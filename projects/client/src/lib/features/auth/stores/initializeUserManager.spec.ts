@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
 import { ErrorResponse, type User, UserManager } from 'oidc-client-ts';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { silentRenewPolicy } from '../silentRenewPolicy.ts';
 import { getToken, type Token } from '../token/index.ts';
 import type { AuthContextType } from './createAuthContext.ts';
 import { getAuthContext } from './getAuthContext.ts';
@@ -28,6 +29,19 @@ function stubServiceWorker() {
 }
 
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
+
+const { cooldownMs, failureResetMs, maxConsecutiveFailures } =
+  silentRenewPolicy;
+
+const openBreaker = async (
+  stub: { signinSilent: ReturnType<typeof vi.fn> },
+) => {
+  await vi.advanceTimersByTimeAsync(cooldownMs * (maxConsecutiveFailures - 1));
+  expect(stub.signinSilent).toHaveBeenCalledTimes(maxConsecutiveFailures);
+
+  await vi.advanceTimersByTimeAsync(cooldownMs);
+  expect(stub.signinSilent).toHaveBeenCalledTimes(maxConsecutiveFailures);
+};
 
 function makeLapsedUser(): User {
   return {
@@ -171,6 +185,7 @@ describe('initializeUserManager', () => {
   });
   describe('renewal', () => {
     afterEach(() => {
+      vi.useRealTimers();
       vi.mocked(UserManager).mockReset();
     });
 
@@ -206,6 +221,79 @@ describe('initializeUserManager', () => {
 
       expect(stub.removeUser).toHaveBeenCalledTimes(1);
       expect(isInitializing()).toBe(false);
+    });
+
+    it('should keep a session whose refresh token survived a transient failure', async () => {
+      const { stub } = stubUserManager(() =>
+        Promise.reject(new TypeError('Failed to fetch'))
+      );
+
+      await renderGate();
+
+      expect(stub.removeUser).not.toHaveBeenCalled();
+    });
+
+    it('should retry once the cooldown lapses', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true });
+      const { stub } = stubUserManager(() =>
+        Promise.reject(new TypeError('Failed to fetch'))
+      );
+
+      await renderGate();
+
+      expect(stub.signinSilent).toHaveBeenCalledTimes(1);
+
+      await vi.advanceTimersByTimeAsync(cooldownMs);
+
+      expect(stub.signinSilent).toHaveBeenCalledTimes(2);
+    });
+
+    it('should let a reconnect renew without waiting out the cooldown', async () => {
+      const { stub } = stubUserManager(() =>
+        Promise.reject(new TypeError('Failed to fetch'))
+      );
+
+      await renderGate();
+
+      expect(stub.signinSilent).toHaveBeenCalledTimes(1);
+
+      globalThis.window.dispatchEvent(new Event('online'));
+      await flush();
+
+      expect(stub.signinSilent).toHaveBeenCalledTimes(2);
+    });
+
+    it('should let a reconnect renew past an open breaker', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true });
+      const { stub } = stubUserManager(() =>
+        Promise.reject(new TypeError('Failed to fetch'))
+      );
+
+      await renderGate();
+      await openBreaker(stub);
+
+      globalThis.window.dispatchEvent(new Event('online'));
+      await flush();
+
+      expect(stub.signinSilent).toHaveBeenCalledTimes(
+        maxConsecutiveFailures + 1,
+      );
+    });
+
+    it('should keep retrying until an open breaker resets', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true });
+      const { stub } = stubUserManager(() =>
+        Promise.reject(new TypeError('Failed to fetch'))
+      );
+
+      await renderGate();
+      await openBreaker(stub);
+
+      await vi.advanceTimersByTimeAsync(failureResetMs);
+
+      expect(stub.signinSilent.mock.calls.length).toBeGreaterThan(
+        maxConsecutiveFailures,
+      );
     });
   });
 });
