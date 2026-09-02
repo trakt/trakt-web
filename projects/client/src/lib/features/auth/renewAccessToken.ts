@@ -3,15 +3,6 @@ import type { User, UserManager } from 'oidc-client-ts';
 
 const RENEW_LOCK_NAME = 'trakt-auth-renew';
 
-export type RenewedSession = {
-  user: User | null;
-  /**
-   * True when another holder had already renewed, so `signinSilent` was skipped
-   * and no `userLoaded` event was raised for this user.
-   */
-  didAdopt: boolean;
-};
-
 function withRenewLock<T>(task: () => Promise<T>): Promise<T> {
   if (!navigator.locks) {
     return task();
@@ -25,7 +16,13 @@ function withRenewLock<T>(task: () => Promise<T>): Promise<T> {
 // origin - the rest adopt what it minted instead of spending theirs again.
 export function renewAccessToken(
   manager: UserManager,
-): Promise<RenewedSession> {
+  /**
+   * The access token a 401 just refused, when the renewal is reactive. Storage
+   * still holding it means nobody has renewed and its expiry cannot be
+   * trusted, so the freshness check below must not adopt it.
+   */
+  rejectedToken?: string | null,
+): Promise<User | null> {
   return withRenewLock(async () => {
     const current = await manager.getUser();
 
@@ -33,12 +30,16 @@ export function renewAccessToken(
       manager.settings.accessTokenExpiringNotificationTimeInSeconds,
     );
     const didAnotherHolderRenew = current != null && !current.expired &&
+      current.access_token !== rejectedToken &&
       time.seconds(current.expires_at ?? 0) > expiringAt;
 
     if (didAnotherHolderRenew) {
-      return { user: current, didAdopt: true };
+      // `signinSilent` raises `userLoaded` itself; adopting has to, or only
+      // the minting holder ends up writing the token.
+      await manager.events.load(current);
+      return current;
     }
 
-    return { user: await manager.signinSilent(), didAdopt: false };
+    return await manager.signinSilent();
   });
 }

@@ -17,9 +17,10 @@ const mockUserManager = vi.fn(function () {
     events: {
       addAccessTokenExpiring: vi.fn().mockReturnValue(() => {}),
       addAccessTokenExpired: vi.fn().mockReturnValue(() => {}),
-      addUserLoaded: vi.fn().mockResolvedValue(OidcUserMock),
-      addUserUnloaded: vi.fn(),
+      addUserLoaded: vi.fn().mockReturnValue(() => {}),
+      addUserUnloaded: vi.fn().mockReturnValue(() => {}),
       addSilentRenewError: vi.fn(),
+      load: vi.fn().mockResolvedValue(undefined),
     },
   };
 });

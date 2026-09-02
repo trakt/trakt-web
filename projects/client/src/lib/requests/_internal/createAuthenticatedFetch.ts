@@ -1,20 +1,41 @@
 import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
+import { isFatalRenewError } from '$lib/features/auth/isFatalRenewError.ts';
+import { renewAccessToken } from '$lib/features/auth/renewAccessToken.ts';
 import { getUserManager } from '../../features/auth/stores/userManager.ts';
 import { IS_DEV } from '../../utils/env/index.ts';
-import { safeSessionStorage } from '../../utils/storage/safeStorage.ts';
 
-const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
+// `useUser` fans out ~15 authorized queries at once, so a lapsed token 401s
+// every one of them. Share one attempt across the burst.
+let inflightRenewal: Promise<string | null> | null = null;
 
-const hasRequestedRefresh = () =>
-  Boolean(safeSessionStorage.getItem(SESSION_STORAGE_REFRESH_KEY));
+function renewSession(rejectedToken: string): Promise<string | null> {
+  const manager = getUserManager();
 
-const setRefreshKey = () =>
-  safeSessionStorage.setItem(SESSION_STORAGE_REFRESH_KEY, 'true');
+  if (!manager) {
+    return Promise.resolve(null);
+  }
 
-const clearRefreshKey = () =>
-  safeSessionStorage.removeItem(SESSION_STORAGE_REFRESH_KEY);
+  inflightRenewal ??= renewAccessToken(manager, rejectedToken)
+    .then((user) => user?.access_token ?? null)
+    .catch((reason) => {
+      // Only a refused grant means the session is gone. Offline, timeout, 5xx
+      // and rate limits leave the refresh token spendable, so the 401 goes back
+      // to the caller with the session intact.
+      if (isFatalRenewError(reason)) {
+        void manager.removeUser();
+      }
+
+      error('Failed to renew the session:', reason);
+      return null;
+    })
+    .finally(() => {
+      inflightRenewal = null;
+    });
+
+  return inflightRenewal;
+}
 
 export function createAuthenticatedFetch<
   T extends typeof fetch,
@@ -23,10 +44,8 @@ export function createAuthenticatedFetch<
     input: Parameters<T>[0],
     init?: Parameters<T>[1],
   ): Promise<Response> {
-    const headers = new Headers(init?.headers || {});
-
-    try {
-      const { value: token } = getToken();
+    const send = (token: string | Nil) => {
+      const headers = new Headers(init?.headers || {});
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -38,23 +57,24 @@ export function createAuthenticatedFetch<
           ...init,
           headers,
         } as Parameters<T>[1],
-      ).then((response) => {
+      );
+    };
+
+    try {
+      const { value: token } = getToken();
+
+      return send(token).then((response) => {
         /**
          * FIXME: @seferturan these should return 403 not 401
          * talk to @rudf0rd about this
          */
-        if (!IS_DEV && response.status === 401 && !hasRequestedRefresh()) {
-          setRefreshKey();
-          getUserManager()?.removeUser().then(() =>
-            globalThis.window.location.reload()
-          );
+        if (IS_DEV || response.status !== 401 || !token) {
+          return response;
         }
 
-        if (response.status !== 401) {
-          clearRefreshKey();
-        }
-
-        return response;
+        return renewSession(token).then((renewed) =>
+          renewed == null || renewed === token ? response : send(renewed)
+        );
       });
     } catch (e) {
       error('Fetch interceptor error:', e);
