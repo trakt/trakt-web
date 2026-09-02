@@ -101,6 +101,26 @@ describe('createSilentRenewGuard', () => {
     expect(attempt).toHaveBeenCalledTimes(maxFailures + 1);
   });
 
+  it('should ignore a reset that follows another within the cooldown', async () => {
+    const clock = { value: 0 };
+    const guard = makeGuard(clock);
+    const attempt = vi.fn().mockRejectedValue(new Error('nope'));
+
+    for (let i = 0; i < maxFailures; i++) {
+      clock.value += cooldown;
+      await guard.renew(attempt).catch(() => null);
+    }
+
+    guard.reset();
+    await guard.renew(attempt).catch(() => null);
+    clock.value += cooldown - 1;
+    guard.reset();
+    const blocked = await guard.renew(attempt);
+
+    expect(attempt).toHaveBeenCalledTimes(maxFailures + 1);
+    expect(blocked.outcome).toBe('blocked');
+  });
+
   it('should reset the failure count after a success', async () => {
     const clock = { value: 0 };
     const guard = makeGuard(clock);
@@ -166,5 +186,77 @@ describe('createSilentRenewGuard', () => {
 
     await expect(owner).rejects.toThrow('nope');
     expect(await deferred).toEqual({ outcome: 'deferred', value: null });
+  });
+  it('should let a reconnect outrun the cooldown', async () => {
+    const clock = { value: 0 };
+    const guard = makeGuard(clock);
+    const attempt = vi.fn().mockResolvedValue(undefined);
+
+    await guard.renew(attempt);
+    guard.reset();
+    await guard.renew(attempt);
+
+    expect(attempt).toHaveBeenCalledTimes(2);
+  });
+
+  it('should reopen the breaker on reset', async () => {
+    const clock = { value: 0 };
+    const guard = makeGuard(clock);
+    const attempt = vi.fn().mockRejectedValue(new Error('nope'));
+
+    for (let i = 0; i < maxFailures; i++) {
+      clock.value += cooldown;
+      await guard.renew(attempt).catch(() => null);
+    }
+
+    expect((await guard.renew(attempt)).outcome).toBe('blocked');
+
+    clock.value += cooldown;
+    guard.reset();
+    await guard.renew(attempt).catch(() => null);
+
+    expect(attempt).toHaveBeenCalledTimes(maxFailures + 1);
+  });
+
+  it('should let a caller override the cooldown it waits behind', async () => {
+    const clock = { value: 0 };
+    const guard = makeGuard(clock);
+    const attempt = vi.fn().mockResolvedValue(undefined);
+
+    await guard.renew(attempt);
+    clock.value = 5_000;
+    await guard.renew(attempt, { cooldownMs: 1_000 });
+
+    expect(attempt).toHaveBeenCalledTimes(2);
+  });
+
+  it('should still block an overriding caller inside its own cooldown', async () => {
+    const clock = { value: 0 };
+    const guard = makeGuard(clock);
+    const attempt = vi.fn().mockResolvedValue(undefined);
+
+    await guard.renew(attempt);
+    clock.value = 500;
+    const blocked = await guard.renew(attempt, { cooldownMs: 1_000 });
+
+    expect(attempt).toHaveBeenCalledTimes(1);
+    expect(blocked.outcome).toBe('blocked');
+  });
+
+  it('should hold an overriding caller behind the shared breaker', async () => {
+    const clock = { value: 0 };
+    const guard = makeGuard(clock);
+    const attempt = vi.fn().mockRejectedValue(new Error('nope'));
+
+    for (let i = 0; i < maxFailures; i++) {
+      clock.value = i * cooldown;
+      await guard.renew(attempt).catch(() => null);
+    }
+
+    clock.value = maxFailures * cooldown;
+    const blocked = await guard.renew(attempt, { cooldownMs: 0 });
+
+    expect(attempt).toHaveBeenCalledTimes(maxFailures);
+    expect(blocked.outcome).toBe('blocked');
   });
 });

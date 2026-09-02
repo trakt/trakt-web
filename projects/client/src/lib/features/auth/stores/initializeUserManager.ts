@@ -16,15 +16,13 @@ import { portWorkerAuthSession } from '../portWorkerAuthSession.ts';
 import { postToken } from '../postToken.ts';
 import { renewAccessToken } from '../renewAccessToken.ts';
 import { resolveOidcAuthority } from '../resolveOidcAuthority.ts';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { time } from '$lib/utils/timing/time.ts';
+import { silentRenewPolicy } from '../silentRenewPolicy.ts';
 import { setToken, type Token } from '../token/index.ts';
 import type { AuthContextType } from './createAuthContext.ts';
+import { setSilentRenewGuard } from './silentRenewGuard.ts';
 import { setUserManager } from './userManager.ts';
-
-const renewCooldown = time.seconds(30);
-const maxRenewFailures = 3;
-const renewFailureReset = time.minutes(5);
 
 type InitializeUserManagerParams = {
   ctx: AuthContextType;
@@ -65,11 +63,11 @@ export function initializeUserManager(
       getOidcConfig(),
     );
 
-    const renewGuard = createSilentRenewGuard({
+    let retryHandle: ReturnType<typeof setTimeout> | null = null;
+
+    const renewGuard = createSilentRenewGuard<User | null>({
       now: () => Date.now(),
-      cooldownMs: renewCooldown,
-      maxConsecutiveFailures: maxRenewFailures,
-      failureResetMs: renewFailureReset,
+      ...silentRenewPolicy,
     });
 
     const syncToken = (user: User | null) => {
@@ -122,13 +120,24 @@ export function initializeUserManager(
       );
     };
 
+    const scheduleRenewRetry = () => {
+      if (retryHandle != null) {
+        return;
+      }
+
+      retryHandle = setTimeout(() => {
+        retryHandle = null;
+        renewIfLapsed();
+      }, silentRenewPolicy.cooldownMs);
+    };
+
     const handleSilentRenewFailure = async (error: unknown) => {
       if (isRateLimitError(error) && isInitializing.value) {
         dispatchRateLimitError();
       }
 
       if (isFatalRenewError(error)) {
-        await manager.removeUser().catch(() => {});
+        await manager.removeUser().catch(NOOP_FN);
         handleUserEvent(null);
         return;
       }
@@ -140,12 +149,20 @@ export function initializeUserManager(
       const current = await manager.getUser().catch(() => null);
       if (current?.refresh_token == null) {
         handleUserEvent(null);
+        return;
       }
+
+      scheduleRenewRetry();
     };
 
     const renewSilently = () => {
       renewGuard
         .renew(() => renewAccessToken(manager))
+        .then(({ outcome }) => {
+          if (outcome === 'blocked') {
+            scheduleRenewRetry();
+          }
+        })
         .catch(handleSilentRenewFailure)
         // The guard resolves without attempting once its breaker is open, and
         // a gated tree that never hears back renders nothing at all.
@@ -175,13 +192,31 @@ export function initializeUserManager(
       syncToken(user);
     };
 
-    const checkTokenOnFocus = async () => {
-      const user = await manager.getUser();
-      if (!user?.expired) {
+    // A tab that opens already focused never fires `focus`, so a failed
+    // renewal would sit lapsed until a manual reload.
+    function renewIfLapsed() {
+      manager.getUser()
+        .then((user) => {
+          if (!user?.expired) {
+            return;
+          }
+
+          renewSilently();
+        })
+        .catch(NOOP_FN);
+    }
+
+    const renewOnReconnect = () => {
+      renewGuard.reset();
+      renewIfLapsed();
+    };
+
+    const renewIfVisible = () => {
+      if (globalThis.document.visibilityState !== 'visible') {
         return;
       }
 
-      renewSilently();
+      renewIfLapsed();
     };
 
     const disposeExpiring = manager.events.addAccessTokenExpiring(
@@ -197,16 +232,30 @@ export function initializeUserManager(
 
     manager.getUser().then(initializeUser);
 
-    globalThis.window.addEventListener('focus', checkTokenOnFocus);
+    globalThis.window.addEventListener('focus', renewIfLapsed);
+    globalThis.window.addEventListener('online', renewOnReconnect);
+    globalThis.document.addEventListener('visibilitychange', renewIfVisible);
 
+    setSilentRenewGuard(renewGuard);
     setUserManager(manager);
 
     return () => {
+      if (retryHandle != null) {
+        clearTimeout(retryHandle);
+        retryHandle = null;
+      }
+
       disposeExpiring();
       disposeExpired();
       disposeUserLoaded();
       disposeUserUnloaded();
-      globalThis.window.removeEventListener('focus', checkTokenOnFocus);
+      globalThis.window.removeEventListener('focus', renewIfLapsed);
+      globalThis.window.removeEventListener('online', renewOnReconnect);
+      globalThis.document.removeEventListener(
+        'visibilitychange',
+        renewIfVisible,
+      );
+      setSilentRenewGuard(null);
       setUserManager(null);
     };
   });

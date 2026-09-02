@@ -1,3 +1,8 @@
+import { createSilentRenewGuard } from '$lib/features/auth/createSilentRenewGuard.ts';
+import {
+  getSilentRenewGuard,
+  setSilentRenewGuard,
+} from '$lib/features/auth/stores/silentRenewGuard.ts';
 import { setToken } from '$lib/features/auth/token/index.ts';
 import { setUserManager } from '$lib/features/auth/stores/userManager.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -34,6 +39,24 @@ function stubUserManager(
   return { removeUser };
 }
 
+const BACKGROUND_COOLDOWN = time.seconds(30);
+const clock = { value: 0 };
+
+function stubRenewGuard(
+  { maxConsecutiveFailures = 3 }: { maxConsecutiveFailures?: number } = {},
+) {
+  clock.value = 0;
+
+  setSilentRenewGuard(
+    createSilentRenewGuard<User | null>({
+      now: () => clock.value,
+      cooldownMs: BACKGROUND_COOLDOWN,
+      maxConsecutiveFailures,
+      failureResetMs: time.minutes(5),
+    }),
+  );
+}
+
 function bearerOf(call: Parameters<typeof fetch> | undefined) {
   return new Headers(call?.[1]?.headers).get('Authorization');
 }
@@ -41,10 +64,12 @@ function bearerOf(call: Parameters<typeof fetch> | undefined) {
 describe('createAuthenticatedFetch', () => {
   beforeEach(() => {
     setToken({ value: LAPSED_TOKEN, expiresAt: Date.now() });
+    stubRenewGuard();
   });
 
   afterEach(() => {
     setUserManager(null);
+    setSilentRenewGuard(null);
     setToken(null);
   });
 
@@ -145,5 +170,82 @@ describe('createAuthenticatedFetch', () => {
 
     expect(renewals).toBe(1);
     expect(responses.every((response) => response.status === 200)).toBe(true);
+  });
+  it('should stop renewing once the breaker has opened', async () => {
+    stubRenewGuard({ maxConsecutiveFailures: 1 });
+    let renewals = 0;
+    stubUserManager(() => {
+      renewals = renewals + 1;
+      return Promise.reject(new TypeError('Failed to fetch'));
+    });
+    const baseFetch = vi.fn().mockResolvedValue(
+      new Response(null, { status: 401 }),
+    );
+    const authenticatedFetch = createAuthenticatedFetch(
+      baseFetch as unknown as typeof fetch,
+    );
+
+    await authenticatedFetch('/x');
+    clock.value = BACKGROUND_COOLDOWN;
+    await authenticatedFetch('/x');
+
+    expect(renewals).toBe(1);
+  });
+
+  it('should renew a 401 the background cooldown would have silenced', async () => {
+    stubUserManager(() => Promise.resolve(makeRenewedUser()));
+    await getSilentRenewGuard()?.renew(() => Promise.resolve(null));
+
+    clock.value = time.seconds(6);
+    const baseFetch = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(new Response(null, { status: 401 }))
+      .mockResolvedValueOnce(new Response(null, { status: 200 }));
+
+    const response = await createAuthenticatedFetch(
+      baseFetch as unknown as typeof fetch,
+    )('/x');
+
+    expect(response.status).toBe(200);
+    expect(bearerOf(baseFetch.mock.calls.at(1))).toBe(
+      `Bearer ${RENEWED_TOKEN}`,
+    );
+  });
+
+  it('should not renew again for a 401 that trails a fresh token', async () => {
+    let renewals = 0;
+    stubUserManager(() => {
+      renewals = renewals + 1;
+      return Promise.resolve(makeRenewedUser());
+    });
+    const baseFetch = vi.fn().mockResolvedValue(
+      new Response(null, { status: 401 }),
+    );
+    const authenticatedFetch = createAuthenticatedFetch(
+      baseFetch as unknown as typeof fetch,
+    );
+
+    await authenticatedFetch('/x');
+    clock.value = time.seconds(1);
+    await authenticatedFetch('/x');
+
+    expect(renewals).toBe(1);
+  });
+
+  it('should return the 401 untouched when no guard is mounted', async () => {
+    setSilentRenewGuard(null);
+    const { removeUser } = stubUserManager(() =>
+      Promise.resolve(makeRenewedUser())
+    );
+    const baseFetch = vi.fn().mockResolvedValue(
+      new Response(null, { status: 401 }),
+    );
+
+    const response = await createAuthenticatedFetch(
+      baseFetch as unknown as typeof fetch,
+    )('/x');
+
+    expect(response.status).toBe(401);
+    expect(removeUser).not.toHaveBeenCalled();
+    expect(baseFetch).toHaveBeenCalledTimes(1);
   });
 });
