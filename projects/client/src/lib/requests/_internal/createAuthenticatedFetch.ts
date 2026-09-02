@@ -24,7 +24,9 @@ function renewSession(rejectedToken: string): Promise<string | null> {
       // and rate limits leave the refresh token spendable, so the 401 goes back
       // to the caller with the session intact.
       if (isFatalRenewError(reason)) {
-        void manager.removeUser();
+        // Best-effort: storage can be unavailable (private mode, blocked),
+        // and a failed clear here shouldn't surface as an unhandled rejection.
+        manager.removeUser().catch(() => {});
       }
 
       error('Failed to renew the session:', reason);

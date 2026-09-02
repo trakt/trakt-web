@@ -34,8 +34,8 @@ function stubUserManager(
   return { removeUser };
 }
 
-function bearerOf(call: [unknown, RequestInit | undefined] | undefined) {
-  return new Headers(call?.at(1)?.headers).get('Authorization');
+function bearerOf(call: Parameters<typeof fetch> | undefined) {
+  return new Headers(call?.[1]?.headers).get('Authorization');
 }
 
 describe('createAuthenticatedFetch', () => {
@@ -49,7 +49,9 @@ describe('createAuthenticatedFetch', () => {
   });
 
   it('should attach the current bearer', async () => {
-    const baseFetch = vi.fn().mockResolvedValue(new Response(null));
+    const baseFetch = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response(null),
+    );
 
     await createAuthenticatedFetch(baseFetch as unknown as typeof fetch)('/x');
 
@@ -58,7 +60,7 @@ describe('createAuthenticatedFetch', () => {
 
   it('should retry a 401 with the renewed bearer', async () => {
     stubUserManager(() => Promise.resolve(makeRenewedUser()));
-    const baseFetch = vi.fn()
+    const baseFetch = vi.fn<typeof fetch>()
       .mockResolvedValueOnce(new Response(null, { status: 401 }))
       .mockResolvedValueOnce(new Response(null, { status: 200 }));
 

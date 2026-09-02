@@ -8,7 +8,13 @@ function withRenewLock<T>(task: () => Promise<T>): Promise<T> {
     return task();
   }
 
-  return navigator.locks.request(RENEW_LOCK_NAME, task);
+  // lib.dom's LockGrantedCallback types the callback's return as a bare `T`
+  // rather than `T | PromiseLike<T>`, even though the spec awaits it - so TS
+  // can't infer through the promise `task` returns. The runtime does flatten
+  // it, hence the cast.
+  return navigator.locks.request(RENEW_LOCK_NAME, task) as unknown as Promise<
+    T
+  >;
 }
 
 // Refresh tokens rotate on use, so a second concurrent renewal presents a
