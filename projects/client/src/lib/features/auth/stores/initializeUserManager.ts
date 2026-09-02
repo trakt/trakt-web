@@ -14,6 +14,7 @@ import { isRateLimitError } from '../isRateLimitError.ts';
 import { mapToToken } from '../mapToToken.ts';
 import { portWorkerAuthSession } from '../portWorkerAuthSession.ts';
 import { postToken } from '../postToken.ts';
+import { renewAccessToken } from '../renewAccessToken.ts';
 import { resolveOidcAuthority } from '../resolveOidcAuthority.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -24,16 +25,6 @@ import { setUserManager } from './userManager.ts';
 const renewCooldown = time.seconds(30);
 const maxRenewFailures = 3;
 const renewFailureReset = time.minutes(5);
-const renewLockName = 'trakt-auth-renew';
-
-async function withRenewLock(task: () => Promise<void>) {
-  if (!navigator.locks) {
-    await task();
-    return;
-  }
-
-  await navigator.locks.request(renewLockName, task);
-}
 
 type InitializeUserManagerParams = {
   ctx: AuthContextType;
@@ -142,38 +133,32 @@ export function initializeUserManager(
         return;
       }
 
+      // A surviving refresh token means the session is still spendable and
+      // only the attempt failed. Gating on the access token instead tore the
+      // session down for every renewal that ran past its expiry - which is
+      // every renewal, since that expiry is what triggers them.
       const current = await manager.getUser().catch(() => null);
-      if (current?.expired ?? true) {
+      if (current?.refresh_token == null) {
         handleUserEvent(null);
-        return;
       }
-
-      isInitializing.next(false);
     };
 
     const renewUnderLock = async () => {
-      await withRenewLock(async () => {
-        const current = await manager.getUser();
+      const { user, didAdopt } = await renewAccessToken(manager);
 
-        const expiringAt = Date.now() + time.seconds(
-          manager.settings.accessTokenExpiringNotificationTimeInSeconds,
-        );
-        const didAnotherTabRenew = current != null && !current.expired &&
-          time.seconds(current.expires_at ?? 0) > expiringAt;
-
-        if (didAnotherTabRenew) {
-          handleUserEvent(current);
-          return;
-        }
-
-        await manager.signinSilent();
-      });
+      // `signinSilent` raises `userLoaded`; an adopted token does not.
+      if (didAdopt) {
+        handleUserEvent(user);
+      }
     };
 
     const renewSilently = () => {
       renewGuard
         .renew(renewUnderLock)
-        .catch(handleSilentRenewFailure);
+        .catch(handleSilentRenewFailure)
+        // The guard resolves without attempting once its breaker is open, and
+        // a gated tree that never hears back renders nothing at all.
+        .finally(() => isInitializing.next(false));
     };
 
     const initializeUser = (user: User | null) => {
