@@ -97,7 +97,8 @@ async function deleteCache(key: string) {
   }
 }
 
-const navigationCacheName = `${CacheKey.navigation}-${TRAKT_GIT_SHA}`;
+const buildSha = typeof TRAKT_GIT_SHA === 'string' ? TRAKT_GIT_SHA : 'dev';
+const navigationCacheName = `${CacheKey.navigation}-${buildSha}`;
 
 const CLEANUP_TIMEOUT_MS = time.seconds(3);
 
