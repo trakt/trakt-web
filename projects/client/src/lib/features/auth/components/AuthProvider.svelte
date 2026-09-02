@@ -23,15 +23,21 @@
   // document was rendered for whoever populated the entry. Storage is truth.
   const clientAuth = iffy(resolveBrowserAuthState);
 
-  // Optimistic: an expired session still seeds authorized, since the silent
-  // renew `initializeUserManager` fires on init almost always lands before it
-  // matters.
-  const isAuthorized = iffy(() => clientAuth?.hasSession ?? isAuthorizedOidc);
+  // A lapsed access token is not a session that can be spent. Seeding it
+  // authorizes the `useUser` fan-out to leave with a dead bearer, and the 401
+  // that comes back tears the session down before the renewal lands.
+  const hasLiveSession = iffy(
+    () => clientAuth?.hasSession === true && !clientAuth.isExpired,
+  );
+
+  const isAuthorized = iffy(() =>
+    clientAuth == null ? isAuthorizedOidc : hasLiveSession,
+  );
 
   // `useUser` subscribes authorized queries during this first render, before
   // `initializeUserManager` mounts; without a token they 401 and sign out.
   iffy(() => {
-    if (clientAuth?.token.value == null) {
+    if (!hasLiveSession || clientAuth?.token.value == null) {
       return;
     }
 
@@ -41,7 +47,7 @@
   const ctx = iffy(() =>
     createAuthContext({
       isAuthorized,
-      token: clientAuth?.token ?? null,
+      token: hasLiveSession ? (clientAuth?.token ?? null) : null,
     }),
   );
 
@@ -50,11 +56,12 @@
       ctx,
       tokenFromServer: accessToken,
       hasServerSession,
-      // Only skip the gate for a session we actually found. Ungating an
-      // unauthorized tree renders children in this same cycle, and their
-      // `onMount` runs before ours - so `/callback` would reach for
-      // `getUserManager()` before `setUserManager` has been called.
-      isResolved: clientAuth?.hasSession === true,
+      // Only skip the gate for a session that can be spent right now: a lapsed
+      // one waits behind its renewal instead. Ungating an unauthorized tree
+      // renders children in this same cycle, and their `onMount` runs before
+      // ours - so `/callback` would reach for `getUserManager()` before
+      // `setUserManager` has been called.
+      isResolved: hasLiveSession,
     }),
   );
   const { user } = useUser();
