@@ -4499,6 +4499,10 @@
       "default": "Language",
       "description": "Text for the section that allows users to change the language."
     },
+    "row_label_loading_title": {
+      "default": "Loading name",
+      "description": "Aria-label for the placeholder shown in a settings row while its title is still loading, such as a Plex server whose name has not arrived yet."
+    },
     "text_settings_cover_image": {
       "default": "Cover Image",
       "description": "Title of the settings row that lets users reset the custom cover image shown behind their profile."
