@@ -43,4 +43,24 @@ export default ts.config(
       ],
     },
   },
+  {
+    files: ['src/**'],
+    ignores: ['src/lib/utils/markdown/**'],
+
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          'paths': [
+            {
+              'name': 'marked',
+              'importNames': ['Marked', 'marked', 'parse', 'parseInline'],
+              'message':
+                'Raw marked output is not XSS safe. Use createSafeMarked from $lib/utils/markdown/createSafeMarked.ts instead.',
+            },
+          ],
+        },
+      ],
+    },
+  },
 );

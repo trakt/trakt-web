@@ -4,7 +4,7 @@
   import { spoilMeAnyway } from "$lib/features/spoilers/components/spoilMeAnyway";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import { Marked } from "marked";
+  import { createSafeMarked } from "$lib/utils/markdown/createSafeMarked.ts";
   import { createHeadingRenderer } from "./marked/createHeadingRenderer";
   import { createParagraphRenderer } from "./marked/createParagraphRenderer";
   import { spoilerExtension } from "./marked/spoilerExtension";
@@ -21,7 +21,7 @@
   const { comment, media, type, onClick }: CommentBodyProps = $props();
 
   const marked = $derived(
-    new Marked({
+    createSafeMarked({
       extensions: [spoilerExtension()],
       renderer: {
         paragraph: createParagraphRenderer(comment.isSpoiler),
