@@ -21,7 +21,7 @@
     initiallyManaging = false,
   }: {
     serverId: string;
-    serverName: string;
+    serverName: string | undefined;
     libraryUuids: string[];
     isSyncing: boolean;
     onSyncNow: (serverId: string) => void;

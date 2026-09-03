@@ -59,8 +59,7 @@
 
     return [...persistedServers, ...pending].map((server) => ({
       ...server,
-      serverName: servers.find(({ id }) => id === server.serverId)?.name ??
-        server.serverId,
+      serverName: servers.find(({ id }) => id === server.serverId)?.name,
       isPending: !persistedIds.includes(server.serverId),
     }));
   });
@@ -148,6 +147,15 @@
     {/if}
 
     <SettingsGroupCard>
+      {#if serversState === "error"}
+        <SyncLoadError
+          variant="plain"
+          message={m.error_text_plex_unavailable()}
+          hint={m.error_text_plex_unavailable_hint()}
+          onRetry={onRetryServers}
+        />
+      {/if}
+
       {#each syncedServers as synced (synced.serverId)}
         <PlexSyncedServerRow
           serverId={synced.serverId}
@@ -159,18 +167,11 @@
           onForget={forgetServer}
         />
       {:else}
-        {#if serversState === "error"}
-          <SyncLoadError
-            variant="plain"
-            message={m.error_text_plex_unavailable()}
-            hint={m.error_text_plex_unavailable_hint()}
-            onRetry={onRetryServers}
-          />
-        {:else if serversState === "loading"}
+        {#if serversState === "loading"}
           <div class="loading-container">
             <LoadingIndicator />
           </div>
-        {:else}
+        {:else if serversState === "loaded"}
           <SettingsHighlightCard
             icon={emptyIcon}
             primary={emptyPrimary}
