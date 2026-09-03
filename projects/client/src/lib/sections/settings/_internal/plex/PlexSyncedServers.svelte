@@ -2,18 +2,20 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import ServerIcon from "$lib/components/icons/ServerIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { PlexServer } from "$lib/requests/plex/plexServersQuery.ts";
   import { slide } from "svelte/transition";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsHighlightCard from "../SettingsHighlightCard.svelte";
   import SettingsSection from "../SettingsSection.svelte";
   import SettingsVipUpsell from "../SettingsVipUpsell.svelte";
+  import SyncLoadError from "../SyncLoadError.svelte";
   import PlexSyncedServerRow from "./PlexSyncedServerRow.svelte";
+  import type { PlexSyncedServersProps } from "./PlexSyncedServersProps.ts";
   import { usePlexSelectedLibraries } from "./usePlexSelectedLibraries.ts";
 
   // FIXME: replace with sync.server_limit from plexSettingsQuery once
@@ -22,13 +24,11 @@
 
   const {
     servers,
+    serversState,
     isSyncing,
     onSyncNow,
-  }: {
-    servers: PlexServer[];
-    isSyncing: boolean;
-    onSyncNow: (serverId: string) => void;
-  } = $props();
+    onRetryServers,
+  }: PlexSyncedServersProps = $props();
 
   const { user } = useUser();
   const isVip = $derived($user?.isVip ?? false);
@@ -159,11 +159,24 @@
           onForget={forgetServer}
         />
       {:else}
-        <SettingsHighlightCard
-          icon={emptyIcon}
-          primary={emptyPrimary}
-          secondary={emptySecondary}
-        />
+        {#if serversState === "error"}
+          <SyncLoadError
+            variant="plain"
+            message={m.error_text_plex_unavailable()}
+            hint={m.error_text_plex_unavailable_hint()}
+            onRetry={onRetryServers}
+          />
+        {:else if serversState === "loading"}
+          <div class="loading-container">
+            <LoadingIndicator />
+          </div>
+        {:else}
+          <SettingsHighlightCard
+            icon={emptyIcon}
+            primary={emptyPrimary}
+            secondary={emptySecondary}
+          />
+        {/if}
       {/each}
     </SettingsGroupCard>
   </SettingsSection>
@@ -171,6 +184,13 @@
 
 <style lang="scss">
   .trakt-plex-synced-servers {
+    .loading-container {
+      display: flex;
+      justify-content: center;
+
+      padding: var(--gap-l);
+    }
+
     .empty-icon {
       display: flex;
       align-items: center;
