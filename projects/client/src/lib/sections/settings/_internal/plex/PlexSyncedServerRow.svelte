@@ -14,6 +14,7 @@
   const {
     serverId,
     serverName,
+    isNameLoading,
     libraryUuids,
     isSyncing,
     onSyncNow,
@@ -21,7 +22,8 @@
     initiallyManaging = false,
   }: {
     serverId: string;
-    serverName: string;
+    serverName: string | undefined;
+    isNameLoading: boolean;
     libraryUuids: string[];
     isSyncing: boolean;
     onSyncNow: (serverId: string) => void;
@@ -47,7 +49,8 @@
 </script>
 
 <SettingsGroupRow
-    title={serverName}
+    title={serverName ?? m.label_plex_server()}
+    isTitleLoading={isNameLoading}
     description={libraryTitles.join(", ") || undefined}
     variant="custom"
   >

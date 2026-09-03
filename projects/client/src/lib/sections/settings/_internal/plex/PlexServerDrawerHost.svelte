@@ -25,7 +25,7 @@
     onRemoved,
   }: {
     serverId: string;
-    serverName: string;
+    serverName: string | undefined;
     onClose: () => void;
     onRemoved: () => void;
   } = $props();
@@ -45,6 +45,8 @@
   } = usePlexServer({ serverId: iffy(() => serverId) });
 
   const { confirm } = useConfirm();
+
+  const serverLabel = $derived(serverName ?? m.label_plex_server());
 
   const accountsErrorCopy = $derived(toPlexErrorCopy($accountsError?.code));
 
@@ -75,7 +77,7 @@
   const confirmRemove = $derived(
     confirm({
       type: ConfirmationType.RemovePlexServer,
-      server: serverName,
+      server: serverLabel,
       onConfirm: async () => {
         isRemoving = true;
 
@@ -128,7 +130,7 @@
     variant="secondary"
     style="ghost"
     color="red"
-    label={m.button_label_plex_remove_server({ server: serverName })}
+    label={m.button_label_plex_remove_server({ server: serverLabel })}
     disabled={isBusy}
     onclick={confirmRemove}
   >
@@ -136,7 +138,7 @@
   </ActionButton>
 {/snippet}
 
-<Drawer onClose={handleClose} title={serverName} size="auto" {badge}>
+<Drawer onClose={handleClose} title={serverLabel} size="auto" {badge}>
   <SettingsGroupCard variant="bare">
     {#if $isLoadingAccounts}
       <div class="loading-container">
