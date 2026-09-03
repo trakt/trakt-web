@@ -11,8 +11,12 @@ import { mapToSocialMedia } from './mapToSocialMedia.ts';
 import { mapToTrailerUrl } from './mapToTrailerUrl.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
+type ShowResponseWithLastAired = ShowResponse & {
+  last_aired?: string | null;
+};
+
 export function mapToShowEntry(
-  show: ShowResponse,
+  show: ShowResponseWithLastAired,
 ): ShowEntry {
   const poster = mapToPoster(show.images);
   const cover = mapToCover(show.images);
@@ -63,6 +67,7 @@ export function mapToShowEntry(
     airDate: effectiveReleaseDate,
     releaseDate: effectiveReleaseDate,
     effectiveReleaseDate,
+    ...(show.last_aired ? { lastAired: new Date(show.last_aired) } : {}),
     certification: show.certification,
     votes: show.votes ?? 0,
     plexSlug: show.ids.plex?.slug,
