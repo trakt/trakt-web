@@ -155,7 +155,7 @@
   "button_label_pick_match": "Importeer {option}.",
   "button_label_play_track": "Speel {title} af",
   "button_label_plex_add_server": "Een Plex-server toevoegen",
-  "button_label_plex_connect": "Verbind je Plex-account",
+  "button_label_plex_connect": "Koppel je Plex-account",
   "button_label_plex_disconnect": "Koppel je Plex-account los",
   "button_label_plex_manage_server": "Serverbibliotheken beheren",
   "button_label_plex_remove_server": "Verwijder {server}",
