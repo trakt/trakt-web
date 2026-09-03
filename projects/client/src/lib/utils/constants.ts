@@ -1,3 +1,11 @@
+import { time } from '$lib/utils/timing/time.ts';
+
+/**
+ * Keep in sync with --animation-duration-background-flash in
+ * style/animations/index.css.
+ */
+export const BACKGROUND_FLASH_DURATION = time.seconds(1.5);
+
 /**
  * This cover is the Alien Isolation cover.
  */

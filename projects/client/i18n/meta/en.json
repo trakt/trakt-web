@@ -2477,6 +2477,27 @@
         }
       }
     },
+    "link_label_view_list": {
+      "default": "View list {name}",
+      "description": "Aria-label for the link that opens a list from the manage lists drawer.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "tooltip_view_list": {
+      "default": "View list",
+      "description": "Tooltip for the link that opens a list from the manage lists drawer."
+    },
+    "link_label_view_watchlist": {
+      "default": "View watchlist",
+      "description": "Aria-label for the link that opens the watchlist from the manage lists drawer."
+    },
+    "tooltip_view_watchlist": {
+      "default": "View watchlist",
+      "description": "Tooltip for the link that opens the watchlist from the manage lists drawer."
+    },
     "button_label_add_to_personal_list": {
       "default": "Add \"{title}\" to {list}",
       "description": "Aria-label for the button that allows users to add a movie or show to a personal list.",
