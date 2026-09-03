@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
+  import { resolve } from "$app/paths";
+  import { page } from "$app/state";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import Form from "$lib/components/form/Form.svelte";
   import FormInput from "$lib/components/form/FormInput.svelte";
@@ -8,6 +11,7 @@
   import type { ListPrivacy } from "$lib/requests/models/ListPrivacy";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { iffy } from "$lib/utils/function/iffy";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { useSaveList } from "./useSaveList";
@@ -60,12 +64,36 @@
       : useSaveList({ type: "update", listId: props.list.slug }),
   );
 
+  const listOwner = $derived(
+    props.type === "update" ? props.list.user.slug : undefined,
+  );
+  const isOnListPage = $derived(
+    props.type === "update" && !!listOwner &&
+      UrlBuilder.users(listOwner).lists(props.list.slug) ===
+        page.url.pathname,
+  );
+
   async function handleSubmit() {
-    await saveList({
+    const wasOnListPage = isOnListPage;
+    const owner = listOwner;
+
+    const slug = await saveList({
       name: $name,
       description: $description,
       privacy: $privacy,
     });
+
+    if (wasOnListPage && owner && slug) {
+      const target = resolve("/users/[user]/lists/[list]", {
+        user: owner,
+        list: slug,
+      });
+
+      if (target !== page.url.pathname) {
+        // eslint-disable-next-line svelte/no-navigation-without-resolve
+        await goto(`${target}${page.url.search}`, { replaceState: true });
+      }
+    }
 
     $isOpen && onClose();
   }
