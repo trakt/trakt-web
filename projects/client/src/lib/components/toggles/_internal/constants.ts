@@ -18,7 +18,7 @@ type DiscoverToggleType = DiscoverMode;
 type SocialToggleType = 'following' | 'followers' | 'requests';
 type CommentToggleType = CommentSortType;
 type TriviaToggleType = 'spoilers' | 'no-spoilers';
-type ProgressToggleType = 'in-progress' | 'dropped' | 'completed';
+type ProgressToggleType = 'in-progress' | 'dropped' | 'completed' | 'ended';
 type ActivityToggleType = 'reviews' | 'ratings';
 type LibraryToggleType = 'plex' | 'other';
 type EpisodeTypeToggleType = EpisodeTypeFilter;
@@ -128,6 +128,11 @@ const progress: ToggleDefinition<'progress'> = {
       value: 'completed',
       text: m.button_text_progress_completed,
       label: m.button_label_progress_completed,
+    },
+    {
+      value: 'ended',
+      text: m.button_text_progress_ended,
+      label: m.button_label_progress_ended,
     },
     {
       value: 'in-progress',
