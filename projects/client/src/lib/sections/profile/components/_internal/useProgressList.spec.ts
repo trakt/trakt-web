@@ -1,3 +1,4 @@
+import { HiddenShowProgressResponseMock } from '$mocks/data/users/response/HiddenShowProgressResponseMock.ts';
 import { UpNextResponseMock } from '$mocks/data/sync/response/UpNextResponseMock.ts';
 import { server } from '$mocks/server.ts';
 import type { ProgressEntry } from '$lib/requests/models/ProgressEntry.ts';
@@ -12,6 +13,7 @@ const [baseEntry] = UpNextResponseMock;
 
 const ENDED_SHOW = 'ended-show';
 const AIRING_SHOW = 'airing-show';
+const DROPPED_SHOW = 'dropped-show';
 
 function withShow(
   { status, slug, trakt }: {
@@ -48,6 +50,30 @@ function serveCompletedBucket() {
   );
 }
 
+/**
+ * The dropped bucket comes from a different endpoint and must not be split on
+ * status, so it is served an ended show: if the status predicate ever leaked
+ * onto this branch, the show would vanish and this fails.
+ */
+function serveDroppedBucket() {
+  const [base] = HiddenShowProgressResponseMock;
+
+  server.use(
+    http.get('http://localhost/users/hidden/dropped*', () =>
+      HttpResponse.json([
+        {
+          ...base,
+          show: {
+            ...base.show,
+            status: 'ended',
+            title: DROPPED_SHOW,
+            ids: { ...base.show.ids, slug: DROPPED_SHOW, trakt: 103 },
+          },
+        },
+      ])),
+  );
+}
+
 function listTitles(type: ProgressListType) {
   return runQuery({
     factory: () => useProgressList({ type }).list,
@@ -69,6 +95,12 @@ describe('store: useProgressList', () => {
 
   it('should keep only finished shows under "ended"', async () => {
     expect(await listTitles('ended')).toEqual([ENDED_SHOW]);
+  });
+
+  it('should not filter the dropped bucket by status', async () => {
+    serveDroppedBucket();
+
+    expect(await listTitles('dropped')).toEqual([DROPPED_SHOW]);
   });
 
   it('should not filter by status on the in progress bucket', async () => {
