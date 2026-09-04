@@ -8724,6 +8724,10 @@
       "default": "Up to date",
       "description": "Text for the button that allows users to filter the list to only display shows that are completed. This title should be as short and concise as possible."
     },
+    "button_text_progress_ended": {
+      "default": "Ended",
+      "description": "Text for the button that allows users to filter the list to only display shows that have ended or been canceled. This title should be as short and concise as possible."
+    },
     "button_text_progress_dropped": {
       "default": "Dropped",
       "description": "Text for the button that allows users to filter the list to only display shows that are dropped. This title should be as short and concise as possible."
@@ -8735,6 +8739,10 @@
     "button_label_progress_completed": {
       "default": "View completed shows",
       "description": "Aria-label for the button that allows users to filter the list to only display shows that are completed."
+    },
+    "button_label_progress_ended": {
+      "default": "View ended shows",
+      "description": "Aria-label for the button that allows users to filter the list to only display shows that have ended or been canceled."
     },
     "button_label_progress_dropped": {
       "default": "View dropped shows",

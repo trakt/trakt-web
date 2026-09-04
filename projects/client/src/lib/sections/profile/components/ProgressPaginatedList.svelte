@@ -4,12 +4,13 @@
   import type { ListSortProps } from "$lib/sections/lists/user/models/ListSortProps.ts";
   import { useSort } from "$lib/sections/lists/user/useSort.ts";
   import ProgressItem from "./_internal/progress/ProgressItem.svelte";
-  import { useProgressList } from "./_internal/useProgressList.ts";
-
-  type ProgressType = "in-progress" | "completed" | "dropped";
+  import {
+    type ProgressListType,
+    useProgressList,
+  } from "./_internal/useProgressList.ts";
 
   type ProgressPaginatedListProps = {
-    type: ProgressType;
+    type: ProgressListType;
   } & ListSortProps;
 
   const { type, sortBy, sortHow }: ProgressPaginatedListProps = $props();
