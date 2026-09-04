@@ -91,6 +91,10 @@
   <TrackIcon />
 {/if}
 
+{#if option.value === "ended"}
+  <FinaleIcon />
+{/if}
+
 {#if option.value === "dropped"}
   <DropIcon />
 {/if}
