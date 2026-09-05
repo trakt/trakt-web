@@ -16,7 +16,7 @@
   const { current, set, options } = useToggler("progress");
 
   const cta = $derived(
-    $current.value === "in-progress" || $current.value === "completed"
+    $current.value !== "dropped"
       ? {
           type: "progress" as const,
           mediaType: "show" as const,
