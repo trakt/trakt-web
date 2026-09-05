@@ -472,6 +472,21 @@
       "default": "Watched until here",
       "description": "Text for the button that allows users to mark a show as watched until a specific point."
     },
+    "confirmation_title_watched_until_here": {
+      "default": "Fill in the episodes you skipped?",
+      "description": "Title of the prompt shown after marking an episode watched that left earlier episodes unwatched."
+    },
+    "warning_prompt_watched_until_here": {
+      "default": "Marking \"{title}\" as watched left earlier episodes unwatched. Mark everything up to it as watched too?",
+      "description": "Message of the prompt shown after marking an episode watched that left earlier episodes unwatched.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Episode title",
+          "required": true
+        }
+      }
+    },
     "button_text_watch_again": {
       "default": "Watch again",
       "description": "Text for the button that allows users to mark a movie, episode, or show as re-watched."

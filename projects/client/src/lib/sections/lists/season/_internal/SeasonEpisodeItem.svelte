@@ -13,7 +13,10 @@
   import type { EpisodeUrlOverride } from "$lib/sections/lists/components/models/EpisodeUrlOverride";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchedUntilHereDrawer from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/WatchedUntilHereDrawer.svelte";
+  import { countSkippedEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/countSkippedEpisodes.ts";
   import { useWatchUntilHereEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/useWatchUntilHereEpisodes.ts";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
 
@@ -50,7 +53,7 @@
     hasUnseenEpisodes && episode.effectiveReleaseDate && !isFuture,
   );
 
-  const { isWatchable } = $derived(
+  const { isWatchable, isWatched } = $derived(
     useMarkAsWatched({ type: "episode", media: episode, show }),
   );
 
@@ -58,6 +61,15 @@
     !isFuture && (isWatchable || hasBulkMarkAsWatched),
   );
   const variant = $derived(isFuture ? "upcoming" : "default");
+
+  const skippedCount = $derived(
+    countSkippedEpisodes({
+      target: { season: episode.season, number: episode.number },
+      currentSeasonEpisodes,
+      previousSeasons,
+      watchedBySeason,
+    }),
+  );
 
   const src = $derived(
     useEpisodeSpoilerImage({
@@ -68,6 +80,35 @@
   );
 
   let isWatchUntilDrawerOpen = $state(false);
+
+  const { confirm } = useConfirm();
+  const confirmFillGap = $derived(
+    confirm({
+      type: ConfirmationType.WatchedUntilHere,
+      title: episode.title,
+      onConfirm: () => (isWatchUntilDrawerOpen = true),
+    }),
+  );
+
+  /**
+   * The prompt follows the episode becoming watched rather than the click, so
+   * it covers every route that marks it - the row check, the overflow, or the
+   * date drawer - and never fires on a re-watch, since the state was already
+   * true. `null` is the first read, before anything has been observed.
+   */
+  let wasWatched: boolean | null = $state(null);
+
+  $effect(() => {
+    const isNowWatched = $isWatched;
+    const previous = wasWatched;
+    wasWatched = isNowWatched;
+
+    if (previous !== false || !isNowWatched || skippedCount === 0) {
+      return;
+    }
+
+    confirmFillGap();
+  });
 
   const watchUntilResolver = $derived.by(() => {
     if (!isWatchUntilDrawerOpen) return null;
