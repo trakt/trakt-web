@@ -19,11 +19,13 @@
   const {
     isConnected,
     servers,
+    serversState,
     authState,
     isSyncing,
     startAuth,
     disconnect,
     syncNow,
+    retryServers,
   } = iffy(() => usePlexSync());
 
   const hasSyncedServers = usePlexSelectedLibraries().pipe(
@@ -77,8 +79,10 @@
   {#if $isConnected}
     <PlexSyncedServers
       servers={$servers}
+      serversState={$serversState}
       isSyncing={$isSyncing}
       onSyncNow={syncNow}
+      onRetryServers={retryServers}
     />
 
     {#if $hasSyncedServers}
