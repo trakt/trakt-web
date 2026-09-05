@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "pemutaran duplikat",
   "text_during_credits": "Selama kredit",
   "text_edit_mode_toggle_sections": "Sembunyikan/tampilkan bagian",
+  "text_email_unsubscribe_message": "Anda tidak akan lagi menerima email ini dari Trakt.",
+  "text_email_unsubscribe_title": "Berhenti Berlangganan",
   "text_ends_at": "Berakhir pukul {time}",
   "text_episodes_watched": "{count} episode",
   "text_export_status_complete": "Ekspor selesai.",

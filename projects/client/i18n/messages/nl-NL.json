@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "dubbele weergaven",
   "text_during_credits": "Tijdens de aftiteling",
   "text_edit_mode_toggle_sections": "Secties verbergen/tonen",
+  "text_email_unsubscribe_message": "U ontvangt deze e-mails van Trakt niet meer.",
+  "text_email_unsubscribe_title": "Uitschrijving",
   "text_ends_at": "Eindigt om {time}",
   "text_episodes_watched": "{count} afleveringen",
   "text_export_status_complete": "Export voltooid.",

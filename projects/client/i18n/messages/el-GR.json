@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "διπλότυπες προβολές",
   "text_during_credits": "Κατά τη διάρκεια των τίτλων",
   "text_edit_mode_toggle_sections": "Απόκρυψη/εμφάνιση ενοτήτων",
+  "text_email_unsubscribe_message": "Δεν θα λαμβάνετε πλέον αυτά τα email από το Trakt.",
+  "text_email_unsubscribe_title": "Απεγγραφή",
   "text_ends_at": "Τελειώνει στις {time}",
   "text_episodes_watched": "{count} επεισόδια",
   "text_export_status_complete": "Η εξαγωγή ολοκληρώθηκε.",

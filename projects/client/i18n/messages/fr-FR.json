@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "doublons de lectures",
   "text_during_credits": "Pendant le générique",
   "text_edit_mode_toggle_sections": "Afficher/masquer les sections",
+  "text_email_unsubscribe_message": "Vous ne recevrez plus ces e-mails de Trakt.",
+  "text_email_unsubscribe_title": "Désabonné",
   "text_ends_at": "Se termine à {time}",
   "text_episodes_watched": "{count} épisodes",
   "text_export_status_complete": "Exportation terminée.",

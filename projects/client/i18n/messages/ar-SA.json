@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "مشاهدات مكررة",
   "text_during_credits": "خلال الاعتمادات",
   "text_edit_mode_toggle_sections": "إخفاء/إظهار الأقسام",
+  "text_email_unsubscribe_message": "لن تتلقى بعد الآن هذه الرسائل الإلكترونية من Trakt.",
+  "text_email_unsubscribe_title": "تم إلغاء الاشتراك",
   "text_ends_at": "ينتهي في {time}",
   "text_episodes_watched": "{count} من الحلَقات",
   "text_export_status_complete": "اكتمل التصدير.",

@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "reproducciones duplicadas",
   "text_during_credits": "Durante los créditos",
   "text_edit_mode_toggle_sections": "Ocultar/mostrar secciones",
+  "text_email_unsubscribe_message": "Ya no recibirás estos correos de Trakt.",
+  "text_email_unsubscribe_title": "Suscripción cancelada",
   "text_ends_at": "Termina a las {time}",
   "text_episodes_watched": "{count} episodios",
   "text_export_status_complete": "Exportación completa.",

@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "yinelenen oynatmalar",
   "text_during_credits": "Jenerik sırasında",
   "text_edit_mode_toggle_sections": "Bölümleri gizle/göster",
+  "text_email_unsubscribe_message": "Bu e-postaları Trakt'ten artık almayacaksınız.",
+  "text_email_unsubscribe_title": "Abonelikten Çıkıldı",
   "text_ends_at": "{time}da biter",
   "text_episodes_watched": "{count} bölüm",
   "text_export_status_complete": "Dışa aktarma tamamlandı.",

@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "duplikált lejátszások",
   "text_during_credits": "Stáblista közbeni jelenetek",
   "text_edit_mode_toggle_sections": "Szakaszok elrejtése/megjelenítése",
+  "text_email_unsubscribe_message": "A továbbiakban nem kap ilyen e-maileket a Trakt-tól.",
+  "text_email_unsubscribe_title": "Leiratkozva",
   "text_ends_at": "Vége {time} órakor",
   "text_episodes_watched": "{count} epizód",
   "text_export_status_complete": "Exportálás befejeződött.",

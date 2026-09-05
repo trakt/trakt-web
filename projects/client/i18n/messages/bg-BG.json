@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "дублиращи се гледания",
   "text_during_credits": "По време на надписите",
   "text_edit_mode_toggle_sections": "Скриване/показване на секции",
+  "text_email_unsubscribe_message": "Вече няма да получавате тези имейли от Trakt.",
+  "text_email_unsubscribe_title": "Отписан",
   "text_ends_at": "Приключва в {time}",
   "text_episodes_watched": "{count} епизода",
   "text_export_status_complete": "Експортирането е завършено.",

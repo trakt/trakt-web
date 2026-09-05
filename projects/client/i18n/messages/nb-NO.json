@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "duplikate avspillinger",
   "text_during_credits": "Under rulleteksten",
   "text_edit_mode_toggle_sections": "Skjul/vis seksjoner",
+  "text_email_unsubscribe_message": "Du vil ikke lenger motta disse e-postene fra Trakt.",
+  "text_email_unsubscribe_title": "Avmeldt",
   "text_ends_at": "Slutter kl. {time}",
   "text_episodes_watched": "{count} episoder",
   "text_export_status_complete": "Eksport fullført.",

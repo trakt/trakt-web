@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "doppelte Wiedergaben",
   "text_during_credits": "Während des Abspanns",
   "text_edit_mode_toggle_sections": "Abschnitte aus-/einblenden",
+  "text_email_unsubscribe_message": "Sie erhalten diese E-Mails von Trakt nicht mehr.",
+  "text_email_unsubscribe_title": "Abgemeldet",
   "text_ends_at": "Endet um {time}",
   "text_episodes_watched": "{count} Episoden",
   "text_export_status_complete": "Export abgeschlossen.",

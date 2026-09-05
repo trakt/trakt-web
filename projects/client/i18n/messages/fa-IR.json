@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "نوازش‌های تکراری",
   "text_during_credits": "در طول تیتراژ",
   "text_edit_mode_toggle_sections": "پنهان/نمایش بخش‌ها",
+  "text_email_unsubscribe_message": "شما دیگر این ایمیل‌ها را از Trakt دریافت نخواهید کرد.",
+  "text_email_unsubscribe_title": "لغو اشتراک شد",
   "text_ends_at": "در {time} به پایان می‌رسد",
   "text_episodes_watched": "{count} اپیزود",
   "text_export_status_complete": "خروجی کامل شد.",

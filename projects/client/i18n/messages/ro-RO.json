@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "vizionări duplicate",
   "text_during_credits": "În timpul creditelor",
   "text_edit_mode_toggle_sections": "Ascunde/afișează secțiunile",
+  "text_email_unsubscribe_message": "Nu vei mai primi aceste e-mailuri de la Trakt.",
+  "text_email_unsubscribe_title": "Dezabonat",
   "text_ends_at": "Se termină la {time}",
   "text_episodes_watched": "{count} episoade",
   "text_export_status_complete": "Export finalizat.",

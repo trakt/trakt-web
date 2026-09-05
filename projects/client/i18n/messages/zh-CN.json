@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "重复播放",
   "text_during_credits": "片尾字幕期间",
   "text_edit_mode_toggle_sections": "隐藏/显示部分",
+  "text_email_unsubscribe_message": "您将不再收到 Trakt 的此类电子邮件。",
+  "text_email_unsubscribe_title": "已取消订阅",
   "text_ends_at": "结束于 {time}",
   "text_episodes_watched": "{count} 集",
   "text_export_status_complete": "导出完成。",

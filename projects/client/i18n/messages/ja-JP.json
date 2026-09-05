@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "重複再生",
   "text_during_credits": "クレジット中",
   "text_edit_mode_toggle_sections": "セクションの表示/非表示",
+  "text_email_unsubscribe_message": "今後、Traktからのメールは届きません。",
+  "text_email_unsubscribe_title": "登録解除しました",
   "text_ends_at": "{time}に終了",
   "text_episodes_watched": "{count}エピソード",
   "text_export_status_complete": "エクスポートが完了しました。",

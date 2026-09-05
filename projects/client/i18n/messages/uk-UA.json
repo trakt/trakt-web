@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "повторні перегляди",
   "text_during_credits": "Під час титрів",
   "text_edit_mode_toggle_sections": "Приховати/показати розділи",
+  "text_email_unsubscribe_message": "Ви більше не отримуватимете ці листи від Trakt.",
+  "text_email_unsubscribe_title": "Підписку скасовано",
   "text_ends_at": "Закінчується о {time}",
   "text_episodes_watched": "{count} епізодів",
   "text_export_status_complete": "Експорт завершено.",

@@ -1451,6 +1451,8 @@
   "text_duplicate_plays": "dubblettvisningar",
   "text_during_credits": "Under eftertexterna",
   "text_edit_mode_toggle_sections": "Dölj/visa avsnitt",
+  "text_email_unsubscribe_message": "Du kommer inte längre att få dessa e-postmeddelanden från Trakt.",
+  "text_email_unsubscribe_title": "Avprenumererad",
   "text_ends_at": "Slutar klockan {time}",
   "text_episodes_watched": "{count} avsnitt",
   "text_export_status_complete": "Exporten slutförd.",
