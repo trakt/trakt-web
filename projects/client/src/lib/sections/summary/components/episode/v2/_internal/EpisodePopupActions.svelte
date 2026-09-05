@@ -40,6 +40,16 @@
     {title}
     {show}
   />
+
+  <!-- The check now records another play, so removal belongs here. -->
+  <MarkAsWatchedAction
+    style="dropdown-item"
+    type="episode"
+    media={episode}
+    mode="hybrid"
+    {title}
+    {show}
+  />
 {/if}
 
 <EpisodeSideActions

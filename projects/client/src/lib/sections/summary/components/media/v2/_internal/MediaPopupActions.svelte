@@ -56,6 +56,15 @@
     {title}
     {media}
   />
+
+  <!-- The check now records another play, so removal belongs here. -->
+  <MarkAsWatchedAction
+    style="dropdown-item"
+    type={media.type}
+    mode="hybrid"
+    {title}
+    {media}
+  />
 {/if}
 
 {#if show}

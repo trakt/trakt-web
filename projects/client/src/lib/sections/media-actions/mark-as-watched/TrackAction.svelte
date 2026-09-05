@@ -3,6 +3,7 @@
   import type { MarkAsWatchedButtonIntl } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonIntl";
   import { MarkAsWatchedButtonIntlProvider } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonIntlProvider";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import {
@@ -25,6 +26,7 @@
   const { isMarkingAsWatched, isWatchable, isWatched, removeWatched } =
     $derived(useMarkAsWatched({ ...target, isToastEnabled: false }));
 
+  const { user } = useUser();
   const { confirm } = useConfirm();
   const openMarkAsWatchedDrawer = $derived(() => {
     markAsWatchedDrawerStore.open({
@@ -40,8 +42,20 @@
     }),
   );
 
+  /**
+   * A filled check reads as "done", so tapping it again should mean "watched
+   * again", not "undo everything". Removal lives in the overflow menu, where
+   * destructive actions belong.
+   *
+   * When the account opts out of multiple plays there is no second play to
+   * record, so the check keeps its removal role.
+   */
+  const isWatchAgain = $derived(
+    $isWatched && $user.preferences.hasWatchAgain,
+  );
+
   const handler = (ev: MouseEvent) => {
-    if ($isWatched) {
+    if ($isWatched && !isWatchAgain) {
       confirmRemoveWatched(ev);
       return;
     }
@@ -53,7 +67,11 @@
 <trakt-track-action class:is-watchable={isWatchable}>
   <ActionButton
     disabled={$isMarkingAsWatched || !isWatchable}
-    label={i18n.label({ title, isWatched: $isWatched, isRewatching: false })}
+    label={i18n.label({
+      title,
+      isWatched: $isWatched,
+      isRewatching: isWatchAgain,
+    })}
     onclick={handler}
     variant={$isWatched ? "primary" : "secondary"}
     color="purple"
