@@ -8,7 +8,11 @@ export const VIP_PLANS: VipPlan[] = [
     totalPrice: 96,
     durationInMonths: 24,
     isPopular: false,
-    discount: null,
+    discount: {
+      discountedAmount: 95.76,
+      discountedAmountMonthly: 3.99,
+      firstTermOnly: false,
+    },
   },
   {
     type: 'yearly',
@@ -16,7 +20,11 @@ export const VIP_PLANS: VipPlan[] = [
     totalPrice: 60,
     durationInMonths: 12,
     isPopular: true,
-    discount: null,
+    discount: {
+      discountedAmount: 59.88,
+      discountedAmountMonthly: 4.99,
+      firstTermOnly: false,
+    },
   },
   {
     type: 'monthly',
@@ -24,7 +32,11 @@ export const VIP_PLANS: VipPlan[] = [
     totalPrice: 6,
     durationInMonths: 1,
     isPopular: false,
-    discount: null,
+    discount: {
+      discountedAmount: 5.99,
+      discountedAmountMonthly: 5.99,
+      firstTermOnly: false,
+    },
   },
 ];
 

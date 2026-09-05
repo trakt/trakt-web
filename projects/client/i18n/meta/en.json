@@ -6884,18 +6884,6 @@
         }
       }
     },
-    "tag_text_discount_monthly": {
-      "default": "First month discount",
-      "description": "Discount pill text for monthly VIP plan, shown when a discount is active."
-    },
-    "tag_text_discount_yearly": {
-      "default": "First year discount",
-      "description": "Discount pill text for yearly VIP plan, shown when a discount is active."
-    },
-    "tag_text_discount_biyearly": {
-      "default": "First 2 years discount",
-      "description": "Discount pill text for 2-year VIP plan, shown when a discount is active."
-    },
     "text_vip_billed_monthly": {
       "default": "Billed monthly",
       "description": "Short billing frequency label for monthly VIP plan displayed on the subscription card."
@@ -6907,78 +6895,6 @@
     "text_vip_billed_biyearly": {
       "default": "Billed every 2 years",
       "description": "Short billing frequency label for 2-year VIP plan displayed on the subscription card."
-    },
-    "text_vip_billing_now": {
-      "default": "{price} billed now",
-      "description": "Text shown for the first discounted billing amount that will be charged immediately.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_discount_then_price": {
-      "default": "then {price}",
-      "description": "Text shown below the discounted VIP price to indicate the regular recurring price after the first discounted billing term. Example: then $60 billed yearly.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_discount_first_term_monthly": {
-      "default": "{price} for month 1, then",
-      "description": "First line of discounted billing text for monthly plan. Shows discounted price for first month.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_discount_first_term_yearly": {
-      "default": "{price} for year 1, then",
-      "description": "First line of discounted billing text for yearly plan. Shows discounted price for first year.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_discount_first_term_biyearly": {
-      "default": "{price} for 2 years, then",
-      "description": "First line of discounted billing text for 2-year plan. Shows discounted price for first 2-year term.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_recurring_monthly": {
-      "default": "{price} every month after that",
-      "description": "Second line of discounted billing text showing the regular recurring monthly price.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_recurring_yearly": {
-      "default": "{price} every year after that",
-      "description": "Second line of discounted billing text showing the regular recurring yearly price.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_recurring_biyearly": {
-      "default": "{price} every 2 years after that",
-      "description": "Second line of discounted billing text showing the regular recurring 2-year price.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
     },
     "usage_title_lists": {
       "default": "Lists",

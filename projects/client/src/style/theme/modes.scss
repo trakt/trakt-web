@@ -294,12 +294,6 @@
     var(--color-vip-surface-muted) 0%,
     var(--shade-100) 100%
   );
-  --color-vip-discount-pill: var(--purple-700);
-  --color-vip-discount-pill-background: color-mix(
-    in srgb,
-    var(--purple-700) 10%,
-    transparent
-  );
   --background-vip-card: linear-gradient(
     135deg,
     var(--purple-60),
@@ -797,12 +791,6 @@
     167.08% 143.09% at 7.82% 100%,
     var(--color-vip-surface-muted) 0%,
     var(--shade-1000) 100%
-  );
-  --color-vip-discount-pill: var(--purple-100);
-  --color-vip-discount-pill-background: color-mix(
-    in srgb,
-    var(--purple-100) 10%,
-    transparent
   );
   --background-vip-card: linear-gradient(
     135deg,

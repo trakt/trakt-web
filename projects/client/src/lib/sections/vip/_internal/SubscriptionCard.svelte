@@ -1,5 +1,4 @@
 <script lang="ts">
-  import TextTag from "$lib/components/tags/TextTag.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanCurrency } from "$lib/utils/formatting/currency/toHumanCurrency";
@@ -22,8 +21,6 @@
     }
   };
 
-  const hasDiscount = $derived(plan.discount != null);
-
   const formatCurrency = (price: number) =>
     toHumanCurrency({ price, currency: "usd", locale: languageTag() });
 
@@ -43,26 +40,9 @@
     return { whole: match[1], cents: match[2] };
   };
 
-  const originalPrice = $derived(formatCurrency(plan.monthlyPrice));
-
   const displayPrice = $derived(
-    splitPrice(
-      plan.discount ? plan.discount.discountedAmountMonthly : plan.monthlyPrice,
-    ),
+    splitPrice(plan.discount ? plan.discount.discountedAmountMonthly : plan.monthlyPrice),
   );
-
-  const discountPillText = $derived.by(() => {
-    if (!hasDiscount) return null;
-
-    switch (plan.type) {
-      case "monthly":
-        return m.tag_text_discount_monthly();
-      case "yearly":
-        return m.tag_text_discount_yearly();
-      case "two_years":
-        return m.tag_text_discount_biyearly();
-    }
-  });
 
   const billedText = $derived.by(() => {
     switch (plan.type) {
@@ -88,16 +68,6 @@
 
   <div class="trakt-subscription-container">
     <div class="trakt-subscription-pricing">
-      {#if hasDiscount}
-        <span class="original-price">{originalPrice}/mo</span>
-      {/if}
-
-      {#if discountPillText}
-        <div class="discount-pill">
-          <TextTag><p>{discountPillText}</p></TextTag>
-        </div>
-      {/if}
-
       <span class="price">
         {displayPrice.whole}
         {#if displayPrice.cents}
@@ -186,28 +156,6 @@
     align-items: center;
 
     text-align: center;
-
-    .original-price {
-      font-size: var(--font-size-body);
-      text-decoration: line-through;
-      opacity: 0.6;
-    }
-
-    .discount-pill {
-      margin: var(--ni-8) 0;
-
-      :global(.trakt-text-tag) {
-        background: var(--color-vip-discount-pill-background);
-        border-radius: var(--ni-4);
-        padding: var(--ni-4) var(--ni-12);
-        color: var(--color-vip-discount-pill);
-      }
-
-      p {
-        text-transform: uppercase;
-        font-weight: bold;
-      }
-    }
 
     .price {
       margin-top: var(--ni-12);
