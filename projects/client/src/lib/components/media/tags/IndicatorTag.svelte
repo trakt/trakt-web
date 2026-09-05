@@ -8,10 +8,18 @@
   const {
     variant = "full",
     indicator,
+    count = 0,
   }: {
     variant?: "partial" | "full";
     indicator: "watched" | "dropped" | "rewatching" | "watchlisted";
+    count?: number;
   } = $props();
+
+  /**
+   * A single play keeps the plain square badge, so the common case is pixel
+   * identical. Only a rewatch earns the extra width the number needs.
+   */
+  const hasCount = $derived(indicator === "watched" && count > 1);
 </script>
 
 {#snippet icon()}
@@ -26,13 +34,21 @@
   {/if}
 {/snippet}
 
-<trakt-indicator-tag data-variant={variant} data-indicator={indicator}>
+<trakt-indicator-tag
+  data-variant={variant}
+  data-indicator={indicator}
+  class:has-count={hasCount}
+>
   <StemTag
     --color-background-stem-tag="var(--color-background-indicator-tag)"
     --color-foreground-stem-tag="var(--color-text-indicator-tag)"
     --border-radius-tag="var(--border-radius-s)"
     {icon}
-  />
+  >
+    {#if hasCount}
+      <p class="bold count">{count}</p>
+    {/if}
+  </StemTag>
 </trakt-indicator-tag>
 
 <style>
@@ -51,6 +67,17 @@
 
     &[data-indicator="rewatching"] {
       --glyph-scale: 1.6;
+    }
+
+    &.has-count :global(.trakt-tag) {
+      width: auto;
+      gap: var(--ni-2);
+      padding-inline: var(--ni-3);
+
+      .count {
+        font-size: var(--ni-8);
+        line-height: var(--ni-10);
+      }
     }
 
     :global(.trakt-tag) {

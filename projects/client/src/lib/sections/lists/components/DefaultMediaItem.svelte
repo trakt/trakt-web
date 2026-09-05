@@ -13,6 +13,7 @@
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { useIsRewatching } from "$lib/sections/media-actions/rewatching/useIsRewatching";
+  import { useWatchCount } from "$lib/stores/useWatchCount";
   import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted";
   import type { Snippet } from "svelte";
   import type { MediaCardProps } from "../components/models/MediaCardProps";
@@ -38,6 +39,7 @@
     useIsWatched({ type, media }),
   );
   const { isRewatching } = $derived(useIsRewatching({ type, media }));
+  const { watchCount } = $derived(useWatchCount({ type, media }));
   const { isWatchlisted } = $derived(useIsWatchlisted({ type, media }));
   const { isDropped } = $derived(useIsDropped(media));
 
@@ -73,6 +75,7 @@
   <PosterTags
     isRewatching={$isRewatching}
     isWatched={$isWatched}
+    watchCount={$watchCount}
     isPartiallyWatched={$isPartiallyWatched}
     isWatchlisted={$isWatchlisted}
     isDropped={$isDropped}
