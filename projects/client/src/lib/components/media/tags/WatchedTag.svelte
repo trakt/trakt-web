@@ -23,5 +23,5 @@
 {#if variant === "full"}
   <WatchCountTag {count} {i18n} {link} {onclick} />
 {:else}
-  <IndicatorTag variant="full" indicator="watched" />
+  <IndicatorTag variant="full" indicator="watched" {count} />
 {/if}

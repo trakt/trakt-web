@@ -53,7 +53,7 @@
 {:else if active === "watched"}
   <WatchedTag
     {variant}
-    count={full?.watchCount}
+    count={props.watchCount}
     i18n={full?.i18n}
     link={full?.historyLink}
     onclick={full?.onWatchCountClick}

@@ -1,14 +1,19 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
-import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { getShowWatchState } from '$lib/utils/media/getShowWatchState.ts';
 import { combineLatest, map } from 'rxjs';
 
 export type UseWatchCountProps =
   | { type: 'movie'; media: MediaEntry }
-  | { type: 'show'; media: ShowEntry }
-  | { type: 'episode'; show: ShowEntry; episode: EpisodeEntry };
+  // The episode count is optional so list cards, which carry a leaner entry,
+  // can ask too. Without it a show cannot read as fully watched, and
+  // `getShowWatchState` already returns no count in that case.
+  | {
+    type: 'show';
+    media: MediaEntry & Partial<{ episode: { count: number } }>;
+  }
+  | { type: 'episode'; show: { id: number }; episode: EpisodeEntry };
 
 export function useWatchCount(props: UseWatchCountProps) {
   const { history } = useUser();
@@ -27,7 +32,7 @@ export function useWatchCount(props: UseWatchCountProps) {
         case 'show': {
           const { isWatched, minPlays } = getShowWatchState({
             watchedShow: $history.shows.get(mediaId),
-            episodeCount: props.media.episode.count,
+            episodeCount: props.media.episode?.count,
           });
 
           return isWatched ? minPlays : 0;

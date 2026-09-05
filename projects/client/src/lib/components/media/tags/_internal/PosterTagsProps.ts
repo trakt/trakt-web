@@ -7,6 +7,7 @@ type SharedPosterTagsProps = {
   isPartiallyWatched?: boolean;
   isDropped?: boolean;
   isWatchlisted?: boolean;
+  watchCount?: number;
 };
 
 type DefaultPosterTagsProps = SharedPosterTagsProps & {
@@ -16,7 +17,6 @@ type DefaultPosterTagsProps = SharedPosterTagsProps & {
 type FullPosterTagsProps = SharedPosterTagsProps & {
   variant: 'full';
   i18n: TagIntl;
-  watchCount: number;
   postCreditsCount: number;
   historyLink?: DrawerLinkProps;
   seasonsLink?: DrawerLinkProps;
