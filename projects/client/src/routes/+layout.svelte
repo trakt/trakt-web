@@ -14,6 +14,7 @@
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
   import EditModeProvider from "$lib/features/edit-mode/EditModeProvider.svelte";
+  import EmailUnsubscribeSnackbar from "$lib/features/email-unsubscribe/EmailUnsubscribeSnackbar.svelte";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
   import FeatureFlagProvider from "$lib/features/feature-flag/FeatureFlagProvider.svelte";
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
@@ -143,6 +144,7 @@
                                         </RenderFor>
 
                                         <LoginErrorSnackbar />
+                                        <EmailUnsubscribeSnackbar />
                                         <QueryDevtools
                                           client={data.queryClient}
                                           buttonPosition="bottom-right"

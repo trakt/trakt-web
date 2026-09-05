@@ -10771,6 +10771,14 @@
     "text_login_rate_limited_message": {
       "default": "Please wait a moment and try again.",
       "description": "Snackbar message when sign in is refused because the viewer is rate limited."
+    },
+    "text_email_unsubscribe_title": {
+      "default": "Unsubscribed",
+      "description": "Snackbar title confirming the viewer unsubscribed from Trakt emails via an email footer link."
+    },
+    "text_email_unsubscribe_message": {
+      "default": "You'll no longer receive these emails from Trakt.",
+      "description": "Snackbar message confirming the email unsubscribe was successful."
     }
   }
 }
