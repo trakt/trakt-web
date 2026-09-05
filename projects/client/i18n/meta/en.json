@@ -10518,6 +10518,14 @@
       "default": "Pick your favorite genres from a visual grid instead of a list of tags.",
       "description": "Description for the Genre Picker preview feature."
     },
+    "preview_feature_title_large_screen_cards": {
+      "default": "Large Screen Cards",
+      "description": "Title for the Large Screen Cards preview feature."
+    },
+    "preview_feature_description_large_screen_cards": {
+      "default": "On bigger screens, view all lists use the same cards as the rest of the app. Selecting one opens a quick glance instead of leaving the list.",
+      "description": "Description for the Large Screen Cards preview feature."
+    },
     "preview_feature_title_list_counts": {
       "default": "List Counts",
       "description": "Title for the List Counts preview feature."

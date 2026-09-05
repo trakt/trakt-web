@@ -2,12 +2,19 @@
   import DateTag from "$lib/components/media/tags/DateTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import type { LibraryItem } from "$lib/requests/models/LibraryItem";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import MediaItem from "../../components/MediaItem.svelte";
 
   const {
     item,
     style = "cover",
   }: { item: LibraryItem; style?: "summary" | "cover" } = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const isSummary = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards) === "summary",
+  );
 
   const target = $derived.by(() => {
     if (item.type === "episode") {
@@ -37,7 +44,7 @@
   variant="start"
   {style}
   coverTag={addedAtTag}
-  tag={style === "summary" ? addedAtTag : undefined}
+  tag={isSummary ? addedAtTag : undefined}
 />
 
 <style>

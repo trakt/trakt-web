@@ -184,6 +184,7 @@
 
 {#if drawer === SummaryDrawers.Episode && seasons && currentSeason != null && sourceEpisode != null && showEntry}
   <EpisodeDrawerHost
+    slug={showEntry.slug}
     show={showEntry}
     {seasons}
     season={currentSeason}

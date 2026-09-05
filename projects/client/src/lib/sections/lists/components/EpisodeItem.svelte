@@ -12,11 +12,16 @@
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { mediaGlanceNavigation } from "$lib/sections/summary/components/glance/mediaGlanceNavigation.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import type { Snippet } from "svelte";
+  import MediaHoverCard from "./_internal/MediaHoverCard.svelte";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
   import EpisodeCard from "./EpisodeCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
@@ -31,13 +36,42 @@
   const isHidden = $derived(props.status === "hidden");
   const isListItem = $derived(props.variant === "list-item");
 
+  const isLargeScreenCards = useLargeScreenCards();
+
   const style = $derived(props.style ?? "cover");
-  const resolvedStyle: "cover" | "summary" = $derived(
-    style === "compact" || style === "minimal" ? "summary" : style,
+  const resolvedStyle = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards),
   );
   const summaryCardLayout = $derived(
     style === "compact" || style === "minimal" ? style : "default",
   );
+
+  const { buildEpisodeGlanceLink } = mediaGlanceNavigation();
+  const urlOverride = $derived(
+    $isLargeScreenCards && style === "summary"
+      ? buildEpisodeGlanceLink({
+        slug: props.media.slug,
+        season: props.episode.season,
+        episode: props.episode.number,
+      })
+      : props.urlOverride,
+  );
+
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
+  const hasHoverPanel = $derived(
+    resolvedStyle === "cover" && $isMouse && style === "summary" && isListItem,
+  );
+
+  const hoverSubtitle = $derived.by(() => {
+    const numberLabel = episodeNumberLabel({
+      seasonNumber: props.episode.season,
+      episodeNumber: props.episode.number,
+    });
+
+    return $spoilerFreeTitle
+      ? `${numberLabel} - ${$spoilerFreeTitle}`
+      : numberLabel;
+  });
 
   const runtime = $derived(
     isNaN(props.episode.runtime) ? props.media.runtime : props.episode.runtime,
@@ -224,7 +258,7 @@
         },
       }}
       popupActions={props.popupActions}
-      urlOverride={props.urlOverride}
+      {urlOverride}
       layout={summaryCardLayout}
       badge={action}
       {sortTag}
@@ -233,13 +267,27 @@
     />
   {/if}
 
-  {#if style === "cover"}
+  {#snippet episodeCard()}
     <EpisodeCard
       {...props}
       {tag}
       {action}
+      {urlOverride}
       indicators={hasIndicators ? indicatorTags : undefined}
     />
+  {/snippet}
+
+  {#if resolvedStyle === "cover"}
+    {#if hasHoverPanel}
+      <MediaHoverCard
+        media={props.media}
+        subtitle={hoverSubtitle}
+        {tag}
+        children={episodeCard}
+      />
+    {:else}
+      {@render episodeCard()}
+    {/if}
   {/if}
 {/snippet}
 

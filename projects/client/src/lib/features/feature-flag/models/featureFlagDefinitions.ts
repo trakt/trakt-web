@@ -1,4 +1,5 @@
 import CheckIcon from '$lib/components/icons/CheckIcon.svelte';
+import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import EyeIcon from '$lib/components/icons/EyeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
@@ -101,6 +102,17 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_genre_picker(),
     addedAt: new Date('2026-08-24'),
     description: () => m.preview_feature_description_genre_picker(),
+  },
+  [FeatureFlag.LargeScreenCards]: {
+    icon: CoverImageIcon,
+    title: () => m.preview_feature_title_large_screen_cards(),
+    addedAt: new Date('2026-09-03'),
+    description: () => m.preview_feature_description_large_screen_cards(),
+    featureLink: () =>
+      openFeatureLink(
+        UrlBuilder.trending(),
+        m.preview_feature_title_large_screen_cards(),
+      ),
   },
   [FeatureFlag.ParentalGuide]: {
     icon: NoSpoilerIcon,
