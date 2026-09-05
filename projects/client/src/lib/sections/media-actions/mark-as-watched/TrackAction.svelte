@@ -55,7 +55,7 @@
   );
 
   const handler = (ev: MouseEvent) => {
-    if ($isWatched && !isWatchAgain) {
+    if ($isWatched && !$user.preferences.hasWatchAgain) {
       confirmRemoveWatched(ev);
       return;
     }
