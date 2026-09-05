@@ -5,8 +5,8 @@ import type {
 } from './MarkAsWatchedButtonIntl.ts';
 
 export const MarkAsWatchedButtonIntlProvider: MarkAsWatchedButtonIntl = {
-  label: ({ isWatched, title }: MarkAsWatchedButtonMeta) =>
-    isWatched
+  label: ({ isWatched, isRewatching, title }: MarkAsWatchedButtonMeta) =>
+    isWatched && !isRewatching
       ? m.button_label_remove_from_watched({ title })
       : m.button_label_mark_as_watched({ title }),
   text: ({ isWatched, isRewatching }: MarkAsWatchedButtonMeta) => {
