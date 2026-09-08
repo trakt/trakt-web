@@ -1,7 +1,6 @@
 import { map } from 'rxjs';
 import type { ActivityHistory } from '../../requests/queries/users/activityHistoryQuery.ts';
 import { createDismissalStore } from './_internal/createDismissalStore.ts';
-import { DISMISSAL_LIMIT } from './constants/index.ts';
 
 const dismissalStore = createDismissalStore();
 
@@ -11,10 +10,6 @@ export function useDismissals() {
       map((store) => store.items),
     ),
     dismiss: dismissalStore.dismiss,
-    resetCount: dismissalStore.resetCount,
-    isAtLimit: dismissalStore.dismissals.pipe(
-      map((store) => store.dismissalCount >= DISMISSAL_LIMIT),
-    ),
     wasDismissed: (activity: ActivityHistory) => {
       const dismissedItems = dismissalStore.dismissals.value.items;
 

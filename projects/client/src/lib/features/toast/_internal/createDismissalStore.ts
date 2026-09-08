@@ -2,7 +2,6 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import { persistDebounced } from '$lib/utils/storage/persistDebounced.ts';
 import { BehaviorSubject } from 'rxjs';
 import { DISMISSAL_STORAGE_KEY } from '../constants/index.ts';
-import type { DismissalVariant } from '../models/DismissalVariant.ts';
 import type { DismissedItem } from '../models/DismissedItem.ts';
 import type { StoredDismissalsV2 } from '../models/StoredDismissal.ts';
 import { getStoredDismissals } from './getStoredDismissals.ts';
@@ -25,17 +24,7 @@ export function createDismissalStore() {
 
   return {
     dismissals,
-    resetCount: () => {
-      update({
-        ...dismissals.value,
-        dismissalCount: 0,
-      });
-    },
-    dismiss: (
-      id: number,
-      type: ExtendedMediaType,
-      variant: DismissalVariant,
-    ) => {
+    dismiss: (id: number, type: ExtendedMediaType) => {
       const dismissal: DismissedItem = {
         id: id.toString(),
         type,
@@ -44,12 +33,10 @@ export function createDismissalStore() {
 
       const current = dismissals.value;
       const items = normalizeDismissalItems([dismissal, ...current.items]);
-      const count = variant === 'manual' ? ++current.dismissalCount : 0;
 
       update({
         ...current,
         items,
-        dismissalCount: count,
       });
     },
   };

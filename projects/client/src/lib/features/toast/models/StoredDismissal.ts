@@ -10,5 +10,4 @@ export type StoredDismissalsV1 = {
 export type StoredDismissalsV2 = {
   version: 2;
   items: DismissedItem[];
-  dismissalCount: number;
 };

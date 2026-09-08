@@ -15,7 +15,6 @@ export enum ConfirmationType {
   StopCheckin = 'stop-checkin',
   DeleteComment = 'delete-comment',
   DeleteNote = 'delete-note',
-  SuppressRatingsToast = 'suppress-ratings-toast',
   Logout = 'logout',
   SimpleFilters = 'simple-filters',
   CancelVip = 'cancel-vip',

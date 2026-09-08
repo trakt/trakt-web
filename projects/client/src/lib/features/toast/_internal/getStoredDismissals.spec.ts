@@ -22,7 +22,6 @@ describe('getStoredDismissals', () => {
     expect(getStoredDismissals()).toEqual({
       version: 2,
       items: [],
-      dismissalCount: 0,
     });
   });
 
@@ -31,7 +30,6 @@ describe('getStoredDismissals', () => {
     expect(getStoredDismissals()).toEqual({
       version: 2,
       items: [],
-      dismissalCount: 0,
     });
   });
 
@@ -44,14 +42,12 @@ describe('getStoredDismissals', () => {
     expect(getStoredDismissals()).toEqual({
       version: 2,
       items: [],
-      dismissalCount: 0,
     });
   });
 
   it('should normalize and return v2 stored dismissals', () => {
     const stored: StoredDismissalsV2 = {
       version: 2,
-      dismissalCount: 0,
       items: [
         { id: '1', type: 'movie', dismissedAt: now - 1 },
         {
@@ -67,7 +63,6 @@ describe('getStoredDismissals', () => {
     expect(getStoredDismissals()).toEqual({
       version: 2,
       items: [{ id: '1', type: 'movie', dismissedAt: now - 1 }],
-      dismissalCount: 0,
     });
   });
 
@@ -85,7 +80,6 @@ describe('getStoredDismissals', () => {
         ...v1,
         id: v1.id.toString(),
       }],
-      dismissalCount: 1,
     });
   });
 
@@ -101,7 +95,6 @@ describe('getStoredDismissals', () => {
     expect(getStoredDismissals()).toEqual({
       version: 2,
       items: [],
-      dismissalCount: 0,
     });
   });
 });
