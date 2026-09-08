@@ -9410,6 +9410,15 @@
         }
       }
     },
+    "button_label_change_rating": {
+      "default": "Change rating for \"{title}\"",
+      "description": "Aria label for the badge that shows the user's own rating and, when pressed, reopens the rating picker so they can change it.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "button_text_watch_until_here_anchor_start": {
       "default": "Start time",
       "description": "Toggle label that treats the picked date and time as when the user started binge-watching the selected episodes."
