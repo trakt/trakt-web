@@ -5010,14 +5010,6 @@
       "default": "Real-world connections",
       "description": "Text for the 'Real-world connections' trivia category option. Should be as short and concise as possible."
     },
-    "button_text_stop_asking": {
-      "default": "Stop asking",
-      "description": "Text for the button that allows a user to stop prompted, for example being asked to rate what they recently saw."
-    },
-    "warning_prompt_suppress_ratings_toast": {
-      "default": "Do you want to stop being asked to rate what you recently watched?",
-      "description": "Text for the warning prompt that appears to ask a user to stop being asked to rate what they recently watched."
-    },
     "button_text_restore_rating_prompts": {
       "default": "Restore Rating Prompts",
       "description": "Text for the button that allows users to reset their suppressed rating prompts."
@@ -9380,10 +9372,6 @@
     "confirmation_title_delete_note": {
       "default": "Delete note?",
       "description": "Title of the confirmation dialog shown before permanently deleting one of the user's notes."
-    },
-    "confirmation_title_suppress_ratings_toast": {
-      "default": "Stop asking?",
-      "description": "Title of the confirmation dialog shown before suppressing future ratings prompts."
     },
     "confirmation_title_log_out": {
       "default": "Logout?",

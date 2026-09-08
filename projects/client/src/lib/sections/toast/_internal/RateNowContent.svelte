@@ -2,8 +2,6 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import AutoCloseButton from "$lib/components/buttons/AutoCloseButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { m } from "$lib/features/i18n/messages";
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import { useLastWatched } from "$lib/features/toast/useLastWatched";
@@ -19,13 +17,7 @@
 
   let interactionCounter = $state(0);
 
-  const { dismiss, suppress, isAtLimit } = useLastWatched();
-
-  const { confirm } = useConfirm();
-  const confirmSuppression = confirm({
-    type: ConfirmationType.SuppressRatingsToast,
-    onConfirm: suppress,
-  });
+  const { dismiss } = useLastWatched();
 
   const ratingPrompts = [
     m.text_rating_prompt_1(),
@@ -66,14 +58,7 @@
           {/key}
         {:else}
           <ActionButton
-            onclick={() => {
-              handleDismiss();
-              if (!$isAtLimit) {
-                return;
-              }
-
-              confirmSuppression();
-            }}
+            onclick={handleDismiss}
             label={m.button_label_dismiss()}
             style="ghost"
             size="small"

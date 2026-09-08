@@ -9,7 +9,6 @@ import { normalizeDismissalItems } from './normalizeDismissalItems.ts';
 const EMPTY_DATA: StoredDismissalsV2 = {
   version: 2,
   items: [],
-  dismissalCount: 0,
 };
 
 // FIXME: remove backwards compatibility end of jan 2026
@@ -36,11 +35,10 @@ function parseStoredDismissals(raw: string | Nil): StoredDismissalsV2 | null {
     switch (version) {
       case 2: {
         const data = parsed as StoredDismissalsV2;
-        const normalized = normalizeDismissalItems(data.items);
 
         return {
-          ...data,
-          items: normalized,
+          version: 2,
+          items: normalizeDismissalItems(data.items),
         };
       }
       case 1: {
@@ -53,7 +51,6 @@ function parseStoredDismissals(raw: string | Nil): StoredDismissalsV2 | null {
 
         return {
           ...EMPTY_DATA,
-          dismissalCount: normalized.length,
           items: normalized,
         };
       }

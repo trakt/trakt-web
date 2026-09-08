@@ -120,12 +120,6 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.warning_prompt_delete_note(),
     operation: 'destructive',
   }),
-  [ConfirmationType.SuppressRatingsToast]: () => ({
-    title: m.confirmation_title_suppress_ratings_toast(),
-    buttonText: m.button_text_stop_asking(),
-    message: m.warning_prompt_suppress_ratings_toast(),
-    operation: 'destructive',
-  }),
   [ConfirmationType.Logout]: () => ({
     title: m.confirmation_title_log_out(),
     buttonText: m.button_text_logout(),
