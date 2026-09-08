@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { m } from "$lib/features/i18n/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -13,6 +14,8 @@
   };
 
   const { title, slug, mode }: RecentlyWatchedListProps = $props();
+
+  const { isMe } = $derived(useIsMe(slug));
 </script>
 
 <DrillableMediaList
@@ -34,6 +37,6 @@
   urlBuilder={() => UrlBuilder.profile.history(slug)}
 >
   {#snippet item(media)}
-    <RecentlyWatchedItem {media} />
+    <RecentlyWatchedItem {media} isActionable={$isMe} />
   {/snippet}
 </DrillableMediaList>
