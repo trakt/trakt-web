@@ -1,3 +1,8 @@
+<script lang="ts" module>
+  const STAR_PATH =
+    "M12 2L14.8214 8.11672L21.5106 8.90983L16.5651 13.4833L17.8779 20.0902L12 16.8L6.12215 20.0902L7.43493 13.4833L2.48944 8.90983L9.17863 8.11672L12 2Z";
+</script>
+
 <script lang="ts">
   const { fill }: { fill: "none" | "half" | "full" } = $props();
 
@@ -24,19 +29,10 @@
 >
   <defs>
     <clipPath id={clipId}>
-      <path
-        d="M12 2L14.8214 8.11672L21.5106 8.90983L16.5651 13.4833L17.8779 20.0902L12 16.8L6.12215 20.0902L7.43493 13.4833L2.48944 8.90983L9.17863 8.11672L12 2Z"
-      />
+      <path d={STAR_PATH} />
     </clipPath>
   </defs>
-  <path
-    class="trakt-star-path"
-    d="M12 2L14.8214 8.11672L21.5106 8.90983L16.5651 13.4833L17.8779 20.0902L12 16.8L6.12215 20.0902L7.43493 13.4833L2.48944 8.90983L9.17863 8.11672L12 2Z"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linejoin="bevel"
-    fill="transparent"
-  />
+  <path class="trakt-star-track" d={STAR_PATH} fill="currentColor" />
   <rect
     class="trakt-star-fill"
     x="0"
@@ -49,10 +45,9 @@
 </svg>
 
 <style>
-  .trakt-star-path {
-    transition:
-      fill,
-      stroke var(--transition-increment) ease-in-out;
+  .trakt-star-track {
+    opacity: var(--star-track-opacity, 0.3);
+    transition: opacity var(--transition-increment) ease-in-out;
   }
 
   .trakt-star-fill {
