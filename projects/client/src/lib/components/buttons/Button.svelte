@@ -402,8 +402,12 @@
       --color-outline-stroke,
       var(--color-background-button)
     );
+    // Resting fill. Defaults to nothing so `outline` stays the transparent
+    // variant; a caller that needs the stroke echoed as a wash sets
+    // --color-outline-fill and hover keeps intensifying on top of it.
+    --color-button-fill: var(--color-outline-fill, transparent);
 
-    background: transparent;
+    background: var(--color-button-fill);
     color: var(--color-outline-text, var(--color-foreground));
     box-shadow: inset 0 0 0 var(--border-thickness-xxs)
       var(--color-button-stroke);
@@ -424,13 +428,18 @@
   :global(#{$b}[data-style=outline][disabled]),
   :global(#{$b}[data-style=outline][aria-disabled=true]) {
     --color-button-stroke: var(--color-surface-button-disabled);
+    --color-button-fill: transparent;
 
     color: var(--color-foreground-button-disabled);
   }
 
   @include for-mouse {
     :global(#{$b}[data-style=outline]:hover#{$on}) {
-      background: color-mix(in srgb, var(--color-button-stroke) 18%, transparent);
+      background: color-mix(
+        in srgb,
+        var(--color-button-stroke) 18%,
+        var(--color-button-fill)
+      );
     }
   }
 
