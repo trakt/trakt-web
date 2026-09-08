@@ -117,13 +117,5 @@
     :global(.trakt-rate-now) {
       justify-content: flex-start;
     }
-
-    :global(svg) {
-      --icon-color: var(--color-foreground);
-    }
-
-    :global(.is-current-rating svg) {
-      --icon-fill-color: var(--color-foreground);
-    }
   }
 </style>

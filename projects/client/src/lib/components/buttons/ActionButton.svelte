@@ -193,7 +193,7 @@
 
   @include icon-button-ghost("#{$b}[data-style=ghost]", scale(0.92), $on);
 
-  :global(#{$b}[data-style=ghost]:active#{$on}) {
+  :global(#{$b}[data-style=ghost]) {
     box-shadow: none;
   }
 
