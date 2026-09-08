@@ -185,7 +185,7 @@
     }
 
     &[data-has-value="true"] {
-      border-color: var(--blue-500);
+      border-color: var(--purple-500);
     }
 
     &[data-disabled] {

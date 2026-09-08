@@ -25,12 +25,12 @@
 
   tr.trakt-row-highlighted {
     font-weight: bold;
-    border-top: 2px solid var(--blue-600);
-    border-bottom: 2px solid var(--blue-600);
+    border-top: 2px solid var(--purple-600);
+    border-bottom: 2px solid var(--purple-600);
     background-color: color-mix(
       in srgb,
       var(--color-background) 95%,
-      var(--blue-600)
+      var(--purple-600)
     );
   }
 </style>

@@ -108,7 +108,7 @@
         ),
         radial-gradient(
           ellipse 50% 45% at 72% 50%,
-          var(--blue-800) 0%,
+          var(--purple-800) 0%,
           transparent 65%
         ),
         var(--color-yir-poster-background);
