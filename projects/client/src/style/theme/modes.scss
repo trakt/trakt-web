@@ -228,6 +228,33 @@
   );
 
   /*
+   * Error pages
+   */
+  --color-error-page-surface: color-mix(
+    in srgb,
+    var(--color-text-primary) 2%,
+    var(--color-background)
+  );
+  --color-error-page-border: var(--color-border);
+  --color-error-page-kicker: var(--purple-600);
+  --color-error-page-action-fill: color-mix(
+    in srgb,
+    var(--purple-500) 8%,
+    transparent
+  );
+  --background-error-page-mark-ring: conic-gradient(
+    from 200deg,
+    var(--purple-500) 0deg,
+    color-mix(in srgb, var(--color-text-primary) 14%, transparent) 170deg,
+    var(--purple-500) 360deg
+  );
+  --background-error-page-bloom: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--purple-500) 12%, transparent) 0%,
+    transparent 70%
+  );
+
+  /*
    * Sentiment
    */
   --color-sentiment-good: var(--purple-700);
@@ -719,6 +746,37 @@
     in srgb,
     var(--color-text-primary) 14%,
     transparent
+  );
+
+  /*
+   * Error pages
+   */
+  --color-error-page-surface: color-mix(
+    in srgb,
+    var(--color-text-primary) 3%,
+    var(--color-background)
+  );
+  --color-error-page-border: color-mix(
+    in srgb,
+    var(--color-text-primary) 9%,
+    transparent
+  );
+  --color-error-page-kicker: var(--purple-300);
+  --color-error-page-action-fill: color-mix(
+    in srgb,
+    var(--purple-400) 16%,
+    transparent
+  );
+  --background-error-page-mark-ring: conic-gradient(
+    from 200deg,
+    var(--purple-400) 0deg,
+    color-mix(in srgb, var(--color-text-primary) 16%, transparent) 170deg,
+    var(--purple-400) 360deg
+  );
+  --background-error-page-bloom: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--purple-500) 18%, transparent) 0%,
+    transparent 70%
   );
 
   /*
