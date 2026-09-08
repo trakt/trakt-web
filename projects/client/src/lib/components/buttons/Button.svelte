@@ -347,17 +347,8 @@
     outline: var(--border-thickness-xxs) solid var(--color-foreground);
   }
 
-  @include for-mouse {
-    :global(#{$b}[data-style=flat]:hover#{$on}) {
-      box-shadow: 0 var(--ni-4) var(--ni-12) var(--ni-neg-2)
-        color-mix(in srgb, var(--color-background-button) 45%, transparent);
-      transform: translateY(calc(var(--ni-1) * -1));
-    }
-  }
-
   :global(#{$b}[data-style=flat]:active#{$on}) {
     transform: scale(calc(var(--scale-factor-button) * 0.97));
-    box-shadow: none;
   }
 
   :global(#{$b}[data-style=underlined]) {
@@ -434,8 +425,8 @@
     }
   }
 
-  // Press feedback to match `flat`/`ghost`; keep the stroke (unlike `flat`,
-  // whose box-shadow is a hover lift, outline's box-shadow is the border).
+  // Press feedback to match `flat`/`ghost`; keep the stroke - outline's
+  // box-shadow IS the border, not decoration.
   :global(#{$b}[data-style=outline]:active#{$on}) {
     transform: scale(calc(var(--scale-factor-button) * 0.97));
   }

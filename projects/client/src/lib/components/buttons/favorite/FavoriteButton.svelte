@@ -56,13 +56,7 @@
 
 {#if style === "action"}
   <QueuedIndicator {isQueued}>
-    <ActionButton
-      {...commonProps}
-      {...props}
-      style="ghost"
-      color="default"
-      classList="trakt-favorite-action-button"
-    >
+    <ActionButton {...commonProps} {...props} style="ghost" color="default">
       <FavoriteIcon {state} --icon-color="var(--color-background-red)" />
     </ActionButton>
   </QueuedIndicator>
@@ -77,21 +71,3 @@
     {/snippet}
   </DropdownItem>
 {/if}
-
-<style lang="scss">
-  /*
-    The heart wears the same treatment as the rating badge that opens the rate
-    popover beside it: a hover wash and a press, no glow. ActionButton draws
-    that glow from --color-background-action-button, a surface a ghost button
-    never paints, so here it reads as a shadow cast by nothing. The selector
-    repeats ActionButton's own disabled guards because it has to outrank the
-    rule it cancels.
-  */
-  :global(
-    .trakt-action-button.trakt-favorite-action-button:hover:not([disabled]):not(
-        [aria-disabled="true"]
-      )
-  ) {
-    box-shadow: none;
-  }
-</style>

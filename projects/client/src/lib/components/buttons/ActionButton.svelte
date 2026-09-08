@@ -162,7 +162,7 @@
 
     transition: var(--transition-increment) cubic-bezier(0.22, 1, 0.36, 1);
     transition-property:
-      background-color, color, box-shadow, transform, outline, outline-offset;
+      background-color, color, transform, outline, outline-offset;
   }
 
   @each $color in "purple", "red", "blue", "orange", "default" {
@@ -188,20 +188,8 @@
     display: none;
   }
 
-  @include for-mouse {
-    :global(#{$b}:hover#{$on}) {
-      box-shadow: 0 var(--ni-2) var(--ni-8) var(--ni-neg-2)
-        color-mix(
-          in srgb,
-          var(--color-background-action-button) 50%,
-          transparent
-        );
-    }
-  }
-
   :global(#{$b}:active#{$on}) {
     transform: scale(0.92);
-    box-shadow: none;
   }
 
   :global(#{$b}:active[disabled]),
