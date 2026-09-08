@@ -21,13 +21,19 @@ function getStore(): UseStore | null {
   }
 }
 
+// `idb-keyval`'s lazy open throws synchronously, so a chained `.catch()` never
+// attaches.
 export async function readAuthMarker(): Promise<boolean> {
   const current = getStore();
   if (!current) {
     return false;
   }
 
-  return await get<boolean>(MARKER_KEY, current).catch(() => false) ?? false;
+  try {
+    return await get<boolean>(MARKER_KEY, current) ?? false;
+  } catch {
+    return false;
+  }
 }
 
 export async function writeAuthMarker(isAuthorized: boolean): Promise<void> {
@@ -36,5 +42,9 @@ export async function writeAuthMarker(isAuthorized: boolean): Promise<void> {
     return;
   }
 
-  await set(MARKER_KEY, isAuthorized, current).catch(() => {});
+  try {
+    await set(MARKER_KEY, isAuthorized, current);
+  } catch {
+    // SecurityError: storage is blocked.
+  }
 }
