@@ -238,8 +238,6 @@
   @include for-mouse {
     :global(#{$selector}[data-style='flat']:hover:not([disabled]):not([aria-disabled='true'])),
     :global(#{$selector}[data-style='flat']:focus-visible:not([disabled]):not([aria-disabled='true'])) {
-      transform: none;
-      box-shadow: none;
       border-color: var(--color-card-border-hover);
     }
   }

@@ -239,10 +239,6 @@
         }
       }
 
-      :global(.ratings-drilldown:hover) {
-        box-shadow: none;
-      }
-
       :global(.ratings-drilldown:active) {
         transform: scale(0.98);
       }
