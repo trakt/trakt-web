@@ -4,6 +4,7 @@
   import { VIP_PLANS } from "./constants";
   import TraktIcon from "./icons/TraktIcon.svelte";
   import SubscriptionCard from "./SubscriptionCard.svelte";
+  import TwoYearDealBanner from "./TwoYearDealBanner.svelte";
   import { useVip } from "./useVip";
   import VipContentContainer from "./VipContentContainer.svelte";
   import VipHeader from "./VipHeader.svelte";
@@ -35,6 +36,8 @@
       {/snippet}
     </VipHeader>
   {/snippet}
+
+  <TwoYearDealBanner />
 
   <div class="trakt-vip-subscription-plans">
     {#each activePlans as plan (plan.type)}

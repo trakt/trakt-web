@@ -6888,6 +6888,38 @@
       "default": "Billed every 2 years",
       "description": "Short billing frequency label for 2-year VIP plan displayed on the subscription card."
     },
+    "header_vip_paypal_switch": {
+      "default": "Switch to credit card",
+      "description": "Header for the card on the VIP manage page inviting PayPal subscribers to switch their payment method to credit card."
+    },
+    "text_vip_paypal_switch": {
+      "default": "Move your VIP subscription from PayPal to a credit card. You won't lose any VIP time, and your PayPal subscription is cancelled automatically once you pick a new plan.",
+      "description": "Description for the card on the VIP manage page inviting PayPal subscribers to switch their payment method to credit card."
+    },
+    "button_text_vip_paypal_switch": {
+      "default": "View plans",
+      "description": "Text for the button that opens the VIP plans page so a PayPal subscriber can switch to credit card. This should be as short as possible."
+    },
+    "button_label_vip_paypal_switch": {
+      "default": "View VIP plans and switch to credit card",
+      "description": "Aria-label for the button that opens the VIP plans page so a PayPal subscriber can switch to credit card."
+    },
+    "header_vip_two_year_deal": {
+      "default": "Pay for 1 year, get 2 years of VIP!",
+      "description": "Header for the banner on the VIP plans page announcing a first-term discount on the 2 year plan."
+    },
+    "text_vip_two_year_deal": {
+      "default": "You've unlocked the 2 year plan for {price}, then {renewalPrice} every 2 years. The discount is applied automatically at checkout.",
+      "description": "Description for the banner on the VIP plans page announcing a first-term discount on the 2 year plan.",
+      "variables": {
+        "price": {
+          "type": "string"
+        },
+        "renewalPrice": {
+          "type": "string"
+        }
+      }
+    },
     "usage_title_lists": {
       "default": "Lists",
       "description": "Title for the section that shows a user's lists usage, such as their list item counts and limits."
