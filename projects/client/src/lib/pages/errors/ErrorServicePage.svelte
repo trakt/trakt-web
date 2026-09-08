@@ -1,30 +1,42 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import Link from "$lib/components/link/Link.svelte";
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import LostSignalMark from "./_internal/LostSignalMark.svelte";
   import ErrorPage from "./ErrorPage.svelte";
+  import RetryAction from "./_internal/RetryAction.svelte";
 
   const { message }: { message?: string } = $props();
 </script>
 
-<ErrorPage title={m.page_title_service_unavailable()}>
-  {#if message}
-    <p>{message}</p>
-  {:else}
-    <p>{m.error_text_service_unavailable()}</p>
-  {/if}
+{#snippet mark()}
+  <LostSignalMark />
+{/snippet}
 
-  <Link href={UrlBuilder.status()} color="classic">
-    {m.link_text_service_status()}
-  </Link>
+{#snippet caretIcon()}
+  <CaretRightIcon />
+{/snippet}
+
+{#snippet actions()}
+  <RetryAction />
 
   <Button
     variant="primary"
-    color="purple"
-    onclick={() => window.location.reload()}
-    label={m.button_label_retry()}
+    color="default"
+    style="ghost"
+    href={UrlBuilder.status()}
+    label={m.link_text_service_status()}
+    icon={caretIcon}
   >
-    {m.button_text_retry()}
+    {m.link_text_service_status()}
   </Button>
-</ErrorPage>
+{/snippet}
+
+<ErrorPage
+  title={m.page_title_service_unavailable()}
+  kicker={m.error_kicker_service_unavailable()}
+  message={message ?? m.error_text_service_unavailable()}
+  {mark}
+  {actions}
+/>
