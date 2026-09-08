@@ -15,8 +15,10 @@
     children,
     variant = "primary",
     style = "flat",
+    shape = "rounded",
     color = "custom",
     icon,
+    iconPlacement = "end",
     subtitle,
     size = "normal",
     text = "capitalize",
@@ -36,7 +38,11 @@
   const { isActive } = $derived(useActiveLink($originalHref));
 
   const hasIcon = $derived(icon != null);
-  const alignment = $derived(hasIcon ? "default" : "centered");
+  // A trailing icon pushes away from the label; a leading one belongs beside
+  // it, so only the trailing case spreads the row.
+  const alignment = $derived(
+    hasIcon && iconPlacement === "end" ? "default" : "centered",
+  );
 
   const classList = $derived(
     [
@@ -60,6 +66,8 @@
       "data-variant": variant,
       "data-alignment": alignment,
       "data-style": style,
+      "data-shape": shape,
+      "data-icon-placement": hasIcon ? iconPlacement : undefined,
       "data-color": color,
       "data-size": size,
       "data-dpad-navigation": navigationType,
@@ -72,7 +80,18 @@
   });
 </script>
 
+{#snippet buttonIcon()}
+  {#if icon}
+    <div class="button-icon">
+      {@render icon()}
+    </div>
+  {/if}
+{/snippet}
+
 {#snippet contents()}
+  {#if iconPlacement === "start"}
+    {@render buttonIcon()}
+  {/if}
   <div class="button-label">
     <p
       class="ellipsis bold"
@@ -86,10 +105,8 @@
       <p class="button-subtitle">{@render subtitle()}</p>
     {/if}
   </div>
-  {#if icon}
-    <div class="button-icon">
-      {@render icon()}
-    </div>
+  {#if iconPlacement === "end"}
+    {@render buttonIcon()}
   {/if}
 {/snippet}
 
@@ -255,6 +272,20 @@
     height: var(--button-height);
     box-sizing: border-box;
     border-radius: var(--border-radius-m);
+  }
+
+  // A leading icon reads as part of the label rather than a separate control,
+  // so it sits closer than the trailing default.
+  :global(#{$b}[data-icon-placement=start]) {
+    gap: var(--gap-s);
+  }
+
+  // Fully rounded ends. Half the button's own height, so every size lands on a
+  // true pill instead of an approximated large radius.
+  :global(#{$b}[data-shape=pill]),
+  :global(#{$b}[data-shape=pill]::before),
+  :global(#{$b}[data-shape=pill]:active[disabled]) {
+    border-radius: calc(var(--button-height) / 2);
   }
 
   :global(#{$b}::before) {
