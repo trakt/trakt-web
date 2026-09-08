@@ -41,6 +41,8 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-error-page {
+    --font-size-error-title: var(--ni-32);
+
     height: 100%;
 
     display: flex;
@@ -138,7 +140,7 @@
     .error-title {
       max-width: var(--ni-640);
 
-      font-size: var(--ni-32);
+      font-size: var(--font-size-error-title);
       line-height: 1.15;
       text-wrap: balance;
     }
@@ -166,19 +168,15 @@
     }
 
     @include for-tablet-sm-and-below {
-      .error-title {
-        font-size: var(--ni-28);
-      }
+      --font-size-error-title: var(--ni-28);
     }
 
     @include for-mobile {
+      --font-size-error-title: var(--ni-22);
+
       .error-mark {
         width: var(--ni-80);
         height: var(--ni-80);
-      }
-
-      .error-title {
-        font-size: var(--ni-22);
       }
     }
   }
