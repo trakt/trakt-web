@@ -87,6 +87,8 @@
     border: var(--border-thickness-xxs) solid var(--color-error-page-border);
 
     text-align: start;
+    /* The body balances its prose lines; a stack trace must not be reflowed. */
+    text-wrap: wrap;
 
     .trakt-error-details-header {
       grid-column: 1 / -1;

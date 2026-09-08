@@ -147,19 +147,33 @@
 
       font-size: var(--ni-32);
       line-height: 1.15;
+      // A headline that has to wrap should split evenly rather than leaving
+      // one word stranded on the second line.
+      text-wrap: balance;
     }
 
     .error-body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--gap-m);
+      // Tight enough that consecutive rows read as one message, loose enough
+      // that two separate thoughts still separate.
+      gap: var(--gap-s);
 
-      max-width: var(--ni-480);
+      // Wide enough that a two-sentence message lands on one row instead of
+      // breaking mid-phrase (the reason for the extra room over the 480 the
+      // shortest copy needs): at 480 the unexpected-error message split its
+      // "submit a new issue" link across lines, and the locked-account page
+      // read as a long line, an orphaned "account.", then a short line.
+      max-width: var(--ni-640);
 
-      // Slotted prose inherits both, so no :global() reach-in is needed.
+      // Slotted prose inherits all three, so no :global() reach-in is needed.
       color: var(--color-text-secondary);
       line-height: 1.5;
+      // Copy that fits stays on one row; copy that does not splits into even
+      // lines instead of a full line plus a stranded word. Reset it around
+      // preformatted content, which must not be re-flowed.
+      text-wrap: balance;
     }
 
     .error-actions {
@@ -169,11 +183,12 @@
       --color-outline-fill: var(--color-error-page-action-fill);
       --color-outline-stroke: var(--color-error-page-action-stroke);
 
+      // Stacked and centred, primary first: the recovery action leads and the
+      // way out sits under it, rather than competing beside it.
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: var(--gap-s);
+      gap: var(--gap-m);
 
       margin-block-start: var(--gap-l);
     }
