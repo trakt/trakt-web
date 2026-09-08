@@ -53,26 +53,33 @@ self.addEventListener('unhandledrejection', (event) => {
   console.error('Service Worker unhandledrejection:', event.reason);
 });
 
-// Global Workbox catch handler: log the failure and fall back to network
-setCatchHandler(async ({ event, request, url }) => {
-  console.error('Workbox route handler failed for:', {
-    url: request?.url ?? url?.toString(),
-    method: request?.method,
-    type: request?.destination,
-  });
+const RETRY_DELAY_MS = time.seconds(1);
 
-  // Try network as a safe fallback so the page still loads
-  try {
-    return await fetch(request || event.request);
-  } catch (err) {
-    console.error('Network fallback also failed:', err);
-    // Return a 503 response rather than letting respondWith reject.
-    return new Response('Service worker fetch failed', {
-      status: 503,
-      statusText: 'Service Worker Error',
-      headers: { 'Content-Type': 'text/plain' },
-    });
+const isIdempotentNavigation = (request: Request) =>
+  request.mode === 'navigate' && request.method === 'GET';
+
+// Workbox lands here when the network rejected and the cache missed. A
+// synthesised error status on a document renders as the browser's own "HTTP
+// ERROR" interstitial, so fail the way a fetch with no worker installed does.
+setCatchHandler(async ({ event, request }) => {
+  const failed = request ?? event.request;
+
+  const response = await fetch(failed).catch(() => null);
+
+  if (response) {
+    return response;
   }
+
+  if (!isIdempotentNavigation(failed)) {
+    return Response.error();
+  }
+
+  await delay(RETRY_DELAY_MS);
+
+  return await fetch(failed).catch(() => {
+    console.error('Service worker could not fetch:', failed.url);
+    return Response.error();
+  });
 });
 
 const toSeconds = (milliseconds: number) => milliseconds / time.seconds(1);
@@ -102,25 +109,35 @@ const navigationCacheName = `${CacheKey.navigation}-${buildSha}`;
 
 const CLEANUP_TIMEOUT_MS = time.seconds(3);
 
-async function deleteNavigationCaches() {
+async function deleteNavigationCaches(isDeletable: (key: string) => boolean) {
   const keys = await caches.keys().catch(() => []);
 
   await Promise.all(
-    keys
-      .filter((key) => key.startsWith(CacheKey.navigation))
-      .map((key) => deleteCache(key)),
+    keys.filter(isDeletable).map((key) => deleteCache(key)),
   );
 }
 
-// The cache name is keyed to the build, so this is garbage collection, not
-// correctness. Broken storage can hang instead of rejecting, and every caller
-// sits on something a user is waiting for: activation, a `_cb` navigation, or
-// a CacheBust round trip.
+const isNavigationCache = (key: string) => key.startsWith(CacheKey.navigation);
+
+// Broken storage can hang instead of rejecting, and every caller sits on
+// something a user is waiting for.
+const withCleanupTimeout = (cleanup: Promise<void>) =>
+  Promise.race([cleanup, delay(CLEANUP_TIMEOUT_MS)]);
+
+// Keeping this build's cache leaves a navigation that races a network blip
+// something to fall back on, and stops a lost race from deleting fresh
+// documents.
+function evictStaleNavigationCaches() {
+  return withCleanupTimeout(
+    deleteNavigationCaches((key) =>
+      isNavigationCache(key) && key !== navigationCacheName
+    ),
+  );
+}
+
+// `_cb` and CacheBust ask for fresh HTML, so they take this build's cache too.
 function removeNavigationCache() {
-  return Promise.race([
-    deleteNavigationCaches(),
-    delay(CLEANUP_TIMEOUT_MS),
-  ]);
+  return withCleanupTimeout(deleteNavigationCaches(isNavigationCache));
 }
 
 // Force immediate activation for new service worker
@@ -135,7 +152,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     Promise.all([
       self.clients.claim(),
-      removeNavigationCache(),
+      evictStaleNavigationCaches(),
     ]).catch(() => undefined),
   );
 });
