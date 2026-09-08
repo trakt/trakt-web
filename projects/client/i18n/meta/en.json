@@ -449,7 +449,7 @@
       "description": "Title for the 404 error page."
     },
     "error_text_404": {
-      "default": "(Don't worry, it happens! Even the Force is sometimes out of alignment.)",
+      "default": "Don't worry, it happens! Even the Force is sometimes out of alignment.",
       "description": "Text shown on the 404 error page."
     },
     "link_text_back_to_safety": {
@@ -2445,8 +2445,12 @@
       "description": "Title for the page shown when the Trakt service is unreachable."
     },
     "error_text_service_unavailable": {
-      "default": "Trakt can't be reached right now. Your watch history is safe. We'll pick up exactly where you left off.",
+      "default": "Trakt can't be reached right now. Your watch history is safe.",
       "description": "Text shown on the error page when the Trakt service is unreachable."
+    },
+    "error_text_service_unavailable_resume": {
+      "default": "We'll pick up exactly where you left off.",
+      "description": "Second line shown on the error page when the Trakt service is unreachable, reassuring the user that nothing is lost."
     },
     "error_kicker_service_unavailable": {
       "default": "Intermission",
