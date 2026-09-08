@@ -193,10 +193,6 @@
 
   @include icon-button-ghost("#{$b}[data-style=ghost]", scale(0.92), $on);
 
-  :global(#{$b}[data-style=ghost]) {
-    box-shadow: none;
-  }
-
   :global(#{$b}:active[disabled]),
   :global(#{$b}:active[aria-disabled=true]) {
     animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle) infinite;
