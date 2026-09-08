@@ -1,6 +1,9 @@
 <script lang="ts">
   const { fill }: { fill: "none" | "half" | "full" } = $props();
 
+  const STAR_PATH =
+    "M12 2L14.8214 8.11672L21.5106 8.90983L16.5651 13.4833L17.8779 20.0902L12 16.8L6.12215 20.0902L7.43493 13.4833L2.48944 8.90983L9.17863 8.11672L12 2Z";
+
   const fillWidth = $derived.by(() => {
     switch (fill) {
       case "none":
@@ -24,19 +27,16 @@
 >
   <defs>
     <clipPath id={clipId}>
-      <path
-        d="M12 2L14.8214 8.11672L21.5106 8.90983L16.5651 13.4833L17.8779 20.0902L12 16.8L6.12215 20.0902L7.43493 13.4833L2.48944 8.90983L9.17863 8.11672L12 2Z"
-      />
+      <path d={STAR_PATH} />
     </clipPath>
   </defs>
-  <path
-    class="trakt-star-path"
-    d="M12 2L14.8214 8.11672L21.5106 8.90983L16.5651 13.4833L17.8779 20.0902L12 16.8L6.12215 20.0902L7.43493 13.4833L2.48944 8.90983L9.17863 8.11672L12 2Z"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linejoin="bevel"
-    fill="transparent"
-  />
+  <!--
+    The unfilled part of the star is a dimmed fill, never a stroke. A stroked
+    outline has to bevel the star's five points, which reads as hard straight
+    edges the moment the fill slides over them - most visible on the active or
+    hovered star. Fill-only keeps the points sharp at every fill level.
+  -->
+  <path class="trakt-star-track" d={STAR_PATH} fill="currentColor" />
   <rect
     class="trakt-star-fill"
     x="0"
@@ -49,10 +49,9 @@
 </svg>
 
 <style>
-  .trakt-star-path {
-    transition:
-      fill,
-      stroke var(--transition-increment) ease-in-out;
+  .trakt-star-track {
+    opacity: var(--star-track-opacity, 0.3);
+    transition: opacity var(--transition-increment) ease-in-out;
   }
 
   .trakt-star-fill {

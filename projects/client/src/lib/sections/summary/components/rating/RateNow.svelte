@@ -1,6 +1,5 @@
 <script lang="ts">
   import QueuedTag from "$lib/components/badge/QueuedTag.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
@@ -15,7 +14,6 @@
   const {
     variant = "guard",
     onclick,
-    style = "default",
     ...props
   }: RateNowProps & { variant?: "allow" | "guard" } = $props();
 
@@ -66,9 +64,6 @@
     data-dpad-navigation={DpadNavigationType.List}
     transition:slide={{ duration: 150 }}
   >
-    {#if style !== "minimal"}
-      <span class="bold">{m.header_rate_now()}</span>
-    {/if}
     <div
       class="trakt-rate-actions"
       transition:fade={{ duration: 150, delay: 150 }}
@@ -96,7 +91,6 @@
         >
           <FavoriteAction
             style="action"
-            size="small"
             title={props.media.title}
             type={props.type}
             id={props.media.id}
@@ -125,8 +119,6 @@
     height: var(--ni-40);
 
     position: relative;
-
-    gap: var(--gap-m);
   }
 
   .trakt-rate-actions {
