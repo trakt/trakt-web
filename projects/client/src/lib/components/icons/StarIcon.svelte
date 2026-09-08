@@ -31,12 +31,13 @@
     </clipPath>
   </defs>
   <!--
-    The unfilled part of the star is a dimmed fill, never a stroke. A stroked
-    outline has to bevel the star's five points, which reads as hard straight
-    edges the moment the fill slides over them - most visible on the active or
-    hovered star. Fill-only keeps the points sharp at every fill level.
+    The empty star is the outline; the fill is painted over it in the same
+    colour, so a fully rated star reads as one solid shape and both states
+    share an outer extent. The join is left to default (miter) rather than
+    bevel - bevel chops all five points flat, and those hard straight edges
+    are exactly what the fill exposes on the active or hovered star.
   -->
-  <path class="trakt-star-track" d={STAR_PATH} fill="currentColor" />
+  <path d={STAR_PATH} stroke="currentColor" stroke-width="2" fill="none" />
   <rect
     class="trakt-star-fill"
     x="0"
@@ -49,11 +50,6 @@
 </svg>
 
 <style>
-  .trakt-star-track {
-    opacity: var(--star-track-opacity, 0.3);
-    transition: opacity var(--transition-increment) ease-in-out;
-  }
-
   .trakt-star-fill {
     transition: width var(--transition-increment) ease-in-out;
   }

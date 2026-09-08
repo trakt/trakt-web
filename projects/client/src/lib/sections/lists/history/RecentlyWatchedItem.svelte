@@ -141,12 +141,5 @@
     background-color: var(--color-modal-background);
     box-shadow: var(--shadow-menu);
 
-    :global(svg) {
-      --icon-color: var(--color-text-primary);
-    }
-
-    :global(.is-current-rating svg) {
-      --icon-fill-color: var(--color-text-primary);
-    }
   }
 </style>
