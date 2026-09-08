@@ -76,7 +76,7 @@
     width: 100%;
   }
 
-  // Rounded panel sharing the stats section's blue-tinted radial fill so
+  // Rounded panel sharing the stats section's purple-tinted radial fill so
   // the two sections read as a set. overflow:hidden clips the oversized
   // watermark to the panel bounds.
   .yir-2024-genres-panel {

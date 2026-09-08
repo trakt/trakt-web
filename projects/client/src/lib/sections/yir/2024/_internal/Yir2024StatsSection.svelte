@@ -301,7 +301,7 @@
     overflow: visible;
     padding: var(--panel-padding-top) var(--panel-padding-x)
       var(--panel-padding-bottom);
-    // Approximates v2's #112836 → #191C1E radial: a faint blue-tinged
+    // Approximates v2's #112836 → #191C1E radial: a faint purple-tinged
     // center at the top fading out to a darker charcoal everywhere else.
     background: var(--color-yir-panel-background);
 

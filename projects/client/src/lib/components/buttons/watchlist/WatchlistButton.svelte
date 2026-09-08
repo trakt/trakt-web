@@ -27,7 +27,7 @@
   const handler = $derived(isWatchlisted ? onRemove : onAdd);
 
   const preferredColor = $derived(
-    type === "dropdown-item" ? "default" : "blue",
+    type === "dropdown-item" ? "default" : "purple",
   );
 
   const { color, variant, ...events } = $derived(

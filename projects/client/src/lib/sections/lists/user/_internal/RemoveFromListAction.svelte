@@ -24,7 +24,7 @@
   );
 
   const { color, variant, ...events } = $derived(
-    useDangerButton({ isActive: true, color: "blue" }),
+    useDangerButton({ isActive: true, color: "purple" }),
   );
 
   const { confirm } = useConfirm();

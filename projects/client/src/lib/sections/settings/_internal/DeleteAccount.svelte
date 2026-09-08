@@ -149,8 +149,8 @@
 
     padding: var(--gap-m);
 
-    color: var(--color-foreground-blue);
-    background: var(--color-background-blue);
+    color: var(--color-foreground-purple);
+    background: var(--color-background-purple);
   }
 
   .vip-notice-icon {

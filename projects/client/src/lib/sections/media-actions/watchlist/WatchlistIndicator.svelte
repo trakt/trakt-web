@@ -13,7 +13,7 @@
 <StemSwipeIndicator
   {isActive}
   --color-gesture-active={state === "missing"
-    ? "var(--color-background-blue)"
+    ? "var(--color-background-purple)"
     : "var(--color-background-red)"}
 >
   <BookmarkIcon {state} />
