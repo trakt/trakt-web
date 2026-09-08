@@ -72,7 +72,6 @@
       <RateNow
         {...lastWatched}
         variant="allow"
-        style="minimal"
         onclick={() => (interactionCounter += 1)}
       />
     </div>

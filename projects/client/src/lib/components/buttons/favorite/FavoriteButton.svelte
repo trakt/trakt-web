@@ -45,7 +45,7 @@
 </script>
 
 {#if style === "normal"}
-  <Button {...commonProps} {...props} style="ghost" color="orange">
+  <Button {...commonProps} {...props} style="ghost" color="red">
     {i18n.text({ isFavorited, title })}
     {#if isQueued}<QueuedTag />{/if}
     {#snippet icon()}
@@ -57,7 +57,7 @@
 {#if style === "action"}
   <QueuedIndicator {isQueued}>
     <ActionButton {...commonProps} {...props} style="ghost" color="default">
-      <FavoriteIcon {state} --icon-color="var(--color-background-orange)" />
+      <FavoriteIcon {state} --icon-color="var(--color-background-red)" />
     </ActionButton>
   </QueuedIndicator>
 {/if}

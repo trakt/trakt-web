@@ -358,15 +358,15 @@
         opacity var(--transition-increment) var(--ease-glide);
     }
 
-    :global(.star-item[data-highlighted]) {
-      transform: scale(1.3);
-    }
-
     // Tint the whole row while scrubbing, and gently recede the stars that
     // aren't the active target so the highlight reads cleanly.
     &.is-previewing {
       :global(.star-item) {
         color: var(--orange-400);
+      }
+
+      :global(.star-item[data-highlighted]) {
+        transform: scale(1.3);
       }
 
       :global(.star-item:not([data-highlighted])) {
