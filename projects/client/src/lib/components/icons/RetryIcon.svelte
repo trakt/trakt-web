@@ -1,11 +1,22 @@
 <svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
   xmlns="http://www.w3.org/2000/svg"
-  height="24px"
-  viewBox="0 -960 960 960"
-  width="24px"
-  fill="currentColor"
 >
   <path
-    d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"
+    d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M21 3v5h-5"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
   />
 </svg>

@@ -242,6 +242,7 @@
     var(--purple-500) 8%,
     transparent
   );
+  --color-error-page-action-stroke: var(--purple-500);
   --background-error-page-mark-ring: conic-gradient(
     from 200deg,
     var(--purple-500) 0deg,
@@ -767,6 +768,7 @@
     var(--purple-400) 16%,
     transparent
   );
+  --color-error-page-action-stroke: var(--purple-400);
   --background-error-page-mark-ring: conic-gradient(
     from 200deg,
     var(--purple-400) 0deg,

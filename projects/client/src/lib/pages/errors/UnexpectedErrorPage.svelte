@@ -57,9 +57,11 @@
     variant="primary"
     color="purple"
     style="outline"
+    shape="pill"
     onclick={() => window.location.reload()}
     label={m.button_label_retry()}
     icon={retryIcon}
+    iconPlacement="start"
   >
     {m.button_text_retry()}
   </Button>

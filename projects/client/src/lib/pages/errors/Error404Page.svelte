@@ -23,6 +23,7 @@
     variant="primary"
     color="purple"
     style="outline"
+    shape="pill"
     href={UrlBuilder.home()}
     label={m.link_text_back_to_safety()}
   >
