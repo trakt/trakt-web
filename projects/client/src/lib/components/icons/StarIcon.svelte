@@ -32,7 +32,13 @@
       <path d={STAR_PATH} />
     </clipPath>
   </defs>
-  <path class="trakt-star-track" d={STAR_PATH} fill="currentColor" />
+  <path
+    d={STAR_PATH}
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linejoin="bevel"
+    fill="none"
+  />
   <rect
     class="trakt-star-fill"
     x="0"
@@ -45,11 +51,6 @@
 </svg>
 
 <style>
-  .trakt-star-track {
-    opacity: var(--star-track-opacity, 0.3);
-    transition: opacity var(--transition-increment) ease-in-out;
-  }
-
   .trakt-star-fill {
     transition: width var(--transition-increment) ease-in-out;
   }
