@@ -88,7 +88,7 @@
       <Button
         size="small"
         style={isPreventative ? "flat" : "outline"}
-        color={isPreventative ? "blue" : "default"}
+        color={isPreventative ? "purple" : "default"}
         label={cancelText}
         onclick={() => onAction("cancel", isPreflightEnabled)}
       >

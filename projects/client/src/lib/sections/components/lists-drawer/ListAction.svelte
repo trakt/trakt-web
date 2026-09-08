@@ -37,7 +37,7 @@
 {#if style === "normal"}
   <Button
     style="flat"
-    color="blue"
+    color="purple"
     {size}
     {variant}
     label={m.dropdown_label_add_remove_from_lists({ title })}
