@@ -7,8 +7,8 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { writable } from "$lib/utils/store/WritableSubject";
+  import { slideEdge } from "$lib/utils/transitions/slideEdge.ts";
   import { onMount, type Snippet } from "svelte";
-  import { slide } from "svelte/transition";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";
   import ListTitle from "../lists/_internal/ListTitle.svelte";
@@ -128,7 +128,7 @@
   data-elevated={elevated}
   data-header-variant={headerVariant}
   style:--drawer-header-overlay-opacity={headerOverlayOpacity}
-  transition:slide={{ duration: 150, axis: slideAxis }}
+  transition:slideEdge={{ duration: 150, axis: slideAxis }}
   use:portal
   use:trap
   use:appendClassList={classList}
