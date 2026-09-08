@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { toHumanCurrency } from "$lib/utils/formatting/currency/toHumanCurrency";
   import type { VipPlan } from "./models/VipPlan";
   import MostPopularTag from "./MostPopularTag.svelte";
   import { useVip } from "./useVip";
+  import { toVipPriceLabel } from "./utils/toVipPriceLabel";
 
   const {
     plan,
@@ -21,12 +20,9 @@
     }
   };
 
-  const formatCurrency = (price: number) =>
-    toHumanCurrency({ price, currency: "usd", locale: languageTag() });
-
   const splitPrice = (price: number) => {
     const isWholeNumber = price % 1 === 0;
-    const formatted = formatCurrency(price);
+    const formatted = toVipPriceLabel(price);
 
     if (isWholeNumber) {
       return { whole: formatted, cents: null };

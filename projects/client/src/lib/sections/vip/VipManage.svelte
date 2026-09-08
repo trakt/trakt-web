@@ -1,5 +1,6 @@
 <script lang="ts">
   import AccountDetails from "./_internal/AccountDetails.svelte";
+  import PaypalSwitchCard from "./_internal/PaypalSwitchCard.svelte";
   import UsageTabs from "./_internal/UsageTabs.svelte";
   import { useVip } from "./_internal/useVip";
   import VipContent from "./_internal/VipContent.svelte";
@@ -12,6 +13,7 @@
   {#if !$isLoading}
     <div class="trakt-vip-account-group">
       <AccountDetails subscription={$subscription} />
+      <PaypalSwitchCard subscription={$subscription} />
     </div>
 
     <UsageTabs subscription={$subscription} />
