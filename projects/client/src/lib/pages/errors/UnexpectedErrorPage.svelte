@@ -31,7 +31,7 @@
 
   {#if sessionId || error?.stack}
     <div class="trakt-error-details">
-      <p class="trakt-error-details-header">
+      <p class="details-header">
         {m.error_text_unexpected_error_include_details()}
       </p>
 
@@ -90,7 +90,7 @@
     /* The body balances its prose lines; a stack trace must not be reflowed. */
     text-wrap: wrap;
 
-    .trakt-error-details-header {
+    .details-header {
       grid-column: 1 / -1;
     }
 
