@@ -19,6 +19,17 @@ import type { ErrorEvent as SentryErrorEvent } from '@sentry/sveltekit';
 // the token.
 captureWebviewSession();
 
+// WebKit's wording for a dynamic import whose chunk no longer exists.
+const WEBKIT_MISSING_MODULE_PATTERN = /Importing module '.*' is not found\./;
+
+const DYNAMIC_IMPORT_ERROR_PATTERNS: ReadonlyArray<RegExp> = [
+  /Failed to fetch dynamically imported module/,
+  /error loading dynamically imported module/,
+  /Importing a module script failed/,
+  /Unable to preload CSS for/,
+  WEBKIT_MISSING_MODULE_PATTERN,
+];
+
 const SAMPLED_ERROR_PATTERNS = [
   /^Failed to fetch( \((app|media)\.trakt\.tv\))?$/,
   /^Load failed( \((app|media)\.trakt\.tv\))?$/,
@@ -72,10 +83,7 @@ Sentry.init({
     'Failed to register a ServiceWorker',
     'service-worker.js load failed',
     "type 'module' in RegistrationOptions is not implemented yet",
-    'Failed to fetch dynamically imported module',
-    'error loading dynamically imported module',
-    'Importing a module script failed',
-    'Unable to preload CSS for',
+    ...DYNAMIC_IMPORT_ERROR_PATTERNS,
     /^Module load timeout: m_\d+$/,
     // Cross-origin frames we cannot reach into: embedded players, plus frames
     // injected by ad-blockers / privacy extensions.
@@ -134,18 +142,9 @@ if (typeof document !== 'undefined') {
 
 const DYNAMIC_IMPORT_RELOAD_KEY = 'dynamic-import-reload';
 
-const DYNAMIC_IMPORT_ERROR_PATTERNS = [
-  'Failed to fetch dynamically imported module',
-  'error loading dynamically imported module',
-  'Importing a module script failed',
-  'Unable to preload CSS for',
-];
-
 function isDynamicImportError(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error);
-  return DYNAMIC_IMPORT_ERROR_PATTERNS.some((pattern) =>
-    message.includes(pattern)
-  );
+  return DYNAMIC_IMPORT_ERROR_PATTERNS.some((pattern) => pattern.test(message));
 }
 
 function hasChunkPath(path?: string): boolean {
