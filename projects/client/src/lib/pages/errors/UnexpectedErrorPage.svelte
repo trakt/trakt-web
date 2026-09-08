@@ -71,6 +71,7 @@
     border: var(--border-thickness-xxs) solid var(--color-error-page-border);
 
     text-align: start;
+    text-wrap: wrap;
 
     .trakt-error-details-header {
       grid-column: 1 / -1;

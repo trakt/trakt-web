@@ -140,27 +140,27 @@
 
       font-size: var(--ni-32);
       line-height: 1.15;
+      text-wrap: balance;
     }
 
     .error-body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--gap-m);
+      gap: var(--gap-s);
 
-      max-width: var(--ni-480);
+      max-width: var(--ni-640);
 
-      // Slotted prose inherits both, so no :global() reach-in is needed.
       color: var(--color-text-secondary);
       line-height: 1.5;
+      text-wrap: balance;
     }
 
     .error-actions {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: var(--gap-s);
+      gap: var(--gap-m);
 
       margin-block-start: var(--gap-l);
     }
