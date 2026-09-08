@@ -36,7 +36,13 @@
 <ErrorPage
   title={m.page_title_service_unavailable()}
   kicker={m.error_kicker_service_unavailable()}
-  message={message ?? m.error_text_service_unavailable()}
   {mark}
   {actions}
-/>
+>
+  {#if message}
+    <p>{message}</p>
+  {:else}
+    <p>{m.error_text_service_unavailable()}</p>
+    <p>{m.error_text_service_unavailable_resume()}</p>
+  {/if}
+</ErrorPage>
