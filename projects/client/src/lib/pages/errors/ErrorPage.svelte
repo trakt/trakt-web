@@ -10,28 +10,30 @@
 
 <main class="trakt-error-page">
   <section class="error-card">
-    <div class="error-mark">
-      <span class="mark-ring"></span>
-      <span class="mark-glyph">{@render mark()}</span>
-    </div>
+    <div class="error-content">
+      <div class="error-mark">
+        <span class="mark-ring"></span>
+        <span class="mark-glyph">{@render mark()}</span>
+      </div>
 
-    <p class="error-kicker bold uppercase tag">{kicker}</p>
+      <p class="error-kicker bold uppercase tag">{kicker}</p>
 
-    <h1 class="error-title">{title}</h1>
+      <h1 class="error-title">{title}</h1>
 
-    <div class="error-body">
-      {#if rest.children}
-        {@render rest.children()}
-      {:else}
-        <p>{rest.message}</p>
+      <div class="error-body">
+        {#if rest.children}
+          {@render rest.children()}
+        {:else}
+          <p>{rest.message}</p>
+        {/if}
+      </div>
+
+      {#if actions}
+        <div class="error-actions">
+          {@render actions()}
+        </div>
       {/if}
     </div>
-
-    {#if actions}
-      <div class="error-actions">
-        {@render actions()}
-      </div>
-    {/if}
   </section>
 </main>
 
@@ -53,10 +55,11 @@
       isolation: isolate;
 
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: var(--gap-s);
+      // Content taller than the card (a long stack trace, a short landscape
+      // viewport) scrolls instead of squashing. `margin: auto` on the child
+      // does the centring, because `justify-content: center` would put the
+      // overflow out of reach above the scroll origin.
+      overflow: auto;
 
       padding: var(--gap-xxl) var(--gap-l);
       box-sizing: border-box;
@@ -68,8 +71,20 @@
       border-radius: var(--border-radius-xxl);
     }
 
+    .error-content {
+      margin: auto;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--gap-s);
+
+      width: 100%;
+    }
+
     .error-mark {
       position: relative;
+      flex-shrink: 0;
 
       width: var(--ni-96);
       height: var(--ni-96);
@@ -148,9 +163,11 @@
     }
 
     .error-actions {
-      // Documented hook on Button's `outline` style: the actions row echoes
-      // the stroke as a resting wash, hover still intensifies on top of it.
+      // Documented hooks on Button's `outline` style: the actions row echoes
+      // the stroke as a resting wash (hover still intensifies on top of it)
+      // and brightens the rim, which the flat purple is too heavy for here.
       --color-outline-fill: var(--color-error-page-action-fill);
+      --color-outline-stroke: var(--color-error-page-action-stroke);
 
       display: flex;
       flex-wrap: wrap;
