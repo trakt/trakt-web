@@ -80,6 +80,13 @@ export const DESIGN_SYSTEM_GROUPS: DesignSystemGroup[] = [
         kind: 'Component',
       },
       {
+        title: 'Errors',
+        href: '/_design_system/errors',
+        description:
+          'Full-page error scenes: ringed marks, kickers, and recovery actions.',
+        kind: 'Component',
+      },
+      {
         title: 'Member Counter',
         href: '/_design_system/member-counter',
         description:
