@@ -8,6 +8,7 @@
   import { useCalendarPeriod } from "./context/useCalendarPeriod";
   import type { CalendarPeriod } from "./models/CalendarLayoutProps";
   import ReleasesCalendarItem from "./ReleasesCalendarItem.svelte";
+  import { useEpisodeType } from "./useEpisodeType";
 
   const order = "chronological" as const;
 
@@ -24,21 +25,25 @@
   const { mode } = useDiscover();
   const { filterMap } = useFilter();
 
+  const { episodeType } = useEpisodeType();
+
   const days = $derived(getDaysDifference($startDate, $endDate));
 
-  const { isLoading, calendar } = $derived(
+  const { isLoading, calendar, hasUpstreamItems } = $derived(
     useReleasesCalendar({
       start: $startDate,
       days,
       type: $mode,
       filter: $filterMap,
+      episodeType,
     }),
   );
 
   const periods: CalendarPeriod<ReleasesCalendarEntry>[] = $derived(
     accumulate({
       calendar: $calendar,
-      fingerprint: `releases:${$mode}:${JSON.stringify($filterMap)}`,
+      fingerprint: `releases:${$mode}:${JSON.stringify($filterMap)}:${$episodeType}`,
+      isEmpty: !$hasUpstreamItems,
     }),
   );
 

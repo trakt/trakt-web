@@ -1,3 +1,5 @@
+import { filterByEpisodeType } from '$lib/features/calendar/filterByEpisodeType.ts';
+import type { EpisodeTypeFilter } from '$lib/features/calendar/models/EpisodeTypeFilter.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { episodeWithShowOrMovieTargets } from '$lib/features/intl-overlay/episodeWithShowOrMovieTargets.ts';
@@ -9,12 +11,13 @@ import {
   releasesCalendarQuery,
 } from '$lib/requests/queries/calendars/releasesCalendarQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { map } from 'rxjs';
+import { map, type Observable } from 'rxjs';
 import { filterReleasesItems } from './_internal/filterReleasesItems.ts';
 
 type UseReleasesItemsProps = {
   type: DiscoverMode;
   limit: number;
+  episodeType: Observable<EpisodeTypeFilter>;
 } & FilterParams;
 
 const daysToFetch = 30;
@@ -43,9 +46,11 @@ export function useReleasesItems(props: UseReleasesItemsProps) {
   const baseLoading = query.pipe(map(($query) => $query.isLoading));
 
   const list = query.pipe(
-    map(($query) =>
+    map(($query) => $query.data ?? []),
+    filterByEpisodeType(props.episodeType),
+    map((entries) =>
       filterReleasesItems({
-        entries: $query.data ?? [],
+        entries,
         limit: props.limit,
         now: new Date(),
       })

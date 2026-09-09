@@ -12,13 +12,13 @@ import { upcomingMediaQuery } from '$lib/requests/queries/calendars/upcomingMedi
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { isSameDay } from 'date-fns/isSameDay';
 import { combineLatest, map, type Observable } from 'rxjs';
 import type { FilterParams } from '../../../requests/models/FilterParams.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
+import { filterByEpisodeType } from '../filterByEpisodeType.ts';
 import type { Calendar } from '../models/Calendar.ts';
-import { matchesEpisodeTypeFilter } from '../matchesEpisodeTypeFilter.ts';
 import type { EpisodeTypeFilter } from '../models/EpisodeTypeFilter.ts';
+import { toCalendar } from './toCalendar.ts';
 
 export type CalendarItem = UpcomingEpisodeEntry | MediaEntry;
 type CalendarItems = CalendarItem[];
@@ -84,10 +84,8 @@ export function useCalendar(
     }),
   );
 
-  const allItems = combineLatest([sorted, props.episodeType]).pipe(
-    map(([$sorted, $episodeType]) =>
-      $sorted.filter((item) => matchesEpisodeTypeFilter(item, $episodeType))
-    ),
+  const allItems = sorted.pipe(
+    filterByEpisodeType(props.episodeType),
     overlay.operator,
   );
 
@@ -95,18 +93,13 @@ export function useCalendar(
     isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     hasUpstreamItems: sorted.pipe(map(($sorted) => $sorted.length > 0)),
     calendar: allItems.pipe(
-      map(($allItems) => {
-        return Array.from({ length: props.days }, (_, i) => {
-          const date = new Date(props.start);
-          date.setDate(props.start.getDate() + i);
-
-          const items = $allItems.filter(
-            (item) => isSameDay(item.effectiveReleaseDate, date),
-          );
-
-          return { date, items };
-        });
-      }),
+      map(($allItems) =>
+        toCalendar({
+          items: $allItems,
+          start: props.start,
+          days: props.days,
+        })
+      ),
     ),
   };
 }

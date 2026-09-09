@@ -8,21 +8,25 @@ import {
 } from '$lib/requests/queries/calendars/releasesCalendarQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { isSameDay } from 'date-fns/isSameDay';
 import { map, type Observable } from 'rxjs';
 import type { FilterParams } from '../../../requests/models/FilterParams.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
+import { filterByEpisodeType } from '../filterByEpisodeType.ts';
 import type { Calendar } from '../models/Calendar.ts';
+import type { EpisodeTypeFilter } from '../models/EpisodeTypeFilter.ts';
+import { toCalendar } from './toCalendar.ts';
 
 type UseReleasesCalendarParams = {
   start: Date;
   days: number;
   type: DiscoverMode;
+  episodeType: Observable<EpisodeTypeFilter>;
 } & FilterParams;
 
 type ReleasesCalendarResult = {
   isLoading: Observable<boolean>;
   calendar: Observable<Calendar<ReleasesCalendarEntry>>;
+  hasUpstreamItems: Observable<boolean>;
 };
 
 export function useReleasesCalendar(
@@ -52,21 +56,24 @@ export function useReleasesCalendar(
     getTargets: episodeWithShowOrMovieTargets,
   });
 
+  const items = query.pipe(
+    map(($query) => $query.data ?? []),
+  );
+
+  const filteredItems = items.pipe(
+    filterByEpisodeType(props.episodeType),
+    overlay.operator,
+  );
+
   return {
     isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
-    calendar: query.pipe(
-      map(($query) => $query.data ?? []),
-      overlay.operator,
+    hasUpstreamItems: items.pipe(map(($items) => $items.length > 0)),
+    calendar: filteredItems.pipe(
       map(($items) =>
-        Array.from({ length: props.days }, (_, i) => {
-          const date = new Date(props.start);
-          date.setDate(props.start.getDate() + i);
-
-          const items = $items.filter(
-            (item) => isSameDay(item.effectiveReleaseDate, date),
-          );
-
-          return { date, items };
+        toCalendar({
+          items: $items,
+          start: props.start,
+          days: props.days,
         })
       ),
     ),
