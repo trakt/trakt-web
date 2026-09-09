@@ -60,12 +60,23 @@ export function holdToReorder(node: HTMLElement, params: HoldToReorderParams) {
     const index = segmentAt(event.target);
     if (index === null) return;
 
+    // A pointer released outside the row never reaches `pointerup` here, so
+    // clear whatever the previous gesture left behind before starting.
+    reset();
+
     startX = event.clientX;
     fromIndex = index;
     holdTimer = setTimeout(() => {
+      try {
+        node.setPointerCapture?.(event.pointerId);
+      } catch {
+        // The pointer is already gone, so there is no gesture left to claim.
+        reset();
+        return;
+      }
+
       isHolding = true;
       toIndex = index;
-      node.setPointerCapture?.(event.pointerId);
       current.onHold(index);
     }, HOLD_MS);
   };
