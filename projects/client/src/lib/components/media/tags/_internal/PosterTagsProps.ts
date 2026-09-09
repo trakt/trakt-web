@@ -7,16 +7,19 @@ type SharedPosterTagsProps = {
   isPartiallyWatched?: boolean;
   isDropped?: boolean;
   isWatchlisted?: boolean;
-  watchCount?: number;
 };
 
 type DefaultPosterTagsProps = SharedPosterTagsProps & {
   variant?: 'default';
+  // Optional on a card: the badge only grows for a rewatch, so a caller that
+  // has no count to hand renders the same square badge as before.
+  watchCount?: number;
 };
 
 type FullPosterTagsProps = SharedPosterTagsProps & {
   variant: 'full';
   i18n: TagIntl;
+  watchCount: number;
   postCreditsCount: number;
   historyLink?: DrawerLinkProps;
   seasonsLink?: DrawerLinkProps;
