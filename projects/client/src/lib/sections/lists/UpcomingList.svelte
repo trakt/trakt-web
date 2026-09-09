@@ -7,9 +7,9 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { FilterParams } from "$lib/requests/models/FilterParams";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "./components/cta/CtaItem.svelte";
+  import EpisodeTypeMetaInfo from "./components/EpisodeTypeMetaInfo.svelte";
   import DrillableMediaList from "./drilldown/DrillableMediaList.svelte";
   import { useUpcomingItems } from "./stores/useUpcomingItems";
 
@@ -17,7 +17,7 @@
 
   const { filterMap } = useFilter();
 
-  const { episodeType, current, isApplicable } = useEpisodeType();
+  const { episodeType } = useEpisodeType();
 
   const useList = (
     props: { type: DiscoverMode; limit: number } & FilterParams,
@@ -30,9 +30,7 @@
 </script>
 
 {#snippet metaInfo()}
-  {#if $isApplicable}
-    <ListMetaInfo text={$current.text()} />
-  {/if}
+  <EpisodeTypeMetaInfo />
 {/snippet}
 
 <DrillableMediaList

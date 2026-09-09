@@ -1,4 +1,4 @@
-import { matchesEpisodeTypeFilter } from '$lib/features/calendar/matchesEpisodeTypeFilter.ts';
+import { filterByEpisodeType } from '$lib/features/calendar/filterByEpisodeType.ts';
 import type { EpisodeTypeFilter } from '$lib/features/calendar/models/EpisodeTypeFilter.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
@@ -17,7 +17,7 @@ import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMov
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { combineLatest, map, type Observable } from 'rxjs';
+import { map, type Observable } from 'rxjs';
 
 type UseUpcomingItemsProps = {
   type: DiscoverMode;
@@ -67,14 +67,14 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
 
   const baseLoading = query.pipe(map(($query) => $query.isLoading));
 
-  const list = combineLatest([query, props.episodeType]).pipe(
-    map(([$query, $episodeType]) => {
+  const list = query.pipe(
+    map(($query) => {
       const startOfToday = getStartOfDay(new Date()).getTime();
       return ($query.data ?? [])
-        .filter((d) => d.effectiveReleaseDate.getTime() >= startOfToday)
-        .filter((d) => matchesEpisodeTypeFilter(d, $episodeType))
-        .slice(0, props.limit);
+        .filter((d) => d.effectiveReleaseDate.getTime() >= startOfToday);
     }),
+    filterByEpisodeType(props.episodeType),
+    map((items) => items.slice(0, props.limit)),
     overlay.operator,
   );
 

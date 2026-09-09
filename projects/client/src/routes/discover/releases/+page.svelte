@@ -1,6 +1,8 @@
 <script lang="ts">
   import CalendarProvider from "$lib/features/calendar/CalendarProvider.svelte";
+  import EpisodeTypeToggles from "$lib/features/calendar/EpisodeTypeToggles.svelte";
   import ReleasesCalendar from "$lib/features/calendar/ReleasesCalendar.svelte";
+  import { useEpisodeType } from "$lib/features/calendar/useEpisodeType";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
@@ -9,7 +11,12 @@
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
 
   const { current } = useDiscover();
+  const { current: episodeType, isApplicable } = useEpisodeType();
 </script>
+
+{#snippet episodeTypeToggles()}
+  <EpisodeTypeToggles />
+{/snippet}
 
 <TraktPage
   audience="authenticated"
@@ -22,7 +29,8 @@
       hasFilters
       header={{
         title: m.list_title_releases(),
-        metaInfo: $current.text(),
+        metaInfo: $isApplicable ? $episodeType.text() : $current.text(),
+        actions: episodeTypeToggles,
       }}
     />
 
