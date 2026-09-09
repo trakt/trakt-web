@@ -81,7 +81,7 @@ export function useWatchlist(props: UseWatchlistProps) {
           label: m.action_toast_label_change_list({ title: singleEntry.title }),
           onAction: () =>
             manageListsDrawerStore.open({
-              media: singleEntry,
+              target: { type: singleEntry.type, media: singleEntry },
               title: singleEntry.title,
             }),
         }

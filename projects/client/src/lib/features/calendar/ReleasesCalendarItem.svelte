@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { ReleasesCalendarEntry } from "$lib/requests/queries/calendars/releasesCalendarQuery";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { ListTarget } from "$lib/models/ListTarget";
   import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
@@ -19,6 +20,10 @@
   }: ReleasesCalendarItemProps = $props();
 
   const listTarget = $derived("show" in item ? item.show : item);
+  const target = $derived<ListTarget>({
+    type: listTarget.type,
+    media: listTarget,
+  });
 </script>
 
 {#snippet popupActions()}
@@ -52,11 +57,12 @@
 
     <ListAction
       style="dropdown-item"
-      media={listTarget}
+      {target}
       title={listTarget.title}
       onClick={() =>
         manageListsDrawerStore.open({
-          media: listTarget,
+          target,
+          title: listTarget.title,
           metaInfo: listTarget.title,
         })}
     />

@@ -108,7 +108,11 @@
     <DefaultMediaPopupActions
       {media}
       onListAction={() =>
-        manageListsDrawerStore.open({ media, metaInfo: media.title })}
+        manageListsDrawerStore.open({
+          target: { type: media.type, media },
+          title: media.title,
+          metaInfo: media.title,
+        })}
     />
   {/if}
 {/snippet}

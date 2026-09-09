@@ -20,7 +20,11 @@
   <MediaPopupActions
     {media}
     {title}
-    onListAction={() => manageListsDrawerStore.open({ media, title })}
+    onListAction={() =>
+      manageListsDrawerStore.open({
+        target: { type: media.type, media },
+        title,
+      })}
   />
 {/snippet}
 
