@@ -13,7 +13,8 @@
 
   const { mode }: { mode: DiscoverMode } = $props();
 
-  const { current, set, options } = useToggler("progress");
+  const { current, set, options, orderedOptions, setOrder } =
+    useToggler("progress");
 
   const cta = $derived(
     $current.value !== "dropped"
@@ -54,7 +55,9 @@
         <Toggler
           value={$current.value}
           onChange={set}
-          {options}
+          options={$orderedOptions ?? options}
+          reorderable
+          onReorder={setOrder}
           ariaLabel={m.list_title_progress()}
         />
       {/snippet}
