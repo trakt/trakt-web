@@ -20,6 +20,19 @@ const handleError = (e: unknown) => {
   error('IDB Persister Error:', e);
 };
 
+// `idb-keyval`'s lazy open throws synchronously, so a chained `.catch()` never
+// attaches.
+async function orUndefined<T>(
+  operation: () => Promise<T>,
+): Promise<T | undefined> {
+  try {
+    return await operation();
+  } catch (e) {
+    handleError(e);
+    return undefined;
+  }
+}
+
 // Storage round-trips PersistedQuery through IDB structured clone, so Dates,
 // Maps, Sets, and other built-ins survive rehydration. The default JSON
 // serializer would coerce them to plain strings/objects and break consumers
@@ -29,28 +42,20 @@ function createIdbStorage(): AsyncStorage<PersistedQuery> {
 
   return {
     getItem: monitor(
-      (key: string) =>
-        get<PersistedQuery>(key, store).catch((e) => {
-          handleError(e);
-          return undefined;
-        }),
+      (key: string) => orUndefined(() => get<PersistedQuery>(key, store)),
       'IDB Restorer',
     ),
     setItem: monitor(
       (key: string, value: PersistedQuery) =>
-        set(key, value, store).catch(handleError),
+        orUndefined(() => set(key, value, store)),
       'IDB Persister',
     ),
-    removeItem: (key: string) => del(key, store).catch(handleError),
-    entries: () =>
-      entries<string, PersistedQuery>(store)
-        .then((rows) =>
-          rows.map(([k, v]) => [String(k), v] as [string, PersistedQuery])
-        )
-        .catch((e) => {
-          handleError(e);
-          return [];
-        }),
+    removeItem: (key: string) => orUndefined(() => del(key, store)),
+    entries: async () =>
+      await orUndefined(async () => {
+        const rows = await entries<string, PersistedQuery>(store);
+        return rows.map(([k, v]) => [String(k), v] as [string, PersistedQuery]);
+      }) ?? [],
   };
 }
 
