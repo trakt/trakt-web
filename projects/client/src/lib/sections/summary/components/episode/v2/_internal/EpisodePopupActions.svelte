@@ -3,9 +3,13 @@
   import ReportButton from "$lib/features/report/ReportButton.svelte";
   import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { ListTarget } from "$lib/models/ListTarget";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import ModerateAction from "$lib/sections/components/admin/ModerateAction.svelte";
+  import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
+  import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
+  import { episodeMetaInfo } from "$lib/utils/intl/episodeMetaInfo";
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
@@ -29,6 +33,9 @@
   const { isWatched } = $derived(
     useIsWatched({ media: episode, show, type: "episode" }),
   );
+
+  const target = $derived<ListTarget>({ type: "episode", media: episode });
+  const metaInfo = $derived(episodeMetaInfo(episode, showTitle));
 </script>
 
 {#if $isWatched}
@@ -41,6 +48,14 @@
     {show}
   />
 {/if}
+
+<ListAction
+  style="dropdown-item"
+  {target}
+  {title}
+  onClick={() => manageListsDrawerStore.open({ target, title, metaInfo })}
+  variant="primary"
+/>
 
 <EpisodeSideActions
   {title}

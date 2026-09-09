@@ -1,25 +1,29 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
-import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { ListTarget } from '$lib/models/ListTarget.ts';
+import { userEpisodeListIdsQuery } from '$lib/requests/queries/users/userEpisodeListIdsQuery.ts';
 import { userMovieListIdsQuery } from '$lib/requests/queries/users/userMovieListIdsQuery.ts';
+import { userSeasonListIdsQuery } from '$lib/requests/queries/users/userSeasonListIdsQuery.ts';
 import { userShowListIdsQuery } from '$lib/requests/queries/users/userShowListIdsQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map, type Observable } from 'rxjs';
 
-type UseListIdsProps = { media$: Observable<MediaEntry> };
+type UseListIdsProps = { target$: Observable<ListTarget> };
 
-function typeToQuery(media: MediaEntry) {
-  const params = { slug: media.slug };
-
-  switch (media.type) {
+function targetToQuery(target: ListTarget) {
+  switch (target.type) {
     case 'movie':
-      return userMovieListIdsQuery(params);
+      return userMovieListIdsQuery({ slug: target.media.slug });
     case 'show':
-      return userShowListIdsQuery(params);
+      return userShowListIdsQuery({ slug: target.media.slug });
+    case 'season':
+      return userSeasonListIdsQuery({ id: target.media.id });
+    case 'episode':
+      return userEpisodeListIdsQuery({ id: target.media.id });
   }
 }
 
-export function useListedOnIds({ media$ }: UseListIdsProps) {
-  const response = useQuery(media$.pipe(map(typeToQuery)));
+export function useListedOnIds({ target$ }: UseListIdsProps) {
+  const response = useQuery(target$.pipe(map(targetToQuery)));
 
   return {
     listedOnIds: response.pipe(map(($response) => $response.data ?? [])),

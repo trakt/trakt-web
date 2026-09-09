@@ -52,11 +52,12 @@
 
     <ListAction
       style="dropdown-item"
-      media={listTarget}
+      target={{ type: listTarget.type, media: listTarget }}
       title={listTarget.title}
       onClick={() =>
         manageListsDrawerStore.open({
-          media: listTarget,
+          target: { type: listTarget.type, media: listTarget },
+          title: listTarget.title,
           metaInfo: listTarget.title,
         })}
     />

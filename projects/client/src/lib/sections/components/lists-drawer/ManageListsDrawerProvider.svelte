@@ -6,7 +6,7 @@
 {#if $manageListsDrawerStore?.isOpen}
   <ListsDrawer
     onClose={manageListsDrawerStore.close}
-    media={$manageListsDrawerStore.media}
+    target={$manageListsDrawerStore.target}
     title={$manageListsDrawerStore.title}
     metaInfo={$manageListsDrawerStore.metaInfo}
   />

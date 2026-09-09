@@ -3,6 +3,7 @@ import type { ExtendedMediaType } from './ExtendedMediaType.ts';
 import type { MediaType } from './MediaType.ts';
 
 export type RatedMediaType = ExtendedMediaType | 'season';
+export type ListedMediaType = ExtendedMediaType | 'season';
 
 type UserType = 'avatar' | 'settings' | 'follow' | 'cover' | 'block';
 type ListType = 'edited' | 'deleted' | 'created' | 'like';
@@ -73,6 +74,10 @@ type TypeDataMap = {
   'app_delete': null;
 };
 
+function toListedScope(type: ListedMediaType): MediaType {
+  return type === 'movie' ? 'movie' : 'show';
+}
+
 export function invalidationId(key?: string) {
   return `${INVALIDATION_ID}:${key ?? ''}` as const;
 }
@@ -101,7 +106,8 @@ export const InvalidateAction = {
     buildInvalidationKey('collected', type),
 
   Watchlisted: (type: MediaType) => buildInvalidationKey('watchlisted', type),
-  Listed: (type: MediaType) => buildInvalidationKey('listed', type),
+  Listed: (type: ListedMediaType) =>
+    buildInvalidationKey('listed', toListedScope(type)),
 
   Drop: (type: MediaType) => buildInvalidationKey('dropped', type),
 
