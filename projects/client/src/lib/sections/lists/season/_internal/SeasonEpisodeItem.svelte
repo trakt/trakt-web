@@ -3,6 +3,7 @@
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
@@ -14,6 +15,7 @@
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchedUntilHereDrawer from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/WatchedUntilHereDrawer.svelte";
   import { countSkippedEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/countSkippedEpisodes.ts";
+  import { toWatchedGapPrompt } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/toWatchedGapPrompt.ts";
   import { useWatchUntilHereEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/useWatchUntilHereEpisodes.ts";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -81,6 +83,7 @@
 
   let isWatchUntilDrawerOpen = $state(false);
 
+  const { history } = useUser();
   const { confirm } = useConfirm();
   const confirmFillGap = $derived(
     confirm({
@@ -91,19 +94,23 @@
   );
 
   /**
-   * The prompt follows the episode becoming watched rather than the click, so
-   * it covers every route that marks it - the row check, the overflow, or the
-   * date drawer - and never fires on a re-watch, since the state was already
-   * true. `null` is the first read, before anything has been observed.
+   * `toWatchedGapPrompt` holds the transition rule, including why an unsettled
+   * history cannot move the baseline. Plain `let`, not `$state`: nothing else
+   * reads it, and the effect must not re-run on its own write.
    */
-  let wasWatched: boolean | null = $state(null);
+  let watchedBaseline: boolean | null = null;
 
   $effect(() => {
-    const isNowWatched = $isWatched;
-    const previous = wasWatched;
-    wasWatched = isNowWatched;
+    const { baseline, shouldPrompt } = toWatchedGapPrompt({
+      baseline: watchedBaseline,
+      isHistorySettled: $history !== null,
+      isWatched: $isWatched,
+      skippedCount,
+    });
 
-    if (previous !== false || !isNowWatched || skippedCount === 0) {
+    watchedBaseline = baseline;
+
+    if (!shouldPrompt) {
       return;
     }
 
