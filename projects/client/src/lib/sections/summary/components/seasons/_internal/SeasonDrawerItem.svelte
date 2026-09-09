@@ -23,7 +23,7 @@
     {title}
     episodes={$episodes}
     {show}
-    seasonId={season.id}
+    {season}
     isLoading={$isLoading}
   />
 {/snippet}

@@ -2,14 +2,19 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
   import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { ListTarget } from "$lib/models/ListTarget";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
+  import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
+  import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import type { BaseItemProps } from "$lib/sections/lists/components/models/BaseItemProps";
   import type { EpisodeUrlOverride } from "$lib/sections/lists/components/models/EpisodeUrlOverride";
@@ -19,6 +24,7 @@
   import { useWatchUntilHereEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/useWatchUntilHereEpisodes.ts";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
+  import { episodeMetaInfo } from "$lib/utils/intl/episodeMetaInfo";
 
   type SeasonEpisodeItemProps = {
     show: ShowEntry;
@@ -71,6 +77,14 @@
     }),
   );
 
+  const { isAuthorized } = useAuth();
+  const { user } = useUser();
+  const target = $derived<ListTarget>({ type: "episode", media: episode });
+  const listMetaInfo = $derived(episodeMetaInfo(episode, show.title));
+  const hasPopupActions = $derived(
+    isActionable || ($isAuthorized && $user != null),
+  );
+
   const src = $derived(
     useEpisodeSpoilerImage({
       episode,
@@ -114,15 +128,17 @@
 
 {#snippet popupActions()}
   <RenderFor audience="authenticated">
-    <MarkAsWatchedAction
-      style="dropdown-item"
-      type="episode"
-      title={episode.title}
-      {show}
-      media={episode}
-      mode="hybrid"
-      onWatched={offerGapFill}
-    />
+    {#if isActionable}
+      <MarkAsWatchedAction
+        style="dropdown-item"
+        type="episode"
+        title={episode.title}
+        {show}
+        media={episode}
+        mode="hybrid"
+        onWatched={offerGapFill}
+      />
+    {/if}
     {#if hasBulkMarkAsWatched}
       <DropdownItem
         onclick={() => (isWatchUntilDrawerOpen = true)}
@@ -140,6 +156,17 @@
         {/snippet}
       </DropdownItem>
     {/if}
+    <ListAction
+      style="dropdown-item"
+      {target}
+      title={episode.title}
+      onClick={() =>
+        manageListsDrawerStore.open({
+          target,
+          title: episode.title,
+          metaInfo: listMetaInfo,
+        })}
+    />
   </RenderFor>
 {/snippet}
 
@@ -148,7 +175,7 @@
     {episode}
     media={show}
     {style}
-    popupActions={isActionable ? popupActions : undefined}
+    popupActions={hasPopupActions ? popupActions : undefined}
     variant={isFuture ? "upcoming" : "default"}
     context="show"
     {source}

@@ -1,4 +1,5 @@
 import * as m from '$lib/features/i18n/messages.ts';
+import { episodeMetaInfo } from '$lib/utils/intl/episodeMetaInfo.ts';
 import type { MarkAsWatchedStoreProps } from '../useMarkAsWatched.ts';
 
 export function toMarkAsWatchedMetaInfo(props: MarkAsWatchedStoreProps) {
@@ -15,9 +16,7 @@ export function toMarkAsWatchedMetaInfo(props: MarkAsWatchedStoreProps) {
 
   switch (props.type) {
     case 'episode':
-      return `${props.show.title} • ${
-        m.text_season_episode_number(props.media)
-      }`;
+      return episodeMetaInfo(props.media, props.show.title);
     case 'show': {
       if (!props.media.seasons) {
         return;

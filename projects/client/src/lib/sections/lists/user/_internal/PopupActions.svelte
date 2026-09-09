@@ -4,6 +4,8 @@
   import type { ListItem } from "$lib/requests/models/ListItem";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
 
+  import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
+  import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
@@ -53,6 +55,16 @@
 <RenderFor audience="authenticated">
   {#if isMyList && target}
     <RemoveFromListAction {list} {target} />
+  {/if}
+
+  {#if target && (listedItem.type === "season" || listedItem.type === "episode")}
+    <ListAction
+      style="dropdown-item"
+      {target}
+      title={target.title}
+      onClick={() =>
+        manageListsDrawerStore.open({ target, title: target.title })}
+    />
   {/if}
 
   {#if listedItem.type === "movie" || listedItem.type === "show"}

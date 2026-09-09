@@ -5,19 +5,19 @@ import { time } from '$lib/utils/timing/time.ts';
 import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import { listIdsRequest } from './_internal/listIdsRequest.ts';
 
-type UserMovieListIdsParams = { slug: string } & ApiParams;
+type UserSeasonListIdsParams = { id: number } & ApiParams;
 
-const userMovieListIdsRequest = (
-  { fetch, slug }: UserMovieListIdsParams,
-) => listIdsRequest({ fetch, path: `/v3/movies/${slug}/me/lists` });
+const userSeasonListIdsRequest = (
+  { fetch, id }: UserSeasonListIdsParams,
+) => listIdsRequest({ fetch, path: `/v3/seasons/${id}/me/lists` });
 
-export const userMovieListIdsQuery = defineQuery({
-  key: 'userMovieListIds',
+export const userSeasonListIdsQuery = defineQuery({
+  key: 'userSeasonListIds',
   invalidations: [
-    InvalidateAction.Listed('movie'),
+    InvalidateAction.Listed('season'),
   ],
-  dependencies: (params) => [params.slug],
-  request: userMovieListIdsRequest,
+  dependencies: (params) => [params.id],
+  request: userSeasonListIdsRequest,
   mapper: (response) => response.body,
   schema: ListIdSchema.array(),
   ttl: time.hours(3),

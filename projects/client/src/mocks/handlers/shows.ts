@@ -2,10 +2,14 @@ import { http, HttpResponse } from 'msw';
 
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { OfficialListsResponseMock } from '$mocks/data/lists/response/OfficialListsResponseMock.ts';
+import { UserEpisodeListIdsResponseMock } from '$mocks/data/lists/response/UserEpisodeListIdsResponseMock.ts';
+import { UserSeasonListIdsResponseMock } from '$mocks/data/lists/response/UserSeasonListIdsResponseMock.ts';
 import { UserShowListIdsResponseMock } from '$mocks/data/lists/response/UserShowListIdsResponseMock.ts';
+import { EpisodeSiloMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloMappedMock.ts';
 import { EpisodeSiloCommentsResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloCommentsResponseMock.ts';
 import { EpisodeSiloPeopleResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloPeopleResponseMock.ts';
 import { EpisodeSiloWatchNowResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloWatchNowResponseMock.ts';
+import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';
 import { ShowSiloCommentsResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloCommentsResponseMock.ts';
 import { ShowSiloSentimentResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloSentimentResponseMock.ts';
 import { ShowSiloSoundtrackResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloSoundtrackResponseMock.ts';
@@ -302,6 +306,20 @@ export const shows = [
     `http://localhost/v3/shows/${ShowSiloResponseMock.ids.slug}/me/lists`,
     () => {
       return HttpResponse.json(UserShowListIdsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/v3/seasons/${
+      assertDefined(ShowSiloSeasonsMappedMock.at(0)).id
+    }/me/lists`,
+    () => {
+      return HttpResponse.json(UserSeasonListIdsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/v3/episodes/${EpisodeSiloMappedMock.id}/me/lists`,
+    () => {
+      return HttpResponse.json(UserEpisodeListIdsResponseMock);
     },
   ),
 ];
