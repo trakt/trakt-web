@@ -6,4 +6,5 @@ export type FormProps = {
   confirmButtonText: string;
   confirmButtonLabel: string;
   inlineActions?: boolean;
+  stickyActions?: boolean;
 } & ChildrenProps;

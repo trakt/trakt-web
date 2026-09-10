@@ -7,20 +7,14 @@
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import { useStoredFilters } from "$lib/features/filters/useStoredFilters.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import FilterTabs from "./FilterTabs.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
+  import FilterTabs from "./FilterTabs.svelte";
 
   const { onClose }: { onClose: () => void } = $props();
 
   const { activeMode, setActiveMode, saveFilters, resetFilters } =
     useStoredFilters();
   const { hasActiveFilter } = useFilter();
-
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const isSmallTablet = useMedia(WellKnownMediaQuery.tabletSmall);
-
-  const tabPosition = $derived($isMobile || $isSmallTablet ? "bottom" : "top");
 </script>
 
 {#snippet badge()}
@@ -71,7 +65,7 @@
   trapSelector=".trakt-filter"
   size="auto"
 >
-  <FilterTabs activeMode={$activeMode} {setActiveMode} {tabPosition} />
+  <FilterTabs activeMode={$activeMode} {setActiveMode} />
 </Drawer>
 
 <style>

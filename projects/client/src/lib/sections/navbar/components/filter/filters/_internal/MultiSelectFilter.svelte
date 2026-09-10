@@ -64,12 +64,13 @@
   ]);
 </script>
 
-<Filter title={filter.advanced.label?.() ?? filter.label()}>
+<Filter title={filter.advanced.label?.() ?? filter.label()} variant="inline">
   <MultiSelect
     options={optionsWithAll}
     included={selection.included}
     excluded={selection.excluded}
     placeholder={m.option_text_all()}
+    variant="chip"
     {disabled}
     {searchPlaceholder}
     {emptyLabel}

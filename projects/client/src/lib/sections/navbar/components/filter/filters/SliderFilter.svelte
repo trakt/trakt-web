@@ -78,10 +78,11 @@
 <style>
   .trakt-slider-filter {
     width: 100%;
-    height: var(--ni-64);
 
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-xs);
+
+    padding-block: var(--gap-s) var(--ni-32);
   }
 </style>

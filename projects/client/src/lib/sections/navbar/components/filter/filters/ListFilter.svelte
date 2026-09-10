@@ -38,11 +38,13 @@
   };
 </script>
 
-<Filter title={filter.label()}>
+<Filter title={filter.label()} variant="inline">
   <SingleSelect
     {options}
     value={$currentValue ?? null}
     placeholder={m.option_text_all()}
+    variant="chip"
+    autoWidth
     {onChange}
   />
 </Filter>

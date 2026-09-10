@@ -12,18 +12,20 @@
   import type { UserLimits } from "$lib/requests/models/UserLimits";
   import { iffy } from "$lib/utils/function/iffy";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import FilterSection from "../navbar/components/filter/FilterSection.svelte";
   import FilterTabs from "../navbar/components/filter/FilterTabs.svelte";
   import LimitWarning from "./_internal/LimitWarning.svelte";
   import MediaTypeToggler from "./_internal/MediaTypeToggler.svelte";
   import TargetDropdown from "./_internal/TargetDropdown.svelte";
   import TargetPreview from "./_internal/TargetPreview.svelte";
+  import { toTargetLabel } from "./_internal/toTargetLabel";
   import { ListTarget } from "./models/ListTarget";
   import { useCreateSmartList } from "./useCreateSmartList";
 
   const { mode, limits }: { mode: DiscoverMode; limits: UserLimits } = $props();
 
   const { createList, isCreating } = useCreateSmartList();
-  const { filterMap } = useFilter();
+  const { filterMap, activeFilterCount } = useFilter();
   const { user } = useUser();
 
   const limit = iffy(() =>
@@ -59,9 +61,8 @@
 </script>
 
 {#snippet targetSelector()}
-  <div class="trakt-target-selector-container">
-    <span>{m.header_target()}</span>
-    <div class="trakt-target-selector">
+  <FilterSection title={m.header_target()} variant="inline">
+    <div class="trakt-target-row">
       <TargetDropdown
         value={target}
         onChange={(value) => (target = value)}
@@ -69,6 +70,21 @@
       />
       <MediaTypeToggler {type} onChange={(value) => (type = value)} />
     </div>
+  </FilterSection>
+{/snippet}
+
+{#snippet recipe()}
+  <div class="trakt-smart-list-recipe">
+    <span class="bold ellipsis">{toTargetLabel(target)}</span>
+    <span class="separator" aria-hidden="true">·</span>
+    <span class="bold ellipsis">
+      {type === "movie" ? m.button_text_movies() : m.button_text_shows()}
+    </span>
+    {#if $activeFilterCount > 0}
+      <span class="filter-count tag bold" aria-label={m.button_label_filters()}>
+        {$activeFilterCount}
+      </span>
+    {/if}
   </div>
 {/snippet}
 
@@ -77,6 +93,7 @@
 
   <Drawer
     title={m.header_create_smart_list()}
+    metaInfo={recipe}
     onClose={goBack}
     size="normal"
     dismissal="manual"
@@ -91,6 +108,7 @@
       disabled={isDisabled || !listName}
       confirmButtonText={m.button_text_create()}
       confirmButtonLabel={m.button_label_create_list()}
+      stickyActions
     >
       <div class="trakt-smart-list-form-content" class:is-limited={isAtLimit}>
         <FormInput
@@ -129,9 +147,11 @@
   }
 
   .trakt-smart-list-form-content {
+    --filters-content-gap: var(--gap-m);
+
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xl);
+    gap: var(--gap-m);
 
     &.is-limited {
       opacity: 0.5;
@@ -139,15 +159,42 @@
     }
   }
 
-  .trakt-target-selector-container {
+  .trakt-target-row {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
     gap: var(--gap-xs);
+
+    min-width: 0;
   }
 
-  .trakt-target-selector {
-    display: grid;
-    grid-template-columns: 1fr auto;
+  .trakt-smart-list-recipe {
+    display: flex;
+    align-items: center;
     gap: var(--gap-xxs);
+
+    min-width: 0;
+    color: var(--color-text-secondary);
+
+    .separator {
+      color: var(--color-text-secondary);
+    }
+
+    .filter-count {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      min-width: var(--ni-16);
+      height: var(--ni-16);
+      padding: 0 var(--ni-4);
+      box-sizing: border-box;
+
+      border-radius: var(--border-radius-l);
+      background-color: var(--purple-500);
+      color: var(--shade-10);
+
+      line-height: 1;
+    }
   }
 </style>

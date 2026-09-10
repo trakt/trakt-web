@@ -25,12 +25,12 @@
       <ListFilter {filter} />
     {/if}
   {/each}
-</FilterGroup>
 
-{#each ratingTypeFilters as filter (filter.key)}
-  <SliderFilter
-    key={filter.key}
-    sliderOptions={filter}
-    mode={FilterMode.Simple}
-  />
-{/each}
+  {#each ratingTypeFilters as filter (filter.key)}
+    <SliderFilter
+      key={filter.key}
+      sliderOptions={filter}
+      mode={FilterMode.Simple}
+    />
+  {/each}
+</FilterGroup>

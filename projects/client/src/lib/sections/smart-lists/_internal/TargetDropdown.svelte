@@ -2,6 +2,7 @@
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { ListTarget } from "../models/ListTarget";
+  import { toTargetLabel } from "./toTargetLabel";
 
   const {
     value,
@@ -13,27 +14,10 @@
     disabled?: boolean;
   } = $props();
 
-  const targetText = (target: ListTarget) => {
-    switch (target) {
-      case ListTarget.Trending:
-        return m.list_title_trending();
-      case ListTarget.Anticipated:
-        return m.list_title_most_anticipated();
-      case ListTarget.Popular:
-        return m.list_title_most_popular();
-      case ListTarget.Recommendations:
-        return m.list_title_recommended();
-      case ListTarget.Watchlist:
-        return m.list_title_watchlist();
-      case ListTarget.Library:
-        return m.list_title_library();
-    }
-  };
-
   const options = $derived(
     Object.values(ListTarget).map((target) => ({
       value: target,
-      label: targetText(target),
+      label: toTargetLabel(target),
     })),
   );
 </script>
@@ -43,6 +27,7 @@
   {value}
   {disabled}
   placeholder={m.header_target()}
+  variant="chip"
   autoWidth
   onChange={(value) => onChange(value as ListTarget)}
 />

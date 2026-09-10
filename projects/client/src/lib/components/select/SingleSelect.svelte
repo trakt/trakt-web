@@ -9,6 +9,7 @@
     placeholder,
     disabled = false,
     autoWidth = false,
+    variant = "default",
     onChange,
     icon,
     trigger,
@@ -28,6 +29,7 @@
   {placeholder}
   {disabled}
   {autoWidth}
+  {variant}
   {icon}
   {trigger}
   triggerLabel={selectedLabel}

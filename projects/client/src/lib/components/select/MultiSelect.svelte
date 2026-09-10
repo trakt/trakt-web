@@ -11,6 +11,7 @@
     excluded = [],
     placeholder,
     disabled = false,
+    variant = "default",
     searchPlaceholder,
     emptyLabel,
     onChange,
@@ -129,6 +130,7 @@
   hasValue={value.length > 0}
   onValueChange={onRowToggle}
   header={searchPlaceholder ? searchField : undefined}
+  {variant}
   autoWidth
 >
   {#each visibleOptions as option (option.value)}

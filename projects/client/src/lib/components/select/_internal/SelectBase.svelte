@@ -1,6 +1,7 @@
 <script lang="ts">
   import DropdownCaretIcon from "$lib/components/dropdown/DropdownCaretIcon.svelte";
   import { Select } from "bits-ui";
+  import type { SelectTriggerVariant } from "../models/SelectTriggerVariant.ts";
   import type { Snippet } from "svelte";
   import ScrollDownIcon from "./icons/ScrollDownIcon.svelte";
   import ScrollUpIcon from "./icons/ScrollUpIcon.svelte";
@@ -25,6 +26,7 @@
     children: Snippet;
     header?: Snippet;
     autoWidth?: boolean;
+    variant?: SelectTriggerVariant;
     icon?: Snippet;
     trigger?: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
   } & (SelectSingleProps | SelectMultipleProps);
@@ -37,6 +39,7 @@
     children,
     header,
     autoWidth = false,
+    variant = "default",
     icon,
     trigger,
     ...rest
@@ -55,6 +58,7 @@
           {...props}
           class="trakt-select-trigger"
           aria-label={placeholder}
+          data-variant={variant}
           data-has-value={hasValue}
         >
           {#if icon}
@@ -198,6 +202,33 @@
       width: var(--ni-12);
       height: var(--ni-12);
       flex-shrink: 0;
+    }
+
+    &[data-variant="chip"] {
+      max-width: 100%;
+      padding: var(--ni-4) var(--ni-10);
+      gap: var(--gap-xxs);
+
+      border-color: transparent;
+      background-color: transparent;
+      color: var(--color-text-secondary);
+
+      &[data-has-value="true"] {
+        border-color: var(--color-filter-chip-border);
+        background-color: var(--color-filter-chip-background);
+        color: var(--color-filter-chip-text);
+      }
+
+      &:not([data-disabled]) {
+        @include for-mouse {
+          &:hover,
+          &:focus-visible {
+            border-color: var(--color-border);
+            background-color: transparent;
+            color: var(--color-text-primary);
+          }
+        }
+      }
     }
   }
 
