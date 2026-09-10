@@ -12,6 +12,8 @@
     orientation = "horizontal",
     seriesIndex = 0,
     color,
+    fillStyle = "gradient",
+    animated = true,
     active = false,
     track = true,
     rounded = true,
@@ -35,8 +37,10 @@
   class="trakt-distribution-bar"
   data-orientation={orientation}
   class:is-active={active}
+  class:is-animated={animated}
   class:has-track={track}
   class:is-rounded={rounded}
+  data-fill-style={fillStyle}
   role="progressbar"
   aria-valuenow={Math.round(clamped * 100)}
   aria-valuemin={0}
@@ -92,6 +96,10 @@
     );
   }
 
+  .trakt-distribution-bar[data-fill-style="flat"] .distribution-bar-fill {
+    background: var(--viz-series);
+  }
+
   // High-contrast hatch overlay (shape encoding); invisible until a HC mode
   // sets --viz-pattern-opacity to 1.
   .distribution-bar-fill::after {
@@ -119,6 +127,10 @@
     // transform-origin has no logical keyword; physical left only affects the
     // brief one-shot entrance scale, so RTL impact is negligible.
     transform-origin: left center;
+  }
+
+  .trakt-distribution-bar.is-animated[data-orientation="horizontal"]
+    .distribution-bar-fill {
     transition:
       width var(--viz-morph-duration) ease,
       filter var(--transition-increment) ease;
@@ -134,6 +146,10 @@
     bottom: 0;
     height: var(--viz-fill);
     transform-origin: center bottom;
+  }
+
+  .trakt-distribution-bar.is-animated[data-orientation="vertical"]
+    .distribution-bar-fill {
     transition:
       height var(--viz-morph-duration) ease,
       filter var(--transition-increment) ease;

@@ -1,31 +1,31 @@
+import type { AvailableLocale } from '$lib/features/i18n/index.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import {
   type MediaParentalGuide,
   MediaParentalGuideSchema,
 } from '$lib/requests/models/MediaParentalGuide.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { toMediaInfoPath } from '../../_internal/toMediaInfoPath.ts';
 
 type MediaParentalGuideParams = {
-  imdbId?: string | null;
+  type: MediaType;
+  slug: string;
+  locale: AvailableLocale;
 } & ApiParams;
 
 const mediaParentalGuideRequest = async (
-  { fetch, imdbId }: MediaParentalGuideParams,
+  { fetch, type, slug, locale }: MediaParentalGuideParams,
 ) => {
-  if (!imdbId) {
-    return {
-      body: undefined,
-      status: 204,
-    };
-  }
-
   const response = await rawApiFetch({
     fetch,
-    path: `/v3/media/imdb/${encodeURIComponent(imdbId)}/parental-guide`,
+    path: toMediaInfoPath({ type, slug, infoType: 16, locale }),
   });
 
-  if (response.status === 204) {
+  // A missing guide 404s upstream; fold it into no-content so the query
+  // resolves to null instead of throwing.
+  if (response.status === 204 || response.status === 404) {
     return {
       body: undefined,
       status: 204,
@@ -48,10 +48,9 @@ const mediaParentalGuideRequest = async (
 export const mediaParentalGuideQuery = defineQuery({
   key: 'mediaParentalGuide',
   invalidations: [],
-  dependencies: (params) => [params.imdbId ?? ''],
+  dependencies: (params) => [params.type, params.slug, params.locale],
   request: mediaParentalGuideRequest,
   mapper: (response): MediaParentalGuide | null => response.body ?? null,
   schema: MediaParentalGuideSchema.nullish(),
   ttl: time.hours(3),
-  enabled: (params) => Boolean(params.imdbId),
 });

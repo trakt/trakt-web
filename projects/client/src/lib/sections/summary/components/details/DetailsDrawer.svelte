@@ -14,10 +14,6 @@
     $props();
 
   let isOpen = $state(false);
-
-  const imdbId = $derived(
-    props.type === "episode" ? props.episode.imdbId : props.media.imdbId,
-  );
 </script>
 
 <Drawer
@@ -36,13 +32,13 @@
 
       {#if props.type !== "episode"}
         <MediaLinks media={props.media} />
-      {/if}
 
-      <RenderForFeature flag={FeatureFlag.ParentalGuide} audience="director">
-        {#snippet enabled()}
-          <MediaParentalGuide {imdbId} />
-        {/snippet}
-      </RenderForFeature>
+        <RenderForFeature flag={FeatureFlag.ParentalGuide} audience="director">
+          {#snippet enabled()}
+            <MediaParentalGuide type={props.type} slug={props.media.slug} />
+          {/snippet}
+        </RenderForFeature>
+      {/if}
     </div>
   {/if}
 </Drawer>

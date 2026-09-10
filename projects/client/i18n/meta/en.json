@@ -8528,8 +8528,44 @@
       "description": "Description for the Pantheon (follows watch-time ranking) preview feature."
     },
     "preview_feature_description_parental_guide": {
-      "default": "Show content risk levels in the details drawer for movies, shows, and episodes.",
+      "default": "Show content risk levels in the details drawer for movies and shows.",
       "description": "Description for the Parental Guidance preview feature."
+    },
+    "label_parental_guide_category_nudity": {
+      "default": "Sex & Nudity",
+      "description": "Label for the sex and nudity category in the parental guide."
+    },
+    "label_parental_guide_category_violence": {
+      "default": "Violence & Gore",
+      "description": "Label for the violence and gore category in the parental guide."
+    },
+    "label_parental_guide_category_profanity": {
+      "default": "Profanity",
+      "description": "Label for the profanity category in the parental guide."
+    },
+    "label_parental_guide_category_alcohol": {
+      "default": "Alcohol, Drugs & Smoking",
+      "description": "Label for the alcohol, drugs, and smoking category in the parental guide."
+    },
+    "label_parental_guide_category_frightening": {
+      "default": "Frightening & Intense Scenes",
+      "description": "Label for the frightening and intense scenes category in the parental guide."
+    },
+    "label_parental_guide_severity_none": {
+      "default": "None",
+      "description": "Label for content with no reported parental guide concerns."
+    },
+    "label_parental_guide_severity_mild": {
+      "default": "Mild",
+      "description": "Label for content with mild parental guide concerns."
+    },
+    "label_parental_guide_severity_moderate": {
+      "default": "Moderate",
+      "description": "Label for content with moderate parental guide concerns."
+    },
+    "label_parental_guide_severity_severe": {
+      "default": "Severe",
+      "description": "Label for content with severe parental guide concerns."
     },
     "header_official_links": {
       "default": "Official Links",

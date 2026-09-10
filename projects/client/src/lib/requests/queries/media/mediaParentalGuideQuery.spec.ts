@@ -1,86 +1,86 @@
+import { mediaParentalGuideQuery } from '$lib/requests/queries/media/mediaParentalGuideQuery.ts';
+import { MediaParentalGuideResponseMock } from '$mocks/data/summary/common/response/MediaParentalGuideResponseMock.ts';
+import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
+import { server } from '$mocks/server.ts';
 import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { server } from '$mocks/server.ts';
-import { describe, expect, it } from 'vitest';
 import { http, HttpResponse } from 'msw';
-import { mediaParentalGuideQuery } from './mediaParentalGuideQuery.ts';
+import { describe, expect, it } from 'vitest';
 
-const MediaParentalGuideMock = {
-  id: 'tt14693272',
-  title: 'Freedom Day',
-  categories: {
-    sex_nudity: {
-      categoryId: 'NUDITY',
-      label: 'Sex & Nudity',
-      severity: 'NONE',
-      severityLabel: 'None',
-      votes: {
-        none: 10,
-        mild: 1,
-        moderate: 0,
-        severe: 0,
-      },
-      totalVotes: 11,
-    },
-    violence_gore: {
-      categoryId: 'VIOLENCE',
-      label: 'Violence & Gore',
-      severity: 'MODERATE',
-      severityLabel: 'Moderate',
-      votes: {
-        none: 1,
-        mild: 4,
-        moderate: 12,
-        severe: 2,
-      },
-      totalVotes: 19,
-    },
-  },
-};
+const MOVIE_SLUG = MovieHereticResponseMock.ids.slug;
+const PARENTAL_GUIDE_PATH =
+  `http://localhost/v3/media/movie/${MOVIE_SLUG}/info/16/version/1`;
 
 describe('mediaParentalGuideQuery', () => {
-  it('should be disabled without an IMDb id', () => {
-    const query = mediaParentalGuideQuery({ imdbId: null });
-
-    expect(query.enabled).to.equal(false);
-  });
-
-  it('should query for a media parental guide by IMDb id', async () => {
+  it('should query for a movie parental guide by slug', async () => {
     server.use(
       http.get(
-        `http://localhost/v3/media/imdb/${MediaParentalGuideMock.id}/parental-guide`,
-        () => HttpResponse.json(MediaParentalGuideMock),
+        PARENTAL_GUIDE_PATH,
+        () => HttpResponse.json(MediaParentalGuideResponseMock),
       ),
     );
 
     const result = await runQuery({
       factory: () =>
         createTestBedQuery(
-          mediaParentalGuideQuery({ imdbId: MediaParentalGuideMock.id }),
+          mediaParentalGuideQuery({
+            type: 'movie',
+            slug: MOVIE_SLUG,
+            locale: 'en',
+          }),
         ),
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(MediaParentalGuideMock);
+    expect(result).to.deep.equal(MediaParentalGuideResponseMock);
   });
 
   it('should return null when a media parental guide is unavailable', async () => {
     server.use(
       http.get(
-        `http://localhost/v3/media/imdb/${MediaParentalGuideMock.id}/parental-guide`,
-        () => new HttpResponse(null, { status: 204 }),
+        PARENTAL_GUIDE_PATH,
+        () => new HttpResponse(null, { status: 404 }),
       ),
     );
 
     const result = await runQuery({
       factory: () =>
         createTestBedQuery(
-          mediaParentalGuideQuery({ imdbId: MediaParentalGuideMock.id }),
+          mediaParentalGuideQuery({
+            type: 'movie',
+            slug: MOVIE_SLUG,
+            locale: 'en',
+          }),
         ),
       mapper: (response) => response?.data,
       waitFor: (response) => response === null,
     });
 
     expect(result).to.equal(null);
+  });
+
+  it('should request the given locale', async () => {
+    const requestedLocales: Array<string | null> = [];
+
+    server.use(
+      http.get(PARENTAL_GUIDE_PATH, ({ request }) => {
+        requestedLocales.push(new URL(request.url).searchParams.get('locale'));
+        return HttpResponse.json(MediaParentalGuideResponseMock);
+      }),
+    );
+
+    await runQuery({
+      factory: () =>
+        createTestBedQuery(
+          mediaParentalGuideQuery({
+            type: 'movie',
+            slug: MOVIE_SLUG,
+            locale: 'pt-BR',
+          }),
+        ),
+      mapper: (response) => response?.data,
+    });
+
+    expect(requestedLocales).to.deep.equal(['pt-BR']);
   });
 });

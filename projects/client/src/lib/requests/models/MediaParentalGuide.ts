@@ -1,25 +1,28 @@
 import { z } from 'zod';
 
-const MediaParentalGuideVotesSchema = z.object({
-  none: z.number(),
-  mild: z.number(),
-  moderate: z.number(),
-  severe: z.number(),
+const signals = z.number().int().nonnegative();
+
+const MediaParentalGuideSignalsSchema = z.object({
+  none: signals,
+  mild: signals,
+  moderate: signals,
+  severe: signals,
 });
 
 const MediaParentalGuideCategorySchema = z.object({
-  categoryId: z.string().nullish(),
-  label: z.string(),
-  severity: z.string(),
-  severityLabel: z.string().nullish(),
-  votes: MediaParentalGuideVotesSchema,
-  totalVotes: z.number(),
+  category: z.enum([
+    'NUDITY',
+    'VIOLENCE',
+    'PROFANITY',
+    'ALCOHOL',
+    'FRIGHTENING',
+  ]),
+  severity: z.enum(['NONE', 'MILD', 'MODERATE', 'SEVERE']),
+  signals: MediaParentalGuideSignalsSchema,
 });
 
 export const MediaParentalGuideSchema = z.object({
-  id: z.string(),
-  title: z.string().nullish(),
-  categories: z.record(MediaParentalGuideCategorySchema),
+  guide: z.array(MediaParentalGuideCategorySchema),
 });
 
 export type MediaParentalGuide = z.infer<typeof MediaParentalGuideSchema>;

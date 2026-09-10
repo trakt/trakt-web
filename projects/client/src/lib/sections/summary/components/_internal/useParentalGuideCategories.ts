@@ -1,75 +1,117 @@
+import { getLocale } from '$lib/features/i18n/index.ts';
+import * as m from '$lib/features/i18n/messages.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaParentalGuide as Guide } from '$lib/requests/models/MediaParentalGuide.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { mediaParentalGuideQuery } from '$lib/requests/queries/media/mediaParentalGuideQuery.ts';
+import { isShallowEqual } from '$lib/utils/object/isShallowEqual.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { distinctUntilChanged, map, type Observable } from 'rxjs';
-
-type SeverityTone = 'none' | 'mild' | 'moderate' | 'severe' | 'unknown';
 
 type DisplayableCategory = {
   key: string;
   label: string;
   severityLabel: string;
+  severityProgress: number;
   severityTone: SeverityTone;
+  signals: ReadonlyArray<{
+    key: SignalTone;
+    label: string;
+    count: number;
+  }>;
 };
 
-const CATEGORY_ORDER = [
-  'sex_nudity',
-  'violence_gore',
-  'profanity',
-  'alcohol_drugs_smoking',
-  'frightening_intense_scenes',
-];
+type GuideEntry = Guide['guide'][number];
+type GuideCategory = GuideEntry['category'];
+type GuideSeverity = GuideEntry['severity'];
+type SignalTone = Lowercase<GuideSeverity>;
+type SeverityTone = SignalTone | 'unknown';
 
-function toSeverityTone(severity: string): SeverityTone {
-  switch (severity.toUpperCase()) {
-    case 'NONE':
-      return 'none';
-    case 'MILD':
-      return 'mild';
-    case 'MODERATE':
-      return 'moderate';
-    case 'SEVERE':
-      return 'severe';
-    default:
-      return 'unknown';
-  }
-}
+type ParentalGuideTarget = {
+  type: MediaType;
+  slug: string;
+};
 
-function toDisplayableSeverity(severity: string): string {
-  return severity
-    .toLowerCase()
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, (character) => character.toUpperCase());
-}
+// Declaration order is render order: category rows, then signal breakdown.
+const CATEGORY_LABEL = {
+  NUDITY: m.label_parental_guide_category_nudity,
+  VIOLENCE: m.label_parental_guide_category_violence,
+  PROFANITY: m.label_parental_guide_category_profanity,
+  ALCOHOL: m.label_parental_guide_category_alcohol,
+  FRIGHTENING: m.label_parental_guide_category_frightening,
+} as const satisfies Record<GuideCategory, () => string>;
 
-function categoryRank(key: string): number {
-  const index = CATEGORY_ORDER.indexOf(key);
-  return index === -1 ? CATEGORY_ORDER.length : index;
-}
+const SEVERITY = {
+  NONE: {
+    tone: 'none',
+    label: m.label_parental_guide_severity_none,
+    progress: 0.1,
+  },
+  MILD: {
+    tone: 'mild',
+    label: m.label_parental_guide_severity_mild,
+    progress: 0.3,
+  },
+  MODERATE: {
+    tone: 'moderate',
+    label: m.label_parental_guide_severity_moderate,
+    progress: 0.6,
+  },
+  SEVERE: {
+    tone: 'severe',
+    label: m.label_parental_guide_severity_severe,
+    progress: 0.9,
+  },
+} as const satisfies Record<
+  GuideSeverity,
+  { tone: SignalTone; label: () => string; progress: number }
+>;
 
 function toDisplayableCategories(
   parentalGuide: Guide | null | undefined,
 ): DisplayableCategory[] {
-  return Object.entries(parentalGuide?.categories ?? {})
-    .filter(([, category]) => category.label.length > 0)
-    .sort(([keyA], [keyB]) => categoryRank(keyA) - categoryRank(keyB))
-    .map(([key, category]) => ({
-      key,
-      label: category.label,
-      severityLabel: category.severityLabel ??
-        toDisplayableSeverity(category.severity),
-      severityTone: toSeverityTone(category.severity),
-    }));
+  return Object.entries(CATEGORY_LABEL).map(([category, toCategoryLabel]) => {
+    const entry = parentalGuide?.guide.find((item) =>
+      item.category === category
+    );
+
+    if (!entry) {
+      return {
+        key: category,
+        label: toCategoryLabel(),
+        severityLabel: m.text_unknown(),
+        severityProgress: 0,
+        severityTone: 'unknown',
+        signals: [],
+      };
+    }
+
+    const severity = SEVERITY[entry.severity];
+
+    return {
+      key: category,
+      label: toCategoryLabel(),
+      severityLabel: severity.label(),
+      severityProgress: severity.progress,
+      severityTone: severity.tone,
+      signals: Object.values(SEVERITY).map(({ tone, label }) => ({
+        key: tone,
+        label: label(),
+        count: entry.signals[tone],
+      })),
+    };
+  });
 }
 
 export function useParentalGuideCategories(
-  { imdbId$ }: { imdbId$: Observable<string | null | undefined> },
+  { target$ }: { target$: Observable<ParentalGuideTarget> },
 ) {
   const query = useQuery(
-    imdbId$.pipe(
-      distinctUntilChanged(),
-      map((imdbId) => mediaParentalGuideQuery({ imdbId })),
+    target$.pipe(
+      distinctUntilChanged(isShallowEqual),
+      map(({ type, slug }) =>
+        mediaParentalGuideQuery({ type, slug, locale: getLocale() })
+      ),
     ),
   );
 
