@@ -7,23 +7,13 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
-  import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../../components/router/Redirect.svelte";
   import Footer from "../footer/Footer.svelte";
   import NavbarStateSetter from "../navbar/NavbarStateSetter.svelte";
+  import { createMediaLd } from "./_internal/createMediaLd.ts";
+  import type { MediaInfo } from "./_internal/MediaInfo.ts";
   import { openGraphUrlBuilder } from "./_internal/openGraphUrlBuilder";
-
-  type MediaInfo = {
-    overview: string;
-    runtime?: number;
-    year?: number | Nil;
-    genres?: ReadonlyArray<string>;
-    rating?: number | Nil;
-    votes?: number;
-    certification?: string | Nil;
-    updatedAt?: Date | Nil;
-  };
 
   type TraktPageProps = {
     title: string | undefined;
@@ -191,77 +181,21 @@
     });
   };
 
-  const buildAggregateRating = (
-    rating: number | Nil,
-    votes: number | undefined,
-  ) => {
-    if (!rating || !votes) return undefined;
-    return {
-      "@type": "AggregateRating",
-      ratingValue: rating.toFixed(1),
-      ratingCount: votes,
-      bestRating: "10",
-      worstRating: "0",
-    };
-  };
-
-  const createMovieLd = (title: string, url: string) => {
-    const { runtime, year, genres, rating, votes, certification } = _info ?? {};
-    const genreLabels = genres?.map((g) => toTranslatedGenre(g)) ?? [];
-    const aggregateRating = buildAggregateRating(rating, votes);
-
-    return JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Movie",
-      name: title,
-      description,
-      image: _image,
-      url,
-      ...(year ? { datePublished: String(year) } : {}),
-      ...(genreLabels.length > 0 ? { genre: genreLabels } : {}),
-      ...(runtime && runtime > 0 ? { duration: `PT${runtime}M` } : {}),
-      ...(certification ? { contentRating: certification } : {}),
-      ...(aggregateRating ? { aggregateRating } : {}),
-    });
-  };
-
-  const createShowLd = (title: string, url: string) => {
-    const { year, genres, rating, votes } = _info ?? {};
-    const genreLabels = genres?.map((g) => toTranslatedGenre(g)) ?? [];
-    const aggregateRating = buildAggregateRating(rating, votes);
-
-    return JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "TVSeries",
-      name: title,
-      description,
-      image: _image,
-      url,
-      ...(year ? { datePublished: String(year) } : {}),
-      ...(genreLabels.length > 0 ? { genre: genreLabels } : {}),
-      ...(aggregateRating ? { aggregateRating } : {}),
-    });
-  };
-
-  // FIXME: extend with season and episode information
-  const createEpisodeLd = (title: string, url: string) =>
-    JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "TVEpisode",
-      name: title,
-      description: description,
-      image: _image,
-      url,
-    });
-
   const jsonLd = $derived.by(() => {
     if (type === "home") return createWebsiteLd(canonicalUrl);
-    if (type === "movie" && _title) return createMovieLd(_title, canonicalUrl);
-    if (type === "show" && _title) return createShowLd(_title, canonicalUrl);
-    if (type === "episode" && _title)
-      return createEpisodeLd(_title, canonicalUrl);
-    return null;
+    if (type === "webpage" || !_title) return null;
+
+    return createMediaLd({
+      type,
+      title: _title,
+      url: canonicalUrl,
+      description,
+      image: _image,
+      info: _info,
+    });
   });
+
+  const escapedJsonLd = $derived(jsonLd?.replaceAll("<", "\\u003c"));
 
   const dynamicContentProps = $derived(
     hasDynamicContent
@@ -305,8 +239,8 @@
   <meta name="twitter:image" content={image} />
   <meta name="twitter:creator" content={twitterHandle} />
 
-  {#if jsonLd != null}
-    {@html `<script type="application/ld+json">${jsonLd}</script>`}
+  {#if escapedJsonLd != null}
+    {@html `<script type="application/ld+json">${escapedJsonLd}</script>`}
   {/if}
 </svelte:head>
 
