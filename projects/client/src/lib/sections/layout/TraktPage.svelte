@@ -13,6 +13,7 @@
   import Footer from "../footer/Footer.svelte";
   import NavbarStateSetter from "../navbar/NavbarStateSetter.svelte";
   import { createMediaLd } from "./_internal/createMediaLd.ts";
+  import { isNoIndexPath } from "./_internal/isNoIndexPath.ts";
   import type { MediaInfo } from "./_internal/MediaInfo.ts";
   import { openGraphUrlBuilder } from "./_internal/openGraphUrlBuilder";
 
@@ -24,6 +25,7 @@
     hasDynamicContent?: boolean;
     mode?: "default" | "content-only";
     filterScope?: FilterScope;
+    isIndexable?: boolean;
   };
 
   const {
@@ -36,6 +38,7 @@
     hasDynamicContent = false,
     mode = "default",
     filterScope = "local",
+    isIndexable = true,
   }: ChildrenProps & TraktPageProps & AudienceProps = $props();
 
   const websiteName = "Trakt Web";
@@ -129,7 +132,11 @@
     director: "noindex, nofollow",
   };
 
-  const robots = $derived(AUDIENCE_ROBOTS[audience]);
+  const robots = $derived(
+    !isIndexable || isNoIndexPath(page.url.pathname)
+      ? "noindex, nofollow"
+      : AUDIENCE_ROBOTS[audience],
+  );
 
   const AUDIENCE_REDIRECTS: Partial<
     Record<
