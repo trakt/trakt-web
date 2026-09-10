@@ -6,6 +6,7 @@
 
   const {
     href,
+    onclick,
     label,
     title,
     icon,
@@ -13,7 +14,8 @@
     ariaLabel,
     children,
   }: {
-    href: string;
+    href?: string;
+    onclick?: () => void;
     label: string;
     title: string;
     icon: Snippet;
@@ -22,6 +24,13 @@
     children?: Snippet;
   } = $props();
 </script>
+
+{#snippet navItemContent()}
+  {@render icon()}
+  {#if !isCollapsed}
+    <span class="bold ellipsis nav-label">{title}</span>
+  {/if}
+{/snippet}
 
 <div class="trakt-nav-group">
   <div class="nav-main-link" class:is-expanded={!isCollapsed}>
@@ -33,12 +42,15 @@
       delayDuration={0}
       sideOffset={16}
     >
-      <Link {href} {label}>
-        {@render icon()}
-        {#if !isCollapsed}
-          <span class="bold ellipsis nav-label">{title}</span>
-        {/if}
-      </Link>
+      {#if onclick}
+        <button class="nav-action" type="button" aria-label={label} {onclick}>
+          {@render navItemContent()}
+        </button>
+      {:else}
+        <Link {href} {label}>
+          {@render navItemContent()}
+        </Link>
+      {/if}
     </Tooltip>
   </div>
 
@@ -73,12 +85,27 @@
       min-width: 0;
     }
 
+    .nav-action,
     :global(.trakt-link) {
       display: flex;
       align-items: center;
       gap: var(--gap-s);
       text-decoration: none;
       min-width: 0;
+    }
+
+    .nav-action {
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+
+      &:focus-visible {
+        border-radius: var(--border-radius-m);
+        outline: var(--border-thickness-xs) solid var(--color-link-active);
+        outline-offset: var(--ni-neg-4);
+      }
     }
 
     :global(svg) {

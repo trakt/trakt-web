@@ -13,6 +13,7 @@
   import BotProvider from "$lib/features/bot-verification/BotProvider.svelte";
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
+  import DevtoolsProvider from "$lib/features/devtools/DevtoolsProvider.svelte";
   import EditModeProvider from "$lib/features/edit-mode/EditModeProvider.svelte";
   import EmailUnsubscribeSnackbar from "$lib/features/email-unsubscribe/EmailUnsubscribeSnackbar.svelte";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
@@ -50,6 +51,8 @@
   import { onMount } from "svelte";
 
   const { data, children } = $props();
+
+  const isDev = import.meta.env.DEV;
 
   $effect.pre(initializeSeasonalThemes);
 
@@ -145,10 +148,24 @@
 
                                           <LoginErrorSnackbar />
                                           <EmailUnsubscribeSnackbar />
-                                          <QueryDevtools
-                                            client={data.queryClient}
-                                            buttonPosition="bottom-right"
-                                          />
+                                          {#if isDev}
+                                            <RenderFor
+                                              audience="all"
+                                              device={["desktop", "tablet-lg"]}
+                                            >
+                                              <DevtoolsProvider />
+                                            </RenderFor>
+
+                                            <RenderFor
+                                              audience="all"
+                                              device={["mobile", "tablet-sm"]}
+                                            >
+                                              <QueryDevtools
+                                                client={data.queryClient}
+                                                buttonPosition="bottom-right"
+                                              />
+                                            </RenderFor>
+                                          {/if}
                                         </SpotlightProvider>
                                       </ListScrollHistoryProvider>
                                     </ThemeProvider>
