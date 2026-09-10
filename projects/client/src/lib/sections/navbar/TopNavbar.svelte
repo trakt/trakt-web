@@ -48,7 +48,10 @@
           {#if !$isEditMode}
             {@render $state.headerActions?.()}
             {#if $state.showFilters}
-              <FilterButton isDisabled={!$state.hasFilters} />
+              <FilterButton
+                isDisabled={!$state.hasFilters}
+                smartListTarget={$state.smartListTarget}
+              />
             {/if}
           {/if}
         </RenderFor>
