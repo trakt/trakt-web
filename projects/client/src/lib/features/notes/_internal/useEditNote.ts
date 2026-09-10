@@ -1,11 +1,11 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { NoteType } from '$lib/requests/models/NoteType.ts';
 import { editNoteRequest } from '$lib/requests/queries/users/editNoteRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject } from 'rxjs';
 
 type EditNoteProps = {
   id: number;
@@ -18,33 +18,30 @@ type EditNoteProps = {
 };
 
 export function useEditNote() {
-  const isEditing = new BehaviorSubject(false);
-
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.EditNote);
 
-  const editNote = async ({ id, notes, media, type }: EditNoteProps) => {
-    isEditing.next(true);
+  const edit = useMutation(defineMutation({
+    key: 'note:edit',
+    request: ({ id, notes, type }: EditNoteProps) =>
+      editNoteRequest({ id, body: { type, notes } }),
+    invalidations: (
+      { variables },
+    ) => [InvalidateAction.Note.Edit(variables.media.type)],
+  }));
 
+  const editNote = async ({ id, notes, media, type }: EditNoteProps) => {
     const trimmed = notes.trim();
     if (!trimmed) {
-      isEditing.next(false);
       return;
     }
 
     track({ type });
-    const result = await editNoteRequest({
-      id,
-      body: { type, notes: trimmed },
-    });
-    await invalidate(InvalidateAction.Note.Edit(media.type));
 
-    isEditing.next(false);
-    return result;
+    return await edit.mutate({ id, notes: trimmed, media, type });
   };
 
   return {
     editNote,
-    isEditing: isEditing.asObservable(),
+    isEditing: edit.isPending,
   };
 }
