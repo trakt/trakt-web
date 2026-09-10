@@ -1,5 +1,6 @@
 import { AssetPattern } from '$worker/AssetPattern.ts';
 import { Domain } from '$worker/Domain.ts';
+import { isCacheableDocument } from '$worker/isCacheableDocument.ts';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
 import { CacheExpiration, ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute } from 'workbox-precaching';
@@ -189,16 +190,18 @@ const documentCacheKey = {
   },
 };
 
-const skipRedirectedDocuments = {
+// Declaring `cacheWillUpdate` replaces Workbox's own status check, so the
+// predicate has to do the rejecting itself.
+const skipUncacheableDocuments = {
   cacheWillUpdate: ({ response }: { response: Response }) =>
-    Promise.resolve(response.redirected ? null : response),
+    Promise.resolve(isCacheableDocument(response) ? response : null),
 };
 
 const navigationOptions = {
   cacheName: navigationCacheName,
   plugins: [
     documentCacheKey,
-    skipRedirectedDocuments,
+    skipUncacheableDocuments,
     expiration(time.hours(12)),
   ],
 };
