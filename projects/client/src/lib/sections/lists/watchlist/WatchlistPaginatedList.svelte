@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import type { Snippet } from "svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import SortValue from "../user/_internal/SortValue.svelte";
   import type { ListSortProps } from "../user/models/ListSortProps";
@@ -9,15 +10,19 @@
   import { useWatchList } from "./useWatchList";
 
   type WatchListProps = {
+    title?: string;
     type?: DiscoverMode;
     intent?: "default" | "start";
+    actions?: Snippet;
   } & ListSortProps;
 
   const {
+    title,
     type,
     sortBy,
     sortHow,
     intent = "default",
+    actions,
   }: WatchListProps = $props();
 
   const { filterMap } = useFilter();
@@ -26,6 +31,7 @@
 
 <DrilledMediaList
   id="view-all-watchlist-${type}-${intent}"
+  {title}
   {type}
   filter={$filterMap}
   useList={(params) =>
@@ -36,6 +42,7 @@
       sortHow,
     })}
   groupBy={sort.groupBy}
+  {actions}
 >
   {#snippet item(item)}
     {#snippet sortTag()}
