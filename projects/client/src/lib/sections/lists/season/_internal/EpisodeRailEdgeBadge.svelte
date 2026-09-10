@@ -33,7 +33,7 @@
   const sign = $derived(side === "start" ? "−" : "+");
 </script>
 
-<div class="trakt-episode-rail-edge-badge" data-side={side}>
+<div class="trakt-episode-rail-edge-badge" data-side={side} data-cover-edge>
   <Link
     href={link.href}
     noscroll={link.noscroll}
@@ -50,22 +50,19 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-episode-rail-edge-badge {
+    /* Centred on the cover, not the card: the footer sits below it. */
     position: absolute;
-    top: 50%;
+    top: calc(var(--height-card-cover) / 2);
     transform: translateY(-50%);
 
     z-index: var(--layer-raised);
 
-    /*
-      A pixel past the frame so no hairline of artwork shows between the badge
-      and the edge; the cover clips, so the overhang never appears.
-    */
     &[data-side="start"] {
-      inset-inline-start: calc(-1 * var(--ni-1));
+      inset-inline-start: 0;
     }
 
     &[data-side="end"] {
-      inset-inline-end: calc(-1 * var(--ni-1));
+      inset-inline-end: 0;
     }
 
     :global(.trakt-link) {

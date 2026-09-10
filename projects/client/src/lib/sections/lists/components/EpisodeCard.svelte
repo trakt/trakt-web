@@ -127,7 +127,6 @@
         alt={`${show.title} - ${$spoilerFreeTitle}`}
         {badge}
         {tag}
-        {edge}
       />
 
       {#if indicators}
@@ -136,6 +135,10 @@
         </IndicatorTags>
       {/if}
     </Link>
+
+    {#if edge}
+      {@render edge()}
+    {/if}
 
     <CardFooter {action}>
       {#if isShowContext}

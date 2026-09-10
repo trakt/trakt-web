@@ -6,8 +6,7 @@
   import { lineClamp } from "../text/lineClamp";
   import type { CardCoverProps } from "./CardCoverProps";
 
-  const { src, overlaySrc, alt, badge, tag, edge, title }: CardCoverProps =
-    $props();
+  const { src, overlaySrc, alt, badge, tag, title }: CardCoverProps = $props();
 
   let isImagePending = $state(true);
   const id = $derived(checksum(`${src}-${title}`));
@@ -36,9 +35,6 @@
     <div class="trakt-card-cover-tag">
       {@render tag()}
     </div>
-  {/if}
-  {#if edge}
-    {@render edge()}
   {/if}
   <div
     class="trakt-card-cover-image"
@@ -152,6 +148,18 @@
   @include for-mouse() {
     :global(.trakt-card-content:hover) .trakt-card-cover {
       outline-color: var(--color-card-border-hover);
+    }
+
+    /*
+      Except when the pointer is on a control docked over the cover (marked
+      `data-cover-edge`): it has a target of its own, so lighting the card
+      behind it says the click will open the episode when it will not. The
+      control lives outside the cover, hence the match from the card content.
+    */
+    :global(
+      .trakt-card-content:has([data-cover-edge]:hover) .trakt-card-cover
+    ) {
+      outline-color: transparent;
     }
   }
 

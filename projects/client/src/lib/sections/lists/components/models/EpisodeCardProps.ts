@@ -31,7 +31,11 @@ export type EpisodeItemVariant =
 
 export type EpisodeCardProps = BaseItemProps & EpisodeItemVariant & {
   media: ShowInput;
-  /** Docked to the cover's edges, inside its frame - see CardCoverProps. */
+  /**
+   * Rendered beside the card link, never inside it: a link in here would
+   * nest anchors. Mark the control `data-cover-edge` so the cover drops its
+   * hover outline while the pointer is on it.
+   */
   edge?: Snippet;
   urlOverride?: EpisodeUrlOverride;
   onWatched?: () => void;
