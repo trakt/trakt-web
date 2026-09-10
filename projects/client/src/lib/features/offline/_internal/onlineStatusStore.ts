@@ -1,19 +1,16 @@
-import { browser } from '$app/environment';
-import { BehaviorSubject, type Observable } from 'rxjs';
+import { onlineManager } from '@tanstack/query-core';
+import { Observable, type Observer } from 'rxjs';
 
-const isOnlineSubject = new BehaviorSubject<boolean>(
-  browser ? navigator.onLine : true,
-);
+const isOnline$ = new Observable<boolean>((subscriber: Observer<boolean>) => {
+  subscriber.next(onlineManager.isOnline());
 
-if (browser) {
-  globalThis.addEventListener('online', () => isOnlineSubject.next(true));
-  globalThis.addEventListener('offline', () => isOnlineSubject.next(false));
-}
+  return onlineManager.subscribe((isOnline) => subscriber.next(isOnline));
+});
 
 export const onlineStatusStore: {
   isOnline$: Observable<boolean>;
   isOnline: () => boolean;
 } = {
-  isOnline$: isOnlineSubject.asObservable(),
-  isOnline: () => isOnlineSubject.getValue(),
+  isOnline$,
+  isOnline: () => onlineManager.isOnline(),
 };

@@ -28,6 +28,8 @@ export const load: LayoutLoad = ({ data }) => {
         retry: 3,
         retryDelay,
         refetchOnWindowFocus: false,
+        // Mounting the client turns on reconnect refetching for every query.
+        refetchOnReconnect: false,
         persister: persister?.persisterFn,
       },
     },
