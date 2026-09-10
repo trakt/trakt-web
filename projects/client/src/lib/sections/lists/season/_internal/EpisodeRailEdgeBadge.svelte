@@ -33,7 +33,7 @@
   const sign = $derived(side === "start" ? "−" : "+");
 </script>
 
-<div class="trakt-episode-rail-edge-badge" data-side={side}>
+<div class="trakt-episode-rail-edge-badge" data-side={side} data-cover-edge>
   <Link
     href={link.href}
     noscroll={link.noscroll}
