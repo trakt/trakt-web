@@ -30,16 +30,16 @@
       <MultiSelectFilter {filter} />
     {/if}
   {/each}
-</FilterGroup>
 
-{#each sliderFilters as filter (filter.key)}
-  <SliderFilter
-    key={filter.key}
-    sliderOptions={filter.advanced}
-    mode={FilterMode.Advanced}
-    additionalKeys={filter.advanced.additionalKeys}
-  />
-{/each}
+  {#each sliderFilters as filter (filter.key)}
+    <SliderFilter
+      key={filter.key}
+      sliderOptions={filter.advanced}
+      mode={FilterMode.Advanced}
+      additionalKeys={filter.advanced.additionalKeys}
+    />
+  {/each}
+</FilterGroup>
 
 <RenderForFeature flag={FeatureFlag.ParentalGuide}>
   {#snippet enabled()}
