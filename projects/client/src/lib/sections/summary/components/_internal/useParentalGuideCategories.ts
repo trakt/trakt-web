@@ -14,25 +14,19 @@ type DisplayableCategory = {
   severityLabel: string;
   severityProgress: number;
   severityTone: SeverityTone;
-  signals: ReadonlyArray<{
-    key: SignalTone;
-    label: string;
-    count: number;
-  }>;
 };
 
 type GuideEntry = Guide['guide'][number];
 type GuideCategory = GuideEntry['category'];
 type GuideSeverity = GuideEntry['severity'];
-type SignalTone = Lowercase<GuideSeverity>;
-type SeverityTone = SignalTone | 'unknown';
+type SeverityTone = Lowercase<GuideSeverity> | 'unknown';
 
 type ParentalGuideTarget = {
   type: MediaType;
   slug: string;
 };
 
-// Declaration order is render order: category rows, then signal breakdown.
+// Declaration order is render order.
 const CATEGORY_LABEL = {
   NUDITY: m.label_parental_guide_category_nudity,
   VIOLENCE: m.label_parental_guide_category_violence,
@@ -60,11 +54,11 @@ const SEVERITY = {
   SEVERE: {
     tone: 'severe',
     label: m.label_parental_guide_severity_severe,
-    progress: 0.9,
+    progress: 1,
   },
 } as const satisfies Record<
   GuideSeverity,
-  { tone: SignalTone; label: () => string; progress: number }
+  { tone: SeverityTone; label: () => string; progress: number }
 >;
 
 function toDisplayableCategories(
@@ -82,7 +76,6 @@ function toDisplayableCategories(
         severityLabel: m.text_unknown(),
         severityProgress: 0,
         severityTone: 'unknown',
-        signals: [],
       };
     }
 
@@ -94,11 +87,6 @@ function toDisplayableCategories(
       severityLabel: severity.label(),
       severityProgress: severity.progress,
       severityTone: severity.tone,
-      signals: Object.values(SEVERITY).map(({ tone, label }) => ({
-        key: tone,
-        label: label(),
-        count: entry.signals[tone],
-      })),
     };
   });
 }

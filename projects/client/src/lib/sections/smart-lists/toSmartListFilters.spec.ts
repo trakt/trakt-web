@@ -2,6 +2,22 @@ import { describe, expect, it } from 'vitest';
 import { toSmartListFilters } from './toSmartListFilters.ts';
 
 describe('toSmartListFilters', () => {
+  it('should preserve all parental guidance ranges including none only', () => {
+    expect(toSmartListFilters({
+      parental_nudity: '0-0',
+      parental_violence: '0-1',
+      parental_profanity: '1-2',
+      parental_alcohol: '2-3',
+      parental_frightening: '3-3',
+    })).toEqual({
+      parental_nudity: [0, 0],
+      parental_violence: [0, 1],
+      parental_profanity: [1, 2],
+      parental_alcohol: [2, 3],
+      parental_frightening: [3, 3],
+    });
+  });
+
   it('splits list keys into trimmed string arrays', () => {
     expect(toSmartListFilters({ genres: 'adventure, comedy' })).to.deep.equal({
       genres: ['adventure', 'comedy'],

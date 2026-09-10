@@ -1,3 +1,4 @@
+import { parentalGuideFilters } from '$lib/features/filters/parentalGuideFilters.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { SmartList } from '$lib/requests/queries/users/smartListQuery.ts';
@@ -114,6 +115,17 @@ function formatList(key: string, values: string[]): string[] {
 }
 
 function formatRange(key: string, range: number[]): string[] {
+  const parentalFilter = parentalGuideFilters.find((filter) =>
+    filter.key === key
+  );
+  if (parentalFilter) {
+    const [
+      min = parentalFilter.range.min,
+      max = parentalFilter.range.max,
+    ] = range;
+    return [parentalFilter.formatLabel({ min, max })];
+  }
+
   switch (key) {
     case 'years':
       return [formatNumberRange(range, m.advanced_filter_label_release_year)];

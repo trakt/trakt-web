@@ -4,6 +4,7 @@ import {
   generateDecadeRange,
 } from '$lib/features/filters/_internal/generateDecadeOptions.ts';
 import { type Filter, FilterKey } from '$lib/features/filters/models/Filter.ts';
+import { parentalGuideFilters } from '$lib/features/filters/parentalGuideFilters.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
@@ -236,6 +237,7 @@ export const FILTERS = [
   CERTIFICATION_FILTER,
   COUNTRY_FILTER,
   STATUS_FILTER,
+  ...parentalGuideFilters,
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;

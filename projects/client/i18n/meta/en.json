@@ -8528,7 +8528,7 @@
       "description": "Description for the Pantheon (follows watch-time ranking) preview feature."
     },
     "preview_feature_description_parental_guide": {
-      "default": "Show content risk levels in the details drawer for movies and shows.",
+      "default": "Show content risk levels in the details drawer for movies and shows, and filter by severity in advanced filters.",
       "description": "Description for the Parental Guidance preview feature."
     },
     "label_parental_guide_category_nudity": {
@@ -8566,6 +8566,21 @@
     "label_parental_guide_severity_severe": {
       "default": "Severe",
       "description": "Label for content with severe parental guide concerns."
+    },
+    "advanced_filter_label_parental_guide": {
+      "default": "{category}: {min} to {max}",
+      "description": "Selected parental guidance severity range for a category.",
+      "variables": {
+        "category": {
+          "type": "string"
+        },
+        "min": {
+          "type": "string"
+        },
+        "max": {
+          "type": "string"
+        }
+      }
     },
     "header_official_links": {
       "default": "Official Links",
