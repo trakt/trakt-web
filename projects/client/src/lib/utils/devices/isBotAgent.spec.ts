@@ -9,6 +9,10 @@ describe('isBotAgent', () => {
       'Twitterbot/1.0',
       'WhatsApp/2.21.12.21 (iPhone)',
       'LinkedInBot/1.0 (compatible)',
+      'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Mobile Safari/537.36 (compatible; Google-InspectionTool/1.0;)',
+      'Mozilla/5.0 (compatible; GoogleOther)',
+      'Mozilla/5.0 (X11; Linux x86_64; Storebot-Google/1.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+      'Mozilla/5.0 (compatible; MojeekBot/0.11; +https://www.mojeek.com/bot.html)',
     ];
 
     botAgents.forEach((agent) => {
