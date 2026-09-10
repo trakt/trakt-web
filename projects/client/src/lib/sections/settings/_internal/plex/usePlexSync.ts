@@ -9,37 +9,52 @@ import { onDestroy } from 'svelte';
 import { BehaviorSubject } from 'rxjs';
 
 export type PlexAuthState = 'idle' | 'waiting' | 'connecting' | 'disconnecting';
+export type PlexServersState = 'loading' | 'loaded' | 'error';
 
 export function usePlexSync() {
   const isConnected = new BehaviorSubject<boolean | null>(null);
   const servers = new BehaviorSubject<PlexServer[]>([]);
+  const serversState = new BehaviorSubject<PlexServersState>('loading');
   const authState = new BehaviorSubject<PlexAuthState>('idle');
   const isSyncing = new BehaviorSubject(false);
 
   onDestroy(() => {
     isConnected.complete();
     servers.complete();
+    serversState.complete();
     authState.complete();
     isSyncing.complete();
   });
 
-  async function loadServers(): Promise<void> {
-    const [settingsResponse, result] = await Promise.all([
-      api().users.plex.settings(),
-      plexServersQuery(),
-    ]);
+  async function loadConnection(): Promise<boolean> {
+    const response = await api().users.plex.settings();
+    const connected = response.status === 200 &&
+      response.body.connection.connected;
 
-    if (
-      settingsResponse.status !== 200 ||
-      !settingsResponse.body.connection.connected
-    ) {
-      isConnected.next(false);
+    isConnected.next(connected);
+    return connected;
+  }
+
+  async function loadServers(): Promise<void> {
+    serversState.next('loading');
+
+    try {
+      servers.next(await plexServersQuery());
+      serversState.next('loaded');
+    } catch {
       servers.next([]);
+      serversState.next('error');
+    }
+  }
+
+  async function load(): Promise<void> {
+    if (!await loadConnection()) {
+      servers.next([]);
+      serversState.next('loaded');
       return;
     }
 
-    isConnected.next(true);
-    servers.next(result ?? []);
+    await loadServers();
   }
 
   function cleanPlexStatusParam() {
@@ -51,12 +66,13 @@ export function usePlexSync() {
 
   if (browser) {
     cleanPlexStatusParam();
-    loadServers();
+    load();
   }
 
   return {
     isConnected: isConnected.asObservable(),
     servers: servers.asObservable(),
+    serversState: serversState.asObservable(),
     authState: authState.asObservable(),
     isSyncing: isSyncing.asObservable(),
 
@@ -71,9 +87,11 @@ export function usePlexSync() {
 
     confirmAuth: async () => {
       authState.next('connecting');
-      await loadServers();
+      await load();
       authState.next('idle');
     },
+
+    retryServers: loadServers,
 
     cancelAuth: () => {
       authState.next('idle');
@@ -86,6 +104,7 @@ export function usePlexSync() {
 
       isConnected.next(false);
       servers.next([]);
+      serversState.next('loaded');
       authState.next('idle');
     },
 

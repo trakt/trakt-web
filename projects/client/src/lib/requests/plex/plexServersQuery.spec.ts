@@ -11,15 +11,27 @@ describe('plexServersQuery', () => {
     expect(result).to.deep.equal(PlexServersMappedMock);
   });
 
-  it('should return null when the request fails', async () => {
+  it('should throw when the request fails', async () => {
     server.use(
       http.get('http://localhost/users/settings/plex/servers', () => {
         return HttpResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }),
     );
 
-    const result = await plexServersQuery();
+    await expect(plexServersQuery()).rejects.toThrow(
+      'Failed to load Plex servers: 401',
+    );
+  });
 
-    expect(result).toBeNull();
+  it('should throw when the request times out at the edge', async () => {
+    server.use(
+      http.get('http://localhost/users/settings/plex/servers', () => {
+        return new HttpResponse('Gateway Timeout', { status: 504 });
+      }),
+    );
+
+    await expect(plexServersQuery()).rejects.toThrow(
+      'Failed to load Plex servers: 504',
+    );
   });
 });
