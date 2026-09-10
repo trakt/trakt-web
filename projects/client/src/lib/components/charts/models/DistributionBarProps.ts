@@ -7,6 +7,10 @@ export type DistributionBarProps = {
   seriesIndex?: number;
   /** Explicit CSS color override; defaults to the `seriesIndex` viz token. */
   color?: string;
+  /** Fill treatment. Defaults to the shared gradient treatment. */
+  fillStyle?: 'gradient' | 'flat';
+  /** Animate fill changes and the initial reveal. Defaults to true. */
+  animated?: boolean;
   /** Spotlight this bar (full strength + glow) - e.g. hovered/selected row. */
   active?: boolean;
   /** Render the muted track behind the fill. Defaults to true. */

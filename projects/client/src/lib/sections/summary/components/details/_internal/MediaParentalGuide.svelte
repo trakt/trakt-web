@@ -1,14 +1,17 @@
 <script lang="ts">
+  import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import { getLocale } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { MediaType } from "$lib/requests/models/MediaType.ts";
+  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { useParentalGuideCategories } from "../../_internal/useParentalGuideCategories.ts";
 
-  const LOADING_ROWS = Array.from({ length: 5 });
-
-  const { imdbId }: { imdbId?: string | null } = $props();
+  const { type, slug }: { type: MediaType; slug: string } = $props();
 
   const { categories, isError, isLoading } = useParentalGuideCategories({
-    imdbId$: fromRune(() => imdbId),
+    target$: fromRune(() => ({ type, slug })),
   });
 
   const guideState = $derived.by(() => {
@@ -20,88 +23,112 @@
       return "error";
     }
 
-    return $categories.length > 0 ? "ready" : "empty";
+    return "ready";
   });
 
-  const guideNotice = $derived.by(() => {
-    if (guideState === "error") {
-      return {
-        label: m.error_text_parental_guide_load_failed(),
-        severityTone: "severe",
-      };
-    }
-
-    if (guideState === "empty") {
-      return {
-        label: m.text_unavailable(),
-        severityTone: "none",
-      };
-    }
-
-    return null;
-  });
+  const isPending = $derived(guideState === "loading");
 </script>
 
 <section
   class="trakt-media-parental-guide"
-  aria-busy={guideState === "loading"}
+  aria-busy={isPending}
   data-state={guideState}
 >
-  <p class="bold secondary">
+  <p class="guide-heading bold secondary">
     {m.option_text_certification_parental_guidance()}
   </p>
 
-  {#if guideState === "ready"}
+  {#if guideState !== "error"}
     <ul class="guide-list">
       {#each $categories as category (category.key)}
-        <li class="guide-row" data-severity={category.severityTone}>
-          <span class="severity-rail" aria-hidden="true"></span>
-          <span class="guide-copy">
-            <span class="guide-label bold">{category.label}</span>
-            <span class="guide-severity secondary">{category.severityLabel}</span>
+        {@const severityLabel = isPending
+          ? m.yir_state_loading()
+          : category.severityLabel}
+        <li
+          class="guide-row"
+          data-severity={isPending ? "unknown" : category.severityTone}
+        >
+          <span class="guide-label bold" title={category.label}>
+            {category.label}
+          </span>
+          <div class="guide-meter">
+            <Tooltip
+              variant="compact"
+              sideOffset={4}
+              disabled={isPending || category.signals.length === 0}
+              disableHoverableContent
+            >
+              {#snippet content()}
+                <dl class="signals-list">
+                  {#each category.signals as signal (signal.key)}
+                    <div class="signal-row">
+                      <dt>{signal.label}</dt>
+                      <dd>
+                        {toHumanNumber(signal.count, getLocale())}
+                      </dd>
+                    </div>
+                  {/each}
+                </dl>
+              {/snippet}
+              <span class="guide-accessible-label">
+                {category.label}: {severityLabel}
+              </span>
+              <div class="guide-bar" aria-hidden="true">
+                <DistributionBar
+                  fraction={isPending ? 0 : category.severityProgress}
+                  color="var(--guide-severity-color)"
+                  fillStyle="flat"
+                  animated={false}
+                  --distribution-bar-thickness="var(--ni-8)"
+                  --distribution-bar-track="var(--guide-track-color)"
+                />
+              </div>
+            </Tooltip>
+          </div>
+          <span class="guide-severity secondary">
+            {severityLabel}
           </span>
         </li>
       {/each}
     </ul>
-  {:else if guideState === "loading"}
-    <div class="guide-list" aria-hidden="true">
-      {#each LOADING_ROWS as _, index (index)}
-        <div class="guide-row is-loading">
-          <span class="severity-rail"></span>
-          <span class="guide-copy">
-            <span class="guide-label"></span>
-            <span class="guide-severity"></span>
-          </span>
-        </div>
-      {/each}
-    </div>
-  {:else if guideNotice}
+  {:else}
     <div class="guide-list">
-      <div class="guide-row" data-severity={guideNotice.severityTone}>
-        <span class="severity-rail" aria-hidden="true"></span>
-        <span class="guide-copy">
-          <span class="guide-label bold secondary">{guideNotice.label}</span>
+      <div class="guide-row" data-severity="severe">
+        <span class="guide-notice bold secondary">
+          {m.error_text_parental_guide_load_failed()}
         </span>
       </div>
     </div>
   {/if}
 </section>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-media-parental-guide {
+    --guide-track-color: color-mix(
+      in srgb,
+      var(--color-text-secondary) 22%,
+      transparent
+    );
+
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-xs);
 
     padding-top: var(--gap-l);
 
     border-top: var(--ni-1) solid var(--color-border);
   }
 
+  .trakt-media-parental-guide .guide-heading {
+    max-width: 100%;
+  }
+
   .trakt-media-parental-guide .guide-list {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
+    gap: 0;
 
     padding: 0;
     margin: 0;
@@ -111,35 +138,70 @@
 
   .trakt-media-parental-guide .guide-row {
     display: grid;
-    grid-template-columns: var(--ni-6) minmax(0, 1fr);
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(var(--ni-80), 0.72fr)
+      var(--ni-96);
     align-items: center;
-    gap: var(--gap-s);
-    min-height: var(--ni-32);
+    gap: var(--gap-l);
+    height: var(--ni-52);
+
+    border-bottom: var(--ni-1) solid var(--color-border);
   }
 
-  .trakt-media-parental-guide .severity-rail {
-    width: var(--ni-6);
-    height: var(--ni-28);
-
-    border-radius: var(--border-radius-xs);
-    background: var(--guide-severity-color, var(--shade-500));
+  .trakt-media-parental-guide .guide-row:last-child {
+    border-bottom: none;
   }
 
-  .trakt-media-parental-guide .guide-copy {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: var(--gap-xs);
+  .trakt-media-parental-guide .guide-label,
+  .trakt-media-parental-guide .guide-meter,
+  .trakt-media-parental-guide .guide-severity {
     min-width: 0;
   }
 
   .trakt-media-parental-guide .guide-label,
   .trakt-media-parental-guide .guide-severity {
-    overflow-wrap: anywhere;
+    display: -webkit-box;
+    overflow: hidden;
+
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .trakt-media-parental-guide .guide-meter {
+    display: block;
+    width: 100%;
+
+    :global(.trakt-tooltip-trigger) {
+      width: 100%;
+    }
+  }
+
+  .trakt-media-parental-guide .guide-severity {
+    color: var(--guide-severity-color);
+
+    text-align: end;
+  }
+
+  .trakt-media-parental-guide .guide-bar {
+    width: 100%;
+  }
+
+  .trakt-media-parental-guide .guide-accessible-label {
+    @include visually-hidden;
+  }
+
+  .trakt-media-parental-guide .guide-notice {
+    grid-column: 1 / -1;
   }
 
   .trakt-media-parental-guide .guide-row[data-severity="none"] {
     --guide-severity-color: var(--shade-300);
+  }
+
+  .trakt-media-parental-guide .guide-row[data-severity="unknown"] {
+    --guide-severity-color: var(--color-text-secondary);
   }
 
   .trakt-media-parental-guide .guide-row[data-severity="mild"] {
@@ -154,29 +216,51 @@
     --guide-severity-color: var(--red-500);
   }
 
-  .trakt-media-parental-guide .guide-row.is-loading .severity-rail,
-  .trakt-media-parental-guide .guide-row.is-loading .guide-label,
-  .trakt-media-parental-guide .guide-row.is-loading .guide-severity {
-    background: color-mix(
-      in srgb,
-      var(--color-text-secondary) 18%,
-      transparent
-    );
+  .signals-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-4);
+    min-width: var(--ni-120);
+    margin: 0;
+
+    line-height: 1.25;
+    font-weight: 400;
   }
 
-  .trakt-media-parental-guide .guide-row.is-loading .guide-label,
-  .trakt-media-parental-guide .guide-row.is-loading .guide-severity {
-    display: block;
-    height: var(--ni-14);
+  .signal-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--gap-l);
 
-    border-radius: var(--border-radius-xs);
+    white-space: nowrap;
+
+    dt,
+    dd {
+      margin: 0;
+    }
+
+    dt {
+      font-weight: 600;
+    }
+
+    dd {
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+    }
   }
 
-  .trakt-media-parental-guide .guide-row.is-loading .guide-label {
-    width: min(var(--ni-192), 60%);
-  }
+  @include for-mobile {
+    .trakt-media-parental-guide .guide-row {
+      grid-template-columns: minmax(0, 1fr) var(--ni-96);
+      gap: var(--gap-xs) var(--gap-m);
+      height: var(--ni-64);
+      box-sizing: border-box;
+      padding-block: var(--gap-xs);
+    }
 
-  .trakt-media-parental-guide .guide-row.is-loading .guide-severity {
-    width: var(--ni-72);
+    .trakt-media-parental-guide .guide-meter {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
   }
 </style>
