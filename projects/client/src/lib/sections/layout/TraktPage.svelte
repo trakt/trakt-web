@@ -12,6 +12,7 @@
   import Footer from "../footer/Footer.svelte";
   import NavbarStateSetter from "../navbar/NavbarStateSetter.svelte";
   import { createMediaLd } from "./_internal/createMediaLd.ts";
+  import { isNoIndexPath } from "./_internal/isNoIndexPath.ts";
   import type { MediaInfo } from "./_internal/MediaInfo.ts";
   import { openGraphUrlBuilder } from "./_internal/openGraphUrlBuilder";
 
@@ -128,7 +129,11 @@
     director: "noindex, nofollow",
   };
 
-  const robots = $derived(AUDIENCE_ROBOTS[audience]);
+  const robots = $derived(
+    isNoIndexPath(page.url.pathname)
+      ? "noindex, nofollow"
+      : AUDIENCE_ROBOTS[audience],
+  );
 
   const AUDIENCE_REDIRECTS: Partial<
     Record<
