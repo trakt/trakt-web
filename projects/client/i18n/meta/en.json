@@ -11,6 +11,10 @@
     }
   },
   "messages": {
+    "list_title_featured_people": {
+      "default": "Featured People",
+      "description": "Heading for the row of recurring cast, directors, and creators featured in a list."
+    },
     "link_text_streaming_sync_settings": {
       "default": "Streaming",
       "description": "Text for the link to the streaming services settings page."
