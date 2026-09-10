@@ -1,7 +1,7 @@
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { deleteSmartListRequest } from '$lib/requests/queries/users/deleteSmartListRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject } from 'rxjs';
 import { AnalyticsEvent } from '../../../../features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../../../../features/analytics/useTrack.ts';
 
@@ -10,28 +10,22 @@ type DeleteListProps = {
 };
 
 export function useDeleteSmartList() {
-  const isDeleting = new BehaviorSubject(false);
-
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.SmartListDelete);
 
-  const deleteList = async (
-    { slug }: DeleteListProps,
-  ) => {
-    isDeleting.next(true);
+  const deletion = useMutation(defineMutation({
+    key: 'smart-list:delete',
+    request: ({ slug }: DeleteListProps) => deleteSmartListRequest({ slug }),
+    invalidations: [InvalidateAction.SmartList.Deleted],
+  }));
+
+  const deleteList = async ({ slug }: DeleteListProps) => {
     track();
 
-    await deleteSmartListRequest({
-      slug,
-    });
-
-    await invalidate(InvalidateAction.SmartList.Deleted);
-
-    isDeleting.next(false);
+    await deletion.mutate({ slug });
   };
 
   return {
     deleteList,
-    isDeleting: isDeleting.asObservable(),
+    isDeleting: deletion.isPending,
   };
 }

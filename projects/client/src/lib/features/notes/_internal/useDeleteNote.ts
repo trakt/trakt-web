@@ -1,11 +1,11 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { NoteType } from '$lib/requests/models/NoteType.ts';
 import { deleteNoteRequest } from '$lib/requests/queries/users/deleteNoteRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject } from 'rxjs';
 
 type DeleteNoteProps = {
   id: number;
@@ -17,22 +17,25 @@ type DeleteNoteProps = {
 };
 
 export function useDeleteNote() {
-  const isDeleting = new BehaviorSubject(false);
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.DeleteNote);
 
+  const deletion = useMutation(defineMutation({
+    key: 'note:delete',
+    request: ({ id, type }: DeleteNoteProps) =>
+      deleteNoteRequest({ id, body: { type } }),
+    invalidations: (
+      { variables },
+    ) => [InvalidateAction.Note.Delete(variables.media.type)],
+  }));
+
   const deleteNote = async ({ id, media, type }: DeleteNoteProps) => {
-    isDeleting.next(true);
-
     track({ type });
-    await deleteNoteRequest({ id, body: { type } });
-    await invalidate(InvalidateAction.Note.Delete(media.type));
 
-    isDeleting.next(false);
+    await deletion.mutate({ id, media, type });
   };
 
   return {
     deleteNote,
-    isDeleting: isDeleting.asObservable(),
+    isDeleting: deletion.isPending,
   };
 }

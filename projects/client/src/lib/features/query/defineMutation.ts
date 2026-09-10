@@ -5,7 +5,15 @@ import type { MutationMeta } from './models/MutationMeta.ts';
 export function defineMutation<TData, TVariables = void>(
   { key, request, invalidations }: DefineMutationProps<TData, TVariables>,
 ): CreateMutationOptions<TData, Error, TVariables> {
-  const meta: MutationMeta = { invalidations };
+  const meta: MutationMeta = {
+    resolveInvalidations: ({ data, variables }) =>
+      typeof invalidations === 'function'
+        ? invalidations({
+          data: data as TData,
+          variables: variables as TVariables,
+        })
+        : invalidations,
+  };
 
   return {
     mutationKey: [key],
