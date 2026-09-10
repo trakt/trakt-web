@@ -24,6 +24,10 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.BlockUser;
     username: string;
   };
+  [ConfirmationType.WatchedUntilHere]: {
+    type: ConfirmationType.WatchedUntilHere;
+    title: string;
+  };
   [ConfirmationType.RemoveFromWatched]: {
     type: ConfirmationType.RemoveFromWatched;
     title: string;
