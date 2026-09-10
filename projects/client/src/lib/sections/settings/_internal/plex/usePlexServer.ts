@@ -1,4 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { PlexErrorCode } from '$lib/requests/plex/PlexErrorCode.ts';
 import { plexServerAccountsQuery } from '$lib/requests/plex/plexServerAccountsQuery.ts';
@@ -6,7 +8,6 @@ import { plexSettingsQuery } from '$lib/requests/plex/plexSettingsQuery.ts';
 import { plexUpdateSettingsRequest } from '$lib/requests/plex/plexUpdateSettingsRequest.ts';
 import { refetchQuery } from '$lib/features/query/refetchQuery.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import {
   BehaviorSubject,
@@ -30,7 +31,13 @@ const UNRECOVERABLE_ERROR_CODES = new Set<PlexErrorCode>([
 ]);
 
 export function usePlexServer({ serverId }: { serverId: string }) {
-  const { invalidate } = useInvalidator();
+  const selectionWrite = useMutation(defineMutation({
+    key: 'plex:write-selection',
+    request: (selection: PlexSelectionUpdate) =>
+      plexUpdateSettingsRequest({ settings: { sync: { selection } } })
+        .catch(() => false),
+    invalidations: ({ data }) => data ? [InvalidateAction.Plex.Settings] : [],
+  }));
   const { user } = useUser();
 
   const accountsQuery = useQuery(plexServerAccountsQuery({ serverId }));
@@ -143,16 +150,7 @@ export function usePlexServer({ serverId }: { serverId: string }) {
   async function writeSelection(
     selection: PlexSelectionUpdate,
   ): Promise<boolean> {
-    const success = await plexUpdateSettingsRequest({
-      settings: { sync: { selection } },
-    }).catch(() => false);
-
-    if (!success) {
-      return false;
-    }
-
-    await invalidate(InvalidateAction.Plex.Settings);
-    return true;
+    return await selectionWrite.mutate(selection);
   }
 
   async function saveChanges(): Promise<boolean> {
