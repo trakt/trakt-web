@@ -3,37 +3,35 @@ import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
 import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { resetCoverImageRequest } from '$lib/requests/queries/users/resetCoverImageRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject, map } from 'rxjs';
+import { map } from 'rxjs';
 
 export function useResetCoverImage() {
-  const isResettingCoverImage = new BehaviorSubject(false);
-
   const { user } = useUser();
-  const { invalidate } = useInvalidator();
   const { confirm } = useConfirm();
   const { track } = useTrack(AnalyticsEvent.Settings);
+
+  const reset = useMutation(defineMutation({
+    key: 'user:reset-cover-image',
+    request: () => resetCoverImageRequest({}),
+    invalidations: [InvalidateAction.User.CoverImage],
+  }));
 
   const resetCoverImage = confirm({
     type: ConfirmationType.ResetCoverImage,
     onConfirm: async () => {
-      isResettingCoverImage.next(true);
+      track({ settings: 'reset-cover-image' });
 
-      try {
-        track({ settings: 'reset-cover-image' });
-        await resetCoverImageRequest({});
-        await invalidate(InvalidateAction.User.CoverImage);
-      } finally {
-        isResettingCoverImage.next(false);
-      }
+      await reset.mutate();
     },
   });
 
   return {
     resetCoverImage,
     hasCoverImage: user.pipe(map(($user) => Boolean($user.cover.url))),
-    isResettingCoverImage: isResettingCoverImage.asObservable(),
+    isResettingCoverImage: reset.isPending,
   };
 }
