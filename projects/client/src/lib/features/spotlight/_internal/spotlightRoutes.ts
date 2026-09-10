@@ -1,0 +1,176 @@
+import * as m from '$lib/features/i18n/messages';
+import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
+import type { SpotlightRoute } from './models/SpotlightRoute.ts';
+
+export const spotlightRoutes: ReadonlyArray<SpotlightRoute> = [
+  {
+    id: 'home',
+    url: UrlBuilder.home(),
+    label: m.page_title_home,
+    keywords: ['home', 'dashboard', 'up next'],
+  },
+  {
+    id: 'shows',
+    url: UrlBuilder.shows(),
+    label: m.page_title_shows,
+    keywords: ['shows', 'tv', 'series', m.link_text_discover_shows],
+  },
+  {
+    id: 'movies',
+    url: UrlBuilder.movies(),
+    label: m.page_title_movies,
+    keywords: ['movies', 'films', 'cinema', m.link_text_discover_movies],
+  },
+  {
+    id: 'discover',
+    url: UrlBuilder.discover(),
+    label: m.page_title_discover,
+    keywords: ['discover', 'browse', 'explore', m.link_text_discover_media],
+  },
+  {
+    id: 'calendar',
+    url: UrlBuilder.calendar(),
+    label: m.page_title_calendar,
+    keywords: [
+      'calendar',
+      'schedule',
+      'upcoming',
+      'airing',
+      m.list_title_upcoming_schedule,
+    ],
+  },
+  {
+    id: 'search',
+    url: UrlBuilder.search(),
+    label: m.page_title_search,
+    keywords: ['search', 'find', 'lookup'],
+  },
+  {
+    id: 'trending',
+    url: UrlBuilder.trending(),
+    label: m.page_title_trending_media,
+    keywords: ['trending', 'hot', 'now', m.list_title_trending],
+  },
+  {
+    id: 'popular',
+    url: UrlBuilder.popular(),
+    label: m.page_title_popular_media,
+    keywords: ['popular', 'top', m.list_title_most_popular],
+  },
+  {
+    id: 'anticipated',
+    url: UrlBuilder.anticipated(),
+    label: m.page_title_anticipated_media,
+    keywords: [
+      'anticipated',
+      'awaited',
+      'soon',
+      m.list_title_most_anticipated,
+    ],
+  },
+  {
+    id: 'recommended',
+    url: UrlBuilder.recommended(),
+    label: m.page_title_recommended_media,
+    keywords: [
+      'recommended',
+      'for you',
+      'suggestions',
+      m.list_title_recommended,
+    ],
+  },
+  {
+    id: 'history',
+    url: UrlBuilder.history.home(),
+    label: m.page_title_history,
+    keywords: [
+      'history',
+      'watched',
+      'recently watched',
+      m.list_title_watch_history,
+      m.list_title_recently_watched,
+    ],
+  },
+  {
+    id: 'lists',
+    url: UrlBuilder.lists.smart.all(),
+    label: m.page_title_lists,
+    keywords: [
+      'lists',
+      'collections',
+      'smart lists',
+      m.list_title_smart_lists,
+      m.list_title_personal_lists,
+    ],
+  },
+  {
+    id: 'profile',
+    url: UrlBuilder.profile.me(),
+    label: m.page_title_profile,
+    keywords: ['profile', 'me', 'account', m.link_text_account_settings],
+  },
+  {
+    id: 'settings',
+    url: UrlBuilder.settings.general(),
+    label: m.page_title_settings,
+    keywords: ['settings', 'preferences', 'config'],
+  },
+  {
+    id: 'about',
+    url: UrlBuilder.about(),
+    label: m.page_title_about,
+    keywords: ['about', 'info'],
+  },
+  {
+    id: 'watchlist',
+    url: UrlBuilder.lists.watchlist('me'),
+    label: m.page_title_watchlist,
+    keywords: ['watchlist', 'to watch', 'queue', 'saved'],
+  },
+  {
+    id: 'startWatching',
+    url: UrlBuilder.startWatching('me'),
+    label: m.page_title_start_watching,
+    keywords: ['start watching'],
+  },
+  {
+    id: 'progress',
+    url: UrlBuilder.progress('me'),
+    label: m.page_title_progress,
+    keywords: [
+      'progress',
+      'continue',
+      'watching',
+      'in progress',
+      'up next',
+      'continue watching',
+      m.button_text_progress_in_progress,
+      m.list_title_up_next,
+    ],
+  },
+  {
+    id: 'library',
+    url: UrlBuilder.library.home(),
+    label: m.page_title_library,
+    keywords: ['library', 'collection', 'owned', 'collected'],
+  },
+  {
+    id: 'favorites',
+    url: UrlBuilder.profile.favorites('me'),
+    label: m.page_title_favorites,
+    keywords: ['favorites', 'favourites', 'loved'],
+  },
+  {
+    id: 'social',
+    url: UrlBuilder.social.activity(),
+    label: m.page_title_social_activity,
+    keywords: [
+      'social',
+      'activity',
+      'friends',
+      'feed',
+      m.page_title_social,
+      m.list_title_activity,
+    ],
+  },
+];

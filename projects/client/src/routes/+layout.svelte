@@ -30,8 +30,8 @@
   import QueryDevtools from "$lib/features/query/QueryDevtools.svelte";
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
   import ReportDialogProvider from "$lib/features/report/ReportDialogProvider.svelte";
-  import SearchShortcut from "$lib/features/search/SearchShortcut.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
+  import SpotlightProvider from "$lib/features/spotlight/SpotlightProvider.svelte";
   import SeasonalFlair from "$lib/features/theme/components/SeasonalFlair.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import { initializeSeasonalThemes } from "$lib/features/theme/initializeSeasonalThemes.js";
@@ -84,7 +84,6 @@
           accessToken={data.oidcAuth.token}
           hasServerSession={data.oidcAuth.hasSession}
         >
-          <SearchShortcut />
           <FeatureFlagProvider>
             <PlayerProvider>
               <AnalyticsProvider>
@@ -108,47 +107,49 @@
                                   <EditModeProvider>
                                     <ThemeProvider theme={data.theme}>
                                       <ListScrollHistoryProvider>
-                                        <!--
-                                      All navbars are added in the layout to make sure they can
-                                      persist during navigation. The state is set on a page level.
-                                    -->
-                                        <RenderFor
-                                          audience="all"
-                                          device={["mobile", "tablet-sm"]}
-                                        >
-                                          <TopNavbar />
-                                        </RenderFor>
+                                        <SpotlightProvider>
+                                          <!--
+                                        All navbars are added in the layout to make sure they can
+                                        persist during navigation. The state is set on a page level.
+                                      -->
+                                          <RenderFor
+                                            audience="all"
+                                            device={["mobile", "tablet-sm"]}
+                                          >
+                                            <TopNavbar />
+                                          </RenderFor>
 
-                                        <RenderFor
-                                          audience="all"
-                                          device={["desktop", "tablet-lg"]}
-                                        >
-                                          <SideNavbar />
-                                        </RenderFor>
+                                          <RenderFor
+                                            audience="all"
+                                            device={["desktop", "tablet-lg"]}
+                                          >
+                                            <SideNavbar />
+                                          </RenderFor>
 
-                                        {@render children()}
+                                          {@render children()}
 
-                                        <RenderFor
-                                          audience="all"
-                                          device={["mobile", "tablet-sm"]}
-                                        >
-                                          <MobileNavbar />
-                                        </RenderFor>
+                                          <RenderFor
+                                            audience="all"
+                                            device={["mobile", "tablet-sm"]}
+                                          >
+                                            <MobileNavbar />
+                                          </RenderFor>
 
-                                        <RenderFor audience="authenticated">
-                                          <NavbarToastContent />
-                                        </RenderFor>
+                                          <RenderFor audience="authenticated">
+                                            <NavbarToastContent />
+                                          </RenderFor>
 
-                                        <RenderFor audience="authenticated">
-                                          <OfflineSync />
-                                        </RenderFor>
+                                          <RenderFor audience="authenticated">
+                                            <OfflineSync />
+                                          </RenderFor>
 
-                                        <LoginErrorSnackbar />
-                                        <EmailUnsubscribeSnackbar />
-                                        <QueryDevtools
-                                          client={data.queryClient}
-                                          buttonPosition="bottom-right"
-                                        />
+                                          <LoginErrorSnackbar />
+                                          <EmailUnsubscribeSnackbar />
+                                          <QueryDevtools
+                                            client={data.queryClient}
+                                            buttonPosition="bottom-right"
+                                          />
+                                        </SpotlightProvider>
                                       </ListScrollHistoryProvider>
                                     </ThemeProvider>
                                   </EditModeProvider>

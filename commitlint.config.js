@@ -117,6 +117,7 @@ module.exports = {
         'snackbar',
         'social',
         'spoiler',
+        'spotlight',
         'streaming',
         'stats',
         'summary',
