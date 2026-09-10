@@ -1,20 +1,18 @@
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
+import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
 import { captureRequests } from '$test/beds/request/captureRequests.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { firstValueFrom } from 'rxjs';
-import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   type MarkAsWatchedStoreProps,
   useMarkAsWatched,
 } from './useMarkAsWatched.ts';
-
-vi.mock('$lib/stores/useInvalidator.ts');
 
 const removeRatingSpy = vi.fn((_body?: unknown) => Promise.resolve(true));
 vi.mock('$lib/requests/sync/removeRatingRequest.ts', () => ({
@@ -35,20 +33,11 @@ vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
 }));
 
 describe('useMarkAsWatched', () => {
-  const invalidate = vi.fn(function () {});
-
   beforeEach(() => {
     setAuthorization(true);
-    invalidate.mockReset();
     removeRatingSpy.mockClear();
     addWatchedSpy.mockClear();
-    notify.mockReset();
-
-    (useInvalidator as Mock)
-      .mockReturnValueOnce({ invalidate }) // 1: useMarkAsWatched
-      .mockReturnValueOnce({ invalidate }) // 2: useMarkAsWatched -> useUser
-      .mockReturnValueOnce({ invalidate }) // 3: useMarkAsWatched -> useTrack -> useUser
-      .mockReturnValueOnce({ invalidate }); // 4: useMarkAsWatched -> useIsWatched -> useUser
+    notify.mockReset(); // 4: useMarkAsWatched -> useIsWatched -> useUser
   });
 
   const runCommonTests = (
@@ -104,8 +93,9 @@ describe('useMarkAsWatched', () => {
         useMarkAsWatched(props)
       );
 
-      await removeWatched();
-      expect(invalidate).toHaveBeenCalledWith(invalidation);
+      const invalidations = await captureInvalidations(removeWatched);
+
+      expect(invalidations).toContain(invalidation);
     });
 
     it('should call invalidate after removing watched', async () => {
@@ -113,8 +103,9 @@ describe('useMarkAsWatched', () => {
         useMarkAsWatched(props)
       );
 
-      await removeWatched();
-      expect(invalidate).toHaveBeenCalledWith(invalidation);
+      const invalidations = await captureInvalidations(removeWatched);
+
+      expect(invalidations).toContain(invalidation);
     });
 
     it('should NOT be watched', async () => {
