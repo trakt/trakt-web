@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
@@ -44,16 +43,6 @@
     })}
   groupBy={sort.groupBy}
 >
-  {#snippet listActions()}
-    <div class="trakt-list-actions">
-      {#if list.description}
-        <Tooltip content={list.description}>
-          <span class="secondary ellipsis">{list.description}</span>
-        </Tooltip>
-      {/if}
-    </div>
-  {/snippet}
-
   {#snippet item(media)}
     {#snippet sortTag()}
       <SortValue item={media} {sortBy} />
@@ -67,13 +56,3 @@
     />
   {/snippet}
 </DrilledMediaList>
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  .trakt-list-actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xs);
-  }
-</style>

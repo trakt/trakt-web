@@ -11,6 +11,7 @@
     label: string;
     classList?: string;
     lineCount?: number;
+    as?: "p" | "div";
   } & ChildrenProps;
 
   const {
@@ -18,6 +19,7 @@
     label,
     classList = "",
     lineCount = defaultLineCount,
+    as = "p",
   }: LineClampProps = $props();
 
   const isClamped = writable(false);
@@ -31,13 +33,14 @@
 </script>
 
 <div class="trakt-clamped-text">
-  <p
+  <svelte:element
+    this={as}
     use:lineClamp={{ lines: $lines, isClamped }}
     use:appendClassList={classList}
     class="line-clamp-content"
   >
     {@render children()}
-  </p>
+  </svelte:element>
 
   {#if $isClamped || isExpanded}
     <MoreButton
