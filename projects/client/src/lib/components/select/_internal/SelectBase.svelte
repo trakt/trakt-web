@@ -26,6 +26,7 @@
     header?: Snippet;
     autoWidth?: boolean;
     icon?: Snippet;
+    triggerTag?: Snippet;
     trigger?: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
   } & (SelectSingleProps | SelectMultipleProps);
 
@@ -38,6 +39,7 @@
     header,
     autoWidth = false,
     icon,
+    triggerTag,
     trigger,
     ...rest
   }: SelectBaseProps = $props();
@@ -61,6 +63,7 @@
             <span class="trigger-icon">{@render icon()}</span>
           {/if}
           <span class="trigger-label ellipsis capitalize">{triggerLabel}</span>
+          {@render triggerTag?.()}
           <DropdownCaretIcon {open} />
         </button>
       {/if}

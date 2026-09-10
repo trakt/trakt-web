@@ -6,4 +6,5 @@ export type SelectOption = {
   /* Multi-select only: when false the option cannot be excluded (no toggle). */
   excludable?: boolean;
   icon?: Snippet<[SelectOption]>;
+  tag?: Snippet<[SelectOption]>;
 };
