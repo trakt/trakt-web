@@ -64,6 +64,8 @@
         {option.label}
       </span>
 
+      {@render option.tag?.(option)}
+
       {#if hasToggle}
         {@render sideToggle("excluded")}
       {:else if selected}

@@ -1,5 +1,8 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { Season } from "$lib/requests/models/Season.ts";
@@ -31,20 +34,11 @@
     return `${season.number}`;
   };
 
-  const seasonText = (season: Season) => {
-    if (variant === "default") return seasonLabel(season);
-
-    const episodes = m.tag_text_number_of_episodes({
-      count: season.episodes.count,
-    });
-
-    return `${seasonLabel(season)} (${episodes})`;
-  };
-
   const options = $derived(
     seasons.map((season) => ({
       value: `${season.number}`,
-      label: seasonText(season),
+      label: seasonLabel(season),
+      tag: variant === "detailed" ? episodeCountTag : undefined,
     })),
   );
 
@@ -54,6 +48,17 @@
   };
 </script>
 
+{#snippet episodeCountTag(option: SelectOption)}
+  <span class="season-episode-count">
+    <EpisodeCountTag
+      count={seasons.find((season) => `${season.number}` === option.value)
+        ?.episodes.count ?? 0}
+      i18n={TagIntlProvider}
+      type="tag"
+    />
+  </span>
+{/snippet}
+
 <SingleSelect
   {options}
   value={`${currentSeason}`}
@@ -62,3 +67,12 @@
   autoWidth
   onChange={onSeasonChange}
 />
+
+<style>
+  .season-episode-count {
+    display: contents;
+
+    --color-background-stem-tag: var(--color-tablist-background);
+    --color-foreground-stem-tag: var(--color-foreground);
+  }
+</style>
