@@ -2,6 +2,9 @@
 const bots = [
   // Search engine bots
   'Googlebot',
+  'Google-InspectionTool',
+  'GoogleOther',
+  'Storebot-Google',
   'Bingbot',
   'Slurp',
   'DuckDuckBot',
@@ -10,6 +13,7 @@ const bots = [
   'Sogou',
   'Exabot',
   'ia_archiver',
+  'MojeekBot',
 
   // Social media bots
   'facebot',

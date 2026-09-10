@@ -24,4 +24,14 @@ describe('GlobalParameterProvider', () => {
     expect(params.get('sort_by')).toBe('rank');
     expect(params.get('sort_how')).toBe('asc');
   });
+  it('should leave anchors untouched when escaped at the provider root', () => {
+    const { getByTestId } = render(GlobalParameterHost, {
+      props: { href: '/shows/silo', parameter: 'mode', escaped: true },
+    });
+
+    const link = getByTestId('link') as HTMLAnchorElement;
+
+    expect(link.getAttribute('href')).toBe('/shows/silo');
+    expect(new URL(link.href).search).toBe('');
+  });
 });

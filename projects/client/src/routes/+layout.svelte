@@ -25,6 +25,7 @@
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import AddNoteDrawerProvider from "$lib/features/notes/AddNoteDrawerProvider.svelte";
   import OfflineSync from "$lib/features/offline/OfflineSync.svelte";
+  import GlobalParameterEscaper from "$lib/features/parameters/GlobalParameterEscaper.svelte";
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
   import PlayerProvider from "$lib/features/player/YoutubePlayerProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
@@ -44,6 +45,7 @@
   import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
   import TopNavbar from "$lib/sections/navbar/TopNavbar.svelte";
   import NavbarToastContent from "$lib/sections/toast/NavbarToastContent.svelte";
+  import { isCrawler } from "$lib/utils/devices/isCrawler.ts";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
   import { retry } from "$lib/utils/retry/retry.js";
   import { WorkerMessage } from "$worker/WorkerMessage";
@@ -81,115 +83,117 @@
 <ErrorProvider>
   <QueryClientProvider client={data.queryClient}>
     <GlobalParameterProvider>
-      <BotProvider isLegitimateBot={data.isLegitimateBot}>
-        <AuthProvider
-          isAuthorized={data.oidcAuth.isAuthorized}
-          accessToken={data.oidcAuth.token}
-          hasServerSession={data.oidcAuth.hasSession}
-        >
-          <FeatureFlagProvider>
-            <PlayerProvider>
-              <AnalyticsProvider>
-                <RedirectProvider>
-                  <NavigationProvider>
-                    <NavigationHistoryProvider>
-                      <LocaleProvider>
-                        <LocaleSettingSync />
-                        <SearchProvider config={data.typesense}>
-                          <FilterProvider>
-                            <CoverProvider>
-                              <ToastProvider>
-                                <ConfirmationProvider>
-                                  <MarkAsWatchedDrawerProvider />
-                                  <ManageListsDrawerProvider />
-                                  <ActionToastHost />
-                                  <AddNoteDrawerProvider />
-                                  <ReportDialogProvider />
-                                  <CoverImage />
-                                  <SeasonalFlair />
-                                  <EditModeProvider>
-                                    <ThemeProvider theme={data.theme}>
-                                      <ListScrollHistoryProvider>
-                                        <SpotlightProvider>
-                                          <!--
-                                        All navbars are added in the layout to make sure they can
-                                        persist during navigation. The state is set on a page level.
-                                      -->
-                                          <RenderFor
-                                            audience="all"
-                                            device={["mobile", "tablet-sm"]}
-                                          >
-                                            <TopNavbar />
-                                          </RenderFor>
+      <GlobalParameterEscaper enabled={isCrawler()}>
+        <BotProvider isLegitimateBot={data.isLegitimateBot}>
+          <AuthProvider
+            isAuthorized={data.oidcAuth.isAuthorized}
+            accessToken={data.oidcAuth.token}
+            hasServerSession={data.oidcAuth.hasSession}
+          >
+            <FeatureFlagProvider>
+              <PlayerProvider>
+                <AnalyticsProvider>
+                  <RedirectProvider>
+                    <NavigationProvider>
+                      <NavigationHistoryProvider>
+                        <LocaleProvider>
+                          <LocaleSettingSync />
+                          <SearchProvider config={data.typesense}>
+                            <FilterProvider>
+                              <CoverProvider>
+                                <ToastProvider>
+                                  <ConfirmationProvider>
+                                    <MarkAsWatchedDrawerProvider />
+                                    <ManageListsDrawerProvider />
+                                    <ActionToastHost />
+                                    <AddNoteDrawerProvider />
+                                    <ReportDialogProvider />
+                                    <CoverImage />
+                                    <SeasonalFlair />
+                                    <EditModeProvider>
+                                      <ThemeProvider theme={data.theme}>
+                                        <ListScrollHistoryProvider>
+                                          <SpotlightProvider>
+                                            <!--
+                                          All navbars are added in the layout to make sure they can
+                                          persist during navigation. The state is set on a page level.
+                                        -->
+                                            <RenderFor
+                                              audience="all"
+                                              device={["mobile", "tablet-sm"]}
+                                            >
+                                              <TopNavbar />
+                                            </RenderFor>
 
-                                          <RenderFor
-                                            audience="all"
-                                            device={["desktop", "tablet-lg"]}
-                                          >
-                                            <SideNavbar />
-                                          </RenderFor>
-
-                                          {@render children()}
-
-                                          <RenderFor
-                                            audience="all"
-                                            device={["mobile", "tablet-sm"]}
-                                          >
-                                            <MobileNavbar />
-                                          </RenderFor>
-
-                                          <RenderFor audience="authenticated">
-                                            <NavbarToastContent />
-                                          </RenderFor>
-
-                                          <RenderFor audience="authenticated">
-                                            <OfflineSync />
-                                          </RenderFor>
-
-                                          <LoginErrorSnackbar />
-                                          <EmailUnsubscribeSnackbar />
-                                          {#if isDev}
                                             <RenderFor
                                               audience="all"
                                               device={["desktop", "tablet-lg"]}
                                             >
-                                              <DevtoolsProvider />
+                                              <SideNavbar />
                                             </RenderFor>
+
+                                            {@render children()}
 
                                             <RenderFor
                                               audience="all"
                                               device={["mobile", "tablet-sm"]}
                                             >
-                                              <QueryDevtools
-                                                client={data.queryClient}
-                                                buttonPosition="bottom-right"
-                                              />
+                                              <MobileNavbar />
                                             </RenderFor>
-                                          {/if}
-                                        </SpotlightProvider>
-                                      </ListScrollHistoryProvider>
-                                    </ThemeProvider>
-                                  </EditModeProvider>
-                                </ConfirmationProvider>
-                              </ToastProvider>
-                            </CoverProvider>
-                          </FilterProvider>
-                        </SearchProvider>
-                      </LocaleProvider>
-                    </NavigationHistoryProvider>
-                  </NavigationProvider>
 
-                  <!-- Keyed on the pathname, not `route.id`: two pages sharing
-                       a template are still distinct page views. -->
-                  {#key page.url.pathname}
-                    <PageView />
-                  {/key}
-                </RedirectProvider>
-              </AnalyticsProvider>
-            </PlayerProvider>
-          </FeatureFlagProvider>
-        </AuthProvider>
-      </BotProvider>
+                                            <RenderFor audience="authenticated">
+                                              <NavbarToastContent />
+                                            </RenderFor>
+
+                                            <RenderFor audience="authenticated">
+                                              <OfflineSync />
+                                            </RenderFor>
+
+                                            <LoginErrorSnackbar />
+                                            <EmailUnsubscribeSnackbar />
+                                            {#if isDev}
+                                              <RenderFor
+                                                audience="all"
+                                                device={["desktop", "tablet-lg"]}
+                                              >
+                                                <DevtoolsProvider />
+                                              </RenderFor>
+
+                                              <RenderFor
+                                                audience="all"
+                                                device={["mobile", "tablet-sm"]}
+                                              >
+                                                <QueryDevtools
+                                                  client={data.queryClient}
+                                                  buttonPosition="bottom-right"
+                                                />
+                                              </RenderFor>
+                                            {/if}
+                                          </SpotlightProvider>
+                                        </ListScrollHistoryProvider>
+                                      </ThemeProvider>
+                                    </EditModeProvider>
+                                  </ConfirmationProvider>
+                                </ToastProvider>
+                              </CoverProvider>
+                            </FilterProvider>
+                          </SearchProvider>
+                        </LocaleProvider>
+                      </NavigationHistoryProvider>
+                    </NavigationProvider>
+
+                    <!-- Keyed on the pathname, not `route.id`: two pages sharing
+                         a template are still distinct page views. -->
+                    {#key page.url.pathname}
+                      <PageView />
+                    {/key}
+                  </RedirectProvider>
+                </AnalyticsProvider>
+              </PlayerProvider>
+            </FeatureFlagProvider>
+          </AuthProvider>
+        </BotProvider>
+      </GlobalParameterEscaper>
     </GlobalParameterProvider>
   </QueryClientProvider>
 </ErrorProvider>
