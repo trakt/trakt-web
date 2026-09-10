@@ -1,15 +1,15 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { dropMovieRequest } from '$lib/requests/queries/users/dropMovieRequest.ts';
 import { dropShowRequest } from '$lib/requests/queries/users/dropShowRequest.ts';
 import { hideShowCalendarRequest } from '$lib/requests/queries/users/hideShowCalendarRequest.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
-import { BehaviorSubject } from 'rxjs';
 import { useDropNotePrompt } from './_internal/useDropNotePrompt.ts';
 
 type DropProps = {
@@ -43,12 +43,18 @@ export function useDrop(
   props: DropStoreProps,
 ) {
   const { title, context = 'drop', ...target } = props;
-  const isDropping = new BehaviorSubject(false);
   const { user } = useUser();
-  const { invalidate } = useInvalidator();
   const dropNote = useDropNotePrompt();
 
   const { track } = useTrack(AnalyticsEvent.Drop);
+
+  const dropping = useMutation(defineMutation({
+    key: 'media:drop',
+    request: async () => {
+      await requestDrop(target);
+    },
+    invalidations: [InvalidateAction.Drop(target.type)],
+  }));
 
   const drop = async () => {
     const current = await resolve(user);
@@ -57,22 +63,17 @@ export function useDrop(
       return;
     }
 
-    isDropping.next(true);
     track({ type: target.type });
 
-    await requestDrop(target);
+    await dropping.mutate();
 
     if (context === 'drop') {
       dropNote?.show({ title, type: target.type, id: target.id });
     }
-
-    await invalidate(InvalidateAction.Drop(target.type));
-
-    isDropping.next(false);
   };
 
   return {
-    isDropping,
+    isDropping: dropping.isPending,
     drop,
   };
 }

@@ -1,11 +1,11 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { hideRecommendedMovieRequest } from '$lib/requests/queries/recommendations/hideRecommendedMovieRequest.ts';
 import { hideRecommendedShowRequest } from '$lib/requests/queries/recommendations/hideRecommendedShowRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject } from 'rxjs';
 
 export type HideRecommendationParams = {
   slug: string;
@@ -22,25 +22,25 @@ function typeToRequest(type: MediaType) {
 }
 
 export function useHideRecommendation() {
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.HideRecommendation);
 
-  const isHiding = new BehaviorSubject(false);
+  const hiding = useMutation(defineMutation({
+    key: 'recommendation:hide',
+    request: ({ slug, type }: HideRecommendationParams) =>
+      typeToRequest(type)({ slug }),
+    invalidations: ({ variables }) => [
+      InvalidateAction.HideRecommended(variables.type),
+    ],
+  }));
 
-  const hide = async ({ slug, type }: HideRecommendationParams) => {
-    track({ type });
-    isHiding.next(true);
+  const hide = async (params: HideRecommendationParams) => {
+    track({ type: params.type });
 
-    const request = typeToRequest(type);
-
-    await request({ slug });
-    await invalidate(InvalidateAction.HideRecommended(type));
-
-    isHiding.next(false);
+    await hiding.mutate(params);
   };
 
   return {
-    isHiding,
+    isHiding: hiding.isPending,
     hide,
   };
 }
