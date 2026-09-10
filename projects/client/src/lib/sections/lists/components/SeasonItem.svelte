@@ -13,10 +13,15 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { mediaGlanceNavigation } from "$lib/sections/summary/components/glance/mediaGlanceNavigation.ts";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import type { Snippet } from "svelte";
+  import MediaHoverCard from "./_internal/MediaHoverCard.svelte";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { SeasonCardProps } from "./models/SeasonCardProps";
 
@@ -44,6 +49,23 @@
 
   const isEmphasized = $derived(isCurrentSeason && !season.title);
 
+  const isLargeScreenCards = useLargeScreenCards();
+  const resolvedStyle = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards),
+  );
+
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
+  const hasHoverPanel = $derived(
+    resolvedStyle === "cover" && $isMouse && style === "summary",
+  );
+
+  const { buildSeasonGlanceLink } = mediaGlanceNavigation();
+  const href = $derived(
+    $isLargeScreenCards && style === "summary"
+      ? buildSeasonGlanceLink({ slug: media.slug, season: season.number }).href
+      : urlBuilder(),
+  );
+
   const scrollToItem = (element: HTMLElement, active: boolean) => {
     if (variant === "list-item") return;
     return scrollActiveItemIntoView(element, active);
@@ -64,68 +86,80 @@
   data-variant={variant}
   use:scrollToItem={isCurrentSeason}
 >
-  {#if style === "cover"}
+  {#if resolvedStyle === "cover"}
     {#snippet tag()}
       <TagBar>
         <SeasonLabelTag seasonNumber={season.number} />
       </TagBar>
     {/snippet}
 
-    <PortraitCard>
-      {#if popupActions}
-        <CardActionBar>
-          {#snippet actions()}
-            <PopupMenu
-              label={m.button_label_popup_menu({
-                title: seasonLabel(season.number),
-              })}
-              title={seasonLabel(season.number)}
-            >
-              {#snippet items()}
-                {@render popupActions()}
-              {/snippet}
-            </PopupMenu>
-          {/snippet}
-        </CardActionBar>
-      {/if}
-
-      <Link
-        focusable={false}
-        href={urlBuilder()}
-        onclick={() => source && track({ source, type: "season" })}
-        noscroll
-      >
-        <CardCover
-          title={seasonLabel(season.number)}
-          src={season.poster?.url.medium ?? media.poster.url.medium}
-          alt={seasonLabel(season.number)}
-        />
-
-        <IndicatorTags>
-          {@render indicatorTags()}
-        </IndicatorTags>
-      </Link>
-      <CardFooter tag={variant === "list-item" ? tag : undefined}>
-        {#if variant === "default"}
-          <p
-            use:lineClamp={{ lines: 2 }}
-            class="trakt-season-title"
-            class:trakt-card-title={isEmphasized}
-            class:trakt-card-subtitle={!isEmphasized}
-          >
-            {seasonLabel(season.number)}
-          </p>
-          {#if season.title}
-            <p class="trakt-season-subtitle trakt-card-subtitle ellipsis">
-              {season.title}
-            </p>
-          {/if}
+    {#snippet seasonCard()}
+      <PortraitCard>
+        {#if popupActions}
+          <CardActionBar>
+            {#snippet actions()}
+              <PopupMenu
+                label={m.button_label_popup_menu({
+                  title: seasonLabel(season.number),
+                })}
+                title={seasonLabel(season.number)}
+              >
+                {#snippet items()}
+                  {@render popupActions()}
+                {/snippet}
+              </PopupMenu>
+            {/snippet}
+          </CardActionBar>
         {/if}
-      </CardFooter>
-    </PortraitCard>
+
+        <Link
+          focusable={false}
+          {href}
+          onclick={() => source && track({ source, type: "season" })}
+          noscroll
+        >
+          <CardCover
+            title={seasonLabel(season.number)}
+            src={season.poster?.url.medium ?? media.poster.url.medium}
+            alt={seasonLabel(season.number)}
+          />
+
+          <IndicatorTags>
+            {@render indicatorTags()}
+          </IndicatorTags>
+        </Link>
+        <CardFooter tag={variant === "list-item" ? tag : undefined}>
+          {#if variant === "default"}
+            <p
+              use:lineClamp={{ lines: 2 }}
+              class="trakt-season-title"
+              class:trakt-card-title={isEmphasized}
+              class:trakt-card-subtitle={!isEmphasized}
+            >
+              {seasonLabel(season.number)}
+            </p>
+            {#if season.title}
+              <p class="trakt-season-subtitle trakt-card-subtitle ellipsis">
+                {season.title}
+              </p>
+            {/if}
+          {/if}
+        </CardFooter>
+      </PortraitCard>
+    {/snippet}
+
+    {#if hasHoverPanel}
+      <MediaHoverCard
+        {media}
+        subtitle={seasonLabel(season.number)}
+        children={seasonCard}
+      />
+    {:else}
+      {@render seasonCard()}
+    {/if}
   {/if}
 
-  {#if style === "summary"}
+  {#if resolvedStyle === "summary"}
     <MediaSummaryCard
       type="season"
       {season}

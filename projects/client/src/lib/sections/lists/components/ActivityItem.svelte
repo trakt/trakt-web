@@ -12,6 +12,7 @@
     source,
     action,
     activityType,
+    style,
   }: ActivityItemProps & {
     action?: Snippet;
   } = $props();
@@ -28,6 +29,7 @@
     {source}
     {action}
     {activityType}
+    {style}
   />
 {/if}
 
@@ -42,5 +44,6 @@
     {source}
     {action}
     {activityType}
+    {style}
   />
 {/if}

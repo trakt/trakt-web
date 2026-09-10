@@ -4,6 +4,7 @@
   import Popover from "$lib/components/popover/Popover.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import RemoveFromHistoryAction from "$lib/sections/media-actions/remove-from-history/RemoveFromHistoryAction.svelte";
@@ -13,6 +14,7 @@
   import { NOOP_FN } from "$lib/utils/constants";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import ActivityItem from "../components/ActivityItem.svelte";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
   import type { HistoryEntry } from "../stores/models/HistoryEntry";
 
@@ -27,6 +29,11 @@
     style = "cover",
     isActionable = false,
   }: RecentlyWatchedItemProps = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const resolvedStyle = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards),
+  );
 
   const { ratings } = useUser();
 
@@ -112,9 +119,10 @@
   {/if}
 {/snippet}
 
-{#if style === "cover"}
+{#if resolvedStyle === "cover"}
   <ActivityItem
     activityAt={activity.watchedAt}
+    {style}
     {activity}
     popupActions={isActionable ? popupActions : undefined}
     action={isActionable ? action : undefined}
@@ -123,7 +131,7 @@
   />
 {/if}
 
-{#if style === "summary"}
+{#if resolvedStyle === "summary"}
   <ActivitySummaryCard
     activityAt={activity.watchedAt}
     {activity}

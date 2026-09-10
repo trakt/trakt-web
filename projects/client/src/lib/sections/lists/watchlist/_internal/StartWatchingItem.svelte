@@ -10,6 +10,9 @@
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { Snippet } from "svelte";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import MediaItem from "../../components/MediaItem.svelte";
   import UpNextSwipe from "../../progress/_internal/UpNextSwipe.svelte";
   import { mapToMarkAsWatchedTarget } from "./mapToMarkAsWatchedTarget";
@@ -24,6 +27,11 @@
     style: "summary" | "cover";
     sortTag?: Snippet;
   } = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const isSummary = $derived(
+    resolveItemCardStyle(style, $isLargeScreenCards) === "summary",
+  );
 
   const markAsWatchedTarget = $derived(mapToMarkAsWatchedTarget(entry));
   const mediaEntry = $derived.by(() => {
@@ -44,6 +52,15 @@
       media: entry,
     };
   });
+
+  const hoverSubtitle = $derived(
+    mediaEntry.episode
+      ? episodeNumberLabel({
+        seasonNumber: mediaEntry.episode.season,
+        episodeNumber: mediaEntry.episode.number,
+      })
+      : undefined,
+  );
 
   const commonActionProps = $derived({
     style: "dropdown-item" as const,
@@ -94,7 +111,9 @@
     {popupActions}
     {action}
     {sortTag}
-    tag={style === "summary" ? summaryTag : undefined}
+    tag={isSummary ? summaryTag : undefined}
+    hoverTag={summaryTag}
+    {hoverSubtitle}
     variant="start"
     source="start-watching"
   />

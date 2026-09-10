@@ -1,6 +1,8 @@
 <script lang="ts" generics="T extends { key: string }, M">
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { drilldownGrid } from "$lib/sections/lists/utils/drilldownGrid.ts";
   import type { DrilledMediaListProps } from "./MediaListProps";
 
   const {
@@ -9,11 +11,14 @@
     empty: externalEmpty,
     useList,
     actions,
-    cardOrientation = "portrait",
+    variant = "portrait",
     id,
     listActions,
     ...props
   }: DrilledMediaListProps<T, M> = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const grid = $derived(drilldownGrid($isLargeScreenCards, variant));
 </script>
 
 <PaginatedList {type} {filter} {useList}>
@@ -24,8 +29,8 @@
       {actions}
       {items}
       {listActions}
-      sizing="auto"
-      --width-item="var(--width-summary-card)"
+      sizing={grid.sizing}
+      --width-item={grid.itemWidth}
     >
       {#snippet empty()}
         {#if !isLoading}

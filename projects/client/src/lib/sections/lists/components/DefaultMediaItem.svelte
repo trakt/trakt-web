@@ -8,6 +8,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
@@ -17,6 +18,7 @@
   import type { Snippet } from "svelte";
   import type { MediaCardProps } from "../components/models/MediaCardProps";
   import DefaultMediaPopupActions from "./DefaultMediaPopupActions.svelte";
+  import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
 
@@ -43,7 +45,10 @@
 
   const isDeemphasized = $derived(canDeemphasize && $isWatched);
 
-  const isSummary = $derived(style === "summary");
+  const isLargeScreenCards = useLargeScreenCards();
+  const isSummary = $derived(
+    resolveItemCardStyle(style ?? "cover", $isLargeScreenCards) === "summary",
+  );
 
 </script>
 
@@ -53,7 +58,7 @@
   {/if}
 {/snippet}
 
-{#snippet defaultTag()}
+{#snippet defaultTag(hasCertification: boolean)}
   {#if "episode" in media}
     <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} year={media.year} />
     <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
@@ -64,7 +69,7 @@
     {/if}
   {/if}
 
-  {#if isSummary && media.certification}
+  {#if hasCertification && media.certification}
     <CertificationTag certification={media.certification} />
   {/if}
 {/snippet}
@@ -92,12 +97,19 @@
         </RenderFor>
       {/if}
       {@render externalTag?.()}
-      {@render defaultTag()}
+      {@render defaultTag(true)}
     {:else if externalTag}
       {@render externalTag()}
     {:else}
-      {@render defaultTag()}
+      {@render defaultTag(false)}
     {/if}
+  </TagBar>
+{/snippet}
+
+{#snippet hoverTag()}
+  <TagBar>
+    {@render externalTag?.()}
+    {@render defaultTag(true)}
   </TagBar>
 {/snippet}
 
@@ -123,6 +135,7 @@
       {media}
       {style}
       tag={rest.variant !== "next" ? tag : undefined}
+      {hoverTag}
       coverTag={externalCoverTag}
       contextualTag={mode === "mixed" ? contextualTag : undefined}
       indicators={indicatorTags}
