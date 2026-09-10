@@ -24,6 +24,7 @@
   const { mode, current: currentDiscoverMode } = useDiscover();
 
   const listName = $derived($list?.name ?? "");
+  const isMissing = $derived(!$isLoading && $list == null);
 
   const { current, options, urlBuilder } = $derived(
     useListSorting({ list: $list, type: "user-list" }),
@@ -51,6 +52,7 @@
   image={DEFAULT_SHARE_COVER}
   title={listName}
   hasDynamicContent={true}
+  isIndexable={!isMissing}
 >
   <ResponsiveNavbarStateSetter contentToggle="discover"
     hasFilters
