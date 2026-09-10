@@ -26,7 +26,7 @@ async function importPersister() {
   return createIdbPersister();
 }
 
-const DATA_UPDATED_AT = new Date('2026-09-09T00:00:00.000Z').getTime();
+const DATA_UPDATED_AT = Date.now();
 
 const persistedQuery = {
   buster: 'v3',
