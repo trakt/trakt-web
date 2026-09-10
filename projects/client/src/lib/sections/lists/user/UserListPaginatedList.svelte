@@ -4,6 +4,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import FeaturedPeopleList from "./FeaturedPeopleList.svelte";
   import SortValue from "./_internal/SortValue.svelte";
   import UserListItem from "./_internal/UserListItem.svelte";
   import type { ListSortProps } from "./models/ListSortProps";
@@ -67,6 +68,8 @@
     />
   {/snippet}
 </DrilledMediaList>
+
+<FeaturedPeopleList listId={list.id} />
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

@@ -14,7 +14,7 @@
 
   type CreditMemberItemProps = {
     member: CreditMember;
-    type: ExtendedMediaType;
+    type?: ExtendedMediaType;
   };
 
   const { member, type }: CreditMemberItemProps = $props();
