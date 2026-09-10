@@ -29,6 +29,7 @@ type SmartListItemsParams =
     type?: string;
     sortBy?: string;
     sortHow?: 'asc' | 'desc';
+    updatedAt?: Date;
   }
   & PaginationParams
   & ApiParams
@@ -49,7 +50,7 @@ function mapToSmartListItem(item: SmartListItemResponse) {
 }
 
 const smartListItemsRequest = (
-  { fetch, slug, limit, page, filter, type, sortBy, sortHow }:
+  { fetch, slug, limit, page, filter, type, sortBy, sortHow, updatedAt }:
     SmartListItemsParams,
 ) =>
   api({ fetch })
@@ -65,6 +66,7 @@ const smartListItemsRequest = (
         extended: 'full,images,colors',
         page,
         limit,
+        updated_at: updatedAt?.toISOString(),
         ...filter,
       },
     });
@@ -81,6 +83,7 @@ export const smartListItemsQuery = defineInfiniteQuery({
     params.type,
     params.sortBy,
     params.sortHow,
+    params.updatedAt?.toISOString(),
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: smartListItemsRequest,

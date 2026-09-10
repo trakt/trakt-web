@@ -1,5 +1,6 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { createRevalidatingFetch } from '$lib/requests/_internal/createRevalidatingFetch.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SmartListDefinitionResponse } from '@trakt/api';
@@ -83,7 +84,7 @@ type SmartListParams =
 const smartListRequest = (
   { fetch, userId }: SmartListParams,
 ) =>
-  api({ fetch })
+  api({ fetch: createRevalidatingFetch(fetch ?? globalThis.fetch) })
     .users
     .smartLists
     .personal({
@@ -96,6 +97,7 @@ export const smartListQuery = defineInfiniteQuery({
   key: (params: SmartListParams) => `smartLists-${params.userId ?? 'me'}`,
   invalidations: [
     InvalidateAction.SmartList.Created,
+    InvalidateAction.SmartList.Updated,
     InvalidateAction.SmartList.Deleted,
   ],
   dependencies: (

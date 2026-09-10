@@ -7423,6 +7423,10 @@
       "default": "Create Smart List",
       "description": "Header for the section that allows users to create a smart list."
     },
+    "header_edit_smart_list": {
+      "default": "Edit Smart List",
+      "description": "Title of the drawer used to edit an existing smart list."
+    },
     "header_target": {
       "default": "Target",
       "description": "Header for the section that allows users to select a target for their smart lists, such as anticipated movies, popular shows, etc."

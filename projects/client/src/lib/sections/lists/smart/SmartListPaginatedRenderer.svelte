@@ -17,7 +17,11 @@
 
   const useList = (params: { limit: number }) =>
     usePaginatedListQuery(
-      smartListItemsQuery({ slug: list.slug, limit: params.limit }),
+      smartListItemsQuery({
+        slug: list.slug,
+        limit: params.limit,
+        updatedAt: list.updatedAt,
+      }),
     );
 </script>
 
