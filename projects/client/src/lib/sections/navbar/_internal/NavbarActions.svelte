@@ -103,7 +103,12 @@
     padding-inline-start: calc(
       var(--layout-distance-side) + var(--layout-sidebar-distance)
     );
-    padding-inline-end: var(--layout-distance-side);
+    /* bits-ui's scroll lock drops the page scrollbar, widening the viewport
+       this fixed bar is sized against. It publishes the reclaimed width as
+       --scrollbar-width; absorb it so the bar's contents stay put. */
+    padding-inline-end: calc(
+      var(--layout-distance-side) + var(--scrollbar-width, 0px)
+    );
 
     &::before {
       content: "";

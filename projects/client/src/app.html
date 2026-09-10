@@ -110,6 +110,11 @@
         background-color: var(--color-background);
         color: var(--color-foreground);
         font-family: "Roboto", "Tajawal", Arial, sans-serif;
+
+        /* bits-ui's scroll lock reserves the scrollbar gutter as padding-right
+           on body. Under content-box that widens the body box instead of
+           insetting content, so every dialog shifts the page. */
+        box-sizing: border-box;
       }
 
       code,
