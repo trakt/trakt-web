@@ -11,6 +11,8 @@
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import CreateSmartListAction from "$lib/sections/smart-lists/CreateSmartListAction.svelte";
   import type { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { useFilterSidebar } from "$lib/stores/useFilterSidebar.ts";
   import FilterTabs from "./FilterTabs.svelte";
 
   const {
@@ -21,9 +23,18 @@
     smartListTarget?: ListTarget | Nil;
   } = $props();
 
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+
   const { activeMode, setActiveMode, saveFilters, resetFilters } =
     useStoredFilters();
   const { hasActiveFilter } = useFilter();
+  const { setDocked } = useFilterSidebar();
+
+  $effect(() => {
+    setDocked(!$isMobile);
+
+    return () => setDocked(false);
+  });
 </script>
 
 {#snippet badge()}
@@ -73,6 +84,8 @@
   title={m.header_filters()}
   trapSelector=".trakt-filter"
   size="auto"
+  dismissal={$isMobile ? "auto" : "escape-only"}
+  close={$isMobile ? "default" : "anchored"}
 >
   <FilterTabs activeMode={$activeMode} {setActiveMode} />
 

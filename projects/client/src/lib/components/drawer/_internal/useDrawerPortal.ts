@@ -20,20 +20,18 @@ export function useDrawerPortal(
     const ownRouteId = page.route.id;
 
     onMount(() => {
-      if (!hasAutoClose) {
-        return;
+      const underlay = hasAutoClose ? createUnderlay({ elevated }) : null;
+
+      if (underlay) {
+        document.body.appendChild(underlay);
+        underlay.addEventListener('click', onClose);
       }
 
-      const newUnderlay = createUnderlay({ elevated });
-
-      document.body.appendChild(newUnderlay);
       document.body.appendChild(element);
 
-      newUnderlay.addEventListener('click', onClose);
-
       return () => {
-        newUnderlay.removeEventListener('click', onClose);
-        newUnderlay.remove();
+        underlay?.removeEventListener('click', onClose);
+        underlay?.remove();
         element.remove();
       };
     });
