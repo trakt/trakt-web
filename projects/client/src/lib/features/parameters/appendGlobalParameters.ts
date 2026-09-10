@@ -2,10 +2,8 @@ import {
   filterScopeStore,
   type FilterScopeValue,
 } from '$lib/features/filters/filterScopeStore.ts';
-import {
-  LOCAL_PARAMS,
-  WHITE_LISTED_PARAMS,
-} from '$lib/features/parameters/_internal/constants.ts';
+import { LOCAL_PARAMS } from '$lib/features/parameters/localParams.ts';
+import { WHITE_LISTED_PARAMS } from '$lib/features/parameters/whiteListedParams.ts';
 import { FILTER_KEYS } from '$lib/features/filters/filterKeys.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
 import { buildParamString } from '$lib/utils/url/buildParamString.ts';

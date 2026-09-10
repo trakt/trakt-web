@@ -5,5 +5,3 @@ export const WHITE_LISTED_PARAMS: readonly string[] = [
   'mode',
   ...FILTER_KEYS,
 ];
-
-export const LOCAL_PARAMS: readonly string[] = ['sort_by', 'sort_how'];
