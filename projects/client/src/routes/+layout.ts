@@ -1,6 +1,7 @@
 import { browser } from '$app/environment';
 import { setToken } from '$lib/features/auth/token/index.ts';
 import { createIdbPersister } from '$lib/features/query/_internal/createIdbPersister.ts';
+import { createMutationCache } from '$lib/features/query/createMutationCache.ts';
 import { retryDelay } from '$lib/utils/retry/retryDelay.ts';
 import type { LayoutLoad } from '$types/$types.d.ts';
 import { QueryClient } from '@tanstack/query-core';
@@ -15,7 +16,13 @@ const persister = canPersist ? createIdbPersister() : undefined;
 
 export const load: LayoutLoad = ({ data }) => {
   const queryClient = new QueryClient({
+    mutationCache: createMutationCache(),
     defaultOptions: {
+      mutations: {
+        // query-core pauses an offline mutation instead of rejecting it.
+        // Queueing is the offline feature's job, so writes stay eager.
+        networkMode: 'always',
+      },
       queries: {
         enabled: browser,
         retry: 3,

@@ -217,7 +217,69 @@ validate with Zod if response body matters.
 
 ---
 
-## Pattern 5 - Offline-Aware Tracking Mutation
+## Pattern 5 - Mutation Hook (`defineMutation` + `useMutation`)
+
+Hooks never hand-roll a pending flag or call `invalidate` after a write. Wrap
+the `*Request` function with `defineMutation` and drive it with `useMutation`:
+query-core owns the pending state, the error state and the invalidation.
+
+```ts
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
+
+export function useLikeList(list: MediaListSummary) {
+  const like = useMutation(defineMutation({
+    key: 'list:like',
+    request: likeListRequest,
+    invalidations: [InvalidateAction.List.Like],
+  }));
+
+  const likeList = async () => {
+    track({ action: 'like' });
+    await like.mutate({ listId: list.id });
+  };
+
+  return { likeList, isUpdating: like.isPending };
+}
+```
+
+`useMutation` returns:
+
+| Field       | Shape                                     |
+| ----------- | ----------------------------------------- |
+| `mutate`    | `(variables) => Promise<TData>`           |
+| `isPending` | `Observable<boolean>`                     |
+| `result`    | `Observable<MutationObserverResult<...>>` |
+| `reset`     | `() => void`                              |
+
+### Key rules
+
+- `key` is a stable `{domain}:{action}` string (`'list:like'`).
+- `request` is the existing `*Request` function - do not create a `*Mutation.ts`
+  file for it. Variables are the request params.
+- `invalidations` replaces every `await invalidate(...)` in the hook. They run
+  in the shared `MutationCache` (`createMutationCache.ts`), and query-core
+  awaits them before the mutation settles, so `isPending` still covers the
+  invalidation window.
+- `mutate` rejects when the request throws - callers keep whatever error
+  handling they had around `await someRequest(...)`.
+- Expose the pending state under whatever name the components already use
+  (`isUpdating`, `isSaving`); combine several with
+  `combineLatest([a.isPending, b.isPending])`.
+- Never pass per-call callbacks to `mutate`: query-core only runs those while
+  the observer has listeners. Side effects go in `invalidations`, in the
+  mutation options, or in the caller after `await`.
+- The mutation cache is shared with the test bed (`TestProvider.svelte`), so a
+  hook spec exercises the real invalidation path. Assert invalidations with
+  `captureInvalidations` from `$test/beds/query/` - module mocks do not reach
+  modules loaded through the Svelte provider tree.
+- `useInvalidator` survives only for invalidations that are not tied to one
+  request, such as the auth teardown in `useAuth`. A write hook should not
+  import it.
+
+---
+
+## Pattern 6 - Offline-Aware Tracking Mutation
 
 User tracking mutations (history, watchlist, ratings, favorites) must survive a
 dead connection: they queue in IndexedDB and replay when connectivity returns.
@@ -402,5 +464,7 @@ Before submitting a new query or request, verify:
 - [ ] `invalidations` lists relevant `InvalidateAction.*` tokens
 - [ ] Mapper is pure function - no side effects
 - [ ] `ttl` is appropriate for data's freshness requirements
-- [ ] Tracking mutation: hook routes through `executeOrEnqueue` (Pattern 5),
+- [ ] Write hook: `defineMutation` + `useMutation` (Pattern 5), no hand-rolled
+      pending flag and no `await invalidate(...)`
+- [ ] Tracking mutation: hook routes through `executeOrEnqueue` (Pattern 6),
       read store overlays the pending queue via `findPendingOverride`
