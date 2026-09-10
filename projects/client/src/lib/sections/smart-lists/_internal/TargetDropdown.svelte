@@ -21,6 +21,8 @@
         return m.list_title_most_anticipated();
       case ListTarget.Popular:
         return m.list_title_most_popular();
+      case ListTarget.Recommendations:
+        return m.list_title_recommended();
     }
   };
 

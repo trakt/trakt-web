@@ -4,6 +4,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import AnticipatedPaginatedList from "$lib/sections/lists/anticipated/AnticipatedPaginatedList.svelte";
   import PopularPaginatedList from "$lib/sections/lists/popular/PopularPaginatedList.svelte";
+  import RecommendedPaginatedList from "$lib/sections/lists/recommended/RecommendedPaginatedList.svelte";
   import TrendingPaginatedList from "$lib/sections/lists/trending/TrendingPaginatedList.svelte";
   import type { ListTarget } from "../models/ListTarget";
 
@@ -26,9 +27,7 @@
     {type}
     {actions}
   />
-{/if}
-
-{#if target === "anticipated"}
+{:else if target === "anticipated"}
   <AnticipatedPaginatedList
     title={type === "movie"
       ? m.list_title_anticipated_movies()
@@ -36,13 +35,19 @@
     {type}
     {actions}
   />
-{/if}
-
-{#if target === "popular"}
+{:else if target === "popular"}
   <PopularPaginatedList
     title={type === "movie"
       ? m.list_title_popular_movies()
       : m.list_title_popular_shows()}
+    {type}
+    {actions}
+  />
+{:else if target === "recommendations"}
+  <RecommendedPaginatedList
+    title={type === "movie"
+      ? m.list_title_recommended_movies()
+      : m.list_title_recommended_shows()}
     {type}
     {actions}
   />
