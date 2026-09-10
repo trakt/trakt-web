@@ -25,6 +25,8 @@
         return m.list_title_recommended();
       case ListTarget.Watchlist:
         return m.list_title_watchlist();
+      case ListTarget.Library:
+        return m.list_title_library();
     }
   };
 

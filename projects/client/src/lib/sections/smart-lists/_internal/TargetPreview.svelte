@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import AnticipatedPaginatedList from "$lib/sections/lists/anticipated/AnticipatedPaginatedList.svelte";
+  import LibraryListPaginated from "$lib/sections/lists/library/LibraryListPaginated.svelte";
   import PopularPaginatedList from "$lib/sections/lists/popular/PopularPaginatedList.svelte";
   import RecommendedPaginatedList from "$lib/sections/lists/recommended/RecommendedPaginatedList.svelte";
   import TrendingPaginatedList from "$lib/sections/lists/trending/TrendingPaginatedList.svelte";
@@ -52,9 +53,7 @@
     {type}
     {actions}
   />
-{/if}
-
-{#if target === "watchlist"}
+{:else if target === "watchlist"}
   <WatchlistPaginatedList
     title={type === "movie"
       ? m.list_title_watchlist_movies()
@@ -62,6 +61,13 @@
     {type}
     sortBy={undefined}
     sortHow="desc"
+    {actions}
+  />
+{:else if target === "library"}
+  <LibraryListPaginated
+    library="plex"
+    title={m.list_title_library()}
+    {type}
     {actions}
   />
 {/if}

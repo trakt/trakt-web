@@ -4,4 +4,5 @@ export enum ListTarget {
   Popular = 'popular',
   Recommendations = 'recommendations',
   Watchlist = 'watchlist',
+  Library = 'library',
 }

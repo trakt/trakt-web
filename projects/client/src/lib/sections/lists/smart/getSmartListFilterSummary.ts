@@ -18,6 +18,8 @@ function sourceLabel(source: SmartList['source']): string {
       return m.button_label_discover();
     case 'watchlist':
       return m.list_title_watchlist();
+    case 'library':
+      return m.list_title_library();
   }
 }
 
