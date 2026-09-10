@@ -12,6 +12,7 @@ const SmartListSourceSchema = z.enum([
   'anticipated',
   'recommendations',
   'discover',
+  'watchlist',
 ]);
 export type SmartListSource = z.infer<typeof SmartListSourceSchema>;
 

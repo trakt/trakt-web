@@ -6,6 +6,7 @@
   import PopularPaginatedList from "$lib/sections/lists/popular/PopularPaginatedList.svelte";
   import RecommendedPaginatedList from "$lib/sections/lists/recommended/RecommendedPaginatedList.svelte";
   import TrendingPaginatedList from "$lib/sections/lists/trending/TrendingPaginatedList.svelte";
+  import WatchlistPaginatedList from "$lib/sections/lists/watchlist/WatchlistPaginatedList.svelte";
   import type { ListTarget } from "../models/ListTarget";
 
   const { target, type }: { target: ListTarget; type: MediaType } = $props();
@@ -49,6 +50,18 @@
       ? m.list_title_recommended_movies()
       : m.list_title_recommended_shows()}
     {type}
+    {actions}
+  />
+{/if}
+
+{#if target === "watchlist"}
+  <WatchlistPaginatedList
+    title={type === "movie"
+      ? m.list_title_watchlist_movies()
+      : m.list_title_watchlist_shows()}
+    {type}
+    sortBy={undefined}
+    sortHow="desc"
     {actions}
   />
 {/if}

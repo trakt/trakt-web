@@ -23,6 +23,8 @@
         return m.list_title_most_popular();
       case ListTarget.Recommendations:
         return m.list_title_recommended();
+      case ListTarget.Watchlist:
+        return m.list_title_watchlist();
     }
   };
 

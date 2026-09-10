@@ -16,6 +16,8 @@ function sourceLabel(source: SmartList['source']): string {
       return m.list_title_recommended();
     case 'discover':
       return m.button_label_discover();
+    case 'watchlist':
+      return m.list_title_watchlist();
   }
 }
 
