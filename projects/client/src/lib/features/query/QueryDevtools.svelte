@@ -5,9 +5,9 @@
     DevtoolsButtonPosition,
     DevtoolsErrorType,
     DevtoolsPosition,
-    TanstackQueryDevtools,
   } from "@tanstack/query-devtools";
   import { onMount } from "svelte";
+  import { mountQueryDevtools } from "./mountQueryDevtools.ts";
 
   type QueryDevtoolsProps = {
     client: QueryClient;
@@ -32,34 +32,27 @@
   }: QueryDevtoolsProps = $props();
 
   let ref: HTMLDivElement;
-  let devtools: TanstackQueryDevtools | undefined;
 
   onMount(() => {
     if (!dev || !browser) return;
-    let cancelled = false;
 
-    import("@tanstack/query-devtools").then((m) => {
-      if (cancelled) return;
-      devtools = new m.TanstackQueryDevtools({
-        client,
-        queryFlavor: "Svelte Query",
-        version: "5",
-        onlineManager,
-        buttonPosition,
-        position,
-        initialIsOpen,
-        errorTypes,
-        styleNonce,
-        shadowDOMTarget,
-        hideDisabledQueries,
-      });
-      devtools.mount(ref);
+    return mountQueryDevtools({
+      target: ref,
+      create: (m) =>
+        new m.TanstackQueryDevtools({
+          client,
+          queryFlavor: "Svelte Query",
+          version: "5",
+          onlineManager,
+          buttonPosition,
+          position,
+          initialIsOpen,
+          errorTypes,
+          styleNonce,
+          shadowDOMTarget,
+          hideDisabledQueries,
+        }),
     });
-
-    return () => {
-      cancelled = true;
-      devtools?.unmount();
-    };
   });
 </script>
 
