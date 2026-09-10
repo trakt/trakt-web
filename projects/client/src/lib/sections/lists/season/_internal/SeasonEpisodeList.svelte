@@ -12,7 +12,8 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import type { Snippet } from "svelte";
-  import MoreEpisodesCard from "./MoreEpisodesCard.svelte";
+  import EpisodeRailEdgeBadge from "./EpisodeRailEdgeBadge.svelte";
+  import { getEpisodeWindow } from "./getEpisodeWindow.ts";
   import SeasonEpisodeItem from "./SeasonEpisodeItem.svelte";
   import { useShowWatchedEpisodes } from "./useShowWatchedEpisodes";
 
@@ -57,21 +58,49 @@
 
   const itemCount = useLandscapeListItemCount();
 
-  // Large screens mask the strip instead of scrolling it, so episodes past
-  // the row's slot count are unreachable. The overflow card takes the last
-  // slot and routes to the seasons drawer. Small screens scroll freely.
-  const visibleCount = $derived.by(() => {
-    if (!isLargeScreen) return episodes.length;
-    if (episodes.length <= $itemCount) return episodes.length;
-    return Math.max($itemCount - 1, 1);
-  });
+  /*
+    Large screens mask the strip instead of scrolling it, so the rail shows a
+    window rather than the whole season. It opens on the episode the viewer is
+    up to, and the counts either side ride the first and last cards - see
+    getEpisodeWindow. Small screens scroll freely, so they keep every episode
+    and need no counts.
+  */
+  const anchorIndex = $derived(
+    currentEpisode == null
+      ? 0
+      : episodes.findIndex((episode) => episode.number === currentEpisode),
+  );
 
-  const visibleEpisodes = $derived(episodes.slice(0, visibleCount));
-  const overflowEpisodes = $derived(episodes.slice(visibleCount));
+  const window = $derived(
+    isLargeScreen
+      ? getEpisodeWindow({
+        total: episodes.length,
+        slots: $itemCount,
+        anchorIndex,
+      })
+      : { start: 0, end: episodes.length, before: 0, after: 0 },
+  );
+
+  const visibleEpisodes = $derived(episodes.slice(window.start, window.end));
+
+  /* The rail's own ends, so the badges can find the cards they dock to -
+     SectionList hands its item snippet the episode, not its position. */
+  const firstVisibleNumber = $derived(visibleEpisodes.at(0)?.number);
+  const lastVisibleNumber = $derived(visibleEpisodes.at(-1)?.number);
 </script>
 
-{#snippet moreEpisodes()}
-  <MoreEpisodesCard episodes={overflowEpisodes} link={seasonDrawerLink} />
+<!-- Declared out here on purpose: a snippet written inside a component is
+     one of that component's props, and these belong to the cards. -->
+{#snippet earlierBadge()}
+  <EpisodeRailEdgeBadge
+    side="start"
+    count={window.before}
+    link={seasonDrawerLink}
+  />
+{/snippet}
+
+{#snippet laterBadge()}
+  <EpisodeRailEdgeBadge side="end" count={window.after} link={seasonDrawerLink} />
 {/snippet}
 
 <SectionList
@@ -82,7 +111,6 @@
   items={visibleEpisodes}
   {title}
   {subtitle}
-  trailingItem={overflowEpisodes.length > 0 ? moreEpisodes : undefined}
   --height-list={mediaListHeightResolver("landscape")}
   drilldown={{
     ...seasonDrawerLink,
@@ -91,6 +119,10 @@
   }}
 >
   {#snippet item(episode)}
+    {@const isRailStart = window.before > 0 &&
+      episode.number === firstVisibleNumber}
+    {@const isRailEnd = window.after > 0 &&
+      episode.number === lastVisibleNumber}
     <SeasonEpisodeItem
       {show}
       {episode}
@@ -105,6 +137,7 @@
         episode: episode.number,
       })}
       source="season-episode-list"
+      edge={isRailStart ? earlierBadge : isRailEnd ? laterBadge : undefined}
     />
   {/snippet}
 

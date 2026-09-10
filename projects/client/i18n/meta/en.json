@@ -3687,6 +3687,28 @@
         }
       }
     },
+    "text_episodes_short": {
+      "default": "eps",
+      "description": "Abbreviation for 'episodes', shown under the count on the episode rail's edge badges. Rendered uppercase."
+    },
+    "button_label_earlier_episodes": {
+      "default": "Show {count} earlier episodes",
+      "description": "Accessible label for the badge on the first episode card of the season rail, which opens the seasons drawer.",
+      "variables": {
+        "count": {
+          "description": "How many episodes sit before the ones the rail is showing."
+        }
+      }
+    },
+    "button_label_later_episodes": {
+      "default": "Show {count} more episodes",
+      "description": "Accessible label for the badge on the last episode card of the season rail, which opens the seasons drawer.",
+      "variables": {
+        "count": {
+          "description": "How many episodes sit after the ones the rail is showing."
+        }
+      }
+    },
     "text_more_episodes": {
       "default": "more episodes",
       "description": "Caption under the counter on the overflow card at the end of the season episode strip. Rendered in uppercase by CSS."
