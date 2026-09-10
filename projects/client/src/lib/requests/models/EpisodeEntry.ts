@@ -25,6 +25,7 @@ const BaseEpisodeEntrySchema = z.object({
   certification: z.null().optional(),
   postCredits: PostCreditsSchema.array(),
   rating: z.number().nullish(),
+  votes: z.number().nullish(),
   updatedAt: z.date().nullish(),
 });
 

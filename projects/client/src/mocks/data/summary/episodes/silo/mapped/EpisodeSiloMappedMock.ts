@@ -14,6 +14,7 @@ export const EpisodeSiloMappedMock: EpisodeEntry = {
   'number': 1,
   'runtime': 60,
   'rating': 0.7753,
+  'votes': 4186,
   'updatedAt': new Date('2025-01-20T03:49:10.000Z'),
   'cover': {
     'url':
