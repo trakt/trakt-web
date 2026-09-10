@@ -10,7 +10,6 @@
     showSlug,
     seasons,
     currentSeason,
-    variant = "default",
     urlBuilder,
   }: SeasonDropdownProps = $props();
 
@@ -32,13 +31,11 @@
   };
 
   const seasonText = (season: Season) => {
-    if (variant === "default") return seasonLabel(season);
-
     const episodes = m.tag_text_number_of_episodes({
       count: season.episodes.count,
     });
 
-    return `${seasonLabel(season)} (${episodes})`;
+    return `${seasonLabel(season)} · ${episodes}`;
   };
 
   const options = $derived(

@@ -44,6 +44,10 @@
 
   const isEmphasized = $derived(isCurrentSeason && !season.title);
 
+  const episodeCount = $derived(
+    m.tag_text_number_of_episodes({ count: season.episodes.count }),
+  );
+
   const scrollToItem = (element: HTMLElement, active: boolean) => {
     if (variant === "list-item") return;
     return scrollActiveItemIntoView(element, active);
@@ -120,6 +124,9 @@
               {season.title}
             </p>
           {/if}
+          <p class="trakt-card-subtitle ellipsis">
+            {episodeCount}
+          </p>
         {/if}
       </CardFooter>
     </PortraitCard>

@@ -32,6 +32,7 @@
    */
   --height-card-footer: var(--ni-40);
   --height-card-footer-sm: var(--ni-28);
+  --height-card-footer-lg: var(--ni-56);
 
   --width-portrait-card: var(--min-portrait-card-width);
   @include dynamic-card-width(
@@ -45,6 +46,9 @@
   );
   --height-portrait-card-sm: calc(
     var(--height-portrait-card-cover) + var(--height-card-footer-sm)
+  );
+  --height-portrait-card-lg: calc(
+    var(--height-portrait-card-cover) + var(--height-card-footer-lg)
   );
 
   --width-landscape-card: var(--min-landscape-card-width);
@@ -250,6 +254,9 @@
   );
   --height-poster-list-sm: calc(
     var(--height-portrait-card-sm) + var(--layout-scrollbar-width)
+  );
+  --height-poster-list-lg: calc(
+    var(--height-portrait-card-lg) + var(--layout-scrollbar-width)
   );
   --height-lists-list: calc(
     var(--height-list-card) + var(--layout-scrollbar-width)
