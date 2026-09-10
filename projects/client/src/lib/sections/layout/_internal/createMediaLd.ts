@@ -59,7 +59,6 @@ const SCHEMAS: Record<
       ...toGenres(info?.genres),
       ...toDuration(info?.runtime),
       ...toContentRating(info?.certification),
-      ...toAggregateRating(info),
     }),
   },
   show: {
@@ -67,7 +66,6 @@ const SCHEMAS: Record<
     details: (info) => ({
       ...toDatePublished(info?.year),
       ...toGenres(info?.genres),
-      ...toAggregateRating(info),
     }),
   },
   episode: {
@@ -95,6 +93,7 @@ export function createMediaLd({
     image,
     url,
     ...toDateModified(info?.updatedAt),
+    ...toAggregateRating(info),
     ...schema.details(info),
   });
 }

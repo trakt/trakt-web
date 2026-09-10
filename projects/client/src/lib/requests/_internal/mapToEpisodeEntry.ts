@@ -56,6 +56,7 @@ export function mapToEpisodeEntry(
     year: effectiveReleaseDate.getFullYear(),
     postCredits: mapToPostCredits(episode),
     rating: mapToTraktRating(episode.rating),
-    updatedAt: episode.updated_at ? new Date(episode.updated_at) : undefined,
+    ...(episode.votes != null ? { votes: episode.votes } : {}),
+    ...(episode.updated_at ? { updatedAt: new Date(episode.updated_at) } : {}),
   };
 }

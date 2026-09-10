@@ -4,7 +4,7 @@ export type MediaInfo = {
   year?: number | Nil;
   genres?: ReadonlyArray<string>;
   rating?: number | Nil;
-  votes?: number;
+  votes?: number | Nil;
   certification?: string | Nil;
   updatedAt?: Date | Nil;
 };

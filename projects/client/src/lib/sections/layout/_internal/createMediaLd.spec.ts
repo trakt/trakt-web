@@ -145,6 +145,7 @@ describe('util: createMediaLd', () => {
         info: {
           overview: "Sheriff Becker's plans are thrown off course.",
           rating: 0.7753,
+          votes: 4186,
         },
       }));
 
@@ -155,6 +156,13 @@ describe('util: createMediaLd', () => {
         description: "Sheriff Becker's plans are thrown off course.",
         image: 'https://media.trakt.tv/freedom-day.webp',
         url: 'https://app.trakt.tv/shows/silo/seasons/1/episodes/1',
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '7.8',
+          ratingCount: 4186,
+          bestRating: '10',
+          worstRating: '1',
+        },
       });
     });
   });
