@@ -5,6 +5,8 @@ import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { m } from '$lib/features/i18n/messages.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
@@ -12,10 +14,10 @@ import { removeRatingRequest } from '$lib/requests/sync/removeRatingRequest.ts';
 import { toAddRatingsPayload } from '$lib/requests/sync/toAddRatingsPayload.ts';
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
 import { toRemoveRatingsPayload } from '$lib/requests/sync/toRemoveRatingsPayload.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import type { HistoryAddRequest } from '@trakt/api';
-import { BehaviorSubject, filter } from 'rxjs';
+import { filter } from 'rxjs';
 
 type RemovedMediaType = 'movie' | 'episode';
 
@@ -36,6 +38,8 @@ function toHistoryAddPayload(
   return type === 'movie' ? { movies: entries } : { episodes: entries };
 }
 
+type OrphanedRating = number | undefined;
+
 export type UseRemoveFromHistoryProps =
   & { watchedAt: Date; title?: string; isToastEnabled?: boolean }
   & (
@@ -53,9 +57,7 @@ export function useRemoveFromHistory(props: UseRemoveFromHistoryProps) {
   // Trakt id of the media itself; `id` above is the history entry (play) id.
   const traktId = props.type === 'movie' ? props.movie.id : props.episode.id;
 
-  const isRemoving = new BehaviorSubject(false);
   const { history, ratings } = useUser();
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.RemoveFromHistory);
   const notify = toGatedNotify(useActionToast().notify, isToastEnabled);
 
@@ -88,10 +90,32 @@ export function useRemoveFromHistory(props: UseRemoveFromHistoryProps) {
     }
   };
 
-  const restoreToHistory = async (orphanedRating: number | undefined) => {
-    isRemoving.next(true);
+  const historyInvalidations = (orphanedRating: OrphanedRating) =>
+    orphanedRating == null
+      ? [InvalidateAction.MarkAsWatched(type)]
+      : [InvalidateAction.Rated(type), InvalidateAction.MarkAsWatched(type)];
 
-    try {
+  const removal = useMutation(defineMutation({
+    key: 'history:remove',
+    request: async (): Promise<OrphanedRating> => {
+      const orphanedRating = await getOrphanedRating();
+
+      await removeWatchedRequest({ body: { ids: [id] } });
+
+      if (orphanedRating != null) {
+        await removeRatingRequest({
+          body: toRemoveRatingsPayload(type, [traktId]),
+        });
+      }
+
+      return orphanedRating;
+    },
+    invalidations: ({ data }) => historyInvalidations(data),
+  }));
+
+  const restoration = useMutation(defineMutation({
+    key: 'history:restore',
+    request: async (orphanedRating: OrphanedRating) => {
       await markAsWatchedRequest({
         body: toHistoryAddPayload({ type, traktId, watchedAt }),
       });
@@ -103,41 +127,25 @@ export function useRemoveFromHistory(props: UseRemoveFromHistoryProps) {
             rating: orphanedRating,
           }]),
         });
-        await invalidate(InvalidateAction.Rated(type));
       }
-
-      await invalidate(InvalidateAction.MarkAsWatched(type));
-    } finally {
-      isRemoving.next(false);
-    }
-  };
+    },
+    invalidations: ({ variables }) => historyInvalidations(variables),
+  }));
 
   const removeFromHistory = async () => {
-    isRemoving.next(true);
     track();
 
-    const orphanedRating = await getOrphanedRating();
-
-    await removeWatchedRequest({ body: { ids: [id] } });
-
-    if (orphanedRating != null) {
-      await removeRatingRequest({
-        body: toRemoveRatingsPayload(type, [traktId]),
-      });
-      await invalidate(InvalidateAction.Rated(type));
-    }
-
-    await invalidate(InvalidateAction.MarkAsWatched(type));
+    const orphanedRating = await removal.mutate();
 
     notify({
       message: title
         ? m.action_toast_removed_from_history({ title })
         : m.action_toast_removed_from_history_generic(),
-      action: undoToastAction(() => restoreToHistory(orphanedRating)),
+      action: undoToastAction(() => restoration.mutate(orphanedRating)),
     });
-
-    isRemoving.next(false);
   };
+
+  const isRemoving = anyTrue([removal.isPending, restoration.isPending]);
 
   return {
     isRemoving,
