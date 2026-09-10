@@ -24,6 +24,9 @@
 
   --dialog-height: 100dvh;
 
+  --drawer-size-normal: var(--ni-380);
+  --drawer-size-large: var(--ni-480);
+
   --segmented-select-segment-height: var(--ni-32);
   --segmented-select-extension-inset: var(--gap-xs);
   --segmented-select-extension-height: calc(

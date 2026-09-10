@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { beforeNavigate } from "$app/navigation";
   import { page } from "$app/state";
   import FilterScopeSetter from "$lib/features/filters/FilterScopeSetter.svelte";
   import type { FilterScope } from "$lib/features/filters/models/FilterScope.ts";
@@ -6,6 +7,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
+  import { useFilterSidebar } from "$lib/stores/useFilterSidebar.ts";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import { escapeJsonForScriptTag } from "$lib/utils/json/escapeJsonForScriptTag.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -40,6 +42,17 @@
     filterScope = "local",
     isIndexable = true,
   }: ChildrenProps & TraktPageProps & AudienceProps = $props();
+
+  const { isDocked: isSidebarDocked, dismiss: dismissSidebar } =
+    useFilterSidebar();
+
+  beforeNavigate((navigation) => {
+    if (navigation.to?.url.pathname === navigation.from?.url.pathname) {
+      return;
+    }
+
+    dismissSidebar();
+  });
 
   const websiteName = "Trakt Web";
   const websiteTitle = "Track Your Shows & Movies";
@@ -260,7 +273,12 @@
       <NavbarStateSetter mode="full" />
     {/if}
 
-    <main class="trakt-content" data-mode={mode} {...dynamicContentProps}>
+    <main
+      class="trakt-content"
+      class:has-docked-sidebar={$isSidebarDocked}
+      data-mode={mode}
+      {...dynamicContentProps}
+    >
       {@render children()}
     </main>
 
@@ -284,6 +302,10 @@
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: gap, margin, padding;
+
+    &.has-docked-sidebar {
+      padding-inline-end: var(--drawer-size-normal);
+    }
 
     display: flex;
     flex-direction: column;

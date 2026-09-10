@@ -35,6 +35,7 @@
     variant?: "default" | "vip";
     drilldown?: ListDrilldownProps;
     headerVariant?: "default" | "overlay";
+    close?: "default" | "anchored";
     // Raise this drawer (and its underlay) above a base-layer drawer, so a
     // drawer stacked on top of another still closes on outside tap.
     elevated?: boolean;
@@ -55,6 +56,7 @@
     variant = "default",
     drilldown,
     headerVariant = "default",
+    close = "default",
     elevated = false,
   }: DrawerProps = $props();
 
@@ -187,17 +189,21 @@
       {@render actions?.()}
 
       <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-        <ActionButton
-          onclick={onClose}
-          label={m.button_label_close()}
-          style="ghost"
-          navigationType={DpadNavigationType.Item}
-          --color-foreground-default={headerVariant === "overlay"
-            ? "var(--color-text-primary)"
-            : "var(--color-text-secondary)"}
-        >
-          <CloseIcon />
-        </ActionButton>
+        {#if close === "anchored"}
+          <div class="trakt-drawer-close-slot" aria-hidden="true"></div>
+        {:else}
+          <ActionButton
+            onclick={onClose}
+            label={m.button_label_close()}
+            style="ghost"
+            navigationType={DpadNavigationType.Item}
+            --color-foreground-default={headerVariant === "overlay"
+              ? "var(--color-text-primary)"
+              : "var(--color-text-secondary)"}
+          >
+            <CloseIcon />
+          </ActionButton>
+        {/if}
       </RenderFor>
     </div>
   </div>
@@ -210,8 +216,16 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  .trakt-drawer-close-slot {
+    width: var(--ni-40);
+    height: var(--ni-40);
+    flex-shrink: 0;
+
+    margin-inline-start: var(--gap-xs);
+  }
+
   .trakt-drawer {
-    --drawer-size: var(--ni-380);
+    --drawer-size: var(--drawer-size-normal);
     --drawer-padding: var(--ni-16);
     --drawer-gap: var(--gap-m);
     --drawer-border-radius: var(--border-radius-xxl);
@@ -338,7 +352,7 @@
     }
 
     &[data-size="large"] {
-      --drawer-size: var(--ni-480);
+      --drawer-size: var(--drawer-size-large);
     }
 
     &:has(.trakt-drawer-drag-handle) {

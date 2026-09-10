@@ -272,7 +272,8 @@
 
   .section-list-empty-state:not(:has(:global(.trakt-skeleton-list))) {
     width: calc(
-      100dvw - var(--layout-distance-side) * 2 - var(--layout-sidebar-distance)
+      100dvw - var(--layout-distance-side) * 2 - var(--layout-sidebar-distance) -
+        var(--layout-filter-sidebar-distance)
     );
 
     display: flex;

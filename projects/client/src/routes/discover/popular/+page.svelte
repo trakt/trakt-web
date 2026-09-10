@@ -5,6 +5,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import PopularPaginatedList from "$lib/sections/lists/popular/PopularPaginatedList.svelte";
+  import FilterSidebarAutoOpen from "$lib/sections/navbar/components/filter/FilterSidebarAutoOpen.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
 
@@ -26,6 +27,8 @@
   image={DEFAULT_SHARE_MOVIE_COVER}
   title={m.page_title_popular_media()}
 >
+  <FilterSidebarAutoOpen />
+
   <NavbarStateSetter
     hasFilters
     smartListTarget={ListTarget.Popular}

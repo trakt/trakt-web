@@ -6,6 +6,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
 
   import AnticipatedPaginatedList from "$lib/sections/lists/anticipated/AnticipatedPaginatedList.svelte";
+  import FilterSidebarAutoOpen from "$lib/sections/navbar/components/filter/FilterSidebarAutoOpen.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
@@ -26,6 +27,8 @@
   image={DEFAULT_SHARE_MOVIE_COVER}
   title={m.page_title_anticipated_media()}
 >
+  <FilterSidebarAutoOpen />
+
   <NavbarStateSetter
     hasFilters
     smartListTarget={ListTarget.Anticipated}

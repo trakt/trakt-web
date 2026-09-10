@@ -7,6 +7,7 @@
   import * as m from "$lib/features/i18n/messages";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
+  import FilterSidebarAutoOpen from "$lib/sections/navbar/components/filter/FilterSidebarAutoOpen.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
 
@@ -25,6 +26,8 @@
   info={{ overview: m.page_description_releases() }}
 >
   <CalendarProvider>
+    <FilterSidebarAutoOpen />
+
     <NavbarStateSetter
       hasFilters
       header={{
