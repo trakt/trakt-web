@@ -1,4 +1,4 @@
-import type { SpotlightKeyword } from './SpotlightKeyword.ts';
+import type { SpotlightKeyword } from '../../models/SpotlightKeyword.ts';
 
 export type SpotlightRoute = {
   id: string;
