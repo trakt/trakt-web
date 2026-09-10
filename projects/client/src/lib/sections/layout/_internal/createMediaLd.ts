@@ -31,6 +31,9 @@ const toAggregateRating = (info: MediaInfo | Nil) => {
   };
 };
 
+const toDateModified = (updatedAt: Date | Nil) =>
+  updatedAt ? { dateModified: updatedAt.toISOString() } : {};
+
 const toDatePublished = (year: number | Nil) =>
   year ? { datePublished: String(year) } : {};
 
@@ -91,6 +94,7 @@ export function createMediaLd({
     description,
     image,
     url,
+    ...toDateModified(info?.updatedAt),
     ...schema.details(info),
   });
 }

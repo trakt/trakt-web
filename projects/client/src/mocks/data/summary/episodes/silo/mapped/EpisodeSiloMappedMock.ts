@@ -14,6 +14,7 @@ export const EpisodeSiloMappedMock: EpisodeEntry = {
   'number': 1,
   'runtime': 60,
   'rating': 0.7753,
+  'updatedAt': new Date('2025-01-20T03:49:10.000Z'),
   'cover': {
     'url':
       'https://media.trakt.tv/images/episodes/005/165/667/screenshots/thumb/e035db5f06.jpg.webp',

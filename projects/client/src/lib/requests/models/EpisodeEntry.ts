@@ -25,6 +25,7 @@ const BaseEpisodeEntrySchema = z.object({
   certification: z.null().optional(),
   postCredits: PostCreditsSchema.array(),
   rating: z.number().nullish(),
+  updatedAt: z.date().nullish(),
 });
 
 // FIXME: discriminated union; only for computed types
