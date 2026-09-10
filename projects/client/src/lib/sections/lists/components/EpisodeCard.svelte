@@ -35,6 +35,7 @@
     media: show,
     source,
     indicators,
+    edge,
     ...rest
   }: EpisodeCardProps = $props();
 
@@ -126,6 +127,7 @@
         alt={`${show.title} - ${$spoilerFreeTitle}`}
         {badge}
         {tag}
+        {edge}
       />
 
       {#if indicators}

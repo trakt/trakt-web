@@ -22,6 +22,12 @@
     var(--shade-700) 75%,
     transparent
   );
+  /* The same glass, closed up - for a cover tag that is also a control. */
+  --color-background-cover-tag-hover: color-mix(
+    in srgb,
+    var(--shade-700) 88%,
+    transparent
+  );
 
   --color-text-trend-tag: var(--shade-10);
   --color-background-trend-neutral-background-tag: var(--color-text-secondary);

@@ -25,6 +25,7 @@
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
   import { episodeMetaInfo } from "$lib/utils/intl/episodeMetaInfo";
+  import type { Snippet } from "svelte";
 
   type SeasonEpisodeItemProps = {
     show: ShowEntry;
@@ -38,6 +39,8 @@
     style?: BaseItemProps["style"];
     source: string;
     urlOverride?: EpisodeUrlOverride;
+    /** Docked to the still's edge - the rail's hidden-episode counts. */
+    edge?: Snippet;
   };
 
   const {
@@ -52,6 +55,7 @@
     style,
     source,
     urlOverride,
+    edge,
   }: SeasonEpisodeItemProps = $props();
 
   const isFuture = $derived(episode.effectiveReleaseDate > new Date());
@@ -180,6 +184,7 @@
     context="show"
     {source}
     {urlOverride}
+    {edge}
     coverUrl={$src}
     onWatched={offerGapFill}
   />
