@@ -49,7 +49,8 @@
     useShowWatchedEpisodes({ showId: show.id }),
   );
 
-  const { buildDrawerLink, buildEpisodeDrawerLink } = summaryDrawerNavigation();
+  const { buildDrawerLink, buildEpisodeDrawerLink, buildSeasonsDrawerLink } =
+    summaryDrawerNavigation();
   const seasonDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Seasons));
 
   const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
@@ -87,20 +88,32 @@
      SectionList hands its item snippet the episode, not its position. */
   const firstVisibleNumber = $derived(visibleEpisodes.at(0)?.number);
   const lastVisibleNumber = $derived(visibleEpisodes.at(-1)?.number);
+
+  /*
+    Each badge opens the drawer on the episode its own side cuts off at - the
+    last one behind the window, the first one ahead of it - so the list lands
+    where the rail stopped rather than at episode one.
+  */
+  const earlierLink = $derived(
+    buildSeasonsDrawerLink(
+      /* Guarded rather than relying on the badge being hidden at zero:
+         `at(-1)` would quietly wrap to the finale. */
+      window.start > 0 ? episodes.at(window.start - 1)?.number : undefined,
+    ),
+  );
+  const laterLink = $derived(
+    buildSeasonsDrawerLink(episodes.at(window.end)?.number),
+  );
 </script>
 
 <!-- Declared out here on purpose: a snippet written inside a component is
      one of that component's props, and these belong to the cards. -->
 {#snippet earlierBadge()}
-  <EpisodeRailEdgeBadge
-    side="start"
-    count={window.before}
-    link={seasonDrawerLink}
-  />
+  <EpisodeRailEdgeBadge side="start" count={window.before} link={earlierLink} />
 {/snippet}
 
 {#snippet laterBadge()}
-  <EpisodeRailEdgeBadge side="end" count={window.after} link={seasonDrawerLink} />
+  <EpisodeRailEdgeBadge side="end" count={window.after} link={laterLink} />
 {/snippet}
 
 <SectionList

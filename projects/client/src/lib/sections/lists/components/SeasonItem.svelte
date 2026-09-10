@@ -46,7 +46,7 @@
 
   const scrollToItem = (element: HTMLElement, active: boolean) => {
     if (variant === "list-item") return;
-    return scrollActiveItemIntoView(element, active);
+    return scrollActiveItemIntoView(element, { active });
   };
 </script>
 
