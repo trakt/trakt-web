@@ -82,6 +82,21 @@ describe('util: createMediaLd', () => {
     });
   });
 
+  describe('dateModified', () => {
+    it('should expose when the media was last updated', () => {
+      const movieLd = createMovieLd({
+        ...HERETIC,
+        updatedAt: new Date('2026-09-09T08:15:00.000Z'),
+      });
+
+      expect(movieLd.dateModified).to.equal('2026-09-09T08:15:00.000Z');
+    });
+
+    it('should be omitted when the media has no update date', () => {
+      expect(createMovieLd(HERETIC)).to.not.have.property('dateModified');
+    });
+  });
+
   describe('show: Silo', () => {
     it('should describe the show', () => {
       const showLd = parse(createMediaLd({
