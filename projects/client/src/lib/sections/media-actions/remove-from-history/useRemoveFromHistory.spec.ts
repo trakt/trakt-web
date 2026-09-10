@@ -3,16 +3,14 @@ import {
   useRemoveFromHistory,
   type UseRemoveFromHistoryProps,
 } from '$lib/sections/media-actions/remove-from-history/useRemoveFromHistory.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
+import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
 import { captureRequests } from '$test/beds/request/captureRequests.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { server } from '$mocks/server.ts';
 import { http, HttpResponse } from 'msw';
 import { firstValueFrom } from 'rxjs';
-import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
-
-vi.mock('$lib/stores/useInvalidator.ts');
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const { notify } = vi.hoisted(() => ({ notify: vi.fn() }));
 vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
@@ -28,15 +26,10 @@ vi.mock('$lib/requests/sync/removeWatchedRequest.ts', () => ({
 }));
 
 describe('useRemoveFromHistory', () => {
-  const invalidate = vi.fn(function () {});
-
   beforeEach(() => {
     setAuthorization(true);
-    invalidate.mockReset();
     removeRatingSpy.mockClear();
     notify.mockReset();
-
-    (useInvalidator as Mock).mockReturnValue({ invalidate });
   });
 
   const runCommonTests = (
@@ -65,8 +58,9 @@ describe('useRemoveFromHistory', () => {
         useRemoveFromHistory(props)
       );
 
-      await removeFromHistory();
-      expect(invalidate).toHaveBeenCalledWith(invalidation);
+      const invalidations = await captureInvalidations(removeFromHistory);
+
+      expect(invalidations).toContain(invalidation);
     });
   };
 
