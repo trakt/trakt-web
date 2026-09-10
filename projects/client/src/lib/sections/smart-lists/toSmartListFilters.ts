@@ -19,6 +19,11 @@ const RANGE_KEYS = [
   'imdb_ratings',
   'rt_meters',
   'rt_user_meters',
+  'parental_nudity',
+  'parental_violence',
+  'parental_profanity',
+  'parental_alcohol',
+  'parental_frightening',
 ] as const;
 type RangeKey = (typeof RANGE_KEYS)[number];
 

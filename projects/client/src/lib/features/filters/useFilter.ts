@@ -1,3 +1,6 @@
+import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
+import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
+import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import type { FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
 import { combineLatest, distinctUntilChanged, map } from 'rxjs';
@@ -8,13 +11,47 @@ import { FILTERS } from './_internal/constants.ts';
 import { getAppliedFilters } from './_internal/getAppliedFilters.ts';
 import { isDifferentFilterSet } from './_internal/isDifferentFilterSet.ts';
 import { mapToSearchParamValue } from './_internal/mapToSearchParamValue.ts';
+import { parentalGuideFilters } from './parentalGuideFilters.ts';
 import { useStoredFilters } from './useStoredFilters.ts';
 
 export function useFilter() {
-  const { search } = useParameters();
+  const { search: rawSearch } = useParameters();
   const { user } = useUser();
-  const { storedFilters } = useStoredFilters();
+  const { storedFilters: rawStoredFilters } = useStoredFilters();
   const { state } = useNavbarState();
+
+  const { isAuthorized } = useAuth();
+  const { isEnabled } = useFeatureFlag();
+  const parentalKeys = new Set<string>(
+    parentalGuideFilters.map(({ key }) => key),
+  );
+  const canUseParentalFilters = combineLatest([
+    isEnabled(FeatureFlag.ParentalGuide),
+    isAuthorized,
+    user,
+  ]).pipe(
+    map(([enabled, authorized, currentUser]) =>
+      enabled && authorized && Boolean(currentUser?.isVip)
+    ),
+    distinctUntilChanged(),
+  );
+  const search = combineLatest([rawSearch, canUseParentalFilters]).pipe(
+    map(([params, available]) =>
+      available ? params : new URLSearchParams(
+        Array.from(params).filter(([key]) => !parentalKeys.has(key)),
+      )
+    ),
+  );
+  const storedFilters = combineLatest([rawStoredFilters, canUseParentalFilters])
+    .pipe(
+      map(([filters, available]) =>
+        available ? filters : Object.fromEntries(
+          Object.entries(filters ?? {}).filter(([key]) =>
+            !parentalKeys.has(key)
+          ),
+        )
+      ),
+    );
 
   return {
     filters: FILTERS,

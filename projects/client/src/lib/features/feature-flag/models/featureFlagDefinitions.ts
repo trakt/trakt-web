@@ -107,7 +107,7 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.option_text_certification_parental_guidance(),
     addedAt: new Date('2026-06-30'),
     description: () => m.preview_feature_description_parental_guide(),
-    audience: 'director',
+    audience: 'vip',
   },
   [FeatureFlag.ActionConfirmations]: {
     icon: CheckIcon,

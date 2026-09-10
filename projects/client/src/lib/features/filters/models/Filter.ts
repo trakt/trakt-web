@@ -20,10 +20,16 @@ export enum FilterKey {
   RtMeter = 'rt_meters',
   RtUserMeter = 'rt_user_meters',
   Status = 'statuses',
+  ParentalNudity = 'parental_nudity',
+  ParentalViolence = 'parental_violence',
+  ParentalProfanity = 'parental_profanity',
+  ParentalAlcohol = 'parental_alcohol',
+  ParentalFrightening = 'parental_frightening',
 }
 
 type BaseFilter = {
   key: FilterKey;
+  advancedOnly?: boolean;
   label: () => string;
   type: 'list' | 'toggle' | 'slider';
 };

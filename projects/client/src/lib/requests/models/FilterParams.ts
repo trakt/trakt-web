@@ -7,6 +7,11 @@ export type FilterParam = {
   genres: string;
   subgenres: string;
   years: string;
+  parental_nudity: string;
+  parental_violence: string;
+  parental_profanity: string;
+  parental_alcohol: string;
+  parental_frightening: string;
   ignore_watched: boolean;
   ignore_watchlisted: boolean;
   watch_window: number;

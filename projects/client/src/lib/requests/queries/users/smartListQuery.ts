@@ -38,6 +38,11 @@ const SmartListFiltersSchema = z.object({
   imdb_ratings: range,
   rt_meters: range,
   rt_user_meters: range,
+  parental_nudity: range,
+  parental_violence: range,
+  parental_profanity: range,
+  parental_alcohol: range,
+  parental_frightening: range,
   ignore_watched: z.boolean().optional(),
   ignore_watchlisted: z.boolean().optional(),
 });

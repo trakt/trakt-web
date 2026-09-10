@@ -1,10 +1,7 @@
 <script lang="ts">
   import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
-  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
-  import { getLocale } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaType } from "$lib/requests/models/MediaType.ts";
-  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { useParentalGuideCategories } from "../../_internal/useParentalGuideCategories.ts";
 
@@ -48,42 +45,23 @@
           class="guide-row"
           data-severity={isPending ? "unknown" : category.severityTone}
         >
-          <span class="guide-label bold" title={category.label}>
+          <span class="guide-label bold">
             {category.label}
           </span>
           <div class="guide-meter">
-            <Tooltip
-              variant="compact"
-              sideOffset={4}
-              disabled={isPending || category.signals.length === 0}
-              disableHoverableContent
-            >
-              {#snippet content()}
-                <dl class="signals-list">
-                  {#each category.signals as signal (signal.key)}
-                    <div class="signal-row">
-                      <dt>{signal.label}</dt>
-                      <dd>
-                        {toHumanNumber(signal.count, getLocale())}
-                      </dd>
-                    </div>
-                  {/each}
-                </dl>
-              {/snippet}
-              <span class="guide-accessible-label">
-                {category.label}: {severityLabel}
-              </span>
-              <div class="guide-bar" aria-hidden="true">
-                <DistributionBar
-                  fraction={isPending ? 0 : category.severityProgress}
-                  color="var(--guide-severity-color)"
-                  fillStyle="flat"
-                  animated={false}
-                  --distribution-bar-thickness="var(--ni-8)"
-                  --distribution-bar-track="var(--guide-track-color)"
-                />
-              </div>
-            </Tooltip>
+            <span class="guide-accessible-label">
+              {category.label}: {severityLabel}
+            </span>
+            <div class="guide-bar" aria-hidden="true">
+              <DistributionBar
+                fraction={isPending ? 0 : category.severityProgress}
+                color="var(--guide-severity-color)"
+                fillStyle="flat"
+                animated={false}
+                --distribution-bar-thickness="var(--ni-8)"
+                --distribution-bar-track="var(--guide-track-color)"
+              />
+            </div>
           </div>
           <span class="guide-severity secondary">
             {severityLabel}
@@ -172,10 +150,6 @@
   .trakt-media-parental-guide .guide-meter {
     display: block;
     width: 100%;
-
-    :global(.trakt-tooltip-trigger) {
-      width: 100%;
-    }
   }
 
   .trakt-media-parental-guide .guide-severity {
@@ -214,39 +188,6 @@
 
   .trakt-media-parental-guide .guide-row[data-severity="severe"] {
     --guide-severity-color: var(--red-500);
-  }
-
-  .signals-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-4);
-    min-width: var(--ni-120);
-    margin: 0;
-
-    line-height: 1.25;
-    font-weight: 400;
-  }
-
-  .signal-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: var(--gap-l);
-
-    white-space: nowrap;
-
-    dt,
-    dd {
-      margin: 0;
-    }
-
-    dt {
-      font-weight: 600;
-    }
-
-    dd {
-      font-weight: 400;
-      font-variant-numeric: tabular-nums;
-    }
   }
 
   @include for-mobile {

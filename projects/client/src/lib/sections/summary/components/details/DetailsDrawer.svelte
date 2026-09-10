@@ -33,7 +33,7 @@
       {#if props.type !== "episode"}
         <MediaLinks media={props.media} />
 
-        <RenderForFeature flag={FeatureFlag.ParentalGuide} audience="director">
+        <RenderForFeature flag={FeatureFlag.ParentalGuide}>
           {#snippet enabled()}
             <MediaParentalGuide type={props.type} slug={props.media.slug} />
           {/snippet}

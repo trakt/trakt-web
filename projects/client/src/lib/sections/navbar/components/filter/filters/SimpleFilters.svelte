@@ -2,6 +2,7 @@
   import { FilterKey } from "$lib/features/filters/models/Filter.ts";
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import { isAutoRenderedFilter } from "./_internal/isAutoRenderedFilter";
   import FilterGroup from "./_internal/FilterGroup.svelte";
   import StreamingAvailabilityFilter from "./_internal/StreamingAvailabilityFilter.svelte";
   import ListFilter from "./ListFilter.svelte";
@@ -13,7 +14,9 @@
     filters.filter((filter) => filter.type === "list"),
   );
   const ratingTypeFilters = $derived(
-    filters.filter((filter) => filter.type === "slider"),
+    filters
+      .filter(isAutoRenderedFilter)
+      .filter((filter) => filter.type === "slider"),
   );
 </script>
 
