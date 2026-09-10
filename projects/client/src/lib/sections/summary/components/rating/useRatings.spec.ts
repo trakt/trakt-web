@@ -1,29 +1,19 @@
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';
+import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { waitForValue } from '$test/readable/waitForValue.ts';
 import { firstValueFrom } from 'rxjs';
-import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useRatings } from './useRatings.ts';
 
-vi.mock('$lib/stores/useInvalidator.ts');
-
 describe('useRatings', () => {
-  const invalidate = vi.fn(function () {});
-
   beforeEach(() => {
-    setAuthorization(true);
-    invalidate.mockReset();
-
-    (useInvalidator as Mock)
-      .mockReturnValueOnce({ invalidate }) // 1: in useRatings
-      .mockReturnValueOnce({ invalidate }) // 2: in useRatings -> useUser
-      .mockReturnValueOnce({ invalidate }); // 3: in useRatings -> useTrack -> useUser
+    setAuthorization(true); // 3: in useRatings -> useTrack -> useUser
   });
 
   it('should indicate while rating is in progress', async () => {
@@ -101,15 +91,15 @@ describe('useRatings', () => {
       })
     );
 
-    vi.useFakeTimers();
-    addRating(2);
-    await vi.advanceTimersByTimeAsync(500);
-    vi.useRealTimers();
+    const invalidations = await captureInvalidations(async () => {
+      vi.useFakeTimers();
+      addRating(2);
+      await vi.advanceTimersByTimeAsync(500);
+      vi.useRealTimers();
+    });
 
-    expect(invalidate)
-      .toHaveBeenCalledWith(InvalidateAction.Rated('movie'));
-    expect(invalidate)
-      .not.toHaveBeenNthCalledWith(2, InvalidateAction.Favorited('movie'));
+    expect(invalidations).toContain(InvalidateAction.Rated('movie'));
+    expect(invalidations).not.toContain(InvalidateAction.Favorited('movie'));
   });
 
   it('should call invalidate after rating a season', async () => {
@@ -122,12 +112,13 @@ describe('useRatings', () => {
       })
     );
 
-    vi.useFakeTimers();
-    addRating(6);
-    await vi.advanceTimersByTimeAsync(500);
-    vi.useRealTimers();
+    const invalidations = await captureInvalidations(async () => {
+      vi.useFakeTimers();
+      addRating(6);
+      await vi.advanceTimersByTimeAsync(500);
+      vi.useRealTimers();
+    });
 
-    expect(invalidate)
-      .toHaveBeenCalledWith(InvalidateAction.Rated('season'));
+    expect(invalidations).toContain(InvalidateAction.Rated('season'));
   });
 });

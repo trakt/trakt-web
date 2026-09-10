@@ -1,11 +1,11 @@
 import { useAddNoteDrawer } from '$lib/features/notes/useAddNoteDrawer.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
+import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
 import { captureRequests } from '$test/beds/request/captureRequests.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
@@ -13,7 +13,6 @@ import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { type FavoritesStoreProps, useFavorites } from './useFavorites.ts';
 
-vi.mock('$lib/stores/useInvalidator.ts');
 vi.mock('$lib/features/notes/useAddNoteDrawer.ts');
 
 const { notify } = vi.hoisted(() => ({ notify: vi.fn() }));
@@ -22,16 +21,9 @@ vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
 }));
 
 describe('useFavorites', () => {
-  const invalidate = vi.fn(function () {});
-
   beforeEach(() => {
     setAuthorization(true);
-    invalidate.mockReset();
-    notify.mockReset();
-
-    (useInvalidator as Mock)
-      .mockReturnValueOnce({ invalidate }) // 1: useFavorites
-      .mockReturnValueOnce({ invalidate }); // 2: useFavorites -> useUser
+    notify.mockReset(); // 2: useFavorites -> useUser
 
     (useAddNoteDrawer as Mock).mockReturnValue({ open: vi.fn() });
   });
@@ -84,8 +76,9 @@ describe('useFavorites', () => {
     it('should call invalidate after adding to favorites', async () => {
       const { addToFavorites } = await renderStore(() => useFavorites(props));
 
-      await addToFavorites();
-      expect(invalidate).toHaveBeenCalledWith(invalidation);
+      const invalidations = await captureInvalidations(addToFavorites);
+
+      expect(invalidations).toContain(invalidation);
     });
 
     it('should call invalidate after removing from favorites', async () => {
@@ -93,8 +86,9 @@ describe('useFavorites', () => {
         useFavorites(props)
       );
 
-      await removeFromFavorites();
-      expect(invalidate).toHaveBeenCalledWith(invalidation);
+      const invalidations = await captureInvalidations(removeFromFavorites);
+
+      expect(invalidations).toContain(invalidation);
     });
 
     it('should NOT be favorited', async () => {

@@ -1,18 +1,16 @@
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
+import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
 import { captureRequests } from '$test/beds/request/captureRequests.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { firstValueFrom } from 'rxjs';
-import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useWatchlist } from './useWatchlist.ts';
-
-vi.mock('$lib/stores/useInvalidator.ts');
 
 const { notify } = vi.hoisted(() => ({ notify: vi.fn() }));
 vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
@@ -20,17 +18,9 @@ vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
 }));
 
 describe('useWatchlist', () => {
-  const invalidate = vi.fn(function () {});
-
   beforeEach(() => {
     setAuthorization(true);
-    invalidate.mockReset();
-    notify.mockReset();
-
-    (useInvalidator as Mock)
-      .mockReturnValueOnce({ invalidate }) // 1: in useWatchlist
-      .mockReturnValueOnce({ invalidate }) // 2: in useWatchlist -> useTrack -> useUser
-      .mockReturnValueOnce({ invalidate }); // 3: in useWatchlist -> useIsWatchlisted -> useUser
+    notify.mockReset(); // 3: in useWatchlist -> useIsWatchlisted -> useUser
   });
 
   const runCommonTests = (props: MediaStoreProps, invalidation: string) => {
@@ -81,8 +71,9 @@ describe('useWatchlist', () => {
     it('should call invalidate after adding to watchlist', async () => {
       const { addToWatchlist } = await renderStore(() => useWatchlist(props));
 
-      await addToWatchlist();
-      expect(invalidate).toHaveBeenCalledWith(invalidation);
+      const invalidations = await captureInvalidations(addToWatchlist);
+
+      expect(invalidations).toContain(invalidation);
     });
 
     it('should call invalidate after removing from watchlist', async () => {
@@ -90,8 +81,9 @@ describe('useWatchlist', () => {
         useWatchlist(props)
       );
 
-      await removeFromWatchlist();
-      expect(invalidate).toHaveBeenCalledWith(invalidation);
+      const invalidations = await captureInvalidations(removeFromWatchlist);
+
+      expect(invalidations).toContain(invalidation);
     });
 
     it('should NOT be watchlisted', async () => {
