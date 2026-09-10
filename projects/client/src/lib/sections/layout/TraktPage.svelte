@@ -8,6 +8,7 @@
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
+  import { escapeJsonForScriptTag } from "$lib/utils/json/escapeJsonForScriptTag.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../../components/router/Redirect.svelte";
   import Footer from "../footer/Footer.svelte";
@@ -263,6 +264,10 @@
     return null;
   });
 
+  const escapedJsonLd = $derived(
+    jsonLd == null ? null : escapeJsonForScriptTag(jsonLd),
+  );
+
   const dynamicContentProps = $derived(
     hasDynamicContent
       ? {
@@ -305,8 +310,8 @@
   <meta name="twitter:image" content={image} />
   <meta name="twitter:creator" content={twitterHandle} />
 
-  {#if jsonLd != null}
-    {@html `<script type="application/ld+json">${jsonLd}</script>`}
+  {#if escapedJsonLd != null}
+    {@html `<script type="application/ld+json">${escapedJsonLd}</script>`}
   {/if}
 </svelte:head>
 
