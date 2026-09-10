@@ -1,10 +1,10 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ListPrivacy } from '$lib/requests/models/ListPrivacy.ts';
 import { createListRequest } from '$lib/requests/queries/users/createListRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject } from 'rxjs';
 import { updateListRequest } from '../../../../requests/queries/users/updateListRequest.ts';
 
 type SaveListProps = {
@@ -49,16 +49,20 @@ async function saveRequest(
 }
 
 export function useSaveList(props: UseSaveListProps) {
-  const isSaving = new BehaviorSubject(false);
-  const { invalidate } = useInvalidator();
+  const isCreating = props.type === 'create';
 
-  const invalidateAction = props.type === 'create'
-    ? InvalidateAction.List.Created
-    : InvalidateAction.List.Edited;
-  const analyticsEvent = props.type === 'create'
-    ? AnalyticsEvent.ListCreate
-    : AnalyticsEvent.ListEdit;
-  const { track } = useTrack(analyticsEvent);
+  const { track } = useTrack(
+    isCreating ? AnalyticsEvent.ListCreate : AnalyticsEvent.ListEdit,
+  );
+
+  const save = useMutation(defineMutation({
+    key: `list:${props.type}`,
+    request: (variables: SaveListProps) =>
+      saveRequest({ ...props, ...variables }),
+    invalidations: [
+      isCreating ? InvalidateAction.List.Created : InvalidateAction.List.Edited,
+    ],
+  }));
 
   const saveList = async (
     { name, description, privacy }: SaveListProps,
@@ -68,25 +72,13 @@ export function useSaveList(props: UseSaveListProps) {
       return;
     }
 
-    isSaving.next(true);
     track();
 
-    const slug = await saveRequest({
-      ...props,
-      name: newName,
-      description,
-      privacy,
-    });
-
-    await invalidate(invalidateAction);
-
-    isSaving.next(false);
-
-    return slug;
+    return await save.mutate({ name: newName, description, privacy });
   };
 
   return {
-    isSaving: isSaving.asObservable(),
+    isSaving: save.isPending,
     saveList,
   };
 }
