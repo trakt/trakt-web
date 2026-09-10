@@ -7,11 +7,7 @@ const previewLimit = 8;
 
 export function useSmartListPreview(list: SmartList) {
   const { list: items, isLoading } = usePaginatedListQuery(
-    smartListItemsQuery({
-      slug: list.slug,
-      limit: previewLimit,
-      updatedAt: list.updatedAt,
-    }),
+    smartListItemsQuery({ list, limit: previewLimit }),
   );
 
   return {

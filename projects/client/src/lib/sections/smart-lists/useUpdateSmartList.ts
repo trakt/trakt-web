@@ -1,9 +1,9 @@
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { SmartListFilters } from '$lib/requests/queries/users/smartListQuery.ts';
 import { updateSmartListRequest } from '$lib/requests/queries/users/updateSmartListRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject } from 'rxjs';
 import { AnalyticsEvent } from '../../features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../../features/analytics/useTrack.ts';
 import { toSmartListWrite } from './_internal/toSmartListWrite.ts';
@@ -18,33 +18,32 @@ type UpdateListProps = {
   baseFilters: SmartListFilters;
 };
 
-export function useUpdateSmartList() {
-  const isUpdating = new BehaviorSubject(false);
+function toUpdateBody({ slug: _slug, ...props }: UpdateListProps) {
+  const { source, ...write } = toSmartListWrite(props);
 
-  const { invalidate } = useInvalidator();
+  return source ? { ...write, source } : write;
+}
+
+export function useUpdateSmartList() {
   const { track } = useTrack(AnalyticsEvent.SmartListUpdate);
 
-  const updateList = async ({ slug, ...props }: UpdateListProps) => {
-    isUpdating.next(true);
+  const update = useMutation(defineMutation({
+    key: 'smart-list:update',
+    request: (props: UpdateListProps) =>
+      updateSmartListRequest({ slug: props.slug, body: toUpdateBody(props) }),
+    invalidations: [InvalidateAction.SmartList.Edited],
+  }));
+
+  const updateList = async (props: UpdateListProps) => {
     track();
 
-    const { source, ...write } = toSmartListWrite(props);
-    const body = source ? { ...write, source } : write;
+    const isUpdated = await update.mutate(props).catch(() => false);
 
-    const isUpdated = await updateSmartListRequest({ slug, body })
-      .catch(() => false);
-
-    if (isUpdated) {
-      await invalidate(InvalidateAction.SmartList.Updated);
-    }
-
-    isUpdating.next(false);
-
-    return isUpdated ? slug : null;
+    return isUpdated ? props.slug : null;
   };
 
   return {
     updateList,
-    isUpdating: isUpdating.asObservable(),
+    isUpdating: update.isPending,
   };
 }

@@ -89,7 +89,7 @@ type SmartListParams =
 const smartListRequest = (
   { fetch, userId }: SmartListParams,
 ) =>
-  api({ fetch: createRevalidatingFetch(fetch ?? globalThis.fetch) })
+  api({ fetch: createRevalidatingFetch(fetch) })
     .users
     .smartLists
     .personal({
@@ -102,7 +102,7 @@ export const smartListQuery = defineInfiniteQuery({
   key: (params: SmartListParams) => `smartLists-${params.userId ?? 'me'}`,
   invalidations: [
     InvalidateAction.SmartList.Created,
-    InvalidateAction.SmartList.Updated,
+    InvalidateAction.SmartList.Edited,
     InvalidateAction.SmartList.Deleted,
   ],
   dependencies: (

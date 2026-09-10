@@ -9,7 +9,7 @@
     onChange,
     disabled,
   }: {
-    value: ListTarget;
+    value: ListTarget | Nil;
     onChange: (value: ListTarget) => void;
     disabled?: boolean;
   } = $props();
@@ -24,7 +24,7 @@
 
 <SingleSelect
   {options}
-  {value}
+  value={value ?? null}
   {disabled}
   placeholder={m.header_target()}
   variant="chip"

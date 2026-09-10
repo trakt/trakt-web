@@ -9,40 +9,43 @@
   import TrendingPaginatedList from "$lib/sections/lists/trending/TrendingPaginatedList.svelte";
   import WatchlistPaginatedList from "$lib/sections/lists/watchlist/WatchlistPaginatedList.svelte";
   import type { ListTarget } from "../models/ListTarget";
+  import { toTargetLabel } from "./toTargetLabel";
 
   const { target, type }: { target: ListTarget; type: DiscoverMode } = $props();
 
-  const titles = $derived({
+  const TYPED_TITLES: Partial<
+    Record<ListTarget, Record<"movie" | "show", () => string>>
+  > = {
     trending: {
-      movie: m.list_title_trending_movies(),
-      show: m.list_title_trending_shows(),
-      media: m.list_title_trending(),
+      movie: m.list_title_trending_movies,
+      show: m.list_title_trending_shows,
     },
     anticipated: {
-      movie: m.list_title_anticipated_movies(),
-      show: m.list_title_anticipated_shows(),
-      media: m.list_title_most_anticipated(),
+      movie: m.list_title_anticipated_movies,
+      show: m.list_title_anticipated_shows,
     },
     popular: {
-      movie: m.list_title_popular_movies(),
-      show: m.list_title_popular_shows(),
-      media: m.list_title_most_popular(),
+      movie: m.list_title_popular_movies,
+      show: m.list_title_popular_shows,
     },
     recommendations: {
-      movie: m.list_title_recommended_movies(),
-      show: m.list_title_recommended_shows(),
-      media: m.list_title_recommended(),
+      movie: m.list_title_recommended_movies,
+      show: m.list_title_recommended_shows,
     },
     watchlist: {
-      movie: m.list_title_watchlist_movies(),
-      show: m.list_title_watchlist_shows(),
-      media: m.list_title_watchlist(),
+      movie: m.list_title_watchlist_movies,
+      show: m.list_title_watchlist_shows,
     },
-    library: {
-      movie: m.list_title_library(),
-      show: m.list_title_library(),
-      media: m.list_title_library(),
-    },
+  };
+
+  const title = $derived.by(() => {
+    const typed = TYPED_TITLES[target];
+
+    if (!typed || type === "media") {
+      return toTargetLabel(target);
+    }
+
+    return typed[type]();
   });
 </script>
 
@@ -56,31 +59,31 @@
 
 {#if target === "trending"}
   <TrendingPaginatedList
-    title={titles.trending[type]}
+    {title}
     {type}
     {actions}
   />
 {:else if target === "anticipated"}
   <AnticipatedPaginatedList
-    title={titles.anticipated[type]}
+    {title}
     {type}
     {actions}
   />
 {:else if target === "popular"}
   <PopularPaginatedList
-    title={titles.popular[type]}
+    {title}
     {type}
     {actions}
   />
 {:else if target === "recommendations"}
   <RecommendedPaginatedList
-    title={titles.recommendations[type]}
+    {title}
     {type}
     {actions}
   />
 {:else if target === "watchlist"}
   <WatchlistPaginatedList
-    title={titles.watchlist[type]}
+    {title}
     {type}
     sortBy={undefined}
     sortHow="desc"
@@ -89,7 +92,7 @@
 {:else if target === "library"}
   <LibraryListPaginated
     library="plex"
-    title={titles.library[type]}
+    {title}
     {type}
     {actions}
   />

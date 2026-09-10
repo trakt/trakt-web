@@ -14,7 +14,7 @@ describe('smartListItemsQuery', () => {
       factory: () =>
         createTestBedInfiniteQuery(
           smartListItemsQuery({
-            slug: assertDefined(SmartListDefinitionsMappedMock.at(0)).slug,
+            list: assertDefined(SmartListDefinitionsMappedMock.at(0)),
             limit: DEFAULT_PAGE_SIZE,
           }),
         ),

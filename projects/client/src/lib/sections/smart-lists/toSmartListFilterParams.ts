@@ -2,7 +2,7 @@ import type { SmartListFilters } from '$lib/requests/queries/users/smartListQuer
 
 function toParamValue(value: unknown): string | undefined {
   if (typeof value === 'boolean') {
-    return value ? 'true' : undefined;
+    return String(value);
   }
 
   if (Array.isArray(value)) {

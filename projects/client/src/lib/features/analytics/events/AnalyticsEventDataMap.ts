@@ -148,6 +148,7 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.SmartListDelete]: never;
   [AnalyticsEvent.SmartListCreate]: never;
+  [AnalyticsEvent.SmartListUpdate]: never;
 
   [AnalyticsEvent.AddNote]: { type: NoteType };
   [AnalyticsEvent.DeleteNote]: { type: NoteType };

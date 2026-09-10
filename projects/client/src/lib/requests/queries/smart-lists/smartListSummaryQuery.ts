@@ -13,7 +13,7 @@ type SmartListSummaryParams = { listId: string } & ApiParams;
 const smartListSummaryRequest = (
   { fetch, listId }: SmartListSummaryParams,
 ) =>
-  api({ fetch: createRevalidatingFetch(fetch ?? globalThis.fetch) })
+  api({ fetch: createRevalidatingFetch(fetch) })
     .users
     .smartLists
     .smartList
@@ -27,7 +27,7 @@ const smartListSummaryRequest = (
 export const smartListSummaryQuery = defineQuery({
   key: 'smartListSummary',
   invalidations: [
-    InvalidateAction.SmartList.Updated,
+    InvalidateAction.SmartList.Edited,
     InvalidateAction.SmartList.Created,
     InvalidateAction.SmartList.Deleted,
   ],

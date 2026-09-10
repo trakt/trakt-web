@@ -22,7 +22,7 @@ export function toSmartListWrite(
   { name, type, target, filterMap, baseFilters }: SmartListWriteProps,
 ): SmartListWriteRequest {
   return {
-    name,
+    name: name.trim(),
     source: target as SmartListWriteRequest['source'],
     media_type: MEDIA_TYPES[type],
     filters: toSmartListFilters(filterMap, baseFilters),

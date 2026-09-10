@@ -1,4 +1,5 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
@@ -7,6 +8,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
+import type { SmartList } from '$lib/requests/queries/users/smartListQuery.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
@@ -25,8 +27,7 @@ export type SmartListItemResponse = {
 
 type SmartListItemsParams =
   & {
-    slug: string;
-    updatedAt?: Date;
+    list: SmartList;
   }
   & PaginationParams
   & ApiParams
@@ -47,33 +48,39 @@ function mapToSmartListItem(item: SmartListItemResponse) {
 }
 
 const smartListItemsRequest = (
-  { fetch, slug, limit, page, filter, updatedAt }: SmartListItemsParams,
-) =>
-  api({ fetch })
+  { fetch, list, limit, page, filter }: SmartListItemsParams,
+) => {
+  const query = {
+    extended: 'full,images,colors' as const,
+    page,
+    limit,
+    updated_at: list.updatedAt.toISOString(),
+    ...filter,
+  };
+
+  return api({ fetch })
     .smart_lists
     .items({
       params: {
-        list_id: slug,
+        list_id: list.slug,
       },
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        updated_at: updatedAt?.toISOString(),
-        ...filter,
-      },
+      query,
     });
+};
 
 export const smartListItemsQuery = defineInfiniteQuery({
   key: 'smartListItems',
-  invalidations: [],
+  invalidations: [
+    InvalidateAction.SmartList.Edited,
+    InvalidateAction.SmartList.Deleted,
+  ],
   dependencies: (
     params: SmartListItemsParams,
   ) => [
-    params.slug,
+    params.list.slug,
+    params.list.updatedAt.toISOString(),
     params.limit,
     params.page,
-    params.updatedAt?.toISOString(),
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: smartListItemsRequest,

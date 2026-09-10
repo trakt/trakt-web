@@ -8,6 +8,7 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import SmartListCreator from "$lib/sections/smart-lists/SmartListCreator.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
   import { useSmartListSummary } from "../../view/[list]/useSmartListSummary.ts";
@@ -17,9 +18,8 @@
   const { mode } = useDiscover();
   const { limits } = useUser();
 
-  const { list, isLoading } = $derived(
-    useSmartListSummary({ listId: params.list }),
-  );
+  const listId$ = fromRune(() => params.list);
+  const { list, isLoading } = useSmartListSummary(listId$);
 </script>
 
 <TraktPage
