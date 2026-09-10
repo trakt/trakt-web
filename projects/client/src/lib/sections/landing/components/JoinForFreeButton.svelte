@@ -9,11 +9,13 @@
 
 <trakt-join-for-free-button>
   <Button
-    color="purple"
+    color="custom"
     label={m.button_label_join_trakt()}
     style="flat"
     navigationType={DpadNavigationType.Item}
     onclick={login}
+    --color-background-custom="var(--purple-500)"
+    --color-foreground-custom="var(--purple-50)"
   >
     {m.button_text_join_trakt_for_free()}
   </Button>

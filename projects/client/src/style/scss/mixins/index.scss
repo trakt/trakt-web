@@ -245,6 +245,58 @@
   }
 }
 
+@mixin flat-outline-button(
+  $selector,
+  $accent,
+  $surface,
+  $active-transform,
+  $exclude: ""
+) {
+  $on: ":not([disabled]):not([aria-disabled='true'])#{$exclude}";
+
+  :global(#{$selector}[data-style='flat'][data-variant='primary']#{$on}) {
+    --flat-ring-width: var(--border-thickness-xs);
+
+    background-color: color-mix(in srgb, #{$surface} 14%, transparent);
+    color: #{$accent};
+    box-shadow: inset 0 0 0 var(--flat-ring-width)
+      color-mix(in srgb, #{$accent} 65%, transparent);
+  }
+
+  :global(#{$selector}[data-style='flat'][data-variant='secondary']#{$on}) {
+    --flat-ring-width: var(--border-thickness-xxs);
+
+    background-color: transparent;
+    color: #{$accent};
+    box-shadow: inset 0 0 0 var(--flat-ring-width)
+      color-mix(in srgb, #{$accent} 30%, transparent);
+  }
+
+  @include for-mouse {
+    :global(#{$selector}[data-style='flat'][data-variant='primary']:hover#{$on}) {
+      background-color: color-mix(in srgb, #{$surface} 26%, transparent);
+      box-shadow: inset 0 0 0 var(--flat-ring-width)
+        color-mix(in srgb, #{$accent} 95%, transparent);
+    }
+
+    :global(#{$selector}[data-style='flat'][data-variant='secondary']:hover#{$on}) {
+      background-color: color-mix(in srgb, #{$surface} 16%, transparent);
+      box-shadow: inset 0 0 0 var(--flat-ring-width)
+        color-mix(in srgb, #{$accent} 60%, transparent);
+    }
+  }
+
+  // Emitted per variant so the press state ties with the hover rules above on
+  // specificity and wins on source order. A mouse press always also matches
+  // `:hover`, so a bare `[data-style]:active` would lose its fill and ring.
+  :global(#{$selector}[data-style='flat'][data-variant='primary']:active#{$on}),
+  :global(#{$selector}[data-style='flat'][data-variant='secondary']:active#{$on}) {
+    transform: $active-transform;
+    background-color: color-mix(in srgb, #{$surface} 36%, transparent);
+    box-shadow: inset 0 0 0 var(--flat-ring-width) #{$accent};
+  }
+}
+
 // Premium "rare/tier" chip decoration: a diagonal tint gradient, a hairline
 // ring, and a soft drop glow, all keyed off a single colour. Extracted from
 // the match-drawer chips so rank medals and other accents share one look.
