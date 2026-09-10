@@ -8,10 +8,11 @@
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { MediaType } from "$lib/requests/models/MediaType";
+  import type { SmartList } from "$lib/requests/queries/users/smartListQuery";
   import type { UserLimits } from "$lib/requests/models/UserLimits";
   import { iffy } from "$lib/utils/function/iffy";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { untrack } from "svelte";
   import FilterSection from "../navbar/components/filter/FilterSection.svelte";
   import FilterTabs from "../navbar/components/filter/FilterTabs.svelte";
   import LimitWarning from "./_internal/LimitWarning.svelte";
@@ -19,12 +20,20 @@
   import TargetDropdown from "./_internal/TargetDropdown.svelte";
   import TargetPreview from "./_internal/TargetPreview.svelte";
   import SmartListRecipe from "./_internal/SmartListRecipe.svelte";
+  import { toSmartListFilterMode } from "./toSmartListFilterMode";
   import { ListTarget } from "./models/ListTarget";
+  import { toDiscoverMode } from "../lists/smart/_internal/toDiscoverMode";
   import { useCreateSmartList } from "./useCreateSmartList";
+  import { useUpdateSmartList } from "./useUpdateSmartList";
 
-  const { mode, limits }: { mode: DiscoverMode; limits: UserLimits } = $props();
+  const { mode, limits, list }: {
+    mode: DiscoverMode;
+    limits: UserLimits;
+    list?: SmartList;
+  } = $props();
 
   const { createList, isCreating } = useCreateSmartList();
+  const { updateList, isUpdating } = useUpdateSmartList();
   const { filterMap } = useFilter();
   const { user } = useUser();
 
@@ -32,26 +41,51 @@
     $user.isVip ? limits.dynamicLists.vip : limits.dynamicLists.free,
   );
 
-  let listName = $state("");
-  let type = $state<MediaType>(iffy(() => (mode === "media" ? "show" : mode)));
-  let activeMode = $state(FilterMode.Simple);
-  let target = $state<ListTarget>(ListTarget.Trending);
+  const toTarget = (source: SmartList["source"]) =>
+    Object.values(ListTarget).find((value) => value === source);
+
+  const initial = untrack(() => ({
+    name: list?.title ?? "",
+    type: list ? toDiscoverMode(list.mediaType) : mode,
+    target: list ? toTarget(list.source) : ListTarget.Trending,
+    filterMode: list
+      ? toSmartListFilterMode(list.filters)
+      : FilterMode.Simple,
+  }));
+
+  let listName = $state(initial.name);
+  let type = $state<DiscoverMode>(initial.type);
+  let activeMode = $state(initial.filterMode);
+  let target = $state<ListTarget | undefined>(initial.target);
 
   const goBack = () => {
-    goto(UrlBuilder.lists.user("me"));
+    goto(
+      list
+        ? UrlBuilder.lists.smart.view(list.slug)
+        : UrlBuilder.lists.user("me"),
+    );
   };
 
   const onActiveModeChange = (to: string) => {
     activeMode = to as FilterMode;
   };
 
-  const onCreateHandler = async () => {
-    const slug = await createList({
-      name: listName,
-      type,
-      target,
-      filterMap: $filterMap,
-    });
+  const onSaveHandler = async () => {
+    const slug = list
+      ? await updateList({
+        slug: list.slug,
+        name: listName,
+        type,
+        target,
+        filterMap: $filterMap,
+        baseFilters: list.filters,
+      })
+      : await createList({
+        name: listName,
+        type,
+        target: target ?? ListTarget.Trending,
+        filterMap: $filterMap,
+      });
 
     if (!slug) {
       return;
@@ -60,8 +94,9 @@
     goBack();
   };
 
-  const isAtLimit = $derived(limits.dynamicLists.current >= limit);
-  const isDisabled = $derived(isAtLimit || $isCreating);
+  const isAtLimit = $derived(!list && limits.dynamicLists.current >= limit);
+  const isSaving = $derived($isCreating || $isUpdating);
+  const isDisabled = $derived(isAtLimit || isSaving);
 </script>
 
 {#snippet targetSelector()}
@@ -78,14 +113,18 @@
 {/snippet}
 
 {#snippet recipe()}
-  <SmartListRecipe {target} {type} />
+  {#if target}
+    <SmartListRecipe {target} {type} />
+  {/if}
 {/snippet}
 
 <div class="trakt-smart-list-creator">
-  <TargetPreview {target} {type} />
+  {#if target}
+    <TargetPreview {target} {type} />
+  {/if}
 
   <Drawer
-    title={m.header_create_smart_list()}
+    title={list ? m.header_edit_smart_list() : m.header_create_smart_list()}
     metaInfo={recipe}
     onClose={goBack}
     size="normal"
@@ -96,11 +135,13 @@
     {/if}
 
     <Form
-      onSubmit={onCreateHandler}
+      onSubmit={onSaveHandler}
       onCancel={goBack}
       disabled={isDisabled || !listName}
-      confirmButtonText={m.button_text_create()}
-      confirmButtonLabel={m.button_label_create_list()}
+      confirmButtonText={list ? m.button_text_apply() : m.button_text_create()}
+      confirmButtonLabel={list
+        ? m.button_label_apply()
+        : m.button_label_create_list()}
       stickyActions
     >
       <div class="trakt-smart-list-form-content" class:is-limited={isAtLimit}>

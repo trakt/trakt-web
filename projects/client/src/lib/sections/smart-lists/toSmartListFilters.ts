@@ -47,8 +47,21 @@ const toRange = (value: string): number[] =>
     .filter((item) => !Number.isNaN(item))
     .slice(0, 2);
 
+function toPreserved(base: SmartListFilters): SmartListFilters {
+  return Object.entries(base).reduce<SmartListFilters>(
+    (filters, [key, value]) => {
+      const isControlled = isListKey(key) || isRangeKey(key) ||
+        isBooleanKey(key);
+
+      return isControlled ? filters : { ...filters, [key]: value };
+    },
+    {},
+  );
+}
+
 export function toSmartListFilters(
   filterMap: Record<string, string>,
+  base: SmartListFilters = {},
 ): SmartListFilters {
   return Object.entries(filterMap).reduce<SmartListFilters>(
     (filters, [key, value]) => {
@@ -70,6 +83,6 @@ export function toSmartListFilters(
 
       return filters;
     },
-    {},
+    toPreserved(base),
   );
 }

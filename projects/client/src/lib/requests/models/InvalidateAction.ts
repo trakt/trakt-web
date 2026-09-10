@@ -137,6 +137,7 @@ export const InvalidateAction = {
 
   SmartList: {
     Created: buildInvalidationKey('smart_list', 'created'),
+    Updated: buildInvalidationKey('smart_list', 'updated'),
     Deleted: buildInvalidationKey('smart_list', 'deleted'),
   },
 

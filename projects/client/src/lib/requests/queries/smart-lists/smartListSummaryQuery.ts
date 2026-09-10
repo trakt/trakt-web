@@ -1,5 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { createRevalidatingFetch } from '$lib/requests/_internal/createRevalidatingFetch.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import {
   mapToSmartList,
@@ -12,7 +13,7 @@ type SmartListSummaryParams = { listId: string } & ApiParams;
 const smartListSummaryRequest = (
   { fetch, listId }: SmartListSummaryParams,
 ) =>
-  api({ fetch })
+  api({ fetch: createRevalidatingFetch(fetch ?? globalThis.fetch) })
     .users
     .smartLists
     .smartList
@@ -26,6 +27,7 @@ const smartListSummaryRequest = (
 export const smartListSummaryQuery = defineQuery({
   key: 'smartListSummary',
   invalidations: [
+    InvalidateAction.SmartList.Updated,
     InvalidateAction.SmartList.Created,
     InvalidateAction.SmartList.Deleted,
   ],
