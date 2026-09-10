@@ -1,13 +1,21 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import CountBadge from "$lib/components/badge/CountBadge.svelte";
   import FilterIcon from "$lib/components/icons/FilterIcon.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import type { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import FilterSidebar from "./FilterSidebar.svelte";
 
-  const { isDisabled }: { isDisabled: boolean } = $props();
+  const {
+    isDisabled,
+    smartListTarget,
+  }: {
+    isDisabled: boolean;
+    smartListTarget?: ListTarget | Nil;
+  } = $props();
 
   const { hasActiveFilter, activeFilterCount } = useFilter();
 
@@ -37,13 +45,15 @@
       <FilterIcon state={filteredState} />
     </ActionButton>
     {#if count > 0}
-      <span class="filter-count-badge tag bold">{count}</span>
+      <span class="filter-count-anchor">
+        <CountBadge {count} />
+      </span>
     {/if}
   </div>
 </div>
 
 {#if $isSidebarOpen}
-  <FilterSidebar {onClose} />
+  <FilterSidebar {onClose} {smartListTarget} />
 {/if}
 
 <style lang="scss">
@@ -75,26 +85,12 @@
     position: relative;
     display: inline-flex;
 
-    .filter-count-badge {
+    .filter-count-anchor {
       position: absolute;
       top: 0;
       inset-inline-end: 0;
 
-      min-width: var(--ni-16);
-      height: var(--ni-16);
-      padding: 0 var(--ni-4);
-      box-sizing: border-box;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: var(--border-radius-l);
-      background-color: var(--purple-500);
-      color: var(--shade-10);
-
-      line-height: 1;
-
+      display: inline-flex;
       pointer-events: none;
     }
   }

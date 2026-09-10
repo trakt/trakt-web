@@ -9,7 +9,7 @@ type CreateSmartListRequestParams =
 
 export function createSmartListRequest(
   { body, fetch }: CreateSmartListRequestParams,
-): Promise<boolean> {
+): Promise<string | Nil> {
   return api({ fetch })
     .users
     .smartLists
@@ -19,5 +19,11 @@ export function createSmartListRequest(
       },
       body,
     })
-    .then(({ status }) => status === 201);
+    .then((response) => {
+      if (response.status !== 201) {
+        return null;
+      }
+
+      return response.body.ids.slug;
+    });
 }

@@ -18,14 +18,14 @@
   import MediaTypeToggler from "./_internal/MediaTypeToggler.svelte";
   import TargetDropdown from "./_internal/TargetDropdown.svelte";
   import TargetPreview from "./_internal/TargetPreview.svelte";
-  import { toTargetLabel } from "./_internal/toTargetLabel";
+  import SmartListRecipe from "./_internal/SmartListRecipe.svelte";
   import { ListTarget } from "./models/ListTarget";
   import { useCreateSmartList } from "./useCreateSmartList";
 
   const { mode, limits }: { mode: DiscoverMode; limits: UserLimits } = $props();
 
   const { createList, isCreating } = useCreateSmartList();
-  const { filterMap, activeFilterCount } = useFilter();
+  const { filterMap } = useFilter();
   const { user } = useUser();
 
   const limit = iffy(() =>
@@ -46,12 +46,16 @@
   };
 
   const onCreateHandler = async () => {
-    await createList({
+    const slug = await createList({
       name: listName,
       type,
       target,
       filterMap: $filterMap,
     });
+
+    if (!slug) {
+      return;
+    }
 
     goBack();
   };
@@ -74,18 +78,7 @@
 {/snippet}
 
 {#snippet recipe()}
-  <div class="trakt-smart-list-recipe">
-    <span class="bold ellipsis">{toTargetLabel(target)}</span>
-    <span class="separator" aria-hidden="true">·</span>
-    <span class="bold ellipsis">
-      {type === "movie" ? m.button_text_movies() : m.button_text_shows()}
-    </span>
-    {#if $activeFilterCount > 0}
-      <span class="filter-count tag bold" aria-label={m.button_label_filters()}>
-        {$activeFilterCount}
-      </span>
-    {/if}
-  </div>
+  <SmartListRecipe {target} {type} />
 {/snippet}
 
 <div class="trakt-smart-list-creator">
@@ -166,35 +159,5 @@
     gap: var(--gap-xs);
 
     min-width: 0;
-  }
-
-  .trakt-smart-list-recipe {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xxs);
-
-    min-width: 0;
-    color: var(--color-text-secondary);
-
-    .separator {
-      color: var(--color-text-secondary);
-    }
-
-    .filter-count {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      min-width: var(--ni-16);
-      height: var(--ni-16);
-      padding: 0 var(--ni-4);
-      box-sizing: border-box;
-
-      border-radius: var(--border-radius-l);
-      background-color: var(--purple-500);
-      color: var(--shade-10);
-
-      line-height: 1;
-    }
   }
 </style>

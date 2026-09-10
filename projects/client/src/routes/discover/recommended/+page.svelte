@@ -6,6 +6,7 @@
 
   import RecommendedPaginatedList from "$lib/sections/lists/recommended/RecommendedPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
 
   const { mode, current } = useDiscover();
@@ -18,6 +19,7 @@
 >
   <NavbarStateSetter
     hasFilters
+    smartListTarget={ListTarget.Recommendations}
     header={{
       title: m.list_title_recommended(),
       metaInfo: $current.text(),

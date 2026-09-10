@@ -1,5 +1,5 @@
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createSmartListRequest } from '$lib/requests/queries/users/createSmartListRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { SmartListWriteRequest } from '@trakt/api';
@@ -9,9 +9,15 @@ import { useTrack } from '../../features/analytics/useTrack.ts';
 import type { ListTarget } from './models/ListTarget.ts';
 import { toSmartListFilters } from './toSmartListFilters.ts';
 
+const MEDIA_TYPES: Record<DiscoverMode, SmartListWriteRequest['media_type']> = {
+  movie: 'movies',
+  show: 'shows',
+  media: 'media',
+};
+
 type CreateListProps = {
   name: string;
-  type: MediaType;
+  type: DiscoverMode;
   target: ListTarget;
   filterMap: Record<string, string>;
 };
@@ -22,7 +28,7 @@ function toPayload(
   return {
     name,
     source: target as SmartListWriteRequest['source'],
-    media_type: type === 'movie' ? 'movies' : 'shows',
+    media_type: MEDIA_TYPES[type],
     filters: toSmartListFilters(filterMap),
   };
 }
@@ -38,11 +44,16 @@ export function useCreateSmartList() {
     track();
 
     const body = toPayload(props);
-    await createSmartListRequest({ body });
+    const slug = await createSmartListRequest({ body })
+      .catch(() => null);
 
-    await invalidate(InvalidateAction.SmartList.Created);
+    if (slug) {
+      await invalidate(InvalidateAction.SmartList.Created);
+    }
 
     isCreating.next(false);
+
+    return slug;
   };
 
   return {

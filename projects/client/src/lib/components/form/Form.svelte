@@ -3,6 +3,7 @@
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount } from "svelte";
   import Button from "../buttons/Button.svelte";
+  import DrawerDock from "../drawer/DrawerDock.svelte";
   import type { FormProps } from "./models/FormProps";
 
   const {
@@ -44,11 +45,7 @@
     {@render children()}
   </div>
 
-  <div
-    class="trakt-form-actions"
-    class:is-inline={inlineActions}
-    class:is-sticky={stickyActions}
-  >
+  {#snippet formActions()}
     <Button
       size="small"
       variant="secondary"
@@ -70,7 +67,17 @@
     >
       {confirmButtonText}
     </Button>
-  </div>
+  {/snippet}
+
+  {#if stickyActions}
+    <DrawerDock>
+      {@render formActions()}
+    </DrawerDock>
+  {:else}
+    <div class="trakt-form-actions" class:is-inline={inlineActions}>
+      {@render formActions()}
+    </div>
+  {/if}
 </form>
 
 <style>
@@ -91,38 +98,6 @@
 
     &.is-inline {
       flex-direction: row;
-    }
-
-    /*
-     * Docked actions float above the scrolling content instead of sealing the
-     * bottom edge, so content stays visible underneath and the panel still
-     * reads as scrollable.
-     */
-    &.is-sticky {
-      --form-dock-padding: var(--gap-xs);
-      --form-actions-surface: color-mix(
-        in srgb,
-        var(--color-dialog-background) 86%,
-        transparent
-      );
-
-      position: sticky;
-      bottom: var(--gap-xxs);
-      z-index: var(--layer-raised);
-
-      flex-direction: row;
-      margin-block-start: var(--gap-xs);
-      padding: var(--form-dock-padding);
-
-      border: var(--border-thickness-xxs) solid var(--color-drawer-border);
-      /* concentric with the small buttons it wraps */
-      border-radius: calc(
-        var(--border-radius-m) * 0.8 + var(--form-dock-padding)
-      );
-
-      background: var(--form-actions-surface);
-      backdrop-filter: blur(var(--ni-12));
-      box-shadow: var(--shadow-dialog);
     }
   }
 </style>

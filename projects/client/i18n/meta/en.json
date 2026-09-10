@@ -10627,6 +10627,23 @@
       "default": "Added to your watchlist",
       "description": "Confirmation toast shown after adding to the watchlist when no single title is available (e.g. bulk actions)."
     },
+    "action_toast_created_smart_list": {
+      "default": "<b>{title}</b> was created",
+      "description": "Confirmation toast shown after creating a smart list from the filter panel. {title} is the list name.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_action_view_smart_list": {
+      "default": "View list",
+      "description": "Action on the toast shown after creating a smart list; opens the newly created list."
+    },
+    "action_toast_label_view_smart_list": {
+      "default": "Open the smart list you just created",
+      "description": "Accessible label for the action on the toast shown after creating a smart list."
+    },
     "action_toast_removed_from_watchlist": {
       "default": "<b>{title}</b> was removed from your watchlist",
       "description": "Confirmation toast shown after removing a title from the watchlist. {title} is the movie or show title.",
