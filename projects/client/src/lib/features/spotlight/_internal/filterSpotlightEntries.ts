@@ -1,5 +1,4 @@
-import type { SpotlightKeyword } from './models/SpotlightKeyword.ts';
-import type { SpotlightRoute } from './models/SpotlightRoute.ts';
+import type { SpotlightKeyword } from '../models/SpotlightKeyword.ts';
 
 const NO_MATCH = Number.POSITIVE_INFINITY;
 
@@ -7,13 +6,13 @@ function toKeywordText(keyword: SpotlightKeyword): string {
   return typeof keyword === 'function' ? keyword() : keyword;
 }
 
-type ScoreRouteProps = {
+type ScoreEntryProps = {
   label: string;
   keywords: ReadonlyArray<string>;
   query: string;
 };
 
-function scoreRoute({ label, keywords, query }: ScoreRouteProps): number {
+function scoreEntry({ label, keywords, query }: ScoreEntryProps): number {
   if (label.startsWith(query)) return 0;
   if (label.includes(query)) return 1;
 
@@ -27,27 +26,32 @@ function scoreRoute({ label, keywords, query }: ScoreRouteProps): number {
   return Math.min(NO_MATCH, ...keywordScores);
 }
 
-export function filterSpotlightRoutes(
-  routes: ReadonlyArray<SpotlightRoute>,
+type SpotlightEntry = {
+  label: () => string;
+  keywords: ReadonlyArray<SpotlightKeyword>;
+};
+
+export function filterSpotlightEntries<TEntry extends SpotlightEntry>(
+  entries: ReadonlyArray<TEntry>,
   query: string,
-): ReadonlyArray<SpotlightRoute> {
+): ReadonlyArray<TEntry> {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return [];
 
-  return routes
-    .map((route) => {
-      const label = route.label().toLowerCase();
+  return entries
+    .map((entry) => {
+      const label = entry.label().toLowerCase();
       return {
-        route,
+        entry,
         label,
-        score: scoreRoute({
+        score: scoreEntry({
           label,
-          keywords: route.keywords.map(toKeywordText),
+          keywords: entry.keywords.map(toKeywordText),
           query: normalized,
         }),
       };
     })
     .filter(({ score }) => score !== NO_MATCH)
     .sort((a, b) => a.score - b.score || a.label.localeCompare(b.label))
-    .map(({ route }) => route);
+    .map(({ entry }) => entry);
 }
