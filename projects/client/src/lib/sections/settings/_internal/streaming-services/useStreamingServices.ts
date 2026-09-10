@@ -1,15 +1,23 @@
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { saveStreamingPreferencesRequest } from '$lib/requests/queries/services/saveStreamingPreferencesRequest.ts';
 import { streamingSourcesQuery } from '$lib/requests/queries/services/streamingSourcesQuery.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { combineLatest, map } from 'rxjs';
 import { toFavoriteId } from './toFavoriteId.ts';
 
 export function useStreamingServices() {
   const { country, favorites } = useStreamingPreferences();
-  const { invalidate } = useInvalidator();
+
+  const savePreferences = useMutation(defineMutation({
+    key: 'streaming:save-preferences',
+    request: (
+      preferences: Parameters<typeof saveStreamingPreferencesRequest>[0],
+    ) => saveStreamingPreferencesRequest(preferences),
+    invalidations: [InvalidateAction.User.Settings],
+  }));
 
   const sources = useQuery(streamingSourcesQuery()).pipe(
     map((query) => query.data),
@@ -36,8 +44,7 @@ export function useStreamingServices() {
   );
 
   const setCountry = async (nextCountry: string) => {
-    await saveStreamingPreferencesRequest({ country: nextCountry });
-    await invalidate(InvalidateAction.User.Settings);
+    await savePreferences.mutate({ country: nextCountry });
   };
 
   const saveFavorites = async (forCountry: string, sourceSlugs: string[]) => {
@@ -45,8 +52,7 @@ export function useStreamingServices() {
     // payload fully replaces the stored list, so other countries are not sent.
     const next = sourceSlugs.map((slug) => toFavoriteId(forCountry, slug));
 
-    await saveStreamingPreferencesRequest({ favorites: next });
-    await invalidate(InvalidateAction.User.Settings);
+    await savePreferences.mutate({ favorites: next });
   };
 
   return {

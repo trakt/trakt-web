@@ -1,10 +1,12 @@
 import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
 import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { startShowRewatchingRequest } from '$lib/requests/queries/shows/startShowRewatchingRequest.ts';
 import { stopShowRewatchingRequest } from '$lib/requests/queries/shows/stopShowRewatchingRequest.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
+import { firstValueFrom } from 'rxjs';
 import { useIsRewatching } from './useIsRewatching.ts';
 
 type UseRewatchingProps = {
@@ -14,8 +16,6 @@ type UseRewatchingProps = {
 };
 
 export function useRewatching({ show }: UseRewatchingProps) {
-  const isUpdatingRewatching = new BehaviorSubject(false);
-  const { invalidateAll } = useInvalidator();
   const { isEnabled } = useFeatureFlag();
   const isRewatchingFeatureEnabled = isEnabled(FeatureFlag.Rewatching);
   const { isRewatching } = useIsRewatching({
@@ -23,29 +23,32 @@ export function useRewatching({ show }: UseRewatchingProps) {
     media: show,
   });
 
-  const invalidateRewatching = () =>
-    invalidateAll([
-      InvalidateAction.Rewatching('show'),
-      InvalidateAction.MarkAsWatched('show'),
-    ]);
+  const rewatchingInvalidations = ({ data }: { data: boolean }) =>
+    data
+      ? [
+        InvalidateAction.Rewatching('show'),
+        InvalidateAction.MarkAsWatched('show'),
+      ]
+      : [];
+
+  const start = useMutation(defineMutation({
+    key: 'show:start-rewatching',
+    request: () => startShowRewatchingRequest({ id: show.id }),
+    invalidations: rewatchingInvalidations,
+  }));
+
+  const stop = useMutation(defineMutation({
+    key: 'show:stop-rewatching',
+    request: () => stopShowRewatchingRequest({ id: show.id }),
+    invalidations: rewatchingInvalidations,
+  }));
 
   const startRewatching = async () => {
     if (!(await firstValueFrom(isRewatchingFeatureEnabled))) {
       return false;
     }
 
-    isUpdatingRewatching.next(true);
-
-    try {
-      const didStart = await startShowRewatchingRequest({ id: show.id });
-      if (didStart) {
-        await invalidateRewatching();
-      }
-
-      return didStart;
-    } finally {
-      isUpdatingRewatching.next(false);
-    }
+    return await start.mutate();
   };
 
   const stopRewatching = async () => {
@@ -53,19 +56,10 @@ export function useRewatching({ show }: UseRewatchingProps) {
       return false;
     }
 
-    isUpdatingRewatching.next(true);
-
-    try {
-      const didStop = await stopShowRewatchingRequest({ id: show.id });
-      if (didStop) {
-        await invalidateRewatching();
-      }
-
-      return didStop;
-    } finally {
-      isUpdatingRewatching.next(false);
-    }
+    return await stop.mutate();
   };
+
+  const isUpdatingRewatching = anyTrue([start.isPending, stop.isPending]);
 
   return {
     isRewatching,
