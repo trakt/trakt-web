@@ -11,6 +11,8 @@ type CreateMediaLdParams = {
   info: MediaInfo | Nil;
 };
 
+const TRAKT_RATING_SCALE = 10;
+
 const toAggregateRating = (info: MediaInfo | Nil) => {
   const { rating, votes } = info ?? {};
 
@@ -21,10 +23,10 @@ const toAggregateRating = (info: MediaInfo | Nil) => {
   return {
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: rating.toFixed(1),
+      ratingValue: (rating * TRAKT_RATING_SCALE).toFixed(1),
       ratingCount: votes,
-      bestRating: '10',
-      worstRating: '0',
+      bestRating: String(TRAKT_RATING_SCALE),
+      worstRating: '1',
     },
   };
 };
