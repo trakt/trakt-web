@@ -1,18 +1,30 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import { likeListRequest } from '$lib/requests/queries/lists/likeListRequest.ts';
 import { unlikeListRequest } from '$lib/requests/queries/lists/unlikeListRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject, map } from 'rxjs';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
+import { map } from 'rxjs';
 
 export function useLikeList(list: MediaListSummary) {
-  const isUpdating = new BehaviorSubject<boolean>(false);
   const { track } = useTrack(AnalyticsEvent.ListLike);
-  const { invalidate } = useInvalidator();
   const { likes } = useUser();
+
+  const like = useMutation(defineMutation({
+    key: 'list:like',
+    request: likeListRequest,
+    invalidations: [InvalidateAction.List.Like],
+  }));
+
+  const unlike = useMutation(defineMutation({
+    key: 'list:unlike',
+    request: unlikeListRequest,
+    invalidations: [InvalidateAction.List.Like],
+  }));
 
   const isLiked = likes.pipe(
     map(($likes) => {
@@ -24,28 +36,16 @@ export function useLikeList(list: MediaListSummary) {
     }),
   );
 
+  const isUpdating = anyTrue([like.isPending, unlike.isPending]);
+
   const likeList = async () => {
-    isUpdating.next(true);
-
     track({ action: 'like' });
-    await likeListRequest({
-      listId: list.id,
-    });
-    await invalidate(InvalidateAction.List.Like);
-
-    isUpdating.next(false);
+    await like.mutate({ listId: list.id });
   };
 
   const unlikeList = async () => {
-    isUpdating.next(true);
-
     track({ action: 'unlike' });
-    await unlikeListRequest({
-      listId: list.id,
-    });
-    await invalidate(InvalidateAction.List.Like);
-
-    isUpdating.next(false);
+    await unlike.mutate({ listId: list.id });
   };
 
   return {

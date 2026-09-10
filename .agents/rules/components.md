@@ -306,8 +306,10 @@ export function useUser() {
   context or shared section
 - Hooks that fire user tracking mutations (history, watchlist, ratings,
   favorites) route writes through `executeOrEnqueue` and overlay reads with
-  `findPendingOverride` so actions work offline - see "Pattern 5" in
+  `findPendingOverride` so actions work offline - see "Pattern 6" in
   `requests.md`
+- Every other write hook uses `defineMutation` + `useMutation` for its pending
+  state and invalidation - see "Pattern 5" in `requests.md`
 
 ### Hooks that drive `useQuery` take `Observable<T>`, never a bare value
 
