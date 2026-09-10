@@ -101,8 +101,8 @@
 
       @include for-mouse {
         &:hover {
-          color: var(--blue-600);
-          text-decoration-color: var(--blue-300);
+          color: var(--purple-600);
+          text-decoration-color: var(--purple-300);
         }
       }
     }

@@ -303,10 +303,10 @@
 
     &[data-color="blue"] {
       @include color(
-        var(--blue-600),
-        var(--blue-200),
-        var(--blue-600),
-        var(--blue-50)
+        var(--purple-600),
+        var(--purple-200),
+        var(--purple-600),
+        var(--purple-50)
       );
     }
 
