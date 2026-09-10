@@ -11,6 +11,9 @@ const summaryDrawerParams = {
   [SummaryDrawers.Comments]: { [COMMENT_ID_PARAM]: '' },
   [SummaryDrawers.Review]: { [COMMENT_ID_PARAM]: '' },
   [SummaryDrawers.Episode]: { [EPISODE_PARAM]: '', [SEASON_PARAM]: '' },
+  /* The seasons drawer can be asked to open on an episode - the rail's edge
+     badges send the one its window cuts off at. */
+  [SummaryDrawers.Seasons]: { [EPISODE_PARAM]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 function mapToDrawer(value: string | Nil) {
@@ -93,6 +96,12 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
       buildDrawerLink(
         SummaryDrawers.Episode,
         { [EPISODE_PARAM]: String(episode), [SEASON_PARAM]: String(season) },
+      ),
+    /** The seasons drawer, optionally opened on a given episode. */
+    buildSeasonsDrawerLink: (episode?: number) =>
+      buildDrawerLink(
+        SummaryDrawers.Seasons,
+        episode != null ? { [EPISODE_PARAM]: String(episode) } : undefined,
       ),
     buildCommentsDrawerLink: (id?: number) =>
       buildDrawerLink(

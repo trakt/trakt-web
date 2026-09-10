@@ -10,6 +10,8 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import SeasonDropdown from "$lib/sections/lists/season/SeasonDropdown.svelte";
+  import { EPISODE_PARAM } from "$lib/sections/summary/constants.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { hasSeasonTitles } from "$lib/utils/media/hasSeasonTitles.ts";
   import { fade } from "svelte/transition";
   import SeasonDrawerItem from "./_internal/SeasonDrawerItem.svelte";
@@ -32,6 +34,12 @@
   let isOpen = $state(false);
   let activeTab = $state("episodes");
 
+  /* Opened from a rail edge badge, the link names the episode the rail cut
+     off at, and the list scrolls itself there. */
+  const { sourceEpisode } = $derived(
+    summaryDrawerNavigation(page.url.searchParams),
+  );
+
   const currentSeasonData = $derived(
     seasons.find((s) => s.number === currentSeason),
   );
@@ -41,6 +49,8 @@
   const buildSeasonLink = (seasonNumber: number) => {
     const url = new URL(page.url);
     url.searchParams.set("season", String(seasonNumber));
+    // The episode target belongs to the season the badge opened.
+    url.searchParams.delete(EPISODE_PARAM);
     return url.toString();
   };
 </script>
@@ -67,7 +77,12 @@
 {/snippet}
 
 {#snippet episodesContent()}
-  <SeasonEpisodesTab {show} {seasons} {currentSeason} />
+  <SeasonEpisodesTab
+    {show}
+    {seasons}
+    {currentSeason}
+    currentEpisode={sourceEpisode}
+  />
 {/snippet}
 
 {#snippet overviewContent()}
