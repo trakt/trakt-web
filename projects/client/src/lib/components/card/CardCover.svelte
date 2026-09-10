@@ -6,7 +6,8 @@
   import { lineClamp } from "../text/lineClamp";
   import type { CardCoverProps } from "./CardCoverProps";
 
-  const { src, overlaySrc, alt, badge, tag, title }: CardCoverProps = $props();
+  const { src, overlaySrc, alt, badge, tag, edge, title }: CardCoverProps =
+    $props();
 
   let isImagePending = $state(true);
   const id = $derived(checksum(`${src}-${title}`));
@@ -35,6 +36,9 @@
     <div class="trakt-card-cover-tag">
       {@render tag()}
     </div>
+  {/if}
+  {#if edge}
+    {@render edge()}
   {/if}
   <div
     class="trakt-card-cover-image"

@@ -1,3 +1,4 @@
+import type { Snippet } from 'svelte';
 import type { ActivityType } from '$lib/models/ActivityType.ts';
 import type { ShowInput } from '$lib/models/MediaInput.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
@@ -30,6 +31,8 @@ export type EpisodeItemVariant =
 
 export type EpisodeCardProps = BaseItemProps & EpisodeItemVariant & {
   media: ShowInput;
+  /** Docked to the cover's edges, inside its frame - see CardCoverProps. */
+  edge?: Snippet;
   urlOverride?: EpisodeUrlOverride;
   onWatched?: () => void;
   /**
