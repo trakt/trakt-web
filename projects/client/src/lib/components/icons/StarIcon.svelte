@@ -1,6 +1,9 @@
 <script lang="ts">
   const { fill }: { fill: "none" | "half" | "full" } = $props();
 
+  const STAR_PATH =
+    "M12 2L14.8214 8.11672L21.5106 8.90983L16.5651 13.4833L17.8779 20.0902L12 16.8L6.12215 20.0902L7.43493 13.4833L2.48944 8.90983L9.17863 8.11672L12 2Z";
+
   const fillWidth = $derived.by(() => {
     switch (fill) {
       case "none":
@@ -24,19 +27,17 @@
 >
   <defs>
     <clipPath id={clipId}>
-      <path
-        d="M12 2L14.8214 8.11672L21.5106 8.90983L16.5651 13.4833L17.8779 20.0902L12 16.8L6.12215 20.0902L7.43493 13.4833L2.48944 8.90983L9.17863 8.11672L12 2Z"
-      />
+      <path d={STAR_PATH} />
     </clipPath>
   </defs>
-  <path
-    class="trakt-star-path"
-    d="M12 2L14.8214 8.11672L21.5106 8.90983L16.5651 13.4833L17.8779 20.0902L12 16.8L6.12215 20.0902L7.43493 13.4833L2.48944 8.90983L9.17863 8.11672L12 2Z"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linejoin="bevel"
-    fill="transparent"
-  />
+  <!--
+    The empty star is the outline; the fill is painted over it in the same
+    colour, so a fully rated star reads as one solid shape and both states
+    share an outer extent. The join is left to default (miter) rather than
+    bevel - bevel chops all five points flat, and those hard straight edges
+    are exactly what the fill exposes on the active or hovered star.
+  -->
+  <path d={STAR_PATH} stroke="currentColor" stroke-width="2" fill="none" />
   <rect
     class="trakt-star-fill"
     x="0"
@@ -49,12 +50,6 @@
 </svg>
 
 <style>
-  .trakt-star-path {
-    transition:
-      fill,
-      stroke var(--transition-increment) ease-in-out;
-  }
-
   .trakt-star-fill {
     transition: width var(--transition-increment) ease-in-out;
   }

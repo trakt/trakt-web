@@ -18,13 +18,6 @@
 
     width: 100%;
 
-    :global(svg) {
-      --icon-color: var(--color-text-primary);
-    }
-
-    :global(.is-current-rating svg) {
-      --icon-fill-color: var(--color-text-primary);
-    }
 
     :global(.trakt-action-button[disabled]) {
       background-color: transparent;

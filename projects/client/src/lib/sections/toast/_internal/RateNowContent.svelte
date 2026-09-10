@@ -72,7 +72,6 @@
       <RateNow
         {...lastWatched}
         variant="allow"
-        style="minimal"
         onclick={() => (interactionCounter += 1)}
       />
     </div>
@@ -119,12 +118,5 @@
       justify-content: flex-start;
     }
 
-    :global(svg) {
-      --icon-color: var(--color-foreground);
-    }
-
-    :global(.is-current-rating svg) {
-      --icon-fill-color: var(--color-foreground);
-    }
   }
 </style>
