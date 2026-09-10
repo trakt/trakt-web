@@ -2,11 +2,11 @@ import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
 import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { setCoverImageRequest } from '$lib/requests/queries/users/setCoverImageRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject } from 'rxjs';
 
 type UseCoverImageProps = {
   type: ExtendedMediaType;
@@ -18,29 +18,28 @@ type UseCoverImageProps = {
 export function useCoverImage(
   { type, id, title, coverUrl }: UseCoverImageProps,
 ) {
-  const isSettingCoverImage = new BehaviorSubject(false);
-
-  const { invalidate } = useInvalidator();
   const { confirm } = useConfirm();
   const { track } = useTrack(AnalyticsEvent.CoverImage);
+
+  const setting = useMutation(defineMutation({
+    key: 'user:set-cover-image',
+    request: () => setCoverImageRequest({ type, id }),
+    invalidations: [InvalidateAction.User.CoverImage],
+  }));
 
   const setCoverImage = confirm({
     type: ConfirmationType.SetCoverImage,
     title,
     previewUrl: coverUrl,
     onConfirm: async () => {
-      isSettingCoverImage.next(true);
-
       track({ type });
-      await setCoverImageRequest({ type, id });
-      await invalidate(InvalidateAction.User.CoverImage);
 
-      isSettingCoverImage.next(false);
+      await setting.mutate();
     },
   });
 
   return {
     setCoverImage,
-    isSettingCoverImage: isSettingCoverImage.asObservable(),
+    isSettingCoverImage: setting.isPending,
   };
 }
