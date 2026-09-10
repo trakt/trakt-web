@@ -15,6 +15,8 @@
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
+  import ListDetailsButton from "./_internal/ListDetailsButton.svelte";
+  import ListDetailsDrawerHost from "./_internal/ListDetailsDrawerHost.svelte";
   import ManageCollaboratorsButton from "./_internal/ManageCollaboratorsButton.svelte";
   import ManageCollaboratorsDrawerHost from "./_internal/ManageCollaboratorsDrawerHost.svelte";
   import ListReorderDrawer from "./ListReorderDrawer.svelte";
@@ -75,6 +77,9 @@
   >
     {#snippet items()}
       {@render popupActions?.()}
+      {#if isOnListPage}
+        <ListDetailsButton {list} />
+      {/if}
       {#if isListOwner}
         <ShareButton
           title={list.name}
@@ -110,6 +115,10 @@
       {/if}
     {/snippet}
   </PopupMenu>
+
+  {#if isOnListPage}
+    <ListDetailsDrawerHost {list} />
+  {/if}
 </RenderFor>
 
 {#if showEditList}

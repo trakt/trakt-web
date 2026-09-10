@@ -59,6 +59,26 @@
       "default": "Nothing matches \"{query}\"",
       "description": "Message shown in spotlight when the typed query matches no pages or media."
     },
+    "list_title_featured_people": {
+      "default": "Featured People",
+      "description": "Heading of the section in the list details drawer that lists the recurring cast, directors, and creators featured in a list."
+    },
+    "header_list_description": {
+      "default": "Description",
+      "description": "Heading above the list description in the list details drawer."
+    },
+    "text_list_no_description": {
+      "default": "This list doesn't have a description yet.",
+      "description": "Shown in the list details drawer when the list has no description."
+    },
+    "text_no_featured_people": {
+      "default": "No featured people",
+      "description": "Title of the empty state in the list details drawer when no cast or crew member appears in more than one title of the list."
+    },
+    "text_featured_people_empty_hint": {
+      "default": "People show up here once they appear in more than one title on this list.",
+      "description": "Explanation under the empty featured people state in the list details drawer."
+    },
     "link_text_streaming_sync_settings": {
       "default": "Streaming",
       "description": "Text for the link to the streaming services settings page."
