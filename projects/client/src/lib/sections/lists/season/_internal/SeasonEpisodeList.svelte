@@ -49,7 +49,8 @@
     useShowWatchedEpisodes({ showId: show.id }),
   );
 
-  const { buildDrawerLink, buildEpisodeDrawerLink } = summaryDrawerNavigation();
+  const { buildDrawerLink, buildEpisodeDrawerLink, buildSeasonsDrawerLink } =
+    summaryDrawerNavigation();
   const seasonDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Seasons));
 
   const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
@@ -71,7 +72,7 @@
       : episodes.findIndex((episode) => episode.number === currentEpisode),
   );
 
-  const window = $derived(
+  const episodeWindow = $derived(
     isLargeScreen
       ? getEpisodeWindow({
         total: episodes.length,
@@ -81,26 +82,38 @@
       : { start: 0, end: episodes.length, before: 0, after: 0 },
   );
 
-  const visibleEpisodes = $derived(episodes.slice(window.start, window.end));
+  const visibleEpisodes = $derived(episodes.slice(episodeWindow.start, episodeWindow.end));
 
   /* The rail's own ends, so the badges can find the cards they dock to -
      SectionList hands its item snippet the episode, not its position. */
   const firstVisibleNumber = $derived(visibleEpisodes.at(0)?.number);
   const lastVisibleNumber = $derived(visibleEpisodes.at(-1)?.number);
+
+  /*
+    Each badge opens the drawer on the episode its own side cuts off at - the
+    last one behind the window, the first one ahead of it - so the list lands
+    where the rail stopped rather than at episode one.
+  */
+  const earlierLink = $derived(
+    buildSeasonsDrawerLink(
+      /* Guarded rather than relying on the badge being hidden at zero:
+         `at(-1)` would quietly wrap to the finale. */
+      episodeWindow.start > 0 ? episodes.at(episodeWindow.start - 1)?.number : undefined,
+    ),
+  );
+  const laterLink = $derived(
+    buildSeasonsDrawerLink(episodes.at(episodeWindow.end)?.number),
+  );
 </script>
 
 <!-- Declared out here on purpose: a snippet written inside a component is
      one of that component's props, and these belong to the cards. -->
 {#snippet earlierBadge()}
-  <EpisodeRailEdgeBadge
-    side="start"
-    count={window.before}
-    link={seasonDrawerLink}
-  />
+  <EpisodeRailEdgeBadge side="start" count={episodeWindow.before} link={earlierLink} />
 {/snippet}
 
 {#snippet laterBadge()}
-  <EpisodeRailEdgeBadge side="end" count={window.after} link={seasonDrawerLink} />
+  <EpisodeRailEdgeBadge side="end" count={episodeWindow.after} link={laterLink} />
 {/snippet}
 
 <SectionList
@@ -119,9 +132,9 @@
   }}
 >
   {#snippet item(episode)}
-    {@const isRailStart = window.before > 0 &&
+    {@const isRailStart = episodeWindow.before > 0 &&
       episode.number === firstVisibleNumber}
-    {@const isRailEnd = window.after > 0 &&
+    {@const isRailEnd = episodeWindow.after > 0 &&
       episode.number === lastVisibleNumber}
     <SeasonEpisodeItem
       {show}
