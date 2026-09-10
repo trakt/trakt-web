@@ -9,10 +9,12 @@ import { isAddEndpoint } from '$lib/features/offline/isAddEndpoint.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import { useIsQueued } from '$lib/features/offline/useIsQueued.ts';
 import { useOfflineActions } from '$lib/features/offline/useOfflineActions.ts';
+import { whenExecuted } from '$lib/features/offline/whenExecuted.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 
 export type FavoritesStoreProps = {
   type: MediaType;
@@ -35,9 +37,7 @@ function getFavoritesPayload(
 export function useFavorites(
   { type, id, title, isToastEnabled = true }: FavoritesStoreProps,
 ) {
-  const isUpdatingFavorite = new BehaviorSubject(false);
   const { favorites } = useUser();
-  const { invalidate } = useInvalidator();
   const notify = toGatedNotify(useActionToast().notify, isToastEnabled);
 
   const { actions } = useOfflineActions();
@@ -71,21 +71,20 @@ export function useFavorites(
     }),
   );
 
+  const favoriting = useMutation(defineMutation({
+    key: 'favorites:write',
+    request: (action: 'add' | 'remove') =>
+      executeOrEnqueue({
+        endpoint: action === 'add' ? 'favorites:add' : 'favorites:remove',
+        keys: [toMediaKey(type, id)],
+        body: getFavoritesPayload({ type, id }),
+        invalidations: [InvalidateAction.Favorited(type)],
+      }),
+    invalidations: whenExecuted([InvalidateAction.Favorited(type)]),
+  }));
+
   const addOrRemoveFavorite = async (action: 'add' | 'remove') => {
-    isUpdatingFavorite.next(true);
-
-    const payload = getFavoritesPayload({ type, id });
-
-    const result = await executeOrEnqueue({
-      endpoint: action === 'add' ? 'favorites:add' : 'favorites:remove',
-      keys: [toMediaKey(type, id)],
-      body: payload,
-      invalidations: [InvalidateAction.Favorited(type)],
-    });
-
-    if (result === 'executed') {
-      await invalidate(InvalidateAction.Favorited(type));
-    }
+    await favoriting.mutate(action);
 
     notify({
       message: action === 'add'
@@ -95,14 +94,10 @@ export function useFavorites(
         addOrRemoveFavorite(action === 'add' ? 'remove' : 'add')
       ),
     });
-
-    // Always clear: a queued action stays flagged via isQueued, and leaving
-    // this pinned would re-disable the button once it syncs and dequeues.
-    isUpdatingFavorite.next(false);
   };
 
   return {
-    isUpdatingFavorite,
+    isUpdatingFavorite: favoriting.isPending,
     isFavorited,
     isQueued,
     addToFavorites: async () => await addOrRemoveFavorite('add'),

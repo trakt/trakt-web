@@ -287,20 +287,33 @@ The infrastructure lives in `lib/features/offline/`.
 
 **Hooks never call these request functions directly.** They go through
 `executeOrEnqueue`, which runs the request when online and queues it (deduped by
-media key set, latest intent wins) on network failure:
+media key set, latest intent wins) on network failure. It is the mutation's
+`request` (Pattern 5), and `whenExecuted` keeps the invalidation off the queued
+path - a queued action carries its own tokens and invalidates when it replays:
 
 ```ts
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
+import { whenExecuted } from '$lib/features/offline/whenExecuted.ts';
 
-await executeOrEnqueue({
-  endpoint: 'watchlist:add',
-  keys: media.map((item) => toMediaKey(type, item.id)),
-  body,
-  invalidations: [InvalidateAction.Watchlisted(type)],
-});
-await invalidate(InvalidateAction.Watchlisted(type));
+const invalidations = [InvalidateAction.Watchlisted(type)];
+
+const addition = useMutation(defineMutation({
+  key: 'watchlist:add',
+  request: () =>
+    executeOrEnqueue({
+      endpoint: 'watchlist:add',
+      keys: media.map((item) => toMediaKey(type, item.id)),
+      body,
+      invalidations,
+    }),
+  invalidations: whenExecuted(invalidations),
+}));
 ```
+
+State the hook reads before the write - an orphaned rating, a history snapshot
+an undo needs - belongs inside `request` and comes back as the mutation data, so
+`isPending` covers the read too.
 
 The matching read store overlays the pending queue so the UI reflects the action
 while offline (see `useIsWatched` / `useIsWatchlisted`):
@@ -318,8 +331,9 @@ if (pending) return isAddEndpoint(pending.endpoint);
 2. Map its body type in `offline/models/OfflineActionBody.ts`.
 3. Register the executor in `offline/_internal/executeOfflineAction.ts`
    (endpoint -> existing `*Request` function).
-4. Route the hook's write through `executeOrEnqueue` with `toMediaKey` keys and
-   the same `InvalidateAction` tokens the hook already fires.
+4. Route the hook's write through `executeOrEnqueue` inside a `defineMutation`
+   `request`, with `toMediaKey` keys and the same `InvalidateAction` tokens on
+   both the action and `whenExecuted`.
 5. Overlay the read store with `findPendingOverride` + `isAddEndpoint`.
 6. If replaying the action can duplicate server-side effects (like extra history
    plays), extend the reconcile step

@@ -7,6 +7,8 @@ import type { OfflineAction } from './models/OfflineAction.ts';
 import type { OfflineActionBody } from './models/OfflineActionBody.ts';
 import type { OfflineActionEndpoint } from './models/OfflineActionEndpoint.ts';
 
+export type ExecuteOrEnqueueOutcome = 'executed' | 'queued';
+
 type ExecuteOrEnqueueParams<TEndpoint extends OfflineActionEndpoint> = {
   endpoint: TEndpoint;
   keys: string[];
@@ -22,7 +24,7 @@ export async function executeOrEnqueue<
   TEndpoint extends OfflineActionEndpoint,
 >(
   { endpoint, keys, body, invalidations }: ExecuteOrEnqueueParams<TEndpoint>,
-): Promise<'executed' | 'queued'> {
+): Promise<ExecuteOrEnqueueOutcome> {
   const action: OfflineAction = {
     id: crypto.randomUUID(),
     endpoint,
