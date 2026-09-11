@@ -6,11 +6,15 @@ import { InvalidateAction } from '../../models/InvalidateAction.ts';
 
 type UserListsParams = ApiParams;
 
+// slug/ownerSlug are absent from the minimal payload; useAllPersonalLists
+// overlays them from the list summary queries.
 const UserListSchema = z.object({
   id: z.number(),
   name: z.string(),
+  slug: z.string().nullish(),
   count: z.number(),
   ownerId: z.number(),
+  ownerSlug: z.string().nullish(),
 });
 
 export type UserList = z.infer<typeof UserListSchema>;

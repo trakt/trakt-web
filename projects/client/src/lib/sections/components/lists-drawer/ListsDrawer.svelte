@@ -2,6 +2,7 @@
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
+  import type { DropdownItemFlash } from "$lib/components/dropdown/DropdownItemFlash";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -9,8 +10,11 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
   import { useAllPersonalLists } from "$lib/stores/useAllPersonalLists";
+  import { useBackgroundFlash } from "$lib/stores/useBackgroundFlash.svelte";
   import { useListedOnIds } from "$lib/stores/useListedOnIds";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import ViewListLink from "./_internal/ViewListLink.svelte";
   import ListDropdownItem from "./ListDropdownItem.svelte";
 
   const {
@@ -62,8 +66,49 @@
   const isLoading = $derived($isLoadingIds || $isLoadingLists);
   const isEmpty = $derived($lists.length === 0);
 
+  const watchlistFlash = useBackgroundFlash<DropdownItemFlash>();
+  let wasWatchlistUpdating = false;
+
   $effect(() => {
-    onLoading?.($isWatchlistUpdating);
+    const isUpdating = $isWatchlistUpdating;
+    onLoading?.(isUpdating);
+
+    if (wasWatchlistUpdating && !isUpdating) {
+      watchlistFlash.flash($isWatchlisted ? "purple" : "red");
+    }
+    wasWatchlistUpdating = isUpdating;
+  });
+
+  // Rows flash off the listed-ids diff instead of the request lifecycle -
+  // add/remove re-sorts the rows, and the server-state change is the one
+  // signal that survives that churn.
+  const rowFlash = useBackgroundFlash<{ id: number; color: DropdownItemFlash }>();
+  let previousListedIds: Set<number> | null = null;
+
+  $effect(() => {
+    if ($isLoadingIds) {
+      return;
+    }
+
+    const current = listedOnIdsSet;
+    const previous = previousListedIds;
+    previousListedIds = current;
+
+    if (previous == null) {
+      return;
+    }
+
+    const addedId = [...current].find((id) => !previous.has(id));
+    const removedId = [...previous].find((id) => !current.has(id));
+
+    if (addedId != null) {
+      rowFlash.flash({ id: addedId, color: "purple" });
+      return;
+    }
+
+    if (removedId != null) {
+      rowFlash.flash({ id: removedId, color: "red" });
+    }
   });
 </script>
 
@@ -76,9 +121,18 @@
         size="normal"
         isWatchlistUpdating={$isWatchlistUpdating}
         isWatchlisted={$isWatchlisted}
+        flash={watchlistFlash.flashing}
         onAdd={addToWatchlist}
         onRemove={confirmRemove}
-      />
+      >
+        {#snippet action()}
+          <ViewListLink
+            href={UrlBuilder.lists.watchlist("me")}
+            label={m.link_label_view_watchlist()}
+            tooltip={m.tooltip_view_watchlist()}
+          />
+        {/snippet}
+      </WatchlistButton>
 
       {#if isEmpty && isLoading}
         <LoadingIndicator />
@@ -90,6 +144,9 @@
             {onLoading}
             {media}
             isListed={listedOnIdsSet.has(list.id)}
+            flash={rowFlash.flashing?.id === list.id
+              ? rowFlash.flashing.color
+              : undefined}
           />
         {/each}
       {/if}
@@ -99,7 +156,9 @@
 
 <style>
   .lists-layout {
-    --dropdown-item-direction: row-reverse;
-    --dropdown-item-justify: space-between;
+    /* The group's list is overflow: hidden, which zeroes its automatic
+       min-size inside the drawer's scroll flexbox - without this wrapper the
+       group shrinks to fit and clips instead of letting the drawer scroll. */
+    flex-shrink: 0;
   }
 </style>

@@ -7,10 +7,9 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { useBackgroundFlash } from "$lib/stores/useBackgroundFlash.svelte";
   import { MEDIA_POSTER_PLACEHOLDER } from "$lib/utils/assets.ts";
   import { clamp } from "$lib/utils/number/clamp.ts";
-  import { time } from "$lib/utils/timing/time.ts";
-  import { onDestroy, tick } from "svelte";
   import { flip } from "svelte/animate";
   import { cubicOut } from "svelte/easing";
   import type { ReorderableListItem } from "./models/ReorderableListItem.ts";
@@ -43,8 +42,6 @@
 
   const { confirm } = useConfirm();
 
-  const flashDuration = time.seconds(1.5);
-
   let localOrder = $state<{
     signature: string;
     items: ReorderableListItem[];
@@ -54,8 +51,7 @@
   let instantPosterKeys = $state<readonly string[]>([]);
   let placeholderIndex = $state<number | null>(null);
   let dragGhost = $state<DragGhost | null>(null);
-  let flashKey = $state<string | null>(null);
-  let flashTimeout: ReturnType<typeof setTimeout> | null = null;
+  const movedRowFlash = useBackgroundFlash<string>();
 
   const rankOrderedItems = $derived(sortReorderableItems(items));
   const rankSignature = $derived(itemOrderSignature(rankOrderedItems));
@@ -153,7 +149,7 @@
     dragGhost = null;
 
     if (!cancelled && key != null) {
-      highlightMovedRow(key);
+      movedRowFlash.flash(key);
     }
   }
 
@@ -185,30 +181,8 @@
     }
 
     moveItemToIndex(key, targetIndex);
-    highlightMovedRow(key);
+    movedRowFlash.flash(key);
   }
-
-  async function highlightMovedRow(key: string) {
-    if (flashTimeout != null) {
-      clearTimeout(flashTimeout);
-    }
-
-    flashKey = null;
-
-    await tick();
-
-    flashKey = key;
-    flashTimeout = setTimeout(() => {
-      flashKey = null;
-      flashTimeout = null;
-    }, flashDuration);
-  }
-
-  onDestroy(() => {
-    if (flashTimeout != null) {
-      clearTimeout(flashTimeout);
-    }
-  });
 
   async function handleApply() {
     if (!canApply) {
@@ -303,10 +277,7 @@
     </ActionButton>
   {/snippet}
 
-  <div
-    class="reorder-drawer"
-    style="--reorder-flash-duration: {flashDuration}ms"
-  >
+  <div class="reorder-drawer">
     {#if !isLoaded}
       <div class="reorder-loading" role="status" aria-live="polite">
         <LoadingIndicator />
@@ -328,7 +299,7 @@
         >
           {#each renderRows as row (row.key)}
             {@const isFlashing = row.type === "item" &&
-            row.item.key === flashKey}
+            row.item.key === movedRowFlash.flashing}
             <tr
               data-reorder-key={row.type === "item" ? row.item.key : undefined}
               class:drag-placeholder={row.type === "placeholder"}
@@ -506,7 +477,8 @@
       pointer-events: none;
       background: var(--color-background-purple);
       opacity: 0;
-      animation: reorder-flash var(--reorder-flash-duration) ease-out;
+      animation: background-flash var(--animation-duration-background-flash)
+        ease-out;
     }
 
     &:first-child::after {
@@ -517,26 +489,6 @@
     &:last-child::after {
       border-start-end-radius: var(--border-radius-m);
       border-end-end-radius: var(--border-radius-m);
-    }
-  }
-
-  @keyframes reorder-flash {
-    0% {
-      opacity: 0.28;
-    }
-
-    35% {
-      opacity: 0.28;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .is-flashing td::after {
-      animation: none;
     }
   }
 
