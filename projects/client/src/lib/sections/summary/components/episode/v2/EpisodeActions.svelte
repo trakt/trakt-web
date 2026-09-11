@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
+  import { episodeMetaInfo } from "$lib/utils/intl/episodeMetaInfo";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import TrackAction from "$lib/sections/media-actions/mark-as-watched/TrackAction.svelte";
@@ -29,7 +29,7 @@
   popup={{
     title,
     actions: popupActions,
-    metaInfo: `${showTitle} • ${m.text_season_episode_number(episode)}`,
+    metaInfo: episodeMetaInfo(episode, showTitle),
   }}
 >
   <TrackAction {title} type="episode" media={episode} {show} />

@@ -73,7 +73,7 @@
 
 <ListAction
   style="dropdown-item"
-  {media}
+  target={{ type: media.type, media }}
   {title}
   onClick={onListAction}
   variant="primary"

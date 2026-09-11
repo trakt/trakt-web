@@ -4,7 +4,7 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { ListTarget } from "$lib/models/ListTarget";
   import { useListedOnIds } from "$lib/stores/useListedOnIds";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
 
@@ -13,7 +13,7 @@
     style?: "normal" | "action" | "dropdown-item";
     variant?: "primary" | "secondary";
     title: string;
-    media: MediaEntry;
+    target: ListTarget;
     onClick: () => void;
     disabled?: boolean;
   };
@@ -23,13 +23,13 @@
     style = "normal",
     variant = "secondary",
     title,
-    media,
+    target,
     onClick,
     disabled,
   }: ListActionProps = $props();
 
-  const media$ = fromRune(() => media);
-  const { isLoading } = useListedOnIds({ media$ });
+  const target$ = fromRune(() => target);
+  const { isLoading } = useListedOnIds({ target$ });
 
   const isDisabled = $derived(disabled || $isLoading);
 </script>

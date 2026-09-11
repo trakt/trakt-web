@@ -35,10 +35,7 @@ export function useRemoveFromList(props: UseRemoveFromListProps) {
       listId: props.listId,
     });
 
-    const invalidationType = type === 'episode' || type === 'season'
-      ? 'show'
-      : type;
-    await invalidate(InvalidateAction.Listed(invalidationType));
+    await invalidate(InvalidateAction.Listed(type));
 
     isListUpdating.next(false);
   };

@@ -2490,7 +2490,7 @@
     },
     "button_text_manage_lists": {
       "default": "Manage lists",
-      "description": "Text for the button that opens the lists drawer. This allows users to add or remove a movie or show from their lists."
+      "description": "Text for the button that opens the lists drawer. This allows users to add or remove a movie, show, season or episode from their lists."
     },
     "button_text_view_history": {
       "default": "View History",
@@ -2498,7 +2498,7 @@
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "Add or remove \"{title}\" from lists",
-      "description": "Aria-label for the dropdown that allows users to add or remove a movie or show from lists.",
+      "description": "Aria-label for the dropdown that allows users to add or remove a movie, show, season or episode from lists.",
       "variables": {
         "title": {
           "type": "string"
@@ -2507,7 +2507,7 @@
     },
     "button_label_add_to_personal_list": {
       "default": "Add \"{title}\" to {list}",
-      "description": "Aria-label for the button that allows users to add a movie or show to a personal list.",
+      "description": "Aria-label for the button that allows users to add a movie, show, season or episode to a personal list.",
       "variables": {
         "title": {
           "type": "string"
@@ -2519,7 +2519,7 @@
     },
     "button_label_remove_from_personal_list": {
       "default": "Remove \"{title}\" from {list}",
-      "description": "Aria-label for the button that allows users to remove a movie or show from a personal list.",
+      "description": "Aria-label for the button that allows users to remove a movie, show, season or episode from a personal list.",
       "variables": {
         "title": {
           "type": "string"
@@ -5768,7 +5768,7 @@
     },
     "header_manage_lists": {
       "default": "Manage lists",
-      "description": "Header for the drawer that allows users to add/remove a movie or show to/from their lists."
+      "description": "Header for the drawer that allows users to add/remove a movie, show, season or episode to/from their lists."
     },
     "header_sentiment_highlight": {
       "default": "Highlight",

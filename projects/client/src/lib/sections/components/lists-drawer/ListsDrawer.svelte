@@ -1,35 +1,32 @@
 <script lang="ts">
-  import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
+  import type { ListTarget } from "$lib/models/ListTarget";
   import { useAllPersonalLists } from "$lib/stores/useAllPersonalLists";
   import { useListedOnIds } from "$lib/stores/useListedOnIds";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import ListDropdownItem from "./ListDropdownItem.svelte";
+  import WatchlistDropdownItem from "./_internal/WatchlistDropdownItem.svelte";
 
   const {
     onClose,
     metaInfo,
-    media,
+    target,
     title,
     onLoading,
   }: {
     onClose: () => void;
-    title?: string;
+    title: string;
     metaInfo?: string;
-    media: MediaEntry;
+    target: ListTarget;
     onLoading?: (isLoading: boolean) => void;
   } = $props();
 
   const { lists, isLoading: isLoadingLists } = useAllPersonalLists();
-  const media$ = fromRune(() => media);
-  const { listedOnIds, isLoading: isLoadingIds } = useListedOnIds({ media$ });
+  const target$ = fromRune(() => target);
+  const { listedOnIds, isLoading: isLoadingIds } = useListedOnIds({ target$ });
 
   const listedOnIdsSet = $derived(new Set($listedOnIds));
   const sortedLists = $derived(
@@ -41,54 +38,31 @@
     }),
   );
 
-  const {
-    addToWatchlist,
-    isWatchlistUpdating,
-    isWatchlisted,
-    removeFromWatchlist,
-  } = $derived(
-    useWatchlist({ media, type: media.type, isToastEnabled: false }),
-  );
-
-  const { confirm } = useConfirm();
-  const confirmRemove = $derived(
-    confirm({
-      type: ConfirmationType.RemoveFromWatchList,
-      title: title ?? media.title,
-      onConfirm: removeFromWatchlist,
-    }),
-  );
-
   const isLoading = $derived($isLoadingIds || $isLoadingLists);
   const isEmpty = $derived($lists.length === 0);
-
-  $effect(() => {
-    onLoading?.($isWatchlistUpdating);
-  });
 </script>
 
 <Drawer {onClose} title={m.header_manage_lists()} {metaInfo}>
   <div class="lists-layout">
     <DropdownGroup>
-      <WatchlistButton
-        title={title ?? media.title}
-        type="dropdown-item"
-        size="normal"
-        isWatchlistUpdating={$isWatchlistUpdating}
-        isWatchlisted={$isWatchlisted}
-        onAdd={addToWatchlist}
-        onRemove={confirmRemove}
-      />
+      {#if target.type === "movie" || target.type === "show"}
+        <WatchlistDropdownItem
+          media={target.media}
+          type={target.type}
+          {title}
+          {onLoading}
+        />
+      {/if}
 
       {#if isEmpty && isLoading}
         <LoadingIndicator />
       {:else}
         {#each sortedLists as list (list.id)}
           <ListDropdownItem
-            title={title ?? media.title}
+            {title}
             {list}
             {onLoading}
-            {media}
+            {target}
             isListed={listedOnIdsSet.has(list.id)}
           />
         {/each}
