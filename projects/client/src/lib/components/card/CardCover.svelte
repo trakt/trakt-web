@@ -119,6 +119,12 @@
       bottom: 0;
       inset-inline-start: 0;
 
+      /* Cards that hang indicators off the bottom edge raise the tag above them. */
+      padding-bottom: var(
+        --padding-bottom-override-card-tag,
+        var(--padding-card-tag)
+      );
+
       justify-content: flex-start;
       gap: var(--gap-xxs);
 

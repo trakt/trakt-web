@@ -6,4 +6,6 @@ export type SelectOption = {
   /* Multi-select only: when false the option cannot be excluded (no toggle). */
   excludable?: boolean;
   icon?: Snippet<[SelectOption]>;
+  /* Rendered after the label, in the list and in the single-select trigger. */
+  tag?: Snippet<[SelectOption]>;
 };

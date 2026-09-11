@@ -26,6 +26,7 @@
     header?: Snippet;
     autoWidth?: boolean;
     icon?: Snippet;
+    triggerTag?: Snippet;
     trigger?: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
   } & (SelectSingleProps | SelectMultipleProps);
 
@@ -38,6 +39,7 @@
     header,
     autoWidth = false,
     icon,
+    triggerTag,
     trigger,
     ...rest
   }: SelectBaseProps = $props();
@@ -61,6 +63,9 @@
             <span class="trigger-icon">{@render icon()}</span>
           {/if}
           <span class="trigger-label ellipsis capitalize">{triggerLabel}</span>
+          {#if triggerTag}
+            <span class="trigger-tag">{@render triggerTag()}</span>
+          {/if}
           <DropdownCaretIcon {open} />
         </button>
       {/if}
@@ -154,6 +159,15 @@
       }
     }
 
+    .trigger-tag {
+      display: flex;
+      flex-shrink: 0;
+
+      /* Pull the tag in from the trigger's gap so it sits as close to the
+         label as it does in the list rows. */
+      margin-inline-start: calc(var(--gap-xs) - var(--gap-s));
+    }
+
     padding: var(--ni-12);
     box-sizing: border-box;
 
@@ -175,6 +189,18 @@
           background-color: var(--color-foreground-select);
           color: var(--color-background-select);
           border-color: var(--color-background-select);
+
+          /* The button inverts, so a subtle tag inside it follows the text. */
+          --color-background-subtle-tag: color-mix(
+            in srgb,
+            currentColor 15%,
+            transparent
+          );
+          --color-border-subtle-tag: color-mix(
+            in srgb,
+            currentColor 30%,
+            transparent
+          );
         }
 
         &:focus-visible {

@@ -14,13 +14,18 @@
     trigger,
   }: SingleSelectProps = $props();
 
-  const selectedLabel = $derived(
-    value
-      ? (options.find((o) => o.value === value)?.label ?? placeholder)
-      : placeholder,
+  const selectedOption = $derived(
+    value ? options.find((o) => o.value === value) : undefined,
   );
 
+  const selectedLabel = $derived(selectedOption?.label ?? placeholder);
 </script>
+
+{#snippet triggerTag()}
+  {#if selectedOption?.tag}
+    {@render selectedOption.tag(selectedOption)}
+  {/if}
+{/snippet}
 
 <SelectBase
   type="single"
@@ -31,6 +36,7 @@
   {icon}
   {trigger}
   triggerLabel={selectedLabel}
+  triggerTag={selectedOption?.tag ? triggerTag : undefined}
   hasValue={Boolean(value)}
   onValueChange={onChange}
 >
