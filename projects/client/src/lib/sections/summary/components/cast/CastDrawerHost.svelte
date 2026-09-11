@@ -8,19 +8,11 @@
   import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
   import CreditMemberItem from "$lib/sections/lists/components/CreditMemberItem.svelte";
   import type { CreditMember } from "$lib/sections/lists/models/CreditMember.ts";
-  import { toCreditMembers } from "$lib/sections/lists/toCreditMembers.ts";
+  import { toCreditGroups } from "$lib/sections/summary/components/toCreditGroups.ts";
   import { fade } from "svelte/transition";
-  import CreditGroupHeader from "./_internal/CreditGroupHeader.svelte";
+  import CreditGroupHeader from "$lib/sections/summary/components/CreditGroupHeader.svelte";
 
   type CreditsType = "cast" | "crew";
-  type CreditGroupId = "main-cast" | "supporting-cast" | "crew";
-  type CreditGroup = {
-    id: CreditGroupId;
-    label: string;
-    members: CreditMember[];
-    showHeader: boolean;
-  };
-
   const creditOptions: ToggleOption<CreditsType>[] = [
     {
       value: "cast",
@@ -59,73 +51,18 @@
 
   const toCreditMemberKey = (member: CreditMember) =>
     `${member.key}-${member.positions ? "cast" : "crew"}`;
-  const toCreditGroupHeaderId = (group: CreditGroup) =>
+  const toCreditGroupHeaderId = (group: { id: string }) =>
     `cast-list-${type}-${isSearching ? "search" : creditsType}-${group.id}-header`;
 
-  const filterCreditMembers = (members: CreditMember[]) => {
-    if (!isSearching) return members;
-
-    return members.filter(({ description, name }) =>
-      `${name} ${description}`.toLocaleLowerCase().includes(
-        normalizedSearchTerm,
-      )
-    );
-  };
-
-  const { cast: mainCastMembers, crew: crewMembers } = $derived(
-    toCreditMembers({ crew, type }),
-  );
-  const supportingCastMembers = $derived(
-    type === "episode"
-      ? toCreditMembers({ crew: { ...crew, cast: crew.guestStars }, type }).cast
-      : [],
-  );
-  const castGroupLabel = $derived(
-    type === "episode" ? m.header_main_cast() : m.drawer_meta_info_cast(),
-  );
-  const supportingCastGroupLabel = $derived(
-    type === "episode" && mainCastMembers.length > 0
-      ? m.header_supporting_cast()
-      : m.drawer_meta_info_cast(),
-  );
-  const allCreditGroups = $derived<CreditGroup[]>([
-    {
-      id: "main-cast",
-      label: castGroupLabel,
-      members: mainCastMembers,
-      showHeader: true,
-    },
-    {
-      id: "supporting-cast",
-      label: supportingCastGroupLabel,
-      members: supportingCastMembers,
-      showHeader: true,
-    },
-    {
-      id: "crew",
-      label: m.drawer_meta_info_crew(),
-      members: crewMembers,
-      showHeader: isSearching,
-    },
-  ]);
-  const selectedCreditGroups = $derived.by(() => {
-    if (isSearching) return allCreditGroups;
-    if (creditsType === "crew") {
-      return allCreditGroups
-        .filter((group) => group.id === "crew")
-        .map((group) => ({ ...group, showHeader: false }));
-    }
-
-    return allCreditGroups.filter((group) => group.id !== "crew");
-  });
   const visibleCreditGroups = $derived(
-    selectedCreditGroups
+    toCreditGroups({ crew, type, searchTerm: normalizedSearchTerm })
+      .filter((group) => isSearching || group.type === creditsType)
       .map((group) => ({
         ...group,
-        members: filterCreditMembers(group.members),
-      }))
-      .filter((group) => group.members.length > 0),
+        showHeader: isSearching || group.type === "cast",
+      })),
   );
+
 </script>
 
 <Drawer
