@@ -1,6 +1,7 @@
 <script lang="ts">
-  import EpisodeTypeToggles from "$lib/features/calendar/EpisodeTypeToggles.svelte";
+  import CalendarFeedMenu from "$lib/features/calendar/CalendarFeedMenu.svelte";
   import CalendarItem from "$lib/features/calendar/CalendarItem.svelte";
+  import EpisodeTypeToggles from "$lib/features/calendar/EpisodeTypeToggles.svelte";
   import { useEpisodeType } from "$lib/features/calendar/useEpisodeType";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useDiscover } from "$lib/features/filters/useDiscover";
@@ -53,6 +54,7 @@
 
   {#snippet actions()}
     <EpisodeTypeToggles />
+    <CalendarFeedMenu />
   {/snippet}
 
   {#snippet ctaItem()}
