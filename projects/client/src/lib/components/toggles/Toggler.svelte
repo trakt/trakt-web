@@ -10,6 +10,8 @@
     options: ToggleOption<T>[];
     variant?: "icon" | "text";
     ariaLabel?: string;
+    reorderable?: boolean;
+    onReorder?: (values: T[]) => void;
   }
 
   const {
@@ -18,6 +20,8 @@
     options,
     variant = "icon",
     ariaLabel,
+    reorderable = false,
+    onReorder,
   }: TogglerProps = $props();
 
   const segmentedOptions = $derived<SegmentedSelectOption<T>[]>(
@@ -48,5 +52,7 @@
   options={segmentedOptions}
   {ariaLabel}
   icon={variant === "icon" ? iconSnippet : undefined}
+  {reorderable}
+  {onReorder}
   {onChange}
 />

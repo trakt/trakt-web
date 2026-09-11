@@ -6,6 +6,8 @@
   import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters.ts";
   import type { SegmentedSelectOption } from "./models/SegmentedSelectOption.ts";
   import type { SegmentedSelectProps } from "./models/SegmentedSelectProps.ts";
+  import { moveItem } from "$lib/utils/array/moveItem.ts";
+  import { holdToReorder } from "./_internal/holdToReorder.ts";
   import {
     trackSelector,
     type TrackSelectorParams,
@@ -24,8 +26,14 @@
     collapsedCount = 0,
     expanded = false,
     extension,
+    reorderable = false,
+    onReorder,
     onChange,
   }: SegmentedSelectProps<TValue> = $props();
+
+  let heldIndex = $state<number | null>(null);
+  let previewIndex = $state<number | null>(null);
+  const isReordering = $derived(heldIndex !== null);
 
   const selectedIndex = $derived(
     Math.max(
@@ -53,7 +61,19 @@
     collapsed: boolean;
   };
 
+  const reorderTo = (from: number, to: number) => {
+    if (from === to) return;
+    onReorder?.(
+      moveItem({ items: options.map((option) => option.value), from, to }),
+    );
+  };
+
   const segmentProps = ({ option, index, collapsed }: SegmentPropsParams) => ({
+    "data-segment-index": index,
+    "data-held": heldIndex === index ? "true" : undefined,
+    "data-preview": previewIndex === index && heldIndex !== index
+      ? "true"
+      : undefined,
     class: [
       "segment",
       !collapsed && index === selectedIndex && "is-selected",
@@ -153,6 +173,20 @@
 >
   <div
     class="segment-row"
+    class:is-reordering={isReordering}
+    use:holdToReorder={{
+      isEnabled: reorderable,
+      onHold: (index) => {
+        heldIndex = index;
+        previewIndex = index;
+      },
+      onPreview: (index) => (previewIndex = index),
+      onCommit: reorderTo,
+      onRelease: () => {
+        heldIndex = null;
+        previewIndex = null;
+      },
+    }}
     use:trackSelector={selectorParams}
     data-dpad-navigation={DpadNavigationType.List}
   >
@@ -185,6 +219,38 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  /* Reorder mode: the row rocks so it reads as editable, the held chip lifts
+     out of the rocking, and the slot it would land in makes room. */
+  @keyframes segment-rock {
+    0%, 100% { rotate: -0.8deg; }
+    50% { rotate: 0.8deg; }
+  }
+
+  .segment-row.is-reordering {
+    touch-action: none;
+    cursor: grabbing;
+
+    :global([data-segment-index]) {
+      animation: segment-rock 240ms ease-in-out infinite;
+    }
+
+    :global([data-held="true"]) {
+      animation: none;
+      scale: 1.06;
+      z-index: 1;
+    }
+
+    :global([data-preview="true"]) {
+      opacity: 0.55;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .segment-row.is-reordering :global([data-segment-index]) {
+      animation: none;
+    }
+  }
 
   .trakt-segmented-select {
     --segment-height: var(--segmented-select-segment-height);
