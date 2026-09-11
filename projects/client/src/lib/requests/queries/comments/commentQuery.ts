@@ -1,10 +1,13 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import {
+  type CommentResponseWithGif,
+  CommentResponseWithGifSchema,
+} from '$lib/requests/_internal/CommentResponseWithGif.ts';
 import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts';
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { type CommentResponse, commentResponseSchema } from '@trakt/api';
 
 type CommentParams =
   & {
@@ -26,12 +29,12 @@ const commentRequest = async ({ fetch, id }: CommentParams) => {
   }
 
   return {
-    body: commentResponseSchema.parse(await response.json()),
+    body: CommentResponseWithGifSchema.parse(await response.json()),
     status: response.status,
   };
 };
 
-function mapToComment(response: CommentResponse | null) {
+function mapToComment(response: CommentResponseWithGif | null) {
   if (response == null) {
     throw new Error('Comment response body is missing');
   }
