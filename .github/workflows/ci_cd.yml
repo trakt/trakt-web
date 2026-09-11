@@ -265,6 +265,7 @@ jobs:
         run: 'deno task build:preview'
         env:
           TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
+          KLIPY_API_KEY: ${{ secrets.KLIPY_API_KEY }}
 
       - name: Witnessing the Premonition aka Run Preview
         working-directory: projects/client
@@ -324,6 +325,7 @@ jobs:
         run: 'deno task build'
         env:
           TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
+          KLIPY_API_KEY: ${{ secrets.KLIPY_API_KEY }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       # Add this new step to copy the .npmrc file
