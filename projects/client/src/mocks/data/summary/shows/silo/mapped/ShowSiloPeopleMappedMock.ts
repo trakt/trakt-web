@@ -184,6 +184,20 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'key': 'steve-zahn',
       'name': 'Steve Zahn',
     },
+    {
+      'episodeCount': 2,
+      'characterName': 'Gloria Hildebrandt',
+      'headshot': {
+        'url': {
+          'thumb':
+            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
+          'medium':
+            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/medium/2e92bf71ee.jpg.webp',
+        },
+      },
+      'key': 'sophie-thompson',
+      'name': 'Sophie Thompson',
+    },
   ],
   'guestStars': [],
   'directors': [
