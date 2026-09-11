@@ -1,7 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable } from "$lib/utils/store/WritableSubject";
-  import { onMount } from "svelte";
   import Button from "../buttons/Button.svelte";
   import type { FormProps } from "./models/FormProps";
 
@@ -14,6 +13,7 @@
     confirmButtonText,
     confirmButtonLabel,
     inlineActions = false,
+    isValid,
   }: FormProps = $props();
 
   let formElement: HTMLFormElement;
@@ -21,11 +21,13 @@
   const isFormValid = writable(false);
 
   const checkFormValidity = () => {
-    const isValid = formElement.checkValidity();
-    isFormValid.set(isValid);
+    isFormValid.set(formElement.checkValidity());
   };
 
-  onMount(() => {
+  // A child whose own rule changed with `isValid` has no input event to
+  // announce itself with.
+  $effect(() => {
+    isValid;
     checkFormValidity();
   });
 </script>
@@ -59,7 +61,7 @@
       size="small"
       variant="primary"
       color="purple"
-      disabled={disabled || !$isFormValid}
+      disabled={disabled || !$isFormValid || isValid === false}
       label={confirmButtonLabel}
       type="submit"
     >
