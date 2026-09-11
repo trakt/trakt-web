@@ -4,6 +4,7 @@ import { auth } from './handlers/auth.ts';
 import { calendars } from './handlers/calendars.ts';
 import { comments } from './handlers/comments.ts';
 import { intl } from './handlers/intl.ts';
+import { klipy } from './handlers/klipy.ts';
 import { lists } from './handlers/lists.ts';
 import { movies } from './handlers/movies.ts';
 import { people } from './handlers/people.ts';
@@ -36,6 +37,7 @@ const handlers = [
   ...comments,
   ...team,
   ...intl,
+  ...klipy,
   ...vip,
 ];
 
