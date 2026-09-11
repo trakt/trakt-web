@@ -67,3 +67,15 @@ This handler requires the following environment variables to be configured:
 - **`TYPESENSE_SERVER`**: The URL of the Typesense server endpoint (e.g.,
   `https://your-typesense-server.com`). This specifies which Typesense instance
   to connect to for search operations.
+
+### KLIPY
+
+The GIF picker in comments is backed by [KLIPY](https://klipy.com). KLIPY's
+integration requirements mandate that calls reach them from the end user's
+browser rather than through our servers, so the picker talks to `api.klipy.com`
+directly and the app key is public by design.
+
+- **`KLIPY_API_KEY`**: The KLIPY app key. Read at build time and inlined into
+  the bundle by Vite, like `TRAKT_CLIENT_ID`, so it is consumed by the build
+  steps in `ci_cd.yml` and never pushed to the Worker. Without it the GIF button
+  opens an empty picker; nothing else is affected.
