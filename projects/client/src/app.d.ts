@@ -12,6 +12,7 @@ declare global {
    * VITE environment variables
    */
   const TRAKT_CLIENT_ID: string;
+  const KLIPY_API_KEY: string;
   const TRAKT_MODE: 'development' | 'production' | 'test';
   const TRAKT_TARGET_ENVIRONMENT: Environment;
 
