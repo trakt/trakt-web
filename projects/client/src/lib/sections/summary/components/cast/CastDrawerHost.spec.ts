@@ -1,7 +1,7 @@
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
 import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
-import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
+import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
@@ -15,17 +15,17 @@ describe('CastDrawerHost', () => {
   it('filters credits and searches locally', async () => {
     const user = userEvent.setup();
     const crew = {
-      ...ShowSiloPeopleMappedMock,
+      ...ShowSiloSplitPeopleMappedMock,
       cast: [
         {
-          ...ShowSiloPeopleMappedMock.cast[0]!,
+          ...ShowSiloSplitPeopleMappedMock.cast[0]!,
           characters: [
             'Juliette Nichols',
             'Juliette Nichols (voice)',
             'Juliette Nichols (archive footage)',
           ],
         },
-        ...ShowSiloPeopleMappedMock.cast.slice(1),
+        ...ShowSiloSplitPeopleMappedMock.cast.slice(1),
       ],
     };
 
@@ -48,9 +48,9 @@ describe('CastDrawerHost', () => {
     );
     expect(screen.getByText('People')).toBeInTheDocument();
     expect(screen.getByRole('heading', {
-      name: `Cast ${crew.cast.length} people`,
+      name: `Main Cast ${crew.cast.length} people`,
     })).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: /Supporting Cast/ })).not
+    expect(screen.getByRole('heading', { name: 'Supporting Cast 1 person' }))
       .toBeInTheDocument();
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     expect(screen.getByText('Juliette Nichols'))
@@ -78,7 +78,7 @@ describe('CastDrawerHost', () => {
       expect(screen.getByText('Cast & Crew')).toBeInTheDocument();
     });
     expect(screen.getByRole('heading', {
-      name: 'Cast 1 person',
+      name: 'Main Cast 1 person',
     })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /Supporting Cast/ })).not
       .toBeInTheDocument();
@@ -90,7 +90,7 @@ describe('CastDrawerHost', () => {
 
     await waitFor(() => {
       expect(screen.getByRole('heading', {
-        name: `Cast ${crew.cast.length} people`,
+        name: `Main Cast ${crew.cast.length} people`,
       })).toBeInTheDocument();
     });
     expect(screen.getByText('Juliette Nichols (voice)')).toBeInTheDocument();
