@@ -190,6 +190,32 @@
     color-mix(in srgb, var(--color-foreground) 5%, transparent);
 }
 
+// Clickable gif-backed tile in the picker: category chips and result tiles
+// share the surface, the focus ring and the tap behaviour. Consumers set
+// `--gif-tile-image` and their own box.
+@mixin gif-tile-surface {
+  all: unset;
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  border-radius: var(--border-radius-s);
+  overflow: hidden;
+
+  background-color: var(--color-input-background);
+  background-image: var(--gif-tile-image, none);
+  background-size: cover;
+  background-position: center;
+
+  outline: var(--border-thickness-xs) solid transparent;
+  transition: outline-color var(--transition-increment) ease-in-out;
+
+  &:hover,
+  &:focus-visible {
+    outline-color: var(--color-link-active);
+  }
+}
+
 @mixin card-tile-surface {
   box-sizing: border-box;
   padding: var(--ni-12);
