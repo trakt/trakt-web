@@ -10818,6 +10818,10 @@
     "button_label_add_gif": {
       "default": "Add a GIF",
       "description": "Aria-label for the button that opens the GIF picker from a comment box."
+    },
+    "image_alt_comment_gif": {
+      "default": "GIF attached to the comment",
+      "description": "Alt text for the GIF rendered underneath a posted comment."
     }
   }
 }

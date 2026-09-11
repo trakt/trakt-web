@@ -5,6 +5,7 @@
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { Marked } from "marked";
+  import CommentGif from "./CommentGif.svelte";
   import { createHeadingRenderer } from "./marked/createHeadingRenderer";
   import { createParagraphRenderer } from "./marked/createParagraphRenderer";
   import { spoilerExtension } from "./marked/spoilerExtension";
@@ -19,6 +20,9 @@
   };
 
   const { comment, media, type, onClick }: CommentBodyProps = $props();
+
+  // A gif is a comment on its own, so the body can be empty.
+  const hasText = $derived(comment.comment.trim().length > 0);
 
   const marked = $derived(
     new Marked({
@@ -47,18 +51,34 @@
       use:spoilMeAnyway
     >
       {@render commentText()}
+      {#if comment.gif}
+        <CommentGif url={comment.gif} variant="full" />
+      {/if}
     </div>
   </Spoiler>
 {:else}
   <button class="trakt-comment-preview" onclick={onClick}>
     <Spoiler {media} type={media.type} variant="persistent">
+      <!--
+        The gif is part of what a spoiler hides, so the blur sits on the row
+        that holds both it and the text rather than on the text alone.
+      -->
       <div
-        class="trakt-comment trakt-comment-preview-content"
-        use:lineClamp={{ lines: maxPreviewLines }}
-        style="--max-lines: {maxPreviewLines}"
+        class="trakt-comment-preview-row"
         class:trakt-spoiler={comment.isSpoiler}
       >
-        {@render commentText()}
+        {#if hasText}
+          <div
+            class="trakt-comment trakt-comment-preview-content"
+            use:lineClamp={{ lines: maxPreviewLines }}
+            style="--max-lines: {maxPreviewLines}"
+          >
+            {@render commentText()}
+          </div>
+        {/if}
+        {#if comment.gif}
+          <CommentGif url={comment.gif} variant="preview" />
+        {/if}
       </div>
     </Spoiler>
   </button>
@@ -115,10 +135,29 @@
     all: unset;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
-    display: flex;
+    // Grid rather than flex so the spoiler wrapper in between fills the card
+    // on both axes, which is what the row below measures itself against.
+    display: grid;
     height: var(--preview-height);
 
+    .trakt-comment-preview-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--gap-xs);
+
+      width: 100%;
+      height: var(--preview-height);
+      box-sizing: border-box;
+
+      &:global(.trakt-spoiler) {
+        @include spoiler-blur();
+      }
+    }
+
     .trakt-comment-preview-content {
+      flex-grow: 1;
+      min-width: 0;
+
       :global(p) {
         line-height: calc(var(--preview-height) / var(--max-lines));
       }
