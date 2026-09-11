@@ -7,6 +7,7 @@
     useCalendar,
     type CalendarItem as CalendarItemEntry,
   } from "./_internal/useCalendar";
+  import CalendarFeedMenu from "./CalendarFeedMenu.svelte";
   import CalendarItem from "./CalendarItem.svelte";
   import CalendarLayout from "./CalendarLayout.svelte";
   import { useCalendarPeriod } from "./context/useCalendarPeriod";
@@ -65,6 +66,10 @@
   {periods}
   {order}
 >
+  {#snippet actions()}
+    <CalendarFeedMenu />
+  {/snippet}
+
   {#snippet item(media)}
     <CalendarItem item={media} variant="summary" />
   {/snippet}
