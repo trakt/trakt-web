@@ -14,5 +14,6 @@ export const ShowEntrySchema = MediaEntrySchema.merge(EpisodeCountSchema)
     network: z.string().nullish(),
     totalRuntime: z.number(),
     airs: ShowAirsSchema.nullish(),
+    lastAired: z.date().nullish(),
   });
 export type ShowEntry = z.infer<typeof ShowEntrySchema>;
