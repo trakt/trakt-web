@@ -1,3 +1,4 @@
+import { ShowSiloSplitPeopleResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloSplitPeopleResponseMock.ts';
 import { http, HttpResponse } from 'msw';
 
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
@@ -112,13 +113,14 @@ export const shows = [
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/people`,
     ({ request }) => {
-      if (
-        new URL(request.url).searchParams.get('extended') !== 'images'
-      ) {
-        return new HttpResponse(null, { status: 400 });
+      const extended = new URL(request.url).searchParams.get('extended');
+      if (extended === 'images,guest_stars') {
+        return HttpResponse.json(ShowSiloSplitPeopleResponseMock);
       }
-
-      return HttpResponse.json(ShowSiloPeopleResponseMock);
+      if (extended === 'images') {
+        return HttpResponse.json(ShowSiloPeopleResponseMock);
+      }
+      return new HttpResponse(null, { status: 400 });
     },
   ),
   http.get(
@@ -199,8 +201,14 @@ export const shows = [
   ),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/people`,
-    () => {
-      return HttpResponse.json(ShowSiloPeopleResponseMock);
+    ({ request }) => {
+      if (
+        new URL(request.url).searchParams.get('extended') !==
+          'images,guest_stars'
+      ) {
+        return new HttpResponse(null, { status: 400 });
+      }
+      return HttpResponse.json(ShowSiloSplitPeopleResponseMock);
     },
   ),
   http.get(

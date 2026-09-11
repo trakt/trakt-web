@@ -13,6 +13,7 @@
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle.ts";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
+  import ShowCastDrawerHost from "./components/cast/ShowCastDrawerHost.svelte";
   import CastDrawerHost from "./components/cast/CastDrawerHost.svelte";
   import type { CommentsProps } from "./components/comments/CommentsProps";
   import CommentsDrawerHost from "./components/comments/drawers/CommentsDrawerHost.svelte";
@@ -138,7 +139,11 @@
 {/if}
 
 {#if drawer === SummaryDrawers.Cast}
-  <CastDrawerHost crew={details.crew} type={details.type} onClose={close} />
+  {#if details.type === "show"}
+    <ShowCastDrawerHost slug={mediaSlug} crew={details.crew} onClose={close} />
+  {:else}
+    <CastDrawerHost crew={details.crew} type={details.type} onClose={close} />
+  {/if}
 {/if}
 
 {#if drawer === SummaryDrawers.Videos && videos}

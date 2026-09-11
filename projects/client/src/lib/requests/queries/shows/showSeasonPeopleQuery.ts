@@ -10,6 +10,8 @@ type ShowSeasonPeopleParams = {
   season: number;
 } & ApiParams;
 
+const EXTENDED = 'images,guest_stars';
+
 const showSeasonPeopleRequest = (
   { fetch, slug, season }: ShowSeasonPeopleParams,
 ) =>
@@ -22,14 +24,14 @@ const showSeasonPeopleRequest = (
         season: castNumberAsString(season),
       },
       query: {
-        extended: 'images',
+        extended: EXTENDED as 'images',
       },
     });
 
 export const showSeasonPeopleQuery = defineQuery({
   key: 'showSeasonPeople',
   invalidations: [],
-  dependencies: (params) => [params.slug, params.season],
+  dependencies: (params) => [params.slug, params.season, EXTENDED],
   request: showSeasonPeopleRequest,
   mapper: (response) => mapToMediaCrew(response.body),
   schema: MediaCrewSchema,

@@ -8,7 +8,8 @@
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CreditMemberItem from "$lib/sections/lists/components/CreditMemberItem.svelte";
   import type { CreditMember } from "$lib/sections/lists/models/CreditMember.ts";
-  import { toCreditMembers } from "$lib/sections/lists/toCreditMembers.ts";
+  import { toCreditGroups } from "$lib/sections/summary/components/toCreditGroups.ts";
+  import CreditGroupHeader from "$lib/sections/summary/components/CreditGroupHeader.svelte";
   import DrawerCreditListSkeleton from "./DrawerCreditListSkeleton.svelte";
   import DrawerTabTitle from "./DrawerTabTitle.svelte";
 
@@ -49,25 +50,29 @@
     return m.drawer_meta_info_cast();
   });
 
-  const { cast: castMembers, crew: crewMembers } = $derived(
-    toCreditMembers({ crew, type }),
-  );
+  const visibleCreditGroups = $derived.by(() => {
+    const groups = toCreditGroups({
+      crew,
+      type,
+      searchTerm: normalizedSearchTerm,
+      mainCastLabel: m.header_main_cast(),
+    }).filter((group) => isSearching || group.type === creditsType);
 
-  const selectedCredits = $derived(
-    creditsType === "cast" ? castMembers : crewMembers,
-  );
+    if (type !== "movie" || groups.length === 0) return groups;
+
+    return [{
+      id: "credits",
+      label: creditsMetaInfo,
+      members: groups.flatMap((group) => group.members),
+      type: creditsType,
+    }];
+  });
 
   const toCreditMemberKey = (member: CreditMember) =>
     `${member.key}-${member.positions ? "cast" : "crew"}`;
 
-  const visibleCredits = $derived(
-    isSearching
-      ? [...castMembers, ...crewMembers].filter(({ description, name }) =>
-          `${name} ${description}`.toLocaleLowerCase().includes(
-            normalizedSearchTerm,
-          ),
-        )
-      : selectedCredits,
+  const showGroupHeaders = $derived(
+    type !== "movie" && (isSearching || creditsType === "cast"),
   );
 </script>
 
@@ -96,14 +101,32 @@
 
   {#if isLoading}
     <DrawerCreditListSkeleton />
-  {:else if visibleCredits.length > 0}
+  {:else if visibleCreditGroups.length > 0}
     <div
       id={`drawer-cast-list-${type}-${isSearching ? "search" : creditsType}`}
-      class="credit-list"
-      role="list"
+      class="credit-groups"
     >
-      {#each visibleCredits as item (toCreditMemberKey(item))}
-        <CreditMemberItem member={item} {type} />
+      {#each visibleCreditGroups as group (group.id)}
+        <section class="credit-group">
+          {#if showGroupHeaders}
+            <CreditGroupHeader
+              id={`drawer-credit-${type}-${group.id}-header`}
+              label={group.label}
+              count={group.members.length}
+            />
+          {/if}
+          <div
+            class="credit-list"
+            role="list"
+            aria-labelledby={showGroupHeaders
+              ? `drawer-credit-${type}-${group.id}-header`
+              : undefined}
+          >
+            {#each group.members as item (toCreditMemberKey(item))}
+              <CreditMemberItem member={item} {type} />
+            {/each}
+          </div>
+        </section>
       {/each}
     </div>
   {:else}
@@ -120,6 +143,18 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
+  }
+
+  .credit-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+  }
+
+  .credit-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
   }
 
   .credit-list {
