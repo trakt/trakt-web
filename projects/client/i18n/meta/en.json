@@ -10830,6 +10830,14 @@
     "image_alt_comment_gif": {
       "default": "GIF attached to the comment",
       "description": "Alt text for the GIF rendered underneath a posted comment."
+    },
+    "preview_feature_title_comment_gifs": {
+      "default": "GIFs in comments",
+      "description": "Title for the comment-GIFs preview feature toggle in settings."
+    },
+    "preview_feature_description_comment_gifs": {
+      "default": "Attach a GIF to any comment or review you write.",
+      "description": "Description for the comment-GIFs preview feature toggle in settings."
     }
   }
 }
