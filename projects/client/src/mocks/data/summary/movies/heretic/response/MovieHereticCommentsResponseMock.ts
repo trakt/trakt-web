@@ -1,11 +1,12 @@
+import type { CommentResponseWithGif } from '$lib/requests/_internal/CommentResponseWithGif.ts';
 import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
-import type { CommentResponse } from '@trakt/api';
 
-export const MovieHereticCommentsResponseMock: CommentResponse[] = [
+export const MovieHereticCommentsResponseMock: CommentResponseWithGif[] = [
   {
     'id': 1337,
     'comment':
       'This all could have been avoided if he just started a podcast like a normal dude',
+    'gif': null,
     'spoiler': false,
     'review': false,
     'parent_id': 0,

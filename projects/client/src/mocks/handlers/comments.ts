@@ -10,6 +10,7 @@ import { EpisodeSiloCommentReactionsResponseMock } from '../data/summary/episode
 
 const commentResponseMocks = [
   ...EpisodeSiloCommentsResponseMock,
+  ...EpisodeSiloCommentReplyResponseMock,
   ...MovieHereticCommentsResponseMock,
 ];
 

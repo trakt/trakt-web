@@ -1,11 +1,12 @@
+import type { CommentResponseWithGif } from '$lib/requests/_internal/CommentResponseWithGif.ts';
 import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
-import type { CommentResponse } from '@trakt/api';
 
-export const ShowSiloCommentsResponseMock: CommentResponse[] = [
+export const ShowSiloCommentsResponseMock: CommentResponseWithGif[] = [
   {
     'id': 420,
     'comment':
       "this looks really good, can't wait. The fact that its on AppleTV and not Netflix series gives a big hope",
+    'gif': null,
     'spoiler': false,
     'review': false,
     'parent_id': 0,
