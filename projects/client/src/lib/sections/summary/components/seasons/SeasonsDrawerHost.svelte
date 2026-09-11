@@ -169,10 +169,10 @@
 
   .seasons-section {
     --column-count: 4;
-    --season-card-footer-height: var(--height-card-footer);
+    --season-card-footer-height: var(--height-card-footer-sm);
 
     &.has-season-titles {
-      --season-card-footer-height: var(--height-card-footer-lg);
+      --season-card-footer-height: var(--height-card-footer);
     }
 
     --container-width: calc(

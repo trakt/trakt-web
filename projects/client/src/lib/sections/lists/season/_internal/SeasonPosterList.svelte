@@ -44,11 +44,11 @@
     label: m.button_text_view_all(),
   }}
   --height-list={hasTitles
-    ? "var(--height-poster-list-lg)"
-    : "var(--height-poster-list)"}
+    ? "var(--height-poster-list)"
+    : "var(--height-poster-list-sm)"}
   --height-override-card={hasTitles
-    ? "var(--height-portrait-card-lg)"
-    : "var(--height-portrait-card)"}
+    ? "var(--height-portrait-card)"
+    : "var(--height-portrait-card-sm)"}
 >
   {#snippet item(season)}
     <SeasonPosterItem

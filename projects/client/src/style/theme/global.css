@@ -14,6 +14,16 @@
    */
   --color-background-stem-tag: var(--shade-800);
   --color-foreground-stem-tag: var(--shade-10);
+  --color-background-subtle-tag: color-mix(
+    in srgb,
+    var(--color-foreground) 5%,
+    transparent
+  );
+  --color-border-subtle-tag: color-mix(
+    in srgb,
+    var(--color-border) 40%,
+    transparent
+  );
 
   --color-text-progress-tag: var(--shade-10);
   --color-background-progress-tag: var(--shade-930);

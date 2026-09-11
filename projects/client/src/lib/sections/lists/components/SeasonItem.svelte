@@ -5,8 +5,10 @@
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
+  import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import PosterTags from "$lib/components/media/tags/PosterTags.svelte";
   import SeasonLabelTag from "$lib/components/media/tags/SeasonLabelTag.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp";
@@ -44,15 +46,19 @@
 
   const isEmphasized = $derived(isCurrentSeason && !season.title);
 
-  const episodeCount = $derived(
-    m.tag_text_number_of_episodes({ count: season.episodes.count }),
-  );
-
   const scrollToItem = (element: HTMLElement, active: boolean) => {
     if (variant === "list-item") return;
     return scrollActiveItemIntoView(element, active);
   };
 </script>
+
+{#snippet coverTag()}
+  <EpisodeCountTag
+    count={season.episodes.count}
+    i18n={TagIntlProvider}
+    type="tag"
+  />
+{/snippet}
 
 {#snippet indicatorTags()}
   <PosterTags
@@ -103,6 +109,7 @@
           title={seasonLabel(season.number)}
           src={season.poster?.url.medium ?? media.poster.url.medium}
           alt={seasonLabel(season.number)}
+          tag={coverTag}
         />
 
         <IndicatorTags>
@@ -124,9 +131,6 @@
               {season.title}
             </p>
           {/if}
-          <p class="trakt-card-subtitle ellipsis">
-            {episodeCount}
-          </p>
         {/if}
       </CardFooter>
     </PortraitCard>
@@ -154,6 +158,10 @@
   }
 
   .trakt-season-item {
+    /* The watched indicator hangs half over the poster's bottom edge; this
+       leaves the episode count pill a hair above it. */
+    --padding-bottom-override-card-tag: var(--ni-10);
+
     -webkit-tap-highlight-color: transparent;
 
     cursor: pointer;

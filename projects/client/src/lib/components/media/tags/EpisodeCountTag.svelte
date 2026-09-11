@@ -1,5 +1,6 @@
 <script lang="ts">
   import StemTag from "$lib/components/tags/StemTag.svelte";
+  import type { StemTagVariant } from "$lib/components/tags/StemTagVariant.ts";
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import type { TagType } from "./models/TagType";
   import type { TagIntl } from "./TagIntl";
@@ -8,10 +9,12 @@
     count,
     i18n,
     type = "text",
+    variant,
   }: {
     count: number;
     i18n: TagIntl;
     type?: TagType;
+    variant?: StemTagVariant;
   } = $props();
 </script>
 
@@ -26,7 +29,7 @@
     {@render content()}
   </TextTag>
 {:else}
-  <StemTag>
+  <StemTag {variant}>
     {@render content()}
   </StemTag>
 {/if}

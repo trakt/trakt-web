@@ -1,5 +1,8 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { Season } from "$lib/requests/models/Season.ts";
@@ -30,18 +33,17 @@
     return `${season.number}`;
   };
 
-  const seasonText = (season: Season) => {
-    const episodes = m.tag_text_number_of_episodes({
-      count: season.episodes.count,
-    });
-
-    return `${seasonLabel(season)} · ${episodes}`;
-  };
+  const episodeCountByValue = $derived(
+    new Map(
+      seasons.map((season) => [`${season.number}`, season.episodes.count]),
+    ),
+  );
 
   const options = $derived(
     seasons.map((season) => ({
       value: `${season.number}`,
-      label: seasonText(season),
+      label: seasonLabel(season),
+      tag: episodeCountTag,
     })),
   );
 
@@ -50,6 +52,15 @@
     goto(buildUrl(Number(value)), { noScroll: true });
   };
 </script>
+
+{#snippet episodeCountTag(option: SelectOption)}
+  <EpisodeCountTag
+    count={episodeCountByValue.get(option.value) ?? 0}
+    i18n={TagIntlProvider}
+    type="tag"
+    variant="subtle"
+  />
+{/snippet}
 
 <SingleSelect
   {options}
