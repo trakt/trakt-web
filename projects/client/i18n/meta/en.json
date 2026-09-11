@@ -10802,6 +10802,22 @@
     "text_email_unsubscribe_message": {
       "default": "You'll no longer receive these emails from Trakt.",
       "description": "Snackbar message confirming the email unsubscribe was successful."
+    },
+    "drawer_title_add_gif": {
+      "default": "Add a GIF",
+      "description": "Title for the drawer that lets a user pick a GIF for their comment."
+    },
+    "input_label_search_gifs": {
+      "default": "Search GIFs",
+      "description": "Aria-label for the GIF picker search input."
+    },
+    "input_placeholder_search_gifs": {
+      "default": "Search GIFs",
+      "description": "Placeholder for the GIF picker search input."
+    },
+    "button_label_add_gif": {
+      "default": "Add a GIF",
+      "description": "Aria-label for the button that opens the GIF picker from a comment box."
     }
   }
 }
