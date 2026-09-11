@@ -14,6 +14,7 @@
     confirmButtonText,
     confirmButtonLabel,
     inlineActions = false,
+    isValid,
   }: FormProps = $props();
 
   let formElement: HTMLFormElement;
@@ -21,8 +22,7 @@
   const isFormValid = writable(false);
 
   const checkFormValidity = () => {
-    const isValid = formElement.checkValidity();
-    isFormValid.set(isValid);
+    isFormValid.set(formElement.checkValidity());
   };
 
   onMount(() => {
@@ -59,7 +59,7 @@
       size="small"
       variant="primary"
       color="purple"
-      disabled={disabled || !$isFormValid}
+      disabled={disabled || !(isValid ?? $isFormValid)}
       label={confirmButtonLabel}
       type="submit"
     >
