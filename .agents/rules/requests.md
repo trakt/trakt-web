@@ -269,6 +269,46 @@ the fact is semantically wrong.
 
 ---
 
+## Pattern 6 - Direct Third-Party API
+
+Third-party APIs the browser calls itself (Klipy, in `queries/gifs/`). Klipy's
+integration requirements forbid routing its traffic through our own servers, so
+the app key is a build-time global inlined by Vite (`KLIPY_API_KEY`, declared in
+`src/app.d.ts`) rather than a server-held secret. From `lib/requests` this is
+Pattern 3 against an absolute url - except that an upstream failure throws
+rather than answering an empty body:
+
+```ts
+const response = await fetch(klipyUrl(path, params));
+
+if (!response.ok) {
+  throw new Error(`Klipy request failed: ${path} (${response.status})`);
+}
+```
+
+Rules on top of Pattern 3:
+
+- **Never answer a failed read with an empty body.** Pattern 3's
+  `{ status: 200, body: undefined }` fallback is safe for a one-shot read, but
+  behind `defineQuery` it caches the outage as a successful empty result for the
+  whole `ttl` - and the idb persister replays it across reloads. Throw inside
+  the request function instead: it rejects before `isValidResponse` runs, so the
+  query retries without firing the global fetch-error banner.
+
+- Keep url construction in one place (`_internal/klipyUrl.ts`) so the key and
+  host are never spelled out at a call site.
+- A key that ships in the bundle is only acceptable when the provider intends
+  it. Do not reach for this pattern to avoid writing a server route.
+- Validate every entry on its own with `safeParse` when the upstream mixes item
+  kinds (Klipy returns ads inline with gifs) - a whole-array parse would drop a
+  usable page over one foreign entry.
+- MSW handlers carry the upstream origin, with the key as a path param
+  (`https://api.klipy.com/api/v1/:key/...`).
+- Add the upstream host to `img-src` / `connect-src` in `src/app.html` - the CSP
+  is enforced and failures are silent.
+
+---
+
 ## Mapper Functions
 
 - Pure functions - no side effects, no API calls.
