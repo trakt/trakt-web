@@ -2,14 +2,20 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import DismissibleError from "$lib/components/errors/DismissibleError.svelte";
   import PostMessageIcon from "$lib/components/icons/PostMessageIcon.svelte";
+  import GifButton from "$lib/features/gif-picker/GifButton.svelte";
+  import { klipyCustomerId } from "$lib/features/gif-picker/klipyCustomerId.ts";
   import { NOOP_FN } from "$lib/utils/constants";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
   import type { ActiveComment } from "../models/ActiveComment";
+  import type { CommentDraftGif } from "../models/CommentDraftGif.ts";
+  import { reportGifShare } from "../reportGifShare.ts";
   import { usePostComment, type UseAddCommentProps } from "../usePostComment";
   import { autoResizeArea as autoResizeAreaFn } from "./autoResizeArea";
+  import SelectedGif from "./SelectedGif.svelte";
   import SpoilerSwitch from "./SpoilerSwitch.svelte";
+  import { toCommentDraftGif } from "./toCommentDraftGif.ts";
   import { useContentObserver } from "./useContentObserver";
 
   type CommentInputProps = {
@@ -29,6 +35,9 @@
 
   let textAreaElement: HTMLTextAreaElement;
   let isSpoiler = $state(false);
+  let gif = $state<CommentDraftGif | null>(null);
+
+  const customerId = klipyCustomerId();
 
   const { contentObserver, hasContent } = $derived(useContentObserver());
   const { postComment, isCommenting, error } = usePostComment();
@@ -37,9 +46,12 @@
     sizing === "auto" ? autoResizeAreaFn : NOOP_FN,
   );
 
+  const hasSomethingToSay = $derived($hasContent || gif != null);
+
   const postCommentHandler = async () => {
     const response = await postComment({
-      comment: textAreaElement.value,
+      comment: textAreaElement.value.trim(),
+      gif: gif?.url ?? null,
       isSpoiler,
       ...props,
     });
@@ -48,7 +60,10 @@
       return;
     }
 
+    reportGifShare({ gif, customerId });
+
     textAreaElement.value = "";
+    gif = null;
     onCommentPost({
       id: response.id,
       isReplying: false,
@@ -63,6 +78,14 @@
 </script>
 
 <trakt-comment-input>
+  {#if gif}
+    <SelectedGif
+      {gif}
+      disabled={$isCommenting}
+      onRemove={() => (gif = null)}
+    />
+  {/if}
+
   <div class="trakt-comment-reply-box" transition:slide={{ duration: 150 }}>
     <textarea
       bind:this={textAreaElement}
@@ -79,6 +102,11 @@
         onclick={() => (isSpoiler = !isSpoiler)}
       />
 
+      <GifButton
+        disabled={$isCommenting}
+        onSelect={(selected) => (gif = toCommentDraftGif(selected))}
+      />
+
       <ActionButton
         onclick={postCommentHandler}
         {label}
@@ -86,9 +114,9 @@
         color="purple"
         size="small"
         variant="secondary"
-        disabled={$isCommenting || !$hasContent}
+        disabled={$isCommenting || !hasSomethingToSay}
       >
-        <PostMessageIcon style={$hasContent ? "filled" : "open"} />
+        <PostMessageIcon style={hasSomethingToSay ? "filled" : "open"} />
       </ActionButton>
     </div>
   </div>
@@ -160,6 +188,9 @@
     display: flex;
     align-items: center;
     align-self: end;
+
+    flex-wrap: wrap;
+    justify-content: flex-end;
 
     gap: var(--gap-s);
   }

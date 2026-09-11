@@ -10819,6 +10819,14 @@
       "default": "Add a GIF",
       "description": "Aria-label for the button that opens the GIF picker from a comment box."
     },
+    "button_label_remove_gif": {
+      "default": "Remove GIF",
+      "description": "Aria-label for the button that takes the selected GIF off a comment being written."
+    },
+    "image_alt_selected_gif": {
+      "default": "Selected GIF",
+      "description": "Alt text for the GIF attached to the comment being written."
+    },
     "image_alt_comment_gif": {
       "default": "GIF attached to the comment",
       "description": "Alt text for the GIF rendered underneath a posted comment."
