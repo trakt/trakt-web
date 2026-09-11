@@ -7,15 +7,16 @@ import { m } from '$lib/features/i18n/messages.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import { useIsQueued } from '$lib/features/offline/useIsQueued.ts';
+import { whenExecuted } from '$lib/features/offline/whenExecuted.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import { manageListsDrawerStore } from '$lib/sections/components/lists-drawer/manageListsDrawerStore.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { useIsWatchlisted } from '$lib/stores/useIsWatchlisted.ts';
-import { BehaviorSubject } from 'rxjs';
-
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 // The "change list" drawer needs a full entry; bulk mutations may only carry
 // an `{ id }`.
 function isListableEntry(item: { id: number }): item is MediaEntry {
@@ -33,8 +34,6 @@ type UseWatchlistProps = MediaStoreProps & {
 export function useWatchlist(props: UseWatchlistProps) {
   const { type, isToastEnabled = true } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
-  const isWatchlistUpdating = new BehaviorSubject(false);
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Watchlist);
   const notify = toGatedNotify(useActionToast().notify, isToastEnabled);
 
@@ -52,24 +51,44 @@ export function useWatchlist(props: UseWatchlistProps) {
   });
   const body = toBulkPayload(type, ids);
 
+  const watchlistInvalidations = type === 'episode'
+    ? []
+    : [InvalidateAction.Watchlisted(type)];
+
+  const addition = useMutation(defineMutation({
+    key: 'watchlist:add',
+    request: () =>
+      executeOrEnqueue({
+        endpoint: 'watchlist:add',
+        keys: ids.map((id) => toMediaKey(type, id)),
+        body,
+        invalidations: watchlistInvalidations,
+      }),
+    invalidations: whenExecuted(watchlistInvalidations),
+  }));
+
+  const removal = useMutation(defineMutation({
+    key: 'watchlist:remove',
+    request: () =>
+      executeOrEnqueue({
+        endpoint: 'watchlist:remove',
+        keys: ids.map((id) => toMediaKey(type, id)),
+        body,
+        invalidations: watchlistInvalidations,
+      }),
+    invalidations: whenExecuted(watchlistInvalidations),
+  }));
+
+  const isWatchlistUpdating = anyTrue([addition.isPending, removal.isPending]);
+
   const addToWatchlist = async () => {
     if (type === 'episode') {
       return;
     }
 
-    isWatchlistUpdating.next(true);
     track({ action: 'add' });
 
-    const addResult = await executeOrEnqueue({
-      endpoint: 'watchlist:add',
-      keys: ids.map((id) => toMediaKey(type, id)),
-      body,
-      invalidations: [InvalidateAction.Watchlisted(type)],
-    });
-
-    if (addResult === 'executed') {
-      await invalidate(InvalidateAction.Watchlisted(type));
-    }
+    await addition.mutate();
 
     notify({
       message: singleEntry
@@ -87,10 +106,6 @@ export function useWatchlist(props: UseWatchlistProps) {
         }
         : undefined,
     });
-
-    // Always clear: a queued action stays flagged via isQueued, and leaving
-    // this pinned would re-disable the button once it syncs and dequeues.
-    isWatchlistUpdating.next(false);
   };
 
   const removeFromWatchlist = async () => {
@@ -98,19 +113,9 @@ export function useWatchlist(props: UseWatchlistProps) {
       return;
     }
 
-    isWatchlistUpdating.next(true);
     track({ action: 'remove' });
 
-    const removeResult = await executeOrEnqueue({
-      endpoint: 'watchlist:remove',
-      keys: ids.map((id) => toMediaKey(type, id)),
-      body,
-      invalidations: [InvalidateAction.Watchlisted(type)],
-    });
-
-    if (removeResult === 'executed') {
-      await invalidate(InvalidateAction.Watchlisted(type));
-    }
+    await removal.mutate();
 
     notify({
       message: singleEntry
@@ -118,8 +123,6 @@ export function useWatchlist(props: UseWatchlistProps) {
         : m.action_toast_removed_from_watchlist_generic(),
       action: undoToastAction(addToWatchlist),
     });
-
-    isWatchlistUpdating.next(false);
   };
 
   return {

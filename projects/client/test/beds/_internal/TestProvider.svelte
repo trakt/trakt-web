@@ -7,6 +7,7 @@
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
   import { OidcUserMock } from "$mocks/data/auth/OidcUserMock.ts";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
+  import { createMutationCache } from "$lib/features/query/createMutationCache.ts";
   import { QueryClient } from "@tanstack/query-core";
   import type { Snippet } from "svelte";
   import { isAuthorized } from "./isAuthorized.ts";
@@ -15,7 +16,9 @@
 </script>
 
 <!-- TODO: add more providers here as we expand test suite -->
-<QueryClientProvider client={new QueryClient()}>
+<QueryClientProvider
+  client={new QueryClient({ mutationCache: createMutationCache() })}
+>
   <AuthProvider
     isAuthorized={$isAuthorized}
     accessToken={OidcUserMock.access_token}

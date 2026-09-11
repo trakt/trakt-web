@@ -179,6 +179,7 @@ invariants only.
 | `resolve(stream, timeout)` | Await first defined value from RxJS `Observable`                                 |
 | `fromRune(accessor)`       | Bridge a Svelte 5 rune-driven accessor into an `Observable<T>` via `$effect.pre` |
 | `multicast(graceMs?)`      | `share + ReplaySubject(1) + timer` operator for multi-subscriber Observables     |
+| `anyTrue(sources)`         | `true` while any boolean Observable is `true` (combined pending / loading flags) |
 
 ---
 

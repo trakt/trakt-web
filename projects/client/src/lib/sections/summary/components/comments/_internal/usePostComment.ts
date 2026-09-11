@@ -1,13 +1,14 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import type { CommentableMediaType } from '$lib/requests/models/CommentableMediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { editCommentRequest } from '$lib/requests/queries/comments/editCommentRequest.ts';
 import { postCommentRequest } from '$lib/requests/queries/comments/postCommentRequest.ts';
 import { replyCommentRequest } from '$lib/requests/queries/comments/replyCommentRequest.ts';
 import { CommentError } from '$lib/sections/summary/components/comments/_internal/models/CommentError.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { isHttpError } from '@sveltejs/kit';
 import type { CommentPostParams } from '@trakt/api';
@@ -101,10 +102,14 @@ function toInvalidations(props: PostCommentProps) {
 
 export function usePostComment() {
   const { user } = useUser();
-  const isCommenting = new BehaviorSubject(false);
   const error = new BehaviorSubject<CommentError | null>(null);
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.AddComment);
+
+  const comment = useMutation(defineMutation({
+    key: 'comment:post',
+    request: (props: PostCommentProps) => addCommentRequest(props),
+    invalidations: ({ variables }) => toInvalidations(variables),
+  }));
 
   const postComment = async (props: PostCommentProps) => {
     const current = await resolve(user);
@@ -112,10 +117,6 @@ export function usePostComment() {
     if (!current) {
       return null;
     }
-
-    const invalidateActions = toInvalidations(props);
-
-    isCommenting.next(true);
 
     /*
       FIXME: standardize errors we display in components.
@@ -127,14 +128,9 @@ export function usePostComment() {
       error.next(null);
 
       track({ action: props.commentType });
-      const result = await addCommentRequest(props);
-      await Promise.all(invalidateActions.map(invalidate));
 
-      isCommenting.next(false);
-      return result;
+      return await comment.mutate(props);
     } catch (commentError) {
-      isCommenting.next(false);
-
       if (!isHttpError(commentError)) {
         throw error;
       }
@@ -146,7 +142,7 @@ export function usePostComment() {
 
   return {
     postComment,
-    isCommenting,
+    isCommenting: comment.isPending,
     error,
   };
 }

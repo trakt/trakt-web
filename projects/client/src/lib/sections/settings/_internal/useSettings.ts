@@ -2,12 +2,13 @@ import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { changeEmailRequest } from '$lib/requests/queries/users/changeEmailRequest.ts';
 import { saveSettingsRequest } from '$lib/requests/queries/users/saveSettingsRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { Genre, SettingsRequest } from '@trakt/api';
-import { BehaviorSubject, map } from 'rxjs';
+import { map } from 'rxjs';
 
 type HandleSettingsProps = {
   request: () => Promise<boolean>;
@@ -34,24 +35,24 @@ export function useSettings() {
   // direct `$user` bindings and these slices, so no local shareReplay wrapper
   // is needed anymore.
   const { user } = useUser();
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Settings);
-  const isSavingSettings = new BehaviorSubject(false);
+
+  const settingsChange = useMutation(defineMutation({
+    key: 'user:save-settings',
+    request: ({ request }: HandleSettingsProps) => request(),
+    invalidations: ({ data }) => data ? [InvalidateAction.User.Settings] : [],
+  }));
 
   const handleSettingsChange = async (
-    { request, action }: HandleSettingsProps,
+    props: HandleSettingsProps,
   ): Promise<boolean> => {
-    isSavingSettings.next(true);
+    const success = await settingsChange.mutate(props);
 
-    const success = await request();
     if (!success) {
-      isSavingSettings.next(false);
       return false;
     }
 
-    track({ settings: action });
-    await invalidate(InvalidateAction.User.Settings);
-    isSavingSettings.next(false);
+    track({ settings: props.action });
     return true;
   };
 
@@ -95,7 +96,7 @@ export function useSettings() {
   };
 
   return {
-    isSavingSettings: isSavingSettings.asObservable(),
+    isSavingSettings: settingsChange.isPending,
     spoilers: user.pipe(map(($user) => ({
       isHidden: Boolean($user.preferences.isSpoilerHidden),
       set: async (isEnabled: boolean) => {

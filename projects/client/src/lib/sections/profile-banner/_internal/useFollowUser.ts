@@ -7,6 +7,8 @@ import {
 import { currentUserPendingFollowsQuery } from '$lib/features/auth/queries/currentUserPendingFollowsQuery.ts';
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
@@ -14,19 +16,43 @@ import { approveFollowRequest } from '$lib/requests/queries/users/approveFollowR
 import { denyFollowRequest } from '$lib/requests/queries/users/denyFollowRequest.ts';
 import { followUserRequest } from '$lib/requests/queries/users/followUserRequest.ts';
 import { unfollowUserRequest } from '$lib/requests/queries/users/unfollowUserRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { BehaviorSubject, combineLatest, map, of, switchMap, tap } from 'rxjs';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
+import { combineLatest, map, of, startWith, switchMap } from 'rxjs';
 
 export type FollowStatus = 'none' | 'pending' | 'following';
 
+const followInvalidations = [InvalidateAction.User.Follow];
+
 export function useFollowUserRequest(slug: string) {
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Follow);
   const { isAuthorized } = useAuth();
   const { network } = useUser();
   const pendingFollowsQuerySignal = useQuery(currentUserPendingFollowsQuery());
   const followRequestsQuerySignal = useQuery(currentUserFollowRequestsQuery());
-  const isRequestingFollow = new BehaviorSubject(false);
+
+  const follow = useMutation(defineMutation({
+    key: 'user:follow',
+    request: () => followUserRequest({ slug }),
+    invalidations: followInvalidations,
+  }));
+
+  const unfollow = useMutation(defineMutation({
+    key: 'user:unfollow',
+    request: () => unfollowUserRequest({ slug }),
+    invalidations: followInvalidations,
+  }));
+
+  const approve = useMutation(defineMutation({
+    key: 'user:approve-follow-request',
+    request: (requestId: number) => approveFollowRequest({ requestId }),
+    invalidations: ({ data }) => data ? followInvalidations : [],
+  }));
+
+  const deny = useMutation(defineMutation({
+    key: 'user:deny-follow-request',
+    request: (requestId: number) => denyFollowRequest({ requestId }),
+    invalidations: ({ data }) => data ? followInvalidations : [],
+  }));
 
   const pendingFollows = isAuthorized.pipe(
     switchMap((authorized) =>
@@ -50,11 +76,9 @@ export function useFollowUserRequest(slug: string) {
     ),
   );
 
-  const followStatus = combineLatest([network, pendingFollows]).pipe(
-    tap(([$network, $pendingFollows]) => {
-      const isReady = $network != null && $pendingFollows != null;
-      isRequestingFollow.next(!isReady);
-    }),
+  const followState = combineLatest([network, pendingFollows]);
+
+  const followStatus = followState.pipe(
     map(([$network, $pendingFollows]): FollowStatus => {
       if ($network?.following.some((user) => user.slug === slug)) {
         return 'following';
@@ -68,63 +92,41 @@ export function useFollowUserRequest(slug: string) {
     }),
   );
 
+  const isFollowStateUnsettled = followState.pipe(
+    map(([$network, $pendingFollows]) =>
+      $network == null || $pendingFollows == null
+    ),
+  );
+
+  const isRequestingFollow = anyTrue([
+    isFollowStateUnsettled,
+    follow.isPending,
+    unfollow.isPending,
+    approve.isPending,
+    deny.isPending,
+  ]).pipe(startWith(false));
+
   const followUser = async () => {
-    isRequestingFollow.next(true);
-
     track({ action: 'follow' });
-    await followUserRequest({ slug });
-    await invalidate(InvalidateAction.User.Follow);
 
-    isRequestingFollow.next(false);
+    await follow.mutate();
   };
 
   const unfollowUser = async () => {
-    isRequestingFollow.next(true);
-
     track({ action: 'unfollow' });
-    await unfollowUserRequest({ slug });
-    await invalidate(InvalidateAction.User.Follow);
 
-    isRequestingFollow.next(false);
+    await unfollow.mutate();
   };
 
   const cancelFollowRequest = async () => {
-    isRequestingFollow.next(true);
-
     track({ action: 'cancel-follow-request' });
-    await unfollowUserRequest({ slug });
-    await invalidate(InvalidateAction.User.Follow);
 
-    isRequestingFollow.next(false);
+    await unfollow.mutate();
   };
-
-  const respondToFollowRequest = async (
-    action: (params: { requestId: number }) => Promise<boolean>,
-    requestId: number,
-  ): Promise<boolean> => {
-    isRequestingFollow.next(true);
-
-    try {
-      const succeeded = await action({ requestId });
-      if (succeeded) {
-        await invalidate(InvalidateAction.User.Follow);
-      }
-
-      return succeeded;
-    } finally {
-      isRequestingFollow.next(false);
-    }
-  };
-
-  const approveIncomingFollowRequest = (requestId: number) =>
-    respondToFollowRequest(approveFollowRequest, requestId);
-
-  const denyIncomingFollowRequest = (requestId: number) =>
-    respondToFollowRequest(denyFollowRequest, requestId);
 
   return {
-    approveIncomingFollowRequest,
-    denyIncomingFollowRequest,
+    approveIncomingFollowRequest: approve.mutate,
+    denyIncomingFollowRequest: deny.mutate,
     incomingFollowRequest,
     isRequestingFollow,
     followStatus,

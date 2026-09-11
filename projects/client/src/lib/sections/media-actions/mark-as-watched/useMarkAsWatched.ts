@@ -12,6 +12,9 @@ import { m } from '$lib/features/i18n/messages.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import { useIsQueued } from '$lib/features/offline/useIsQueued.ts';
+import { whenExecuted } from '$lib/features/offline/whenExecuted.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
@@ -20,10 +23,10 @@ import {
   toAddRatingsPayload,
 } from '$lib/requests/sync/toAddRatingsPayload.ts';
 import { toRemoveRatingsPayload } from '$lib/requests/sync/toRemoveRatingsPayload.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { hasAired } from '$lib/utils/media/hasAired.ts';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
-import { BehaviorSubject, filter } from 'rxjs';
+import { filter } from 'rxjs';
 import type { MarkAsWatchedAt } from '../../../models/MarkAsWatchedAt.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
@@ -68,9 +71,7 @@ export function useMarkAsWatched(
   const { type, isToastEnabled = true } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const mediaKeys = media.map((item) => toMediaKey(type, item.id));
-  const isMarkingAsWatched = new BehaviorSubject(false);
   const { user, history, ratings } = useUser();
-  const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.MarkAsWatched);
   const notify = toGatedNotify(useActionToast().notify, isToastEnabled);
 
@@ -79,6 +80,72 @@ export function useMarkAsWatched(
 
   const { isWatched } = useIsWatched(props);
   const { isQueued } = useIsQueued({ domain: 'history', keys: mediaKeys });
+
+  const watchedInvalidations = [InvalidateAction.MarkAsWatched(type)];
+  const ratedInvalidations = [InvalidateAction.Rated(type)];
+
+  const watchedAdd = useMutation(defineMutation({
+    key: 'history:add',
+    request: (watchedAt: MarkAsWatchedAt | ReadonlyMap<number, Date>) =>
+      executeOrEnqueue({
+        endpoint: 'history:add',
+        keys: mediaKeys,
+        body: toMarkAsWatchedPayload(props, watchedAt),
+        invalidations: watchedInvalidations,
+      }),
+    invalidations: whenExecuted(watchedInvalidations),
+  }));
+
+  // The snapshot has to be read before the request, and the submitted state
+  // has to cover that read, so it happens inside the write.
+  const watchedRemove = useMutation(defineMutation({
+    key: 'history:remove',
+    request: async () => {
+      const snapshot = await getRemovalSnapshot();
+
+      const outcome = await executeOrEnqueue({
+        endpoint: 'history:remove',
+        keys: mediaKeys,
+        body: toMarkAsWatchedPayload(props),
+        invalidations: watchedInvalidations,
+      });
+
+      return { snapshot, outcome };
+    },
+    invalidations: ({ data }) =>
+      whenExecuted(watchedInvalidations)({ data: data.outcome }),
+  }));
+
+  const ratingAdd = useMutation(defineMutation({
+    key: 'rating:add',
+    request: (targets: ReadonlyArray<RatedTarget>) =>
+      executeOrEnqueue({
+        endpoint: 'rating:add',
+        keys: targets.map(({ id }) => toMediaKey(type, id)),
+        body: toAddRatingsPayload(type, targets),
+        invalidations: ratedInvalidations,
+      }),
+    invalidations: whenExecuted(ratedInvalidations),
+  }));
+
+  const ratingRemove = useMutation(defineMutation({
+    key: 'rating:remove',
+    request: (targets: ReadonlyArray<RatedTarget>) =>
+      executeOrEnqueue({
+        endpoint: 'rating:remove',
+        keys: targets.map(({ id }) => toMediaKey(type, id)),
+        body: toRemoveRatingsPayload(type, targets.map(({ id }) => id)),
+        invalidations: ratedInvalidations,
+      }),
+    invalidations: whenExecuted(ratedInvalidations),
+  }));
+
+  const isMarkingAsWatched = anyTrue([
+    watchedAdd.isPending,
+    watchedRemove.isPending,
+    ratingAdd.isPending,
+    ratingRemove.isPending,
+  ]);
 
   const markAsWatched = async (
     watchedAt?: MarkAsWatchedAt | ReadonlyMap<number, Date>,
@@ -89,25 +156,9 @@ export function useMarkAsWatched(
       return;
     }
 
-    const watchedAtDate = watchedAt ?? 'now';
-
-    isMarkingAsWatched.next(true);
     track({ action: 'add' });
 
-    const result = await executeOrEnqueue({
-      endpoint: 'history:add',
-      keys: mediaKeys,
-      body: toMarkAsWatchedPayload(props, watchedAtDate),
-      invalidations: [InvalidateAction.MarkAsWatched(type)],
-    });
-
-    if (result === 'executed') {
-      await invalidate(InvalidateAction.MarkAsWatched(type));
-    }
-
-    // Always clear: a queued action stays flagged via isQueued, and leaving
-    // this pinned would re-disable the button once it syncs and dequeues.
-    isMarkingAsWatched.next(false);
+    await watchedAdd.mutate(watchedAt ?? 'now');
   };
 
   // A removal wipes every play of the target, so a rated item that is
@@ -174,48 +225,16 @@ export function useMarkAsWatched(
       return;
     }
 
-    const result = await executeOrEnqueue({
-      endpoint: 'rating:add',
-      keys: snapshot.ratings.map(({ id }) => toMediaKey(type, id)),
-      body: toAddRatingsPayload(type, snapshot.ratings),
-      invalidations: [InvalidateAction.Rated(type)],
-    });
-
-    if (result === 'executed') {
-      await invalidate(InvalidateAction.Rated(type));
-    }
+    await ratingAdd.mutate(snapshot.ratings);
   };
 
   const removeWatched = async () => {
-    isMarkingAsWatched.next(true);
     track({ action: 'remove' });
 
-    const snapshot = await getRemovalSnapshot();
-
-    const removeResult = await executeOrEnqueue({
-      endpoint: 'history:remove',
-      keys: mediaKeys,
-      body: toMarkAsWatchedPayload(props),
-      invalidations: [InvalidateAction.MarkAsWatched(type)],
-    });
+    const { snapshot } = await watchedRemove.mutate();
 
     if (snapshot.ratings.length > 0) {
-      const ratingResult = await executeOrEnqueue({
-        endpoint: 'rating:remove',
-        keys: snapshot.ratings.map(({ id }) => toMediaKey(type, id)),
-        body: toRemoveRatingsPayload(
-          type,
-          snapshot.ratings.map(({ id }) => id),
-        ),
-        invalidations: [InvalidateAction.Rated(type)],
-      });
-      if (ratingResult === 'executed') {
-        await invalidate(InvalidateAction.Rated(type));
-      }
-    }
-
-    if (removeResult === 'executed') {
-      await invalidate(InvalidateAction.MarkAsWatched(type));
+      await ratingRemove.mutate(snapshot.ratings);
     }
 
     // A show-wide removal captures no dates, so it gets no undo.
@@ -229,8 +248,6 @@ export function useMarkAsWatched(
         ? undoToastAction(() => restoreWatched(snapshot))
         : undefined,
     });
-
-    isMarkingAsWatched.next(false);
   };
 
   const isWatchable = media.every((item) => {

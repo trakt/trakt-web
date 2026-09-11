@@ -41,4 +41,20 @@ export const lists = [
       return HttpResponse.json(ListedMoviesResponseMock);
     },
   ),
+  http.post(
+    `http://localhost/lists/${
+      assertDefined(SiloListsResponseMock.at(0)).ids.trakt
+    }/like`,
+    () => {
+      return new HttpResponse(null, { status: 204 });
+    },
+  ),
+  http.delete(
+    `http://localhost/lists/${
+      assertDefined(SiloListsResponseMock.at(0)).ids.trakt
+    }/like`,
+    () => {
+      return new HttpResponse(null, { status: 204 });
+    },
+  ),
 ];
