@@ -1,15 +1,18 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import CodeIcon from "$lib/components/icons/CodeIcon.svelte";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
+  import { devtoolsSpotlightActions } from "$lib/features/devtools/devtoolsSpotlightActions.ts";
   import * as m from "$lib/features/i18n/messages";
   import type { MediaResult } from "$lib/requests/queries/search/searchMediaQuery";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { SpotlightAction } from "../models/SpotlightAction.ts";
   import type { Snippet } from "svelte";
-  import { filterSpotlightRoutes } from "./filterSpotlightRoutes";
+  import { filterSpotlightEntries } from "./filterSpotlightEntries";
   import { getSpotlightContext } from "./getSpotlightContext";
   import { spotlightRoutes } from "./spotlightRoutes";
   import { useSpotlightMedia } from "./useSpotlightMedia";
@@ -22,22 +25,50 @@
     clear: clearMedia,
   } = useSpotlightMedia();
 
+  type SpotlightListEntry = {
+    id: string;
+    label: string;
+    url?: string;
+    run: () => void;
+  };
+
   let query = $state("");
   let selectedIndex = $state(0);
   let scrollElement = $state<HTMLElement | null>(null);
 
-  const pageResults = $derived(filterSpotlightRoutes(spotlightRoutes, query));
+  const actions = $derived(
+    import.meta.env.DEV ? devtoolsSpotlightActions : [],
+  );
+  const actionEntries = $derived(
+    filterSpotlightEntries(actions, query).map((action) => ({
+      id: action.id,
+      label: action.label(),
+      run: () => runAction(action),
+    })),
+  );
+  const pageEntries = $derived(
+    filterSpotlightEntries(spotlightRoutes, query).map((route) => ({
+      id: route.id,
+      label: route.label(),
+      url: route.url,
+      run: () => navigateTo(route.url),
+    })),
+  );
   const movies = $derived($media?.movies ?? []);
   const shows = $derived($media?.shows ?? []);
 
   const mediaResults = $derived([...movies, ...shows]);
 
   const items = $derived([
-    ...pageResults.map((route) => route.url),
-    ...mediaResults.map((entry) => UrlBuilder.media(entry.type, entry.slug)),
+    ...actionEntries.map((entry) => entry.run),
+    ...pageEntries.map((entry) => entry.run),
+    ...mediaResults.map(
+      (entry) => () => navigateTo(UrlBuilder.media(entry.type, entry.slug)),
+    ),
   ]);
 
-  const moviesOffset = $derived(pageResults.length);
+  const pagesOffset = $derived(actionEntries.length);
+  const moviesOffset = $derived(pagesOffset + pageEntries.length);
   const showsOffset = $derived(moviesOffset + movies.length);
 
   const trimmedQuery = $derived(query.trim());
@@ -85,6 +116,11 @@
     goto(url);
   }
 
+  function runAction(action: SpotlightAction) {
+    close();
+    action.run();
+  }
+
   function moveSelection(delta: number) {
     if (items.length === 0) return;
 
@@ -104,12 +140,13 @@
         return;
       case "Enter":
         event.preventDefault();
-        navigateTo(items.at(activeIndex));
+        items.at(activeIndex)?.();
         return;
     }
   }
 </script>
 
+{#snippet codeIcon()}<CodeIcon />{/snippet}
 {#snippet discoverIcon()}<DiscoverIcon />{/snippet}
 {#snippet movieIcon()}<MovieIcon />{/snippet}
 {#snippet showIcon()}<ShowIcon />{/snippet}
@@ -121,6 +158,37 @@
     </span>
     {title}
   </h2>
+{/snippet}
+
+{#snippet listSection(
+  title: string,
+  icon: Snippet,
+  entries: ReadonlyArray<SpotlightListEntry>,
+  startIndex: number,
+)}
+  <section class="spotlight-section">
+    {@render sectionHeading(title, icon)}
+    <ul class="spotlight-list">
+      {#each entries as entry, index (entry.id)}
+        {@const globalIndex = startIndex + index}
+        <li>
+          <button
+            type="button"
+            class="spotlight-item"
+            class:is-active={globalIndex === activeIndex}
+            data-spotlight-index={globalIndex}
+            onpointermove={() => (selectedIndex = globalIndex)}
+            onclick={entry.run}
+          >
+            <span class="spotlight-item-label">{entry.label}</span>
+            {#if entry.url}
+              <span class="spotlight-item-url">{entry.url}</span>
+            {/if}
+          </button>
+        </li>
+      {/each}
+    </ul>
+  </section>
 {/snippet}
 
 {#snippet mediaSection(
@@ -180,27 +248,17 @@
             {m.spotlight_no_results({ query: trimmedQuery })}
           </p>
         {:else}
-          {#if pageResults.length > 0}
-            <section class="spotlight-section">
-              {@render sectionHeading(m.spotlight_section_pages(), discoverIcon)}
-              <ul class="spotlight-list">
-                {#each pageResults as route, index (route.id)}
-                  <li>
-                    <button
-                      type="button"
-                      class="spotlight-item"
-                      class:is-active={index === activeIndex}
-                      data-spotlight-index={index}
-                      onpointermove={() => (selectedIndex = index)}
-                      onclick={() => navigateTo(route.url)}
-                    >
-                      <span class="spotlight-item-label">{route.label()}</span>
-                      <span class="spotlight-item-url">{route.url}</span>
-                    </button>
-                  </li>
-                {/each}
-              </ul>
-            </section>
+          {#if actionEntries.length > 0}
+            {@render listSection("Devtools", codeIcon, actionEntries, 0)}
+          {/if}
+
+          {#if pageEntries.length > 0}
+            {@render listSection(
+              m.spotlight_section_pages(),
+              discoverIcon,
+              pageEntries,
+              pagesOffset,
+            )}
           {/if}
 
           {#if movies.length > 0}
