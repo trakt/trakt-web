@@ -3,30 +3,33 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import type { MediaCrew } from '$lib/requests/models/MediaCrew.ts';
 import { toCreditMembers } from '$lib/sections/lists/toCreditMembers.ts';
 
+type CreditsType = 'cast' | 'crew';
+
 type CreditGroupsProps = {
   crew: MediaCrew;
   type: ExtendedMediaType;
   searchTerm: string;
-  mainCastLabel?: string;
+  creditsType: CreditsType;
+  splitCast: boolean;
 };
 
 export function toCreditGroups(
-  { crew, type, searchTerm, mainCastLabel }: CreditGroupsProps,
+  { crew, type, searchTerm, creditsType, splitCast }: CreditGroupsProps,
 ) {
+  const isSearching = searchTerm.length > 0;
   const { cast, crew: crewMembers } = toCreditMembers({ crew, type });
   const supportingCast = type === 'movie'
     ? []
     : toCreditMembers({ crew: { ...crew, cast: crew.guestStars }, type }).cast;
 
-  return [
+  const groups = [
     {
       id: 'main-cast',
       type: 'cast' as const,
-      label: mainCastLabel ??
-        (supportingCast.length > 0
-          ? m.header_main_cast()
-          : m.drawer_meta_info_cast()),
-      members: cast,
+      label: type === 'movie'
+        ? m.drawer_meta_info_cast()
+        : m.header_main_cast(),
+      members: splitCast ? cast : [...cast, ...supportingCast],
     },
     {
       id: 'supporting-cast',
@@ -34,7 +37,7 @@ export function toCreditGroups(
       label: cast.length > 0
         ? m.header_supporting_cast()
         : m.drawer_meta_info_cast(),
-      members: supportingCast,
+      members: splitCast ? supportingCast : [],
     },
     {
       id: 'crew',
@@ -42,12 +45,26 @@ export function toCreditGroups(
       label: m.drawer_meta_info_crew(),
       members: crewMembers,
     },
-  ].map((group) => ({
-    ...group,
-    members: searchTerm
-      ? group.members.filter(({ description, name }) =>
-        `${name} ${description}`.toLocaleLowerCase().includes(searchTerm)
-      )
-      : group.members,
-  })).filter((group) => group.members.length > 0);
+  ]
+    .filter((group) => isSearching || group.type === creditsType)
+    .map((group) => ({
+      ...group,
+      showHeader: isSearching || group.type === 'cast',
+      members: isSearching
+        ? group.members.filter(({ description, name }) =>
+          `${name} ${description}`.toLocaleLowerCase().includes(searchTerm)
+        )
+        : group.members,
+    }))
+    .filter((group) => group.members.length > 0);
+
+  const firstGroup = groups.at(0);
+  if (splitCast || !firstGroup) return groups;
+
+  return [{
+    ...firstGroup,
+    id: 'credits',
+    showHeader: false,
+    members: groups.flatMap((group) => group.members),
+  }];
 }
