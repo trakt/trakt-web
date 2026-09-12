@@ -102,6 +102,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-08-24'),
     description: () => m.preview_feature_description_genre_picker(),
   },
+  [FeatureFlag.SplitCast]: {
+    icon: PeopleIcon,
+    title: () => m.preview_feature_title_split_cast(),
+    description: () => m.preview_feature_description_split_cast(),
+    addedAt: new Date('2026-09-12'),
+    audience: 'vip',
+  },
   [FeatureFlag.ParentalGuide]: {
     icon: NoSpoilerIcon,
     title: () => m.option_text_certification_parental_guidance(),

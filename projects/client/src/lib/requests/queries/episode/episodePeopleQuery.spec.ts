@@ -14,6 +14,7 @@ describe('episodePeopleQuery', () => {
           episodePeopleQuery({
             slug: ShowSiloResponseMock.ids.slug,
             season: EpisodeSiloResponseMock.season,
+            guestStars: true,
             episode: EpisodeSiloResponseMock.number,
           }),
         ),
@@ -21,5 +22,27 @@ describe('episodePeopleQuery', () => {
     });
 
     expect(result).to.deep.equal(EpisodeSiloPeopleMappedMock);
+  });
+  it('should request the full cast without guest stars by default', async () => {
+    const params = {
+      slug: ShowSiloResponseMock.ids.slug,
+      season: EpisodeSiloResponseMock.season,
+      episode: EpisodeSiloResponseMock.number,
+    };
+    const result = await runQuery({
+      factory: () => createTestBedQuery(episodePeopleQuery(params)),
+      mapper: (response) => response?.data,
+    });
+    expect(result).to.deep.equal({
+      ...EpisodeSiloPeopleMappedMock,
+      cast: [
+        ...EpisodeSiloPeopleMappedMock.cast,
+        ...EpisodeSiloPeopleMappedMock.guestStars,
+      ],
+      guestStars: [],
+    });
+    expect(episodePeopleQuery(params).queryKey).not.toEqual(
+      episodePeopleQuery({ ...params, guestStars: true }).queryKey,
+    );
   });
 });

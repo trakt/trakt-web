@@ -1,3 +1,4 @@
+import { ShowSiloSplitPeopleResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloSplitPeopleResponseMock.ts';
 import { http, HttpResponse } from 'msw';
 
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
@@ -111,8 +112,15 @@ export const shows = [
   ),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/people`,
-    () => {
-      return HttpResponse.json(ShowSiloPeopleResponseMock);
+    ({ request }) => {
+      const extended = new URL(request.url).searchParams.get('extended');
+      if (extended === 'images,guest_stars') {
+        return HttpResponse.json(ShowSiloSplitPeopleResponseMock);
+      }
+      if (extended === 'images') {
+        return HttpResponse.json(ShowSiloPeopleResponseMock);
+      }
+      return new HttpResponse(null, { status: 400 });
     },
   ),
   http.get(
@@ -193,8 +201,17 @@ export const shows = [
   ),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/people`,
-    () => {
-      return HttpResponse.json(ShowSiloPeopleResponseMock);
+    ({ request }) => {
+      if (new URL(request.url).searchParams.get('extended') === 'images') {
+        return HttpResponse.json(ShowSiloPeopleResponseMock);
+      }
+      if (
+        new URL(request.url).searchParams.get('extended') !==
+          'images,guest_stars'
+      ) {
+        return new HttpResponse(null, { status: 400 });
+      }
+      return HttpResponse.json(ShowSiloSplitPeopleResponseMock);
     },
   ),
   http.get(
@@ -205,7 +222,21 @@ export const shows = [
   ),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/people`,
-    () => {
+    ({ request }) => {
+      if (new URL(request.url).searchParams.get('extended') === 'images') {
+        const { guest_stars, ...people } = EpisodeSiloPeopleResponseMock;
+        return HttpResponse.json({
+          ...people,
+          cast: [...(people.cast ?? []), ...guest_stars],
+        });
+      }
+      if (
+        new URL(request.url).searchParams.get('extended') !==
+          'images,guest_stars'
+      ) {
+        return new HttpResponse(null, { status: 400 });
+      }
+
       return HttpResponse.json(EpisodeSiloPeopleResponseMock);
     },
   ),

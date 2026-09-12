@@ -1,3 +1,4 @@
+import { useSplitCast } from '$lib/features/feature-flag/useSplitCast.ts';
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
@@ -34,7 +35,11 @@ export function useEpisode(params$: Observable<UseEpisodeParams>) {
     params$.pipe(map((p) => showSeasonsQuery(p))),
   );
   const crew = useQuery(
-    params$.pipe(map((p) => episodePeopleQuery(p))),
+    combineLatest([params$, useSplitCast()]).pipe(
+      map(([params, guestStars]) =>
+        episodePeopleQuery({ ...params, guestStars })
+      ),
+    ),
   );
 
   const locale = languageTag();
