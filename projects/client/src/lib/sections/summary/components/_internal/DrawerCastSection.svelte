@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSplitCast } from "$lib/features/feature-flag/useSplitCast.ts";
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
@@ -38,6 +39,8 @@
     isLoading?: boolean;
   } = $props();
 
+  const splitCast = useSplitCast();
+
   let searchTerm = $state("");
   let creditsType = $state<CreditsType>("cast");
 
@@ -54,11 +57,11 @@
     const groups = toCreditGroups({
       crew,
       type,
-      searchTerm: normalizedSearchTerm,
+      splitCast: $splitCast, searchTerm: normalizedSearchTerm,
       mainCastLabel: m.header_main_cast(),
     }).filter((group) => isSearching || group.type === creditsType);
 
-    if (type !== "movie" || groups.length === 0) return groups;
+    if (($splitCast && type !== "movie") || groups.length === 0) return groups;
 
     return [{
       id: "credits",
@@ -72,7 +75,7 @@
     `${member.key}-${member.positions ? "cast" : "crew"}`;
 
   const showGroupHeaders = $derived(
-    type !== "movie" && (isSearching || creditsType === "cast"),
+    $splitCast && type !== "movie" && (isSearching || creditsType === "cast"),
   );
 </script>
 

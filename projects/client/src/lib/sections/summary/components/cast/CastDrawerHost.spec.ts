@@ -1,3 +1,5 @@
+import { afterEach, beforeEach } from 'vitest';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
 import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
@@ -47,10 +49,14 @@ describe('CastDrawerHost', () => {
       'overlay',
     );
     expect(screen.getByText('People')).toBeInTheDocument();
-    expect(screen.getByRole('heading', {
-      name: `Main Cast ${crew.cast.length} people`,
-    })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Supporting Cast 1 person' }))
+    expect(
+      await screen.findByRole('heading', {
+        name: `Main Cast ${crew.cast.length} people`,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: 'Supporting Cast 1 person' }),
+    )
       .toBeInTheDocument();
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     expect(screen.getByText('Juliette Nichols'))
@@ -77,9 +83,11 @@ describe('CastDrawerHost', () => {
     await waitFor(() => {
       expect(screen.getByText('Cast & Crew')).toBeInTheDocument();
     });
-    expect(screen.getByRole('heading', {
-      name: 'Main Cast 1 person',
-    })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', {
+        name: 'Main Cast 1 person',
+      }),
+    ).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /Supporting Cast/ })).not
       .toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /^Crew/ })).not
@@ -89,9 +97,11 @@ describe('CastDrawerHost', () => {
     await user.clear(searchInput);
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', {
-        name: `Main Cast ${crew.cast.length} people`,
-      })).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', {
+          name: `Main Cast ${crew.cast.length} people`,
+        }),
+      ).toBeInTheDocument();
     });
     expect(screen.getByText('Juliette Nichols (voice)')).toBeInTheDocument();
 
@@ -155,13 +165,17 @@ describe('CastDrawerHost', () => {
         .toBeInTheDocument();
     });
 
-    expect(screen.getByRole('heading', {
-      name: `Main Cast ${EpisodeSiloPeopleMappedMock.cast.length} people`,
-    })).toBeInTheDocument();
-    expect(screen.getByRole('heading', {
-      name:
-        `Supporting Cast ${EpisodeSiloPeopleMappedMock.guestStars.length} person`,
-    })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', {
+        name: `Main Cast ${EpisodeSiloPeopleMappedMock.cast.length} people`,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', {
+        name:
+          `Supporting Cast ${EpisodeSiloPeopleMappedMock.guestStars.length} person`,
+      }),
+    ).toBeInTheDocument();
     expect(screen.getByText('Sophie Thompson')).toBeInTheDocument();
     expect(screen.queryByText('2 eps.')).not.toBeInTheDocument();
   });
@@ -185,9 +199,11 @@ describe('CastDrawerHost', () => {
         .toBeInTheDocument();
     });
 
-    expect(screen.getByRole('heading', {
-      name: `Cast ${crew.guestStars.length} person`,
-    })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', {
+        name: `Cast ${crew.guestStars.length} person`,
+      }),
+    ).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /Main Cast/ })).not
       .toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /Supporting Cast/ })).not
@@ -208,10 +224,24 @@ describe('CastDrawerHost', () => {
         .toBeInTheDocument();
     });
 
-    expect(screen.getByRole('heading', {
-      name: `Cast ${MovieHereticPeopleMappedMock.cast.length} people`,
-    })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', {
+        name: `Cast ${MovieHereticPeopleMappedMock.cast.length} people`,
+      }),
+    ).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /Main Cast/ })).not
       .toBeInTheDocument();
   });
+});
+
+beforeEach(() => {
+  localStorage.setItem(
+    'trakt-feature-flags',
+    JSON.stringify({ 'split-cast': true }),
+  );
+  setAuthorization(true);
+});
+afterEach(() => {
+  setAuthorization(false);
+  localStorage.removeItem('trakt-feature-flags');
 });

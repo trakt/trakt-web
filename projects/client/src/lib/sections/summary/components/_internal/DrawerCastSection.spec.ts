@@ -1,3 +1,5 @@
+import { afterEach, beforeEach } from 'vitest';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
 import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
@@ -66,4 +68,30 @@ describe('DrawerCastSection', () => {
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     expect(screen.getByText('Sophie Thompson')).toBeInTheDocument();
   });
+});
+
+it('shows one full cast list without group headings when the flag is off', async () => {
+  localStorage.setItem(
+    'trakt-feature-flags',
+    JSON.stringify({ 'split-cast': false }),
+  );
+  renderComponent(DrawerCastSection, {
+    props: { crew: EpisodeSiloPeopleMappedMock, type: 'episode' },
+  });
+  expect(await screen.findByText('Sophie Thompson')).toBeInTheDocument();
+  expect(screen.getAllByRole('list')).toHaveLength(1);
+  expect(screen.queryByRole('heading', { name: /Main Cast|Supporting Cast/ }))
+    .not.toBeInTheDocument();
+});
+
+beforeEach(() => {
+  localStorage.setItem(
+    'trakt-feature-flags',
+    JSON.stringify({ 'split-cast': true }),
+  );
+  setAuthorization(true);
+});
+afterEach(() => {
+  setAuthorization(false);
+  localStorage.removeItem('trakt-feature-flags');
 });

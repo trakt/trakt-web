@@ -1746,6 +1746,14 @@
       "default": "Cast & Crew",
       "description": "Subtitle for the people drawer when searching across cast and crew. This should be as short and concise as possible."
     },
+    "preview_feature_title_split_cast": {
+      "default": "Main and Supporting Cast",
+      "description": "Title for the VIP split cast preview feature."
+    },
+    "preview_feature_description_split_cast": {
+      "default": "See main and supporting cast separately in show, season, and episode people panels.",
+      "description": "Description of the VIP split cast preview feature."
+    },
     "header_main_cast": {
       "default": "Main Cast",
       "description": "Header for the primary cast group in the people drawer. This should be as short and concise as possible."

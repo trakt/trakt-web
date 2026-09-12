@@ -202,6 +202,9 @@ export const shows = [
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/people`,
     ({ request }) => {
+      if (new URL(request.url).searchParams.get('extended') === 'images') {
+        return HttpResponse.json(ShowSiloPeopleResponseMock);
+      }
       if (
         new URL(request.url).searchParams.get('extended') !==
           'images,guest_stars'
@@ -220,6 +223,13 @@ export const shows = [
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/people`,
     ({ request }) => {
+      if (new URL(request.url).searchParams.get('extended') === 'images') {
+        const { guest_stars, ...people } = EpisodeSiloPeopleResponseMock;
+        return HttpResponse.json({
+          ...people,
+          cast: [...(people.cast ?? []), ...guest_stars],
+        });
+      }
       if (
         new URL(request.url).searchParams.get('extended') !==
           'images,guest_stars'
