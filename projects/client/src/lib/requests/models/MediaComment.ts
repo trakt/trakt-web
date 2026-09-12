@@ -8,6 +8,9 @@ export const MediaCommentSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   comment: z.string(),
+  // Klipy link the author attached; the server keeps it out of `comment` so
+  // it renders as a GIF rather than a raw url.
+  gif: z.string().nullish(),
   isSpoiler: z.boolean(),
   isReview: z.boolean(),
   replyCount: z.number(),

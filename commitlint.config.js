@@ -71,6 +71,7 @@ module.exports = {
         'formatter',
         'frame',
         'gestures',
+        'gif',
         'guards',
         'i18n',
         'import',

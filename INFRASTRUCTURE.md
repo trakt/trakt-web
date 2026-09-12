@@ -67,3 +67,15 @@ This handler requires the following environment variables to be configured:
 - **`TYPESENSE_SERVER`**: The URL of the Typesense server endpoint (e.g.,
   `https://your-typesense-server.com`). This specifies which Typesense instance
   to connect to for search operations.
+
+### KLIPY
+
+The GIF picker in comments is backed by [KLIPY](https://klipy.com). Requests go
+through our own `/api/klipy` proxy so the key never reaches the browser, which
+also lets the edge cache the trending and category responses.
+
+- **`KLIPY_API_KEY`**: The KLIPY app key. Without it `/api/klipy` answers `503`
+  and the GIF button opens an empty picker; nothing else is affected.
+
+Set it as a repository secret, then run the `Rotate Secrets` workflow to push it
+to the Cloudflare Worker.

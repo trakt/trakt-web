@@ -269,6 +269,39 @@ the fact is semantically wrong.
 
 ---
 
+## Pattern 6 - Proxied Third-Party API
+
+Third-party APIs whose key must stay server-side (Klipy, in `queries/gifs/`) are
+reached through a same-origin route under `src/routes/api/` that holds the key,
+never from the browser directly. From `lib/requests` this is Pattern 3 with a
+relative path instead of `rawApiFetch`:
+
+```ts
+const response = await fetch(`/api/klipy/${path}?${params}`);
+
+if (!response.ok) {
+  return { status: 200, body: undefined };
+}
+```
+
+Rules on top of Pattern 3:
+
+- The proxy route allowlists the upstream paths and the forwarded query
+  parameters, so neither can be caller-controlled. Keep those decisions in the
+  route's `_internal/` as pure functions with specs; `+server.ts` stays a thin
+  I/O shell (see `api/klipy/[...path]/`).
+- Read the key through a boundary wrapper in the feature that owns it (e.g.
+  `klipyApiKeyFromEnv.ts`), mirroring `mintSearchKeysFromEnv`.
+- Validate every entry on its own with `safeParse` when the upstream mixes item
+  kinds (Klipy returns ads inline with gifs) - a whole-array parse would drop a
+  usable page over one foreign entry.
+- MSW handlers for a proxy use **relative** paths (`/api/klipy/...`), unlike the
+  Trakt handlers which carry `http://localhost/`.
+- Add the upstream host to `img-src` / `connect-src` in `src/app.html` - the CSP
+  is enforced and failures are silent.
+
+---
+
 ## Mapper Functions
 
 - Pure functions - no side effects, no API calls.

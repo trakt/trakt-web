@@ -10802,6 +10802,42 @@
     "text_email_unsubscribe_message": {
       "default": "You'll no longer receive these emails from Trakt.",
       "description": "Snackbar message confirming the email unsubscribe was successful."
+    },
+    "drawer_title_add_gif": {
+      "default": "Add a GIF",
+      "description": "Title for the drawer that lets a user pick a GIF for their comment."
+    },
+    "input_label_search_gifs": {
+      "default": "Search GIFs",
+      "description": "Aria-label for the GIF picker search input."
+    },
+    "input_placeholder_search_gifs": {
+      "default": "Search GIFs",
+      "description": "Placeholder for the GIF picker search input."
+    },
+    "button_label_add_gif": {
+      "default": "Add a GIF",
+      "description": "Aria-label for the button that opens the GIF picker from a comment box."
+    },
+    "button_label_remove_gif": {
+      "default": "Remove GIF",
+      "description": "Aria-label for the button that takes the selected GIF off a comment being written."
+    },
+    "image_alt_selected_gif": {
+      "default": "Selected GIF",
+      "description": "Alt text for the GIF attached to the comment being written."
+    },
+    "image_alt_comment_gif": {
+      "default": "GIF attached to the comment",
+      "description": "Alt text for the GIF rendered underneath a posted comment."
+    },
+    "preview_feature_title_comment_gifs": {
+      "default": "GIFs in comments",
+      "description": "Title for the comment-GIFs preview feature toggle in settings."
+    },
+    "preview_feature_description_comment_gifs": {
+      "default": "Attach a GIF to any comment or review you write.",
+      "description": "Description for the comment-GIFs preview feature toggle in settings."
     }
   }
 }
