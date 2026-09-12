@@ -108,6 +108,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
         m.preview_feature_title_large_screen_cards(),
       ),
   },
+  [FeatureFlag.SplitCast]: {
+    icon: PeopleIcon,
+    title: () => m.preview_feature_title_split_cast(),
+    description: () => m.preview_feature_description_split_cast(),
+    addedAt: new Date('2026-10-01'),
+    audience: 'vip',
+  },
   [FeatureFlag.ParentalGuide]: {
     icon: NoSpoilerIcon,
     title: () => m.option_text_certification_parental_guidance(),

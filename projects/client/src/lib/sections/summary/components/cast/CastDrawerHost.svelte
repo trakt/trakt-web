@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSplitCast } from "$lib/features/feature-flag/useSplitCast.ts";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
@@ -11,6 +12,7 @@
   import { toCreditGroups } from "$lib/sections/summary/components/toCreditGroups.ts";
   import { fade } from "svelte/transition";
   import CreditGroupHeader from "$lib/sections/summary/components/CreditGroupHeader.svelte";
+  import DrawerCreditListSkeleton from "$lib/sections/summary/components/_internal/DrawerCreditListSkeleton.svelte";
 
   type CreditsType = "cast" | "crew";
   const creditOptions: ToggleOption<CreditsType>[] = [
@@ -30,11 +32,15 @@
     onClose,
     crew,
     type,
+    isLoading = false,
   }: {
     crew: MediaCrew;
     type: ExtendedMediaType;
     onClose: () => void;
+    isLoading?: boolean;
   } = $props();
+
+  const splitCast = useSplitCast();
 
   let isOpen = $state(false);
   let searchTerm = $state("");
@@ -55,14 +61,14 @@
     `cast-list-${type}-${isSearching ? "search" : creditsType}-${group.id}-header`;
 
   const visibleCreditGroups = $derived(
-    toCreditGroups({ crew, type, searchTerm: normalizedSearchTerm })
-      .filter((group) => isSearching || group.type === creditsType)
-      .map((group) => ({
-        ...group,
-        showHeader: isSearching || group.type === "cast",
-      })),
+    toCreditGroups({
+      crew,
+      type,
+      splitCast: $splitCast,
+      searchTerm: normalizedSearchTerm,
+      creditsType,
+    }),
   );
-
 </script>
 
 <Drawer
@@ -81,7 +87,11 @@
         placeholder={m.input_placeholder_search_credit_members()}
       />
 
-      {#if visibleCreditGroups.length > 0}
+      {#if isLoading}
+        <DrawerCreditListSkeleton
+          withHeader={$splitCast && (isSearching || creditsType === "cast")}
+        />
+      {:else if visibleCreditGroups.length > 0}
         <div
           id={`cast-list-${type}-${isSearching ? "search" : creditsType}`}
           class="credit-list"

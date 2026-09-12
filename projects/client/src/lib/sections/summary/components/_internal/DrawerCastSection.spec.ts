@@ -1,7 +1,9 @@
+import { afterEach, beforeEach } from 'vitest';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
 import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
-import { screen, within } from '@testing-library/svelte';
+import { screen, waitFor, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import DrawerCastSection from './DrawerCastSection.svelte';
@@ -66,4 +68,60 @@ describe('DrawerCastSection', () => {
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     expect(screen.getByText('Sophie Thompson')).toBeInTheDocument();
   });
+});
+
+it('should reserve the group heading in the loading skeleton only when the flag is on', async () => {
+  const { unmount } = renderComponent(DrawerCastSection, {
+    props: {
+      crew: EpisodeSiloPeopleMappedMock,
+      type: 'episode',
+      isLoading: true,
+    },
+  });
+  await waitFor(() => {
+    expect(document.querySelector('.credit-skeleton-header')).not.toBeNull();
+  });
+  unmount();
+
+  localStorage.setItem(
+    'trakt-feature-flags',
+    JSON.stringify({ 'split-cast': false }),
+  );
+  renderComponent(DrawerCastSection, {
+    props: {
+      crew: EpisodeSiloPeopleMappedMock,
+      type: 'episode',
+      isLoading: true,
+    },
+  });
+  await waitFor(() => {
+    expect(document.querySelector('.credit-skeleton-card')).not.toBeNull();
+  });
+  expect(document.querySelector('.credit-skeleton-header')).toBeNull();
+});
+
+it('shows one full cast list without group headings when the flag is off', async () => {
+  localStorage.setItem(
+    'trakt-feature-flags',
+    JSON.stringify({ 'split-cast': false }),
+  );
+  renderComponent(DrawerCastSection, {
+    props: { crew: EpisodeSiloPeopleMappedMock, type: 'episode' },
+  });
+  expect(await screen.findByText('Sophie Thompson')).toBeInTheDocument();
+  expect(screen.getAllByRole('list')).toHaveLength(1);
+  expect(screen.queryByRole('heading', { name: /Main Cast|Supporting Cast/ }))
+    .not.toBeInTheDocument();
+});
+
+beforeEach(() => {
+  localStorage.setItem(
+    'trakt-feature-flags',
+    JSON.stringify({ 'split-cast': true }),
+  );
+  setAuthorization(true);
+});
+afterEach(() => {
+  setAuthorization(false);
+  localStorage.removeItem('trakt-feature-flags');
 });

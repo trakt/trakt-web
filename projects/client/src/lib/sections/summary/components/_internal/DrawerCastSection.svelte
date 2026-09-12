@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSplitCast } from "$lib/features/feature-flag/useSplitCast.ts";
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
@@ -38,6 +39,8 @@
     isLoading?: boolean;
   } = $props();
 
+  const splitCast = useSplitCast();
+
   let searchTerm = $state("");
   let creditsType = $state<CreditsType>("cast");
 
@@ -50,30 +53,18 @@
     return m.drawer_meta_info_cast();
   });
 
-  const visibleCreditGroups = $derived.by(() => {
-    const groups = toCreditGroups({
+  const visibleCreditGroups = $derived(
+    toCreditGroups({
       crew,
       type,
+      splitCast: $splitCast,
       searchTerm: normalizedSearchTerm,
-      mainCastLabel: m.header_main_cast(),
-    }).filter((group) => isSearching || group.type === creditsType);
-
-    if (type !== "movie" || groups.length === 0) return groups;
-
-    return [{
-      id: "credits",
-      label: creditsMetaInfo,
-      members: groups.flatMap((group) => group.members),
-      type: creditsType,
-    }];
-  });
+      creditsType,
+    }),
+  );
 
   const toCreditMemberKey = (member: CreditMember) =>
     `${member.key}-${member.positions ? "cast" : "crew"}`;
-
-  const showGroupHeaders = $derived(
-    type !== "movie" && (isSearching || creditsType === "cast"),
-  );
 </script>
 
 <div class="drawer-cast-section">
@@ -100,7 +91,9 @@
   />
 
   {#if isLoading}
-    <DrawerCreditListSkeleton />
+    <DrawerCreditListSkeleton
+      withHeader={$splitCast && (isSearching || creditsType === "cast")}
+    />
   {:else if visibleCreditGroups.length > 0}
     <div
       id={`drawer-cast-list-${type}-${isSearching ? "search" : creditsType}`}
@@ -108,7 +101,7 @@
     >
       {#each visibleCreditGroups as group (group.id)}
         <section class="credit-group">
-          {#if showGroupHeaders}
+          {#if group.showHeader}
             <CreditGroupHeader
               id={`drawer-credit-${type}-${group.id}-header`}
               label={group.label}
@@ -118,7 +111,7 @@
           <div
             class="credit-list"
             role="list"
-            aria-labelledby={showGroupHeaders
+            aria-labelledby={group.showHeader
               ? `drawer-credit-${type}-${group.id}-header`
               : undefined}
           >
