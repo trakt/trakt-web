@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSplitCast } from "$lib/features/feature-flag/useSplitCast.ts";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
@@ -37,6 +38,8 @@
   } = $props();
 
   let isOpen = $state(false);
+  const splitCast = useSplitCast();
+
   let searchTerm = $state("");
   let creditsType = $state<CreditsType>("cast");
 
@@ -54,14 +57,22 @@
   const toCreditGroupHeaderId = (group: { id: string }) =>
     `cast-list-${type}-${isSearching ? "search" : creditsType}-${group.id}-header`;
 
-  const visibleCreditGroups = $derived(
-    toCreditGroups({ crew, type, searchTerm: normalizedSearchTerm })
+  const visibleCreditGroups = $derived.by(() => {
+    const groups = toCreditGroups({ crew, type, splitCast: $splitCast, searchTerm: normalizedSearchTerm })
       .filter((group) => isSearching || group.type === creditsType)
       .map((group) => ({
         ...group,
         showHeader: isSearching || group.type === "cast",
-      })),
-  );
+      }));
+    if ($splitCast || groups.length === 0) return groups;
+    return [{
+      id: "credits",
+      type: creditsType,
+      label: creditsMetaInfo,
+      members: groups.flatMap((group) => group.members),
+      showHeader: false,
+    }];
+  });
 
 </script>
 

@@ -8,12 +8,11 @@ import { time } from '$lib/utils/timing/time.ts';
 type ShowSeasonPeopleParams = {
   slug: string;
   season: number;
+  guestStars?: boolean;
 } & ApiParams;
 
-const EXTENDED = 'images,guest_stars';
-
 const showSeasonPeopleRequest = (
-  { fetch, slug, season }: ShowSeasonPeopleParams,
+  { fetch, slug, season, guestStars = false }: ShowSeasonPeopleParams,
 ) =>
   api({ fetch })
     .shows
@@ -24,14 +23,20 @@ const showSeasonPeopleRequest = (
         season: castNumberAsString(season),
       },
       query: {
-        extended: EXTENDED as 'images',
+        extended: (guestStars ? 'images,guest_stars' : 'images') as 'images',
       },
     });
 
 export const showSeasonPeopleQuery = defineQuery({
   key: 'showSeasonPeople',
   invalidations: [],
-  dependencies: (params) => [params.slug, params.season, EXTENDED],
+  dependencies: (
+    params,
+  ) => [
+    params.slug,
+    params.season,
+    params.guestStars ? 'images,guest_stars' : 'images',
+  ],
   request: showSeasonPeopleRequest,
   mapper: (response) => mapToMediaCrew(response.body),
   schema: MediaCrewSchema,

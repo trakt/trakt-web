@@ -8,10 +8,11 @@ type CreditGroupsProps = {
   type: ExtendedMediaType;
   searchTerm: string;
   mainCastLabel?: string;
+  splitCast: boolean;
 };
 
 export function toCreditGroups(
-  { crew, type, searchTerm, mainCastLabel }: CreditGroupsProps,
+  { crew, type, searchTerm, mainCastLabel, splitCast }: CreditGroupsProps,
 ) {
   const { cast, crew: crewMembers } = toCreditMembers({ crew, type });
   const supportingCast = type === 'movie'
@@ -26,7 +27,7 @@ export function toCreditGroups(
         (supportingCast.length > 0
           ? m.header_main_cast()
           : m.drawer_meta_info_cast()),
-      members: cast,
+      members: splitCast ? cast : [...cast, ...supportingCast],
     },
     {
       id: 'supporting-cast',
@@ -34,7 +35,7 @@ export function toCreditGroups(
       label: cast.length > 0
         ? m.header_supporting_cast()
         : m.drawer_meta_info_cast(),
-      members: supportingCast,
+      members: splitCast ? supportingCast : [],
     },
     {
       id: 'crew',
