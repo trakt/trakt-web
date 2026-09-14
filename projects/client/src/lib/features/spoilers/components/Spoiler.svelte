@@ -31,7 +31,7 @@
     :global(.trakt-comment p),
     :global(span:not(button span):not(a span)) {
       transition: var(--transition-increment) ease-in-out;
-      transition-property: filter, padding;
+      transition-property: filter;
     }
 
     &:global(.trakt-spoiler) {
