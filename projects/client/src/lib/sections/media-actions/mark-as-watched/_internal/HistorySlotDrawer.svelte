@@ -9,7 +9,6 @@
   import { useRecentlyWatchedList } from "$lib/sections/lists/stores/useRecentlyWatchedList";
   import { MIN_DATE } from "$lib/utils/constants";
   import HistorySlotPicker from "./HistorySlotPicker.svelte";
-  import type { HistorySelection } from "./models/HistorySelection";
 
   type HistorySlotDrawerProps = {
     onClose: () => void;
@@ -22,11 +21,7 @@
     $props();
 
   const now = new Date();
-  let selectedSlot = $state<HistorySelection | undefined>(undefined);
-
-  const handleSelectSlot = ({ date, bounds }: HistorySelection) => {
-    selectedSlot = { date, bounds };
-  };
+  let selectedDate = $state<Date | undefined>(undefined);
 
   const { history } = useUser();
   const hasHistory = $derived.by(() => {
@@ -47,23 +42,11 @@
   <div class="trakt-history-slot-drawer-content">
     <div class="picker-wrapper">
       <DateTimePicker
-        value={selectedSlot?.date}
-        disabled={!selectedSlot && hasHistory}
-        minDate={selectedSlot?.bounds.minDate}
-        maxDate={selectedSlot?.bounds.maxDate ?? now}
-        onChange={(date) => {
-          if (!date) {
-            selectedSlot = undefined;
-            return;
-          }
-          selectedSlot = {
-            date,
-            bounds: selectedSlot?.bounds ?? {
-              minDate: MIN_DATE,
-              maxDate: now,
-            },
-          };
-        }}
+        value={selectedDate}
+        disabled={!selectedDate && hasHistory}
+        minDate={MIN_DATE}
+        maxDate={now}
+        onChange={(date) => (selectedDate = date)}
         label={m.date_time_label_watched({ title })}
       />
       <div class="picker-footer">
@@ -80,10 +63,10 @@
           variant="primary"
           color="purple"
           label={m.button_label_mark_as_watched({ title })}
-          disabled={!selectedSlot}
+          disabled={!selectedDate}
           onclick={() => {
-            if (!selectedSlot) return;
-            onConfirm(selectedSlot.date);
+            if (!selectedDate) return;
+            onConfirm(selectedDate);
           }}
         >
           {m.button_text_mark_as_watched()}
@@ -105,8 +88,8 @@
           {#snippet items(items)}
             <HistorySlotPicker
               list={items}
-              selectedDate={selectedSlot?.date}
-              onSelect={handleSelectSlot}
+              {selectedDate}
+              onSelect={(date) => (selectedDate = date)}
               {title}
             />
           {/snippet}

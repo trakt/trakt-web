@@ -7,16 +7,15 @@
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { buildHistorySlots } from "./buildHistorySlots";
-  import { calculateHistorySelection } from "./calculateHistorySelection";
+  import { calculateSlotMidpoint } from "./calculateSlotMidpoint";
   import { getActiveSlotKey } from "./getActiveSlotKey";
   import HistorySlotButton from "./HistorySlotButton.svelte";
-  import type { HistorySelection } from "./models/HistorySelection";
   import type { SlottedEntry } from "./models/SlottedEntry";
 
   type HistorySlotPickerProps = {
     list: HistoryEntry[];
     selectedDate?: Date;
-    onSelect: (selection: HistorySelection) => void;
+    onSelect: (date: Date) => void;
     title: string;
   };
 
@@ -45,8 +44,7 @@
 
   const handleSelect = (slot: SlottedEntry) => {
     lastClickedKey = slot.key;
-    const selection = calculateHistorySelection(slot.startDate, slot.endDate);
-    onSelect(selection);
+    onSelect(calculateSlotMidpoint(slot.startDate, slot.endDate));
   };
 </script>
 
