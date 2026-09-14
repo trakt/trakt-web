@@ -424,8 +424,8 @@
     }
 
     &[data-type="movie"] {
-      color: var(--blue-300);
-      background: color-mix(in srgb, var(--blue-500) 20%, transparent);
+      color: var(--purple-300);
+      background: color-mix(in srgb, var(--purple-500) 20%, transparent);
     }
   }
 

@@ -121,7 +121,7 @@
     :global(.trakt-slider-range) {
       position: absolute;
       height: 100%;
-      background-color: var(--blue-500);
+      background-color: var(--purple-500);
     }
   }
 
@@ -139,7 +139,7 @@
     cursor: pointer;
     border-radius: 50%;
 
-    background-color: var(--blue-500);
+    background-color: var(--purple-500);
     box-shadow: var(--shadow-raised);
 
     transition: var(--transition-increment) ease-in-out;
@@ -154,7 +154,7 @@
     }
 
     &:hover {
-      background-color: var(--blue-600);
+      background-color: var(--purple-600);
     }
 
     &:focus-visible {

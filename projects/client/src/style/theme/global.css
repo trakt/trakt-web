@@ -52,9 +52,9 @@
   --color-foreground-red: var(--red-50);
   --color-background-red-hover: var(--red-700);
 
-  --color-background-blue: var(--blue-700);
-  --color-foreground-blue: var(--blue-50);
-  --color-background-blue-hover: var(--blue-800);
+  --color-background-blue: var(--purple-700);
+  --color-foreground-blue: var(--purple-50);
+  --color-background-blue-hover: var(--purple-800);
 
   --color-background-default: var(--shade-700);
   --color-foreground-default: var(--shade-50);
@@ -75,9 +75,9 @@
   --color-switch-foreground-red: var(--red-50);
   --color-switch-background-red: var(--red-800);
 
-  --color-tick-blue: var(--blue-500);
-  --color-switch-foreground-blue: var(--blue-50);
-  --color-switch-background-blue: var(--blue-800);
+  --color-tick-blue: var(--purple-500);
+  --color-switch-foreground-blue: var(--purple-50);
+  --color-switch-background-blue: var(--purple-800);
 
   --color-tick-default: var(--shade-500);
   --color-switch-foreground-default: var(--shade-50);
@@ -110,7 +110,7 @@
   /**
    * Inputs
    */
-  --color-input-focus: var(--blue-500);
+  --color-input-focus: var(--purple-500);
   --color-input-error: var(--red-600);
 
   /**
