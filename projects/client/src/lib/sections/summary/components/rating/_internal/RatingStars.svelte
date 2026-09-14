@@ -348,6 +348,9 @@
       gap: var(--gap-xs);
     }
 
+    // Every star keeps the same footprint at every state - the active one is
+    // called out with colour and opacity, never with size, so a selected row
+    // reads as one even sequence instead of one oversized trailing star.
     :global(.star-item) {
       display: inline-flex;
       cursor: pointer;
@@ -356,10 +359,6 @@
         transform var(--transition-increment) var(--ease-spring),
         color var(--transition-increment) var(--ease-glide),
         opacity var(--transition-increment) var(--ease-glide);
-    }
-
-    :global(.star-item[data-highlighted]) {
-      transform: scale(1.3);
     }
 
     // Tint the whole row while scrubbing, and gently recede the stars that
@@ -386,8 +385,9 @@
         bottom: calc(100% + var(--gap-l));
       }
 
+      // Lift only - no scale, so the star stays the size of its neighbours.
       :global(.star-item[data-highlighted]) {
-        transform: translateY(-0.75rem) scale(1.3);
+        transform: translateY(-0.75rem);
       }
     }
 
