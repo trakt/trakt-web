@@ -6,11 +6,11 @@ import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
 type EpisodePeopleParams =
-  & { slug: string; season: number; episode: number }
+  & { slug: string; season: number; guestStars?: boolean; episode: number }
   & ApiParams;
 
 const episodePeopleRequest = (
-  { fetch, slug, season, episode }: EpisodePeopleParams,
+  { fetch, slug, season, episode, guestStars = false }: EpisodePeopleParams,
 ) =>
   api({ fetch })
     .shows
@@ -22,14 +22,16 @@ const episodePeopleRequest = (
         episode,
       },
       query: {
-        extended: 'images',
+        extended: (guestStars ? 'images,guest_stars' : 'images') as 'images',
       },
     });
 
 export const episodePeopleQuery = defineQuery({
   key: 'episodePeopleQuery',
   invalidations: [],
-  dependencies: (params) => [params.slug, params.season, params.episode],
+  dependencies: (
+    params,
+  ) => [params.slug, params.season, params.episode, params.guestStars ?? false],
   request: episodePeopleRequest,
   mapper: (response) => mapToMediaCrew(response.body),
   schema: MediaCrewSchema,

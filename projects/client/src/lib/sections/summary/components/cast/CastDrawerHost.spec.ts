@@ -1,5 +1,9 @@
+import { afterEach, beforeEach } from 'vitest';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
-import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
+import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
+import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
+import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
@@ -13,17 +17,17 @@ describe('CastDrawerHost', () => {
   it('filters credits and searches locally', async () => {
     const user = userEvent.setup();
     const crew = {
-      ...ShowSiloPeopleMappedMock,
+      ...ShowSiloSplitPeopleMappedMock,
       cast: [
         {
-          ...ShowSiloPeopleMappedMock.cast[0]!,
+          ...ShowSiloSplitPeopleMappedMock.cast[0]!,
           characters: [
             'Juliette Nichols',
             'Juliette Nichols (voice)',
             'Juliette Nichols (archive footage)',
           ],
         },
-        ...ShowSiloPeopleMappedMock.cast.slice(1),
+        ...ShowSiloSplitPeopleMappedMock.cast.slice(1),
       ],
     };
 
@@ -45,7 +49,15 @@ describe('CastDrawerHost', () => {
       'overlay',
     );
     expect(screen.getByText('People')).toBeInTheDocument();
-    expect(screen.getByText('Cast')).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', {
+        name: `Main Cast ${crew.cast.length} people`,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: 'Supporting Cast 1 person' }),
+    )
+      .toBeInTheDocument();
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     expect(screen.getByText('Juliette Nichols'))
       .toBeInTheDocument();
@@ -71,12 +83,25 @@ describe('CastDrawerHost', () => {
     await waitFor(() => {
       expect(screen.getByText('Cast & Crew')).toBeInTheDocument();
     });
+    expect(
+      await screen.findByRole('heading', {
+        name: 'Main Cast 1 person',
+      }),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Supporting Cast/ })).not
+      .toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /^Crew/ })).not
+      .toBeInTheDocument();
     expect(screen.getByText('Juliette Nichols (voice)')).toBeInTheDocument();
 
     await user.clear(searchInput);
 
     await waitFor(() => {
-      expect(screen.getByText('Cast')).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', {
+          name: `Main Cast ${crew.cast.length} people`,
+        }),
+      ).toBeInTheDocument();
     });
     expect(screen.getByText('Juliette Nichols (voice)')).toBeInTheDocument();
 
@@ -125,4 +150,98 @@ describe('CastDrawerHost', () => {
     expect(screen.getByRole('radio', { name: 'Cast' })).toBeInTheDocument();
     expect(screen.getByRole('radio', { name: 'Crew' })).toBeInTheDocument();
   });
+
+  it('hides episode counts for episode credits', async () => {
+    renderComponent(CastDrawerHost, {
+      props: {
+        crew: EpisodeSiloPeopleMappedMock,
+        type: 'episode',
+        onClose: vi.fn(),
+      },
+    });
+
+    await waitFor(() => {
+      expect(screen.getByRole('searchbox', { name: 'Search people' }))
+        .toBeInTheDocument();
+    });
+
+    expect(
+      await screen.findByRole('heading', {
+        name: `Main Cast ${EpisodeSiloPeopleMappedMock.cast.length} people`,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', {
+        name:
+          `Supporting Cast ${EpisodeSiloPeopleMappedMock.guestStars.length} person`,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Sophie Thompson')).toBeInTheDocument();
+    expect(screen.queryByText('2 eps.')).not.toBeInTheDocument();
+  });
+
+  it('uses Cast as the episode cast header when only supporting cast is available', async () => {
+    const crew = {
+      ...EpisodeSiloPeopleMappedMock,
+      cast: [],
+    };
+
+    renderComponent(CastDrawerHost, {
+      props: {
+        crew,
+        type: 'episode',
+        onClose: vi.fn(),
+      },
+    });
+
+    await waitFor(() => {
+      expect(screen.getByRole('searchbox', { name: 'Search people' }))
+        .toBeInTheDocument();
+    });
+
+    expect(
+      await screen.findByRole('heading', {
+        name: `Cast ${crew.guestStars.length} person`,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Main Cast/ })).not
+      .toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Supporting Cast/ })).not
+      .toBeInTheDocument();
+  });
+
+  it('uses Cast as the movie cast group header', async () => {
+    renderComponent(CastDrawerHost, {
+      props: {
+        crew: MovieHereticPeopleMappedMock,
+        type: 'movie',
+        onClose: vi.fn(),
+      },
+    });
+
+    await waitFor(() => {
+      expect(screen.getByRole('searchbox', { name: 'Search people' }))
+        .toBeInTheDocument();
+    });
+
+    expect(
+      await screen.findByRole('heading', {
+        name: `Cast ${MovieHereticPeopleMappedMock.cast.length} people`,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Main Cast/ })).not
+      .toBeInTheDocument();
+  });
+});
+
+beforeEach(() => {
+  localStorage.setItem(
+    'trakt-feature-flags',
+    JSON.stringify({ 'split-cast': true }),
+  );
+  setAuthorization(true);
+});
+afterEach(() => {
+  setAuthorization(false);
+  localStorage.removeItem('trakt-feature-flags');
 });

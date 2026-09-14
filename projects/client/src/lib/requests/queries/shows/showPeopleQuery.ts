@@ -6,10 +6,11 @@ import { time } from '$lib/utils/timing/time.ts';
 
 type ShowPeopleParams = {
   slug: string;
+  guestStars?: boolean;
 } & ApiParams;
 
 const showPeopleRequest = (
-  { fetch, slug }: ShowPeopleParams,
+  { fetch, slug, guestStars = false }: ShowPeopleParams,
 ) =>
   api({ fetch })
     .shows
@@ -18,14 +19,14 @@ const showPeopleRequest = (
         id: slug,
       },
       query: {
-        extended: 'images',
+        extended: (guestStars ? 'images,guest_stars' : 'images') as 'images',
       },
     });
 
 export const showPeopleQuery = defineQuery({
   key: 'showPeople',
   invalidations: [],
-  dependencies: (params) => [params.slug],
+  dependencies: (params) => [params.slug, params.guestStars ?? false],
   request: showPeopleRequest,
   mapper: (response) => mapToMediaCrew(response.body),
   schema: MediaCrewSchema,
