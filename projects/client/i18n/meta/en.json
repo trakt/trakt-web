@@ -477,12 +477,16 @@
       "description": "Title for the 404 error page."
     },
     "error_text_404": {
-      "default": "(Don't worry, it happens! Even the Force is sometimes out of alignment.)",
+      "default": "Don't worry, it happens! Even the Force is sometimes out of alignment.",
       "description": "Text shown on the 404 error page."
     },
     "link_text_back_to_safety": {
       "default": "Back to safety...",
       "description": "Text for the link that takes users back to the homepage from the 404 error page."
+    },
+    "error_kicker_404": {
+      "default": "Missing reel",
+      "description": "Short scene label shown above the title on the 404 error page."
     },
     "input_prompt_mark_as_watched_date": {
       "default": "When did you finish watching this? (YYYY-MM-DD HH:MM)",
@@ -2465,12 +2469,20 @@
       }
     },
     "page_title_service_unavailable": {
-      "default": "Trakt service unreachable",
+      "default": "We lost the signal",
       "description": "Title for the page shown when the Trakt service is unreachable."
     },
     "error_text_service_unavailable": {
-      "default": "The connection is... absent. Like a forgotten memory.",
+      "default": "Trakt can't be reached right now. Your watch history is safe.",
       "description": "Text shown on the error page when the Trakt service is unreachable."
+    },
+    "error_text_service_unavailable_resume": {
+      "default": "We'll pick up exactly where you left off.",
+      "description": "Second line shown on the error page when the Trakt service is unreachable, reassuring the user that nothing is lost."
+    },
+    "error_kicker_service_unavailable": {
+      "default": "Intermission",
+      "description": "Short scene label shown above the title on the service unreachable error page."
     },
     "link_text_service_status": {
       "default": "Trakt service status",
@@ -2907,6 +2919,10 @@
     "page_title_account_locked": {
       "default": "Account locked",
       "description": "Title for the account locked page."
+    },
+    "error_kicker_account_locked": {
+      "default": "House closed",
+      "description": "Short scene label shown above the title on the account locked page."
     },
     "error_text_locked_account_guide": {
       "default": "Please visit the <a>advanced settings</a> to run a history analysis and unlock your account.",
@@ -4006,6 +4022,10 @@
     "page_title_unexpected_error": {
       "default": "Something went wrong",
       "description": "Title for the unexpected error page."
+    },
+    "error_kicker_unexpected_error": {
+      "default": "Bad take",
+      "description": "Short scene label shown above the title on the unexpected error page."
     },
     "error_text_unexpected_error": {
       "default": "Uh oh... this wasn't planned. If this keeps happening, please <a>submit a new issue</a>.",
