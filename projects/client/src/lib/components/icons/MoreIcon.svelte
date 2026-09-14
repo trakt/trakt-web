@@ -44,7 +44,7 @@
 <svg
   width={baseSize}
   height={baseSize}
-  viewBox="0 0 #{baseSize} #{baseSize}"
+  viewBox="0 0 {baseSize} {baseSize}"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
   overflow="visible"
