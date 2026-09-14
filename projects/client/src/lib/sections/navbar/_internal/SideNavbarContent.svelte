@@ -7,9 +7,12 @@
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import DevtoolsNavItem from "./DevtoolsNavItem.svelte";
   import NavGroup from "./NavGroup.svelte";
 
   const { isCollapsed }: { isCollapsed: boolean } = $props();
+
+  const isDev = import.meta.env.DEV;
 </script>
 
 {#snippet iconSearch()}<SearchIcon />{/snippet}
@@ -91,6 +94,10 @@
       )}
     </NavGroup>
   </RenderFor>
+
+  {#if isDev}
+    <DevtoolsNavItem {isCollapsed} />
+  {/if}
 </div>
 
 <style>
