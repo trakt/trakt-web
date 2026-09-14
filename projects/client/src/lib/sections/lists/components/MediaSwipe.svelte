@@ -1,5 +1,9 @@
 <script lang="ts">
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
+  import { hasSwipeGesture } from "./_internal/hasSwipeGesture.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { swipeIndicatorHeight } from "./_internal/swipeIndicatorHeight.ts";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { BaseMediaInput } from "$lib/models/MediaInput";
@@ -14,6 +18,17 @@
     };
 
   const { type, media, style, children }: MediaSwipeProps = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
+
+  const hasSwipe = $derived(
+    hasSwipeGesture({
+      style,
+      isLargeScreenCards: $isLargeScreenCards,
+      isMouse: $isMouse,
+    }),
+  );
 
   const target = $derived({ type, media });
 
@@ -37,7 +52,7 @@
   );
 </script>
 
-{#if style === "summary"}
+{#if hasSwipe}
   <SwipeX
     {children}
     directions={["left", "right"]}
@@ -51,7 +66,7 @@
         addToWatchlist();
       }
     }}
-    --indicator-height="var(--height-summary-card-cover)"
+    --indicator-height={swipeIndicatorHeight($isLargeScreenCards)}
   >
     {#snippet indicator({ isActive, direction })}
       {#if direction === "left"}

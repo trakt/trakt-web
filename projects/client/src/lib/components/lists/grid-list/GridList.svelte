@@ -13,7 +13,7 @@
     promotedItems?: T[];
     dimensionObserver?: (node: HTMLElement) => void;
     listActions?: Snippet;
-    sizing?: "default" | "auto";
+    sizing?: "default" | "auto" | "cover";
     groupBy?: (item: T) => string;
     groupHeader?: Snippet<[string]>;
   };
@@ -123,17 +123,22 @@
 
     gap: var(--list-header-gap);
 
-    &[data-sizing="auto"] {
+    &[data-sizing="auto"],
+    &[data-sizing="cover"] {
       .trakt-list-items {
         grid-template-columns: repeat(
           auto-fill,
           minmax(var(--width-item), 1fr)
         );
-
-        :global(.trakt-card) {
-          --width-override-card: 100%;
-        }
       }
+    }
+
+    &[data-sizing="auto"] .trakt-list-items :global(.trakt-card) {
+      --width-override-card: 100%;
+    }
+
+    &[data-sizing="cover"] .trakt-list-items {
+      justify-items: center;
     }
   }
 

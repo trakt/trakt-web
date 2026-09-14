@@ -17,6 +17,7 @@
 
 <DrilledMediaList
   id="media-watch-history-list-{type}"
+  variant="landscape"
   title={m.list_title_history()}
   {type}
   useList={(params) => useRecentlyWatchedList({ ...params, id: media.id })}

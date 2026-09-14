@@ -10,4 +10,5 @@ export enum FeatureFlag {
   ReviewerStats = 'reviewer-stats',
   GenrePicker = 'genre-picker',
   ActionConfirmations = 'action-confirmations',
+  LargeScreenCards = 'large-screen-cards',
 }
