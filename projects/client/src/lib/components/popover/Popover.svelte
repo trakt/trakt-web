@@ -5,6 +5,7 @@
 
   type PopoverProps = {
     content: Snippet;
+    label?: string;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
   } & (
@@ -12,7 +13,8 @@
     | { children: Snippet; customAnchor?: never }
   );
 
-  const { content, open, onOpenChange, ...rest }: PopoverProps = $props();
+  const { content, label, open, onOpenChange, ...rest }: PopoverProps =
+    $props();
 
   const isControlled = $derived(open !== undefined);
 
@@ -30,7 +32,7 @@
 
 <Popover.Root bind:open={getOpen, setOpen}>
   {#if rest.children}
-    <Popover.Trigger class="trakt-popover-trigger">
+    <Popover.Trigger class="trakt-popover-trigger" aria-label={label}>
       {@render rest.children()}
     </Popover.Trigger>
   {/if}
@@ -62,5 +64,12 @@
   :global(.trakt-popover-trigger) {
     all: unset;
     display: inline-flex;
+  }
+
+  /* `all: unset` above strips the UA focus ring, so put one back. */
+  :global(.trakt-popover-trigger:focus-visible) {
+    outline: var(--border-thickness-xs) solid var(--color-foreground);
+    outline-offset: var(--ni-2);
+    border-radius: var(--border-radius-m);
   }
 </style>

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import Popover from "$lib/components/popover/Popover.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
@@ -10,7 +9,6 @@
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
   import type { RateNowProps } from "$lib/sections/summary/components/rating/models/RateNowProps";
-  import { NOOP_FN } from "$lib/utils/constants";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import ActivityItem from "../components/ActivityItem.svelte";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
@@ -61,6 +59,12 @@
 
     return activity.movie.title;
   });
+
+  const rateLabel = $derived(
+    userRating
+      ? m.button_label_change_rating({ title: targetTitle })
+      : m.button_label_rate({ title: targetTitle }),
+  );
 </script>
 
 {#snippet popupActions()}
@@ -93,23 +97,27 @@
   </div>
 {/snippet}
 
+<!--
+  Rated and unrated share one <Popover> and one trigger, so the element survives
+  a rating landing while the popover is open - the badge swaps in without the
+  popover unmounting under the user's cursor - and both states get the same
+  press affordance.
+-->
 {#snippet action()}
-  {#if userRating}
-    <UserRating rating={userRating} />
-  {:else}
-    <RenderFor audience="authenticated">
-      <Popover content={rateContent}>
-        <ActionButton
-          style="ghost"
-          size="small"
-          onclick={NOOP_FN}
-          label={m.button_label_rate({ title: targetTitle })}
-        >
+  <RenderFor audience="authenticated">
+    <Popover content={rateContent} label={rateLabel}>
+      <span
+        class="trakt-history-rating-badge"
+        class:is-rated={Boolean(userRating)}
+      >
+        {#if userRating}
+          <UserRating rating={userRating} />
+        {:else}
           <StarIcon fill="none" />
-        </ActionButton>
-      </Popover>
-    </RenderFor>
-  {/if}
+        {/if}
+      </span>
+    </Popover>
+  </RenderFor>
 {/snippet}
 
 {#if style === "cover"}
@@ -134,7 +142,52 @@
   />
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  /*
+    Negative margins cancel the hit-area padding so the badge keeps the exact
+    position it had as a read-only tag; only the wash grows.
+  */
+  .trakt-history-rating-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-foreground);
+
+    padding: var(--ni-6);
+    margin: var(--ni-neg-6);
+    border-radius: var(--border-radius-m);
+
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: background-color, transform;
+
+    /*
+      Unrated shows a lone star, so it is sized here rather than by UserRating.
+      Guarded on :not(.is-rated) so the rule can never reach the rated badge's
+      own icon, which UserRating sizes.
+    */
+    &:not(.is-rated) :global(svg) {
+      width: var(--ni-20);
+      height: var(--ni-20);
+    }
+
+    @include for-mouse() {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 10%,
+          transparent
+        );
+      }
+    }
+
+    &:active {
+      transform: scale(0.92);
+    }
+  }
+
   .trakt-history-rate-popover {
     padding: var(--ni-12) var(--ni-16);
     border-radius: var(--border-radius-l);
