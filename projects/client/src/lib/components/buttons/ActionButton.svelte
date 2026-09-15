@@ -106,6 +106,11 @@
     $bg: var(--color-background-#{$color});
     $fg: var(--color-foreground-#{$color});
 
+    :global(#{$base}[data-color=#{$color}]) {
+      --accent-action-button: var(--color-accent-#{$color}, #{$bg});
+      --surface-action-button: #{$bg};
+    }
+
     @include variant-styles($base, $color, primary, $bg, $fg);
     @include variant-styles($base, $color, secondary, $fg, $bg);
 
@@ -188,18 +193,14 @@
     display: none;
   }
 
-  @include for-mouse {
-    :global(#{$b}:hover#{$on}) {
-      box-shadow: 0 var(--ni-2) var(--ni-8) var(--ni-neg-2)
-        color-mix(
-          in srgb,
-          var(--color-background-action-button) 50%,
-          transparent
-        );
-    }
-  }
+  @include flat-outline-button(
+    $b,
+    var(--accent-action-button),
+    var(--surface-action-button),
+    scale(0.92)
+  );
 
-  :global(#{$b}:active#{$on}) {
+  :global(#{$b}[data-style=ghost]:active#{$on}) {
     transform: scale(0.92);
     box-shadow: none;
   }
@@ -217,28 +218,6 @@
   :global(#{$b}[data-size=large]) {
     scale: 1.2;
     margin: var(--ni-4);
-  }
-
-  :global(#{$b}[data-variant=secondary]:not([data-style=ghost])#{$on}) {
-    background-color: color-mix(
-      in srgb,
-      var(--color-foreground-action-button) 5%,
-      transparent
-    );
-    border: var(--border-thickness-xxs) solid
-      color-mix(
-        in srgb,
-        var(--color-foreground-action-button) 50%,
-        transparent
-      );
-    color: var(--color-text-primary);
-  }
-
-  @include for-mouse {
-    :global(#{$b}[data-variant=secondary]:not([data-style=ghost])#{$on}:hover) {
-      background-color: var(--color-background-action-button);
-      color: var(--color-foreground-action-button);
-    }
   }
 
   :global(#{$b}[data-style=ghost]) {
