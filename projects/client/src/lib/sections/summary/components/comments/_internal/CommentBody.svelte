@@ -111,7 +111,7 @@
     &,
     :global(p) {
       transition: var(--transition-increment) ease-in-out;
-      transition-property: filter, padding;
+      transition-property: filter;
     }
 
     &:global(.trakt-spoiler),
