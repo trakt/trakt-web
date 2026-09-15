@@ -1,6 +1,18 @@
 :root {
   --animation-duration-jiggle-wiggle: calc(var(--transition-increment) * 3);
   --animation-duration-loopy-loop: calc(var(--transition-increment) * 3);
+  /* Keep in sync with BACKGROUND_FLASH_DURATION in lib/utils/constants.ts. */
+  --animation-duration-background-flash: calc(var(--transition-increment) * 10);
+}
+
+@keyframes background-flash {
+  0%,
+  35% {
+    opacity: 0.28;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes jiggle-wiggle {

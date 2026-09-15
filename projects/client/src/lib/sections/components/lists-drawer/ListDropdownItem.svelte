@@ -1,13 +1,16 @@
 <script lang="ts">
   import { useDangerButton } from "$lib/components/buttons/_internal/useDangerButton";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import type { DropdownItemFlash } from "$lib/components/dropdown/DropdownItemFlash";
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
+  import ViewListLink from "./_internal/ViewListLink.svelte";
   import { ListDropdownItemIntlProvider } from "./ListDropdownItemIntlProvider";
   import type { ListDropdownItemProps } from "./ListDropdownItemProps";
   import { useList } from "./useList";
@@ -19,6 +22,7 @@
     i18n = ListDropdownItemIntlProvider,
     media,
     isListed,
+    flash,
   }: ListDropdownItemProps = $props();
 
   const { user } = useUser();
@@ -55,21 +59,33 @@
     }),
   );
 
+  // Slugs are overlaid asynchronously from the list summaries; the numeric
+  // ids resolve to the same page until they land.
+  const listUrl = $derived(
+    list.ownerSlug && list.slug
+      ? UrlBuilder.users(list.ownerSlug).lists(list.slug)
+      : UrlBuilder.users(String(list.ownerId)).lists(String(list.id)),
+  );
+
   const handler = $derived(isListed ? confirmRemove : addToList);
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: isListed, color: "default" }),
   );
   const state = $derived(isListed ? "added" : "missing");
 
-  const itemProps: Omit<ButtonProps, "children"> = $derived({
-    style: "flat",
-    label: i18n.label({ isListed, listName: list.name, title }),
-    color: $color,
-    variant: isListed ? variant : "primary",
-    onclick: handler,
-    disabled: $isListUpdating || (!isListed && !isBelowLimit),
-    ...events,
-  });
+  const itemProps:
+    & Omit<ButtonProps, "children">
+    & { flash?: DropdownItemFlash | Nil } =
+    $derived({
+      style: "flat",
+      label: i18n.label({ isListed, listName: list.name, title }),
+      color: $color,
+      variant: isListed ? variant : "primary",
+      onclick: handler,
+      disabled: $isListUpdating || (!isListed && !isBelowLimit),
+      flash,
+      ...events,
+    });
 </script>
 
 <DropdownItem {...itemProps}>
@@ -81,5 +97,13 @@
     {:else}
       <BookmarkIcon {state} size="normal" />
     {/if}
+  {/snippet}
+
+  {#snippet action()}
+    <ViewListLink
+      href={listUrl}
+      label={i18n.viewLabel({ isListed, listName: list.name, title })}
+      tooltip={i18n.viewTooltip()}
+    />
   {/snippet}
 </DropdownItem>
