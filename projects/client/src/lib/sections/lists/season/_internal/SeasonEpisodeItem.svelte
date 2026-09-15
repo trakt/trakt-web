@@ -3,6 +3,7 @@
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
@@ -13,7 +14,11 @@
   import type { EpisodeUrlOverride } from "$lib/sections/lists/components/models/EpisodeUrlOverride";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchedUntilHereDrawer from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/WatchedUntilHereDrawer.svelte";
+  import { countSkippedEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/countSkippedEpisodes.ts";
+  import { toWatchedGapPrompt } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/toWatchedGapPrompt.ts";
   import { useWatchUntilHereEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/useWatchUntilHereEpisodes.ts";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
 
@@ -50,7 +55,7 @@
     hasUnseenEpisodes && episode.effectiveReleaseDate && !isFuture,
   );
 
-  const { isWatchable } = $derived(
+  const { isWatchable, isWatched } = $derived(
     useMarkAsWatched({ type: "episode", media: episode, show }),
   );
 
@@ -58,6 +63,15 @@
     !isFuture && (isWatchable || hasBulkMarkAsWatched),
   );
   const variant = $derived(isFuture ? "upcoming" : "default");
+
+  const skippedCount = $derived(
+    countSkippedEpisodes({
+      target: { season: episode.season, number: episode.number },
+      currentSeasonEpisodes,
+      previousSeasons,
+      watchedBySeason,
+    }),
+  );
 
   const src = $derived(
     useEpisodeSpoilerImage({
@@ -68,6 +82,40 @@
   );
 
   let isWatchUntilDrawerOpen = $state(false);
+
+  const { history } = useUser();
+  const { confirm } = useConfirm();
+  const confirmFillGap = $derived(
+    confirm({
+      type: ConfirmationType.WatchedUntilHere,
+      title: episode.title,
+      onConfirm: () => (isWatchUntilDrawerOpen = true),
+    }),
+  );
+
+  /**
+   * `toWatchedGapPrompt` holds the transition rule, including why an unsettled
+   * history cannot move the baseline. Plain `let`, not `$state`: nothing else
+   * reads it, and the effect must not re-run on its own write.
+   */
+  let watchedBaseline: boolean | null = null;
+
+  $effect(() => {
+    const { baseline, shouldPrompt } = toWatchedGapPrompt({
+      baseline: watchedBaseline,
+      isHistorySettled: $history !== null,
+      isWatched: $isWatched,
+      skippedCount,
+    });
+
+    watchedBaseline = baseline;
+
+    if (!shouldPrompt) {
+      return;
+    }
+
+    confirmFillGap();
+  });
 
   const watchUntilResolver = $derived.by(() => {
     if (!isWatchUntilDrawerOpen) return null;
