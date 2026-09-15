@@ -1,9 +1,9 @@
-import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { ListTarget } from '$lib/models/ListTarget.ts';
 import { BehaviorSubject } from 'rxjs';
 
 type ManageListsDrawerProps = {
-  media: MediaEntry;
-  title?: string;
+  target: ListTarget;
+  title: string;
   metaInfo?: string;
 };
 

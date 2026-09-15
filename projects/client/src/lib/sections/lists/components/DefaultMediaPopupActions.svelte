@@ -26,7 +26,7 @@
 />
 <ListAction
   style="dropdown-item"
-  {media}
+  target={{ type: media.type, media }}
   title={media.title}
   onClick={onListAction}
 />

@@ -6,7 +6,6 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { onMount } from "svelte";
   import { ListDropdownItemIntlProvider } from "./ListDropdownItemIntlProvider";
   import type { ListDropdownItemProps } from "./ListDropdownItemProps";
@@ -17,18 +16,14 @@
     list,
     onLoading,
     i18n = ListDropdownItemIntlProvider,
-    media,
+    target,
     isListed,
   }: ListDropdownItemProps = $props();
 
   const { user } = useUser();
 
   const { addToList, removeFromList, isListUpdating } = $derived(
-    useList({
-      list,
-      type: media.type as MediaType,
-      media,
-    }),
+    useList({ list, ...target }),
   );
 
   const isBelowLimit = $derived(list.count < $user.limits.lists.itemLimit);
