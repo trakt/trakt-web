@@ -60,8 +60,12 @@
 
       {@render option.icon?.(option)}
 
-      <span class="trakt-select-item-label ellipsis capitalize">
-        {option.label}
+      <span class="item-content">
+        <span class="trakt-select-item-label ellipsis capitalize">
+          {option.label}
+        </span>
+
+        {@render option.tag?.(option)}
       </span>
 
       {#if hasToggle}
@@ -177,10 +181,22 @@
     }
   }
 
-  .trakt-select-item-label {
+  /* label and its tag sit together at the start; the side slots stay at the edges */
+  .item-content {
     flex: 1;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
+
+  .trakt-select-item-label {
     min-width: 0;
     text-align: start;
   }
 
+  .trakt-select-item :global(.trakt-stem-tag) {
+    flex-shrink: 0;
+  }
 </style>

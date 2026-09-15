@@ -60,7 +60,6 @@
     showSlug={show.slug}
     {seasons}
     {currentSeason}
-    variant="detailed"
   />
 {/snippet}
 

@@ -4,6 +4,5 @@ export type SeasonDropdownProps = {
   showSlug: string;
   seasons: Season[];
   currentSeason: number;
-  variant?: 'default' | 'detailed';
   urlBuilder?: (seasonNumber: number) => string;
 };
