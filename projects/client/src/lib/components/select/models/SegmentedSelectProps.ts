@@ -13,5 +13,8 @@ export type SegmentedSelectProps<TValue extends string = string> = {
   collapsedCount?: number;
   expanded?: boolean;
   extension?: Snippet;
+  /** Opt in to holding a segment to drag it into another position. */
+  reorderable?: boolean;
+  onReorder?: (values: TValue[]) => void;
   onChange: (value: TValue) => void;
 };

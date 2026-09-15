@@ -16,7 +16,8 @@
 
   const { params }: PageProps = $props();
 
-  const { current, set, options } = useToggler("progress");
+  const { current, set, options, orderedOptions, setOrder } =
+    useToggler("progress");
 
   const { isMe } = $derived(useIsMe(params.slug));
 
@@ -32,7 +33,13 @@
 </script>
 
 {#snippet actions()}
-  <Toggler value={$current.value} onChange={set} {options} />
+  <Toggler
+    value={$current.value}
+    onChange={set}
+    options={$orderedOptions ?? options}
+    reorderable
+    onReorder={setOrder}
+  />
 {/snippet}
 
 {#if !$isMe}
