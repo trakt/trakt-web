@@ -1,7 +1,10 @@
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 
 type BuildImageMetadataProps = {
-  media: Pick<MediaEntry, 'effectiveReleaseDate'>;
+  media:
+    & Pick<MediaEntry, 'effectiveReleaseDate'>
+    & Partial<Pick<ShowEntry, 'lastAired'>>;
   cachedAt: Date;
 };
 
@@ -15,6 +18,7 @@ export function buildImageMetadata(
 ): ImageMetadata {
   return {
     cachedAt: cachedAt.toISOString(),
-    releasedAt: media.effectiveReleaseDate.toISOString(),
+    releasedAt: (media.lastAired ?? media.effectiveReleaseDate)
+      .toISOString(),
   };
 }
