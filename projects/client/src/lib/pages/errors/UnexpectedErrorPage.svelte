@@ -1,8 +1,10 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import RetryIcon from "$lib/components/icons/RetryIcon.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import BadTakeMark from "./_internal/BadTakeMark.svelte";
   import ErrorPage from "./ErrorPage.svelte";
 
   type UnexpectedErrorPageProps = {
@@ -13,80 +15,82 @@
   const { error, sessionId }: UnexpectedErrorPageProps = $props();
 </script>
 
-<ErrorPage title={m.page_title_unexpected_error()}>
-  <div class="trakt-unexpected-error">
-    <div class="trakt-error-message">
-      <p>
-        <MessageWithLink
-          message={m.error_text_unexpected_error()}
-          href={UrlBuilder.github.reportIssue()}
-          target="_blank"
-        />
+<ErrorPage
+  title={m.page_title_unexpected_error()}
+  kicker={m.error_kicker_unexpected_error()}
+  {mark}
+  {actions}
+>
+  <p>
+    <MessageWithLink
+      message={m.error_text_unexpected_error()}
+      href={UrlBuilder.github.reportIssue()}
+      target="_blank"
+    />
+  </p>
+
+  {#if sessionId || error?.stack}
+    <div class="trakt-error-details">
+      <p class="details-header">
+        {m.error_text_unexpected_error_include_details()}
       </p>
-      <Button
-        variant="primary"
-        color="purple"
-        onclick={() => window.location.reload()}
-        label={m.button_label_retry()}
-      >
-        {m.button_text_retry()}
-      </Button>
+
+      {#if sessionId}
+        <span class="tag bold">Session ID</span>
+        <code>{sessionId}</code>
+      {/if}
+
+      {#if error?.stack}
+        <span class="tag bold">Stack trace</span>
+        <pre>{error.stack}</pre>
+      {/if}
     </div>
-
-    {#if sessionId || error?.stack}
-      <div class="trakt-error-details">
-        <p class="trakt-error-details-header">
-          {m.error_text_unexpected_error_include_details()}
-        </p>
-
-        {#if sessionId}
-          <span class="tag bold">Session ID</span>
-          <code>{sessionId}</code>
-        {/if}
-
-        {#if error?.stack}
-          <span class="tag bold">Stack trace</span>
-          <pre>{error.stack}</pre>
-        {/if}
-      </div>
-    {/if}
-  </div>
+  {/if}
 </ErrorPage>
 
+{#snippet mark()}
+  <BadTakeMark />
+{/snippet}
+
+{#snippet actions()}
+  <Button
+    variant="primary"
+    color="purple"
+    style="outline"
+    shape="pill"
+    onclick={() => window.location.reload()}
+    label={m.button_label_retry()}
+    icon={retryIcon}
+    iconPlacement="start"
+  >
+    {m.button_text_retry()}
+  </Button>
+{/snippet}
+
+{#snippet retryIcon()}
+  <RetryIcon />
+{/snippet}
+
 <style>
-  .trakt-unexpected-error {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--gap-xxl);
-  }
-
-  .trakt-error-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--gap-l);
-
-    text-align: center;
-  }
-
   .trakt-error-details {
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: baseline;
     gap: var(--gap-s) var(--gap-m);
 
-    max-width: var(--ni-640);
+    width: 100%;
 
     padding: var(--ni-16);
     box-sizing: border-box;
 
     border-radius: var(--border-radius-m);
-    border: var(--ni-1) solid var(--color-border);
+    border: var(--border-thickness-xxs) solid var(--color-error-page-border);
 
     text-align: start;
+    /* The body balances its prose lines; a stack trace must not be reflowed. */
+    text-wrap: wrap;
 
-    .trakt-error-details-header {
+    .details-header {
       grid-column: 1 / -1;
     }
 

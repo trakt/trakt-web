@@ -3,6 +3,7 @@
 
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import ClosedHouseMark from "./_internal/ClosedHouseMark.svelte";
   import ErrorPage from "./ErrorPage.svelte";
 
   const { message = "" }: { message?: string } = $props();
@@ -16,7 +17,11 @@
   });
 </script>
 
-<ErrorPage title={m.page_title_account_locked()}>
+<ErrorPage
+  title={m.page_title_account_locked()}
+  kicker={m.error_kicker_account_locked()}
+  {mark}
+>
   {#if lockType === "collection_limit"}
     <p>
       <MessageWithLink
@@ -42,3 +47,7 @@
     </p>
   {/if}
 </ErrorPage>
+
+{#snippet mark()}
+  <ClosedHouseMark />
+{/snippet}
