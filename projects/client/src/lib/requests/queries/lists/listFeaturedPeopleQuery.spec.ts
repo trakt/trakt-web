@@ -14,7 +14,7 @@ const readFeaturedPeople = () =>
   }).then((response) => response.data);
 
 describe('listFeaturedPeopleQuery', () => {
-  it('should request the extension and preserve ranking with minimal person data', async () => {
+  it('should request the extension and map headshots and preserve ranking with compact person data', async () => {
     let requestedUrl: URL | undefined;
     server.use(
       http.get(`http://localhost/lists/${listId}`, ({ request }) => {
@@ -24,6 +24,12 @@ describe('listFeaturedPeopleQuery', () => {
             {
               name: 'Rebecca Ferguson',
               ids: { trakt: 2, slug: 'rebecca-ferguson' },
+              images: {
+                headshot: [
+                  'https://walter.trakt.tv/images/people/2/headshots/medium/rebecca.webp',
+                ],
+                fanart: [],
+              },
             },
             { name: 'Hugh Grant', ids: { trakt: 1, slug: 'hugh-grant' } },
           ],
@@ -39,10 +45,29 @@ describe('listFeaturedPeopleQuery', () => {
       'hugh-grant',
     ]);
     expect(result?.map((person) => person.headshot.url.thumb)).toEqual([
-      MEDIA_POSTER_PLACEHOLDER,
+      'https://walter.trakt.tv/images/people/2/headshots/thumb/rebecca.webp',
       MEDIA_POSTER_PLACEHOLDER,
     ]);
   });
+
+  it.each([{ headshot: [], fanart: [] }, null, undefined])(
+    'should use a placeholder when headshots are unavailable (%s)',
+    async (images) => {
+      server.use(
+        http.get(`http://localhost/lists/${listId}`, () =>
+          HttpResponse.json({
+            featured: [{
+              name: 'Hugh Grant',
+              ids: { trakt: 1, slug: 'hugh-grant' },
+              images,
+            }],
+          })),
+      );
+
+      const result = await readFeaturedPeople();
+      expect(result?.[0]?.headshot.url.thumb).toBe(MEDIA_POSTER_PLACEHOLDER);
+    },
+  );
 
   it.each([[], null, undefined])(
     'should return no people for an empty or unavailable extension (%s)',
