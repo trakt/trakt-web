@@ -172,7 +172,7 @@
   --color-calendar-inactive-background: var(--color-background-navbar-base);
   --color-calendar-active-background: var(--shade-200);
   --color-calendar-background-hover: var(--shade-100);
-  --color-calendar-item-indicator: var(--blue-700);
+  --color-calendar-item-indicator: var(--purple-700);
 
   /*
    * Landing
@@ -470,13 +470,13 @@
   --color-mir-banner-foreground: var(--shade-10);
   --color-mir-banner-pill: var(--purple-600);
   --color-mir-banner-accent: var(--purple-200);
-  // 2024 template: branded purple hero wordmark and blue-tinged stat panels
+  // 2024 template: branded purple hero wordmark and purple-tinged stat panels
   // (charts themselves render through the shared --viz-* tokens).
   --color-yir-hero-gradient-start: var(--purple-400);
   --color-yir-hero-gradient-end: var(--purple-800);
   --color-yir-panel-background: radial-gradient(
     50% 39.27% at 50% 0%,
-    color-mix(in srgb, var(--shade-10) 92%, var(--blue-500) 8%) 0%,
+    color-mix(in srgb, var(--shade-10) 92%, var(--purple-500) 8%) 0%,
     color-mix(in srgb, var(--shade-50) 70%, var(--shade-100) 30%) 100%
   );
   // Opacity of the dark "trakt" fanart wordmark behind the hero. Full in dark
@@ -658,7 +658,7 @@
   --color-calendar-inactive-background: var(--color-background-navbar-base);
   --color-calendar-active-background: var(--shade-800);
   --color-calendar-background-hover: var(--shade-700);
-  --color-calendar-item-indicator: var(--blue-500);
+  --color-calendar-item-indicator: var(--purple-500);
 
   /*
    * Landing
@@ -958,7 +958,7 @@
   --color-yir-hero-gradient-end: var(--purple-700);
   --color-yir-panel-background: radial-gradient(
     50% 39.27% at 50% 0%,
-    color-mix(in srgb, var(--shade-950) 90%, var(--blue-500) 10%) 0%,
+    color-mix(in srgb, var(--shade-950) 90%, var(--purple-500) 10%) 0%,
     color-mix(in srgb, var(--shade-950) 70%, var(--shade-900) 30%) 100%
   );
   --yir-hero-watermark-opacity: 1;
