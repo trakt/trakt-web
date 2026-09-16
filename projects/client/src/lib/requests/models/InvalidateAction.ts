@@ -5,7 +5,7 @@ import type { MediaType } from './MediaType.ts';
 export type RatedMediaType = ExtendedMediaType | 'season';
 
 type UserType = 'avatar' | 'settings' | 'follow' | 'cover' | 'block';
-type ListType = 'edited' | 'deleted' | 'created' | 'like';
+type ListType = 'edited' | 'deleted' | 'created' | 'like' | 'collaborator';
 type VipType = 'canceled' | 'updated';
 type PlexType = 'settings' | 'syncs';
 type RewatchingType = 'show';
@@ -133,6 +133,7 @@ export const InvalidateAction = {
     Deleted: buildInvalidationKey('list', 'deleted'),
     Created: buildInvalidationKey('list', 'created'),
     Like: buildInvalidationKey('list', 'like'),
+    Collaborators: buildInvalidationKey('list', 'collaborator'),
   },
 
   SmartList: {

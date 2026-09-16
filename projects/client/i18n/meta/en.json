@@ -756,6 +756,14 @@
       "default": "Search people",
       "description": "Aria-label for the people drawer search input."
     },
+    "input_placeholder_search_collaborators": {
+      "default": "Search name or username...",
+      "description": "Placeholder text for the manage collaborators drawer search input. This should be short and indicate users can search locally by name or username."
+    },
+    "input_label_search_collaborators": {
+      "default": "Search collaborators",
+      "description": "Aria-label for the manage collaborators drawer search input."
+    },
     "input_placeholder_search_streaming_services": {
       "default": "Search streaming service or country...",
       "description": "Placeholder text for the where-to-watch drawer search input. This should be short and indicate users can search locally by country name or streaming service name."
@@ -3074,6 +3082,53 @@
     "tag_text_blocked_user": {
       "default": "Blocked",
       "description": "Tag shown on another user's profile when the current user has blocked them."
+    },
+    "page_title_manage_collaborators": {
+      "default": "Manage Collaborators",
+      "description": "Drawer title for managing a personal list's collaborators."
+    },
+    "button_text_manage_collaborators": {
+      "default": "Manage collaborators",
+      "description": "Text for the list actions menu item that opens the manage collaborators drawer."
+    },
+    "button_label_manage_collaborators": {
+      "default": "Manage collaborators for {name}",
+      "description": "Aria-label for the list actions menu item that opens the manage collaborators drawer.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "description_manage_collaborators": {
+      "default": "Collaborators can add and remove items on this list. Choose from people who follow you.",
+      "description": "Description shown at the top of the manage collaborators drawer."
+    },
+    "list_title_collaborators": {
+      "default": "Collaborators",
+      "description": "Section heading above the current collaborators in the manage collaborators drawer."
+    },
+    "text_no_collaborator_candidates": {
+      "default": "Nobody follows you yet. People who follow you can be added as collaborators.",
+      "description": "Empty-state text shown in the manage collaborators drawer when the user has no followers to add."
+    },
+    "button_label_add_collaborator": {
+      "default": "Add {username} as a collaborator",
+      "description": "Aria-label for the button that adds a user as a list collaborator.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_collaborator": {
+      "default": "Remove {username} as a collaborator",
+      "description": "Aria-label for the button that removes a user as a list collaborator.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_follow_request_pending": {
       "default": "Pending",
@@ -8522,6 +8577,14 @@
     "preview_feature_description_edit_mode": {
       "default": "Enable controls for hiding or showing configurable sections across the app.",
       "description": "Description for the Edit Mode preview feature."
+    },
+    "preview_feature_title_list_collaborators": {
+      "default": "List Collaborators",
+      "description": "Title for the List Collaborators preview feature."
+    },
+    "preview_feature_description_list_collaborators": {
+      "default": "Add people who follow you as collaborators on your personal lists so they can add and remove items too.",
+      "description": "Description for the List Collaborators preview feature."
     },
     "preview_feature_title_scoped_favorites": {
       "default": "Scoped Favorites",
