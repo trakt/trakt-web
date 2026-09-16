@@ -29,6 +29,7 @@ export type DrilledMediaListProps<T, M> =
     actions?: Snippet<[]>;
     cardOrientation?: 'landscape' | 'portrait';
     listActions?: Snippet;
+    completed?: Snippet;
     groupBy?: (item: T) => string;
     groupHeader?: Snippet<[string]>;
   };

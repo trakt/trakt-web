@@ -67,9 +67,10 @@
       sortTag={sort.toTag(sortTag)}
     />
   {/snippet}
+  {#snippet completed()}
+    <FeaturedPeopleList listId={list.id} />
+  {/snippet}
 </DrilledMediaList>
-
-<FeaturedPeopleList listId={list.id} />
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

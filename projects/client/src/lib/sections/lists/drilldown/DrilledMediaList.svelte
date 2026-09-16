@@ -9,14 +9,15 @@
     empty: externalEmpty,
     useList,
     actions,
-    cardOrientation = "portrait",
+    cardOrientation: _cardOrientation = "portrait",
     id,
     listActions,
+    completed,
     ...props
   }: DrilledMediaListProps<T, M> = $props();
 </script>
 
-<PaginatedList {type} {filter} {useList}>
+<PaginatedList {type} {filter} {useList} {completed}>
   {#snippet items(items, isLoading)}
     <GridList
       {...props}

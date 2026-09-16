@@ -9,6 +9,7 @@
     type,
     filter,
     items,
+    completed,
     target = "default",
   }: PaginatedListProps<T, M> = $props();
 
@@ -27,7 +28,7 @@
   };
 
   let listElement = $state<HTMLDivElement | null>(null);
-  const parentElement = $derived<HTMLElement | Nil>(
+  const parentElement = $derived<HTMLElement | null | undefined>(
     target === "parent" ? listElement?.parentElement : null,
   );
 
@@ -42,4 +43,8 @@
 
 {#if $isLoading}
   <LoadingIndicator />
+{/if}
+
+{#if !$isLoading && !$hasNextPage && $list.length > 0}
+  {@render completed?.()}
 {/if}
