@@ -25,5 +25,4 @@ export type RateNowProps =
   & (RateableEpisode | RateableSeason | RateableMedia)
   & {
     onclick?: () => void;
-    style?: 'default' | 'minimal';
   };
