@@ -37,6 +37,7 @@
   import GearIcon from "$lib/components/icons/GearIcon.svelte";
   import GithubIcon from "$lib/components/icons/GithubIcon.svelte";
   import GlobeIcon from "$lib/components/icons/GlobeIcon.svelte";
+  import GroupIcon from "$lib/components/icons/GroupIcon.svelte";
   import HideIcon from "$lib/components/icons/HideIcon.svelte";
   import HourglassIcon from "$lib/components/icons/HourglassIcon.svelte";
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
@@ -305,6 +306,7 @@
         <IconTile name="CustomLibraryIcon"><CustomLibraryIcon /></IconTile>
         <IconTile name="FollowersIcon"><FollowersIcon /></IconTile>
         <IconTile name="FollowingIcon"><FollowingIcon /></IconTile>
+        <IconTile name="GroupIcon"><GroupIcon /></IconTile>
         <IconTile name="PlexLibraryIcon"><PlexLibraryIcon /></IconTile>
         <IconTile name="SmartListIcon"><SmartListIcon /></IconTile>
         <IconTile name="SocialIcon"><SocialIcon /></IconTile>
