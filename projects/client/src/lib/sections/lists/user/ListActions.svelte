@@ -14,6 +14,8 @@
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
+  import ManageCollaboratorsButton from "./_internal/ManageCollaboratorsButton.svelte";
+  import ManageCollaboratorsDrawerHost from "./_internal/ManageCollaboratorsDrawerHost.svelte";
   import ListReorderDrawer from "./ListReorderDrawer.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
@@ -26,6 +28,7 @@
 
   let showEditList = $state(false);
   let showReorderList = $state(false);
+  let showManageCollaborators = $state(false);
 
   const { user } = useUser();
   const { likeList, unlikeList, isUpdating, isLiked } = $derived(
@@ -84,6 +87,11 @@
           isDeleting={$isDeleting}
           onClick={() => (showEditList = true)}
         />
+        <ManageCollaboratorsButton
+          {list}
+          isDeleting={$isDeleting}
+          onClick={() => (showManageCollaborators = true)}
+        />
         <DeleteListButton
           {list}
           isDeleting={$isDeleting}
@@ -108,5 +116,12 @@
     title={list.name}
     source={{ type: "user-list", list }}
     onClose={() => (showReorderList = false)}
+  />
+{/if}
+
+{#if showManageCollaborators}
+  <ManageCollaboratorsDrawerHost
+    {list}
+    onClose={() => (showManageCollaborators = false)}
   />
 {/if}

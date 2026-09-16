@@ -8,6 +8,7 @@ import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
+import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
@@ -114,5 +115,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_action_confirmations(),
     addedAt: new Date('2026-08-25'),
     description: () => m.preview_feature_description_action_confirmations(),
+  },
+  [FeatureFlag.ListCollaborators]: {
+    icon: SocialIcon,
+    title: () => m.preview_feature_title_list_collaborators(),
+    addedAt: new Date('2026-09-15'),
+    description: () => m.preview_feature_description_list_collaborators(),
   },
 };
