@@ -31,7 +31,7 @@ const listFeaturedPeopleRequest = async (
 };
 
 export const listFeaturedPeopleQuery = defineQuery({
-  key: 'listFeaturedPeople',
+  key: 'listFeaturedPeople:v2',
   invalidations: [
     InvalidateAction.List.Edited,
     InvalidateAction.Listed('movie'),
