@@ -58,8 +58,8 @@
 
   const label = $derived(
     isQueued
-      ? `${i18n.label({ title, isWatched, isRewatching })} (${m.label_queued_action()})`
-      : i18n.label({ title, isWatched, isRewatching }),
+      ? `${i18n.label({ title, isRemovable, isRewatching })} (${m.label_queued_action()})`
+      : i18n.label({ title, isRemovable, isRewatching }),
   );
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
@@ -76,7 +76,7 @@
   const buttonText = $derived.by(() => {
     const postFix = shouldAsk ? "…" : "";
 
-    return `${i18n.text({ title, isWatched, isRewatching })}${postFix}`;
+    return `${i18n.text({ title, isRemovable, isRewatching })}${postFix}`;
   });
 
   const allowMarkAsWatched = $derived(
