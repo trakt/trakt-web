@@ -1,6 +1,6 @@
 export type MarkAsWatchedButtonMeta = {
   title: string;
-  isWatched: boolean;
+  isRemovable: boolean;
   isRewatching: boolean;
 };
 
