@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { filterSpotlightRoutes } from './filterSpotlightRoutes.ts';
+import { filterSpotlightEntries } from './filterSpotlightEntries.ts';
 import type { SpotlightRoute } from './models/SpotlightRoute.ts';
 
 const routes: ReadonlyArray<SpotlightRoute> = [
@@ -13,24 +13,24 @@ const routes: ReadonlyArray<SpotlightRoute> = [
   },
 ];
 
-describe('util: filterSpotlightRoutes', () => {
+describe('util: filterSpotlightEntries', () => {
   it('should return nothing for an empty query', () => {
-    expect(filterSpotlightRoutes(routes, '')).toEqual([]);
-    expect(filterSpotlightRoutes(routes, '   ')).toEqual([]);
+    expect(filterSpotlightEntries(routes, '')).toEqual([]);
+    expect(filterSpotlightEntries(routes, '   ')).toEqual([]);
   });
 
   it('should match on the translated label', () => {
-    const result = filterSpotlightRoutes(routes, 'mov');
+    const result = filterSpotlightEntries(routes, 'mov');
     expect(result.map((r) => r.id)).toEqual(['movies']);
   });
 
   it('should match on keyword aliases', () => {
-    const result = filterSpotlightRoutes(routes, 'films');
+    const result = filterSpotlightEntries(routes, 'films');
     expect(result.map((r) => r.id)).toEqual(['movies']);
   });
 
   it('should be case insensitive', () => {
-    const result = filterSpotlightRoutes(routes, 'SETTINGS');
+    const result = filterSpotlightEntries(routes, 'SETTINGS');
     expect(result.map((r) => r.id)).toEqual(['settings']);
   });
 
@@ -44,7 +44,7 @@ describe('util: filterSpotlightRoutes', () => {
       },
     ];
 
-    const result = filterSpotlightRoutes(translated, 'onlangs');
+    const result = filterSpotlightEntries(translated, 'onlangs');
     expect(result.map((r) => r.id)).toEqual(['history']);
   });
 
@@ -60,14 +60,14 @@ describe('util: filterSpotlightRoutes', () => {
       },
     ];
 
-    expect(filterSpotlightRoutes(translated, 'films').map((r) => r.id))
+    expect(filterSpotlightEntries(translated, 'films').map((r) => r.id))
       .toEqual([]);
 
     locale = 'nl';
 
-    expect(filterSpotlightRoutes(translated, 'films').map((r) => r.id))
+    expect(filterSpotlightEntries(translated, 'films').map((r) => r.id))
       .toEqual(['movies']);
-    expect(filterSpotlightRoutes(translated, 'bioscoop').map((r) => r.id))
+    expect(filterSpotlightEntries(translated, 'bioscoop').map((r) => r.id))
       .toEqual(['movies']);
   });
 
@@ -77,7 +77,7 @@ describe('util: filterSpotlightRoutes', () => {
       { id: 'shows', url: '/shows', label: () => 'Shows', keywords: ['tv'] },
     ];
 
-    const result = filterSpotlightRoutes(withOverlap, 'show');
+    const result = filterSpotlightEntries(withOverlap, 'show');
     expect(result.map((r) => r.id)).toEqual(['shows', 'a']);
   });
 });
