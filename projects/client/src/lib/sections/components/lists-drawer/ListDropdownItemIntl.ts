@@ -7,4 +7,6 @@ export type ListDropdownItemMeta = {
 export type ListDropdownItemIntl = {
   label: (meta: ListDropdownItemMeta) => string;
   text: (meta: ListDropdownItemMeta) => string;
+  viewLabel: (meta: ListDropdownItemMeta) => string;
+  viewTooltip: () => string;
 };
