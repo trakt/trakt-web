@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
@@ -15,8 +16,8 @@
     season: Season;
   } = $props();
 
-  const { crew, isLoading } = $derived(
-    useSeasonPeople(show.slug, season.number),
+  const { crew, isLoading } = useSeasonPeople(
+    fromRune(() => ({ slug: show.slug, season: season.number })),
   );
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSplitCast } from "$lib/features/feature-flag/useSplitCast.ts";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
@@ -8,11 +9,11 @@
   import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
   import CreditMemberItem from "$lib/sections/lists/components/CreditMemberItem.svelte";
   import type { CreditMember } from "$lib/sections/lists/models/CreditMember.ts";
-  import { toCreditMembers } from "$lib/sections/lists/toCreditMembers.ts";
+  import { toCreditGroups } from "$lib/sections/summary/components/toCreditGroups.ts";
   import { fade } from "svelte/transition";
+  import CreditGroupHeader from "$lib/sections/summary/components/CreditGroupHeader.svelte";
 
   type CreditsType = "cast" | "crew";
-
   const creditOptions: ToggleOption<CreditsType>[] = [
     {
       value: "cast",
@@ -37,6 +38,8 @@
   } = $props();
 
   let isOpen = $state(false);
+  const splitCast = useSplitCast();
+
   let searchTerm = $state("");
   let creditsType = $state<CreditsType>("cast");
 
@@ -51,28 +54,26 @@
 
   const toCreditMemberKey = (member: CreditMember) =>
     `${member.key}-${member.positions ? "cast" : "crew"}`;
+  const toCreditGroupHeaderId = (group: { id: string }) =>
+    `cast-list-${type}-${isSearching ? "search" : creditsType}-${group.id}-header`;
 
-  const { cast: castMembers, crew: crewMembers } = $derived(
-    toCreditMembers({ crew, type }),
-  );
-  const allCredits = $derived([...castMembers, ...crewMembers]);
-  const selectedCredits = $derived.by(() => {
-    if (isSearching) return allCredits;
-    if (creditsType === "crew") return crewMembers;
-
-    return castMembers;
+  const visibleCreditGroups = $derived.by(() => {
+    const groups = toCreditGroups({ crew, type, splitCast: $splitCast, searchTerm: normalizedSearchTerm })
+      .filter((group) => isSearching || group.type === creditsType)
+      .map((group) => ({
+        ...group,
+        showHeader: isSearching || group.type === "cast",
+      }));
+    if ($splitCast || groups.length === 0) return groups;
+    return [{
+      id: "credits",
+      type: creditsType,
+      label: creditsMetaInfo,
+      members: groups.flatMap((group) => group.members),
+      showHeader: false,
+    }];
   });
-  const visibleCredits = $derived.by(() => {
-    if (!isSearching) {
-      return selectedCredits;
-    }
 
-    return selectedCredits.filter(({ description, name }) =>
-      `${name} ${description}`
-        .toLocaleLowerCase()
-        .includes(normalizedSearchTerm),
-    );
-  });
 </script>
 
 <Drawer
@@ -91,14 +92,33 @@
         placeholder={m.input_placeholder_search_credit_members()}
       />
 
-      {#if visibleCredits.length > 0}
+      {#if visibleCreditGroups.length > 0}
         <div
           id={`cast-list-${type}-${isSearching ? "search" : creditsType}`}
           class="credit-list"
-          role="list"
         >
-          {#each visibleCredits as item (toCreditMemberKey(item))}
-            <CreditMemberItem member={item} {type} />
+          {#each visibleCreditGroups as group (group.id)}
+            <section class="credit-list-group">
+              {#if group.showHeader}
+                <CreditGroupHeader
+                  id={toCreditGroupHeaderId(group)}
+                  label={group.label}
+                  count={group.members.length}
+                />
+              {/if}
+
+              <div
+                class="credit-list-group-items"
+                role="list"
+                aria-labelledby={group.showHeader
+                  ? toCreditGroupHeaderId(group)
+                  : undefined}
+              >
+                {#each group.members as item (toCreditMemberKey(item))}
+                  <CreditMemberItem member={item} {type} />
+                {/each}
+              </div>
+            </section>
           {/each}
         </div>
       {:else}
@@ -124,9 +144,22 @@
     flex-direction: column;
     gap: var(--gap-m);
 
-    .credit-list {
+    .credit-list,
+    .credit-list-group,
+    .credit-list-group-items {
       display: flex;
       flex-direction: column;
+    }
+
+    .credit-list {
+      gap: var(--gap-m);
+    }
+
+    .credit-list-group {
+      gap: var(--gap-xs);
+    }
+
+    .credit-list-group-items {
       gap: var(--gap-s);
     }
 
