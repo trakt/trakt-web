@@ -1,9 +1,11 @@
 <script lang="ts">
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
 
   type CommonRowProps = {
-    title: string;
+    title: string | undefined;
     description?: string;
     icon: Snippet;
     tag?: Snippet;
@@ -40,7 +42,18 @@
 
   <div class="row-body">
     <div class="row-title-line">
-      <span class="row-title">{title}</span>
+      {#if title}
+        <span class="row-title">{title}</span>
+      {:else}
+        <span
+          class="row-title"
+          role="status"
+          aria-busy="true"
+          aria-label={m.row_label_loading_title()}
+        >
+          <Skeleton width="var(--ni-160)" height="var(--font-size-text)" />
+        </span>
+      {/if}
       {#if tag}
         {@render tag()}
       {/if}
