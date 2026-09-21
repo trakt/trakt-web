@@ -6,6 +6,7 @@
   import type { MediaRating } from "$lib/requests/models/MediaRating.ts";
   import FeedContent from "./_internal/FeedContent.svelte";
   import { getBackgroundGradient } from "./_internal/getBackgroundGradient.ts";
+  import { getWatermarkPlacement } from "./_internal/getWatermarkPlacement.ts";
   import OpenGraphContent from "./_internal/OpenGraphContent.svelte";
   import Poster from "./_internal/Poster.svelte";
   import StoryContent from "./_internal/StoryContent.svelte";
@@ -28,6 +29,8 @@
   const { width, height, padding } = $derived(SHARE_TYPE_DIMENSIONS[variant]);
 
   const { gradientStart, gradientEnd } = $derived(getBackgroundGradient(media));
+
+  const watermark = $derived(getWatermarkPlacement(variant));
 
   const logoColor = $derived.by(() => {
     const color = media.colors?.at(0);
@@ -68,8 +71,11 @@
     ></div>
   {/if}
 
-  <div class="trakt-share-card-background" style="color: {logoColor};">
-    <TraktLogoLarge />
+  <div
+    class="trakt-share-card-background"
+    style="color: {logoColor}; {watermark.style}"
+  >
+    <TraktLogoLarge viewBox={watermark.viewBox} />
   </div>
   <div class="trakt-share-card-logo" style={logoStyle}>
     <TraktLogoText />
@@ -131,38 +137,13 @@
   }
 
   .trakt-share-card[data-variant="open-graph"] {
-    .trakt-share-card-background {
-      width: 100%;
-      height: 200%;
-
-      top: -50%;
-      right: -30%;
-    }
-
     .trakt-share-card-logo {
       width: 175px;
       height: 42px;
     }
   }
 
-  .trakt-share-card[data-variant="story"] {
-    .trakt-share-card-background {
-      width: 200%;
-      height: 100%;
-
-      bottom: -5%;
-      left: -55%;
-    }
-  }
-
   .trakt-share-card[data-variant="feed"] {
-    .trakt-share-card-background {
-      width: 100%;
-      height: 100%;
-
-      left: -25%;
-    }
-
     .trakt-share-card-logo {
       width: 175px;
       height: 42px;
