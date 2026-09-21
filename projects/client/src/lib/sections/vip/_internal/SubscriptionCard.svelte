@@ -1,24 +1,12 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import type { VipPlan } from "./models/VipPlan";
-  import MostPopularTag from "./MostPopularTag.svelte";
-  import { useVip } from "./useVip";
+  import SubscriptionTag from "./SubscriptionTag.svelte";
+  import UpgradeButton from "./UpgradeButton.svelte";
+  import { isTwoYearDealPlan } from "./utils/isTwoYearDealPlan";
   import { toVipPriceLabel } from "./utils/toVipPriceLabel";
 
-  const {
-    plan,
-    variant = "default",
-  }: { plan: VipPlan; variant?: "default" | "elevated" } = $props();
-
-  const { startCheckout, isFetching } = useVip();
-
-  const onCardClick = async () => {
-    if ($isFetching) return;
-    const url = await startCheckout(plan);
-    if (url) {
-      globalThis.window.location.href = url;
-    }
-  };
+  const { plan }: { plan: VipPlan } = $props();
 
   const splitPrice = (price: number) => {
     const isWholeNumber = price % 1 === 0;
@@ -40,60 +28,60 @@
     splitPrice(plan.discount ? plan.discount.discountedAmountMonthly : plan.monthlyPrice),
   );
 
+  const dealPlan = $derived(isTwoYearDealPlan(plan) ? plan : null);
+
   const billedText = $derived.by(() => {
+    if (dealPlan) {
+      return m.text_vip_billed_deal_first_term({
+        price: toVipPriceLabel(dealPlan.discount.discountedAmount),
+        renewalPrice: toVipPriceLabel(dealPlan.totalPrice),
+      });
+    }
+
+    const price = toVipPriceLabel(plan.discount?.discountedAmount ?? plan.totalPrice);
     switch (plan.type) {
       case "monthly":
-        return m.text_vip_billed_monthly();
+        return m.text_vip_plan_billed_monthly({ price });
       case "yearly":
-        return m.text_vip_billed_yearly();
+        return m.text_vip_plan_billed_yearly({ price });
       case "two_years":
-        return m.text_vip_billed_biyearly();
+        return m.text_vip_plan_billed_two_years({ price });
     }
   });
 </script>
 
-<button
-  class="trakt-subscription-card"
-  data-variant={variant}
-  onclick={onCardClick}
-  aria-label={m.button_label_vip_upgrade()}
->
-  {#if plan.isPopular}
-    <MostPopularTag />
+<article class="trakt-subscription-card">
+  {#if dealPlan}
+    <SubscriptionTag variant="highlight">{m.tag_text_deal_price()}</SubscriptionTag>
+  {:else if plan.type === "two_years"}
+    <SubscriptionTag variant="highlight">{m.tag_text_vip_best_value()}</SubscriptionTag>
+  {:else if plan.isPopular}
+    <SubscriptionTag variant="popular">
+      {m.tag_text_most_popular()}
+    </SubscriptionTag>
   {/if}
 
   <div class="trakt-subscription-container">
     <div class="trakt-subscription-pricing">
-      <span class="price">
-        {displayPrice.whole}
-        {#if displayPrice.cents}
-          <sup class="cents">{displayPrice.cents}</sup>
-        {/if}
-        <span class="per-month">/mo</span>
-      </span>
+      <span class="price">{displayPrice.whole}{#if displayPrice.cents}<sup class="cents">{displayPrice.cents}</sup>{/if}<span class="per-month">/mo</span></span>
 
       <span class="billed-text">{billedText}</span>
     </div>
 
-    <div class="trakt-upgrade-label" data-variant={variant}>
-      <span class="bold uppercase">{m.button_text_vip_upgrade()}</span>
-    </div>
+    <UpgradeButton {plan} />
   </div>
-</button>
+</article>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   .trakt-subscription-card {
-    all: unset;
     box-sizing: border-box;
     width: 100%;
-    text-align: inherit;
 
     position: relative;
     display: flex;
     justify-content: center;
-    cursor: pointer;
 
     background: var(--background-subscription-card);
 
@@ -102,20 +90,6 @@
     border-radius: var(--border-radius-xxl);
     border: var(--ni-1) solid
       color-mix(in srgb, var(--shade-10) 10%, transparent);
-
-    transform: scale(1);
-    transition:
-      transform var(--transition-duration-short) ease-in-out,
-      background var(--transition-duration-short) ease-in-out,
-      border-color var(--transition-duration-short) ease-in-out,
-      box-shadow var(--transition-duration-short) ease-in-out;
-
-    &[data-variant="elevated"] {
-      transform: scale(1.1);
-      border: var(--ni-1) solid var(--shade-10);
-      background: var(--background-vip-elevated-card);
-      box-shadow: var(--shadow-raised);
-    }
   }
 
   .trakt-subscription-container {
@@ -147,6 +121,8 @@
   .trakt-subscription-pricing {
     --price-font-size: var(--ni-48);
 
+    flex: 1;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -164,6 +140,7 @@
       }
 
       .per-month {
+        margin-inline-start: var(--ni-2);
         font-size: 0.5em;
       }
     }
@@ -176,36 +153,6 @@
 
     @include for-tablet-sm-and-below {
       --price-font-size: var(--ni-36);
-    }
-  }
-
-  .trakt-upgrade-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: var(--ni-40);
-    padding: 0 var(--ni-16);
-    box-sizing: border-box;
-
-    background: var(--color-vip-surface-muted);
-    color: var(--color-text-primary);
-    border: var(--ni-1) solid var(--color-vip-border-accent);
-    border-radius: var(--border-radius-m);
-
-    font-size: var(--font-size-text);
-
-    pointer-events: none;
-    transition: background-color var(--transition-duration-short) ease-in-out;
-
-    span {
-      font-size: 0.75rem;
-    }
-
-    &[data-variant="elevated"] {
-      background: var(--purple-500);
-      color: var(--shade-10);
-      border: none;
     }
   }
 </style>

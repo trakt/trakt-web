@@ -1,19 +1,19 @@
 <script lang="ts">
-  import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { VIP_PLANS } from "./constants";
   import TraktIcon from "./icons/TraktIcon.svelte";
   import SubscriptionCard from "./SubscriptionCard.svelte";
-  import TwoYearDealBanner from "./TwoYearDealBanner.svelte";
+  import TwoYearDealCard from "./TwoYearDealCard.svelte";
   import { useVip } from "./useVip";
+  import { findTwoYearDealPlan } from "./utils/findTwoYearDealPlan";
   import VipContentContainer from "./VipContentContainer.svelte";
   import VipHeader from "./VipHeader.svelte";
 
-  const { plans, elevatedPlanType, setElevatedPlanType } = useVip();
+  const { plans } = useVip();
 
   const activePlans = $derived($plans.length > 0 ? $plans : VIP_PLANS);
 
-  const elevatedType = $derived($elevatedPlanType);
+  const dealPlan = $derived(findTwoYearDealPlan(activePlans));
 </script>
 
 <VipContentContainer>
@@ -23,31 +23,29 @@
         <TraktIcon />
       {/snippet}
 
-      Unlock <strong>more</strong> with Trakt <VipBadge size="large" />
+      Unlock <strong>more</strong> with Trakt VIP
 
       {#snippet description()}
         <span class="secondary">
           {m.text_vip_get_insights()}
         </span>
         <span class="secondary">
-          <VipBadge />
-          {m.text_vip_powers_trakt()}
+          VIP {m.text_vip_powers_trakt()}
         </span>
       {/snippet}
     </VipHeader>
   {/snippet}
 
-  <TwoYearDealBanner />
+  {#if dealPlan}
+    <TwoYearDealCard plan={dealPlan} />
+    <p class="trakt-vip-plans-divider small secondary uppercase">
+      {m.text_vip_deal_or_standard_plan()}
+    </p>
+  {/if}
 
-  <div class="trakt-vip-subscription-plans">
+  <div id="vip-plans" class="trakt-vip-subscription-plans" class:has-deal={dealPlan != null}>
     {#each activePlans as plan (plan.type)}
-      <!-- svelte-ignore a11y_no_static_element_interactions -->
-      <div onmouseenter={() => setElevatedPlanType(plan.type)}>
-        <SubscriptionCard
-          {plan}
-          variant={elevatedType === plan.type ? "elevated" : "default"}
-        />
-      </div>
+      <SubscriptionCard {plan} />
     {/each}
   </div>
 </VipContentContainer>
@@ -80,6 +78,35 @@
       margin-top: 0;
       grid-template-columns: var(--ni-280);
       gap: var(--gap-xl);
+    }
+
+    &.has-deal {
+      margin-top: 0;
+    }
+  }
+
+  .trakt-vip-plans-divider {
+    width: 100%;
+    max-width: var(--ni-768);
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
+
+    margin-top: var(--ni-28);
+    letter-spacing: 0.08em;
+
+    &::before,
+    &::after {
+      content: "";
+      flex: 1;
+      height: var(--ni-1);
+      background: var(--color-border);
+    }
+
+    @include for-mobile {
+      max-width: var(--ni-280);
+      margin-top: var(--ni-16);
     }
   }
 </style>

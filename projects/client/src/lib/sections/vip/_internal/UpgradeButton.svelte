@@ -1,15 +1,31 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { Snippet } from "svelte";
   import type { VipPlan } from "./models/VipPlan";
   import { useVip } from "./useVip";
 
-  const { plan }: { plan: VipPlan } = $props();
+  const {
+    plan,
+    label,
+    children,
+  }: { plan: VipPlan; label?: string; children?: Snippet } = $props();
+
+  const planLabel = $derived.by(() => {
+    switch (plan.type) {
+      case "monthly":
+        return m.button_text_vip_continue_monthly();
+      case "yearly":
+        return m.button_text_vip_continue_yearly();
+      case "two_years":
+        return m.button_text_vip_claim_deal();
+    }
+  });
 
   const { startCheckout, isFetching } = useVip();
 
   const onStartCheckout = async () => {
-    if (!plan) return;
+    if ($isFetching) return;
     const url = await startCheckout(plan);
     if (url) {
       globalThis.window.location.href = url;
@@ -20,7 +36,7 @@
 <trakt-vip-upgrade-button>
   <Button
     size="small"
-    label={m.button_label_vip_upgrade()}
+    label={label ?? planLabel}
     color="custom"
     variant="primary"
     style="flat"
@@ -28,7 +44,11 @@
     onclick={onStartCheckout}
     disabled={$isFetching}
   >
-    {m.button_text_vip_upgrade()}
+    {#if children}
+      {@render children()}
+    {:else}
+      {planLabel}
+    {/if}
   </Button>
 </trakt-vip-upgrade-button>
 
