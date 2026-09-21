@@ -10956,6 +10956,14 @@
       "default": "Removed from your history",
       "description": "Confirmation toast shown after removing from watch history when no single title is available."
     },
+    "preview_feature_title_featured_people": {
+      "default": "Featured People",
+      "description": "Title for the featured-people preview feature toggle in settings."
+    },
+    "preview_feature_description_featured_people": {
+      "default": "Discover the cast and crew featured across titles in a list, with portraits and a searchable view of everyone.",
+      "description": "Description for the VIP Featured People preview toggle in settings."
+    },
     "preview_feature_title_action_confirmations": {
       "default": "Action confirmations",
       "description": "Title for the action-confirmations preview feature toggle in settings."

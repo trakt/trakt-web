@@ -6,6 +6,7 @@ export enum FeatureFlag {
   Leaderboard = 'leaderboard',
   ParentalGuide = 'parental-guide',
   Soundtrack = 'soundtrack',
+  FeaturedPeople = 'featured-people',
   ListCounts = 'list-counts',
   ReviewerStats = 'reviewer-stats',
   GenrePicker = 'genre-picker',
