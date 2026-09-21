@@ -1303,6 +1303,7 @@
   "preview_feature_title_soundtrack": "サウンドトラック",
   "preview_feature_title_up_next_smart_sort": "続きを視聴 スマートソート",
   "reset_status_cleared": "ウォッチリストをクリアしました。",
+  "row_label_loading_title": "名前を読み込み中",
   "screen_account_settings_language_system_message_tvos": "TraktはApple TVの言語設定を使用します。更新するには、以下に移動してください:\n\nApple TV 設定 > 一般 > Apple TVの言語",
   "section_title_season_progress": "シーズン{number}の進捗",
   "section_title_seasons_overview": "概要",

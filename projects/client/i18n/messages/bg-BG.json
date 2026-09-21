@@ -1303,6 +1303,7 @@
   "preview_feature_title_soundtrack": "Саундтрак",
   "preview_feature_title_up_next_smart_sort": "Интелигентно сортиране на Продължи гледането",
   "reset_status_cleared": "Списъкът за гледане е изчистен.",
+  "row_label_loading_title": "Зареждане на име",
   "screen_account_settings_language_system_message_tvos": "Trakt използва езиковите настройки на вашия Apple TV. За да ги актуализирате, отидете на:\\n\\nНастройки на Apple TV > Общи > Езици на Apple TV",
   "section_title_season_progress": "Сезон {number} напредък",
   "section_title_seasons_overview": "Преглед",

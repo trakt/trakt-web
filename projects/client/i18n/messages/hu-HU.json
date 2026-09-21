@@ -1303,6 +1303,7 @@
   "preview_feature_title_soundtrack": "Filmzene",
   "preview_feature_title_up_next_smart_sort": "Megtekintés folytatása - Okos Rendezés",
   "reset_status_cleared": "Megnézendők listája kiürítve.",
+  "row_label_loading_title": "Név betöltése",
   "screen_account_settings_language_system_message_tvos": "A Trakt az Apple TV nyelvi beállításait használja. A frissítéshez lépjen ide:\\n\\nApple TV Beállítások > Általános > Apple TV Nyelvek",
   "section_title_season_progress": "{number}. évad előrehaladása",
   "section_title_seasons_overview": "Áttekintés",

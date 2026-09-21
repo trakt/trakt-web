@@ -1303,6 +1303,7 @@
   "preview_feature_title_soundtrack": "原声带",
   "preview_feature_title_up_next_smart_sort": "继续观看智能排序",
   "reset_status_cleared": "待看列表已清除。",
+  "row_label_loading_title": "正在加载名称",
   "screen_account_settings_language_system_message_tvos": "Trakt 使用您的 Apple TV 语言设置。要更新，请前往：\\n\\nApple TV 设置 > 通用 > Apple TV 语言",
   "section_title_season_progress": "第 {number} 季 进度",
   "section_title_seasons_overview": "概览",

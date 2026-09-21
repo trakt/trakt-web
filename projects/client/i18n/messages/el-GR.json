@@ -1303,6 +1303,7 @@
   "preview_feature_title_soundtrack": "Σάουντρακ",
   "preview_feature_title_up_next_smart_sort": "Συνέχιση Παρακολούθησης Έξυπνη Ταξινόμηση",
   "reset_status_cleared": "Η λίστα παρακολούθησης εκκαθαρίστηκε.",
+  "row_label_loading_title": "Φόρτωση ονόματος",
   "screen_account_settings_language_system_message_tvos": "Το Trakt χρησιμοποιεί τις ρυθμίσεις γλώσσας του Apple TV σας. Για να την ενημερώσετε, μεταβείτε σε:\\n\\nΡυθμίσεις Apple TV > Γενικά > Γλώσσες Apple TV",
   "section_title_season_progress": "Πρόοδος Σεζόν {number}",
   "section_title_seasons_overview": "Επισκόπηση",

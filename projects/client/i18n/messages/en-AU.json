@@ -1303,6 +1303,7 @@
   "preview_feature_title_soundtrack": "Soundtrack",
   "preview_feature_title_up_next_smart_sort": "Continue Watching Smart Sort",
   "reset_status_cleared": "Watchlist cleared.",
+  "row_label_loading_title": "Loading name",
   "screen_account_settings_language_system_message_tvos": "Trakt uses your Apple TV language settings. To update it, go to:\n\nApple TV Settings > General > Apple TV Languages",
   "section_title_season_progress": "Season {number} progress",
   "section_title_seasons_overview": "Overview",
