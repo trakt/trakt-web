@@ -104,13 +104,17 @@ export const GET: RequestHandler = async (
     });
 
     if (!IS_DEV && platform) {
-      try {
-        await platform.env.R2_WALTER.put(imagePath, buffer, {
+      const cached = platform.env.R2_WALTER
+        .put(imagePath, buffer, {
           httpMetadata: { contentType: 'image/png' },
           customMetadata: buildImageMetadata({ media, cachedAt: new Date() }),
-        });
-      } catch (e) {
-        error('Failed to cache image in R2:', e);
+        })
+        .catch((e: unknown) => error('Failed to cache image in R2:', e));
+
+      if (platform.context) {
+        platform.context.waitUntil(cached);
+      } else {
+        await cached;
       }
     }
 
