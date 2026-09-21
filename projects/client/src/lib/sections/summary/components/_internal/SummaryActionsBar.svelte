@@ -49,7 +49,8 @@
     position: relative;
 
     height: var(--ni-56);
-    width: var(--ni-280);
+    width: max-content;
+    min-width: var(--ni-280);
 
     padding: var(--ni-8) var(--ni-10);
     box-sizing: border-box;
@@ -79,8 +80,9 @@
       transition-delay: 0s;
     }
 
+    // Tracks the poster width, and grows past it when the actions need more.
     @include for-tablet-sm-and-below {
-      width: var(--summary-poster-width);
+      min-width: var(--summary-poster-width);
       &:global(:has(.trakt-media-actions-popup-button.is-opened)) {
         border-radius: var(--border-radius-l);
       }

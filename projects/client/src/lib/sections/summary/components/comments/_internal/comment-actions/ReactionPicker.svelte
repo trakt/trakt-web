@@ -4,7 +4,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { toTranslatedReaction } from "$lib/utils/formatting/string/toTranslatedReaction";
-  import ReactionEmoji from "./ReactionEmoji.svelte";
+  import ReactionEmoji from "$lib/sections/summary/components/reactions/ReactionEmoji.svelte";
   import { REACTIONS_CODE_MAP } from "./constants";
 
   const {

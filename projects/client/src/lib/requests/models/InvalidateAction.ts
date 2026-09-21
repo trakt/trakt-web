@@ -49,7 +49,7 @@ type TypeDataMap = {
   'watchlisted': MediaType;
   'dropped': MediaType;
   'restored': 'show';
-  'react': 'comment';
+  'react': 'comment' | 'media';
   'comment_reply': CommentableMediaType;
   'listed': MediaType;
   'user': UserType;
@@ -108,6 +108,7 @@ export const InvalidateAction = {
   Restore: buildInvalidationKey('restored', 'show'),
 
   React: buildInvalidationKey('react', 'comment'),
+  ReactMedia: buildInvalidationKey('react', 'media'),
 
   Comment: {
     Post: (type: CommentableMediaType) =>

@@ -10723,6 +10723,154 @@
     "text_email_unsubscribe_message": {
       "default": "You'll no longer receive these emails from Trakt.",
       "description": "Snackbar message confirming the email unsubscribe was successful."
+    },
+    "header_react": {
+      "default": "React",
+      "description": "Header of the popup where users pick reactions for a movie, show or episode."
+    },
+    "header_recent_reactions": {
+      "default": "Your recent",
+      "description": "Header above the row of reactions the user picked most recently, shown as quick-add shortcuts."
+    },
+    "text_reactions_selected": {
+      "default": "{count} of {max}",
+      "description": "How many reactions the user has placed on this item out of the allowed maximum, e.g. \"2 of 3\".",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        }
+      }
+    },
+    "preview_feature_title_reactions": {
+      "default": "Reactions",
+      "description": "Product feature name for the media reactions preview feature."
+    },
+    "preview_feature_description_reactions": {
+      "default": "React to movies, shows and episodes with up to three emojis, and see what everyone else picked.",
+      "description": "Description for the media reactions preview feature."
+    },
+    "translated_value_reaction_heart_eyes": {
+      "default": "Heart eyes",
+      "description": "Text for the heart eyes media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_rofl": {
+      "default": "Rolling on the floor laughing",
+      "description": "Text for the rolling on the floor laughing media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_holding_back_tears": {
+      "default": "Holding back tears",
+      "description": "Text for the holding back tears media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_partying": {
+      "default": "Partying",
+      "description": "Text for the partying media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_mind_blown": {
+      "default": "Mind blown",
+      "description": "Text for the mind blown media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_cursing": {
+      "default": "Cursing",
+      "description": "Text for the cursing media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_weary": {
+      "default": "Weary",
+      "description": "Text for the weary media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_woozy": {
+      "default": "Woozy",
+      "description": "Text for the woozy media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_yawning": {
+      "default": "Yawning",
+      "description": "Text for the yawning media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_shushing": {
+      "default": "Shushing",
+      "description": "Text for the shushing media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_smiling_tear": {
+      "default": "Smiling with tear",
+      "description": "Text for the smiling with tear media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_neutral": {
+      "default": "Neutral",
+      "description": "Text for the neutral media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_anxious": {
+      "default": "Anxious",
+      "description": "Text for the anxious media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_thinking": {
+      "default": "Thinking",
+      "description": "Text for the thinking media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_flushed": {
+      "default": "Flushed",
+      "description": "Text for the flushed media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_melting": {
+      "default": "Melting",
+      "description": "Text for the melting media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_grimacing": {
+      "default": "Grimacing",
+      "description": "Text for the grimacing media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_vomiting": {
+      "default": "Vomiting",
+      "description": "Text for the vomiting media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_eye_roll": {
+      "default": "Eye roll",
+      "description": "Text for the eye roll media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_rock_on": {
+      "default": "Rock on",
+      "description": "Text for the rock on media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_skull": {
+      "default": "Skull",
+      "description": "Text for the skull media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_popcorn": {
+      "default": "Popcorn",
+      "description": "Text for the popcorn media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_fire": {
+      "default": "Fire",
+      "description": "Text for the fire media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_crying": {
+      "default": "Crying",
+      "description": "Text for the crying media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_pinched_fingers": {
+      "default": "Pinched fingers",
+      "description": "Text for the pinched fingers media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_broken_heart": {
+      "default": "Broken heart",
+      "description": "Text for the broken heart media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_freezing": {
+      "default": "Freezing",
+      "description": "Text for the freezing media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_disguised": {
+      "default": "Disguised",
+      "description": "Text for the disguised media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_nerd": {
+      "default": "Nerd",
+      "description": "Text for the nerd media reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_monocle": {
+      "default": "Monocle",
+      "description": "Text for the monocle media reaction. The value is sent back from the Trakt API."
     }
   }
 }

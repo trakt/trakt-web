@@ -7,6 +7,7 @@ import ListIcon from '$lib/components/icons/mobile/ListIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
+import ReactionIcon from '$lib/components/icons/ReactionIcon.svelte';
 import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
@@ -114,5 +115,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_action_confirmations(),
     addedAt: new Date('2026-08-25'),
     description: () => m.preview_feature_description_action_confirmations(),
+  },
+  [FeatureFlag.Reactions]: {
+    icon: ReactionIcon,
+    title: () => m.preview_feature_title_reactions(),
+    addedAt: new Date('2026-09-11'),
+    description: () => m.preview_feature_description_reactions(),
   },
 };

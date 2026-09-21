@@ -3,7 +3,7 @@
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { time } from "$lib/utils/timing/time";
   import { onMount } from "svelte";
-  import { EMOJI_BASE_URL } from "./constants";
+  import { EMOJI_BASE_URL } from "./_internal/EMOJI_BASE_URL";
 
   const {
     code,

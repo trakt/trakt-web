@@ -7,6 +7,7 @@ import { intl } from './handlers/intl.ts';
 import { lists } from './handlers/lists.ts';
 import { movies } from './handlers/movies.ts';
 import { people } from './handlers/people.ts';
+import { reactions } from './handlers/reactions.ts';
 import { plex } from './handlers/plex.ts';
 import { recommendations } from './handlers/recommendations.ts';
 import { search } from './handlers/search.ts';
@@ -34,6 +35,7 @@ const handlers = [
   ...search,
   ...lists,
   ...comments,
+  ...reactions,
   ...team,
   ...intl,
   ...vip,

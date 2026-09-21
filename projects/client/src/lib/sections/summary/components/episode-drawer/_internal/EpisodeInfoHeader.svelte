@@ -544,7 +544,7 @@
 
     @include for-tablet-sm-and-below {
       :global(.trakt-summary-actions-bar) {
-        width: var(--ni-280);
+        min-width: var(--ni-280);
       }
     }
   }

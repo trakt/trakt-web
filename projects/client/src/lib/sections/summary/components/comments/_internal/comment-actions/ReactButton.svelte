@@ -8,8 +8,9 @@
   import { scale } from "svelte/transition";
   import ReactionPicker from "./ReactionPicker.svelte";
   import ReactionsDistribution from "./ReactionsDistribution.svelte";
-  import ReactionsSummary from "./ReactionsSummary.svelte";
+  import ReactionsSummary from "$lib/sections/summary/components/reactions/ReactionsSummary.svelte";
   import { useCommentReaction } from "./useCommentReaction";
+  import { REACTIONS_CODE_MAP } from "./constants";
   import { useCommentReactions } from "./useCommentReactions";
 
   const { comment }: { comment: MediaComment } = $props();
@@ -50,7 +51,13 @@
   </RenderFor>
 
   {#if $summary.count > 0}
-    <ReactionsSummary summary={$summary} />
+    <ReactionsSummary
+      count={$summary.count}
+      top={$summary.top.map((reaction) => ({
+        type: reaction,
+        code: REACTIONS_CODE_MAP[reaction],
+      }))}
+    />
   {/if}
 {/snippet}
 
