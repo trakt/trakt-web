@@ -3,6 +3,7 @@ import {
   type ShareType,
 } from '$lib/features/share/models/ShareType.ts';
 import ShareCard from '$lib/features/share/ShareCard.svelte';
+import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/assets.ts';
 import { error } from '$lib/utils/console/print.ts';
 import { IS_DEV } from '$lib/utils/env/index.ts';
 import { ImageResponse } from '@ethercorps/sveltekit-og';
@@ -12,9 +13,14 @@ import { buildImagePath } from './_internal/buildImagePath.ts';
 import { fetchMediaData } from './_internal/fetchMediaData.ts';
 import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
 import { loadShareFonts } from './_internal/loadShareFonts.ts';
-import { resolvePosterDataUri } from './_internal/resolvePosterDataUri.ts';
+import { resolvePosterSource } from './_internal/resolvePosterSource.ts';
 
 const cacheControl = 'public, max-age=604800';
+
+const imageHeaders = {
+  'Content-Type': 'image/png',
+  'Cache-Control': cacheControl,
+};
 
 // FIXME: add support for HMAC signed urls
 export const GET: RequestHandler = async (
@@ -55,10 +61,7 @@ export const GET: RequestHandler = async (
         and the DOM ReadableStream, they're the same at runtime.
       */
       return new Response(cachedImage.body as BodyInit, {
-        headers: {
-          'Content-Type': 'image/png',
-          'Cache-Control': cacheControl,
-        },
+        headers: imageHeaders,
       });
     }
   }
@@ -80,18 +83,12 @@ export const GET: RequestHandler = async (
 
   const { media, ratings, crew } = mediaData;
 
-  const [posterDataUri, fonts] = await Promise.all([
-    resolvePosterDataUri({
-      posterUrl: media.poster.url.medium,
-      fetch: fetchFn,
-    }),
-    loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
-  ]);
+  const fonts = await loadShareFonts({ bucket: platform?.env?.R2_WALTER });
 
   const { width, height } = SHARE_TYPE_DIMENSIONS[shareType];
 
-  try {
-    const imageResponse = new ImageResponse(
+  const toBuffer = (posterUrl: string) =>
+    new ImageResponse(
       ShareCard,
       {
         width,
@@ -99,10 +96,16 @@ export const GET: RequestHandler = async (
         fonts,
         debug: IS_DEV && url.searchParams.get('debug') === 'true',
       },
-      { media, crew, ratings, posterUrl: posterDataUri, variant: shareType },
-    );
+      { media, crew, ratings, posterUrl, variant: shareType },
+    ).arrayBuffer();
 
-    const buffer = await imageResponse.arrayBuffer();
+  try {
+    const buffer = await toBuffer(
+      resolvePosterSource(media.poster.url.medium),
+    ).catch((e: unknown) => {
+      error('Failed to render with the media poster:', e);
+      return toBuffer(resolvePosterSource(MEDIA_POSTER_PLACEHOLDER));
+    });
 
     if (!IS_DEV && platform) {
       try {
@@ -115,10 +118,7 @@ export const GET: RequestHandler = async (
       }
     }
 
-    const responseHeaders = new Headers(imageResponse.headers);
-    responseHeaders.set('Cache-Control', cacheControl);
-
-    return new Response(buffer, { headers: responseHeaders });
+    return new Response(buffer, { headers: imageHeaders });
   } catch (e) {
     error('ImageResponse error:', e);
     return new Response('Failed to generate image', { status: 500 });
