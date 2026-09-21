@@ -121,6 +121,5 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_comment_gifs(),
     addedAt: new Date('2026-09-16'),
     description: () => m.preview_feature_description_comment_gifs(),
-    audience: 'director',
   },
 };

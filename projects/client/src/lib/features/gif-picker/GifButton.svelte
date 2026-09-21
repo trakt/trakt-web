@@ -17,7 +17,7 @@
   let isPickerOpen = $state(false);
 </script>
 
-<RenderForFeature flag={FeatureFlag.CommentGifs} audience="director">
+<RenderForFeature flag={FeatureFlag.CommentGifs}>
   {#snippet enabled()}
     <ActionButton
       onclick={() => (isPickerOpen = true)}
