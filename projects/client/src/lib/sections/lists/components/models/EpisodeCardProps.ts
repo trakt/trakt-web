@@ -31,6 +31,7 @@ export type EpisodeItemVariant =
 export type EpisodeCardProps = BaseItemProps & EpisodeItemVariant & {
   media: ShowInput;
   urlOverride?: EpisodeUrlOverride;
+  onWatched?: () => void;
   /**
    * FIXME: We should migrate these on the backend and remove from the client.
    */

@@ -8,4 +8,5 @@ export type MarkAsWatchedActionProps = {
   i18n?: MarkAsWatchedButtonIntl;
   mode?: 'act' | 'hybrid' | 'ask';
   isLoading?: boolean;
+  onWatched?: () => void;
 } & MarkAsWatchedStoreProps;

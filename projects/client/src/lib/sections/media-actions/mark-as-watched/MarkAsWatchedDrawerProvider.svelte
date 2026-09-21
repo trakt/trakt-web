@@ -7,6 +7,7 @@
   <MarkAsWatchedDrawerHost
     onClose={markAsWatchedDrawerStore.close}
     title={$markAsWatchedDrawerStore.title}
+    onWatched={$markAsWatchedDrawerStore.onWatched}
     {...$markAsWatchedDrawerStore.mediaStore}
   />
 {/if}

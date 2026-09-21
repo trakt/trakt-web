@@ -2,6 +2,8 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -13,6 +15,7 @@
   import type { EpisodeUrlOverride } from "$lib/sections/lists/components/models/EpisodeUrlOverride";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchedUntilHereDrawer from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/WatchedUntilHereDrawer.svelte";
+  import { countSkippedEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/countSkippedEpisodes.ts";
   import { useWatchUntilHereEpisodes } from "$lib/sections/media-actions/mark-as-watched/_internal/watch-until-here/useWatchUntilHereEpisodes.ts";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
@@ -59,6 +62,15 @@
   );
   const variant = $derived(isFuture ? "upcoming" : "default");
 
+  const skippedCount = $derived(
+    countSkippedEpisodes({
+      target: { season: episode.season, number: episode.number },
+      currentSeasonEpisodes,
+      previousSeasons,
+      watchedBySeason,
+    }),
+  );
+
   const src = $derived(
     useEpisodeSpoilerImage({
       episode,
@@ -68,6 +80,23 @@
   );
 
   let isWatchUntilDrawerOpen = $state(false);
+
+  const { confirm } = useConfirm();
+  const confirmFillGap = $derived(
+    confirm({
+      type: ConfirmationType.WatchedUntilHere,
+      title: episode.title,
+      onConfirm: () => (isWatchUntilDrawerOpen = true),
+    }),
+  );
+
+  const offerGapFill = () => {
+    if (skippedCount === 0) {
+      return;
+    }
+
+    confirmFillGap();
+  };
 
   const watchUntilResolver = $derived.by(() => {
     if (!isWatchUntilDrawerOpen) return null;
@@ -92,6 +121,7 @@
       {show}
       media={episode}
       mode="hybrid"
+      onWatched={offerGapFill}
     />
     {#if hasBulkMarkAsWatched}
       <DropdownItem
@@ -124,6 +154,7 @@
     {source}
     {urlOverride}
     coverUrl={$src}
+    onWatched={offerGapFill}
   />
 {/snippet}
 

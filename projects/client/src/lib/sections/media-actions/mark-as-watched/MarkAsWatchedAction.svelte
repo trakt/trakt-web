@@ -14,6 +14,7 @@
     i18n,
     mode,
     isLoading,
+    onWatched,
     ...target
   }: MarkAsWatchedActionProps = $props();
 
@@ -37,7 +38,14 @@
       type: ConfirmationType.MarkAsWatched,
       title,
       target,
-      onConfirm: () => markAsWatched(),
+      onConfirm: async () => {
+        const wasWatched = $isWatched;
+        await markAsWatched();
+
+        if (!wasWatched) {
+          onWatched?.();
+        }
+      },
     }),
   );
   const confirmRemoveFromWatched = $derived(
@@ -52,6 +60,7 @@
     markAsWatchedDrawerStore.open({
       title,
       mediaStore: target,
+      onWatched,
     });
   });
 </script>
