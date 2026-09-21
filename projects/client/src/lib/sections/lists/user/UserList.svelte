@@ -16,9 +16,11 @@
     type?: DiscoverMode;
     titleAction?: Snippet;
     scope?: string;
+    popupActions?: Snippet;
   };
 
-  const { list, type, titleAction, scope }: UserListProps = $props();
+  const { list, type, titleAction, scope, popupActions }: UserListProps =
+    $props();
 
   const { filterMap } = useFilter();
 
@@ -60,7 +62,7 @@
   {/snippet}
 
   {#snippet actions()}
-    <ListActions {list} />
+    <ListActions {list} {popupActions} />
   {/snippet}
 
   {#snippet empty()}

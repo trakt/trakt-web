@@ -12,6 +12,7 @@
   import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
+  import LeaveCollaborationButton from "./_internal/LeaveCollaborationButton.svelte";
   import ListsHeader from "./_internal/ListsHeader.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
@@ -52,6 +53,7 @@
   });
 
   const isMine = $derived(type === "personal" && $isMe);
+  const canLeave = $derived(type === "collaboration" && $isMe);
   const isPresentable = $derived(
     (display === "compact" ? $isMe : isMine) ||
       (!$isLoading && $lists.length > 0),
@@ -108,7 +110,15 @@
       {/if}
 
       {#each $lists as list (list.id)}
-        <UserList {list} type={mode} />
+        {#snippet popupActions()}
+          <LeaveCollaborationButton {list} />
+        {/snippet}
+
+        <UserList
+          {list}
+          type={mode}
+          popupActions={canLeave ? popupActions : undefined}
+        />
       {/each}
     </div>
   {/if}
@@ -133,7 +143,14 @@
         : undefined}
     >
       {#snippet item(list)}
-        <ListSummaryItem {list} />
+        {#snippet popupActions()}
+          <LeaveCollaborationButton {list} />
+        {/snippet}
+
+        <ListSummaryItem
+          {list}
+          popupActions={canLeave ? popupActions : undefined}
+        />
       {/snippet}
 
       {#snippet empty()}

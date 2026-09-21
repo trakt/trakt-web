@@ -8,6 +8,7 @@ export enum ConfirmationType {
   RestoreShow = 'restore-show',
   StartRewatching = 'start-rewatching',
   DeleteList = 'delete-list',
+  LeaveCollaboration = 'leave-collaboration',
   RemoveFavorite = 'remove-favorite',
   RemoveFromWatchList = 'remove-from-watchlist',
   RemoveFromList = 'remove-from-list',
