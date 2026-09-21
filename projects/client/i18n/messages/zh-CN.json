@@ -73,6 +73,7 @@
   "button_label_change_email": "更改电子邮件",
   "button_label_change_location": "更改位置",
   "button_label_change_plex_home_users": "更改 Plex 家庭用户",
+  "button_label_change_rating": "更改“{title}”的评分",
   "button_label_change_username": "更改用户名",
   "button_label_checkin": "正在观看“{title}”",
   "button_label_clean_up_episodes": "从您的历史记录中移除重复的剧集播放。",

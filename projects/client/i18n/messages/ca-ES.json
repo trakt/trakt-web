@@ -73,6 +73,7 @@
   "button_label_change_email": "Canvia el correu electrònic",
   "button_label_change_location": "Canvia la ubicació",
   "button_label_change_plex_home_users": "Canvia els usuaris de Plex Home",
+  "button_label_change_rating": "Canviar valoració de \"{title}\"",
   "button_label_change_username": "Canvia el nom d'usuari",
   "button_label_checkin": "Ara veient \"{title}\"",
   "button_label_clean_up_episodes": "Eliminar reproduccions d'episodis duplicades del teu historial.",

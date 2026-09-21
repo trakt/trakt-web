@@ -73,6 +73,7 @@
   "button_label_change_email": "تغییر ایمیل",
   "button_label_change_location": "تغییر مکان",
   "button_label_change_plex_home_users": "تغییر کاربران Plex Home",
+  "button_label_change_rating": "تغییر امتیاز برای \"{title}\"",
   "button_label_change_username": "تغییر نام کاربری",
   "button_label_checkin": "در حال تماشای \"{title}\"",
   "button_label_clean_up_episodes": "نوازش‌های تکراری قسمت‌ها را از تاریخچه خود حذف کنید.",

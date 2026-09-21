@@ -73,6 +73,7 @@
   "button_label_change_email": "Ändra e-post",
   "button_label_change_location": "Ändra plats",
   "button_label_change_plex_home_users": "Ändra Plex Home-användare",
+  "button_label_change_rating": "Ändra betyg för \"{title}\"",
   "button_label_change_username": "Ändra användarnamn",
   "button_label_checkin": "Tittar nu på \"{title}\"",
   "button_label_clean_up_episodes": "Ta bort dubblettvisningar av avsnitt från din historik.",

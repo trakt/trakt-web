@@ -73,6 +73,7 @@
   "button_label_change_email": "メールアドレスを変更",
   "button_label_change_location": "所在地を変更",
   "button_label_change_plex_home_users": "Plex Homeユーザーを変更",
+  "button_label_change_rating": "「{title}」の評価を変更",
   "button_label_change_username": "ユーザー名を変更",
   "button_label_checkin": "「{title}」を今視聴中",
   "button_label_clean_up_episodes": "履歴から重複するエピソードの再生を削除します。",

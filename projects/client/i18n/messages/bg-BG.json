@@ -73,6 +73,7 @@
   "button_label_change_email": "Промени имейл",
   "button_label_change_location": "Промени местоположение",
   "button_label_change_plex_home_users": "Промяна на потребителите на Plex Home",
+  "button_label_change_rating": "Промени оценката за „{title}“",
   "button_label_change_username": "Промени потребителското име",
   "button_label_checkin": "Гледам сега \"{title}\"",
   "button_label_clean_up_episodes": "Премахване на дублиращи се гледания на епизоди от вашата история.",

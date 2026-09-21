@@ -73,6 +73,7 @@
   "button_label_change_email": "Αλλαγή email",
   "button_label_change_location": "Αλλαγή τοποθεσίας",
   "button_label_change_plex_home_users": "Αλλαγή χρηστών Plex Home",
+  "button_label_change_rating": "Αλλαγή βαθμολογίας για το \"{title}\"",
   "button_label_change_username": "Αλλαγή ονόματος χρήστη",
   "button_label_checkin": "Τώρα παρακολουθώ το \"{title}\"",
   "button_label_clean_up_episodes": "Αφαιρέστε διπλότυπες προβολές επεισοδίων από το ιστορικό σας.",

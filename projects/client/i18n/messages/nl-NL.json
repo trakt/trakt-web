@@ -73,6 +73,7 @@
   "button_label_change_email": "Wijzig e-mail",
   "button_label_change_location": "Wijzig locatie",
   "button_label_change_plex_home_users": "Plex Home-gebruikers wijzigen",
+  "button_label_change_rating": "Wijzig beoordeling voor \"{title}\"",
   "button_label_change_username": "Gebruikersnaam wijzigen",
   "button_label_checkin": "Nu \"{title}\" aan het kijken",
   "button_label_clean_up_episodes": "Verwijder dubbele afleveringweergaven uit je geschiedenis.",

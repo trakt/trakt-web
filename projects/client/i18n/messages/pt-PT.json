@@ -73,6 +73,7 @@
   "button_label_change_email": "Alterar e-mail",
   "button_label_change_location": "Alterar localização",
   "button_label_change_plex_home_users": "Alterar utilizadores do Plex Home",
+  "button_label_change_rating": "Alterar avaliação para \"{title}\"",
   "button_label_change_username": "Alterar nome de utilizador",
   "button_label_checkin": "A ver \"{title}\"",
   "button_label_clean_up_episodes": "Remover visualizações duplicadas de episódios do teu histórico",

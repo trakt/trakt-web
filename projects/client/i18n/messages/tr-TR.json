@@ -73,6 +73,7 @@
   "button_label_change_email": "E-postayı değiştir",
   "button_label_change_location": "Konumu değiştir",
   "button_label_change_plex_home_users": "Plex aile kullanıcılarını değiştir",
+  "button_label_change_rating": "\"{title}\" için derecelendirmeyi değiştir",
   "button_label_change_username": "Kullanıcı adını değiştir",
   "button_label_checkin": "Şimdi \"{title}\" izleniyor",
   "button_label_clean_up_episodes": "Yinelenen bölüm oynatmalarını geçmişinizden kaldırın.",

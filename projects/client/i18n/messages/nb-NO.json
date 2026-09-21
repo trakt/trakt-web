@@ -73,6 +73,7 @@
   "button_label_change_email": "Endre e-post",
   "button_label_change_location": "Endre sted",
   "button_label_change_plex_home_users": "Endre Plex hjemmebrukere",
+  "button_label_change_rating": "Endre vurdering for \"{title}\"",
   "button_label_change_username": "Endre brukernavn",
   "button_label_checkin": "Ser nå \"{title}\"",
   "button_label_clean_up_episodes": "Fjern duplikate episodeavspillinger fra historikken din.",

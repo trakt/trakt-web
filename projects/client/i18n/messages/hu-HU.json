@@ -73,6 +73,7 @@
   "button_label_change_email": "E-mail cím módosítása",
   "button_label_change_location": "Hely módosítása",
   "button_label_change_plex_home_users": "Plex otthoni felhasználók módosítása",
+  "button_label_change_rating": "Értékelés módosítása ehhez: „{title}”",
   "button_label_change_username": "Felhasználónév módosítása",
   "button_label_checkin": "Most nézem: \"{title}\"",
   "button_label_clean_up_episodes": "Duplikált epizódlejátszások eltávolítása az előzményeidből.",
