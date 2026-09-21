@@ -29,7 +29,7 @@ describe('ShowCastDrawerHost', () => {
   });
 });
 
-it('keeps full credits in the show drawer when the flag is off', async () => {
+it('should keep full credits in the show drawer when the flag is off', async () => {
   localStorage.setItem(
     'trakt-feature-flags',
     JSON.stringify({ 'split-cast': false }),

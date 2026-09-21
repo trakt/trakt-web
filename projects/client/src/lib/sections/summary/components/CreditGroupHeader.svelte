@@ -1,15 +1,12 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { CreditGroupHeaderProps } from "./CreditGroupHeaderProps.ts";
 
   const {
     id,
     label,
     count,
-  }: {
-    id: string;
-    label: string;
-    count: number;
-  } = $props();
+  }: CreditGroupHeaderProps = $props();
 
   const peopleCount = $derived(
     count === 1
@@ -18,7 +15,7 @@
   );
 </script>
 
-<div {id} class="trakt-list-header" role="heading" aria-level="2">
+<div {id} class="trakt-credit-group-header" role="heading" aria-level="2">
   <div class="trakt-list-header-content">
     <div class="trakt-list-title">
       <div class="trakt-list-title-wrapper">
@@ -34,7 +31,7 @@
 </div>
 
 <style lang="scss">
-  .trakt-list-header {
+  .trakt-credit-group-header {
     display: flex;
     align-items: center;
     gap: var(--gap-xs);

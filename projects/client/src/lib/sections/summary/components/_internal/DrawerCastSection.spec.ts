@@ -9,7 +9,7 @@ import { describe, expect, it } from 'vitest';
 import DrawerCastSection from './DrawerCastSection.svelte';
 
 describe('DrawerCastSection', () => {
-  it('groups episode credits and searches supporting cast from the crew view', async () => {
+  it('should group episode credits and search supporting cast from the crew view', async () => {
     const user = userEvent.setup();
     renderComponent(DrawerCastSection, {
       props: { crew: EpisodeSiloPeopleMappedMock, type: 'episode' },
@@ -41,7 +41,7 @@ describe('DrawerCastSection', () => {
     );
   });
 
-  it('labels supporting cast as Cast when the main cast is unavailable', async () => {
+  it('should label supporting cast as Cast when the main cast is unavailable', async () => {
     renderComponent(DrawerCastSection, {
       props: {
         crew: { ...EpisodeSiloPeopleMappedMock, cast: [] },
@@ -55,7 +55,7 @@ describe('DrawerCastSection', () => {
       .not.toBeInTheDocument();
   });
 
-  it('groups season cast while keeping episode counts', async () => {
+  it('should group season cast while keeping episode counts', async () => {
     renderComponent(DrawerCastSection, {
       props: { crew: ShowSiloSplitPeopleMappedMock, type: 'show' },
     });
@@ -70,7 +70,7 @@ describe('DrawerCastSection', () => {
   });
 });
 
-it('shows one full cast list without group headings when the flag is off', async () => {
+it('should show one full cast list without group headings when the flag is off', async () => {
   localStorage.setItem(
     'trakt-feature-flags',
     JSON.stringify({ 'split-cast': false }),
