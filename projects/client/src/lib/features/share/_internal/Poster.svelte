@@ -46,7 +46,5 @@
 
   .trakt-share-poster {
     border-radius: 12px;
-
-    box-shadow: 0px 12px 32px 0px rgba(19, 21, 23, 0.22);
   }
 </style>
