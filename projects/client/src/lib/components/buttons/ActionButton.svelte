@@ -148,27 +148,18 @@
 
     all: unset;
 
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-
     display: flex;
     width: var(--button-size);
     height: var(--button-size);
-    padding: var(--ni-6);
-    box-sizing: border-box;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
 
-    border-radius: var(--border-radius-m);
     background-color: var(--color-background-action-button);
     color: var(--color-foreground-action-button);
-
-    transition: var(--transition-increment) cubic-bezier(0.22, 1, 0.36, 1);
-    transition-property:
-      background-color, color, box-shadow, transform, outline, outline-offset;
   }
+
+  @include icon-button-box($b);
 
   @each $color in "purple", "red", "blue", "orange", "default" {
     @include color-styles($b, $color);
@@ -200,8 +191,9 @@
     scale(0.92)
   );
 
+  @include icon-button-ghost("#{$b}[data-style=ghost]", scale(0.92), $on);
+
   :global(#{$b}[data-style=ghost]:active#{$on}) {
-    transform: scale(0.92);
     box-shadow: none;
   }
 
@@ -220,17 +212,4 @@
     margin: var(--ni-4);
   }
 
-  :global(#{$b}[data-style=ghost]) {
-    background-color: transparent;
-  }
-
-  @include for-mouse {
-    :global(#{$b}[data-style=ghost]:hover) {
-      background-color: color-mix(
-        in srgb,
-        var(--color-foreground) 10%,
-        transparent
-      );
-    }
-  }
 </style>

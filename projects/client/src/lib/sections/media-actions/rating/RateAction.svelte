@@ -79,22 +79,18 @@
     }
   }
 
+  @include icon-button-box(".trakt-rate-action");
+  @include icon-button-ghost(".trakt-rate-action", scale(0.92));
+
   .trakt-rate-action {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    box-sizing: border-box;
     min-width: var(--ni-32);
     min-height: var(--ni-32);
-    padding: var(--ni-6);
-    border-radius: var(--border-radius-m);
 
     color: var(--color-foreground);
-    cursor: pointer;
-
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: background-color, transform;
 
     :global(svg) {
       filter: drop-shadow(
@@ -106,20 +102,6 @@
     &:not(.is-rated) :global(svg) {
       width: var(--ni-16);
       height: var(--ni-16);
-    }
-
-    @include for-mouse() {
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--color-foreground) 10%,
-          transparent
-        );
-      }
-    }
-
-    &:active {
-      transform: scale(0.92);
     }
   }
 

@@ -255,6 +255,42 @@
     color-mix(in srgb, var(--purple-500) 15%, transparent);
 }
 
+@mixin icon-button-box($selector) {
+  :global(#{$selector}) {
+    box-sizing: border-box;
+    padding: var(--ni-6);
+    border-radius: var(--border-radius-m);
+
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    transition: var(--transition-increment) cubic-bezier(0.22, 1, 0.36, 1);
+    transition-property:
+      background-color, color, box-shadow, transform, outline, outline-offset;
+  }
+}
+
+@mixin icon-button-ghost($selector, $active-transform, $on: "") {
+  :global(#{$selector}) {
+    background-color: transparent;
+  }
+
+  @include for-mouse {
+    :global(#{$selector}:hover#{$on}) {
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground) 10%,
+        transparent
+      );
+    }
+  }
+
+  :global(#{$selector}:active#{$on}) {
+    transform: $active-transform;
+  }
+}
+
 @mixin card-outline-button($selector) {
   :global(#{$selector}) {
     border: var(--ni-1) solid var(--color-text-primary);
