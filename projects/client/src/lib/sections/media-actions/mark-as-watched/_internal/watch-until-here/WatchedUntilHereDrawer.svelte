@@ -105,90 +105,92 @@
       <CheckIcon />
     {/snippet}
 
-    <DropdownGroup>
-      <DropdownItem
-        onclick={() => handleModeChange("just-now")}
-        label={m.button_label_mark_as_watched_now()}
-        style="flat"
-        color="default"
-        variant={mode === "just-now" ? "primary" : "secondary"}
-        disabled={mode === "just-now"}
-        end={mode === "just-now" ? activeCheck : undefined}
-      >
-        {m.button_text_mark_as_watched_now()}
-        {#snippet icon()}
-          <IconWrapper isLoading={false}>
-            <TrackIcon state="watched" />
-          </IconWrapper>
-        {/snippet}
-      </DropdownItem>
+    <div class="mode-options">
+      <DropdownGroup>
+        <DropdownItem
+          onclick={() => handleModeChange("just-now")}
+          label={m.button_label_mark_as_watched_now()}
+          style="flat"
+          color="default"
+          variant={mode === "just-now" ? "primary" : "secondary"}
+          disabled={mode === "just-now"}
+          end={mode === "just-now" ? activeCheck : undefined}
+        >
+          {m.button_text_mark_as_watched_now()}
+          {#snippet icon()}
+            <IconWrapper isLoading={false}>
+              <TrackIcon state="watched" />
+            </IconWrapper>
+          {/snippet}
+        </DropdownItem>
 
-      <DropdownItem
-        onclick={() => handleModeChange("custom-end")}
-        label={m.button_label_mark_as_watched_other_date()}
-        style="flat"
-        color="default"
-        variant={isCustom ? "primary" : "secondary"}
-        disabled={isCustom}
-        end={isCustom ? activeCheck : undefined}
-      >
-        {m.button_text_mark_as_watched_other_date()}
-        {#snippet icon()}
-          <IconWrapper isLoading={false}>
-            <RenameIcon />
-          </IconWrapper>
-        {/snippet}
-      </DropdownItem>
+        <DropdownItem
+          onclick={() => handleModeChange("custom-end")}
+          label={m.button_label_mark_as_watched_other_date()}
+          style="flat"
+          color="default"
+          variant={isCustom ? "primary" : "secondary"}
+          disabled={isCustom}
+          end={isCustom ? activeCheck : undefined}
+        >
+          {m.button_text_mark_as_watched_other_date()}
+          {#snippet icon()}
+            <IconWrapper isLoading={false}>
+              <RenameIcon />
+            </IconWrapper>
+          {/snippet}
+        </DropdownItem>
 
-      <DropdownItem
-        onclick={() => handleModeChange("released")}
-        label={m.button_label_mark_as_watched_release_date()}
-        style="flat"
-        color="default"
-        variant={mode === "released" ? "primary" : "secondary"}
-        disabled={mode === "released"}
-        end={mode === "released" ? activeCheck : undefined}
-      >
-        {m.button_text_mark_as_watched_release_date()}
-        {#snippet icon()}
-          <IconWrapper isLoading={false}>
-            <CalendarIcon />
-          </IconWrapper>
-        {/snippet}
-      </DropdownItem>
-    </DropdownGroup>
+        <DropdownItem
+          onclick={() => handleModeChange("released")}
+          label={m.button_label_mark_as_watched_release_date()}
+          style="flat"
+          color="default"
+          variant={mode === "released" ? "primary" : "secondary"}
+          disabled={mode === "released"}
+          end={mode === "released" ? activeCheck : undefined}
+        >
+          {m.button_text_mark_as_watched_release_date()}
+          {#snippet icon()}
+            <IconWrapper isLoading={false}>
+              <CalendarIcon />
+            </IconWrapper>
+          {/snippet}
+        </DropdownItem>
+      </DropdownGroup>
 
-    {#if isCustom}
-      <div class="custom-anchor">
-        <div class="anchor-kind">
-          <Button
-            size="small"
-            variant={anchorKind === "start" ? "primary" : "secondary"}
-            color={anchorKind === "start" ? "purple" : "default"}
-            label={m.button_label_watch_until_here_anchor_start()}
-            onclick={() => (anchorKind = "start")}
-          >
-            {m.button_text_watch_until_here_anchor_start()}
-          </Button>
-          <Button
-            size="small"
-            variant={anchorKind === "end" ? "primary" : "secondary"}
-            color={anchorKind === "end" ? "purple" : "default"}
-            label={m.button_label_watch_until_here_anchor_end()}
-            onclick={() => (anchorKind = "end")}
-          >
-            {m.button_text_watch_until_here_anchor_end()}
-          </Button>
+      {#if isCustom}
+        <div class="custom-anchor">
+          <div class="anchor-kind">
+            <Button
+              size="small"
+              variant={anchorKind === "start" ? "primary" : "secondary"}
+              color={anchorKind === "start" ? "purple" : "default"}
+              label={m.button_label_watch_until_here_anchor_start()}
+              onclick={() => (anchorKind = "start")}
+            >
+              {m.button_text_watch_until_here_anchor_start()}
+            </Button>
+            <Button
+              size="small"
+              variant={anchorKind === "end" ? "primary" : "secondary"}
+              color={anchorKind === "end" ? "purple" : "default"}
+              label={m.button_label_watch_until_here_anchor_end()}
+              onclick={() => (anchorKind = "end")}
+            >
+              {m.button_text_watch_until_here_anchor_end()}
+            </Button>
+          </div>
+
+          <DateTimePicker
+            value={anchorDate}
+            maxDate={new Date()}
+            onChange={(date) => (anchorDate = date)}
+            label={m.date_time_label_watch_until_here()}
+          />
         </div>
-
-        <DateTimePicker
-          value={anchorDate}
-          maxDate={new Date()}
-          onChange={(date) => (anchorDate = date)}
-          label={m.date_time_label_watch_until_here()}
-        />
-      </div>
-    {/if}
+      {/if}
+    </div>
 
     <section class="preview">
       {#if !isCustom || Boolean(anchorDate)}
@@ -252,6 +254,14 @@
     min-height: 0;
   }
 
+  .mode-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+
+    flex-shrink: 0;
+  }
+
   .custom-anchor {
     display: flex;
     flex-direction: column;
@@ -276,6 +286,7 @@
     flex-direction: column;
     gap: var(--gap-xs);
 
+    flex: 1 1 auto;
     min-height: 0;
   }
 
@@ -322,6 +333,8 @@
     display: flex;
     gap: var(--gap-s);
     margin-top: auto;
+
+    flex-shrink: 0;
 
     :global(> *) {
       flex: 1;
