@@ -16,6 +16,10 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.DeleteList;
     name: string;
   };
+  [ConfirmationType.LeaveCollaboration]: {
+    type: ConfirmationType.LeaveCollaboration;
+    name: string;
+  };
   [ConfirmationType.UnfollowUser]: {
     type: ConfirmationType.UnfollowUser;
     username: string;

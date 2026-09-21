@@ -4,14 +4,17 @@
   import ListMeta from "$lib/sections/lists/components/ListMeta.svelte";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import ListActions from "$lib/sections/lists/user/ListActions.svelte";
+  import type { Snippet } from "svelte";
   import { getListUrl } from "./getListUrl.ts";
 
   const {
     list,
     onclick,
+    popupActions,
   }: {
     list: MediaListSummary;
     onclick?: () => void;
+    popupActions?: Snippet;
   } = $props();
 
   const listUrl = $derived(getListUrl({ type: "user-list", list }));
@@ -34,7 +37,7 @@
     />
   </div>
 
-  <ListActions {list} />
+  <ListActions {list} {popupActions} />
 </div>
 
 <style lang="scss">

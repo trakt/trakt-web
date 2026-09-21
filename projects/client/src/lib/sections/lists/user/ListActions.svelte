@@ -10,6 +10,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
@@ -22,7 +23,10 @@
   import { useLikeList } from "./_internal/useLikeList";
   import ListReorderButton from "./ListReorderButton.svelte";
 
-  const { list }: { list: MediaListSummary } = $props();
+  const {
+    list,
+    popupActions,
+  }: { list: MediaListSummary; popupActions?: Snippet } = $props();
 
   const { deleteList, isDeleting, isDeleted } = $derived(useDeleteList(list));
 
@@ -70,6 +74,7 @@
     title={list.name}
   >
     {#snippet items()}
+      {@render popupActions?.()}
       {#if isListOwner}
         <ShareButton
           title={list.name}
