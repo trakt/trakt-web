@@ -28,10 +28,12 @@
   const {
     onClose,
     title,
+    onWatched,
     ...target
   }: {
     onClose: () => void;
     title: string;
+    onWatched?: () => void;
   } & MarkAsWatchedStoreProps = $props();
 
   const { confirm } = useConfirm();
@@ -98,6 +100,7 @@
   };
 
   const handler = async (watchedAt: MarkAsWatchedAt) => {
+    const wasWatched = $isWatched;
     const shouldPromptRewatching =
       watchedAt === "now" && isRewatchingPromptCandidate();
 
@@ -108,6 +111,11 @@
       onConfirm: async () => {
         confirmedAction.set(watchedAt);
         await markAsWatched(watchedAt);
+
+        if (!wasWatched) {
+          onWatched?.();
+        }
+
         promptRewatchingAfterClose(shouldPromptRewatching);
       },
     });

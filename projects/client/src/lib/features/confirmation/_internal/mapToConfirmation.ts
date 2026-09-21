@@ -26,6 +26,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: getWarningMessage(props.title, props.target),
     operation: 'destructive',
   }),
+  [ConfirmationType.WatchedUntilHere]: (props) => ({
+    title: m.confirmation_title_watched_until_here(),
+    buttonText: m.button_text_watched_until_here(),
+    message: m.warning_prompt_watched_until_here({ title: props.title }),
+    operation: 'affirmative',
+  }),
   [ConfirmationType.RemoveFromWatched]: (props) => ({
     title: m.confirmation_title_remove_from_watched(),
     buttonText: m.button_text_remove_from_history(),

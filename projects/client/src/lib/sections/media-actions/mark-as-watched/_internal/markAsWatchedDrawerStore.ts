@@ -4,6 +4,7 @@ import type { MarkAsWatchedStoreProps } from '../useMarkAsWatched.ts';
 type MarkAsWatchedProps = {
   title: string;
   mediaStore: MarkAsWatchedStoreProps;
+  onWatched?: () => void;
 };
 
 export type MarkAsWatchedDrawerState =
@@ -22,7 +23,9 @@ function createMarkAsWatchedDrawerStore() {
     },
     close: () => {
       const current = subject.getValue();
-      if (current) subject.next({ ...current, isOpen: false });
+      if (current) {
+        subject.next({ ...current, isOpen: false, onWatched: undefined });
+      }
     },
   };
 }

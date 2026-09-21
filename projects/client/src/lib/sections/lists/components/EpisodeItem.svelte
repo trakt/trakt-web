@@ -102,6 +102,7 @@
           title={$spoilerFreeTitle}
           media={props.episode}
           show={props.media}
+          onWatched={props.onWatched}
         />
       </RenderFor>
     {/if}
