@@ -71,20 +71,16 @@ export const GET: RequestHandler = async (
     fetch,
   });
 
-  const mediaData = await fetchMediaData({
-    type,
-    slug,
-    fetch: fetchFn,
-  }).catch(() => null);
+  const [mediaData, fonts] = await Promise.all([
+    fetchMediaData({ type, slug, fetch: fetchFn }).catch(() => null),
+    loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
+  ]);
 
   if (!mediaData) {
     return new Response('Data not found', { status: 404 });
   }
 
   const { media, ratings, crew } = mediaData;
-
-  const fonts = await loadShareFonts({ bucket: platform?.env?.R2_WALTER });
-
   const { width, height } = SHARE_TYPE_DIMENSIONS[shareType];
 
   const toBuffer = (posterUrl: string) =>
