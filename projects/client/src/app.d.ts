@@ -204,6 +204,7 @@ declare global {
     }
     // interface Platform {}
     interface Platform {
+      context?: import('@cloudflare/workers-types').ExecutionContext;
       env: {
         R2_WALTER: import('@cloudflare/workers-types').R2Bucket;
         R2_IMMUTABLE: import('@cloudflare/workers-types').R2Bucket;
