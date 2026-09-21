@@ -1,21 +1,10 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { VIP_PLANS } from "./constants";
+  import Button from "$lib/components/buttons/Button.svelte";
   import FooterCard from "./FooterCard.svelte";
   import GlassCard from "./GlassCard.svelte";
   import yodaUrl from "./icons/yoda.png";
-  import UpgradeButton from "./UpgradeButton.svelte";
-  import { useVip } from "./useVip";
-
-  const { plans, elevatedPlanType } = useVip();
-
-  const activePlans = $derived($plans.length > 0 ? $plans : VIP_PLANS);
-
-  const elevatedPlan = $derived(
-    activePlans.find((plan) => plan.type === $elevatedPlanType) ??
-      activePlans[0],
-  );
 </script>
 
 <FooterCard>
@@ -38,7 +27,9 @@
           <img src={yodaUrl} alt="" width="33" height="33" />
           <span>{m.text_vip_make_it_official()}</span>
         </div>
-        <UpgradeButton plan={elevatedPlan} />
+        <Button href="#vip-plans" size="small" label={m.button_text_vip_compare_plans()}>
+          {m.button_text_vip_compare_plans()}
+        </Button>
       </div>
     </GlassCard>
   </div>

@@ -6991,13 +6991,126 @@
       "default": "View VIP plans and switch to credit card",
       "description": "Aria-label for the button that opens the VIP plans page so a PayPal subscriber can switch to credit card."
     },
-    "header_vip_two_year_deal": {
-      "default": "Pay for 1 year, get 2 years of VIP!",
-      "description": "Header for the banner on the VIP plans page announcing a first-term discount on the 2 year plan."
+    "tag_text_vip_deal_welcome_back": {
+      "default": "Welcome back offer",
+      "description": "Eyebrow label on the deal card shown to former VIPs who rejoin, above the headline. This should be as short as possible."
     },
-    "text_vip_two_year_deal": {
-      "default": "You've unlocked the 2 year plan for {price}, then {renewalPrice} every 2 years. The discount is applied automatically at checkout.",
-      "description": "Description for the banner on the VIP plans page announcing a first-term discount on the 2 year plan.",
+    "header_vip_deal_welcome_back": {
+      "default": "Get 2 years of VIP for {price}",
+      "description": "Headline showing the discounted total price for the first 2 years of VIP.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_deal_welcome_back": {
+      "default": "{price} upfront for 2 years, then auto-renews at {renewalPrice} every 2 years. Discount applied at checkout.",
+      "description": "Fine print on the deal card shown to former VIPs who rejoin. {renewalPrice} is the full 2 year plan price the plan renews at.",
+      "variables": {
+        "price": {
+          "type": "string"
+        },
+        "renewalPrice": {
+          "type": "string"
+        }
+      }
+    },
+    "tag_text_vip_deal_paypal_switch": {
+      "default": "PayPal to card offer",
+      "description": "Eyebrow label on the deal card shown to PayPal subscribers switching to credit card, above the headline. This should be as short as possible."
+    },
+    "header_vip_deal_paypal_switch": {
+      "default": "Switch to card. Get 2 years of VIP for {price}",
+      "description": "Headline showing the discounted total price for the first 2 years of VIP.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_deal_paypal_switch": {
+      "default": "{price} upfront for 2 years, then auto-renews at {renewalPrice} every 2 years. Discount applied at checkout. You keep your remaining VIP time; we automatically cancel PayPal after checkout.",
+      "description": "Fine print on the deal card shown to PayPal subscribers switching to credit card. {renewalPrice} is the full 2 year plan price the plan renews at.",
+      "variables": {
+        "price": {
+          "type": "string"
+        },
+        "renewalPrice": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_deal_ribbon": {
+      "default": "First 2 Years",
+      "description": "Short tag indicating that the offer price applies to the first 2 years."
+    },
+    "text_vip_deal_term": {
+      "default": "2 years of VIP",
+      "description": "Text under the deal price on the VIP deal card, saying what the price buys. This should be as short as possible."
+    },
+    "button_text_vip_claim_deal": {
+      "default": "Continue with 2 years",
+      "description": "Text for the button on the VIP deal card that starts checkout for the discounted 2 year plan. This should be as short as possible."
+    },
+    "button_label_vip_claim_deal": {
+      "default": "Continue with 2 years",
+      "description": "Aria-label for the button on the VIP deal card that starts checkout for the discounted 2 year plan."
+    },
+    "text_vip_deal_or_standard_plan": {
+      "default": "Compare all plans",
+      "description": "Divider text between the VIP deal card and the regular plan cards on the VIP plans page. This should be as short as possible."
+    },
+    "button_text_vip_continue_monthly": {
+      "default": "Continue monthly",
+      "description": "VIP plan checkout button text."
+    },
+    "button_text_vip_continue_yearly": {
+      "default": "Continue yearly",
+      "description": "VIP plan checkout button text."
+    },
+    "button_text_vip_compare_plans": {
+      "default": "Compare plans",
+      "description": "VIP plan checkout button text."
+    },
+    "text_vip_plan_billed_monthly": {
+      "default": "{price} billed monthly",
+      "description": "Billing total and frequency for a VIP plan.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_plan_billed_yearly": {
+      "default": "{price} billed yearly",
+      "description": "Billing total and frequency for a VIP plan.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_plan_billed_two_years": {
+      "default": "{price} billed every 2 years",
+      "description": "Billing total and frequency for a VIP plan.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "tag_text_vip_best_value": {
+      "default": "Best Value",
+      "description": "Short tag on the standard 2-year VIP plan, which has the lowest monthly price."
+    },
+    "tag_text_deal_price": {
+      "default": "First 2 Years",
+      "description": "Short tag indicating that the offer price applies to the first 2 years."
+    },
+    "text_vip_billed_deal_first_term": {
+      "default": "{price} for your first 2 years, then {renewalPrice} every 2 years",
+      "description": "Billing line on the 2 year plan card when a first-term deal is applied. {price} is the discounted total for the first 2 year term.",
       "variables": {
         "price": {
           "type": "string"

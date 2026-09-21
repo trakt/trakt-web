@@ -13,12 +13,9 @@ import { vipSubscriptionQuery } from '$lib/requests/vip/vipSubscriptionQuery.ts'
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
-import { BehaviorSubject, map } from 'rxjs';
+import { map } from 'rxjs';
 import type { VipPlan } from './models/VipPlan.ts';
-import type { VipPlanDuration } from '$lib/requests/models/VipPlanDuration.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
-
-const elevatedPlanType = new BehaviorSubject<VipPlanDuration>('yearly');
 
 function getReturnUrl() {
   const url = new URL(UrlBuilder.vip(), globalThis.window.location.origin);
@@ -32,6 +29,7 @@ export function useVip() {
 
   const subscription = useQuery(vipSubscriptionQuery());
   const plansResult = useQuery(vipPlansQuery());
+  const plans = plansResult.pipe(map(($plans) => $plans.data ?? []));
 
   const checkout = useMutation(defineMutation({
     key: 'vip:start-checkout',
@@ -71,7 +69,7 @@ export function useVip() {
   ]);
 
   return {
-    plans: plansResult.pipe(map(($plans) => $plans.data ?? [])),
+    plans,
     startCheckout: async (plan: VipPlan) => {
       trackUpgrade({ plan: plan.type });
 
@@ -91,7 +89,5 @@ export function useVip() {
     isFetching,
     subscription: subscription.pipe(map(($details) => $details.data)),
     isLoading: subscription.pipe(map(toLoadingState)),
-    elevatedPlanType: elevatedPlanType.asObservable(),
-    setElevatedPlanType: (type: VipPlanDuration) => elevatedPlanType.next(type),
   };
 }

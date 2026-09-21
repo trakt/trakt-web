@@ -4,6 +4,7 @@
   import { type VipSubscription } from "$lib/requests/models/VipSubscription";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useVip } from "./useVip";
+  import { findTwoYearDealPlan } from "./utils/findTwoYearDealPlan";
   import { isPaypalGateway } from "./utils/isPaypalGateway";
   import { toVipPriceLabel } from "./utils/toVipPriceLabel";
 
@@ -13,11 +14,9 @@
 
   const isPaypal = $derived(isPaypalGateway(subscription?.gateway));
 
-  // On the manage page a discounted 2-year plan can only be the PayPal switch
-  // deal, so surface its pricing when the API returns one.
-  const dealPlan = $derived(
-    $plans.find((plan) => plan.type === "two_years" && plan.discount != null),
-  );
+  // On the manage page a 2 year deal can only be the PayPal switch deal, so
+  // surface its pricing when the API returns one.
+  const dealPlan = $derived(findTwoYearDealPlan($plans));
 </script>
 
 {#if isPaypal}
@@ -28,12 +27,9 @@
     </div>
 
     <div class="switch-action">
-      {#if dealPlan?.discount}
+      {#if dealPlan}
         <div class="switch-price">
-          <span class="price">
-            {toVipPriceLabel(dealPlan.discount.discountedAmountMonthly)}
-            <span class="per-month">/mo</span>
-          </span>
+          <span class="price">{toVipPriceLabel(dealPlan.discount.discountedAmountMonthly)}<span class="per-month">/mo</span></span>
           <span class="billed-text">{m.text_vip_billed_biyearly()}</span>
         </div>
       {/if}
@@ -114,6 +110,7 @@
       font-variant-numeric: tabular-nums;
 
       .per-month {
+        margin-inline-start: var(--ni-2);
         font-size: 0.5em;
       }
     }
