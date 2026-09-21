@@ -1,4 +1,3 @@
-import { afterEach, beforeEach } from 'vitest';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
@@ -6,7 +5,15 @@ import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic
 import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import {
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 import CastDrawerHost from './CastDrawerHost.svelte';
 
 beforeAll(() => {
@@ -151,7 +158,7 @@ describe('CastDrawerHost', () => {
     expect(screen.getByRole('radio', { name: 'Crew' })).toBeInTheDocument();
   });
 
-  it('hides episode counts for episode credits', async () => {
+  it('should hide episode counts for episode credits', async () => {
     renderComponent(CastDrawerHost, {
       props: {
         crew: EpisodeSiloPeopleMappedMock,
@@ -180,7 +187,7 @@ describe('CastDrawerHost', () => {
     expect(screen.queryByText('2 eps.')).not.toBeInTheDocument();
   });
 
-  it('uses Cast as the episode cast header when only supporting cast is available', async () => {
+  it('should use Cast as the episode cast header when only supporting cast is available', async () => {
     const crew = {
       ...EpisodeSiloPeopleMappedMock,
       cast: [],
@@ -228,7 +235,7 @@ describe('CastDrawerHost', () => {
     ).toBeInTheDocument();
   });
 
-  it('uses Cast as the movie cast group header', async () => {
+  it('should use Cast as the movie cast group header', async () => {
     renderComponent(CastDrawerHost, {
       props: {
         crew: MovieHereticPeopleMappedMock,

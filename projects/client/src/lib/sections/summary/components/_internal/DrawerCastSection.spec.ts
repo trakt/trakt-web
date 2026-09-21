@@ -1,15 +1,14 @@
-import { afterEach, beforeEach } from 'vitest';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
 import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { screen, waitFor, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import DrawerCastSection from './DrawerCastSection.svelte';
 
 describe('DrawerCastSection', () => {
-  it('groups episode credits and searches supporting cast from the crew view', async () => {
+  it('should group episode credits and search supporting cast from the crew view', async () => {
     const user = userEvent.setup();
     renderComponent(DrawerCastSection, {
       props: { crew: EpisodeSiloPeopleMappedMock, type: 'episode' },
@@ -41,7 +40,7 @@ describe('DrawerCastSection', () => {
     );
   });
 
-  it('labels supporting cast as Cast when the main cast is unavailable', async () => {
+  it('should label supporting cast as Cast when the main cast is unavailable', async () => {
     renderComponent(DrawerCastSection, {
       props: {
         crew: { ...EpisodeSiloPeopleMappedMock, cast: [] },
@@ -55,7 +54,7 @@ describe('DrawerCastSection', () => {
       .not.toBeInTheDocument();
   });
 
-  it('groups season cast while keeping episode counts', async () => {
+  it('should group season cast while keeping episode counts', async () => {
     renderComponent(DrawerCastSection, {
       props: { crew: ShowSiloSplitPeopleMappedMock, type: 'show' },
     });
@@ -100,7 +99,7 @@ it('should reserve the group heading in the loading skeleton only when the flag 
   expect(document.querySelector('.credit-skeleton-header')).toBeNull();
 });
 
-it('shows one full cast list without group headings when the flag is off', async () => {
+it('should show one full cast list without group headings when the flag is off', async () => {
   localStorage.setItem(
     'trakt-feature-flags',
     JSON.stringify({ 'split-cast': false }),

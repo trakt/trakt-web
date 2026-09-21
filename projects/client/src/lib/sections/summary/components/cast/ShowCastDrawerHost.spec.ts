@@ -1,11 +1,10 @@
-import { afterEach, beforeEach } from 'vitest';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
 import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { screen, within } from '@testing-library/svelte';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import ShowCastDrawerHost from './ShowCastDrawerHost.svelte';
 
 describe('ShowCastDrawerHost', () => {
@@ -46,7 +45,7 @@ describe('ShowCastDrawerHost', () => {
   });
 });
 
-it('keeps full credits in the show drawer when the flag is off', async () => {
+it('should keep full credits in the show drawer when the flag is off', async () => {
   localStorage.setItem(
     'trakt-feature-flags',
     JSON.stringify({ 'split-cast': false }),
