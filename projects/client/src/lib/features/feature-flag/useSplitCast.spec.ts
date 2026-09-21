@@ -15,7 +15,7 @@ afterEach(() => {
 });
 
 it.each([true, false])(
-  'requires VIP access when the split-cast flag is enabled (VIP=%s)',
+  'should require VIP access when the split-cast flag is enabled (VIP=%s)',
   async (vip) => {
     localStorage.setItem(
       'trakt-feature-flags',
@@ -50,7 +50,7 @@ it.each([true, false])(
   },
 );
 
-it('disables the feature for anonymous visitors even with the flag enabled', async () => {
+it('should disable the feature for anonymous visitors even with the flag enabled', async () => {
   setAuthorization(false);
   localStorage.setItem(
     'trakt-feature-flags',
