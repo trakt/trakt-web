@@ -13,6 +13,7 @@
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
+  import LeaveCollaborationButton from "./_internal/LeaveCollaborationButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
   import ManageCollaboratorsButton from "./_internal/ManageCollaboratorsButton.svelte";
   import ManageCollaboratorsDrawerHost from "./_internal/ManageCollaboratorsDrawerHost.svelte";
@@ -98,6 +99,9 @@
           onDelete={deleteList}
         />
       {:else}
+        {#if list.type === "personal"}
+          <LeaveCollaborationButton {list} />
+        {/if}
         <ReportButton
           params={{ type: ReportableType.List, id: list.id, title: list.name }}
           label={m.button_label_report_list({ name: list.name })}

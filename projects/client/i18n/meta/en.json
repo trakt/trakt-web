@@ -3318,6 +3318,28 @@
         }
       }
     },
+    "button_text_leave_collaboration": {
+      "default": "Leave",
+      "description": "Text for the button that removes the current user as a collaborator on a list they don't own."
+    },
+    "button_label_leave_collaboration": {
+      "default": "Remove yourself as a collaborator on {name}",
+      "description": "Aria-label for the list actions menu item that removes the current user as a collaborator.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_leave_collaboration": {
+      "default": "Are you sure you want to remove yourself as a collaborator on {name}? You'll lose the ability to add or remove items from this list.",
+      "description": "Warning prompt shown when a collaborator tries to remove themselves from a list.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "link_text_vip_list_upsell": {
       "default": "Get VIP to add more lists.",
       "description": "Text for the link that takes users to the VIP upsell page. This should be as short as possible and be translated as if it starts with 'get vip'."
@@ -9522,6 +9544,10 @@
     "confirmation_title_delete_list": {
       "default": "Delete list?",
       "description": "Title of the confirmation dialog shown before permanently deleting a user's custom list."
+    },
+    "confirmation_title_leave_collaboration": {
+      "default": "Leave collaboration?",
+      "description": "Title of the confirmation dialog shown before a collaborator removes themselves from a list."
     },
     "confirmation_title_remove_favorite": {
       "default": "Remove favorite?",
