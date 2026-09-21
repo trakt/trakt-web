@@ -7,6 +7,9 @@
   import { createSafeMarked } from "$lib/utils/markdown/createSafeMarked.ts";
   import CommentGif from "./CommentGif.svelte";
   import { createHeadingRenderer } from "./marked/createHeadingRenderer";
+  import { createHtmlRenderer } from "./marked/createHtmlRenderer";
+  import { createImageRenderer } from "./marked/createImageRenderer";
+  import { createLinkRenderer } from "./marked/createLinkRenderer";
   import { createParagraphRenderer } from "./marked/createParagraphRenderer";
   import { spoilerExtension } from "./marked/spoilerExtension";
 
@@ -30,6 +33,9 @@
       renderer: {
         paragraph: createParagraphRenderer(comment.isSpoiler),
         heading: createHeadingRenderer(),
+        html: createHtmlRenderer(),
+        link: createLinkRenderer(),
+        image: createImageRenderer(),
       },
     }),
   );
