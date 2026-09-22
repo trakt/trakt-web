@@ -5,12 +5,15 @@ import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ListPrivacy } from '$lib/requests/models/ListPrivacy.ts';
 import { createListRequest } from '$lib/requests/queries/users/createListRequest.ts';
+import type { SortDirection } from '../models/SortDirection.ts';
 import { updateListRequest } from '../../../../requests/queries/users/updateListRequest.ts';
 
 type SaveListProps = {
   name: string;
   description?: string;
   privacy: ListPrivacy;
+  sortBy?: string;
+  sortHow?: SortDirection;
 };
 
 type CreateListProps = {
@@ -44,6 +47,8 @@ async function saveRequest(
       return updateListRequest({
         ...payload,
         listId: props.listId,
+        sortBy: props.sortBy,
+        sortHow: props.sortHow,
       });
   }
 }
@@ -59,13 +64,15 @@ export function useSaveList(props: UseSaveListProps) {
     key: `list:${props.type}`,
     request: (variables: SaveListProps) =>
       saveRequest({ ...props, ...variables }),
-    invalidations: [
-      isCreating ? InvalidateAction.List.Created : InvalidateAction.List.Edited,
+    invalidations: isCreating ? [InvalidateAction.List.Created] : [
+      InvalidateAction.List.Edited,
+      InvalidateAction.Listed('movie'),
+      InvalidateAction.Listed('show'),
     ],
   }));
 
   const saveList = async (
-    { name, description, privacy }: SaveListProps,
+    { name, description, privacy, sortBy, sortHow }: SaveListProps,
   ) => {
     const newName = name.trim();
     if (!newName) {
@@ -74,7 +81,13 @@ export function useSaveList(props: UseSaveListProps) {
 
     track();
 
-    return await save.mutate({ name: newName, description, privacy });
+    return await save.mutate({
+      name: newName,
+      description,
+      privacy,
+      sortBy,
+      sortHow,
+    });
   };
 
   return {
