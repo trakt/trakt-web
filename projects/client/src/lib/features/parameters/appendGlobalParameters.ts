@@ -92,7 +92,7 @@ export function appendGlobalParameters(
       ...effectiveSearch.entries(),
     ]);
 
-    anchor.href = `${target.pathname}${buildParamString(params)}`;
+    anchor.href = `${target.pathname}${buildParamString(params)}${target.hash}`;
   };
 
   const subscription = combineLatest(
