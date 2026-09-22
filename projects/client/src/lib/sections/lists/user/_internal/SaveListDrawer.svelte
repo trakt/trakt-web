@@ -1,9 +1,12 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import Form from "$lib/components/form/Form.svelte";
   import FormInput from "$lib/components/form/FormInput.svelte";
+  import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
+  import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -13,6 +16,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   import { writable } from "$lib/utils/store/WritableSubject.ts";
+  import { WATCHLIST_SORT_OPTIONS } from "../constants/index.ts";
   import { useSaveList } from "./useSaveList";
 
   // FIXME: remove when we properly deal with other privacy options
@@ -43,6 +47,8 @@
         name: "",
         description: "",
         privacy: ($user?.isPrivate ? "private" : "public") as ListPrivacy,
+        sortBy: undefined as string | undefined,
+        sortHow: undefined as "asc" | "desc" | undefined,
       };
     }
 
@@ -50,12 +56,29 @@
       name: props.list.name,
       description: props.list.description,
       privacy: props.list.privacy,
+      sortBy: props.list.sortBy,
+      sortHow: props.list.sortHow,
     };
   });
 
   const name = writable(defaultValues.name);
   const description = writable(defaultValues.description);
   const privacy = writable(defaultValues.privacy);
+  const sortBy = writable(defaultValues.sortBy);
+  const sortHow = writable(defaultValues.sortHow);
+
+  const sortByOptions = $derived(
+    WATCHLIST_SORT_OPTIONS
+      .filter((option) => option.value !== undefined)
+      .map((option) => ({ value: option.value as string, label: option.text() })),
+  );
+
+  const currentSortHow = $derived($sortHow ?? "desc");
+  const sortDirectionLabel = $derived(
+    currentSortHow === "asc"
+      ? m.button_label_sort_ascending()
+      : m.button_label_sort_descending(),
+  );
 
   const { saveList, isSaving } = iffy(() =>
     props.type === "create"
@@ -80,6 +103,8 @@
       name: $name,
       description: $description,
       privacy: $privacy,
+      sortBy: $sortBy,
+      sortHow: $sortHow,
     });
 
     if (owner && slug) {
@@ -97,7 +122,9 @@
   const isDirty = $derived(
     defaultValues.description !== $description ||
       defaultValues.name !== $name ||
-      defaultValues.privacy !== $privacy,
+      defaultValues.privacy !== $privacy ||
+      defaultValues.sortBy !== $sortBy ||
+      defaultValues.sortHow !== $sortHow,
   );
 </script>
 
@@ -157,6 +184,34 @@
         disabled={$isSaving}
         value={$description}
       />
+      {#if props.type === "update"}
+        <div class="trakt-list-sort-order">
+          <span>{m.text_default_sort_order()}</span>
+          <div class="sort-order-controls">
+            <div class="sort-order-field">
+              <SingleSelect
+                options={sortByOptions}
+                value={$sortBy}
+                placeholder={m.text_default_sort_order()}
+                disabled={$isSaving}
+                autoWidth
+                onChange={(value) => sortBy.set(value)}
+              />
+            </div>
+            <ActionButton
+              type="button"
+              style="flat"
+              variant="secondary"
+              label={sortDirectionLabel}
+              disabled={$isSaving}
+              onclick={() =>
+                sortHow.set(currentSortHow === "asc" ? "desc" : "asc")}
+            >
+              <SortDirectionIcon direction={currentSortHow} />
+            </ActionButton>
+          </div>
+        </div>
+      {/if}
     </div>
   </Form>
 </Drawer>
@@ -173,6 +228,28 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
+  }
+
+  .trakt-list-sort-order {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+    width: 100%;
+    margin-block-start: var(--gap-s);
+
+    .sort-order-controls {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: var(--gap-xxs);
+      width: 100%;
+
+      .sort-order-field {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+    }
   }
 
   .trakt-list-privacy-toggle {

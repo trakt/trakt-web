@@ -9,12 +9,15 @@ const RENAMED_LIST = {
   ids: { trakt: 30998548, slug: 'new-name' },
 };
 
-function updateList() {
+function updateList(
+  overrides: Partial<Parameters<typeof updateListRequest>[0]> = {},
+) {
   return updateListRequest({
     userId: 'me',
     listId: 'old-slug',
     name: 'New name',
     privacy: 'private',
+    ...overrides,
   });
 }
 
@@ -41,5 +44,23 @@ describe('updateListRequest', () => {
     );
 
     expect(await updateList()).to.equal(undefined);
+  });
+
+  it('should send the default sort fields when provided', async () => {
+    let requestBody: unknown;
+
+    server.use(
+      http.put(UPDATE_URL, async ({ request }) => {
+        requestBody = await request.json();
+        return HttpResponse.json(RENAMED_LIST);
+      }),
+    );
+
+    await updateList({ sortBy: 'released', sortHow: 'asc' });
+
+    expect(requestBody).to.deep.include({
+      sort_by: 'released',
+      sort_how: 'asc',
+    });
   });
 });
