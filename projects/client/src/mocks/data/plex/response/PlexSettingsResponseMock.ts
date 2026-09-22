@@ -14,6 +14,7 @@ export const PlexSettingsResponseMock: PlexSettingsResponse = {
   sync: {
     configured: true,
     error: false,
+    server_limit: 1,
     selection: {
       server_ids: ['abc123server'],
       library_ids: [

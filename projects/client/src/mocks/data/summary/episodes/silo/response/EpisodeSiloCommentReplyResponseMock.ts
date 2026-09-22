@@ -1,9 +1,9 @@
-import type { CommentResponseWithGif } from '$lib/requests/_internal/CommentResponseWithGif.ts';
+import type { CommentResponse } from '@trakt/api';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { EpisodeSiloCommentsResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloCommentsResponseMock.ts';
 import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
 
-export const EpisodeSiloCommentReplyResponseMock: CommentResponseWithGif[] = [
+export const EpisodeSiloCommentReplyResponseMock: CommentResponse[] = [
   {
     'id': 421,
     'comment': 'This is a reply to another comment.',

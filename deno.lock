@@ -13,7 +13,7 @@
     "npm:@ethercorps/sveltekit-og@4.3.0": "4.3.0_@sveltejs+kit@2.70.3__@sveltejs+vite-plugin-svelte@7.3.0___svelte@5.57.1___vite@8.3.0____esbuild@0.28.2____jiti@2.7.0____sass-embedded@1.104.1___esbuild@0.28.2___sass-embedded@1.104.1__svelte@5.57.1__typescript@5.9.3__vite@8.3.0___esbuild@0.28.2___jiti@2.7.0___sass-embedded@1.104.1__esbuild@0.28.2__sass-embedded@1.104.1_esbuild@0.28.2_sass-embedded@1.104.1_vite@8.3.0__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.104.1",
     "npm:@inlang/paraglide-js@2.25.4": "2.25.4_typescript@5.9.3_vite@8.3.0__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.104.1_esbuild@0.28.2_sass-embedded@1.104.1",
     "npm:@jsr/libn__fuzzy@0.4.0": "0.4.0",
-    "npm:@jsr/trakt__api@0.5.4": "0.5.4_openapi3-ts@4.6.1",
+    "npm:@jsr/trakt__api@0.6.0": "0.6.0_openapi3-ts@4.6.1",
     "npm:@playwright/test@1.63.0": "1.63.0",
     "npm:@sentry/sveltekit@10.75.0": "10.75.0_@sveltejs+kit@2.70.3__@sveltejs+vite-plugin-svelte@7.3.0___svelte@5.57.1___vite@8.3.0____esbuild@0.28.2____jiti@2.7.0____sass-embedded@1.104.1___esbuild@0.28.2___sass-embedded@1.104.1__svelte@5.57.1__typescript@5.9.3__vite@8.3.0___esbuild@0.28.2___jiti@2.7.0___sass-embedded@1.104.1__esbuild@0.28.2__sass-embedded@1.104.1_vite@8.3.0__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.104.1_esbuild@0.28.2_sass-embedded@1.104.1",
     "npm:@svelte-put/shortcut@4.2.0": "4.2.0_svelte@5.57.1",
@@ -1923,14 +1923,14 @@
       "integrity": "sha512-aD9yjW6CMt37S3AMTc95LeuRXcKor69Zkr0aWOhYvinTOEAhEIuaJhP4pQqyQGaAC9HIrQcKh1PtRTK85kkVjA==",
       "tarball": "https://npm.jsr.io/~/11/@jsr/libn__fuzzy/0.4.0.tgz"
     },
-    "@jsr/trakt__api@0.5.4_openapi3-ts@4.6.1": {
-      "integrity": "sha512-FuMd4aVNjco5cGLFcAPndtBdyJ/0yrhXBEzQJM6OQ2KB7/4t7p+KwlYohTl7AkEpQ73SaMbQlRLQfI/aThJkng==",
+    "@jsr/trakt__api@0.6.0_openapi3-ts@4.6.1": {
+      "integrity": "sha512-k8y6mLWJ6iC4XzAX+6RESMDPCeQW247oXegJVlrZWBeddD/iZrCkQdaDuUrwKexgUAESIeXwV0Tcw8fI3+bPOQ==",
       "dependencies": [
         "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.5.4.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.6.0.tgz"
     },
     "@keyv/bigmap@1.3.1_keyv@5.6.0": {
       "integrity": "sha512-WbzE9sdmQtKy8vrNPa9BRnwZh5UF4s1KTmSK0KUVLo3eff5BlQNNWDnFOouNpKfPKDnms9xynJjsMYjMaT/aFQ==",
@@ -7660,7 +7660,7 @@
             "npm:@ethercorps/sveltekit-og@4.3.0",
             "npm:@inlang/paraglide-js@2.25.4",
             "npm:@jsr/libn__fuzzy@0.4.0",
-            "npm:@jsr/trakt__api@0.5.4",
+            "npm:@jsr/trakt__api@0.6.0",
             "npm:@playwright/test@1.63.0",
             "npm:@sentry/sveltekit@10.75.0",
             "npm:@svelte-put/shortcut@4.2.0",

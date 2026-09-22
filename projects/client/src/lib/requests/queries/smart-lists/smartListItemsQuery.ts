@@ -24,12 +24,7 @@ export type SmartListItemResponse = {
 };
 
 type SmartListItemsParams =
-  & {
-    slug: string;
-    type?: string;
-    sortBy?: string;
-    sortHow?: 'asc' | 'desc';
-  }
+  & { slug: string }
   & PaginationParams
   & ApiParams
   & FilterParams;
@@ -49,17 +44,13 @@ function mapToSmartListItem(item: SmartListItemResponse) {
 }
 
 const smartListItemsRequest = (
-  { fetch, slug, limit, page, filter, type, sortBy, sortHow }:
-    SmartListItemsParams,
+  { fetch, slug, limit, page, filter }: SmartListItemsParams,
 ) =>
   api({ fetch })
     .smart_lists
     .items({
       params: {
         list_id: slug,
-        type: type ?? 'all',
-        sort_by: sortBy ?? 'rank',
-        sort_how: sortHow ?? 'asc',
       },
       query: {
         extended: 'full,images,colors',
@@ -78,17 +69,11 @@ export const smartListItemsQuery = defineInfiniteQuery({
     params.slug,
     params.limit,
     params.page,
-    params.type,
-    params.sortBy,
-    params.sortHow,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: smartListItemsRequest,
   mapper: (response) => ({
-    // @trakt/api 0.4.27 mis-types items as double-nested (`movie.movie`); the
-    // live endpoint returns them flat, so re-cast to the real shape.
-    entries: (response.body as unknown as SmartListItemResponse[])
-      .map(mapToSmartListItem),
+    entries: response.body.map(mapToSmartListItem),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(SmartListItemSchema),

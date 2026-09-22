@@ -60,26 +60,11 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations/en`,
-    () => {
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations`,
+    ({ request }) => {
+      const language = new URL(request.url).searchParams.get('language') ?? '';
       return HttpResponse.json(
-        ShowSiloTranslationsResponseMock.get('en'),
-      );
-    },
-  ),
-  http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations/nl`,
-    () => {
-      return HttpResponse.json(
-        ShowSiloTranslationsResponseMock.get('nl'),
-      );
-    },
-  ),
-  http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations/ja`,
-    () => {
-      return HttpResponse.json(
-        ShowSiloTranslationsResponseMock.get('ja'),
+        ShowSiloTranslationsResponseMock.get(language),
       );
     },
   ),
@@ -178,15 +163,12 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/translations/en`,
-    () => {
-      return HttpResponse.json(EpisodeSiloTranslationsResponseMock.get('en'));
-    },
-  ),
-  http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/translations/nl`,
-    () => {
-      return HttpResponse.json(EpisodeSiloTranslationsResponseMock.get('nl'));
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/translations`,
+    ({ request }) => {
+      const language = new URL(request.url).searchParams.get('language') ?? '';
+      return HttpResponse.json(
+        EpisodeSiloTranslationsResponseMock.get(language),
+      );
     },
   ),
   http.get(

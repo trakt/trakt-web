@@ -40,6 +40,8 @@ const episodeIntlRequest = (
         id: slug,
         season: castNumberAsString(season),
         episode,
+      },
+      query: {
         language,
       },
     });

@@ -14,6 +14,7 @@ export const PlexSettingsMappedMock = {
   sync: {
     isConfigured: PlexSettingsResponseMock.sync.configured,
     hasError: PlexSettingsResponseMock.sync.error,
+    serverLimit: PlexSettingsResponseMock.sync.server_limit,
     selection: {
       serverIds: PlexSettingsResponseMock.sync.selection.server_ids,
       libraryIds: PlexSettingsResponseMock.sync.selection.library_ids.map(
