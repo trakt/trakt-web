@@ -8,7 +8,7 @@ function gif(id: string, width: number, height: number): GifEntry {
     slug: id,
     title: id,
     preview: { url: `https://static.klipy.com/${id}.webp`, width, height },
-    url: `https://static.klipy.com/${id}.gif`,
+    full: { url: `https://static.klipy.com/${id}.gif`, width, height },
   };
 }
 

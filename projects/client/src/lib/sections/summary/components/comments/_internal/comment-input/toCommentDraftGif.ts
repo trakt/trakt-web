@@ -3,11 +3,11 @@ import type { CommentDraftGif } from '../models/CommentDraftGif.ts';
 
 export function toCommentDraftGif(gif: GifEntry): CommentDraftGif {
   return {
-    url: gif.url,
+    url: gif.full.url,
     slug: gif.slug,
     previewUrl: gif.preview.url,
     stillUrl: gif.still?.url,
-    width: gif.preview.width,
-    height: gif.preview.height,
+    width: gif.full.width,
+    height: gif.full.height,
   };
 }

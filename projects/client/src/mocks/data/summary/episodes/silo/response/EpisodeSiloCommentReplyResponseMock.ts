@@ -7,8 +7,12 @@ export const EpisodeSiloCommentReplyResponseMock: CommentResponseWithGif[] = [
   {
     'id': 421,
     'comment': 'This is a reply to another comment.',
-    'gif':
-      'https://static.klipy.com/ii/8ce8357c78ea940b9c2015daf05ce1a5/ea/72/WGDcNWlt.gif',
+    'gif': {
+      'url':
+        'https://static.klipy.com/ii/8ce8357c78ea940b9c2015daf05ce1a5/ea/72/WGDcNWlt.gif',
+      'width': 498,
+      'height': 374,
+    },
     'spoiler': false,
     'review': false,
     'parent_id': assertDefined(EpisodeSiloCommentsResponseMock.at(0)).id,

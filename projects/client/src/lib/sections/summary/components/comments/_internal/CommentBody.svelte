@@ -43,6 +43,12 @@
   {@html marked.parse(comment.comment, { gfm: true, breaks: true })}
 {/snippet}
 
+{#snippet commentGif(variant: "full" | "preview")}
+  {#if comment.gif}
+    <CommentGif url={comment.gif.url} size={comment.gif.size} {variant} />
+  {/if}
+{/snippet}
+
 {#if type === "full"}
   <Spoiler {media} type={media.type}>
     <div
@@ -51,9 +57,7 @@
       use:spoilMeAnyway
     >
       {@render commentText()}
-      {#if comment.gif}
-        <CommentGif url={comment.gif} variant="full" />
-      {/if}
+      {@render commentGif("full")}
     </div>
   </Spoiler>
 {:else}
@@ -76,9 +80,7 @@
             {@render commentText()}
           </div>
         {/if}
-        {#if comment.gif}
-          <CommentGif url={comment.gif} variant="preview" />
-        {/if}
+        {@render commentGif("preview")}
       </div>
     </Spoiler>
   </button>

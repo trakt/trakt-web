@@ -8,7 +8,11 @@ import { z } from 'zod';
   contract's own schema silently drops the gif the api sends.
 */
 export const CommentResponseWithGifSchema = commentResponseSchema.extend({
-  gif: z.string().nullish(),
+  gif: z.object({
+    url: z.string(),
+    width: z.number(),
+    height: z.number(),
+  }).nullish(),
 });
 
 export type CommentResponseWithGif = z.infer<
