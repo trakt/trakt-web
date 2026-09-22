@@ -3,6 +3,7 @@
   import PlugIcon from "$lib/components/icons/PlugIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
+  import { isApiAppsSunset } from "./isApiAppsSunset.ts";
   import SettingsGroupCard from "./_internal/SettingsGroupCard.svelte";
   import SettingsGroupRow from "./_internal/SettingsGroupRow.svelte";
 </script>
@@ -23,16 +24,18 @@
       {/snippet}
     </SettingsGroupRow>
 
-    <SettingsGroupRow
-      title={m.heading_api_applications()}
-      description={m.description_api_applications()}
-      variant="link"
-      href={UrlBuilder.settings.appsApi()}
-    >
-      {#snippet icon()}
-        <CodeIcon />
-      {/snippet}
-    </SettingsGroupRow>
+    {#if !isApiAppsSunset()}
+      <SettingsGroupRow
+        title={m.heading_api_applications()}
+        description={m.description_api_applications()}
+        variant="link"
+        href={UrlBuilder.settings.appsApi()}
+      >
+        {#snippet icon()}
+          <CodeIcon />
+        {/snippet}
+      </SettingsGroupRow>
+    {/if}
   </SettingsGroupCard>
 </div>
 

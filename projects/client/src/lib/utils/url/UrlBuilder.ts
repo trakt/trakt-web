@@ -287,6 +287,10 @@ export const UrlBuilder = {
   docs: {
     api: () => 'https://docs.trakt.tv',
   },
+  developer: {
+    portal: () => 'https://developer.trakt.tv',
+    newApp: () => 'https://developer.trakt.tv/apps/new',
+  },
   github: {
     web: () => 'https://github.com/trakt/trakt-web',
     reportIssue: () => 'https://github.com/trakt/trakt-web/issues/new',
