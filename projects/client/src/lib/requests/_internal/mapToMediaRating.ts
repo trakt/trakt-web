@@ -48,6 +48,21 @@ export function mapToMediaRating(
     };
   };
 
+  // Trakt's own rating sits at the top level by default and moves into a
+  // `trakt` block under `extended=all`.
+  const mapTraktRating = () => {
+    const trakt = ratings.trakt ?? ratings;
+    if (trakt.rating == null || trakt.votes == null) {
+      return;
+    }
+
+    return {
+      rating: mapToTraktRating(trakt.rating),
+      votes: trakt.votes,
+      distribution: trakt.distribution ?? {},
+    };
+  };
+
   const mapRottenRating = () => {
     const { rotten_tomatoes: rotten } = ratings;
     if (!rotten?.rating) {
@@ -62,11 +77,7 @@ export function mapToMediaRating(
   };
 
   return {
-    trakt: {
-      rating: mapToTraktRating(ratings.trakt.rating),
-      votes: ratings.trakt.votes,
-      distribution: ratings.trakt.distribution,
-    },
+    trakt: mapTraktRating(),
     imdb: mapImdbRating(),
     tmdb: mapExternalRating(ratings.tmdb),
     rotten: mapRottenRating(),

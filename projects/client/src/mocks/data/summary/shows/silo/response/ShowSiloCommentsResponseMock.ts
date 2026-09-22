@@ -1,7 +1,7 @@
-import type { CommentResponseWithGif } from '$lib/requests/_internal/CommentResponseWithGif.ts';
+import type { CommentResponse } from '@trakt/api';
 import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
 
-export const ShowSiloCommentsResponseMock: CommentResponseWithGif[] = [
+export const ShowSiloCommentsResponseMock: CommentResponse[] = [
   {
     'id': 420,
     'comment':

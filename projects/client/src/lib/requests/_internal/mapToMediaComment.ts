@@ -1,8 +1,8 @@
+import type { CommentResponse } from '@trakt/api';
 import type { MediaComment } from '../models/MediaComment.ts';
-import type { CommentResponseWithGif } from './CommentResponseWithGif.ts';
 import { mapToUserProfile } from './mapToUserProfile.ts';
 
-function toCommentGif(commentResponse: CommentResponseWithGif) {
+function toCommentGif(commentResponse: CommentResponse) {
   const { gif } = commentResponse;
 
   if (!gif) {
@@ -19,7 +19,7 @@ function toCommentGif(commentResponse: CommentResponseWithGif) {
 }
 
 export function mapToMediaComment(
-  commentResponse: CommentResponseWithGif,
+  commentResponse: CommentResponse,
 ): MediaComment {
   return {
     id: commentResponse.id,

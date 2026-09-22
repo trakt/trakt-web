@@ -6,7 +6,6 @@
   import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import ServerIcon from "$lib/components/icons/ServerIcon.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { slide } from "svelte/transition";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
@@ -17,10 +16,7 @@
   import PlexSyncedServerRow from "./PlexSyncedServerRow.svelte";
   import type { PlexSyncedServersProps } from "./PlexSyncedServersProps.ts";
   import { usePlexSelectedLibraries } from "./usePlexSelectedLibraries.ts";
-
-  // FIXME: replace with sync.server_limit from plexSettingsQuery once
-  // @trakt/api ships it (merged in ef2722b, unreleased as of 0.5.4).
-  const FREE_SERVER_LIMIT = 1;
+  import { usePlexServerLimit } from "./usePlexServerLimit.ts";
 
   const {
     servers,
@@ -30,10 +26,8 @@
     onRetryServers,
   }: PlexSyncedServersProps = $props();
 
-  const { user } = useUser();
-  const isVip = $derived($user?.isVip ?? false);
-
   const selectedLibraries = usePlexSelectedLibraries();
+  const serverLimit = usePlexServerLimit();
 
   let pendingServerIds = $state<string[]>([]);
   let isUpsellVisible = $state(false);
@@ -70,8 +64,10 @@
     ),
   );
 
-  const isAtFreeLimit = $derived(
-    !isVip && syncedServers.length >= FREE_SERVER_LIMIT,
+  // Undefined until the settings query lands; adding is held back until then.
+  const isLimitKnown = $derived($serverLimit !== undefined);
+  const isAtServerLimit = $derived(
+    $serverLimit != null && syncedServers.length >= $serverLimit,
   );
 
   function addServer(serverId: string) {
@@ -100,7 +96,7 @@
 {/snippet}
 
 {#snippet addServerAction()}
-  {#if isAtFreeLimit}
+  {#if isAtServerLimit}
     <ActionButton
       size="small"
       style="ghost"
@@ -115,7 +111,7 @@
       mode="standalone"
       label={m.button_label_plex_add_server()}
       title={m.button_plex_add_server()}
-      disabled={candidateServers.length === 0}
+      disabled={!isLimitKnown || candidateServers.length === 0}
     >
       {#snippet icon()}<PlusIcon />{/snippet}
       {#snippet items()}

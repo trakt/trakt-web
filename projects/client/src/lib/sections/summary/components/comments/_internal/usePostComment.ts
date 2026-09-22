@@ -11,7 +11,6 @@ import { replyCommentRequest } from '$lib/requests/queries/comments/replyComment
 import { CommentError } from '$lib/sections/summary/components/comments/_internal/models/CommentError.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { isHttpError } from '@sveltejs/kit';
-import type { CommentPostParams } from '@trakt/api';
 import { BehaviorSubject } from 'rxjs';
 import type { CommentsProps } from '../CommentsProps.ts';
 import { mapToCommentError } from './mapToCommentError.ts';
@@ -79,13 +78,12 @@ function addCommentRequest(props: PostCommentProps) {
   const traktId = props.type === 'episode' || props.type === 'season'
     ? props.id
     : props.media.id;
-  // FIXME: remove cast after updating @trakt/api
-  const body = {
-    ...commonProps,
-    ...toPostCommentPayload(props.type, traktId),
-  } as CommentPostParams;
-
-  return postCommentRequest({ body });
+  return postCommentRequest({
+    body: {
+      ...commonProps,
+      ...toPostCommentPayload(props.type, traktId),
+    },
+  });
 }
 
 function toInvalidations(props: PostCommentProps) {

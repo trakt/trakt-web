@@ -20,6 +20,8 @@ const showIntlRequest = (
     .translations({
       params: {
         id: slug,
+      },
+      query: {
         language,
       },
     });

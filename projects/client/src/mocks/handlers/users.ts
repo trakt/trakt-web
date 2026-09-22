@@ -234,7 +234,7 @@ export const users = [
     return new HttpResponse(null, { status: 204 });
   }),
   http.get(
-    'http://localhost/smart-lists/:list_id/items/:type/:sort_by/:sort_how',
+    'http://localhost/smart-lists/:list_id/items',
     () => {
       return HttpResponse.json(SmartListItemsResponseMock);
     },

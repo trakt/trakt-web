@@ -63,6 +63,8 @@ const PlexSettingsSchema = z.object({
   sync: z.object({
     isConfigured: z.boolean(),
     hasError: z.boolean(),
+    // Max servers this user may sync; null when unlimited (VIP).
+    serverLimit: z.number().nullable(),
     selection: z.object({
       serverIds: z.string().array(),
       libraryIds: z.array(z.object({
@@ -100,6 +102,7 @@ function mapToPlexSettings(body: PlexSettingsResponse): PlexSettings {
     sync: {
       isConfigured: body.sync.configured,
       hasError: body.sync.error,
+      serverLimit: body.sync.server_limit,
       selection: {
         serverIds: body.sync.selection.server_ids,
         libraryIds: body.sync.selection.library_ids.map((
