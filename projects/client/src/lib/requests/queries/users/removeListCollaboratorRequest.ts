@@ -17,9 +17,6 @@ export async function removeListCollaboratorRequest(
     },
   });
 
-  if (!isValidResponse(response, 'removeListCollaboratorRequest')) {
-    return false;
-  }
-
+  isValidResponse(response, 'removeListCollaboratorRequest');
   return response.ok;
 }

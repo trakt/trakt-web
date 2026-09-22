@@ -1,3 +1,5 @@
+import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
+import * as m from '$lib/features/i18n/messages.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
@@ -32,6 +34,7 @@ export function useManageCollaborators(
   target$: Observable<ManageCollaboratorsTarget>,
 ) {
   const { invalidate } = useInvalidator();
+  const { notify } = useActionToast();
 
   // Eligibility/sorting rules for these three queries live in
   // buildCollaboratorCandidates - this just fetches the raw inputs.
@@ -93,7 +96,18 @@ export function useManageCollaborators(
 
     return withTarget(
       profile,
-      ({ listId }) => addListCollaboratorRequest({ listId, userSlug }),
+      async ({ listId }) => {
+        const result = await addListCollaboratorRequest({ listId, userSlug });
+
+        if (result === 'limit-reached') {
+          notify({
+            message: m.action_toast_collaborator_limit_reached(),
+            variant: 'error',
+          });
+        }
+
+        return result === 'added';
+      },
     );
   };
 
