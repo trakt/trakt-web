@@ -52,8 +52,17 @@
   // A stored gif is its own preview - the picker's lighter variant is only
   // known while the comment is being written.
   const initialGif = iffy((): CommentDraftGif | null => {
-    const url = rest.mode === "edit" ? rest.comment.gif : null;
-    return url ? { url, previewUrl: url } : null;
+    if (rest.mode !== "edit" || !rest.comment.gif) {
+      return null;
+    }
+
+    const { url, size } = rest.comment.gif;
+    return {
+      url,
+      previewUrl: url,
+      width: size?.width,
+      height: size?.height,
+    };
   });
 
   let isOpen = $state(true);
@@ -88,7 +97,7 @@
   async function handleSubmit() {
     const response = await postComment({
       comment: comment.trim(),
-      gif: gif?.url ?? null,
+      gif: gif ? { url: gif.url, width: gif.width, height: gif.height } : null,
       isSpoiler,
       ...commentProps,
     });

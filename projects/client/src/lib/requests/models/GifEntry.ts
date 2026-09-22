@@ -10,12 +10,9 @@ export const GifEntrySchema = z.object({
   id: z.string(),
   slug: z.string(),
   title: z.string(),
-  // Light animated variant, only ever rendered inside the picker grid.
   preview: GifSourceSchema,
-  // Goes into the comment verbatim, so it stays a plain gif every client reads.
-  url: z.string(),
+  full: GifSourceSchema,
   still: GifSourceSchema.nullish(),
-  // Inline base64 placeholder, shown while the preview downloads.
   blurPreview: z.string().nullish(),
 });
 

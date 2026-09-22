@@ -12,7 +12,11 @@ export const GifTrendingMappedMock: GifEntry[] = [
       width: 220,
       height: 220,
     },
-    url: `https://static.klipy.com/ii/${HASH}/md.gif`,
+    full: {
+      url: `https://static.klipy.com/ii/${HASH}/md.gif`,
+      width: 480,
+      height: 480,
+    },
     still: {
       url: `https://static.klipy.com/ii/${HASH}/sm.jpg`,
       width: 220,

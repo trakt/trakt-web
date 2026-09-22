@@ -51,7 +51,7 @@
   const postCommentHandler = async () => {
     const response = await postComment({
       comment: textAreaElement.value.trim(),
-      gif: gif?.url ?? null,
+      gif: gif ? { url: gif.url, width: gif.width, height: gif.height } : null,
       isSpoiler,
       ...props,
     });

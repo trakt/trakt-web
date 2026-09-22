@@ -4,13 +4,19 @@
 
   type CommentGifProps = {
     url: string;
+    size?: { width: number; height: number } | null;
     variant: "full" | "preview";
   };
 
-  const { url, variant }: CommentGifProps = $props();
+  const { url, size, variant }: CommentGifProps = $props();
 </script>
 
-<div class="trakt-comment-gif" data-variant={variant}>
+<div
+  class="trakt-comment-gif"
+  data-variant={variant}
+  style:--gif-width={size?.width}
+  style:--gif-height={size?.height}
+>
   <img
     src={url}
     alt={m.image_alt_comment_gif()}
@@ -34,16 +40,25 @@
 
     img {
       display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     &[data-variant="full"] {
       align-self: flex-start;
-      max-width: 100%;
+      max-width: min(100%, var(--ni-320));
+
+      aspect-ratio: var(--gif-width) / var(--gif-height);
+
+      width: min(
+        100%,
+        calc(var(--gif-width) * 1px),
+        var(--ni-320),
+        calc(var(--ni-320) * var(--gif-width) / var(--gif-height))
+      );
 
       img {
-        width: auto;
-        height: auto;
-        max-width: min(100%, var(--ni-320));
         max-height: var(--ni-320);
       }
     }
@@ -55,12 +70,6 @@
 
       --klipy-watermark-inset: var(--ni-4);
       --klipy-watermark-width: var(--ni-32);
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
     }
   }
 
