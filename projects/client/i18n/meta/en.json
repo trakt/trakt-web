@@ -11296,6 +11296,10 @@
       "default": "That didn't work. Please try again.",
       "description": "Confirmation toast shown when an action offered by a previous toast, such as Undo, fails."
     },
+    "action_toast_collaborator_limit_reached": {
+      "default": "This list has reached its collaborator limit.",
+      "description": "Error toast shown when adding a collaborator fails because the list already has the maximum number allowed."
+    },
     "text_login_failed_title": {
       "default": "Couldn't start sign in",
       "description": "Snackbar title when the sign-in redirect fails before it leaves the app."

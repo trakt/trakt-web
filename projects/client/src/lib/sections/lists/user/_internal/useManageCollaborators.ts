@@ -1,3 +1,7 @@
+import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
+import * as m from '$lib/features/i18n/messages.ts';
+import { defineMutation } from '$lib/features/query/defineMutation.ts';
+import { useMutation } from '$lib/features/query/useMutation.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
@@ -6,11 +10,10 @@ import { addListCollaboratorRequest } from '$lib/requests/queries/users/addListC
 import { followersQuery } from '$lib/requests/queries/users/followersQuery.ts';
 import { followingQuery } from '$lib/requests/queries/users/followingQuery.ts';
 import { removeListCollaboratorRequest } from '$lib/requests/queries/users/removeListCollaboratorRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { toUserSlug } from '$lib/utils/profile/toUserSlug.ts';
 import {
-  BehaviorSubject,
   combineLatest,
+  distinctUntilChanged,
   firstValueFrom,
   map,
   type Observable,
@@ -31,7 +34,7 @@ type ManageCollaboratorsTarget = {
 export function useManageCollaborators(
   target$: Observable<ManageCollaboratorsTarget>,
 ) {
-  const { invalidate } = useInvalidator();
+  const { notify } = useActionToast();
 
   const followersQuery$ = useQuery(
     target$.pipe(map(({ ownerSlug }) => followersQuery({ slug: ownerSlug }))),
@@ -55,8 +58,6 @@ export function useManageCollaborators(
     collaboratorsQuery$,
   ]).pipe(map((queries) => queries.some((query) => query.isPending)));
 
-  const pendingUserId = new BehaviorSubject<number | null>(null);
-
   const candidates = combineLatest([followers, following, collaborators]).pipe(
     map(([followerProfiles, followingProfiles, collaboratorProfiles]) =>
       buildCollaboratorCandidates({
@@ -67,43 +68,58 @@ export function useManageCollaborators(
     ),
   );
 
-  const withTarget = async (
-    profile: UserProfile,
-    action: (target: ManageCollaboratorsTarget) => Promise<boolean>,
-  ) => {
-    const target = await firstValueFrom(target$);
+  const collaboratorInvalidations = [InvalidateAction.List.Collaborators];
 
-    pendingUserId.next(profile.id);
-    try {
-      await action(target);
-      await invalidate(InvalidateAction.List.Collaborators);
-    } finally {
-      pendingUserId.next(null);
+  const add = useMutation(defineMutation({
+    key: 'list:add-collaborator',
+    request: async (profile: UserProfile) => {
+      const { listId } = await firstValueFrom(target$);
+      return addListCollaboratorRequest({
+        listId,
+        userSlug: toUserSlug(profile),
+      });
+    },
+    invalidations: collaboratorInvalidations,
+  }));
+
+  const remove = useMutation(defineMutation({
+    key: 'list:remove-collaborator',
+    request: async (profile: UserProfile) => {
+      const { listId } = await firstValueFrom(target$);
+      return removeListCollaboratorRequest({
+        listId,
+        userSlug: toUserSlug(profile),
+      });
+    },
+    invalidations: collaboratorInvalidations,
+  }));
+
+  const pendingUserId = combineLatest([add.result, remove.result]).pipe(
+    map((results) =>
+      results.find((result) => result.isPending)?.variables?.id ?? null
+    ),
+    distinctUntilChanged(),
+  );
+
+  const addCollaborator = async (profile: UserProfile) => {
+    const result = await add.mutate(profile);
+
+    if (result === 'limit-reached') {
+      notify({
+        message: m.action_toast_collaborator_limit_reached(),
+        variant: 'error',
+      });
     }
   };
 
-  const addCollaborator = (profile: UserProfile) => {
-    const userSlug = toUserSlug(profile);
-
-    return withTarget(
-      profile,
-      ({ listId }) => addListCollaboratorRequest({ listId, userSlug }),
-    );
-  };
-
-  const removeCollaborator = (profile: UserProfile) => {
-    const userSlug = toUserSlug(profile);
-
-    return withTarget(
-      profile,
-      ({ listId }) => removeListCollaboratorRequest({ listId, userSlug }),
-    );
+  const removeCollaborator = async (profile: UserProfile) => {
+    await remove.mutate(profile);
   };
 
   return {
     candidates,
     isLoading,
-    pendingUserId: pendingUserId.asObservable(),
+    pendingUserId,
     addCollaborator,
     removeCollaborator,
   };

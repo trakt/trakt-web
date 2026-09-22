@@ -6,9 +6,11 @@ type AddListCollaboratorParams = {
   userSlug: string;
 } & ApiParams;
 
+export type AddListCollaboratorResult = 'added' | 'limit-reached' | 'failed';
+
 export async function addListCollaboratorRequest(
   { fetch, listId, userSlug }: AddListCollaboratorParams,
-): Promise<boolean> {
+): Promise<AddListCollaboratorResult> {
   const response = await rawApiFetch({
     fetch,
     path: `/lists/${listId}/collaborators/${userSlug}`,
@@ -17,9 +19,10 @@ export async function addListCollaboratorRequest(
     },
   });
 
-  if (!isValidResponse(response, 'addListCollaboratorRequest')) {
-    return false;
+  if (response.status === 420) {
+    return 'limit-reached';
   }
 
-  return response.ok;
+  isValidResponse(response, 'addListCollaboratorRequest');
+  return response.ok ? 'added' : 'failed';
 }
