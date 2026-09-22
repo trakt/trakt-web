@@ -88,6 +88,26 @@ describe('appendGlobalParameters', () => {
     expect(new URL(anchor.href).search).toBe('');
   });
 
+  it('should preserve the plans fragment when appending global parameters', () => {
+    navigate('/vip');
+    seedLiveParams({ [FilterKey.Genres]: 'action' });
+    const anchor = makeAnchor('#vip-plans');
+    const action = appendGlobalParameters(anchor, '#vip-plans');
+
+    const target = new URL(anchor.href);
+    expect(target.pathname).toBe('/vip');
+    expect(target.hash).toBe('#vip-plans');
+    expect(target.searchParams.get(FilterKey.Genres)).toBe('action');
+
+    action.update('/vip/renew?page=2#vip-plans');
+    const updatedTarget = new URL(anchor.href);
+    expect(updatedTarget.pathname).toBe('/vip/renew');
+    expect(updatedTarget.hash).toBe('#vip-plans');
+    expect(updatedTarget.searchParams.get('page')).toBe('2');
+    expect(updatedTarget.searchParams.get(FilterKey.Genres)).toBe('action');
+    action.destroy();
+  });
+
   it('preserves non-whitelisted params from the original href', () => {
     const anchor = makeAnchor('/profile/userA?page=2');
     appendGlobalParameters(anchor, '/profile/userA?page=2');
