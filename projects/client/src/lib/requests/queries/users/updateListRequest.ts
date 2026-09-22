@@ -15,10 +15,21 @@ type UpdateListRequest = {
   name: string;
   description?: string;
   privacy: ListPrivacy;
+  sortBy?: string;
+  sortHow?: 'asc' | 'desc';
 } & ApiParams;
 
 export function updateListRequest(
-  { userId, listId, name, fetch, description, privacy }: UpdateListRequest,
+  {
+    userId,
+    listId,
+    name,
+    fetch,
+    description,
+    privacy,
+    sortBy,
+    sortHow,
+  }: UpdateListRequest,
 ): Promise<string | Nil> {
   return api({ fetch })
     .users
@@ -33,6 +44,8 @@ export function updateListRequest(
         name,
         description,
         privacy,
+        sort_by: sortBy,
+        sort_how: sortHow,
       },
     })
     .then(({ status, body }) => {

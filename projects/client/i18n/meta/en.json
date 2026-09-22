@@ -4755,6 +4755,10 @@
       "default": "View all lists",
       "description": "Aria-label for the button that allows users to view all lists."
     },
+    "text_default_sort_order": {
+      "default": "Default sort order",
+      "description": "Label shown above the sort field and direction dropdowns in the edit list drawer, used to set a personal list's default sort order."
+    },
     "button_text_sort_default": {
       "default": "Default",
       "description": "Text for the button that allows users to sort items by the default sorting method."

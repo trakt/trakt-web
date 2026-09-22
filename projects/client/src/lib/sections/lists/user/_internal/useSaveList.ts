@@ -11,6 +11,8 @@ type SaveListProps = {
   name: string;
   description?: string;
   privacy: ListPrivacy;
+  sortBy?: string;
+  sortHow?: 'asc' | 'desc';
 };
 
 type CreateListProps = {
@@ -44,24 +46,30 @@ async function saveRequest(
       return updateListRequest({
         ...payload,
         listId: props.listId,
+        sortBy: props.sortBy,
+        sortHow: props.sortHow,
       });
   }
 }
 
 export function useSaveList(props: UseSaveListProps) {
   const isSaving = new BehaviorSubject(false);
-  const { invalidate } = useInvalidator();
+  const { invalidateAll } = useInvalidator();
 
-  const invalidateAction = props.type === 'create'
-    ? InvalidateAction.List.Created
-    : InvalidateAction.List.Edited;
+  const invalidateActions = props.type === 'create'
+    ? [InvalidateAction.List.Created]
+    : [
+      InvalidateAction.List.Edited,
+      InvalidateAction.Listed('movie'),
+      InvalidateAction.Listed('show'),
+    ];
   const analyticsEvent = props.type === 'create'
     ? AnalyticsEvent.ListCreate
     : AnalyticsEvent.ListEdit;
   const { track } = useTrack(analyticsEvent);
 
   const saveList = async (
-    { name, description, privacy }: SaveListProps,
+    { name, description, privacy, sortBy, sortHow }: SaveListProps,
   ) => {
     const newName = name.trim();
     if (!newName) {
@@ -76,9 +84,11 @@ export function useSaveList(props: UseSaveListProps) {
       name: newName,
       description,
       privacy,
+      sortBy,
+      sortHow,
     });
 
-    await invalidate(invalidateAction);
+    await invalidateAll(invalidateActions);
 
     isSaving.next(false);
 
