@@ -1,22 +1,25 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
-  import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { toTranslatedLibrary } from "$lib/utils/formatting/string/toTranslatedLibrary";
+  import { useLibrarySelection } from "./useLibrarySelection.ts";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import LibraryMediaItem from "./_internal/LibraryMediaItem.svelte";
+  import LibraryEmptyState from "./_internal/LibraryEmptyState.svelte";
   import LibraryToggler from "./_internal/LibraryToggler.svelte";
   import type { Library } from "./models/Library";
   import { useLibraryList } from "./useLibraryList";
 
   const { mode }: { mode: DiscoverMode } = $props();
 
-  const { current } = useToggler("library");
-  const activeLibrary: Library = $derived($current.value);
+  const librarySelection = useLibrarySelection();
+  const { selection } = librarySelection;
+  const activeLibrary: Library = $derived($selection.value);
 
   const { list, isLoading } = $derived(
     useLibraryList({
@@ -26,12 +29,10 @@
       type: mode,
     }),
   );
-
-  // FIXME: when we have native plex sync, always show skeleton + cta/upsell to sync plex
 </script>
 
 {#snippet metaInfo()}
-  <ListMetaInfo text={$current.text()} />
+  <ListMetaInfo text={toTranslatedLibrary(activeLibrary)} />
 {/snippet}
 
 <div class="trakt-library-list">
@@ -55,14 +56,14 @@
     {/snippet}
 
     {#snippet actions()}
-      <LibraryToggler />
+      <LibraryToggler library={librarySelection} />
     {/snippet}
 
     {#snippet empty()}
       {#if $isLoading}
         <SkeletonList id="library-list" variant="portrait" />
       {:else}
-        {m.list_placeholder_personal_list_empty()}
+        <LibraryEmptyState library={activeLibrary} />
       {/if}
     {/snippet}
   </SectionList>

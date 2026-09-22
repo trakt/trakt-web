@@ -2,6 +2,9 @@ export type SyncEngineCallbacks = {
   onProgress: (processed: number) => void;
   onError: (message: string) => void;
   onStart?: () => void;
-  onComplete?: (success: boolean, failedCount?: number) => void;
+  onComplete?: (
+    success: boolean,
+    failedCount?: number,
+  ) => void | Promise<void>;
   signal?: AbortSignal;
 };

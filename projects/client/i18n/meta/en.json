@@ -11,6 +11,26 @@
     }
   },
   "messages": {
+    "text_clear_source_custom_library": {
+      "default": "Custom Library",
+      "description": "Clear data source containing only non-Plex library items."
+    },
+    "button_export_clear_custom_library": {
+      "default": "Export and clear",
+      "description": "Button that exports the Custom Library to a file, then removes its items."
+    },
+    "warning_prompt_clear_custom_library": {
+      "default": "Your Custom Library will be exported to a file, then permanently cleared. Your Plex Library will not be changed. This cannot be undone.",
+      "description": "Confirmation before exporting and clearing the non-Plex Custom Library. Export is required before deletion."
+    },
+    "text_clear_data_failed": {
+      "default": "Some items could not be cleared. Please try again.",
+      "description": "Error after clearing data fails or completes only partially."
+    },
+    "text_empty_plex_library": {
+      "default": "Connect your Plex account to sync your Plex Library with Trakt.",
+      "description": "Empty library prompt with a separate link to Plex settings."
+    },
     "spotlight_dialog_label": {
       "default": "Quick navigation",
       "description": "Accessible label for the spotlight quick-navigation dialog."

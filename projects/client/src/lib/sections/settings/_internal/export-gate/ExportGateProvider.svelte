@@ -52,7 +52,7 @@
     });
   };
 
-  const run: ExportGateContext["run"] = async ({ shouldExport, user }) => {
+  const run: ExportGateContext["run"] = async ({ shouldExport, user, exporter }) => {
     if (!shouldExport || !user) {
       return true;
     }
@@ -71,6 +71,7 @@
 
     const result = await runExportGate({
       user,
+      exporter,
       signal,
       onStatus: (status) => {
         state.status = status;

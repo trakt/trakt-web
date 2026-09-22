@@ -12,6 +12,8 @@
   import { useClearInProgress } from "$lib/stores/useClearInProgress.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator";
   import { slide } from "svelte/transition";
+  import { useCustomLibrary } from "../sync/useCustomLibrary.ts";
+  import { runCustomLibraryExport } from "../export/runCustomLibraryExport.ts";
   import type { SyncState } from "../sync/models/SyncState";
   import { clearData } from "./clear/clearData";
   import { CLEAR_DATA_SOURCES } from "./clear/constants";
@@ -24,14 +26,15 @@
   import SettingsSection from "./SettingsSection.svelte";
   import SettingsRow from "./SettingsRow.svelte";
 
-  const { user, watchlist, ratings, history, collection } = useUser();
+  const { user, watchlist, ratings, history } = useUser();
+  const collection = useCustomLibrary();
   const { invalidateAll } = useInvalidator();
   const { clearInProgress } = useClearInProgress();
   const { confirm } = useConfirm();
   const { record } = useAnalytics();
   const exportGate = useExportGate();
 
-  type ClearStatus = "idle" | "clearing" | "done";
+  type ClearStatus = "idle" | "clearing" | "done" | "failed";
 
   let activeSourceType = $state<ClearSourceType>("watchlist");
 
@@ -57,9 +60,10 @@
   const isClearing = $derived(syncState.status === "clearing");
   let isRunning = $state(false);
 
-  const { totalCount, invalidations } = $derived(
+  const { totalCount } = $derived(
     getClearProperties(activeSource),
   );
+  const isCustomLibrary = $derived(activeSource.type === "library");
 
   function isClearDataInput(source: ClearSource): source is ClearDataInput {
     return Boolean(source.input);
@@ -67,15 +71,29 @@
 
   let abortController: AbortController | null = null;
   async function startClear(shouldExport: boolean) {
-    const source = activeSource;
-    if (!isClearDataInput(source)) return;
+    let source = activeSource;
+    if (!isClearDataInput(source) || !$user || isRunning) return;
+
+    const isLibrary = source.type === "library";
 
     isRunning = true;
     clearInProgress.next(true);
 
-    const canProceed = await exportGate.run({ shouldExport, user: $user });
+    const canProceed = await exportGate.run({
+      shouldExport: isLibrary || shouldExport,
+      user: $user,
+      exporter: isLibrary
+        ? (options) =>
+            runCustomLibraryExport({
+              ...options,
+              onCollection: (input) => {
+                source = { type: "library", input };
+              },
+            })
+        : undefined,
+    });
 
-    if (!canProceed) {
+    if (!canProceed || !isClearDataInput(source)) {
       isRunning = false;
       clearInProgress.next(false);
       return;
@@ -83,15 +101,17 @@
 
     record(AnalyticsEvent.ClearInitiated, { source: source.type });
 
-    abortController = new AbortController();
+    const controller = new AbortController();
+    abortController = controller;
+    const { invalidations, totalCount: count } = getClearProperties(source);
     syncState.status = "clearing";
     syncState.processedCount = 0;
-    syncState.totalCount = totalCount;
+    syncState.totalCount = count;
     const startTime = Date.now();
     let errorCount = 0;
 
     await clearData(source, {
-      signal: abortController.signal,
+      signal: controller.signal,
       onProgress: (n) => {
         syncState.processedCount = n;
       },
@@ -100,9 +120,14 @@
         errorCount++;
       },
       onComplete: async (success) => {
+        await invalidateAll(invalidations, {
+          refetchType: isLibrary ? "all" : "active",
+        });
+        if (controller.signal.aborted) return;
         if (!success) {
           clearInProgress.next(false);
           isRunning = false;
+          syncState.status = "failed";
           record(AnalyticsEvent.ClearFailed, {
             source: source.type,
             error: "aborted or fully failed",
@@ -121,7 +146,6 @@
           duration,
         });
 
-        await invalidateAll(invalidations);
         clearInProgress.next(false);
         isRunning = false;
         syncState.status = "done";
@@ -141,6 +165,7 @@
 
   const applySourceChange = (type: ClearSourceType) => {
     activeSourceType = type;
+    syncState.status = "idle";
   };
 
   const onSourceChange = (type: ClearSourceType) => {
@@ -174,7 +199,7 @@
 </script>
 
 <NavigationGuard
-  isActive={isClearing}
+  isActive={isRunning}
   confirmationParams={{ type: ConfirmationType.CancelClear }}
   onreset={stopClear}
 >
@@ -204,12 +229,15 @@
               onclick={confirm({
                 type: ConfirmationType.ClearData,
                 sourceText: currentSourceText,
+                isCustomLibrary,
                 onConfirm: startClear,
               })}
               disabled={isLoading || $clearInProgress || totalCount === 0}
               icon={isLoading || isRunning ? loadingIcon : undefined}
             >
-              {m.button_text_clear_now()}
+              {isCustomLibrary
+                ? m.button_export_clear_custom_library()
+                : m.button_text_clear_now()}
             </Button>
 
             {#if syncState.status === "done"}
@@ -219,6 +247,8 @@
               >
                 {m.clear_status_source_cleared({ source: currentSourceText })}
               </p>
+            {:else if syncState.status === "failed"}
+              <p class="secondary" role="alert">{m.text_clear_data_failed()}</p>
             {/if}
           </div>
         </div>

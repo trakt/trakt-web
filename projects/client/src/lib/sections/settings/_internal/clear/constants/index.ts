@@ -21,6 +21,6 @@ export const CLEAR_DATA_SOURCES: readonly ClearSource[] = [
   },
   {
     type: 'library',
-    label: m.text_clear_source_library,
+    label: m.text_clear_source_custom_library,
   },
 ];

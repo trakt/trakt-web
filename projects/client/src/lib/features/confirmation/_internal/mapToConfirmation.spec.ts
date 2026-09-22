@@ -3,6 +3,26 @@ import { ConfirmationType } from '../models/ConfirmationType.ts';
 import { mapToConfirmation } from './mapToConfirmation.ts';
 
 describe('mapToConfirmation', () => {
+  it('should require export for custom library clearing without offering a skip switch', () => {
+    const result = mapToConfirmation({
+      type: ConfirmationType.ClearData,
+      sourceText: 'Custom Library',
+      isCustomLibrary: true,
+    });
+    expect(result.operation).toBe('destructive');
+    expect(result.preflight).toBeUndefined();
+    expect(result.buttonText).toBe('Export and clear');
+    expect(result.message).toContain('Your Plex Library will not be changed.');
+  });
+
+  it('should retain the optional export switch for other data sources', () => {
+    const result = mapToConfirmation({
+      type: ConfirmationType.ClearData,
+      sourceText: 'Watchlist',
+    });
+    expect(result.preflight?.isEnabledByDefault).toBe(true);
+  });
+
   it('should build a destructive confirmation for BlockUser with the username interpolated', () => {
     const result = mapToConfirmation({
       type: ConfirmationType.BlockUser,
