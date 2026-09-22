@@ -5,7 +5,9 @@ import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoadin
 import type { LibraryItem } from '$lib/requests/models/LibraryItem.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { libraryQuery } from '$lib/requests/queries/sync/libraryQuery.ts';
+import { useCollectedRefresh } from '$lib/stores/useCollectedRefresh.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { firstValueFrom, startWith, switchMap } from 'rxjs';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 import type { Library } from './models/Library.ts';
 
@@ -42,21 +44,37 @@ const libraryItemTargets = makeTargets<LibraryItem>(
 );
 
 export function useLibraryList(props: UseLibraryListProps) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(libraryQuery({
-      page: props.page ?? 1,
-      limit: props.limit ?? DEFAULT_PAGE_SIZE,
-      availableOn: props.library,
-      type: props.type,
-    }));
+  const refreshed = useCollectedRefresh({ refetchType: 'none' });
+
+  const { list: baseList, isLoading: baseLoading, hasNextPage, fetchNextPage } =
+    usePaginatedListQuery({
+      ...libraryQuery({
+        page: props.page ?? 1,
+        limit: props.limit ?? DEFAULT_PAGE_SIZE,
+        availableOn: props.library,
+        type: props.type,
+      }),
+      refetchOnMount: 'always',
+      persister: undefined,
+    });
 
   const overlay = createBulkIntlOverlay<LibraryItem>({
     getTargets: libraryItemTargets,
   });
 
   return {
-    list: baseList.pipe(overlay.operator),
-    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
-    ...rest,
+    list: refreshed.pipe(switchMap(() => baseList), overlay.operator),
+    isLoading: refreshed.pipe(
+      switchMap(() => withOverlayLoading(baseLoading, overlay.intlLoading$)),
+      startWith(true),
+    ),
+    hasNextPage: refreshed.pipe(
+      switchMap(() => hasNextPage),
+      startWith(false),
+    ),
+    fetchNextPage: async () => {
+      await firstValueFrom(refreshed);
+      await fetchNextPage();
+    },
   };
 }

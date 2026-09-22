@@ -9,14 +9,20 @@
   import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
   import { toTranslatedLibrary } from "$lib/utils/formatting/string/toTranslatedLibrary";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { useLibrarySelection } from "$lib/sections/lists/library/useLibrarySelection.ts";
 
-  const library: Library = $derived(
-    page.url.searchParams.get("library") === "other" ? "other" : "plex",
+  const librarySelection = useLibrarySelection(
+    fromRune(() =>
+      page.url.searchParams.get("library") === "other" ? "other" : "plex"
+    ),
   );
+  const { selection } = librarySelection;
+  const library: Library = $derived($selection.value);
 </script>
 
 {#snippet actions()}
-  <LibraryToggler value={library} withLinks />
+  <LibraryToggler library={librarySelection} withLinks />
 {/snippet}
 
 <TraktPage

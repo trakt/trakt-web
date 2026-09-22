@@ -1,33 +1,32 @@
 <script lang="ts">
   import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import type { Library } from "../models/Library";
-
-  const { current, options, set } = useToggler("library");
+  import type { useLibrarySelection } from "../useLibrarySelection.ts";
 
   const {
-    value,
+    library,
     withLinks = false,
   }: {
-    value?: Library;
+    library: ReturnType<typeof useLibrarySelection>;
     withLinks?: boolean;
   } = $props();
 
-  const activeValue: Library = $derived(value ?? $current.value);
+  const selection = $derived(library.selection);
 
   const togglerOptions = $derived(
     withLinks
-      ? options.map((option) => ({
+      ? $selection.options.map((option) => ({
           ...option,
           href: UrlBuilder.library.me(option.value),
         }))
-      : options,
+      : $selection.options,
   );
 </script>
 
-<Toggler
-  value={activeValue}
-  onChange={set}
-  options={togglerOptions}
-/>
+{#if togglerOptions.length > 1}
+  <Toggler
+    value={$selection.value}
+    onChange={library.set}
+    options={togglerOptions}
+  />
+{/if}

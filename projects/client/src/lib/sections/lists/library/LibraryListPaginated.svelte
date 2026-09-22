@@ -1,8 +1,8 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/filters/useDiscover";
-  import * as m from "$lib/features/i18n/messages.ts";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import LibraryMediaItem from "./_internal/LibraryMediaItem.svelte";
+  import LibraryEmptyState from "./_internal/LibraryEmptyState.svelte";
   import type { Library } from "./models/Library";
   import { useLibraryList } from "./useLibraryList";
 
@@ -22,6 +22,6 @@
   {/snippet}
 
   {#snippet empty()}
-    {m.list_placeholder_personal_list_empty()}
+    <LibraryEmptyState {library} />
   {/snippet}
 </DrilledMediaList>

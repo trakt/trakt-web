@@ -97,6 +97,7 @@ interface ConfirmationParamsMap {
   [ConfirmationType.ClearData]: {
     type: ConfirmationType.ClearData;
     sourceText: string;
+    isCustomLibrary?: boolean;
   };
   [ConfirmationType.CleanUpHistory]: {
     type: ConfirmationType.CleanUpHistory;

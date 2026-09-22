@@ -2,8 +2,13 @@ import type { UserCollection } from '$lib/features/auth/stores/useCurrentUserCol
 import { rawApiFetch } from '$lib/requests/api.ts';
 import { SYNC_CHUNK_SIZE } from '$lib/sections/settings/sync/constants/index.ts';
 import { chunk } from '$lib/utils/array/chunk.ts';
+import { z } from 'zod';
 import { createSyncRunner } from './createSyncRunner.ts';
 import type { SyncEngineCallbacks } from './models/SyncEngineCallbacks.ts';
+
+const collectionRemovalResponseSchema = z.object({
+  deleted: z.object({ movies: z.number(), episodes: z.number() }),
+});
 
 type CollectionId = { ids: { trakt: number } };
 
@@ -19,12 +24,23 @@ function removeFromCollection(
       body: JSON.stringify(body),
       signal,
     },
-  }).then((response) => {
+  }).then(async (response) => {
     if (!response.ok) {
       throw response;
     }
 
-    return response;
+    const { deleted } = collectionRemovalResponseSchema.parse(
+      await response.json(),
+    );
+    const expected = 'movies' in body
+      ? body.movies.length
+      : body.episodes.length;
+    const removed = 'movies' in body ? deleted.movies : deleted.episodes;
+    if (removed !== expected) {
+      throw new Error('Not all custom library items were removed.');
+    }
+
+    return deleted;
   });
 }
 
@@ -42,7 +58,11 @@ export async function clearLibrary(
       ids: { trakt: id },
     }));
 
-    const { run } = createSyncRunner({ onProgress, onError, signal });
+    const { run, getErrorCount } = createSyncRunner({
+      onProgress,
+      onError,
+      signal,
+    });
 
     if (movies.length > 0) {
       await run(
@@ -60,9 +80,12 @@ export async function clearLibrary(
       );
     }
 
-    onComplete?.(!signal?.aborted);
+    await onComplete?.(
+      !signal?.aborted && getErrorCount() === 0,
+      getErrorCount(),
+    );
   } catch (err) {
-    onComplete?.(false);
+    await onComplete?.(false);
     throw err;
   }
 }

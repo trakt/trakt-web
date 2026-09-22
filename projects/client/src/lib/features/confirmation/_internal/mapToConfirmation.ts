@@ -190,10 +190,14 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   }),
   [ConfirmationType.ClearData]: (props) => ({
     title: m.confirmation_title_clear_data(),
-    buttonText: m.button_text_clear_now(),
-    message: m.warning_prompt_clear_data({ source: props.sourceText }),
+    buttonText: props.isCustomLibrary
+      ? m.button_export_clear_custom_library()
+      : m.button_text_clear_now(),
+    message: props.isCustomLibrary
+      ? m.warning_prompt_clear_custom_library()
+      : m.warning_prompt_clear_data({ source: props.sourceText }),
     operation: 'destructive',
-    preflight: toExportFirstPreflight(),
+    preflight: props.isCustomLibrary ? undefined : toExportFirstPreflight(),
   }),
   [ConfirmationType.CleanUpHistory]: (props) => ({
     title: m.confirmation_title_clean_up_history(),
