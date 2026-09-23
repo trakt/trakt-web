@@ -1,7 +1,6 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
-  import KlipyWatermark from "$lib/features/gif-picker/KlipyWatermark.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import type { SelectedGifProps } from "./SelectedGifProps.ts";
@@ -23,8 +22,6 @@
     height={gif.height}
     decoding="async"
   />
-
-  <KlipyWatermark />
 
   <div class="selected-gif-remove">
     <ActionButton
