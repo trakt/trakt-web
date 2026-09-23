@@ -29,10 +29,9 @@
       label={m.button_label_remove_gif()}
       type="button"
       style="ghost"
-      color="red"
       size="small"
-      variant="secondary"
       {disabled}
+      --color-foreground="var(--shade-50)"
     >
       <CloseIcon />
     </ActionButton>
@@ -48,15 +47,17 @@
     max-width: 100%;
 
     border-radius: var(--border-radius-s);
+    border: var(--border-thickness-xxs) solid var(--color-border);
     overflow: hidden;
 
     img {
       display: block;
 
       width: auto;
-      height: auto;
-      max-width: var(--ni-160);
-      max-height: var(--ni-160);
+      height: var(--selected-gif-height, auto);
+      max-width: var(--selected-gif-max-width, var(--ni-160));
+      max-height: var(--selected-gif-max-height, var(--ni-160));
+      object-fit: cover;
 
       background-color: var(--color-input-background);
     }
@@ -67,7 +68,8 @@
       inset-inline-end: var(--ni-4);
 
       border-radius: 50%;
-      background-color: var(--color-background-select);
+      background-color: color-mix(in srgb, var(--shade-900) 60%, transparent);
+      backdrop-filter: blur(var(--ni-4));
     }
   }
 </style>
