@@ -13,9 +13,11 @@
   type GifPickerDrawerHostProps = {
     onClose: () => void;
     onSelect: (gif: GifEntry) => void;
+    suggestedQuery?: string;
   };
 
-  const { onClose, onSelect }: GifPickerDrawerHostProps = $props();
+  const { onClose, onSelect, suggestedQuery }: GifPickerDrawerHostProps =
+    $props();
 
   const customerId = klipyCustomerId();
 
@@ -28,7 +30,8 @@
     debouncedTerm.set(searchTerm.trim());
   });
 
-  const query = $derived($debouncedTerm ?? "");
+  const term = $derived($debouncedTerm ?? "");
+  const query = $derived(term || suggestedQuery || "");
 
   // Klipy hears about the gif only once the comment carrying it is posted.
   const select = (gif: GifEntry) => {
@@ -52,7 +55,7 @@
       --drawer-search-input-margin-block="var(--ni-4) 0"
     />
 
-    {#if !query}
+    {#if !term}
       <GifCategories {customerId} onSelect={(term) => (searchTerm = term)} />
     {/if}
 

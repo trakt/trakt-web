@@ -18,6 +18,7 @@
   import type { ActiveComment } from "../_internal/models/ActiveComment.ts";
   import type { CommentDraftGif } from "../_internal/models/CommentDraftGif.ts";
   import { reportGifShare } from "../_internal/reportGifShare.ts";
+  import { toGifSuggestedQuery } from "../_internal/toGifSuggestedQuery.ts";
   import {
     type UseAddCommentProps,
     usePostComment,
@@ -129,6 +130,7 @@
 {#snippet actions()}
   <GifButton
     disabled={$isCommenting}
+    suggestedQuery={toGifSuggestedQuery(media)}
     onSelect={(selected) => (gif = toCommentDraftGif(selected))}
   />
 {/snippet}
