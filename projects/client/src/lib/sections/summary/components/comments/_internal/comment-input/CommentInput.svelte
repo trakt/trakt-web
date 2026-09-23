@@ -4,6 +4,7 @@
   import PostMessageIcon from "$lib/components/icons/PostMessageIcon.svelte";
   import GifButton from "$lib/features/gif-picker/GifButton.svelte";
   import { klipyCustomerId } from "$lib/features/gif-picker/klipyCustomerId.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { NOOP_FN } from "$lib/utils/constants";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment";
   import { onMount } from "svelte";
@@ -40,6 +41,8 @@
   let gif = $state<CommentDraftGif | null>(null);
 
   const customerId = klipyCustomerId();
+
+  const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
 
   const { contentObserver, hasContent } = $derived(useContentObserver());
   const { postComment, isCommenting, error } = usePostComment();
@@ -80,14 +83,6 @@
 </script>
 
 <trakt-comment-input>
-  {#if gif}
-    <SelectedGif
-      {gif}
-      disabled={$isCommenting}
-      onRemove={() => (gif = null)}
-    />
-  {/if}
-
   <div class="trakt-comment-reply-box" transition:slide={{ duration: 150 }}>
     <textarea
       bind:this={textAreaElement}
@@ -99,30 +94,43 @@
 
     <div class="trakt-comment-actions">
       <SpoilerSwitch
+        size="small"
         disabled={$isCommenting}
         isChecked={isSpoiler}
         onclick={() => (isSpoiler = !isSpoiler)}
       />
 
-      <GifButton
-        disabled={$isCommenting}
-        suggestedQuery={gifSuggestedQuery}
-        onSelect={(selected) => (gif = toCommentDraftGif(selected))}
-      />
+      <div class="comment-send-actions">
+        <GifButton
+          disabled={$isCommenting}
+          suggestedQuery={gifSuggestedQuery}
+          onSelect={(selected) => (gif = toCommentDraftGif(selected))}
+        />
 
-      <ActionButton
-        onclick={postCommentHandler}
-        {label}
-        style="ghost"
-        color="purple"
-        size="small"
-        variant="secondary"
-        disabled={$isCommenting || !hasSomethingToSay}
-      >
-        <PostMessageIcon style={hasSomethingToSay ? "filled" : "open"} />
-      </ActionButton>
+        <ActionButton
+          onclick={postCommentHandler}
+          {label}
+          style="ghost"
+          color="purple"
+          size="small"
+          variant="secondary"
+          disabled={$isCommenting || !hasSomethingToSay}
+        >
+          <PostMessageIcon style={hasSomethingToSay ? "filled" : "open"} />
+        </ActionButton>
+      </div>
     </div>
   </div>
+
+  {#if gif}
+    <div transition:slide={{ duration: $isReducedMotion ? 0 : 150 }}>
+      <SelectedGif
+        {gif}
+        disabled={$isCommenting}
+        onRemove={() => (gif = null)}
+      />
+    </div>
+  {/if}
   {#if $error}
     <DismissibleError
       message={toTranslatedErrorComment($error)}
@@ -144,8 +152,8 @@
     width: 100%;
 
     display: flex;
-    align-items: center;
-    gap: var(--gap-s);
+    flex-direction: column;
+    gap: var(--gap-xs);
 
     padding: var(--ni-8);
     padding-inline-start: var(--ni-16);
@@ -163,18 +171,10 @@
 
     textarea {
       all: unset;
-      flex-grow: 1;
+      width: 100%;
 
       &::-webkit-scrollbar-corner {
         background-color: transparent;
-      }
-    }
-
-    &:has(textarea:not([rows="1"])) {
-      flex-direction: column;
-
-      textarea {
-        width: 100%;
       }
     }
 
@@ -190,11 +190,13 @@
   .trakt-comment-actions {
     display: flex;
     align-items: center;
-    align-self: end;
-
-    flex-wrap: wrap;
-    justify-content: flex-end;
-
+    justify-content: space-between;
     gap: var(--gap-s);
+  }
+
+  .comment-send-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
   }
 </style>
