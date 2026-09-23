@@ -3,7 +3,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToUpcomingEpisodeEntry } from '$lib/requests/_internal/mapToUpcomingEpisodeEntry.ts';
-import { api, type ApiParams } from '$lib/requests/api.ts';
+import { type ApiParams, unauthorizedApi } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
@@ -47,7 +47,7 @@ function isCalendarShow(
 const releasesCalendarRequest = (
   { fetch, startDate, days, type, filter }: ReleasesCalendarParams,
 ) => {
-  return api({ fetch })
+  return unauthorizedApi({ fetch })
     .calendars
     .releasesHot({
       query: {
