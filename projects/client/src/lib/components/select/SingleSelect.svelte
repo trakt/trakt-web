@@ -20,25 +20,26 @@
 
   const selectedLabel = $derived(selectedOption?.label ?? placeholder);
 
-</script>
+  const triggerProps = $derived(
+    trigger
+      ? { trigger }
+      : {
+          placeholder,
+          triggerLabel: selectedLabel,
+          hasValue: Boolean(value),
+          icon,
+          selectedOption,
+        },
+  );
 
-{#snippet triggerTag()}
-  {#if selectedOption}
-    {@render selectedOption.tag?.(selectedOption)}
-  {/if}
-{/snippet}
+</script>
 
 <SelectBase
   type="single"
   value={value ?? undefined}
-  {placeholder}
   {disabled}
   {autoWidth}
-  {icon}
-  {trigger}
-  {triggerTag}
-  triggerLabel={selectedLabel}
-  hasValue={Boolean(value)}
+  {...triggerProps}
   onValueChange={onChange}
 >
   {#each options as option (option.value)}
