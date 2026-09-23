@@ -2,7 +2,7 @@
   import { getLocale } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import type { ReactionSummary } from "../models/ReactionSummary";
-  import ReactionEmoji from "./ReactionEmoji.svelte";
+  import ReactionEmoji from "$lib/components/reactions/ReactionEmoji.svelte";
   import { REACTIONS_CODE_MAP } from "./constants";
 
   const { summary }: { summary: ReactionSummary } = $props();

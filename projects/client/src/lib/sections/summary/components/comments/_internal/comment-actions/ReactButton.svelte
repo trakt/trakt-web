@@ -6,9 +6,11 @@
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { scale } from "svelte/transition";
-  import ReactionPicker from "./ReactionPicker.svelte";
+  import ReactionPicker from "$lib/components/reactions/ReactionPicker.svelte";
   import ReactionsDistribution from "./ReactionsDistribution.svelte";
   import ReactionsSummary from "./ReactionsSummary.svelte";
+  import { toTranslatedReaction } from "$lib/utils/formatting/string/toTranslatedReaction";
+  import { REACTIONS_CODE_MAP } from "./constants";
   import { useCommentReaction } from "./useCommentReaction";
   import { useCommentReactions } from "./useCommentReactions";
 
@@ -35,6 +37,14 @@
 
     react(reaction);
   }
+
+  /* The comment taxonomy, flattened for the shared picker. Seven values fit
+     one row, so this leaves `quickCount` off and shows all of them. */
+  const options = Object.entries(REACTIONS_CODE_MAP).map(([reaction, code]) => ({
+    id: reaction,
+    label: toTranslatedReaction(reaction as Reaction),
+    code,
+  }));
 
   const isDisabled = $derived($isReacting);
   const hasDistribution = $derived($summary.count > 0 || $isReacting);
@@ -85,8 +95,9 @@
       out:scale={{ duration: 300 }}
     >
       <ReactionPicker
-        currentReaction={$currentReaction}
-        onChange={reactionHandler}
+        {options}
+        chosen={$currentReaction}
+        onSelect={(id) => reactionHandler(id as Reaction)}
         onClose={close}
       />
 
@@ -152,6 +163,16 @@
         }
       }
     }
+  }
+
+  /*
+    The bar's own sizing, now that the picker inside it is shared and carries
+    no box of its own - the media surface opens the same control inside a
+    panel with completely different padding.
+  */
+  .transition-wrapper :global(.trakt-reaction-picker) {
+    height: var(--ni-40);
+    margin: var(--ni-8);
   }
 
   .transition-wrapper {
