@@ -191,7 +191,13 @@
 
     --reaction-emoji-size: var(--ni-16);
 
-    color: var(--color-text-secondary);
+    /*
+      The same weight the invite carries on a review, where the react button
+      unsets itself and inherits body text. Secondary greyed it down a step,
+      which read as disabled next to glyphs at full strength - and it is the
+      one thing in the pill the viewer is meant to press.
+    */
+    color: var(--color-text-primary);
   }
 
   /*
