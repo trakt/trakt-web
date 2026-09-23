@@ -134,8 +134,6 @@
   .badge-glyphs {
     display: inline-flex;
     align-items: center;
-
-    --reaction-emoji-size: var(--ni-16);
   }
 
   /*
@@ -188,8 +186,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    --reaction-emoji-size: var(--ni-16);
 
     /*
       The same weight the invite carries on a review, where the react button
