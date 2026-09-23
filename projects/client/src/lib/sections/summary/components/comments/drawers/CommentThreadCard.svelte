@@ -10,6 +10,7 @@
   import CommentBody from "../_internal/CommentBody.svelte";
   import CommentFooter from "../_internal/CommentFooter.svelte";
   import CommentHeader from "../_internal/CommentHeader.svelte";
+  import { toGifSuggestedQuery } from "../_internal/toGifSuggestedQuery.ts";
   import type { CommentTypeProps } from "../CommentsProps";
   import CommentReplies from "./CommentReplies.svelte";
   import { THREAD_LIST_CLASS } from "./constants";
@@ -81,6 +82,7 @@
         placeholder={m.textarea_placeholder_reply()}
         label={m.button_label_post_reply()}
         type={typeProps.type}
+        gifSuggestedQuery={toGifSuggestedQuery(media)}
       />
     {/if}
   </div>

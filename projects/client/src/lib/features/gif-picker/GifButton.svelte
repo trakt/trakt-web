@@ -10,9 +10,10 @@
   type GifButtonProps = {
     onSelect: (gif: GifEntry) => void;
     disabled?: boolean;
+    suggestedQuery?: string;
   };
 
-  const { onSelect, disabled }: GifButtonProps = $props();
+  const { onSelect, disabled, suggestedQuery }: GifButtonProps = $props();
 
   let isPickerOpen = $state(false);
 </script>
@@ -32,7 +33,11 @@
     </ActionButton>
 
     {#if isPickerOpen}
-      <GifPickerDrawerHost onClose={() => (isPickerOpen = false)} {onSelect} />
+      <GifPickerDrawerHost
+        onClose={() => (isPickerOpen = false)}
+        {onSelect}
+        {suggestedQuery}
+      />
     {/if}
   {/snippet}
 </RenderForFeature>

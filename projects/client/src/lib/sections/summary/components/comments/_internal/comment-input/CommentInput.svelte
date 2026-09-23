@@ -23,6 +23,7 @@
     placeholder: string;
     onCommentPost: (comment: ActiveComment) => void;
     sizing?: "normal" | "auto";
+    gifSuggestedQuery?: string;
   } & UseAddCommentProps;
 
   const {
@@ -30,6 +31,7 @@
     placeholder,
     onCommentPost,
     sizing = "auto",
+    gifSuggestedQuery,
     ...props
   }: CommentInputProps = $props();
 
@@ -104,6 +106,7 @@
 
       <GifButton
         disabled={$isCommenting}
+        suggestedQuery={gifSuggestedQuery}
         onSelect={(selected) => (gif = toCommentDraftGif(selected))}
       />
 
