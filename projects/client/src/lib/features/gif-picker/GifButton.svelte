@@ -22,6 +22,7 @@
     <ActionButton
       onclick={() => (isPickerOpen = true)}
       label={m.button_label_add_gif()}
+      type="button"
       style="ghost"
       color="purple"
       size="small"

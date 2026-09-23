@@ -30,6 +30,7 @@
     <ActionButton
       onclick={onRemove}
       label={m.button_label_remove_gif()}
+      type="button"
       style="ghost"
       color="red"
       size="small"
