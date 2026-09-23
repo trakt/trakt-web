@@ -8,6 +8,7 @@ const whitelistedUrls = [
   UrlBuilder.app.ios(),
   UrlBuilder.app.android(),
   UrlBuilder.github.web(),
+  UrlBuilder.developer.home(),
   UrlBuilder.socialMedia.reddit(),
   UrlBuilder.status(),
 ] as const;

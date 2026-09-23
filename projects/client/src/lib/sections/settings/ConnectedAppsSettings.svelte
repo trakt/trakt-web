@@ -1,7 +1,6 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import ConnectedAppRow from "./_internal/apps/ConnectedAppRow.svelte";
   import ConnectedAppsLimitWarning from "./_internal/apps/ConnectedAppsLimitWarning.svelte";
   import ConnectedAppsUsageMeter from "./_internal/apps/ConnectedAppsUsageMeter.svelte";
@@ -16,56 +15,38 @@
   const hasApps = $derived($apps.length > 0);
 </script>
 
-<div class="trakt-connected-apps-settings">
-  <SettingsSection
-    title={m.heading_connected_apps()}
-    description={m.description_connected_apps()}
-    crumb={{
-      href: UrlBuilder.settings.apps(),
-      label: m.link_text_apps_settings(),
-    }}
-  >
-    {#if $isLoading}
-      <SettingsGroupCard>
-        {#each Array(3) as _, index (index)}
-          <SettingsGroupRowSkeleton />
-        {/each}
-      </SettingsGroupCard>
-    {:else if !hasApps}
-      <p class="secondary">{m.text_no_connected_apps()}</p>
+<SettingsSection
+  title={m.heading_connected_community_apps()}
+  description={m.description_connected_apps()}
+>
+  <!-- VIP users get a generous, invisible limit: the meter would only
+       induce anxiety, so it is shown to free accounts only. -->
+  {#snippet action()}
+    {#if !$isLoading && hasApps && $limits && !$user.isVip}
+      <ConnectedAppsUsageMeter
+        current={$limits.connectedApps.current}
+        limit={$limits.connectedApps.free}
+      />
     {/if}
-  </SettingsSection>
+  {/snippet}
 
-  {#if !$isLoading && hasApps}
+  {#if $isLoading}
+    <SettingsGroupCard>
+      {#each Array(3) as _, index (index)}
+        <SettingsGroupRowSkeleton />
+      {/each}
+    </SettingsGroupCard>
+  {:else if !hasApps}
+    <p class="secondary">{m.text_no_connected_apps()}</p>
+  {:else}
     {#if $isAtLimit}
       <ConnectedAppsLimitWarning />
     {/if}
 
-    <SettingsSection title={m.heading_community_apps()}>
-      <!-- VIP users get a generous, invisible limit: the meter would only
-           induce anxiety, so it is shown to free accounts only. -->
-      {#snippet action()}
-        {#if $limits && !$user.isVip}
-          <ConnectedAppsUsageMeter
-            current={$limits.connectedApps.current}
-            limit={$limits.connectedApps.free}
-          />
-        {/if}
-      {/snippet}
-
-      <SettingsGroupCard>
-        {#each $apps as app (app.key)}
-          <ConnectedAppRow {app} />
-        {/each}
-      </SettingsGroupCard>
-    </SettingsSection>
+    <SettingsGroupCard>
+      {#each $apps as app (app.key)}
+        <ConnectedAppRow {app} />
+      {/each}
+    </SettingsGroupCard>
   {/if}
-</div>
-
-<style lang="scss">
-  .trakt-connected-apps-settings {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xl);
-  }
-</style>
+</SettingsSection>

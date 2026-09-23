@@ -129,10 +129,6 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.RevokeApp;
     name: string;
   };
-  [ConfirmationType.DeleteApiApp]: {
-    type: ConfirmationType.DeleteApiApp;
-    name: string;
-  };
   [ConfirmationType.DeleteAccount]: {
     type: ConfirmationType.DeleteAccount;
     username: string;

@@ -44,10 +44,9 @@ export const settingsPages: ReadonlyArray<SettingsPage> = [
     icon: LibraryIcon,
   },
   {
-    href: UrlBuilder.settings.apps(),
+    href: UrlBuilder.settings.appsConnected(),
     label: m.link_text_apps_settings,
     icon: PlugIcon,
-    nested: true,
   },
   {
     href: UrlBuilder.settings.streamingServices(),
