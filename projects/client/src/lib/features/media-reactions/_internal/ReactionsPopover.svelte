@@ -155,11 +155,21 @@
     box-shadow: var(--shadow-menu);
   }
 
-  /* The picker is a bare row; whatever opens it sets the room around it, and
-     these are the measurements the comment bar uses. */
+  /*
+    The picker is a bare row; whatever opens it sets the room around it, and
+    these are the measurements the comment bar uses.
+
+    Centred, which the comment bar is not: there the row opens with a close
+    button, so its left edge is a real edge and the reactions read as starting
+    after it. Here the row is the whole width of a panel with a ranked grid
+    above it, and left-aligned it hung off one side of everything it belongs
+    to.
+  */
   .popover-panel :global(.trakt-reaction-picker) {
     height: var(--ni-40);
     margin: var(--ni-8);
+
+    justify-content: center;
   }
 
   /* Grows out of the edge nearest its trigger. `--alignment-correction` is how
