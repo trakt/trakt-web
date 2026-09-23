@@ -24,10 +24,9 @@
       label={m.button_label_add_gif()}
       type="button"
       style="ghost"
-      color="purple"
       size="small"
-      variant="secondary"
       {disabled}
+      --color-foreground="var(--color-text-primary)"
     >
       <GifIcon />
     </ActionButton>
