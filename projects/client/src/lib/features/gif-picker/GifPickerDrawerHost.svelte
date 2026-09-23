@@ -3,6 +3,7 @@
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { GifEntry } from "$lib/requests/models/GifEntry.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { useDebouncedValue } from "$lib/stores/useDebouncedValue.ts";
   import { GIF_SEARCH_DEBOUNCE } from "./_internal/constants.ts";
   import GifCategories from "./_internal/GifCategories.svelte";
@@ -17,6 +18,8 @@
   const { onClose, onSelect }: GifPickerDrawerHostProps = $props();
 
   const customerId = klipyCustomerId();
+
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
 
   let searchTerm = $state("");
 
@@ -37,7 +40,7 @@
 <Drawer
   {onClose}
   title={m.drawer_title_add_gif()}
-  size="large"
+  size={$isMobile ? "large" : "normal"}
   elevated
 >
   <div class="trakt-gif-picker-drawer-host">

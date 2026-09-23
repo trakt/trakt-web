@@ -36,10 +36,14 @@
 
   .trakt-gif-categories {
     display: flex;
+    flex-shrink: 0;
     gap: var(--gap-xs);
 
     overflow-x: auto;
     scrollbar-width: none;
+
+    padding: var(--border-thickness-xs);
+    margin: calc(-1 * var(--border-thickness-xs));
 
     .gif-category {
       @include gif-tile-surface;
