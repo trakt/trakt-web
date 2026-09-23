@@ -1,5 +1,4 @@
 <script lang="ts">
-  import KlipyWatermark from "$lib/features/gif-picker/KlipyWatermark.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
 
   type CommentGifProps = {
@@ -23,7 +22,6 @@
     loading="lazy"
     decoding="async"
   />
-  <KlipyWatermark />
 </div>
 
 <style lang="scss">
@@ -67,9 +65,6 @@
       flex-shrink: 0;
       width: var(--ni-72);
       height: 100%;
-
-      --klipy-watermark-inset: var(--ni-4);
-      --klipy-watermark-width: var(--ni-32);
     }
   }
 
