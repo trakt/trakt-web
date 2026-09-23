@@ -12,16 +12,16 @@
   /*
     One pill, two zones split by a hairline.
 
-    LEFT is the room: the top sentiments and the total, and it never changes
-    shape because of the viewer. RIGHT is the viewer's own slot - an invite
-    to react, or their pick held in a ring.
+    The viewer's own slot LEADS - an invite to react, or their pick held in a
+    ring - and the room follows it: the top sentiments and the total, which
+    never change shape because of the viewer.
 
     That split is the whole point. Letting the glyphs speak for everyone
     including the viewer reads as one statement in two voices; separating them
     means the stack stays an honest reading of the room while the viewer's
-    answer sits somewhere it cannot be mistaken for it. The viewer's pick
-    lives on the right even when it matches one of the top glyphs - no
-    exceptions, or the slot stops being a place you can look.
+    answer sits somewhere it cannot be mistaken for it. Their pick stays in
+    its own slot even when it matches one of the top glyphs - no exceptions,
+    or the slot stops being a place you can look.
   */
   const { type, slug }: MediaReactionsBadgeProps = $props();
 
@@ -32,7 +32,7 @@
   const glyphs = $derived(toTopSentiments(summary.metrics));
 
   /* The room only speaks once somebody has: no glyphs and no count means
-     there is nothing on the left to divide from the viewer's slot. */
+     there is nothing following the viewer's slot to divide it from. */
   const hasRoom = $derived(glyphs.length > 0 || summary.totalCount > 0);
 </script>
 
@@ -42,7 +42,24 @@
 >
   {#snippet trigger()}
     <span class="trakt-media-reactions-badge">
+      <span class="badge-mine" class:has-reaction={chosen != null}>
+        {#if chosen}
+          <SentimentEmoji sentiment={chosen} />
+        {:else}
+          <ReactionIcon state="add" />
+        {/if}
+      </span>
+
       {#if hasRoom}
+        <!-- Only earns its place between two things. With no reactions yet
+             the pill is the invite alone, and a rule beside nothing reads as
+             a control that failed to load. -->
+        <span
+          class="badge-hairline"
+          class:has-icon-before={chosen == null}
+          aria-hidden="true"
+        ></span>
+
         <span class="badge-room">
           <span class="badge-glyphs" aria-hidden="true">
             {#each glyphs as sentiment, index (sentiment)}
@@ -58,24 +75,7 @@
             </span>
           {/if}
         </span>
-
-        <!-- Only earns its place between two things. With no reactions yet
-             the pill is the invite alone, and a rule beside nothing reads as
-             a control that failed to load. -->
-        <span
-          class="badge-hairline"
-          class:has-icon-after={chosen == null}
-          aria-hidden="true"
-        ></span>
       {/if}
-
-      <span class="badge-mine" class:has-reaction={chosen != null}>
-        {#if chosen}
-          <SentimentEmoji sentiment={chosen} />
-        {:else}
-          <ReactionIcon state="add" />
-        {/if}
-      </span>
     </span>
   {/snippet}
 </ReactionsPopover>
@@ -175,13 +175,13 @@
     what sits either side is not: the count's digits end where their ink ends,
     while the invite icon is drawn 2.5px inside its own box - so the rule read
     as sitting closer to the number than to the smiley. This pays that bearing
-    back on the left.
+    back on the side the glyphs are on.
 
     Only against the ICON. The reacted slot is a filled ring whose ink reaches
     its edge, so it needs no compensation and would look over-spaced with it.
   */
-  .badge-hairline.has-icon-after {
-    margin-inline-start: var(--ni-2);
+  .badge-hairline.has-icon-before {
+    margin-inline-end: var(--ni-2);
   }
 
   .badge-mine {
