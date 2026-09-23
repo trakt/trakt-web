@@ -30,7 +30,6 @@ export enum ConfirmationType {
   DisconnectPlex = 'disconnect-plex',
   RemovePlexServer = 'remove-plex-server',
   RevokeApp = 'revoke-app',
-  DeleteApiApp = 'delete-api-app',
   DeleteAccount = 'delete-account',
   ResetCoverImage = 'reset-cover-image',
   SetCoverImage = 'set-cover-image',

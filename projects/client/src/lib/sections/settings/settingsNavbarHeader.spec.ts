@@ -31,13 +31,13 @@ describe('util: settingsNavbarHeader', () => {
     expect(header.back?.href).toBe(UrlBuilder.settings.general());
   });
 
-  it('should drill nested sub-pages back to their section root', () => {
+  it('should point connected apps back to the settings hub', () => {
     const header = settingsNavbarHeader({
       pathname: UrlBuilder.settings.appsConnected(),
       isCompact: true,
     });
 
-    expect(header.back?.href).toBe(UrlBuilder.settings.apps());
+    expect(header.back?.href).toBe(UrlBuilder.settings.general());
   });
 
   it('should label the back affordance with its destination', () => {
@@ -47,7 +47,7 @@ describe('util: settingsNavbarHeader', () => {
     });
 
     expect(header.back?.label).toBe(
-      activeSettingsPageTitle(UrlBuilder.settings.apps()),
+      activeSettingsPageTitle(UrlBuilder.settings.general()),
     );
   });
 });

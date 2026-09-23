@@ -18,11 +18,11 @@
       <span class="bold">VIP</span>
     </Link>
     <Link
-      href={UrlBuilder.docs.api()}
+      href={UrlBuilder.developer.home()}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span class="bold">{m.link_text_api()}</span>
+      <span class="bold">{m.link_text_developer()}</span>
     </Link>
   </div>
 

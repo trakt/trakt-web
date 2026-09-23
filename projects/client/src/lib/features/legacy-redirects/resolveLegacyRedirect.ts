@@ -198,15 +198,15 @@ const rules: ReadonlyArray<LegacyRule> = [
   },
   {
     pattern: /^\/oauth\/applications\/new\/?$/,
-    to: () => UrlBuilder.settings.appsApiNew(),
+    to: () => UrlBuilder.developer.newApp(),
   },
   {
     pattern: /^\/oauth\/applications\/(\d+)\/edit\/?$/,
-    to: (m) => UrlBuilder.settings.appsApiEdit(m[1]),
+    to: (m) => UrlBuilder.developer.editApp(m[1]),
   },
   {
     pattern: /^\/oauth\/applications\/(\d+)\/?$/,
-    to: (m) => UrlBuilder.settings.appsApiDetail(m[1]),
+    to: (m) => UrlBuilder.developer.app(m[1]),
   },
   {
     pattern: /^\/oauth\/authorized_applications\/?$/,
@@ -214,7 +214,7 @@ const rules: ReadonlyArray<LegacyRule> = [
   },
   {
     pattern: /^\/oauth\/applications\/?$/,
-    to: () => UrlBuilder.settings.appsApi(),
+    to: () => UrlBuilder.developer.apps(),
   },
 
   // --- No sensible target -> nearest-section fallback (home) ---

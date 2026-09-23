@@ -169,24 +169,24 @@ describe('util: resolveLegacyRedirect', () => {
       );
     });
 
-    it('should map oauth app management to the apps settings', () => {
+    it('should map oauth app management to the portal and authorizations to settings', () => {
       expect(resolveLegacyRedirect('/oauth/applications')).toBe(
-        '/settings/apps/api',
+        'https://developer.trakt.tv/apps',
       );
       expect(resolveLegacyRedirect('/oauth/authorized_applications')).toBe(
         '/settings/apps/connected',
       );
     });
 
-    it('should map oauth app pages to their settings equivalent', () => {
+    it('should preserve oauth app destinations in the developer portal', () => {
       expect(resolveLegacyRedirect('/oauth/applications/new')).toBe(
-        '/settings/apps/api/new',
+        'https://developer.trakt.tv/apps/new',
       );
       expect(resolveLegacyRedirect('/oauth/applications/901')).toBe(
-        '/settings/apps/api/901',
+        'https://developer.trakt.tv/apps/901',
       );
       expect(resolveLegacyRedirect('/oauth/applications/901/edit')).toBe(
-        '/settings/apps/api/901/edit',
+        'https://developer.trakt.tv/apps/901/edit',
       );
     });
   });

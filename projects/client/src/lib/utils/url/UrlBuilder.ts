@@ -284,8 +284,13 @@ export const UrlBuilder = {
     ios: () => 'https://apps.apple.com/us/app/trakt/id1514873602',
     tvTime: () => 'https://tvtime.trakt.tv',
   },
-  docs: {
-    api: () => 'https://docs.trakt.tv',
+  developer: {
+    home: () => 'https://developer.trakt.tv',
+    apps: () => 'https://developer.trakt.tv/apps',
+    newApp: () => 'https://developer.trakt.tv/apps/new',
+    app: (id: number | string) => `https://developer.trakt.tv/apps/${id}`,
+    editApp: (id: number | string) =>
+      `https://developer.trakt.tv/apps/${id}/edit`,
   },
   github: {
     web: () => 'https://github.com/trakt/trakt-web',
@@ -318,12 +323,7 @@ export const UrlBuilder = {
     generalDetail: () => '/settings/general',
     account: () => '/settings/account',
     data: () => '/settings/data',
-    apps: () => '/settings/apps',
     appsConnected: () => '/settings/apps/connected',
-    appsApi: () => '/settings/apps/api',
-    appsApiNew: () => '/settings/apps/api/new',
-    appsApiDetail: (id: number | string) => `/settings/apps/api/${id}`,
-    appsApiEdit: (id: number | string) => `/settings/apps/api/${id}/edit`,
     advanced: () => '/settings/advanced',
     preview: () => '/settings/preview',
     streamingServices: (
