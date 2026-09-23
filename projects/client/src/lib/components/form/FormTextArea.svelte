@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, type Snippet } from "svelte";
   import { createValidationState } from "./_internal/createValidationState.ts";
   import FormElementWrapper from "./_internal/FormElementWrapper.svelte";
   import type { FormInputProps } from "./models/FormInputProps";
@@ -16,8 +16,10 @@
     validation,
     rows = 5,
     required,
+    actions,
   }: FormInputProps & {
     rows?: number;
+    actions?: Snippet;
   } = $props();
 
   let textAreaElement: HTMLTextAreaElement;
@@ -31,11 +33,13 @@
     onChange(newValue);
   };
 
-  onMount(() => {
-    if (value) {
-      validate(textAreaElement, value);
-    }
+  const validateOnRuleChange = (element: HTMLTextAreaElement) => {
+    if (validation && !element.value) return;
 
+    validate(element, element.value);
+  };
+
+  onMount(() => {
     if (!autofocus) return;
 
     requestAnimationFrame(() => {
@@ -44,7 +48,7 @@
   });
 </script>
 
-<FormElementWrapper {validation} hasError={$hasError} {errorLabelId}>
+<FormElementWrapper {validation} hasError={$hasError} {errorLabelId} {actions}>
   <textarea
     bind:this={textAreaElement}
     {disabled}
@@ -53,6 +57,7 @@
     {rows}
     {required}
     oninput={handleInput}
+    {@attach validateOnRuleChange}
     aria-invalid={$hasError ? "true" : "false"}
     aria-describedby={$hasError ? errorLabelId : undefined}
     class="trakt-form-textarea"

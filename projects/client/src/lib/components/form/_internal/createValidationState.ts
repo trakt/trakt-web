@@ -14,6 +14,8 @@ export function createValidationState(
     const validation = getValidation();
 
     if (!validation) {
+      hasError.set(false);
+      element.setCustomValidity('');
       return;
     }
 

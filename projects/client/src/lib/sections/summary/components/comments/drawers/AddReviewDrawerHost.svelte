@@ -119,19 +119,19 @@
   }
 </script>
 
-{#snippet badge()}
-  <div class="trakt-review-badge">
-    <GifButton
-      disabled={$isCommenting}
-      onSelect={(selected) => (gif = toCommentDraftGif(selected))}
-    />
+{#snippet actions()}
+  <GifButton
+    disabled={$isCommenting}
+    onSelect={(selected) => (gif = toCommentDraftGif(selected))}
+  />
+{/snippet}
 
-    <SpoilerSwitch
-      disabled={$isCommenting}
-      isChecked={isSpoiler}
-      onclick={() => (isSpoiler = !isSpoiler)}
-    />
-  </div>
+{#snippet badge()}
+  <SpoilerSwitch
+    disabled={$isCommenting}
+    isChecked={isSpoiler}
+    onclick={() => (isSpoiler = !isSpoiler)}
+  />
 {/snippet}
 
 <Drawer
@@ -157,23 +157,20 @@
       : m.button_label_add_comment()}
   >
     <div class="trakt-review-properties">
-      <!--
-        Re-mounted when a gif comes or goes, so the textarea repaints the word
-        minimum that the gif waives.
-      -->
-      {#key gif != null}
-        <FormTextArea
-          placeholder={m.textarea_placeholder_comment()}
-          onChange={(value) => (comment = value)}
-          disabled={$isCommenting}
-          autofocus
-          value={comment}
-          validation={{
-            isValid: (review) => gif != null || isReviewValid(review),
-            errorText: m.translated_value_error_comment_invalid_content(),
-          }}
-        />
-      {/key}
+      <FormTextArea
+        placeholder={m.textarea_placeholder_comment()}
+        onChange={(value) => (comment = value)}
+        disabled={$isCommenting}
+        autofocus
+        value={comment}
+        {actions}
+        validation={gif
+          ? undefined
+          : {
+              isValid: isReviewValid,
+              errorText: m.translated_value_error_comment_invalid_content(),
+            }}
+      />
 
       {#if gif}
         <SelectedGif
@@ -204,12 +201,6 @@
   .trakt-review-properties {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
-  }
-
-  .trakt-review-badge {
-    display: flex;
-    align-items: center;
     gap: var(--gap-xs);
   }
 </style>
