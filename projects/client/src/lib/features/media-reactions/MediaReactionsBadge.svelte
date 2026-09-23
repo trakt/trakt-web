@@ -67,13 +67,11 @@
 
         <span class="badge-room">
           <span class="badge-glyphs" aria-hidden="true">
-            {#each glyphs as reaction, index (reaction)}
-              <span class="badge-glyph" style:z-index={glyphs.length - index}>
-                <ReactionEmoji
-                  code={REACTIONS_CODE_MAP[reaction]}
-                  label={toTranslatedReaction(reaction)}
-                />
-              </span>
+            {#each glyphs as reaction (reaction)}
+              <ReactionEmoji
+                code={REACTIONS_CODE_MAP[reaction]}
+                label={toTranslatedReaction(reaction)}
+              />
             {/each}
           </span>
 
@@ -139,36 +137,21 @@
     gap: var(--gap-xs);
   }
 
+  /*
+    A queue, not a stack - exactly what the review cluster does.
+
+    These were overlapped, each glyph carrying a ring to cut it out of the one
+    behind it. A ring can only do that in the colour of whatever is actually
+    painted behind it, and this pill is transparent at rest over a header that
+    is artwork, gradient and page in turn. So the ring was never the backdrop:
+    it was a dark circle drawn around every emoji.
+
+    The renderer's own box already holds them apart, so nothing has to be
+    drawn at all.
+  */
   .badge-glyphs {
     display: inline-flex;
     align-items: center;
-
-    /*
-      Decoration, not a tap target, so the box IS the artwork. Left at the
-      renderer's default the emoji sits in a box six pixels wider than itself,
-      which spaces the stack out and draws each disc's ring around thin air.
-    */
-    --reaction-emoji-box: var(--ni-18);
-  }
-
-  /*
-    Overlapped like the review cluster - a stack, not a queue. Each glyph
-    carries a ring in the surface BEHIND the pill rather than the pill's own
-    fill: the cut has to read against the page, which is what makes the
-    overlap look like discs in front of each other instead of a smear.
-  */
-  .badge-glyph {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    box-sizing: content-box;
-    border-radius: 50%;
-    box-shadow: 0 0 0 var(--border-thickness-xs) var(--color-background);
-  }
-
-  .badge-glyph + .badge-glyph {
-    margin-inline-start: calc(-1 * var(--ni-5));
   }
 
   .badge-count {
