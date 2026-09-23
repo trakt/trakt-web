@@ -53,8 +53,29 @@
     align-self: flex-start;
     margin-top: var(--gap-xxs);
 
+    /*
+      The badge buys its hover wash with 12px of inline padding, which put its
+      first glyph 12px past the title above and the overview below - the only
+      thing in the column not starting on the column's edge.
+
+      The padding stays, because the wash needs it; the box is pulled back by
+      the same amount instead. The lit surface then reaches into the gutter,
+      which is what a padded hover target is supposed to do, and the ink lines
+      up with everything stacked around it.
+    */
+    :global(.trakt-reactions-popover-trigger) {
+      margin-inline-start: calc(-1 * var(--ni-12));
+    }
+
     @include for-tablet-sm-and-below {
       align-self: center;
+
+      /* Centred at this size rather than start-aligned, and there is no
+         column edge to meet - a pull would only sit the row off centre by
+         half of it. */
+      :global(.trakt-reactions-popover-trigger) {
+        margin-inline-start: 0;
+      }
     }
 
     /*
