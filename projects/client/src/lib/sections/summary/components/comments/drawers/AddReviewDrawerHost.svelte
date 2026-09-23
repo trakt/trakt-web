@@ -7,8 +7,11 @@
   import { klipyCustomerId } from "$lib/features/gif-picker/klipyCustomerId.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaComment } from "$lib/requests/models/MediaComment.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment.ts";
   import { iffy } from "$lib/utils/function/iffy.ts";
+  import { cubicOut } from "svelte/easing";
+  import { slide } from "svelte/transition";
   import SelectedGif from "../_internal/comment-input/SelectedGif.svelte";
   import SpoilerSwitch from "../_internal/comment-input/SpoilerSwitch.svelte";
   import { toCommentDraftGif } from "../_internal/comment-input/toCommentDraftGif.ts";
@@ -21,6 +24,7 @@
   } from "../_internal/usePostComment.ts";
   import type { CommentsProps } from "../CommentsProps.ts";
 
+  import { gifPop } from "./_internal/gifPop.ts";
   import { isReviewValid } from "./isReviewValid.ts";
 
   type PostMode = {
@@ -71,6 +75,9 @@
   let gif = $state(initialGif);
 
   const customerId = klipyCustomerId();
+
+  const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
+  const motion = (duration: number) => ($isReducedMotion ? 0 : duration);
 
   // A gif waives the word minimum, and native validity only re-reads the
   // textarea on input - so the submit gate is spelled out here instead.
@@ -157,28 +164,43 @@
       : m.button_label_add_comment()}
   >
     <div class="trakt-review-properties">
-      <FormTextArea
-        placeholder={m.textarea_placeholder_comment()}
-        onChange={(value) => (comment = value)}
-        disabled={$isCommenting}
-        autofocus
-        value={comment}
-        {actions}
-        validation={gif
-          ? undefined
-          : {
-              isValid: isReviewValid,
-              errorText: m.translated_value_error_comment_invalid_content(),
-            }}
-      />
-
-      {#if gif}
-        <SelectedGif
-          {gif}
+      <div class="review-composer">
+        <FormTextArea
+          placeholder={m.textarea_placeholder_comment()}
+          onChange={(value) => (comment = value)}
           disabled={$isCommenting}
-          onRemove={() => (gif = null)}
+          autofocus
+          value={comment}
+          {actions}
+          validation={gif
+            ? undefined
+            : {
+                isValid: isReviewValid,
+                errorText: m.translated_value_error_comment_invalid_content(),
+              }}
         />
-      {/if}
+
+        {#if gif}
+          <div
+            class="review-gif"
+            transition:slide={{
+              axis: "x",
+              duration: motion(250),
+              easing: cubicOut,
+            }}
+          >
+            {#key gif.url}
+              <div in:gifPop={{ delay: 80, duration: motion(450) }}>
+                <SelectedGif
+                  {gif}
+                  disabled={$isCommenting}
+                  onRemove={() => (gif = null)}
+                />
+              </div>
+            {/key}
+          </div>
+        {/if}
+      </div>
 
       {#if $error}
         <DismissibleError
@@ -202,5 +224,21 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
+  }
+
+  .review-composer {
+    container-type: inline-size;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .review-gif {
+    padding-inline-start: var(--gap-xs);
+
+    --selected-gif-height: calc(5lh + 2 * var(--ni-12));
+    --selected-gif-max-width: min(var(--ni-160), 40cqi);
+    --selected-gif-max-height: none;
   }
 </style>
