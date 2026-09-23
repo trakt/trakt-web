@@ -2,6 +2,7 @@
   import DropdownCaretIcon from "$lib/components/dropdown/DropdownCaretIcon.svelte";
   import { Select } from "bits-ui";
   import type { Snippet } from "svelte";
+  import type { SelectOption } from "../models/SelectOption.ts";
   import ScrollDownIcon from "./icons/ScrollDownIcon.svelte";
   import ScrollUpIcon from "./icons/ScrollUpIcon.svelte";
 
@@ -17,18 +18,31 @@
     onValueChange: (value: string[]) => void;
   };
 
-  type SelectBaseProps = {
+  type CustomTriggerProps = {
+    trigger: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
+    placeholder?: never;
+    triggerLabel?: never;
+    hasValue?: never;
+    icon?: never;
+    selectedOption?: never;
+  };
+
+  type DefaultTriggerProps = {
+    trigger?: never;
     placeholder: string;
-    disabled?: boolean;
     triggerLabel: string;
     hasValue: boolean;
+    icon?: Snippet;
+    selectedOption?: SelectOption;
+  };
+
+  type SelectBaseProps = {
+    disabled?: boolean;
     children: Snippet;
     header?: Snippet;
     autoWidth?: boolean;
-    icon?: Snippet;
-    triggerTag?: Snippet;
-    trigger?: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
-  } & (SelectSingleProps | SelectMultipleProps);
+  } & (CustomTriggerProps | DefaultTriggerProps) &
+    (SelectSingleProps | SelectMultipleProps);
 
   const {
     placeholder,
@@ -39,7 +53,7 @@
     header,
     autoWidth = false,
     icon,
-    triggerTag,
+    selectedOption,
     trigger,
     ...rest
   }: SelectBaseProps = $props();
@@ -63,7 +77,7 @@
             <span class="trigger-icon">{@render icon()}</span>
           {/if}
           <span class="trigger-label ellipsis capitalize">{triggerLabel}</span>
-          {@render triggerTag?.()}
+          {@render selectedOption?.tag?.(selectedOption)}
           <DropdownCaretIcon {open} />
         </button>
       {/if}

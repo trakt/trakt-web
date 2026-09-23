@@ -1,6 +1,16 @@
 import type { Snippet } from 'svelte';
 import type { SelectOption } from './SelectOption.ts';
 
+type CustomTriggerProps = {
+  trigger: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
+  icon?: never;
+};
+
+type DefaultTriggerProps = {
+  trigger?: never;
+  icon?: Snippet;
+};
+
 export type SingleSelectProps = {
   options: ReadonlyArray<SelectOption>;
   value?: string | null;
@@ -8,6 +18,4 @@ export type SingleSelectProps = {
   disabled?: boolean;
   autoWidth?: boolean;
   onChange: (value: string) => void;
-  icon?: Snippet;
-  trigger?: Snippet<[{ props: Record<string, unknown>; open: boolean }]>;
-};
+} & (CustomTriggerProps | DefaultTriggerProps);
