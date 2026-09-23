@@ -44,6 +44,7 @@
     align-self: flex-start;
 
     display: flex;
+    width: fit-content;
     max-width: 100%;
 
     border-radius: var(--border-radius-s);
