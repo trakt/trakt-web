@@ -1,10 +1,13 @@
-import type { ReactionSentiment } from '$lib/requests/models/ReactionSentiment.ts';
+import type { ReactionDistribution } from '$lib/requests/models/ReactionDistribution.ts';
+import type { Reaction } from '$lib/requests/queries/comments/commentReactionsQuery.ts';
 import type { Snippet } from 'svelte';
 
 export type ReactionsPopoverProps = {
-  chosen: ReactionSentiment | null;
-  /** Fires with the tapped sentiment; the caller decides set vs. clear. */
-  onSelect: (sentiment: ReactionSentiment) => void;
+  chosen: Reaction | null;
+  /** Fires with the tapped reaction; the caller decides set vs. clear. */
+  onSelect: (reaction: Reaction) => void;
+  /** Counts behind the ranking panel. */
+  distribution: ReactionDistribution;
   /** What the viewer clicks - the badge on the summary header. */
   trigger: Snippet;
 };

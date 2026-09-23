@@ -1,19 +1,20 @@
 <script lang="ts">
   import ReactionIcon from "$lib/components/icons/ReactionIcon.svelte";
+  import ReactionEmoji from "$lib/components/reactions/ReactionEmoji.svelte";
+  import { REACTIONS_CODE_MAP } from "$lib/components/reactions/reactionCodeMap.ts";
   import { getLocale } from "$lib/features/i18n";
-  import type { ReactionSentiment } from "$lib/requests/models/ReactionSentiment.ts";
-  import type { MediaReactionsBadgeProps } from "./MediaReactionsBadgeProps.ts";
+  import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-  import SentimentEmoji from "./_internal/SentimentEmoji.svelte";
+  import { toTranslatedReaction } from "$lib/utils/formatting/string/toTranslatedReaction";
+  import type { MediaReactionsBadgeProps } from "./MediaReactionsBadgeProps.ts";
   import ReactionsPopover from "./_internal/ReactionsPopover.svelte";
-  import { toTopSentiments } from "./toTopSentiments.ts";
   import { useMediaReactions } from "./stores/useMediaReactions.ts";
 
   /*
     One pill, two zones split by a hairline.
 
     The viewer's own slot LEADS - an invite to react, or their pick held in a
-    ring - and the room follows it: the top sentiments and the total, which
+    ring - and the room follows it: the top reactions and the total, which
     never change shape because of the viewer.
 
     That split is the whole point. Letting the glyphs speak for everyone
@@ -27,9 +28,9 @@
 
   const summary = $derived(useMediaReactions({ type, slug }).summary);
 
-  let chosen = $state<ReactionSentiment | null>(null);
+  let chosen = $state<Reaction | null>(null);
 
-  const glyphs = $derived(toTopSentiments(summary.metrics));
+  const glyphs = $derived(summary.top);
 
   /* The room only speaks once somebody has: no glyphs and no count means
      there is nothing following the viewer's slot to divide it from. */
@@ -38,13 +39,17 @@
 
 <ReactionsPopover
   {chosen}
-  onSelect={(sentiment) => (chosen = chosen === sentiment ? null : sentiment)}
+  distribution={summary.distribution}
+  onSelect={(reaction) => (chosen = chosen === reaction ? null : reaction)}
 >
   {#snippet trigger()}
     <span class="trakt-media-reactions-badge">
       <span class="badge-mine" class:has-reaction={chosen != null}>
         {#if chosen}
-          <SentimentEmoji sentiment={chosen} />
+          <ReactionEmoji
+            code={REACTIONS_CODE_MAP[chosen]}
+            label={toTranslatedReaction(chosen)}
+          />
         {:else}
           <ReactionIcon state="add" />
         {/if}
@@ -62,9 +67,12 @@
 
         <span class="badge-room">
           <span class="badge-glyphs" aria-hidden="true">
-            {#each glyphs as sentiment, index (sentiment)}
+            {#each glyphs as reaction, index (reaction)}
               <span class="badge-glyph" style:z-index={glyphs.length - index}>
-                <SentimentEmoji {sentiment} />
+                <ReactionEmoji
+                  code={REACTIONS_CODE_MAP[reaction]}
+                  label={toTranslatedReaction(reaction)}
+                />
               </span>
             {/each}
           </span>
@@ -134,6 +142,13 @@
   .badge-glyphs {
     display: inline-flex;
     align-items: center;
+
+    /*
+      Decoration, not a tap target, so the box IS the artwork. Left at the
+      renderer's default the emoji sits in a box six pixels wider than itself,
+      which spaces the stack out and draws each disc's ring around thin air.
+    */
+    --reaction-emoji-box: var(--ni-18);
   }
 
   /*
@@ -186,6 +201,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
+    /* Same reason as the stack beside it. */
+    --reaction-emoji-box: var(--ni-18);
 
     /*
       The same weight the invite carries on a review, where the react button

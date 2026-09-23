@@ -1,6 +1,8 @@
 import type { MediaReactionSummary } from '$lib/requests/models/MediaReactionSummary.ts';
+import type { ReactionDistribution } from '$lib/requests/models/ReactionDistribution.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import { ReactionSentimentSchema } from '$lib/requests/models/ReactionSentiment.ts';
+import { reactionsInOrder } from '$lib/components/reactions/reactionsInOrder.ts';
+import { toTopReactions } from '../../toTopReactions.ts';
 
 /*
   Stand-in for an endpoint that does not exist yet.
@@ -36,14 +38,17 @@ export const mediaReactionsMock = {
   summary({ mediaType, mediaId }: SummaryParams): MediaReactionSummary {
     const rng = createSeededRandom(seedFrom(`${mediaType}:${mediaId}`));
 
-    const metrics = ReactionSentimentSchema.options.map((sentiment) => ({
-      sentiment,
-      count: 4 + Math.floor(rng() * 320),
-      hasReacted: false,
-    }));
+    const distribution = Object.fromEntries(
+      reactionsInOrder.map((
+        reaction,
+      ) => [reaction, 4 + Math.floor(rng() * 320)]),
+    ) as ReactionDistribution;
 
-    const totalCount = metrics.reduce((sum, metric) => sum + metric.count, 0);
+    const totalCount = Object.values(distribution).reduce(
+      (sum, count) => sum + count,
+      0,
+    );
 
-    return { totalCount, metrics };
+    return { totalCount, distribution, top: toTopReactions(distribution) };
   },
 };

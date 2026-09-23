@@ -3,7 +3,7 @@
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import type { ReactionSummary } from "../models/ReactionSummary";
   import ReactionEmoji from "$lib/components/reactions/ReactionEmoji.svelte";
-  import { REACTIONS_CODE_MAP } from "./constants";
+  import { REACTIONS_CODE_MAP } from "$lib/components/reactions/reactionCodeMap.ts";
 
   const { summary }: { summary: ReactionSummary } = $props();
 </script>

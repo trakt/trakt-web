@@ -8,13 +8,13 @@ type UseMediaReactionsProps = {
 };
 
 /**
- * Aggregate reaction summary for a movie or show.
+ * How a title was reacted to, in aggregate.
  *
  * V0 is sourced from deterministic mock data so the team can play with a fully
  * functional prototype without a backend. When the endpoint ships, swap the
  * mock line for the real query - the return shape is unchanged:
  *
- *   const query = useQuery(mediaReactionSummaryQuery({ type, slug }));
+ *   const query = useQuery(mediaReactionsQuery({ type, slug }));
  *   return { summary: $derived(query.data ?? EMPTY_SUMMARY) };
  */
 export function useMediaReactions(

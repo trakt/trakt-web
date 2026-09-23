@@ -11,15 +11,4 @@ export type ReactionPickerProps = {
    * popover, so it leaves this off.
    */
   onClose?: () => void;
-  /**
-   * Show only this many at rest, with a `+` that opens search for the rest.
-   * Left off, every option is on the row - which is the right answer for a
-   * short taxonomy, and why comment reactions never needed it.
-   */
-  quickCount?: number;
-  /**
-   * Ids to float to the front of the quick row - the viewer's own recent
-   * picks. Only meaningful alongside `quickCount`.
-   */
-  preferred?: ReadonlyArray<string>;
 };

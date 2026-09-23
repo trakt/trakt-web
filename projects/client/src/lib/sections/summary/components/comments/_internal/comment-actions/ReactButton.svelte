@@ -7,10 +7,9 @@
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { scale } from "svelte/transition";
   import ReactionPicker from "$lib/components/reactions/ReactionPicker.svelte";
-  import ReactionsDistribution from "./ReactionsDistribution.svelte";
+  import ReactionsDistribution from "$lib/components/reactions/ReactionsDistribution.svelte";
   import ReactionsSummary from "./ReactionsSummary.svelte";
-  import { toTranslatedReaction } from "$lib/utils/formatting/string/toTranslatedReaction";
-  import { REACTIONS_CODE_MAP } from "./constants";
+  import { toReactionPickerOptions } from "$lib/components/reactions/toReactionPickerOptions.ts";
   import { useCommentReaction } from "./useCommentReaction";
   import { useCommentReactions } from "./useCommentReactions";
 
@@ -38,13 +37,7 @@
     react(reaction);
   }
 
-  /* The comment taxonomy, flattened for the shared picker. Seven values fit
-     one row, so this leaves `quickCount` off and shows all of them. */
-  const options = Object.entries(REACTIONS_CODE_MAP).map(([reaction, code]) => ({
-    id: reaction,
-    label: toTranslatedReaction(reaction as Reaction),
-    code,
-  }));
+  const options = toReactionPickerOptions();
 
   const isDisabled = $derived($isReacting);
   const hasDistribution = $derived($summary.count > 0 || $isReacting);
@@ -106,6 +99,7 @@
           distribution={$summary.distribution}
           currentReaction={$currentReaction}
           isLoading={$isReacting}
+          title={m.header_comment_reactions()}
         />
       {/if}
     </div>

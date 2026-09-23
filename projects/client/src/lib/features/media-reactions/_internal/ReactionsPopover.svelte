@@ -1,50 +1,39 @@
 <script lang="ts">
-  import { usePortal } from "$lib/features/portal/usePortal";
+  import ReactionPicker from "$lib/components/reactions/ReactionPicker.svelte";
+  import ReactionsDistribution from "$lib/components/reactions/ReactionsDistribution.svelte";
+  import { toReactionPickerOptions } from "$lib/components/reactions/toReactionPickerOptions.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { ReactionSentiment } from "$lib/requests/models/ReactionSentiment.ts";
+  import { usePortal } from "$lib/features/portal/usePortal";
+  import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { cubicOut } from "svelte/easing";
   import { scale } from "svelte/transition";
-  import { recentReactionsStore } from "../stores/recentReactionsStore.ts";
-  import ReactionPicker from "$lib/components/reactions/ReactionPicker.svelte";
-  import { reactionSentimentDefinitions } from "../reactionSentimentDefinitions.ts";
   import type { ReactionsPopoverProps } from "./ReactionsPopoverProps.ts";
 
   /*
     Reacting to a title, the way reacting to a review already works: the
-    trigger pops the picker open in place. Reacting is a one-tap answer to
-    what you just watched, and anything that routes - a drawer, a page - makes
-    it a trip away from the thing being reacted to.
+    trigger pops the same picker open over the same ranking of counts.
+    Reacting is a one-tap answer to what you just watched, and anything that
+    routes - a drawer, a page - makes it a trip away from the thing being
+    reacted to.
 
-    Persistent portal, so a click inside the picker does not dismiss it before
+    Persistent portal, so a click inside the panel does not dismiss it before
     the button under the pointer fires - the same mode the review picker uses.
   */
-  const { chosen, onSelect, trigger }: ReactionsPopoverProps = $props();
+  const { chosen, onSelect, distribution, trigger }: ReactionsPopoverProps =
+    $props();
 
   const { portalTrigger, portal, isOpened, close } = usePortal({
     placement: { position: "top" },
     type: "persistent",
   });
 
-  const recent = recentReactionsStore.recent;
-
-  /* The media taxonomy, flattened for the shared picker - the same control the
-     review reactions use, split into a quick row plus search because nine
-     sentiments do not fit a pill the way seven fit a comment bar. */
-  const QUICK_COUNT = 6;
-
-  const options = Object.entries(reactionSentimentDefinitions).map((
-    [sentiment, definition],
-  ) => ({
-    id: sentiment,
-    label: definition.label(),
-    code: definition.code,
-  }));
+  const options = toReactionPickerOptions();
 
   /*
-    One settle for the whole panel, rather than an entrance per emoji: nine
-    things bumping in one after another is a performance, and this is a
-    control the reader opened to use. It barely scales - just enough to read
-    as coming from the button it is anchored to - and decelerates into place.
+    One settle for the whole panel, rather than an entrance per emoji: this is
+    a control the reader opened to use, not a performance. It barely scales -
+    just enough to read as coming from the button it is anchored to - and
+    decelerates into place.
 
     Checked here rather than in CSS because a Svelte transition runs in JS,
     where a media query cannot reach it. Reduced motion keeps the fade and
@@ -61,17 +50,12 @@
   };
 
   /*
-    Closes on a pick, where the review picker stays open: it holds a
-    distribution worth watching update, and this holds nine sentiments the
-    viewer has just answered. Clearing a pick closes too - the trigger shows
-    the result either way.
+    Closes on a pick, where the review picker stays open: that one is read
+    while you work down a thread, and this is opened from a badge that prints
+    the result anyway. Clearing a pick closes too.
   */
-  function selectHandler(sentiment: ReactionSentiment) {
-    if (sentiment !== chosen) {
-      recentReactionsStore.remember(sentiment);
-    }
-
-    onSelect(sentiment);
+  function selectHandler(reaction: Reaction) {
+    onSelect(reaction);
     close();
   }
 </script>
@@ -98,12 +82,23 @@
       in:scale={{ ...settle, duration: isReducedMotion ? 90 : 140 }}
       out:scale={{ ...settle, duration: isReducedMotion ? 60 : 90 }}
     >
+      <!--
+        Ranked rather than canonical: the question a title's panel answers is
+        which reactions it is best known for, and an answer to that has to
+        lead with the most used.
+      -->
+      <ReactionsDistribution
+        {distribution}
+        currentReaction={chosen}
+        isLoading={false}
+        title={m.header_media_reactions()}
+        order="ranked"
+      />
+
       <ReactionPicker
         {options}
         {chosen}
-        quickCount={QUICK_COUNT}
-        preferred={$recent}
-        onSelect={(id) => selectHandler(id as ReactionSentiment)}
+        onSelect={(id) => selectHandler(id as Reaction)}
       />
     </div>
   </div>
@@ -129,17 +124,13 @@
       Out of flow and definitely sized, both so the portal measures it right.
       It centres the popup on its trigger using this element's width, read
       while the element is still sitting where Svelte put it - inside the
-      header's action row. A content-sized flex item there gets shrunk by the
-      row, so the centring was done against a width the panel never had, and
-      the popup opened off to one side.
+      header's row. A content-sized flex item there gets shrunk by the row, so
+      the centring was done against a width the panel never had, and the popup
+      opened off to one side.
     */
     position: absolute;
-    /*
-      Sized to the WIDEST mode the picker has - the quick tray, which is six
-      targets, a rule and the toggle. The search field then fills the same
-      box. Too narrow and the content hangs off the painted panel, which is
-      what 280 did once the tray gained its toggle.
-    */
+    /* The width the review popup uses, so the two read as one panel seen from
+       two places. */
     width: var(--ni-340);
 
     /* Clear of the trigger on whichever side the portal picks. */
@@ -156,9 +147,19 @@
     width: 100%;
     box-sizing: border-box;
 
+    display: flex;
+    flex-direction: column;
+
     background-color: var(--color-reaction-background);
-    border-radius: var(--border-radius-l);
+    border-radius: var(--border-radius-xxl);
     box-shadow: var(--shadow-menu);
+  }
+
+  /* The picker is a bare row; whatever opens it sets the room around it, and
+     these are the measurements the comment bar uses. */
+  .popover-panel :global(.trakt-reaction-picker) {
+    height: var(--ni-40);
+    margin: var(--ni-8);
   }
 
   /* Grows out of the edge nearest its trigger. `--alignment-correction` is how

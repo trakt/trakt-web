@@ -10763,61 +10763,13 @@
       "default": "Reactions",
       "description": "Title for the media-reactions preview feature toggle in settings."
     },
+    "header_media_reactions": {
+      "default": "Reactions",
+      "description": "Heading above the ranked reaction counts in the popup opened from a title's reaction badge."
+    },
     "preview_feature_description_reactions": {
       "default": "React to a movie or show, and see how everyone else felt.",
       "description": "Description for the media-reactions preview feature toggle in settings."
-    },
-    "button_label_more_reactions": {
-      "default": "More reactions",
-      "description": "Aria-label for the button in the reaction tray that swaps the quick row for a search over every reaction."
-    },
-    "button_label_quick_reactions": {
-      "default": "Quick reactions",
-      "description": "Aria-label for the button that returns the reaction search to the quick row of reactions."
-    },
-    "input_placeholder_search_reactions": {
-      "default": "Search reactions",
-      "description": "Placeholder in the reaction search field, shown after opening the full reaction set from the tray."
-    },
-    "reactions_search_empty": {
-      "default": "No reactions match that",
-      "description": "Shown under the reaction search field when the typed text matches none of the reactions."
-    },
-    "reaction_sentiment_love": {
-      "default": "Obsessed",
-      "description": "Label for the 'love' reaction sentiment. Should read as intense adoration."
-    },
-    "reaction_sentiment_thrilled": {
-      "default": "Thrilled",
-      "description": "Label for the 'thrilled' reaction sentiment."
-    },
-    "reaction_sentiment_mindblown": {
-      "default": "Mind blown",
-      "description": "Label for the 'mindblown' reaction sentiment."
-    },
-    "reaction_sentiment_moved": {
-      "default": "Moved to tears",
-      "description": "Label for the 'moved' reaction sentiment. Emotional, tearful."
-    },
-    "reaction_sentiment_shook": {
-      "default": "Shook",
-      "description": "Label for the 'shook' reaction sentiment. Shocked or rattled."
-    },
-    "reaction_sentiment_bored": {
-      "default": "Bored stiff",
-      "description": "Label for the 'bored' reaction sentiment."
-    },
-    "reaction_sentiment_cringe": {
-      "default": "Cringe",
-      "description": "Label for the 'cringe' reaction sentiment. Second-hand embarrassment."
-    },
-    "reaction_sentiment_enraged": {
-      "default": "Enraged",
-      "description": "Label for the 'enraged' reaction sentiment. Anger."
-    },
-    "reaction_sentiment_vomit": {
-      "default": "Sick to my stomach",
-      "description": "Label for the visceral 'vomit' reaction sentiment. Nauseated, repulsed."
     }
   }
 }
