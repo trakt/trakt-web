@@ -16,6 +16,7 @@ import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
 import { loadShareFonts } from './_internal/loadShareFonts.ts';
 import { rasterizeShareCard } from './_internal/rasterizeShareCard.ts';
 import { resolvePosterSource } from './_internal/resolvePosterSource.ts';
+import { useShareCodecs } from './_internal/useShareCodecs.ts';
 import { warmPoster } from './_internal/warmPoster.ts';
 
 const cacheControl = 'public, max-age=604800';
@@ -62,6 +63,12 @@ export const GET: RequestHandler = async (
       ? { ...imageHeaders, 'Server-Timing': timing.toHeader() }
       : imageHeaders;
 
+  const fontsRequest = timing.measure(
+    'fonts',
+    () => loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
+  );
+  useShareCodecs().catch(() => undefined);
+
   if (!IS_DEV && platform) {
     const cachedImage = await timing.measure(
       'cache',
@@ -97,10 +104,6 @@ export const GET: RequestHandler = async (
               fetch: globalThis.fetch,
             })),
       }).catch(() => null),
-  );
-  const fontsRequest = timing.measure(
-    'fonts',
-    () => loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
   );
 
   const [mediaData, fonts] = await Promise.all([
