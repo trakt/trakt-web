@@ -73,11 +73,8 @@
     "vitest": "4.1.11"
   },
   "dependencies": {
-    "@ethercorps/sveltekit-og": "4.3.0",
     "@inlang/paraglide-js": "2.25.4",
-    "@jsquash/jpeg": "1.6.0",
     "@libn/fuzzy": "npm:@jsr/libn__fuzzy@0.4.0",
-    "@resvg/resvg-wasm": "2.6.2",
     "@sentry/sveltekit": "10.75.0",
     "@svelte-put/shortcut": "4.2.0",
     "@sveltejs/kit": "2.70.3",
@@ -104,6 +101,7 @@
     "svelte-confetti": "2.3.2",
     "ts-retry": "7.0.3",
     "typesense": "3.0.6",
+    "unwasm": "0.5.3",
     "workbox-expiration": "7.4.1",
     "workbox-precaching": "7.4.1",
     "workbox-routing": "7.4.1",

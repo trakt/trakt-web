@@ -1,4 +1,4 @@
-import { sveltekitOG } from '@ethercorps/sveltekit-og/plugin';
+import { unwasm } from 'unwasm/plugin';
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { sentrySvelteKit } from '@sentry/sveltekit';
 import { sveltekit } from '@sveltejs/kit/vite';
@@ -89,7 +89,16 @@ export default defineConfig(({ mode }) => ({
       project: 'trakt-web',
     }),
     sveltekit(),
-    sveltekitOG(),
+    {
+      name: 'vite-plugin-unwasm',
+      config: () => ({
+        build: {
+          rollupOptions: {
+            plugins: [unwasm({ esmImport: true, lazy: true })],
+          },
+        },
+      }),
+    },
     paraglideVitePlugin({
       project: './i18n/project.inlang',
       outdir: './src/lib/paraglide',
