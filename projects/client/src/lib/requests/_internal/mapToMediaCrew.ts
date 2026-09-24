@@ -51,20 +51,18 @@ function toCastMember(
 }
 
 export function mapToMediaCrew(
-  response: PeopleResponse,
+  response: PeopleResponseWithGuestStars,
 ): MediaCrew {
-  const people = response as PeopleResponseWithGuestStars;
-
   return {
-    directors: (people.crew?.directing ?? [])
+    directors: (response.crew?.directing ?? [])
       .map(toCrewMember),
-    writers: (people.crew?.writing ?? [])
+    writers: (response.crew?.writing ?? [])
       .map(toCrewMember),
-    creators: (people.crew?.['created by'] ?? [])
+    creators: (response.crew?.['created by'] ?? [])
       .map(toCrewMember),
-    cast: (people.cast ?? [])
+    cast: (response.cast ?? [])
       .map(toCastMember),
-    guestStars: (people.guest_stars ?? [])
+    guestStars: (response.guest_stars ?? [])
       .map(toCastMember),
   };
 }

@@ -15,6 +15,7 @@
   import EpisodeSummaryV2 from "./components/episode/v2/EpisodeSummary.svelte";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
   import SummaryDrawer from "./SummaryDrawer.svelte";
+  import { dedupe } from "$lib/utils/array/dedupe.ts";
 
   const {
     episode,
@@ -37,7 +38,9 @@
   const currentSeasonOnly = $derived(
     seasons.filter((s) => s.number === episode.season),
   );
-  const actors = $derived([...crew.cast, ...crew.guestStars]);
+  const actors = $derived(
+    dedupe((member) => member.key, crew.cast, crew.guestStars),
+  );
 
   // The seasons drawer can switch seasons via the `season` search param
   // (set by the dropdown / poster links), independent of the episode's own
