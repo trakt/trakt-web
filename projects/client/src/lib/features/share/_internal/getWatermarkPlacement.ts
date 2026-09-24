@@ -17,6 +17,22 @@ const PLACEMENTS: Record<ShareType, Placement> = {
   'story': { left: -0.55, top: 0.05, width: 2, height: 1 },
 };
 
+function fitLogo(box: Box): Box {
+  const scale = Math.min(
+    box.width / LOGO_VIEW_BOX.width,
+    box.height / LOGO_VIEW_BOX.height,
+  );
+  const width = LOGO_VIEW_BOX.width * scale;
+  const height = LOGO_VIEW_BOX.height * scale;
+
+  return {
+    left: box.left + (box.width - width) / 2,
+    top: box.top + (box.height - height) / 2,
+    width,
+    height,
+  };
+}
+
 function round(value: number): number {
   return Math.round(value * 1000) / 1000;
 }
@@ -25,21 +41,21 @@ export function getWatermarkPlacement(variant: ShareType) {
   const { width, height } = SHARE_TYPE_DIMENSIONS[variant];
   const placement = PLACEMENTS[variant];
 
-  const box: Box = {
+  const box = fitLogo({
     left: placement.left * width,
     top: placement.top * height,
     width: placement.width * width,
     height: placement.height * height,
-  };
+  });
 
-  const left = Math.max(box.left, 0);
-  const top = Math.max(box.top, 0);
+  const left = Math.round(Math.max(box.left, 0));
+  const top = Math.round(Math.max(box.top, 0));
 
   const visible: Box = {
     left,
     top,
-    width: Math.min(box.left + box.width, width) - left,
-    height: Math.min(box.top + box.height, height) - top,
+    width: Math.round(Math.min(box.left + box.width, width)) - left,
+    height: Math.round(Math.min(box.top + box.height, height)) - top,
   };
 
   const viewBox = [

@@ -35,14 +35,25 @@ describe('util: getWatermarkPlacement', () => {
     },
   );
 
+  it.each(variants)(
+    'should scale the %s logo evenly so it stays round',
+    (variant) => {
+      const { style, viewBox } = getWatermarkPlacement(variant);
+      const [, , boxWidth = 0, boxHeight = 0] = toNumbers(style);
+      const [, , viewWidth = 1, viewHeight = 1] = toNumbers(viewBox);
+
+      expect(boxWidth / viewWidth).toBeCloseTo(boxHeight / viewHeight, 2);
+    },
+  );
+
   describe('story', () => {
-    it('should crop away the half that falls off the canvas', () => {
+    it('should crop away the part that falls off the canvas', () => {
       const { style, viewBox } = getWatermarkPlacement('story');
 
       expect(style).toBe(
         'top: 96px; left: 0px; width: 1080px; height: 1824px;',
       );
-      expect(viewBox).toBe('144.8 -185 336 674.5');
+      expect(viewBox).toBe('116.281 -185 399.375 674.5');
     });
   });
 });
