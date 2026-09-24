@@ -4,7 +4,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import { BehaviorSubject } from "rxjs";
   import { slide } from "svelte/transition";
   import CommentReply from "../_internal/CommentReply.svelte";
   import type { CommentTypeProps } from "../CommentsProps";
@@ -13,21 +12,29 @@
   type CommentRepliesProps = {
     comment: MediaComment;
     media: MediaEntry;
+    isExpanded: boolean;
+    onToggle: () => void;
   } & CommentTypeProps;
 
-  const { comment, media, ...typeProps }: CommentRepliesProps = $props();
-
-  const showReplies = new BehaviorSubject(false);
+  const {
+    comment,
+    media,
+    isExpanded,
+    onToggle,
+    ...typeProps
+  }: CommentRepliesProps = $props();
 
   const { list, isLoading } = $derived(useCommentReplies({ id: comment.id }));
+
+  const isAwaitingReplies = $derived($isLoading && $list.length === 0);
 </script>
 
 {#if comment.replyCount > 0}
   <button
     class="toggle-replies-button"
-    onclick={() => showReplies.next(!$showReplies)}
+    onclick={onToggle}
   >
-    {#if $showReplies}
+    {#if isExpanded}
       {#if $isLoading}
         <LoadingIndicator />
       {:else}
@@ -42,7 +49,7 @@
   </button>
 {/if}
 
-{#if $showReplies && !$isLoading}
+{#if isExpanded && !isAwaitingReplies}
   <div
     class="trakt-comment-replies"
     transition:slide={{ duration: 150, axis: "y" }}
