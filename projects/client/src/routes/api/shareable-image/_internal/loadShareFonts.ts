@@ -1,19 +1,13 @@
 import { error } from '$lib/utils/console/print.ts';
 import type { R2Bucket } from '@cloudflare/workers-types';
-import type { ImageResponseOptions } from '@ethercorps/sveltekit-og';
+import type { FontDetails } from '@takumi-rs/wasm';
+import { shareFontSources } from './shareFontSources.ts';
 
-type ShareFonts = NonNullable<ImageResponseOptions['fonts']>;
+type ShareFonts = FontDetails[];
 
 type LoadShareFontsProps = {
   bucket: Pick<R2Bucket, 'get'> | Nil;
 };
-
-const FONT_FAMILY = 'Inter';
-
-const FONT_SOURCES = [
-  { path: 'assets/fonts/NotoSans-Regular.ttf', weight: 400 },
-  { path: 'assets/fonts/NotoSans-Bold.ttf', weight: 700 },
-] as const;
 
 let cachedFonts: ShareFonts | undefined;
 
@@ -30,7 +24,7 @@ export async function loadShareFonts(
 
   try {
     cachedFonts = await Promise.all(
-      FONT_SOURCES.map(async ({ path, weight }) => {
+      shareFontSources.map(async ({ name, path, weight }) => {
         const object = await bucket.get(path);
 
         if (!object) {
@@ -38,17 +32,17 @@ export async function loadShareFonts(
         }
 
         return {
-          name: FONT_FAMILY,
+          name,
           data: await object.arrayBuffer(),
           weight,
           style: 'normal',
-        } as const;
+        };
       }),
     );
 
     return cachedFonts;
   } catch (e) {
-    error('Failed to load share fonts, falling back to the bundled set:', e);
+    error('Failed to load share fonts, falling back to the media cdn:', e);
     return;
   }
 }

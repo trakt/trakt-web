@@ -3,20 +3,14 @@ import {
   type ShareType,
 } from '$lib/features/share/models/ShareType.ts';
 import { describe, expect, it } from 'vitest';
-import { rasterizeShareCard } from './rasterizeShareCard.ts';
+import { renderShareCard } from './renderShareCard.ts';
 
 const SOI = [0xff, 0xd8, 0xff];
 const MARKER = 0xff;
 const START_OF_FRAME = 0xc0;
 
-function toSvg(): string {
-  return [
-    '<svg width="120" height="60" xmlns="http://www.w3.org/2000/svg">',
-    '<rect width="120" height="60" fill="#1b2b36"/>',
-    '<circle cx="60" cy="30" r="20" fill="#d29d40"/>',
-    '</svg>',
-  ].join('');
-}
+const HTML =
+  '<div style="display:flex;width:100%;height:100%;background:#1b2b36"></div>';
 
 function readDimensions(bytes: Uint8Array) {
   let offset = 2;
@@ -40,14 +34,16 @@ function readDimensions(bytes: Uint8Array) {
   }
 }
 
-describe('util: rasterizeShareCard', () => {
+describe('util: renderShareCard', () => {
   const variants: ReadonlyArray<ShareType> = ['open-graph', 'feed', 'story'];
 
-  it.each(variants)('should encode %s as a baseline jpeg', async (variant) => {
-    const bytes = new Uint8Array(
-      await rasterizeShareCard({ svg: toSvg(), variant }),
-    );
-
+  it.each(variants)('should render %s as a baseline jpeg', async (variant) => {
+    const bytes = await renderShareCard({
+      html: HTML,
+      variant,
+      fonts: [],
+      images: [],
+    });
     const { width, height } = SHARE_TYPE_DIMENSIONS[variant];
 
     expect([...bytes.slice(0, SOI.length)]).toEqual(SOI);
