@@ -1,4 +1,3 @@
-import { undoToastAction } from '$lib/features/action-toast/undoToastAction.ts';
 import { toGatedNotify } from '$lib/features/action-toast/toGatedNotify.ts';
 import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
@@ -88,7 +87,11 @@ export function useWatchlist(props: UseWatchlistProps) {
 
     track({ action: 'add' });
 
-    await addition.mutate();
+    const outcome = await addition.mutate();
+
+    if (outcome === 'queued') {
+      return;
+    }
 
     notify({
       message: singleEntry
@@ -116,13 +119,6 @@ export function useWatchlist(props: UseWatchlistProps) {
     track({ action: 'remove' });
 
     await removal.mutate();
-
-    notify({
-      message: singleEntry
-        ? m.action_toast_removed_from_watchlist({ title: singleEntry.title })
-        : m.action_toast_removed_from_watchlist_generic(),
-      action: undoToastAction(addToWatchlist),
-    });
   };
 
   return {

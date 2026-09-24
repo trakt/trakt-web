@@ -2,9 +2,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
-import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
 import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
-import { captureRequests } from '$test/beds/request/captureRequests.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { firstValueFrom } from 'rxjs';
@@ -22,22 +20,10 @@ vi.mock('$lib/requests/sync/removeWatchedRequest.ts', () => ({
   removeWatchedRequest: () => Promise.resolve(true),
 }));
 
-const addWatchedSpy = vi.fn((_body?: unknown) => Promise.resolve(true));
-vi.mock('$lib/requests/sync/markAsWatchedRequest.ts', () => ({
-  markAsWatchedRequest: ({ body }: { body: unknown }) => addWatchedSpy(body),
-}));
-
-const { notify } = vi.hoisted(() => ({ notify: vi.fn() }));
-vi.mock('$lib/features/action-toast/useActionToast.ts', () => ({
-  useActionToast: () => ({ notify, dismiss: vi.fn() }),
-}));
-
 describe('useMarkAsWatched', () => {
   beforeEach(() => {
     setAuthorization(true);
     removeRatingSpy.mockClear();
-    addWatchedSpy.mockClear();
-    notify.mockReset(); // 4: useMarkAsWatched -> useIsWatched -> useUser
   });
 
   const runCommonTests = (
@@ -176,22 +162,6 @@ describe('useMarkAsWatched', () => {
       expect(removeRatingSpy).toHaveBeenCalledWith({
         body: { shows: [{ ids: { trakt: 180770 } }] },
       });
-    });
-  });
-
-  describe('inline trigger', () => {
-    it('should NOT raise an action toast when toasts are disabled', async () => {
-      const { removeWatched } = await renderStore(() =>
-        useMarkAsWatched({
-          type: 'movie',
-          media: MovieHereticMappedMock,
-          isToastEnabled: false,
-        })
-      );
-
-      await removeWatched();
-
-      expect(notify).not.toHaveBeenCalled();
     });
   });
 
@@ -370,70 +340,6 @@ describe('useMarkAsWatched', () => {
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(true);
-    });
-  });
-
-  describe('action confirmation undo', () => {
-    const watchedMovie = {
-      id: MovieHereticMappedMock.id,
-      effectiveReleaseDate: new Date(),
-    };
-
-    it('should offer an Undo action on the removal toast', async () => {
-      const { removeWatched } = await renderStore(() =>
-        useMarkAsWatched({ type: 'movie', media: watchedMovie })
-      );
-
-      await removeWatched();
-
-      expect(lastActionToast(notify)?.action).toBeDefined();
-    });
-
-    it('should restore the rating the removal orphaned', async () => {
-      const { removeWatched } = await renderStore(() =>
-        useMarkAsWatched({ type: 'movie', media: watchedMovie })
-      );
-
-      await removeWatched();
-
-      const undoRequests = await captureRequests(async () => {
-        await lastActionToast(notify)?.action?.onAction();
-      });
-      expect(undoRequests).toContain('POST /sync/ratings');
-    });
-
-    it('should restore the original play date, not "now"', async () => {
-      const { removeWatched } = await renderStore(() =>
-        useMarkAsWatched({ type: 'movie', media: watchedMovie })
-      );
-
-      await removeWatched();
-      await lastActionToast(notify)?.action?.onAction();
-
-      expect(addWatchedSpy).toHaveBeenCalledWith({
-        movies: [
-          {
-            ids: { trakt: watchedMovie.id },
-            watched_at: '2024-12-27T16:15:28.000Z',
-          },
-        ],
-      });
-    });
-
-    it('should offer no Undo when the play dates cannot be restored', async () => {
-      const { removeWatched } = await renderStore(() =>
-        useMarkAsWatched({
-          type: 'show',
-          media: {
-            id: ShowSiloMappedMock.id,
-            effectiveReleaseDate: new Date(),
-          },
-        })
-      );
-
-      await removeWatched();
-
-      expect(lastActionToast(notify)?.action).toBeUndefined();
     });
   });
 });

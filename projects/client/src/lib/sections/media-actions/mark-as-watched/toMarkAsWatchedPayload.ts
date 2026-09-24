@@ -27,24 +27,23 @@ type MediaTypeMap = MoviesPayload | ShowsPayload | EpisodesPayload;
 
 export function toMarkAsWatchedPayload(
   target: MediaStoreProps,
-  watchedAt?: MarkAsWatchedAt | ReadonlyMap<number, Date>,
+  watchedAt?: MarkAsWatchedAt,
 ): MediaTypeMap {
-  const toWatchedAt = (id: number) => {
-    const value = watchedAt instanceof Map ? watchedAt.get(id) : watchedAt;
-    return value instanceof Date ? value.toISOString() : value;
-  };
+  const watchedAtDate = watchedAt instanceof Date
+    ? watchedAt.toISOString()
+    : watchedAt;
 
   if (target.type === 'show') {
     const shows = Array.isArray(target.media) ? target.media : [target.media];
     return {
       shows: shows.map(({ id, seasons }) => ({
         ids: { trakt: id },
-        watched_at: !seasons ? toWatchedAt(id) : undefined,
+        watched_at: !seasons ? watchedAtDate : undefined,
         seasons: seasons?.map((season) => ({
           number: season.number,
           episodes: season.episodes.map((episode) => ({
             number: episode.number,
-            watched_at: episode.watched_at ?? toWatchedAt(id),
+            watched_at: episode.watched_at ?? watchedAtDate,
           })),
         })),
       })),
@@ -54,7 +53,7 @@ export function toMarkAsWatchedPayload(
   const media = Array.isArray(target.media) ? target.media : [target.media];
   const payload = media.map(({ id }) => ({
     ids: { trakt: id },
-    watched_at: toWatchedAt(id),
+    watched_at: watchedAtDate,
   }));
 
   return target.type === 'movie' ? { movies: payload } : { episodes: payload };

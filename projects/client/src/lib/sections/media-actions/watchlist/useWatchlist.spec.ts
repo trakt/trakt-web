@@ -1,13 +1,16 @@
+import { m } from '$lib/features/i18n/messages.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
+import { server } from '$mocks/server.ts';
 import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
 import { captureRequests } from '$test/beds/request/captureRequests.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
+import { http, HttpResponse } from 'msw';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useWatchlist } from './useWatchlist.ts';
@@ -152,23 +155,48 @@ describe('useWatchlist', () => {
     });
   });
 
-  describe('action confirmation undo', () => {
-    it('should re-add to the watchlist when the removal toast Undo runs', async () => {
+  describe('action confirmation', () => {
+    it('should NOT raise an action toast on removal', async () => {
       const { removeFromWatchlist } = await renderStore(() =>
         useWatchlist({ type: 'movie', media: MovieMatrixMappedMock })
       );
 
-      const removeRequests = await captureRequests(() => removeFromWatchlist());
-      expect(removeRequests).toContain('POST /sync/watchlist/remove');
+      await removeFromWatchlist();
 
-      const toast = lastActionToast(notify);
-      expect(toast?.action).toBeDefined();
+      expect(notify).not.toHaveBeenCalled();
+    });
 
-      const undoRequests = await captureRequests(async () => {
-        await toast?.action?.onAction();
-      });
-      expect(undoRequests).toContain('POST /sync/watchlist');
-      expect(undoRequests).not.toContain('POST /sync/watchlist/remove');
+    it('should offer to change the list when adding', async () => {
+      const { addToWatchlist } = await renderStore(() =>
+        useWatchlist({ type: 'movie', media: MovieMatrixMappedMock })
+      );
+
+      const addRequests = await captureRequests(() => addToWatchlist());
+      expect(addRequests).toContain('POST /sync/watchlist');
+
+      expect(lastActionToast(notify)?.action?.text).toBe(
+        m.action_toast_action_change_list(),
+      );
+    });
+
+    it('should NOT raise an action toast when the addition is queued offline', async () => {
+      server.use(
+        http.post(
+          'http://localhost/sync/watchlist',
+          () => HttpResponse.error(),
+        ),
+      );
+
+      const { addToWatchlist } = await renderStore(() =>
+        useWatchlist({
+          type: 'movie',
+          media: { ...MovieMatrixMappedMock, id: 999_998 },
+        })
+      );
+
+      await addToWatchlist();
+
+      expect(notify).not.toHaveBeenCalled();
     });
   });
 });

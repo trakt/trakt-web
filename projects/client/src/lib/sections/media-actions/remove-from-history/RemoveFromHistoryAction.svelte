@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { isToastEnabledForStyle } from "../_internal/isToastEnabledForStyle";
   import RemoveFromHistoryButton from "$lib/components/buttons/remove-from-history/RemoveFromHistoryButton.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -21,11 +20,7 @@
   }: RemoveFromHistoryActionProps = $props();
 
   const { isRemoving, removeFromHistory } = $derived(
-    useRemoveFromHistory({
-      ...entry,
-      title,
-      isToastEnabled: isToastEnabledForStyle(style),
-    }),
+    useRemoveFromHistory(entry),
   );
 
   const { confirm } = useConfirm();
