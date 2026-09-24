@@ -42,6 +42,7 @@ export const commentRepliesQuery = defineInfiniteQuery({
     InvalidateAction.Comment.Reply('movie'),
     InvalidateAction.Comment.Reply('show'),
     InvalidateAction.Comment.Reply('episode'),
+    InvalidateAction.Comment.Reply('season'),
   ],
   dependencies: (
     params,
