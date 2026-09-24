@@ -5,7 +5,6 @@ import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToUpcomingEpisodeEntry } from '$lib/requests/_internal/mapToUpcomingEpisodeEntry.ts';
 import { type ApiParams, unauthorizedApi } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
-import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type {
@@ -65,14 +64,7 @@ const releasesCalendarRequest = (
 
 export const releasesCalendarQuery = defineQuery({
   key: 'releasesCalendar',
-  invalidations: [
-    InvalidateAction.Watchlisted('show'),
-    InvalidateAction.MarkAsWatched('episode'),
-    InvalidateAction.MarkAsWatched('show'),
-    InvalidateAction.Drop('show'),
-    InvalidateAction.Watchlisted('movie'),
-    InvalidateAction.MarkAsWatched('movie'),
-  ],
+  invalidations: [],
   dependencies: (
     params: ReleasesCalendarParams,
   ) => [
