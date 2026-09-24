@@ -193,6 +193,8 @@
 <div
   use:scrollActiveItemIntoView={isCurrentEpisode}
   class="trakt-season-episode-item"
+  class:is-current-episode={isCurrentEpisode}
+  aria-current={isCurrentEpisode ? "page" : undefined}
 >
   {@render episodeItem()}
 </div>
@@ -206,3 +208,15 @@
     onClose={() => (isWatchUntilDrawerOpen = false)}
   />
 {/if}
+
+<style lang="scss">
+  /*
+    Marks the episode currently open in the drawer. The ring reuses the token
+    behind the hover and d-pad focus rings, and the title switches to the
+    emphasis colour so the card stays distinct while a neighbour is hovered.
+  */
+  .trakt-season-episode-item.is-current-episode {
+    --color-override-card-outline: var(--color-card-border-hover);
+    --color-override-card-title: var(--color-text-emphasis);
+  }
+</style>

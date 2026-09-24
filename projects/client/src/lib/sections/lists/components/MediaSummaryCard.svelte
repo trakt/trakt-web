@@ -352,10 +352,16 @@
 
   :global(.trakt-summary-card) {
     :global(.trakt-card-content) {
-      outline: var(--border-thickness-xs) solid transparent;
+      outline: var(--border-thickness-xs) solid
+        var(--color-override-card-outline, transparent);
       transition:
         opacity var(--transition-increment) ease-in-out,
         outline-color var(--transition-increment) ease-in-out;
+    }
+
+    /* The summary card rings its body, never the inner cover. */
+    :global(.trakt-card-cover) {
+      --color-override-card-outline: transparent;
     }
 
     @include for-mouse() {

@@ -81,7 +81,7 @@
       }
 
       :global(.trakt-card-title) {
-        color: var(--color-text-primary);
+        color: var(--color-override-card-title, var(--color-text-primary));
         margin: 0;
         font-weight: 500;
 
