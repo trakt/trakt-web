@@ -36,7 +36,10 @@ type SoundtrackType = SourceType & {
   position: number;
   matched_on: string;
 };
-type CommentType = { action: 'post' | 'reply' | 'edit' };
+type CommentType = {
+  action: 'post' | 'reply' | 'edit';
+  type: 'text' | 'gif' | 'text-and-gif';
+};
 type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
 type CalendarType = { action: 'reset' | 'next' | 'previous' };
 type StreamOnType = SourceType;
