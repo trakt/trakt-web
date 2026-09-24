@@ -46,6 +46,17 @@
 
     return scrollActiveCommentIntoView(node, scrollContainerClass);
   };
+
+  let areRepliesExpanded = $state(false);
+
+  function toggleReplies() {
+    areRepliesExpanded = !areRepliesExpanded;
+  }
+
+  function onReplyPost() {
+    areRepliesExpanded = true;
+    reset();
+  }
 </script>
 
 <Card
@@ -63,7 +74,13 @@
 
     <div class="trakt-comment-thread">
       <CommentBody {comment} {media} type="full" />
-      <CommentReplies {comment} {media} {...typeProps} />
+      <CommentReplies
+        {comment}
+        {media}
+        isExpanded={areRepliesExpanded}
+        onToggle={toggleReplies}
+        {...typeProps}
+      />
     </div>
 
     <CommentFooter>
@@ -78,7 +95,7 @@
       <CommentInput
         id={comment.id}
         commentType="reply"
-        onCommentPost={reset}
+        onCommentPost={onReplyPost}
         placeholder={m.textarea_placeholder_reply()}
         label={m.button_label_post_reply()}
         type={typeProps.type}
