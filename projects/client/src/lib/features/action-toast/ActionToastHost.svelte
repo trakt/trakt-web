@@ -1,19 +1,8 @@
 <script lang="ts">
   import Snackbar from "$lib/components/snackbar/Snackbar.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
-  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import { actionToastStore } from "./_internal/actionToastStore.ts";
   import { ACTION_TOAST_DURATION } from "./constants/index.ts";
-
-  const { isEnabled } = useFeatureFlag();
-  const isActionConfirmationsEnabled = isEnabled(
-    FeatureFlag.ActionConfirmations,
-  );
-
-  $effect(() => {
-    actionToastStore.setEnabled($isActionConfirmationsEnabled);
-  });
 
   const toast = $derived($actionToastStore);
 
