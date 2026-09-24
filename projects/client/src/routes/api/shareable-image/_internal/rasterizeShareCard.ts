@@ -2,6 +2,7 @@ import {
   SHARE_TYPE_DIMENSIONS,
   type ShareType,
 } from '$lib/features/share/models/ShareType.ts';
+import { unwrapGradientPatterns } from './unwrapGradientPatterns.ts';
 import { useShareCodecs } from './useShareCodecs.ts';
 
 const QUALITY: Record<ShareType, number> = {
@@ -21,7 +22,7 @@ export async function rasterizeShareCard(
   const { Resvg, encodeJpeg } = await useShareCodecs();
   const { width, height } = SHARE_TYPE_DIMENSIONS[variant];
 
-  const rendered = new Resvg(svg, {
+  const rendered = new Resvg(unwrapGradientPatterns(svg), {
     fitTo: { mode: 'width', value: width },
   }).render();
 
