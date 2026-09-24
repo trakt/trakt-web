@@ -33,7 +33,6 @@ describe('showSeasonPeopleQuery', () => {
     });
     const result = await runQuery({
       factory: () => {
-        // The previous key contained the query id, schema hash, slug and season.
         useQueryClient().setQueryData(
           options.queryKey.slice(0, 4),
           ShowSiloPeopleMappedMock,
