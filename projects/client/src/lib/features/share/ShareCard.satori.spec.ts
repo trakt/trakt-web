@@ -19,8 +19,6 @@ vi.mock('$lib/features/share/models/ShareType.ts', () => ({
 const pixelPng =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==';
 
-const pngSignature = [137, 80, 78, 71, 13, 10, 26, 10];
-
 const show = {
   media: ShowSiloMappedMock,
   crew: ShowSiloPeopleMappedMock,
@@ -68,20 +66,15 @@ function toImageResponse(variant: ShareType) {
         weight: 400,
         style: 'normal',
       }],
+      format: 'svg',
     },
   );
 }
 
-function renderPng(variant: ShareType): Promise<ArrayBuffer> {
-  return toImageResponse(variant).arrayBuffer().catch((e: unknown) => {
+function renderSvg(variant: ShareType): Promise<string> {
+  return toImageResponse(variant).text().catch((e: unknown) => {
     throw new Error(toRootMessage(e));
   });
-}
-
-function isPng(buffer: ArrayBuffer): boolean {
-  const signature = new Uint8Array(buffer.slice(0, pngSignature.length));
-
-  return pngSignature.every((byte, index) => signature[index] === byte);
 }
 
 describe.skipIf(!process.env.CI)('component: ShareCard through satori', () => {
@@ -96,9 +89,9 @@ describe.skipIf(!process.env.CI)('component: ShareCard through satori', () => {
       const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
       const error = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-      const png = await renderPng(variant);
+      const svg = await renderSvg(variant);
 
-      expect(isPng(png)).toBe(true);
+      expect(svg.startsWith('<svg')).toBe(true);
       expect(complaints(warn.mock.calls)).toEqual([]);
       expect(complaints(error.mock.calls)).toEqual([]);
     });

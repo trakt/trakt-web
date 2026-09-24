@@ -11,7 +11,7 @@ describe('util: buildImagePath', () => {
       slug: 'reacher',
     });
 
-    expect(path).toBe('images/share/og/show/reacher/image.png');
+    expect(path).toBe('images/share/og/show/reacher/image.jpg');
   });
 
   describe('share types', () => {
@@ -22,7 +22,7 @@ describe('util: buildImagePath', () => {
     ])('should store the %s variant under %s', (shareType, folder) => {
       const path = buildImagePath({ shareType, type: 'show', slug: 'reacher' });
 
-      expect(path).toBe(`images/share/${folder}/show/reacher/image.png`);
+      expect(path).toBe(`images/share/${folder}/show/reacher/image.jpg`);
     });
   });
 
@@ -36,7 +36,7 @@ describe('util: buildImagePath', () => {
           slug: 'reacher',
         });
 
-        expect(path).toBe(`images/share/feed/${type}/reacher/image.png`);
+        expect(path).toBe(`images/share/feed/${type}/reacher/image.jpg`);
       },
     );
   });
