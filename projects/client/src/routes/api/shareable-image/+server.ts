@@ -10,6 +10,7 @@ import { ImageResponse } from '@ethercorps/sveltekit-og';
 import type { RequestHandler } from '@sveltejs/kit';
 import { buildImageMetadata } from './_internal/buildImageMetadata.ts';
 import { buildImagePath } from './_internal/buildImagePath.ts';
+import { createServerTiming } from './_internal/createServerTiming.ts';
 import { fetchMediaData } from './_internal/fetchMediaData.ts';
 import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
 import { loadShareFonts } from './_internal/loadShareFonts.ts';
@@ -53,16 +54,25 @@ export const GET: RequestHandler = async (
 
   const shareType = variant as ShareType;
   const imagePath = buildImagePath({ shareType, slug, type });
+  const timing = createServerTiming();
+  const isTimed = url.searchParams.get('timing') === 'true';
+  const responseHeaders = () =>
+    isTimed
+      ? { ...imageHeaders, 'Server-Timing': timing.toHeader() }
+      : imageHeaders;
 
   if (!IS_DEV && platform) {
-    const cachedImage = await platform.env.R2_WALTER.get(imagePath);
+    const cachedImage = await timing.measure(
+      'cache',
+      () => platform.env.R2_WALTER.get(imagePath),
+    );
     if (cachedImage) {
       /*
         Cast needed due to structural mismatch between Cloudflare's ReadableStream
         and the DOM ReadableStream, they're the same at runtime.
       */
       return new Response(cachedImage.body as BodyInit, {
-        headers: imageHeaders,
+        headers: responseHeaders(),
       });
     }
   }
@@ -73,8 +83,14 @@ export const GET: RequestHandler = async (
   });
 
   const [mediaData, fonts] = await Promise.all([
-    fetchMediaData({ type, slug, fetch: fetchFn }).catch(() => null),
-    loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
+    timing.measure(
+      'data',
+      () => fetchMediaData({ type, slug, fetch: fetchFn }).catch(() => null),
+    ),
+    timing.measure(
+      'fonts',
+      () => loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
+    ),
   ]);
 
   if (!mediaData) {
@@ -85,17 +101,18 @@ export const GET: RequestHandler = async (
   const { width, height } = SHARE_TYPE_DIMENSIONS[shareType];
 
   const toBuffer = async (posterUrl: string) => {
-    const svg = await new ImageResponse(
-      ShareCard,
-      {
-        width,
-        height,
-        fonts,
-        format: 'svg',
-        debug: IS_DEV && url.searchParams.get('debug') === 'true',
-      },
-      { media, crew, ratings, posterUrl, variant: shareType },
-    ).text();
+    const svg = await timing.measure('svg', () =>
+      new ImageResponse(
+        ShareCard,
+        {
+          width,
+          height,
+          fonts,
+          format: 'svg',
+          debug: IS_DEV && url.searchParams.get('debug') === 'true',
+        },
+        { media, crew, ratings, posterUrl, variant: shareType },
+      ).text());
 
     return rasterizeShareCard({ svg, variant: shareType });
   };
@@ -123,7 +140,7 @@ export const GET: RequestHandler = async (
       }
     }
 
-    return new Response(buffer, { headers: imageHeaders });
+    return new Response(buffer, { headers: responseHeaders() });
   } catch (e) {
     error('ImageResponse error:', e);
     return new Response('Failed to generate image', { status: 500 });
