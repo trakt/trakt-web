@@ -7,6 +7,7 @@
   import FeedContent from "./_internal/FeedContent.svelte";
   import { getBackgroundGradient } from "./_internal/getBackgroundGradient.ts";
   import { getWatermarkPlacement } from "./_internal/getWatermarkPlacement.ts";
+  import { hexToRgba } from "$lib/utils/color/hexToRgba.ts";
   import OpenGraphContent from "./_internal/OpenGraphContent.svelte";
   import Poster from "./_internal/Poster.svelte";
   import StoryContent from "./_internal/StoryContent.svelte";
@@ -15,6 +16,9 @@
   import { SHARE_TYPE_DIMENSIONS, type ShareType } from "./models/ShareType.ts";
 
   const defaultLogoColor = "#00588c";
+  const watermarkAlpha = 0.1;
+  const defaultWatermarkFill = hexToRgba(defaultLogoColor, watermarkAlpha) ??
+    defaultLogoColor;
 
   type ShareCardProps = {
     media: MediaEntry;
@@ -34,12 +38,16 @@
 
   const logoColor = $derived.by(() => {
     const color = media.colors?.at(0);
-    if (Boolean(color) && color !== "transparent") {
+    if (color && color !== "transparent") {
       return color;
     }
 
     return defaultLogoColor;
   });
+
+  const watermarkFill = $derived(
+    hexToRgba(logoColor, watermarkAlpha) ?? defaultWatermarkFill,
+  );
 
   const backdropHeight = $derived(height * 0.8);
   const backdropWidth = $derived(width * 0.75);
@@ -73,9 +81,9 @@
 
   <div
     class="trakt-share-card-background"
-    style="color: {logoColor}; {watermark.style}"
+    style={watermark.style}
   >
-    <TraktLogoLarge viewBox={watermark.viewBox} />
+    <TraktLogoLarge viewBox={watermark.viewBox} fill={watermarkFill} />
   </div>
   <div class="trakt-share-card-logo" style={logoStyle}>
     <TraktLogoText />
@@ -121,8 +129,6 @@
       height: 100%;
       width: 100%;
       overflow: visible;
-
-      opacity: 0.1;
     }
   }
 
