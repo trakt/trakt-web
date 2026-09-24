@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { isToastEnabledForStyle } from "../_internal/isToastEnabledForStyle";
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -25,12 +24,7 @@
     markAsWatched,
     removeWatched,
     isWatchable,
-  } = $derived(
-    useMarkAsWatched({
-      ...target,
-      isToastEnabled: isToastEnabledForStyle(style),
-    }),
-  );
+  } = $derived(useMarkAsWatched(target));
 
   const { confirm } = useConfirm();
   const confirmMarkAsWatched = $derived(

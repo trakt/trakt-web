@@ -10678,19 +10678,6 @@
       "default": "Added to your watchlist",
       "description": "Confirmation toast shown after adding to the watchlist when no single title is available (e.g. bulk actions)."
     },
-    "action_toast_removed_from_watchlist": {
-      "default": "<b>{title}</b> was removed from your watchlist",
-      "description": "Confirmation toast shown after removing a title from the watchlist. {title} is the movie or show title.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "action_toast_removed_from_watchlist_generic": {
-      "default": "Removed from your watchlist",
-      "description": "Confirmation toast shown after removing from the watchlist when no single title is available."
-    },
     "action_toast_action_change_list": {
       "default": "Change list",
       "description": "Inline link in the watchlist confirmation toast that opens the manage-lists drawer to move the item to a different list."
@@ -10707,41 +10694,6 @@
     "action_toast_action_failed": {
       "default": "That didn't work. Please try again.",
       "description": "Confirmation toast shown when an action offered by a previous toast, such as Undo, fails."
-    },
-    "action_toast_label_undo": {
-      "default": "Undo the last change",
-      "description": "Accessible label for the 'Undo' button in an action-confirmation toast."
-    },
-    "action_toast_added_to_favorites": {
-      "default": "<b>{title}</b> was added to your favorites",
-      "description": "Confirmation toast shown after adding a title to favorites. {title} is the movie or show title.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "action_toast_removed_from_favorites": {
-      "default": "<b>{title}</b> was removed from your favorites",
-      "description": "Confirmation toast shown after removing a title from favorites. {title} is the movie or show title.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "action_toast_removed_from_history": {
-      "default": "<b>{title}</b> was removed from your history",
-      "description": "Confirmation toast shown after removing a title from watch history. {title} is the movie, show, or episode title.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "action_toast_removed_from_history_generic": {
-      "default": "Removed from your history",
-      "description": "Confirmation toast shown after removing from watch history when no single title is available."
     },
     "preview_feature_title_action_confirmations": {
       "default": "Action confirmations",

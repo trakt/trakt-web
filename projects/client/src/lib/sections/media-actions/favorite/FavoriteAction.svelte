@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { isToastEnabledForStyle } from "../_internal/isToastEnabledForStyle";
   import FavoriteButton from "$lib/components/buttons/favorite/FavoriteButton.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -41,14 +40,7 @@
     isQueued,
     addToFavorites: doAddToFavorites,
     removeFromFavorites,
-  } = $derived(
-    useFavorites({
-      type,
-      id,
-      title,
-      isToastEnabled: isToastEnabledForStyle(style),
-    }),
-  );
+  } = $derived(useFavorites({ type, id, title }));
 
   const addToFavorites = async () => {
     await doAddToFavorites();

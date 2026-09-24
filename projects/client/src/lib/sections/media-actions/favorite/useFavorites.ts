@@ -1,8 +1,4 @@
-import { undoToastAction } from '$lib/features/action-toast/undoToastAction.ts';
-import { toGatedNotify } from '$lib/features/action-toast/toGatedNotify.ts';
-import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { m } from '$lib/features/i18n/messages.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { findPendingOverride } from '$lib/features/offline/findPendingOverride.ts';
 import { isAddEndpoint } from '$lib/features/offline/isAddEndpoint.ts';
@@ -20,7 +16,6 @@ export type FavoritesStoreProps = {
   type: MediaType;
   id: number;
   title: string;
-  isToastEnabled?: boolean;
 };
 
 function getFavoritesPayload(
@@ -34,11 +29,8 @@ function getFavoritesPayload(
   }
 }
 
-export function useFavorites(
-  { type, id, title, isToastEnabled = true }: FavoritesStoreProps,
-) {
+export function useFavorites({ type, id }: FavoritesStoreProps) {
   const { favorites } = useUser();
-  const notify = toGatedNotify(useActionToast().notify, isToastEnabled);
 
   const { actions } = useOfflineActions();
   const { isQueued } = useIsQueued({
@@ -83,24 +75,11 @@ export function useFavorites(
     invalidations: whenExecuted([InvalidateAction.Favorited(type)]),
   }));
 
-  const addOrRemoveFavorite = async (action: 'add' | 'remove') => {
-    await favoriting.mutate(action);
-
-    notify({
-      message: action === 'add'
-        ? m.action_toast_added_to_favorites({ title })
-        : m.action_toast_removed_from_favorites({ title }),
-      action: undoToastAction(() =>
-        addOrRemoveFavorite(action === 'add' ? 'remove' : 'add')
-      ),
-    });
-  };
-
   return {
     isUpdatingFavorite: favoriting.isPending,
     isFavorited,
     isQueued,
-    addToFavorites: async () => await addOrRemoveFavorite('add'),
-    removeFromFavorites: async () => await addOrRemoveFavorite('remove'),
+    addToFavorites: async () => await favoriting.mutate('add'),
+    removeFromFavorites: async () => await favoriting.mutate('remove'),
   };
 }
