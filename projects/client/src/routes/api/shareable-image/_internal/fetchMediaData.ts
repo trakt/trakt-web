@@ -1,4 +1,5 @@
 import type { ApiParams } from '$lib/requests/api.ts';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { moviePeopleQuery } from '$lib/requests/queries/movies/moviePeopleQuery.ts';
 import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.ts';
@@ -10,13 +11,32 @@ import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.t
 type FetchMediaDataParams = {
   type: MediaType;
   slug: string;
+  onSummary?: (media: MediaEntry) => Promise<unknown>;
 } & ApiParams;
 
-function resolveMediaData({ type, slug, fetch }: FetchMediaDataParams) {
+function withSummaryHook<T extends MediaEntry>(
+  summary: Promise<T | Nil>,
+  onSummary: FetchMediaDataParams['onSummary'],
+) {
+  return summary.then(async (media) => {
+    if (media && onSummary) {
+      await onSummary(media).catch(() => undefined);
+    }
+
+    return media;
+  });
+}
+
+function resolveMediaData(
+  { type, slug, fetch, onSummary }: FetchMediaDataParams,
+) {
   if (type === 'movie') {
     return Promise.all(
       [
-        movieSummaryQuery({ slug, fetch }).execute(),
+        withSummaryHook(
+          movieSummaryQuery({ slug, fetch }).execute(),
+          onSummary,
+        ),
         movieRatingQuery({ slug, fetch }).execute(),
         moviePeopleQuery({ slug, fetch }).execute(),
       ] as const,
@@ -25,7 +45,7 @@ function resolveMediaData({ type, slug, fetch }: FetchMediaDataParams) {
 
   return Promise.all(
     [
-      showSummaryQuery({ slug, fetch }).execute(),
+      withSummaryHook(showSummaryQuery({ slug, fetch }).execute(), onSummary),
       showRatingQuery({ slug, fetch }).execute(),
       showPeopleQuery({ slug, fetch }).execute(),
     ] as const,

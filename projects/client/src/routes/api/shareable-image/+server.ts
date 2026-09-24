@@ -16,6 +16,7 @@ import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
 import { loadShareFonts } from './_internal/loadShareFonts.ts';
 import { rasterizeShareCard } from './_internal/rasterizeShareCard.ts';
 import { resolvePosterSource } from './_internal/resolvePosterSource.ts';
+import { warmPoster } from './_internal/warmPoster.ts';
 
 const cacheControl = 'public, max-age=604800';
 
@@ -82,15 +83,29 @@ export const GET: RequestHandler = async (
     fetch,
   });
 
+  const mediaDataRequest = timing.measure(
+    'data',
+    () =>
+      fetchMediaData({
+        type,
+        slug,
+        fetch: fetchFn,
+        onSummary: (media) =>
+          timing.measure('poster', () =>
+            warmPoster({
+              posterUrl: resolvePosterSource(media.poster.url.medium),
+              fetch: globalThis.fetch,
+            })),
+      }).catch(() => null),
+  );
+  const fontsRequest = timing.measure(
+    'fonts',
+    () => loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
+  );
+
   const [mediaData, fonts] = await Promise.all([
-    timing.measure(
-      'data',
-      () => fetchMediaData({ type, slug, fetch: fetchFn }).catch(() => null),
-    ),
-    timing.measure(
-      'fonts',
-      () => loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
-    ),
+    mediaDataRequest,
+    fontsRequest,
   ]);
 
   if (!mediaData) {
