@@ -57,7 +57,7 @@ describe('pruneShareImages', () => {
     it('prunes a fresh release cached over 12 hours ago (tier 1: ≤14 days)', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/the-dark-knight/image.png',
+          key: 'images/share/og/movie/the-dark-knight/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.hours(13)),
             releasedAt: releasedAt(7),
@@ -74,7 +74,7 @@ describe('pruneShareImages', () => {
     it('skips a fresh release cached under 12 hours ago (tier 1: ≤14 days)', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/the-dark-knight/image.png',
+          key: 'images/share/og/movie/the-dark-knight/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.hours(11)),
             releasedAt: releasedAt(7),
@@ -91,7 +91,7 @@ describe('pruneShareImages', () => {
     it('prunes a mid-age release cached over 3 days ago (tier 2: 15-40 days)', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/oppenheimer/image.png',
+          key: 'images/share/og/movie/oppenheimer/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.days(4)),
             releasedAt: releasedAt(20),
@@ -107,7 +107,7 @@ describe('pruneShareImages', () => {
     it('skips a mid-age release cached under 3 days ago (tier 2: 15-40 days)', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/oppenheimer/image.png',
+          key: 'images/share/og/movie/oppenheimer/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.days(2)),
             releasedAt: releasedAt(20),
@@ -123,7 +123,7 @@ describe('pruneShareImages', () => {
     it('prunes older release cached over 7 days ago (tier 3: 41-120 days)', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/show/breaking-bad/image.png',
+          key: 'images/share/og/show/breaking-bad/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.days(8)),
             releasedAt: releasedAt(60),
@@ -139,7 +139,7 @@ describe('pruneShareImages', () => {
     it('prunes catalog content cached over 30 days ago (fallback: >120 days)', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/show/the-wire/image.png',
+          key: 'images/share/og/show/the-wire/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.days(31)),
             releasedAt: releasedAt(365 * 10),
@@ -155,7 +155,7 @@ describe('pruneShareImages', () => {
     it('skips catalog content cached under 30 days ago (fallback: >120 days)', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/show/the-wire/image.png',
+          key: 'images/share/og/show/the-wire/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.days(20)),
             releasedAt: releasedAt(365 * 10),
@@ -173,7 +173,7 @@ describe('pruneShareImages', () => {
     it('prunes when the cached age exactly equals the recheck interval', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/the-dark-knight/image.png',
+          key: 'images/share/og/movie/the-dark-knight/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.hours(12)),
             releasedAt: releasedAt(7),
@@ -190,7 +190,7 @@ describe('pruneShareImages', () => {
     it('keeps a release aged exactly 14 days in tier 1', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/the-dark-knight/image.png',
+          key: 'images/share/og/movie/the-dark-knight/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.hours(13)),
             releasedAt: releasedAt(14),
@@ -207,7 +207,7 @@ describe('pruneShareImages', () => {
     it('moves a release aged just over 14 days into tier 2', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/the-dark-knight/image.png',
+          key: 'images/share/og/movie/the-dark-knight/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.hours(13)),
             releasedAt: releasedAt(14 + 1 / 24),
@@ -226,7 +226,7 @@ describe('pruneShareImages', () => {
     it('always prunes entries missing releasedAt metadata', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/legacy-film/image.png',
+          key: 'images/share/og/movie/legacy-film/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.hours(1)),
           },
@@ -244,7 +244,7 @@ describe('pruneShareImages', () => {
     it('still reads objects written before the ISO switch', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/epoch-film/image.png',
+          key: 'images/share/og/movie/epoch-film/image.jpg',
           customMetadata: {
             cachedAt: String(NOW - time.hours(11)),
             releasedAt: String(NOW - time.days(7)),
@@ -263,7 +263,7 @@ describe('pruneShareImages', () => {
     it('skips entries with no cachedAt metadata', async () => {
       const bucket = makeBucket([
         {
-          key: 'images/share/og/movie/unknown/image.png',
+          key: 'images/share/og/movie/unknown/image.jpg',
           customMetadata: { releasedAt: releasedAt(10) },
         },
       ]);
@@ -276,7 +276,7 @@ describe('pruneShareImages', () => {
 
     it('skips entries with no metadata at all', async () => {
       const bucket = makeBucket([
-        { key: 'images/share/og/movie/no-meta/image.png' },
+        { key: 'images/share/og/movie/no-meta/image.jpg' },
       ]);
 
       const result = await pruneShareImages(bucket, prefixes);
@@ -325,14 +325,14 @@ describe('pruneShareImages', () => {
     it('counts delete errors and continues processing remaining objects', async () => {
       const objects: BucketObject[] = [
         {
-          key: 'images/share/og/movie/film-a/image.png',
+          key: 'images/share/og/movie/film-a/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.days(31)),
             releasedAt: releasedAt(200),
           },
         },
         {
-          key: 'images/share/og/movie/film-b/image.png',
+          key: 'images/share/og/movie/film-b/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.days(31)),
             releasedAt: releasedAt(200),
@@ -354,7 +354,7 @@ describe('pruneShareImages', () => {
     it('follows cursor until truncated is false', async () => {
       const page1: BucketObject[] = [
         {
-          key: 'images/share/og/movie/film-a/image.png',
+          key: 'images/share/og/movie/film-a/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.days(31)),
             releasedAt: releasedAt(200),
@@ -363,7 +363,7 @@ describe('pruneShareImages', () => {
       ];
       const page2: BucketObject[] = [
         {
-          key: 'images/share/og/movie/film-b/image.png',
+          key: 'images/share/og/movie/film-b/image.jpg',
           customMetadata: {
             cachedAt: cachedAt(time.days(31)),
             releasedAt: releasedAt(200),

@@ -13,12 +13,13 @@ import { buildImagePath } from './_internal/buildImagePath.ts';
 import { fetchMediaData } from './_internal/fetchMediaData.ts';
 import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
 import { loadShareFonts } from './_internal/loadShareFonts.ts';
+import { rasterizeShareCard } from './_internal/rasterizeShareCard.ts';
 import { resolvePosterSource } from './_internal/resolvePosterSource.ts';
 
 const cacheControl = 'public, max-age=604800';
 
 const imageHeaders = {
-  'Content-Type': 'image/png',
+  'Content-Type': 'image/jpeg',
   'Cache-Control': cacheControl,
 };
 
@@ -83,17 +84,21 @@ export const GET: RequestHandler = async (
   const { media, ratings, crew } = mediaData;
   const { width, height } = SHARE_TYPE_DIMENSIONS[shareType];
 
-  const toBuffer = (posterUrl: string) =>
-    new ImageResponse(
+  const toBuffer = async (posterUrl: string) => {
+    const svg = await new ImageResponse(
       ShareCard,
       {
         width,
         height,
         fonts,
+        format: 'svg',
         debug: IS_DEV && url.searchParams.get('debug') === 'true',
       },
       { media, crew, ratings, posterUrl, variant: shareType },
-    ).arrayBuffer();
+    ).text();
+
+    return rasterizeShareCard({ svg, variant: shareType });
+  };
 
   try {
     const buffer = await toBuffer(
@@ -106,7 +111,7 @@ export const GET: RequestHandler = async (
     if (!IS_DEV && platform) {
       const cached = platform.env.R2_WALTER
         .put(imagePath, buffer, {
-          httpMetadata: { contentType: 'image/png' },
+          httpMetadata: { contentType: 'image/jpeg' },
           customMetadata: buildImageMetadata({ media, cachedAt: new Date() }),
         })
         .catch((e: unknown) => error('Failed to cache image in R2:', e));

@@ -9,5 +9,5 @@ type BuildImagePathProps = {
 };
 
 export function buildImagePath({ shareType, slug, type }: BuildImagePathProps) {
-  return `${shareImagePrefix({ shareType, type })}${slug}/image.png`;
+  return `${shareImagePrefix({ shareType, type })}${slug}/image.jpg`;
 }
