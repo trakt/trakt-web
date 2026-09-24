@@ -81,6 +81,8 @@
     "@sentry/sveltekit": "10.75.0",
     "@svelte-put/shortcut": "4.2.0",
     "@sveltejs/kit": "2.70.3",
+    "@takumi-rs/helpers": "2.14.0",
+    "@takumi-rs/wasm": "2.14.0",
     "@tanstack/query-core": "5.103.1",
     "@tanstack/query-devtools": "5.103.1",
     "@tanstack/query-persist-client-core": "5.103.1",

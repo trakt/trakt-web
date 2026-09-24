@@ -23,6 +23,8 @@
     "npm:@sveltejs/adapter-cloudflare@7.2.9": "7.2.9_@sveltejs+kit@2.70.3__@sveltejs+vite-plugin-svelte@7.3.0___svelte@5.57.1___vite@8.3.0____esbuild@0.28.2____jiti@2.7.0____sass-embedded@1.104.1___esbuild@0.28.2___sass-embedded@1.104.1__svelte@5.57.1__typescript@5.9.3__vite@8.3.0___esbuild@0.28.2___jiti@2.7.0___sass-embedded@1.104.1__esbuild@0.28.2__sass-embedded@1.104.1_esbuild@0.28.2_sass-embedded@1.104.1_vite@8.3.0__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.104.1",
     "npm:@sveltejs/kit@2.70.3": "2.70.3_@sveltejs+vite-plugin-svelte@7.3.0__svelte@5.57.1__vite@8.3.0___esbuild@0.28.2___jiti@2.7.0___sass-embedded@1.104.1__esbuild@0.28.2__sass-embedded@1.104.1_svelte@5.57.1_typescript@5.9.3_vite@8.3.0__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.104.1_esbuild@0.28.2_sass-embedded@1.104.1",
     "npm:@sveltejs/vite-plugin-svelte@7.3.0": "7.3.0_svelte@5.57.1_vite@8.3.0__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.104.1_esbuild@0.28.2_sass-embedded@1.104.1",
+    "npm:@takumi-rs/helpers@2.14.0": "2.14.0",
+    "npm:@takumi-rs/wasm@2.14.0": "2.14.0",
     "npm:@tanstack/query-core@5.103.1": "5.103.1",
     "npm:@tanstack/query-devtools@5.103.1": "5.103.1_csstype@3.2.3",
     "npm:@tanstack/query-persist-client-core@5.103.1": "5.103.1",
@@ -2992,6 +2994,15 @@
       "integrity": "sha512-5lSsMOTXURePglDfvuAQUqkGek9Hg2kksOYay2m0+XR++b2NWYL/4sWyuvVBIs8oKnJaxkdi9whaL/sqN13afw==",
       "dependencies": [
         "tslib"
+      ]
+    },
+    "@takumi-rs/helpers@2.14.0": {
+      "integrity": "sha512-jFIpuWfBMAxlULx3tEk2V+FCs1CLOMo2/c7h3I2P+eNzMmxwE9TJ/BtwJVghnLlFW1M88QW/ZOY/E7MqXACWJA=="
+    },
+    "@takumi-rs/wasm@2.14.0": {
+      "integrity": "sha512-ncaNPVl9CL47g5eOyQp1kMPzc0GsUDbQdxRURvNBzMpUC2u6ImeMwJN6ZXiu3tqfSVgYZP1aU0Ntkg+q1S2d4g==",
+      "dependencies": [
+        "@takumi-rs/helpers"
       ]
     },
     "@tanstack/match-sorter-utils@8.19.4": {
@@ -7659,6 +7670,8 @@
             "npm:@sveltejs/adapter-cloudflare@7.2.9",
             "npm:@sveltejs/kit@2.70.3",
             "npm:@sveltejs/vite-plugin-svelte@7.3.0",
+            "npm:@takumi-rs/helpers@2.14.0",
+            "npm:@takumi-rs/wasm@2.14.0",
             "npm:@tanstack/query-core@5.103.1",
             "npm:@tanstack/query-devtools@5.103.1",
             "npm:@tanstack/query-persist-client-core@5.103.1",
