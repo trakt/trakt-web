@@ -101,7 +101,6 @@
     position: relative;
 
     display: flex;
-    border-radius: 16px;
 
     box-sizing: border-box;
   }
