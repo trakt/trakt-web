@@ -1,4 +1,3 @@
-import { afterEach, beforeEach } from 'vitest';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
@@ -6,7 +5,15 @@ import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic
 import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import {
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 import CastDrawerHost from './CastDrawerHost.svelte';
 
 beforeAll(() => {

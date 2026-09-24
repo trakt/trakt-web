@@ -1,11 +1,10 @@
-import { afterEach, beforeEach } from 'vitest';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
 import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { screen, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import DrawerCastSection from './DrawerCastSection.svelte';
 
 describe('DrawerCastSection', () => {
