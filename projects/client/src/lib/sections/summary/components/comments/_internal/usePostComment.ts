@@ -86,6 +86,13 @@ function addCommentRequest(props: PostCommentProps) {
   });
 }
 
+function toContentType({ comment, gif }: PostCommentProps) {
+  if (!gif) return 'text';
+  if (!comment.trim()) return 'gif';
+
+  return 'text-and-gif';
+}
+
 function toInvalidations(props: PostCommentProps) {
   switch (props.commentType) {
     case 'post':
@@ -127,7 +134,7 @@ export function usePostComment() {
     try {
       error.next(null);
 
-      track({ action: props.commentType });
+      track({ action: props.commentType, type: toContentType(props) });
 
       return await comment.mutate(props);
     } catch (commentError) {
