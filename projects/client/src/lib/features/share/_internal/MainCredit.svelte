@@ -48,10 +48,10 @@
     gap: 8px;
 
     font-size: 36px;
+  }
 
-    span {
-      font-size: 26px;
-      flex-shrink: 0;
-    }
+  .trakt-main-credit span {
+    font-size: 26px;
+    flex-shrink: 0;
   }
 </style>

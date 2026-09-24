@@ -79,27 +79,23 @@
     color: #efefef;
     font-size: 32px;
     font-weight: bold;
-
-    span {
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    :global(svg) {
-      width: 32px;
-      height: 32px;
-    }
   }
 
-  .trakt-rating {
-    :global(svg) {
-      color: #9f42c6;
-    }
+  .trakt-rating-item span {
+    font-size: 32px;
+    font-weight: bold;
   }
 
-  .imdb-rating {
-    :global(svg) {
-      width: 64px;
-    }
+  .trakt-rating-item :global(svg) {
+    width: 32px;
+    height: 32px;
+  }
+
+  .trakt-rating :global(svg) {
+    color: #9f42c6;
+  }
+
+  .imdb-rating :global(svg) {
+    width: 64px;
   }
 </style>

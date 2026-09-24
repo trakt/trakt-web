@@ -6,17 +6,18 @@ import ShareCard from '$lib/features/share/ShareCard.svelte';
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/assets.ts';
 import { error } from '$lib/utils/console/print.ts';
 import { IS_DEV } from '$lib/utils/env/index.ts';
-import { ImageResponse } from '@ethercorps/sveltekit-og';
 import type { RequestHandler } from '@sveltejs/kit';
+import { render } from 'svelte/server';
 import { buildImageMetadata } from './_internal/buildImageMetadata.ts';
 import { buildImagePath } from './_internal/buildImagePath.ts';
 import { createServerTiming } from './_internal/createServerTiming.ts';
 import { fetchMediaData } from './_internal/fetchMediaData.ts';
 import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
+import { loadFallbackShareFonts } from './_internal/loadFallbackShareFonts.ts';
+import { loadPosterImages } from './_internal/loadPosterImages.ts';
 import { loadShareFonts } from './_internal/loadShareFonts.ts';
-import { rasterizeShareCard } from './_internal/rasterizeShareCard.ts';
+import { renderShareCard } from './_internal/renderShareCard.ts';
 import { resolvePosterSource } from './_internal/resolvePosterSource.ts';
-import { useShareCodecs } from './_internal/useShareCodecs.ts';
 import { warmPoster } from './_internal/warmPoster.ts';
 
 const cacheControl = 'public, max-age=604800';
@@ -65,9 +66,13 @@ export const GET: RequestHandler = async (
 
   const fontsRequest = timing.measure(
     'fonts',
-    () => loadShareFonts({ bucket: platform?.env?.R2_WALTER }),
+    async () =>
+      await loadShareFonts({ bucket: platform?.env?.R2_WALTER }) ??
+        await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
+          error('Failed to load fallback share fonts:', e);
+          return [];
+        }),
   );
-  useShareCodecs().catch(() => undefined);
 
   if (!IS_DEV && platform) {
     const cachedImage = await timing.measure(
@@ -116,23 +121,22 @@ export const GET: RequestHandler = async (
   }
 
   const { media, ratings, crew } = mediaData;
-  const { width, height } = SHARE_TYPE_DIMENSIONS[shareType];
-
   const toBuffer = async (posterUrl: string) => {
-    const svg = await timing.measure('svg', () =>
-      new ImageResponse(
-        ShareCard,
-        {
-          width,
-          height,
-          fonts,
-          format: 'svg',
-          debug: IS_DEV && url.searchParams.get('debug') === 'true',
-        },
-        { media, crew, ratings, posterUrl, variant: shareType },
-      ).text());
+    const images = await timing.measure(
+      'images',
+      () => loadPosterImages({ posterUrl, fetch: globalThis.fetch }),
+    );
+    const { body, head } = render(ShareCard, {
+      props: { media, crew, ratings, posterUrl, variant: shareType },
+    });
 
-    return rasterizeShareCard({ svg, variant: shareType });
+    return renderShareCard({
+      html: body + head,
+      variant: shareType,
+      fonts,
+      images,
+      debug: IS_DEV && url.searchParams.get('debug') === 'true',
+    });
   };
 
   try {

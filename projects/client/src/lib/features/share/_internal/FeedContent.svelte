@@ -50,8 +50,9 @@
 
     width: 100%;
 
-    :global(.trakt-main-credit) {
-      justify-content: center;
-    }
+  }
+
+  .trakt-feed-details :global(.trakt-main-credit) {
+    justify-content: center;
   }
 </style>

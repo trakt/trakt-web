@@ -124,35 +124,25 @@
 
   .trakt-share-card-background {
     border-radius: 16px;
-
-    :global(svg) {
-      height: 100%;
-      width: 100%;
-      overflow: visible;
-    }
   }
 
-  .trakt-share-card-logo {
-    :global(svg) {
-      height: 100%;
-      width: 100%;
-
-      color: #efefef;
-    }
+  .trakt-share-card-background :global(svg) {
+    height: 100%;
+    width: 100%;
+    overflow: visible;
   }
 
-  .trakt-share-card[data-variant="open-graph"] {
-    .trakt-share-card-logo {
-      width: 175px;
-      height: 42px;
-    }
+  .trakt-share-card-logo :global(svg) {
+    height: 100%;
+    width: 100%;
+
+    color: #efefef;
   }
 
-  .trakt-share-card[data-variant="feed"] {
-    .trakt-share-card-logo {
-      width: 175px;
-      height: 42px;
-    }
+  .trakt-share-card[data-variant="open-graph"] .trakt-share-card-logo,
+  .trakt-share-card[data-variant="feed"] .trakt-share-card-logo {
+    width: 175px;
+    height: 42px;
   }
 
   .trakt-share-card[data-variant="feed"],

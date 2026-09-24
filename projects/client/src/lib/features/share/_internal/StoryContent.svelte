@@ -47,8 +47,9 @@
     width: 100%;
     height: 340px;
 
-    :global(.trakt-main-credit) {
-      justify-content: center;
-    }
+  }
+
+  .trakt-story-details :global(.trakt-main-credit) {
+    justify-content: center;
   }
 </style>
