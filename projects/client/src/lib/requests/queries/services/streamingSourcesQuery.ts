@@ -34,6 +34,7 @@ function mapStreamingSourceResponse(
   return {
     source: sourceResponse.source,
     name: sourceResponse.name,
+    type: sourceResponse.type,
     isFree: sourceResponse.free,
     logoUrl: prependHttps(sourceResponse.images.logo),
     channelLogoUrl: prependHttps(sourceResponse.images.channel),
