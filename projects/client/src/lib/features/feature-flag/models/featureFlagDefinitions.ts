@@ -3,7 +3,6 @@ import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import EyeIcon from '$lib/components/icons/EyeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
-import GifIcon from '$lib/components/icons/GifIcon.svelte';
 import ListIcon from '$lib/components/icons/mobile/ListIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
@@ -115,11 +114,5 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_action_confirmations(),
     addedAt: new Date('2026-08-25'),
     description: () => m.preview_feature_description_action_confirmations(),
-  },
-  [FeatureFlag.CommentGifs]: {
-    icon: GifIcon,
-    title: () => m.preview_feature_title_comment_gifs(),
-    addedAt: new Date('2026-09-16'),
-    description: () => m.preview_feature_description_comment_gifs(),
   },
 };
