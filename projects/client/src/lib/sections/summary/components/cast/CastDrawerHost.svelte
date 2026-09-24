@@ -37,9 +37,9 @@
     onClose: () => void;
   } = $props();
 
-  let isOpen = $state(false);
   const splitCast = useSplitCast();
 
+  let isOpen = $state(false);
   let searchTerm = $state("");
   let creditsType = $state<CreditsType>("cast");
 
@@ -58,13 +58,20 @@
     `cast-list-${type}-${isSearching ? "search" : creditsType}-${group.id}-header`;
 
   const visibleCreditGroups = $derived.by(() => {
-    const groups = toCreditGroups({ crew, type, splitCast: $splitCast, searchTerm: normalizedSearchTerm })
+    const groups = toCreditGroups({
+      crew,
+      type,
+      splitCast: $splitCast,
+      searchTerm: normalizedSearchTerm,
+    })
       .filter((group) => isSearching || group.type === creditsType)
       .map((group) => ({
         ...group,
         showHeader: isSearching || group.type === "cast",
       }));
+
     if ($splitCast || groups.length === 0) return groups;
+
     return [{
       id: "credits",
       type: creditsType,
@@ -73,7 +80,6 @@
       showHeader: false,
     }];
   });
-
 </script>
 
 <Drawer

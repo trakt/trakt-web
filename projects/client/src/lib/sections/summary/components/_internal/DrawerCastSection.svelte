@@ -53,15 +53,18 @@
     return m.drawer_meta_info_cast();
   });
 
+  const isGrouped = $derived($splitCast && type !== "movie");
+
   const visibleCreditGroups = $derived.by(() => {
     const groups = toCreditGroups({
       crew,
       type,
-      splitCast: $splitCast, searchTerm: normalizedSearchTerm,
+      splitCast: $splitCast,
+      searchTerm: normalizedSearchTerm,
       mainCastLabel: m.header_main_cast(),
     }).filter((group) => isSearching || group.type === creditsType);
 
-    if (($splitCast && type !== "movie") || groups.length === 0) return groups;
+    if (isGrouped || groups.length === 0) return groups;
 
     return [{
       id: "credits",
@@ -75,7 +78,7 @@
     `${member.key}-${member.positions ? "cast" : "crew"}`;
 
   const showGroupHeaders = $derived(
-    $splitCast && type !== "movie" && (isSearching || creditsType === "cast"),
+    isGrouped && (isSearching || creditsType === "cast"),
   );
 </script>
 

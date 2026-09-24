@@ -1,4 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { getPeopleExtended } from '$lib/requests/_internal/getPeopleExtended.ts';
 import { mapToMediaCrew } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaCrewSchema } from '$lib/requests/models/MediaCrew.ts';
@@ -23,19 +24,17 @@ const showSeasonPeopleRequest = (
         season: castNumberAsString(season),
       },
       query: {
-        extended: (guestStars ? 'images,guest_stars' : 'images') as 'images',
+        extended: getPeopleExtended(guestStars),
       },
     });
 
 export const showSeasonPeopleQuery = defineQuery({
   key: 'showSeasonPeople',
   invalidations: [],
-  dependencies: (
-    params,
-  ) => [
+  dependencies: (params) => [
     params.slug,
     params.season,
-    params.guestStars ? 'images,guest_stars' : 'images',
+    params.guestStars ?? false,
   ],
   request: showSeasonPeopleRequest,
   mapper: (response) => mapToMediaCrew(response.body),

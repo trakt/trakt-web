@@ -1,4 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { getPeopleExtended } from '$lib/requests/_internal/getPeopleExtended.ts';
 import { mapToMediaCrew } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaCrewSchema } from '$lib/requests/models/MediaCrew.ts';
@@ -22,7 +23,7 @@ const episodePeopleRequest = (
         episode,
       },
       query: {
-        extended: (guestStars ? 'images,guest_stars' : 'images') as 'images',
+        extended: getPeopleExtended(guestStars),
       },
     });
 
