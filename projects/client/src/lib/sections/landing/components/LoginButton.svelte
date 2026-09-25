@@ -1,46 +1,58 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import LockIcon from "$lib/components/icons/LockIcon.svelte";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
 
+  const { size = "small" }: { size?: "small" | "normal" } = $props();
+
   const { login } = useAuth();
 </script>
 
-<div class="trakt-login-button">
+<div class="trakt-login-button" data-size={size}>
   <Button
     label={m.button_label_login()}
     style="flat"
-    size="small"
-    color="default"
+    {size}
+    color="custom"
     navigationType={DpadNavigationType.Item}
     onclick={login}
+    --color-background-custom="color-mix(in srgb, var(--shade-10) 7%, transparent)"
+    --color-foreground-custom="var(--shade-10)"
   >
     {m.button_text_login()}
-    {#snippet icon()}
-      <LockIcon />
-    {/snippet}
   </Button>
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-login-button :global(.trakt-button[data-size=small]) {
-    gap: var(--ni-12);
-    padding: var(--ni-14) var(--ni-18);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--shade-10) 14%, transparent);
-    border-radius: var(--ni-12);
-    background: color-mix(in srgb, var(--shade-10) 7%, transparent);
+  .trakt-login-button {
+    display: contents;
+
+    :global(.trakt-button) {
+      justify-content: center;
+
+      padding: var(--ni-16) var(--ni-28);
+      border-radius: var(--landing-radius-pill);
+      box-shadow: inset 0 0 0 var(--ni-1) var(--landing-color-stroke);
+
+      @include backdrop-filter-blur(var(--ni-12));
+    }
+
+    &[data-size="small"] :global(.trakt-button) {
+      padding: var(--ni-10) var(--ni-20);
+    }
   }
 
   @include for-mouse {
-    .trakt-login-button :global(.trakt-button[data-size=small]:hover) {
-      --color-foreground-button: var(--color-foreground-default);
-      background: color-mix(in srgb, var(--shade-10) 12%, transparent);
-      border-color: color-mix(in srgb, var(--shade-10) 24%, transparent);
+    .trakt-login-button :global(.trakt-button:hover) {
+      --color-background-button: color-mix(
+        in srgb,
+        var(--shade-10) 12%,
+        transparent
+      );
+      --color-foreground-button: var(--shade-10);
     }
   }
 </style>

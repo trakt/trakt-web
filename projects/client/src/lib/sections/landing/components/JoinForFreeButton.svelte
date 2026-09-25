@@ -15,50 +15,48 @@
     navigationType={DpadNavigationType.Item}
     onclick={login}
     --color-background-custom="var(--purple-500)"
-    --color-foreground-custom="var(--purple-50)"
+    --color-foreground-custom="var(--shade-10)"
   >
     {m.button_text_join_trakt_for_free()}
   </Button>
 </trakt-join-for-free-button>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   trakt-join-for-free-button {
+    display: contents;
+
     :global(.trakt-button) {
-      position: relative;
-      overflow: visible;
-      width: 100%;
+      justify-content: center;
 
-      &:before {
-        --glow-size: var(--ni-2);
+      padding: var(--ni-16) var(--ni-28);
+      border-radius: var(--landing-radius-pill);
 
-        content: "";
+      background-image: linear-gradient(
+        135deg,
+        var(--purple-400),
+        var(--purple-600)
+      );
+      box-shadow:
+        0 var(--ni-8) var(--ni-30)
+          color-mix(in srgb, var(--purple-500) 35%, transparent),
+        inset 0 var(--ni-1) 0 color-mix(in srgb, var(--shade-10) 18%, transparent);
 
-        position: absolute;
-        top: calc(-1 * var(--glow-size));
-        inset-inline-start: calc(-1 * var(--glow-size));
+      font-weight: 700;
+    }
 
-        width: calc(100% + 2 * var(--glow-size));
-        height: calc(100% + 2 * var(--glow-size));
+    @include for-mouse {
+      :global(.trakt-button:hover) {
+        --color-background-button: var(--purple-500);
+        --color-foreground-button: var(--shade-10);
 
-        background: linear-gradient(
-          45deg,
-          var(--purple-500),
-          var(--purple-300),
-          var(--purple-100),
-          var(--purple-400),
-          var(--purple-700),
-          var(--purple-800),
-          var(--purple-900),
-          var(--purple-700),
-          var(--purple-500)
-        );
-        background-size: 400%;
-
-        z-index: var(--layer-background);
-        filter: blur(var(--ni-4));
-
-        animation: shift-background 20s linear infinite;
-        opacity: 1;
+        box-shadow:
+          0 var(--ni-10) var(--ni-40)
+            color-mix(in srgb, var(--purple-500) 60%, transparent),
+          inset 0 var(--ni-1) 0
+            color-mix(in srgb, var(--shade-10) 18%, transparent);
+        transform: translateY(calc(-1 * var(--ni-1)));
       }
     }
   }
