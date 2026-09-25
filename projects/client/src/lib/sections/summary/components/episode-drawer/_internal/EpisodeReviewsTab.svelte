@@ -1,6 +1,5 @@
 <script lang="ts">
   import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
@@ -11,6 +10,8 @@
   import AddCommentAction from "$lib/sections/summary/components/comments/_internal/comment-actions/AddCommentAction.svelte";
   import AddReviewDrawerHost from "$lib/sections/summary/components/comments/drawers/AddReviewDrawerHost.svelte";
   import InlineComments from "$lib/sections/summary/components/comments/InlineComments.svelte";
+  import { useMineTab } from "$lib/sections/summary/components/comments/_internal/useMineTab.ts";
+
   const {
     show,
     episode,
@@ -19,7 +20,14 @@
     episode: EpisodeEntry;
   } = $props();
 
-  const { current: sort, set: setSort, options } = useToggler("comment");
+  const {
+    sort,
+    mineActive,
+    sortOptions,
+    activeTab,
+    activeText,
+    onTabChange,
+  } = useMineTab();
 
   const commentLanguage = useCommentLanguage();
 
@@ -29,11 +37,15 @@
 <div class="episode-reviews-tab">
   <DrawerTabTitle title={m.tab_text_seasons_reviews()}>
     {#snippet metaInfo()}
-      <ListMetaInfo text={$sort.text()} />
+      <ListMetaInfo text={$activeText()} />
     {/snippet}
 
     {#snippet actions()}
-      <Toggler value={$sort.value} onChange={setSort} {options} />
+      <Toggler
+        value={$activeTab}
+        onChange={onTabChange}
+        options={$sortOptions}
+      />
       <CommentLanguageSelect
         value={commentLanguage.value}
         onChange={commentLanguage.set}
@@ -51,6 +63,7 @@
       id={episode.id}
       sort={$sort.value}
       language={commentLanguage.filter}
+      mineActive={$mineActive}
     />
   {/key}
 </div>
