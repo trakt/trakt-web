@@ -1,12 +1,19 @@
 <script lang="ts">
   import AvatarPill from "$lib/components/avatar-pill/AvatarPill.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+  import { currentUserNetworkQuery } from "$lib/features/auth/queries/currentUserNetworkQuery.ts";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useQuery } from "$lib/features/query/useQuery.ts";
+  import { map } from "rxjs";
   import { profileDrawerNavigation } from "../_internal/profileDrawerNavigation.ts";
 
   const AVATAR_DISPLAY_LIMIT = 5;
 
   const { network } = useUser();
+  const isLoading = useQuery(currentUserNetworkQuery()).pipe(
+    map(($query) => $query.isLoading),
+  );
   const { buildLeaderboardDrawerLink } = profileDrawerNavigation();
   const drawerLink = $derived(buildLeaderboardDrawerLink());
 
@@ -18,7 +25,15 @@
   );
 </script>
 
-{#if following.length > 0}
+{#if $isLoading}
+  <div class="trakt-leaderboard-pill">
+    <Skeleton
+      width="var(--ni-160)"
+      height="var(--ni-36)"
+      radius="var(--border-radius-xxl)"
+    />
+  </div>
+{:else if following.length > 0}
   <div class="trakt-leaderboard-pill">
     <AvatarPill
       {avatars}
