@@ -2,14 +2,19 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
+  import { useAuth } from "$lib/features/auth/stores/useAuth.ts";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { COMMENTS_DRILL_SIZE } from "$lib/utils/constants";
   import { writable } from "svelte/store";
   import type { CommentsProps } from "../CommentsProps";
   import CommentLanguageSelect from "../_internal/CommentLanguageSelect.svelte";
   import { useCommentLanguage } from "../_internal/useCommentLanguage.svelte.ts";
   import type { ActiveComment } from "../_internal/models/ActiveComment";
-  import { useComments } from "../_internal/useComments";
+  import { useCommentsWithPinnedMine } from "../_internal/useCommentsWithPinnedMine";
+  import type { UseMyCommentsProps } from "../_internal/UseMyCommentsProps.ts";
   import ReviewsDrawerShell from "./_internal/ReviewsDrawerShell.svelte";
 
   type CommentsDrawerProps = {
@@ -24,6 +29,18 @@
   const commentLanguage = useCommentLanguage();
 
   const isOpened = writable(false);
+
+  const { isAuthorized } = useAuth();
+  const { isEnabled } = useFeatureFlag();
+  const pinMine$ = isEnabled(FeatureFlag.ReviewsPinMine);
+
+  // Built outside the useList factory PaginatedList wraps in $derived, so a
+  // re-render updates the query's options instead of recreating it.
+  const myCommentsParams$ = fromRune((): UseMyCommentsProps => ({
+    ...props,
+    slug: media.slug,
+    enabled: $isAuthorized ?? false,
+  }));
 </script>
 
 <Drawer
@@ -37,11 +54,13 @@
     <ReviewsDrawerShell
       {source}
       useList={() =>
-        useComments({
+        useCommentsWithPinnedMine({
           slug: media.slug,
           limit: COMMENTS_DRILL_SIZE,
           sort: $sortType.value,
           language: commentLanguage.filter,
+          pinMine$,
+          myCommentsParams$,
           ...props,
         })}
       {media}
