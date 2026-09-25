@@ -80,6 +80,13 @@
         var(--shade-800) 45%,
         var(--purple-900) 100%
       );
+
+    @include for-tablet-sm-and-below {
+      display: flex;
+      flex-direction: column;
+
+      min-height: 100svh;
+    }
   }
 
   .landing-nav {
@@ -128,7 +135,9 @@
     }
 
     @include for-tablet-sm-and-below {
+      flex: 1;
       grid-template-columns: minmax(0, 1fr);
+      align-content: center;
       gap: var(--gap-l);
 
       padding: 0 var(--ni-20) var(--ni-56);
