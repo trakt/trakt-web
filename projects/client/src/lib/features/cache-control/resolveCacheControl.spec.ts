@@ -28,9 +28,9 @@ describe('util: resolveCacheControl', () => {
   });
 
   describe('for a public path', () => {
-    it('should keep the short public cache for social bots', () => {
+    it('should keep a short private cache for social bots', () => {
       expect(resolve({ isSocialBot: true }))
-        .toBe('public, max-age=120, s-maxage=120');
+        .toBe('private, max-age=120');
     });
 
     it('should keep the long public cache for verified crawlers', () => {
