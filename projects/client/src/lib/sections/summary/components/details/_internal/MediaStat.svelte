@@ -1,5 +1,5 @@
 <script lang="ts">
-  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import type { Snippet } from "svelte";
@@ -23,9 +23,7 @@
 
   <span class="bold">
     {#if isLoading}
-      <div class="stat-loading-indicator">
-        <LoadingIndicator />
-      </div>
+      <Skeleton width="var(--ni-32)" height="1lh" />
     {:else}
       {toHumanNumber(value, languageTag())}
     {/if}
@@ -48,15 +46,6 @@
     padding: var(--ni-12);
 
     flex: 1;
-  }
-
-  .stat-loading-indicator {
-    display: contents;
-
-    :global(svg) {
-      width: var(--ni-16);
-      height: var(--ni-16);
-    }
   }
 
   .stat-icon {
