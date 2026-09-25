@@ -21,7 +21,7 @@
 <div class="trakt-landing">
   <LandingColumns>
     {#snippet left()}
-      <div class="trakt-landing-logo">
+      <div class="trakt-landing-logo" data-boot-target>
         <Logo />
       </div>
       <TrendingItems type="show">

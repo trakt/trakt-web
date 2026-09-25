@@ -79,8 +79,16 @@
     <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&family=Roboto+Mono:wght@400;600&family=Tajawal:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&family=Roboto+Mono:wght@400;600&family=Tajawal:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <!-- Base styles -->
     <style>
       html,
@@ -133,6 +141,7 @@
     %sveltekit.head%
   </head>
   <body>
+    %boot.loader%
     <div
       style="display: contents"
       data-sveltekit-preload-code="viewport"

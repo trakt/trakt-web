@@ -1,6 +1,7 @@
 import '$lib/polyfills/mapGroupBy.ts';
 import { handle as handleAssetFallback } from '$lib/features/asset-fallback/handle.ts';
 import { handle as handleAuth } from '$lib/features/auth/handle.ts';
+import { handle as handleBootLoader } from '$lib/features/boot-loader/handle.ts';
 import { handle as handleBotVerification } from '$lib/features/bot-verification/handle.ts';
 import { resolveCacheControl } from '$lib/features/cache-control/resolveCacheControl.ts';
 import { handle as handleDeployment } from '$lib/features/deployment/handle.ts';
@@ -128,6 +129,7 @@ export const handle: Handle = sequence(
   // rest of the pipeline entirely.
   handleAssetFallback,
   handleBotVerification,
+  handleBootLoader,
   handleDevice,
   handleLocale,
   handleTheme,

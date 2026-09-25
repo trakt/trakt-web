@@ -11,7 +11,9 @@
 <div class="trakt-landing">
   <div class="trakt-landing-content">
     <div class="trakt-landing-buttons">
-      <Logo />
+      <div class="trakt-landing-logo" data-boot-target>
+        <Logo />
+      </div>
       <LoginButton />
     </div>
 
@@ -80,8 +82,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
 
-    > :global(svg) {
+  .trakt-landing-logo {
+    display: flex;
+
+    :global(svg) {
       height: var(--ni-32);
       width: auto;
     }
