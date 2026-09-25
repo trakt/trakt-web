@@ -6,7 +6,7 @@ import {
 } from '$lib/requests/queries/comments/commentReactionsQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map, type Observable } from 'rxjs';
-import type { ReactionDistribution } from '../models/ReactionDistribution.ts';
+import type { ReactionDistribution } from '$lib/requests/models/ReactionDistribution.ts';
 import type { ReactionSummary } from '../models/ReactionSummary.ts';
 
 type UseCommentReactionsProps = {

@@ -1,5 +1,8 @@
 <script lang="ts">
-  const { state }: { state: "default" | "edit" | "add" } = $props();
+  /* Optional so the icon can be used as a bare glyph - the preview-features
+     list renders every icon with no props. */
+  const { state = "default" }: { state?: "default" | "edit" | "add" } =
+    $props();
 </script>
 
 <svg

@@ -10774,6 +10774,18 @@
     "image_alt_comment_gif": {
       "default": "GIF attached to the comment",
       "description": "Alt text for the GIF rendered underneath a posted comment."
+    },
+    "preview_feature_title_reactions": {
+      "default": "Reactions",
+      "description": "Title for the media-reactions preview feature toggle in settings."
+    },
+    "header_media_reactions": {
+      "default": "Reactions",
+      "description": "Heading above the ranked reaction counts in the popup opened from a title's reaction badge."
+    },
+    "preview_feature_description_reactions": {
+      "default": "React to a movie or show, and see how everyone else felt.",
+      "description": "Description for the media-reactions preview feature toggle in settings."
     }
   }
 }

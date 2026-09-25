@@ -2,8 +2,8 @@
   import { getLocale } from "$lib/features/i18n";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-  import ReactionEmoji from "./ReactionEmoji.svelte";
-  import { REACTIONS_CODE_MAP } from "./constants";
+  import ReactionEmoji from "$lib/components/reactions/ReactionEmoji.svelte";
+  import { REACTIONS_CODE_MAP } from "./reactionCodeMap.ts";
 
   const {
     reaction,

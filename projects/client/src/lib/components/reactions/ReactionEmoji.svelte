@@ -3,17 +3,32 @@
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { time } from "$lib/utils/timing/time";
   import { onMount } from "svelte";
-  import { EMOJI_BASE_URL } from "./constants";
+
+  /*
+    ONE emoji renderer for every reaction surface in the app.
+
+    It used to live inside the comment stack, reachable only from there - so
+    anything else that wanted an emoji was going to grow its own, and the
+    obvious shortcut is a bare unicode character in a span. That renders as
+    whatever the viewer's OS happens to ship and never moves.
+
+    This is the shipped comment behaviour, unchanged: Google's animated Noto
+    emoji, a static SVG at rest and the animated frames on hover. Taxonomies
+    stay with their own domains - this takes a `code` and knows nothing about
+    which set it came from.
+  */
+  const EMOJI_BASE_URL = "https://fonts.gstatic.com/s/e/notoemoji/latest";
 
   const {
     code,
     label,
     animation = "none",
-    index,
+    index = 0,
   }: {
     code: string;
     label: string;
-    index: number;
+    /* Only read by the staggered intro; static callers can leave it off. */
+    index?: number;
     animation?: "initial" | "infinite" | "none";
   } = $props();
 
@@ -85,17 +100,23 @@
     }
   }
 
+  /*
+    Two hooks rather than one: the artwork and the box it sits in are set
+    independently, because a chip wants a big emoji in a tight box while the
+    picker wants a small one in a generous tap target. The defaults are the
+    sizes the comment stack has always used, so nothing there moves.
+  */
   .trakt-reaction-emoji {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: var(--ni-24);
-    height: var(--ni-24);
+    width: var(--reaction-emoji-box, var(--ni-24));
+    height: var(--reaction-emoji-box, var(--ni-24));
 
     :global(img) {
-      width: var(--ni-18);
-      height: var(--ni-18);
+      width: var(--reaction-emoji-size, var(--ni-18));
+      height: var(--reaction-emoji-size, var(--ni-18));
     }
   }
 

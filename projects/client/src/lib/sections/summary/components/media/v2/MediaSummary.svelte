@@ -13,7 +13,7 @@
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
-  import SocialActivitiesButton from "../../_internal/SocialActivitiesButton.svelte";
+  import SummarySocialRow from "../../_internal/SummarySocialRow.svelte";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
@@ -43,11 +43,6 @@
   const title = $derived(intl?.title ?? media?.title ?? "");
   const { watchCount } = $derived(useWatchCount(target));
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
-  const socialTarget = $derived({
-    type: target.type,
-    slug: media.slug,
-  });
-
   const { isRateable } = $derived(useIsRateable(target));
   const { isDropped } = $derived(useIsDropped(media));
   const { isStarted } = $derived(useIsStarted(target));
@@ -103,7 +98,7 @@
 
     <RenderFor audience="authenticated">
       <MediaActions {media} {title} />
-      <SocialActivitiesButton target={socialTarget} {title} />
+      <SummarySocialRow type={target.type} slug={media.slug} {title} />
     </RenderFor>
   {/snippet}
 

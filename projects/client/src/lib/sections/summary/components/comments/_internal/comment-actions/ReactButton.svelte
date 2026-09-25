@@ -6,9 +6,10 @@
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { scale } from "svelte/transition";
-  import ReactionPicker from "./ReactionPicker.svelte";
-  import ReactionsDistribution from "./ReactionsDistribution.svelte";
+  import ReactionPicker from "$lib/components/reactions/ReactionPicker.svelte";
+  import ReactionsDistribution from "$lib/components/reactions/ReactionsDistribution.svelte";
   import ReactionsSummary from "./ReactionsSummary.svelte";
+  import { toReactionPickerOptions } from "$lib/components/reactions/toReactionPickerOptions.ts";
   import { useCommentReaction } from "./useCommentReaction";
   import { useCommentReactions } from "./useCommentReactions";
 
@@ -35,6 +36,8 @@
 
     react(reaction);
   }
+
+  const options = toReactionPickerOptions();
 
   const isDisabled = $derived($isReacting);
   const hasDistribution = $derived($summary.count > 0 || $isReacting);
@@ -85,8 +88,9 @@
       out:scale={{ duration: 300 }}
     >
       <ReactionPicker
-        currentReaction={$currentReaction}
-        onChange={reactionHandler}
+        {options}
+        chosen={$currentReaction}
+        onSelect={(id) => reactionHandler(id as Reaction)}
         onClose={close}
       />
 
@@ -95,6 +99,7 @@
           distribution={$summary.distribution}
           currentReaction={$currentReaction}
           isLoading={$isReacting}
+          title={m.header_comment_reactions()}
         />
       {/if}
     </div>
@@ -152,6 +157,16 @@
         }
       }
     }
+  }
+
+  /*
+    The bar's own sizing, now that the picker inside it is shared and carries
+    no box of its own - the media surface opens the same control inside a
+    panel with completely different padding.
+  */
+  .transition-wrapper :global(.trakt-reaction-picker) {
+    height: var(--ni-40);
+    margin: var(--ni-8);
   }
 
   .transition-wrapper {
