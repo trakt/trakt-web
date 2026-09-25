@@ -18,14 +18,6 @@
     :global(svg) {
       width: var(--ni-56);
       height: var(--ni-56);
-
-      animation: spin 2s infinite linear;
-    }
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(1turn);
     }
   }
 </style>
