@@ -3,7 +3,16 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { TrendingEntry } from "$lib/sections/lists/trending/useTrendingList.ts";
   import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType.ts";
-  import { spotlightPosition } from "../spotlightPosition.ts";
+  import {
+    spotlightPosition,
+    type SpotlightPosition,
+  } from "../spotlightPosition.ts";
+
+  const PLACEHOLDER_POSITIONS: ReadonlyArray<SpotlightPosition> = [
+    "front",
+    "next",
+    "after",
+  ];
 
   const {
     items,
@@ -15,6 +24,14 @@
 
 <div class="trakt-landing-spotlight">
   <div class="spotlight-cards" aria-hidden="true">
+    {#if items.length === 0}
+      {#each PLACEHOLDER_POSITIONS as position (position)}
+        <div class="spotlight-card" data-position={position}>
+          <span class="spotlight-placeholder"></span>
+        </div>
+      {/each}
+    {/if}
+
     {#each items as item, index (item.key)}
       <div
         class="spotlight-card"
@@ -33,20 +50,27 @@
     {/each}
   </div>
 
-  {#if current}
-    <div class="spotlight-caption">
-      <span class="spotlight-label tag bold uppercase">{m.header_landing_trending_now()}</span>
+  <div class="spotlight-caption">
+    <span class="spotlight-label tag bold uppercase">{m.header_landing_trending_now()}</span>
+    {#if current}
       <strong class="spotlight-title ellipsis">{current.title}</strong>
       <span class="spotlight-meta small">
         {toTranslatedType(current.type)}{current.year ? ` · ${current.year}` : ""}
       </span>
-      <div class="spotlight-dots">
-        {#each items as item, index (item.key)}
-          <i class:is-active={index === active}></i>
-        {/each}
-      </div>
+    {:else}
+      <span class="spotlight-title spotlight-line" style:--line-width="60%">
+        <span class="spotlight-placeholder"></span>
+      </span>
+      <span class="spotlight-meta spotlight-line small" style:--line-width="30%">
+        <span class="spotlight-placeholder"></span>
+      </span>
+    {/if}
+    <div class="spotlight-dots">
+      {#each items as item, index (item.key)}
+        <i class:is-active={index === active}></i>
+      {/each}
     </div>
-  {/if}
+  </div>
 </div>
 
 <style lang="scss">
@@ -54,6 +78,8 @@
 
   .trakt-landing-spotlight {
     --card-width: var(--ni-300);
+    --placeholder-pulse: pulse calc(5 * var(--transition-increment))
+      ease-in-out infinite alternate;
 
     display: flex;
     flex-direction: column;
@@ -102,6 +128,28 @@
         0 var(--ni-24) var(--ni-64)
           color-mix(in srgb, var(--shade-1000) 55%, transparent),
         0 0 0 var(--ni-1) color-mix(in srgb, var(--shade-10) 8%, transparent);
+    }
+
+    .spotlight-placeholder {
+      position: relative;
+
+      display: block;
+      height: 100%;
+
+      border-radius: var(--border-radius-xl);
+      background: var(--shade-900);
+      box-shadow: inset 0 0 0 var(--ni-1) var(--landing-color-border);
+      animation: none;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        border-radius: inherit;
+        background: var(--landing-color-border);
+        animation: var(--placeholder-pulse);
+      }
     }
 
     &::after {
@@ -185,6 +233,21 @@
     letter-spacing: -0.02em;
   }
 
+  .spotlight-line {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    box-sizing: border-box;
+    height: 1lh;
+    padding-block: 0.2lh;
+
+    .spotlight-placeholder {
+      width: var(--line-width);
+      border-radius: var(--border-radius-s);
+    }
+  }
+
   .spotlight-meta {
     color: var(--landing-color-muted);
   }
@@ -193,6 +256,7 @@
     display: flex;
     gap: var(--gap-xxs);
 
+    height: var(--ni-3);
     margin-top: var(--gap-xxs);
 
     i {
@@ -209,10 +273,20 @@
     }
   }
 
+  .spotlight-placeholder {
+    background: var(--landing-color-border);
+
+    animation: var(--placeholder-pulse);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .spotlight-card,
     .spotlight-card::after {
       transition: none;
+    }
+
+    .trakt-landing-spotlight {
+      --placeholder-pulse: none;
     }
   }
 </style>
