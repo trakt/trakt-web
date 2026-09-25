@@ -13,9 +13,16 @@
   import { useSearchMode } from "$lib/features/search/useSearchMode";
   import { buildParamString } from "$lib/utils/url/buildParamString";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import type { ContentToggleSurface } from "./ContentToggleSurface.ts";
 
-  const { surface }: { surface: ContentToggleSurface } = $props();
+  const {
+    surface,
+    extension,
+  }: {
+    surface: ContentToggleSurface;
+    extension?: Snippet | Nil;
+  } = $props();
 
   const {
     mode: discoverMode,
@@ -50,6 +57,8 @@
 
   const value = $derived(surface === "search" ? $searchMode : $discoverMode);
 
+  const isOpen = $derived(surface === "search" || Boolean(extension));
+
   const onChange = (next: string) => {
     if (surface === "search") return;
     onModeChange(next as DiscoverMode);
@@ -59,8 +68,8 @@
 <GlobalParameterSetter parameter={DISCOVER_MODE_PARAM}>
   <div
     class="trakt-navbar-content-toggle"
-    class:is-open={surface === "search"}
-    role={surface === "search" ? "search" : undefined}
+    class:is-open={isOpen}
+    role={isOpen ? "search" : undefined}
   >
     <SegmentedSelect
       expandable
@@ -69,7 +78,7 @@
       {options}
       {value}
       icon={contentIcon}
-      extension={searchExtension}
+      extension={surface === "search" ? searchExtension : extension ?? undefined}
       {onChange}
     />
   </div>

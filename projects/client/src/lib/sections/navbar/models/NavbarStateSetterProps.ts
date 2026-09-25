@@ -7,6 +7,7 @@ export type NavbarStateSetterProps = {
   actions?: Snippet;
   contextualActions?: Snippet;
   contentToggle?: ContentToggleSurface | Nil;
+  contentToggleExtension?: Snippet | Nil;
   toastActions?: Snippet | Nil;
   mode?: NavbarMode;
   hasFilters?: boolean;

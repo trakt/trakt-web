@@ -16,6 +16,7 @@ type PersonalListsParams = {
   slug: string;
   sortBy?: UserListsSortBy | Nil;
   sortHow?: SortDirection | Nil;
+  terms?: string | Nil;
 } & Partial<PaginationParams>;
 
 function sortByUpdatedAt(
@@ -29,7 +30,7 @@ function sortByUpdatedAt(
 }
 
 function typeToQuery(
-  { type, slug, limit, sortBy, sortHow }: PersonalListsParams,
+  { type, slug, limit, sortBy, sortHow, terms }: PersonalListsParams,
 ) {
   const paginationProps = {
     limit: limit ?? DEFAULT_LISTS_PAGE_SIZE,
@@ -43,6 +44,7 @@ function typeToQuery(
         slug,
         sortBy,
         sortHow,
+        terms,
         ...paginationProps,
       });
     case 'collaboration':
@@ -57,6 +59,7 @@ export function usePersonalListsSummary(
     limit,
     sortBy,
     sortHow,
+    terms,
   }: PersonalListsParams,
 ) {
   const resolvedSortBy = sortBy ?? 'updated_at';
@@ -68,6 +71,7 @@ export function usePersonalListsSummary(
       limit,
       sortBy: resolvedSortBy,
       sortHow: resolvedSortHow,
+      terms,
     }),
   );
 

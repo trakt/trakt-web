@@ -15,12 +15,13 @@ type PersonalListsParams =
     slug: string;
     sortBy?: UserListsSortBy | Nil;
     sortHow?: SortDirection | Nil;
+    terms?: string | Nil;
   }
   & ApiParams
   & PaginationParams;
 
 const personalListsRequest = (
-  { fetch, slug, page, limit, sortBy, sortHow }: PersonalListsParams,
+  { fetch, slug, page, limit, sortBy, sortHow, terms }: PersonalListsParams,
 ) => {
   const query = {
     extended: 'images' as const,
@@ -28,6 +29,7 @@ const personalListsRequest = (
     limit,
     sort_by: sortBy,
     sort_how: sortHow,
+    terms,
   };
 
   return api({ fetch })
@@ -57,6 +59,7 @@ export const personalListsQuery = defineInfiniteQuery({
     params.limit,
     params.sortBy,
     params.sortHow,
+    params.terms,
   ],
   request: personalListsRequest,
   mapper: (response) => ({
