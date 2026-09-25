@@ -5,7 +5,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
-<LegalPage title="Trakt Terms of Use" lastUpdated="March 29, 2022">
+<LegalPage title="Trakt Terms of Use" lastUpdated="September 25, 2026">
   <svelte:fragment slot="intro">
     <p>
       Welcome to Trakt! These Terms of Use (or <b>"Terms"</b>) are a legally
@@ -646,6 +646,12 @@
       to the Services and/or terminate the participation of any users who
       infringe any intellectual property rights of others, whether or not there
       is any repeat infringement.
+    </p>
+    <p>
+      GIFs in comments are not hosted by Trakt. They are provided by
+      <Link href="https://klipy.com" target="_blank">KLIPY</Link> and load
+      directly from their servers; Trakt does not store them. To have a GIF
+      removed at the source, please report it to KLIPY directly.
     </p>
   </div>
 
