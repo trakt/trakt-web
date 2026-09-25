@@ -851,6 +851,34 @@
       "default": "opinions, ratings, and lists that others will love to follow.",
       "description": "Description for the share step. This should be a short and concise message that indicates what users can share."
     },
+    "header_landing_hero": {
+      "default": "Your next favorite is already out there.",
+      "description": "Main headline on the landing page for signed-out visitors. Keep it short and punchy."
+    },
+    "text_landing_hero": {
+      "default": "Track what you've seen, find what to watch next, and see where it's streaming tonight.",
+      "description": "Supporting text under the main headline on the landing page."
+    },
+    "text_landing_platforms": {
+      "default": "Free on web, iOS and Android",
+      "description": "Small badge above the landing page headline saying Trakt is free on these platforms."
+    },
+    "header_landing_trending_now": {
+      "default": "Trending now",
+      "description": "Label above the title of the trending movie or show shown in the landing page poster spotlight."
+    },
+    "text_landing_discover_eyebrow": {
+      "default": "Find it",
+      "description": "Small label above the discover step on the landing page. Keep it to two or three words."
+    },
+    "text_landing_track_eyebrow": {
+      "default": "Log it",
+      "description": "Small label above the track step on the landing page. Keep it to two or three words."
+    },
+    "text_landing_share_eyebrow": {
+      "default": "Talk about it",
+      "description": "Small label above the share step on the landing page. Keep it to two or three words."
+    },
     "text_landing_numbers_1": {
       "default": "years of watching together",
       "description": "Part of the promotion text for welcoming a new user. Example: 15 years of watching together"
