@@ -91,6 +91,56 @@
     </noscript>
     <!-- Base styles -->
     <style>
+      /* Arial scaled to the measured width and line metrics of each webfont,
+         per weight (Tajawal for the Arabic range), so the swap does not re-wrap. */
+      @font-face {
+        font-family: "Roboto Fallback";
+        src: local("Arial"), local("ArialMT");
+        font-weight: 100 500;
+        size-adjust: 99.56%;
+        ascent-override: 93.18%;
+        descent-override: 24.52%;
+        line-gap-override: 0%;
+      }
+
+      @font-face {
+        font-family: "Roboto Fallback";
+        src: local("Arial Bold"), local("Arial-BoldMT");
+        font-weight: 600 900;
+        size-adjust: 94.42%;
+        ascent-override: 98.25%;
+        descent-override: 25.85%;
+        line-gap-override: 0%;
+      }
+
+      @font-face {
+        font-family: "Tajawal Fallback";
+        src: local("Arial"), local("ArialMT");
+        font-weight: 100 500;
+        unicode-range:
+          U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1,
+          U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF,
+          U+FE70-FE74, U+FE76-FEFC;
+        size-adjust: 128%;
+        ascent-override: 50%;
+        descent-override: 28.13%;
+        line-gap-override: 15.63%;
+      }
+
+      @font-face {
+        font-family: "Tajawal Fallback";
+        src: local("Arial Bold"), local("Arial-BoldMT");
+        font-weight: 600 900;
+        unicode-range:
+          U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1,
+          U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF,
+          U+FE70-FE74, U+FE76-FEFC;
+        size-adjust: 140%;
+        ascent-override: 45.71%;
+        descent-override: 25.71%;
+        line-gap-override: 14.29%;
+      }
+
       html,
       body {
         margin: 0;
@@ -117,7 +167,9 @@
       body {
         background-color: var(--color-background);
         color: var(--color-foreground);
-        font-family: "Roboto", "Tajawal", Arial, sans-serif;
+        font-family:
+          "Roboto", "Tajawal", "Tajawal Fallback", "Roboto Fallback", Arial,
+          sans-serif;
 
         /* bits-ui's scroll lock reserves the scrollbar gutter as padding-right
            on body. Under content-box that widens the body box instead of
