@@ -242,6 +242,7 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
   const stylesTotal = Number(loader.dataset.css) || 1;
   const scriptsTotal = Number(loader.dataset.js) || 1;
   const scripts = new Set();
+  const settledStylesheets = new Set();
   const startedAt = performance.now();
   let stylesReadyAt = null;
 
@@ -365,9 +366,10 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
   };
 
   const tick = () => {
-    const stylesDone = Array.from(
-      document.querySelectorAll('link[data-boot-css]'),
-    ).filter(isStylesheetSettled).length;
+    document.querySelectorAll('link[data-boot-css]').forEach((link) => {
+      if (isStylesheetSettled(link)) settledStylesheets.add(link);
+    });
+    const stylesDone = settledStylesheets.size;
     const stylesProgress = Math.min(stylesDone / stylesTotal, 1);
     const scriptsProgress = Math.min(scripts.size / scriptsTotal, 1);
     const progress = STYLES_SHARE * stylesProgress +
