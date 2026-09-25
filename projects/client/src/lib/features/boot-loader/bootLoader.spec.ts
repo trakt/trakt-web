@@ -124,4 +124,20 @@ describe('boot loader', () => {
     vi.advanceTimersByTime(150);
     expect(page && getComputedStyle(page).visibility).toBe('visible');
   });
+
+  it('should never move the progress backwards', () => {
+    const stylesheets = mountBootLoader();
+    const percent = () =>
+      document.querySelector('.boot-loader-percent')?.textContent;
+
+    vi.advanceTimersByTime(500);
+    settle(stylesheets);
+    vi.advanceTimersByTime(20);
+    const settled = percent();
+    expect(settled).toBe('40%');
+
+    unsettle(stylesheets);
+    vi.advanceTimersByTime(20);
+    expect(percent()).toBe(settled);
+  });
 });
