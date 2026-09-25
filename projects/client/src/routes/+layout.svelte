@@ -10,6 +10,7 @@
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import LoginErrorSnackbar from "$lib/features/auth/components/LoginErrorSnackbar.svelte";
+  import { markAppReady } from "$lib/features/boot-loader/markAppReady.ts";
   import BotProvider from "$lib/features/bot-verification/BotProvider.svelte";
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
@@ -59,6 +60,8 @@
   $effect.pre(initializeSeasonalThemes);
 
   onMount(async () => {
+    markAppReady();
+
     if (isPWA()) {
       document.body.classList.add("trakt-pwa");
     }

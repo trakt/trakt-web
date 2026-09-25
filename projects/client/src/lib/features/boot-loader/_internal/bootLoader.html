@@ -1,0 +1,395 @@
+<script>
+document.documentElement.dataset.boot = 'loading';
+</script>
+<style>
+.boot-loader {
+  display: none;
+}
+
+html[data-boot] .boot-loader {
+  --boot-accent: oklch(56.1% 0.205 314.2);
+  --boot-background: oklch(99% 0.004 300);
+  --boot-well: oklch(92% 0.008 300);
+  --boot-text: oklch(19.5% 0.009 300);
+
+  display: block;
+}
+
+html[data-theme="dark"] .boot-loader {
+  --boot-background: color-mix(
+    in srgb,
+    oklch(19.5% 0.009 300) 97%,
+    oklch(29% 0.1128 314.2)
+  );
+  --boot-well: oklch(30% 0.011 300);
+  --boot-text: oklch(99% 0.004 300);
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="system"] .boot-loader {
+    --boot-background: color-mix(
+      in srgb,
+      oklch(19.5% 0.009 300) 97%,
+      oklch(29% 0.1128 314.2)
+    );
+    --boot-well: oklch(30% 0.011 300);
+    --boot-text: oklch(99% 0.004 300);
+  }
+}
+
+.boot-loader-splash {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  z-index: 2147483647;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--boot-background);
+  animation: boot-loader-appear 300ms ease 250ms backwards;
+  transition: background-color 500ms ease 100ms;
+}
+
+.boot-loader-emblem {
+  position: relative;
+}
+
+.boot-loader-logo {
+  display: block;
+  width: 88px;
+  aspect-ratio: 32 / 33;
+  overflow: visible;
+  transform-origin: 0 0;
+  transition: opacity 200ms ease 550ms;
+}
+
+.boot-loader-well {
+  fill: var(--boot-well);
+}
+
+.boot-loader-level {
+  transform: translateY(34px);
+  transition: transform 300ms ease-out;
+}
+
+.boot-loader-wave {
+  fill: var(--boot-accent);
+  animation: boot-loader-wave 1.6s linear infinite;
+}
+
+.boot-loader-mark {
+  color: #fefefe;
+  opacity: 0.5;
+}
+
+.boot-loader-mark-lit {
+  color: #fefefe;
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.boot-loader-percent {
+  position: absolute;
+  top: 100%;
+  inset-inline: 0;
+  margin-top: 20px;
+
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 20px;
+  line-height: 1;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: var(--boot-text);
+  opacity: 0.7;
+  transition: opacity 200ms ease;
+}
+
+.boot-loader-bar {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 2147483647;
+  height: 3px;
+
+  background: var(--boot-accent);
+  box-shadow: 0 0 10px var(--boot-accent);
+  clip-path: inset(0 calc(100% - var(--boot-progress, 0%)) 0 0);
+  opacity: 0;
+  pointer-events: none;
+  transition: clip-path 250ms ease-out, opacity 400ms ease;
+}
+
+html[dir="rtl"] .boot-loader-bar {
+  clip-path: inset(0 0 0 calc(100% - var(--boot-progress, 0%)));
+}
+
+html[data-boot="styled"] .boot-loader-splash {
+  background-color: transparent;
+  pointer-events: none;
+}
+
+html[data-boot="styled"] .boot-loader-percent {
+  opacity: 0;
+}
+
+html[data-boot="styled"] .boot-loader-bar {
+  opacity: 1;
+}
+
+html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
+  opacity: 0;
+}
+
+@keyframes boot-loader-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes boot-loader-wave {
+  to {
+    transform: translateX(-32px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-loader-wave {
+    animation: none;
+  }
+
+  .boot-loader-logo {
+    transition: opacity 200ms ease;
+  }
+}
+</style>
+<div
+  class="boot-loader"
+  role="progressbar"
+  aria-label="Trakt"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow="0"
+  data-css="%boot.css%"
+  data-js="%boot.js%"
+>
+  <div class="boot-loader-splash">
+    <div class="boot-loader-emblem">
+      <svg class="boot-loader-logo" viewBox="0 0 32 33" aria-hidden="true">
+        <defs>
+          <clipPath id="boot-loader-circle">
+            <circle cx="16" cy="16.69" r="16" />
+          </clipPath>
+          <g id="boot-loader-mark" fill="currentColor">
+            <path
+              d="M11.4966 10.2592L10.5176 11.2383L15.8008 16.5215L16.7798 15.5424L11.4966 10.2592Z" />
+            <path
+              d="M10.0631 11.7006L9.08398 12.6797L14.3672 17.9629L15.3463 16.9838L10.0631 11.7006Z" />
+            <path
+              d="M8.62165 13.1323L7.64258 14.1113L17.2394 23.7081L18.2184 22.729L8.62165 13.1323Z" />
+            <path
+              d="M32.3382 0.903955L13.873 19.3691L14.8521 20.3482L33.3173 1.88303L32.3382 0.903955Z" />
+            <path
+              d="M18.6812 22.2743L16.2598 19.8596L32.34 3.7793L33.3166 4.75589L18.2196 19.8596L19.6578 21.2977L18.6812 22.2743Z" />
+            <path
+              d="M32.3435 6.66042L19.1426 19.8613L20.1216 20.8404L33.3226 7.6395L32.3435 6.66042Z" />
+            <path
+              d="M16.0001 29.6252C8.86964 29.6252 3.07031 23.8258 3.07031 16.6954C3.07031 9.56495 8.86964 3.76562 16.0001 3.76562C17.9466 3.76562 19.8128 4.18703 21.5586 5.01646L20.9633 6.2673C19.4048 5.52482 17.7392 5.15024 16.0001 5.15024C9.63219 5.15024 4.44824 10.3342 4.44824 16.7021C4.44824 23.07 9.63219 28.2539 16.0001 28.2539C20.5486 28.2539 24.689 25.5716 26.5486 21.4178L27.8128 21.9797C25.7325 26.6285 21.0971 29.6318 16.0068 29.6318L16.0001 29.6252Z" />
+          </g>
+        </defs>
+        <circle class="boot-loader-well" cx="16" cy="16.69" r="16" />
+        <g clip-path="url(#boot-loader-circle)">
+          <g class="boot-loader-level">
+            <path
+              class="boot-loader-wave"
+              d="M0 1 Q8 -1 16 1 T32 1 T48 1 T64 1 V40 H0 Z"
+            />
+          </g>
+          <use class="boot-loader-mark" href="#boot-loader-mark" />
+          <use class="boot-loader-mark-lit" href="#boot-loader-mark" />
+        </g>
+      </svg>
+      <div class="boot-loader-percent">0%</div>
+    </div>
+  </div>
+  <div class="boot-loader-bar"></div>
+</div>
+<script>
+(() => {
+  const STYLES_SHARE = 0.4;
+  const LEVEL_EMPTY = 34;
+  const LEVEL_FULL = -2;
+  const STYLES_TIMEOUT_MS = 20000;
+  const SPLASH_DELAY_MS = 250;
+  const HANDOFF_MS = 800;
+  const BAR_START_SIZE = 6;
+  const FLIGHT_MS = 700;
+  const APP_SCRIPT = /\/_app\/immutable\/.+\.js$/;
+
+  const html = document.documentElement;
+  const loader = document.querySelector('.boot-loader');
+  const splash = loader.querySelector('.boot-loader-splash');
+  const logo = loader.querySelector('.boot-loader-logo');
+  const level = loader.querySelector('.boot-loader-level');
+  const markLit = loader.querySelector('.boot-loader-mark-lit');
+  const percent = loader.querySelector('.boot-loader-percent');
+
+  const stylesTotal = Number(loader.dataset.css) || 1;
+  const scriptsTotal = Number(loader.dataset.js) || 1;
+  const scripts = new Set();
+  const startedAt = performance.now();
+
+  const observer = typeof PerformanceObserver === 'function'
+    ? new PerformanceObserver((list) => {
+      list.getEntries()
+        .filter((entry) => APP_SCRIPT.test(entry.name))
+        .forEach((entry) => scripts.add(entry.name));
+    })
+    : null;
+  observer?.observe({ type: 'resource', buffered: true });
+
+  const isStylesheetSettled = (link) =>
+    link.sheet !== null || link.dataset.bootFailed !== undefined;
+
+  const isAppReady = () => html.hasAttribute('data-app-ready');
+
+  const toMarkSquare = (rect) => {
+    const size = Math.min(rect.width, rect.height);
+    return { left: rect.left, top: rect.top + (rect.height - size) / 2, size };
+  };
+
+  const isOnScreen = (rect) =>
+    rect.width > 0 && rect.bottom > 0 && rect.top < innerHeight;
+
+  const toDrawnRect = (svg) => {
+    const box = svg.getBoundingClientRect();
+    const viewBox = svg.viewBox.baseVal;
+    if (!viewBox?.width || !viewBox?.height) return box;
+
+    const scale = Math.min(
+      box.width / viewBox.width,
+      box.height / viewBox.height,
+    );
+    const width = viewBox.width * scale;
+    const height = viewBox.height * scale;
+
+    return {
+      left: box.left + (box.width - width) / 2,
+      top: box.top + (box.height - height) / 2,
+      width,
+      height,
+      bottom: box.top + (box.height + height) / 2,
+    };
+  };
+
+  const findVisibleLogo = () =>
+    Array.from(document.querySelectorAll('[data-boot-target] svg'))
+      .map(toDrawnRect)
+      .find(isOnScreen);
+
+  const barStart = () => ({
+    left: html.dir === 'rtl' ? innerWidth - BAR_START_SIZE : 0,
+    top: 0,
+    size: BAR_START_SIZE,
+  });
+
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  const flyLogoHome = () => {
+    logo.style.opacity = '0';
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const from = toMarkSquare(toDrawnRect(logo));
+    const takeoff = performance.now();
+
+    const step = (now) => {
+      const t = Math.min((now - takeoff) / FLIGHT_MS, 1);
+      const eased = easeOutCubic(t);
+      const visibleLogo = findVisibleLogo();
+      const to = visibleLogo ? toMarkSquare(visibleLogo) : barStart();
+      const scale = 1 + (to.size / from.size - 1) * eased;
+
+      logo.style.transform = `translate(${(to.left - from.left) * eased}px, ${
+        (to.top - from.top) * eased
+      }px) scale(${scale})`;
+
+      if (t < 1 && logo.isConnected) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  const reveal = () => {
+    html.dataset.boot = 'styled';
+
+    if (performance.now() - startedAt < SPLASH_DELAY_MS) {
+      loader.remove();
+      return;
+    }
+
+    requestAnimationFrame(flyLogoHome);
+    setTimeout(() => splash.remove(), HANDOFF_MS);
+  };
+
+  const complete = () => {
+    loader.classList.add('is-complete');
+    loader.style.setProperty('--boot-progress', '100%');
+    observer?.disconnect();
+    setTimeout(() => {
+      loader.remove();
+      delete html.dataset.boot;
+    }, 700);
+  };
+
+  const tick = () => {
+    const stylesDone = Array.from(
+      document.querySelectorAll('link[data-boot-css]'),
+    ).filter(isStylesheetSettled).length;
+    const stylesProgress = Math.min(stylesDone / stylesTotal, 1);
+    const scriptsProgress = Math.min(scripts.size / scriptsTotal, 1);
+    const progress = STYLES_SHARE * stylesProgress +
+      (1 - STYLES_SHARE) * 0.95 * scriptsProgress;
+    const value = Math.floor(progress * 100);
+
+    level.style.transform = `translateY(${
+      LEVEL_EMPTY - (LEVEL_EMPTY - LEVEL_FULL) * stylesProgress
+    }px)`;
+    markLit.style.opacity = String(Math.max(0, (stylesProgress - 0.5) * 2));
+    percent.textContent = `${value}%`;
+    loader.setAttribute('aria-valuenow', String(value));
+    loader.style.setProperty('--boot-progress', `${value}%`);
+
+    const stylesTimedOut = performance.now() - startedAt >
+      STYLES_TIMEOUT_MS;
+    if (
+      html.dataset.boot === 'loading' &&
+      (stylesProgress === 1 || stylesTimedOut)
+    ) {
+      reveal();
+    }
+
+    if (!loader.isConnected) {
+      observer?.disconnect();
+      delete html.dataset.boot;
+      return;
+    }
+
+    if (html.dataset.boot === 'styled' && isAppReady()) {
+      complete();
+      return;
+    }
+
+    requestAnimationFrame(tick);
+  };
+
+  tick();
+})();
+</script>
