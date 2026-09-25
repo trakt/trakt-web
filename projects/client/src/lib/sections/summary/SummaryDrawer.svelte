@@ -7,6 +7,7 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
+  import type { YouTubeSpecial } from "$lib/requests/models/YouTubeSpecial.ts";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
   import RewatchingDrawerHost from "$lib/sections/media-actions/rewatching/RewatchingDrawerHost.svelte";
   import WhereToWatchDrawerHost from "$lib/sections/lists/where-to-watch/WhereToWatchDrawerHost.svelte";
@@ -35,12 +36,14 @@
     videos,
     seasons,
     currentSeason,
+    youtubeSpecial,
     ...details
   }: {
     sentiment?: SentimentAnalysis | null | undefined;
     videos?: MediaVideo[];
     seasons?: Season[];
     currentSeason?: number;
+    youtubeSpecial?: YouTubeSpecial | Nil;
   } & MediaDetailsProps = $props();
 
   const {
@@ -170,7 +173,11 @@
 {/if}
 
 {#if drawer === SummaryDrawers.WhereToWatch}
-  <WhereToWatchDrawerHost {...whereToWatchTarget} onClose={close} />
+  <WhereToWatchDrawerHost
+    {...whereToWatchTarget}
+    {youtubeSpecial}
+    onClose={close}
+  />
 {/if}
 
 {#if drawer === SummaryDrawers.Seasons && seasons && currentSeason != null && showEntry}

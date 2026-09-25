@@ -9,8 +9,17 @@
 
   const { params }: PageProps = $props();
 
-  const { movie, intl, studios, crew, streamOn, isLoading, videos, sentiment } =
-    useMovie(fromRune(() => params.slug));
+  const {
+    movie,
+    intl,
+    studios,
+    crew,
+    streamOn,
+    isLoading,
+    videos,
+    sentiment,
+    youtubeSpecial,
+  } = useMovie(fromRune(() => params.slug));
 </script>
 
 <TraktPage
@@ -34,6 +43,7 @@
       streamOn={$streamOn}
       videos={$videos}
       sentiment={$sentiment}
+      youtubeSpecial={$youtubeSpecial}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->

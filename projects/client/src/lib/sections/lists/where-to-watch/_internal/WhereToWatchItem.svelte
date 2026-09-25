@@ -2,12 +2,13 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { StreamingServiceOption } from "$lib/requests/models/StreamingServiceOptions";
   import type { LibraryOption } from "../models/LibraryOption";
+  import type { YouTubeSpecialOption } from "../models/YouTubeSpecialOption.ts";
   import { getMediaCost } from "./getMediaCost";
   import WhereToWatchLogo from "./WhereToWatchLogo.svelte";
   import WhereToWatchServiceLink from "./WhereToWatchServiceLink.svelte";
 
   type WhereToWatchItemProps = {
-    service: StreamingServiceOption | LibraryOption;
+    service: StreamingServiceOption | LibraryOption | YouTubeSpecialOption;
     country: string;
   };
 
@@ -19,6 +20,8 @@
         return m.text_library();
       case "streaming":
         return m.text_stream();
+      case "youtube-special":
+        return m.text_free();
       case "on-demand": {
         const costText = getMediaCost(service, "any");
         if (!costText) {
@@ -32,11 +35,20 @@
   });
 
   const hasSmallLogo = $derived(service.type === "on-demand");
+  const isOfficialPick = $derived(
+    service.type === "youtube-special" && service.isOfficial,
+  );
+  const isFanUpload = $derived(
+    service.type === "youtube-special" && !service.isOfficial,
+  );
 </script>
 
 <div class="trakt-where-to-watch-item">
   <WhereToWatchServiceLink {service}>
-    <div class="where-to-watch-item-content">
+    <div
+      class="where-to-watch-item-content"
+      class:is-official-pick={isOfficialPick}
+    >
       <WhereToWatchLogo
         source={service.source}
         {country}
@@ -44,6 +56,9 @@
       />
       {#if text}
         <p>{text}</p>
+      {/if}
+      {#if isFanUpload}
+        <span class="tag fan-upload-pill">{m.tag_label_fan_upload()}</span>
       {/if}
     </div>
   </WhereToWatchServiceLink>
@@ -96,6 +111,12 @@
     justify-content: center;
     overflow: hidden;
 
+    &.is-official-pick {
+      box-shadow:
+        var(--shadow-base),
+        inset 0 0 0 var(--border-thickness-xs) var(--color-accent-purple);
+    }
+
     p {
       text-align: center;
       flex-shrink: 0;
@@ -103,6 +124,15 @@
       min-height: var(--ni-18);
       display: flex;
       align-items: center;
+    }
+
+    .fan-upload-pill {
+      flex-shrink: 0;
+      margin-block-start: var(--gap-xxs);
+      padding: var(--ni-2) var(--ni-6);
+      border-radius: var(--border-radius-s);
+      background-color: var(--color-background-indicator-tag);
+      color: var(--color-text-indicator-tag);
     }
   }
 </style>

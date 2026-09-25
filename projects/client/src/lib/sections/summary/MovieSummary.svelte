@@ -8,6 +8,7 @@
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
+  import type { YouTubeSpecial } from "$lib/requests/models/YouTubeSpecial.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -31,18 +32,28 @@
     streamOn,
     videos,
     sentiment,
+    youtubeSpecial,
   }: {
     media: MovieEntry;
     studios: MediaStudio[];
     videos: MediaVideo[];
     sentiment: SentimentAnalysis | Nil;
+    youtubeSpecial: YouTubeSpecial | Nil;
   } & CommonMediaSummaryProps = $props();
 
   const relatedLink = $derived(UrlBuilder.related.movie(media.slug));
   const listsLink = $derived(UrlBuilder.popularLists.movie(media.slug));
 </script>
 
-<SummaryDrawer {sentiment} {studios} {crew} {media} {videos} type="movie" />
+<SummaryDrawer
+  {sentiment}
+  {studios}
+  {crew}
+  {media}
+  {videos}
+  {youtubeSpecial}
+  type="movie"
+/>
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <MediaSummaryV2 {media} {studios} {crew} {intl} type="movie" />
@@ -52,7 +63,13 @@
   <MediaSummary {media} {intl} {streamOn} {crew} type="movie">
     {#snippet contextualContent()}
       <RenderFor audience="all" device={["desktop"]}>
-        <WhereToWatchList type="movie" {media} {streamOn} variant="inline" />
+        <WhereToWatchList
+          type="movie"
+          {media}
+          {streamOn}
+          {youtubeSpecial}
+          variant="inline"
+        />
         <Sentiment
           {sentiment}
           slug={media.slug}
@@ -65,7 +82,7 @@
 </RenderFor>
 
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
-  <WhereToWatchList type="movie" {media} {streamOn} />
+  <WhereToWatchList type="movie" {media} {streamOn} {youtubeSpecial} />
   <Sentiment {sentiment} slug={media.slug} type="movie" />
 </RenderFor>
 

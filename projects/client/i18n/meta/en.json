@@ -4503,6 +4503,22 @@
       "default": "On demand",
       "description": "Text label indicating that the media can be streamed on demand."
     },
+    "text_free": {
+      "default": "Free",
+      "description": "Text label indicating that the media can be watched for free, e.g a YouTube upload. If there is no short translation available, Anglicism is fine."
+    },
+    "tag_label_fan_upload": {
+      "default": "Fan upload",
+      "description": "Small pill label shown on a free YouTube tile when the upload is not the official one from the rights holder."
+    },
+    "button_label_watch_official_upload_on_youtube": {
+      "default": "Watch the official upload free on YouTube",
+      "description": "Aria-label for the tile that links to a free YouTube upload of a stand-up special, published by the comedian or their label."
+    },
+    "button_label_watch_fan_upload_on_youtube": {
+      "default": "Watch a fan upload free on YouTube",
+      "description": "Aria-label for the tile that links to a free YouTube upload of a stand-up special, published by someone other than the rights holder."
+    },
     "list_title_where_to_watch": {
       "default": "Where to Watch",
       "description": "Title for lists containing streaming services where a movie or show is available to watch. This title should be as short and concise as possible."
@@ -10560,6 +10576,14 @@
     "preview_feature_description_soundtrack": {
       "default": "Adds a soundtrack section to movie and show pages, with playback where a track can be matched.",
       "description": "Description for the soundtrack preview feature."
+    },
+    "preview_feature_title_youtube_specials": {
+      "default": "YouTube specials",
+      "description": "Product feature name for the preview feature that links stand-up specials to their full upload on YouTube."
+    },
+    "preview_feature_description_youtube_specials": {
+      "default": "Adds free YouTube uploads of stand-up specials to Where to watch on movie pages.",
+      "description": "Description for the YouTube specials preview feature."
     },
     "preview_feature_title_genre_picker": {
       "default": "Genre Picker",
