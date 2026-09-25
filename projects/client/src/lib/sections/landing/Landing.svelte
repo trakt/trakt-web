@@ -34,7 +34,6 @@
         <p class="hero-subtitle">{m.text_landing_hero()}</p>
         <div class="hero-actions">
           <JoinForFreeButton />
-          <LoginButton size="normal" />
         </div>
       </div>
 

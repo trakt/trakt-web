@@ -4,16 +4,14 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
 
-  const { size = "small" }: { size?: "small" | "normal" } = $props();
-
   const { login } = useAuth();
 </script>
 
-<div class="trakt-login-button" data-size={size}>
+<div class="trakt-login-button">
   <Button
     label={m.button_label_login()}
     style="flat"
-    {size}
+    size="small"
     color="custom"
     navigationType={DpadNavigationType.Item}
     onclick={login}
@@ -33,15 +31,11 @@
     :global(.trakt-button) {
       justify-content: center;
 
-      padding: var(--ni-16) var(--ni-28);
+      padding: var(--ni-10) var(--ni-20);
       border-radius: var(--landing-radius-pill);
       box-shadow: inset 0 0 0 var(--ni-1) var(--landing-color-stroke);
 
       @include backdrop-filter-blur(var(--ni-12));
-    }
-
-    &[data-size="small"] :global(.trakt-button) {
-      padding: var(--ni-10) var(--ni-20);
     }
   }
 
