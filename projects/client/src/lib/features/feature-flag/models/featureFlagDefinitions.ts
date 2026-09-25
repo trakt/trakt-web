@@ -9,6 +9,7 @@ import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
+import YouTubeIcon from '$lib/components/icons/YouTubeIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { Component } from 'svelte';
@@ -114,5 +115,12 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_action_confirmations(),
     addedAt: new Date('2026-08-25'),
     description: () => m.preview_feature_description_action_confirmations(),
+  },
+  [FeatureFlag.YouTubeSpecials]: {
+    icon: YouTubeIcon,
+    title: () => m.preview_feature_title_youtube_specials(),
+    addedAt: new Date('2026-09-26'),
+    description: () => m.preview_feature_description_youtube_specials(),
+    audience: 'director',
   },
 };

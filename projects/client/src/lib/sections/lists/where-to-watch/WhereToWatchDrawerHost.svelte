@@ -7,10 +7,12 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { YouTubeSpecial } from "$lib/requests/models/YouTubeSpecial.ts";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { filterGroupedServices } from "./_internal/filterGroupedServices";
   import { getGroupedServices } from "./_internal/getGroupedServices";
+  import { mapToYouTubeSpecialOption } from "./_internal/mapToYouTubeSpecialOption.ts";
   import { StreamingGroup } from "./_internal/models/StreamingGroup";
   import { useAllStreamOn } from "./_internal/useAllStreamOn";
   import WhereToWatchCategory from "./_internal/WhereToWatchCategory.svelte";
@@ -20,14 +22,17 @@
   const {
     onClose,
     elevated = false,
+    youtubeSpecial,
     ...target
   }: MetaInfoProps & {
     onClose: () => void;
     elevated?: boolean;
+    youtubeSpecial?: YouTubeSpecial | Nil;
   } = $props();
 
   const { list, isLoading } = $derived(useAllStreamOn(target));
   const { plexServices } = $derived(usePlexLibrary(target));
+  const youtubeTile = $derived(mapToYouTubeSpecialOption(youtubeSpecial));
 
   const { country, favorites } = useStreamingPreferences();
   const serviceNames = useStreamingServiceNames();
@@ -67,7 +72,8 @@
   );
 
   const hasAnyResults = $derived(
-    ($plexServices.length > 0 && !isSearching) || hasStreamingResults,
+    (!isSearching && (Boolean(youtubeTile) || $plexServices.length > 0)) ||
+      hasStreamingResults,
   );
 </script>
 
@@ -83,6 +89,25 @@
     placeholder={m.input_placeholder_search_streaming_services()}
     --drawer-search-input-margin-block="var(--ni-4) var(--gap-s)"
   />
+
+  {#if youtubeTile && !isSearching}
+    <WhereToWatchCategory>
+      <SectionList
+        id={{
+          scope: `where-to-watch-drawer-list-youtube`,
+          key: target.media.slug,
+        }}
+        items={[youtubeTile]}
+        title={null}
+        variant="inline"
+        --height-list="var(--height-where-to-watch-list)"
+      >
+        {#snippet item(entry)}
+          <WhereToWatchItem service={entry} country={$country} />
+        {/snippet}
+      </SectionList>
+    </WhereToWatchCategory>
+  {/if}
 
   <RenderFor audience="authenticated" device={["mobile"]}>
     {#if $plexServices.length > 0 && !isSearching}

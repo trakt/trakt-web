@@ -5,6 +5,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
+  import type { YouTubeSpecial } from "$lib/requests/models/YouTubeSpecial.ts";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
@@ -12,20 +13,24 @@
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { hasAired } from "$lib/utils/media/hasAired";
   import { slide } from "svelte/transition";
+  import { buildServiceTiles } from "./_internal/buildServiceTiles.ts";
   import JustWatchInfo from "./_internal/JustWatchInfo.svelte";
   import { mapToServices } from "./_internal/mapToServices";
+  import { mapToYouTubeSpecialOption } from "./_internal/mapToYouTubeSpecialOption.ts";
   import { whereToWatchListScope } from "./_internal/whereToWatchListScope.ts";
   import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
   import WhereToWatchSkeletonItems from "./_internal/WhereToWatchSkeletonItems.svelte";
 
   const {
     streamOn,
+    youtubeSpecial,
     variant,
     onDrilldown,
     isLoading = false,
     ...target
   }: MetaInfoProps & {
     streamOn?: StreamOn;
+    youtubeSpecial?: YouTubeSpecial | Nil;
     variant?: ListVariant;
     onDrilldown?: () => void;
     isLoading?: boolean;
@@ -47,17 +52,19 @@
     return { ...shared, ...buildDrawerLink(SummaryDrawers.WhereToWatch) };
   });
   const justWatchServices = $derived(mapToServices(streamOn));
+  const youtubeTile = $derived(mapToYouTubeSpecialOption(youtubeSpecial));
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
 
   const { plexServices } = $derived(usePlexLibrary(target));
 
-  const services = $derived.by(() => {
-    if (!$isMobile) {
-      return justWatchServices;
-    }
-
-    return [...$plexServices, ...justWatchServices];
-  });
+  const services = $derived(
+    buildServiceTiles({
+      justWatchServices,
+      plexServices: $plexServices,
+      youtubeTile,
+      isMobile: $isMobile,
+    }),
+  );
 
   const { country } = useStreamingPreferences();
 

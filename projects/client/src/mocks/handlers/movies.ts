@@ -5,6 +5,7 @@ import { UserMovieListIdsResponseMock } from '$mocks/data/lists/response/UserMov
 import { MovieHereticCommentsResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticCommentsResponseMock.ts';
 import { MovieHereticSentimentResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticSentimentResponseMock.ts';
 import { MovieHereticSoundtrackResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticSoundtrackResponseMock.ts';
+import { MovieHereticYouTubeSpecialResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticYouTubeSpecialResponseMock.ts';
 import { MoviesAnticipatedResponseMock } from '../data/movies/response/MoviesAnticipatedResponseMock.ts';
 import { MoviesPopularResponseMock } from '../data/movies/response/MoviesPopularResponseMock.ts';
 import { MoviesTrendingResponseMock } from '../data/movies/response/MoviesTrendingResponseMock.ts';
@@ -145,6 +146,12 @@ export const movies = [
     `http://localhost/v3/media/movie/${MovieHereticResponseMock.ids.slug}/info/15/version/1`,
     () => {
       return HttpResponse.json(MovieHereticSoundtrackResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/v3/media/movie/${MovieHereticResponseMock.ids.slug}/info/17/version/1`,
+    () => {
+      return HttpResponse.json(MovieHereticYouTubeSpecialResponseMock);
     },
   ),
   http.get(

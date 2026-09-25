@@ -1,4 +1,6 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
+import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
+import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import {
   getLanguageAndRegion,
   getLocale,
@@ -12,6 +14,7 @@ import { movieSentimentQuery } from '$lib/requests/queries/movies/movieSentiment
 import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { movieVideosQuery } from '$lib/requests/queries/movies/movieVideosQuery.ts';
+import { movieYouTubeSpecialQuery } from '$lib/requests/queries/movies/movieYouTubeSpecialQuery.ts';
 import { streamMovieQuery } from '$lib/requests/queries/movies/streamMovieQuery.ts';
 import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferredStreamingService.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
@@ -19,7 +22,7 @@ import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { combineLatest, type Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 export function useMovie(slug$: Observable<string>) {
   const { isAuthorized } = useAuth();
@@ -56,6 +59,34 @@ export function useMovie(slug$: Observable<string>) {
 
   const videos = useQuery(
     slug$.pipe(map((slug) => movieVideosQuery({ slug }))),
+  );
+
+  const isComedy = movie.pipe(
+    map(($movie) => $movie.data?.genres.includes('comedy') ?? false),
+    distinctUntilChanged(),
+  );
+
+  const { isEnabled } = useFeatureFlag();
+  const canShowYouTubeSpecial = combineLatest([
+    isAuthorized,
+    isEnabled(FeatureFlag.YouTubeSpecials),
+  ]).pipe(map(([authorized, flagged]) => authorized && flagged));
+
+  const youtubeSpecial = combineLatest([
+    canShowYouTubeSpecial,
+    useQuery(
+      combineLatest([slug$, canShowYouTubeSpecial, isComedy]).pipe(
+        map(([slug, canShow, comedy]) =>
+          movieYouTubeSpecialQuery({
+            slug,
+            locale: activeLocale,
+            enabled: canShow && comedy,
+          })
+        ),
+      ),
+    ),
+  ]).pipe(
+    map(([canShow, query]) => (canShow ? query.data : null)),
   );
 
   const locale = languageTag();
@@ -111,6 +142,7 @@ export function useMovie(slug$: Observable<string>) {
     crew: crew.pipe(map(($crew) => $crew.data ?? EMPTY_CREW)),
     videos: videos.pipe(map(($videos) => $videos.data ?? [])),
     sentiment: sentiment.pipe(map(($sentiment) => $sentiment?.data)),
+    youtubeSpecial,
     intl: combineLatest([intl, movie]).pipe(
       map(([$intl, $movie]) =>
         findRegionalIntl({
