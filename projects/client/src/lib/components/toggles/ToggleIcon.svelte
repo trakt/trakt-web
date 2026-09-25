@@ -74,6 +74,10 @@
   <PopularIcon />
 {/if}
 
+{#if option.value === "mine"}
+  <ProfileIcon />
+{/if}
+
 {#if option.value === "spoilers"}
   <SpoilerIcon />
 {/if}

@@ -10,6 +10,9 @@
   import CommentBody from "../_internal/CommentBody.svelte";
   import CommentFooter from "../_internal/CommentFooter.svelte";
   import CommentHeader from "../_internal/CommentHeader.svelte";
+  import { isTopLevelComment } from "../_internal/isTopLevelComment.ts";
+  import ReplyContext from "../_internal/ReplyContext.svelte";
+  import { toReplyThreadUrl } from "../_internal/toReplyThreadUrl.ts";
   import { toGifSuggestedQuery } from "../_internal/toGifSuggestedQuery.ts";
   import type { CommentTypeProps } from "../CommentsProps";
   import CommentReplies from "./CommentReplies.svelte";
@@ -47,6 +50,8 @@
     return scrollActiveCommentIntoView(node, scrollContainerClass);
   };
 
+  const isReply = $derived(!isTopLevelComment(comment));
+
   let areRepliesExpanded = $state(false);
 
   function toggleReplies() {
@@ -69,6 +74,15 @@
     {#if header}
       {@render header()}
     {:else}
+      {#if isReply}
+        <ReplyContext
+          href={toReplyThreadUrl({
+            parentId: comment.parentId,
+            media,
+            ...typeProps,
+          })}
+        />
+      {/if}
       <CommentHeader {comment} {media} {...typeProps} />
     {/if}
 
@@ -85,10 +99,12 @@
 
     <CommentFooter>
       <ReactAction {comment} />
-      <ReplyButton
-        {comment}
-        onClick={() => setReplying(comment, !isReplying)}
-      />
+      {#if !isReply}
+        <ReplyButton
+          {comment}
+          onClick={() => setReplying(comment, !isReplying)}
+        />
+      {/if}
     </CommentFooter>
 
     {#if isReplying}

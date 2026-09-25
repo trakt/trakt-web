@@ -8,4 +8,5 @@ export enum FeatureFlag {
   VipCancelFlow = 'vip-cancel-flow',
   ShowEnding = 'show-ending',
   ReviewsPinMine = 'reviews-pin-mine',
+  ReviewsMineTab = 'reviews-mine-tab',
 }
