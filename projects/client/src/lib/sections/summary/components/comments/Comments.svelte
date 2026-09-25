@@ -2,7 +2,6 @@
   import { goto } from "$app/navigation";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { useToggler } from "$lib/components/toggles/useToggler";
   import { useAuth } from "$lib/features/auth/stores/useAuth.ts";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
@@ -19,6 +18,7 @@
   import { useCommentLanguage } from "./_internal/useCommentLanguage.svelte.ts";
   import type { ActiveComment } from "./_internal/models/ActiveComment";
   import { useComments } from "./_internal/useComments";
+  import { useMineTab } from "./_internal/useMineTab.ts";
   import { useMyComments } from "./_internal/useMyComments.ts";
   import type { UseMyCommentsProps } from "./_internal/UseMyCommentsProps.ts";
   import type { CommentsProps } from "./CommentsProps";
@@ -26,14 +26,21 @@
 
   const { media, ...props }: CommentsProps = $props();
 
-  const { current: sortType, set, options } = useToggler("comment");
+  const {
+    sort,
+    mineActive,
+    sortOptions,
+    activeTab,
+    activeText,
+    onTabChange,
+  } = useMineTab();
 
   const commentLanguage = useCommentLanguage();
 
   const { isLoading, list: comments } = $derived(
     useComments({
       slug: media.slug,
-      sort: $sortType.value,
+      sort: $sort.value,
       language: commentLanguage.filter,
       ...props,
     }),
@@ -42,12 +49,14 @@
   const { isAuthorized } = useAuth();
 
   const { isEnabled } = useFeatureFlag();
+  const isMineTabEnabled = $derived(isEnabled(FeatureFlag.ReviewsMineTab));
   const isPinMineEnabled = $derived(isEnabled(FeatureFlag.ReviewsPinMine));
 
   const myCommentsParams$ = fromRune((): UseMyCommentsProps => ({
     ...props,
     slug: media.slug,
-    enabled: ($isAuthorized ?? false) && $isPinMineEnabled,
+    enabled: ($isAuthorized ?? false) &&
+      ($isMineTabEnabled || $isPinMineEnabled),
   }));
 
   const { list: allMineNewestFirst, isLoading: isMineLoading } = useMyComments(
@@ -60,7 +69,7 @@
       : [],
   );
 
-  const displayedComments = $derived.by(() => {
+  const popularOrRecentComments = $derived.by(() => {
     if (pinnedComments.length === 0) return $comments;
 
     const pinnedKeys = new Set(pinnedComments.map((comment) => comment.key));
@@ -70,10 +79,16 @@
     ];
   });
 
+  const displayedComments = $derived(
+    $mineActive ? $allMineNewestFirst : popularOrRecentComments,
+  );
+
   // With pinning on, the empty state waits for /comments/mine too, or an
   // empty public list flashes "No reviews yet" before the pin lands.
   const displayedIsLoading = $derived(
-    $isLoading || ($isPinMineEnabled && $isMineLoading),
+    $mineActive
+      ? $isMineLoading
+      : $isLoading || ($isPinMineEnabled && $isMineLoading),
   );
 
   const { buildCommentsDrawerLink } = summaryDrawerNavigation();
@@ -91,14 +106,14 @@
 </script>
 
 {#snippet metaInfo()}
-  <ListMetaInfo text={$sortType.text()} />
+  <ListMetaInfo text={$activeText()} />
 {/snippet}
 
 <RenderFor audience="all">
   <SectionList
     id={{
       scope: `comments-list-${props.type}`,
-      key: `${media.slug}-${$sortType.value}-${commentLanguage.value}`,
+      key: `${media.slug}-${$activeTab}-${commentLanguage.value}`,
     }}
     items={displayedComments}
     title={m.list_title_comments()}
@@ -116,17 +131,19 @@
 
     {#snippet empty()}
       {#if !displayedIsLoading}
-        <p>{commentsPlaceholder(commentLanguage.value)}</p>
+        <p>
+          {$mineActive
+            ? m.list_placeholder_reviews_mine()
+            : commentsPlaceholder(commentLanguage.value)}
+        </p>
       {/if}
     {/snippet}
 
     {#snippet actions()}
       <Toggler
-        value={$sortType.value}
-        onChange={(value) => {
-          set(value);
-        }}
-        {options}
+        value={$activeTab}
+        onChange={onTabChange}
+        options={$sortOptions}
       />
 
       <CommentLanguageSelect

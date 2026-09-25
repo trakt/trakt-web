@@ -1989,6 +1989,10 @@
       "default": "No {language} reviews yet.",
       "description": "Placeholder text shown when there are no reviews in a specific language. {language} is the localized language name, e.g. 'Dutch'."
     },
+    "list_placeholder_reviews_mine": {
+      "default": "You haven't reviewed this yet.",
+      "description": "Placeholder text shown in the 'Mine' filter of a reviews list when the viewer has no review on this title."
+    },
     "text_review_by": {
       "default": "Review by",
       "description": "Text used to indicate the author of a review."
@@ -4432,6 +4436,14 @@
     "button_text_recent_comments": {
       "default": "Recent",
       "description": "Text for the button that allows users to sort reviews by recency. This should be short and ideally one word."
+    },
+    "button_label_mine_reviews": {
+      "default": "Your reviews",
+      "description": "Aria-label for the button that filters a reviews list down to the viewer's own review."
+    },
+    "button_text_mine_reviews": {
+      "default": "Mine",
+      "description": "Text for the button that filters a reviews list down to the viewer's own review. This should be short and ideally one word."
     },
     "link_text_vip_cover_image_upsell": {
       "default": "Upgrade to VIP to set cover images.",
@@ -10766,6 +10778,14 @@
     "preview_feature_description_reviews_pin_mine": {
       "default": "Pins your own review at the top of a movie or show's reviews section.",
       "description": "Description for the reviews-pin-mine preview feature toggle in settings."
+    },
+    "preview_feature_title_reviews_mine_tab": {
+      "default": "My reviews tab",
+      "description": "Title for the reviews-mine-tab preview feature toggle in settings."
+    },
+    "preview_feature_description_reviews_mine_tab": {
+      "default": "Adds a \"Mine\" tab to a movie or show's reviews section, showing only your own.",
+      "description": "Description for the reviews-mine-tab preview feature toggle in settings."
     }
   }
 }

@@ -122,4 +122,10 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-09-24'),
     description: () => m.preview_feature_description_reviews_pin_mine(),
   },
+  [FeatureFlag.ReviewsMineTab]: {
+    icon: CommentIcon,
+    title: () => m.preview_feature_title_reviews_mine_tab(),
+    addedAt: new Date('2026-09-24'),
+    description: () => m.preview_feature_description_reviews_mine_tab(),
+  },
 };

@@ -1,7 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { useToggler } from "$lib/components/toggles/useToggler";
   import { useAuth } from "$lib/features/auth/stores/useAuth.ts";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
@@ -14,6 +13,8 @@
   import { useCommentLanguage } from "../_internal/useCommentLanguage.svelte.ts";
   import type { ActiveComment } from "../_internal/models/ActiveComment";
   import { useCommentsWithPinnedMine } from "../_internal/useCommentsWithPinnedMine";
+  import { useMineTab } from "../_internal/useMineTab.ts";
+  import { useMyComments } from "../_internal/useMyComments";
   import type { UseMyCommentsProps } from "../_internal/UseMyCommentsProps.ts";
   import ReviewsDrawerShell from "./_internal/ReviewsDrawerShell.svelte";
 
@@ -24,7 +25,14 @@
 
   const { onClose, source, media, ...props }: CommentsDrawerProps = $props();
 
-  const { current: sortType, set, options } = useToggler("comment");
+  const {
+    sort,
+    mineActive,
+    sortOptions,
+    activeTab,
+    activeText,
+    onTabChange,
+  } = useMineTab();
 
   const commentLanguage = useCommentLanguage();
 
@@ -47,29 +55,36 @@
   {onClose}
   title={m.dialog_title_comment()}
   size="large"
-  metaInfo={$sortType.text()}
+  metaInfo={$activeText()}
   onOpened={() => isOpened.set(true)}
 >
   {#if $isOpened}
     <ReviewsDrawerShell
       {source}
       useList={() =>
-        useCommentsWithPinnedMine({
-          slug: media.slug,
-          limit: COMMENTS_DRILL_SIZE,
-          sort: $sortType.value,
-          language: commentLanguage.filter,
-          pinMine$,
-          myCommentsParams$,
-          ...props,
-        })}
+        $mineActive
+          ? useMyComments(myCommentsParams$)
+          : useCommentsWithPinnedMine({
+              slug: media.slug,
+              limit: COMMENTS_DRILL_SIZE,
+              sort: $sort.value,
+              language: commentLanguage.filter,
+              pinMine$,
+              myCommentsParams$,
+              ...props,
+            })}
+      emptyText={$mineActive ? m.list_placeholder_reviews_mine() : undefined}
       {media}
       {...props}
     />
   {/if}
 
   {#snippet badge()}
-    <Toggler value={$sortType.value} onChange={set} {options} />
+    <Toggler
+      value={$activeTab}
+      onChange={onTabChange}
+      options={$sortOptions}
+    />
     <CommentLanguageSelect
       value={commentLanguage.value}
       onChange={commentLanguage.set}
