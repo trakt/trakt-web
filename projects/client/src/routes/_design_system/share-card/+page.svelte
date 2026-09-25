@@ -136,7 +136,6 @@
               >
               <Switch
                 label="Toggle image preview"
-                color="purple"
                 checked={showImagePreview[variant]}
                 onclick={() => {
                   showImagePreview[variant] = !showImagePreview[variant];

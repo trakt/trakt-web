@@ -31,7 +31,6 @@
       checked={!$spoilers.isHidden}
       onclick={() => $spoilers.set(!$spoilers.isHidden)}
       disabled={$isSavingSettings}
-      color="purple"
     />
   </SettingsGroupRow>
 
@@ -46,7 +45,6 @@
       checked={$watchAgain.hasWatchAgain}
       onclick={() => $watchAgain.set(!$watchAgain.hasWatchAgain)}
       disabled={$isSavingSettings}
-      color="purple"
     />
   </SettingsGroupRow>
 
@@ -61,7 +59,6 @@
       checked={$ratingPrompt.showRatingPrompt}
       onclick={() => $ratingPrompt.set(!$ratingPrompt.showRatingPrompt)}
       disabled={$isSavingSettings}
-      color="purple"
     />
   </SettingsGroupRow>
 </SettingsGroupCard>

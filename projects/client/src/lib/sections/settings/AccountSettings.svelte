@@ -183,7 +183,6 @@
         checked={$profile.isPrivate}
         onclick={() => $profile.set({ private: !$profile.isPrivate })}
         disabled={$isSavingSettings}
-        color="purple"
       />
     </SettingsGroupRow>
 

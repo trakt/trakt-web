@@ -28,7 +28,6 @@
   <span class="spoiler-switch-control">
     <Switch
       label={m.switch_label_mark_as_spoiler()}
-      color="red"
       checked={isChecked}
       {onclick}
       {disabled}
