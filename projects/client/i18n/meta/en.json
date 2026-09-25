@@ -13882,6 +13882,14 @@
     "text_mixtape_pick_prompt": {
       "default": "Tap a poster you loved",
       "description": "Shown in the Mixtape bottom bar before anything is picked."
+    },
+    "preview_feature_title_reviews_pin_mine": {
+      "default": "Pin my review",
+      "description": "Title for the reviews-pin-mine preview feature toggle in settings."
+    },
+    "preview_feature_description_reviews_pin_mine": {
+      "default": "Pins your own review at the top of a movie or show's reviews section.",
+      "description": "Description for the reviews-pin-mine preview feature toggle in settings."
     }
   }
 }

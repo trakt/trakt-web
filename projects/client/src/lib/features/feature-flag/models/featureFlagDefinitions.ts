@@ -1,3 +1,4 @@
+import CommentIcon from '$lib/components/icons/CommentIcon.svelte';
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
@@ -94,5 +95,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_show_ending(),
     addedAt: new Date('2026-10-16'),
     description: () => m.preview_feature_description_show_ending(),
+  },
+  [FeatureFlag.ReviewsPinMine]: {
+    icon: CommentIcon,
+    title: () => m.preview_feature_title_reviews_pin_mine(),
+    addedAt: new Date('2026-09-24'),
+    description: () => m.preview_feature_description_reviews_pin_mine(),
   },
 };
