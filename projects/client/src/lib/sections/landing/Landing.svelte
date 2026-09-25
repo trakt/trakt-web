@@ -140,7 +140,8 @@
       align-content: center;
       gap: var(--gap-l);
 
-      padding: 0 var(--ni-20) var(--ni-56);
+      padding: 0 var(--ni-20)
+        calc(var(--ni-80) + env(safe-area-inset-bottom, 0px));
 
       :global(.trakt-landing-spotlight) {
         order: -1;
