@@ -41,12 +41,9 @@ export function resolveCacheControl({
     return 'public, max-age=3600, s-maxage=3600';
   }
 
-  // Social bots (Discord, Slack, etc.), allow a short cache so strict crawlers
-  // (Discord) will render embeds. Only cache publicly for unauthenticated
-  // requests to prevent cache poisoning via spoofed User-Agent.
+  // Social bots (Discord, Slack, etc.) need a cacheable response to render embeds.
   if (isSocialBot && !hasSession) {
-    // 120 seconds is enough to satisfy Discord without heavily caching stale content
-    return 'public, max-age=120, s-maxage=120';
+    return 'private, max-age=120';
   }
 
   return NO_STORE;
