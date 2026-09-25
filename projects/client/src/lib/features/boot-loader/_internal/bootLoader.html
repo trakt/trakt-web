@@ -62,6 +62,10 @@ html[data-theme="dark"] .boot-loader {
   animation: boot-loader-appear 300ms ease 400ms backwards;
 }
 
+html[data-boot="loading"] body > :not(.boot-loader) {
+  visibility: hidden;
+}
+
 .boot-loader-logo {
   display: block;
   width: 88px;

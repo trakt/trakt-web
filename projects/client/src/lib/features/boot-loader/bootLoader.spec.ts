@@ -111,4 +111,17 @@ describe('boot loader', () => {
     vi.advanceTimersByTime(100);
     expect(boot()).toBe('styled');
   });
+
+  it('should hide the page until the loader hands off', () => {
+    const stylesheets = mountBootLoader();
+    const page = document.querySelector('.app');
+
+    vi.advanceTimersByTime(450);
+    settle(stylesheets);
+    vi.advanceTimersByTime(650);
+    expect(page && getComputedStyle(page).visibility).toBe('hidden');
+
+    vi.advanceTimersByTime(150);
+    expect(page && getComputedStyle(page).visibility).toBe('visible');
+  });
 });
