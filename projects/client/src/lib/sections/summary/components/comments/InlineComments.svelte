@@ -1,10 +1,15 @@
 <script lang="ts">
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
+  import { useAuth } from "$lib/features/auth/stores/useAuth.ts";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import type { CommentSortType } from "$lib/requests/models/CommentSortType.ts";
   import { COMMENTS_DRILL_SIZE } from "$lib/utils/constants";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { CommentsProps } from "./CommentsProps.ts";
   import { commentsPlaceholder } from "./_internal/commentsPlaceholder.ts";
-  import { useComments } from "./_internal/useComments.ts";
+  import { useCommentsWithPinnedMine } from "./_internal/useCommentsWithPinnedMine.ts";
+  import type { UseMyCommentsProps } from "./_internal/UseMyCommentsProps.ts";
   import { useActiveComment } from "./drawers/useActiveComment.ts";
   import CommentThreadCard from "./drawers/CommentThreadCard.svelte";
 
@@ -13,6 +18,18 @@
     & { sort: CommentSortType; language?: string } = $props();
 
   const { reset, setReplying, activeComment } = useActiveComment();
+
+  const { isAuthorized } = useAuth();
+  const { isEnabled } = useFeatureFlag();
+  const pinMine$ = isEnabled(FeatureFlag.ReviewsPinMine);
+
+  // Built outside the useList factory PaginatedList wraps in $derived, so a
+  // re-render updates the query's options instead of recreating it.
+  const myCommentsParams$ = fromRune((): UseMyCommentsProps => ({
+    ...props,
+    slug: media.slug,
+    enabled: $isAuthorized ?? false,
+  }));
 
   const isReplying = (id: number) =>
     $activeComment?.id === id && $activeComment?.isReplying;
@@ -23,11 +40,13 @@
     type={`inline-comments-${sort}-${language ?? "all"}`}
     target="default"
     useList={() =>
-      useComments({
+      useCommentsWithPinnedMine({
         slug: media.slug,
         limit: COMMENTS_DRILL_SIZE,
         sort,
         language,
+        pinMine$,
+        myCommentsParams$,
         ...props,
       })}
   >

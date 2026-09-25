@@ -3,8 +3,12 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
+  import { useAuth } from "$lib/features/auth/stores/useAuth.ts";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import CommentCard from "$lib/sections/summary/components/comments/CommentCard.svelte";
@@ -15,6 +19,8 @@
   import { useCommentLanguage } from "./_internal/useCommentLanguage.svelte.ts";
   import type { ActiveComment } from "./_internal/models/ActiveComment";
   import { useComments } from "./_internal/useComments";
+  import { useMyComments } from "./_internal/useMyComments.ts";
+  import type { UseMyCommentsProps } from "./_internal/UseMyCommentsProps.ts";
   import type { CommentsProps } from "./CommentsProps";
   import AddReviewDrawerHost from "./drawers/AddReviewDrawerHost.svelte";
 
@@ -31,6 +37,43 @@
       language: commentLanguage.filter,
       ...props,
     }),
+  );
+
+  const { isAuthorized } = useAuth();
+
+  const { isEnabled } = useFeatureFlag();
+  const isPinMineEnabled = $derived(isEnabled(FeatureFlag.ReviewsPinMine));
+
+  const myCommentsParams$ = fromRune((): UseMyCommentsProps => ({
+    ...props,
+    slug: media.slug,
+    enabled: ($isAuthorized ?? false) && $isPinMineEnabled,
+  }));
+
+  const { list: allMineNewestFirst, isLoading: isMineLoading } = useMyComments(
+    myCommentsParams$,
+  );
+
+  const pinnedComments = $derived(
+    $isPinMineEnabled && $allMineNewestFirst.length > 0
+      ? $allMineNewestFirst.slice(0, 1)
+      : [],
+  );
+
+  const displayedComments = $derived.by(() => {
+    if (pinnedComments.length === 0) return $comments;
+
+    const pinnedKeys = new Set(pinnedComments.map((comment) => comment.key));
+    return [
+      ...pinnedComments,
+      ...$comments.filter((comment) => !pinnedKeys.has(comment.key)),
+    ];
+  });
+
+  // With pinning on, the empty state waits for /comments/mine too, or an
+  // empty public list flashes "No reviews yet" before the pin lands.
+  const displayedIsLoading = $derived(
+    $isLoading || ($isPinMineEnabled && $isMineLoading),
   );
 
   const { buildCommentsDrawerLink } = summaryDrawerNavigation();
@@ -57,7 +100,7 @@
       scope: `comments-list-${props.type}`,
       key: `${media.slug}-${$sortType.value}-${commentLanguage.value}`,
     }}
-    items={$comments}
+    items={displayedComments}
     title={m.list_title_comments()}
     --height-list="var(--height-comments-list)"
     {metaInfo}
@@ -72,7 +115,7 @@
     {/snippet}
 
     {#snippet empty()}
-      {#if !$isLoading}
+      {#if !displayedIsLoading}
         <p>{commentsPlaceholder(commentLanguage.value)}</p>
       {/if}
     {/snippet}
