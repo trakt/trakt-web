@@ -3,10 +3,13 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { TrendingEntry } from "$lib/sections/lists/trending/useTrendingList.ts";
   import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType.ts";
+  import { DragGesture } from "@use-gesture/vanilla";
+  import type { Attachment } from "svelte/attachments";
   import {
     spotlightPosition,
     type SpotlightPosition,
   } from "../spotlightPosition.ts";
+  import { spotlightSwipeStep } from "../spotlightSwipeStep.ts";
 
   const PLACEHOLDER_POSITIONS: ReadonlyArray<SpotlightPosition> = [
     "front",
@@ -14,16 +17,55 @@
     "after",
   ];
 
-  const {
-    items,
-    active,
-  }: { items: ReadonlyArray<TrendingEntry>; active: number } = $props();
+  type SpotlightStackProps = {
+    items: ReadonlyArray<TrendingEntry>;
+    active: number;
+    onStep?: (delta: number) => void;
+  };
+
+  const { items, active, onStep }: SpotlightStackProps = $props();
 
   const current = $derived(items.at(active));
+  const isSwipeable = $derived(Boolean(onStep) && items.length > 1);
+
+  let dragX = $state(0);
+
+  const swipeable: Attachment<HTMLElement> = (node) => {
+    const gesture = new DragGesture(
+      node,
+      ({ first, last, tap, movement: [dx] }) => {
+        if (first) onStep?.(0);
+
+        if (!last) {
+          dragX = dx;
+          return;
+        }
+
+        dragX = 0;
+
+        const delta = spotlightSwipeStep({
+          dx,
+          isTap: tap,
+          isRtl: getComputedStyle(node).direction === "rtl",
+        });
+        if (delta !== 0) onStep?.(delta);
+      },
+      { filterTaps: true, axis: "x", pointer: { keys: false } },
+    );
+
+    return () => gesture.destroy();
+  };
 </script>
 
 <div class="trakt-landing-spotlight">
-  <div class="spotlight-cards" aria-hidden="true">
+  <div
+    class="spotlight-cards"
+    aria-hidden="true"
+    data-swipeable={isSwipeable}
+    data-dragging={dragX !== 0}
+    style:--drag-x="{dragX}px"
+    {@attach isSwipeable ? swipeable : undefined}
+  >
     {#if items.length === 0}
       {#each PLACEHOLDER_POSITIONS as position (position)}
         <div class="spotlight-card" data-position={position}>
@@ -99,18 +141,36 @@
 
     width: var(--card-width);
     height: calc(var(--card-width) * 1.5);
+
+    &[data-swipeable="true"] {
+      cursor: grab;
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    &[data-dragging="true"] {
+      cursor: grabbing;
+
+      .spotlight-card[data-position="front"] {
+        transition: none;
+      }
+    }
   }
 
   .spotlight-card {
     --shift: 0;
     --tilt: -2deg;
     --scale: 1;
+    --drag-offset: 0px;
 
     position: absolute;
     inset: 0;
 
     transform: translateX(
-        calc(var(--card-width) * var(--shift) * var(--rtl-sign))
+        calc(
+          var(--card-width) * var(--shift) * var(--rtl-sign) +
+            var(--drag-offset)
+        )
       )
       rotate(calc(var(--tilt) * var(--rtl-sign))) scale(var(--scale));
     transition:
@@ -122,6 +182,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      pointer-events: none;
 
       border-radius: var(--border-radius-xl);
       box-shadow:
@@ -167,6 +228,8 @@
     }
 
     &[data-position="front"] {
+      --drag-offset: var(--drag-x, 0px);
+
       z-index: 3;
 
       &::after {
