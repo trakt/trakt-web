@@ -12,7 +12,7 @@ import { dailyShuffle } from '../../utils/array/dailyShuffle.ts';
 import { usePaginatedListQuery } from '../lists/stores/usePaginatedListQuery.ts';
 import type { TrendingEntry } from '../lists/trending/useTrendingList.ts';
 
-export const RANDOM_ITEM_COUNT = 12;
+const RANDOM_ITEM_COUNT = 12;
 
 function typeToQuery(type: MediaType) {
   const params = {

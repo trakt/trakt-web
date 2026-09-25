@@ -1,112 +1,78 @@
 <script lang="ts">
   import Logo from "$lib/components/logo/Logo.svelte";
-  import JoinForFree from "./components/JoinForFree.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import JoinForFreeButton from "./components/JoinForFreeButton.svelte";
+  import LandingApps from "./components/LandingApps.svelte";
+  import LandingPillars from "./components/LandingPillars.svelte";
   import LoginButton from "./components/LoginButton.svelte";
-  import Steps from "./components/Steps.svelte";
-  import TraktApps from "./components/TraktApps.svelte";
+  import SpotlightBackdrop from "./components/SpotlightBackdrop.svelte";
+  import SpotlightStack from "./components/SpotlightStack.svelte";
+  import { useSpotlightItems } from "./useSpotlightItems.ts";
+  import { useSpotlightTick } from "./useSpotlightTick.ts";
 
-  import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
-  import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
-  import Link from "$lib/components/link/Link.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import AppStoreBadge from "./assets/AppStoreBadge.svelte";
-  import GooglePlayBadge from "./assets/GooglePlayBadge.svelte";
-  import popcorn from "./assets/popcorn.png";
-  import ExploreLabels from "./components/ExploreLabels.svelte";
-  import LandingColumns from "./components/LandingColumns.svelte";
-  import TrendingItems from "./components/TrendingItems.svelte";
+  const { items } = useSpotlightItems();
+  const tick = useSpotlightTick();
+
+  const active = $derived($items.length > 0 ? $tick % $items.length : 0);
 </script>
 
 <div class="trakt-landing">
-  <LandingColumns>
-    {#snippet left()}
-      <div class="trakt-landing-logo" data-boot-target>
+  <section class="landing-hero">
+    <SpotlightBackdrop items={$items} {active} />
+
+    <header class="landing-nav">
+      <div class="landing-logo" data-boot-target>
         <Logo />
       </div>
-      <TrendingItems type="show">
-        <ExploreLabels text="shows" />
-        <ShowIcon />
-      </TrendingItems>
-    {/snippet}
+      <LoginButton />
+    </header>
 
-    <Steps />
-    <JoinForFree />
-
-    {#snippet right()}
-      <div class="trakt-landing-login">
-        <LoginButton />
+    <div class="hero-content">
+      <div class="hero-copy">
+        <span class="hero-chip small">{m.text_landing_platforms()}</span>
+        <h1 class="hero-title">{m.header_landing_hero()}</h1>
+        <p class="hero-subtitle">{m.text_landing_hero()}</p>
+        <div class="hero-actions">
+          <JoinForFreeButton />
+          <LoginButton size="normal" />
+        </div>
       </div>
-      <TrendingItems type="movie">
-        <MovieIcon />
-        <ExploreLabels text="movies" />
-      </TrendingItems>
-    {/snippet}
-  </LandingColumns>
 
-  <LandingColumns>
-    {#snippet left()}
-      <RenderFor audience="public" device={["tablet-lg", "desktop"]}>
-        <Link href={UrlBuilder.app.ios()} target="_blank">
-          <AppStoreBadge />
-        </Link>
-      </RenderFor>
-    {/snippet}
+      <SpotlightStack items={$items} {active} />
+    </div>
+  </section>
 
-    <TraktApps />
-
-    {#snippet right()}
-      <RenderFor audience="public" device={["tablet-lg", "desktop"]}>
-        <Link href={UrlBuilder.app.android()} target="_blank">
-          <GooglePlayBadge />
-        </Link>
-      </RenderFor>
-    {/snippet}
-  </LandingColumns>
-
-  <img src={popcorn} class="trakt-popcorn" alt="" />
+  <LandingPillars />
+  <LandingApps />
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   .trakt-landing {
-    --landing-padding: var(--ni-48);
-    --landing-gap: var(--ni-96);
+    --landing-color-muted: color-mix(in srgb, var(--shade-10) 72%, transparent);
+    --landing-color-faint: color-mix(in srgb, var(--shade-10) 45%, transparent);
+    --landing-color-border: color-mix(in srgb, var(--shade-10) 9%, transparent);
+    --landing-color-stroke: color-mix(in srgb, var(--shade-10) 16%, transparent);
+    --landing-radius-pill: var(--ni-104);
 
-    --popcorn-height: var(--ni-200);
-    --popcorn-safe-area: var(--popcorn-height);
-
-    position: absolute;
-    inset-inline-start: 0;
-    top: 0;
-    width: calc(
-      100dvw - 2 * var(--landing-padding) - var(--layout-scrollbar-width)
-    );
-    min-height: calc(
-      100dvh - var(--landing-padding) - var(--popcorn-safe-area)
-    );
-
+    min-height: 100dvh;
     overflow-x: hidden;
 
-    display: flex;
-    flex-direction: column;
-    gap: var(--landing-gap);
+    color: var(--shade-10);
+    background-color: var(--shade-940);
+  }
 
-    padding: var(--landing-padding);
-    padding-bottom: var(--popcorn-safe-area);
+  .landing-hero {
+    position: relative;
+    overflow: hidden;
 
     background-color: var(--shade-920);
     background-image:
       radial-gradient(
-        72% 78% at 50% 110%,
+        72% 55% at 50% 110%,
         color-mix(in srgb, var(--purple-500) 42%, transparent),
         transparent 70%
-      ),
-      radial-gradient(
-        110% 90% at 50% 42%,
-        color-mix(in srgb, var(--shade-920) 25%, transparent),
-        color-mix(in srgb, var(--shade-920) 80%, transparent)
       ),
       linear-gradient(
         180deg,
@@ -114,55 +80,139 @@
         var(--shade-800) 45%,
         var(--purple-900) 100%
       );
-
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: padding;
-
-    :global(.trakt-landing-content-left) {
-      :global(.trakt-landing-trending-items) {
-        justify-content: end;
-        justify-items: end;
-      }
-    }
-
-    @include for-tablet-lg-and-below {
-      --landing-padding: var(--ni-24);
-    }
-
-    @include for-tablet-sm-and-below {
-      :global(.trakt-explore-labels) {
-        display: none;
-      }
-    }
   }
 
-  .trakt-landing-login {
-    display: flex;
-    justify-content: flex-end;
-  }
+  .landing-nav {
+    position: relative;
 
-  .trakt-landing-logo {
     display: flex;
-    align-self: flex-start;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: var(--ni-28) var(--ni-40);
+    padding-top: calc(var(--ni-28) + env(safe-area-inset-top, 0px));
+
+    .landing-logo {
+      display: flex;
+    }
 
     :global(svg) {
-      flex-shrink: 0;
       height: var(--ni-32);
       width: auto;
     }
+
+    @include for-tablet-sm-and-below {
+      padding: var(--ni-20);
+      padding-top: calc(var(--ni-20) + env(safe-area-inset-top, 0px));
+
+      :global(svg) {
+        height: var(--ni-28);
+      }
+    }
   }
 
-  .trakt-popcorn {
-    position: absolute;
+  .hero-content {
+    position: relative;
 
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--gap-xxl);
 
-    object-fit: cover;
-    object-position: top;
+    max-width: var(--ni-1280);
+    margin-inline: auto;
+    padding: var(--ni-40) var(--ni-80) var(--ni-96);
 
-    width: var(--ni-640);
-    height: var(--popcorn-height);
+    @include for-tablet-lg-and-below {
+      padding: var(--ni-24) var(--ni-40) var(--ni-72);
+    }
+
+    @include for-tablet-sm-and-below {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--gap-l);
+
+      padding: 0 var(--ni-20) var(--ni-56);
+
+      :global(.trakt-landing-spotlight) {
+        order: -1;
+      }
+    }
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-l);
+
+    @include for-tablet-sm-and-below {
+      align-items: center;
+      gap: var(--gap-m);
+
+      text-align: center;
+    }
+  }
+
+  .hero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xs);
+
+    padding: var(--ni-6) var(--ni-14);
+    border: var(--ni-1) solid var(--landing-color-stroke);
+    border-radius: var(--landing-radius-pill);
+
+    background: color-mix(in srgb, var(--shade-940) 60%, transparent);
+    color: var(--landing-color-muted);
+
+    @include backdrop-filter-blur(var(--ni-10));
+
+    &::before {
+      content: "";
+
+      width: var(--ni-6);
+      height: var(--ni-6);
+      border-radius: 50%;
+
+      background: var(--purple-400);
+      box-shadow: 0 0 var(--ni-10) var(--purple-400);
+    }
+  }
+
+  .hero-title {
+    font-size: var(--ni-88);
+    font-weight: 900;
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+
+    @include for-tablet-lg-and-below {
+      font-size: var(--ni-64);
+    }
+
+    @include for-tablet-sm-and-below {
+      font-size: var(--ni-44);
+    }
+  }
+
+  .hero-subtitle {
+    max-width: var(--ni-480);
+
+    font-size: var(--ni-18);
+    color: var(--landing-color-muted);
+
+    @include for-tablet-sm-and-below {
+      font-size: var(--ni-16);
+    }
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--gap-s);
+
+    @include for-tablet-sm-and-below {
+      flex-direction: column;
+      align-self: stretch;
+    }
   }
 </style>
