@@ -69,10 +69,8 @@
 
           <div class="feature-flag-actions">
             <Switch
-              color="purple"
               label={title}
               checked={value}
-              innerText={value ? "On" : "Off"}
               onclick={() => setFlag(key, !value)}
             />
 

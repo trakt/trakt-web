@@ -1,9 +1,9 @@
 <script lang="ts">
+  import NoveltySwitch from "$lib/components/toggles/NoveltySwitch.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
 
-  type SwitchColor = "purple" | "red" | "blue" | "orange";
   type MediaType = "show" | "movie";
   type DiscoverMode = "media" | MediaType;
   type SearchMode = DiscoverMode | "people" | "lists";
@@ -18,12 +18,11 @@
     title: string;
     label: string;
     detail: string;
-    color: SwitchColor;
     checked?: boolean;
     disabled?: boolean;
     indeterminate?: boolean;
-    innerText?: string;
   };
+
 
   const option = <T,>(
     value: T,
@@ -37,50 +36,38 @@
 
   const switchExamples: SwitchExample[] = [
     {
-      title: "Default on",
-      detail: "Enabled state with inner text.",
+      title: "On",
+      detail: "Track takes the accent, thumb sits at the far end.",
       label: "Toggle web availability",
-      color: "purple",
       checked: true,
-      innerText: "Web",
     },
     {
-      title: "Default off",
-      detail: "Unchecked setting state.",
+      title: "Off",
+      detail: "A position, not a warning - neutral track, thumb at the start.",
       label: "Toggle notification sync",
-      color: "red",
-    },
-    {
-      title: "Active",
-      detail: "Checked state without inner text.",
-      label: "Toggle calendar sync",
-      color: "blue",
-      checked: true,
     },
     {
       title: "Mixed",
-      detail: "Indeterminate state for partial selection.",
+      detail: "Partial selection: thinned track, thumb centred.",
       label: "Toggle partial library selection",
-      color: "orange",
       indeterminate: true,
     },
     {
       title: "Disabled on",
-      detail: "Unavailable checked state.",
+      detail: "Colours drop, the position is kept.",
       label: "Disabled enabled switch",
-      color: "purple",
       checked: true,
       disabled: true,
     },
     {
       title: "Disabled off",
-      detail: "Unavailable unchecked state with text.",
+      detail: "Same pair, the other position.",
       label: "Disabled web switch",
-      color: "blue",
-      innerText: "Web",
       disabled: true,
     },
   ];
+
+
 
   const mediaTypeOptions: ToggleOption<MediaType>[] = [
     option("show", "Shows", "Toggle to shows"),
@@ -149,7 +136,7 @@
       <h2>Switches</h2>
 
       <div class="switch-grid">
-        {#each switchExamples as example}
+        {#each switchExamples as example (example.title)}
           <article class="toggle-row">
             <div>
               <h3>{example.title}</h3>
@@ -160,12 +147,34 @@
               checked={example.checked}
               disabled={example.disabled}
               indeterminate={example.indeterminate}
-              innerText={example.innerText}
               label={example.label}
-              color={example.color}
             />
           </article>
         {/each}
+      </div>
+    </section>
+
+
+    <section>
+      <h2>Novelty</h2>
+
+      <div class="switch-grid">
+        <article class="toggle-row">
+          <div>
+            <h3>Flair only</h3>
+            <p class="secondary">
+              Keeps an icon and a word. Seasonal filters and the theme toggle -
+              never a setting.
+            </p>
+          </div>
+
+          <NoveltySwitch
+            checked
+            color="orange"
+            innerText="boo"
+            label="Toggle halloween filters"
+          />
+        </article>
       </div>
     </section>
 

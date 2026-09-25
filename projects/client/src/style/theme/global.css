@@ -65,7 +65,22 @@
   --color-background-orange-hover: var(--orange-800);
 
   /**
-   * Toggle switches
+   * Toggle switch (Switch)
+   *
+   * Only the resting thumb lives here, because it is the one value no theme
+   * or tier argues with. The ON pair is declared per theme in modes.scss
+   * instead of once on :root - a tier preview stamps `data-tier` +
+   * `data-theme` on a wrapper, and a token declared only at the root would
+   * be INHERITED by that wrapper rather than re-resolved inside it, so all
+   * three tiers would wear whichever one the visitor happens to be.
+   */
+  --color-switch-thumb: var(--shade-10);
+
+  /**
+   * Toggle switches - novelty variant only
+   *
+   * The seasonal + labelled toggles that keep an icon in the thumb and text
+   * inside the track. Settings switches are flat and use the tokens above.
    */
   --color-tick-purple: var(--purple-500);
   --color-switch-foreground-purple: var(--purple-50);

@@ -4,7 +4,7 @@
   import LightMode from "$lib/features/theme/components/LightMode.svelte";
   import { ThemeEndpoint } from "$lib/features/theme/ThemeEndpoint";
   import { Theme } from "$lib/features/theme/models/Theme";
-  import Switch from "$lib/components/toggles/Switch.svelte";
+  import NoveltySwitch from "$lib/components/toggles/NoveltySwitch.svelte";
   import { onMount } from "svelte";
 
   let theme = $state<Theme>(Theme.Light);
@@ -50,7 +50,7 @@
 </script>
 
 <div class="design-system-theme-toggle">
-  <Switch
+  <NoveltySwitch
     checked={isDark}
     {innerText}
     {label}
@@ -64,7 +64,7 @@
         <LightMode />
       {/if}
     {/snippet}
-  </Switch>
+  </NoveltySwitch>
 </div>
 
 <style>
@@ -72,7 +72,7 @@
     display: flex;
     align-items: center;
 
-    :global(.trakt-switch) {
+    :global(.trakt-novelty-switch) {
       --custom-width: var(--ni-72);
     }
 

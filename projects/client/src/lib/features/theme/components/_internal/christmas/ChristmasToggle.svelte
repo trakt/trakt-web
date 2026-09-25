@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Switch from "$lib/components/toggles/Switch.svelte";
+  import NoveltySwitch from "$lib/components/toggles/NoveltySwitch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import ChristmasIcon from "../icons/ChristmasIcon.svelte";
 
@@ -8,7 +8,7 @@
 </script>
 
 <div class="trakt-christmas-toggle">
-  <Switch
+  <NoveltySwitch
     label={m.switch_label_toggle_christmas_filters()}
     innerText={isEnabled ? "santa" : "grinch"}
     checked={isEnabled}
@@ -18,7 +18,7 @@
     {#snippet icon()}
       <ChristmasIcon />
     {/snippet}
-  </Switch>
+  </NoveltySwitch>
 </div>
 
 <style lang="scss">

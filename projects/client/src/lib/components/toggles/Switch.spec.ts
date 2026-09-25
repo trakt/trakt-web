@@ -19,17 +19,6 @@ describe('Switch', () => {
     expect(switchToggle).toBeInTheDocument();
   });
 
-  it('should render inner text', () => {
-    render(Switch, {
-      ...defaultProps,
-      innerText: 'Web',
-    });
-
-    const subtitle = screen.getByText('Web');
-
-    expect(subtitle).toBeInTheDocument();
-  });
-
   it('should toggle', async () => {
     render(Switch, defaultProps);
 
@@ -40,14 +29,13 @@ describe('Switch', () => {
     expect(switchToggle).toBeChecked();
   });
 
-  it('should apply correct styles based on props', () => {
+  it('should report a mixed state', () => {
     render(Switch, {
       ...defaultProps,
-      color: 'red',
+      indeterminate: true,
     });
 
-    const switchToggle = screen.getByRole('switch');
-    expect(switchToggle).toHaveAttribute('data-color', 'red');
+    expect(screen.getByRole('switch')).toBePartiallyChecked();
   });
 
   it('should set switch as disabled', () => {
@@ -58,5 +46,15 @@ describe('Switch', () => {
 
     const switchToggle = screen.getByRole('switch');
     expect(switchToggle).toBeDisabled();
+  });
+
+  it('should not render any text inside the control', () => {
+    render(Switch, {
+      ...defaultProps,
+      checked: true,
+    });
+
+    expect(screen.getByRole('switch').closest('label')?.textContent?.trim())
+      .toBe('');
   });
 });

@@ -186,7 +186,42 @@
   --color-step-shadow-text: var(--shade-50);
 
   /*
-   * Toggle
+   * Toggle switch (Switch)
+   *
+   * OFF is a position, not a warning, so the track is a neutral wash of the
+   * page's own ink - never a second hue. Light needs a heavier alpha than
+   * dark does: the white thumb has to read as a hole punched in the track,
+   * and it only does that once the track is well clear of the card beneath.
+   *
+   * Disabled drops the track almost away and inks the thumb instead, so the
+   * pair inverts but the thumb's POSITION still answers on-or-off.
+   */
+  /*
+    ON rides the purple ramp rather than naming a tier, so the tier themes
+    carry it without this file knowing they exist: director.scss re-hues the
+    ramp to gold, free.scss re-points the pair at its white/ink selection.
+  */
+  --color-switch-track-on: var(--purple-500);
+  --color-switch-thumb-on: var(--color-switch-thumb);
+
+  --color-switch-track-off: color-mix(
+    in srgb,
+    var(--shade-900) 20%,
+    transparent
+  );
+  --color-switch-track-disabled: color-mix(
+    in srgb,
+    var(--shade-900) 8%,
+    transparent
+  );
+  --color-switch-thumb-disabled: color-mix(
+    in srgb,
+    var(--shade-900) 30%,
+    transparent
+  );
+
+  /*
+   * Segmented control (SegmentedSelect + Toggler)
    */
   --color-segmented-track-background: color-mix(
     in srgb,
@@ -700,7 +735,29 @@
   --color-step-shadow-text: var(--shade-920);
 
   /*
-   * Toggle
+   * Toggle switch (Switch) - see light-theme for the rationale
+   */
+  --color-switch-track-on: var(--purple-500);
+  --color-switch-thumb-on: var(--color-switch-thumb);
+
+  --color-switch-track-off: color-mix(
+    in srgb,
+    var(--shade-10) 14%,
+    transparent
+  );
+  --color-switch-track-disabled: color-mix(
+    in srgb,
+    var(--shade-10) 8%,
+    transparent
+  );
+  --color-switch-thumb-disabled: color-mix(
+    in srgb,
+    var(--shade-10) 35%,
+    transparent
+  );
+
+  /*
+   * Segmented control (SegmentedSelect + Toggler)
    */
   --color-segmented-track-background: color-mix(
     in srgb,
