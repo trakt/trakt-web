@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Switch from "$lib/components/toggles/Switch.svelte";
+  import NoveltySwitch from "$lib/components/toggles/NoveltySwitch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import HalloweenIcon from "../icons/HalloweenIcon.svelte";
 
@@ -7,7 +7,7 @@
     $props();
 </script>
 
-<Switch
+<NoveltySwitch
   label={m.switch_label_toggle_halloween_filters()}
   innerText={isEnabled ? "boo" : "eek"}
   checked={isEnabled}
@@ -17,4 +17,4 @@
   {#snippet icon()}
     <HalloweenIcon />
   {/snippet}
-</Switch>
+</NoveltySwitch>

@@ -65,7 +65,12 @@
   --color-background-orange-hover: var(--orange-800);
 
   /**
-   * Toggle switches
+   * Toggle switch (Switch)
+   */
+  --color-switch-thumb: var(--shade-10);
+
+  /**
+   * Toggle switches (NoveltySwitch)
    */
   --color-tick-purple: var(--purple-500);
   --color-switch-foreground-purple: var(--purple-50);

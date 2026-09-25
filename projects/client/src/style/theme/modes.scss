@@ -186,7 +186,34 @@
   --color-step-shadow-text: var(--shade-50);
 
   /*
-   * Toggle
+   * Toggle switch (Switch)
+   */
+  --color-switch-track-on: var(--purple-500);
+  --color-switch-thumb-on: var(--color-switch-thumb);
+
+  --color-switch-track-off: color-mix(
+    in srgb,
+    var(--shade-900) 20%,
+    transparent
+  );
+  --color-switch-track-disabled: color-mix(
+    in srgb,
+    var(--shade-900) 8%,
+    transparent
+  );
+  --color-switch-thumb-disabled: color-mix(
+    in srgb,
+    var(--shade-900) 30%,
+    transparent
+  );
+  --color-switch-track-shadow: color-mix(
+    in srgb,
+    var(--shade-1000) 12%,
+    transparent
+  );
+
+  /*
+   * Segmented control (SegmentedSelect + Toggler)
    */
   --color-segmented-track-background: color-mix(
     in srgb,
@@ -700,7 +727,34 @@
   --color-step-shadow-text: var(--shade-920);
 
   /*
-   * Toggle
+   * Toggle switch (Switch)
+   */
+  --color-switch-track-on: var(--purple-500);
+  --color-switch-thumb-on: var(--color-switch-thumb);
+
+  --color-switch-track-off: color-mix(
+    in srgb,
+    var(--shade-10) 14%,
+    transparent
+  );
+  --color-switch-track-disabled: color-mix(
+    in srgb,
+    var(--shade-10) 8%,
+    transparent
+  );
+  --color-switch-thumb-disabled: color-mix(
+    in srgb,
+    var(--shade-10) 35%,
+    transparent
+  );
+  --color-switch-track-shadow: color-mix(
+    in srgb,
+    var(--shade-1000) 40%,
+    transparent
+  );
+
+  /*
+   * Segmented control (SegmentedSelect + Toggler)
    */
   --color-segmented-track-background: color-mix(
     in srgb,

@@ -188,13 +188,6 @@
     display: flex;
     align-items: center;
     inline-size: var(--ni-44);
-
-    :global(.trakt-switch) {
-      --button-width: var(--ni-44);
-      --button-height: var(--ni-20);
-      --tick-size: var(--ni-14);
-      --tick-offset: var(--ni-3);
-    }
   }
 
   .import-summary-match {
