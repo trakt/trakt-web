@@ -300,18 +300,11 @@
 
   .upload-spinner {
     display: flex;
-    animation: upload-spin 1.2s linear infinite;
 
     :global(svg) {
       width: var(--ni-28);
       height: var(--ni-28);
       color: white;
-    }
-  }
-
-  @keyframes upload-spin {
-    to {
-      transform: rotate(1turn);
     }
   }
 </style>
