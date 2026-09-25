@@ -11,9 +11,13 @@
   import { useSpotlightTick } from "./useSpotlightTick.ts";
 
   const { items } = useSpotlightItems();
-  const tick = useSpotlightTick();
+  const { tick, step } = useSpotlightTick();
 
-  const active = $derived($items.length > 0 ? $tick % $items.length : 0);
+  const active = $derived(
+    $items.length > 0
+      ? (($tick % $items.length) + $items.length) % $items.length
+      : 0,
+  );
 </script>
 
 <div class="trakt-landing">
@@ -37,7 +41,7 @@
         </div>
       </div>
 
-      <SpotlightStack items={$items} {active} />
+      <SpotlightStack items={$items} {active} onStep={step} />
     </div>
   </section>
 
