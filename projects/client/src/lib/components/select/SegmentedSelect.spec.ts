@@ -136,27 +136,52 @@ describe('component: SegmentedSelect', () => {
       ).toHaveAttribute('data-expandable', 'true');
     });
 
-    it('should only render the extension row while expanded', () => {
+    it('should render a passed extension without unfolding the collapsed options', () => {
       const extension = createRawSnippet(() => ({
         render: () => '<span>Embedded search</span>',
       }));
 
-      const collapsed = render(SegmentedSelect, {
+      render(SegmentedSelect, {
         ...expandableProps,
         value: 'media',
         expanded: false,
         extension,
       });
-      expect(collapsed.queryByText('Embedded search')).toBeNull();
-      collapsed.unmount();
 
-      const expanded = render(SegmentedSelect, {
+      expect(screen.getByText('Embedded search')).toBeInTheDocument();
+      expect(screen.getAllByRole('radio')).toHaveLength(3);
+      expect(screen.queryByRole('radio', { name: 'People' })).toBeNull();
+    });
+
+    it('should render the extension alongside the unfolded options when expanded', () => {
+      const extension = createRawSnippet(() => ({
+        render: () => '<span>Embedded search</span>',
+      }));
+
+      render(SegmentedSelect, {
         ...expandableProps,
         value: 'media',
         expanded: true,
         extension,
       });
-      expect(expanded.getByText('Embedded search')).toBeInTheDocument();
+
+      expect(screen.getByText('Embedded search')).toBeInTheDocument();
+      expect(screen.getAllByRole('radio')).toHaveLength(5);
+    });
+
+    it('should not render an extension on a select that is not expandable', () => {
+      const extension = createRawSnippet(() => ({
+        render: () => '<span>Embedded search</span>',
+      }));
+
+      render(SegmentedSelect, {
+        ...expandableProps,
+        expandable: false,
+        value: 'media',
+        extension,
+      });
+
+      expect(screen.queryByText('Embedded search')).toBeNull();
     });
   });
 

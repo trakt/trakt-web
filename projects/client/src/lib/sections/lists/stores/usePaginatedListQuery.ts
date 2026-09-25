@@ -4,19 +4,24 @@ import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import type { CreateInfiniteQueryOptions } from '$lib/features/query/types.ts';
 import type { InfiniteData, QueryKey } from '@tanstack/query-core';
-import { firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, map, type Observable } from 'rxjs';
 
-export function usePaginatedListQuery<
-  TOutput extends { key: string },
-  TError extends Error,
->(
-  props: CreateInfiniteQueryOptions<
+type PaginatedListQueryOptions<TOutput, TError extends Error> =
+  CreateInfiniteQueryOptions<
     Paginatable<TOutput>,
     TError,
     InfiniteData<Paginatable<TOutput>>,
     QueryKey,
     number
-  >,
+  >;
+
+export function usePaginatedListQuery<
+  TOutput extends { key: string },
+  TError extends Error,
+>(
+  props:
+    | PaginatedListQueryOptions<TOutput, TError>
+    | Observable<PaginatedListQueryOptions<TOutput, TError>>,
 ) {
   const query = useInfiniteQuery(props);
 
@@ -45,6 +50,9 @@ export function usePaginatedListQuery<
 
   const hasNextPage = query.pipe(map(($query) => $query.hasNextPage));
 
+  // A failed request leaves `list` empty; this tells it apart from no results.
+  const isError = query.pipe(map(($query) => $query.isError));
+
   const fetchNextPage = async () => {
     const { fetchNextPage } = await firstValueFrom(query);
     await fetchNextPage().catch(rethrowUnlessCancelled);
@@ -53,6 +61,7 @@ export function usePaginatedListQuery<
   return {
     list,
     isLoading,
+    isError,
     hasNextPage,
     fetchNextPage,
   };

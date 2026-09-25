@@ -1,10 +1,13 @@
-import type { CreateQueryOptions } from '$lib/features/query/types.ts';
+import type {
+  CreateInfiniteQueryOptions,
+  CreateQueryOptions,
+} from '$lib/features/query/types.ts';
 import { createStateWriter } from '$test/beds/svelte/createStateWriter.svelte.ts';
 import { runInDerived } from '$test/beds/svelte/runInDerived.svelte.ts';
 import { QueryClient } from '@tanstack/query-core';
-import { config, type Subscription } from 'rxjs';
+import { BehaviorSubject, config, type Subscription } from 'rxjs';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { queryBridge } from './queryBridge.ts';
+import { queryBridge, reactiveInfiniteQueryBridge } from './queryBridge.ts';
 
 function buildOptions(): CreateQueryOptions<string, Error> {
   return {
@@ -79,5 +82,49 @@ describe('queryBridge', () => {
 
     expect(captured.errors).to.deep.equal([]);
     expect(writer.writes).toBeGreaterThan(writesBefore);
+  });
+});
+
+function buildInfiniteOptions(
+  terms: string,
+  fetched: string[],
+): CreateInfiniteQueryOptions<string[], Error> {
+  return {
+    queryKey: ['reactiveInfiniteQueryBridge', terms],
+    queryFn: () => {
+      fetched.push(terms);
+      return Promise.resolve([terms]);
+    },
+    initialPageParam: 1,
+    getNextPageParam: () => undefined,
+    staleTime: 0,
+  };
+}
+
+describe('reactiveInfiniteQueryBridge', () => {
+  it('should keep one observer and move it to the new options', async () => {
+    const client = new QueryClient();
+    const fetched: string[] = [];
+    const options$ = new BehaviorSubject(buildInfiniteOptions('a', fetched));
+
+    const subscription = reactiveInfiniteQueryBridge(options$, client, {})
+      .subscribe();
+
+    await vi.waitFor(() => expect(fetched).toEqual(['a']));
+
+    options$.next(buildInfiniteOptions('b', fetched));
+
+    await vi.waitFor(() => expect(fetched).toEqual(['a', 'b']));
+
+    const observerCount = (terms: string) =>
+      client.getQueryCache()
+        .find({ queryKey: ['reactiveInfiniteQueryBridge', terms] })
+        ?.getObserversCount();
+
+    expect(observerCount('a')).toBe(0);
+    expect(observerCount('b')).toBe(1);
+
+    subscription.unsubscribe();
+    expect(observerCount('b')).toBe(0);
   });
 });

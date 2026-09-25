@@ -34,7 +34,9 @@
     ),
   );
 
-  const hasExtension = $derived(expandable && Boolean(extension) && expanded);
+  // The extension shows whenever one is handed in; `expanded` only decides
+  // whether the collapsed options unfold alongside it.
+  const hasExtension = $derived(expandable && Boolean(extension));
 
   const collapseFrom = $derived(
     expandable ? options.length - collapsedCount : options.length,

@@ -26,8 +26,10 @@ import { findQueryId } from './_internal/findQueryId.ts';
 import { invalidationPredicate } from './_internal/invalidationPredicate.ts';
 import {
   infiniteQueryBridge,
+  type InfiniteQueryOptionsRef,
   queryBridge,
   type QueryOptionsRef,
+  reactiveInfiniteQueryBridge,
   reactiveQueryBridge,
 } from './_internal/queryBridge.ts';
 import { rethrowUnlessCancelled } from './rethrowUnlessCancelled.ts';
@@ -150,15 +152,35 @@ export function useInfiniteQuery<
   TQueryKey extends QueryKey = QueryKey,
   TPageParam = number,
 >(
-  props: CreateInfiniteQueryOptions<
-    Paginatable<TOutput>,
-    TError,
-    TData,
-    TQueryKey,
-    TPageParam
-  >,
+  props:
+    | CreateInfiniteQueryOptions<
+      Paginatable<TOutput>,
+      TError,
+      TData,
+      TQueryKey,
+      TPageParam
+    >
+    | Observable<
+      CreateInfiniteQueryOptions<
+        Paginatable<TOutput>,
+        TError,
+        TData,
+        TQueryKey,
+        TPageParam
+      >
+    >,
 ): Observable<InfiniteQueryObserverResult<TData, TError>> {
   const client = useQueryClient();
+
+  // Reactive options keep one observer and swap its options, instead of the
+  // caller rebuilding the whole query whenever an input changes.
+  if (isObservable(props)) {
+    const ref: InfiniteQueryOptionsRef = {};
+    return reactiveInfiniteQueryBridge(props, client, ref).pipe(
+      invalidationHook(() => ref.current?.queryKey),
+      multicast(),
+    );
+  }
 
   return infiniteQueryBridge<
     Paginatable<TOutput>,

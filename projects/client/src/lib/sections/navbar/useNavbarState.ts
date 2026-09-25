@@ -17,6 +17,8 @@ type NavbarState = {
   actions: Snippet | undefined;
   contextualActions: Snippet | undefined;
   contentToggle: ContentToggleSurface | Nil;
+  /** Page-supplied content rendered under the expanded content toggle. */
+  contentToggleExtension: Snippet | Nil;
   hasFilters: boolean;
   showFilters: boolean;
   headerActions?: Snippet;
@@ -40,6 +42,7 @@ const initialNavbarState: NavbarState = {
   actions: undefined,
   contextualActions: undefined,
   contentToggle: undefined,
+  contentToggleExtension: null,
   hasFilters: false,
   showFilters: true,
   headerActions: undefined,

@@ -58,11 +58,12 @@ export function useUserListsSorting(
       }),
     ),
     urlBuilder: (
-      { sortBy, sortHow }: ListUrlBuilderParams<UserListsSortBy>,
+      { sortBy, sortHow, terms }: ListUrlBuilderParams<UserListsSortBy>,
     ) =>
       UrlBuilder.lists.all(props.slug, 'personal', {
         ...(sortBy ? { sort_by: sortBy } : {}),
         ...(sortHow ? { sort_how: sortHow } : {}),
+        ...(terms ? { terms } : {}),
       }),
   };
 }

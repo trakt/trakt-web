@@ -3,7 +3,7 @@ import type { UserListsSortBy } from '$lib/requests/models/UserListsSortBy.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import { personalListsQuery } from '$lib/requests/queries/users/personalListsQuery.ts';
 import { dedupe } from '$lib/utils/array/dedupe.ts';
-import { map } from 'rxjs';
+import { distinctUntilChanged, map, type Observable } from 'rxjs';
 import type { PaginationParams } from '../../../requests/models/PaginationParams.ts';
 import { likedListsQuery } from '../../../requests/queries/users/likedListsQuery.ts';
 import { DEFAULT_LISTS_PAGE_SIZE } from '../../../utils/constants.ts';
@@ -16,6 +16,7 @@ type PersonalListsParams = {
   slug: string;
   sortBy?: UserListsSortBy | Nil;
   sortHow?: SortDirection | Nil;
+  terms?: string | Nil;
 } & Partial<PaginationParams>;
 
 function sortByUpdatedAt(
@@ -29,7 +30,7 @@ function sortByUpdatedAt(
 }
 
 function typeToQuery(
-  { type, slug, limit, sortBy, sortHow }: PersonalListsParams,
+  { type, slug, limit, sortBy, sortHow, terms }: PersonalListsParams,
 ) {
   const paginationProps = {
     limit: limit ?? DEFAULT_LISTS_PAGE_SIZE,
@@ -43,12 +44,21 @@ function typeToQuery(
         slug,
         sortBy,
         sortHow,
+        terms,
         ...paginationProps,
       });
     case 'collaboration':
       return collaborationListsQuery({ slug });
   }
 }
+
+type UsePersonalListsSummaryParams = Omit<PersonalListsParams, 'terms'> & {
+  /**
+   * Search term as a stream, so a new term updates the one query observer's
+   * options instead of rebuilding the query.
+   */
+  terms$?: Observable<string | Nil>;
+};
 
 export function usePersonalListsSummary(
   {
@@ -57,18 +67,25 @@ export function usePersonalListsSummary(
     limit,
     sortBy,
     sortHow,
-  }: PersonalListsParams,
+    terms$,
+  }: UsePersonalListsSummaryParams,
 ) {
   const resolvedSortBy = sortBy ?? 'updated_at';
   const resolvedSortHow = sortHow ?? 'desc';
-  const { list, ...rest } = usePaginatedListQuery(
+  const toQuery = (terms?: string | Nil) =>
     typeToQuery({
       type,
       slug,
       limit,
       sortBy: resolvedSortBy,
       sortHow: resolvedSortHow,
-    }),
+      terms,
+    });
+
+  const { list, ...rest } = usePaginatedListQuery(
+    terms$
+      ? terms$.pipe(distinctUntilChanged(), map((terms) => toQuery(terms)))
+      : toQuery(),
   );
 
   return {

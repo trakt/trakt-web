@@ -2,6 +2,7 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useLazyLoader } from "$lib/sections/lists/drilldown/_internal/useLazyLoader";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants";
+  import { of } from "rxjs";
   import type { PaginatedListProps } from "./models/PaginatedListProps";
 
   const {
@@ -12,7 +13,15 @@
     target = "default",
   }: PaginatedListProps<T, M> = $props();
 
-  const { list, hasNextPage, isLoading, fetchNextPage } = $derived(
+  const noError = of(false);
+
+  const {
+    list,
+    hasNextPage,
+    isLoading,
+    isError = noError,
+    fetchNextPage,
+  } = $derived(
     useList({
       type,
       filter,
@@ -37,7 +46,7 @@
 </script>
 
 <div bind:this={listElement} use:observeDimension class="trakt-paginated-list">
-  {@render items($list, $isLoading)}
+  {@render items($list, $isLoading, $isError)}
 </div>
 
 {#if $isLoading}

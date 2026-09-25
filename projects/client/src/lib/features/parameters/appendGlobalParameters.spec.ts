@@ -219,6 +219,22 @@ describe('appendGlobalParameters', () => {
     expect(params.get('mode')).toBe('movie');
   });
 
+  it('keeps the list search term on a same-path mode toggle', () => {
+    mockSvelteContextStore.set(
+      PARAMETER_SETTER_CONTEXT_KEY,
+      new BehaviorSubject('mode'),
+    );
+
+    const anchor = makeAnchor('?mode=movie');
+    appendGlobalParameters(anchor, '?mode=movie');
+
+    navigate('/users/me/lists/view/personal?terms=marvel');
+
+    const params = new URL(anchor.href).searchParams;
+    expect(params.get('terms')).toBe('marvel');
+    expect(params.get('mode')).toBe('movie');
+  });
+
   it('unsubscribes from the RxJS stream on destroy', () => {
     const anchor = makeAnchor('/profile/userA');
     const action = appendGlobalParameters(anchor, '/profile/userA');

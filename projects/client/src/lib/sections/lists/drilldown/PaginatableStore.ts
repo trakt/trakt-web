@@ -9,4 +9,6 @@ export type PaginatableStore<T, M = MediaType> = (
   isLoading: Observable<boolean>;
   fetchNextPage: () => Promise<void>;
   hasNextPage: Observable<boolean>;
+  /** Stores backed by a query report failures, so callers can skip empty states. */
+  isError?: Observable<boolean>;
 };

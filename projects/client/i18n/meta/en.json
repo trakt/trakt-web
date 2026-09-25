@@ -799,6 +799,18 @@
       "default": "Search streaming services",
       "description": "Aria-label for the where-to-watch drawer search input."
     },
+    "input_label_search_lists": {
+      "default": "Search lists",
+      "description": "Aria-label for the search input on the personal lists page, which filters the user's lists by name."
+    },
+    "button_label_search_lists": {
+      "default": "Search lists",
+      "description": "Aria-label for the button on the personal lists page that shows or hides the search input."
+    },
+    "list_placeholder_no_matching_lists": {
+      "default": "No lists match your search.",
+      "description": "Placeholder text shown on the personal lists page when no lists match the search term."
+    },
     "button_label_toggle_streaming_countries": {
       "default": "Toggle countries for {service}",
       "description": "Aria-label for the button that expands or collapses the list of countries a streaming service is available in."

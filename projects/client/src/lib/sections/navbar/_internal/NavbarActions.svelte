@@ -34,7 +34,10 @@
       <EditModeBar />
     {:else}
       {#if $state.contentToggle}
-        <NavbarContentToggle surface={$state.contentToggle} />
+        <NavbarContentToggle
+          surface={$state.contentToggle}
+          extension={$state.contentToggleExtension}
+        />
       {/if}
       {@render $state.actions?.()}
     {/if}

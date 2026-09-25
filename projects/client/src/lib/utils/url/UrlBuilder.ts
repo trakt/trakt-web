@@ -23,6 +23,7 @@ type WellKnownQueryParams = {
   sort_how?: string;
   mode?: DiscoverMode;
   section?: string;
+  terms?: string;
 };
 
 type DiscoverUrlParams = SearchParams & {
@@ -67,6 +68,7 @@ function sanitizeParams(
     sort_how: params.sort_how,
     mode: params.mode,
     section: params.section,
+    terms: params.terms,
   };
 }
 
@@ -272,7 +274,7 @@ export const UrlBuilder = {
     all: (
       user: string,
       type: PersonalListType,
-      params: Pick<WellKnownQueryParams, 'sort_by' | 'sort_how'> = {},
+      params: Pick<WellKnownQueryParams, 'sort_by' | 'sort_how' | 'terms'> = {},
     ) =>
       `${listsDrilldownFactory(user)(type)}${
         buildParamString(sanitizeParams(params))

@@ -47,4 +47,29 @@ describe('personalListsQuery', () => {
     expect(requestedUrl?.searchParams.get('sort_by')).to.equal('updated_at');
     expect(requestedUrl?.searchParams.get('sort_how')).to.equal('desc');
   });
+
+  it('should query user lists filtered by terms', async () => {
+    let requestedUrl: URL | undefined;
+
+    server.use(
+      http.get('http://localhost/users/me/lists*', ({ request }) => {
+        requestedUrl = new URL(request.url);
+        return HttpResponse.json(PersonalListsResponseMock);
+      }),
+    );
+
+    await runQuery({
+      factory: () =>
+        createTestBedInfiniteQuery(
+          personalListsQuery({
+            slug: 'me',
+            limit: 10,
+            terms: 'marvel',
+          }),
+        ),
+      mapper: mapToEntries,
+    });
+
+    expect(requestedUrl?.searchParams.get('terms')).to.equal('marvel');
+  });
 });
