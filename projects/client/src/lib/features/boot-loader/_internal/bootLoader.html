@@ -54,12 +54,12 @@ html[data-theme="dark"] .boot-loader {
   justify-content: center;
 
   background: var(--boot-background);
-  animation: boot-loader-appear 300ms ease 250ms backwards;
   transition: background-color 500ms ease 100ms;
 }
 
 .boot-loader-emblem {
   position: relative;
+  animation: boot-loader-appear 300ms ease 400ms backwards;
 }
 
 .boot-loader-logo {
@@ -218,7 +218,10 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
   const LEVEL_EMPTY = 50;
   const LEVEL_FULL = -4;
   const STYLES_TIMEOUT_MS = 20000;
-  const SPLASH_DELAY_MS = 250;
+  const SPLASH_DELAY_MS = 400;
+  const SPLASH_FADE_MS = 300;
+  const SPLASH_MIN_VISIBLE_MS = 500;
+  const FILL_SETTLE_MS = 300;
   const HANDOFF_MS = 800;
   const BAR_START_SIZE = 6;
   const FLIGHT_MS = 700;
@@ -236,6 +239,7 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
   const scriptsTotal = Number(loader.dataset.js) || 1;
   const scripts = new Set();
   const startedAt = performance.now();
+  let stylesReadyAt = null;
 
   const observer = typeof PerformanceObserver === 'function'
     ? new PerformanceObserver((list) => {
@@ -317,16 +321,33 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
     requestAnimationFrame(step);
   };
 
+  const splashVisibleLongEnoughAt = startedAt + SPLASH_DELAY_MS +
+    SPLASH_FADE_MS + SPLASH_MIN_VISIBLE_MS;
+
+  const skipLoader = () => {
+    html.dataset.boot = 'styled';
+    loader.remove();
+  };
+
   const reveal = () => {
     html.dataset.boot = 'styled';
+    requestAnimationFrame(flyLogoHome);
+    setTimeout(() => splash.remove(), HANDOFF_MS);
+  };
 
-    if (performance.now() - startedAt < SPLASH_DELAY_MS) {
-      loader.remove();
+  const handOff = (now) => {
+    if (stylesReadyAt === null) stylesReadyAt = now;
+
+    if (stylesReadyAt - startedAt < SPLASH_DELAY_MS) {
+      skipLoader();
       return;
     }
 
-    requestAnimationFrame(flyLogoHome);
-    setTimeout(() => splash.remove(), HANDOFF_MS);
+    const handoffAt = Math.max(
+      stylesReadyAt + FILL_SETTLE_MS,
+      splashVisibleLongEnoughAt,
+    );
+    if (now >= handoffAt) reveal();
   };
 
   const complete = () => {
@@ -357,13 +378,13 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
     loader.setAttribute('aria-valuenow', String(value));
     loader.style.setProperty('--boot-progress', `${value}%`);
 
-    const stylesTimedOut = performance.now() - startedAt >
-      STYLES_TIMEOUT_MS;
+    const now = performance.now();
+    const stylesTimedOut = now - startedAt > STYLES_TIMEOUT_MS;
     if (
       html.dataset.boot === 'loading' &&
       (stylesProgress === 1 || stylesTimedOut)
     ) {
-      reveal();
+      handOff(now);
     }
 
     if (!loader.isConnected) {
