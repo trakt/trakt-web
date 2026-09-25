@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import LoadingIndicator from "../icons/LoadingIndicator.svelte";
+  import Skeleton from "../skeleton/Skeleton.svelte";
 
   const {
     children,
@@ -17,16 +17,16 @@
 </script>
 
 <div class="trakt-stat" data-variant={variant}>
-  {#if isLoading}
-    <LoadingIndicator />
-  {:else}
-    {@render icon()}
-  {/if}
+  {@render icon()}
 
   <div class="stat-value">
-    <p class="ellipsis bold">
-      {@render children()}
-    </p>
+    {#if isLoading}
+      <Skeleton width="var(--ni-40)" height="1lh" />
+    {:else}
+      <p class="ellipsis bold">
+        {@render children()}
+      </p>
+    {/if}
 
     {@render tag?.()}
   </div>
