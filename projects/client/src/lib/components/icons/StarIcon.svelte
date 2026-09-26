@@ -52,7 +52,8 @@
 
 <style>
   .trakt-star-fill {
-    transition: width var(--transition-increment) ease-in-out;
+    transition: width var(--star-fill-duration, var(--transition-increment))
+      ease-in-out;
   }
 
   /**
