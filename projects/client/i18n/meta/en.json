@@ -823,10 +823,6 @@
       "default": "Hand crafted around the world.",
       "description": "Additional detail for the copyright notice indicating that the project is developed by a global team."
     },
-    "button_text_join_trakt_for_free": {
-      "default": "Join Trakt for Free",
-      "description": "Text for the button that takes users to the Trakt login page, keep the text as short as possible (always as short or shorter than the english version)."
-    },
     "header_landing_discover": {
       "default": "Discover",
       "description": "Header for the discover step."
@@ -858,6 +854,14 @@
     "text_landing_hero": {
       "default": "Track what you've seen, find what to watch next, and see where it's streaming tonight.",
       "description": "Supporting text under the main headline on the landing page."
+    },
+    "button_text_get_started": {
+      "default": "Get started",
+      "description": "Primary call-to-action on the landing page that takes new users to sign up, keep the text as short as possible (always as short or shorter than the english version)."
+    },
+    "button_label_get_started": {
+      "default": "Get started with Trakt",
+      "description": "Aria-label for the landing page's primary call-to-action. Must begin with the same words as button_text_get_started."
     },
     "text_landing_platforms": {
       "default": "Free on web, iOS and Android",
