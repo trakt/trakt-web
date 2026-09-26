@@ -44,16 +44,13 @@ describe('util: starsFromRects', () => {
     });
 
     describe('first star', () => {
-      it('should clear (0) over its leading third', () => {
-        expect(measure(2)).toBe(0);
+      it('should return a half over its leading half, never a clear', () => {
+        expect(measure(1)).toBe(0.5);
+        expect(measure(8)).toBe(0.5);
       });
 
-      it('should return a half over its middle third', () => {
-        expect(measure(10)).toBe(0.5);
-      });
-
-      it('should return a whole over its trailing third', () => {
-        expect(measure(18)).toBe(1);
+      it('should return a whole over its trailing half', () => {
+        expect(measure(12)).toBe(1);
       });
     });
   });
@@ -68,8 +65,8 @@ describe('util: starsFromRects', () => {
       expect(measure(-5, { allowHalf: false })).toBe(0);
     });
 
-    it('should clear (0) over the first star leading half', () => {
-      expect(measure(5, { allowHalf: false })).toBe(0);
+    it('should return a whole over the first star leading half', () => {
+      expect(measure(5, { allowHalf: false })).toBe(1);
     });
   });
 
@@ -123,10 +120,8 @@ describe('util: starsFromRects', () => {
       expect(measure(25, { isRtl: true })).toBe(2);
     });
 
-    it('should clear (0) over the first star leading side in RTL', () => {
-      // In RTL the first star's leading side is its right; clientX 18 sits
-      // there, in the leading third.
-      expect(measure(18, { isRtl: true })).toBe(0);
+    it('should return a half over the first star leading side in RTL', () => {
+      expect(measure(18, { isRtl: true })).toBe(0.5);
     });
   });
 });

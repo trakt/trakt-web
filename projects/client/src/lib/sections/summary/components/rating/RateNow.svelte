@@ -5,9 +5,12 @@
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { slideFade } from "$lib/utils/transitions/slideFade";
   import { fade, slide } from "svelte/transition";
+  import PopcornBurst from "./_internal/PopcornBurst.svelte";
+  import { ratingDelight } from "./_internal/ratingDelight.ts";
   import RatingStars from "./_internal/RatingStars.svelte";
-  import StarsConfetti from "./_internal/StarsConfetti.svelte";
+  import RottenTomato from "./_internal/RottenTomato.svelte";
   import { useIsRateable } from "./_internal/useIsRateable";
+  import type { RatingDelight } from "./models/RatingDelight.ts";
   import type { RateNowProps } from "./models/RateNowProps";
   import { useRatings } from "./useRatings";
 
@@ -36,22 +39,29 @@
     }),
   );
 
-  const confettiPosition = writable<{ x: number; y: number } | null>(null);
-  const setConfettiPosition = (rating: number, ev?: MouseEvent) => {
-    const isMaxRating = rating === 10;
-    const target = ev?.currentTarget;
-    const hasValidTarget = target instanceof HTMLElement;
+  const delight = writable<RatingDelight | null>(null);
 
-    if (!isMaxRating || !rootElement || !hasValidTarget) {
-      confettiPosition.set(null);
+  const setDelight = (rating: number, star?: HTMLElement) => {
+    const kind = ratingDelight(rating);
+
+    if (!kind || !star || !rootElement) {
+      delight.set(null);
       return;
     }
 
-    const targetRect = target.getBoundingClientRect();
+    const offsetParent = star.offsetParent ?? rootElement;
+    const offsetRect = offsetParent.getBoundingClientRect();
     const parentRect = rootElement.getBoundingClientRect();
 
-    const x = targetRect.left + targetRect.width / 2 - parentRect.left;
-    confettiPosition.set({ x, y: 0 });
+    delight.set({
+      kind,
+      origin: {
+        x: offsetRect.left + star.offsetLeft + star.offsetWidth / 2 -
+          parentRect.left,
+        y: offsetRect.top + star.offsetTop + star.offsetHeight / 2 -
+          parentRect.top,
+      },
+    });
   };
 
   let rootElement: HTMLElement | null = $state(null);
@@ -75,9 +85,9 @@
           onclick?.();
           removeRating();
         }}
-        onAddRating={(rating: number, ev?: MouseEvent) => {
+        onAddRating={(rating: number, star?: HTMLElement) => {
           onclick?.();
-          setConfettiPosition(rating, ev);
+          setDelight(rating, star);
           addRating(rating);
         }}
       />
@@ -101,8 +111,14 @@
       {/if}
     </div>
 
-    {#if $confettiPosition}
-      <StarsConfetti position={$confettiPosition} />
+    {#if $delight}
+      {#key $delight}
+        {#if $delight.kind === "popcorn"}
+          <PopcornBurst origin={$delight.origin} />
+        {:else}
+          <RottenTomato origin={$delight.origin} />
+        {/if}
+      {/key}
     {/if}
   </div>
 {/if}

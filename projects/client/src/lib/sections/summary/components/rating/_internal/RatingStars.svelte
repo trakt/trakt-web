@@ -17,7 +17,7 @@
   }: {
     rating?: number;
     isRating: boolean;
-    onAddRating: (rating: number, ev?: MouseEvent) => void;
+    onAddRating: (rating: number, star?: HTMLElement) => void;
     onRemoveRating: () => void;
     // FIXME: remove when allowing half star filtering (https://github.com/trakt/trakt-web/issues/1466)
     variant?: "full" | "half";
@@ -45,10 +45,6 @@
   // null === pointer isn't over the stars.
   let previewStars: number | null = $state(null);
 
-  // Inline offset of the active star's center, so the preview bubble snaps to
-  // it. Retains its last value when the gesture ends so the bubble recedes in
-  // place under the current star instead of gliding back to center. null only
-  // before the first interaction (bubble falls back to center).
   let previewX: number | null = $state(null);
 
   // Pointer gestures commit on pointerup (a scrub-drag releases on a different
@@ -73,7 +69,7 @@
   // Cleared when the gesture ends so the next interaction re-measures.
   type StarLayout = {
     rects: ReadonlyArray<DOMRect>;
-    rootLeft: number;
+    rootCenter: number;
     isRtl: boolean;
   };
   let layout: StarLayout | null = null;
@@ -86,9 +82,11 @@
     );
     if (items.length === 0) return null;
 
+    const rootRect = rootEl.getBoundingClientRect();
+
     return {
       rects: items.map((item) => item.getBoundingClientRect()),
-      rootLeft: rootEl.getBoundingClientRect().left,
+      rootCenter: rootRect.left + rootRect.width / 2,
       isRtl: getComputedStyle(rootEl).direction === "rtl",
     };
   }
@@ -112,23 +110,43 @@
     });
   }
 
-  // Center of the given star, relative to the root's inline-start, so the
-  // preview bubble snaps to a star rather than the raw cursor.
+  const starIndex = (stars: number) =>
+    Math.min(Math.max(Math.ceil(stars) - 1, 0), MAX_STARS - 1);
+
   function starCenterX(stars: number): number | null {
     layout ??= measureLayout();
     if (!layout) return null;
 
-    const index = Math.min(
-      Math.max(Math.ceil(stars) - 1, 0),
-      layout.rects.length - 1,
-    );
-    const rect = layout.rects.at(index);
+    const rect = layout.rects.at(starIndex(stars));
     if (!rect) return null;
 
-    return rect.left + rect.width / 2 - layout.rootLeft;
+    return rect.left + rect.width / 2 - layout.rootCenter;
   }
 
-  function commit(stars: number, ev?: MouseEvent) {
+  function starItem(stars: number): HTMLElement | undefined {
+    return rootEl?.querySelectorAll<HTMLElement>(ITEM_SELECTOR)
+      .item(starIndex(stars)) ?? undefined;
+  }
+
+  function pulseStar(stars: number, scale: number) {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    starItem(stars)?.firstElementChild?.animate?.(
+      [
+        { transform: "scale(1)" },
+        { transform: `scale(${scale})` },
+        { transform: "scale(1)" },
+      ],
+      { duration: 240, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)" },
+    );
+  }
+
+  function tickStep(stars: number) {
+    pulseStar(stars, 1.2);
+    if (isTouchScrub) navigator.vibrate?.(4);
+  }
+
+  function commit(stars: number) {
     if (isRating) return;
 
     // Keep previewX so the bubble recedes in place; only hide it.
@@ -142,7 +160,8 @@
       return;
     }
 
-    onAddRating(toRating(stars), ev);
+    pulseStar(stars, 1.3);
+    onAddRating(toRating(stars), starItem(stars));
   }
 
   // Live drag/hover preview: pointermove drives the value + bubble, pointerleave
@@ -156,7 +175,11 @@
     }
 
     const stars = starsFromPointerX(clientX);
+    const isStep = previewStars !== null && stars !== null &&
+      stars !== previewStars;
+
     previewStars = stars;
+    if (isStep) tickStep(stars);
     if (stars !== null) previewX = starCenterX(stars);
   }
 
@@ -169,7 +192,7 @@
     if (stars !== null) {
       const travelled = Math.abs(up.clientX - down.clientX) >= TAP_SLOP;
       const snapToWhole = up.pointerType !== "mouse" && !travelled;
-      commit(snapToWhole ? Math.ceil(stars) : stars, up);
+      commit(snapToWhole ? Math.ceil(stars) : stars);
     }
 
     // Defer past the click this release triggers (which onValueChange skips via
@@ -293,13 +316,21 @@
     display: flex;
     align-items: center;
     position: relative;
-    touch-action: none;
+    isolation: isolate;
+    touch-action: pan-y;
     // Suppress the grey flash the mobile browser paints on tap.
     -webkit-tap-highlight-color: transparent;
 
-    // Premium easing curves shared across the interaction.
     --ease-glide: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset-block: calc((var(--ni-44) - 100%) / -2);
+      inset-inline: 0;
+      z-index: -1;
+      cursor: pointer;
+    }
 
     // Floats above the stars while scrubbing; snaps to the current star's
     // center via the JS-measured --preview-x (falls back to center). Absolute
@@ -310,7 +341,8 @@
     .rating-preview {
       position: absolute;
       bottom: calc(100% + var(--gap-xs));
-      left: var(--preview-x, 50%);
+      left: 50%;
+      translate: var(--preview-x, 0px) 0;
       transform: translateX(-50%) translateY(0.35rem) scale(0.85);
       transform-origin: bottom center;
       z-index: var(--layer-top);
@@ -328,9 +360,9 @@
 
       pointer-events: none;
       opacity: 0;
-      will-change: left, transform, opacity;
+      will-change: translate, transform, opacity;
       transition:
-        left var(--transition-increment) var(--ease-glide),
+        translate var(--transition-increment) var(--ease-glide),
         transform var(--transition-increment) var(--ease-glide),
         opacity var(--transition-increment) ease;
 
@@ -353,24 +385,19 @@
       cursor: pointer;
       will-change: transform;
       transition:
-        transform var(--transition-increment) var(--ease-spring),
-        color var(--transition-increment) var(--ease-glide),
-        opacity var(--transition-increment) var(--ease-glide);
+        transform var(--transition-increment) var(--ease-glide),
+        color var(--transition-increment) var(--ease-glide);
     }
 
-    // Tint the whole row while scrubbing, and gently recede the stars that
-    // aren't the active target so the highlight reads cleanly.
     &.is-previewing {
+      --star-fill-duration: 0ms;
+
       :global(.star-item) {
         color: var(--orange-400);
       }
 
       :global(.star-item[data-highlighted]) {
-        transform: scale(1.3);
-      }
-
-      :global(.star-item:not([data-highlighted])) {
-        opacity: 0.75;
+        transform: scale(1.15);
       }
     }
 
@@ -387,7 +414,7 @@
       }
 
       :global(.star-item[data-highlighted]) {
-        transform: translateY(-0.75rem) scale(1.3);
+        transform: translateY(-0.75rem) scale(1.2);
       }
     }
 
