@@ -40,7 +40,12 @@
   }
 
   @include for-mouse {
-    .trakt-login-button :global(.trakt-button:hover) {
+    .trakt-login-button
+      :global(.trakt-button[data-style="flat"][data-color="custom"][data-variant="primary"]:hover),
+    .trakt-login-button
+      :global(
+        .trakt-button[data-style="flat"][data-color="custom"][data-variant="primary"]:focus-visible
+      ) {
       --color-background-button: color-mix(
         in srgb,
         var(--shade-10) 12%,
