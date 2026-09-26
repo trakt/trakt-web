@@ -1,7 +1,7 @@
 <script lang="ts">
   import Logo from "$lib/components/logo/Logo.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import JoinForFreeButton from "./components/JoinForFreeButton.svelte";
+  import GetStartedButton from "./components/GetStartedButton.svelte";
   import LandingApps from "./components/LandingApps.svelte";
   import LandingPillars from "./components/LandingPillars.svelte";
   import LoginButton from "./components/LoginButton.svelte";
@@ -36,9 +36,7 @@
         <span class="hero-chip small">{m.text_landing_platforms()}</span>
         <h1 class="hero-title">{m.header_landing_hero()}</h1>
         <p class="hero-subtitle">{m.text_landing_hero()}</p>
-        <div class="hero-actions">
-          <JoinForFreeButton />
-        </div>
+        <GetStartedButton />
       </div>
 
       <SpotlightStack items={$items} {active} onStep={step} />
@@ -216,16 +214,6 @@
 
     @include for-tablet-sm-and-below {
       font-size: var(--ni-16);
-    }
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: var(--gap-s);
-
-    @include for-tablet-sm-and-below {
-      flex-direction: column;
-      align-self: stretch;
     }
   }
 </style>
