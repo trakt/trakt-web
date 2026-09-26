@@ -1,13 +1,33 @@
 const scrollOffset = 8;
+
+type ScrollActiveItemParams = {
+  active: boolean;
+  /**
+   * Which way the item's container scrolls.
+   *
+   * `inline` (the default) nudges a horizontal rail by its own scrollLeft,
+   * which is the only way to move a masked strip. `block` hands off to
+   * `scrollIntoView`, which finds whichever ancestor scrolls vertically - a
+   * drawer's body, usually, several levels up from the item.
+   */
+  axis?: 'inline' | 'block';
+};
+
 export function scrollActiveItemIntoView(
   element: HTMLElement,
-  active: boolean,
+  params: ScrollActiveItemParams,
 ) {
   let rafId: number | null = null;
 
-  const doScroll = (active: boolean, behavior: 'smooth' | 'instant') => {
-    if (!active) return;
+  const scrollBlock = (behavior: 'smooth' | 'instant') => {
+    if (rafId) cancelAnimationFrame(rafId);
 
+    rafId = requestAnimationFrame(() => {
+      element.scrollIntoView({ block: 'start', behavior });
+    });
+  };
+
+  const scrollInline = (behavior: 'smooth' | 'instant') => {
     const parent = element.parentElement;
     if (!parent) return;
 
@@ -29,11 +49,25 @@ export function scrollActiveItemIntoView(
     });
   };
 
-  doScroll(active, 'instant');
+  const doScroll = (
+    { active, axis = 'inline' }: ScrollActiveItemParams,
+    behavior: 'smooth' | 'instant',
+  ) => {
+    if (!active) return;
+
+    if (axis === 'block') {
+      scrollBlock(behavior);
+      return;
+    }
+
+    scrollInline(behavior);
+  };
+
+  doScroll(params, 'instant');
 
   return {
-    update: (active: boolean) => {
-      doScroll(active, 'smooth');
+    update: (next: ScrollActiveItemParams) => {
+      doScroll(next, 'smooth');
     },
     destroy: () => {
       if (rafId) cancelAnimationFrame(rafId);

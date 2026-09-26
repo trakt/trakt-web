@@ -136,6 +136,7 @@
               episode: episode.number,
             })}
             style="minimal"
+            scrollAxis="block"
             source="seasons-drawer"
           />
         {/snippet}

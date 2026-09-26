@@ -25,6 +25,7 @@
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
   import { episodeMetaInfo } from "$lib/utils/intl/episodeMetaInfo";
+  import type { Snippet } from "svelte";
 
   type SeasonEpisodeItemProps = {
     show: ShowEntry;
@@ -38,6 +39,14 @@
     style?: BaseItemProps["style"];
     source: string;
     urlOverride?: EpisodeUrlOverride;
+    /** Docked to the still's edge - the rail's hidden-episode counts. */
+    edge?: Snippet;
+    /**
+     * Which way this item's container scrolls when it is the current
+     * episode. The rail is a horizontal strip; the seasons drawer is a
+     * vertical list several levels inside a scrolling body.
+     */
+    scrollAxis?: "inline" | "block";
   };
 
   const {
@@ -52,6 +61,8 @@
     style,
     source,
     urlOverride,
+    edge,
+    scrollAxis = "inline",
   }: SeasonEpisodeItemProps = $props();
 
   const isFuture = $derived(episode.effectiveReleaseDate > new Date());
@@ -180,6 +191,7 @@
     context="show"
     {source}
     {urlOverride}
+    {edge}
     coverUrl={$src}
     onWatched={offerGapFill}
   />
@@ -191,7 +203,7 @@
   active episode changes. The scroll action is a no-op when not current.
 -->
 <div
-  use:scrollActiveItemIntoView={isCurrentEpisode}
+  use:scrollActiveItemIntoView={{ active: isCurrentEpisode, axis: scrollAxis }}
   class="trakt-season-episode-item"
 >
   {@render episodeItem()}

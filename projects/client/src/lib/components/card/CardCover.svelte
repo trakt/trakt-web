@@ -6,7 +6,8 @@
   import { lineClamp } from "../text/lineClamp";
   import type { CardCoverProps } from "./CardCoverProps";
 
-  const { src, overlaySrc, alt, badge, tag, title }: CardCoverProps = $props();
+  const { src, overlaySrc, alt, badge, tag, edge, title }: CardCoverProps =
+    $props();
 
   let isImagePending = $state(true);
   const id = $derived(checksum(`${src}-${title}`));
@@ -35,6 +36,9 @@
     <div class="trakt-card-cover-tag">
       {@render tag()}
     </div>
+  {/if}
+  {#if edge}
+    {@render edge()}
   {/if}
   <div
     class="trakt-card-cover-image"
@@ -143,6 +147,20 @@
   @include for-mouse() {
     :global(.trakt-card-content:hover) .trakt-card-cover {
       outline-color: var(--color-card-border-hover);
+    }
+
+    /*
+      Except when the pointer is on something docked in the edge slot. That
+      control stands in front of the cover with a target of its own, so
+      lighting the card behind it says the click will open the episode when
+      it will not. Written global so it matches the slotted element, whose
+      styles belong to another component; the `:has` outweighs the rule above
+      it, so no `!important` is needed.
+    */
+    :global(
+      .trakt-card-content:hover .trakt-card-cover:has([data-cover-edge]:hover)
+    ) {
+      outline-color: transparent;
     }
   }
 
