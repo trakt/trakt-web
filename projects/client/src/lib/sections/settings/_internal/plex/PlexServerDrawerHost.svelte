@@ -180,7 +180,6 @@
             label={lib.title}
             checked={lib.isSelected}
             onclick={() => toggleLibrary(lib.uuid)}
-            color="purple"
           />
         </SettingsGroupRow>
       {/each}
