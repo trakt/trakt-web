@@ -3872,6 +3872,34 @@
       "default": "Calendar",
       "description": "Aria-label for the button that opens the calendar page."
     },
+    "button_label_calendar_feed": {
+      "default": "Subscribe to this calendar",
+      "description": "Aria-label for the menu button on the calendar page that offers the iCal subscription feed."
+    },
+    "header_calendar_feed": {
+      "default": "Calendar feed",
+      "description": "Title of the menu offering the iCal subscription feed for the calendar, also used as the title of the copied confirmation."
+    },
+    "button_text_open_calendar_feed": {
+      "default": "Add to calendar app",
+      "description": "Text for the menu item that opens the iCal feed in the user's calendar app through a webcal link."
+    },
+    "button_label_open_calendar_feed": {
+      "default": "Subscribe to this calendar in your calendar app",
+      "description": "Aria-label for the menu item that opens the iCal feed in the user's calendar app."
+    },
+    "button_text_copy_calendar_feed": {
+      "default": "Copy iCal link",
+      "description": "Text for the menu item that copies the iCal feed URL to the clipboard."
+    },
+    "button_label_copy_calendar_feed": {
+      "default": "Copy the iCal feed link for this calendar",
+      "description": "Aria-label for the menu item that copies the iCal feed URL to the clipboard."
+    },
+    "text_info_calendar_feed_copied": {
+      "default": "iCal link copied. Paste it into your calendar app to subscribe.",
+      "description": "Confirmation shown after the iCal feed link was copied to the clipboard."
+    },
     "text_cta_up_next_media": {
       "default": "Your shows and movies. Your pace. Jump back in exactly where you left off. What are you currently watching?",
       "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite shows and movies."

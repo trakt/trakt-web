@@ -7,6 +7,7 @@
   import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
   import BlockIcon from "$lib/components/icons/BlockIcon.svelte";
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
+  import CalendarAddIcon from "$lib/components/icons/CalendarAddIcon.svelte";
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
@@ -142,6 +143,7 @@
         <IconTile name="BookmarkIcon added">
           <BookmarkIcon state="added" />
         </IconTile>
+        <IconTile name="CalendarAddIcon"><CalendarAddIcon /></IconTile>
         <IconTile name="CalendarIcon"><CalendarIcon /></IconTile>
         <IconTile name="CastIcon"><CastIcon /></IconTile>
         <IconTile name="CheckInIcon"><CheckInIcon /></IconTile>
