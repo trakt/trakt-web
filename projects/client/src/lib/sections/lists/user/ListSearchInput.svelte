@@ -1,5 +1,6 @@
 <script lang="ts">
   import SearchField from "$lib/components/form/SearchField.svelte";
+  import type { SearchFieldVariant } from "$lib/components/form/models/SearchFieldVariant.ts";
   import * as m from "$lib/features/i18n/messages.ts";
 
   const {
@@ -9,7 +10,7 @@
     onClose,
   }: {
     value: string;
-    variant?: "default" | "embedded";
+    variant?: SearchFieldVariant;
     onInput: (value: string) => void;
     onClose: () => void;
   } = $props();

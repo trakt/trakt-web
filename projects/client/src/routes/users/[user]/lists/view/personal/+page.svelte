@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { SearchFieldVariant } from "$lib/components/form/models/SearchFieldVariant.ts";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -40,7 +41,7 @@
   {/if}
 {/snippet}
 
-{#snippet listSearch(variant: "default" | "embedded")}
+{#snippet listSearch(variant: SearchFieldVariant)}
   <ListSearchInput
     {variant}
     value={search.term}

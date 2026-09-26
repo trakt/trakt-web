@@ -1,5 +1,7 @@
+import type { SearchFieldVariant } from './SearchFieldVariant.ts';
+
 export type SearchFieldProps = {
-  variant?: 'default' | 'embedded';
+  variant?: SearchFieldVariant;
   placeholder: string;
   /** Accessible name; falls back to the placeholder when omitted. */
   label?: string;

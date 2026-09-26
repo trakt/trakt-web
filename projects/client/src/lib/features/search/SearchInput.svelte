@@ -2,6 +2,7 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import SearchField from "$lib/components/form/SearchField.svelte";
+  import type { SearchFieldVariant } from "$lib/components/form/models/SearchFieldVariant.ts";
   import * as m from "$lib/features/i18n/messages";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { buildParamString } from "$lib/utils/url/buildParamString";
@@ -9,7 +10,7 @@
   import { useSearch } from "./useSearch";
 
   type SearchInputProps = {
-    variant?: "default" | "embedded";
+    variant?: SearchFieldVariant;
   };
 
   const { variant = "default" }: SearchInputProps = $props();

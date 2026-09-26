@@ -16,7 +16,7 @@
   style="ghost"
   label={m.button_label_search_lists()}
   classList={isActive ? "trakt-link-active" : ""}
-  aria-expanded={isActive}
+  aria-pressed={isActive ? "true" : "false"}
   {onclick}
 >
   <SearchIcon />
