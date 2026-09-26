@@ -393,7 +393,35 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
         ],
       },
     },
+    {
+      'episode_count': 2,
+      'character': 'Gloria Hildebrandt',
+      'characters': [
+        'Gloria Hildebrandt',
+      ],
+      'person': {
+        'name': 'Sophie Thompson',
+        'ids': {
+          'trakt': 14103,
+          'slug': 'sophie-thompson',
+          'imdb': 'nm0860749',
+          'tmdb': 10207,
+        },
+        'images': {
+          'headshot': [
+            'walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
+        ],
+      },
+    },
   ],
+
   'crew': {
     'production': [
       {
