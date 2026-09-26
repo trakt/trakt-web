@@ -3,6 +3,7 @@ import { ListedMoviesResponseMock } from '$mocks/data/lists/response/ListedMovie
 import { ListedShowsResponseMock } from '$mocks/data/lists/response/ListedShowsResponseMock.ts';
 import { HereticListsResponseMock } from '$mocks/data/summary/movies/heretic/response/HereticListsResponseMock.ts';
 import { SiloListsResponseMock } from '$mocks/data/summary/shows/silo/response/SiloListsResponseMock.ts';
+import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
 import { http, HttpResponse } from 'msw';
 
 export const lists = [
@@ -12,6 +13,14 @@ export const lists = [
     }`,
     () => {
       return HttpResponse.json(SiloListsResponseMock[0]);
+    },
+  ),
+  http.get(
+    `http://localhost/lists/${
+      assertDefined(SiloListsResponseMock.at(0)).ids.trakt
+    }/collaborators`,
+    () => {
+      return HttpResponse.json([UserProfileHarryResponseMock]);
     },
   ),
   http.get(

@@ -74,6 +74,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.warning_prompt_delete_list({ name: props.name }),
     operation: 'destructive',
   }),
+  [ConfirmationType.LeaveCollaboration]: (props) => ({
+    title: m.confirmation_title_leave_collaboration(),
+    buttonText: m.button_text_leave_collaboration(),
+    message: m.warning_prompt_leave_collaboration({ name: props.name }),
+    operation: 'destructive',
+  }),
   [ConfirmationType.RemoveFavorite]: (props) => ({
     title: m.confirmation_title_remove_favorite(),
     buttonText: m.button_text_remove_from_favorites(),

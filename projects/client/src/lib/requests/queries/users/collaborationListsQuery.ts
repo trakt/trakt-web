@@ -31,6 +31,7 @@ export const collaborationListsQuery = defineInfiniteQuery({
     InvalidateAction.Listed('movie'),
     InvalidateAction.Listed('show'),
     InvalidateAction.List.Like,
+    InvalidateAction.List.Collaborators,
   ],
   dependencies: (params) => [params.slug],
   request: collaborationListsRequest,
