@@ -10,11 +10,16 @@ function source(
   return {
     source: slug,
     name,
+    type: 'subscription',
     isFree: false,
     logoUrl,
     channelLogoUrl: null,
     color: undefined,
   };
+}
+
+function purchaseSource(slug: string, name = slug): StreamingSource {
+  return { ...source(slug, name), type: 'purchase' };
 }
 
 describe('buildStreamingServiceOptions', () => {
@@ -133,6 +138,86 @@ describe('buildStreamingServiceOptions', () => {
       'netflix',
       'hulu',
     ]);
+  });
+
+  it('should keep rent and buy services out of the simple options', () => {
+    const result = buildStreamingServiceOptions({
+      countryCode: 'us',
+      favorites: [],
+      sourceMap: new Map([
+        [
+          'us',
+          [
+            purchaseSource('apple_tv', 'Apple TV'),
+            source('netflix', 'Netflix'),
+            source('apple_tv_plus', 'Apple TV+'),
+          ],
+        ],
+      ]),
+    });
+
+    expect(result.top.map((option) => option.source)).toEqual([
+      'netflix',
+      'apple_tv_plus',
+    ]);
+  });
+
+  it('should list rent and buy services after streaming services', () => {
+    const result = buildStreamingServiceOptions({
+      countryCode: 'us',
+      favorites: [],
+      sourceMap: new Map([
+        [
+          'us',
+          [
+            purchaseSource('apple_tv', 'Apple TV'),
+            source('netflix', 'Netflix'),
+            purchaseSource('amazon_video', 'Amazon Video'),
+          ],
+        ],
+      ]),
+    });
+
+    expect(result.all.map((option) => option.source)).toEqual([
+      'netflix',
+      'apple_tv',
+      'amazon_video',
+    ]);
+  });
+
+  it('should drop rent and buy variants from a grouped simple option', () => {
+    const result = buildStreamingServiceOptions({
+      countryCode: 'us',
+      favorites: [],
+      sourceMap: new Map([
+        [
+          'us',
+          [
+            purchaseSource('youtube', 'YouTube'),
+            source('youtube_free', 'YouTube Free'),
+          ],
+        ],
+      ]),
+    });
+
+    expect(result.top).toEqual([
+      expect.objectContaining({
+        source: 'youtube_free',
+        slugs: ['youtube_free'],
+      }),
+    ]);
+  });
+
+  it('should keep services without a known type', () => {
+    const result = buildStreamingServiceOptions({
+      countryCode: 'us',
+      favorites: [],
+      sourceMap: new Map([
+        ['us', [{ ...source('hulu', 'Hulu'), type: null }]],
+      ]),
+    });
+
+    expect(result.all.map((option) => option.source)).toEqual(['hulu']);
   });
 
   it('should mark advanced service options that have a logo', () => {
