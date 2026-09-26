@@ -51,7 +51,8 @@ type UserStatsParams = { slug: string } & ApiParams;
 
 // A `404` means a hidden/private profile. That is expected, not an error, so
 // short-circuit to an empty body instead of letting `isValidResponse` throw a
-// fetch error.
+// fetch error. An empty 2xx (e.g. `204`) is treated the same way, since
+// `response.json()` would throw on it.
 const userStatsRequest = async (
   { fetch, slug }: UserStatsParams,
 ) => {
@@ -60,9 +61,11 @@ const userStatsRequest = async (
     path: `/users/${slug}/stats`,
   });
 
-  return response.ok
+  const text = response.ok ? await response.text() : '';
+
+  return text
     ? {
-      body: UserStatsResponseSchema.parse(await response.json()),
+      body: UserStatsResponseSchema.parse(JSON.parse(text)),
       status: 200 as const,
     }
     : { body: undefined, status: 200 as const };
