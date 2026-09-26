@@ -135,8 +135,13 @@
     }
   }
 
+  /*
+    Consumers can mark a card (e.g. the current episode) by setting
+    --color-override-card-outline on an ancestor; hover still takes over.
+  */
   .trakt-card-cover {
-    outline: var(--border-thickness-xs) solid transparent;
+    outline: var(--border-thickness-xs) solid
+      var(--color-override-card-outline, transparent);
     transition: outline-color var(--transition-increment) ease-in-out;
   }
 
