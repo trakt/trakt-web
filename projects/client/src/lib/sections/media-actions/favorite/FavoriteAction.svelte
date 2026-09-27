@@ -7,6 +7,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { onMount } from "svelte";
   import NotePrompt from "../_internal/NotePrompt.svelte";
+  import HeartBurst from "./_internal/HeartBurst.svelte";
   import { useFavorites } from "./useFavorites";
 
   type FavoriteActionProps = {
@@ -32,6 +33,7 @@
   }: FavoriteActionProps = $props();
 
   let showNotePrompt = $state(false);
+  let burstCount = $state(0);
 
   const {
     isUpdatingFavorite,
@@ -50,6 +52,7 @@
 
   const addToFavorites = async () => {
     await doAddToFavorites();
+    burstCount += 1;
     showNotePrompt = true;
   };
 
@@ -93,15 +96,30 @@
   {id}
   noteType="favorites"
 >
-  <FavoriteButton
-    {style}
-    {title}
-    {navigationType}
-    {size}
-    isFavorited={$isFavorited}
-    isFavoriteUpdating={$isUpdatingFavorite}
-    isQueued={$isQueued}
-    onAdd={() => handler("add")}
-    onRemove={() => handler("remove")}
-  />
+  <span class="trakt-favorite-action">
+    <FavoriteButton
+      {style}
+      {title}
+      {navigationType}
+      {size}
+      isFavorited={$isFavorited}
+      isFavoriteUpdating={$isUpdatingFavorite}
+      isQueued={$isQueued}
+      onAdd={() => handler("add")}
+      onRemove={() => handler("remove")}
+    />
+
+    {#if style === "action" && burstCount > 0}
+      {#key burstCount}
+        <HeartBurst />
+      {/key}
+    {/if}
+  </span>
 </NotePrompt>
+
+<style>
+  .trakt-favorite-action {
+    position: relative;
+    display: inline-flex;
+  }
+</style>
