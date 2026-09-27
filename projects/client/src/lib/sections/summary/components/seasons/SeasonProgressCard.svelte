@@ -7,6 +7,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage.ts";
   import { stretchedPercentage } from "$lib/utils/number/stretchedPercentage.ts";
+  import { didCompleteSeason } from "./_internal/didCompleteSeason.ts";
+  import SeasonCompleteSweep from "./_internal/SeasonCompleteSweep.svelte";
 
   type SeasonProgressCardProps = {
     seasonNumber: number;
@@ -37,6 +39,15 @@
   const remaining = $derived(Math.max(0, total - watched));
   const isComplete = $derived(total > 0 && watched >= total);
   const isStarted = $derived(watched > 0);
+
+  let previousSnapshot: Parameters<typeof didCompleteSeason>[0] = null;
+  let sweepCount = $state(0);
+
+  $effect(() => {
+    const snapshot = { seasonNumber, watched, total, loading };
+    if (didCompleteSeason(previousSnapshot, snapshot)) sweepCount += 1;
+    previousSnapshot = snapshot;
+  });
 </script>
 
 {#snippet tags()}
@@ -77,9 +88,17 @@
   {#if loading}
     <div class="progress-skeleton skeleton"></div>
   {:else}
-    <ProgressTag progress={barPercentage} {tags}>
-      {m.tag_text_number_of_episodes({ count: watched })}
-    </ProgressTag>
+    <div class="progress-bar">
+      <ProgressTag progress={barPercentage} {tags}>
+        {m.tag_text_number_of_episodes({ count: watched })}
+      </ProgressTag>
+
+      {#if sweepCount > 0}
+        {#key sweepCount}
+          <SeasonCompleteSweep />
+        {/key}
+      {/if}
+    </div>
   {/if}
 </div>
 
@@ -113,6 +132,10 @@
     .complete-label {
       color: var(--color-text-emphasis);
     }
+  }
+
+  .progress-bar {
+    position: relative;
   }
 
   .progress-skeleton {
