@@ -15,6 +15,7 @@
   } from "../dashboard/_internal/dashboardDrawerNavigation";
   import StreakIcon from "./_internal/icons/StreakIcon.svelte";
   import StreakAccumulator from "./_internal/StreakAccumulator.svelte";
+  import StreakEmbers from "./_internal/StreakEmbers.svelte";
   import { useActivityHeatmap } from "./_internal/useActivityHeatmap.ts";
   import { useStreak } from "./_internal/useStreak";
 
@@ -28,7 +29,9 @@
     action: editModeAction,
   } = $derived(section(id));
 
-  const { streakCount, isLoading } = $derived(useStreak({ mode: $mode }));
+  const { streakCount, isLoading, milestone } = $derived(
+    useStreak({ mode: $mode }),
+  );
   const { heatmap } = $derived(
     useActivityHeatmap({ mode: $mode, period: "week" }),
   );
@@ -74,12 +77,30 @@
           <div class="trakt-streak-callout" use:editModeAction>
             <div class="trakt-streak-left">
               <div class="trakt-streak-flame">
-                <StreakIcon count={$streakCount} />
+                {#key $milestone}
+                  <div
+                    class="streak-flame-body"
+                    class:is-flaring={$milestone != null}
+                  >
+                    <StreakIcon count={$streakCount} />
+                  </div>
+
+                  {#if $milestone != null}
+                    <StreakEmbers />
+                  {/if}
+                {/key}
               </div>
 
               <div class="trakt-streak-info">
                 <p class="trakt-streak-title bold">
-                  <span class="trakt-streak-count bold">{streakLabel}</span>
+                  {#key $milestone}
+                    <span
+                      class="trakt-streak-count bold"
+                      class:is-flipping={$milestone != null}
+                    >
+                      {streakLabel}
+                    </span>
+                  {/key}
                   {m.text_stats_watching_streak()}
                 </p>
               </div>
@@ -87,7 +108,10 @@
 
             <div class="trakt-streak-right">
               <div class="trakt-streak-accumulator">
-                <StreakAccumulator cells={$heatmap?.cells ?? []} />
+                <StreakAccumulator
+                  cells={$heatmap?.cells ?? []}
+                  isCelebrating={$milestone != null}
+                />
               </div>
               <div class="trakt-streak-footer">
                 <ArrowRightIcon />
@@ -189,6 +213,7 @@
   }
 
   .trakt-streak-flame {
+    position: relative;
     width: var(--ni-48);
     height: var(--ni-48);
 
@@ -228,6 +253,54 @@
     :global(svg) {
       width: var(--ni-16);
       height: var(--ni-16);
+    }
+  }
+
+  .streak-flame-body {
+    display: flex;
+    transform-origin: 50% 90%;
+
+    &.is-flaring {
+      animation: streak-flame-flare 900ms ease-out both;
+    }
+  }
+
+  .trakt-streak-count {
+    display: inline-block;
+
+    &.is-flipping {
+      animation: streak-count-flip 420ms cubic-bezier(0.3, 1.5, 0.5, 1) both;
+    }
+  }
+
+  @keyframes streak-flame-flare {
+    0%,
+    100% {
+      transform: scale(1);
+      filter: none;
+    }
+    35% {
+      transform: scale(1.3, 1.5);
+      filter: drop-shadow(0 0 var(--ni-10) var(--orange-400));
+    }
+    70% {
+      transform: scale(0.96);
+    }
+  }
+
+  @keyframes streak-count-flip {
+    from {
+      transform: rotateX(-90deg);
+    }
+    to {
+      transform: rotateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .streak-flame-body.is-flaring,
+    .trakt-streak-count.is-flipping {
+      animation: none;
     }
   }
 </style>
