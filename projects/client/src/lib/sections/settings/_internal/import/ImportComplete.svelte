@@ -12,6 +12,7 @@
   import { toUnresolvedCsv } from "$lib/sections/settings/import/toUnresolvedCsv.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { slide } from "svelte/transition";
+  import ImportTally from "./ImportTally.svelte";
 
   type ImportCompleteProps = {
     processedCount: number;
@@ -189,9 +190,7 @@
 
 <div class="trakt-import-complete" transition:slide={{ duration: 150, axis: "y" }}>
   <div class="import-complete-summary">
-    <p class="secondary">
-      {m.import_complete_synced({ count: successCount })}
-    </p>
+    <ImportTally count={successCount} />
     {#if errorCount > 0}
       <p class="secondary">
         {m.import_complete_errors({ count: errorCount })}
