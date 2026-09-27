@@ -70,7 +70,7 @@ describe('handle: boot-loader', () => {
     const request = new Request('http://localhost', {
       headers: { 'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' },
     });
-    const { preload, transformPageChunk } = await interceptHandleResolveOptions(
+    const { transformPageChunk } = await interceptHandleResolveOptions(
       handle,
       request,
     );
@@ -80,9 +80,21 @@ describe('handle: boot-loader', () => {
       done: true,
     });
 
-    expect(preload).toBeUndefined();
     expect(transformed).toBe(
       page(STYLESHEET).replace(BOOT_LOADER_PLACEHOLDER, ''),
     );
+  });
+
+  it('should not preload anything for social bots', async () => {
+    const request = new Request('http://localhost', {
+      headers: {
+        'user-agent':
+          'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)',
+      },
+    });
+    const { preload } = await interceptHandleResolveOptions(handle, request);
+
+    expect(preload?.({ type: 'css', path: 'a.css' })).toBe(false);
+    expect(preload?.({ type: 'js', path: 'a.js' })).toBe(false);
   });
 });
