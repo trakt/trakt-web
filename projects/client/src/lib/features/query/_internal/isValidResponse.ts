@@ -10,10 +10,10 @@ import { isSuccessResponse } from './isSuccessResponse.ts';
 
 // FIXME: extend with error schemas
 class FetchError<TInput> extends Error {
-  constructor(public response: RequestResponse<TInput>, message: string) {
-    super(message);
+  constructor(public response: RequestResponse<TInput>, key?: string) {
+    super(`Failed to fetch data: ${key}`);
 
-    printError(message);
+    printError(this.message);
 
     // FIXME: see if we can leverage window.onerror
     const responses = Array.isArray(response) ? response : [response];
@@ -22,6 +22,7 @@ class FetchError<TInput> extends Error {
         new CustomEvent<CustomFetchError>(FETCH_ERROR_EVENT, {
           detail: {
             status,
+            key,
             message: status === 503 && typeof body === 'object'
               ? body.message
               : undefined,
@@ -40,10 +41,7 @@ export function isValidResponse<TInput>(
   const isNoContent = isNoContentResponse(response);
 
   if (!(isSuccess || isNoContent)) {
-    throw new FetchError(
-      response,
-      `Failed to fetch data: ${key}`,
-    );
+    throw new FetchError(response, key);
   }
 
   return isSuccess;

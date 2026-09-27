@@ -24,10 +24,29 @@
   let unexpectedError = $state<Error | undefined>(undefined);
   let sessionId = $state<string | undefined>(undefined);
 
+  let loggedKeys: ReadonlySet<string | undefined> = new Set();
+
+  const logServiceError = ({ key, status }: CustomFetchError) => {
+    if (loggedKeys.has(key)) return;
+
+    loggedKeys = new Set([...loggedKeys, key]);
+
+    Sentry.logger.warn("Service unavailable", {
+      key: key ?? "unknown",
+      status,
+      route: page.route.id ?? "unknown",
+    });
+  };
+
   onMount(() => {
     const handler = (event: Event) => {
-      const errorEvent = event as CustomEvent<CustomFetchError>;
-      fetchError = mapToWellKnownError(errorEvent.detail);
+      const { detail } = event as CustomEvent<CustomFetchError>;
+      fetchError = mapToWellKnownError(detail);
+
+      if (fetchError?.type !== WellKnownErrorType.ServerError) return;
+      if (hasExemption) return;
+
+      logServiceError(detail);
     };
 
     globalThis.window.addEventListener(FETCH_ERROR_EVENT, handler);
@@ -41,6 +60,7 @@
     fetchError = undefined;
     unexpectedError = undefined;
     sessionId = undefined;
+    loggedKeys = new Set();
   });
 
   const hasExemption = $derived(isErrorExempt(fetchError, page.route.id));
