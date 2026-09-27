@@ -35,6 +35,7 @@ export const handle: Handle = ({ event, resolve }) => {
 
   if (event.locals.isLegitimateBot || isBotAgent(agent)) {
     return resolve(event, {
+      preload: () => false,
       transformPageChunk: ({ html }) =>
         html.replace(BOOT_LOADER_PLACEHOLDER, ''),
     });
