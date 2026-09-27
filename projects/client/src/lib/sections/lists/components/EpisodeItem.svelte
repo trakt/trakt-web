@@ -130,6 +130,9 @@
             episodes={props.episode.episodes}
             isLatestAired={props.episode.isLatestAired}
             releaseDate={props.episode.effectiveReleaseDate}
+            announceKey={props.source === "continue-watching"
+              ? `episode-${props.episode.id}`
+              : undefined}
           />
         {/snippet}
 
