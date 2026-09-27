@@ -23,7 +23,7 @@ const bots = [
   'Slackbot',
   'WhatsApp',
   'Discordbot',
-  'Pinterest',
+  'pinterest.com/bot',
   'TelegramBot',
   'Viber',
   'SkypeUriPreview',
