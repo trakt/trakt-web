@@ -4,7 +4,10 @@
   import type { HeatmapCell } from "./models/HeatmapCell.ts";
   import { formatActivityTooltip } from "./utils/formatActivityTooltip.ts";
 
-  const { cells }: { cells: ReadonlyArray<HeatmapCell> } = $props();
+  const {
+    cells,
+    isCelebrating = false,
+  }: { cells: ReadonlyArray<HeatmapCell>; isCelebrating?: boolean } = $props();
 
   const now = new Date();
   const locale = $derived(languageTag());
@@ -25,6 +28,7 @@
         data-active={cell.count > 0 || undefined}
         data-future={cell.isFuture || undefined}
         data-today={cell.isToday || undefined}
+        data-celebrating={(cell.isToday && isCelebrating) || undefined}
       ></div>
     </Tooltip>
   {/each}
@@ -92,6 +96,33 @@
       outline: var(--ni-1) solid var(--color-streak-day);
       outline-offset: var(--ni-1);
       opacity: 1;
+    }
+
+    &[data-celebrating] {
+      animation: streak-today-glow 1600ms 260ms ease-out both;
+    }
+  }
+
+  @keyframes streak-today-glow {
+    0% {
+      background: var(--color-streak-day);
+      transform: scaleY(1);
+    }
+    30% {
+      background: var(--orange-400);
+      box-shadow: 0 0 var(--ni-10) var(--orange-400);
+      transform: scaleY(1.2);
+    }
+    100% {
+      background: var(--orange-400);
+      transform: scaleY(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trakt-streak-pill[data-celebrating] {
+      animation: none;
+      background: var(--orange-400);
     }
   }
 </style>

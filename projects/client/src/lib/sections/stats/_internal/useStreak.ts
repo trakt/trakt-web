@@ -2,7 +2,8 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
-import { map } from 'rxjs';
+import { filter, map, pairwise } from 'rxjs';
+import { crossedStreakMilestone } from './crossedStreakMilestone.ts';
 import { filterWatchedDates } from './filterWatchedDates.ts';
 
 type StreakResult = {
@@ -88,5 +89,12 @@ export function useStreak({ mode }: { mode: DiscoverMode }) {
   return {
     streakCount: streak.pipe(map(($s) => $s?.count ?? 0)),
     isLoading: streak.pipe(map(($s) => $s === null)),
+    milestone: streak.pipe(
+      filter(($s): $s is StreakResult => $s !== null),
+      map(($s) => $s.count),
+      pairwise(),
+      map(([previous, next]) => crossedStreakMilestone(previous, next)),
+      filter((milestone): milestone is number => milestone !== null),
+    ),
   };
 }
