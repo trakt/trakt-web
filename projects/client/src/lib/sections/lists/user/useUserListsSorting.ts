@@ -3,6 +3,7 @@ import { useSortParams } from '$lib/sections/lists/stores/useSortParams.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { map, type Observable } from 'rxjs';
+import { defaultDirection } from './defaultDirection.ts';
 import { userListsSortOptions } from './constants/userListsSortOptions.ts';
 import type {
   ListUrlBuilder,
@@ -31,10 +32,6 @@ function mapToDirection(value: string | Nil): SortDirection | undefined {
 function mapToSortBy(value: string | Nil): UserListsSortBy | undefined {
   const sortBy = userListsSortOptions.find((option) => option.value === value);
   return sortBy?.value;
-}
-
-function defaultDirection(sortBy: UserListsSortBy): SortDirection {
-  return sortBy === 'rank' || sortBy === 'name' ? 'asc' : 'desc';
 }
 
 export function useUserListsSorting(
