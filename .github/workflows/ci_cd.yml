@@ -148,6 +148,15 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Recalling Past Visions aka Restore Vitest Module Cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.experimental-vitest-cache
+          key: vitest-fs-cache-${{ matrix.shard }}-${{ hashFiles('deno.lock') }}-${{ github.run_id }}
+          restore-keys: |
+            vitest-fs-cache-${{ matrix.shard }}-${{ hashFiles('deno.lock') }}-
+            vitest-fs-cache-${{ matrix.shard }}-
+
       - name: "Probe the Client's Mind aka Run Tests [${{ matrix.shard }}/4]"
         working-directory: projects/client
         run: 'node node_modules/vitest/vitest.mjs --coverage --shard=${{ matrix.shard }}/4 --reporter=blob --reporter=dot --reporter=github-actions'
