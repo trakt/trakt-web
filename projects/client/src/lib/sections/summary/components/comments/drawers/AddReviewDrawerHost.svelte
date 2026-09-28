@@ -2,7 +2,7 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DismissibleError from "$lib/components/errors/DismissibleError.svelte";
   import Form from "$lib/components/form/Form.svelte";
-  import FormTextArea from "$lib/components/form/FormTextArea.svelte";
+  import FormRichTextArea from "$lib/components/form/FormRichTextArea.svelte";
   import GifButton from "$lib/features/gif-picker/GifButton.svelte";
   import { klipyCustomerId } from "$lib/features/gif-picker/klipyCustomerId.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -10,6 +10,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment.ts";
   import { iffy } from "$lib/utils/function/iffy.ts";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { cubicOut } from "svelte/easing";
   import { slide } from "svelte/transition";
   import SelectedGif from "../_internal/comment-input/SelectedGif.svelte";
@@ -19,6 +20,7 @@
   import type { CommentDraftGif } from "../_internal/models/CommentDraftGif.ts";
   import { reportGifShare } from "../_internal/reportGifShare.ts";
   import { toGifSuggestedQuery } from "../_internal/toGifSuggestedQuery.ts";
+  import { useMediaMentions } from "../_internal/useMediaMentions.ts";
   import {
     type UseAddCommentProps,
     usePostComment,
@@ -85,6 +87,9 @@
   const isSubmittable = $derived(gif != null || isReviewValid(comment));
 
   const { postComment, isCommenting, error } = usePostComment();
+  const { mentions } = useMediaMentions(
+    fromRune(() => ({ ...rest, slug: media.slug })),
+  );
 
   const commentProps = $derived.by((): UseAddCommentProps => {
     if (rest.mode === "edit") {
@@ -167,13 +172,14 @@
   >
     <div class="trakt-review-properties">
       <div class="review-composer">
-        <FormTextArea
+        <FormRichTextArea
           placeholder={m.textarea_placeholder_comment()}
           onChange={(value) => (comment = value)}
           disabled={$isCommenting}
           autofocus
           value={comment}
           {actions}
+          mentions={$mentions}
           validation={gif
             ? undefined
             : {

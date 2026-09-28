@@ -2,41 +2,43 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import DismissibleError from "$lib/components/errors/DismissibleError.svelte";
   import PostMessageIcon from "$lib/components/icons/PostMessageIcon.svelte";
+  import RichTextEditor from "$lib/components/rich-text/RichTextEditor.svelte";
   import GifButton from "$lib/features/gif-picker/GifButton.svelte";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { klipyCustomerId } from "$lib/features/gif-picker/klipyCustomerId.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
-  import { NOOP_FN } from "$lib/utils/constants";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment";
-  import { onMount } from "svelte";
   import { slide } from "svelte/transition";
   import type { ActiveComment } from "../models/ActiveComment";
   import type { CommentDraftGif } from "../models/CommentDraftGif.ts";
   import { reportGifShare } from "../reportGifShare.ts";
   import { usePostComment, type UseAddCommentProps } from "../usePostComment";
-  import { autoResizeArea as autoResizeAreaFn } from "./autoResizeArea";
+  import {
+    useMediaMentions,
+    type MediaMentionSource,
+  } from "../useMediaMentions.ts";
   import SelectedGif from "./SelectedGif.svelte";
   import SpoilerSwitch from "./SpoilerSwitch.svelte";
   import { toCommentDraftGif } from "./toCommentDraftGif.ts";
-  import { useContentObserver } from "./useContentObserver";
 
   type CommentInputProps = {
     label: string;
     placeholder: string;
     onCommentPost: (comment: ActiveComment) => void;
-    sizing?: "normal" | "auto";
     gifSuggestedQuery?: string;
+    mentionSource: MediaMentionSource;
   } & UseAddCommentProps;
 
   const {
     label,
     placeholder,
     onCommentPost,
-    sizing = "auto",
     gifSuggestedQuery,
+    mentionSource,
     ...props
   }: CommentInputProps = $props();
 
-  let textAreaElement: HTMLTextAreaElement;
+  let comment = $state("");
   let isSpoiler = $state(false);
   let gif = $state<CommentDraftGif | null>(null);
 
@@ -44,18 +46,14 @@
 
   const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
 
-  const { contentObserver, hasContent } = $derived(useContentObserver());
   const { postComment, isCommenting, error } = usePostComment();
+  const { mentions } = useMediaMentions(fromRune(() => mentionSource));
 
-  const autoResizeArea = $derived(
-    sizing === "auto" ? autoResizeAreaFn : NOOP_FN,
-  );
-
-  const hasSomethingToSay = $derived($hasContent || gif != null);
+  const hasSomethingToSay = $derived(comment.trim().length > 0 || gif != null);
 
   const postCommentHandler = async () => {
     const response = await postComment({
-      comment: textAreaElement.value.trim(),
+      comment: comment.trim(),
       gif: gif ? { url: gif.url, width: gif.width, height: gif.height } : null,
       isSpoiler,
       ...props,
@@ -67,7 +65,7 @@
 
     reportGifShare({ gif, customerId });
 
-    textAreaElement.value = "";
+    comment = "";
     gif = null;
     onCommentPost({
       id: response.id,
@@ -75,22 +73,24 @@
     });
   };
 
-  onMount(() => {
-    textAreaElement.focus();
-  });
-
   // FIXME: merge with the component in the drawer
 </script>
 
 <trakt-comment-input>
-  <div class="trakt-comment-reply-box" transition:slide={{ duration: 150 }}>
-    <textarea
-      bind:this={textAreaElement}
-      use:contentObserver
-      use:autoResizeArea
-      disabled={$isCommenting}
+  <div
+    class="trakt-comment-reply-box"
+    class:is-disabled={$isCommenting}
+    transition:slide={{ duration: 150 }}
+  >
+    <RichTextEditor
+      value={comment}
+      onChange={(markdown) => (comment = markdown)}
       {placeholder}
-    ></textarea>
+      label={placeholder}
+      disabled={$isCommenting}
+      autofocus
+      mentions={$mentions}
+    />
 
     <div class="trakt-comment-actions">
       <SpoilerSwitch
@@ -169,20 +169,11 @@
 
     backdrop-filter: blur(var(--ni-4));
 
-    textarea {
-      all: unset;
-      width: 100%;
-
-      &::-webkit-scrollbar-corner {
-        background-color: transparent;
-      }
-    }
-
-    &:has(textarea:focus-within) {
+    &:focus-within {
       border-color: var(--purple-500);
     }
 
-    &:has(textarea[disabled]) {
+    &.is-disabled {
       border-color: var(--color-surface-button-disabled);
     }
   }

@@ -105,6 +105,12 @@
       font-size: inherit;
     }
 
+    :global(blockquote) {
+      margin-inline: 0;
+      padding-inline-start: var(--gap-xs);
+      border-inline-start: var(--border-thickness-xs) solid var(--purple-50);
+    }
+
     :global(.trakt-comment-heading) {
       text-transform: none;
       text-decoration: underline;
