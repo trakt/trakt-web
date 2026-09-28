@@ -31,7 +31,7 @@
 <SearchResultsGrid {title} items={$list} {type}>
   {#snippet empty()}
     {#if isLoading}
-      <LoadingIndicator />
+      <LoadingIndicator size="large" />
     {/if}
   {/snippet}
 </SearchResultsGrid>

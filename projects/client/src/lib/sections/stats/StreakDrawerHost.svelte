@@ -41,7 +41,7 @@
         )}
           <div class="trakt-monthly-stat-card">
             {#if $isLoading}
-              <LoadingIndicator />
+              <LoadingIndicator size="small" />
             {:else}
               <p class="trakt-monthly-stat-value bold">
                 {format(value, languageTag())}
@@ -133,11 +133,6 @@
     border-radius: var(--border-radius-l);
     background: var(--color-card-background);
     box-shadow: var(--shadow-base);
-
-    :global(.loading-indicator svg) {
-      width: var(--ni-32);
-      height: var(--ni-32);
-    }
   }
 
   .trakt-monthly-stat-value {

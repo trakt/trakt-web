@@ -53,7 +53,7 @@
       <RenderFor audience="authenticated">
         <div class="trakt-social-activity-drawer">
           {#if $isLoading && !hasEntries}
-            <LoadingIndicator />
+            <LoadingIndicator size="large" />
           {/if}
 
           {#if !$isLoading && !hasEntries}

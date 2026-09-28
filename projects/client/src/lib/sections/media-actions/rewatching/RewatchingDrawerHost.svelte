@@ -81,7 +81,7 @@
       {/snippet}
 
       {#if isDrawerLoading}
-        <LoadingIndicator />
+        <LoadingIndicator size="large" />
       {:else}
         <GridList
           id={`rewatching-episodes-${show.slug}`}

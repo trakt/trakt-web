@@ -309,7 +309,7 @@
   >
     {#if !isLoaded}
       <div class="reorder-loading" role="status" aria-live="polite">
-        <LoadingIndicator />
+        <LoadingIndicator size="large" />
         <p class="secondary bold">{m.yir_state_loading()}</p>
       </div>
     {:else if orderedItems.length === 0}

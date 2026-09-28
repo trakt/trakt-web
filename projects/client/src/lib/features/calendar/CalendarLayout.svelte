@@ -101,7 +101,7 @@
 
   {#if isInitialLoad}
     <div class="loading-wrapper">
-      <LoadingIndicator />
+      <LoadingIndicator size="large" />
     </div>
   {:else}
     <ScrollSpy
@@ -122,7 +122,7 @@
 
     {#if isLoading}
       <div class="loading-wrapper">
-        <LoadingIndicator />
+        <LoadingIndicator size="small" />
       </div>
     {/if}
   {/if}

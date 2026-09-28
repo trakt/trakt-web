@@ -33,7 +33,7 @@
     {#if !$isLoading}
       {placeholder}
     {:else}
-      <LoadingIndicator />
+      <LoadingIndicator size="large" />
     {/if}
   {/snippet}
 </GridList>

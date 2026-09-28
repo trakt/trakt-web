@@ -3,7 +3,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
-  import BannerLoadingIndicator from "../_internal/BannerLoadingIndicator.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
   import { useYearInReview } from "./_internal/useYearInReview";
   import YearInReviewLink from "./_internal/YearInReviewLink.svelte";
@@ -48,7 +48,7 @@
       {/snippet}
 
       {#if $isLoading}
-        <BannerLoadingIndicator />
+        <LoadingIndicator size="small" />
       {:else if $review}
         <YearInReviewStats review={$review} />
       {/if}

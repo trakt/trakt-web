@@ -22,7 +22,7 @@
   <Redirect to={targetUrl} />
 {:else if $isLoading}
   <div class="trakt-direct-comment-loading">
-    <LoadingIndicator />
+    <LoadingIndicator size="large" />
   </div>
 {:else}
   <Error404Page />

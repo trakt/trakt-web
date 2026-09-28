@@ -45,7 +45,7 @@
     {#if $isFiltered && !$isLoading}
       <NoFilterResultsPlaceholder />
     {:else if $isLoading}
-      <LoadingIndicator />
+      <LoadingIndicator size="large" />
     {:else}
       <p class="secondary">
         {m.list_placeholder_from_my_history({ name })}
