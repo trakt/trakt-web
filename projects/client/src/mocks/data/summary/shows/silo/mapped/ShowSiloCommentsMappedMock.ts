@@ -19,7 +19,6 @@ export const ShowSiloCommentsMappedMock: MediaComment[] = [
       ...UserProfileHarryMappedMock,
       'stats': {
         'completedCount': 11,
-        'playCount': 11,
         'rating': null,
       },
     },

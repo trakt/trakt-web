@@ -37,7 +37,6 @@ export function mapToMediaComment(
       ...mapToUserProfile(commentResponse.user),
       stats: {
         rating: commentResponse.user_stats.rating,
-        playCount: commentResponse.user_stats.play_count,
         completedCount: commentResponse.user_stats.completed_count,
       },
     },

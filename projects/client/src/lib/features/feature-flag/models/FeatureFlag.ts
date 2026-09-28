@@ -7,7 +7,6 @@ export enum FeatureFlag {
   ParentalGuide = 'parental-guide',
   Soundtrack = 'soundtrack',
   ListCounts = 'list-counts',
-  ReviewerStats = 'reviewer-stats',
   GenrePicker = 'genre-picker',
   YouTubeSpecials = 'youtube-specials',
 }
