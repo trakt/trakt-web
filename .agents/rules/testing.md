@@ -22,8 +22,25 @@ Vitest + `@testing-library/svelte` in jsdom environment.
 
 ```bash
 deno task test:unit    # from projects/client/
-vitest                 # from projects/client/
 ```
+
+Vitest runs on Node, locally and in CI alike. Always go through the `deno task`
+scripts so both stay on the same runtime.
+
+## Shared Workers (`isolate: false`)
+
+Most spec files share one worker and module cache (the `shared` project in
+`vite.config.ts`). Any spec that calls `vi.mock` / `vi.doMock` is detected
+automatically and runs in the `isolated` project instead.
+
+- Never assign globals directly (`globalThis.x = ...`,
+  `Object.defineProperty(window, ...)`, `console.info = ...`). Use
+  `vi.stubGlobal` or `vi.spyOn(..., 'get')`, which `resetEnvironment` undoes
+  after every file.
+- Module singletons (stores, event buses) outlive the file. Reset them in
+  `beforeEach`, and don't rely on a clean slate.
+- Global module mocks belong in `vitest-setup.ts` itself, not in a module it
+  imports, otherwise they apply once per worker only.
 
 ## Testing Philosophy
 

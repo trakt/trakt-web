@@ -143,9 +143,14 @@ jobs:
         working-directory: projects/client
         run: 'deno task prebuild'
 
+      - name: Awaken the Node Ancient (Setup Node 22 for Vitest)
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
       - name: "Probe the Client's Mind aka Run Tests [${{ matrix.shard }}/4]"
         working-directory: projects/client
-        run: 'deno run -A npm:vitest --coverage --shard=${{ matrix.shard }}/4 --reporter=blob --reporter=dot --reporter=github-actions'
+        run: 'node node_modules/vitest/vitest.mjs --coverage --shard=${{ matrix.shard }}/4 --reporter=blob --reporter=dot --reporter=github-actions'
 
       - name: Sealing the Evidence aka Upload Blob Report
         uses: actions/upload-artifact@v4
@@ -222,9 +227,14 @@ jobs:
           path: projects/client/.vitest-reports
           merge-multiple: true
 
+      - name: Awaken the Node Ancient (Setup Node 22 for Vitest)
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
       - name: Merging the Testimony aka Merge Reports & Coverage
         working-directory: projects/client
-        run: 'deno run -A npm:vitest --merge-reports .vitest-reports --coverage'
+        run: 'node node_modules/vitest/vitest.mjs --merge-reports .vitest-reports --coverage'
 
       - name: Trial by Deep Source
         uses: deepsourcelabs/test-coverage-action@master

@@ -6,7 +6,7 @@ function getMockUser() {
   return isAuthorized.value ? OidcUserMock : null;
 }
 
-const mockUserManager = vi.fn(function () {
+export const UserManager = vi.fn(function () {
   return {
     getUser: vi.fn().mockResolvedValue(getMockUser()),
     signinSilent: vi.fn().mockResolvedValue(null),
@@ -22,13 +22,5 @@ const mockUserManager = vi.fn(function () {
       addSilentRenewError: vi.fn(),
       load: vi.fn().mockResolvedValue(undefined),
     },
-  };
-});
-
-vi.mock('oidc-client-ts', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('oidc-client-ts')>();
-  return {
-    ...actual,
-    UserManager: mockUserManager,
   };
 });

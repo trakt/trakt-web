@@ -58,6 +58,20 @@ const TRAKT_API_PROXY_TARGET = process.env.IS_LOCAL
 
 const IS_DOCTOR = process.env.IS_DOCTOR === 'true';
 
+const TEST_INCLUDE = [
+  'src/**/*.{test,spec}.{js,ts}',
+  '.scripts/**/*.{test,spec}.{js,ts}',
+  'i18n/**/*.{test,spec}.{js,ts}',
+];
+
+const MODULE_MOCKING_SPECS = process.env.VITEST
+  ? fs.globSync(TEST_INCLUDE, { cwd: import.meta.dirname }).filter((file) =>
+    /\bvi\.(mock|doMock)\(/.test(
+      fs.readFileSync(path.join(import.meta.dirname, file), 'utf8'),
+    )
+  )
+  : [];
+
 export default defineConfig(({ mode }) => ({
   define: {
     'TRAKT_CLIENT_ID': `"${process.env.TRAKT_CLIENT_ID}"`,
@@ -137,13 +151,26 @@ export default defineConfig(({ mode }) => ({
 
   //TODO enable globals when typings are fixed
   test: {
-    include: [
-      'src/**/*.{test,spec}.{js,ts}',
-      '.scripts/**/*.{test,spec}.{js,ts}',
-      'i18n/**/*.{test,spec}.{js,ts}',
-    ],
     environment: 'jsdom',
     setupFiles: ['./vitest-setup.ts'],
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'shared',
+          include: TEST_INCLUDE,
+          exclude: MODULE_MOCKING_SPECS,
+          isolate: false,
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'isolated',
+          include: MODULE_MOCKING_SPECS,
+        },
+      },
+    ],
     coverage: {
       provider: 'istanbul',
       reporter: ['clover', 'lcov'],

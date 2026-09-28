@@ -1,9 +1,7 @@
 import { vi } from 'vitest';
 
-vi.mock('$app/navigation', () => ({
-  goto: vi.fn(function () {
-    return Promise.resolve();
-  }),
-  beforeNavigate: vi.fn(function () {}),
-  afterNavigate: vi.fn(function () {}),
-}));
+export const goto = vi.fn(function () {
+  return Promise.resolve();
+});
+export const beforeNavigate = vi.fn(function () {});
+export const afterNavigate = vi.fn(function () {});
