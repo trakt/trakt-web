@@ -153,6 +153,7 @@ export default defineConfig(({ mode }) => ({
   test: {
     environment: 'jsdom',
     setupFiles: ['./vitest-setup.ts'],
+    experimental: { fsModuleCache: true },
     projects: [
       {
         extends: true,
