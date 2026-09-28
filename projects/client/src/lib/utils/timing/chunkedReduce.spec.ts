@@ -1,5 +1,17 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  type MockInstance,
+  vi,
+} from 'vitest';
 import { chunkedReduce } from './chunkedReduce.ts';
+
+function yieldCalls(spy: MockInstance<typeof setTimeout>) {
+  return spy.mock.calls.filter(([, delay]) => delay === 0);
+}
 
 describe('util: chunkedReduce', () => {
   it('should reduce an iterable to a single value', async () => {
@@ -44,7 +56,7 @@ describe('util: chunkedReduce', () => {
       const result = await promise;
 
       expect(result).toBe(45);
-      expect(setTimeoutSpy).toHaveBeenCalledTimes(2);
+      expect(yieldCalls(setTimeoutSpy)).toHaveLength(2);
     });
 
     it('should not yield when iterable has fewer items than chunkSize', async () => {
@@ -52,7 +64,7 @@ describe('util: chunkedReduce', () => {
 
       await chunkedReduce([1, 2, 3], (acc, n) => acc + n, 0, 100);
 
-      expect(setTimeoutSpy).not.toHaveBeenCalled();
+      expect(yieldCalls(setTimeoutSpy)).toHaveLength(0);
     });
 
     it('should prefer scheduler.yield over setTimeout when available', async () => {

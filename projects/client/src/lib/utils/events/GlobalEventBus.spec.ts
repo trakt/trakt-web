@@ -88,7 +88,7 @@ describe('GlobalEventBus', () => {
 
   it('should remove event listener when no handlers are registered', () => {
     const handler = vi.fn();
-    const eventType = 'click';
+    const eventType = 'beforeprint';
 
     const unregister = eventBus.register(eventType, handler);
     const unregister2 = eventBus.register(eventType, vi.fn());

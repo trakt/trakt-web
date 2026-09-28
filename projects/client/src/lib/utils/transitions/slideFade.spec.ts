@@ -1,8 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { slideFade, splitTransition } from './slideFade.ts';
 
 describe('transition: slideFade', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it('starts both transitions at 0', () => {
     expect(splitTransition(0)).toEqual([0, 0]);
   });
@@ -18,11 +22,11 @@ describe('transition: slideFade', () => {
   it('transitions the width correctly', () => {
     const node = { style: { opacity: '1' } } as unknown as Element;
 
-    globalThis.getComputedStyle = () => ({
+    vi.stubGlobal('getComputedStyle', () => ({
       opacity: '1',
       width: '100',
       height: '50',
-    } as CSSStyleDeclaration);
+    } as CSSStyleDeclaration));
 
     const transition = slideFade(node, { axis: 'x' });
 
@@ -37,11 +41,11 @@ describe('transition: slideFade', () => {
   it('transitions the height correctly', () => {
     const node = { style: { opacity: '1' } } as unknown as Element;
 
-    globalThis.getComputedStyle = () => ({
+    vi.stubGlobal('getComputedStyle', () => ({
       opacity: '1',
       width: '100',
       height: '50',
-    } as CSSStyleDeclaration);
+    } as CSSStyleDeclaration));
 
     const transition = slideFade(node, { axis: 'y' });
 

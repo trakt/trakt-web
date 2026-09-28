@@ -14,8 +14,7 @@ describe('monitor', () => {
   });
 
   it('should measure sync function execution time', () => {
-    const mockLog = vi.fn();
-    console.info = mockLog;
+    const mockLog = vi.spyOn(console, 'info').mockImplementation(() => {});
 
     const testFn = (x: number) => x * 2;
     const monitoredFn = monitor(testFn, 'testFn');
@@ -32,8 +31,7 @@ describe('monitor', () => {
   });
 
   it('should measure async function execution time', async () => {
-    const mockLog = vi.fn();
-    console.info = mockLog;
+    const mockLog = vi.spyOn(console, 'info').mockImplementation(() => {});
 
     const testFn = async (x: number) => {
       await new Promise((resolve) => setTimeout(resolve, 10));
@@ -53,8 +51,7 @@ describe('monitor', () => {
   });
 
   it('should preserve this context', () => {
-    const mockLog = vi.fn();
-    console.info = mockLog;
+    const mockLog = vi.spyOn(console, 'info').mockImplementation(() => {});
 
     const obj = {
       multiplier: 3,
@@ -72,8 +69,7 @@ describe('monitor', () => {
   });
 
   it('should handle function with multiple arguments', () => {
-    const mockLog = vi.fn();
-    console.info = mockLog;
+    const mockLog = vi.spyOn(console, 'info').mockImplementation(() => {});
 
     const testFn = (x: number, y: number, z: number) => x * y * z;
     const monitoredFn = monitor(testFn, 'testFn');
@@ -85,8 +81,7 @@ describe('monitor', () => {
   });
 
   it('should handle async function rejection', async () => {
-    const mockLog = vi.fn();
-    console.info = mockLog;
+    const mockLog = vi.spyOn(console, 'info').mockImplementation(() => {});
 
     const testFn = () => Promise.reject(new Error('Test error'));
     const monitoredFn = monitor(testFn, 'testFn');
@@ -101,8 +96,7 @@ describe('monitor', () => {
   });
 
   it('should preserve async function return type', async () => {
-    const mockLog = vi.fn();
-    console.info = mockLog;
+    const mockLog = vi.spyOn(console, 'info').mockImplementation(() => {});
 
     const testFn = (): Promise<string> => Promise.resolve('test');
     const monitoredFn = monitor(testFn, 'testFn');

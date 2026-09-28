@@ -1,6 +1,6 @@
 import { server } from '$mocks/server.ts';
 import { http, HttpResponse } from 'msw';
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { offlineActionsStore } from './_internal/offlineActionsStore.ts';
 import { executeOrEnqueue } from './executeOrEnqueue.ts';
 
@@ -21,6 +21,8 @@ async function drainQueue() {
 }
 
 describe('util: executeOrEnqueue', () => {
+  beforeEach(drainQueue);
+
   it('should execute right away when the request succeeds', async () => {
     const result = await addToWatchlist();
 
@@ -60,7 +62,5 @@ describe('util: executeOrEnqueue', () => {
         body: WATCHLIST_BODY,
       },
     ]);
-
-    await drainQueue();
   });
 });

@@ -1,5 +1,5 @@
 import { renderStore } from '$test/beds/store/renderStore.ts';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   POPUP_ALIGNMENT_ATTRIBUTE,
   POPUP_POSITION_ATTRIBUTE,
@@ -21,13 +21,14 @@ describe('action: usePortal', () => {
     toJSON: () => {},
   };
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   beforeEach(() => {
     vi.useFakeTimers({ toFake: ['requestAnimationFrame'] });
 
-    Object.defineProperty(window, 'innerWidth', {
-      value: popupWidth - 20,
-      configurable: true,
-    });
+    vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(popupWidth - 20);
   });
 
   it('should set the position attributes', async () => {

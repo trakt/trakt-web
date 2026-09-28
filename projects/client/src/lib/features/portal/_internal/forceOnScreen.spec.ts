@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { forceOnScreen } from './forceOnScreen.ts';
 
 describe('forceOnScreen', () => {
@@ -19,15 +19,15 @@ describe('forceOnScreen', () => {
     };
   }
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   beforeEach(() => {
     popupContainer = document.createElement('div');
     targetNode = document.createElement('div');
 
-    Object.defineProperty(globalThis.window, 'innerWidth', {
-      writable: true,
-      configurable: true,
-      value: 1920,
-    });
+    vi.spyOn(globalThis.window, 'innerWidth', 'get').mockReturnValue(1920);
   });
 
   it('should account for left overflow', () => {
