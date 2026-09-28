@@ -26,6 +26,7 @@ import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesRespo
 import { RatedSeasonsResponseMock } from '../data/users/response/RatedSeasonsResponseMock.ts';
 import { RewatchingShowsResponseMock } from '../data/users/response/RewatchingShowsResponseMock.ts';
 import { ShowActivityHistoryResponseMock } from '../data/users/response/ShowActivityHistoryResponseMock.ts';
+import { FollowingActivityResponseMock } from '$mocks/data/users/response/FollowingActivityResponseMock.ts';
 import { SocialActivityResponseMock } from '../data/users/response/SocialActivityResponseMock.ts';
 import { UserBlockedResponseMock } from '../data/users/response/UserBlockedResponseMock.ts';
 import { UserFollowersResponseMock } from '../data/users/response/UserFollowersResponseMock.ts';
@@ -137,6 +138,15 @@ export const users = [
   }),
   http.get('http://localhost/users/me/history/episodes*', () => {
     return HttpResponse.json(EpisodeActivityHistoryResponseMock);
+  }),
+  http.get('http://localhost/v3/users/me/following/activities', () => {
+    return HttpResponse.json(FollowingActivityResponseMock, {
+      headers: {
+        'X-Pagination-Page': '1',
+        'X-Pagination-Page-Count': '1',
+        'X-Pagination-Item-Count': `${FollowingActivityResponseMock.length}`,
+      },
+    });
   }),
   http.get('http://localhost/users/me/following/activities', () => {
     return HttpResponse.json(SocialActivityResponseMock);

@@ -160,6 +160,8 @@ export const UrlBuilder = {
 
   landing: () => '/',
   home: () => '/home',
+  today: () => '/today',
+  comment: (id: number) => `/comments/${id}`,
   welcome: () => '/welcome',
   shows: () => '/shows',
   discover: (params?: DiscoverUrlParams) => {

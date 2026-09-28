@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import Banner from "$lib/sections/banner/Banner.svelte";
   import DashboardDrawer from "$lib/sections/dashboard/DashboardDrawer.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
@@ -13,6 +15,8 @@
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
+  import TodayRail from "$lib/sections/today/TodayRail.svelte";
+  import TodayStoryViewerHost from "$lib/sections/today/TodayStoryViewerHost.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   // FIXME: move to PersonalHistoryList when Profile also supports discover mode
@@ -36,6 +40,13 @@
   <NavbarStateSetter contentToggle="discover" hasFilters />
 
   <Banner />
+
+  <RenderForFeature flag={FeatureFlag.TodayStory}>
+    {#snippet enabled()}
+      <TodayRail type={$mode} />
+    {/snippet}
+  </RenderForFeature>
+
   <UpNextList />
 
   <WatchList
@@ -55,4 +66,10 @@
   <ActivityList />
 
   <DashboardDrawer />
+
+  <RenderForFeature flag={FeatureFlag.TodayStory}>
+    {#snippet enabled()}
+      <TodayStoryViewerHost />
+    {/snippet}
+  </RenderForFeature>
 </TraktPage>

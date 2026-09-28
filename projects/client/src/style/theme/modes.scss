@@ -1180,3 +1180,7 @@
 [data-device='tv'] {
   @include dark-theme();
 }
+
+.trakt-today-story-viewer {
+  @include dark-theme();
+}
