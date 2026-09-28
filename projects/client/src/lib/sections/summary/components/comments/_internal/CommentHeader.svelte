@@ -1,10 +1,7 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
-  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import { getLocale } from "$lib/features/i18n/index.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaComment } from "$lib/requests/models/MediaComment.ts";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry.ts";
   import TextCardHeader from "$lib/sections/components/text-card/TextCardHeader.svelte";
@@ -14,7 +11,6 @@
   import CommentActions from "../CommentActions.svelte";
   import type { CommentTypeProps } from "../CommentsProps.ts";
   import AddReviewDrawerHost from "../drawers/AddReviewDrawerHost.svelte";
-  import CommenterRating from "./CommenterRating.svelte";
   import ReviewerStatsTag from "./ReviewerStatsTag.svelte";
 
   type CommentHeaderProps = {
@@ -29,16 +25,11 @@
   const { user } = useUser();
   const isOwnComment = $derived(comment.user.id === $user.id);
 
-  const { isEnabled } = useFeatureFlag();
-  const isReviewerStatsEnabled = $derived(
-    isEnabled(FeatureFlag.ReviewerStats),
-  );
-
   const subTitle = $derived(
     toHumanDay({
       date: comment.createdAt,
       locale: getLocale(),
-      format: $isReviewerStatsEnabled ? "short" : "long",
+      format: "short",
     }),
   );
 </script>
@@ -51,18 +42,7 @@
 
     {#snippet actions()}
       <div class="trakt-comment-header-actions">
-        <RenderForFeature flag={FeatureFlag.ReviewerStats}>
-          {#snippet enabled()}
-            <ReviewerStatsTag
-              review={comment}
-              {media}
-              isOwnReview={isOwnComment}
-              {...typeProps}
-            />
-          {/snippet}
-
-          <CommenterRating {comment} />
-        </RenderForFeature>
+        <ReviewerStatsTag review={comment} {media} {...typeProps} />
 
         <RenderFor audience="authenticated">
           <CommentActions

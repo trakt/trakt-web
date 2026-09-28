@@ -10605,14 +10605,6 @@
       "default": "Shows how many items a list holds, and how many lists a section has.",
       "description": "Description for the List Counts preview feature."
     },
-    "preview_feature_title_reviewer_stats": {
-      "default": "Reviewer Stats",
-      "description": "Title for the Reviewer Stats preview feature."
-    },
-    "preview_feature_description_reviewer_stats": {
-      "default": "Shows how much of a title a reviewer watched next to their rating.",
-      "description": "Description for the Reviewer Stats preview feature."
-    },
     "page_title_widget_background": {
       "default": "Background",
       "description": "Title for the widget background settings page."

@@ -19,7 +19,6 @@ export const MovieHereticCommentsMappedMock: MediaComment[] = [
       ...UserProfileHarryMappedMock,
       'stats': {
         'completedCount': 1,
-        'playCount': 1,
         'rating': 8,
       },
     },
