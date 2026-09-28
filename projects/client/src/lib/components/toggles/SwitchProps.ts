@@ -1,4 +1,4 @@
-import type { DpadNavigationType } from '../../features/navigation/models/DpadNavigationType.ts';
+import type { DpadNavigationType } from '$lib/features/navigation/models/DpadNavigationType.ts';
 
 export type SwitchProps = Omit<CheckboxProps, 'checked'> & {
   checked?: boolean;
