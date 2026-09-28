@@ -18,9 +18,11 @@
   const {
     onClose,
     smartListTarget,
+    docked = false,
   }: {
     onClose: () => void;
     smartListTarget?: ListTarget | Nil;
+    docked?: boolean;
   } = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -30,7 +32,13 @@
   const { hasActiveFilter } = useFilter();
   const { setDocked } = useFilterSidebar();
 
+  const isDocked = $derived(docked && !$isMobile);
+
   $effect(() => {
+    if (!docked) {
+      return;
+    }
+
     setDocked(!$isMobile);
 
     return () => setDocked(false);
@@ -84,8 +92,8 @@
   title={m.header_filters()}
   trapSelector=".trakt-filter"
   size="auto"
-  dismissal={$isMobile ? "auto" : "escape-only"}
-  close={$isMobile ? "default" : "anchored"}
+  dismissal={isDocked ? "escape-only" : "auto"}
+  close={isDocked ? "anchored" : "default"}
 >
   <FilterTabs activeMode={$activeMode} {setActiveMode} />
 

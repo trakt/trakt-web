@@ -7,15 +7,18 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
   import { useFilterSidebar } from "$lib/stores/useFilterSidebar.ts";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import FilterSidebarClose from "./_internal/FilterSidebarClose.svelte";
   import FilterSidebar from "./FilterSidebar.svelte";
 
   const {
     isDisabled,
     smartListTarget,
+    docked = false,
   }: {
     isDisabled: boolean;
     smartListTarget?: ListTarget | Nil;
+    docked?: boolean;
   } = $props();
 
   const { hasActiveFilter, activeFilterCount } = useFilter();
@@ -26,7 +29,32 @@
 
   const count = $derived($activeFilterCount);
 
-  const { isOpen, isDocked, close, toggle } = useFilterSidebar();
+  const {
+    isOpen: isSharedOpen,
+    isDocked,
+    close: closeShared,
+    toggle: toggleShared,
+  } = useFilterSidebar();
+  const isLocalOpen = writable(false);
+
+  const isOpen = $derived(docked ? $isSharedOpen : $isLocalOpen);
+  const isReplaced = $derived(docked && $isDocked);
+
+  const toggle = () => {
+    if (docked) {
+      return toggleShared();
+    }
+
+    isLocalOpen.set(!$isLocalOpen);
+  };
+
+  const close = () => {
+    if (docked) {
+      return closeShared();
+    }
+
+    isLocalOpen.set(false);
+  };
 
   let buttonElement = $state<HTMLElement | undefined>();
 </script>
@@ -35,26 +63,26 @@
   <div class="filter-button-wrapper" bind:this={buttonElement}>
     <ActionButton
       style="ghost"
-      label={$isOpen ? m.button_label_close() : m.button_label_filters()}
+      label={isOpen ? m.button_label_close() : m.button_label_filters()}
       disabled={isDisabled}
       navigationType={DpadNavigationType.Item}
       onclick={toggle}
       --color-background-custom="transparent"
       --color-foreground-custom="var(--color-foreground)"
     >
-      <span class="filter-button-icon" class:is-replaced={$isDocked}>
+      <span class="filter-button-icon" class:is-replaced={isReplaced}>
         <FilterIcon state={filteredState} />
       </span>
     </ActionButton>
     {#if count > 0}
-      <span class="filter-count-anchor" class:is-replaced={$isDocked}>
+      <span class="filter-count-anchor" class:is-replaced={isReplaced}>
         <CountBadge {count} />
       </span>
     {/if}
   </div>
 </div>
 
-{#if !isDisabled}
+{#if docked && !isDisabled}
   <FilterSidebarClose
     anchor={buttonElement}
     isVisible={$isDocked}
@@ -62,8 +90,8 @@
   />
 {/if}
 
-{#if $isOpen && !isDisabled}
-  <FilterSidebar onClose={close} {smartListTarget} />
+{#if isOpen && !isDisabled}
+  <FilterSidebar onClose={close} {docked} {smartListTarget} />
 {/if}
 
 <style lang="scss">

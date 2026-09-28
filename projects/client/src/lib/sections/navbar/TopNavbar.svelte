@@ -51,6 +51,7 @@
               <FilterButton
                 isDisabled={!$state.hasFilters}
                 smartListTarget={$state.smartListTarget}
+                docked
               />
             {/if}
           {/if}
