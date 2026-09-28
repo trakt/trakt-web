@@ -26,6 +26,7 @@ type UseListItemsProps = PaginationParams & FilterParams & {
   type?: DiscoverMode;
   sortBy?: SortBy | Nil;
   sortHow?: SortDirection | Nil;
+  terms?: string | Nil;
 };
 
 // FIXME: remove when official lists are sluggable
@@ -43,7 +44,8 @@ function mapListParamsToQueryParams(list: ListParams) {
 }
 
 function listToQuery(
-  { list, limit, type, page, filter, sortBy, sortHow }: UseListItemsProps,
+  { list, limit, type, page, filter, sortBy, sortHow, terms }:
+    UseListItemsProps,
 ) {
   const commonParams = {
     type: type === 'media' ? undefined : type,
@@ -60,6 +62,7 @@ function listToQuery(
       ...commonParams,
       userId: params.userId,
       listId: params.listId,
+      terms,
     });
   }
 

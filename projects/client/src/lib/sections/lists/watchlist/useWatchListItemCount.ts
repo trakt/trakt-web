@@ -9,7 +9,8 @@ export function useWatchListItemCount(
 
   const hasFilters = Object.keys(props.filter ?? {}).length > 0;
 
-  if (props.intent === 'start' || hasFilters) {
+  // The cached watchlist sets only know the whole list, not a narrowed one.
+  if (props.intent === 'start' || hasFilters || props.terms) {
     return { itemCount: of(undefined) };
   }
 

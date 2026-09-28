@@ -9,10 +9,16 @@
   import ListReorderDrawer from "$lib/sections/lists/user/ListReorderDrawer.svelte";
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting.ts";
   import ListReorderButton from "$lib/sections/lists/user/ListReorderButton.svelte";
+  import ListSearchButton from "$lib/sections/lists/user/ListSearchButton.svelte";
+  import ListSearchInput from "$lib/sections/lists/user/ListSearchInput.svelte";
+  import ListSearchLayout from "$lib/sections/lists/user/ListSearchLayout.svelte";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
+  import type { ListSearchCopy } from "$lib/sections/lists/user/models/ListSearchCopy.ts";
+  import { useListSearch } from "$lib/sections/lists/user/useListSearch.svelte.ts";
   import { useWatchListItemCount } from "$lib/sections/lists/watchlist/useWatchListItemCount.ts";
   import WatchlistPaginatedList from "$lib/sections/lists/watchlist/WatchlistPaginatedList.svelte";
   import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants.ts";
 
@@ -24,6 +30,19 @@
     intent: "default",
   });
 
+  const search = useListSearch();
+  const searchCopy: ListSearchCopy = {
+    toggle: m.button_label_search_list_items(),
+    label: m.input_label_search_list_items(),
+    placeholder: m.input_placeholder_search_list_items(),
+  };
+
+  // Desktop hosts the search field inside the navbar's content toggle, the
+  // same panel the search page uses. Smaller screens hide that toggle, so
+  // they get the standalone field above the items instead.
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const hasSearchExtension = $derived(search.isOpen && $isDesktop);
+
   const { itemCount } = $derived(
     useWatchListItemCount({
       intent: "default",
@@ -32,11 +51,16 @@
       sortBy: $current.sorting.value,
       sortHow: $current.sortHow,
       limit: DEFAULT_DRILL_SIZE,
+      terms: search.filter,
     }),
   );
 
   let showReorderList = $state(false);
 </script>
+
+{#snippet listSearchExtension()}
+  <ListSearchInput {search} copy={searchCopy} variant="embedded" />
+{/snippet}
 
 {#snippet listMetaInfo()}
   <ListMeta
@@ -70,6 +94,7 @@
   <TraktPageCoverSetter />
 
   <ResponsiveNavbarStateSetter contentToggle="discover"
+    contentToggleExtension={hasSearchExtension ? listSearchExtension : null}
     hasFilters
     header={{
       title: m.list_title_watchlist(),
@@ -78,19 +103,28 @@
     }}
   >
     {#snippet headerActions()}
+      <ListSearchButton
+        copy={searchCopy}
+        isActive={search.isOpen}
+        onclick={search.toggle}
+      />
       <ListSortActions
         {options}
-        {urlBuilder}
+        urlBuilder={(sortParams) =>
+          urlBuilder({ ...sortParams, terms: search.filter })}
         current={$current}
       />
     {/snippet}
   </ResponsiveNavbarStateSetter>
 
-  <WatchlistPaginatedList
-    type={$mode}
-    sortBy={$current.sorting.value}
-    sortHow={$current.sortHow}
-  />
+  <ListSearchLayout {search} copy={searchCopy} isEmbedded={$isDesktop}>
+    <WatchlistPaginatedList
+      type={$mode}
+      sortBy={$current.sorting.value}
+      sortHow={$current.sortHow}
+      searchTerm={search.filter}
+    />
+  </ListSearchLayout>
 </TraktPage>
 
 {#if showReorderList}

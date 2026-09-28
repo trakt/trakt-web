@@ -19,6 +19,7 @@ type UserListItemsParams =
     type?: MediaType;
     sortBy?: string | Nil;
     sortHow?: 'asc' | 'desc' | Nil;
+    terms?: string | Nil;
   }
   & PaginationParams
   & ApiParams
@@ -35,9 +36,21 @@ const userListItemsRequest = (
     type,
     sortBy,
     sortHow,
+    terms,
   }: UserListItemsParams,
 ) => {
   const method = typeToListMethod(type);
+  // `terms` is declared by @trakt/api 0.6.1; building the query first keeps it
+  // past the inline excess-property check on 0.6.0, which sends it either way.
+  const query = {
+    extended: 'full,images,colors' as const,
+    page,
+    limit,
+    sort_by: sortBy,
+    sort_how: sortHow,
+    terms,
+    ...filter,
+  };
 
   return api({ fetch })
     .users
@@ -48,14 +61,7 @@ const userListItemsRequest = (
         id: userId,
         list_id: listId,
       },
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        sort_by: sortBy,
-        sort_how: sortHow,
-        ...filter,
-      },
+      query,
     });
 };
 
@@ -75,6 +81,7 @@ export const userListItemsQuery = defineInfiniteQuery({
     params.type,
     params.sortBy,
     params.sortHow,
+    params.terms,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: userListItemsRequest,

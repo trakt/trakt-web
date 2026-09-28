@@ -22,6 +22,7 @@ export type WatchListStoreProps = PaginationParams & FilterParams & {
   sortHow?: SortDirection;
   limit?: number;
   intent?: WatchListIntent;
+  terms?: string | Nil;
 };
 
 export function useWatchList(params: WatchListStoreProps) {
@@ -36,6 +37,7 @@ export function useWatchList(params: WatchListStoreProps) {
         sortHow: params.sortHow ?? 'desc',
         filter: params.filter,
         hide: params.intent === 'start' ? 'unreleased' : undefined,
+        terms: params.terms,
       }),
     );
 

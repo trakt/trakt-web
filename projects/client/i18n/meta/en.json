@@ -811,6 +811,22 @@
       "default": "No lists match your search.",
       "description": "Placeholder text shown on the personal lists page when no lists match the search term."
     },
+    "input_label_search_list_items": {
+      "default": "Search titles",
+      "description": "Aria-label for the search input on a list or watchlist page, which filters its items by title."
+    },
+    "input_placeholder_search_list_items": {
+      "default": "Search titles...",
+      "description": "Placeholder text for the search input on a list or watchlist page, which filters its items by title."
+    },
+    "button_label_search_list_items": {
+      "default": "Search titles",
+      "description": "Aria-label for the button on a list or watchlist page that shows or hides the title search input."
+    },
+    "list_placeholder_no_matching_list_items": {
+      "default": "No titles match your search.",
+      "description": "Placeholder text shown on a list or watchlist page when no items match the search term."
+    },
     "button_label_toggle_streaming_countries": {
       "default": "Toggle countries for {service}",
       "description": "Aria-label for the button that expands or collapses the list of countries a streaming service is available in."

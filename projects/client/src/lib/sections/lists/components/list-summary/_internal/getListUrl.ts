@@ -21,12 +21,14 @@ type ListProps = {
 type ListUrlProps = {
   sortBy?: SortBy;
   sortHow?: SortDirection;
+  terms?: string;
 } & ListProps;
 
 export function getListUrl(props: ListUrlProps) {
   const params: Record<string, string> = {};
   if (props?.sortBy) params.sort_by = props.sortBy;
   if (props?.sortHow) params.sort_how = props.sortHow;
+  if (props?.terms) params.terms = props.terms;
 
   switch (props.type) {
     case 'watchlist':

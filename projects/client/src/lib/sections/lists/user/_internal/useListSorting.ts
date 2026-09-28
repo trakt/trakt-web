@@ -112,13 +112,14 @@ export function useListSorting(
         };
       }),
     ),
-    urlBuilder: ({ sortBy, sortHow }: ListUrlBuilderParams) => {
+    urlBuilder: ({ sortBy, sortHow, terms }: ListUrlBuilderParams) => {
       if (props.type === 'watchlist') {
         return getListUrl({
           type: 'watchlist',
           intent: props.intent,
           sortBy,
           sortHow,
+          terms,
         });
       }
 
@@ -150,6 +151,7 @@ export function useListSorting(
         list,
         sortBy,
         sortHow,
+        terms,
       });
     },
   };

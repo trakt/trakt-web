@@ -2,6 +2,7 @@
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import SortValue from "./_internal/SortValue.svelte";
@@ -13,9 +14,12 @@
   type UserListProps = {
     type?: DiscoverMode;
     list: MediaListSummary;
+    searchTerm?: string | Nil;
   } & ListSortProps;
 
-  const { type, list, sortBy, sortHow }: UserListProps = $props();
+  const { type, list, sortBy, sortHow, searchTerm }: UserListProps = $props();
+
+  const terms = $derived(searchTerm?.trim() || undefined);
 
   const { filterMap } = useFilter();
   const sort = $derived(useSort(sortBy));
@@ -40,10 +44,17 @@
       list,
       sortBy,
       sortHow,
+      terms,
       ...params,
     })}
   groupBy={sort.groupBy}
 >
+  {#snippet empty()}
+    {#if terms}
+      <p class="secondary">{m.list_placeholder_no_matching_list_items()}</p>
+    {/if}
+  {/snippet}
+
   {#snippet listActions()}
     <div class="trakt-list-actions">
       {#if list.description}
