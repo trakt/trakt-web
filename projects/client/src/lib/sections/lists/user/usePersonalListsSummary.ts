@@ -10,6 +10,7 @@ import { DEFAULT_LISTS_PAGE_SIZE } from '../../../utils/constants.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 import type { PersonalListType } from './models/PersonalListType.ts';
 import type { SortDirection } from './models/SortDirection.ts';
+import { defaultDirection } from './defaultDirection.ts';
 
 type PersonalListsParams = {
   type: PersonalListType;
@@ -26,6 +27,10 @@ function sortByUpdatedAt(
     const diff = a.updatedAt.getTime() - b.updatedAt.getTime();
     return sortHow === 'asc' ? diff : -diff;
   });
+}
+
+function defaultSortBy(type: PersonalListType): UserListsSortBy {
+  return type === 'personal' ? 'rank' : 'updated_at';
 }
 
 function typeToQuery(
@@ -59,8 +64,8 @@ export function usePersonalListsSummary(
     sortHow,
   }: PersonalListsParams,
 ) {
-  const resolvedSortBy = sortBy ?? 'updated_at';
-  const resolvedSortHow = sortHow ?? 'desc';
+  const resolvedSortBy = sortBy ?? defaultSortBy(type);
+  const resolvedSortHow = sortHow ?? defaultDirection(resolvedSortBy);
   const { list, ...rest } = usePaginatedListQuery(
     typeToQuery({
       type,
