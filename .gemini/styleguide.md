@@ -395,6 +395,11 @@ export function actionName(node: HTMLElement, params?: ActionParams) {
 <Button onclick={handleClick} label={label} />
 ```
 
+#### One Implementation per Control
+A new look for an existing control is a variant of it, never a copied component.
+Shared markup and behaviour live in one `_internal/` base that each look renders
+through. See `.agents/rules/components.md` for the rationale.
+
 #### Type Guards
 ```typescript
 if (props.type === 'episode') {

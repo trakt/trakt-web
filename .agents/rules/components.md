@@ -239,6 +239,32 @@ reused across the app should not.
 
 ---
 
+## One Implementation per Control
+
+A new look for an existing control is a variant of that control, never a copy of
+it. Forking `Switch.svelte` into a second component duplicates the markup, the
+input wiring and the state rules, and every later fix has to land twice.
+
+Put the shared markup and behaviour in one base under `_internal/` and render
+each look through a variant. A public wrapper per look is fine when the looks
+need different props (e.g. a narrower `SwitchProps` so settings cannot pass an
+icon), as long as the wrapper only forwards to the base.
+
+```svelte
+<!-- Bad - NoveltySwitch.svelte copies Switch.svelte and restyles it -->
+<label class="trakt-novelty-switch">
+  <input type="checkbox" role="switch" {...props} />
+  ...
+</label>
+
+<!-- Good - both wrappers forward to the one base -->
+<SwitchBase variant="novelty" {color} {...props} />
+```
+
+Reference: `lib/components/toggles/_internal/SwitchBase.svelte`.
+
+---
+
 ## Provider Pattern
 
 Feature providers are thin shells calling a context factory from `_internal/`.
@@ -873,6 +899,8 @@ element before rejecting so a presence check cannot block a retry.
 - [ ] `{#each}` keys are stable identifiers - never translated text, formatted
       values, or any other rendered string
 - [ ] Primitives extended with a `Snippet` slot, not a domain-shaped prop
+- [ ] A new look for an existing control is a variant of its one base, not a
+      copied component
 - [ ] Shared components styled via their props / CSS variable hooks, not
       `:global()` overrides from the consumer
 - [ ] Props type file created for components with 3+ props
