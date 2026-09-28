@@ -40,23 +40,24 @@
 
   const isLoading = $derived($isLoadingIds || $isLoadingLists);
   const isEmpty = $derived($lists.length === 0);
+  const hasItems = $derived(
+    target.type === "movie" || target.type === "show" || sortedLists.length > 0,
+  );
 </script>
 
 <Drawer {onClose} title={m.header_manage_lists()} {metaInfo}>
   <div class="lists-layout">
-    <DropdownGroup>
-      {#if target.type === "movie" || target.type === "show"}
-        <WatchlistDropdownItem
-          media={target.media}
-          type={target.type}
-          {title}
-          {onLoading}
-        />
-      {/if}
+    {#if hasItems}
+      <DropdownGroup>
+        {#if target.type === "movie" || target.type === "show"}
+          <WatchlistDropdownItem
+            media={target.media}
+            type={target.type}
+            {title}
+            {onLoading}
+          />
+        {/if}
 
-      {#if isEmpty && isLoading}
-        <LoadingIndicator />
-      {:else}
         {#each sortedLists as list (list.id)}
           <ListDropdownItem
             {title}
@@ -66,13 +67,21 @@
             isListed={listedOnIdsSet.has(list.id)}
           />
         {/each}
-      {/if}
-    </DropdownGroup>
+      </DropdownGroup>
+    {/if}
+
+    {#if isEmpty && isLoading}
+      <LoadingIndicator size="small" />
+    {/if}
   </div>
 </Drawer>
 
 <style>
   .lists-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+
     --dropdown-item-direction: row-reverse;
     --dropdown-item-justify: space-between;
   }

@@ -197,7 +197,7 @@
 
             {#if category.isLoading}
               <div class="card-loading">
-                <LoadingIndicator />
+                <LoadingIndicator size="small" />
               </div>
             {:else}
               <div class="duplicate-hero">

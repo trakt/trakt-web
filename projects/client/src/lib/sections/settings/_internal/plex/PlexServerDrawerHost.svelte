@@ -142,7 +142,7 @@
   <SettingsGroupCard variant="bare">
     {#if $isLoadingAccounts}
       <div class="loading-container">
-        <LoadingIndicator />
+        <LoadingIndicator size="small" />
       </div>
     {:else if $accountsError}
       <SyncLoadError

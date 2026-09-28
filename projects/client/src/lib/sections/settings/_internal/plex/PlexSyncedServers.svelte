@@ -166,7 +166,7 @@
       {:else}
         {#if serversState === "loading"}
           <div class="loading-container">
-            <LoadingIndicator />
+            <LoadingIndicator size="small" />
           </div>
         {:else if serversState === "loaded"}
           <SettingsHighlightCard

@@ -73,7 +73,7 @@
       <RenderFor audience="authenticated">
         <div class="trakt-media-watch-history">
           {#if $isLoading && !hasHistory}
-            <LoadingIndicator />
+            <LoadingIndicator size="large" />
           {/if}
 
           {#if !$isLoading && !hasHistory}

@@ -114,7 +114,7 @@
     </DrawerTabTitle>
 
     {#if $isLoading}
-      <LoadingIndicator />
+      <LoadingIndicator size="large" />
     {:else}
       <GridList
         id={`season-episodes-${show.slug}-${currentSeason}`}

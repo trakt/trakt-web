@@ -20,6 +20,8 @@
     }),
   );
 
+  const loaderSize = $derived($list.length > 0 ? "small" : "large");
+
   const loadMore = () => {
     if ($hasNextPage && !$isLoading) {
       fetchNextPage();
@@ -41,5 +43,5 @@
 </div>
 
 {#if $isLoading}
-  <LoadingIndicator />
+  <LoadingIndicator size={loaderSize} />
 {/if}

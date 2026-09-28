@@ -19,7 +19,7 @@
 
 <Drawer {onClose} title={m.drawer_title_notes()} {badge}>
   {#if $isLoading}
-    <LoadingIndicator />
+    <LoadingIndicator size="large" />
   {:else}
     <Notes notes={$notes} {media} />
   {/if}

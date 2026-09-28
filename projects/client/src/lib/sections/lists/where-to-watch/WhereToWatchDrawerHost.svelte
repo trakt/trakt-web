@@ -151,7 +151,7 @@
   </div>
 
   {#if $isLoading}
-    <LoadingIndicator />
+    <LoadingIndicator size="large" />
   {/if}
 
   {#if !$isLoading && !hasAnyResults}

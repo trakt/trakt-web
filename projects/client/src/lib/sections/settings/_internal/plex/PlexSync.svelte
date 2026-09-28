@@ -52,7 +52,7 @@
   <SettingsGroupCard>
     {#if $isConnected === null}
       <div class="loading-container">
-        <LoadingIndicator />
+        <LoadingIndicator size="small" />
       </div>
     {:else}
       <SettingsGroupRow

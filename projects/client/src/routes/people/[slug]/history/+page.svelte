@@ -29,7 +29,7 @@
   />
 
   {#if $isLoading || !$person}
-    <LoadingIndicator />
+    <LoadingIndicator size="large" />
   {:else}
     <CreditsHistoryPaginatedList slug={params.slug} name={$person.name} />
   {/if}
