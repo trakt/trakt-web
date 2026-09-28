@@ -10633,6 +10633,329 @@
       "default": "Adds free YouTube uploads of stand-up specials to Where to watch on movie pages.",
       "description": "Description for the YouTube specials preview feature."
     },
+    "preview_feature_title_today_story": {
+      "default": "Today",
+      "description": "Product feature name for the preview feature that shows today's activity of followed people and new items as stories."
+    },
+    "preview_feature_description_today_story": {
+      "default": "See what the people you follow watched and rated today, and what's new for you, as stories on the home page.",
+      "description": "Description for the Today preview feature."
+    },
+    "list_title_today": {
+      "default": "Today",
+      "description": "Title of the home page row with today's stories. This should be as short as possible."
+    },
+    "button_label_view_all_today": {
+      "default": "View everything from today",
+      "description": "Aria-label for the link that opens the Today page with all of today's activity."
+    },
+    "page_title_today": {
+      "default": "Today",
+      "description": "Page title of the Today page."
+    },
+    "text_today_for_you": {
+      "default": "For you",
+      "description": "Label for the story and section with new episodes and releases for the current user."
+    },
+    "text_today_from_friends": {
+      "default": "From people you follow",
+      "description": "Section title for today's activity of the people the user follows."
+    },
+    "tag_text_today_new_episode": {
+      "default": "New in Up Next",
+      "description": "Tag for an episode that aired today and is next in the user's Up Next."
+    },
+    "tag_text_today_released": {
+      "default": "Released today",
+      "description": "Tag for a watchlist movie or show that was released today."
+    },
+    "text_today_friends_watched": {
+      "default": "{count} people you follow were on this",
+      "description": "Headline when several people the user follows watched, rated or commented on a title in the last 24 hours.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_today_friends_other": {
+      "default": "{count} friends",
+      "description": "Count of several followed people active on a title today.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_today_titles_one": {
+      "default": "1 title",
+      "description": "Count of exactly one title a followed person was active on during the chosen day."
+    },
+    "text_today_titles_other": {
+      "default": "{count} titles",
+      "description": "Count of several titles a followed person was active on during the chosen day.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_today_watched_at": {
+      "default": "Watched · {time}",
+      "description": "When a followed person watched a movie in the last 24 hours. The time is a clock time, or a day and a clock time.",
+      "variables": {
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_watched_episode_at": {
+      "default": "Watched {episode} · {time}",
+      "description": "When a followed person watched an episode in the last 24 hours. The episode is a season and episode number, the time is a clock time, or a day and a clock time.",
+      "variables": {
+        "episode": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_day_time": {
+      "default": "{day}, {time}",
+      "description": "A relative day (for example yesterday) followed by a clock time.",
+      "variables": {
+        "day": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_watched_episodes_at": {
+      "default": "Watched {count} episodes · {time}",
+      "description": "When a followed person watched several episodes of a show in the last 24 hours. The time is of the latest one.",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_rated_at": {
+      "default": "Rated · {time}",
+      "description": "When a followed person rated a movie or show in the last 24 hours.",
+      "variables": {
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_rated_item_at": {
+      "default": "Rated {item} · {time}",
+      "description": "When a followed person rated a season or episode. The item is a season or episode label.",
+      "variables": {
+        "item": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_commented_at": {
+      "default": "Commented · {time}",
+      "description": "When a followed person commented on a movie or show in the last 24 hours.",
+      "variables": {
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_commented_item_at": {
+      "default": "Commented on {item} · {time}",
+      "description": "When a followed person commented on a season or episode. The item is a season or episode label.",
+      "variables": {
+        "item": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_reviewed_at": {
+      "default": "Reviewed · {time}",
+      "description": "When a followed person wrote a review in the last 24 hours.",
+      "variables": {
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_counter_comments": {
+      "default": "Friend comments",
+      "description": "Label of the counter with how many comments followed people wrote in the last 24 hours."
+    },
+    "option_text_today_comments": {
+      "default": "Comments",
+      "description": "Filter option on the Today page that shows what followed people commented."
+    },
+    "button_label_open_comment": {
+      "default": "Open the comment",
+      "description": "Aria-label for the comment in the story viewer that opens the full comment."
+    },
+    "label_today_day": {
+      "default": "Choose a day",
+      "description": "Accessible name of the weekday options on the Today page."
+    },
+    "text_today_empty_day": {
+      "default": "Nothing from the people you follow on this day.",
+      "description": "Shown on the Today page when an earlier day has no activity."
+    },
+    "text_today_empty": {
+      "default": "Nothing new in the last 24 hours. Check back later.",
+      "description": "Shown on the Today page when there is no activity in the last 24 hours."
+    },
+    "text_today_story_position": {
+      "default": "{current} of {total}",
+      "description": "Position of the current story in the story viewer.",
+      "variables": {
+        "current": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "option_text_today_all": {
+      "default": "All",
+      "description": "Filter option on the Today page that shows everything."
+    },
+    "option_text_today_for_you": {
+      "default": "For you",
+      "description": "Filter option on the Today page that shows only new items for the user."
+    },
+    "option_text_today_watched": {
+      "default": "Watched",
+      "description": "Filter option on the Today page that shows what followed people watched."
+    },
+    "option_text_today_rated": {
+      "default": "Rated",
+      "description": "Filter option on the Today page that shows what followed people rated."
+    },
+    "option_text_today_by_title": {
+      "default": "By title",
+      "description": "Option on the Today page that groups activity by movie or show."
+    },
+    "option_text_today_by_person": {
+      "default": "By person",
+      "description": "Option on the Today page that groups activity by followed person."
+    },
+    "label_today_filter": {
+      "default": "Filter today's activity",
+      "description": "Accessible name of the filter options on the Today page."
+    },
+    "label_today_grouping": {
+      "default": "Group today's activity",
+      "description": "Accessible name of the grouping options on the Today page."
+    },
+    "text_today_counter_for_you": {
+      "default": "New for you",
+      "description": "Label of the counter with new episodes and releases for the user today."
+    },
+    "text_today_counter_watches": {
+      "default": "Friend watches",
+      "description": "Label of the counter with how many watches followed people made today."
+    },
+    "text_today_counter_ratings": {
+      "default": "Friend ratings",
+      "description": "Label of the counter with how many ratings followed people gave today."
+    },
+    "button_text_play_all_stories": {
+      "default": "Play all",
+      "description": "Button that plays all of today's stories. This should be as short as possible."
+    },
+    "button_label_play_all_stories": {
+      "default": "Play all of today's stories",
+      "description": "Aria-label for the button that plays all of today's stories."
+    },
+    "button_text_play_story": {
+      "default": "Play story",
+      "description": "Button that plays the story of one title or person."
+    },
+    "button_label_play_story": {
+      "default": "Play the story for {title}",
+      "description": "Aria-label for the button that plays the story of one title or person.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_open_story": {
+      "default": "Open the story for {title}",
+      "description": "Aria-label for a story bubble in the Today row.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_previous_story": {
+      "default": "Previous story",
+      "description": "Aria-label for the area that goes to the previous story."
+    },
+    "button_label_next_story": {
+      "default": "Next story",
+      "description": "Aria-label for the area that goes to the next story."
+    },
+    "button_label_close_stories": {
+      "default": "Close stories",
+      "description": "Aria-label for the button that closes the story viewer."
+    },
+    "button_label_show_details": {
+      "default": "Show details",
+      "description": "Aria-label for the area in the story viewer that flips the poster to show ratings, overview and sentiment."
+    },
+    "button_label_hide_details": {
+      "default": "Hide details",
+      "description": "Aria-label for the area in the story viewer that flips the poster back."
+    },
+    "tag_text_today_started_show": {
+      "default": "Started the show",
+      "description": "Tag when a followed person watched the first episode of a show."
+    },
+    "tag_text_today_started_season": {
+      "default": "Started season {season}",
+      "description": "Tag when a followed person watched a season premiere.",
+      "variables": {
+        "season": {
+          "type": "number"
+        }
+      }
+    },
+    "tag_text_today_finished_season": {
+      "default": "Finished season {season}",
+      "description": "Tag when a followed person watched a season finale.",
+      "variables": {
+        "season": {
+          "type": "number"
+        }
+      }
+    },
+    "tag_text_today_finished_show": {
+      "default": "Finished the show",
+      "description": "Tag when a followed person watched the series finale of a show."
+    },
+    "button_label_today_list": {
+      "default": "Show today as a list",
+      "description": "Aria-label for the button in the story viewer that opens the Today page."
+    },
     "preview_feature_title_genre_picker": {
       "default": "Genre Picker",
       "description": "Title for the Genre Picker preview feature."

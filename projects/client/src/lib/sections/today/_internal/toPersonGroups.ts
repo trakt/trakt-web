@@ -1,0 +1,35 @@
+import type { TodayPersonAction } from '../models/TodayPersonAction.ts';
+import type { TodayPersonGroup } from '../models/TodayPersonGroup.ts';
+import type { TodayTitleStory } from '../models/TodayTitleStory.ts';
+import { byMostRecent } from './byMostRecent.ts';
+
+export function toPersonGroups(
+  stories: ReadonlyArray<TodayTitleStory>,
+): TodayPersonGroup[] {
+  const byPerson = stories
+    .flatMap((story) =>
+      story.actions.map((action): TodayPersonAction => ({
+        ...action,
+        media: story.media,
+      }))
+    )
+    .reduce((groups, action) => {
+      const actions = groups.get(action.user.key)?.actions ?? [];
+      return groups.set(action.user.key, {
+        user: action.user,
+        actions: [...actions, action],
+      });
+    }, new Map<string, Pick<TodayPersonGroup, 'user' | 'actions'>>());
+
+  return Array.from(byPerson.entries())
+    .map(([key, group]) => {
+      const actions = group.actions.toSorted(byMostRecent);
+      return {
+        key,
+        user: group.user,
+        actions,
+        latestAt: actions.at(0)?.activityAt ?? new Date(0),
+      };
+    })
+    .toSorted((a, b) => b.latestAt.getTime() - a.latestAt.getTime());
+}

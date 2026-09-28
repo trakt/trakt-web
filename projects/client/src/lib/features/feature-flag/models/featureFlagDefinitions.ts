@@ -1,3 +1,4 @@
+import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
@@ -108,5 +109,16 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-09-26'),
     description: () => m.preview_feature_description_youtube_specials(),
     audience: 'director',
+  },
+  [FeatureFlag.TodayStory]: {
+    icon: CalendarIcon,
+    title: () => m.preview_feature_title_today_story(),
+    addedAt: new Date('2026-09-29'),
+    description: () => m.preview_feature_description_today_story(),
+    featureLink: () =>
+      openFeatureLink(
+        UrlBuilder.today(),
+        m.preview_feature_title_today_story(),
+      ),
   },
 };
