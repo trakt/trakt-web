@@ -3,7 +3,15 @@ import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/Sh
 import { renderStore } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import type { Subscription } from 'rxjs';
-import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 import { useSearch } from './useSearch.ts';
 
 const { trackSpy } = vi.hoisted(() => ({ trackSpy: vi.fn() }));
@@ -11,6 +19,14 @@ const { trackSpy } = vi.hoisted(() => ({ trackSpy: vi.fn() }));
 vi.mock('../analytics/useTrack.ts', () => ({
   useTrack: () => ({ track: trackSpy }),
 }));
+
+beforeAll(() => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+});
+
+afterAll(() => {
+  vi.useRealTimers();
+});
 
 describe('useSearch', () => {
   it('should initialize with empty results', async () => {
@@ -63,10 +79,7 @@ describe('useSearch', () => {
    */
 });
 
-// Real timers: rxjs captures its own scheduler, so vitest's fake timers do not
-// drive `debounceTime` here. Waits are kept just past the tracking debounce.
-const settle = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+const settle = (ms: number) => vi.advanceTimersByTimeAsync(ms);
 
 describe('useSearch: tracking volume', () => {
   const subscriptions: Subscription[] = [];
