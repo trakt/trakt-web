@@ -3,7 +3,7 @@ import { UpNextResponseMock } from '$mocks/data/sync/response/UpNextResponseMock
 import { server } from '$mocks/server.ts';
 import type { ProgressEntry } from '$lib/requests/models/ProgressEntry.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import type { UpNextResponse } from '@trakt/api';
 import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, it } from 'vitest';

@@ -1,6 +1,6 @@
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { useIsFollowing } from './useIsFollowing.ts';
 

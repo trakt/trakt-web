@@ -3,7 +3,8 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
-import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';

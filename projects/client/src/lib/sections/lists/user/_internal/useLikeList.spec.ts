@@ -1,6 +1,7 @@
 import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
 import { captureRequests } from '$test/beds/request/captureRequests.ts';
-import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it } from 'vitest';

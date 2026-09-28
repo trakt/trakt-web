@@ -2,7 +2,7 @@ import { ExtendedUserMappedMock } from '$mocks/data/users/mapped/ExtendedUserSet
 import { UserFavoritedMappedMock } from '$mocks/data/users/mapped/UserFavoritedMappedMock.ts';
 import { UserRatedMappedMock } from '$mocks/data/users/mapped/UserRatedMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { useUser } from './useUser.ts';
 

@@ -1,7 +1,8 @@
 import { time } from '$lib/utils/timing/time.ts';
 import { OidcUserMock } from '$mocks/data/auth/OidcUserMock.ts';
 import UserManagerTestBed from '$test/beds/auth/UserManagerTestBed.svelte';
-import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { render } from '@testing-library/svelte';
 import { BehaviorSubject } from 'rxjs';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';

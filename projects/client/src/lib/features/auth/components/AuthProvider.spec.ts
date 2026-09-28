@@ -1,4 +1,5 @@
-import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { describe, expect, it } from 'vitest';
 import { getUserManager } from '../stores/userManager.ts';
 

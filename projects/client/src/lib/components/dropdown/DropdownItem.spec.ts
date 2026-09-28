@@ -1,7 +1,7 @@
 import DropdownItem from './DropdownItem.svelte';
 
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
-import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import { createRawSnippet } from 'svelte';
 import { describe, expect, it } from 'vitest';

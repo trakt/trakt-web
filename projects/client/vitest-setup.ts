@@ -22,7 +22,7 @@ if (!Blob.prototype.arrayBuffer) {
   };
 }
 
-import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import process from 'node:process';
 import { afterAll, afterEach, beforeAll, vi } from 'vitest';
 import { server } from './src/mocks/server.ts';

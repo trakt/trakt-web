@@ -4,7 +4,8 @@ import {
   type UseRemoveFromHistoryProps,
 } from '$lib/sections/media-actions/remove-from-history/useRemoveFromHistory.ts';
 import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
-import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

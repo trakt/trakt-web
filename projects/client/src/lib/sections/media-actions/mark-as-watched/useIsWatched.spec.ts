@@ -1,7 +1,8 @@
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import { server } from '$mocks/server.ts';
-import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { http, HttpResponse } from 'msw';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it } from 'vitest';

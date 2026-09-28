@@ -4,7 +4,8 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';
 import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
-import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { waitForValue } from '$test/readable/waitForValue.ts';
 import { firstValueFrom } from 'rxjs';

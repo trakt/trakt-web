@@ -2,7 +2,7 @@ import { PlexServersMappedMock } from '$mocks/data/plex/mapped/PlexServersMapped
 import { PlexSettingsResponseMock } from '$mocks/data/plex/response/PlexSettingsResponseMock.ts';
 import { server } from '$mocks/server.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
-import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { setAuthorization } from '$test/beds/store/setAuthorization.ts';
 import { fireEvent, screen } from '@testing-library/svelte';
 import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
