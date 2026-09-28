@@ -100,6 +100,7 @@
         label={m.button_label_post_reply()}
         type={typeProps.type}
         gifSuggestedQuery={toGifSuggestedQuery(media)}
+        mentionSource={{ ...typeProps, slug: media.slug }}
       />
     {/if}
   </div>

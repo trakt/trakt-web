@@ -2456,6 +2456,50 @@
       "default": "Spoiler",
       "description": "Text used to indicate that something is a spoiler."
     },
+    "toolbar_label_text_formatting": {
+      "default": "Text formatting",
+      "description": "Aria-label for the toolbar with formatting buttons above the review and reply editors."
+    },
+    "button_label_format_bold": {
+      "default": "Bold",
+      "description": "Aria-label and tooltip for the toolbar button that makes the selected text bold."
+    },
+    "button_label_format_italic": {
+      "default": "Italic",
+      "description": "Aria-label and tooltip for the toolbar button that makes the selected text italic."
+    },
+    "button_label_format_spoiler": {
+      "default": "Hide as spoiler",
+      "description": "Aria-label and tooltip for the toolbar button that hides the selected text behind a spoiler blur."
+    },
+    "button_label_format_mention": {
+      "default": "Mention cast",
+      "description": "Aria-label and tooltip for the toolbar button that opens a list of the cast of the title being discussed, to mention one of them."
+    },
+    "button_label_format_remove_mention": {
+      "default": "Remove mention",
+      "description": "Aria-label and tooltip for the toolbar button that turns a mentioned cast member back into plain text."
+    },
+    "input_placeholder_mention_search": {
+      "default": "Search cast",
+      "description": "Placeholder for the field that filters the cast of the title being discussed when mentioning someone."
+    },
+    "input_label_mention_search": {
+      "default": "Search cast",
+      "description": "Aria-label for the field that filters the cast of the title being discussed when mentioning someone."
+    },
+    "text_no_matching_cast": {
+      "default": "No matching cast",
+      "description": "Shown in the mention list when no cast member matches what the user typed."
+    },
+    "button_label_format_bullet_list": {
+      "default": "Bullet list",
+      "description": "Aria-label and tooltip for the toolbar button that turns the current lines into a bullet list."
+    },
+    "button_label_format_quote": {
+      "default": "Quote",
+      "description": "Aria-label and tooltip for the toolbar button that turns the current paragraph into a quote."
+    },
     "button_label_close_error": {
       "default": "Close error",
       "description": "Aria-label for the button that closes an error message."
