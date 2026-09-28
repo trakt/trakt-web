@@ -38,9 +38,9 @@
   };
 
   const onSubmit = async () => {
-    const name = listName;
+    const name = listName.trim();
 
-    if (!name.trim()) {
+    if (!name) {
       return;
     }
 
@@ -52,6 +52,7 @@
     });
 
     if (!slug) {
+      notify({ message: m.action_toast_action_failed(), variant: "error" });
       return;
     }
 
