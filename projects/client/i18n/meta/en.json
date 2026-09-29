@@ -11647,6 +11647,18 @@
     "yir_2026_preview_reset": {
       "default": "Reset",
       "description": "Button that clears the previewed persona. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
+    },
+    "page_title_app_sign_in_handoff": {
+      "default": "Continue in the Trakt app",
+      "description": "Title of the page shown when a sign-in from the Trakt mobile app opens in the browser instead of the app."
+    },
+    "error_kicker_app_sign_in_handoff": {
+      "default": "Almost there",
+      "description": "Short scene label shown above the title on the mobile app sign-in handoff page."
+    },
+    "text_app_sign_in_handoff": {
+      "default": "The app didn't open automatically. Go back to the Trakt app and sign in again from there. Don't have it yet? Get it below.",
+      "description": "Text on the page shown when a sign-in from the Trakt mobile app opens in the browser instead of the app."
     }
   }
 }
