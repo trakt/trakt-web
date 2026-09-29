@@ -23,6 +23,8 @@
   } = $props();
 
   const currentMonth = $derived(monthly.at(monthIndex));
+
+  const language = languageTag();
 </script>
 
 <div class="yir-reel-month-head">
@@ -30,7 +32,7 @@
     {currentMonth
       ? toHumanMonth(
           new Date(year, currentMonth.month - 1, 1),
-          languageTag(),
+          language,
         )
       : ""}
   </span>
@@ -66,7 +68,7 @@
       <i></i>
       {toHumanMonth(
         new Date(year, entry.month - 1, 1),
-        languageTag(),
+        language,
         "short",
       )}
     </li>
