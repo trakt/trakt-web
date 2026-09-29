@@ -10956,6 +10956,14 @@
       "default": "Show today as a list",
       "description": "Aria-label for the button in the story viewer that opens the Today page."
     },
+    "preview_feature_title_year_in_review_2026": {
+      "default": "Year in Review 2026",
+      "description": "Product feature name for the preview feature that shows the persona-based 2026 Year in Review."
+    },
+    "preview_feature_description_year_in_review_2026": {
+      "default": "Your 2026 as a scroll-driven reel with a viewer persona, then a stats page styled to match it.",
+      "description": "Description for the Year in Review 2026 preview feature."
+    },
     "preview_feature_title_genre_picker": {
       "default": "Genre Picker",
       "description": "Title for the Genre Picker preview feature."
