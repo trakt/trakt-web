@@ -151,7 +151,9 @@ jobs:
       - name: Recalling Past Visions aka Restore Vitest Module Cache
         uses: actions/cache@v4
         with:
-          path: node_modules/.experimental-vitest-cache
+          path: |
+            node_modules/.experimental-vitest-cache
+            projects/client/i18n/project.inlang/cache
           key: vitest-fs-cache-${{ matrix.shard }}-${{ hashFiles('deno.lock') }}-${{ github.run_id }}
           restore-keys: |
             vitest-fs-cache-${{ matrix.shard }}-${{ hashFiles('deno.lock') }}-
