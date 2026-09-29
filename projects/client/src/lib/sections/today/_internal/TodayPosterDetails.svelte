@@ -5,12 +5,14 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre.ts";
+  import { toSentimentAspects } from "$lib/utils/sentiment/toSentimentAspects.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { TodayMedia } from "../models/TodayMedia.ts";
   import { useTodayDetails } from "../useTodayDetails.ts";
+  import TodaySentimentVerdict from "./TodaySentimentVerdict.svelte";
 
   const MAX_GENRES = 3;
-  const MAX_ASPECTS = 3;
+  const ASPECTS_LIMIT = 4;
 
   const { media }: { media: TodayMedia } = $props();
 
@@ -29,17 +31,21 @@
       .join(" · "),
   );
 
+  const selected = $derived(
+    $sentiment && $sentiment.aspect.pros.length + $sentiment.aspect.cons.length > 0
+      ? toSentimentAspects({
+          pros: $sentiment.aspect.pros,
+          cons: $sentiment.aspect.cons,
+          limit: ASPECTS_LIMIT,
+        })
+      : null,
+  );
+  const verdict = $derived(selected?.verdict ?? null);
   const aspects = $derived(
-    $sentiment
+    selected
       ? [
-          {
-            key: "good" as const,
-            items: $sentiment.aspect.pros.slice(0, MAX_ASPECTS),
-          },
-          {
-            key: "bad" as const,
-            items: $sentiment.aspect.cons.slice(0, MAX_ASPECTS),
-          },
+          { key: "good" as const, items: selected.pros },
+          { key: "bad" as const, items: selected.cons },
         ].filter((aspect) => aspect.items.length > 0)
       : [],
   );
@@ -69,9 +75,14 @@
 
     {#if $sentiment}
       <div class="details-sentiment">
-        <p class="tag uppercase bold details-kicker">
-          {m.header_community_sentiment()}
-        </p>
+        <div class="details-sentiment-header">
+          <p class="tag uppercase bold details-kicker">
+            {m.header_community_sentiment()}
+          </p>
+          {#if verdict}
+            <TodaySentimentVerdict {verdict} />
+          {/if}
+        </div>
         <p class="small" use:lineClamp={{ lines: 3 }}>
           {$sentiment.highlight}
         </p>
@@ -156,6 +167,13 @@
 
       padding-top: var(--gap-s);
       border-top: var(--border-thickness-xxs) solid var(--color-border);
+    }
+
+    .details-sentiment-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--gap-xs);
     }
 
     .details-kicker {

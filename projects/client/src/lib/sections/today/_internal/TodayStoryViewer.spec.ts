@@ -5,10 +5,11 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { fireEvent, screen } from '@testing-library/svelte';
+import { fireEvent, screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { buildFriendAction } from '$test/beds/today/buildFriendAction.ts';
-import { describe, expect, it, vi } from 'vitest';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import TodayStoryViewer from './TodayStoryViewer.svelte';
 import { toStoryGroups } from './toStoryGroups.ts';
 
@@ -51,6 +52,10 @@ async function tap(name: 'Next story' | 'Previous story') {
 }
 
 describe('TodayStoryViewer', () => {
+  beforeEach(() => {
+    setAuthorization(true);
+  });
+
   it('should open on the requested story', async () => {
     await renderViewer(`show-${ShowSiloMappedMock.id}`);
 
@@ -131,17 +136,80 @@ describe('TodayStoryViewer', () => {
     expect(document.querySelector('.segment-timer')).toHaveClass('is-paused');
   });
 
-  it('should flip the poster while a mouse hovers it', async () => {
+  it('should flip the poster while a mouse is over it', async () => {
     await renderViewer(null);
+    const poster = assertDefined(document.querySelector('.poster-hit'));
+    poster.getBoundingClientRect = () =>
+      ({ left: 100, right: 300, top: 100, bottom: 400 }) as DOMRect;
     const flip = screen.getByRole('button', { name: 'Show details' });
 
-    await fireEvent.pointerEnter(flip, { pointerType: 'mouse' });
+    await fireEvent.pointerMove(window, {
+      clientX: 150,
+      clientY: 150,
+      pointerType: 'mouse',
+    });
 
     expect(flip).toHaveAttribute('aria-pressed', 'true');
 
-    await fireEvent.pointerLeave(flip, { pointerType: 'mouse' });
+    await fireEvent.pointerMove(window, {
+      clientX: 700,
+      clientY: 150,
+      pointerType: 'mouse',
+    });
 
     expect(flip).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  it('should have the back ready before the poster is flipped', async () => {
+    await renderViewer(null);
+
+    await waitFor(() => {
+      expect(document.querySelector('.trakt-today-poster-details'))
+        .not.toBeNull();
+    });
+  });
+
+  it('should keep the back out of reach until it is flipped', async () => {
+    await renderViewer(null);
+    const back = assertDefined(
+      document.querySelector<HTMLElement>('.poster-face.is-back'),
+    );
+
+    expect(back.inert).toBe(true);
+
+    await fireEvent.click(
+      screen.getByRole('button', { name: 'Show details' }),
+    );
+
+    expect(back.inert).toBe(false);
+  });
+
+  it('should link to everything from today', async () => {
+    await renderViewer(null);
+
+    expect(screen.getByRole('link', { name: 'View everything from today' }))
+      .toBeInTheDocument();
+  });
+
+  it('should highlight a movie the user also watched', async () => {
+    const watched = { ...MovieHereticMappedMock, id: 916302 };
+    renderComponent(TodayStoryViewer, {
+      props: {
+        groups: toStoryGroups({ forYou: [], titles: [story(watched)] }),
+        startKey: null,
+        onClose: vi.fn(),
+      },
+    });
+
+    expect(await screen.findByText('Watched'))
+      .toBeInTheDocument();
+  });
+
+  it('should not highlight a movie the user has not watched', async () => {
+    await renderViewer(null);
+
+    expect(screen.queryByText('Watched')).not
+      .toBeInTheDocument();
   });
 
   it('should flip back when moving to the next title', async () => {
@@ -213,5 +281,61 @@ describe('TodayStoryViewer', () => {
     expect(await screen.findByText('That ending though.')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Open the comment' }))
       .toBeInTheDocument();
+  });
+
+  it('should close on escape while focus is inside', async () => {
+    const onClose = await renderViewer(null);
+
+    await fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' });
+
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should not close on escape pressed somewhere else', async () => {
+    const onClose = await renderViewer(null);
+
+    await fireEvent.keyDown(document.body, { key: 'Escape' });
+
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('should take focus when it opens and give it back when it closes', async () => {
+    const opener = document.createElement('button');
+    document.body.appendChild(opener);
+    opener.focus();
+
+    const { unmount } = renderComponent(TodayStoryViewer, {
+      props: { groups, startKey: null, onClose: vi.fn() },
+    });
+    const dialog = await screen.findByRole('dialog');
+
+    expect(document.activeElement).toBe(dialog);
+
+    unmount();
+
+    expect(document.activeElement).toBe(opener);
+    opener.remove();
+  });
+
+  it('should not leave a tap zone focused after a mouse click', async () => {
+    await renderViewer(null);
+    const next = screen.getAllByRole('button', { name: 'Next story' })[0];
+    const zone = assertDefined(next);
+
+    zone.focus();
+    await fireEvent.click(zone, { detail: 1 });
+
+    expect(document.activeElement).toBe(screen.getByRole('dialog'));
+  });
+
+  it('should keep focus on a tap zone activated from the keyboard', async () => {
+    await renderViewer(null);
+    const next = screen.getAllByRole('button', { name: 'Next story' })[0];
+    const zone = assertDefined(next);
+
+    zone.focus();
+    await fireEvent.click(zone, { detail: 0 });
+
+    expect(document.activeElement).toBe(zone);
   });
 });

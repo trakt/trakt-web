@@ -2,28 +2,23 @@ import { describe, expect, it } from 'vitest';
 import { todayOverviewParams } from './todayOverviewParams.ts';
 
 describe('util: todayOverviewParams', () => {
-  it('should default to everything grouped by title', () => {
+  it('should default to grouping by title', () => {
     const params = todayOverviewParams(new URLSearchParams());
 
-    expect(params.filter).toBe('all');
     expect(params.grouping).toBe('title');
   });
 
-  it('should read the filter and grouping from the url', () => {
-    const params = todayOverviewParams(
-      new URLSearchParams('filter=rated&group=person'),
-    );
+  it('should read the grouping from the url', () => {
+    const params = todayOverviewParams(new URLSearchParams('group=time'));
 
-    expect(params.filter).toBe('rated');
-    expect(params.grouping).toBe('person');
+    expect(params.grouping).toBe('time');
   });
 
   it('should ignore unknown values', () => {
     const params = todayOverviewParams(
-      new URLSearchParams('filter=nope&group=nope'),
+      new URLSearchParams('group=nope'),
     );
 
-    expect(params.filter).toBe('all');
     expect(params.grouping).toBe('title');
   });
 

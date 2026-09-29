@@ -13,6 +13,7 @@ import { dedupe } from '$lib/utils/array/dedupe.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { combineLatest, map } from 'rxjs';
 import { getTodayWindow } from './_internal/getTodayWindow.ts';
+import { toActivityWindow } from './_internal/toActivityWindow.ts';
 import type { TodayRange } from './models/TodayRange.ts';
 import { toForYouItems } from './_internal/toForYouItems.ts';
 import { toTitleStories } from './_internal/toTitleStories.ts';
@@ -38,13 +39,11 @@ function isEpisodeProgress(entry: object): entry is UpNextEntry {
 export function useTodayStories(
   { type, filter, range = getTodayWindow(new Date()) }: TodayStoriesProps,
 ) {
-  const activityParams = range.isRolling ? { limit: TODAY_ACTIVITY_LIMIT } : {
-    limit: TODAY_ACTIVITY_LIMIT,
-    startDate: range.start,
-    endDate: range.end,
-  };
   const activityQuery = useAllPagesInfiniteQuery(
-    followingActivityQuery(activityParams),
+    followingActivityQuery({
+      limit: TODAY_ACTIVITY_LIMIT,
+      ...toActivityWindow(range),
+    }),
   );
   const activityList = activityQuery.pipe(
     map(($query) =>

@@ -4,6 +4,7 @@ import type { TodayFriendAction } from '../models/TodayFriendAction.ts';
 import type { TodayMedia } from '../models/TodayMedia.ts';
 import type { TodayTitleStory } from '../models/TodayTitleStory.ts';
 import { byMostRecent } from './byMostRecent.ts';
+import { isTitleRating } from './isTitleRating.ts';
 import { strongestMilestone } from './strongestMilestone.ts';
 import { toMilestone } from './toMilestone.ts';
 
@@ -64,10 +65,7 @@ function toAverageRating(
 ): number | null {
   const ratings = dedupe(
     (action) => action.user.key,
-    actions.filter((action) =>
-      action.kind === 'rating' &&
-      (action.target === 'movie' || action.target === 'show')
-    ),
+    actions.filter(isTitleRating),
   ).map((action) => action.rating ?? 0);
 
   if (ratings.length === 0) return null;
@@ -80,7 +78,7 @@ function toTitleStory(group: TitleGroup): TodayTitleStory {
   const actions = mergeWatches(group.actions);
 
   return {
-    key: `${media.type}-${media.id}`,
+    key: media.key,
     media,
     actions,
     users: dedupe((user) => user.key, actions.map((action) => action.user)),
@@ -96,9 +94,8 @@ export function toTitleStories(
   const byTitle = dedupe((activity) => activity.key, [...activities])
     .map(toMediaAction)
     .reduce((groups, { media, action }) => {
-      const key = `${media.type}-${media.id}`;
-      const actions = groups.get(key)?.actions ?? [];
-      return groups.set(key, { media, actions: [...actions, action] });
+      const actions = groups.get(media.key)?.actions ?? [];
+      return groups.set(media.key, { media, actions: [...actions, action] });
     }, new Map<string, TitleGroup>());
 
   return Array.from(byTitle.values())
