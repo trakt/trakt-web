@@ -35,6 +35,7 @@
     })),
   );
 
+  let isHovering = $state(false);
 </script>
 
 <YirScene
@@ -50,9 +51,18 @@
   {#snippet children(isInView)}
     <div
       class="yir-map"
+      role="presentation"
       class:is-in={isInView}
+      class:is-hovering={isHovering}
       data-reveal
       style:--d="calc(var(--yir-beat) * 2)"
+      onpointerover={(event) => {
+        isHovering =
+          event.pointerType === "mouse" &&
+          event.target instanceof Element &&
+          event.target.classList.contains("is-interactive");
+      }}
+      onpointerleave={() => (isHovering = false)}
     >
       <div class="yir-map-grid" aria-hidden="true"></div>
       <div class="yir-map-scan" aria-hidden="true"></div>
@@ -178,8 +188,7 @@
   }
 
   @include for-mouse {
-    .yir-map:has(:global(.country.is-interactive:hover))
-      :global(.country:not(:hover)) {
+    .yir-map.is-hovering :global(.country:not(:hover)) {
       opacity: 0.55;
     }
   }
