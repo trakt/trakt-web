@@ -184,23 +184,18 @@
     transition:
       opacity var(--yir-t-reveal) ease,
       transform var(--yir-t-reveal) var(--yir-ease),
-      clip-path calc(var(--yir-beat) * 5.5) cubic-bezier(0.25, 1, 0.5, 1),
-      letter-spacing var(--yir-t-reveal) cubic-bezier(0.25, 1, 0.5, 1);
+      clip-path calc(var(--yir-beat) * 5.5) cubic-bezier(0.25, 1, 0.5, 1);
     transition-delay: var(--d, 0ms);
   }
 
   .yir-scene-title {
     clip-path: inset(-20% -5% -20% -5%);
-    transition-duration: calc(var(--yir-beat) * 4.5), calc(var(--yir-beat) * 5.5), calc(var(--yir-beat) * 5.5), var(--yir-t-reveal);
+    transition-duration: calc(var(--yir-beat) * 4.5), calc(var(--yir-beat) * 5.5), calc(var(--yir-beat) * 5.5);
   }
 
   .trakt-yir-scene:not(.is-in) .yir-scene-title {
     clip-path: inset(100% -5% -20% -5%);
     transform: translateY(var(--ni-16));
-  }
-
-  .trakt-yir-scene:not(.is-in) .yir-scene-kicker {
-    letter-spacing: 0.5em;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -220,10 +215,6 @@
 
     .trakt-yir-scene:not(.is-in) .yir-scene-title {
       clip-path: none;
-    }
-
-    .trakt-yir-scene:not(.is-in) .yir-scene-kicker {
-      letter-spacing: 0.2em;
     }
   }
 
