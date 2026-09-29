@@ -101,22 +101,24 @@
 
 {#if $persona}
   <YirPersonaTheme persona={$persona.persona} runnerUp={$persona.runnerUp}>
-    <ReviewPageShell id="year-in-review" headerForeground="theme">
-      <YirHeader {slug} {year} />
-      {#key arrivals}
-        <Yir2026Hero
-          result={$persona}
-          {detail}
-          {name}
-          isMe={$isMe}
-          isMorphTarget={!isReelOpen}
-          hasArrived={arrivals > 0}
-          onreplay={() => setReel(true)}
-        />
-      {/key}
-      <Yir2026Scenes {detail} {slug} {year} />
-      <YirUpgradeSection {slug} source="yir" />
-    </ReviewPageShell>
+    <div class="yir-2026-page" class:is-covered={isReelOpen}>
+      <ReviewPageShell id="year-in-review" headerForeground="theme">
+        <YirHeader {slug} {year} />
+        {#key arrivals}
+          <Yir2026Hero
+            result={$persona}
+            {detail}
+            {name}
+            isMe={$isMe}
+            isMorphTarget={!isReelOpen}
+            hasArrived={arrivals > 0}
+            onreplay={() => setReel(true)}
+          />
+        {/key}
+        <Yir2026Scenes {detail} {slug} {year} />
+        <YirUpgradeSection {slug} source="yir" />
+      </ReviewPageShell>
+    </div>
 
     {#if isReelOpen}
       <YirReel result={$persona} {detail} {name} {year} onclose={closeReel}>
@@ -142,6 +144,10 @@
 {/snippet}
 
 <style>
+  .yir-2026-page.is-covered {
+    content-visibility: hidden;
+  }
+
   :global(:root[data-yir-transition]::view-transition-old(root)) {
     animation: yir-reel-out calc(var(--yir-beat) * 6.5) cubic-bezier(0.4, 0, 0.2, 1) both;
   }
