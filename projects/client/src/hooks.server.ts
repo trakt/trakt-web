@@ -34,6 +34,7 @@ const WHITELISTED_HEADERS = new Set([
 ]);
 
 const REDIRECT_STATUSES = new Set([301, 302, 303, 307, 308]);
+const APP_CALLBACK_PATH = '/callback/app/';
 
 function hasWebviewParam(url: URL): boolean {
   return Object.values(WEBVIEW_PARAMS).some((param) =>
@@ -50,7 +51,9 @@ function hasWebviewParam(url: URL): boolean {
 export const handleReferrerPolicy: Handle = async ({ event, resolve }) => {
   const response = await resolve(event);
 
-  if (hasWebviewParam(event.url)) {
+  const isAppCallback = event.url.pathname.startsWith(APP_CALLBACK_PATH);
+
+  if (hasWebviewParam(event.url) || isAppCallback) {
     response.headers.set('Referrer-Policy', 'strict-origin');
   }
 

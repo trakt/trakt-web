@@ -10,6 +10,7 @@
             {
                 "appID": "GZG6JGPM44.tv.trakt.trakt",
                 "paths": [
+                    "/callback/app/trakt",
                     "NOT /movies/*/?*",
                     "/movies/?*",
                     "NOT /shows/*/seasons/*/episodes/*/?*",
@@ -20,6 +21,11 @@
                     "/people/?*"
                 ]
             }
+        ]
+    },
+    "webcredentials": {
+        "apps": [
+            "GZG6JGPM44.tv.trakt.trakt"
         ]
     }
 }
