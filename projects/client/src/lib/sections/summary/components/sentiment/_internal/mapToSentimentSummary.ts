@@ -1,4 +1,5 @@
-import { m } from '$lib/features/i18n/messages.ts';
+import { toSentimentAspects } from '$lib/utils/sentiment/toSentimentAspects.ts';
+import { toTranslatedSentimentVerdict } from '$lib/utils/formatting/string/toTranslatedSentimentVerdict.ts';
 import { calculateAspectsLimit } from './calculateAspectsLimit.ts';
 
 type MapToSentimentSummaryProps = {
@@ -14,29 +15,14 @@ type SentimentSummary = {
 export function mapToSentimentSummary(
   { pros, cons }: MapToSentimentSummaryProps,
 ): SentimentSummary {
-  const summaryLimit = calculateAspectsLimit(pros, cons);
-
-  const isPositive = pros.length > cons.length;
-  const isNegative = cons.length > pros.length;
-
-  if (isPositive) {
-    return {
-      text: m.header_sentiment_positive(),
-      aspects: pros.slice(0, summaryLimit),
-    };
-  }
-
-  if (isNegative) {
-    return {
-      text: m.header_sentiment_negative(),
-      aspects: cons.slice(0, summaryLimit),
-    };
-  }
-
-  const half = Math.floor(summaryLimit / 2);
+  const selected = toSentimentAspects({
+    pros,
+    cons,
+    limit: calculateAspectsLimit(pros, cons),
+  });
 
   return {
-    text: m.header_sentiment_mixed(),
-    aspects: [...pros.slice(0, half), ...cons.slice(0, half)],
+    text: toTranslatedSentimentVerdict(selected.verdict),
+    aspects: [...selected.pros, ...selected.cons],
   };
 }

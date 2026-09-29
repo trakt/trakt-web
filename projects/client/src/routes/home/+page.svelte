@@ -15,7 +15,7 @@
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
-  import TodayRail from "$lib/sections/today/TodayRail.svelte";
+  import TodayNavbarEntry from "$lib/sections/today/TodayNavbarEntry.svelte";
   import TodayStoryViewerHost from "$lib/sections/today/TodayStoryViewerHost.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
@@ -29,6 +29,14 @@
   );
 </script>
 
+{#snippet todayEntry()}
+  <RenderForFeature flag={FeatureFlag.TodayStory}>
+    {#snippet enabled()}
+      <TodayNavbarEntry type={$mode} />
+    {/snippet}
+  </RenderForFeature>
+{/snippet}
+
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
@@ -37,16 +45,13 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter contentToggle="discover" hasFilters />
+  <NavbarStateSetter
+    contentToggle="discover"
+    hasFilters
+    headerActions={todayEntry}
+  />
 
   <Banner />
-
-  <RenderForFeature flag={FeatureFlag.TodayStory}>
-    {#snippet enabled()}
-      <TodayRail type={$mode} />
-    {/snippet}
-  </RenderForFeature>
-
   <UpNextList />
 
   <WatchList

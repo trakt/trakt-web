@@ -1,21 +1,55 @@
 <script lang="ts">
+  import WatchedTag from "$lib/components/media/tags/WatchedTag.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import StemTag from "$lib/components/tags/StemTag.svelte";
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
+  import { pointerWithin } from "$lib/utils/actions/pointerWithin.ts";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
+  import { time } from "$lib/utils/timing/time.ts";
+  import { onMount } from "svelte";
   import type { TodayStoryFrame } from "../models/TodayStoryFrame.ts";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
   import TodayForYouAction from "./TodayForYouAction.svelte";
   import TodayMilestoneChip from "./TodayMilestoneChip.svelte";
   import TodayPosterDetails from "./TodayPosterDetails.svelte";
   import { toFrameMedia } from "./toFrameMedia.ts";
+  import { hasWatchedToo } from "./hasWatchedToo.ts";
   import { toFriendActionText } from "./toFriendActionText.ts";
+  
 
-  const { frame, isFlipped }: { frame: TodayStoryFrame; isFlipped: boolean } =
-    $props();
+  const HOVER_EXIT_MARGIN = 16;
+  const BACK_PRELOAD_DELAY = time.seconds(0.25);
+
+  let {
+    frame,
+    isFlipped = $bindable(false),
+  }: { frame: TodayStoryFrame; isFlipped?: boolean } = $props();
+
+  const { history } = useUser();
 
   const media = $derived(toFrameMedia(frame));
+  const isWatchedToo = $derived(
+    frame.type !== "for-you" && hasWatchedToo({ history: $history, media }),
+  );
+
+  let hasPreloadedBack = $state(false);
+  const showBack = $derived(hasPreloadedBack || isFlipped);
+
+  onMount(() => {
+    const timeout = setTimeout(() => {
+      hasPreloadedBack = true;
+    }, BACK_PRELOAD_DELAY);
+
+    return () => clearTimeout(timeout);
+  });
+  const rating = $derived.by(() => {
+    if (frame.type === "friend") return frame.action.rating;
+    if (frame.type === "summary") return frame.story.averageRating;
+    return null;
+  });
   const milestone = $derived.by(() => {
     if (frame.type === "friend") return frame.action.milestone;
     if (frame.type === "summary") return frame.story.milestone;
@@ -26,25 +60,40 @@
 <div class="trakt-today-story-frame-content" data-type={frame.type}>
   <div class="frame-poster">
     <div
-      class="poster-card"
-      class:is-flipped={isFlipped}
-      data-milestone={milestone?.type}
+      class="poster-hit"
+      use:pointerWithin={{
+        onChange: (isWithin) => (isFlipped = isWithin),
+        exitMargin: HOVER_EXIT_MARGIN,
+      }}
     >
-      {#if milestone && !isFlipped}
-        <div class="poster-milestone">
-          <TodayMilestoneChip {milestone} />
-        </div>
-      {/if}
-      <div class="poster-face">
-        <CrossOriginImage
-          src={media.poster.url.medium}
-          alt={m.image_alt_media_poster({ title: media.title })}
-        />
-      </div>
-      <div class="poster-face is-back" aria-hidden={!isFlipped}>
-        {#if isFlipped}
-          <TodayPosterDetails {media} />
+      <div
+        class="poster-card"
+        class:is-flipped={isFlipped}
+        data-milestone={milestone?.type}
+      >
+        {#if rating != null && !isFlipped}
+          <div class="poster-rating">
+            <StemTag>
+              <UserRating {rating} size="small" />
+            </StemTag>
+          </div>
         {/if}
+        {#if isWatchedToo && !isFlipped}
+          <div class="poster-watched">
+            <WatchedTag variant="full" />
+          </div>
+        {/if}
+        <div class="poster-face">
+          <CrossOriginImage
+            src={media.poster.url.medium}
+            alt={m.image_alt_media_poster({ title: media.title })}
+          />
+        </div>
+        <div class="poster-face is-back" inert={!isFlipped}>
+          {#if showBack}
+            <TodayPosterDetails {media} />
+          {/if}
+        </div>
       </div>
     </div>
   </div>
@@ -58,18 +107,20 @@
   <div class="frame-footer">
     {#if frame.type === "for-you"}
       <div class="frame-text">
-        <p class="tag uppercase bold frame-kicker">
-          {frame.item.type === "up-next"
-            ? m.tag_text_today_new_episode()
-            : m.tag_text_today_released()}
+        <p class="ellipsis">
+          <span class="tag uppercase bold frame-kicker">
+            {frame.item.type === "up-next"
+              ? m.tag_text_today_new_episode()
+              : m.tag_text_today_released()}
+          </span>
+          {#if frame.item.type === "up-next"}
+            <span class="tag secondary">
+              · {m.text_season_episode_number(frame.item.entry)} · {frame.item
+                .entry.title}
+            </span>
+          {/if}
         </p>
         <h2 class="frame-headline">{media.title}</h2>
-        {#if frame.item.type === "up-next"}
-          <p class="secondary">
-            {m.text_season_episode_number(frame.item.entry)} · {frame.item.entry
-              .title}
-          </p>
-        {/if}
       </div>
     {/if}
 
@@ -78,16 +129,16 @@
         <h2 class="frame-headline">
           {m.text_today_friends_watched({ count: frame.story.users.length })}
         </h2>
-        <div class="frame-faces">
-          {#each frame.story.users as user (user.key)}
-            <CrossOriginImage src={user.avatar.url} alt="" />
-          {/each}
-        </div>
-        {#if frame.story.averageRating != null}
-          <div class="frame-rating">
-            <UserRating rating={frame.story.averageRating} />
+        <div class="frame-meta">
+          <div class="frame-faces">
+            {#each frame.story.users as user (user.key)}
+              <CrossOriginImage src={user.avatar.url} alt="" />
+            {/each}
           </div>
-        {/if}
+          {#if frame.story.milestone}
+            <TodayMilestoneChip milestone={frame.story.milestone} />
+          {/if}
+        </div>
       </div>
     {/if}
 
@@ -104,10 +155,8 @@
             <p class="bold ellipsis">{toDisplayableName(frame.action.user)}</p>
             <p class="small secondary">{toFriendActionText(frame.action)}</p>
           </div>
-          {#if frame.action.rating != null}
-            <div class="frame-rating">
-              <UserRating rating={frame.action.rating} />
-            </div>
+          {#if frame.action.milestone}
+            <TodayMilestoneChip milestone={frame.action.milestone} />
           {/if}
         </div>
       </div>
@@ -143,32 +192,61 @@
       flex-grow: 1;
       min-height: 0;
 
-      perspective: var(--ni-1280);
+      container-type: size;
     }
 
-    .poster-card {
+    .poster-hit {
+      --poster-natural-width: calc(100cqh * 2 / 3);
+
       position: relative;
 
       height: 100%;
       max-width: 100%;
       aspect-ratio: 2 / 3;
+      width: min(
+        100cqw,
+        calc(
+          var(--poster-natural-width) +
+            max(0px, (var(--poster-natural-width) - 94cqw) * 50)
+        )
+      );
+
+      perspective: var(--ni-1280);
+    }
+
+    .poster-card {
+      position: absolute;
+      inset: 0;
 
       transform-style: preserve-3d;
-      transition: transform var(--transition-duration-short) ease-in-out;
+      transition: transform calc(var(--transition-duration-short) * 0.75)
+        cubic-bezier(0.3, 0.7, 0.2, 1);
 
       &.is-flipped {
         transform: rotateY(180deg);
       }
     }
 
-    .poster-milestone {
+    .poster-rating {
+      --color-background-stem-tag: var(--color-background-indicator-tag);
+      --color-foreground-stem-tag: var(--color-text-indicator-tag);
+
       position: absolute;
-      top: var(--gap-s);
+      bottom: var(--gap-s);
+      inset-inline-end: var(--gap-s);
+      z-index: var(--layer-floating);
+
+      transform: translateZ(var(--ni-1));
+    }
+
+    .poster-watched {
+      position: absolute;
+      bottom: 0;
       left: 50%;
       z-index: var(--layer-floating);
 
       max-width: calc(100% - var(--gap-m));
-      transform: translateX(-50%) translateZ(var(--ni-1));
+      transform: translate(-50%, 50%) translateZ(var(--ni-1));
     }
 
     .poster-card[data-milestone] .poster-face {
@@ -213,6 +291,13 @@
       align-items: center;
       gap: var(--gap-m);
       flex-shrink: 0;
+      min-height: var(--ni-64);
+    }
+
+    .frame-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-s);
     }
 
     .frame-actions {
@@ -242,6 +327,7 @@
 
     .frame-faces {
       display: flex;
+      margin-inline-start: calc(-1 * var(--border-thickness-xs));
 
       :global(img) {
         width: var(--ni-28);
@@ -274,10 +360,6 @@
       min-width: 0;
     }
 
-    .frame-rating :global(svg) {
-      width: var(--ni-24);
-      height: var(--ni-24);
-    }
   }
 
   @keyframes today-milestone-glow {

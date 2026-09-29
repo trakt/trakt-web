@@ -6,7 +6,7 @@
   import TodayStoryViewer from "./_internal/TodayStoryViewer.svelte";
   import { todayOverviewParams } from "./_internal/todayOverviewParams.ts";
   import { todayStoryNavigation } from "./_internal/todayStoryNavigation.ts";
-  import { toFilteredStories } from "./_internal/toFilteredStories.ts";
+  import { toTodayStories } from "./_internal/toTodayStories.ts";
   import { useTodayStories } from "./useTodayStories.ts";
 
   const { mode } = useDiscover();
@@ -24,10 +24,9 @@
   );
 
   const { groups } = $derived(
-    toFilteredStories({
+    toTodayStories({
       activities: $activities ?? [],
       forYou: $forYou ?? [],
-      filter: params.filter,
     }),
   );
 </script>

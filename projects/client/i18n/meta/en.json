@@ -10685,6 +10685,10 @@
       "default": "Today",
       "description": "Title of the home page row with today's stories. This should be as short as possible."
     },
+    "button_label_open_today_stories": {
+      "default": "Open today's stories",
+      "description": "Aria-label for the button in the top bar that opens the Today stories."
+    },
     "button_label_view_all_today": {
       "default": "View everything from today",
       "description": "Aria-label for the link that opens the Today page with all of today's activity."
@@ -10697,9 +10701,82 @@
       "default": "For you",
       "description": "Label for the story and section with new episodes and releases for the current user."
     },
+    "text_today_part_morning": {
+      "default": "Morning",
+      "description": "Heading of the group of activity that happened in the morning on the Today page."
+    },
+    "text_today_part_afternoon": {
+      "default": "Afternoon",
+      "description": "Heading of the group of activity that happened in the afternoon on the Today page."
+    },
+    "text_today_part_evening": {
+      "default": "Evening",
+      "description": "Heading of the group of activity that happened in the evening on the Today page."
+    },
+    "text_today_part_night": {
+      "default": "Night",
+      "description": "Heading of the group of activity that happened late at night on the Today page."
+    },
+    "text_today_section_day_part": {
+      "default": "{day}, {part}",
+      "description": "Heading of a group of activity from an earlier day on the Today page. The day is a weekday name and the part is morning, afternoon, evening or night.",
+      "variables": {
+        "day": {
+          "type": "string"
+        },
+        "part": {
+          "type": "string"
+        }
+      }
+    },
+    "option_text_today_by_time": {
+      "default": "By time",
+      "description": "Option on the Today page that lists activity as a timeline, newest first."
+    },
+    "text_today_top_story": {
+      "default": "Top story",
+      "description": "Heading above the featured story on the Today page."
+    },
     "text_today_from_friends": {
       "default": "From people you follow",
-      "description": "Section title for today's activity of the people the user follows."
+      "description": "Heading above the tiles of what the people the user follows did on the chosen day."
+    },
+    "text_today_day_with_count": {
+      "default": "{day} {count}",
+      "description": "Option in the day picker on the Today page, with the weekday and how many things the people the user follows did that day.",
+      "variables": {
+        "day": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_today_most_active": {
+      "default": "Most active",
+      "description": "Heading of the list of followed people with the most activity on the Today page."
+    },
+    "text_today_stories_one": {
+      "default": "1 story",
+      "description": "Count of exactly one story a followed person made during the chosen day."
+    },
+    "text_today_stories_other": {
+      "default": "{count} stories",
+      "description": "Count of several stories a followed person made during the chosen day.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_today_caught_up": {
+      "default": "That is everything from today so far.",
+      "description": "Note at the end of the Today timeline when there is little activity."
+    },
+    "button_text_today_see_yesterday": {
+      "default": "See yesterday",
+      "description": "Button on the Today page that switches to the previous day."
     },
     "tag_text_today_new_episode": {
       "default": "New in Up Next",
@@ -10836,14 +10913,6 @@
         }
       }
     },
-    "text_today_counter_comments": {
-      "default": "Friend comments",
-      "description": "Label of the counter with how many comments followed people wrote in the last 24 hours."
-    },
-    "option_text_today_comments": {
-      "default": "Comments",
-      "description": "Filter option on the Today page that shows what followed people commented."
-    },
     "button_label_open_comment": {
       "default": "Open the comment",
       "description": "Aria-label for the comment in the story viewer that opens the full comment."
@@ -10855,6 +10924,10 @@
     "text_today_empty_day": {
       "default": "Nothing from the people you follow on this day.",
       "description": "Shown on the Today page when an earlier day has no activity."
+    },
+    "tag_text_today_watched_too": {
+      "default": "You watched this too",
+      "description": "Tag shown when a followed person watched a movie or show the user has also watched."
     },
     "text_today_empty": {
       "default": "Nothing new in the last 24 hours. Check back later.",
@@ -10872,22 +10945,6 @@
         }
       }
     },
-    "option_text_today_all": {
-      "default": "All",
-      "description": "Filter option on the Today page that shows everything."
-    },
-    "option_text_today_for_you": {
-      "default": "For you",
-      "description": "Filter option on the Today page that shows only new items for the user."
-    },
-    "option_text_today_watched": {
-      "default": "Watched",
-      "description": "Filter option on the Today page that shows what followed people watched."
-    },
-    "option_text_today_rated": {
-      "default": "Rated",
-      "description": "Filter option on the Today page that shows what followed people rated."
-    },
     "option_text_today_by_title": {
       "default": "By title",
       "description": "Option on the Today page that groups activity by movie or show."
@@ -10896,25 +10953,9 @@
       "default": "By person",
       "description": "Option on the Today page that groups activity by followed person."
     },
-    "label_today_filter": {
-      "default": "Filter today's activity",
-      "description": "Accessible name of the filter options on the Today page."
-    },
     "label_today_grouping": {
       "default": "Group today's activity",
       "description": "Accessible name of the grouping options on the Today page."
-    },
-    "text_today_counter_for_you": {
-      "default": "New for you",
-      "description": "Label of the counter with new episodes and releases for the user today."
-    },
-    "text_today_counter_watches": {
-      "default": "Friend watches",
-      "description": "Label of the counter with how many watches followed people made today."
-    },
-    "text_today_counter_ratings": {
-      "default": "Friend ratings",
-      "description": "Label of the counter with how many ratings followed people gave today."
     },
     "button_text_play_all_stories": {
       "default": "Play all",
@@ -10931,15 +10972,6 @@
     "button_label_play_story": {
       "default": "Play the story for {title}",
       "description": "Aria-label for the button that plays the story of one title or person.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "button_label_open_story": {
-      "default": "Open the story for {title}",
-      "description": "Aria-label for a story bubble in the Today row.",
       "variables": {
         "title": {
           "type": "string"
@@ -10991,10 +11023,6 @@
     "tag_text_today_finished_show": {
       "default": "Finished the show",
       "description": "Tag when a followed person watched the series finale of a show."
-    },
-    "button_label_today_list": {
-      "default": "Show today as a list",
-      "description": "Aria-label for the button in the story viewer that opens the Today page."
     },
     "preview_feature_title_year_in_review_2026": {
       "default": "Year in Review 2026",

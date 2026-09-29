@@ -1,12 +1,13 @@
 <script lang="ts">
   import { shortcut } from "@svelte-put/shortcut";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import GridIcon from "$lib/components/icons/GridIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { trapTabFocus } from "$lib/utils/actions/trapTabFocus.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { onMount, untrack } from "svelte";
@@ -61,12 +62,12 @@
   const isMouse = (event: MouseEvent) =>
     "pointerType" in event && event.pointerType === "mouse";
 
-  const flipOnHover = (flipped: boolean) => (event: PointerEvent) => {
-    if (isMouse(event)) isFlipped = flipped;
+  const returnFocusAfterPointer = (event: MouseEvent) => {
+    if (event.detail > 0) dialog?.focus({ preventScroll: true });
   };
 
   const flipOnTap = (event: MouseEvent) => {
-    if (!isMouse(event)) onTap(toggleFlip)();
+    if (!isMouse(event)) onTap(toggleFlip)(event);
   };
 
   const press = () => {
@@ -80,7 +81,9 @@
     lastPressDuration = Date.now() - pressedAt;
   };
 
-  const onTap = (move: () => void) => () => {
+  const onTap = (move: () => void) => (event: MouseEvent) => {
+    returnFocusAfterPointer(event);
+
     if (lastPressDuration > HOLD_THRESHOLD) {
       lastPressDuration = 0;
       return;
@@ -136,11 +139,13 @@
     }
   };
 
-  const nextGroup = () => {
+  const nextGroup = (event: MouseEvent) => {
+    returnFocusAfterPointer(event);
     if (groupIndex < groups.length - 1) showGroup(groupIndex + 1, 0);
   };
 
-  const previousGroup = () => {
+  const previousGroup = (event: MouseEvent) => {
+    returnFocusAfterPointer(event);
     if (groupIndex > 0) showGroup(groupIndex - 1, 0);
   };
 
@@ -154,18 +159,24 @@
   onMount(() => {
     if (group) markSeen(group.key);
 
-    if (typeof dialog?.showModal === "function") {
-      dialog.showModal();
+    const previouslyFocused = document.activeElement;
+
+    if (typeof dialog?.show === "function") {
+      dialog.show();
     } else {
       dialog?.setAttribute("open", "");
     }
+    dialog?.focus();
 
     const onVisibilityChange = () => {
       isPageHidden = document.hidden;
     };
     document.addEventListener("visibilitychange", onVisibilityChange);
-    return () =>
+
+    return () => {
       document.removeEventListener("visibilitychange", onVisibilityChange);
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
+    };
   });
 </script>
 
@@ -175,12 +186,12 @@
   bind:this={dialog}
   class="trakt-today-story-viewer"
   aria-label={title}
+  aria-modal="true"
+  tabindex="-1"
   style="--today-story-duration: {FRAME_DURATION}ms"
-  oncancel={(event) => {
-    event.preventDefault();
-    onClose();
-  }}
+  onkeydown={(event) => event.key === "Escape" && onClose()}
   use:portalToBody
+  use:trapTabFocus
 >
   {#if cover}
     <div class="viewer-backdrop">
@@ -229,11 +240,11 @@
         </p>
       </div>
       <ActionButton
-        label={m.button_label_today_list()}
+        label={m.button_label_view_all_today()}
         style="ghost"
         href={UrlBuilder.today()}
       >
-        <CalendarIcon />
+        <GridIcon />
       </ActionButton>
       <ActionButton
         label={m.button_label_close_stories()}
@@ -261,14 +272,10 @@
           : m.button_label_show_details()}
         aria-pressed={isFlipped}
         onclick={flipOnTap}
-        onpointerenter={flipOnHover(true)}
-        onpointerleave={(event) => {
-          release();
-          flipOnHover(false)(event);
-        }}
         onpointerdown={press}
         onpointerup={release}
         onpointercancel={release}
+        onpointerleave={release}
       ></button>
       <button
         class="viewer-tap is-next"
@@ -282,7 +289,7 @@
 
       {#if frame}
         {#key frame.key}
-          <TodayStoryFrameContent {frame} {isFlipped} />
+          <TodayStoryFrameContent {frame} bind:isFlipped />
         {/key}
       {/if}
     </div>
@@ -317,8 +324,8 @@
     padding: 0;
     border: 0;
 
-    &::backdrop {
-      background: transparent;
+    &:focus-visible {
+      outline: none;
     }
 
     display: flex;

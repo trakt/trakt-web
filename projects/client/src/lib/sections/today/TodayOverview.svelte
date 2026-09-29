@@ -7,21 +7,32 @@
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import { getLocale } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek.ts";
   import { getDayRange } from "./_internal/getDayRange.ts";
+  import { pickHeroStory } from "./_internal/pickHeroStory.ts";
+  import TodayFeedEntry from "./_internal/TodayFeedEntry.svelte";
+  import TodayFeed from "./_internal/TodayFeed.svelte";
   import TodayForYouRow from "./_internal/TodayForYouRow.svelte";
+  import TodayHero from "./_internal/TodayHero.svelte";
+  import TodayMostActive from "./_internal/TodayMostActive.svelte";
   import { todayOverviewParams } from "./_internal/todayOverviewParams.ts";
   import TodayPersonDrawer from "./_internal/TodayPersonDrawer.svelte";
   import TodayPersonTile from "./_internal/TodayPersonTile.svelte";
   import { todayStoryNavigation } from "./_internal/todayStoryNavigation.ts";
   import TodayTitleDrawer from "./_internal/TodayTitleDrawer.svelte";
   import TodayTitleTile from "./_internal/TodayTitleTile.svelte";
+  import { toFeedSections } from "./_internal/toFeedSections.ts";
+  import { toHighlights } from "./_internal/toHighlights.ts";
+  import { toPersonActions } from "./_internal/toPersonActions.ts";
   import { toPersonGroups } from "./_internal/toPersonGroups.ts";
-  import { toFilteredStories } from "./_internal/toFilteredStories.ts";
   import { toTodayDays } from "./_internal/toTodayDays.ts";
-  import type { TodayFilter } from "./models/TodayFilter.ts";
+  import { toTodayStories } from "./_internal/toTodayStories.ts";
   import type { TodayGrouping } from "./models/TodayGrouping.ts";
+  import { useTodayDayCounts } from "./useTodayDayCounts.ts";
   import { useTodayStories } from "./useTodayStories.ts";
+
+  const QUIET_ACTION_COUNT = 4;
 
   const { type }: { type: DiscoverMode } = $props();
 
@@ -39,64 +50,64 @@
 
   let openKey: string | null = $state(null);
 
-  const filtered = $derived(
-    toFilteredStories({
+  const stories = $derived(
+    toTodayStories({
       activities: $activities ?? [],
       forYou: $forYou ?? [],
-      filter: params.filter,
     }),
   );
-  const filteredTitles = $derived(filtered.titles);
-  const personGroups = $derived(toPersonGroups(filteredTitles));
-  const firstStory = $derived(filtered.groups.at(0));
-  const counts = $derived(
-    ($activities ?? []).reduce(
-      (result, { detail }) => ({
-        ...result,
-        [detail.action]: result[detail.action] + 1,
-      }),
-      { watch: 0, rating: 0, comment: 0 },
+  const titles = $derived(stories.titles);
+  const personGroups = $derived(toPersonGroups(titles));
+  const firstStory = $derived(stories.groups.at(0));
+  const hero = $derived(pickHeroStory(titles));
+
+  const actions = $derived(toPersonActions(titles));
+  const nonHeroActions = $derived(
+    actions.filter((action) => action.media.key !== hero?.key),
+  );
+  const highlights = $derived(toHighlights(nonHeroActions));
+  const highlightCards = $derived(
+    [highlights.comment, highlights.rating].filter((action) => action != null),
+  );
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const featuredCards = $derived($isMobile ? [] : highlightCards);
+  const feedSections = $derived(
+    toFeedSections(
+      nonHeroActions.filter((action) =>
+        !featuredCards.some((card) => card.key === action.key)
+      ),
     ),
   );
   const isEmpty = $derived(
-    !$isLoading &&
-      filteredTitles.length === 0 &&
-      filtered.forYou.length === 0,
+    !$isLoading && titles.length === 0 && stories.forYou.length === 0,
   );
 
   const days = toTodayDays(now);
+  const dayCounts = useTodayDayCounts({ days, now });
   const selectedDay = $derived(
     days.find((day) => day.key === params.day) ?? days.at(0),
   );
+  const yesterday = days.at(1);
+  const isQuiet = $derived(
+    !$isLoading &&
+      selectedDay?.isToday === true &&
+      actions.length > 0 &&
+      actions.length < QUIET_ACTION_COUNT,
+  );
+
+  const toDayText = (day: (typeof days)[number]) => {
+    const weekday = toHumanDayOfWeek(day.date, getLocale());
+    const count = type === "media" ? $dayCounts[day.key] : null;
+
+    return count == null
+      ? weekday
+      : m.text_today_day_with_count({ day: weekday, count });
+  };
   const dayOptions: ToggleOption<string>[] = days.map((day) => ({
     value: day.key,
-    text: () => toHumanDayOfWeek(day.date, getLocale()),
-    label: () => toHumanDayOfWeek(day.date, getLocale()),
+    text: () => toDayText(day),
+    label: () => toDayText(day),
   }));
-
-  const filterOptions: ToggleOption<TodayFilter>[] = [
-    { value: "all", text: m.option_text_today_all, label: m.option_text_today_all },
-    {
-      value: "mine",
-      text: m.option_text_today_for_you,
-      label: m.option_text_today_for_you,
-    },
-    {
-      value: "watched",
-      text: m.option_text_today_watched,
-      label: m.option_text_today_watched,
-    },
-    {
-      value: "rated",
-      text: m.option_text_today_rated,
-      label: m.option_text_today_rated,
-    },
-    {
-      value: "comments",
-      text: m.option_text_today_comments,
-      label: m.option_text_today_comments,
-    },
-  ];
 
   const groupingOptions: ToggleOption<TodayGrouping>[] = [
     {
@@ -109,11 +120,14 @@
       text: m.option_text_today_by_person,
       label: m.option_text_today_by_person,
     },
+    {
+      value: "time",
+      text: m.option_text_today_by_time,
+      label: m.option_text_today_by_time,
+    },
   ];
 
-  const openStory = $derived(
-    filteredTitles.find((story) => story.key === openKey),
-  );
+  const openStory = $derived(titles.find((story) => story.key === openKey));
   const openPerson = $derived(
     personGroups.find((group) => group.key === openKey),
   );
@@ -136,15 +150,7 @@
       ariaLabel={m.label_today_day()}
     />
 
-    <Toggler
-      value={params.filter}
-      onChange={params.setFilter}
-      options={filterOptions}
-      variant="text"
-      ariaLabel={m.label_today_filter()}
-    />
-
-    {#if params.filter !== "mine"}
+    <div class="toolbar-end">
       <Toggler
         value={params.grouping}
         onChange={params.setGrouping}
@@ -152,61 +158,57 @@
         variant="text"
         ariaLabel={m.label_today_grouping()}
       />
-    {/if}
 
-    {#if firstStory}
-      {@const link = storyLink(firstStory.key)}
-      <Button
-        href={link.href}
-        noscroll={link.noscroll}
-        replacestate={link.replacestate}
-        label={m.button_label_play_all_stories()}
-        size="small"
-        color="purple"
-      >
-        {m.button_text_play_all_stories()}
-      </Button>
-    {/if}
+      {#if firstStory}
+        {@const link = storyLink(firstStory.key)}
+        <Button
+          href={link.href}
+          noscroll={link.noscroll}
+          replacestate={link.replacestate}
+          label={m.button_label_play_all_stories()}
+          size="small"
+          color="purple"
+        >
+          {m.button_text_play_all_stories()}
+        </Button>
+      {/if}
+    </div>
   </div>
 
   <div class="overview-body">
-    <aside class="overview-aside">
-      <div class="overview-counters">
-        <div class="overview-counter">
-          <p class="bold">{($forYou ?? []).length}</p>
-          <p class="small secondary">{m.text_today_counter_for_you()}</p>
-        </div>
-        <div class="overview-counter">
-          <p class="bold">{counts.watch}</p>
-          <p class="small secondary">{m.text_today_counter_watches()}</p>
-        </div>
-        <div class="overview-counter">
-          <p class="bold">{counts.rating}</p>
-          <p class="small secondary">{m.text_today_counter_ratings()}</p>
-        </div>
-        <div class="overview-counter">
-          <p class="bold">{counts.comment}</p>
-          <p class="small secondary">{m.text_today_counter_comments()}</p>
-        </div>
-      </div>
+    {#if hero || stories.forYou.length > 0}
+      <section class="overview-column overview-spotlight">
+        {#if hero}
+          <h3>{m.text_today_top_story()}</h3>
+          <TodayHero story={hero} />
 
-      {#if filtered.forYou.length > 0}
-        <section class="overview-section">
-          <h3>{m.text_today_for_you()}</h3>
-          {#each filtered.forYou as item (item.key)}
-            <TodayForYouRow {item} />
-          {/each}
-        </section>
-      {/if}
-    </aside>
+          <div class="spotlight-highlights">
+            {#each highlightCards as action (action.key)}
+              <TodayFeedEntry {action} />
+            {/each}
+          </div>
+        {/if}
 
-    <div class="overview-main">
-      {#if filteredTitles.length > 0}
-        <section class="overview-section">
+        {#if stories.forYou.length > 0}
+          <div class="spotlight-for-you">
+            <h3>{m.text_today_for_you()}</h3>
+            {#each stories.forYou as item (item.key)}
+              <TodayForYouRow {item} />
+            {/each}
+          </div>
+        {/if}
+      </section>
+    {/if}
+
+    <div class="overview-column overview-main">
+      {#if titles.length > 0}
+        {#if params.grouping === "time"}
+          <TodayFeed sections={feedSections} {now} />
+        {:else}
           <h3>{m.text_today_from_friends()}</h3>
           <div class="overview-cards">
             {#if params.grouping === "title"}
-              {#each filteredTitles as story (story.key)}
+              {#each titles as story (story.key)}
                 <TodayTitleTile {story} onOpen={() => open(story.key)} />
               {/each}
             {:else}
@@ -215,7 +217,20 @@
               {/each}
             {/if}
           </div>
-        </section>
+        {/if}
+      {/if}
+
+      {#if isQuiet && yesterday}
+        <div class="overview-quiet">
+          <p class="secondary">{m.text_today_caught_up()}</p>
+          <Button
+            label={m.button_text_today_see_yesterday()}
+            onclick={() => params.setDay(yesterday.key)}
+            size="small"
+          >
+            {m.button_text_today_see_yesterday()}
+          </Button>
+        </div>
       {/if}
 
       {#if isEmpty}
@@ -226,14 +241,18 @@
         </p>
       {/if}
     </div>
+
+    <aside class="overview-column overview-rail">
+      <TodayMostActive groups={personGroups} onOpen={open} />
+    </aside>
   </div>
 </div>
 
-{#if params.grouping === "title" && openStory}
+{#if openStory}
   <TodayTitleDrawer story={openStory} onClose={close} />
 {/if}
 
-{#if params.grouping === "person" && openPerson}
+{#if openPerson}
   <TodayPersonDrawer group={openPerson} onClose={close} />
 {/if}
 
@@ -247,7 +266,19 @@
 
     padding-inline: var(--layout-distance-side);
 
+    h3 {
+      margin: 0;
+    }
+
     .overview-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--gap-s);
+    }
+
+    .toolbar-end {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -259,29 +290,88 @@
       flex-direction: column;
       gap: var(--gap-l);
 
+      @include for-tablet-sm {
+        display: grid;
+        grid-template-columns: minmax(var(--ni-280), 1fr) minmax(0, 2fr);
+        align-items: start;
+      }
+
+      @include for-tablet-lg {
+        display: grid;
+        grid-template-columns: minmax(var(--ni-280), 1fr) minmax(0, 2fr);
+        align-items: start;
+      }
+
       @include for-desktop {
         display: grid;
-        grid-template-columns: minmax(var(--ni-320), 1fr) minmax(0, 3fr);
+        grid-template-columns:
+          minmax(var(--ni-280), 1fr)
+          minmax(0, 1.4fr)
+          minmax(var(--ni-240), 0.7fr);
         align-items: start;
       }
     }
 
-    .overview-aside {
+    .overview-column {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-l);
+      gap: var(--gap-s);
+      min-width: 0;
+    }
+
+    .overview-spotlight,
+    .overview-main {
+      @include for-tablet-sm {
+        grid-row: 1;
+      }
+
+      @include for-tablet-lg {
+        grid-row: 1;
+      }
 
       @include for-desktop {
-        position: sticky;
-        top: var(--gap-l);
+        grid-row: 1;
       }
     }
 
     .overview-main {
+      gap: var(--gap-l);
+
+      @include for-tablet-sm {
+        grid-column: 2;
+      }
+
+      @include for-tablet-lg {
+        grid-column: 2;
+      }
+
+      @include for-desktop {
+        grid-column: 2;
+      }
+    }
+
+    .spotlight-highlights,
+    .spotlight-for-you {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-l);
-      min-width: 0;
+      gap: var(--gap-m);
+      margin-top: var(--gap-s);
+    }
+
+    .spotlight-highlights {
+      @include for-mobile {
+        display: none;
+      }
+    }
+
+    .overview-rail {
+      display: none;
+
+      @include for-desktop {
+        display: flex;
+        grid-column: 3;
+        grid-row: 1;
+      }
     }
 
     .overview-cards {
@@ -291,31 +381,15 @@
       gap: var(--gap-m);
     }
 
-    .overview-counters {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--gap-xs);
-    }
-
-    .overview-counter {
+    .overview-quiet {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-xxs);
-
-      padding: var(--gap-s);
-      border-radius: var(--border-radius-l);
-      background: var(--color-card-background);
-      border: var(--border-thickness-xxs) solid var(--color-border);
-    }
-
-    .overview-section {
-      display: flex;
-      flex-direction: column;
+      align-items: flex-start;
       gap: var(--gap-s);
 
-      h3 {
-        margin: 0;
-      }
+      padding: var(--gap-m);
+      border-radius: var(--border-radius-l);
+      background: var(--color-card-background);
     }
   }
 </style>
