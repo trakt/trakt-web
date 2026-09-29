@@ -1,38 +1,44 @@
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged } from 'rxjs';
 import { onMount } from 'svelte';
 
 export function useScrollDistance() {
   const distanceFromBottom = new BehaviorSubject(0);
 
-  const handleScroll = () => {
-    const scrollTop = globalThis.document.documentElement.scrollTop;
-    const scrollHeight = globalThis.document.documentElement.scrollHeight;
-    const clientHeight = globalThis.document.documentElement.clientHeight;
+  let frame = 0;
 
-    const scrollDistance = scrollHeight - clientHeight;
-    distanceFromBottom.next(scrollDistance - scrollTop);
+  const measure = () => {
+    frame = 0;
+    const { scrollTop, scrollHeight, clientHeight } =
+      globalThis.document.documentElement;
+
+    distanceFromBottom.next(scrollHeight - clientHeight - scrollTop);
+  };
+
+  const schedule = () => {
+    if (!frame) frame = requestAnimationFrame(measure);
   };
 
   onMount(() => {
-    requestAnimationFrame(handleScroll);
+    schedule();
 
     const unregisterScroll = GlobalEventBus.getInstance().register(
       'scroll',
-      handleScroll,
+      schedule,
     );
     const unregisterResize = GlobalEventBus.getInstance().register(
       'resize',
-      handleScroll,
+      schedule,
     );
 
     return () => {
+      cancelAnimationFrame(frame);
       unregisterScroll();
       unregisterResize();
     };
   });
 
   return {
-    distanceFromBottom: distanceFromBottom.asObservable(),
+    distanceFromBottom: distanceFromBottom.pipe(distinctUntilChanged()),
   };
 }
