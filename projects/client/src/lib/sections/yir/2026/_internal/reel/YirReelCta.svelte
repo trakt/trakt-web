@@ -61,8 +61,20 @@
     font: inherit;
     text-align: start;
     cursor: pointer;
-    animation: cta-glow 2.4s ease-in-out infinite;
+    isolation: isolate;
     transition: transform var(--transition-increment) ease-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      box-shadow: 0 0 var(--ni-16) var(--ni-4) var(--color-yir-accent);
+      opacity: 0;
+      animation: cta-glow 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
 
     &:hover,
     &:focus-visible {
@@ -105,10 +117,10 @@
   @keyframes cta-glow {
     0%,
     100% {
-      box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-yir-accent) 55%, transparent);
+      opacity: 0;
     }
-    60% {
-      box-shadow: 0 0 0 var(--ni-12) color-mix(in srgb, var(--color-yir-accent) 0%, transparent);
+    35% {
+      opacity: 0.55;
     }
   }
 
@@ -119,7 +131,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .yir-reel-cta,
+    .yir-reel-cta::before,
     .yir-reel-cta-arrow {
       animation: none;
     }

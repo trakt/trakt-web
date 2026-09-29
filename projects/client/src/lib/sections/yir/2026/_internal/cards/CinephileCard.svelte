@@ -1,5 +1,7 @@
 <script lang="ts">
   import type { PersonaCardProps } from "./PersonaCardProps";
+  const DIGITS = [8, 7, 6, 5, 4, 3, 2];
+
   const { card, live }: PersonaCardProps = $props();
 </script>
 
@@ -9,11 +11,11 @@
     <div class="no">No. {card.number} · 2026 · 2.20 : 1</div>
     <div class="screen" aria-hidden="true">
       <div class="leader">
-        <div class="sweep"></div>
+        <div class="sweep"><i class="half first"></i><i class="half second"></i></div>
         <div class="cross"></div>
         <div class="ring outer"></div>
         <div class="ring inner"></div>
-        <div class="count"></div>
+        <div class="count"><div class="digits">{#each DIGITS as digit (digit)}<span>{digit}</span>{/each}</div></div>
       </div>
       <div class="beam"></div>
       <div class="grain"></div>
@@ -92,11 +94,34 @@
     position: absolute;
     width: 30cqw;
     aspect-ratio: 1;
+  }
+  .half {
+    position: absolute;
+    inset-block: 0;
+    width: 50%;
+    overflow: hidden;
+  }
+  .half.first {
+    left: 50%;
+  }
+  .half.second {
+    left: 0;
+  }
+  .half::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 100%;
     border-radius: 50%;
-    background: conic-gradient(
-      rgb(242 239 232 / 34%) calc(var(--sweep) * 360deg),
-      transparent 0
-    );
+  }
+  .half.first::before {
+    left: -100%;
+    background: linear-gradient(to right, rgb(242 239 232 / 34%) 50%, transparent 50%);
+  }
+  .half.second::before {
+    left: 0;
+    background: linear-gradient(to left, rgb(242 239 232 / 34%) 50%, transparent 50%);
   }
   .cross {
     position: absolute;
@@ -125,10 +150,18 @@
     font-size: 17cqw;
     line-height: 1;
     color: #f2efe8;
-    counter-reset: n var(--n);
+    height: 1em;
+    overflow: hidden;
   }
-  .count::after {
-    content: counter(n);
+  .digits {
+    display: flex;
+    flex-direction: column;
+  }
+  .digits span {
+    display: block;
+    font: inherit;
+    height: 1em;
+    text-align: center;
   }
   .beam {
     position: absolute;
@@ -145,16 +178,6 @@
       radial-gradient(circle at 45% 80%, rgb(0 0 0 / 30%) 0 0.3cqw, transparent 0.4cqw),
       linear-gradient(90deg, transparent 62%, rgb(242 239 232 / 10%) 62.3%, transparent 62.6%);
     background-size: 100% 100%;
-  }
-  @property --n {
-    syntax: "<integer>";
-    inherits: true;
-    initial-value: 8;
-  }
-  @property --sweep {
-    syntax: "<number>";
-    inherits: true;
-    initial-value: 0;
   }
   .name {
     font-family: "Instrument Serif", serif;
@@ -203,11 +226,14 @@
   .is-live .screen {
     animation: letterbox var(--yir-t-hero) cubic-bezier(0.2, 0.8, 0.2, 1) both;
   }
-  .is-live .count {
+  .is-live .digits {
     animation: leader-count 7s steps(7, jump-none) infinite;
   }
-  .is-live .sweep {
-    animation: leader-sweep 1s linear infinite;
+  .is-live .half.first::before {
+    animation: sweep-first 1s linear infinite;
+  }
+  .is-live .half.second::before {
+    animation: sweep-second 1s linear infinite;
   }
   .is-live .grain {
     animation: grain 0.4s steps(3) infinite;
@@ -223,12 +249,14 @@
     63% { opacity: 1; }
   }
   @keyframes leader-count {
-    from { --n: 8; }
-    to { --n: 2; }
+    to { transform: translateY(-6em); }
   }
-  @keyframes leader-sweep {
-    from { --sweep: 0; }
-    to { --sweep: 1; }
+  @keyframes sweep-first {
+    50%, 100% { transform: rotate(180deg); }
+  }
+  @keyframes sweep-second {
+    0%, 50% { transform: none; }
+    100% { transform: rotate(180deg); }
   }
   @keyframes grain {
     33% { transform: translate(1cqw, -0.5cqw); }
@@ -239,7 +267,9 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .root,
-    .root * {
+    .root *,
+    .root *::before,
+    .root *::after {
       animation: none !important;
     }
   }
