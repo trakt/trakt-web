@@ -121,4 +121,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
         m.preview_feature_title_today_story(),
       ),
   },
+  [FeatureFlag.YearInReview2026]: {
+    icon: SparkleIcon,
+    title: () => m.preview_feature_title_year_in_review_2026(),
+    addedAt: new Date('2026-09-29'),
+    description: () => m.preview_feature_description_year_in_review_2026(),
+    audience: 'director',
+  },
 };
