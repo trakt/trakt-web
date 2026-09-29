@@ -4,11 +4,18 @@ import type {
   AvailableLocale,
 } from '$lib/features/i18n/index.ts';
 
+const formatters = new Map<string, Intl.NumberFormat>();
+
 export function toGroupedNumber(
   value: number,
   locale: AvailableLocale | AvailableLanguage | string = 'en',
 ) {
-  return new Intl.NumberFormat(getIntlLocale(locale as AvailableLanguage), {
-    maximumFractionDigits: 0,
-  }).format(value);
+  const intlLocale = getIntlLocale(locale as AvailableLanguage);
+  const cached = formatters.get(intlLocale);
+  const formatter = cached ??
+    new Intl.NumberFormat(intlLocale, { maximumFractionDigits: 0 });
+
+  if (!cached) formatters.set(intlLocale, formatter);
+
+  return formatter.format(value);
 }
