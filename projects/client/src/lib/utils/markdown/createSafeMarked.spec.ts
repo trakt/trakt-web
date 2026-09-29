@@ -1,5 +1,4 @@
 import { createHeadingRenderer } from '$lib/sections/summary/components/comments/_internal/marked/createHeadingRenderer.ts';
-import { createParagraphRenderer } from '$lib/sections/summary/components/comments/_internal/marked/createParagraphRenderer.ts';
 import { spoilerExtension } from '$lib/sections/summary/components/comments/_internal/marked/spoilerExtension.ts';
 import { describe, expect, it } from 'vitest';
 import { createSafeMarked } from './createSafeMarked.ts';
@@ -233,9 +232,8 @@ describe('createSafeMarked', () => {
       isCommentSpoiler = false,
     ) =>
       createSafeMarked({
-        extensions: [spoilerExtension()],
+        extensions: [spoilerExtension(isCommentSpoiler)],
         renderer: {
-          paragraph: createParagraphRenderer(isCommentSpoiler),
           heading: createHeadingRenderer(),
         },
       }).parse(source, commentOptions);
@@ -254,8 +252,27 @@ describe('createSafeMarked', () => {
     it('should still render a spoiler tag', () => {
       const result = renderWithCommentExtensions('[spoiler]hidden[/spoiler]');
 
-      expect(result).toContain('class="trakt-spoiler"');
-      expect(result).toContain('<span>hidden</span>');
+      expect(result).toContain('<span class="trakt-spoiler">hidden</span>');
+    });
+
+    it.each([
+      ['wrapped in bold', '**[spoiler]hidden[/spoiler]**'],
+      ['inside a list item', '- [spoiler]hidden[/spoiler]'],
+    ])('should hide a spoiler %s', (_, source) => {
+      const container = toDom(renderWithCommentExtensions(source));
+
+      expect(container.querySelector('.trakt-spoiler')?.textContent).toBe(
+        'hidden',
+      );
+    });
+
+    it('should not hide inline spoilers of a spoiler comment', () => {
+      const result = renderWithCommentExtensions(
+        '[spoiler]hidden[/spoiler]',
+        true,
+      );
+
+      expect(result).not.toContain('trakt-spoiler');
     });
 
     it('should still render a heading', () => {

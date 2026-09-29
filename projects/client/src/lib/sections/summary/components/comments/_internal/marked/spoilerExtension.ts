@@ -9,11 +9,15 @@ export function matchSpoilerTag(src: string) {
   return rule.exec(src);
 }
 
-export function spoilerRenderer(text: string) {
-  return `<span>${text}</span>`;
+export function spoilerRenderer(text: string, isCommentSpoiler: boolean) {
+  if (isCommentSpoiler) return `<span>${text}</span>`;
+
+  return `<span class="trakt-spoiler">${text}</span>`;
 }
 
-export function spoilerExtension(): TokenizerAndRendererExtension {
+export function spoilerExtension(
+  isCommentSpoiler = false,
+): TokenizerAndRendererExtension {
   return {
     name: 'spoiler',
     level: 'inline',
@@ -37,7 +41,7 @@ export function spoilerExtension(): TokenizerAndRendererExtension {
     },
     renderer(token) {
       const parsedContent = this.parser.parseInline(token.tokens ?? []);
-      return spoilerRenderer(parsedContent);
+      return spoilerRenderer(parsedContent, isCommentSpoiler);
     },
   };
 }
