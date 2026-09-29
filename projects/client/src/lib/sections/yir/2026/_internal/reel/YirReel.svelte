@@ -102,8 +102,7 @@
 
   const latchLive = () => {
     const backAt = runner ? 0.6 : 0.2;
-
-    live = {
+    const next = {
       mobile: {
         front: live.mobile.front || flip.mobile > 0.2,
         back: live.mobile.back || flip.mobile > backAt,
@@ -113,6 +112,15 @@
         back: live.desktop.back || !runner || flip.desktop > 0.6,
       },
     };
+
+    if (
+      next.mobile.front !== live.mobile.front ||
+      next.mobile.back !== live.mobile.back ||
+      next.desktop.front !== live.desktop.front ||
+      next.desktop.back !== live.desktop.back
+    ) {
+      live = next;
+    }
   };
 
   const chapters: Record<string, () => string> = {
@@ -139,28 +147,44 @@
   let target: Record<string, number> = {};
   let targetTotal = 0;
 
+  type Geometry = {
+    viewport: number;
+    scrollable: number;
+    scenes: ReadonlyArray<{ top: number; height: number }>;
+  };
+
+  let geometry: Geometry = { viewport: 0, scrollable: 1, scenes: [] };
+
+  const readGeometry = () => {
+    if (!scroller) return;
+
+    geometry = {
+      viewport: scroller.clientHeight,
+      scrollable: Math.max(1, scroller.scrollHeight - scroller.clientHeight),
+      scenes: sceneElements.map((element) => ({
+        top: element.offsetTop,
+        height: element.offsetHeight,
+      })),
+    };
+  };
+
   const readTargets = () => {
     if (!scroller) return;
 
-    const height = scroller.clientHeight;
     const top = scroller.scrollTop;
 
-    targetTotal = clamp({
-      value: top / Math.max(1, scroller.scrollHeight - height),
-      min: 0,
-      max: 1,
-    });
+    targetTotal = clamp({ value: top / geometry.scrollable, min: 0, max: 1 });
     target = Object.fromEntries(
-      sceneElements.map((element, index) => {
-        const scene = scenes.at(index) ?? "";
+      geometry.scenes.map((scene, index) => {
+        const id = scenes.at(index) ?? "";
         return [
-          scene,
+          id,
           sceneProgress({
             scrollTop: top,
-            sceneTop: element.offsetTop,
-            sceneHeight: element.offsetHeight,
-            viewportHeight: height,
-            isPinnedOnly: scene === "monthly",
+            sceneTop: scene.top,
+            sceneHeight: scene.height,
+            viewportHeight: geometry.viewport,
+            isPinnedOnly: id === "monthly",
           }),
         ];
       }),
@@ -179,13 +203,14 @@
       return current + delta * EASING;
     };
 
-    total = step(total, targetTotal);
-    progress = Object.fromEntries(
-      Object.entries(target).map(([scene, value]) => [
-        scene,
-        step(progress[scene] ?? 0, value),
-      ]),
-    );
+    const nextTotal = step(total, targetTotal);
+    if (nextTotal !== total) total = nextTotal;
+
+    for (const [scene, value] of Object.entries(target)) {
+      const current = progress[scene] ?? 0;
+      const next = step(current, value);
+      if (next !== current) progress[scene] = next;
+    }
     latchLive();
 
     if (moving) frame = requestAnimationFrame(measure);
@@ -205,7 +230,15 @@
 
 
   onMount(() => {
+    readGeometry();
     measure();
+
+    const resize = new ResizeObserver(() => {
+      readGeometry();
+      onscroll();
+    });
+    if (scroller) resize.observe(scroller);
+    sceneElements.forEach((element) => element && resize.observe(element));
     if (typeof dialog?.showModal === "function") dialog.showModal();
     else dialog?.setAttribute("open", "");
     scroller?.focus();
@@ -214,6 +247,7 @@
 
     return () => {
       cancelAnimationFrame(frame);
+      resize.disconnect();
       stopWarming();
     };
   });
@@ -223,13 +257,14 @@
   bind:this={dialog}
   class="trakt-yir-reel"
   aria-label={m.yir_2026_replay()}
-  style:--total={total}
   oncancel={(event) => {
     event.preventDefault();
     onclose();
   }}
 >
-  <div class="yir-reel-progress" aria-hidden="true"><b></b></div>
+  <div class="yir-reel-progress" aria-hidden="true">
+    <b style:--total={total}></b>
+  </div>
   <button class="yir-reel-skip" type="button" onclick={onclose}>
     {m.yir_2026_reel_skip()}
   </button>
