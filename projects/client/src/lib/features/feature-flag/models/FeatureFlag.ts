@@ -9,4 +9,6 @@ export enum FeatureFlag {
   ListCounts = 'list-counts',
   GenrePicker = 'genre-picker',
   YouTubeSpecials = 'youtube-specials',
+  ReviewsPinMine = 'reviews-pin-mine',
+  ReviewsMineTab = 'reviews-mine-tab',
 }

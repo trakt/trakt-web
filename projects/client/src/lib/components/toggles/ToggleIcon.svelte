@@ -17,6 +17,7 @@
   import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import PopularIcon from "$lib/components/icons/PopularIcon.svelte";
   import PremiereIcon from "$lib/components/icons/PremiereIcon.svelte";
+  import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
@@ -69,6 +70,10 @@
 
 {#if option.value === "likes"}
   <PopularIcon />
+{/if}
+
+{#if option.value === "mine"}
+  <ProfileIcon />
 {/if}
 
 {#if option.value === "spoilers"}
