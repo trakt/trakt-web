@@ -7,7 +7,6 @@
   import { createSafeMarked } from "$lib/utils/markdown/createSafeMarked.ts";
   import CommentGif from "./CommentGif.svelte";
   import { createHeadingRenderer } from "./marked/createHeadingRenderer";
-  import { createParagraphRenderer } from "./marked/createParagraphRenderer";
   import { spoilerExtension } from "./marked/spoilerExtension";
 
   const maxPreviewLines = 3;
@@ -26,9 +25,8 @@
 
   const marked = $derived(
     createSafeMarked({
-      extensions: [spoilerExtension()],
+      extensions: [spoilerExtension(comment.isSpoiler)],
       renderer: {
-        paragraph: createParagraphRenderer(comment.isSpoiler),
         heading: createHeadingRenderer(),
       },
     }),
@@ -117,22 +115,22 @@
     }
 
     &,
-    :global(p) {
+    :global(span) {
       transition: var(--transition-increment) ease-in-out;
       transition-property: filter;
     }
 
     &:global(.trakt-spoiler),
-    :global(p.trakt-spoiler span) {
+    :global(span.trakt-spoiler) {
       @include spoiler-blur();
     }
 
-    :global(p.trakt-spoiler span) {
+    :global(span.trakt-spoiler *) {
       pointer-events: none;
     }
 
     &:global(.trakt-spoiler),
-    :global(p.trakt-spoiler) {
+    :global(span.trakt-spoiler) {
       cursor: pointer;
     }
   }

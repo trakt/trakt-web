@@ -21,8 +21,14 @@ describe('spoilerExtension', () => {
     expect(match).to.deep.equal(null);
   });
 
-  it('should render a spoiler span', () => {
-    const renderedResult = spoilerRenderer('test');
+  it('should render a hidden spoiler span', () => {
+    const renderedResult = spoilerRenderer('test', false);
+
+    expect(renderedResult).to.equal('<span class="trakt-spoiler">test</span>');
+  });
+
+  it('should render a plain span when the whole comment is a spoiler', () => {
+    const renderedResult = spoilerRenderer('test', true);
 
     expect(renderedResult).to.equal('<span>test</span>');
   });
