@@ -1,4 +1,5 @@
 import { UserNameSchema } from '$lib/requests/models/UserName.ts';
+import { VipVeteranSchema } from '$lib/requests/models/VipVeteran.ts';
 import z from 'zod';
 
 export const UserProfileSchema = z.object({
@@ -20,6 +21,7 @@ export const UserProfileSchema = z.object({
     url: z.string().nullish(),
   }).optional(),
   joinedAt: z.date().nullish(),
+  veteran: VipVeteranSchema.nullish(),
 });
 
 export type UserProfile = z.infer<typeof UserProfileSchema>;

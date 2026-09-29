@@ -22,4 +22,5 @@ export const UserProfileHarryMappedMock: UserProfile = {
   'location': undefined,
   'cover': undefined,
   'joinedAt': null,
+  'veteran': null,
 };
