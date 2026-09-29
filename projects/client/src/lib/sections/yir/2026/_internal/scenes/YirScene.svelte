@@ -55,6 +55,8 @@
     border-top: var(--ni-1) solid var(--color-yir-separator);
     background: var(--color-yir-background);
     color: var(--color-yir-text-primary);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 100dvh;
   }
 
   .yir-scene-inner {
