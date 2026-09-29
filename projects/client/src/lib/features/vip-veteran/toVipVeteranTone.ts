@@ -1,9 +1,7 @@
 import type { VipBadgeTone } from '$lib/components/badge/VipBadgeTone.ts';
+import { VIP_VETERAN_LADDER } from './VIP_VETERAN_LADDER.ts';
 
 export function toVipVeteranTone(tier: number): VipBadgeTone {
-  if (tier >= 10) return 'gold';
-  if (tier >= 7) return 'silver';
-  if (tier >= 5) return 'copper';
-  if (tier >= 3) return 'deep';
-  return 'vip';
+  return VIP_VETERAN_LADDER.findLast((rung) => tier >= rung.tier)?.tone ??
+    'vip';
 }

@@ -11,6 +11,7 @@
   import ActivityDrawerHost from "./components/_internal/drawers/ActivityDrawerHost.svelte";
   import AllTimeStatsDrawerHost from "./components/_internal/drawers/AllTimeStatsDrawerHost.svelte";
   import LeaderboardDrawerHost from "./leaderboard/LeaderboardDrawerHost.svelte";
+  import VipStreakDrawerHost from "./vip-streak/VipStreakDrawerHost.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps.ts";
 
   const { slug, profile }: DisplayableProfileProps = $props();
@@ -33,4 +34,6 @@
   <LeaderboardDrawerHost {slug} onClose={close} />
 {:else if drawer === ProfileDrawers.AllTimeStats}
   <AllTimeStatsDrawerHost onClose={close} />
+{:else if drawer === ProfileDrawers.VipStreak}
+  <VipStreakDrawerHost {slug} onClose={close} />
 {/if}
