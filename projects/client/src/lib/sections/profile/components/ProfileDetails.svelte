@@ -3,13 +3,20 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ProfilePageBanner from "$lib/sections/profile-banner/ProfilePageBanner.svelte";
+  import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import type { DisplayableProfileProps } from "../DisplayableProfileProps";
   import AllTimeStats from "./AllTimeStats.svelte";
   import MonthToDate from "./MonthToDate.svelte";
   import ThisMonth from "./ThisMonth.svelte";
   import ThisYear from "./ThisYear.svelte";
 
-  const { profile, slug }: DisplayableProfileProps = $props();
+  const {
+    profile,
+    slug,
+    promotion,
+  }: DisplayableProfileProps & {
+    promotion?: VipVeteranPromotion | null;
+  } = $props();
 
   const { isMe } = $derived(useIsMe(slug));
 
@@ -34,7 +41,7 @@
   class:has-stats={hasStats}
   class:is-narrow={isFreeOtherProfile}
 >
-  <ProfilePageBanner {profile} {slug} />
+  <ProfilePageBanner {profile} {slug} {promotion} />
 
   {#if hasStats}
     <RenderFor audience="all" device={["desktop"]}>
