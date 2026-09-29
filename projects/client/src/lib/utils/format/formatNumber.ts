@@ -1,3 +1,6 @@
+let formatter: Intl.NumberFormat | null = null;
+
 export function formatNumber(value: number): string {
-  return Math.round(value).toLocaleString();
+  formatter ??= new Intl.NumberFormat();
+  return formatter.format(Math.round(value));
 }
