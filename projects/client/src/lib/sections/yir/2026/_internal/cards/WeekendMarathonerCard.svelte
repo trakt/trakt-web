@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PersonaCardProps } from "./PersonaCardProps";
+  const COUNTDOWN = [5, 4, 3, 2, 1];
   const BANDS = ["#f59f00", "#e8590c", "#c2255c", "#862e4f", "#4a0f1f"];
   const { card, live }: PersonaCardProps = $props();
 </script>
@@ -17,7 +18,7 @@
   <div class="name">{card.name}</div>
   <div class="row">
     <div class="tag">{card.tagline}</div>
-    <span class="next" aria-hidden="true"><span class="ring"></span>Next episode</span>
+    <span class="next" aria-hidden="true"><span class="ring"><span class="drain"><i class="half first"></i><i class="half second"></i></span><span class="count"><span class="digits">{#each COUNTDOWN as digit (digit)}<span>{digit}</span>{/each}</span></span></span>Next episode</span>
   </div>
   <div class="stats">
     {#each card.stats as stat (stat.key)}
@@ -109,33 +110,66 @@
     font-weight: 600;
   }
   .ring {
+    position: relative;
     width: 6cqw;
     height: 6cqw;
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: conic-gradient(#ffb03a calc(var(--r) * 360deg), rgb(255 255 255 / 20%) 0);
+    background: #ffb03a;
   }
-  .ring::after {
-    content: counter(n);
-    counter-reset: n var(--n);
+  .drain {
+    position: absolute;
+    inset: 0;
+    transform: scaleX(-1);
+  }
+  .half {
+    position: absolute;
+    inset-block: 0;
+    width: 50%;
+    overflow: hidden;
+  }
+  .half.first {
+    left: 50%;
+  }
+  .half.second {
+    left: 0;
+  }
+  .half::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  .half.first::before {
+    left: -100%;
+    background: linear-gradient(to right, color-mix(in srgb, #4a0f1f 80%, #fff) 50%, transparent 50%);
+  }
+  .half.second::before {
+    left: 0;
+    background: linear-gradient(to left, color-mix(in srgb, #4a0f1f 80%, #fff) 50%, transparent 50%);
+  }
+  .count {
+    position: relative;
     width: 4.4cqw;
     height: 4.4cqw;
     border-radius: 50%;
     background: #4a0f1f;
-    display: grid;
-    place-items: center;
+    overflow: hidden;
     font-size: 2.6cqw;
+    line-height: 4.4cqw;
+    text-align: center;
   }
-  @property --n {
-    syntax: "<integer>";
-    inherits: true;
-    initial-value: 5;
+  .digits {
+    display: block;
   }
-  @property --r {
-    syntax: "<number>";
-    inherits: true;
-    initial-value: 1;
+  .digits span {
+    display: block;
+    font: inherit;
+    color: inherit;
+    height: 4.4cqw;
   }
   .stats {
     display: grid;
@@ -159,8 +193,14 @@
   .is-live .bands i {
     animation: band calc(var(--yir-beat) * 6) cubic-bezier(0.2, 0.8, 0.2, 1) both;
   }
-  .is-live .ring {
-    animation: countdown 5s linear infinite;
+  .is-live .half.first::before {
+    animation: drain-first 5s linear infinite;
+  }
+  .is-live .half.second::before {
+    animation: drain-second 5s linear infinite;
+  }
+  .is-live .digits {
+    animation: countdown 5s steps(5) infinite;
   }
   @keyframes sunrise {
     from { transform: translateY(40cqw); }
@@ -169,12 +209,20 @@
     from { transform: scaleX(0); }
   }
   @keyframes countdown {
-    from { --n: 5; --r: 1; }
-    to { --n: 0; --r: 0; }
+    to { transform: translateY(-22cqw); }
+  }
+  @keyframes drain-first {
+    50%, 100% { transform: rotate(180deg); }
+  }
+  @keyframes drain-second {
+    0%, 50% { transform: none; }
+    100% { transform: rotate(180deg); }
   }
   @media (prefers-reduced-motion: reduce) {
     .root,
-    .root * {
+    .root *,
+    .root *::before,
+    .root *::after {
       animation: none !important;
     }
   }

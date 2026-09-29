@@ -172,18 +172,33 @@
 
   .is-active .yir-bar-peak {
     transform: scale(1);
+  }
+
+  .yir-bar-peak::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--color-yir-accent);
+    opacity: 0;
+  }
+
+  .is-active .yir-bar-peak::after {
     animation: peak-pulse 2.6s ease-out 1.6s infinite;
   }
 
   @keyframes peak-pulse {
     0% {
-      box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-yir-accent) 60%, transparent);
+      opacity: 0.6;
+      transform: scale(1);
     }
     70%,
     100% {
-      box-shadow: 0 0 0 var(--ni-12) color-mix(in srgb, var(--color-yir-accent) 0%, transparent);
+      opacity: 0;
+      transform: scale(4);
     }
   }
+
 
   @media (hover: hover) {
     .trakt-yir-bars:hover .yir-bar:not(:hover) i {
@@ -204,6 +219,10 @@
     .yir-bar-peak {
       transform: scale(1);
       transition: none;
+      animation: none;
+    }
+
+    .is-active .yir-bar-peak::after {
       animation: none;
     }
   }

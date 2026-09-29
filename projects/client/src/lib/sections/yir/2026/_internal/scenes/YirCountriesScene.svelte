@@ -34,6 +34,7 @@
       detail: unit(country.count),
     })),
   );
+
 </script>
 
 <YirScene
@@ -47,7 +48,12 @@
     : m.yir_2024_most_watched_movie_countries()}
 >
   {#snippet children(isInView)}
-    <div class="yir-map" class:is-in={isInView} data-reveal style:--d="calc(var(--yir-beat) * 2)">
+    <div
+      class="yir-map"
+      class:is-in={isInView}
+      data-reveal
+      style:--d="calc(var(--yir-beat) * 2)"
+    >
       <div class="yir-map-grid" aria-hidden="true"></div>
       <div class="yir-map-scan" aria-hidden="true"></div>
       <YirCountriesMap
@@ -127,8 +133,8 @@
 
     :global(.country.is-interactive) {
       filter: drop-shadow(
-        0 0 var(--ni-6)
-          color-mix(in srgb, var(--color-yir-accent) 70%, transparent)
+        0 0 var(--ni-10)
+          color-mix(in srgb, var(--color-yir-accent) 80%, transparent)
       );
     }
 
@@ -136,9 +142,6 @@
       clip-path: inset(-20%);
     }
 
-    &.is-in :global(.country.is-interactive) {
-      animation: map-glow 3.2s ease-in-out 2.1s infinite alternate;
-    }
   }
 
   .yir-map-grid {
@@ -195,22 +198,12 @@
     }
   }
 
-  @keyframes map-glow {
-    to {
-      filter: drop-shadow(
-        0 0 var(--ni-16)
-          color-mix(in srgb, var(--color-yir-accent) 90%, transparent)
-      );
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .yir-map :global(.trakt-country-map) {
       clip-path: none;
       transition: none;
     }
 
-    .yir-map.is-in :global(.country.is-interactive),
     .is-in .yir-map-scan {
       animation: none;
     }
