@@ -11958,6 +11958,69 @@
     "button_label_open_vip_streak": {
       "default": "Show VIP streak",
       "description": "Accessible label for the VIP badge on a profile, which opens a sheet with how long the member has kept VIP."
+    },
+    "header_vip_streak": {
+      "default": "VIP streak",
+      "description": "Title of the sheet that shows how long a member has kept VIP without a break."
+    },
+    "text_vip_streak_caption_one": {
+      "default": "year of VIP",
+      "description": "Caption under the big number 1 in the VIP streak sheet, reading as '1 year of VIP'."
+    },
+    "text_vip_streak_caption_other": {
+      "default": "years of VIP",
+      "description": "Caption under a big number of years (2 or more) in the VIP streak sheet, reading as '13 years of VIP'."
+    },
+    "text_vip_streak_since": {
+      "default": "Unbroken since {date}",
+      "description": "Start date of the member's current VIP streak, for example 'Unbroken since March 1, 2016'.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_streak_rung_one": {
+      "default": "1 year",
+      "description": "First step on the VIP streak ladder."
+    },
+    "text_vip_streak_rung_other": {
+      "default": "{years} years",
+      "description": "A step on the VIP streak ladder, always 3 or more years.",
+      "variables": {
+        "years": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_streak_next_one": {
+      "default": "{title} in 1 year",
+      "description": "How long until the member reaches the next badge on the VIP streak ladder, when it is 1 year away. The title is the badge name, for example 'Veteran'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_streak_next_other": {
+      "default": "{title} in {years} years",
+      "description": "How long until the member reaches the next badge on the VIP streak ladder, when it is 2 or more years away. The title is the badge name, for example 'Legend'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "years": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_streak_top": {
+      "default": "Top of the ladder",
+      "description": "Shown in the VIP streak sheet when the member has reached the highest badge."
+    },
+    "text_vip_streak_grace_note": {
+      "default": "A break of up to 31 days keeps the streak going.",
+      "description": "Footnote in the VIP streak sheet explaining how long VIP can lapse before the streak resets."
     }
   }
 }
