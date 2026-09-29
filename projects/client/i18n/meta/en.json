@@ -11105,6 +11105,512 @@
     "image_alt_comment_gif": {
       "default": "GIF attached to the comment",
       "description": "Alt text for the GIF rendered underneath a posted comment."
+    },
+    "yir_2026_persona_anime_voyager_name": {
+      "default": "Anime Voyager",
+      "description": "Name of the \"Anime Voyager\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_anime_voyager_tagline": {
+      "default": "Subs on, arcs long, never skipping the opening.",
+      "description": "One-line tagline under the \"Anime Voyager\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_day_one_devotee_name": {
+      "default": "Day-One Devotee",
+      "description": "Name of the \"Day-One Devotee\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_day_one_devotee_tagline": {
+      "default": "Spoilers can't catch you.",
+      "description": "One-line tagline under the \"Day-One Devotee\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_weekend_marathoner_name": {
+      "default": "Weekend Marathoner",
+      "description": "Name of the \"Weekend Marathoner\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_weekend_marathoner_tagline": {
+      "default": "Friday starts a season. Sunday ends it.",
+      "description": "One-line tagline under the \"Weekend Marathoner\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_comfort_rewatcher_name": {
+      "default": "Comfort Rewatcher",
+      "description": "Name of the \"Comfort Rewatcher\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_comfort_rewatcher_tagline": {
+      "default": "You know how it ends. That's the point.",
+      "description": "One-line tagline under the \"Comfort Rewatcher\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_omnivore_name": {
+      "default": "The Omnivore",
+      "description": "Name of the \"The Omnivore\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_omnivore_tagline": {
+      "default": "Crime, anime, reality, prestige. All of it.",
+      "description": "One-line tagline under the \"The Omnivore\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_opening_night_name": {
+      "default": "Opening Night",
+      "description": "Name of the \"Opening Night\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_opening_night_tagline": {
+      "default": "First in line, checked in before the trailers end.",
+      "description": "One-line tagline under the \"Opening Night\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_cinephile_name": {
+      "default": "The Cinephile",
+      "description": "Name of the \"The Cinephile\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_cinephile_tagline": {
+      "default": "Two hours is a warm-up.",
+      "description": "One-line tagline under the \"The Cinephile\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_critic_name": {
+      "default": "The Critic",
+      "description": "Name of the \"The Critic\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_critic_tagline": {
+      "default": "You don't watch things. You judge them.",
+      "description": "One-line tagline under the \"The Critic\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_loyalist_name": {
+      "default": "The Loyalist",
+      "description": "Name of the \"The Loyalist\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_loyalist_tagline": {
+      "default": "One world, fully committed.",
+      "description": "One-line tagline under the \"The Loyalist\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_curator_name": {
+      "default": "The Curator",
+      "description": "Name of the \"The Curator\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_curator_tagline": {
+      "default": "Fewer things, better things.",
+      "description": "One-line tagline under the \"The Curator\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_wildcard_name": {
+      "default": "The Wildcard",
+      "description": "Name of the \"The Wildcard\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_wildcard_tagline": {
+      "default": "No box fits you. That's the whole point.",
+      "description": "One-line tagline under the \"The Wildcard\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_opening_act_name": {
+      "default": "The Opening Act",
+      "description": "Name of the \"The Opening Act\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "yir_2026_persona_opening_act_tagline": {
+      "default": "Your story's just starting.",
+      "description": "One-line tagline under the \"The Opening Act\" persona name on the 2026 Year in Review persona card."
+    },
+    "yir_2026_highlight_anime_episodes": {
+      "default": "anime episodes",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_anime_share": {
+      "default": "of all episodes were anime",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_streak_days": {
+      "default": "day streak",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_premiere_share": {
+      "default": "watched within 3 days of airing",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_premieres": {
+      "default": "premieres",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_weekend_share": {
+      "default": "on weekends",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_binge_days": {
+      "default": "binge days",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_plays_per_day": {
+      "default": "per active day",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_catalog_share": {
+      "default": "catalog episodes",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_top_show_episodes": {
+      "default": "episodes of your #1 show",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_apps": {
+      "default": "apps",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_shows": {
+      "default": "shows",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_networks": {
+      "default": "networks",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_checkin_share": {
+      "default": "checked in",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_new_releases": {
+      "default": "new releases",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_avg_runtime": {
+      "default": "min average runtime",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_avg_vintage": {
+      "default": "average vintage",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_pre_2000": {
+      "default": "before 2000",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_ratings": {
+      "default": "ratings",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_avg_rating": {
+      "default": "average rating",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_perfect_tens": {
+      "default": "perfect tens",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_top_show_share": {
+      "default": "of all episodes",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_genre_share": {
+      "default": "in your top genre",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_movies": {
+      "default": "movies",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_plays": {
+      "default": "plays",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_highlight_personas_in_range": {
+      "default": "personas in range",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
+    },
+    "yir_2026_trait_streak_keeper": {
+      "default": "Streak Keeper",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_night_owl": {
+      "default": "Night Owl",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_early_bird": {
+      "default": "Early Bird",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_weekend_warrior": {
+      "default": "Weekend Warrior",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_time_traveler": {
+      "default": "Time Traveler",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_globetrotter": {
+      "default": "Globetrotter",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_social_butterfly": {
+      "default": "Social Butterfly",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_automaton": {
+      "default": "Automaton",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_app_hopper": {
+      "default": "App Hopper",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_silent_watcher": {
+      "default": "Silent Watcher",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_hype_machine": {
+      "default": "Hype Machine",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_tough_crowd": {
+      "default": "Tough Crowd",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_polariser": {
+      "default": "Polariser",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_live_checker": {
+      "default": "Live Checker",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_doc_nerd": {
+      "default": "Doc Nerd",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_horror_hound": {
+      "default": "Horror Hound",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_trait_fresh_start": {
+      "default": "Fresh Start",
+      "description": "Name of a stackable viewing trait badge shown next to the persona on the 2026 Year in Review."
+    },
+    "yir_2026_reel_presents": {
+      "default": "Trakt presents",
+      "description": "Kicker above the year on the opening scene of the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_your_year": {
+      "default": "{name}'s year, on screen.",
+      "description": "Subtitle on the opening scene of the 2026 Year in Review reel.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_reel_scroll": {
+      "default": "Scroll",
+      "description": "Hint prompting the user to scroll on the opening scene of the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_you_watched": {
+      "default": "You watched",
+      "description": "Kicker above the hours count-up scene of the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_hours": {
+      "default": "hours",
+      "description": "Unit label under the hours count-up in the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_days_of_screen": {
+      "default": "{days} days of screen time.",
+      "description": "Line converting watched hours to days in the 2026 Year in Review reel.",
+      "variables": {
+        "days": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_reel_number_one": {
+      "default": "Your number one",
+      "description": "Kicker above the most-watched title scene of the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_plays": {
+      "default": "{count} plays",
+      "description": "Play count under the most-watched title in the 2026 Year in Review reel.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_reel_streak": {
+      "default": "Longest streak",
+      "description": "Kicker above the streak ring scene of the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_days_in_row": {
+      "default": "days in a row",
+      "description": "Unit under the streak number in the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_month_by_month": {
+      "default": "Month by month",
+      "description": "Kicker above the monthly persona scene of the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_mostly": {
+      "default": "Mostly {persona}",
+      "description": "Summary under the monthly persona scene of the 2026 Year in Review reel.",
+      "variables": {
+        "persona": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_reel_and_you_are": {
+      "default": "And you are",
+      "description": "Kicker above the persona card reveal in the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_a_little_bit": {
+      "default": "A little bit {persona}",
+      "description": "Kicker shown while the runner-up persona card is visible, before it flips to the primary persona, in the 2026 Year in Review reel.",
+      "variables": {
+        "persona": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_reel_but_mostly": {
+      "default": "But mostly",
+      "description": "Kicker shown once the card flips from the runner-up to the primary persona in the 2026 Year in Review reel."
+    },
+    "yir_2026_reel_skip": {
+      "default": "Skip to my stats",
+      "description": "Button that closes the 2026 Year in Review reel and shows the themed stats page."
+    },
+    "yir_2026_reel_see_stats": {
+      "default": "See all my stats",
+      "description": "Button at the end of the 2026 Year in Review reel that opens the themed stats page."
+    },
+    "yir_2026_reel_jump_back": {
+      "default": "Jump back to",
+      "description": "Label above the chapter buttons at the end of the 2026 Year in Review reel."
+    },
+    "yir_2026_hybrid": {
+      "default": "with a streak of {persona}",
+      "description": "Hybrid stamp shown when the runner-up persona scored close to the primary on the 2026 Year in Review.",
+      "variables": {
+        "persona": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_rarity": {
+      "default": "Only {percent}% are {persona}",
+      "description": "Rarity line under the persona on the 2026 Year in Review.",
+      "variables": {
+        "percent": {
+          "type": "number"
+        },
+        "persona": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_replay": {
+      "default": "Replay your 2026",
+      "description": "Button on the themed 2026 Year in Review page that plays the reel again."
+    },
+    "yir_2026_watch_reel": {
+      "default": "Watch {name}'s reel",
+      "description": "Button on someone else's 2026 Year in Review page that plays their reel.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_traits": {
+      "default": "Traits",
+      "description": "Heading above the trait badges on the themed 2026 Year in Review page."
+    },
+    "yir_2026_reel_see_stats_hint": {
+      "default": "Genres, studios, the map, people and more",
+      "description": "Hint under the \"See all my stats\" call to action at the end of the 2026 Year in Review reel, listing what the stats page contains."
+    },
+    "yir_2026_scene_kicker": {
+      "default": "Scene {number} · {title}",
+      "description": "Mono kicker above each section of the themed 2026 Year in Review page, styled like a film scene slate.",
+      "variables": {
+        "number": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_hours_of": {
+      "default": "hours of {items}",
+      "description": "Line next to the big hours number in a 2026 Year in Review stats scene, e.g. \"hours of 21 shows\".",
+      "variables": {
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_peak_week": {
+      "default": "Most active week",
+      "description": "Label for the week with the most plays in a 2026 Year in Review stats scene."
+    },
+    "yir_2026_peak_hour": {
+      "default": "Peak hour",
+      "description": "Label for the hour of day with the most plays in a 2026 Year in Review stats scene."
+    },
+    "yir_2026_hours_by_month": {
+      "default": "Hours by month",
+      "description": "Label above the monthly hours chart in a 2026 Year in Review stats scene."
+    },
+    "yir_2026_trend_missed": {
+      "default": "Missed",
+      "description": "Stamp on a trending title the user did not watch in the 2026 Year in Review trends scene."
+    },
+    "yir_2026_trends_score": {
+      "default": "{watched} of {total}",
+      "description": "Big score of trending titles watched in the 2026 Year in Review trends scene.",
+      "variables": {
+        "watched": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_2026_top_rated_rating": {
+      "default": "{rating} out of 10",
+      "description": "Accessible label for a star rating in the 2026 Year in Review top rated scene.",
+      "variables": {
+        "rating": {
+          "type": "number"
+        }
+      }
+    },
+    "yir_2026_credits_kicker": {
+      "default": "Credits",
+      "description": "Kicker above the people section of the 2026 Year in Review, styled like film end credits."
+    },
+    "yir_2026_preview_title": {
+      "default": "Persona preview",
+      "description": "Toggle button of the persona preview panel. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
+    },
+    "yir_2026_preview_persona": {
+      "default": "Persona",
+      "description": "Label of the persona picker. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
+    },
+    "yir_2026_preview_runner_up": {
+      "default": "Runner-up",
+      "description": "Label of the runner-up persona picker. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
+    },
+    "yir_2026_preview_runner_default": {
+      "default": "Default",
+      "description": "Option that keeps the runner-up from the data. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
+    },
+    "yir_2026_preview_runner_default_named": {
+      "default": "Default ({persona})",
+      "description": "Option that keeps the runner-up from the data, naming it. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas.",
+      "variables": {
+        "persona": {
+          "type": "string"
+        }
+      }
+    },
+    "yir_2026_preview_runner_none": {
+      "default": "None (no hybrid)",
+      "description": "Option that removes the runner-up so the persona is not a hybrid. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
+    },
+    "yir_2026_preview_play_reel": {
+      "default": "Play reel",
+      "description": "Button that plays the reel again. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
+    },
+    "yir_2026_preview_reset": {
+      "default": "Reset",
+      "description": "Button that clears the previewed persona. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
     }
   }
 }
