@@ -8,6 +8,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
+  import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import { useVipVeteran } from "$lib/features/vip-veteran/stores/useVipVeteran.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import LeaderboardPill from "$lib/sections/profile/leaderboard/LeaderboardPill.svelte";
@@ -26,12 +27,14 @@
 
   type ProfilePageBannerProps = DisplayableProfileProps & {
     variant?: "private" | "public";
+    promotion?: VipVeteranPromotion | null;
   };
 
   const {
     profile,
     slug,
     variant = "public",
+    promotion,
   }: ProfilePageBannerProps = $props();
 
   const { user, blocked } = useUser();
@@ -40,6 +43,7 @@
 
   const { veteran } = useVipVeteran(fromRune(() => slug));
   const shownVeteran = $derived(profile.isVip ? $veteran : null);
+  const ringTone = $derived(toVipVeteranRingTone(shownVeteran));
 
   const { isEnabled } = useFeatureFlag();
   const leaderboardEnabled = isEnabled(FeatureFlag.Leaderboard);
@@ -60,7 +64,7 @@
       name={profile.name.first}
       src={profile.avatar.url}
       isVip={profile.isVip}
-      ringTone={toVipVeteranRingTone(shownVeteran)}
+      {ringTone}
       hasEntrance={shownVeteran != null}
     >
       {#snippet badge()}
@@ -73,7 +77,11 @@
         </RenderFor>
         {#if !isBlocked && !isPending}
           {#if shownVeteran}
-            <VipStreakBadge veteran={shownVeteran} />
+            <VipStreakBadge
+              veteran={shownVeteran}
+              {promotion}
+              isDirector={profile.isDirector}
+            />
           {:else}
             <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
               {#if profile.isVip}

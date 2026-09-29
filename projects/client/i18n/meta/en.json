@@ -12021,6 +12021,62 @@
     "text_vip_streak_grace_note": {
       "default": "A break of up to 31 days keeps the streak going.",
       "description": "Footnote in the VIP streak sheet explaining how long VIP can lapse before the streak resets."
+    },
+    "text_vip_grace_ends_one": {
+      "default": "Your {years}-year VIP streak ends in 1 day",
+      "description": "Banner on your own profile when VIP has lapsed and the streak will reset tomorrow unless VIP is renewed. {years} is the streak length, for example '7-year'.",
+      "variables": {
+        "years": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_grace_ends_other": {
+      "default": "Your {years}-year VIP streak ends in {days} days",
+      "description": "Banner on your own profile when VIP has lapsed and the streak will reset unless VIP is renewed. {years} is the streak length, {days} is 2 to 14.",
+      "variables": {
+        "years": {
+          "type": "string"
+        },
+        "days": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_grace_body": {
+      "default": "Renew before then to keep it going.",
+      "description": "Second line of the banner that warns a VIP streak is about to end."
+    },
+    "text_vip_anniversary_title_one": {
+      "default": "1 year of VIP",
+      "description": "Title of the thank-you card shown on the day a member's VIP streak turns 1 year old."
+    },
+    "text_vip_anniversary_title_other": {
+      "default": "{years} years of VIP",
+      "description": "Title of the thank-you card shown on the day a member's VIP streak turns another year older.",
+      "variables": {
+        "years": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_anniversary_body": {
+      "default": "Thank you for sticking with Trakt since {date}.",
+      "description": "Body of the VIP anniversary thank-you card. {date} is a month and year, for example 'March 2019'.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_veteran_promoted": {
+      "default": "You're now a {title}",
+      "description": "Announced to screen readers when the VIP badge flips to a new title after a long streak. {title} is 'Veteran' or 'Legend'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
