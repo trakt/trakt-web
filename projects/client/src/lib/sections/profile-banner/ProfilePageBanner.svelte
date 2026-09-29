@@ -7,11 +7,15 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
+  import { useVipVeteran } from "$lib/features/vip-veteran/stores/useVipVeteran.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import LeaderboardPill from "$lib/sections/profile/leaderboard/LeaderboardPill.svelte";
   import MatchPill from "$lib/sections/profile/components/MatchPill.svelte";
+  import VipStreakBadge from "$lib/sections/profile/vip-streak/VipStreakBadge.svelte";
   import ProfileAbout from "$lib/sections/profile/components/ProfileAbout.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { DisplayableProfileProps } from "../profile/DisplayableProfileProps";
   import BlockedUserTag from "./_internal/BlockedUserTag.svelte";
@@ -34,6 +38,9 @@
   const { isMe } = $derived(useIsMe(slug));
   const { followStatus } = $derived(useFollowUserRequest(slug));
 
+  const { veteran } = useVipVeteran(fromRune(() => slug));
+  const shownVeteran = $derived(profile.isVip ? $veteran : null);
+
   const { isEnabled } = useFeatureFlag();
   const leaderboardEnabled = isEnabled(FeatureFlag.Leaderboard);
 
@@ -53,6 +60,8 @@
       name={profile.name.first}
       src={profile.avatar.url}
       isVip={profile.isVip}
+      ringTone={toVipVeteranRingTone(shownVeteran)}
+      hasEntrance={shownVeteran != null}
     >
       {#snippet badge()}
         <RenderFor audience="authenticated">
@@ -63,11 +72,15 @@
           {/if}
         </RenderFor>
         {#if !isBlocked && !isPending}
-          <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-            {#if profile.isVip}
-              <VipBadge isDirector={profile.isDirector} />
-            {/if}
-          </RenderFor>
+          {#if shownVeteran}
+            <VipStreakBadge veteran={shownVeteran} />
+          {:else}
+            <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
+              {#if profile.isVip}
+                <VipBadge isDirector={profile.isDirector} />
+              {/if}
+            </RenderFor>
+          {/if}
         {/if}
       {/snippet}
     </ProfileImage>

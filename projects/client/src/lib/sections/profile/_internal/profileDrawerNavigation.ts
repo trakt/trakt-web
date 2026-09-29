@@ -9,6 +9,7 @@ export enum ProfileDrawers {
   Match = 'match',
   Leaderboard = 'leaderboard',
   AllTimeStats = 'all-time-stats',
+  VipStreak = 'vip-streak',
 }
 
 const profileDrawerParams = {
@@ -27,6 +28,8 @@ function mapToDrawer(value: string | Nil) {
       return ProfileDrawers.Leaderboard;
     case ProfileDrawers.AllTimeStats:
       return ProfileDrawers.AllTimeStats;
+    case ProfileDrawers.VipStreak:
+      return ProfileDrawers.VipStreak;
     default:
       return null;
   }
@@ -53,5 +56,6 @@ export function profileDrawerNavigation(searchParams?: URLSearchParams) {
       buildDrawerLink(ProfileDrawers.Leaderboard),
     buildAllTimeStatsDrawerLink: () =>
       buildDrawerLink(ProfileDrawers.AllTimeStats),
+    buildVipStreakDrawerLink: () => buildDrawerLink(ProfileDrawers.VipStreak),
   };
 }
