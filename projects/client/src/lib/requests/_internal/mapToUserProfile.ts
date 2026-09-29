@@ -3,6 +3,7 @@ import { DEFAULT_AVATAR } from '$lib/utils/constants.ts';
 import { toUserName } from '$lib/utils/formatting/string/toUserName.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { ProfileResponse } from '@trakt/api';
+import { mapToVipVeteran } from './mapToVipVeteran.ts';
 
 export function mapToUserProfile(user: ProfileResponse): UserProfile {
   const cover = user.vip_cover_image
@@ -26,5 +27,6 @@ export function mapToUserProfile(user: ProfileResponse): UserProfile {
     about: user.about,
     cover,
     joinedAt: user.joined_at ? new Date(user.joined_at) : null,
+    veteran: mapToVipVeteran(user),
   };
 }

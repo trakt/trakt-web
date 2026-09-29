@@ -9,6 +9,7 @@ import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
+import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
 import YouTubeIcon from '$lib/components/icons/YouTubeIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
@@ -145,6 +146,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_year_in_review_2026(),
     addedAt: new Date('2026-09-29'),
     description: () => m.preview_feature_description_year_in_review_2026(),
+    audience: 'director',
+  },
+  [FeatureFlag.VipVeteran]: {
+    icon: SparkleStarIcon,
+    title: () => m.preview_feature_title_vip_veteran(),
+    addedAt: new Date('2026-10-02'),
+    description: () => m.preview_feature_description_vip_veteran(),
     audience: 'director',
   },
 };

@@ -10,6 +10,34 @@
   --color-foreground-vip-badge: var(--shade-10);
 
   /**
+   * VIP veteran tiers: 1 and 3 years stay purple, 5 copper, 7 silver, 10 gold.
+   */
+  --color-background-vip-badge-vip-start: var(--purple-300);
+  --color-background-vip-badge-vip-end: var(--purple-600);
+  --color-glow-vip-badge-vip: var(--purple-500);
+  --color-foreground-vip-badge-vip: var(--shade-10);
+
+  --color-background-vip-badge-deep-start: var(--purple-500);
+  --color-background-vip-badge-deep-end: var(--purple-800);
+  --color-glow-vip-badge-deep: var(--purple-600);
+  --color-foreground-vip-badge-deep: var(--shade-10);
+
+  --color-background-vip-badge-copper-start: var(--orange-300);
+  --color-background-vip-badge-copper-end: var(--orange-700);
+  --color-glow-vip-badge-copper: var(--orange-500);
+  --color-foreground-vip-badge-copper: var(--shade-10);
+
+  --color-background-vip-badge-silver-start: var(--shade-60);
+  --color-background-vip-badge-silver-end: var(--shade-300);
+  --color-glow-vip-badge-silver: var(--shade-200);
+  --color-foreground-vip-badge-silver: var(--shade-900);
+
+  --color-background-vip-badge-gold-start: var(--yellow-200);
+  --color-background-vip-badge-gold-end: var(--yellow-600);
+  --color-glow-vip-badge-gold: var(--yellow-500);
+  --color-foreground-vip-badge-gold: var(--shade-900);
+
+  /**
    * Tags
    */
   --color-background-stem-tag: var(--shade-800);
@@ -46,6 +74,9 @@
    */
   --color-border-avatar: var(--shade-50);
   --color-border-vip-avatar: var(--purple-400);
+  --color-border-vip-avatar-copper: var(--orange-400);
+  --color-border-vip-avatar-silver: var(--shade-200);
+  --color-border-vip-avatar-gold: var(--yellow-400);
 
   /**
    * Buttons

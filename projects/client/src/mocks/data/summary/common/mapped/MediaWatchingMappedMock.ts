@@ -25,6 +25,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'klaasje',
@@ -47,6 +48,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'cuno',
@@ -69,6 +71,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'joyce',
@@ -91,6 +94,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'measurehead',
@@ -113,6 +117,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'lilian',
@@ -135,6 +140,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'titus',
@@ -157,6 +163,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'garte',
@@ -179,6 +186,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'evrart',
@@ -201,6 +209,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'thepale',
@@ -223,6 +232,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'lena',
@@ -245,6 +255,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
   {
     'username': 'renee',
@@ -267,5 +278,6 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'location': undefined,
     'cover': undefined,
     'joinedAt': null,
+    'veteran': null,
   },
 ];

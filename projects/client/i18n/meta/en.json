@@ -11927,6 +11927,14 @@
       "default": "Reset",
       "description": "Button that clears the previewed persona. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
     },
+    "preview_feature_title_vip_veteran": {
+      "default": "VIP veteran status",
+      "description": "Product feature name for the preview feature that marks members who have kept VIP without a break for years."
+    },
+    "preview_feature_description_vip_veteran": {
+      "default": "Shows how long members have kept VIP without a break, with a Veteran or Legend badge, a coloured avatar ring and a few celebrations on your own profile.",
+      "description": "Description for the VIP veteran status preview feature."
+    },
     "page_title_app_sign_in_handoff": {
       "default": "Continue in the Trakt app",
       "description": "Title of the page shown when a sign-in from the Trakt mobile app opens in the browser instead of the app."
