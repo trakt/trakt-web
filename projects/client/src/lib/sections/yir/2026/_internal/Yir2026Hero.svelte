@@ -75,6 +75,8 @@
       },
     ].filter((total) => total !== null),
   );
+
+  const locale = getLocale();
 </script>
 
 <section class="trakt-yir-2026-hero" id="section-totals">
@@ -108,7 +110,7 @@
             <YirCountUp
               value={total.value}
               active={isMounted}
-              format={(value) => toGroupedNumber(Math.round(value), getLocale())}
+              format={(value) => toGroupedNumber(Math.round(value), locale)}
               duration={yirBeats(18)}
             />
           </dd>

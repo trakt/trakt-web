@@ -57,6 +57,8 @@
       : null,
   );
 
+  const locale = getLocale();
+
   const hours = $derived(
     Math.round((detail?.stats.all.minutes.total ?? 0) / 60),
   );
@@ -133,12 +135,17 @@
 
   const isCtaVisible = $derived(reduced || at("card") > 0.55);
 
-  const kicker = (value: number) => {
+  const kicker = (isRunnerFace: boolean) => {
     if (!runner) return m.yir_2026_reel_and_you_are();
-    return value < 0.6
+    return isRunnerFace
       ? m.yir_2026_reel_a_little_bit({ persona: runner.name })
       : m.yir_2026_reel_but_mostly();
   };
+
+  const isMobileRunnerFace = $derived(flip.mobile < 0.6);
+  const isDesktopRunnerFace = $derived(flip.desktop < 0.6);
+  const mobileKicker = $derived(kicker(isMobileRunnerFace));
+  const desktopKicker = $derived(kicker(isDesktopRunnerFace));
 
   let frame = 0;
   const EASING = 0.14;
@@ -308,7 +315,7 @@
           <div class="yir-reel-sticky">
             <span class="yir-reel-kicker">{m.yir_2026_reel_you_watched()}</span>
             <span class="yir-reel-huge">
-              {toGroupedNumber(Math.round(hours * reach("hours")), getLocale())}
+              {toGroupedNumber(Math.round(hours * reach("hours")), locale)}
             </span>
             <span class="yir-reel-sub">{m.yir_2026_reel_hours()}</span>
             <span class="yir-reel-sub is-reveal">
@@ -331,7 +338,7 @@
               <span class="yir-reel-big">{top.entry.title}</span>
               <span class="yir-reel-sub">
                 {m.yir_2026_reel_plays({
-                  count: toGroupedNumber(top.plays, getLocale()),
+                  count: toGroupedNumber(top.plays, locale),
                 })}
               </span>
             {/if}
@@ -384,7 +391,7 @@
           style:--p={at("card")}
         >
           <div class="yir-reel-sticky">
-            <span class="yir-reel-kicker is-mobile">{kicker(flip.mobile)}</span>
+            <span class="yir-reel-kicker is-mobile">{mobileKicker}</span>
             <div
               class="yir-reel-card is-mobile"
               style:--rotation="{flipRotation(flip.mobile, !!runner)}deg"
@@ -429,7 +436,7 @@
 
       <aside class="yir-reel-side" aria-hidden="true">
         <div class="yir-reel-side-sticky">
-          <span class="yir-reel-kicker">{kicker(flip.desktop)}</span>
+          <span class="yir-reel-kicker">{desktopKicker}</span>
           <div
             class="yir-reel-card"
             style:--rotation="{flipRotation(flip.desktop, !!runner)}deg"
