@@ -11946,6 +11946,18 @@
     "text_app_sign_in_handoff": {
       "default": "The app didn't open automatically. Go back to the Trakt app and sign in again from there. Don't have it yet? Get it below.",
       "description": "Text on the page shown when a sign-in from the Trakt mobile app opens in the browser instead of the app."
+    },
+    "text_vip_veteran_title_veteran": {
+      "default": "Veteran",
+      "description": "Badge title for a member who has kept VIP for 5 or more years without a break. Shown in capitals inside a small pill. Keep it one short word."
+    },
+    "text_vip_veteran_title_legend": {
+      "default": "Legend",
+      "description": "Badge title for a member who has kept VIP for 10 or more years without a break. Shown in capitals inside a small pill. Keep it one short word."
+    },
+    "button_label_open_vip_streak": {
+      "default": "Show VIP streak",
+      "description": "Accessible label for the VIP badge on a profile, which opens a sheet with how long the member has kept VIP."
     }
   }
 }

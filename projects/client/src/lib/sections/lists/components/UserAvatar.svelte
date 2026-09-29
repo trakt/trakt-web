@@ -2,12 +2,15 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
 
   type UserAvatarProps = {
-    user: Pick<UserProfile, "avatar" | "slug" | "username" | "isVip">;
+    user: Pick<UserProfile, "avatar" | "slug" | "username" | "isVip"> &
+      Partial<Pick<UserProfile, "veteran">>;
     size?: "small" | "large";
     icon?: Snippet;
     onClick?: () => void;
@@ -21,6 +24,11 @@
     onClick,
     linked = true,
   }: UserAvatarProps = $props();
+
+  const isVeteranEnabled = useVipVeteranEnabled();
+  const ringTone = $derived(
+    $isVeteranEnabled && user.isVip ? toVipVeteranRingTone(user.veteran) : null,
+  );
 </script>
 
 {#snippet avatar()}
@@ -28,6 +36,7 @@
     class="trakt-user-avatar"
     class:trakt-vip-user={user.isVip}
     data-size={size}
+    data-ring-tone={ringTone}
   >
     <CrossOriginImage
       src={user.avatar.url}
@@ -73,6 +82,18 @@
       :global(img) {
         border: var(--ni-2) solid var(--color-border-vip-avatar);
       }
+    }
+
+    &[data-ring-tone="copper"] :global(img) {
+      border-color: var(--color-border-vip-avatar-copper);
+    }
+
+    &[data-ring-tone="silver"] :global(img) {
+      border-color: var(--color-border-vip-avatar-silver);
+    }
+
+    &[data-ring-tone="gold"] :global(img) {
+      border-color: var(--color-border-vip-avatar-gold);
     }
   }
 </style>

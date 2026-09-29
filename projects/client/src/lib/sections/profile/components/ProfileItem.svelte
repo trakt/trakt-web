@@ -2,6 +2,8 @@
   import { dPadTrigger } from "$lib/components/card/_internal/dPadTrigger";
   import Link from "$lib/components/link/Link.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
@@ -10,6 +12,10 @@
 
   const { profile }: { profile: UserProfile } = $props();
   const { navigation } = useNavigation();
+  const isVeteranEnabled = useVipVeteranEnabled();
+  const ringTone = $derived(
+    $isVeteranEnabled ? toVipVeteranRingTone(profile.veteran) : null,
+  );
 </script>
 
 <div
@@ -31,6 +37,7 @@
       name={profile.name.first}
       src={profile.avatar.url}
       isVip={profile.isVip}
+      {ringTone}
     />
   </Link>
   <div class="profile-footer">

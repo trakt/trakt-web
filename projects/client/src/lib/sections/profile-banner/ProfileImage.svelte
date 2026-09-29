@@ -6,6 +6,7 @@
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction";
   import { uploadAvatarRequest } from "$lib/requests/queries/users/uploadAvatarRequest";
   import { useInvalidator } from "$lib/stores/useInvalidator";
+  import type { VipVeteranRingTone } from "$lib/features/vip-veteran/VipVeteranRingTone.ts";
   import type { Snippet } from "svelte";
   import { fade } from "svelte/transition";
   import ProfileImageContextMenu from "./_internal/ProfileImageContextMenu.svelte";
@@ -16,11 +17,15 @@
     src,
     isEditable = false,
     isVip = false,
+    ringTone,
+    hasEntrance = false,
     badge,
   }: {
     name: string;
     src: string;
     isVip?: boolean;
+    ringTone?: VipVeteranRingTone | null;
+    hasEntrance?: boolean;
     isEditable?: boolean;
     badge?: Snippet;
   } = $props();
@@ -93,7 +98,12 @@
   }
 </script>
 
-<div class="trakt-profile-image" class:is-vip={isVip}>
+<div
+  class="trakt-profile-image"
+  class:is-vip={isVip}
+  class:has-entrance={isVip && hasEntrance}
+  data-ring-tone={isVip ? ringTone : undefined}
+>
   <figure class="profile-image" data-sentry-block>
     <!-- This should be the first element, else: HierarchyRequestError -->
     <figcaption class="visually-hidden">
@@ -190,13 +200,38 @@
 
     &.is-vip {
       --color-border-avatar: var(--color-border-vip-avatar);
+      --ring-glow-inner: var(--purple-400);
+      --ring-glow-outer: var(--purple-500);
 
       .profile-image {
         box-shadow:
-          0 0 var(--ni-8) color-mix(in srgb, var(--purple-400) 60%, transparent),
+          0 0 var(--ni-8)
+            color-mix(in srgb, var(--ring-glow-inner) 60%, transparent),
           0 0 var(--ni-16)
-          color-mix(in srgb, var(--purple-500) 50%, transparent);
+            color-mix(in srgb, var(--ring-glow-outer) 50%, transparent);
       }
+    }
+
+    &[data-ring-tone="copper"] {
+      --color-border-avatar: var(--color-border-vip-avatar-copper);
+      --ring-glow-inner: var(--color-border-vip-avatar-copper);
+      --ring-glow-outer: var(--color-glow-vip-badge-copper);
+    }
+
+    &[data-ring-tone="silver"] {
+      --color-border-avatar: var(--color-border-vip-avatar-silver);
+      --ring-glow-inner: var(--color-border-vip-avatar-silver);
+      --ring-glow-outer: var(--color-glow-vip-badge-silver);
+    }
+
+    &[data-ring-tone="gold"] {
+      --color-border-avatar: var(--color-border-vip-avatar-gold);
+      --ring-glow-inner: var(--color-border-vip-avatar-gold);
+      --ring-glow-outer: var(--color-glow-vip-badge-gold);
+    }
+
+    &.has-entrance .profile-image {
+      animation: ring-swell 1.2s ease-out 0.2s both;
     }
 
     :global(.vip-badge) {
@@ -209,6 +244,22 @@
       inset-inline-end: var(--ni-neg-8);
 
       z-index: var(--layer-raised);
+    }
+  }
+
+  @keyframes ring-swell {
+    40% {
+      box-shadow:
+        0 0 var(--ni-16)
+          color-mix(in srgb, var(--ring-glow-inner) 80%, transparent),
+        0 0 var(--ni-40)
+          color-mix(in srgb, var(--ring-glow-outer) 60%, transparent);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trakt-profile-image.has-entrance .profile-image {
+      animation: none;
     }
   }
 

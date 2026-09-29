@@ -4,7 +4,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
-type UserProfileParams = { slug: string } & ApiParams;
+type UserProfileParams = { slug: string; enabled?: boolean } & ApiParams;
 
 const userProfileRequest = (
   { fetch, slug }: UserProfileParams,
@@ -24,6 +24,7 @@ export const userProfileQuery = defineQuery({
   key: 'userProfile',
   invalidations: [],
   dependencies: (params) => [params.slug],
+  enabled: (params) => params.enabled ?? true,
   request: userProfileRequest,
   mapper: (response) => mapToUserProfile(response.body),
   schema: UserProfileSchema,
