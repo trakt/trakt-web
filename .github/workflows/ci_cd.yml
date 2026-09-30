@@ -316,20 +316,19 @@ jobs:
         run: kill $(cat server.pid)
 
   build:
+    needs: files-changed
+    if: ${{
+      github.ref == 'refs/heads/main' &&
+      (
+      needs.files-changed.outputs.client_source == 'true' ||
+      needs.files-changed.outputs.workflows == 'true'
+      )
+      }}
     name: The Forge (Build)
     runs-on: ubuntu-latest
     concurrency:
-      group: ci-${{ github.ref }}
+      group: ci-build-${{ github.ref }}
       cancel-in-progress: true
-    needs: [test-gate, typecheck]
-    permissions:
-      contents: read
-      deployments: write
-    if: |
-      always() &&
-      needs.test-gate.result == 'success' &&
-      needs.typecheck.result == 'success' &&
-      github.ref == 'refs/heads/main'
 
     steps:
       - name: Secure the Evidence aka Checkout Code
@@ -350,6 +349,47 @@ jobs:
           TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
           KLIPY_API_KEY: ${{ secrets.KLIPY_API_KEY }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
+      - name: Sealing the Tapestry aka Upload Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudflare-build
+          path: |
+            projects/client/.svelte-kit/cloudflare
+            projects/client/.svelte-kit/cloudflare-tmp
+            projects/client/.svelte-kit/output/server
+          include-hidden-files: true
+          retention-days: 1
+
+  deploy:
+    name: The Divine Deployment (Deploy)
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-${{ github.ref }}
+      cancel-in-progress: false
+    needs: [build, test-gate, typecheck]
+    permissions:
+      contents: read
+      deployments: write
+    if: |
+      always() &&
+      needs.build.result == 'success' &&
+      needs.test-gate.result == 'success' &&
+      needs.typecheck.result == 'success' &&
+      github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v5
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
+      - name: Unsealing the Tapestry aka Download Build
+        uses: actions/download-artifact@v4
+        with:
+          name: cloudflare-build
+          path: projects/client/.svelte-kit
 
       # Add this new step to copy the .npmrc file
       - name: The Ancient Scroll of JSR aka Copy .npmrc
