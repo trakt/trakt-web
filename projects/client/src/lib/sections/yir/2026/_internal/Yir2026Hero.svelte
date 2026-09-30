@@ -162,7 +162,8 @@
     box-sizing: border-box;
     max-width: var(--ni-1280);
     margin-inline: auto;
-    padding: var(--ni-104) var(--ni-24) var(--ni-72);
+    padding: calc(var(--ni-104) + env(safe-area-inset-top, 0px)) var(--ni-24)
+      var(--ni-72);
 
     @include for-tablet-lg {
       grid-template-columns: minmax(0, var(--ni-340)) minmax(0, 1fr);
