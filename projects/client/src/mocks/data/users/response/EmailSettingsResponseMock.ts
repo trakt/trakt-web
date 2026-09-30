@@ -2,5 +2,6 @@ import type { EmailSettingsResponse } from '$lib/requests/models/EmailSettingsRe
 
 export const EmailSettingsResponseMock: EmailSettingsResponse = {
   notifications: true,
+  recaps: true,
   marketing: false,
 };
