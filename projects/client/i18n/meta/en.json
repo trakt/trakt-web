@@ -6152,7 +6152,7 @@
       "default": "Sign-in codes, security alerts, billing and legal updates. These can't be turned off.",
       "description": "Description for the essential emails row: sign-in/magic codes, security, billing, legal and sync issue emails are always sent."
     },
-    "tag_emails_always_on": {
+    "tag_text_emails_always_on": {
       "default": "Always on",
       "description": "Badge on the essential emails row, indicating these emails cannot be disabled."
     },
@@ -6168,12 +6168,24 @@
       "default": "Receive activity notification emails",
       "description": "Aria-label for the switch that toggles all activity notification emails."
     },
+    "text_emails_recaps": {
+      "default": "Recaps",
+      "description": "Title for the switch that enables or disables all personal recap emails (Month in Review, streaming optimizations)."
+    },
+    "description_emails_recaps": {
+      "default": "Your Month in Review and streaming service insights.",
+      "description": "Description for the recap emails switch."
+    },
+    "switch_label_emails_recaps": {
+      "default": "Receive recap emails",
+      "description": "Aria-label for the switch that toggles all recap emails."
+    },
     "text_emails_marketing": {
       "default": "News & offers",
       "description": "Title for the switch that enables or disables all marketing emails."
     },
     "description_emails_marketing": {
-      "default": "Product news, special offers, the weekly digest and your Month in Review.",
+      "default": "Product news, special offers and the weekly digest.",
       "description": "Description for the marketing emails switch."
     },
     "switch_label_emails_marketing": {

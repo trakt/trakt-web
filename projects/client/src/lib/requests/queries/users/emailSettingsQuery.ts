@@ -17,15 +17,18 @@ const emailSettingsRequest = async ({ fetch }: ApiParams) => {
     path: '/users/settings/emails',
   });
 
-  return {
-    body: EmailSettingsResponseSchema.parse(await response.json()),
-    status: response.status,
-  };
+  return response.ok
+    ? {
+      body: EmailSettingsResponseSchema.parse(await response.json()),
+      status: 200,
+    }
+    : { body: null, status: response.status };
 };
 
 function mapToEmailSettings(body: EmailSettingsResponse): EmailSettings {
   return {
     hasNotifications: body.notifications,
+    hasRecaps: body.recaps,
     hasMarketing: body.marketing,
   };
 }
@@ -35,7 +38,8 @@ export const emailSettingsQuery = defineQuery({
   invalidations: [InvalidateAction.User.EmailSettings],
   dependencies: [],
   request: emailSettingsRequest,
-  mapper: (response) => mapToEmailSettings(response.body),
-  schema: EmailSettingsSchema,
+  mapper: (response) =>
+    response.body ? mapToEmailSettings(response.body) : null,
+  schema: EmailSettingsSchema.nullable(),
   ttl: time.minutes(5),
 });

@@ -8,8 +8,8 @@ import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
 import { SiloListsResponseMock } from '$mocks/data/summary/shows/silo/response/SiloListsResponseMock.ts';
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
-import { EmailSettingsResponseMock } from '$mocks/data/users/response/EmailSettingsResponseMock.ts';
 import { CollaborationListsResponseMock } from '$mocks/data/users/response/CollaborationListsResponseMock.ts';
+import { EmailSettingsResponseMock } from '$mocks/data/users/response/EmailSettingsResponseMock.ts';
 import { ExtendedUserProfileHarryResponseMock } from '$mocks/data/users/response/ExtendedUserProfileHarryResponseMock.ts';
 import { PersonalListsResponseMock } from '$mocks/data/users/response/PersonalListsResponseMock.ts';
 import { RatedShowsResponseMock } from '$mocks/data/users/response/RatedShowsResponseMock.ts';
@@ -52,6 +52,9 @@ export const users = [
   }),
   http.get('http://localhost/users/settings/emails', () => {
     return HttpResponse.json(EmailSettingsResponseMock);
+  }),
+  http.put('http://localhost/users/settings/emails', () => {
+    return new HttpResponse(null, { status: 204 });
   }),
   http.get('http://localhost/users/me/stats', () => {
     return HttpResponse.json(UserStatsResponseMock);
