@@ -417,6 +417,16 @@ jobs:
           RELEASE_SHA: ${{ steps.vars.outputs.short_sha }}
         continue-on-error: true
 
+      - name: Invoking the Cloudflare Spirits
+        if: github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: projects/client
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: deploy --message "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" --tag "${{ steps.vars.outputs.short_sha }}"
+
       - name: Prune Old Releases from R2 (last 10 or last 24h, whichever is larger)
         working-directory: projects/client
         run: 'deno task prune:immutable'
@@ -427,13 +437,3 @@ jobs:
           KEEP_RELEASES: '10'
           MIN_AGE_HOURS: '24'
         continue-on-error: true
-
-      - name: Invoking the Cloudflare Spirits
-        if: github.ref == 'refs/heads/main'
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: projects/client
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          command: deploy --message "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" --tag "${{ steps.vars.outputs.short_sha }}"
