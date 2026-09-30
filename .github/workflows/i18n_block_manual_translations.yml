@@ -48,7 +48,7 @@ jobs:
             ':(exclude)projects/client/i18n/messages/en.json'
           )
 
-          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- "${CATALOGS[@]}")
+          CHANGED=$(git diff --name-only "$BASE_SHA...$HEAD_SHA" -- "${CATALOGS[@]}")
           if [ -z "$CHANGED" ]; then
             echo "No translated-catalog changes. 👌"
             exit 0
@@ -56,11 +56,11 @@ jobs:
 
           # Any added or modified line (a '+' that is not the '+++' file header)
           # is a hand-authored translation value - the thing CrowdIn owns.
-          ADDED=$(git diff "$BASE_SHA" "$HEAD_SHA" -- "${CATALOGS[@]}" \
+          ADDED=$(git diff "$BASE_SHA...$HEAD_SHA" -- "${CATALOGS[@]}" \
             | grep -E '^\+' | grep -vE '^\+\+\+' || true)
 
           # A source key removal is the only legitimate catalog change in a PR.
-          META_CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- \
+          META_CHANGED=$(git diff --name-only "$BASE_SHA...$HEAD_SHA" -- \
             'projects/client/i18n/meta/en.json')
 
           if [ -z "$ADDED" ] && [ -n "$META_CHANGED" ]; then
