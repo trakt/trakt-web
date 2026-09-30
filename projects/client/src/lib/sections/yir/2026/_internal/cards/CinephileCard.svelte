@@ -66,7 +66,7 @@
     padding: 7cqw 4cqw 6cqw;
   }
   .no {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.6cqw;
     letter-spacing: 0.2em;
     color: #8f8a80;
@@ -146,7 +146,7 @@
   }
   .count {
     position: relative;
-    font-family: "Instrument Serif", serif;
+    font-family: "Instrument Serif", "Instrument Serif Fallback", serif;
     font-size: 17cqw;
     line-height: 1;
     color: #f2efe8;
@@ -180,7 +180,7 @@
     background-size: 100% 100%;
   }
   .name {
-    font-family: "Instrument Serif", serif;
+    font-family: "Instrument Serif", "Instrument Serif Fallback", serif;
     font-style: italic;
     font-size: 14cqw;
     line-height: 0.9;
@@ -205,13 +205,13 @@
     padding-bottom: 1.2cqw;
   }
   .stat b {
-    font-family: "Instrument Serif", serif;
+    font-family: "Instrument Serif", "Instrument Serif Fallback", serif;
     font-size: 6.4cqw;
     font-weight: 400;
     order: 2;
   }
   .stat span {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "IBM Plex Sans", "IBM Plex Sans Fallback", sans-serif;
     font-size: 2.6cqw;
     letter-spacing: 0.16em;
     text-transform: uppercase;

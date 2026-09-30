@@ -89,7 +89,7 @@
   }
   .corner {
     position: absolute;
-    font-family: "Abril Fatface", serif;
+    font-family: "Abril Fatface", "Abril Fatface Fallback", serif;
     font-size: 7cqw;
     line-height: 0.9;
     text-align: center;
@@ -126,14 +126,14 @@
     transform-origin: center;
   }
   .no {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.6cqw;
     letter-spacing: 0.18em;
     color: #6b6b80;
     margin-top: 3cqw;
   }
   .name {
-    font-family: "Abril Fatface", serif;
+    font-family: "Abril Fatface", "Abril Fatface Fallback", serif;
     font-size: 11cqw;
     line-height: 1;
     margin-top: 1.5cqw;
@@ -156,7 +156,7 @@
     text-align: center;
   }
   .stat b {
-    font-family: "Abril Fatface", serif;
+    font-family: "Abril Fatface", "Abril Fatface Fallback", serif;
     font-size: 6.4cqw;
   }
   .stat span {

@@ -38,7 +38,7 @@
   .osd {
     display: flex;
     justify-content: space-between;
-    font-family: "VT323", monospace;
+    font-family: "VT323", "VT323 Fallback", monospace;
     font-size: 6.4cqw;
     color: #eafff0;
     text-shadow: 0 0 1.4cqw rgb(120 255 170 / 55%);
@@ -53,20 +53,20 @@
     transform: rotate(-1.6deg);
   }
   .brand {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.6cqw;
     letter-spacing: 0.14em;
     color: #6b665c;
   }
   .name {
-    font-family: "Permanent Marker", cursive;
+    font-family: "Permanent Marker", "Permanent Marker Fallback", cursive;
     font-size: 9cqw;
     line-height: 1.02;
     color: #1f2d85;
     margin-top: 1.5cqw;
   }
   .note {
-    font-family: "Permanent Marker", cursive;
+    font-family: "Permanent Marker", "Permanent Marker Fallback", cursive;
     font-size: 4.2cqw;
     color: #3b3b3b;
     margin-top: 2cqw;
@@ -119,7 +119,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 2cqw;
     margin-top: auto;
-    font-family: "VT323", monospace;
+    font-family: "VT323", "VT323 Fallback", monospace;
   }
   .stat b {
     font-size: 8cqw;

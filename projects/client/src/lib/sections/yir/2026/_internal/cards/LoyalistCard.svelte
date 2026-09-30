@@ -57,7 +57,7 @@
     opacity: 0.5;
   }
   .no {
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Cormorant Garamond", "Cormorant Garamond Fallback", serif;
     font-size: 3.4cqw;
     letter-spacing: 0.35em;
     color: #d8b46a;
@@ -86,13 +86,13 @@
     padding: 6cqw;
   }
   .center b {
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Cormorant Garamond", "Cormorant Garamond Fallback", serif;
     font-weight: 600;
     font-size: 16cqw;
     line-height: 0.9;
   }
   .center span {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "IBM Plex Sans", "IBM Plex Sans Fallback", sans-serif;
     font-size: 2.5cqw;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -100,7 +100,7 @@
     margin-top: 1cqw;
   }
   .name {
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Cormorant Garamond", "Cormorant Garamond Fallback", serif;
     font-style: italic;
     font-weight: 600;
     font-size: 13cqw;
@@ -112,7 +112,7 @@
     color: transparent;
   }
   .tag {
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Cormorant Garamond", "Cormorant Garamond Fallback", serif;
     font-size: 4.8cqw;
     color: #e8dfc6;
     margin-top: 1cqw;
@@ -124,12 +124,12 @@
     margin-top: auto;
   }
   .stat b {
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Cormorant Garamond", "Cormorant Garamond Fallback", serif;
     font-weight: 600;
     font-size: 7cqw;
   }
   .stat span {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "IBM Plex Sans", "IBM Plex Sans Fallback", sans-serif;
     font-size: 2.4cqw;
     letter-spacing: 0.14em;
     text-transform: uppercase;
