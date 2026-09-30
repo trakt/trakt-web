@@ -32,7 +32,7 @@ import { r2FromEnv } from './_internal/r2.ts';
 
 const SOURCE_DIR = Deno.env.get('IMMUTABLE_SOURCE_DIR') ??
   '.svelte-kit/cloudflare';
-const CONCURRENCY = 16;
+const CONCURRENCY = 64;
 
 async function uploadOne(
   r2: ReturnType<typeof r2FromEnv>,
