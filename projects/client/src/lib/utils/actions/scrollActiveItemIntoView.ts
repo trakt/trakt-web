@@ -1,4 +1,13 @@
 const scrollOffset = 8;
+
+function getOffsetInScroller(element: HTMLElement, scroller: HTMLElement) {
+  const elementRect = element.getBoundingClientRect();
+  const scrollerRect = scroller.getBoundingClientRect();
+  const left = scroller.scrollLeft + elementRect.left - scrollerRect.left;
+
+  return { left, right: left + elementRect.width };
+}
+
 export function scrollActiveItemIntoView(
   element: HTMLElement,
   active: boolean,
@@ -8,24 +17,19 @@ export function scrollActiveItemIntoView(
   const doScroll = (active: boolean, behavior: 'smooth' | 'instant') => {
     if (!active) return;
 
-    const parent = element.parentElement;
-    if (!parent) return;
-
-    const parentRight = parent.scrollLeft + parent.clientWidth;
-    const elementLeft = element.offsetLeft;
-    const elementRight = elementLeft + element.offsetWidth;
-    const isOutOfView = elementRight > parentRight ||
-      elementLeft < parent.scrollLeft;
-
-    if (!isOutOfView) return;
-
     if (rafId) cancelAnimationFrame(rafId);
 
+    // Measured after layout so siblings and late-loading content are settled.
     rafId = requestAnimationFrame(() => {
-      parent.scrollTo({
-        left: elementLeft - scrollOffset,
-        behavior,
-      });
+      const parent = element.parentElement;
+      if (!parent) return;
+
+      const { left, right } = getOffsetInScroller(element, parent);
+      const isOutOfView = right > parent.scrollLeft + parent.clientWidth ||
+        left < parent.scrollLeft;
+      if (!isOutOfView) return;
+
+      parent.scrollTo({ left: left - scrollOffset, behavior });
     });
   };
 

@@ -35,6 +35,7 @@
     watchedBySeason: ReadonlyMap<number, ReadonlySet<number>>;
     isWatchedLoading: boolean;
     isCurrentEpisode?: boolean;
+    shouldScrollIntoView?: boolean;
     style?: BaseItemProps["style"];
     source: string;
     urlOverride?: EpisodeUrlOverride;
@@ -49,6 +50,7 @@
     watchedBySeason,
     isWatchedLoading,
     isCurrentEpisode = false,
+    shouldScrollIntoView = false,
     style,
     source,
     urlOverride,
@@ -191,7 +193,7 @@
   active episode changes. The scroll action is a no-op when not current.
 -->
 <div
-  use:scrollActiveItemIntoView={isCurrentEpisode}
+  use:scrollActiveItemIntoView={isCurrentEpisode && shouldScrollIntoView}
   class="trakt-season-episode-item"
   class:is-current-episode={isCurrentEpisode}
   aria-current={isCurrentEpisode ? "page" : undefined}

@@ -74,6 +74,7 @@
       watchedBySeason={$watchedBySeason}
       isWatchedLoading={$isWatchedLoading}
       isCurrentEpisode={episode.number === currentEpisode}
+      shouldScrollIntoView
       urlOverride={buildEpisodeDrawerLink({
         season: episode.season,
         episode: episode.number,
