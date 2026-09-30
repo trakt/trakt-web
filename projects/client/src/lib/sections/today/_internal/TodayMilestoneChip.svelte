@@ -29,6 +29,9 @@
     --color-background-stem-tag: var(--purple-500);
     --color-foreground-stem-tag: var(--shade-10);
 
+    flex-shrink: 0;
+    white-space: nowrap;
+
     &[data-milestone="series-end"] {
       --color-background-stem-tag: linear-gradient(
         120deg,

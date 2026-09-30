@@ -332,6 +332,7 @@
 
     .frame-person {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: var(--gap-s);
 
@@ -347,7 +348,7 @@
     .frame-person-info {
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
+      flex: 1 1 var(--ni-120);
       min-width: 0;
     }
 

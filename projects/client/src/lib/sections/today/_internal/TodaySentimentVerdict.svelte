@@ -22,9 +22,11 @@
   .trakt-today-sentiment-verdict {
     display: inline-flex;
     align-items: center;
+    flex-shrink: 0;
     gap: var(--gap-xxs);
 
     padding: var(--ni-4) var(--ni-10);
+    white-space: nowrap;
     border-radius: var(--border-radius-xxl);
 
     background: color-mix(in srgb, currentColor 16%, transparent);
