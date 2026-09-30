@@ -2,15 +2,10 @@ import { error as printError } from '$lib/utils/console/print.ts';
 import { IS_DEV } from '$lib/utils/env/index.ts';
 import { json, type RequestHandler } from '@sveltejs/kit';
 import { buildReportIssue } from './_internal/buildReportIssue.ts';
+import { toStorageName } from './_internal/toStorageName.ts';
 import { validateTvTimeReport } from './_internal/validateTvTimeReport.ts';
 
 const GITHUB_API = 'https://api.github.com';
-
-/** Strips path segments + unsafe chars so a filename can't escape the prefix. */
-function sanitizeName(name: string): string {
-  const base = name.split(/[\\/]/).pop() ?? 'file';
-  return base.replace(/[^\w.\- ]+/g, '_').slice(0, 128) || 'file';
-}
 
 /** Normalises an importer source id into a safe key/label segment. */
 function sanitizeSource(source: string): string {
@@ -51,7 +46,7 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
   }
 
   const reportedFiles = files.map((file) => ({
-    name: file.name,
+    name: toStorageName(file.name),
     size: file.size,
   }));
 
@@ -59,7 +54,7 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
     await Promise.all(
       files.map(async (file) =>
         platform.env.R2_IMPORT_REPORTS.put(
-          `${prefix}/${sanitizeName(file.name)}`,
+          `${prefix}/${toStorageName(file.name)}`,
           await file.arrayBuffer(),
           {
             httpMetadata: {
