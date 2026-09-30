@@ -1,16 +1,25 @@
 import * as m from '$lib/features/i18n/messages.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { TvTimeExportParser } from './TvTimeExportParser.ts';
+import { TvTimeExtractorParser } from './TvTimeExtractorParser.ts';
 import { TvTimeGdprParser } from './TvTimeGdprParser.ts';
 import { TvTimeLiberatorParser } from './TvTimeLiberatorParser.ts';
 import { TvTimeNativeParser } from './TvTimeNativeParser.ts';
 import { parseCsvFile } from './utils/parseCsvFile.ts';
 import { zipEntryBasenames } from './utils/zipEntryBasenames.ts';
 
-type TvTimeFormat = 'gdpr' | 'liberator' | 'native' | 'export' | 'unknown';
+type TvTimeFormat =
+  | 'gdpr'
+  | 'liberator'
+  | 'native'
+  | 'export'
+  | 'extractor'
+  | 'unknown';
 
 const GDPR_ZIP_MARKER = 'tracking-prod-records';
 const LIBERATOR_ZIP_MARKER = 'activity_history.csv';
+const EXTRACTOR_ZIP_MARKER = 'tv-time-export.csv';
+const EXTRACTOR_MARKER = 'media_type';
 const GDPR_ACCOUNT_MARKERS = ['auth-prod-login.csv', 'gdpr_requests.csv'];
 const TRAKT_EXPORT_MARKER =
   /^(user|watched|collection|ratings|watchlist)-.+\.json$/;
@@ -60,6 +69,7 @@ async function detectZipFormat(file: File): Promise<TvTimeFormat> {
     return 'gdpr';
   }
   if (basenames.includes(LIBERATOR_ZIP_MARKER)) return 'liberator';
+  if (basenames.includes(EXTRACTOR_ZIP_MARKER)) return 'extractor';
   if (
     basenames.some((name) =>
       name.startsWith('tvtime-') &&
@@ -78,6 +88,7 @@ async function detectFormat(file: File): Promise<TvTimeFormat> {
   const [first] = await parseCsvFile(file) as Record<string, unknown>[];
   if (!first) return 'unknown';
   if (isExportCsv(file, first)) return 'export';
+  if (EXTRACTOR_MARKER in first) return 'extractor';
   if ('imdb_id' in first) return 'liberator';
   if (
     'type-uuid-n' in first || 'key' in first ||
@@ -137,6 +148,8 @@ export const TvTimeCsvParser: FileParser = {
         return TvTimeGdprParser.parse(recognized);
       case 'export':
         return TvTimeExportParser.parse(recognized);
+      case 'extractor':
+        return parsePerFile(TvTimeExtractorParser, recognized);
       default:
         return parsePerFile(TvTimeNativeParser, recognized);
     }
