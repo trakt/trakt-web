@@ -6,15 +6,17 @@
     primary,
     runner,
     faces,
+    isFlipped,
   }: {
     primary: PersonaCardData;
     runner: PersonaCardData | null;
     faces: { front: boolean; back: boolean };
+    isFlipped: boolean;
   } = $props();
 </script>
 
 {#if runner}
-  <div class="yir-reel-flip">
+  <div class="yir-reel-flip" class:is-flipped={isFlipped}>
     <div class="yir-reel-face is-front">
       <YirPersonaCard card={runner} live={faces.front} />
     </div>
@@ -43,6 +45,17 @@
 
     &.is-back {
       transform: rotateY(180deg);
+      visibility: hidden;
+    }
+  }
+
+  .yir-reel-flip.is-flipped .yir-reel-face {
+    &.is-front {
+      visibility: hidden;
+    }
+
+    &.is-back {
+      visibility: visible;
     }
   }
 </style>
