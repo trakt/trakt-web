@@ -476,6 +476,12 @@
     }
   }
 
+  @mixin short-stage {
+    @media (max-height: 30rem) {
+      @content;
+    }
+  }
+
   .trakt-yir-reel {
     position: fixed;
     inset: 0;
@@ -604,7 +610,7 @@
       text-align: start;
     }
 
-    @media (max-height: 30rem) {
+    @include short-stage {
       padding-block: var(--ni-48) var(--ni-16);
       gap: var(--ni-6);
     }
@@ -700,9 +706,41 @@
   }
 
 
+  @mixin finale-clears-cta {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 100dvh;
+    padding-bottom: calc(var(--ni-160) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .is-finale .yir-reel-sticky {
+    @include finale-clears-cta;
+
+    @include split-stage {
+      box-sizing: content-box;
+      height: 100dvh;
+      min-height: 0;
+      padding-bottom: var(--ni-32);
+
+      @include short-stage {
+        @include finale-clears-cta;
+      }
+    }
+  }
+
   .yir-reel-finale-spacer {
     display: block;
-    height: var(--ni-120);
+    flex: 1 0 var(--ni-24);
+
+    @include split-stage {
+      flex: initial;
+      height: var(--ni-120);
+
+      @include short-stage {
+        flex: 1 0 var(--ni-24);
+        height: auto;
+      }
+    }
   }
 
   .yir-reel-chapters {
