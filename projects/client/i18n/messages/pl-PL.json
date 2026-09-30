@@ -1791,7 +1791,6 @@
   "text_today_commented_at": "Skomentowano \n{time}",
   "text_today_commented_item_at": "Skomentowano {item} \n{time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Brak nowości w ciągu ostatnich 24 godzin. Sprawdź później.",
   "text_today_empty_day": "Brak aktywności od osób, które obserwujesz, w tym dniu.",
   "text_today_for_you": "Dla Ciebie",

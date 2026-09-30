@@ -1791,7 +1791,6 @@
   "text_today_commented_at": "Kommenteret · {time}",
   "text_today_commented_item_at": "Kommenteret på {item} · {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Intet nyt de sidste 24 timer. Prøv igen senere.",
   "text_today_empty_day": "Intet fra de personer, du følger, på denne dag.",
   "text_today_for_you": "Til dig",

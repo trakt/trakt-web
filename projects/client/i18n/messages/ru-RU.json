@@ -1791,7 +1791,6 @@
   "text_today_commented_at": "Прокомментировано · {time}",
   "text_today_commented_item_at": "Прокомментировано {item} · {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Ничего нового за последние 24 часа. Зайдите позже.",
   "text_today_empty_day": "В этот день нет активности от людей, на которых вы подписаны.",
   "text_today_for_you": "Для вас",

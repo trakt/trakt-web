@@ -1791,7 +1791,6 @@
   "text_today_commented_at": "Dikomentari \n· {time}",
   "text_today_commented_item_at": "Dikomentari tentang {item} \n· {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Tidak ada yang baru dalam 24 jam terakhir. Cek lagi nanti.",
   "text_today_empty_day": "Tidak ada dari orang yang Anda ikuti pada hari ini.",
   "text_today_for_you": "Untuk Anda",

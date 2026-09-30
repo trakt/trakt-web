@@ -5,13 +5,12 @@
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
-  import { getLocale } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
-  import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { getDayRange } from "./_internal/getDayRange.ts";
   import { pickHeroStory } from "./_internal/pickHeroStory.ts";
+  import TodayDayStrip from "./_internal/TodayDayStrip.svelte";
   import TodayFeedEntry from "./_internal/TodayFeedEntry.svelte";
   import TodayFeed from "./_internal/TodayFeed.svelte";
   import TodayForYouRow from "./_internal/TodayForYouRow.svelte";
@@ -99,20 +98,6 @@
       actions.length < QUIET_ACTION_COUNT,
   );
 
-  const toDayText = (day: (typeof days)[number]) => {
-    const weekday = toHumanDayOfWeek(day.date, getLocale());
-    const count = type === "media" ? $dayCounts[day.key] : null;
-
-    return count == null
-      ? weekday
-      : m.text_today_day_with_count({ day: weekday, count });
-  };
-  const dayOptions: ToggleOption<string>[] = days.map((day) => ({
-    value: day.key,
-    text: () => toDayText(day),
-    label: () => toDayText(day),
-  }));
-
   const groupingOptions: ToggleOption<TodayGrouping>[] = [
     {
       value: "title",
@@ -146,12 +131,11 @@
 
 <div class="trakt-today-overview">
   <div class="overview-toolbar">
-    <Toggler
+    <TodayDayStrip
+      {days}
       value={selectedDay?.key ?? ""}
+      counts={type === "media" ? $dayCounts : null}
       onChange={params.setDay}
-      options={dayOptions}
-      variant="text"
-      ariaLabel={m.label_today_day()}
     />
 
     <div class="toolbar-end">

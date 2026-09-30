@@ -1790,7 +1790,6 @@
   "text_today_commented_at": "Commenté · {time}",
   "text_today_commented_item_at": "Commenté sur {item} · {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Aucune nouveauté au cours des dernières 24 heures. Revenez plus tard.",
   "text_today_empty_day": "Rien des personnes que vous suivez ce jour-là.",
   "text_today_for_you": "Pour vous",

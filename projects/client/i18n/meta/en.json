@@ -10767,9 +10767,18 @@
       "default": "From people you follow",
       "description": "Heading above the tiles of what the people the user follows did on the chosen day."
     },
-    "text_today_day_with_count": {
-      "default": "{day} {count}",
-      "description": "Option in the day picker on the Today page, with the weekday and how many things the people the user follows did that day.",
+    "label_today_day_activity_one": {
+      "default": "{day}, 1 activity",
+      "description": "Accessible name of a day in the day picker on the Today page when the people the user follows did one thing that day.",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
+    },
+    "label_today_day_activity_other": {
+      "default": "{day}, {count} activities",
+      "description": "Accessible name of a day in the day picker on the Today page, with how many things the people the user follows did that day.",
       "variables": {
         "day": {
           "type": "string"
