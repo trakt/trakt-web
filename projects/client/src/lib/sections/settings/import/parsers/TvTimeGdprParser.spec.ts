@@ -426,6 +426,38 @@ describe('TvTimeGdprParser', () => {
       expect(result).toHaveLength(0);
     });
 
+    it('should add rewatched episodes to history as extra plays', async () => {
+      const csv = toCsv(V2_HEADER, [
+        v2EpisodeWatch(),
+        v2EpisodeWatch({
+          key: 'rewatch-episode-02531a20-2745-4f3c-b0b0-25475135b863-1',
+          created_at: '2023-01-05 20:15:00',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(2);
+      expect(new Set(result.map((item) => item.watched_at)).size).toBe(2);
+      expect(result[1]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { tvdb: 1331151 },
+      });
+    });
+
+    it('should not watchlist followed shows with only rewatched episodes', async () => {
+      const csv = toCsv(V2_HEADER, [
+        v2UserSeries({ is_followed: 'true', s_id: '82066' }),
+        v2EpisodeWatch({ key: 'rewatch-episode-02531a20-1' }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result.filter((item) => item.action === 'watchlist'))
+        .toHaveLength(0);
+    });
+
     it('should ignore unfollowed shows and stats rows', async () => {
       const csv = toCsv(V2_HEADER, [
         v2UserSeries(),
