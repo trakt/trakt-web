@@ -3,9 +3,8 @@ import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
 import { subtractDays } from '$lib/utils/date/subtractDays.ts';
 import type { TodayRange } from '../models/TodayRange.ts';
 import { getTodayWindow } from './getTodayWindow.ts';
+import { TODAY_WEEK_LENGTH } from './TODAY_WEEK_LENGTH.ts';
 import { toTodayDays } from './toTodayDays.ts';
-
-const WEEK_LENGTH = 7;
 
 type GetDayRangeParams = {
   dayKey: string | Nil;
@@ -19,7 +18,7 @@ export function getDayRange({ dayKey, now }: GetDayRangeParams): TodayRange {
 
   if (day.kind === 'week') {
     return {
-      start: getStartOfDay(subtractDays(now, WEEK_LENGTH - 1)),
+      start: getStartOfDay(subtractDays(now, TODAY_WEEK_LENGTH - 1)),
       end: now,
       isRolling: false,
     };
