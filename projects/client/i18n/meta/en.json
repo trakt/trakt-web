@@ -6136,6 +6136,50 @@
       "default": "Manage your spoiler tolerance and rewatching habits.",
       "description": "Description for the behavior section."
     },
+    "header_emails": {
+      "default": "Emails",
+      "description": "Header for the settings section that lets users choose which emails they receive."
+    },
+    "description_emails": {
+      "default": "Choose which emails you'd like to receive from us.",
+      "description": "Description for the emails settings section."
+    },
+    "text_emails_system": {
+      "default": "Account & security",
+      "description": "Title for the row explaining essential emails that cannot be turned off."
+    },
+    "description_emails_system": {
+      "default": "Sign-in codes, security alerts, billing and legal updates. These can't be turned off.",
+      "description": "Description for the essential emails row: sign-in/magic codes, security, billing, legal and sync issue emails are always sent."
+    },
+    "tag_emails_always_on": {
+      "default": "Always on",
+      "description": "Badge on the essential emails row, indicating these emails cannot be disabled."
+    },
+    "text_emails_notifications": {
+      "default": "Activity notifications",
+      "description": "Title for the switch that enables or disables all social notification emails."
+    },
+    "description_emails_notifications": {
+      "default": "Replies, mentions, likes, new followers and list collaborations.",
+      "description": "Description for the activity notification emails switch."
+    },
+    "switch_label_emails_notifications": {
+      "default": "Receive activity notification emails",
+      "description": "Aria-label for the switch that toggles all activity notification emails."
+    },
+    "text_emails_marketing": {
+      "default": "News & offers",
+      "description": "Title for the switch that enables or disables all marketing emails."
+    },
+    "description_emails_marketing": {
+      "default": "Product news, special offers, the weekly digest and your Month in Review.",
+      "description": "Description for the marketing emails switch."
+    },
+    "switch_label_emails_marketing": {
+      "default": "Receive news & offer emails",
+      "description": "Aria-label for the switch that toggles all marketing emails."
+    },
     "text_show_multiple_watches": {
       "default": "Enable multiple watches",
       "description": "Text for the section that allows users to enable or disable multiple watches."

@@ -5,7 +5,13 @@ import type { MediaType } from './MediaType.ts';
 export type RatedMediaType = ExtendedMediaType | 'season';
 export type ListedMediaType = ExtendedMediaType | 'season';
 
-type UserType = 'avatar' | 'settings' | 'follow' | 'cover' | 'block';
+type UserType =
+  | 'avatar'
+  | 'settings'
+  | 'email_settings'
+  | 'follow'
+  | 'cover'
+  | 'block';
 type ListType = 'edited' | 'deleted' | 'created' | 'like' | 'collaborator';
 type VipType = 'canceled' | 'updated';
 type PlexType = 'settings' | 'syncs';
@@ -128,6 +134,7 @@ export const InvalidateAction = {
     Avatar: buildInvalidationKey('user', 'avatar'),
     CoverImage: buildInvalidationKey('user', 'cover'),
     Settings: buildInvalidationKey('user', 'settings'),
+    EmailSettings: buildInvalidationKey('user', 'email_settings'),
     Follow: buildInvalidationKey('user', 'follow'),
     Block: buildInvalidationKey('user', 'block'),
   },

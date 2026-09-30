@@ -8,6 +8,7 @@ import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
 import { SiloListsResponseMock } from '$mocks/data/summary/shows/silo/response/SiloListsResponseMock.ts';
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
+import { EmailSettingsResponseMock } from '$mocks/data/users/response/EmailSettingsResponseMock.ts';
 import { CollaborationListsResponseMock } from '$mocks/data/users/response/CollaborationListsResponseMock.ts';
 import { ExtendedUserProfileHarryResponseMock } from '$mocks/data/users/response/ExtendedUserProfileHarryResponseMock.ts';
 import { PersonalListsResponseMock } from '$mocks/data/users/response/PersonalListsResponseMock.ts';
@@ -48,6 +49,9 @@ import { WatchlistShowsResponseMock } from '../data/users/response/WatchlistShow
 export const users = [
   http.get('http://localhost/users/settings', () => {
     return HttpResponse.json(ExtendedUsersResponseMock);
+  }),
+  http.get('http://localhost/users/settings/emails', () => {
+    return HttpResponse.json(EmailSettingsResponseMock);
   }),
   http.get('http://localhost/users/me/stats', () => {
     return HttpResponse.json(UserStatsResponseMock);
