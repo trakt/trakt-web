@@ -195,20 +195,10 @@
     }
 
     .poster-hit {
-      --poster-natural-width: calc(100cqh * 2 / 3);
-
       position: relative;
 
-      height: 100%;
-      max-width: 100%;
+      width: min(100cqw, 100cqh * 2 / 3);
       aspect-ratio: 2 / 3;
-      width: min(
-        100cqw,
-        calc(
-          var(--poster-natural-width) +
-            max(0px, (var(--poster-natural-width) - 94cqw) * 50)
-        )
-      );
 
       perspective: var(--ni-1280);
     }
