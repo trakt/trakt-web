@@ -231,3 +231,70 @@ export function infiniteQueryBridge<
       ),
   );
 }
+
+export type InfiniteQueryOptionsRef<
+  TOutput,
+  TError extends Error,
+  TData,
+  TQueryKey extends QueryKey,
+  TPageParam,
+> = {
+  current?: CreateInfiniteQueryOptions<
+    TOutput,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >;
+};
+
+export function reactiveInfiniteQueryBridge<
+  TOutput,
+  TError extends Error,
+  TData = InfiniteData<TOutput>,
+  TQueryKey extends QueryKey = QueryKey,
+  TPageParam = unknown,
+>(
+  options$: Observable<
+    CreateInfiniteQueryOptions<TOutput, TError, TData, TQueryKey, TPageParam>
+  >,
+  client: QueryClient,
+  optionsRef: InfiniteQueryOptionsRef<
+    TOutput,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >,
+): Observable<InfiniteQueryObserverResult<TData, TError>> {
+  return new Observable<InfiniteQueryObserverResult<TData, TError>>(
+    (subscriber) => {
+      let observer:
+        | InfiniteQueryObserver<TOutput, TError, TData, TQueryKey, TPageParam>
+        | undefined;
+      let cleanup: (() => void) | undefined;
+
+      const sub = options$.subscribe({
+        next: (value) => {
+          optionsRef.current = value;
+          const resolved = resolveInfiniteQueryOptions(client, value);
+          if (observer) {
+            observer.setOptions(resolved);
+            return;
+          }
+          cleanup = bridge(
+            subscriber,
+            () => (observer = new InfiniteQueryObserver(client, resolved)),
+          );
+        },
+        error: (err) => subscriber.error(err),
+        complete: () => subscriber.complete(),
+      });
+
+      return () => {
+        sub.unsubscribe();
+        cleanup?.();
+      };
+    },
+  );
+}
