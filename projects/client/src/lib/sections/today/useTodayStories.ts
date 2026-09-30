@@ -11,7 +11,8 @@ import { useUpNextList } from '$lib/sections/lists/progress/useUpNextList.ts';
 import { useWatchList } from '$lib/sections/lists/watchlist/useWatchList.ts';
 import { dedupe } from '$lib/utils/array/dedupe.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
-import { combineLatest, map } from 'rxjs';
+import { keepPreviousData } from '@tanstack/query-core';
+import { BehaviorSubject, combineLatest, map, type Observable } from 'rxjs';
 import { getTodayWindow } from './_internal/getTodayWindow.ts';
 import { toActivityWindow } from './_internal/toActivityWindow.ts';
 import type { TodayRange } from './models/TodayRange.ts';
@@ -23,7 +24,7 @@ const TODAY_RELEASES_LIMIT = 25;
 
 type TodayStoriesProps = FilterParams & {
   type: DiscoverMode;
-  range?: TodayRange;
+  range?: Observable<TodayRange>;
 };
 
 function isInMode(activity: FollowingActivity, type: DiscoverMode) {
@@ -37,13 +38,22 @@ function isEpisodeProgress(entry: object): entry is UpNextEntry {
 }
 
 export function useTodayStories(
-  { type, filter, range = getTodayWindow(new Date()) }: TodayStoriesProps,
+  {
+    type,
+    filter,
+    range = new BehaviorSubject(getTodayWindow(new Date())),
+  }: TodayStoriesProps,
 ) {
   const activityQuery = useAllPagesInfiniteQuery(
-    followingActivityQuery({
-      limit: TODAY_ACTIVITY_LIMIT,
-      ...toActivityWindow(range),
-    }),
+    range.pipe(
+      map(($range) => ({
+        ...followingActivityQuery({
+          limit: TODAY_ACTIVITY_LIMIT,
+          ...toActivityWindow($range),
+        }),
+        placeholderData: keepPreviousData,
+      })),
+    ),
   );
   const activityList = activityQuery.pipe(
     map(($query) =>
@@ -55,7 +65,8 @@ export function useTodayStories(
   );
   const isActivityLoading = activityQuery.pipe(
     map(($query) =>
-      $query.isPending || $query.isFetchingNextPage || $query.hasNextPage
+      $query.isPending || $query.isPlaceholderData ||
+      $query.isFetchingNextPage || $query.hasNextPage
     ),
   );
   const overlay = createBulkIntlOverlay<FollowingActivity>({
@@ -84,12 +95,12 @@ export function useTodayStories(
     map(($list) => $list.filter((entry) => isInMode(entry, type))),
   );
 
-  const forYou = combineLatest([upNext.list, startWatching.list]).pipe(
-    map(([$upNext, $watchlist]) =>
+  const forYou = combineLatest([upNext.list, startWatching.list, range]).pipe(
+    map(([$upNext, $watchlist, $range]) =>
       toForYouItems({
         upNext: $upNext.filter(isEpisodeProgress),
         watchlist: $watchlist,
-        range,
+        range: $range,
       })
     ),
   );

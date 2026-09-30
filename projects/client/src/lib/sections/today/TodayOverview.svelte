@@ -9,6 +9,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek.ts";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { getDayRange } from "./_internal/getDayRange.ts";
   import { pickHeroStory } from "./_internal/pickHeroStory.ts";
   import TodayFeedEntry from "./_internal/TodayFeedEntry.svelte";
@@ -40,7 +41,7 @@
   const params = $derived(todayOverviewParams(page.url.searchParams));
   const dayKey = $derived(params.day);
   const now = new Date();
-  const range = $derived(getDayRange({ dayKey, now }));
+  const range = fromRune(() => getDayRange({ dayKey, now }));
 
   const { activities, forYou, isLoading } = $derived(
     useTodayStories({ type, filter: $filterMap, range }),
@@ -59,6 +60,9 @@
   const titles = $derived(stories.titles);
   const personGroups = $derived(toPersonGroups(titles));
   const firstStory = $derived(stories.groups.at(0));
+  const playAllLink = $derived(
+    firstStory ? storyLink(firstStory.key) : null,
+  );
   const hero = $derived(pickHeroStory(titles));
 
   const actions = $derived(toPersonActions(titles));
@@ -159,23 +163,21 @@
         ariaLabel={m.label_today_grouping()}
       />
 
-      {#if firstStory}
-        {@const link = storyLink(firstStory.key)}
-        <Button
-          href={link.href}
-          noscroll={link.noscroll}
-          replacestate={link.replacestate}
-          label={m.button_label_play_all_stories()}
-          size="small"
-          color="purple"
-        >
-          {m.button_text_play_all_stories()}
-        </Button>
-      {/if}
+      <Button
+        href={playAllLink?.href}
+        noscroll={playAllLink?.noscroll}
+        replacestate={playAllLink?.replacestate}
+        disabled={!playAllLink}
+        label={m.button_label_play_all_stories()}
+        size="small"
+        color="purple"
+      >
+        {m.button_text_play_all_stories()}
+      </Button>
     </div>
   </div>
 
-  <div class="overview-body">
+  <div class="overview-body" class:is-loading={$isLoading}>
     {#if hero || stories.forYou.length > 0}
       <section class="overview-column overview-spotlight">
         {#if hero}
@@ -289,6 +291,13 @@
       display: flex;
       flex-direction: column;
       gap: var(--gap-l);
+
+      transition: opacity var(--transition-increment) ease-out;
+
+      &.is-loading {
+        opacity: 0.5;
+        pointer-events: none;
+      }
 
       @include for-tablet-sm {
         display: grid;
