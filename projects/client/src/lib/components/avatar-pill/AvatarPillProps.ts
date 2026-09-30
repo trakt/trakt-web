@@ -1,12 +1,7 @@
-import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
-
-export type AvatarPillUser = Pick<
-  UserProfile,
-  'avatar' | 'slug' | 'username' | 'isVip'
->;
+import type { AvatarStackProps } from '$lib/components/avatar-stack/AvatarStackProps.ts';
 
 type AvatarPillBaseProps = {
-  avatars: Array<{ key: string; user: AvatarPillUser }>;
+  avatars: AvatarStackProps['avatars'];
   countLabel: string | null;
   label: string;
   ariaLabel: string;

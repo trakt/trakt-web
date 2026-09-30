@@ -7,6 +7,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
   import { dedupe } from "$lib/utils/array/dedupe.ts";
   import { isStorySeen } from "./_internal/isStorySeen.ts";
+  import TodayFaces from "./_internal/TodayFaces.svelte";
   import { todayStoryNavigation } from "./_internal/todayStoryNavigation.ts";
   import { toFrameMedia } from "./_internal/toFrameMedia.ts";
   import { toStoryGroups } from "./_internal/toStoryGroups.ts";
@@ -76,9 +77,7 @@
           </div>
 
           <div class="entry-faces">
-            {#each faces as user (user.key)}
-              <CrossOriginImage src={user.avatar.url} alt="" />
-            {/each}
+            <TodayFaces users={faces} size="small" />
           </div>
 
           <span class="bold entry-label">{m.list_title_today()}</span>
@@ -142,18 +141,6 @@
     .entry-faces {
       display: flex;
       padding-inline-start: var(--ni-4);
-
-      :global(img) {
-        width: var(--ni-22);
-        height: var(--ni-22);
-
-        border: var(--border-thickness-xs) solid var(--color-background);
-        border-radius: 50%;
-      }
-
-      :global(img + img) {
-        margin-inline-start: calc(-1 * var(--ni-8));
-      }
     }
 
     .entry-label {

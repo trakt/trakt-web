@@ -1,7 +1,7 @@
 <script lang="ts">
+  import AvatarStack from "$lib/components/avatar-stack/AvatarStack.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import type { AvatarPillProps } from "./AvatarPillProps.ts";
 
   const {
@@ -21,12 +21,8 @@
 {#snippet pill()}
   <span class="trakt-avatar-pill">
     {#if hasAvatars}
-      <span class="avatar-stack" aria-hidden="true">
-        {#each avatars as avatar, index (avatar.key)}
-          <span class="avatar" style:z-index={avatars.length - index}>
-            <UserAvatar user={avatar.user} size="small" />
-          </span>
-        {/each}
+      <span class="pill-avatars">
+        <AvatarStack {avatars} mobileLimit={3} />
       </span>
     {/if}
 
@@ -81,11 +77,6 @@
     --height-pill-label: calc(var(--font-size-text) + var(--ni-2));
     --pill-avatar-size: var(--ni-28);
 
-    // Preferred avatar overlap. Tightened by the container query below when the
-    // pill's container (opt-in via `container: avatar-pill / inline-size`) is
-    // too narrow to fit the pill at this spacing.
-    --avatar-overlap: calc(var(--pill-avatar-size) * -0.5);
-
     display: inline-flex;
     align-items: center;
     gap: var(--ni-4);
@@ -114,20 +105,12 @@
     }
   }
 
-  .avatar-stack {
+  .pill-avatars {
     display: inline-flex;
-    align-items: center;
     pointer-events: none;
     flex: 0 0 auto;
 
     margin-inline-end: var(--ni-4);
-
-    // Trim the stack to 3 avatars on mobile to keep the pill narrow.
-    @include for-mobile {
-      .avatar:nth-child(n + 4) {
-        display: none;
-      }
-    }
   }
 
   // When the pill sits in an opted-in container, size it to the space
@@ -146,8 +129,8 @@
       max-width: var(--pill-available);
     }
 
-    .avatar-stack {
-      --avatar-overlap: calc(
+    .pill-avatars {
+      --avatar-stack-overlap: calc(
         -1 *
           clamp(
             var(--pill-avatar-size) * 0.5,
@@ -156,33 +139,6 @@
             var(--pill-avatar-size) * 0.78
           )
       );
-    }
-  }
-
-  .avatar {
-    position: relative;
-
-    width: var(--pill-avatar-size);
-    height: var(--pill-avatar-size);
-    flex: 0 0 var(--pill-avatar-size);
-
-    margin-inline-start: var(--avatar-overlap);
-
-    border-radius: 50%;
-    overflow: hidden;
-    box-sizing: border-box;
-
-    &:first-child {
-      margin-inline-start: 0;
-    }
-
-    :global(.trakt-user-avatar) {
-      width: var(--pill-avatar-size);
-      height: var(--pill-avatar-size);
-
-      :global(img) {
-        border-width: var(--ni-1);
-      }
     }
   }
 
