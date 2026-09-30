@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const EmailSettingsResponseSchema = z.object({
   notifications: z.boolean(),
+  recaps: z.boolean(),
   marketing: z.boolean(),
 });
 

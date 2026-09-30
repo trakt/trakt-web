@@ -1,12 +1,13 @@
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
-import type { EmailSettingsResponse } from '$lib/requests/models/EmailSettingsResponse.ts';
+import type { EmailCategory } from '$lib/requests/models/EmailCategory.ts';
 
 type SaveEmailSettingsParams = {
-  body: Partial<EmailSettingsResponse>;
+  category: EmailCategory;
+  enabled: boolean;
 } & ApiParams;
 
 export async function saveEmailSettingsRequest(
-  { body, fetch }: SaveEmailSettingsParams,
+  { category, enabled, fetch }: SaveEmailSettingsParams,
 ): Promise<boolean> {
   const response = await rawApiFetch({
     fetch,
@@ -14,7 +15,7 @@ export async function saveEmailSettingsRequest(
     init: {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ [category]: enabled }),
     },
   });
 
