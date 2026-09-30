@@ -150,6 +150,47 @@ function bridge<TResult>(
   };
 }
 
+type ReactiveObserverBridgeParams<TOptions, TObserver> = {
+  options$: Observable<TOptions>;
+  onOptions: (options: TOptions) => void;
+  create: (options: TOptions) => TObserver;
+  update: (observer: TObserver, options: TOptions) => void;
+};
+
+function reactiveObserverBridge<
+  TOptions,
+  TResult,
+  TObserver extends ReadableObserver<TResult>,
+>(
+  { options$, onOptions, create, update }: ReactiveObserverBridgeParams<
+    TOptions,
+    TObserver
+  >,
+): Observable<TResult> {
+  return new Observable<TResult>((subscriber) => {
+    let observer: TObserver | undefined;
+    let cleanup: (() => void) | undefined;
+
+    const sub = options$.subscribe({
+      next: (value) => {
+        onOptions(value);
+        if (observer) {
+          update(observer, value);
+          return;
+        }
+        cleanup = bridge(subscriber, () => (observer = create(value)));
+      },
+      error: (err) => subscriber.error(err),
+      complete: () => subscriber.complete(),
+    });
+
+    return () => {
+      sub.unsubscribe();
+      cleanup?.();
+    };
+  });
+}
+
 export type QueryOptionsRef<TOutput, TError extends Error> = {
   current?: CreateQueryOptions<TOutput, TError>;
 };
@@ -175,31 +216,13 @@ export function reactiveQueryBridge<TOutput, TError extends Error>(
   client: QueryClient,
   optionsRef: QueryOptionsRef<TOutput, TError>,
 ): Observable<QueryObserverResult<TOutput, TError>> {
-  return new Observable<QueryObserverResult<TOutput, TError>>((subscriber) => {
-    let observer: QueryObserver<TOutput, TError> | undefined;
-    let cleanup: (() => void) | undefined;
-
-    const sub = options$.subscribe({
-      next: (value) => {
-        optionsRef.current = value;
-        const resolved = resolveQueryOptions(client, value);
-        if (observer) {
-          observer.setOptions(resolved);
-          return;
-        }
-        cleanup = bridge(
-          subscriber,
-          () => (observer = new QueryObserver(client, resolved)),
-        );
-      },
-      error: (err) => subscriber.error(err),
-      complete: () => subscriber.complete(),
-    });
-
-    return () => {
-      sub.unsubscribe();
-      cleanup?.();
-    };
+  return reactiveObserverBridge({
+    options$,
+    onOptions: (value) => (optionsRef.current = value),
+    create: (value) =>
+      new QueryObserver(client, resolveQueryOptions(client, value)),
+    update: (observer, value) =>
+      observer.setOptions(resolveQueryOptions(client, value)),
   });
 }
 
@@ -230,4 +253,52 @@ export function infiniteQueryBridge<
           ),
       ),
   );
+}
+
+export type InfiniteQueryOptionsRef<
+  TOutput,
+  TError extends Error,
+  TData,
+  TQueryKey extends QueryKey,
+  TPageParam,
+> = {
+  current?: CreateInfiniteQueryOptions<
+    TOutput,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >;
+};
+
+export function reactiveInfiniteQueryBridge<
+  TOutput,
+  TError extends Error,
+  TData = InfiniteData<TOutput>,
+  TQueryKey extends QueryKey = QueryKey,
+  TPageParam = unknown,
+>(
+  options$: Observable<
+    CreateInfiniteQueryOptions<TOutput, TError, TData, TQueryKey, TPageParam>
+  >,
+  client: QueryClient,
+  optionsRef: InfiniteQueryOptionsRef<
+    TOutput,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >,
+): Observable<InfiniteQueryObserverResult<TData, TError>> {
+  return reactiveObserverBridge({
+    options$,
+    onOptions: (value) => (optionsRef.current = value),
+    create: (value) =>
+      new InfiniteQueryObserver(
+        client,
+        resolveInfiniteQueryOptions(client, value),
+      ),
+    update: (observer, value) =>
+      observer.setOptions(resolveInfiniteQueryOptions(client, value)),
+  });
 }

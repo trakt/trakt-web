@@ -26,8 +26,10 @@ import { findQueryId } from './_internal/findQueryId.ts';
 import { invalidationPredicate } from './_internal/invalidationPredicate.ts';
 import {
   infiniteQueryBridge,
+  type InfiniteQueryOptionsRef,
   queryBridge,
   type QueryOptionsRef,
+  reactiveInfiniteQueryBridge,
   reactiveQueryBridge,
 } from './_internal/queryBridge.ts';
 import { rethrowUnlessCancelled } from './rethrowUnlessCancelled.ts';
@@ -143,6 +145,20 @@ export function useQuery<
   );
 }
 
+type InfiniteQueryProps<
+  TOutput,
+  TError extends Error,
+  TData,
+  TQueryKey extends QueryKey,
+  TPageParam,
+> = CreateInfiniteQueryOptions<
+  Paginatable<TOutput>,
+  TError,
+  TData,
+  TQueryKey,
+  TPageParam
+>;
+
 export function useInfiniteQuery<
   TOutput,
   TError extends Error,
@@ -150,15 +166,27 @@ export function useInfiniteQuery<
   TQueryKey extends QueryKey = QueryKey,
   TPageParam = number,
 >(
-  props: CreateInfiniteQueryOptions<
-    Paginatable<TOutput>,
-    TError,
-    TData,
-    TQueryKey,
-    TPageParam
-  >,
+  props:
+    | InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
+    | Observable<
+      InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
+    >,
 ): Observable<InfiniteQueryObserverResult<TData, TError>> {
   const client = useQueryClient();
+
+  if (isObservable(props)) {
+    const ref: InfiniteQueryOptionsRef<
+      Paginatable<TOutput>,
+      TError,
+      TData,
+      TQueryKey,
+      TPageParam
+    > = {};
+    return reactiveInfiniteQueryBridge(props, client, ref).pipe(
+      invalidationHook(() => ref.current?.queryKey),
+      multicast(),
+    );
+  }
 
   return infiniteQueryBridge<
     Paginatable<TOutput>,
@@ -185,23 +213,28 @@ export function useAllPagesInfiniteQuery<
   TQueryKey extends QueryKey = QueryKey,
   TPageParam = number,
 >(
-  props: CreateInfiniteQueryOptions<
-    Paginatable<TOutput>,
-    TError,
-    TData,
-    TQueryKey,
-    TPageParam
-  >,
+  props:
+    | InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
+    | Observable<
+      InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
+    >,
 ): Observable<InfiniteQueryObserverResult<TData, TError>> {
   const client = useQueryClient();
+  const ref = { current: isObservable(props) ? undefined : props };
+  const options = isObservable(props)
+    ? props.pipe(tap((value) => (ref.current = value)))
+    : props;
 
   return useInfiniteQuery<TOutput, TError, TData, TQueryKey, TPageParam>(
-    props,
+    options,
   ).pipe(
     tap((query) => {
+      const queryKey = ref.current?.queryKey;
       if (
+        queryKey &&
         query.hasNextPage &&
-        client.getQueryState(props.queryKey)?.fetchStatus === 'idle'
+        !query.isPlaceholderData &&
+        client.getQueryState(queryKey)?.fetchStatus === 'idle'
       ) {
         query.fetchNextPage().catch(rethrowUnlessCancelled);
       }
