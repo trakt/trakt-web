@@ -1,3 +1,4 @@
+import * as m from '$lib/features/i18n/messages.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { TvTimeExportParser } from './TvTimeExportParser.ts';
 import { TvTimeGdprParser } from './TvTimeGdprParser.ts';
@@ -10,6 +11,10 @@ type TvTimeFormat = 'gdpr' | 'liberator' | 'native' | 'export' | 'unknown';
 
 const GDPR_ZIP_MARKER = 'tracking-prod-records';
 const LIBERATOR_ZIP_MARKER = 'activity_history.csv';
+const GDPR_ACCOUNT_MARKERS = ['auth-prod-login.csv', 'gdpr_requests.csv'];
+const TRAKT_EXPORT_MARKER =
+  /^(user|watched|collection|ratings|watchlist)-.+\.json$/;
+const SUMMARY_PAGE_MARKER = /^tvtime-summary-.+\.html$/;
 
 // Columns unique to TV Time's native export. GDPR noise files
 // (show_seen_episode_latest.csv, where-to-watch-prod-table.csv) also carry
@@ -28,15 +33,26 @@ function isExportCsv(file: File, first: Record<string, unknown>): boolean {
   return file.name.startsWith('tvtime-') || 'series_tvdb_id' in first;
 }
 
+function toUnknownZipMessage(basenames: ReadonlyArray<string>): string {
+  if (basenames.some((name) => TRAKT_EXPORT_MARKER.test(name))) {
+    return m.import_error_tvtime_trakt_export();
+  }
+  if (basenames.some((name) => GDPR_ACCOUNT_MARKERS.includes(name))) {
+    return m.import_error_tvtime_no_history();
+  }
+  if (basenames.some((name) => SUMMARY_PAGE_MARKER.test(name))) {
+    return m.import_error_tvtime_summary_only();
+  }
+  return m.import_error_tvtime_unknown_zip();
+}
+
 async function detectZipFormat(file: File): Promise<TvTimeFormat> {
   const buffer = await file.arrayBuffer();
   const basenames = (() => {
     try {
       return zipEntryBasenames(buffer);
     } catch {
-      throw new Error(
-        'Could not read the .zip file. If it is password protected, extract it first and upload the CSV files inside instead.',
-      );
+      throw new Error(m.import_error_tvtime_unreadable_zip());
     }
   })();
 
@@ -53,9 +69,7 @@ async function detectZipFormat(file: File): Promise<TvTimeFormat> {
     return 'export';
   }
 
-  throw new Error(
-    'This .zip file does not look like a TV Time export. Upload the GDPR data export .zip or the Liberator export .zip.',
-  );
+  throw new Error(toUnknownZipMessage(basenames));
 }
 
 async function detectFormat(file: File): Promise<TvTimeFormat> {
@@ -107,15 +121,11 @@ export const TvTimeCsvParser: FileParser = {
     );
 
     if (distinct.size === 0) {
-      throw new Error(
-        'None of these files look like a TV Time export. Upload the Liberator export or the GDPR data export.',
-      );
+      throw new Error(m.import_error_tvtime_no_files());
     }
 
     if (distinct.size > 1) {
-      throw new Error(
-        'These files come from different TV Time exports. Import either the Liberator export or the GDPR data export, not both at once.',
-      );
+      throw new Error(m.import_error_tvtime_mixed_exports());
     }
 
     const [format] = distinct;

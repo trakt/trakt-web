@@ -1,3 +1,4 @@
+import * as m from '$lib/features/i18n/messages.ts';
 import { zipSync } from 'fflate';
 import { describe, expect, it } from 'vitest';
 import { TvTimeCsvParser } from './TvTimeCsvParser.ts';
@@ -167,6 +168,47 @@ describe('TvTimeCsvParser', () => {
 
       await expect(TvTimeCsvParser.parse([file])).rejects.toThrow(
         /does not look like a TV Time export/,
+      );
+    });
+
+    it('should point out a trakt export uploaded as a TV Time export', async () => {
+      const file = zipFile(
+        {
+          'user-profile.json': '{}',
+          'user-settings.json': '{}',
+          'watched-shows.json': '[]',
+        },
+        'trakt-export-someone-1a2b3c.zip',
+      );
+
+      await expect(TvTimeCsvParser.parse([file])).rejects.toThrow(
+        m.import_error_tvtime_trakt_export(),
+      );
+    });
+
+    it('should point out a gdpr export without watch history', async () => {
+      const file = zipFile(
+        {
+          'gdpr-data/auth-prod-login.csv': 'email,provider\nx,email',
+          'gdpr-data/gdpr_requests.csv': 'id,status\n1,done',
+          'gdpr-data/user.csv': 'id,name\n1,someone',
+        },
+        'gdpr-data.zip',
+      );
+
+      await expect(TvTimeCsvParser.parse([file])).rejects.toThrow(
+        m.import_error_tvtime_no_history(),
+      );
+    });
+
+    it('should point out a zip holding only the summary page', async () => {
+      const file = zipFile(
+        { 'tvtime-summary-2026-07-05.html': '<html></html>' },
+        'tvtime-summary-2026-07-05.zip',
+      );
+
+      await expect(TvTimeCsvParser.parse([file])).rejects.toThrow(
+        m.import_error_tvtime_summary_only(),
       );
     });
 
