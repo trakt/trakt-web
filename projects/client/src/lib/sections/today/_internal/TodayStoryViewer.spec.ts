@@ -136,6 +136,24 @@ describe('TodayStoryViewer', () => {
     expect(document.querySelector('.segment-timer')).toHaveClass('is-paused');
   });
 
+  it('should flip the poster on a touch tap reported as a mouse click', async () => {
+    await renderViewer(null);
+    const flip = screen.getByRole('button', { name: 'Show details' });
+
+    await fireEvent.pointerDown(flip, { pointerType: 'touch' });
+    await fireEvent.pointerUp(flip, { pointerType: 'touch' });
+    await fireEvent(
+      flip,
+      new PointerEvent('click', {
+        bubbles: true,
+        detail: 1,
+        pointerType: 'mouse',
+      }),
+    );
+
+    expect(flip).toHaveAttribute('aria-pressed', 'true');
+  });
+
   it('should flip the poster while a mouse is over it', async () => {
     await renderViewer(null);
     const poster = assertDefined(document.querySelector('.poster-hit'));

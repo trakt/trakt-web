@@ -50,6 +50,7 @@
   let isUsingAction = $state(false);
   let pressedAt = 0;
   let lastPressDuration = 0;
+  let lastPointerType = "";
 
   const isPaused = $derived(
     isHeld || isPageHidden || isUsingAction || isFlipped,
@@ -59,18 +60,17 @@
     isFlipped = !isFlipped;
   };
 
-  const isMouse = (event: MouseEvent) =>
-    "pointerType" in event && event.pointerType === "mouse";
-
   const returnFocusAfterPointer = (event: MouseEvent) => {
     if (event.detail > 0) dialog?.focus({ preventScroll: true });
   };
 
   const flipOnTap = (event: MouseEvent) => {
-    if (!isMouse(event)) onTap(toggleFlip)(event);
+    const isMouse = event.detail > 0 && lastPointerType === "mouse";
+    if (!isMouse) onTap(toggleFlip)(event);
   };
 
-  const press = () => {
+  const press = (event: PointerEvent) => {
+    lastPointerType = event.pointerType;
     isHeld = true;
     pressedAt = Date.now();
   };
