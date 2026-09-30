@@ -446,6 +446,53 @@ describe('TvTimeGdprParser', () => {
       });
     });
 
+    it('should collapse plays of the same episode within the same minute', async () => {
+      const csv = toCsv(V2_HEADER, [
+        v2EpisodeWatch({ created_at: '2023-10-24 20:20:39' }),
+        v2EpisodeWatch({
+          key: 'rewatch-episode-02531a20-2745-4f3c-b0b0-25475135b863-1',
+          created_at: '2023-10-24 20:20:39',
+        }),
+        v2EpisodeWatch({
+          key: 'rewatch-episode-02531a20-2745-4f3c-b0b0-25475135b863-2',
+          created_at: '2023-10-24 20:20:58',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(1);
+    });
+
+    it('should keep plays of the same episode in different minutes', async () => {
+      const csv = toCsv(V2_HEADER, [
+        v2EpisodeWatch({ created_at: '2023-10-24 20:20:39' }),
+        v2EpisodeWatch({
+          key: 'rewatch-episode-02531a20-2745-4f3c-b0b0-25475135b863-1',
+          created_at: '2023-10-24 20:21:02',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(2);
+    });
+
+    it('should keep different episodes watched within the same minute', async () => {
+      const csv = toCsv(V2_HEADER, [
+        v2EpisodeWatch({ created_at: '2023-10-24 20:20:39' }),
+        v2EpisodeWatch({
+          ep_id: '1331152',
+          ep_no: '11',
+          created_at: '2023-10-24 20:20:39',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(2);
+    });
+
     it('should not watchlist followed shows with only rewatched episodes', async () => {
       const csv = toCsv(V2_HEADER, [
         v2UserSeries({ is_followed: 'true', s_id: '82066' }),
@@ -519,6 +566,20 @@ describe('TvTimeGdprParser', () => {
         year: 2017,
         watched_at: new Date(1649590015 * 1000).toISOString(),
       });
+    });
+
+    it('should collapse plays of the same movie within the same minute', async () => {
+      const csv = toCsv(V1_HEADER, [
+        v1MovieWatch(),
+        v1MovieWatch({
+          'type-uuid-n': 'watch-002e2d8f-aee0-40ce-aa39-1be952e2952a-1',
+          watch_date_range_key: 'watch-date-1649590018',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result).toHaveLength(1);
     });
 
     it('should derive english titles from the alpha slug', async () => {

@@ -359,6 +359,35 @@ function parseListRows(listRows: ListRow[]): UniversalImportItem[] {
   });
 }
 
+function toPlayKey(item: UniversalImportItem): string | null {
+  if (item.action !== 'history' || !item.watched_at) return null;
+
+  return JSON.stringify([
+    item.type,
+    item.ids,
+    item.showTvdb,
+    item.season,
+    item.episode,
+    item.title,
+    item.year,
+    item.watched_at.slice(0, 16),
+  ]);
+}
+
+function dedupeSameMinutePlays(
+  items: UniversalImportItem[],
+): UniversalImportItem[] {
+  const seen = new Set<string>();
+
+  return items.filter((item) => {
+    const key = toPlayKey(item);
+    if (key == null) return true;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 function parseGdprRows(
   { v1Rows, v2Rows, followedRows, ratingRows, listRows }: {
     v1Rows: TrackingV1Row[];
@@ -368,19 +397,23 @@ function parseGdprRows(
     listRows: ListRow[];
   },
 ): UniversalImportItem[] {
-  const episodes = v2Rows.length > 0
-    ? v2Rows
-      .map(parseV2Episode)
-      .filter((item): item is UniversalImportItem => item !== null)
-    : v1Rows
-      .filter((row) => row.entity_type === 'episode')
-      .map(parseV1Episode)
-      .filter((item): item is UniversalImportItem => item !== null);
+  const episodes = dedupeSameMinutePlays(
+    v2Rows.length > 0
+      ? v2Rows
+        .map(parseV2Episode)
+        .filter((item): item is UniversalImportItem => item !== null)
+      : v1Rows
+        .filter((row) => row.entity_type === 'episode')
+        .map(parseV1Episode)
+        .filter((item): item is UniversalImportItem => item !== null),
+  );
 
-  const movies = v1Rows
-    .filter((row) => row.entity_type === 'movie')
-    .map(parseV1Movie)
-    .filter((item): item is UniversalImportItem => item !== null);
+  const movies = dedupeSameMinutePlays(
+    v1Rows
+      .filter((row) => row.entity_type === 'movie')
+      .map(parseV1Movie)
+      .filter((item): item is UniversalImportItem => item !== null),
+  );
 
   const watchedShowIds = new Set(
     v2Rows
