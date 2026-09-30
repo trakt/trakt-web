@@ -181,8 +181,14 @@ function toV2Position(row: TrackingV2Row) {
   return { season: toInt(season), episode: toInt(episode) };
 }
 
+const EPISODE_PLAY_PREFIXES = ['watch-episode-', 'rewatch-episode-'];
+
+function isEpisodePlay(row: TrackingV2Row): boolean {
+  return EPISODE_PLAY_PREFIXES.some((prefix) => row.key?.startsWith(prefix));
+}
+
 function parseV2Episode(row: TrackingV2Row): UniversalImportItem | null {
-  if (!row.key?.startsWith('watch-episode-')) return null;
+  if (!isEpisodePlay(row)) return null;
 
   // ep_id is the TVDB episode id (verified against the Trakt search API);
   // legacy exports carry it under episode_id. s_id/s_no/ep_no back positional
@@ -350,7 +356,7 @@ function parseGdprRows(
 
   const watchedShowIds = new Set(
     v2Rows
-      .filter((row) => row.key?.startsWith('watch-episode-'))
+      .filter(isEpisodePlay)
       .map((row) => toInt(row.s_id))
       .filter((id): id is number => id != null),
   );
