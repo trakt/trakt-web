@@ -700,9 +700,28 @@
   }
 
 
+  .is-finale .yir-reel-sticky {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 100dvh;
+    padding-bottom: calc(var(--ni-120) + env(safe-area-inset-bottom, 0px));
+
+    @include split-stage {
+      box-sizing: content-box;
+      height: 100dvh;
+      min-height: 0;
+      padding-bottom: var(--ni-32);
+    }
+  }
+
   .yir-reel-finale-spacer {
     display: block;
-    height: var(--ni-120);
+    flex: 1 0 var(--ni-24);
+
+    @include split-stage {
+      flex: initial;
+      height: var(--ni-120);
+    }
   }
 
   .yir-reel-chapters {
