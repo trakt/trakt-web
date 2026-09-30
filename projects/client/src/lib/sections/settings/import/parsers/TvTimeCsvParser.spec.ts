@@ -8,6 +8,11 @@ const LIBERATOR_CSV = [
   'tt0903747,3859781,episode,Breaking Bad,3,7,false,true,2023-06-01T12:00:00Z,ended,false',
 ].join('\n');
 
+const EXTRACTOR_CSV = [
+  'type,media_type,tmdb_id,imdb_id,tvdb_id,title,year,season,episode,watched_at,rating,review',
+  'watch,movie,,tt0163025,,Jurassic Park III,2001,,,2019-10-21T06:31:39Z,,',
+].join('\n');
+
 const NATIVE_CSV = [
   'ts,show_name,episode_id,episode_season_number,episode_number,episode_name',
   '1685620800,Breaking Bad,4325452,3,8,I See You',
@@ -69,6 +74,30 @@ describe('TvTimeCsvParser', () => {
         ids: { imdb: 'tt0903747', tvdb: 3859781 },
         title: 'Breaking Bad',
       });
+    });
+
+    it('should route extractor files by their media_type column', async () => {
+      const result = await TvTimeCsvParser.parse([
+        csvFile(EXTRACTOR_CSV, 'tv-time-export.csv'),
+      ]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'movie',
+        ids: { imdb: 'tt0163025' },
+      });
+    });
+
+    it('should route extractor zips by their tv-time-export.csv entry', async () => {
+      const file = zipFile(
+        { 'tv-time-export.csv': EXTRACTOR_CSV },
+        'tv-time-export.zip',
+      );
+
+      const result = await TvTimeCsvParser.parse([file]);
+
+      expect(result).toHaveLength(1);
     });
 
     it('should route gdpr tracking files by their ep_id column', async () => {
