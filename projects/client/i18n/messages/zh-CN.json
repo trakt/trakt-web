@@ -1498,6 +1498,7 @@
   "text_data_syncs_count_after": "次",
   "text_data_syncs_count_before": "数据已同步",
   "text_data_syncs_recent_before": "最近一次同步于",
+  "text_default_sort_order": "默认排序顺序",
   "text_deleted_username": "已删除",
   "text_directed_by": "导演：<a>{name}</a>",
   "text_directed_by_plain": "导演：{name}",

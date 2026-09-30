@@ -1498,6 +1498,7 @@
   "text_data_syncs_count_after": "keer",
   "text_data_syncs_count_before": "Gegevens zijn gesynchroniseerd",
   "text_data_syncs_recent_before": "Meest recente synchronisatie was",
+  "text_default_sort_order": "Standaard sorteervolgorde",
   "text_deleted_username": "Verwijderd",
   "text_directed_by": "Geregisseerd door <a>{name}</a>",
   "text_directed_by_plain": "Geregisseerd door {name}",

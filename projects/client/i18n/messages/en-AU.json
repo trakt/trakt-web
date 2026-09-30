@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "times",
   "text_data_syncs_count_before": "Data has synced",
   "text_data_syncs_recent_before": "Most recent sync was",
+  "text_default_sort_order": "Default sort order",
   "text_deleted_username": "Deleted",
   "text_directed_by": "Directed by <a>{name}</a>",
   "text_directed_by_plain": "Directed by {name}",

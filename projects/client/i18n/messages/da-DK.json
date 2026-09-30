@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "gange",
   "text_data_syncs_count_before": "Data er synkroniseret",
   "text_data_syncs_recent_before": "Seneste synkronisering var",
+  "text_default_sort_order": "Standard sorteringsrækkefølge",
   "text_deleted_username": "Slettet",
   "text_directed_by": "Instrueret af <a>{name}</a>",
   "text_directed_by_plain": "Instrueret af {name}",

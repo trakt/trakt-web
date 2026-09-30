@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "раз",
   "text_data_syncs_count_before": "Данные синхронизировались",
   "text_data_syncs_recent_before": "Последняя синхронизация была",
+  "text_default_sort_order": "Порядок сортировки по умолчанию",
   "text_deleted_username": "Удален",
   "text_directed_by": "Режиссер <a>{name}</a>",
   "text_directed_by_plain": "Режиссер {name}",

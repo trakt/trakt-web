@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "vegades",
   "text_data_syncs_count_before": "S'han sincronitzat dades",
   "text_data_syncs_recent_before": "L'última sincronització va ser",
+  "text_default_sort_order": "Ordre de classificació per defecte",
   "text_deleted_username": "Suprimit",
   "text_directed_by": "Dirigida per <a>{name}</a>",
   "text_directed_by_plain": "Dirigida per {name}",

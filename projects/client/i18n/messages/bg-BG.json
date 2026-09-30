@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "пъти",
   "text_data_syncs_count_before": "Данните са синхронизирани",
   "text_data_syncs_recent_before": "Последната синхронизация беше",
+  "text_default_sort_order": "Подредба по подразбиране",
   "text_deleted_username": "Изтрит",
   "text_directed_by": "Режисиран от <a>{name}</a>",
   "text_directed_by_plain": "Режисиран от {name}",

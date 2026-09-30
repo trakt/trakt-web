@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "Mal",
   "text_data_syncs_count_before": "Daten wurden synchronisiert",
   "text_data_syncs_recent_before": "Die letzte Synchronisierung war",
+  "text_default_sort_order": "Standard-Sortierreihenfolge",
   "text_deleted_username": "Gelöscht",
   "text_directed_by": "Regie von <a>{name}</a>",
   "text_directed_by_plain": "Regie von {name}",

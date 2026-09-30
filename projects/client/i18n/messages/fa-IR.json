@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "مرتبه",
   "text_data_syncs_count_before": "داده‌ها همگام‌سازی شده‌اند",
   "text_data_syncs_recent_before": "آخرین همگام‌سازی در",
+  "text_default_sort_order": "ترتیب پیش\nفرض مرتب\nسازی",
   "text_deleted_username": "حذف شده",
   "text_directed_by": "کارگردانی توسط <a>{name}</a>",
   "text_directed_by_plain": "کارگردانی توسط {name}",

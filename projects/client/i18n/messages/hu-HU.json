@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "alkalommal",
   "text_data_syncs_count_before": "Az adatok szinkronizálva",
   "text_data_syncs_recent_before": "Legutóbbi szinkronizálás:",
+  "text_default_sort_order": "Alapértelmezett rendezési sorrend",
   "text_deleted_username": "Törölve",
   "text_directed_by": "Rendezte: <a>{name}</a>",
   "text_directed_by_plain": "Rendezte: {name}",

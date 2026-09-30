@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "回",
   "text_data_syncs_count_before": "データが同期されました",
   "text_data_syncs_recent_before": "最新の同期は",
+  "text_default_sort_order": "デフォルトの並べ替え順",
   "text_deleted_username": "削除済み",
   "text_directed_by": "監督: <a>{name}</a>",
   "text_directed_by_plain": "監督: {name}",

@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "gånger",
   "text_data_syncs_count_before": "Data har synkroniserats",
   "text_data_syncs_recent_before": "Senaste synkroniseringen var",
+  "text_default_sort_order": "Standard sorteringsordning",
   "text_deleted_username": "Borttagen",
   "text_directed_by": "Regisserad av <a>{name}</a>",
   "text_directed_by_plain": "Regisserad av {name}",

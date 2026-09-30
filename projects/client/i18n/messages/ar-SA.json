@@ -1498,6 +1498,7 @@
   "text_data_syncs_count_after": "مرات",
   "text_data_syncs_count_before": "تمت مزامنة البيانات",
   "text_data_syncs_recent_before": "آخر مزامنة كانت",
+  "text_default_sort_order": "ترتيب الفرز الافتراضي",
   "text_deleted_username": "محذوف",
   "text_directed_by": "إخراج <a>{name}</a>",
   "text_directed_by_plain": "إخراج {name}",

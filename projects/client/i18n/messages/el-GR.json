@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "φορές",
   "text_data_syncs_count_before": "Τα δεδομένα συγχρονίστηκαν",
   "text_data_syncs_recent_before": "Ο πιο πρόσφατος συγχρονισμός ήταν",
+  "text_default_sort_order": "Προεπιλεγμένη σειρά ταξινόμησης",
   "text_deleted_username": "Διαγραμμένο",
   "text_directed_by": "Σκηνοθεσία <a>{name}</a>",
   "text_directed_by_plain": "Σκηνοθεσία {name}",

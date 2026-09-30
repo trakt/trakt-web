@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "ori",
   "text_data_syncs_count_before": "Datele au fost sincronizate",
   "text_data_syncs_recent_before": "Cea mai recentă sincronizare a fost",
+  "text_default_sort_order": "Ordine de sortare implicită",
   "text_deleted_username": "Șters",
   "text_directed_by": "Regizat de <a>{name}</a>",
   "text_directed_by_plain": "Regizat de {name}",

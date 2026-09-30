@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "razy",
   "text_data_syncs_count_before": "Dane zsynchronizowano",
   "text_data_syncs_recent_before": "Ostatnia synchronizacja była",
+  "text_default_sort_order": "Domyślna kolejność sortowania",
   "text_deleted_username": "Usunięty",
   "text_directed_by": "Reżyseria: <a>{name}</a>",
   "text_directed_by_plain": "Reżyseria: {name}",

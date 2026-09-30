@@ -1498,6 +1498,7 @@
   "text_data_syncs_count_after": "fois",
   "text_data_syncs_count_before": "Les données ont été synchronisées",
   "text_data_syncs_recent_before": "La synchronisation la plus récente était",
+  "text_default_sort_order": "Ordre de tri par défaut",
   "text_deleted_username": "Supprimé",
   "text_directed_by": "Réalisé par <a>{name}</a>",
   "text_directed_by_plain": "Réalisé par {name}",

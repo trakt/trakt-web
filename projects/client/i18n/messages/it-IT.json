@@ -1499,6 +1499,7 @@
   "text_data_syncs_count_after": "volte",
   "text_data_syncs_count_before": "I dati sono stati sincronizzati",
   "text_data_syncs_recent_before": "L'ultima sincronizzazione è stata",
+  "text_default_sort_order": "Ordinamento predefinito",
   "text_deleted_username": "Eliminato",
   "text_directed_by": "Diretto da <a>{name}</a>",
   "text_directed_by_plain": "Diretto da {name}",
