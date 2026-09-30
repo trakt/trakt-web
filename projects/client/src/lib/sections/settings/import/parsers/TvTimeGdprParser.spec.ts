@@ -850,6 +850,110 @@ describe('TvTimeGdprParser', () => {
         listIsPublic: false,
       });
     });
+
+    describe('with names only in the collection row', () => {
+      const COLLECTION_HEADER = [
+        's_key',
+        'name',
+        'is_public',
+        'objects',
+        'lists',
+      ];
+      const objects = '[map[created_at:1.7e+09 id:253463 type:series]]';
+      const collection =
+        '[map[created_at:1.7e+09 description:<nil> fanart:[https://artworks.thetvdb.com/a.jpg https://artworks.thetvdb.com/b.jpg] ' +
+        'is_public:false name:Watch later (maybe) order:<nil> posters:[https://artworks.thetvdb.com/c.jpg] ' +
+        's_key:0597455b-6940-4cb4 type:list updated_at:1.7e+09 user_id:1] ' +
+        'map[created_at:1.7e+09 description:<nil> fanart:<nil> is_public:false name:Kdrama ' +
+        'posters:<nil> s_key:109882a2-631d-4507 type:list updated_at:1.7e+09 user_id:1] ' +
+        'map[created_at:1.7e+09 description:<nil> fanart:<nil> is_public:false name:<nil> ' +
+        'posters:<nil> s_key:1befc5c3-8f9e-4a34 type:list updated_at:1.7e+09 user_id:1] ' +
+        'map[created_at:1.7e+09 description:<nil> fanart:<nil> is_public:false name:Favorite Shows ' +
+        'posters:<nil> s_key:favorite-series type:list updated_at:1.7e+09 user_id:1]]';
+
+      it('should name unnamed lists from the collection row', async () => {
+        const csv = toCsv(COLLECTION_HEADER, [
+          {
+            s_key: '0597455b-6940-4cb4',
+            name: '',
+            is_public: 'false',
+            objects,
+          },
+          {
+            s_key: '109882a2-631d-4507',
+            name: '',
+            is_public: 'false',
+            objects,
+          },
+          { s_key: 'collection', lists: collection },
+        ]);
+
+        const result = await TvTimeGdprParser.parse([
+          csvFile(csv, 'lists-prod-lists.csv'),
+        ]);
+
+        expect(result.map((item) => item.listName)).toEqual([
+          'Watch later (maybe)',
+          'Kdrama',
+        ]);
+      });
+
+      it('should prefer the row name over the collection name', async () => {
+        const csv = toCsv(COLLECTION_HEADER, [
+          {
+            s_key: '109882a2-631d-4507',
+            name: 'Mine',
+            is_public: 'true',
+            objects,
+          },
+          { s_key: 'collection', lists: collection },
+        ]);
+
+        const result = await TvTimeGdprParser.parse([
+          csvFile(csv, 'lists-prod-lists.csv'),
+        ]);
+
+        expect(result).toHaveLength(1);
+        expect(result[0]).toMatchObject({ listName: 'Mine' });
+      });
+
+      it('should skip lists whose collection name is nil', async () => {
+        const csv = toCsv(COLLECTION_HEADER, [
+          {
+            s_key: '1befc5c3-8f9e-4a34',
+            name: '',
+            is_public: 'false',
+            objects,
+          },
+          { s_key: 'collection', lists: collection },
+        ]);
+
+        const result = await TvTimeGdprParser.parse([
+          csvFile(csv, 'lists-prod-lists.csv'),
+        ]);
+
+        expect(result).toHaveLength(0);
+      });
+
+      it('should not import favorites as a list', async () => {
+        const csv = toCsv(COLLECTION_HEADER, [
+          { s_key: 'favorite-series', name: '', is_public: 'false', objects },
+          {
+            s_key: 'favorite-movies',
+            name: 'Favorite Movies',
+            is_public: 'false',
+            objects,
+          },
+          { s_key: 'collection', lists: collection },
+        ]);
+
+        const result = await TvTimeGdprParser.parse([
+          csvFile(csv, 'lists-prod-lists.csv'),
+        ]);
+
+        expect(result).toHaveLength(0);
+      });
+    });
   });
 
   describe('zip archives', () => {

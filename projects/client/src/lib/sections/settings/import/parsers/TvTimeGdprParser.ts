@@ -52,9 +52,11 @@ type RatingVoteRow = {
 };
 
 type ListRow = {
+  s_key?: string;
   name?: string;
   is_public?: string;
   objects?: string;
+  lists?: string;
 };
 
 const TRACKING_V1_MARKER = 'type-uuid-n';
@@ -309,9 +311,35 @@ function parseRatingVotes(
 // Keys print alphabetically, so `id:<n> type:<t>` are always adjacent.
 const LIST_OBJECT_RE = /id:(\d+)\s+type:(\w+)/g;
 
+const COLLECTION_S_KEY = 'collection';
+const FAVORITES_S_KEY_PREFIX = 'favorite-';
+const COLLECTION_ENTRY_NAME_RE =
+  /(?:^|\s)name:(.*?) (?:order|posters|related|s_key):/;
+const COLLECTION_ENTRY_KEY_RE = /(?:^|\s)s_key:([^\s\]]+)/;
+
+function toCollectionListNames(
+  listRows: ListRow[],
+): ReadonlyMap<string, string> {
+  const collection = listRows.find((row) => row.s_key === COLLECTION_S_KEY);
+
+  return new Map(
+    (collection?.lists ?? '').split('map[').flatMap((entry) => {
+      const name = entry.match(COLLECTION_ENTRY_NAME_RE)?.at(1)?.trim();
+      const sKey = entry.match(COLLECTION_ENTRY_KEY_RE)?.at(1);
+      if (!name || name === '<nil>' || !sKey) return [];
+      return [[sKey, name] as const];
+    }),
+  );
+}
+
 function parseListRows(listRows: ListRow[]): UniversalImportItem[] {
+  const collectionNames = toCollectionListNames(listRows);
+
   return listRows.flatMap((row) => {
-    const listName = row.name?.trim();
+    if (row.s_key?.startsWith(FAVORITES_S_KEY_PREFIX)) return [];
+
+    const listName = row.name?.trim() ||
+      collectionNames.get(row.s_key ?? '');
     if (!listName || !row.objects) return [];
 
     const listIsPublic = row.is_public === 'true';
