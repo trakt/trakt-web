@@ -1,4 +1,5 @@
 <script lang="ts">
+  import PlayArrowIcon from "$lib/components/icons/PlayArrowIcon.svelte";
   import { yirBeats } from "./persona/yirBeats";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages";
@@ -128,7 +129,8 @@
     </div>
 
     <button class="yir-2026-hero-replay" type="button" onclick={onreplay}>
-      ▶ {isMe ? m.yir_2026_replay() : m.yir_2026_watch_reel({ name })}
+      <PlayArrowIcon />
+      {isMe ? m.yir_2026_replay() : m.yir_2026_watch_reel({ name })}
     </button>
   </div>
   </div>
@@ -299,6 +301,10 @@
   }
 
   .yir-2026-hero-replay {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ni-6);
     margin-top: var(--ni-8);
     padding: var(--ni-12) var(--ni-24);
     border: 0;
@@ -308,6 +314,13 @@
     font: inherit;
     font-weight: 700;
     cursor: pointer;
+
+    :global(svg) {
+      flex: none;
+      width: 1.5em;
+      height: 1.5em;
+      margin-inline-start: calc(-1 * var(--ni-6));
+    }
   }
 
   .trakt-yir-2026-hero {
