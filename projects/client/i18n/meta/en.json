@@ -7490,6 +7490,18 @@
       "default": "Get asked to rate movies and episodes after watching.",
       "description": "Text for the description of the settings that controls whether users are prompted to rate movies and episodes after watching."
     },
+    "text_settings_open_imdb_links": {
+      "default": "Open IMDb links in Trakt",
+      "description": "Text for the setting in the mobile app that lets users open IMDb links in Trakt instead of the browser or the IMDb app."
+    },
+    "text_settings_open_imdb_links_description": {
+      "default": "Allow Trakt to open IMDb links in your system settings.",
+      "description": "Description of the setting in the mobile app that lets users open IMDb links in Trakt instead of the browser or the IMDb app. Tapping it opens the system settings, where the user has to allow Trakt to open these links."
+    },
+    "error_text_imdb_link_not_found": {
+      "default": "We couldn't find this IMDb title on Trakt.",
+      "description": "Error shown when an opened IMDb link points to a title that doesn't exist on Trakt."
+    },
     "switch_label_rating_prompt": {
       "default": "Enable or disable rating prompts",
       "description": "Accessible label for the toggle switch that enables or disables rating prompts."
