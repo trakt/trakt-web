@@ -153,6 +153,15 @@
   };
 </script>
 
+{#snippet heading(text: string, count?: number)}
+  <h3 class="overview-heading">
+    {text}
+    {#if count}
+      <span class="tag bold overview-count">{count}</span>
+    {/if}
+  </h3>
+{/snippet}
+
 <div class="trakt-today-overview">
   <div class="overview-toolbar">
     <div class="toolbar-days">
@@ -196,7 +205,7 @@
     {#if hero || stories.forYou.length > 0}
       <section class="overview-column overview-spotlight">
         {#if hero}
-          <h3>{m.text_today_top_story()}</h3>
+          {@render heading(m.text_today_top_story())}
           <TodayHero story={hero} />
 
           <div class="spotlight-highlights">
@@ -208,7 +217,7 @@
 
         {#if stories.forYou.length > 0}
           <div class="spotlight-for-you">
-            <h3>{m.text_today_for_you()}</h3>
+            {@render heading(m.text_today_for_you(), stories.forYou.length)}
             {#each stories.forYou as item (item.key)}
               <TodayForYouRow {item} />
             {/each}
@@ -222,7 +231,10 @@
         {#if params.grouping === "time"}
           <TodayFeed sections={feedSections} {now} />
         {:else}
-          <h3>{m.text_today_from_friends()}</h3>
+          {@render heading(
+            m.text_today_from_friends(),
+            params.grouping === "title" ? titles.length : personGroups.length,
+          )}
           <div class="overview-cards">
             {#if params.grouping === "title"}
               {#each titles as story (story.key)}
@@ -260,7 +272,10 @@
     </div>
 
     <aside class="overview-column overview-rail">
-      <TodayMostActive groups={personGroups} onOpen={open} />
+      {#if personGroups.length > 0}
+        {@render heading(m.text_today_most_active())}
+        <TodayMostActive groups={personGroups} onOpen={open} />
+      {/if}
     </aside>
   </div>
 </div>
@@ -281,10 +296,32 @@
     flex-direction: column;
     gap: var(--gap-l);
 
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--ni-1920);
+    margin-inline: auto;
     padding-inline: var(--layout-distance-side);
 
     h3 {
       margin: 0;
+    }
+
+    .overview-heading {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xs);
+    }
+
+    .overview-count {
+      min-width: var(--ni-20);
+      padding: var(--ni-2) var(--ni-6);
+      box-sizing: border-box;
+
+      border-radius: var(--border-radius-xxl);
+      background: color-mix(in srgb, var(--purple-500) 16%, transparent);
+      color: var(--color-text-emphasis);
+      text-align: center;
+      font-variant-numeric: tabular-nums;
     }
 
     .overview-toolbar {
@@ -315,6 +352,8 @@
     }
 
     .overview-body {
+      --overview-column-gap: var(--gap-xl);
+
       display: flex;
       flex-direction: column;
       gap: var(--gap-l);
@@ -328,22 +367,25 @@
 
       @include for-tablet-sm {
         display: grid;
+        column-gap: var(--overview-column-gap);
         grid-template-columns: minmax(var(--ni-280), 1fr) minmax(0, 2fr);
         align-items: start;
       }
 
       @include for-tablet-lg {
         display: grid;
+        column-gap: var(--overview-column-gap);
         grid-template-columns: minmax(var(--ni-280), 1fr) minmax(0, 2fr);
         align-items: start;
       }
 
       @include for-desktop {
         display: grid;
+        column-gap: var(--overview-column-gap);
         grid-template-columns:
-          minmax(var(--ni-280), 1fr)
-          minmax(0, 1.4fr)
-          minmax(var(--ni-240), 0.7fr);
+          minmax(var(--ni-280), min(30%, var(--ni-480)))
+          minmax(0, 1fr)
+          minmax(var(--ni-240), min(20%, var(--ni-320)));
         align-items: start;
       }
     }
@@ -353,6 +395,56 @@
       flex-direction: column;
       gap: var(--gap-s);
       min-width: 0;
+    }
+
+    .overview-main {
+      --splitter-top: calc(var(--ni-40) + var(--gap-s));
+      --splitter-color: color-mix(
+        in srgb,
+        var(--purple-400) 45%,
+        var(--color-foreground) 10%
+      );
+
+      position: relative;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: var(--splitter-top);
+        width: var(--border-thickness-xxs);
+        height: min(calc(100% - var(--splitter-top)), var(--ni-640));
+
+        pointer-events: none;
+        background: linear-gradient(
+          180deg,
+          transparent,
+          var(--splitter-color) var(--ni-48),
+          color-mix(in srgb, var(--splitter-color) 40%, transparent) 55%,
+          transparent
+        );
+      }
+
+      &::before {
+        inset-inline-start: calc(-0.5 * var(--overview-column-gap));
+      }
+
+      &::after {
+        display: none;
+        inset-inline-end: calc(-0.5 * var(--overview-column-gap));
+      }
+
+      @include for-mobile {
+        &::before {
+          display: none;
+        }
+      }
+
+      @include for-desktop {
+        &::after {
+          display: block;
+        }
+      }
     }
 
     .overview-spotlight,
@@ -371,7 +463,7 @@
     }
 
     .overview-main {
-      gap: var(--gap-l);
+      container: today-cards / inline-size;
 
       @include for-tablet-sm {
         grid-column: 2;
@@ -390,8 +482,15 @@
     .spotlight-for-you {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-m);
       margin-top: var(--gap-s);
+    }
+
+    .spotlight-highlights {
+      gap: var(--gap-m);
+    }
+
+    .spotlight-for-you {
+      gap: var(--gap-s);
     }
 
     .spotlight-highlights {
@@ -411,26 +510,41 @@
     }
 
     .overview-cards {
+      --overview-card-columns: 1;
+      --overview-card-gap: var(--gap-m);
+
       display: grid;
-      grid-template-columns: repeat(auto-fill, var(--width-portrait-card));
-      justify-content: start;
-      gap: var(--gap-m);
+      grid-template-columns: repeat(
+        var(--overview-card-columns),
+        minmax(0, 1fr)
+      );
+      gap: var(--overview-card-gap);
 
-      @include for-mobile {
-        container-type: inline-size;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      --width-override-card: calc(
+        (
+            100cqi - (var(--overview-card-columns) - 1) *
+              var(--overview-card-gap)
+          ) / var(--overview-card-columns)
+      );
+      --height-override-card-cover: calc(var(--width-override-card) * 1.5);
+      --height-override-card: calc(
+        var(--height-override-card-cover) + var(--height-card-footer)
+      );
+    }
 
-        --width-override-card: calc((100cqi - var(--gap-m)) / 2);
-        --card-aspect-ratio: calc(
-          var(--height-portrait-card-cover) / var(--width-portrait-card)
-        );
-        --height-override-card-cover: calc(
-          var(--width-override-card) * var(--card-aspect-ratio)
-        );
-        --height-override-card: calc(
-          var(--height-override-card-cover) +
-            var(--height-portrait-card) - var(--height-portrait-card-cover)
-        );
+    // Picks the column count that keeps cards closest to the regular card
+    // width (8.25rem), then the cards stretch to fill the row.
+    @for $columns from 2 through 10 {
+      @container today-cards (min-width: #{($columns - 0.5) * 9.25 - 1}rem) {
+        .overview-cards {
+          --overview-card-columns: #{$columns};
+        }
+      }
+    }
+
+    @include for-mobile {
+      .overview-cards {
+        --overview-card-columns: 2;
       }
     }
 

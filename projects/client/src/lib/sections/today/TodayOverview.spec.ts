@@ -49,8 +49,9 @@ describe('TodayOverview', () => {
     const user = userEvent.setup();
     renderComponent(TodayOverview, { props: { type: 'media' } });
 
+    await screen.findByText('Most active');
     const mostActive = assertDefined(
-      (await screen.findByText('Most active')).closest('section'),
+      document.querySelector<HTMLElement>('.trakt-today-most-active'),
     );
     const person = assertDefined(
       within(mostActive).getAllByRole('button').at(0),
