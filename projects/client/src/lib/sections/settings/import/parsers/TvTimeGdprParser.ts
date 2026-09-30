@@ -174,6 +174,13 @@ function parseV1Episode(row: TrackingV1Row): UniversalImportItem | null {
   };
 }
 
+function toV2Position(row: TrackingV2Row) {
+  const [season, episode] = toInt(row.ep_no)
+    ? [row.s_no, row.ep_no]
+    : [firstOf(row.season_number, row.s_no), row.episode_number];
+  return { season: toInt(season), episode: toInt(episode) };
+}
+
 function parseV2Episode(row: TrackingV2Row): UniversalImportItem | null {
   if (!row.key?.startsWith('watch-episode-')) return null;
 
@@ -181,8 +188,7 @@ function parseV2Episode(row: TrackingV2Row): UniversalImportItem | null {
   // legacy exports carry it under episode_id. s_id/s_no/ep_no back positional
   // resolution when the episode's own id is absent.
   const showTvdb = toInt(row.s_id);
-  const season = toInt(firstOf(row.s_no, row.season_number));
-  const episode = toInt(firstOf(row.ep_no, row.episode_number));
+  const { season, episode } = toV2Position(row);
   const ids = toEpisodeIds({
     tvdbId: toInt(firstOf(row.ep_id, row.episode_id)),
     showTvdb,
