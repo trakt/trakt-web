@@ -11231,6 +11231,58 @@
         }
       }
     },
+    "text_today_watched": {
+      "default": "Watched",
+      "description": "What a followed person did: watched a movie or show. Shown on its own line in a Today story card, under the person's name and above the time."
+    },
+    "text_today_watched_episode": {
+      "default": "Watched {episode}",
+      "description": "What a followed person did: watched one episode, e.g. Watched S1 • E1. Shown on its own line in a Today story card, under the person's name and above the time.",
+      "variables": {
+        "episode": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_watched_episodes": {
+      "default": "Watched {count} episodes",
+      "description": "What a followed person did: watched several episodes. Shown on its own line in a Today story card, under the person's name and above the time.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_today_rated": {
+      "default": "Rated",
+      "description": "What a followed person did: rated a title. Shown on its own line in a Today story card, under the person's name and above the time."
+    },
+    "text_today_rated_item": {
+      "default": "Rated {item}",
+      "description": "What a followed person did: rated a season or episode, e.g. Rated Season 1. Shown on its own line in a Today story card, under the person's name and above the time.",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_commented": {
+      "default": "Commented",
+      "description": "What a followed person did: commented on a title. Shown on its own line in a Today story card, under the person's name and above the time."
+    },
+    "text_today_commented_item": {
+      "default": "Commented on {item}",
+      "description": "What a followed person did: commented on a season or episode. Shown on its own line in a Today story card, under the person's name and above the time.",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_reviewed": {
+      "default": "Reviewed",
+      "description": "What a followed person did: wrote a review. Shown on its own line in a Today story card, under the person's name and above the time."
+    },
     "text_today_watched_at": {
       "default": "Watched · {time}",
       "description": "When a followed person watched a movie in the last 24 hours. The time is a clock time, or a day and a clock time.",

@@ -51,6 +51,7 @@
   let isUsingAction = $state(false);
   let pressedAt = 0;
   let lastPressDuration = 0;
+  let lastPointerType = "";
 
   const isPaused = $derived(
     isHeld || isPageHidden || isUsingAction || isFlipped,
@@ -60,18 +61,17 @@
     isFlipped = !isFlipped;
   };
 
-  const isMouse = (event: MouseEvent) =>
-    "pointerType" in event && event.pointerType === "mouse";
-
   const returnFocusAfterPointer = (event: MouseEvent) => {
     if (event.detail > 0) dialog?.focus({ preventScroll: true });
   };
 
   const flipOnTap = (event: MouseEvent) => {
-    if (!isMouse(event)) onTap(toggleFlip)(event);
+    const isMouse = event.detail > 0 && lastPointerType === "mouse";
+    if (!isMouse) onTap(toggleFlip)(event);
   };
 
-  const press = () => {
+  const press = (event: PointerEvent) => {
+    lastPointerType = event.pointerType;
     isHeld = true;
     pressedAt = Date.now();
   };
@@ -320,6 +320,14 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  @mixin floating-card {
+    width: var(--ni-480);
+    height: min(var(--ni-920), 92dvh);
+
+    border-radius: var(--border-radius-xxl);
+    box-shadow: var(--shadow-base);
+  }
+
   .trakt-today-story-viewer {
     position: fixed;
     inset: 0;
@@ -362,7 +370,7 @@
     .viewer-side {
       position: relative;
 
-      @include for-tablet-lg-and-below {
+      @include for-tablet-sm-and-below {
         display: none;
       }
     }
@@ -377,7 +385,12 @@
 
       width: 100%;
       height: 100%;
-      padding: var(--gap-s) var(--gap-m) var(--gap-l);
+      padding-block: calc(var(--gap-s) + env(safe-area-inset-top, 0px))
+        calc(var(--gap-l) + env(safe-area-inset-bottom, 0px));
+      padding-inline: calc(
+        var(--gap-m) +
+          max(env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px))
+      );
 
       background: linear-gradient(
         180deg,
@@ -386,12 +399,12 @@
         var(--color-background) 70%
       );
 
-      @include for-desktop {
-        width: var(--ni-480);
-        height: min(var(--ni-920), 92dvh);
+      @include for-tablet-lg {
+        @include floating-card;
+      }
 
-        border-radius: var(--border-radius-xxl);
-        box-shadow: var(--shadow-base);
+      @include for-desktop {
+        @include floating-card;
       }
     }
 

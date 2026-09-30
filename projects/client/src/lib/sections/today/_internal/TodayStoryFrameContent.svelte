@@ -19,7 +19,8 @@
   import TodayPosterDetails from "./TodayPosterDetails.svelte";
   import { toFrameMedia } from "./toFrameMedia.ts";
   import { hasWatchedToo } from "./hasWatchedToo.ts";
-  import { toFriendActionText } from "./toFriendActionText.ts";
+  import { toFriendActionLabel } from "./toFriendActionLabel.ts";
+  import { toFriendActionTime } from "./toFriendActionTime.ts";
   
 
   const HOVER_EXIT_MARGIN = 16;
@@ -153,7 +154,10 @@
           />
           <div class="frame-person-info">
             <p class="bold ellipsis">{toDisplayableName(frame.action.user)}</p>
-            <p class="small secondary">{toFriendActionText(frame.action)}</p>
+            <p class="small ellipsis">{toFriendActionLabel(frame.action)}</p>
+            <p class="small secondary ellipsis">
+              {toFriendActionTime(frame.action.activityAt)}
+            </p>
           </div>
           {#if frame.action.milestone}
             <TodayMilestoneChip milestone={frame.action.milestone} />
@@ -196,20 +200,10 @@
     }
 
     .poster-hit {
-      --poster-natural-width: calc(100cqh * 2 / 3);
-
       position: relative;
 
-      height: 100%;
-      max-width: 100%;
+      width: min(100cqw, 100cqh * 2 / 3);
       aspect-ratio: 2 / 3;
-      width: min(
-        100cqw,
-        calc(
-          var(--poster-natural-width) +
-            max(0px, (var(--poster-natural-width) - 94cqw) * 50)
-        )
-      );
 
       perspective: var(--ni-1280);
     }
@@ -333,6 +327,7 @@
 
     .frame-person {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: var(--gap-s);
 
@@ -348,7 +343,7 @@
     .frame-person-info {
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
+      flex: 1 1 var(--ni-120);
       min-width: 0;
     }
 
