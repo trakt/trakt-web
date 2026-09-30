@@ -17,6 +17,7 @@ import { hasAuthSession } from '$lib/features/auth/hasAuthSession.ts';
 import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
 
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
+import { stripOAuthParams } from '$lib/utils/url/stripOAuthParams.ts';
 import { stripWebviewParams } from '$lib/utils/url/stripWebviewParams.ts';
 import { WEBVIEW_PARAMS } from '$lib/utils/url/webviewParams.ts';
 import {
@@ -89,10 +90,7 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
   });
 };
 
-// Keep the slurm VIP token out of Sentry. The client strips the WebView params
-// before anything reads them, but the server request URL still carries them, so
-// scrub the request URL from every error and transaction report.
-function scrubWebviewParams<T extends { request?: { url?: string } }>(
+function scrubSensitiveParams<T extends { request?: { url?: string } }>(
   event: T,
 ): T {
   const request = event.request;
@@ -101,7 +99,9 @@ function scrubWebviewParams<T extends { request?: { url?: string } }>(
   }
 
   try {
-    request.url = stripWebviewParams(new URL(request.url)).href;
+    request.url = stripOAuthParams(
+      stripWebviewParams(new URL(request.url)),
+    ).href;
   } catch {
     // Leave a non-absolute / unparseable URL untouched.
   }
@@ -120,8 +120,8 @@ export const handle: Handle = sequence(
       // whichever subrequest or body-read was in flight.
       'Network connection lost.',
     ],
-    beforeSend: scrubWebviewParams,
-    beforeSendTransaction: scrubWebviewParams,
+    beforeSend: scrubSensitiveParams,
+    beforeSendTransaction: scrubSensitiveParams,
   }),
   handleSentryTunnel,
   sentryHandle(),
