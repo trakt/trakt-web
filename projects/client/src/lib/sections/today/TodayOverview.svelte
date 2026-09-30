@@ -129,6 +129,15 @@
   };
 </script>
 
+{#snippet heading(text: string, count?: number)}
+  <h3 class="overview-heading">
+    {text}
+    {#if count}
+      <span class="tag bold overview-count">{count}</span>
+    {/if}
+  </h3>
+{/snippet}
+
 <div class="trakt-today-overview">
   <div class="overview-toolbar">
     <TodayDayStrip
@@ -165,7 +174,7 @@
     {#if hero || stories.forYou.length > 0}
       <section class="overview-column overview-spotlight">
         {#if hero}
-          <h3>{m.text_today_top_story()}</h3>
+          {@render heading(m.text_today_top_story())}
           <TodayHero story={hero} />
 
           <div class="spotlight-highlights">
@@ -177,7 +186,7 @@
 
         {#if stories.forYou.length > 0}
           <div class="spotlight-for-you">
-            <h3>{m.text_today_for_you()}</h3>
+            {@render heading(m.text_today_for_you(), stories.forYou.length)}
             {#each stories.forYou as item (item.key)}
               <TodayForYouRow {item} />
             {/each}
@@ -191,7 +200,10 @@
         {#if params.grouping === "time"}
           <TodayFeed sections={feedSections} {now} />
         {:else}
-          <h3>{m.text_today_from_friends()}</h3>
+          {@render heading(
+            m.text_today_from_friends(),
+            params.grouping === "title" ? titles.length : personGroups.length,
+          )}
           <div class="overview-cards">
             {#if params.grouping === "title"}
               {#each titles as story (story.key)}
@@ -254,6 +266,24 @@
 
     h3 {
       margin: 0;
+    }
+
+    .overview-heading {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xs);
+    }
+
+    .overview-count {
+      min-width: var(--ni-20);
+      padding: var(--ni-2) var(--ni-6);
+      box-sizing: border-box;
+
+      border-radius: var(--border-radius-xxl);
+      background: color-mix(in srgb, var(--purple-500) 16%, transparent);
+      color: var(--color-text-emphasis);
+      text-align: center;
+      font-variant-numeric: tabular-nums;
     }
 
     .overview-toolbar {
@@ -372,6 +402,22 @@
       grid-template-columns: repeat(auto-fill, var(--width-portrait-card));
       justify-content: start;
       gap: var(--gap-m);
+
+      @include for-mobile {
+        --overview-card-gap: var(--gap-s);
+
+        container-type: inline-size;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--overview-card-gap);
+
+        --width-override-card: calc(
+          (100cqi - 2 * var(--overview-card-gap)) / 3
+        );
+        --height-override-card-cover: calc(var(--width-override-card) * 1.5);
+        --height-override-card: calc(
+          var(--height-override-card-cover) + var(--height-card-footer)
+        );
+      }
     }
 
     .overview-quiet {

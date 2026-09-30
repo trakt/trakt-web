@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import WatchedTag from "$lib/components/media/tags/WatchedTag.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
@@ -81,6 +82,9 @@
           color="purple"
         >
           {m.button_text_play_story()}
+          {#snippet icon()}
+            <PlayIcon size="small" />
+          {/snippet}
         </Button>
       </div>
     </div>
@@ -98,6 +102,21 @@
     border-radius: var(--border-radius-xl);
     background: var(--shade-900);
     color: var(--shade-10);
+    box-shadow:
+      0 0 0 var(--border-thickness-xxs)
+        color-mix(in srgb, var(--purple-400) 35%, transparent),
+      0 var(--ni-16) var(--ni-48)
+        color-mix(in srgb, var(--purple-700) 30%, transparent);
+
+    :global(.hero-backdrop) {
+      transition: transform calc(var(--transition-duration-short) * 2) ease-out;
+    }
+
+    @include for-mouse {
+      &:hover :global(.hero-backdrop) {
+        transform: scale(1.04);
+      }
+    }
 
     :global(.hero-backdrop) {
       position: absolute;
@@ -116,6 +135,11 @@
         180deg,
         color-mix(in srgb, var(--shade-1000) 15%, transparent),
         color-mix(in srgb, var(--shade-1000) 96%, transparent)
+      ),
+      radial-gradient(
+        circle at 50% 110%,
+        color-mix(in srgb, var(--purple-600) 45%, transparent),
+        transparent 60%
       );
     }
 
@@ -153,6 +177,11 @@
       justify-content: center;
 
       padding-bottom: var(--gap-s);
+
+      :global(img) {
+        box-shadow: 0 var(--ni-12) var(--ni-32)
+          color-mix(in srgb, var(--shade-1000) 60%, transparent);
+      }
     }
 
     .hero-text {
@@ -178,8 +207,30 @@
     @include for-mobile {
       min-height: var(--ni-200);
 
+      .hero-content {
+        display: grid;
+        grid-template-columns: var(--ni-80) minmax(0, 1fr);
+        grid-template-areas:
+          "people people"
+          "poster text";
+        align-items: end;
+        column-gap: var(--gap-m);
+      }
+
+      .hero-people {
+        grid-area: people;
+        align-self: start;
+      }
+
       .hero-poster {
-        display: none;
+        --summary-poster-width: var(--ni-80);
+
+        grid-area: poster;
+        padding-bottom: 0;
+      }
+
+      .hero-text {
+        grid-area: text;
       }
     }
   }
