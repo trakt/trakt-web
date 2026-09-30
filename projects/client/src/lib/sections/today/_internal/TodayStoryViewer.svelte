@@ -367,7 +367,12 @@
 
       width: 100%;
       height: 100%;
-      padding: var(--gap-s) var(--gap-m) var(--gap-l);
+      padding-block: calc(var(--gap-s) + env(safe-area-inset-top, 0px))
+        calc(var(--gap-l) + env(safe-area-inset-bottom, 0px));
+      padding-inline: calc(
+        var(--gap-m) +
+          max(env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px))
+      );
 
       background: linear-gradient(
         180deg,
