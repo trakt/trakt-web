@@ -74,7 +74,7 @@
     margin-top: 7cqw;
     background: #fff;
     padding: 3.5cqw 4cqw;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "IBM Plex Sans", "IBM Plex Sans Fallback", sans-serif;
   }
   .name {
     font-weight: 700;

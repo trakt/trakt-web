@@ -71,7 +71,7 @@
     width: 15cqw;
     background: #15102e;
     writing-mode: vertical-rl;
-    font-family: "Dela Gothic One", sans-serif;
+    font-family: "Dela Gothic One", "Dela Gothic One Fallback", sans-serif;
     font-size: 8cqw;
     display: grid;
     place-items: center;
@@ -89,13 +89,13 @@
     inset-inline-start: var(--x);
   }
   .no {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.8cqw;
     letter-spacing: 0.18em;
     color: #ff8cc0;
   }
   .name {
-    font-family: "Dela Gothic One", sans-serif;
+    font-family: "Dela Gothic One", "Dela Gothic One Fallback", sans-serif;
     font-size: 10.5cqw;
     line-height: 1;
     margin-top: 1.5cqw;
@@ -114,7 +114,7 @@
     margin-top: 3.5cqw;
   }
   .stat b {
-    font-family: "Dela Gothic One", sans-serif;
+    font-family: "Dela Gothic One", "Dela Gothic One Fallback", sans-serif;
     font-size: 5.6cqw;
   }
   .stat span {

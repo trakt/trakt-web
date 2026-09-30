@@ -69,7 +69,7 @@
     top: 4cqw;
     inset-inline-end: 4cqw;
     background: rgb(0 0 0 / 78%);
-    font-family: "VT323", monospace;
+    font-family: "VT323", "VT323 Fallback", monospace;
     font-size: 7cqw;
     line-height: 1;
     padding: 1cqw 2.4cqw;
@@ -90,13 +90,13 @@
     padding: 5cqw;
   }
   .no {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.8cqw;
     letter-spacing: 0.18em;
     color: #a3a3a3;
   }
   .name {
-    font-family: "Bricolage Grotesque", sans-serif;
+    font-family: "Bricolage Grotesque", "Bricolage Grotesque Fallback", sans-serif;
     font-weight: 800;
     font-size: 12cqw;
     line-height: 0.92;
@@ -119,7 +119,7 @@
     padding-top: 2cqw;
   }
   .stat b {
-    font-family: "Bricolage Grotesque", sans-serif;
+    font-family: "Bricolage Grotesque", "Bricolage Grotesque Fallback", sans-serif;
     font-weight: 800;
     font-size: 7cqw;
   }

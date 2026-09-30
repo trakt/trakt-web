@@ -36,7 +36,7 @@
   }
   .mast {
     text-align: center;
-    font-family: "Playfair Display", serif;
+    font-family: "Playfair Display", "Playfair Display Fallback", serif;
     font-weight: 900;
     font-size: 7.6cqw;
     border-top: 1.2cqw double #1b1a17;
@@ -45,7 +45,7 @@
   .date {
     display: flex;
     justify-content: space-between;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.4cqw;
     letter-spacing: 0.1em;
     border-block: 0.3cqw solid #1b1a17;
@@ -53,7 +53,7 @@
     margin-top: 1.6cqw;
   }
   .kick {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "IBM Plex Sans", "IBM Plex Sans Fallback", sans-serif;
     font-weight: 700;
     font-size: 2.8cqw;
     letter-spacing: 0.3em;
@@ -61,7 +61,7 @@
     margin-top: 5cqw;
   }
   .name {
-    font-family: "Playfair Display", serif;
+    font-family: "Playfair Display", "Playfair Display Fallback", serif;
     font-weight: 900;
     font-size: 15cqw;
     line-height: 0.9;
@@ -82,7 +82,7 @@
     clip-path: inset(0 calc(100% - var(--fill)) 0 0);
   }
   .quote {
-    font-family: "Playfair Display", serif;
+    font-family: "Playfair Display", "Playfair Display Fallback", serif;
     font-style: italic;
     font-size: 4.6cqw;
     line-height: 1.25;
@@ -94,7 +94,7 @@
     position: absolute;
     top: 34cqw;
     inset-inline-end: 6cqw;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "IBM Plex Sans", "IBM Plex Sans Fallback", sans-serif;
     font-weight: 700;
     font-size: 3cqw;
     letter-spacing: 0.2em;
@@ -121,12 +121,12 @@
     border-inline-start: 0.3cqw solid #1b1a17;
   }
   .stat b {
-    font-family: "Playfair Display", serif;
+    font-family: "Playfair Display", "Playfair Display Fallback", serif;
     font-weight: 900;
     font-size: 7.4cqw;
   }
   .stat span {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "IBM Plex Sans", "IBM Plex Sans Fallback", sans-serif;
     font-size: 2.7cqw;
     color: #55503f;
   }

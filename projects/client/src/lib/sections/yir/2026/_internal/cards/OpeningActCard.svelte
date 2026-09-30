@@ -81,14 +81,14 @@
     flex-direction: column;
   }
   .field span {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.3cqw;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #a9a79d;
   }
   .field b {
-    font-family: "Caveat", cursive;
+    font-family: "Caveat", "Caveat Fallback", cursive;
     font-weight: 700;
     font-size: 6.6cqw;
     line-height: 1;
@@ -102,13 +102,13 @@
     justify-content: center;
   }
   .no {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.6cqw;
     letter-spacing: 0.18em;
     color: #a9a79d;
   }
   .name {
-    font-family: "Caveat", cursive;
+    font-family: "Caveat", "Caveat Fallback", cursive;
     font-weight: 700;
     font-size: 14cqw;
     line-height: 0.9;

@@ -59,13 +59,13 @@
     text-align: center;
   }
   .admit {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.8cqw;
     letter-spacing: 0.4em;
     color: #8a1c2b;
   }
   .name {
-    font-family: "Abril Fatface", serif;
+    font-family: "Abril Fatface", "Abril Fatface Fallback", serif;
     font-size: 12cqw;
     line-height: 0.95;
     color: #b3122b;
@@ -75,13 +75,13 @@
     display: flex;
     justify-content: center;
     gap: 3cqw;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.8cqw;
     margin-top: 3cqw;
     color: #5a2a2a;
   }
   .tag {
-    font-family: "Playfair Display", serif;
+    font-family: "Playfair Display", "Playfair Display Fallback", serif;
     font-style: italic;
     font-size: 4cqw;
     margin-top: 3cqw;
@@ -117,7 +117,7 @@
     transition: transform calc(var(--yir-beat) * 4) cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .stat b {
-    font-family: "Abril Fatface", serif;
+    font-family: "Abril Fatface", "Abril Fatface Fallback", serif;
     font-size: 7.4cqw;
     line-height: 1;
   }
