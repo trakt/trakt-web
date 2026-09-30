@@ -5666,6 +5666,34 @@
         }
       }
     },
+    "import_error_tvtime_unreadable_zip": {
+      "default": "Could not read the .zip file. If it is password protected, extract it first and upload the CSV files inside instead.",
+      "description": "TV Time import error when the uploaded .zip can't be opened. Shown inside import_status_error."
+    },
+    "import_error_tvtime_unknown_zip": {
+      "default": "This .zip file does not look like a TV Time export. Upload the GDPR data export .zip or the Liberator export .zip.",
+      "description": "TV Time import error when the uploaded .zip matches no known TV Time export. Shown inside import_status_error."
+    },
+    "import_error_tvtime_trakt_export": {
+      "default": "This is a Trakt export, not a TV Time one. Upload the export you downloaded from TV Time instead.",
+      "description": "TV Time import error when the user uploads their own Trakt data export (trakt-export-*.zip) to the TV Time importer. Shown inside import_status_error."
+    },
+    "import_error_tvtime_no_history": {
+      "default": "This TV Time export has no watch history in it: the tracking-prod-records files are missing, so there is nothing to import.",
+      "description": "TV Time import error when a GDPR export .zip contains account files but none of the tracking-prod-records watch history files. Filenames stay verbatim. Shown inside import_status_error."
+    },
+    "import_error_tvtime_summary_only": {
+      "default": "This .zip only contains the TV Time summary page, which can't be imported. Upload the tvtime-*.csv files from the same export instead.",
+      "description": "TV Time import error when the .zip only holds the tvtime-summary HTML page. Filenames stay verbatim. Shown inside import_status_error."
+    },
+    "import_error_tvtime_no_files": {
+      "default": "None of these files look like a TV Time export. Upload the Liberator export or the GDPR data export.",
+      "description": "TV Time import error when none of the uploaded files match a known TV Time export. Shown inside import_status_error."
+    },
+    "import_error_tvtime_mixed_exports": {
+      "default": "These files come from different TV Time exports. Import either the Liberator export or the GDPR data export, not both at once.",
+      "description": "TV Time import error when the uploaded files come from more than one TV Time export format. Shown inside import_status_error."
+    },
     "import_summary_history": {
       "default": "{count} items for History",
       "description": "Summary line showing the number of history items found in the import file.",
