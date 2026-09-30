@@ -314,6 +314,36 @@ describe('TvTimeGdprParser', () => {
       });
     });
 
+    it('should fall back to legacy numbers when s_no and ep_no are zeroed', async () => {
+      const csv = toCsv(V2_HEADER, [
+        v2EpisodeWatch({
+          s_no: '0',
+          ep_no: '0',
+          season_number: '2',
+          episode_number: '10',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result[0]).toMatchObject({ season: 2, episode: 10 });
+    });
+
+    it('should keep specials numbered in s_no and ep_no', async () => {
+      const csv = toCsv(V2_HEADER, [
+        v2EpisodeWatch({
+          s_no: '0',
+          ep_no: '3',
+          season_number: '0',
+          episode_number: '3',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result[0]).toMatchObject({ season: 0, episode: 3 });
+    });
+
     it('should prefer ep_id over a blank ep_id shadowing episode_id', async () => {
       // ep_id column present but empty must not shadow a populated episode_id.
       const bothHeader = [
