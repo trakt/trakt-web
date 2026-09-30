@@ -38,13 +38,13 @@ export function useList({ list, type, media }: UseListProps) {
   const addToList = async () => {
     track({ action: 'add' });
 
-    await addition.mutate();
+    return await addition.mutate();
   };
 
   const removeFromList = async () => {
     track({ action: 'remove' });
 
-    await removal.mutate();
+    return await removal.mutate();
   };
 
   const isListUpdating = anyTrue([addition.isPending, removal.isPending]);

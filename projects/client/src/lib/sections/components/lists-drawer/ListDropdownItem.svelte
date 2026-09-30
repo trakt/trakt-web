@@ -1,12 +1,16 @@
 <script lang="ts">
   import { useDangerButton } from "$lib/components/buttons/_internal/useDangerButton";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
+  import CheckboxIcon from "$lib/components/icons/CheckboxIcon.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import { onMount } from "svelte";
+  import {
+    type BackgroundFlash,
+    backgroundFlash,
+  } from "$lib/utils/attachments/backgroundFlash";
+  import { createAttachmentKey } from "svelte/attachments";
   import { ListDropdownItemIntlProvider } from "./ListDropdownItemIntlProvider";
   import type { ListDropdownItemProps } from "./ListDropdownItemProps";
   import { useList } from "./useList";
@@ -14,7 +18,6 @@
   const {
     title,
     list,
-    onLoading,
     i18n = ListDropdownItemIntlProvider,
     target,
     isListed,
@@ -26,19 +29,21 @@
     useList({ list, ...target }),
   );
 
-  const isBelowLimit = $derived(list.count < $user.limits.lists.itemLimit);
+  let flash = $state<BackgroundFlash | null>(null);
 
-  onMount(() => {
-    if (!onLoading) {
-      return;
+  const add = async () => {
+    if (await addToList()) {
+      flash = { color: "purple" };
     }
+  };
 
-    const subscription = isListUpdating.subscribe((value) => {
-      onLoading(value);
-    });
+  const remove = async () => {
+    if (await removeFromList()) {
+      flash = { color: "red" };
+    }
+  };
 
-    return () => subscription.unsubscribe();
-  });
+  const isBelowLimit = $derived(list.count < $user.limits.lists.itemLimit);
 
   const { confirm } = useConfirm();
   const confirmRemove = $derived(
@@ -46,25 +51,26 @@
       type: ConfirmationType.RemoveFromList,
       title,
       name: list.name,
-      onConfirm: removeFromList,
+      onConfirm: remove,
     }),
   );
 
-  const handler = $derived(isListed ? confirmRemove : addToList);
+  const handler = $derived(isListed ? confirmRemove : add);
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: isListed, color: "default" }),
   );
-  const state = $derived(isListed ? "added" : "missing");
 
   const itemProps: Omit<ButtonProps, "children"> = $derived({
-    style: "flat",
-    label: i18n.label({ isListed, listName: list.name, title }),
-    color: $color,
-    variant: isListed ? variant : "primary",
-    onclick: handler,
-    disabled: $isListUpdating || (!isListed && !isBelowLimit),
-    ...events,
-  });
+      style: "flat",
+      label: i18n.label({ isListed, listName: list.name, title }),
+      "aria-pressed": isListed ? "true" : "false",
+      color: $color,
+      variant: isListed ? variant : "primary",
+      onclick: handler,
+      disabled: $isListUpdating || (!isListed && !isBelowLimit),
+      ...events,
+      [createAttachmentKey()]: backgroundFlash(flash),
+    });
 </script>
 
 <DropdownItem {...itemProps}>
@@ -74,7 +80,8 @@
     {#if $isListUpdating}
       <LoadingIndicator />
     {:else}
-      <BookmarkIcon {state} size="normal" />
+      <CheckboxIcon state={isListed ? "checked" : "unchecked"} />
     {/if}
   {/snippet}
+
 </DropdownItem>

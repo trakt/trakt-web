@@ -33,7 +33,7 @@ function mapListParamsToQueryParams(list: ListParams) {
   if (list.user?.slug) {
     return {
       userId: list.user.slug,
-      listId: assertDefined(list.slug),
+      listId: list.slug ?? `${assertDefined(list.id)}`,
     };
   }
 

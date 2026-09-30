@@ -1,6 +1,41 @@
 :root {
   --animation-duration-jiggle-wiggle: calc(var(--transition-increment) * 3);
   --animation-duration-loopy-loop: calc(var(--transition-increment) * 3);
+  --animation-duration-background-flash: calc(var(--transition-increment) * 10);
+}
+
+[data-background-flash] {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+
+    opacity: 0;
+    animation: background-flash var(--animation-duration-background-flash)
+      ease-out;
+  }
+}
+
+[data-background-flash="purple"]::after {
+  background: var(--color-background-purple);
+}
+
+[data-background-flash="red"]::after {
+  background: var(--color-background-red);
+}
+
+@keyframes background-flash {
+  0%,
+  35% {
+    opacity: 0.28;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes jiggle-wiggle {

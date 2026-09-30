@@ -5,7 +5,6 @@ import type { ListDropdownItemIntl } from './ListDropdownItemIntl.ts';
 export type ListDropdownItemProps = {
   list: UserList;
   target: ListTarget;
-  onLoading?: (isLoading: boolean) => void;
   title: string;
   isListed: boolean;
   i18n?: ListDropdownItemIntl;

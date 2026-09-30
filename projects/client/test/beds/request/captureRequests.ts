@@ -1,7 +1,7 @@
 import { server } from '$mocks/server.ts';
 
 export async function captureRequests(
-  run: () => Promise<void>,
+  run: () => Promise<unknown>,
 ): Promise<string[]> {
   const requests: string[] = [];
   const record = ({ request }: { request: Request }) => {

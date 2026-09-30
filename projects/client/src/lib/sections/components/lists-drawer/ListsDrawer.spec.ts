@@ -68,17 +68,14 @@ describe('ListsDrawer', () => {
 
       const row = await screen.findByText(LIST_NAME);
 
-      const bookmarkFill = () =>
-        row
-          .closest('li')
-          ?.querySelector('.trakt-bookmark-path')
-          ?.getAttribute('fill');
+      const isPressed = () =>
+        row.closest('[role="button"]')?.getAttribute('aria-pressed');
 
-      await waitFor(() => expect(bookmarkFill()).toBe('transparent'));
+      await waitFor(() => expect(isPressed()).toBe('false'));
 
       await user.click(row);
 
-      await waitFor(() => expect(bookmarkFill()).toBe('currentColor'));
+      await waitFor(() => expect(isPressed()).toBe('true'));
     },
   );
 });
