@@ -107,6 +107,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-yir-persona-toggles {
     position: fixed;
     inset-inline-end: var(--ni-16);
@@ -119,6 +121,10 @@
     max-width: calc(100vw - var(--ni-32));
     font-family: var(--yir-font-mono);
     font-size: var(--font-size-tag);
+
+    @include for-tablet-sm-and-below {
+      bottom: calc(var(--mobile-navbar-height) + var(--ni-16));
+    }
 
     &.is-raised {
       bottom: calc(env(safe-area-inset-bottom, 0) + var(--ni-160));
