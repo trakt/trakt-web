@@ -22,4 +22,17 @@ describe('util: personaFonts', () => {
 
     expect(url.match(/Abril\+Fatface/g)).toHaveLength(1);
   });
+
+  it('should load every family a persona card uses', () => {
+    const url = personaFonts(['omnivore']);
+
+    expect(url).toContain('family=Bricolage+Grotesque');
+    expect(url).toContain('family=VT323');
+  });
+
+  it('should not repeat a family shared across two personas', () => {
+    const url = personaFonts(['omnivore', 'comfort-rewatcher']);
+
+    expect(url.match(/family=VT323/g)).toHaveLength(1);
+  });
 });
