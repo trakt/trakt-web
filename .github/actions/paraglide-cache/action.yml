@@ -1,0 +1,36 @@
+name: Paraglide Cache
+description: Restores the compiled Paraglide output so the vite plugin can skip recompiling unchanged messages
+
+inputs:
+  save:
+    description: 'Save the cache at the end of the job. Only for jobs that compile through the vite plugin, which writes the cache manifest the skip relies on'
+    required: false
+    default: 'false'
+
+outputs:
+  cache-hit:
+    description: 'Whether the cache was restored for the exact inputs'
+    value: ${{ steps.save.outputs.cache-hit || steps.restore.outputs.cache-hit }}
+
+runs:
+  using: composite
+  steps:
+    - name: Recalling the Runes aka Restore & Save Paraglide Cache
+      id: save
+      if: inputs.save == 'true'
+      uses: actions/cache@v4
+      with:
+        path: |
+          projects/client/i18n/project.inlang
+          projects/client/src/lib/paraglide
+        key: paraglide-v2-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}
+
+    - name: Recalling the Runes aka Restore Paraglide Cache
+      id: restore
+      if: inputs.save != 'true'
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          projects/client/i18n/project.inlang
+          projects/client/src/lib/paraglide
+        key: paraglide-v2-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}

@@ -139,6 +139,11 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             -o DPkg::Lock::Timeout=120 fontconfig fonts-dejavu-core
 
+      - name: Recalling the Runes aka Paraglide Cache
+        uses: ./.github/actions/paraglide-cache
+        with:
+          save: 'true'
+
       - name: Forging the Artifacts aka Prebuild
         working-directory: projects/client
         run: 'deno task prebuild'
@@ -190,11 +195,16 @@ jobs:
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
 
+      - name: Recalling the Runes aka Paraglide Cache
+        id: paraglide
+        uses: ./.github/actions/paraglide-cache
+
       - name: Summoning the Ancient Tongues aka Generate i18n
         working-directory: projects/client
         run: 'deno task i18n:web'
 
       - name: Forging the Paraglide Runes aka Compile Paraglide
+        if: steps.paraglide.outputs.cache-hit != 'true'
         working-directory: projects/client
         run: 'deno run -A npm:@inlang/paraglide-js compile --project ./i18n/project.inlang --outdir ./src/lib/paraglide'
 
@@ -214,6 +224,9 @@ jobs:
 
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
+
+      - name: Recalling the Runes aka Paraglide Cache
+        uses: ./.github/actions/paraglide-cache
 
       - name: Assembling the Shards of Evidence aka Download Blob Reports
         uses: actions/download-artifact@v4
@@ -259,6 +272,11 @@ jobs:
       - name: The Phantom Browsers Materialize aka Install Browsers
         working-directory: projects/client
         run: 'deno run -A npm:@playwright/test install chromium'
+
+      - name: Recalling the Runes aka Paraglide Cache
+        uses: ./.github/actions/paraglide-cache
+        with:
+          save: 'true'
 
       - name: Whispers of the Future aka Preview Build
         working-directory: projects/client
@@ -319,6 +337,11 @@ jobs:
 
       - name: Setup Deno Environment
         uses: ./.github/actions/setup-deno
+
+      - name: Recalling the Runes aka Paraglide Cache
+        uses: ./.github/actions/paraglide-cache
+        with:
+          save: 'true'
 
       - name: Weaving the Digital Tapestry aka Build
         working-directory: projects/client
