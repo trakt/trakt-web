@@ -451,6 +451,7 @@
       border: 0;
       background: transparent;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
 
       &.is-previous {
         inset-inline-start: 0;
