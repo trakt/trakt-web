@@ -2,7 +2,9 @@
   import { page } from "$app/state";
   import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { getDayRange } from "./_internal/getDayRange.ts";
+  import { toActivityRanges } from "./_internal/toActivityRanges.ts";
   import TodayStoryViewer from "./_internal/TodayStoryViewer.svelte";
   import { todayOverviewParams } from "./_internal/todayOverviewParams.ts";
   import { todayStoryNavigation } from "./_internal/todayStoryNavigation.ts";
@@ -18,9 +20,10 @@
   const params = $derived(todayOverviewParams(page.url.searchParams));
   const dayKey = $derived(params.day);
   const now = new Date();
-  const range = $derived(getDayRange({ dayKey, now }));
+  const range = fromRune(() => getDayRange({ dayKey, now }));
+  const ranges = fromRune(() => toActivityRanges({ dayKey, now }));
   const { activities, forYou, isLoading } = $derived(
-    useTodayStories({ type: $mode, filter: $filterMap, range }),
+    useTodayStories({ type: $mode, filter: $filterMap, range, ranges }),
   );
 
   const { groups } = $derived(
