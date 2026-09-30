@@ -142,6 +142,8 @@
       : m.yir_2026_reel_but_mostly();
   };
 
+  const mobileRotation = $derived(flipRotation(flip.mobile, !!runner));
+  const desktopRotation = $derived(flipRotation(flip.desktop, !!runner));
   const isMobileRunnerFace = $derived(flip.mobile < 0.6);
   const isDesktopRunnerFace = $derived(flip.desktop < 0.6);
   const mobileKicker = $derived(kicker(isMobileRunnerFace));
@@ -394,10 +396,15 @@
             <span class="yir-reel-kicker is-mobile">{mobileKicker}</span>
             <div
               class="yir-reel-card is-mobile"
-              style:--rotation="{flipRotation(flip.mobile, !!runner)}deg"
+              style:--rotation="{mobileRotation}deg"
               style:--appear={Math.min(1, flip.mobile * 3)}
             >
-              <YirReelFlipCard {primary} {runner} faces={live.mobile} />
+              <YirReelFlipCard
+                {primary}
+                {runner}
+                faces={live.mobile}
+                isFlipped={mobileRotation >= 90}
+              />
             </div>
 
             <span class="yir-reel-kicker is-desktop">
@@ -439,10 +446,15 @@
           <span class="yir-reel-kicker">{desktopKicker}</span>
           <div
             class="yir-reel-card"
-            style:--rotation="{flipRotation(flip.desktop, !!runner)}deg"
+            style:--rotation="{desktopRotation}deg"
             style:--appear={1}
           >
-            <YirReelFlipCard {primary} {runner} faces={live.desktop} />
+            <YirReelFlipCard
+              {primary}
+              {runner}
+              faces={live.desktop}
+              isFlipped={desktopRotation >= 90}
+            />
           </div>
         </div>
       </aside>
