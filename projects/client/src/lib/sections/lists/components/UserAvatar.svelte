@@ -11,9 +11,16 @@
     size?: "small" | "large";
     icon?: Snippet;
     onClick?: () => void;
+    linked?: boolean;
   };
 
-  const { user, size = "large", icon, onClick }: UserAvatarProps = $props();
+  const {
+    user,
+    size = "large",
+    icon,
+    onClick,
+    linked = true,
+  }: UserAvatarProps = $props();
 </script>
 
 {#snippet avatar()}
@@ -33,7 +40,7 @@
   </div>
 {/snippet}
 
-{#if user.slug}
+{#if linked && user.slug}
   <Link href={UrlBuilder.profile.user(user.slug)} onclick={onClick}>
     {@render avatar()}
   </Link>

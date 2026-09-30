@@ -12,6 +12,7 @@
   import { onMount } from "svelte";
   import type { TodayStoryFrame } from "../models/TodayStoryFrame.ts";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
+  import TodayFaces from "./TodayFaces.svelte";
   import TodayForYouAction from "./TodayForYouAction.svelte";
   import TodayMilestoneChip from "./TodayMilestoneChip.svelte";
   import TodayPosterDetails from "./TodayPosterDetails.svelte";
@@ -131,9 +132,7 @@
         </h2>
         <div class="frame-meta">
           <div class="frame-faces">
-            {#each frame.story.users as user (user.key)}
-              <CrossOriginImage src={user.avatar.url} alt="" />
-            {/each}
+            <TodayFaces users={frame.story.users} />
           </div>
           {#if frame.story.milestone}
             <TodayMilestoneChip milestone={frame.story.milestone} />
@@ -327,16 +326,8 @@
 
     .frame-faces {
       display: flex;
-      margin-inline-start: calc(-1 * var(--border-thickness-xs));
-
-      :global(img) {
-        width: var(--ni-28);
-        height: var(--ni-28);
-        margin-inline-end: calc(-1 * var(--ni-8));
-
-        border: var(--border-thickness-xs) solid var(--color-background);
-        border-radius: 50%;
-      }
+      margin-inline: calc(-1 * var(--border-thickness-xs))
+        calc(-1 * var(--ni-8));
     }
 
     .frame-person {
