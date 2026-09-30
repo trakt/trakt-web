@@ -23,11 +23,13 @@
   type DrawerProps = {
     children: Snippet;
     onClose: () => void;
+    onDismiss?: () => void;
     title?: string;
     dismissal?: "auto" | "escape-only" | "manual";
     trapSelector?: string;
     size?: "normal" | "large" | "auto";
     badge?: Snippet;
+    leading?: Snippet;
     actions?: Snippet;
     metaInfo?: string | Snippet;
     onOpened?: () => void;
@@ -43,11 +45,13 @@
   const {
     children,
     onClose,
+    onDismiss = onClose,
     title,
     dismissal = "auto",
     trapSelector,
     size = "normal",
     badge,
+    leading,
     actions,
     metaInfo,
     onOpened,
@@ -84,7 +88,7 @@
       return;
     }
 
-    onClose();
+    onDismiss();
   };
 
   const updateHeaderOverlay = (event: Event) => {
@@ -162,6 +166,8 @@
     class:has-title={!!title}
     data-dpad-navigation={DpadNavigationType.List}
   >
+    {@render leading?.()}
+
     {#if title}
       <div class="trakt-drawer-title-container">
         <div class="trakt-drawer-title">
@@ -188,7 +194,7 @@
 
       <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
         <ActionButton
-          onclick={onClose}
+          onclick={onDismiss}
           label={m.button_label_close()}
           style="ghost"
           navigationType={DpadNavigationType.Item}

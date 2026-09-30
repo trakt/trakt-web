@@ -90,7 +90,7 @@ export function useWatchlist(props: UseWatchlistProps) {
     const outcome = await addition.mutate();
 
     if (outcome === 'queued') {
-      return;
+      return outcome;
     }
 
     notify({
@@ -109,6 +109,8 @@ export function useWatchlist(props: UseWatchlistProps) {
         }
         : undefined,
     });
+
+    return outcome;
   };
 
   const removeFromWatchlist = async () => {
@@ -118,7 +120,7 @@ export function useWatchlist(props: UseWatchlistProps) {
 
     track({ action: 'remove' });
 
-    await removal.mutate();
+    return await removal.mutate();
   };
 
   return {

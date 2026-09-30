@@ -21,6 +21,7 @@
     type,
     onAdd,
     onRemove,
+    size,
     ...props
   }: WatchlistButtonProps = $props();
 
@@ -62,6 +63,7 @@
     <Button
       {...commonProps}
       {...props}
+      {size}
       navigationType={DpadNavigationType.Item}
     >
       {i18n.text({ isWatchlisted, title })}
@@ -75,14 +77,14 @@
 
 {#if type === "action"}
   <QueuedIndicator {isQueued}>
-    <ActionButton style="ghost" {...actionProps} {...props}>
+    <ActionButton style="ghost" {...actionProps} {...props} {size}>
       <BookmarkIcon {state} />
     </ActionButton>
   </QueuedIndicator>
 {/if}
 
 {#if type === "dropdown-item"}
-  <DropdownItem {...commonProps} style="flat">
+  <DropdownItem {...commonProps} {...props} style="flat">
     {i18n.text({ isWatchlisted, title })}
     {#if isQueued}<QueuedTag />{/if}
     {#snippet icon()}

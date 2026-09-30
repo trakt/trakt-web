@@ -2646,6 +2646,23 @@
         }
       }
     },
+    "button_label_preview_list": {
+      "default": "Preview list {name}",
+      "description": "Aria-label for the button that shows the items of a list inside the manage lists drawer.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_preview_watchlist": {
+      "default": "Preview watchlist",
+      "description": "Aria-label for the button that shows the items of the watchlist inside the manage lists drawer."
+    },
+    "text_list_preview_empty": {
+      "default": "Nothing on this list yet.",
+      "description": "Shown in the manage lists drawer when a previewed list has no items."
+    },
     "button_label_add_to_personal_list": {
       "default": "Add \"{title}\" to {list}",
       "description": "Aria-label for the button that allows users to add a movie, show, season or episode to a personal list.",
