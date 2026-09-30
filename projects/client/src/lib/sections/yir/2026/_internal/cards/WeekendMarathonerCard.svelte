@@ -72,14 +72,14 @@
     height: 3.4cqw;
   }
   .no {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.8cqw;
     letter-spacing: 0.18em;
     margin-top: 5cqw;
     color: #9c3d2b;
   }
   .name {
-    font-family: "Shrikhand", serif;
+    font-family: "Shrikhand", "Shrikhand Fallback", serif;
     font-size: 11cqw;
     line-height: 1;
     color: #c2255c;
@@ -180,7 +180,7 @@
     padding-top: 3cqw;
   }
   .stat b {
-    font-family: "Shrikhand", serif;
+    font-family: "Shrikhand", "Shrikhand Fallback", serif;
     font-size: 6.4cqw;
   }
   .stat span {

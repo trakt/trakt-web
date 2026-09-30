@@ -1,4 +1,5 @@
 <script lang="ts">
+  import "./fallback-fonts.css";
   import type { YirPersonaId } from "$lib/requests/models/YirPersonaId";
   import type { Snippet } from "svelte";
   import { personaFonts } from "./personaFonts";
@@ -41,7 +42,7 @@
 
 <style lang="scss">
   .trakt-yir-persona-theme {
-    --yir-font-mono: "JetBrains Mono", monospace;
+    --yir-font-mono: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     --yir-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
     --yir-beat: var(--yir-beat-base);
     --yir-t-quick: calc(var(--yir-beat) * 2.5);

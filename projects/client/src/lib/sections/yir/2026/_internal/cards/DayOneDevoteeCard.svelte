@@ -45,7 +45,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-size: 2.8cqw;
     letter-spacing: 0.14em;
     color: #c9c3cf;
@@ -67,7 +67,7 @@
     background: #fff;
   }
   .big {
-    font-family: "Archivo Black", sans-serif;
+    font-family: "Archivo Black", "Archivo Black Fallback", sans-serif;
     font-size: 30cqw;
     line-height: 0.85;
     margin-top: auto;
@@ -88,7 +88,7 @@
   .l1 {
     background: #fff;
     color: #0b0b0f;
-    font-family: "Archivo Black", sans-serif;
+    font-family: "Archivo Black", "Archivo Black Fallback", sans-serif;
     font-size: 7.2cqw;
     padding: 1.4cqw 3cqw;
     border-inline-start: 2.4cqw solid #ff2d3d;
@@ -106,7 +106,7 @@
     color: #0b0b0f;
     overflow: hidden;
     white-space: pre;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
     font-weight: 600;
     font-size: 3.4cqw;
     padding: 1.8cqw 0;
