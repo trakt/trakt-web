@@ -80,6 +80,8 @@
     useCollapsedList(listId),
   );
 
+  let isHorizontalScrollUnlocked = $state(false);
+
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
   onMount(() => {
@@ -168,6 +170,8 @@
               use:scrollHistory={listId}
               use:resetScroll={contentHash}
               use:unlockOnHorizontalWheel
+              onhorizontalwheel={() => (isHorizontalScrollUnlocked = true)}
+              data-horizontal-scroll={isHorizontalScrollUnlocked || undefined}
               class="trakt-list-item-container section-list-horizontal-scroll"
               data-dpad-navigation={DpadNavigationType.List}
               data-navigation-type={$navigation}

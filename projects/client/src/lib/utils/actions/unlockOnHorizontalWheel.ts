@@ -1,15 +1,13 @@
-const UNLOCKED_ATTRIBUTE = 'data-horizontal-scroll';
-
 /**
  * Media queries cannot tell a trackpad from a mouse, so a horizontal wheel
- * gesture (only produced by trackpads and similar) marks the node as
- * horizontally scrollable.
+ * gesture (only produced by trackpads and similar) dispatches a
+ * `horizontalwheel` event once, letting the owner unlock horizontal scrolling.
  */
 export function unlockOnHorizontalWheel(node: HTMLElement) {
   const handleWheel = (event: WheelEvent) => {
     if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
 
-    node.setAttribute(UNLOCKED_ATTRIBUTE, 'true');
+    node.dispatchEvent(new CustomEvent('horizontalwheel'));
     node.removeEventListener('wheel', handleWheel);
   };
 
