@@ -24,15 +24,18 @@ if (!Blob.prototype.arrayBuffer) {
 
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import process from 'node:process';
-import { afterAll, afterEach, beforeAll, vi } from 'vitest';
-import { server } from './src/mocks/server.ts';
+import { afterAll, afterEach, vi } from 'vitest';
+import { lazyServer } from './test/mocks/lazyServer.ts';
 
 process.env.TZ = 'UTC';
 
-beforeAll(() => server.listen());
-afterEach(() => {
+const mockServer = lazyServer({
+  loadServer: () => import('./src/mocks/server.ts').then((m) => m.server),
+});
+
+afterEach(async () => {
   vi.clearAllMocks();
-  server.resetHandlers();
+  await mockServer.reset();
   setAuthorization(false);
 });
-afterAll(() => server.close());
+afterAll(() => mockServer.close());
