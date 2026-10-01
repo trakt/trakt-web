@@ -10,6 +10,7 @@
     icon?: Snippet;
     end?: Snippet;
     subtitle?: Snippet;
+    subtitleSize?: "small" | "tag";
     style?: "ghost" | "flat";
     variant?: "primary" | "secondary";
     selected?: boolean;
@@ -27,6 +28,7 @@
     icon,
     end,
     subtitle,
+    subtitleSize = "small",
     ...props
   }: DropdownItemProps | DropdownItemAnchorProps = $props();
 
@@ -49,7 +51,9 @@
   <div class="item-label">
     <p class="bold capitalize ellipsis">{@render children()}</p>
     {#if subtitle}
-      <p class="small secondary ellipsis">{@render subtitle()}</p>
+      <p class="item-subtitle {subtitleSize} secondary ellipsis">
+        {@render subtitle()}
+      </p>
     {/if}
   </div>
 {/snippet}
@@ -138,6 +142,10 @@
 
     .item-label {
       min-width: 0;
+
+      .item-subtitle {
+        color: var(--color-text-secondary);
+      }
     }
 
     .item-icon {

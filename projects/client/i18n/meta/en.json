@@ -4228,7 +4228,7 @@
     },
     "header_calendar_feed": {
       "default": "Calendar feed",
-      "description": "Title of the menu offering the iCal subscription feed for the calendar, also used as the title of the copied confirmation."
+      "description": "Title of the menu offering the iCal subscription feed for the calendar."
     },
     "button_text_open_calendar_feed": {
       "default": "Add to calendar app",
@@ -4245,6 +4245,10 @@
     "button_label_copy_calendar_feed": {
       "default": "Copy the iCal feed link for this calendar",
       "description": "Aria-label for the menu item that copies the iCal feed URL to the clipboard."
+    },
+    "text_calendar_feed_filtered": {
+      "default": "Filtered",
+      "description": "Shown in the calendar feed menu when active filters are carried into the iCal feed."
     },
     "text_info_calendar_feed_copied": {
       "default": "iCal link copied. Paste it into your calendar app to subscribe.",

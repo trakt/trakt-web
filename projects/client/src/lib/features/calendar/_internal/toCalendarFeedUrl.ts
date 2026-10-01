@@ -9,7 +9,7 @@ type ToCalendarFeedUrlParams = {
   token: string;
   mode: DiscoverMode;
   episodeType: EpisodeTypeFilter;
-  filters: Record<string, string>;
+  filters: Readonly<Record<string, string>>;
 };
 
 function feedPath(

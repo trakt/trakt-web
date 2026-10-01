@@ -3,21 +3,29 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import CalendarAddIcon from "$lib/components/icons/CalendarAddIcon.svelte";
   import CopyIcon from "$lib/components/icons/CopyIcon.svelte";
-  import Snackbar from "$lib/components/snackbar/Snackbar.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser";
-  import { useDiscover } from "$lib/features/filters/useDiscover";
-  import { useFilter } from "$lib/features/filters/useFilter";
-  import * as m from "$lib/features/i18n/messages";
+  import { useActionToast } from "$lib/features/action-toast/useActionToast.ts";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
+  import { useDiscover } from "$lib/features/filters/useDiscover.ts";
+  import { useFilter } from "$lib/features/filters/useFilter.ts";
+  import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { copyToClipboard } from "$lib/utils/clipboard/copyToClipboard";
-  import { calendarFeedEnvironment } from "./_internal/calendarFeedEnvironment";
-  import { toCalendarFeedUrl } from "./_internal/toCalendarFeedUrl";
-  import { useEpisodeType } from "./useEpisodeType";
+  import { copyToClipboard } from "$lib/utils/clipboard/copyToClipboard.ts";
+  import { calendarFeedEnvironment } from "./_internal/calendarFeedEnvironment.ts";
+  import { toCalendarFeedUrl } from "./_internal/toCalendarFeedUrl.ts";
+  import { useEpisodeType } from "./useEpisodeType.ts";
 
   const { user } = useUser();
-  const { mode } = useDiscover();
-  const { episodeType } = useEpisodeType();
-  const { filterMap } = useFilter();
+  const { mode, current: currentMode } = useDiscover();
+  const {
+    episodeType,
+    current: currentEpisodeType,
+    isApplicable,
+  } = useEpisodeType();
+  const { filterMap, activeFilterCount } = useFilter();
+  const { track } = useTrack(AnalyticsEvent.CalendarFeed);
+  const { notify } = useActionToast();
 
   const environment = calendarFeedEnvironment(TRAKT_TARGET_ENVIRONMENT);
 
@@ -34,14 +42,29 @@
     });
   });
 
-  let isCopied = $state(false);
+  const scope = $derived(
+    [
+      $currentMode.text(),
+      $isApplicable && $episodeType !== "all"
+        ? $currentEpisodeType.text()
+        : null,
+      $activeFilterCount > 0 ? m.text_calendar_feed_filtered() : null,
+    ]
+      .filter(Boolean)
+      .join(" · "),
+  );
 
   const copyLink = async () => {
     if (!feedUrl) return;
 
-    isCopied = await copyToClipboard(feedUrl.https)
+    track({ action: "copy", mode: $mode });
+
+    const isCopied = await copyToClipboard(feedUrl.https)
       .then(() => true)
       .catch(() => false);
+    if (!isCopied) return;
+
+    notify({ message: m.text_info_calendar_feed_copied() });
   };
 </script>
 
@@ -62,9 +85,14 @@
           color="default"
           variant="secondary"
           label={m.button_label_open_calendar_feed()}
+          subtitleSize="tag"
           href={feedUrl.webcal}
+          onclick={() => track({ action: "subscribe", mode: $mode })}
         >
           {m.button_text_open_calendar_feed()}
+          {#snippet subtitle()}
+            {scope}
+          {/snippet}
           {#snippet icon()}
             <CalendarAddIcon />
           {/snippet}
@@ -74,9 +102,13 @@
           color="default"
           variant="secondary"
           label={m.button_label_copy_calendar_feed()}
+          subtitleSize="tag"
           onclick={copyLink}
         >
           {m.button_text_copy_calendar_feed()}
+          {#snippet subtitle()}
+            {scope}
+          {/snippet}
           {#snippet icon()}
             <CopyIcon />
           {/snippet}
@@ -85,10 +117,3 @@
     </PopupMenu>
   {/if}
 </RenderFor>
-
-<Snackbar
-  open={isCopied}
-  onDismiss={() => (isCopied = false)}
-  title={m.header_calendar_feed()}
-  message={m.text_info_calendar_feed_copied()}
-/>

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import CalendarFeedMenu from "$lib/features/calendar/CalendarFeedMenu.svelte";
   import CalendarItem from "$lib/features/calendar/CalendarItem.svelte";
   import EpisodeTypeToggles from "$lib/features/calendar/EpisodeTypeToggles.svelte";
   import { useEpisodeType } from "$lib/features/calendar/useEpisodeType";
@@ -54,7 +53,6 @@
 
   {#snippet actions()}
     <EpisodeTypeToggles />
-    <CalendarFeedMenu />
   {/snippet}
 
   {#snippet ctaItem()}
