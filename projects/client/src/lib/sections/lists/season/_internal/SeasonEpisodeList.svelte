@@ -12,7 +12,9 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import type { Snippet } from "svelte";
-  import EpisodeRailEdgeBadge from "./EpisodeRailEdgeBadge.svelte";
+  import EpisodeRailCountLabel from "./EpisodeRailCountLabel.svelte";
+  import { getHiddenEpisodeCounts } from "./getHiddenEpisodeCounts.ts";
+  import type { VisibleRange } from "$lib/utils/actions/VisibleRange.ts";
   import { getEpisodeWindow } from "./getEpisodeWindow.ts";
   import SeasonEpisodeItem from "./SeasonEpisodeItem.svelte";
   import { useShowWatchedEpisodes } from "./useShowWatchedEpisodes";
@@ -53,8 +55,10 @@
     Where the viewer is at: the furthest episode they have watched in this
     season. An explicit currentEpisode (the episode being viewed) wins.
   */
+  const season = $derived(episodes.at(0)?.season);
+  const contentHash = $derived(`${show.slug}-${season}`);
+
   const lastWatchedEpisode = $derived.by(() => {
-    const season = episodes.at(0)?.season;
     if (season == null) return undefined;
 
     const watched = $watchedBySeason.get(season);
@@ -72,12 +76,13 @@
 
   const itemCount = useLandscapeListItemCount();
 
+  let visibleRange = $state<VisibleRange>();
+
   /*
-    Large screens mask the strip instead of scrolling it, so the rail shows a
-    window rather than the whole season. It opens on the episode the viewer is
-    up to, and the counts either side ride the first and last cards - see
-    getEpisodeWindow. Small screens scroll freely, so they keep every episode
-    and need no counts.
+    Every episode is always rendered, so unlocking swipe scrolling never
+    repaints the rail. On large screens the strip is masked rather than
+    scrolled, and opens on the episode the viewer is up to - the window only
+    decides where that is. Small screens just start at the beginning.
   */
   const anchorIndex = $derived(
     activeEpisode == null
@@ -88,48 +93,51 @@
       ),
   );
 
-  const episodeWindow = $derived(
-    isLargeScreen
-      ? getEpisodeWindow({
-        total: episodes.length,
-        slots: $itemCount,
-        anchorIndex,
-      })
-      : { start: 0, end: episodes.length, before: 0, after: 0 },
+  const windowStart = $derived(
+    getEpisodeWindow({
+      total: episodes.length,
+      slots: $itemCount,
+      anchorIndex,
+    }).start,
   );
 
-  const visibleEpisodes = $derived(episodes.slice(episodeWindow.start, episodeWindow.end));
+  /* Once the rail has left where it opened, the labels stay up in a strip
+     that grows in above the stills. Keyed on the content, so a new season
+     opens fresh: back on its active episode with chips docked. */
+  let movedContentHash = $state<string | null>(null);
+  const hasMoved = $derived(movedContentHash === contentHash);
 
-  /* The rail's own ends, so the badges can find the cards they dock to -
-     SectionList hands its item snippet the episode, not its position. */
-  const firstVisibleNumber = $derived(visibleEpisodes.at(0)?.number);
-  const lastVisibleNumber = $derived(visibleEpisodes.at(-1)?.number);
+  const initialIndex = $derived(
+    isLargeScreen && !hasMoved ? windowStart : undefined,
+  );
 
-  /*
-    Each badge opens the drawer on the episode its own side cuts off at - the
-    last one behind the window, the first one ahead of it - so the list lands
-    where the rail stopped rather than at episode one.
-  */
+  const hidden = $derived(
+    isLargeScreen
+      ? getHiddenEpisodeCounts({ total: episodes.length, range: visibleRange })
+      : { before: 0, after: 0 },
+  );
+
+  /* Nothing to scroll to means nothing to float, so a swipe changes nothing. */
+  const hasHidden = $derived(hidden.before + hidden.after > 0);
+
+  /* Each label opens the drawer on the episode its own side cuts off at. */
   const earlierLink = $derived(
     buildSeasonsDrawerLink(
-      /* Guarded rather than relying on the badge being hidden at zero:
-         `at(-1)` would quietly wrap to the finale. */
-      episodeWindow.start > 0 ? episodes.at(episodeWindow.start - 1)?.number : undefined,
+      visibleRange && visibleRange.first > 0
+        ? episodes.at(visibleRange.first - 1)?.number
+        : undefined,
     ),
   );
   const laterLink = $derived(
-    buildSeasonsDrawerLink(episodes.at(episodeWindow.end)?.number),
+    buildSeasonsDrawerLink(
+      visibleRange ? episodes.at(visibleRange.last + 1)?.number : undefined,
+    ),
   );
 </script>
 
-<!-- Declared out here on purpose: a snippet written inside a component is
-     one of that component's props, and these belong to the cards. -->
-{#snippet earlierBadge()}
-  <EpisodeRailEdgeBadge side="start" count={episodeWindow.before} link={earlierLink} />
-{/snippet}
-
-{#snippet laterBadge()}
-  <EpisodeRailEdgeBadge side="end" count={episodeWindow.after} link={laterLink} />
+{#snippet countLabels()}
+  <EpisodeRailCountLabel side="start" count={hidden.before} link={earlierLink} isDocked={!hasMoved} />
+  <EpisodeRailCountLabel side="end" count={hidden.after} link={laterLink} isDocked={!hasMoved} />
 {/snippet}
 
 <SectionList
@@ -137,9 +145,18 @@
     scope: "season-episode-list",
     key: show.slug,
   }}
-  items={visibleEpisodes}
+  items={episodes}
+  onUserScroll={() => {
+    if (!hasHidden) return;
+    movedContentHash = contentHash;
+  }}
+  onVisibleRange={(range) => (visibleRange = range)}
+  scrollToIndex={initialIndex}
+  {contentHash}
+  overlay={countLabels}
   {title}
   {subtitle}
+  --list-inset-top={isLargeScreen && hasMoved ? "var(--ni-28)" : undefined}
   --height-list={mediaListHeightResolver("landscape")}
   drilldown={{
     ...seasonDrawerLink,
@@ -148,10 +165,6 @@
   }}
 >
   {#snippet item(episode)}
-    {@const isRailStart = episodeWindow.before > 0 &&
-      episode.number === firstVisibleNumber}
-    {@const isRailEnd = episodeWindow.after > 0 &&
-      episode.number === lastVisibleNumber}
     <SeasonEpisodeItem
       {show}
       {episode}
@@ -166,7 +179,7 @@
         episode: episode.number,
       })}
       source="season-episode-list"
-      edge={isRailStart ? earlierBadge : isRailEnd ? laterBadge : undefined}
+      scrollAxis={isLargeScreen ? "none" : "inline"}
     />
   {/snippet}
 

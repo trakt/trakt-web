@@ -3,15 +3,19 @@ const GESTURE_END_DELAY_MS = 150;
 /**
  * Media queries cannot tell a trackpad from a mouse, so a horizontal wheel
  * gesture (only produced by trackpads and similar) dispatches a
- * `horizontalwheel` event once, letting the owner unlock horizontal scrolling.
+ * `horizontalwheel` event once per lock, letting the owner unlock horizontal
+ * scrolling. Passing `isUnlocked: false` again re-arms it.
  *
  * The browser decides at gesture start whether an element scrolls, so the
  * unlocking gesture itself would be lost on an `overflow: hidden` node. It is
  * scrolled manually until the gesture ends; later gestures scroll natively.
  */
-export function unlockOnHorizontalWheel(node: HTMLElement) {
+export function unlockOnHorizontalWheel(
+  node: HTMLElement,
+  isUnlocked = false,
+) {
   const state = {
-    unlocked: false,
+    unlocked: isUnlocked,
     timeout: undefined as ReturnType<typeof setTimeout> | undefined,
   };
 
@@ -35,9 +39,20 @@ export function unlockOnHorizontalWheel(node: HTMLElement) {
     }, GESTURE_END_DELAY_MS);
   };
 
-  node.addEventListener('wheel', handleWheel, { passive: false });
+  const arm = () => {
+    clearTimeout(state.timeout);
+    node.style.scrollSnapType = '';
+    state.unlocked = false;
+    node.addEventListener('wheel', handleWheel, { passive: false });
+  };
+
+  if (!isUnlocked) arm();
 
   return {
+    update(next = false) {
+      if (next || !state.unlocked) return;
+      arm();
+    },
     destroy() {
       clearTimeout(state.timeout);
       node.style.scrollSnapType = '';

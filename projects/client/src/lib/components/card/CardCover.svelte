@@ -149,18 +149,6 @@
     :global(.trakt-card-content:hover) .trakt-card-cover {
       outline-color: var(--color-card-border-hover);
     }
-
-    /*
-      Except when the pointer is on a control docked over the cover (marked
-      `data-cover-edge`): it has a target of its own, so lighting the card
-      behind it says the click will open the episode when it will not. The
-      control lives outside the cover, hence the match from the card content.
-    */
-    :global(
-      .trakt-card-content:has([data-cover-edge]:hover) .trakt-card-cover
-    ) {
-      outline-color: transparent;
-    }
   }
 
   .trakt-card-cover-image {
