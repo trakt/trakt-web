@@ -225,6 +225,18 @@ declare global {
        * Works only in conjunction with the `unlockOnHorizontalWheel` action.
        */
       'onhorizontalwheel'?: (ev: CustomEvent) => void;
+      /**
+       * Works only in conjunction with the `trackVisibleRange` action.
+       */
+      'onvisiblerange'?: (
+        ev: CustomEvent<
+          import('$lib/utils/actions/VisibleRange.ts').VisibleRange
+        >,
+      ) => void;
+      /**
+       * Works only in conjunction with the `touchScroll` action.
+       */
+      'ontouchscroll'?: (ev: CustomEvent) => void;
       'onfiles'?: (ev: CustomEvent<{ files: FileList }>) => void;
     }
 
