@@ -23,19 +23,16 @@ function setupZip(files: Record<string, unknown[]>) {
   const zipEntries: Record<string, Uint8Array> = {};
 
   for (const filename of Object.keys(files)) {
-    zipEntries[filename] = encoder.encode('placeholder');
+    zipEntries[filename] = encoder.encode(filename);
   }
 
   mockUnzip.mockReturnValue(
     zipEntries as unknown as ReturnType<typeof unzipSync>,
   );
 
-  mockParseCsvText.mockImplementation((_text: string) => {
-    const callCount = mockParseCsvText.mock.calls.length;
-    const keys = Object.keys(files);
-    const idx = callCount - 1;
-    return Promise.resolve(files[keys[idx] ?? ''] ?? []);
-  });
+  mockParseCsvText.mockImplementation((text: string) =>
+    Promise.resolve(files[text] ?? [])
+  );
 }
 
 describe('LetterboxdParser', () => {
@@ -180,6 +177,77 @@ describe('LetterboxdParser', () => {
         title: 'Dune',
         year: 2021,
       });
+    });
+
+    it('parses an export nested in a top-level folder', async () => {
+      setupZip({
+        'letterboxd-user-2026-09-30/diary.csv': [],
+        'letterboxd-user-2026-09-30/watched.csv': [
+          { Date: '2023-06-22', Name: 'The Matrix', Year: '1999' },
+        ],
+        'letterboxd-user-2026-09-30/ratings.csv': [
+          { Name: 'Inception', Year: '2010', Rating: '4' },
+        ],
+        'letterboxd-user-2026-09-30/watchlist.csv': [
+          { Name: 'Dune', Year: '2021' },
+        ],
+      });
+
+      const result = await LetterboxdParser.parse([makeZipFile()]);
+
+      expect(result.map((i) => [i.action, i.title])).toEqual([
+        ['history', 'The Matrix'],
+        ['ratings', 'Inception'],
+        ['watchlist', 'Dune'],
+      ]);
+    });
+
+    it('ignores the deleted and orphaned diaries', async () => {
+      setupZip({
+        'watched.csv': [
+          { Date: '2023-06-22', Name: 'The Matrix', Year: '1999' },
+        ],
+        'deleted/diary.csv': [
+          { Name: 'Inception', Year: '2010', 'Watched Date': '2024-01-15' },
+        ],
+        'orphaned/diary.csv': [
+          { Name: 'Dune', Year: '2021', 'Watched Date': '2024-01-15' },
+        ],
+      });
+
+      const result = await LetterboxdParser.parse([makeZipFile()]);
+
+      expect(result.map((i) => i.title)).toEqual(['The Matrix']);
+    });
+
+    it('ignores the deleted diary of a nested export', async () => {
+      setupZip({
+        'export/deleted/diary.csv': [
+          { Name: 'Inception', Year: '2010', 'Watched Date': '2024-01-15' },
+        ],
+        'export/watched.csv': [
+          { Date: '2023-06-22', Name: 'The Matrix', Year: '1999' },
+        ],
+      });
+
+      const result = await LetterboxdParser.parse([makeZipFile()]);
+
+      expect(result.map((i) => i.title)).toEqual(['The Matrix']);
+    });
+
+    it('ignores deleted and orphaned diaries without a root export', async () => {
+      setupZip({
+        'deleted/diary.csv': [
+          { Name: 'Inception', Year: '2010', 'Watched Date': '2024-01-15' },
+        ],
+        'orphaned/diary.csv': [
+          { Name: 'Dune', Year: '2021', 'Watched Date': '2024-01-15' },
+        ],
+      });
+
+      const result = await LetterboxdParser.parse([makeZipFile()]);
+
+      expect(result).toHaveLength(0);
     });
   });
 });

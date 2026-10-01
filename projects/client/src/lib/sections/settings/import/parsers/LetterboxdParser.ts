@@ -102,6 +102,38 @@ function parseWatchlistRow(
   };
 }
 
+const EXPORT_FILES = [
+  'diary.csv',
+  'watched.csv',
+  'ratings.csv',
+  'watchlist.csv',
+];
+
+const IGNORED_FOLDERS = ['deleted', 'orphaned'];
+
+function isExportFile(path: string): boolean {
+  const segments = path.split('/');
+
+  return EXPORT_FILES.includes(segments.at(-1) ?? '') &&
+    !IGNORED_FOLDERS.includes(segments.at(-2) ?? '');
+}
+
+function toDepth(path: string): number {
+  return path.split('/').length;
+}
+
+function toExportRoot(paths: ReadonlyArray<string>): string {
+  const roots = paths
+    .filter(isExportFile)
+    .map((path) => path.slice(0, path.lastIndexOf('/') + 1));
+
+  return roots.reduce(
+    (shallowest, root) =>
+      toDepth(root) < toDepth(shallowest) ? root : shallowest,
+    roots.at(0) ?? '',
+  );
+}
+
 async function parseLetterboxdZip(
   file: File,
 ): Promise<UniversalImportItem[]> {
@@ -109,9 +141,12 @@ async function parseLetterboxdZip(
   const unzipped = unzipSync(new Uint8Array(buffer));
   const decoder = new TextDecoder('utf-8');
 
+  const root = toExportRoot(Object.keys(unzipped));
+
   const csvTexts: Record<string, string> = {};
   for (const [filename, data] of Object.entries(unzipped)) {
-    csvTexts[filename] = decoder.decode(data);
+    if (!filename.startsWith(root)) continue;
+    csvTexts[filename.slice(root.length)] = decoder.decode(data);
   }
 
   const items: UniversalImportItem[] = [];
