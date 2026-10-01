@@ -1,6 +1,7 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { GENRES } from '$lib/features/filters/_internal/genres.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
@@ -148,7 +149,9 @@ export function useSettings() {
       },
     }))),
     genres: user.pipe(map(($user) => ({
-      loved: $user?.genres?.loved ?? [],
+      loved: ($user?.genres?.loved ?? []).filter((genre) =>
+        GENRES.includes(genre)
+      ),
     }))),
     setLovedGenres,
     theme: { set: setTheme },
