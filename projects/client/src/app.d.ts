@@ -221,6 +221,10 @@ declare global {
        * Works only in conjunction with the `clickOutside` action.
        */
       'onclickoutside'?: (ev: CustomEvent) => void;
+      /**
+       * Works only in conjunction with the `unlockOnHorizontalWheel` action.
+       */
+      'onhorizontalwheel'?: (ev: CustomEvent) => void;
       'onfiles'?: (ev: CustomEvent<{ files: FileList }>) => void;
     }
 
