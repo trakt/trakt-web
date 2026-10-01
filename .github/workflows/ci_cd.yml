@@ -143,6 +143,7 @@ jobs:
         uses: ./.github/actions/paraglide-cache
         with:
           save: 'true'
+          variant: 'test'
 
       - name: Forging the Artifacts aka Prebuild
         working-directory: projects/client
@@ -227,6 +228,12 @@ jobs:
 
       - name: Recalling the Runes aka Paraglide Cache
         uses: ./.github/actions/paraglide-cache
+        with:
+          variant: 'test'
+
+      - name: Forging the Artifacts aka Prebuild
+        working-directory: projects/client
+        run: 'deno task prebuild'
 
       - name: Assembling the Shards of Evidence aka Download Blob Reports
         uses: actions/download-artifact@v4

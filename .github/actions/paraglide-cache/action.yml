@@ -7,6 +7,11 @@ inputs:
     required: false
     default: 'false'
 
+  variant:
+    description: 'Cache namespace. The plugin writes a manifest per output structure (production builds emit message-modules, test and dev emit locale-modules), so jobs that compile differently need separate caches or the skip never matches'
+    required: false
+    default: ''
+
 outputs:
   cache-hit:
     description: 'Whether the cache was restored for the exact inputs'
@@ -23,7 +28,7 @@ runs:
         path: |
           projects/client/i18n/project.inlang
           projects/client/src/lib/paraglide
-        key: paraglide-v2-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}
+        key: paraglide-v2${{ inputs.variant && format('-{0}', inputs.variant) || '' }}-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}
 
     - name: Recalling the Runes aka Restore Paraglide Cache
       id: restore
@@ -33,4 +38,4 @@ runs:
         path: |
           projects/client/i18n/project.inlang
           projects/client/src/lib/paraglide
-        key: paraglide-v2-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}
+        key: paraglide-v2${{ inputs.variant && format('-{0}', inputs.variant) || '' }}-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}
