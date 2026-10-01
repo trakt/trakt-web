@@ -49,6 +49,19 @@
     useShowWatchedEpisodes({ showId: show.id }),
   );
 
+  /*
+    Where the viewer is at: the furthest episode they have watched in this
+    season. An explicit currentEpisode (the episode being viewed) wins.
+  */
+  const lastWatchedEpisode = $derived.by(() => {
+    const season = episodes.at(0)?.season;
+    if (season == null) return undefined;
+
+    const watched = $watchedBySeason.get(season);
+    return watched?.size ? Math.max(...watched) : undefined;
+  });
+  const activeEpisode = $derived(currentEpisode ?? lastWatchedEpisode);
+
   const { buildDrawerLink, buildEpisodeDrawerLink, buildSeasonsDrawerLink } =
     summaryDrawerNavigation();
   const seasonDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Seasons));
@@ -67,9 +80,12 @@
     and need no counts.
   */
   const anchorIndex = $derived(
-    currentEpisode == null
+    activeEpisode == null
       ? 0
-      : episodes.findIndex((episode) => episode.number === currentEpisode),
+      : Math.max(
+        episodes.findIndex((episode) => episode.number === activeEpisode),
+        0,
+      ),
   );
 
   const episodeWindow = $derived(
@@ -144,7 +160,7 @@
       currentSeasonEpisodes={episodes}
       watchedBySeason={$watchedBySeason}
       isWatchedLoading={$isWatchedLoading}
-      isCurrentEpisode={episode.number === currentEpisode}
+      isCurrentEpisode={episode.number === activeEpisode}
       urlOverride={buildEpisodeDrawerLink({
         season: episode.season,
         episode: episode.number,

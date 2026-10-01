@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
 
@@ -10,8 +9,6 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
-  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
-  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -51,15 +48,6 @@
 
   const relatedLink = $derived(UrlBuilder.related.show(media.slug));
   const listsLink = $derived(UrlBuilder.popularLists.show(media.slug));
-
-  // Episode pages open as a drawer over the show page, so the episode being
-  // viewed lives in the drawer's URL params rather than in the route.
-  const { drawer, sourceEpisode } = $derived(
-    summaryDrawerNavigation(page.url.searchParams),
-  );
-  const currentEpisode = $derived(
-    drawer === SummaryDrawers.Episode ? sourceEpisode : undefined,
-  );
 
   const networks = $derived(
     [
@@ -104,7 +92,7 @@
   <Sentiment {sentiment} slug={media.slug} type="show" />
 </RenderFor>
 
-<SeasonList show={media} {seasons} {currentSeason} {currentEpisode} />
+<SeasonList show={media} {seasons} {currentSeason} />
 
 <CastList
   title={m.list_title_actors()}
