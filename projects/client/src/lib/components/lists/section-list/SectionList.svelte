@@ -10,6 +10,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import { unlockOnHorizontalWheel } from "$lib/utils/actions/unlockOnHorizontalWheel";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
@@ -166,6 +167,7 @@
             <div
               use:scrollHistory={listId}
               use:resetScroll={contentHash}
+              use:unlockOnHorizontalWheel
               class="trakt-list-item-container section-list-horizontal-scroll"
               data-dpad-navigation={DpadNavigationType.List}
               data-navigation-type={$navigation}
@@ -346,6 +348,11 @@
       }
 
       @include for-touch {
+        overflow-x: auto;
+        mask-image: none;
+      }
+
+      &[data-horizontal-scroll] {
         overflow-x: auto;
         mask-image: none;
       }
