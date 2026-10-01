@@ -10,6 +10,12 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import { scrollToChild } from "$lib/utils/actions/scrollToChild";
+  import {
+    trackVisibleRange,
+    type VisibleRange,
+  } from "$lib/utils/actions/trackVisibleRange";
+  import { touchScroll } from "$lib/utils/actions/touchScroll";
   import { unlockOnHorizontalWheel } from "$lib/utils/actions/unlockOnHorizontalWheel";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "$lib/utils/store/WritableSubject";
@@ -39,9 +45,17 @@
     drilldown?: ListDrilldownProps;
     contentHash?: string;
     trailingItem?: Snippet;
+    isHorizontalScrollUnlocked?: boolean;
+    /** Child index to scroll to the start of; `undefined` leaves scroll alone. */
+    scrollToIndex?: number;
+    /** Fires when the viewer starts scrolling the list themselves. */
+    onUserScroll?: () => void;
+    onVisibleRange?: (range: VisibleRange) => void;
+    /** Floats over the list, e.g. labels pinned to its corners. */
+    overlay?: Snippet;
   };
 
-  const {
+  let {
     id,
     items,
     title,
@@ -57,6 +71,11 @@
     variant = "default",
     titleAction: externalTitleAction,
     contentHash,
+    isHorizontalScrollUnlocked = $bindable(false),
+    scrollToIndex,
+    onVisibleRange,
+    onUserScroll,
+    overlay,
   }: SectionListProps<T> = $props();
 
   const { isEditMode, section } = useEditMode();
@@ -79,8 +98,6 @@
   const { isCollapsed: isListCollapsed, toggle } = $derived(
     useCollapsedList(listId),
   );
-
-  let isHorizontalScrollUnlocked = $state(false);
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
@@ -169,8 +186,16 @@
             <div
               use:scrollHistory={listId}
               use:resetScroll={contentHash}
+              use:scrollToChild={{ index: scrollToIndex, key: contentHash }}
+              use:trackVisibleRange
+              onvisiblerange={(event) => onVisibleRange?.(event.detail)}
               use:unlockOnHorizontalWheel
-              onhorizontalwheel={() => (isHorizontalScrollUnlocked = true)}
+              onhorizontalwheel={() => {
+                isHorizontalScrollUnlocked = true;
+                onUserScroll?.();
+              }}
+              use:touchScroll
+              ontouchscroll={onUserScroll}
               data-horizontal-scroll={isHorizontalScrollUnlocked || undefined}
               class="trakt-list-item-container section-list-horizontal-scroll"
               data-dpad-navigation={DpadNavigationType.List}
@@ -200,6 +225,10 @@
             {/if}
           {/snippet}
         </Crossfade>
+
+        {#if overlay}
+          {@render overlay()}
+        {/if}
       </div>
     {/if}
   </section>
