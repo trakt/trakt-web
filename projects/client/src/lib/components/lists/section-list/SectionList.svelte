@@ -319,6 +319,8 @@
     height: var(--section-list-height);
     display: flex;
     overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
     transition: gap var(--transition-increment) ease-in-out;
     gap: var(--list-gap);
 
