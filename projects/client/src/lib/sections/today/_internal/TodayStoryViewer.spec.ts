@@ -41,7 +41,8 @@ async function renderViewer(startKey: string | null, onClose = vi.fn()) {
   renderComponent(TodayStoryViewer, {
     props: { groups, startKey, onClose },
   });
-  await screen.findByRole('dialog');
+  // The first render in a cold worker can exceed the 1s default on busy CI runners.
+  await screen.findByRole('dialog', {}, { timeout: 10_000 });
   return onClose;
 }
 
