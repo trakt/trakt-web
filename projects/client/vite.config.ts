@@ -10,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { defineConfig } from 'vite';
+import { configDefaults } from 'vitest/config';
 import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
 import { manifest } from './src/lib/pwa/manifest.ts';
 
@@ -57,6 +58,33 @@ const TRAKT_API_PROXY_TARGET = process.env.IS_LOCAL
   : TRAKT_TARGET_ENVIRONMENT;
 
 const IS_DOCTOR = process.env.IS_DOCTOR === 'true';
+
+// Utility folders whose specs never touch the DOM run without jsdom and its
+// browser-API mocks. Folders that need a DOM (actions, devices, events,
+// markdown, perf) stay in the jsdom project.
+const NODE_UTILS = [
+  'array',
+  'assert',
+  'color',
+  'date',
+  'format',
+  'formatting',
+  'json',
+  'media',
+  'number',
+  'object',
+  'profile',
+  'sentiment',
+  'storage',
+  'store',
+  'string',
+  'timing',
+  'transitions',
+  'url',
+];
+const NODE_SPECS = NODE_UTILS.map((dir) =>
+  `src/lib/utils/${dir}/**/*.{test,spec}.{js,ts}`
+);
 
 export default defineConfig(({ mode }) => ({
   define: {
@@ -137,13 +165,31 @@ export default defineConfig(({ mode }) => ({
 
   //TODO enable globals when typings are fixed
   test: {
-    include: [
-      'src/**/*.{test,spec}.{js,ts}',
-      '.scripts/**/*.{test,spec}.{js,ts}',
-      'i18n/**/*.{test,spec}.{js,ts}',
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'node',
+          include: NODE_SPECS,
+          environment: 'node',
+          setupFiles: ['./vitest-setup.node.ts'],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'dom',
+          include: [
+            'src/**/*.{test,spec}.{js,ts}',
+            '.scripts/**/*.{test,spec}.{js,ts}',
+            'i18n/**/*.{test,spec}.{js,ts}',
+          ],
+          exclude: [...configDefaults.exclude, ...NODE_SPECS],
+          environment: 'jsdom',
+          setupFiles: ['./vitest-setup.ts'],
+        },
+      },
     ],
-    environment: 'jsdom',
-    setupFiles: ['./vitest-setup.ts'],
     coverage: {
       provider: 'istanbul',
       reporter: ['clover', 'lcov'],
