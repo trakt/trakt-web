@@ -16,13 +16,16 @@ export function lazyServer({ loadServer }: LazyServerProps) {
   const originalFetch = globalThis.fetch;
   const state: { server?: Promise<MockServer> } = {};
 
-  const start = () =>
+  const start = () => {
     state.server ??= loadServer().then((server) => {
       // MSW patches whatever `fetch` is current, so the wrapper must go first.
       globalThis.fetch = originalFetch;
       server.listen();
       return server;
     });
+
+    return state.server;
+  };
 
   globalThis.fetch = (...args) => start().then(() => globalThis.fetch(...args));
 
