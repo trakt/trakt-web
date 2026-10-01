@@ -22,14 +22,25 @@
     mentions?: ReadonlyArray<RichTextMention>;
   } = $props();
 
+  let hasBlurred = $state(false);
+
   const hasError = $derived(
-    validation != null && value.trim() !== "" && !validation.isValid(value),
+    validation != null &&
+      hasBlurred &&
+      value.trim() !== "" &&
+      !validation.isValid(value),
   );
 </script>
 
 <FormElementWrapper {validation} {hasError} {errorLabelId} {actions}>
   <div
     class="trakt-form-rich-textarea"
+    onfocusout={(event) => {
+      if (event.currentTarget.contains(event.relatedTarget as Node | null)) {
+        return;
+      }
+      hasBlurred = true;
+    }}
     class:is-disabled={disabled}
     class:has-error={hasError}
     aria-describedby={hasError ? errorLabelId : undefined}
