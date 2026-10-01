@@ -43,7 +43,6 @@
     drilldown?: ListDrilldownProps;
     contentHash?: string;
     trailingItem?: Snippet;
-    isHorizontalScrollUnlocked?: boolean;
     /** Child index to scroll to the start of; `undefined` leaves scroll alone. */
     scrollToIndex?: number;
     /** Fires when the viewer starts scrolling the list themselves. */
@@ -53,7 +52,7 @@
     overlay?: Snippet;
   };
 
-  let {
+  const {
     id,
     items,
     title,
@@ -69,7 +68,6 @@
     variant = "default",
     titleAction: externalTitleAction,
     contentHash,
-    isHorizontalScrollUnlocked = $bindable(false),
     scrollToIndex,
     onVisibleRange,
     onUserScroll,
@@ -96,6 +94,10 @@
   const { isCollapsed: isListCollapsed, toggle } = $derived(
     useCollapsedList(listId),
   );
+
+  const unlockKey = $derived(contentHash ?? "");
+  let unlockedKey = $state<string | null>(null);
+  const isHorizontalScrollUnlocked = $derived(unlockedKey === unlockKey);
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
@@ -184,12 +186,15 @@
             <div
               use:scrollHistory={listId}
               use:resetScroll={contentHash}
-              use:scrollToChild={{ index: scrollToIndex, key: contentHash }}
+              use:scrollToChild={{
+                index: isHorizontalScrollUnlocked ? undefined : scrollToIndex,
+                key: contentHash,
+              }}
               use:trackVisibleRange={onVisibleRange != null}
               onvisiblerange={(event) => onVisibleRange?.(event.detail)}
-              use:unlockOnHorizontalWheel
+              use:unlockOnHorizontalWheel={isHorizontalScrollUnlocked}
               onhorizontalwheel={() => {
-                isHorizontalScrollUnlocked = true;
+                unlockedKey = unlockKey;
                 onUserScroll?.();
               }}
               use:touchScroll={onUserScroll != null}
@@ -240,8 +245,10 @@
     --section-list-height: calc(
       var(--height-override-list, var(--height-list)) + var(--shadow-spacing)
     );
+    --list-inset-top-resolved: var(--list-inset-top, var(--ni-0));
     --height-container: calc(
-      var(--section-list-height) + var(--ni-40) + var(--list-header-gap)
+      var(--section-list-height) + var(--ni-40) + var(--list-header-gap) +
+        var(--list-inset-top-resolved)
     );
 
     --list-mask-offset: var(--layout-distance-side);
@@ -296,8 +303,10 @@
 
   .section-list,
   .section-list-empty-state {
-    min-height: var(--section-list-height);
-    height: var(--section-list-height);
+    min-height: calc(
+      var(--section-list-height) + var(--list-inset-top-resolved)
+    );
+    height: calc(var(--section-list-height) + var(--list-inset-top-resolved));
 
     &:not(.trakt-edit-mode) {
       transition:
@@ -346,10 +355,14 @@
     overflow-x: auto;
     overflow-y: hidden;
     overscroll-behavior-x: contain;
-    transition: gap var(--transition-increment) ease-in-out;
+    transition:
+      gap var(--transition-increment) ease-in-out,
+      padding-top var(--transition-increment) ease-in-out;
     gap: var(--list-gap);
 
-    padding-top: var(--shadow-spacing);
+    padding-top: calc(
+      var(--shadow-spacing) + var(--list-inset-top-resolved, var(--ni-0))
+    );
 
     &[data-navigation-type="dpad"] {
       gap: var(--gap-xxs);

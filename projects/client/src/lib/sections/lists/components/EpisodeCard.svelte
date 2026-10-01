@@ -35,7 +35,6 @@
     media: show,
     source,
     indicators,
-    edge,
     coverWrapper,
     ...rest
   }: EpisodeCardProps = $props();
@@ -152,10 +151,6 @@
         </IndicatorTags>
       {/if}
     </Link>
-
-    {#if edge}
-      {@render edge()}
-    {/if}
 
     <CardFooter {action}>
       {#if isShowContext}
