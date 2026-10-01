@@ -1,4 +1,3 @@
-import type { Snippet } from 'svelte';
 import type { ActivityType } from '$lib/models/ActivityType.ts';
 import type { ShowInput } from '$lib/models/MediaInput.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
@@ -31,12 +30,6 @@ export type EpisodeItemVariant =
 
 export type EpisodeCardProps = BaseItemProps & EpisodeItemVariant & {
   media: ShowInput;
-  /**
-   * Rendered beside the card link, never inside it: a link in here would
-   * nest anchors. Mark the control `data-cover-edge` so the cover drops its
-   * hover outline while the pointer is on it.
-   */
-  edge?: Snippet;
   urlOverride?: CardUrlOverride;
   onWatched?: () => void;
   /**
