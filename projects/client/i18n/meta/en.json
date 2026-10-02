@@ -12206,6 +12206,10 @@
         }
       }
     },
+    "header_media_reactions": {
+      "default": "Reactions",
+      "description": "Heading above the ranked reaction counts in the popup opened from a title's reaction badge."
+    },
     "button_label_more_reactions": {
       "default": "More reactions",
       "description": "Aria-label for the button in the reaction tray that swaps the quick row for a search over every reaction."
