@@ -1,5 +1,5 @@
-import { createHeadingRenderer } from '$lib/sections/summary/components/comments/_internal/marked/createHeadingRenderer.ts';
-import { spoilerExtension } from '$lib/sections/summary/components/comments/_internal/marked/spoilerExtension.ts';
+import { createHeadingRenderer } from '$lib/sections/components/markdown/_internal/createHeadingRenderer.ts';
+import { spoilerExtension } from '$lib/sections/components/markdown/_internal/spoilerExtension.ts';
 import { describe, expect, it } from 'vitest';
 import { createSafeMarked } from './createSafeMarked.ts';
 
@@ -277,7 +277,7 @@ describe('createSafeMarked', () => {
 
     it('should still render a heading', () => {
       expect(renderWithCommentExtensions('# title')).toContain(
-        'class="bold trakt-comment-heading"',
+        'class="bold trakt-markdown-heading"',
       );
     });
 
