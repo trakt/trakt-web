@@ -47,3 +47,11 @@ npm run i18n:convert          # Convert messages/ to meta/
 npm run i18n:generate         # Generate all platforms
 npm run test:unit -- i18n/   # Run tests
 ```
+
+## Removing a message
+
+Delete the key from `meta/en.json`, then run `deno task i18n:web` in
+`projects/client`. The generator prunes the key from every locale catalog under
+`messages/` (a deletion-only change), and the PR check that blocks hand-edited
+translations allows it. `deno task i18n:resolve` is only for merge conflicts in
+the catalogs and does not prune anything.

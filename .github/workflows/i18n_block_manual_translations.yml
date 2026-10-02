@@ -9,8 +9,8 @@ name: The Translation Warden aka Block Manual Message Edits
 # Strings are authored in projects/client/i18n/meta/en.json (the source). This
 # guard leaves the source untouched. It also allows the one legitimate way a
 # PR may change the catalogs: removing a key from the source prunes it from
-# every locale via `deno task client:i18n:resolve`, which is a deletion-only
-# change. Anything that adds or modifies a translation value is blocked.
+# every locale via `deno task i18n:web` (run in projects/client), which is a
+# deletion-only change. Anything that adds or modifies a translation value is blocked.
 
 on:
   pull_request:
@@ -83,7 +83,7 @@ jobs:
           echo ""
           echo "What to do instead:"
           echo "  - Add or change strings in projects/client/i18n/meta/en.json (the source)."
-          echo "  - Removing a key? Do it there and run 'deno task client:i18n:resolve' to prune locales."
+          echo "  - Removing a key? Do it there and run 'deno task i18n:web' in projects/client to prune locales."
           echo "  - Adding a new locale? Add its code to i18n/project.inlang/settings.json only."
           echo "  - Translations flow back automatically via the CrowdIn sync (branch i18n_crowdin_updates)."
           exit 1
