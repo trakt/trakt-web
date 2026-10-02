@@ -6,6 +6,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'amazon_prime_video',
         'name': 'Amazon Prime Video',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -20,6 +21,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'amazon_video',
         'name': 'Amazon Video',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -34,6 +36,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'apple_tv',
         'name': 'Apple TV',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -48,6 +51,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'apple_tv_plus',
         'name': 'Apple TV+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -62,6 +66,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'broadwayhd',
         'name': 'BroadwayHD',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -76,6 +81,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'canal_plus',
         'name': 'Canal+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -90,6 +96,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'cinemember',
         'name': 'CineMember',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -104,6 +111,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'crime_investigation_play_amazon_channel',
         'name': 'Crime+Investigation Play (on Amazon) ',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': true,
@@ -119,6 +127,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'crunchyroll',
         'name': 'Crunchyroll',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -133,6 +142,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'crunchyroll_amazon_channel',
         'name': 'Crunchyroll (on Amazon)',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': true,
@@ -148,6 +158,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'cultpix',
         'name': 'Cultpix',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -162,6 +173,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'curiosity_stream',
         'name': 'Curiosity Stream',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -176,6 +188,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'dekkoo',
         'name': 'Dekkoo',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -190,6 +203,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'discovery_plus',
         'name': 'Discovery+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -204,6 +218,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'disney_plus',
         'name': 'Disney+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -218,6 +233,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'dizi_amazon_channel',
         'name': 'Dizi (on Amazon)',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': true,
@@ -233,6 +249,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'docalliance_films',
         'name': 'DocAlliance Films',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -247,6 +264,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'docsville',
         'name': 'DOCSVILLE',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -261,6 +279,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'eventive',
         'name': 'Eventive',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -275,6 +294,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'film1',
         'name': 'Film1',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -289,6 +309,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'filmbox_plus',
         'name': 'FilmBox+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -303,6 +324,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'filmzie',
         'name': 'Filmzie (free)',
+        'type': 'free',
         'free': true,
         'cinema': false,
         'amazon': false,
@@ -318,6 +340,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'google_play_movies',
         'name': 'Google Play Movies',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -332,6 +355,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'guidedoc',
         'name': 'GuideDoc',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -346,6 +370,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'hayu',
         'name': 'Hayu',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -360,6 +385,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'hoichoi',
         'name': 'Hoichoi (free)',
+        'type': 'free',
         'free': true,
         'cinema': false,
         'amazon': false,
@@ -375,6 +401,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'iffr_unleashed',
         'name': 'IFFR Unleashed',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -389,6 +416,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'justwatchtv',
         'name': 'JustWatchTV (free)',
+        'type': 'free',
         'free': true,
         'cinema': false,
         'amazon': false,
@@ -403,6 +431,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'kpn',
         'name': 'KPN',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -417,6 +446,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'magellan_tv',
         'name': 'Magellan TV',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -431,6 +461,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'max',
         'name': 'Max',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -445,6 +476,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'mejane',
         'name': 'meJane',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -459,6 +491,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'mgm_plus_amazon_channel',
         'name': 'MGM+ (on Amazon)',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': true,
@@ -474,6 +507,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'microsoft_store',
         'name': 'Microsoft Store',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -488,6 +522,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'mubi',
         'name': 'MUBI',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -502,6 +537,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'netflix',
         'name': 'Netflix',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -516,6 +552,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'netflix_kids',
         'name': 'Netflix Kids',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -530,6 +567,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'nlziet',
         'name': 'NLZIET',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -544,6 +582,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'npo_start',
         'name': 'NPO Start (free)',
+        'type': 'free',
         'free': true,
         'cinema': false,
         'amazon': false,
@@ -559,6 +598,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'npo_plus',
         'name': 'NPO+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -573,6 +613,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'pathe_thuis',
         'name': 'Pathé Thuis',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -587,6 +628,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'picl',
         'name': 'Picl',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -601,6 +643,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'plex',
         'name': 'Plex',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -615,6 +658,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'rakuten_tv',
         'name': 'Rakuten TV',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -629,6 +673,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'shortstv_amazon_channel',
         'name': 'ShortsTV (on Amazon)',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': true,
@@ -644,6 +689,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'skyshowtime',
         'name': 'SkyShowtime',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -658,6 +704,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'sooner',
         'name': 'Sooner',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -672,6 +719,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'south_park',
         'name': 'South Park (free)',
+        'type': 'free',
         'free': true,
         'cinema': false,
         'amazon': false,
@@ -687,6 +735,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'spamflix',
         'name': 'Spamflix',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -701,6 +750,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'sun_nxt',
         'name': 'Sun Nxt',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -715,6 +765,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'takflix',
         'name': 'Takflix',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -729,6 +780,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'true_story',
         'name': 'True Story',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -743,6 +795,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'viaplay',
         'name': 'Viaplay',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -757,6 +810,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'videoland',
         'name': 'Videoland',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -771,6 +825,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'wow_presents_plus',
         'name': 'WOW Presents+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -785,6 +840,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'ziggo_tv',
         'name': 'Ziggo TV',
+        'type': 'tv_everywhere',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -803,6 +859,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'amazon_prime_video',
         'name': 'Amazon Prime Video',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -817,6 +874,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'broadwayhd',
         'name': 'BroadwayHD',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -831,6 +889,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'crunchyroll',
         'name': 'Crunchyroll',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -845,6 +904,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'cultpix',
         'name': 'Cultpix',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -859,6 +919,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'curiosity_stream',
         'name': 'Curiosity Stream',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -873,6 +934,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'dekkoo',
         'name': 'Dekkoo',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -887,6 +949,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'disney_plus',
         'name': 'Disney+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -901,6 +964,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'docalliance_films',
         'name': 'DocAlliance Films',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -915,6 +979,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'docsville',
         'name': 'DOCSVILLE',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -929,6 +994,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'eventive',
         'name': 'Eventive',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -943,6 +1009,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'filmbox_plus',
         'name': 'FilmBox+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -957,6 +1024,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'filmzie',
         'name': 'Filmzie (free)',
+        'type': 'free',
         'free': true,
         'cinema': false,
         'amazon': false,
@@ -972,6 +1040,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'hayu',
         'name': 'Hayu',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -986,6 +1055,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'hoichoi',
         'name': 'Hoichoi (free)',
+        'type': 'free',
         'free': true,
         'cinema': false,
         'amazon': false,
@@ -1001,6 +1071,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'justwatchtv',
         'name': 'JustWatchTV (free)',
+        'type': 'free',
         'free': true,
         'cinema': false,
         'amazon': false,
@@ -1015,6 +1086,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'magellan_tv',
         'name': 'Magellan TV',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1029,6 +1101,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'max',
         'name': 'Max',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1043,6 +1116,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'mubi',
         'name': 'MUBI',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1057,6 +1131,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'netflix',
         'name': 'Netflix',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1071,6 +1146,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'plex',
         'name': 'Plex',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1085,6 +1161,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'rakuten_tv',
         'name': 'Rakuten TV',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1099,6 +1176,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'skyshowtime',
         'name': 'SkyShowtime',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1113,6 +1191,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'spamflix',
         'name': 'Spamflix',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1127,6 +1206,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'sun_nxt',
         'name': 'Sun Nxt',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1141,6 +1221,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'takflix',
         'name': 'Takflix',
+        'type': 'purchase',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1155,6 +1236,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'true_story',
         'name': 'True Story',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,
@@ -1169,6 +1251,7 @@ export const WatchNowSourcesResponseMock: WatchNowSourcesResponse[] = [
       {
         'source': 'wow_presents_plus',
         'name': 'WOW Presents+',
+        'type': 'subscription',
         'free': false,
         'cinema': false,
         'amazon': false,

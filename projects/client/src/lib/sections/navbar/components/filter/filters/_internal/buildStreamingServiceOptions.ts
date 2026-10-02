@@ -15,6 +15,10 @@ type BuildStreamingServiceOptionsParams = {
   sourceMap: ReadonlyMap<string, ReadonlyArray<StreamingSource>>;
 };
 
+function isPurchaseService(source: StreamingSource): boolean {
+  return source.type === 'purchase';
+}
+
 function toServiceOption(source: StreamingSource): StreamingServiceOption {
   return {
     source: source.source,
@@ -113,7 +117,15 @@ export function buildStreamingServiceOptions({
   favorites,
   sourceMap,
 }: BuildStreamingServiceOptionsParams): StreamingServiceOptions {
-  const services = sourceMap.get(countryCode) ?? [];
+  const countryServices = sourceMap.get(countryCode) ?? [];
+  // Rent and buy stores never join a brand chip and sort last in the advanced
+  // list, so picking a service does not silently include its rental store.
+  const purchaseServices = sortStreamingServices(
+    countryServices.filter(isPurchaseService),
+  );
+  const services = countryServices.filter(
+    (service) => !isPurchaseService(service),
+  );
   const favoriteOptions = toFavoriteOptions({
     favorites,
     services,
@@ -122,7 +134,9 @@ export function buildStreamingServiceOptions({
   const hasFavorites = favoriteOptions.length > 0;
 
   return {
-    all: sortStreamingServices(services).map(toServiceOption),
+    all: [...sortStreamingServices(services), ...purchaseServices].map(
+      toServiceOption,
+    ),
     top: (hasFavorites ? favoriteOptions : toBrandOptions(services)).slice(
       0,
       simpleServiceLimit,
