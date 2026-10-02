@@ -40,7 +40,10 @@ type CommentType = {
   action: 'post' | 'reply' | 'edit';
   type: 'text' | 'gif' | 'text-and-gif';
 };
-type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
+type ReactionType = {
+  action: 'add' | 'remove';
+  type: 'comment' | MediaType;
+};
 type CalendarType = { action: 'reset' | 'next' | 'previous' };
 type StreamOnType = SourceType;
 type CtaDataType = { type: CtaType };
