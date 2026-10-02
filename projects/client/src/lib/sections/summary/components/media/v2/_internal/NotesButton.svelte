@@ -3,6 +3,7 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import NotesIcon from "$lib/components/icons/NotesIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { m } from "$lib/features/i18n/messages.ts";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
@@ -31,7 +32,7 @@
 
 {#if hasNotes}
   {#if style === "action"}
-    <ActionButton style="ghost" label="Notes" {variant} {...drawerLink}>
+    <ActionButton style="ghost" label={m.drawer_title_notes()} {variant} {...drawerLink}>
       <NotesIcon active={hasNotes} />
     </ActionButton>
   {/if}
@@ -43,7 +44,7 @@
       variant={variant ?? "primary"}
       {...drawerLink}
     >
-      Notes
+      {m.drawer_title_notes()}
       {#snippet icon()}
         <NotesIcon active={hasNotes} />
       {/snippet}
