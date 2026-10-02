@@ -2,6 +2,8 @@ import { http, HttpResponse } from 'msw';
 
 import { OfficialListsResponseMock } from '$mocks/data/lists/response/OfficialListsResponseMock.ts';
 import { UserMovieListIdsResponseMock } from '$mocks/data/lists/response/UserMovieListIdsResponseMock.ts';
+import { MovieHereticReactionsSummaryResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticReactionsSummaryResponseMock.ts';
+import { MovieHereticUserReactionsResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticUserReactionsResponseMock.ts';
 import { MovieHereticCommentsResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticCommentsResponseMock.ts';
 import { MovieHereticSentimentResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticSentimentResponseMock.ts';
 import { MovieHereticSoundtrackResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticSoundtrackResponseMock.ts';
@@ -164,6 +166,18 @@ export const movies = [
     `http://localhost/v3/movies/${MovieHereticResponseMock.ids.slug}/me/lists`,
     () => {
       return HttpResponse.json(UserMovieListIdsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/v3/movies/${MovieHereticResponseMock.ids.slug}/reactions/summary`,
+    () => {
+      return HttpResponse.json(MovieHereticReactionsSummaryResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/v3/users/me/movie/${MovieHereticResponseMock.ids.trakt}`,
+    () => {
+      return HttpResponse.json(MovieHereticUserReactionsResponseMock);
     },
   ),
 ];
