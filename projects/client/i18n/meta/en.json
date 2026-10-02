@@ -482,6 +482,10 @@
       "default": "Continue Watching",
       "description": "Title for lists containing the next episodes and in progress movies. This title should be as short and concise as possible."
     },
+    "description_widget_up_next": {
+      "default": "See what to continue watching at a glance.",
+      "description": "Description shown in the widget gallery/picker for the Up Next (Continue Watching) home-screen widget."
+    },
     "tag_text_remaining_episodes": {
       "default": "{count} left",
       "description": "Text for the tag that shows the number of episodes left in a show. This should be as short as possible.",
@@ -2661,9 +2665,9 @@
       "default": "Manage lists",
       "description": "Text for the button that opens the lists drawer. This allows users to add or remove a movie, show, season or episode from their lists."
     },
-    "button_text_view_history": {
-      "default": "View History",
-      "description": "Text for the button that opens the full page of the user's plays for a particular media item."
+    "button_text_go_to_show": {
+      "default": "Go to show",
+      "description": "Text for the menu action that opens the parent show's summary page from an episode or season."
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "Add or remove \"{title}\" from lists",
@@ -8040,6 +8044,30 @@
       "default": "Update failed. Please try again.",
       "description": "Generic error text shown when a user attempts to update their settings and the update fails."
     },
+    "label_rating_user": {
+      "default": "Rated {rating} out of 5",
+      "description": "VoiceOver label for a person's rating of an item, e.g. \"Rated 3.5 out of 5\"."
+    },
+    "label_rating_average": {
+      "default": "Average rating {rating} out of 5",
+      "description": "VoiceOver label for the average of several people's ratings of an item, e.g. friends' ratings."
+    },
+    "label_rating_community": {
+      "default": "{percent} Trakt rating",
+      "description": "VoiceOver label for an item's community rating, e.g. \"78% Trakt rating\". {percent} is an already-formatted percentage (e.g. \"78%\"), formatted by the caller via a locale-aware percent formatter rather than this template, so the % sign's locale-specific spacing (e.g. German's \"78 %\") is correct."
+    },
+    "label_rating_hidden": {
+      "default": "Rating hidden to avoid spoilers",
+      "description": "VoiceOver label for a community rating blurred by the user's spoiler settings."
+    },
+    "label_rating_hidden_hint": {
+      "default": "Reveals the rating",
+      "description": "VoiceOver hint for a spoiler-hidden rating, describing what activating it does. Describes the result, not the gesture, because the control can be activated in other ways."
+    },
+    "error_text_rating_save_failed": {
+      "default": "Something went wrong saving your rating. Please try again.",
+      "description": "Error message shown in an alert when a rating the user just picked fails to save."
+    },
     "button_text_cancel_vip": {
       "default": "Cancel VIP",
       "description": "Text for the button that allows users to cancel their VIP subscription. This should be as short as possible."
@@ -9009,6 +9037,23 @@
       "default": "Start rewatching sessions for shows you've already seen, check in or mark watched episodes directly from the session drawer.",
       "description": "Description for the Rewatch preview feature."
     },
+    "button_label_history_slot_picker_insert_here": {
+      "default": "Set date to here",
+      "description": "Aria-label for the insertion-point button between two entries in the history slot picker sheet, which jumps the date field near that point in the user's watch history."
+    },
+    "button_text_history_slot_picker_reset": {
+      "default": "Reset",
+      "description": "Text for the button that resets the date field in the history slot picker's date popover back to the current date and time."
+    },
+    "label_date_picker_time": {
+      "default": "Time",
+      "description": "Generic label for the time-of-day row next to a graphical DatePicker's time field, wherever a date and time are picked together as two separate controls."
+    },
+    "text_history_slot_picker_empty": {
+      "default": "You don't have any watch history yet. This will be your first entry.",
+      "description": "Placeholder text shown in the history slot picker sheet when the user has no watch history at all to pick an insertion point from."
+    },
+
     "preview_feature_title_leaderboard": {
       "default": "Pantheon",
       "description": "Product feature name for the follows watch-time ranking preview feature. Keep as the loanword 'Pantheon' (transliterate if needed); do not translate literally to 'temple'."
@@ -11375,6 +11420,10 @@
     "yir_2026_persona_anime_voyager_name": {
       "default": "Anime Voyager",
       "description": "Name of the \"Anime Voyager\" viewer persona on the 2026 Year in Review persona card."
+    },
+    "button_label_preview_gif": {
+      "default": "View GIF at full size",
+      "description": "Aria-label for the button that opens the selected GIF at a larger size while composing a comment/review."
     },
     "yir_2026_persona_anime_voyager_tagline": {
       "default": "Subs on, arcs long, never skipping the opening.",
