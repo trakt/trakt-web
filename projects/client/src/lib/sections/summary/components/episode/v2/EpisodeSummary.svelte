@@ -72,7 +72,7 @@
   {/snippet}
 
   {#snippet sideActions()}
-    <EpisodeSideActions {title} {showTitle} {episode} />
+    <EpisodeSideActions {title} />
   {/snippet}
 
   {#snippet meta()}

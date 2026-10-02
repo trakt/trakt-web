@@ -97,7 +97,6 @@
         <ShareButton
           title={list.name}
           style="dropdown-item"
-          textFactory={({ title: name }) => m.text_share_list({ name })}
           source={{ id: "user-list" }}
         />
         <ListReorderButton

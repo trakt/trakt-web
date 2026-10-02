@@ -9,7 +9,6 @@ import { toShareUrl } from '../../../utils/url/toShareUrl.ts';
 type ShareData = {
   title: string;
   url: string;
-  text: string;
 };
 
 const IgnoredShareErrors: ReadonlySet<string> = new Set([

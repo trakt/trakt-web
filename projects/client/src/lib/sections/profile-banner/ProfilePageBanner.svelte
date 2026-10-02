@@ -4,7 +4,6 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import * as m from "$lib/features/i18n/messages.ts";
   import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
   import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import { useVipVeteran } from "$lib/features/vip-veteran/stores/useVipVeteran.ts";
@@ -108,7 +107,6 @@
           <ShareButton
             title={profile.name.first}
             urlOverride={UrlBuilder.profile.user(shareableSlug)}
-            textFactory={({ title: name }) => m.text_share_profile({ name })}
             source={{ id: "profile", type: $isMe ? "own" : "other" }}
           />
         {/if}

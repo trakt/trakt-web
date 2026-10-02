@@ -34,7 +34,6 @@
       {#snippet popupActions()}
         <ShareButton
           title={person.name}
-          textFactory={({ title: name }) => m.text_share_person({ name })}
           source={{ id: "person" }}
           style="dropdown-item"
         />

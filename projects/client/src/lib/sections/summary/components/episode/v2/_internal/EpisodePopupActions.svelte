@@ -59,8 +59,6 @@
 
 <EpisodeSideActions
   {title}
-  {showTitle}
-  {episode}
   style="dropdown-item"
   variant="primary"
 />
