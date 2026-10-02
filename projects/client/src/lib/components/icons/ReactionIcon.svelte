@@ -1,5 +1,6 @@
 <script lang="ts">
-  const { state }: { state: "default" | "edit" | "add" } = $props();
+  const { state = "default" }: { state?: "default" | "edit" | "add" } =
+    $props();
 </script>
 
 <svg

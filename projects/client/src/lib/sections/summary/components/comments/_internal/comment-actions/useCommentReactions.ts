@@ -4,16 +4,15 @@ import {
   commentReactionsQuery,
   type Reaction,
 } from '$lib/requests/queries/comments/commentReactionsQuery.ts';
+import { toTopReactions } from '$lib/utils/reactions/toTopReactions.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { reactionsSchema } from '@trakt/api';
 import { map, type Observable } from 'rxjs';
-import type { ReactionDistribution } from '../models/ReactionDistribution.ts';
 import type { ReactionSummary } from '../models/ReactionSummary.ts';
 
 type UseCommentReactionsProps = {
   id: number;
 };
-
-const PREVIEW_LIMIT = 3;
 
 type CommentReactions = {
   currentReaction: Observable<Reaction | null>;
@@ -40,24 +39,18 @@ export function useCommentReactions(
           return {
             count: 0,
             top: [],
-            distribution: {} as ReactionDistribution,
+            distribution: {},
           };
         }
 
-        const sortedDistribution = Object
-          .entries($summary.data.distribution)
-          .toSorted(([_key, a], [_key2, b]) => b - a);
-
-        const top = sortedDistribution
-          .slice(0, PREVIEW_LIMIT)
-          .filter(([_, count]) => count > 0)
-          .map(([reaction]) => reaction) as Array<Reaction>;
+        const top = toTopReactions({
+          distribution: $summary.data.distribution,
+          reactions: reactionsSchema.options,
+        });
 
         return {
           count: $summary.data.count,
-          distribution: Object.fromEntries(
-            sortedDistribution,
-          ) as ReactionDistribution,
+          distribution: $summary.data.distribution,
           top,
         };
       }),
