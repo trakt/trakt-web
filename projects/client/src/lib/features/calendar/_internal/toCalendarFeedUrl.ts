@@ -5,7 +5,7 @@ import type { EpisodeTypeFilter } from '../models/EpisodeTypeFilter.ts';
 const FEED_TOKEN_PARAM = 'slurm';
 
 type ToCalendarFeedUrlParams = {
-  environment: string;
+  origin: string;
   token: string;
   mode: DiscoverMode;
   episodeType: EpisodeTypeFilter;
@@ -22,11 +22,11 @@ function feedPath(
 }
 
 export function toCalendarFeedUrl(
-  { environment, token, mode, episodeType, filters }: ToCalendarFeedUrlParams,
+  { origin, token, mode, episodeType, filters }: ToCalendarFeedUrlParams,
 ): { https: string; webcal: string } {
   const path = feedPath({ mode, episodeType });
   const query = buildParamString({ [FEED_TOKEN_PARAM]: token, ...filters });
-  const https = `${environment}/calendars/${path}.ics${query}`;
+  const https = `${origin}/calendars/${path}.ics${query}`;
 
   return { https, webcal: https.replace(/^https?:/, 'webcal:') };
 }

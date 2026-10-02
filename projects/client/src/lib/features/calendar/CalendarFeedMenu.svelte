@@ -12,7 +12,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { copyToClipboard } from "$lib/utils/clipboard/copyToClipboard.ts";
-  import { calendarFeedEnvironment } from "./_internal/calendarFeedEnvironment.ts";
+  import { calendarFeedOrigin } from "./_internal/calendarFeedOrigin.ts";
   import { toCalendarFeedUrl } from "./_internal/toCalendarFeedUrl.ts";
   import { useEpisodeType } from "./useEpisodeType.ts";
 
@@ -27,14 +27,14 @@
   const { track } = useTrack(AnalyticsEvent.CalendarFeed);
   const { notify } = useActionToast();
 
-  const environment = calendarFeedEnvironment(TRAKT_TARGET_ENVIRONMENT);
+  const origin = calendarFeedOrigin(TRAKT_TARGET_ENVIRONMENT);
 
   const feedUrl = $derived.by(() => {
     const token = $user.token;
     if (!token) return null;
 
     return toCalendarFeedUrl({
-      environment,
+      origin,
       token,
       mode: $mode,
       episodeType: $episodeType,
