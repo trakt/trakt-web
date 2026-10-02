@@ -4,10 +4,8 @@
   import { spoilMeAnyway } from "$lib/features/spoilers/components/spoilMeAnyway";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import { createSafeMarked } from "$lib/utils/markdown/createSafeMarked.ts";
+  import MarkdownText from "$lib/sections/components/markdown/MarkdownText.svelte";
   import CommentGif from "./CommentGif.svelte";
-  import { createHeadingRenderer } from "./marked/createHeadingRenderer";
-  import { spoilerExtension } from "./marked/spoilerExtension";
 
   const maxPreviewLines = 3;
 
@@ -22,23 +20,10 @@
 
   // A gif is a comment on its own, so the body can be empty.
   const hasText = $derived(comment.comment.trim().length > 0);
-
-  const marked = $derived(
-    createSafeMarked({
-      extensions: [spoilerExtension(comment.isSpoiler)],
-      renderer: {
-        heading: createHeadingRenderer(),
-      },
-    }),
-  );
 </script>
 
 {#snippet commentText()}
-  <!--
-        -gfm: to enable GitHub Flavored Markdown
-        -breaks: to enable gfm line breaks
-      -->
-  {@html marked.parse(comment.comment, { gfm: true, breaks: true })}
+  <MarkdownText text={comment.comment} isSpoiler={comment.isSpoiler} />
 {/snippet}
 
 {#snippet commentGif(variant: "full" | "preview")}
@@ -92,45 +77,12 @@
     flex-direction: column;
     gap: var(--gap-xs);
 
-    font-size: var(--font-size-text);
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: filter;
 
-    :global(a) {
-      @include default-link-style;
-    }
-
-    :global(p),
-    :global(li) {
-      font-size: inherit;
-    }
-
-    :global(blockquote) {
-      margin-inline: 0;
-      padding-inline-start: var(--gap-xs);
-      border-inline-start: var(--border-thickness-xs) solid var(--purple-50);
-    }
-
-    :global(.trakt-comment-heading) {
-      text-transform: none;
-      text-decoration: underline;
-    }
-
-    &,
-    :global(span) {
-      transition: var(--transition-increment) ease-in-out;
-      transition-property: filter;
-    }
-
-    &:global(.trakt-spoiler),
-    :global(span.trakt-spoiler) {
+    &:global(.trakt-spoiler) {
       @include spoiler-blur();
-    }
 
-    :global(span.trakt-spoiler *) {
-      pointer-events: none;
-    }
-
-    &:global(.trakt-spoiler),
-    :global(span.trakt-spoiler) {
       cursor: pointer;
     }
   }
