@@ -5,7 +5,7 @@ import type { EpisodeTypeFilter } from '../models/EpisodeTypeFilter.ts';
 const FEED_TOKEN_PARAM = 'slurm';
 
 type ToCalendarFeedUrlParams = {
-  origin: string;
+  origin: HttpsUrl;
   token: string;
   mode: DiscoverMode;
   episodeType: EpisodeTypeFilter;
