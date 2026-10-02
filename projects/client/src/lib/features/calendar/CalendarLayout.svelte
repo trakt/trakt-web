@@ -22,6 +22,7 @@
     order = "chronological",
     periods,
     onLoadMore,
+    actions,
   }: CalendarLayoutProps<T> = $props();
 
   const { visibleDate } = getCalendarContext();
@@ -88,7 +89,12 @@
       use:trackElementBottom={"--calendar-nav-bottom"}
     >
       {#if navigation}
-        <CalendarHeader {navigation} {maxDate} activeDate={selectedDate} />
+        <CalendarHeader
+          {navigation}
+          {maxDate}
+          {actions}
+          activeDate={selectedDate}
+        />
       {/if}
       <CalendarDays
         calendar={visiblePeriodCalendar}
