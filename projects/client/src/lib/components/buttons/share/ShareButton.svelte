@@ -10,7 +10,6 @@
 
   type ShareButtonProps = {
     title: string;
-    textFactory: ({ title }: { title: string }) => string;
     urlOverride?: string;
     style?: "action" | "dropdown-item";
     source: DrilldownSource;
@@ -19,7 +18,6 @@
 
   const {
     title,
-    textFactory,
     urlOverride,
     source,
     style = "action",
@@ -28,7 +26,6 @@
 
   const data = $derived({
     title,
-    text: textFactory({ title }),
     url: urlOverride ?? (browser ? page.url.toString() : ""),
   });
 

@@ -2119,60 +2119,6 @@
       "default": "Liked",
       "description": "Title for lists containing the user's liked lists. This title should be as short and concise as possible."
     },
-    "text_share_movie": {
-      "default": "Just discovered \"{title}\" - you need to see this! 🎬",
-      "description": "Text for sharing a movie.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "text_share_show": {
-      "default": "Found this awesome show: {title}! 📺",
-      "description": "Text for sharing a show.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "text_share_episode": {
-      "default": "Just watched {show} S{season}E{episode} - {title}! 🔥",
-      "description": "Text for sharing an episode of a show.",
-      "variables": {
-        "show": {
-          "type": "string"
-        },
-        "season": {
-          "type": "number"
-        },
-        "episode": {
-          "type": "number"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "text_share_person": {
-      "default": "Check out {name} on Trakt! 🎭",
-      "description": "Text for sharing a person (actor, director, etc.).",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "text_share_profile": {
-      "default": "Check out {name} on Trakt! 🎭",
-      "description": "Text for sharing a user's profile.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
-    },
     "list_title_recently_watched": {
       "default": "Recently Watched",
       "description": "Title for lists containing recently watched movies or episodes. This title should be as short and concise as possible."
@@ -3701,24 +3647,6 @@
       "description": "Aria-label for the button that allows users to toggle a genre, for example as a favorite.",
       "variables": {
         "genre": {
-          "type": "string"
-        }
-      }
-    },
-    "text_share_list": {
-      "default": "Check out this \"{name}\" list on Trakt! 📋",
-      "description": "Text shown when sharing a user created list.",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
-    },
-    "text_share_top_list": {
-      "default": "Check out {name} on Trakt! 🔥",
-      "description": "Text shown when sharing the anticipated, hot, popular, or trending list.",
-      "variables": {
-        "name": {
           "type": "string"
         }
       }

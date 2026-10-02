@@ -16,7 +16,6 @@
 {#snippet actions()}
   <ShareButton
     title={m.list_title_most_anticipated()}
-    textFactory={({ title: name }) => m.text_share_top_list({ name })}
     source={{ id: "anticipated", type: $mode }}
   />
 {/snippet}
