@@ -7,6 +7,7 @@ import ListIcon from '$lib/components/icons/mobile/ListIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
+import ReactionIcon from '$lib/components/icons/ReactionIcon.svelte';
 import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
@@ -154,5 +155,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-10-02'),
     description: () => m.preview_feature_description_vip_veteran(),
     audience: 'director',
+  },
+  [FeatureFlag.Reactions]: {
+    icon: ReactionIcon,
+    title: () => m.preview_feature_title_reactions(),
+    addedAt: new Date('2026-10-02'),
+    description: () => m.preview_feature_description_reactions(),
   },
 };

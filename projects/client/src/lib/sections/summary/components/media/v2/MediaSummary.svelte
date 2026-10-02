@@ -6,7 +6,7 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
-  import SocialActivitiesButton from "../../_internal/SocialActivitiesButton.svelte";
+  import SummarySocialRow from "../../_internal/SummarySocialRow.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import { useIsRateable } from "../../rating/_internal/useIsRateable";
   import type { MediaSummaryEntry } from "../models/MediaSummaryEntry";
@@ -26,11 +26,6 @@
   const media = $derived(target.media);
 
   const title = $derived(intl?.title ?? media?.title ?? "");
-  const socialTarget = $derived({
-    type: target.type,
-    slug: media.slug,
-  });
-
   const { isRateable } = $derived(useIsRateable(target));
 
   const { buildDrawerLink } = summaryDrawerNavigation();
@@ -44,7 +39,12 @@
 {#snippet actions()}
   <RenderFor audience="authenticated">
     <MediaActions {media} {title} />
-    <SocialActivitiesButton target={socialTarget} {title} />
+    <SummarySocialRow
+      type={target.type}
+      slug={media.slug}
+      id={media.id}
+      {title}
+    />
   </RenderFor>
 {/snippet}
 
