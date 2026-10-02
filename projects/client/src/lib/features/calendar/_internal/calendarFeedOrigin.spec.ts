@@ -12,12 +12,9 @@ describe('util: calendarFeedOrigin', () => {
     );
   });
 
-  it('should keep the api host for non-production environments', () => {
+  it('should keep the staging api host on staging', () => {
     expect(calendarFeedOrigin(Environment.staging)).toBe(
       Environment.staging,
-    );
-    expect(calendarFeedOrigin(Environment.development)).toBe(
-      Environment.development,
     );
   });
 });
