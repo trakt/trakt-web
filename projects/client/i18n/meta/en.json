@@ -2456,6 +2456,14 @@
       "default": "Scroll to end",
       "description": "Aria-label for the carousel button that scrolls toward the end of the items."
     },
+    "button_label_carousel_previous": {
+      "default": "Previous",
+      "description": "Aria-label for the carousel button that moves to the previous slide."
+    },
+    "button_label_carousel_next": {
+      "default": "Next",
+      "description": "Aria-label for the carousel button that moves to the next slide."
+    },
     "button_label_comment_replies": {
       "default": "Review Replies",
       "description": "Aria-label for the button that opens the review replies dialog."

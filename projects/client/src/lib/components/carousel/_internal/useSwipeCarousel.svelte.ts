@@ -45,19 +45,26 @@ function computeSlideProgress(
 }
 
 export function useSwipeCarousel(
-  slideCount: number,
+  getSlideCount: () => number,
   callbacks: SwipeCarouselCallbacks = {},
 ) {
-  const lastSlide = slideCount - 1;
-  const slideOffsetPercent = 100 / slideCount;
+  const lastSlide = $derived(Math.max(FIRST_SLIDE, getSlideCount() - 1));
+  const slideOffsetPercent = $derived(100 / Math.max(1, getSlideCount()));
 
-  let activeSlide = $state(FIRST_SLIDE);
+  let requestedSlide = $state(FIRST_SLIDE);
   let dragX = $state(0);
   let isDragging = $state(false);
   let slideProgress = $state(FIRST_SLIDE);
 
+  let isRtl = $state(false);
+  const inlineSign = $derived(isRtl ? -1 : 1);
+
+  const activeSlide = $derived(Math.min(requestedSlide, lastSlide));
+
   const trackTransform = $derived(
-    `translateX(calc(${-activeSlide * slideOffsetPercent}% + ${dragX}px))`,
+    `translateX(calc(${
+      -inlineSign * activeSlide * slideOffsetPercent
+    }% + ${dragX}px))`,
   );
 
   function setSlideProgress(value: number) {
@@ -70,29 +77,38 @@ export function useSwipeCarousel(
     callbacks.onDraggingChange?.(value);
   }
 
+  function goTo(slide: number) {
+    requestedSlide = slide;
+    setSlideProgress(slide);
+  }
+
   function goToNext() {
     if (activeSlide >= lastSlide) return;
-    activeSlide += 1;
-    setSlideProgress(activeSlide);
+    goTo(activeSlide + 1);
   }
 
   function goToPrev() {
     if (activeSlide <= FIRST_SLIDE) return;
-    activeSlide -= 1;
-    setSlideProgress(activeSlide);
+    goTo(activeSlide - 1);
   }
 
   function createGesture(node: HTMLElement): DragGesture {
     return new DragGesture(
       node,
       (state) => {
-        const [dx] = state.movement;
+        if (state.tap) {
+          setIsDragging(false);
+          dragX = 0;
+          return;
+        }
+
+        const [physicalDx] = state.movement;
+        const dx = physicalDx * inlineSign;
 
         if (state.last) {
           setIsDragging(false);
           dragX = 0;
-          activeSlide = resolveSlideOnRelease(dx, activeSlide, lastSlide);
-          setSlideProgress(activeSlide);
+          goTo(resolveSlideOnRelease(dx, activeSlide, lastSlide));
           return;
         }
 
@@ -100,7 +116,7 @@ export function useSwipeCarousel(
         setSlideProgress(
           computeSlideProgress(activeSlide, lastSlide, dx, node.clientWidth),
         );
-        dragX = clampDragX(activeSlide, lastSlide, dx);
+        dragX = clampDragX(activeSlide, lastSlide, dx) * inlineSign;
       },
       GESTURE_OPTIONS,
     );
@@ -108,6 +124,7 @@ export function useSwipeCarousel(
 
   function setupSwipe(node: HTMLElement, enabled = true) {
     let gesture: DragGesture | undefined;
+    isRtl = getComputedStyle(node).direction === 'rtl';
 
     if (enabled) {
       gesture = createGesture(node);
@@ -132,6 +149,9 @@ export function useSwipeCarousel(
     },
     get isDragging() {
       return isDragging;
+    },
+    get lastSlide() {
+      return lastSlide;
     },
     get slideProgress() {
       return slideProgress;

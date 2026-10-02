@@ -11,7 +11,7 @@
   import AllTimeStatsDrawerLink from "./_internal/AllTimeStatsDrawerLink.svelte";
   import WatchStats from "./_internal/WatchStats.svelte";
   import AllTimeLink from "./AllTimeLink.svelte";
-  import SwipeCarousel from "./SwipeCarousel.svelte";
+  import SwipeCarousel from "$lib/components/carousel/SwipeCarousel.svelte";
   import YearToDateLink from "./YearToDateLink.svelte";
 
   const source = "month-to-date";
@@ -75,11 +75,15 @@
         <WatchStats stats={$allTimeStats} isLoading={$isAllTimeLoading} />
       {/snippet}
       <SwipeCarousel
-        slides={[monthToDateSlide, allTimeSlide]}
+        items={[monthToDateSlide, allTimeSlide]}
         enabled={$isMe}
         onSlideProgress={(p) => (slideProgress = p)}
         onDragging={(d) => (isDragging = d)}
-      />
+      >
+        {#snippet item(slide)}
+          {@render slide()}
+        {/snippet}
+      </SwipeCarousel>
     {:else}
       <WatchStats stats={$monthToDate} isLoading={$isLoading} />
     {/if}
