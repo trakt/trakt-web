@@ -3,17 +3,18 @@
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { time } from "$lib/utils/timing/time";
   import { onMount } from "svelte";
-  import { EMOJI_BASE_URL } from "./constants";
+  import { EMOJI_BASE_URL } from "./constants.ts";
+
 
   const {
     code,
     label,
     animation = "none",
-    index,
+    index = 0,
   }: {
     code: string;
     label: string;
-    index: number;
+    index?: number;
     animation?: "initial" | "infinite" | "none";
   } = $props();
 
@@ -90,8 +91,8 @@
     justify-content: center;
     align-items: center;
 
-    width: var(--ni-24);
-    height: var(--ni-24);
+    width: var(--reaction-emoji-box, var(--ni-24));
+    height: var(--reaction-emoji-box, var(--ni-24));
 
     :global(img) {
       width: var(--ni-18);

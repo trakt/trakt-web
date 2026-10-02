@@ -3900,6 +3900,126 @@
       "default": "Spoiler",
       "description": "Text for the spoiler reaction. The value is sent back from the Trakt API."
     },
+    "translated_value_reaction_heart_eyes": {
+      "default": "Heart eyes",
+      "description": "Text for the heart eyes reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_rofl": {
+      "default": "Rolling on the floor",
+      "description": "Text for the rofl reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_holding_back_tears": {
+      "default": "Holding back tears",
+      "description": "Text for the holding back tears reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_partying": {
+      "default": "Partying",
+      "description": "Text for the partying reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_mind_blown": {
+      "default": "Mind blown",
+      "description": "Text for the mind blown reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_cursing": {
+      "default": "Cursing",
+      "description": "Text for the cursing reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_weary": {
+      "default": "Weary",
+      "description": "Text for the weary reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_woozy": {
+      "default": "Woozy",
+      "description": "Text for the woozy reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_yawning": {
+      "default": "Yawning",
+      "description": "Text for the yawning reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_shushing": {
+      "default": "Shushing",
+      "description": "Text for the shushing reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_smiling_tear": {
+      "default": "Smiling through tears",
+      "description": "Text for the smiling tear reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_neutral": {
+      "default": "Neutral",
+      "description": "Text for the neutral reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_anxious": {
+      "default": "Anxious",
+      "description": "Text for the anxious reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_thinking": {
+      "default": "Thinking",
+      "description": "Text for the thinking reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_flushed": {
+      "default": "Flushed",
+      "description": "Text for the flushed reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_melting": {
+      "default": "Melting",
+      "description": "Text for the melting reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_grimacing": {
+      "default": "Grimacing",
+      "description": "Text for the grimacing reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_vomiting": {
+      "default": "Vomiting",
+      "description": "Text for the vomiting reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_eye_roll": {
+      "default": "Eye roll",
+      "description": "Text for the eye roll reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_rock_on": {
+      "default": "Rock on",
+      "description": "Text for the rock on reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_skull": {
+      "default": "Dead",
+      "description": "Text for the skull reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_popcorn": {
+      "default": "Popcorn",
+      "description": "Text for the popcorn reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_fire": {
+      "default": "Fire",
+      "description": "Text for the fire reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_crying": {
+      "default": "Crying",
+      "description": "Text for the crying reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_pinched_fingers": {
+      "default": "Chef's kiss",
+      "description": "Text for the pinched fingers reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_broken_heart": {
+      "default": "Broken heart",
+      "description": "Text for the broken heart reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_freezing": {
+      "default": "Freezing",
+      "description": "Text for the freezing reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_disguised": {
+      "default": "Disguised",
+      "description": "Text for the disguised reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_nerd": {
+      "default": "Nerd",
+      "description": "Text for the nerd reaction. The value is sent back from the Trakt API."
+    },
+    "translated_value_reaction_monocle": {
+      "default": "Monocle",
+      "description": "Text for the monocle reaction. The value is sent back from the Trakt API."
+    },
     "button_label_popup_reactions": {
       "default": "Reactions",
       "description": "Aria-label for the button that opens the reactions popup."
@@ -12085,6 +12205,22 @@
           "type": "string"
         }
       }
+    },
+    "button_label_more_reactions": {
+      "default": "More reactions",
+      "description": "Aria-label for the button in the reaction tray that swaps the quick row for a search over every reaction."
+    },
+    "button_label_quick_reactions": {
+      "default": "Quick reactions",
+      "description": "Aria-label for the button that returns the reaction search to the quick row of reactions."
+    },
+    "input_placeholder_search_reactions": {
+      "default": "Search reactions",
+      "description": "Placeholder in the reaction search field, shown after opening the full reaction set from the tray."
+    },
+    "reactions_search_empty": {
+      "default": "No reactions match that",
+      "description": "Shown under the reaction search field when the typed text matches none of the reactions."
     }
   }
 }

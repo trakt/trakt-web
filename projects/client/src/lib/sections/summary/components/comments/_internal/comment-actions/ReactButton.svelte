@@ -1,23 +1,19 @@
 <script lang="ts">
   import ReactionIcon from "$lib/components/icons/ReactionIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { usePortal } from "$lib/features/portal/usePortal";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
-  import { scale } from "svelte/transition";
-  import ReactionPicker from "./ReactionPicker.svelte";
-  import ReactionsDistribution from "./ReactionsDistribution.svelte";
+  import { reactionsSchema } from "@trakt/api";
+  import ReactionPicker from "$lib/components/reactions/ReactionPicker.svelte";
+  import ReactionsDistribution from "$lib/components/reactions/ReactionsDistribution.svelte";
+  import ReactionsPopup from "$lib/components/reactions/ReactionsPopup.svelte";
   import ReactionsSummary from "./ReactionsSummary.svelte";
+  import { toReactionPickerOptions } from "$lib/components/reactions/toReactionPickerOptions.ts";
   import { useCommentReaction } from "./useCommentReaction";
   import { useCommentReactions } from "./useCommentReactions";
 
   const { comment }: { comment: MediaComment } = $props();
-
-  const { portalTrigger, portal, isOpened, close } = usePortal({
-    placement: { position: "top" },
-    type: "persistent",
-  });
 
   // FIXME: add reactions support to replies and switch to extended=reactions everywhere
   const { currentReaction, summary } = $derived(
@@ -35,6 +31,9 @@
 
     react(reaction);
   }
+
+  const options = toReactionPickerOptions(reactionsSchema.options);
+  const chosen = $derived($currentReaction ? [$currentReaction] : []);
 
   const isDisabled = $derived($isReacting);
   const hasDistribution = $derived($summary.count > 0 || $isReacting);
@@ -55,16 +54,39 @@
 {/snippet}
 
 <RenderFor audience="authenticated">
-  <button
-    class="trakt-react-button"
-    use:portalTrigger
-    disabled={isDisabled}
-    aria-label={m.button_label_popup_reactions()}
-    class:is-current={$currentReaction}
-    class:has-summary={$summary.count > 0}
-  >
-    {@render content()}
-  </button>
+  <ReactionsPopup reserve="var(--ni-196)">
+    {#snippet trigger(attach)}
+      <button
+        class="trakt-react-button"
+        use:attach
+        disabled={isDisabled}
+        aria-label={m.button_label_popup_reactions()}
+        class:is-current={$currentReaction}
+        class:has-summary={$summary.count > 0}
+      >
+        {@render content()}
+      </button>
+    {/snippet}
+
+    {#snippet children(close)}
+      {#if hasDistribution}
+        <ReactionsDistribution
+          reactions={reactionsSchema.options}
+          distribution={$summary.distribution}
+          current={chosen}
+          isLoading={$isReacting}
+          title={m.header_comment_reactions()}
+        />
+      {/if}
+
+      <ReactionPicker
+        {options}
+        {chosen}
+        onSelect={reactionHandler}
+        onClose={close}
+      />
+    {/snippet}
+  </ReactionsPopup>
 </RenderFor>
 
 <RenderFor audience="public">
@@ -72,34 +94,6 @@
     {@render content()}
   </div>
 </RenderFor>
-
-{#if $isOpened}
-  <div
-    class="trakt-reaction-popup"
-    use:portal
-    class:has-distribution={hasDistribution}
-  >
-    <div
-      class="transition-wrapper"
-      in:scale={{ duration: 150 }}
-      out:scale={{ duration: 300 }}
-    >
-      <ReactionPicker
-        currentReaction={$currentReaction}
-        onChange={reactionHandler}
-        onClose={close}
-      />
-
-      {#if hasDistribution}
-        <ReactionsDistribution
-          distribution={$summary.distribution}
-          currentReaction={$currentReaction}
-          isLoading={$isReacting}
-        />
-      {/if}
-    </div>
-  </div>
-{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -150,47 +144,6 @@
           background-color: var(--color-reaction-background-hover);
           cursor: pointer;
         }
-      }
-    }
-  }
-
-  .transition-wrapper {
-    width: 100%;
-
-    position: absolute;
-    display: flex;
-
-    background-color: var(--color-reaction-background);
-    border-radius: var(--border-radius-xxl);
-
-    box-shadow: var(--shadow-menu);
-  }
-
-  .trakt-reaction-popup {
-    position: relative;
-
-    width: var(--ni-340);
-    height: var(--ni-48);
-
-    &.has-distribution {
-      height: var(--ni-196);
-    }
-
-    &:global([data-popup-position="top"]) {
-      .transition-wrapper {
-        transform-origin: calc(50% - var(--alignment-correction, 0px)) bottom;
-        flex-direction: column-reverse;
-
-        bottom: 0;
-      }
-    }
-
-    &:global([data-popup-position="bottom"]) {
-      .transition-wrapper {
-        transform-origin: calc(50% - var(--alignment-correction, 0px)) top;
-        flex-direction: column;
-
-        top: 0;
       }
     }
   }
