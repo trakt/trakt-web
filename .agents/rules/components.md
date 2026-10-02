@@ -103,6 +103,11 @@ Key runes:
 | `$effect`       | Side effect that re-runs on dependency change (do not use unless absolutely necessary) |
 | `$effect.pre`   | Side effect that runs before DOM updates (do not use unless absolutely necessary)      |
 
+- Avoid `$bindable`: pass a prop plus a callback (`isOpen` + `onToggle`) so
+  props stay `const` and state has one owner.
+- A snippet named like one of the component's own props renders itself (stack
+  overflow). Rename the prop when destructuring: `{ trigger: badge }`.
+
 ---
 
 ## Props Type Files
@@ -856,7 +861,8 @@ property (`inset-inline-start`, not `left`), or the animation silently dies.
   encode meaning in color alone.
 - Decorative imagery uses empty `alt=""`; meaningful imagery has descriptive
   `alt`. Decorative SVGs that are not directional need no label.
-- Respect `prefers-reduced-motion` for non-essential animation.
+- Respect `prefers-reduced-motion` for non-essential animation. In JS, use
+  `useMedia(WellKnownMediaQuery.reducedMotion)`, not a raw `matchMedia` read.
 
 ## Head Content: `app.html` vs `<svelte:head>`
 
