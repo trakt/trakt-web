@@ -5,6 +5,7 @@
   import { createRichTextEditor } from "./_internal/createRichTextEditor.ts";
   import { insertMention } from "./_internal/insertMention.ts";
   import MentionList from "./_internal/MentionList.svelte";
+  import { stepActiveIndex } from "./_internal/stepActiveIndex.ts";
   import type { MentionSuggestionState } from "./_internal/MentionSuggestionState.ts";
   import RichTextToolbar from "./_internal/RichTextToolbar.svelte";
   import { toMentionMatches } from "./_internal/toMentionMatches.ts";
@@ -22,6 +23,9 @@
     disabled = false,
     autofocus = false,
     mentions = [],
+    describedBy,
+    toolbarActions,
+    field,
   }: RichTextEditorProps = $props();
 
   const maxSuggestions = 8;
@@ -73,9 +77,13 @@
       return false;
     }
 
-    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-      const step = event.key === "ArrowDown" ? 1 : -1;
-      activeIndex = (activeIndex + step + suggestions.length) % suggestions.length;
+    const next = stepActiveIndex({
+      key: event.key,
+      activeIndex,
+      count: suggestions.length,
+    });
+    if (next != null) {
+      activeIndex = next;
       return true;
     }
 
@@ -97,6 +105,7 @@
         markdown: initialMarkdown,
         placeholder,
         label,
+        describedBy,
         autofocus,
         onUpdate: (updated) => {
           lastMarkdown = trimBlankLines(updated.getMarkdown());
@@ -136,9 +145,18 @@
 
 </script>
 
-<div class="trakt-rich-text-editor" class:is-disabled={disabled}>
-  <RichTextToolbar {editor} {toolbarState} {disabled} {mentions} />
+{#snippet surface()}
   <div class="editor-surface" inert={disabled} {@attach mountEditor}></div>
+{/snippet}
+
+
+<div class="trakt-rich-text-editor" class:is-disabled={disabled}>
+  {#if field}
+    {@render field(surface)}
+  {:else}
+    {@render surface()}
+  {/if}
+
   {#if suggestions.length > 0}
     <MentionList
       mentions={suggestions}
@@ -146,6 +164,14 @@
       {activeIndex}
     />
   {/if}
+
+  <RichTextToolbar
+    {editor}
+    {toolbarState}
+    {disabled}
+    {mentions}
+    actions={toolbarActions}
+  />
 </div>
 
 <style lang="scss">

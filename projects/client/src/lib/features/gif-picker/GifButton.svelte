@@ -21,7 +21,6 @@
   label={m.button_label_add_gif()}
   type="button"
   style="ghost"
-  size="small"
   {disabled}
   --color-foreground="var(--color-text-primary)"
 >

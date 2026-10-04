@@ -1,3 +1,4 @@
+import type { Snippet } from 'svelte';
 import type { RichTextMention } from './RichTextMention.ts';
 
 export type RichTextEditorProps = {
@@ -8,4 +9,7 @@ export type RichTextEditorProps = {
   disabled?: boolean;
   autofocus?: boolean;
   mentions?: ReadonlyArray<RichTextMention>;
+  describedBy?: string;
+  toolbarActions?: Snippet;
+  field?: Snippet<[Snippet]>;
 };

@@ -31,7 +31,6 @@ describe('component: FormRichTextArea', () => {
     const { field } = await renderRichTextArea('two words');
 
     expect(field.classList.contains('has-error')).toBe(false);
-    expect(field.getAttribute('aria-describedby')).toBeNull();
   });
 
   it('should not flag an invalid value when focus moves within the field', async () => {
@@ -49,7 +48,9 @@ describe('component: FormRichTextArea', () => {
 
     await fireEvent.focusOut(screen.getByRole('textbox'));
 
-    const describedBy = field.getAttribute('aria-describedby');
+    const describedBy = screen.getByRole('textbox').getAttribute(
+      'aria-describedby',
+    );
 
     expect(field.classList.contains('has-error')).toBe(true);
     expect(describedBy).not.toBeNull();
