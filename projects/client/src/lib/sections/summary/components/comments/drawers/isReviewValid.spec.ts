@@ -82,4 +82,17 @@ describe('isReviewValid', () => {
   it('should count mixed Japanese and English words correctly', () => {
     expect(isReviewValid('この映画は really amazing')).toBe(true);
   });
+
+  it('should not count spoiler tags as words', () => {
+    expect(isReviewValid('one two [spoiler]three[/spoiler] four')).toBe(false);
+  });
+
+  it('should count a mention by its name, not its link', () => {
+    expect(
+      isReviewValid('loved [Keanu Reeves](/people/keanu-reeves) a lot'),
+    ).toBe(true);
+    expect(isReviewValid('[Keanu Reeves](/people/keanu-reeves) yes')).toBe(
+      false,
+    );
+  });
 });

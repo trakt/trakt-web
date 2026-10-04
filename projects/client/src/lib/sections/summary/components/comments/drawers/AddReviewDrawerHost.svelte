@@ -140,6 +140,29 @@
   />
 {/snippet}
 
+{#snippet selectedGif()}
+  {#if gif}
+    <div
+      class="review-gif"
+      transition:slide={{
+        axis: "x",
+        duration: motion(250),
+        easing: cubicOut,
+      }}
+    >
+      {#key gif.url}
+        <div class="review-gif-pop" in:gifPop={{ delay: 80, duration: motion(450) }}>
+          <SelectedGif
+            {gif}
+            disabled={$isCommenting}
+            onRemove={() => (gif = null)}
+          />
+        </div>
+      {/key}
+    </div>
+  {/if}
+{/snippet}
+
 {#snippet badge()}
   <SpoilerSwitch
     disabled={$isCommenting}
@@ -162,7 +185,10 @@
     onSubmit={handleSubmit}
     onCancel={onClose}
     disabled={$isCommenting}
+    isCancelDisabled={$isCommenting}
     isValid={isSubmittable}
+    inlineActions
+    confirmButtonFill="solid"
     confirmButtonText={isEditing
       ? m.button_text_edit_comment()
       : m.button_text_add_review()}
@@ -171,44 +197,22 @@
       : m.button_label_add_comment()}
   >
     <div class="trakt-review-properties">
-      <div class="review-composer">
-        <FormRichTextArea
-          placeholder={m.textarea_placeholder_comment()}
-          onChange={(value) => (comment = value)}
-          disabled={$isCommenting}
-          autofocus
-          value={comment}
-          {actions}
-          mentions={$mentions}
-          validation={gif
-            ? undefined
-            : {
-                isValid: isReviewValid,
-                errorText: m.translated_value_error_comment_invalid_content(),
-              }}
-        />
-
-        {#if gif}
-          <div
-            class="review-gif"
-            transition:slide={{
-              axis: "x",
-              duration: motion(250),
-              easing: cubicOut,
+      <FormRichTextArea
+        placeholder={m.textarea_placeholder_comment()}
+        onChange={(value) => (comment = value)}
+        disabled={$isCommenting}
+        autofocus
+        value={comment}
+        {actions}
+        mentions={$mentions}
+        validation={gif
+          ? undefined
+          : {
+              isValid: isReviewValid,
+              errorText: m.translated_value_error_comment_invalid_content(),
             }}
-          >
-            {#key gif.url}
-              <div in:gifPop={{ delay: 80, duration: motion(450) }}>
-                <SelectedGif
-                  {gif}
-                  disabled={$isCommenting}
-                  onRemove={() => (gif = null)}
-                />
-              </div>
-            {/key}
-          </div>
-        {/if}
-      </div>
+        attachment={selectedGif}
+      />
 
       {#if $error}
         <DismissibleError
@@ -234,19 +238,15 @@
     gap: var(--gap-xs);
   }
 
-  .review-composer {
-    container-type: inline-size;
-
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: start;
-  }
-
   .review-gif {
     padding-inline-start: var(--gap-xs);
 
-    --selected-gif-height: calc(5lh + 2 * var(--ni-12));
+    --selected-gif-height: 100%;
     --selected-gif-max-width: min(var(--ni-160), 40cqi);
     --selected-gif-max-height: none;
+  }
+
+  .review-gif-pop {
+    height: 100%;
   }
 </style>

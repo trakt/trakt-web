@@ -14,6 +14,7 @@
     confirmButtonText,
     confirmButtonLabel,
     inlineActions = false,
+    confirmButtonFill = "tint",
     isValid,
   }: FormProps = $props();
 
@@ -58,10 +59,12 @@
     <Button
       size="small"
       variant="primary"
-      color="purple"
+      color={confirmButtonFill === "solid" ? "custom" : "purple"}
       disabled={disabled || !(isValid ?? $isFormValid)}
       label={confirmButtonLabel}
       type="submit"
+      --color-background-custom="var(--color-background-purple)"
+      --color-foreground-custom="var(--shade-10)"
     >
       {confirmButtonText}
     </Button>

@@ -46,6 +46,8 @@
     display: flex;
     width: fit-content;
     max-width: 100%;
+    height: var(--selected-gif-height, auto);
+    box-sizing: border-box;
 
     border-radius: var(--border-radius-s);
     border: var(--border-thickness-xxs) solid var(--color-border);
@@ -55,7 +57,7 @@
       display: block;
 
       width: auto;
-      height: var(--selected-gif-height, auto);
+      height: 100%;
       max-width: var(--selected-gif-max-width, var(--ni-160));
       max-height: var(--selected-gif-max-height, var(--ni-160));
       object-fit: cover;

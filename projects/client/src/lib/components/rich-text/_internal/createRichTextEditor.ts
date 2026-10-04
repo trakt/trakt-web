@@ -8,6 +8,7 @@ export type CreateRichTextEditorProps = {
   markdown: string;
   placeholder: string;
   label: string;
+  describedBy?: string;
   autofocus: boolean;
   onUpdate: (editor: Editor) => void;
   onTransaction: (editor: Editor) => void;
@@ -20,6 +21,7 @@ export async function createRichTextEditor({
   markdown,
   placeholder,
   label,
+  describedBy,
   autofocus,
   onUpdate,
   onTransaction,
@@ -71,6 +73,7 @@ export async function createRichTextEditor({
         role: 'textbox',
         'aria-multiline': 'true',
         'aria-label': label,
+        ...(describedBy ? { 'aria-describedby': describedBy } : {}),
       },
     },
     onUpdate: ({ editor }) => onUpdate(editor),

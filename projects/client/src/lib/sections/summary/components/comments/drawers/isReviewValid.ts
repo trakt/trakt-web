@@ -6,6 +6,9 @@ const CjkPattern =
   /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/gu;
 const wordPattern = /[\p{L}\p{N}]+/gu;
 
+const spoilerTagPattern = /\[\/?spoiler\]/gi;
+const linkTargetPattern = /\]\([^)]*\)/g;
+
 const segmenter = typeof Intl.Segmenter === 'function'
   ? new Intl.Segmenter(undefined, { granularity: 'word' })
   : null;
@@ -26,10 +29,17 @@ function countWithoutSegmenter(review: string): number {
   return cjkCharacters + words;
 }
 
+function toReadableText(review: string): string {
+  return review
+    .replace(spoilerTagPattern, ' ')
+    .replace(linkTargetPattern, ']');
+}
+
 export function isReviewValid(review: string): boolean {
+  const text = toReadableText(review);
   const count = segmenter
-    ? countWithSegmenter(review, segmenter)
-    : countWithoutSegmenter(review);
+    ? countWithSegmenter(text, segmenter)
+    : countWithoutSegmenter(text);
 
   return count >= wordCountThreshold;
 }

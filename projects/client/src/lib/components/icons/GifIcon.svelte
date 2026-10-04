@@ -1,28 +1,28 @@
 <svg
-  width="24"
+  width="36"
   height="24"
-  viewBox="0 0 24 24"
+  viewBox="0 0 36 24"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
 >
   <rect
-    x="2"
-    y="5"
-    width="20"
-    height="14"
-    rx="3"
+    x="0.75"
+    y="0.75"
+    width="34.5"
+    height="22.5"
+    rx="5.25"
     stroke="currentColor"
-    stroke-width="2"
+    stroke-opacity="0.55"
+    stroke-width="1.5"
   />
   <text
-    x="12"
-    y="12.5"
+    x="18"
+    y="12"
     text-anchor="middle"
     dominant-baseline="central"
-    font-family="Arial, Helvetica, sans-serif"
-    font-size="8"
-    font-weight="700"
-    letter-spacing="0.5"
+    font-size="11"
+    font-weight="800"
+    letter-spacing="0.66"
     fill="currentColor"
   >GIF</text>
 </svg>

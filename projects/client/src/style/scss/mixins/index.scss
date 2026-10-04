@@ -215,6 +215,20 @@
   }
 }
 
+@mixin input-field-surface {
+  border-radius: var(--border-radius-m);
+  border: calc(var(--border-thickness-xxs) * 1.5) var(--color-border) solid;
+
+  background-color: var(--color-input-background);
+  backdrop-filter: blur(var(--ni-4));
+
+  transition: border-color var(--transition-increment) ease-in-out;
+
+  &:focus-within {
+    border-color: var(--color-input-focus);
+  }
+}
+
 @mixin card-tile-surface {
   box-sizing: border-box;
   padding: var(--ni-12);
