@@ -2,35 +2,12 @@ import {
   SHARE_TYPE_DIMENSIONS,
   type ShareType,
 } from '$lib/features/share/models/ShareType.ts';
-import ShareCard from '$lib/features/share/ShareCard.svelte';
-import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/assets.ts';
-import { error } from '$lib/utils/console/print.ts';
-import { IS_DEV } from '$lib/utils/env/index.ts';
 import type { RequestHandler } from '@sveltejs/kit';
-import { render } from 'svelte/server';
-import { buildImageMetadata } from './_internal/buildImageMetadata.ts';
-import { buildImagePath } from './_internal/buildImagePath.ts';
-import { createServerTiming } from './_internal/createServerTiming.ts';
-import { fetchMediaData } from './_internal/fetchMediaData.ts';
-import { fetchWithUserAgent } from './_internal/fetchWithUserAgent.ts';
-import { loadFallbackShareFonts } from './_internal/loadFallbackShareFonts.ts';
-import { loadPosterImages } from './_internal/loadPosterImages.ts';
-import { loadShareFonts } from './_internal/loadShareFonts.ts';
-import { renderShareCard } from './_internal/renderShareCard.ts';
-import { resolvePosterSource } from './_internal/resolvePosterSource.ts';
-import { warmPoster } from './_internal/warmPoster.ts';
-
-const cacheControl = 'public, max-age=604800';
-
-const imageHeaders = {
-  'Content-Type': 'image/jpeg',
-  'Cache-Control': cacheControl,
-};
+import { respondWithMediaShareImage } from './_internal/respondWithMediaShareImage.ts';
 
 // FIXME: add support for HMAC signed urls
-export const GET: RequestHandler = async (
-  { request, url, fetch, platform },
-) => {
+export const GET: RequestHandler = (event) => {
+  const { url } = event;
   const type = url.searchParams.get('type');
   const slug = url.searchParams.get('slug');
   const variant = url.searchParams.get('variant');
@@ -51,120 +28,11 @@ export const GET: RequestHandler = async (
     return new Response('Invalid variant parameter', { status: 400 });
   }
 
-  if (!IS_DEV && !platform?.env?.R2_WALTER) {
-    return new Response('Server configuration error', { status: 500 });
-  }
-
-  const shareType = variant as ShareType;
-  const imagePath = buildImagePath({ shareType, slug, type });
-  const timing = createServerTiming();
-  const isTimed = url.searchParams.get('timing') === 'true';
-  const responseHeaders = () =>
-    isTimed
-      ? { ...imageHeaders, 'Server-Timing': timing.toHeader() }
-      : imageHeaders;
-
-  const fontsRequest = timing.measure(
-    'fonts',
-    async () =>
-      await loadShareFonts({ bucket: platform?.env?.R2_WALTER }) ??
-        await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
-          error('Failed to load fallback share fonts:', e);
-          return [];
-        }),
-  );
-
-  if (!IS_DEV && platform) {
-    const cachedImage = await timing.measure(
-      'cache',
-      () => platform.env.R2_WALTER.get(imagePath),
-    );
-    if (cachedImage) {
-      /*
-        Cast needed due to structural mismatch between Cloudflare's ReadableStream
-        and the DOM ReadableStream, they're the same at runtime.
-      */
-      return new Response(cachedImage.body as BodyInit, {
-        headers: responseHeaders(),
-      });
-    }
-  }
-
-  const fetchFn = fetchWithUserAgent({
-    userAgent: request.headers.get('user-agent'),
-    fetch,
+  return respondWithMediaShareImage({
+    event,
+    type,
+    slug,
+    shareType: variant as ShareType,
+    cacheControl: 'public, max-age=604800',
   });
-
-  const mediaDataRequest = timing.measure(
-    'data',
-    () =>
-      fetchMediaData({
-        type,
-        slug,
-        fetch: fetchFn,
-        onSummary: (media) =>
-          timing.measure('poster', () =>
-            warmPoster({
-              posterUrl: resolvePosterSource(media.poster.url.medium),
-              fetch: globalThis.fetch,
-            })),
-      }).catch(() => null),
-  );
-
-  const [mediaData, fonts] = await Promise.all([
-    mediaDataRequest,
-    fontsRequest,
-  ]);
-
-  if (!mediaData) {
-    return new Response('Data not found', { status: 404 });
-  }
-
-  const { media, ratings, crew } = mediaData;
-  const toBuffer = async (posterUrl: string) => {
-    const images = await timing.measure(
-      'images',
-      () => loadPosterImages({ posterUrl, fetch: globalThis.fetch }),
-    );
-    const { body, head } = render(ShareCard, {
-      props: { media, crew, ratings, posterUrl, variant: shareType },
-    });
-
-    return renderShareCard({
-      html: body + head,
-      variant: shareType,
-      fonts,
-      images,
-      debug: IS_DEV && url.searchParams.get('debug') === 'true',
-    });
-  };
-
-  try {
-    const buffer = await toBuffer(
-      resolvePosterSource(media.poster.url.medium),
-    ).catch((e: unknown) => {
-      error('Failed to render with the media poster:', e);
-      return toBuffer(resolvePosterSource(MEDIA_POSTER_PLACEHOLDER));
-    });
-
-    if (!IS_DEV && platform) {
-      const cached = platform.env.R2_WALTER
-        .put(imagePath, buffer, {
-          httpMetadata: { contentType: 'image/jpeg' },
-          customMetadata: buildImageMetadata({ media, cachedAt: new Date() }),
-        })
-        .catch((e: unknown) => error('Failed to cache image in R2:', e));
-
-      if (platform.context) {
-        platform.context.waitUntil(cached);
-      } else {
-        await cached;
-      }
-    }
-
-    return new Response(buffer, { headers: responseHeaders() });
-  } catch (e) {
-    error('ImageResponse error:', e);
-    return new Response('Failed to generate image', { status: 500 });
-  }
 };
