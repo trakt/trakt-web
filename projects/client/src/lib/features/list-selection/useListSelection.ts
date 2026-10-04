@@ -1,12 +1,9 @@
-import { NOOP_LIST_SELECTION_CONTEXT } from './_internal/NOOP_LIST_SELECTION_CONTEXT.ts';
-import { getListSelectionContext } from './_internal/getListSelectionContext.ts';
+import { listSelectionStore } from './listSelectionStore.svelte.ts';
 
 /**
- * Reads the bulk-selection state set up by `ListSelectionProvider`. Safe to
- * call from a component that is not always rendered inside one (e.g.
- * `ListActions`, shared with pages that never enter bulk-edit mode) - it
- * falls back to an inert no-op context rather than throwing.
+ * Reads the shared bulk-selection state for the current list page - see
+ * `listSelectionStore` for why this is a singleton rather than context.
  */
 export function useListSelection() {
-  return getListSelectionContext() ?? NOOP_LIST_SELECTION_CONTEXT;
+  return listSelectionStore;
 }

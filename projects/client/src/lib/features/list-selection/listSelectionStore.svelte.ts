@@ -1,21 +1,27 @@
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
-import { setContext } from 'svelte';
-import { computeRangeSelection } from './computeRangeSelection.ts';
-import {
-  LIST_SELECTION_CONTEXT_KEY,
-  type ListSelectionContext,
-  type SelectionClickModifiers,
-} from './ListSelectionContext.ts';
+import { computeRangeSelection } from './_internal/computeRangeSelection.ts';
+import type {
+  ListSelectionContext,
+  SelectionClickModifiers,
+} from './_internal/ListSelectionContext.ts';
 
 /**
- * Creates the per-list selection state for bulk editing: which items are
- * selected, whether edit mode is active, and the rendered order every
- * `SelectableListItem` registers itself into, which shift-click ranges are
- * computed against. Items register with their full `ListItem` so bulk
- * actions (delete, and later copy) can build their request bodies straight
- * from the selection without the page having to keep a second item cache.
+ * Bulk-selection state for a list's items: which are selected, whether edit
+ * mode is active, and the rendered order every `SelectableListItem`
+ * registers itself into, which shift-click ranges are computed against.
+ *
+ * This is a plain module-level singleton, not Svelte context. `ListActions`
+ * (the entry point, in the list's "..." menu) and the grid of
+ * `SelectableListItem`s are unrelated branches of the component tree - the
+ * menu is rendered by the global `TopNavbar` off of `useNavbarState()`'s
+ * store, not as a descendant of the page that set it. Context can only flow
+ * to actual descendants, so a shared module singleton is the only thing both
+ * sides can reach. Only one list page is ever open at a time, so a single
+ * instance is enough; `reset()` clears it between list pages.
  */
-export function createListSelectionContext(): ListSelectionContext {
+export function createListSelectionStore(): ListSelectionContext & {
+  reset: () => void;
+} {
   let isEditing = $state(false);
   let selected = $state<Set<string>>(new Set());
   let order = $state<string[]>([]);
@@ -35,6 +41,12 @@ export function createListSelectionContext(): ListSelectionContext {
     isEditing = false;
     selected = new Set();
     anchorKey = null;
+  }
+
+  function reset() {
+    exitEdit();
+    order = [];
+    itemsByKey = new Map();
   }
 
   function toggleOne(key: string) {
@@ -103,7 +115,7 @@ export function createListSelectionContext(): ListSelectionContext {
     }
   }
 
-  const context: ListSelectionContext = {
+  return {
     get isEditing() {
       return isEditing;
     },
@@ -122,14 +134,13 @@ export function createListSelectionContext(): ListSelectionContext {
     isSelected: (key) => selected.has(key),
     enterEdit,
     exitEdit,
+    reset,
     click,
     selectAll,
     clearSelection,
     register,
     unregister,
   };
-
-  setContext(LIST_SELECTION_CONTEXT_KEY, context);
-
-  return context;
 }
+
+export const listSelectionStore = createListSelectionStore();

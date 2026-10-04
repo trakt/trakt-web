@@ -1,7 +1,5 @@
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 
-export const LIST_SELECTION_CONTEXT_KEY = Symbol('list-selection-context');
-
 export type SelectionClickModifiers = {
   shiftKey: boolean;
   ctrlKey: boolean;

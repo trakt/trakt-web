@@ -9,6 +9,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useListSelection } from "$lib/features/list-selection/useListSelection.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
+  import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll.ts";
   import { useBulkDeleteFromList } from "./useBulkDeleteFromList.ts";
 
   const { list }: { list: MediaListSummary } = $props();
@@ -51,7 +52,10 @@
   }
 </script>
 
-<div class="trakt-bulk-delete-list-header">
+<div
+  class="trakt-bulk-delete-list-header"
+  use:trackWindowScroll={"is-scrolled"}
+>
   <button
     type="button"
     class="select-all"
@@ -114,8 +118,19 @@
     gap: var(--gap-s);
 
     padding: var(--ni-12) var(--layout-distance-side);
-    background: var(--color-floating-background);
-    box-shadow: var(--shadow-floating);
+
+    // Transparent at rest - this sits flush above the grid with nothing to
+    // show through yet. Once cards scroll underneath (`.is-scrolled`, set by
+    // `trackWindowScroll`), it gets the same frosted backdrop as the app
+    // navbar, so content never shows through a see-through sticky bar.
+    transition: calc(2 * var(--transition-increment)) ease-in-out;
+    transition-property: background-color, box-shadow;
+
+    &:global(.is-scrolled) {
+      background-color: var(--color-background-navbar);
+      box-shadow: var(--shadow-navbar);
+      backdrop-filter: blur(var(--ni-8));
+    }
   }
 
   .select-all {

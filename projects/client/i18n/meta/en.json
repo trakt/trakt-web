@@ -12601,11 +12601,11 @@
       "description": "Aria-label for the button that collapses the expanded reaction tray back to the quick row."
     },
     "button_text_bulk_edit_list": {
-      "default": "Edit",
+      "default": "Bulk edit",
       "description": "Text for the button that enters bulk-selection edit mode on a list's items."
     },
     "button_label_bulk_edit_list": {
-      "default": "Select items in {name} to delete them",
+      "default": "Bulk edit items in {name}",
       "description": "Aria-label for the button that enters bulk-selection edit mode on a list's items.",
       "variables": {
         "name": {
