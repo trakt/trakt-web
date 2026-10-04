@@ -3,7 +3,6 @@
   import { useListSelection } from "$lib/features/list-selection/useListSelection.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ListItem } from "$lib/requests/models/ListItem.ts";
-  import { disableNavigation } from "$lib/utils/actions/disableNavigation.ts";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard.ts";
   import { onMount, type Snippet } from "svelte";
 
@@ -29,6 +28,12 @@
     return () => selection.unregister(itemKey);
   });
 
+  // Capture phase, not bubble: the card's own link (and any nested gesture
+  // handlers) must never see this click while editing. A bubble-phase
+  // `onclick` here would also race Svelte's own delegated click dispatch -
+  // anything upstream calling stopPropagation() first (e.g. disableNavigation)
+  // sets `event.cancelBubble`, which Svelte checks before invoking a
+  // bubble-phase handler at all, silently dropping it.
   function handleClick(event: MouseEvent) {
     if (!isEditing) {
       return;
@@ -78,9 +83,8 @@
       ? m.button_label_deselect_list_item({ title })
       : m.button_label_select_list_item({ title }))
     : undefined}
-  use:disableNavigation={isEditing}
   use:triggerWithKeyboard
-  onclick={handleClick}
+  onclickcapture={handleClick}
   onpointerdown={handlePointerDown}
   onpointerup={clearLongPress}
   onpointermove={clearLongPress}

@@ -40,7 +40,7 @@
 
 {#snippet listActions()}
   {#if $list}
-    <ListActions list={$list} />
+    <ListActions list={$list} editable={isOwner} />
   {/if}
 {/snippet}
 
@@ -61,46 +61,44 @@
   hasDynamicContent={true}
   isIndexable={!isMissing}
 >
-  <ResponsiveNavbarStateSetter contentToggle="discover"
-    hasFilters
-    header={{
-      title: listName,
-      metaInfo: $list ? listMetaInfo : $currentDiscoverMode.text(),
-      actions: listActions,
-    }}
-  >
-    {#snippet headerActions()}
-      <ListSortActions
-        {options}
-        {urlBuilder}
-        current={$current}
-        disabled={$isLoading}
-      />
-    {/snippet}
-  </ResponsiveNavbarStateSetter>
-
-  <TraktPageCoverSetter />
-
-  {#if $list}
-    {#if isOwner}
-      <ListSelectionProvider>
-        <BulkListEditBar list={$list} />
-        <UserListPaginatedList
-          list={$list}
-          type={$mode}
-          sortBy={$current.sorting.value}
-          sortHow={$current.sortHow}
-          isEditable
+  <!--
+    Wraps the whole page unconditionally - cheap to provide, and the owner
+    gate lives on the controls that enter edit mode (ListActions' `editable`,
+    UserListPaginatedList's `isEditable`), not on the provider itself.
+  -->
+  <ListSelectionProvider>
+    <ResponsiveNavbarStateSetter contentToggle="discover"
+      hasFilters
+      header={{
+        title: listName,
+        metaInfo: $list ? listMetaInfo : $currentDiscoverMode.text(),
+        actions: listActions,
+      }}
+    >
+      {#snippet headerActions()}
+        <ListSortActions
+          {options}
+          {urlBuilder}
+          current={$current}
+          disabled={$isLoading}
         />
-      </ListSelectionProvider>
-    {:else}
+      {/snippet}
+    </ResponsiveNavbarStateSetter>
+
+    <TraktPageCoverSetter />
+
+    {#if $list}
+      {#if isOwner}
+        <BulkListEditBar list={$list} />
+      {/if}
+
       <UserListPaginatedList
         list={$list}
         type={$mode}
         sortBy={$current.sorting.value}
         sortHow={$current.sortHow}
+        isEditable={isOwner}
       />
     {/if}
-  {/if}
+  </ListSelectionProvider>
 </TraktPage>
-

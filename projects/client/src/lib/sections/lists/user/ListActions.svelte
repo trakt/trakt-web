@@ -5,6 +5,7 @@
   import Redirect from "$lib/components/router/Redirect.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useListSelection } from "$lib/features/list-selection/useListSelection.ts";
   import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
   import ReportButton from "$lib/features/report/ReportButton.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -15,6 +16,7 @@
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import AddFromListsButton from "./_internal/bulk-add/AddFromListsButton.svelte";
   import BulkAddDrawer from "./_internal/bulk-add/BulkAddDrawer.svelte";
+  import BulkEditListButton from "./_internal/BulkEditListButton.svelte";
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
@@ -32,9 +34,12 @@
   const {
     list,
     popupActions,
-  }: { list: MediaListSummary; popupActions?: Snippet } = $props();
+    editable = false,
+  }: { list: MediaListSummary; popupActions?: Snippet; editable?: boolean } =
+    $props();
 
   const { deleteList, isDeleting, isDeleted } = $derived(useDeleteList(list));
+  const selection = useListSelection();
 
   let showEditList = $state(false);
   let showReorderList = $state(false);
@@ -102,6 +107,13 @@
           onclick={() => (showReorderList = true)}
         />
         <AddFromListsButton {list} onClick={() => (showBulkAdd = true)} />
+        {#if editable}
+          <BulkEditListButton
+            name={list.name}
+            disabled={$isDeleting}
+            onclick={() => selection.enterEdit()}
+          />
+        {/if}
         <EditListButton
           {list}
           isDeleting={$isDeleting}

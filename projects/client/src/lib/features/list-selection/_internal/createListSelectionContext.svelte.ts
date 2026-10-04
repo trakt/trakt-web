@@ -116,6 +116,9 @@ export function createListSelectionContext(): ListSelectionContext {
     get selectedItems() {
       return [...selected].flatMap((key) => itemsByKey.get(key) ?? []);
     },
+    get totalCount() {
+      return order.length;
+    },
     isSelected: (key) => selected.has(key),
     enterEdit,
     exitEdit,

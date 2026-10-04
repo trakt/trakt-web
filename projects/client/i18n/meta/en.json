@@ -12679,6 +12679,14 @@
           "type": "string"
         }
       }
+    },
+    "button_text_unselect_all": {
+      "default": "Unselect all",
+      "description": "Text for the button that deselects every loaded item in bulk-selection edit mode, shown once everything is already selected."
+    },
+    "button_label_unselect_all_list_items": {
+      "default": "Unselect all items",
+      "description": "Aria-label for the button that deselects every loaded item in bulk-selection edit mode, shown once everything is already selected."
     }
   }
 }

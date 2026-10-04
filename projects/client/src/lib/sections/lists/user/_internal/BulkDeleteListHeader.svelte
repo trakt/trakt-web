@@ -37,17 +37,32 @@
   );
 
   const hasSelection = $derived(selection.selectedCount > 0);
+  const isAllSelected = $derived(
+    selection.totalCount > 0 && selection.selectedCount === selection.totalCount,
+  );
+
+  function toggleSelectAll() {
+    if (isAllSelected) {
+      selection.clearSelection();
+      return;
+    }
+
+    selection.selectAll();
+  }
 </script>
 
 <div class="trakt-bulk-delete-list-header">
   <button
     type="button"
     class="select-all"
-    onclick={selection.selectAll}
-    aria-label={m.button_label_select_all_list_items()}
+    onclick={toggleSelectAll}
+    aria-pressed={isAllSelected}
+    aria-label={isAllSelected
+      ? m.button_label_unselect_all_list_items()
+      : m.button_label_select_all_list_items()}
   >
-    <CheckboxIcon state="unchecked" />
-    {m.button_text_select_all()}
+    <CheckboxIcon state={isAllSelected ? "checked" : "unchecked"} />
+    {isAllSelected ? m.button_text_unselect_all() : m.button_text_select_all()}
   </button>
 
   <p class="secondary selected-count">

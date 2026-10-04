@@ -13,6 +13,8 @@ export type ListSelectionContext = {
   readonly selectedKeys: ReadonlySet<string>;
   readonly selectedCount: number;
   readonly selectedItems: ListItem[];
+  /** Every item currently registered (i.e. loaded and rendered). */
+  readonly totalCount: number;
   isSelected: (key: string) => boolean;
   enterEdit: (initialKey?: string) => void;
   exitEdit: () => void;
