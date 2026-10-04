@@ -16,6 +16,8 @@
   import { isNoIndexPath } from "./_internal/isNoIndexPath.ts";
   import type { MediaInfo } from "./_internal/MediaInfo.ts";
   import { openGraphUrlBuilder } from "./_internal/openGraphUrlBuilder";
+  import { isTrendingShareImage } from "./_internal/isTrendingShareImage.ts";
+  import { stampShareDate } from "./_internal/stampShareDate.ts";
 
   type TraktPageProps = {
     title: string | undefined;
@@ -67,7 +69,10 @@
       });
     }
 
-    return _image ?? DEFAULT_SHARE_COVER;
+    return stampShareDate({
+      url: new URL(_image ?? DEFAULT_SHARE_COVER, page.url.origin),
+      date: new Date(),
+    }).href;
   });
 
   const displayTitle = $derived(`${websiteName}: ${_title || websiteTitle}`);
@@ -169,6 +174,9 @@
   );
 
   const isMediaPage = $derived(type === "movie" || type === "show");
+  const hasOpenGraphDimensions = $derived(
+    isMediaPage || isTrendingShareImage(new URL(image)),
+  );
 
   const createWebsiteLd = (url: string) => {
     const origin = new URL(url).origin;
@@ -225,7 +233,7 @@
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:image" content={image} />
   <meta property="og:image:alt" content={ogTitle} />
-  {#if isMediaPage}
+  {#if hasOpenGraphDimensions}
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
   {/if}

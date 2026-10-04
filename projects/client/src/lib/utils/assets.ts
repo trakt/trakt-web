@@ -1,6 +1,7 @@
 import { assets } from '$app/paths';
 import { shuffle } from '$lib/utils/array/shuffle.ts';
 import { assertDefined } from './assert/assertDefined.ts';
+import { UrlBuilder } from './url/UrlBuilder.ts';
 
 export const EPISODE_COVER_PLACEHOLDER =
   `${assets}/placeholders/landscape_placeholder.png` as HttpsUrl;
@@ -21,20 +22,16 @@ export const PLACEHOLDERS: string[] = [
   MEDIA_POSTER_PLACEHOLDER,
 ];
 
-const generateShareCover = (type: 'show' | 'movie') =>
-  assertDefined(
-    // Bracket access instead of .at(): this runs at module-eval on the boot
-    // path and Array.prototype.at throws on old/spoofed WebView engines.
-    shuffle(
-      [1, 2, 3, 4, 5].map((n) => `${assets}/trakt_share_${type}_${n}.webp`),
-    )[0],
-    `${type} share cover is required`,
-  );
-
-export const DEFAULT_SHARE_SHOW_COVER = generateShareCover('show');
-export const DEFAULT_SHARE_MOVIE_COVER = generateShareCover('movie');
+export const DEFAULT_SHARE_SHOW_COVER = UrlBuilder.api
+  .trendingShareableImage('show')
+  .openGraph();
+export const DEFAULT_SHARE_MOVIE_COVER = UrlBuilder.api
+  .trendingShareableImage('movie')
+  .openGraph();
 
 export const DEFAULT_SHARE_COVER = assertDefined(
+  // Bracket access instead of .at(): this runs at module-eval on the boot
+  // path and Array.prototype.at throws on old/spoofed WebView engines.
   shuffle([
     DEFAULT_SHARE_SHOW_COVER,
     DEFAULT_SHARE_MOVIE_COVER,

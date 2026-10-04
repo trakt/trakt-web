@@ -95,6 +95,8 @@ const listsDrilldownFactory = (user: string) => (type: PersonalListType) => {
   }
 };
 
+const TRENDING_SHAREABLE_IMAGE_PATH = '/api/shareable-image/trending';
+
 const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
   const page = globalThis.location?.href ?? 'https://app.trakt.tv';
   const supportSubject = 'Trakt Support Request';
@@ -359,6 +361,13 @@ export const UrlBuilder = {
         openGraph: () => `${basePath}&variant=open-graph`,
         feed: () => `${basePath}&variant=feed`,
         story: () => `${basePath}&variant=story`,
+      };
+    },
+    trendingShareableImagePath: () => TRENDING_SHAREABLE_IMAGE_PATH,
+    trendingShareableImage: (type: 'movie' | 'show') => {
+      const basePath = `${TRENDING_SHAREABLE_IMAGE_PATH}?type=${type}`;
+      return {
+        openGraph: () => `${basePath}&variant=open-graph`,
       };
     },
   },
