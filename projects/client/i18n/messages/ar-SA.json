@@ -1843,7 +1843,6 @@
   "text_today_commented_at": "تم التعليق · {time}",
   "text_today_commented_item_at": "تم التعليق على {item} · {time}",
   "text_today_day_time": "{day}، {time}",
-  "text_today_day_with_count": "{day}، {count}",
   "text_today_empty": "لا يوجد شيء جديد خلال الـ 24 ساعة الماضية. تحقق لاحقًا.",
   "text_today_empty_day": "لا يوجد شيء من الأشخاص الذين تتابعهم في هذا اليوم.",
   "text_today_for_you": "لك",

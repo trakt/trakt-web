@@ -5,6 +5,7 @@
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import GridIcon from "$lib/components/icons/GridIcon.svelte";
+  import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { trapTabFocus } from "$lib/utils/actions/trapTabFocus.ts";
@@ -239,6 +240,15 @@
           })}
         </p>
       </div>
+      <div class="viewer-details-button">
+        <ActionButton
+          label={m.button_label_poster_details()}
+          style="ghost"
+          onclick={toggleFlip}
+        >
+          <InfoIcon />
+        </ActionButton>
+      </div>
       <ActionButton
         label={m.button_label_view_all_today()}
         style="ghost"
@@ -420,6 +430,14 @@
       gap: var(--gap-xs);
     }
 
+    .viewer-details-button {
+      display: none;
+
+      @include for-touch {
+        display: flex;
+      }
+    }
+
     .viewer-title {
       display: flex;
       flex-direction: column;
@@ -446,20 +464,34 @@
       border: 0;
       background: transparent;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
 
       &.is-previous {
         inset-inline-start: 0;
         width: 25%;
+
+        @include for-touch {
+          width: 15%;
+        }
       }
 
       &.is-flip {
         inset-inline-start: 25%;
         width: 50%;
+
+        @include for-touch {
+          inset-inline-start: 15%;
+          width: 70%;
+        }
       }
 
       &.is-next {
         inset-inline-end: 0;
         width: 25%;
+
+        @include for-touch {
+          width: 15%;
+        }
       }
     }
   }

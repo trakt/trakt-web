@@ -1,11 +1,27 @@
 import { formatLocalDate } from '$lib/utils/date/formatLocalDate.ts';
 import { subtractDays } from '$lib/utils/date/subtractDays.ts';
+import type { TodayDayKind } from '../models/TodayDayKind.ts';
 
-const TODAY_DAY_COUNT = 7;
+export const WEEK_DAY_KEY = 'week';
 
-export function toTodayDays(now: Date) {
-  return Array.from({ length: TODAY_DAY_COUNT }, (_, daysAgo) => {
-    const date = subtractDays(now, daysAgo);
-    return { key: formatLocalDate(date), date, isToday: daysAgo === 0 };
-  });
+type TodayDay = Readonly<{
+  key: string;
+  kind: TodayDayKind;
+  date: Date;
+  isToday: boolean;
+}>;
+
+export function toTodayDays(now: Date): TodayDay[] {
+  const yesterday = subtractDays(now, 1);
+
+  return [
+    { key: formatLocalDate(now), kind: 'today', date: now, isToday: true },
+    {
+      key: formatLocalDate(yesterday),
+      kind: 'yesterday',
+      date: yesterday,
+      isToday: false,
+    },
+    { key: WEEK_DAY_KEY, kind: 'week', date: now, isToday: false },
+  ];
 }

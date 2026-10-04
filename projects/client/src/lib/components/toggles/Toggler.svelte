@@ -10,6 +10,7 @@
     options: ToggleOption<T>[];
     variant?: "icon" | "text";
     ariaLabel?: string;
+    fill?: boolean;
   }
 
   const {
@@ -18,6 +19,7 @@
     options,
     variant = "icon",
     ariaLabel,
+    fill = false,
   }: TogglerProps = $props();
 
   const segmentedOptions = $derived<SegmentedSelectOption<T>[]>(
@@ -25,6 +27,7 @@
       value: option.value,
       text: option.text(),
       label: option.label(),
+      ...(option.count != null ? { count: option.count } : {}),
       ...(option.href ? { href: option.href } : {}),
     })),
   );
@@ -47,6 +50,7 @@
   {value}
   options={segmentedOptions}
   {ariaLabel}
+  {fill}
   icon={variant === "icon" ? iconSnippet : undefined}
   {onChange}
 />

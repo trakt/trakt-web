@@ -1844,7 +1844,6 @@
   "text_today_commented_at": "Gereageerd \n {time}",
   "text_today_commented_item_at": "Gereageerd op {item} \n {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Niets nieuws in de afgelopen 24 uur. Kom later terug.",
   "text_today_empty_day": "Geen activiteit van de mensen die je volgt op deze dag.",
   "text_today_for_you": "Voor jou",

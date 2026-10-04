@@ -15,14 +15,22 @@ describe('util: getDayRange', () => {
     expect(getDayRange({ dayKey: null, now }).end).toEqual(now);
   });
 
-  it('should cover the whole calendar day for an earlier day', () => {
-    const range = getDayRange({ dayKey: '2026-09-25', now });
+  it('should cover the whole calendar day for yesterday', () => {
+    const range = getDayRange({ dayKey: '2026-09-27', now });
 
-    expect(range.start).toEqual(new Date(2026, 8, 25, 0, 0, 0, 0));
-    expect(range.end).toEqual(new Date(2026, 8, 25, 23, 59, 59, 999));
+    expect(range.start).toEqual(new Date(2026, 8, 27, 0, 0, 0, 0));
+    expect(range.end).toEqual(new Date(2026, 8, 27, 23, 59, 59, 999));
   });
 
-  it('should ignore days older than a week', () => {
+  it('should cover the last seven calendar days for the past week', () => {
+    const range = getDayRange({ dayKey: 'week', now });
+
+    expect(range.start).toEqual(new Date(2026, 8, 22, 0, 0, 0, 0));
+    expect(range.end).toEqual(now);
+    expect(range.isRolling).toBe(false);
+  });
+
+  it('should ignore days that are not offered', () => {
     expect(getDayRange({ dayKey: '2026-09-01', now }).end).toEqual(now);
   });
 });

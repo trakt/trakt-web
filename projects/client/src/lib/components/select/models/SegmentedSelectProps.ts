@@ -7,6 +7,7 @@ export type SegmentedSelectProps<TValue extends string = string> = {
   value: TValue;
   variant?: SelectVariant;
   disabled?: boolean;
+  fill?: boolean;
   ariaLabel?: string;
   icon?: Snippet<[SegmentedSelectOption<TValue>]>;
   expandable?: boolean;

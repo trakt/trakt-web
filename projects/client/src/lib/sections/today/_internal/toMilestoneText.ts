@@ -4,12 +4,10 @@ import type { TodayMilestone } from '../models/TodayMilestone.ts';
 export function toMilestoneText(milestone: TodayMilestone): string {
   switch (milestone.type) {
     case 'series-start':
-      return m.tag_text_today_started_show();
-    case 'season-start':
-      return m.tag_text_today_started_season({ season: milestone.season });
-    case 'season-end':
-      return m.tag_text_today_finished_season({ season: milestone.season });
     case 'series-end':
-      return m.tag_text_today_finished_show();
+      return m.translated_value_type_show();
+    case 'season-start':
+    case 'season-end':
+      return m.text_season_number({ number: milestone.season });
   }
 }

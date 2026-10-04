@@ -1844,7 +1844,6 @@
   "text_today_commented_at": "Прокоментовано · {time}",
   "text_today_commented_item_at": "Прокоментовано {item} · {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Нічого нового за останні 24 години. Перевірте пізніше.",
   "text_today_empty_day": "Нічого від людей, на яких ви підписані, цього дня.",
   "text_today_for_you": "Для вас",

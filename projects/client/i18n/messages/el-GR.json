@@ -1844,7 +1844,6 @@
   "text_today_commented_at": "Σχολιάστηκε · {time}",
   "text_today_commented_item_at": "Σχολιάστηκε το {item} · {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Τίποτα καινούργιο τις τελευταίες 24 ώρες. Ελέγξτε ξανά αργότερα.",
   "text_today_empty_day": "Καμία δραστηριότητα από τους χρήστες που ακολουθείτε αυτήν την ημέρα.",
   "text_today_for_you": "Για εσάς",
