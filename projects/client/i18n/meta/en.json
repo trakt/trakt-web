@@ -6174,7 +6174,7 @@
     },
     "button_text_select_all": {
       "default": "Select all",
-      "description": "Text for the subtle button in the title picker that selects every title of the chosen list that is not in the target list yet."
+      "description": "Text for a button that selects every available item, such as the titles in the title picker or the loaded items in a list's bulk-selection edit mode."
     },
     "button_text_deselect_all": {
       "default": "Deselect all",
@@ -12599,6 +12599,86 @@
     "button_label_quick_reactions": {
       "default": "Quick reactions",
       "description": "Aria-label for the button that collapses the expanded reaction tray back to the quick row."
+    },
+    "button_text_bulk_edit_list": {
+      "default": "Edit",
+      "description": "Text for the button that enters bulk-selection edit mode on a list's items."
+    },
+    "button_label_bulk_edit_list": {
+      "default": "Select items in {name} to delete them",
+      "description": "Aria-label for the button that enters bulk-selection edit mode on a list's items.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_exit_list_edit_mode": {
+      "default": "Cancel",
+      "description": "Aria-label for the button that exits bulk-selection edit mode on a list's items without making changes."
+    },
+    "button_label_select_list_item": {
+      "default": "Select \"{title}\"",
+      "description": "Aria-label for the checkbox that selects a list item in bulk-selection edit mode.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_deselect_list_item": {
+      "default": "Deselect \"{title}\"",
+      "description": "Aria-label for the checkbox that deselects a list item in bulk-selection edit mode.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_select_all_list_items": {
+      "default": "Select all items",
+      "description": "Aria-label for the button that selects every loaded item in bulk-selection edit mode."
+    },
+    "text_list_items_selected": {
+      "default": "{count} selected",
+      "description": "Count of items currently selected in a list's bulk-selection edit mode.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_delete_selected": {
+      "default": "Delete",
+      "description": "Text for the button that deletes every selected item from a list in bulk-selection edit mode."
+    },
+    "button_label_delete_selected_list_items": {
+      "default": "Delete {count} selected items from {name}",
+      "description": "Aria-label for the button that deletes every selected item from a list in bulk-selection edit mode.",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "confirmation_title_bulk_remove_from_list": {
+      "default": "Delete selected items?",
+      "description": "Title of the confirmation dialog shown before bulk-deleting selected items from a personal list."
+    },
+    "warning_prompt_bulk_remove_from_list": {
+      "default": "Are you sure you want to remove {count} selected items from {list}?",
+      "description": "Warning prompt shown when a user tries to bulk-delete selected items from a personal list.",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
     }
   }
 }

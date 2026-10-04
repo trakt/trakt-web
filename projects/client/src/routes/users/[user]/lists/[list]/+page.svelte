@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
+  import ListSelectionProvider from "$lib/features/list-selection/ListSelectionProvider.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import ListMeta from "$lib/sections/lists/components/ListMeta.svelte";
+  import BulkListEditBar from "$lib/sections/lists/user/_internal/BulkListEditBar.svelte";
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting.ts";
   import ListActions from "$lib/sections/lists/user/ListActions.svelte";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
@@ -22,9 +25,13 @@
   );
 
   const { mode, current: currentDiscoverMode } = useDiscover();
+  const { user } = useUser();
 
   const listName = $derived($list?.name ?? "");
   const isMissing = $derived(!$isLoading && $list == null);
+  const isOwner = $derived(
+    Boolean($user?.slug) && $user.slug === $list?.user?.slug,
+  );
 
   const { current, options, urlBuilder } = $derived(
     useListSorting({ list: $list, type: "user-list" }),
@@ -75,12 +82,25 @@
   <TraktPageCoverSetter />
 
   {#if $list}
-    <UserListPaginatedList
-      list={$list}
-      type={$mode}
-      sortBy={$current.sorting.value}
-      sortHow={$current.sortHow}
-    />
+    {#if isOwner}
+      <ListSelectionProvider>
+        <BulkListEditBar list={$list} />
+        <UserListPaginatedList
+          list={$list}
+          type={$mode}
+          sortBy={$current.sorting.value}
+          sortHow={$current.sortHow}
+          isEditable
+        />
+      </ListSelectionProvider>
+    {:else}
+      <UserListPaginatedList
+        list={$list}
+        type={$mode}
+        sortBy={$current.sorting.value}
+        sortHow={$current.sortHow}
+      />
+    {/if}
   {/if}
 </TraktPage>
 

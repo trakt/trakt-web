@@ -12,6 +12,11 @@ interface ConfirmationParamsMap {
     title: string;
     name: string;
   };
+  [ConfirmationType.BulkRemoveFromList]: {
+    type: ConfirmationType.BulkRemoveFromList;
+    count: number;
+    name: string;
+  };
   [ConfirmationType.DeleteList]: {
     type: ConfirmationType.DeleteList;
     name: string;
