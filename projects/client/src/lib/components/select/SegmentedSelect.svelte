@@ -18,6 +18,7 @@
     value,
     variant = "regular",
     disabled = false,
+    fill = false,
     ariaLabel,
     icon,
     expandable = false,
@@ -137,6 +138,9 @@
   {#if variant !== "compact" || !icon}
     <span class="segment-label">
       <span class="label-text bold ellipsis capitalize">{option.text}</span>
+      {#if option.count != null}
+        <span class="label-count small">{option.count}</span>
+      {/if}
     </span>
   {/if}
 {/snippet}
@@ -147,6 +151,7 @@
   role="radiogroup"
   aria-label={ariaLabel}
   data-variant={variant}
+  data-fill={fill ? "true" : undefined}
   data-expandable={expandable ? "true" : undefined}
   style:--segment-count={options.length}
   style:--selected-index={selectedIndex}
@@ -214,6 +219,10 @@
     );
     backdrop-filter: blur(var(--ni-8));
     overflow: hidden;
+
+    &[data-fill="true"] {
+      width: 100%;
+    }
 
     &[data-variant="compact"] {
       --track-base-radius: var(
@@ -297,6 +306,23 @@
     -webkit-tap-highlight-color: transparent;
 
     transition: color var(--transition-increment) ease-in-out;
+
+    .segment-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--gap-xxs);
+      min-width: 0;
+    }
+
+    .label-count {
+      flex-shrink: 0;
+
+      padding: var(--ni-1) var(--ni-6);
+      border-radius: var(--border-radius-xxl);
+
+      background: color-mix(in srgb, currentColor 18%, transparent);
+      font-variant-numeric: tabular-nums;
+    }
 
     .segment-icon {
       display: flex;

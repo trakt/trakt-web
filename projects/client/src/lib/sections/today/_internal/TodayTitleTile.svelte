@@ -12,7 +12,7 @@
   import TodayTileFaces from "./TodayTileFaces.svelte";
   import { hasWatchedToo } from "./hasWatchedToo.ts";
   import { toFriendActionText } from "./toFriendActionText.ts";
-  import { toMilestoneText } from "./toMilestoneText.ts";
+  import { toMilestoneLabel } from "./toMilestoneLabel.ts";
 
 
   const { story, onOpen }: { story: TodayTitleStory; onOpen: () => void } =
@@ -26,7 +26,7 @@
   const label = $derived(
     [
       story.media.title,
-      story.milestone ? toMilestoneText(story.milestone) : null,
+      story.milestone ? toMilestoneLabel(story.milestone) : null,
       isWatchedToo ? m.tag_text_today_watched_too() : null,
     ].filter((part) => part != null).join(", "),
   );

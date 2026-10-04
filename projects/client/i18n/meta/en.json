@@ -11092,17 +11092,17 @@
       "default": "From people you follow",
       "description": "Heading above the tiles of what the people the user follows did on the chosen day."
     },
-    "text_today_day_with_count": {
-      "default": "{day} {count}",
-      "description": "Option in the day picker on the Today page, with the weekday and how many things the people the user follows did that day.",
-      "variables": {
-        "day": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+    "option_text_today_day_today": {
+      "default": "Today",
+      "description": "Option in the day picker on the Today page for the last 24 hours."
+    },
+    "option_text_today_day_yesterday": {
+      "default": "Yesterday",
+      "description": "Option in the day picker on the Today page for the previous calendar day."
+    },
+    "option_text_today_day_week": {
+      "default": "Week",
+      "description": "Option in the day picker on the Today page for the last seven days. This should be as short as possible."
     },
     "text_today_most_active": {
       "default": "Most active",
@@ -11340,6 +11340,10 @@
     "button_label_close_stories": {
       "default": "Close stories",
       "description": "Aria-label for the button that closes the story viewer."
+    },
+    "button_label_poster_details": {
+      "default": "Poster details",
+      "description": "Aria-label for the info button in the story viewer header that flips the poster to show ratings, overview and sentiment."
     },
     "button_label_show_details": {
       "default": "Show details",

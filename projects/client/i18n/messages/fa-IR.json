@@ -1844,7 +1844,6 @@
   "text_today_commented_at": "نظر داده شد · {time}",
   "text_today_commented_item_at": "در مورد {item} نظر داده شد · {time}",
   "text_today_day_time": "{day}، {time}",
-  "text_today_day_with_count": "{day}، {count}",
   "text_today_empty": "در ۲۴ ساعت گذشته هیچ چیز جدیدی وجود ندارد. بعداً دوباره بررسی کنید.",
   "text_today_empty_day": "در این روز فعالیتی از افرادی که دنبال می‌کنید، وجود ندارد.",
   "text_today_for_you": "برای شما",

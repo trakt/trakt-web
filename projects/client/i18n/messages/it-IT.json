@@ -1844,7 +1844,6 @@
   "text_today_commented_at": "Commentato · {time}",
   "text_today_commented_item_at": "Commentato su {item} · {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day}, {count}",
   "text_today_empty": "Nessuna novità nelle ultime 24 ore. Riprova più tardi.",
   "text_today_empty_day": "Nessuna attività dalle persone che segui in questo giorno.",
   "text_today_for_you": "Per te",

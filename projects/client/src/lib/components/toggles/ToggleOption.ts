@@ -8,4 +8,5 @@ export interface ToggleOption<T> {
   label: IntlFn;
   icon?: Snippet;
   href?: string;
+  count?: number;
 }

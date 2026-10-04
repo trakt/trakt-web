@@ -1844,7 +1844,6 @@
   "text_today_commented_at": "Comentat · {time}",
   "text_today_commented_item_at": "Comentat la {item} · {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Nimic nou în ultimele 24 de ore. Revino mai târziu.",
   "text_today_empty_day": "Nimic de la persoanele pe care le urmărești în această zi.",
   "text_today_for_you": "Pentru tine",

@@ -1844,7 +1844,6 @@
   "text_today_commented_at": "Kommentiert · {time}",
   "text_today_commented_item_at": "{item} kommentiert · {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "In den letzten 24 Stunden nichts Neues. Später erneut prüfen.",
   "text_today_empty_day": "An diesem Tag keine Aktivitäten von Personen, denen du folgst.",
   "text_today_for_you": "Für dich",

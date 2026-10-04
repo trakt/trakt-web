@@ -5,10 +5,8 @@
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
-  import { getLocale } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
-  import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek.ts";
   import { getDayRange } from "./_internal/getDayRange.ts";
   import { pickHeroStory } from "./_internal/pickHeroStory.ts";
   import TodayFeedEntry from "./_internal/TodayFeedEntry.svelte";
@@ -95,19 +93,28 @@
       actions.length < QUIET_ACTION_COUNT,
   );
 
-  const toDayText = (day: (typeof days)[number]) => {
-    const weekday = toHumanDayOfWeek(day.date, getLocale());
-    const count = type === "media" ? $dayCounts[day.key] : null;
-
-    return count == null
-      ? weekday
-      : m.text_today_day_with_count({ day: weekday, count });
+  const toDayName = ({ kind }: (typeof days)[number]) => {
+    switch (kind) {
+      case "today":
+        return m.option_text_today_day_today();
+      case "yesterday":
+        return m.option_text_today_day_yesterday();
+      case "week":
+        return m.option_text_today_day_week();
+    }
   };
-  const dayOptions: ToggleOption<string>[] = days.map((day) => ({
-    value: day.key,
-    text: () => toDayText(day),
-    label: () => toDayText(day),
-  }));
+  const dayOptions = $derived<ToggleOption<string>[]>(
+    days.map((day) => {
+      const count = type === "media" ? $dayCounts[day.key] : null;
+
+      return {
+        value: day.key,
+        text: () => toDayName(day),
+        label: () => toDayName(day),
+        ...(count == null ? {} : { count }),
+      };
+    }),
+  );
 
   const groupingOptions: ToggleOption<TodayGrouping>[] = [
     {
@@ -142,22 +149,28 @@
 
 <div class="trakt-today-overview">
   <div class="overview-toolbar">
-    <Toggler
-      value={selectedDay?.key ?? ""}
-      onChange={params.setDay}
-      options={dayOptions}
-      variant="text"
-      ariaLabel={m.label_today_day()}
-    />
+    <div class="toolbar-days">
+      <Toggler
+        value={selectedDay?.key ?? ""}
+        onChange={params.setDay}
+        options={dayOptions}
+        variant="text"
+        fill
+        ariaLabel={m.label_today_day()}
+      />
+    </div>
 
     <div class="toolbar-end">
-      <Toggler
-        value={params.grouping}
-        onChange={params.setGrouping}
-        options={groupingOptions}
-        variant="text"
-        ariaLabel={m.label_today_grouping()}
-      />
+      <div class="toolbar-grouping">
+        <Toggler
+          value={params.grouping}
+          onChange={params.setGrouping}
+          options={groupingOptions}
+          variant="text"
+          fill
+          ariaLabel={m.label_today_grouping()}
+        />
+      </div>
 
       {#if firstStory}
         {@const link = storyLink(firstStory.key)}
@@ -285,6 +298,18 @@
       gap: var(--gap-s);
     }
 
+    @include for-mobile {
+      .overview-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .toolbar-end {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
     .overview-body {
       display: flex;
       flex-direction: column;
@@ -379,6 +404,23 @@
       grid-template-columns: repeat(auto-fill, var(--width-portrait-card));
       justify-content: start;
       gap: var(--gap-m);
+
+      @include for-mobile {
+        container-type: inline-size;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        --width-override-card: calc((100cqi - var(--gap-m)) / 2);
+        --card-aspect-ratio: calc(
+          var(--height-portrait-card-cover) / var(--width-portrait-card)
+        );
+        --height-override-card-cover: calc(
+          var(--width-override-card) * var(--card-aspect-ratio)
+        );
+        --height-override-card: calc(
+          var(--height-override-card-cover) +
+            var(--height-portrait-card) - var(--height-portrait-card-cover)
+        );
+      }
     }
 
     .overview-quiet {

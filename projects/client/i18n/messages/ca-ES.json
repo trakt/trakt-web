@@ -1844,7 +1844,6 @@
   "text_today_commented_at": "Comentat · {time}",
   "text_today_commented_item_at": "Comentat a {item} · {time}",
   "text_today_day_time": "{day}, {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "Res de nou en les darreres 24 hores. Torna-hi més tard.",
   "text_today_empty_day": "Res de les persones que segueixes en aquest dia.",
   "text_today_for_you": "Per a tu",

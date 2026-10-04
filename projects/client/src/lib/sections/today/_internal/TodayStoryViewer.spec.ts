@@ -246,7 +246,8 @@ describe('TodayStoryViewer', () => {
       },
     });
 
-    expect(await screen.findByText('Finished the show')).toBeInTheDocument();
+    expect(await screen.findByRole('img', { name: 'Finished the show' }))
+      .toBeInTheDocument();
   });
 
   it('should show a friend comment with a link to it', async () => {

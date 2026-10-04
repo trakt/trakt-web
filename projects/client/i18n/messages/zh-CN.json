@@ -1843,7 +1843,6 @@
   "text_today_commented_at": "已评论 · {time}",
   "text_today_commented_item_at": "已评论 {item} · {time}",
   "text_today_day_time": "{day} {time}",
-  "text_today_day_with_count": "{day} {count}",
   "text_today_empty": "过去24小时内没有新内容。请稍后查看。",
   "text_today_empty_day": "您关注的人今天没有任何动态。",
   "text_today_for_you": "为您推荐",

@@ -7,4 +7,5 @@ export type SegmentedSelectOption<TValue extends string = string> =
     text: string;
     label?: string;
     href?: string;
+    count?: number;
   };
