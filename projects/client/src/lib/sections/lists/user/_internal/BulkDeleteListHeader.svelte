@@ -21,7 +21,7 @@
 
   async function handleDeleted() {
     await deleteItems(selection.selectedItems);
-    selection.clearSelection();
+    selection.exitEdit();
   }
 
   const confirmDelete = $derived(
@@ -56,24 +56,26 @@
   class="trakt-bulk-delete-list-header"
   use:trackWindowScroll={"is-scrolled"}
 >
-  <button
-    type="button"
-    class="select-all"
-    onclick={toggleSelectAll}
-    aria-pressed={isAllSelected}
-    aria-label={isAllSelected
-      ? m.button_label_unselect_all_list_items()
-      : m.button_label_select_all_list_items()}
-  >
-    <CheckboxIcon state={isAllSelected ? "checked" : "unchecked"} />
-    {isAllSelected ? m.button_text_unselect_all() : m.button_text_select_all()}
-  </button>
-
   <p class="secondary selected-count">
     {m.text_list_items_selected({ count: selection.selectedCount })}
   </p>
 
   <div class="header-actions">
+    <button
+      type="button"
+      class="select-all"
+      onclick={toggleSelectAll}
+      aria-pressed={isAllSelected}
+      aria-label={isAllSelected
+        ? m.button_label_unselect_all_list_items()
+        : m.button_label_select_all_list_items()}
+    >
+      <CheckboxIcon state={isAllSelected ? "checked" : "unchecked"} />
+      {isAllSelected
+        ? m.button_text_unselect_all()
+        : m.button_text_select_all()}
+    </button>
+
     <Button
       size="small"
       color={$color}
