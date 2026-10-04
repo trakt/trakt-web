@@ -12,6 +12,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
+  import CloneListButton from "./_internal/CloneListButton.svelte";
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
@@ -33,6 +34,7 @@
   const { deleteList, isDeleting, isDeleted } = $derived(useDeleteList(list));
 
   let showEditList = $state(false);
+  let showCloneList = $state(false);
   let showReorderList = $state(false);
   let showManageCollaborators = $state(false);
 
@@ -80,6 +82,11 @@
       {#if isOnListPage}
         <ListDetailsButton {list} />
       {/if}
+      <CloneListButton
+        {list}
+        disabled={$isDeleting}
+        onClick={() => (showCloneList = true)}
+      />
       {#if isListOwner}
         <ShareButton
           title={list.name}
@@ -123,6 +130,14 @@
 
 {#if showEditList}
   <SaveListDrawer type="update" onClose={() => (showEditList = false)} {list} />
+{/if}
+
+{#if showCloneList}
+  <SaveListDrawer
+    type="clone"
+    onClose={() => (showCloneList = false)}
+    {list}
+  />
 {/if}
 
 {#if showReorderList}

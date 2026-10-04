@@ -8,7 +8,7 @@ import { createListRequest } from '$lib/requests/queries/users/createListRequest
 import type { SortDirection } from '../models/SortDirection.ts';
 import { updateListRequest } from '../../../../requests/queries/users/updateListRequest.ts';
 
-type SaveListProps = {
+export type SaveListProps = {
   name: string;
   description?: string;
   privacy: ListPrivacy;
@@ -40,9 +40,10 @@ async function saveRequest(
   };
 
   switch (type) {
-    case 'create':
-      await createListRequest(payload);
-      return undefined;
+    case 'create': {
+      const created = await createListRequest(payload);
+      return created?.slug;
+    }
     case 'update':
       return updateListRequest({
         ...payload,

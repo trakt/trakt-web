@@ -9181,7 +9181,6 @@
       "default": "You don't have any watch history yet. This will be your first entry.",
       "description": "Placeholder text shown in the history slot picker sheet when the user has no watch history at all to pick an insertion point from."
     },
-
     "preview_feature_title_leaderboard": {
       "default": "Pantheon",
       "description": "Product feature name for the follows watch-time ranking preview feature. Keep as the loanword 'Pantheon' (transliterate if needed); do not translate literally to 'temple'."
@@ -12237,6 +12236,36 @@
     "reactions_search_empty": {
       "default": "No reactions match that",
       "description": "Shown under the reaction search field when the typed text matches none of the reactions."
+    },
+    "button_text_clone_list": {
+      "default": "Clone",
+      "description": "Text for the button that copies a list into the user's own lists."
+    },
+    "button_label_clone_list": {
+      "default": "Clone the list {name} into your own lists",
+      "description": "Aria-label for the button that copies a list into the user's own lists.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_clone_list": {
+      "default": "Clone List",
+      "description": "Title for a screen that allows users to copy an existing list into their own lists."
+    },
+    "button_text_clone": {
+      "default": "Clone",
+      "description": "Text for the button that confirms copying a list into the user's own lists."
+    },
+    "text_cloned_list_name": {
+      "default": "{name} (Copy)",
+      "description": "Default name suggested for a list that is copied into the user's own lists.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

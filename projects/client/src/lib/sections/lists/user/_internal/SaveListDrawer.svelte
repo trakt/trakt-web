@@ -18,6 +18,7 @@
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { WATCHLIST_SORT_OPTIONS } from "../constants/index.ts";
   import type { SortDirection } from "../models/SortDirection.ts";
+  import { useCloneList } from "./useCloneList";
   import { useSaveList } from "./useSaveList";
 
   // FIXME: remove when we properly deal with other privacy options
@@ -32,9 +33,14 @@
     list: MediaListSummary;
   };
 
+  type CloneListProps = {
+    type: "clone";
+    list: MediaListSummary;
+  };
+
   type SaveListDrawerProps = {
     onClose: () => void;
-  } & (CreateListProps | UpdateListProps);
+  } & (CreateListProps | UpdateListProps | CloneListProps);
 
   const { onClose, ...props }: SaveListDrawerProps = $props();
 
@@ -42,12 +48,26 @@
 
   const { user } = useUser();
 
+  const ownPrivacy = $derived(
+    ($user?.isPrivate ? "private" : "public") as ListPrivacy,
+  );
+
   const defaultValues = iffy(() => {
     if (props.type === "create") {
       return {
         name: "",
         description: "",
-        privacy: ($user?.isPrivate ? "private" : "public") as ListPrivacy,
+        privacy: ownPrivacy,
+        sortBy: undefined as string | undefined,
+        sortHow: undefined as SortDirection | undefined,
+      };
+    }
+
+    if (props.type === "clone") {
+      return {
+        name: m.text_cloned_list_name({ name: props.list.name }),
+        description: props.list.description,
+        privacy: ownPrivacy,
         sortBy: undefined as string | undefined,
         sortHow: undefined as SortDirection | undefined,
       };
@@ -81,11 +101,16 @@
       : m.button_label_sort_descending(),
   );
 
-  const { saveList, isSaving } = iffy(() =>
-    props.type === "create"
-      ? useSaveList({ type: "create" })
-      : useSaveList({ type: "update", listId: props.list.slug }),
-  );
+  const { saveList, isSaving } = iffy(() => {
+    switch (props.type) {
+      case "create":
+        return useSaveList({ type: "create" });
+      case "clone":
+        return useCloneList(props.list);
+      case "update":
+        return useSaveList({ type: "update", listId: props.list.slug });
+    }
+  });
 
   const listOwner = $derived(
     props.type === "update" ? props.list.user.slug : undefined,
@@ -108,7 +133,10 @@
       sortHow: $sortHow,
     });
 
-    if (owner && slug) {
+    if (props.type === "clone" && slug) {
+      // eslint-disable-next-line svelte/no-navigation-without-resolve
+      await goto(UrlBuilder.users("me").lists(slug));
+    } else if (owner && slug) {
       const target = UrlBuilder.users(owner).lists(slug);
 
       if (target !== page.url.pathname) {
@@ -127,6 +155,47 @@
       defaultValues.sortBy !== $sortBy ||
       defaultValues.sortHow !== $sortHow,
   );
+
+  const drawerTitle = $derived.by(() => {
+    switch (props.type) {
+      case "create":
+        return m.page_title_create_list();
+      case "clone":
+        return m.page_title_clone_list();
+      case "update":
+        return m.page_title_edit_list();
+    }
+  });
+
+  const confirmText = $derived.by(() => {
+    switch (props.type) {
+      case "create":
+        return m.button_text_create();
+      case "clone":
+        return m.button_text_clone();
+      case "update":
+        return m.button_text_apply();
+    }
+  });
+
+  const confirmLabel = $derived.by(() => {
+    switch (props.type) {
+      case "create":
+        return m.button_label_create_list();
+      case "clone":
+        return m.button_label_clone_list({ name: props.list.name });
+      case "update":
+        return m.button_label_apply();
+    }
+  });
+
+  /**
+   * A clone is submittable as-is - its prefilled values are the copy the user
+   * asked for, so it does not have to be edited first.
+   */
+  const isSubmittable = $derived(
+    props.type === "clone" ? $name.trim().length > 0 : isDirty,
+  );
 </script>
 
 <Drawer
@@ -135,9 +204,7 @@
     onClose();
   }}
   size="auto"
-  title={props.type === "create"
-    ? m.page_title_create_list()
-    : m.page_title_edit_list()}
+  title={drawerTitle}
   classList="trakt-save-list-drawer"
 >
   {#snippet badge()}
@@ -157,14 +224,10 @@
   <Form
     onSubmit={handleSubmit}
     onCancel={onClose}
-    disabled={$isSaving || !isDirty}
+    disabled={$isSaving || !isSubmittable}
     isCancelDisabled={$isSaving}
-    confirmButtonText={props.type === "create"
-      ? m.button_text_create()
-      : m.button_text_apply()}
-    confirmButtonLabel={props.type === "create"
-      ? m.button_label_create_list()
-      : m.button_label_apply()}
+    confirmButtonText={confirmText}
+    confirmButtonLabel={confirmLabel}
   >
     <div class="trakt-list-properties">
       <FormInput

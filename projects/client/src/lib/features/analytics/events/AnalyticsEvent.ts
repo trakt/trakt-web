@@ -65,6 +65,7 @@ export const AnalyticsEvent = {
   ListCreate: buildEventKey(LIST_ACTION_PREFIX, 'create'),
   ListSort: buildEventKey(LIST_ACTION_PREFIX, 'sort'),
   ListLike: buildEventKey(LIST_ACTION_PREFIX, 'like'),
+  ListClone: buildEventKey(LIST_ACTION_PREFIX, 'clone'),
 
   CalendarPeriod: buildEventKey(CALENDAR_ACTION_PREFIX, 'period'),
 

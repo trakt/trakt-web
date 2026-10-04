@@ -1,6 +1,19 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { CreateListRequest } from '@trakt/api';
+import { z } from 'zod';
 import type { ListPrivacy } from '../../models/ListPrivacy.ts';
+
+const CreatedListSchema = z.object({
+  ids: z.object({
+    trakt: z.number(),
+    slug: z.string(),
+  }),
+});
+
+type CreatedList = {
+  id: number;
+  slug: string;
+};
 
 type CreateListRequestParams =
   & {
@@ -13,7 +26,7 @@ type CreateListRequestParams =
 
 export function createListRequest(
   { userId, name, fetch, description, privacy }: CreateListRequestParams,
-): Promise<boolean> {
+): Promise<CreatedList | Nil> {
   return api({ fetch })
     .users
     .lists
@@ -27,5 +40,20 @@ export function createListRequest(
         privacy,
       },
     })
-    .then(({ status }) => status === 201);
+    .then(({ status, body }) => {
+      if (status !== 201) {
+        return undefined;
+      }
+
+      const parsed = CreatedListSchema.safeParse(body);
+
+      if (!parsed.success) {
+        return undefined;
+      }
+
+      return {
+        id: parsed.data.ids.trakt,
+        slug: parsed.data.ids.slug,
+      };
+    });
 }

@@ -134,6 +134,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.ListEdit]: never;
   [AnalyticsEvent.ListDelete]: never;
   [AnalyticsEvent.ListCreate]: never;
+  [AnalyticsEvent.ListClone]: never;
   [AnalyticsEvent.ListSort]: SortType;
   [AnalyticsEvent.ListLike]: LikeType;
 
