@@ -11,12 +11,13 @@
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { onMount } from "svelte";
-  import type { TodayStoryFrame } from "../models/TodayStoryFrame.ts";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
   import TodayFaces from "./TodayFaces.svelte";
   import TodayForYouAction from "./TodayForYouAction.svelte";
   import TodayMilestoneChip from "./TodayMilestoneChip.svelte";
   import TodayPosterDetails from "./TodayPosterDetails.svelte";
+  import type { TodayStoryFrameContentProps } from "./TodayStoryFrameContentProps.ts";
+  import TodayStoryTapZones from "./TodayStoryTapZones.svelte";
   import { toFrameMedia } from "./toFrameMedia.ts";
   import { hasWatchedToo } from "./hasWatchedToo.ts";
   import { toFriendActionLabel } from "./toFriendActionLabel.ts";
@@ -29,7 +30,10 @@
   let {
     frame,
     isFlipped = $bindable(false),
-  }: { frame: TodayStoryFrame; isFlipped?: boolean } = $props();
+    onTap,
+    onPressStart,
+    onPressEnd,
+  }: TodayStoryFrameContentProps = $props();
 
   const { history } = useUser();
 
@@ -98,6 +102,14 @@
           {/if}
         </div>
       </div>
+      {#if onTap && onPressStart && onPressEnd}
+        <TodayStoryTapZones
+          {isFlipped}
+          {onTap}
+          {onPressStart}
+          {onPressEnd}
+        />
+      {/if}
     </div>
   </div>
 
@@ -282,6 +294,9 @@
     }
 
     .frame-footer {
+      position: relative;
+      z-index: var(--layer-raised);
+
       display: flex;
       align-items: center;
       gap: var(--gap-m);
