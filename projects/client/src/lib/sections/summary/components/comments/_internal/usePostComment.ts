@@ -139,7 +139,7 @@ export function usePostComment() {
       return await comment.mutate(props);
     } catch (commentError) {
       if (!isHttpError(commentError)) {
-        throw error;
+        throw commentError;
       }
 
       error.next(mapToCommentError(commentError.status));
