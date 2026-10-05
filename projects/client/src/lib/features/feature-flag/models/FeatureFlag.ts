@@ -4,7 +4,6 @@ export enum FeatureFlag {
   ScopedFavorites = 'scoped-favorites',
   Rewatching = 'rewatching',
   Soundtrack = 'soundtrack',
-  ListCounts = 'list-counts',
   GenrePicker = 'genre-picker',
   YouTubeSpecials = 'youtube-specials',
   TodayStory = 'today-story',
