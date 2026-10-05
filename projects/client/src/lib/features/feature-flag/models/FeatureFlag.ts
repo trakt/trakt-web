@@ -5,7 +5,6 @@ export enum FeatureFlag {
   Rewatching = 'rewatching',
   Soundtrack = 'soundtrack',
   GenrePicker = 'genre-picker',
-  YouTubeSpecials = 'youtube-specials',
   TodayStory = 'today-story',
   YearInReview2026 = 'year-in-review-2026',
   LargeScreenCards = 'large-screen-cards',

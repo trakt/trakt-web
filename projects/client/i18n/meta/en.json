@@ -10995,14 +10995,6 @@
       "default": "Adds a soundtrack section to movie and show pages, with playback where a track can be matched.",
       "description": "Description for the soundtrack preview feature."
     },
-    "preview_feature_title_youtube_specials": {
-      "default": "YouTube specials",
-      "description": "Product feature name for the preview feature that links stand-up specials to their full upload on YouTube."
-    },
-    "preview_feature_description_youtube_specials": {
-      "default": "Adds free YouTube uploads of stand-up specials to Where to watch on movie pages.",
-      "description": "Description for the YouTube specials preview feature."
-    },
     "preview_feature_title_today_story": {
       "default": "Today",
       "description": "Product feature name for the preview feature that shows today's activity of followed people and new items as stories."
