@@ -2,7 +2,6 @@ export enum FeatureFlag {
   SplitCast = 'split-cast',
   EditMode = 'edit-mode',
   ScopedFavorites = 'scoped-favorites',
-  UpNextSmartSort = 'up-next-smart-sort',
   Rewatching = 'rewatching',
   ParentalGuide = 'parental-guide',
   Soundtrack = 'soundtrack',

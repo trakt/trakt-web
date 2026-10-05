@@ -8,7 +8,6 @@ import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import ReactionIcon from '$lib/components/icons/ReactionIcon.svelte';
-import SmartListIcon from '$lib/components/icons/SmartListIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
 import YouTubeIcon from '$lib/components/icons/YouTubeIcon.svelte';
@@ -56,17 +55,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
       openFeatureLink(
         UrlBuilder.profile.favorites('me'),
         m.preview_feature_title_scoped_favorites(),
-      ),
-  },
-  [FeatureFlag.UpNextSmartSort]: {
-    icon: SmartListIcon,
-    title: () => m.preview_feature_title_up_next_smart_sort(),
-    addedAt: new Date('2026-07-09'),
-    description: () => m.preview_feature_description_up_next_smart_sort(),
-    featureLink: () =>
-      openFeatureLink(
-        UrlBuilder.progress('me', { sort_by: 'smart' }),
-        m.preview_feature_title_up_next_smart_sort(),
       ),
   },
   [FeatureFlag.Rewatching]: {

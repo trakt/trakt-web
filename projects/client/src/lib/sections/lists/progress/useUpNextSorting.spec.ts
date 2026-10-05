@@ -1,7 +1,5 @@
-import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
-import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
-import { filter, firstValueFrom, map, take } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { useUpNextSorting } from './useUpNextSorting.ts';
 
@@ -14,59 +12,26 @@ describe('useUpNextSorting', () => {
     history.replaceState(null, '', '/');
   });
 
-  it('should hide smart sorting until the preview flag is enabled', async () => {
-    const { sorting, featureFlag } = await renderStore(() => ({
+  it('should offer smart sorting', async () => {
+    const { sorting } = await renderStore(() => ({
       sorting: useUpNextSorting('me'),
-      featureFlag: useFeatureFlag(),
     }));
-    const hasSmartOption = () =>
-      firstValueFrom(
-        sorting.options.pipe(
-          map((options) => options.some((option) => option.value === 'smart')),
-        ),
-      );
-    const waitForSmartOption = () =>
-      firstValueFrom(
-        sorting.options.pipe(
-          map((options) => options.some((option) => option.value === 'smart')),
-          filter(Boolean),
-          take(1),
-        ),
-      );
+    const options = await firstValueFrom(sorting.options);
 
-    expect(await hasSmartOption()).toBe(false);
-
-    featureFlag.setFlag(FeatureFlag.UpNextSmartSort, true);
-
-    expect(await waitForSmartOption()).toBe(true);
+    expect(options.some((option) => option.value === 'smart')).toBe(true);
   });
 
-  it('should ignore smart sorting from the URL until the preview flag is enabled', async () => {
+  it('should apply smart sorting from URL', async () => {
     history.replaceState(null, '', '/?sort_by=smart');
 
-    const { sorting, featureFlag } = await renderStore(() => ({
+    const { sorting } = await renderStore(() => ({
       sorting: useUpNextSorting('me'),
-      featureFlag: useFeatureFlag(),
     }));
-    const currentSortBy = () =>
-      firstValueFrom(
-        sorting.current.pipe(map((current) => current.sorting.value)),
-      );
+    const current = await firstValueFrom(sorting.current);
 
-    expect(await currentSortBy()).toBeUndefined();
-
-    featureFlag.setFlag(FeatureFlag.UpNextSmartSort, true);
-
-    expect(
-      await firstValueFrom(
-        sorting.current.pipe(
-          map((current) => current.sorting.value),
-          filter((sortBy) => sortBy === 'smart'),
-          take(1),
-        ),
-      ),
-    ).toBe('smart');
+    expect(current.sorting.value).toBe('smart');
   });
+
   it('should describe direction-dependent sorting per sort direction', async () => {
     const { sorting } = await renderStore(() => ({
       sorting: useUpNextSorting('me'),

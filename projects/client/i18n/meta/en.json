@@ -9149,14 +9149,6 @@
       "default": "Time-box favorite lists by showing current-year favorites on profiles and grouping the full favorites list by year.",
       "description": "Description for the Scoped Favorites preview feature."
     },
-    "preview_feature_title_up_next_smart_sort": {
-      "default": "Continue Watching Smart Sort",
-      "description": "Title for the Up Next Smart Sort preview feature."
-    },
-    "preview_feature_description_up_next_smart_sort": {
-      "default": "Test a smarter way to sort your Continue Watching.",
-      "description": "Description for the Up Next Smart Sort preview feature."
-    },
     "preview_feature_title_rewatch": {
       "default": "Rewatch",
       "description": "Title for the Rewatch preview feature."
