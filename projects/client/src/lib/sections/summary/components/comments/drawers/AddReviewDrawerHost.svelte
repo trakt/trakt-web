@@ -7,13 +7,10 @@
   import { klipyCustomerId } from "$lib/features/gif-picker/klipyCustomerId.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaComment } from "$lib/requests/models/MediaComment.ts";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment.ts";
   import { iffy } from "$lib/utils/function/iffy.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
-  import { cubicOut } from "svelte/easing";
-  import { slide } from "svelte/transition";
-  import SelectedGif from "../_internal/comment-input/SelectedGif.svelte";
+  import ComposerGif from "../_internal/comment-input/ComposerGif.svelte";
   import SpoilerSwitch from "../_internal/comment-input/SpoilerSwitch.svelte";
   import { toCommentDraftGif } from "../_internal/comment-input/toCommentDraftGif.ts";
   import type { ActiveComment } from "../_internal/models/ActiveComment.ts";
@@ -27,7 +24,6 @@
   } from "../_internal/usePostComment.ts";
   import type { CommentsProps } from "../CommentsProps.ts";
 
-  import { gifPop } from "./_internal/gifPop.ts";
   import { isReviewValid } from "./isReviewValid.ts";
 
   type PostMode = {
@@ -78,9 +74,6 @@
   let gif = $state(initialGif);
 
   const customerId = klipyCustomerId();
-
-  const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
-  const motion = (duration: number) => ($isReducedMotion ? 0 : duration);
 
   // A gif waives the word minimum, and native validity only re-reads the
   // textarea on input - so the submit gate is spelled out here instead.
@@ -141,26 +134,7 @@
 {/snippet}
 
 {#snippet selectedGif()}
-  {#if gif}
-    <div
-      class="review-gif"
-      transition:slide={{
-        axis: "x",
-        duration: motion(250),
-        easing: cubicOut,
-      }}
-    >
-      {#key gif.url}
-        <div class="review-gif-pop" in:gifPop={{ delay: 80, duration: motion(450) }}>
-          <SelectedGif
-            {gif}
-            disabled={$isCommenting}
-            onRemove={() => (gif = null)}
-          />
-        </div>
-      {/key}
-    </div>
-  {/if}
+  <ComposerGif {gif} disabled={$isCommenting} onRemove={() => (gif = null)} />
 {/snippet}
 
 {#snippet badge()}
@@ -236,17 +210,5 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
-  }
-
-  .review-gif {
-    padding-inline-start: var(--gap-xs);
-
-    --selected-gif-height: 100%;
-    --selected-gif-max-width: min(var(--ni-160), 40cqi);
-    --selected-gif-max-height: none;
-  }
-
-  .review-gif-pop {
-    height: 100%;
   }
 </style>

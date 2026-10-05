@@ -67,7 +67,6 @@
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import PopcornIcon from "$lib/components/icons/PopcornIcon.svelte";
   import PopularIcon from "$lib/components/icons/PopularIcon.svelte";
-  import PostMessageIcon from "$lib/components/icons/PostMessageIcon.svelte";
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import QuestionIcon from "$lib/components/icons/QuestionIcon.svelte";
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
@@ -210,10 +209,6 @@
         <IconTile name="LockIcon"><LockIcon /></IconTile>
         <IconTile name="LogoutIcon"><LogoutIcon /></IconTile>
         <IconTile name="PlusIcon"><PlusIcon /></IconTile>
-        <IconTile name="PostMessageIcon"><PostMessageIcon /></IconTile>
-        <IconTile name="PostMessageIcon filled">
-          <PostMessageIcon style="filled" />
-        </IconTile>
         <IconTile name="QuestionIcon"><QuestionIcon /></IconTile>
         <IconTile name="ReactionIcon"><ReactionIcon state="default" /></IconTile>
         <IconTile name="ReactionIcon add">

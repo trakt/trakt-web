@@ -1,12 +1,12 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import DismissibleError from "$lib/components/errors/DismissibleError.svelte";
-  import PostMessageIcon from "$lib/components/icons/PostMessageIcon.svelte";
-  import RichTextEditor from "$lib/components/rich-text/RichTextEditor.svelte";
+  import Form from "$lib/components/form/Form.svelte";
+  import FormRichTextArea from "$lib/components/form/FormRichTextArea.svelte";
   import GifButton from "$lib/features/gif-picker/GifButton.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { klipyCustomerId } from "$lib/features/gif-picker/klipyCustomerId.ts";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
+  import { useMotionDuration } from "$lib/stores/css/useMotionDuration.ts";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment";
   import { slide } from "svelte/transition";
   import type { ActiveComment } from "../models/ActiveComment";
@@ -17,7 +17,7 @@
     useMediaMentions,
     type MediaMentionSource,
   } from "../useMediaMentions.ts";
-  import SelectedGif from "./SelectedGif.svelte";
+  import ComposerGif from "./ComposerGif.svelte";
   import SpoilerSwitch from "./SpoilerSwitch.svelte";
   import { toCommentDraftGif } from "./toCommentDraftGif.ts";
 
@@ -25,6 +25,7 @@
     label: string;
     placeholder: string;
     onCommentPost: (comment: ActiveComment) => void;
+    onCancel: () => void;
     gifSuggestedQuery?: string;
     mentionSource: MediaMentionSource;
   } & UseAddCommentProps;
@@ -33,6 +34,7 @@
     label,
     placeholder,
     onCommentPost,
+    onCancel,
     gifSuggestedQuery,
     mentionSource,
     ...props
@@ -44,7 +46,7 @@
 
   const customerId = klipyCustomerId();
 
-  const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
+  const duration = useMotionDuration();
 
   const { postComment, isCommenting, error } = usePostComment();
   const { mentions } = useMediaMentions(fromRune(() => mentionSource));
@@ -76,118 +78,79 @@
   // FIXME: merge with the component in the drawer
 </script>
 
-<trakt-comment-input>
-  <div
-    class="trakt-comment-reply-box"
-    class:is-disabled={$isCommenting}
-    transition:slide={{ duration: 150 }}
-  >
-    <RichTextEditor
-      value={comment}
-      onChange={(markdown) => (comment = markdown)}
-      {placeholder}
-      label={placeholder}
+{#snippet actions()}
+  <GifButton
+    disabled={$isCommenting}
+    suggestedQuery={gifSuggestedQuery}
+    onSelect={(selected) => (gif = toCommentDraftGif(selected))}
+  />
+{/snippet}
+
+{#snippet selectedGif()}
+  <ComposerGif {gif} disabled={$isCommenting} onRemove={() => (gif = null)} />
+{/snippet}
+
+<trakt-comment-input
+  transition:slide={{ duration: $duration(150) }}
+>
+  <div class="comment-input-header">
+    <SpoilerSwitch
+      size="small"
       disabled={$isCommenting}
-      autofocus
-      mentions={$mentions}
+      isChecked={isSpoiler}
+      onclick={() => (isSpoiler = !isSpoiler)}
     />
-
-    <div class="trakt-comment-actions">
-      <SpoilerSwitch
-        size="small"
-        disabled={$isCommenting}
-        isChecked={isSpoiler}
-        onclick={() => (isSpoiler = !isSpoiler)}
-      />
-
-      <div class="comment-send-actions">
-        <GifButton
-          disabled={$isCommenting}
-          suggestedQuery={gifSuggestedQuery}
-          onSelect={(selected) => (gif = toCommentDraftGif(selected))}
-        />
-
-        <ActionButton
-          onclick={postCommentHandler}
-          {label}
-          style="ghost"
-          color="purple"
-          size="small"
-          variant="secondary"
-          disabled={$isCommenting || !hasSomethingToSay}
-        >
-          <PostMessageIcon style={hasSomethingToSay ? "filled" : "open"} />
-        </ActionButton>
-      </div>
-    </div>
   </div>
 
-  {#if gif}
-    <div transition:slide={{ duration: $isReducedMotion ? 0 : 150 }}>
-      <SelectedGif
-        {gif}
+  <Form
+    onSubmit={postCommentHandler}
+    {onCancel}
+    disabled={$isCommenting}
+    isCancelDisabled={$isCommenting}
+    isValid={hasSomethingToSay}
+    inlineActions
+    confirmButtonFill="solid"
+    confirmButtonText={m.button_text_add_reply()}
+    confirmButtonLabel={label}
+  >
+    <div class="comment-input-body">
+      <FormRichTextArea
+        value={comment}
+        onChange={(markdown) => (comment = markdown)}
+        {placeholder}
         disabled={$isCommenting}
-        onRemove={() => (gif = null)}
+        autofocus
+        mentions={$mentions}
+        {actions}
+        attachment={selectedGif}
+        --rich-textarea-min-height="var(--ni-96)"
       />
+
+      {#if $error}
+        <DismissibleError
+          message={toTranslatedErrorComment($error)}
+          onDismiss={() => error.next(null)}
+        />
+      {/if}
     </div>
-  {/if}
-  {#if $error}
-    <DismissibleError
-      message={toTranslatedErrorComment($error)}
-      onDismiss={() => error.next(null)}
-    />
-  {/if}
+  </Form>
 </trakt-comment-input>
 
-<style lang="scss">
-  @use "$style/scss/mixins/index.scss" as *;
-
+<style>
   trakt-comment-input {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xxs);
+    gap: var(--gap-xs);
   }
 
-  .trakt-comment-reply-box {
-    width: 100%;
-
+  .comment-input-body {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
-
-    padding: var(--ni-8);
-    padding-inline-start: var(--ni-16);
-    box-sizing: border-box;
-
-    border-radius: var(--border-radius-s);
-    border: var(--ni-2) var(--purple-50) solid;
-
-    color: var(--color-text-primary);
-    background-color: var(--color-input-background);
-
-    transition: border-color var(--transition-increment) ease-in-out;
-
-    backdrop-filter: blur(var(--ni-4));
-
-    &:focus-within {
-      border-color: var(--purple-500);
-    }
-
-    &.is-disabled {
-      border-color: var(--color-surface-button-disabled);
-    }
   }
 
-  .trakt-comment-actions {
+  .comment-input-header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--gap-s);
-  }
-
-  .comment-send-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xs);
+    justify-content: flex-end;
   }
 </style>
