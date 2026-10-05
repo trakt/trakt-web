@@ -317,10 +317,6 @@
           pointer-events: auto;
         }
 
-        .trakt-drawer-title-container {
-          align-items: flex-start;
-        }
-
         :global(.trakt-action-button) {
           position: relative;
           z-index: 1;

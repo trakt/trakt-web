@@ -4,7 +4,6 @@ import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
-import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import ReactionIcon from '$lib/components/icons/ReactionIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
@@ -82,13 +81,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
         UrlBuilder.trending(),
         m.preview_feature_title_large_screen_cards(),
       ),
-  },
-  [FeatureFlag.SplitCast]: {
-    icon: PeopleIcon,
-    title: () => m.preview_feature_title_split_cast(),
-    description: () => m.preview_feature_description_split_cast(),
-    addedAt: new Date('2026-10-01'),
-    audience: 'vip',
   },
   [FeatureFlag.TodayStory]: {
     icon: CalendarIcon,

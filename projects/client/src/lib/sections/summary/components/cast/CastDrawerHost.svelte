@@ -1,32 +1,19 @@
 <script lang="ts">
-  import { useSplitCast } from "$lib/features/feature-flag/useSplitCast.ts";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
-  import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType.ts";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
   import CreditMemberItem from "$lib/sections/lists/components/CreditMemberItem.svelte";
   import type { CreditMember } from "$lib/sections/lists/models/CreditMember.ts";
-  import { toCreditGroups } from "$lib/sections/summary/components/toCreditGroups.ts";
-  import { fade } from "svelte/transition";
   import CreditGroupHeader from "$lib/sections/summary/components/CreditGroupHeader.svelte";
+  import CreditsToggler from "$lib/sections/summary/components/CreditsToggler.svelte";
+  import { toActiveCreditsType } from "$lib/sections/summary/components/toActiveCreditsType.ts";
+  import { toCreditGroups } from "$lib/sections/summary/components/toCreditGroups.ts";
+  import { toVisibleCreditGroups } from "$lib/sections/summary/components/toVisibleCreditGroups.ts";
+  import type { CreditsType } from "$lib/sections/summary/models/CreditsType.ts";
+  import { fade } from "svelte/transition";
   import DrawerCreditListSkeleton from "$lib/sections/summary/components/_internal/DrawerCreditListSkeleton.svelte";
-
-  type CreditsType = "cast" | "crew";
-  const creditOptions: ToggleOption<CreditsType>[] = [
-    {
-      value: "cast",
-      text: m.drawer_meta_info_cast,
-      label: m.drawer_meta_info_cast,
-    },
-    {
-      value: "crew",
-      text: m.drawer_meta_info_crew,
-      label: m.drawer_meta_info_crew,
-    },
-  ];
 
   const {
     onClose,
@@ -40,33 +27,30 @@
     isLoading?: boolean;
   } = $props();
 
-  const splitCast = useSplitCast();
-
   let isOpen = $state(false);
   let searchTerm = $state("");
-  let creditsType = $state<CreditsType>("cast");
+  let creditsType = $state<CreditsType>("main");
 
   const normalizedSearchTerm = $derived(searchTerm.trim().toLocaleLowerCase());
   const isSearching = $derived(normalizedSearchTerm.length > 0);
-  const creditsMetaInfo = $derived.by(() => {
-    if (isSearching) return m.drawer_meta_info_cast_and_crew();
-    if (creditsType === "crew") return m.drawer_meta_info_crew();
 
-    return m.drawer_meta_info_cast();
-  });
+  const creditGroups = $derived(
+    toCreditGroups({ crew, type }),
+  );
+  const activeCreditsType = $derived(
+    toActiveCreditsType({ groups: creditGroups, creditsType }),
+  );
 
   const toCreditMemberKey = (member: CreditMember) =>
     `${member.key}-${member.positions ? "cast" : "crew"}`;
   const toCreditGroupHeaderId = (group: { id: string }) =>
-    `cast-list-${type}-${isSearching ? "search" : creditsType}-${group.id}-header`;
+    `cast-list-${type}-${isSearching ? "search" : activeCreditsType}-${group.id}-header`;
 
   const visibleCreditGroups = $derived(
-    toCreditGroups({
-      crew,
-      type,
-      splitCast: $splitCast,
+    toVisibleCreditGroups({
+      groups: creditGroups,
       searchTerm: normalizedSearchTerm,
-      creditsType,
+      creditsType: activeCreditsType,
     }),
   );
 </script>
@@ -75,7 +59,6 @@
   {onClose}
   onOpened={() => (isOpen = true)}
   title={m.drawer_title_people()}
-  metaInfo={creditsMetaInfo}
   size="large"
   headerVariant="overlay"
 >
@@ -88,30 +71,24 @@
       />
 
       {#if isLoading}
-        <DrawerCreditListSkeleton
-          withHeader={$splitCast && (isSearching || creditsType === "cast")}
-        />
+        <DrawerCreditListSkeleton />
       {:else if visibleCreditGroups.length > 0}
         <div
-          id={`cast-list-${type}-${isSearching ? "search" : creditsType}`}
+          id={`cast-list-${type}-${isSearching ? "search" : activeCreditsType}`}
           class="credit-list"
         >
           {#each visibleCreditGroups as group (group.id)}
             <section class="credit-list-group">
-              {#if group.showHeader}
-                <CreditGroupHeader
-                  id={toCreditGroupHeaderId(group)}
-                  label={group.label}
-                  count={group.members.length}
-                />
-              {/if}
+              <CreditGroupHeader
+                id={toCreditGroupHeaderId(group)}
+                label={group.label}
+                count={group.members.length}
+              />
 
               <div
                 class="credit-list-group-items"
                 role="list"
-                aria-labelledby={group.showHeader
-                  ? toCreditGroupHeaderId(group)
-                  : undefined}
+                aria-labelledby={toCreditGroupHeaderId(group)}
               >
                 {#each group.members as item (toCreditMemberKey(item))}
                   <CreditMemberItem member={item} {type} />
@@ -127,11 +104,11 @@
   {/if}
 
   {#snippet badge()}
-    {#if !isSearching}
-      <Toggler
-        value={creditsType}
+    {#if !isSearching && !isLoading}
+      <CreditsToggler
+        groups={creditGroups}
+        value={activeCreditsType}
         onChange={(value) => (creditsType = value)}
-        options={creditOptions}
       />
     {/if}
   {/snippet}

@@ -1,5 +1,4 @@
 export enum FeatureFlag {
-  SplitCast = 'split-cast',
   EditMode = 'edit-mode',
   ScopedFavorites = 'scoped-favorites',
   Rewatching = 'rewatching',

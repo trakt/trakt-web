@@ -1,19 +1,10 @@
-import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
 import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
 import { ShowSiloSplitPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSplitPeopleMappedMock.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
-import {
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-} from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import CastDrawerHost from './CastDrawerHost.svelte';
 
 beforeAll(() => {
@@ -61,10 +52,8 @@ describe.skip('CastDrawerHost', () => {
         name: `Main Cast ${crew.cast.length} people`,
       }),
     ).toBeInTheDocument();
-    expect(
-      await screen.findByRole('heading', { name: 'Supporting Cast 1 person' }),
-    )
-      .toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Supporting Cast 1 person' }))
+      .not.toBeInTheDocument();
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     expect(screen.getByText('Juliette Nichols'))
       .toBeInTheDocument();
@@ -87,9 +76,6 @@ describe.skip('CastDrawerHost', () => {
     });
     await user.type(searchInput, 'Rebecca');
 
-    await waitFor(() => {
-      expect(screen.getByText('Cast & Crew')).toBeInTheDocument();
-    });
     expect(
       await screen.findByRole('heading', {
         name: 'Main Cast 1 person',
@@ -119,7 +105,9 @@ describe.skip('CastDrawerHost', () => {
     expect(screen.getByAltText('Headshot of Rebecca Ferguson'))
       .toBeInTheDocument();
     expect(screen.queryByText('Graham Yost')).not.toBeInTheDocument();
-    expect(screen.getByRole('radio', { name: 'Cast' }))
+    expect(screen.getByRole('radio', { name: 'Main Cast' }))
+      .toHaveTextContent('');
+    expect(screen.getByRole('radio', { name: 'Supporting Cast' }))
       .toHaveTextContent('');
     expect(screen.getByRole('radio', { name: 'Crew' }))
       .toHaveTextContent('');
@@ -130,7 +118,7 @@ describe.skip('CastDrawerHost', () => {
       expect(screen.getAllByText('Graham Yost')).not.toHaveLength(0);
     });
     expect(screen.getByText('Creator, Writer')).toBeInTheDocument();
-    expect(screen.getByText('Crew')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^Crew/ })).toBeInTheDocument();
     expect(screen.queryByAltText('Headshot of Graham Yost'))
       .not.toBeInTheDocument();
     expect(screen.queryByText('Rebecca Ferguson')).not.toBeInTheDocument();
@@ -143,22 +131,21 @@ describe.skip('CastDrawerHost', () => {
     await waitFor(() => {
       expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     });
-    expect(screen.getByText('Cast & Crew')).toBeInTheDocument();
-    expect(screen.queryByRole('radio', { name: 'Cast' })).not
-      .toBeInTheDocument();
-    expect(screen.queryByRole('radio', { name: 'Crew' })).not
-      .toBeInTheDocument();
+    expect(screen.queryByRole('radio')).not.toBeInTheDocument();
 
     await user.clear(search);
 
     await waitFor(() => {
-      expect(screen.getByText('Crew')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /^Crew/ }))
+        .toBeInTheDocument();
     });
-    expect(screen.getByRole('radio', { name: 'Cast' })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: 'Main Cast' }))
+      .toBeInTheDocument();
     expect(screen.getByRole('radio', { name: 'Crew' })).toBeInTheDocument();
   });
 
   it('should hide episode counts for episode credits', async () => {
+    const user = userEvent.setup();
     renderComponent(CastDrawerHost, {
       props: {
         crew: EpisodeSiloPeopleMappedMock,
@@ -177,6 +164,9 @@ describe.skip('CastDrawerHost', () => {
         name: `Main Cast ${EpisodeSiloPeopleMappedMock.cast.length} people`,
       }),
     ).toBeInTheDocument();
+
+    await user.click(screen.getByRole('radio', { name: 'Supporting Cast' }));
+
     expect(
       await screen.findByRole('heading', {
         name:
@@ -217,7 +207,7 @@ describe.skip('CastDrawerHost', () => {
       .toBeInTheDocument();
   });
 
-  it('should keep Main Cast as the show cast header before supporting cast is available', async () => {
+  it('should use Cast as the show cast header before supporting cast is available', async () => {
     const crew = { ...ShowSiloSplitPeopleMappedMock, guestStars: [] };
 
     renderComponent(CastDrawerHost, {
@@ -230,7 +220,7 @@ describe.skip('CastDrawerHost', () => {
 
     expect(
       await screen.findByRole('heading', {
-        name: `Main Cast ${crew.cast.length} people`,
+        name: `Cast ${crew.cast.length} people`,
       }),
     ).toBeInTheDocument();
   });
@@ -257,16 +247,4 @@ describe.skip('CastDrawerHost', () => {
     expect(screen.queryByRole('heading', { name: /Main Cast/ })).not
       .toBeInTheDocument();
   });
-});
-
-beforeEach(() => {
-  localStorage.setItem(
-    'trakt-feature-flags',
-    JSON.stringify({ 'split-cast': true }),
-  );
-  setAuthorization(true);
-});
-afterEach(() => {
-  setAuthorization(false);
-  localStorage.removeItem('trakt-feature-flags');
 });
