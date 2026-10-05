@@ -1,57 +1,71 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import type { TodayPersonGroup } from "../models/TodayPersonGroup.ts";
   import TodayActionRow from "./TodayActionRow.svelte";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
-  import { toFriendActionText } from "./toFriendActionText.ts";
+  import TodayDrawerHeader from "./TodayDrawerHeader.svelte";
+  import { toFriendActionLabel } from "./toFriendActionLabel.ts";
+  import { toFriendActionTime } from "./toFriendActionTime.ts";
 
   const { group, onClose }: { group: TodayPersonGroup; onClose: () => void } =
     $props();
 
   const name = $derived(toDisplayableName(group.user));
+  const latest = $derived(group.actions.at(0));
+  const storyCount = $derived(
+    group.actions.length === 1
+      ? m.text_today_stories_one()
+      : m.text_today_stories_other({ count: group.actions.length }),
+  );
 </script>
 
-<Drawer {onClose} title={name} size="auto">
+<Drawer {onClose} size="auto">
   <div class="trakt-today-person-drawer">
-    {#each group.actions as action (action.key)}
-      <TodayActionRow
-        title={action.media.title}
-        detail={toFriendActionText(action)}
-        rating={action.rating}
+    {#if latest}
+      <TodayDrawerHeader
+        href={group.user.slug
+          ? UrlBuilder.profile.user(group.user.slug)
+          : UrlBuilder.media(latest.media.type, latest.media.slug)}
+        cover={latest.media.cover.url.medium}
+        title={name}
+        meta={storyCount}
       >
         {#snippet lead()}
-          <Link
-            href={UrlBuilder.media(action.media.type, action.media.slug)}
-            label={action.media.title}
-          >
-            <div class="drawer-poster">
-              <CrossOriginImage src={action.media.poster.url.thumb} alt="" />
-            </div>
-          </Link>
+          <UserAvatar user={group.user} />
         {/snippet}
-      </TodayActionRow>
-      {#if action.comment}
-        <TodayCommentBubble comment={action.comment} lines={3} />
-      {/if}
-    {/each}
-
-    {#if group.user.slug}
-      <div class="drawer-actions">
-        <Button
-          href={UrlBuilder.profile.user(group.user.slug)}
-          label={name}
-          variant="secondary"
-          color="default"
-        >
-          {name}
-        </Button>
-      </div>
+      </TodayDrawerHeader>
     {/if}
+
+    <ul class="drawer-timeline">
+      {#each group.actions as action (action.key)}
+        <TodayActionRow
+          title={action.media.title}
+          action={toFriendActionLabel(action)}
+          time={toFriendActionTime(action.activityAt)}
+          rating={action.rating}
+        >
+          {#snippet lead()}
+            <Link
+              href={UrlBuilder.media(action.media.type, action.media.slug)}
+              label={action.media.title}
+            >
+              <div class="drawer-poster">
+                <CrossOriginImage src={action.media.poster.url.thumb} alt="" />
+              </div>
+            </Link>
+          {/snippet}
+          {#if action.comment}
+            <TodayCommentBubble comment={action.comment} lines={3} />
+          {/if}
+        </TodayActionRow>
+      {/each}
+    </ul>
   </div>
 </Drawer>
 
@@ -59,7 +73,7 @@
   .trakt-today-person-drawer {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-l);
 
     .drawer-poster {
       width: var(--ni-40);
@@ -73,8 +87,14 @@
       }
     }
 
-    .drawer-actions {
+    .drawer-timeline {
       display: flex;
+      flex-direction: column;
+      gap: var(--gap-m);
+
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
   }
 </style>

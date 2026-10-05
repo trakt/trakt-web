@@ -5,14 +5,13 @@
   import { lineClamp } from "$lib/components/text/lineClamp.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre.ts";
   import { toSentimentAspects } from "$lib/utils/sentiment/toSentimentAspects.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { TodayMedia } from "../models/TodayMedia.ts";
   import { useTodayDetails } from "../useTodayDetails.ts";
+  import { toMediaMeta } from "./toMediaMeta.ts";
   import TodaySentimentVerdict from "./TodaySentimentVerdict.svelte";
 
-  const MAX_GENRES = 3;
   const ASPECTS_LIMIT = 4;
 
   const { media }: { media: TodayMedia } = $props();
@@ -21,16 +20,7 @@
     fromRune(() => media),
   );
 
-  const meta = $derived(
-    [
-      media.year,
-      ...media.genres
-        .slice(0, MAX_GENRES)
-        .map((genre) => toTranslatedGenre(genre)),
-    ]
-      .filter(Boolean)
-      .join(" · "),
-  );
+  const meta = $derived(toMediaMeta(media));
 
   const selected = $derived(
     $sentiment && $sentiment.aspect.pros.length + $sentiment.aspect.cons.length > 0
