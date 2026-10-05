@@ -1,18 +1,14 @@
 <script lang="ts">
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
 
-  const { withHeader = false }: { withHeader?: boolean } = $props();
-
   const skeletonCount = 3;
 </script>
 
 <div class="trakt-drawer-credit-list-skeleton" aria-hidden="true">
-  {#if withHeader}
-    <div class="credit-skeleton-header">
-      <Skeleton width="30%" height="var(--ni-16)" />
-      <Skeleton width="15%" height="var(--ni-12)" />
-    </div>
-  {/if}
+  <div class="credit-skeleton-header">
+    <Skeleton width="30%" height="var(--ni-16)" />
+    <Skeleton width="15%" height="var(--ni-12)" />
+  </div>
 
   <div class="credit-skeleton-list">
     {#each Array(skeletonCount) as _, index (`credit-member-skeleton-${index}`)}
