@@ -252,6 +252,12 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.confirmation_message_plex_remove_server(),
     operation: 'destructive',
   }),
+  [ConfirmationType.RemoveMediaSyncServer]: (props) => ({
+    title: m.confirmation_title_plex_remove_server({ server: props.server }),
+    buttonText: m.button_text_plex_remove_server(),
+    message: m.confirmation_message_media_sync_remove_server(),
+    operation: 'destructive',
+  }),
   [ConfirmationType.ResetCoverImage]: () => ({
     title: m.confirmation_title_reset_cover_image(),
     buttonText: m.button_text_reset_cover_image(),

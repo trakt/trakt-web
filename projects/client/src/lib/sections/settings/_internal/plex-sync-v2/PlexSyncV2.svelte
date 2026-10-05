@@ -14,6 +14,7 @@
   import SettingsVipUpsell from "../SettingsVipUpsell.svelte";
   import SyncLoadError from "../SyncLoadError.svelte";
   import PlexConnectDrawer from "./PlexConnectDrawer.svelte";
+  import PlexSyncRuns from "./PlexSyncRuns.svelte";
   import PlexSyncServerRow from "./PlexSyncServerRow.svelte";
   import { usePlexConnect } from "./usePlexConnect.ts";
 
@@ -104,6 +105,10 @@
         {/each}
       </SettingsGroupCard>
     </SettingsSection>
+
+    {#each $connections ?? [] as connection (connection.id)}
+      <PlexSyncRuns {connection} />
+    {/each}
   {/if}
 </div>
 

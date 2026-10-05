@@ -34,9 +34,14 @@
   } = $props();
 
   function toErrorText(error: string): string {
-    return error === "server_limit_reached"
-      ? m.error_text_media_sync_server_limit()
-      : m.error_text_media_sync_generic();
+    switch (error) {
+      case "server_limit_reached":
+        return m.error_text_media_sync_server_limit();
+      case "connection_removing":
+        return m.error_text_media_sync_server_removing();
+      default:
+        return m.error_text_media_sync_generic();
+    }
   }
 </script>
 
