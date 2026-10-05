@@ -26,8 +26,10 @@
     {#if action.rating != null}
       <UserRating rating={action.rating} />
     {/if}
-    <UserProfileLink user={action.user} />
-    <UserAvatar user={action.user} size="small" />
+    <div class="entry-person">
+      <UserProfileLink user={action.user} />
+      <UserAvatar user={action.user} size="small" />
+    </div>
   </div>
 {/snippet}
 
@@ -109,9 +111,31 @@
     .entry-badge {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
       gap: var(--gap-xs);
-      width: 100%;
+
+      min-width: 0;
+      margin-inline-start: auto;
+
+      :global(.trakt-link) {
+        width: auto;
+        min-width: 0;
+      }
+    }
+
+    .entry-person {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xs);
+      min-width: 0;
+
+      padding-inline-start: var(--ni-12);
+      border-radius: var(--border-radius-l);
+      background: color-mix(
+        in srgb,
+        var(--color-card-background) 50%,
+        transparent
+      );
+      backdrop-filter: blur(var(--ni-8));
     }
   }
 </style>

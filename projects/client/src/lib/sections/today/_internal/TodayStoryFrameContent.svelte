@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
   import WatchedTag from "$lib/components/media/tags/WatchedTag.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -116,7 +117,7 @@
           </span>
           {#if frame.item.type === "up-next"}
             <span class="tag secondary">
-              · {m.text_season_episode_number(frame.item.entry)} · {frame.item
+              · {episodeNumberLabel({ seasonNumber: frame.item.entry.season, episodeNumber: frame.item.entry.number })} · {frame.item
                 .entry.title}
             </span>
           {/if}

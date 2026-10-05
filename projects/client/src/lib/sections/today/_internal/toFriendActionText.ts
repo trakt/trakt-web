@@ -3,6 +3,7 @@ import * as m from '$lib/features/i18n/messages.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { toHumanClockTime } from '$lib/utils/formatting/date/toHumanClockTime.ts';
 import { toRelativeHumanDay } from '$lib/utils/formatting/date/toRelativeHumanDay.ts';
+import { episodeNumberLabel } from '$lib/utils/intl/episodeNumberLabel.ts';
 import type { TodayFriendAction } from '../models/TodayFriendAction.ts';
 
 function toActionTime(activityAt: Date, now: Date): string {
@@ -17,7 +18,12 @@ function toActionTime(activityAt: Date, now: Date): string {
 }
 
 function toItemLabel(action: TodayFriendAction): string | null {
-  if (action.episode) return m.text_season_episode_number(action.episode);
+  if (action.episode) {
+    return episodeNumberLabel({
+      seasonNumber: action.episode.season,
+      episodeNumber: action.episode.number,
+    });
+  }
   if (action.season) {
     return m.text_season_number({ number: action.season.number });
   }
@@ -35,7 +41,10 @@ function toWatchText(action: TodayFriendAction, time: string): string {
   if (!action.episode) return m.text_today_watched_at({ time });
 
   return m.text_today_watched_episode_at({
-    episode: m.text_season_episode_number(action.episode),
+    episode: episodeNumberLabel({
+      seasonNumber: action.episode.season,
+      episodeNumber: action.episode.number,
+    }),
     time,
   });
 }
