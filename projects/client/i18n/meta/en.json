@@ -5141,9 +5141,9 @@
       "default": "Upgrade to VIP to see where you rank amongst your friends",
       "description": "Upsell text on the pinned free-viewer card at the bottom of the leaderboard drawer."
     },
-    "header_leaderboard": {
-      "default": "Pantheon",
-      "description": "Product feature name for the drawer that ranks the people a user follows by watch time. Keep as the loanword 'Pantheon' (transliterate if needed); do not translate literally to 'temple'."
+    "header_follows_leaderboard": {
+      "default": "Leaderboard",
+      "description": "Title of the drawer that ranks the people a user follows by watch time."
     },
     "button_label_open_leaderboard": {
       "default": "Open follows leaderboard",
@@ -9180,15 +9180,6 @@
     "text_history_slot_picker_empty": {
       "default": "You don't have any watch history yet. This will be your first entry.",
       "description": "Placeholder text shown in the history slot picker sheet when the user has no watch history at all to pick an insertion point from."
-    },
-
-    "preview_feature_title_leaderboard": {
-      "default": "Pantheon",
-      "description": "Product feature name for the follows watch-time ranking preview feature. Keep as the loanword 'Pantheon' (transliterate if needed); do not translate literally to 'temple'."
-    },
-    "preview_feature_description_leaderboard": {
-      "default": "Rank the people you follow by watch time and see where you land among them.",
-      "description": "Description for the Pantheon (follows watch-time ranking) preview feature."
     },
     "preview_feature_description_parental_guide": {
       "default": "Show content risk levels in the details drawer for movies and shows, and filter by severity in advanced filters.",

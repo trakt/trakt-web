@@ -1,7 +1,5 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
-  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import ScreenTimeDrawerHost from "../stats/ScreenTimeDrawerHost.svelte";
   import MatchDrawerHost from "./_internal/MatchDrawerHost.svelte";
   import {
@@ -19,9 +17,6 @@
   const { drawer, sourceCommentId, close } = $derived(
     profileDrawerNavigation(page.url.searchParams),
   );
-
-  const { isEnabled } = useFeatureFlag();
-  const leaderboardEnabled = isEnabled(FeatureFlag.Leaderboard);
 </script>
 
 {#if drawer === ProfileDrawers.ScreenTime}
@@ -30,7 +25,7 @@
   <ActivityDrawerHost {sourceCommentId} onClose={close} />
 {:else if drawer === ProfileDrawers.Match}
   <MatchDrawerHost {slug} {profile} onClose={close} />
-{:else if drawer === ProfileDrawers.Leaderboard && $leaderboardEnabled}
+{:else if drawer === ProfileDrawers.Leaderboard}
   <LeaderboardDrawerHost {slug} onClose={close} />
 {:else if drawer === ProfileDrawers.AllTimeStats}
   <AllTimeStatsDrawerHost onClose={close} />
