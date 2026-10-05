@@ -14,5 +14,7 @@ export function mapToSoundtrackTrack(
     spotifyId: response.spotify_id,
     matchedOn: response.matched_on,
     position: response.position,
+    season: response.season,
+    source: response.source,
   };
 }
