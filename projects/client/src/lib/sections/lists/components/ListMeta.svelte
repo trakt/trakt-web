@@ -3,10 +3,8 @@
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import { languageTag } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
@@ -75,17 +73,13 @@
   {/if}
 
   {#if displayCount != null}
-    <RenderForFeature flag={FeatureFlag.ListCounts}>
-      {#snippet enabled()}
-        {#if countUrl}
-          <Link href={countUrl} onclick={onCountClick}>
-            {@render count(displayCount)}
-          </Link>
-        {:else}
-          {@render count(displayCount)}
-        {/if}
-      {/snippet}
-    </RenderForFeature>
+    {#if countUrl}
+      <Link href={countUrl} onclick={onCountClick}>
+        {@render count(displayCount)}
+      </Link>
+    {:else}
+      {@render count(displayCount)}
+    {/if}
   {/if}
 </div>
 
