@@ -145,7 +145,7 @@ export const movies = [
     },
   ),
   http.get(
-    `http://localhost/v3/media/movie/${MovieHereticResponseMock.ids.slug}/info/15/version/1`,
+    `http://localhost/v3/media/movie/${MovieHereticResponseMock.ids.slug}/info/15/version/2`,
     () => {
       return HttpResponse.json(MovieHereticSoundtrackResponseMock);
     },

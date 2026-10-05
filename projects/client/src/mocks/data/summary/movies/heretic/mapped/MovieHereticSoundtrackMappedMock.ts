@@ -8,6 +8,8 @@ export const MovieHereticSoundtrackMappedMock: SoundtrackTrack[] = [
     spotifyId: '1aBcDeFgHiJkLmNoPqRsTu',
     matchedOn: 'credit',
     position: 0,
+    season: null,
+    source: 'imdb',
   },
   {
     key: 'movie_soundtrack_1',
@@ -16,6 +18,8 @@ export const MovieHereticSoundtrackMappedMock: SoundtrackTrack[] = [
     spotifyId: null,
     matchedOn: null,
     position: 1,
+    season: null,
+    source: 'imdb',
   },
   {
     key: 'movie_soundtrack_2',
@@ -24,5 +28,17 @@ export const MovieHereticSoundtrackMappedMock: SoundtrackTrack[] = [
     spotifyId: '2vWxYzAbCdEfGhIjKlMnOp',
     matchedOn: 'title',
     position: 2,
+    season: null,
+    source: 'both',
+  },
+  {
+    key: 'movie_soundtrack_3',
+    title: 'Mr. Reed',
+    performer: 'Chris Bacon',
+    spotifyId: '4pQrStUvWxYzAbCdEfGhIj',
+    matchedOn: 'album_spotify',
+    position: 3,
+    season: null,
+    source: 'album',
   },
 ];

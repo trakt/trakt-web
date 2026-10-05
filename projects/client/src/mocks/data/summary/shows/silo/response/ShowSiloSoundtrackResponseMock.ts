@@ -7,6 +7,8 @@ export const ShowSiloSoundtrackResponseMock: SoundtrackResponse = [
     spotify_id: '3qRsTuVwXyZaBcDeFgHiJk',
     matched_on: 'both',
     position: 0,
+    season: null,
+    source: 'both',
   },
   {
     title: 'The Down Deep',
@@ -14,5 +16,16 @@ export const ShowSiloSoundtrackResponseMock: SoundtrackResponse = [
     spotify_id: null,
     matched_on: null,
     position: 1,
+    season: 1,
+    source: 'imdb',
+  },
+  {
+    title: 'Lukas',
+    performer: 'Atli Örvarsson',
+    spotify_id: '5sTuVwXyZaBcDeFgHiJkLm',
+    matched_on: 'album_spotify',
+    position: 2,
+    season: 2,
+    source: 'album',
   },
 ];
