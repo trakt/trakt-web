@@ -49,7 +49,7 @@
   const isCover = $derived(resolvedStyle === "cover");
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
-  const hasHoverPanel = $derived(
+  const hasHoverCard = $derived(
     isCover && $isMouse && style === "summary" &&
       (props.variant == null || props.variant === "start"),
   );
@@ -83,11 +83,12 @@
   </div>
 {/snippet}
 
-{#snippet mediaCard()}
+{#snippet mediaCard(coverWrapper?: Snippet<[Snippet]>)}
   <MediaCard
     {...props}
     {coverTag}
     {urlOverride}
+    {coverWrapper}
     style={resolvedStyle}
     action={props.action}
     popupActions={props.badge ? undefined : props.popupActions}
@@ -95,7 +96,7 @@
 {/snippet}
 
 {#if resolvedStyle === "cover"}
-  {#if hasHoverPanel}
+  {#if hasHoverCard}
     <MediaHoverCard
       media={props.media}
       tag={hoverTag}

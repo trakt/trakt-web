@@ -1,9 +1,8 @@
 <script lang="ts">
+  import FlipCard from "$lib/components/card/FlipCard.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import type { Snippet } from "svelte";
-  import { cubicOut } from "svelte/easing";
   import SummaryCardBackgroundImage from "./SummaryCardBackgroundImage.svelte";
   import SummaryCardRating from "../SummaryCardRating.svelte";
 
@@ -14,35 +13,16 @@
     contextualTag,
     subtitle,
   }: {
-    children: Snippet;
+    children: Snippet<[Snippet<[Snippet]>]>;
     media: MediaInputDefault;
     tag?: Snippet;
     contextualTag?: Snippet;
     subtitle?: string;
   } = $props();
 
-  let isExpanded = $state(false);
   let isFlipped = $state(false);
-
-  const prefersReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
-
-  function reveal(_node: HTMLElement) {
-    if ($prefersReducedMotion) {
-      return { duration: 90, css: (t: number) => `opacity: ${t}` };
-    }
-
-    return {
-      duration: 150,
-      easing: cubicOut,
-      css: (t: number) => `
-        width: calc(
-          var(--panel-collapsed-width) +
-            (var(--panel-width) - var(--panel-collapsed-width)) * ${t}
-        );
-        opacity: ${Math.min(1, t * 2.5)};
-      `,
-    };
-  }
+  let hasFlipped = $state(false);
+  let coverArea = $state<HTMLElement>();
 
   const hasDistinctOriginalTitle = $derived(
     media.originalTitle
@@ -50,43 +30,40 @@
       : false,
   );
 
-  function overflowsInlineEnd(node: HTMLElement) {
-    const { left, right, width } = node.getBoundingClientRect();
-
-    if (getComputedStyle(node).direction === "rtl") {
-      return left - width < 0;
-    }
-
-    return right + width > globalThis.window.innerWidth;
-  }
-
-  function hoverReveal(node: HTMLElement) {
+  function hoverFlip(node: HTMLElement) {
     const isPopupOpen = () =>
       node.querySelector('[data-popup-state="opened"]') != null;
 
-    const onEnter = () => {
-      isFlipped = overflowsInlineEnd(node);
-      isExpanded = true;
-    };
+    let isOverCover = false;
 
-    const onLeave = () => {
+    const setFlipped = (next: boolean) => {
       if (isPopupOpen()) {
         return;
       }
 
-      isExpanded = false;
+      hasFlipped ||= next;
+      isFlipped = next;
     };
 
-    const popupObserver = new MutationObserver(() => {
-      if (node.matches(":hover")) {
-        return;
-      }
+    const onMove = (event: PointerEvent) => {
+      const rect = coverArea?.getBoundingClientRect();
 
-      onLeave();
-    });
+      isOverCover = rect != null &&
+        event.clientX >= rect.left && event.clientX <= rect.right &&
+        event.clientY >= rect.top && event.clientY <= rect.bottom;
 
-    node.addEventListener("mouseenter", onEnter);
-    node.addEventListener("mouseleave", onLeave);
+      setFlipped(isOverCover);
+    };
+
+    const onLeave = () => {
+      isOverCover = false;
+      setFlipped(false);
+    };
+
+    const popupObserver = new MutationObserver(() => setFlipped(isOverCover));
+
+    node.addEventListener("pointermove", onMove);
+    node.addEventListener("pointerleave", onLeave);
     popupObserver.observe(node, {
       subtree: true,
       attributeFilter: ["data-popup-state"],
@@ -94,30 +71,35 @@
 
     return {
       destroy() {
-        node.removeEventListener("mouseenter", onEnter);
-        node.removeEventListener("mouseleave", onLeave);
+        node.removeEventListener("pointermove", onMove);
+        node.removeEventListener("pointerleave", onLeave);
         popupObserver.disconnect();
       },
     };
   }
 </script>
 
-<div
-  class="trakt-media-hover-card"
-  class:is-expanded={isExpanded}
-  class:is-flipped={isFlipped}
-  use:hoverReveal
->
-  {#if isExpanded}
-    <div class="hover-panel" transition:reveal>
+{#snippet flip(cover: Snippet)}
+  <div class="hover-card-cover" bind:this={coverArea}>
+    <FlipCard
+      {isFlipped}
+      front={cover}
+      {back}
+      --border-radius-flip-card="var(--border-radius-m)"
+    />
+  </div>
+{/snippet}
+
+{#snippet back()}
+  <div class="hover-card-back" class:is-flipped={isFlipped}>
+    {#if hasFlipped}
       <SummaryCardBackgroundImage
         src={media.cover.url.thumb}
         alt={media.title}
-        align={isFlipped ? "start" : "end"}
       />
 
-      <div class="hover-panel-details">
-        <div class="hover-panel-titles">
+      <div class="hover-card-details">
+        <div class="hover-card-titles">
           <p class="trakt-card-title">{media.title}</p>
 
           {#if subtitle}
@@ -140,133 +122,63 @@
         </div>
 
         {#if tag}
-          <div class="hover-panel-tags">
+          <div class="hover-card-tags">
             {@render tag()}
           </div>
         {/if}
       </div>
 
-      <div class="hover-panel-bottom">
+      <div class="hover-card-bottom">
         {@render contextualTag?.()}
         <SummaryCardRating item={media} />
       </div>
-    </div>
-  {/if}
-
-  <div class="hover-card-base">
-    {@render children()}
+    {/if}
   </div>
+{/snippet}
+
+<div
+  class="trakt-media-hover-card"
+  class:is-flipped={isFlipped}
+  use:hoverFlip
+>
+  {@render children(flip)}
 </div>
 
 <style>
-  .trakt-media-hover-card {
-    --panel-inset: calc(0.5 * var(--list-gap));
-
-    position: relative;
-
-    &.is-expanded {
-      z-index: var(--layer-top);
-
-      .hover-card-base :global(.trakt-card-footer) {
-        visibility: hidden;
-      }
-
-      .hover-card-base :global(.trakt-card-cover) {
-        outline-color: transparent;
-      }
-    }
-  }
-
-  .hover-panel {
-    --drift-sign: -1;
-    --panel-width: calc(
-      2 * var(--width-portrait-card) + var(--list-gap) + 2 * var(--panel-inset)
-    );
-    --panel-collapsed-width: calc(
-      var(--width-portrait-card) + 2 * var(--panel-inset)
-    );
-    --panel-content-width: calc(
-      var(--width-portrait-card) + var(--list-gap)
-    );
-
-    position: absolute;
-    inset-block-start: calc(-1 * var(--panel-inset));
-    inset-inline-start: calc(-1 * var(--panel-inset));
-
-    width: var(--panel-width);
-    height: calc(100% + 2 * var(--panel-inset));
-
+  .hover-card-back {
     box-sizing: border-box;
-    padding: var(--panel-inset);
-    padding-inline-start: calc(var(--width-portrait-card) + var(--panel-inset));
+    height: 100%;
 
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
 
+    color: var(--color-text-primary);
     background: var(--color-card-background);
     border-radius: var(--border-radius-m);
-    box-shadow: var(--shadow-menu);
     outline: var(--border-thickness-xs) solid var(--color-card-border-hover);
-
     overflow: hidden;
-
-    .is-flipped & {
-      --drift-sign: 1;
-
-      align-items: flex-end;
-
-      inset-inline-start: auto;
-      inset-inline-end: calc(-1 * var(--panel-inset));
-
-      padding-inline-start: var(--panel-inset);
-      padding-inline-end: calc(var(--width-portrait-card) + var(--panel-inset));
-    }
   }
 
-  .hover-panel-details,
-  .hover-panel-bottom {
-    width: var(--panel-content-width);
-    box-sizing: border-box;
-
-    animation: hover-panel-drift var(--transition-increment)
-      cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  @keyframes hover-panel-drift {
-    from {
-      opacity: 0;
-      transform: translateX(
-        calc(var(--rtl-sign) * var(--drift-sign) * var(--ni-12))
-      );
-    }
-
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  .hover-panel-details {
+  .hover-card-details {
     position: relative;
     z-index: var(--layer-raised);
 
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-s);
 
-    flex-grow: 1;
+    min-height: 0;
     overflow: hidden;
 
     padding: var(--ni-12);
-    padding-top: var(--ni-10);
+    padding-bottom: var(--gap-s);
   }
 
-  .hover-panel-titles {
+  .hover-card-titles {
     display: flex;
     flex-direction: column;
     gap: var(--gap-micro);
-
-    min-height: var(--ni-66);
 
     .trakt-card-title,
     .trakt-card-subtitle,
@@ -285,9 +197,14 @@
       min-width: 0;
       font-size: var(--font-size-text);
     }
+
+    .trakt-card-subtitle,
+    :global(.trakt-card-subtitle) {
+      color: var(--color-text-secondary);
+    }
   }
 
-  .hover-panel-tags {
+  .hover-card-tags {
     :global(.trakt-tag-bar) {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -298,7 +215,7 @@
     }
   }
 
-  .hover-panel-bottom {
+  .hover-card-bottom {
     position: relative;
     z-index: var(--layer-raised);
 
