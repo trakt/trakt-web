@@ -1,23 +1,27 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { getLocale } from "$lib/features/i18n";
-  import * as m from "$lib/features/i18n/messages.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
-  import FilterSidebar from "$lib/sections/navbar/components/filter/FilterSidebar.svelte";
-  import { useNavbarState } from "$lib/sections/navbar/useNavbarState";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { getDaysDifference } from "$lib/utils/date/getDaysDifference";
   import { LOCALE_MAP } from "$lib/utils/formatting/date/LOCALE_MAP.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { NOOP_FN } from "$lib/utils/constants.ts";
   import { differenceInDays } from "date-fns/differenceInDays";
   import { endOfMonth } from "date-fns/endOfMonth";
   import { endOfWeek } from "date-fns/endOfWeek";
   import { startOfMonth } from "date-fns/startOfMonth";
+  import { addMonths } from "date-fns/addMonths";
   import { startOfWeek as dfStartOfWeek } from "date-fns/startOfWeek";
-  import { tick } from "svelte";
+  import { tick, untrack } from "svelte";
   import { useFilter } from "../filters/useFilter";
   import CalendarDays from "./_internal/CalendarDays.svelte";
+  import CalendarPosterTile from "./_internal/CalendarPosterTile.svelte";
+  import CalendarSidebar from "./_internal/CalendarSidebar.svelte";
   import CalendarHeader from "./_internal/CalendarHeader.svelte";
+  import CalendarDayDrawer from "./_internal/CalendarDayDrawer.svelte";
+  import { useIsCalendarDocked } from "./useIsCalendarDocked";
+  import CalendarToolbar from "./_internal/CalendarToolbar.svelte";
   import CalendarMonthGrid from "./_internal/CalendarMonthGrid.svelte";
   import CalendarWeekdayRow from "./_internal/CalendarWeekdayRow.svelte";
   import { dateKey } from "./_internal/dateKey";
@@ -26,8 +30,8 @@
     useCalendar,
     type CalendarItem as CalendarItemEntry,
   } from "./_internal/useCalendar";
-  import CalendarFeedMenu from "./CalendarFeedMenu.svelte";
   import CalendarItem from "./CalendarItem.svelte";
+  import CalendarTitleActions from "./CalendarTitleActions.svelte";
   import CalendarLayout from "./CalendarLayout.svelte";
   import { getCalendarContext } from "./context/getCalendarContext";
   import { useCalendarPeriod } from "./context/useCalendarPeriod";
@@ -45,6 +49,8 @@
     loadMore,
     accumulate,
     activeDate,
+    restart,
+    goTo,
   } = useCalendarPeriod();
   const { mode } = useDiscover();
 
@@ -64,10 +70,25 @@
     }),
   );
 
+  const fingerprint = $derived(
+    `${$mode}:${JSON.stringify($filterMap)}:${$episodeType}`,
+  );
+
+  let previousFingerprint: string | undefined;
+
+  $effect(() => {
+    const current = fingerprint;
+    const hasChanged = previousFingerprint !== undefined &&
+      previousFingerprint !== current;
+    previousFingerprint = current;
+
+    if (hasChanged) untrack(restart);
+  });
+
   const periods: CalendarPeriod<CalendarItemEntry>[] = $derived(
     accumulate({
       calendar: $calendar,
-      fingerprint: `${$mode}:${JSON.stringify($filterMap)}:${$episodeType}`,
+      fingerprint,
       isEmpty: !$hasUpstreamItems,
     }),
   );
@@ -96,34 +117,53 @@
       ?.scrollIntoView({ block: "start" });
   }
 
-  const navigation = $derived({
-    onNext: () => handleNavigation(next),
-    onPrevious: () => handleNavigation(previous),
-    onReset: () => handleNavigation(reset),
-  });
 
-  let calendarView = $state<CalendarView>("day");
+  const isDocked = useIsCalendarDocked();
+
+  let chosenView = $state<CalendarView | null>(null);
+  const calendarView = $derived<CalendarView>(
+    chosenView ?? ($isDocked ? "week" : "day"),
+  );
 
   const toggleView = () => {
-    calendarView = calendarView === "day" ? "week" : "day";
+    chosenView = calendarView === "day" ? "week" : "day";
   };
 
-  // Week view leans into upcoming content. Each `period` is one week, so
-  // pulling three additional weeks via `loadMore()` lands the user on the
-  // current week + the next three already populated. Past weeks remain
-  // reachable through the chevrons or by scrolling up.
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
+  const isCompact = $derived($isMobile || $isTabletSmall);
+  const layoutView = $derived(isCompact ? "day" : calendarView);
+  const isMonthOnly = $derived(isCompact && calendarView === "week");
+
+  const goToMonth = (offset: number) =>
+    goTo(
+      addMonths(startOfMonth(selectedDate), offset),
+      offset > 0 ? "next" : "previous",
+    );
+
+  const navigation = $derived(
+    isMonthOnly
+      ? {
+          onNext: () => goToMonth(1),
+          onPrevious: () => goToMonth(-1),
+          onReset: reset,
+        }
+      : {
+          onNext: () => handleNavigation(next),
+          onPrevious: () => handleNavigation(previous),
+          onReset: () => handleNavigation(reset),
+        },
+  );
+
   const WEEK_VIEW_PRELOAD_TARGET = 4;
 
   $effect(() => {
-    if (calendarView !== "week") return;
+    if (layoutView !== "week") return;
     if (periods.length >= WEEK_VIEW_PRELOAD_TARGET) return;
     if ($isLoading) return;
     loadMore();
   });
 
-  // Month-wide calendar fetch — feeds the week-view month grid so every
-  // day in the displayed month is coloured by has-items, not just the
-  // weeks the day-view's infinite scroll has accumulated.
   const monthRange = $derived.by(() => {
     const locale = LOCALE_MAP[getLocale()] ?? LOCALE_MAP["en"];
     const reference = endOfWeek(selectedDate, { locale });
@@ -147,179 +187,272 @@
 
   const monthAllDays = $derived($monthCalendar ?? []);
 
-  // Push the calendar navigation (Today / chevrons / Day-Week toggle +
-  // day strip + month grid) into the FilterSidebar via navbar state so
-  // the docked sidebar renders it at the top of its content — same hook
-  // the overlay drawer uses elsewhere.
-  const { set } = useNavbarState();
 
-  $effect(() => {
-    set({ filterPanelHeader: calendarNavigation });
-    return () => set({ filterPanelHeader: null });
-  });
+  let selectedDay = $state<{ date: Date; items: CalendarItemEntry[] } | null>(
+    null,
+  );
+  const isBarPinned = $derived($isDocked || calendarView === "day");
+
+  let barHeight = $state(0);
+
 
   const closeToHome = () => goto(UrlBuilder.home());
 </script>
 
-{#snippet feedActions()}
-  <CalendarFeedMenu />
+{#snippet episodeTypeFilters()}
+  <CalendarTitleActions />
 {/snippet}
 
-{#snippet calendarNavigation()}
-  <div class="calendar-filter-navigation" data-view={calendarView}>
+{#snippet summaryItem(media: CalendarItemEntry)}
+  <CalendarItem item={media} variant="summary" />
+{/snippet}
+
+{#snippet posterItem(media: CalendarItemEntry)}
+  <CalendarPosterTile item={media} />
+{/snippet}
+
+{#snippet monthPreview(items: CalendarItemEntry[])}
+  {#each items as media (media.key)}
+    <CrossOriginImage
+      classList="calendar-month-poster"
+      animate={false}
+      src={"show" in media ? media.show.poster.url.thumb : media.poster.url.thumb}
+      alt=""
+    />
+  {/each}
+{/snippet}
+
+{#snippet miniMonth()}
+  <div class="calendar-mini-month">
     <CalendarHeader
       {navigation}
       activeDate={selectedDate}
-      actions={feedActions}
       view={calendarView}
       onToggleView={toggleView}
+      variant="bar"
     />
-    <div class="calendar-filter-divider" aria-hidden="true"></div>
     <CalendarWeekdayRow />
-    {#if calendarView === "day"}
-      <CalendarDays
-        calendar={visiblePeriodCalendar}
-        {navigation}
-        activeDate={selectedDate}
-      />
-    {:else}
-      <CalendarMonthGrid
-        allDays={monthAllDays}
-        activeDate={selectedDate}
-      />
-    {/if}
-    <button
-      type="button"
-      class="calendar-filter-expand"
-      aria-label={calendarView === "week"
-        ? m.button_label_collapse_calendar_month()
-        : m.button_label_expand_calendar_month()}
-      onclick={toggleView}
-    >
-      <svg
-        aria-hidden="true"
-        width="16"
-        height="16"
-        viewBox="0 0 17 16"
-        fill="none"
-      >
-        <path stroke="currentColor" stroke-width="2" d="m1.5 4.5 7 7 7-7" />
-      </svg>
-    </button>
+    <CalendarMonthGrid
+      allDays={monthAllDays}
+      activeDate={selectedDate}
+      variant="mini"
+    />
   </div>
 {/snippet}
 
-<div class="calendar-page-layout" data-view={calendarView}>
+<div
+  class="calendar-page-layout"
+  data-view={calendarView}
+  class:is-docked={$isDocked}
+  class:is-bar-pinned={isBarPinned}
+  style:--calendar-bar-height="{barHeight}px"
+>
   <div class="calendar-main">
+    <div
+      class="calendar-bar"
+      class:is-month-only={isMonthOnly}
+      bind:offsetHeight={barHeight}
+    >
+      <CalendarToolbar
+        {navigation}
+        activeDate={selectedDate}
+        filters={$isDocked ? episodeTypeFilters : undefined}
+        hasControls={!$isDocked}
+        view={calendarView}
+        onToggleView={toggleView}
+      />
+
+      {#if !$isDocked}
+        <div class="calendar-bar-dates">
+          <CalendarWeekdayRow />
+          {#if calendarView === "day"}
+            <CalendarDays
+              calendar={visiblePeriodCalendar}
+              {navigation}
+              activeDate={selectedDate}
+            />
+          {:else}
+            <CalendarMonthGrid
+              allDays={monthAllDays}
+              activeDate={selectedDate}
+              preview={monthPreview}
+              variant={isMonthOnly ? "fill" : "default"}
+              onSelectDay={isMonthOnly
+                ? (day) => (selectedDay = day)
+                : undefined}
+            />
+          {/if}
+        </div>
+      {/if}
+    </div>
+
+    {#if !isMonthOnly}
     <CalendarLayout
       activeDate={$activeDate}
       isLoading={$isLoading}
       onLoadMore={loadMore}
       {periods}
       {order}
-      view={calendarView}
-    >
-      {#snippet item(media)}
-        <CalendarItem item={media} variant="summary" />
-      {/snippet}
-    </CalendarLayout>
+      view={layoutView}
+      hasNavigationBar={false}
+      item={layoutView === "week" ? posterItem : summaryItem}
+    />
+    {/if}
   </div>
 
-  <FilterSidebar
-    hasAutoClose={false}
-    onClose={closeToHome}
-    onSaveFilter={NOOP_FN}
-  />
+  {#if $isDocked}
+    <CalendarSidebar onClose={closeToHome}>
+      {@render miniMonth()}
+    </CalendarSidebar>
+  {/if}
 </div>
+
+{#if selectedDay}
+  <CalendarDayDrawer
+    day={selectedDay}
+    item={summaryItem}
+    onClose={() => (selectedDay = null)}
+  />
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   .calendar-page-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) var(--ni-380);
-    gap: var(--gap-l);
+    --calendar-bar-top: var(--navbar-height);
+    --calendar-sticky-top: var(--calendar-bar-top);
 
-    margin: 0 var(--layout-distance-side);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+
+    margin-inline: var(--layout-distance-side);
 
     @include for-tablet-sm-and-below {
-      grid-template-columns: 1fr;
+      --calendar-bar-top: calc(
+        var(--navbar-height) + env(safe-area-inset-top, 0px)
+      );
+    }
+
+    &.is-docked {
+      --calendar-bar-top: 0px;
+      --drawer-width: var(--ni-320);
+
+      grid-template-columns: minmax(0, 1fr) var(--drawer-width);
+    }
+
+    &.is-bar-pinned {
+      --calendar-sticky-top: calc(
+        var(--calendar-bar-top) + var(--calendar-bar-height) -
+          var(--border-thickness-xxs)
+      );
     }
   }
 
   .calendar-main {
+    display: flex;
+    flex-direction: column;
+
     min-width: 0;
   }
 
-  /* The shared CalendarLayout adds its own page-side margin; zero it out
-     inside the calendar page so the outer grid owns the layout edge. */
-  .calendar-page-layout :global(.calendar-layout-container) {
-    margin-left: 0;
-    margin-right: 0;
+  .calendar-page-layout :global(.trakt-calendar-layout) {
+    margin-inline: 0;
   }
 
-  /* The calendar-navigation block is the snippet pushed to the docked
-     filter sidebar via navbar state; styles match the overlay flow. */
-  .calendar-filter-navigation {
+  .calendar-bar {
+    position: relative;
+    z-index: var(--layer-floating);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+
+    padding-block: var(--gap-s) var(--gap-m);
+
+    background-color: var(--color-background);
+
+    @include for-tablet-sm-and-below {
+      gap: var(--gap-s);
+      padding-bottom: var(--gap-xs);
+    }
+
+    .is-docked & {
+      --page-top-offset: calc(var(--gap-m) + env(safe-area-inset-top, 0px));
+
+      margin-top: calc(-1 * var(--page-top-offset));
+      padding-top: calc(
+        var(--page-top-offset) +
+          (var(--side-navbar-actions-height) - var(--ni-48)) / 2
+      );
+    }
+
+    .is-bar-pinned & {
+      position: sticky;
+      top: var(--calendar-bar-top);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset-inline: calc(-1 * var(--layout-distance-side));
+      bottom: 100%;
+
+      height: var(--calendar-bar-top);
+
+      background-color: var(--color-background);
+    }
+
+
+    :global(.calendar-month-poster) {
+      place-self: center;
+
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      min-height: 0;
+      aspect-ratio: 2 / 3;
+
+      object-fit: cover;
+      border-radius: var(--ni-2);
+    }
+  }
+
+  .calendar-bar.is-month-only {
+    min-height: calc(100dvh - var(--calendar-bar-top) - var(--gap-m));
+
+    @include for-mobile {
+      min-height: calc(
+        100dvh - var(--calendar-bar-top) - var(--mobile-navbar-height) -
+          var(--gap-m)
+      );
+    }
+
+    .calendar-bar-dates {
+      flex: 1;
+      min-height: 0;
+    }
+  }
+
+  .calendar-bar-dates {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+
+    padding: var(--ni-10) var(--ni-8);
+    border-radius: var(--border-radius-xl);
+
+    background-color: var(--color-calendar-background);
+  }
+
+  .calendar-mini-month {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
 
-    width: 100%;
-    padding: var(--ni-12) var(--ni-8);
-    box-sizing: border-box;
+    padding: var(--ni-12);
+    border-radius: var(--border-radius-xl);
 
-    border: var(--border-thickness-xxs) solid var(--shade-800);
-    border-radius: var(--border-radius-m);
-
-    background-color: var(--shade-900);
-  }
-
-  .calendar-filter-divider {
-    height: var(--border-thickness-xxs);
-    width: 100%;
-
-    background-color: var(--shade-800);
-  }
-
-  .calendar-filter-expand {
-    all: unset;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: var(--ni-24);
-    height: var(--ni-24);
-
-    margin: 0 auto;
-
-    color: var(--color-text-secondary);
-
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: color, transform;
-
-    -webkit-tap-highlight-color: transparent;
-
-    svg {
-      width: var(--ni-16);
-      height: var(--ni-16);
-
-      transition: transform var(--transition-increment) ease-in-out;
-    }
-
-    &:hover {
-      color: var(--color-foreground);
-    }
-
-    &:focus-visible {
-      outline: var(--border-thickness-xxs) solid var(--purple-400);
-      border-radius: var(--ni-4);
-    }
-  }
-
-  .calendar-filter-navigation[data-view="week"] .calendar-filter-expand svg {
-    transform: rotate(180deg);
+    background-color: var(--color-calendar-background);
   }
 </style>

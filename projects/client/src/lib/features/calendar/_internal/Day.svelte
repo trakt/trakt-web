@@ -4,6 +4,7 @@
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
   import { isBefore } from "date-fns/isBefore";
+  import { isToday } from "date-fns/isToday";
   import { startOfDay } from "date-fns/startOfDay";
   import ContentIndicator from "./ContentIndicator.svelte";
   import { dateKey } from "./dateKey";
@@ -36,6 +37,7 @@
   class:has-items={itemCount > 0}
   class:is-active={isActiveDate}
   class:is-past={isPast}
+  class:is-today={isToday(day.date)}
   onclick={scrollToDay}
 >
   <span class="day-cell">
@@ -56,57 +58,63 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--gap-xs);
+    gap: var(--gap-micro);
 
     min-width: var(--ni-44);
     box-sizing: border-box;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition: opacity var(--transition-increment) ease-in-out;
   }
 
   .day-cell {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: var(--ni-2);
 
     width: 100%;
-    padding: var(--ni-4) var(--ni-2);
+    padding: var(--ni-6) var(--ni-2);
     box-sizing: border-box;
 
     border: var(--border-thickness-xxs) solid transparent;
     border-radius: var(--ni-10);
 
-    color: var(--color-text-secondary);
-
     transition: var(--transition-increment) ease-in-out;
     transition-property: background-color, border-color, color;
 
-    .day-of-month,
-    .month {
+    .day-of-month {
       font-size: var(--font-size-text);
-      line-height: var(--ni-24);
-      letter-spacing: 0.025em;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
     }
 
-    .day-of-month {
-      font-weight: 600;
+    .month {
+      font-size: var(--font-size-tag);
+      color: var(--color-text-secondary);
     }
+  }
+
+  .trakt-calendar-day-button.is-today .day-cell {
+    border-color: var(--color-calendar-item-indicator);
+  }
+
+  .trakt-calendar-day-button.is-active .day-cell {
+    background-color: var(--color-calendar-active-background);
+  }
+
+  .trakt-calendar-day-button.is-past {
+    opacity: 0.55;
   }
 
   .trakt-calendar-day-button:not(.has-items) {
     pointer-events: none;
-
-    .day-cell {
-      opacity: 0.6;
-    }
-  }
-
-  .trakt-calendar-day-button.is-active .day-cell {
-    background-color: var(--purple-900);
-    border-color: var(--purple-700);
-    color: var(--shade-10);
-  }
-
-  .trakt-calendar-day-button.is-past {
     opacity: 0.3;
+  }
+
+  .trakt-calendar-day-button:focus-visible .day-cell {
+    outline: var(--border-thickness-xs) solid var(--color-link-active);
   }
 
   @include for-mouse {
@@ -114,12 +122,7 @@
       cursor: pointer;
 
       .day-cell {
-        background-color: color-mix(
-          in srgb,
-          var(--purple-900) 35%,
-          transparent
-        );
-        color: var(--shade-10);
+        background-color: var(--color-calendar-background-hover);
       }
     }
   }

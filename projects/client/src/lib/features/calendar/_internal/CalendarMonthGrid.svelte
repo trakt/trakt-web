@@ -5,6 +5,8 @@
   import { LOCALE_MAP } from "$lib/utils/formatting/date/LOCALE_MAP.ts";
   import { endOfWeek } from "date-fns/endOfWeek";
   import { isBefore } from "date-fns/isBefore";
+  import { isToday } from "date-fns/isToday";
+  import type { Snippet } from "svelte";
   import { startOfDay } from "date-fns/startOfDay";
   import type { Calendar } from "../models/Calendar.ts";
   import { buildMonthMatrix } from "./buildMonthMatrix.ts";
@@ -14,6 +16,9 @@
     allDays,
     activeDate,
     skipActiveWeek = false,
+    preview,
+    variant = "default",
+    onSelectDay,
   }: {
     allDays: Calendar<T>;
     activeDate: Date;
@@ -24,9 +29,12 @@
      * itself is wrapped via the `.is-active-week` modifier.
      */
     skipActiveWeek?: boolean;
+    preview?: Snippet<[T[]]>;
+    variant?: "default" | "mini" | "fill";
+    onSelectDay?: (day: { date: Date; items: T[] }) => void;
   } = $props();
 
-  const MAX_INDICATOR_DOTS = 3;
+  const MAX_PREVIEW_ITEMS = 4;
 
   const referenceDate = $derived(
     endOfWeek(activeDate, {
@@ -51,7 +59,7 @@
   };
 </script>
 
-<div class="calendar-month-grid">
+<div class="calendar-month-grid" data-variant={variant}>
   {#each matrix.weeks as week, weekIndex (weekIndex)}
     {#if !(skipActiveWeek && weekIndex === matrix.activeWeekIndex)}
       <div
@@ -65,20 +73,27 @@
             class="month-day"
             class:has-items={cell.items.length > 0}
             class:is-past={isBefore(cell.date, todayStart)}
+            class:is-today={isToday(cell.date)}
+            class:is-outside-month={cell.isOutsideMonth}
             aria-label={m.button_label_go_to_calendar_day({
               day: toHumanDay({ date: cell.date, locale: getLocale() }),
             })}
             disabled={cell.items.length === 0}
-            onclick={() => scrollToDay(cell.date)}
+            onclick={() =>
+              onSelectDay ? onSelectDay(cell) : scrollToDay(cell.date)}
           >
             <span class="month-day-number">{cell.date.getDate()}</span>
-            {#if cell.items.length > 0}
-              <span class="month-day-indicator" aria-hidden="true">
-                {#each Array.from({ length: Math.min(cell.items.length, MAX_INDICATOR_DOTS) }) as _, i (i)}
-                  <span class="dot"></span>
-                {/each}
-              </span>
-            {/if}
+            <span
+              class="month-day-preview"
+              data-count={Math.min(cell.items.length, MAX_PREVIEW_ITEMS)}
+              aria-hidden="true"
+            >
+              {#if cell.items.length > 0 && preview}
+                {@render preview(cell.items.slice(0, MAX_PREVIEW_ITEMS))}
+              {:else if cell.items.length > 0}
+                <span class="dot"></span>
+              {/if}
+            </span>
           </button>
         {/each}
       </div>
@@ -90,85 +105,161 @@
   @use "$style/scss/mixins/index" as *;
 
   .calendar-month-grid {
+    --month-day-radius: var(--ni-8);
+
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
+    gap: var(--ni-4);
 
     width: 100%;
   }
 
   .week-row {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: var(--gap-xs);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--ni-4);
 
-    border-radius: var(--ni-10);
+    border-radius: var(--month-day-radius);
   }
 
   .week-row.is-active-week {
-    outline: var(--border-thickness-xxs) solid var(--purple-400);
+    outline: var(--border-thickness-xxs) solid
+      var(--color-calendar-item-indicator);
     outline-offset: var(--ni-2);
   }
 
   .month-day {
     all: unset;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--ni-2);
-
-    aspect-ratio: 1 / 1;
-
-    border-radius: var(--ni-10);
-
-    background-color: var(--shade-800);
-    color: var(--color-text-secondary);
-
-    font-size: var(--font-size-text);
-
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: background-color, color;
-  }
-
-  .month-day.has-items {
-    background-color: var(--purple-700);
-    color: var(--shade-10);
-  }
-
-  .month-day[disabled] {
-    cursor: not-allowed;
-  }
-
-  .month-day.is-past {
-    opacity: 0.3;
-  }
-
-  .month-day-indicator {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: var(--ni-2);
 
-    height: var(--ni-4);
+    aspect-ratio: 3 / 4;
+    min-width: 0;
+    padding: var(--ni-2) var(--ni-4) var(--ni-4);
+    box-sizing: border-box;
+    overflow: hidden;
+
+    border-radius: var(--month-day-radius);
+    background-color: var(--color-calendar-inactive-background);
+
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: background-color, opacity;
+
+    &[disabled] {
+      cursor: default;
+    }
+
+    &.is-outside-month {
+      opacity: 0.45;
+    }
+
+    &.is-past:not(.is-today) {
+      opacity: 0.55;
+    }
+
+    &:focus-visible {
+      outline: var(--border-thickness-xs) solid var(--color-link-active);
+    }
+  }
+
+  .month-day-number {
+    display: grid;
+    place-items: center;
+
+    min-width: var(--ni-24);
+    height: var(--ni-18);
+    padding-inline: var(--ni-4);
+    box-sizing: border-box;
+
+    border-radius: var(--border-radius-xxl);
+
+    font-size: var(--font-size-tag);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+
+    .month-day:not(.has-items) & {
+      color: var(--color-text-secondary);
+    }
+
+    .month-day.is-today & {
+      color: var(--shade-10);
+      background-color: var(--color-calendar-item-indicator);
+    }
+  }
+
+  .month-day-preview {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, 1fr);
+    gap: var(--ni-2);
+
+    &[data-count="1"] {
+      grid-template-columns: minmax(0, 1fr);
+    }
 
     .dot {
+      place-self: center;
+
       width: var(--ni-4);
       height: var(--ni-4);
-
       border-radius: 50%;
-      background-color: var(--shade-10);
+
+      background-color: var(--color-calendar-item-indicator);
+    }
+  }
+
+  .calendar-month-grid[data-variant="fill"] {
+    flex: 1;
+    min-height: 0;
+
+    .week-row {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .month-day {
+      aspect-ratio: auto;
+      height: 100%;
+    }
+  }
+
+  .calendar-month-grid[data-variant="mini"] {
+    gap: var(--ni-2);
+
+    .week-row {
+      gap: var(--ni-2);
+    }
+
+    .month-day {
+      aspect-ratio: auto;
+      height: var(--ni-40);
+      justify-content: center;
+
+      background-color: transparent;
+    }
+
+    .month-day-preview {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+
+      height: var(--ni-4);
     }
   }
 
   @include for-mouse {
     .month-day.has-items:hover {
-      background-color: var(--purple-600);
+      background-color: var(--color-calendar-background-hover);
     }
   }
 </style>
