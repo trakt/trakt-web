@@ -1,0 +1,21 @@
+export const MediaSyncRunsResponseMock = [
+  {
+    id: 101,
+    library_id: null,
+    kind: 'incremental',
+    feed: 'history',
+    status: 'completed',
+    pages_total: 1,
+    pages_done: 1,
+    pages_failed: 0,
+    items_seen: 2,
+    items_matched: 2,
+    items_written: 2,
+    items_unmatched: 0,
+    items_removed: 0,
+    error: null,
+    started_at: '2026-10-05T09:00:01.000Z',
+    finished_at: '2026-10-05T09:00:12.000Z',
+    created_at: '2026-10-05T09:00:00.000Z',
+  },
+];

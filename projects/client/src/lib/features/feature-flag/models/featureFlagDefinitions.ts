@@ -1,6 +1,7 @@
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
+import PlexLogo from '$lib/components/icons/PlexLogo.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import ReactionIcon from '$lib/components/icons/ReactionIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
@@ -82,5 +83,17 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_reactions(),
     addedAt: new Date('2026-10-02'),
     description: () => m.preview_feature_description_reactions(),
+  },
+  [FeatureFlag.PlexSyncV2]: {
+    icon: PlexLogo,
+    title: () => m.preview_feature_title_plex_sync_v2(),
+    addedAt: new Date('2026-10-05'),
+    description: () => m.preview_feature_description_plex_sync_v2(),
+    featureLink: () =>
+      openFeatureLink(
+        UrlBuilder.settings.plex(),
+        m.preview_feature_title_plex_sync_v2(),
+      ),
+    audience: 'director',
   },
 };

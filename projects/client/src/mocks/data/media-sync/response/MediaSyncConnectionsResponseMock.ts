@@ -1,0 +1,37 @@
+export const MediaSyncConnectionsResponseMock = [
+  {
+    id: 7,
+    provider: 'plex',
+    status: 'active',
+    server_id: 'server-mock-1',
+    server_name: 'Living Room',
+    account_name: 'mock-user',
+    feeds: ['history', 'ratings', 'collection', 'watchlist'],
+    libraries: [
+      {
+        id: 11,
+        external_id: '1',
+        kind: 'movies',
+        title: 'Movies',
+        enabled: true,
+        item_count: 520,
+      },
+      {
+        id: 12,
+        external_id: '2',
+        kind: 'shows',
+        title: 'TV Shows',
+        enabled: false,
+        item_count: 48,
+      },
+    ],
+    failure_count: 0,
+    last_failure_kind: null,
+    last_error: null,
+    collection_limit_reached: false,
+    full_synced_at: '2026-10-01T10:00:00.000Z',
+    last_synced_at: '2026-10-05T09:00:00.000Z',
+    next_sync_at: '2026-10-05T10:00:00.000Z',
+    created_at: '2026-10-01T09:58:00.000Z',
+  },
+];
