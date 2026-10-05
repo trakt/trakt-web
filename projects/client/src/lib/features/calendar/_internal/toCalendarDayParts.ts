@@ -7,6 +7,8 @@ type CalendarDayParts = {
   month: string;
   weekday: string;
   weekdayLong: string;
+  monthLong: string;
+  year: string;
 };
 
 export function toCalendarDayParts(
@@ -20,5 +22,7 @@ export function toCalendarDayParts(
     month: format(date, 'MMM', { locale }),
     weekday: format(date, 'EEE', { locale }),
     weekdayLong: format(date, 'EEEE', { locale }),
+    monthLong: format(date, 'LLLL', { locale }),
+    year: format(date, 'yyyy', { locale }),
   };
 }

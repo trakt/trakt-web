@@ -7941,25 +7941,17 @@
         "ios"
       ]
     },
+    "text_calendar_up_next": {
+      "default": "Up next",
+      "description": "Label on the line in today's calendar column that marks where the releases still to come start.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "button_label_calendar_view": {
       "default": "Calendar view",
       "description": "Accessibility label for the calendar view selector dropdown (Day / Week).",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "button_label_expand_calendar_month": {
-      "default": "Expand to month view",
-      "description": "Accessibility label for the chevron button at the bottom of the calendar navigation that expands the day strip into a month grid.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "button_label_collapse_calendar_month": {
-      "default": "Collapse to day view",
-      "description": "Accessibility label for the chevron button at the bottom of the calendar navigation when in month view; clicking collapses back to the day strip.",
       "exclude": [
         "android",
         "ios"

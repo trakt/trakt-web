@@ -26,7 +26,9 @@
   <CalendarControls {...navigationProps} {view} {onToggleView} />
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-calendar-header {
     height: var(--ni-40);
     overflow: hidden;
@@ -41,5 +43,27 @@
     align-items: center;
 
     margin-inline-end: auto;
+  }
+
+  :global(.trakt-calendar-toolbar) .trakt-calendar-header {
+    height: var(--ni-40);
+    padding-inline: var(--ni-4) 0;
+    box-sizing: border-box;
+    gap: var(--ni-4);
+
+    border-radius: var(--border-radius-m);
+    background-color: var(--color-segmented-track-background);
+    backdrop-filter: blur(var(--ni-8));
+
+    .calendar-header-actions:empty {
+      display: none;
+    }
+
+    .calendar-header-actions {
+      margin-inline-end: 0;
+      padding-inline-end: var(--ni-4);
+      border-inline-end: var(--border-thickness-xxs) solid
+        var(--color-segmented-track-border);
+    }
   }
 </style>

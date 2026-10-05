@@ -43,7 +43,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .calendar-day-anchor {
-    scroll-margin-top: var(--calendar-nav-bottom, 0px);
+    scroll-margin-top: var(--calendar-sticky-top, 0px);
 
     display: flex;
     flex-direction: column;

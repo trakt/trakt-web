@@ -130,6 +130,15 @@
   --color-switch-background-orange: var(--orange-800);
 
   /**
+   * Docked filter panel
+   */
+  --color-filter-panel-card-background: color-mix(
+    in srgb,
+    var(--color-background-navbar-base) 90%,
+    transparent
+  );
+
+  /**
    * Segmented select
    */
   --color-segmented-selector-background: linear-gradient(

@@ -1,18 +1,12 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { getLocale } from "$lib/features/i18n";
-  import * as m from "$lib/features/i18n/messages.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
-  import FilterSidebar from "$lib/sections/navbar/components/filter/FilterSidebar.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { useNavbarState } from "$lib/sections/navbar/useNavbarState";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
-  import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import { getDaysDifference } from "$lib/utils/date/getDaysDifference";
   import { LOCALE_MAP } from "$lib/utils/formatting/date/LOCALE_MAP.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { NOOP_FN } from "$lib/utils/constants.ts";
   import { differenceInDays } from "date-fns/differenceInDays";
   import { endOfMonth } from "date-fns/endOfMonth";
   import { endOfWeek } from "date-fns/endOfWeek";
@@ -21,8 +15,9 @@
   import { tick } from "svelte";
   import { useFilter } from "../filters/useFilter";
   import CalendarDays from "./_internal/CalendarDays.svelte";
-  import CalendarHeader from "./_internal/CalendarHeader.svelte";
   import CalendarPosterTile from "./_internal/CalendarPosterTile.svelte";
+  import CalendarSidebar from "./_internal/CalendarSidebar.svelte";
+  import CalendarToolbar from "./_internal/CalendarToolbar.svelte";
   import CalendarMonthGrid from "./_internal/CalendarMonthGrid.svelte";
   import CalendarWeekdayRow from "./_internal/CalendarWeekdayRow.svelte";
   import { dateKey } from "./_internal/dateKey";
@@ -33,6 +28,7 @@
   } from "./_internal/useCalendar";
   import CalendarFeedMenu from "./CalendarFeedMenu.svelte";
   import CalendarItem from "./CalendarItem.svelte";
+  import EpisodeTypeToggles from "./EpisodeTypeToggles.svelte";
   import CalendarLayout from "./CalendarLayout.svelte";
   import { getCalendarContext } from "./context/getCalendarContext";
   import { useCalendarPeriod } from "./context/useCalendarPeriod";
@@ -150,16 +146,17 @@
   const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
   const isCompact = $derived($isMobile || $isTabletSmall);
   const layoutView = $derived(isCompact ? "day" : calendarView);
+  const isBarPinned = $derived($isDesktop || calendarView === "day");
 
-  const { set } = useNavbarState();
+  let barHeight = $state(0);
 
-  $effect(() => {
-    set({ filterPanelHeader: $isDesktop ? calendarNavigation : null });
-    return () => set({ filterPanelHeader: null });
-  });
 
   const closeToHome = () => goto(UrlBuilder.home());
 </script>
+
+{#snippet episodeTypeFilters()}
+  <EpisodeTypeToggles />
+{/snippet}
 
 {#snippet feedActions()}
   <CalendarFeedMenu />
@@ -184,48 +181,14 @@
   {/each}
 {/snippet}
 
-{#snippet calendarNavigation()}
-  <div class="calendar-filter-navigation" data-view={calendarView}>
-    <CalendarHeader
-      {navigation}
-      activeDate={selectedDate}
-      actions={feedActions}
-      view={calendarView}
-      onToggleView={toggleView}
-    />
-    <div class="calendar-filter-divider" aria-hidden="true"></div>
+{#snippet miniMonth()}
+  <div class="calendar-mini-month">
     <CalendarWeekdayRow />
-    {#if calendarView === "day"}
-      <CalendarDays
-        calendar={visiblePeriodCalendar}
-        {navigation}
-        activeDate={selectedDate}
-      />
-    {:else}
-      <CalendarMonthGrid
-        allDays={monthAllDays}
-        activeDate={selectedDate}
-        preview={monthPreview}
-      />
-    {/if}
-    <button
-      type="button"
-      class="calendar-filter-expand"
-      aria-label={calendarView === "week"
-        ? m.button_label_collapse_calendar_month()
-        : m.button_label_expand_calendar_month()}
-      onclick={toggleView}
-    >
-      <svg
-        aria-hidden="true"
-        width="16"
-        height="16"
-        viewBox="0 0 17 16"
-        fill="none"
-      >
-        <path stroke="currentColor" stroke-width="2" d="m1.5 4.5 7 7 7-7" />
-      </svg>
-    </button>
+    <CalendarMonthGrid
+      allDays={monthAllDays}
+      activeDate={selectedDate}
+      variant="mini"
+    />
   </div>
 {/snippet}
 
@@ -233,17 +196,40 @@
   class="calendar-page-layout"
   data-view={calendarView}
   class:is-docked={$isDesktop}
+  class:is-bar-pinned={isBarPinned}
+  style:--calendar-bar-height="{barHeight}px"
 >
   <div class="calendar-main">
-    {#if !$isDesktop}
-      <div
-        class="calendar-pinned-navigation"
-        use:trackWindowScroll={"is-scrolled"}
-        use:trackElementBottom={"--calendar-nav-bottom"}
-      >
-        {@render calendarNavigation()}
-      </div>
-    {/if}
+    <div class="calendar-bar" bind:offsetHeight={barHeight}>
+      <CalendarToolbar
+        {navigation}
+        activeDate={selectedDate}
+        actions={feedActions}
+        filters={episodeTypeFilters}
+        view={calendarView}
+        onToggleView={toggleView}
+      />
+
+      {#if !$isDesktop}
+        <div class="calendar-bar-dates">
+          <CalendarWeekdayRow />
+          {#if calendarView === "day"}
+            <CalendarDays
+              calendar={visiblePeriodCalendar}
+              {navigation}
+              activeDate={selectedDate}
+            />
+          {:else}
+            <CalendarMonthGrid
+              allDays={monthAllDays}
+              activeDate={selectedDate}
+              preview={monthPreview}
+            />
+          {/if}
+        </div>
+      {/if}
+    </div>
+
     <CalendarLayout
       activeDate={$activeDate}
       isLoading={$isLoading}
@@ -257,11 +243,9 @@
   </div>
 
   {#if $isDesktop}
-    <FilterSidebar
-      hasAutoClose={false}
-      onClose={closeToHome}
-      onSaveFilter={NOOP_FN}
-    />
+    <CalendarSidebar onClose={closeToHome}>
+      {@render miniMonth()}
+    </CalendarSidebar>
   {/if}
 </div>
 
@@ -269,27 +253,39 @@
   @use "$style/scss/mixins/index" as *;
 
   .calendar-page-layout {
-    --calendar-sticky-top: var(--navbar-height);
+    --calendar-bar-top: var(--navbar-height);
+    --calendar-sticky-top: var(--calendar-bar-top);
 
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--gap-l);
+    gap: var(--gap-xl);
 
     margin-inline: var(--layout-distance-side);
 
+    @include for-tablet-sm-and-below {
+      --calendar-bar-top: calc(
+        var(--navbar-height) + env(safe-area-inset-top, 0px)
+      );
+    }
+
     &.is-docked {
+      --calendar-bar-top: 0px;
+
       grid-template-columns: minmax(0, 1fr) var(--ni-380);
     }
 
-    &:not(.is-docked) {
-      --calendar-sticky-top: var(--calendar-nav-bottom, var(--navbar-height));
+    &.is-bar-pinned {
+      @media (min-height: 500px) {
+        --calendar-sticky-top: calc(
+          var(--calendar-bar-top) + var(--calendar-bar-height)
+        );
+      }
     }
   }
 
   .calendar-main {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
 
     min-width: 0;
   }
@@ -298,52 +294,65 @@
     margin-inline: 0;
   }
 
-  .calendar-pinned-navigation {
-    position: sticky;
-    top: var(--navbar-actions-bottom, var(--navbar-height));
-    z-index: var(--layer-overlay);
+  .calendar-bar {
+    position: relative;
+    z-index: var(--layer-floating);
 
-    @include for-tablet-sm-and-below {
-      top: calc(var(--navbar-height) + env(safe-area-inset-top, 0px));
-    }
-
-    .calendar-page-layout[data-view="week"] & {
-      position: relative;
-    }
-
-    :global(.trakt-calendar-header),
-    .calendar-filter-divider,
-    .calendar-filter-expand {
-      transition: var(--transition-increment) ease-in-out;
-      transition-property: height, opacity, margin;
-    }
-
-    &:global(.is-scrolled) {
-      :global(.trakt-calendar-header),
-      .calendar-filter-divider,
-      .calendar-filter-expand {
-        height: 0;
-        margin-block: calc(-1 * var(--gap-s) / 2);
-        opacity: 0;
-        overflow: hidden;
-        pointer-events: none;
-      }
-    }
-  }
-
-  .calendar-filter-navigation {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-m);
 
-    width: 100%;
-    padding: var(--ni-12);
-    box-sizing: border-box;
+    padding-block: var(--gap-s) var(--gap-m);
 
-    border-radius: var(--border-radius-xl);
-    background-color: var(--color-calendar-background);
-    box-shadow: var(--shadow-raised);
-    backdrop-filter: blur(var(--ni-16));
+    background-color: var(--color-background);
+
+    .is-docked & {
+      --page-top-offset: calc(var(--gap-m) + env(safe-area-inset-top, 0px));
+
+      margin-top: calc(-1 * var(--page-top-offset));
+      padding-top: calc(
+        var(--page-top-offset) +
+          (var(--side-navbar-actions-height) - var(--ni-48)) / 2
+      );
+    }
+
+    .is-bar-pinned & {
+      @media (min-height: 500px) {
+        position: sticky;
+        top: var(--calendar-bar-top);
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset-inline: calc(-1 * var(--layout-distance-side));
+      bottom: 100%;
+
+      height: var(--calendar-bar-top);
+
+      background-color: var(--color-background);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      top: 100%;
+
+      height: var(--ni-16);
+
+      background: linear-gradient(
+        to bottom,
+        var(--color-background),
+        transparent
+      );
+      pointer-events: none;
+    }
+
+    .is-docked &::after {
+      display: none;
+    }
 
     :global(.calendar-month-poster) {
       width: 100%;
@@ -355,49 +364,25 @@
     }
   }
 
-  .calendar-filter-divider {
-    height: var(--border-thickness-xxs);
-    width: 100%;
-
-    background-color: var(--color-calendar-active-background);
-  }
-
-  .calendar-filter-expand {
-    all: unset;
-    cursor: pointer;
-
+  .calendar-bar-dates {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: var(--gap-xs);
 
-    width: var(--ni-24);
-    height: var(--ni-24);
-    margin-inline: auto;
+    padding: var(--ni-10) var(--ni-8);
+    border-radius: var(--border-radius-xl);
 
-    color: var(--color-text-secondary);
-
-    -webkit-tap-highlight-color: transparent;
-
-    svg {
-      width: var(--ni-16);
-      height: var(--ni-16);
-
-      transition: transform var(--transition-increment) ease-in-out;
-    }
-
-    @include for-mouse {
-      &:hover {
-        color: var(--color-foreground);
-      }
-    }
-
-    &:focus-visible {
-      outline: var(--border-thickness-xxs) solid var(--color-link-active);
-      border-radius: var(--ni-4);
-    }
+    background-color: var(--color-calendar-background);
   }
 
-  .calendar-filter-navigation[data-view="week"] .calendar-filter-expand svg {
-    transform: rotate(180deg);
+  .calendar-mini-month {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+
+    padding: var(--ni-12);
+    border-radius: var(--border-radius-xl);
+
+    background-color: var(--color-calendar-background);
   }
 </style>

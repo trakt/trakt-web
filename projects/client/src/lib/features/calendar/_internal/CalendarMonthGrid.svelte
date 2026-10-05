@@ -17,6 +17,7 @@
     activeDate,
     skipActiveWeek = false,
     preview,
+    variant = "default",
   }: {
     allDays: Calendar<T>;
     activeDate: Date;
@@ -28,6 +29,7 @@
      */
     skipActiveWeek?: boolean;
     preview?: Snippet<[T[]]>;
+    variant?: "default" | "mini";
   } = $props();
 
   const MAX_PREVIEW_ITEMS = 4;
@@ -55,7 +57,7 @@
   };
 </script>
 
-<div class="calendar-month-grid">
+<div class="calendar-month-grid" data-variant={variant}>
   {#each matrix.weeks as week, weekIndex (weekIndex)}
     {#if !(skipActiveWeek && weekIndex === matrix.activeWeekIndex)}
       <div
@@ -78,19 +80,17 @@
             onclick={() => scrollToDay(cell.date)}
           >
             <span class="month-day-number">{cell.date.getDate()}</span>
-            {#if cell.items.length > 0}
-              <span
-                class="month-day-preview"
-                data-count={Math.min(cell.items.length, MAX_PREVIEW_ITEMS)}
-                aria-hidden="true"
-              >
-                {#if preview}
-                  {@render preview(cell.items.slice(0, MAX_PREVIEW_ITEMS))}
-                {:else}
-                  <span class="dot"></span>
-                {/if}
-              </span>
-            {/if}
+            <span
+              class="month-day-preview"
+              data-count={Math.min(cell.items.length, MAX_PREVIEW_ITEMS)}
+              aria-hidden="true"
+            >
+              {#if cell.items.length > 0 && preview}
+                {@render preview(cell.items.slice(0, MAX_PREVIEW_ITEMS))}
+              {:else if cell.items.length > 0}
+                <span class="dot"></span>
+              {/if}
+            </span>
           </button>
         {/each}
       </div>
@@ -212,6 +212,30 @@
       border-radius: 50%;
 
       background-color: var(--color-calendar-item-indicator);
+    }
+  }
+
+  .calendar-month-grid[data-variant="mini"] {
+    gap: var(--ni-2);
+
+    .week-row {
+      gap: var(--ni-2);
+    }
+
+    .month-day {
+      aspect-ratio: auto;
+      height: var(--ni-40);
+      justify-content: center;
+
+      background-color: transparent;
+    }
+
+    .month-day-preview {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+
+      height: var(--ni-4);
     }
   }
 

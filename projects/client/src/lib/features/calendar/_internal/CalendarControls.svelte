@@ -82,4 +82,15 @@
     align-items: center;
     gap: var(--gap-xs);
   }
+
+  :global(.trakt-calendar-toolbar) .trakt-calendar-controls {
+    gap: var(--ni-4);
+
+    .calendar-controls-left {
+      gap: var(--ni-2);
+      padding-inline-end: var(--ni-4);
+      border-inline-end: var(--border-thickness-xxs) solid
+        var(--color-segmented-track-border);
+    }
+  }
 </style>
