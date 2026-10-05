@@ -2,8 +2,6 @@
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import SettingsButton from "$lib/components/buttons/settings/SettingsButton.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
-  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -44,9 +42,6 @@
   const { veteran } = useVipVeteran(fromRune(() => slug));
   const shownVeteran = $derived(profile.isVip ? $veteran : null);
   const ringTone = $derived(toVipVeteranRingTone(shownVeteran));
-
-  const { isEnabled } = useFeatureFlag();
-  const leaderboardEnabled = isEnabled(FeatureFlag.Leaderboard);
 
   const shareableSlug = $derived($isMe ? $user.slug : slug);
   const isBlocked = $derived($blocked.has(slug));
@@ -101,7 +96,7 @@
         <RenderFor audience="authenticated">
           <MatchPill {slug} />
         </RenderFor>
-      {:else if $isMe && $leaderboardEnabled}
+      {:else if $isMe}
         <LeaderboardPill />
       {/if}
     </div>

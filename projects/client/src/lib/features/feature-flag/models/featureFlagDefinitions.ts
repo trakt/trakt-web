@@ -75,12 +75,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-06-19'),
     description: () => m.preview_feature_description_rewatch(),
   },
-  [FeatureFlag.Leaderboard]: {
-    icon: PeopleIcon,
-    title: () => m.preview_feature_title_leaderboard(),
-    addedAt: new Date('2026-07-09'),
-    description: () => m.preview_feature_description_leaderboard(),
-  },
   [FeatureFlag.Soundtrack]: {
     icon: MusicNoteIcon,
     title: () => m.preview_feature_title_soundtrack(),

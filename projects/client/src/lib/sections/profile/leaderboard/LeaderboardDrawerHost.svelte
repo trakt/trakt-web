@@ -20,7 +20,7 @@
   let isOpened = $state(false);
 </script>
 
-<Drawer {onClose} title={m.header_leaderboard()} size="large" onOpened={() => (isOpened = true)}>
+<Drawer {onClose} title={m.header_follows_leaderboard()} size="large" onOpened={() => (isOpened = true)}>
   {#if isOpened}
     <div class="trakt-leaderboard-list">
       <PaginatedList

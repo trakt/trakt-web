@@ -4,7 +4,6 @@ export enum FeatureFlag {
   ScopedFavorites = 'scoped-favorites',
   UpNextSmartSort = 'up-next-smart-sort',
   Rewatching = 'rewatching',
-  Leaderboard = 'leaderboard',
   ParentalGuide = 'parental-guide',
   Soundtrack = 'soundtrack',
   ListCounts = 'list-counts',

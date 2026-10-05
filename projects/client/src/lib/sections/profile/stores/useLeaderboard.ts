@@ -86,13 +86,21 @@ export function useLeaderboard({ slug, limit }: UseLeaderboardProps) {
   // (`useLeaderboardViewer`) instead.
   const ownStats = useQuery(userStatsQuery({ slug: 'me' }));
 
-  const listWithViewer = combineLatest([list, user, isAuthorized, ownStats])
+  const listWithViewer = combineLatest([
+    list,
+    listLoading,
+    user,
+    isAuthorized,
+    ownStats,
+  ])
     .pipe(
-      map(([loaded, currentUser, authorized, stats]): LeaderboardEntry[] => {
-        // Hold the list until the viewer's own stats settle, so the woven VIP
-        // row is painted in its final sorted position instead of popping in
-        // and re-sorting the list.
-        if (toLoadingState(stats)) {
+      map((
+        [loaded, loading, currentUser, authorized, stats],
+      ): LeaderboardEntry[] => {
+        // Hold the list until the first page and the viewer's own stats
+        // settle, so the woven VIP row is painted in its final sorted position
+        // instead of showing alone above the spinner and re-sorting the list.
+        if (toLoadingState(stats) || (loading && loaded.length === 0)) {
           return [];
         }
 
