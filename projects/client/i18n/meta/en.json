@@ -12368,6 +12368,116 @@
       "default": "New Plex sync",
       "description": "Title for the preview feature toggle that switches the Plex settings page to the new Plex sync."
     },
+    "header_media_sync_connect": {
+      "default": "Connect a Plex server",
+      "description": "Title of the drawer that walks the user through connecting a Plex server to the new Plex sync."
+    },
+    "description_media_sync_connect_waiting": {
+      "default": "Approve Trakt Media Sync in the Plex window. This page updates by itself once you do.",
+      "description": "Shown while the new Plex sync waits for the user to approve the sign-in on plex.tv."
+    },
+    "button_media_sync_open_plex": {
+      "default": "Open Plex sign-in",
+      "description": "Button that opens the plex.tv sign-in page again if the pop-up was blocked or closed."
+    },
+    "button_label_media_sync_open_plex": {
+      "default": "Open the Plex sign-in page",
+      "description": "Accessible label for the button that reopens the plex.tv sign-in page."
+    },
+    "description_media_sync_connect_expired": {
+      "default": "The Plex sign-in expired. Start again to connect your server.",
+      "description": "Shown when the user did not approve the plex.tv sign-in in time."
+    },
+    "header_media_sync_choose_server": {
+      "default": "Choose a server",
+      "description": "Heading above the list of Plex servers the user can connect."
+    },
+    "description_media_sync_server_unreachable": {
+      "default": "Not reachable from the internet",
+      "description": "Shown under a Plex server that Trakt cannot reach, so it cannot be synced."
+    },
+    "button_media_sync_choose_server": {
+      "default": "Choose",
+      "description": "Button that picks a Plex server to connect from the list of the user's servers."
+    },
+    "button_label_media_sync_choose_server": {
+      "default": "Choose {server}",
+      "description": "Accessible label for the button that picks a Plex server to connect.",
+      "variables": {
+        "server": {
+          "type": "string",
+          "description": "Name of the Plex server.",
+          "required": true
+        }
+      }
+    },
+    "header_media_sync_choose_libraries": {
+      "default": "Choose libraries",
+      "description": "Heading above the library switches when connecting a Plex server."
+    },
+    "button_media_sync_connect_server": {
+      "default": "Connect server",
+      "description": "Button that connects the chosen Plex server with the chosen libraries."
+    },
+    "button_label_media_sync_connect_server": {
+      "default": "Connect the chosen Plex server",
+      "description": "Accessible label for the button that connects the chosen Plex server."
+    },
+    "error_text_media_sync_server_limit": {
+      "default": "Free accounts can sync 1 Plex server. Go VIP to add more.",
+      "description": "Shown when a free user tries to connect a second Plex server."
+    },
+    "error_text_media_sync_generic": {
+      "default": "Something went wrong. Try again in a moment.",
+      "description": "Generic error shown when a step of the new Plex sync fails."
+    },
+    "description_media_sync_never_synced": {
+      "default": "Waiting for its first sync",
+      "description": "Shown on a connected Plex server that has not synced yet."
+    },
+    "description_media_sync_unreachable": {
+      "default": "Trakt can't reach this server. Retry once it's back online.",
+      "description": "Shown on a Plex server that has been unreachable for too long and stopped syncing."
+    },
+    "description_media_sync_unauthorized": {
+      "default": "Plex no longer accepts Trakt's access. Reconnect to keep syncing.",
+      "description": "Shown on a Plex server whose access was revoked or expired."
+    },
+    "description_media_sync_paused": {
+      "default": "Paused",
+      "description": "Shown on a Plex server whose syncing the user paused."
+    },
+    "tag_media_sync_needs_attention": {
+      "default": "Needs attention",
+      "description": "Badge on a Plex server that stopped syncing and needs the user to act."
+    },
+    "button_media_sync_retry": {
+      "default": "Retry",
+      "description": "Button that retries syncing a Plex server that could not be reached."
+    },
+    "button_label_media_sync_retry": {
+      "default": "Retry syncing this server",
+      "description": "Accessible label for the button that retries syncing a Plex server."
+    },
+    "button_media_sync_reconnect": {
+      "default": "Reconnect",
+      "description": "Button that signs in to Plex again for a server whose access was lost."
+    },
+    "button_label_media_sync_reconnect": {
+      "default": "Sign in to Plex again for this server",
+      "description": "Accessible label for the button that reconnects a Plex server."
+    },
+    "description_media_sync_synced_at": {
+      "default": "Synced {when}",
+      "description": "Shown on a connected Plex server with the time of its last successful sync, e.g. 'Synced today at 9:00 AM'.",
+      "variables": {
+        "when": {
+          "type": "string",
+          "description": "When the server last synced, already formatted for the user's locale.",
+          "required": true
+        }
+      }
+    },
     "preview_feature_description_plex_sync_v2": {
       "default": "Try the rebuilt Plex sync: choose what each server syncs, pick whose plays count, and see every sync it runs.",
       "description": "Description for the new Plex sync preview feature toggle in settings."
