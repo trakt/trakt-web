@@ -7901,6 +7901,46 @@
         "ios"
       ]
     },
+    "header_calendar_this_week": {
+      "default": "This week",
+      "description": "Title of the calendar week that contains today.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_calendar_next_week": {
+      "default": "Next week",
+      "description": "Title of the calendar week right after the current one.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_calendar_last_week": {
+      "default": "Last week",
+      "description": "Title of the calendar week right before the current one.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_today": {
+      "default": "Today",
+      "description": "Label shown instead of the weekday for today's column in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_nothing_scheduled": {
+      "default": "Nothing scheduled",
+      "description": "Placeholder for a calendar day without any episodes or movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "button_label_calendar_view": {
       "default": "Calendar view",
       "description": "Accessibility label for the calendar view selector dropdown (Day / Week).",

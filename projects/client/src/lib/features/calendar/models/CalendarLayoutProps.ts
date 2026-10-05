@@ -18,4 +18,5 @@ export type CalendarLayoutProps<T> = {
   periods: ReadonlyArray<CalendarPeriod<T>>;
   onLoadMore: () => void;
   actions?: Snippet;
+  hasNavigationBar?: boolean;
 } & CalendarNavigationProps;

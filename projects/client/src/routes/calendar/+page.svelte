@@ -7,11 +7,13 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
 
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   const { current } = useDiscover();
   const { current: episodeType, isApplicable } = useEpisodeType();
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 </script>
 
 {#snippet episodeTypeToggles()}
@@ -27,7 +29,8 @@
 
   <ResponsiveNavbarStateSetter
     contentToggle="discover"
-    showFilters={false}
+    hasFilters
+    showFilters={!$isDesktop}
     header={{
       title: m.header_calendar(),
       metaInfo: $isApplicable ? $episodeType.text() : $current.text(),
