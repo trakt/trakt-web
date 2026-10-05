@@ -19,5 +19,6 @@
     color: inherit;
     text-align: start;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 </style>
