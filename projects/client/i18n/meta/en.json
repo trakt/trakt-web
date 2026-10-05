@@ -9173,10 +9173,6 @@
       "default": "You don't have any watch history yet. This will be your first entry.",
       "description": "Placeholder text shown in the history slot picker sheet when the user has no watch history at all to pick an insertion point from."
     },
-    "preview_feature_description_parental_guide": {
-      "default": "Show content risk levels in the details drawer for movies and shows, and filter by severity in advanced filters.",
-      "description": "Description for the Parental Guidance preview feature."
-    },
     "label_parental_guide_category_nudity": {
       "default": "Sex & Nudity",
       "description": "Label for the sex and nudity category in the parental guide."

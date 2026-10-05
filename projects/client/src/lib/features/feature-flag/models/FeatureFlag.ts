@@ -3,7 +3,6 @@ export enum FeatureFlag {
   EditMode = 'edit-mode',
   ScopedFavorites = 'scoped-favorites',
   Rewatching = 'rewatching',
-  ParentalGuide = 'parental-guide',
   Soundtrack = 'soundtrack',
   ListCounts = 'list-counts',
   GenrePicker = 'genre-picker',
