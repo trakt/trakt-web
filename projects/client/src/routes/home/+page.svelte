@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import Banner from "$lib/sections/banner/Banner.svelte";
   import DashboardDrawer from "$lib/sections/dashboard/DashboardDrawer.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
@@ -30,11 +28,7 @@
 </script>
 
 {#snippet todayEntry()}
-  <RenderForFeature flag={FeatureFlag.TodayStory}>
-    {#snippet enabled()}
-      <TodayNavbarEntry />
-    {/snippet}
-  </RenderForFeature>
+  <TodayNavbarEntry />
 {/snippet}
 
 <TraktPage
@@ -72,9 +66,5 @@
 
   <DashboardDrawer />
 
-  <RenderForFeature flag={FeatureFlag.TodayStory}>
-    {#snippet enabled()}
-      <TodayStoryViewerHost />
-    {/snippet}
-  </RenderForFeature>
+  <TodayStoryViewerHost />
 </TraktPage>

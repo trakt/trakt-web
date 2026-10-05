@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
@@ -20,10 +18,6 @@
 
   <NavbarStateSetter mode="minimal" />
 
-  <RenderForFeature flag={FeatureFlag.TodayStory}>
-    {#snippet enabled()}
-      <TodayOverview />
-      <TodayStoryViewerHost />
-    {/snippet}
-  </RenderForFeature>
+  <TodayOverview />
+  <TodayStoryViewerHost />
 </TraktPage>

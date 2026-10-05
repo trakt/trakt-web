@@ -1,4 +1,3 @@
-import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
@@ -80,17 +79,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
       openFeatureLink(
         UrlBuilder.trending(),
         m.preview_feature_title_large_screen_cards(),
-      ),
-  },
-  [FeatureFlag.TodayStory]: {
-    icon: CalendarIcon,
-    title: () => m.preview_feature_title_today_story(),
-    addedAt: new Date('2026-09-29'),
-    description: () => m.preview_feature_description_today_story(),
-    featureLink: () =>
-      openFeatureLink(
-        UrlBuilder.today(),
-        m.preview_feature_title_today_story(),
       ),
   },
   [FeatureFlag.YearInReview2026]: {
