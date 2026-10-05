@@ -12355,6 +12355,14 @@
       "default": "React to a movie or show, and see how everyone else felt.",
       "description": "Description for the media-reactions preview feature toggle in settings."
     },
+    "preview_feature_title_plex_sync_v2": {
+      "default": "New Plex sync",
+      "description": "Title for the preview feature toggle that switches the Plex settings page to the new Plex sync."
+    },
+    "preview_feature_description_plex_sync_v2": {
+      "default": "Try the rebuilt Plex sync: choose what each server syncs, pick whose plays count, and see every sync it runs.",
+      "description": "Description for the new Plex sync preview feature toggle in settings."
+    },
     "button_label_more_reactions": {
       "default": "More reactions",
       "description": "Aria-label for the button in the reaction tray that swaps the quick row for a search over every reaction."

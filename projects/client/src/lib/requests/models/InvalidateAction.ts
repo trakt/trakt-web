@@ -9,6 +9,7 @@ type UserType = 'avatar' | 'settings' | 'follow' | 'cover' | 'block';
 type ListType = 'edited' | 'deleted' | 'created' | 'like' | 'collaborator';
 type VipType = 'canceled' | 'updated';
 type PlexType = 'settings' | 'syncs';
+type MediaSyncType = 'connections' | 'runs';
 type RewatchingType = 'show';
 
 const INVALIDATION_ID = 'invalidate' as const;
@@ -38,6 +39,7 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:streaming_connection`
   | `${typeof INVALIDATION_ID}:data_sync`
   | `${typeof INVALIDATION_ID}:plex:${PlexType}`
+  | `${typeof INVALIDATION_ID}:media_sync:${MediaSyncType}`
   | `${typeof INVALIDATION_ID}:app_revoke`;
 
 type TypeDataMap = {
@@ -66,6 +68,7 @@ type TypeDataMap = {
   'streaming_connection': null;
   'data_sync': null;
   'plex': PlexType;
+  'media_sync': MediaSyncType;
   'app_revoke': null;
 };
 
@@ -169,6 +172,11 @@ export const InvalidateAction = {
   Plex: {
     Settings: buildInvalidationKey('plex', 'settings'),
     Syncs: buildInvalidationKey('plex', 'syncs'),
+  },
+
+  MediaSync: {
+    Connections: buildInvalidationKey('media_sync', 'connections'),
+    Runs: buildInvalidationKey('media_sync', 'runs'),
   },
 
   App: {
