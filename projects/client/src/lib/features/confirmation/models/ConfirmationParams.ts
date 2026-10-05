@@ -129,6 +129,10 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.RemovePlexServer;
     server: string;
   };
+  [ConfirmationType.RemoveMediaSyncServer]: {
+    type: ConfirmationType.RemoveMediaSyncServer;
+    server: string;
+  };
   [ConfirmationType.RevokeApp]: {
     type: ConfirmationType.RevokeApp;
     name: string;

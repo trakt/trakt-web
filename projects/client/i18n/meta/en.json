@@ -12556,6 +12556,117 @@
       "default": "Turn on at least one sync setting.",
       "description": "Hint under the Apply button when every Plex sync switch is off."
     },
+    "header_media_sync_runs": {
+      "default": "Recent syncs",
+      "description": "Heading of the list of recent syncs of one Plex server."
+    },
+    "description_media_sync_runs": {
+      "default": "What each sync of {server} found and wrote to Trakt.",
+      "description": "Explains the list of recent syncs of one Plex server.",
+      "variables": {
+        "server": {
+          "type": "string",
+          "description": "Name of the Plex server.",
+          "required": true
+        }
+      }
+    },
+    "tag_media_sync_run_full": {
+      "default": "Full sync",
+      "description": "Label on a sync that read the whole Plex server, not just what changed."
+    },
+    "tag_media_sync_run_check": {
+      "default": "Library check",
+      "description": "Label on a sync that checked which items are still on the Plex server."
+    },
+    "text_media_sync_run_added": {
+      "default": "{feed}: {count} added",
+      "description": "What one sync added to Trakt for one kind of data, e.g. 'History: 2 added'.",
+      "variables": {
+        "feed": {
+          "type": "string",
+          "description": "Name of the kind of data, e.g. History.",
+          "required": true
+        },
+        "count": {
+          "type": "number",
+          "description": "How many items were added.",
+          "required": true
+        }
+      }
+    },
+    "text_media_sync_run_nothing_new": {
+      "default": "Nothing new",
+      "description": "Shown on a sync that added nothing to Trakt."
+    },
+    "text_media_sync_run_checked": {
+      "default": "{checked} items checked, {removed} removed from your collection",
+      "description": "Result of a library check sync.",
+      "variables": {
+        "checked": {
+          "type": "number",
+          "description": "How many items were checked.",
+          "required": true
+        },
+        "removed": {
+          "type": "number",
+          "description": "How many items were removed from the Trakt collection.",
+          "required": true
+        }
+      }
+    },
+    "text_media_sync_run_failed": {
+      "default": "This sync didn't finish. It tries again on its own.",
+      "description": "Shown on a sync that failed."
+    },
+    "tag_media_sync_run_running": {
+      "default": "Syncing",
+      "description": "Status label on a sync that is still running."
+    },
+    "tag_media_sync_run_done": {
+      "default": "Done",
+      "description": "Status label on a sync that finished."
+    },
+    "tag_media_sync_run_failed": {
+      "default": "Failed",
+      "description": "Status label on a sync that failed."
+    },
+    "text_media_sync_no_runs": {
+      "default": "No syncs yet.",
+      "description": "Shown when a Plex server has not synced yet."
+    },
+    "header_media_sync_collection_limit": {
+      "default": "Your collection hit the free limit",
+      "description": "Title of the notice shown when a Plex server sync stopped adding to the collection at the free limit."
+    },
+    "description_media_sync_collection_limit": {
+      "default": "Some items from this server aren't in your Trakt collection yet. Go VIP to collect everything.",
+      "description": "Body of the notice shown when a Plex server sync stopped adding to the collection at the free limit."
+    },
+    "text_media_sync_run_nothing_new_since": {
+      "default": "Nothing new in {count} syncs since {when}",
+      "description": "Shown on one row that stands for several syncs in a row that added nothing, e.g. 'Nothing new in 12 syncs since today at 7:27 AM'.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "How many syncs found nothing new.",
+          "required": true
+        },
+        "when": {
+          "type": "string",
+          "description": "When the oldest of those syncs ran, already formatted for the user's locale.",
+          "required": true
+        }
+      }
+    },
+    "confirmation_message_media_sync_remove_server": {
+      "default": "This stops syncing the server and removes what it added to your Trakt collection. Your plays and ratings stay. You can connect it again any time.",
+      "description": "Body of the confirmation dialog shown before removing a server from the new Plex sync."
+    },
+    "error_text_media_sync_server_removing": {
+      "default": "This server is still being removed. Try again in a few minutes.",
+      "description": "Shown when the user tries to connect a Plex server that Trakt is still removing."
+    },
     "description_media_sync_synced_at": {
       "default": "Synced {when}",
       "description": "Shown on a connected Plex server with the time of its last successful sync, e.g. 'Synced today at 9:00 AM'.",

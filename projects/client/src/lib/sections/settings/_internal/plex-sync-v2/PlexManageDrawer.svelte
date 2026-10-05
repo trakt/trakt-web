@@ -92,7 +92,7 @@
 
   const confirmRemove = $derived(
     confirm({
-      type: ConfirmationType.RemovePlexServer,
+      type: ConfirmationType.RemoveMediaSyncServer,
       server: serverLabel,
       onConfirm: async () => {
         if (await remove()) {

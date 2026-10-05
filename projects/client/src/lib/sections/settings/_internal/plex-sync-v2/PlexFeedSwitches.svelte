@@ -11,6 +11,7 @@
   import Switch from "$lib/components/toggles/Switch.svelte";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
+  import { toFeedTitle } from "./toFeedTitle.ts";
 
   const {
     feeds,
@@ -20,26 +21,11 @@
     onToggle: (feed: MediaSyncFeed) => void;
   } = $props();
 
-  const FEED_COPY: Record<
-    MediaSyncFeed,
-    { title: () => string; description: () => string }
-  > = {
-    history: {
-      title: m.label_media_sync_feed_history,
-      description: m.description_media_sync_feed_history,
-    },
-    ratings: {
-      title: m.label_media_sync_feed_ratings,
-      description: m.description_media_sync_feed_ratings,
-    },
-    collection: {
-      title: m.label_media_sync_feed_collection,
-      description: m.description_media_sync_feed_collection,
-    },
-    watchlist: {
-      title: m.label_media_sync_feed_watchlist,
-      description: m.description_media_sync_feed_watchlist,
-    },
+  const FEED_DESCRIPTION: Record<MediaSyncFeed, () => string> = {
+    history: m.description_media_sync_feed_history,
+    ratings: m.description_media_sync_feed_ratings,
+    collection: m.description_media_sync_feed_collection,
+    watchlist: m.description_media_sync_feed_watchlist,
   };
 </script>
 
@@ -50,8 +36,8 @@
 >
   {#each MediaSyncFeedSchema.options as feed (feed)}
     <SettingsGroupRow
-      title={FEED_COPY[feed].title()}
-      description={FEED_COPY[feed].description()}
+      title={toFeedTitle(feed)}
+      description={FEED_DESCRIPTION[feed]()}
       variant="custom"
     >
       {#snippet icon()}
@@ -66,7 +52,7 @@
         {/if}
       {/snippet}
       <Switch
-        label={FEED_COPY[feed].title()}
+        label={toFeedTitle(feed)}
         checked={feeds.includes(feed)}
         onclick={() => onToggle(feed)}
       />
