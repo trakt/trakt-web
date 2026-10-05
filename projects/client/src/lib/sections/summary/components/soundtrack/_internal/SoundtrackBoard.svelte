@@ -88,9 +88,10 @@
   {/if}
 
   <ul class="board-list">
-    {#each visibleTracks as track (track.key)}
+    {#each visibleTracks as track, index (track.key)}
       <SoundtrackTrackRow
         {track}
+        number={index + 1}
         isPlaying={isPlaying && selectedKey === track.key}
         isSelected={selectedKey === track.key}
         {onPlay}

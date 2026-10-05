@@ -6,11 +6,13 @@
 
   const {
     track,
+    number,
     isPlaying,
     isSelected = false,
     onPlay,
   }: {
     track: SoundtrackTrack;
+    number: number;
     isPlaying: boolean;
     isSelected?: boolean;
     onPlay: (track: SoundtrackTrack) => void;
@@ -24,7 +26,7 @@
   class:is-muted={!isPlayable}
   class:is-playing={isSelected}
 >
-  <span class="row-position">{track.position + 1}</span>
+  <span class="row-position">{number}</span>
 
   <span class="row-title ellipsis" class:bold={isPlayable}>{track.title}</span>
 
