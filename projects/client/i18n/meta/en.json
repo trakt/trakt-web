@@ -6259,6 +6259,78 @@
       "default": "Manage lists",
       "description": "Header for the drawer that allows users to add/remove a movie, show, season or episode to/from their lists."
     },
+    "button_text_add_from_lists": {
+      "default": "Add from your lists",
+      "description": "Text for the list menu item that opens the drawer for adding titles from other lists to the current list."
+    },
+    "button_label_add_from_lists": {
+      "default": "Add titles to {name} from your other lists",
+      "description": "Aria-label for the list menu item that opens the drawer for adding titles from other lists to the current list."
+    },
+    "header_add_from_lists": {
+      "default": "Add to {name}",
+      "description": "Header for the drawer that adds titles from other lists to a list. The variable is the list name."
+    },
+    "text_add_from_lists_description": {
+      "default": "Choose titles from your other lists",
+      "description": "Subtitle for the drawer that adds titles from other lists to a list."
+    },
+    "label_add_from_lists_source": {
+      "default": "Source list",
+      "description": "Aria-label for the dropdown that picks which list to choose titles from."
+    },
+    "text_add_from_lists_already_in_list": {
+      "default": "{count} already in {name}",
+      "description": "Status line above the title picker. The first variable is how many titles are already in the list, the second is the list name."
+    },
+    "text_titles_selected": {
+      "default": "{count} selected",
+      "description": "Summary of how many titles are selected in the picker."
+    },
+    "text_nothing_selected": {
+      "default": "Nothing selected",
+      "description": "Summary shown in the picker when no titles are selected."
+    },
+    "text_selected_from_lists": {
+      "default": "from {count} lists",
+      "description": "Hint showing the selected titles come from several lists. The variable is the number of lists."
+    },
+    "text_pick_from_other_lists_hint": {
+      "default": "Open the list menu to pick more",
+      "description": "Hint under the selection summary telling users they can switch lists to keep picking titles."
+    },
+    "button_text_add_selected": {
+      "default": "Add {count}",
+      "description": "Text for the button that adds the selected titles to the list. The variable is the number of titles."
+    },
+    "button_text_add_selected_none": {
+      "default": "Add",
+      "description": "Text for the disabled add button when no titles are selected."
+    },
+    "text_already_in_list": {
+      "default": "In list",
+      "description": "Tag shown on a title in the picker that is already in the target list."
+    },
+    "text_added_title_to_list": {
+      "default": "Added 1 title to {name}",
+      "description": "Confirmation shown after exactly one title was added to a list. The variable is the list name."
+    },
+    "text_added_titles_to_list": {
+      "default": "Added {count} titles to {name}",
+      "description": "Confirmation shown after several titles were added to a list. The first variable is the number of titles, the second is the list name."
+    },
+    "text_failed_to_add_titles": {
+      "default": "Could not add titles to {name}",
+      "description": "Error shown when adding titles to a list failed. The variable is the list name."
+    },
+    "text_empty_list_add_from_lists": {
+      "default": "Nothing here yet. Start with titles you already saved in your other lists.",
+      "description": "Message on an empty collaboration list that suggests adding titles from the other lists of the user."
+    },
+    "text_no_titles_to_add": {
+      "default": "Nothing to add from this list",
+      "description": "Empty state in the title picker when the chosen list has no movies or shows."
+    },
     "header_sentiment_highlight": {
       "default": "Highlight",
       "description": "Header for the section that displays the highlight of a movie or show sentiment analysis."

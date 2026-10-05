@@ -3,6 +3,8 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import AddFromListsEmptyState from "./_internal/bulk-add/AddFromListsEmptyState.svelte";
+  import AddFromListsTile from "./_internal/bulk-add/AddFromListsTile.svelte";
   import SortValue from "./_internal/SortValue.svelte";
   import UserListItem from "./_internal/UserListItem.svelte";
   import type { ListSortProps } from "./models/ListSortProps";
@@ -43,6 +45,14 @@
     })}
   groupBy={sort.groupBy}
 >
+  {#snippet ctaItem()}
+    <AddFromListsTile {list} />
+  {/snippet}
+
+  {#snippet empty()}
+    <AddFromListsEmptyState {list} />
+  {/snippet}
+
   {#snippet item(media)}
     {#snippet sortTag()}
       <SortValue item={media} {sortBy} />
