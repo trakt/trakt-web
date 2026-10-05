@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import SentimentIcon from "$lib/components/icons/SentimentIcon.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp.ts";
@@ -61,13 +62,17 @@
   </div>
 
   <div class="details-body">
-    {#if $ratings}
-      <RatingList
-        ratings={$ratings}
-        entry={media}
-        isLoading={$isRatingsLoading}
-      />
-    {/if}
+    <div class="details-ratings">
+      {#if $ratings}
+        <RatingList
+          ratings={$ratings}
+          entry={media}
+          isLoading={$isRatingsLoading}
+        />
+      {:else if $isRatingsLoading}
+        <Skeleton height="var(--ni-32)" />
+      {/if}
+    </div>
 
     {#if media.overview}
       <p class="small" use:lineClamp={{ lines: 5 }}>{media.overview}</p>
@@ -113,8 +118,7 @@
 
     .details-header {
       position: relative;
-      flex: 1 0 var(--ni-120);
-      min-height: var(--ni-120);
+      flex: 0 0 max(var(--ni-120), 35%);
 
       :global(img) {
         position: absolute;
@@ -158,6 +162,10 @@
       flex-shrink: 0;
 
       padding: var(--gap-s) var(--gap-m) var(--gap-m);
+    }
+
+    .details-ratings {
+      min-height: var(--ni-32);
     }
 
     .details-sentiment {
