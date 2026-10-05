@@ -32,7 +32,7 @@
 {#snippet todayEntry()}
   <RenderForFeature flag={FeatureFlag.TodayStory}>
     {#snippet enabled()}
-      <TodayNavbarEntry type={$mode} />
+      <TodayNavbarEntry />
     {/snippet}
   </RenderForFeature>
 {/snippet}

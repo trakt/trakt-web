@@ -11167,6 +11167,48 @@
       "default": "Week",
       "description": "Option in the day picker on the Today page for the last seven days. This should be as short as possible."
     },
+    "text_today_headline_week": {
+      "default": "Last 7 days",
+      "description": "Headline on the Today page when the last seven days are selected."
+    },
+    "text_today_activities_one": {
+      "default": "1 activity",
+      "description": "Part of the summary under the Today headline: exactly one thing the people the user follows did in the chosen period."
+    },
+    "text_today_activities_other": {
+      "default": "{count} activities",
+      "description": "Part of the summary under the Today headline: how many things the people the user follows did in the chosen period.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_today_people_one": {
+      "default": "1 person",
+      "description": "Part of the summary under the Today headline: exactly one followed person was active."
+    },
+    "text_today_people_other": {
+      "default": "{count} people",
+      "description": "Part of the summary under the Today headline: how many followed people were active.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_today_summary": {
+      "default": "{activities} from {people}",
+      "description": "Summary under the Today headline, e.g. '5 activities from 3 people'. Both parts are already translated and pluralised.",
+      "variables": {
+        "activities": {
+          "type": "string"
+        },
+        "people": {
+          "type": "string"
+        }
+      }
+    },
     "text_today_most_active": {
       "default": "Most active",
       "description": "Heading of the list of followed people with the most activity on the Today page."
