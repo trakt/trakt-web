@@ -9,10 +9,12 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaSyncConnection } from "$lib/requests/media-sync/models/MediaSyncConnection.ts";
+  import type { MediaSyncFeed } from "$lib/requests/media-sync/models/MediaSyncFeed.ts";
   import { iffy } from "$lib/utils/function/iffy.ts";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
   import SyncLoadError from "../SyncLoadError.svelte";
+  import PlexFeedSwitches from "./PlexFeedSwitches.svelte";
   import PlexProfilePicker from "./PlexProfilePicker.svelte";
   import PlexProfilePickerSkeleton from "./PlexProfilePickerSkeleton.svelte";
   import { toManageChanges } from "./toManageChanges.ts";
@@ -40,6 +42,7 @@
         .map((library) => library.id)
     ),
   );
+  let feeds = $state(iffy(() => connection.feeds));
   let pickedAccountId = $state<string | null>(null);
   let hasWriteFailed = $state(false);
 
@@ -51,6 +54,8 @@
     toManageChanges({
       libraries: connection.libraries,
       enabledLibraryIds,
+      currentFeeds: connection.feeds,
+      feeds,
       currentAccountId,
       accountId: pickedAccountId ?? currentAccountId,
     }),
@@ -66,6 +71,12 @@
     enabledLibraryIds = enabledLibraryIds.includes(libraryId)
       ? enabledLibraryIds.filter((id) => id !== libraryId)
       : [...enabledLibraryIds, libraryId];
+  }
+
+  function toggleFeed(feed: MediaSyncFeed) {
+    feeds = feeds.includes(feed)
+      ? feeds.filter((current) => current !== feed)
+      : [...feeds, feed];
   }
 
   async function onApply() {
@@ -137,6 +148,8 @@
       />
     {/if}
 
+    <PlexFeedSwitches {feeds} onToggle={toggleFeed} />
+
     <SettingsGroupCard variant="bare" title={m.header_media_sync_libraries()}>
       {#each connection.libraries as library (library.id)}
         <SettingsGroupRow
@@ -172,7 +185,10 @@
         variant="primary"
         color="purple"
         label={m.button_label_apply()}
-        disabled={$isBusy || !hasChanges || enabledLibraryIds.length === 0}
+        disabled={$isBusy ||
+          !hasChanges ||
+          enabledLibraryIds.length === 0 ||
+          feeds.length === 0}
         onclick={onApply}
       >
         {m.button_text_apply()}
@@ -181,6 +197,12 @@
       {#if enabledLibraryIds.length === 0}
         <p class="library-hint secondary small">
           {m.text_plex_library_required()}
+        </p>
+      {/if}
+
+      {#if feeds.length === 0}
+        <p class="library-hint secondary small">
+          {m.text_media_sync_feed_required()}
         </p>
       {/if}
     </div>
