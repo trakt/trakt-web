@@ -4,6 +4,7 @@ import { createMediaSyncConnectionRequest } from '$lib/requests/media-sync/creat
 import { createPlexPinRequest } from '$lib/requests/media-sync/createPlexPinRequest.ts';
 import { MediaSyncFeedSchema } from '$lib/requests/media-sync/models/MediaSyncFeed.ts';
 import { plexPinStatusRequest } from '$lib/requests/media-sync/plexPinStatusRequest.ts';
+import { plexServerAccountsRequest } from '$lib/requests/media-sync/plexServerAccountsRequest.ts';
 import { plexServerLibrariesRequest } from '$lib/requests/media-sync/plexServerLibrariesRequest.ts';
 import { registerPlexPinRequest } from '$lib/requests/media-sync/registerPlexPinRequest.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -76,6 +77,8 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       serverId: null,
       libraries: null,
       libraryIds: [],
+      accounts: null,
+      accountId: null,
     });
 
     const serverId = toDefaultServerId(status.servers);
@@ -119,18 +122,26 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     const current = state.value;
     if (current.step !== 'choosing') return;
 
-    state.next({ ...current, serverId, libraries: null, libraryIds: [] });
-
-    const libraries = await plexServerLibrariesRequest({
-      attemptId: current.attemptId,
+    state.next({
+      ...current,
       serverId,
-    }).catch(() => null);
+      libraries: null,
+      libraryIds: [],
+      accounts: null,
+      accountId: null,
+    });
+
+    const target = { attemptId: current.attemptId, serverId };
+    const [libraries, accounts] = await Promise.all([
+      plexServerLibrariesRequest(target).catch(() => null),
+      plexServerAccountsRequest(target).catch(() => null),
+    ]);
 
     const latest = state.value;
     if (latest.step !== 'choosing' || latest.serverId !== serverId) return;
 
-    if (!libraries) {
-      state.next({ step: 'failed', error: 'libraries_failed' });
+    if (!libraries || !accounts) {
+      state.next({ step: 'failed', error: 'server_details_failed' });
       return;
     }
 
@@ -138,7 +149,17 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       ...latest,
       libraries,
       libraryIds: libraries.map((library) => library.externalId),
+      accounts,
+      accountId: accounts.find((account) => account.selected)?.accountId ??
+        null,
     });
+  }
+
+  function chooseAccount(accountId: string) {
+    const current = state.value;
+    if (current.step !== 'choosing') return;
+
+    state.next({ ...current, accountId });
   }
 
   function toggleLibrary(externalId: string, enabled: boolean) {
@@ -162,6 +183,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       serverId: current.serverId,
       libraryIds: current.libraryIds,
       feeds: MediaSyncFeedSchema.options,
+      syncAccountId: current.accountId,
     }).catch(() => null);
 
     if (!result?.ok) {
@@ -185,6 +207,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     start,
     openSignIn,
     chooseServer,
+    chooseAccount,
     toggleLibrary,
     connect,
     cancel,

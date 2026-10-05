@@ -8,9 +8,11 @@
   import { iffy } from "$lib/utils/function/iffy.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
+  import PlexManageDrawer from "./PlexManageDrawer.svelte";
   import type { ServerSyncStatus } from "./models/ServerSyncStatus.ts";
   import { toServerSyncStatus } from "./toServerSyncStatus.ts";
   import { useServerActions } from "./useServerActions.ts";
+  import { useSyncAccounts } from "./useSyncAccounts.ts";
 
   const {
     connection,
@@ -23,6 +25,15 @@
   const { syncNow, retry, isBusy } = useServerActions(
     iffy(() => connection.id),
   );
+
+  const accounts = useSyncAccounts(iffy(() => connection.id));
+
+  $effect(() => {
+    const subscription = accounts.subscribe();
+    return () => subscription.unsubscribe();
+  });
+
+  let isManaging = $state(false);
 
   const status = $derived(toServerSyncStatus(connection));
 
@@ -105,7 +116,19 @@
       </Button>
     </RenderFor>
   {/if}
+  <Button
+    size="small"
+    color="purple"
+    label={m.button_label_plex_manage_server()}
+    onclick={() => (isManaging = true)}
+  >
+    {m.button_plex_manage_server()}
+  </Button>
 </SettingsGroupRow>
+
+{#if isManaging}
+  <PlexManageDrawer {connection} onClose={() => (isManaging = false)} />
+{/if}
 
 <style lang="scss">
   .needs-attention {

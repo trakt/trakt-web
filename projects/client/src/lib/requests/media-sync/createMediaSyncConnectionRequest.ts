@@ -13,10 +13,12 @@ type CreatePlexConnectionParams = {
   serverId: string;
   libraryIds: string[];
   feeds: MediaSyncFeed[];
+  syncAccountId: string | null;
 } & ApiParams;
 
 export async function createMediaSyncConnectionRequest(
-  { fetch, attemptId, serverId, libraryIds, feeds }: CreatePlexConnectionParams,
+  { fetch, attemptId, serverId, libraryIds, feeds, syncAccountId }:
+    CreatePlexConnectionParams,
 ): Promise<MediaSyncResult<MediaSyncConnection>> {
   const response = await rawApiFetch({
     fetch,
@@ -30,6 +32,7 @@ export async function createMediaSyncConnectionRequest(
         server_id: serverId,
         library_ids: libraryIds,
         feeds,
+        sync_account_id: syncAccountId ?? undefined,
       }),
     },
   });

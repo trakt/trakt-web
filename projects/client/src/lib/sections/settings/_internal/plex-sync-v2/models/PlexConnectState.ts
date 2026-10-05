@@ -1,3 +1,4 @@
+import type { MediaSyncAccount } from '$lib/requests/media-sync/models/MediaSyncAccount.ts';
 import type { PlexLibraryOption } from '$lib/requests/media-sync/plexServerLibrariesRequest.ts';
 import type { PlexServerOption } from '$lib/requests/media-sync/plexPinStatusRequest.ts';
 
@@ -12,6 +13,8 @@ export type PlexConnectState =
     serverId: string | null;
     libraries: PlexLibraryOption[] | null;
     libraryIds: string[];
+    accounts: MediaSyncAccount[] | null;
+    accountId: string | null;
   }
   | { step: 'connecting' }
   | { step: 'expired' }
