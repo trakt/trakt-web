@@ -1,6 +1,4 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
-import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
-import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import {
   getLanguageAndRegion,
   getLocale,
@@ -66,27 +64,21 @@ export function useMovie(slug$: Observable<string>) {
     distinctUntilChanged(),
   );
 
-  const { isEnabled } = useFeatureFlag();
-  const canShowYouTubeSpecial = combineLatest([
-    isAuthorized,
-    isEnabled(FeatureFlag.YouTubeSpecials),
-  ]).pipe(map(([authorized, flagged]) => authorized && flagged));
-
   const youtubeSpecial = combineLatest([
-    canShowYouTubeSpecial,
+    isAuthorized,
     useQuery(
-      combineLatest([slug$, canShowYouTubeSpecial, isComedy]).pipe(
-        map(([slug, canShow, comedy]) =>
+      combineLatest([slug$, isAuthorized, isComedy]).pipe(
+        map(([slug, authorized, comedy]) =>
           movieYouTubeSpecialQuery({
             slug,
             locale: activeLocale,
-            enabled: canShow && comedy,
+            enabled: authorized && comedy,
           })
         ),
       ),
     ),
   ]).pipe(
-    map(([canShow, query]) => (canShow ? query.data : null)),
+    map(([authorized, query]) => (authorized ? query.data : null)),
   );
 
   const locale = languageTag();

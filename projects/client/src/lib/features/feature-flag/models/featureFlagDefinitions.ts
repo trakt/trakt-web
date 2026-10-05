@@ -8,7 +8,6 @@ import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import ReactionIcon from '$lib/components/icons/ReactionIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
-import YouTubeIcon from '$lib/components/icons/YouTubeIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { Component } from 'svelte';
@@ -90,13 +89,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     description: () => m.preview_feature_description_split_cast(),
     addedAt: new Date('2026-10-01'),
     audience: 'vip',
-  },
-  [FeatureFlag.YouTubeSpecials]: {
-    icon: YouTubeIcon,
-    title: () => m.preview_feature_title_youtube_specials(),
-    addedAt: new Date('2026-09-26'),
-    description: () => m.preview_feature_description_youtube_specials(),
-    audience: 'director',
   },
   [FeatureFlag.TodayStory]: {
     icon: CalendarIcon,
