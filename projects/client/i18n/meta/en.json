@@ -11051,6 +11051,15 @@
       "default": "Not available to play",
       "description": "Accessible label for a soundtrack track that is credited but cannot be played."
     },
+    "switch_label_soundtrack_season_only": {
+      "default": "Season {number} only",
+      "description": "Label of the switch in the soundtrack drawer that limits the song list to the season being viewed. Keep it short.",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
     "text_soundtrack_upsell": {
       "default": "Hear the score.",
       "description": "Headline inviting a non-VIP reader to unlock the soundtrack section."
