@@ -112,7 +112,7 @@ describe('TodayStoryViewer', () => {
 
   it('should pause the timer while the story is held', async () => {
     await renderViewer(null);
-    const stage = assertDefined(document.querySelector('.viewer-tap.is-next'));
+    const stage = assertDefined(document.querySelector('[data-zone="next"]'));
 
     await fireEvent.pointerDown(stage);
 
@@ -356,6 +356,11 @@ describe('TodayStoryViewer', () => {
     zone.focus();
     await fireEvent.click(zone, { detail: 0 });
 
-    expect(document.activeElement).toBe(zone);
+    await waitFor(() =>
+      expect(document.activeElement).toHaveAttribute(
+        'aria-label',
+        'Next story',
+      )
+    );
   });
 });

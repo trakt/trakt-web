@@ -11,10 +11,11 @@
   import { trapTabFocus } from "$lib/utils/actions/trapTabFocus.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { onMount, untrack } from "svelte";
+  import { onMount, tick, untrack } from "svelte";
   import { useTodaySeenStories } from "../useTodaySeenStories.ts";
   import { portalToBody } from "./portalToBody.ts";
   import TodayStoryFrameContent from "./TodayStoryFrameContent.svelte";
+  import type { TodayStoryTapZone } from "./TodayStoryTapZonesProps.ts";
   import type { TodayStoryViewerProps } from "./TodayStoryViewerProps.ts";
   import { toFrameMedia } from "./toFrameMedia.ts";
 
@@ -63,6 +64,16 @@
 
   const returnFocusAfterPointer = (event: MouseEvent) => {
     if (event.detail > 0) dialog?.focus({ preventScroll: true });
+  };
+
+  const keepKeyboardFocus = (
+    { zone, event }: { zone: TodayStoryTapZone; event: MouseEvent },
+  ) => {
+    if (event.detail > 0) return;
+
+    tick().then(() =>
+      dialog?.querySelector<HTMLElement>(`[data-zone="${zone}"]`)?.focus(),
+    );
   };
 
   const flipOnTap = (event: MouseEvent) => {
@@ -138,6 +149,13 @@
     if (groupIndex > 0 && previousGroup) {
       showGroup(groupIndex - 1, previousGroup.frames.length - 1);
     }
+  };
+
+  const tapZone = (zone: TodayStoryTapZone, event: MouseEvent) => {
+    if (zone === "previous") onTap(previous)(event);
+    if (zone === "next") onTap(next)(event);
+    if (zone === "flip") flipOnTap(event);
+    keepKeyboardFocus({ zone, event });
   };
 
   const nextGroup = (event: MouseEvent) => {
@@ -266,40 +284,15 @@
     </header>
 
     <div class="viewer-stage">
-      <button
-        class="viewer-tap is-previous"
-        aria-label={m.button_label_previous_story()}
-        onclick={onTap(previous)}
-        onpointerdown={press}
-        onpointerup={release}
-        onpointercancel={release}
-        onpointerleave={release}
-      ></button>
-      <button
-        class="viewer-tap is-flip"
-        aria-label={isFlipped
-          ? m.button_label_hide_details()
-          : m.button_label_show_details()}
-        aria-pressed={isFlipped}
-        onclick={flipOnTap}
-        onpointerdown={press}
-        onpointerup={release}
-        onpointercancel={release}
-        onpointerleave={release}
-      ></button>
-      <button
-        class="viewer-tap is-next"
-        aria-label={m.button_label_next_story()}
-        onclick={onTap(next)}
-        onpointerdown={press}
-        onpointerup={release}
-        onpointercancel={release}
-        onpointerleave={release}
-      ></button>
-
       {#if frame}
         {#key frame.key}
-          <TodayStoryFrameContent {frame} bind:isFlipped />
+          <TodayStoryFrameContent
+            {frame}
+            bind:isFlipped
+            onTap={tapZone}
+            onPressStart={press}
+            onPressEnd={release}
+          />
         {/key}
       {/if}
     </div>
@@ -468,45 +461,6 @@
       min-height: 0;
     }
 
-    .viewer-tap {
-      position: absolute;
-      inset-block: 0;
-      z-index: var(--layer-base);
-
-      padding: 0;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-
-      &.is-previous {
-        inset-inline-start: 0;
-        width: 25%;
-
-        @include for-touch {
-          width: 15%;
-        }
-      }
-
-      &.is-flip {
-        inset-inline-start: 25%;
-        width: 50%;
-
-        @include for-touch {
-          inset-inline-start: 15%;
-          width: 70%;
-        }
-      }
-
-      &.is-next {
-        inset-inline-end: 0;
-        width: 25%;
-
-        @include for-touch {
-          width: 15%;
-        }
-      }
-    }
   }
 
   @keyframes today-story-timer {
