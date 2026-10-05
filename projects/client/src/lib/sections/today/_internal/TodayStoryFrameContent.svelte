@@ -270,6 +270,7 @@
 
       &.is-back {
         transform: rotateY(180deg);
+        border: var(--border-thickness-xxs) solid var(--color-border);
         background: var(--color-card-background);
       }
     }
