@@ -25,7 +25,13 @@
       <p class="small" use:lineClamp={{ lines }}>{comment.text}</p>
     {/if}
     {#if comment.gif && !comment.isSpoiler}
-      <div class="bubble-gif">
+      <div
+        class="bubble-gif"
+        class:has-size={comment.gif.size != null}
+        style:--gif-ratio={comment.gif.size
+          ? comment.gif.size.width / comment.gif.size.height
+          : undefined}
+      >
         <CrossOriginImage src={comment.gif.url} alt="" />
       </div>
     {/if}
@@ -78,6 +84,23 @@
       max-width: 100%;
       max-height: var(--ni-120);
       border-radius: var(--border-radius-s);
+    }
+
+    .bubble-gif:not(.has-size) :global(img) {
+      height: var(--ni-120);
+      object-fit: contain;
+    }
+
+    .bubble-gif.has-size {
+      width: min(100%, calc(var(--ni-120) * var(--gif-ratio)));
+      aspect-ratio: var(--gif-ratio);
+
+      :global(img) {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 </style>
