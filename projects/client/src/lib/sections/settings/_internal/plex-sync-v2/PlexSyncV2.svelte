@@ -112,6 +112,7 @@
     state={$connectState}
     onOpenSignIn={connect.openSignIn}
     onChooseServer={connect.chooseServer}
+    onChooseAccount={connect.chooseAccount}
     onToggleLibrary={connect.toggleLibrary}
     onConnect={connect.connect}
     onRestart={connect.start}

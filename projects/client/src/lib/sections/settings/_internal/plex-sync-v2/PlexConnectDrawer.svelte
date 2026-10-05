@@ -9,12 +9,15 @@
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
   import SyncLoadError from "../SyncLoadError.svelte";
+  import PlexProfilePicker from "./PlexProfilePicker.svelte";
+  import PlexProfilePickerSkeleton from "./PlexProfilePickerSkeleton.svelte";
   import type { PlexConnectState } from "./models/PlexConnectState.ts";
 
   const {
     state,
     onOpenSignIn,
     onChooseServer,
+    onChooseAccount,
     onToggleLibrary,
     onConnect,
     onRestart,
@@ -23,6 +26,7 @@
     state: PlexConnectState;
     onOpenSignIn: () => void;
     onChooseServer: (serverId: string) => void;
+    onChooseAccount: (accountId: string) => void;
     onToggleLibrary: (externalId: string, enabled: boolean) => void;
     onConnect: () => void;
     onRestart: () => void;
@@ -94,6 +98,16 @@
         </SettingsGroupRow>
       {/each}
     </SettingsGroupCard>
+
+    {#if state.serverId && state.accounts === null}
+      <PlexProfilePickerSkeleton />
+    {:else if state.accounts && state.accounts.length > 1}
+      <PlexProfilePicker
+        accounts={state.accounts}
+        pickedAccountId={state.accountId}
+        onPick={onChooseAccount}
+      />
+    {/if}
 
     {#if state.serverId}
       <SettingsGroupCard

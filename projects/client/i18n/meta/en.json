@@ -12458,6 +12458,60 @@
       "default": "Sign in to Plex again for this server",
       "description": "Accessible label for the button that reconnects a Plex server."
     },
+    "header_media_sync_profiles": {
+      "default": "Whose plays sync",
+      "description": "Heading of the Plex Home profile picker in the Plex server drawer."
+    },
+    "description_media_sync_profiles": {
+      "default": "Pick the Plex Home profile that watches on your Trakt account.",
+      "description": "Explains the Plex Home profile picker."
+    },
+    "tag_media_sync_profile_you": {
+      "default": "You",
+      "description": "Small tag under the Plex profile that belongs to the server owner."
+    },
+    "tag_media_sync_profile_syncing": {
+      "default": "Syncing now",
+      "description": "Small tag under the Plex profile whose plays currently sync."
+    },
+    "label_media_sync_unnamed_profile": {
+      "default": "Plex profile",
+      "description": "Fallback name for a Plex Home profile without a name."
+    },
+    "button_label_media_sync_choose_profile": {
+      "default": "Sync plays of {name}",
+      "description": "Accessible label for a Plex profile tile in the profile picker.",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Plex profile.",
+          "required": true
+        }
+      }
+    },
+    "text_media_sync_profile_switch": {
+      "default": "Plays from {name} will sync from now on, starting with their full Plex history. Plays already on Trakt stay.",
+      "description": "Shown after picking a different Plex profile, before applying.",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "Name of the newly picked Plex profile.",
+          "required": true
+        }
+      }
+    },
+    "text_media_sync_profile_note": {
+      "default": "Ratings and watchlist always come from your own Plex account.",
+      "description": "Note under the Plex profile picker."
+    },
+    "header_media_sync_libraries": {
+      "default": "Libraries",
+      "description": "Heading above the library switches in the Plex server drawer."
+    },
+    "text_media_sync_library_removal": {
+      "default": "Turning this off removes what it added to your Trakt collection. Your watch history and ratings stay.",
+      "description": "Warning under a library switch that was turned off, before applying."
+    },
     "description_media_sync_synced_at": {
       "default": "Synced {when}",
       "description": "Shown on a connected Plex server with the time of its last successful sync, e.g. 'Synced today at 9:00 AM'.",

@@ -20,7 +20,7 @@ export const MediaSyncAccountResponseSchema = z.object({
 
 type MediaSyncAccountResponse = z.infer<typeof MediaSyncAccountResponseSchema>;
 
-function mapToMediaSyncAccount(
+export function mapToMediaSyncAccount(
   account: MediaSyncAccountResponse,
 ): MediaSyncAccount {
   return {
