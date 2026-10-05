@@ -10,8 +10,11 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { Snippet } from "svelte";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { type Snippet, untrack } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
+  import AddFromListsButton from "./_internal/bulk-add/AddFromListsButton.svelte";
+  import BulkAddDrawer from "./_internal/bulk-add/BulkAddDrawer.svelte";
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
@@ -19,6 +22,7 @@
   import ListDetailsDrawerHost from "./_internal/ListDetailsDrawerHost.svelte";
   import ManageCollaboratorsButton from "./_internal/ManageCollaboratorsButton.svelte";
   import ManageCollaboratorsDrawerHost from "./_internal/ManageCollaboratorsDrawerHost.svelte";
+  import { useIsCollaborationList } from "./_internal/bulk-add/useIsCollaborationList";
   import ListReorderDrawer from "./ListReorderDrawer.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
@@ -35,11 +39,17 @@
   let showEditList = $state(false);
   let showReorderList = $state(false);
   let showManageCollaborators = $state(false);
+  let showBulkAdd = $state(false);
 
   const { user } = useUser();
   const { likeList, unlikeList, isUpdating, isLiked } = $derived(
     useLikeList(list),
   );
+
+  const { isCollaboration } = useIsCollaborationList({
+    list$: fromRune(() => list),
+    userSlug: untrack(() => $user.slug),
+  });
 
   const isListOwner = $derived($user.slug === list.user?.slug);
   const isOnListPage = $derived(
@@ -79,6 +89,9 @@
       {@render popupActions?.()}
       {#if isOnListPage}
         <ListDetailsButton {list} />
+      {/if}
+      {#if $isCollaboration}
+        <AddFromListsButton {list} onClick={() => (showBulkAdd = true)} />
       {/if}
       {#if isListOwner}
         <ShareButton
@@ -123,6 +136,10 @@
 
 {#if showEditList}
   <SaveListDrawer type="update" onClose={() => (showEditList = false)} {list} />
+{/if}
+
+{#if showBulkAdd}
+  <BulkAddDrawer {list} onClose={() => (showBulkAdd = false)} />
 {/if}
 
 {#if showReorderList}

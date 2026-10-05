@@ -31,6 +31,7 @@
     badge?: Snippet;
     leading?: Snippet;
     actions?: Snippet;
+    footer?: Snippet;
     metaInfo?: string | Snippet;
     onOpened?: () => void;
     classList?: string;
@@ -53,6 +54,7 @@
     badge,
     leading,
     actions,
+    footer,
     metaInfo,
     onOpened,
     classList = "",
@@ -211,6 +213,12 @@
   <div class="trakt-drawer-content" onscroll={updateHeaderOverlay}>
     {@render children()}
   </div>
+
+  {#if footer}
+    <div class="trakt-drawer-footer">
+      {@render footer()}
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
@@ -466,6 +474,12 @@
   .trakt-drawer-content {
     padding-inline-start: var(--drawer-padding);
     padding-inline-end: var(--drawer-padding);
+  }
+
+  .trakt-drawer-footer {
+    padding-inline: var(--drawer-padding);
+    padding-top: var(--gap-s);
+    border-top: var(--ni-1) solid var(--color-drawer-border);
   }
 
   .trakt-drawer-vip-background {

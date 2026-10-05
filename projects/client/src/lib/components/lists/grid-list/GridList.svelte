@@ -23,6 +23,7 @@
     promotedItems = [],
     title,
     item,
+    ctaItem,
     actions,
     empty,
     dimensionObserver,
@@ -100,6 +101,7 @@
           {@render item(i)}
         {/each}
       {/if}
+      {@render ctaItem?.()}
     </div>
   {:else if empty != null && $isMounted}
     <div class="grid-list-empty-state">
