@@ -1,7 +1,7 @@
 export type TodayDayLink = Readonly<{
   value: string;
   label: string;
-  count?: number | Nil;
+  count?: number | null;
 }>;
 
 export type TodayDayLinksProps = {

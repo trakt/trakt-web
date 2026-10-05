@@ -22,7 +22,7 @@
 
   <RenderForFeature flag={FeatureFlag.TodayStory}>
     {#snippet enabled()}
-      <TodayOverview type="media" />
+      <TodayOverview />
       <TodayStoryViewerHost />
     {/snippet}
   </RenderForFeature>

@@ -2,24 +2,23 @@
   import { page } from "$app/state";
   import Button from "$lib/components/buttons/Button.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
-  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
-  import { getLocale } from "$lib/features/i18n/index.ts";
-  import { toHumanDateRange } from "$lib/utils/formatting/date/toHumanDateRange.ts";
-  import { toHumanWeekdayDate } from "$lib/utils/formatting/date/toHumanWeekdayDate.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { getDayRange } from "./_internal/getDayRange.ts";
   import { toActivityRanges } from "./_internal/toActivityRanges.ts";
   import { pickHeroStory } from "./_internal/pickHeroStory.ts";
-  import TodayDayLinks from "./_internal/TodayDayLinks.svelte";
   import TodayFeedEntry from "./_internal/TodayFeedEntry.svelte";
   import TodayFeed from "./_internal/TodayFeed.svelte";
   import TodayGroupingDropdown from "./_internal/TodayGroupingDropdown.svelte";
   import TodayForYouRow from "./_internal/TodayForYouRow.svelte";
   import TodayHero from "./_internal/TodayHero.svelte";
+  import TodayMasthead from "./_internal/TodayMasthead.svelte";
+  import TodayHeroSkeleton from "./_internal/TodayHeroSkeleton.svelte";
   import TodayMostActive from "./_internal/TodayMostActive.svelte";
+  import TodayMostActiveSkeleton from "./_internal/TodayMostActiveSkeleton.svelte";
   import { todayOverviewParams } from "./_internal/todayOverviewParams.ts";
   import TodayPersonDrawer from "./_internal/TodayPersonDrawer.svelte";
   import TodayPersonTile from "./_internal/TodayPersonTile.svelte";
@@ -37,18 +36,18 @@
   import type { Snippet } from "svelte";
 
   const QUIET_ACTION_COUNT = 4;
-
-  const { type }: { type: DiscoverMode } = $props();
+  const CARD_SKELETON_COUNT = 6;
 
   const { filterMap } = useFilter();
   const params = $derived(todayOverviewParams(page.url.searchParams));
   const dayKey = $derived(params.day);
   const now = new Date();
-  const range = fromRune(() => getDayRange({ dayKey, now }));
+  const dayRange = $derived(getDayRange({ dayKey, now }));
+  const range = fromRune(() => dayRange);
   const ranges = fromRune(() => toActivityRanges({ dayKey, now }));
 
   const { activities, forYou, isLoading } = $derived(
-    useTodayStories({ type, filter: $filterMap, range, ranges }),
+    useTodayStories({ type: "media", filter: $filterMap, range, ranges }),
   );
 
   const { storyLink } = todayStoryNavigation();
@@ -86,9 +85,11 @@
       ),
     ),
   );
-  const isEmpty = $derived(
-    !$isLoading && titles.length === 0 && stories.forYou.length === 0,
+  const hasNoStories = $derived(
+    titles.length === 0 && stories.forYou.length === 0,
   );
+  const isFirstLoad = $derived($isLoading && hasNoStories);
+  const isEmpty = $derived(!$isLoading && hasNoStories);
 
   const days = toTodayDays(now);
   const dayCounts = useTodayDayCounts({ days, now });
@@ -103,41 +104,6 @@
       actions.length < QUIET_ACTION_COUNT,
   );
 
-  const toDayName = ({ kind }: (typeof days)[number]) => {
-    switch (kind) {
-      case "today":
-        return m.option_text_today_day_today();
-      case "yesterday":
-        return m.option_text_today_day_yesterday();
-      case "week":
-        return m.option_text_today_day_week();
-    }
-  };
-  const dayLinks = $derived(
-    days.map((day) => ({
-      value: day.key,
-      label: toDayName(day),
-      count: type === "media" ? $dayCounts[day.key] : null,
-    })),
-  );
-
-  const dayRange = $derived(getDayRange({ dayKey, now }));
-  const headline = $derived(
-    selectedDay?.kind === "week"
-      ? m.text_today_headline_week()
-      : selectedDay
-        ? toDayName(selectedDay)
-        : "",
-  );
-  const dateLine = $derived(
-    selectedDay?.kind === "week"
-      ? toHumanDateRange({
-          start: dayRange.start,
-          end: dayRange.end,
-          locale: getLocale(),
-        })
-      : toHumanWeekdayDate(selectedDay?.date ?? now, getLocale()),
-  );
   const summary = $derived.by(() => {
     if ($isLoading || actions.length === 0) return null;
 
@@ -214,23 +180,44 @@
 {/snippet}
 
 <div class="trakt-today-overview">
-  <header class="overview-masthead">
-    <div class="masthead-title">
-      <p class="tag bold uppercase masthead-date">{dateLine}</p>
-      <h2 class="masthead-headline">{headline}</h2>
-      <p class="secondary masthead-summary" class:is-pending={!summary}>
-        {summary ?? ""}
-      </p>
-    </div>
+  <TodayMasthead
+    {days}
+    {selectedDay}
+    range={dayRange}
+    counts={$dayCounts}
+    {summary}
+    isLoading={$isLoading}
+    onChange={params.setDay}
+  />
 
-    <TodayDayLinks
-      options={dayLinks}
-      value={selectedDay?.key ?? ""}
-      onChange={params.setDay}
-    />
-  </header>
+  <div class="overview-body" class:is-loading={$isLoading && !isFirstLoad}>
+    {#if isFirstLoad}
+      <section class="overview-column overview-spotlight" aria-hidden="true">
+        {@render heading(m.text_today_top_story())}
+        <TodayHeroSkeleton />
+      </section>
 
-  <div class="overview-body" class:is-loading={$isLoading}>
+      <div class="overview-column overview-main" aria-hidden="true">
+        {@render heading(m.text_today_from_friends(), undefined, grouping)}
+        <div class="overview-cards">
+          {#each Array.from({ length: CARD_SKELETON_COUNT }, (_, index) => index) as card (card)}
+            <div class="card-skeleton">
+              <Skeleton
+                height="var(--height-override-card-cover)"
+                radius="var(--border-radius-m)"
+              />
+              <Skeleton width="70%" height="var(--ni-14)" />
+              <Skeleton width="45%" height="var(--ni-12)" />
+            </div>
+          {/each}
+        </div>
+      </div>
+
+      <aside class="overview-column overview-rail" aria-hidden="true">
+        {@render heading(m.text_today_most_active())}
+        <TodayMostActiveSkeleton />
+      </aside>
+    {:else}
     {#if hero || stories.forYou.length > 0}
       <section class="overview-column overview-spotlight">
         {#if hero}
@@ -311,6 +298,7 @@
         <TodayMostActive groups={personGroups} onOpen={open} />
       {/if}
     </aside>
+    {/if}
   </div>
 </div>
 
@@ -358,50 +346,11 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .overview-masthead {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: var(--gap-s) var(--gap-l);
-
-      padding-top: var(--ni-10);
-
-      @include for-tablet-sm-and-below {
-        padding-top: var(--ni-16);
-      }
-
-      @include for-mobile {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    .masthead-title {
+    .card-skeleton {
       display: flex;
       flex-direction: column;
       gap: var(--gap-xxs);
-      min-width: 0;
-    }
-
-    .masthead-date {
-      color: var(--color-text-emphasis);
-      letter-spacing: 0.08em;
-    }
-
-    .masthead-headline {
-      margin: 0;
-      font-size: var(--ni-40);
-      line-height: 1;
-      letter-spacing: -0.02em;
-
-      @include for-mobile {
-        font-size: var(--ni-32);
-      }
-    }
-
-    .masthead-summary {
-      min-height: 1lh;
+      height: var(--height-override-card);
     }
 
     .overview-heading-row {
