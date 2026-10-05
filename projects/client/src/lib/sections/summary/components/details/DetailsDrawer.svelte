@@ -1,8 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { fade } from "svelte/transition";
   import MediaDetails from "./_internal/MediaDetails.svelte";
   import MediaLinks from "./_internal/MediaLinks.svelte";
@@ -33,11 +31,7 @@
       {#if props.type !== "episode"}
         <MediaLinks media={props.media} />
 
-        <RenderForFeature flag={FeatureFlag.ParentalGuide}>
-          {#snippet enabled()}
-            <MediaParentalGuide type={props.type} slug={props.media.slug} />
-          {/snippet}
-        </RenderForFeature>
+        <MediaParentalGuide type={props.type} slug={props.media.slug} />
       {/if}
     </div>
   {/if}

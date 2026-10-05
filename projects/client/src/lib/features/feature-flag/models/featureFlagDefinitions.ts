@@ -5,7 +5,6 @@ import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
 import ListIcon from '$lib/components/icons/mobile/ListIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
-import NoSpoilerIcon from '$lib/components/icons/NoSpoilerIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import ReactionIcon from '$lib/components/icons/ReactionIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
@@ -97,13 +96,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_split_cast(),
     description: () => m.preview_feature_description_split_cast(),
     addedAt: new Date('2026-10-01'),
-    audience: 'vip',
-  },
-  [FeatureFlag.ParentalGuide]: {
-    icon: NoSpoilerIcon,
-    title: () => m.option_text_certification_parental_guidance(),
-    addedAt: new Date('2026-06-30'),
-    description: () => m.preview_feature_description_parental_guide(),
     audience: 'vip',
   },
   [FeatureFlag.YouTubeSpecials]: {

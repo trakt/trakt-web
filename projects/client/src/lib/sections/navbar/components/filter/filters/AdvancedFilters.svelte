@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { FilterKey } from "$lib/features/filters/models/Filter.ts";
   import { parentalGuideFilters } from "$lib/features/filters/parentalGuideFilters.ts";
@@ -41,9 +39,9 @@
   />
 {/each}
 
-<RenderForFeature flag={FeatureFlag.ParentalGuide}>
-  {#snippet enabled()}
-    <p class="bold">{m.option_text_certification_parental_guidance()}</p>
+<div class="trakt-parental-guide-filters">
+  <p class="bold">{m.option_text_certification_parental_guidance()}</p>
+  <div class="parental-guide-sliders">
     {#each parentalGuideFilters as filter (filter.key)}
       <SliderFilter
         key={filter.key}
@@ -51,5 +49,19 @@
         mode={FilterMode.Advanced}
       />
     {/each}
-  {/snippet}
-</RenderForFeature>
+  </div>
+</div>
+
+<style>
+  .trakt-parental-guide-filters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+
+    .parental-guide-sliders {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-s);
+    }
+  }
+</style>
