@@ -12512,6 +12512,50 @@
       "default": "Turning this off removes what it added to your Trakt collection. Your watch history and ratings stay.",
       "description": "Warning under a library switch that was turned off, before applying."
     },
+    "header_media_sync_feeds": {
+      "default": "Sync settings",
+      "description": "Heading above the switches that pick what a Plex server syncs to Trakt."
+    },
+    "description_media_sync_feeds": {
+      "default": "Choose what this server syncs to your Trakt account. Each switch covers movies and shows alike.",
+      "description": "Explains the Plex sync feed switches."
+    },
+    "label_media_sync_feed_history": {
+      "default": "History",
+      "description": "Title of the switch that syncs Plex watch history to Trakt."
+    },
+    "description_media_sync_feed_history": {
+      "default": "Movies and episodes you finish on this server.",
+      "description": "Explains the Plex watch history sync switch."
+    },
+    "label_media_sync_feed_ratings": {
+      "default": "Ratings",
+      "description": "Title of the switch that syncs Plex ratings to Trakt."
+    },
+    "description_media_sync_feed_ratings": {
+      "default": "Stars you give movies, shows, seasons and episodes in Plex.",
+      "description": "Explains the Plex ratings sync switch."
+    },
+    "label_media_sync_feed_collection": {
+      "default": "Collection",
+      "description": "Title of the switch that syncs Plex libraries to the Trakt collection."
+    },
+    "description_media_sync_feed_collection": {
+      "default": "Everything in the libraries you pick.",
+      "description": "Explains the Plex collection sync switch."
+    },
+    "label_media_sync_feed_watchlist": {
+      "default": "Watchlist",
+      "description": "Title of the switch that syncs the Plex watchlist to Trakt."
+    },
+    "description_media_sync_feed_watchlist": {
+      "default": "Your Plex watchlist. Items you remove in Plex leave Trakt too, if this sync added them.",
+      "description": "Explains the Plex watchlist sync switch."
+    },
+    "text_media_sync_feed_required": {
+      "default": "Turn on at least one sync setting.",
+      "description": "Hint under the Apply button when every Plex sync switch is off."
+    },
     "description_media_sync_synced_at": {
       "default": "Synced {when}",
       "description": "Shown on a connected Plex server with the time of its last successful sync, e.g. 'Synced today at 9:00 AM'.",
