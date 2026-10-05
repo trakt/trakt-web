@@ -127,7 +127,12 @@
     const activeUri = uri;
     const token = playToken;
 
-    if (activeUri == null || token === requestedToken) {
+    if (activeUri == null) {
+      controller?.pause();
+      return;
+    }
+
+    if (token === requestedToken) {
       return;
     }
 

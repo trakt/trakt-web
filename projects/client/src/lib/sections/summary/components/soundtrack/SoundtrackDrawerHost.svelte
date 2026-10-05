@@ -1,17 +1,19 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { fade } from "svelte/transition";
+  import { filterBySeason } from "./_internal/filterBySeason.ts";
   import SoundtrackBoard from "./_internal/SoundtrackBoard.svelte";
   import { toSoundtrackSummary } from "./_internal/toSoundtrackSummary.ts";
+  import type { SoundtrackDrawerHostProps } from "./SoundtrackDrawerHostProps.ts";
   import { useSoundtrack } from "./useSoundtrack.ts";
 
-  const { media, onClose }: { media: MediaEntry; onClose: () => void } =
+  const { media, currentSeason, onClose }: SoundtrackDrawerHostProps =
     $props();
 
   const { tracks } = useSoundtrack(
@@ -19,9 +21,36 @@
   );
 
   let isOpen = $state(false);
+  let isSeasonOnly = $state(false);
 
-  const summary = $derived(toSoundtrackSummary($tracks));
+  const hasSeasonTracks = $derived(
+    currentSeason !== undefined &&
+      $tracks.some((track) => track.season === currentSeason),
+  );
+  const shownTracks = $derived(
+    filterBySeason(
+      $tracks,
+      hasSeasonTracks && isSeasonOnly ? (currentSeason ?? null) : null,
+    ),
+  );
+  const summary = $derived(toSoundtrackSummary(shownTracks));
 </script>
+
+{#snippet actions()}
+  {#if hasSeasonTracks && currentSeason !== undefined}
+    {@const label = m.switch_label_soundtrack_season_only({
+      number: currentSeason,
+    })}
+    <div class="soundtrack-season-filter">
+      <span class="secondary">{label}</span>
+      <Switch
+        {label}
+        checked={isSeasonOnly}
+        onclick={() => (isSeasonOnly = !isSeasonOnly)}
+      />
+    </div>
+  {/if}
+{/snippet}
 
 {#snippet metaInfo()}
   <ListMetaInfo
@@ -39,13 +68,14 @@
   variant="vip"
   size="auto"
   {metaInfo}
+  {actions}
 >
   {#if isOpen}
     <div transition:fade={{ duration: 150 }}>
       <RenderFor audience="vip">
         <SoundtrackBoard
           {media}
-          tracks={$tracks}
+          tracks={shownTracks}
           {summary}
           source="soundtrack-drawer"
           layout="stacked"
@@ -60,3 +90,11 @@
     </div>
   {/if}
 </Drawer>
+
+<style lang="scss">
+  .soundtrack-season-filter {
+    display: flex;
+    gap: var(--ni-8);
+    align-items: center;
+  }
+</style>
