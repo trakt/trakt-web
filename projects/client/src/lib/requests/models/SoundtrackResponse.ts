@@ -9,6 +9,9 @@ export const SoundtrackResponseSchema = z.array(
     // one would fail the whole array, costing the reader the tracklist.
     matched_on: z.string().nullish(),
     position: z.number(),
+    season: z.number().nullish(),
+    // Not an enum for the same reason as `matched_on`.
+    source: z.string().nullish(),
   }),
 );
 
