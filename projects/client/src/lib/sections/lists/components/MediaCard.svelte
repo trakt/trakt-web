@@ -29,6 +29,7 @@
     popupActions,
     source,
     indicators,
+    coverWrapper,
     ...rest
   }: MediaCardProps = $props();
 
@@ -50,6 +51,18 @@
 </script>
 
 {#snippet content(mediaCoverImageUrl: string, mediaCoverOverlay?: string)}
+  {#snippet cover()}
+    <CardCover
+      title={media.title}
+      src={mediaCoverImageUrl}
+      overlaySrc={mediaCoverOverlay}
+      alt={m.image_alt_media_poster({ title: media.title })}
+      --color-card-cover-shadow={media.colors?.[1]}
+      {badge}
+      tag={coverTag}
+    />
+  {/snippet}
+
   {#if popupActions}
     <CardActionBar>
       {#snippet actions()}
@@ -73,15 +86,11 @@
       source && track({ source, type: media.type });
     }}
   >
-    <CardCover
-      title={media.title}
-      src={mediaCoverImageUrl}
-      overlaySrc={mediaCoverOverlay}
-      alt={m.image_alt_media_poster({ title: media.title })}
-      --color-card-cover-shadow={media.colors?.[1]}
-      {badge}
-      tag={coverTag}
-    />
+    {#if coverWrapper}
+      {@render coverWrapper(cover)}
+    {:else}
+      {@render cover()}
+    {/if}
 
     {#if indicators}
       <IndicatorTags>

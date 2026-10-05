@@ -58,7 +58,7 @@
   );
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
-  const hasHoverPanel = $derived(
+  const hasHoverCard = $derived(
     resolvedStyle === "cover" && $isMouse && style === "summary" && isListItem,
   );
 
@@ -271,18 +271,19 @@
     />
   {/if}
 
-  {#snippet episodeCard()}
+  {#snippet episodeCard(coverWrapper?: Snippet<[Snippet]>)}
     <EpisodeCard
       {...props}
       {tag}
       {action}
       {urlOverride}
+      {coverWrapper}
       indicators={hasIndicators ? indicatorTags : undefined}
     />
   {/snippet}
 
   {#if resolvedStyle === "cover"}
-    {#if hasHoverPanel}
+    {#if hasHoverCard}
       <MediaHoverCard
         media={props.media}
         subtitle={hoverSubtitle}

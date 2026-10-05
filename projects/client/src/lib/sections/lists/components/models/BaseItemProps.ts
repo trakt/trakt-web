@@ -8,4 +8,5 @@ export type BaseItemProps = {
   source?: string;
   popupActions?: Snippet;
   indicators?: Snippet;
+  coverWrapper?: Snippet<[Snippet]>;
 };

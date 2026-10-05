@@ -36,6 +36,7 @@
     source,
     indicators,
     edge,
+    coverWrapper,
     ...rest
   }: EpisodeCardProps = $props();
 
@@ -66,6 +67,25 @@
   const isTitleTruncated = writable(false);
 </script>
 
+{#snippet posterCover()}
+  <CardCover
+    title={show.title}
+    src={show.poster.url.thumb ?? MEDIA_POSTER_PLACEHOLDER}
+    alt={`${show.title} - ${$spoilerFreeTitle}`}
+    {badge}
+  />
+{/snippet}
+
+{#snippet landscapeCover()}
+  <CardCover
+    title={show.title}
+    src={$src ?? EPISODE_COVER_PLACEHOLDER}
+    alt={`${show.title} - ${$spoilerFreeTitle}`}
+    {badge}
+    {tag}
+  />
+{/snippet}
+
 {#snippet popupActions()}
   {#if externalPopupActions}
     <CardActionBar>
@@ -94,12 +114,11 @@
       replacestate={episodeLink.replacestate}
       onclick={() => source && track({ source, type: "episode" })}
     >
-      <CardCover
-        title={show.title}
-        src={show.poster.url.thumb ?? MEDIA_POSTER_PLACEHOLDER}
-        alt={`${show.title} - ${$spoilerFreeTitle}`}
-        {badge}
-      />
+      {#if coverWrapper}
+        {@render coverWrapper(posterCover)}
+      {:else}
+        {@render posterCover()}
+      {/if}
 
       {#if indicators}
         <IndicatorTags>
@@ -121,13 +140,11 @@
       replacestate={episodeLink.replacestate}
       onclick={() => source && track({ source, type: "episode" })}
     >
-      <CardCover
-        title={show.title}
-        src={$src ?? EPISODE_COVER_PLACEHOLDER}
-        alt={`${show.title} - ${$spoilerFreeTitle}`}
-        {badge}
-        {tag}
-      />
+      {#if coverWrapper}
+        {@render coverWrapper(landscapeCover)}
+      {:else}
+        {@render landscapeCover()}
+      {/if}
 
       {#if indicators}
         <IndicatorTags>

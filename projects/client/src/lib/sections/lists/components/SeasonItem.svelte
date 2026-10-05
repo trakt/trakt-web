@@ -55,7 +55,7 @@
   );
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
-  const hasHoverPanel = $derived(
+  const hasHoverCard = $derived(
     resolvedStyle === "cover" && $isMouse && style === "summary",
   );
 
@@ -93,7 +93,15 @@
       </TagBar>
     {/snippet}
 
-    {#snippet seasonCard()}
+    {#snippet seasonCard(coverWrapper?: Snippet<[Snippet]>)}
+      {#snippet seasonCover()}
+        <CardCover
+          title={seasonLabel(season.number)}
+          src={season.poster?.url.medium ?? media.poster.url.medium}
+          alt={seasonLabel(season.number)}
+        />
+      {/snippet}
+
       <PortraitCard>
         {#if popupActions}
           <CardActionBar>
@@ -118,16 +126,17 @@
           onclick={() => source && track({ source, type: "season" })}
           noscroll
         >
-          <CardCover
-            title={seasonLabel(season.number)}
-            src={season.poster?.url.medium ?? media.poster.url.medium}
-            alt={seasonLabel(season.number)}
-          />
+          {#if coverWrapper}
+            {@render coverWrapper(seasonCover)}
+          {:else}
+            {@render seasonCover()}
+          {/if}
 
           <IndicatorTags>
             {@render indicatorTags()}
           </IndicatorTags>
         </Link>
+
         <CardFooter tag={variant === "list-item" ? tag : undefined}>
           {#if variant === "default"}
             <p
@@ -148,7 +157,7 @@
       </PortraitCard>
     {/snippet}
 
-    {#if hasHoverPanel}
+    {#if hasHoverCard}
       <MediaHoverCard
         {media}
         subtitle={seasonLabel(season.number)}
