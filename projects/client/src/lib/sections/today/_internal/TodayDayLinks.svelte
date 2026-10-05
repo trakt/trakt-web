@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { getLocale } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
@@ -10,7 +11,7 @@
 
 <div
   class="trakt-today-day-links"
-  role="radiogroup"
+  role="group"
   aria-label={m.label_today_day()}
   data-dpad-navigation={DpadNavigationType.List}
 >
@@ -18,16 +19,19 @@
     {@const isActive = option.value === value}
     <button
       type="button"
-      role="radio"
       class="day-link"
       class:is-active={isActive}
-      aria-checked={isActive}
+      aria-pressed={isActive}
       data-dpad-navigation={DpadNavigationType.Item}
       onclick={() => onChange(option.value)}
     >
       <span class="day-dot" aria-hidden="true"></span>
       <span class="bold day-label">{option.label}</span>
-      {#if option.count}
+      {#if option.count === null}
+        <span class="small day-count">
+          <Skeleton height="var(--ni-12)" />
+        </span>
+      {:else if option.count !== undefined}
         <span class="small day-count">
           {toHumanNumber(option.count, getLocale())}
         </span>
@@ -65,6 +69,9 @@
     }
 
     .day-count {
+      display: inline-flex;
+      align-items: center;
+      min-width: 2ch;
       color: var(--color-text-secondary);
       opacity: 0.7;
       font-variant-numeric: tabular-nums;

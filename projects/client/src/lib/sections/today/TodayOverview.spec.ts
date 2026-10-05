@@ -9,7 +9,7 @@ import TodayOverview from './TodayOverview.svelte';
 
 describe('TodayOverview', () => {
   it('should group friend activity by title by default', async () => {
-    renderComponent(TodayOverview, { props: { type: 'media' } });
+    renderComponent(TodayOverview, { props: {} });
 
     expect(await screen.findByText('From people you follow'))
       .toBeInTheDocument();
@@ -20,7 +20,7 @@ describe('TodayOverview', () => {
   });
 
   it('should feature a milestone story as the hero', async () => {
-    renderComponent(TodayOverview, { props: { type: 'media' } });
+    renderComponent(TodayOverview, { props: {} });
 
     expect(
       await screen.findByRole('link', {
@@ -31,7 +31,7 @@ describe('TodayOverview', () => {
 
   it('should open a title to show who did what', async () => {
     const user = userEvent.setup();
-    renderComponent(TodayOverview, { props: { type: 'media' } });
+    renderComponent(TodayOverview, { props: {} });
 
     const tile = await screen.findByRole('button', {
       name: MovieHereticMappedMock.title,
@@ -47,11 +47,12 @@ describe('TodayOverview', () => {
 
   it('should open a person from most active without grouping by person', async () => {
     const user = userEvent.setup();
-    renderComponent(TodayOverview, { props: { type: 'media' } });
+    renderComponent(TodayOverview, { props: {} });
 
-    await screen.findByText('Most active');
-    const mostActive = assertDefined(
-      document.querySelector<HTMLElement>('.trakt-today-most-active'),
+    const mostActive = await waitFor(() =>
+      assertDefined(
+        document.querySelector<HTMLElement>('.trakt-today-most-active'),
+      )
     );
     const person = assertDefined(
       within(mostActive).getAllByRole('button').at(0),
