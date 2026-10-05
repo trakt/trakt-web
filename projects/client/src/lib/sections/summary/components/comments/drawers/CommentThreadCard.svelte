@@ -96,6 +96,7 @@
         id={comment.id}
         commentType="reply"
         onCommentPost={onReplyPost}
+        onCancel={() => setReplying(comment, false)}
         placeholder={m.textarea_placeholder_reply()}
         label={m.button_label_post_reply()}
         type={typeProps.type}
