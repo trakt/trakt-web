@@ -1,6 +1,5 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
@@ -17,11 +16,10 @@
   const MAX_FACES = 3;
   const MAX_POSTERS = 2;
 
-  const { type }: { type: DiscoverMode } = $props();
 
   const { filterMap } = useFilter();
   const { titles, forYou } = $derived(
-    useTodayStories({ type, filter: $filterMap }),
+    useTodayStories({ type: "media", filter: $filterMap }),
   );
   const { seenStories } = useTodaySeenStories();
   const { storyLink } = todayStoryNavigation();

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { getDayRange } from "./_internal/getDayRange.ts";
@@ -11,7 +10,6 @@
   import { toTodayStories } from "./_internal/toTodayStories.ts";
   import { useTodayStories } from "./useTodayStories.ts";
 
-  const { mode } = useDiscover();
   const { filterMap } = useFilter();
 
   const { isOpen, storyKey, close } = $derived(
@@ -23,7 +21,7 @@
   const range = fromRune(() => getDayRange({ dayKey, now }));
   const ranges = fromRune(() => toActivityRanges({ dayKey, now }));
   const { activities, forYou, isLoading } = $derived(
-    useTodayStories({ type: $mode, filter: $filterMap, range, ranges }),
+    useTodayStories({ type: "media", filter: $filterMap, range, ranges }),
   );
 
   const { groups } = $derived(

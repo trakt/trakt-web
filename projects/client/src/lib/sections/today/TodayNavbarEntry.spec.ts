@@ -15,7 +15,7 @@ describe('TodayNavbarEntry', () => {
   });
 
   it('should invite the user to open today with the number of new stories', async () => {
-    renderComponent(TodayNavbarEntry, { props: { type: 'media' } });
+    renderComponent(TodayNavbarEntry, { props: {} });
 
     const link = await screen.findByRole('link', { name: LINK_NAME });
 
@@ -28,7 +28,7 @@ describe('TodayNavbarEntry', () => {
   });
 
   it('should open the newest story that was not seen yet', async () => {
-    renderComponent(TodayNavbarEntry, { props: { type: 'media' } });
+    renderComponent(TodayNavbarEntry, { props: {} });
 
     const link = await screen.findByRole('link', { name: LINK_NAME });
 
@@ -39,20 +39,12 @@ describe('TodayNavbarEntry', () => {
     });
   });
 
-  it('should only count shows in show mode', async () => {
-    renderComponent(TodayNavbarEntry, { props: { type: 'show' } });
-
-    const link = await screen.findByRole('link', { name: LINK_NAME });
-
-    expect(within(link).getByText('1')).toBeInTheDocument();
-  });
-
   it('should be quiet once every story was seen', async () => {
     const { markSeen } = useTodaySeenStories();
     markSeen(`movie-${MovieHereticMappedMock.id}`);
     markSeen(`show-${ShowSiloMappedMock.id}`);
 
-    renderComponent(TodayNavbarEntry, { props: { type: 'media' } });
+    renderComponent(TodayNavbarEntry, { props: {} });
 
     const link = await screen.findByRole('link', { name: LINK_NAME });
 

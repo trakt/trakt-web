@@ -1,18 +1,22 @@
 <script lang="ts">
   import { page } from "$app/state";
   import Button from "$lib/components/buttons/Button.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import type { ToggleOption } from "$lib/components/toggles/ToggleOption.ts";
+  import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
+  import { getLocale } from "$lib/features/i18n/index.ts";
+  import { toHumanDateRange } from "$lib/utils/formatting/date/toHumanDateRange.ts";
+  import { toHumanWeekdayDate } from "$lib/utils/formatting/date/toHumanWeekdayDate.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { getDayRange } from "./_internal/getDayRange.ts";
   import { toActivityRanges } from "./_internal/toActivityRanges.ts";
   import { pickHeroStory } from "./_internal/pickHeroStory.ts";
+  import TodayDayLinks from "./_internal/TodayDayLinks.svelte";
   import TodayFeedEntry from "./_internal/TodayFeedEntry.svelte";
   import TodayFeed from "./_internal/TodayFeed.svelte";
+  import TodayGroupingDropdown from "./_internal/TodayGroupingDropdown.svelte";
   import TodayForYouRow from "./_internal/TodayForYouRow.svelte";
   import TodayHero from "./_internal/TodayHero.svelte";
   import TodayMostActive from "./_internal/TodayMostActive.svelte";
@@ -28,9 +32,9 @@
   import { toPersonGroups } from "./_internal/toPersonGroups.ts";
   import { toTodayDays } from "./_internal/toTodayDays.ts";
   import { toTodayStories } from "./_internal/toTodayStories.ts";
-  import type { TodayGrouping } from "./models/TodayGrouping.ts";
   import { useTodayDayCounts } from "./useTodayDayCounts.ts";
   import { useTodayStories } from "./useTodayStories.ts";
+  import type { Snippet } from "svelte";
 
   const QUIET_ACTION_COUNT = 4;
 
@@ -109,36 +113,45 @@
         return m.option_text_today_day_week();
     }
   };
-  const dayOptions = $derived<ToggleOption<string>[]>(
-    days.map((day) => {
-      const count = type === "media" ? $dayCounts[day.key] : null;
-
-      return {
-        value: day.key,
-        text: () => toDayName(day),
-        label: () => toDayName(day),
-        ...(count == null ? {} : { count }),
-      };
-    }),
+  const dayLinks = $derived(
+    days.map((day) => ({
+      value: day.key,
+      label: toDayName(day),
+      count: type === "media" ? $dayCounts[day.key] : null,
+    })),
   );
 
-  const groupingOptions: ToggleOption<TodayGrouping>[] = [
-    {
-      value: "title",
-      text: m.option_text_today_by_title,
-      label: m.option_text_today_by_title,
-    },
-    {
-      value: "person",
-      text: m.option_text_today_by_person,
-      label: m.option_text_today_by_person,
-    },
-    {
-      value: "time",
-      text: m.option_text_today_by_time,
-      label: m.option_text_today_by_time,
-    },
-  ];
+  const dayRange = $derived(getDayRange({ dayKey, now }));
+  const headline = $derived(
+    selectedDay?.kind === "week"
+      ? m.text_today_headline_week()
+      : selectedDay
+        ? toDayName(selectedDay)
+        : "",
+  );
+  const dateLine = $derived(
+    selectedDay?.kind === "week"
+      ? toHumanDateRange({
+          start: dayRange.start,
+          end: dayRange.end,
+          locale: getLocale(),
+        })
+      : toHumanWeekdayDate(selectedDay?.date ?? now, getLocale()),
+  );
+  const summary = $derived.by(() => {
+    if ($isLoading || actions.length === 0) return null;
+
+    const activities =
+      actions.length === 1
+        ? m.text_today_activities_one()
+        : m.text_today_activities_other({ count: actions.length });
+    const people =
+      personGroups.length === 1
+        ? m.text_today_people_one()
+        : m.text_today_people_other({ count: personGroups.length });
+
+    return m.text_today_summary({ activities, people });
+  });
 
   const openStory = $derived(titles.find((story) => story.key === openKey));
   const openPerson = $derived(
@@ -153,59 +166,75 @@
   };
 </script>
 
-{#snippet heading(text: string, count?: number)}
-  <h3 class="overview-heading">
-    {text}
-    {#if count}
-      <span class="tag bold overview-count">{count}</span>
+{#snippet heading(text: string, count?: number, end?: Snippet)}
+  <div class="overview-heading-row">
+    <h3 class="overview-heading">
+      {text}
+      {#if count}
+        <span class="tag bold overview-count">{count}</span>
+      {/if}
+    </h3>
+    {#if end}
+      <div class="heading-end">{@render end()}</div>
     {/if}
-  </h3>
+  </div>
+{/snippet}
+
+{#snippet playAll()}
+  {#if playAllLink}
+    <Button
+      href={playAllLink.href}
+      noscroll={playAllLink.noscroll}
+      replacestate={playAllLink.replacestate}
+      label={m.button_label_play_all_stories()}
+      size="small"
+      style="ghost"
+      color="purple"
+    >
+      {m.button_text_play_all_stories()}
+      {#snippet icon()}
+        <PlayIcon size="small" />
+      {/snippet}
+    </Button>
+  {/if}
+{/snippet}
+
+{#snippet grouping()}
+  <TodayGroupingDropdown
+    value={params.grouping}
+    onChange={params.setGrouping}
+  />
+{/snippet}
+
+{#snippet friendsEnd()}
+  {#if !hero}
+    {@render playAll()}
+  {/if}
+  {@render grouping()}
 {/snippet}
 
 <div class="trakt-today-overview">
-  <div class="overview-toolbar">
-    <div class="toolbar-days">
-      <Toggler
-        value={selectedDay?.key ?? ""}
-        onChange={params.setDay}
-        options={dayOptions}
-        variant="text"
-        fill
-        ariaLabel={m.label_today_day()}
-      />
+  <header class="overview-masthead">
+    <div class="masthead-title">
+      <p class="tag bold uppercase masthead-date">{dateLine}</p>
+      <h2 class="masthead-headline">{headline}</h2>
+      <p class="secondary masthead-summary" class:is-pending={!summary}>
+        {summary ?? ""}
+      </p>
     </div>
 
-    <div class="toolbar-end">
-      <div class="toolbar-grouping">
-        <Toggler
-          value={params.grouping}
-          onChange={params.setGrouping}
-          options={groupingOptions}
-          variant="text"
-          fill
-          ariaLabel={m.label_today_grouping()}
-        />
-      </div>
-
-      <Button
-        href={playAllLink?.href}
-        noscroll={playAllLink?.noscroll}
-        replacestate={playAllLink?.replacestate}
-        disabled={!playAllLink}
-        label={m.button_label_play_all_stories()}
-        size="small"
-        color="purple"
-      >
-        {m.button_text_play_all_stories()}
-      </Button>
-    </div>
-  </div>
+    <TodayDayLinks
+      options={dayLinks}
+      value={selectedDay?.key ?? ""}
+      onChange={params.setDay}
+    />
+  </header>
 
   <div class="overview-body" class:is-loading={$isLoading}>
     {#if hero || stories.forYou.length > 0}
       <section class="overview-column overview-spotlight">
         {#if hero}
-          {@render heading(m.text_today_top_story())}
+          {@render heading(m.text_today_top_story(), undefined, playAll)}
           <TodayHero story={hero} />
 
           <div class="spotlight-highlights">
@@ -217,7 +246,11 @@
 
         {#if stories.forYou.length > 0}
           <div class="spotlight-for-you">
-            {@render heading(m.text_today_for_you(), stories.forYou.length)}
+            {@render heading(
+              m.text_today_for_you(),
+              stories.forYou.length,
+              !hero && titles.length === 0 ? playAll : undefined,
+            )}
             {#each stories.forYou as item (item.key)}
               <TodayForYouRow {item} />
             {/each}
@@ -228,13 +261,14 @@
 
     <div class="overview-column overview-main">
       {#if titles.length > 0}
+        {@render heading(
+          m.text_today_from_friends(),
+          params.grouping === "person" ? personGroups.length : titles.length,
+          friendsEnd,
+        )}
         {#if params.grouping === "time"}
           <TodayFeed sections={feedSections} {now} />
         {:else}
-          {@render heading(
-            m.text_today_from_friends(),
-            params.grouping === "title" ? titles.length : personGroups.length,
-          )}
           <div class="overview-cards">
             {#if params.grouping === "title"}
               {#each titles as story (story.key)}
@@ -324,31 +358,68 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .overview-toolbar {
+    .overview-masthead {
       display: flex;
       flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--gap-s) var(--gap-l);
+
+      padding-top: var(--ni-10);
+
+      @include for-tablet-sm-and-below {
+        padding-top: var(--ni-16);
+      }
+
+      @include for-mobile {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .masthead-title {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-xxs);
+      min-width: 0;
+    }
+
+    .masthead-date {
+      color: var(--color-text-emphasis);
+      letter-spacing: 0.08em;
+    }
+
+    .masthead-headline {
+      margin: 0;
+      font-size: var(--ni-40);
+      line-height: 1;
+      letter-spacing: -0.02em;
+
+      @include for-mobile {
+        font-size: var(--ni-32);
+      }
+    }
+
+    .masthead-summary {
+      min-height: 1lh;
+    }
+
+    .overview-heading-row {
+      display: flex;
       align-items: center;
       justify-content: space-between;
       gap: var(--gap-s);
+      min-height: var(--ni-40);
+
+      .overview-heading {
+        min-width: 0;
+      }
     }
 
-    .toolbar-end {
+    .heading-end {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      gap: var(--gap-s);
-    }
-
-    @include for-mobile {
-      .overview-toolbar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .toolbar-end {
-        flex-direction: column;
-        align-items: stretch;
-      }
+      gap: var(--gap-xs);
     }
 
     .overview-body {
