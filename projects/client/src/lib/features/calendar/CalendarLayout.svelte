@@ -25,6 +25,7 @@
     periods,
     onLoadMore,
     actions,
+    hasNavigationBar = true,
   }: CalendarLayoutProps<T> = $props();
 
   const { visibleDate } = getCalendarContext();
@@ -84,7 +85,7 @@
 </script>
 
 <div class="trakt-calendar-layout" use:observeDimension>
-  {#if navigation || !isInitialLoad}
+  {#if hasNavigationBar && (navigation || !isInitialLoad)}
     <div
       class="calendar-navigation"
       use:trackWindowScroll={"is-scrolled"}
