@@ -1,21 +1,14 @@
 <script lang="ts">
-  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
+  import AvatarStack from "$lib/components/avatar-stack/AvatarStack.svelte";
   import type { UserProfile } from "$lib/requests/models/UserProfile.ts";
 
   const MAX_FACES = 3;
 
   const { users }: { users: ReadonlyArray<UserProfile> } = $props();
+
+  const avatars = $derived(
+    users.slice(0, MAX_FACES).map((user) => ({ key: user.key, user })),
+  );
 </script>
 
-<div class="trakt-today-tile-faces">
-  {#each users.slice(0, MAX_FACES) as user (user.key)}
-    <UserAvatar {user} size="small" />
-  {/each}
-</div>
-
-<style>
-  .trakt-today-tile-faces {
-    display: flex;
-    gap: var(--gap-xxs);
-  }
-</style>
+<AvatarStack {avatars} linked={false} />

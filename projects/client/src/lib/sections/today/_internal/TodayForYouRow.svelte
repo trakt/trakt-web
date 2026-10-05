@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
@@ -38,7 +39,7 @@
     <p class="bold ellipsis">{media.title}</p>
     {#if item.type === "up-next"}
       <p class="small secondary ellipsis">
-        {m.text_season_episode_number(item.entry)} · {item.entry.title}
+        {episodeNumberLabel({ seasonNumber: item.entry.season, episodeNumber: item.entry.number })} · {item.entry.title}
       </p>
     {/if}
   </div>
