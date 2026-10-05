@@ -12,8 +12,13 @@
 
     <div class="upsell-board">
       <ul class="upsell-list" aria-hidden="true">
-        {#each teaserTracks as track (track.key)}
-          <SoundtrackTrackRow {track} isPlaying={false} onPlay={() => {}} />
+        {#each teaserTracks as track, index (track.key)}
+          <SoundtrackTrackRow
+            {track}
+            number={index + 1}
+            isPlaying={false}
+            onPlay={() => {}}
+          />
         {/each}
       </ul>
 
