@@ -7,15 +7,14 @@
 </div>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-filter-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--gap-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
 
-    @include for-tablet-sm-and-below {
-      gap: var(--gap-s);
-    }
+    padding: var(--gap-xs);
+    border-radius: var(--border-radius-m);
+
+    border: var(--border-thickness-xxs) solid var(--color-filter-group-border);
   }
 </style>

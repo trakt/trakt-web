@@ -4,6 +4,7 @@
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import Filter from "./_internal/Filter.svelte";
   import { useFilterSetter } from "./_internal/useFilterSetter";
 
@@ -14,6 +15,9 @@
   }: {
     filter: ListFilter;
     } = $props();
+
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const title = $derived(filter.label());
 
   const { getFilterValue } = useFilter();
   const { gotoFilteredState } = useFilterSetter();
@@ -38,11 +42,13 @@
   };
 </script>
 
-<Filter title={filter.label()}>
+<Filter {title} variant={$isMobile ? "compact" : "inline"}>
   <SingleSelect
     {options}
     value={$currentValue ?? null}
-    placeholder={m.option_text_all()}
+    placeholder={$isMobile ? title : m.option_text_all()}
+    variant="chip"
+    autoWidth
     {onChange}
   />
 </Filter>

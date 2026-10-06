@@ -4,6 +4,8 @@
   import { parentalGuideFilters } from "$lib/features/filters/parentalGuideFilters.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import FilterSection from "../FilterSection.svelte";
+  import FilterChips from "./_internal/FilterChips.svelte";
   import FilterGroup from "./_internal/FilterGroup.svelte";
   import { isAutoRenderedFilter } from "./_internal/isAutoRenderedFilter";
   import { isMultiSelectFilter } from "./_internal/isMultiSelectFilter";
@@ -20,48 +22,46 @@
   const multiSelectFilters = $derived(filters.filter(isMultiSelectFilter));
 </script>
 
-<FilterGroup>
-  {#each multiSelectFilters as filter (filter.key)}
-    {#if filter.key === FilterKey.Streaming}
-      <StreamingServicesFilter {filter} />
-    {:else}
-      <MultiSelectFilter {filter} />
-    {/if}
-  {/each}
-</FilterGroup>
+<div class="trakt-advanced-filters">
+  <FilterGroup>
+    <FilterChips>
+      {#each multiSelectFilters as filter (filter.key)}
+        {#if filter.key === FilterKey.Streaming}
+          <StreamingServicesFilter {filter} />
+        {:else}
+          <MultiSelectFilter {filter} />
+        {/if}
+      {/each}
+    </FilterChips>
 
-{#each sliderFilters as filter (filter.key)}
-  <SliderFilter
-    key={filter.key}
-    sliderOptions={filter.advanced}
-    mode={FilterMode.Advanced}
-    additionalKeys={filter.advanced.additionalKeys}
-  />
-{/each}
-
-<div class="trakt-parental-guide-filters">
-  <p class="bold">{m.option_text_certification_parental_guidance()}</p>
-  <div class="parental-guide-sliders">
-    {#each parentalGuideFilters as filter (filter.key)}
+    {#each sliderFilters as filter (filter.key)}
       <SliderFilter
         key={filter.key}
         sliderOptions={filter.advanced}
         mode={FilterMode.Advanced}
+        additionalKeys={filter.advanced.additionalKeys}
       />
     {/each}
-  </div>
+  </FilterGroup>
+
+  <FilterSection title={m.option_text_certification_parental_guidance()}>
+    <FilterGroup>
+      {#each parentalGuideFilters as filter (filter.key)}
+        <SliderFilter
+          key={filter.key}
+          sliderOptions={filter.advanced}
+          mode={FilterMode.Advanced}
+        />
+      {/each}
+    </FilterGroup>
+  </FilterSection>
 </div>
 
 <style>
-  .trakt-parental-guide-filters {
+  .trakt-advanced-filters {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
-
-    .parental-guide-sliders {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-s);
-    }
+    gap: var(--gap-l);
   }
+
 </style>

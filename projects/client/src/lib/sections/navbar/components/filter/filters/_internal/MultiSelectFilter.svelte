@@ -7,6 +7,7 @@
   import { toMultiSelectSelection } from "$lib/features/filters/toMultiSelectSelection.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import Filter from "./Filter.svelte";
   import { useFilterSetter } from "./useFilterSetter.ts";
 
@@ -23,6 +24,9 @@
     searchPlaceholder?: string;
     emptyLabel?: string;
     } = $props();
+
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const title = $derived(filter.advanced.label?.() ?? filter.label());
 
   const { getFilterValue } = useFilter();
   const currentValueRaw = $derived(getFilterValue(filter.key));
@@ -64,12 +68,13 @@
   ]);
 </script>
 
-<Filter title={filter.advanced.label?.() ?? filter.label()}>
+<Filter {title} variant={$isMobile ? "compact" : "inline"}>
   <MultiSelect
     options={optionsWithAll}
     included={selection.included}
     excluded={selection.excluded}
-    placeholder={m.option_text_all()}
+    placeholder={$isMobile ? title : m.option_text_all()}
+    variant="chip"
     {disabled}
     {searchPlaceholder}
     {emptyLabel}
