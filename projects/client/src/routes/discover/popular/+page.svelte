@@ -6,6 +6,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import PopularPaginatedList from "$lib/sections/lists/popular/PopularPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
 
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
 
@@ -27,6 +28,7 @@
 >
   <NavbarStateSetter
     hasFilters
+    smartListTarget={ListTarget.Popular}
     header={{
       title: m.list_title_most_popular(),
       metaInfo: $current.text(),

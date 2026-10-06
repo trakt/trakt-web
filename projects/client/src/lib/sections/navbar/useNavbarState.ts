@@ -8,6 +8,7 @@ import {
 } from 'rxjs';
 import type { Snippet } from 'svelte';
 import { isShallowEqual } from '$lib/utils/object/isShallowEqual.ts';
+import type { ListTarget } from '$lib/sections/smart-lists/models/ListTarget.ts';
 import type { NavbarHeaderState } from './models/NavbarHeaderState.ts';
 import type { ContentToggleSurface } from './_internal/ContentToggleSurface.ts';
 
@@ -19,6 +20,7 @@ type NavbarState = {
   contentToggle: ContentToggleSurface | Nil;
   hasFilters: boolean;
   showFilters: boolean;
+  smartListTarget: ListTarget | Nil;
   headerActions?: Snippet;
   header?: NavbarHeaderState;
   sidebar: {
@@ -42,6 +44,7 @@ const initialNavbarState: NavbarState = {
   contentToggle: undefined,
   hasFilters: false,
   showFilters: true,
+  smartListTarget: undefined,
   headerActions: undefined,
   header: undefined,
   sidebar: {
