@@ -52,6 +52,8 @@
     resolveItemCardStyle(style ?? "cover", $isLargeScreenCards) === "summary",
   );
 
+  const hasHoverTag = $derived(Boolean(externalTag || media.certification));
+
 </script>
 
 {#snippet contextualTag()}
@@ -110,8 +112,11 @@
 
 {#snippet hoverTag()}
   <TagBar>
-    {@render externalTag?.()}
-    {@render defaultTag(true)}
+    {#if externalTag}
+      {@render defaultTag(true)}
+    {:else if media.certification}
+      <CertificationTag certification={media.certification} />
+    {/if}
   </TagBar>
 {/snippet}
 
@@ -141,7 +146,7 @@
       {media}
       {style}
       tag={rest.variant !== "next" ? tag : undefined}
-      {hoverTag}
+      hoverTag={hasHoverTag ? hoverTag : undefined}
       coverTag={externalCoverTag}
       contextualTag={mode === "mixed" ? contextualTag : undefined}
       indicators={indicatorTags}

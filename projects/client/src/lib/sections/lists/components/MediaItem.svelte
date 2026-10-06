@@ -17,13 +17,11 @@
     contextualTag,
     sortTag,
     hoverTag,
-    hoverSubtitle,
     ...props
   }: MediaCardProps & {
     contextualTag?: Snippet;
     sortTag?: Snippet;
     hoverTag?: Snippet;
-    hoverSubtitle?: string;
   } = $props();
 
   const isLargeScreenCards = useLargeScreenCards();
@@ -99,9 +97,8 @@
   {#if hasHoverCard}
     <MediaHoverCard
       media={props.media}
+      title={props.variant === "start" ? undefined : props.media.title}
       tag={hoverTag}
-      subtitle={hoverSubtitle}
-      {contextualTag}
       children={mediaCard}
     />
   {:else}

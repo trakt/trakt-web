@@ -62,17 +62,6 @@
     resolvedStyle === "cover" && $isMouse && style === "summary" && isListItem,
   );
 
-  const hoverSubtitle = $derived.by(() => {
-    const numberLabel = episodeNumberLabel({
-      seasonNumber: props.episode.season,
-      episodeNumber: props.episode.number,
-    });
-
-    return $spoilerFreeTitle
-      ? `${numberLabel} - ${$spoilerFreeTitle}`
-      : numberLabel;
-  });
-
   const runtime = $derived(
     isNaN(props.episode.runtime) ? props.media.runtime : props.episode.runtime,
   );
@@ -96,6 +85,8 @@
       show: props.media,
     }),
   );
+
+  const hoverSubtitle = $derived($spoilerFreeTitle || undefined);
 
   const hasMarkAsWatched = $derived.by(() => {
     if (isListItem || isFuture || isHidden || isActivity) {
@@ -286,8 +277,8 @@
     {#if hasHoverCard}
       <MediaHoverCard
         media={props.media}
+        title={props.media.title}
         subtitle={hoverSubtitle}
-        {tag}
         children={episodeCard}
       />
     {:else}
