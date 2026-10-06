@@ -5,7 +5,7 @@
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { usePaginatedListQuery } from "../stores/usePaginatedListQuery";
-  import { toDiscoverMode } from "./_internal/toDiscoverMode";
+  import { toDiscoverMode } from "./toDiscoverMode";
 
   type PaginatedSmartListRendererProps = {
     list: SmartList;

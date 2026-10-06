@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SmartList } from "$lib/requests/queries/users/smartListQuery";
   import DeleteSmartListButton from "./DeleteSmartListButton.svelte";
+  import EditSmartListButton from "./EditSmartListButton.svelte";
   import { useDeleteSmartList } from "./useDeleteSmartList";
 
   const { list }: { list: SmartList } = $props();
@@ -16,6 +17,8 @@
   title={list.title}
 >
   {#snippet items()}
+    <EditSmartListButton {list} />
+
     <DeleteSmartListButton
       {list}
       isDeleting={$isDeleting}

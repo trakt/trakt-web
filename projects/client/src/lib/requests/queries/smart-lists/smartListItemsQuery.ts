@@ -1,4 +1,5 @@
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
@@ -62,7 +63,10 @@ const smartListItemsRequest = (
 
 export const smartListItemsQuery = defineInfiniteQuery({
   key: 'smartListItems',
-  invalidations: [],
+  invalidations: [
+    InvalidateAction.SmartList.Edited,
+    InvalidateAction.SmartList.Deleted,
+  ],
   dependencies: (
     params: SmartListItemsParams,
   ) => [

@@ -18,6 +18,7 @@
     confirmButtonFill = "tint",
     isValid,
     stickyActions = false,
+    hasActions = true,
   }: FormProps = $props();
 
   let formElement: HTMLFormElement;
@@ -72,11 +73,11 @@
     </Button>
   {/snippet}
 
-  {#if stickyActions}
+  {#if hasActions && stickyActions}
     <DrawerDock>
       {@render formActions()}
     </DrawerDock>
-  {:else}
+  {:else if hasActions}
     <div class="trakt-form-actions" class:is-inline={inlineActions}>
       {@render formActions()}
     </div>

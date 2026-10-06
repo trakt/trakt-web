@@ -6,7 +6,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import FilterSection from "../FilterSection.svelte";
   import FilterChips from "./_internal/FilterChips.svelte";
-  import FilterGroup from "./_internal/FilterGroup.svelte";
+  import FilterGroup from "./FilterGroup.svelte";
   import { isAutoRenderedFilter } from "./_internal/isAutoRenderedFilter";
   import { isMultiSelectFilter } from "./_internal/isMultiSelectFilter";
   import { isSliderFilter } from "./_internal/isSliderFilter";

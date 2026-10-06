@@ -4,7 +4,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ListTarget } from "../models/ListTarget";
-  import { toTargetLabel } from "./toTargetLabel";
+  import { toSmartListSourceLabel } from "$lib/sections/lists/smart/toSmartListSourceLabel";
 
   const { target, type }: { target: ListTarget; type: DiscoverMode } = $props();
 
@@ -23,7 +23,7 @@
 </script>
 
 <div class="trakt-smart-list-recipe">
-  <span class="bold ellipsis">{toTargetLabel(target)}</span>
+  <span class="bold ellipsis">{toSmartListSourceLabel(target)}</span>
 
   {#if typeLabel}
     <span class="separator" aria-hidden="true">·</span>

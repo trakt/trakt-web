@@ -8,7 +8,7 @@
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import Filter from "./Filter.svelte";
+  import Filter from "../Filter.svelte";
   import { useFilterSetter } from "./useFilterSetter.ts";
 
   const resetValue = "__reset_filter__";

@@ -8,15 +8,15 @@
   import SmartListPaginatedRenderer from "$lib/sections/lists/smart/SmartListPaginatedRenderer.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import type { PageProps } from "./$types";
   import { useSmartListSummary } from "./useSmartListSummary.ts";
 
   const { params }: PageProps = $props();
 
-  const { list, isLoading } = $derived(
-    useSmartListSummary({ listId: params.list }),
-  );
+  const listId$ = fromRune(() => params.list);
+  const { list, isLoading } = useSmartListSummary(listId$);
 
   // FIXME: split up (or add support) for public smart lists
 </script>

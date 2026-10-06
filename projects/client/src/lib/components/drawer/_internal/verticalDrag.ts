@@ -1,10 +1,12 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { DragGesture } from '@use-gesture/vanilla';
 import { handleDrag } from './handleDrag.ts';
 import type { DragState } from './models/DragState.ts';
 import type { GestureState } from './models/GestureState.ts';
 
 const STATE_CHANGE_THRESHOLD = 0.05;
+const CLOSE_SETTLE_DELAY = time.seconds(0.3);
 
 type VerticalDragProps = {
   onClose: () => void;
@@ -45,6 +47,16 @@ export function verticalDrag(
     parent.style.setProperty('--initial-height', `${parent.clientHeight}px`);
   };
 
+  const settleIfStillOpen = () => {
+    if (!parent.isConnected) {
+      return;
+    }
+
+    dragState = { ...dragState, dragOffset: 0, shouldClose: false };
+    parent.style.setProperty(offsetVariable, '0px');
+    parent.classList.remove(dragClass);
+  };
+
   const gesture = new DragGesture(
     node,
     (state) => {
@@ -69,6 +81,7 @@ export function verticalDrag(
 
       if (dragState.shouldClose) {
         onClose();
+        setTimeout(settleIfStillOpen, CLOSE_SETTLE_DELAY);
       }
     },
     {

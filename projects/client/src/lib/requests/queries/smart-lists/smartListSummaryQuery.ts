@@ -26,6 +26,7 @@ const smartListSummaryRequest = (
 export const smartListSummaryQuery = defineQuery({
   key: 'smartListSummary',
   invalidations: [
+    InvalidateAction.SmartList.Edited,
     InvalidateAction.SmartList.Created,
     InvalidateAction.SmartList.Deleted,
   ],

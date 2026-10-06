@@ -2,27 +2,9 @@ import { parentalGuideFilters } from '$lib/features/filters/parentalGuideFilters
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { SmartList } from '$lib/requests/queries/users/smartListQuery.ts';
+import { toSmartListSourceLabel } from './toSmartListSourceLabel.ts';
 import { toPercentage } from '$lib/utils/formatting/number/toPercentage.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
-
-function sourceLabel(source: SmartList['source']): string {
-  switch (source) {
-    case 'trending':
-      return m.list_title_trending();
-    case 'popular':
-      return m.list_title_most_popular();
-    case 'anticipated':
-      return m.list_title_most_anticipated();
-    case 'recommendations':
-      return m.list_title_recommended();
-    case 'discover':
-      return m.button_label_discover();
-    case 'watchlist':
-      return m.list_title_watchlist();
-    case 'library':
-      return m.list_title_library();
-  }
-}
 
 function toTitleCase(value: string): string {
   return value
@@ -170,5 +152,5 @@ export function getSmartListFilterSummary(list: SmartList): string {
   const filters = Object.entries(list.filters)
     .flatMap(([key, value]) => formatFilter(key, value));
 
-  return [sourceLabel(list.source), ...filters].join(', ');
+  return [toSmartListSourceLabel(list.source), ...filters].join(', ');
 }
