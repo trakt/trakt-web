@@ -160,7 +160,7 @@
     {#if hasHoverCard}
       <MediaHoverCard
         {media}
-        subtitle={seasonLabel(season.number)}
+        title={media.title}
         children={seasonCard}
       />
     {:else}

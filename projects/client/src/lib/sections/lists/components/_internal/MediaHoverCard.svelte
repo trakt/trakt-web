@@ -9,14 +9,14 @@
   const {
     children,
     media,
+    title,
     tag,
-    contextualTag,
     subtitle,
   }: {
     children: Snippet<[Snippet<[Snippet]>]>;
     media: MediaInputDefault;
+    title?: string;
     tag?: Snippet;
-    contextualTag?: Snippet;
     subtitle?: string;
   } = $props();
 
@@ -25,8 +25,8 @@
   let coverArea = $state<HTMLElement>();
 
   const hasDistinctOriginalTitle = $derived(
-    media.originalTitle
-      ? media.title.toLowerCase() !== media.originalTitle.toLowerCase()
+    title && media.originalTitle
+      ? title.toLowerCase() !== media.originalTitle.toLowerCase()
       : false,
   );
 
@@ -100,7 +100,9 @@
 
       <div class="hover-card-details">
         <div class="hover-card-titles">
-          <p class="trakt-card-title">{media.title}</p>
+          {#if title}
+            <p class="trakt-card-title">{title}</p>
+          {/if}
 
           {#if subtitle}
             <p class="trakt-card-subtitle small secondary">
@@ -129,7 +131,6 @@
       </div>
 
       <div class="hover-card-bottom">
-        {@render contextualTag?.()}
         <SummaryCardRating item={media} />
       </div>
     {/if}

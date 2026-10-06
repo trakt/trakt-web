@@ -11,7 +11,6 @@
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { Snippet } from "svelte";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
-  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import MediaItem from "../../components/MediaItem.svelte";
   import UpNextSwipe from "../../progress/_internal/UpNextSwipe.svelte";
@@ -53,15 +52,6 @@
     };
   });
 
-  const hoverSubtitle = $derived(
-    mediaEntry.episode
-      ? episodeNumberLabel({
-        seasonNumber: mediaEntry.episode.season,
-        episodeNumber: mediaEntry.episode.number,
-      })
-      : undefined,
-  );
-
   const commonActionProps = $derived({
     style: "dropdown-item" as const,
     title: entry.title,
@@ -88,13 +78,13 @@
   <WatchlistAction {...commonActionProps} type={entry.type} media={entry} />
 {/snippet}
 
-{#snippet summaryTag()}
+{#snippet metaTags(hasDuration: boolean)}
   <TagBar>
     <AirDateTag i18n={TagIntlProvider} airDate={entry.airDate} year={entry.year} />
 
     {#if "episode" in entry}
       <EpisodeCountTag i18n={TagIntlProvider} count={entry.episode.count} />
-    {:else}
+    {:else if hasDuration}
       <DurationTag i18n={TagIntlProvider} runtime={entry.runtime} />
     {/if}
 
@@ -102,6 +92,14 @@
       <CertificationTag certification={entry.certification} />
     {/if}
   </TagBar>
+{/snippet}
+
+{#snippet summaryTag()}
+  {@render metaTags(true)}
+{/snippet}
+
+{#snippet hoverTag()}
+  {@render metaTags(false)}
 {/snippet}
 
 {#snippet mediaItem()}
@@ -112,8 +110,7 @@
     {action}
     {sortTag}
     tag={isSummary ? summaryTag : undefined}
-    hoverTag={summaryTag}
-    {hoverSubtitle}
+    {hoverTag}
     variant="start"
     source="start-watching"
   />
