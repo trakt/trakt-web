@@ -112,7 +112,7 @@
   .trakt-filter-tabs {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-l);
+    gap: var(--filters-content-gap, var(--gap-l));
   }
 
   .filter-modes {
