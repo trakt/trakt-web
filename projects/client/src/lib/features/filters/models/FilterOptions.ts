@@ -24,6 +24,7 @@ export type FilterOption = {
 
 export type SliderOption = {
   type: 'slider';
+  label?: () => string;
   range: { min: number; max: number };
   formatLabel: (value: { min: number; max: number }) => string;
   ticks?: {

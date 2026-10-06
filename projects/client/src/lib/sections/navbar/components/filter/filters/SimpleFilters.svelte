@@ -3,6 +3,7 @@
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import { isAutoRenderedFilter } from "./_internal/isAutoRenderedFilter";
+  import FilterChips from "./_internal/FilterChips.svelte";
   import FilterGroup from "./_internal/FilterGroup.svelte";
   import StreamingAvailabilityFilter from "./_internal/StreamingAvailabilityFilter.svelte";
   import ListFilter from "./ListFilter.svelte";
@@ -21,19 +22,21 @@
 </script>
 
 <FilterGroup>
-  {#each listTypeFilters as filter (filter.key)}
-    {#if filter.key === FilterKey.Streaming}
-      <StreamingAvailabilityFilter {filter} />
-    {:else}
-      <ListFilter {filter} />
-    {/if}
+  <FilterChips>
+    {#each listTypeFilters as filter (filter.key)}
+      {#if filter.key === FilterKey.Streaming}
+        <StreamingAvailabilityFilter {filter} />
+      {:else}
+        <ListFilter {filter} />
+      {/if}
+    {/each}
+  </FilterChips>
+
+  {#each ratingTypeFilters as filter (filter.key)}
+    <SliderFilter
+      key={filter.key}
+      sliderOptions={filter}
+      mode={FilterMode.Simple}
+    />
   {/each}
 </FilterGroup>
-
-{#each ratingTypeFilters as filter (filter.key)}
-  <SliderFilter
-    key={filter.key}
-    sliderOptions={filter}
-    mode={FilterMode.Simple}
-  />
-{/each}

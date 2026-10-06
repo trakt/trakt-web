@@ -9,6 +9,7 @@
     placeholder,
     disabled = false,
     autoWidth = false,
+    variant = "default",
     onChange,
     icon,
     trigger,
@@ -39,6 +40,7 @@
   value={value ?? undefined}
   {disabled}
   {autoWidth}
+  {variant}
   {...triggerProps}
   onValueChange={onChange}
 >

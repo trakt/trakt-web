@@ -40,6 +40,7 @@ export const parentalGuideFilters: ReadonlyArray<RatingsFilter> = categories
     ({ key, label }) => {
       const slider: SliderOption = {
         type: 'slider',
+        label,
         range: { min: 0, max: severities.length - 1 },
         ticks: { count: severities.length, formatter: formatSeverity },
         formatLabel: ({ min, max }) =>

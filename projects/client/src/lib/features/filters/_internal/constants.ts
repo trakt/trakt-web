@@ -48,6 +48,7 @@ const DECADE_FILTER: Filter = {
   options: generateDecadeOptions(),
   advanced: {
     type: 'slider',
+    label: m.tag_text_released,
     range: generateDecadeRange(),
     formatLabel: m.advanced_filter_label_release_year,
   },
@@ -60,6 +61,7 @@ const RUNTIME_FILTER: Filter = {
   options: generateRuntimeOptions(),
   advanced: {
     type: 'slider',
+    label: m.header_runtime,
     range: { min: 0, max: 500 },
     formatLabel: m.advanced_filter_label_runtime,
   },
@@ -90,6 +92,7 @@ const toRatingPercentage = (value: number) =>
 
 const RATING_OPTION = {
   type: 'slider' as const,
+  label: m.header_ratings_trakt,
   range: { min: 0, max: 100 },
   ticks: {
     count: 6,
@@ -107,6 +110,7 @@ const RATINGS_FILTER: Filter = {
     }),
   advanced: {
     ...RATING_OPTION,
+    label: m.header_ratings,
     formatLabel: ({ min, max }) =>
       m.advanced_filter_label_ratings({
         min: toRatingPercentage(min),
