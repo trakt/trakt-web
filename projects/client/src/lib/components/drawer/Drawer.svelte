@@ -225,7 +225,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-drawer {
-    --drawer-size: var(--ni-380);
+    --drawer-size: var(--drawer-width, var(--ni-380));
     --drawer-padding: var(--ni-16);
     --drawer-gap: var(--gap-m);
     --drawer-border-radius: var(--border-radius-xxl);

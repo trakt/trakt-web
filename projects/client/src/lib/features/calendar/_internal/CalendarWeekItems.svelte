@@ -92,7 +92,11 @@
         class:is-today={isDayToday}
       >
         <div class="week-day-row-header">
-          <CalendarDayHeader date={day.date} count={day.items.length} />
+          <CalendarDayHeader
+            date={day.date}
+            count={day.items.length}
+            variant="column"
+          />
         </div>
         <div class="week-day-items">
           {#each day.items as media, index (media.key)}
@@ -117,8 +121,6 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  $board-min-width: 744px;
-
   .trakt-calendar-week {
     --color-week-today-tint: color-mix(
       in srgb,
@@ -126,8 +128,6 @@
       transparent
     );
     --week-column-padding: var(--ni-6);
-
-    container-type: inline-size;
 
     display: flex;
     flex-direction: column;
@@ -280,33 +280,42 @@
     user-select: none;
   }
 
-  @container (max-width: #{$board-min-width}) {
+  @include for-tablet-lg {
     .week-days-head {
       display: none;
     }
 
     .week-days {
       grid-template-columns: minmax(0, 1fr);
-      gap: var(--gap-m);
+      gap: var(--gap-xs);
     }
 
     .week-day {
-      padding: 0;
-      border-radius: 0;
+      display: grid;
+      grid-template-columns: var(--ni-56) minmax(0, 1fr);
+      align-items: start;
+      gap: var(--gap-s);
+
+      padding: var(--gap-xs);
+      border-radius: var(--border-radius-l);
 
       &.is-today {
-        background: none;
+        background: var(--color-week-today-tint);
       }
     }
 
     .week-day-row-header {
-      display: contents;
+      position: sticky;
+      top: calc(var(--calendar-sticky-top, 0px) + var(--gap-xs));
+
+      display: flex;
+      justify-content: center;
     }
 
     .week-day-items {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(var(--ni-104), 1fr));
-      gap: var(--gap-m) var(--gap-s);
+      grid-template-columns: repeat(auto-fill, minmax(var(--ni-88), 1fr));
+      gap: var(--gap-s);
 
       .week-up-next {
         grid-column: 1 / -1;
@@ -315,7 +324,7 @@
 
     .week-day-empty {
       min-height: 0;
-      place-items: start;
+      place-items: center start;
 
       padding: 0;
       border: none;

@@ -83,7 +83,7 @@
     gap: var(--gap-xs);
   }
 
-  :global(.trakt-calendar-toolbar) .trakt-calendar-controls {
+  :global(.trakt-calendar-header[data-variant="bar"]) .trakt-calendar-controls {
     gap: var(--ni-4);
 
     .calendar-controls-left {

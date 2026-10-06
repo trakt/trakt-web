@@ -11,13 +11,19 @@
     actions?: Snippet;
     view?: CalendarView;
     onToggleView?: () => void;
+    variant?: "plain" | "bar";
   };
 
-  const { actions, view, onToggleView, ...navigationProps }: CalendarHeaderProps =
-    $props();
+  const {
+    actions,
+    view,
+    onToggleView,
+    variant = "plain",
+    ...navigationProps
+  }: CalendarHeaderProps = $props();
 </script>
 
-<div class="trakt-calendar-header">
+<div class="trakt-calendar-header" data-variant={variant}>
   {#if actions}
     <div class="calendar-header-actions">
       {@render actions()}
@@ -45,7 +51,7 @@
     margin-inline-end: auto;
   }
 
-  :global(.trakt-calendar-toolbar) .trakt-calendar-header {
+  .trakt-calendar-header[data-variant="bar"] {
     height: var(--ni-40);
     padding-inline: var(--ni-4) 0;
     box-sizing: border-box;

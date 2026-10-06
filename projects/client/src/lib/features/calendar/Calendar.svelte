@@ -18,7 +18,9 @@
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarPosterTile from "./_internal/CalendarPosterTile.svelte";
   import CalendarSidebar from "./_internal/CalendarSidebar.svelte";
+  import CalendarHeader from "./_internal/CalendarHeader.svelte";
   import CalendarDayDrawer from "./_internal/CalendarDayDrawer.svelte";
+  import { useIsCalendarDocked } from "./useIsCalendarDocked";
   import CalendarToolbar from "./_internal/CalendarToolbar.svelte";
   import CalendarMonthGrid from "./_internal/CalendarMonthGrid.svelte";
   import CalendarWeekdayRow from "./_internal/CalendarWeekdayRow.svelte";
@@ -117,11 +119,11 @@
   }
 
 
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const isDocked = useIsCalendarDocked();
 
   let chosenView = $state<CalendarView | null>(null);
   const calendarView = $derived<CalendarView>(
-    chosenView ?? ($isDesktop ? "week" : "day"),
+    chosenView ?? ($isDocked ? "week" : "day"),
   );
 
   const toggleView = () => {
@@ -190,7 +192,7 @@
   let selectedDay = $state<{ date: Date; items: CalendarItemEntry[] } | null>(
     null,
   );
-  const isBarPinned = $derived($isDesktop || calendarView === "day");
+  const isBarPinned = $derived($isDocked || calendarView === "day");
 
   let barHeight = $state(0);
 
@@ -227,6 +229,14 @@
 
 {#snippet miniMonth()}
   <div class="calendar-mini-month">
+    <CalendarHeader
+      {navigation}
+      activeDate={selectedDate}
+      actions={feedActions}
+      view={calendarView}
+      onToggleView={toggleView}
+      variant="bar"
+    />
     <CalendarWeekdayRow />
     <CalendarMonthGrid
       allDays={monthAllDays}
@@ -239,7 +249,7 @@
 <div
   class="calendar-page-layout"
   data-view={calendarView}
-  class:is-docked={$isDesktop}
+  class:is-docked={$isDocked}
   class:is-bar-pinned={isBarPinned}
   style:--calendar-bar-height="{barHeight}px"
 >
@@ -254,11 +264,12 @@
         activeDate={selectedDate}
         actions={feedActions}
         filters={episodeTypeFilters}
+        hasControls={!$isDocked}
         view={calendarView}
         onToggleView={toggleView}
       />
 
-      {#if !$isDesktop}
+      {#if !$isDocked}
         <div class="calendar-bar-dates">
           <CalendarWeekdayRow />
           {#if calendarView === "day"}
@@ -296,7 +307,7 @@
     {/if}
   </div>
 
-  {#if $isDesktop}
+  {#if $isDocked}
     <CalendarSidebar onClose={closeToHome}>
       {@render miniMonth()}
     </CalendarSidebar>
@@ -332,16 +343,19 @@
 
     &.is-docked {
       --calendar-bar-top: 0px;
+      --drawer-width: var(--ni-320);
 
-      grid-template-columns: minmax(0, 1fr) var(--ni-380);
+      grid-template-columns: minmax(0, 1fr) var(--drawer-width);
+
+      @include for-tablet-lg {
+        gap: var(--gap-m);
+      }
     }
 
     &.is-bar-pinned {
-      @media (min-height: 500px) {
-        --calendar-sticky-top: calc(
-          var(--calendar-bar-top) + var(--calendar-bar-height)
-        );
-      }
+      --calendar-sticky-top: calc(
+        var(--calendar-bar-top) + var(--calendar-bar-height)
+      );
     }
   }
 
@@ -379,10 +393,8 @@
     }
 
     .is-bar-pinned & {
-      @media (min-height: 500px) {
-        position: sticky;
-        top: var(--calendar-bar-top);
-      }
+      position: sticky;
+      top: var(--calendar-bar-top);
     }
 
     &::before {
@@ -461,7 +473,7 @@
   .calendar-mini-month {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
+    gap: var(--gap-s);
 
     padding: var(--ni-12);
     border-radius: var(--border-radius-xl);

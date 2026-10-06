@@ -15,10 +15,15 @@
     onToggleView: () => void;
     actions?: Snippet;
     filters?: Snippet;
+    hasControls?: boolean;
   };
 
-  const { activeDate, filters, ...headerProps }: CalendarToolbarProps =
-    $props();
+  const {
+    activeDate,
+    filters,
+    hasControls = true,
+    ...headerProps
+  }: CalendarToolbarProps = $props();
 
   const parts = $derived(toCalendarDayParts(activeDate, getLocale()));
   const weekTitle = $derived(
@@ -45,7 +50,9 @@
     </div>
   {/if}
 
-  <CalendarHeader {...headerProps} {activeDate} />
+  {#if hasControls}
+    <CalendarHeader {...headerProps} {activeDate} variant="bar" />
+  {/if}
 </div>
 
 <style lang="scss">
@@ -53,8 +60,8 @@
 
   .trakt-calendar-toolbar {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
     gap: var(--gap-s) var(--gap-m);
 
     min-width: 0;
@@ -62,6 +69,7 @@
     :global(.trakt-calendar-header) {
       flex-shrink: 0;
       gap: var(--gap-s);
+      margin-inline-start: auto;
     }
 
     @include for-mobile {
@@ -84,19 +92,6 @@
         padding-inline-start: 0;
         border-inline-start: none;
       }
-
-      :global(.trakt-calendar-header) {
-        flex: 1;
-        min-width: 0;
-      }
-
-      @media (max-width: 383px) {
-        flex-wrap: wrap;
-
-        :global(.trakt-calendar-header) {
-          flex-basis: 100%;
-        }
-      }
     }
   }
 
@@ -110,7 +105,6 @@
     display: flex;
     align-items: center;
 
-    margin-inline-end: auto;
     padding-inline-start: var(--gap-m);
     border-inline-start: var(--border-thickness-xxs) solid
       var(--color-segmented-track-border);

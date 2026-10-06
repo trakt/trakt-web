@@ -6,13 +6,13 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { useIsCalendarDocked } from "$lib/features/calendar/useIsCalendarDocked";
 
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   const { current } = useDiscover();
   const { current: episodeType, isApplicable } = useEpisodeType();
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const isDocked = useIsCalendarDocked();
 </script>
 
 <TraktPage
@@ -23,9 +23,9 @@
   <TraktPageCoverSetter />
 
   <NavbarStateSetter
-    mode={$isDesktop ? "minimal" : "full"}
+    mode={$isDocked ? "minimal" : "full"}
     hasFilters
-    showFilters={!$isDesktop}
+    showFilters={!$isDocked}
     header={{
       title: m.header_calendar(),
       metaInfo: $isApplicable ? $episodeType.text() : $current.text(),
