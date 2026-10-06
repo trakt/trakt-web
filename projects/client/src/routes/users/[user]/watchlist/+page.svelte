@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -13,11 +15,14 @@
   import { useWatchListItemCount } from "$lib/sections/lists/watchlist/useWatchListItemCount.ts";
   import WatchlistPaginatedList from "$lib/sections/lists/watchlist/WatchlistPaginatedList.svelte";
   import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
+  import { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants.ts";
 
   const { mode, current: currentDiscoverMode } = useDiscover();
   const { filterMap } = useFilter();
+
+  const isMe = $derived(useIsMe(page.params.user ?? "").isMe);
 
   const { current, options, urlBuilder } = useListSorting({
     type: "watchlist",
@@ -71,6 +76,7 @@
 
   <ResponsiveNavbarStateSetter contentToggle="discover"
     hasFilters
+    smartListTarget={$isMe ? ListTarget.Watchlist : null}
     header={{
       title: m.list_title_watchlist(),
       metaInfo: listMetaInfo,

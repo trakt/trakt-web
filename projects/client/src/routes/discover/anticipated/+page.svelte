@@ -7,6 +7,7 @@
 
   import AnticipatedPaginatedList from "$lib/sections/lists/anticipated/AnticipatedPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
 
   const { mode, current } = useDiscover();
@@ -27,6 +28,7 @@
 >
   <NavbarStateSetter
     hasFilters
+    smartListTarget={ListTarget.Anticipated}
     header={{
       title: m.list_title_most_anticipated(),
       metaInfo: $current.text(),

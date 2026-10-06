@@ -7,6 +7,7 @@
 
   import TrendingPaginatedList from "$lib/sections/lists/trending/TrendingPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
 
   const { mode, current } = useDiscover();
@@ -27,6 +28,7 @@
 >
   <NavbarStateSetter
     hasFilters
+    smartListTarget={ListTarget.Trending}
     header={{
       title: m.list_title_trending(),
       metaInfo: $current.text(),

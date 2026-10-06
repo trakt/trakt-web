@@ -7,11 +7,20 @@
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import { useStoredFilters } from "$lib/features/filters/useStoredFilters.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import CreateSmartListAction from "$lib/sections/smart-lists/CreateSmartListAction.svelte";
+  import type { ListTarget } from "$lib/sections/smart-lists/models/ListTarget";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import FilterTabs from "./FilterTabs.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
 
-  const { onClose }: { onClose: () => void } = $props();
+  const {
+    onClose,
+    smartListTarget,
+  }: {
+    onClose: () => void;
+    smartListTarget?: ListTarget | Nil;
+  } = $props();
 
   const { activeMode, setActiveMode, saveFilters, resetFilters } =
     useStoredFilters();
@@ -72,6 +81,12 @@
   size="auto"
 >
   <FilterTabs activeMode={$activeMode} {setActiveMode} {tabPosition} />
+
+  {#if smartListTarget}
+    <RenderFor audience="authenticated">
+      <CreateSmartListAction target={smartListTarget} />
+    </RenderFor>
+  {/if}
 </Drawer>
 
 <style>
