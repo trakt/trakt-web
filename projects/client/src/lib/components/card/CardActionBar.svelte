@@ -32,6 +32,10 @@
     inset-inline-start: 0;
     z-index: var(--layer-floating);
 
+    transform-origin: 50%
+      calc(var(--height-override-card-cover, var(--height-card-cover)) / 2);
+    transform: var(--transform-card-action-bar, none);
+
     pointer-events: none;
 
     &[data-variant="default"] {

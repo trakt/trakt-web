@@ -91,7 +91,7 @@
 {/snippet}
 
 {#snippet back()}
-  <div class="hover-card-back" class:is-flipped={isFlipped}>
+  <div class="hover-card-back">
     {#if hasFlipped}
       <SummaryCardBackgroundImage
         src={media.cover.url.thumb}
@@ -146,6 +146,20 @@
 </div>
 
 <style>
+  .trakt-media-hover-card {
+    --transform-card-action-bar: perspective(var(--flip-card-perspective))
+        translateZ(calc(sin(var(--flip-card-angle)) * var(--flip-card-lift)))
+        rotateY(
+          calc(var(--flip-card-angle) - round(var(--flip-card-angle), 180deg))
+        );
+
+    transition: var(--transition-flip-card);
+
+    &.is-flipped {
+      --flip-card-angle: 180deg;
+    }
+  }
+
   .hover-card-back {
     box-sizing: border-box;
     height: 100%;
