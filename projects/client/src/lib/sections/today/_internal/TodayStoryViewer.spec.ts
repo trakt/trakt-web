@@ -191,7 +191,8 @@ describe('TodayStoryViewer', () => {
   it('should keep the back out of reach until it is flipped', async () => {
     await renderViewer(null);
     const back = assertDefined(
-      document.querySelector<HTMLElement>('.poster-face.is-back'),
+      document.querySelector('.poster-face.is-back')
+        ?.closest<HTMLElement>('.flip-card-face'),
     );
 
     expect(back.inert).toBe(true);

@@ -1,9 +1,21 @@
+@property --flip-card-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
 :root {
   /**
    * Animation transition variables
    */
   --transition-increment: 150ms;
   --transition-duration-short: 300ms;
+
+  --transition-flip-card: --flip-card-angle
+    calc(var(--transition-duration-short) * 1.75)
+    cubic-bezier(0.34, 1.36, 0.64, 1);
+  --flip-card-perspective: var(--ni-1280);
+  --flip-card-lift: var(--ni-64);
 
   @media (prefers-reduced-motion: reduce) {
     --transition-increment: 0ms;
