@@ -11,12 +11,14 @@
   import { endOfMonth } from "date-fns/endOfMonth";
   import { endOfWeek } from "date-fns/endOfWeek";
   import { startOfMonth } from "date-fns/startOfMonth";
+  import { addMonths } from "date-fns/addMonths";
   import { startOfWeek as dfStartOfWeek } from "date-fns/startOfWeek";
   import { tick, untrack } from "svelte";
   import { useFilter } from "../filters/useFilter";
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarPosterTile from "./_internal/CalendarPosterTile.svelte";
   import CalendarSidebar from "./_internal/CalendarSidebar.svelte";
+  import CalendarDayDrawer from "./_internal/CalendarDayDrawer.svelte";
   import CalendarToolbar from "./_internal/CalendarToolbar.svelte";
   import CalendarMonthGrid from "./_internal/CalendarMonthGrid.svelte";
   import CalendarWeekdayRow from "./_internal/CalendarWeekdayRow.svelte";
@@ -47,6 +49,7 @@
     accumulate,
     activeDate,
     restart,
+    goTo,
   } = useCalendarPeriod();
   const { mode } = useDiscover();
 
@@ -113,11 +116,6 @@
       ?.scrollIntoView({ block: "start" });
   }
 
-  const navigation = $derived({
-    onNext: () => handleNavigation(next),
-    onPrevious: () => handleNavigation(previous),
-    onReset: () => handleNavigation(reset),
-  });
 
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
@@ -130,10 +128,36 @@
     chosenView = calendarView === "day" ? "week" : "day";
   };
 
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
+  const isCompact = $derived($isMobile || $isTabletSmall);
+  const layoutView = $derived(isCompact ? "day" : calendarView);
+  const isMonthOnly = $derived(isCompact && calendarView === "week");
+
+  const goToMonth = (offset: number) =>
+    goTo(
+      addMonths(startOfMonth(selectedDate), offset),
+      offset > 0 ? "next" : "previous",
+    );
+
+  const navigation = $derived(
+    isMonthOnly
+      ? {
+          onNext: () => goToMonth(1),
+          onPrevious: () => goToMonth(-1),
+          onReset: reset,
+        }
+      : {
+          onNext: () => handleNavigation(next),
+          onPrevious: () => handleNavigation(previous),
+          onReset: () => handleNavigation(reset),
+        },
+  );
+
   const WEEK_VIEW_PRELOAD_TARGET = 4;
 
   $effect(() => {
-    if (calendarView !== "week") return;
+    if (layoutView !== "week") return;
     if (periods.length >= WEEK_VIEW_PRELOAD_TARGET) return;
     if ($isLoading) return;
     loadMore();
@@ -162,10 +186,10 @@
 
   const monthAllDays = $derived($monthCalendar ?? []);
 
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
-  const isCompact = $derived($isMobile || $isTabletSmall);
-  const layoutView = $derived(isCompact ? "day" : calendarView);
+
+  let selectedDay = $state<{ date: Date; items: CalendarItemEntry[] } | null>(
+    null,
+  );
   const isBarPinned = $derived($isDesktop || calendarView === "day");
 
   let barHeight = $state(0);
@@ -220,7 +244,11 @@
   style:--calendar-bar-height="{barHeight}px"
 >
   <div class="calendar-main">
-    <div class="calendar-bar" bind:offsetHeight={barHeight}>
+    <div
+      class="calendar-bar"
+      class:is-month-only={isMonthOnly}
+      bind:offsetHeight={barHeight}
+    >
       <CalendarToolbar
         {navigation}
         activeDate={selectedDate}
@@ -244,12 +272,17 @@
               allDays={monthAllDays}
               activeDate={selectedDate}
               preview={monthPreview}
+              variant={isMonthOnly ? "fill" : "default"}
+              onSelectDay={isMonthOnly
+                ? (day) => (selectedDay = day)
+                : undefined}
             />
           {/if}
         </div>
       {/if}
     </div>
 
+    {#if !isMonthOnly}
     <CalendarLayout
       activeDate={$activeDate}
       isLoading={$isLoading}
@@ -260,6 +293,7 @@
       hasNavigationBar={false}
       item={layoutView === "week" ? posterItem : summaryItem}
     />
+    {/if}
   </div>
 
   {#if $isDesktop}
@@ -268,6 +302,14 @@
     </CalendarSidebar>
   {/if}
 </div>
+
+{#if selectedDay}
+  <CalendarDayDrawer
+    day={selectedDay}
+    item={summaryItem}
+    onClose={() => (selectedDay = null)}
+  />
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -375,12 +417,33 @@
     }
 
     :global(.calendar-month-poster) {
-      width: 100%;
-      height: 100%;
+      place-self: center;
+
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
       min-height: 0;
+      aspect-ratio: 2 / 3;
 
       object-fit: cover;
       border-radius: var(--ni-2);
+    }
+  }
+
+  .calendar-bar.is-month-only {
+    min-height: calc(100dvh - var(--calendar-bar-top) - var(--gap-m));
+
+    @include for-mobile {
+      min-height: calc(
+        100dvh - var(--calendar-bar-top) - var(--mobile-navbar-height) -
+          var(--gap-m)
+      );
+    }
+
+    .calendar-bar-dates {
+      flex: 1;
+      min-height: 0;
     }
   }
 

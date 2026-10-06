@@ -18,6 +18,7 @@
     skipActiveWeek = false,
     preview,
     variant = "default",
+    onSelectDay,
   }: {
     allDays: Calendar<T>;
     activeDate: Date;
@@ -29,7 +30,8 @@
      */
     skipActiveWeek?: boolean;
     preview?: Snippet<[T[]]>;
-    variant?: "default" | "mini";
+    variant?: "default" | "mini" | "fill";
+    onSelectDay?: (day: { date: Date; items: T[] }) => void;
   } = $props();
 
   const MAX_PREVIEW_ITEMS = 4;
@@ -77,7 +79,8 @@
               day: toHumanDay({ date: cell.date, locale: getLocale() }),
             })}
             disabled={cell.items.length === 0}
-            onclick={() => scrollToDay(cell.date)}
+            onclick={() =>
+              onSelectDay ? onSelectDay(cell) : scrollToDay(cell.date)}
           >
             <span class="month-day-number">{cell.date.getDate()}</span>
             <span
@@ -212,6 +215,21 @@
       border-radius: 50%;
 
       background-color: var(--color-calendar-item-indicator);
+    }
+  }
+
+  .calendar-month-grid[data-variant="fill"] {
+    flex: 1;
+    min-height: 0;
+
+    .week-row {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .month-day {
+      aspect-ratio: auto;
+      height: 100%;
     }
   }
 

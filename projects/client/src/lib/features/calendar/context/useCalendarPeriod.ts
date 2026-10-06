@@ -64,6 +64,16 @@ export function useCalendarPeriod(
     startDate.next(newStart);
   };
 
+  const goTo = (date: Date, direction: Direction) => {
+    track({ action: direction });
+    const newStart = getStartOfWeek(date, getLocale());
+
+    clear(newStart);
+    visibleDate.next(null);
+    activeDate.next(date);
+    startDate.next(newStart);
+  };
+
   const restart = () => {
     const referenceDate = visibleDate.value ?? activeDate.value;
     const newStart = getStartOfWeek(referenceDate, getLocale());
@@ -100,5 +110,6 @@ export function useCalendarPeriod(
     activeDate,
     reset,
     restart,
+    goTo,
   };
 }

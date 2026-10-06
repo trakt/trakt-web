@@ -30,7 +30,7 @@
   );
 </script>
 
-<div class="trakt-calendar-toolbar">
+<div class="trakt-calendar-toolbar" data-view={headerProps.view}>
   <div class="toolbar-title">
     <h2 class="toolbar-month">
       {parts.monthLong}
@@ -68,6 +68,15 @@
       column-gap: var(--gap-s);
 
       .toolbar-title {
+        display: none;
+      }
+
+      &[data-view="week"] .toolbar-title {
+        display: flex;
+        flex-basis: 100%;
+      }
+
+      &[data-view="week"] .toolbar-week {
         display: none;
       }
 
