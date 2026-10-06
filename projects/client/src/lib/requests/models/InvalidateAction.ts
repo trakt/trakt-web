@@ -140,6 +140,7 @@ export const InvalidateAction = {
 
   SmartList: {
     Created: buildInvalidationKey('smart_list', 'created'),
+    Edited: buildInvalidationKey('smart_list', 'edited'),
     Deleted: buildInvalidationKey('smart_list', 'deleted'),
   },
 

@@ -11,4 +11,5 @@ export type FormProps = {
    * do not carry themselves. */
   isValid?: boolean;
   stickyActions?: boolean;
+  hasActions?: boolean;
 } & ChildrenProps;

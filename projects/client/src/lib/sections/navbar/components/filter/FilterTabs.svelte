@@ -9,7 +9,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
   import FilterSection from "./FilterSection.svelte";
-  import FilterGroup from "./filters/_internal/FilterGroup.svelte";
+  import FilterGroup from "./filters/FilterGroup.svelte";
   import AdvancedFilters from "./filters/AdvancedFilters.svelte";
   import { useFilterSetter } from "./filters/_internal/useFilterSetter";
   import SimpleFilters from "./filters/SimpleFilters.svelte";

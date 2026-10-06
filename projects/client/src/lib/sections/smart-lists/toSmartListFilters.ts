@@ -1,3 +1,4 @@
+import { FILTER_KEYS } from '$lib/features/filters/filterKeys.ts';
 import type { SmartListFilters } from '$lib/requests/queries/users/smartListQuery.ts';
 
 const LIST_KEYS = [
@@ -47,8 +48,20 @@ const toRange = (value: string): number[] =>
     .filter((item) => !Number.isNaN(item))
     .slice(0, 2);
 
+const isEditableKey = (key: string) =>
+  (FILTER_KEYS as readonly string[]).includes(key);
+
+function toPreserved(base: SmartListFilters): SmartListFilters {
+  return Object.entries(base).reduce<SmartListFilters>(
+    (filters, [key, value]) =>
+      isEditableKey(key) ? filters : { ...filters, [key]: value },
+    {},
+  );
+}
+
 export function toSmartListFilters(
   filterMap: Record<string, string>,
+  base: SmartListFilters = {},
 ): SmartListFilters {
   return Object.entries(filterMap).reduce<SmartListFilters>(
     (filters, [key, value]) => {
@@ -70,6 +83,6 @@ export function toSmartListFilters(
 
       return filters;
     },
-    {},
+    toPreserved(base),
   );
 }

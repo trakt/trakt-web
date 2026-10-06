@@ -4,7 +4,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import { isAutoRenderedFilter } from "./_internal/isAutoRenderedFilter";
   import FilterChips from "./_internal/FilterChips.svelte";
-  import FilterGroup from "./_internal/FilterGroup.svelte";
+  import FilterGroup from "./FilterGroup.svelte";
   import StreamingAvailabilityFilter from "./_internal/StreamingAvailabilityFilter.svelte";
   import ListFilter from "./ListFilter.svelte";
   import SliderFilter from "./SliderFilter.svelte";

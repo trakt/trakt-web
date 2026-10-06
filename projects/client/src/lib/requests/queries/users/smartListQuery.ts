@@ -101,6 +101,7 @@ export const smartListQuery = defineInfiniteQuery({
   key: (params: SmartListParams) => `smartLists-${params.userId ?? 'me'}`,
   invalidations: [
     InvalidateAction.SmartList.Created,
+    InvalidateAction.SmartList.Edited,
     InvalidateAction.SmartList.Deleted,
   ],
   dependencies: (

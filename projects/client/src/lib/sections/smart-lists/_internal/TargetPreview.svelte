@@ -1,7 +1,7 @@
 <script lang="ts">
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { MediaType } from "$lib/requests/models/MediaType";
+  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import AnticipatedPaginatedList from "$lib/sections/lists/anticipated/AnticipatedPaginatedList.svelte";
   import LibraryListPaginated from "$lib/sections/lists/library/LibraryListPaginated.svelte";
   import PopularPaginatedList from "$lib/sections/lists/popular/PopularPaginatedList.svelte";
@@ -9,8 +9,44 @@
   import TrendingPaginatedList from "$lib/sections/lists/trending/TrendingPaginatedList.svelte";
   import WatchlistPaginatedList from "$lib/sections/lists/watchlist/WatchlistPaginatedList.svelte";
   import type { ListTarget } from "../models/ListTarget";
+  import { toSmartListSourceLabel } from "$lib/sections/lists/smart/toSmartListSourceLabel";
 
-  const { target, type }: { target: ListTarget; type: MediaType } = $props();
+  const { target, type }: { target: ListTarget; type: DiscoverMode } = $props();
+
+  const TYPED_TITLES: Partial<
+    Record<ListTarget, Record<"movie" | "show", () => string>>
+  > = {
+    trending: {
+      movie: m.list_title_trending_movies,
+      show: m.list_title_trending_shows,
+    },
+    anticipated: {
+      movie: m.list_title_anticipated_movies,
+      show: m.list_title_anticipated_shows,
+    },
+    popular: {
+      movie: m.list_title_popular_movies,
+      show: m.list_title_popular_shows,
+    },
+    recommendations: {
+      movie: m.list_title_recommended_movies,
+      show: m.list_title_recommended_shows,
+    },
+    watchlist: {
+      movie: m.list_title_watchlist_movies,
+      show: m.list_title_watchlist_shows,
+    },
+  };
+
+  const title = $derived.by(() => {
+    const typed = TYPED_TITLES[target];
+
+    if (!typed || type === "media") {
+      return toSmartListSourceLabel(target);
+    }
+
+    return typed[type]();
+  });
 </script>
 
 {#snippet actions()}
@@ -23,41 +59,31 @@
 
 {#if target === "trending"}
   <TrendingPaginatedList
-    title={type === "movie"
-      ? m.list_title_trending_movies()
-      : m.list_title_trending_shows()}
+    {title}
     {type}
     {actions}
   />
 {:else if target === "anticipated"}
   <AnticipatedPaginatedList
-    title={type === "movie"
-      ? m.list_title_anticipated_movies()
-      : m.list_title_anticipated_shows()}
+    {title}
     {type}
     {actions}
   />
 {:else if target === "popular"}
   <PopularPaginatedList
-    title={type === "movie"
-      ? m.list_title_popular_movies()
-      : m.list_title_popular_shows()}
+    {title}
     {type}
     {actions}
   />
 {:else if target === "recommendations"}
   <RecommendedPaginatedList
-    title={type === "movie"
-      ? m.list_title_recommended_movies()
-      : m.list_title_recommended_shows()}
+    {title}
     {type}
     {actions}
   />
 {:else if target === "watchlist"}
   <WatchlistPaginatedList
-    title={type === "movie"
-      ? m.list_title_watchlist_movies()
-      : m.list_title_watchlist_shows()}
+    {title}
     {type}
     sortBy={undefined}
     sortHow="desc"
@@ -66,7 +92,7 @@
 {:else if target === "library"}
   <LibraryListPaginated
     library="plex"
-    title={m.list_title_library()}
+    {title}
     {type}
     {actions}
   />

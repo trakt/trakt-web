@@ -5,7 +5,7 @@
   import { FilterMode } from "$lib/features/filters/models/FilterMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import { m } from "$lib/features/i18n/messages.ts";
-  import Filter from "./_internal/Filter.svelte";
+  import Filter from "./Filter.svelte";
   import {
     toggleFilterState,
     type ToggleFilterState,
