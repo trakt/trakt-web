@@ -10,6 +10,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import FilterTabs from "$lib/sections/navbar/components/filter/FilterTabs.svelte";
+  import ActiveFilters from "$lib/sections/navbar/components/filter/filters/ActiveFilters.svelte";
   import type { Snippet } from "svelte";
 
   const { onClose, children }: { onClose: () => void } & {
@@ -90,7 +91,17 @@
         </div>
       </div>
 
-      <div class="filters-body" id={filtersId} inert={!isFiltersOpen}>
+      <div
+        class="filters-body filters-summary"
+        inert={isFiltersOpen}
+        aria-hidden={isFiltersOpen}
+      >
+        <div class="filters-body-inner">
+          <ActiveFilters />
+        </div>
+      </div>
+
+      <div class="filters-body filters-full" id={filtersId} inert={!isFiltersOpen}>
         <div class="filters-body-inner">
           <FilterTabs activeMode={$activeMode} {setActiveMode} />
         </div>
@@ -190,8 +201,16 @@
     transition: grid-template-rows var(--sidebar-reveal-duration)
       var(--sidebar-ease);
 
-    .is-open & {
-      grid-template-rows: 1fr;
+    &.filters-full {
+      .is-open & {
+        grid-template-rows: 1fr;
+      }
+    }
+
+    &.filters-summary {
+      .sidebar-filters:not(.is-open) & {
+        grid-template-rows: 1fr;
+      }
     }
   }
 
@@ -212,12 +231,15 @@
       flex-shrink: 0;
     }
 
-    .is-open & {
-      padding-bottom: var(--gap-m);
-
+    .is-open .filters-full &,
+    .sidebar-filters:not(.is-open) .filters-summary & {
       opacity: 1;
       transform: none;
       filter: none;
+    }
+
+    .is-open .filters-full & {
+      padding-bottom: var(--gap-m);
     }
   }
 

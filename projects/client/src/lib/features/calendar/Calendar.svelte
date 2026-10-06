@@ -103,10 +103,15 @@
     onReset: () => handleNavigation(reset),
   });
 
-  let calendarView = $state<CalendarView>("day");
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+
+  let chosenView = $state<CalendarView | null>(null);
+  const calendarView = $derived<CalendarView>(
+    chosenView ?? ($isDesktop ? "week" : "day"),
+  );
 
   const toggleView = () => {
-    calendarView = calendarView === "day" ? "week" : "day";
+    chosenView = calendarView === "day" ? "week" : "day";
   };
 
   const WEEK_VIEW_PRELOAD_TARGET = 4;
@@ -141,7 +146,6 @@
 
   const monthAllDays = $derived($monthCalendar ?? []);
 
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
   const isCompact = $derived($isMobile || $isTabletSmall);
