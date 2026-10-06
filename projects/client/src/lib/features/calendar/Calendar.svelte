@@ -12,7 +12,7 @@
   import { endOfWeek } from "date-fns/endOfWeek";
   import { startOfMonth } from "date-fns/startOfMonth";
   import { startOfWeek as dfStartOfWeek } from "date-fns/startOfWeek";
-  import { tick } from "svelte";
+  import { tick, untrack } from "svelte";
   import { useFilter } from "../filters/useFilter";
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarPosterTile from "./_internal/CalendarPosterTile.svelte";
@@ -46,6 +46,7 @@
     loadMore,
     accumulate,
     activeDate,
+    restart,
   } = useCalendarPeriod();
   const { mode } = useDiscover();
 
@@ -65,10 +66,25 @@
     }),
   );
 
+  const fingerprint = $derived(
+    `${$mode}:${JSON.stringify($filterMap)}:${$episodeType}`,
+  );
+
+  let previousFingerprint: string | undefined;
+
+  $effect(() => {
+    const current = fingerprint;
+    const hasChanged = previousFingerprint !== undefined &&
+      previousFingerprint !== current;
+    previousFingerprint = current;
+
+    if (hasChanged) untrack(restart);
+  });
+
   const periods: CalendarPeriod<CalendarItemEntry>[] = $derived(
     accumulate({
       calendar: $calendar,
-      fingerprint: `${$mode}:${JSON.stringify($filterMap)}:${$episodeType}`,
+      fingerprint,
       isEmpty: !$hasUpstreamItems,
     }),
   );
