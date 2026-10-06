@@ -4,6 +4,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import FlipCard from "$lib/components/card/FlipCard.svelte";
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
@@ -73,11 +74,7 @@
         exitMargin: HOVER_EXIT_MARGIN,
       }}
     >
-      <div
-        class="poster-card"
-        class:is-flipped={isFlipped}
-        data-milestone={milestone?.type}
-      >
+      <div class="poster-card" data-milestone={milestone?.type}>
         {#if rating != null && !isFlipped}
           <div class="poster-rating">
             <StemTag>
@@ -90,17 +87,27 @@
             <WatchedTag variant="full" />
           </div>
         {/if}
-        <div class="poster-face">
-          <CrossOriginImage
-            src={media.poster.url.medium}
-            alt={m.image_alt_media_poster({ title: media.title })}
-          />
-        </div>
-        <div class="poster-face is-back" inert={!isFlipped}>
-          {#if showBack}
-            <TodayPosterDetails {media} />
-          {/if}
-        </div>
+        <FlipCard
+          {isFlipped}
+          --border-radius-flip-card="var(--border-radius-l)"
+          --height-flip-card="100%"
+        >
+          {#snippet front()}
+            <div class="poster-face">
+              <CrossOriginImage
+                src={media.poster.url.medium}
+                alt={m.image_alt_media_poster({ title: media.title })}
+              />
+            </div>
+          {/snippet}
+          {#snippet back()}
+            <div class="poster-face is-back">
+              {#if showBack}
+                <TodayPosterDetails {media} />
+              {/if}
+            </div>
+          {/snippet}
+        </FlipCard>
       </div>
       {#if onTap && onPressStart && onPressEnd}
         <TodayStoryTapZones
@@ -216,21 +223,11 @@
 
       width: min(100cqw, 100cqh * 2 / 3);
       aspect-ratio: 2 / 3;
-
-      perspective: var(--ni-1280);
     }
 
     .poster-card {
       position: absolute;
       inset: 0;
-
-      transform-style: preserve-3d;
-      transition: transform calc(var(--transition-duration-short) * 0.75)
-        cubic-bezier(0.3, 0.7, 0.2, 1);
-
-      &.is-flipped {
-        transform: rotateY(180deg);
-      }
     }
 
     .poster-rating {
@@ -241,8 +238,6 @@
       bottom: var(--gap-s);
       inset-inline-end: var(--gap-s);
       z-index: var(--layer-floating);
-
-      transform: translateZ(var(--ni-1));
     }
 
     .poster-watched {
@@ -252,7 +247,7 @@
       z-index: var(--layer-floating);
 
       max-width: calc(100% - var(--gap-m));
-      transform: translate(-50%, 50%) translateZ(var(--ni-1));
+      transform: translate(-50%, 50%);
     }
 
     .poster-card[data-milestone] .poster-face {
@@ -266,13 +261,12 @@
     }
 
     .poster-face {
-      position: absolute;
-      inset: 0;
+      box-sizing: border-box;
+      height: 100%;
       overflow: hidden;
 
       border-radius: var(--border-radius-l);
       box-shadow: var(--shadow-base);
-      backface-visibility: hidden;
 
       :global(img) {
         width: 100%;
@@ -281,7 +275,6 @@
       }
 
       &.is-back {
-        transform: rotateY(180deg);
         border: var(--border-thickness-xxs) solid var(--color-border);
         background: var(--color-card-background);
       }
