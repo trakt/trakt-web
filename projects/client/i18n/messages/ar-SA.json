@@ -1637,6 +1637,8 @@
   "text_landing_track_eyebrow": "سجّله",
   "text_language": "اللغة",
   "text_last_day": "آخر {day}",
+  "text_leaderboard": "لوحة الصدارة",
+  "text_leaderboard_following_count": "{count} متابع",
   "text_leaderboard_free_section": "الأعضاء المجّانيون",
   "text_leaderboard_upsell_footer": "قم بالترقية إلى VIP لترى ترتيبك بين أصدقائك",
   "text_leaderboard_you": "أنت",

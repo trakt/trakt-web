@@ -1638,6 +1638,8 @@
   "text_landing_track_eyebrow": "Logga den",
   "text_language": "Språk",
   "text_last_day": "förra {day}",
+  "text_leaderboard": "Topplista",
+  "text_leaderboard_following_count": "{count} följer",
   "text_leaderboard_free_section": "Gratismedlemmar",
   "text_leaderboard_upsell_footer": "Uppgradera till VIP för att se din rankning bland dina vänner",
   "text_leaderboard_you": "Du",

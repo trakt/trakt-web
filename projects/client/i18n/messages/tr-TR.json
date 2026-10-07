@@ -1638,6 +1638,8 @@
   "text_landing_track_eyebrow": "Kaydedin",
   "text_language": "Dil",
   "text_last_day": "geçen {day}",
+  "text_leaderboard": "Liderlik Tablosu",
+  "text_leaderboard_following_count": "{count} takip edilen",
   "text_leaderboard_free_section": "Ücretsiz üyeler",
   "text_leaderboard_upsell_footer": "Arkadaşların arasında nerede sıralandığını görmek için VIP'ye yükselt",
   "text_leaderboard_you": "Sen",

@@ -1638,6 +1638,8 @@
   "text_landing_track_eyebrow": "Log det",
   "text_language": "Sprog",
   "text_last_day": "sidste {day}",
+  "text_leaderboard": "Rangliste",
+  "text_leaderboard_following_count": "{count} du følger",
   "text_leaderboard_free_section": "Gratis medlemmer",
   "text_leaderboard_upsell_footer": "Opgrader til VIP for at se din placering blandt dine venner",
   "text_leaderboard_you": "Dig",

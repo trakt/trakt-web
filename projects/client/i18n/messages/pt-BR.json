@@ -1638,6 +1638,8 @@
   "text_landing_track_eyebrow": "Registre",
   "text_language": "Idioma",
   "text_last_day": "última {day}",
+  "text_leaderboard": "Classificação",
+  "text_leaderboard_following_count": "{count} seguindo",
   "text_leaderboard_free_section": "Membros gratuitos",
   "text_leaderboard_upsell_footer": "Atualize para VIP para ver sua classificação entre seus amigos",
   "text_leaderboard_you": "Você",

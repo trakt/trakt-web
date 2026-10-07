@@ -1638,6 +1638,8 @@
   "text_landing_track_eyebrow": "Registra-ho",
   "text_language": "Idioma",
   "text_last_day": "el darrer {day}",
+  "text_leaderboard": "Classificació",
+  "text_leaderboard_following_count": "{count} a qui segueix",
   "text_leaderboard_free_section": "Membres gratuïts",
   "text_leaderboard_upsell_footer": "Actualitza a VIP per veure la teva posició entre els teus amics",
   "text_leaderboard_you": "Tu",

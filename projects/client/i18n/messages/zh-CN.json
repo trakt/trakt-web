@@ -1637,6 +1637,8 @@
   "text_landing_track_eyebrow": "记录",
   "text_language": "语言",
   "text_last_day": "上 {day}",
+  "text_leaderboard": "排行榜",
+  "text_leaderboard_following_count": "{count} 位关注",
   "text_leaderboard_free_section": "免费会员",
   "text_leaderboard_upsell_footer": "升级为VIP，查看您在好友中的排名",
   "text_leaderboard_you": "你",

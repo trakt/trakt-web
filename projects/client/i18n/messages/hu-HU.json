@@ -1638,6 +1638,8 @@
   "text_landing_track_eyebrow": "Naplózd",
   "text_language": "Nyelv",
   "text_last_day": "múlt {day}",
+  "text_leaderboard": "Ranglista",
+  "text_leaderboard_following_count": "{count} követés",
   "text_leaderboard_free_section": "Ingyenes tagok",
   "text_leaderboard_upsell_footer": "Frissíts VIP-re, hogy lásd, hol helyezkedsz el a barátaid között",
   "text_leaderboard_you": "Te",

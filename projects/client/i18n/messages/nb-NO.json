@@ -1638,6 +1638,8 @@
   "text_landing_track_eyebrow": "Loggfør det",
   "text_language": "Språk",
   "text_last_day": "sist {day}",
+  "text_leaderboard": "Ledertavle",
+  "text_leaderboard_following_count": "{count} følger",
   "text_leaderboard_free_section": "Gratismedlemmer",
   "text_leaderboard_upsell_footer": "Oppgrader til VIP for å se hvor du rangerer blant vennene dine",
   "text_leaderboard_you": "Du",

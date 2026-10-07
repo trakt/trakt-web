@@ -1637,6 +1637,8 @@
   "text_landing_track_eyebrow": "Suivez-le",
   "text_language": "Langue",
   "text_last_day": "{day} dernier",
+  "text_leaderboard": "Classement",
+  "text_leaderboard_following_count": "{count} suivis",
   "text_leaderboard_free_section": "Membres gratuits",
   "text_leaderboard_upsell_footer": "Passez au statut VIP pour voir votre classement parmi vos amis",
   "text_leaderboard_you": "Vous",
