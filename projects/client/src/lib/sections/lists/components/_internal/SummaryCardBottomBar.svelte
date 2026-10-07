@@ -74,7 +74,9 @@
     &[data-layout="minimal"],
     &[data-layout="compact"] {
       --poster-width: calc(
-        var(--height-summary-card-cover-compact) * var(--poster-aspect-ratio, 0)
+        var(--height-summary-card-cover-compact) * var(--poster-aspect-ratio, 0) +
+          var(--height-summary-card-compact) -
+          var(--height-summary-card-cover-compact)
       );
     }
   }
