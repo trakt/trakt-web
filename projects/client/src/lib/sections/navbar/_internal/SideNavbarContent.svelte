@@ -9,6 +9,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DevtoolsNavItem from "./DevtoolsNavItem.svelte";
   import NavGroup from "./NavGroup.svelte";
+  import SearchShortcutHint from "./SearchShortcutHint.svelte";
 
   const { isCollapsed }: { isCollapsed: boolean } = $props();
 
@@ -19,6 +20,7 @@
 {#snippet iconHome()}<HomeIcon />{/snippet}
 {#snippet iconDiscover()}<DiscoverIcon />{/snippet}
 {#snippet iconList()}<ListIcon />{/snippet}
+{#snippet searchHint()}<SearchShortcutHint />{/snippet}
 
 {#snippet navSubLink(href: string, title: string)}
   <Link {href} label={title}>
@@ -33,6 +35,7 @@
       label={m.button_label_search()}
       title={m.page_title_search()}
       icon={iconSearch}
+      hint={searchHint}
       {isCollapsed}
     />
   </RenderFor>
