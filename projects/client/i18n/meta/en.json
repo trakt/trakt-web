@@ -5136,8 +5136,8 @@
       "default": "hours",
       "description": "Label for a watch-time value expressed in hours."
     },
-    "text_following": {
-      "default": "Following",
+    "text_leaderboard": {
+      "default": "Leaderboard",
       "description": "Label for the follows pill on a profile that opens the leaderboard."
     },
     "text_leaderboard_free_section": {
