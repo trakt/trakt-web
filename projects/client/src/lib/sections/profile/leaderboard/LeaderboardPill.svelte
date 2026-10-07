@@ -38,7 +38,7 @@
     <AvatarPill
       {avatars}
       countLabel={String(following.length)}
-      label={m.text_following()}
+      label={m.text_leaderboard()}
       href={drawerLink.href}
       noscroll={drawerLink.noscroll}
       replacestate={drawerLink.replacestate}
