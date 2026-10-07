@@ -61,6 +61,12 @@ type SortType = { sortBy: string; sortHow: string };
 type LikeType = { action: 'like' | 'unlike' };
 type VipUpsellType = SourceType;
 type VipUpgradeType = { plan: string };
+type VipCancelType = {
+  reason?: string;
+  tenure?: string;
+  offer?: string;
+  gateway?: string;
+};
 type ImportInitiatedType = { source: string };
 type ImportCompletedType = {
   source: string;
@@ -154,7 +160,7 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.VipUpgrade]: VipUpgradeType;
   [AnalyticsEvent.VipManage]: never;
-  [AnalyticsEvent.VipCancel]: never;
+  [AnalyticsEvent.VipCancel]: VipCancelType;
 
   [AnalyticsEvent.SmartListDelete]: never;
   [AnalyticsEvent.SmartListCreate]: never;
