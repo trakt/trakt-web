@@ -64,6 +64,7 @@ const ANONYMOUS_USER: UserSettings = {
   slug: '',
   username: '',
   token: null,
+  shareCode: null,
   name: {
     first: '',
     last: '',
