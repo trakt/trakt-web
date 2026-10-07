@@ -217,7 +217,7 @@
           <DefaultMediaItem
             type={entry.type}
             media={entry}
-            style="compact"
+            style="minimal"
             source="search"
             mode="mixed"
           />

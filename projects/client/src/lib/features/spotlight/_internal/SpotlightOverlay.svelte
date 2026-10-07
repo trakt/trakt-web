@@ -75,7 +75,7 @@
     border: var(--border-thickness-xxs) solid
       color-mix(in srgb, var(--color-text-primary) 8%, transparent);
     outline: none;
-    background-color: var(--color-modal-background);
+    background-color: var(--color-dialog-background);
     color: var(--color-text-primary);
     box-shadow: var(--shadow-dialog);
 
