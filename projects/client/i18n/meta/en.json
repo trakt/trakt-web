@@ -12387,6 +12387,392 @@
     "preview_feature_description_vip_cancel_flow": {
       "default": "A new way to cancel VIP: asks why, shows what changes and offers 2 more years. Uses sample data for now.",
       "description": "Description of the VIP cancel flow preview feature."
+    },
+    "page_title_vip_cancel": {
+      "default": "Cancel VIP",
+      "description": "Page title of the VIP cancel page."
+    },
+    "text_vip_cancel_card_title": {
+      "default": "Cancel VIP",
+      "description": "Small title at the top of each card on the VIP cancel page."
+    },
+    "text_vip_cancel_step": {
+      "default": "Step {current} of {total}",
+      "description": "Accessible text for the step progress on the VIP cancel page.",
+      "variables": {
+        "current": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "tag_text_vip_cancel_reason": {
+      "default": "Before you go",
+      "description": "Eyebrow above the reason question on the VIP cancel page. Short."
+    },
+    "header_vip_cancel_reason": {
+      "default": "Why are you leaving?",
+      "description": "Question on the first card on the VIP cancel page."
+    },
+    "text_vip_cancel_reason_description": {
+      "default": "Pick one. It goes straight to the team.",
+      "description": "Text under the reason question on the VIP cancel page."
+    },
+    "text_vip_cancel_reason_price": {
+      "default": "Too expensive",
+      "description": "Cancellation reason option on the VIP cancel page. Short."
+    },
+    "text_vip_cancel_reason_usage": {
+      "default": "Not using it enough",
+      "description": "Cancellation reason option on the VIP cancel page. Short."
+    },
+    "text_vip_cancel_reason_feature": {
+      "default": "Missing a feature",
+      "description": "Cancellation reason option on the VIP cancel page. Short."
+    },
+    "text_vip_cancel_reason_broken": {
+      "default": "Something's broken",
+      "description": "Cancellation reason option on the VIP cancel page. Short."
+    },
+    "text_vip_cancel_reason_switch": {
+      "default": "Switching apps",
+      "description": "Cancellation reason option on the VIP cancel page. Short."
+    },
+    "text_vip_cancel_reason_break": {
+      "default": "Taking a break",
+      "description": "Cancellation reason option on the VIP cancel page. Short."
+    },
+    "text_vip_cancel_reason_other": {
+      "default": "Other",
+      "description": "Cancellation reason option on the VIP cancel page. Short."
+    },
+    "input_placeholder_vip_cancel_feature": {
+      "default": "What should we build? (optional)",
+      "description": "Placeholder of the free text box on the VIP cancel page when the reason is a missing feature."
+    },
+    "input_placeholder_vip_cancel_other": {
+      "default": "Tell us more (optional)",
+      "description": "Placeholder of the free text box on the VIP cancel page when the reason is other."
+    },
+    "input_label_vip_cancel_details": {
+      "default": "More detail",
+      "description": "Accessible label of the optional free text box on the VIP cancel page."
+    },
+    "text_vip_cancel_details_count": {
+      "default": "{count} / {max}",
+      "description": "Character counter under the free text box on the VIP cancel page.",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        }
+      }
+    },
+    "text_vip_cancel_details_cleaned": {
+      "default": "Sent as: {text}",
+      "description": "Shown under the free text box on the VIP cancel page when emails, links or numbers were removed before sending. {text} is the cleaned text.",
+      "variables": {
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_vip_cancel_continue": {
+      "default": "Continue",
+      "description": "Button on the VIP cancel page that goes to the next card."
+    },
+    "button_label_vip_cancel_continue": {
+      "default": "Continue to the next step",
+      "description": "Accessible label of the continue button on the VIP cancel page."
+    },
+    "button_text_vip_cancel_never_mind": {
+      "default": "Never mind",
+      "description": "Button on the first card on the VIP cancel page that keeps VIP."
+    },
+    "button_label_vip_cancel_never_mind": {
+      "default": "Never mind, keep VIP",
+      "description": "Accessible label of the never mind button on the VIP cancel page."
+    },
+    "tag_text_vip_cancel_library": {
+      "default": "Your library",
+      "description": "Eyebrow on the library card on the VIP cancel page."
+    },
+    "header_vip_cancel_library": {
+      "default": "Nothing gets deleted. It just stops growing.",
+      "description": "Headline of the library card on the VIP cancel page."
+    },
+    "text_vip_cancel_library_description": {
+      "default": "{plays} plays, {hours} hours and {ratings} ratings. All of it stays. But free accounts can't add more of these until they're back under the limit.",
+      "description": "Text on the library card on the VIP cancel page. Numbers are already formatted.",
+      "variables": {
+        "plays": {
+          "type": "string"
+        },
+        "hours": {
+          "type": "string"
+        },
+        "ratings": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_cancel_limit_watchlist": {
+      "default": "Watchlist",
+      "description": "Name of a limited item on the library card on the VIP cancel page."
+    },
+    "text_vip_cancel_limit_collection": {
+      "default": "Collection",
+      "description": "Name of a limited item on the library card on the VIP cancel page."
+    },
+    "text_vip_cancel_limit_notes": {
+      "default": "Notes",
+      "description": "Name of a limited item on the library card on the VIP cancel page."
+    },
+    "text_vip_cancel_limit_smart_lists": {
+      "default": "Smart lists",
+      "description": "Name of a limited item on the library card on the VIP cancel page."
+    },
+    "text_vip_cancel_limit_connected_apps": {
+      "default": "Connected apps",
+      "description": "Name of a limited item on the library card on the VIP cancel page."
+    },
+    "tag_text_vip_cancel_confirm": {
+      "default": "Last step",
+      "description": "Eyebrow on the last card on the VIP cancel page."
+    },
+    "header_vip_cancel_confirm": {
+      "default": "Cancel VIP?",
+      "description": "Headline of the last card on the VIP cancel page."
+    },
+    "text_vip_cancel_fact_until": {
+      "default": "VIP until",
+      "description": "Label of the date VIP ends on the VIP cancel page."
+    },
+    "text_vip_cancel_fact_data": {
+      "default": "Your data",
+      "description": "Label of what happens to the data on the VIP cancel page."
+    },
+    "text_vip_cancel_fact_all_kept": {
+      "default": "All kept",
+      "description": "Value meaning all data is kept on the VIP cancel page."
+    },
+    "header_vip_cancel_losses": {
+      "default": "On {date} you lose",
+      "description": "Heading above the list of what someone loses on the VIP cancel page. {date} is a short date.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "header_vip_cancel_includes": {
+      "default": "VIP includes",
+      "description": "Heading above the list of VIP features on the VIP cancel page, shown when the person has nothing personal to lose."
+    },
+    "text_vip_cancel_loss_streaming": {
+      "default": "Stop syncing. Free keeps one service.",
+      "description": "Explains a lost streaming service row on the VIP cancel page."
+    },
+    "text_vip_cancel_value_service": {
+      "default": "1 service",
+      "description": "Count of one streaming service on the VIP cancel page."
+    },
+    "text_vip_cancel_value_services": {
+      "default": "{count} services",
+      "description": "Count of several streaming services on the VIP cancel page.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "header_vip_cancel_loss_plex_scrobbling": {
+      "default": "Plex scrobbling",
+      "description": "Title of the Plex scrobbling row on the VIP cancel page."
+    },
+    "text_vip_cancel_loss_plex_scrobbling": {
+      "default": "Plays stop being tracked on their own",
+      "description": "Explains the Plex scrobbling row on the VIP cancel page."
+    },
+    "text_vip_cancel_value_server": {
+      "default": "1 server",
+      "description": "Count of one Plex server on the VIP cancel page."
+    },
+    "text_vip_cancel_value_off": {
+      "default": "Off",
+      "description": "Value meaning a feature turns off on the VIP cancel page."
+    },
+    "text_vip_cancel_feature_reviews": {
+      "default": "Year in Review and Month in Review",
+      "description": "VIP feature listed on the VIP cancel page when the person has nothing personal to lose."
+    },
+    "text_vip_cancel_feature_insights": {
+      "default": "Trivia, soundtracks and sentiment",
+      "description": "VIP feature listed on the VIP cancel page when the person has nothing personal to lose."
+    },
+    "text_vip_cancel_feature_plex": {
+      "default": "Plex scrobbling",
+      "description": "VIP feature listed on the VIP cancel page when the person has nothing personal to lose."
+    },
+    "text_vip_cancel_feature_streaming": {
+      "default": "Sync with all your streaming services",
+      "description": "VIP feature listed on the VIP cancel page when the person has nothing personal to lose."
+    },
+    "tag_text_vip_cancel_offer": {
+      "default": "Before you go · one time only",
+      "description": "Eyebrow on the 2 year offer on the VIP cancel page."
+    },
+    "header_vip_cancel_offer": {
+      "default": "Or stay 2 more years",
+      "description": "Headline of the 2 year offer on the VIP cancel page."
+    },
+    "text_vip_cancel_offer_monthly": {
+      "default": "That's {price} a month. Starts {date}, nothing today.",
+      "description": "Fine print of the 2 year offer on the VIP cancel page. {price} is the monthly price, {date} a short date.",
+      "variables": {
+        "price": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_cancel_offer_break": {
+      "default": "Take your break. The price waits. Starts {date}, nothing today.",
+      "description": "Fine print of the 2 year offer on the VIP cancel page when the reason is taking a break.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_vip_cancel_claim": {
+      "default": "Claim 2 years for {price}",
+      "description": "Button on the VIP cancel page that claims the 2 year offer.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_vip_cancel_claim": {
+      "default": "Claim the 2 year offer",
+      "description": "Accessible label of the claim button on the VIP cancel page."
+    },
+    "button_text_vip_cancel_keep": {
+      "default": "Keep VIP",
+      "description": "Button on the VIP cancel page that keeps VIP."
+    },
+    "button_label_vip_cancel_keep": {
+      "default": "Keep VIP",
+      "description": "Accessible label of the keep VIP button on the VIP cancel page."
+    },
+    "button_text_vip_cancel_confirm": {
+      "default": "Cancel VIP",
+      "description": "Button on the VIP cancel page that cancels VIP."
+    },
+    "button_label_vip_cancel_confirm": {
+      "default": "Cancel VIP",
+      "description": "Accessible label of the cancel VIP button on the VIP cancel page."
+    },
+    "header_vip_cancel_claimed": {
+      "default": "Two more years.",
+      "description": "Headline after claiming the 2 year offer on the VIP cancel page."
+    },
+    "text_vip_cancel_claimed": {
+      "default": "{price} on {date}. VIP through {until}. This offer is now used.",
+      "description": "Text after claiming the 2 year offer on the VIP cancel page.",
+      "variables": {
+        "price": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "until": {
+          "type": "string"
+        }
+      }
+    },
+    "header_vip_cancel_kept": {
+      "default": "Still VIP.",
+      "description": "Headline after choosing to keep VIP on the VIP cancel page."
+    },
+    "text_vip_cancel_kept": {
+      "default": "Nothing changed. VIP renews {date}.",
+      "description": "Text after choosing to keep VIP on the VIP cancel page.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "header_vip_cancel_cancelled": {
+      "default": "VIP cancelled.",
+      "description": "Headline after cancelling on the VIP cancel page."
+    },
+    "text_vip_cancel_cancelled": {
+      "default": "You keep VIP until {date}. Everything you've saved stays.",
+      "description": "Text after cancelling on the VIP cancel page.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "tag_text_vip_cancel_kept": {
+      "default": "Best decision today",
+      "description": "Eyebrow on the celebratory card shown on the VIP cancel page after someone decides to keep VIP. Short and playful."
+    },
+    "button_text_vip_cancel_home": {
+      "default": "Back to Trakt",
+      "description": "Button on the last card of the VIP cancel page that goes to the home page."
+    },
+    "button_label_vip_cancel_home": {
+      "default": "Go to the home page",
+      "description": "Accessible label of the button on the last card of the VIP cancel page that goes to the home page."
+    },
+    "button_text_vip_cancel_claim_short": {
+      "default": "Claim offer",
+      "description": "Main button on the last card of the VIP cancel page when a 2 year offer is available. It claims that offer. As short as possible."
+    },
+    "tag_text_vip_cancel_claimed": {
+      "default": "Offer claimed",
+      "description": "Eyebrow on the celebratory card shown on the VIP cancel page after someone claims the 2 year offer. Short."
+    },
+    "tag_text_vip_cancel_campaign": {
+      "default": "Limited-time deal",
+      "description": "Tag on the 2 year offer on the VIP cancel page when the discount comes from a running campaign, like Black Friday, instead of the personal offer. Short."
+    },
+    "header_vip_cancel_loss_plex_servers": {
+      "default": "Extra Plex servers",
+      "description": "Title of the row on the VIP cancel page about Plex servers that stop syncing."
+    },
+    "text_vip_cancel_loss_plex_servers": {
+      "default": "Free accounts sync one server",
+      "description": "Explains the extra Plex servers row on the VIP cancel page."
+    },
+    "text_vip_cancel_value_servers": {
+      "default": "{count} servers",
+      "description": "Count of several Plex servers on the VIP cancel page.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_vip_cancel_claim_failed_title": {
+      "default": "Couldn't claim the offer",
+      "description": "Title of the error message on the VIP cancel page when claiming the 2 year offer fails."
+    },
+    "text_vip_cancel_claim_failed_message": {
+      "default": "Nothing was charged. Please try again, or keep VIP as it is.",
+      "description": "Error message on the VIP cancel page when claiming the 2 year offer fails."
     }
   }
 }
