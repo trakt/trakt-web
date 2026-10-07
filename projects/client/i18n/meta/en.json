@@ -12667,6 +12667,73 @@
       "default": "This server is still being removed. Try again in a few minutes.",
       "description": "Shown when the user tries to connect a Plex server that Trakt is still removing."
     },
+    "text_media_sync_step": {
+      "default": "Step {current} of {total}",
+      "description": "Progress label at the top of the Plex connect wizard.",
+      "variables": {
+        "current": {
+          "type": "number",
+          "description": "The step the user is on.",
+          "required": true
+        },
+        "total": {
+          "type": "number",
+          "description": "How many steps the wizard has.",
+          "required": true
+        }
+      }
+    },
+    "header_media_sync_sign_in": {
+      "default": "Sign in to Plex",
+      "description": "Heading of the first step of the Plex connect wizard."
+    },
+    "header_media_sync_what_to_sync": {
+      "default": "What to sync",
+      "description": "Heading of the last step of the Plex connect wizard, where the user picks feeds and libraries."
+    },
+    "button_media_sync_next": {
+      "default": "Next",
+      "description": "Button that moves the Plex connect wizard to its next step."
+    },
+    "button_label_media_sync_next": {
+      "default": "Go to the next step",
+      "description": "Accessible label for the button that moves the Plex connect wizard forward."
+    },
+    "button_media_sync_back": {
+      "default": "Back",
+      "description": "Button that moves the Plex connect wizard back one step."
+    },
+    "button_label_media_sync_back": {
+      "default": "Go back one step",
+      "description": "Accessible label for the button that moves the Plex connect wizard back."
+    },
+    "description_media_sync_add_server_vip": {
+      "default": "Connect another Plex server to sync it too.",
+      "description": "Shown on the Plex connection row of a VIP who already has a server connected."
+    },
+    "description_media_sync_add_server_free": {
+      "default": "Free accounts sync 1 Plex server. Go VIP to add more.",
+      "description": "Shown on the Plex connection row of a free user who already has a server connected."
+    },
+    "button_media_sync_continue": {
+      "default": "Continue",
+      "description": "Button on the chosen Plex server, once its details loaded, that moves the connect wizard on."
+    },
+    "button_label_media_sync_continue": {
+      "default": "Continue with {server}",
+      "description": "Accessible label for the button that continues the connect wizard with the chosen Plex server.",
+      "variables": {
+        "server": {
+          "type": "string",
+          "description": "Name of the Plex server.",
+          "required": true
+        }
+      }
+    },
+    "button_media_sync_loading": {
+      "default": "Loading…",
+      "description": "Shown on the chosen Plex server's button while its details load."
+    },
     "description_media_sync_synced_at": {
       "default": "Synced {when}",
       "description": "Shown on a connected Plex server with the time of its last successful sync, e.g. 'Synced today at 9:00 AM'.",

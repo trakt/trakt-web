@@ -2,10 +2,15 @@ import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import { createMediaSyncConnectionRequest } from '$lib/requests/media-sync/createMediaSyncConnectionRequest.ts';
 import { createPlexPinRequest } from '$lib/requests/media-sync/createPlexPinRequest.ts';
-import { MediaSyncFeedSchema } from '$lib/requests/media-sync/models/MediaSyncFeed.ts';
+import {
+  type MediaSyncFeed,
+  MediaSyncFeedSchema,
+} from '$lib/requests/media-sync/models/MediaSyncFeed.ts';
 import { plexPinStatusRequest } from '$lib/requests/media-sync/plexPinStatusRequest.ts';
 import { plexServerAccountsRequest } from '$lib/requests/media-sync/plexServerAccountsRequest.ts';
 import { plexServerLibrariesRequest } from '$lib/requests/media-sync/plexServerLibrariesRequest.ts';
+import type { MediaSyncAccount } from '$lib/requests/media-sync/models/MediaSyncAccount.ts';
+import type { PlexLibraryOption } from '$lib/requests/media-sync/plexServerLibrariesRequest.ts';
 import { registerPlexPinRequest } from '$lib/requests/media-sync/registerPlexPinRequest.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -19,11 +24,30 @@ const POLL_INTERVAL = time.seconds(2);
 const POPUP_NAME = 'trakt-plex-sign-in';
 const POPUP_FEATURES = 'width=600,height=720';
 
+type ServerDetails = {
+  libraries: PlexLibraryOption[] | null;
+  accounts: MediaSyncAccount[] | null;
+};
+
 export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
   const state = new BehaviorSubject<PlexConnectState>({ step: 'idle' });
+  const serverDetails = new Map<string, Promise<ServerDetails>>();
   let popup: Window | null = null;
   let pollTimer: ReturnType<typeof setTimeout> | undefined;
   let latestStartId = 0;
+
+  function loadServer(attemptId: string, serverId: string) {
+    const cached = serverDetails.get(serverId);
+    if (cached) return cached;
+
+    const target = { attemptId, serverId };
+    const loading = Promise.all([
+      plexServerLibrariesRequest(target).catch(() => null),
+      plexServerAccountsRequest(target).catch(() => null),
+    ]).then(([libraries, accounts]) => ({ libraries, accounts }));
+    serverDetails.set(serverId, loading);
+    return loading;
+  }
 
   const create = useMutation(defineMutation({
     key: 'media-sync:create-connection',
@@ -79,7 +103,12 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       libraryIds: [],
       accounts: null,
       accountId: null,
+      feeds: MediaSyncFeedSchema.options,
     });
+
+    status.servers
+      .filter((server) => server.reachable)
+      .forEach((server) => loadServer(attemptId, server.id));
 
     const serverId = toDefaultServerId(status.servers);
     if (serverId) await chooseServer(serverId);
@@ -88,6 +117,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
   async function start() {
     const startId = ++latestStartId;
     stopPolling();
+    serverDetails.clear();
     popup = globalThis.window.open('', POPUP_NAME, POPUP_FEATURES);
     state.next({ step: 'starting' });
 
@@ -131,11 +161,10 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       accountId: null,
     });
 
-    const target = { attemptId: current.attemptId, serverId };
-    const [libraries, accounts] = await Promise.all([
-      plexServerLibrariesRequest(target).catch(() => null),
-      plexServerAccountsRequest(target).catch(() => null),
-    ]);
+    const { libraries, accounts } = await loadServer(
+      current.attemptId,
+      serverId,
+    );
 
     const latest = state.value;
     if (latest.step !== 'choosing' || latest.serverId !== serverId) return;
@@ -162,6 +191,18 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     state.next({ ...current, accountId });
   }
 
+  function toggleFeed(feed: MediaSyncFeed) {
+    const current = state.value;
+    if (current.step !== 'choosing') return;
+
+    state.next({
+      ...current,
+      feeds: current.feeds.includes(feed)
+        ? current.feeds.filter((chosen) => chosen !== feed)
+        : [...current.feeds, feed],
+    });
+  }
+
   function toggleLibrary(externalId: string, enabled: boolean) {
     const current = state.value;
     if (current.step !== 'choosing') return;
@@ -182,7 +223,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       attemptId: current.attemptId,
       serverId: current.serverId,
       libraryIds: current.libraryIds,
-      feeds: MediaSyncFeedSchema.options,
+      feeds: current.feeds,
       syncAccountId: current.accountId,
     }).catch(() => null);
 
@@ -208,6 +249,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     openSignIn,
     chooseServer,
     chooseAccount,
+    toggleFeed,
     toggleLibrary,
     connect,
     cancel,
