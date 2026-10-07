@@ -308,6 +308,7 @@ export const UrlBuilder = {
     reddit: () => 'https://www.reddit.com/r/trakt',
   },
   vip: () => '/vip',
+  vipCancel: () => '/vip/cancel',
   terms: () => '/terms',
   privacy: () => '/privacy',
   about: () => '/about',
