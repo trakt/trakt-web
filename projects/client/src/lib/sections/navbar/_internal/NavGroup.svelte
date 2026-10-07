@@ -12,6 +12,7 @@
     icon,
     isCollapsed,
     ariaLabel,
+    hint,
     children,
   }: {
     href?: string;
@@ -21,6 +22,7 @@
     icon: Snippet;
     isCollapsed: boolean;
     ariaLabel?: string;
+    hint?: Snippet;
     children?: Snippet;
   } = $props();
 </script>
@@ -52,6 +54,10 @@
         </Link>
       {/if}
     </Tooltip>
+
+    {#if hint && !isCollapsed}
+      <div class="nav-hint">{@render hint()}</div>
+    {/if}
   </div>
 
   {#if children && !isCollapsed}
@@ -114,6 +120,12 @@
       flex-shrink: 0;
       display: block;
     }
+  }
+
+  .nav-hint {
+    display: flex;
+    margin-inline-start: auto;
+    padding-inline-start: var(--gap-s);
   }
 
   .nav-label {
