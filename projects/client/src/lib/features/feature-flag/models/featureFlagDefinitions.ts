@@ -64,12 +64,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-08-03'),
     description: () => m.preview_feature_description_soundtrack(),
   },
-  [FeatureFlag.GenrePicker]: {
-    icon: SparkleIcon,
-    title: () => m.preview_feature_title_genre_picker(),
-    addedAt: new Date('2026-08-24'),
-    description: () => m.preview_feature_description_genre_picker(),
-  },
   [FeatureFlag.LargeScreenCards]: {
     icon: CoverImageIcon,
     title: () => m.preview_feature_title_large_screen_cards(),

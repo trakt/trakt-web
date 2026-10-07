@@ -4,12 +4,12 @@
   import Appearance from "./_internal/Appearance.svelte";
   import Behavior from "./_internal/Behavior.svelte";
   import BlockedUsers from "./_internal/BlockedUsers.svelte";
-  import Genres from "./_internal/Genres.svelte";
+  import GenreSlots from "./_internal/GenreSlots.svelte";
 </script>
 
 <div class="trakt-general-settings-body">
   <Behavior />
-  <Genres />
+  <GenreSlots />
   <BlockedUsers />
   <Appearance />
 
