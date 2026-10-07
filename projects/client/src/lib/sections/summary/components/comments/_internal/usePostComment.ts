@@ -35,7 +35,7 @@ export type UseAddCommentProps = ReplyProps | PostProps | EditProps;
 
 type PostCommentProps = {
   comment: string;
-  gif: { url: string } | null;
+  gif: { url: string; slug?: string } | null;
   isSpoiler: boolean;
 } & UseAddCommentProps;
 
