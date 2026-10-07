@@ -1,6 +1,5 @@
 export enum FeatureFlag {
   EditMode = 'edit-mode',
-  ScopedFavorites = 'scoped-favorites',
   Rewatching = 'rewatching',
   Soundtrack = 'soundtrack',
   YearInReview2026 = 'year-in-review-2026',
