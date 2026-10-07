@@ -6,10 +6,8 @@ export function mapToGifEntry(response: KlipyGifResponse): GifEntry {
     id: `${response.id}`,
     slug: response.slug,
     title: response.title,
-    // Animated webp is roughly a fifth of the gif's weight, and the grid holds
-    // dozens at once. Falls back to the gif where Klipy has no webp.
     preview: response.file.sm.webp ?? response.file.sm.gif,
-    full: response.file.md.gif,
+    full: response.file.md.webp ?? response.file.md.gif,
     still: response.file.sm.jpg,
     blurPreview: response.blur_preview,
   };
