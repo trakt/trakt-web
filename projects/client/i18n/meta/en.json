@@ -12364,10 +12364,6 @@
       "default": "React to a movie or show, and see how everyone else felt.",
       "description": "Description for the media-reactions preview feature toggle in settings."
     },
-    "preview_feature_title_plex_sync_v2": {
-      "default": "New Plex sync",
-      "description": "Title for the preview feature toggle that switches the Plex settings page to the new Plex sync."
-    },
     "header_media_sync_connect": {
       "default": "Connect a Plex server",
       "description": "Title of the drawer that walks the user through connecting a Plex server to the new Plex sync."
@@ -12765,10 +12761,6 @@
           "required": true
         }
       }
-    },
-    "preview_feature_description_plex_sync_v2": {
-      "default": "Try the rebuilt Plex sync: choose what each server syncs, pick whose plays count, and see every sync it runs.",
-      "description": "Description for the new Plex sync preview feature toggle in settings."
     },
     "button_label_more_reactions": {
       "default": "More reactions",
