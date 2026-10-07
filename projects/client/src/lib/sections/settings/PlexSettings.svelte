@@ -3,11 +3,8 @@
   import { page } from "$app/state";
   import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
-  import PlexSync from "./_internal/plex/PlexSync.svelte";
   import PlexWebhook from "./_internal/plex/PlexWebhook.svelte";
   import PlexSyncV2 from "./_internal/plex-sync-v2/PlexSyncV2.svelte";
   import SettingsVipUpsell from "./_internal/SettingsVipUpsell.svelte";
@@ -32,22 +29,8 @@
   <PlexLogo />
 {/snippet}
 
-{#snippet plexSyncV2()}
-  <PlexSyncV2 />
-{/snippet}
-
 {#snippet syncTab()}
-  {#if import.meta.env.DEV}
-    {@render plexSyncV2()}
-  {:else}
-    <RenderForFeature
-      flag={FeatureFlag.PlexSyncV2}
-      audience="director"
-      enabled={plexSyncV2}
-    >
-      <PlexSync />
-    </RenderForFeature>
-  {/if}
+  <PlexSyncV2 />
 {/snippet}
 
 {#snippet webhookTab()}
