@@ -3,6 +3,7 @@
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
+  import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { map } from "rxjs";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -10,7 +11,10 @@
     useFavoritesList,
     type UseFavoritesProps,
   } from "../stores/useFavoritesList";
+  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import FavoriteMediaItem from "./_internal/FavoriteMediaItem.svelte";
+  import FavoritesYearGroup from "./_internal/FavoritesYearGroup.svelte";
+  import { toYearGroupedFavorites } from "./_internal/toYearGroupedFavorites";
 
   const {
     title,
@@ -35,48 +39,48 @@
     mediaType: mode === "media" ? undefined : mode,
   });
 
-  const currentYear = new Date().getFullYear();
+  const variant = $derived(useDefaultCardVariant(mode));
+  const listHeight = $derived(
+    `calc(${mediaListHeightResolver($variant)} + var(--height-year-label))`,
+  );
 
-  function useFavoritesListForYear(params: UseFavoritesProps) {
+  function useYearGroupedFavoritesList(params: UseFavoritesProps) {
     const result = useFavoritesList(params);
     return {
       ...result,
       list: result.list.pipe(
-        map((entries) =>
-          entries.filter(
-            (entry) => entry.favoritedAt.getFullYear() === currentYear,
-          ),
-        ),
+        map(toYearGroupedFavorites),
       ),
     };
   }
 </script>
 
 <DrillableMediaList
+  --height-year-label="var(--ni-20)"
+  --list-header-gap="0"
+  --height-override-list={listHeight}
   {title}
   id={{
     scope: "favorites-list",
     key: `${mode}-${slug}`,
   }}
   type={mode}
-  useList={(params) => useFavoritesListForYear({ ...params, slug })}
+  useList={(params) => useYearGroupedFavoritesList({ ...params, slug })}
   drilldownLabel={m.button_label_view_all_favorites()}
   source={{ id: "favorites", type: mode }}
   urlBuilder={() => UrlBuilder.profile.favorites(slug)}
 >
-  {#snippet metaInfo()}
-    <p class="tag secondary">
-      {currentYear}
-    </p>
-  {/snippet}
-
   {#snippet item(media)}
-    <FavoriteMediaItem {media} {mode} isActionable={$isMe} />
+    <FavoritesYearGroup year={media.yearHeader}>
+      <FavoriteMediaItem {media} {mode} isActionable={$isMe} />
+    </FavoritesYearGroup>
   {/snippet}
 
   {#snippet ctaItem()}
     {#if $isMe}
-      <CtaItem {cta} variant="card" />
+      <FavoritesYearGroup>
+        <CtaItem {cta} variant="card" />
+      </FavoritesYearGroup>
     {/if}
   {/snippet}
 
