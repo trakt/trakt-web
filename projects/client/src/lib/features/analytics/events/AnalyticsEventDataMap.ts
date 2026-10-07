@@ -1,3 +1,4 @@
+import type { ShareArrivalOutcome } from '$lib/features/share-arrival/models/ShareArrivalOutcome.ts';
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
@@ -108,6 +109,10 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.SummaryDrilldown]: DrilldownType;
   [AnalyticsEvent.Search]: SearchType;
   [AnalyticsEvent.Share]: ShareType;
+  [AnalyticsEvent.ShareArrival]: {
+    type: string;
+    outcome: ShareArrivalOutcome;
+  };
 
   [AnalyticsEvent.Drop]: { type: MediaType };
   [AnalyticsEvent.Restore]: never;
