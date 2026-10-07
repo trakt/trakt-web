@@ -5,7 +5,9 @@
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { mediaSyncConnectionsQuery } from "$lib/requests/media-sync/mediaSyncConnectionsQuery.ts";
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import { map } from "rxjs";
+  import { slide } from "svelte/transition";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
   import SettingsGroupRowSkeleton from "../SettingsGroupRowSkeleton.svelte";
@@ -47,6 +49,24 @@
   }
 
   const isConnected = $derived(($connections?.length ?? 0) > 0);
+
+  const { user } = useUser();
+  let isUpsellVisible = $state(false);
+
+  const connectionDescription = $derived.by(() => {
+    if (!isConnected) return m.description_plex_sync();
+    return $user.isVip
+      ? m.description_media_sync_add_server_vip()
+      : m.description_media_sync_add_server_free();
+  });
+
+  function addServer() {
+    if ($user.isVip) {
+      startConnect();
+      return;
+    }
+    isUpsellVisible = !isUpsellVisible;
+  }
 </script>
 
 {#snippet plexIcon()}
@@ -73,7 +93,7 @@
     {:else}
       <SettingsGroupRow
         title={m.label_plex_connection()}
-        description={m.description_plex_sync()}
+        description={connectionDescription}
         variant="custom"
       >
         {#snippet icon()}<PlexLogo />{/snippet}
@@ -82,17 +102,39 @@
             <SettingsStatusBadge label={m.label_plex_connected()} />
           {/if}
         {/snippet}
-        <Button
-          size="small"
-          color="default"
-          label={m.button_label_plex_connect()}
-          onclick={startConnect}
-        >
-          {m.button_connect_plex()}
-        </Button>
+        {#if !isConnected}
+          <Button
+            size="small"
+            color="default"
+            label={m.button_label_plex_connect()}
+            onclick={startConnect}
+          >
+            {m.button_connect_plex()}
+          </Button>
+        {:else}
+          <Button
+            size="small"
+            color="default"
+            label={m.button_label_plex_add_server()}
+            onclick={addServer}
+          >
+            {m.button_plex_add_server()}
+          </Button>
+        {/if}
       </SettingsGroupRow>
     {/if}
   </SettingsGroupCard>
+
+  {#if isUpsellVisible}
+    <div transition:slide={{ duration: 150, axis: "y" }}>
+      <SettingsVipUpsell
+        icon={plexIcon}
+        title={m.header_plex_vip_upsell_add_server()}
+        description={m.description_plex_vip_upsell_add_server()}
+        source="plex-settings-add-server"
+      />
+    </div>
+  {/if}
 
   {#if isConnected}
     <SettingsSection
@@ -114,10 +156,11 @@
 
 {#if isConnecting}
   <PlexConnectDrawer
-    state={$connectState}
+    flow={$connectState}
     onOpenSignIn={connect.openSignIn}
     onChooseServer={connect.chooseServer}
     onChooseAccount={connect.chooseAccount}
+    onToggleFeed={connect.toggleFeed}
     onToggleLibrary={connect.toggleLibrary}
     onConnect={connect.connect}
     onRestart={connect.start}

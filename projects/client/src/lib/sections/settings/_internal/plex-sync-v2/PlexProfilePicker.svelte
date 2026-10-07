@@ -7,10 +7,12 @@
     accounts,
     pickedAccountId,
     onPick,
+    hasTitle = true,
   }: {
     accounts: MediaSyncAccount[];
     pickedAccountId: string | null;
     onPick: (accountId: string) => void;
+    hasTitle?: boolean;
   } = $props();
 
   const picked = $derived(
@@ -20,7 +22,9 @@
 
 <div class="trakt-plex-profile-picker">
   <div class="picker-header">
-    <p class="bold">{m.header_media_sync_profiles()}</p>
+    {#if hasTitle}
+      <p class="bold">{m.header_media_sync_profiles()}</p>
+    {/if}
     <p class="secondary">{m.description_media_sync_profiles()}</p>
   </div>
 
