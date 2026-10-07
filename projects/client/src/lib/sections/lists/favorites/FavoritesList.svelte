@@ -1,10 +1,7 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { map } from "rxjs";
@@ -40,9 +37,6 @@
 
   const currentYear = new Date().getFullYear();
 
-  const { isEnabled } = useFeatureFlag();
-  const isFlagEnabled = $derived(isEnabled(FeatureFlag.ScopedFavorites));
-
   function useFavoritesListForYear(params: UseFavoritesProps) {
     const result = useFavoritesList(params);
     return {
@@ -56,10 +50,6 @@
       ),
     };
   }
-
-  const useFavorites = $derived(
-    $isFlagEnabled ? useFavoritesListForYear : useFavoritesList,
-  );
 </script>
 
 <DrillableMediaList
@@ -69,19 +59,15 @@
     key: `${mode}-${slug}`,
   }}
   type={mode}
-  useList={(params) => useFavorites({ ...params, slug })}
+  useList={(params) => useFavoritesListForYear({ ...params, slug })}
   drilldownLabel={m.button_label_view_all_favorites()}
   source={{ id: "favorites", type: mode }}
   urlBuilder={() => UrlBuilder.profile.favorites(slug)}
 >
   {#snippet metaInfo()}
-    <RenderForFeature flag={FeatureFlag.ScopedFavorites}>
-      {#snippet enabled()}
-        <p class="tag secondary">
-          {currentYear}
-        </p>
-      {/snippet}
-    </RenderForFeature>
+    <p class="tag secondary">
+      {currentYear}
+    </p>
   {/snippet}
 
   {#snippet item(media)}

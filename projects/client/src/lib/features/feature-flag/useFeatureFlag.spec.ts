@@ -37,7 +37,7 @@ describe('store: useFeatureFlag', () => {
     expect(await waitForValue(isEnabled(FeatureFlag.EditMode), true)).toBe(
       true,
     );
-    expect(await waitForValue(isEnabled(FeatureFlag.ScopedFavorites), true))
+    expect(await waitForValue(isEnabled(FeatureFlag.Rewatching), true))
       .toBe(true);
   });
 

@@ -1,7 +1,6 @@
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
-import FavoriteIcon from '$lib/components/icons/FavoriteIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import ReactionIcon from '$lib/components/icons/ReactionIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
@@ -40,17 +39,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_edit_mode(),
     addedAt: new Date('2026-04-30'),
     description: () => m.preview_feature_description_edit_mode(),
-  },
-  [FeatureFlag.ScopedFavorites]: {
-    icon: FavoriteIcon,
-    title: () => m.preview_feature_title_scoped_favorites(),
-    addedAt: new Date('2026-06-11'),
-    description: () => m.preview_feature_description_scoped_favorites(),
-    featureLink: () =>
-      openFeatureLink(
-        UrlBuilder.profile.favorites('me'),
-        m.preview_feature_title_scoped_favorites(),
-      ),
   },
   [FeatureFlag.Rewatching]: {
     icon: FastRewindIcon,
