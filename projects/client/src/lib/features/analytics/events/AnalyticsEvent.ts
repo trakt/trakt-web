@@ -36,6 +36,7 @@ export const AnalyticsEvent = {
   SummaryDrilldown: buildEventKey(ACTION_PREFIX, 'summary-drilldown'),
   Search: buildEventKey(ACTION_PREFIX, 'search'),
   Share: buildEventKey(ACTION_PREFIX, 'share'),
+  ShareArrival: 'share.arrival',
 
   Drop: buildEventKey(MEDIA_ACTION_PREFIX, 'drop'),
   Restore: buildEventKey(MEDIA_ACTION_PREFIX, 'restore'),

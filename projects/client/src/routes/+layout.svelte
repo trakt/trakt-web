@@ -34,6 +34,7 @@
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
   import ReportDialogProvider from "$lib/features/report/ReportDialogProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
+  import ShareArrival from "$lib/features/share-arrival/ShareArrival.svelte";
   import SpotlightProvider from "$lib/features/spotlight/SpotlightProvider.svelte";
   import SeasonalFlair from "$lib/features/theme/components/SeasonalFlair.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
@@ -191,6 +192,7 @@
                          a template are still distinct page views. -->
                     {#key page.url.pathname}
                       <PageView />
+                      <ShareArrival />
                     {/key}
                   </RedirectProvider>
                 </AnalyticsProvider>
