@@ -171,7 +171,6 @@ export const InvalidateAction = {
 
   Plex: {
     Settings: buildInvalidationKey('plex', 'settings'),
-    Syncs: buildInvalidationKey('plex', 'syncs'),
   },
 
   MediaSync: {
