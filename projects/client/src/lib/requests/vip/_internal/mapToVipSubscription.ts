@@ -40,6 +40,13 @@ export function mapToVipSubscription(
     daysLeft: response.days_left,
     renewalPrice: response.renewal?.price ?? null,
     manageUrl: response.manage_url ?? null,
+    retentionOffer: response.retention_offer
+      ? {
+        planCode: response.retention_offer.plan_code,
+        amount: response.retention_offer.amount,
+        discountedAmount: response.retention_offer.discounted_amount,
+      }
+      : null,
     transactions: response.transactions.map(mapToTransaction),
   };
 }
