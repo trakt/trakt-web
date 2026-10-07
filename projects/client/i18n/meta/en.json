@@ -12749,6 +12749,36 @@
       "default": "Limited-time deal",
       "description": "Tag on the 2 year offer on the VIP cancel page when the discount comes from a running campaign, like Black Friday, instead of the personal offer. Short."
     },
+    "text_vip_cancel_kept_streak": {
+      "default": "{tenure} of VIP, and counting",
+      "description": "Chip on the celebratory card shown on the VIP cancel page after someone keeps VIP. {tenure} is how long they have been VIP, already formatted, like 4 years.",
+      "variables": {
+        "tenure": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_cancel_kept_streak_new": {
+      "default": "Your VIP keeps going",
+      "description": "Chip on the celebratory card shown on the VIP cancel page after someone keeps VIP, used when they have been VIP for under a month."
+    },
+    "text_vip_cancel_claimed_chip": {
+      "default": "VIP locked in until {date}",
+      "description": "Chip on the celebratory card shown on the VIP cancel page after someone claims the 2 year offer. {date} is a long date.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_vip_cancel_celebrate": {
+      "default": "Celebrate again",
+      "description": "Accessible label of the crown on the celebratory card of the VIP cancel page. Pressing it fires the confetti again."
+    },
+    "text_vip_cancel_tenure_new": {
+      "default": "under a month",
+      "description": "How long someone has been VIP on the VIP cancel page, used when it is less than one month."
+    },
     "header_vip_cancel_loss_plex_servers": {
       "default": "Extra Plex servers",
       "description": "Title of the row on the VIP cancel page about Plex servers that stop syncing."

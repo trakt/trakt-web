@@ -7,6 +7,7 @@
   import type { DeckCardTone } from "./DeckCardProps.ts";
   import DeckCard from "./DeckCard.svelte";
   import DeckCardHeading from "./DeckCardHeading.svelte";
+  import KeptCelebration from "./KeptCelebration.svelte";
   import type { OutcomeCardProps } from "./OutcomeCardProps.ts";
   import VipCancelButton from "./VipCancelButton.svelte";
 
@@ -68,6 +69,16 @@
     />
   {/snippet}
 
+  {#snippet visual()}
+    {#if outcome === "kept"}
+      <KeptCelebration vipMonths={summary.vipMonths} />
+    {:else if outcome === "claimed"}
+      <KeptCelebration
+        vipMonths={summary.vipMonths}
+        chip={m.text_vip_cancel_claimed_chip({ date: until })}
+      />
+    {/if}
+  {/snippet}
 
   {#snippet actions()}
     <VipCancelButton
