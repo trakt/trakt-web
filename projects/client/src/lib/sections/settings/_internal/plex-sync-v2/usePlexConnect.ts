@@ -17,6 +17,7 @@ import { time } from '$lib/utils/timing/time.ts';
 import { BehaviorSubject } from 'rxjs';
 import { onDestroy } from 'svelte';
 import type { PlexConnectState } from './models/PlexConnectState.ts';
+import { PLEX_ACCOUNT_SERVER_ID } from './PLEX_ACCOUNT_SERVER_ID.ts';
 import { toDefaultServerId } from './toDefaultServerId.ts';
 import { toLibraryChoice } from './toLibraryChoice.ts';
 
@@ -159,6 +160,9 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       libraryIds: [],
       accounts: null,
       accountId: null,
+      feeds: serverId === PLEX_ACCOUNT_SERVER_ID
+        ? ['watchlist']
+        : MediaSyncFeedSchema.options,
     });
 
     const { libraries, accounts } = await loadServer(

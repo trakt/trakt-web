@@ -1,9 +1,12 @@
 import type { PlexConnectStep } from './models/PlexConnectStep.ts';
 
 export function toConnectSteps(
-  { hasProfiles }: { hasProfiles: boolean },
+  { hasProfiles, isAccountOnly = false }: {
+    hasProfiles: boolean;
+    isAccountOnly?: boolean;
+  },
 ): PlexConnectStep[] {
-  return hasProfiles
+  return hasProfiles && !isAccountOnly
     ? ['sign-in', 'server', 'profile', 'sync']
     : ['sign-in', 'server', 'sync'];
 }

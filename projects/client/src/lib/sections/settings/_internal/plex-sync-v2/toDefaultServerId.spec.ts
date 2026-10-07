@@ -19,6 +19,11 @@ describe('toDefaultServerId', () => {
       .to.equal(null);
   });
 
+  it('ignores the watchlist-only entry', () => {
+    expect(toDefaultServerId([server('a', true), server('plex.tv', true)]))
+      .to.equal('a');
+  });
+
   it('picks nothing when no server is reachable', () => {
     expect(toDefaultServerId([server('a', false)])).to.equal(null);
   });

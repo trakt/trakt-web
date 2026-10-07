@@ -12383,6 +12383,18 @@
       "default": "Choose a server",
       "description": "Heading above the list of Plex servers the user can connect."
     },
+    "label_media_sync_watchlist_only": {
+      "default": "Watchlist only",
+      "description": "Title of the option in the Plex connect list that syncs only the user's Plex watchlist, without a media server."
+    },
+    "description_media_sync_watchlist_only": {
+      "default": "No server needed. Syncs your Plex watchlist.",
+      "description": "Shown under the watchlist-only option in the Plex connect list."
+    },
+    "label_media_sync_plex_watchlist": {
+      "default": "Plex watchlist",
+      "description": "Title of a connected Plex sync that only syncs the user's Plex watchlist and has no media server."
+    },
     "description_media_sync_server_unreachable": {
       "default": "Not reachable from the internet",
       "description": "Shown under a Plex server that Trakt cannot reach, so it cannot be synced."
