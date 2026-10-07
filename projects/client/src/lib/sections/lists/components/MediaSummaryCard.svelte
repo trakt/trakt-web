@@ -118,7 +118,7 @@
       rest.type === "season" ? rest.season.poster?.url.thumb : undefined;
 
     return {
-      background: media.cover.url.thumb,
+      background: !isMinimal ? media.cover.url.thumb : undefined,
       poster: seasonPoster ?? media.poster.url.thumb,
       title: media.title,
     };
