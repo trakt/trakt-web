@@ -179,53 +179,9 @@
       "default": "Connect your Plex account",
       "description": "Aria-label for the button that starts the Plex connection flow."
     },
-    "button_label_plex_disconnect": {
-      "default": "Disconnect your Plex account",
-      "description": "Aria-label for the button that disconnects the linked Plex account."
-    },
     "button_label_plex_sync_now": {
       "default": "Sync Plex now",
       "description": "Aria-label for the button that triggers an immediate Plex sync."
-    },
-    "button_label_plex_toggle_movie_watched": {
-      "default": "Toggle watched sync for movies",
-      "description": "Aria-label for the button that toggles watched history sync for movies."
-    },
-    "button_label_plex_toggle_movie_rated": {
-      "default": "Toggle ratings sync for movies",
-      "description": "Aria-label for the button that toggles ratings sync for movies."
-    },
-    "button_label_plex_toggle_movie_watchlist": {
-      "default": "Toggle watchlist sync for movies",
-      "description": "Aria-label for the button that toggles watchlist sync for movies."
-    },
-    "button_label_plex_toggle_movie_library": {
-      "default": "Toggle library sync for movies",
-      "description": "Aria-label for the button that toggles library sync for movies."
-    },
-    "button_label_plex_toggle_show_rated": {
-      "default": "Toggle ratings sync for shows",
-      "description": "Aria-label for the button that toggles ratings sync for shows."
-    },
-    "button_label_plex_toggle_show_watchlist": {
-      "default": "Toggle watchlist sync for shows",
-      "description": "Aria-label for the button that toggles watchlist sync for shows."
-    },
-    "button_label_plex_toggle_season_rated": {
-      "default": "Toggle ratings sync for seasons",
-      "description": "Aria-label for the button that toggles ratings sync for seasons."
-    },
-    "button_label_plex_toggle_episode_watched": {
-      "default": "Toggle watched sync for episodes",
-      "description": "Aria-label for the button that toggles watched history sync for episodes."
-    },
-    "button_label_plex_toggle_episode_rated": {
-      "default": "Toggle ratings sync for episodes",
-      "description": "Aria-label for the button that toggles ratings sync for episodes."
-    },
-    "button_label_plex_toggle_episode_library": {
-      "default": "Toggle library sync for episodes",
-      "description": "Aria-label for the button that toggles library sync for episodes."
     },
     "tag_text_inactive": {
       "default": "Inactive",
@@ -10425,70 +10381,6 @@
       "default": "We couldn't load this right now. Please try again.",
       "description": "Inline error message shown when a streaming sync detail or its items fail to load."
     },
-    "error_text_plex_server_unreachable": {
-      "default": "Trakt can't reach this Plex media server.",
-      "description": "Inline error on the Plex settings server card when Trakt cannot reach the user's Plex media server over the network."
-    },
-    "error_text_plex_server_unreachable_hint": {
-      "default": "Make sure remote access is enabled and port 32400 is open.",
-      "description": "Secondary guidance line under the unreachable Plex server error explaining how to fix it."
-    },
-    "error_text_plex_bad_auth": {
-      "default": "Your Plex connection is no longer valid.",
-      "description": "Inline error on the Plex settings server card when the stored Plex authorization is missing or has been revoked."
-    },
-    "error_text_plex_bad_auth_hint": {
-      "default": "Disconnect and reconnect Plex, then try again.",
-      "description": "Secondary guidance line under the invalid Plex authorization error, telling the user to disconnect and reconnect Plex."
-    },
-    "error_text_plex_no_server_selected": {
-      "default": "No Plex media server selected.",
-      "description": "Inline error on the Plex settings server card when the request reached Trakt without a Plex server to look up."
-    },
-    "error_text_plex_no_server_selected_hint": {
-      "default": "Choose a server, then save your settings.",
-      "description": "Secondary guidance line under the no-server-selected error, telling the user to pick a server and save."
-    },
-    "error_text_plex_server_missing": {
-      "default": "This Plex media server is no longer available.",
-      "description": "Inline error on the Plex settings server card when the selected server no longer exists on the user's Plex account."
-    },
-    "error_text_plex_server_missing_hint": {
-      "default": "Refresh, then choose an active server and save your settings.",
-      "description": "Secondary guidance line under the unavailable Plex server error, telling the user to pick a different server."
-    },
-    "error_text_plex_not_found": {
-      "default": "Plex couldn't find this media server's details.",
-      "description": "Inline error on the Plex settings server card when Plex itself reports the requested resource as missing."
-    },
-    "error_text_plex_not_found_hint": {
-      "default": "Refresh and try again.",
-      "description": "Secondary guidance line under the Plex not-found error suggesting the user refreshes and retries."
-    },
-    "error_text_plex_server_timeout": {
-      "default": "Timed out while connecting to Plex.",
-      "description": "Inline error on the Plex settings server card when the request to the user's Plex media server timed out."
-    },
-    "error_text_plex_server_timeout_hint": {
-      "default": "Try again in a few minutes.",
-      "description": "Secondary guidance line under the Plex server timeout error suggesting the user retries shortly."
-    },
-    "error_text_plex_unavailable": {
-      "default": "Plex is currently unavailable.",
-      "description": "Inline error on the Plex settings server card when Plex is down or replies with something Trakt cannot read."
-    },
-    "error_text_plex_unavailable_hint": {
-      "default": "Try again in a few minutes.",
-      "description": "Secondary guidance line under the Plex unavailable error suggesting the user retries shortly."
-    },
-    "error_text_plex_rejected": {
-      "default": "Plex rejected this request.",
-      "description": "Inline error on the Plex settings server card when Plex refuses the request as unprocessable."
-    },
-    "error_text_plex_rejected_hint": {
-      "default": "Try again. If this keeps happening, reconnect Plex.",
-      "description": "Secondary guidance line under the Plex rejected-request error suggesting a retry then reconnecting Plex."
-    },
     "error_text_parental_guide_load_failed": {
       "default": "Loading Error",
       "description": "Short label shown in the parental guide when its content fails to load."
@@ -10749,10 +10641,6 @@
       "default": "Server",
       "description": "Label for the Plex server row in settings."
     },
-    "tag_plex_syncing": {
-      "default": "Syncing",
-      "description": "Badge shown next to each Plex server that has libraries selected for sync."
-    },
     "header_plex_synced_servers": {
       "default": "Synced Servers",
       "description": "Title of the settings card listing the Plex servers currently syncing."
@@ -10777,18 +10665,6 @@
       "default": "Manage server libraries",
       "description": "Accessible label for the manage button on a synced Plex server row."
     },
-    "header_plex_no_synced_servers": {
-      "default": "No synced servers yet",
-      "description": "Heading of the empty state in the synced servers card when no Plex server has been added."
-    },
-    "description_plex_no_synced_servers": {
-      "default": "Add your Plex server to start syncing your libraries with Trakt.",
-      "description": "Body copy of the empty state in the synced servers card when no Plex server has been added."
-    },
-    "description_plex_sync_history": {
-      "default": "Recent data syncs from your Plex Media Servers.",
-      "description": "Subtitle under the Plex sync history section header."
-    },
     "header_plex_vip_upsell_add_server": {
       "default": "Multiple servers is a VIP feature",
       "description": "Heading on the upsell card shown when a free member tries to add a second Plex server."
@@ -10796,18 +10672,6 @@
     "description_plex_vip_upsell_add_server": {
       "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers, refreshed every hour.",
       "description": "Body copy on the upsell card shown when a free member tries to add a second Plex server."
-    },
-    "header_plex_sync_settings": {
-      "default": "Plex Sync Settings",
-      "description": "Header for the section that shows sync toggle settings for Plex."
-    },
-    "description_plex_sync_settings": {
-      "default": "Choose what each media type syncs to your Trakt account.",
-      "description": "Description under the Plex sync settings section header."
-    },
-    "label_plex_sync_as": {
-      "default": "Sync as",
-      "description": "Label for the dropdown to select which Plex home account to sync as."
     },
     "label_plex_library_table_type": {
       "default": "Type",
