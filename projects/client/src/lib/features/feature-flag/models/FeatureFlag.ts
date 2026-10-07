@@ -6,5 +6,4 @@ export enum FeatureFlag {
   LargeScreenCards = 'large-screen-cards',
   VipVeteran = 'vip-veteran',
   Reactions = 'reactions',
-  PlexSyncV2 = 'plex-sync-v2',
 }
