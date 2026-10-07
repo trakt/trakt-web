@@ -10,8 +10,7 @@ export const EpisodeSiloCommentReplyResponseMock: CommentResponse[] = [
     'gif': {
       'url':
         'https://static.klipy.com/ii/8ce8357c78ea940b9c2015daf05ce1a5/ea/72/WGDcNWlt.gif',
-      'width': 498,
-      'height': 374,
+      'slug': 'its-thursday-dance-1',
     },
     'spoiler': false,
     'review': false,
