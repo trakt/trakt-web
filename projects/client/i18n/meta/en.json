@@ -3740,10 +3740,6 @@
       "default": "When is your birthday?",
       "description": "Message for the prompt that allows users to specify their birthday."
     },
-    "header_favorite_genres": {
-      "default": "Favorite Genres",
-      "description": "Header for the section that allows users to change their favorite genres."
-    },
     "button_label_toggle_genre": {
       "default": "Toggle the {genre} genre",
       "description": "Aria-label for the button that allows users to toggle a genre, for example as a favorite.",
@@ -4410,15 +4406,6 @@
     "description_account_details": {
       "default": "Change your photo, name and other details.",
       "description": "Description for the account details section."
-    },
-    "description_genres": {
-      "default": "Add or remove your {limit} favorite genres.",
-      "description": "Description for the genres section, indicating that there is a limit.",
-      "variables": {
-        "limit": {
-          "type": "number"
-        }
-      }
     },
     "list_title_activity": {
       "default": "Activity",
@@ -11539,14 +11526,6 @@
     "preview_feature_description_year_in_review_2026": {
       "default": "Your 2026 as a scroll-driven reel with a viewer persona, then a stats page styled to match it.",
       "description": "Description for the Year in Review 2026 preview feature."
-    },
-    "preview_feature_title_genre_picker": {
-      "default": "Genre Picker",
-      "description": "Title for the Genre Picker preview feature."
-    },
-    "preview_feature_description_genre_picker": {
-      "default": "Pick your favorite genres from a visual grid instead of a list of tags.",
-      "description": "Description for the Genre Picker preview feature."
     },
     "preview_feature_title_large_screen_cards": {
       "default": "Large Screen Cards",
