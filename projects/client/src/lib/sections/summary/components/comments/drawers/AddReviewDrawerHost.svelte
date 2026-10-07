@@ -98,7 +98,7 @@
   async function handleSubmit() {
     const response = await postComment({
       comment: comment.trim(),
-      gif: gif ? { url: gif.url } : null,
+      gif: gif ? { url: gif.url, slug: gif.slug } : null,
       isSpoiler,
       ...commentProps,
     });
