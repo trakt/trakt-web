@@ -23,6 +23,9 @@
       .slice(0, AVATAR_DISPLAY_LIMIT)
       .map((user) => ({ key: user.key, user })),
   );
+  const caption = $derived(
+    m.text_leaderboard_following_count({ count: following.length }),
+  );
 </script>
 
 {#if $isLoading}
@@ -37,8 +40,9 @@
   <div class="trakt-leaderboard-pill">
     <AvatarPill
       {avatars}
-      countLabel={String(following.length)}
+      countLabel={null}
       label={m.text_leaderboard()}
+      {caption}
       href={drawerLink.href}
       noscroll={drawerLink.noscroll}
       replacestate={drawerLink.replacestate}
@@ -53,9 +57,6 @@
 
     display: flex;
     justify-content: flex-start;
-    // The pill sizes itself against the `avatar-pill` container established on
-    // the banner row, so let it overflow this (content-width) details column
-    // into the space beneath the pinned action buttons.
     min-width: 0;
   }
 </style>

@@ -92,6 +92,8 @@
       {#if isPublic}
         <span class="user-location ellipsis">{profile.location}</span>
       {/if}
+    </div>
+    <div class="profile-pill" data-hj-suppress data-sentry-mask>
       {#if !$isMe && !isBlocked}
         <RenderFor audience="authenticated">
           <MatchPill {slug} />
@@ -156,19 +158,14 @@
   }
 
   .profile-identity {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: var(--gap-s);
-
-    // Query container for the leaderboard pill. Its width is driven by layout
-    // (not the pill's content), so the pill can size to the space available
-    // without a feedback loop. The pill may use the whole row except the
-    // profile image and its gap, so reserve that inline space.
-    container: avatar-pill / inline-size;
-    --avatar-pill-reserved-inline: calc(var(--ni-64) + var(--gap-s));
+    column-gap: var(--gap-s);
 
     :global(.trakt-profile-image) {
+      grid-row: 1 / span 2;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -182,10 +179,7 @@
     }
 
     @include for-tablet-sm-and-below {
-      gap: var(--gap-xs);
-      flex-wrap: wrap;
-
-      --avatar-pill-reserved-inline: calc(var(--ni-40) + var(--gap-xs));
+      column-gap: var(--gap-xs);
 
       span.ellipsis {
         white-space: normal;
@@ -204,14 +198,24 @@
     flex-direction: column;
     gap: var(--gap-micro);
     min-width: 0;
-    flex: 1;
+    grid-area: 1 / 2;
 
     .user-location {
       color: var(--color-text-secondary);
     }
   }
 
+  .profile-pill {
+    grid-area: 2 / 2 / auto / -1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+
+    container: avatar-pill / inline-size;
+  }
+
   .profile-actions {
+    grid-area: 1 / 3;
     display: flex;
     align-items: center;
     gap: var(--gap-s);

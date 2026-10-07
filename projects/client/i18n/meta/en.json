@@ -5140,6 +5140,15 @@
       "default": "Leaderboard",
       "description": "Label for the follows pill on a profile that opens the leaderboard."
     },
+    "text_leaderboard_following_count": {
+      "default": "{count} following",
+      "description": "Caption under the leaderboard pill label with the number of people the user follows.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "text_leaderboard_free_section": {
       "default": "Free members",
       "description": "Divider label separating ranked VIP entries from unranked free members on the leaderboard."

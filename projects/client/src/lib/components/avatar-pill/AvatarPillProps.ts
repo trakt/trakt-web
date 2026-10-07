@@ -4,6 +4,7 @@ type AvatarPillBaseProps = {
   avatars: AvatarStackProps['avatars'];
   countLabel: string | null;
   label: string;
+  caption?: string;
   ariaLabel: string;
 };
 
