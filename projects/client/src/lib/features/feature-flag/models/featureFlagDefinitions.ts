@@ -88,4 +88,16 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
         m.preview_feature_title_calendar_redesign(),
       ),
   },
+  [FeatureFlag.VipCancelFlow]: {
+    icon: SparkleIcon,
+    title: () => m.preview_feature_title_vip_cancel_flow(),
+    addedAt: new Date('2026-10-14'),
+    description: () => m.preview_feature_description_vip_cancel_flow(),
+    featureLink: () =>
+      openFeatureLink(
+        UrlBuilder.vipCancel(),
+        m.preview_feature_title_vip_cancel_flow(),
+      ),
+    audience: 'director',
+  },
 };

@@ -12544,6 +12544,14 @@
     "button_text_game_play": {
       "default": "Play",
       "description": "Label on the hidden \"Rated Higher?\" game card in the spotlight search that starts the game."
+    },
+    "preview_feature_title_vip_cancel_flow": {
+      "default": "VIP cancel flow",
+      "description": "Product feature name for the preview feature that replaces the cancel VIP dialog with a short guided flow."
+    },
+    "preview_feature_description_vip_cancel_flow": {
+      "default": "A new way to cancel VIP: asks why, shows what changes and offers a deal to stay.",
+      "description": "Description of the VIP cancel flow preview feature."
     }
   }
 }
