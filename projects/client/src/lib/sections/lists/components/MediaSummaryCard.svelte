@@ -17,6 +17,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { trackTextOverflow } from "$lib/utils/actions/trackTextOverflow.ts";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
+  import { isUnknownDate } from "$lib/utils/date/isUnknownDate.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { toHumanTime } from "$lib/utils/formatting/date/toHumanTime.ts";
   import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
@@ -224,20 +225,26 @@
           {media.title}
         </p>
       {/if}
-      <p
-        class="trakt-card-subtitle small secondary ellipsis capitalize"
-        title={toHumanDate(new Date(), rest.date, getLocale())}
-      >
-        {#if rest.activityType === "social" || hasMultiLineTitles}
-          {toRelativeHumanDay(new Date(), rest.date, getLocale())}
-        {:else}
-          {toHumanDate(new Date(), rest.date, getLocale())}
-        {/if}
-      </p>
-      {#if rest.activityType === "personal" && hasMultiLineTitles}
+      {#if isUnknownDate(rest.date)}
         <p class="trakt-card-subtitle small secondary ellipsis capitalize">
-          {toHumanTime({ date: rest.date, locale: getLocale() })}
+          {m.button_text_mark_as_watched_unknown_date()}
         </p>
+      {:else}
+        <p
+          class="trakt-card-subtitle small secondary ellipsis capitalize"
+          title={toHumanDate(new Date(), rest.date, getLocale())}
+        >
+          {#if rest.activityType === "social" || hasMultiLineTitles}
+            {toRelativeHumanDay(new Date(), rest.date, getLocale())}
+          {:else}
+            {toHumanDate(new Date(), rest.date, getLocale())}
+          {/if}
+        </p>
+        {#if rest.activityType === "personal" && hasMultiLineTitles}
+          <p class="trakt-card-subtitle small secondary ellipsis capitalize">
+            {toHumanTime({ date: rest.date, locale: getLocale() })}
+          </p>
+        {/if}
       {/if}
     {:else if isShowContext && rest.type === "episode"}
       <Tooltip

@@ -4,6 +4,7 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { HistoryEntry } from "$lib/sections/lists/stores/models/HistoryEntry";
   import { MEDIA_POSTER_PLACEHOLDER } from "$lib/utils/assets";
+  import { isUnknownDate } from "$lib/utils/date/isUnknownDate";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { buildHistorySlots } from "./buildHistorySlots";
@@ -67,7 +68,9 @@
             <p class="ellipsis">{entry.movie.title}</p>
           {/if}
           <p class="capitalize ellipsis secondary italic">
-            {toHumanDate(now, entry.watchedAt, getLocale())}
+            {isUnknownDate(entry.watchedAt)
+              ? m.button_text_mark_as_watched_unknown_date()
+              : toHumanDate(now, entry.watchedAt, getLocale())}
           </p>
         </div>
       </li>
