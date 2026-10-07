@@ -7,7 +7,6 @@ export const EpisodeSiloCommentReplyMappedMock: MediaComment[] = [
     'gif': {
       'url':
         'https://static.klipy.com/ii/8ce8357c78ea940b9c2015daf05ce1a5/ea/72/WGDcNWlt.gif',
-      'size': { 'width': 498, 'height': 374 },
     },
     'createdAt': new Date('2023-03-11T06:25:15.000Z'),
     'id': 421,

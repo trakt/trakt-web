@@ -10,10 +10,6 @@ export const MediaCommentSchema = z.object({
   comment: z.string(),
   gif: z.object({
     url: z.string(),
-    size: z.object({
-      width: z.number(),
-      height: z.number(),
-    }).nullish(),
   }).nullish(),
   isSpoiler: z.boolean(),
   isReview: z.boolean(),

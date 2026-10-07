@@ -59,13 +59,8 @@
       return null;
     }
 
-    const { url, size } = rest.comment.gif;
-    return {
-      url,
-      previewUrl: url,
-      width: size?.width,
-      height: size?.height,
-    };
+    const { url } = rest.comment.gif;
+    return { url, previewUrl: url };
   });
 
   let isOpen = $state(true);
@@ -103,7 +98,7 @@
   async function handleSubmit() {
     const response = await postComment({
       comment: comment.trim(),
-      gif: gif ? { url: gif.url, width: gif.width, height: gif.height } : null,
+      gif: gif ? { url: gif.url } : null,
       isSpoiler,
       ...commentProps,
     });

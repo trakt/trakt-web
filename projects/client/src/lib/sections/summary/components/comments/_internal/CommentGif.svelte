@@ -3,19 +3,13 @@
 
   type CommentGifProps = {
     url: string;
-    size?: { width: number; height: number } | null;
     variant: "full" | "preview";
   };
 
-  const { url, size, variant }: CommentGifProps = $props();
+  const { url, variant }: CommentGifProps = $props();
 </script>
 
-<div
-  class="trakt-comment-gif"
-  data-variant={variant}
-  style:--gif-width={size?.width}
-  style:--gif-height={size?.height}
->
+<div class="trakt-comment-gif" data-variant={variant}>
   <img
     src={url}
     alt={m.image_alt_comment_gif()}
@@ -45,19 +39,13 @@
 
     &[data-variant="full"] {
       align-self: flex-start;
-      max-width: min(100%, var(--ni-320));
-
-      aspect-ratio: var(--gif-width) / var(--gif-height);
-
-      width: min(
-        100%,
-        calc(var(--gif-width) * 1px),
-        var(--ni-320),
-        calc(var(--ni-320) * var(--gif-width) / var(--gif-height))
-      );
+      width: fit-content;
+      max-width: 100%;
+      height: var(--ni-200);
 
       img {
-        max-height: var(--ni-320);
+        width: auto;
+        max-width: 100%;
       }
     }
 

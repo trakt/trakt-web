@@ -28,7 +28,7 @@
 
 {#snippet commentGif(variant: "full" | "preview")}
   {#if comment.gif}
-    <CommentGif url={comment.gif.url} size={comment.gif.size} {variant} />
+    <CommentGif url={comment.gif.url} {variant} />
   {/if}
 {/snippet}
 

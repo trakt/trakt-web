@@ -41,7 +41,6 @@ export const FollowingActivityMappedMock: FollowingActivity[] = [
         text: 'That ending though.',
         gif: {
           url: 'https://static.klipy.com/ii/heretic.gif',
-          size: { width: 320, height: 180 },
         },
         isSpoiler: false,
         isReview: false,
