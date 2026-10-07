@@ -8,6 +8,7 @@
   import { iffy } from "$lib/utils/function/iffy.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
+  import { PLEX_ACCOUNT_SERVER_ID } from "./PLEX_ACCOUNT_SERVER_ID.ts";
   import PlexManageDrawer from "./PlexManageDrawer.svelte";
   import type { ServerSyncStatus } from "./models/ServerSyncStatus.ts";
   import { toServerSyncStatus } from "./toServerSyncStatus.ts";
@@ -41,6 +42,10 @@
     status.kind === "unreachable" || status.kind === "unauthorized",
   );
 
+  const isAccountOnly = $derived(
+    connection.serverId === PLEX_ACCOUNT_SERVER_ID,
+  );
+
   const libraryTitles = $derived(
     connection.libraries
       .filter((library) => library.enabled)
@@ -71,7 +76,9 @@
 </script>
 
 <SettingsGroupRow
-  title={connection.serverName ?? m.label_plex_server()}
+  title={isAccountOnly
+    ? m.label_media_sync_plex_watchlist()
+    : connection.serverName ?? m.label_plex_server()}
   {description}
   variant="custom"
 >

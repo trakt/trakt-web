@@ -15,6 +15,7 @@
   import PlexConnectProgress from "./PlexConnectProgress.svelte";
   import PlexFeedSwitches from "./PlexFeedSwitches.svelte";
   import PlexProfilePicker from "./PlexProfilePicker.svelte";
+  import { PLEX_ACCOUNT_SERVER_ID } from "./PLEX_ACCOUNT_SERVER_ID.ts";
   import { toConnectSteps } from "./toConnectSteps.ts";
 
   const {
@@ -48,8 +49,39 @@
 
   let chosenStep = $state<PlexConnectStep>("server");
 
+  const isAccountOnly = $derived(
+    flow.step === "choosing" && flow.serverId === PLEX_ACCOUNT_SERVER_ID,
+  );
+
+  const orderedServers = $derived(
+    flow.step === "choosing"
+      ? [
+        ...flow.servers.filter(({ id }) => id !== PLEX_ACCOUNT_SERVER_ID),
+        ...flow.servers.filter(({ id }) => id === PLEX_ACCOUNT_SERVER_ID),
+      ]
+      : [],
+  );
+
+  function toServerTitle(server: { id: string; name: string }): string {
+    return server.id === PLEX_ACCOUNT_SERVER_ID
+      ? m.label_media_sync_watchlist_only()
+      : server.name;
+  }
+
+  function toServerDescription(
+    server: { id: string; reachable: boolean },
+  ): string | undefined {
+    if (server.id === PLEX_ACCOUNT_SERVER_ID) {
+      return m.description_media_sync_watchlist_only();
+    }
+    return server.reachable
+      ? undefined
+      : m.description_media_sync_server_unreachable();
+  }
+
   const steps = $derived(
     toConnectSteps({
+      isAccountOnly,
       hasProfiles: flow.step === "choosing" &&
         (flow.accounts?.length ?? 0) > 1,
     }),
@@ -72,7 +104,7 @@
 
   const canConnect = $derived(
     flow.step === "choosing" &&
-      flow.libraryIds.length > 0 &&
+      (isAccountOnly || flow.libraryIds.length > 0) &&
       flow.feeds.length > 0,
   );
 
@@ -177,13 +209,11 @@
           </div>
         {:else if flow.step === "choosing" && step === "server"}
           <SettingsGroupCard variant="bare">
-            {#each flow.servers as server (server.id)}
+            {#each orderedServers as server (server.id)}
               {@const isChosen = server.id === flow.serverId}
               <SettingsGroupRow
-                title={server.name}
-                description={server.reachable
-                  ? undefined
-                  : m.description_media_sync_server_unreachable()}
+                title={toServerTitle(server)}
+                description={toServerDescription(server)}
                 variant="custom"
               >
                 {#snippet icon()}<ServerIcon />{/snippet}
@@ -193,7 +223,7 @@
                     variant="primary"
                     color="purple"
                     label={m.button_label_media_sync_continue({
-                      server: server.name,
+                      server: toServerTitle(server),
                     })}
                     onclick={() => goTo(1)}
                   >
@@ -215,7 +245,7 @@
                     variant="secondary"
                     color="default"
                     label={m.button_label_media_sync_choose_server({
-                      server: server.name,
+                      server: toServerTitle(server),
                     })}
                     disabled={!server.reachable}
                     onclick={() => onChooseServer(server.id)}
@@ -236,7 +266,12 @@
           />
         {:else if flow.step === "choosing" && step === "sync"}
           <div class="sync-choices">
-            <PlexFeedSwitches feeds={flow.feeds} onToggle={onToggleFeed} />
+            <PlexFeedSwitches
+              feeds={flow.feeds}
+              available={isAccountOnly ? ["watchlist"] : undefined}
+              onToggle={onToggleFeed}
+            />
+            {#if !isAccountOnly}
             <SettingsGroupCard
               variant="bare"
               title={m.header_media_sync_choose_libraries()}
@@ -256,6 +291,7 @@
                 </SettingsGroupRow>
               {/each}
             </SettingsGroupCard>
+            {/if}
           </div>
         {:else}
           <div class="loading-container">

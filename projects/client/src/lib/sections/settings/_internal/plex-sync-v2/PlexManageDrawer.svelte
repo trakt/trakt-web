@@ -14,6 +14,7 @@
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
   import SyncLoadError from "../SyncLoadError.svelte";
+  import { PLEX_ACCOUNT_SERVER_ID } from "./PLEX_ACCOUNT_SERVER_ID.ts";
   import PlexFeedSwitches from "./PlexFeedSwitches.svelte";
   import PlexProfilePicker from "./PlexProfilePicker.svelte";
   import PlexProfilePickerSkeleton from "./PlexProfilePickerSkeleton.svelte";
@@ -33,7 +34,16 @@
   );
   const { confirm } = useConfirm();
 
-  const serverLabel = $derived(connection.serverName ?? m.label_plex_server());
+  const isAccountOnly = $derived(
+    connection.serverId === PLEX_ACCOUNT_SERVER_ID,
+  );
+
+  const serverLabel = $derived(
+    isAccountOnly
+      ? m.label_media_sync_plex_watchlist()
+      : connection.serverName ?? m.label_plex_server(),
+  );
+  const needsLibraries = $derived(!isAccountOnly);
 
   let enabledLibraryIds = $state(
     iffy(() =>
@@ -138,9 +148,9 @@
       <SyncLoadError message={m.error_text_failed_update()} variant="plain" />
     {/if}
 
-    {#if !$accounts}
+    {#if needsLibraries && !$accounts}
       <PlexProfilePickerSkeleton />
-    {:else if $accounts.length > 1}
+    {:else if needsLibraries && $accounts && $accounts.length > 1}
       <PlexProfilePicker
         accounts={$accounts}
         pickedAccountId={pickedAccountId ?? currentAccountId}
@@ -148,8 +158,13 @@
       />
     {/if}
 
-    <PlexFeedSwitches {feeds} onToggle={toggleFeed} />
+    <PlexFeedSwitches
+      {feeds}
+      available={isAccountOnly ? ["watchlist"] : undefined}
+      onToggle={toggleFeed}
+    />
 
+    {#if needsLibraries}
     <SettingsGroupCard variant="bare" title={m.header_media_sync_libraries()}>
       {#each connection.libraries as library (library.id)}
         <SettingsGroupRow
@@ -168,6 +183,7 @@
         </SettingsGroupRow>
       {/each}
     </SettingsGroupCard>
+    {/if}
 
     <div class="drawer-actions">
       <Button
@@ -187,14 +203,14 @@
         label={m.button_label_apply()}
         disabled={$isBusy ||
           !hasChanges ||
-          enabledLibraryIds.length === 0 ||
+          (needsLibraries && enabledLibraryIds.length === 0) ||
           feeds.length === 0}
         onclick={onApply}
       >
         {m.button_text_apply()}
       </Button>
 
-      {#if enabledLibraryIds.length === 0}
+      {#if needsLibraries && enabledLibraryIds.length === 0}
         <p class="library-hint secondary small">
           {m.text_plex_library_required()}
         </p>

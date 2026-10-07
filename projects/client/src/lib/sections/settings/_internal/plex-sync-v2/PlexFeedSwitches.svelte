@@ -15,9 +15,11 @@
 
   const {
     feeds,
+    available = MediaSyncFeedSchema.options,
     onToggle,
   }: {
     feeds: MediaSyncFeed[];
+    available?: readonly MediaSyncFeed[];
     onToggle: (feed: MediaSyncFeed) => void;
   } = $props();
 
@@ -34,7 +36,7 @@
   title={m.header_media_sync_feeds()}
   description={m.description_media_sync_feeds()}
 >
-  {#each MediaSyncFeedSchema.options as feed (feed)}
+  {#each available as feed (feed)}
     <SettingsGroupRow
       title={toFeedTitle(feed)}
       description={FEED_DESCRIPTION[feed]()}
