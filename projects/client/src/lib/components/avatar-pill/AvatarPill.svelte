@@ -4,10 +4,13 @@
   import Link from "$lib/components/link/Link.svelte";
   import type { AvatarPillProps } from "./AvatarPillProps.ts";
 
+  const MOBILE_AVATAR_LIMIT = 3;
+
   const {
     avatars,
     countLabel,
     label,
+    caption,
     ariaLabel,
     href,
     onclick,
@@ -16,21 +19,41 @@
   }: AvatarPillProps = $props();
 
   const hasAvatars = $derived(avatars.length > 0);
+  const hasCaption = $derived(caption != null);
 </script>
 
 {#snippet pill()}
-  <span class="trakt-avatar-pill">
+  <span
+    class="trakt-avatar-pill"
+    style:--pill-avatar-count={avatars.length}
+    style:--pill-mobile-avatar-limit={MOBILE_AVATAR_LIMIT}
+  >
     {#if hasAvatars}
       <span class="pill-avatars">
-        <AvatarStack {avatars} mobileLimit={3} />
+        <AvatarStack {avatars} mobileLimit={MOBILE_AVATAR_LIMIT} />
       </span>
     {/if}
 
-    <span class="pill-label" class:is-text-only={countLabel == null}>
+    <span
+      class="pill-label"
+      class:is-text-only={countLabel == null}
+      class:has-caption={hasCaption}
+    >
       {#if countLabel != null}
         <span class="pill-count bold">{countLabel}</span>
       {/if}
-      <span class="pill-text">{label}</span>
+      <span class="pill-lines">
+        <span
+          class="pill-text"
+          class:tag={hasCaption}
+          class:bold={hasCaption}
+        >
+          {label}
+        </span>
+        {#if hasCaption}
+          <span class="pill-caption tag">{caption}</span>
+        {/if}
+      </span>
     </span>
 
     <span class="pill-caret" aria-hidden="true">
@@ -114,19 +137,26 @@
   }
 
   // When the pill sits in an opted-in container, size it to the space
-  // available: `100cqi` is the container's inline size, minus any inline space
-  // the container reserves for siblings the pill must not sit under
-  // (`--avatar-pill-reserved-inline`). The avatar overlap then scales from the
-  // preferred 50% while there's room toward ~78% as the space narrows, so all
-  // avatars stay visible without overflowing. Inert when no `avatar-pill`
-  // container ancestor exists.
+  // available: `100cqi` is the container's inline size. Once the pill no
+  // longer fits, the avatar overlap grows from the preferred 50% toward ~78%,
+  // spread over the visible overlaps so the pill shrinks exactly as fast as the
+  // space does. `--pill-content-inline` approximates everything in the pill
+  // except the overlapping avatars. Inert when no `avatar-pill` container
+  // ancestor exists.
   @container avatar-pill (min-width: 0px) {
     .trakt-avatar-pill {
-      --pill-available: calc(
-        100cqi - var(--avatar-pill-reserved-inline, 0px)
-      );
+      --pill-available: 100cqi;
+      --pill-content-inline: calc(var(--ni-136) + var(--ni-4));
+      --pill-overlap-steps: max(var(--pill-avatar-count) - 1, 1);
 
       max-width: var(--pill-available);
+
+      @include for-mobile {
+        --pill-overlap-steps: max(
+          min(var(--pill-avatar-count), var(--pill-mobile-avatar-limit)) - 1,
+          1
+        );
+      }
     }
 
     .pill-avatars {
@@ -134,8 +164,9 @@
         -1 *
           clamp(
             var(--pill-avatar-size) * 0.5,
-            var(--pill-avatar-size) * 0.78 -
-              (var(--pill-available) - 210px) * 0.5,
+            var(--pill-avatar-size) -
+              (var(--pill-available) - var(--pill-content-inline)) /
+              var(--pill-overlap-steps),
             var(--pill-avatar-size) * 0.78
           )
       );
@@ -154,6 +185,17 @@
     &.is-text-only {
       padding-inline: var(--ni-8);
     }
+
+    &.has-caption {
+      height: auto;
+      padding-inline-start: 0;
+    }
+  }
+
+  .pill-lines {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
   }
 
   .pill-text {
@@ -161,6 +203,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .pill-caption {
+    opacity: 0.6;
+    line-height: 1.2;
   }
 
   .pill-count {
