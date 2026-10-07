@@ -122,14 +122,7 @@ function mapToDetail(
         comment: {
           id: comment.id,
           text: comment.comment,
-          gif: gif
-            ? {
-              url: gif.url,
-              size: gif.width && gif.height
-                ? { width: gif.width, height: gif.height }
-                : null,
-            }
-            : null,
+          gif: gif ? { url: gif.url } : null,
           isSpoiler: comment.spoiler,
           isReview: comment.review,
           likeCount: comment.likes,

@@ -2,22 +2,6 @@ import type { CommentResponse } from '@trakt/api';
 import type { MediaComment } from '../models/MediaComment.ts';
 import { mapToUserProfile } from './mapToUserProfile.ts';
 
-function toCommentGif(commentResponse: CommentResponse) {
-  const { gif } = commentResponse;
-
-  if (!gif) {
-    return null;
-  }
-
-  const { url, width, height } = gif;
-
-  return {
-    url,
-    // Zero on a comment stored before clients sent the size.
-    size: width && height ? { width, height } : null,
-  };
-}
-
 export function mapToMediaComment(
   commentResponse: CommentResponse,
 ): MediaComment {
@@ -28,7 +12,7 @@ export function mapToMediaComment(
     createdAt: new Date(commentResponse.created_at),
     updatedAt: new Date(commentResponse.updated_at),
     comment: commentResponse.comment,
-    gif: toCommentGif(commentResponse),
+    gif: commentResponse.gif ? { url: commentResponse.gif.url } : null,
     isSpoiler: commentResponse.spoiler,
     isReview: commentResponse.review,
     replyCount: commentResponse.replies,
