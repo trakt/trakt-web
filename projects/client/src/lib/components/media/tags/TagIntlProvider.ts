@@ -1,6 +1,7 @@
 import * as m from '$lib/features/i18n/messages.ts';
 
 import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
+import { isUnknownDate } from '$lib/utils/date/isUnknownDate.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 
 import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
@@ -23,7 +24,9 @@ export const TagIntlProvider: TagIntl = {
   toWatcherCount: (count) => toHumanNumber(count, languageTag()),
   toReleaseEstimate: (airDate) => toHumanETA(new Date(), airDate, getLocale()),
   toActivityDate: (activityDate) =>
-    toRelativeHumanDay(new Date(), activityDate, getLocale()),
+    isUnknownDate(activityDate)
+      ? m.button_text_mark_as_watched_unknown_date()
+      : toRelativeHumanDay(new Date(), activityDate, getLocale()),
   tbaLabel: () => m.tag_text_tba(),
   toAnticipatedCount: (count) => toHumanNumber(count, languageTag()),
   watchCountLabel: () => m.tag_text_watch_count(),

@@ -1,7 +1,9 @@
 <script lang="ts">
   import { getLocale } from "$lib/features/i18n";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { HistoryEntry } from "$lib/sections/lists/stores/models/HistoryEntry";
   import RemoveFromHistoryAction from "$lib/sections/media-actions/remove-from-history/RemoveFromHistoryAction.svelte";
+  import { isUnknownDate } from "$lib/utils/date/isUnknownDate";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
 
@@ -24,7 +26,9 @@
           class:secondary={entry.type === "episode"}
           class:italic={entry.type === "episode"}
         >
-          {toHumanDate(now, entry.watchedAt, getLocale())}
+          {isUnknownDate(entry.watchedAt)
+              ? m.button_text_mark_as_watched_unknown_date()
+              : toHumanDate(now, entry.watchedAt, getLocale())}
         </p>
       </div>
       <RemoveFromHistoryAction
