@@ -6,4 +6,5 @@ export enum FeatureFlag {
   LargeScreenCards = 'large-screen-cards',
   VipVeteran = 'vip-veteran',
   CalendarRedesign = 'calendar-redesign',
+  VipCancelFlow = 'vip-cancel-flow',
 }
