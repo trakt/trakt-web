@@ -1,10 +1,8 @@
 <script lang="ts">
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
-  import { genreIcons } from "$lib/components/icons/genres/genreIcons.ts";
-  import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre.ts";
   import { GENRE_LIMIT } from "./constants.ts";
+  import GenreCard from "./GenreCard.svelte";
   import GenresDrawer from "./GenresDrawer.svelte";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
   import { useSettings } from "./useSettings.ts";
@@ -28,15 +26,10 @@
   >
     <div class="slots-row">
       {#each loved as genre (genre)}
-        <div class="genre-slot" data-genre={genre}>
-          {@html genreIcons[genre]}
-          <span class="genre-name small">{toTranslatedGenre(genre)}</span>
-        </div>
+        <GenreCard {genre} />
       {/each}
       {#each { length: Math.max(0, GENRE_LIMIT - loved.length) } as _, i (i)}
-        <div class="genre-slot is-empty" aria-hidden="true">
-          <PlusIcon />
-        </div>
+        <GenreCard />
       {/each}
     </div>
     <span class="row-caret">
@@ -59,7 +52,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-genre-section {
-    --genre-tile-size: 92px;
+    --genre-tile-size: var(--ni-80);
 
     display: flex;
     align-items: center;
@@ -117,41 +110,4 @@
         (var(--genre-columns) - 1) * var(--gap-s)
     );
   }
-
-  .genre-slot {
-    @include genre-tile-surface;
-
-    overflow: hidden;
-
-    :global(svg) {
-      width: min(var(--ni-36), 45%);
-      height: min(var(--ni-36), 45%);
-    }
-  }
-
-  .genre-name {
-    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
-    text-align: center;
-    line-height: 1;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .genre-slot.is-empty {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--border-radius-m);
-    border: var(--border-thickness-xxs) dashed
-      color-mix(in srgb, var(--color-foreground) 20%, transparent);
-    color: color-mix(in srgb, var(--color-foreground) 30%, transparent);
-
-    :global(svg) {
-      width: var(--ni-16);
-      height: var(--ni-16);
-    }
-  }
-
 </style>

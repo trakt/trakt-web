@@ -4,6 +4,12 @@
   initial-value: 0deg;
 }
 
+@property --genre-card-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
 :root {
   /**
    * Animation transition variables

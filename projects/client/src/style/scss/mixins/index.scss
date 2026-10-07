@@ -171,24 +171,6 @@
   }
 }
 
-@mixin genre-tile-surface {
-  --stroke-0: color-mix(in srgb, var(--color-foreground) 70%, transparent);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--gap-xs);
-  width: 100%;
-  aspect-ratio: 1;
-  padding: var(--gap-xs);
-  box-sizing: border-box;
-  border-radius: var(--border-radius-m);
-  background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
-  border: var(--border-thickness-xxs) solid
-    color-mix(in srgb, var(--color-foreground) 5%, transparent);
-}
-
 // Clickable gif-backed tile in the picker: category chips and result tiles
 // share the surface, the focus ring and the tap behaviour. Consumers set
 // `--gif-tile-image` and their own box.

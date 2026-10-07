@@ -2,8 +2,6 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
-  import { genreIcons } from "$lib/components/icons/genres/genreIcons.ts";
-  import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
   import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import { GENRES } from "$lib/features/filters/_internal/genres.ts";
@@ -14,6 +12,7 @@
   import { untrack } from "svelte";
   import { SvelteSet } from "svelte/reactivity";
   import { GENRE_LIMIT } from "./constants.ts";
+  import GenreCard from "./GenreCard.svelte";
 
   type GenresDrawerProps = {
     title: string;
@@ -123,27 +122,10 @@
       <p class="section-label">{m.label_genres_drawer_selected()}</p>
       <div class="selections-row">
         {#each selectedSorted as genre (genre)}
-          <button
-            class="genre-tile is-selected"
-            type="button"
-            data-genre={genre}
-            aria-pressed="true"
-            aria-label={m.button_label_toggle_genre({
-              genre: toTranslatedGenre(genre),
-            })}
-            onclick={() => toggle(genre)}
-          >
-            <span class="genre-icon">{@html genreIcons[genre]}</span>
-            <span class="genre-name small">{toTranslatedGenre(genre)}</span>
-            <span class="tile-check" aria-hidden="true">
-              <CheckIcon />
-            </span>
-          </button>
+          <GenreCard {genre} isSelected onclick={() => toggle(genre)} />
         {/each}
         {#each { length: emptySlotCount } as _, i (i)}
-          <div class="genre-slot-empty" aria-hidden="true">
-            <PlusIcon />
-          </div>
+          <GenreCard />
         {/each}
       </div>
     </div>
@@ -151,36 +133,18 @@
     <p class="section-label catalog-label">{m.label_genres_drawer_all()}</p>
     <div class="genre-catalog">
       {#each catalogGenres as genre (genre)}
-        {@const isSelected = selected.has(genre)}
-        {@const disabled = !isSelectable(genre)}
-        <button
-          class="genre-tile"
-          class:is-selected={isSelected}
-          type="button"
-          data-genre={genre}
-          aria-pressed={isSelected}
-          aria-label={m.button_label_toggle_genre({
-            genre: toTranslatedGenre(genre),
-          })}
-          {disabled}
+        <GenreCard
+          {genre}
+          isSelected={selected.has(genre)}
+          disabled={!isSelectable(genre)}
           onclick={() => toggle(genre)}
-        >
-          <span class="genre-icon">{@html genreIcons[genre]}</span>
-          <span class="genre-name small">{toTranslatedGenre(genre)}</span>
-          {#if isSelected}
-            <span class="tile-check" aria-hidden="true">
-              <CheckIcon />
-            </span>
-          {/if}
-        </button>
+        />
       {/each}
     </div>
   </div>
 </Drawer>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   :global(.trakt-drawer.trakt-genres-drawer) {
     --drawer-padding: var(--gap-s);
     --drawer-gap: var(--gap-micro);
@@ -229,92 +193,10 @@
     gap: var(--gap-s);
   }
 
-  .genre-slot-empty {
-    width: 100%;
-    aspect-ratio: 1;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--border-radius-m);
-    border: var(--border-thickness-xxs) dashed
-      color-mix(in srgb, var(--color-foreground) 20%, transparent);
-    color: color-mix(in srgb, var(--color-foreground) 30%, transparent);
-
-    :global(svg) {
-      width: var(--ni-20);
-      height: var(--ni-20);
-    }
-  }
-
   .genre-catalog {
     display: grid;
     grid-template-columns: repeat(var(--genre-columns), minmax(0, 1fr));
     gap: var(--gap-s);
     align-content: start;
   }
-
-  .genre-tile {
-    @include genre-tile-surface;
-
-    position: relative;
-    cursor: pointer;
-    color: inherit;
-    transition: border-color var(--transition-increment) ease-in-out;
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-
-    &.is-selected {
-      --stroke-0: var(--color-foreground);
-      border-color: var(--color-background-purple);
-    }
-
-    @include for-mouse {
-      &:hover:not(:disabled) {
-        border-color: color-mix(in srgb, var(--color-background-purple) 60%, transparent);
-      }
-    }
-  }
-
-  .genre-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--ni-32);
-    height: var(--ni-32);
-    flex-shrink: 0;
-  }
-
-  .genre-name {
-    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
-    text-align: center;
-    line-height: 1.25;
-  }
-
-  .tile-check {
-    position: absolute;
-    top: var(--ni-neg-6);
-    inset-inline-end: var(--ni-neg-4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--ni-18);
-    height: var(--ni-18);
-    border-radius: 50%;
-    background: var(--color-background-purple);
-    color: var(--shade-10);
-
-    :global(svg) {
-      width: var(--ni-10);
-      height: var(--ni-10);
-    }
-
-    :global(svg path) {
-      stroke-width: 3;
-    }
-  }
-
 </style>
