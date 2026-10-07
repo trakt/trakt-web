@@ -29,6 +29,12 @@ const VipRenewalSchema = z.object({
   }),
 });
 
+const VipRetentionOfferSchema = z.object({
+  plan_code: z.string(),
+  amount: z.number(),
+  discounted_amount: z.number(),
+});
+
 const VipTransactionSchema = z.object({
   id: z.number(),
   gateway: VipGatewaySchema,
@@ -57,6 +63,7 @@ export const VipSubscriptionResponseSchema = z.object({
   plan: z.string().nullable(),
   renewal: VipRenewalSchema.optional(),
   manage_url: z.string().nullish(),
+  retention_offer: VipRetentionOfferSchema.nullish(),
 });
 
 export type VipSubscriptionResponse = z.infer<

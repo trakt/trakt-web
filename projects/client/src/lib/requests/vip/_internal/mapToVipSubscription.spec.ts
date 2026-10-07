@@ -66,6 +66,29 @@ describe('mapToVipSubscription', () => {
     expect(subscription?.gateway).toBeNull();
   });
 
+  it('should have no retention offer when the API sends none', () => {
+    const subscription = mapToVipSubscription(buildResponse());
+    expect(subscription?.retentionOffer).toBeNull();
+  });
+
+  it('should map the retention offer the API decided on', () => {
+    const subscription = mapToVipSubscription(
+      buildResponse({
+        retention_offer: {
+          plan_code: 'two_years',
+          amount: 96,
+          discounted_amount: 60,
+        },
+      }),
+    );
+
+    expect(subscription?.retentionOffer).toEqual({
+      planCode: 'two_years',
+      amount: 96,
+      discountedAmount: 60,
+    });
+  });
+
   it('should expose the server-built manage_url for non-Stripe gateways', () => {
     const subscription = mapToVipSubscription(
       buildResponse({

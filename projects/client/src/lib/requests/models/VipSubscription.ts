@@ -9,6 +9,12 @@ const VipRenewalPriceSchema = z.object({
   readable: z.string(),
 });
 
+const VipSubscriptionRetentionOfferSchema = z.object({
+  planCode: z.string(),
+  amount: z.number(),
+  discountedAmount: z.number(),
+});
+
 export const VipSubscriptionSchema = z.object({
   type: VipTypeSchema,
   plan: z.string().nullable(),
@@ -21,6 +27,7 @@ export const VipSubscriptionSchema = z.object({
   daysLeft: z.number(),
   renewalPrice: VipRenewalPriceSchema.nullable(),
   manageUrl: z.string().nullable(),
+  retentionOffer: VipSubscriptionRetentionOfferSchema.nullable(),
   transactions: z.array(VipTransactionSchema),
 });
 

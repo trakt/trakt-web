@@ -5,6 +5,7 @@ import { useMutation } from '$lib/features/query/useMutation.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { cancelSubscriptionQuery } from '$lib/requests/vip/cancelSubscriptionQuery.ts';
+import { claimRetentionOfferQuery } from '$lib/requests/vip/claimRetentionOfferQuery.ts';
 import { confirmCheckoutQuery } from '$lib/requests/vip/confirmCheckoutQuery.ts';
 import { manageSubscriptionQuery } from '$lib/requests/vip/manageSubscriptionQuery.ts';
 import { startCheckoutQuery } from '$lib/requests/vip/startCheckoutQuery.ts';
@@ -14,6 +15,7 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { map } from 'rxjs';
+import type { AnalyticsEventDataMap } from '$lib/features/analytics/events/AnalyticsEventDataMap.ts';
 import type { VipPlan } from './models/VipPlan.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 
@@ -53,6 +55,12 @@ export function useVip() {
     invalidations: [InvalidateAction.Vip.Canceled],
   }));
 
+  const retentionOffer = useMutation(defineMutation({
+    key: 'vip:claim-retention-offer',
+    request: () => claimRetentionOfferQuery(),
+    invalidations: [InvalidateAction.Vip.Updated],
+  }));
+
   const confirmation = useMutation(defineMutation({
     key: 'vip:confirm-checkout',
     request: (sessionId: string) => confirmCheckoutQuery({ sessionId }),
@@ -66,6 +74,7 @@ export function useVip() {
     checkout.isPending,
     management.isPending,
     cancellation.isPending,
+    retentionOffer.isPending,
   ]);
 
   return {
@@ -80,11 +89,14 @@ export function useVip() {
 
       return await management.mutate();
     },
-    cancelSubscription: async () => {
-      trackCancel();
+    cancelSubscription: async (
+      data: AnalyticsEventDataMap[typeof AnalyticsEvent.VipCancel] = {},
+    ) => {
+      trackCancel(data);
 
       return await cancellation.mutate();
     },
+    claimRetentionOffer: () => retentionOffer.mutate(),
     confirmCheckout: (sessionId: string) => confirmation.mutate(sessionId),
     isFetching,
     subscription: subscription.pipe(map(($details) => $details.data)),
