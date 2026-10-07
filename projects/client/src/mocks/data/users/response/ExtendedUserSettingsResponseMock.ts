@@ -43,6 +43,7 @@ export const ExtendedUsersResponseMock: SettingsResponse & {
     'time_24hr': true,
     'cover_image': null,
     'token': null,
+    'share_code': 'Xk3mPq2Bf9aQ',
     'display_ads': true,
   },
   'browsing': {

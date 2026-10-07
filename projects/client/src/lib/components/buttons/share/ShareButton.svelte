@@ -5,7 +5,6 @@
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { DrilldownSource } from "$lib/sections/lists/components/models/DrilldownSource";
-  import { PREFETCH_SHARE_PARAM } from "$lib/utils/requests/shouldPrefetch";
   import ActionButton from "../ActionButton.svelte";
   import { useShare } from "./useShare";
 
@@ -27,24 +26,10 @@
     variant = "secondary",
   }: ShareButtonProps = $props();
 
-  const shareUrl = $derived.by(() => {
-    const baseUrl = urlOverride ?? (browser ? page.url.toString() : null);
-    if (!baseUrl) return "";
-
-    if (baseUrl.startsWith("https://")) {
-      const url = new URL(baseUrl);
-      url.searchParams.set(PREFETCH_SHARE_PARAM, "true");
-      return url.toString();
-    }
-
-    const separator = baseUrl.includes("?") ? "&" : "?";
-    return `${baseUrl}${separator}${PREFETCH_SHARE_PARAM}=true`;
-  });
-
   const data = $derived({
     title,
     text: textFactory({ title }),
-    url: shareUrl,
+    url: urlOverride ?? (browser ? page.url.toString() : ""),
   });
 
   const isShareable = $derived(
