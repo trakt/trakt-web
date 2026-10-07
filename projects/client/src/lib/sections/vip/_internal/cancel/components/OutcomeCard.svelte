@@ -1,0 +1,100 @@
+<script lang="ts">
+  import { languageTag } from "$lib/features/i18n/index.ts";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
+  import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate.ts";
+  import { addYear } from "$lib/utils/date/addYear.ts";
+  import { toPaymentMethodLabel } from "../../utils/toPaymentMethodLabel.ts";
+  import { toVipPriceLabel } from "../../utils/toVipPriceLabel.ts";
+  import type { DeckCardTone } from "./DeckCardProps.ts";
+  import DeckCard from "./DeckCard.svelte";
+  import DeckCardHeading from "./DeckCardHeading.svelte";
+  import type { OutcomeCardProps } from "./OutcomeCardProps.ts";
+  import VipCancelButton from "./VipCancelButton.svelte";
+
+  const TWO_YEARS = 2;
+
+  const { outcome, summary, offer }: OutcomeCardProps = $props();
+
+  const store = $derived(toPaymentMethodLabel(summary.gateway));
+
+  const date = $derived(toHumanLongDate(summary.endsAt, languageTag()));
+  const until = $derived(
+    toHumanLongDate(addYear(summary.endsAt, TWO_YEARS), languageTag()),
+  );
+
+  const content = $derived.by(
+    (): {
+      tone: DeckCardTone;
+      eyebrow: string;
+      title: string;
+      description: string;
+    } => {
+      switch (outcome) {
+        case "claimed":
+          return {
+            tone: "celebrate",
+            eyebrow: m.tag_text_vip_cancel_claimed(),
+            title: m.header_vip_cancel_claimed(),
+            description: m.text_vip_cancel_claimed({
+              price: toVipPriceLabel(offer?.discountedAmount ?? 0),
+              date,
+              until,
+            }),
+          };
+        case "kept":
+          return {
+            tone: "celebrate",
+            eyebrow: m.tag_text_vip_cancel_kept(),
+            title: m.header_vip_cancel_kept(),
+            description: m.text_vip_cancel_kept({ date }),
+          };
+        case "external":
+          return {
+            tone: "default",
+            eyebrow: m.text_vip_cancel_card_title(),
+            title: m.header_vip_cancel_external({ store }),
+            description: m.text_vip_cancel_external({ date }),
+          };
+        case "cancelled":
+          return {
+            tone: "default",
+            eyebrow: m.text_vip_cancel_card_title(),
+            title: m.header_vip_cancel_cancelled(),
+            description: m.text_vip_cancel_cancelled({ date }),
+          };
+      }
+    },
+  );
+</script>
+
+<DeckCard tone={content.tone} position={0}>
+  {#snippet copy()}
+    <DeckCardHeading
+      eyebrow={content.eyebrow}
+      title={content.title}
+      description={content.description}
+    />
+  {/snippet}
+
+
+  {#snippet actions()}
+    {#if outcome === "external" && summary.manageUrl}
+      <VipCancelButton
+        look="secondary"
+        label={m.button_label_vip_cancel_external_open({ store })}
+        href={summary.manageUrl}
+        target="_blank"
+      >
+        {m.button_text_vip_cancel_external_open({ store })}
+      </VipCancelButton>
+    {/if}
+    <VipCancelButton
+      look="primary"
+      label={m.button_label_vip_cancel_home()}
+      href={UrlBuilder.home()}
+    >
+      {m.button_text_vip_cancel_home()}
+    </VipCancelButton>
+  {/snippet}
+</DeckCard>
