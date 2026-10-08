@@ -1,14 +1,17 @@
 <script lang="ts">
   import ReactionPicker from "$lib/components/reactions/ReactionPicker.svelte";
   import ReactionsDistribution from "$lib/components/reactions/ReactionsDistribution.svelte";
-  import { toReactionPickerOptions } from "$lib/components/reactions/toReactionPickerOptions.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { MAX_MEDIA_REACTIONS } from "$lib/features/media-reactions/MAX_MEDIA_REACTIONS.ts";
+  import {
+    MAX_MEDIA_REACTIONS,
+    QUICK_MEDIA_REACTIONS,
+  } from "$lib/features/media-reactions/constants.ts";
   import {
     type MediaReaction,
     MediaReactionSchema,
   } from "$lib/requests/models/MediaReaction.ts";
   import type { ReactionsPopoverContentProps } from "./ReactionsPopoverContentProps.ts";
+  import { toMediaReactionOptions } from "./toMediaReactionOptions.ts";
 
   const {
     chosen,
@@ -16,27 +19,14 @@
     distribution,
     isLoading,
     close,
+    onMore,
   }: ReactionsPopoverContentProps = $props();
-
-  const QUICK_REACTIONS: ReadonlyArray<MediaReaction> = [
-    "heart_eyes",
-    "rofl",
-    "holding_back_tears",
-    "mind_blown",
-    "shocked",
-    "yawning",
-  ];
 
   const DISTRIBUTION_PAGE_SIZE = 8;
 
   let isExpanded = $state(false);
 
-  const options = toReactionPickerOptions([
-    ...QUICK_REACTIONS,
-    ...MediaReactionSchema.options.filter(
-      (reaction) => !QUICK_REACTIONS.includes(reaction),
-    ),
-  ]);
+  const options = toMediaReactionOptions();
 
   const reacted = $derived(
     MediaReactionSchema.options.filter(
@@ -81,9 +71,9 @@
   {chosen}
   limit={MAX_MEDIA_REACTIONS}
   onSelect={selectHandler}
-  quickCount={QUICK_REACTIONS.length}
+  quickCount={QUICK_MEDIA_REACTIONS.length}
   {isExpanded}
-  onToggleExpanded={() => (isExpanded = !isExpanded)}
+  onToggleExpanded={onMore ?? (() => (isExpanded = !isExpanded))}
 />
 
 <style lang="scss">

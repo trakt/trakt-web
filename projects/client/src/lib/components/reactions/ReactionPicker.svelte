@@ -3,7 +3,7 @@
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import ReactionEmoji from "./ReactionEmoji.svelte";
+  import ReactionPickerCell from "./ReactionPickerCell.svelte";
   import type { ReactionPickerOption } from "./ReactionPickerOption.ts";
   import type { ReactionPickerProps } from "./ReactionPickerProps.ts";
 
@@ -17,8 +17,6 @@
     isExpanded = false,
     onToggleExpanded,
   }: ReactionPickerProps<T> = $props();
-
-  const isAtLimit = $derived(limit != null && chosen.length >= limit);
 
   const isSplit = $derived(quickCount != null && options.length > quickCount);
 
@@ -43,26 +41,7 @@
 {/snippet}
 
 {#snippet reactionButton(option: ReactionPickerOption<T>, index: number)}
-  {@const isChosen = chosen.includes(option.id)}
-  <div
-    class="picker-cell"
-    class:is-chosen={isChosen}
-    style="--reaction-index: {index}"
-  >
-    <ActionButton
-      label={m.button_label_react({ reaction: option.label })}
-      onclick={() => onSelect(option.id)}
-      disabled={isAtLimit && !isChosen}
-      style="ghost"
-    >
-      <ReactionEmoji
-        code={option.code}
-        label={option.label}
-        {index}
-        animation="initial"
-      />
-    </ActionButton>
-  </div>
+  <ReactionPickerCell {option} {index} {chosen} {limit} {onSelect} />
 {/snippet}
 
 <div
@@ -251,42 +230,4 @@
     background-color: var(--color-border);
   }
 
-  .picker-cell {
-    --animation-duration: calc(var(--transition-increment) * 2);
-
-    :global(.trakt-reaction-emoji-container) {
-      transition: var(--transition-increment) ease-out;
-      transition-property: opacity, filter;
-    }
-
-    :global(.trakt-action-button[disabled] .trakt-reaction-emoji-container) {
-      opacity: 0.35;
-      filter: grayscale(1);
-    }
-
-    :global(.trakt-action-button) {
-      transition: var(--transition-increment) ease-in-out;
-      transition-property: background-color;
-
-      border-radius: 50%;
-
-      opacity: 0;
-
-      --delay-factor: calc(var(--animation-duration) / 6);
-      animation: bump-in var(--animation-duration) ease-in forwards;
-      animation-delay: calc(var(--reaction-index) * var(--delay-factor));
-    }
-
-    &.is-chosen :global(.trakt-action-button) {
-      background-color: var(--color-current-reaction-background);
-
-      @include for-touch {
-        background-color: var(--color-current-reaction-hover);
-      }
-
-      &:hover {
-        background-color: var(--color-current-reaction-hover);
-      }
-    }
-  }
 </style>
