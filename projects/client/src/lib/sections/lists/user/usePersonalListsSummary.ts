@@ -2,8 +2,10 @@ import { collaborationListsQuery } from '$lib/requests/queries/users/collaborati
 import type { UserListsSortBy } from '$lib/requests/models/UserListsSortBy.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import { personalListsQuery } from '$lib/requests/queries/users/personalListsQuery.ts';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { dedupe } from '$lib/utils/array/dedupe.ts';
-import { map } from 'rxjs';
+import { map, of } from 'rxjs';
 import type { PaginationParams } from '../../../requests/models/PaginationParams.ts';
 import { likedListsQuery } from '../../../requests/queries/users/likedListsQuery.ts';
 import { DEFAULT_LISTS_PAGE_SIZE } from '../../../utils/constants.ts';
@@ -34,7 +36,9 @@ function defaultSortBy(type: PersonalListType): UserListsSortBy {
 }
 
 function typeToQuery(
-  { type, slug, limit, sortBy, sortHow }: PersonalListsParams,
+  { type, slug, limit, sortBy, sortHow }: PersonalListsParams & {
+    type: Exclude<PersonalListType, 'collaboration'>;
+  },
 ) {
   const paginationProps = {
     limit: limit ?? DEFAULT_LISTS_PAGE_SIZE,
@@ -50,9 +54,28 @@ function typeToQuery(
         sortHow,
         ...paginationProps,
       });
-    case 'collaboration':
-      return collaborationListsQuery({ slug });
   }
+}
+
+function useCollaborationLists(slug: string) {
+  const query = useQuery(collaborationListsQuery({ slug }));
+
+  return {
+    list: query.pipe(map(($query) => $query.data ?? [])),
+    isLoading: query.pipe(map(toLoadingState)),
+    hasNextPage: of(false),
+    fetchNextPage: () => Promise.resolve(),
+  };
+}
+
+function useListsQuery(params: PersonalListsParams) {
+  const { type } = params;
+
+  if (type === 'collaboration') {
+    return useCollaborationLists(params.slug);
+  }
+
+  return usePaginatedListQuery(typeToQuery({ ...params, type }));
 }
 
 export function usePersonalListsSummary(
@@ -66,15 +89,13 @@ export function usePersonalListsSummary(
 ) {
   const resolvedSortBy = sortBy ?? defaultSortBy(type);
   const resolvedSortHow = sortHow ?? defaultDirection(resolvedSortBy);
-  const { list, ...rest } = usePaginatedListQuery(
-    typeToQuery({
-      type,
-      slug,
-      limit,
-      sortBy: resolvedSortBy,
-      sortHow: resolvedSortHow,
-    }),
-  );
+  const { list, ...rest } = useListsQuery({
+    type,
+    slug,
+    limit,
+    sortBy: resolvedSortBy,
+    sortHow: resolvedSortHow,
+  });
 
   return {
     ...rest,
