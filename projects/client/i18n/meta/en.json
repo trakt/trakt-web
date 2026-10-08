@@ -6172,6 +6172,14 @@
       "default": "{count} already in {name}",
       "description": "Status line above the title picker. The first variable is how many titles are already in the list, the second is the list name."
     },
+    "button_text_select_all": {
+      "default": "Select all",
+      "description": "Text for the subtle button in the title picker that selects every title of the chosen list that is not in the target list yet."
+    },
+    "button_text_deselect_all": {
+      "default": "Deselect all",
+      "description": "Text for the subtle button in the title picker that clears the selection of every title of the chosen list."
+    },
     "text_titles_selected": {
       "default": "{count} selected",
       "description": "Summary of how many titles are selected in the picker."
@@ -6214,7 +6222,7 @@
     },
     "text_empty_list_add_from_lists": {
       "default": "Nothing here yet. Start with titles you already saved in your other lists.",
-      "description": "Message on an empty collaboration list that suggests adding titles from the other lists of the user."
+      "description": "Message on an empty list the user can add to, which suggests adding titles from the other lists of the user."
     },
     "text_no_titles_to_add": {
       "default": "Nothing to add from this list",

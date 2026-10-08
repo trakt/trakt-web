@@ -7,4 +7,5 @@ export type BulkAddSourceItemsProps = {
   listedKeys: ReadonlySet<string>;
   picks: ReadonlyArray<BulkAddPick>;
   onTogglePick: (pick: BulkAddPick) => void;
+  onToggleAllPicks: (picks: ReadonlyArray<BulkAddPick>) => void;
 };

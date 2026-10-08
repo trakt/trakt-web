@@ -6,14 +6,15 @@ import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts'
 import { listCollaboratorsQuery } from '$lib/requests/queries/lists/listCollaboratorsQuery.ts';
 import { collaborationListsQuery } from '$lib/requests/queries/users/collaborationListsQuery.ts';
 import { combineLatest, map, type Observable } from 'rxjs';
+import { toAddFromListsAccess } from './toAddFromListsAccess.ts';
 
-type UseIsCollaborationListProps = {
+type UseCanAddFromListsProps = {
   list$: Observable<MediaListSummary>;
   userSlug: string;
 };
 
-export function useIsCollaborationList(
-  { list$, userSlug }: UseIsCollaborationListProps,
+export function useCanAddFromLists(
+  { list$, userSlug }: UseCanAddFromListsProps,
 ) {
   const collaborationLists = useAllPagesInfiniteQuery(
     collaborationListsQuery({ slug: userSlug }),
@@ -22,21 +23,24 @@ export function useIsCollaborationList(
     list$.pipe(map(({ id }) => listCollaboratorsQuery({ listId: id }))),
   );
 
-  const isCollaboration = combineLatest([
+  const access = combineLatest([
     list$,
     collaborationLists,
     collaborators,
   ]).pipe(
-    map(([list, $lists, $collaborators]) => {
-      const isCollaborator = ($lists.data?.pages ?? [])
-        .flatMap((page) => page.entries)
-        .some(({ id }) => id === list.id);
-      const isOwnerOfSharedList = list.user.slug === userSlug &&
-        ($collaborators.data ?? []).length > 0;
-
-      return isCollaborator || isOwnerOfSharedList;
-    }),
+    map(([list, $lists, $collaborators]) =>
+      toAddFromListsAccess({
+        isOwner: list.user.slug === userSlug,
+        isCollaborator: ($lists.data?.pages ?? [])
+          .flatMap((page) => page.entries)
+          .some(({ id }) => id === list.id),
+        hasCollaborators: ($collaborators.data ?? []).length > 0,
+      })
+    ),
   );
 
-  return { isCollaboration };
+  return {
+    canAddFromLists: access.pipe(map(({ canAddFromLists }) => canAddFromLists)),
+    isSharedList: access.pipe(map(({ isSharedList }) => isSharedList)),
+  };
 }

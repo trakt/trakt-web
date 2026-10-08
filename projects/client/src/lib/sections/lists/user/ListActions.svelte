@@ -22,7 +22,7 @@
   import ListDetailsDrawerHost from "./_internal/ListDetailsDrawerHost.svelte";
   import ManageCollaboratorsButton from "./_internal/ManageCollaboratorsButton.svelte";
   import ManageCollaboratorsDrawerHost from "./_internal/ManageCollaboratorsDrawerHost.svelte";
-  import { useIsCollaborationList } from "./_internal/bulk-add/useIsCollaborationList";
+  import { useCanAddFromLists } from "./_internal/bulk-add/useCanAddFromLists";
   import ListReorderDrawer from "./ListReorderDrawer.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
@@ -46,7 +46,7 @@
     useLikeList(list),
   );
 
-  const { isCollaboration } = useIsCollaborationList({
+  const { canAddFromLists } = useCanAddFromLists({
     list$: fromRune(() => list),
     userSlug: untrack(() => $user.slug),
   });
@@ -90,9 +90,6 @@
       {#if isOnListPage}
         <ListDetailsButton {list} />
       {/if}
-      {#if $isCollaboration}
-        <AddFromListsButton {list} onClick={() => (showBulkAdd = true)} />
-      {/if}
       {#if isListOwner}
         <ShareButton
           title={list.name}
@@ -104,6 +101,7 @@
           disabled={$isDeleting}
           onclick={() => (showReorderList = true)}
         />
+        <AddFromListsButton {list} onClick={() => (showBulkAdd = true)} />
         <EditListButton
           {list}
           isDeleting={$isDeleting}
@@ -120,6 +118,9 @@
           onDelete={deleteList}
         />
       {:else}
+        {#if $canAddFromLists}
+          <AddFromListsButton {list} onClick={() => (showBulkAdd = true)} />
+        {/if}
         <ReportButton
           params={{ type: ReportableType.List, id: list.id, title: list.name }}
           label={m.button_label_report_list({ name: list.name })}
