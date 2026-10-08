@@ -9,7 +9,16 @@ import { toShareUrl } from '../../../utils/url/toShareUrl.ts';
 type ShareData = {
   title: string;
   url: string;
+  image?: string;
 };
+
+function warmImage(image: string | Nil) {
+  if (!image) {
+    return;
+  }
+
+  fetch(image, { priority: 'low' }).catch(() => undefined);
+}
 
 const IgnoredShareErrors: ReadonlySet<string> = new Set([
   // User dismissed the share sheet.
@@ -32,7 +41,7 @@ export function useShare(source: DrilldownSource) {
     return shareCode;
   };
 
-  const share = async (data: ShareData) => {
+  const share = async ({ image, ...data }: ShareData) => {
     const shareData = {
       ...data,
       url: toShareUrl({ url: data.url, shareCode: currentShareCode() }),
@@ -42,6 +51,8 @@ export function useShare(source: DrilldownSource) {
     if (!isShareable) {
       return;
     }
+
+    warmImage(image);
 
     try {
       await navigator.share(shareData);
