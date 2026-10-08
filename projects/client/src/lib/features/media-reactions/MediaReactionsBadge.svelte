@@ -9,7 +9,10 @@
   import { toTranslatedReaction } from "$lib/utils/formatting/string/toTranslatedReaction.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import type { MediaReactionsBadgeProps } from "./MediaReactionsBadgeProps.ts";
+  import { MAX_MEDIA_REACTIONS } from "./constants.ts";
+  import type { ReactionsSnapshot } from "./_internal/ReactionsSnapshot.ts";
   import ReactionsPopover from "./_internal/ReactionsPopover.svelte";
+  import { useOptimisticReactions } from "./_internal/useOptimisticReactions.svelte.ts";
   import { reactionRoll } from "./_internal/reactionRoll.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { useMediaReaction } from "./stores/useMediaReaction.ts";
@@ -20,9 +23,28 @@
   const { summary, held, isLoading } = useMediaReactions({
     target$: fromRune(() => ({ type, slug, id })),
   });
-  const { react, remove, isReacting } = useMediaReaction();
+  const { react, remove } = useMediaReaction();
 
-  const chosen = $derived([...new Set($held.map((entry) => entry.reaction))]);
+  const live = $derived<ReactionsSnapshot>({
+    held: [...new Set($held.map((entry) => entry.reaction))],
+    distribution: $summary.distribution,
+    totalCount: $summary.totalCount,
+  });
+
+  const reactions = useOptimisticReactions({
+    live: () => live,
+    idsOf: (reaction) =>
+      $held
+        .filter((entry) => entry.reaction === reaction)
+        .map((entry) => entry.id),
+    react: (reaction) => react({ type, slug, reaction }),
+    remove: (ids) => remove({ type, slug, ids }),
+    limit: MAX_MEDIA_REACTIONS,
+  });
+
+  const merged = $derived(reactions.merged);
+
+  const chosen = $derived(merged.chosen);
 
   const ROLL_INTERVAL = time.seconds(2.6);
 
@@ -48,28 +70,22 @@
   const shownIndex = $derived(chosen.at(shown) ? shown : 0);
 
   function selectHandler(reaction: MediaReaction) {
-    const ids = $held
-      .filter((entry) => entry.reaction === reaction)
-      .map((entry) => entry.id);
+    const isAdding = !chosen.includes(reaction);
+    const index = chosen.length;
 
-    if (ids.length > 0) {
-      remove({ type, slug, ids });
-      return;
-    }
-
-    shown = chosen.length;
-    react({ type, slug, reaction });
+    if (!reactions.select(reaction)) return;
+    if (isAdding) shown = index;
   }
 
-  const glyphs = $derived($summary.top);
+  const glyphs = $derived(merged.top);
 
-  const hasRoom = $derived(glyphs.length > 0 || $summary.totalCount > 0);
+  const hasRoom = $derived(glyphs.length > 0 || merged.totalCount > 0);
 </script>
 
 <ReactionsPopover
   {chosen}
-  distribution={$summary.distribution}
-  isLoading={$isLoading || $isReacting}
+  distribution={merged.distribution}
+  isLoading={$isLoading}
   onSelect={selectHandler}
 >
   {#snippet trigger()}
@@ -128,9 +144,9 @@
             {/each}
           </span>
 
-          {#if $summary.totalCount > 0}
+          {#if merged.totalCount > 0}
             <span class="badge-count bold">
-              {toHumanCount($summary.totalCount, getLocale())}
+              {toHumanCount(merged.totalCount, getLocale())}
             </span>
           {/if}
         </span>

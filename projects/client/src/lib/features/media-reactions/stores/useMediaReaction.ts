@@ -8,7 +8,6 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 
 import { reactMediaRequest } from '$lib/requests/queries/media/reactMediaRequest.ts';
 import { removeMediaReactionsRequest } from '$lib/requests/queries/media/removeMediaReactionsRequest.ts';
-import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 
 type MediaTarget = { type: MediaType; slug: string };
 type RemoveParams = MediaTarget & { ids: ReadonlyArray<number> };
@@ -33,24 +32,21 @@ export function useMediaReaction() {
     ],
   }));
 
-  const isReacting = anyTrue([removal.isPending, reaction.isPending]);
-
   const remove = async (params: RemoveParams) => {
-    if (params.ids.length === 0) return;
+    if (params.ids.length === 0) return false;
 
     track({ action: 'remove', type: params.type });
 
-    await removal.mutate(params);
+    return await removal.mutate(params);
   };
 
   const react = async (params: ReactParams) => {
     track({ action: 'add', type: params.type });
 
-    await reaction.mutate(params);
+    return await reaction.mutate(params);
   };
 
   return {
-    isReacting,
     react,
     remove,
   };
