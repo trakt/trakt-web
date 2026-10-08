@@ -1,3 +1,4 @@
+import type { Snippet } from 'svelte';
 import type { AvatarStackProps } from '$lib/components/avatar-stack/AvatarStackProps.ts';
 
 type AvatarPillBaseProps = {
@@ -6,6 +7,7 @@ type AvatarPillBaseProps = {
   label: string;
   caption?: string;
   ariaLabel: string;
+  badge?: Snippet;
 };
 
 type AvatarPillLinkProps = AvatarPillBaseProps & {

@@ -1,10 +1,13 @@
 <script lang="ts">
   import AvatarPill from "$lib/components/avatar-pill/AvatarPill.svelte";
+  import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
+  import { useRecommendedBy } from "../recommended-by/useRecommendedBy.ts";
+  import { toSharedPillState } from "./toSharedPillState.ts";
   import { useSocialActivities } from "./useSocialActivities.ts";
 
   const avatarDisplayLimit = 5;
@@ -27,13 +30,22 @@
     hasNextPage,
   } = useSocialActivities(target$);
 
+  const { recommendedBy } = useRecommendedBy(target$);
+
   const activityCount = $derived($socialEntries.length);
+  const { isShared, isSharedOnly } = $derived(
+    toSharedPillState({ activityCount, recommendedBy: $recommendedBy }),
+  );
   const isInitialLoading = $derived($isLoading && activityCount === 0);
 
   const avatars = $derived(
-    $socialEntries
-      .slice(0, avatarDisplayLimit)
-      .map((entry) => ({ key: entry.key, user: entry.user })),
+    isSharedOnly
+      ? ($recommendedBy?.users ?? [])
+        .slice(0, 1)
+        .map((user) => ({ key: user.key, user }))
+      : $socialEntries
+        .slice(0, avatarDisplayLimit)
+        .map((entry) => ({ key: entry.key, user: entry.user })),
   );
 
   const countLabel = $derived(
@@ -41,16 +53,28 @@
   );
 
   const label = $derived(
-    activityCount === 0
+    isSharedOnly
+      ? m.text_shared_with_you()
+      : activityCount === 0
       ? m.text_no_activity()
       : activityCount === 1
       ? m.text_social_activity()
       : m.text_social_activities(),
   );
 
+  const ariaLabel = $derived(
+    isShared
+      ? m.link_label_view_social_activities_shared({ title })
+      : m.link_label_view_social_activities({ title }),
+  );
+
   const { buildDrawerLink } = summaryDrawerNavigation();
   const drawerLink = $derived(buildDrawerLink(SummaryDrawers.Social));
 </script>
+
+{#snippet sharedBadge()}
+  <ShareIcon />
+{/snippet}
 
 <div class="trakt-social-activities-button-link-wrapper">
   {#if isInitialLoading}
@@ -64,7 +88,8 @@
       {countLabel}
       {label}
       {onclick}
-      ariaLabel={m.link_label_view_social_activities({ title })}
+      {ariaLabel}
+      badge={isShared ? sharedBadge : undefined}
     />
   {:else}
     <AvatarPill
@@ -74,7 +99,8 @@
       href={drawerLink.href}
       noscroll={drawerLink.noscroll}
       replacestate={drawerLink.replacestate}
-      ariaLabel={m.link_label_view_social_activities({ title })}
+      {ariaLabel}
+      badge={isShared ? sharedBadge : undefined}
     />
   {/if}
 </div>
