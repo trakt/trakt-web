@@ -16,7 +16,9 @@
 <div class="trakt-summary-social-row">
   <RenderForFeature flag={FeatureFlag.Reactions}>
     {#snippet enabled()}
-      <MediaReactionsBadge {type} {slug} {id} />
+      {#key `${type}:${slug}`}
+        <MediaReactionsBadge {type} {slug} {id} />
+      {/key}
     {/snippet}
   </RenderForFeature>
 

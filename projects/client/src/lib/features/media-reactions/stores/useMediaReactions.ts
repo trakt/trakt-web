@@ -4,7 +4,6 @@ import { mediaReactionsSummaryQuery } from '$lib/requests/queries/media/mediaRea
 import { userMediaReactionsQuery } from '$lib/requests/queries/users/userMediaReactionsQuery.ts';
 import type { UserMediaReaction } from '$lib/requests/models/UserMediaReaction.ts';
 import { toMediaReactionDistribution } from '$lib/utils/reactions/toMediaReactionDistribution.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map, type Observable } from 'rxjs';
 import type { MediaReactionsTarget } from '$lib/features/media-reactions/MediaReactionsTarget.ts';
 
@@ -39,6 +38,8 @@ export function useMediaReactions(
   return {
     summary: summary.pipe(map(($summary) => $summary.data ?? EMPTY_SUMMARY)),
     held: mine.pipe(map(($mine) => $mine.data ?? [])),
-    isLoading: summary.pipe(map(toLoadingState)),
+    isLoading: summary.pipe(
+      map(($summary) => $summary.isEnabled && $summary.isPending),
+    ),
   };
 }
