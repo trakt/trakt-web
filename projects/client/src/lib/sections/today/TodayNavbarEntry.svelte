@@ -65,7 +65,10 @@
       color="inherit"
     >
       <div class="entry-ring">
+        <span class="entry-glow" aria-hidden="true"></span>
+        <span class="entry-spin" aria-hidden="true"></span>
         <div class="entry-body">
+          <span class="entry-sheen" aria-hidden="true"></span>
           <div class="entry-posters">
             {#each posters as poster (poster.key)}
               <div class="entry-poster">
@@ -110,6 +113,7 @@
 
     .entry-ring {
       position: relative;
+      isolation: isolate;
 
       display: inline-flex;
       box-sizing: border-box;
@@ -120,7 +124,91 @@
       background: var(--entry-ring);
     }
 
+    .entry-glow,
+    .entry-spin,
+    .entry-sheen {
+      display: none;
+      pointer-events: none;
+    }
+
+    &[data-seen="false"] {
+      .entry-ring {
+        background: none;
+      }
+
+      .entry-glow {
+        display: block;
+        position: absolute;
+        inset: calc(-1 * var(--ni-2));
+        z-index: -1;
+
+        border-radius: inherit;
+        background: var(--entry-ring);
+        filter: blur(var(--ni-8));
+        opacity: 0.35;
+
+        animation: today-entry-breathe calc(var(--transition-duration-short) * 12)
+          ease-in-out infinite alternate;
+      }
+
+      .entry-spin,
+      .entry-sheen {
+        display: block;
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+
+        border-radius: inherit;
+      }
+
+      .entry-spin {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 150%;
+          aspect-ratio: 1;
+
+          background: var(--entry-ring);
+          transform: translate(-50%, -50%);
+          animation: today-entry-spin calc(var(--transition-duration-short) * 30)
+            linear infinite;
+        }
+      }
+
+      .entry-sheen {
+        &::before {
+          content: "";
+          position: absolute;
+          inset-block: 0;
+          left: 0;
+          width: 40%;
+
+          background: linear-gradient(
+            100deg,
+            transparent,
+            color-mix(in srgb, var(--purple-200) 30%, transparent),
+            transparent
+          );
+          transform: translateX(-120%);
+
+          animation: today-entry-sheen calc(var(--transition-duration-short) * 20)
+            ease-in-out calc(var(--transition-duration-short) * 3) 3;
+        }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .entry-glow,
+      .entry-spin::before,
+      .entry-sheen::before {
+        animation: none;
+      }
+    }
+
     .entry-body {
+      position: relative;
       display: flex;
       align-items: center;
       gap: var(--gap-xs);
@@ -219,6 +307,31 @@
 
         border: var(--border-thickness-xs) solid var(--color-background);
       }
+    }
+  }
+
+  @keyframes today-entry-spin {
+    to {
+      transform: translate(-50%, -50%) rotate(1turn);
+    }
+  }
+
+  @keyframes today-entry-breathe {
+    from {
+      opacity: 0.25;
+    }
+    to {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes today-entry-sheen {
+    0%,
+    70% {
+      transform: translateX(-120%);
+    }
+    100% {
+      transform: translateX(300%);
     }
   }
 </style>
