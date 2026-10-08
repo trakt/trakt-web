@@ -69,6 +69,7 @@
         title={m.header_media_reactions()}
         order="ranked"
         pageSize={DISTRIBUTION_PAGE_SIZE}
+        format="share"
         onRemove={onSelect}
       />
     </div>
