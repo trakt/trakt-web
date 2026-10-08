@@ -36,6 +36,7 @@
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ShareArrival from "$lib/features/share-arrival/ShareArrival.svelte";
   import SpotlightProvider from "$lib/features/spotlight/SpotlightProvider.svelte";
+  import EasterEggGameHost from "$lib/features/easter-egg/EasterEggGameHost.svelte";
   import SeasonalFlair from "$lib/features/theme/components/SeasonalFlair.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import { initializeSeasonalThemes } from "$lib/features/theme/initializeSeasonalThemes.js";
@@ -158,6 +159,10 @@
 
                                             <RenderFor audience="authenticated">
                                               <SmartListNudgePill />
+                                            </RenderFor>
+
+                                            <RenderFor audience="authenticated">
+                                              <EasterEggGameHost />
                                             </RenderFor>
 
                                             <LoginErrorSnackbar />
