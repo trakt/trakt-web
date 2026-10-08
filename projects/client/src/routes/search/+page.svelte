@@ -117,6 +117,10 @@
     @include for-desktop {
       padding-top: var(--results-clearance);
     }
+
+    @include for-tablet-sm-and-below {
+      padding-top: var(--gap-s);
+    }
   }
 
   .trakt-search-container {
