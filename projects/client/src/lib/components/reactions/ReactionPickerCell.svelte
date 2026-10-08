@@ -17,17 +17,34 @@
   const isDisabled = $derived(
     !isChosen && limit != null && chosen.length >= limit,
   );
+
+  let isPressed = $state(false);
+
+  function pressHandler() {
+    isPressed = false;
+    requestAnimationFrame(() => (isPressed = true));
+
+    onSelect(option.id);
+  }
+
+  function animationEndHandler(event: AnimationEvent) {
+    if (!event.animationName.endsWith("reaction-press")) return;
+
+    isPressed = false;
+  }
 </script>
 
 <div
   class="picker-cell"
   class:is-chosen={isChosen}
   class:is-large={size === "large"}
+  class:is-pressed={isPressed}
   style="--reaction-index: {index}"
+  onanimationend={animationEndHandler}
 >
   <ActionButton
     label={m.button_label_react({ reaction: option.label })}
-    onclick={() => onSelect(option.id)}
+    onclick={pressHandler}
     disabled={isDisabled}
     style="ghost"
   >
@@ -44,6 +61,10 @@
   @use "$style/scss/mixins/index" as *;
 
   .picker-cell {
+    &.is-pressed :global(.trakt-reaction-emoji-container) {
+      animation: reaction-press calc(var(--transition-increment) * 2) ease-out;
+    }
+
     &.is-large {
       --reaction-emoji-box: var(--ni-36);
       --reaction-emoji-size: var(--ni-28);
@@ -85,4 +106,18 @@
         background-color: var(--color-current-reaction-hover);
       }
     }
-  }</style>
+  }
+  @keyframes reaction-press {
+    30% {
+      transform: scale(0.8);
+    }
+
+    65% {
+      transform: scale(1.2);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+</style>
