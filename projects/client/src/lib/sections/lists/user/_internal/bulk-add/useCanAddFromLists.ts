@@ -1,7 +1,4 @@
-import {
-  useAllPagesInfiniteQuery,
-  useQuery,
-} from '$lib/features/query/useQuery.ts';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import { listCollaboratorsQuery } from '$lib/requests/queries/lists/listCollaboratorsQuery.ts';
 import { collaborationListsQuery } from '$lib/requests/queries/users/collaborationListsQuery.ts';
@@ -16,7 +13,7 @@ type UseCanAddFromListsProps = {
 export function useCanAddFromLists(
   { list$, userSlug }: UseCanAddFromListsProps,
 ) {
-  const collaborationLists = useAllPagesInfiniteQuery(
+  const collaborationLists = useQuery(
     collaborationListsQuery({ slug: userSlug }),
   );
   const collaborators = useQuery(
@@ -31,9 +28,7 @@ export function useCanAddFromLists(
     map(([list, $lists, $collaborators]) =>
       toAddFromListsAccess({
         isOwner: list.user.slug === userSlug,
-        isCollaborator: ($lists.data?.pages ?? [])
-          .flatMap((page) => page.entries)
-          .some(({ id }) => id === list.id),
+        isCollaborator: ($lists.data ?? []).some(({ id }) => id === list.id),
         hasCollaborators: ($collaborators.data ?? []).length > 0,
       })
     ),
