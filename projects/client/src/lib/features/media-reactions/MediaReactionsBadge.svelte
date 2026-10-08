@@ -93,25 +93,31 @@
               </span>
             {/key}
           </span>
-          {#if chosen.length > 1}
-            <span class="mine-dots" aria-hidden="true">
-              {#each chosen as reaction, index (reaction)}
-                <span class="mine-dot" class:is-shown={index === shownIndex}></span>
-              {/each}
-            </span>
-          {/if}
         {:else}
           <ReactionIcon state="add" />
         {/if}
       </span>
 
-      {#if hasRoom}
+      {#if hasRoom || chosen.length > 1}
         <span
-          class="badge-hairline"
+          class="badge-divider"
           class:has-icon-before={chosen.length === 0}
           aria-hidden="true"
-        ></span>
+        >
+          {#if chosen.length > 1}
+            <span class="mine-dots">
+              {#each chosen as reaction, index (reaction)}
+                <span class="mine-dot" class:is-shown={index === shownIndex}
+                ></span>
+              {/each}
+            </span>
+          {:else}
+            <span class="badge-hairline"></span>
+          {/if}
+        </span>
+      {/if}
 
+      {#if hasRoom}
         <span class="badge-room">
           <span class="badge-glyphs" aria-hidden="true">
             {#each glyphs as reaction (reaction)}
@@ -190,6 +196,23 @@
     color: var(--color-text-primary);
   }
 
+  .badge-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--ni-8);
+    align-self: stretch;
+  }
+
+  .badge-divider.has-icon-before {
+    margin-inline-end: var(--ni-2);
+  }
+
+  .badge-divider:not(.has-icon-before) {
+    margin-inline-start: var(--ni-3);
+  }
+
   .badge-hairline {
     width: var(--border-thickness-xxs);
     height: var(--ni-20);
@@ -197,20 +220,10 @@
     background: var(--color-border);
   }
 
-  .badge-hairline.has-icon-before {
-    margin-inline-end: var(--ni-2);
-  }
-
-  .badge-hairline:not(.has-icon-before) {
-    margin-inline-start: var(--ni-3);
-  }
-
   .badge-mine {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    align-self: stretch;
 
     --reaction-emoji-box: var(--ni-18);
 
@@ -229,12 +242,8 @@
   }
 
   .mine-dots {
-    position: absolute;
-    inset-block-end: 0;
-    inset-inline: 0;
-
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: var(--ni-2);
   }
 
