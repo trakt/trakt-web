@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450"
+  viewBox="0 0 300 450">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="70%">
+      <stop offset="0" stop-color="#7a1f9e" />
+      <stop offset="0.45" stop-color="#2a0b33" />
+      <stop offset="1" stop-color="#0b080d" />
+    </radialGradient>
+    <radialGradient id="blood" cx="50%" cy="100%" r="60%">
+      <stop offset="0" stop-color="#a3132a" stop-opacity="0.55" />
+      <stop offset="1" stop-color="#a3132a" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="300" height="450" fill="url(#glow)" />
+  <rect width="300" height="450" fill="url(#blood)" />
+  <circle cx="150" cy="180" r="58" fill="#f4f1f6" />
+  <text x="150" y="196" text-anchor="middle"
+    font-family="Impact, 'Arial Narrow', sans-serif" font-size="46"
+    font-weight="900" fill="#0b080d">VS</text>
+  <path d="M150 62 L186 104 L114 104 Z" fill="#4fd38a" />
+  <path d="M150 298 L186 256 L114 256 Z" fill="#e2384f" />
+  <text x="24" y="370" font-family="Impact, 'Arial Narrow', sans-serif"
+    font-size="54" font-weight="900" fill="#f4f1f6">RATED</text>
+  <text x="24" y="424" font-family="Impact, 'Arial Narrow', sans-serif"
+    font-size="54" font-weight="900"
+    fill="#f4f1f6">HIGHER<tspan fill="#c26ce8">?</tspan></text>
+</svg>
