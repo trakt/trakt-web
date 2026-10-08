@@ -342,7 +342,8 @@
 
     &.is-bar-pinned {
       --calendar-sticky-top: calc(
-        var(--calendar-bar-top) + var(--calendar-bar-height)
+        var(--calendar-bar-top) + var(--calendar-bar-height) -
+          var(--border-thickness-xxs)
       );
     }
   }
@@ -370,6 +371,11 @@
 
     background-color: var(--color-background);
 
+    @include for-tablet-sm-and-below {
+      gap: var(--gap-s);
+      padding-bottom: var(--gap-xs);
+    }
+
     .is-docked & {
       --page-top-offset: calc(var(--gap-m) + env(safe-area-inset-top, 0px));
 
@@ -396,25 +402,6 @@
       background-color: var(--color-background);
     }
 
-    &::after {
-      content: "";
-      position: absolute;
-      inset-inline: 0;
-      top: 100%;
-
-      height: var(--ni-16);
-
-      background: linear-gradient(
-        to bottom,
-        var(--color-background),
-        transparent
-      );
-      pointer-events: none;
-    }
-
-    .is-docked &::after {
-      display: none;
-    }
 
     :global(.calendar-month-poster) {
       place-self: center;

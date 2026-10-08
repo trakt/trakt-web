@@ -62,8 +62,8 @@
     &.is-today .day-number {
       color: var(--shade-10);
       background-color: var(--color-day-header-accent);
-      box-shadow: 0 0 var(--ni-16)
-        color-mix(in srgb, var(--color-day-header-accent) 55%, transparent);
+      box-shadow: 0 0 var(--ni-4)
+        color-mix(in srgb, var(--color-day-header-accent) 40%, transparent);
     }
 
     &[data-variant="column"] {
@@ -137,6 +137,22 @@
 
       .item-count {
         margin-inline-start: auto;
+      }
+
+      @include for-tablet-sm-and-below {
+        padding-block: var(--gap-xs);
+
+        .day-number {
+          min-width: var(--ni-28);
+          height: var(--ni-28);
+          border-radius: var(--border-radius-s);
+
+          font-size: var(--ni-16);
+        }
+
+        .month {
+          display: none;
+        }
       }
     }
   }
