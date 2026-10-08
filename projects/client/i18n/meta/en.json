@@ -3901,6 +3901,15 @@
         }
       }
     },
+    "button_label_remove_reaction": {
+      "default": "Remove {reaction}",
+      "description": "Aria-label for your own reaction in the reaction counts, which removes it when pressed.",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
+    },
     "tag_text_movies": {
       "default": "Movies",
       "description": "Text for the tag that indicates a movie."

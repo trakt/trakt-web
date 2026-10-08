@@ -55,7 +55,11 @@
 </script>
 
 {#if reacted.length > 0}
-  <div class="popover-ranking" class:is-folded={isExpanded}>
+  <div
+    class="popover-ranking"
+    class:is-folded={isExpanded}
+    inert={isExpanded}
+  >
     <div class="popover-ranking-body">
       <ReactionsDistribution
         reactions={reacted}
@@ -65,6 +69,7 @@
         title={m.header_media_reactions()}
         order="ranked"
         pageSize={DISTRIBUTION_PAGE_SIZE}
+        onRemove={onSelect}
       />
     </div>
   </div>
