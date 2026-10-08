@@ -1,14 +1,12 @@
 <script lang="ts" generics="T extends AnyReaction">
   import type { AnyReaction } from "$lib/requests/models/AnyReaction.ts";
-  import { getLocale } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import { toTranslatedReaction } from "$lib/utils/formatting/string/toTranslatedReaction.ts";
   import ReactionEmoji from "$lib/components/reactions/ReactionEmoji.svelte";
   import { REACTIONS_CODE_MAP } from "./constants.ts";
   import type { ReactionDetailsProps } from "./ReactionDetailsProps.ts";
 
-  const { reaction, count, isCurrent, index, onRemove }: ReactionDetailsProps<T> =
+  const { reaction, value, isCurrent, index, onRemove }: ReactionDetailsProps<T> =
     $props();
 
   const label = $derived(toTranslatedReaction(reaction));
@@ -21,7 +19,7 @@
     animation={isCurrent ? "infinite" : "none"}
     {index}
   />
-  <p class="bold">{toHumanNumber(count, getLocale())}</p>
+  <p class="bold">{value}</p>
 {/snippet}
 
 {#if isCurrent && onRemove}
@@ -49,6 +47,8 @@
     gap: var(--gap-xs);
 
     min-width: var(--ni-66);
+
+    --reaction-emoji-box: var(--ni-18);
     height: var(--ni-30);
 
     color: var(--color-foreground);

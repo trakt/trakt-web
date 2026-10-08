@@ -3,7 +3,10 @@
   import ReactionIcon from "$lib/components/icons/ReactionIcon.svelte";
   import type { AnyReaction } from "$lib/requests/models/AnyReaction.ts";
   import { slide } from "svelte/transition";
+  import { getLocale } from "$lib/features/i18n/index.ts";
   import { chunk } from "$lib/utils/array/chunk.ts";
+  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
+  import { toReactionShare } from "$lib/utils/reactions/toReactionShare.ts";
   import ReactionDetails from "./ReactionDetails.svelte";
   import type { ReactionsDistributionProps } from "./ReactionsDistributionProps.ts";
 
@@ -16,9 +19,19 @@
     order = "canonical",
     pageSize,
     onRemove,
+    format = "count",
   }: ReactionsDistributionProps<T> = $props();
 
   const countOf = (reaction: T) => distribution?.[reaction] ?? 0;
+
+  const total = $derived(
+    reactions.reduce((sum, reaction) => sum + countOf(reaction), 0),
+  );
+
+  const valueOf = (reaction: T) =>
+    format === "share"
+      ? toReactionShare({ count: countOf(reaction), total, locale: getLocale() })
+      : toHumanNumber(countOf(reaction), getLocale());
 
   const ordered = $derived(
     order === "canonical"
@@ -38,7 +51,7 @@
     {#each page as reaction, index (reaction)}
       <ReactionDetails
         {reaction}
-        count={countOf(reaction)}
+        value={valueOf(reaction)}
         isCurrent={current.includes(reaction)}
         {onRemove}
         {index}
@@ -115,7 +128,7 @@
     display: grid;
 
     grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(max-content, 1fr));
 
     row-gap: var(--ni-12);
     column-gap: var(--ni-4);
