@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="T extends AnyReaction">
   import SwipeCarousel from "$lib/components/carousel/SwipeCarousel.svelte";
   import ReactionIcon from "$lib/components/icons/ReactionIcon.svelte";
   import type { AnyReaction } from "$lib/requests/models/AnyReaction.ts";
@@ -15,9 +15,10 @@
     title,
     order = "canonical",
     pageSize,
-  }: ReactionsDistributionProps = $props();
+    onRemove,
+  }: ReactionsDistributionProps<T> = $props();
 
-  const countOf = (reaction: AnyReaction) => distribution?.[reaction] ?? 0;
+  const countOf = (reaction: T) => distribution?.[reaction] ?? 0;
 
   const ordered = $derived(
     order === "canonical"
@@ -32,13 +33,14 @@
   });
 </script>
 
-{#snippet grid(page: ReadonlyArray<AnyReaction>)}
+{#snippet grid(page: ReadonlyArray<T>)}
   <div class="trakt-reactions">
     {#each page as reaction, index (reaction)}
       <ReactionDetails
         {reaction}
         count={countOf(reaction)}
         isCurrent={current.includes(reaction)}
+        {onRemove}
         {index}
       />
     {/each}

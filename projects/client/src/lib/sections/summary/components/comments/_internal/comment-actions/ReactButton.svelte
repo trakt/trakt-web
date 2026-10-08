@@ -74,6 +74,7 @@
           reactions={reactionsSchema.options}
           distribution={$summary.distribution}
           current={chosen}
+          onRemove={reactionHandler}
           isLoading={$isReacting}
           title={m.header_comment_reactions()}
         />
