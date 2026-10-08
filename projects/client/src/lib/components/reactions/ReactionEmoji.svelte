@@ -95,8 +95,8 @@
     height: var(--reaction-emoji-box, var(--ni-24));
 
     :global(img) {
-      width: var(--ni-18);
-      height: var(--ni-18);
+      width: var(--reaction-emoji-size, var(--ni-18));
+      height: var(--reaction-emoji-size, var(--ni-18));
     }
   }
 
