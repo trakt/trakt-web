@@ -67,7 +67,7 @@ export const YirPersonaResultSchema = z.object({
   scores: z.record(YirPersonaIdSchema, z.number()),
   streak: z.object({
     longest: z.number(),
-    startedAt: z.coerce.date(),
+    startedAt: z.coerce.date().nullable(),
   }),
   monthly: z.object({
     month: z.number(),
