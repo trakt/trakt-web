@@ -238,6 +238,7 @@
   "button_label_remove_from_watchlist": "أزِل \"{title}\" من قائمة المشاهدة",
   "button_label_remove_gif": "إزالة صورة GIF",
   "button_label_remove_photo": "إزالة صورة ملفك الشخصي",
+  "button_label_remove_reaction": "إزالة {reaction}",
   "button_label_renew_vip": "تجديد الاشتراك",
   "button_label_reorder_item": "إعادة ترتيب {title}",
   "button_label_reorder_list": "إعادة ترتيب {name}",

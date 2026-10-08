@@ -238,6 +238,7 @@
   "button_label_remove_from_watchlist": "Удалить \"{title}\" из списка просмотра",
   "button_label_remove_gif": "Удалить GIF",
   "button_label_remove_photo": "Удалить ваше фото профиля",
+  "button_label_remove_reaction": "Удалить {reaction}",
   "button_label_renew_vip": "Продлить подписку",
   "button_label_reorder_item": "Переупорядочить {title}",
   "button_label_reorder_list": "Переупорядочить {name}",

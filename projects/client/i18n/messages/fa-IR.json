@@ -238,6 +238,7 @@
   "button_label_remove_from_watchlist": "\" {title} \" را از لیست تماشای خود حذف کنید",
   "button_label_remove_gif": "حذف گیف",
   "button_label_remove_photo": "حذف عکس پروفایل شما",
+  "button_label_remove_reaction": "حذف {reaction}",
   "button_label_renew_vip": "تمدید اشتراک",
   "button_label_reorder_item": "مرتب سازی {title}",
   "button_label_reorder_list": "مرتب سازی {name}",

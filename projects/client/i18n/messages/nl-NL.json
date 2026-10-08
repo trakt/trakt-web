@@ -238,6 +238,7 @@
   "button_label_remove_from_watchlist": "\"{title}\" van je kijklijst verwijderen",
   "button_label_remove_gif": "Verwijder GIF",
   "button_label_remove_photo": "Verwijder je profielfoto",
+  "button_label_remove_reaction": "Verwijder {reaction}",
   "button_label_renew_vip": "Abonnement verlengen",
   "button_label_reorder_item": "Herschik {title}",
   "button_label_reorder_list": "Herschik {name}",

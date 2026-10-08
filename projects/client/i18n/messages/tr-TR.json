@@ -238,6 +238,7 @@
   "button_label_remove_from_watchlist": "\"{title}\" İzleme Listenizden kaldır",
   "button_label_remove_gif": "GIF'i Kaldır",
   "button_label_remove_photo": "Profil fotoğrafınızı kaldır",
+  "button_label_remove_reaction": "{reaction}'ı Kaldır",
   "button_label_renew_vip": "Aboneliği Yenile",
   "button_label_reorder_item": "{title} listesini yeniden sırala",
   "button_label_reorder_list": "{name} listesini yeniden sırala",

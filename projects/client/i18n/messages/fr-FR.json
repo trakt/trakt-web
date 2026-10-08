@@ -238,6 +238,7 @@
   "button_label_remove_from_watchlist": "Retirer \"{title}\" de votre liste de suivi",
   "button_label_remove_gif": "Supprimer le GIF",
   "button_label_remove_photo": "Retirer votre photo de profil",
+  "button_label_remove_reaction": "Supprimer {reaction}",
   "button_label_renew_vip": "Renouveler l'abonnement",
   "button_label_reorder_item": "Réorganiser {title}",
   "button_label_reorder_list": "Réorganiser {name}",

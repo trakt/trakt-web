@@ -238,6 +238,7 @@
   "button_label_remove_from_watchlist": "Fjern \"{title}\" fra din Huskeliste",
   "button_label_remove_gif": "Fjern GIF",
   "button_label_remove_photo": "Fjern dit profilfoto",
+  "button_label_remove_reaction": "Fjern {reaction}",
   "button_label_renew_vip": "Forny abonnement",
   "button_label_reorder_item": "Omarranger {title}",
   "button_label_reorder_list": "Omarranger {name}",

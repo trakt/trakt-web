@@ -238,6 +238,7 @@
   "button_label_remove_from_watchlist": "Hapus \"{title}\" dari Daftar Tontonan Anda",
   "button_label_remove_gif": "Hapus GIF",
   "button_label_remove_photo": "Hapus foto profil Anda",
+  "button_label_remove_reaction": "Hapus {reaction}",
   "button_label_renew_vip": "Perbarui Langganan",
   "button_label_reorder_item": "Susun ulang {title}",
   "button_label_reorder_list": "Susun ulang {name}",

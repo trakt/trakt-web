@@ -238,6 +238,7 @@
   "button_label_remove_from_watchlist": "\"{title}\" von Ihrer Merkliste entfernen",
   "button_label_remove_gif": "GIF entfernen",
   "button_label_remove_photo": "Ihr Profilfoto entfernen",
+  "button_label_remove_reaction": "{reaction} entfernen",
   "button_label_renew_vip": "Abonnement erneuern",
   "button_label_reorder_item": "{title} neu anordnen",
   "button_label_reorder_list": "{name} neu anordnen",
