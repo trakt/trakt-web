@@ -35,6 +35,7 @@
     watchedBySeason: ReadonlyMap<number, ReadonlySet<number>>;
     isWatchedLoading: boolean;
     isCurrentEpisode?: boolean;
+    isConcealed?: boolean;
     style?: BaseItemProps["style"];
     source: string;
     urlOverride?: CardUrlOverride;
@@ -55,6 +56,7 @@
     watchedBySeason,
     isWatchedLoading,
     isCurrentEpisode = false,
+    isConcealed = false,
     style,
     source,
     urlOverride,
@@ -204,6 +206,7 @@
   }}
   class="trakt-season-episode-item"
   class:is-current-episode={isCurrentEpisode}
+  data-concealed={isConcealed}
   aria-current={isCurrentEpisode ? "page" : undefined}
 >
   {@render episodeItem()}
@@ -220,6 +223,15 @@
 {/if}
 
 <style lang="scss">
+  .trakt-season-episode-item {
+    transition: opacity var(--transition-increment) ease-in-out;
+
+    &[data-concealed="true"]:not(:focus-within) {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
   /*
     Marks the episode currently open in the drawer. The ring reuses the token
     behind the hover and d-pad focus rings, and the title switches to the

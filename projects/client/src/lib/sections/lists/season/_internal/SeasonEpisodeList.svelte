@@ -111,6 +111,10 @@
     isLargeScreen && !hasMoved ? windowStart : undefined,
   );
 
+  const concealBefore = $derived(
+    initialIndex == null ? 0 : (episodes.at(initialIndex)?.number ?? 0),
+  );
+
   const hidden = $derived(
     isLargeScreen
       ? getHiddenEpisodeCounts({ total: episodes.length, range: visibleRange })
@@ -157,6 +161,7 @@
   {title}
   {subtitle}
   --list-inset-top={isLargeScreen && hasMoved ? "var(--ni-28)" : undefined}
+  --list-end-spacer={isLargeScreen ? '""' : undefined}
   --height-list={mediaListHeightResolver("landscape")}
   drilldown={{
     ...seasonDrawerLink,
@@ -174,6 +179,7 @@
       watchedBySeason={$watchedBySeason}
       isWatchedLoading={$isWatchedLoading}
       isCurrentEpisode={episode.number === activeEpisode}
+      isConcealed={episode.number < concealBefore}
       urlOverride={buildEpisodeDrawerLink({
         season: episode.season,
         episode: episode.number,

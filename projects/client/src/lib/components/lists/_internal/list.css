@@ -3,6 +3,12 @@
   padding: 0 var(--layout-distance-side);
 }
 
+.trakt-list-item-container::after {
+  content: var(--list-end-spacer, none);
+  flex: none;
+  width: 0;
+}
+
 .section-list-empty-state:has(.trakt-skeleton-list) {
   padding-inline-end: 0;
   padding-inline-start: 0;
