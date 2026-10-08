@@ -12979,6 +12979,74 @@
     "text_year_in_review_banner_tagline": {
       "default": "Twelve personas. One of them is you.",
       "description": "Tagline under the Year in Review banner title. Year in Review assigns the user one of twelve viewing personas."
+    },
+    "header_game_rated_higher": {
+      "default": "Rated Higher?",
+      "description": "Title of the hidden \"Rated Higher?\" guessing game, opened by searching for \"I want to play a game\". Players guess if the next title has a higher or lower Trakt rating."
+    },
+    "text_game_intro_hello": {
+      "default": "Hello.",
+      "description": "First line typed out on the intro screen of the hidden \"Rated Higher?\" game. A nod to the Saw films."
+    },
+    "text_game_intro_play": {
+      "default": "I want to play a game.",
+      "description": "Second line typed out on the intro screen of the hidden \"Rated Higher?\" game. A nod to the Saw films."
+    },
+    "text_game_intro_again": {
+      "default": "Again?",
+      "description": "Typed out on the intro screen when the player restarts the hidden \"Rated Higher?\" game."
+    },
+    "button_text_game_higher": {
+      "default": "Higher",
+      "description": "Button in the hidden \"Rated Higher?\" game to guess that the next title has a higher Trakt rating."
+    },
+    "button_text_game_lower": {
+      "default": "Lower",
+      "description": "Button in the hidden \"Rated Higher?\" game to guess that the next title has a lower Trakt rating."
+    },
+    "label_game_streak": {
+      "default": "Streak",
+      "description": "Label for the number of correct guesses in a row in the hidden \"Rated Higher?\" game."
+    },
+    "label_game_best": {
+      "default": "Best",
+      "description": "Label for the player's best streak in the hidden \"Rated Higher?\" game."
+    },
+    "text_game_versus": {
+      "default": "VS",
+      "description": "Short \"versus\" badge between the two titles compared in the hidden \"Rated Higher?\" game."
+    },
+    "text_game_reveal": {
+      "default": "{title} is rated {rating}",
+      "description": "Announced to screen readers when the rating of a title is revealed in the hidden \"Rated Higher?\" game. Rating is a percentage."
+    },
+    "text_game_spoiler": {
+      "default": "Spoiler: {title} is rated {rating}",
+      "description": "Shown on the game over screen of the hidden \"Rated Higher?\" game, revealing the rating the player guessed wrong. Rating is a percentage."
+    },
+    "text_game_new_best": {
+      "default": "New best",
+      "description": "Shown on the game over screen of the hidden \"Rated Higher?\" game when the player beat their best streak."
+    },
+    "text_game_best": {
+      "default": "Best {count}",
+      "description": "Shown on the game over screen of the hidden \"Rated Higher?\" game with the player's best streak."
+    },
+    "button_text_game_play_again": {
+      "default": "Play again",
+      "description": "Button on the game over screen of the hidden \"Rated Higher?\" game to start a new run."
+    },
+    "button_text_game_close": {
+      "default": "Close",
+      "description": "Button on the game over screen of the hidden \"Rated Higher?\" game to close the game and go back to search."
+    },
+    "text_game_load_error": {
+      "default": "Couldn't load titles. Check your connection and try again.",
+      "description": "Shown when the titles for the hidden \"Rated Higher?\" game fail to load."
+    },
+    "text_game_hint_swipe": {
+      "default": "Swipe up for higher, down for lower",
+      "description": "Hint at the bottom of the hidden \"Rated Higher?\" game on touch devices."
     }
   }
 }
