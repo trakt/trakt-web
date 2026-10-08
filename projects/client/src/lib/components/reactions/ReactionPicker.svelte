@@ -1,14 +1,11 @@
 <script lang="ts" generics="T extends string">
-  import { tick } from "svelte";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
-  import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import ReactionEmoji from "./ReactionEmoji.svelte";
   import type { ReactionPickerOption } from "./ReactionPickerOption.ts";
   import type { ReactionPickerProps } from "./ReactionPickerProps.ts";
-  import { matchesReactionSearch } from "./matchesReactionSearch.ts";
 
   const {
     options,
@@ -17,8 +14,8 @@
     onClose,
     quickCount,
     limit,
-    isSearching = false,
-    onToggleSearch,
+    isExpanded = false,
+    onToggleExpanded,
   }: ReactionPickerProps<T> = $props();
 
   const isAtLimit = $derived(limit != null && chosen.length >= limit);
@@ -26,35 +23,19 @@
   const isSplit = $derived(quickCount != null && options.length > quickCount);
 
   const quick = $derived(isSplit ? options.slice(0, quickCount) : options);
-
-  let query = $state("");
-  let queryInput = $state<HTMLInputElement>();
-
-  async function toggleSearch() {
-    const willSearch = !isSearching;
-    onToggleSearch?.();
-
-    if (!willSearch) return;
-
-    await tick();
-    queryInput?.focus({ preventScroll: true });
-  }
-
-  const results = $derived(
-    options.filter((option) => matchesReactionSearch(option, query)),
-  );
+  const rest = $derived(isSplit ? options.slice(quickCount) : []);
 </script>
 
 {#snippet modeToggle()}
   <div class="picker-toggle">
     <ActionButton
-      label={isSearching
+      label={isExpanded
         ? m.button_label_quick_reactions()
         : m.button_label_more_reactions()}
-      onclick={toggleSearch}
+      onclick={onToggleExpanded}
       style="ghost"
     >
-      <span class="toggle-icon" class:is-open={isSearching}>
+      <span class="toggle-icon" class:is-open={isExpanded}>
         <PlusIcon />
       </span>
     </ActionButton>
@@ -87,32 +68,19 @@
 <div
   class="trakt-reaction-picker"
   class:is-split={isSplit}
-  class:is-searching={isSearching}
+  class:is-expanded={isExpanded}
   style:--picker-columns={isSplit ? quick.length + 1 : null}
 >
   {#if isSplit}
-    <div class="picker-search" inert={!isSearching}>
-      <div class="picker-search-body">
-        <label class="picker-field">
-          <SearchIcon />
-          <input
-            type="text"
-            bind:this={queryInput}
-            bind:value={query}
-            placeholder={m.input_placeholder_search_reactions()}
-            aria-label={m.input_placeholder_search_reactions()}
-          />
-        </label>
-
-        {#if results.length > 0}
+    <div class="picker-more" inert={!isExpanded}>
+      <div class="picker-more-body">
+        <div class="picker-more-card">
           <div class="picker-row is-wrapping">
-            {#each results as option, index (option.id)}
+            {#each rest as option, index (option.id)}
               {@render reactionButton(option, index)}
             {/each}
           </div>
-        {:else}
-          <p class="picker-empty secondary">{m.reactions_search_empty()}</p>
-        {/if}
+        </div>
       </div>
     </div>
   {/if}
@@ -145,9 +113,9 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-reaction-picker {
-    /* The quick row and the search grid share one set of columns - the quick
+    /* The quick row and the full grid share one set of columns - the quick
        reactions plus the toggle - spread to the panel's edges, so every column
-       of results sits under one in the row. */
+       below sits under one in the row. */
     &.is-split :is(.picker-quick, .picker-row.is-wrapping) {
       display: grid;
       grid-template-columns: repeat(var(--picker-columns), var(--ni-40));
@@ -192,7 +160,7 @@
     align-items: center;
   }
 
-  .picker-search {
+  .picker-more {
     display: grid;
     grid-template-rows: 0fr;
     opacity: 0;
@@ -202,30 +170,29 @@
         cubic-bezier(0.22, 1, 0.36, 1),
       opacity var(--transition-increment) ease-out;
 
-    .is-searching & {
+    .is-expanded & {
       grid-template-rows: 1fr;
       opacity: 1;
     }
   }
 
-  .picker-search-body {
+  .picker-more-body {
     min-height: 0;
     overflow: hidden;
 
     margin-inline: calc(-1 * var(--ni-4));
-    padding-inline: var(--ni-4);
+  }
 
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
+  .picker-more-card {
+    margin-block: 0 var(--ni-12);
+    padding: var(--ni-8) var(--ni-4) 0;
 
-    > :global(*) {
-      flex-shrink: 0;
+    :global([data-popup-position="bottom"]) & {
+      margin-block: var(--ni-12) 0;
     }
 
-    > :first-child {
-      margin-block-start: var(--ni-12);
-    }
+    background: var(--color-reaction-distribution-background);
+    border-radius: var(--border-radius-xxl);
   }
 
   .picker-toggle :global(.trakt-action-button) {
@@ -250,7 +217,7 @@
     &.is-wrapping {
       flex-wrap: wrap;
 
-      height: var(--ni-104);
+      height: var(--ni-152);
       align-content: flex-start;
       overflow-y: auto;
 
@@ -321,55 +288,5 @@
         background-color: var(--color-current-reaction-hover);
       }
     }
-  }
-
-  .picker-field {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xs);
-
-    box-sizing: border-box;
-    height: var(--ni-36);
-    padding-inline: var(--ni-12);
-
-    border-radius: var(--border-radius-xxl);
-    background-color: color-mix(
-      in srgb,
-      var(--color-foreground) 7%,
-      transparent
-    );
-    box-shadow: inset 0 0 0 var(--border-thickness-xxs) var(--color-border);
-
-    :global(svg) {
-      flex-shrink: 0;
-      color: var(--color-text-secondary);
-    }
-
-    input {
-      all: unset;
-
-      min-width: 0;
-      flex: 1;
-
-      font-size: var(--font-size-text);
-      color: var(--color-text-primary);
-
-      &::placeholder {
-        color: var(--color-text-secondary);
-      }
-    }
-  }
-
-  .picker-empty {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: var(--ni-104);
-    padding-block-end: var(--ni-8);
-    margin: 0;
-
-    font-size: var(--font-size-text-small);
-    text-align: center;
   }
 </style>

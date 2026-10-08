@@ -29,7 +29,7 @@
 
   const DISTRIBUTION_PAGE_SIZE = 8;
 
-  let isSearching = $state(false);
+  let isExpanded = $state(false);
 
   const options = toReactionPickerOptions([
     ...QUICK_REACTIONS,
@@ -55,7 +55,7 @@
 </script>
 
 {#if reacted.length > 0}
-  <div class="popover-ranking" class:is-folded={isSearching}>
+  <div class="popover-ranking" class:is-folded={isExpanded}>
     <div class="popover-ranking-body">
       <ReactionsDistribution
         reactions={reacted}
@@ -76,8 +76,8 @@
   limit={MAX_MEDIA_REACTIONS}
   onSelect={selectHandler}
   quickCount={QUICK_REACTIONS.length}
-  {isSearching}
-  onToggleSearch={() => (isSearching = !isSearching)}
+  {isExpanded}
+  onToggleExpanded={() => (isExpanded = !isExpanded)}
 />
 
 <style lang="scss">
