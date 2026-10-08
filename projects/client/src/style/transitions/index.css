@@ -10,6 +10,12 @@
   initial-value: transparent;
 }
 
+@property --list-bleed-alpha {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
 :root {
   /**
    * Animation transition variables

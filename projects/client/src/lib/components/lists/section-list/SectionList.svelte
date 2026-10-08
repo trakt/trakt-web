@@ -281,6 +281,7 @@
 
     &[data-variant="inline"] {
       --list-mask-offset: 0;
+      --list-bleed-start: var(--ni-0);
 
       :global(.trakt-list-inset-title) {
         margin: 0;
@@ -373,11 +374,11 @@
   .section-list-has-multiple-items:has(:global(.trakt-view-all-button)) {
     .section-list-horizontal-scroll {
       overflow-x: hidden;
-      @include list-mask(var(--list-mask-offset));
+      --list-end-fade: var(--list-mask-offset);
 
       @supports (-moz-appearance: none) {
         overflow-x: auto;
-        mask-image: none;
+        --list-end-fade: var(--ni-0);
       }
 
       @include for-tablet-lg {
@@ -388,18 +389,86 @@
 
       @include for-tablet-sm-and-below {
         overflow-x: auto;
-        mask-image: none;
       }
 
       @include for-touch {
         overflow-x: auto;
-        mask-image: none;
+        --list-end-fade: var(--ni-0);
       }
 
       &[data-horizontal-scroll] {
         overflow-x: auto;
-        mask-image: none;
+        --list-end-fade: var(--ni-0);
       }
+    }
+  }
+
+  .section-list-horizontal-scroll {
+    --list-fade-dir: to right;
+    --list-bleed-fade: var(--ni-0);
+    --list-end-fade: var(--ni-0);
+
+    mask-image:
+      linear-gradient(
+        var(--list-fade-dir),
+        rgb(0 0 0 / var(--list-bleed-alpha)) 0,
+        rgb(0 0 0 / calc(var(--list-bleed-alpha) + (1 - var(--list-bleed-alpha)) * 0.156))
+          calc(var(--list-bleed-fade) * 0.25),
+        rgb(0 0 0 / calc(var(--list-bleed-alpha) + (1 - var(--list-bleed-alpha)) * 0.5))
+          calc(var(--list-bleed-fade) * 0.5),
+        rgb(0 0 0 / calc(var(--list-bleed-alpha) + (1 - var(--list-bleed-alpha)) * 0.844))
+          calc(var(--list-bleed-fade) * 0.75),
+        black var(--list-bleed-fade),
+        black calc(100% - var(--list-end-fade)),
+        transparent calc(100% - var(--list-end-fade))
+      ),
+      linear-gradient(black, black);
+    mask-size:
+      100% 100%,
+      100% var(--layout-scrollbar-width);
+    mask-position:
+      0 0,
+      0 100%;
+    mask-repeat: no-repeat;
+
+    &:dir(rtl) {
+      --list-fade-dir: to left;
+    }
+
+    @include for-tablet-sm-and-below {
+      mask-image: none;
+    }
+  }
+
+  :global(.trakt-content) .section-list-horizontal-scroll {
+    --list-bleed-fade: calc(
+      var(--list-bleed-start) + min(var(--list-bleed-start), var(--ni-64))
+    );
+
+    margin-inline-start: calc(-1 * var(--list-bleed-start));
+    padding-inline-start: calc(
+      var(--layout-distance-side) + var(--list-bleed-start)
+    );
+
+    @supports (animation-timeline: scroll()) {
+      animation: list-bleed-fade linear both;
+      animation-timeline: scroll(self inline);
+      animation-range: 0 var(--list-bleed-start);
+    }
+
+    &::-webkit-scrollbar-track {
+      margin-left: var(--list-bleed-start);
+    }
+
+    &:dir(rtl)::-webkit-scrollbar-track {
+      margin-left: 0;
+      margin-right: var(--list-bleed-start);
+    }
+  }
+
+  @keyframes list-bleed-fade {
+    to {
+      --list-bleed-alpha: 0.1;
     }
   }
 
