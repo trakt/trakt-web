@@ -54,7 +54,7 @@ html[data-theme="dark"] .boot-loader {
   justify-content: center;
 
   background: var(--boot-background);
-  transition: background-color 500ms ease 100ms;
+  transition: opacity var(--transition-increment) ease;
 }
 
 .boot-loader-emblem {
@@ -71,8 +71,6 @@ html[data-boot="loading"] body > :not(.boot-loader) {
   width: 88px;
   aspect-ratio: 1;
   overflow: visible;
-  transform-origin: 0 0;
-  transition: opacity 200ms ease 550ms;
 }
 
 .boot-loader-well {
@@ -135,12 +133,8 @@ html[dir="rtl"] .boot-loader-bar {
 }
 
 html[data-boot="styled"] .boot-loader-splash {
-  background-color: transparent;
-  pointer-events: none;
-}
-
-html[data-boot="styled"] .boot-loader-percent {
   opacity: 0;
+  pointer-events: none;
 }
 
 html[data-boot="styled"] .boot-loader-bar {
@@ -170,10 +164,6 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
 @media (prefers-reduced-motion: reduce) {
   .boot-loader-wave {
     animation: none;
-  }
-
-  .boot-loader-logo {
-    transition: opacity 200ms ease;
   }
 }
 </style>
@@ -227,14 +217,11 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
   const SPLASH_MIN_VISIBLE_MS = 500;
   const FILL_SETTLE_MS = 300;
   const HANDOFF_MS = 800;
-  const BAR_START_SIZE = 6;
-  const FLIGHT_MS = 700;
   const APP_SCRIPT = /\/_app\/immutable\/.+\.js$/;
 
   const html = document.documentElement;
   const loader = document.querySelector('.boot-loader');
   const splash = loader.querySelector('.boot-loader-splash');
-  const logo = loader.querySelector('.boot-loader-logo');
   const level = loader.querySelector('.boot-loader-level');
   const markLit = loader.querySelector('.boot-loader-mark-lit');
   const percent = loader.querySelector('.boot-loader-percent');
@@ -260,72 +247,6 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
 
   const isAppReady = () => html.hasAttribute('data-app-ready');
 
-  const toMarkSquare = (rect) => {
-    const size = Math.min(rect.width, rect.height);
-    return { left: rect.left, top: rect.top + (rect.height - size) / 2, size };
-  };
-
-  const isOnScreen = (rect) =>
-    rect.width > 0 && rect.bottom > 0 && rect.top < innerHeight;
-
-  const toDrawnRect = (svg) => {
-    const box = svg.getBoundingClientRect();
-    const viewBox = svg.viewBox.baseVal;
-    if (!viewBox?.width || !viewBox?.height) return box;
-
-    const scale = Math.min(
-      box.width / viewBox.width,
-      box.height / viewBox.height,
-    );
-    const width = viewBox.width * scale;
-    const height = viewBox.height * scale;
-
-    return {
-      left: box.left + (box.width - width) / 2,
-      top: box.top + (box.height - height) / 2,
-      width,
-      height,
-      bottom: box.top + (box.height + height) / 2,
-    };
-  };
-
-  const findVisibleLogo = () =>
-    Array.from(document.querySelectorAll('[data-boot-target] svg'))
-      .map(toDrawnRect)
-      .find(isOnScreen);
-
-  const barStart = () => ({
-    left: html.dir === 'rtl' ? innerWidth - BAR_START_SIZE : 0,
-    top: 0,
-    size: BAR_START_SIZE,
-  });
-
-  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-
-  const flyLogoHome = () => {
-    logo.style.opacity = '0';
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const from = toMarkSquare(toDrawnRect(logo));
-    const takeoff = performance.now();
-
-    const step = (now) => {
-      const t = Math.min((now - takeoff) / FLIGHT_MS, 1);
-      const eased = easeOutCubic(t);
-      const visibleLogo = findVisibleLogo();
-      const to = visibleLogo ? toMarkSquare(visibleLogo) : barStart();
-      const scale = 1 + (to.size / from.size - 1) * eased;
-
-      logo.style.transform = `translate(${(to.left - from.left) * eased}px, ${
-        (to.top - from.top) * eased
-      }px) scale(${scale})`;
-
-      if (t < 1 && logo.isConnected) requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
-  };
-
   const splashVisibleLongEnoughAt = startedAt + SPLASH_DELAY_MS +
     SPLASH_FADE_MS + SPLASH_MIN_VISIBLE_MS;
 
@@ -336,7 +257,6 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
 
   const reveal = () => {
     html.dataset.boot = 'styled';
-    requestAnimationFrame(flyLogoHome);
     setTimeout(() => splash.remove(), HANDOFF_MS);
   };
 
