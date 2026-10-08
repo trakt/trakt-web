@@ -35,7 +35,6 @@
   {#snippet children(close)}
     <ReactionsPopoverContent
       {...content}
-      {close}
       onMore={$isMobile || $isTabletSmall ? () => openDrawer(close) : undefined}
     />
   {/snippet}
