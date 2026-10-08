@@ -1,8 +1,5 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
-  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import type { SelectOption } from "$lib/components/select/models/SelectOption.ts";
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { Season } from "$lib/requests/models/Season.ts";
@@ -13,7 +10,6 @@
     showSlug,
     seasons,
     currentSeason,
-    variant = "default",
     urlBuilder,
   }: SeasonDropdownProps = $props();
 
@@ -38,7 +34,6 @@
     seasons.map((season) => ({
       value: `${season.number}`,
       label: seasonLabel(season),
-      tag: variant === "detailed" ? episodeCountTag : undefined,
     })),
   );
 
@@ -47,17 +42,6 @@
     goto(buildUrl(Number(value)), { noScroll: true });
   };
 </script>
-
-{#snippet episodeCountTag(option: SelectOption)}
-  <span class="season-episode-count">
-    <EpisodeCountTag
-      count={seasons.find((season) => `${season.number}` === option.value)
-        ?.episodes.count ?? 0}
-      i18n={TagIntlProvider}
-      type="tag"
-    />
-  </span>
-{/snippet}
 
 <SingleSelect
   {options}
@@ -68,11 +52,3 @@
   onChange={onSeasonChange}
 />
 
-<style>
-  .season-episode-count {
-    display: contents;
-
-    --color-background-stem-tag: var(--color-tablist-background);
-    --color-foreground-stem-tag: var(--color-foreground);
-  }
-</style>
