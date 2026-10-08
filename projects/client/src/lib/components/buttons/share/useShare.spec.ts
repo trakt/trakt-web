@@ -66,4 +66,32 @@ describe('useShare', () => {
       url: 'https://app.trakt.tv/movies/the-matrix-1999?share=true',
     });
   });
+
+  it('will warm the share image without sending it to the share sheet', async () => {
+    user.current = new BehaviorSubject(undefined);
+    const fetchMock = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('fetch', fetchMock);
+    const image = 'https://app.trakt.tv/api/shareable-image?type=movie';
+
+    await useShare({ id: 'summary', type: 'movie' }).share({
+      ...shareData,
+      image,
+    });
+
+    expect(fetchMock).toHaveBeenCalledWith(image, { priority: 'low' });
+    expect(share).toHaveBeenCalledWith({
+      ...shareData,
+      url: 'https://app.trakt.tv/movies/the-matrix-1999?share=true',
+    });
+  });
+
+  it('will not fetch anything without a share image', async () => {
+    user.current = new BehaviorSubject(undefined);
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    await useShare({ id: 'summary', type: 'movie' }).share(shareData);
+
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
 });

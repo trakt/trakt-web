@@ -11,6 +11,7 @@
   type ShareButtonProps = {
     title: string;
     urlOverride?: string;
+    image?: string;
     style?: "action" | "dropdown-item";
     source: DrilldownSource;
     variant?: "primary" | "secondary";
@@ -19,6 +20,7 @@
   const {
     title,
     urlOverride,
+    image,
     source,
     style = "action",
     variant = "secondary",
@@ -33,7 +35,7 @@
     browser && !!navigator.canShare && navigator.canShare(data),
   );
   const { share: shareFn } = $derived(useShare(source));
-  const share = $derived(() => shareFn(data));
+  const share = $derived(() => shareFn({ ...data, image }));
 </script>
 
 {#if isShareable}

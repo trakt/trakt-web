@@ -49,16 +49,6 @@ export async function respondWithMediaShareImage(
       ? { ...imageHeaders, 'Server-Timing': timing.toHeader() }
       : imageHeaders;
 
-  const fontsRequest = timing.measure(
-    'fonts',
-    async () =>
-      await loadShareFonts({ bucket: platform?.env?.R2_WALTER }) ??
-        await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
-          error('Failed to load fallback share fonts:', e);
-          return [];
-        }),
-  );
-
   if (!IS_DEV && platform) {
     const cachedImage = await timing.measure(
       'cache',
@@ -74,6 +64,16 @@ export async function respondWithMediaShareImage(
       });
     }
   }
+
+  const fontsRequest = timing.measure(
+    'fonts',
+    async () =>
+      await loadShareFonts({ bucket: platform?.env?.R2_WALTER }) ??
+        await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
+          error('Failed to load fallback share fonts:', e);
+          return [];
+        }),
+  );
 
   const fetchFn = fetchWithUserAgent({
     userAgent: request.headers.get('user-agent'),
