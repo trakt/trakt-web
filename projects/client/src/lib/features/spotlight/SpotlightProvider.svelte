@@ -17,7 +17,9 @@
   const excludedRoutes = new Set([UrlBuilder.welcome()]);
 
   const triggers = $derived(createSpotlightTriggers({
-    enabled: $isAuthorized && !excludedRoutes.has(page.url.pathname),
+    enabled: $isAuthorized &&
+      !excludedRoutes.has(page.url.pathname) &&
+      !page.state.isPlayingGame,
     open,
     toggle,
   }));

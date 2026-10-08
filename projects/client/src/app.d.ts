@@ -203,6 +203,7 @@ declare global {
     // interface PageData {}
     interface PageState {
       preservedFilters?: Record<string, string>;
+      isPlayingGame?: boolean;
     }
     // interface Platform {}
     interface Platform {

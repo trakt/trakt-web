@@ -2,6 +2,8 @@
   import * as m from "$lib/features/i18n/messages";
 
   import { page } from "$app/state";
+  import GameSearchCard from "$lib/features/easter-egg/GameSearchCard.svelte";
+  import { isGameKeyword } from "$lib/features/easter-egg/isGameKeyword";
   import type { SearchItem } from "$lib/features/search/models/SearchItem";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import SearchModePanel from "$lib/features/search/SearchModePanel.svelte";
