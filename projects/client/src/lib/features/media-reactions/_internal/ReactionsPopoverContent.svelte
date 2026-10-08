@@ -6,10 +6,7 @@
     MAX_MEDIA_REACTIONS,
     QUICK_MEDIA_REACTIONS,
   } from "$lib/features/media-reactions/constants.ts";
-  import {
-    type MediaReaction,
-    MediaReactionSchema,
-  } from "$lib/requests/models/MediaReaction.ts";
+  import { MediaReactionSchema } from "$lib/requests/models/MediaReaction.ts";
   import type { ReactionsPopoverContentProps } from "./ReactionsPopoverContentProps.ts";
   import { toMediaReactionOptions } from "./toMediaReactionOptions.ts";
 
@@ -18,7 +15,6 @@
     onSelect,
     distribution,
     isLoading,
-    close,
     onMore,
   }: ReactionsPopoverContentProps = $props();
 
@@ -33,15 +29,6 @@
       (reaction) => (distribution[reaction] ?? 0) > 0,
     ),
   );
-
-  function selectHandler(reaction: MediaReaction) {
-    const isFilling = !chosen.includes(reaction) &&
-      chosen.length + 1 >= MAX_MEDIA_REACTIONS;
-
-    onSelect(reaction);
-
-    if (isFilling) close();
-  }
 </script>
 
 {#if reacted.length > 0}
@@ -70,7 +57,7 @@
   {options}
   {chosen}
   limit={MAX_MEDIA_REACTIONS}
-  onSelect={selectHandler}
+  {onSelect}
   quickCount={QUICK_MEDIA_REACTIONS.length}
   {isExpanded}
   onToggleExpanded={onMore ?? (() => (isExpanded = !isExpanded))}
