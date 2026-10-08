@@ -45,6 +45,8 @@ describe('handle: boot-loader', () => {
     expect(transformed).not.toContain(BOOT_LOADER_PLACEHOLDER);
     expect(transformed).toContain('data-css="2"');
     expect(transformed).toContain('data-js="2"');
+    expect(transformed).toContain('data-delay="1000"');
+    expect(transformed).toContain('--boot-splash-delay: 1000ms');
   });
 
   it('should keep the default preload behavior', async () => {

@@ -1,8 +1,11 @@
 import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
 import bootLoaderTemplate from './_internal/bootLoader.html?raw';
 
 export const BOOT_LOADER_PLACEHOLDER = '%boot.loader%';
+
+const SPLASH_DELAY = time.seconds(1);
 
 const STYLESHEET_LINK = /<link href="([^"]+)" rel="stylesheet">/g;
 
@@ -22,7 +25,8 @@ function renderBootLoader({ html, scriptCount }: {
 
   const loader = bootLoaderTemplate
     .replace('%boot.css%', `${hrefs.length}`)
-    .replace('%boot.js%', `${scriptCount}`);
+    .replace('%boot.js%', `${scriptCount}`)
+    .replaceAll('%boot.delay%', `${SPLASH_DELAY}`);
   const stylesheets = hrefs.map(toBootStylesheet).join('');
 
   return html
