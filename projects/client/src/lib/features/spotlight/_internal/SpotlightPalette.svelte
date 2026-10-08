@@ -3,10 +3,14 @@
   import CodeIcon from "$lib/components/icons/CodeIcon.svelte";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
+  import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import { devtoolsSpotlightActions } from "$lib/features/devtools/devtoolsSpotlightActions.ts";
   import { DEVTOOLS_TITLE } from "$lib/features/devtools/devtoolsTitle.ts";
+  import GameSpotlightCard from "$lib/features/easter-egg/GameSpotlightCard.svelte";
+  import { isGameKeyword } from "$lib/features/easter-egg/isGameKeyword";
+  import { openGame } from "$lib/features/easter-egg/openGame";
   import * as m from "$lib/features/i18n/messages";
   import type { MediaResult } from "$lib/requests/queries/search/searchMediaQuery";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
@@ -46,6 +50,8 @@
       ? devtoolsSpotlightActions
       : [],
   );
+  const hasGame = $derived(isGameKeyword(query));
+  const gameEntries = $derived(hasGame ? [playGame] : []);
   const actionEntries = $derived(
     filterSpotlightEntries(actions, query).map((action) => ({
       id: action.id,
@@ -67,6 +73,7 @@
   const mediaResults = $derived([...movies, ...shows]);
 
   const items = $derived([
+    ...gameEntries,
     ...actionEntries.map((entry) => entry.run),
     ...pageEntries.map((entry) => entry.run),
     ...mediaResults.map(
@@ -74,7 +81,9 @@
     ),
   ]);
 
-  const pagesOffset = $derived(actionEntries.length);
+  const gameIndex = 0;
+  const actionsOffset = $derived(gameIndex + gameEntries.length);
+  const pagesOffset = $derived(actionsOffset + actionEntries.length);
   const moviesOffset = $derived(pagesOffset + pageEntries.length);
   const showsOffset = $derived(moviesOffset + movies.length);
 
@@ -123,6 +132,11 @@
     goto(url);
   }
 
+  function playGame() {
+    close();
+    openGame();
+  }
+
   function runAction(action: SpotlightAction) {
     close();
     action.run();
@@ -154,6 +168,7 @@
 </script>
 
 {#snippet codeIcon()}<CodeIcon />{/snippet}
+{#snippet playIcon()}<PlayIcon />{/snippet}
 {#snippet discoverIcon()}<DiscoverIcon />{/snippet}
 {#snippet movieIcon()}<MovieIcon />{/snippet}
 {#snippet showIcon()}<ShowIcon />{/snippet}
@@ -255,8 +270,28 @@
             {m.spotlight_no_results({ query: trimmedQuery })}
           </p>
         {:else}
+          {#if hasGame}
+            <section class="spotlight-section">
+              {@render sectionHeading(m.spotlight_section_games(), playIcon)}
+              <div
+                class="spotlight-media-card"
+                class:is-active={activeIndex === gameIndex}
+                data-spotlight-index={gameIndex}
+                role="presentation"
+                onpointermove={() => (selectedIndex = gameIndex)}
+              >
+                <GameSpotlightCard onclick={playGame} />
+              </div>
+            </section>
+          {/if}
+
           {#if actionEntries.length > 0}
-            {@render listSection(DEVTOOLS_TITLE, codeIcon, actionEntries, 0)}
+            {@render listSection(
+              DEVTOOLS_TITLE,
+              codeIcon,
+              actionEntries,
+              actionsOffset,
+            )}
           {/if}
 
           {#if pageEntries.length > 0}

@@ -13051,6 +13051,18 @@
     "button_label_play_game": {
       "default": "Play Rated Higher?",
       "description": "Aria-label for the hidden \"Rated Higher?\" game card shown first in search results when searching for \"game\". Opens the game."
+    },
+    "spotlight_section_games": {
+      "default": "Games",
+      "description": "Heading of the spotlight search section that holds the hidden \"Rated Higher?\" game, shown when searching for \"game\"."
+    },
+    "text_game_spotlight_subtitle": {
+      "default": "Guess which title Trakt rates higher",
+      "description": "Subtitle of the hidden \"Rated Higher?\" game card in the spotlight search, shown when searching for \"game\"."
+    },
+    "button_text_game_play": {
+      "default": "Play",
+      "description": "Label on the hidden \"Rated Higher?\" game card in the spotlight search that starts the game."
     }
   }
 }
