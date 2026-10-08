@@ -14,6 +14,7 @@
     listedKeys,
     picks,
     onTogglePick,
+    onToggleAllPicks,
   }: BulkAddSourceItemsProps = $props();
 
   const { items, isLoading, hasNextPage, fetchNextPage } =
@@ -22,6 +23,14 @@
   const pickedKeys = $derived(new Set(picks.map(({ key }) => key)));
   const alreadyInListCount = $derived(
     $items.filter(({ key }) => listedKeys.has(key)).length,
+  );
+  const candidates = $derived(
+    $items
+      .filter(({ key }) => !listedKeys.has(key))
+      .map((item) => toBulkAddPick({ item, sourceKey: source.key })),
+  );
+  const isAllPicked = $derived(
+    candidates.length > 0 && candidates.every(({ key }) => pickedKeys.has(key)),
   );
 </script>
 
@@ -52,18 +61,35 @@
       {/if}
     {/each}
 
-    {#if $hasNextPage}
+    {#if candidates.length > 0 || $hasNextPage}
       <div class="items-more">
-        <Button
-          label={m.button_text_load_more()}
-          style="flat"
-          variant="secondary"
-          color="default"
-          disabled={$isLoading}
-          onclick={fetchNextPage}
-        >
-          {m.button_text_load_more()}
-        </Button>
+        {#if candidates.length > 0}
+          {@const text = isAllPicked
+            ? m.button_text_deselect_all()
+            : m.button_text_select_all()}
+          <Button
+            label={text}
+            style="flat"
+            variant="secondary"
+            color="default"
+            onclick={() => onToggleAllPicks(candidates)}
+          >
+            {text}
+          </Button>
+        {/if}
+
+        {#if $hasNextPage}
+          <Button
+            label={m.button_text_load_more()}
+            style="flat"
+            variant="secondary"
+            color="default"
+            disabled={$isLoading}
+            onclick={fetchNextPage}
+          >
+            {m.button_text_load_more()}
+          </Button>
+        {/if}
       </div>
     {/if}
   </div>
@@ -83,8 +109,9 @@
     }
 
     .items-more {
-      display: grid;
-      place-items: center;
+      display: flex;
+      justify-content: center;
+      gap: var(--gap-s);
       padding: var(--gap-m);
     }
   }

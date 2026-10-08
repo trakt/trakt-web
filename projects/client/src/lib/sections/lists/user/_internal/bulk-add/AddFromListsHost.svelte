@@ -4,23 +4,31 @@
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { type Snippet, untrack } from "svelte";
   import BulkAddDrawer from "./BulkAddDrawer.svelte";
-  import { useIsCollaborationList } from "./useIsCollaborationList.ts";
+  import { useCanAddFromLists } from "./useCanAddFromLists.ts";
 
-  const {
-    list,
-    children,
-  }: { list: MediaListSummary; children: Snippet<[() => void]> } = $props();
+  type AddFromListsHostProps = {
+    list: MediaListSummary;
+    isSharedOnly?: boolean;
+    children: Snippet<[() => void]>;
+  };
+
+  const { list, isSharedOnly = false, children }: AddFromListsHostProps =
+    $props();
 
   const { user } = useUser();
-  const { isCollaboration } = useIsCollaborationList({
+  const { canAddFromLists, isSharedList } = useCanAddFromLists({
     list$: fromRune(() => list),
     userSlug: untrack(() => $user.slug),
   });
 
+  const isVisible = $derived(
+    isSharedOnly ? $isSharedList : $canAddFromLists,
+  );
+
   let showBulkAdd = $state(false);
 </script>
 
-{#if $isCollaboration}
+{#if isVisible}
   {@render children(() => (showBulkAdd = true))}
 {/if}
 

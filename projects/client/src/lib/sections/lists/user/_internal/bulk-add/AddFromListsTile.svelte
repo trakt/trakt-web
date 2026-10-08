@@ -1,17 +1,21 @@
 <script lang="ts">
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import AddFromListsHost from "./AddFromListsHost.svelte";
 
   const { list }: { list: MediaListSummary } = $props();
+
+  const isLargeScreenCards = useLargeScreenCards();
 </script>
 
-<AddFromListsHost {list}>
+<AddFromListsHost {list} isSharedOnly>
   {#snippet children(open)}
     <button
       type="button"
       class="trakt-add-from-lists-tile"
+      data-variant={$isLargeScreenCards ? "cover" : "summary"}
       aria-label={m.button_label_add_from_lists({ name: list.name })}
       onclick={open}
     >
@@ -42,6 +46,12 @@
     cursor: pointer;
     transition: var(--transition-increment) ease-in-out;
     transition-property: color, border-color;
+
+    &[data-variant="summary"] {
+      aspect-ratio: auto;
+      height: var(--height-summary-card);
+      flex-direction: row;
+    }
 
     &:hover,
     &:focus-visible {

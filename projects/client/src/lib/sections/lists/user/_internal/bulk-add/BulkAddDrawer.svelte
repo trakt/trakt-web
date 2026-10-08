@@ -7,6 +7,7 @@
   import type { BulkAddPick } from "./BulkAddPick.ts";
   import BulkAddSourceItems from "./BulkAddSourceItems.svelte";
   import BulkAddSourceSelect from "./BulkAddSourceSelect.svelte";
+  import { toggleAllPicks } from "./toggleAllPicks.ts";
   import { togglePick } from "./togglePick.ts";
   import { useBulkAddSources } from "./useBulkAddSources.ts";
   import { useBulkAddToList } from "./useBulkAddToList.ts";
@@ -75,6 +76,8 @@
           listedKeys={$listedKeys}
           picks={effectivePicks}
           onTogglePick={(pick) => (picks = togglePick(picks, pick))}
+          onToggleAllPicks={(candidates) =>
+            (picks = toggleAllPicks(picks, candidates))}
         />
       {/key}
     {/if}
