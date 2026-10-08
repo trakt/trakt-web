@@ -220,6 +220,8 @@
   }
 
   .week-day-items {
+    isolation: isolate;
+
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);

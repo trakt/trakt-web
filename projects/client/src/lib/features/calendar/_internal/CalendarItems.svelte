@@ -56,6 +56,8 @@
     gap: var(--gap-l);
 
     :global(.trakt-list-item-container) {
+      isolation: isolate;
+
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;

@@ -86,7 +86,7 @@
       border-radius: var(--border-radius-m);
 
       background-color: var(--color-calendar-inactive-background);
-      box-shadow: var(--shadow-raised);
+      box-shadow: var(--shadow-base);
 
       transition: var(--transition-increment) ease-in-out;
       transition-property: transform, box-shadow;
