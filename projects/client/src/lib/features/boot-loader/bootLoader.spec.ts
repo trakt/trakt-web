@@ -15,6 +15,7 @@ function mountBootLoader() {
     bootLoaderTemplate
       .replace('%boot.css%', `${STYLESHEET_COUNT}`)
       .replace('%boot.js%', '1')
+      .replaceAll('%boot.delay%', '1000')
   }<div class="app">page</div>`;
 
   Array.from(document.body.querySelectorAll('script'))
@@ -63,14 +64,30 @@ describe('boot loader', () => {
       .forEach((link) => link.remove());
     document.body.innerHTML = '';
     delete document.documentElement.dataset.boot;
+    document.documentElement.removeAttribute('data-app-ready');
   });
 
-  it('should skip the loader when styles land before it appears', () => {
+  it('should skip the splash when styles land before it appears', () => {
     const stylesheets = mountBootLoader();
 
-    vi.advanceTimersByTime(200);
+    vi.advanceTimersByTime(900);
     settle(stylesheets);
     vi.advanceTimersByTime(50);
+
+    expect(document.querySelector('.boot-loader-splash')).toBeNull();
+    expect(document.querySelector('.boot-loader-bar')).not.toBeNull();
+    expect(boot()).toBe('styled');
+  });
+
+  it('should keep the bar until the app is ready after skipping the splash', () => {
+    const stylesheets = mountBootLoader();
+
+    vi.advanceTimersByTime(900);
+    settle(stylesheets);
+    vi.advanceTimersByTime(50);
+
+    document.documentElement.setAttribute('data-app-ready', '');
+    vi.advanceTimersByTime(800);
 
     expect(document.querySelector('.boot-loader')).toBeNull();
     expect(boot()).toBeUndefined();
@@ -79,7 +96,7 @@ describe('boot loader', () => {
   it('should keep the loader until it has been visible long enough', () => {
     const stylesheets = mountBootLoader();
 
-    vi.advanceTimersByTime(450);
+    vi.advanceTimersByTime(1050);
     settle(stylesheets);
 
     vi.advanceTimersByTime(650);
@@ -92,7 +109,7 @@ describe('boot loader', () => {
   it('should let the fill finish before handing off after slow styles', () => {
     const stylesheets = mountBootLoader();
 
-    vi.advanceTimersByTime(2000);
+    vi.advanceTimersByTime(3000);
     settle(stylesheets);
 
     vi.advanceTimersByTime(250);
@@ -106,7 +123,7 @@ describe('boot loader', () => {
     const stylesheets = mountBootLoader();
     const page = document.querySelector('.app');
 
-    vi.advanceTimersByTime(450);
+    vi.advanceTimersByTime(1050);
     settle(stylesheets);
     vi.advanceTimersByTime(650);
     expect(page && getComputedStyle(page).visibility).toBe('hidden');
@@ -120,7 +137,7 @@ describe('boot loader', () => {
     const percent = () =>
       document.querySelector('.boot-loader-percent')?.textContent;
 
-    vi.advanceTimersByTime(500);
+    vi.advanceTimersByTime(1050);
     settle(stylesheets);
     vi.advanceTimersByTime(20);
     const settled = percent();

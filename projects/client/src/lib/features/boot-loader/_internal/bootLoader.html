@@ -59,7 +59,7 @@ html[data-theme="dark"] .boot-loader {
 
 .boot-loader-emblem {
   position: relative;
-  animation: boot-loader-appear 300ms ease 400ms backwards;
+  animation: boot-loader-appear 300ms ease var(--boot-splash-delay) backwards;
 }
 
 html[data-boot="loading"] body > :not(.boot-loader) {
@@ -176,6 +176,8 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
   aria-valuenow="0"
   data-css="%boot.css%"
   data-js="%boot.js%"
+  data-delay="%boot.delay%"
+  style="--boot-splash-delay: %boot.delay%ms"
 >
   <div class="boot-loader-splash">
     <div class="boot-loader-emblem">
@@ -212,7 +214,6 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
   const LEVEL_EMPTY = 50;
   const LEVEL_FULL = -4;
   const STYLES_TIMEOUT_MS = 20000;
-  const SPLASH_DELAY_MS = 400;
   const SPLASH_FADE_MS = 300;
   const SPLASH_MIN_VISIBLE_MS = 500;
   const FILL_SETTLE_MS = 300;
@@ -226,6 +227,7 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
   const markLit = loader.querySelector('.boot-loader-mark-lit');
   const percent = loader.querySelector('.boot-loader-percent');
 
+  const splashDelay = Number(loader.dataset.delay) || 0;
   const stylesTotal = Number(loader.dataset.css) || 1;
   const scriptsTotal = Number(loader.dataset.js) || 1;
   const scripts = new Set();
@@ -247,12 +249,12 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
 
   const isAppReady = () => html.hasAttribute('data-app-ready');
 
-  const splashVisibleLongEnoughAt = startedAt + SPLASH_DELAY_MS +
+  const splashVisibleLongEnoughAt = startedAt + splashDelay +
     SPLASH_FADE_MS + SPLASH_MIN_VISIBLE_MS;
 
-  const skipLoader = () => {
+  const skipSplash = () => {
     html.dataset.boot = 'styled';
-    loader.remove();
+    splash.remove();
   };
 
   const reveal = () => {
@@ -263,8 +265,8 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
   const handOff = (now) => {
     if (stylesReadyAt === null) stylesReadyAt = now;
 
-    if (stylesReadyAt - startedAt < SPLASH_DELAY_MS) {
-      skipLoader();
+    if (stylesReadyAt - startedAt < splashDelay) {
+      skipSplash();
       return;
     }
 
