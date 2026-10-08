@@ -7,6 +7,6 @@ export type ReactionPickerProps<T extends string> = {
   onSelect: (id: T) => void;
   onClose?: () => void;
   quickCount?: number;
-  isSearching?: boolean;
-  onToggleSearch?: () => void;
+  isExpanded?: boolean;
+  onToggleExpanded?: () => void;
 };
