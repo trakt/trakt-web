@@ -11,6 +11,7 @@ type VipType = 'canceled' | 'updated';
 type PlexType = 'settings' | 'syncs';
 type MediaSyncType = 'connections' | 'runs';
 type RewatchingType = 'show';
+type ShareType = 'click' | 'mute';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
@@ -40,6 +41,7 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:data_sync`
   | `${typeof INVALIDATION_ID}:plex:${PlexType}`
   | `${typeof INVALIDATION_ID}:media_sync:${MediaSyncType}`
+  | `${typeof INVALIDATION_ID}:share:${ShareType}`
   | `${typeof INVALIDATION_ID}:app_revoke`;
 
 type TypeDataMap = {
@@ -69,6 +71,7 @@ type TypeDataMap = {
   'data_sync': null;
   'plex': PlexType;
   'media_sync': MediaSyncType;
+  'share': ShareType;
   'app_revoke': null;
 };
 
@@ -127,6 +130,11 @@ export const InvalidateAction = {
     Settings: buildInvalidationKey('user', 'settings'),
     Follow: buildInvalidationKey('user', 'follow'),
     Block: buildInvalidationKey('user', 'block'),
+  },
+
+  Share: {
+    Click: buildInvalidationKey('share', 'click'),
+    Mute: buildInvalidationKey('share', 'mute'),
   },
 
   CheckIn: buildInvalidationKey('check_in'),

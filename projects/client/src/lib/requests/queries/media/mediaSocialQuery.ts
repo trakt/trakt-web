@@ -8,6 +8,7 @@ import {
   type MediaSocial,
   MediaSocialSchema,
 } from '$lib/requests/models/MediaSocial.ts';
+import { SocialUserResponseSchema } from '$lib/requests/models/SocialUserResponse.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -41,29 +42,6 @@ type MediaSocialParams =
   & PaginationParams
   & ApiParams;
 
-const MediaSocialUserResponseSchema = z.object({
-  username: z.string(),
-  private: z.boolean().default(false),
-  deleted: z.boolean().default(false),
-  name: z.string().nullish().default(null),
-  vip: z.boolean().nullish(),
-  vip_ep: z.boolean().nullish(),
-  director: z.boolean().nullish(),
-  ids: z.object({
-    slug: z.string().nullish(),
-    trakt: z.number(),
-  }),
-  images: z.object({
-    avatar: z.object({
-      full: z.string().nullish(),
-    }).default({ full: null }),
-  }).default({ avatar: { full: null } }),
-  location: z.string().nullish().default(null),
-  about: z.string().nullish().default(null),
-  vip_cover_image: z.string().nullish().default(null),
-  joined_at: z.string().nullish().default(null),
-}).passthrough();
-
 const MediaSocialRatingResponseSchema = z.object({
   rating: z.number(),
   rated_at: z.string().nullish(),
@@ -94,7 +72,7 @@ const MediaSocialWatchlistedResponseSchema = z.object({
 export const MediaSocialResponseSchema = z.array(
   z.object({
     followed_at: z.string(),
-    user: MediaSocialUserResponseSchema,
+    user: SocialUserResponseSchema,
     watched: MediaSocialWatchedResponseSchema.optional(),
     watchlisted: MediaSocialWatchlistedResponseSchema.optional(),
   }),

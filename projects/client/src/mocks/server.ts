@@ -17,6 +17,7 @@ import { streamingSync } from './handlers/streamingSync.ts';
 import { sync } from './handlers/sync.ts';
 import { team } from './handlers/team.ts';
 import { users } from './handlers/users.ts';
+import { shares } from './handlers/shares.ts';
 import { vip } from './handlers/vip.ts';
 import { watchNow } from './handlers/watchNow.ts';
 
@@ -41,6 +42,7 @@ const handlers = [
   ...intl,
   ...klipy,
   ...vip,
+  ...shares,
 ];
 
 export const server = setupServer(...handlers);

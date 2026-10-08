@@ -7,6 +7,9 @@
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { fade } from "svelte/transition";
   import { useSocialActivities } from "../_internal/useSocialActivities.ts";
+  import { hasSharers } from "../recommended-by/hasSharers.ts";
+  import { useRecommendedBy } from "../recommended-by/useRecommendedBy.ts";
+  import SharedBySection from "./_internal/SharedBySection.svelte";
   import SocialActivityRow from "./_internal/SocialActivityRow.svelte";
   import SocialActivitySummaryHeader from "./_internal/SocialActivitySummaryHeader.svelte";
 
@@ -29,6 +32,9 @@
     mode: "all",
   });
 
+  const { recommendedBy, muteSharer, isMuting } = useRecommendedBy(target$);
+
+  const isShared = $derived(hasSharers($recommendedBy));
   const hasEntries = $derived($socialEntries.length > 0);
   const activityCount = $derived($socialEntries.length);
   const ratings = $derived.by(() => {
@@ -56,7 +62,7 @@
             <LoadingIndicator size="large" />
           {/if}
 
-          {#if !$isLoading && !hasEntries}
+          {#if !$isLoading && !hasEntries && !isShared}
             <p class="social-activity-placeholder">
               {m.text_social_activities_placeholder()}
             </p>
@@ -72,6 +78,14 @@
                 {/each}
               </ul>
             </div>
+          {/if}
+
+          {#if hasSharers($recommendedBy)}
+            <SharedBySection
+              recommendedBy={$recommendedBy}
+              isMuting={$isMuting}
+              onMute={muteSharer}
+            />
           {/if}
         </div>
       </RenderFor>

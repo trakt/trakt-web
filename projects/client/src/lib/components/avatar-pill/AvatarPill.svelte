@@ -12,6 +12,7 @@
     label,
     caption,
     ariaLabel,
+    badge,
     href,
     onclick,
     noscroll,
@@ -29,8 +30,15 @@
     style:--pill-mobile-avatar-limit={MOBILE_AVATAR_LIMIT}
   >
     {#if hasAvatars}
-      <span class="pill-avatars">
-        <AvatarStack {avatars} mobileLimit={MOBILE_AVATAR_LIMIT} />
+      <span class="pill-avatars" class:has-badge={badge != null}>
+        <span class="pill-stack">
+          <AvatarStack {avatars} mobileLimit={MOBILE_AVATAR_LIMIT} />
+        </span>
+        {#if badge}
+          <span class="pill-badge" aria-hidden="true">
+            {@render badge()}
+          </span>
+        {/if}
       </span>
     {/if}
 
@@ -129,6 +137,7 @@
   }
 
   .pill-avatars {
+    position: relative;
     display: inline-flex;
     pointer-events: none;
     flex: 0 0 auto;
@@ -170,6 +179,54 @@
             var(--pill-avatar-size) * 0.78
           )
       );
+    }
+  }
+
+  .pill-stack {
+    display: inline-flex;
+  }
+
+  .pill-avatars.has-badge {
+    --pill-badge-size: var(--ni-16);
+    --pill-badge-offset: var(--ni-2);
+    --pill-badge-radius: calc(var(--pill-badge-size) / 2);
+    --pill-badge-center: calc(
+      var(--pill-badge-radius) - var(--pill-badge-offset)
+    );
+    --pill-badge-cutout: calc(var(--pill-badge-radius) + var(--ni-1));
+
+    .pill-stack {
+      mask: radial-gradient(
+        circle at
+          calc(50% + var(--rtl-sign) * (50% - var(--pill-badge-center)))
+          calc(100% - var(--pill-badge-center)),
+        transparent var(--pill-badge-cutout),
+        black calc(var(--pill-badge-cutout) + var(--ni-1) / 2)
+      );
+    }
+  }
+
+  .pill-badge {
+    position: absolute;
+    inset-inline-end: calc(-1 * var(--pill-badge-offset));
+    inset-block-end: calc(-1 * var(--pill-badge-offset));
+    z-index: 1;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--pill-badge-size);
+    height: var(--pill-badge-size);
+    border-radius: 50%;
+
+    color: var(--shade-10);
+    background: var(--purple-600);
+
+    :global(svg) {
+      width: var(--ni-10);
+      height: var(--ni-10);
+      color: var(--shade-10);
+      fill: var(--shade-10);
     }
   }
 

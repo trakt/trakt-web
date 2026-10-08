@@ -10368,6 +10368,23 @@
       "default": "No activity",
       "description": "Placeholder text shown when there are no social activities for a movie, show, or episode. This should be as short and concise as possible."
     },
+    "link_label_view_social_activities_shared": {
+      "default": "View social activities for {title}, shared with you",
+      "description": "Accessible label for the link that opens social activities for a specific movie, show, or episode when someone shared it with you.",
+      "variables": { "title": { "type": "string" } }
+    },
+    "text_shared_with_you": {
+      "default": "Shared with you",
+      "description": "Label on the social activities pill when nobody you follow has activity on a movie, show, or episode but someone shared it with you. This should be as short and concise as possible."
+    },
+    "list_title_shared_by": {
+      "default": "Shared by",
+      "description": "Heading above the avatars of the people who shared a movie, show, or episode with you."
+    },
+    "button_label_hide_their_recommendations": {
+      "default": "Hide their recommendations",
+      "description": "Button in the popover of a person who shared an item with you. Stops their shares from showing up for you."
+    },
     "text_social_activity": {
       "default": "Activity",
       "description": "Text for singular social activity label."
