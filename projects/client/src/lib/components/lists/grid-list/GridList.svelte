@@ -11,6 +11,7 @@
     title?: string;
     metaInfo?: Snippet;
     promotedItems?: T[];
+    leadingItem?: Snippet;
     dimensionObserver?: (node: HTMLElement) => void;
     listActions?: Snippet;
     sizing?: "default" | "auto" | "cover";
@@ -21,6 +22,7 @@
   const {
     items,
     promotedItems = [],
+    leadingItem,
     title,
     item,
     ctaItem,
@@ -74,12 +76,13 @@
     <ListHeader {title} {metaInfo} {actions} {listActions} />
   {/if}
 
-  {#if uniqueItems.length > 0 || promotedItems.length > 0}
+  {#if uniqueItems.length > 0 || promotedItems.length > 0 || leadingItem}
     <div
       class="trakt-list-item-container trakt-list-items"
       role={groupBy ? "none" : "list"}
       use:customAction
     >
+      {@render leadingItem?.()}
       {#each promotedItems as i (i.key)}
         {@render item(i)}
       {/each}

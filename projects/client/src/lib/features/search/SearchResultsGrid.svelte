@@ -1,19 +1,10 @@
 <script lang="ts">
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
-  import type { Snippet } from "svelte";
   import SearchResultItem from "./_internal/SearchResultItem.svelte";
-  import type { SearchItem } from "./models/SearchItem";
+  import type { SearchResultsGridProps } from "./SearchResultsGridProps.ts";
 
-  type SearchResultsGridProps = {
-    title?: string;
-    empty?: Snippet;
-    items: Array<SearchItem>;
-    onclick?: (item: SearchItem) => void;
-    type: "media" | "people" | "lists";
-  };
-
-  const { title, items, empty, onclick, type }: SearchResultsGridProps =
-    $props();
+  const { title, items, empty, leadingItem, onclick, type }:
+    SearchResultsGridProps = $props();
 
   const cardWidthVariable = $derived.by(() => {
     switch (type) {
@@ -33,6 +24,7 @@
     {items}
     {title}
     {empty}
+    {leadingItem}
     --width-item={`var(--width-override-card, var(${cardWidthVariable}))`}
   >
     {#snippet item(item)}

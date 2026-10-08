@@ -13047,6 +13047,10 @@
     "text_game_hint_swipe": {
       "default": "Swipe up for higher, down for lower",
       "description": "Hint at the bottom of the hidden \"Rated Higher?\" game on touch devices."
+    },
+    "button_label_play_game": {
+      "default": "Play Rated Higher?",
+      "description": "Aria-label for the hidden \"Rated Higher?\" game card shown first in search results when searching for \"game\". Opens the game."
     }
   }
 }

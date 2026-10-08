@@ -31,6 +31,10 @@
     search(query, $mode);
   });
 
+  const hasGameCard = $derived(
+    $results?.type === "media" && isGameKeyword(query),
+  );
+
   const pageTitle = $derived(
     query ? m.page_title_search_results({ query }) : m.page_title_search(),
   );
@@ -46,6 +50,10 @@
     postRecentSearch(item, query);
   };
 </script>
+
+{#snippet gameCard()}
+  <GameSearchCard />
+{/snippet}
 
 <TraktPage
   audience="authenticated"
@@ -86,6 +94,7 @@
         items={$results.items}
         type={$results.type}
         onclick={onResultClick}
+        leadingItem={hasGameCard ? gameCard : undefined}
       />
     {:else if !query}
       <SearchPlaceHolder />
