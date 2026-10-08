@@ -1500,6 +1500,7 @@
   "text_app_connected_on": "Csatlakoztatva ekkor: {date}",
   "text_app_last_used": "Utoljára használva ekkor: {date}",
   "text_app_sign_in_handoff": "Az alkalmazás nem nyílt meg automatikusan. Menj vissza a Trakt alkalmazásba, és jelentkezz be újra onnan. Még nincs meg? Szerezd be alább.",
+  "text_app_sign_in_handoff_open_app": "Az alkalmazás nem nyílt meg automatikusan. Koppintson lent a bejelentkezés befejezéséhez.",
   "text_automatic_tracking": "Automatikus követés",
   "text_avatar": "Profilkép",
   "text_billing_already_vip": "Mostantól Trakt VIP tag vagy!\nKöszönjük a támogatást, és jó szórakozást.",

@@ -1500,6 +1500,7 @@
   "text_app_connected_on": "Conectado em {date}",
   "text_app_last_used": "Última vez usado em {date}",
   "text_app_sign_in_handoff": "O aplicativo não abriu automaticamente. Volte para o aplicativo Trakt e faça login novamente por lá. Ainda não tem? Obtenha-o abaixo.",
+  "text_app_sign_in_handoff_open_app": "O aplicativo não abriu automaticamente. Toque abaixo para finalizar o login.",
   "text_automatic_tracking": "Acompanhamento Automático",
   "text_avatar": "Imagem de perfil",
   "text_billing_already_vip": "Você agora é um VIP do Trakt!\\nObrigado(a) pelo seu apoio e aproveite.",

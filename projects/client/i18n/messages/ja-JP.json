@@ -1500,6 +1500,7 @@
   "text_app_connected_on": "{date}に接続済み",
   "text_app_last_used": "最終使用日: {date}",
   "text_app_sign_in_handoff": "アプリが自動的に開かれませんでした。Traktアプリに戻り、そこからもう一度サインインしてください。まだお持ちではありませんか？以下から入手してください。",
+  "text_app_sign_in_handoff_open_app": "アプリが自動的に開かれませんでした。サインインを完了するには、以下をタップしてください。",
   "text_automatic_tracking": "自動トラッキング",
   "text_avatar": "プロフィール画像",
   "text_billing_already_vip": "あなたはTrakt VIPになりました！\nご支援ありがとうございます。お楽しみください。",

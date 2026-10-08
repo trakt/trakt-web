@@ -1500,6 +1500,7 @@
   "text_app_connected_on": "متصل شده در {date}",
   "text_app_last_used": "آخرین استفاده در {date}",
   "text_app_sign_in_handoff": "برنامه به طور خودکار باز نشد. به برنامه Trakt بازگردید و از آنجا دوباره وارد شوید. هنوز آن را ندارید؟ از لینک زیر دانلود کنید.",
+  "text_app_sign_in_handoff_open_app": "برنامه به صورت خودکار باز نشد. برای تکمیل ورود، روی دکمه زیر ضربه بزنید.",
   "text_automatic_tracking": "ردیابی خودکار",
   "text_avatar": "تصویر پروفایل",
   "text_billing_already_vip": "اکنون شما یک Trakt VIP هستید!\\nاز حمایت شما متشکریم و لذت ببرید.",

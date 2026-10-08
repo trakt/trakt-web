@@ -1499,6 +1499,7 @@
   "text_app_connected_on": "已连接 {date}",
   "text_app_last_used": "上次使用 {date}",
   "text_app_sign_in_handoff": "应用未自动打开。请返回 Trakt 应用并从那里再次登录。还没有 Trakt 应用？请在下方获取。",
+  "text_app_sign_in_handoff_open_app": "应用未自动打开。点击下方完成登录。",
   "text_automatic_tracking": "自动追踪",
   "text_avatar": "个人资料图片",
   "text_billing_already_vip": "你现在是 Trakt VIP！\\n感谢你的支持，请尽情享受。",

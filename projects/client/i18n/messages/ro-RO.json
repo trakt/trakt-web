@@ -1500,6 +1500,7 @@
   "text_app_connected_on": "Conectat la {date}",
   "text_app_last_used": "Ultima utilizare {date}",
   "text_app_sign_in_handoff": "Aplicația nu s-a deschis automat. Revino la aplicația Trakt și conectează-te din nou de acolo. Nu o ai încă? Descarc-o de mai jos.",
+  "text_app_sign_in_handoff_open_app": "Aplicația nu s-a deschis automat. Atingeți mai jos pentru a finaliza autentificarea.",
   "text_automatic_tracking": "Urmărire automată",
   "text_avatar": "Imagine de profil",
   "text_billing_already_vip": "Ești acum un VIP Trakt!\nÎți mulțumim pentru sprijin și bucură-te de experiență.",

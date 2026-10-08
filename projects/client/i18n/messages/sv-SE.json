@@ -1500,6 +1500,7 @@
   "text_app_connected_on": "Ansluten {date}",
   "text_app_last_used": "Senast använd {date}",
   "text_app_sign_in_handoff": "Appen öppnades inte automatiskt. Gå tillbaka till Trakt-appen och logga in igen därifrån. Har du den inte än? Hämta den nedan.",
+  "text_app_sign_in_handoff_open_app": "Appen öppnades inte automatiskt. Tryck nedan för att slutföra inloggningen.",
   "text_automatic_tracking": "Automatisk spårning",
   "text_avatar": "Profilbild",
   "text_billing_already_vip": "Du är nu en Trakt VIP!\nTack för ditt stöd och njut.",

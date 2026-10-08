@@ -1500,6 +1500,7 @@
   "text_app_connected_on": "{date} tarihinde bağlandı",
   "text_app_last_used": "Son kullanım {date}",
   "text_app_sign_in_handoff": "Uygulama otomatik olarak açılmadı. Trakt uygulamasına geri dönün ve oradan tekrar oturum açın. Henüz uygulamanız yok mu? Aşağıdan edinin.",
+  "text_app_sign_in_handoff_open_app": "Uygulama otomatik olarak açılmadı. Giriş yapmayı tamamlamak için aşağıya dokunun.",
   "text_automatic_tracking": "Otomatik Takip",
   "text_avatar": "Profil resmi",
   "text_billing_already_vip": "Artık bir Trakt VIP'siniz!\\nDesteğiniz için teşekkür ederiz, keyfini çıkarın.",
