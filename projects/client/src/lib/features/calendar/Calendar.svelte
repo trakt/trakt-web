@@ -30,9 +30,8 @@
     useCalendar,
     type CalendarItem as CalendarItemEntry,
   } from "./_internal/useCalendar";
-  import CalendarFeedMenu from "./CalendarFeedMenu.svelte";
   import CalendarItem from "./CalendarItem.svelte";
-  import EpisodeTypeToggles from "./EpisodeTypeToggles.svelte";
+  import CalendarTitleActions from "./CalendarTitleActions.svelte";
   import CalendarLayout from "./CalendarLayout.svelte";
   import { getCalendarContext } from "./context/getCalendarContext";
   import { useCalendarPeriod } from "./context/useCalendarPeriod";
@@ -201,11 +200,7 @@
 </script>
 
 {#snippet episodeTypeFilters()}
-  <EpisodeTypeToggles />
-{/snippet}
-
-{#snippet feedActions()}
-  <CalendarFeedMenu />
+  <CalendarTitleActions />
 {/snippet}
 
 {#snippet summaryItem(media: CalendarItemEntry)}
@@ -232,7 +227,6 @@
     <CalendarHeader
       {navigation}
       activeDate={selectedDate}
-      actions={feedActions}
       view={calendarView}
       onToggleView={toggleView}
       variant="bar"
@@ -262,8 +256,7 @@
       <CalendarToolbar
         {navigation}
         activeDate={selectedDate}
-        actions={feedActions}
-        filters={episodeTypeFilters}
+        filters={$isDocked ? episodeTypeFilters : undefined}
         hasControls={!$isDocked}
         view={calendarView}
         onToggleView={toggleView}
@@ -331,7 +324,6 @@
 
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--gap-xl);
 
     margin-inline: var(--layout-distance-side);
 
@@ -346,10 +338,6 @@
       --drawer-width: var(--ni-320);
 
       grid-template-columns: minmax(0, 1fr) var(--drawer-width);
-
-      @include for-tablet-lg {
-        gap: var(--gap-m);
-      }
     }
 
     &.is-bar-pinned {

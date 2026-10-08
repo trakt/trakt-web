@@ -33,16 +33,6 @@
 
 <div class="trakt-calendar-controls">
   <div class="calendar-controls-left">
-    <Button
-      color="default"
-      label={m.button_label_reset_calendar_period()}
-      disabled={isToday(activeDate)}
-      onclick={navigation.onReset}
-      style="ghost"
-    >
-      {m.button_text_reset_calendar_period()}
-    </Button>
-
     <ActionButton
       label={m.button_label_previous_calendar_period()}
       onclick={navigation.onPrevious}
@@ -61,9 +51,21 @@
     </ActionButton>
   </div>
 
-  {#if view && onToggleView}
-    <CalendarViewSelector {view} onToggle={onToggleView} />
-  {/if}
+  <div class="calendar-controls-right">
+    <Button
+      color="default"
+      label={m.button_label_reset_calendar_period()}
+      disabled={isToday(activeDate)}
+      onclick={navigation.onReset}
+      style="ghost"
+    >
+      {m.button_text_reset_calendar_period()}
+    </Button>
+
+    {#if view && onToggleView}
+      <CalendarViewSelector {view} onToggle={onToggleView} />
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
@@ -77,7 +79,8 @@
     width: 100%;
   }
 
-  .calendar-controls-left {
+  .calendar-controls-left,
+  .calendar-controls-right {
     display: flex;
     align-items: center;
     gap: var(--gap-xs);

@@ -72,25 +72,13 @@
       margin-inline-start: auto;
     }
 
-    @include for-mobile {
-      column-gap: var(--gap-s);
-
-      .toolbar-title {
-        display: none;
-      }
-
-      &[data-view="week"] .toolbar-title {
-        display: flex;
-        flex-basis: 100%;
+    @include for-tablet-sm-and-below {
+      :global(.trakt-calendar-header) {
+        margin-inline-start: auto;
       }
 
       &[data-view="week"] .toolbar-week {
         display: none;
-      }
-
-      .toolbar-filters {
-        padding-inline-start: 0;
-        border-inline-start: none;
       }
     }
   }
