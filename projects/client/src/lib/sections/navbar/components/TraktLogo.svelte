@@ -4,7 +4,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
-<div class="trakt-logo" data-boot-target>
+<div class="trakt-logo">
   <Link href={UrlBuilder.home()}>
     <CircularLogo />
   </Link>

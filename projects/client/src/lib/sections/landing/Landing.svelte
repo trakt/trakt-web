@@ -25,7 +25,7 @@
     <SpotlightBackdrop items={$items} {active} />
 
     <header class="landing-nav">
-      <div class="landing-logo" data-boot-target>
+      <div class="landing-logo">
         <Logo />
       </div>
       <LoginButton />
