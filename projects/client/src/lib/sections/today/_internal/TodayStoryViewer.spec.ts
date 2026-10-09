@@ -9,6 +9,8 @@ import { fireEvent, screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { buildFriendAction } from '$test/beds/today/buildFriendAction.ts';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { createStateValue } from '$test/beds/svelte/createStateValue.svelte.ts';
+import { tick } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import TodayStoryViewer from './TodayStoryViewer.svelte';
 import { toStoryGroups } from './toStoryGroups.ts';
@@ -79,6 +81,26 @@ describe('TodayStoryViewer', () => {
     await tap('Previous story');
 
     expect(screen.getByRole('dialog', { name: MovieHereticMappedMock.title }))
+      .toBeInTheDocument();
+  });
+
+  it('should keep its stories when the list changes while open', async () => {
+    const stories = createStateValue(groups);
+    renderComponent(TodayStoryViewer, {
+      props: {
+        get groups() {
+          return stories.value;
+        },
+        startKey: `show-${ShowSiloMappedMock.id}`,
+        onClose: vi.fn(),
+      },
+    });
+    await screen.findByRole('dialog', {}, { timeout: 10_000 });
+
+    stories.set(groups.slice(0, 1));
+    await tick();
+
+    expect(screen.getByRole('dialog', { name: ShowSiloMappedMock.title }))
       .toBeInTheDocument();
   });
 

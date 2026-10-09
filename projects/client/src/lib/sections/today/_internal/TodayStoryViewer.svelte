@@ -22,8 +22,10 @@
   const FRAME_DURATION = time.seconds(10);
   const HOLD_THRESHOLD = time.seconds(0.3);
 
-  const { groups, startKey, onClose }: TodayStoryViewerProps = $props();
+  const { groups: initialGroups, startKey, onClose }: TodayStoryViewerProps =
+    $props();
 
+  const groups = untrack(() => initialGroups);
   const { markSeen } = useTodaySeenStories();
 
   let groupKey = $state(untrack(() => startKey));
