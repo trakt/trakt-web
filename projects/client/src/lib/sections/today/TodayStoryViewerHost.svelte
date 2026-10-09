@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { scan } from "rxjs";
   import { getDayRange } from "./_internal/getDayRange.ts";
   import { toActivityRanges } from "./_internal/toActivityRanges.ts";
   import TodayStoryViewer from "./_internal/TodayStoryViewer.svelte";
@@ -30,8 +31,12 @@
       forYou: $forYou ?? [],
     }),
   );
+
+  const hasLoaded = $derived(
+    isLoading.pipe(scan((loaded, loading) => loaded || !loading, false)),
+  );
 </script>
 
-{#if isOpen && !$isLoading && groups.length > 0}
+{#if isOpen && $hasLoaded && groups.length > 0}
   <TodayStoryViewer {groups} startKey={storyKey} onClose={close} />
 {/if}
