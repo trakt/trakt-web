@@ -12,7 +12,7 @@ type WatchedNumberedPayload = {
 };
 
 type WatchedSeasonsPayload = WatchedNumberedPayload & {
-  episodes?: WatchedNumberedPayload[];
+  episodes: WatchedNumberedPayload[];
 };
 
 type WatchedShowPayload = WatchedPayload & {
