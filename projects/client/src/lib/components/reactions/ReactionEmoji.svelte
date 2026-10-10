@@ -3,7 +3,7 @@
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { time } from "$lib/utils/timing/time";
   import { onMount } from "svelte";
-  import { EMOJI_BASE_URL } from "./constants.ts";
+  import { toReactionEmojiUrl } from "./toReactionEmojiUrl.ts";
 
 
   const {
@@ -18,9 +18,11 @@
     animation?: "initial" | "infinite" | "none";
   } = $props();
 
-  const baseUrl = $derived(`${EMOJI_BASE_URL}/${code}`);
 
   const hasInitialAnimation = writable(false);
+
+  let animatedCode = $state<string | null>(null);
+  const isAnimationReady = $derived(animatedCode === code);
 
   // FIXME: switch to Lottie animations for better control on the animation and reduce file size
   const hasAnimation = $derived(
@@ -52,16 +54,26 @@
   });
 </script>
 
-<div class="trakt-reaction-emoji-container" class:is-animated={hasAnimation}>
+<div
+  class="trakt-reaction-emoji-container"
+  class:is-animated={hasAnimation}
+  class:is-animation-ready={isAnimationReady}
+>
   <picture class="trakt-reaction-emoji animated">
-    <source srcset={`${baseUrl}/512.webp`} type="image/webp" />
-    <CrossOriginImage loading="eager" src={`${baseUrl}/512.gif`} alt={label} />
+    <source srcset={toReactionEmojiUrl(code, "512.webp")} type="image/webp" />
+    <CrossOriginImage
+      loading="lazy"
+      animate={false}
+      src={toReactionEmojiUrl(code, "512.gif")}
+      alt={label}
+      onload={() => (animatedCode = code)}
+    />
   </picture>
 
   <picture class="trakt-reaction-emoji static">
     <CrossOriginImage
       loading="eager"
-      src={`${baseUrl}/emoji.svg`}
+      src={toReactionEmojiUrl(code, "emoji.svg")}
       alt={label}
     />
   </picture>
@@ -71,6 +83,8 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-reaction-emoji-container {
+    display: grid;
+
     .animated {
       display: none;
     }
@@ -79,7 +93,9 @@
       .animated {
         display: flex;
       }
+    }
 
+    &.is-animated.is-animation-ready {
       .static {
         display: none;
       }
@@ -87,6 +103,8 @@
   }
 
   .trakt-reaction-emoji {
+    grid-area: 1 / 1;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,7 +126,7 @@
             display: flex;
           }
 
-          .static {
+          &.is-animation-ready .static {
             display: none;
           }
         }
