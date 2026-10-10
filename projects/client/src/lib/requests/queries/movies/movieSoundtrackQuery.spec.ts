@@ -9,7 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { movieSoundtrackQuery } from './movieSoundtrackQuery.ts';
 
 const path =
-  `http://localhost/v3/media/movie/${MovieHereticMappedMock.slug}/info/15/version/1`;
+  `http://localhost/v3/media/movie/${MovieHereticMappedMock.slug}/info/15/version/2`;
 
 function query(locale: 'en' | 'pt-BR' = 'en') {
   return createTestBedQuery(

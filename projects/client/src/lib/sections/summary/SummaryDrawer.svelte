@@ -160,7 +160,7 @@
 {#if drawer === SummaryDrawers.Soundtrack && media}
   <RenderForFeature flag={FeatureFlag.Soundtrack}>
     {#snippet enabled()}
-      <SoundtrackDrawerHost {media} onClose={close} />
+      <SoundtrackDrawerHost {media} {currentSeason} onClose={close} />
     {/snippet}
   </RenderForFeature>
 {/if}
