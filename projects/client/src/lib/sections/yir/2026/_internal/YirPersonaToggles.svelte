@@ -6,6 +6,7 @@
     YirPersonaIdSchema,
   } from "$lib/requests/models/YirPersonaId";
   import * as m from "$lib/features/i18n/messages";
+  import { parsePersonaPreview } from "./parsePersonaPreview";
   import { personaCopy } from "./persona/personaCopy";
 
   const {
@@ -13,12 +14,13 @@
     runnerUp,
     isRaised = false,
   }: {
-    persona: YirPersonaId;
+    persona: YirPersonaId | Nil;
     runnerUp: YirPersonaId | Nil;
     isRaised?: boolean;
   } = $props();
 
   const personas = YirPersonaIdSchema.options;
+  const realData = "real";
 
   let isOpen = $state(false);
 
@@ -33,6 +35,9 @@
   };
 
   const runnerValue = $derived(page.url.searchParams.get("runner") ?? "auto");
+  const personaValue = $derived(
+    parsePersonaPreview(page.url.searchParams)?.persona ?? realData,
+  );
 </script>
 
 <div
@@ -54,10 +59,13 @@
       <label>
         <span>{m.yir_2026_preview_persona()}</span>
         <select
-          value={persona}
+          value={personaValue}
           onchange={(event) =>
-            setParams({ persona: event.currentTarget.value })}
+            event.currentTarget.value === realData
+              ? setParams({ persona: null, runner: null })
+              : setParams({ persona: event.currentTarget.value })}
         >
+          <option value={realData}>{m.yir_2026_preview_real_data()}</option>
           {#each personas as id (id)}
             <option value={id}>{personaCopy(id).name}</option>
           {/each}
@@ -68,9 +76,9 @@
         <span>{m.yir_2026_preview_runner_up()}</span>
         <select
           value={runnerValue}
+          disabled={personaValue === realData}
           onchange={(event) =>
             setParams({
-              persona,
               runner:
                 event.currentTarget.value === "auto"
                   ? null
@@ -94,12 +102,6 @@
       <div class="yir-toggles-actions">
         <button type="button" onclick={() => setParams({ reel: "1" })}>
           ▶ {m.yir_2026_preview_play_reel()}
-        </button>
-        <button
-          type="button"
-          onclick={() => setParams({ persona: null, runner: null })}
-        >
-          {m.yir_2026_preview_reset()}
         </button>
       </div>
     </div>

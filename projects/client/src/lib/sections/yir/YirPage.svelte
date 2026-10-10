@@ -55,6 +55,7 @@
         isLoading={$isLoading}
         {slug}
         year={2026}
+        fallback={review}
       />
     {/snippet}
     {@render review()}

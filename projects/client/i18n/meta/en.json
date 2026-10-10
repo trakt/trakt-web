@@ -11998,6 +11998,10 @@
       "default": "Persona",
       "description": "Label of the persona picker. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
     },
+    "yir_2026_preview_real_data": {
+      "default": "Real data",
+      "description": "Persona picker option that shows the user's real persona instead of a mocked one. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
+    },
     "yir_2026_preview_runner_up": {
       "default": "Runner-up",
       "description": "Label of the runner-up persona picker. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
@@ -12022,10 +12026,6 @@
     "yir_2026_preview_play_reel": {
       "default": "Play reel",
       "description": "Button that plays the reel again. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
-    },
-    "yir_2026_preview_reset": {
-      "default": "Reset",
-      "description": "Button that clears the previewed persona. Shown in the internal persona preview panel on the 2026 Year in Review, used by staff to try out personas."
     },
     "preview_feature_title_vip_veteran": {
       "default": "VIP veteran status",
