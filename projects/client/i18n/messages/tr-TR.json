@@ -1699,7 +1699,7 @@
   "text_media_sync_run_checked": "{checked} öğe kontrol edildi, koleksiyonunuzdan {removed} öğe kaldırıldı",
   "text_media_sync_run_failed": "Bu senkronizasyon tamamlanmadı. Otomatik olarak tekrar deneyecek.",
   "text_media_sync_run_nothing_new": "Yeni bir şey yok",
-  "text_media_sync_run_nothing_new_since": "{when} tarihinden beri {count} senkronizasyonda yeni bir şey yok",
+  "text_media_sync_run_nothing_new_since": "{count} senkronizasyonda {when} tarihinden beri yeni bir şey yok",
   "text_media_sync_step": "{total} adımın {current}. adımı",
   "text_member_count_accessible": "{count} üzerinde kayıtlı Trakt hesabı",
   "text_member_count_tagline": "izlediklerini takip eden ve saymaya devam eden kişiler",
