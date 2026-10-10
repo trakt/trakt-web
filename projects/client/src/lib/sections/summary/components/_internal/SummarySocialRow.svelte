@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import MediaReactionsBadge from "$lib/features/media-reactions/MediaReactionsBadge.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import SocialActivitiesButton from "./SocialActivitiesButton.svelte";
   import type { SummarySocialRowProps } from "./SummarySocialRowProps.ts";
 
@@ -14,13 +12,9 @@
 </script>
 
 <div class="trakt-summary-social-row">
-  <RenderForFeature flag={FeatureFlag.Reactions}>
-    {#snippet enabled()}
-      {#key `${type}:${slug}`}
-        <MediaReactionsBadge {type} {slug} {id} />
-      {/key}
-    {/snippet}
-  </RenderForFeature>
+  {#key `${type}:${slug}`}
+    <MediaReactionsBadge {type} {slug} {id} />
+  {/key}
 
   <SocialActivitiesButton target={{ type, slug }} {title} />
 </div>
