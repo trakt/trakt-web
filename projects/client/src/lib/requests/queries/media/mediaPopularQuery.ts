@@ -25,10 +25,8 @@ type MediaPopularParams =
 const PopularMediaSchema = z.union([ShowEntrySchema, MovieEntrySchema]);
 
 const mediaPopularRequest = (
-  { fetch, limit, page, filter, filterOverride, search }: MediaPopularParams,
+  { fetch, limit, page, filter, theme, search }: MediaPopularParams,
 ) => {
-  const filterParams = filterOverride?.show ?? filter;
-
   return api({ fetch })
     .media
     .popular({
@@ -36,7 +34,8 @@ const mediaPopularRequest = (
         extended: 'full,images,colors',
         page,
         limit,
-        ...filterParams,
+        theme,
+        ...filter,
         ...search,
       },
     });
@@ -56,9 +55,8 @@ export const mediaPopularQuery = defineInfiniteQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.movie ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
+    params.theme,
     ...getRecordDependencies(params.search),
   ],
   request: mediaPopularRequest,

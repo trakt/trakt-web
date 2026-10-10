@@ -31,7 +31,7 @@ type AnticipatedListStoreProps =
 function typeToQuery(
   { type, ...params }: AnticipatedListStoreProps,
 ) {
-  if (!params.filter?.years) {
+  if (!params.filter?.years && !params.theme) {
     // FIXME: remove this when behavior is uplifted to the server
     params.filter = params.filter ?? {};
     // @ts-expect-error we are extending the object to dedupe

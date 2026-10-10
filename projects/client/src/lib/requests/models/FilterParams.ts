@@ -17,12 +17,7 @@ export type FilterParam = {
   watch_window: number;
 };
 
-export type FilterOverrideParams = DeepPartial<{
-  movie?: FilterParam;
-  show?: FilterParam;
-}>;
-
 export type FilterParams = DeepPartial<{
   filter: FilterParam;
-  filterOverride?: FilterOverrideParams;
+  theme: string;
 }>;

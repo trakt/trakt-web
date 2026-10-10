@@ -43,10 +43,8 @@ export function mapToAnticipatedShow({
 }
 
 export const showAnticipatedRequest = (
-  { fetch, limit, page, filter, filterOverride, search }: ShowAnticipatedParams,
+  { fetch, limit, page, filter, theme, search }: ShowAnticipatedParams,
 ) => {
-  const filterParams = filterOverride?.show ?? filter;
-
   return api({ fetch })
     .shows
     .anticipated({
@@ -54,7 +52,8 @@ export const showAnticipatedRequest = (
         extended: 'full,images,colors',
         page,
         limit,
-        ...filterParams,
+        theme,
+        ...filter,
         ...search,
       },
     });
@@ -72,9 +71,8 @@ export const showAnticipatedQuery = defineInfiniteQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.show ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
+    params.theme,
     ...getRecordDependencies(params.search),
   ],
   request: showAnticipatedRequest,

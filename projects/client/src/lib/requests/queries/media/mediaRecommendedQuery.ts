@@ -29,10 +29,12 @@ const RecommendedMediaSchema = z.union([
 ]);
 
 const recommendedMediaRequest = async (
-  { fetch, limit, filter, filterOverride }: RecommendedMediaParams,
+  { fetch, limit, filter }: RecommendedMediaParams,
 ) => {
-  const filterParams = filterOverride?.movie ?? filterOverride?.show ?? filter;
-  const searchParams = getRecommendedSearchParams({ limit, filterParams });
+  const searchParams = getRecommendedSearchParams({
+    limit,
+    filterParams: filter,
+  });
 
   // FIXME: move to @trakt/api when we drop support for legacy recommendations
   const response = await rawApiFetch({
@@ -64,9 +66,7 @@ export const recommendedMediaQuery = defineQuery({
   ) => [
     params.limit,
     params.filter?.watch_window,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.movie ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: recommendedMediaRequest,
   mapper: (response) =>

@@ -24,10 +24,12 @@ type RecommendedShowsParams =
   & FilterParams;
 
 export const recommendedShowsRequest = async (
-  { fetch, limit, filter, filterOverride }: RecommendedShowsParams,
+  { fetch, limit, filter }: RecommendedShowsParams,
 ) => {
-  const filterParams = filterOverride?.show ?? filter;
-  const searchParams = getRecommendedSearchParams({ limit, filterParams });
+  const searchParams = getRecommendedSearchParams({
+    limit,
+    filterParams: filter,
+  });
 
   const response = await rawApiFetch({
     fetch,
@@ -55,9 +57,7 @@ export const recommendedShowsQuery = defineQuery({
   ) => [
     params.limit,
     params.filter?.watch_window,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.show ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: recommendedShowsRequest,
   mapper: (response) =>

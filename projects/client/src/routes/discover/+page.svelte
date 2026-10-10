@@ -13,15 +13,11 @@
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
 
   const { mode: type, useSeasonalFilters } = useDiscover();
-  const { themeFilters } = useSeasonalTheme();
+  const { activeTheme } = useSeasonalTheme();
 
-  const getThemeFilters = (id: string) => {
-    if (!$useSeasonalFilters) {
-      return;
-    }
-
-    return $themeFilters?.find((filter) => filter.id === id);
-  };
+  const theme = $derived(
+    $useSeasonalFilters ? ($activeTheme ?? undefined) : undefined,
+  );
 
   const overview = $derived.by(() => {
     switch ($type) {
@@ -67,7 +63,7 @@
       ? m.button_label_view_all_trending_shows()
       : m.button_label_view_all_trending_movies()}
     type={$type}
-    filterOverride={getThemeFilters("trending")}
+    {theme}
   />
 
   <ReleasesList />
@@ -78,7 +74,7 @@
       : m.button_label_view_all_anticipated_movies()}
     title={m.list_title_most_anticipated()}
     type={$type}
-    filterOverride={getThemeFilters("anticipated")}
+    {theme}
   />
   <PopularList
     drilldownLabel={$type === "show"
@@ -86,6 +82,6 @@
       : m.button_label_view_all_popular_movies()}
     title={m.list_title_most_popular()}
     type={$type}
-    filterOverride={getThemeFilters("popular")}
+    {theme}
   />
 </TraktPage>

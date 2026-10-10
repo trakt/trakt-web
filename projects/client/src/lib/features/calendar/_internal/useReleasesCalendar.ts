@@ -44,7 +44,6 @@ export function useReleasesCalendar(
       days: props.days,
       type: props.type,
       filter: props.filter,
-      filterOverride: props.filterOverride,
     }),
   );
 

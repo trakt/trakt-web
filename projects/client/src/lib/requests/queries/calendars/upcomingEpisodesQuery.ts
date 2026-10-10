@@ -24,18 +24,15 @@ export const UpcomingEpisodeEntrySchema = EpisodeEntrySchema.merge(z.object({
 export type UpcomingEpisodeEntry = z.infer<typeof UpcomingEpisodeEntrySchema>;
 
 export const upcomingEpisodesRequest = (
-  { fetch, startDate, days, filter, filterOverride, target = 'my' }:
-    CalendarShowsParams,
+  { fetch, startDate, days, filter, target = 'my' }: CalendarShowsParams,
 ) => {
-  const filterParams = filterOverride?.show ?? filter;
-
   return api({ fetch })
     .calendars
     .shows({
       query: {
         extended: 'full,images',
         group: 'day',
-        ...filterParams,
+        ...filter,
       },
       params: {
         target,
@@ -59,9 +56,7 @@ export const upcomingEpisodesQuery = defineQuery({
     params.target,
     params.startDate,
     params.days,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.show ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: upcomingEpisodesRequest,
   mapper: (response) => response.body.map(mapToUpcomingEpisodeEntry),

@@ -31,11 +31,8 @@ const AnticipatedMediaSchema = z.union([
 ]);
 
 const mediaAnticipatedRequest = (
-  { fetch, limit, page, filter, filterOverride, search }:
-    MediaAnticipatedParams,
+  { fetch, limit, page, filter, theme, search }: MediaAnticipatedParams,
 ) => {
-  const filterParams = filterOverride?.show ?? filter;
-
   return api({ fetch })
     .media
     .anticipated({
@@ -43,7 +40,8 @@ const mediaAnticipatedRequest = (
         extended: 'full,images,colors',
         page,
         limit,
-        ...filterParams,
+        theme,
+        ...filter,
         ...search,
       },
     });
@@ -63,9 +61,8 @@ export const mediaAnticipatedQuery = defineInfiniteQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.movie ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
+    params.theme,
     ...getRecordDependencies(params.search),
   ],
   request: mediaAnticipatedRequest,

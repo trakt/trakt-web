@@ -19,10 +19,8 @@ type ShowPopularParams =
   & SearchParams;
 
 const showPopularRequest = (
-  { fetch, limit, page, filter, filterOverride, search }: ShowPopularParams,
+  { fetch, limit, page, filter, theme, search }: ShowPopularParams,
 ) => {
-  const filterParams = filterOverride?.show ?? filter;
-
   return api({ fetch })
     .shows
     .popular({
@@ -30,7 +28,8 @@ const showPopularRequest = (
         extended: 'full,images,colors',
         page,
         limit,
-        ...filterParams,
+        theme,
+        ...filter,
         ...search,
       },
     });
@@ -49,9 +48,8 @@ export const showPopularQuery = defineInfiniteQuery({
     params.limit,
 
     params.page,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.show ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
+    params.theme,
     ...getRecordDependencies(params.search),
   ],
   request: showPopularRequest,

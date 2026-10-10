@@ -37,10 +37,8 @@ export function mapToTrendingShow({
 }
 
 export const showTrendingRequest = (
-  { fetch, limit, page, filter, filterOverride, search }: ShowTrendingParams,
+  { fetch, limit, page, filter, theme, search }: ShowTrendingParams,
 ) => {
-  const filterParams = filterOverride?.show ?? filter;
-
   return api({ fetch })
     .shows
     .trending({
@@ -48,7 +46,8 @@ export const showTrendingRequest = (
         extended: 'full,images,colors',
         page,
         limit,
-        ...filterParams,
+        theme,
+        ...filter,
         ...search,
       },
     });
@@ -66,9 +65,8 @@ export const showTrendingQuery = defineInfiniteQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.show ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
+    params.theme,
     ...getRecordDependencies(params.search),
   ],
   request: showTrendingRequest,

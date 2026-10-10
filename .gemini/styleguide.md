@@ -172,7 +172,7 @@ export type MediaStoreProps<T extends { id: number } = { id: number }> =
 ```typescript
 type FilterParams = DeepPartial<{
   filter: FilterParam;
-  filterOverride?: FilterOverrideParams;
+  theme: string;
 }>;
 ```
 

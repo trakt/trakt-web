@@ -2,7 +2,6 @@
   import { page } from "$app/state";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -14,14 +13,12 @@
     title: string;
     drilldownLabel: string;
     type: DiscoverMode;
-    filterOverride?: FilterOverrideParams;
   };
 
   const {
     title,
     drilldownLabel,
     type,
-    filterOverride,
   }: RecommendationListProps = $props();
   const { filterMap } = useFilter();
 
@@ -46,7 +43,6 @@
     ...$filterMap,
     ...extractWatchWindowParam(page.url.searchParams),
   }}
-  {filterOverride}
   useList={(params) => useRecommendedList(params)}
   urlBuilder={() => UrlBuilder.recommended()}
 >

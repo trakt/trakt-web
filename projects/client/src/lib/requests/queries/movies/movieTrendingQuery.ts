@@ -36,10 +36,8 @@ export function mapToTrendingMovie({
 }
 
 export const movieTrendingRequest = (
-  { fetch, limit, page, filter, filterOverride, search }: MovieTrendingParams,
+  { fetch, limit, page, filter, theme, search }: MovieTrendingParams,
 ) => {
-  const filterParams = filterOverride?.movie ?? filter;
-
   return api({ fetch })
     .movies
     .trending({
@@ -47,7 +45,8 @@ export const movieTrendingRequest = (
         extended: 'full,images,colors',
         page,
         limit,
-        ...filterParams,
+        theme,
+        ...filter,
         ...search,
       },
     });
@@ -64,9 +63,8 @@ export const movieTrendingQuery = defineInfiniteQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.movie ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
+    params.theme,
     ...getRecordDependencies(params.search),
   ],
   request: movieTrendingRequest,

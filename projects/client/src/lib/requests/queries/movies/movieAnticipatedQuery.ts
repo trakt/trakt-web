@@ -36,11 +36,8 @@ export function mapToAnticipatedMovie({
 }
 
 export const movieAnticipatedRequest = (
-  { fetch, limit, page, filter, filterOverride, search }:
-    MovieAnticipatedParams,
+  { fetch, limit, page, filter, theme, search }: MovieAnticipatedParams,
 ) => {
-  const filterParams = filterOverride?.movie ?? filter;
-
   return api({ fetch })
     .movies
     .anticipated({
@@ -48,7 +45,8 @@ export const movieAnticipatedRequest = (
         extended: 'full,images,colors',
         page,
         limit,
-        ...filterParams,
+        theme,
+        ...filter,
         ...search,
       },
     });
@@ -65,9 +63,8 @@ export const movieAnticipatedQuery = defineInfiniteQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.movie ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
+    params.theme,
     ...getRecordDependencies(params.search),
   ],
   request: movieAnticipatedRequest,

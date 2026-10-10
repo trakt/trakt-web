@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -14,7 +13,7 @@
     drilldownLabel: string;
     type: DiscoverMode;
     search?: Record<string, string>;
-    filterOverride?: FilterOverrideParams;
+    theme?: string;
     actions?: Snippet;
     scope?: string;
   } & Partial<DrillListProps<DiscoverMode>>;
@@ -24,7 +23,7 @@
     drilldownLabel,
     type,
     search,
-    filterOverride,
+    theme,
     actions,
     urlBuilder,
     scope,
@@ -43,8 +42,8 @@
   {title}
   {drilldownLabel}
   {type}
-  filter={$filterMap}
-  {filterOverride}
+  filter={theme ? undefined : $filterMap}
+  {theme}
   {actions}
   useList={(params) =>
     useTrendingList({

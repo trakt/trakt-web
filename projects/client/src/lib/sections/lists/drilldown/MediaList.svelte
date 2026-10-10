@@ -19,7 +19,7 @@
     actions: externalActions,
     useList,
     filter,
-    filterOverride,
+    theme,
     metaInfo,
     drilldown,
     variant: externalVariant,
@@ -32,7 +32,7 @@
       type,
       limit: DEFAULT_PAGE_SIZE,
       filter,
-      filterOverride,
+      theme,
     }),
   );
 
@@ -45,7 +45,7 @@
       JSON.stringify({
         type,
         filter: filter ?? {},
-        filterOverride: filterOverride ?? {},
+        theme: theme ?? '',
         contentKey: contentKey ?? {},
       }),
     ),
