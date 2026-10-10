@@ -2,8 +2,12 @@
   import ReactionIcon from "$lib/components/icons/ReactionIcon.svelte";
   import ReactionEmoji from "$lib/components/reactions/ReactionEmoji.svelte";
   import { REACTIONS_CODE_MAP } from "$lib/components/reactions/constants.ts";
+  import { preloadReactionEmojis } from "$lib/components/reactions/preloadReactionEmojis.ts";
   import { getLocale } from "$lib/features/i18n/index.ts";
-  import type { MediaReaction } from "$lib/requests/models/MediaReaction.ts";
+  import {
+    MediaReactionSchema,
+    type MediaReaction,
+  } from "$lib/requests/models/MediaReaction.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { toHumanCount } from "$lib/utils/formatting/number/toHumanCount.ts";
   import { toTranslatedReaction } from "$lib/utils/formatting/string/toTranslatedReaction.ts";
@@ -14,6 +18,7 @@
   import ReactionsPopover from "./_internal/ReactionsPopover.svelte";
   import { useOptimisticReactions } from "./_internal/useOptimisticReactions.svelte.ts";
   import { reactionRoll } from "./_internal/reactionRoll.ts";
+  import { onMount } from "svelte";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { useMediaReaction } from "./stores/useMediaReaction.ts";
   import { useMediaReactions } from "./stores/useMediaReactions.ts";
@@ -26,6 +31,12 @@
     onReact,
     onOpenChange,
   }: MediaReactionsBadgeProps = $props();
+
+  onMount(() =>
+    preloadReactionEmojis(
+      MediaReactionSchema.options.map((reaction) => REACTIONS_CODE_MAP[reaction]),
+    )
+  );
 
   const { summary, held, isLoading } = useMediaReactions({
     target$: fromRune(() => ({ type, slug, id })),
