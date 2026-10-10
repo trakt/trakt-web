@@ -31,7 +31,7 @@ type RecommendationListStoreProps =
   & FilterParams;
 
 function typeToQuery(
-  { type, filter, filterOverride }: Omit<
+  { type, filter }: Omit<
     RecommendationListStoreProps,
     'page'
   >,
@@ -40,7 +40,6 @@ function typeToQuery(
   const params = {
     limit: RECOMMENDED_UPPER_LIMIT,
     filter,
-    filterOverride,
   };
 
   switch (type) {
@@ -60,10 +59,6 @@ function typeToQuery(
 }
 
 function getListKey(props: RecommendationListStoreProps) {
-  if (props.filterOverride) {
-    return `${props.type}-overridden`;
-  }
-
   const filters = props.filter ?? {};
   const hasFilters = Object.keys(filters).length > 0;
 

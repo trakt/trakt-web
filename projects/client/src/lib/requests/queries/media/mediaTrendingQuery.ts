@@ -28,10 +28,8 @@ type MediaTrendingParams =
 const TrendingMediaSchema = z.union([TrendingShowSchema, TrendingMovieSchema]);
 
 const mediaTrendingRequest = (
-  { fetch, limit, page, filter, filterOverride, search }: MediaTrendingParams,
+  { fetch, limit, page, filter, theme, search }: MediaTrendingParams,
 ) => {
-  const filterParams = filterOverride?.show ?? filter;
-
   return api({ fetch })
     .media
     .trending({
@@ -39,7 +37,8 @@ const mediaTrendingRequest = (
         extended: 'full,images,colors',
         page,
         limit,
-        ...filterParams,
+        theme,
+        ...filter,
         ...search,
       },
     });
@@ -59,9 +58,8 @@ export const mediaTrendingQuery = defineInfiniteQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.movie ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
+    params.theme,
     ...getRecordDependencies(params.search),
   ],
   request: mediaTrendingRequest,

@@ -35,7 +35,6 @@ export function useReleasesItems(props: UseReleasesItemsProps) {
       days: daysToFetch,
       type: props.type,
       filter: props.filter,
-      filterOverride: props.filterOverride,
     }),
   );
 

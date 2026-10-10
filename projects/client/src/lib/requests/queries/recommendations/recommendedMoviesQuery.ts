@@ -24,10 +24,12 @@ type RecommendedMoviesParams =
   & FilterParams;
 
 export const recommendedMoviesRequest = async (
-  { fetch, limit, filter, filterOverride }: RecommendedMoviesParams,
+  { fetch, limit, filter }: RecommendedMoviesParams,
 ) => {
-  const filterParams = filterOverride?.movie ?? filter;
-  const searchParams = getRecommendedSearchParams({ limit, filterParams });
+  const searchParams = getRecommendedSearchParams({
+    limit,
+    filterParams: filter,
+  });
 
   const response = await rawApiFetch({
     fetch,
@@ -54,9 +56,7 @@ export const recommendedMoviesQuery = defineQuery({
   ) => [
     params.limit,
     params.filter?.watch_window,
-    ...getGlobalFilterDependencies(
-      params.filterOverride?.movie ?? params.filter,
-    ),
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: recommendedMoviesRequest,
   mapper: (response) =>

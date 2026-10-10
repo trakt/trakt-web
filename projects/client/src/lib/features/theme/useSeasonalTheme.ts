@@ -58,15 +58,6 @@ export function useSeasonalTheme() {
 
   return {
     activeTheme: activeTheme.asObservable(),
-    themeFilters: activeTheme.pipe(
-      map(($activeTheme) => {
-        if (!$activeTheme) {
-          return;
-        }
-
-        return SEASONAL_THEMES[$activeTheme]?.filters;
-      }),
-    ),
     actionBarImageSrc: activeTheme.pipe(
       map(($activeTheme) => {
         if (!$activeTheme) {

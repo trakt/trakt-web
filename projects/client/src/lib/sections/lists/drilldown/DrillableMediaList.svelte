@@ -24,7 +24,7 @@
   }: DrillableList<T, M> = $props();
 
   const drilldown = $derived.by(() => {
-    if (props.filterOverride) {
+    if (props.theme) {
       return undefined;
     }
 

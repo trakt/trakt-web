@@ -473,7 +473,8 @@ import { getRecordDependencies } from '$lib/requests/_internal/getRecordDependen
 dependencies: (params) => [
   params.limit,
   params.page,
-  ...getGlobalFilterDependencies(params.filterOverride?.movie ?? params.filter),
+  ...getGlobalFilterDependencies(params.filter),
+  params.theme,
   ...getRecordDependencies(params.search),
 ],
 ```
