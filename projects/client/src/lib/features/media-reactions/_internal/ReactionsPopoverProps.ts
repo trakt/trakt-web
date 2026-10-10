@@ -8,4 +8,5 @@ export type ReactionsPopoverProps = {
   distribution: Partial<ReactionDistribution<MediaReaction>>;
   isLoading: boolean;
   trigger: Snippet;
+  onOpenChange?: (isOpen: boolean) => void;
 };

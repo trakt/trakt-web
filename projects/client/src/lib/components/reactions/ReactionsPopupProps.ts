@@ -6,4 +6,5 @@ export type ReactionsPopupProps = {
   children: Snippet<[close: () => void]>;
   reserve: string;
   offset?: string;
+  onOpenChange?: (isOpened: boolean) => void;
 };

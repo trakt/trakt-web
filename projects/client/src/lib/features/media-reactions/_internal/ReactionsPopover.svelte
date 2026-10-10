@@ -6,12 +6,16 @@
   import ReactionsPopoverContent from "./ReactionsPopoverContent.svelte";
   import type { ReactionsPopoverProps } from "./ReactionsPopoverProps.ts";
 
-  const { trigger: badge, ...content }: ReactionsPopoverProps = $props();
+  const { trigger: badge, onOpenChange, ...content }: ReactionsPopoverProps =
+    $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
 
   let isDrawerOpen = $state(false);
+  let isPopupOpen = $state(false);
+
+  $effect(() => onOpenChange?.(isPopupOpen || isDrawerOpen));
 
   function openDrawer(close: () => void) {
     close();
@@ -19,7 +23,11 @@
   }
 </script>
 
-<ReactionsPopup reserve="var(--ni-252)" offset="var(--ni-8)">
+<ReactionsPopup
+  reserve="var(--ni-252)"
+  offset="var(--ni-8)"
+  onOpenChange={(isOpened) => (isPopupOpen = isOpened)}
+>
   {#snippet trigger(attach, isOpened)}
     <button
       type="button"

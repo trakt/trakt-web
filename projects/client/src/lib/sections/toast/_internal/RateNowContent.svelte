@@ -2,6 +2,7 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import AutoCloseButton from "$lib/components/buttons/AutoCloseButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import MediaReactionsBadge from "$lib/features/media-reactions/MediaReactionsBadge.svelte";
   import { m } from "$lib/features/i18n/messages";
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import { useLastWatched } from "$lib/features/toast/useLastWatched";
@@ -16,6 +17,7 @@
   const { lastWatched }: { lastWatched: LastWatchedItem } = $props();
 
   let interactionCounter = $state(0);
+  let isReacting = $state(false);
 
   const { dismiss } = useLastWatched();
 
@@ -54,6 +56,7 @@
               onclick={handleDismiss}
               label={m.button_label_dismiss()}
               durationMs={lingerDuration}
+              persistent={isReacting}
             />
           {/key}
         {:else}
@@ -74,6 +77,16 @@
         variant="allow"
         onclick={() => (interactionCounter += 1)}
       />
+      {#key `${lastWatched.type}:${lastWatched.media.slug}`}
+        <MediaReactionsBadge
+          type={lastWatched.type}
+          slug={lastWatched.media.slug}
+          id={lastWatched.media.id}
+          variant="compact"
+          onReact={() => (interactionCounter += 1)}
+          onOpenChange={(isOpen) => (isReacting = isOpen)}
+        />
+      {/key}
     </div>
   </div>
 </div>
@@ -114,8 +127,19 @@
   }
 
   .trakt-rate-now-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-xs);
+
     :global(.trakt-rate-now) {
       justify-content: flex-start;
+    }
+
+    @include for-tablet-sm-and-below {
+      :global(.trakt-rate-actions) {
+        gap: var(--gap-micro);
+      }
     }
   }
 </style>
