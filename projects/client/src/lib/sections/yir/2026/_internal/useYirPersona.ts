@@ -4,6 +4,7 @@ import {
   type YirPersonaParams,
   yirPersonaQuery,
 } from '$lib/requests/queries/users/yirPersonaQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map, type Observable } from 'rxjs';
 
 export function useYirPersona(params: Observable<YirPersonaParams>) {
@@ -15,5 +16,6 @@ export function useYirPersona(params: Observable<YirPersonaParams>) {
 
   return {
     persona: query.pipe(map(($query) => $query.data ?? null)),
+    isLoading: query.pipe(map(toLoadingState)),
   };
 }

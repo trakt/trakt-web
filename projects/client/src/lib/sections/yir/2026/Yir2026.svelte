@@ -10,7 +10,7 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { map } from "rxjs";
-  import { tick } from "svelte";
+  import { tick, type Snippet } from "svelte";
   import { yirBeats } from "./_internal/persona/yirBeats";
   import ReviewPageShell from "../_internal/ReviewPageShell.svelte";
   import YirHeader from "../_internal/YirHeader.svelte";
@@ -28,14 +28,16 @@
     detail,
     slug,
     year,
+    fallback,
   }: {
     detail: YirDetail | null;
     isLoading: boolean;
     slug: string;
     year: number;
+    fallback: Snippet;
   } = $props();
 
-  const { persona } = useYirPersona(
+  const { persona, isLoading: isPersonaLoading } = useYirPersona(
     fromRune(() => ({
       slug,
       year,
@@ -130,17 +132,18 @@
       {@render toggles(false)}
     {/if}
   </YirPersonaTheme>
+{:else if !$isPersonaLoading}
+  {@render fallback()}
+  {@render toggles(false)}
 {/if}
 
 
 {#snippet toggles(isRaised: boolean)}
-  {#if $persona}
-    <YirPersonaToggles
-      persona={$persona.persona}
-      runnerUp={$persona.runnerUp}
-      {isRaised}
-    />
-  {/if}
+  <YirPersonaToggles
+    persona={$persona?.persona}
+    runnerUp={$persona?.runnerUp}
+    {isRaised}
+  />
 {/snippet}
 
 <style>
