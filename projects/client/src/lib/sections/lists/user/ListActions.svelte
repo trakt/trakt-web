@@ -16,7 +16,7 @@
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import AddFromListsButton from "./_internal/bulk-add/AddFromListsButton.svelte";
   import BulkAddDrawer from "./_internal/bulk-add/BulkAddDrawer.svelte";
-  import BulkEditListButton from "./_internal/BulkEditListButton.svelte";
+  import BulkEditListButton from "./_internal/bulk-edit/BulkEditListButton.svelte";
   import DeleteListButton from "./_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";

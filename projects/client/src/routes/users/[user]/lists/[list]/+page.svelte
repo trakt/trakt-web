@@ -5,7 +5,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import ListMeta from "$lib/sections/lists/components/ListMeta.svelte";
-  import BulkListEditBar from "$lib/sections/lists/user/_internal/BulkListEditBar.svelte";
+  import BulkListEditBar from "$lib/sections/lists/user/BulkListEditBar.svelte";
   import { useListSorting } from "$lib/sections/lists/user/_internal/useListSorting.ts";
   import ListActions from "$lib/sections/lists/user/ListActions.svelte";
   import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";

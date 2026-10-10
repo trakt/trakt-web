@@ -1,43 +1,17 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import { useDangerButton } from "$lib/components/buttons/_internal/useDangerButton";
   import CheckboxIcon from "$lib/components/icons/CheckboxIcon.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
-  import DeleteIcon from "$lib/components/icons/DeleteIcon.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useListSelection } from "$lib/features/list-selection/useListSelection.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll.ts";
-  import { useBulkDeleteFromList } from "./useBulkDeleteFromList.ts";
+  import { bulkEditActions } from "./bulkEditActions.ts";
 
   const { list }: { list: MediaListSummary } = $props();
 
   const selection = useListSelection();
-  const { isDeleting, deleteItems } = $derived(useBulkDeleteFromList(list));
 
-  const { confirm } = useConfirm();
-
-  async function handleDeleted() {
-    await deleteItems(selection.selectedItems);
-    selection.exitEdit();
-  }
-
-  const confirmDelete = $derived(
-    confirm({
-      type: ConfirmationType.BulkRemoveFromList,
-      count: selection.selectedCount,
-      name: list.name,
-      onConfirm: handleDeleted,
-    }),
-  );
-
-  const { color, variant: _variant, ...dangerEvents } = $derived(
-    useDangerButton({ isActive: true, color: "default" }),
-  );
-
-  const hasSelection = $derived(selection.selectedCount > 0);
   const isAllSelected = $derived(
     selection.totalCount > 0 && selection.selectedCount === selection.totalCount,
   );
@@ -53,7 +27,7 @@
 </script>
 
 <div
-  class="trakt-bulk-delete-list-header"
+  class="trakt-bulk-edit-list-header"
   use:trackWindowScroll={"is-scrolled"}
 >
   <p class="secondary selected-count">
@@ -67,31 +41,22 @@
       onclick={toggleSelectAll}
       aria-pressed={isAllSelected}
       aria-label={isAllSelected
-        ? m.button_label_unselect_all_list_items()
+        ? m.button_label_deselect_all_list_items()
         : m.button_label_select_all_list_items()}
     >
       <CheckboxIcon state={isAllSelected ? "checked" : "unchecked"} />
       {isAllSelected
-        ? m.button_text_unselect_all()
+        ? m.button_text_deselect_all()
         : m.button_text_select_all()}
     </button>
 
-    <Button
-      size="small"
-      color={$color}
-      disabled={!hasSelection || $isDeleting}
-      label={m.button_label_delete_selected_list_items({
-        count: selection.selectedCount,
-        name: list.name,
-      })}
-      onclick={confirmDelete}
-      {...dangerEvents}
-    >
-      {m.button_text_delete_selected()}
-      {#snippet icon()}
-        <DeleteIcon />
-      {/snippet}
-    </Button>
+    {#each bulkEditActions as action (action.key)}
+      <action.component
+        {list}
+        items={selection.selectedItems}
+        onDone={selection.exitEdit}
+      />
+    {/each}
 
     <Button
       size="small"
@@ -110,7 +75,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-bulk-delete-list-header {
+  .trakt-bulk-edit-list-header {
     position: sticky;
     inset-block-start: 0;
     z-index: var(--layer-floating);

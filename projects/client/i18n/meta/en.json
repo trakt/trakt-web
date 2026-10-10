@@ -6178,7 +6178,7 @@
     },
     "button_text_deselect_all": {
       "default": "Deselect all",
-      "description": "Text for the subtle button in the title picker that clears the selection of every title of the chosen list."
+      "description": "Text for a button that clears the selection of every selected item, such as the titles in the title picker or the loaded items in a list's bulk-selection edit mode."
     },
     "text_titles_selected": {
       "default": "{count} selected",
@@ -12680,12 +12680,8 @@
         }
       }
     },
-    "button_text_unselect_all": {
-      "default": "Unselect all",
-      "description": "Text for the button that deselects every loaded item in bulk-selection edit mode, shown once everything is already selected."
-    },
-    "button_label_unselect_all_list_items": {
-      "default": "Unselect all items",
+    "button_label_deselect_all_list_items": {
+      "default": "Deselect all items",
       "description": "Aria-label for the button that deselects every loaded item in bulk-selection edit mode, shown once everything is already selected."
     }
   }
