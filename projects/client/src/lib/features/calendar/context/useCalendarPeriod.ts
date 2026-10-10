@@ -64,11 +64,31 @@ export function useCalendarPeriod(
     startDate.next(newStart);
   };
 
+  const goTo = (date: Date, direction: Direction) => {
+    track({ action: direction });
+    const newStart = getStartOfWeek(date, getLocale());
+
+    clear(newStart);
+    visibleDate.next(null);
+    activeDate.next(date);
+    startDate.next(newStart);
+  };
+
+  const restart = () => {
+    const referenceDate = visibleDate.value ?? activeDate.value;
+    const newStart = getStartOfWeek(referenceDate, getLocale());
+
+    clear(newStart);
+    visibleDate.next(null);
+    startDate.next(newStart);
+  };
+
   const reset = () => {
     track({ action: 'reset' });
     const referenceDate = visibleDate.value ?? startDate.value;
 
     if (isCurrentWeek(referenceDate, getLocale())) {
+      visibleDate.next(null);
       activeDate.next(new Date());
       return;
     }
@@ -89,5 +109,7 @@ export function useCalendarPeriod(
     accumulate,
     activeDate,
     reset,
+    restart,
+    goTo,
   };
 }

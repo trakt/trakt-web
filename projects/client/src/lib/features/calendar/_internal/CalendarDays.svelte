@@ -48,16 +48,17 @@
     position: relative;
     width: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    align-items: start;
 
     gap: var(--gap-micro);
 
     border-radius: var(--border-radius-s);
 
     :global(.trakt-calendar-day-button) {
-      flex: 1;
+      width: 100%;
+      min-width: 0;
     }
   }
 </style>

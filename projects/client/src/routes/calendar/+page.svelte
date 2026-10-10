@@ -1,21 +1,23 @@
 <script lang="ts">
   import Calendar from "$lib/features/calendar/Calendar.svelte";
-  import EpisodeTypeToggles from "$lib/features/calendar/EpisodeTypeToggles.svelte";
   import { useEpisodeType } from "$lib/features/calendar/useEpisodeType";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import CalendarTitleActions from "$lib/features/calendar/CalendarTitleActions.svelte";
+  import { useIsCalendarDocked } from "$lib/features/calendar/useIsCalendarDocked";
 
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   const { current } = useDiscover();
   const { current: episodeType, isApplicable } = useEpisodeType();
+  const isDocked = useIsCalendarDocked();
 </script>
 
 {#snippet episodeTypeToggles()}
-  <EpisodeTypeToggles />
+  <CalendarTitleActions />
 {/snippet}
 
 <TraktPage
@@ -25,13 +27,14 @@
 >
   <TraktPageCoverSetter />
 
-  <ResponsiveNavbarStateSetter
-    contentToggle="discover"
+  <NavbarStateSetter
+    mode={$isDocked ? "minimal" : "full"}
     hasFilters
+    showFilters={!$isDocked}
     header={{
       title: m.header_calendar(),
       metaInfo: $isApplicable ? $episodeType.text() : $current.text(),
-      actions: episodeTypeToggles,
+      actions: $isDocked ? undefined : episodeTypeToggles,
     }}
   />
 
