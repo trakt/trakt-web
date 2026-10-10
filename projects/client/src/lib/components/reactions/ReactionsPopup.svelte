@@ -11,12 +11,15 @@
     children,
     reserve,
     offset = "0px",
+    onOpenChange,
   }: ReactionsPopupProps = $props();
 
   const { portalTrigger, portal, isOpened, close } = usePortal({
     placement: { position: "top" },
     type: "persistent",
   });
+
+  $effect(() => onOpenChange?.($isOpened));
 
   const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
 

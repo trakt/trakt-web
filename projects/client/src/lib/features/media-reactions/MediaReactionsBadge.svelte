@@ -18,7 +18,14 @@
   import { useMediaReaction } from "./stores/useMediaReaction.ts";
   import { useMediaReactions } from "./stores/useMediaReactions.ts";
 
-  const { type, slug, id }: MediaReactionsBadgeProps = $props();
+  const {
+    type,
+    slug,
+    id,
+    variant = "default",
+    onReact,
+    onOpenChange,
+  }: MediaReactionsBadgeProps = $props();
 
   const { summary, held, isLoading } = useMediaReactions({
     target$: fromRune(() => ({ type, slug, id })),
@@ -74,12 +81,17 @@
     const index = chosen.length;
 
     if (!reactions.select(reaction)) return;
+    onReact?.();
     if (isAdding) shown = index;
   }
 
   const glyphs = $derived(merged.top);
 
-  const hasRoom = $derived(glyphs.length > 0 || merged.totalCount > 0);
+  const isCompact = $derived(variant === "compact");
+
+  const hasRoom = $derived(
+    !isCompact && (glyphs.length > 0 || merged.totalCount > 0),
+  );
 </script>
 
 <ReactionsPopover
@@ -87,6 +99,7 @@
   distribution={merged.distribution}
   isLoading={$isLoading}
   onSelect={selectHandler}
+  {onOpenChange}
 >
   {#snippet trigger()}
     <span
@@ -114,7 +127,7 @@
         {/if}
       </span>
 
-      {#if hasRoom || chosen.length > 1}
+      {#if hasRoom || (!isCompact && chosen.length > 1)}
         <span
           class="badge-divider"
           class:has-icon-before={chosen.length === 0}
