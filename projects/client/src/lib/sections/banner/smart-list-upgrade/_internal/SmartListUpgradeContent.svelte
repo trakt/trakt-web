@@ -5,13 +5,13 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import type { SmartListDraft } from "$lib/requests/models/SmartListDraft.ts";
+  import { toListOverlap } from "$lib/sections/smart-lists/toListOverlap.ts";
   import { useConvertSmartList } from "$lib/sections/smart-lists/useConvertSmartList.ts";
   import { useSmartListDraft } from "$lib/sections/smart-lists/useSmartListDraft.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { untrack } from "svelte";
   import BannerCta from "../../_internal/BannerCta.svelte";
   import SmartListUpgradeCard from "./SmartListUpgradeCard.svelte";
-  import { toListOverlap } from "./toListOverlap.ts";
   import { toSmartListDraftChips } from "./toSmartListDraftChips.ts";
   import { toStaleOriginName } from "./toStaleOriginName.ts";
 

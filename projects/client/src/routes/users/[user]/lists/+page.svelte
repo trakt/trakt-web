@@ -11,6 +11,7 @@
   import type { PersonalListType } from "$lib/sections/lists/user/models/PersonalListType.ts";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import SmartListNudgeBar from "$lib/sections/smart-list-nudges/SmartListNudgeBar.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
@@ -42,6 +43,10 @@
   <TraktPageCoverSetter />
 
   <NavbarStateSetter contentToggle="discover" hasFilters />
+
+  {#if $isMe}
+    <SmartListNudgeBar />
+  {/if}
 
   <WatchList
     drilldownLabel={m.button_label_view_all_watchlist_items()}

@@ -19,6 +19,7 @@ import { FavoritedShowsResponseMock } from '../data/users/response/FavoritedShow
 import { HiddenShowProgressResponseMock } from '../data/users/response/HiddenShowProgressResponseMock.ts';
 import { MinimalLikedListsResponseMock } from '../data/users/response/MinimalLikedListsResponseMock.ts';
 import { SmartListDraftResponseMock } from '../data/users/response/SmartListDraftResponseMock.ts';
+import { SmartListDraftsSummaryResponseMock } from '../data/users/response/SmartListDraftsSummaryResponseMock.ts';
 import { SmartListDefinitionsResponseMock } from '../data/users/response/SmartListDefinitionsResponseMock.ts';
 import { SmartListItemsResponseMock } from '../data/smart-lists/response/SmartListItemsResponseMock.ts';
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
@@ -187,6 +188,9 @@ export const users = [
       return HttpResponse.json(SiloListsResponseMock.at(0));
     },
   ),
+  http.get('http://localhost/users/me/smart-list-drafts', () => {
+    return HttpResponse.json(SmartListDraftsSummaryResponseMock);
+  }),
   http.get(
     `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${
       assertDefined(SiloListsMappedMock.at(0)).slug

@@ -9,6 +9,7 @@
   import { useUserListsSorting } from "$lib/sections/lists/user/useUserListsSorting.ts";
   import UserListsActions from "$lib/sections/lists/user/UserListsActions.svelte";
   import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
+  import SmartListNudgeBar from "$lib/sections/smart-list-nudges/SmartListNudgeBar.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import type { PageProps } from "./$types";
 
@@ -52,6 +53,10 @@
       />
     {/snippet}
   </ResponsiveNavbarStateSetter>
+
+  {#if $isMe}
+    <SmartListNudgeBar />
+  {/if}
 
   <PersonalListsPaginated
     type="personal"
