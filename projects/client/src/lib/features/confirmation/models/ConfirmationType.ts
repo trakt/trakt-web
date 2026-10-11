@@ -12,6 +12,7 @@ export enum ConfirmationType {
   RemoveFavorite = 'remove-favorite',
   RemoveFromWatchList = 'remove-from-watchlist',
   RemoveFromList = 'remove-from-list',
+  BulkRemoveFromList = 'bulk-remove-from-list',
   UnfollowUser = 'unfollow-user',
   BlockUser = 'block-user',
   StopCheckin = 'stop-checkin',

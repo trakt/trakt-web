@@ -74,6 +74,15 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.warning_prompt_delete_list({ name: props.name }),
     operation: 'destructive',
   }),
+  [ConfirmationType.BulkRemoveFromList]: (props) => ({
+    title: m.confirmation_title_bulk_remove_from_list(),
+    buttonText: m.button_text_delete_selected(),
+    message: m.warning_prompt_bulk_remove_from_list({
+      count: props.count,
+      list: props.name,
+    }),
+    operation: 'destructive',
+  }),
   [ConfirmationType.LeaveCollaboration]: (props) => ({
     title: m.confirmation_title_leave_collaboration(),
     buttonText: m.button_text_leave_collaboration(),
