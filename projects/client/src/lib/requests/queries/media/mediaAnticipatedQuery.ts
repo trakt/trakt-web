@@ -67,10 +67,12 @@ export const mediaAnticipatedQuery = defineInfiniteQuery({
   ],
   request: mediaAnticipatedRequest,
   mapper: (response) => ({
-    entries: response.body.map((entry) =>
-      'show' in entry
-        ? mapToAnticipatedShow(entry)
-        : mapToAnticipatedMovie(entry)
+    entries: response.body.flatMap(({ show, movie, ...rest }) =>
+      show
+        ? [mapToAnticipatedShow({ ...rest, show })]
+        : movie
+        ? [mapToAnticipatedMovie({ ...rest, movie })]
+        : []
     ),
     page: extractPageMeta(response.headers),
   }),

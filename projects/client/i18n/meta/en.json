@@ -4857,6 +4857,10 @@
       "default": "Toggle christmas filters",
       "description": "Aria-label for the switch that allows users to toggle christmas filters."
     },
+    "list_title_all_titles": {
+      "default": "All titles",
+      "description": "Title for a smart list that draws from every movie and show with no preset source. This title should be as short and concise as possible."
+    },
     "list_title_library": {
       "default": "Library",
       "description": "Title for lists containing movies and episodes in a users library. This title should be as short and concise as possible."
@@ -12591,6 +12595,46 @@
     "button_label_quick_reactions": {
       "default": "Quick reactions",
       "description": "Aria-label for the button that collapses the expanded reaction tray back to the quick row."
+    },
+    "smart_list_upgrade_draft_title": {
+      "default": "Make this list update itself",
+      "description": "Heading on the banner that offers list owners a ready-made smart list built from their frozen list."
+    },
+    "smart_list_upgrade_plain_title": {
+      "default": "Want this list to update itself?",
+      "description": "Heading on the smaller banner that pitches smart lists to owners of a frozen list when no ready-made setup exists."
+    },
+    "smart_list_upgrade_plain_description": {
+      "default": "Smart lists add new titles on their own, based on filters you pick.",
+      "description": "Muted supporting line on the compact banner that pitches smart lists to owners of a frozen list when no ready-made setup exists."
+    },
+    "smart_list_upgrade_origin_note": {
+      "default": "Synced from {origin}, which no longer updates Trakt lists.",
+      "description": "Short footnote on the phone-width smart list upgrade banner explaining why the list stopped updating. {origin} is the display name of the service the list was synced from."
+    },
+    "smart_list_upgrade_origin_note_link": {
+      "default": "Synced from {origin}, which no longer updates Trakt lists. Same list, same link after converting.",
+      "description": "Footnote on the desktop smart list upgrade banner explaining why the list stopped updating and that converting keeps the list address. {origin} is the display name of the service the list was synced from."
+    },
+    "button_text_smart_list_convert": {
+      "default": "Turn into a smart list",
+      "description": "Text for the button that turns a frozen list into a smart list."
+    },
+    "button_label_smart_list_convert": {
+      "default": "Turn this list into a smart list",
+      "description": "Aria-label for the button that turns a frozen list into a smart list."
+    },
+    "button_text_create_smart_list": {
+      "default": "Create a smart list",
+      "description": "Text for the button that opens the smart list builder."
+    },
+    "smart_list_upgrade_overlap": {
+      "default": "Brings back {kept} of your {total} titles, plus new releases",
+      "description": "Muted text next to the heading of the smart list upgrade banner estimating how many of the list's titles the smart list would include. {kept} is the estimated number kept, {total} is the number of titles checked."
+    },
+    "button_text_not_now": {
+      "default": "Not now",
+      "description": "Text for the button that dismisses a suggestion banner without acting on it."
     }
   }
 }

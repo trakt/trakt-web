@@ -1,5 +1,8 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/filters/useDiscover";
+  import Redirect from "$lib/components/router/Redirect.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import SmartListUpgradeBanner from "$lib/sections/banner/smart-list-upgrade/SmartListUpgradeBanner.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import ListMeta from "$lib/sections/lists/components/ListMeta.svelte";
@@ -10,6 +13,7 @@
   import { useUserListSummary } from "$lib/sections/lists/user/useUserListSummary.ts";
   import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
 
   const { params }: PageProps = $props();
@@ -74,7 +78,15 @@
 
   <TraktPageCoverSetter />
 
+  {#if $list?.convertedTo}
+    <RenderFor audience="authenticated">
+      <Redirect to={UrlBuilder.lists.smart.view($list.convertedTo.slug)} />
+    </RenderFor>
+  {/if}
+
   {#if $list}
+    <SmartListUpgradeBanner list={$list} />
+
     <UserListPaginatedList
       list={$list}
       type={$mode}

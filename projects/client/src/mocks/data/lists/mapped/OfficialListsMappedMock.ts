@@ -12,6 +12,8 @@ export const OfficialListsMappedMock: MediaListSummary[] = [
     'sortBy': 'added',
     'sortHow': 'asc',
     'privacy': 'public',
+    'staleOrigin': null,
+    'convertedTo': null,
     'user': {
       'username': 'Trakt',
       'id': 0,

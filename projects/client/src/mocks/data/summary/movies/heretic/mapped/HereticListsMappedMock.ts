@@ -17,5 +17,7 @@ export const HereticListsMappedMock: MediaListSummary[] = [
     'sortHow': 'asc',
     'type': 'personal',
     'privacy': 'public',
+    'staleOrigin': null,
+    'convertedTo': null,
   },
 ];

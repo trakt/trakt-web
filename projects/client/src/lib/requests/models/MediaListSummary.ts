@@ -21,6 +21,11 @@ export const MediaListSummarySchema = z.object({
   sortBy: z.string(),
   type: ListTypeSchema,
   privacy: ListPrivacySchema,
+  staleOrigin: z.object({
+    name: z.string(),
+    url: z.string().nullable(),
+  }).nullable(),
+  convertedTo: z.object({ slug: z.string() }).nullable(),
 });
 
 export type MediaListSummary = z.infer<typeof MediaListSummarySchema>;

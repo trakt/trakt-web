@@ -5,50 +5,22 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { SmartListDefinitionResponse } from '@trakt/api';
 import { z } from 'zod';
 import { InvalidateAction } from '../../models/InvalidateAction.ts';
+import {
+  type SmartListFilters,
+  SmartListFiltersSchema,
+} from '../../models/SmartListFilters.ts';
+import {
+  type SmartListMediaType,
+  SmartListMediaTypeSchema,
+} from '../../models/SmartListMediaType.ts';
+import {
+  type SmartListSource,
+  SmartListSourceSchema,
+} from '../../models/SmartListSource.ts';
 
-const SmartListSourceSchema = z.enum([
-  'trending',
-  'popular',
-  'anticipated',
-  'recommendations',
-  'discover',
-  'watchlist',
-  'library',
-]);
-export type SmartListSource = z.infer<typeof SmartListSourceSchema>;
-
-const SmartListMediaTypeSchema = z.enum(['movies', 'shows', 'media']);
-export type SmartListMediaType = z.infer<typeof SmartListMediaTypeSchema>;
+export type { SmartListFilters, SmartListMediaType, SmartListSource };
 
 const SmartListPrivacySchema = z.enum(['public', 'private', 'friends']);
-
-const list = z.string().array().optional();
-const range = z.number().array().optional();
-
-const SmartListFiltersSchema = z.object({
-  genres: list,
-  subgenres: list,
-  certifications: list,
-  languages: list,
-  countries: list,
-  statuses: list,
-  networks: list,
-  watchnow: list,
-  years: range,
-  ratings: range,
-  runtimes: range,
-  imdb_ratings: range,
-  rt_meters: range,
-  rt_user_meters: range,
-  parental_nudity: range,
-  parental_violence: range,
-  parental_profanity: range,
-  parental_alcohol: range,
-  parental_frightening: range,
-  ignore_watched: z.boolean().optional(),
-  ignore_watchlisted: z.boolean().optional(),
-});
-export type SmartListFilters = z.infer<typeof SmartListFiltersSchema>;
 
 export const SmartListSchema = z.object({
   key: z.string(),

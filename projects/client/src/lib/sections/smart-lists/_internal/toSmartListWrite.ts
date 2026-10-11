@@ -1,6 +1,6 @@
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import type { SmartListWriteRequest } from '@trakt/api';
-import type { SmartListFilters } from '$lib/requests/queries/users/smartListQuery.ts';
+import type { SmartListFilters } from '$lib/requests/models/SmartListFilters.ts';
 import type { ListTarget } from '../models/ListTarget.ts';
 import { toSmartListFilters } from '../toSmartListFilters.ts';
 
