@@ -468,6 +468,32 @@ If no suitable semantic variable exists yet, add one to **both** mixins in
 
 ---
 
+## No Outlines on Surfaces
+
+Do not give cards, banners, callouts, pills or other raised surfaces a border or
+outline unless the design or the owner explicitly asks for one. Separate a
+surface from the page with its background and the shared shadow instead.
+
+```scss
+// Bad - outlined card
+.trakt-my-callout {
+  border: var(--border-thickness-xxs) solid var(--color-border);
+  border-radius: var(--border-radius-l);
+}
+
+// Good - shadow, no outline
+.trakt-my-callout {
+  border-radius: var(--border-radius-l);
+  box-shadow: var(--shadow-floating);
+}
+```
+
+Still fine: keyboard focus rings (`:focus-visible` outlines are an accessibility
+requirement), thin dividers between rows inside a surface, and form inputs.
+Reference: `lib/sections/stats/StreakCallout.svelte`.
+
+---
+
 ## Font Styling
 
 Use global typography utility classes from `style/typography/index.css` for font
