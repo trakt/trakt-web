@@ -12635,6 +12635,74 @@
     "button_text_not_now": {
       "default": "Not now",
       "description": "Text for the button that dismisses a suggestion banner without acting on it."
+    },
+    "smart_list_nudge_message": {
+      "default": "{count} of your lists can update themselves",
+      "description": "Message in the floating pill and the lists page bar telling list owners how many of their frozen lists can become smart lists. {count} is the number of lists.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "smart_list_nudge_message_short": {
+      "default": "{count} lists can update themselves",
+      "description": "Phone-width version of the smart list nudge message, used when there is more than one list. {count} is the number of lists.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "smart_list_nudge_message_short_single": {
+      "default": "{count} list can update itself",
+      "description": "Phone-width version of the smart list nudge message, used when there is exactly one list. {count} is the number of lists.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_show_me": {
+      "default": "Show me",
+      "description": "Text for the button in the floating smart list nudge that opens the owner's lists page."
+    },
+    "button_label_show_convertible_lists": {
+      "default": "Show the lists that can update themselves",
+      "description": "Aria-label for the button in the floating smart list nudge that opens the owner's lists page."
+    },
+    "button_text_review_lists": {
+      "default": "Review",
+      "description": "Text for the button on the lists page bar that expands the list of lists that can become smart lists."
+    },
+    "button_text_hide_lists": {
+      "default": "Hide",
+      "description": "Text for the button on the lists page bar that collapses the list of lists that can become smart lists."
+    },
+    "smart_list_nudge_row_overlap": {
+      "default": "Brings back {kept} of {total}",
+      "description": "Muted text on a row of the lists page bar estimating how many of the list's titles the smart list would include. {kept} is the estimated number kept, {total} is the number of titles checked.",
+      "variables": {
+        "kept": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_convert": {
+      "default": "Convert",
+      "description": "Text for the compact button that turns a frozen list into a smart list in one click."
+    },
+    "button_label_smart_list_convert_named": {
+      "default": "Turn {name} into a smart list",
+      "description": "Aria-label for the compact button that turns the named frozen list into a smart list. {name} is the list name.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

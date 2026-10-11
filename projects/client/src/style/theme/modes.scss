@@ -59,6 +59,12 @@
   --color-official-list-background: var(--purple-200);
 
   /*
+   * Smart list nudge
+   */
+  --color-smart-list-nudge-background: var(--shade-900);
+  --color-smart-list-nudge-foreground: var(--shade-10);
+
+  /*
    * Actions bar
    */
   --color-actions-bar-background: var(--color-floating-background);
@@ -623,6 +629,12 @@
    */
   --color-card-background: var(--color-floating-background);
   --color-official-list-background: var(--purple-800);
+
+  /*
+   * Smart list nudge
+   */
+  --color-smart-list-nudge-background: var(--shade-800);
+  --color-smart-list-nudge-foreground: var(--shade-10);
 
   /*
    * Actions bar

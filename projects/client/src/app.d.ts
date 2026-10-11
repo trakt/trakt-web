@@ -164,6 +164,8 @@ declare global {
     & {
       label: string;
       'aria-pressed'?: 'true' | 'false' | 'mixed';
+      'aria-expanded'?: boolean;
+      'aria-controls'?: string;
       type?: 'button' | 'submit' | 'reset';
       value?: string;
     }

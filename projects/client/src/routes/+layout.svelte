@@ -47,6 +47,7 @@
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
   import TopNavbar from "$lib/sections/navbar/TopNavbar.svelte";
+  import SmartListNudgePill from "$lib/sections/smart-list-nudges/SmartListNudgePill.svelte";
   import NavbarToastContent from "$lib/sections/toast/NavbarToastContent.svelte";
   import { isCrawler } from "$lib/utils/devices/isCrawler.ts";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
@@ -153,6 +154,10 @@
 
                                             <RenderFor audience="authenticated">
                                               <OfflineSync />
+                                            </RenderFor>
+
+                                            <RenderFor audience="authenticated">
+                                              <SmartListNudgePill />
                                             </RenderFor>
 
                                             <LoginErrorSnackbar />

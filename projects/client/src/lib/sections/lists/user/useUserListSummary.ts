@@ -7,6 +7,7 @@ import { map, of } from 'rxjs';
 type UseUserListSummaryProps = {
   userId: string | undefined;
   listId: string | undefined;
+  withPosters?: boolean;
 };
 
 export function useUserListSummary(props: UseUserListSummaryProps) {
@@ -20,6 +21,7 @@ export function useUserListSummary(props: UseUserListSummaryProps) {
   const query = useQuery(userListSummaryQuery({
     userId: props.userId,
     listId: props.listId,
+    withPosters: props.withPosters,
   }));
 
   return {
