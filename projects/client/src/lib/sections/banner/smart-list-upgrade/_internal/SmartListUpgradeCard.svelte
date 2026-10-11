@@ -105,9 +105,8 @@
       var(--color-card-background) 80%,
       transparent
     );
-    border: var(--border-thickness-xxs) solid
-      color-mix(in srgb, var(--color-border) 50%, transparent);
     border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-floating);
 
     &::before {
       content: "";

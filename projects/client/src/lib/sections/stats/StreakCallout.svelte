@@ -174,6 +174,8 @@
   .trakt-streak-callout {
     background: var(--color-streak-surface);
 
+    box-sizing: border-box;
+    min-height: var(--ni-74);
     padding: var(--ni-12);
     padding-inline-end: var(--ni-18);
 
@@ -181,8 +183,8 @@
     align-items: center;
     gap: var(--gap-s);
 
-    border: var(--ni-1) solid var(--color-streak-border);
     border-radius: var(--border-radius-l);
+    box-shadow: var(--shadow-floating);
   }
 
   .trakt-streak-left {
