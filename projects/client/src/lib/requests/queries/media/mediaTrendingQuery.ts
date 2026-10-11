@@ -64,8 +64,12 @@ export const mediaTrendingQuery = defineInfiniteQuery({
   ],
   request: mediaTrendingRequest,
   mapper: (response) => ({
-    entries: response.body.map((entry) =>
-      'show' in entry ? mapToTrendingShow(entry) : mapToTrendingMovie(entry)
+    entries: response.body.flatMap(({ show, movie, ...rest }) =>
+      show
+        ? [mapToTrendingShow({ ...rest, show })]
+        : movie
+        ? [mapToTrendingMovie({ ...rest, movie })]
+        : []
     ),
     page: extractPageMeta(response.headers),
   }),

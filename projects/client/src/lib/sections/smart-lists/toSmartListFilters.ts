@@ -1,5 +1,5 @@
 import { FILTER_KEYS } from '$lib/features/filters/filterKeys.ts';
-import type { SmartListFilters } from '$lib/requests/queries/users/smartListQuery.ts';
+import type { SmartListFilters } from '$lib/requests/models/SmartListFilters.ts';
 
 const LIST_KEYS = [
   'genres',

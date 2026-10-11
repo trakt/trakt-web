@@ -1,4 +1,4 @@
-import type { SmartListFilters } from '$lib/requests/queries/users/smartListQuery.ts';
+import type { SmartListFilters } from '$lib/requests/models/SmartListFilters.ts';
 
 function toParamValue(value: unknown): string | undefined {
   if (typeof value === 'boolean') {

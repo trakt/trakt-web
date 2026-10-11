@@ -15,6 +15,8 @@ export const SiloListsMappedMock: MediaListSummary[] = [
     'sortBy': 'added',
     'sortHow': 'asc',
     'privacy': 'public',
+    'staleOrigin': null,
+    'convertedTo': null,
     'posters': [
       {
         'url': {

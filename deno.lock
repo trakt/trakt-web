@@ -12,7 +12,7 @@
     "npm:@eslint/js@10.0.1": "10.0.1_eslint@10.12.0",
     "npm:@inlang/paraglide-js@2.27.0": "2.27.0_typescript@5.9.3_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1_esbuild@0.28.2_sass-embedded@1.105.1",
     "npm:@jsr/libn__fuzzy@0.4.0": "0.4.0",
-    "npm:@jsr/trakt__api@0.7.4": "0.7.4_openapi3-ts@4.6.1",
+    "npm:@jsr/trakt__api@0.7.6": "0.7.6_openapi3-ts@4.6.1",
     "npm:@playwright/test@1.64.0": "1.64.0",
     "npm:@sentry/sveltekit@10.76.2": "10.76.2_@sveltejs+kit@2.70.3__@opentelemetry+api@1.9.1__@sveltejs+vite-plugin-svelte@7.3.1___svelte@5.57.2___vite@8.3.4____esbuild@0.28.2____jiti@2.7.0____sass-embedded@1.105.1___esbuild@0.28.2___sass-embedded@1.105.1__svelte@5.57.2__typescript@5.9.3__vite@8.3.4___esbuild@0.28.2___jiti@2.7.0___sass-embedded@1.105.1__esbuild@0.28.2__sass-embedded@1.105.1_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1_esbuild@0.28.2_sass-embedded@1.105.1",
     "npm:@svelte-put/shortcut@4.2.0": "4.2.0_svelte@5.57.2",
@@ -41,7 +41,7 @@
     "npm:@types/serviceworker@0.0.203": "0.0.203",
     "npm:@use-gesture/vanilla@10.3.1": "10.3.1",
     "npm:@vite-pwa/sveltekit@1.1.0": "1.1.0_@sveltejs+kit@2.70.3__@opentelemetry+api@1.9.1__@sveltejs+vite-plugin-svelte@7.3.1___svelte@5.57.2___vite@8.3.4____esbuild@0.28.2____jiti@2.7.0____sass-embedded@1.105.1___esbuild@0.28.2___sass-embedded@1.105.1__svelte@5.57.2__typescript@5.9.3__vite@8.3.4___esbuild@0.28.2___jiti@2.7.0___sass-embedded@1.105.1__esbuild@0.28.2__sass-embedded@1.105.1_esbuild@0.28.2_sass-embedded@1.105.1_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1",
-    "npm:@vitest/coverage-istanbul@4.1.11": "4.1.11_vitest@4.1.11_esbuild@0.28.2_jsdom@30.1.2_sass-embedded@1.105.1_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1",
+    "npm:@vitest/coverage-istanbul@4.1.11": "4.1.11_vitest@4.1.11_@opentelemetry+api@1.9.1_jsdom@30.1.2_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1",
     "npm:bits-ui@2.19.5": "2.19.5_svelte@5.57.2_esbuild@0.28.2_sass-embedded@1.105.1_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1",
     "npm:concurrently@10.0.6": "10.0.6",
     "npm:cross-env@10.1.0": "10.1.0",
@@ -1908,14 +1908,14 @@
       "integrity": "sha512-aD9yjW6CMt37S3AMTc95LeuRXcKor69Zkr0aWOhYvinTOEAhEIuaJhP4pQqyQGaAC9HIrQcKh1PtRTK85kkVjA==",
       "tarball": "https://npm.jsr.io/~/11/@jsr/libn__fuzzy/0.4.0.tgz"
     },
-    "@jsr/trakt__api@0.7.4_openapi3-ts@4.6.1": {
-      "integrity": "sha512-h7lFnIkORXR7NeK0awkc2n7q/RP9z9GiMzb9rT2n+5tn82u3DjFnOHSH4JPZX0EVx07Mxb6Tffx1hxuInBm4Xg==",
+    "@jsr/trakt__api@0.7.6_openapi3-ts@4.6.1": {
+      "integrity": "sha512-na8Z/6XdymvYZ+HIW7ZSyjGUPSJM6gLwpm4DFBheFjIelN7XE9/s/HLTnlNCN+l98J3/qZj8OUVrZsb+Bb2+Sw==",
       "dependencies": [
         "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.7.4.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.7.6.tgz"
     },
     "@keyv/bigmap@1.3.1_keyv@5.6.0": {
       "integrity": "sha512-WbzE9sdmQtKy8vrNPa9BRnwZh5UF4s1KTmSK0KUVLo3eff5BlQNNWDnFOouNpKfPKDnms9xynJjsMYjMaT/aFQ==",
@@ -3648,22 +3648,6 @@
       ]
     },
     "@vitest/coverage-istanbul@4.1.11_vitest@4.1.11_@opentelemetry+api@1.9.1_jsdom@30.1.2_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1": {
-      "integrity": "sha512-pK9LJtOS534bmUwdwLpGD9qL52DeqVWSInrXFMNqrvWLbbAhuIPAlRup3UbsjFOMqCC/p3MmmX7uXV7ZTkcFfQ==",
-      "dependencies": [
-        "@babel/core",
-        "@istanbuljs/schema",
-        "@jridgewell/gen-mapping",
-        "@jridgewell/trace-mapping@0.3.31",
-        "istanbul-lib-coverage",
-        "istanbul-lib-report",
-        "istanbul-reports",
-        "magicast",
-        "obug",
-        "tinyrainbow",
-        "vitest"
-      ]
-    },
-    "@vitest/coverage-istanbul@4.1.11_vitest@4.1.11_esbuild@0.28.2_jsdom@30.1.2_sass-embedded@1.105.1_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1": {
       "integrity": "sha512-pK9LJtOS534bmUwdwLpGD9qL52DeqVWSInrXFMNqrvWLbbAhuIPAlRup3UbsjFOMqCC/p3MmmX7uXV7ZTkcFfQ==",
       "dependencies": [
         "@babel/core",
@@ -7388,7 +7372,7 @@
       "integrity": "sha512-fhACrNXUidIbGSBr5FlbuBkO7VWC1ZyLl0DO4CU2DrQoAPxX84Ysxs+HeGQpii5lZWV1Q4gBZTTu49mF+A6Edw==",
       "dependencies": [
         "@opentelemetry/api",
-        "@vitest/coverage-istanbul@4.1.11_vitest@4.1.11_@opentelemetry+api@1.9.1_jsdom@30.1.2_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1",
+        "@vitest/coverage-istanbul",
         "@vitest/expect",
         "@vitest/mocker",
         "@vitest/pretty-format",
@@ -7413,7 +7397,7 @@
       ],
       "optionalPeers": [
         "@opentelemetry/api",
-        "@vitest/coverage-istanbul@4.1.11_vitest@4.1.11_@opentelemetry+api@1.9.1_jsdom@30.1.2_vite@8.3.4__esbuild@0.28.2__jiti@2.7.0__sass-embedded@1.105.1",
+        "@vitest/coverage-istanbul",
         "jsdom"
       ],
       "bin": true
@@ -7827,7 +7811,7 @@
             "npm:@eslint/js@10.0.1",
             "npm:@inlang/paraglide-js@2.27.0",
             "npm:@jsr/libn__fuzzy@0.4.0",
-            "npm:@jsr/trakt__api@0.7.4",
+            "npm:@jsr/trakt__api@0.7.6",
             "npm:@playwright/test@1.64.0",
             "npm:@sentry/sveltekit@10.76.2",
             "npm:@svelte-put/shortcut@4.2.0",

@@ -44,5 +44,9 @@ export function mapToMediaListSummary(
     posters,
     type: mapToType(listResponse.type),
     privacy: mapToPrivacy(listResponse.privacy),
+    staleOrigin: listResponse.stale_origin ?? null,
+    convertedTo: listResponse.converted_to
+      ? { slug: listResponse.converted_to.ids.slug }
+      : null,
   };
 }

@@ -18,6 +18,7 @@ import { FavoritedMoviesResponseMock } from '../data/users/response/FavoritedMov
 import { FavoritedShowsResponseMock } from '../data/users/response/FavoritedShowsResponseMock.ts';
 import { HiddenShowProgressResponseMock } from '../data/users/response/HiddenShowProgressResponseMock.ts';
 import { MinimalLikedListsResponseMock } from '../data/users/response/MinimalLikedListsResponseMock.ts';
+import { SmartListDraftResponseMock } from '../data/users/response/SmartListDraftResponseMock.ts';
 import { SmartListDefinitionsResponseMock } from '../data/users/response/SmartListDefinitionsResponseMock.ts';
 import { SmartListItemsResponseMock } from '../data/smart-lists/response/SmartListItemsResponseMock.ts';
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
@@ -184,6 +185,24 @@ export const users = [
     }`,
     () => {
       return HttpResponse.json(SiloListsResponseMock.at(0));
+    },
+  ),
+  http.get(
+    `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${
+      assertDefined(SiloListsMappedMock.at(0)).slug
+    }/smart-list-draft`,
+    () => {
+      return HttpResponse.json(SmartListDraftResponseMock);
+    },
+  ),
+  http.post(
+    `http://localhost/users/:id/lists/${
+      assertDefined(SiloListsMappedMock.at(0)).slug
+    }/smart-list-draft/convert`,
+    () => {
+      return HttpResponse.json({
+        ids: { trakt: 99999, slug: 'new-smart-list' },
+      }, { status: 201 });
     },
   ),
   http.get(

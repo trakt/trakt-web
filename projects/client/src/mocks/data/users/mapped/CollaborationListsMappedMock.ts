@@ -17,5 +17,7 @@ export const CollaborationListsMappedMock: MediaListSummary[] = [
     'sortHow': 'asc',
     'type': 'personal',
     'privacy': 'public',
+    'staleOrigin': null,
+    'convertedTo': null,
   },
 ];

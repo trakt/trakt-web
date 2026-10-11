@@ -1,7 +1,7 @@
 import { EXCLUSION_PREFIX } from '$lib/features/filters/_internal/exclusionPrefix.ts';
 import { FILTERS } from '$lib/features/filters/_internal/constants.ts';
 import { FilterMode } from '$lib/features/filters/models/FilterMode.ts';
-import type { SmartListFilters } from '$lib/requests/queries/users/smartListQuery.ts';
+import type { SmartListFilters } from '$lib/requests/models/SmartListFilters.ts';
 
 const SIMPLE_KEYS: ReadonlyArray<string> = FILTERS
   .filter((filter) => !filter.advancedOnly)
