@@ -8,8 +8,8 @@
   import ListSummaryCard from "$lib/sections/lists/components/ListSummaryCard.svelte";
   import { getSmartListFilterSummary } from "$lib/sections/lists/smart/getSmartListFilterSummary.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import SmartListActions from "./SmartListActions.svelte";
-  import { useSmartListPreview } from "./useSmartListPreview";
+  import SmartListActions from "./_internal/SmartListActions.svelte";
+  import { useSmartListPreview } from "./_internal/useSmartListPreview";
 
   const { list }: { list: SmartList } = $props();
 

@@ -4,8 +4,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
-  import CreateSmartListButton from "./_internal/CreateSmartListButton.svelte";
-  import SmartListSummaryItem from "./_internal/SmartListSummaryItem.svelte";
+  import CreateSmartListButton from "./CreateSmartListButton.svelte";
+  import SmartListSummaryItem from "./SmartListSummaryItem.svelte";
   import { useSmartLists } from "./useSmartLists";
 
   const { mode }: { mode: DiscoverMode } = $props();
