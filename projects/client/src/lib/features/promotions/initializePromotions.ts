@@ -7,7 +7,7 @@ export function initializePromotions() {
   const { set } = usePromotion();
 
   initializeEvents({
-    events: PROMOTIONS,
+    getEvents: () => PROMOTIONS,
     dateFn: utcToLocalDate,
     setEvent: (id: string | null) => {
       if (!id || !PROMOTIONS[id]) {
