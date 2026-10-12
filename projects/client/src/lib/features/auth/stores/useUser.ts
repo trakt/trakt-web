@@ -1,11 +1,14 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
+import type { ClientState } from '$lib/requests/models/ClientState.ts';
 import { type UserLimits } from '$lib/requests/models/UserLimits.ts';
 import { blockedUsersQuery } from '$lib/requests/queries/users/blockedUsersQuery.ts';
 import { userLimitsQuery } from '$lib/requests/queries/vip/userLimitsQuery.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { map, of, switchMap } from 'rxjs';
 import { getContext, setContext } from 'svelte';
+import { currentUserClientStateQuery } from '../queries/currentUserClientStateQuery.ts';
+import { toSettledClientState } from '../queries/toSettledClientState.ts';
 import {
   currentUserCommentReactionsQuery,
   type UserReactions,
@@ -142,6 +145,7 @@ function createUseUserInstance() {
   const droppedQuerySignal = useQuery(currentUserDroppedQuery());
   const rewatchingQuerySignal = useQuery(currentUserRewatchingQuery());
   const blockedQuerySignal = useQuery(blockedUsersQuery());
+  const clientStateQuerySignal = useQuery(currentUserClientStateQuery());
 
   // Create a stream that switches between authorized and anonymous state
   const userContext$ = isAuthorized.pipe(
@@ -195,6 +199,7 @@ function createUseUserInstance() {
             shows: new Set(),
           }),
           blocked: of<Set<string>>(new Set()),
+          clientState: of<ClientState | Nil>(null),
         });
       }
 
@@ -246,6 +251,7 @@ function createUseUserInstance() {
             )
           ),
         ),
+        clientState: clientStateQuerySignal.pipe(map(toSettledClientState)),
       });
     }),
   );
@@ -270,6 +276,9 @@ function createUseUserInstance() {
     dropped: sharedUserContext$.pipe(switchMap((ctx) => ctx.dropped)),
     rewatching: sharedUserContext$.pipe(switchMap((ctx) => ctx.rewatching)),
     blocked: sharedUserContext$.pipe(switchMap((ctx) => ctx.blocked)),
+    clientState: sharedUserContext$.pipe(
+      switchMap((ctx) => ctx.clientState),
+    ),
   };
 }
 

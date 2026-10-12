@@ -8,6 +8,7 @@ import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
 import { SiloListsResponseMock } from '$mocks/data/summary/shows/silo/response/SiloListsResponseMock.ts';
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
+import { ClientStateResponseMock } from '$mocks/data/users/response/ClientStateResponseMock.ts';
 import { CollaborationListsResponseMock } from '$mocks/data/users/response/CollaborationListsResponseMock.ts';
 import { EmailSettingsResponseMock } from '$mocks/data/users/response/EmailSettingsResponseMock.ts';
 import { ExtendedUserProfileHarryResponseMock } from '$mocks/data/users/response/ExtendedUserProfileHarryResponseMock.ts';
@@ -120,6 +121,12 @@ export const users = [
   }),
   http.get('http://localhost/v3/users/me/watchlist/minimal', () => {
     return HttpResponse.json(WatchlistMinimalResponseMock);
+  }),
+  http.get('http://localhost/v3/users/me/client-state', () => {
+    return HttpResponse.json(ClientStateResponseMock);
+  }),
+  http.put('http://localhost/v3/users/me/client-state/:key', () => {
+    return new HttpResponse(null, { status: 204 });
   }),
   http.get('http://localhost/users/me/ratings/movies', () => {
     return HttpResponse.json(RatedMoviesResponseMock);
