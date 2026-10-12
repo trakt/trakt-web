@@ -1,8 +1,10 @@
 import type { DatePart } from '$lib/models/DatePart.ts';
 
+export type SeasonalDate = Omit<DatePart, 'year'>;
+
 export type SeasonalThemeConfig = {
   id: string;
-  start: DatePart;
-  end: DatePart;
+  start: SeasonalDate;
+  end: SeasonalDate;
   actionBarImage?: string;
 };
