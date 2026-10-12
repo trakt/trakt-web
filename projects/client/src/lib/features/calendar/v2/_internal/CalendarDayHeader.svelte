@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { isToday } from "date-fns/isToday";
   import { toCalendarDayParts } from "./toCalendarDayParts.ts";
+  import { toCalendarItemCountLabel } from "./toCalendarItemCountLabel.ts";
 
   const {
     date,
@@ -12,11 +13,7 @@
 
   const parts = $derived(toCalendarDayParts(date, getLocale()));
   const isDateToday = $derived(isToday(date));
-  const itemCountLabel = $derived(
-    count === 1
-      ? m.calendar_day_item_count_one({ count })
-      : m.calendar_day_item_count_other({ count }),
-  );
+  const itemCountLabel = $derived(toCalendarItemCountLabel(count));
 </script>
 
 <div
@@ -96,7 +93,7 @@
     }
 
     &[data-variant="row"] {
-      position: sticky;
+      position: var(--calendar-day-header-position, sticky);
       top: var(--calendar-sticky-top, 0px);
       z-index: var(--layer-raised);
 

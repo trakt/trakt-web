@@ -2,33 +2,25 @@
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
-  import { LOCALE_MAP } from "$lib/utils/formatting/date/LOCALE_MAP.ts";
-  import { endOfWeek } from "date-fns/endOfWeek";
   import { isBefore } from "date-fns/isBefore";
   import { isToday } from "date-fns/isToday";
   import type { Snippet } from "svelte";
   import { startOfDay } from "date-fns/startOfDay";
-  import type { Calendar } from "../models/Calendar.ts";
+  import type { Calendar } from "../../models/Calendar.ts";
   import { buildMonthMatrix } from "./buildMonthMatrix.ts";
-  import { dateKey } from "./dateKey.ts";
+  import { scrollToCalendarDay } from "./scrollToCalendarDay.ts";
+  import { toMonthGridRange } from "./toMonthGridRange.ts";
+  import { dateKey } from "../../_internal/dateKey.ts";
 
   const {
     allDays,
     activeDate,
-    skipActiveWeek = false,
     preview,
     variant = "default",
     onSelectDay,
   }: {
     allDays: Calendar<T>;
     activeDate: Date;
-    /**
-     * When `true`, the week containing `activeDate` is omitted from the
-     * grid — useful when a rich day-strip already renders that week above.
-     * When `false` (default) the active week is shown inline and the row
-     * itself is wrapped via the `.is-active-week` modifier.
-     */
-    skipActiveWeek?: boolean;
     preview?: Snippet<[T[]]>;
     variant?: "default" | "mini" | "fill";
     onSelectDay?: (day: { date: Date; items: T[] }) => void;
@@ -36,68 +28,54 @@
 
   const MAX_PREVIEW_ITEMS = 4;
 
-  const referenceDate = $derived(
-    endOfWeek(activeDate, {
-      locale: LOCALE_MAP[getLocale()] ?? LOCALE_MAP["en"],
-    }),
-  );
-
   const matrix = $derived(
     buildMonthMatrix({
-      referenceDate,
+      referenceDate: toMonthGridRange(activeDate, getLocale()).reference,
       activeDate,
       allDays,
       localeKey: getLocale(),
     }),
   );
 
-  const todayStart = $derived(startOfDay(new Date()));
-
-  const scrollToDay = (date: Date) => {
-    const element = document.getElementById(dateKey(date));
-    element?.scrollIntoView({ block: "start", behavior: "smooth" });
-  };
+  const todayStart = startOfDay(new Date());
 </script>
 
 <div class="calendar-month-grid" data-variant={variant}>
-  {#each matrix.weeks as week, weekIndex (weekIndex)}
-    {#if !(skipActiveWeek && weekIndex === matrix.activeWeekIndex)}
-      <div
-        class="week-row"
-        class:is-active-week={!skipActiveWeek &&
-          weekIndex === matrix.activeWeekIndex}
-      >
-        {#each week as cell (dateKey(cell.date))}
-          <button
-            type="button"
-            class="month-day"
-            class:has-items={cell.items.length > 0}
-            class:is-past={isBefore(cell.date, todayStart)}
-            class:is-today={isToday(cell.date)}
-            class:is-outside-month={cell.isOutsideMonth}
-            aria-label={m.button_label_go_to_calendar_day({
-              day: toHumanDay({ date: cell.date, locale: getLocale() }),
-            })}
-            disabled={cell.items.length === 0}
-            onclick={() =>
-              onSelectDay ? onSelectDay(cell) : scrollToDay(cell.date)}
+  {#each matrix.weeks as week, weekIndex (week.key)}
+    <div
+      class="week-row"
+      class:is-active-week={weekIndex === matrix.activeWeekIndex}
+    >
+      {#each week.cells as cell (dateKey(cell.date))}
+        <button
+          type="button"
+          class="month-day"
+          class:has-items={cell.items.length > 0}
+          class:is-past={isBefore(cell.date, todayStart)}
+          class:is-today={isToday(cell.date)}
+          class:is-outside-month={cell.isOutsideMonth}
+          aria-label={m.button_label_go_to_calendar_day({
+            day: toHumanDay({ date: cell.date, locale: getLocale() }),
+          })}
+          disabled={cell.items.length === 0}
+          onclick={() =>
+            onSelectDay ? onSelectDay(cell) : scrollToCalendarDay(cell.date)}
+        >
+          <span class="month-day-number">{cell.date.getDate()}</span>
+          <span
+            class="month-day-preview"
+            data-count={Math.min(cell.items.length, MAX_PREVIEW_ITEMS)}
+            aria-hidden="true"
           >
-            <span class="month-day-number">{cell.date.getDate()}</span>
-            <span
-              class="month-day-preview"
-              data-count={Math.min(cell.items.length, MAX_PREVIEW_ITEMS)}
-              aria-hidden="true"
-            >
-              {#if cell.items.length > 0 && preview}
-                {@render preview(cell.items.slice(0, MAX_PREVIEW_ITEMS))}
-              {:else if cell.items.length > 0}
-                <span class="dot"></span>
-              {/if}
-            </span>
-          </button>
-        {/each}
-      </div>
-    {/if}
+            {#if cell.items.length > 0 && preview}
+              {@render preview(cell.items.slice(0, MAX_PREVIEW_ITEMS))}
+            {:else if cell.items.length > 0}
+              <span class="dot"></span>
+            {/if}
+          </span>
+        </button>
+      {/each}
+    </div>
   {/each}
 </div>
 

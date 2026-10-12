@@ -115,8 +115,6 @@
 </Drawer>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-calendar-sidebar {
     --sidebar-ease: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -130,7 +128,7 @@
     flex-direction: column;
 
     border-radius: var(--border-radius-xl);
-    background-color: var(--color-filter-panel-card-background);
+    background-color: var(--color-calendar-background);
 
     transition: box-shadow var(--sidebar-reveal-duration) var(--sidebar-ease);
 
@@ -144,7 +142,8 @@
     align-items: center;
     gap: var(--gap-xs);
 
-    padding: var(--ni-6) var(--ni-6) var(--ni-6) var(--gap-m);
+    padding-block: var(--ni-6);
+    padding-inline: var(--gap-m) var(--ni-6);
   }
 
   .filters-toggle {
@@ -242,7 +241,7 @@
     }
 
     .is-open .filters-full & {
-      padding-bottom: var(--gap-m);
+      padding-block-end: var(--gap-m);
     }
   }
 

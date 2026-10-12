@@ -7,7 +7,7 @@
   import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { CalendarItem } from "./useCalendar";
+  import type { CalendarItem } from "../../_internal/useCalendar";
 
   const { item }: { item: CalendarItem } = $props();
 
@@ -121,7 +121,6 @@
         background: var(--color-background-cover-tag);
       }
     }
-
 
     .tile-title {
       margin-top: var(--gap-xxs);

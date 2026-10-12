@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getLocale } from "$lib/features/i18n";
   import type { Snippet } from "svelte";
-  import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
+  import type { CalendarNavigationProps } from "../../models/CalendarNavigationProps";
   import type { CalendarView } from "../models/CalendarView.ts";
   import CalendarHeader from "./CalendarHeader.svelte";
   import { toCalendarDayParts } from "./toCalendarDayParts.ts";
@@ -13,19 +13,20 @@
   > & {
     view: CalendarView;
     onToggleView: () => void;
-    actions?: Snippet;
     filters?: Snippet;
+    titleDate?: Date;
     hasControls?: boolean;
   };
 
   const {
     activeDate,
+    titleDate = activeDate,
     filters,
     hasControls = true,
     ...headerProps
   }: CalendarToolbarProps = $props();
 
-  const parts = $derived(toCalendarDayParts(activeDate, getLocale()));
+  const parts = $derived(toCalendarDayParts(titleDate, getLocale()));
   const weekTitle = $derived(
     toCalendarWeekTitle({
       start: activeDate,
@@ -73,10 +74,6 @@
     }
 
     @include for-tablet-sm-and-below {
-      :global(.trakt-calendar-header) {
-        margin-inline-start: auto;
-      }
-
       &[data-view="week"] .toolbar-week {
         display: none;
       }
