@@ -16,7 +16,9 @@
 </script>
 
 {#if $activeTheme}
-  <SeasonalBackground themeId={$activeTheme} />
+  {#if !$hasSplashScreen}
+    <SeasonalBackground themeId={$activeTheme} />
+  {/if}
 
   <SeasonalSplashscreen
     hasSplashScreen={$hasSplashScreen}

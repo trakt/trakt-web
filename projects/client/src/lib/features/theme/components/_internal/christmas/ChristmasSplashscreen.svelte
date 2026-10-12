@@ -1,6 +1,7 @@
 <script lang="ts">
   import BaseSplashscreen from "../BaseSplashscreen.svelte";
-  import SnowBackground from "./SnowBackground.svelte";
+  import { snowPainter } from "../ambient/painters/snowPainter";
+  import ParticleBackground from "../ambient/ParticleBackground.svelte";
 
   const {
     onDismiss,
@@ -11,7 +12,7 @@
 </script>
 
 <BaseSplashscreen {onDismiss} {hasSplashScreen}>
-  <SnowBackground />
+  <ParticleBackground painter={snowPainter} />
   {#await cover then module}
     {#if module}
       <module.default />

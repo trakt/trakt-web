@@ -10,6 +10,8 @@
    * Theme-able variables
    */
   --color-floating-background: var(--shade-10);
+  --color-seasonal-snow: var(--shade-300);
+  --color-seasonal-silhouette: var(--shade-800);
   --color-shadow: var(--shade-900);
 
   --color-foreground: var(--shade-920);
@@ -606,13 +608,17 @@
   color-scheme: dark;
 
   --color-floating-background: var(--shade-930);
+  --color-seasonal-snow: var(--shade-10);
+  --color-seasonal-silhouette: var(--shade-600);
   --color-shadow: var(--shade-940);
 
   --color-foreground: var(--shade-10);
+  --color-background-tint: var(--purple-900);
+  --color-background-tint-strength: 3%;
   --color-background: color-mix(
     in srgb,
-    var(--shade-920) 97%,
-    var(--purple-900)
+    var(--shade-920),
+    var(--color-background-tint) var(--color-background-tint-strength)
   );
 
   --color-text-primary: var(--shade-10);
