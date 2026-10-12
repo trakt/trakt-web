@@ -1,11 +1,13 @@
 import type { Snippet } from 'svelte';
 import type { SegmentedSelectOption } from './SegmentedSelectOption.ts';
+import type { SelectStyle } from './SelectStyle.ts';
 import type { SelectVariant } from './SelectVariant.ts';
 
 export type SegmentedSelectProps<TValue extends string = string> = {
   options: ReadonlyArray<SegmentedSelectOption<TValue>>;
   value: TValue;
   variant?: SelectVariant;
+  style?: SelectStyle;
   disabled?: boolean;
   fill?: boolean;
   ariaLabel?: string;

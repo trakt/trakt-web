@@ -1,9 +1,9 @@
-import { WellKnownMediaQuery } from '$lib/stores/css/useMedia';
 import { time } from '$lib/utils/timing/time.ts';
 
 export type TrackSelectorParams = {
   isFluid: boolean;
   shouldMorph: boolean;
+  isReducedMotion: boolean;
   selector: HTMLElement | Nil;
   target: HTMLElement | Nil;
 };
@@ -11,9 +11,6 @@ export type TrackSelectorParams = {
 const morphDuration = time.seconds(0.3);
 
 const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
-
-const prefersReducedMotion = () =>
-  globalThis.matchMedia?.(WellKnownMediaQuery.reducedMotion).matches ?? false;
 
 export function trackSelector(
   row: HTMLElement,
@@ -51,10 +48,10 @@ export function trackSelector(
   };
 
   const morph = () => {
-    const { selector, target } = params;
+    const { selector, target, isReducedMotion } = params;
     if (!selector || !target) return;
 
-    if (prefersReducedMotion()) {
+    if (isReducedMotion) {
       measure();
       return;
     }

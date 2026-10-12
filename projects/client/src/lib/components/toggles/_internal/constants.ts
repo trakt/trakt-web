@@ -12,7 +12,8 @@ export type TogglerId =
   | 'progress'
   | 'activity'
   | 'library'
-  | 'episodeType';
+  | 'episodeType'
+  | 'myLists';
 
 type DiscoverToggleType = DiscoverMode;
 type SocialToggleType = 'following' | 'followers' | 'requests';
@@ -22,6 +23,7 @@ type ProgressToggleType = 'in-progress' | 'dropped' | 'completed' | 'ended';
 type ActivityToggleType = 'reviews' | 'ratings';
 type LibraryToggleType = 'plex' | 'other';
 type EpisodeTypeToggleType = EpisodeTypeFilter;
+type MyListsToggleType = 'smart' | 'personal' | 'liked' | 'collaboration';
 
 type Toggler<T, K> = {
   id: T;
@@ -38,6 +40,7 @@ export type TogglerValueMap = {
   activity: ActivityToggleType;
   library: LibraryToggleType;
   episodeType: EpisodeTypeToggleType;
+  myLists: MyListsToggleType;
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
@@ -203,6 +206,33 @@ const episodeType: ToggleDefinition<'episodeType'> = {
   ],
 };
 
+const myLists: ToggleDefinition<'myLists'> = {
+  id: 'myLists',
+  default: 'smart',
+  options: [
+    {
+      value: 'smart',
+      text: m.button_text_smart_lists,
+      label: m.list_title_smart_lists,
+    },
+    {
+      value: 'personal',
+      text: m.button_text_personal,
+      label: m.list_title_personal_lists,
+    },
+    {
+      value: 'liked',
+      text: m.list_title_liked_lists,
+      label: m.list_title_liked_lists,
+    },
+    {
+      value: 'collaboration',
+      text: m.list_title_collaborative_lists,
+      label: m.list_title_collaborative_lists,
+    },
+  ],
+};
+
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
@@ -214,4 +244,5 @@ export const TOGGLERS: {
   activity,
   library,
   episodeType,
+  myLists,
 } as const;
