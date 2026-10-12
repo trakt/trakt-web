@@ -6,10 +6,13 @@ import { fromLegacyDismissals } from '$lib/features/toast/_internal/fromLegacyDi
 import { fromLegacyNudgeDismissals } from '$lib/sections/smart-list-nudges/_internal/fromLegacyNudgeDismissals.ts';
 import { mergeNudgeDismissal } from '$lib/sections/smart-list-nudges/_internal/mergeNudgeDismissal.ts';
 import { NudgeDismissalRecordSchema } from '$lib/sections/smart-list-nudges/_internal/NudgeDismissalRecord.ts';
+import { COMMENT_LANGUAGE_ALL } from '$lib/sections/summary/components/comments/_internal/commentLanguageAll.ts';
+import { commentLanguageCodes } from '$lib/sections/summary/components/comments/_internal/commentLanguageCodes.ts';
 import { getTodayWindow } from '$lib/sections/today/_internal/getTodayWindow.ts';
 import { fromLegacyReelSeen } from '$lib/sections/yir/2026/_internal/fromLegacyReelSeen.ts';
 import { z } from 'zod';
 import { defineClientRecord } from './defineClientRecord.ts';
+import { defineClientValue } from './defineClientValue.ts';
 import { latest } from './merge/latest.ts';
 import { ClientStateKey } from './models/ClientStateKey.ts';
 
@@ -31,8 +34,7 @@ export const clientStateDefinitions = {
   [ClientStateKey.DismissedRateNow]: defineClientRecord({
     entry: z.number(),
     mergeEntry: latest,
-    isExpired: (dismissedAt, now) =>
-      now - dismissedAt > SHOW_BINGE_WINDOW,
+    isExpired: (dismissedAt, now) => now - dismissedAt > SHOW_BINGE_WINDOW,
     legacyStorageKey: DISMISSAL_STORAGE_KEY,
     fromLegacy: fromLegacyDismissals,
   }),
@@ -47,5 +49,14 @@ export const clientStateDefinitions = {
     entry: z.literal(true),
     legacyStorageKey: 'trakt-yir-reel-seen',
     fromLegacy: fromLegacyReelSeen,
+  }),
+  [ClientStateKey.CommentLanguage]: defineClientValue({
+    schema: z
+      .string()
+      .refine(
+        (value) =>
+          value === COMMENT_LANGUAGE_ALL || commentLanguageCodes.has(value),
+      ),
+    legacyStorageKey: 'trakt-comment-language',
   }),
 } satisfies Record<ClientStateKey, { kind: 'record' | 'value' }>;
