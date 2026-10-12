@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { provideClientState } from "$lib/features/client-state/provideClientState.ts";
   import { iffy } from "$lib/utils/function/iffy";
   import { resolveBrowserAuthState } from "../resolveBrowserAuthState";
   import { createAuthContext } from "../stores/createAuthContext";
@@ -65,6 +66,7 @@
     }),
   );
   const { user, clientState } = useUser();
+  provideClientState();
 </script>
 
 {#if !$isInitializing && $user != null && $clientState !== undefined}
