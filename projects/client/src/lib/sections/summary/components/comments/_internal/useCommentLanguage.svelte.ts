@@ -1,25 +1,12 @@
 import { goto } from '$app/navigation';
 import { page } from '$app/state';
+import { ClientStateKey } from '$lib/features/client-state/models/ClientStateKey.ts';
+import { useClientValue } from '$lib/features/client-state/useClientValue.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
-import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
+import { fromStore, type Readable } from 'svelte/store';
 import { COMMENT_LANGUAGE_ALL } from './commentLanguageAll.ts';
-import { commentLanguageCodes } from './commentLanguageCodes.ts';
 
 const REVIEW_LANGUAGE_PARAM = 'review_lang';
-const STORAGE_KEY = 'trakt-comment-language';
-
-function isSupportedLanguage(value: string) {
-  return value === COMMENT_LANGUAGE_ALL || commentLanguageCodes.has(value);
-}
-
-function toStoredPreference() {
-  const stored = safeLocalStorage.getItem(STORAGE_KEY);
-  if (stored == null) return null;
-
-  return isSupportedLanguage(stored) ? stored : null;
-}
-
-let preference = $state<string | null>(toStoredPreference());
 
 /**
  * Comment language filter. Reads the stored preference, overridden by a
@@ -30,8 +17,18 @@ let preference = $state<string | null>(toStoredPreference());
  * value to pass to the query (undefined for "all", i.e. no filter).
  */
 export function useCommentLanguage() {
+  const store = useClientValue(ClientStateKey.CommentLanguage);
+  const stored: Readable<string | null> = {
+    subscribe: (run) => {
+      const subscription = store.value.subscribe(run);
+      return () => subscription.unsubscribe();
+    },
+  };
+  const preference = fromStore(stored);
+
   const value = $derived(
-    page.url.searchParams.get(REVIEW_LANGUAGE_PARAM) ?? preference ??
+    page.url.searchParams.get(REVIEW_LANGUAGE_PARAM) ??
+      preference.current ??
       languageTag(),
   );
   const filter = $derived(
@@ -39,8 +36,7 @@ export function useCommentLanguage() {
   );
 
   function set(next: string) {
-    preference = next;
-    safeLocalStorage.setItem(STORAGE_KEY, next);
+    store.set(next);
 
     const url = new URL(page.url);
     url.searchParams.set(REVIEW_LANGUAGE_PARAM, next);

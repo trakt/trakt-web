@@ -1,4 +1,6 @@
+import { renderStore } from '$test/beds/store/renderStore.ts';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { useCommentLanguage } from './useCommentLanguage.svelte.ts';
 
 vi.mock('$lib/features/i18n/index.ts', () => ({
   languageTag: () => 'en',
@@ -11,11 +13,8 @@ function navigateTo(search: string) {
   globalThis.history.replaceState({}, '', `/movies/heretic${search}`);
 }
 
-async function loadHook() {
-  vi.resetModules();
-  const { useCommentLanguage } = await import('./useCommentLanguage.svelte.ts');
-
-  return useCommentLanguage();
+function loadHook() {
+  return renderStore(() => useCommentLanguage());
 }
 
 describe('store: useCommentLanguage', () => {
@@ -76,7 +75,12 @@ describe('store: useCommentLanguage', () => {
       const commentLanguage = await loadHook();
       commentLanguage.set('nl');
 
-      expect(globalThis.localStorage.getItem(STORAGE_KEY)).to.equal('nl');
+      expect(
+        globalThis.localStorage.getItem(
+          'trakt-client-state:comment_language:guest',
+        ),
+      )
+        .to.equal('"nl"');
     });
 
     it('should keep the selection after navigating away', async () => {

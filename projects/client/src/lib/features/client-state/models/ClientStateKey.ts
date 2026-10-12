@@ -1,4 +1,5 @@
 export enum ClientStateKey {
+  CommentLanguage = 'comment_language',
   DismissedBanners = 'dismissed_banners',
   DismissedPinnedLists = 'dismissed_pinned_lists',
   DismissedRateNow = 'dismissed_rate_now',
