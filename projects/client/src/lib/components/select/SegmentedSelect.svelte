@@ -6,6 +6,7 @@
   import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters.ts";
   import type { SegmentedSelectOption } from "./models/SegmentedSelectOption.ts";
   import type { SegmentedSelectProps } from "./models/SegmentedSelectProps.ts";
+  import { scrollSelectedIntoView } from "./_internal/scrollSelectedIntoView.ts";
   import {
     trackSelector,
     type TrackSelectorParams,
@@ -17,6 +18,7 @@
     options,
     value,
     variant = "regular",
+    style = "default",
     disabled = false,
     fill = false,
     ariaLabel,
@@ -86,14 +88,20 @@
   };
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
+  const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
   const isLabelHidden = $derived(variant === "compact" && Boolean(icon));
 
   let selectorEl = $state<HTMLElement>();
   let segmentEls = $state<Array<HTMLElement | undefined>>([]);
 
+  const isSelectedVariant = $derived(
+    variant === "selected-label" || variant === "selected-icon",
+  );
+
   const selectorParams = $derived<TrackSelectorParams>({
-    isFluid: expandable || variant === "selected-label",
-    shouldMorph: variant === "selected-label",
+    isFluid: expandable || isSelectedVariant,
+    shouldMorph: isSelectedVariant,
+    isReducedMotion: $isReducedMotion,
     selector: selectorEl,
     target: segmentEls[selectedIndex],
   });
@@ -147,10 +155,16 @@
 
 <div
   class="trakt-segmented-select"
+  use:scrollSelectedIntoView={{
+    isEnabled: variant === "selected-icon",
+    isReducedMotion: $isReducedMotion,
+    target: segmentEls[selectedIndex],
+  }}
   class:has-extension={hasExtension}
   role="radiogroup"
   aria-label={ariaLabel}
   data-variant={variant}
+  data-style={style}
   data-fill={fill ? "true" : undefined}
   data-expandable={expandable ? "true" : undefined}
   style:--segment-count={options.length}
@@ -382,7 +396,8 @@
   }
 
   .trakt-segmented-select[data-expandable="true"],
-  .trakt-segmented-select[data-variant="selected-label"] {
+  .trakt-segmented-select[data-variant="selected-label"],
+  .trakt-segmented-select[data-variant="selected-icon"] {
     --expand-duration: 360ms;
     --expand-slide: 300ms;
     --expand-ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -468,11 +483,14 @@
     }
   }
 
-  .trakt-segmented-select[data-variant="selected-label"] {
+  .trakt-segmented-select[data-variant="selected-label"],
+  .trakt-segmented-select[data-variant="selected-icon"] {
     --expand-duration: 240ms;
     --expand-slide: 240ms;
     --expand-ease: cubic-bezier(0.3, 0, 0.2, 1);
+  }
 
+  .trakt-segmented-select[data-variant="selected-label"] {
     .segment {
       gap: 0;
       padding-inline: var(--ni-8);
@@ -509,6 +527,86 @@
     @media (prefers-reduced-motion: reduce) {
       .segment .segment-label {
         transition: none;
+      }
+    }
+  }
+
+  .trakt-segmented-select[data-variant="selected-icon"] {
+
+    --scroll-inset: var(--segmented-select-scroll-inset, var(--segment-inset));
+    --scroll-fade: var(--segmented-select-scroll-fade, var(--ni-0));
+    --scroll-fade-dir: to right;
+
+    &:dir(rtl) {
+      --scroll-fade-dir: to left;
+    }
+
+    padding-inline: var(--scroll-inset);
+    scroll-padding-inline: var(--scroll-inset);
+
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+
+    mask-image: linear-gradient(
+      var(--scroll-fade-dir),
+      black calc(100% - var(--scroll-fade)),
+      transparent
+    );
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .segment-row {
+      width: max-content;
+    }
+
+    .segment {
+      gap: 0;
+      max-inline-size: none;
+
+      .segment-icon {
+        overflow: hidden;
+        width: var(--ni-18);
+        margin-inline-end: var(--gap-xs);
+
+        transition:
+          width var(--expand-duration) var(--expand-ease),
+          margin-inline-end var(--expand-duration) var(--expand-ease),
+          opacity var(--expand-duration) var(--expand-ease);
+      }
+
+      &:not(.is-selected) .segment-icon {
+        width: 0;
+        margin-inline-end: 0;
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .segment .segment-icon {
+        transition: none;
+      }
+    }
+  }
+
+  .trakt-segmented-select[data-style="minimal"] {
+    --segment-height: var(--segmented-select-minimal-segment-height);
+    --segment-inset: var(--ni-0);
+    --segment-font-size: var(--font-size-text-small);
+    --track-radius: var(--border-radius-m);
+    --segment-radius: var(--border-radius-m);
+
+    background-color: transparent;
+    backdrop-filter: none;
+
+    .segment {
+      padding-inline: var(--ni-10);
+
+      .segment-icon :global(svg) {
+        width: var(--ni-16);
+        height: var(--ni-16);
       }
     }
   }

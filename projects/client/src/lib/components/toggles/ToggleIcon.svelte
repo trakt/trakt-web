@@ -17,10 +17,13 @@
   import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import PopularIcon from "$lib/components/icons/PopularIcon.svelte";
   import PremiereIcon from "$lib/components/icons/PremiereIcon.svelte";
+  import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import RatingIcon from "$lib/components/icons/RatingIcon.svelte";
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
+  import SocialIcon from "$lib/components/icons/SocialIcon.svelte";
   import SpoilerIcon from "$lib/components/icons/SpoilerIcon.svelte";
+  import ThumbsUpIcon from "$lib/components/icons/ThumbsUpIcon.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
 
   interface ToggleIconProps {
@@ -133,4 +136,16 @@
 
 {#if option.value === "finales"}
   <FinaleIcon />
+{/if}
+
+{#if option.value === "personal"}
+  <ProfileIcon />
+{/if}
+
+{#if option.value === "liked"}
+  <ThumbsUpIcon />
+{/if}
+
+{#if option.value === "collaboration"}
+  <SocialIcon />
 {/if}

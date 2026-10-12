@@ -25,6 +25,7 @@
   --dialog-height: 100dvh;
 
   --segmented-select-segment-height: var(--ni-32);
+  --segmented-select-minimal-segment-height: var(--ni-28);
   --segmented-select-extension-inset: var(--gap-xs);
   --segmented-select-extension-height: calc(
     var(--segmented-select-segment-height) + 2 *

@@ -1,1 +1,5 @@
-export type SelectVariant = 'regular' | 'compact' | 'selected-label';
+export type SelectVariant =
+  | 'regular'
+  | 'compact'
+  | 'selected-label'
+  | 'selected-icon';
