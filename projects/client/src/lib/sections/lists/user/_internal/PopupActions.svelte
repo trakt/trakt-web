@@ -67,6 +67,16 @@
     />
   {/if}
 
+  {#if target && listedItem.type === "episode"}
+    <MarkAsWatchedAction
+      style="dropdown-item"
+      type="episode"
+      title={target.title}
+      media={listedItem.entry.episode}
+      show={listedItem.entry.show}
+    />
+  {/if}
+
   {#if listedItem.type === "movie" || listedItem.type === "show"}
     <WatchlistAction
       style="dropdown-item"
