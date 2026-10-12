@@ -38,20 +38,13 @@
     align-items: center;
     justify-content: center;
 
-    background: radial-gradient(
-      117.94% 117.94% at 50% 100%,
-      #131517 24%,
-      rgba(19, 21, 23, 0.8) 64%,
-      rgba(19, 21, 23, 0.64) 100%
-    );
-
-    :global(svg) {
-      max-width: 100vw;
-      max-height: 100vh;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+    background:
+      radial-gradient(
+        ellipse at 50% 40%,
+        color-mix(in srgb, var(--purple-700) 45%, transparent) 0%,
+        transparent 60%
+      ),
+      color-mix(in srgb, var(--shade-1000) 92%, transparent);
 
     :global(.trakt-auto-close-button) {
       position: absolute;

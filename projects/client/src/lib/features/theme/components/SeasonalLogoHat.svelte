@@ -1,25 +1,13 @@
 <script lang="ts">
   import { useSeasonalTheme } from "../useSeasonalTheme";
-  import PartyHatMascot from "./_internal/mascots/PartyHatMascot.svelte";
-  import SantaHatMascot from "./_internal/mascots/SantaHatMascot.svelte";
-  import WitchHatMascot from "./_internal/mascots/WitchHatMascot.svelte";
+  import SeasonalHat from "./_internal/mascots/SeasonalHat.svelte";
 
   const { activeTheme } = useSeasonalTheme();
 </script>
 
 {#if $activeTheme}
   <div class="trakt-seasonal-logo-hat" data-season={$activeTheme}>
-    {#if $activeTheme === "halloween"}
-      <WitchHatMascot />
-    {/if}
-
-    {#if $activeTheme === "christmas"}
-      <SantaHatMascot />
-    {/if}
-
-    {#if $activeTheme === "new-year"}
-      <PartyHatMascot />
-    {/if}
+    <SeasonalHat themeId={$activeTheme} />
   </div>
 {/if}
 
