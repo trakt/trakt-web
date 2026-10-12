@@ -6,9 +6,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import SmartLists from "$lib/sections/lists/smart/SmartLists.svelte";
-  import PersonalLists from "$lib/sections/lists/user/PersonalLists.svelte";
-  import type { PersonalListType } from "$lib/sections/lists/user/models/PersonalListType.ts";
+  import MyLists from "$lib/sections/lists/user/MyLists.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import SmartListNudgeBar from "$lib/sections/smart-list-nudges/SmartListNudgeBar.svelte";
@@ -22,12 +20,6 @@
   const { user } = useUser();
 
   const { isMe } = $derived(useIsMe(params.user));
-
-  const personalListTypes: PersonalListType[] = [
-    "personal",
-    "liked",
-    "collaboration",
-  ];
 </script>
 
 <TraktPage
@@ -53,9 +45,5 @@
     type={$mode}
   />
 
-  <SmartLists mode={$mode} />
-
-  {#each personalListTypes as type (type)}
-    <PersonalLists slug={$user.slug} {type} mode={$mode} display="compact" />
-  {/each}
+  <MyLists slug={$user.slug} mode={$mode} />
 </TraktPage>
