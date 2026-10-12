@@ -4,7 +4,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
-  import CreateSmartListButton from "$lib/sections/lists/smart/_internal/CreateSmartListButton.svelte";
+  import CreateSmartListButton from "$lib/sections/lists/smart/CreateSmartListButton.svelte";
   import SmartListRenderer from "$lib/sections/lists/smart/SmartListRenderer.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
