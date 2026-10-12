@@ -1,34 +1,29 @@
-import { map } from 'rxjs';
+import { ClientStateKey } from '$lib/features/client-state/models/ClientStateKey.ts';
+import { useClientRecord } from '$lib/features/client-state/useClientRecord.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { ActivityHistory } from '../../requests/queries/users/activityHistoryQuery.ts';
-import { createDismissalStore } from './_internal/createDismissalStore.ts';
+import { toDismissalKey } from './_internal/toDismissalKey.ts';
 
-const dismissalStore = createDismissalStore();
+function toActivityKey(activity: ActivityHistory): string | null {
+  switch (activity.type) {
+    case 'movie':
+      return toDismissalKey({ type: 'movie', id: activity.movie.id });
+    case 'episode':
+      return toDismissalKey({ type: 'show', id: activity.show.id });
+    default:
+      return null;
+  }
+}
 
 export function useDismissals() {
-  return {
-    dismissals: dismissalStore.dismissals.pipe(
-      map((store) => store.items),
-    ),
-    dismiss: dismissalStore.dismiss,
-    wasDismissed: (activity: ActivityHistory) => {
-      const dismissedItems = dismissalStore.dismissals.value.items;
+  const dismissals = useClientRecord(ClientStateKey.DismissedRateNow);
 
-      return dismissedItems.some((dismissed) => {
-        switch (activity.type) {
-          case 'movie':
-            return (
-              dismissed.type === 'movie' &&
-              dismissed.id === activity.movie.id.toString()
-            );
-          case 'episode':
-            return (
-              dismissed.type === 'show' &&
-              dismissed.id === activity.show.id.toString()
-            );
-          default:
-            return false;
-        }
-      });
+  return {
+    dismiss: (id: number, type: ExtendedMediaType) =>
+      dismissals.set(toDismissalKey({ type, id }), Date.now()),
+    wasDismissed: (activity: ActivityHistory) => {
+      const key = toActivityKey(activity);
+      return key !== null && dismissals.current(key) !== undefined;
     },
   };
 }
