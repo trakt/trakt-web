@@ -4,4 +4,5 @@ export enum ClientStateKey {
   DismissedRateNow = 'dismissed_rate_now',
   DismissedSmartListNudges = 'dismissed_smart_list_nudges',
   TodaySeenStories = 'today_seen_stories',
+  YirReelSeen = 'yir_reel_seen',
 }

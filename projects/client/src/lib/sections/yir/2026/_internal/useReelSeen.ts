@@ -1,32 +1,13 @@
-import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { BehaviorSubject, map } from 'rxjs';
-
-const LOCAL_STORAGE_KEY = 'trakt-yir-reel-seen';
-
-function readSeenYears(): ReadonlyArray<number> {
-  try {
-    const parsed: unknown = JSON.parse(
-      safeLocalStorage.getItem(LOCAL_STORAGE_KEY) ?? '[]',
-    );
-    return Array.isArray(parsed) ? parsed.filter(Number.isInteger) : [];
-  } catch {
-    return [];
-  }
-}
+import { ClientStateKey } from '$lib/features/client-state/models/ClientStateKey.ts';
+import { useClientRecord } from '$lib/features/client-state/useClientRecord.ts';
+import { map } from 'rxjs';
 
 export function useReelSeen(year: number) {
-  const seenYears = new BehaviorSubject(readSeenYears());
-
-  const markSeen = () => {
-    if (seenYears.value.includes(year)) return;
-
-    const next = [...seenYears.value, year];
-    safeLocalStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(next));
-    seenYears.next(next);
-  };
+  const years = useClientRecord(ClientStateKey.YirReelSeen);
+  const key = String(year);
 
   return {
-    isSeen: seenYears.pipe(map(($years) => $years.includes(year))),
-    markSeen,
+    isSeen: years.entry(key).pipe(map((seen) => seen === true)),
+    markSeen: () => years.set(key, true),
   };
 }

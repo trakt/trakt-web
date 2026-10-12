@@ -7,6 +7,7 @@ import { fromLegacyNudgeDismissals } from '$lib/sections/smart-list-nudges/_inte
 import { mergeNudgeDismissal } from '$lib/sections/smart-list-nudges/_internal/mergeNudgeDismissal.ts';
 import { NudgeDismissalRecordSchema } from '$lib/sections/smart-list-nudges/_internal/NudgeDismissalRecord.ts';
 import { getTodayWindow } from '$lib/sections/today/_internal/getTodayWindow.ts';
+import { fromLegacyReelSeen } from '$lib/sections/yir/2026/_internal/fromLegacyReelSeen.ts';
 import { z } from 'zod';
 import { defineClientRecord } from './defineClientRecord.ts';
 import { latest } from './merge/latest.ts';
@@ -41,5 +42,10 @@ export const clientStateDefinitions = {
     isExpired: (seenAt, now) =>
       seenAt < getTodayWindow(new Date(now)).start.getTime(),
     legacyStorageKey: 'today-seen-stories',
+  }),
+  [ClientStateKey.YirReelSeen]: defineClientRecord({
+    entry: z.literal(true),
+    legacyStorageKey: 'trakt-yir-reel-seen',
+    fromLegacy: fromLegacyReelSeen,
   }),
 } satisfies Record<ClientStateKey, { kind: 'record' | 'value' }>;
