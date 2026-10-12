@@ -4861,6 +4861,34 @@
       "default": "All titles",
       "description": "Title for a smart list that draws from every movie and show with no preset source. This title should be as short and concise as possible."
     },
+    "header_seasonal_greeting_halloween": {
+      "default": "Happy Halloween",
+      "description": "Title of the splash screen shown once when the halloween theme starts."
+    },
+    "text_seasonal_greeting_halloween": {
+      "default": "Spooky picks are waiting for you in Discover.",
+      "description": "Subtitle of the halloween splash screen, pointing users to the seasonal picks on the discover page."
+    },
+    "header_seasonal_greeting_christmas": {
+      "default": "Merry Christmas",
+      "description": "Title of the splash screen shown once when the christmas theme starts."
+    },
+    "text_seasonal_greeting_christmas": {
+      "default": "Grab a blanket, festive picks are waiting in Discover.",
+      "description": "Subtitle of the christmas splash screen, pointing users to the seasonal picks on the discover page."
+    },
+    "header_seasonal_greeting_new_year": {
+      "default": "Happy New Year",
+      "description": "Title of the splash screen shown once when the new year theme starts."
+    },
+    "text_seasonal_greeting_new_year": {
+      "default": "Here's to a year full of great watches.",
+      "description": "Subtitle of the new year splash screen, wishing users a good year of watching."
+    },
+    "text_seasonal_greeting_signoff": {
+      "default": "From all of us at Trakt",
+      "description": "Sign-off shown at the bottom of the seasonal greeting splash screen."
+    },
     "list_title_library": {
       "default": "Library",
       "description": "Title for lists containing movies and episodes in a users library. This title should be as short and concise as possible."

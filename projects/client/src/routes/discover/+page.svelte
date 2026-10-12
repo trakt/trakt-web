@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
+  import SeasonalDiscoverDelight from "$lib/features/theme/components/SeasonalDiscoverDelight.svelte";
   import SeasonalToggle from "$lib/features/theme/components/SeasonalToggle.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -45,6 +46,7 @@
   filterScope="global"
 >
   <TraktPageCoverSetter />
+  <SeasonalDiscoverDelight />
 
   <NavbarStateSetter contentToggle="discover" hasFilters={!$seasonalFilterTheme}>
     {#snippet headerActions()}

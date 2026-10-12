@@ -1,9 +1,7 @@
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
-import type {
-  Particle,
-  ParticleBounds,
-  ParticlePainter,
-} from './ParticlePainter.ts';
+import type { Particle } from './Particle.ts';
+import type { ParticleBounds } from './ParticleBounds.ts';
+import type { ParticlePainter } from './ParticlePainter.ts';
 
 function readColors(canvas: HTMLCanvasElement, tokens: ReadonlyArray<string>) {
   const style = getComputedStyle(canvas);
