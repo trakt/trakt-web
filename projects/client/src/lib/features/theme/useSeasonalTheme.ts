@@ -6,6 +6,7 @@ import { safeLocalStorage } from '../../utils/storage/safeStorage.ts';
 import { SEASONAL_THEMES } from './constants.ts';
 import type { SeasonalThemeConfig } from './models/SeasonalThemeConfig.ts';
 import { buildLocalDate } from './utils/buildLocalDate.ts';
+import { resolveSeasonalWindow } from './utils/resolveSeasonalWindow.ts';
 
 const SEASONAL_STORAGE_KEY_PREFIX = 'trakt_seasonal_splash_dismissal';
 
@@ -22,12 +23,16 @@ function getWasDismissed(themeId: string): boolean {
     const value = safeLocalStorage.getItem(SEASONAL_STORAGE_KEY_PREFIX);
     if (!value) return false;
     const parsed = JSON.parse(value);
+    if (parsed.themeId !== themeId) return false;
 
-    const theme = getThemeConfig(themeId);
     const dismissedAt = new Date(parsed.dismissedAt);
-    const themeEnd = buildLocalDate(theme.end);
+    const { start, end } = resolveSeasonalWindow({
+      ...getThemeConfig(themeId),
+      now: new Date(),
+    });
 
-    return dismissedAt < themeEnd;
+    return dismissedAt >= buildLocalDate(start) &&
+      dismissedAt <= buildLocalDate(end);
   } catch {
     return false;
   }
