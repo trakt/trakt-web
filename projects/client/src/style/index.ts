@@ -29,3 +29,4 @@ import './direction/index.css';
 
 import './theme/seasonal/christmas.css';
 import './theme/seasonal/halloween.css';
+import './theme/seasonal/new-year.css';

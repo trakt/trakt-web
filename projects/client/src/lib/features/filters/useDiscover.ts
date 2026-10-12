@@ -2,10 +2,11 @@ import { page } from '$app/state';
 import { useToggler } from '$lib/components/toggles/useToggler.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { persistDebounced } from '$lib/utils/storage/persistDebounced.ts';
-import { combineLatest, distinctUntilChanged, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, map, shareReplay } from 'rxjs';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import { useParameters } from '../parameters/useParameters.ts';
+import { SEASONAL_THEMES } from '../theme/constants.ts';
 import { useSeasonalTheme } from '../theme/useSeasonalTheme.ts';
 import {
   DISCOVER_MODE_PARAM,
@@ -47,19 +48,37 @@ export function useDiscover() {
     set(value);
   };
 
+  const seasonal = combineLatest([useSeasonalFilters, activeTheme]).pipe(
+    map(([isEnabled, theme]) => {
+      const hasFilters =
+        theme !== null && SEASONAL_THEMES[theme]?.hasDiscoverFilters === true;
+
+      return {
+        isOn: theme !== null && isEnabled,
+        filterTheme:
+          theme !== null && isEnabled && hasFilters ? theme : undefined,
+        hasDecor: theme !== null && (isEnabled || !hasFilters),
+      };
+    }),
+    shareReplay({ bufferSize: 1, refCount: true }),
+  );
+
   return {
     options,
     current: currentOption,
     onModeChange,
     mode,
-    useSeasonalFilters: combineLatest([useSeasonalFilters, activeTheme]).pipe(
-      map(([$useSeasonalFilters, $activeTheme]) => {
-        if ($activeTheme === null) {
-          return false;
-        }
-
-        return $useSeasonalFilters;
-      }),
+    useSeasonalFilters: seasonal.pipe(
+      map(({ isOn }) => isOn),
+      distinctUntilChanged(),
+    ),
+    seasonalFilterTheme: seasonal.pipe(
+      map(({ filterTheme }) => filterTheme),
+      distinctUntilChanged(),
+    ),
+    hasSeasonalDecor: seasonal.pipe(
+      map(({ hasDecor }) => hasDecor),
+      distinctUntilChanged(),
     ),
     setSeasonalFilters: (value: boolean) => {
       useSeasonalFilters.next(value);
