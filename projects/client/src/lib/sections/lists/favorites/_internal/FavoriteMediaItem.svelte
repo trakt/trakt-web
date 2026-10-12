@@ -2,6 +2,7 @@
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import type { FavoritedEntry } from "$lib/requests/models/FavoritedEntry";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
+  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import type { Snippet } from "svelte";
   import DefaultMediaItem from "../../components/DefaultMediaItem.svelte";
 
@@ -26,6 +27,12 @@
     title={media.item.title}
     type={media.item.type}
     id={media.item.id}
+  />
+  <MarkAsWatchedAction
+    style="dropdown-item"
+    title={media.item.title}
+    type={media.item.type}
+    media={media.item}
   />
 {/snippet}
 
