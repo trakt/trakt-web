@@ -1,0 +1,4 @@
+:root[data-seasonal-theme] ::selection {
+  color: var(--shade-10);
+  background-color: var(--purple-500);
+}

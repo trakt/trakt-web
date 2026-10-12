@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SeasonalActionBarImage from "$lib/features/theme/components/SeasonalActionBarImage.svelte";
+  import SeasonalActionBarMascot from "$lib/features/theme/components/SeasonalActionBarMascot.svelte";
   import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
   import type { Snippet } from "svelte";
   import SummaryActionsPopup from "./SummaryActionsPopup.svelte";
@@ -23,7 +23,7 @@
   class:has-seasonal-theme={$activeTheme !== null}
   style="--popup-transition-duration: {sliderTransitionMs}ms"
 >
-  <SeasonalActionBarImage />
+  <SeasonalActionBarMascot />
   {@render children()}
 
   {#if popup}
@@ -69,7 +69,7 @@
       color: var(--color-text-primary);
     }
 
-    :global(svg) {
+    :global(svg:not([data-seasonal-decoration] *)) {
       height: var(--ni-16);
     }
 
