@@ -7,6 +7,7 @@
   import type { ProgressListType } from "$lib/sections/profile/components/_internal/useProgressList.ts";
   import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
+  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import type { Snippet } from "svelte";
 
   type ProgressItemProps = {
@@ -19,7 +20,6 @@
   const { entry, style = "cover", type, sortTag }: ProgressItemProps = $props();
 
   const { isDropped } = $derived(useIsDropped(entry.show));
-  const hasActions = $derived(!$isDropped);
 </script>
 
 {#snippet coverTag()}
@@ -34,6 +34,12 @@
 
 {#snippet popupActions()}
   <RenderFor audience="authenticated">
+    <MarkAsWatchedAction
+      style="dropdown-item"
+      type="show"
+      title={entry.show.title}
+      media={entry.show}
+    />
     {#if !$isDropped}
       <DropAction
         style="dropdown-item"
@@ -53,5 +59,5 @@
   {style}
   {sortTag}
   coverTag={type === "in-progress" ? coverTag : undefined}
-  popupActions={hasActions ? popupActions : undefined}
+  {popupActions}
 />
