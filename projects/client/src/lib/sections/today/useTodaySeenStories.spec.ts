@@ -1,10 +1,13 @@
+import { renderStore } from '$test/beds/store/renderStore.ts';
 import { firstValueFrom } from 'rxjs';
 import { describe, expect, it } from 'vitest';
 import { useTodaySeenStories } from './useTodaySeenStories.ts';
 
 describe('store: useTodaySeenStories', () => {
   it('should remember when a story was seen', async () => {
-    const { seenStories, markSeen } = useTodaySeenStories();
+    const { seenStories, markSeen } = await renderStore(() =>
+      useTodaySeenStories()
+    );
 
     markSeen('movie-1');
 
@@ -14,20 +17,28 @@ describe('store: useTodaySeenStories', () => {
   });
 
   it('should share seen stories between instances', async () => {
-    useTodaySeenStories().markSeen('show-3');
+    const [first, second] = await renderStore(() => [
+      useTodaySeenStories(),
+      useTodaySeenStories(),
+    ]);
 
-    const seen = await firstValueFrom(useTodaySeenStories().seenStories);
+    first.markSeen('show-3');
 
+    const seen = await firstValueFrom(second.seenStories);
     expect(seen['show-3']).toBeTypeOf('number');
   });
 
-  it('should persist seen stories', () => {
-    useTodaySeenStories().markSeen('show-4');
-
-    const stored = JSON.parse(
-      localStorage.getItem('today-seen-stories') ?? '{}',
+  it('should forget stories seen outside the today window', async () => {
+    localStorage.clear();
+    localStorage.setItem(
+      'today-seen-stories',
+      JSON.stringify({ 'show-5': 1, 'show-6': Date.now() }),
     );
 
-    expect(stored['show-4']).toBeTypeOf('number');
+    const { seenStories } = await renderStore(() => useTodaySeenStories());
+
+    const seen = await firstValueFrom(seenStories);
+    expect(seen['show-5']).toBeUndefined();
+    expect(seen['show-6']).toBeTypeOf('number');
   });
 });

@@ -5,7 +5,6 @@ import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { screen, waitFor, within } from '@testing-library/svelte';
 import { beforeEach, describe, expect, it } from 'vitest';
 import TodayNavbarEntry from './TodayNavbarEntry.svelte';
-import { useTodaySeenStories } from './useTodaySeenStories.ts';
 
 const LINK_NAME = "Open today's stories";
 
@@ -40,9 +39,15 @@ describe('TodayNavbarEntry', () => {
   });
 
   it('should be quiet once every story was seen', async () => {
-    const { markSeen } = useTodaySeenStories();
-    markSeen(`movie-${MovieHereticMappedMock.id}`);
-    markSeen(`show-${ShowSiloMappedMock.id}`);
+    localStorage.clear();
+    setAuthorization(true);
+    localStorage.setItem(
+      'today-seen-stories',
+      JSON.stringify({
+        [`movie-${MovieHereticMappedMock.id}`]: Date.now(),
+        [`show-${ShowSiloMappedMock.id}`]: Date.now(),
+      }),
+    );
 
     renderComponent(TodayNavbarEntry, { props: {} });
 
