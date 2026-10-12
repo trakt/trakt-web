@@ -2,7 +2,6 @@
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import SeasonalToggle from "$lib/features/theme/components/SeasonalToggle.svelte";
-  import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
@@ -12,12 +11,8 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
 
-  const { mode: type, useSeasonalFilters } = useDiscover();
-  const { activeTheme } = useSeasonalTheme();
-
-  const theme = $derived(
-    $useSeasonalFilters ? ($activeTheme ?? undefined) : undefined,
-  );
+  const { mode: type, seasonalFilterTheme } = useDiscover();
+  const theme = $derived($seasonalFilterTheme);
 
   const overview = $derived.by(() => {
     switch ($type) {
@@ -51,7 +46,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter contentToggle="discover" hasFilters={!$useSeasonalFilters}>
+  <NavbarStateSetter contentToggle="discover" hasFilters={!$seasonalFilterTheme}>
     {#snippet headerActions()}
       <SeasonalToggle />
     {/snippet}
