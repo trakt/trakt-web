@@ -2,6 +2,10 @@
   import CalendarProvider from "$lib/features/calendar/CalendarProvider.svelte";
   import EpisodeTypeToggles from "$lib/features/calendar/EpisodeTypeToggles.svelte";
   import ReleasesCalendar from "$lib/features/calendar/ReleasesCalendar.svelte";
+  import ReleasesCalendarV2 from "$lib/features/calendar/v2/ReleasesCalendar.svelte";
+  import CalendarNavbarState from "$lib/features/calendar/v2/CalendarNavbarState.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { useEpisodeType } from "$lib/features/calendar/useEpisodeType";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages";
@@ -25,6 +29,13 @@
   info={{ overview: m.page_description_releases() }}
 >
   <CalendarProvider>
+    <RenderForFeature flag={FeatureFlag.CalendarRedesign}>
+      {#snippet enabled()}
+        <CalendarNavbarState title={m.list_title_releases()} />
+        <TraktPageCoverSetter />
+        <ReleasesCalendarV2 />
+      {/snippet}
+
     <NavbarStateSetter
       hasFilters
       header={{
@@ -37,5 +48,6 @@
     <TraktPageCoverSetter />
 
     <ReleasesCalendar />
+    </RenderForFeature>
   </CalendarProvider>
 </TraktPage>

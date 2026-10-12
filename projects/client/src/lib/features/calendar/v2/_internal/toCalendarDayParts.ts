@@ -4,7 +4,6 @@ import { format } from 'date-fns/format';
 
 type CalendarDayParts = {
   dayOfMonth: string;
-  month: string;
   weekday: string;
   weekdayLong: string;
   monthLong: string;
@@ -13,13 +12,12 @@ type CalendarDayParts = {
 
 export function toCalendarDayParts(
   date: Date,
-  localeKey: AvailableLocale = 'en',
+  localeKey: AvailableLocale,
 ): CalendarDayParts {
   const locale = LOCALE_MAP[localeKey] ?? LOCALE_MAP['en'];
 
   return {
     dayOfMonth: format(date, 'd', { locale }),
-    month: format(date, 'MMM', { locale }),
     weekday: format(date, 'EEE', { locale }),
     weekdayLong: format(date, 'EEEE', { locale }),
     monthLong: format(date, 'LLLL', { locale }),

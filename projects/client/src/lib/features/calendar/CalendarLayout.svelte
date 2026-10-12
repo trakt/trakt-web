@@ -6,7 +6,6 @@
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarHeader from "./_internal/CalendarHeader.svelte";
   import CalendarItems from "./_internal/CalendarItems.svelte";
-  import CalendarWeekItems from "./_internal/CalendarWeekItems.svelte";
   import { dateKey } from "./_internal/dateKey";
   import EmptyPeriod from "./_internal/EmptyPeriod.svelte";
   import ScrollSpy from "./_internal/ScrollSpy.svelte";
@@ -21,11 +20,9 @@
     layout = "grid",
     maxDate,
     order = "chronological",
-    view = "day",
     periods,
     onLoadMore,
     actions,
-    hasNavigationBar = true,
   }: CalendarLayoutProps<T> = $props();
 
   const { visibleDate } = getCalendarContext();
@@ -85,7 +82,7 @@
 </script>
 
 <div class="trakt-calendar-layout" use:observeDimension>
-  {#if hasNavigationBar && (navigation || !isInitialLoad)}
+  {#if navigation || !isInitialLoad}
     <div
       class="calendar-navigation"
       use:trackWindowScroll={"is-scrolled"}
@@ -119,17 +116,13 @@
       onUpdate={handleScrollSpyUpdate}
     >
       {#each periods as period (period.key)}
-        {#if view === "week"}
-          <CalendarWeekItems calendar={period.calendar} {item} />
-        {:else}
-          <CalendarItems calendar={period.calendar} {order} {item} {layout}>
-            {#snippet empty()}
-              {#if !isLoading}
-                <EmptyPeriod />
-              {/if}
-            {/snippet}
-          </CalendarItems>
-        {/if}
+        <CalendarItems calendar={period.calendar} {order} {item} {layout}>
+          {#snippet empty()}
+            {#if !isLoading}
+              <EmptyPeriod />
+            {/if}
+          {/snippet}
+        </CalendarItems>
       {/each}
     </ScrollSpy>
 

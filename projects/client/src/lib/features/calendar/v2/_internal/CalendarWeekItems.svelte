@@ -5,9 +5,10 @@
   import { isToday } from "date-fns/isToday";
   import { startOfDay } from "date-fns/startOfDay";
   import type { Snippet } from "svelte";
-  import type { Calendar } from "../models/Calendar.ts";
+  import type { Calendar } from "../../models/Calendar.ts";
   import CalendarDayHeader from "./CalendarDayHeader.svelte";
-  import { dateKey } from "./dateKey.ts";
+  import { dateKey } from "../../_internal/dateKey.ts";
+  import { toCalendarItemCountLabel } from "./toCalendarItemCountLabel.ts";
   import { toCalendarWeekTitle } from "./toCalendarWeekTitle.ts";
 
   const {
@@ -35,11 +36,7 @@
   const count = $derived(
     calendar.reduce((total, day) => total + day.items.length, 0),
   );
-  const countLabel = $derived(
-    count === 1
-      ? m.calendar_day_item_count_one({ count })
-      : m.calendar_day_item_count_other({ count }),
-  );
+  const countLabel = $derived(toCalendarItemCountLabel(count));
 
   let headHeight = $state(0);
 

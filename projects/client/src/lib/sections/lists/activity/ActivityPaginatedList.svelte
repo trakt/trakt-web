@@ -1,5 +1,8 @@
 <script lang="ts">
   import CalendarLayout from "$lib/features/calendar/CalendarLayout.svelte";
+  import HistoryCalendar from "$lib/features/calendar/v2/HistoryCalendar.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import { useCalendarPeriod } from "$lib/features/calendar/context/useCalendarPeriod";
   import type { CalendarPeriod } from "$lib/features/calendar/models/CalendarLayoutProps";
   import { useDiscover } from "$lib/features/filters/useDiscover";
@@ -51,9 +54,13 @@
     onPrevious: previous,
     onReset: reset,
   });
+
+  const { isEnabled } = useFeatureFlag();
+  const isRedesign = isEnabled(FeatureFlag.CalendarRedesign);
+  const Layout = $derived($isRedesign ? HistoryCalendar : CalendarLayout);
 </script>
 
-<CalendarLayout
+<Layout
   activeDate={$activeDate}
   isLoading={$isLoading}
   {navigation}
@@ -66,4 +73,4 @@
   {#snippet item(activity)}
     <SocialActivityItem {activity} style="summary" />
   {/snippet}
-</CalendarLayout>
+</Layout>

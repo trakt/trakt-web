@@ -1,4 +1,5 @@
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
+import { getIntlLocale } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { getStartOfWeek } from '$lib/utils/date/getStartOfWeek.ts';
 import { addDays } from 'date-fns/addDays';
@@ -30,6 +31,9 @@ export function toCalendarWeekTitle(
   const relativeTitle = RELATIVE_WEEK_TITLES.get(weekOffset);
   if (relativeTitle) return relativeTitle();
 
-  return new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric' })
+  return new Intl.DateTimeFormat(getIntlLocale(locale), {
+    month: 'short',
+    day: 'numeric',
+  })
     .formatRange(weekStart, addDays(weekStart, DAYS_IN_WEEK - 1));
 }
