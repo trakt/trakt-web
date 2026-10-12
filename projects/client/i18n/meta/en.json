@@ -12865,6 +12865,56 @@
           "type": "string"
         }
       }
+    },
+    "text_comment_translation_downloading": {
+      "default": "Downloading language…",
+      "description": "Status text shown while the on-device translation language pack downloads before a comment can be translated."
+    },
+    "text_comment_translation_downloading_ai": {
+      "default": "Downloading Gemini…",
+      "description": "Status text shown while the on-device Gemini AI model downloads before a comment can be translated. Gemini is a product name and should not be translated."
+    },
+    "text_comment_translation_downloading_ai_progress": {
+      "default": "Downloading Gemini… {progress}%",
+      "description": "Status text with download progress shown while the on-device Gemini AI model downloads before a comment can be translated. {progress} is a whole number from 0 to 100. Gemini is a product name and should not be translated.",
+      "variables": {
+        "progress": {
+          "type": "number"
+        }
+      }
+    },
+    "header_comment_translation_download": {
+      "default": "Download language?",
+      "description": "Title of the confirmation dialog asking the user to download an on-device translation language pack before translating a comment."
+    },
+    "header_comment_translation_download_ai": {
+      "default": "Download Gemini model?",
+      "description": "Title of the confirmation dialog asking the user to download the on-device Gemini AI model before translating a comment. Gemini is a product name and should not be translated."
+    },
+    "text_comment_translation_download_metered": {
+      "default": "Translating this comment needs a one-time language download. You are on mobile data, so this may use your data allowance.",
+      "description": "Body of the confirmation dialog shown when the user is on mobile data and translating a comment needs a language pack download."
+    },
+    "text_comment_translation_download_ai_metered": {
+      "default": "Translating this comment needs a one-time download of the on-device AI model, which can be large. You are on mobile data, so this may use your data allowance.",
+      "description": "Body of the confirmation dialog shown when the user is on mobile data and translating a comment needs the on-device AI model download."
+    },
+    "button_text_comment_translated": {
+      "default": "Translated",
+      "description": "Label on the comment translate button once the comment is shown in its translated form."
+    },
+    "header_year_in_review_banner": {
+      "default": "Your {year} Year in Review is here!",
+      "description": "Title of the full screen banner announcing that the user's Year in Review is available. {year} is the four-digit year, for example 2026.",
+      "variables": {
+        "year": {
+          "type": "number"
+        }
+      }
+    },
+    "text_year_in_review_banner_tagline": {
+      "default": "Twelve personas. One of them is you.",
+      "description": "Tagline under the Year in Review banner title. Year in Review assigns the user one of twelve viewing personas."
     }
   }
 }
