@@ -1,5 +1,6 @@
 import { ThemeEndpoint } from '$lib/features/theme/ThemeEndpoint.ts';
 import { THEME_COOKIE_NAME } from '$lib/features/theme/constants.ts';
+import { renderSeasonalCover } from '$lib/features/theme/_internal/renderSeasonalCover.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
 import { safeJsonParse } from '$lib/utils/json/safeJsonParse.ts';
@@ -8,6 +9,7 @@ import type { Handle } from '@sveltejs/kit';
 
 export const THEME_PLACEHOLDER = '%theme.current%';
 export const THEME_SCOPE_PLACEHOLDER = '%theme.seasonal%';
+export const SEASONAL_COVER_PLACEHOLDER = '%theme.seasonal.cover%';
 
 export type ThemeResponse = { theme: Theme };
 
@@ -51,7 +53,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 
       return html
         .replace(THEME_PLACEHOLDER, `${theme}`)
-        .replace(THEME_SCOPE_PLACEHOLDER, `${scope}`);
+        .replace(THEME_SCOPE_PLACEHOLDER, `${scope}`)
+        .replace(SEASONAL_COVER_PLACEHOLDER, renderSeasonalCover(new Date()));
     },
   });
 

@@ -1,12 +1,5 @@
-export type ParticleBounds = {
-  width: number;
-  height: number;
-};
-
-export type Particle = {
-  x: number;
-  y: number;
-};
+import type { Particle } from './Particle.ts';
+import type { ParticleBounds } from './ParticleBounds.ts';
 
 type CreateParticleProps = {
   bounds: ParticleBounds;

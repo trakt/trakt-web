@@ -1,4 +1,5 @@
-import type { Particle, ParticlePainter } from '../ParticlePainter.ts';
+import type { Particle } from '../Particle.ts';
+import type { ParticlePainter } from '../ParticlePainter.ts';
 import { pickColor } from './pickColor.ts';
 
 type Snowflake = Particle & {

@@ -1,9 +1,7 @@
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
-import type {
-  Particle,
-  ParticleBounds,
-  ParticlePainter,
-} from './ParticlePainter.ts';
+import type { Particle } from './Particle.ts';
+import type { ParticleBounds } from './ParticleBounds.ts';
+import type { ParticlePainter } from './ParticlePainter.ts';
 
 function readColors(canvas: HTMLCanvasElement, tokens: ReadonlyArray<string>) {
   const style = getComputedStyle(canvas);
@@ -44,9 +42,8 @@ export function particleCanvas<P extends Particle>(
     canvas.height = bounds.height;
 
     if (particles.length === 0) {
-      particles = Array.from(
-        { length: particleCount(painter, bounds) },
-        () => painter.create({ bounds, colors, isInitial: true }),
+      particles = Array.from({ length: particleCount(painter, bounds) }, () =>
+        painter.create({ bounds, colors, isInitial: true }),
       );
       return;
     }
@@ -76,15 +73,14 @@ export function particleCanvas<P extends Particle>(
   setup();
   draw();
 
-  const unregisterResize = GlobalEventBus.getInstance().register(
-    'resize',
-    () => setup(),
+  const unregisterResize = GlobalEventBus.getInstance().register('resize', () =>
+    setup(),
   );
 
   const themeObserver = new MutationObserver(() => {
     colors = readColors(canvas, painter.colorTokens);
     particles = particles.map(() =>
-      painter.create({ bounds, colors, isInitial: true })
+      painter.create({ bounds, colors, isInitial: true }),
     );
   });
   themeObserver.observe(document.documentElement, {

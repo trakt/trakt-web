@@ -1,0 +1,53 @@
+<style>
+html[data-seasonal-cover]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--layer-top, 999) - 1);
+
+  background: var(--color-background, Canvas);
+}
+</style>
+<script>
+(() => {
+  const windows = %seasonal.windows%;
+  const storageKey = '%seasonal.storage%';
+  const failsafeMs = %seasonal.failsafe%;
+
+  const toDate = (parts) =>
+    new Date(
+      parts.year,
+      parts.month - 1,
+      parts.day,
+      parts.hour ?? 0,
+      parts.minute ?? 0,
+      parts.second ?? 0,
+    );
+  const isWithin = (date, season) =>
+    date >= toDate(season.start) && date <= toDate(season.end);
+
+  const readDismissedAt = (themeId) => {
+    try {
+      const dismissal = JSON.parse(localStorage.getItem(storageKey) ?? 'null');
+      return dismissal?.themeId === themeId
+        ? new Date(dismissal.dismissedAt)
+        : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const now = new Date();
+  const active = windows.find((season) => isWithin(now, season));
+  if (!active) return;
+
+  const html = document.documentElement;
+  html.setAttribute('data-seasonal-theme', active.id);
+
+  const dismissedAt = readDismissedAt(active.id);
+  if (dismissedAt && isWithin(dismissedAt, active)) return;
+
+  html.setAttribute('data-seasonal-cover', '');
+  setTimeout(() => html.removeAttribute('data-seasonal-cover'), failsafeMs);
+})();
+</script>

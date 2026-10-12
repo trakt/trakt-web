@@ -45,6 +45,16 @@
       fill: var(--purple-300);
       opacity: 0.6;
     }
+
+    .ghost-mouth {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    &:hover .ghost-mouth {
+      transform: scale(1.6, 2);
+    }
   }
 
   @keyframes ghost-float {
