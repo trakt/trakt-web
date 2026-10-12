@@ -7,4 +7,5 @@ export type SeasonalThemeConfig = {
   start: SeasonalDate;
   end: SeasonalDate;
   actionBarImage?: string;
+  hasDiscoverFilters?: boolean;
 };
