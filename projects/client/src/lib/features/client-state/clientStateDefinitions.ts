@@ -16,4 +16,8 @@ export const clientStateDefinitions = {
     legacyStorageKey: 'trakt-dismissed-smart-list-nudges',
     fromLegacy: fromLegacyNudgeDismissals,
   }),
+  [ClientStateKey.DismissedPinnedLists]: defineClientRecord({
+    entry: z.literal(true),
+    legacyStorageKey: 'trakt-dismissed-pinned-lists',
+  }),
 } satisfies Record<ClientStateKey, { kind: 'record' | 'value' }>;
