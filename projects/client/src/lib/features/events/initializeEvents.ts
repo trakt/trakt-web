@@ -5,13 +5,18 @@ import type { Events } from './models/Events.ts';
 
 type InitializeEventsProps = {
   setEvent: (id: string | null) => void;
-  events: Events | undefined;
+  getEvents: (now: Date) => Events | undefined;
   dateFn: EventDateFn;
 };
 
-function checkAndSchedule({ events, dateFn, setEvent }: InitializeEventsProps) {
-  if (!events) return;
+function checkAndSchedule({
+  getEvents,
+  dateFn,
+  setEvent,
+}: InitializeEventsProps) {
   const now = new Date();
+  const events = getEvents(now);
+  if (!events) return;
   const eventProps = { events, now, dateFn };
   const active = activeEvent(eventProps);
 
@@ -22,7 +27,7 @@ function checkAndSchedule({ events, dateFn, setEvent }: InitializeEventsProps) {
 
   if (ms !== null && ms > 0) {
     const clamp = Math.min(ms, 2147483647);
-    setTimeout(() => checkAndSchedule({ events, dateFn, setEvent }), clamp);
+    setTimeout(() => checkAndSchedule({ getEvents, dateFn, setEvent }), clamp);
   }
 }
 
