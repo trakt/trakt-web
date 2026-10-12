@@ -8,12 +8,11 @@ import {
 } from 'rxjs';
 import { z } from 'zod';
 import { safeLocalStorage } from '../../utils/storage/safeStorage.ts';
-import { SEASONAL_THEMES } from './constants.ts';
+import { SEASONAL_SPLASH_DISMISSAL_KEY, SEASONAL_THEMES } from './constants.ts';
 import type { SeasonalThemeId } from './models/SeasonalThemeId.ts';
 import { buildLocalDate } from './utils/buildLocalDate.ts';
 import { resolveSeasonalWindow } from './utils/resolveSeasonalWindow.ts';
 
-const SEASONAL_STORAGE_KEY_PREFIX = 'trakt_seasonal_splash_dismissal';
 const SEASONAL_THEME_ATTRIBUTE = 'data-seasonal-theme';
 
 const DismissalSchema = z.object({
@@ -32,7 +31,7 @@ function readSeasonalTheme(): SeasonalThemeId | null {
 
 function getWasDismissed(themeId: SeasonalThemeId): boolean {
   try {
-    const value = safeLocalStorage.getItem(SEASONAL_STORAGE_KEY_PREFIX);
+    const value = safeLocalStorage.getItem(SEASONAL_SPLASH_DISMISSAL_KEY);
     if (!value) return false;
 
     const parsed = DismissalSchema.safeParse(JSON.parse(value));
@@ -89,7 +88,7 @@ export function useSeasonalTheme() {
         dismissedAt: new Date().toISOString(),
       };
       safeLocalStorage.setItem(
-        SEASONAL_STORAGE_KEY_PREFIX,
+        SEASONAL_SPLASH_DISMISSAL_KEY,
         JSON.stringify(dismissal),
       );
 

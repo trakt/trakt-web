@@ -2,6 +2,7 @@ import type { SeasonalThemeConfig } from './models/SeasonalThemeConfig.ts';
 import type { SeasonalThemeId } from './models/SeasonalThemeId.ts';
 
 export const THEME_COOKIE_NAME = 'trakt-theme';
+export const SEASONAL_SPLASH_DISMISSAL_KEY = 'trakt_seasonal_splash_dismissal';
 export const SEASONAL_THEMES: Record<SeasonalThemeId, SeasonalThemeConfig> = {
   halloween: {
     id: 'halloween',

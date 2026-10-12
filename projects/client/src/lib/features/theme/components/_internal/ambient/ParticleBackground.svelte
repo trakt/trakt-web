@@ -1,5 +1,6 @@
 <script lang="ts" generics="P extends Particle">
-  import type { Particle, ParticlePainter } from "./ParticlePainter";
+  import type { Particle } from "./Particle";
+  import type { ParticlePainter } from "./ParticlePainter";
   import { particleCanvas } from "./particleCanvas";
 
   const { painter }: { painter: ParticlePainter<P> } = $props();
@@ -14,10 +15,7 @@
 <style>
   .trakt-particle-background {
     position: fixed;
-    top: 0;
-    inset-inline-start: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
 
     pointer-events: none;
 
