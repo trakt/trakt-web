@@ -307,6 +307,18 @@ const media$ = fromRune(() => media);
 const { listedOnIds } = useListedOnIds({ media$ });
 ```
 
+#### Per-user UI state goes through `useClientRecord`
+
+Dismissals, "seen" markers and small preferences a user expects on every
+device use `useClientRecord(ClientStateKey.X)` (or `useClientValue` for a
+single value), with the key's shape defined in
+`lib/features/client-state/clientStateDefinitions.ts`, never a new
+`safeLocalStorage` + `BehaviorSubject` pair. Flag new hand-rolled per-user
+storage, a definition outside `clientStateDefinitions.ts`, features that spread
+or map the whole record instead of using `set` / `entry`, and a changed entry
+shape on an existing key (Android and iOS read the same shape, so a new shape
+needs a new key). See `.agents/rules/components.md`.
+
 ## Styling
 
 ### SCSS with Scoped Styles

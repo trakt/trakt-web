@@ -388,6 +388,68 @@ runes" for the full perf rationale.
 
 ---
 
+## Per-User UI State That Follows the User (`useClientRecord`)
+
+UI state a signed-in user expects on every device (dismissals, "seen" markers,
+small preferences) goes through the client state store, never through a
+hand-rolled `safeLocalStorage` + `BehaviorSubject` pair. The store keeps a
+per-user localStorage copy for an instant read (the only copy for guests), syncs
+it with the per-user client state endpoint, and falls back to the local copy
+whenever the endpoint errors, times out or the device is offline.
+
+1. Add the key to `ClientStateKey` (`lib/features/client-state/models/`).
+   Lowercase snake_case, one key per feature. Register the same key on the admin
+   client state page, or the server refuses saves and the state stays local.
+2. Define its shape in `lib/features/client-state/clientStateDefinitions.ts`,
+   the one place every key lives. The compiler requires exactly one entry per
+   key. Almost everything is a map of id to entry, so reach for
+   `defineClientRecord`:
+
+```ts
+[ClientStateKey.DismissedThings]: defineClientRecord({
+  entry: z.number(), // value stored per id
+  mergeEntry: latest, // optional, server wins per entry by default
+  isExpired: (dismissedAt, now) => now - dismissedAt > WINDOW, // optional
+  legacyStorageKey: 'old-key', // optional: carry over pre-sync localStorage
+}),
+```
+
+3. Use it by key. The entry type comes from the definition:
+
+```ts
+export function useThingDismissal(id: string) {
+  const things = useClientRecord(ClientStateKey.DismissedThings);
+
+  return {
+    dismiss: () => things.set(id, Date.now()),
+    isDismissed: things.entry(id).pipe(map((at) => at !== undefined)),
+  };
+}
+```
+
+- `useClientRecord` gives `entries`, `entry(id)` (observable), `current(id)`,
+  `set(id, entry)`, `update(id, (entry) => next)` and `remove(id)`. Never spread
+  or map the whole record in a feature.
+- A single value (one preference) uses `defineClientValue` + `useClientValue`
+  (`value`, `set`). Passing a value key to `useClientRecord`, or the other way
+  around, fails to compile.
+- Timestamps use `latest` (`client-state/merge/latest.ts`) so the newest wins
+  per entry. Anything else passes its own `mergeEntry`.
+- **Call it during component init.** It reads Svelte context, so module scope or
+  after `await` throws. `$derived(useThingDismissal(...))` is fine.
+- **The entry schema is a contract.** Android and iOS store the same key with
+  the same shape, so changing a shape means a new key, not an edit.
+- **Keep device-local state out.** Feature flags, auth markers and the offline
+  queue stay in plain localStorage.
+- Saves are batched for one second and dropped when the signed-in user changes,
+  so `set` freely; never debounce at the call site.
+
+Reference: `lib/features/client-state/clientStateDefinitions.ts` (every key),
+`lib/sections/banner/_internal/useBannerDismissal.ts` (plain map),
+`lib/features/toast/useDismissals.ts` (timestamps, expiry, legacy migration).
+
+---
+
 ## URL Navigation in Feature Hooks
 
 Never mutate `page.url.searchParams` (or any other property of `page` from
