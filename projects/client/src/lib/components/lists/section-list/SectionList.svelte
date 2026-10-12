@@ -50,6 +50,7 @@
     onVisibleRange?: (range: VisibleRange) => void;
     /** Floats over the list, e.g. labels pinned to its corners. */
     overlay?: Snippet;
+    listActions?: Snippet;
   };
 
   const {
@@ -72,6 +73,7 @@
     onVisibleRange,
     onUserScroll,
     overlay,
+    listActions: externalListActions,
   }: SectionListProps<T> = $props();
 
   const { isEditMode, section } = useEditMode();
@@ -112,6 +114,8 @@
 
     return $isListCollapsed;
   });
+
+  const hasListActions = $derived(Boolean(externalListActions));
 </script>
 
 {#snippet titleAction()}
@@ -155,6 +159,12 @@
   </RenderForFeature>
 {/snippet}
 
+{#snippet listActions()}
+  <div class="section-list-actions" inert={isCollapsed}>
+    {@render externalListActions?.()}
+  </div>
+{/snippet}
+
 {#if !$isEditModeEnabled || $isEditMode || !$isHidden}
   <section
     use:whenInViewport={() => isVisible.set(true)}
@@ -163,6 +173,7 @@
     class:section-list-container-mounted={$isMounted}
     class:section-list-container-no-header={!isHeaderVisible}
     class:section-list-has-drilldown={Boolean(drilldown)}
+    class:section-list-has-list-actions={hasListActions}
     class:section-list-has-multiple-items={items.length > 1}
     data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
     data-variant={variant}
@@ -175,6 +186,7 @@
           {titleAction}
           {metaInfo}
           actions={isCollapsed ? undefined : actions}
+          listActions={hasListActions ? listActions : undefined}
           navigationType={headerNavigationType}
           drilldown={isCollapsed ? undefined : drilldown}
           disabled={items.length === 0 && drilldown?.mode !== "always"}
@@ -242,12 +254,15 @@
     --shadow-spacing: var(--ni-2);
 
     --height-min-container: var(--ni-40);
+    --section-list-header-height: var(--ni-40);
+
     --section-list-height: calc(
       var(--height-override-list, var(--height-list)) + var(--shadow-spacing)
     );
     --list-inset-top-resolved: var(--list-inset-top, var(--ni-0));
     --height-container: calc(
-      var(--section-list-height) + var(--ni-40) + var(--list-header-gap) +
+      var(--section-list-height) + var(--section-list-header-height) +
+        var(--list-header-gap) +
         var(--list-inset-top-resolved)
     );
 
@@ -297,6 +312,13 @@
     }
   }
 
+  .section-list-container.section-list-has-list-actions {
+    --section-list-header-height: calc(
+      var(--ni-40) + var(--list-header-gap) +
+        var(--list-actions-height, var(--ni-0))
+    );
+  }
+
   .section-list-container {
     min-height: var(--height-container);
     height: var(--height-container);
@@ -335,6 +357,18 @@
 
   .section-list {
     position: relative;
+  }
+
+  .section-list-actions {
+    --list-actions-inset: var(--layout-distance-side);
+
+    display: flex;
+    align-items: center;
+
+    margin-inline: calc(-1 * var(--list-actions-inset));
+
+    height: var(--list-actions-height, auto);
+    margin-top: var(--list-header-gap);
   }
 
   .section-list-container.section-list-container-collapsed {
