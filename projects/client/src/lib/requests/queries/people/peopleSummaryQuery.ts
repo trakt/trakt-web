@@ -16,12 +16,12 @@ const peopleSummaryRequest = (
         id: slug,
       },
       query: {
-        extended: 'full,images',
+        extended: 'full,images,markdown',
       },
     });
 
 export const peopleSummaryQuery = defineQuery({
-  key: 'peopleSummary',
+  key: 'peopleSummary:v3',
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: peopleSummaryRequest,
