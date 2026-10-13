@@ -29,9 +29,11 @@
     <GameButton variant="primary" onclick={onplayagain} isAutofocused>
       {m.button_text_game_play_again()}
     </GameButton>
-    <GameButton onclick={onclose}>
-      {m.button_text_game_close()}
-    </GameButton>
+    {#if onclose}
+      <GameButton onclick={onclose}>
+        {m.button_text_game_close()}
+      </GameButton>
+    {/if}
   </div>
 </div>
 

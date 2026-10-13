@@ -10,6 +10,7 @@ describe('util: isNoIndexPath', () => {
     expect(isNoIndexPath('/users/peekay5000/lists')).to.equal(true);
     expect(isNoIndexPath('/users/peekay5000/lists/view/liked')).to.equal(true);
     expect(isNoIndexPath('/users/peekay5000/watchlist')).to.equal(true);
+    expect(isNoIndexPath('/play/rated-higher')).to.equal(true);
   });
 
   it('should keep public user lists indexable', () => {

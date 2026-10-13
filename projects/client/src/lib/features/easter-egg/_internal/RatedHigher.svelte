@@ -245,6 +245,7 @@
   class="trakt-rated-higher"
   style:--game-advance-duration="{ADVANCE_DURATION}ms"
   class:is-revealed={isRevealed}
+  class:has-close={onclose !== undefined}
   class:has-missed={result === "miss"}
 >
   <div
@@ -303,7 +304,9 @@
     <span class="hint-keys">
       <span><kbd>↑</kbd> {m.button_text_game_higher()}</span>
       <span><kbd>↓</kbd> {m.button_text_game_lower()}</span>
-      <span><kbd>esc</kbd> {m.button_text_game_close()}</span>
+      {#if onclose}
+        <span><kbd>esc</kbd> {m.button_text_game_close()}</span>
+      {/if}
     </span>
     <span class="hint-swipe">{m.text_game_hint_swipe()}</span>
   </p>
@@ -449,8 +452,7 @@
       justify-content: space-between;
       gap: var(--ni-16);
       padding-block-start: calc(env(safe-area-inset-top, 0px) + var(--ni-20));
-      padding-inline: var(--ni-24)
-        calc(var(--ni-24) + var(--game-close-size) + var(--ni-16));
+      padding-inline: var(--ni-24);
       pointer-events: none;
 
       transition:
@@ -581,6 +583,12 @@
 
     .rated-higher-announcer {
       @include visually-hidden;
+    }
+
+    &.has-close .rated-higher-hud {
+      padding-inline-end: calc(
+        var(--ni-24) + var(--game-close-size) + var(--ni-16)
+      );
     }
 
     &:not(.is-revealed) {

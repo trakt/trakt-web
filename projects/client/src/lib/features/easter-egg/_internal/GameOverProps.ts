@@ -6,5 +6,5 @@ export type GameOverProps = {
   best: number;
   isNewBest: boolean;
   onplayagain: () => void;
-  onclose: () => void;
+  onclose?: () => void;
 };

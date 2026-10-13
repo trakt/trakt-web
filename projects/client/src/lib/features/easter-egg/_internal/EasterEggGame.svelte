@@ -11,7 +11,7 @@
   import RatedHigher from "./RatedHigher.svelte";
   import { useTitlePool } from "./useTitlePool.ts";
 
-  const { onclose }: { onclose: () => void } = $props();
+  const { onclose }: { onclose?: () => void } = $props();
 
   const MIN_TITLES = 3;
   const CURTAIN_DURATION = time.seconds(1.1);
@@ -58,7 +58,7 @@
   aria-label={m.header_game_rated_higher()}
   oncancel={(event) => {
     event.preventDefault();
-    onclose();
+    onclose?.();
   }}
 >
   {#if isReady}
@@ -85,11 +85,13 @@
 
   <div class="easter-egg-grain" aria-hidden="true"></div>
 
-  <div class="easter-egg-close">
-    <GameButton shape="round" label={m.button_label_close()} onclick={onclose}>
-      <CloseIcon />
-    </GameButton>
-  </div>
+  {#if onclose}
+    <div class="easter-egg-close">
+      <GameButton shape="round" label={m.button_label_close()} onclick={onclose}>
+        <CloseIcon />
+      </GameButton>
+    </div>
+  {/if}
 </dialog>
 
 <style lang="scss">
