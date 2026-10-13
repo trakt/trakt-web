@@ -52,7 +52,7 @@ describe('DropdownItem', () => {
 
     await waitFor(() => {
       const listItemElement = screen.getByRole('listitem');
-      expect(listItemElement).toHaveAttribute('data-color', 'purple');
+      expect(listItemElement).toHaveAttribute('data-color', 'default');
     });
   });
 
@@ -120,22 +120,6 @@ describe('DropdownItem', () => {
     await waitFor(() => {
       const iconElement = screen.getByText(iconContent);
       expect(iconElement).toBeInTheDocument();
-    });
-  });
-
-  it('should apply flat style', async () => {
-    renderComponent(DropdownItem, {
-      props: {
-        style: 'flat',
-        children: createRawSnippet(() => ({
-          render: () => '<span>flat item</span>',
-        })),
-      },
-    });
-
-    await waitFor(() => {
-      const listItemElement = screen.getByRole('listitem');
-      expect(listItemElement).toHaveAttribute('data-style', 'flat');
     });
   });
 });

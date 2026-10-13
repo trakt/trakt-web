@@ -32,9 +32,6 @@
         <p class="bold ellipsis">{name}</p>
       </li>
       <DropdownItem
-        style="flat"
-        color="default"
-        variant="secondary"
         disabled={isMuting}
         onclick={() => onMute(user.id)}
       >

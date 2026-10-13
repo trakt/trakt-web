@@ -34,7 +34,6 @@
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label,
-    variant: "primary",
     onclick: handler,
     // A queued action stays disabled so it can't be re-triggered while it
     // waits to sync - the pending pill signals it's already been actioned.
@@ -45,7 +44,7 @@
 </script>
 
 {#if style === "normal"}
-  <Button {...commonProps} {...props} style="ghost" color="red">
+  <Button {...commonProps} variant="primary" {...props} style="ghost" color="red">
     {i18n.text({ isFavorited, title })}
     {#if isQueued}<QueuedTag />{/if}
     {#snippet icon()}
@@ -56,14 +55,14 @@
 
 {#if style === "action"}
   <QueuedIndicator {isQueued}>
-    <ActionButton {...commonProps} {...props} style="ghost" color="default">
+    <ActionButton {...commonProps} variant="primary" {...props} style="ghost" color="default">
       <FavoriteIcon {state} --icon-color="var(--color-background-red)" />
     </ActionButton>
   </QueuedIndicator>
 {/if}
 
 {#if style === "dropdown-item"}
-  <DropdownItem {...commonProps} style="flat" color="default">
+  <DropdownItem {...commonProps}>
     {i18n.text({ isFavorited, title })}
     {#if isQueued}<QueuedTag />{/if}
     {#snippet icon()}

@@ -37,9 +37,7 @@
 
 <DropdownItem
   label={m.button_label_leave_collaboration({ name: list.name })}
-  style="flat"
   color={$color as "default" | "red"}
-  variant="secondary"
   disabled={$isLeaving}
   onclick={confirmLeave}
   {...dangerEvents}

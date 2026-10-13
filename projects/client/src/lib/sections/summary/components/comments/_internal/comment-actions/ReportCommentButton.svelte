@@ -22,9 +22,6 @@
 <DropdownItem
   onclick={handleReport}
   label={m.button_label_report_comment()}
-  color="default"
-  style="flat"
-  variant="secondary"
 >
   {m.button_text_report_comment()}
   {#snippet icon()}

@@ -26,13 +26,11 @@
   );
 
   const itemProps: Omit<ButtonProps, "children"> = $derived({
-    style: "flat",
     label: isCollaborator
       ? m.button_label_remove_collaborator({ username: displayName })
       : m.button_label_add_collaborator({ username: displayName }),
     "aria-pressed": isCollaborator ? "true" : "false",
     color: $color,
-    variant: "primary",
     disabled: isPending,
     onclick: onToggle,
     ...dangerEvents,

@@ -27,9 +27,6 @@
   {#snippet popupActions()}
     <DropdownItem
       onclick={() => (isSourcesDrawerOpen = true)}
-      style="flat"
-      color="default"
-      variant="secondary"
       label={m.button_text_view_recommendation_sources()}
     >
       {m.button_text_view_recommendation_sources()}

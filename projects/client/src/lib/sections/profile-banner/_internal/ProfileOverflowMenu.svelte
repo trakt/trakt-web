@@ -98,7 +98,6 @@
   const blockButtonProps: Omit<ButtonProps, "children"> = $derived({
     label: m.button_label_block({ username: userDisplayName }),
     color: $color,
-    variant: "secondary",
     onclick: confirmBlock,
     disabled: $isRequestingBlock,
     ...events,
@@ -148,9 +147,6 @@
   {#snippet items()}
     {#if $incomingFollowRequest}
       <DropdownItem
-        style="flat"
-        color="default"
-        variant="secondary"
         label={m.button_label_approve_follow_request({
           username: userDisplayName,
         })}
@@ -163,9 +159,7 @@
         {/snippet}
       </DropdownItem>
       <DropdownItem
-        style="flat"
         color="red"
-        variant="secondary"
         label={m.button_label_reject_follow_request({
           username: userDisplayName,
         })}
@@ -181,9 +175,6 @@
 
     {#if !isBlocked}
       <DropdownItem
-        style="flat"
-        color="default"
-        variant="secondary"
         label={followItem.label}
         onclick={followItem.onClick}
         disabled={$isRequestingFollow}
@@ -196,9 +187,6 @@
     {/if}
     {#if isBlocked}
       <DropdownItem
-        style="flat"
-        color="default"
-        variant="secondary"
         label={m.button_label_unblock({ username: userDisplayName })}
         onclick={() => blockActions.unblockUser(slug)}
         disabled={$isRequestingBlock}
@@ -209,7 +197,7 @@
         {/snippet}
       </DropdownItem>
     {:else}
-      <DropdownItem style="flat" {...blockButtonProps}>
+      <DropdownItem {...blockButtonProps}>
         {m.button_text_block()}
         {#snippet icon()}
           <BlockIcon />
@@ -224,7 +212,7 @@
       />
     </RenderFor>
 
-    <ModerateAction variant="secondary" />
+    <ModerateAction />
   {/snippet}
 </PopupMenu>
 

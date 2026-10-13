@@ -125,10 +125,7 @@
   <DropdownItem
     onclick={selectCheckin}
     label={m.button_label_checkin({ title: episode.title })}
-    style="flat"
-    color="default"
     disabled={isCheckinDisabled}
-    variant="primary"
   >
     {m.button_text_checkin()}
     {#snippet icon()}
@@ -139,10 +136,7 @@
   <DropdownItem
     onclick={selectWatched}
     label={m.button_label_mark_as_watched_now()}
-    style="flat"
-    color="default"
     disabled={isWatchedDisabled}
-    variant="primary"
   >
     {m.button_text_mark_as_watched_now()}
     {#snippet icon()}

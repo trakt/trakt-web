@@ -29,7 +29,6 @@
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: m.button_label_restore_show({ title }),
     color: $color,
-    variant,
     onclick: confirmRestore,
     disabled: isRestoring,
     ...events,
@@ -39,7 +38,7 @@
 </script>
 
 {#if style === "normal"}
-  <Button {...commonProps} {...props}>
+  <Button {...commonProps} {variant} {...props}>
     {text}
     {#snippet icon()}
       <RestoreIcon />
@@ -48,13 +47,13 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton {...commonProps} {...props} style="ghost">
+  <ActionButton {...commonProps} {variant} {...props} style="ghost">
     <RestoreIcon />
   </ActionButton>
 {/if}
 
 {#if style === "dropdown-item"}
-  <DropdownItem {...commonProps} style="flat">
+  <DropdownItem {...commonProps}>
     {text}
     {#snippet icon()}
       <RestoreIcon />

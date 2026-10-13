@@ -14,9 +14,6 @@
 
 <DropdownItem
   label={m.button_label_edit_list({ name: list.name })}
-  style="flat"
-  color="default"
-  variant="secondary"
   disabled={isDeleting}
   onclick={onClick}
 >

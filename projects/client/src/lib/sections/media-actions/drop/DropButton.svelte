@@ -43,7 +43,6 @@
         ? m.button_label_drop_movie({ title })
         : m.button_label_drop_show({ title }),
     color: $color,
-    variant: variantOverride ?? variant,
     onclick: confirmDrop,
     disabled: isDropping,
     ...events,
@@ -55,7 +54,7 @@
 </script>
 
 {#if style === "normal"}
-  <Button {...commonProps} {...props}>
+  <Button {...commonProps} variant={variantOverride ?? variant} {...props}>
     {text}
     {#snippet icon()}
       <DropIcon />
@@ -64,13 +63,13 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton {...commonProps} {...props} style="ghost">
+  <ActionButton {...commonProps} variant={variantOverride ?? variant} {...props} style="ghost">
     <DropIcon />
   </ActionButton>
 {/if}
 
 {#if style === "dropdown-item"}
-  <DropdownItem {...commonProps} style="flat">
+  <DropdownItem {...commonProps}>
     {text}
     {#snippet icon()}
       <DropIcon />

@@ -9,9 +9,6 @@
 <DropdownItem
   {onclick}
   label={m.button_label_edit_note()}
-  color="default"
-  style="flat"
-  variant="secondary"
 >
   {`${m.button_text_edit_note()}…`}
   {#snippet icon()}

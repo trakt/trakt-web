@@ -19,8 +19,6 @@
 
 <GlobalParameterEscaper enabled>
   <DropdownItem
-    style="flat"
-    variant="secondary"
     label={m.button_label_edit_list({ name: list.title })}
     {href}
   >

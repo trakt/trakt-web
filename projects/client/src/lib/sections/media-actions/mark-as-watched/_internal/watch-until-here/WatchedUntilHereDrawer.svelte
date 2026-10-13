@@ -110,9 +110,6 @@
         <DropdownItem
           onclick={() => handleModeChange("just-now")}
           label={m.button_label_mark_as_watched_now()}
-          style="flat"
-          color="default"
-          variant={mode === "just-now" ? "primary" : "secondary"}
           disabled={mode === "just-now"}
           end={mode === "just-now" ? activeCheck : undefined}
         >
@@ -127,9 +124,6 @@
         <DropdownItem
           onclick={() => handleModeChange("custom-end")}
           label={m.button_label_mark_as_watched_other_date()}
-          style="flat"
-          color="default"
-          variant={isCustom ? "primary" : "secondary"}
           disabled={isCustom}
           end={isCustom ? activeCheck : undefined}
         >
@@ -144,9 +138,6 @@
         <DropdownItem
           onclick={() => handleModeChange("released")}
           label={m.button_label_mark_as_watched_release_date()}
-          style="flat"
-          color="default"
-          variant={mode === "released" ? "primary" : "secondary"}
           disabled={mode === "released"}
           end={mode === "released" ? activeCheck : undefined}
         >

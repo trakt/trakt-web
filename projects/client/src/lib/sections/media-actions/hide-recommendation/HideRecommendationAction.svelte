@@ -23,9 +23,6 @@
 
 <DropdownItem
   onclick={confirmHide}
-  style="flat"
-  color="default"
-  variant="secondary"
   label={m.button_label_hide_recommendation({ title: media.title })}
   disabled={$isHiding}
 >

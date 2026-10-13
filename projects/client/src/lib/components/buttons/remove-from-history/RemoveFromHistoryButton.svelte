@@ -28,7 +28,6 @@
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: i18n.label({ title }),
     color: $color,
-    variant,
     onclick: onRemove,
     disabled: isRemoving,
     ...events,
@@ -36,7 +35,7 @@
 </script>
 
 {#if style === "normal"}
-  <Button {...commonProps} {...props}>
+  <Button {...commonProps} {variant} {...props}>
     {i18n.text()}
     {#snippet icon()}
       <TrackIcon state="watched" />
@@ -45,13 +44,13 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton {...commonProps} {...props} style="ghost">
+  <ActionButton {...commonProps} {variant} {...props} style="ghost">
     <DeleteIcon />
   </ActionButton>
 {/if}
 
 {#if style === "dropdown-item"}
-  <DropdownItem {...commonProps} style="flat">
+  <DropdownItem {...commonProps}>
     {i18n.text()}
     {#snippet icon()}
       <TrackIcon state="watched" />

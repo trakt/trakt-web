@@ -60,7 +60,6 @@
 <EpisodeSideActions
   {title}
   style="dropdown-item"
-  variant="primary"
 />
 
 <SetCoverImageAction
@@ -69,7 +68,6 @@
   id={episode.id}
   coverUrl={episode.cover.url}
   {title}
-  variant="primary"
 />
 
 <HistoryButton onclick={onHistoryOpen} />
@@ -78,7 +76,6 @@
   <ReportButton
     params={{ type: ReportableType.Episode, id: episode.id, title }}
     label={m.button_label_report_media({ title })}
-    variant="primary"
   />
 </RenderFor>
 

@@ -65,10 +65,7 @@
 
 {#if style === "dropdown-item"}
   <DropdownItem
-    {variant}
     onclick={onClick}
-    style="flat"
-    color="default"
     label={m.dropdown_label_add_remove_from_lists({ title })}
     disabled={isDisabled}
   >

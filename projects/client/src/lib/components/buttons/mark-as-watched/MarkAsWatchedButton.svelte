@@ -65,7 +65,6 @@
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label,
     color: $color,
-    variant: mode === "ask" ? "primary" : variant,
     onclick: handler,
     // A queued action stays disabled so it can't be re-triggered while it
     // waits to sync - the pending pill signals it's already been actioned.
@@ -100,6 +99,7 @@
     >
       <Button
         {...commonProps}
+        variant={mode === "ask" ? "primary" : variant}
         {...props}
         navigationType={DpadNavigationType.Item}
       >
@@ -114,14 +114,14 @@
 
   {#if style === "action"}
     <QueuedIndicator {isQueued}>
-      <ActionButton style="ghost" {...commonProps} {...props}>
+      <ActionButton style="ghost" {...commonProps} variant={mode === "ask" ? "primary" : variant} {...props}>
         {@render watchIcon("small")}
       </ActionButton>
     </QueuedIndicator>
   {/if}
 
   {#if style === "dropdown-item"}
-    <DropdownItem {...commonProps} style="flat">
+    <DropdownItem {...commonProps}>
       {buttonText}
       {#if isQueued}<QueuedTag />{/if}
       {#snippet icon()}

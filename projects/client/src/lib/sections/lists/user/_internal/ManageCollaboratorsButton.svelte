@@ -14,9 +14,6 @@
 
 <DropdownItem
   label={m.button_label_manage_collaborators({ name: list.name })}
-  style="flat"
-  color="default"
-  variant="secondary"
   disabled={isDeleting}
   onclick={onClick}
 >

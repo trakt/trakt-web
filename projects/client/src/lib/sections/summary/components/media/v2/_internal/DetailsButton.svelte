@@ -40,9 +40,6 @@
 
 {#if style === "dropdown-item"}
   <DropdownItem
-    style="flat"
-    color="default"
-    variant={variant ?? "primary"}
     {...commonProps}
   >
     {m.button_text_details()}

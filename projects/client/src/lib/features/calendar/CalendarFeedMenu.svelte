@@ -81,9 +81,6 @@
       {/snippet}
       {#snippet items()}
         <DropdownItem
-          style="flat"
-          color="default"
-          variant="secondary"
           label={m.button_label_open_calendar_feed()}
           subtitleSize="tag"
           href={feedUrl.webcal}
@@ -98,9 +95,6 @@
           {/snippet}
         </DropdownItem>
         <DropdownItem
-          style="flat"
-          color="default"
-          variant="secondary"
           label={m.button_label_copy_calendar_feed()}
           subtitleSize="tag"
           onclick={copyLink}

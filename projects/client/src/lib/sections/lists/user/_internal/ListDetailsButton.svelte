@@ -18,9 +18,6 @@
 
 <DropdownItem
   label={m.button_label_details({ title: list.name })}
-  style="flat"
-  color="default"
-  variant="secondary"
   {...buildDrawerLink(UserListDrawers.Details)}
 >
   {m.button_text_details()}

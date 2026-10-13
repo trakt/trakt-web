@@ -59,7 +59,7 @@
 {/if}
 
 {#if style === "dropdown-item"}
-  <DropdownItem {...commonProps} color="default" variant="primary" style="flat">
+  <DropdownItem {...commonProps}>
     {m.button_text_logout()}
     {#snippet icon()}
       <LogoutIcon />

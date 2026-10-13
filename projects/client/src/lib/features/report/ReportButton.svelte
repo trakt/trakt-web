@@ -8,10 +8,9 @@
   type ReportButtonProps = {
     params: ReportParams;
     label: string;
-    variant?: "primary" | "secondary";
   };
 
-  const { params, label, variant = "secondary" }: ReportButtonProps = $props();
+  const { params, label }: ReportButtonProps = $props();
 
   const report = useReportDialog();
 
@@ -23,9 +22,6 @@
 <DropdownItem
   onclick={handleReport}
   {label}
-  color="default"
-  style="flat"
-  {variant}
 >
   {m.button_text_report()}
   {#snippet icon()}

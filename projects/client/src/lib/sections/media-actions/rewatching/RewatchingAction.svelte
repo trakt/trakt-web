@@ -10,7 +10,6 @@
   type RewatchingActionProps = {
     show: ShowEntry;
     title: string;
-    variant?: "primary" | "secondary";
     startLink: {
       href: string;
       noscroll: boolean;
@@ -21,7 +20,6 @@
   const {
     show,
     title,
-    variant = "primary",
     startLink,
   }: RewatchingActionProps = $props();
 
@@ -48,11 +46,8 @@
     <DropdownItem
       onclick={onStopRewatching}
       label={m.button_label_stop_rewatching({ title })}
-      style="flat"
-      color="default"
       disabled={$isUpdatingRewatching}
       icon={rewindIcon}
-      {variant}
     >
       {m.button_text_stop_rewatching()}
     </DropdownItem>
@@ -60,11 +55,8 @@
     <DropdownItem
       {...startLink}
       label={m.button_label_start_rewatching({ title })}
-      style="flat"
-      color="default"
       disabled={$isUpdatingRewatching}
       icon={rewindIcon}
-      {variant}
     >
       {m.button_text_start_rewatching()}
     </DropdownItem>

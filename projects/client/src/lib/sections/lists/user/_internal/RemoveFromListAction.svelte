@@ -23,7 +23,7 @@
     }),
   );
 
-  const { color, variant, ...events } = $derived(
+  const { color, variant: _, ...events } = $derived(
     useDangerButton({ isActive: true, color: "purple" }),
   );
 
@@ -40,7 +40,6 @@
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: m.button_label_remove_from_list({ title: target.title }),
     color: $color,
-    variant,
     onclick: confirmRemove,
     disabled: $isListUpdating,
     ...events,
@@ -52,7 +51,7 @@
   */
 </script>
 
-<DropdownItem {...commonProps} style="flat">
+<DropdownItem {...commonProps}>
   {m.button_text_remove_from_list()}
 
   {#snippet icon()}

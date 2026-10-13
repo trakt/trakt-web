@@ -10,9 +10,6 @@
 
 <DropdownItem
   label={m.button_label_save_filters()}
-  style="flat"
-  color="default"
-  variant="secondary"
   onclick={() => {
     saveFilters();
     onSave();

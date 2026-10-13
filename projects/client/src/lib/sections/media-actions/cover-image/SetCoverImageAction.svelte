@@ -14,7 +14,6 @@
     type: ExtendedMediaType;
     title: string;
     coverUrl?: HttpsUrl | Nil;
-    variant?: "primary" | "secondary";
   };
 
   const {
@@ -23,7 +22,6 @@
     type,
     title,
     coverUrl,
-    variant = "secondary",
   }: SetCoverImageActionProps = $props();
 
   const { isSettingCoverImage, setCoverImage } = $derived(
@@ -64,9 +62,6 @@
 
 {#if style === "dropdown-item"}
   <DropdownItem
-    color="default"
-    style="flat"
-    {variant}
     subtitle={$isCover ? coverSubtitle : undefined}
     {...commonProps}
     {icon}

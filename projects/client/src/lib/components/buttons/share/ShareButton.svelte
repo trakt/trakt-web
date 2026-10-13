@@ -14,7 +14,6 @@
     image?: string;
     style?: "action" | "dropdown-item";
     source: DrilldownSource;
-    variant?: "primary" | "secondary";
   };
 
   const {
@@ -23,7 +22,6 @@
     image,
     source,
     style = "action",
-    variant = "secondary",
   }: ShareButtonProps = $props();
 
   const data = $derived({
@@ -50,7 +48,7 @@
   {/if}
 
   {#if style === "dropdown-item"}
-    <DropdownItem color="default" style="flat" onclick={share} {variant}>
+    <DropdownItem onclick={share}>
       {m.button_text_share()}
       {#snippet icon()}
         <ShareIcon />
