@@ -46,6 +46,7 @@ jobs:
               - 'projects/client/deno.json'
               - 'projects/client/svelte.config.js'
               - 'projects/client/vite.config.ts'
+              - 'projects/client/.vite/**'
               - 'projects/client/wrangler.jsonc'
             i18n_source:
               - 'projects/client/i18n/meta/**'
