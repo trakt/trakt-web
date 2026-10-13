@@ -223,22 +223,22 @@
    */
   --color-segmented-track-background: color-mix(
     in srgb,
-    var(--shade-900) 5%,
+    var(--shade-900) 7%,
     transparent
   );
   --color-segmented-track-border: color-mix(
     in srgb,
-    var(--shade-900) 10%,
+    var(--shade-900) 14%,
     transparent
   );
   --color-segmented-selector-background: color-mix(
     in srgb,
-    var(--purple-500) 14%,
+    var(--purple-500) 22%,
     var(--shade-10)
   );
-  --color-segmented-selector-border: var(--purple-400);
-  --color-segmented-selector-foreground: var(--purple-800);
-  --color-segmented-segment-foreground: var(--shade-500);
+  --color-segmented-selector-border: var(--purple-500);
+  --color-segmented-selector-foreground: var(--purple-900);
+  --color-segmented-segment-foreground: var(--shade-600);
 
   /*
    * Where to watch
