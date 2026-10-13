@@ -157,8 +157,8 @@
     padding-inline: var(--ni-20) var(--ni-6);
     border-radius: var(--border-radius-xxl);
 
-    background: var(--color-segmented-selector-background);
-    color: var(--color-segmented-selector-foreground);
+    background: var(--color-background-purple);
+    color: var(--color-foreground-purple);
     -webkit-tap-highlight-color: transparent;
     box-shadow: 0 var(--ni-8) var(--ni-24)
       color-mix(in srgb, var(--purple-500) 45%, transparent);
