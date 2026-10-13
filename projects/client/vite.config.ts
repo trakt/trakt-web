@@ -12,6 +12,8 @@ import process from 'node:process';
 import { defineConfig } from 'vite';
 import { configDefaults } from 'vitest/config';
 import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
+import { prepareTestI18nProject } from './.vite/prepareTestI18nProject.ts';
+import { redirectParaglide } from './.vite/redirectParaglide.ts';
 import { manifest } from './src/lib/pwa/manifest.ts';
 
 function findGitRoot(dir: string): string {
@@ -58,6 +60,26 @@ const TRAKT_API_PROXY_TARGET = process.env.IS_LOCAL
   : TRAKT_TARGET_ENVIRONMENT;
 
 const IS_DOCTOR = process.env.IS_DOCTOR === 'true';
+
+const IS_VITEST = Boolean(process.env.VITEST);
+
+const TEST_I18N_DIR = path.join(
+  import.meta.dirname,
+  'node_modules/vitest-i18n',
+);
+
+const PARAGLIDE = IS_VITEST
+  ? {
+    project: prepareTestI18nProject({
+      i18nDir: path.join(import.meta.dirname, 'i18n'),
+      testDir: TEST_I18N_DIR,
+    }),
+    outdir: path.join(TEST_I18N_DIR, 'paraglide'),
+  }
+  : {
+    project: './i18n/project.inlang',
+    outdir: './src/lib/paraglide',
+  };
 
 // Utility folders whose specs never touch the DOM run without jsdom and its
 // browser-API mocks. Folders that need a DOM (actions, devices, events,
@@ -127,9 +149,10 @@ export default defineConfig(({ mode }) => ({
         },
       }),
     },
-    paraglideVitePlugin({
-      project: './i18n/project.inlang',
-      outdir: './src/lib/paraglide',
+    paraglideVitePlugin(PARAGLIDE),
+    IS_VITEST && redirectParaglide({
+      from: path.join(import.meta.dirname, 'src/lib/paraglide'),
+      to: PARAGLIDE.outdir,
     }),
     denoSveltekitExit(),
     SvelteKitPWA({
@@ -207,7 +230,7 @@ export default defineConfig(({ mode }) => ({
     reporters: process.env.GITHUB_ACTIONS ? ['dot', 'github-actions'] : ['dot'],
   },
 
-  resolve: process.env.VITEST
+  resolve: IS_VITEST
     ? {
       conditions: ['browser'],
     }
