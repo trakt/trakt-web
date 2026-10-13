@@ -213,8 +213,13 @@
     --track-radius: var(--track-base-radius);
     --segment-radius: calc(var(--track-base-radius) - var(--segment-inset));
     --segment-font-size: var(--font-size-text);
-    --selector-shadow: var(--ni-0) var(--ni-2) var(--ni-8) var(--ni-0)
-      color-mix(in srgb, var(--color-shadow) 30%, transparent);
+    --selector-shadow:
+      inset 0 0 0 var(--border-thickness-xxs)
+        var(--color-segmented-selector-border),
+      var(--ni-0) var(--ni-6) var(--ni-16) var(--ni-0)
+        color-mix(in srgb, var(--color-shadow) 35%, transparent);
+    --track-shadow: inset 0 0 0 var(--border-thickness-xxs)
+      var(--color-segmented-track-border);
 
     position: relative;
     box-sizing: border-box;
@@ -230,6 +235,7 @@
       --segmented-select-background,
       var(--color-segmented-track-background)
     );
+    box-shadow: var(--track-shadow);
     backdrop-filter: blur(var(--ni-8));
     overflow: hidden;
 
@@ -287,7 +293,8 @@
     background: var(--color-segmented-selector-background);
     box-shadow: var(--selector-shadow);
 
-    transition: transform var(--transition-increment) ease-in-out;
+    transition: transform var(--transition-spring-duration)
+      var(--transition-spring-ease);
 
     @media (prefers-reduced-motion: reduce) {
       transition: none;
@@ -312,7 +319,7 @@
     padding-inline: var(--ni-12);
     cursor: pointer;
 
-    color: var(--color-text-secondary);
+    color: var(--color-segmented-segment-foreground);
     font-size: var(--segment-font-size);
     border-radius: var(--segment-radius);
 
@@ -398,9 +405,9 @@
   .trakt-segmented-select[data-variant="selected-label"],
   .trakt-segmented-select[data-variant="selected-icon"] {
     --expand-duration: 360ms;
-    --expand-slide: 300ms;
+    --expand-slide: var(--transition-spring-duration);
     --expand-ease: cubic-bezier(0.22, 1, 0.36, 1);
-    --selector-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --selector-ease: var(--transition-spring-ease);
 
     .segment-row {
       display: inline-flex;
@@ -596,6 +603,14 @@
     --segment-font-size: var(--font-size-text-small);
     --track-radius: var(--border-radius-m);
     --segment-radius: var(--border-radius-m);
+    --track-shadow: none;
+    --segment-block-inset: var(--gap-xs);
+    --selector-shadow:
+      inset 0 0 0 var(--border-thickness-xxs)
+        var(--color-segmented-selector-border),
+      var(--shadow-base);
+
+    margin-block: calc(-1 * var(--segment-block-inset));
 
     background-color: transparent;
     backdrop-filter: none;
