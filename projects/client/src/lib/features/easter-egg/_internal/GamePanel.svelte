@@ -30,6 +30,7 @@
   data-role={role}
   data-result={result ?? undefined}
   data-leaning={leaning ?? undefined}
+  data-entrance={entranceIndex !== null ? "" : undefined}
   style:--panel-entrance-index={entranceIndex}
 >
   <div class="panel-backdrop">
@@ -516,9 +517,11 @@
       opacity: 0;
     }
 
-    :global(.trakt-rated-higher.is-revealed) & .panel-poster,
-    :global(.trakt-rated-higher.is-revealed) & .panel-meta,
-    :global(.trakt-rated-higher.is-revealed) &[data-role="mystery"] .panel-choices {
+    :global(.trakt-rated-higher.is-revealed) &[data-entrance] .panel-poster,
+    :global(.trakt-rated-higher.is-revealed) &[data-entrance] .panel-meta,
+    :global(.trakt-rated-higher.is-revealed)
+      &[data-entrance][data-role="mystery"]
+      .panel-choices {
       animation: panel-rise 0.9s var(--game-ease-out) backwards;
       animation-delay: calc(0.4s + var(--panel-entrance-index) * 0.14s);
     }
