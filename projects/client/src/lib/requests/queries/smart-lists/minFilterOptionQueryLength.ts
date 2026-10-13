@@ -1,0 +1,1 @@
+export const MIN_FILTER_OPTION_QUERY_LENGTH = 2;

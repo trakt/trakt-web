@@ -6,9 +6,15 @@
   import type { ListTarget } from "../models/ListTarget";
   import { toSmartListSourceLabel } from "$lib/sections/lists/smart/toSmartListSourceLabel";
 
-  const { target, type }: { target: ListTarget; type: DiscoverMode } = $props();
+  const { target, type, extraCount = 0 }: {
+    target: ListTarget;
+    type: DiscoverMode;
+    extraCount?: number;
+  } = $props();
 
   const { activeFilterCount } = useFilter();
+
+  const filterCount = $derived($activeFilterCount + extraCount);
 
   const typeLabel = $derived.by(() => {
     switch (type) {
@@ -30,8 +36,8 @@
     <span class="bold ellipsis">{typeLabel}</span>
   {/if}
 
-  {#if $activeFilterCount > 0}
-    <CountBadge count={$activeFilterCount} label={m.button_label_filters()} />
+  {#if filterCount > 0}
+    <CountBadge count={filterCount} label={m.button_label_filters()} />
   {/if}
 </div>
 

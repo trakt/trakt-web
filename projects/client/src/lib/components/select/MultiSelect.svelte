@@ -4,6 +4,7 @@
   import type { MultiSelectProps } from "./models/MultiSelectProps.ts";
   import type { MultiSelectState } from "./models/MultiSelectState.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import LoaderIcon from "$lib/components/icons/LoaderIcon.svelte";
 
   const {
     options,
@@ -14,6 +15,8 @@
     variant = "default",
     searchPlaceholder,
     emptyLabel,
+    isLoading = false,
+    onSearch,
     onChange,
   }: MultiSelectProps = $props();
 
@@ -34,9 +37,15 @@
 
   let search = $state("");
 
+  const statusText = $derived.by(() => {
+    if (isLoading) return m.text_select_searching();
+    if (options.length === 0) return emptyLabel ?? "";
+    return "";
+  });
+
   const normalizedSearch = $derived(search.trim().toLowerCase());
   const visibleOptions = $derived(
-    normalizedSearch
+    normalizedSearch && !onSearch
       ? options.filter((option) =>
         option.label.toLowerCase().includes(normalizedSearch)
       )
@@ -109,15 +118,21 @@
 </script>
 
 {#snippet searchField()}
-  <div class="trakt-select-search">
+  <div class="trakt-select-search" aria-busy={isLoading}>
     <input
       bind:value={search}
+      oninput={(event) => onSearch?.(event.currentTarget.value)}
       type="search"
       placeholder={searchPlaceholder}
       aria-label={searchPlaceholder}
       onkeydown={stopSelectKeyboardHandling}
       onclick={(event) => event.stopPropagation()}
     />
+    {#if isLoading}
+      <span class="trakt-select-search-loader" aria-hidden="true">
+        <LoaderIcon />
+      </span>
+    {/if}
   </div>
 {/snippet}
 
@@ -140,20 +155,26 @@
       onCommit={(next) => setState(option.value, next)}
     />
   {/each}
-  {#if visibleOptions.length === 0 && emptyLabel}
+  {#if visibleOptions.length === 0 && emptyLabel && !isLoading}
     <div class="trakt-select-empty">
       {emptyLabel}
     </div>
   {/if}
+  {#if onSearch}
+    <div class="trakt-select-status" role="status">{statusText}</div>
+  {/if}
 </SelectBase>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-select-search {
     --color-select-search-background: var(--color-select-raised-background);
     --color-select-search-border: var(--color-border);
     --color-select-search-foreground: var(--color-foreground);
     --color-select-search-placeholder: var(--color-select-muted-foreground);
 
+    position: relative;
     padding: var(--ni-4) var(--ni-4) var(--ni-8);
 
     input {
@@ -182,6 +203,34 @@
         border-color: var(--color-input-focus);
       }
     }
+
+    &[aria-busy="true"] input {
+      padding-inline-end: var(--ni-36);
+    }
+  }
+
+  .trakt-select-search-loader {
+    position: absolute;
+    inset-block-start: var(--ni-4);
+    inset-inline-end: var(--ni-4);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--ni-36);
+    height: var(--ni-36);
+
+    color: var(--color-select-muted-foreground);
+
+    :global(svg) {
+      width: var(--ni-18);
+      height: var(--ni-18);
+    }
+  }
+
+  .trakt-select-status {
+    @include visually-hidden;
   }
 
   .trakt-select-empty {

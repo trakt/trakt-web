@@ -1,18 +1,13 @@
 import { parentalGuideFilters } from '$lib/features/filters/parentalGuideFilters.ts';
+import { OPEN_VOTES_CEILING } from './openVotesCeiling.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { SmartList } from '$lib/requests/queries/users/smartListQuery.ts';
 import { toSmartListSourceLabel } from './toSmartListSourceLabel.ts';
 import { toHumanCount } from '$lib/utils/formatting/number/toHumanCount.ts';
 import { toPercentage } from '$lib/utils/formatting/number/toPercentage.ts';
+import { toTitleCaseSlug } from '$lib/utils/formatting/string/toTitleCaseSlug.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
-
-function toTitleCase(value: string): string {
-  return value
-    .replaceAll('-', ' ')
-    .replaceAll('_', ' ')
-    .replace(/\b\w/g, (character) => character.toUpperCase());
-}
 
 function toRatingPercentage(value: number): string {
   return toPercentage(value / 100, languageTag());
@@ -88,8 +83,6 @@ function formatPercentRange(range: number[], label: string): string {
   return label;
 }
 
-const OPEN_VOTES_CEILING = 999_999_999;
-
 function formatVotesRange(range: number[], source: string): string {
   const [min = 0, max] = range;
   const count = (value: number) => toHumanCount(value, languageTag());
@@ -114,7 +107,7 @@ function formatList(key: string, values: string[]): string[] {
     case 'countries':
       return values.map((value) => value.toUpperCase());
     default:
-      return values.map(toTitleCase);
+      return values.map(toTitleCaseSlug);
   }
 }
 

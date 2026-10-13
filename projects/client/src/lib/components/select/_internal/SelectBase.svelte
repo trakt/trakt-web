@@ -92,7 +92,11 @@
       {#snippet child({ props, wrapperProps, open: contentOpen })}
         {#if contentOpen}
           <div {...wrapperProps}>
-            <div {...props} class="trakt-select-content" data-auto-width={autoWidth}>
+            <div
+              {...props}
+              class="trakt-select-content"
+              data-auto-width={autoWidth}
+            >
               {#if header}
                 {@render header()}
               {/if}
@@ -253,6 +257,10 @@
     width: max-content;
     min-width: var(--bits-select-anchor-width);
     max-width: min(var(--ni-240), var(--bits-floating-available-width));
+
+    &:has(:global(.trakt-select-search)) {
+      width: min(var(--ni-240), var(--bits-floating-available-width));
+    }
   }
 
   .trakt-select-content {

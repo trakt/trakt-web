@@ -13,6 +13,9 @@
   import MultiSelectFilter from "./_internal/MultiSelectFilter.svelte";
   import StreamingServicesFilter from "./_internal/StreamingServicesFilter.svelte";
   import SliderFilter from "./SliderFilter.svelte";
+  import type { FilterSettingsResolver } from "./FilterSettingsResolver.ts";
+
+  const { settingsFor }: { settingsFor?: FilterSettingsResolver } = $props();
 
   const { filters } = useFilter();
 
@@ -29,7 +32,7 @@
         {#if filter.key === FilterKey.Streaming}
           <StreamingServicesFilter {filter} />
         {:else}
-          <MultiSelectFilter {filter} />
+          <MultiSelectFilter {filter} settings={settingsFor?.(filter.key)} />
         {/if}
       {/each}
     </FilterChips>
