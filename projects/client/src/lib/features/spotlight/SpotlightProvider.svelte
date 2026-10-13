@@ -14,7 +14,7 @@
   const { isAuthorized } = useAuth();
   const { open, toggle } = iffy(createSpotlightContext);
 
-  const excludedRoutes = new Set([UrlBuilder.welcome()]);
+  const excludedRoutes = new Set([UrlBuilder.welcome(), UrlBuilder.game()]);
 
   const triggers = $derived(createSpotlightTriggers({
     enabled: $isAuthorized &&

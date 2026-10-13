@@ -165,6 +165,7 @@ export const UrlBuilder = {
   today: () => '/today',
   comment: (id: number) => `/comments/${id}`,
   welcome: () => '/welcome',
+  game: () => '/play/rated-higher',
   shows: () => '/shows',
   discover: (params?: DiscoverUrlParams) => {
     const baseUrl = '/discover';

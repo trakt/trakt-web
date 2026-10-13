@@ -1,4 +1,4 @@
-const NO_INDEX_PREFIXES: readonly string[] = ['/profile', '/users'];
+const NO_INDEX_PREFIXES: readonly string[] = ['/profile', '/users', '/play'];
 
 const INDEXABLE_PATTERNS: readonly RegExp[] = [
   /^\/users\/[^/]+\/lists\/[^/]+$/,
