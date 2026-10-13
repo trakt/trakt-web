@@ -168,6 +168,7 @@
     gap: var(--gap-micro);
 
     @include for-mobile {
+      flex-basis: auto;
       padding-inline-end: var(--ni-40);
     }
   }
