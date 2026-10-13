@@ -8,7 +8,7 @@
   import * as m from "$lib/features/i18n/messages";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import CreditMediaItem from "../components/CreditMediaItem.svelte";
-  import NoFilterResultsPlaceholder from "../drilldown/_internal/NoFilterResultsPlaceholder.svelte";
+  import NoFilterResultsPlaceholder from "../drilldown/NoFilterResultsPlaceholder.svelte";
   import { useHistoryCreditsList } from "./_internal/useHistoryCreditsList";
 
   type CreditsHistoryPaginatedListProps = {

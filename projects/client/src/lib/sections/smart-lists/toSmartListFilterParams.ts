@@ -1,7 +1,10 @@
 import type { SmartListFilters } from '$lib/requests/models/SmartListFilters.ts';
 
 function toParamValue(value: unknown): string | undefined {
-  if (typeof value === 'boolean') {
+  if (
+    typeof value === 'boolean' || typeof value === 'number' ||
+    typeof value === 'string'
+  ) {
     return String(value);
   }
 

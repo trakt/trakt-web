@@ -16,7 +16,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CreditMediaItem from "./components/CreditMediaItem.svelte";
   import CreditsPositionDropdown from "./components/CreditsPositionDropdown.svelte";
-  import NoFilterResultsPlaceholder from "./drilldown/_internal/NoFilterResultsPlaceholder.svelte";
+  import NoFilterResultsPlaceholder from "./drilldown/NoFilterResultsPlaceholder.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
   import { resolveSelectedPosition } from "./utils/resolveSelectedPosition";

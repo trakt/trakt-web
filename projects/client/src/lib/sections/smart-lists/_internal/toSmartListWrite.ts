@@ -3,12 +3,7 @@ import type { SmartListWriteRequest } from '@trakt/api';
 import type { SmartListFilters } from '$lib/requests/models/SmartListFilters.ts';
 import type { ListTarget } from '../models/ListTarget.ts';
 import { toSmartListFilters } from '../toSmartListFilters.ts';
-
-const MEDIA_TYPES: Record<DiscoverMode, SmartListWriteRequest['media_type']> = {
-  movie: 'movies',
-  show: 'shows',
-  media: 'media',
-};
+import { toSmartListMediaType } from '../toSmartListMediaType.ts';
 
 type SmartListWriteProps = {
   name: string;
@@ -24,7 +19,7 @@ export function toSmartListWrite(
   return {
     name: name.trim(),
     source: target as SmartListWriteRequest['source'],
-    media_type: MEDIA_TYPES[type],
+    media_type: toSmartListMediaType(type),
     filters: toSmartListFilters(filterMap, baseFilters),
   };
 }

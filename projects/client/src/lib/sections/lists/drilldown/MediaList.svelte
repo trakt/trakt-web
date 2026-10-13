@@ -6,7 +6,7 @@
   import { checksum } from "$lib/utils/string/checksum";
   import SkeletonList from "../../../components/lists/SkeletonList.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
-  import NoFilterResultsPlaceholder from "./_internal/NoFilterResultsPlaceholder.svelte";
+  import NoFilterResultsPlaceholder from "./NoFilterResultsPlaceholder.svelte";
   import type { MediaListProps } from "./MediaListProps";
 
   const {

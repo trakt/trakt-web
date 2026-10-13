@@ -7,7 +7,7 @@
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import CreditMediaItem from "../components/CreditMediaItem.svelte";
-  import NoFilterResultsPlaceholder from "../drilldown/_internal/NoFilterResultsPlaceholder.svelte";
+  import NoFilterResultsPlaceholder from "../drilldown/NoFilterResultsPlaceholder.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import { useHistoryCreditsList } from "./_internal/useHistoryCreditsList";
 
