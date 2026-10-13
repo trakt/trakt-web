@@ -81,6 +81,8 @@
 
 @mixin default-link-style {
   text-decoration-color: var(--color-link-active);
+  text-underline-offset: var(--ni-2);
+  text-decoration-thickness: var(--ni-2);
 
   &,
   &:visited {
