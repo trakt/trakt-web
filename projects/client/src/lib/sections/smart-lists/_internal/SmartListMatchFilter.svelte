@@ -25,6 +25,5 @@
     ariaLabel={m.label_smart_list_match()}
     {disabled}
     onChange={(next) => onChange(next === "and" ? "and" : null)}
-    --segmented-select-radius="var(--border-radius-m)"
   />
 </Filter>

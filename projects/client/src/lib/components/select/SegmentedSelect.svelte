@@ -209,7 +209,10 @@
     --segment-inset: var(--ni-4);
     --segment-block-inset: var(--segment-inset);
     --segment-gap: var(--gap-xs);
-    --track-base-radius: var(--segmented-select-radius, var(--border-radius-l));
+    --track-base-radius: var(
+      --segmented-select-radius,
+      var(--border-radius-pill)
+    );
     --track-radius: var(--track-base-radius);
     --segment-radius: calc(var(--track-base-radius) - var(--segment-inset));
     --segment-font-size: var(--font-size-text);
@@ -243,15 +246,9 @@
       width: 100%;
     }
 
-    &[data-variant="compact"] {
-      --track-base-radius: var(
-        --segmented-select-radius,
-        var(--border-radius-m)
-      );
-    }
-
     &.has-extension {
       --segment-block-inset: var(--segmented-select-extension-inset);
+      --track-radius: var(--segmented-select-extension-radius);
     }
 
     .segment-row {
@@ -338,7 +335,7 @@
       flex-shrink: 0;
 
       padding: var(--ni-1) var(--ni-6);
-      border-radius: var(--border-radius-xxl);
+      border-radius: var(--border-radius-pill);
 
       background: color-mix(in srgb, currentColor 18%, transparent);
       font-variant-numeric: tabular-nums;
