@@ -12939,7 +12939,7 @@
       "description": "Status text shown while the on-device Gemini AI model downloads before a comment can be translated. Gemini is a product name and should not be translated."
     },
     "text_comment_translation_downloading_ai_progress": {
-      "default": "Downloading Gemini… {progress}%",
+      "default": "Downloading Gemini… {progress}",
       "description": "Status text with download progress shown while the on-device Gemini AI model downloads before a comment can be translated. {progress} is a whole number from 0 to 100. Gemini is a product name and should not be translated.",
       "variables": {
         "progress": {
