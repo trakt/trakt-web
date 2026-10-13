@@ -750,6 +750,18 @@ functions. Never inline literal user-facing strings.
 </button>
 ```
 
+Never build a label by joining a symbol or word onto a formatted value
+(`` `<${percent}` ``). Word order and text direction differ per locale. Format
+the value first, then pass it into a message as a variable.
+
+```ts
+// Good
+m.label_reaction_share_under_one({ percent: toPercentage(0.01, locale) });
+
+// Bad - hardcodes order and direction, breaks in RTL locales
+`<${toPercentage(0.01, locale)}`;
+```
+
 ---
 
 ## Drawer Naming Convention
