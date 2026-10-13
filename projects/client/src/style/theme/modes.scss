@@ -247,6 +247,7 @@
     transparent
   );
   --color-dialog-background: var(--color-drawer-background);
+  --color-popup-menu-background: var(--shade-70);
   --color-filter-group-border: color-mix(
     in srgb,
     var(--shade-900) 8%,
@@ -814,6 +815,7 @@
     transparent
   );
   --color-dialog-background: var(--color-drawer-background);
+  --color-popup-menu-background: var(--shade-800);
   --color-filter-group-border: color-mix(
     in srgb,
     var(--shade-10) 8%,
