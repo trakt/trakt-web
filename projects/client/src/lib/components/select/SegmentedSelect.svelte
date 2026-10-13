@@ -210,7 +210,10 @@
     --segment-inset: var(--ni-4);
     --segment-block-inset: var(--segment-inset);
     --segment-gap: var(--gap-xs);
-    --track-base-radius: var(--segmented-select-radius, var(--border-radius-l));
+    --track-base-radius: var(
+      --segmented-select-radius,
+      var(--border-radius-pill)
+    );
     --track-radius: var(--track-base-radius);
     --segment-radius: calc(var(--track-base-radius) - var(--segment-inset));
     --segment-font-size: var(--font-size-text);
@@ -242,13 +245,6 @@
 
     &[data-fill="true"] {
       width: 100%;
-    }
-
-    &[data-variant="compact"] {
-      --track-base-radius: var(
-        --segmented-select-radius,
-        var(--border-radius-m)
-      );
     }
 
     &.has-extension {

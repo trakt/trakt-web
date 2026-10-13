@@ -5,6 +5,7 @@
   --border-radius-l: var(--ni-16);
   --border-radius-xl: var(--ni-20);
   --border-radius-xxl: var(--ni-24);
+  --border-radius-pill: 999px;
 
   --border-thickness-xxs: var(--ni-1);
   --border-thickness-xs: var(--ni-2);
