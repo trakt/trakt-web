@@ -75,10 +75,6 @@
     gap: var(--gap-xs);
     padding: var(--ni-4) var(--ni-12);
 
-    :global(.trakt-popup-menu-container) & {
-      color: var(--shade-900);
-    }
-
     :global(.trakt-user-avatar) {
       width: var(--ni-24);
       height: var(--ni-24);

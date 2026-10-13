@@ -17,7 +17,7 @@
     display: grid;
     grid-template-columns: 100%;
 
-    border-radius: var(--border-radius-l);
+    border-radius: var(--dropdown-group-border-radius, var(--border-radius-l));
     overflow: hidden;
 
     &[data-style="card"] {

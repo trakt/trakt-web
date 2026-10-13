@@ -68,9 +68,9 @@
       transition:slide={{ duration: 150 }}
     >
       <div class="spacer"></div>
-      <ul>
+      <DropdownGroup>
         {@render items()}
-      </ul>
+      </DropdownGroup>
     </div>
   {/if}
 {/if}
@@ -127,6 +127,9 @@
       --active-color: var(--purple-900);
 
       &[data-popup-state="opened"] {
+        --active-background-color: transparent;
+        --active-color: var(--color-text-primary);
+
         background-color: var(--active-background-color);
         color: var(--active-color);
       }
@@ -184,29 +187,20 @@
 
   .trakt-popup-menu-container {
     --list-padding: var(--ni-8);
+    --dropdown-group-border-radius: calc(
+      var(--border-radius-m) - var(--list-padding)
+    );
 
     min-width: var(--ni-156);
     max-width: var(--ni-240);
     padding: var(--list-padding);
 
     border-radius: var(--border-radius-m);
-    background-color: var(--shade-10);
+    background: var(--color-drawer-background);
+    backdrop-filter: blur(var(--ni-12));
 
     position: absolute;
     box-shadow: var(--shadow-menu);
-
-    ul {
-      all: unset;
-
-      display: grid;
-      grid-template-columns: 100%;
-      gap: var(--gap-xxs);
-
-      :global(li) {
-        width: 100%;
-        box-sizing: border-box;
-      }
-    }
 
     div.spacer {
       height: calc($button-size + $button-padding * 2 + var(--list-padding));
