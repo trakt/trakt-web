@@ -6078,6 +6078,18 @@
       "default": "Something went wrong deleting your account. Please try again.",
       "description": "Error message shown when permanent account deletion fails."
     },
+    "label_delete_account_stat_years": {
+      "default": "Years together",
+      "description": "Short label under the number of years the user has had their account, shown in the delete account confirmation dialog."
+    },
+    "label_delete_account_stat_hours": {
+      "default": "Hours watched",
+      "description": "Short label under the total hours the user has watched, shown in the delete account confirmation dialog."
+    },
+    "label_delete_account_stat_plays": {
+      "default": "Plays logged",
+      "description": "Short label under the total number of plays the user has logged, shown in the delete account confirmation dialog."
+    },
     "text_clear_watchlist": {
       "default": "Clear watchlist",
       "description": "Label for the row in clear data settings that allows users to clear their entire watchlist."
