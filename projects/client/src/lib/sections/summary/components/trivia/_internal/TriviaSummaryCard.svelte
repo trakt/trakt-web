@@ -6,9 +6,9 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
+  import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
-  import { createSafeMarked } from "$lib/utils/markdown/createSafeMarked.ts";
   import { stripMarkdownLinks } from "$lib/utils/markdown/stripMarkdownLinks.ts";
 
   const {
@@ -17,7 +17,6 @@
     summary: ReadonlyArray<string>;
   } = $props();
 
-  const marked = createSafeMarked();
   const { buildDrawerLink } = summaryDrawerNavigation();
   const { track } = useTrack(AnalyticsEvent.Drilldown);
 </script>
@@ -41,7 +40,7 @@
                 <SparkleIcon />
               </span>
               <div class="trakt-trivia-summary-fact-body">
-                {@html marked.parse(stripMarkdownLinks(fact))}
+                <InlineMarkdown text={stripMarkdownLinks(fact)} />
               </div>
             </li>
           {/each}
@@ -124,10 +123,6 @@
 
   .trakt-trivia-summary-fact-body {
     line-height: 1.5;
-
-    :global(p) {
-      margin: 0;
-    }
   }
 
   .trakt-trivia-summary-footer {
