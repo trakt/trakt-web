@@ -22,6 +22,8 @@
    */
   --transition-increment: 150ms;
   --transition-duration-short: 300ms;
+  --transition-spring-duration: 420ms;
+  --transition-spring-ease: cubic-bezier(0.34, 1.4, 0.5, 1);
 
   --transition-flip-card: --flip-card-angle
     calc(var(--transition-duration-short) * 1.75)
@@ -32,5 +34,6 @@
   @media (prefers-reduced-motion: reduce) {
     --transition-increment: 0ms;
     --transition-duration-short: 0ms;
+    --transition-spring-duration: 0ms;
   }
 }

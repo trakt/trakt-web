@@ -45,8 +45,8 @@
 
 <main>
   <p class="secondary">
-    Inline single-select: every option stays visible while the purple selector
-    slides onto the active one. <strong>Regular</strong> shows icon + label;
+    Inline single-select: every option stays visible while the purple glass
+    thumb springs onto the active one. <strong>Regular</strong> shows icon + label;
     <strong>compact</strong> condenses to icon-only squares for dense drawer rows.
   </p>
 

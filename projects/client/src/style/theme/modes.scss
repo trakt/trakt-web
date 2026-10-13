@@ -223,14 +223,22 @@
    */
   --color-segmented-track-background: color-mix(
     in srgb,
-    var(--shade-900) 10%,
+    var(--shade-900) 5%,
     transparent
   );
   --color-segmented-track-border: color-mix(
     in srgb,
-    var(--shade-900) 14%,
+    var(--shade-900) 10%,
     transparent
   );
+  --color-segmented-selector-background: color-mix(
+    in srgb,
+    var(--purple-500) 14%,
+    var(--shade-10)
+  );
+  --color-segmented-selector-border: var(--purple-400);
+  --color-segmented-selector-foreground: var(--purple-800);
+  --color-segmented-segment-foreground: var(--shade-500);
 
   /*
    * Where to watch
@@ -441,13 +449,6 @@
    */
   --color-confirmation-destructive-background: var(--red-300);
   --color-confirmation-destructive-foreground: var(--red-1000);
-
-  /*
-   * Filters
-   */
-  --color-filter-tablist-background: var(--shade-100);
-  --color-filter-tab-background: var(--purple-700);
-  --color-filter-tab-active-text: var(--shade-10);
 
   /*
    * Data visualization
@@ -791,14 +792,22 @@
    */
   --color-segmented-track-background: color-mix(
     in srgb,
-    var(--shade-10) 6%,
+    var(--shade-10) 3%,
     transparent
   );
   --color-segmented-track-border: color-mix(
     in srgb,
-    var(--shade-10) 8%,
+    var(--shade-10) 6%,
     transparent
   );
+  --color-segmented-selector-background: color-mix(
+    in srgb,
+    var(--purple-500) 24%,
+    var(--shade-920)
+  );
+  --color-segmented-selector-border: var(--purple-400);
+  --color-segmented-selector-foreground: var(--shade-10);
+  --color-segmented-segment-foreground: var(--shade-500);
 
   /*
    * Where to watch
@@ -1025,13 +1034,6 @@
    */
   --color-confirmation-destructive-background: var(--red-200);
   --color-confirmation-destructive-foreground: var(--red-1000);
-
-  /*
-   * Filters
-   */
-  --color-filter-tablist-background: var(--shade-910);
-  --color-filter-tab-background: var(--purple-700);
-  --color-filter-tab-active-text: var(--shade-10);
 
   /*
    * Data visualization (dark surfaces)

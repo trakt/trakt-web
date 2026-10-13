@@ -8,9 +8,16 @@ export type TrackSelectorParams = {
   target: HTMLElement | Nil;
 };
 
-const morphDuration = time.seconds(0.3);
+const morphDuration = time.seconds(0.42);
 
-const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
+const springOvershoot = 1.70158;
+
+const easeOutSpring = (progress: number) => {
+  const remaining = progress - 1;
+  return 1 +
+    (springOvershoot + 1) * Math.pow(remaining, 3) +
+    springOvershoot * Math.pow(remaining, 2);
+};
 
 export function trackSelector(
   row: HTMLElement,
@@ -66,7 +73,7 @@ export function trackSelector(
 
     const step = () => {
       const to = offsetOf(target);
-      const progress = easeOutCubic(
+      const progress = easeOutSpring(
         Math.min((performance.now() - startedAt) / morphDuration, 1),
       );
 
