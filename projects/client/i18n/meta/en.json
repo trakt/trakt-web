@@ -8232,6 +8232,22 @@
         }
       }
     },
+    "page_title_convert_smart_list": {
+      "default": "Turn into a smart list",
+      "description": "Page title for the page that compares a list with its proposed smart list before converting it."
+    },
+    "header_smart_list_compare_current": {
+      "default": "Your list",
+      "description": "Column header on the smart list compare page for the list as it is today."
+    },
+    "header_smart_list_compare_proposed": {
+      "default": "As a smart list",
+      "description": "Column header on the smart list compare page for the proposed smart list version of the list."
+    },
+    "label_smart_list_compare_view": {
+      "default": "Choose which version to show",
+      "description": "Aria-label for the toggle that switches between the current list and the proposed smart list on small screens."
+    },
     "warning_smart_lists_limit": {
       "default": "You've reached your smart list limit",
       "description": "Warning text shown when a user has reached their smart list limit and attempts to create a new smart list."

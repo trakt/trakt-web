@@ -14,9 +14,10 @@
   type UserListProps = {
     type?: DiscoverMode;
     list: MediaListSummary;
+    title?: string;
   } & ListSortProps;
 
-  const { type, list, sortBy, sortHow }: UserListProps = $props();
+  const { type, list, title, sortBy, sortHow }: UserListProps = $props();
 
   const { filterMap } = useFilter();
   const sort = $derived(useSort(sortBy));
@@ -34,6 +35,7 @@
 
 <DrilledMediaList
   id={`user-paginated-list-${listCacheId}`}
+  {title}
   {type}
   filter={$filterMap}
   useList={(params) =>

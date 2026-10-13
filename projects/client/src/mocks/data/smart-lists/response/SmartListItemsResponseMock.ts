@@ -1,4 +1,4 @@
-import type { SmartListItemResponse } from '$lib/requests/queries/smart-lists/smartListItemsQuery.ts';
+import type { SmartListItemResponse } from '$lib/requests/models/SmartListItemResponse.ts';
 import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
 import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
 

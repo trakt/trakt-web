@@ -1,24 +1,12 @@
-import { goto } from '$app/navigation';
-import { SmartListDraftResponseMock } from '$mocks/data/users/response/SmartListDraftResponseMock.ts';
 import { SmartListDraftsSummaryMappedMock } from '$mocks/data/users/mapped/SmartListDraftsSummaryMappedMock.ts';
-import { server } from '$mocks/server.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
-import { screen, waitFor } from '@testing-library/svelte';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
-import { http, HttpResponse } from 'msw';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import SmartListNudgeBarContent from './SmartListNudgeBarContent.svelte';
 
 const FIRST_LIST_SLUG = SmartListDraftsSummaryMappedMock.lists[0]!.slug;
-
-function serveDraft() {
-  server.use(
-    http.get(
-      `http://localhost/users/me/lists/${FIRST_LIST_SLUG}/smart-list-draft`,
-      () => HttpResponse.json(SmartListDraftResponseMock),
-    ),
-  );
-}
 
 async function renderBar(onDismiss = vi.fn()) {
   renderComponent(SmartListNudgeBarContent, {
@@ -31,10 +19,6 @@ async function renderBar(onDismiss = vi.fn()) {
 }
 
 describe('component: SmartListNudgeBarContent', () => {
-  beforeEach(() => {
-    vi.mocked(goto).mockClear();
-  });
-
   it('should start collapsed with the count of convertible lists', async () => {
     await renderBar();
 
@@ -84,36 +68,15 @@ describe('component: SmartListNudgeBarContent', () => {
     expect(onDismiss).toHaveBeenCalledOnce();
   });
 
-  it('should convert a list in one click and open the new smart list', async () => {
+  it('should link each list to its smart list comparison', async () => {
     const user = userEvent.setup();
-    serveDraft();
+    setAuthorization(true);
     await renderBar();
 
     await user.click(screen.getByRole('button', { name: 'Review' }));
-    await user.click(
-      screen.getByRole('button', { name: 'Turn Silos into a smart list' }),
-    );
 
-    await waitFor(() =>
-      expect(goto).toHaveBeenCalledWith('/lists/smart/view/new-smart-list')
-    );
-  });
-
-  it('should stay on the page when the list has no draft', async () => {
-    const user = userEvent.setup();
-    server.use(
-      http.get(
-        `http://localhost/users/me/lists/${FIRST_LIST_SLUG}/smart-list-draft`,
-        () => new HttpResponse(null, { status: 404 }),
-      ),
-    );
-    await renderBar();
-
-    await user.click(screen.getByRole('button', { name: 'Review' }));
-    await user.click(
-      screen.getByRole('button', { name: 'Turn Silos into a smart list' }),
-    );
-
-    await waitFor(() => expect(goto).not.toHaveBeenCalled());
+    expect(
+      screen.getByRole('link', { name: 'Turn Silos into a smart list' }),
+    ).toHaveAttribute('href', `/lists/smart/convert/${FIRST_LIST_SLUG}`);
   });
 });

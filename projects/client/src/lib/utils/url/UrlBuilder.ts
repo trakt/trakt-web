@@ -258,6 +258,7 @@ export const UrlBuilder = {
         const search = new URLSearchParams(params).toString();
         return `/lists/smart/edit/${slug}${search ? `?${search}` : ''}`;
       },
+      convert: (slug: string) => `/lists/smart/convert/${slug}`,
       all: () => '/lists/smart/view',
       view: (slug: string) => `/lists/smart/view/${slug}`,
     },
