@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
   import Button from "$lib/components/buttons/Button.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import { useActionToast } from "$lib/features/action-toast/useActionToast.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SmartListDraftSummary } from "$lib/requests/models/SmartListDraftSummary.ts";
   import { useUserListSummary } from "$lib/sections/lists/user/useUserListSummary.ts";
@@ -10,12 +8,8 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { untrack } from "svelte";
   import NudgeListPosters from "./NudgeListPosters.svelte";
-  import { useConvertNudgeList } from "./useConvertNudgeList.ts";
 
   const { list }: { list: SmartListDraftSummary } = $props();
-
-  const { convert, isConverting } = useConvertNudgeList();
-  const { notify } = useActionToast();
 
   const { list: summary } = useUserListSummary({
     userId: "me",
@@ -28,17 +22,6 @@
   const overlap = $derived(
     toListOverlap({ count: list.count ?? 0, confidence: list.confidence }),
   );
-
-  const onConvert = async () => {
-    const slug = await convert({ slug: list.slug, name });
-
-    if (!slug) {
-      notify({ message: m.action_toast_action_failed(), variant: "error" });
-      return;
-    }
-
-    goto(UrlBuilder.lists.smart.view(slug));
-  };
 </script>
 
 <li class="trakt-smart-list-nudge-row">
@@ -64,10 +47,8 @@
   <Button
     size="small"
     color="purple"
-    type="button"
     label={m.button_label_smart_list_convert_named({ name })}
-    disabled={$isConverting}
-    onclick={onConvert}
+    href={UrlBuilder.lists.smart.convert(list.slug)}
   >
     {m.button_text_convert()}
   </Button>
