@@ -16,7 +16,13 @@ const showTriviaRequest = async (
   const response = await rawApiFetch(
     {
       fetch,
-      path: toMediaInfoPath({ type: 'show', slug, infoType: 5, locale }),
+      path: toMediaInfoPath({
+        type: 'show',
+        slug,
+        infoType: 5,
+        infoVersion: 2,
+        locale,
+      }),
     },
   );
 
@@ -29,7 +35,7 @@ const showTriviaRequest = async (
 };
 
 export const showTriviaQuery = defineQuery({
-  key: 'showTrivia',
+  key: 'showTrivia:v2',
   invalidations: [],
   dependencies: (params) => [params.slug, params.locale],
   request: showTriviaRequest,

@@ -17,7 +17,9 @@
 </script>
 
 {#snippet parsedContent()}
-  {@html marked.parse(trivia.text)}
+  <div class="trakt-trivia-text">
+    {@html marked.parse(trivia.text)}
+  </div>
 {/snippet}
 
 <InfoCard>
@@ -29,3 +31,18 @@
     </Spoiler>
   {/if}
 </InfoCard>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-trivia-text {
+    display: contents;
+
+    :global(a) {
+      @include default-link-style;
+
+      text-underline-offset: var(--ni-2);
+      text-decoration-thickness: var(--ni-2);
+    }
+  }
+</style>

@@ -9,6 +9,7 @@
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { createSafeMarked } from "$lib/utils/markdown/createSafeMarked.ts";
+  import { stripMarkdownLinks } from "$lib/utils/markdown/stripMarkdownLinks.ts";
 
   const {
     summary,
@@ -40,7 +41,7 @@
                 <SparkleIcon />
               </span>
               <div class="trakt-trivia-summary-fact-body">
-                {@html marked.parse(fact)}
+                {@html marked.parse(stripMarkdownLinks(fact))}
               </div>
             </li>
           {/each}

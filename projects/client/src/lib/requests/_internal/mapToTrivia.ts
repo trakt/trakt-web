@@ -1,3 +1,5 @@
+import { SEO_ORIGIN } from '$lib/features/seo/seoOrigin.ts';
+import { toRelativeMarkdownLinks } from '$lib/utils/markdown/toRelativeMarkdownLinks.ts';
 import type { MediaTrivia } from '../models/MediaTrivia.ts';
 import type { TriviaResponse } from '../models/TriviaResponse.ts';
 
@@ -11,7 +13,7 @@ export function mapToTrivia(
 
   return {
     key,
-    text: response.text,
+    text: toRelativeMarkdownLinks(response.text, SEO_ORIGIN),
     isSpoiler: response.spoiler,
     category: response.category,
   };
