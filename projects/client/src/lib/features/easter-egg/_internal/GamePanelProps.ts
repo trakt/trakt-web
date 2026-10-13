@@ -9,6 +9,6 @@ export type GamePanelProps = {
   guess: Guess | null;
   result: GuessResult | null;
   leaning: Guess | null;
-  entranceIndex: number;
+  entranceIndex: number | null;
   onguess: (guess: Guess) => void;
 };

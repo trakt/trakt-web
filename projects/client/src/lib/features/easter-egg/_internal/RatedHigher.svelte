@@ -34,6 +34,7 @@
   const SWIPE_THRESHOLD = 40;
   const MAX_TILT = { x: 14, y: 10 };
   const FIRE_STREAK = 3;
+  const ENTRANCE_PANELS = 2;
   const CONFETTI_COLORS = [
     "--game-green",
     "--game-purple",
@@ -69,7 +70,9 @@
   let swipeGuess = $state<Guess | null>(null);
   let stopConfetti = NOOP_FN;
 
-  let slots = $state.raw(deck.opening());
+  const openingSlots = deck.opening();
+
+  let slots = $state.raw(openingSlots);
 
   const roles = $derived(toPanelRoles(phase));
   const isMysteryActive = $derived(phase !== "advance");
@@ -271,7 +274,9 @@
             guess={index === 1 && isMysteryActive ? guess : null}
             result={index === 1 && isMysteryActive ? result : null}
             leaning={index === 1 ? swipeGuess : null}
-            entranceIndex={index}
+            entranceIndex={slots === openingSlots && index < ENTRANCE_PANELS
+              ? index
+              : null}
             {onguess}
           />
         {/each}
