@@ -55,7 +55,6 @@
           <Button
             size="small"
             variant="secondary"
-            style="ghost"
             color="default"
             type="button"
             label={m.button_text_not_now()}
