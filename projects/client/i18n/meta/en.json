@@ -1989,6 +1989,15 @@
       "default": "by",
       "description": "Text used to indicate the creator of a list."
     },
+    "label_reaction_share_under_one": {
+      "default": "<{percent}",
+      "description": "Share of reactions too small to round up to 1%, shown on a reaction tile. {percent} is the already formatted 1% (e.g. \"1%\"). Translate as a phrase such as \"less than {percent}\" and keep word order and text direction natural for the language. Keep it as short as possible: the tile is narrow.",
+      "variables": {
+        "percent": {
+          "type": "string"
+        }
+      }
+    },
     "label_list_item_count": {
       "default": "{count} items",
       "description": "Accessible label / tooltip for the item count shown next to a list."
