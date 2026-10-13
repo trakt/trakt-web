@@ -289,7 +289,7 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/v3/media/show/${ShowSiloResponseMock.ids.slug}/info/0/version/1`,
+    `http://localhost/v3/media/show/${ShowSiloResponseMock.ids.slug}/info/0/version/2`,
     () => {
       return HttpResponse.json(ShowSiloSentimentResponseMock);
     },

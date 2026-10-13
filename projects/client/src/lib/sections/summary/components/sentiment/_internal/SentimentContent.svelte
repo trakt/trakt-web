@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
+  import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
   import InfoCard from "../../_internal/InfoCard.svelte";
   import SentimentAspects from "./SentimentAspects.svelte";
 
@@ -8,11 +9,11 @@
 </script>
 
 <div class="trakt-sentiment-content">
-  <p>{sentiment.analysis}</p>
+  <p><InlineMarkdown text={sentiment.analysis} /></p>
 
   <InfoCard variant="highlight">
     <p class="bold">{m.header_sentiment_highlight()}</p>
-    <p>{sentiment.highlight}</p>
+    <p><InlineMarkdown text={sentiment.highlight} /></p>
   </InfoCard>
 
   <InfoCard>

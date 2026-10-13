@@ -19,7 +19,13 @@ const movieSentimentRequest = async (
   const response = await rawApiFetch(
     {
       fetch,
-      path: toMediaInfoPath({ type: 'movie', slug, infoType: 0, locale }),
+      path: toMediaInfoPath({
+        type: 'movie',
+        slug,
+        infoType: 0,
+        infoVersion: 2,
+        locale,
+      }),
     },
   );
 
@@ -32,7 +38,7 @@ const movieSentimentRequest = async (
 };
 
 export const movieSentimentQuery = defineQuery({
-  key: 'movieSentiment',
+  key: 'movieSentiment:v2',
   invalidations: [],
   dependencies: (params) => [params.slug, params.locale],
   request: movieSentimentRequest,

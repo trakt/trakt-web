@@ -30,7 +30,7 @@ describe('movieSentimentQuery', () => {
 
     server.use(
       http.get(
-        `http://localhost/v3/media/movie/${MovieHereticMappedMock.slug}/info/0/version/1`,
+        `http://localhost/v3/media/movie/${MovieHereticMappedMock.slug}/info/0/version/2`,
         ({ request }) => {
           requestedLocales.push(
             new URL(request.url).searchParams.get('locale'),

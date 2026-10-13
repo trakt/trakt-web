@@ -19,7 +19,13 @@ const showSentimentRequest = async (
   const response = await rawApiFetch(
     {
       fetch,
-      path: toMediaInfoPath({ type: 'show', slug, infoType: 0, locale }),
+      path: toMediaInfoPath({
+        type: 'show',
+        slug,
+        infoType: 0,
+        infoVersion: 2,
+        locale,
+      }),
     },
   );
 
@@ -32,7 +38,7 @@ const showSentimentRequest = async (
 };
 
 export const showSentimentQuery = defineQuery({
-  key: 'showSentiment',
+  key: 'showSentiment:v2',
   invalidations: [],
   dependencies: (params) => [params.slug, params.locale],
   request: showSentimentRequest,
