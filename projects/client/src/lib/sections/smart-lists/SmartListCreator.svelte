@@ -30,6 +30,7 @@
   import TargetPreview from "./_internal/TargetPreview.svelte";
   import SmartListRecipe from "./_internal/SmartListRecipe.svelte";
   import { toSmartListFilterMode } from "./toSmartListFilterMode";
+  import { toSmartListFilters } from "./toSmartListFilters";
   import { ListTarget } from "./models/ListTarget";
   import { toDiscoverMode } from "../lists/smart/toDiscoverMode";
   import { useCreateSmartList } from "./useCreateSmartList";
@@ -180,7 +181,11 @@
 
 <div class="trakt-smart-list-creator">
   {#if target}
-    <TargetPreview {target} {type} />
+    <TargetPreview
+      {target}
+      {type}
+      filters={toSmartListFilters($filterMap, list?.filters)}
+    />
   {/if}
 
   <Drawer

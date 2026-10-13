@@ -8,7 +8,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import CreditMediaItem from "./components/CreditMediaItem.svelte";
-  import NoFilterResultsPlaceholder from "./drilldown/_internal/NoFilterResultsPlaceholder.svelte";
+  import NoFilterResultsPlaceholder from "./drilldown/NoFilterResultsPlaceholder.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
   import { parseRequestedPosition } from "./utils/parseRequestedPosition";
   import { resolveSelectedPosition } from "./utils/resolveSelectedPosition";

@@ -2,16 +2,24 @@
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
-  import AnticipatedPaginatedList from "$lib/sections/lists/anticipated/AnticipatedPaginatedList.svelte";
-  import LibraryListPaginated from "$lib/sections/lists/library/LibraryListPaginated.svelte";
-  import PopularPaginatedList from "$lib/sections/lists/popular/PopularPaginatedList.svelte";
-  import RecommendedPaginatedList from "$lib/sections/lists/recommended/RecommendedPaginatedList.svelte";
-  import TrendingPaginatedList from "$lib/sections/lists/trending/TrendingPaginatedList.svelte";
-  import WatchlistPaginatedList from "$lib/sections/lists/watchlist/WatchlistPaginatedList.svelte";
-  import type { ListTarget } from "../models/ListTarget";
+  import type { SmartListFilters } from "$lib/requests/models/SmartListFilters";
+  import { smartListPreviewQuery } from "$lib/requests/queries/smart-lists/smartListPreviewQuery";
+  import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
+  import DrilledMediaList from "$lib/sections/lists/drilldown/DrilledMediaList.svelte";
+  import NoFilterResultsPlaceholder from "$lib/sections/lists/drilldown/NoFilterResultsPlaceholder.svelte";
   import { toSmartListSourceLabel } from "$lib/sections/lists/smart/toSmartListSourceLabel";
+  import { usePaginatedListQuery } from "$lib/sections/lists/stores/usePaginatedListQuery";
+  import type { ListTarget } from "../models/ListTarget";
+  import { toSmartListFilterParams } from "../toSmartListFilterParams";
+  import { toSmartListMediaType } from "../toSmartListMediaType";
 
-  const { target, type }: { target: ListTarget; type: DiscoverMode } = $props();
+  type TargetPreviewProps = {
+    target: ListTarget;
+    type: DiscoverMode;
+    filters: SmartListFilters;
+  };
+
+  const { target, type, filters }: TargetPreviewProps = $props();
 
   const TYPED_TITLES: Partial<
     Record<ListTarget, Record<"movie" | "show", () => string>>
@@ -57,46 +65,36 @@
   </StemTag>
 {/snippet}
 
-{#if target === "trending"}
-  <TrendingPaginatedList
-    {title}
-    {type}
-    {actions}
-  />
-{:else if target === "anticipated"}
-  <AnticipatedPaginatedList
-    {title}
-    {type}
-    {actions}
-  />
-{:else if target === "popular"}
-  <PopularPaginatedList
-    {title}
-    {type}
-    {actions}
-  />
-{:else if target === "recommendations"}
-  <RecommendedPaginatedList
-    {title}
-    {type}
-    {actions}
-  />
-{:else if target === "watchlist"}
-  <WatchlistPaginatedList
-    {title}
-    {type}
-    sortBy={undefined}
-    sortHow="desc"
-    {actions}
-  />
-{:else if target === "library"}
-  <LibraryListPaginated
-    library="plex"
-    {title}
-    {type}
-    {actions}
-  />
-{/if}
+<DrilledMediaList
+  id={`smart-list-preview-${target}-${type}`}
+  {title}
+  {type}
+  {actions}
+  useList={(params) =>
+    usePaginatedListQuery(
+      smartListPreviewQuery({
+        source: target,
+        mediaType: toSmartListMediaType(type),
+        filters: toSmartListFilterParams(filters),
+        limit: params.limit,
+      }),
+    )}
+>
+  {#snippet empty()}
+    <NoFilterResultsPlaceholder />
+  {/snippet}
+
+  {#snippet item(media)}
+    <DefaultMediaItem
+      type={media.type}
+      {media}
+      source="smart-list"
+      style="summary"
+      mode={type === "media" ? "mixed" : "standalone"}
+      canDeemphasize
+    />
+  {/snippet}
+</DrilledMediaList>
 
 <style>
   .preview-tag {
