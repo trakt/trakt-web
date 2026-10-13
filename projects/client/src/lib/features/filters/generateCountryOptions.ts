@@ -1,7 +1,7 @@
 import { languageTag } from '$lib/features/i18n/index.ts';
 import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
-import type { FilterOption } from '../models/FilterOptions.ts';
-import { COUNTRY_REGIONS } from './countries.ts';
+import type { FilterOption } from './models/FilterOptions.ts';
+import { COUNTRY_REGIONS } from './_internal/countries.ts';
 
 const HISTORICAL_COUNTRY_NAMES: Readonly<Record<string, string>> = {
   su: 'Soviet Union',

@@ -11,6 +11,7 @@
   import FilterSection from "./FilterSection.svelte";
   import FilterGroup from "./filters/FilterGroup.svelte";
   import AdvancedFilters from "./filters/AdvancedFilters.svelte";
+  import type { FilterSettingsResolver } from "./filters/FilterSettingsResolver.ts";
   import { useFilterSetter } from "./filters/_internal/useFilterSetter";
   import SimpleFilters from "./filters/SimpleFilters.svelte";
   import ToggleFilter from "./filters/ToggleFilter.svelte";
@@ -19,11 +20,17 @@
     activeMode,
     setActiveMode,
     actions,
+    advanced,
+    settingsFor,
+    hasExtraFilters = false,
     tabPosition = "top",
   }: {
     activeMode: FilterMode;
     setActiveMode: (to: string) => void;
     actions?: Snippet;
+    advanced?: Snippet;
+    settingsFor?: FilterSettingsResolver;
+    hasExtraFilters?: boolean;
     tabPosition?: "top" | "bottom";
   } = $props();
 
@@ -54,7 +61,7 @@
       return;
     }
 
-    if (to !== FilterMode.Simple || !$hasAnyAdvancedFilter) {
+    if (to !== FilterMode.Simple || (!$hasAnyAdvancedFilter && !hasExtraFilters)) {
       return;
     }
 
@@ -91,7 +98,7 @@
     {#if activeMode === FilterMode.Simple}
       <SimpleFilters />
     {:else}
-      <AdvancedFilters />
+      <AdvancedFilters {settingsFor} />
     {/if}
   </div>
 
@@ -102,6 +109,10 @@
       {/each}
     </FilterGroup>
   </FilterSection>
+
+  {#if activeMode === FilterMode.Advanced}
+    {@render advanced?.()}
+  {/if}
 
   {#if tabPosition === "bottom"}
     {@render modeSelector()}

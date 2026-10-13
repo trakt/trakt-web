@@ -9,6 +9,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import Filter from "../Filter.svelte";
+  import type { FilterSettingsSlot } from "../FilterSettingsSlot.ts";
   import { useFilterSetter } from "./useFilterSetter.ts";
 
   const resetValue = "__reset_filter__";
@@ -18,11 +19,13 @@
     disabled = false,
     searchPlaceholder,
     emptyLabel,
+    settings,
   }: {
     filter: AdvancedMultiSelectFilter;
     disabled?: boolean;
     searchPlaceholder?: string;
     emptyLabel?: string;
+    settings?: FilterSettingsSlot;
     } = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -68,7 +71,7 @@
   ]);
 </script>
 
-<Filter {title} variant={$isMobile ? "compact" : "inline"}>
+<Filter {title} variant={$isMobile ? "compact" : "inline"} {settings}>
   <MultiSelect
     options={optionsWithAll}
     included={selection.included}

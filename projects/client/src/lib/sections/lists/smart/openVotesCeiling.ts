@@ -1,0 +1,1 @@
+export const OPEN_VOTES_CEILING = 999_999_999;

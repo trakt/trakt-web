@@ -4,6 +4,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createSmartListRequest } from '$lib/requests/queries/users/createSmartListRequest.ts';
 import { AnalyticsEvent } from '../../features/analytics/events/AnalyticsEvent.ts';
+import type { SmartListFilters } from '$lib/requests/models/SmartListFilters.ts';
 import { useTrack } from '../../features/analytics/useTrack.ts';
 import { toSmartListWrite } from './_internal/toSmartListWrite.ts';
 import type { ListTarget } from './models/ListTarget.ts';
@@ -13,6 +14,7 @@ type CreateListProps = {
   type: DiscoverMode;
   target: ListTarget;
   filterMap: Record<string, string>;
+  baseFilters?: SmartListFilters;
 };
 
 export function useCreateSmartList() {

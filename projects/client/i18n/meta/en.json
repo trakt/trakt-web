@@ -7932,6 +7932,191 @@
       "default": "List preview",
       "description": "Text for the tag that indicates a preview of a smart list. This should be as short as possible."
     },
+    "header_smart_list_more_filters": {
+      "default": "More filters",
+      "description": "Header above the smart list editor section with filters beyond the regular filter panel, e.g. keywords, people or studios."
+    },
+    "header_smart_list_keywords": {
+      "default": "Keywords",
+      "description": "Label for the smart list filter that matches titles by keyword."
+    },
+    "header_smart_list_people": {
+      "default": "People",
+      "description": "Label for the smart list filter that matches titles by cast or crew."
+    },
+    "header_smart_list_studios": {
+      "default": "Studios",
+      "description": "Label for the smart list filter that matches titles by production studio."
+    },
+    "header_smart_list_networks": {
+      "default": "Networks",
+      "description": "Label for the smart list filter that matches shows by TV network."
+    },
+    "header_smart_list_languages": {
+      "default": "Languages",
+      "description": "Label for the smart list filter that matches titles by original language."
+    },
+    "header_smart_list_streaming_country": {
+      "default": "Streaming country",
+      "description": "Label for the smart list setting that picks which country's streaming services are used."
+    },
+    "header_smart_list_released_within": {
+      "default": "Released within",
+      "description": "Label for the smart list filter that keeps only titles released recently."
+    },
+    "header_smart_list_more_ratings": {
+      "default": "More ratings",
+      "description": "Label above the extra rating sliders in the smart list editor (TMDB, Letterboxd, MAL, Metascore)."
+    },
+    "header_smart_list_hide": {
+      "default": "Hide",
+      "description": "Label above the smart list toggles that hide titles, e.g. unreleased or ended shows."
+    },
+    "button_label_filter_settings": {
+      "default": "{filter} settings",
+      "description": "Aria label for the settings button next to a filter (e.g. Genre) that opens extra options like matching any or all values.",
+      "variables": { "filter": { "type": "string" } }
+    },
+    "button_label_filter_settings_modified": {
+      "default": "{filter} settings, changed",
+      "description": "Aria label for the settings button next to a filter (e.g. Genre) when one of its extra options differs from the default.",
+      "variables": { "filter": { "type": "string" } }
+    },
+    "text_smart_list_filter_search_hint": {
+      "default": "Type at least 2 characters to search",
+      "description": "Shown in the smart list editor search dropdowns (keywords, people, studios, networks) before enough characters are typed to search."
+    },
+    "text_select_searching": {
+      "default": "Searching",
+      "description": "Screen reader announcement in a searchable dropdown while results for the typed text are loading."
+    },
+    "text_smart_list_filter_no_results": {
+      "default": "No matches",
+      "description": "Shown in the smart list editor search dropdowns (keywords, people, studios, networks) when a search returns nothing."
+    },
+    "button_label_reset_smart_list_more_filters": {
+      "default": "Reset more filters",
+      "description": "Aria label for the button that clears every value in the \"More filters\" section of the smart list editor."
+    },
+    "input_placeholder_search_keywords": {
+      "default": "Search keywords...",
+      "description": "Placeholder for the keyword search field in the smart list editor."
+    },
+    "input_placeholder_search_studios": {
+      "default": "Search studios...",
+      "description": "Placeholder for the studio search field in the smart list editor."
+    },
+    "input_placeholder_search_networks": {
+      "default": "Search networks...",
+      "description": "Placeholder for the network search field in the smart list editor."
+    },
+    "input_placeholder_search_languages": {
+      "default": "Search languages...",
+      "description": "Placeholder for the language search field in the smart list editor."
+    },
+    "option_text_any_time": {
+      "default": "Any time",
+      "description": "Option for the 'Released within' smart list filter that applies no release window."
+    },
+    "option_text_last_days": {
+      "default": "Last {count} days",
+      "description": "Option for the 'Released within' smart list filter, e.g. 'Last 90 days'.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "option_text_any_country": {
+      "default": "Your country",
+      "description": "Option for the smart list streaming country setting that uses the owner's own country."
+    },
+    "option_text_match_any": {
+      "default": "Any",
+      "description": "Option for matching titles that have any of the selected values, e.g. any of the selected genres."
+    },
+    "option_text_match_all": {
+      "default": "All",
+      "description": "Option for matching titles that have all of the selected values, e.g. all of the selected genres."
+    },
+    "option_text_any_votes": {
+      "default": "Any",
+      "description": "Option for the minimum votes smart list filter that applies no minimum."
+    },
+    "option_text_votes_from": {
+      "default": "{count}+",
+      "description": "Option for the minimum votes smart list filter, e.g. '1,000+'.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "label_smart_list_min_votes": {
+      "default": "Minimum {source} votes",
+      "description": "Label for a minimum vote count smart list filter, e.g. 'Minimum IMDb votes'.",
+      "variables": {
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "option_text_role_any": {
+      "default": "Any role",
+      "description": "Option for the people filter role in the smart list editor that matches any credit."
+    },
+    "option_text_role_cast": {
+      "default": "Cast",
+      "description": "Option for the people filter role in the smart list editor that matches acting credits."
+    },
+    "option_text_role_directing": {
+      "default": "Directing",
+      "description": "Option for the people filter role in the smart list editor that matches directing credits."
+    },
+    "option_text_role_writing": {
+      "default": "Writing",
+      "description": "Option for the people filter role in the smart list editor that matches writing credits."
+    },
+    "option_text_role_producing": {
+      "default": "Producing",
+      "description": "Option for the people filter role in the smart list editor that matches producing credits."
+    },
+    "label_smart_list_people_role": {
+      "default": "Role",
+      "description": "Label for the people filter role setting in the smart list editor."
+    },
+    "label_smart_list_match": {
+      "default": "Match",
+      "description": "Label for the any/all match setting next to a smart list filter."
+    },
+    "toggle_text_hide_watching": {
+      "default": "Shows you're watching",
+      "description": "Smart list toggle that hides shows the owner is currently watching."
+    },
+    "toggle_text_hide_unreleased": {
+      "default": "Unreleased titles",
+      "description": "Smart list toggle that hides titles that are not released yet."
+    },
+    "toggle_text_hide_released": {
+      "default": "Released titles",
+      "description": "Smart list toggle that hides titles that are already released."
+    },
+    "toggle_text_hide_ended": {
+      "default": "Ended shows",
+      "description": "Smart list toggle that hides shows that have ended."
+    },
+    "toggle_text_hide_airing": {
+      "default": "Airing shows",
+      "description": "Smart list toggle that hides shows that are still airing."
+    },
+    "toggle_text_hide_no_release_date": {
+      "default": "Titles without a release date",
+      "description": "Smart list toggle that hides titles with no known release date."
+    },
+    "toggle_text_include_unrated_parental": {
+      "default": "Include unrated titles",
+      "description": "Smart list toggle, shown under the parental guidance header, that keeps titles with no parental guide rating when parental filters are set."
+    },
     "validation_text_settings_field": {
       "default": "{name} is required",
       "description": "Validation text shown when the user inputs an invalid value for a setting.",

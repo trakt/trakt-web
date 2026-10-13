@@ -11,5 +11,7 @@ export type MultiSelectProps = {
   variant?: SelectTriggerVariant;
   searchPlaceholder?: string;
   emptyLabel?: string;
+  isLoading?: boolean;
+  onSearch?: (query: string) => void;
   onChange: (selection: MultiSelectSelection) => void;
 };

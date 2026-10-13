@@ -29,8 +29,16 @@
   import TargetDropdown from "./_internal/TargetDropdown.svelte";
   import TargetPreview from "./_internal/TargetPreview.svelte";
   import SmartListRecipe from "./_internal/SmartListRecipe.svelte";
+  import { FilterKey } from "$lib/features/filters/models/Filter.ts";
   import { toSmartListFilterMode } from "./toSmartListFilterMode";
-  import { toSmartListFilters } from "./toSmartListFilters";
+  import { toSmartListFilters } from "./toSmartListFilters.ts";
+  import { toExtraSmartListFilters } from "./toExtraSmartListFilters.ts";
+  import { isSameSmartListFilters } from "./isSameSmartListFilters.ts";
+  import { toSmartListExtrasForType } from "./toSmartListExtrasForType.ts";
+  import SmartListMoreFilters from "./_internal/SmartListMoreFilters.svelte";
+  import SmartListMatchFilter from "./_internal/SmartListMatchFilter.svelte";
+  import type { FilterSettingsResolver } from "$lib/sections/navbar/components/filter/filters/FilterSettingsResolver.ts";
+  import { withSmartListFilter } from "./withSmartListFilter.ts";
   import { ListTarget } from "./models/ListTarget";
   import { toDiscoverMode } from "../lists/smart/toDiscoverMode";
   import { useCreateSmartList } from "./useCreateSmartList";
@@ -69,10 +77,36 @@
     filters: toFilterParams(page.url),
   }));
 
+  const initialExtras = untrack(() =>
+    toExtraSmartListFilters(list?.filters ?? {})
+  );
+
   let listName = $state(initial.name);
+  let extraFilters = $state(initialExtras);
   let type = $state<DiscoverMode>(initial.type);
   let activeMode = $state(initial.filterMode);
   let target = $state<ListTarget | undefined>(initial.target);
+
+  const settingsFor: FilterSettingsResolver = (key) =>
+    key === FilterKey.Genres
+      ? {
+        content: genreSettings,
+        isModified: extraFilters.genres_operator != null,
+      }
+      : undefined;
+
+  const typedExtras = $derived(
+    toSmartListExtrasForType({ filters: extraFilters, type }),
+  );
+  const hasExtraFilters = $derived(
+    Object.values(typedExtras).some((value) =>
+      Array.isArray(value) ? value.length > 0 : value != null
+    ),
+  );
+
+  const appliedExtras = $derived(
+    activeMode === FilterMode.Advanced ? typedExtras : {},
+  );
 
   const goBack = () => {
     goto(
@@ -86,7 +120,8 @@
     listName !== initial.name ||
       type !== initial.type ||
       target !== initial.target ||
-      toFilterParams(page.url) !== initial.filters,
+      toFilterParams(page.url) !== initial.filters ||
+      !isSameSmartListFilters(appliedExtras, initialExtras),
   );
 
   const requestClose = () => {
@@ -113,13 +148,14 @@
         type,
         target,
         filterMap: $filterMap,
-        baseFilters: list.filters,
+        baseFilters: appliedExtras,
       })
       : await createList({
         name: listName,
         type,
         target: target ?? ListTarget.Trending,
         filterMap: $filterMap,
+        baseFilters: appliedExtras,
       });
 
     if (!slug) {
@@ -173,9 +209,35 @@
   </FilterGroup>
 {/snippet}
 
+{#snippet genreSettings()}
+  <SmartListMatchFilter
+    value={extraFilters.genres_operator}
+    disabled={isDisabled}
+    onChange={(value) =>
+      (extraFilters = withSmartListFilter({
+        filters: extraFilters,
+        key: "genres_operator",
+        value,
+      }))}
+  />
+{/snippet}
+
+{#snippet moreFilters()}
+  <SmartListMoreFilters
+    filters={extraFilters}
+    {type}
+    disabled={isDisabled}
+    onChange={(next) => (extraFilters = next)}
+  />
+{/snippet}
+
 {#snippet recipe()}
   {#if target}
-    <SmartListRecipe {target} {type} />
+    <SmartListRecipe
+      {target}
+      {type}
+      extraCount={Object.keys(appliedExtras).length}
+    />
   {/if}
 {/snippet}
 
@@ -184,7 +246,7 @@
     <TargetPreview
       {target}
       {type}
-      filters={toSmartListFilters($filterMap, list?.filters)}
+      filters={toSmartListFilters($filterMap, appliedExtras)}
     />
   {/if}
 
@@ -229,6 +291,9 @@
           {activeMode}
           setActiveMode={onActiveModeChange}
           actions={targetSelector}
+          advanced={moreFilters}
+          {settingsFor}
+          {hasExtraFilters}
           tabPosition={$isMobile ? "bottom" : "top"}
         />
       </div>
