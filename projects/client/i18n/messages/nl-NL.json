@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Voor het vertalen van deze reactie is een eenmalige taaldownload nodig. U gebruikt mobiele data, dus dit kan uw databundel verbruiken.",
   "text_comment_translation_downloading": "Taal downloaden…",
   "text_comment_translation_downloading_ai": "Gemini downloaden…",
-  "text_comment_translation_downloading_ai_progress": "Gemini downloaden… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Gemini downloaden… {progress}",
   "text_connection_status_cancelled_message": "Je kunt {service} verbinden wanneer je maar wilt.",
   "text_connection_status_cancelled_title": "Verbinding geannuleerd",
   "text_connection_status_connected_message": "We synchroniseren nu je kijkgeschiedenis en beoordelingen.",

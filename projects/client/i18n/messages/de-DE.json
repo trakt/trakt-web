@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Für die Übersetzung dieses Kommentars ist ein einmaliger Sprach-Download erforderlich. Sie verwenden mobile Daten, was Ihr Datenvolumen verbrauchen kann.",
   "text_comment_translation_downloading": "Sprache wird heruntergeladen…",
   "text_comment_translation_downloading_ai": "Gemini wird heruntergeladen…",
-  "text_comment_translation_downloading_ai_progress": "Gemini wird heruntergeladen… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Gemini wird heruntergeladen… {progress}",
   "text_connection_status_cancelled_message": "Du kannst {service} verbinden, wann immer du bereit bist.",
   "text_connection_status_cancelled_title": "Verbindung abgebrochen",
   "text_connection_status_connected_message": "Wir synchronisieren jetzt deinen Verlauf und deine Bewertungen.",

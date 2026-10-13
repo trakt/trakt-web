@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Для перекладу цього коментаря потрібне одноразове завантаження мови. Ви використовуєте мобільні дані, тому це може спожити ваш трафік.",
   "text_comment_translation_downloading": "Завантаження мови…",
   "text_comment_translation_downloading_ai": "Завантаження Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Завантаження Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Завантаження Gemini… {progress}",
   "text_connection_status_cancelled_message": "Ви можете підключити {service}, коли будете готові.",
   "text_connection_status_cancelled_title": "З'єднання скасовано",
   "text_connection_status_connected_message": "Зараз ми синхронізуємо вашу історію переглядів та оцінки.",

@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "La traduction de ce commentaire nécessite un téléchargement unique de la langue. Vous utilisez des données mobiles, ce qui peut consommer votre forfait.",
   "text_comment_translation_downloading": "Téléchargement de la langue…",
   "text_comment_translation_downloading_ai": "Téléchargement de Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Téléchargement de Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Téléchargement de Gemini… {progress}",
   "text_connection_status_cancelled_message": "Vous pouvez connecter {service} quand vous le souhaitez.",
   "text_connection_status_cancelled_title": "Connexion annulée",
   "text_connection_status_connected_message": "Nous synchronisons votre historique de visionnage et vos notes maintenant.",

@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "For at oversætte denne kommentar skal der foretages en engangsdownload af sprog. Du bruger mobildata, så dette kan bruge af din dataforbrug.",
   "text_comment_translation_downloading": "Downloader sprog…",
   "text_comment_translation_downloading_ai": "Downloader Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Downloader Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Downloader Gemini… {progress}",
   "text_connection_status_cancelled_message": "Du kan oprette forbindelse til {service}, når du er klar.",
   "text_connection_status_cancelled_title": "Forbindelse annulleret",
   "text_connection_status_connected_message": "Vi synkroniserer din sete historie og vurderinger nu.",

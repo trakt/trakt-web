@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "La traduzione di questo commento richiede un download una tantum della lingua. Sei connesso tramite dati mobili, quindi questo potrebbe consumare la tua disponibilità di dati.",
   "text_comment_translation_downloading": "Download della lingua in corso…",
   "text_comment_translation_downloading_ai": "Download di Gemini in corso…",
-  "text_comment_translation_downloading_ai_progress": "Download di Gemini in corso… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Download di Gemini in corso… {progress}",
   "text_connection_status_cancelled_message": "Puoi connettere {service} quando sei pronto.",
   "text_connection_status_cancelled_title": "Connessione annullata",
   "text_connection_status_connected_message": "Stiamo sincronizzando la tua cronologia e le valutazioni.",

@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Att översätta den här kommentaren kräver en engångsnedladdning av språk. Du använder mobildata, så detta kan förbruka din datamängd.",
   "text_comment_translation_downloading": "Laddar ner språk...",
   "text_comment_translation_downloading_ai": "Laddar ner Gemini...",
-  "text_comment_translation_downloading_ai_progress": "Laddar ner Gemini... {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Laddar ner Gemini... {progress}",
   "text_connection_status_cancelled_message": "Du kan ansluta {service} när du är redo.",
   "text_connection_status_cancelled_title": "Anslutning avbruten",
   "text_connection_status_connected_message": "Vi synkroniserar din visningshistorik och dina betyg nu.",

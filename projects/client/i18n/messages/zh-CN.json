@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "翻译此评论需要一次性下载语言包。您正在使用移动数据，这可能会消耗您的流量。",
   "text_comment_translation_downloading": "正在下载语言包…",
   "text_comment_translation_downloading_ai": "正在下载 Gemini…",
-  "text_comment_translation_downloading_ai_progress": "正在下载 Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "正在下载 Gemini… {progress}",
   "text_connection_status_cancelled_message": "您可以随时连接 {service}。",
   "text_connection_status_cancelled_title": "连接已取消",
   "text_connection_status_connected_message": "我们正在同步您的观看历史和评分。",

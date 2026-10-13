@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Tłumaczenie tego komentarza wymaga jednorazowego pobrania języka. Korzystasz z danych mobilnych, więc może to zużyć Twój pakiet danych.",
   "text_comment_translation_downloading": "Pobieranie języka…",
   "text_comment_translation_downloading_ai": "Pobieranie Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Pobieranie Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Pobieranie Gemini… {progress}",
   "text_connection_status_cancelled_message": "Możesz połączyć {service}, kiedy tylko będziesz gotowy.",
   "text_connection_status_cancelled_title": "Połączenie anulowane",
   "text_connection_status_connected_message": "Teraz synchronizujemy Twoją historię oglądania i oceny.",

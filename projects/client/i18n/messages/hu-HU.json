@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "A hozzászólás fordításához egyszeri nyelvi letöltés szükséges. Mobildaton van, így ez felhasználhatja az adatforgalmát.",
   "text_comment_translation_downloading": "Nyelv letöltése…",
   "text_comment_translation_downloading_ai": "Gemini letöltése…",
-  "text_comment_translation_downloading_ai_progress": "Gemini letöltése… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Gemini letöltése… {progress}",
   "text_connection_status_cancelled_message": "Bármikor csatlakozhat a(z) {service} szolgáltatáshoz, amikor készen áll.",
   "text_connection_status_cancelled_title": "Kapcsolat megszakítva",
   "text_connection_status_connected_message": "Most szinkronizáljuk megtekintett előzményeit és értékeléseit.",

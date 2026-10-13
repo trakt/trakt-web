@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Para traducir este comentario se requiere una descarga única del idioma. Estás usando datos móviles, lo que podría consumir tu plan de datos.",
   "text_comment_translation_downloading": "Descargando idioma…",
   "text_comment_translation_downloading_ai": "Descargando Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Descargando Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Descargando Gemini… {progress}",
   "text_connection_status_cancelled_message": "Puedes conectar {service} cuando quieras.",
   "text_connection_status_cancelled_title": "Conexión cancelada",
   "text_connection_status_connected_message": "Estamos sincronizando tu historial de reproducción y calificaciones ahora.",

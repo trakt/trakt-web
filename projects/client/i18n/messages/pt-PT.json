@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Traduzir este comentário requer a transferência única de um idioma. Estás a usar dados móveis, por isso, esta transferência pode consumir o teu plafond de dados.",
   "text_comment_translation_downloading": "A transferir idioma…",
   "text_comment_translation_downloading_ai": "A transferir o Gemini…",
-  "text_comment_translation_downloading_ai_progress": "A transferir o Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "A transferir o Gemini… {progress}",
   "text_connection_status_cancelled_message": "Podes associar {service} quando quiseres.",
   "text_connection_status_cancelled_title": "Associação cancelada",
   "text_connection_status_connected_message": "Estamos a sincronizar o teu histórico de visualizações e classificações.",

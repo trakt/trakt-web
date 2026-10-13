@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Per traduir aquest comentari cal fer una baixada única de l'idioma. Esteu utilitzant dades mòbils, la qual cosa pot consumir la vostra quota de dades.",
   "text_comment_translation_downloading": "S'està baixant l'idioma…",
   "text_comment_translation_downloading_ai": "S'està baixant Gemini…",
-  "text_comment_translation_downloading_ai_progress": "S'està baixant Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "S'està baixant Gemini… {progress}",
   "text_connection_status_cancelled_message": "Pots connectar {service} quan estiguis preparat.",
   "text_connection_status_cancelled_title": "Connexió cancel·lada",
   "text_connection_status_connected_message": "Estem sincronitzant el teu historial vist i les puntuacions ara.",

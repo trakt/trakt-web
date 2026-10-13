@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "تتطلب ترجمة هذا التعليق تنزيلًا لمرة واحدة للغة. أنت تستخدم بيانات الجوال، لذا قد يستهلك ذلك من رصيد بياناتك.",
   "text_comment_translation_downloading": "تنزيل اللغة…",
   "text_comment_translation_downloading_ai": "تنزيل Gemini…",
-  "text_comment_translation_downloading_ai_progress": "تنزيل Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "تنزيل Gemini… {progress}",
   "text_connection_status_cancelled_message": "يمكنك توصيل {service} عندما تكون مستعدًا.",
   "text_connection_status_cancelled_title": "تم إلغاء الاتصال",
   "text_connection_status_connected_message": "نقوم الآن بمزامنة سجل المشاهدة وتقييماتك.",

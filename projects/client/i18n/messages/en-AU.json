@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Translating this comment needs a one-off language download. You're on mobile data, so this might use up your data allowance.",
   "text_comment_translation_downloading": "Downloading language…",
   "text_comment_translation_downloading_ai": "Downloading Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Downloading Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Downloading Gemini… {progress}",
   "text_connection_status_cancelled_message": "You can connect {service} whenever you're ready.",
   "text_connection_status_cancelled_title": "Connection cancelled",
   "text_connection_status_connected_message": "We're syncing your watched history and ratings now.",

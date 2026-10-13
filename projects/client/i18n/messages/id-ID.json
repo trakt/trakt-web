@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Menerjemahkan komentar ini memerlukan unduhan bahasa satu kali. Anda menggunakan data seluler, jadi ini mungkin menggunakan kuota data Anda.",
   "text_comment_translation_downloading": "Mengunduh bahasa…",
   "text_comment_translation_downloading_ai": "Mengunduh Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Mengunduh Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Mengunduh Gemini… {progress}",
   "text_connection_status_cancelled_message": "Anda dapat menghubungkan {service} kapan saja Anda siap.",
   "text_connection_status_cancelled_title": "Koneksi dibatalkan",
   "text_connection_status_connected_message": "Kami sedang menyinkronkan riwayat tontonan dan rating Anda sekarang.",

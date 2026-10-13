@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "このコメントを翻訳するには、言語の初回ダウンロードが必要です。モバイルデータ通信を使用しているため、データ通信量がかかる場合があります。",
   "text_comment_translation_downloading": "言語をダウンロード中…",
   "text_comment_translation_downloading_ai": "Geminiをダウンロード中…",
-  "text_comment_translation_downloading_ai_progress": "Geminiをダウンロード中… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Geminiをダウンロード中… {progress}",
   "text_connection_status_cancelled_message": "準備ができたらいつでも{service}に接続できます。",
   "text_connection_status_cancelled_title": "接続がキャンセルされました",
   "text_connection_status_connected_message": "視聴履歴と評価を現在同期しています。",

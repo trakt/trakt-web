@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Traducerea acestui comentariu necesită o descărcare unică a pachetului lingvistic. Folosești date mobile, așa că acest lucru îți poate consuma din alocația de date.",
   "text_comment_translation_downloading": "Se descarcă limba…",
   "text_comment_translation_downloading_ai": "Se descarcă Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Se descarcă Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Se descarcă Gemini… {progress}",
   "text_connection_status_cancelled_message": "Poți conecta {service} oricând ești gata.",
   "text_connection_status_cancelled_title": "Conexiune anulată",
   "text_connection_status_connected_message": "Sincronizăm acum istoricul vizionărilor și evaluările tale.",

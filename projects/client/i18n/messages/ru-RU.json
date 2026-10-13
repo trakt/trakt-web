@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Для перевода этого комментария требуется однократная загрузка языка. Вы используете мобильные данные, что может расходовать ваш трафик.",
   "text_comment_translation_downloading": "Загрузка языка…",
   "text_comment_translation_downloading_ai": "Загрузка Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Загрузка Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Загрузка Gemini… {progress}",
   "text_connection_status_cancelled_message": "Вы можете подключить {service}, когда будете готовы.",
   "text_connection_status_cancelled_title": "Подключение отменено",
   "text_connection_status_connected_message": "Сейчас мы синхронизируем вашу историю просмотров и оценки.",

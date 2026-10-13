@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Превеждането на този коментар изисква еднократно изтегляне на език. Използвате мобилни данни, така че това може да изразходва част от вашия абонамент.",
   "text_comment_translation_downloading": "Изтегляне на език...",
   "text_comment_translation_downloading_ai": "Изтегляне на Gemini...",
-  "text_comment_translation_downloading_ai_progress": "Изтегляне на Gemini... {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Изтегляне на Gemini... {progress}",
   "text_connection_status_cancelled_message": "Можете да се свържете с {service}, когато сте готови.",
   "text_connection_status_cancelled_title": "Връзката е отменена",
   "text_connection_status_connected_message": "В момента синхронизираме историята на гледанията ви и оценките ви.",

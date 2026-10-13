@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "برای ترجمه این نظر، یک بار دانلود زبان لازم است. شما از داده تلفن همراه استفاده می‌کنید، بنابراین ممکن است از سهمیه داده شما مصرف شود.",
   "text_comment_translation_downloading": "در حال دانلود زبان…",
   "text_comment_translation_downloading_ai": "در حال دانلود Gemini…",
-  "text_comment_translation_downloading_ai_progress": "در حال دانلود Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "در حال دانلود Gemini… {progress}",
   "text_connection_status_cancelled_message": "می‌توانید هر زمان که آماده بودید به {service} متصل شوید.",
   "text_connection_status_cancelled_title": "اتصال لغو شد",
   "text_connection_status_connected_message": "ما در حال همگام‌سازی سابقه تماشا و امتیازات شما هستیم.",

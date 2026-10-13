@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "For å oversette denne kommentaren må et språk lastes ned én gang. Du bruker mobildata, så dette kan bruke av datakvoten din.",
   "text_comment_translation_downloading": "Laster ned språk…",
   "text_comment_translation_downloading_ai": "Laster ned Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Laster ned Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Laster ned Gemini… {progress}",
   "text_connection_status_cancelled_message": "Du kan koble til {service} når du er klar.",
   "text_connection_status_cancelled_title": "Tilkobling avbrutt",
   "text_connection_status_connected_message": "Vi synkroniserer din sett historie og rangeringer nå.",

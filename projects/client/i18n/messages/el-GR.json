@@ -1605,7 +1605,7 @@
   "text_comment_translation_download_metered": "Για τη μετάφραση αυτού του σχολίου απαιτείται εφάπαξ λήψη γλώσσας. Χρησιμοποιείτε δεδομένα κινητής τηλεφωνίας, επομένως ενδέχεται να καταναλώσετε από το διαθέσιμο όριό σας.",
   "text_comment_translation_downloading": "Λήψη γλώσσας…",
   "text_comment_translation_downloading_ai": "Λήψη Gemini…",
-  "text_comment_translation_downloading_ai_progress": "Λήψη Gemini… {progress}%",
+  "text_comment_translation_downloading_ai_progress": "Λήψη Gemini… {progress}",
   "text_connection_status_cancelled_message": "Μπορείτε να συνδέσετε την {service} όποτε είστε έτοιμοι.",
   "text_connection_status_cancelled_title": "Η σύνδεση ακυρώθηκε",
   "text_connection_status_connected_message": "Συγχρονίζουμε το ιστορικό παρακολούθησης και τις αξιολογήσεις σας τώρα.",
