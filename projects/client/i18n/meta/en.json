@@ -8196,6 +8196,42 @@
         }
       }
     },
+    "list_summary_votes_from": {
+      "default": "{count}+ {source} votes",
+      "description": "Smart list filter summary for a minimum vote count, e.g. '5,000+ IMDb votes'.",
+      "variables": {
+        "count": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "list_summary_votes_between": {
+      "default": "{min} to {max} {source} votes",
+      "description": "Smart list filter summary for a vote count range, e.g. '1,000 to 5,000 Trakt votes'.",
+      "variables": {
+        "min": {
+          "type": "string"
+        },
+        "max": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "list_summary_released_within_days": {
+      "default": "Released in the last {count} days",
+      "description": "Smart list filter summary for titles released within a rolling window, e.g. 'Released in the last 90 days'.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
     "warning_smart_lists_limit": {
       "default": "You've reached your smart list limit",
       "description": "Warning text shown when a user has reached their smart list limit and attempts to create a new smart list."

@@ -3,6 +3,7 @@ import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { SmartList } from '$lib/requests/queries/users/smartListQuery.ts';
 import { toSmartListSourceLabel } from './toSmartListSourceLabel.ts';
+import { toHumanCount } from '$lib/utils/formatting/number/toHumanCount.ts';
 import { toPercentage } from '$lib/utils/formatting/number/toPercentage.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
 
@@ -87,6 +88,23 @@ function formatPercentRange(range: number[], label: string): string {
   return label;
 }
 
+const OPEN_VOTES_CEILING = 999_999_999;
+
+function formatVotesRange(range: number[], source: string): string {
+  const [min = 0, max] = range;
+  const count = (value: number) => toHumanCount(value, languageTag());
+
+  if (max == null || max >= OPEN_VOTES_CEILING) {
+    return m.list_summary_votes_from({ count: count(min), source });
+  }
+
+  return m.list_summary_votes_between({
+    min: count(min),
+    max: count(max),
+    source,
+  });
+}
+
 function formatList(key: string, values: string[]): string[] {
   switch (key) {
     case 'genres':
@@ -100,6 +118,14 @@ function formatList(key: string, values: string[]): string[] {
   }
 }
 
+const PLAIN_RANGE_SOURCES: Record<string, string> = {
+  imdb_ratings: 'IMDb',
+  tmdb_ratings: 'TMDB',
+  letterboxd_ratings: 'Letterboxd',
+  mal_ratings: 'MAL',
+  metascores: 'Metascore',
+};
+
 function formatRange(key: string, range: number[]): string[] {
   const parentalFilter = parentalGuideFilters.find((filter) =>
     filter.key === key
@@ -112,6 +138,11 @@ function formatRange(key: string, range: number[]): string[] {
     return [parentalFilter.formatLabel({ min, max })];
   }
 
+  const plainRangeSource = PLAIN_RANGE_SOURCES[key];
+  if (plainRangeSource) {
+    return [`${plainRangeSource} ${formatPlainRange(range)}`];
+  }
+
   switch (key) {
     case 'years':
       return [formatNumberRange(range, m.advanced_filter_label_release_year)];
@@ -119,12 +150,14 @@ function formatRange(key: string, range: number[]): string[] {
       return [formatNumberRange(range, m.advanced_filter_label_runtime)];
     case 'ratings':
       return [formatPercentRange(range, 'Trakt')];
-    case 'imdb_ratings':
-      return [`IMDb ${formatPlainRange(range)}`];
     case 'rt_meters':
       return [formatPercentRange(range, 'RT')];
     case 'rt_user_meters':
       return [formatPercentRange(range, 'RT Audience')];
+    case 'votes':
+      return [formatVotesRange(range, 'Trakt')];
+    case 'imdb_votes':
+      return [formatVotesRange(range, 'IMDb')];
     default:
       return [];
   }
@@ -135,6 +168,10 @@ function formatFilter(key: string, value: unknown): string[] {
     return value.every((item) => typeof item === 'string')
       ? formatList(key, value as string[])
       : formatRange(key, value as number[]);
+  }
+
+  if (typeof value === 'number' && key === 'released_within_days') {
+    return [m.list_summary_released_within_days({ count: String(value) })];
   }
 
   if (value === true && key === 'ignore_watched') {
