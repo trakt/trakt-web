@@ -187,23 +187,22 @@
 
   .trakt-popup-menu-container {
     --list-padding: var(--ni-8);
-    --dropdown-group-border-radius: calc(
-      var(--border-radius-m) - var(--list-padding)
-    );
+    --dropdown-group-border-radius: var(--border-radius-m);
 
     min-width: var(--ni-156);
     max-width: var(--ni-240);
     padding: var(--list-padding);
 
     border-radius: var(--border-radius-m);
-    background: var(--color-drawer-background);
-    backdrop-filter: blur(var(--ni-12));
+    background: var(--color-popup-menu-background);
 
     position: absolute;
-    box-shadow: var(--shadow-menu);
+    box-shadow:
+      0 0 0 var(--ni-1) var(--color-popup-menu-background),
+      var(--shadow-menu);
 
     div.spacer {
-      height: calc($button-size + $button-padding * 2 + var(--list-padding));
+      height: calc($button-size + $button-padding * 2);
     }
   }
 </style>
