@@ -10,7 +10,7 @@
   import FilterButton from "$lib/sections/navbar/components/filter/FilterButton.svelte";
   import PersonTitle from "../../_internal/PersonTitle.svelte";
   import Summary from "./../../_internal/Summary.svelte";
-  import SummaryOverview from "./../../summary/SummaryOverview.svelte";
+  import SummaryMarkdownOverview from "./../../summary/SummaryMarkdownOverview.svelte";
   import ImdbLink from "./_internal/ImdbLink.svelte";
   import PersonDetails from "./_internal/PersonDetails.svelte";
   import SocialMediaLinks from "./_internal/SocialMediaLinks.svelte";
@@ -71,5 +71,8 @@
     />
   {/snippet}
 
-  <SummaryOverview title={person.name} overview={person.biography} />
+  <SummaryMarkdownOverview
+    title={person.name}
+    overview={person.biography}
+  />
 </Summary>
