@@ -30,6 +30,16 @@
   });
 
   const isExpanded = $derived($lines === 1337);
+
+  const expand = () => lines.set(1337);
+
+  const expandOnKeyboardFocus = (event: FocusEvent) => {
+    if (!$isClamped) return;
+    if (!(event.target instanceof Element)) return;
+    if (!event.target.matches(":focus-visible")) return;
+
+    expand();
+  };
 </script>
 
 <div class="trakt-clamped-text">
@@ -38,6 +48,7 @@
     use:lineClamp={{ lines: $lines, isClamped }}
     use:appendClassList={classList}
     class="line-clamp-content"
+    onfocusin={expandOnKeyboardFocus}
   >
     {@render children()}
   </svelte:element>
@@ -48,7 +59,7 @@
       {label}
       count={undefined}
       onCollapse={() => lines.set(lineCount)}
-      onExpand={() => lines.set(1337)}
+      onExpand={expand}
     />
   {/if}
 </div>

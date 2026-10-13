@@ -8,7 +8,7 @@
   import PersonTitle from "../_internal/PersonTitle.svelte";
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
   import SummaryHeader from "./../summary/SummaryHeader.svelte";
-  import SummaryOverview from "./../summary/SummaryOverview.svelte";
+  import SummaryMarkdownOverview from "./../summary/SummaryMarkdownOverview.svelte";
   import DetailSeparator from "./v2/_internal/DetailSeparator.svelte";
   import { hasSocialMediaLinks } from "./v2/_internal/hasSocialMediaLinks";
   import ImdbLink from "./v2/_internal/ImdbLink.svelte";
@@ -50,7 +50,10 @@
       <PersonTitle name={person.name} knownFor={person.knownFor} />
     </SummaryHeader>
 
-    <SummaryOverview title={person.name} overview={person.biography} />
+    <SummaryMarkdownOverview
+      title={person.name}
+      overview={person.biography}
+    />
   </div>
 
   <div class="person-meta-info">
