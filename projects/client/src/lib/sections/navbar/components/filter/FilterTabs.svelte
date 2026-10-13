@@ -83,7 +83,6 @@
     ariaLabel={m.header_filters()}
     fill
     {onChange}
-    --segmented-select-radius="var(--border-radius-m)"
   />
 {/snippet}
 

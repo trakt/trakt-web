@@ -5,6 +5,7 @@
   --border-radius-l: var(--ni-16);
   --border-radius-xl: var(--ni-20);
   --border-radius-xxl: var(--ni-24);
+  --border-radius-pill: var(--border-radius-xxl);
 
   --border-thickness-xxs: var(--ni-1);
   --border-thickness-xs: var(--ni-2);
@@ -27,6 +28,7 @@
   --segmented-select-segment-height: var(--ni-32);
   --segmented-select-minimal-segment-height: var(--ni-28);
   --segmented-select-extension-inset: var(--gap-xs);
+  --segmented-select-extension-radius: var(--border-radius-l);
   --segmented-select-extension-height: calc(
     var(--segmented-select-segment-height) +
     2 *

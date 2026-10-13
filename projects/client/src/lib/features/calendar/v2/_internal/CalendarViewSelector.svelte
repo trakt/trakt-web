@@ -40,7 +40,6 @@
     icon={viewIcon}
     ariaLabel={m.button_label_calendar_view()}
     onChange={select}
-    --segmented-select-radius="var(--border-radius-m)"
   />
 </div>
 
@@ -51,6 +50,5 @@
 
   :global(.trakt-calendar-header[data-variant="bar"]) .trakt-calendar-view-selector {
     --segmented-select-background: transparent;
-    --segmented-select-radius: var(--border-radius-m);
   }
 </style>

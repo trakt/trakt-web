@@ -47,7 +47,7 @@
   <p class="secondary">
     Inline single-select: every option stays visible while the purple glass
     thumb springs onto the active one. <strong>Regular</strong> shows icon + label;
-    <strong>compact</strong> condenses to icon-only squares for dense drawer rows.
+    <strong>compact</strong> condenses to icon-only circles for dense drawer rows.
   </p>
 
   <section>
@@ -77,7 +77,7 @@
   <section>
     <h2>Compact</h2>
     <div class="control">
-      <span class="tag secondary uppercase">Icon-only squircles</span>
+      <span class="tag secondary uppercase">Icon-only circles</span>
       <SegmentedSelect
         variant="compact"
         options={mediaOptions}
@@ -92,7 +92,7 @@
   <section>
     <h2>Selected label (mobile)</h2>
     <p class="secondary">
-      Icon-only squares except the active option, which grows to reveal its
+      Icon-only circles except the active option, which grows to reveal its
       label - the tightest labelled form, used on small screens.
     </p>
     <div class="control">

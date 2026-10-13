@@ -44,6 +44,5 @@
     value={state}
     ariaLabel={filter.label()}
     onChange={handleChange}
-    --segmented-select-radius="var(--border-radius-m)"
   />
 </Filter>
