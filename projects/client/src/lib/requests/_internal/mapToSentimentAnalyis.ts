@@ -1,3 +1,5 @@
+import { SEO_ORIGIN } from '$lib/features/seo/seoOrigin.ts';
+import { toRelativeMarkdownLinks } from '$lib/utils/markdown/toRelativeMarkdownLinks.ts';
 import type { SentimentAnalysis } from '../models/SentimentAnalysis.ts';
 import type { SentimentResponse } from '../models/SentimentResponse.ts';
 
@@ -13,8 +15,8 @@ export function mapToSentimentAnalysis(
   }
 
   return {
-    analysis: response?.analysis ?? '',
-    highlight: response?.highlight ?? '',
+    analysis: toRelativeMarkdownLinks(response.analysis ?? '', SEO_ORIGIN),
+    highlight: toRelativeMarkdownLinks(response.highlight ?? '', SEO_ORIGIN),
     aspect: {
       pros: response.aspect.pros.map((item) => appendDot(item.theme)),
       cons: response.aspect.cons.map((item) => appendDot(item.theme)),
