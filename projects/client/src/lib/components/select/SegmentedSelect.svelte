@@ -240,7 +240,6 @@
     );
     box-shadow: var(--track-shadow);
     backdrop-filter: blur(var(--ni-8));
-    overflow: hidden;
 
     &[data-fill="true"] {
       width: 100%;
@@ -649,10 +648,11 @@
       content: "";
 
       position: absolute;
-      inset-inline: calc(-1 * var(--segment-inset));
-      bottom: calc(-1 * var(--segment-inset));
+      inset-inline: 0;
+      bottom: 0;
       height: var(--ni-2);
 
+      border-radius: var(--border-radius-pill);
       background: var(--color-input-focus);
 
       transform: scaleX(0);
