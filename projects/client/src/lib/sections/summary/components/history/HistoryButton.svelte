@@ -7,10 +7,8 @@
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
 
   const {
-    variant = "primary",
     onclick,
   }: {
-    variant?: "primary" | "secondary";
     onclick?: () => void;
   } = $props();
 
@@ -27,9 +25,6 @@
 
 <RenderFor audience="authenticated">
   <DropdownItem
-    style="flat"
-    color="default"
-    {variant}
     {...itemProps}
     label={m.button_label_view_all_history()}
   >

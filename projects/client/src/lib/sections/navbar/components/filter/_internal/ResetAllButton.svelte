@@ -13,8 +13,6 @@
   <DropdownItem
     label={m.button_label_reset_all_filters()}
     color="red"
-    style="flat"
-    variant="secondary"
     disabled={!$hasActiveFilter || undefined}
     onclick={resetFilters}
   >

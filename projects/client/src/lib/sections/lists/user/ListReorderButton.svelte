@@ -18,9 +18,6 @@
 
 <DropdownItem
   label={m.button_label_reorder_list({ name: title })}
-  style="flat"
-  color="default"
-  variant="secondary"
   {disabled}
   {onclick}
 >

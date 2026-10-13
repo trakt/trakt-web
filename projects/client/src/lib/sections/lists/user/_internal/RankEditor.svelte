@@ -70,9 +70,6 @@
 
     {#snippet items()}
       <DropdownItem
-        style="flat"
-        color="default"
-        variant="secondary"
         disabled={rank === 1}
         onclick={() => onMove(1)}
       >
@@ -84,9 +81,6 @@
       </DropdownItem>
 
       <DropdownItem
-        style="flat"
-        color="default"
-        variant="secondary"
         onclick={openSheet}
       >
         {m.button_text_move_to_position()}
@@ -97,9 +91,6 @@
       </DropdownItem>
 
       <DropdownItem
-        style="flat"
-        color="default"
-        variant="secondary"
         disabled={rank === total}
         onclick={() => onMove(total)}
       >

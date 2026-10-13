@@ -39,9 +39,6 @@
 
   {#if style === "dropdown-item"}
     <DropdownItem
-      style="flat"
-      color="default"
-      variant={variant ?? "primary"}
       {...drawerLink}
     >
       {m.drawer_title_notes()}

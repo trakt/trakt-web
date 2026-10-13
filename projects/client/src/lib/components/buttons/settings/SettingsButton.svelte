@@ -20,7 +20,7 @@
 {/if}
 
 {#if style === "dropdown-item"}
-  <DropdownItem style="flat" color="default" variant="primary" {...commonProps}>
+  <DropdownItem {...commonProps}>
     Settings
     {#snippet icon()}
       <GearIcon />

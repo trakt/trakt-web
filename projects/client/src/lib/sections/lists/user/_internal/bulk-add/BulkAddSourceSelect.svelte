@@ -56,9 +56,6 @@
       <DropdownGroup>
         {#each sources as source (source.key)}
           <DropdownItem
-            style="flat"
-            color="default"
-            variant="secondary"
             selected={source.key === activeKey}
             onclick={() => select(source.key)}
           >

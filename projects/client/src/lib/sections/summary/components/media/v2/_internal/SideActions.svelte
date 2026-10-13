@@ -33,7 +33,6 @@
   {title}
   {image}
   {style}
-  {variant}
   source={{ id: "media", type }}
 />
 

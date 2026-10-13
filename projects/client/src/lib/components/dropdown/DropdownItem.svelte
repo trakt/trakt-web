@@ -5,14 +5,12 @@
   import Link from "../link/Link.svelte";
 
   type DropdownItemProps = {
-    color?: "red" | "purple" | "blue" | "orange" | "default";
+    color?: "red" | "default";
     tabindex?: number;
     icon?: Snippet;
     end?: Snippet;
     subtitle?: Snippet;
     subtitleSize?: "small" | "tag";
-    style?: "ghost" | "flat";
-    variant?: "primary" | "secondary";
     selected?: boolean;
   } & ChildrenProps &
     HTMLElementProps;
@@ -20,9 +18,7 @@
   type DropdownItemAnchorProps = DropdownItemProps & HTMLAnchorProps;
 
   const {
-    color = "purple",
-    style = "ghost",
-    variant = "primary",
+    color = "default",
     selected = false,
     children,
     icon,
@@ -65,8 +61,6 @@
   role={itemRole}
   tabindex={tabIndex}
   data-color={color}
-  data-style={style}
-  data-variant={variant}
   class:is-selected={selected}
   class:has-subtitle={subtitle != null}
   {...props}
@@ -105,28 +99,25 @@
 
   li {
     --icon-gap: var(--gap-s);
+    --item-padding-block: var(--ni-14);
+    --item-padding-inline: var(--ni-16);
 
     text-decoration: none;
     list-style-type: none;
     user-select: none;
 
-    --item-padding-block: var(--dropdown-item-padding-block, 0);
-    --item-padding-inline: var(--dropdown-item-padding-inline, var(--ni-12));
-
     padding: var(--item-padding-block) var(--item-padding-inline);
-    height: var(--dropdown-item-height, calc(var(--ni-20) + var(--ni-12) * 2));
     width: 100%;
     box-sizing: border-box;
-    border-radius: var(--dropdown-item-radius, var(--border-radius-m));
 
     align-content: center;
     justify-self: center;
 
     display: flex;
-    flex-direction: var(--dropdown-item-direction, row);
     align-items: center;
-    justify-content: var(--dropdown-item-justify, flex-start);
     gap: var(--icon-gap);
+
+    color: var(--color-text-primary);
 
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -134,10 +125,8 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: background, color;
 
-    &.has-subtitle {
-      --item-padding-block: var(--dropdown-item-padding-block, var(--ni-8));
-
-      height: var(--dropdown-item-height, auto);
+    &:not(:last-child) {
+      border-block-end: var(--ni-1) solid var(--color-option-list-separator);
     }
 
     .item-label {
@@ -167,50 +156,50 @@
       }
     }
 
+    @include for-mouse {
+      &:hover:not([disabled="true"]) {
+        background: var(--color-select-item-hover);
+      }
+    }
+
+    &:active {
+      background: var(--color-select-item-hover);
+    }
+
+    &.is-selected {
+      background: var(--color-option-list-selected);
+
+      @include for-mouse {
+        &:hover:not([disabled="true"]) {
+          background: var(--color-option-list-selected-hover);
+        }
+      }
+
+      &:active {
+        background: var(--color-option-list-selected-hover);
+      }
+    }
+
+    &[data-color="red"] {
+      color: var(--red-600);
+    }
+
+    &:focus-visible,
+    &:has(> :global(.trakt-link:focus-visible)) {
+      outline: var(--border-thickness-xs) solid currentColor;
+    }
+
     &:active[disabled="true"] {
       animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle) infinite;
     }
 
     &[disabled="true"] {
+      color: var(--color-text-secondary);
       cursor: not-allowed;
     }
 
     &:has(> :global(.trakt-link)) {
       padding: 0;
-    }
-
-    :global(.trakt-dropdown-group) & {
-      --dropdown-item-radius: 0;
-      --dropdown-item-height: auto;
-      --dropdown-item-padding-block: var(--ni-14);
-      --dropdown-item-padding-inline: var(--ni-16);
-      --dropdown-item-background: transparent;
-      --dropdown-item-background-hover: var(--color-select-item-hover);
-      --dropdown-item-background-selected: var(--color-select-item-hover);
-      --dropdown-item-background-active: var(--color-select-item-hover);
-      --dropdown-item-foreground: var(--color-text-primary);
-
-      &.is-selected {
-        --dropdown-item-background-selected: var(--color-option-list-selected);
-        --dropdown-item-background-hover: var(
-          --color-option-list-selected-hover
-        );
-        --dropdown-item-background-active: var(
-          --color-option-list-selected-hover
-        );
-      }
-
-      &[data-color="red"] {
-        --dropdown-item-foreground: var(--red-600);
-      }
-
-      &[disabled="true"] {
-        --dropdown-item-foreground: var(--color-text-secondary);
-      }
-
-      &:not(:last-child) {
-        border-block-end: var(--ni-1) solid var(--color-option-list-separator);
-      }
     }
 
     :global(.trakt-link) {
@@ -226,114 +215,6 @@
       gap: var(--icon-gap);
 
       text-decoration: none;
-    }
-
-    @mixin variant($color, $bg-color) {
-      color: var(--dropdown-item-foreground, #{$color});
-
-      @include for-mouse {
-        &:hover:not([disabled="true"]) {
-          background: var(--dropdown-item-background-hover, #{$bg-color});
-        }
-      }
-
-      &[data-style="flat"] {
-        background: var(--dropdown-item-background, #{$color});
-        color: var(--dropdown-item-foreground, #{$bg-color});
-
-        @include for-mouse {
-          &:hover:not([disabled="true"]) {
-            background: var(--dropdown-item-background-hover, #{$bg-color});
-            color: var(--dropdown-item-foreground, #{$color});
-          }
-        }
-      }
-
-      &[disabled="true"] {
-        background: var(
-          --dropdown-item-background,
-          var(--color-foreground-button-disabled)
-        );
-        color: var(
-          --dropdown-item-foreground,
-          var(--color-surface-button-disabled)
-        );
-      }
-
-      &.is-selected {
-        background: var(
-          --dropdown-item-background-selected,
-          var(--color-foreground-button-disabled)
-        );
-        color: var(
-          --dropdown-item-foreground,
-          var(--color-surface-button-disabled)
-        );
-      }
-    }
-
-    @mixin color($color, $active-bg, $outline-color, $bg-color) {
-      &[data-variant="primary"] {
-        @include variant($color, $bg-color);
-      }
-
-      &[data-variant="secondary"] {
-        @include variant($bg-color, $color);
-      }
-
-      &:active {
-        background: var(--dropdown-item-background-active, #{$active-bg});
-      }
-
-      &:focus-visible,
-      &:has(> :global(.trakt-link:focus-visible)) {
-        outline: var(--border-thickness-xs) solid $outline-color;
-      }
-    }
-
-    &[data-color="purple"] {
-      @include color(
-        var(--purple-800),
-        var(--purple-200),
-        var(--purple-800),
-        var(--purple-50)
-      );
-    }
-
-    &[data-color="red"] {
-      @include color(
-        var(--red-600),
-        var(--red-200),
-        var(--red-600),
-        var(--red-50)
-      );
-    }
-
-    &[data-color="blue"] {
-      @include color(
-        var(--blue-600),
-        var(--blue-200),
-        var(--blue-600),
-        var(--blue-50)
-      );
-    }
-
-    &[data-color="orange"] {
-      @include color(
-        var(--orange-600),
-        var(--orange-200),
-        var(--orange-600),
-        var(--orange-50)
-      );
-    }
-
-    &[data-color="default"] {
-      @include color(
-        var(--shade-700),
-        var(--shade-200),
-        var(--shade-700),
-        var(--shade-50)
-      );
     }
   }
 </style>

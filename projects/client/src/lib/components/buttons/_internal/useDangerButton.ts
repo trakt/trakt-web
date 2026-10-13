@@ -4,6 +4,7 @@ import { time } from '../../../utils/timing/time.ts';
 import type { TraktButtonProps } from '../TraktButtonProps.ts';
 
 type ButtonColor = Exclude<TraktButtonProps['color'], Nil>;
+type ButtonVariant = Exclude<TraktButtonProps['variant'], Nil>;
 type DangerProps = {
   color: ButtonColor;
   isActive: boolean;
@@ -20,7 +21,7 @@ export function useDangerButton({
     map((activeColor) => activeColor ?? seed),
   );
 
-  const variant = isActive ? 'primary' : 'secondary';
+  const variant: ButtonVariant = isActive ? 'primary' : 'secondary';
 
   return {
     color: color$.pipe(

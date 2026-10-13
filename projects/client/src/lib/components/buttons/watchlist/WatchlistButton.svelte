@@ -53,7 +53,6 @@
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     color: $color,
-    variant,
     ...actionProps,
   });
 </script>
@@ -62,6 +61,7 @@
   <div data-dpad-navigation={DpadNavigationType.List} style="display: contents">
     <Button
       {...commonProps}
+      {variant}
       {...props}
       {size}
       navigationType={DpadNavigationType.Item}
@@ -84,7 +84,7 @@
 {/if}
 
 {#if type === "dropdown-item"}
-  <DropdownItem {...commonProps} {...props} style="flat">
+  <DropdownItem {...commonProps} {...props}>
     {i18n.text({ isWatchlisted, title })}
     {#if isQueued}<QueuedTag />{/if}
     {#snippet icon()}

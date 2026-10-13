@@ -10,9 +10,6 @@
 
 <DropdownItem
   label={m.button_label_add_from_lists({ name: list.name })}
-  style="flat"
-  color="default"
-  variant="secondary"
   onclick={onClick}
 >
   {m.button_text_add_from_lists()}

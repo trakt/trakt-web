@@ -29,9 +29,6 @@
 <DropdownItem
   onclick={confirmDelete}
   label={m.button_label_delete_note()}
-  color="default"
-  style="flat"
-  variant="secondary"
   disabled={$isDeleting}
 >
   {m.button_text_delete_note()}

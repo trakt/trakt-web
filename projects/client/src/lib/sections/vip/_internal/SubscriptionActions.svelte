@@ -76,9 +76,6 @@
     {#if subscription?.renewsAt && isStripe}
       <DropdownItem
         disabled={$isFetching}
-        style="flat"
-        color="default"
-        variant="secondary"
         onclick={onManage}
         label={m.button_label_manage_vip()}
       >
@@ -89,7 +86,6 @@
       </DropdownItem>
       <DropdownItem
         disabled={$isFetching}
-        style="flat"
         color="red"
         onclick={confirmCancel}
         label={m.button_label_cancel_vip()}
@@ -101,9 +97,6 @@
       </DropdownItem>
     {:else if subscription?.renewsAt && subscription?.manageUrl}
       <DropdownItem
-        style="flat"
-        color="default"
-        variant="secondary"
         href={subscription.manageUrl}
         target="_blank"
         onclick={() => track()}
@@ -116,9 +109,6 @@
       </DropdownItem>
     {:else if !subscription?.renewsAt}
       <DropdownItem
-        style="flat"
-        color="default"
-        variant="secondary"
         href={UrlBuilder.renewVip()}
         label={m.button_label_renew_vip()}
       >

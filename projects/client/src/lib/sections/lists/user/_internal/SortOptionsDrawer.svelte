@@ -77,7 +77,6 @@
 
       <DropdownItem
         replacestate
-        color="default"
         href={`${urlBuilder({ sortHow: sortHowForOption(option.value), sortBy: option.value })}`}
         label={option.label()}
         selected={option.value === current.sorting.value}

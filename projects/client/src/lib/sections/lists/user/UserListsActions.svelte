@@ -27,9 +27,6 @@
   {#snippet items()}
     <DropdownItem
       label={m.button_label_create_list()}
-      style="flat"
-      color="default"
-      variant="secondary"
       onclick={() => (showCreateList = true)}
     >
       {m.button_label_create_list()}

@@ -56,16 +56,14 @@
   );
 
   const handler = $derived(isListed ? confirmRemove : add);
-  const { color, variant, ...events } = $derived(
+  const { color, variant: _, ...events } = $derived(
     useDangerButton({ isActive: isListed, color: "default" }),
   );
 
   const itemProps: Omit<ButtonProps, "children"> = $derived({
-      style: "flat",
       label: i18n.label({ isListed, listName: list.name, title }),
       "aria-pressed": isListed ? "true" : "false",
       color: $color,
-      variant: isListed ? variant : "primary",
       onclick: handler,
       disabled: $isListUpdating || (!isListed && !isBelowLimit),
       ...events,

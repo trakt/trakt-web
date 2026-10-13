@@ -46,9 +46,6 @@
 
 {#if style === "dropdown-item"}
   <DropdownItem
-    color="default"
-    variant="secondary"
-    style="flat"
     {onclick}
     disabled={$isLoading}
   >

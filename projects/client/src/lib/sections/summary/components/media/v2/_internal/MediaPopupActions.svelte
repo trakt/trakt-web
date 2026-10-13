@@ -65,7 +65,6 @@
         {show}
         {title}
         startLink={rewatchingDrawerLink}
-        variant="primary"
       />
     {/snippet}
   </RenderForFeature>
@@ -92,7 +91,6 @@
   type={media.type}
   id={media.id}
   coverUrl={media.cover.url.medium}
-  variant="primary"
   {title}
 />
 
@@ -112,7 +110,6 @@
   <ReportButton
     params={reportParams}
     label={m.button_label_report_media({ title })}
-    variant="primary"
   />
 </RenderFor>
 

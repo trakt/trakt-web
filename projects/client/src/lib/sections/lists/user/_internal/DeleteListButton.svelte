@@ -37,12 +37,11 @@
     color: $color,
     onclick: confirmDelete,
     disabled: isDeleting,
-    variant: "secondary",
     ...events,
   });
 </script>
 
-<DropdownItem style="flat" {...buttonProps}>
+<DropdownItem {...buttonProps}>
   {m.button_text_delete_list()}
 
   {#snippet icon()}

@@ -5,8 +5,6 @@
   import WatchNowIcon from "$lib/components/icons/WatchNowIcon.svelte";
 
   const groupStyles = ["card", "flat"] as const;
-  const colors = ["purple", "red", "blue"] as const;
-  const variants = ["primary", "secondary"] as const;
 </script>
 
 {#snippet watchIcon()}
@@ -45,21 +43,6 @@
       </section>
     {/each}
 
-    <section>
-      <h2 class="capitalize">Standalone items</h2>
-      <ul class="standalone-items">
-        {#each colors as color (color)}
-          {#each variants as variant (variant)}
-            <DropdownItem {color} {variant} onclick={() => {}}>
-              {color} {variant}
-            </DropdownItem>
-          {/each}
-          <DropdownItem {color} style="flat" onclick={() => {}}>
-            {color} flat
-          </DropdownItem>
-        {/each}
-      </ul>
-    </section>
   </div>
 </main>
 
@@ -74,17 +57,7 @@
     align-items: center;
 
     @include for-tablet-sm-and-below {
-      .standalone-items {
-    all: unset;
-
-    display: grid;
-    grid-template-columns: 100%;
-    gap: var(--gap-xxs);
-
-    width: 100%;
-  }
-
-  .display {
+      .display {
         flex-direction: column;
         align-items: center;
         gap: var(--gap-xl);

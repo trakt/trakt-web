@@ -152,10 +152,7 @@
       <DropdownItem
         onclick={() => (isWatchUntilDrawerOpen = true)}
         label={m.button_label_watched_until_here({ title: show.title })}
-        style="flat"
-        color="default"
         disabled={isWatchedLoading}
-        variant="secondary"
       >
         {m.button_text_watched_until_here()}
         {#snippet icon()}

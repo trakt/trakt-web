@@ -4,17 +4,14 @@
   const {
     title,
     style = "action",
-    variant,
   }: {
     title: string;
     style?: "action" | "dropdown-item";
-    variant?: "primary" | "secondary";
   } = $props();
 </script>
 
 <ShareButton
   {title}
   {style}
-  {variant}
   source={{ id: "episode" }}
 />

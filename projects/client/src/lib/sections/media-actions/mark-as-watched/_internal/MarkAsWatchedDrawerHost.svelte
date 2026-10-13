@@ -124,8 +124,6 @@
   };
 
   const commonProps = $derived({
-    style: "flat" as const,
-    color: "default" as const,
     disabled: $isMarkingAsWatched || Boolean($confirmedAction),
   });
 
