@@ -3,6 +3,7 @@ export enum ListTarget {
   Anticipated = 'anticipated',
   Popular = 'popular',
   Recommendations = 'recommendations',
+  Discover = 'discover',
   Watchlist = 'watchlist',
   Library = 'library',
 }
