@@ -596,6 +596,16 @@
       );
     }
 
+    &:not(.has-close) {
+      .rated-higher-hud {
+        justify-content: flex-end;
+      }
+
+      .rated-higher-logo {
+        @include visually-hidden;
+      }
+    }
+
     &:not(.is-revealed) {
       .rated-higher-stage {
         transform: scale(1.12);
