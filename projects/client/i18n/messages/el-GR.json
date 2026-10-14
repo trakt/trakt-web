@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Ενεργοποίηση ή απενεργοποίηση πολλαπλών παρακολουθήσεων",
   "switch_label_private": "Είναι το προφίλ ιδιωτικό",
   "switch_label_rating_prompt": "Ενεργοποίηση ή απενεργοποίηση προτροπών αξιολόγησης",
+  "switch_label_soundtrack_season_only": "Μόνο σεζόν {number}",
   "switch_label_spoilers": "Εμφάνιση spoilers",
   "switch_label_toggle_christmas_filters": "Εναλλαγή φίλτρων Χριστουγέννων",
   "switch_label_toggle_halloween_filters": "Εναλλαγή φίλτρων Χαλοουίν",

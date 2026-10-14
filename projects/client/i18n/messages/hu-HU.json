@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Újranézések engedélyezése vagy letiltása",
   "switch_label_private": "Privát profil",
   "switch_label_rating_prompt": "Értékelési felszólítások engedélyezése vagy letiltása",
+  "switch_label_soundtrack_season_only": "Csak a(z) {number}. évad",
   "switch_label_spoilers": "Spoilerek megjelenítése",
   "switch_label_toggle_christmas_filters": "Karácsonyi szűrők be/ki kapcsolása",
   "switch_label_toggle_halloween_filters": "Halloween szűrők be/ki kapcsolása",

@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "启用或禁用多次观看",
   "switch_label_private": "资料是否私密",
   "switch_label_rating_prompt": "启用或禁用评分提示",
+  "switch_label_soundtrack_season_only": "仅第 {number} 季",
   "switch_label_spoilers": "显示剧透",
   "switch_label_toggle_christmas_filters": "切换圣诞节筛选器",
   "switch_label_toggle_halloween_filters": "切换万圣节筛选器",

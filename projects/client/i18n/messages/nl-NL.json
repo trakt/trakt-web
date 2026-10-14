@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Meerdere kijkbeurten in- of uitschakelen",
   "switch_label_private": "Is profiel privé",
   "switch_label_rating_prompt": "Beoordelingsprompts in- of uitschakelen",
+  "switch_label_soundtrack_season_only": "Alleen seizoen {number}",
   "switch_label_spoilers": "Toon spoilers",
   "switch_label_toggle_christmas_filters": "Schakel kerstfilters in/uit",
   "switch_label_toggle_halloween_filters": "Schakel Halloween-filters in/uit",

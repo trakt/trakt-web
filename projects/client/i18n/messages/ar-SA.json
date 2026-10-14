@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "تمكين أو تعطيل ساعات متعددة",
   "switch_label_private": "هل الملف الشخصي خاص",
   "switch_label_rating_prompt": "تمكين أو تعطيل مطالبات التصنيف",
+  "switch_label_soundtrack_season_only": "الموسم {number} فقط",
   "switch_label_spoilers": "إظهار الحرق",
   "switch_label_toggle_christmas_filters": "تبديل فلاتر الكريسماس",
   "switch_label_toggle_halloween_filters": "تبديل فلاتر الهالوين",

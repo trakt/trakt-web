@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Aktifkan atau nonaktifkan beberapa kali tonton",
   "switch_label_private": "Apakah profil bersifat pribadi",
   "switch_label_rating_prompt": "Aktifkan atau nonaktifkan prompt peringkat",
+  "switch_label_soundtrack_season_only": "Musim {number} saja",
   "switch_label_spoilers": "Tampilkan Spoiler",
   "switch_label_toggle_christmas_filters": "Alihkan filter natal",
   "switch_label_toggle_halloween_filters": "Alihkan filter halloween",

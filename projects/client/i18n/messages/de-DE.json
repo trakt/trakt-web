@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Mehrfaches Ansehen aktivieren oder deaktivieren",
   "switch_label_private": "Ist Profil privat",
   "switch_label_rating_prompt": "Bewertungsaufforderungen aktivieren oder deaktivieren",
+  "switch_label_soundtrack_season_only": "Nur Staffel {number}",
   "switch_label_spoilers": "Spoiler anzeigen",
   "switch_label_toggle_christmas_filters": "Weihnachts-Filter umschalten",
   "switch_label_toggle_halloween_filters": "Halloween-Filter umschalten",

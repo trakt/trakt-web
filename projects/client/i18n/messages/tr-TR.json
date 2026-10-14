@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Birden fazla izlemeyi etkinleştir veya devre dışı bırak",
   "switch_label_private": "Profil gizli mi",
   "switch_label_rating_prompt": "Derecelendirme istemlerini etkinleştir veya devre dışı bırak",
+  "switch_label_soundtrack_season_only": "Sezon {number} sadece",
   "switch_label_spoilers": "Spoilerları göster",
   "switch_label_toggle_christmas_filters": "Yılbaşı filtrelerini aç/kapat",
   "switch_label_toggle_halloween_filters": "Cadılar Bayramı filtrelerini aç/kapat",

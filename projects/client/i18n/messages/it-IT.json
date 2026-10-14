@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Abilita o disabilita visualizzazioni multiple",
   "switch_label_private": "Il profilo è privato",
   "switch_label_rating_prompt": "Abilita o disabilita le richieste di valutazione",
+  "switch_label_soundtrack_season_only": "Stagione {number} solo",
   "switch_label_spoilers": "Mostra spoiler",
   "switch_label_toggle_christmas_filters": "Attiva/disattiva filtri natalizi",
   "switch_label_toggle_halloween_filters": "Attiva/disattiva filtri Halloween",

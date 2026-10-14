@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Aktivera eller inaktivera flera visningar",
   "switch_label_private": "Är profilen privat",
   "switch_label_rating_prompt": "Aktivera eller inaktivera betygsfrågor",
+  "switch_label_soundtrack_season_only": "Säsong {number} endast",
   "switch_label_spoilers": "Visa spoilers",
   "switch_label_toggle_christmas_filters": "Växla julfilter",
   "switch_label_toggle_halloween_filters": "Växla halloween-filter",

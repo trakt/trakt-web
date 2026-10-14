@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Увімкнути або вимкнути кілька переглядів",
   "switch_label_private": "Профіль приватний",
   "switch_label_rating_prompt": "Увімкнути або вимкнути підказки для оцінки",
+  "switch_label_soundtrack_season_only": "Лише сезон {number}",
   "switch_label_spoilers": "Показати спойлери",
   "switch_label_toggle_christmas_filters": "Перемкнути різдвяні фільтри",
   "switch_label_toggle_halloween_filters": "Перемкнути фільтри Гелловіну",

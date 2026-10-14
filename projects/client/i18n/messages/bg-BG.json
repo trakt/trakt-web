@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Разрешаване или забраняване на многократно гледане",
   "switch_label_private": "Профилът е частен",
   "switch_label_rating_prompt": "Разрешаване или забраняване на подканите за оценка",
+  "switch_label_soundtrack_season_only": "Само сезон {number}",
   "switch_label_spoilers": "Покажи спойлери",
   "switch_label_toggle_christmas_filters": "Включване/изключване на филтри за Коледа",
   "switch_label_toggle_halloween_filters": "Включване/изключване на филтри за Хелоуин",

@@ -1477,6 +1477,7 @@
   "switch_label_multiple_watches": "Enable or disable multiple watches",
   "switch_label_private": "Is profile private",
   "switch_label_rating_prompt": "Enable or disable rating prompts",
+  "switch_label_soundtrack_season_only": "Season {number} only",
   "switch_label_spoilers": "Show Spoilers",
   "switch_label_toggle_christmas_filters": "Toggle Christmas filters",
   "switch_label_toggle_halloween_filters": "Toggle Halloween filters",
