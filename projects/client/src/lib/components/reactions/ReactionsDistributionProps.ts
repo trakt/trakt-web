@@ -9,5 +9,7 @@ export type ReactionsDistributionProps<T extends AnyReaction> = {
   order?: 'canonical' | 'ranked';
   pageSize?: number;
   format?: 'count' | 'share';
+  limit?: number;
   onRemove?: (reaction: T) => void;
+  onAdd?: (reaction: T) => void;
 };

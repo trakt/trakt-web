@@ -1,4 +1,5 @@
 import type { MediaReaction } from '$lib/requests/models/MediaReaction.ts';
+import { hasReactionRoom } from '$lib/utils/reactions/hasReactionRoom.ts';
 import { applyPendingReactions } from './applyPendingReactions.ts';
 import type { PendingReactions } from './PendingReactions.ts';
 import type { ReactionsSnapshot } from './ReactionsSnapshot.ts';
@@ -64,7 +65,7 @@ export function useOptimisticReactions(
   }
 
   function addReaction(reaction: MediaReaction) {
-    if (merged.chosen.length >= limit) return false;
+    if (!hasReactionRoom({ count: merged.chosen.length, limit })) return false;
 
     begin(reaction, true);
     track(reaction, react(reaction));

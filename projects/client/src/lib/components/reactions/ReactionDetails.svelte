@@ -6,10 +6,23 @@
   import { REACTIONS_CODE_MAP } from "./constants.ts";
   import type { ReactionDetailsProps } from "./ReactionDetailsProps.ts";
 
-  const { reaction, value, isCurrent, index, onRemove }: ReactionDetailsProps<T> =
-    $props();
+  const {
+    reaction,
+    value,
+    isCurrent,
+    index,
+    onRemove,
+    onAdd,
+  }: ReactionDetailsProps<T> = $props();
 
   const label = $derived(toTranslatedReaction(reaction));
+
+  const onPress = $derived(isCurrent ? onRemove : onAdd);
+  const pressLabel = $derived(
+    isCurrent
+      ? m.button_label_remove_reaction({ reaction: label })
+      : m.button_label_react({ reaction: label }),
+  );
 </script>
 
 {#snippet content()}
@@ -22,12 +35,13 @@
   <p class="bold">{value}</p>
 {/snippet}
 
-{#if isCurrent && onRemove}
+{#if onPress}
   <button
     type="button"
-    class="trakt-reaction-details is-current is-removable"
-    aria-label={m.button_label_remove_reaction({ reaction: label })}
-    onclick={() => onRemove(reaction)}
+    class="trakt-reaction-details is-pressable"
+    class:is-current={isCurrent}
+    aria-label={pressLabel}
+    onclick={() => onPress(reaction)}
   >
     {@render content()}
   </button>
@@ -52,6 +66,7 @@
     height: var(--ni-30);
 
     color: var(--color-foreground);
+    cursor: default;
 
     box-sizing: border-box;
     padding: var(--ni-2) var(--ni-8);
@@ -65,11 +80,13 @@
     }
   }
 
-  .is-removable {
+  .is-pressable {
     border: none;
     font: inherit;
+    background-color: transparent;
 
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 
     @include for-mouse {
       &:hover {

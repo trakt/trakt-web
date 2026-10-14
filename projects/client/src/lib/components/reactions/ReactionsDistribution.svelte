@@ -6,6 +6,7 @@
   import { getLocale } from "$lib/features/i18n/index.ts";
   import { chunk } from "$lib/utils/array/chunk.ts";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
+  import { hasReactionRoom } from "$lib/utils/reactions/hasReactionRoom.ts";
   import { toReactionShare } from "$lib/utils/reactions/toReactionShare.ts";
   import ReactionDetails from "./ReactionDetails.svelte";
   import type { ReactionsDistributionProps } from "./ReactionsDistributionProps.ts";
@@ -18,7 +19,9 @@
     title,
     order = "canonical",
     pageSize,
+    limit,
     onRemove,
+    onAdd,
     format = "count",
   }: ReactionsDistributionProps<T> = $props();
 
@@ -39,6 +42,8 @@
       : reactions.toSorted((a, b) => countOf(b) - countOf(a)),
   );
 
+  const isAddable = $derived(hasReactionRoom({ count: current.length, limit }));
+
   const pages = $derived.by(() => {
     if (pageSize == null || ordered.length <= pageSize) return [ordered];
 
@@ -54,6 +59,7 @@
         value={valueOf(reaction)}
         isCurrent={current.includes(reaction)}
         {onRemove}
+        onAdd={isAddable ? onAdd : undefined}
         {index}
       />
     {/each}
