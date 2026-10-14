@@ -10,21 +10,32 @@
   import { buildAppCallbackDeepLink } from "./_internal/buildAppCallbackDeepLink.ts";
   import { buildAppCallbackIntent } from "./_internal/buildAppCallbackIntent.ts";
 
+  type HandoffPlatform = "android" | "ios" | "other";
+
+  let platform = $state<HandoffPlatform>("other");
   let appLink = $state<string | null>(null);
 
-  function buildAppLink(callbackUrl: URL): string | null {
+  function detectPlatform(): HandoffPlatform {
     if (extractOS(globalThis.navigator.userAgent) === "android") {
-      return buildAppCallbackIntent(callbackUrl, UrlBuilder.app.android());
+      return "android";
     }
 
-    if (isMobileAppleDevice()) {
-      return buildAppCallbackDeepLink(callbackUrl);
-    }
+    return isMobileAppleDevice() ? "ios" : "other";
+  }
 
-    return null;
+  function buildAppLink(callbackUrl: URL): string | null {
+    switch (platform) {
+      case "android":
+        return buildAppCallbackIntent(callbackUrl, UrlBuilder.app.android());
+      case "ios":
+        return buildAppCallbackDeepLink(callbackUrl);
+      default:
+        return null;
+    }
   }
 
   onMount(() => {
+    platform = detectPlatform();
     appLink = buildAppLink(new URL(globalThis.window.location.href));
 
     globalThis.window.history.replaceState(
@@ -50,27 +61,32 @@
     >
       {m.button_text_open_in_service({ service: "Trakt" })}
     </Button>
+  {:else}
+    {#if platform !== "android"}
+      <Button
+        variant="primary"
+        color="purple"
+        style="outline"
+        href={UrlBuilder.app.ios()}
+        target="_blank"
+        label={m.link_label_ios_app()}
+      >
+        {m.link_label_ios_app()}
+      </Button>
+    {/if}
+    {#if platform !== "ios"}
+      <Button
+        variant="primary"
+        color="purple"
+        style="outline"
+        href={UrlBuilder.app.android()}
+        target="_blank"
+        label={m.link_label_android_app()}
+      >
+        {m.link_label_android_app()}
+      </Button>
+    {/if}
   {/if}
-  <Button
-    variant="primary"
-    color="purple"
-    style="outline"
-    href={UrlBuilder.app.ios()}
-    target="_blank"
-    label={m.link_label_ios_app()}
-  >
-    {m.link_label_ios_app()}
-  </Button>
-  <Button
-    variant="primary"
-    color="purple"
-    style="outline"
-    href={UrlBuilder.app.android()}
-    target="_blank"
-    label={m.link_label_android_app()}
-  >
-    {m.link_label_android_app()}
-  </Button>
 {/snippet}
 
 <ErrorPage
