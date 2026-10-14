@@ -1,6 +1,6 @@
 import { rawApiFetch } from '$lib/requests/api.ts';
-import { isValidResponse } from '../../features/query/_internal/isValidResponse.ts';
 import { isMissingSubscription } from './_internal/isMissingSubscription.ts';
+import { subscriptionRequestError } from './_internal/subscriptionRequestError.ts';
 
 export async function cancelSubscriptionQuery(): Promise<boolean> {
   const response = await rawApiFetch({
@@ -14,6 +14,9 @@ export async function cancelSubscriptionQuery(): Promise<boolean> {
     return false;
   }
 
-  isValidResponse(response, 'cancelSubscription');
-  return response.ok;
+  if (!response.ok) {
+    throw subscriptionRequestError('cancelSubscription', response);
+  }
+
+  return true;
 }

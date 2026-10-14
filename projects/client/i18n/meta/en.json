@@ -8227,6 +8227,18 @@
       "default": "We couldn't find an active subscription to manage. It may have already been cancelled. <a>Contact support</a> if you think something's wrong.",
       "description": "Message of the snackbar shown when a VIP subscription can no longer be managed or cancelled because the payment provider has no active subscription for the account. The text wrapped in <a></a> becomes a link to support and must be kept."
     },
+    "text_vip_cancel_failed_title": {
+      "default": "Couldn't update your subscription",
+      "description": "Title of the snackbar shown when cancelling a VIP subscription failed for an unexpected reason."
+    },
+    "text_vip_manage_failed_title": {
+      "default": "Couldn't open your subscription settings",
+      "description": "Title of the snackbar shown when opening the payment provider page to manage a VIP subscription failed for an unexpected reason."
+    },
+    "text_vip_subscription_failed_message": {
+      "default": "Please try again later, or <a>contact support</a> if this keeps happening.",
+      "description": "Message of the snackbar shown when managing or cancelling a VIP subscription failed for an unexpected reason. The text wrapped in <a></a> becomes a link to support and must be kept."
+    },
     "button_text_history": {
       "default": "History",
       "description": "Short text for a button that reveals the VIP payment history. This should be as short as possible."
