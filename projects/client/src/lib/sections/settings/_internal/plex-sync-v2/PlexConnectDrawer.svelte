@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import ServerIcon from "$lib/components/icons/ServerIcon.svelte";
@@ -24,6 +25,7 @@
     onChooseServer,
     onChooseAccount,
     onToggleFeed,
+    onToggleImportHistory,
     onToggleLibrary,
     onConnect,
     onRestart,
@@ -34,6 +36,7 @@
     onChooseServer: (serverId: string) => void;
     onChooseAccount: (accountId: string) => void;
     onToggleFeed: (feed: MediaSyncFeed) => void;
+    onToggleImportHistory: () => void;
     onToggleLibrary: (externalId: string, enabled: boolean) => void;
     onConnect: () => void;
     onRestart: () => void;
@@ -271,6 +274,24 @@
               available={isAccountOnly ? ["watchlist"] : undefined}
               onToggle={onToggleFeed}
             />
+            {#if flow.feeds.includes("history")}
+              <SettingsGroupCard variant="bare">
+                <SettingsGroupRow
+                  title={m.label_media_sync_import_history()}
+                  description={flow.importHistory
+                  ? undefined
+                  : m.description_media_sync_import_history_off()}
+                  variant="custom"
+                >
+                  {#snippet icon()}<ClockIcon />{/snippet}
+                  <Switch
+                    label={m.label_media_sync_import_history()}
+                    checked={flow.importHistory}
+                    onclick={onToggleImportHistory}
+                  />
+                </SettingsGroupRow>
+              </SettingsGroupCard>
+            {/if}
             {#if !isAccountOnly}
             <SettingsGroupCard
               variant="bare"

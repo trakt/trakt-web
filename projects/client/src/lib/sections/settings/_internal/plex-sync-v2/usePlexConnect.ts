@@ -105,6 +105,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       accounts: null,
       accountId: null,
       feeds: MediaSyncFeedSchema.options,
+      importHistory: true,
     });
 
     status.servers
@@ -207,6 +208,13 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     });
   }
 
+  function toggleImportHistory() {
+    const current = state.value;
+    if (current.step !== 'choosing') return;
+
+    state.next({ ...current, importHistory: !current.importHistory });
+  }
+
   function toggleLibrary(externalId: string, enabled: boolean) {
     const current = state.value;
     if (current.step !== 'choosing') return;
@@ -229,6 +237,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       libraryIds: current.libraryIds,
       feeds: current.feeds,
       syncAccountId: current.accountId,
+      importHistory: current.importHistory,
     }).catch(() => null);
 
     if (!result?.ok) {
@@ -254,6 +263,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     chooseServer,
     chooseAccount,
     toggleFeed,
+    toggleImportHistory,
     toggleLibrary,
     connect,
     cancel,

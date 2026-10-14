@@ -161,6 +161,7 @@
     onChooseServer={connect.chooseServer}
     onChooseAccount={connect.chooseAccount}
     onToggleFeed={connect.toggleFeed}
+    onToggleImportHistory={connect.toggleImportHistory}
     onToggleLibrary={connect.toggleLibrary}
     onConnect={connect.connect}
     onRestart={connect.start}
