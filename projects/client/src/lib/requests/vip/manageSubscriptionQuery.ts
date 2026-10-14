@@ -1,9 +1,11 @@
 import { rawApiFetch } from '$lib/requests/api.ts';
 import type { ManageSubscriptionResult } from '$lib/requests/models/ManageSubscriptionResult.ts';
 import z from 'zod';
-import { isValidResponse } from '../../features/query/_internal/isValidResponse.ts';
 import { isMissingSubscription } from './_internal/isMissingSubscription.ts';
 import { isStripeUrl } from './_internal/isStripeUrl.ts';
+import { subscriptionRequestError } from './_internal/subscriptionRequestError.ts';
+
+const noContent = 204;
 
 type ManageSubscriptionParams = {
   returnUrl: string;
@@ -32,7 +34,11 @@ export async function manageSubscriptionQuery(
     return { kind: 'missing-subscription' };
   }
 
-  if (!isValidResponse(response, 'manageSubscription')) {
+  if (!response.ok) {
+    throw subscriptionRequestError('manageSubscription', response);
+  }
+
+  if (response.status === noContent) {
     return { kind: 'unavailable' };
   }
 

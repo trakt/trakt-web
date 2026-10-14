@@ -1,6 +1,7 @@
 import { server } from '$mocks/server.ts';
 import { http, HttpResponse } from 'msw';
-import { describe, expect, it } from 'vitest';
+import { FETCH_ERROR_EVENT } from '$lib/features/errors/constants.ts';
+import { describe, expect, it, vi } from 'vitest';
 import { manageSubscriptionQuery } from './manageSubscriptionQuery.ts';
 
 const CHECKOUT_URL = 'https://billing.stripe.com/p/session/test';
@@ -34,5 +35,38 @@ describe('manageSubscriptionQuery', () => {
     const result = await manageSubscriptionQuery({ returnUrl: RETURN_URL });
 
     expect(result).to.deep.equal({ kind: 'missing-subscription' });
+  });
+
+  it('should throw when the subscription cannot be updated', async () => {
+    server.use(
+      http.post(
+        'http://localhost/vip/stripe/update',
+        () =>
+          HttpResponse.json({
+            message: 'User is not a Stripe VIP',
+          }, { status: 400 }),
+      ),
+    );
+
+    const request = manageSubscriptionQuery({ returnUrl: RETURN_URL });
+
+    await expect(request).rejects.toThrow('Failed to fetch data');
+  });
+
+  it('should not replace the page on a server error', async () => {
+    server.use(
+      http.post(
+        'http://localhost/vip/stripe/update',
+        () => new HttpResponse(null, { status: 500 }),
+      ),
+    );
+    const onFetchError = vi.fn();
+    globalThis.window.addEventListener(FETCH_ERROR_EVENT, onFetchError);
+
+    await expect(manageSubscriptionQuery({ returnUrl: RETURN_URL })).rejects
+      .toThrow('(500)');
+
+    globalThis.window.removeEventListener(FETCH_ERROR_EVENT, onFetchError);
+    expect(onFetchError).not.toHaveBeenCalled();
   });
 });

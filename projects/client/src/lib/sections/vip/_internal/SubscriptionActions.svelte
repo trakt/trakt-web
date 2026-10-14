@@ -18,6 +18,8 @@
   import CrownIcon from "./icons/CrownIcon.svelte";
   import { useVip } from "./useVip";
 
+  type SubscriptionFailure = "missing" | "manage" | "cancel";
+
   const { subscription }: { subscription: VipSubscription | Nil } = $props();
 
   const { manageSubscription, cancelSubscription, isFetching } = useVip();
@@ -26,23 +28,54 @@
 
   const isStripe = $derived(subscription?.gateway === "stripe");
 
-  let isMissingSubscription = $state(false);
+  let failure = $state<SubscriptionFailure | null>(null);
+
+  function toFailureCopy(kind: SubscriptionFailure | null) {
+    if (kind === "missing") {
+      return {
+        title: m.text_vip_subscription_missing_title(),
+        message: m.text_vip_subscription_missing_message(),
+      };
+    }
+
+    return {
+      title:
+        kind === "manage"
+          ? m.text_vip_manage_failed_title()
+          : m.text_vip_cancel_failed_title(),
+      message: m.text_vip_subscription_failed_message(),
+    };
+  }
+
+  const failureCopy = $derived(toFailureCopy(failure));
+
+  async function reportFailure<T>(
+    request: () => Promise<T>,
+    kind: SubscriptionFailure,
+  ): Promise<T> {
+    try {
+      return await request();
+    } catch (error) {
+      failure = kind;
+      throw error;
+    }
+  }
 
   const onManage = async () => {
     track();
-    const result = await manageSubscription();
+    const result = await reportFailure(manageSubscription, "manage");
 
     if (result.kind === "redirect") {
       globalThis.window.location.href = result.url;
       return;
     }
 
-    isMissingSubscription = result.kind === "missing-subscription";
+    failure = result.kind === "missing-subscription" ? "missing" : "manage";
   };
 
   const onCancel = async () => {
-    const isCancelled = await cancelSubscription();
-    isMissingSubscription = !isCancelled;
+    const isCancelled = await reportFailure(cancelSubscription, "cancel");
+    failure = isCancelled ? null : "missing";
   };
 
   const renewsOn = $derived(
@@ -122,10 +155,10 @@
 </PopupMenu>
 
 <Snackbar
-  open={isMissingSubscription}
-  onDismiss={() => (isMissingSubscription = false)}
-  title={m.text_vip_subscription_missing_title()}
-  message={m.text_vip_subscription_missing_message()}
+  open={failure !== null}
+  onDismiss={() => (failure = null)}
+  title={failureCopy.title}
+  message={failureCopy.message}
   href={UrlBuilder.og.support($user?.slug)}
   variant="error"
 />
