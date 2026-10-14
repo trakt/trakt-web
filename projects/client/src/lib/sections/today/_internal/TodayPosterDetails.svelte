@@ -5,6 +5,7 @@
   import { lineClamp } from "$lib/components/text/lineClamp.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { stripMarkdownLinks } from "$lib/utils/markdown/stripMarkdownLinks.ts";
   import { toSentimentAspects } from "$lib/utils/sentiment/toSentimentAspects.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { TodayMedia } from "../models/TodayMedia.ts";
@@ -79,7 +80,7 @@
           {/if}
         </div>
         <p class="small" use:lineClamp={{ lines: 3 }}>
-          {$sentiment.highlight}
+          {stripMarkdownLinks($sentiment.highlight)}
         </p>
 
         {#each aspects as aspect (aspect.key)}

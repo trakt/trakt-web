@@ -1,8 +1,11 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { MovieHereticSentimentMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticSentimentMappedMock.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
+import { MovieHereticSentimentResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticSentimentResponseMock.ts';
+import { server } from '$mocks/server.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { screen } from '@testing-library/svelte';
+import { http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
 import TodayPosterDetails from './TodayPosterDetails.svelte';
 
@@ -30,5 +33,29 @@ describe('TodayPosterDetails', () => {
 
     expect(await screen.findByText(pro)).toBeInTheDocument();
     expect(screen.queryByText(con)).not.toBeInTheDocument();
+  });
+
+  it('should show people named in the highlight as plain text', async () => {
+    server.use(
+      http.get(
+        `http://localhost/v3/media/movie/${MovieHereticMappedMock.slug}/info/0/version/2`,
+        () =>
+          HttpResponse.json({
+            ...MovieHereticSentimentResponseMock,
+            highlight:
+              "[Hugh Grant](https://app.trakt.tv/people/hugh-grant)'s performance is the film's strength.",
+          }),
+      ),
+    );
+
+    renderComponent(TodayPosterDetails, {
+      props: { media: MovieHereticMappedMock },
+    });
+
+    expect(
+      await screen.findByText(
+        "Hugh Grant's performance is the film's strength.",
+      ),
+    ).toBeInTheDocument();
   });
 });
