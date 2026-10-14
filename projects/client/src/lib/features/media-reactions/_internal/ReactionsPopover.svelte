@@ -11,6 +11,7 @@
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
+  const hasDrawer = $derived($isMobile || $isTabletSmall);
 
   let isDrawerOpen = $state(false);
   let isPopupOpen = $state(false);
@@ -24,7 +25,7 @@
 </script>
 
 <ReactionsPopup
-  reserve="var(--ni-252)"
+  reserve={hasDrawer ? "var(--ni-252)" : "var(--ni-292)"}
   offset="var(--ni-8)"
   onOpenChange={(isOpened) => (isPopupOpen = isOpened)}
 >
@@ -43,7 +44,7 @@
   {#snippet children(close)}
     <ReactionsPopoverContent
       {...content}
-      onMore={$isMobile || $isTabletSmall ? () => openDrawer(close) : undefined}
+      onMore={hasDrawer ? () => openDrawer(close) : undefined}
     />
   {/snippet}
 </ReactionsPopup>

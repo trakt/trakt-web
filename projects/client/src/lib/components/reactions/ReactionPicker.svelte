@@ -196,7 +196,7 @@
     &.is-wrapping {
       flex-wrap: wrap;
 
-      height: var(--ni-152);
+      height: var(--ni-216);
       align-content: flex-start;
       overflow-y: auto;
 
