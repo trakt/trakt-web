@@ -14,6 +14,7 @@
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import EmailSettings from "./_internal/EmailSettings.svelte";
+  import PasskeyRow from "./_internal/PasskeyRow.svelte";
   import SettingInputDrawer from "./_internal/SettingInputDrawer.svelte";
   import SettingsGroupCard from "./_internal/SettingsGroupCard.svelte";
   import SettingsGroupRow from "./_internal/SettingsGroupRow.svelte";
@@ -194,6 +195,10 @@
     >
       {#snippet icon()}<StarIcon fill="none" />{/snippet}
     </SettingsGroupRow>
+  </SettingsGroupCard>
+
+  <SettingsGroupCard title={m.header_account_security()}>
+    <PasskeyRow />
   </SettingsGroupCard>
 
   <EmailSettings />
