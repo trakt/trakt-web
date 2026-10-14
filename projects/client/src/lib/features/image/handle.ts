@@ -1,6 +1,7 @@
 import { ImageEndpoint } from '$lib/features/image/ImageEndpoint.ts';
 import { error } from '$lib/utils/console/print.ts';
 import { IS_PROD } from '$lib/utils/env/index.ts';
+import { safeJsonParse } from '$lib/utils/json/safeJsonParse.ts';
 import type { Handle } from '@sveltejs/kit';
 import { Buffer } from 'node:buffer';
 import type { SerializedImageResponse } from './models/SerializedImageResponse.ts';
@@ -42,7 +43,18 @@ export const resolver = IS_PROD ? prodResolver : devResolver;
 
 export const handle: Handle = async ({ event, resolve }) => {
   if (event.url.pathname.startsWith(ImageEndpoint.Gimme)) {
-    const { url } = await event.request.json() as { url: string };
+    if (event.request.method !== 'POST') {
+      return new Response(null, { status: 405, headers: { allow: 'POST' } });
+    }
+
+    const { url } = safeJsonParse<{ url?: string }>(
+      await event.request.text(),
+      {},
+    );
+
+    if (!url) {
+      return new Response(null, { status: 400 });
+    }
 
     return new Response(JSON.stringify(await resolver(url)));
   }

@@ -34,4 +34,30 @@ describe('handle: theme', () => {
       'trakt-theme=light;path=/;maxAge=157680000',
     );
   });
+
+  it('should reject a theme request that is not a POST', async () => {
+    const event = mockRequestEvent({
+      url: `http://localhost${ThemeEndpoint.Set}`,
+      request: new Request(`http://localhost${ThemeEndpoint.Set}`),
+    });
+
+    const response = await handle({ event, resolve: vi.fn() });
+
+    expect(response.status).toBe(405);
+    expect(response.headers.get('Set-Cookie')).toBeNull();
+  });
+
+  it('should reject an empty theme request', async () => {
+    const event = mockRequestEvent({
+      url: `http://localhost${ThemeEndpoint.Set}`,
+      request: new Request(`http://localhost${ThemeEndpoint.Set}`, {
+        method: 'POST',
+      }),
+    });
+
+    const response = await handle({ event, resolve: vi.fn() });
+
+    expect(response.status).toBe(400);
+    expect(response.headers.get('Set-Cookie')).toBeNull();
+  });
 });

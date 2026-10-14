@@ -9,6 +9,7 @@ import {
 import { LocaleEndpoint } from '$lib/features/i18n/LocaleEndpoint.ts';
 import { overwriteServerAsyncLocalStorage } from '$lib/paraglide/runtime.js';
 import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
+import { safeJsonParse } from '$lib/utils/json/safeJsonParse.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import type { Handle } from '@sveltejs/kit';
@@ -29,9 +30,18 @@ overwriteServerAsyncLocalStorage(localeStorage);
 
 export const handle: Handle = async ({ event, resolve }) => {
   if (event.url.pathname.startsWith(LocaleEndpoint.Set)) {
-    const { locale } = await event.request.json() as {
-      locale: string;
-    };
+    if (event.request.method !== 'POST') {
+      return new Response(null, { status: 405, headers: { allow: 'POST' } });
+    }
+
+    const { locale } = safeJsonParse<{ locale?: string }>(
+      await event.request.text(),
+      {},
+    );
+
+    if (!locale) {
+      return new Response(null, { status: 400 });
+    }
 
     const sanitizedLocale = setLocale(locale as AvailableLocale);
 
