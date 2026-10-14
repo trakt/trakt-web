@@ -6,4 +6,5 @@ export type ReactionDetailsProps<T extends AnyReaction> = {
   isCurrent: boolean;
   index: number;
   onRemove?: (reaction: T) => void;
+  onAdd?: (reaction: T) => void;
 };

@@ -1,6 +1,7 @@
 <script lang="ts" generics="T extends string">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { hasReactionRoom } from "$lib/utils/reactions/hasReactionRoom.ts";
   import ReactionEmoji from "./ReactionEmoji.svelte";
   import type { ReactionPickerCellProps } from "./ReactionPickerCellProps.ts";
 
@@ -15,7 +16,7 @@
 
   const isChosen = $derived(chosen.includes(option.id));
   const isDisabled = $derived(
-    !isChosen && limit != null && chosen.length >= limit,
+    !isChosen && !hasReactionRoom({ count: chosen.length, limit }),
   );
 
   let isPressed = $state(false);

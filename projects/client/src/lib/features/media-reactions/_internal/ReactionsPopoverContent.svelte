@@ -47,7 +47,9 @@
         order="ranked"
         pageSize={DISTRIBUTION_PAGE_SIZE}
         format="share"
+        limit={MAX_MEDIA_REACTIONS}
         onRemove={onSelect}
+        onAdd={onSelect}
       />
     </div>
   </div>
