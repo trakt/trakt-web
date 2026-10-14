@@ -4296,6 +4296,26 @@
       "default": "Account Details",
       "description": "Header for the section that allows users to change their account details."
     },
+    "header_account_security": {
+      "default": "Account security",
+      "description": "Header for the account settings section that holds sign-in security options."
+    },
+    "text_passkey": {
+      "default": "Passkey",
+      "description": "Title of the account settings row for the passkey, a sign-in method that replaces the password."
+    },
+    "description_passkey": {
+      "default": "Sign in with your fingerprint, face or screen lock.",
+      "description": "Helper text under the passkey row in account settings. Passkey is the sign-in method that uses the device's fingerprint, face recognition or screen lock."
+    },
+    "button_text_manage_passkey": {
+      "default": "Manage",
+      "description": "Text for the button that opens the passkey management page. This should be as short as possible."
+    },
+    "button_label_manage_passkey": {
+      "default": "Manage passkey",
+      "description": "Aria-label for the button that opens the passkey management page."
+    },
     "description_account_details": {
       "default": "Change your photo, name and other details.",
       "description": "Description for the account details section."
