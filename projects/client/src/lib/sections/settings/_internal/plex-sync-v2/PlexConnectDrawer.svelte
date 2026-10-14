@@ -327,7 +327,10 @@
                 <span class="today-marker"></span>
                 <div class="future">
                   <DistributionBar
-                    fraction={0}
+                    fraction={1}
+                    color="var(--purple-500)"
+                    fillStyle="flat"
+                    animated={false}
                     label={m.label_media_sync_history_from_now()}
                   />
                 </div>
