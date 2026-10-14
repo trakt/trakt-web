@@ -12090,13 +12090,57 @@
       "default": "Movies and episodes you finish on this server.",
       "description": "Explains the Plex watch history sync switch."
     },
-    "label_media_sync_import_history": {
-      "default": "Import past watches",
-      "description": "Label of the switch that decides whether watches from before connecting are imported when linking a Plex server."
+    "header_media_sync_watch_history": {
+      "default": "Watch history",
+      "description": "Heading of the Plex connect wizard step where the user picks where their watch history starts."
     },
-    "description_media_sync_import_history_off": {
-      "default": "Only watches from today on are added.",
-      "description": "Helper text shown under the import past watches switch while it is off."
+    "header_media_sync_history_start": {
+      "default": "Where should your history start?",
+      "description": "Question at the top of the watch history step of the Plex connect wizard."
+    },
+    "label_media_sync_history_past": {
+      "default": "Past watches",
+      "description": "Accessible label of the past part of the timeline bar in the Plex connect wizard."
+    },
+    "label_media_sync_history_from_now": {
+      "default": "From now on",
+      "description": "Accessible label of the future part of the timeline bar in the Plex connect wizard."
+    },
+    "label_media_sync_history_first_play": {
+      "default": "Your first play",
+      "description": "Timeline label marking where imported history starts, used when all past watches are imported."
+    },
+    "label_media_sync_history_skipped": {
+      "default": "Skipped",
+      "description": "Timeline label shown when past watches are not imported."
+    },
+    "label_media_sync_history_today": {
+      "default": "Today",
+      "description": "Timeline label marking the current day."
+    },
+    "tab_text_media_sync_history_all": {
+      "default": "All past watches",
+      "description": "Segmented option that imports every past watch from the Plex server."
+    },
+    "tab_text_media_sync_history_today": {
+      "default": "From today",
+      "description": "Segmented option that only adds watches from today on."
+    },
+    "description_media_sync_history_all": {
+      "default": "Everything you've watched on this server comes over on the first sync.",
+      "description": "Summary shown when all past watches are imported."
+    },
+    "description_media_sync_history_today": {
+      "default": "Only new watches will be added. Your existing Trakt history stays as it is.",
+      "description": "Summary shown when only new watches are added."
+    },
+    "description_media_sync_history_always_full": {
+      "default": "Ratings, collection and watchlist always come over in full.",
+      "description": "Sentence after the history summary explaining other feeds are not affected by the choice."
+    },
+    "hint_media_sync_history_resync": {
+      "default": "Resync brings over your past watches anytime.",
+      "description": "Small hint under the watch history choice."
     },
     "label_media_sync_feed_ratings": {
       "default": "Ratings",

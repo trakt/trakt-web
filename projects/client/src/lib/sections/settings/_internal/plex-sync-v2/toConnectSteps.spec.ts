@@ -23,4 +23,14 @@ describe('toConnectSteps', () => {
       'sync',
     ]);
   });
+
+  it('adds the history step last when the history feed is on', () => {
+    expect(toConnectSteps({ hasProfiles: true, hasHistory: true }))
+      .to.deep.equal(['sign-in', 'server', 'profile', 'sync', 'history']);
+  });
+
+  it('adds the history step to a watchlist-only-free single profile flow', () => {
+    expect(toConnectSteps({ hasProfiles: false, hasHistory: true }))
+      .to.deep.equal(['sign-in', 'server', 'sync', 'history']);
+  });
 });
