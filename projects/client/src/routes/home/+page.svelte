@@ -2,6 +2,7 @@
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import Banner from "$lib/sections/banner/Banner.svelte";
+  import DashboardCallout from "$lib/sections/dashboard/DashboardCallout.svelte";
   import DashboardDrawer from "$lib/sections/dashboard/DashboardDrawer.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -12,7 +13,6 @@
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
   import TodayNavbarEntry from "$lib/sections/today/TodayNavbarEntry.svelte";
   import TodayStoryViewerHost from "$lib/sections/today/TodayStoryViewerHost.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
@@ -54,7 +54,7 @@
     intent="start"
   />
 
-  <StreakCallout />
+  <DashboardCallout />
   <UpcomingList />
   <RecommendedList
     title={m.list_title_recommended()}

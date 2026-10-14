@@ -12540,6 +12540,95 @@
     "button_text_game_play": {
       "default": "Play",
       "description": "Label on the hidden \"Rated Higher?\" game card in the spotlight search that starts the game."
+    },
+    "header_next_steps": {
+      "default": "Get more out of Trakt",
+      "description": "Title of the Home card and drawer listing a few things the member has not tried on Trakt yet."
+    },
+    "text_next_steps_progress": {
+      "default": "{completed}/{total}",
+      "description": "Progress shown inside the ring on the next steps card, e.g. '1/3'.",
+      "variables": {
+        "completed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_open_next_steps": {
+      "default": "Get more out of Trakt, {completed} of {total} done",
+      "description": "Aria-label for the Home card that opens the next steps drawer.",
+      "variables": {
+        "completed": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_skip_all_next_steps": {
+      "default": "Skip all steps",
+      "description": "Button at the bottom of the next steps drawer that skips every remaining step and hides the card for good."
+    },
+    "text_next_step_done": {
+      "default": "Done",
+      "description": "Screen-reader suffix announced after a completed next step in the drawer."
+    },
+    "text_next_step_watch_history": {
+      "default": "Add what you've watched",
+      "description": "Next step: import or log titles the member has already watched."
+    },
+    "text_next_step_watchlist": {
+      "default": "Add 3 titles to your watchlist",
+      "description": "Next step: add at least three titles to the watchlist."
+    },
+    "text_next_step_rate": {
+      "default": "Rate something you watched",
+      "description": "Next step: give a first rating."
+    },
+    "text_next_step_favorite_genres": {
+      "default": "Set your favorite genres",
+      "description": "Next step: pick loved genres in settings."
+    },
+    "text_next_step_favorite_services": {
+      "default": "Set your favorite streaming services",
+      "description": "Next step: pick favorite streaming services in settings."
+    },
+    "text_next_step_streaming_sync": {
+      "default": "Turn on automatic sync for a service",
+      "description": "Next step: connect a streaming service so watches are tracked automatically."
+    },
+    "text_next_step_follow": {
+      "default": "Follow a friend",
+      "description": "Next step: follow another Trakt member."
+    },
+    "text_next_step_create_list": {
+      "default": "Create your first list",
+      "description": "Next step: create a personal list."
+    },
+    "text_next_step_comment": {
+      "default": "Leave your first comment",
+      "description": "Next step: post a first comment."
+    },
+    "button_label_skip_next_step": {
+      "default": "Skip: {step}",
+      "description": "Aria-label for the icon button that skips one step in the next steps drawer, e.g. 'Skip: Follow a friend'.",
+      "variables": {
+        "step": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_next_step_skipped": {
+      "default": "Step skipped",
+      "description": "Toast shown after the member skips one step in the next steps drawer."
+    },
+    "button_label_undo_skip_next_step": {
+      "default": "Undo skipping this step",
+      "description": "Aria-label for the Undo button in the toast shown after skipping a next step."
     }
   }
 }
