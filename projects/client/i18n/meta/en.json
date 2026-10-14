@@ -111,10 +111,6 @@
       "default": "Manage",
       "description": "Text for the button that opens the favorite streaming services picker."
     },
-    "button_text_add_streaming_service": {
-      "default": "Add streaming service",
-      "description": "Text for the button that opens the streaming services picker drawer."
-    },
     "button_label_toggle_favorite_service": {
       "default": "Toggle {service} as a favorite",
       "description": "Aria-label for toggling a streaming service as a favorite."
@@ -159,21 +155,9 @@
       "default": "Reconnect",
       "description": "Text for the button that reconnects a broken streaming service."
     },
-    "button_text_upgrade": {
-      "default": "Upgrade",
-      "description": "Text for the button that upgrades to VIP to unlock a streaming service."
-    },
     "button_label_connect_streaming_service": {
       "default": "Connect {service}",
       "description": "Aria-label for the button that connects a specific streaming service."
-    },
-    "button_label_sync_streaming_service": {
-      "default": "Sync {service}",
-      "description": "Aria-label for the button that syncs a specific streaming service."
-    },
-    "button_label_unlink_streaming_service": {
-      "default": "Unlink {service}",
-      "description": "Aria-label for the button that unlinks a specific streaming service."
     },
     "button_label_plex_connect": {
       "default": "Connect your Plex account",
@@ -483,10 +467,6 @@
     "error_kicker_404": {
       "default": "Missing reel",
       "description": "Short scene label shown above the title on the 404 error page."
-    },
-    "input_prompt_mark_as_watched_date": {
-      "default": "When did you finish watching this? (YYYY-MM-DD HH:MM)",
-      "description": "Message for the prompt that allows users to specify the date and time when they finished watching a movie, show, or episode."
     },
     "button_text_watchlist": {
       "default": "Watchlist",
@@ -871,18 +851,6 @@
       "default": "Talk about it",
       "description": "Small label above the share step on the landing page. Keep it to two or three words."
     },
-    "text_landing_numbers_1": {
-      "default": "years of watching together",
-      "description": "Part of the promotion text for welcoming a new user. Example: 15 years of watching together"
-    },
-    "text_landing_numbers_2": {
-      "default": "mil. shows & movies lovers",
-      "description": "Part of the promotion text for welcoming a new user. Example: 15 mil. shows & movies lovers"
-    },
-    "text_landing_numbers_3": {
-      "default": "mil. titles tracked weekly",
-      "description": "Part of the promotion text for welcoming a new user. Example: 15 mil. titles tracked weekly"
-    },
     "list_title_trending": {
       "default": "Trending",
       "description": "Title for lists containing trending movies or shows. This title should be as short and concise as possible."
@@ -907,10 +875,6 @@
       "default": "Get VIP",
       "description": "Text for the VIP upsell badge. This is shown in a badge and should be as short as possible."
     },
-    "button_label_get_vip": {
-      "default": "Unlock VIP features",
-      "description": "Aria-label for the button that takes users to the VIP subscription page."
-    },
     "link_label_get_vip": {
       "default": "Unlock VIP features",
       "description": "Aria-label for the link that takes users to the VIP subscription page."
@@ -927,10 +891,6 @@
       "default": "Movies",
       "description": "Text for the button that allows users to browse movies."
     },
-    "button_label_browse_movies": {
-      "default": "Browse Movies",
-      "description": "Aria-label for the button that allows users to browse movies."
-    },
     "page_title_movies": {
       "default": "Movies",
       "description": "Title for the movies page."
@@ -946,10 +906,6 @@
     "button_text_browse_shows": {
       "default": "Shows",
       "description": "Text for the button that allows users to browse shows."
-    },
-    "button_label_browse_shows": {
-      "default": "Browse Shows",
-      "description": "Aria-label for the button that allows users to browse shows."
     },
     "page_title_shows": {
       "default": "Shows",
@@ -1020,14 +976,6 @@
     "list_title_related_shows": {
       "default": "Related Shows",
       "description": "Title for lists containing related shows. This title should be as short and concise as possible."
-    },
-    "button_text_find_movies": {
-      "default": "Find Movies",
-      "description": "Text for the button that allows users to find movies. This button is shown in some empty lists."
-    },
-    "button_text_find_shows": {
-      "default": "Find Shows",
-      "description": "Text for the button that allows users to find shows. This button is shown in some empty lists."
     },
     "list_title_show_credits": {
       "default": "Shows",
@@ -1560,10 +1508,6 @@
       "default": "Episodes",
       "description": "Label for the Episodes tab in the season drawer toggle."
     },
-    "tab_label_seasons_episodes": {
-      "default": "Episodes tab",
-      "description": "Aria-label for the Episodes tab button in the season drawer."
-    },
     "tab_text_seasons_info": {
       "default": "Info",
       "description": "Label for the Info tab in the season drawer tab bar."
@@ -1575,10 +1519,6 @@
     "tab_text_seasons_reviews": {
       "default": "Reviews",
       "description": "Label for the Reviews tab in the season drawer toggle."
-    },
-    "tab_label_seasons_reviews": {
-      "default": "Reviews tab",
-      "description": "Aria-label for the Reviews tab button in the season drawer."
     },
     "list_title_seasons": {
       "default": "Seasons",
@@ -1765,10 +1705,6 @@
       "default": "People",
       "description": "Title for the drawer containing people related to a movie, show, or episode. This title should be as short and concise as possible."
     },
-    "drawer_title_episode_information": {
-      "default": "Episode Information",
-      "description": "Title for the episode information drawer opened from an episode card on a summary page."
-    },
     "button_label_previous_episode": {
       "default": "Previous episode",
       "description": "Label for the button that navigates to the previous episode of the season in the episode information drawer."
@@ -1923,14 +1859,6 @@
         }
       }
     },
-    "list_title_favorite_movies": {
-      "default": "Favorite Movies",
-      "description": "Title for lists containing a user's favorite movies. This title should be as short and concise as possible."
-    },
-    "list_title_favorite_shows": {
-      "default": "Favorite Shows",
-      "description": "Title for lists containing a user's favorite shows. This title should be as short and concise as possible."
-    },
     "list_title_favorites": {
       "default": "Favorites",
       "description": "Title for lists containing a user's favorite movies and/or shows. This title should be as short and concise as possible."
@@ -2018,14 +1946,6 @@
     "list_placeholder_comments_language": {
       "default": "No {language} reviews yet.",
       "description": "Placeholder text shown when there are no reviews in a specific language. {language} is the localized language name, e.g. 'Dutch'."
-    },
-    "text_review_by": {
-      "default": "Review by",
-      "description": "Text used to indicate the author of a review."
-    },
-    "text_shout_by": {
-      "default": "Shout by",
-      "description": "Text used to indicate the author of a shout."
     },
     "text_deleted_username": {
       "default": "Deleted",
@@ -2321,15 +2241,6 @@
         }
       }
     },
-    "button_text_comment_likes": {
-      "default": "{count} likes",
-      "description": "Text for the button that shows the number of likes a review has.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
-    },
     "button_label_close": {
       "default": "Close",
       "description": "Aria-label for close buttons, like dialogs, sidebars, etc."
@@ -2371,10 +2282,6 @@
       "default": "Reviews",
       "description": "Title for lists containing reviews on a movie, show, or episode. This title should be as short and concise as possible."
     },
-    "dialog_title_comments": {
-      "default": "Reviews",
-      "description": "Title for the reviews dialog, which lists all current reviews."
-    },
     "dialog_title_comment": {
       "default": "Review",
       "description": "Title for the review dialog, which is used when a user is adding a new review."
@@ -2403,10 +2310,6 @@
     "textarea_placeholder_reply": {
       "default": "Reply...",
       "description": "Placeholder text for the reply textarea in the review dialog."
-    },
-    "button_label_add_new_comment": {
-      "default": "Add a new review",
-      "description": "Aria-label for the button that opens the review dialog to add a new review."
     },
     "textarea_placeholder_comment": {
       "default": "Add a review...",
@@ -2648,15 +2551,6 @@
     "button_label_reset_filter": {
       "default": "Reset",
       "description": "Aria-label for the button that resets a single filter to its initial value."
-    },
-    "text_search_results_for": {
-      "default": "Results for {query}",
-      "description": "Text shown when displaying search results for a specific query.",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
     },
     "translated_value_type_movie": {
       "default": "Movie",
@@ -2909,10 +2803,6 @@
       "default": "Now Playing",
       "description": "Header for the 'now playing' toast that shows the movie or episode the user is currently watching."
     },
-    "text_remaining": {
-      "default": "remaining",
-      "description": "Text used to indicate the remaining time of a movie or episode."
-    },
     "text_ends_at": {
       "default": "Ends at {time}",
       "description": "Text in the 'now playing' check-in toast indicating the clock time when the currently watched movie or episode will finish.",
@@ -3015,10 +2905,6 @@
     "error_text_lists_limit": {
       "default": "You have reached the limit of your personal lists. Upgrade to VIP for unlimited amount of lists!",
       "description": "Text shown to the user, informing that they have reached the maximum amount of lists they can create with their current free subscription plan."
-    },
-    "text_first_play_this_month": {
-      "default": "First play this month",
-      "description": "Text shown to indicate the first movie or show a user has watched this month."
     },
     "text_shows_watched": {
       "default": "{count} shows",
@@ -3242,10 +3128,6 @@
       "default": "Add review",
       "description": "Aria-label for the button that allows users to add a new review."
     },
-    "input_prompt_rename_list": {
-      "default": "Rename your list",
-      "description": "Message for the prompt that is shown when a user is renaming a list."
-    },
     "button_text_edit_list": {
       "default": "Edit",
       "description": "Aria-label for the button that allows users to edit a list."
@@ -3259,14 +3141,6 @@
         }
       }
     },
-    "button_label_view_all_hot_shows": {
-      "default": "View all hot shows",
-      "description": "Aria-label for the button that allows users to view all hot shows this month."
-    },
-    "button_label_view_all_hot_movies": {
-      "default": "View all hot movies",
-      "description": "Aria-label for the button that allows users to view all hot movies this month."
-    },
     "list_title_extras": {
       "default": "Extras",
       "description": "Title for lists containing extras (like trailers) for movies or shows. This title should be as short and concise as possible."
@@ -3278,42 +3152,6 @@
     "page_title_social_activity": {
       "default": "Social activity",
       "description": "Title for the social activity page."
-    },
-    "page_title_trending_shows": {
-      "default": "Trending Shows",
-      "description": "Title for the trending shows page."
-    },
-    "page_title_recommended_shows": {
-      "default": "Recommended Shows",
-      "description": "Title for the recommended shows page."
-    },
-    "page_title_popular_shows": {
-      "default": "Popular Shows",
-      "description": "Title for the popular shows page."
-    },
-    "page_title_anticipated_shows": {
-      "default": "Anticipated Shows",
-      "description": "Title for the anticipated shows page."
-    },
-    "page_title_trending_movies": {
-      "default": "Trending movies",
-      "description": "Title for the trending movies page."
-    },
-    "page_title_recommended_movies": {
-      "default": "Recommended movies",
-      "description": "Title for the recommended movies page."
-    },
-    "page_title_popular_movies": {
-      "default": "Popular movies",
-      "description": "Title for the popular movies page."
-    },
-    "page_title_anticipated_movies": {
-      "default": "Anticipated movies",
-      "description": "Title for the anticipated movies page."
-    },
-    "page_title_recently_watched": {
-      "default": "Recently Watched",
-      "description": "Title for the recently watched page."
     },
     "page_title_profile": {
       "default": "Profile",
@@ -3682,14 +3520,6 @@
     "button_label_movies": {
       "default": "Movies",
       "description": "Aria-label for the button that allows users to toggle movies in the watchlist."
-    },
-    "button_text_view_details": {
-      "default": "View Details",
-      "description": "Text for the button that allows users to show full details of certain show or movie."
-    },
-    "button_text_hide_details": {
-      "default": "Hide Details",
-      "description": "Text for the button that allows users to hide full details of certain show or movie."
     },
     "episode_footer_season_episode": {
       "default": "S{seasonNumber} • E{episodeNumber}",
@@ -4316,17 +4146,9 @@
       "default": "Manage passkey",
       "description": "Aria-label for the button that opens the passkey management page."
     },
-    "description_account_details": {
-      "default": "Change your photo, name and other details.",
-      "description": "Description for the account details section."
-    },
     "list_title_activity": {
       "default": "Activity",
       "description": "Title for lists containing recently watched items of the profiles the user follows or their own recently watched items. This title should be as short and concise as possible."
-    },
-    "button_text_social": {
-      "default": "Social",
-      "description": "Text for the button that allows users to view social activity."
     },
     "button_text_personal": {
       "default": "Personal",
@@ -4384,14 +4206,6 @@
       "default": "Favorite",
       "description": "Text used to indicate the list of all favorite streaming services of a user."
     },
-    "list_title_recently_searched_shows": {
-      "default": "Recently Searched Shows",
-      "description": "Text used to indicate the list of recently searched shows."
-    },
-    "list_title_recently_searched_movies": {
-      "default": "Recently Searched Movies",
-      "description": "Text used to indicate the list of recently searched movies."
-    },
     "text_overview_placeholder": {
       "default": "Overview is not available.",
       "description": "Placeholder text shown when there is no description available for show/movie/episode."
@@ -4419,10 +4233,6 @@
     "text_info_favorites_removed": {
       "default": "Removed from favorites.",
       "description": "Text shown when a user has removed a media item from their favorites."
-    },
-    "text_info_list_added": {
-      "default": "Added to list.",
-      "description": "Text shown when a user has added a media item to their personal custom list."
     },
     "text_info_watchlist_added": {
       "default": "Added to watchlist.",
@@ -4695,10 +4505,6 @@
       "default": "Start Watching",
       "description": "Title for lists containing shows or movies a user should start watching. This title should be as short and concise as possible."
     },
-    "button_label_view_all_start_watching": {
-      "default": "View all watchlist items available to watch",
-      "description": "Aria-label for the button that allows users to view all items they should start watching."
-    },
     "button_label_discover": {
       "default": "Discover movies and shows",
       "description": "Aria-label for the button that takes users to the discover page, where they can discover movies and shows."
@@ -4718,10 +4524,6 @@
     "button_text_recent_comments": {
       "default": "Recent",
       "description": "Text for the button that allows users to sort reviews by recency. This should be short and ideally one word."
-    },
-    "link_text_vip_cover_image_upsell": {
-      "default": "Upgrade to VIP to set cover images.",
-      "description": "Text for the link that takes users to the VIP upsell page. This should be as short as possible and be translated as if it starts with 'get vip' (without it being part of the translation)."
     },
     "button_text_set_cover_image": {
       "default": "Set as cover image",
@@ -4825,10 +4627,6 @@
       "default": "Appearance",
       "description": "Header for the section that allows users to change the appearance, i.e. color theme and language."
     },
-    "description_appearance": {
-      "default": "Change your theme and language settings.",
-      "description": "Description for the appearance section."
-    },
     "text_theme": {
       "default": "Theme",
       "description": "Text for the section that allows users to change the theme."
@@ -4888,10 +4686,6 @@
     "button_label_view_all_library_items": {
       "default": "View all library items",
       "description": "Aria-label for the button that allows users to view all movies and episodes in their library."
-    },
-    "dropdown_label_library": {
-      "default": "Library",
-      "description": "Aria-label for the dropdown that allows users to filter the movies and episodes in their library by category, e.g. plex."
     },
     "translated_value_library_custom": {
       "default": "Custom",
@@ -5086,22 +4880,9 @@
       "default": "You",
       "description": "Label marking the viewer's own entry in the leaderboard."
     },
-    "text_view_all": {
-      "default": "View all",
-      "description": "Text for the button that allows users to view all items in a list."
-    },
     "text_play_count": {
       "default": "{count} plays",
       "description": "Text shown to indicate the number of episode and movie plays a user had in a certain period.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
-    },
-    "text_hours_watched": {
-      "default": "{count} hours",
-      "description": "Text shown to indicate the number of hours a user has watched movies and episodes in a certain period.",
       "variables": {
         "count": {
           "type": "number"
@@ -5278,10 +5059,6 @@
         }
       }
     },
-    "button_label_profile_options": {
-      "default": "Profile options",
-      "description": "Aria-label for the button that opens a popup menu or drawer for a users profile, where users can change settings and logout."
-    },
     "validation_text_list_name": {
       "default": "Name is required",
       "description": "Validation text shown when the user inputs an invalid list name."
@@ -5384,10 +5161,6 @@
       "default": "Spoilers",
       "description": "Text for the button that allows users to view trivia with spoilers. This title should be as short and concise as possible."
     },
-    "button_label_trivia_category_filter": {
-      "default": "Filter trivia by category",
-      "description": "Aria-label for the trivia category filter dropdown button."
-    },
     "option_text_trivia_category_all": {
       "default": "All",
       "description": "Text for the 'All categories' option in the trivia category filter dropdown. Should be as short and concise as possible."
@@ -5411,10 +5184,6 @@
     "option_text_trivia_category_real_world_connections": {
       "default": "Real-world connections",
       "description": "Text for the 'Real-world connections' trivia category option. Should be as short and concise as possible."
-    },
-    "button_text_restore_rating_prompts": {
-      "default": "Restore Rating Prompts",
-      "description": "Text for the button that allows users to reset their suppressed rating prompts."
     },
     "text_billing_month_for_free": {
       "default": "Try 1 month for free and then:",
@@ -5460,10 +5229,6 @@
     "text_vip_upsell_default_2": {
       "default": "Upgrade to VIP!",
       "description": "Text used to promote a VIP package for the user."
-    },
-    "text_vip_upsell_default_description_2": {
-      "default": "Year in Review & more.",
-      "description": "Description used to promote a VIP package for the user."
     },
     "button_label_like_list": {
       "default": "Like {name}",
@@ -6110,18 +5875,6 @@
       "default": "Plays logged",
       "description": "Short label under the total number of plays the user has logged, shown in the delete account confirmation dialog."
     },
-    "text_clear_watchlist": {
-      "default": "Clear watchlist",
-      "description": "Label for the row in clear data settings that allows users to clear their entire watchlist."
-    },
-    "warning_prompt_clear_watchlist": {
-      "default": "Are you sure you want to clear your entire watchlist? This cannot be undone.",
-      "description": "Warning prompt shown when a user tries to clear their entire watchlist."
-    },
-    "reset_status_cleared": {
-      "default": "Watchlist cleared.",
-      "description": "Status text shown when a watchlist clear has completed successfully."
-    },
     "clear_status_clearing": {
       "default": "Clearing {processed} / {total} items…",
       "description": "Status text shown while items are being deleted, such as watchlist, ratings etc.",
@@ -6372,14 +6125,6 @@
     "text_vip_features_tagline": {
       "default": "No hype, just features.",
       "description": "Text used to promote the features of a VIP package for the user."
-    },
-    "vip_feature_title_yir": {
-      "default": "Year in Review",
-      "description": "Title for the Year in Review VIP feature."
-    },
-    "vip_feature_description_yir": {
-      "default": "Lots of stats for every year you've been a member.",
-      "description": "Description for the Year in Review VIP feature."
     },
     "yir_title_year_to_date": {
       "default": "Year to date",
@@ -6668,15 +6413,6 @@
         }
       }
     },
-    "yir_label_week_number": {
-      "default": "Week {weekNumber}",
-      "description": "Label for week number in charts.",
-      "variables": {
-        "weekNumber": {
-          "type": "number"
-        }
-      }
-    },
     "yir_label_top_genres": {
       "default": "Top genres",
       "description": "Label for the top-genres segmented bar chart in the Year in Review genres section."
@@ -6849,19 +6585,6 @@
           "type": "number"
         }
       }
-    },
-    "yir_2024_play_count_in": {
-      "default": "Play Count in {year}",
-      "description": "Label above the play count on the first/last-play cards on the 2024 Year in Review template.",
-      "variables": {
-        "year": {
-          "type": "number"
-        }
-      }
-    },
-    "yir_2024_watched_at": {
-      "default": "Watched At",
-      "description": "Label above the watched-at timestamp on the first/last-play cards on the 2024 Year in Review template."
     },
     "yir_2024_most_watched_shows": {
       "default": "Most Watched Shows",
@@ -7226,14 +6949,6 @@
         }
       }
     },
-    "vip_feature_title_mir": {
-      "default": "Month in Review",
-      "description": "Title for the Month in Review VIP feature."
-    },
-    "vip_feature_description_mir": {
-      "default": "Get a personalized overview of everything you watched and rated each month.",
-      "description": "Description for the Month in Review VIP feature."
-    },
     "vip_feature_title_vip_status": {
       "default": "VIP Status",
       "description": "Title for the VIP Status feature."
@@ -7254,33 +6969,9 @@
       "default": "Go beyond your limits",
       "description": "Heading for the VIP section explaining what increased limits are offered."
     },
-    "vip_feature_description_increased_limits": {
-      "default": "Enjoy higher limits for your lists, ratings, and other features.",
-      "description": "Description for the Increased Limits VIP feature."
-    },
-    "vip_feature_title_sentiment": {
-      "default": "Sentiment",
-      "description": "Title for the Sentiment VIP feature."
-    },
-    "vip_feature_description_sentiment": {
-      "default": "Unlock more detailed sentiment analysis for shows and movies.",
-      "description": "Description for the Sentiment VIP feature."
-    },
-    "vip_feature_title_trivia": {
-      "default": "Trivia",
-      "description": "Title for the Trivia VIP feature."
-    },
     "vip_feature_description_trivia": {
       "default": "Get more trivia and insights about the movies and shows you watch.",
       "description": "Description for the Trivia VIP feature."
-    },
-    "vip_feature_title_more_to_come": {
-      "default": "More to Come",
-      "description": "Title for the More to Come VIP feature section."
-    },
-    "vip_feature_description_more_to_come": {
-      "default": "We're constantly building new features exclusively for VIP members, with exciting updates already on the way.",
-      "description": "Description for the More to Come VIP feature section."
     },
     "vip_feature_title_recaps": {
       "default": "More Stats: Monthly & Yearly Recap",
@@ -7402,45 +7093,6 @@
       "default": "Most popular",
       "description": "Text for the tag that indicates the most popular item in a list or section. This should be as short as possible."
     },
-    "button_text_vip_upgrade": {
-      "default": "Upgrade",
-      "description": "Text for the button that allows users to upgrade to VIP. This should be as short as possible."
-    },
-    "button_label_vip_upgrade": {
-      "default": "Upgrade to VIP",
-      "description": "Aria-label for the button that allows users to upgrade to VIP."
-    },
-    "text_vip_subscription": {
-      "default": "subscription",
-      "description": "Text used to refer to a VIP subscription."
-    },
-    "text_vip_billing_monthly": {
-      "default": "{price} billed monthly",
-      "description": "Text used to indicate the monthly billing option for VIP subscription. This should be as short as possible.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_billing_yearly": {
-      "default": "{price} billed yearly",
-      "description": "Text used to indicate the yearly billing option for VIP subscription. This should be as short as possible.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_billing_biyearly": {
-      "default": "{price} billed every 2 years",
-      "description": "Text used to indicate the biyearly billing option for VIP subscription. This should be as short as possible.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
     "text_vip_billing_cycle_monthly": {
       "default": "1 month",
       "description": "Text used to indicate a monthly billing cycle for VIP subscription. This should be as short as possible."
@@ -7453,14 +7105,6 @@
           "type": "string"
         }
       }
-    },
-    "text_vip_billed_monthly": {
-      "default": "Billed monthly",
-      "description": "Short billing frequency label for monthly VIP plan displayed on the subscription card."
-    },
-    "text_vip_billed_yearly": {
-      "default": "Billed yearly",
-      "description": "Short billing frequency label for yearly VIP plan displayed on the subscription card."
     },
     "text_vip_billed_biyearly": {
       "default": "Billed every 2 years",
@@ -7531,10 +7175,6 @@
           "type": "string"
         }
       }
-    },
-    "text_vip_deal_ribbon": {
-      "default": "First 2 Years",
-      "description": "Short tag indicating that the offer price applies to the first 2 years."
     },
     "text_vip_deal_term": {
       "default": "2 years of VIP",
@@ -7646,10 +7286,6 @@
     "limit_title_connected_apps": {
       "default": "Connected Apps",
       "description": "Title for the progress bar that shows a user's connected community apps usage. This should be as short as possible."
-    },
-    "text_vip_track_more": {
-      "default": "Track more, list more, rate more.",
-      "description": "Text shown to encourage non-VIP users to subscribe to gain higher limits on tracking, listing, and rating."
     },
     "button_label_see_more_limits": {
       "default": "View more limits",
@@ -7845,10 +7481,6 @@
       "default": "3 hours before",
       "description": "Text for the notification time setting that allows users to be notified 3 hours before the release."
     },
-    "header_settings_tracking": {
-      "default": "Tracking",
-      "description": "Header for the section that allows users to manage their media tracking settings."
-    },
     "header_settings_notifications": {
       "default": "Notifications",
       "description": "Header for the section that allows users to manage their notification settings."
@@ -7956,14 +7588,6 @@
           "type": "string"
         }
       }
-    },
-    "vip_feature_title_streaming_sync": {
-      "default": "Streaming Sync",
-      "description": "Title for the Streaming services Sync VIP feature."
-    },
-    "vip_feature_description_streaming_sync": {
-      "default": "Automatically sync your watched history and ratings from all your favorite streaming services.",
-      "description": "Description for the Streaming Sync VIP feature."
     },
     "vip_feature_title_unlock": {
       "default": "Unlock full potential with",
@@ -8953,14 +8577,6 @@
       "default": "Watch History",
       "description": "Title for the progress bar that shows a user's watch history usage. This should be as short as possible."
     },
-    "tooltip_stats_plays": {
-      "default": "Total movies and episodes watched",
-      "description": "Tooltip for total plays stat icon in weekly pulse."
-    },
-    "tooltip_stats_episodes": {
-      "default": "Episodes watched this week",
-      "description": "Tooltip for episodes stat icon in weekly pulse."
-    },
     "tooltip_stats_movies": {
       "default": "Time spent watching movies this week",
       "description": "Tooltip for movies screen time stat icon in weekly pulse."
@@ -8968,30 +8584,6 @@
     "tooltip_stats_shows": {
       "default": "Time spent watching shows this week",
       "description": "Tooltip for shows screen time stat icon in weekly pulse."
-    },
-    "tooltip_stats_active_days": {
-      "default": "Days with at least one watch",
-      "description": "Tooltip for active days stat icon in weekly pulse."
-    },
-    "tooltip_stats_busiest_day": {
-      "default": "Day of week with the most watches",
-      "description": "Tooltip for busiest day stat icon in weekly pulse."
-    },
-    "tooltip_stats_best_day": {
-      "default": "Most watches in a single day",
-      "description": "Tooltip for best day stat icon in weekly pulse."
-    },
-    "tooltip_stats_hours": {
-      "default": "Total hours of content watched",
-      "description": "Tooltip for hours stat icon in weekly pulse."
-    },
-    "tooltip_stats_ratings": {
-      "default": "Items rated this week",
-      "description": "Tooltip for ratings stat icon in weekly pulse."
-    },
-    "tooltip_stats_comments": {
-      "default": "Comments written this week",
-      "description": "Tooltip for comments stat icon in weekly pulse."
     },
     "label_stats_average": {
       "default": "Avg",
@@ -9005,10 +8597,6 @@
       "default": "Watchers",
       "description": "Text for the watchers stat, indicating the number of users who are watching a movie, show, or episode. This should be as short and concise as possible."
     },
-    "limit_title_ratings": {
-      "default": "Ratings",
-      "description": "Title for the progress bar that shows a user's ratings usage. This should be as short as possible."
-    },
     "label_stats_episodes": {
       "default": "Episodes",
       "description": "Label for episodes stat in weekly pulse."
@@ -9016,10 +8604,6 @@
     "stat_text_lists": {
       "default": "Lists",
       "description": "Text for the lists stat, indicating the number of lists that contain a movie, show, or episode. This should be as short and concise as possible."
-    },
-    "limit_title_offline_library": {
-      "default": "Offline Library",
-      "description": "Title for the progress bar that shows a user's offline library usage. This should be as short as possible."
     },
     "label_stats_movies": {
       "default": "Movies",
@@ -9072,14 +8656,6 @@
       "default": "streak",
       "description": "Label following the streak count, e.g. '5 days streak'."
     },
-    "label_stats_busiest_day": {
-      "default": "Busiest Day",
-      "description": "Label for busiest day of week stat in weekly pulse."
-    },
-    "label_stats_best_day": {
-      "default": "Best Day",
-      "description": "Label for best performing day stat in weekly pulse."
-    },
     "label_stats_hours": {
       "default": "Hours",
       "description": "Label for total hours watched stat in weekly pulse."
@@ -9116,36 +8692,9 @@
       "default": "Night",
       "description": "Label for late night time bucket (10pm-5am) in watch clock chart."
     },
-    "text_stats_weeks_ago": {
-      "default": "{count}w ago",
-      "description": "Week trend label for weeks in the past, e.g. '4w ago'.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
-    },
-    "text_stats_weeks_short": {
-      "default": "{count}w",
-      "description": "Abbreviated week trend label, e.g. '3w'.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
-    },
     "text_stats_this_week": {
       "default": "This week",
       "description": "Label for the current week in week trend chart."
-    },
-    "text_stats_was_last_week": {
-      "default": "was {day} last week",
-      "description": "Note indicating the busiest day last week, e.g. 'was Monday last week'.",
-      "variables": {
-        "day": {
-          "type": "string"
-        }
-      }
     },
     "text_stats_delta_up": {
       "default": "+{count}",
@@ -9222,10 +8771,6 @@
     "tooltip_stats_avg_per_day": {
       "default": "Average watch time on active days",
       "description": "Tooltip for average per active day stat in weekly pulse."
-    },
-    "header_stats_graph_shows_movies": {
-      "default": "Shows vs Movies",
-      "description": "Title for the shows/movies breakdown graph in weekly pulse."
     },
     "header_certification": {
       "default": "Certification",
@@ -9560,10 +9105,6 @@
       "default": "View all activity",
       "description": "Aria-label for the button that allows users to view all activity items."
     },
-    "list_placeholder_reviews": {
-      "default": "You haven't written any reviews yet.",
-      "description": "Placeholder text shown when there are no reviews in the user's activity list."
-    },
     "list_placeholder_no_review_activity": {
       "default": "No activity to report on. <a>Want to leave a review?</a>",
       "description": "Subtle prompt shown when there is no review activity."
@@ -9826,10 +9367,6 @@
       "default": "Off",
       "description": "Text for the button that allows users to turn subtitles off when watching a movie or show."
     },
-    "button_text_player_audio_default": {
-      "default": "Default",
-      "description": "Text for the button that allows users to select the default audio language when watching a movie or show."
-    },
     "header_player_subtitle": {
       "default": "Subtitles",
       "description": "Header for the section that allows users to select subtitle options for a movie or show."
@@ -9959,10 +9496,6 @@
     "text_clear_source_history": {
       "default": "History",
       "description": "Text for the source option that allows users to clear their watch history."
-    },
-    "text_clear_source_library": {
-      "default": "Library",
-      "description": "Text for the source option that allows users to clear their library (collection)."
     },
     "button_text_clear_now": {
       "default": "Clear now",
@@ -10138,10 +9671,6 @@
       "default": "Ratings",
       "description": "Title for the ratings page."
     },
-    "list_placeholder_ratings": {
-      "default": "You haven't rated anything yet.",
-      "description": "Placeholder text shown when there are no ratings in the user's ratings list."
-    },
     "button_label_view_all_ratings": {
       "default": "View all ratings",
       "description": "Aria-label for the button that allows users to view all their ratings."
@@ -10219,15 +9748,6 @@
     "match_drawer_title": {
       "default": "Match breakdown",
       "description": "Header of the drawer that opens when the compatibility pill is tapped."
-    },
-    "match_drawer_subject": {
-      "default": "You & {username}",
-      "description": "Subject line shown above the score gauge in the match drawer. Frames the metric as a comparison between the viewer and the profile owner so first-time visitors immediately understand who is being matched. Renders the profile owner's @-handle verbatim.",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
     },
     "match_drawer_overlap_caption": {
       "default": "How your taste overlaps",
@@ -10759,10 +10279,6 @@
       "default": "Connected to Plex",
       "description": "Status label shown when the user has a connected Plex account."
     },
-    "label_plex_not_connected": {
-      "default": "Not connected",
-      "description": "Status label shown when the user has no Plex account connected."
-    },
     "button_connect_plex": {
       "default": "Connect Plex",
       "description": "Button to start the Plex account connection flow."
@@ -10809,34 +10325,6 @@
         }
       }
     },
-    "button_plex_authorized": {
-      "default": "I've connected Plex",
-      "description": "Button shown while waiting for the user to complete Plex authorization in a new tab."
-    },
-    "text_plex_auth_waiting": {
-      "default": "A Plex authorization page has been opened. Complete the sign-in there, then click the button below.",
-      "description": "Instructional text shown while waiting for the user to authorize on plex.tv."
-    },
-    "header_plex_servers": {
-      "default": "Select Server",
-      "description": "Header for the Plex server selection block in settings."
-    },
-    "description_plex_servers": {
-      "default": "Choose the Plex server to sync with Trakt.",
-      "description": "Description for the Plex server selection block."
-    },
-    "label_plex_no_servers": {
-      "default": "No servers found. Make sure your Plex server is online and accessible.",
-      "description": "Message shown when no Plex servers are available after connecting."
-    },
-    "header_plex_manual_sync": {
-      "default": "Manual Sync",
-      "description": "Header for the manual sync section in Plex settings."
-    },
-    "description_plex_manual_sync": {
-      "default": "Trigger an immediate sync of your Plex watch history to Trakt.",
-      "description": "Description for the manual sync section in Plex settings."
-    },
     "button_plex_sync_now": {
       "default": "Sync Now",
       "description": "Button to trigger a manual Plex sync."
@@ -10877,33 +10365,9 @@
       "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers, refreshed every hour.",
       "description": "Body copy on the upsell card shown when a free member tries to add a second Plex server."
     },
-    "label_plex_library_table_type": {
-      "default": "Type",
-      "description": "Column header for the library type in the Plex library table."
-    },
-    "label_plex_library_table_sync": {
-      "default": "Sync?",
-      "description": "Column header for the sync checkbox in the Plex library table."
-    },
     "button_plex_toggle_watched": {
       "default": "Watched",
       "description": "Pill toggle button label for the watched sync option in Plex sync settings."
-    },
-    "text_plex_synced_summary": {
-      "default": "Data has synced {count} times. Your most recent sync was {date}.",
-      "description": "Summary text showing total sync count and last sync date in Plex sync history."
-    },
-    "label_plex_history_date": {
-      "default": "Date",
-      "description": "Column header for the date in the Plex sync history table."
-    },
-    "label_plex_history_service": {
-      "default": "Service",
-      "description": "Column header for the service in the Plex sync history table."
-    },
-    "button_plex_undo_sync": {
-      "default": "Undo",
-      "description": "Button to undo a Plex sync in the sync history table."
     },
     "button_text_install": {
       "default": "Install",
@@ -11050,10 +10514,6 @@
         }
       }
     },
-    "button_text_edit_app": {
-      "default": "Edit",
-      "description": "Text for the button that opens the edit form for an API application."
-    },
     "confirmation_challenge_delete_account": {
       "default": "To confirm, type your username {username} below.",
       "description": "Instruction shown in the delete-account confirmation dialog telling the user to type their username to enable the delete button. {username} is the account's username.",
@@ -11086,10 +10546,6 @@
     "list_title_soundtrack": {
       "default": "Soundtrack",
       "description": "Title for the section listing the music credited in a movie or show. This title should be as short and concise as possible."
-    },
-    "text_soundtrack_music_by": {
-      "default": "Music by",
-      "description": "Small label above the name of the composer who wrote most of a soundtrack."
     },
     "text_soundtrack_playable_ratio": {
       "default": "{playable} of {total} playable",
@@ -11135,14 +10591,6 @@
     "button_label_view_soundtrack": {
       "default": "View soundtrack",
       "description": "Aria-label for the link that opens the full soundtrack listing."
-    },
-    "iframe_title_spotify_player": {
-      "default": "Spotify player for {title}",
-      "description": "Accessible title for the embedded Spotify player. 'title' is the name of the track being played."
-    },
-    "vip_feature_title_soundtrack": {
-      "default": "Soundtrack",
-      "description": "Title for the Soundtrack VIP feature."
     },
     "vip_feature_description_soundtrack": {
       "default": "See every track credited in a movie or show, and play the ones we can match.",
