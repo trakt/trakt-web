@@ -12,7 +12,7 @@
 
   type HandoffPlatform = "android" | "ios" | "other";
 
-  let platform = $state<HandoffPlatform>("other");
+  let platform = $state<HandoffPlatform | null>(null);
   let appLink = $state<string | null>(null);
 
   function detectPlatform(): HandoffPlatform {
@@ -89,12 +89,14 @@
   {/if}
 {/snippet}
 
-<ErrorPage
-  title={m.page_title_app_sign_in_handoff()}
-  kicker={m.error_kicker_app_sign_in_handoff()}
-  message={appLink
-    ? m.text_app_sign_in_handoff_open_app()
-    : m.text_app_sign_in_handoff()}
-  {mark}
-  {actions}
-/>
+{#if platform}
+  <ErrorPage
+    title={m.page_title_app_sign_in_handoff()}
+    kicker={m.error_kicker_app_sign_in_handoff()}
+    message={appLink
+      ? m.text_app_sign_in_handoff_open_app()
+      : m.text_app_sign_in_handoff()}
+    {mark}
+    {actions}
+  />
+{/if}
