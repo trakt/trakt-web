@@ -106,6 +106,7 @@
   .swipe-carousel-nav {
     all: unset;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     flex-shrink: 0;
     display: flex;
     align-items: center;
