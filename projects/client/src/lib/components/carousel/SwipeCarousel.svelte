@@ -68,7 +68,7 @@
     touch-action: pan-y;
     display: flex;
     align-items: center;
-    gap: var(--gap-xs);
+    gap: var(--swipe-carousel-gap, var(--gap-xs));
   }
 
   .swipe-carousel-viewport {
