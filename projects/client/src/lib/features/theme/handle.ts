@@ -2,6 +2,7 @@ import { ThemeEndpoint } from '$lib/features/theme/ThemeEndpoint.ts';
 import { THEME_COOKIE_NAME } from '$lib/features/theme/constants.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
+import { safeJsonParse } from '$lib/utils/json/safeJsonParse.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
 
@@ -18,7 +19,19 @@ export const handle: Handle = async ({ event, resolve }) => {
   setTheme(coerceTheme(event.cookies.get(THEME_COOKIE_NAME)));
 
   if (event.url.pathname.startsWith(ThemeEndpoint.Set)) {
-    const { theme } = await event.request.json() as { theme: Theme };
+    if (event.request.method !== 'POST') {
+      return new Response(null, { status: 405, headers: { allow: 'POST' } });
+    }
+
+    const { theme } = safeJsonParse<Partial<ThemeResponse>>(
+      await event.request.text(),
+      {},
+    );
+
+    if (!theme) {
+      return new Response(null, { status: 400 });
+    }
+
     setTheme(theme);
 
     return new Response(

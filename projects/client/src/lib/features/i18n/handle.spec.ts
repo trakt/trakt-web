@@ -89,6 +89,32 @@ describe('handle: i18n', () => {
     );
   });
 
+  it('should reject a locale request that is not a POST', async () => {
+    const event = mockRequestEvent({
+      url: 'http://localhost/_features/locale/set',
+      request: new Request('http://localhost/_features/locale/set'),
+    });
+
+    const response = await handle({ event, resolve: vi.fn() });
+
+    expect(response.status).toBe(405);
+    expect(response.headers.get('Set-Cookie')).toBeNull();
+  });
+
+  it('should reject an empty locale request', async () => {
+    const event = mockRequestEvent({
+      url: 'http://localhost/_features/locale/set',
+      request: new Request('http://localhost/_features/locale/set', {
+        method: 'POST',
+      }),
+    });
+
+    const response = await handle({ event, resolve: vi.fn() });
+
+    expect(response.status).toBe(400);
+    expect(response.headers.get('Set-Cookie')).toBeNull();
+  });
+
   it('should use the accept-language by default', async () => {
     const html = `<html
                   lang="${LANG_PLACEHOLDER}"
