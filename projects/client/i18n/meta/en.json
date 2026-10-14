@@ -12090,6 +12090,14 @@
       "default": "Movies and episodes you finish on this server.",
       "description": "Explains the Plex watch history sync switch."
     },
+    "label_media_sync_import_history": {
+      "default": "Import past watches",
+      "description": "Label of the switch that decides whether watches from before connecting are imported when linking a Plex server."
+    },
+    "description_media_sync_import_history_off": {
+      "default": "Only watches from today on are added.",
+      "description": "Helper text shown under the import past watches switch while it is off."
+    },
     "label_media_sync_feed_ratings": {
       "default": "Ratings",
       "description": "Title of the switch that syncs Plex ratings to Trakt."

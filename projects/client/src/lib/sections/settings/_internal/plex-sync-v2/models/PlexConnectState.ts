@@ -17,6 +17,7 @@ export type PlexConnectState =
     accounts: MediaSyncAccount[] | null;
     accountId: string | null;
     feeds: MediaSyncFeed[];
+    importHistory: boolean;
   }
   | { step: 'connecting' }
   | { step: 'expired' }
