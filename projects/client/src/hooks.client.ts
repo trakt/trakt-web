@@ -104,6 +104,9 @@ Sentry.init({
     'btn-watch-now',
     'WKWebView API client did not respond',
     'Error invoking postEvent',
+    '__firefox__',
+    'window.ethereum',
+    'Unable to load image data:image/svg+xml',
   ],
   beforeSend(event) {
     if (isServiceWorkerRejection(event)) {
