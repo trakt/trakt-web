@@ -1721,6 +1721,10 @@
       "default": "Crew",
       "description": "Subtitle for the people drawer when crew members are selected. This should be as short and concise as possible."
     },
+    "drawer_meta_info_cast_and_crew": {
+      "default": "Cast & Crew",
+      "description": "Subtitle for the people drawer when searching across cast and crew. This should be as short and concise as possible."
+    },
     "header_main_cast": {
       "default": "Main Cast",
       "description": "Header for the primary cast group in the people drawer. This should be as short and concise as possible."
