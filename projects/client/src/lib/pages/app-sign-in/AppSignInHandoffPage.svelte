@@ -4,19 +4,28 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import ErrorPage from "$lib/pages/errors/ErrorPage.svelte";
   import { extractOS } from "$lib/utils/devices/extractOS.ts";
+  import { isMobileAppleDevice } from "$lib/utils/devices/isMobileAppleDevice.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
+  import { buildAppCallbackDeepLink } from "./_internal/buildAppCallbackDeepLink.ts";
   import { buildAppCallbackIntent } from "./_internal/buildAppCallbackIntent.ts";
 
-  let appIntent = $state<string | null>(null);
+  let appLink = $state<string | null>(null);
+
+  function buildAppLink(callbackUrl: URL): string | null {
+    if (extractOS(globalThis.navigator.userAgent) === "android") {
+      return buildAppCallbackIntent(callbackUrl, UrlBuilder.app.android());
+    }
+
+    if (isMobileAppleDevice()) {
+      return buildAppCallbackDeepLink(callbackUrl);
+    }
+
+    return null;
+  }
 
   onMount(() => {
-    if (extractOS(globalThis.navigator.userAgent) === "android") {
-      appIntent = buildAppCallbackIntent(
-        new URL(globalThis.window.location.href),
-        UrlBuilder.app.android(),
-      );
-    }
+    appLink = buildAppLink(new URL(globalThis.window.location.href));
 
     globalThis.window.history.replaceState(
       null,
@@ -31,12 +40,12 @@
 {/snippet}
 
 {#snippet actions()}
-  {#if appIntent}
-    {@const intent = appIntent}
+  {#if appLink}
+    {@const link = appLink}
     <Button
       variant="primary"
       color="purple"
-      onclick={() => globalThis.window.location.assign(intent)}
+      onclick={() => globalThis.window.location.assign(link)}
       label={m.button_text_open_in_service({ service: "Trakt" })}
     >
       {m.button_text_open_in_service({ service: "Trakt" })}
@@ -67,7 +76,7 @@
 <ErrorPage
   title={m.page_title_app_sign_in_handoff()}
   kicker={m.error_kicker_app_sign_in_handoff()}
-  message={appIntent
+  message={appLink
     ? m.text_app_sign_in_handoff_open_app()
     : m.text_app_sign_in_handoff()}
   {mark}
