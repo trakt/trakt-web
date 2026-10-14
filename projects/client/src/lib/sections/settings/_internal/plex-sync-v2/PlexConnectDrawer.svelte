@@ -1,10 +1,11 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import ServerIcon from "$lib/components/icons/ServerIcon.svelte";
+  import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
+  import TabView from "$lib/components/tabs/TabView.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaSyncFeed } from "$lib/requests/media-sync/models/MediaSyncFeed.ts";
@@ -25,7 +26,7 @@
     onChooseServer,
     onChooseAccount,
     onToggleFeed,
-    onToggleImportHistory,
+    onChooseImportHistory,
     onToggleLibrary,
     onConnect,
     onRestart,
@@ -36,7 +37,7 @@
     onChooseServer: (serverId: string) => void;
     onChooseAccount: (accountId: string) => void;
     onToggleFeed: (feed: MediaSyncFeed) => void;
-    onToggleImportHistory: () => void;
+    onChooseImportHistory: (importHistory: boolean) => void;
     onToggleLibrary: (externalId: string, enabled: boolean) => void;
     onConnect: () => void;
     onRestart: () => void;
@@ -48,6 +49,7 @@
     server: m.header_media_sync_choose_server,
     profile: m.header_media_sync_profiles,
     sync: m.header_media_sync_what_to_sync,
+    history: m.header_media_sync_watch_history,
   };
 
   let chosenStep = $state<PlexConnectStep>("server");
@@ -87,6 +89,7 @@
       isAccountOnly,
       hasProfiles: flow.step === "choosing" &&
         (flow.accounts?.length ?? 0) > 1,
+      hasHistory: flow.step === "choosing" && flow.feeds.includes("history"),
     }),
   );
 
@@ -128,6 +131,17 @@
   }
 </script>
 
+{#snippet historySummary()}
+  {#if flow.step === "choosing"}
+    <p>
+      {flow.importHistory
+        ? m.description_media_sync_history_all()
+        : m.description_media_sync_history_today()}
+      <span class="secondary">{m.description_media_sync_history_always_full()}</span>
+    </p>
+  {/if}
+{/snippet}
+
 <Drawer {onClose} title={m.header_media_sync_connect()} size="auto">
   {#snippet footer()}
     {#if flow.step !== "expired" && flow.step !== "failed"}
@@ -143,7 +157,7 @@
           >
             {m.button_media_sync_back()}
           </Button>
-          {#if step === "sync"}
+          {#if step === steps.at(-1)}
             <Button
               size="small"
               variant="primary"
@@ -274,24 +288,6 @@
               available={isAccountOnly ? ["watchlist"] : undefined}
               onToggle={onToggleFeed}
             />
-            {#if flow.feeds.includes("history")}
-              <SettingsGroupCard variant="bare">
-                <SettingsGroupRow
-                  title={m.label_media_sync_import_history()}
-                  description={flow.importHistory
-                  ? undefined
-                  : m.description_media_sync_import_history_off()}
-                  variant="custom"
-                >
-                  {#snippet icon()}<ClockIcon />{/snippet}
-                  <Switch
-                    label={m.label_media_sync_import_history()}
-                    checked={flow.importHistory}
-                    onclick={onToggleImportHistory}
-                  />
-                </SettingsGroupRow>
-              </SettingsGroupCard>
-            {/if}
             {#if !isAccountOnly}
             <SettingsGroupCard
               variant="bare"
@@ -313,6 +309,55 @@
               {/each}
             </SettingsGroupCard>
             {/if}
+          </div>
+        {:else if flow.step === "choosing" && step === "history"}
+          <div class="history-start">
+            <p class="bold">{m.header_media_sync_history_start()}</p>
+            <div class="timeline">
+              <div class="track">
+                <div class="past" class:is-dimmed={!flow.importHistory}>
+                  <DistributionBar
+                    fraction={1}
+                    color="var(--purple-500)"
+                    fillStyle="flat"
+                    animated={false}
+                    label={m.label_media_sync_history_past()}
+                  />
+                </div>
+                <span class="today-marker"></span>
+                <div class="future">
+                  <DistributionBar
+                    fraction={0}
+                    label={m.label_media_sync_history_from_now()}
+                  />
+                </div>
+              </div>
+              <div class="track-labels small secondary">
+                <span class="past">
+                  {flow.importHistory
+                    ? m.label_media_sync_history_first_play()
+                    : m.label_media_sync_history_skipped()}
+                </span>
+                <span class="future">{m.label_media_sync_history_today()}</span>
+              </div>
+            </div>
+            <TabView
+              value={flow.importHistory ? "all" : "today"}
+              onChange={(value) => onChooseImportHistory(value === "all")}
+              tabs={[
+                {
+                  value: "all",
+                  label: m.tab_text_media_sync_history_all(),
+                  content: historySummary,
+                },
+                {
+                  value: "today",
+                  label: m.tab_text_media_sync_history_today(),
+                  content: historySummary,
+                },
+              ]}
+            />
+            <p class="small secondary">{m.hint_media_sync_history_resync()}</p>
           </div>
         {:else}
           <div class="loading-container">
@@ -337,10 +382,50 @@
   }
 
   .sign-in,
-  .sync-choices {
+  .sync-choices,
+  .history-start {
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+
+  .track,
+  .track-labels {
+    display: flex;
+    gap: var(--gap-xs);
+
+    .past {
+      flex: 7;
+    }
+
+    .future {
+      flex: 3;
+    }
+  }
+
+  .track {
+    align-items: center;
+
+    .past {
+      transition: opacity var(--transition-increment) ease-in-out;
+
+      &.is-dimmed {
+        opacity: 0.3;
+      }
+    }
+  }
+
+  .today-marker {
+    width: var(--ni-4);
+    height: var(--ni-16);
+    border-radius: var(--border-radius-xl);
+    background: var(--purple-500);
   }
 
   .wizard-actions {

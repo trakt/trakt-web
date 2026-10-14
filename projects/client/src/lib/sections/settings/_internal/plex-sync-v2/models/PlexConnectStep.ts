@@ -1,1 +1,6 @@
-export type PlexConnectStep = 'sign-in' | 'server' | 'profile' | 'sync';
+export type PlexConnectStep =
+  | 'sign-in'
+  | 'server'
+  | 'profile'
+  | 'sync'
+  | 'history';

@@ -208,11 +208,11 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     });
   }
 
-  function toggleImportHistory() {
+  function chooseImportHistory(importHistory: boolean) {
     const current = state.value;
     if (current.step !== 'choosing') return;
 
-    state.next({ ...current, importHistory: !current.importHistory });
+    state.next({ ...current, importHistory });
   }
 
   function toggleLibrary(externalId: string, enabled: boolean) {
@@ -263,7 +263,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     chooseServer,
     chooseAccount,
     toggleFeed,
-    toggleImportHistory,
+    chooseImportHistory,
     toggleLibrary,
     connect,
     cancel,
