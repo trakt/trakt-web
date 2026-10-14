@@ -1548,7 +1548,7 @@
   "text_comment_translation_download_metered": "Bu yorumu çevirmek için tek seferlik bir dil indirmesi gerekiyor. Mobil veri kullanıyorsunuz, bu da veri limitinizi tüketebilir.",
   "text_comment_translation_downloading": "Dil indiriliyor…",
   "text_comment_translation_downloading_ai": "Gemini indiriliyor…",
-  "text_comment_translation_downloading_ai_progress": "Gemini indiriliyor… % {progress}",
+  "text_comment_translation_downloading_ai_progress": "Gemini indiriliyor… {progress}",
   "text_connection_status_cancelled_message": "Hazır olduğunuzda {service} ile bağlantı kurabilirsiniz.",
   "text_connection_status_cancelled_title": "Bağlantı iptal edildi",
   "text_connection_status_connected_message": "İzleme geçmişinizi ve puanlarınızı şimdi senkronize ediyoruz.",
