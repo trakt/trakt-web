@@ -46,7 +46,7 @@
 
     gap: var(--gap-xs);
 
-    min-width: var(--ni-66);
+    min-width: var(--ni-64);
 
     --reaction-emoji-box: var(--ni-18);
     height: var(--ni-30);
@@ -54,7 +54,7 @@
     color: var(--color-foreground);
 
     box-sizing: border-box;
-    padding: var(--ni-2) var(--ni-10);
+    padding: var(--ni-2) var(--ni-8);
 
     border-radius: var(--border-radius-xxl);
 

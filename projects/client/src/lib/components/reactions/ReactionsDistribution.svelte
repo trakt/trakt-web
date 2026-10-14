@@ -115,6 +115,7 @@
 
   .trakt-reactions-distribution :global(.trakt-swipe-carousel) {
     --swipe-carousel-nav-overlap: var(--ni-12);
+    --swipe-carousel-gap: var(--gap-xxs);
   }
 
   .trakt-distribution-header {
