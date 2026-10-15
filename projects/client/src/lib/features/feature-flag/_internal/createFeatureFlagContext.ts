@@ -2,13 +2,12 @@ import { safeJsonParse } from '$lib/utils/json/safeJsonParse.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
+import { FEATURE_FLAG_LOCAL_STORAGE_KEY } from '../FeatureFlagLocalStorageKey.ts';
 import type {
   FeatureFlagContext,
   FeatureFlagOverrides,
 } from './FeatureFlagContext.ts';
 import { FEATURE_FLAG_CONTEXT_KEY } from './FeatureFlagContextKey.ts';
-
-export const FEATURE_FLAG_LOCAL_STORAGE_KEY = 'trakt-feature-flags';
 
 export const READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY =
   'trakt-read-preview-features';

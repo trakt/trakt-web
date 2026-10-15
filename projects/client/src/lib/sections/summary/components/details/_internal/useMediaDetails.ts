@@ -12,7 +12,7 @@ import type {
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaNetwork } from '$lib/requests/models/MediaNetwork.ts';
 import type { MediaStudio } from '$lib/requests/models/MediaStudio.ts';
-import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
+import type { ShowEnding, ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { isMaxDate } from '$lib/utils/date/isMaxDate.ts';
 import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
 import { toHumanDayTime } from '$lib/utils/formatting/date/toHumanDayTime.ts';
@@ -63,6 +63,19 @@ function mediaStatus(media: MediaEntry) {
     values: media.year && media.type === 'movie'
       ? undefined
       : [toTranslatedStatus(media.status)],
+  };
+}
+
+const ENDING_LABELS: Record<ShowEnding, () => string> = {
+  concluded: m.translated_value_ending_complete,
+  open: m.translated_value_ending_unresolved,
+};
+
+function showEnding(show: ShowEntry): MediaDetail {
+  return {
+    key: 'ending',
+    title: m.header_ending(),
+    values: show.ending ? [ENDING_LABELS[show.ending]()] : undefined,
   };
 }
 
@@ -254,7 +267,14 @@ type MediaDetail = {
   values?: Array<string | { label: string; link: string }>;
 };
 
-export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
+type MediaDetailsOptions = {
+  isEndingEnabled: boolean;
+};
+
+export function useMediaDetails(
+  props: MediaDetailsProps,
+  { isEndingEnabled }: MediaDetailsOptions,
+): MediaDetail[] {
   if (props.type === 'episode') {
     return [
       episodeAirDate(props.episode),
@@ -273,11 +293,15 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
   const totalRuntimeDetails = props.type === 'show'
     ? [totalRuntime(props.media)]
     : [];
+  const endingDetails = props.type === 'show' && isEndingEnabled
+    ? [showEnding(props.media)]
+    : [];
 
   return [
     ...showAirsDetails,
     mediaAirDate(props.media),
     mediaStatus(props.media),
+    ...endingDetails,
     runtime(props.media),
     ...totalRuntimeDetails,
     networks(props.networks),

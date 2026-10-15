@@ -2,6 +2,7 @@ import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
+import FlagIcon from '$lib/components/icons/FlagIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
@@ -108,5 +109,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     featureLink: () =>
       openFeatureLink(UrlBuilder.mixtape(), m.preview_feature_title_mixtape()),
     audience: 'director',
+  },
+  [FeatureFlag.ShowEnding]: {
+    icon: FlagIcon,
+    title: () => m.preview_feature_title_show_ending(),
+    addedAt: new Date('2026-10-16'),
+    description: () => m.preview_feature_description_show_ending(),
   },
 };

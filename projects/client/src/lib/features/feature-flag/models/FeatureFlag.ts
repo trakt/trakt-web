@@ -8,4 +8,5 @@ export enum FeatureFlag {
   CalendarRedesign = 'calendar-redesign',
   VipCancelFlow = 'vip-cancel-flow',
   Mixtape = 'mixtape',
+  ShowEnding = 'show-ending',
 }

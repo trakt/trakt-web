@@ -1,4 +1,7 @@
+import { FEATURE_FLAG_LOCAL_STORAGE_KEY } from '$lib/features/feature-flag/FeatureFlagLocalStorageKey.ts';
+import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { ShowEnding } from '$lib/requests/models/ShowEntry.ts';
 import { MAX_DATE } from '$lib/utils/constants.ts';
 import { EpisodeSiloMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloMappedMock.ts';
 import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
@@ -251,6 +254,64 @@ describe('MediaDetails', () => {
 
         expect(directorLabel).not.toBeInTheDocument();
         expect(creatorLabel).toBeInTheDocument();
+      });
+    });
+
+    describe('ending', () => {
+      const enableEndingFlag = (enabled: boolean) =>
+        localStorage.setItem(
+          FEATURE_FLAG_LOCAL_STORAGE_KEY,
+          JSON.stringify({ [FeatureFlag.ShowEnding]: enabled }),
+        );
+
+      const withEnding = (ending: ShowEnding | null) =>
+        ({
+          ...defaultProps,
+          media: { ...defaultProps.media, ending },
+        }) as MediaDetailsProps;
+
+      afterEach(() => {
+        localStorage.clear();
+      });
+
+      it('should display Complete for a concluded show when the flag is on', async () => {
+        enableEndingFlag(true);
+        renderComponent(MediaDetails, { props: withEnding('concluded') });
+
+        await waitFor(() => {
+          expect(screen.getByText('Ending')).toBeInTheDocument();
+          expect(screen.getByText('Complete')).toBeInTheDocument();
+        });
+      });
+
+      it('should display Unresolved for an open show when the flag is on', async () => {
+        enableEndingFlag(true);
+        renderComponent(MediaDetails, { props: withEnding('open') });
+
+        await waitFor(() => {
+          expect(screen.getByText('Ending')).toBeInTheDocument();
+          expect(screen.getByText('Unresolved')).toBeInTheDocument();
+        });
+      });
+
+      it('should hide the ending when it is null', async () => {
+        enableEndingFlag(true);
+        renderComponent(MediaDetails, { props: withEnding(null) });
+
+        await waitFor(() => {
+          expect(screen.getByText('Status')).toBeInTheDocument();
+          expect(screen.queryByText('Ending')).not.toBeInTheDocument();
+        });
+      });
+
+      it('should hide the ending when the flag is off', async () => {
+        enableEndingFlag(false);
+        renderComponent(MediaDetails, { props: withEnding('concluded') });
+
+        await waitFor(() => {
+          expect(screen.getByText('Status')).toBeInTheDocument();
+          expect(screen.queryByText('Ending')).not.toBeInTheDocument();
+        });
       });
     });
 
