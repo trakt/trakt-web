@@ -12,6 +12,7 @@
   import LibraryMediaItem from "./_internal/LibraryMediaItem.svelte";
   import LibraryEmptyState from "./_internal/LibraryEmptyState.svelte";
   import LibraryToggler from "./_internal/LibraryToggler.svelte";
+  import LibraryCollectionLimit from "./_internal/LibraryCollectionLimit.svelte";
   import type { Library } from "./models/Library";
   import { useLibraryList } from "./useLibraryList";
 
@@ -32,7 +33,12 @@
 </script>
 
 {#snippet metaInfo()}
-  <ListMetaInfo text={toTranslatedLibrary(activeLibrary)} />
+  <div class="trakt-library-meta">
+    <ListMetaInfo text={toTranslatedLibrary(activeLibrary)} />
+    {#if activeLibrary === "plex"}
+      <LibraryCollectionLimit />
+    {/if}
+  </div>
 {/snippet}
 
 <div class="trakt-library-list">
@@ -68,3 +74,11 @@
     {/snippet}
   </SectionList>
 </div>
+
+<style>
+  .trakt-library-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
+</style>
