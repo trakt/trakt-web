@@ -11,15 +11,17 @@ type SmartListWriteProps = {
   target?: ListTarget;
   filterMap: Record<string, string>;
   baseFilters?: SmartListFilters;
+  privacy?: SmartListWriteRequest['privacy'];
 };
 
 export function toSmartListWrite(
-  { name, type, target, filterMap, baseFilters }: SmartListWriteProps,
+  { name, type, target, filterMap, baseFilters, privacy }: SmartListWriteProps,
 ): SmartListWriteRequest {
   return {
     name: name.trim(),
     source: target as SmartListWriteRequest['source'],
     media_type: toSmartListMediaType(type),
     filters: toSmartListFilters(filterMap, baseFilters),
+    ...(privacy ? { privacy } : {}),
   };
 }

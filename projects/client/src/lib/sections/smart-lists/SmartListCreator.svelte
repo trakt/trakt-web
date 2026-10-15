@@ -4,6 +4,8 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import ListPrivacySwitch from "$lib/sections/lists/components/ListPrivacySwitch.svelte";
+  import { toDefaultListPrivacy } from "$lib/sections/lists/toDefaultListPrivacy.ts";
   import Form from "$lib/components/form/Form.svelte";
   import FormInput from "$lib/components/form/FormInput.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
@@ -16,6 +18,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SmartList } from "$lib/requests/queries/users/smartListQuery";
+  import type { SmartListFilters } from "$lib/requests/models/SmartListFilters.ts";
   import type { UserLimits } from "$lib/requests/models/UserLimits";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { iffy } from "$lib/utils/function/iffy";
@@ -35,6 +38,8 @@
   import { toExtraSmartListFilters } from "./toExtraSmartListFilters.ts";
   import { isSameSmartListFilters } from "./isSameSmartListFilters.ts";
   import { toSmartListExtrasForType } from "./toSmartListExtrasForType.ts";
+  import { fromSmartListExtraParams } from "./fromSmartListExtraParams.ts";
+  import { toSmartListExtraUrl } from "./toSmartListExtraUrl.ts";
   import SmartListMoreFilters from "./_internal/SmartListMoreFilters.svelte";
   import SmartListMatchFilter from "./_internal/SmartListMatchFilter.svelte";
   import type { FilterSettingsResolver } from "$lib/sections/navbar/components/filter/filters/FilterSettingsResolver.ts";
@@ -67,14 +72,21 @@
   const toTarget = (source: SmartList["source"]) =>
     Object.values(ListTarget).find((value) => value === source);
 
+  const toInitialFilterMode = () => {
+    const urlExtras = fromSmartListExtraParams(page.url.searchParams);
+    if (Object.keys(urlExtras).length > 0) return FilterMode.Advanced;
+    if (!list) return FilterMode.Simple;
+
+    return toSmartListFilterMode(list.filters);
+  };
+
   const initial = untrack(() => ({
     name: list?.title ?? "",
     type: list ? toDiscoverMode(list.mediaType) : mode,
     target: list ? toTarget(list.source) : ListTarget.Trending,
-    filterMode: list
-      ? toSmartListFilterMode(list.filters)
-      : FilterMode.Simple,
+    filterMode: toInitialFilterMode(),
     filters: toFilterParams(page.url),
+    privacy: list?.privacy ?? toDefaultListPrivacy($user),
   }));
 
   const initialExtras = untrack(() =>
@@ -82,7 +94,15 @@
   );
 
   let listName = $state(initial.name);
-  let extraFilters = $state(initialExtras);
+  let privacy = $state<SmartList["privacy"]>(initial.privacy);
+  const extraFilters = $derived(fromSmartListExtraParams(page.url.searchParams));
+
+  const setExtraFilters = (filters: SmartListFilters) =>
+    goto(toSmartListExtraUrl({ url: page.url, filters }), {
+      replaceState: true,
+      keepFocus: true,
+      noScroll: true,
+    });
   let type = $state<DiscoverMode>(initial.type);
   let activeMode = $state(initial.filterMode);
   let target = $state<ListTarget | undefined>(initial.target);
@@ -118,6 +138,7 @@
 
   const hasChanges = $derived(
     listName !== initial.name ||
+      privacy !== initial.privacy ||
       type !== initial.type ||
       target !== initial.target ||
       toFilterParams(page.url) !== initial.filters ||
@@ -149,6 +170,7 @@
         target,
         filterMap: $filterMap,
         baseFilters: appliedExtras,
+        privacy,
       })
       : await createList({
         name: listName,
@@ -156,6 +178,7 @@
         target: target ?? ListTarget.Trending,
         filterMap: $filterMap,
         baseFilters: appliedExtras,
+        privacy,
       });
 
     if (!slug) {
@@ -172,6 +195,15 @@
     !isDisabled && listName.trim().length > 0 && (!list || hasChanges),
   );
 </script>
+
+{#snippet privacyToggle()}
+  <ListPrivacySwitch
+    {privacy}
+    hasLegacyState
+    disabled={isDisabled}
+    onChange={(next) => (privacy = next)}
+  />
+{/snippet}
 
 {#snippet headerActions()}
   <Button
@@ -214,11 +246,13 @@
     value={extraFilters.genres_operator}
     disabled={isDisabled}
     onChange={(value) =>
-      (extraFilters = withSmartListFilter({
-        filters: extraFilters,
-        key: "genres_operator",
-        value,
-      }))}
+      setExtraFilters(
+        withSmartListFilter({
+          filters: extraFilters,
+          key: "genres_operator",
+          value,
+        }),
+      )}
   />
 {/snippet}
 
@@ -227,7 +261,7 @@
     filters={extraFilters}
     {type}
     disabled={isDisabled}
-    onChange={(next) => (extraFilters = next)}
+    onChange={setExtraFilters}
   />
 {/snippet}
 
@@ -253,6 +287,7 @@
   <Drawer
     title={list ? m.header_edit_smart_list() : m.header_create_smart_list()}
     metaInfo={recipe}
+    badge={privacyToggle}
     actions={$isMobile ? headerActions : undefined}
     onClose={requestClose}
     size="normal"

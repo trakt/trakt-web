@@ -61,6 +61,7 @@
       listId,
       name: current.name,
       draft: proposed,
+      privacy: current.privacy === "link" ? "private" : current.privacy,
     });
 
     if (!smartSlug) {
