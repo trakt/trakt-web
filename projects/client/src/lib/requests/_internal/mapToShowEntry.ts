@@ -2,7 +2,7 @@ import { MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { type ShowResponse } from '@trakt/api';
-import type { ShowEntry } from '../models/ShowEntry.ts';
+import { ShowEndingSchema, type ShowEntry } from '../models/ShowEntry.ts';
 import { mapToColors } from './mapToColors.ts';
 import { mapToCover } from './mapToCover.ts';
 import { mapToLogo } from './mapToLogo.ts';
@@ -30,6 +30,7 @@ export function mapToShowEntry(
   const episodeCount = show.aired_episodes ?? NaN;
   const totalRuntime = show.total_runtime ?? (runtime * episodeCount);
   const effectiveReleaseDate = new Date(show.first_aired ?? MAX_DATE);
+  const ending = ShowEndingSchema.safeParse(show.ending).data;
 
   return {
     id: show.ids.trakt,
@@ -88,5 +89,6 @@ export function mapToShowEntry(
     homepage: prependHttps(show.homepage),
     socialMedia: mapToSocialMedia(show),
     updatedAt: show.updated_at ? new Date(show.updated_at) : undefined,
+    ...(ending ? { ending } : {}),
   };
 }

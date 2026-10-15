@@ -1,8 +1,8 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { combineLatest, distinctUntilChanged, map } from 'rxjs';
 import { safeLocalStorage } from '../../utils/storage/safeStorage.ts';
-import { FEATURE_FLAG_LOCAL_STORAGE_KEY } from './_internal/createFeatureFlagContext.ts';
 import { getFeatureFlagContext } from './_internal/getFeatureFlagContext.ts';
+import { FEATURE_FLAG_LOCAL_STORAGE_KEY } from './FeatureFlagLocalStorageKey.ts';
 import { FeatureFlag } from './models/FeatureFlag.ts';
 
 export function useFeatureFlag() {

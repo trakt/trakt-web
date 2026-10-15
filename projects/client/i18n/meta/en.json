@@ -13328,6 +13328,26 @@
     "text_mixtape_strip_description": {
       "default": "Pick titles you loved. Get 3 new ones that feel the same.",
       "description": "Short line on the Discover strip that opens the Mixtape page."
+    },
+    "header_ending": {
+      "default": "Ending",
+      "description": "Header for the details row that says whether a show has reached its ending."
+    },
+    "translated_value_ending_complete": {
+      "default": "Complete",
+      "description": "Text for a show whose story has reached its ending. The value is sent back from the Trakt API as concluded."
+    },
+    "translated_value_ending_unresolved": {
+      "default": "Unresolved",
+      "description": "Text for a show that ended or stopped without resolving its story. The value is sent back from the Trakt API as open."
+    },
+    "preview_feature_title_show_ending": {
+      "default": "Show ending",
+      "description": "Product feature name for the preview feature that shows whether a show has a complete ending in its details."
+    },
+    "preview_feature_description_show_ending": {
+      "default": "Shows an Ending row in a show's details: Complete when the story wrapped up, Unresolved when it did not.",
+      "description": "Description of the show ending preview feature."
     }
   }
 }
