@@ -5,6 +5,7 @@ export const MediaSyncConnectionsResponseMock = [
     status: 'active',
     server_id: 'server-mock-1',
     server_name: 'Living Room',
+    webhook_url: 'https://sync.trakt.tv/webhooks/plex/mock-secret',
     account_name: 'mock-user',
     feeds: ['history', 'ratings', 'collection', 'watchlist'],
     libraries: [

@@ -5,14 +5,14 @@
   import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import PlexWebhook from "./_internal/plex/PlexWebhook.svelte";
   import PlexSyncV2 from "./_internal/plex-sync-v2/PlexSyncV2.svelte";
   import SettingsVipUpsell from "./_internal/SettingsVipUpsell.svelte";
+  import SyncWebhooks from "./_internal/webhooks/SyncWebhooks.svelte";
 
   const TAB_PARAM = "tab";
 
-  function toTab(value: string | null): "sync" | "webhook" {
-    return value === "webhook" ? "webhook" : "sync";
+  function toTab(value: string | null): "servers" | "webhooks" {
+    return value === "webhooks" || value === "webhook" ? "webhooks" : "servers";
   }
 
   const activeTab = $derived(toTab(page.url.searchParams.get(TAB_PARAM)));
@@ -29,11 +29,11 @@
   <PlexLogo />
 {/snippet}
 
-{#snippet syncTab()}
+{#snippet serversTab()}
   <PlexSyncV2 />
 {/snippet}
 
-{#snippet webhookTab()}
+{#snippet webhooksTab()}
   <RenderFor audience="free">
     <SettingsVipUpsell
       icon={plexIcon}
@@ -44,7 +44,7 @@
   </RenderFor>
 
   <RenderFor audience="vip">
-    <PlexWebhook />
+    <SyncWebhooks />
   </RenderFor>
 {/snippet}
 
@@ -52,14 +52,14 @@
   value={activeTab}
   tabs={[
     {
-      value: "sync",
-      label: m.tab_text_plex_sync(),
-      content: syncTab,
+      value: "servers",
+      label: m.tab_text_sync_servers(),
+      content: serversTab,
     },
     {
-      value: "webhook",
-      label: m.tab_text_plex_webhook(),
-      content: webhookTab,
+      value: "webhooks",
+      label: m.tab_text_sync_webhooks(),
+      content: webhooksTab,
     },
   ]}
   {onChange}

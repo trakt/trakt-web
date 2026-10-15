@@ -54,8 +54,8 @@ export const settingsPages: ReadonlyArray<SettingsPage> = [
     icon: CastIcon,
   },
   {
-    href: UrlBuilder.settings.plex(),
-    label: m.link_text_plex_settings,
+    href: UrlBuilder.settings.sync(),
+    label: m.link_text_sync_settings,
     icon: PlexLibraryIcon,
   },
   {

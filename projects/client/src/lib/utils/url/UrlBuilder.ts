@@ -343,7 +343,7 @@ export const UrlBuilder = {
     streamingServicesDetail: (id: number | string) =>
       `/settings/streaming-services/${id}`,
     streamingServicesCallback: () => '/callback/streaming',
-    plex: () => '/settings/plex',
+    sync: () => '/settings/sync',
   },
   external: {
     imdb: {

@@ -11,7 +11,7 @@
   <div class="trakt-library-empty-state">
     <p>{m.text_empty_plex_library()}</p>
     <Button
-      href={UrlBuilder.settings.plex()}
+      href={UrlBuilder.settings.sync()}
       label={m.button_connect_plex()}
       size="small"
       style="outline"
