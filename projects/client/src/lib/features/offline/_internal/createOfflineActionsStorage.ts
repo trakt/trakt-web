@@ -1,5 +1,6 @@
 import { error } from '$lib/utils/console/print.ts';
-import { createStore, get, set } from 'idb-keyval';
+import { get, set } from 'idb-keyval';
+import { createIdbStore } from '$lib/utils/storage/createIdbStore.ts';
 import { OfflineActionSchema } from '../models/OfflineAction.ts';
 import type { OfflineActionsStorage } from './OfflineActionsStorage.ts';
 
@@ -15,7 +16,7 @@ const handleError = (e: unknown) => {
 // read so malformed rows from older deploys are dropped instead of breaking
 // the queue.
 export function createOfflineActionsStorage(): OfflineActionsStorage {
-  const store = createStore(DB_NAME, STORE_NAME);
+  const store = createIdbStore(DB_NAME, STORE_NAME);
 
   return {
     read: async () => {

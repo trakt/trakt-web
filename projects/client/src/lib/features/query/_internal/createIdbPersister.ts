@@ -6,7 +6,8 @@ import {
   experimental_createQueryPersister,
   type PersistedQuery,
 } from '@tanstack/query-persist-client-core';
-import { createStore, del, entries, get, set } from 'idb-keyval';
+import { del, entries, get, set } from 'idb-keyval';
+import { createIdbStore } from '$lib/utils/storage/createIdbStore.ts';
 
 const DB_NAME = 'trakt-query';
 const STORE_NAME = 'query-cache';
@@ -38,7 +39,7 @@ async function orUndefined<T>(
 // serializer would coerce them to plain strings/objects and break consumers
 // that depend on their prototypes.
 function createIdbStorage(): AsyncStorage<PersistedQuery> {
-  const store = createStore(DB_NAME, STORE_NAME);
+  const store = createIdbStore(DB_NAME, STORE_NAME);
 
   return {
     getItem: monitor(
