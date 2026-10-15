@@ -5,6 +5,7 @@ import '$lib/polyfills/mapGroupBy.ts';
 import '$lib/polyfills/randomUUID.ts';
 import '$lib/polyfills/toReversed.ts';
 import '$lib/polyfills/toSorted.ts';
+import { toHandledErrorContext } from '$lib/features/errors/toHandledErrorContext.ts';
 import { captureWebviewSession } from '$lib/features/webview/captureWebviewSession.ts';
 import { SentryEndpoint } from '$lib/features/sentry/SentryEndpoint.ts';
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
@@ -14,6 +15,7 @@ import { time } from '$lib/utils/timing/time.ts';
 import * as Sentry from '@sentry/sveltekit';
 import { handleErrorWithSentry } from '@sentry/sveltekit';
 import type { ErrorEvent as SentryErrorEvent } from '@sentry/sveltekit';
+import type { HandleClientError } from '@sveltejs/kit';
 
 // Must run before Sentry.init and before SvelteKit reads `location`: strips the
 // WebView params (slurm VIP token, standalone flag) from the URL and latches
@@ -266,8 +268,14 @@ if (typeof window !== 'undefined') {
 }
 
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
-export const handleError = handleErrorWithSentry(
+const sentryHandleError = handleErrorWithSentry(
   ({ error }: { error: unknown }) => {
     reloadOnceForStaleDeploy(error);
   },
 );
+
+export const handleError: HandleClientError = (input) =>
+  Sentry.withScope((scope) => {
+    scope.setContext('sveltekit_error', toHandledErrorContext(input));
+    return sentryHandleError(input);
+  });
