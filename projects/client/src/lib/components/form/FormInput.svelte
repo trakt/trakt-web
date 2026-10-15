@@ -39,7 +39,7 @@
       // preventScroll so autofocus never scrolls the focused field into view —
       // inside a scroll container (e.g. a drawer) that would shift content under
       // sticky headers and clip the first row.
-      inputElement.focus({ preventScroll: true });
+      inputElement?.focus({ preventScroll: true });
     });
   });
 </script>
