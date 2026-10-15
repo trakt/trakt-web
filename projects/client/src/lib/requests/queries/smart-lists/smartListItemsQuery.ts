@@ -35,10 +35,7 @@ const smartListItemsRequest = (
 
 export const smartListItemsQuery = defineInfiniteQuery({
   key: 'smartListItems',
-  invalidations: [
-    InvalidateAction.SmartList.Edited,
-    InvalidateAction.SmartList.Deleted,
-  ],
+  invalidations: [InvalidateAction.SmartList.Edited],
   dependencies: (
     params: SmartListItemsParams,
   ) => [
