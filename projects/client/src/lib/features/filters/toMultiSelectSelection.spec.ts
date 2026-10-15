@@ -34,4 +34,18 @@ describe('util: toMultiSelectSelection', () => {
       excluded: ['pg-13'],
     });
   });
+
+  it('should drop repeated values', () => {
+    expect(toMultiSelectSelection('action,action,-comedy,-comedy')).toEqual({
+      included: ['action'],
+      excluded: ['comedy'],
+    });
+  });
+
+  it('should keep the first state of a value that is both included and excluded', () => {
+    expect(toMultiSelectSelection('action,-action,-drama,drama')).toEqual({
+      included: ['action'],
+      excluded: ['drama'],
+    });
+  });
 });
