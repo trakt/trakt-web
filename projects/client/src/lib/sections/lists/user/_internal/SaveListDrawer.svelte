@@ -7,8 +7,9 @@
   import FormInput from "$lib/components/form/FormInput.svelte";
   import SortDirectionIcon from "$lib/components/icons/SortDirectionIcon.svelte";
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
-  import Switch from "$lib/components/toggles/Switch.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
+  import ListPrivacySwitch from "$lib/sections/lists/components/ListPrivacySwitch.svelte";
+  import { toDefaultListPrivacy } from "$lib/sections/lists/toDefaultListPrivacy.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ListPrivacy } from "$lib/requests/models/ListPrivacy";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
@@ -20,8 +21,6 @@
   import type { SortDirection } from "../models/SortDirection.ts";
   import { useSaveList } from "./useSaveList";
 
-  // FIXME: remove when we properly deal with other privacy options
-  const SUPPORTED_PRIVACY: ListPrivacy[] = ["public", "private"];
 
   type CreateListProps = {
     type: "create";
@@ -47,7 +46,7 @@
       return {
         name: "",
         description: "",
-        privacy: ($user?.isPrivate ? "private" : "public") as ListPrivacy,
+        privacy: toDefaultListPrivacy($user) as ListPrivacy,
         sortBy: undefined as string | undefined,
         sortHow: undefined as SortDirection | undefined,
       };
@@ -141,17 +140,11 @@
   classList="trakt-save-list-drawer"
 >
   {#snippet badge()}
-    <div class="trakt-list-privacy-toggle">
-      <span class="secondary">{m.text_private()}</span>
-      <Switch
-        label={m.switch_label_toggle_list_privacy()}
-        checked={$privacy === "private"}
-        indeterminate={!SUPPORTED_PRIVACY.includes($privacy)}
-        onclick={() => {
-          privacy.set($privacy === "private" ? "public" : "private");
-        }}
-      />
-    </div>
+    <ListPrivacySwitch
+      privacy={$privacy}
+      hasLegacyState
+      onChange={(next) => privacy.set(next)}
+    />
   {/snippet}
 
   <Form
@@ -253,11 +246,4 @@
     }
   }
 
-  .trakt-list-privacy-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    gap: var(--gap-xs);
-  }
 </style>

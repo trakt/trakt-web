@@ -1,3 +1,4 @@
+import type { SmartListWriteRequest } from '@trakt/api';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
@@ -16,6 +17,7 @@ type UpdateListProps = {
   target?: ListTarget;
   filterMap: Record<string, string>;
   baseFilters: SmartListFilters;
+  privacy?: SmartListWriteRequest['privacy'];
 };
 
 function toUpdateBody({ slug: _slug, ...props }: UpdateListProps) {

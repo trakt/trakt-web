@@ -1,3 +1,4 @@
+import type { SmartListWriteRequest } from '@trakt/api';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -10,9 +11,12 @@ type ConvertListProps = {
   listId: string;
   name: string;
   draft: SmartListDraft;
+  privacy: SmartListWriteRequest['privacy'];
 };
 
-function toConvertRequest({ listId, name, draft }: ConvertListProps) {
+function toConvertRequest(
+  { listId, name, draft, privacy }: ConvertListProps,
+) {
   return convertToSmartListRequest({
     listId,
     body: {
@@ -20,6 +24,7 @@ function toConvertRequest({ listId, name, draft }: ConvertListProps) {
       source: draft.source,
       media_type: draft.mediaType,
       filters: draft.filters,
+      privacy,
     },
   });
 }

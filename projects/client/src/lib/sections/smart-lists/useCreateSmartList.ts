@@ -1,3 +1,4 @@
+import type { SmartListWriteRequest } from '@trakt/api';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -15,6 +16,7 @@ type CreateListProps = {
   target: ListTarget;
   filterMap: Record<string, string>;
   baseFilters?: SmartListFilters;
+  privacy?: SmartListWriteRequest['privacy'];
 };
 
 export function useCreateSmartList() {
