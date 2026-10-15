@@ -2,6 +2,7 @@ import {
   type AvailableLanguage,
   getIntlLocale,
 } from '$lib/features/i18n/index.ts';
+import { toUnitFormatter } from '$lib/utils/formatting/number/toUnitFormatter.ts';
 
 export type Duration = {
   days: number;
@@ -27,29 +28,6 @@ const FALLBACK_UNIT_SUFFIX = {
 } as const;
 
 type FormattedUnit = keyof typeof FALLBACK_UNIT_SUFFIX;
-
-type CreateUnitFormatterProps = {
-  locale: string;
-  unit: FormattedUnit;
-  unitDisplay: Intl.NumberFormatOptions['unitDisplay'];
-};
-
-function createUnitFormatter({
-  locale,
-  unit,
-  unitDisplay,
-}: CreateUnitFormatterProps): { format: (value: number) => string } {
-  try {
-    return new Intl.NumberFormat(locale, { style: 'unit', unit, unitDisplay });
-  } catch {
-    const decimal = new Intl.NumberFormat(locale);
-
-    return {
-      format: (value) =>
-        `${decimal.format(value)}${FALLBACK_UNIT_SUFFIX[unit]}`,
-    };
-  }
-}
 
 export function toHumanDuration({
   days = 0,
@@ -89,24 +67,18 @@ export function toHumanDuration({
   const { days: d, hours: h, minutes: m } = getDuration();
 
   const intlLocale = getIntlLocale(locale);
-  const formatters = {
-    day: createUnitFormatter({ locale: intlLocale, unit: 'day', unitDisplay }),
-    hour: createUnitFormatter({
+  const toFormatter = (unit: FormattedUnit) =>
+    toUnitFormatter({
       locale: intlLocale,
-      unit: 'hour',
-      unitDisplay,
-    }),
-    minute: createUnitFormatter({
-      locale: intlLocale,
-      unit: 'minute',
-      unitDisplay,
-    }),
-  };
+      unit,
+      suffix: FALLBACK_UNIT_SUFFIX[unit],
+      options: { unitDisplay },
+    });
 
   const parts = [
-    d > 0 && formatters.day.format(d),
-    h > 0 && formatters.hour.format(h),
-    m > 0 && formatters.minute.format(m),
+    d > 0 && toFormatter('day')(d),
+    h > 0 && toFormatter('hour')(h),
+    m > 0 && toFormatter('minute')(m),
   ].filter(Boolean);
 
   return parts.join(separator);

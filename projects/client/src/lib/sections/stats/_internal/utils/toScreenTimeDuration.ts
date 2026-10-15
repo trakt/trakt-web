@@ -3,6 +3,7 @@ import {
   getIntlLocale,
 } from '$lib/features/i18n/index.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
+import { toUnitFormatter } from '$lib/utils/formatting/number/toUnitFormatter.ts';
 
 export function toScreenTimeDuration(
   minutes: number,
@@ -14,9 +15,10 @@ export function toScreenTimeDuration(
     return duration;
   }
 
-  return new Intl.NumberFormat(getIntlLocale(language), {
-    style: 'unit',
+  return toUnitFormatter({
+    locale: getIntlLocale(language),
     unit: 'minute',
-    unitDisplay: 'narrow',
-  }).format(0);
+    suffix: 'm',
+    options: { unitDisplay: 'narrow' },
+  })(0);
 }

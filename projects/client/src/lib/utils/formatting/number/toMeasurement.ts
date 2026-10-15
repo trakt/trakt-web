@@ -1,4 +1,5 @@
 import { getIntlLocale } from '$lib/features/i18n/index.ts';
+import { toUnitFormatter } from './toUnitFormatter.ts';
 import type {
   AvailableLanguage,
   AvailableLocale,
@@ -25,16 +26,14 @@ export function toMeasurement(
   const selectedUnit = isMetric ? 'meter' : 'foot';
   const convertedValue = isMetric ? value : metersToFeet(value);
 
-  const formatter = new Intl.NumberFormat(
-    getIntlLocale(locale as AvailableLanguage),
-    {
-      style: 'unit',
-      unit: selectedUnit,
+  return toUnitFormatter({
+    locale: getIntlLocale(locale as AvailableLanguage),
+    unit: selectedUnit,
+    suffix: isMetric ? ' m' : ' ft',
+    options: {
       unitDisplay: 'short',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     },
-  );
-
-  return formatter.format(convertedValue);
+  })(convertedValue);
 }
