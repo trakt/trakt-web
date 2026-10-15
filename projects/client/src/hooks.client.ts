@@ -108,6 +108,7 @@ Sentry.init({
     'window.ethereum',
     'Unable to load image data:image/svg+xml',
   ],
+  denyUrls: [/\/plyr(\.[a-z]+)*\.js/, /www-widgetapi\.js/],
   beforeSend(event) {
     if (isServiceWorkerRejection(event)) {
       return null;
