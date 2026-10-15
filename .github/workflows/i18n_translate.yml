@@ -9,6 +9,7 @@ permissions:
 jobs:
   localize:
     name: The Translation Pit (Localize)
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     concurrency:
       group: localize
@@ -89,9 +90,33 @@ jobs:
           skip_untranslated_strings: true
           export_only_approved: true
           create_pull_request: false
-          localization_branch_name: main
-          commit_message: 'feat(i18n): update translations'
+          push_translations: false
         env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.9.4
+
+      - name: Audit Translation Placeholders
+        working-directory: projects/client
+        run: 'deno task i18n:check'
+
+      - name: Commit Translations
+        run: |
+          set -euo pipefail
+          git config user.name 'Crowdin Bot'
+          git config user.email 'support+bot@crowdin.com'
+          git add projects/client/i18n/messages
+
+          if git diff --cached --quiet; then
+            echo 'No translation changes.'
+            exit 0
+          fi
+
+          git commit -m 'feat(i18n): update translations'
+          git pull --rebase origin main
+          (cd projects/client && deno task i18n:check)
+          git push origin HEAD:main
