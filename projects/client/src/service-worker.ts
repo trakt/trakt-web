@@ -1,6 +1,7 @@
 import { AssetPattern } from '$worker/AssetPattern.ts';
 import { Domain } from '$worker/Domain.ts';
 import { isCacheableDocument } from '$worker/isCacheableDocument.ts';
+import { isOpaqueImageRequest } from '$worker/isOpaqueImageRequest.ts';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
 import { CacheExpiration, ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute } from 'workbox-precaching';
@@ -305,12 +306,9 @@ registerRoute(
 
 // Images
 registerRoute(
-  ({ url }) => Domain.images.includes(url.hostname),
+  ({ request }) => isOpaqueImageRequest(request),
   new CacheFirst({
     cacheName: CacheKey.images,
     plugins: [expiration(time.days(30), 666)],
-    fetchOptions: {
-      mode: 'no-cors',
-    },
   }),
 );
