@@ -10171,33 +10171,9 @@
       "default": "Activities",
       "description": "Text for plural social activities label."
     },
-    "link_text_plex_settings": {
-      "default": "Plex",
-      "description": "Text for the link to the Plex sync settings page."
-    },
     "description_plex_sync": {
       "default": "Connect your Plex account to sync watch history, ratings, and collections with Trakt.",
       "description": "Description for the Plex sync settings section."
-    },
-    "tab_text_plex_sync": {
-      "default": "Sync",
-      "description": "Label for the tab that shows Plex sync settings."
-    },
-    "tab_text_plex_webhook": {
-      "default": "Webhook",
-      "description": "Label for the tab that shows the Plex webhook URL."
-    },
-    "description_plex_webhook": {
-      "default": "Automatically scrobble what you're watching, rating, and adding to your library in real time.",
-      "description": "Description explaining what the Plex webhook does."
-    },
-    "label_plex_webhook_url": {
-      "default": "Webhook URL",
-      "description": "Label for the copyable Plex webhook URL field."
-    },
-    "label_plex_webhook_connect_hint": {
-      "default": "Connect your Plex account to get your webhook URL.",
-      "description": "Hint shown in the webhook tab when the user has no connected Plex account."
     },
     "header_plex_sync_free_limits": {
       "default": "Plex Sync on the free plan",
@@ -10214,78 +10190,6 @@
     "description_plex_vip_upsell_webhook": {
       "default": "Upgrade to VIP to automatically scrobble what you're watching in real time with Plex webhooks.",
       "description": "Body copy on the upsell card shown to free members in the Plex webhook tab."
-    },
-    "header_plex_home_users": {
-      "default": "Plex Home Users",
-      "description": "Header for the Plex home users section in webhook settings."
-    },
-    "label_plex_home_users": {
-      "default": "Usernames",
-      "description": "Row label for the Plex home usernames setting."
-    },
-    "description_plex_home_users": {
-      "default": "Your own plays always sync. Add other Plex Home usernames to sync theirs too.",
-      "description": "Description explaining that the account owner's plays always sync, and listing additional Plex Home usernames syncs their activity too."
-    },
-    "validation_text_plex_home_users": {
-      "default": "Enter a comma-separated list of usernames, without spaces.",
-      "description": "Validation error shown when the Plex home usernames field is not a comma-separated list without spaces."
-    },
-    "button_label_change_plex_home_users": {
-      "default": "Change Plex home users",
-      "description": "Aria-label for the button that opens the Plex home users editor."
-    },
-    "header_plex_scrobbler_settings": {
-      "default": "Scrobbler Settings",
-      "description": "Header for the section that shows real-time scrobbler toggle settings for Plex."
-    },
-    "description_plex_scrobbler_settings": {
-      "default": "These settings control what gets scrobbled to Trakt in real time.",
-      "description": "Description under the Plex scrobbler settings section header."
-    },
-    "button_plex_toggle_scrobble": {
-      "default": "Scrobble",
-      "description": "Pill toggle button label for the real-time scrobble option in Plex scrobbler settings."
-    },
-    "button_label_plex_scrobble_movie_watching": {
-      "default": "Toggle scrobbling for movies",
-      "description": "Aria-label for the button that toggles real-time scrobbling for movies."
-    },
-    "button_label_plex_scrobble_movie_watched": {
-      "default": "Toggle watched scrobbling for movies",
-      "description": "Aria-label for the button that toggles watched scrobbling for movies."
-    },
-    "button_label_plex_scrobble_movie_rated": {
-      "default": "Toggle ratings scrobbling for movies",
-      "description": "Aria-label for the button that toggles ratings scrobbling for movies."
-    },
-    "button_label_plex_scrobble_movie_library": {
-      "default": "Toggle library scrobbling for movies",
-      "description": "Aria-label for the button that toggles library scrobbling for movies."
-    },
-    "button_label_plex_scrobble_show_rated": {
-      "default": "Toggle ratings scrobbling for shows",
-      "description": "Aria-label for the button that toggles ratings scrobbling for shows."
-    },
-    "button_label_plex_scrobble_season_rated": {
-      "default": "Toggle ratings scrobbling for seasons",
-      "description": "Aria-label for the button that toggles ratings scrobbling for seasons."
-    },
-    "button_label_plex_scrobble_episode_watching": {
-      "default": "Toggle scrobbling for episodes",
-      "description": "Aria-label for the button that toggles real-time scrobbling for episodes."
-    },
-    "button_label_plex_scrobble_episode_watched": {
-      "default": "Toggle watched scrobbling for episodes",
-      "description": "Aria-label for the button that toggles watched scrobbling for episodes."
-    },
-    "button_label_plex_scrobble_episode_rated": {
-      "default": "Toggle ratings scrobbling for episodes",
-      "description": "Aria-label for the button that toggles ratings scrobbling for episodes."
-    },
-    "button_label_plex_scrobble_episode_library": {
-      "default": "Toggle library scrobbling for episodes",
-      "description": "Aria-label for the button that toggles library scrobbling for episodes."
     },
     "label_plex_connection": {
       "default": "Connection",
@@ -10380,10 +10284,6 @@
     "description_plex_vip_upsell_add_server": {
       "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers, refreshed every hour.",
       "description": "Body copy on the upsell card shown when a free member tries to add a second Plex server."
-    },
-    "button_plex_toggle_watched": {
-      "default": "Watched",
-      "description": "Pill toggle button label for the watched sync option in Plex sync settings."
     },
     "button_text_install": {
       "default": "Install",
@@ -13039,6 +12939,50 @@
     "button_label_vip_cancel_support": {
       "default": "Contact support to cancel",
       "description": "Accessible label of the contact support button on the VIP cancel page."
+    },
+    "link_text_sync_settings": {
+      "default": "Sync",
+      "description": "Text for the settings menu link to the Sync page, which holds media server sync and webhook settings."
+    },
+    "tab_text_sync_servers": {
+      "default": "Servers",
+      "description": "Label for the tab that lists synced media servers."
+    },
+    "tab_text_sync_webhooks": {
+      "default": "Webhooks",
+      "description": "Label for the tab that shows webhook addresses for live progress."
+    },
+    "header_sync_webhooks_live_progress": {
+      "default": "Live progress",
+      "description": "Heading above the media server webhook cards."
+    },
+    "description_sync_webhooks_live_progress": {
+      "default": "Your media server tells Trakt what you're watching right now and where you paused. Watches still come from sync.",
+      "description": "Intro text under the live progress heading."
+    },
+    "label_media_server_plex": {
+      "default": "Plex",
+      "description": "Brand name of the Plex media server, used as a card title."
+    },
+    "label_media_server_jellyfin": {
+      "default": "Jellyfin",
+      "description": "Brand name of the Jellyfin media server, used as a card title."
+    },
+    "label_sync_webhooks_server_count": {
+      "default": "{count} servers",
+      "description": "Pill on the Plex webhook card showing how many Plex servers the address covers. {count} is the number of servers."
+    },
+    "label_sync_webhooks_soon": {
+      "default": "Soon",
+      "description": "Pill on a webhook card for a media server that is not supported yet."
+    },
+    "description_sync_webhooks_plex": {
+      "default": "Paste this address once in Plex › Settings › Webhooks. It covers {servers}. Needs Plex Pass.",
+      "description": "Instructions on the Plex webhook card. {servers} is a comma separated list of the user's Plex server names."
+    },
+    "description_sync_webhooks_jellyfin": {
+      "default": "Live progress through the Jellyfin Webhook plugin is on the way.",
+      "description": "Text on the Jellyfin webhook card explaining the feature is coming."
     }
   }
 }

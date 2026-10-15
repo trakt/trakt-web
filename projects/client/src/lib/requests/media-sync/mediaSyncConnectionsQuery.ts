@@ -21,6 +21,7 @@ export const MediaSyncConnectionResponseSchema = z.object({
   ]),
   server_id: z.string(),
   server_name: z.string().nullable(),
+  webhook_url: z.string().nullish(),
   account_name: z.string().nullable(),
   feeds: z.array(MediaSyncFeedSchema),
   libraries: z.array(z.object({
@@ -51,6 +52,7 @@ export function mapToMediaSyncConnection(
     status: connection.status,
     serverId: connection.server_id,
     serverName: connection.server_name,
+    webhookUrl: connection.webhook_url ?? null,
     accountName: connection.account_name,
     feeds: connection.feeds,
     libraries: connection.libraries.map((library) => ({

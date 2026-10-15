@@ -22,6 +22,7 @@ export const MediaSyncConnectionSchema = z.object({
   ]),
   serverId: z.string(),
   serverName: z.string().nullable(),
+  webhookUrl: z.string().nullable(),
   accountName: z.string().nullable(),
   feeds: z.array(MediaSyncFeedSchema),
   libraries: z.array(MediaSyncLibrarySchema),
