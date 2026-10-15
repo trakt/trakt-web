@@ -12054,6 +12054,14 @@
       "default": "Import past watches from this server",
       "description": "Accessible label of the button that imports past watches for a Plex server."
     },
+    "label_library_collection_limit": {
+      "default": "Collection limit",
+      "description": "Small tag next to the Plex library name on your profile when your free collection limit stopped new items from syncing."
+    },
+    "description_library_collection_limit": {
+      "default": "Some items from {servers} aren't in your Trakt collection yet. Free accounts stop at the collection limit; VIP collects everything.",
+      "description": "Popover text under the collection limit tag on the profile library. {servers} is a comma separated list of Plex server names."
+    },
     "hint_media_sync_history_resync": {
       "default": "You can import past watches later from the server's Manage menu.",
       "description": "Small hint under the watch history choice."
