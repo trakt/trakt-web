@@ -1,4 +1,5 @@
-import { createStore, get, set, type UseStore } from 'idb-keyval';
+import { get, set, type UseStore } from 'idb-keyval';
+import { createIdbStore } from '$lib/utils/storage/createIdbStore.ts';
 
 const DB_NAME = 'trakt-auth';
 const STORE_NAME = 'auth-marker';
@@ -14,7 +15,7 @@ function getStore(): UseStore | null {
   }
 
   try {
-    store ??= createStore(DB_NAME, STORE_NAME);
+    store ??= createIdbStore(DB_NAME, STORE_NAME);
     return store;
   } catch {
     return null;
