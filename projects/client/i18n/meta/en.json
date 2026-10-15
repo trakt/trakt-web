@@ -10180,7 +10180,7 @@
       "description": "Heading on the tier limits card shown to free members in the Plex sync tab."
     },
     "description_plex_sync_free_limits": {
-      "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers, refreshed every hour.",
+      "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers every hour, with live progress from the Plex webhook (needs Plex Pass).",
       "description": "Body copy explaining the free vs VIP Plex Sync limits (server count and sync frequency) on the card shown to free members in the Plex sync tab."
     },
     "header_plex_vip_upsell_webhook": {
@@ -10282,7 +10282,7 @@
       "description": "Heading on the upsell card shown when a free member tries to add a second Plex server."
     },
     "description_plex_vip_upsell_add_server": {
-      "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers, refreshed every hour.",
+      "default": "Free accounts sync 1 Plex server once a day. Upgrade to VIP to sync unlimited servers every hour, with live progress from the Plex webhook (needs Plex Pass).",
       "description": "Body copy on the upsell card shown when a free member tries to add a second Plex server."
     },
     "button_text_install": {
