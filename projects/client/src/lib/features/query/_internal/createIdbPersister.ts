@@ -8,6 +8,8 @@ import {
 } from '@tanstack/query-persist-client-core';
 import { del, entries, get, set } from 'idb-keyval';
 import { createIdbStore } from '$lib/utils/storage/createIdbStore.ts';
+import * as Sentry from '@sentry/sveltekit';
+import { toPersistedQueryName } from './toPersistedQueryName.ts';
 
 const DB_NAME = 'trakt-query';
 const STORE_NAME = 'query-cache';
@@ -16,6 +18,14 @@ const MAX_AGE_MS = time.days(1);
 // Bump on any change to the persisted format. Stale entries are evicted on
 // read via the persister's buster check.
 const BUSTER = 'v3';
+
+function trackStorage(action: 'restore' | 'persist', key: string) {
+  Sentry.addBreadcrumb({
+    category: 'query.persister',
+    message: `${action} ${toPersistedQueryName(key)}`,
+    level: 'info',
+  });
+}
 
 const handleError = (e: unknown) => {
   error('IDB Persister Error:', e);
@@ -43,12 +53,17 @@ function createIdbStorage(): AsyncStorage<PersistedQuery> {
 
   return {
     getItem: monitor(
-      (key: string) => orUndefined(() => get<PersistedQuery>(key, store)),
+      (key: string) => {
+        trackStorage('restore', key);
+        return orUndefined(() => get<PersistedQuery>(key, store));
+      },
       'IDB Restorer',
     ),
     setItem: monitor(
-      (key: string, value: PersistedQuery) =>
-        orUndefined(() => set(key, value, store)),
+      (key: string, value: PersistedQuery) => {
+        trackStorage('persist', key);
+        return orUndefined(() => set(key, value, store));
+      },
       'IDB Persister',
     ),
     removeItem: (key: string) => orUndefined(() => del(key, store)),

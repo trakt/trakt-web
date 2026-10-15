@@ -9,6 +9,7 @@ const idb = vi.hoisted(() => ({
 }));
 
 vi.mock('idb-keyval', () => idb);
+vi.mock('@sentry/sveltekit', () => ({ addBreadcrumb: vi.fn() }));
 
 // What a storage-partitioned or locked-down context throws. `createStore` is
 // lazy, so this surfaces synchronously out of the idb-keyval call rather than
