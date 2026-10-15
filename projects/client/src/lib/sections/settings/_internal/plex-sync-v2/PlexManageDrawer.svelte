@@ -2,6 +2,7 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import DeleteIcon from "$lib/components/icons/DeleteIcon.svelte";
   import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
@@ -20,6 +21,7 @@
   import PlexProfilePickerSkeleton from "./PlexProfilePickerSkeleton.svelte";
   import { toManageChanges } from "./toManageChanges.ts";
   import { useManageServer } from "./useManageServer.ts";
+  import { useServerActions } from "./useServerActions.ts";
 
   const {
     connection,
@@ -33,6 +35,17 @@
     iffy(() => connection.id),
   );
   const { confirm } = useConfirm();
+  const { importPastWatches } = useServerActions(iffy(() => connection.id));
+
+  async function importPast() {
+    hasWriteFailed = false;
+    const imported = await importPastWatches().catch(() => false);
+    if (imported) {
+      onClose();
+      return;
+    }
+    hasWriteFailed = true;
+  }
 
   const isAccountOnly = $derived(
     connection.serverId === PLEX_ACCOUNT_SERVER_ID,
@@ -163,6 +176,27 @@
       available={isAccountOnly ? ["watchlist"] : undefined}
       onToggle={toggleFeed}
     />
+
+    {#if needsLibraries && connection.feeds.includes("history")}
+      <SettingsGroupCard variant="bare">
+        <SettingsGroupRow
+          title={m.label_media_sync_import_past_watches()}
+          description={m.description_media_sync_import_past_watches()}
+          variant="custom"
+        >
+          {#snippet icon()}<ClockIcon />{/snippet}
+          <Button
+            size="small"
+            color="purple"
+            label={m.button_label_media_sync_import_past_watches()}
+            disabled={$isBusy || hasChanges}
+            onclick={importPast}
+          >
+            {m.button_text_media_sync_import_past_watches()}
+          </Button>
+        </SettingsGroupRow>
+      </SettingsGroupCard>
+    {/if}
 
     {#if needsLibraries}
     <SettingsGroupCard variant="bare" title={m.header_media_sync_libraries()}>
