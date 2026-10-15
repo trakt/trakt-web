@@ -12038,8 +12038,24 @@
       "default": "Ratings, collection and watchlist always come over in full.",
       "description": "Sentence after the history summary explaining other feeds are not affected by the choice."
     },
+    "label_media_sync_import_past_watches": {
+      "default": "Import past watches",
+      "description": "Title of the action in the Plex server Manage drawer that imports the full watch history."
+    },
+    "description_media_sync_import_past_watches": {
+      "default": "Brings over everything you've watched on this server. Runs a full sync.",
+      "description": "Explains the import past watches action in the Plex server Manage drawer."
+    },
+    "button_text_media_sync_import_past_watches": {
+      "default": "Import",
+      "description": "Button text that starts importing past watches for a Plex server."
+    },
+    "button_label_media_sync_import_past_watches": {
+      "default": "Import past watches from this server",
+      "description": "Accessible label of the button that imports past watches for a Plex server."
+    },
     "hint_media_sync_history_resync": {
-      "default": "Resync brings over your past watches anytime.",
+      "default": "You can import past watches later from the server's Manage menu.",
       "description": "Small hint under the watch history choice."
     },
     "label_media_sync_feed_ratings": {
