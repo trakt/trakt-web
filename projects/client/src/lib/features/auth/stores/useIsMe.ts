@@ -11,7 +11,7 @@ export function useIsMe(slug: string) {
       [user, isAuthorized],
     ).pipe(
       map(([$user, $isAuthorized]) =>
-        $isAuthorized && (slug === 'me' || slug === $user.slug)
+        $isAuthorized && (slug === 'me' || slug === $user?.slug)
       ),
     ),
   };
