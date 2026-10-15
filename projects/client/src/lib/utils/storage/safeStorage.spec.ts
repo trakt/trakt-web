@@ -71,4 +71,43 @@ describe('safeStorage', () => {
     expect(safeLocalStorage.getItem('any')).toBeNull();
     expect(safeSessionStorage.getItem('any')).toBeNull();
   });
+
+  it('keeps working when the storage itself throws on access', async () => {
+    vi.resetModules();
+    vi.doMock('$app/environment', () => ({ browser: true }));
+
+    const failure = () => {
+      throw new Error('NS_ERROR_FAILURE');
+    };
+    const originalDescriptor = Object.getOwnPropertyDescriptor(
+      globalThis,
+      'localStorage',
+    );
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      value: {
+        get length() {
+          return failure();
+        },
+        key: failure,
+        getItem: failure,
+        setItem: failure,
+        removeItem: failure,
+        clear: failure,
+      },
+      writable: true,
+    });
+
+    const { safeLocalStorage } = await import('./safeStorage.ts');
+
+    expect(safeLocalStorage.getItem('test-key')).toBeNull();
+    expect(safeLocalStorage.key(0)).toBeNull();
+    expect(safeLocalStorage.length).toBe(0);
+    expect(() => safeLocalStorage.removeItem('test-key')).not.toThrow();
+    expect(() => safeLocalStorage.clear()).not.toThrow();
+
+    if (originalDescriptor) {
+      Object.defineProperty(globalThis, 'localStorage', originalDescriptor);
+    }
+  });
 });

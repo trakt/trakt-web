@@ -10,22 +10,25 @@ const Noop_storage: Storage = {
   clear: NOOP_FN,
 };
 
+function attempt<T>(operation: () => T, fallback: T): T {
+  try {
+    return operation();
+  } catch {
+    return fallback;
+  }
+}
+
 function wrapStorage(storage: Storage): Storage {
   return {
     get length() {
-      return storage.length;
+      return attempt(() => storage.length, 0);
     },
-    key: (index) => storage.key(index),
-    getItem: (key) => storage.getItem(key),
-    setItem: (key, value) => {
-      try {
-        storage.setItem(key, value);
-      } catch {
-        // QuotaExceededError: storage full or disabled
-      }
-    },
-    removeItem: (key) => storage.removeItem(key),
-    clear: () => storage.clear(),
+    key: (index) => attempt(() => storage.key(index), null),
+    getItem: (key) => attempt(() => storage.getItem(key), null),
+    setItem: (key, value) =>
+      attempt(() => storage.setItem(key, value), undefined),
+    removeItem: (key) => attempt(() => storage.removeItem(key), undefined),
+    clear: () => attempt(() => storage.clear(), undefined),
   };
 }
 
