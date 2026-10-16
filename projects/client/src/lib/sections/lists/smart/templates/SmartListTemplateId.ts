@@ -1,0 +1,17 @@
+export type SmartListTemplateId =
+  | 'hidden-gems'
+  | 'critics-darlings'
+  | 'finished-stories'
+  | 'short-and-sweet'
+  | 'time-twisters'
+  | 'a24-after-dark'
+  | 'a24-essentials'
+  | 'the-auteurs'
+  | 'hbo-prestige'
+  | 'kdrama-fever'
+  | 'beyond-the-stars'
+  | 'whodunits'
+  | 'just-landed-services'
+  | 'havent-seen-it'
+  | 'little-ones'
+  | 'next-obsession';

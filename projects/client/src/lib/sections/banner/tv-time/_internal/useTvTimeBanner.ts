@@ -1,7 +1,7 @@
 import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { combineLatest, map } from 'rxjs';
-import { useBannerDismissal } from '../../_internal/useBannerDismissal.ts';
+import { useBannerDismissal } from '../../useBannerDismissal.ts';
 import {
   TV_TIME_ANNOUNCEMENT_DATE,
   TV_TIME_BANNER_END,

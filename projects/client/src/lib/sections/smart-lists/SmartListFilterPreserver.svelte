@@ -4,6 +4,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import { iffy } from "$lib/utils/function/iffy";
   import { onMount } from "svelte";
+  import { omitTemplateFilters } from "./omitTemplateFilters.ts";
 
   const { filterMap } = useFilter();
 
@@ -11,7 +12,12 @@
     We only capture the initial filterMap, since setting filters
     for smart lists will also emit.
   */
-  const currentFilters = iffy(() => $filterMap);
+  const currentFilters = iffy(() =>
+    omitTemplateFilters({
+      filters: $filterMap,
+      searchParams: page.url.searchParams,
+    }),
+  );
 
   /* 
     On back-button navigation the URL could already be clean, so fall back to

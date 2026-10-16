@@ -4,6 +4,7 @@
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import CtaItem from "../components/cta/CtaItem.svelte";
@@ -11,6 +12,8 @@
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import CreateSmartListButton from "../smart/CreateSmartListButton.svelte";
   import SmartListSummaryItem from "../smart/SmartListSummaryItem.svelte";
+  import SmartListTemplates from "../smart/templates/SmartListTemplates.svelte";
+  import { useSmartListTemplates } from "../smart/templates/useSmartListTemplates.ts";
   import CreateListAction from "./_internal/CreateListAction.svelte";
   import LeaveCollaborationButton from "./_internal/LeaveCollaborationButton.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
@@ -22,6 +25,14 @@
   const type = $derived($current.value);
 
   const { items, isLoading } = $derived(useMyLists({ type, slug, mode }));
+
+  const {
+    templates,
+    isLoading: areTemplatesLoading,
+    hide: hideTemplates,
+  } = useSmartListTemplates(fromRune(() => mode));
+
+  const hasTemplates = $derived(type === "smart" && $templates.length > 0);
 
   const drilldown = $derived({
     href:
@@ -79,7 +90,7 @@
   --list-actions-height="var(--segmented-select-minimal-segment-height)"
   --height-list="var(--height-lists-list)"
   --height-override-list={$items.length === 0
-    ? "var(--height-poster-list-sm)"
+    ? hasTemplates ? "0px" : "var(--height-poster-list-sm)"
     : undefined}
 >
   {#snippet item(entry)}
@@ -100,7 +111,9 @@
   {#snippet empty()}
     {#if !$isLoading}
       {#if type === "smart"}
-        <CtaItem cta={{ type: "smart-list" }} variant="placeholder" />
+        {#if !hasTemplates && !$areTemplatesLoading}
+          <CtaItem cta={{ type: "smart-list" }} variant="placeholder" />
+        {/if}
       {:else if type === "personal"}
         <CtaItem {cta} variant="placeholder" />
       {:else}
@@ -109,6 +122,10 @@
     {/if}
   {/snippet}
 </SectionList>
+
+{#if hasTemplates}
+  <SmartListTemplates templates={$templates} onHide={hideTemplates} />
+{/if}
 
 {#if $showCreateList}
   <SaveListDrawer type="create" onClose={() => showCreateList.set(false)} />

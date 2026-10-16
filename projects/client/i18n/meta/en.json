@@ -13423,6 +13423,159 @@
     "button_text_mixtape_show_more": {
       "default": "Show 3 more",
       "description": "Button on the Mixtape end screen that deals three new suggestions for the same picks."
+    },
+    "smart_list_template_hidden_gems_name": {
+      "default": "Hidden Gems",
+      "description": "Name of the official smart list template for a catalogue of rarely noticed but highly rated movies. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_hidden_gems_pitch": {
+      "default": "Loved by the few who found them.",
+      "description": "One line pitch under the name of the official smart list template for a catalogue of rarely noticed but highly rated movies. Keep it to one short sentence."
+    },
+    "smart_list_template_critics_darlings_name": {
+      "default": "Critics' Darlings",
+      "description": "Name of the official smart list template for movies that both critics and audiences rate highly. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_critics_darlings_pitch": {
+      "default": "Critics and audiences finally agree.",
+      "description": "One line pitch under the name of the official smart list template for movies that both critics and audiences rate highly. Keep it to one short sentence."
+    },
+    "smart_list_template_finished_stories_name": {
+      "default": "Finished Stories",
+      "description": "Name of the official smart list template for well rated series that have finished airing. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_finished_stories_pitch": {
+      "default": "Ended series. No cliffhanger waiting.",
+      "description": "One line pitch under the name of the official smart list template for well rated series that have finished airing. Keep it to one short sentence."
+    },
+    "smart_list_template_short_and_sweet_name": {
+      "default": "Short & Sweet",
+      "description": "Name of the official smart list template for well rated movies shorter than 95 minutes. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_short_and_sweet_pitch": {
+      "default": "Great movies under 95 minutes.",
+      "description": "One line pitch under the name of the official smart list template for well rated movies shorter than 95 minutes. Keep it to one short sentence."
+    },
+    "smart_list_template_time_twisters_name": {
+      "default": "Time Twisters",
+      "description": "Name of the official smart list template for movies and shows about time travel and time loops. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_time_twisters_pitch": {
+      "default": "Time travel, time loops, paradoxes.",
+      "description": "One line pitch under the name of the official smart list template for movies and shows about time travel and time loops. Keep it to one short sentence."
+    },
+    "smart_list_template_a24_after_dark_name": {
+      "default": "A24 After Dark",
+      "description": "Name of the official smart list template for horror and thriller movies from the A24 studio. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_a24_after_dark_pitch": {
+      "default": "The studio that made horror art again.",
+      "description": "One line pitch under the name of the official smart list template for horror and thriller movies from the A24 studio. Keep it to one short sentence."
+    },
+    "smart_list_template_a24_essentials_name": {
+      "default": "A24 Essentials",
+      "description": "Name of the official smart list template for popular movies from the A24 studio. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_a24_essentials_pitch": {
+      "default": "Every A24 movie people actually watched.",
+      "description": "One line pitch under the name of the official smart list template for popular movies from the A24 studio. Keep it to one short sentence."
+    },
+    "smart_list_template_the_auteurs_name": {
+      "default": "The Auteurs",
+      "description": "Name of the official smart list template for movies directed by Denis Villeneuve, Christopher Nolan and David Fincher. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_the_auteurs_pitch": {
+      "default": "Villeneuve, Nolan and Fincher, all in one place.",
+      "description": "One line pitch under the name of the official smart list template for movies directed by Denis Villeneuve, Christopher Nolan and David Fincher. Keep it to one short sentence."
+    },
+    "smart_list_template_hbo_prestige_name": {
+      "default": "HBO Prestige",
+      "description": "Name of the official smart list template for well rated shows from the HBO network. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_hbo_prestige_pitch": {
+      "default": "The network that made TV cinema.",
+      "description": "One line pitch under the name of the official smart list template for well rated shows from the HBO network. Keep it to one short sentence."
+    },
+    "smart_list_template_kdrama_fever_name": {
+      "default": "K-Drama Fever",
+      "description": "Name of the official smart list template for well rated Korean series. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_kdrama_fever_pitch": {
+      "default": "The Korean series everyone gets hooked on.",
+      "description": "One line pitch under the name of the official smart list template for well rated Korean series. Keep it to one short sentence."
+    },
+    "smart_list_template_beyond_the_stars_name": {
+      "default": "Beyond the Stars",
+      "description": "Name of the official smart list template for science fiction movies without superheroes. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_beyond_the_stars_pitch": {
+      "default": "Big ideas, other worlds, no superheroes.",
+      "description": "One line pitch under the name of the official smart list template for science fiction movies without superheroes. Keep it to one short sentence."
+    },
+    "smart_list_template_whodunits_name": {
+      "default": "Whodunits",
+      "description": "Name of the official smart list template for shows that are both crime and mystery. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_whodunits_pitch": {
+      "default": "Crime and mystery, both at once.",
+      "description": "One line pitch under the name of the official smart list template for shows that are both crime and mystery. Keep it to one short sentence."
+    },
+    "smart_list_template_just_landed_services_name": {
+      "default": "Just Landed on Your Services",
+      "description": "Name of the official smart list template for recent movies available on the streaming services of the viewer. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_just_landed_services_pitch": {
+      "default": "New movies you can already stream.",
+      "description": "One line pitch under the name of the official smart list template for recent movies available on the streaming services of the viewer. Keep it to one short sentence."
+    },
+    "smart_list_template_havent_seen_it_name": {
+      "default": "Haven't Seen It Yet",
+      "description": "Name of the official smart list template for trending movies the viewer has not watched or added to the watchlist. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_havent_seen_it_pitch": {
+      "default": "This week's hottest movies, minus what you've seen.",
+      "description": "One line pitch under the name of the official smart list template for trending movies the viewer has not watched or added to the watchlist. Keep it to one short sentence."
+    },
+    "smart_list_template_little_ones_name": {
+      "default": "Little Ones Approved",
+      "description": "Name of the official smart list template for family and animation movies suited to small children. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_little_ones_pitch": {
+      "default": "Gentle picks for small kids.",
+      "description": "One line pitch under the name of the official smart list template for family and animation movies suited to small children. Keep it to one short sentence."
+    },
+    "smart_list_template_next_obsession_name": {
+      "default": "Your Next Obsession",
+      "description": "Name of the official smart list template for personal recommendations that are not on the viewer watchlist yet. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_next_obsession_pitch": {
+      "default": "Picked for you, not on your watchlist yet.",
+      "description": "One line pitch under the name of the official smart list template for personal recommendations that are not on the viewer watchlist yet. Keep it to one short sentence."
+    },
+    "smart_list_templates_intro": {
+      "default": "Start from one of ours. Change anything and it becomes yours.",
+      "description": "Intro line above the row of official smart list templates on the Smart tab of the lists page. Explains that a template is only a starting point."
+    },
+    "button_label_hide_smart_list_templates": {
+      "default": "Hide list templates",
+      "description": "Accessible label for the button that hides the row of official smart list templates."
+    },
+    "tag_text_smart_list_template_official": {
+      "default": "Trakt",
+      "description": "Small badge on an official smart list template card showing it is made by Trakt. Brand name, keep it short."
+    },
+    "tag_text_smart_list_template_personal": {
+      "default": "For you",
+      "description": "Small badge on an official smart list template card whose results are personalized to the viewer."
+    },
+    "text_smart_list_template_total": {
+      "default": "{count} titles",
+      "description": "Total number of titles a smart list template matches, shown at the end of the template card footer. The count is already formatted.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
     }
   }
 }

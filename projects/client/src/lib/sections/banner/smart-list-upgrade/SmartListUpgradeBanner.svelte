@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
-  import { useBannerDismissal } from "../_internal/useBannerDismissal.ts";
+  import { useBannerDismissal } from "../useBannerDismissal.ts";
   import SmartListUpgradeContent from "./_internal/SmartListUpgradeContent.svelte";
 
   const { list }: { list: MediaListSummary } = $props();

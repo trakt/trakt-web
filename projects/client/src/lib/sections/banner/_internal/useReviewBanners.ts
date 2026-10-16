@@ -8,7 +8,7 @@ import { getEndOfYear } from '../../../utils/date/getEndOfYear.ts';
 import { isInDateRange } from '../../../utils/date/isInDateRange.ts';
 import { MIR_BANNER_ID } from '../month-in-review/constants/index.ts';
 import { YIR_BANNER_ID } from '../year-in-review/constants/index.ts';
-import { useBannerDismissal } from './useBannerDismissal.ts';
+import { useBannerDismissal } from '../useBannerDismissal.ts';
 
 function isInYirRange(date: Date) {
   const isFirstMonth = date.getMonth() === 0;

@@ -36,6 +36,8 @@
   import { toSmartListFilterMode } from "./toSmartListFilterMode";
   import { toSmartListFilters } from "./toSmartListFilters.ts";
   import { toExtraSmartListFilters } from "./toExtraSmartListFilters.ts";
+  import { fromSmartListTemplateParams } from "./fromSmartListTemplateParams.ts";
+  import { toListTarget } from "./toListTarget.ts";
   import { isSameSmartListFilters } from "./isSameSmartListFilters.ts";
   import { toSmartListExtrasForType } from "./toSmartListExtrasForType.ts";
   import { fromSmartListExtraParams } from "./fromSmartListExtraParams.ts";
@@ -69,29 +71,52 @@
   const toFilterParams = (url: URL) =>
     JSON.stringify(FILTER_KEYS.map((key) => url.searchParams.get(key)));
 
-  const toTarget = (source: SmartList["source"]) =>
-    Object.values(ListTarget).find((value) => value === source);
+  const templatePrefill = untrack(() =>
+    fromSmartListTemplateParams(page.url.searchParams),
+  );
+
+  const toUrlFilters = () =>
+    toSmartListFilters(
+      Object.fromEntries(
+        FILTER_KEYS.flatMap((key) => {
+          const value = page.url.searchParams.get(key);
+          return value ? [[key, value]] : [];
+        }),
+      ),
+    );
 
   const toInitialFilterMode = () => {
     const urlExtras = fromSmartListExtraParams(page.url.searchParams);
     if (Object.keys(urlExtras).length > 0) return FilterMode.Advanced;
-    if (!list) return FilterMode.Simple;
+    if (!list) {
+      return templatePrefill.target
+        ? toSmartListFilterMode(toUrlFilters())
+        : FilterMode.Simple;
+    }
 
     return toSmartListFilterMode(list.filters);
   };
 
   const initial = untrack(() => ({
-    name: list?.title ?? "",
+    name: list?.title ?? templatePrefill.name ?? "",
     type: list ? toDiscoverMode(list.mediaType) : mode,
-    target: list ? toTarget(list.source) : ListTarget.Trending,
+    target: list
+      ? toListTarget(list.source)
+      : (templatePrefill.target ?? ListTarget.Trending),
     filterMode: toInitialFilterMode(),
     filters: toFilterParams(page.url),
     privacy: list?.privacy ?? toDefaultListPrivacy($user),
   }));
 
-  const initialExtras = untrack(() =>
-    toExtraSmartListFilters(list?.filters ?? {})
-  );
+  const initialExtras = untrack(() => {
+    if (list) return toExtraSmartListFilters(list.filters);
+    if (!templatePrefill.target) return {};
+
+    return toSmartListExtrasForType({
+      filters: fromSmartListExtraParams(page.url.searchParams),
+      type: initial.type,
+    });
+  });
 
   let listName = $state(initial.name);
   let privacy = $state<SmartList["privacy"]>(initial.privacy);
