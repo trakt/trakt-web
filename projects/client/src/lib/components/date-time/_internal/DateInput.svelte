@@ -41,7 +41,13 @@
   function pickerOnClick(node: HTMLElement) {
     const handler = () => {
       if (disabled) return;
-      inputElement.showPicker();
+
+      if (typeof inputElement.showPicker === "function") {
+        inputElement.showPicker();
+        return;
+      }
+
+      inputElement.focus();
     };
 
     node.addEventListener("click", handler);
