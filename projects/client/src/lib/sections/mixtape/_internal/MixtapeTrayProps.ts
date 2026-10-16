@@ -4,4 +4,5 @@ export type MixtapeTrayProps = {
   picks: ReadonlyArray<number>;
   picked: ReadonlyArray<MediaInputDefault>;
   removeHref: (id: number) => string;
+  onAdd: () => void;
 };
