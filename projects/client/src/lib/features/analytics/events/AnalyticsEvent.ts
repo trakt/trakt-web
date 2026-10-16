@@ -11,6 +11,7 @@ const SMART_LIST_ACTION_PREFIX = 'smart-list-action';
 const DATA_IMPORT_ACTION_PREFIX = 'data-import';
 const DATA_EXPORT_ACTION_PREFIX = 'data-export';
 const DATA_CLEAR_ACTION_PREFIX = 'data-clear';
+const TODAY_PREFIX = 'today';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -101,4 +102,12 @@ export const AnalyticsEvent = {
   ClearInitiated: buildEventKey(DATA_CLEAR_ACTION_PREFIX, 'initiated'),
   ClearCompleted: buildEventKey(DATA_CLEAR_ACTION_PREFIX, 'completed'),
   ClearFailed: buildEventKey(DATA_CLEAR_ACTION_PREFIX, 'failed'),
+
+  // Today
+  TodayOpen: buildEventKey(TODAY_PREFIX, 'open'),
+  TodayStory: buildEventKey(TODAY_PREFIX, 'story'),
+  TodayClose: buildEventKey(TODAY_PREFIX, 'close'),
+  TodayAction: buildEventKey(TODAY_PREFIX, 'action'),
+  TodayGrouping: buildEventKey(TODAY_PREFIX, 'grouping'),
+  TodayDay: buildEventKey(TODAY_PREFIX, 'day'),
 } as const;

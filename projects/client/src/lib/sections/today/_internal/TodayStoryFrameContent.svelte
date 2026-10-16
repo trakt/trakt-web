@@ -1,6 +1,8 @@
 <script lang="ts">
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
   import WatchedTag from "$lib/components/media/tags/WatchedTag.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
@@ -37,6 +39,18 @@
   }: TodayStoryFrameContentProps = $props();
 
   const { history } = useUser();
+  const { track: trackAction } = useTrack(AnalyticsEvent.TodayAction);
+
+  const trackActionTap = (event: MouseEvent) => {
+    if (!(event.target instanceof Element) || !event.target.closest("button")) {
+      return;
+    }
+
+    trackAction({
+      action: frame.type === "for-you" ? "mark-as-watched" : "watchlist",
+      frame: frame.type,
+    });
+  };
 
   const media = $derived(toFrameMedia(frame));
   const isWatchedToo = $derived(
@@ -185,7 +199,7 @@
       </div>
     {/if}
 
-    <div class="frame-actions">
+    <div class="frame-actions" role="presentation" onclick={trackActionTap}>
       {#if frame.type === "for-you"}
         <TodayForYouAction item={frame.item} />
       {:else}

@@ -41,7 +41,7 @@ const groups: TodayStoryGroup[] = toStoryGroups({
 
 async function renderViewer(startKey: string | null, onClose = vi.fn()) {
   renderComponent(TodayStoryViewer, {
-    props: { groups, startKey, onClose },
+    props: { groups, startKey, source: 'link', onClose },
   });
   // The first render in a cold worker can exceed the 1s default on busy CI runners.
   await screen.findByRole('dialog', {}, { timeout: 10_000 });
@@ -92,6 +92,7 @@ describe('TodayStoryViewer', () => {
           return stories.value;
         },
         startKey: `show-${ShowSiloMappedMock.id}`,
+        source: 'link',
         onClose: vi.fn(),
       },
     });
@@ -239,6 +240,7 @@ describe('TodayStoryViewer', () => {
       props: {
         groups: toStoryGroups({ forYou: [], titles: [story(watched)] }),
         startKey: null,
+        source: 'link',
         onClose: vi.fn(),
       },
     });
@@ -283,6 +285,7 @@ describe('TodayStoryViewer', () => {
           }],
         }),
         startKey: null,
+        source: 'link',
         onClose: vi.fn(),
       },
     });
@@ -317,6 +320,7 @@ describe('TodayStoryViewer', () => {
           }],
         }),
         startKey: null,
+        source: 'link',
         onClose: vi.fn(),
       },
     });
@@ -348,7 +352,7 @@ describe('TodayStoryViewer', () => {
     opener.focus();
 
     const { unmount } = renderComponent(TodayStoryViewer, {
-      props: { groups, startKey: null, onClose: vi.fn() },
+      props: { groups, startKey: null, source: 'link', onClose: vi.fn() },
     });
     const dialog = await screen.findByRole('dialog');
 

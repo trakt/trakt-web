@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { beforeNavigate } from "$app/navigation";
   import { page } from "$app/state";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
@@ -9,6 +10,8 @@
   import { todayOverviewParams } from "./_internal/todayOverviewParams.ts";
   import { todayStoryNavigation } from "./_internal/todayStoryNavigation.ts";
   import { toTodayStories } from "./_internal/toTodayStories.ts";
+  import { toOpenSource } from "./_internal/toOpenSource.ts";
+  import type { TodayOpenSource } from "./models/TodayOpenSource.ts";
   import { useTodayStories } from "./useTodayStories.ts";
 
   const { filterMap } = useFilter();
@@ -16,6 +19,11 @@
   const { isOpen, storyKey, close } = $derived(
     todayStoryNavigation(page.url.searchParams),
   );
+  let source: TodayOpenSource = $state("link");
+  beforeNavigate(({ type, to }) => {
+    source = toOpenSource({ navigationType: type, routeId: to?.route.id });
+  });
+
   const params = $derived(todayOverviewParams(page.url.searchParams));
   const dayKey = $derived(params.day);
   const now = new Date();
@@ -38,5 +46,5 @@
 </script>
 
 {#if isOpen && $hasLoaded && groups.length > 0}
-  <TodayStoryViewer {groups} startKey={storyKey} onClose={close} />
+  <TodayStoryViewer {groups} startKey={storyKey} {source} onClose={close} />
 {/if}

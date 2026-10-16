@@ -6,27 +6,43 @@
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import GridIcon from "$lib/components/icons/GridIcon.svelte";
   import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { trapTabFocus } from "$lib/utils/actions/trapTabFocus.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { onMount, tick, untrack } from "svelte";
+  import type { TodayCloseReason } from "../models/TodayCloseReason.ts";
+  import type { TodayStoryFrame } from "../models/TodayStoryFrame.ts";
+  import type { TodayStoryGroup } from "../models/TodayStoryGroup.ts";
   import { useTodaySeenStories } from "../useTodaySeenStories.ts";
   import { portalToBody } from "./portalToBody.ts";
+  import { NOTHING_SHOWN } from "./NOTHING_SHOWN.ts";
+  import { recordShown } from "./recordShown.ts";
   import TodayStoryFrameContent from "./TodayStoryFrameContent.svelte";
   import type { TodayStoryTapZone } from "./TodayStoryTapZonesProps.ts";
   import type { TodayStoryViewerProps } from "./TodayStoryViewerProps.ts";
   import { toFrameMedia } from "./toFrameMedia.ts";
+  import { toOpenState } from "./toOpenState.ts";
 
   const FRAME_DURATION = time.seconds(10);
   const HOLD_THRESHOLD = time.seconds(0.3);
 
-  const { groups: initialGroups, startKey, onClose }: TodayStoryViewerProps =
-    $props();
+  const { groups: initialGroups, startKey, source, onClose }:
+    TodayStoryViewerProps = $props();
 
   const groups = untrack(() => initialGroups);
-  const { markSeen } = useTodaySeenStories();
+  const { markSeen, seenStories } = useTodaySeenStories();
+  const { track: trackOpen } = useTrack(AnalyticsEvent.TodayOpen);
+  const { track: trackStory } = useTrack(AnalyticsEvent.TodayStory);
+  const { track: trackClose } = useTrack(AnalyticsEvent.TodayClose);
+  const { track: trackAction } = useTrack(AnalyticsEvent.TodayAction);
+
+  const openedAt = Date.now();
+  let viewed = NOTHING_SHOWN;
+  let isTracking = false;
 
   let groupKey = $state(untrack(() => startKey));
   let frameIndex = $state(0);
@@ -114,9 +130,44 @@
     isUsingAction = false;
   };
 
+  const noteShown = (
+    shownGroup: TodayStoryGroup,
+    shownFrame: TodayStoryFrame | undefined,
+  ) => {
+    if (!shownFrame) return;
+
+    viewed = recordShown(viewed, {
+      groupKey: shownGroup.key,
+      frameKey: shownFrame.key,
+    });
+  };
+
+  const enterGroup = (entered: TodayStoryGroup) => {
+    markSeen(entered.key);
+    trackStory({ type: entered.type });
+  };
+
+  const finish = (reason: TodayCloseReason) => {
+    if (!isTracking) return;
+
+    isTracking = false;
+    trackClose({
+      reason,
+      duration: Date.now() - openedAt,
+      frames: viewed.frames.size,
+      groups: viewed.groups.size,
+    });
+  };
+
+  const closeViewer = (reason: TodayCloseReason) => {
+    finish(reason);
+    onClose();
+  };
+
   const showFrame = (index: number) => {
     resetFrameState();
     frameIndex = index;
+    if (group) noteShown(group, group.frames.at(index));
   };
 
   const showGroup = (index: number, frame: number) => {
@@ -126,7 +177,8 @@
     resetFrameState();
     groupKey = shown.key;
     frameIndex = frame;
-    markSeen(shown.key);
+    enterGroup(shown);
+    noteShown(shown, shown.frames.at(frame));
   };
 
   const next = () => {
@@ -139,7 +191,7 @@
       showGroup(groupIndex + 1, 0);
       return;
     }
-    onClose();
+    closeViewer("end");
   };
 
   const previous = () => {
@@ -178,7 +230,15 @@
   ];
 
   onMount(() => {
-    if (group) markSeen(group.key);
+    if (group) {
+      isTracking = true;
+      trackOpen({
+        source,
+        state: toOpenState({ groups, seenStories: $seenStories }),
+      });
+      enterGroup(group);
+      noteShown(group, frame);
+    }
 
     const previouslyFocused = document.activeElement;
 
@@ -195,6 +255,7 @@
     document.addEventListener("visibilitychange", onVisibilityChange);
 
     return () => {
+      finish("leave");
       document.removeEventListener("visibilitychange", onVisibilityChange);
       if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
     };
@@ -210,7 +271,7 @@
   aria-modal="true"
   tabindex="-1"
   style="--today-story-duration: {FRAME_DURATION}ms"
-  onkeydown={(event) => event.key === "Escape" && onClose()}
+  onkeydown={(event) => event.key === "Escape" && closeViewer("close")}
   use:portalToBody
   use:trapTabFocus
 >
@@ -273,13 +334,14 @@
         label={m.button_label_view_all_today()}
         style="ghost"
         href={UrlBuilder.today()}
+        onclick={() => frame && trackAction({ action: "view-all", frame: frame.type })}
       >
         <GridIcon />
       </ActionButton>
       <ActionButton
         label={m.button_label_close_stories()}
         style="ghost"
-        onclick={onClose}
+        onclick={() => closeViewer("close")}
       >
         <CloseIcon />
       </ActionButton>
