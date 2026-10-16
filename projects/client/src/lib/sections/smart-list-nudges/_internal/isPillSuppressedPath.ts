@@ -2,6 +2,7 @@ const SUPPRESSED_PATHS = [
   /^\/users\/[^/]+\/lists\/?$/,
   /^\/users\/[^/]+\/lists\/view\/personal\/?$/,
   /^\/users\/[^/]+\/lists\/(?!view\/?$)[^/]+\/?$/,
+  /^\/discover\/mixtape\/?$/,
 ];
 
 export function isPillSuppressedPath(pathname: string): boolean {

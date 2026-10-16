@@ -7,6 +7,7 @@ describe('isPillSuppressedPath', () => {
     '/users/me/lists/',
     '/users/harry/lists/view/personal',
     '/users/me/lists/silos',
+    '/discover/mixtape',
   ])('suppresses %s', (pathname) => {
     expect(isPillSuppressedPath(pathname)).toBe(true);
   });
