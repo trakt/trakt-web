@@ -22,6 +22,17 @@ function revokeTokens(manager: UserManager | null) {
   });
 }
 
+function endProviderSession(manager: UserManager | null) {
+  const origin = globalThis.window?.location?.origin;
+
+  return manager
+    ?.signoutRedirect({ post_logout_redirect_uri: origin })
+    .catch((error) => {
+      printError('Failed to end the provider session on logout:', error);
+      globalThis.window?.location?.replace(origin ?? '/');
+    });
+}
+
 export function useAuth() {
   const { isAuthorized } = getAuthContext();
   const { invalidate } = useInvalidator();
@@ -43,9 +54,7 @@ export function useAuth() {
     // End the session at the provider (RP-initiated logout) so it's a real
     // logout, not just a local token revoke. signoutRedirect clears the local
     // user and navigates, returning to this origin.
-    await manager?.signoutRedirect({
-      post_logout_redirect_uri: globalThis.window?.location?.origin,
-    });
+    await endProviderSession(manager);
   };
 
   const login = async () => {
