@@ -2,10 +2,8 @@
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import CassetteIcon from "$lib/components/icons/CassetteIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
 
@@ -13,24 +11,20 @@
 </script>
 
 <RenderFor audience="authenticated">
-  <RenderForFeature flag={FeatureFlag.Mixtape} audience="director">
-    {#snippet enabled()}
-      <div class="trakt-mixtape-discover-strip">
-        <Link href={UrlBuilder.mixtape({ type, source: "discover" })}>
-          <div class="strip-content">
-            <span class="strip-icon"><CassetteIcon /></span>
-            <span class="strip-text">
-              <span class="bold">{m.button_text_make_mixtape()}</span>
-              <span class="small secondary ellipsis">
-                {m.text_mixtape_strip_description()}
-              </span>
-            </span>
-            <span class="strip-arrow"><CaretRightIcon /></span>
-          </div>
-        </Link>
+  <div class="trakt-mixtape-discover-strip">
+    <Link href={UrlBuilder.mixtape({ type, source: "discover" })}>
+      <div class="strip-content">
+        <span class="strip-icon"><CassetteIcon /></span>
+        <span class="strip-text">
+          <span class="bold">{m.button_text_make_mixtape()}</span>
+          <span class="small secondary ellipsis">
+            {m.text_mixtape_strip_description()}
+          </span>
+        </span>
+        <span class="strip-arrow"><CaretRightIcon /></span>
       </div>
-    {/snippet}
-  </RenderForFeature>
+    </Link>
+  </div>
 </RenderFor>
 
 <style lang="scss">
