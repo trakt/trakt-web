@@ -3,6 +3,7 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { useTraktTeam } from "$lib/features/team/useTraktTeam";
+  import { distinctUntilChanged, map } from "rxjs";
   import UserAvatar from "../../UserAvatar.svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
   import type { SocialCta } from "../models/Cta";
@@ -15,7 +16,13 @@
 
   const { track } = useTrack(AnalyticsEvent.Cta);
   const { network } = useUser();
-  const { isLoading, team } = $derived(useTraktTeam($network?.following ?? []));
+  const { isLoading, team } = useTraktTeam(
+    network.pipe(
+      map(($network) => $network?.following),
+      distinctUntilChanged(),
+      map((following) => following ?? []),
+    ),
+  );
 </script>
 
 <div class="trakt-team">

@@ -2,8 +2,9 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useTraktTeam } from "$lib/features/team/useTraktTeam.ts";
   import ProfileCard from "$lib/sections/profile/components/ProfileCard.svelte";
+  import { of } from "rxjs";
 
-  const { isLoading, team } = useTraktTeam([]);
+  const { isLoading, team } = useTraktTeam(of([]));
 
   const teamSize = 10;
 </script>
