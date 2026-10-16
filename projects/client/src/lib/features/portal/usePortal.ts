@@ -41,13 +41,18 @@ export function usePortal(props?: PortalProps) {
 
   const { addHelpers, removeHelpers } = usePopupHelpers(placement);
 
+  let destroyClickOutside = NOOP_FN;
+
   const closeHandler = () => {
+    destroyClickOutside();
+    destroyClickOutside = NOOP_FN;
     popupTarget.value?.removeAttribute(POPUP_STATE_ATTRIBUTE);
     removeHelpers(popupContainer.value);
     popupTarget.next(null);
     isPopupOpen.next(false);
   };
   const openHandler = (target: HTMLElement) => {
+    destroyClickOutside = clickOutside(target).destroy;
     popupTarget.next(target);
     target.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Opened);
     addHelpers(target);
@@ -73,7 +78,6 @@ export function usePortal(props?: PortalProps) {
       closeHandler();
     };
     const toggleAroundTarget = () => toggleHandler(targetNode);
-    const { destroy: destroyClickOutside } = clickOutside(targetNode);
 
     targetNode.addEventListener('clickoutside', closeAroundTarget);
     targetNode.addEventListener('click', toggleAroundTarget);
@@ -81,6 +85,7 @@ export function usePortal(props?: PortalProps) {
     return {
       destroy() {
         destroyClickOutside();
+        destroyClickOutside = NOOP_FN;
         targetNode.removeEventListener('clickoutside', closeAroundTarget);
         targetNode.removeEventListener('click', toggleAroundTarget);
         removeHelpers(null);
