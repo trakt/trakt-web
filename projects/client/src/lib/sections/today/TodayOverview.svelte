@@ -3,6 +3,8 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
@@ -31,6 +33,7 @@
   import { toPersonGroups } from "./_internal/toPersonGroups.ts";
   import { toTodayDays } from "./_internal/toTodayDays.ts";
   import { toTodayStories } from "./_internal/toTodayStories.ts";
+  import { TodayGroupingSchema } from "./models/TodayGrouping.ts";
   import { useTodayDayCounts } from "./useTodayDayCounts.ts";
   import { useTodayStories } from "./useTodayStories.ts";
   import type { Snippet } from "svelte";
@@ -39,6 +42,8 @@
   const CARD_SKELETON_COUNT = 6;
 
   const { filterMap } = useFilter();
+  const { track: trackGrouping } = useTrack(AnalyticsEvent.TodayGrouping);
+  const { track: trackDay } = useTrack(AnalyticsEvent.TodayDay);
   const params = $derived(todayOverviewParams(page.url.searchParams));
   const dayKey = $derived(params.day);
   const now = new Date();
@@ -97,6 +102,18 @@
     days.find((day) => day.key === params.day) ?? days.at(0),
   );
   const yesterday = days.at(1);
+
+  const selectDay = (key: string) => {
+    const kind = days.find((day) => day.key === key)?.kind;
+    if (kind && key !== selectedDay?.key) trackDay({ day: kind });
+    params.setDay(key);
+  };
+
+  const selectGrouping = (value: string) => {
+    const grouping = TodayGroupingSchema.safeParse(value);
+    if (grouping.success) trackGrouping({ grouping: grouping.data });
+    params.setGrouping(value);
+  };
   const isQuiet = $derived(
     !$isLoading &&
       selectedDay?.isToday === true &&
@@ -168,7 +185,7 @@
 {#snippet grouping()}
   <TodayGroupingDropdown
     value={params.grouping}
-    onChange={params.setGrouping}
+    onChange={selectGrouping}
   />
 {/snippet}
 
@@ -187,7 +204,7 @@
     counts={$dayCounts}
     {summary}
     isLoading={$isLoading}
-    onChange={params.setDay}
+    onChange={selectDay}
   />
 
   <div class="overview-body" class:is-loading={$isLoading && !isFirstLoad}>
@@ -275,7 +292,7 @@
           <p class="secondary">{m.text_today_caught_up()}</p>
           <Button
             label={m.button_text_today_see_yesterday()}
-            onclick={() => params.setDay(yesterday.key)}
+            onclick={() => selectDay(yesterday.key)}
             size="small"
           >
             {m.button_text_today_see_yesterday()}

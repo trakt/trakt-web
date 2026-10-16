@@ -9,6 +9,8 @@ const METRIC_KEYS: ReadonlySet<string> = new Set([
   'duration',
   'endpointCount',
   'failedCount',
+  'frames',
+  'groups',
   'historyCount',
   'rating',
   'ratingsCount',

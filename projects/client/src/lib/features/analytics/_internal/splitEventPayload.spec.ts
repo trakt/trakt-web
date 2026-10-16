@@ -13,6 +13,17 @@ describe('util: splitEventPayload', () => {
     expect(dims).toEqual({ source: 'tvtime' });
   });
 
+  it('should route the Today story counts to metrics', () => {
+    const { dims, metrics } = splitEventPayload({
+      reason: 'close',
+      frames: 4,
+      groups: 2,
+    });
+
+    expect(dims).toEqual({ reason: 'close' });
+    expect(metrics).toEqual({ frames: 4, groups: 2 });
+  });
+
   it('should keep a non-allowlisted number as a dim', () => {
     const { dims, metrics } = splitEventPayload({ position: 3 });
 

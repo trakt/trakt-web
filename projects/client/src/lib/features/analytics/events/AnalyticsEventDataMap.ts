@@ -8,6 +8,13 @@ import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import type { FilterMode } from '../../filters/models/FilterMode.ts';
+import type { TodayCloseReason } from '$lib/sections/today/models/TodayCloseReason.ts';
+import type { TodayDayKind } from '$lib/sections/today/models/TodayDayKind.ts';
+import type { TodayGrouping } from '$lib/sections/today/models/TodayGrouping.ts';
+import type { TodayOpenSource } from '$lib/sections/today/models/TodayOpenSource.ts';
+import type { TodayStoryAction } from '$lib/sections/today/models/TodayStoryAction.ts';
+import type { TodayStoryFrame } from '$lib/sections/today/models/TodayStoryFrame.ts';
+import type { TodayStoryGroup } from '$lib/sections/today/models/TodayStoryGroup.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
 type SourceType = { source: string };
@@ -98,6 +105,21 @@ type ClearCompletedType = {
 };
 type ClearFailedType = { source: string; error: string };
 
+type TodayOpenType = { source: TodayOpenSource; state: 'unseen' | 'seen' };
+type TodayStoryType = { type: TodayStoryGroup['type'] };
+type TodayCloseType = {
+  reason: TodayCloseReason;
+  duration: number;
+  frames: number;
+  groups: number;
+};
+type TodayActionType = {
+  action: TodayStoryAction;
+  frame: TodayStoryFrame['type'];
+};
+type TodayGroupingType = { grouping: TodayGrouping };
+type TodayDayType = { day: TodayDayKind };
+
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.PageView]: PageViewType;
   [AnalyticsEvent.EnterLite]: never;
@@ -185,4 +207,12 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.ClearInitiated]: ClearInitiatedType;
   [AnalyticsEvent.ClearCompleted]: ClearCompletedType;
   [AnalyticsEvent.ClearFailed]: ClearFailedType;
+
+  // Today
+  [AnalyticsEvent.TodayOpen]: TodayOpenType;
+  [AnalyticsEvent.TodayStory]: TodayStoryType;
+  [AnalyticsEvent.TodayClose]: TodayCloseType;
+  [AnalyticsEvent.TodayAction]: TodayActionType;
+  [AnalyticsEvent.TodayGrouping]: TodayGroupingType;
+  [AnalyticsEvent.TodayDay]: TodayDayType;
 };
