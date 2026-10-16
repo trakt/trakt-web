@@ -13268,7 +13268,7 @@
     },
     "page_title_mixtape": {
       "default": "Mixtape",
-      "description": "Page title of the Mixtape page, where users pick watched titles and get three suggestions with the same feel."
+      "description": "Page title of the Mixtape page, where users pick watched titles and get three suggestions with the same feel. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
     "text_mixtape_description_movies": {
       "default": "Pick a movie you loved. Add more to fine-tune the mix.",
@@ -13348,11 +13348,11 @@
     },
     "text_mixtape_empty_history": {
       "default": "Your history is empty. Mark a few titles as watched to make a mixtape.",
-      "description": "Shown on the Mixtape page when the user has no watched titles of the chosen type."
+      "description": "Shown on the Mixtape page when the user has no watched titles of the chosen type. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
     "header_mixtape_results": {
       "default": "Your mixtape",
-      "description": "Heading above the three suggestions on the Mixtape page."
+      "description": "Heading above the three suggestions on the Mixtape page. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
     "text_mixtape_based_on": {
       "default": "Mixed from {titles}",
@@ -13380,11 +13380,11 @@
     },
     "button_text_make_mixtape": {
       "default": "Make a mixtape",
-      "description": "Title of the Discover strip that opens the Mixtape page."
+      "description": "Title of the Discover strip that opens the Mixtape page. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
     "button_text_start_mixtape_with_this": {
       "default": "Start a mixtape with this",
-      "description": "Item in a poster's menu that opens Mixtape with that title already picked."
+      "description": "Item in a poster's menu that opens Mixtape with that title already picked. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
     "text_mixtape_strip_description": {
       "default": "Pick titles you loved. Get 3 that feel the same.",
@@ -13464,7 +13464,7 @@
     },
     "header_mixtape_done": {
       "default": "That's your mixtape",
-      "description": "Heading on the Mixtape end screen after three titles were added to the watchlist."
+      "description": "Heading on the Mixtape end screen after three titles were added to the watchlist. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
     "text_mixtape_done": {
       "default": "Done",
