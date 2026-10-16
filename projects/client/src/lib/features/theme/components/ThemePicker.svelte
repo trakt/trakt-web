@@ -8,11 +8,14 @@
   import AutoMode from "./SystemMode.svelte";
 
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import * as m from "$lib/features/i18n/messages";
   import { useSettings } from "$lib/sections/settings/_internal/useSettings";
 
   const { set, theme } = useTheme();
+  const { track } = useTrack(AnalyticsEvent.Theme);
 
   const availableThemes = [Theme.Light, Theme.Dark, Theme.System];
 
@@ -26,6 +29,7 @@
   };
 
   async function submitTheme(value: Theme) {
+    track({ theme: value });
     set(value);
     await workerRequest(WorkerMessage.CacheBust);
 
