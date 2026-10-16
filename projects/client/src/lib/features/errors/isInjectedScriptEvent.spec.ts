@@ -29,6 +29,12 @@ describe('util: isInjectedScriptEvent', () => {
     expect(isInjectedScriptEvent(toEvent({ lineno: 269 }))).toBe(true);
   });
 
+  it('should flag a frame from a console snippet', () => {
+    expect(
+      isInjectedScriptEvent(toEvent({ filename: '<anonymous>', lineno: 4 })),
+    ).toBe(true);
+  });
+
   it('should keep an error that passes through our bundle', () => {
     expect(
       isInjectedScriptEvent(
