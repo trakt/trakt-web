@@ -206,7 +206,7 @@
         border-color, background-color, padding, width, top, inset-inline-start,
         opacity;
 
-      backdrop-filter: blur(var(--ni-8));
+      backdrop-filter: var(--backdrop-filter-input-search);
 
       &:placeholder-shown {
         text-overflow: ellipsis;

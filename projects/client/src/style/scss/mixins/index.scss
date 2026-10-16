@@ -220,7 +220,7 @@
   border: calc(var(--border-thickness-xxs) * 1.5) var(--color-border) solid;
 
   background-color: var(--color-input-background);
-  backdrop-filter: blur(var(--ni-4));
+  backdrop-filter: var(--backdrop-filter-input);
 
   transition: border-color var(--transition-increment) ease-in-out;
 
