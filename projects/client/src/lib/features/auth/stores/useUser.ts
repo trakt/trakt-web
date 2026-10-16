@@ -4,7 +4,7 @@ import { type UserLimits } from '$lib/requests/models/UserLimits.ts';
 import { blockedUsersQuery } from '$lib/requests/queries/users/blockedUsersQuery.ts';
 import { userLimitsQuery } from '$lib/requests/queries/vip/userLimitsQuery.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
-import { map, of, switchMap } from 'rxjs';
+import { distinctUntilChanged, map, of, switchMap } from 'rxjs';
 import { getContext, setContext } from 'svelte';
 import {
   currentUserCommentReactionsQuery,
@@ -201,46 +201,60 @@ function createUseUserInstance() {
       return of({
         user: userQuerySignal.pipe(
           map((query) => definedData(query.data)),
+          distinctUntilChanged(),
         ),
         history: historySignal,
         watchlist: watchlistQuerySignal.pipe(
           map((watchlist) => watchlist.data),
+          distinctUntilChanged(),
         ),
         collection: collectionSignal,
         ratings: ratingsQuerySignal.pipe(
           map((ratings) => ratings.data),
+          distinctUntilChanged(),
         ),
         reactions: commentReactionsQuerySignal.pipe(
           map((reactions) => reactions.data),
+          distinctUntilChanged(),
         ),
         favorites: favoritesQuerySignal.pipe(
           map((favorites) => favorites.data),
+          distinctUntilChanged(),
         ),
         network: followingQuerySignal.pipe(
           map((network) => network.data),
+          distinctUntilChanged(),
         ),
         digitalLibrary: digitalLibraryQuerySignal.pipe(
           map((collection) => collection.data),
+          distinctUntilChanged(),
         ),
         likes: likesQuerySignal.pipe(
           map((likes) => likes.data),
+          distinctUntilChanged(),
         ),
         limits: limitsQuerySignal.pipe(
           map((limits) => limits.data),
+          distinctUntilChanged(),
         ),
         notes: notesQuerySignal.pipe(
           map((notes) => notes.data),
+          distinctUntilChanged(),
         ),
         dropped: droppedQuerySignal.pipe(
           map((dropped) => dropped.data),
+          distinctUntilChanged(),
         ),
         rewatching: rewatchingQuerySignal.pipe(
           map((rewatching) => rewatching.data),
+          distinctUntilChanged(),
         ),
         blocked: blockedQuerySignal.pipe(
+          map((blocked) => blocked.data),
+          distinctUntilChanged(),
           map((blocked) =>
             new Set(
-              (blocked.data ?? [])
+              (blocked ?? [])
                 .map((profile) => profile.slug)
                 .filter((slug): slug is string => Boolean(slug)),
             )
