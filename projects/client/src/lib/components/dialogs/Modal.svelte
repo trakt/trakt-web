@@ -44,7 +44,6 @@
 
     backdrop-filter: blur(var(--ni-8));
     opacity: 0;
-    will-change: opacity;
   }
 
   :global(.trakt-modal-overlay[data-state="open"]) {
