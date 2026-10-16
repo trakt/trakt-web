@@ -3,6 +3,7 @@ import { setToken } from '$lib/features/auth/token/index.ts';
 import { createIdbPersister } from '$lib/features/query/_internal/createIdbPersister.ts';
 import { createMutationCache } from '$lib/features/query/createMutationCache.ts';
 import { retryDelay } from '$lib/utils/retry/retryDelay.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import type { LayoutLoad } from '$types/$types.d.ts';
 import { QueryClient } from '@tanstack/query-core';
 
@@ -25,6 +26,7 @@ export const load: LayoutLoad = ({ data }) => {
       },
       queries: {
         enabled: browser,
+        gcTime: browser ? time.minutes(30) : Infinity,
         retry: 3,
         retryDelay,
         refetchOnWindowFocus: false,
