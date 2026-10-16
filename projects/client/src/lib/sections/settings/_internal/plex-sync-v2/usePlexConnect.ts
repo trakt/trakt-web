@@ -20,6 +20,7 @@ import type { PlexConnectState } from './models/PlexConnectState.ts';
 import { PLEX_ACCOUNT_SERVER_ID } from './PLEX_ACCOUNT_SERVER_ID.ts';
 import { toDefaultServerId } from './toDefaultServerId.ts';
 import { toLibraryChoice } from './toLibraryChoice.ts';
+import { isWebhookOnlyServer } from './isWebhookOnlyServer.ts';
 
 const POLL_INTERVAL = time.seconds(2);
 const POPUP_NAME = 'trakt-plex-sign-in';
@@ -154,6 +155,19 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     const current = state.value;
     if (current.step !== 'choosing') return;
 
+    if (isWebhookOnlyServer(current.servers, serverId)) {
+      state.next({
+        ...current,
+        serverId,
+        libraries: [],
+        libraryIds: [],
+        accounts: [],
+        accountId: null,
+        feeds: MediaSyncFeedSchema.options,
+      });
+      return;
+    }
+
     state.next({
       ...current,
       serverId,
@@ -229,7 +243,8 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     const current = state.value;
     if (current.step !== 'choosing' || !current.serverId) return;
 
-    state.next({ step: 'connecting' });
+    const webhookOnly = isWebhookOnlyServer(current.servers, current.serverId);
+    state.next({ step: 'connecting', isWebhookOnly: webhookOnly });
 
     const result = await create.mutate({
       attemptId: current.attemptId,
@@ -238,6 +253,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       feeds: current.feeds,
       syncAccountId: current.accountId,
       importHistory: current.importHistory,
+      webhookOnly,
     }).catch(() => null);
 
     if (!result?.ok) {

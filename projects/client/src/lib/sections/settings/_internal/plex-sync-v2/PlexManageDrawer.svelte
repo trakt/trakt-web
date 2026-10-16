@@ -56,7 +56,9 @@
       ? m.label_media_sync_plex_watchlist()
       : connection.serverName ?? m.label_plex_server(),
   );
-  const needsLibraries = $derived(!isAccountOnly);
+  const needsLibraries = $derived(
+    !isAccountOnly && connection.status !== "webhook_only",
+  );
 
   let enabledLibraryIds = $state(
     iffy(() =>

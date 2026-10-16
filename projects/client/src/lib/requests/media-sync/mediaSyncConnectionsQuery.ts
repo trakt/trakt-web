@@ -18,6 +18,7 @@ export const MediaSyncConnectionResponseSchema = z.object({
     'unreachable',
     'unauthorized',
     'disconnected',
+    'webhook_only',
   ]),
   server_id: z.string(),
   server_name: z.string().nullable(),

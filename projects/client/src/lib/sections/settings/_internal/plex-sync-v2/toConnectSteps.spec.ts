@@ -33,4 +33,9 @@ describe('toConnectSteps', () => {
     expect(toConnectSteps({ hasProfiles: false, hasHistory: true }))
       .to.deep.equal(['sign-in', 'server', 'sync', 'history']);
   });
+
+  it('stops at the server step for a webhook-only server', () => {
+    expect(toConnectSteps({ hasProfiles: true, isWebhookOnly: true }))
+      .to.deep.equal(['sign-in', 'server']);
+  });
 });

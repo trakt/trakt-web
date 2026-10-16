@@ -26,6 +26,8 @@ export function toServerSyncStatus(
       return { kind: 'unauthorized' };
     case 'paused':
       return { kind: 'paused' };
+    case 'webhook_only':
+      return { kind: 'webhook-only' };
     default:
       if (isFailingToReach(connection)) return { kind: 'unreachable' };
       return connection.lastSyncedAt == null

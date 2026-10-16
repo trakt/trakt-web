@@ -3,4 +3,5 @@ export type ServerSyncStatus =
   | { kind: 'never' }
   | { kind: 'paused' }
   | { kind: 'unreachable' }
-  | { kind: 'unauthorized' };
+  | { kind: 'unauthorized' }
+  | { kind: 'webhook-only' };
