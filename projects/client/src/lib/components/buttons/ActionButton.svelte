@@ -1,6 +1,5 @@
 <script lang="ts">
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { Button } from "bits-ui";
   import { useGuardedHref } from "../../features/auth/stores/useGuardedHref";
@@ -27,7 +26,6 @@
   // as a hover tooltip - a pointer-only affordance, gated on mouse so touch is
   // untouched (tap just fires the action). Opt out with `tooltip={false}` where
   // the caller supplies its own tooltip (e.g. custom copy/side).
-  const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
   const { guardedHref, originalHref } = $derived(
     useGuardedHref((props as TraktActionButtonAnchorProps).href),
@@ -70,7 +68,7 @@
   });
 </script>
 
-<Tooltip content={label} variant="compact" disabled={!tooltip || !$isMouse}>
+<Tooltip content={label} variant="compact" disabled={!tooltip}>
   <Button.Root {...host.rootProps}>
     {@render children()}
   </Button.Root>

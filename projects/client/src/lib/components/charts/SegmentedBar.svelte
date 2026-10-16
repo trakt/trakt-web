@@ -91,7 +91,7 @@
             </span>
           {/if}
         </span>
-        <Tooltip content="{segment.percent}%" variant="compact" sideOffset={4}>
+        <Tooltip content="{segment.percent}%" variant="compact" sideOffset={4} openOnTap>
           <div class="segment-fill"></div>
         </Tooltip>
       </div>

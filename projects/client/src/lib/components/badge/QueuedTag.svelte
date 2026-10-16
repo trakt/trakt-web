@@ -4,7 +4,7 @@
   import Tooltip from "../tooltip/Tooltip.svelte";
 </script>
 
-<Tooltip content={m.label_queued_action()}>
+<Tooltip content={m.label_queued_action()} openOnTap>
   <div class="trakt-queued-tag" role="status" aria-label={m.label_queued_action()}>
     <StemTag
       --color-background-stem-tag="var(--color-background-queued-tag)"

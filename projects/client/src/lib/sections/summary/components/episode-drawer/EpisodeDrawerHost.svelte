@@ -180,6 +180,7 @@
     content={episodeTitle}
     disabled={!$isEpisodeTitleTruncated || $isSpoilerHidden}
     side="bottom"
+    openOnTap
   >
     <p
       class="episode-title-meta-info bold ellipsis"

@@ -53,6 +53,7 @@
             content={toHumanNumber(bucket.value, getLocale())}
             variant="compact"
             sideOffset={4}
+            openOnTap
           >
             <div class="histogram-column">
               <div class="histogram-bar">

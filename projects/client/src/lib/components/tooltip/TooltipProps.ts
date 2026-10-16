@@ -15,4 +15,5 @@ export type TooltipProps = {
     bits-ui, which sets pointer-events: none on the content.
   */
   disableHoverableContent?: boolean;
+  openOnTap?: boolean;
 };

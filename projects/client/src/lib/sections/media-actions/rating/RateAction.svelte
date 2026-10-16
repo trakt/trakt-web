@@ -7,7 +7,6 @@
   import type { RateNowProps } from "$lib/sections/summary/components/rating/models/RateNowProps";
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
   import { useRatings } from "$lib/sections/summary/components/rating/useRatings";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
 
   type RateActionProps = {
     target: RateNowProps;
@@ -17,7 +16,6 @@
 
   const { target, title, style = "cover" }: RateActionProps = $props();
 
-  const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
   let requestedOpen = $state(false);
   let ratingAtOpen = $state<number | undefined>(undefined);
@@ -49,7 +47,7 @@
 {/snippet}
 
 <div class="trakt-rate-action-root" data-style={style}>
-  <Tooltip content={label} variant="compact" disabled={!$isMouse}>
+  <Tooltip content={label} variant="compact">
     <Popover
       content={rateContent}
       {label}
