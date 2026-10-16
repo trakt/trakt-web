@@ -36,7 +36,10 @@
   const ratingPrompt = $derived(shuffle(ratingPrompts).at(0));
 
   const handleDismiss = () => {
-    dismiss(lastWatched.media.id, lastWatched.type, "manual");
+    const item: LastWatchedItem | null = lastWatched;
+    if (!item) return;
+
+    dismiss(item.media.id, item.type, "manual");
   };
 </script>
 
