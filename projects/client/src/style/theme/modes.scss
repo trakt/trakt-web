@@ -30,6 +30,8 @@
   --color-accent-default: var(--color-foreground);
 
   --color-input-background: var(--shade-10);
+  --backdrop-filter-input: none;
+  --backdrop-filter-input-search: none;
 
   --color-drawer-border: var(--shade-400);
   --background-vip-drawer: radial-gradient(
@@ -602,6 +604,8 @@
     var(--shade-800) 25%,
     transparent
   );
+  --backdrop-filter-input: blur(var(--ni-4));
+  --backdrop-filter-input-search: blur(var(--ni-8));
 
   --color-drawer-border: var(--shade-700);
   --background-vip-drawer: radial-gradient(
