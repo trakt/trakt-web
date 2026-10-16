@@ -1,13 +1,14 @@
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import { EpisodeComputedType } from '$lib/requests/models/EpisodeType.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
-import { map } from 'rxjs';
+import { map, type Observable } from 'rxjs';
 import type { EpisodeCardProps } from '../../sections/lists/components/models/EpisodeCardProps.ts';
 import { useMediaSpoiler } from './useMediaSpoiler.ts';
 
 type SpoilerImageProps = {
   episode: EpisodeEntry;
   show: ShowEntry;
+  isSpoilerHidden?: Observable<boolean>;
 } & Pick<EpisodeCardProps, 'variant'>;
 
 const SHOW_COVER_VARIANTS: readonly EpisodeCardProps['variant'][] = [
@@ -18,11 +19,11 @@ const SHOW_COVER_VARIANTS: readonly EpisodeCardProps['variant'][] = [
 export function useEpisodeSpoilerImage(props: SpoilerImageProps) {
   const { episode, show, variant } = props;
 
-  const { isSpoilerHidden } = useMediaSpoiler({
+  const isSpoilerHidden = props.isSpoilerHidden ?? useMediaSpoiler({
     show,
     media: episode,
     type: 'episode',
-  });
+  }).isSpoilerHidden;
 
   return isSpoilerHidden.pipe(
     map(($isSpoilerHidden) => {
