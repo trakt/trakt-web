@@ -14,8 +14,10 @@ function toPathname(filename: string): string {
   }
 }
 
+const ANONYMOUS_FILENAMES = ['undefined', '<anonymous>'];
+
 function isAnonymousFrame({ filename }: StackFrame): boolean {
-  return !filename || filename === 'undefined';
+  return !filename || ANONYMOUS_FILENAMES.includes(filename);
 }
 
 function isPageFirstLineFrame({ filename, lineno }: StackFrame): boolean {
