@@ -1,5 +1,5 @@
 import type { MultiSelectSelection } from '$lib/components/select/models/MultiSelectSelection.ts';
-import { EXCLUSION_PREFIX } from './_internal/exclusionPrefix.ts';
+import { EXCLUSION_PREFIX } from './exclusionPrefix.ts';
 
 export function fromMultiSelectSelection(
   { included, excluded }: MultiSelectSelection,

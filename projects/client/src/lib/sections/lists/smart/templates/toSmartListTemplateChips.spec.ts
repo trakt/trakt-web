@@ -45,4 +45,38 @@ describe('util: toSmartListTemplateChips', () => {
 
     expect(chips).toEqual(['Crime', 'Trakt 75% and up', 'Mystery']);
   });
+
+  it('should name the country and language of a template', () => {
+    const chips = toSmartListTemplateChips({
+      source: 'discover',
+      filters: { countries: ['kr'], languages: ['ko'], ratings: [75] },
+      showcase: 'countries',
+    });
+
+    expect(chips).toEqual(['South Korea', 'Korean', 'Trakt 75% and up']);
+  });
+
+  it('should word an excluded genre as not that genre', () => {
+    const chips = toSmartListTemplateChips({
+      source: 'discover',
+      filters: { genres: ['science-fiction', '-superhero'], ratings: [75] },
+      showcase: 'genres',
+    });
+
+    expect(chips).toEqual([
+      'Science Fiction',
+      'Not Superhero',
+      'Trakt 75% and up',
+    ]);
+  });
+
+  it('should word a runtime from zero as an upper bound', () => {
+    const chips = toSmartListTemplateChips({
+      source: 'discover',
+      filters: { runtimes: [0, 95], ratings: [75] },
+      showcase: 'runtimes',
+    });
+
+    expect(chips).toEqual(['Up to 95 minutes', 'Trakt 75% and up']);
+  });
 });

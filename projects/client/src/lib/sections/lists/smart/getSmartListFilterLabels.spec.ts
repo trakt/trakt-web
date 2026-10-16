@@ -68,4 +68,67 @@ describe('getSmartListFilterLabels', () => {
 
     expect(label).toBe('Runtime of 60 to 120 minutes.');
   });
+
+  it('should label a runtime that starts at zero as an upper bound', () => {
+    const [, label] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: { runtimes: [0, 95] },
+    });
+
+    expect(label).toBe('Up to 95 minutes');
+  });
+
+  it('should label countries by name', () => {
+    const [, ...labels] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: { countries: ['kr', 'us'] },
+    });
+
+    expect(labels).toEqual(['South Korea', 'United States']);
+  });
+
+  it('should label languages by name', () => {
+    const [, ...labels] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: { languages: ['ko', 'en'] },
+    });
+
+    expect(labels).toEqual(['Korean', 'English']);
+  });
+
+  it('should label an excluded genre', () => {
+    const [, ...labels] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: { genres: ['science-fiction', '-superhero'] },
+    });
+
+    expect(labels).toEqual(['Science Fiction', 'Not Superhero']);
+  });
+
+  it('should label an excluded country by name', () => {
+    const [, label] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: { countries: ['-kr'] },
+    });
+
+    expect(label).toBe('Not South Korea');
+  });
+
+  it('should label statuses and streaming options with the filter names', () => {
+    const [, ...labels] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: { statuses: ['ended'], watchnow: ['subscriptions'] },
+    });
+
+    expect(labels).toEqual(['Ended', 'Streaming now']);
+  });
+
+  it('should keep certifications as upper case codes', () => {
+    const [, label] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: { certifications: ['pg-13'] },
+    });
+
+    expect(label).toBe('PG-13');
+  });
 });

@@ -1,7 +1,7 @@
 import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import type { Filter } from '../models/Filter.ts';
-import { EXCLUSION_PREFIX } from './exclusionPrefix.ts';
+import { EXCLUSION_PREFIX } from '../exclusionPrefix.ts';
 
 type mapToSearchParamValueProps = {
   filter: Filter;
