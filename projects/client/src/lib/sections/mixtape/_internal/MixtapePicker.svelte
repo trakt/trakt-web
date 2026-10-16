@@ -1,5 +1,4 @@
 <script lang="ts">
-  import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
   import SkeletonCard from "$lib/sections/lists/components/SkeletonCard.svelte";
@@ -26,50 +25,70 @@
   {#if isFull}
     <p class="secondary">{m.text_mixtape_max_picks()}</p>
   {:else if isLoading}
-    <div class="picker-skeleton">
-      {#each Array.from({ length: 6 }, (_, index) => index) as index (index)}
-        <SkeletonCard {index} listIndex={0} />
+    <div class="picker-grid">
+      {#each Array.from({ length: 9 }, (_, index) => index) as index (index)}
+        <div class="picker-cell">
+          <SkeletonCard {index} listIndex={0} />
+        </div>
       {/each}
     </div>
   {:else if picker.items.length === 0}
     <p class="secondary">{emptyText}</p>
   {:else}
-    <GridList
-      id={`mixtape-picker-${picker.kind}`}
-      items={picker.items.map((entry) => ({ ...entry, key: entry.media.key }))}
-      sizing="auto"
-      --width-item="var(--width-portrait-card)"
-    >
-      {#snippet item({ media, isOff })}
-        {#if isOff}
-          <DefaultMediaItem
-            type={media.type}
-            {media}
-            popupActions={null}
-            tag={differentMood}
-            canDeemphasize
-          />
-        {:else}
-          <DefaultMediaItem
-            type={media.type}
-            {media}
-            popupActions={null}
-            urlOverride={{ href: pickHref(media), noscroll: true }}
-            onclick={() => onPick(source)}
-          />
-        {/if}
-      {/snippet}
-    </GridList>
+    <div class="picker-grid" role="list">
+      {#each picker.items as { media, isOff } (media.key)}
+        <div class="picker-cell" role="listitem">
+          {#if isOff}
+            <DefaultMediaItem
+              type={media.type}
+              {media}
+              popupActions={null}
+              tag={differentMood}
+              canDeemphasize
+            />
+          {:else}
+            <DefaultMediaItem
+              type={media.type}
+              {media}
+              popupActions={null}
+              urlOverride={{ href: pickHref(media), noscroll: true }}
+              onclick={() => onPick(source)}
+            />
+          {/if}
+        </div>
+      {/each}
+    </div>
   {/if}
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-mixtape-picker {
-    .picker-skeleton {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--gap-m);
+    .picker-grid {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(var(--width-portrait-card), 1fr)
+      );
+      gap: var(--gap-m) var(--gap-xs);
       padding-inline: var(--layout-distance-side);
+
+      @include for-mobile {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .picker-cell {
+      container-type: inline-size;
+      min-width: 0;
+
+      --width-override-card: 100%;
+      --height-override-card-cover: calc(100cqi * 1.5);
+      --height-override-card: calc(
+        100cqi * 1.5 + var(--height-portrait-card) -
+          var(--height-portrait-card-cover)
+      );
     }
 
     p {

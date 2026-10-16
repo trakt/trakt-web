@@ -7,6 +7,7 @@ export const MixtapeSchema = z.object({
   suggestions: z.array(z.object({
     media: z.union([MovieEntrySchema, ShowEntrySchema]),
     because: z.number(),
+    match: z.number(),
   })),
 });
 

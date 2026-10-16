@@ -135,7 +135,6 @@
   slug={show.slug}
   type="show"
   drilldownLink={relatedLink}
-  mixtapePick={show.id}
 />
 
 <SummaryDrawer

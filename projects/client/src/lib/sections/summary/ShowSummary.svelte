@@ -116,7 +116,6 @@
   slug={media.slug}
   type="show"
   drilldownLink={relatedLink}
-  mixtapePick={media.id}
 />
 
 <!-- TODO: move back to designed position when we have faster queries -->

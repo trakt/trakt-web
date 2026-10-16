@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
-  import MusicNoteIcon from "$lib/components/icons/MusicNoteIcon.svelte";
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
+  import CassetteIcon from "$lib/components/icons/CassetteIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -18,14 +18,14 @@
       <div class="trakt-mixtape-discover-strip">
         <Link href={UrlBuilder.mixtape({ type, source: "discover" })}>
           <div class="strip-content">
-            <MusicNoteIcon />
-            <span class="bold no-wrap">{m.button_text_make_mixtape()}</span>
-            <span class="small secondary ellipsis strip-description">
-              {m.text_mixtape_strip_description()}
+            <span class="strip-icon"><CassetteIcon /></span>
+            <span class="strip-text">
+              <span class="bold">{m.button_text_make_mixtape()}</span>
+              <span class="small secondary ellipsis">
+                {m.text_mixtape_strip_description()}
+              </span>
             </span>
-            <span class="strip-arrow trakt-icon-directional">
-              <ArrowRightIcon />
-            </span>
+            <span class="strip-arrow"><CaretRightIcon /></span>
           </div>
         </Link>
       </div>
@@ -34,36 +34,60 @@
 </RenderFor>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-mixtape-discover-strip {
     padding-inline: var(--layout-distance-side);
+
+    :global(.trakt-link) {
+      display: block;
+      text-decoration: none;
+    }
 
     .strip-content {
       display: flex;
       align-items: center;
       gap: var(--gap-s);
-      min-height: var(--ni-56);
-      padding-inline: var(--gap-m);
+      padding: var(--gap-s);
 
       border-radius: var(--border-radius-l);
       background: var(--color-card-background);
       box-shadow: var(--shadow-floating);
+      color: var(--color-text-primary);
     }
 
-    .strip-description {
-      display: block;
-      min-width: 0;
-      flex: 1;
+    .strip-icon {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--ni-44);
+      height: var(--ni-44);
 
-      @include for-mobile {
-        display: none;
+      border-radius: var(--border-radius-m);
+      background: color-mix(in srgb, var(--purple-500) 14%, transparent);
+      color: var(--color-text-emphasis);
+    }
+
+    .strip-text {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ni-2);
+      flex: 1;
+      min-width: 0;
+
+      .ellipsis {
+        display: block;
       }
     }
 
     .strip-arrow {
-      margin-inline-start: auto;
+      flex: none;
       display: flex;
+      color: var(--color-text-secondary);
+
+      :global(svg) {
+        width: var(--ni-20);
+        height: var(--ni-20);
+      }
     }
   }
 </style>

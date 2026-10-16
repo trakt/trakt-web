@@ -2,7 +2,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import MediaList from "$lib/sections/lists/drilldown/MediaList.svelte";
-  import MixtapeEntryButton from "$lib/sections/mixtape/MixtapeEntryButton.svelte";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import { useRelatedList } from "./stores/useRelatedList";
 
@@ -11,11 +10,9 @@
     type: MediaType;
     slug: string;
     drilldownLink: string;
-    mixtapePick?: number;
   };
 
-  const { title, type, slug, drilldownLink, mixtapePick }: RelatedListProps =
-    $props();
+  const { title, type, slug, drilldownLink }: RelatedListProps = $props();
 </script>
 
 <MediaList
@@ -36,11 +33,5 @@
 >
   {#snippet item(media)}
     <DefaultMediaItem {type} {media} source="related" canDeemphasize />
-  {/snippet}
-
-  {#snippet actions()}
-    {#if mixtapePick != null}
-      <MixtapeEntryButton {type} source="related" pick={mixtapePick} />
-    {/if}
   {/snippet}
 </MediaList>

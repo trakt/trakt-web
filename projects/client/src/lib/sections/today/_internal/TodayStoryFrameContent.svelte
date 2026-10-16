@@ -18,7 +18,7 @@
   import TodayFaces from "./TodayFaces.svelte";
   import TodayForYouAction from "./TodayForYouAction.svelte";
   import TodayMilestoneChip from "./TodayMilestoneChip.svelte";
-  import TodayPosterDetails from "./TodayPosterDetails.svelte";
+  import TodayPosterDetails from "../TodayPosterDetails.svelte";
   import type { TodayStoryFrameContentProps } from "./TodayStoryFrameContentProps.ts";
   import TodayStoryTapZones from "./TodayStoryTapZones.svelte";
   import { toFrameMedia } from "./toFrameMedia.ts";

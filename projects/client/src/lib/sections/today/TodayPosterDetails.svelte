@@ -8,14 +8,15 @@
   import { stripMarkdownLinks } from "$lib/utils/markdown/stripMarkdownLinks.ts";
   import { toSentimentAspects } from "$lib/utils/sentiment/toSentimentAspects.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
-  import type { TodayMedia } from "../models/TodayMedia.ts";
-  import { useTodayDetails } from "../useTodayDetails.ts";
-  import { toMediaMeta } from "./toMediaMeta.ts";
-  import TodaySentimentVerdict from "./TodaySentimentVerdict.svelte";
+  import type { TodayMedia } from "./models/TodayMedia.ts";
+  import { useTodayDetails } from "./useTodayDetails.ts";
+  import { toMediaMeta } from "./_internal/toMediaMeta.ts";
+  import TodaySentimentVerdict from "./_internal/TodaySentimentVerdict.svelte";
 
   const ASPECTS_LIMIT = 4;
 
-  const { media }: { media: TodayMedia } = $props();
+  const { media, kicker = null }: { media: TodayMedia; kicker?: string | null } =
+    $props();
 
   const { ratings, isRatingsLoading, sentiment } = useTodayDetails(
     fromRune(() => media),
@@ -47,6 +48,9 @@
   <div class="details-header">
     <CrossOriginImage src={media.cover.url.medium} alt="" />
     <div class="details-heading">
+      {#if kicker}
+        <p class="tag uppercase bold ellipsis details-kicker">{kicker}</p>
+      {/if}
       <h3 class="ellipsis">{media.title}</h3>
       <p class="small secondary ellipsis">{meta}</p>
     </div>

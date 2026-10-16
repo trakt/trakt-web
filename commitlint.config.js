@@ -82,6 +82,7 @@ module.exports = {
         'link',
         'list',
         'mir',
+        'mixtape',
         'moderation',
         'movie',
         'msw',

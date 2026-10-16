@@ -13206,11 +13206,11 @@
       "description": "Page title of the Mixtape page, where users pick watched titles and get three suggestions with the same feel."
     },
     "text_mixtape_description_movies": {
-      "default": "Pick up to 5 movies you loved for how they felt. We'll mix them into 3 new ones that feel the same.",
+      "default": "Pick up to 5 movies you loved for how they felt.",
       "description": "Intro under the Mixtape heading when picking movies."
     },
     "text_mixtape_description_shows": {
-      "default": "Pick up to 5 shows you loved for how they felt. We'll mix them into 3 new ones that feel the same.",
+      "default": "Pick up to 5 shows you loved for how they felt.",
       "description": "Intro under the Mixtape heading when picking shows."
     },
     "header_mixtape_recent_movies": {
@@ -13250,7 +13250,7 @@
       "description": "Text in the first empty pick slot on the Mixtape page."
     },
     "text_mixtape_slot_next": {
-      "default": "Add another",
+      "default": "Add",
       "description": "Text in the next empty pick slot on the Mixtape page."
     },
     "button_label_mixtape_remove_pick": {
@@ -13290,16 +13290,16 @@
       "description": "Heading above the three suggestions on the Mixtape page."
     },
     "text_mixtape_based_on": {
-      "default": "Based on {titles}",
-      "description": "Line above the Mixtape suggestions naming the picked titles. {titles} is a comma separated list of titles."
+      "default": "Mixed from {titles}",
+      "description": "Line on the Mixtape results naming the picked titles. {titles} is a list of titles."
     },
     "text_mixtape_because": {
       "default": "Because you liked {title}",
       "description": "Line under a Mixtape suggestion naming the picked title it is closest to. {title} is the movie or show title."
     },
     "button_text_mixtape_not_this": {
-      "default": "Not this one",
-      "description": "Button under a Mixtape suggestion that swaps it for the next one."
+      "default": "Not this",
+      "description": "Label under the left button of a Mixtape card, and the stamp shown while swiping a card left. Swaps the suggestion for the next one."
     },
     "button_text_mixtape_change_picks": {
       "default": "Change picks",
@@ -13315,18 +13315,14 @@
     },
     "button_text_make_mixtape": {
       "default": "Make a mixtape",
-      "description": "Button on the History row and on the Discover strip that opens the Mixtape page."
-    },
-    "button_text_add_to_mixtape": {
-      "default": "Add to a mixtape",
-      "description": "Button on the Related row of a movie or show page that opens Mixtape with that title already picked."
+      "description": "Title of the Discover strip that opens the Mixtape page."
     },
     "button_text_start_mixtape_with_this": {
       "default": "Start a mixtape with this",
       "description": "Item in a poster's menu that opens Mixtape with that title already picked."
     },
     "text_mixtape_strip_description": {
-      "default": "Pick titles you loved. Get 3 new ones that feel the same.",
+      "default": "Pick titles you loved. Get 3 that feel the same.",
       "description": "Short line on the Discover strip that opens the Mixtape page."
     },
     "header_ending": {
@@ -13348,6 +13344,74 @@
     "preview_feature_description_show_ending": {
       "default": "Shows an Ending row in a show's details: Complete when the story wrapped up, Unresolved when it did not.",
       "description": "Description of the show ending preview feature."
+    },
+    "text_mixtape_fits_count": {
+      "default": "{count} from your history",
+      "description": "Small text next to the Fits with your picks heading. {count} is how many watched titles still fit."
+    },
+    "text_mixtape_position": {
+      "default": "{position} of {total}",
+      "description": "Which Mixtape card is showing, out of how many. {position} and {total} are numbers."
+    },
+    "text_mixtape_swipe_hint": {
+      "default": "Swipe {right} for watchlist, {left} for another",
+      "description": "One-time hint under the first Mixtape card. {right} and {left} are the bold words from text_mixtape_swipe_right and text_mixtape_swipe_left."
+    },
+    "text_mixtape_swipe_right": {
+      "default": "right",
+      "description": "Bold direction word inside text_mixtape_swipe_hint."
+    },
+    "text_mixtape_swipe_left": {
+      "default": "left",
+      "description": "Bold direction word inside text_mixtape_swipe_hint."
+    },
+    "text_mixtape_or_swipe": {
+      "default": "or swipe",
+      "description": "Text between the two Mixtape card buttons, saying the card can also be swiped."
+    },
+    "tag_mixtape_tap_details": {
+      "default": "Tap for details",
+      "description": "One-time chip on the first Mixtape card saying a tap flips it to show details."
+    },
+    "tag_mixtape_match": {
+      "default": "{match}% match",
+      "description": "Tag on a Mixtape suggestion saying how closely it matches the picked titles. {match} is a number from 0 to 100."
+    },
+    "button_label_mixtape_another": {
+      "default": "Not this, show another",
+      "description": "Accessible label of the left button on a Mixtape card that swaps the suggestion for the next one."
+    },
+    "button_text_mixtape_show_another": {
+      "default": "Show me another",
+      "description": "Link in the Mixtape details panel that swaps the selected suggestion for the next one."
+    },
+    "button_label_mixtape_show_another_for": {
+      "default": "Show me another instead of {title}",
+      "description": "Accessible label of the swap button on a Mixtape poster. {title} is the movie or show title."
+    },
+    "text_mixtape_swapped": {
+      "default": "Swapped {old} for {new}",
+      "description": "Short notice after a Mixtape suggestion was swapped. {old} and {new} are movie or show titles."
+    },
+    "tag_mixtape_on_watchlist": {
+      "default": "On watchlist",
+      "description": "Badge on a Mixtape poster that was added to the watchlist."
+    },
+    "header_mixtape_done": {
+      "default": "That's your mixtape",
+      "description": "Heading on the Mixtape end screen after three titles were added to the watchlist."
+    },
+    "text_mixtape_done": {
+      "default": "Done",
+      "description": "Small text under Your mixtape on the end screen."
+    },
+    "header_mixtape_added": {
+      "default": "On your watchlist now",
+      "description": "Heading above the posters added to the watchlist from this Mixtape."
+    },
+    "button_text_mixtape_show_more": {
+      "default": "Show 3 more",
+      "description": "Button on the Mixtape end screen that deals three new suggestions for the same picks."
     }
   }
 }

@@ -1,9 +1,9 @@
 import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
+import CassetteIcon from '$lib/components/icons/CassetteIcon.svelte';
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FlagIcon from '$lib/components/icons/FlagIcon.svelte';
-import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
@@ -48,7 +48,7 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     description: () => m.preview_feature_description_rewatch(),
   },
   [FeatureFlag.Soundtrack]: {
-    icon: MusicNoteIcon,
+    icon: CassetteIcon,
     title: () => m.preview_feature_title_soundtrack(),
     addedAt: new Date('2026-08-03'),
     description: () => m.preview_feature_description_soundtrack(),
@@ -102,7 +102,7 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     audience: 'director',
   },
   [FeatureFlag.Mixtape]: {
-    icon: MusicNoteIcon,
+    icon: CassetteIcon,
     title: () => m.preview_feature_title_mixtape(),
     addedAt: new Date('2026-10-16'),
     description: () => m.preview_feature_description_mixtape(),

@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import CassetteIcon from "$lib/components/icons/CassetteIcon.svelte";
   import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
   import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
@@ -19,7 +21,7 @@
   import MixtapeResults from "./_internal/MixtapeResults.svelte";
   import MixtapeTray from "./_internal/MixtapeTray.svelte";
   import { parseMixtapeParams } from "./_internal/parseMixtapeParams.ts";
-  import { toMixtapeResults } from "./_internal/toMixtapeResults.ts";
+  import { toMixtapeSlots } from "./_internal/toMixtapeSlots.ts";
   import { toPickerItems } from "./_internal/toPickerItems.ts";
   import { useMixtape } from "./useMixtape.ts";
 
@@ -77,11 +79,25 @@
     $isHistoryLoading || (picker.kind === "fits" && $isMixtapeLoading),
   );
   const isFull = $derived(params.picks.length >= MAX_MIXTAPE_PICKS);
-  const results = $derived(toMixtapeResults($mixtape.suggestions, params.skips));
+  const slots = $derived(toMixtapeSlots($mixtape.suggestions, params.skips));
+  const canSwap = $derived(
+    $mixtape.suggestions.some(
+      ({ media }) =>
+        !params.skips.includes(media.id) &&
+        !slots.some((slot) => slot.media.id === media.id),
+    ),
+  );
 
   const titleOf = (id: number) =>
     $picked.find((media) => media.id === id)?.title ?? null;
-  const pickTitles = $derived($picked.map((media) => media.title));
+
+  const replaceSkips = (skips: ReadonlyArray<number>) =>
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
+    goto(href({ view: "results", skips: [...skips] }), {
+      replaceState: true,
+      noScroll: true,
+      keepFocus: true,
+    });
 
   onMount(() => {
     trackOpen({ source: params.source ?? "direct", type: params.type });
@@ -101,23 +117,29 @@
   });
 </script>
 
-<div class="trakt-mixtape">
-  <header class="mixtape-header">
-    <div class="mixtape-heading">
-      <h2>
-        {params.view === "results"
-          ? m.header_mixtape_results()
-          : m.page_title_mixtape()}
-      </h2>
-      {#if params.view === "pick"}
-        <p class="secondary">
-          {params.type === "show"
-            ? m.text_mixtape_description_shows()
-            : m.text_mixtape_description_movies()}
-        </p>
-      {/if}
-    </div>
-    {#if params.view === "pick"}
+{#if params.view === "results"}
+  <MixtapeResults
+    {slots}
+    {canSwap}
+    isLoading={$isMixtapeLoading}
+    picked={$picked}
+    {titleOf}
+    closeHref={UrlBuilder.discover()}
+    changeHref={href({})}
+    startOverHref={UrlBuilder.mixtape({ type: params.type })}
+    onSkip={(id) => replaceSkips([...params.skips, id])}
+    onUndo={() => replaceSkips(params.skips.slice(0, -1))}
+    onMore={(ids) => replaceSkips([...params.skips, ...ids])}
+    onResult={(action, position) =>
+      trackResult({ action, position: String(position), type: params.type })}
+  />
+{:else}
+  <div class="trakt-mixtape">
+    <header class="mixtape-header">
+      <div class="mixtape-title">
+        <span class="mixtape-icon"><CassetteIcon /></span>
+        <h2>{m.page_title_mixtape()}</h2>
+      </div>
       <SegmentedSelect
         options={typeOptions}
         value={params.type}
@@ -128,23 +150,14 @@
           <ToggleIcon {option} />
         {/snippet}
       </SegmentedSelect>
-    {/if}
-  </header>
+    </header>
 
-  {#if params.view === "results"}
-    <MixtapeResults
-      {results}
-      isLoading={$isMixtapeLoading}
-      {pickTitles}
-      {titleOf}
-      skipHref={(id) =>
-        href({ view: "results", skips: [...params.skips, id] })}
-      changeHref={href({})}
-      startOverHref={UrlBuilder.mixtape({ type: params.type })}
-      onResult={(action, position) =>
-        trackResult({ action, position: String(position), type: params.type })}
-    />
-  {:else}
+    <p class="secondary mixtape-description">
+      {params.type === "show"
+        ? m.text_mixtape_description_shows()
+        : m.text_mixtape_description_movies()}
+    </p>
+
     <div class="mixtape-controls">
       <MixtapeTray
         picks={params.picks}
@@ -171,6 +184,11 @@
               ? m.header_mixtape_recent_shows()
               : m.header_mixtape_recent_movies()}
       </h3>
+      {#if picker.kind === "fits" && !isPickerLoading}
+        <span class="small secondary">
+          {m.text_mixtape_fits_count({ count: String(picker.items.length) })}
+        </span>
+      {/if}
     </div>
 
     <MixtapePicker
@@ -200,29 +218,42 @@
           fits: $mixtape.fits.length,
         })}
     />
-  {/if}
-</div>
+  </div>
+{/if}
 
 <style lang="scss">
   .trakt-mixtape {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-l);
+    gap: var(--gap-m);
+    padding-block-start: var(--gap-m);
 
     .mixtape-header {
       display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: var(--gap-m);
+      gap: var(--gap-s);
       padding-inline: var(--layout-distance-side);
     }
 
-    .mixtape-heading {
+    .mixtape-title {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: var(--gap-xs);
-      min-width: 0;
+
+      h2 {
+        margin: 0;
+      }
+    }
+
+    .mixtape-icon {
+      display: flex;
+      color: var(--color-text-emphasis);
+    }
+
+    .mixtape-description {
+      margin: 0;
+      padding-inline: var(--layout-distance-side);
       max-width: var(--ni-520);
     }
 
@@ -235,7 +266,14 @@
     }
 
     .mixtape-grid-head {
+      display: flex;
+      align-items: baseline;
+      gap: var(--gap-xs);
       padding-inline: var(--layout-distance-side);
+
+      h3 {
+        margin: 0;
+      }
     }
   }
 </style>
