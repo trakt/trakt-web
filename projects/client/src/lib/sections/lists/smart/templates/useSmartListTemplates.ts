@@ -5,8 +5,9 @@ import { useBannerDismissal } from '$lib/sections/banner/useBannerDismissal.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
-import { combineLatest, map, type Observable } from 'rxjs';
+import { combineLatest, filter, map, type Observable, startWith } from 'rxjs';
 import { usePaginatedListQuery } from '../../stores/usePaginatedListQuery.ts';
+import { getSmartListTemplatesPresentation } from './getSmartListTemplatesPresentation.ts';
 import { getVisibleSmartListTemplates } from './getVisibleSmartListTemplates.ts';
 
 export function useSmartListTemplates(mode$: Observable<DiscoverMode>) {
@@ -22,11 +23,10 @@ export function useSmartListTemplates(mode$: Observable<DiscoverMode>) {
   const templates = combineLatest([
     lists,
     query.pipe(map(($query) => $query.data ?? [])),
-    isDismissed,
     mode$,
   ]).pipe(
-    map(([$lists, $templates, $isDismissed, $mode]) =>
-      $isDismissed ? [] : getVisibleSmartListTemplates({
+    map(([$lists, $templates, $mode]) =>
+      getVisibleSmartListTemplates({
         templates: $templates,
         lists: $lists,
         mode: $mode,
@@ -34,10 +34,22 @@ export function useSmartListTemplates(mode$: Observable<DiscoverMode>) {
     ),
   );
 
+  const presentation = combineLatest([lists, areListsLoading, isDismissed])
+    .pipe(
+      filter(([, $isLoading]) => !$isLoading),
+      map(([$lists, , $isHidden]) =>
+        getSmartListTemplatesPresentation({
+          listCount: $lists.length,
+          isHidden: $isHidden,
+        })
+      ),
+      startWith(null),
+    );
+
   const isLoading = anyTrue([
     areListsLoading,
     query.pipe(map(toLoadingState)),
   ]);
 
-  return { templates, isLoading, hide: dismiss };
+  return { templates, presentation, isLoading, hide: dismiss };
 }

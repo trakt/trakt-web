@@ -6,8 +6,6 @@ import { matchesDiscoverMode } from '../matchesDiscoverMode.ts';
 import { closeOpenSmartListRanges } from './closeOpenSmartListRanges.ts';
 import { getSmartListTemplateCopy } from './getSmartListTemplateCopy.ts';
 
-const MAX_LISTS_WITH_TEMPLATES = 3;
-
 type VisibleSmartListTemplatesProps = {
   templates: SmartListTemplate[];
   lists: SmartList[];
@@ -31,10 +29,6 @@ const isCovered = (template: SmartListTemplate, lists: SmartList[]) =>
 export function getVisibleSmartListTemplates(
   { templates, lists, mode }: VisibleSmartListTemplatesProps,
 ): SmartListTemplate[] {
-  if (lists.length >= MAX_LISTS_WITH_TEMPLATES) {
-    return [];
-  }
-
   return templates.filter((template) =>
     getSmartListTemplateCopy(template.id) !== undefined &&
     fitsMode(template, mode) &&

@@ -5,7 +5,7 @@ import type { PersonalListType } from '$lib/sections/lists/user/models/PersonalL
 import type { DiscoverMode } from '../../features/filters/models/DiscoverMode.ts';
 import type { CrewPositions } from '../../requests/models/CrewPosition.ts';
 import { DRAWER_VIEW_PARAM } from '$lib/components/drawer/constants/index.ts';
-import { SUPPORT_EMAIL } from '../constants.ts';
+import { SMART_LIST_TEMPLATES_ANCHOR, SUPPORT_EMAIL } from '../constants.ts';
 import { buildParamString } from './buildParamString.ts';
 
 type TypeParams = {
@@ -277,6 +277,7 @@ export const UrlBuilder = {
       },
       convert: (slug: string) => `/lists/smart/convert/${slug}`,
       all: () => '/lists/smart/view',
+      templates: () => `/lists/smart/view#${SMART_LIST_TEMPLATES_ANCHOR}`,
       view: (slug: string) => `/lists/smart/view/${slug}`,
     },
     official: (slug: string, params: Record<string, string | number> = {}) =>

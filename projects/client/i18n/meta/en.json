@@ -13798,6 +13798,28 @@
       "default": "Start from one of ours. Change anything and it becomes yours.",
       "description": "Intro line above the row of official smart list templates on the Smart tab of the lists page. Explains that a template is only a starting point."
     },
+    "list_title_smart_list_templates": {
+      "default": "Start from a template",
+      "description": "Heading above the grid of official smart list templates on the Smart Lists page. Keep it short; it is a section title, not a sentence about the lists."
+    },
+    "button_text_browse_smart_list_templates_one": {
+      "default": "Browse {count} template",
+      "description": "Single line link under the user's smart lists that opens the official smart list templates (singular, exactly one template). The count is already formatted.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_browse_smart_list_templates_other": {
+      "default": "Browse {count} templates",
+      "description": "Single line link under the user's smart lists that opens the official smart list templates (plural). The count is already formatted. Keep it short; it must fit on one line on a phone.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
     "button_label_hide_smart_list_templates": {
       "default": "Hide list templates",
       "description": "Accessible label for the button that hides the row of official smart list templates."

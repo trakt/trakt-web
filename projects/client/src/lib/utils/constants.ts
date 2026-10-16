@@ -37,6 +37,7 @@ export const RECOMMENDED_DEFAULT_WATCH_WINDOW = 25;
 export const RECOMMENDED_DEFAULT_MIN_YEAR = 1990;
 
 export const DEFAULT_SMART_LIST_LIMIT = 5;
+export const SMART_LIST_TEMPLATES_ANCHOR = 'smart-list-templates';
 
 export const SUPPORT_EMAIL = 'support@trakt.tv';
 export const COPYRIGHT_EMAIL = 'copyright@trakt.tv';
