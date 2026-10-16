@@ -15,6 +15,7 @@ type CreatePlexConnectionParams = {
   feeds: MediaSyncFeed[];
   syncAccountId: string | null;
   importHistory: boolean;
+  webhookOnly: boolean;
 } & ApiParams;
 
 export async function createMediaSyncConnectionRequest(
@@ -26,6 +27,7 @@ export async function createMediaSyncConnectionRequest(
     feeds,
     syncAccountId,
     importHistory,
+    webhookOnly,
   }: CreatePlexConnectionParams,
 ): Promise<MediaSyncResult<MediaSyncConnection>> {
   const response = await rawApiFetch({
@@ -42,6 +44,7 @@ export async function createMediaSyncConnectionRequest(
         feeds,
         sync_account_id: syncAccountId ?? undefined,
         import_history: importHistory,
+        webhook_only: webhookOnly || undefined,
       }),
     },
   });

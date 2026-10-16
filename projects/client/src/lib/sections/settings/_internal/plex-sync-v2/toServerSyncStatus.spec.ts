@@ -72,4 +72,15 @@ describe('toServerSyncStatus', () => {
       }).kind,
     ).to.equal('synced');
   });
+
+  it('reports a server that only gets the Plex webhook', () => {
+    expect(
+      toServerSyncStatus({
+        ...healthy,
+        status: 'webhook_only',
+        lastSyncedAt: null,
+      }),
+    )
+      .to.deep.equal({ kind: 'webhook-only' });
+  });
 });

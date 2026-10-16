@@ -19,6 +19,6 @@ export type PlexConnectState =
     feeds: MediaSyncFeed[];
     importHistory: boolean;
   }
-  | { step: 'connecting' }
+  | { step: 'connecting'; isWebhookOnly: boolean }
   | { step: 'expired' }
   | { step: 'failed'; error: string };

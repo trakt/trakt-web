@@ -12038,6 +12038,34 @@
       "default": "Not reachable from the internet",
       "description": "Shown under a Plex server that Trakt cannot reach, so it cannot be synced."
     },
+    "tag_media_sync_webhook_only": {
+      "default": "Webhook only",
+      "description": "Tag on a Plex server Trakt cannot reach, which only gets updates from the Plex webhook. Keep short."
+    },
+    "description_media_sync_webhook_only_intro": {
+      "default": "Trakt can't reach this server, so it can't sync your library or past watches. Your Plex webhook still sends:",
+      "description": "Shown in the connect drawer when the user picks a Plex server Trakt cannot reach. Followed by a short list of what the webhook still sends."
+    },
+    "description_media_sync_webhook_only_progress": {
+      "default": "what you're watching and where you paused",
+      "description": "List item under the webhook-only note in the connect drawer."
+    },
+    "description_media_sync_webhook_only_watches": {
+      "default": "watches, as you finish them",
+      "description": "List item under the webhook-only note in the connect drawer."
+    },
+    "description_media_sync_webhook_only_ratings": {
+      "default": "ratings you give in Plex",
+      "description": "List item under the webhook-only note in the connect drawer."
+    },
+    "description_media_sync_webhook_only": {
+      "default": "Watches and ratings come from your Plex webhook.",
+      "description": "Status line on a connected Plex server Trakt cannot reach, which only gets updates from the Plex webhook."
+    },
+    "description_sync_webhooks_unreachable_servers": {
+      "default": "On servers Trakt can't reach, it also adds your watches and ratings.",
+      "description": "Second sentence of the Webhooks tab intro, about servers Trakt cannot reach."
+    },
     "button_media_sync_choose_server": {
       "default": "Choose",
       "description": "Button that picks a Plex server to connect from the list of the user's servers."

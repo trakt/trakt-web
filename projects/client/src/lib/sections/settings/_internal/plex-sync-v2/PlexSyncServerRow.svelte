@@ -8,6 +8,7 @@
   import { iffy } from "$lib/utils/function/iffy.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
+  import SettingsPill from "../SettingsPill.svelte";
   import { PLEX_ACCOUNT_SERVER_ID } from "./PLEX_ACCOUNT_SERVER_ID.ts";
   import PlexManageDrawer from "./PlexManageDrawer.svelte";
   import type { ServerSyncStatus } from "./models/ServerSyncStatus.ts";
@@ -67,6 +68,8 @@
         return m.description_media_sync_unreachable();
       case "unauthorized":
         return m.description_media_sync_unauthorized();
+      case "webhook-only":
+        return m.description_media_sync_webhook_only();
     }
   }
 
@@ -88,6 +91,8 @@
       <span class="needs-attention bold tag">
         {m.tag_media_sync_needs_attention()}
       </span>
+    {:else if status.kind === "webhook-only"}
+      <SettingsPill label={m.tag_media_sync_webhook_only()} />
     {/if}
   {/snippet}
 
@@ -110,7 +115,7 @@
     >
       {m.button_media_sync_reconnect()}
     </Button>
-  {:else}
+  {:else if status.kind !== "webhook-only"}
     <RenderFor audience="vip">
       <Button
         size="small"

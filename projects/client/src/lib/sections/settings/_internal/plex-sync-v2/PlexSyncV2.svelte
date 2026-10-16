@@ -157,6 +157,7 @@
 {#if isConnecting}
   <PlexConnectDrawer
     flow={$connectState}
+    isVip={$user.isVip}
     onOpenSignIn={connect.openSignIn}
     onChooseServer={connect.chooseServer}
     onChooseAccount={connect.chooseAccount}

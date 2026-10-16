@@ -15,13 +15,16 @@
   import type { PlexConnectState } from "./models/PlexConnectState.ts";
   import type { PlexConnectStep } from "./models/PlexConnectStep.ts";
   import PlexConnectProgress from "./PlexConnectProgress.svelte";
+  import SettingsPill from "../SettingsPill.svelte";
   import PlexFeedSwitches from "./PlexFeedSwitches.svelte";
   import PlexProfilePicker from "./PlexProfilePicker.svelte";
   import { PLEX_ACCOUNT_SERVER_ID } from "./PLEX_ACCOUNT_SERVER_ID.ts";
+  import { isWebhookOnlyServer } from "./isWebhookOnlyServer.ts";
   import { toConnectSteps } from "./toConnectSteps.ts";
 
   const {
     flow,
+    isVip,
     onOpenSignIn,
     onChooseServer,
     onChooseAccount,
@@ -33,6 +36,7 @@
     onClose,
   }: {
     flow: PlexConnectState;
+    isVip: boolean;
     onOpenSignIn: () => void;
     onChooseServer: (serverId: string) => void;
     onChooseAccount: (accountId: string) => void;
@@ -56,6 +60,12 @@
 
   const isAccountOnly = $derived(
     flow.step === "choosing" && flow.serverId === PLEX_ACCOUNT_SERVER_ID,
+  );
+
+  const isWebhookOnly = $derived(
+    (flow.step === "choosing" &&
+      isWebhookOnlyServer(flow.servers, flow.serverId)) ||
+      (flow.step === "connecting" && flow.isWebhookOnly),
   );
 
   const orderedServers = $derived(
@@ -87,6 +97,7 @@
   const steps = $derived(
     toConnectSteps({
       isAccountOnly,
+      isWebhookOnly,
       hasProfiles: flow.step === "choosing" &&
         (flow.accounts?.length ?? 0) > 1,
       hasHistory: flow.step === "choosing" && flow.feeds.includes("history"),
@@ -97,7 +108,7 @@
     if (flow.step === "starting" || flow.step === "waiting") {
       return "sign-in";
     }
-    if (flow.step === "connecting") return "sync";
+    if (flow.step === "connecting") return isWebhookOnly ? "server" : "sync";
     return chosenStep;
   });
 
@@ -234,7 +245,26 @@
                 variant="custom"
               >
                 {#snippet icon()}<ServerIcon />{/snippet}
-                {#if isChosen && isServerReady}
+                {#snippet tag()}
+                  {#if isWebhookOnlyServer(flow.servers, server.id)}
+                    <SettingsPill
+                      label={isVip
+                        ? m.tag_media_sync_webhook_only()
+                        : m.tag_text_vip()}
+                    />
+                  {/if}
+                {/snippet}
+                {#if isChosen && isServerReady && isWebhookOnly}
+                  <Button
+                    size="small"
+                    variant="primary"
+                    color="purple"
+                    label={m.button_label_media_sync_connect_server()}
+                    onclick={onConnect}
+                  >
+                    {m.button_media_sync_connect_server()}
+                  </Button>
+                {:else if isChosen && isServerReady}
                   <Button
                     size="small"
                     variant="primary"
@@ -264,7 +294,7 @@
                     label={m.button_label_media_sync_choose_server({
                       server: toServerTitle(server),
                     })}
-                    disabled={!server.reachable}
+                    disabled={!server.reachable && !isVip}
                     onclick={() => onChooseServer(server.id)}
                   >
                     {m.button_media_sync_choose_server()}
@@ -273,6 +303,16 @@
               </SettingsGroupRow>
             {/each}
           </SettingsGroupCard>
+          {#if isWebhookOnly}
+            <div class="webhook-only-note small">
+              <p>{m.description_media_sync_webhook_only_intro()}</p>
+              <ul>
+                <li>{m.description_media_sync_webhook_only_progress()}</li>
+                <li>{m.description_media_sync_webhook_only_watches()}</li>
+                <li>{m.description_media_sync_webhook_only_ratings()}</li>
+              </ul>
+            </div>
+          {/if}
         {:else if flow.step === "choosing" && step === "profile" &&
           flow.accounts}
           <PlexProfilePicker
@@ -381,6 +421,21 @@
 
     p {
       margin: 0;
+    }
+  }
+
+  .webhook-only-note {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+
+    padding: var(--ni-12);
+    border-radius: var(--border-radius-m);
+    background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
+
+    ul {
+      margin: 0;
+      padding-inline-start: var(--ni-20);
     }
   }
 

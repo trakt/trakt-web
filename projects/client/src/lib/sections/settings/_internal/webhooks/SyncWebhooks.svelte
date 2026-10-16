@@ -2,7 +2,6 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
   import ServerIcon from "$lib/components/icons/ServerIcon.svelte";
-  import TextTag from "$lib/components/tags/TextTag.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import { mediaSyncConnectionsQuery } from "$lib/requests/media-sync/mediaSyncConnectionsQuery.ts";
@@ -12,6 +11,7 @@
   import { onDestroy } from "svelte";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
+  import SettingsPill from "../SettingsPill.svelte";
   import { toPlexWebhook } from "./toPlexWebhook.ts";
 
   const COPIED_RESET_DURATION = time.seconds(2);
@@ -44,17 +44,12 @@
   onDestroy(() => clearTimeout(resetTimer));
 </script>
 
-{#snippet pill(text: string)}
-  <TextTag classList="webhook-pill">
-    <p class="bold">{text}</p>
-  </TextTag>
-{/snippet}
-
 <div class="trakt-sync-webhooks">
   <header class="webhooks-header">
     <p class="bold">{m.header_sync_webhooks_live_progress()}</p>
     <p class="secondary small">
       {m.description_sync_webhooks_live_progress()}
+      {m.description_sync_webhooks_unreachable_servers()}
     </p>
   </header>
 
@@ -69,11 +64,11 @@
       >
         {#snippet icon()}<PlexLogo />{/snippet}
         {#snippet tag()}
-          {@render pill(
-            m.label_sync_webhooks_server_count({
+          <SettingsPill
+            label={m.label_sync_webhooks_server_count({
               count: $webhook.serverNames.length,
-            }),
-          )}
+            })}
+          />
         {/snippet}
         {#snippet children()}{/snippet}
       </SettingsGroupRow>
@@ -101,7 +96,7 @@
     >
       {#snippet icon()}<ServerIcon />{/snippet}
       {#snippet tag()}
-        {@render pill(m.label_sync_webhooks_soon())}
+        <SettingsPill label={m.label_sync_webhooks_soon()} />
       {/snippet}
       {#snippet children()}{/snippet}
     </SettingsGroupRow>
@@ -143,14 +138,5 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  :global(.webhook-pill) {
-    flex-shrink: 0;
-
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-xl);
-
-    background: color-mix(in srgb, var(--color-foreground) 10%, transparent);
   }
 </style>
