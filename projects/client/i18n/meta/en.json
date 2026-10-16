@@ -5912,6 +5912,24 @@
         }
       }
     },
+    "filter_label_runtime_up_to": {
+      "default": "Up to {max} minutes",
+      "description": "Label for a runtime filter that has no minimum, shown on smart list filter chips, e.g. 'Up to 95 minutes'.",
+      "variables": {
+        "max": {
+          "type": "number"
+        }
+      }
+    },
+    "smart_list_filter_label_excluded": {
+      "default": "Not {value}",
+      "description": "Chip label for a smart list filter value that is left out, e.g. 'Not Superhero' for an excluded genre. {value} is the already translated name of the excluded value.",
+      "variables": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
     "header_behavior": {
       "default": "Behavior",
       "description": "Header for the section that allows users to change the behavior, i.e. spoiler settings and watch again behavior."

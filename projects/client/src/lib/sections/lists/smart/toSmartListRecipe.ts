@@ -1,4 +1,4 @@
-import { EXCLUSION_PREFIX } from '$lib/features/filters/_internal/exclusionPrefix.ts';
+import { EXCLUSION_PREFIX } from '$lib/features/filters/exclusionPrefix.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { SmartListFilters } from '$lib/requests/models/SmartListFilters.ts';

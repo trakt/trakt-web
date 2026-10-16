@@ -1,11 +1,15 @@
+import { EXCLUSION_PREFIX } from '$lib/features/filters/exclusionPrefix.ts';
 import { parentalGuideFilters } from '$lib/features/filters/parentalGuideFilters.ts';
 import { OPEN_VOTES_CEILING } from './openVotesCeiling.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
+import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
+import { toLanguageName } from '$lib/utils/formatting/intl/toLanguageName.ts';
 import { toHumanCount } from '$lib/utils/formatting/number/toHumanCount.ts';
 import { toPercentage } from '$lib/utils/formatting/number/toPercentage.ts';
 import { toTitleCaseSlug } from '$lib/utils/formatting/string/toTitleCaseSlug.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
+import { toTranslatedStatus } from '$lib/utils/formatting/string/toTranslatedStatus.ts';
 
 function toRatingPercentage(value: number): string {
   return toPercentage(value / 100, languageTag());
@@ -34,6 +38,10 @@ function formatNumberRange(
 
 function formatRuntimeRange(range: number[]): string {
   const [min, max] = range;
+
+  if (min === 0 && max != null) {
+    return m.filter_label_runtime_up_to({ max });
+  }
 
   if (min != null && max != null) {
     return m.advanced_filter_label_runtime({ min, max });
@@ -110,17 +118,43 @@ function formatVotesRange(range: number[], source: string): string {
   });
 }
 
-function formatList(key: string, values: string[]): string[] {
+const WATCHNOW_LABELS: Record<string, () => string> = {
+  favorites: m.option_text_my_favorites,
+  subscriptions: m.option_text_streaming_now,
+  free: m.list_title_streaming_free,
+  any: m.option_text_all_digital_releases,
+};
+
+function formatListValue(key: string, value: string): string {
   switch (key) {
     case 'genres':
     case 'subgenres':
-      return values.map((genre) => toTranslatedGenre(genre));
-    case 'certifications':
+      return toTranslatedGenre(value);
+    case 'languages':
+      return toLanguageName(value, languageTag());
     case 'countries':
-      return values.map((value) => value.toUpperCase());
+      return toCountryName(value.toUpperCase(), languageTag());
+    case 'certifications':
+      return value.toUpperCase();
+    case 'statuses':
+      return toTranslatedStatus(value);
+    case 'watchnow':
+      return WATCHNOW_LABELS[value]?.() ?? toTitleCaseSlug(value);
     default:
-      return values.map(toTitleCaseSlug);
+      return toTitleCaseSlug(value);
   }
+}
+
+function formatList(key: string, values: string[]): string[] {
+  return values.map((raw) => {
+    if (!raw.startsWith(EXCLUSION_PREFIX)) {
+      return formatListValue(key, raw);
+    }
+
+    return m.smart_list_filter_label_excluded({
+      value: formatListValue(key, raw.slice(EXCLUSION_PREFIX.length)),
+    });
+  });
 }
 
 const PLAIN_RANGE_SOURCES: Record<string, string> = {
