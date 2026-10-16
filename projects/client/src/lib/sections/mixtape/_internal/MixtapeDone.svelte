@@ -1,8 +1,9 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import WatchlistedTag from "$lib/components/media/tags/WatchlistedTag.svelte";
+  import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MixtapeDoneProps } from "./MixtapeDoneProps.ts";
@@ -40,11 +41,15 @@
       <div class="done-thumbs">
         {#each kept as { media } (media.id)}
           <div class="done-thumb">
-            <CrossOriginImage
-              src={media.poster.url.medium}
-              alt={m.image_alt_media_poster({ title: media.title })}
-            />
-            <span class="done-badge"><BookmarkIcon state="added" /></span>
+            <div class="done-cover">
+              <CrossOriginImage
+                src={media.poster.url.medium}
+                alt={m.image_alt_media_poster({ title: media.title })}
+              />
+            </div>
+            <IndicatorTags>
+              <WatchlistedTag />
+            </IndicatorTags>
           </div>
         {/each}
       </div>
@@ -76,7 +81,6 @@
       <Button
         href={startOverHref}
         variant="secondary"
-        style="ghost"
         label={m.button_text_mixtape_start_over()}
       >
         {m.button_text_mixtape_start_over()}
@@ -169,14 +173,16 @@
   }
 
   .done-thumbs {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--gap-s);
   }
 
   .done-thumb {
-    position: relative;
-    flex: none;
-    width: var(--ni-96);
+    --width-override-card: 100%;
+  }
+
+  .done-cover {
     aspect-ratio: 2 / 3;
     overflow: hidden;
 
@@ -188,26 +194,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-  }
-
-  .done-badge {
-    position: absolute;
-    inset-block-end: var(--ni-6);
-    inset-inline-end: var(--ni-6);
-
-    display: grid;
-    place-items: center;
-    width: var(--ni-24);
-    height: var(--ni-24);
-
-    border-radius: 50%;
-    background: var(--purple-500);
-    color: var(--purple-50);
-
-    :global(svg) {
-      width: var(--ni-12);
-      height: var(--ni-12);
     }
   }
 
