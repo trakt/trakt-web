@@ -29,6 +29,9 @@
   const { guardedHref, originalHref } = $derived(
     useGuardedHref((props as TraktButtonAnchorProps).href),
   );
+  const hasClickOutside = $derived(
+    (props as TraktButtonAnchorProps).onclickoutside != null,
+  );
   const noscroll = $derived((props as TraktButtonAnchorProps).noscroll);
   const replacestate = $derived((props as TraktButtonAnchorProps).replacestate);
 
@@ -65,10 +68,14 @@
       "data-dpad-navigation": navigationType,
       "data-testid": dataTestId,
     }),
-    commonActions: [
-      (node) => disableTransitionOn(node, "touch"),
-      (node) => clickOutside(node),
-    ],
+    get commonActions() {
+      return hasClickOutside
+        ? [
+          (node: HTMLElement) => disableTransitionOn(node, "touch"),
+          (node: HTMLElement) => clickOutside(node),
+        ]
+        : [(node: HTMLElement) => disableTransitionOn(node, "touch")];
+    },
   });
 </script>
 
