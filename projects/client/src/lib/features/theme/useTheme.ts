@@ -1,6 +1,4 @@
 import { browser } from '$app/environment';
-import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
-import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { computeVariable } from '$lib/stores/css/computeVariable.ts';
 import { retry } from '$lib/utils/retry/retry.ts';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
@@ -28,12 +26,10 @@ if (browser) {
 
 export function useTheme() {
   const theme: BehaviorSubject<Theme> = getContext(THEME_COOKIE_NAME);
-  const { track } = useTrack(AnalyticsEvent.Theme);
 
   async function set(value: Theme) {
     globalThis.document.documentElement.dataset.theme = value;
 
-    track({ theme: value });
     theme.next(value);
 
     const response = await retry(() =>

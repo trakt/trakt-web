@@ -4,6 +4,8 @@
   import { AnalyticsEvent } from "./events/AnalyticsEvent";
   import { useTrack } from "./useTrack";
 
+  const AUTH_REDIRECT_ROUTES = new Set(["/callback", "/silent-redirect"]);
+
   const { track } = useTrack(AnalyticsEvent.PageView);
 
   // `route.id` only, never a pathname: HAL cannot tell a template from a real
@@ -11,7 +13,7 @@
   onMount(() => {
     const route = page.route.id;
 
-    if (!route) {
+    if (!route || AUTH_REDIRECT_ROUTES.has(route)) {
       return;
     }
 
