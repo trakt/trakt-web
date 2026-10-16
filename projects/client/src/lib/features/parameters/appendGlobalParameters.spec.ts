@@ -219,6 +219,19 @@ describe('appendGlobalParameters', () => {
     expect(params.get('mode')).toBe('movie');
   });
 
+  it('does not rewrite the href when the computed value is unchanged', () => {
+    const anchor = makeAnchor('/profile/userA?page=2');
+    const action = appendGlobalParameters(anchor, '/profile/userA?page=2');
+    const setHref = vi.spyOn(HTMLAnchorElement.prototype, 'href', 'set');
+
+    action.update('/profile/userA?page=2');
+    urlSubject.next(pageUrl);
+
+    expect(setHref).not.toHaveBeenCalled();
+    setHref.mockRestore();
+    action.destroy();
+  });
+
   it('unsubscribes from the RxJS stream on destroy', () => {
     const anchor = makeAnchor('/profile/userA');
     const action = appendGlobalParameters(anchor, '/profile/userA');

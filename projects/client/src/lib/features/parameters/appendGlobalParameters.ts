@@ -90,7 +90,13 @@ export function appendGlobalParameters(
       ...effectiveSearch.entries(),
     ]);
 
-    anchor.href = `${target.pathname}${buildParamString(params)}${target.hash}`;
+    const nextHref = `${target.pathname}${
+      buildParamString(params)
+    }${target.hash}`;
+
+    if (anchor.getAttribute('href') === nextHref) return;
+
+    anchor.href = nextHref;
   };
 
   const subscription = combineLatest(
