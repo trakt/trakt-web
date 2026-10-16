@@ -10,6 +10,7 @@
     style = "action",
     size = "normal",
     title,
+    onAdd,
     ...target
   }: WatchlistActionProps = $props();
 
@@ -43,6 +44,9 @@
   isWatchlisted={$isWatchlisted}
   isWatchlistUpdating={$isWatchlistUpdating}
   isQueued={$isQueued}
-  onAdd={addToWatchlist}
+  onAdd={() => {
+    addToWatchlist();
+    onAdd?.();
+  }}
   onRemove={confirmRemove}
 />

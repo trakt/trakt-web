@@ -24,6 +24,17 @@ describe('util: splitEventPayload', () => {
     expect(metrics).toEqual({ frames: 4, groups: 2 });
   });
 
+  it('should route the Mixtape pick and fit counts to metrics', () => {
+    const { dims, metrics } = splitEventPayload({
+      type: 'movie',
+      picks: 2,
+      fits: 39,
+    });
+
+    expect(dims).toEqual({ type: 'movie' });
+    expect(metrics).toEqual({ picks: 2, fits: 39 });
+  });
+
   it('should keep a non-allowlisted number as a dim', () => {
     const { dims, metrics } = splitEventPayload({ position: 3 });
 

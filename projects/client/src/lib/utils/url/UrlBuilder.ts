@@ -25,6 +25,17 @@ type WellKnownQueryParams = {
   section?: string;
 };
 
+type MixtapeUrlParams = {
+  type?: MediaType;
+  picks?: ReadonlyArray<number>;
+  skips?: ReadonlyArray<number>;
+  view?: 'results';
+  source?: string;
+};
+
+const toIdList = (ids?: ReadonlyArray<number>) =>
+  ids && ids.length > 0 ? ids.join(',') : undefined;
+
 type DiscoverUrlParams = SearchParams & {
   mode?: DiscoverMode;
 };
@@ -163,6 +174,16 @@ export const UrlBuilder = {
   landing: () => '/',
   home: () => '/home',
   today: () => '/today',
+  mixtape: (params: MixtapeUrlParams = {}) =>
+    `/discover/mixtape${
+      buildParamString({
+        type: params.type,
+        picks: toIdList(params.picks),
+        skips: toIdList(params.skips),
+        view: params.view,
+        source: params.source,
+      })
+    }`,
   comment: (id: number) => `/comments/${id}`,
   welcome: () => '/welcome',
   game: () => '/play/rated-higher',

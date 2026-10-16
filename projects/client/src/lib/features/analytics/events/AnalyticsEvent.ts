@@ -12,6 +12,7 @@ const DATA_IMPORT_ACTION_PREFIX = 'data-import';
 const DATA_EXPORT_ACTION_PREFIX = 'data-export';
 const DATA_CLEAR_ACTION_PREFIX = 'data-clear';
 const TODAY_PREFIX = 'today';
+const MIXTAPE_PREFIX = 'mixtape';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -110,4 +111,10 @@ export const AnalyticsEvent = {
   TodayAction: buildEventKey(TODAY_PREFIX, 'action'),
   TodayGrouping: buildEventKey(TODAY_PREFIX, 'grouping'),
   TodayDay: buildEventKey(TODAY_PREFIX, 'day'),
+
+  MixtapeOpen: buildEventKey(MIXTAPE_PREFIX, 'open'),
+  MixtapePick: buildEventKey(MIXTAPE_PREFIX, 'pick'),
+  MixtapeNoFits: buildEventKey(MIXTAPE_PREFIX, 'no-fits'),
+  MixtapeMix: buildEventKey(MIXTAPE_PREFIX, 'mix'),
+  MixtapeResult: buildEventKey(MIXTAPE_PREFIX, 'result'),
 } as const;
