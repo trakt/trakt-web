@@ -71,6 +71,7 @@
       alt={title}
       href={posterUrl}
       {tags}
+      isPriority
     >
       {#snippet hoverOverlay()}
         {#if streamOn?.preferred != null}

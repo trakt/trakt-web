@@ -75,6 +75,7 @@
       href={titleHref}
       target={titleHref ? "_self" : undefined}
       {tags}
+      isPriority={variant === "page"}
     />
   {/snippet}
 
