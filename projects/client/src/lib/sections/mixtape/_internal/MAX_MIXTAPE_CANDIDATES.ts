@@ -1,0 +1,1 @@
+export const MAX_MIXTAPE_CANDIDATES = 100;
