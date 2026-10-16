@@ -4691,6 +4691,10 @@
       "default": "View all library items",
       "description": "Aria-label for the button that allows users to view all movies and episodes in their library."
     },
+    "translated_value_library_digital": {
+      "default": "Digital",
+      "description": "Value for the digital library name, shown under the Library title. This is the category for library items synced from a media server such as Plex or Jellyfin."
+    },
     "translated_value_library_custom": {
       "default": "Custom",
       "description": "Value for the custom library name. This is the category for library items that are not in a specific category like Plex."

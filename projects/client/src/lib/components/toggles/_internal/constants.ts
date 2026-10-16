@@ -173,8 +173,8 @@ const library: ToggleDefinition<'library'> = {
   options: [
     {
       value: 'plex',
-      text: () => 'Plex',
-      label: () => 'Plex',
+      text: m.translated_value_library_digital,
+      label: m.translated_value_library_digital,
     },
     {
       value: 'other',
