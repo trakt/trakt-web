@@ -108,7 +108,6 @@
   slug={media.slug}
   type="movie"
   drilldownLink={relatedLink}
-  mixtapePick={media.id}
 />
 
 <!-- TODO: move back to designed position when we have faster queries -->

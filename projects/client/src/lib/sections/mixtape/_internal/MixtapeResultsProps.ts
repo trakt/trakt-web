@@ -1,14 +1,20 @@
-import type { MediaInputDefault } from '$lib/models/MediaInput.ts';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
+import type { MixtapeSlot } from './MixtapeSlot.ts';
 
-type MixtapeResult = { media: MediaInputDefault; because: number };
+export type MixtapeResultAction = 'open' | 'skip' | 'watchlist';
 
 export type MixtapeResultsProps = {
-  results: ReadonlyArray<MixtapeResult>;
+  slots: ReadonlyArray<MixtapeSlot>;
   isLoading: boolean;
-  pickTitles: ReadonlyArray<string>;
+  canSwap: boolean;
+  picked: ReadonlyArray<MovieEntry | ShowEntry>;
   titleOf: (id: number) => string | null;
-  skipHref: (id: number) => string;
+  closeHref: string;
   changeHref: string;
   startOverHref: string;
-  onResult: (action: 'open' | 'skip' | 'watchlist', position: number) => void;
+  onSkip: (id: number) => void;
+  onUndo: () => void;
+  onMore: (ids: ReadonlyArray<number>) => void;
+  onResult: (action: MixtapeResultAction, position: number) => void;
 };

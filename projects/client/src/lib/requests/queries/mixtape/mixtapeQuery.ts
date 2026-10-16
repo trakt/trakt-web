@@ -10,7 +10,10 @@ import { MixtapeMediaResponseSchema } from './_internal/MixtapeMediaResponseSche
 const MixtapeResponseSchema = z.object({
   fits: z.array(z.object({ id: z.number(), score: z.number() })),
   suggestions: z.array(
-    MixtapeMediaResponseSchema.extend({ because: z.number() }),
+    MixtapeMediaResponseSchema.extend({
+      because: z.number(),
+      match: z.number(),
+    }),
   ),
 });
 
@@ -54,7 +57,9 @@ export const mixtapeQuery = defineQuery({
     fits: response.body?.fits ?? [],
     suggestions: (response.body?.suggestions ?? []).flatMap((suggestion) => {
       const media = mapToMixtapeMedia(suggestion);
-      return media ? [{ media, because: suggestion.because }] : [];
+      return media
+        ? [{ media, because: suggestion.because, match: suggestion.match }]
+        : [];
     }),
   }),
   schema: MixtapeSchema,

@@ -1,6 +1,6 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import MusicNoteIcon from "$lib/components/icons/MusicNoteIcon.svelte";
+  import CassetteIcon from "$lib/components/icons/CassetteIcon.svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
@@ -47,7 +47,7 @@
     >
       {m.button_text_start_mixtape_with_this()}
       {#snippet icon()}
-        <MusicNoteIcon />
+        <CassetteIcon />
       {/snippet}
     </DropdownItem>
   {/snippet}

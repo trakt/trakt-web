@@ -11,6 +11,7 @@
   <span class="small secondary no-wrap">
     {m.text_mixtape_pick_count({ count: String(pickCount) })}
   </span>
+  <span class="spacer"></span>
   {#if pickCount > 0}
     <Button
       href={clearHref}
@@ -24,7 +25,6 @@
       {m.button_text_mixtape_clear()}
     </Button>
   {/if}
-  <span class="spacer"></span>
   <Button
     href={pickCount > 0 ? mixHref : undefined}
     disabled={pickCount === 0}

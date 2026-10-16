@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MixtapePickSlotProps } from "./MixtapePickSlotProps.ts";
@@ -16,17 +16,15 @@
       alt={m.image_alt_media_poster({ title: media.title })}
     />
     <div class="pick-remove">
-      <Button
+      <Link
         href={removeHref}
         noscroll
         replacestate
-        size="small"
-        style="flat"
-        variant="secondary"
+        color="inherit"
         label={m.button_label_mixtape_remove_pick({ title: media.title })}
       >
         <CloseIcon />
-      </Button>
+      </Link>
     </div>
   {/if}
 </div>
@@ -35,10 +33,10 @@
   .trakt-mixtape-pick-slot {
     position: relative;
     aspect-ratio: 2 / 3;
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-s);
     overflow: hidden;
     background: var(--color-card-background);
-    box-shadow: var(--shadow-floating);
+    box-shadow: var(--shadow-base);
 
     :global(.pick-poster) {
       width: 100%;
@@ -48,8 +46,31 @@
 
     .pick-remove {
       position: absolute;
-      inset-block-start: var(--gap-xxs);
-      inset-inline-end: var(--gap-xxs);
+      inset-block-start: var(--ni-2);
+      inset-inline-end: var(--ni-2);
+
+      :global(.trakt-link) {
+        display: grid;
+        place-items: center;
+        width: var(--ni-28);
+        height: var(--ni-28);
+
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--shade-940) 70%, transparent);
+        color: var(--shade-10);
+        text-decoration: none;
+      }
+
+      :global(.trakt-link)::before {
+        content: "";
+        position: absolute;
+        inset: calc(-1 * var(--ni-8));
+      }
+
+      :global(svg) {
+        width: var(--ni-14);
+        height: var(--ni-14);
+      }
     }
   }
 </style>

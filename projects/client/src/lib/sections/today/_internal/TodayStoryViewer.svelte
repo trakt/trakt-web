@@ -18,7 +18,7 @@
   import type { TodayStoryFrame } from "../models/TodayStoryFrame.ts";
   import type { TodayStoryGroup } from "../models/TodayStoryGroup.ts";
   import { useTodaySeenStories } from "../useTodaySeenStories.ts";
-  import { portalToBody } from "./portalToBody.ts";
+  import { portalToBody } from "$lib/utils/actions/portalToBody.ts";
   import { NOTHING_SHOWN } from "./NOTHING_SHOWN.ts";
   import { recordShown } from "./recordShown.ts";
   import TodayStoryFrameContent from "./TodayStoryFrameContent.svelte";
