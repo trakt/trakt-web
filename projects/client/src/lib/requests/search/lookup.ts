@@ -1,5 +1,4 @@
 import type { MediaType } from '../models/MediaType.ts';
-import { createSearcher } from './createSearcher.ts';
 import type { MovieSchema } from './schema/MovieSchema.ts';
 import type { PersonSchema } from './schema/PersonSchema.ts';
 import type { ShowSchema } from './schema/ShowSchema.ts';
@@ -32,14 +31,16 @@ const PRESET_MAP: Record<SearchCategory, string> = {
   person: 'search:people',
 };
 
-export function lookup<T extends SearchCategory>({
+export async function lookup<T extends SearchCategory>({
   key,
   server,
   query: q,
   limit,
   types,
 }: SearchParams<T>) {
-  return createSearcher({
+  const { createSearcher } = await import('./createSearcher.ts');
+
+  const { hits, found } = await createSearcher({
     key,
     server,
   })
@@ -53,9 +54,10 @@ export function lookup<T extends SearchCategory>({
     }, {
       q,
       limit,
-    })
-    .then(({ hits, found }) => ({
-      hits: hits ?? [],
-      total: found,
-    }));
+    });
+
+  return {
+    hits: hits ?? [],
+    total: found,
+  };
 }
