@@ -36,9 +36,6 @@ export const useDimensionObserver = (
     // Initial size
     update();
 
-    // Mutation observer for DOM changes
-    const mutationObserver = new MutationObserver(() => debouncedUpdate());
-
     // Resize observer for explicit size changes
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
@@ -48,17 +45,10 @@ export const useDimensionObserver = (
       }
     });
 
-    mutationObserver.observe(node, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-    });
-
     resizeObserver.observe(node);
 
     return {
       destroy() {
-        mutationObserver.disconnect();
         resizeObserver.disconnect();
       },
     };
