@@ -180,6 +180,13 @@
         }
       }
 
+      :global(.is-hidden) & {
+        .entry-glow,
+        .entry-spin::before {
+          animation-play-state: paused;
+        }
+      }
+
       .entry-sheen {
         &::before {
           content: "";
