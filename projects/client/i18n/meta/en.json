@@ -7963,6 +7963,60 @@
       "default": "Hide",
       "description": "Label above the smart list toggles that hide titles, e.g. unreleased or ended shows."
     },
+    "header_smart_list_recipe": {
+      "default": "Recipe",
+      "description": "Title of the drawer that lists every filter a smart list applies."
+    },
+    "text_smart_list_recipe_more": {
+      "default": "+{count} more",
+      "description": "Shown after the first few filters of a smart list, counting the filters left out. Opens the full recipe.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_view_smart_list_recipe": {
+      "default": "View the recipe of {title}",
+      "description": "Accessible label for the smart list filter summary that opens the recipe drawer.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "header_smart_list_includes": {
+      "default": "Includes",
+      "description": "Recipe drawer section listing the values a smart list matches, like genres or people."
+    },
+    "header_smart_list_limits": {
+      "default": "Limits",
+      "description": "Recipe drawer section listing the ranges a smart list applies, like ratings or release years."
+    },
+    "header_smart_list_subgenres": {
+      "default": "Subgenres",
+      "description": "Recipe drawer label for the subgenres a smart list matches."
+    },
+    "text_smart_list_recipe_everything": {
+      "default": "No filters, every title from the source is included.",
+      "description": "Shown in the recipe drawer when a smart list has no filters."
+    },
+    "text_smart_list_excluded": {
+      "default": "Excluded",
+      "description": "Screen reader text for a recipe value the smart list leaves out."
+    },
+    "text_smart_list_recipe_detail": {
+      "default": "{label}: {value}",
+      "description": "A smart list filter setting in the recipe drawer, for example 'Match: All' or 'Role: Cast'.",
+      "variables": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
     "button_label_filter_settings": {
       "default": "{filter} settings",
       "description": "Aria label for the settings button next to a filter (e.g. Genre) that opens extra options like matching any or all values.",

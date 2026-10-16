@@ -4,7 +4,8 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import SmartListActions from "$lib/sections/lists/smart/_internal/SmartListActions.svelte";
-  import { getSmartListFilterSummary } from "$lib/sections/lists/smart/getSmartListFilterSummary.ts";
+  import SmartListDrawer from "$lib/sections/lists/smart/_internal/SmartListDrawer.svelte";
+  import SmartListRecipeLink from "$lib/sections/lists/smart/_internal/SmartListRecipeLink.svelte";
   import SmartListPaginatedRenderer from "$lib/sections/lists/smart/SmartListPaginatedRenderer.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
@@ -21,6 +22,12 @@
   // FIXME: split up (or add support) for public smart lists
 </script>
 
+{#snippet recipe()}
+  {#if $list}
+    <SmartListRecipeLink list={$list} />
+  {/if}
+{/snippet}
+
 {#snippet actions()}
   {#if $list}
     <SmartListActions list={$list} />
@@ -36,7 +43,7 @@
   <NavbarStateSetter
     header={{
       title: $list?.title ?? "",
-      metaInfo: $list ? getSmartListFilterSummary($list) : undefined,
+      metaInfo: $list ? recipe : undefined,
       actions,
     }}
   />
@@ -47,5 +54,6 @@
     <Redirect to={UrlBuilder.lists.user("me")} />
   {:else if $list}
     <SmartListPaginatedRenderer list={$list} />
+    <SmartListDrawer list={$list} />
   {/if}
 </TraktPage>
