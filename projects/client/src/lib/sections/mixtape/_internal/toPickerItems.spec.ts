@@ -11,6 +11,7 @@ describe('toPickerItems', () => {
   it('should show the whole history in watch order before any pick', () => {
     const { kind, items } = toPickerItems({
       history,
+      searchResults: [],
       picks: [],
       fits: [],
       query: '',
@@ -23,6 +24,7 @@ describe('toPickerItems', () => {
   it('should show only fitting titles, best fit first, once something is picked', () => {
     const { kind, items } = toPickerItems({
       history,
+      searchResults: [],
       picks: [1],
       fits: [{ id: 3, score: 0.7 }, { id: 2, score: 0.6 }],
       query: '',
@@ -35,6 +37,7 @@ describe('toPickerItems', () => {
   it('should never offer a title that is already picked', () => {
     const { items } = toPickerItems({
       history,
+      searchResults: [],
       picks: [1],
       fits: [{ id: 1, score: 1 }, { id: 2, score: 0.6 }],
       query: '',
@@ -46,6 +49,7 @@ describe('toPickerItems', () => {
   it('should keep a searched title that does not fit, marked off and listed last', () => {
     const { kind, items } = toPickerItems({
       history,
+      searchResults: [],
       picks: [1],
       fits: [{ id: 2, score: 0.6 }],
       query: ' E',
@@ -62,11 +66,43 @@ describe('toPickerItems', () => {
   it('should mark nothing off while searching with no picks', () => {
     const { items } = toPickerItems({
       history,
+      searchResults: [],
       picks: [],
       fits: [],
       query: 'space',
     });
 
     expect(items).toEqual([{ media: spaceballs, isOff: false }]);
+  });
+
+  it('should add older search hits from the whole history after recent matches', () => {
+    const gladiator = { id: 5, title: 'Gladiator' };
+    const gladiatorTwo = { id: 6, title: 'Gladiator II' };
+    const { kind, items } = toPickerItems({
+      history: [...history, gladiatorTwo],
+      searchResults: [gladiatorTwo, gladiator],
+      picks: [1],
+      fits: [{ id: 5, score: 0.77 }],
+      query: 'glad',
+    });
+
+    expect(kind).toBe('search');
+    expect(items.map(({ media, isOff }) => [media.id, isOff])).toEqual([
+      [5, false],
+      [6, true],
+    ]);
+  });
+
+  it('should drop full-history hits that no longer match the typed text', () => {
+    const gladiator = { id: 5, title: 'Gladiator' };
+    const { items } = toPickerItems({
+      history,
+      searchResults: [gladiator],
+      picks: [],
+      fits: [],
+      query: 'star',
+    });
+
+    expect(items).toEqual([]);
   });
 });

@@ -11,14 +11,17 @@ import { MixtapeMediaResponseSchema } from './_internal/MixtapeMediaResponseSche
 
 const MixtapeHistoryResponseSchema = z.array(MixtapeMediaResponseSchema);
 
-type MixtapeHistoryParams = { type: MediaType } & ApiParams;
+type MixtapeHistoryParams = { type: MediaType; search?: string } & ApiParams;
 
 const mixtapeHistoryRequest = async (
-  { fetch, type }: MixtapeHistoryParams,
+  { fetch, type, search }: MixtapeHistoryParams,
 ) => {
+  const query = new URLSearchParams({ type, extended: 'full,images' });
+  if (search) query.set('query', search);
+
   const response = await rawApiFetch({
     fetch,
-    path: `/v3/mixtape/history?type=${type}&extended=full,images`,
+    path: `/v3/mixtape/history?${query}`,
   });
 
   return response.ok
@@ -36,7 +39,10 @@ export const mixtapeHistoryQuery = defineQuery({
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (params: MixtapeHistoryParams) => [params.type],
+  dependencies: (params: MixtapeHistoryParams) => [
+    params.type,
+    params.search ?? '',
+  ],
   request: mixtapeHistoryRequest,
   mapper: (response) =>
     (response.body ?? []).flatMap((entry) => {
