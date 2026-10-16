@@ -49,12 +49,12 @@
   }
 
   .trakt-skeleton-card-cover {
-    width: var(--width-card);
-    height: var(--height-card-cover);
+    width: var(--width-override-card, var(--width-card));
+    height: var(--height-override-card-cover, var(--height-card-cover));
   }
 
   .trakt-skeleton-card-footer {
-    width: calc(var(--width-card) * 0.5);
+    width: calc(var(--width-override-card, var(--width-card)) * 0.5);
     height: var(--ni-12);
 
     padding: var(--ni-4) var(--ni-8);
