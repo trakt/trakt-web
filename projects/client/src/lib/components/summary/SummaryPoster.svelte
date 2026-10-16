@@ -13,6 +13,7 @@
     actions?: Snippet;
     tags?: Snippet;
     variant?: "portrait" | "landscape";
+    isPriority?: boolean;
   };
 
   const {
@@ -24,15 +25,20 @@
     target = "_blank",
     tags,
     variant = "portrait",
+    isPriority = false,
   }: SummaryPosterProps = $props();
 
   const activeOverlay = $derived(href && hoverOverlay);
+
+  const priorityProps = $derived(
+    isPriority ? { loading: "eager" as const, fetchpriority: "high" } : {},
+  );
 </script>
 
 <div class="trakt-summary-poster-container" data-variant={variant}>
   <div class="trakt-summary-poster" class:has-active-overlay={activeOverlay}>
     <Link {href} {target}>
-      <CrossOriginImage {src} {alt} />
+      <CrossOriginImage {src} {alt} {...priorityProps} />
     </Link>
   </div>
 

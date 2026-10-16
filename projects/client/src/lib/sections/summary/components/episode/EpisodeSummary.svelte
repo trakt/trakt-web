@@ -68,6 +68,7 @@
       href={streamOn?.preferred?.link}
       {tags}
       variant="landscape"
+      isPriority
     >
       {#snippet hoverOverlay()}
         <StreamOnOverlay service={streamOn?.preferred} />

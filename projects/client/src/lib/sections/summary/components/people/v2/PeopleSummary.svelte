@@ -27,7 +27,12 @@
 
 <Summary>
   {#snippet poster()}
-    <SummaryPoster src={person.headshot.url.medium} alt={person.name} {tags} />
+    <SummaryPoster
+      src={person.headshot.url.medium}
+      alt={person.name}
+      {tags}
+      isPriority
+    />
   {/snippet}
 
   {#snippet sideActions()}

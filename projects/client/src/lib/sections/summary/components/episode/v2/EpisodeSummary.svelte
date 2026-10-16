@@ -68,7 +68,13 @@
 
 <Summary>
   {#snippet poster()}
-    <SummaryPoster src={posterSrc} alt={title} {tags} variant="landscape" />
+    <SummaryPoster
+      src={posterSrc}
+      alt={title}
+      {tags}
+      variant="landscape"
+      isPriority
+    />
   {/snippet}
 
   {#snippet sideActions()}
