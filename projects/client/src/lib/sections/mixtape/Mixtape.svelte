@@ -36,20 +36,17 @@
       (a, b) => a.type === b.type && a.picks.join() === b.picks.join(),
     ),
   );
-  let query = $state("");
-
   const {
     history,
-    searchResults,
-    isSearchLoading,
     picked,
     isHistoryLoading,
     mixtape,
     isMixtapeLoading,
-  } = useMixtape(request$, fromRune(() => query));
+  } = useMixtape(request$);
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
 
+  let query = $state("");
   let searchBox = $state<HTMLDivElement>();
 
   const { track: trackOpen } = useTrack(AnalyticsEvent.MixtapeOpen);
@@ -83,7 +80,6 @@
   const picker = $derived(
     toPickerItems({
       history: $history,
-      searchResults: $searchResults,
       picks: params.picks,
       fits: $mixtape.fits,
       query,
@@ -100,11 +96,7 @@
   );
   const shownPicker = $derived($heldPicker$ ?? picker);
   const isPickerLoading = $derived(
-    $isHistoryLoading ||
-      (isSettling && shownPicker === picker) ||
-      (picker.kind === "search" &&
-        picker.items.length === 0 &&
-        $isSearchLoading),
+    $isHistoryLoading || (isSettling && shownPicker === picker),
   );
   const isFull = $derived(params.picks.length >= MAX_MIXTAPE_PICKS);
   const slots = $derived(toMixtapeSlots($mixtape.suggestions, params.skips));
