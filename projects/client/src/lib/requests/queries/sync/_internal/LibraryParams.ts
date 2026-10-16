@@ -3,6 +3,6 @@ import type { DiscoverMode } from '../../../../features/filters/models/DiscoverM
 import type { PaginationParams } from '../../../models/PaginationParams.ts';
 
 export type LibraryParams = ApiParams & PaginationParams & {
-  availableOn?: 'plex' | 'other';
+  availableOn?: 'digital' | 'other';
   type?: DiscoverMode;
 };

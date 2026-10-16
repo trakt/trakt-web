@@ -22,7 +22,7 @@ const currentUserPlexLibraryRequest = (
     .collection
     .minimal[type]({
       query: {
-        available_on: 'plex',
+        available_on: 'digital',
       },
     });
 

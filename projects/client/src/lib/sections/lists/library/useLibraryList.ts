@@ -9,6 +9,7 @@ import { useCollectedRefresh } from '$lib/stores/useCollectedRefresh.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { firstValueFrom, startWith, switchMap } from 'rxjs';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
+import { toLibraryAvailableOn } from './_internal/toLibraryAvailableOn.ts';
 import type { Library } from './models/Library.ts';
 
 type UseLibraryListProps = PaginationParams & {
@@ -51,7 +52,7 @@ export function useLibraryList(props: UseLibraryListProps) {
       ...libraryQuery({
         page: props.page ?? 1,
         limit: props.limit ?? DEFAULT_PAGE_SIZE,
-        availableOn: props.library,
+        availableOn: toLibraryAvailableOn(props.library),
         type: props.type,
       }),
       refetchOnMount: 'always',
