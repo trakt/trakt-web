@@ -1,5 +1,6 @@
 import Button from './Button.svelte';
 
+import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { fireEvent, screen, waitFor } from '@testing-library/svelte';
 import { createRawSnippet } from 'svelte';
@@ -133,6 +134,34 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toBeDisabled();
       });
+    });
+  });
+
+  describe('onclickoutside', () => {
+    it('should call onclickoutside when clicking outside', async () => {
+      const onclickoutside = vi.fn();
+
+      renderComponent(Button, {
+        props: { ...defaultProps, onclickoutside } as TraktButtonProps,
+      });
+
+      await screen.findByRole('button', { name: 'Test Button' });
+      document.body.click();
+
+      expect(onclickoutside).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not register global listeners without onclickoutside', async () => {
+      const register = vi.spyOn(GlobalEventBus.getInstance(), 'register');
+
+      renderComponent(Button, { props: { ...defaultProps } });
+
+      await screen.findByRole('button', { name: 'Test Button' });
+      const registered = register.mock.calls.map(([type]) => type);
+      register.mockRestore();
+
+      expect(registered).not.toContain('scroll');
+      expect(registered).not.toContain('keydown');
     });
   });
 
