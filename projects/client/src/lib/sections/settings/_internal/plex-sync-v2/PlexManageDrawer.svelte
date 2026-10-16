@@ -19,6 +19,7 @@
   import PlexFeedSwitches from "./PlexFeedSwitches.svelte";
   import PlexProfilePicker from "./PlexProfilePicker.svelte";
   import PlexProfilePickerSkeleton from "./PlexProfilePickerSkeleton.svelte";
+  import PlexWebhookOnlyNote from "./PlexWebhookOnlyNote.svelte";
   import { toManageChanges } from "./toManageChanges.ts";
   import { useManageServer } from "./useManageServer.ts";
   import { useServerActions } from "./useServerActions.ts";
@@ -56,9 +57,8 @@
       ? m.label_media_sync_plex_watchlist()
       : connection.serverName ?? m.label_plex_server(),
   );
-  const needsLibraries = $derived(
-    !isAccountOnly && connection.status !== "webhook_only",
-  );
+  const isWebhookOnly = $derived(connection.status === "webhook_only");
+  const needsLibraries = $derived(!isAccountOnly && !isWebhookOnly);
 
   let enabledLibraryIds = $state(
     iffy(() =>
@@ -173,11 +173,15 @@
       />
     {/if}
 
-    <PlexFeedSwitches
-      {feeds}
-      available={isAccountOnly ? ["watchlist"] : undefined}
-      onToggle={toggleFeed}
-    />
+    {#if isWebhookOnly}
+      <PlexWebhookOnlyNote />
+    {:else}
+      <PlexFeedSwitches
+        {feeds}
+        available={isAccountOnly ? ["watchlist"] : undefined}
+        onToggle={toggleFeed}
+      />
+    {/if}
 
     {#if needsLibraries && connection.feeds.includes("history")}
       <SettingsGroupCard variant="bare">
@@ -221,43 +225,45 @@
     </SettingsGroupCard>
     {/if}
 
-    <div class="drawer-actions">
-      <Button
-        size="small"
-        variant="secondary"
-        color="default"
-        label={m.button_label_cancel()}
-        disabled={$isBusy}
-        onclick={handleClose}
-      >
-        {m.button_text_cancel()}
-      </Button>
-      <Button
-        size="small"
-        variant="primary"
-        color="purple"
-        label={m.button_label_apply()}
-        disabled={$isBusy ||
-          !hasChanges ||
-          (needsLibraries && enabledLibraryIds.length === 0) ||
-          feeds.length === 0}
-        onclick={onApply}
-      >
-        {m.button_text_apply()}
-      </Button>
+    {#if !isWebhookOnly}
+      <div class="drawer-actions">
+        <Button
+          size="small"
+          variant="secondary"
+          color="default"
+          label={m.button_label_cancel()}
+          disabled={$isBusy}
+          onclick={handleClose}
+        >
+          {m.button_text_cancel()}
+        </Button>
+        <Button
+          size="small"
+          variant="primary"
+          color="purple"
+          label={m.button_label_apply()}
+          disabled={$isBusy ||
+            !hasChanges ||
+            (needsLibraries && enabledLibraryIds.length === 0) ||
+            feeds.length === 0}
+          onclick={onApply}
+        >
+          {m.button_text_apply()}
+        </Button>
 
-      {#if needsLibraries && enabledLibraryIds.length === 0}
-        <p class="library-hint secondary small">
-          {m.text_plex_library_required()}
-        </p>
-      {/if}
+        {#if needsLibraries && enabledLibraryIds.length === 0}
+          <p class="library-hint secondary small">
+            {m.text_plex_library_required()}
+          </p>
+        {/if}
 
-      {#if feeds.length === 0}
-        <p class="library-hint secondary small">
-          {m.text_media_sync_feed_required()}
-        </p>
-      {/if}
-    </div>
+        {#if feeds.length === 0}
+          <p class="library-hint secondary small">
+            {m.text_media_sync_feed_required()}
+          </p>
+        {/if}
+      </div>
+    {/if}
   </div>
 </Drawer>
 
