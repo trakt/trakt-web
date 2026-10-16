@@ -360,7 +360,6 @@
 
       pointer-events: none;
       opacity: 0;
-      will-change: translate, transform, opacity;
       transition:
         translate var(--transition-increment) var(--ease-glide),
         transform var(--transition-increment) var(--ease-glide),
@@ -383,7 +382,6 @@
     :global(.star-item) {
       display: inline-flex;
       cursor: pointer;
-      will-change: transform;
       transition:
         transform var(--transition-increment) var(--ease-glide),
         color var(--transition-increment) var(--ease-glide);
