@@ -4,8 +4,14 @@
   import SkeletonCard from "$lib/sections/lists/components/SkeletonCard.svelte";
   import type { MixtapePickerProps } from "./MixtapePickerProps.ts";
 
-  const { picker, isLoading, isFull, pickHref, onPick }: MixtapePickerProps =
-    $props();
+  const {
+    picker,
+    isLoading,
+    isSettling,
+    isFull,
+    pickHref,
+    onPick,
+  }: MixtapePickerProps = $props();
 
   const source = $derived(picker.kind === "search" ? "search" : "grid");
   const emptyText = $derived(
@@ -35,7 +41,13 @@
   {:else if picker.items.length === 0}
     <p class="secondary">{emptyText}</p>
   {:else}
-    <div class="picker-grid" role="list">
+    <div
+      class="picker-grid"
+      class:is-settling={isSettling}
+      role="list"
+      aria-busy={isSettling}
+      inert={isSettling}
+    >
       {#each picker.items as { media, isOff } (media.key)}
         <div class="picker-cell" role="listitem">
           {#if isOff}
@@ -73,6 +85,12 @@
       );
       gap: var(--gap-m) var(--gap-xs);
       padding-inline: var(--layout-distance-side);
+
+      transition: opacity var(--transition-increment) ease-in-out;
+
+      &.is-settling {
+        opacity: 0.5;
+      }
 
       @include for-mobile {
         grid-template-columns: repeat(3, minmax(0, 1fr));

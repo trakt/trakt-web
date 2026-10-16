@@ -4,6 +4,7 @@ import { mixtapeHistoryQuery } from '$lib/requests/queries/mixtape/mixtapeHistor
 import type { Mixtape } from '$lib/requests/models/Mixtape.ts';
 import { mixtapePicksQuery } from '$lib/requests/queries/mixtape/mixtapePicksQuery.ts';
 import { mixtapeQuery } from '$lib/requests/queries/mixtape/mixtapeQuery.ts';
+import { keepPreviousData } from '@tanstack/query-core';
 import {
   combineLatest,
   distinctUntilChanged,
@@ -29,14 +30,19 @@ export function useMixtape(request$: Observable<MixtapeRequest>) {
   const history$ = history.pipe(map((query) => query.data ?? []));
 
   const mixtape = useQuery(
-    combineLatest([request$, history$]).pipe(
-      map(([{ type, picks }, items]) =>
-        mixtapeQuery({
+    combineLatest([request$, history]).pipe(
+      map(([{ type, picks }, historyQuery]) => {
+        const options = mixtapeQuery({
           type,
           picks,
-          candidates: items.map(({ id }) => id),
-        })
-      ),
+          candidates: (historyQuery.data ?? []).map(({ id }) => id),
+        });
+        return {
+          ...options,
+          enabled: options.enabled && !historyQuery.isLoading,
+          placeholderData: keepPreviousData,
+        };
+      }),
     ),
   );
 
@@ -69,6 +75,8 @@ export function useMixtape(request$: Observable<MixtapeRequest>) {
     picked: picked$,
     isHistoryLoading: history.pipe(map((query) => query.isLoading)),
     mixtape: mixtape.pipe(map((query) => query.data ?? EMPTY_MIXTAPE)),
-    isMixtapeLoading: mixtape.pipe(map((query) => query.isLoading)),
+    isMixtapeLoading: mixtape.pipe(
+      map((query) => query.isLoading || query.isPlaceholderData),
+    ),
   };
 }

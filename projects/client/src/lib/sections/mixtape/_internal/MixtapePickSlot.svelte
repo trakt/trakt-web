@@ -33,10 +33,13 @@
   .trakt-mixtape-pick-slot {
     position: relative;
     aspect-ratio: 2 / 3;
-    border-radius: var(--border-radius-s);
+    border-radius: var(--border-radius-m);
     overflow: hidden;
     background: var(--color-card-background);
     box-shadow: var(--shadow-base);
+
+    animation: pick-slot-pop calc(2 * var(--transition-increment))
+      cubic-bezier(0.34, 1.56, 0.64, 1);
 
     :global(.pick-poster) {
       width: 100%;
@@ -52,8 +55,8 @@
       :global(.trakt-link) {
         display: grid;
         place-items: center;
-        width: var(--ni-28);
-        height: var(--ni-28);
+        width: var(--mixtape-remove-size, var(--ni-28));
+        height: var(--mixtape-remove-size, var(--ni-28));
 
         border-radius: 50%;
         background: color-mix(in srgb, var(--shade-940) 70%, transparent);
@@ -71,6 +74,13 @@
         width: var(--ni-14);
         height: var(--ni-14);
       }
+    }
+  }
+
+  @keyframes pick-slot-pop {
+    from {
+      transform: scale(0.6);
+      opacity: 0;
     }
   }
 </style>
