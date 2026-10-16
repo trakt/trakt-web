@@ -120,6 +120,20 @@ type TodayActionType = {
 type TodayGroupingType = { grouping: TodayGrouping };
 type TodayDayType = { day: TodayDayKind };
 
+type MixtapeOpenType = { source: string; type: MediaType };
+type MixtapePickType = {
+  source: 'grid' | 'search';
+  type: MediaType;
+  picks: number;
+};
+type MixtapeNoFitsType = { type: MediaType; picks: number };
+type MixtapeMixType = { type: MediaType; picks: number; fits: number };
+type MixtapeResultType = {
+  action: 'open' | 'skip' | 'watchlist';
+  position: string;
+  type: MediaType;
+};
+
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.PageView]: PageViewType;
   [AnalyticsEvent.EnterLite]: never;
@@ -215,4 +229,10 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.TodayAction]: TodayActionType;
   [AnalyticsEvent.TodayGrouping]: TodayGroupingType;
   [AnalyticsEvent.TodayDay]: TodayDayType;
+
+  [AnalyticsEvent.MixtapeOpen]: MixtapeOpenType;
+  [AnalyticsEvent.MixtapePick]: MixtapePickType;
+  [AnalyticsEvent.MixtapeNoFits]: MixtapeNoFitsType;
+  [AnalyticsEvent.MixtapeMix]: MixtapeMixType;
+  [AnalyticsEvent.MixtapeResult]: MixtapeResultType;
 };

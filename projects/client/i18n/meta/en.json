@@ -13007,6 +13007,142 @@
     "description_sync_webhooks_jellyfin": {
       "default": "Live progress through the Jellyfin Webhook plugin is on the way.",
       "description": "Text on the Jellyfin webhook card explaining the feature is coming."
+    },
+    "preview_feature_title_mixtape": {
+      "default": "Mixtape",
+      "description": "Product feature name for the preview feature that suggests three titles from up to five watched titles picked for their feel."
+    },
+    "preview_feature_description_mixtape": {
+      "default": "Pick movies or shows you loved for how they felt and get three new ones with the same feel.",
+      "description": "Description of the Mixtape preview feature."
+    },
+    "page_title_mixtape": {
+      "default": "Mixtape",
+      "description": "Page title of the Mixtape page, where users pick watched titles and get three suggestions with the same feel."
+    },
+    "text_mixtape_description_movies": {
+      "default": "Pick up to 5 movies you loved for how they felt. We'll mix them into 3 new ones that feel the same.",
+      "description": "Intro under the Mixtape heading when picking movies."
+    },
+    "text_mixtape_description_shows": {
+      "default": "Pick up to 5 shows you loved for how they felt. We'll mix them into 3 new ones that feel the same.",
+      "description": "Intro under the Mixtape heading when picking shows."
+    },
+    "header_mixtape_recent_movies": {
+      "default": "Your recent movies",
+      "description": "Heading above the grid of the user's recently watched movies before anything is picked on the Mixtape page."
+    },
+    "header_mixtape_recent_shows": {
+      "default": "Your recent shows",
+      "description": "Heading above the grid of the user's recently watched shows before anything is picked on the Mixtape page."
+    },
+    "header_mixtape_fits": {
+      "default": "Fits with your picks",
+      "description": "Heading above the grid of watched titles that share the feel of every title picked so far on the Mixtape page."
+    },
+    "header_mixtape_search_results": {
+      "default": "Search results",
+      "description": "Heading above the Mixtape grid while the user searches their own history."
+    },
+    "input_placeholder_mixtape_search_movies": {
+      "default": "Search movies you've watched",
+      "description": "Placeholder of the search field on the Mixtape page when picking movies. Search only covers the user's own history."
+    },
+    "input_placeholder_mixtape_search_shows": {
+      "default": "Search shows you've watched",
+      "description": "Placeholder of the search field on the Mixtape page when picking shows. Search only covers the user's own history."
+    },
+    "input_label_mixtape_search": {
+      "default": "Search your history",
+      "description": "Accessible label of the search field on the Mixtape page."
+    },
+    "tag_mixtape_different_mood": {
+      "default": "Different mood",
+      "description": "Tag on a searched title that does not share the feel of the titles already picked, so it cannot be added."
+    },
+    "text_mixtape_slot_first": {
+      "default": "Pick one",
+      "description": "Text in the first empty pick slot on the Mixtape page."
+    },
+    "text_mixtape_slot_next": {
+      "default": "Add another",
+      "description": "Text in the next empty pick slot on the Mixtape page."
+    },
+    "button_label_mixtape_remove_pick": {
+      "default": "Remove {title}",
+      "description": "Accessible label of the remove button on a picked title. {title} is the movie or show title."
+    },
+    "text_mixtape_pick_count": {
+      "default": "{count} of 5",
+      "description": "How many titles are picked on the Mixtape page, out of a maximum of 5. {count} is a number."
+    },
+    "button_text_mixtape_clear": {
+      "default": "Clear",
+      "description": "Button that removes every picked title on the Mixtape page."
+    },
+    "button_text_mix_it": {
+      "default": "Mix it",
+      "description": "Main button on the Mixtape page that shows three suggestions for the picked titles."
+    },
+    "text_mixtape_no_fits": {
+      "default": "Nothing else in your history fits all of these. Mix it, or remove a pick to widen the list.",
+      "description": "Shown when no other watched title shares the feel of every picked title."
+    },
+    "text_mixtape_max_picks": {
+      "default": "That's 5 picks. Mix it when you're ready.",
+      "description": "Shown in place of the grid once the maximum of 5 titles is picked."
+    },
+    "text_mixtape_no_search_results": {
+      "default": "Nothing in your history matches that title.",
+      "description": "Shown when the Mixtape search finds no watched title."
+    },
+    "text_mixtape_empty_history": {
+      "default": "Your history is empty. Mark a few titles as watched to make a mixtape.",
+      "description": "Shown on the Mixtape page when the user has no watched titles of the chosen type."
+    },
+    "header_mixtape_results": {
+      "default": "Your mixtape",
+      "description": "Heading above the three suggestions on the Mixtape page."
+    },
+    "text_mixtape_based_on": {
+      "default": "Based on {titles}",
+      "description": "Line above the Mixtape suggestions naming the picked titles. {titles} is a comma separated list of titles."
+    },
+    "text_mixtape_because": {
+      "default": "Because you liked {title}",
+      "description": "Line under a Mixtape suggestion naming the picked title it is closest to. {title} is the movie or show title."
+    },
+    "button_text_mixtape_not_this": {
+      "default": "Not this one",
+      "description": "Button under a Mixtape suggestion that swaps it for the next one."
+    },
+    "button_text_mixtape_change_picks": {
+      "default": "Change picks",
+      "description": "Button on the Mixtape results that goes back to the picker with the same picks."
+    },
+    "button_text_mixtape_start_over": {
+      "default": "Start over",
+      "description": "Button on the Mixtape results that clears the picks and goes back to the picker."
+    },
+    "text_mixtape_results_empty": {
+      "default": "We couldn't find new titles for this mix. Try changing your picks.",
+      "description": "Shown when the Mixtape suggestions come back empty."
+    },
+    "button_text_make_mixtape": {
+      "default": "Make a mixtape",
+      "description": "Button on the History row and on the Discover strip that opens the Mixtape page."
+    },
+    "button_text_add_to_mixtape": {
+      "default": "Add to a mixtape",
+      "description": "Button on the Related row of a movie or show page that opens Mixtape with that title already picked."
+    },
+    "button_text_start_mixtape_with_this": {
+      "default": "Start a mixtape with this",
+      "description": "Item in a poster's menu that opens Mixtape with that title already picked."
+    },
+    "text_mixtape_strip_description": {
+      "default": "Pick titles you loved. Get 3 new ones that feel the same.",
+      "description": "Short line on the Discover strip that opens the Mixtape page."
     }
   }
 }

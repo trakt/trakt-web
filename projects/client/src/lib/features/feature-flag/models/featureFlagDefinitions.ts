@@ -100,4 +100,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
       ),
     audience: 'director',
   },
+  [FeatureFlag.Mixtape]: {
+    icon: MusicNoteIcon,
+    title: () => m.preview_feature_title_mixtape(),
+    addedAt: new Date('2026-10-16'),
+    description: () => m.preview_feature_description_mixtape(),
+    featureLink: () =>
+      openFeatureLink(UrlBuilder.mixtape(), m.preview_feature_title_mixtape()),
+    audience: 'director',
+  },
 };

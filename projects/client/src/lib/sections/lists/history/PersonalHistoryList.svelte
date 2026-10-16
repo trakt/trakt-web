@@ -2,6 +2,7 @@
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages";
+  import MixtapeEntryButton from "$lib/sections/mixtape/MixtapeEntryButton.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -49,5 +50,12 @@
 
   {#snippet empty()}
     <CtaItem {cta} variant="placeholder" />
+  {/snippet}
+
+  {#snippet actions()}
+    <MixtapeEntryButton
+      type={mode === "show" ? "show" : "movie"}
+      source="history"
+    />
   {/snippet}
 </DrillableMediaList>

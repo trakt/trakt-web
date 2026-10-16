@@ -8,6 +8,7 @@
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
   import PopularList from "$lib/sections/lists/popular/PopularList.svelte";
   import ReleasesList from "$lib/sections/lists/ReleasesList.svelte";
+  import MixtapeDiscoverStrip from "$lib/sections/mixtape/MixtapeDiscoverStrip.svelte";
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
@@ -56,6 +57,8 @@
       <SeasonalToggle />
     {/snippet}
   </NavbarStateSetter>
+
+  <MixtapeDiscoverStrip type={$type === "show" ? "show" : "movie"} />
 
   <TrendingList
     title={m.list_title_trending()}
