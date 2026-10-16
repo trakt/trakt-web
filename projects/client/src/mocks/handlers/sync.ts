@@ -6,9 +6,9 @@ import { http, HttpResponse } from 'msw';
 
 import { MediaLibraryResponseMock } from '../data/sync/response/MediaLibraryResponseMock.ts';
 import { UpNextResponseMock } from '../data/sync/response/UpNextResponseMock.ts';
-import { UserPlexEpisodeLibraryResponseMock } from '../data/users/response/UserPlexEpisodeLibraryResponseMock.ts';
-import { UserPlexMovieLibraryResponseMock } from '../data/users/response/UserPlexMovieLibraryResponseMock.ts';
-import { UserPlexShowLibraryResponseMock } from '../data/users/response/UserPlexShowLibraryResponseMock.ts';
+import { UserDigitalEpisodeLibraryResponseMock } from '../data/users/response/UserDigitalEpisodeLibraryResponseMock.ts';
+import { UserDigitalMovieLibraryResponseMock } from '../data/users/response/UserDigitalMovieLibraryResponseMock.ts';
+import { UserDigitalShowLibraryResponseMock } from '../data/users/response/UserDigitalShowLibraryResponseMock.ts';
 
 function paginatedCollection(
   request: Request,
@@ -122,16 +122,16 @@ export const sync = [
   http.get(
     'http://localhost/sync/collection/minimal/movies',
     ({ request }) =>
-      paginatedCollection(request, UserPlexMovieLibraryResponseMock),
+      paginatedCollection(request, UserDigitalMovieLibraryResponseMock),
   ),
   http.get(
     'http://localhost/sync/collection/minimal/episodes',
     ({ request }) =>
-      paginatedCollection(request, UserPlexEpisodeLibraryResponseMock),
+      paginatedCollection(request, UserDigitalEpisodeLibraryResponseMock),
   ),
   http.get(
     'http://localhost/sync/collection/minimal/shows',
     ({ request }) =>
-      paginatedCollection(request, UserPlexShowLibraryResponseMock),
+      paginatedCollection(request, UserDigitalShowLibraryResponseMock),
   ),
 ];

@@ -28,9 +28,9 @@ import {
   type UserNotesHistory,
 } from '../queries/currentUserNotesQuery.ts';
 import {
-  currentUserPlexLibraryQuery,
-  type UserPlexLibrary,
-} from '../queries/currentUserPlexLibraryQuery.ts';
+  currentUserDigitalLibraryQuery,
+  type UserDigitalLibrary,
+} from '../queries/currentUserDigitalLibraryQuery.ts';
 import {
   currentUserRatingsQuery,
   type UserRatings,
@@ -133,8 +133,8 @@ function createUseUserInstance() {
   );
   const favoritesQuerySignal = useQuery(currentUserFavoritesQuery());
   const followingQuerySignal = useQuery(currentUserNetworkQuery());
-  const plexLibraryQuerySignal = useQuery(
-    currentUserPlexLibraryQuery(),
+  const digitalLibraryQuerySignal = useQuery(
+    currentUserDigitalLibraryQuery(),
   );
   const likesQuerySignal = useQuery(currentUserLikesQuery());
   const limitsQuerySignal = useQuery(userLimitsQuery());
@@ -175,10 +175,10 @@ function createUseUserInstance() {
           network: of<UserNetwork>({
             following: [],
           }),
-          plexLibrary: of<UserPlexLibrary>({
-            movieIds: [],
-            episodeIds: [],
-            showIds: [],
+          digitalLibrary: of<UserDigitalLibrary>({
+            movies: {},
+            shows: {},
+            episodes: {},
           }),
           likes: of<UserLikes>({
             lists: new Map(),
@@ -219,7 +219,7 @@ function createUseUserInstance() {
         network: followingQuerySignal.pipe(
           map((network) => network.data),
         ),
-        plexLibrary: plexLibraryQuerySignal.pipe(
+        digitalLibrary: digitalLibraryQuerySignal.pipe(
           map((collection) => collection.data),
         ),
         likes: likesQuerySignal.pipe(
@@ -263,7 +263,9 @@ function createUseUserInstance() {
     reactions: sharedUserContext$.pipe(switchMap((ctx) => ctx.reactions)),
     favorites: sharedUserContext$.pipe(switchMap((ctx) => ctx.favorites)),
     network: sharedUserContext$.pipe(switchMap((ctx) => ctx.network)),
-    plexLibrary: sharedUserContext$.pipe(switchMap((ctx) => ctx.plexLibrary)),
+    digitalLibrary: sharedUserContext$.pipe(
+      switchMap((ctx) => ctx.digitalLibrary),
+    ),
     likes: sharedUserContext$.pipe(switchMap((ctx) => ctx.likes)),
     limits: sharedUserContext$.pipe(switchMap((ctx) => ctx.limits)),
     notes: sharedUserContext$.pipe(switchMap((ctx) => ctx.notes)),
