@@ -68,6 +68,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-mixtape-fan-poster {
     --fan-x: 0px;
     --fan-y: 0px;
@@ -115,8 +117,10 @@
       filter: none;
     }
 
-    &:hover {
-      filter: none;
+    @include for-mouse {
+      &:hover {
+        filter: none;
+      }
     }
   }
 
@@ -216,16 +220,24 @@
     cursor: pointer;
 
     opacity: 0;
+    pointer-events: none;
     transition: opacity var(--transition-increment);
 
-    .trakt-mixtape-fan-poster:hover &,
     .is-selected &,
     &:focus-visible {
       opacity: 1;
+      pointer-events: auto;
     }
 
-    &:hover {
-      background: var(--shade-940);
+    @include for-mouse {
+      .trakt-mixtape-fan-poster:hover & {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      &:hover {
+        background: var(--shade-940);
+      }
     }
   }
 
@@ -240,8 +252,10 @@
     pointer-events: none;
     transition: opacity var(--transition-increment);
 
-    .trakt-mixtape-fan-poster:hover & {
-      opacity: 1;
+    @include for-mouse {
+      .trakt-mixtape-fan-poster:hover & {
+        opacity: 1;
+      }
     }
   }
 </style>

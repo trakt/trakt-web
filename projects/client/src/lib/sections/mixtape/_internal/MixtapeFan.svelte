@@ -162,6 +162,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-mixtape-fan {
     container: mixtape-fan / inline-size;
     position: relative;
@@ -311,9 +313,11 @@
     font-weight: 700;
     cursor: pointer;
 
-    &:hover {
-      color: var(--color-text-primary);
-      background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+    @include for-mouse {
+      &:hover {
+        color: var(--color-text-primary);
+        background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+      }
     }
 
     &:focus-visible {
