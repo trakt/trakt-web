@@ -135,9 +135,13 @@
     position: relative;
     min-width: 100%;
 
-    will-change: transform;
+    isolation: isolate;
 
     transform: translateX(var(--swipe-x));
+
+    &:global([data-state="active"]) {
+      will-change: transform;
+    }
 
     &[data-state="idle"] {
       transition: transform var(--transition-increment)
