@@ -8,6 +8,8 @@ export function scrollSpy(
 ) {
   const visibilityMap = new Map<Element, number>();
   let currentParams = params;
+  let lastId = '';
+  let observeFrame = 0;
 
   const observerCallback = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
@@ -24,9 +26,10 @@ export function scrollSpy(
       }
     });
 
-    if (mostVisibleId) {
-      currentParams.onUpdate(mostVisibleId);
-    }
+    if (!mostVisibleId || mostVisibleId === lastId) return;
+
+    lastId = mostVisibleId;
+    currentParams.onUpdate(mostVisibleId);
   };
 
   const observer = new IntersectionObserver(observerCallback, {
@@ -37,8 +40,17 @@ export function scrollSpy(
   function observeElements() {
     observer.disconnect();
     visibilityMap.clear();
+    lastId = '';
     const elements = node.querySelectorAll(currentParams.selector);
     elements.forEach((el) => observer.observe(el));
+  }
+
+  function scheduleObserveElements() {
+    if (observeFrame) return;
+    observeFrame = requestAnimationFrame(() => {
+      observeFrame = 0;
+      observeElements();
+    });
   }
 
   function scrollToId(id: string) {
@@ -56,9 +68,7 @@ export function scrollSpy(
     scrollToId(currentParams.initialId);
   }
 
-  const mutationObserver = new MutationObserver(() => {
-    observeElements();
-  });
+  const mutationObserver = new MutationObserver(scheduleObserveElements);
 
   mutationObserver.observe(node, { childList: true, subtree: true });
 
@@ -73,6 +83,7 @@ export function scrollSpy(
       }
     },
     destroy() {
+      if (observeFrame) cancelAnimationFrame(observeFrame);
       observer.disconnect();
       mutationObserver.disconnect();
       visibilityMap.clear();
