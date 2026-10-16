@@ -161,4 +161,27 @@ describe('action: usePortal', () => {
     const clone = document.querySelector('[data-popup-state="opened"]');
     expect(clone).toBeNull();
   });
+
+  it('should only listen for outside interaction while open', async () => {
+    const targetNode = document.createElement('div');
+    const closeSpy = vi.spyOn(targetNode, 'removeAttribute');
+
+    const { portalTrigger, isOpened } = usePortal();
+    const component = await renderStore(() => portalTrigger(targetNode));
+
+    globalThis.window.dispatchEvent(new Event('resize'));
+    expect(closeSpy).not.toHaveBeenCalled();
+
+    targetNode.dispatchEvent(new Event('click'));
+    expect(await firstValueFrom(isOpened)).toBe(true);
+
+    globalThis.window.dispatchEvent(new Event('resize'));
+    expect(await firstValueFrom(isOpened)).toBe(false);
+
+    closeSpy.mockClear();
+    globalThis.window.dispatchEvent(new Event('resize'));
+    expect(closeSpy).not.toHaveBeenCalled();
+
+    component.destroy();
+  });
 });
