@@ -11,19 +11,20 @@ export function usePlexLibrary(target: MetaInfoProps) {
     };
   }
 
-  const { plexLibrary } = useUser();
+  const { digitalLibrary } = useUser();
 
-  const isInLibrary = plexLibrary.pipe(
-    map(($plexLibrary) => {
+  const isInLibrary = digitalLibrary.pipe(
+    map(($digitalLibrary) => {
       switch (target.type) {
         case 'movie':
-          return $plexLibrary?.movieIds.includes(target.media.id);
+          return $digitalLibrary?.movies[target.media.id];
         case 'show':
-          return $plexLibrary?.showIds.includes(target.media.id);
+          return $digitalLibrary?.shows[target.media.id];
         case 'episode':
-          return $plexLibrary?.episodeIds.includes(target.episode.id);
+          return $digitalLibrary?.episodes[target.episode.id];
       }
     }),
+    map(($providers) => $providers?.includes('plex') ?? false),
   );
 
   return {
