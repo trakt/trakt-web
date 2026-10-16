@@ -98,17 +98,17 @@
     {placeholder}
     oninput={onSearch}
   />
+  {#if $isSearching}
+    <div class="trakt-search-loader"></div>
+  {/if}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   @keyframes slide-left-to-right {
-    0% {
-      background-position: 200% 0;
-    }
-    100% {
-      background-position: -200% 0;
+    to {
+      transform: translateX(calc(200% / 3));
     }
   }
 
@@ -173,7 +173,7 @@
         height: var(--search-icon-size);
       }
 
-      &.search-is-loading::after {
+      &.search-is-loading .trakt-search-loader {
         bottom: calc(-1 * var(--ni-4));
         height: var(--ni-1);
       }
@@ -248,10 +248,9 @@
     }
 
     &.search-is-loading {
-      &::after {
+      .trakt-search-loader {
         --search-side-distance: var(--ni-32);
 
-        content: "";
         z-index: var(--layer-overlay);
 
         width: calc(var(--search-input-width) - var(--search-side-distance));
@@ -263,25 +262,37 @@
         inset-inline-end: 0;
 
         border-radius: 50%;
-        background: linear-gradient(
-          90deg,
-          var(--color-foreground) 0%,
-          var(--color-foreground) 50%,
-          transparent 50%,
-          transparent 100%
-        );
-        background-size: 200% 100%;
-        animation: slide-left-to-right calc(var(--transition-increment) * 10)
-          linear infinite;
+        overflow: hidden;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -200%;
+          width: 300%;
+
+          background: linear-gradient(
+            90deg,
+            var(--color-foreground) 0%,
+            var(--color-foreground) 33.3333%,
+            transparent 33.3333%,
+            transparent 66.6667%,
+            var(--color-foreground) 66.6667%,
+            var(--color-foreground) 100%
+          );
+          animation: slide-left-to-right calc(var(--transition-increment) * 5)
+            linear infinite;
+        }
       }
 
       @include for-mobile {
-        &::after {
+        .trakt-search-loader {
           z-index: calc(var(--layer-top) + var(--layer-overlay));
         }
 
         &:has(input:focus-within) {
-          &::after {
+          .trakt-search-loader {
             width: calc(
               var(--mobile-search-focus-width) - var(--search-side-distance)
             );
