@@ -13271,12 +13271,12 @@
       "description": "Page title of the Mixtape page, where users pick watched titles and get three suggestions with the same feel."
     },
     "text_mixtape_description_movies": {
-      "default": "Pick up to 5 movies you loved for how they felt.",
-      "description": "Intro under the Mixtape heading when picking movies."
+      "default": "Pick a movie you loved. Add more to fine-tune the mix.",
+      "description": "Intro under the Mixtape heading when picking movies. One pick is enough; more picks narrow the mix."
     },
     "text_mixtape_description_shows": {
-      "default": "Pick up to 5 shows you loved for how they felt.",
-      "description": "Intro under the Mixtape heading when picking shows."
+      "default": "Pick a show you loved. Add more to fine-tune the mix.",
+      "description": "Intro under the Mixtape heading when picking shows. One pick is enough; more picks narrow the mix."
     },
     "header_mixtape_recent_movies": {
       "default": "Your recent movies",
@@ -13312,19 +13312,19 @@
     },
     "text_mixtape_slot_first": {
       "default": "Pick one",
-      "description": "Text in the first empty pick slot on the Mixtape page."
+      "description": "Label on the single add box in the Mixtape tray before anything is picked. Tapping it jumps to search."
     },
     "text_mixtape_slot_next": {
       "default": "Add",
-      "description": "Text in the next empty pick slot on the Mixtape page."
+      "description": "Label on the single add box in the Mixtape tray after the first pick. Tapping it jumps to search."
     },
     "button_label_mixtape_remove_pick": {
       "default": "Remove {title}",
       "description": "Accessible label of the remove button on a picked title. {title} is the movie or show title."
     },
     "text_mixtape_pick_count": {
-      "default": "{count} of 5",
-      "description": "How many titles are picked on the Mixtape page, out of a maximum of 5. {count} is a number."
+      "default": "{count} picked",
+      "description": "How many titles are picked on the Mixtape page. {count} is a number from 1 to 5."
     },
     "button_text_mixtape_clear": {
       "default": "Clear",
@@ -13630,6 +13630,10 @@
           "type": "string"
         }
       }
+    },
+    "text_mixtape_pick_prompt": {
+      "default": "Tap a poster you loved",
+      "description": "Shown in the Mixtape bottom bar before anything is picked."
     }
   }
 }

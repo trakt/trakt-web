@@ -38,6 +38,7 @@
     useMixtape(request$);
 
   let query = $state("");
+  let searchBox = $state<HTMLDivElement>();
 
   const { track: trackOpen } = useTrack(AnalyticsEvent.MixtapeOpen);
   const { track: trackPick } = useTrack(AnalyticsEvent.MixtapePick);
@@ -164,14 +165,17 @@
         picked={$picked}
         removeHref={(id) =>
           href({ picks: params.picks.filter((pick) => pick !== id) })}
+        onAdd={() => searchBox?.querySelector("input")?.focus()}
       />
-      <DrawerSearchInput
-        bind:value={query}
-        label={m.input_label_mixtape_search()}
-        placeholder={params.type === "show"
-          ? m.input_placeholder_mixtape_search_shows()
-          : m.input_placeholder_mixtape_search_movies()}
-      />
+      <div bind:this={searchBox}>
+        <DrawerSearchInput
+          bind:value={query}
+          label={m.input_label_mixtape_search()}
+          placeholder={params.type === "show"
+            ? m.input_placeholder_mixtape_search_shows()
+            : m.input_placeholder_mixtape_search_movies()}
+        />
+      </div>
     </div>
 
     <div class="mixtape-grid-head">

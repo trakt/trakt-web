@@ -9,7 +9,9 @@
 
 <div class="trakt-mixtape-action-bar">
   <span class="small secondary no-wrap">
-    {m.text_mixtape_pick_count({ count: String(pickCount) })}
+    {pickCount === 0
+      ? m.text_mixtape_pick_prompt()
+      : m.text_mixtape_pick_count({ count: String(pickCount) })}
   </span>
   <span class="spacer"></span>
   {#if pickCount > 0}
