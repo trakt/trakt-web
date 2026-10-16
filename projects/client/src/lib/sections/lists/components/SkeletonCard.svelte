@@ -44,6 +44,7 @@
 
     position: relative;
     overflow: hidden;
+    content-visibility: auto;
 
     box-shadow: var(--shadow-base);
   }
