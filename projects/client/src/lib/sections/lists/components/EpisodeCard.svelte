@@ -22,6 +22,7 @@
   } from "$lib/utils/assets";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
+  import { multicast } from "$lib/utils/store/multicast.ts";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
@@ -41,16 +42,22 @@
 
   const isShowContext = $derived("context" in rest && rest.context === "show");
 
+  const isSpoilerHidden = $derived(
+    useMediaSpoiler({ show, media: episode, type: "episode" }).isSpoilerHidden
+      .pipe(multicast()),
+  );
+
   const src = $derived(
-    useEpisodeSpoilerImage({ episode, show, variant: rest.variant }),
+    useEpisodeSpoilerImage({
+      episode,
+      show,
+      variant: rest.variant,
+      isSpoilerHidden,
+    }),
   );
 
   const spoilerFreeTitle = $derived(
-    useSpoilerFreeEpisodeTitle({ episode, show }),
-  );
-
-  const { isSpoilerHidden } = $derived(
-    useMediaSpoiler({ show, media: episode, type: "episode" }),
+    useSpoilerFreeEpisodeTitle({ episode, show, isSpoilerHidden }),
   );
 
   const episodeLink = $derived(

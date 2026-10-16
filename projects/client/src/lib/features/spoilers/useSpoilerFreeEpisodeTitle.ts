@@ -1,11 +1,12 @@
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import { episodeSubtitle } from '$lib/utils/intl/episodeSubtitle.ts';
-import { map } from 'rxjs';
+import { map, type Observable } from 'rxjs';
 import { useMediaSpoiler } from './useMediaSpoiler.ts';
 
 type SpoilerFreeEpisodeTitleProps = {
   episode: EpisodeEntry;
   show: { id: number; title: string };
+  isSpoilerHidden?: Observable<boolean>;
 };
 
 export function useSpoilerFreeEpisodeTitle(
@@ -13,11 +14,11 @@ export function useSpoilerFreeEpisodeTitle(
 ) {
   const { episode, show } = props;
 
-  const { isSpoilerHidden } = useMediaSpoiler({
+  const isSpoilerHidden = props.isSpoilerHidden ?? useMediaSpoiler({
     show,
     media: episode,
     type: 'episode',
-  });
+  }).isSpoilerHidden;
 
   return isSpoilerHidden.pipe(
     map(($isSpoilerHidden) =>
