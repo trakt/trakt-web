@@ -70,6 +70,16 @@ current authoritative docs rather than trust folklore.
 - **Always remove listeners (and cancel pending rAFs) on teardown.** Lingering
   listeners hold their closures and the elements they captured in memory.
   [MDN: `removeEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener).
+- **Never register window-level listeners per instance of a shared primitive.**
+  `Button` used to attach `clickOutside` (click, scroll, resize and keydown on
+  the `GlobalEventBus`) to every instance, so every scroll event dispatched one
+  `CustomEvent` per button on the page. Attach such listeners only when the
+  consumer opts in (`onclickoutside` passed), and for popups register them in
+  the open handler and remove them on close. A closed menu has nothing to close.
+- **Coalesce infinite-scroll checks per frame, not with a trailing debounce.** A
+  trailing debounce only fires after the user stops scrolling, so a fast fling
+  reaches the bottom before the next page is requested. One rAF per frame keeps
+  the request early and allocates nothing per event (`useLazyLoader`).
 
 ---
 
@@ -91,6 +101,24 @@ current authoritative docs rather than trust folklore.
   collapse and cause layout shift.
   [web.dev: `content-visibility`](https://web.dev/articles/content-visibility),
   [MDN: `content-visibility`](https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility).
+- **Measure size with `ResizeObserver`, never with a `MutationObserver`.** A
+  subtree `MutationObserver` that calls `getBoundingClientRect()` forces a
+  synchronous layout right after every DOM write inside the observed node (hover
+  flags, popup attributes, image loads). Every size change already fires the
+  `ResizeObserver`, and reading the rect inside its callback is free because
+  layout has just run (`useDimensionObserver`).
+  [MDN: `ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver).
+- **When a `MutationObserver` must stay, batch its reads into one rAF.** The
+  popup realign and the calendar scroll spy schedule a single frame per burst of
+  mutations; the rAF still runs before that frame's paint, so nothing is drawn
+  in a stale position. Never observe `document.body` from a component that
+  mounts many times; share one rAF-batched tracker (`useMobileNavbarHeight`).
+- **`content-visibility` belongs on blocks with children and an explicit size,
+  never on `<img>`.** A replaced element has no subtree to skip, so the property
+  only adds a relevance check per image. Leaf placeholders with fixed width and
+  height (skeleton cover and footer) are the safe target. Section-level
+  `content-visibility` was tried and reverted (035bcb1ec), so keep it at leaf
+  level.
 - **Prefer native `loading="lazy"` over a custom IntersectionObserver for image
   deferral.** It is connection-aware (1250 px below the viewport on 4G, 2500 px
   on slower) and free of JS cost.
@@ -128,6 +156,22 @@ current authoritative docs rather than trust folklore.
   primitives, structural for objects) so downstream consumers do not re-render
   on no-op upstream churn.
   [rxjs.dev: `distinctUntilChanged`](https://rxjs.dev/api/operators/distinctUntilChanged).
+- **Query results re-emit on every fetch-status change with the same `data`
+  reference.** `isFetching` and `isFetchingNextPage` flips push a new result
+  object downstream. Before building anything from `data` (lookup maps, Sets,
+  flattened page lists, dedupes, intl overlay fetches), project to the data and
+  add `distinctUntilChanged()`:
+  `query.pipe(map((q) => q.data), distinctUntilChanged(), map(build))`. Keep
+  loading flags on the raw stream so they still update. Query-core shares
+  structure between fetches, so unchanged data keeps its reference.
+- **One shared stream per lookup, not one query observer per card.** A hook that
+  every card calls (`useHiddenShows`, streaming logos) should build its index
+  once (keyed per `QueryClient` so SSR requests never share it) and hand out
+  `shareReplay({ bufferSize: 1, refCount: true })`, so cards do `Set.has`
+  instead of a linear scan each.
+- **Let one card compute a shared pipeline once.** When several helpers on the
+  same card each call `useIsWatched` + `useSpoiler`, compute it once in the card
+  and pass it in as an optional `Observable` (`EpisodeCard`).
 - **Map, don't reconstruct.** If a derived stream is a pure function of an
   upstream, use `map` or `combineLatest` + `map`; don't tear down and recreate a
   Subject on every change. Recreated subjects break identity for downstream
@@ -232,6 +276,17 @@ re-creates the entire observer chain on every reactive flush.
   becomes a runaway tab when the source fails for a structural reason. Cap
   retries and back off; cap polls at a session-scoped count.
   [TanStack: window-focus refetching](https://tanstack.com/query/v5/docs/framework/react/guides/window-focus-refetching).
+- **Keep `gcTime` at least as long as a back navigation is likely to take.**
+  With the 5 minute default, a page left for longer is dropped from memory,
+  renders empty on Back, SvelteKit restores scroll against a short page, and the
+  content pops in. The root `QueryClient` keeps inactive queries for 30 minutes;
+  the persisted IndexedDB cache covers the rest.
+- **Start the data request when a tap preloads the route.** Links preload on tap
+  (`data-sveltekit-preload-data="tap"` in `app.html`). In the browser, fire
+  `queryClient.prefetchQuery(<the page's own query>)` without awaiting it and
+  without passing load's `fetch`, so the key matches the page's `useQuery` and
+  the page reuses the in-flight request. Bots and share links keep the awaited
+  path.
 - **Seed lists from a parent query's data with `initialData` when the shape
   allows it.** Avoids a second network round-trip for a detail view that the
   list already rendered.
@@ -250,6 +305,24 @@ re-creates the entire observer chain on every reactive flush.
   to `"all"` on load. In Svelte 5 the handler must be an expression
   (`onload={(e) => ...}`); the legacy HTML-string form doesn't compile.
   [web.dev: Defer non-critical CSS](https://web.dev/articles/defer-non-critical-css).
+- **A redirect-only route must not have a `+page.server.ts`.** Any server load
+  makes every client navigation to that route fetch `__data.json` from the
+  Worker and wait for it, even when the load returns early for data requests.
+  Use a universal `+page.ts` that returns early in the browser and redirects
+  during SSR from the session flag the root layout already exposes (`/`,
+  `/home`, `/today`).
+- **Keep seasonal and rarely shown assets out of the root layout chunk.**
+  Anything the root layout imports statically is parsed on every boot. The
+  Christmas splash cover is a 650 KB inline SVG that only shows in December; it
+  now loads with `{#await import(...)}` inside the splash. Check the root node
+  size in the Vite manifest after touching anything the root layout reaches.
+- **Load heavy clients inside the async function that needs them.** `lookup()`
+  already returns a promise, so `await import('./createSearcher.ts')` keeps
+  typesense and axios out of boot. Server-side callers keep the static import.
+- **Run cleanup at idle, not in a load function.** The persisted query cache
+  sweep reads every IndexedDB entry; it runs in `requestIdleCallback` (capped by
+  its `timeout` option) so hydration does not wait on it. Browsers without
+  `requestIdleCallback` (Safari) fall back to a plain `setTimeout`.
 - **Code-split at route boundaries.** SvelteKit and Vite already split per
   route; resist adding manual `import()` calls that fragment a route's main
   chunk further. Those generally cost more in HTTP round-trips than they save in
@@ -269,6 +342,14 @@ re-creates the entire observer chain on every reactive flush.
 
 ## Images
 
+- **Give the hero image of a page `loading="eager"` and
+  `fetchpriority="high"`.** `CrossOriginImage` defaults to lazy, which is right
+  for cards and wrong for the summary poster, the usual LCP element. Opt in at
+  the page call site (`SummaryPoster`'s priority prop), never inside drawers.
+  [web.dev: Fetch Priority](https://web.dev/articles/fetch-priority).
+- **Never probe an image with `new Image()` to learn whether it loaded.** The
+  probe starts its own request and ignores `loading="lazy"`. Read the rendered
+  element's `complete && naturalWidth > 0` instead.
 - **Always set explicit `width` and `height` on `<img>`** so the browser can
   reserve the correct aspect-ratio box before the image loads. Eliminates CLS
   and makes native lazy loading viable.
@@ -292,6 +373,29 @@ re-creates the entire observer chain on every reactive flush.
   visible to screen readers or LCP detection. Reserve CSS backgrounds for
   decorative patterns.
   [web.dev: Optimize LCP](https://web.dev/articles/optimize-lcp).
+
+---
+
+## Per-instance cost in lists
+
+A grid renders 100 or more cards, so anything a card does once is done 100
+times. Check every per-card cost against what that card variant actually uses.
+
+- **Don't build hooks a card variant never uses.** Swipe actions (mark as
+  watched, watchlist, drop, confirm) only exist on swipeable cards. Put the
+  hooks and the gesture in a child component rendered inside `{#if hasSwipe}` so
+  other cards build none of it (`MediaSwipeGesture`, `UpNextSwipeGesture`).
+- **Mount closed overlays on first open.** A `forceMount` popover keeps its
+  floating, focus and dismiss layers alive for every card while closed. Gate the
+  portal on a `hasOpened` flag and keep it mounted afterwards so the close
+  transition still runs (`Popover`).
+- **Don't keep `will-change` on every card.** Promote the one card being dragged
+  (`[data-state="active"]` in `SwipeX`); keep `isolation: isolate` if the idle
+  card relied on the stacking context.
+- **Pause infinite animations while their container is hidden**
+  (`animation-play-state: paused` under `.is-hidden`), and drop blurs nobody can
+  see: the light theme input background is opaque, so its backdrop blur is a
+  theme token that is `none` there.
 
 ---
 
@@ -350,6 +454,14 @@ Apply skeptically.
   debug-only component in a `dev` gate is dead weight if the component already
   self-gates on `dev` internally. Read the library code before adding a
   hand-rolled gate around it.
+
+---
+
+## Verifying perf work
+
+- Put a counted before/after number in every perf commit body (listeners per
+  instance, layout reads per event, bytes in the boot closure). A change with no
+  number is unverified.
 
 ---
 
