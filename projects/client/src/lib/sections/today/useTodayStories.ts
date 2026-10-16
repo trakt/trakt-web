@@ -11,9 +11,16 @@ import { useUpNextList } from '$lib/sections/lists/progress/useUpNextList.ts';
 import { useWatchList } from '$lib/sections/lists/watchlist/useWatchList.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { dedupe } from '$lib/utils/array/dedupe.ts';
+import { isShallowEqual } from '$lib/utils/object/isShallowEqual.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { keepPreviousData } from '@tanstack/query-core';
-import { BehaviorSubject, combineLatest, map, type Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  type Observable,
+} from 'rxjs';
 import { getTodayWindow } from './_internal/getTodayWindow.ts';
 import { TODAY_WEEK_LENGTH } from './_internal/TODAY_WEEK_LENGTH.ts';
 import { toActivityWindow } from './_internal/toActivityWindow.ts';
@@ -69,11 +76,13 @@ export function useTodayStories(
     map(([$ranges, ...$queries]) => $queries.slice(0, $ranges.length)),
   );
   const activityList = activeQueries.pipe(
-    map(($queries) =>
+    map(($queries) => $queries.map(($query) => $query.data)),
+    distinctUntilChanged(isShallowEqual),
+    map(($data) =>
       dedupe(
         (entry) => entry.key,
-        $queries.flatMap(($query) =>
-          $query.data?.pages.flatMap((page) => page.entries) ?? []
+        $data.flatMap((data) =>
+          data?.pages.flatMap((page) => page.entries) ?? []
         ),
       )
     ),
