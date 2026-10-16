@@ -21,12 +21,12 @@
     hasActions = true,
   }: FormProps = $props();
 
-  let formElement: HTMLFormElement;
+  let formElement: HTMLFormElement | null = null;
 
   const isFormValid = writable(false);
 
   const checkFormValidity = () => {
-    isFormValid.set(formElement.checkValidity());
+    isFormValid.set(formElement?.checkValidity() ?? false);
   };
 
   onMount(() => {
