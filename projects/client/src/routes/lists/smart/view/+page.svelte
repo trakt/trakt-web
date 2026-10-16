@@ -6,10 +6,13 @@
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import CreateSmartListButton from "$lib/sections/lists/smart/CreateSmartListButton.svelte";
   import SmartListRenderer from "$lib/sections/lists/smart/SmartListRenderer.svelte";
+  import SmartListTemplatesGrid from "$lib/sections/lists/smart/templates/SmartListTemplatesGrid.svelte";
+  import { useSmartListTemplates } from "$lib/sections/lists/smart/templates/useSmartListTemplates.ts";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   const { mode } = useDiscover();
+  const { templates, isLoading } = useSmartListTemplates(mode);
 
   /*
     FIXME: add a generic way to handle empty states in applicable pages,
@@ -40,6 +43,8 @@
   />
 
   <SmartListRenderer mode={$mode} limit={100} {empty} />
+
+  <SmartListTemplatesGrid templates={$templates} isReady={!$isLoading} />
 </TraktPage>
 
 <style>

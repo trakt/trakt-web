@@ -41,23 +41,12 @@ describe('util: getVisibleSmartListTemplates', () => {
       .toEqual(templates);
   });
 
-  it('should show templates while the user has fewer than three lists', () => {
-    const lists = [list({ slug: 'a' }), list({ slug: 'b' })];
-
-    expect(
-      getVisibleSmartListTemplates({
-        templates: [template({})],
-        lists,
-        mode: 'media',
-      }),
-    ).toHaveLength(1);
-  });
-
-  it('should hide every template at three lists', () => {
+  it('should keep showing templates to a user with many lists', () => {
     const lists = [
-      list({ slug: 'a' }),
-      list({ slug: 'b' }),
-      list({ slug: 'c' }),
+      list({ slug: 'a', filters: { ratings: [10] } }),
+      list({ slug: 'b', filters: { ratings: [20] } }),
+      list({ slug: 'c', filters: { ratings: [30] } }),
+      list({ slug: 'd', filters: { ratings: [40] } }),
     ];
 
     expect(
@@ -66,7 +55,7 @@ describe('util: getVisibleSmartListTemplates', () => {
         lists,
         mode: 'media',
       }),
-    ).toEqual([]);
+    ).toHaveLength(1);
   });
 
   it('should hide a template the user already has', () => {
@@ -141,21 +130,5 @@ describe('util: getVisibleSmartListTemplates', () => {
       getVisibleSmartListTemplates({ templates, lists: [], mode: 'show' })
         .map(({ id }) => id),
     ).toEqual(['whodunits', 'time-twisters']);
-  });
-
-  it('should count lists of every mode towards the cap', () => {
-    const lists = [
-      list({ slug: 'a', mediaType: 'shows' }),
-      list({ slug: 'b', mediaType: 'shows' }),
-      list({ slug: 'c', mediaType: 'shows' }),
-    ];
-
-    expect(
-      getVisibleSmartListTemplates({
-        templates: [template({})],
-        lists,
-        mode: 'movie',
-      }),
-    ).toEqual([]);
   });
 });

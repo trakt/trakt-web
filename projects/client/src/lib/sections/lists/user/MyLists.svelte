@@ -13,6 +13,7 @@
   import CreateSmartListButton from "../smart/CreateSmartListButton.svelte";
   import SmartListSummaryItem from "../smart/SmartListSummaryItem.svelte";
   import SmartListTemplates from "../smart/templates/SmartListTemplates.svelte";
+  import SmartListTemplatesLink from "../smart/templates/SmartListTemplatesLink.svelte";
   import { useSmartListTemplates } from "../smart/templates/useSmartListTemplates.ts";
   import CreateListAction from "./_internal/CreateListAction.svelte";
   import LeaveCollaborationButton from "./_internal/LeaveCollaborationButton.svelte";
@@ -28,11 +29,14 @@
 
   const {
     templates,
+    presentation,
     isLoading: areTemplatesLoading,
     hide: hideTemplates,
   } = useSmartListTemplates(fromRune(() => mode));
 
   const hasTemplates = $derived(type === "smart" && $templates.length > 0);
+  const hasStrip = $derived(hasTemplates && $presentation === "strip");
+  const hasLink = $derived(hasTemplates && $presentation === "link");
 
   const drilldown = $derived({
     href:
@@ -90,7 +94,7 @@
   --list-actions-height="var(--segmented-select-minimal-segment-height)"
   --height-list="var(--height-lists-list)"
   --height-override-list={$items.length === 0
-    ? hasTemplates ? "0px" : "var(--height-poster-list-sm)"
+    ? hasStrip ? "0px" : "var(--height-poster-list-sm)"
     : undefined}
 >
   {#snippet item(entry)}
@@ -111,7 +115,7 @@
   {#snippet empty()}
     {#if !$isLoading}
       {#if type === "smart"}
-        {#if !hasTemplates && !$areTemplatesLoading}
+        {#if !hasStrip && !$areTemplatesLoading}
           <CtaItem cta={{ type: "smart-list" }} variant="placeholder" />
         {/if}
       {:else if type === "personal"}
@@ -123,8 +127,12 @@
   {/snippet}
 </SectionList>
 
-{#if hasTemplates}
+{#if hasStrip}
   <SmartListTemplates templates={$templates} onHide={hideTemplates} />
+{/if}
+
+{#if hasLink}
+  <SmartListTemplatesLink templates={$templates} />
 {/if}
 
 {#if $showCreateList}
