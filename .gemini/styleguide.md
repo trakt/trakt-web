@@ -381,6 +381,14 @@ export function actionName(node: HTMLElement, params?: ActionParams) {
 - Well-typed inputs and outputs.
 - Include `.ts` extension in imports.
 
+## Analytics
+
+- A new user-facing feature must track its usage in HAL in the same PR: an
+  `AnalyticsEvent` key, a typed payload in `AnalyticsEventDataMap`, and a
+  `useTrack` call. Flag a new feature that ships without one.
+- Payloads carry no personal data (usernames, emails, free text, resolved paths
+  with user slugs).
+
 ## Code Quality
 
 ### ESLint
