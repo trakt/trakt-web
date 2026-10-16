@@ -7,6 +7,7 @@
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import { showActivityHistoryQuery } from "$lib/requests/queries/users/showActivityHistoryQuery.ts";
+  import { dedupe } from "$lib/utils/array/dedupe.ts";
   import { map } from "rxjs";
   import { fade } from "svelte/transition";
   import RewatchingEpisodeItem from "./_internal/RewatchingEpisodeItem.svelte";
@@ -32,13 +33,12 @@
       map(($query) => {
         const entries =
           $query.data?.pages.flatMap((page) => page.entries) ?? [];
-        const episodes = entries
-          .map((entry) => entry.episode)
-          .filter((episode, index, allEpisodes) =>
-            episode.season !== 0 &&
-            allEpisodes.findIndex((candidate) => candidate.id === episode.id) ===
-              index
-          );
+        const episodes = dedupe(
+          (episode) => episode.id,
+          entries
+            .map((entry) => entry.episode)
+            .filter((episode) => episode.season !== 0),
+        );
 
         return episodes.toSorted((episodeA, episodeB) => {
           const seasonDiff = episodeA.season - episodeB.season;
