@@ -4,11 +4,12 @@
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
   import { m } from "$lib/features/i18n/messages.ts";
+  import { useMobileNavbarHeight } from "$lib/sections/navbar/useMobileNavbarHeight.ts";
   import {
     useMedia,
     WellKnownMediaQuery,
   } from "$lib/stores/css/useMedia.ts";
-  import { onMount, type Snippet } from "svelte";
+  import type { Snippet } from "svelte";
   import { backOut, cubicIn } from "svelte/easing";
   import { fly } from "svelte/transition";
 
@@ -50,7 +51,7 @@
     dismissible = true,
   }: SnackbarProps = $props();
 
-  let navbarHeight = $state(0);
+  const { height: navbarHeight } = useMobileNavbarHeight();
 
   const prefersReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
 
@@ -65,41 +66,6 @@
       ? { y: 0, duration: 120 }
       : { y: 150, duration: 250, easing: cubicIn },
   );
-
-  onMount(() => {
-    let currentNavbar: Element | null = null;
-    let resizeObserver: ResizeObserver | undefined;
-
-    const updateHeight = () => {
-      navbarHeight = currentNavbar
-        ? currentNavbar.getBoundingClientRect().height
-        : 0;
-    };
-
-    const checkNavbar = () => {
-      const navbar = document.querySelector(".trakt-mobile-navbar");
-      if (navbar !== currentNavbar) {
-        resizeObserver?.disconnect();
-        currentNavbar = navbar;
-
-        if (navbar) {
-          resizeObserver = new ResizeObserver(updateHeight);
-          resizeObserver.observe(navbar);
-        }
-        updateHeight();
-      }
-    };
-
-    checkNavbar();
-
-    const mutationObserver = new MutationObserver(checkNavbar);
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
-
-    return () => {
-      mutationObserver.disconnect();
-      resizeObserver?.disconnect();
-    };
-  });
 </script>
 
 {#snippet actionButton()}
@@ -123,7 +89,7 @@
     role="status"
     aria-live="polite"
     aria-atomic="true"
-    style="bottom: {navbarHeight}px;"
+    style="bottom: {$navbarHeight}px;"
     data-variant={variant}
     in:fly|global={enterTransition}
     out:fly|global={exitTransition}
