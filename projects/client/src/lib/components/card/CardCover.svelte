@@ -1,7 +1,6 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { PLACEHOLDERS } from "$lib/utils/assets";
-  import { isImageComplete } from "$lib/utils/image/isImageComplete";
   import { checksum } from "$lib/utils/string/checksum";
   import { lineClamp } from "../text/lineClamp";
   import type { CardCoverProps } from "./CardCoverProps";
@@ -13,11 +12,12 @@
 
   const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
 
-  $effect(() => {
-    if (isImageComplete(src)) {
+  const clearPendingWhenComplete = (container: HTMLElement) => {
+    const image = container.querySelector("img");
+    if (image?.complete && image.naturalWidth > 0) {
       isImagePending = false;
     }
-  });
+  };
 </script>
 
 <div
@@ -39,6 +39,7 @@
   <div
     class="trakt-card-cover-image"
     class:has-overlay={overlaySrc || isPlaceholder}
+    {@attach clearPendingWhenComplete}
   >
     <CrossOriginImage
       classList="trakt-card-cover-image"
