@@ -22,7 +22,9 @@ describe('action: usePortal', () => {
   };
 
   beforeEach(() => {
-    vi.useFakeTimers({ toFake: ['requestAnimationFrame'] });
+    vi.useFakeTimers({
+      toFake: ['requestAnimationFrame', 'cancelAnimationFrame'],
+    });
 
     Object.defineProperty(window, 'innerWidth', {
       value: popupWidth - 20,
@@ -62,5 +64,60 @@ describe('action: usePortal', () => {
 
     expect(targetNode.getAttribute(POPUP_POSITION_ATTRIBUTE)).toBeNull();
     expect(targetNode.getAttribute(POPUP_ALIGNMENT_ATTRIBUTE)).toBeNull();
+  });
+
+  it('should realign once per frame when the popup content changes', async () => {
+    const targetNode = document.createElement('div');
+    const popupNode = document.createElement('div');
+    const getBoundingClientRect = vi.fn(() => popupRect);
+    popupNode.getBoundingClientRect = getBoundingClientRect;
+
+    const component = await renderStore(() =>
+      openPopupContainer(popupNode, targetNode, { position: 'right' })
+    );
+
+    vi.advanceTimersByTime(16);
+    getBoundingClientRect.mockClear();
+
+    popupNode.appendChild(document.createElement('span'));
+    await Promise.resolve();
+
+    expect(getBoundingClientRect).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(16);
+    const readsPerRealign = getBoundingClientRect.mock.calls.length;
+    getBoundingClientRect.mockClear();
+
+    popupNode.appendChild(document.createElement('span'));
+    await Promise.resolve();
+    popupNode.appendChild(document.createElement('span'));
+    await Promise.resolve();
+    vi.advanceTimersByTime(16);
+
+    expect(readsPerRealign).toBeGreaterThan(0);
+    expect(getBoundingClientRect).toHaveBeenCalledTimes(readsPerRealign);
+
+    component.destroy();
+  });
+
+  it('should not realign after it is destroyed', async () => {
+    const targetNode = document.createElement('div');
+    const popupNode = document.createElement('div');
+    const getBoundingClientRect = vi.fn(() => popupRect);
+    popupNode.getBoundingClientRect = getBoundingClientRect;
+
+    const component = await renderStore(() =>
+      openPopupContainer(popupNode, targetNode, { position: 'right' })
+    );
+
+    vi.advanceTimersByTime(16);
+    getBoundingClientRect.mockClear();
+
+    popupNode.appendChild(document.createElement('span'));
+    await Promise.resolve();
+    component.destroy();
+    vi.advanceTimersByTime(16);
+
+    expect(getBoundingClientRect).not.toHaveBeenCalled();
   });
 });

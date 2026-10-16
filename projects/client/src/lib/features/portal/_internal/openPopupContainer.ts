@@ -21,9 +21,20 @@ export function openPopupContainer(
 
   onMount(moveNodeToBody);
 
-  const observer = new MutationObserver(() => {
+  let realignFrame: number | null = null;
+
+  const realign = () => {
+    realignFrame = null;
     const targetRect = targetNode.getBoundingClientRect();
     alignPopupContainer({ node, targetRect, targetNode, placement });
+  };
+
+  const observer = new MutationObserver(() => {
+    if (realignFrame != null) {
+      return;
+    }
+
+    realignFrame = requestAnimationFrame(realign);
   });
 
   observer.observe(node, {
@@ -33,6 +44,10 @@ export function openPopupContainer(
 
   return {
     destroy() {
+      if (realignFrame != null) {
+        cancelAnimationFrame(realignFrame);
+      }
+
       resetPositionAttributes(targetNode);
       observer.disconnect();
     },
