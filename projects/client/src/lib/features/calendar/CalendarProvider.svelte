@@ -1,13 +1,9 @@
 <script lang="ts">
-  import { untrack } from "svelte";
   import { createCalendarContext } from "./context/createCalendarContext";
 
-  const {
-    children,
-    initialDate,
-  }: ChildrenProps & { initialDate?: Date | Nil } = $props();
+  const { children }: ChildrenProps = $props();
 
-  createCalendarContext({ initialDate: untrack(() => initialDate) });
+  createCalendarContext();
 </script>
 
 {@render children()}

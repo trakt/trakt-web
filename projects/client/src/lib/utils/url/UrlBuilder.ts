@@ -161,11 +161,6 @@ export const UrlBuilder = {
   releases(params?: DiscoverUrlParams) {
     return discoverDrilldownFactory('releases')(params);
   },
-  social: {
-    activity: () => {
-      return '/social/activity';
-    },
-  },
   progress: (user: string, params: Record<string, string | number> = {}) =>
     `/users/${user}/progress${buildParamString(sanitizeParams(params))}`,
   startWatching: (user: string, params: Record<string, string | number> = {}) =>

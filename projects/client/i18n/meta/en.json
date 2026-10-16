@@ -1959,10 +1959,6 @@
       "default": "Social Activity",
       "description": "Title for lists containing recently watched items of the profiles the user follows. This title should be as short and concise as possible."
     },
-    "button_label_view_all_social_activity": {
-      "default": "View all social activity",
-      "description": "Aria-label for the button that allows users to view all social activity of the profiles they follow."
-    },
     "dropdown_label_person_position": {
       "default": "Position",
       "description": "Aria-label for the dropdown that allows users to filter people by their position in a movie or show."
@@ -3183,15 +3179,6 @@
       "description": "Aria-label for button that allows users to rate a movie, show, or episode with a specific number of stars.",
       "variables": {
         "stars": {
-          "type": "number"
-        }
-      }
-    },
-    "badge_text_more": {
-      "default": "and {count} more",
-      "description": "Text for badges shown on covers, used when there are more badges than can fit on the cover. This should be as short as possible.",
-      "variables": {
-        "count": {
           "type": "number"
         }
       }
