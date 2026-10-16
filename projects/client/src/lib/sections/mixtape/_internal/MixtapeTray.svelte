@@ -23,17 +23,20 @@
   {#if picks.length < MAX_MIXTAPE_PICKS}
     <button type="button" class="add-slot" onclick={onAdd}>
       <PlusIcon />
-      <span class="small bold">{addLabel}</span>
+      <span class="small bold add-label">{addLabel}</span>
     </button>
   {/if}
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-mixtape-tray {
+    container-type: inline-size;
+
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: var(--gap-xs);
-    max-width: var(--ni-520);
 
     .add-slot {
       all: unset;
@@ -49,12 +52,13 @@
 
       border: var(--border-thickness-xs) dashed
         color-mix(in srgb, var(--purple-400) 70%, transparent);
-      border-radius: var(--border-radius-s);
+      border-radius: var(--border-radius-m);
       background: color-mix(in srgb, var(--purple-500) 10%, transparent);
       color: var(--color-text-emphasis);
 
       text-align: center;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
 
       :global(svg) {
         width: var(--ni-20);
@@ -64,6 +68,16 @@
       &:focus-visible {
         outline: var(--border-thickness-xs) solid var(--purple-300);
         outline-offset: var(--ni-2);
+      }
+    }
+  }
+
+  @container (max-width: 280px) {
+    .trakt-mixtape-tray {
+      --mixtape-remove-size: var(--ni-20);
+
+      .add-slot .add-label {
+        @include visually-hidden;
       }
     }
   }

@@ -11,10 +11,12 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaInputDefault } from "$lib/models/MediaInput.ts";
   import type { MediaType } from "$lib/requests/models/MediaType.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { distinctUntilChanged } from "rxjs";
+  import { distinctUntilChanged, map, scan } from "rxjs";
   import { onMount } from "svelte";
+  import { holdSettledPicker } from "./_internal/holdSettledPicker.ts";
   import { MAX_MIXTAPE_PICKS } from "./_internal/MAX_MIXTAPE_PICKS.ts";
   import MixtapeActionBar from "./_internal/MixtapeActionBar.svelte";
   import MixtapePicker from "./_internal/MixtapePicker.svelte";
@@ -34,8 +36,15 @@
       (a, b) => a.type === b.type && a.picks.join() === b.picks.join(),
     ),
   );
-  const { history, picked, isHistoryLoading, mixtape, isMixtapeLoading } =
-    useMixtape(request$);
+  const {
+    history,
+    picked,
+    isHistoryLoading,
+    mixtape,
+    isMixtapeLoading,
+  } = useMixtape(request$);
+
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
 
   let query = $state("");
   let searchBox = $state<HTMLDivElement>();
@@ -76,8 +85,18 @@
       query,
     }),
   );
+  const isSettling = $derived(picker.kind === "fits" && $isMixtapeLoading);
+  const heldPicker$ = fromRune(() => ({
+    picker,
+    isSettling,
+    isHistoryLoading: $isHistoryLoading,
+  })).pipe(
+    scan(holdSettledPicker<MediaInputDefault>, null),
+    map((held) => held?.shown),
+  );
+  const shownPicker = $derived($heldPicker$ ?? picker);
   const isPickerLoading = $derived(
-    $isHistoryLoading || (picker.kind === "fits" && $isMixtapeLoading),
+    $isHistoryLoading || (isSettling && shownPicker === picker),
   );
   const isFull = $derived(params.picks.length >= MAX_MIXTAPE_PICKS);
   const slots = $derived(toMixtapeSlots($mixtape.suggestions, params.skips));
@@ -109,7 +128,7 @@
     const key = `${params.type}:${params.picks.join()}`;
     const ranOut =
       picker.kind === "fits" &&
-      !isPickerLoading &&
+      !isSettling &&
       !isFull &&
       picker.items.length === 0;
     if (!ranOut || reportedNoFits === key) return;
@@ -137,37 +156,51 @@
 {:else}
   <div class="trakt-mixtape">
     <header class="mixtape-header">
-      <div class="mixtape-title">
-        <span class="mixtape-icon"><CassetteIcon /></span>
-        <h2>{m.page_title_mixtape()}</h2>
+      <div class="mixtape-title-row">
+        <h2 class="mixtape-headline">
+          <span class="mixtape-icon"><CassetteIcon /></span>
+          {m.page_title_mixtape()}
+        </h2>
+        <SegmentedSelect
+          options={typeOptions}
+          value={params.type}
+          variant={$isMobile ? "selected-label" : "regular"}
+          ariaLabel={m.page_title_mixtape()}
+          onChange={() => (query = "")}
+        >
+          {#snippet icon(option)}
+            <ToggleIcon {option} />
+          {/snippet}
+        </SegmentedSelect>
       </div>
-      <SegmentedSelect
-        options={typeOptions}
-        value={params.type}
-        ariaLabel={m.page_title_mixtape()}
-        onChange={() => (query = "")}
-      >
-        {#snippet icon(option)}
-          <ToggleIcon {option} />
-        {/snippet}
-      </SegmentedSelect>
+      <p class="secondary mixtape-description">
+        {params.type === "show"
+          ? m.text_mixtape_description_shows()
+          : m.text_mixtape_description_movies()}
+      </p>
     </header>
 
-    <p class="secondary mixtape-description">
-      {params.type === "show"
-        ? m.text_mixtape_description_shows()
-        : m.text_mixtape_description_movies()}
-    </p>
+    <section class="mixtape-browse">
+      <div class="mixtape-grid-head">
+        <h3>
+          {shownPicker.kind === "search"
+            ? m.header_mixtape_search_results()
+            : shownPicker.kind === "fits"
+              ? m.header_mixtape_fits()
+              : params.type === "show"
+                ? m.header_mixtape_recent_shows()
+                : m.header_mixtape_recent_movies()}
+        </h3>
+        {#if shownPicker.kind === "fits" && !isPickerLoading}
+          <span class="small secondary">
+            {m.text_mixtape_fits_count({
+              count: String(shownPicker.items.length),
+            })}
+          </span>
+        {/if}
+      </div>
 
-    <div class="mixtape-controls">
-      <MixtapeTray
-        picks={params.picks}
-        picked={$picked}
-        removeHref={(id) =>
-          href({ picks: params.picks.filter((pick) => pick !== id) })}
-        onAdd={() => searchBox?.querySelector("input")?.focus()}
-      />
-      <div bind:this={searchBox}>
+      <div class="mixtape-search" bind:this={searchBox}>
         <DrawerSearchInput
           bind:value={query}
           label={m.input_label_mixtape_search()}
@@ -176,107 +209,155 @@
             : m.input_placeholder_mixtape_search_movies()}
         />
       </div>
+
+      <MixtapePicker
+        picker={shownPicker}
+        isLoading={isPickerLoading}
+        {isSettling}
+        {isFull}
+        pickHref={(media: MediaInputDefault) =>
+          href({ picks: [...params.picks, media.id] })}
+        onPick={(source) => {
+          query = "";
+          trackPick({
+            source,
+            type: params.type,
+            picks: params.picks.length + 1,
+          });
+        }}
+      />
+    </section>
+
+    <div class="mixtape-dock">
+      <MixtapeActionBar
+        pickCount={params.picks.length}
+        clearHref={UrlBuilder.mixtape({ type: params.type })}
+        mixHref={href({ view: "results" })}
+        onMix={() =>
+          trackMix({
+            type: params.type,
+            picks: params.picks.length,
+            fits: $mixtape.fits.length,
+          })}
+      >
+        <MixtapeTray
+          picks={params.picks}
+          picked={$picked}
+          removeHref={(id) =>
+            href({ picks: params.picks.filter((pick) => pick !== id) })}
+          onAdd={() => searchBox?.querySelector("input")?.focus()}
+        />
+      </MixtapeActionBar>
     </div>
-
-    <div class="mixtape-grid-head">
-      <h3>
-        {picker.kind === "search"
-          ? m.header_mixtape_search_results()
-          : picker.kind === "fits"
-            ? m.header_mixtape_fits()
-            : params.type === "show"
-              ? m.header_mixtape_recent_shows()
-              : m.header_mixtape_recent_movies()}
-      </h3>
-      {#if picker.kind === "fits" && !isPickerLoading}
-        <span class="small secondary">
-          {m.text_mixtape_fits_count({ count: String(picker.items.length) })}
-        </span>
-      {/if}
-    </div>
-
-    <MixtapePicker
-      {picker}
-      isLoading={isPickerLoading}
-      {isFull}
-      pickHref={(media: MediaInputDefault) =>
-        href({ picks: [...params.picks, media.id] })}
-      onPick={(source) => {
-        query = "";
-        trackPick({
-          source,
-          type: params.type,
-          picks: params.picks.length + 1,
-        });
-      }}
-    />
-
-    <MixtapeActionBar
-      pickCount={params.picks.length}
-      clearHref={UrlBuilder.mixtape({ type: params.type })}
-      mixHref={href({ view: "results" })}
-      onMix={() =>
-        trackMix({
-          type: params.type,
-          picks: params.picks.length,
-          fits: $mixtape.fits.length,
-        })}
-    />
   </div>
 {/if}
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-mixtape {
+    --mixtape-content-width: var(--ni-520);
+
+    box-sizing: border-box;
+    min-height: 100dvh;
+
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
-    padding-block-start: var(--gap-m);
 
     .mixtape-header {
       display: flex;
+      flex-direction: column;
+      gap: var(--gap-xs);
+      padding-block-start: var(--ni-10);
+
+      @include for-tablet-sm-and-below {
+        padding-block-start: var(--ni-16);
+      }
+    }
+
+    .mixtape-title-row {
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: var(--gap-s);
-      padding-inline: var(--layout-distance-side);
     }
 
-    .mixtape-title {
+    .mixtape-headline {
       display: flex;
       align-items: center;
-      gap: var(--gap-xs);
+      gap: var(--gap-s);
+      margin: 0;
 
-      h2 {
-        margin: 0;
+      font-size: var(--ni-40);
+      line-height: 1;
+      letter-spacing: -0.02em;
+
+      @include for-mobile {
+        font-size: var(--ni-28);
       }
     }
 
     .mixtape-icon {
       display: flex;
       color: var(--color-text-emphasis);
+
+      :global(svg) {
+        width: 1em;
+        height: 1em;
+      }
     }
 
     .mixtape-description {
       margin: 0;
-      padding-inline: var(--layout-distance-side);
-      max-width: var(--ni-520);
+      max-width: var(--mixtape-content-width);
     }
 
-    .mixtape-controls {
+    .mixtape-header,
+    .mixtape-search,
+    .mixtape-grid-head {
+      padding-inline: var(--layout-distance-side);
+    }
+
+    .mixtape-search {
+      max-width: var(--mixtape-content-width);
+    }
+
+    .mixtape-browse {
       display: flex;
       flex-direction: column;
       gap: var(--gap-m);
-      padding-inline: var(--layout-distance-side);
-      max-width: var(--ni-520);
     }
 
     .mixtape-grid-head {
       display: flex;
       align-items: baseline;
       gap: var(--gap-xs);
-      padding-inline: var(--layout-distance-side);
 
       h3 {
         margin: 0;
+      }
+    }
+
+    .mixtape-dock {
+      position: sticky;
+      inset-block-end: 0;
+      z-index: var(--layer-floating);
+
+      box-sizing: border-box;
+      width: 100%;
+      max-width: calc(
+        var(--mixtape-content-width) + 2 * var(--layout-distance-side)
+      );
+      margin-block-start: auto;
+      margin-inline: auto;
+      padding: var(--gap-s) var(--layout-distance-side);
+      padding-block-end: calc(var(--gap-s) + env(safe-area-inset-bottom));
+
+      @include for-tablet-sm-and-below {
+        inset-block-end: var(--mobile-navbar-height);
+        padding-block-end: var(--gap-s);
       }
     }
   }

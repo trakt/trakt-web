@@ -6,6 +6,22 @@
   }
 }
 
+@mixin fading-divider($thickness) {
+  content: "";
+
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+
+  height: $thickness;
+
+  background: radial-gradient(
+    60% 100% at 50% 50%,
+    color-mix(in srgb, var(--color-foreground) 20%, transparent),
+    transparent 70%
+  );
+}
+
 // Visually hide an element while keeping it available to screen readers
 // (e.g. a chart's <figcaption> summary).
 @mixin visually-hidden {

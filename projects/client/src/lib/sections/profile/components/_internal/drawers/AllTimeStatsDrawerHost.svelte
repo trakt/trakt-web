@@ -178,6 +178,8 @@
 </Drawer>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-all-time-stats-drawer {
     display: flex;
     flex-direction: column;
@@ -206,19 +208,7 @@
     padding-block-start: var(--gap-l);
 
     &::before {
-      content: "";
-
-      position: absolute;
-      inset-block-start: 0;
-      inset-inline: 0;
-
-      height: var(--ni-2);
-
-      background: radial-gradient(
-        60% 100% at 50% 50%,
-        color-mix(in srgb, var(--color-foreground) 20%, transparent),
-        transparent 70%
-      );
+      @include fading-divider(var(--ni-2));
     }
   }
 </style>
