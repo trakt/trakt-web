@@ -81,7 +81,7 @@
   const dragGhostStyle = $derived(
     dragGhost == null
       ? ""
-      : `top: ${dragGhost.top}px; left: ${dragGhost.left}px; width: ${dragGhost.width}px; height: ${dragGhost.height}px;`,
+      : `transform: translate(${dragGhost.left}px, ${dragGhost.top}px); width: ${dragGhost.width}px; height: ${dragGhost.height}px;`,
   );
   const renderRows = $derived.by(() => {
     const rows: (
@@ -564,6 +564,8 @@
 
   .drag-ghost {
     position: fixed;
+    top: 0;
+    left: 0;
     z-index: calc(var(--layer-top) + 1);
     pointer-events: none;
 
@@ -578,8 +580,7 @@
     color: var(--color-text-primary);
     opacity: 1;
     overflow: hidden;
-    transform: translate3d(0, 0, 0);
-    will-change: left, top;
+    will-change: transform;
 
     .ghost-cell {
       box-sizing: border-box;
