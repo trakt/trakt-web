@@ -43,7 +43,9 @@ export function usePaginatedListQuery<
 
   const fetchNextPage = async () => {
     const { fetchNextPage } = await firstValueFrom(query);
-    await fetchNextPage().catch(rethrowUnlessCancelled);
+    await fetchNextPage({ cancelRefetch: false }).catch(
+      rethrowUnlessCancelled,
+    );
   };
 
   return {

@@ -2,8 +2,6 @@ import { browser } from '$app/environment';
 import { useDimensionObserver } from '$lib/stores/css/useDimensionObserver.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
-import { debounce } from '$lib/utils/timing/debounce.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { onMount } from 'svelte';
 import { isPageFilling } from './isPageFilling.ts';
 import { isScrolledFarEnough } from './isScrolledFarEnough.ts';
@@ -12,6 +10,24 @@ type UseLazyLoaderProps = {
   loadMore: () => void;
   parent: HTMLElement | Nil;
 };
+
+function coalescePerFrame(callback: () => void) {
+  let frame = 0;
+
+  return {
+    schedule() {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        callback();
+      });
+    },
+    cancel() {
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+    },
+  };
+}
 
 export function useLazyLoader({ loadMore, parent }: UseLazyLoaderProps) {
   if (!browser) {
@@ -42,12 +58,12 @@ export function useLazyLoader({ loadMore, parent }: UseLazyLoaderProps) {
   }
 
   onMount(() => {
-    const debouncedLoadOnResize = debounce(loadMoreOnResize, time.fps(10));
-    const debouncedLoadOnScroll = debounce(loadMoreOnScroll, time.fps(10));
+    const loadOnResize = coalescePerFrame(loadMoreOnResize);
+    const loadOnScroll = coalescePerFrame(loadMoreOnScroll);
 
     function registerEvents() {
-      const scrollHandler = () => debouncedLoadOnScroll();
-      const resizeHandler = () => debouncedLoadOnResize();
+      const scrollHandler = loadOnScroll.schedule;
+      const resizeHandler = loadOnResize.schedule;
 
       if (parent) {
         parent.addEventListener('scroll', scrollHandler, { passive: true });
@@ -72,7 +88,7 @@ export function useLazyLoader({ loadMore, parent }: UseLazyLoaderProps) {
         if (dimension === 0) {
           return;
         }
-        debouncedLoadOnResize();
+        loadOnResize.schedule();
       },
     );
 
@@ -81,6 +97,8 @@ export function useLazyLoader({ loadMore, parent }: UseLazyLoaderProps) {
     return () => {
       subscription.unsubscribe();
       unregister();
+      loadOnResize.cancel();
+      loadOnScroll.cancel();
     };
   });
 
