@@ -1,5 +1,6 @@
 import { flattenQueryPages } from '$lib/features/query/flattenQueryPages.ts';
 import { isQuerySettled } from '$lib/features/query/isQuerySettled.ts';
+import { settledData } from '$lib/features/query/settledData.ts';
 import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { combineLatest, distinctUntilChanged, map, Observable } from 'rxjs';
@@ -40,14 +41,20 @@ export function useCurrentUserHistory(): UseCurrentUserHistoryResult {
   );
 
   const history = combineLatest([moviesQuery, showsQuery]).pipe(
+    map(([movies, shows]) =>
+      [settledData(movies), settledData(shows)] as const
+    ),
+    distinctUntilChanged(([prevMovies, prevShows], [movies, shows]) =>
+      prevMovies === movies && prevShows === shows
+    ),
     map(([movies, shows]) => {
-      if (!isQuerySettled(movies) || !isQuerySettled(shows)) {
+      if (movies === null || shows === null) {
         return null;
       }
 
       return {
-        movies: toWatchedMap(flattenQueryPages(movies)),
-        shows: toWatchedMap(flattenQueryPages(shows)),
+        movies: toWatchedMap(flattenQueryPages({ data: movies })),
+        shows: toWatchedMap(flattenQueryPages({ data: shows })),
       };
     }),
     distinctUntilChanged((prev, curr) => prev === null && curr === null),

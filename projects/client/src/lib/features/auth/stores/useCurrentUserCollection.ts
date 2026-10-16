@@ -1,5 +1,5 @@
 import { flattenQueryPages } from '$lib/features/query/flattenQueryPages.ts';
-import { isQuerySettled } from '$lib/features/query/isQuerySettled.ts';
+import { settledData } from '$lib/features/query/settledData.ts';
 import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import {
@@ -26,14 +26,20 @@ export function useCurrentUserCollection(): Observable<UserCollection | null> {
   );
 
   return combineLatest([moviesQuery, episodesQuery]).pipe(
+    map(([movies, episodes]) =>
+      [settledData(movies), settledData(episodes)] as const
+    ),
+    distinctUntilChanged(([prevMovies, prevEpisodes], [movies, episodes]) =>
+      prevMovies === movies && prevEpisodes === episodes
+    ),
     map(([movies, episodes]) => {
-      if (!isQuerySettled(movies) || !isQuerySettled(episodes)) {
+      if (movies === null || episodes === null) {
         return null;
       }
 
       return {
-        movies: new Set(flattenQueryPages(movies)),
-        episodes: new Set(flattenQueryPages(episodes)),
+        movies: new Set(flattenQueryPages({ data: movies })),
+        episodes: new Set(flattenQueryPages({ data: episodes })),
       };
     }),
     distinctUntilChanged((prev, curr) => prev === null && curr === null),
