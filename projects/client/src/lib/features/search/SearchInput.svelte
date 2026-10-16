@@ -21,15 +21,6 @@
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
-    const value = inputElement.value.trim();
-
-    if (value.length === 0) {
-      goto(pathName, {
-        replaceState: page.url.pathname === pathName,
-        keepFocus: true,
-      });
-    }
-
     const params = buildParamString({
       m: $mode,
       q: inputElement.value.trim(),
