@@ -12,14 +12,14 @@
     style: "summary" | "cover";
   } = $props();
 
-  const { list: hidden } = $derived(useHiddenShows());
+  const { ids: hidden } = $derived(useHiddenShows());
 
   const target = $derived(
     "show" in entry
       ? {
           episode: entry,
           show: entry.show,
-          status: $hidden.includes(entry.show.id)
+          status: $hidden.has(entry.show.id)
             ? ("hidden" as const)
             : ("watching" as const),
         }
