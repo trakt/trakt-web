@@ -38,7 +38,16 @@ export const load: LayoutLoad = ({ data }) => {
   });
 
   // Best-effort sweep of expired entries. Runs once per cold layout load.
-  persister?.persisterGc();
+  if (persister) {
+    const sweep = () => persister.persisterGc();
+
+    // Safari has no requestIdleCallback.
+    if (typeof requestIdleCallback === 'function') {
+      requestIdleCallback(sweep, { timeout: 10_000 });
+    } else {
+      setTimeout(sweep, 2_000);
+    }
+  }
 
   setToken({ value: data.oidcAuth.token, expiresAt: data.oidcAuth.expiresAt });
 
