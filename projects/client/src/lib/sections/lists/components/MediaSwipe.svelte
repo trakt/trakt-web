@@ -1,16 +1,10 @@
 <script lang="ts">
-  import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import { hasSwipeGesture } from "$lib/sections/lists/utils/hasSwipeGesture.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { swipeIndicatorHeight } from "$lib/sections/lists/utils/swipeIndicatorHeight.ts";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { BaseMediaInput } from "$lib/models/MediaInput";
-  import MarkAsWatchedSwipeIndicator from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedSwipeIndicator.svelte";
-  import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
-  import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
-  import WatchlistIndicator from "$lib/sections/media-actions/watchlist/WatchlistIndicator.svelte";
+  import MediaSwipeGesture from "./MediaSwipeGesture.svelte";
 
   type MediaSwipeProps = BaseMediaInput &
     ChildrenProps & {
@@ -29,55 +23,15 @@
       isMouse: $isMouse,
     }),
   );
-
-  const target = $derived({ type, media });
-
-  const { markAsWatched } = $derived(useMarkAsWatched(target));
-
-  const { confirm } = useConfirm();
-  const confirmMarkAsWatched = $derived(
-    confirm({
-      type: ConfirmationType.MarkAsWatched,
-      title: media.title,
-      target,
-      onConfirm: () => markAsWatched(),
-    }),
-  );
-
-  const { addToWatchlist, isWatchlisted } = $derived(
-    useWatchlist({
-      type,
-      media,
-    }),
-  );
 </script>
 
 {#if hasSwipe}
-  <SwipeX
+  <MediaSwipeGesture
+    {type}
+    {media}
     {children}
-    directions={["left", "right"]}
-    classList="trakt-up-next-episode"
-    onSwipe={(state) => {
-      if (state.direction === "left") {
-        confirmMarkAsWatched();
-      }
-
-      if (state.direction === "right") {
-        addToWatchlist();
-      }
-    }}
-    --indicator-height={swipeIndicatorHeight($isLargeScreenCards)}
-  >
-    {#snippet indicator({ isActive, direction })}
-      {#if direction === "left"}
-        <MarkAsWatchedSwipeIndicator {isActive} />
-      {/if}
-
-      {#if direction === "right"}
-        <WatchlistIndicator {isActive} isWatchlisted={$isWatchlisted} />
-      {/if}
-    {/snippet}
-  </SwipeX>
+    indicatorHeight={swipeIndicatorHeight($isLargeScreenCards)}
+  />
 {:else}
   {@render children()}
 {/if}
