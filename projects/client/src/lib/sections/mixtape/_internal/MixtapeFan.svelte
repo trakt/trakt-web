@@ -163,8 +163,6 @@
 
 <style lang="scss">
   .trakt-mixtape-fan {
-    --width-mixtape-fan-poster: min(var(--ni-232), 30cqi);
-
     container: mixtape-fan / inline-size;
     position: relative;
     overflow: hidden;
@@ -238,12 +236,15 @@
 
   .fan-main {
     display: flex;
-    gap: var(--ni-48);
+    gap: var(--gap-m);
     min-height: var(--ni-640);
   }
 
 
   .fan-stage {
+    --width-mixtape-fan-poster: min(var(--ni-232), 30cqi);
+
+    container: mixtape-fan-stage / inline-size;
     position: relative;
     flex: 1;
     min-width: 0;

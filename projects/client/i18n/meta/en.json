@@ -13197,14 +13197,6 @@
       "default": "Live progress through the Jellyfin Webhook plugin is on the way.",
       "description": "Text on the Jellyfin webhook card explaining the feature is coming."
     },
-    "preview_feature_title_mixtape": {
-      "default": "Mixtape",
-      "description": "Product feature name for the preview feature that suggests three titles from up to five watched titles picked for their feel."
-    },
-    "preview_feature_description_mixtape": {
-      "default": "Pick movies or shows you loved for how they felt and get three new ones with the same feel.",
-      "description": "Description of the Mixtape preview feature."
-    },
     "page_title_mixtape": {
       "default": "Mixtape",
       "description": "Page title of the Mixtape page, where users pick watched titles and get three suggestions with the same feel."

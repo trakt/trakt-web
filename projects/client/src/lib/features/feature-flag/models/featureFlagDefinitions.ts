@@ -1,5 +1,4 @@
 import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
-import CassetteIcon from '$lib/components/icons/CassetteIcon.svelte';
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
@@ -100,15 +99,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
         UrlBuilder.vipCancel(),
         m.preview_feature_title_vip_cancel_flow(),
       ),
-    audience: 'director',
-  },
-  [FeatureFlag.Mixtape]: {
-    icon: CassetteIcon,
-    title: () => m.preview_feature_title_mixtape(),
-    addedAt: new Date('2026-10-16'),
-    description: () => m.preview_feature_description_mixtape(),
-    featureLink: () =>
-      openFeatureLink(UrlBuilder.mixtape(), m.preview_feature_title_mixtape()),
     audience: 'director',
   },
   [FeatureFlag.ShowEnding]: {
