@@ -19,15 +19,21 @@
   const isControlled = $derived(open !== undefined);
 
   let internalOpen = $state(false);
+  let hasOpened = $state(false);
 
   const getOpen = () => open ?? internalOpen;
   const setOpen = (value: boolean) => {
+    if (value) hasOpened = true;
     if (isControlled) {
       onOpenChange?.(value);
     } else {
       internalOpen = value;
     }
   };
+
+  $effect(() => {
+    if (open) hasOpened = true;
+  });
 </script>
 
 <Popover.Root bind:open={getOpen, setOpen}>
@@ -36,28 +42,31 @@
       {@render rest.children()}
     </Popover.Trigger>
   {/if}
-  <Popover.Portal>
-    <Popover.Content
-      forceMount
-      sideOffset={8}
-      side="top"
-      customAnchor={rest.customAnchor}
-    >
-      {#snippet child({ wrapperProps, props, open })}
-        {#if open}
-          <div {...wrapperProps}>
-            <div
-              {...props}
-              style="z-index: var(--layer-top)"
-              transition:scale={{ duration: 250 }}
-            >
-              {@render content()}
+  {#if hasOpened || getOpen()}
+    <Popover.Portal>
+      <Popover.Content
+        forceMount
+        sideOffset={8}
+        side="top"
+        customAnchor={rest.customAnchor}
+      >
+        {#snippet child({ wrapperProps, props, open })}
+          {#if open}
+            <div {...wrapperProps}>
+              <div
+                {...props}
+                style="z-index: var(--layer-top)"
+                in:scale|global={{ duration: 250 }}
+                out:scale={{ duration: 250 }}
+              >
+                {@render content()}
+              </div>
             </div>
-          </div>
-        {/if}
-      {/snippet}
-    </Popover.Content>
-  </Popover.Portal>
+          {/if}
+        {/snippet}
+      </Popover.Content>
+    </Popover.Portal>
+  {/if}
 </Popover.Root>
 
 <style>
