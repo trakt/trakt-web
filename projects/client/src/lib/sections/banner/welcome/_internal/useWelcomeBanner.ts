@@ -1,7 +1,7 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { UserLimits } from '$lib/requests/models/UserLimits.ts';
 import { combineLatest, map } from 'rxjs';
-import { useBannerDismissal } from '../../_internal/useBannerDismissal.ts';
+import { useBannerDismissal } from '../../useBannerDismissal.ts';
 import { WELCOME_BANNER_ID } from '../constants/index.ts';
 
 const DISMISSAL_VALUE = 'dismissed';

@@ -50,4 +50,22 @@ describe('getSmartListFilterLabels', () => {
 
     expect(labels).toEqual(['Time Travel', 'Christopher Nolan', 'A24']);
   });
+
+  it('should label an open ended runtime with its unit', () => {
+    const [, label] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: { runtimes: [80] },
+    });
+
+    expect(label).toBe('80+ minutes');
+  });
+
+  it('should label a bounded runtime', () => {
+    const [, label] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: { runtimes: [60, 120] },
+    });
+
+    expect(label).toBe('Runtime of 60 to 120 minutes.');
+  });
 });

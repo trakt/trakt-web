@@ -5,7 +5,7 @@
   import YirUpsellBanner from "../year-in-review/YirUpsellBanner.svelte";
   import BlackFriday from "./../black-friday/BlackFriday.svelte";
   import BannerContainer from "./BannerContainer.svelte";
-  import { useBannerDismissal } from "./useBannerDismissal";
+  import { useBannerDismissal } from "../useBannerDismissal.ts";
 
   const { promotion }: { promotion: Promotion } = $props();
 

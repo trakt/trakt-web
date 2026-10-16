@@ -34,6 +34,20 @@ function formatNumberRange(
   return '';
 }
 
+function formatRuntimeRange(range: number[]): string {
+  const [min, max] = range;
+
+  if (min != null && max != null) {
+    return m.advanced_filter_label_runtime({ min, max });
+  }
+
+  if (min != null) {
+    return m.filter_label_runtime({ range: `${min}+` });
+  }
+
+  return '';
+}
+
 function formatPlainRange(range: number[]): string {
   const [min, max] = range;
 
@@ -140,7 +154,7 @@ function formatRange(key: string, range: number[]): string[] {
     case 'years':
       return [formatNumberRange(range, m.advanced_filter_label_release_year)];
     case 'runtimes':
-      return [formatNumberRange(range, m.advanced_filter_label_runtime)];
+      return [formatRuntimeRange(range)];
     case 'ratings':
       return [formatPercentRange(range, 'Trakt')];
     case 'rt_meters':

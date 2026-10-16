@@ -270,7 +270,8 @@ export const UrlBuilder = {
   },
   lists: {
     smart: {
-      create: () => '/lists/smart/create',
+      create: (params: Record<string, string> = {}) =>
+        `/lists/smart/create${buildParamString(params)}`,
       edit: (slug: string, params: Record<string, string> = {}) => {
         const search = new URLSearchParams(params).toString();
         return `/lists/smart/edit/${slug}${search ? `?${search}` : ''}`;

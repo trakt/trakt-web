@@ -23,6 +23,7 @@ import { SmartListDraftResponseMock } from '../data/users/response/SmartListDraf
 import { SmartListDraftsSummaryResponseMock } from '../data/users/response/SmartListDraftsSummaryResponseMock.ts';
 import { SmartListDefinitionsResponseMock } from '../data/users/response/SmartListDefinitionsResponseMock.ts';
 import { SmartListItemsResponseMock } from '../data/smart-lists/response/SmartListItemsResponseMock.ts';
+import { SmartListTemplatesResponseMock } from '../data/smart-lists/response/SmartListTemplatesResponseMock.ts';
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
@@ -269,12 +270,20 @@ export const users = [
   http.delete('http://localhost/users/:id/smart-lists/:list_id/', () => {
     return new HttpResponse(null, { status: 204 });
   }),
+  http.get('http://localhost/smart-lists/preview/items', () => {
+    return HttpResponse.json(SmartListItemsResponseMock, {
+      headers: { 'x-pagination-item-count': '81' },
+    });
+  }),
   http.get(
     'http://localhost/smart-lists/:list_id/items',
     () => {
       return HttpResponse.json(SmartListItemsResponseMock);
     },
   ),
+  http.get('http://localhost/smart-lists/templates', () => {
+    return HttpResponse.json(SmartListTemplatesResponseMock);
+  }),
   http.get('http://localhost/smart-lists/:list_id', () => {
     return HttpResponse.json(SmartListDefinitionsResponseMock.at(0));
   }),
