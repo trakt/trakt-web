@@ -25,6 +25,9 @@ deno task test:unit    # from projects/client/
 vitest                 # from projects/client/
 ```
 
+- Run `deno task i18n:prepare` before `deno task check`; without the generated messages the check reports thousands of missing `m.*` errors.
+- Pass paths to vitest directly (`deno run -A npm:vitest --run <paths>`); `deno task test:unit -- --run <path>` forwards `--run` literally and runs the whole suite in watch mode.
+
 ## Testing Philosophy
 
 - **Test pure functions**: focus on business logic and data transformations.
