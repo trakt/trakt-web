@@ -45,12 +45,24 @@ export function useVarToPixels(variable: string, isStable = true) {
 
   if (isStable) return value.asObservable();
 
-  const destroy = GlobalEventBus.getInstance().register(
+  let frame = 0;
+  const scheduleCalculate = () => {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      value.next(calculate(variable));
+    });
+  };
+
+  const unregisterResize = GlobalEventBus.getInstance().register(
     'resize',
-    () => value.next(calculate(variable)),
+    scheduleCalculate,
   );
 
-  onDestroy(destroy);
+  onDestroy(() => {
+    if (frame) cancelAnimationFrame(frame);
+    unregisterResize();
+  });
 
   return value.asObservable();
 }
