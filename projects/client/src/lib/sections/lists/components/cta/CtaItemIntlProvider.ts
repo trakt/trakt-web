@@ -33,7 +33,6 @@ export const CtaItemIntlProvider: CtaItemIntl = {
           : m.text_cta_upcoming_movies();
       }
       case 'social':
-      case 'activity':
         return m.text_cta_activity();
       case 'personal-activity':
         return m.text_cta_personal_activity();

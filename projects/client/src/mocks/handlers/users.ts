@@ -30,7 +30,6 @@ import { RatedSeasonsResponseMock } from '../data/users/response/RatedSeasonsRes
 import { RewatchingShowsResponseMock } from '../data/users/response/RewatchingShowsResponseMock.ts';
 import { ShowActivityHistoryResponseMock } from '../data/users/response/ShowActivityHistoryResponseMock.ts';
 import { FollowingActivityResponseMock } from '$mocks/data/users/response/FollowingActivityResponseMock.ts';
-import { SocialActivityResponseMock } from '../data/users/response/SocialActivityResponseMock.ts';
 import { UserBlockedResponseMock } from '../data/users/response/UserBlockedResponseMock.ts';
 import { UserFollowersResponseMock } from '../data/users/response/UserFollowersResponseMock.ts';
 import { UserFollowRequestsResponseMock } from '../data/users/response/UserFollowRequestsResponseMock.ts';
@@ -156,9 +155,6 @@ export const users = [
         'X-Pagination-Item-Count': `${FollowingActivityResponseMock.length}`,
       },
     });
-  }),
-  http.get('http://localhost/users/me/following/activities', () => {
-    return HttpResponse.json(SocialActivityResponseMock);
   }),
   http.get('http://localhost/users/me/lists/collaborations*', () => {
     return HttpResponse.json(CollaborationListsResponseMock);

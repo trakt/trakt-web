@@ -5,23 +5,17 @@ import { getContext, setContext } from 'svelte';
 import type { CalendarContext } from './CalendarContext.ts';
 import { CALENDAR_CONTEXT_KEY } from './constants.ts';
 
-type CreateCalendarContextOptions = {
-  initialDate?: Date | Nil;
-};
-
-export function createCalendarContext(
-  { initialDate }: CreateCalendarContextOptions = {},
-) {
-  const resolvedDate = initialDate ?? new Date();
+export function createCalendarContext() {
+  const now = new Date();
 
   const ctx = setContext(
     CALENDAR_CONTEXT_KEY,
     getContext<CalendarContext>(CALENDAR_CONTEXT_KEY) ??
       {
         startDate: new BehaviorSubject(
-          getStartOfWeek(resolvedDate, getLocale()),
+          getStartOfWeek(now, getLocale()),
         ),
-        activeDate: new BehaviorSubject<Date>(resolvedDate),
+        activeDate: new BehaviorSubject<Date>(now),
         visibleDate: new BehaviorSubject<Date | null>(null),
       },
   );

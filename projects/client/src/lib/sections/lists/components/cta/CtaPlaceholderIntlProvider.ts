@@ -5,8 +5,6 @@ import { CtaItemIntlProvider } from './CtaItemIntlProvider.ts';
 export const CtaPlaceholderIntlProvider: CtaItemIntl = {
   text: ({ cta }: CtaItemMeta) => {
     switch (cta.type) {
-      case 'activity':
-        return m.text_cta_activity_list();
       case 'favorites': {
         if (!cta.mediaType) {
           return m.text_cta_favorites_list();

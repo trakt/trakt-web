@@ -161,10 +161,11 @@ export const spotlightRoutes: ReadonlyArray<SpotlightRoute> = [
     keywords: ['favorites', 'favourites', 'loved'],
   },
   {
-    id: 'social',
-    url: UrlBuilder.social.activity(),
-    label: m.page_title_social_activity,
+    id: 'today',
+    url: UrlBuilder.today(),
+    label: m.page_title_today,
     keywords: [
+      'today',
       'social',
       'activity',
       'friends',

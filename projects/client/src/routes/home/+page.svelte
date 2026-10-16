@@ -5,7 +5,6 @@
   import DashboardDrawer from "$lib/sections/dashboard/DashboardDrawer.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import ActivityList from "$lib/sections/lists/activity/ActivityList.svelte";
   import PersonalHistoryList from "$lib/sections/lists/history/PersonalHistoryList.svelte";
   import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
   import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
@@ -62,7 +61,6 @@
     type={$mode}
   />
   <PersonalHistoryList mode={$mode} />
-  <ActivityList />
 
   <DashboardDrawer />
 
