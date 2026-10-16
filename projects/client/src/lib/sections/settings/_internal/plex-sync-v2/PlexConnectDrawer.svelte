@@ -18,6 +18,7 @@
   import SettingsPill from "../SettingsPill.svelte";
   import PlexFeedSwitches from "./PlexFeedSwitches.svelte";
   import PlexProfilePicker from "./PlexProfilePicker.svelte";
+  import PlexWebhookOnlyNote from "./PlexWebhookOnlyNote.svelte";
   import { PLEX_ACCOUNT_SERVER_ID } from "./PLEX_ACCOUNT_SERVER_ID.ts";
   import { isWebhookOnlyServer } from "./isWebhookOnlyServer.ts";
   import { toConnectSteps } from "./toConnectSteps.ts";
@@ -304,14 +305,7 @@
             {/each}
           </SettingsGroupCard>
           {#if isWebhookOnly}
-            <div class="webhook-only-note small">
-              <p>{m.description_media_sync_webhook_only_intro()}</p>
-              <ul>
-                <li>{m.description_media_sync_webhook_only_progress()}</li>
-                <li>{m.description_media_sync_webhook_only_watches()}</li>
-                <li>{m.description_media_sync_webhook_only_ratings()}</li>
-              </ul>
-            </div>
+            <PlexWebhookOnlyNote />
           {/if}
         {:else if flow.step === "choosing" && step === "profile" &&
           flow.accounts}
@@ -421,21 +415,6 @@
 
     p {
       margin: 0;
-    }
-  }
-
-  .webhook-only-note {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xs);
-
-    padding: var(--ni-12);
-    border-radius: var(--border-radius-m);
-    background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
-
-    ul {
-      margin: 0;
-      padding-inline-start: var(--ni-20);
     }
   }
 
