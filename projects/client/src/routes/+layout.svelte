@@ -30,7 +30,6 @@
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
   import PlayerProvider from "$lib/features/player/YoutubePlayerProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
-  import QueryDevtools from "$lib/features/query/QueryDevtools.svelte";
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
   import ReportDialogProvider from "$lib/features/report/ReportDialogProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
@@ -168,22 +167,7 @@
                                             <LoginErrorSnackbar />
                                             <EmailUnsubscribeSnackbar />
                                             {#if isDev}
-                                              <RenderFor
-                                                audience="all"
-                                                device={["desktop", "tablet-lg"]}
-                                              >
-                                                <DevtoolsProvider />
-                                              </RenderFor>
-
-                                              <RenderFor
-                                                audience="all"
-                                                device={["mobile", "tablet-sm"]}
-                                              >
-                                                <QueryDevtools
-                                                  client={data.queryClient}
-                                                  buttonPosition="bottom-right"
-                                                />
-                                              </RenderFor>
+                                              <DevtoolsProvider />
                                             {/if}
                                           </SpotlightProvider>
                                         </ListScrollHistoryProvider>

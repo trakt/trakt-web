@@ -1,9 +1,12 @@
 <script lang="ts">
+  import CodeIcon from "$lib/components/icons/CodeIcon.svelte";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { devtoolsStore } from "$lib/features/devtools/devtoolsStore.ts";
+  import { DEVTOOLS_TITLE } from "$lib/features/devtools/devtoolsTitle.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
@@ -13,6 +16,7 @@
   import { useNavbarState } from "./useNavbarState";
 
   const { state } = useNavbarState();
+  const isDev = import.meta.env.DEV;
 
   // FIXME: remove when we have well defined dimensions for navbar contextual content
   const { observedDimension, observeDimension } =
@@ -66,6 +70,17 @@
 
         <ProfileLink />
       </RenderFor>
+
+      {#if isDev}
+        <button
+          type="button"
+          class="trakt-mobile-navbar-devtools"
+          aria-label={DEVTOOLS_TITLE}
+          onclick={devtoolsStore.openDrawer}
+        >
+          <CodeIcon />
+        </button>
+      {/if}
     </div>
   </div>
 
@@ -138,6 +153,24 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+  }
+
+  .trakt-mobile-navbar-devtools {
+    all: unset;
+    width: var(--ni-60);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-text-primary);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: var(--border-thickness-xs) solid var(--purple-300);
+      outline-offset: var(--ni-2);
+      border-radius: var(--border-radius-s);
     }
   }
 

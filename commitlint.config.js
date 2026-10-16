@@ -54,6 +54,7 @@ module.exports = {
         'cta',
         'deploy',
         'deps',
+        'devtools',
         'dialog',
         'discover',
         'drawer',
