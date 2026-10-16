@@ -2,6 +2,7 @@ import { getLocale } from '$lib/features/i18n/index.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { error as printError } from '$lib/utils/console/print.ts';
+import { retry } from '$lib/utils/retry/retry.ts';
 import { WorkerMessage } from '$worker/WorkerMessage.ts';
 import { workerRequest } from '$worker/workerRequest.ts';
 import { loginErrorStore } from '../_internal/loginErrorStore.ts';
@@ -11,6 +12,15 @@ import { LoginErrorType } from '../models/LoginErrorType.ts';
 import { setToken } from '../token/index.ts';
 import { getAuthContext } from './getAuthContext.ts';
 import { getUserManager } from './userManager.ts';
+import type { UserManager } from 'oidc-client-ts';
+
+function revokeTokens(manager: UserManager | null) {
+  if (!manager) return Promise.resolve();
+
+  return retry(() => manager.revokeTokens()).catch((error) => {
+    printError('Failed to revoke tokens on logout:', error);
+  });
+}
 
 export function useAuth() {
   const { isAuthorized } = getAuthContext();
@@ -19,7 +29,7 @@ export function useAuth() {
   const logout = async () => {
     const manager = getUserManager();
 
-    await manager?.revokeTokens();
+    await revokeTokens(manager);
 
     setToken(null);
     isAuthorized.next(false);
