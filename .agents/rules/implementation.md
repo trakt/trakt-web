@@ -15,6 +15,14 @@ applyTo: '**'
   something new.
 - Prefer referencing real files as examples over abstract descriptions.
 
+## Track New Features
+
+- **Every new user-facing feature ships with usage tracking in HAL.** Add the
+  event in the same PR as the feature, not as a follow-up.
+- Track the meaningful interactions (open, complete, key choices), not every
+  click.
+- Read `analytics.md` before adding or changing an event.
+
 ## When Establishing New Patterns
 
 - When you establish a new pattern that diverges from or extends existing

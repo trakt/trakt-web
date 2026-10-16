@@ -18,6 +18,7 @@ mapping; the rule files live at `.agents/rules/`:
 - `requests.md` - API requests, queries, mutations, mappers (lib/requests)
 - `utils.md` - shared utilities (lib/utils)
 - `performance.md` - perf work: animations, scroll handlers, IntersectionObservers, rxjs plumbing, bundle/boot, viewport gating
+- `analytics.md` - usage tracking via HAL: events, payloads, allowlist
 
 Read with the Read tool when the task enters the domain. Re-read after long
 gaps if context was compacted.
