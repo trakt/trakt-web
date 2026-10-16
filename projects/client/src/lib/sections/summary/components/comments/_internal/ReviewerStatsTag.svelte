@@ -76,7 +76,7 @@
 
 {#if hasStats}
   {#if episodeProgress}
-    <Tooltip variant="compact" content={episodeProgress.label}>
+    <Tooltip variant="compact" content={episodeProgress.label} openOnTap>
       {@render statsTag()}
     </Tooltip>
   {:else}

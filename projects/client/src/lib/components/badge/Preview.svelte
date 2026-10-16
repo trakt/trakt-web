@@ -13,7 +13,7 @@
 </script>
 
 {#if $isMounted}
-  <Tooltip content={m.tooltip_text_preview_feature()}>
+  <Tooltip content={m.tooltip_text_preview_feature()} openOnTap>
     <div class="trakt-preview-badge">
       <StemTag
         --color-background-stem-tag="var(--color-background-preview-tag)"

@@ -12,11 +12,14 @@
     sideOffset = 8,
     disabled = false,
     disableHoverableContent = false,
+    openOnTap = false,
   }: TooltipProps & ChildrenProps = $props();
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
   let open = $state(false);
+
+  const isTapToggle = $derived(openOnTap && !disabled && !$isMouse);
 
   const tooltipClass = $derived(
     variant === "compact" ? "trakt-tooltip-compact" : "trakt-tooltip",
@@ -29,13 +32,14 @@
     bind:open
     disabled={disabled ?? false}
     {disableHoverableContent}
+    ignoreNonKeyboardFocus
   >
     <Tooltip.Trigger>
       {#snippet child({ props })}
         <div
           {...props}
           class="trakt-tooltip-trigger"
-          onclick={!$isMouse && !disabled ? () => (open = !open) : undefined}
+          onclick={isTapToggle ? () => (open = !open) : undefined}
         >
           {@render children()}
         </div>

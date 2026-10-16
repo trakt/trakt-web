@@ -250,6 +250,7 @@
       <Tooltip
         content={$spoilerFreeTitle}
         disabled={!$isTitleTruncated || $isSpoilerHidden}
+        openOnTap
       >
         <p
           class="trakt-card-title ellipsis"

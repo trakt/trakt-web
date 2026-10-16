@@ -87,7 +87,6 @@
     });
   };
 
-  const isMouse = useMedia(WellKnownMediaQuery.mouse);
   const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
   const isLabelHidden = $derived(variant === "compact" && Boolean(icon));
 
@@ -183,7 +182,7 @@
 
     {#each options as option, index (option.value)}
       {#if isLabelHidden}
-        <Tooltip content={option.text} variant="compact" disabled={!$isMouse}>
+        <Tooltip content={option.text} variant="compact">
           {@render segment(option, index)}
         </Tooltip>
       {:else}

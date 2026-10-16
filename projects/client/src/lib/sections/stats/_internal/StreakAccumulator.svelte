@@ -22,6 +22,7 @@
         locale,
         now,
       })}
+      openOnTap
     >
       <div
         class="trakt-streak-pill"

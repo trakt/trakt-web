@@ -26,7 +26,7 @@
 
   <div class="kpi-value">
     {#if tooltip}
-      <Tooltip content={tooltip} side="right">
+      <Tooltip content={tooltip} side="right" openOnTap>
         {@render children()}
       </Tooltip>
     {:else}
