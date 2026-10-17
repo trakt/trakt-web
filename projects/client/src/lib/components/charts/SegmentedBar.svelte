@@ -20,7 +20,7 @@
   // beside-the-bar labels give way to a legend list under the bar.
   const {
     items = [],
-    label = "Segmented distribution",
+    label = m.chart_label_segmented_distribution(),
     minSegment = 0.04,
     maxSegments = 8,
   }: SegmentedBarProps = $props();

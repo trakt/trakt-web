@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { sum } from "$lib/utils/number/sum.ts";
   import { time } from "$lib/utils/timing/time";
@@ -24,7 +25,7 @@
     tickLabels,
     tooltip,
     barSpacing = 2,
-    label = "Stacked bar chart",
+    label = m.chart_label_stacked_bar_chart(),
     height = "var(--height-bar-chart)",
   }: StackedBarChartProps = $props();
 
@@ -153,7 +154,7 @@
     height={height$}
     role="img"
     aria-label={label}
-    aria-roledescription="interactive stacked bar chart"
+    aria-roledescription={m.chart_role_interactive_stacked_bar_chart()}
     tabindex="0"
     class="stacked-bar-chart-plot"
     onpointerdown={interaction.handlers.pointerdown}
