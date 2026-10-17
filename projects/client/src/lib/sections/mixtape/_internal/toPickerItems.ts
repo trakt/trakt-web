@@ -7,13 +7,14 @@ type Fit = { id: number; score: number };
 type PickerParams<T extends Media> = {
   history: ReadonlyArray<T>;
   searchResults: ReadonlyArray<T>;
+  fitMedia: ReadonlyArray<T>;
   picks: ReadonlyArray<number>;
   fits: ReadonlyArray<Fit>;
   query: string;
 };
 
 export function toPickerItems<T extends Media>(
-  { history, searchResults, picks, fits, query }: PickerParams<T>,
+  { history, searchResults, fitMedia, picks, fits, query }: PickerParams<T>,
 ): PickerItems<T> {
   const unpicked = history.filter(({ id }) => !picks.includes(id));
   const fitIds = new Set(fits.map(({ id }) => id));
@@ -42,7 +43,11 @@ export function toPickerItems<T extends Media>(
     };
   }
 
-  const byId = new Map(unpicked.map((media) => [media.id, media]));
+  const byId = new Map(
+    [...fitMedia, ...unpicked]
+      .filter(({ id }) => !picks.includes(id))
+      .map((media) => [media.id, media]),
+  );
   const items = fits.flatMap(({ id }) => {
     const media = byId.get(id);
     return media ? [{ media, isOff: false }] : [];

@@ -11,6 +11,7 @@ describe('toPickerItems', () => {
   it('should show the whole history in watch order before any pick', () => {
     const { kind, items } = toPickerItems({
       history,
+      fitMedia: [],
       searchResults: [],
       picks: [],
       fits: [],
@@ -24,6 +25,7 @@ describe('toPickerItems', () => {
   it('should show only fitting titles, best fit first, once something is picked', () => {
     const { kind, items } = toPickerItems({
       history,
+      fitMedia: [],
       searchResults: [],
       picks: [1],
       fits: [{ id: 3, score: 0.7 }, { id: 2, score: 0.6 }],
@@ -37,6 +39,7 @@ describe('toPickerItems', () => {
   it('should never offer a title that is already picked', () => {
     const { items } = toPickerItems({
       history,
+      fitMedia: [],
       searchResults: [],
       picks: [1],
       fits: [{ id: 1, score: 1 }, { id: 2, score: 0.6 }],
@@ -49,6 +52,7 @@ describe('toPickerItems', () => {
   it('should keep a searched title that does not fit, marked off and listed last', () => {
     const { kind, items } = toPickerItems({
       history,
+      fitMedia: [],
       searchResults: [],
       picks: [1],
       fits: [{ id: 2, score: 0.6 }],
@@ -66,6 +70,7 @@ describe('toPickerItems', () => {
   it('should mark nothing off while searching with no picks', () => {
     const { items } = toPickerItems({
       history,
+      fitMedia: [],
       searchResults: [],
       picks: [],
       fits: [],
@@ -80,6 +85,7 @@ describe('toPickerItems', () => {
     const gladiatorTwo = { id: 6, title: 'Gladiator II' };
     const { kind, items } = toPickerItems({
       history: [...history, gladiatorTwo],
+      fitMedia: [],
       searchResults: [gladiatorTwo, gladiator],
       picks: [1],
       fits: [{ id: 5, score: 0.77 }],
@@ -93,10 +99,26 @@ describe('toPickerItems', () => {
     ]);
   });
 
+  it('should show deeper fits from their fetched details in fit order', () => {
+    const gladiator = { id: 5, title: 'Gladiator' };
+    const { kind, items } = toPickerItems({
+      history,
+      fitMedia: [gladiator],
+      searchResults: [],
+      picks: [1],
+      fits: [{ id: 2, score: 0.8 }, { id: 5, score: 0.77 }],
+      query: '',
+    });
+
+    expect(kind).toBe('fits');
+    expect(items.map(({ media }) => media.id)).toEqual([2, 5]);
+  });
+
   it('should drop full-history hits that no longer match the typed text', () => {
     const gladiator = { id: 5, title: 'Gladiator' };
     const { items } = toPickerItems({
       history,
+      fitMedia: [],
       searchResults: [gladiator],
       picks: [],
       fits: [],
