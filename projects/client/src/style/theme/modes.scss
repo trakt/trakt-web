@@ -46,7 +46,7 @@
   --color-background-navbar-base: var(--color-floating-background);
   --color-background-navbar: color-mix(
     in srgb,
-    var(--color-background-navbar-base) 90%,
+    var(--color-background-navbar-base) 95%,
     transparent
   );
   --color-foreground-navbar: var(--color-foreground);
@@ -129,7 +129,7 @@
    */
   --color-background-mobile-navbar: color-mix(
     in srgb,
-    var(--color-background-navbar-base) 90%,
+    var(--color-background-navbar-base) 95%,
     transparent
   );
 
@@ -721,7 +721,7 @@
    */
   --color-background-mobile-navbar: color-mix(
     in srgb,
-    var(--color-background-navbar-base) 80%,
+    var(--color-background-navbar-base) 90%,
     transparent
   );
 

@@ -126,8 +126,6 @@
     &:global(.trakt-navbar-scroll) {
       background-color: var(--color-background-navbar);
       box-shadow: var(--shadow-navbar);
-
-      backdrop-filter: blur(var(--ni-8));
     }
 
     &.is-hidden {
