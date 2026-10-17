@@ -60,11 +60,6 @@ class MediaQueryManager {
 
     return cached;
   }
-
-  static matches(query: string): boolean {
-    if (!browser) return false;
-    return globalThis.matchMedia(query).matches;
-  }
 }
 
 export function useMedia(query: string): Observable<boolean> {
