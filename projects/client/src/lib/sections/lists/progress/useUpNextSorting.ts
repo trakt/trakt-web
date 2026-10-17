@@ -7,6 +7,7 @@ import type { Sorting } from '$lib/sections/lists/user/models/Sorting.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { combineLatest, map, type Observable, of } from 'rxjs';
+import { toSortDirection } from '$lib/sections/lists/user/toSortDirection.ts';
 
 const upNextSortOptions: Sorting<UpNextSortBy>[] = [
   {
@@ -50,10 +51,6 @@ type UpNextSorting = {
   urlBuilder: ListUrlBuilder<UpNextSortBy>;
 };
 
-function mapToDirection(value: string | Nil): SortDirection | undefined {
-  return value === 'asc' || value === 'desc' ? value : undefined;
-}
-
 function mapToSortBy(
   value: string | Nil,
   options: Sorting<UpNextSortBy>[],
@@ -69,7 +66,7 @@ export function useUpNextSorting(user: string): UpNextSorting {
     current: combineLatest([useSortParams(), options]).pipe(
       map(([$params, $options]) => {
         const sortBy = mapToSortBy($params.sortBy, $options);
-        const sortHow = mapToDirection($params.sortHow);
+        const sortHow = toSortDirection($params.sortHow);
 
         const sorting = $options.find(
           (option) => option.value === sortBy,
