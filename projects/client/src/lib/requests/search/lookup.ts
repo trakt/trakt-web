@@ -17,6 +17,7 @@ type SearchParams<T extends SearchCategory> = {
   query: string;
   limit: number;
   types: T[];
+  signal?: AbortSignal;
 };
 
 const COLLECTION_MAP: Record<SearchCategory, string> = {
@@ -37,6 +38,7 @@ export async function lookup<T extends SearchCategory>({
   query: q,
   limit,
   types,
+  signal,
 }: SearchParams<T>) {
   const { createSearcher } = await import('./createSearcher.ts');
 
@@ -54,6 +56,8 @@ export async function lookup<T extends SearchCategory>({
     }, {
       q,
       limit,
+    }, {
+      abortSignal: signal,
     });
 
   return {

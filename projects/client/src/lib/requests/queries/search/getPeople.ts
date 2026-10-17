@@ -7,12 +7,14 @@ type GetPeopleProps = {
   query: string;
   limit: number;
   config: TypesenseConfig;
+  signal?: AbortSignal;
 };
 
 export async function getPeople({
   query,
   limit,
   config,
+  signal,
 }: GetPeopleProps): Promise<SearchResultResponse[]> {
   const type = 'person';
 
@@ -22,6 +24,7 @@ export async function getPeople({
     query,
     limit,
     types: [type],
+    signal,
   });
 
   return hits

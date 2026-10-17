@@ -29,7 +29,10 @@
 </script>
 
 <div
-  use:whenInViewport={() => isVisible.set(true)}
+  use:whenInViewport={{
+    callback: () => isVisible.set(true),
+    rootMargin: "200px",
+  }}
   use:dPadTrigger={".trakt-card-content .trakt-link, .trakt-button-link"}
   class="trakt-card"
   data-navigation-type={$navigation}

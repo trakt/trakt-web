@@ -6,7 +6,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { buildParamString } from "$lib/utils/url/buildParamString";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { useSearch } from "./useSearch";
 
   type SearchInputProps = {
@@ -19,16 +19,37 @@
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
-  function onSearch(ev: Event) {
-    const inputElement = ev.target as HTMLInputElement;
+  const navigationDebounce = 120;
+  let pendingNavigation: ReturnType<typeof setTimeout> | undefined;
+
+  const isOnSearchPage = () => page.url.pathname === pathName;
+
+  function navigate() {
     const params = buildParamString({
       m: $mode,
       q: inputElement.value.trim(),
     });
+    const onSearchPage = isOnSearchPage();
+
     goto(`${pathName}${params}`, {
-      replaceState: page.url.pathname === pathName,
+      replaceState: onSearchPage,
       keepFocus: true,
+      noScroll: onSearchPage,
     });
+  }
+
+  function onSearch() {
+    clearTimeout(pendingNavigation);
+
+    if (!isOnSearchPage()) {
+      navigate();
+      return;
+    }
+
+    pendingNavigation = setTimeout(() => {
+      if (!isOnSearchPage()) return;
+      navigate();
+    }, navigationDebounce);
   }
 
   let inputElement: HTMLInputElement;
@@ -61,6 +82,8 @@
         return m.input_placeholder_search_lists();
     }
   });
+
+  onDestroy(() => clearTimeout(pendingNavigation));
 
   onMount(() => {
     if (!$isMouse) {

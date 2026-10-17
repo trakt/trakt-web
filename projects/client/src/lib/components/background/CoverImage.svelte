@@ -143,13 +143,11 @@
 
     &:not([data-cover-type="main"]) {
       :global(img) {
-        @include for-tablet-sm-and-below {
-          filter: none;
-        }
-      }
+        filter: grayscale(0.5) blur(var(--ni-2));
 
-      &::after {
-        backdrop-filter: blur(var(--ni-2));
+        @include for-tablet-sm-and-below {
+          filter: blur(var(--ni-2));
+        }
       }
     }
   }

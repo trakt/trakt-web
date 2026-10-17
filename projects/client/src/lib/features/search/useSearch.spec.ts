@@ -1,7 +1,9 @@
 import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
 import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
+import { server } from '$mocks/server.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
+import { http, HttpResponse } from 'msw';
 import type { Subscription } from 'rxjs';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { useSearch } from './useSearch.ts';
@@ -61,6 +63,39 @@ describe('useSearch', () => {
   /**
    * TODO: add more scenarios here once I figure out the AbortSignal error in testing
    */
+});
+
+describe('useSearch: superseded searches', () => {
+  it('should abort the requests of a term that was replaced', async () => {
+    const aborted: string[] = [];
+    const started: string[] = [];
+
+    server.use(
+      http.get('http://localhost/search/*', ({ request }) => {
+        const term = new URL(request.url).searchParams.get('query');
+        if (term !== 'first') return HttpResponse.json([]);
+
+        started.push(request.url);
+        return new Promise<Response>((resolve) =>
+          request.signal.addEventListener('abort', () => {
+            aborted.push(request.url);
+            resolve(HttpResponse.json([]));
+          })
+        );
+      }),
+    );
+
+    const { search, results } = await renderStore(() => useSearch());
+    const subscription = results.subscribe();
+
+    search('first', 'media');
+    await vi.waitFor(() => expect(started.length).toBeGreaterThan(0));
+
+    search('second', 'media');
+    await vi.waitFor(() => expect(aborted.length).toBe(started.length));
+
+    subscription.unsubscribe();
+  });
 });
 
 // Real timers: rxjs captures its own scheduler, so vitest's fake timers do not
