@@ -6,6 +6,7 @@ import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { removeFromListRequest } from '$lib/requests/queries/users/removeFromListRequest.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
+import { toArray } from '$lib/utils/array/toArray.ts';
 /*
   FIXME: this is here temporarily
   Will move to a more generic useList
@@ -17,7 +18,7 @@ type UseRemoveFromListProps = {
 
 export function useRemoveFromList(props: UseRemoveFromListProps) {
   const { type } = props;
-  const media = Array.isArray(props.media) ? props.media : [props.media];
+  const media = toArray(props.media);
   const { track } = useTrack(AnalyticsEvent.List);
 
   const ids = media.map(({ id }) => id);

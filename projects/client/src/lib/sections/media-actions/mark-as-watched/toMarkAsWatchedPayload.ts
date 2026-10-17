@@ -1,5 +1,6 @@
 import type { MarkAsWatchedAt } from '$lib/models/MarkAsWatchedAt.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
+import { toArray } from '$lib/utils/array/toArray.ts';
 
 type WatchedPayload = {
   ids: { trakt: number };
@@ -34,7 +35,7 @@ export function toMarkAsWatchedPayload(
     : watchedAt;
 
   if (target.type === 'show') {
-    const shows = Array.isArray(target.media) ? target.media : [target.media];
+    const shows = toArray(target.media);
     return {
       shows: shows.map(({ id, seasons }) => ({
         ids: { trakt: id },
@@ -50,7 +51,7 @@ export function toMarkAsWatchedPayload(
     };
   }
 
-  const media = Array.isArray(target.media) ? target.media : [target.media];
+  const media = toArray(target.media);
   const payload = media.map(({ id }) => ({
     ids: { trakt: id },
     watched_at: watchedAtDate,
