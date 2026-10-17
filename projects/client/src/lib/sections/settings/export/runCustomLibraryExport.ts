@@ -1,7 +1,7 @@
 import type { UserCollection } from '$lib/features/auth/stores/useCurrentUserCollection.ts';
 import { strToU8, zip, type Zippable } from 'fflate';
 import { z } from 'zod';
-import { downloadFile } from './downloadFile.ts';
+import { downloadFile } from '$lib/utils/file/downloadFile.ts';
 import type { ExportOptions } from './models/ExportOptions.ts';
 import { processEndpoint } from './processEndpoint.ts';
 

@@ -4,7 +4,7 @@
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import ShadowScroller from "$lib/sections/components/ShadowScroller.svelte";
-  import { downloadFile } from "$lib/sections/settings/export/downloadFile.ts";
+  import { downloadFile } from "$lib/utils/file/downloadFile.ts";
   import type {
     AmbiguousImportItem,
     UniversalImportItem,
