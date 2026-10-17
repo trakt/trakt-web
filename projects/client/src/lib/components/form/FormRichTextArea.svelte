@@ -5,8 +5,8 @@
   import { useMotionDuration } from "$lib/stores/css/useMotionDuration.ts";
   import type { FormRichTextAreaProps } from "./models/FormRichTextAreaProps.ts";
 
-  const randomId = crypto.randomUUID().slice(0, 8);
-  const hintId = `trakt-rich-textarea-hint-${randomId}`;
+  const uid = $props.id();
+  const hintId = `trakt-rich-textarea-hint-${uid}`;
 
   const duration = useMotionDuration();
 

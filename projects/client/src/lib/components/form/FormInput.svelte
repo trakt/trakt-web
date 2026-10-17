@@ -4,8 +4,8 @@
   import FormElementWrapper from "./_internal/FormElementWrapper.svelte";
   import type { FormInputProps } from "./models/FormInputProps";
 
-  const randomId = crypto.randomUUID().slice(0, 8);
-  const errorLabelId = `trakt-input-error-${randomId}`;
+  const uid = $props.id();
+  const errorLabelId = `trakt-input-error-${uid}`;
 
   const {
     onChange,

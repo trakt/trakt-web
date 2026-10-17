@@ -4,7 +4,7 @@
 
   type GradientStop = { offset?: string; color: string };
 
-  const uniqueId = crypto.randomUUID();
+  const uniqueId = $props.id();
 </script>
 
 {#snippet flame(
