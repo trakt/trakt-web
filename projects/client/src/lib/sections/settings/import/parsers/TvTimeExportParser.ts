@@ -1,4 +1,5 @@
 import type { UniversalImportItem } from '../ImportTypes.ts';
+import { isPositionalItem } from '../isPositionalItem.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toImportISOString } from './utils/toImportISOString.ts';
@@ -298,12 +299,7 @@ function itemKey(item: UniversalImportItem): string {
   // A positional episode is identified by show + season + episode alone; its
   // own id must stay out of the key, or the same watch present in both
   // serializations (one carrying the episode id, one not) fails to dedupe.
-  if (
-    item.type === 'episode' &&
-    (item.showTvdb != null || item.showImdb != null) &&
-    item.season != null &&
-    item.episode != null
-  ) {
+  if (item.type === 'episode' && isPositionalItem(item)) {
     // Prefer tvdb (else imdb) so a watch present in both serializations, one
     // carrying imdb and one not, keys the same and dedupes.
     const showKey =
