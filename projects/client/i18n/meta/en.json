@@ -8606,30 +8606,6 @@
       "default": "Import your data",
       "description": "Call-to-action on the welcome banner that takes the user to the data import settings page."
     },
-    "tv_time_banner_heading": {
-      "default": "Coming from TV Time?",
-      "description": "Heading on the banner shown to users who joined Trakt around the TV Time shutdown announcement, promoting the TV Time-style companion app."
-    },
-    "tv_time_banner_description": {
-      "default": "Feel right at home with our familiar companion app, powered by your Trakt account.",
-      "description": "Description on the TV Time migration banner explaining that tvtime.trakt.tv is a familiar companion app backed by Trakt."
-    },
-    "tv_time_banner_action": {
-      "default": "tvtime.trakt.tv",
-      "description": "Call-to-action link on the TV Time migration banner that opens the tvtime.trakt.tv companion app in a new tab."
-    },
-    "tv_time_import_banner_heading": {
-      "default": "Your TV Time import, improved",
-      "description": "Heading on the banner shown to users who joined during the TV Time migration, telling them the importer has been upgraded."
-    },
-    "tv_time_import_banner_description": {
-      "default": "We've upgraded the importer. If some shows or episodes are missing, import your TV Time export again to pull them in. Still missing after that? Delete the old plays first, then import once more.",
-      "description": "Description on the TV Time importer-update banner explaining that re-importing now recovers missing show/episode data, and to delete old plays before re-importing if issues persist."
-    },
-    "tv_time_import_banner_action": {
-      "default": "Import again",
-      "description": "Call-to-action button on the TV Time importer-update banner that opens the data import settings page."
-    },
     "auto_tracking_card_heading": {
       "default": "Automatically track across your streaming services",
       "description": "Heading on the home screen card promoting automatic tracking of streaming services."
