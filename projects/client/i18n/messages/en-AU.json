@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "or swipe",
   "text_mixtape_pick_count": "{count} picked",
   "text_mixtape_pick_prompt": "Tap a poster you loved",
-  "text_mixtape_position": "{position} of {total}",
   "text_mixtape_results_empty": "We couldn't find new titles for this mix. Try changing your picks.",
   "text_mixtape_slot_first": "Pick one",
   "text_mixtape_slot_next": "Add",

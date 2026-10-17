@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "veya kaydır",
   "text_mixtape_pick_count": "{count} seçildi",
   "text_mixtape_pick_prompt": "Sevdiğiniz bir postere dokunun",
-  "text_mixtape_position": "{total} üzerinden {position}",
   "text_mixtape_results_empty": "Bu mix için yeni içerik bulunamadı. Seçimlerini değiştirmeyi dene.",
   "text_mixtape_slot_first": "Bir tane seç",
   "text_mixtape_slot_next": "Ekle",

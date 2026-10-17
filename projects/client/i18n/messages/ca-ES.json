@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "o llisca",
   "text_mixtape_pick_count": "{count} seleccionats",
   "text_mixtape_pick_prompt": "Toca un pòster que t'hagi agradat",
-  "text_mixtape_position": "{position} de {total}",
   "text_mixtape_results_empty": "No hem pogut trobar nous títols per a aquesta barreja. Prova de canviar les teves seleccions.",
   "text_mixtape_slot_first": "Tria'n una",
   "text_mixtape_slot_next": "Afegeix",

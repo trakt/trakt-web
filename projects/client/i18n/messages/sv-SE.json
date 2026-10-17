@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "eller svep",
   "text_mixtape_pick_count": "{count} valda",
   "text_mixtape_pick_prompt": "Tryck på en affisch du älskade",
-  "text_mixtape_position": "{position} av {total}",
   "text_mixtape_results_empty": "Vi kunde inte hitta nya titlar för denna mix. Försök att ändra dina val.",
   "text_mixtape_slot_first": "Välj en",
   "text_mixtape_slot_next": "Lägg till",

@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "eller sveip",
   "text_mixtape_pick_count": "{count} valgt",
   "text_mixtape_pick_prompt": "Trykk på en plakat du elsket",
-  "text_mixtape_position": "{position} av {total}",
   "text_mixtape_results_empty": "Vi fant ingen nye titler for denne miksen. Prøv å endre valgene dine.",
   "text_mixtape_slot_first": "Velg én",
   "text_mixtape_slot_next": "Legg til",

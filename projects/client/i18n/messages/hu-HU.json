@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "vagy húzd",
   "text_mixtape_pick_count": "{count} kiválasztva",
   "text_mixtape_pick_prompt": "Koppints egy poszterre, amit szerettél",
-  "text_mixtape_position": "{position} / {total}",
   "text_mixtape_results_empty": "Nem találtunk új címeket ehhez a mixhez. Próbáld meg módosítani a választásaidat.",
   "text_mixtape_slot_first": "Válassz egyet",
   "text_mixtape_slot_next": "Hozzáadás",

@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "o desliza",
   "text_mixtape_pick_count": "{count} seleccionados",
   "text_mixtape_pick_prompt": "Toca un póster que te haya encantado",
-  "text_mixtape_position": "{position} de {total}",
   "text_mixtape_results_empty": "No pudimos encontrar nuevos títulos para este mix. Intenta cambiar tus elecciones.",
   "text_mixtape_slot_first": "Elige uno",
   "text_mixtape_slot_next": "Añadir",

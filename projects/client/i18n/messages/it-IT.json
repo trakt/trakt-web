@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "o scorri",
   "text_mixtape_pick_count": "{count} selezionati",
   "text_mixtape_pick_prompt": "Tocca la locandina che ti è piaciuta",
-  "text_mixtape_position": "{position} di {total}",
   "text_mixtape_results_empty": "Non abbiamo trovato nuovi titoli per questo mix. Prova a cambiare le tue scelte.",
   "text_mixtape_slot_first": "Scegli uno",
   "text_mixtape_slot_next": "Aggiungi",

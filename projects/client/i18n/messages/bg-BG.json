@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "или плъзнете",
   "text_mixtape_pick_count": "{count} избрани",
   "text_mixtape_pick_prompt": "Докосни плакат, който си харесал",
-  "text_mixtape_position": "{position} от {total}",
   "text_mixtape_results_empty": "Не успяхме да намерим нови заглавия за този микс. Опитайте да промените избора си.",
   "text_mixtape_slot_first": "Изберете един",
   "text_mixtape_slot_next": "Добавяне",

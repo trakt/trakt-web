@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "أو اسحب",
   "text_mixtape_pick_count": "تم اختيار {count}",
   "text_mixtape_pick_prompt": "انقر على ملصق أحببته",
-  "text_mixtape_position": "{position} من {total}",
   "text_mixtape_results_empty": "لم نتمكن من العثور على عناوين جديدة لهذا المزيج. حاول تغيير اختياراتك.",
   "text_mixtape_slot_first": "اختر واحدًا",
   "text_mixtape_slot_next": "إضافة",

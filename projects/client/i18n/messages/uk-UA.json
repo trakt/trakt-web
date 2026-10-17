@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "або проведіть",
   "text_mixtape_pick_count": "{count} вибрано",
   "text_mixtape_pick_prompt": "Торкніться постера, який вам сподобався",
-  "text_mixtape_position": "{position} з {total}",
   "text_mixtape_results_empty": "Ми не змогли знайти нових назв для цього міксу. Спробуйте змінити свій вибір.",
   "text_mixtape_slot_first": "Виберіть один",
   "text_mixtape_slot_next": "Додати",
