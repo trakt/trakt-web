@@ -15,10 +15,11 @@ import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
 import { toRemoveRatingsPayload } from '$lib/requests/sync/toRemoveRatingsPayload.ts';
+import { withPendingIntent } from '$lib/sections/media-actions/_internal/withPendingIntent.ts';
 import { hasAired } from '$lib/utils/media/hasAired.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
-import { filter } from 'rxjs';
+import { filter, of } from 'rxjs';
 import type { MarkAsWatchedAt } from '$lib/models/MarkAsWatchedAt.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
@@ -50,7 +51,7 @@ export function useMarkAsWatched(
   const { user, history, ratings } = useUser();
   const { track } = useTrack(AnalyticsEvent.MarkAsWatched);
 
-  const { isWatched } = useIsWatched(props);
+  const { isWatched: isWatchedOnServer } = useIsWatched(props);
   const { isQueued } = useIsQueued({ domain: 'history', keys: mediaKeys });
 
   const watchedInvalidations = [InvalidateAction.MarkAsWatched(type)];
@@ -142,6 +143,13 @@ export function useMarkAsWatched(
     watchedRemove.isPending,
     ratingRemove.isPending,
   ]);
+
+  const isAddPredictable = type !== 'show';
+  const isWatched = withPendingIntent({
+    current: isWatchedOnServer,
+    isAdding: isAddPredictable ? watchedAdd.isPending : of(false),
+    isRemoving: watchedRemove.isPending,
+  });
 
   const markAsWatched = async (watchedAt?: MarkAsWatchedAt) => {
     const current = await resolve(user);
