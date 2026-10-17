@@ -18,6 +18,7 @@ import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts'
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { combineLatest, type Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -86,9 +87,7 @@ export function useShow(slug$: Observable<string>) {
   const isSentimentLoading = sentiment.pipe(
     map((query) => query ? toLoadingState(query) : false),
   );
-  const isLoading = combineLatest([isQueriesLoading, isSentimentLoading]).pipe(
-    map((states) => states.some(Boolean)),
-  );
+  const isLoading = anyTrue([isQueriesLoading, isSentimentLoading]);
 
   return {
     isLoading,

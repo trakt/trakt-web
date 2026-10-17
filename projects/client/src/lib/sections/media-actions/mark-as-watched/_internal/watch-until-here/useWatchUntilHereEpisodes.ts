@@ -1,5 +1,6 @@
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import { useSeasonEpisodes } from '$lib/sections/lists/stores/useSeasonEpisodes.ts';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { combineLatest, map, of } from 'rxjs';
 import type { WatchUntilEpisode } from './calculateWatchUntilTimestamps.ts';
 
@@ -75,11 +76,7 @@ export function useWatchUntilHereEpisodes(
     map((groups) => groups.flat()),
   );
 
-  const isLoading = previousResults.length === 0
-    ? of(false)
-    : combineLatest(previousResults.map((entry) => entry.isLoading)).pipe(
-      map((states) => states.some(Boolean)),
-    );
+  const isLoading = anyTrue(previousResults.map((entry) => entry.isLoading));
 
   return { episodes, isLoading };
 }
