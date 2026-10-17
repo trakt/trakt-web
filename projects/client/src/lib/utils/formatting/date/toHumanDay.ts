@@ -1,5 +1,5 @@
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
-import { LOCALE_MAP } from '$lib/utils/formatting/date/LOCALE_MAP.ts';
+import { toDateFnsLocale } from '$lib/utils/formatting/date/toDateFnsLocale.ts';
 import { format } from 'date-fns/format';
 
 const FORMAT_STRINGS = {
@@ -18,7 +18,7 @@ type ToHumanDayProps = {
 export function toHumanDay(
   { date, locale: localeKey, format: formatOption = 'long' }: ToHumanDayProps,
 ): string {
-  const locale = LOCALE_MAP[localeKey] ?? LOCALE_MAP['en'];
+  const locale = toDateFnsLocale(localeKey);
   const formatString = FORMAT_STRINGS[formatOption];
 
   return format(date, formatString, {
