@@ -138,6 +138,59 @@ describe('useWatchlist', () => {
     });
   });
 
+  describe('pending state', () => {
+    it('should show as watchlisted while an add is in flight', async () => {
+      const { isWatchlisted, addToWatchlist } = await renderStore(() =>
+        useWatchlist({ type: 'show', media: ShowDevsMappedMock })
+      );
+
+      expect(await waitForEmission(isWatchlisted, 2)).toBe(false);
+
+      const addition = addToWatchlist();
+      expect(await firstValueFrom(isWatchlisted)).toBe(true);
+
+      await addition;
+    });
+
+    it('should show as not watchlisted while a remove is in flight', async () => {
+      const { isWatchlisted, removeFromWatchlist } = await renderStore(() =>
+        useWatchlist({ type: 'movie', media: MovieMatrixMappedMock })
+      );
+
+      expect(await waitForEmission(isWatchlisted, 2)).toBe(true);
+
+      const removal = removeFromWatchlist();
+      expect(await firstValueFrom(isWatchlisted)).toBe(false);
+
+      await removal;
+    });
+
+    it('should revert to the real state when the add fails', async () => {
+      server.use(
+        http.post(
+          'http://localhost/sync/watchlist',
+          () =>
+            new HttpResponse('{', {
+              status: 201,
+              headers: { 'content-type': 'application/json' },
+            }),
+        ),
+      );
+
+      const { isWatchlisted, addToWatchlist } = await renderStore(() =>
+        useWatchlist({ type: 'show', media: ShowDevsMappedMock })
+      );
+
+      expect(await waitForEmission(isWatchlisted, 2)).toBe(false);
+
+      const addition = addToWatchlist();
+      expect(await firstValueFrom(isWatchlisted)).toBe(true);
+
+      await expect(addition).rejects.toThrow();
+      expect(await firstValueFrom(isWatchlisted)).toBe(false);
+    });
+  });
+
   describe('lists drawer', () => {
     it('should NOT raise an action toast when toasts are disabled', async () => {
       const { addToWatchlist, removeFromWatchlist } = await renderStore(() =>
