@@ -23,6 +23,7 @@ import { filter, of } from 'rxjs';
 import type { MarkAsWatchedAt } from '$lib/models/MarkAsWatchedAt.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
+import { toArray } from '$lib/utils/array/toArray.ts';
 
 export type MarkAsWatchedStoreProps = MediaStoreProps<{
   id: number;
@@ -46,7 +47,7 @@ function ratedBucket(
 
 export function useMarkAsWatched(props: MarkAsWatchedStoreProps) {
   const { type } = props;
-  const media = Array.isArray(props.media) ? props.media : [props.media];
+  const media = toArray(props.media);
   const mediaKeys = media.map((item) => toMediaKey(type, item.id));
   const { user, history, ratings } = useUser();
   const { track } = useTrack(AnalyticsEvent.MarkAsWatched);
