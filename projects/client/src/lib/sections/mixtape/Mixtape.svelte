@@ -147,6 +147,12 @@
     return goto(url, { replaceState: true, noScroll: true, keepFocus: true });
   };
 
+  const matchById = $derived(
+    new Map(
+      $mixtape.suggestions.map(({ media, match }) => [media.id, match]),
+    ),
+  );
+
   const rounds = $derived(
     params.kept.map((ids) =>
       ids.flatMap((id) => {
@@ -158,12 +164,24 @@
     ),
   );
 
-  const keepMedia = async (media: MovieEntry | ShowEntry) => {
+  let pendingKeep: Promise<unknown> = Promise.resolve();
+
+  const recordKeep = async (
+    media: MovieEntry | ShowEntry,
+    saved: Promise<boolean> | null,
+  ) => {
+    if (saved && !(await saved)) return;
     const finished = params.kept.slice(0, -1);
     const current = params.kept.at(-1) ?? [];
+    await replaceResults({ kept: [...finished, [...current, media.id]] });
+  };
+
+  const keepMedia = (media: MovieEntry | ShowEntry) => {
     const saving = keep(params.savedTo, media);
-    if (params.savedTo != null && !(await saving)) return;
-    replaceResults({ kept: [...finished, [...current, media.id]] });
+    const saved = params.savedTo != null ? saving : null;
+    const recorded = pendingKeep.then(() => recordKeep(media, saved));
+    pendingKeep = recorded.catch(() => undefined);
+    return recorded;
   };
 
   onMount(() => {
@@ -197,6 +215,7 @@
     {rounds}
     savedTo={params.savedTo}
     onKeep={keepMedia}
+    matchOf={(id) => matchById.get(id) ?? null}
     onMoved={(savedTo) => replaceResults({ savedTo })}
     onSkip={(id) => replaceResults({ skips: [...params.skips, id] })}
     onUndo={() => replaceResults({ skips: params.skips.slice(0, -1) })}

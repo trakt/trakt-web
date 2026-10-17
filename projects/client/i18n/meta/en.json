@@ -13368,10 +13368,6 @@
       "default": "Your history is empty. Mark a few titles as watched to make a mixtape.",
       "description": "Shown on the Mixtape page when the user has no watched titles of the chosen type. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
-    "header_mixtape_results": {
-      "default": "Your mixtape",
-      "description": "Heading above the three suggestions on the Mixtape page. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
-    },
     "text_mixtape_based_on": {
       "default": "Mixed from {titles}",
       "description": "Line on the Mixtape results naming the picked titles. {titles} is a list of titles."
@@ -13514,10 +13510,6 @@
     "text_mixtape_swapped": {
       "default": "Swapped {old} for {new}",
       "description": "Short notice after a Mixtape suggestion was swapped. {old} and {new} are movie or show titles."
-    },
-    "tag_mixtape_on_watchlist": {
-      "default": "On watchlist",
-      "description": "Badge on a Mixtape poster that was added to the watchlist."
     },
     "header_mixtape_done": {
       "default": "That's your mixtape",
@@ -13679,6 +13671,48 @@
     "text_mixtape_move_failed": {
       "default": "Couldn't move your mixtape. Try again.",
       "description": "Error toast when moving a Mixtape to another list fails."
+    },
+    "tag_mixtape_kept": {
+      "default": "Kept",
+      "description": "Tag on a Mixtape poster the user kept, and the label of its disabled Keep it button."
+    },
+    "text_mixtape_more_to_go": {
+      "default": "{left} more to go.",
+      "description": "Start of the bar under the desktop Mixtape fan. {left} is how many titles are still to keep this round (1 to 3).",
+      "variables": {
+        "left": {
+          "type": "number",
+          "description": "Titles still to keep this round.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_saved_as_you_go": {
+      "default": "Each keep is saved right away, so closing never loses it.",
+      "description": "Rest of the bar under the desktop Mixtape fan, after the count."
+    },
+    "button_text_mixtape_finish_with": {
+      "default": "Finish with {count}",
+      "description": "Button in the bar under the desktop Mixtape fan that ends the round early and opens the end screen. {count} is how many were kept.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Titles kept this round.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_stat_titles_label": {
+      "default": "Titles",
+      "description": "Screen-reader label for the title count on the desktop Mixtape end screen."
+    },
+    "text_mixtape_stat_runtime_label": {
+      "default": "of watching",
+      "description": "Label under the total runtime of the kept movies on the desktop Mixtape end screen, e.g. '11h 15m' / 'of watching'."
+    },
+    "text_mixtape_stat_match_label": {
+      "default": "average match",
+      "description": "Label under the average match percentage of the kept titles on the desktop Mixtape end screen."
     },
     "button_text_mixtape_finish": {
       "default": "Done",

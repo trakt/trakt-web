@@ -3,24 +3,19 @@
   import SwapIcon from "$lib/components/icons/SwapIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { useIsWatchlisted } from "$lib/stores/useIsWatchlisted.ts";
   import MixtapeMatchTag from "./MixtapeMatchTag.svelte";
   import type { MixtapeFanPosterProps } from "./MixtapeFanPosterProps.ts";
-  import { toMediaStoreProps } from "./toMediaStoreProps.ts";
 
   const {
     slot,
     place,
     isSelected,
     isSwapping,
+    isKept,
     canSwap,
     onSelect,
     onSwap,
   }: MixtapeFanPosterProps = $props();
-
-  const { isWatchlisted } = $derived(
-    useIsWatchlisted(toMediaStoreProps(slot.media)),
-  );
 </script>
 
 <div
@@ -34,10 +29,10 @@
       src={slot.media.poster.url.medium}
       alt={m.image_alt_media_poster({ title: slot.media.title })}
     />
-    {#if $isWatchlisted}
+    {#if isKept}
       <span class="poster-kept">
         <BookmarkIcon state="added" />
-        {m.tag_mixtape_on_watchlist()}
+        {m.tag_mixtape_kept()}
       </span>
     {/if}
     <div class="poster-match">

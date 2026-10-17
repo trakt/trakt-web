@@ -10,12 +10,13 @@
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage.ts";
   import { onDestroy } from "svelte";
   import MixtapeDone from "./MixtapeDone.svelte";
+  import MixtapeGoalSlots from "./MixtapeGoalSlots.svelte";
   import type { MixtapeResultsProps } from "./MixtapeResultsProps.ts";
   import MixtapeSwipeCard from "./MixtapeSwipeCard.svelte";
   import { SWIPE_COMMIT_DISTANCE } from "./SWIPE_COMMIT_DISTANCE.ts";
   import { toMixtapeMeta } from "./toMixtapeMeta.ts";
+  import { MIXTAPE_SLOT_COUNT } from "./MIXTAPE_SLOT_COUNT.ts";
 
-  const SLOT_COUNT = 3;
   const LEAVE_DURATION = 260;
   const TOAST_DURATION = 2200;
   const TAP_TOLERANCE = 6;
@@ -58,7 +59,7 @@
   const keptSoFar = $derived(rounds.flat().length);
   const current = $derived(slots.at(position));
   const next = $derived(slots.at(position + 1));
-  const isDone = $derived(position >= SLOT_COUNT || current == null);
+  const isDone = $derived(position >= MIXTAPE_SLOT_COUNT || current == null);
   const isHinting = $derived(!isHintSeen && position === 0 && !isDone);
   const strength = $derived(Math.min(Math.abs(dx) / SWIPE_COMMIT_DISTANCE, 1));
 
@@ -89,7 +90,7 @@
 
       if (direction === "right") {
         onResult("watchlist", position + 1);
-        showToast(slot.media.title, SLOT_COUNT - position - 1);
+        showToast(slot.media.title, MIXTAPE_SLOT_COUNT - position - 1);
         onKeep(slot.media);
         return;
       }
@@ -157,40 +158,25 @@
       <header class="deck-header">
         <div class="deck-heading">
           <h2 class="ellipsis">
-            {SLOT_COUNT - position === 1
+            {MIXTAPE_SLOT_COUNT - position === 1
               ? m.header_mixtape_find_last()
               : isFirstRound
-                ? m.header_mixtape_find({ total: SLOT_COUNT })
-                : m.header_mixtape_find_more({ total: SLOT_COUNT })}
+                ? m.header_mixtape_find({ total: MIXTAPE_SLOT_COUNT })
+                : m.header_mixtape_find_more({ total: MIXTAPE_SLOT_COUNT })}
           </h2>
           <p class="small secondary">
             <b class="deck-count">
               {isFirstRound
-                ? m.text_mixtape_kept({ kept: position, total: SLOT_COUNT })
+                ? m.text_mixtape_kept({ kept: position, total: MIXTAPE_SLOT_COUNT })
                 : m.text_mixtape_round_kept({
                     kept: position,
-                    total: SLOT_COUNT,
+                    total: MIXTAPE_SLOT_COUNT,
                     sofar: keptSoFar,
                   })}
             </b>
           </p>
         </div>
-        <ol class="deck-slots" aria-hidden="true">
-          {#each Array.from({ length: SLOT_COUNT }, (_, index) => index) as index (index)}
-            {@const keptMedia = round.at(index)}
-            <li
-              class="deck-slot"
-              class:is-kept={keptMedia != null}
-              class:is-next={index === position}
-            >
-              {#if keptMedia}
-                <CrossOriginImage src={keptMedia.poster.url.thumb} alt="" />
-              {:else}
-                <BookmarkIcon state="missing" />
-              {/if}
-            </li>
-          {/each}
-        </ol>
+        <MixtapeGoalSlots {round} total={MIXTAPE_SLOT_COUNT} />
         <Link href={closeHref} color="inherit" label={m.button_label_close()}>
           <span class="deck-ghost"><CloseIcon /></span>
         </Link>
@@ -347,50 +333,6 @@
 
   .deck-count {
     color: var(--color-text-primary);
-  }
-
-  .deck-slots {
-    display: flex;
-    gap: var(--ni-6);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .deck-slot {
-    box-sizing: border-box;
-    display: grid;
-    place-items: center;
-    width: var(--ni-30);
-    aspect-ratio: 2 / 3;
-    overflow: hidden;
-
-    border: var(--border-thickness-xs) dashed
-      color-mix(in srgb, var(--purple-400) 70%, transparent);
-    border-radius: var(--border-radius-xs);
-    color: color-mix(in srgb, var(--purple-300) 80%, transparent);
-
-    :global(svg) {
-      width: var(--ni-14);
-      height: var(--ni-14);
-    }
-
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    &.is-next {
-      border-color: var(--purple-300);
-      box-shadow: 0 0 0 var(--ni-3)
-        color-mix(in srgb, var(--purple-500) 35%, transparent);
-    }
-
-    &.is-kept {
-      border-style: solid;
-      border-color: var(--purple-400);
-    }
   }
 
   .deck-ghost {

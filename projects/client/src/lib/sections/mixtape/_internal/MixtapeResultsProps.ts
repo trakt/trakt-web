@@ -20,6 +20,7 @@ export type MixtapeResultsProps = {
   onResult: (action: MixtapeResultAction, position: number) => void;
   rounds: ReadonlyArray<ReadonlyArray<MovieEntry | ShowEntry>>;
   savedTo: MixtapeTarget;
-  onKeep: (media: MovieEntry | ShowEntry) => void;
+  onKeep: (media: MovieEntry | ShowEntry) => Promise<void>;
   onMoved: (target: MixtapeTarget) => void;
+  matchOf: (id: number) => number | null;
 };
