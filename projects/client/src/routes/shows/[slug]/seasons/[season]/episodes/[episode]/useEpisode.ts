@@ -8,7 +8,7 @@ import { streamEpisodeQuery } from '$lib/requests/queries/episode/streamEpisodeQ
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
-import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferredStreamingService.ts';
+import { toStreamOn } from '$lib/stores/toStreamOn.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
@@ -115,20 +115,13 @@ export function useEpisode(params$: Observable<UseEpisodeParams>) {
     ),
     // FIXME: move these to the 'where to watch' component
     streamOn: combineLatest([streamOnQuery, favorites, country]).pipe(
-      map(([$streamOn, $favorites, $country]) => {
-        if (!$streamOn.data) {
-          return;
-        }
-
-        return {
+      map(([$streamOn, $favorites, $country]) =>
+        toStreamOn({
           services: $streamOn.data,
-          preferred: findPreferredStreamingService({
-            services: $streamOn.data,
-            favorites: $favorites,
-            countryCode: $country,
-          }),
-        };
-      }),
+          favorites: $favorites,
+          countryCode: $country,
+        })
+      ),
     ),
   };
 }
