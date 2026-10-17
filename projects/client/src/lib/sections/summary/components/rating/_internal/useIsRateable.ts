@@ -1,33 +1,15 @@
-import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
-import { map } from 'rxjs';
 import { useIsWatched } from '$lib/sections/media-actions/mark-as-watched/useIsWatched.ts';
-import { toArray } from '$lib/utils/array/toArray.ts';
+import { useHasWatchedShowEpisodes } from '$lib/sections/media-actions/rewatching/useHasWatchedShowEpisodes.ts';
 
 export type IsRateableProps = ExtendedMediaStoreProps;
 
 export function useIsRateable(props: IsRateableProps) {
-  const { type } = props;
-  const media = toArray(props.media);
-  const { history } = useUser();
-
-  if (type === 'show') {
+  if (props.type === 'show') {
     return {
-      isRateable: history.pipe(
-        map(($history) => {
-          if (!$history) {
-            return false;
-          }
-
-          return media.every((m) => {
-            const show = $history.shows.get(m.id);
-            return show?.episodes.some((e) => e.season !== 0) ?? false;
-          });
-        }),
-      ),
+      isRateable: useHasWatchedShowEpisodes(props).hasWatchedShowEpisodes,
     };
   }
 
-  const { isWatched } = useIsWatched(props);
-  return { isRateable: isWatched.pipe(map(($isWatched) => $isWatched)) };
+  return { isRateable: useIsWatched(props).isWatched };
 }
