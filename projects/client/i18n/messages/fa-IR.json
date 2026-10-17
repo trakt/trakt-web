@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "یا بکشید",
   "text_mixtape_pick_count": "{count} انتخاب شده",
   "text_mixtape_pick_prompt": "روی پوستری که دوست داشتید ضربه بزنید",
-  "text_mixtape_position": "{position} از {total}",
   "text_mixtape_results_empty": "نتوانستیم عنوان‌های جدیدی برای این میکس پیدا کنیم. سعی کنید انتخاب‌های خود را تغییر دهید.",
   "text_mixtape_slot_first": "یکی را انتخاب کنید",
   "text_mixtape_slot_next": "افزودن",

@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "或滑动",
   "text_mixtape_pick_count": "{count} 已选择",
   "text_mixtape_pick_prompt": "点击你喜欢的海报",
-  "text_mixtape_position": "{total} 中的 {position}",
   "text_mixtape_results_empty": "我们未能找到适合此混搭的新内容。请尝试更改您的选择。",
   "text_mixtape_slot_first": "选择一部",
   "text_mixtape_slot_next": "添加",

@@ -3,7 +3,6 @@
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
-  import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
   import SwipeHandIcon from "$lib/components/icons/SwipeHandIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -23,6 +22,7 @@
 
   const SLOT_COUNT = 3;
   const LEAVE_DURATION = 260;
+  const TOAST_DURATION = 2200;
   const TAP_TOLERANCE = 6;
   const HINT_SEEN_KEY = "trakt-mixtape-swipe-hint-seen";
 
@@ -47,8 +47,13 @@
   let isFlipped = $state(false);
   let isHintSeen = $state(safeLocalStorage.getItem(HINT_SEEN_KEY) === "true");
   let leaveTimer: ReturnType<typeof setTimeout> | undefined;
+  let toast = $state<{ title: string; left: number } | null>(null);
+  let toastTimer: ReturnType<typeof setTimeout> | undefined;
 
-  onDestroy(() => clearTimeout(leaveTimer));
+  onDestroy(() => {
+    clearTimeout(leaveTimer);
+    clearTimeout(toastTimer);
+  });
 
   const current = $derived(slots.at(position));
   const next = $derived(slots.at(position + 1));
@@ -79,6 +84,13 @@
     safeLocalStorage.setItem(HINT_SEEN_KEY, "true");
   };
 
+  const showToast = (title: string, left: number) => {
+    clearTimeout(toastTimer);
+    toast = left > 0 ? { title, left } : null;
+    if (!toast) return;
+    toastTimer = setTimeout(() => (toast = null), TOAST_DURATION);
+  };
+
   const commit = (direction: "left" | "right") => {
     const slot = current;
     if (!slot || leaving) return;
@@ -96,6 +108,7 @@
         kept = [...kept, slot];
         onResult("watchlist", position + 1);
         position += 1;
+        showToast(slot.media.title, SLOT_COUNT - kept.length);
         return;
       }
 
@@ -159,36 +172,46 @@
     />
   {:else if current}
     <div class="deck-layout">
-      <div class="deck-progress">
-        {#each Array.from({ length: SLOT_COUNT }, (_, index) => index) as index (index)}
-          <div class="deck-segment" class:is-on={index <= position}></div>
-        {/each}
-      </div>
-
       <header class="deck-header">
         <div class="deck-heading">
-          <p class="bold ellipsis">{m.header_mixtape_results()}</p>
+          <h2 class="ellipsis">
+            {SLOT_COUNT - kept.length === 1
+              ? m.header_mixtape_find_last()
+              : m.header_mixtape_find({ total: SLOT_COUNT })}
+          </h2>
           <p class="small secondary">
-            {m.text_mixtape_position({
-              position: String(position + 1),
-              total: String(SLOT_COUNT),
-            })}
+            <b class="deck-count">
+              {m.text_mixtape_kept({ kept: kept.length, total: SLOT_COUNT })}
+            </b>
           </p>
         </div>
-        <button
-          type="button"
-          class="deck-ghost"
-          aria-label={m.button_label_show_details()}
-          onclick={flip}
-        >
-          <InfoIcon />
-        </button>
+        <ol class="deck-slots" aria-hidden="true">
+          {#each Array.from({ length: SLOT_COUNT }, (_, index) => index) as index (index)}
+            {@const keptSlot = kept.at(index)}
+            <li
+              class="deck-slot"
+              class:is-kept={keptSlot != null}
+              class:is-next={index === kept.length}
+            >
+              {#if keptSlot}
+                <CrossOriginImage src={keptSlot.media.poster.url.thumb} alt="" />
+              {:else}
+                <BookmarkIcon state="missing" />
+              {/if}
+            </li>
+          {/each}
+        </ol>
         <Link href={closeHref} color="inherit" label={m.button_label_close()}>
           <span class="deck-ghost"><CloseIcon /></span>
         </Link>
       </header>
 
       <div class="deck-stage">
+        {#if toast}
+          <p class="deck-toast" role="status">
+            {m.text_mixtape_kept_toast({ title: toast.title, left: toast.left })}
+          </p>
+        {/if}
         <div
           class="deck-card-box"
           role="group"
@@ -249,7 +272,7 @@
             <CloseIcon />
           </button>
           <span class="deck-label secondary">
-            {m.button_text_mixtape_not_this()}
+            {m.button_text_mixtape_another()}
           </span>
         </div>
 
@@ -265,13 +288,11 @@
             class="deck-button is-keep"
             aria-label={m.button_text_watchlist()}
             style:--button-scale={dx > 0 ? 1 + strength * 0.2 : 1}
-            style:--button-fill={`${dx > 0 ? Math.round(strength * 100) : 0}%`}
-            class:is-filled={dx > 0 && strength > 0.5}
             onclick={() => commit("right")}
           >
             <BookmarkIcon state="added" size="normal" />
           </button>
-          <span class="deck-label is-keep">{m.button_text_watchlist()}</span>
+          <span class="deck-label is-keep">{m.button_text_mixtape_keep()}</span>
         </div>
       </div>
     </div>
@@ -322,22 +343,6 @@
     );
   }
 
-  .deck-progress {
-    display: flex;
-    gap: var(--gap-xxs);
-  }
-
-  .deck-segment {
-    flex: 1;
-    height: var(--ni-3);
-    border-radius: var(--border-radius-xs);
-    background: color-mix(in srgb, var(--color-foreground) 25%, transparent);
-
-    &.is-on {
-      background: var(--color-foreground);
-    }
-  }
-
   .deck-header {
     display: flex;
     align-items: center;
@@ -351,8 +356,62 @@
   .deck-heading {
     display: flex;
     flex-direction: column;
+    gap: var(--ni-2);
     flex: 1;
     min-width: 0;
+
+    h2,
+    p {
+      margin: 0;
+    }
+  }
+
+  .deck-count {
+    color: var(--color-text-emphasis);
+  }
+
+  .deck-slots {
+    display: flex;
+    gap: var(--ni-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .deck-slot {
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    width: var(--ni-30);
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+
+    border: var(--border-thickness-xs) dashed
+      color-mix(in srgb, var(--purple-400) 70%, transparent);
+    border-radius: var(--border-radius-xs);
+    color: color-mix(in srgb, var(--purple-300) 80%, transparent);
+
+    :global(svg) {
+      width: var(--ni-14);
+      height: var(--ni-14);
+    }
+
+    :global(img) {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &.is-next {
+      border-color: var(--purple-300);
+      box-shadow: 0 0 0 var(--ni-3)
+        color-mix(in srgb, var(--purple-500) 35%, transparent);
+    }
+
+    &.is-kept {
+      border-style: solid;
+      border-color: var(--purple-400);
+    }
   }
 
   .deck-ghost {
@@ -385,6 +444,43 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .deck-toast {
+    position: absolute;
+    inset-block-start: var(--gap-xs);
+    inset-inline-start: 50%;
+    z-index: var(--layer-raised);
+    transform: translateX(-50%);
+
+    max-width: calc(100% - var(--gap-m));
+    margin: 0;
+    padding: var(--ni-6) var(--ni-12);
+
+    border-radius: var(--border-radius-xxl);
+    background: var(--purple-500);
+    box-shadow: var(--shadow-floating);
+    color: var(--purple-50);
+    font-size: var(--font-size-text-small);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    animation: deck-toast-in var(--transition-increment) ease-out;
+  }
+
+  @keyframes deck-toast-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, calc(-1 * var(--ni-8)));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deck-toast {
+      animation: none;
+    }
   }
 
   .deck-card-box {
@@ -467,6 +563,10 @@
     font-size: var(--font-size-text-small);
     font-weight: 700;
 
+    &.secondary {
+      color: var(--color-text-secondary);
+    }
+
     &.is-keep {
       color: var(--color-text-emphasis);
     }
@@ -492,8 +592,11 @@
     }
 
     &.is-skip {
+      width: var(--ni-48);
+      height: var(--ni-48);
+
       background: var(--color-card-background);
-      color: var(--color-text-primary);
+      color: var(--color-text-secondary);
 
       :global(svg) {
         width: var(--ni-24);
@@ -502,21 +605,15 @@
     }
 
     &.is-keep {
-      width: var(--ni-64);
-      height: var(--ni-64);
+      width: var(--ni-72);
+      height: var(--ni-72);
 
-      background: color-mix(
-        in srgb,
-        var(--purple-500) var(--button-fill, 0%),
-        var(--color-card-background)
-      );
-      box-shadow:
-        inset 0 0 0 var(--border-thickness-xs) var(--purple-400),
-        var(--shadow-floating);
-      color: var(--purple-300);
+      background: var(--purple-500);
+      color: var(--purple-50);
 
-      &.is-filled {
-        color: var(--purple-50);
+      :global(svg) {
+        width: var(--ni-28);
+        height: var(--ni-28);
       }
     }
   }

@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "lub przesuń",
   "text_mixtape_pick_count": "{count} wybrano",
   "text_mixtape_pick_prompt": "Dotknij plakatu, który pokochałeś.",
-  "text_mixtape_position": "{position} z {total}",
   "text_mixtape_results_empty": "Nie mogliśmy znaleźć nowych tytułów do tego miksu. Spróbuj zmienić swoje wybory.",
   "text_mixtape_slot_first": "Wybierz jeden",
   "text_mixtape_slot_next": "Dodaj",

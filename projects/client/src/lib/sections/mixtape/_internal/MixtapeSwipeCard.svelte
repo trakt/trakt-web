@@ -106,6 +106,11 @@
     position: absolute;
     inset: 0;
 
+    :global(.trakt-flip-card) {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
+    }
+
     .is-hinting & {
       animation: mixtape-nudge 2.6s ease-in-out 0.7s 2;
     }
@@ -129,6 +134,10 @@
     }
 
     &.is-back {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+
       border: var(--border-thickness-xxs) solid var(--color-border);
     }
   }

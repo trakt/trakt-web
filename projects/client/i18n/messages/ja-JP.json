@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "またはスワイプ",
   "text_mixtape_pick_count": "{count}件選択済み",
   "text_mixtape_pick_prompt": "お気に入りのポスターをタップ",
-  "text_mixtape_position": "{total}の{position}",
   "text_mixtape_results_empty": "このミックスに合う新しい作品が見つかりませんでした。選択を変更してみてください。",
   "text_mixtape_slot_first": "1つ選ぶ",
   "text_mixtape_slot_next": "追加",

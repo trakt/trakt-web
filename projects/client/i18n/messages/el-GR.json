@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "ή σύρετε",
   "text_mixtape_pick_count": "{count} επιλεγμένα",
   "text_mixtape_pick_prompt": "Πατήστε σε μια αφίσα που αγαπήσατε",
-  "text_mixtape_position": "{position} από {total}",
   "text_mixtape_results_empty": "Δεν βρέθηκαν νέοι τίτλοι για αυτήν τη μίξη. Δοκιμάστε να αλλάξετε τις επιλογές σας.",
   "text_mixtape_slot_first": "Επιλέξτε ένα",
   "text_mixtape_slot_next": "Προσθήκη",

@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "ou balayez",
   "text_mixtape_pick_count": "{count} sélectionnés",
   "text_mixtape_pick_prompt": "Touchez une affiche que vous avez aimée",
-  "text_mixtape_position": "{position} de {total}",
   "text_mixtape_results_empty": "Nous n'avons pas pu trouver de nouveaux titres pour ce mix. Essayez de modifier vos sélections.",
   "text_mixtape_slot_first": "Choisissez-en un",
   "text_mixtape_slot_next": "Ajouter",

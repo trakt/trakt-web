@@ -1887,7 +1887,6 @@
   "text_mixtape_or_swipe": "eller swipe",
   "text_mixtape_pick_count": "{count} valgt",
   "text_mixtape_pick_prompt": "Tryk på en plakat, du elskede",
-  "text_mixtape_position": "{position} af {total}",
   "text_mixtape_results_empty": "Vi kunne ikke finde nye titler til dette mix. Prøv at ændre dine valg.",
   "text_mixtape_slot_first": "Vælg én",
   "text_mixtape_slot_next": "Tilføj",

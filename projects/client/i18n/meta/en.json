@@ -13414,9 +13414,60 @@
       "default": "{count} from your history",
       "description": "Small text next to the Fits with your picks heading. {count} is how many watched titles still fit."
     },
-    "text_mixtape_position": {
-      "default": "{position} of {total}",
-      "description": "Which Mixtape card is showing, out of how many. {position} and {total} are numbers."
+    "header_mixtape_find": {
+      "default": "Find {total} to watch",
+      "description": "Heading of the phone Mixtape deck. The goal is to keep {total} suggestions by adding them to the watchlist. {total} is a number (3).",
+      "variables": {
+        "total": {
+          "type": "number",
+          "description": "How many titles to keep.",
+          "required": true
+        }
+      }
+    },
+    "header_mixtape_find_last": {
+      "default": "One more to go",
+      "description": "Heading of the phone Mixtape deck when only one more suggestion needs to be kept."
+    },
+    "text_mixtape_kept": {
+      "default": "{kept} of {total} on your watchlist",
+      "description": "Progress under the Mixtape deck heading: how many suggestions were added to the watchlist so far. {kept} and {total} are numbers.",
+      "variables": {
+        "kept": {
+          "type": "number",
+          "description": "Suggestions added so far.",
+          "required": true
+        },
+        "total": {
+          "type": "number",
+          "description": "How many titles to keep.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_kept_toast": {
+      "default": "{title} added, {left} to go",
+      "description": "Short confirmation after adding a Mixtape suggestion to the watchlist. {title} is the movie or show title, {left} is how many more to keep.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Title that was added.",
+          "required": true
+        },
+        "left": {
+          "type": "number",
+          "description": "How many more to keep.",
+          "required": true
+        }
+      }
+    },
+    "button_text_mixtape_keep": {
+      "default": "Keep it",
+      "description": "Label under the right button of a Mixtape card. Adds the suggestion to the watchlist."
+    },
+    "button_text_mixtape_another": {
+      "default": "Another",
+      "description": "Label under the left button of a Mixtape card. Swaps the suggestion for the next one."
     },
     "text_mixtape_swipe_hint": {
       "default": "Swipe {right} for watchlist, {left} for another",
