@@ -20,7 +20,7 @@
 
   let internalOpen = $state(false);
 
-  const getOpen = () => (isControlled ? open! : internalOpen);
+  const getOpen = () => open ?? internalOpen;
   const setOpen = (value: boolean) => {
     if (isControlled) {
       onOpenChange?.(value);
