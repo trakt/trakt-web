@@ -3,6 +3,7 @@ import type { FileParser } from './ParserInterface.ts';
 import { parseCsvFile } from './utils/parseCsvFile.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toImportISOString } from './utils/toImportISOString.ts';
+import { toInt } from './utils/toInt.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
 const ACTIVITY_HISTORY_CSV = 'activity_history.csv';
@@ -21,12 +22,6 @@ type TvTimeLiberatorRow = {
   is_watchlisted?: string;
   rating?: string;
 };
-
-function toInt(value?: string): number | undefined {
-  if (!value) return undefined;
-  const n = parseInt(value, 10);
-  return isNaN(n) ? undefined : n;
-}
 
 function toImportType(value?: string): ImportType {
   const normalized = (value ?? 'movie').toLowerCase();

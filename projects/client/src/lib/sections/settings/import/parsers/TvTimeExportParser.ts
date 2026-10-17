@@ -2,6 +2,7 @@ import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toImportISOString } from './utils/toImportISOString.ts';
+import { toInt } from './utils/toInt.ts';
 import { toEpisodeIds } from './utils/toEpisodeIds.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
@@ -73,12 +74,6 @@ type JsonMovie = {
 // (up_to_date, continuing, stopped) either already have episode history or
 // were dropped.
 const WATCHLIST_SERIES_STATUS = 'not_started_yet';
-
-function toInt(value?: string): number | undefined {
-  if (!value) return undefined;
-  const n = parseInt(value, 10);
-  return isNaN(n) ? undefined : n;
-}
 
 function toImdb(value?: string | null): string | undefined {
   return value && value !== '-1' ? value : undefined;
