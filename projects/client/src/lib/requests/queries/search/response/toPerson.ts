@@ -1,4 +1,4 @@
-import type { PersonSchema } from '../../../search/schema/PersonSchema.ts';
+import type { PersonSchema } from '$lib/requests/search/schema/PersonSchema.ts';
 import { toIds } from './toIds.ts';
 import { toImageArray } from './toImageArray.ts';
 

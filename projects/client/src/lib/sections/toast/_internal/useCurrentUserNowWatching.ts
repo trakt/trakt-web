@@ -1,6 +1,6 @@
 import { map } from 'rxjs';
-import { useQuery } from '../../../features/query/useQuery.ts';
-import { userWatchingQuery } from '../../../requests/queries/users/userWatchingQuery.ts';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import { userWatchingQuery } from '$lib/requests/queries/users/userWatchingQuery.ts';
 
 export function useCurrentUserNowWatching() {
   const response = useQuery(userWatchingQuery({

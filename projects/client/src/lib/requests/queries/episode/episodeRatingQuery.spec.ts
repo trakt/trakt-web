@@ -3,7 +3,7 @@ import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/Sh
 import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { describe, expect, it } from 'vitest';
-import { EpisodeSiloResponseMock } from '../../../../mocks/data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
+import { EpisodeSiloResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
 import { episodeRatingQuery } from './episodeRatingQuery.ts';
 
 describe('episodeRatingQuery', () => {

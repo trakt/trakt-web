@@ -6,7 +6,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import ExternalLinkIcon from "../../../components/icons/ExternalLinkIcon.svelte";
+  import ExternalLinkIcon from "$lib/components/icons/ExternalLinkIcon.svelte";
   import AllTimeLink from "./AllTimeLink.svelte";
 
   const {

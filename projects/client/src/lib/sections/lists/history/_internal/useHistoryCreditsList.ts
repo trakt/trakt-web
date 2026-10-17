@@ -13,7 +13,7 @@ import { personShowCreditsQuery } from '$lib/requests/queries/people/personShowC
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { dedupe } from '$lib/utils/array/dedupe.ts';
 import { combineLatest, map, type Observable } from 'rxjs';
-import { toLoadingState } from '../../../../utils/requests/toLoadingState.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 
 type UseHistoryCreditsListProps = {
   slug$: Observable<string>;

@@ -19,7 +19,7 @@ import { hasAired } from '$lib/utils/media/hasAired.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { filter } from 'rxjs';
-import type { MarkAsWatchedAt } from '../../../models/MarkAsWatchedAt.ts';
+import type { MarkAsWatchedAt } from '$lib/models/MarkAsWatchedAt.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 

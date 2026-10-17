@@ -2,7 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import z from 'zod';
-import type { AvailableLanguage } from '../../../features/i18n/index.ts';
+import type { AvailableLanguage } from '$lib/features/i18n/index.ts';
 import { mapToMediaIntl } from '../../_internal/mapToMediaIntl.ts';
 import { MediaIntlSchema } from '../../models/MediaIntl.ts';
 

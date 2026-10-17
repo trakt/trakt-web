@@ -16,7 +16,7 @@
   import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import CardActionBar from "../../../components/card/CardActionBar.svelte";
+  import CardActionBar from "$lib/components/card/CardActionBar.svelte";
   import type { MediaCardProps } from "./models/MediaCardProps";
 
   const {

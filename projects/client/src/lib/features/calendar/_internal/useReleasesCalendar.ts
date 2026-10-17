@@ -9,7 +9,7 @@ import {
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map, type Observable } from 'rxjs';
-import type { FilterParams } from '../../../requests/models/FilterParams.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import { filterByEpisodeType } from '../filterByEpisodeType.ts';
 import type { Calendar } from '../models/Calendar.ts';

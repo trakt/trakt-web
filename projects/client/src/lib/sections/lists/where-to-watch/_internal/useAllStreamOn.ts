@@ -6,7 +6,7 @@ import { streamAllShowQuery } from '$lib/requests/queries/shows/streamAllShowQue
 import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map, Observable } from 'rxjs';
-import type { MetaInfoProps } from '../../../summary/components/media/useMediaMetaInfo.ts';
+import type { MetaInfoProps } from '$lib/sections/summary/components/media/useMediaMetaInfo.ts';
 import type { NamedServiceOptions } from './models/NamedServiceOptions.ts';
 
 function mapToQuery(props: MetaInfoProps) {

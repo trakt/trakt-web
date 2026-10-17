@@ -1,6 +1,6 @@
 import type { CreateInfiniteQueryOptions } from '../types.ts';
 import type { InfiniteData } from '@tanstack/query-core';
-import type { Paginatable } from '../../../requests/models/Paginatable.ts';
+import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 
 export type InfiniteQuery<T> = CreateInfiniteQueryOptions<
   Paginatable<T>,

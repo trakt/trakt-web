@@ -8,7 +8,7 @@ import { parentalGuideFilters } from '$lib/features/filters/parentalGuideFilters
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
-import { toPercentage } from '../../../utils/formatting/number/toPercentage.ts';
+import { toPercentage } from '$lib/utils/formatting/number/toPercentage.ts';
 import { generateCountryOptions } from '../generateCountryOptions.ts';
 import { generateRegionOptions } from './generateRegionOptions.ts';
 import { generateRuntimeOptions } from './generateRuntimeOptions.ts';

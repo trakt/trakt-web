@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
-  import ExternalLinkAction from "../../../_internal/ExternalLinkAction.svelte";
+  import ExternalLinkAction from "$lib/sections/summary/components/_internal/ExternalLinkAction.svelte";
 
   const { person }: { person: PersonSummary } = $props();
 

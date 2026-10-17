@@ -3,7 +3,7 @@ import { currentUserFollowRequestsQuery } from '$lib/features/auth/queries/curre
 import { followingQuery } from '$lib/requests/queries/users/followingQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map } from 'rxjs';
-import { followersQuery } from '../../../requests/queries/users/followersQuery.ts';
+import { followersQuery } from '$lib/requests/queries/users/followersQuery.ts';
 import type { ProfileSocialListType } from '../models/ProfileSocialListType.ts';
 
 export function useFollowing(slug: string, type: ProfileSocialListType) {

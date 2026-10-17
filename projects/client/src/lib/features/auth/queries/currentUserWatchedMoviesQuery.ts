@@ -4,8 +4,8 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../../requests/api.ts';
-import { time } from '../../../utils/timing/time.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { WatchedMediaSchema } from './_internal/WatchedHistorySchema.ts';
 import { getLastWatchedAt } from './_internal/getLastWatchedAt.ts';
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import type { MovieProgressEntry } from '../../../models/MovieProgressEntry.ts';
-import type { UpNextEntry } from '../../../models/UpNextEntry.ts';
+import type { MovieProgressEntry } from '$lib/requests/models/MovieProgressEntry.ts';
+import type { UpNextEntry } from '$lib/requests/models/UpNextEntry.ts';
 import { interleaveMediaProgress } from './interleaveMediaProgress.ts';
 
 const createContinueMovie = (

@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UrlBuilder } from '../../../utils/url/UrlBuilder.ts';
+import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { useBotContext } from '../../bot-verification/stores/useBotContext.ts';
 import { useAuth } from './useAuth.ts';
 

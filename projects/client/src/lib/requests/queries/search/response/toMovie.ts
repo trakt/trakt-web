@@ -1,5 +1,5 @@
-import { unixToDate } from '../../../../utils/date/unixToDate.ts';
-import type { MovieSchema } from '../../../search/schema/MovieSchema.ts';
+import { unixToDate } from '$lib/utils/date/unixToDate.ts';
+import type { MovieSchema } from '$lib/requests/search/schema/MovieSchema.ts';
 import { toCommonMedia } from './toCommonMedia.ts';
 
 export function toMovie(input: MovieSchema & { slug: string }) {

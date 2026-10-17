@@ -1,4 +1,4 @@
-import type { StreamingServiceOptions } from '../../../../../../lib/requests/models/StreamingServiceOptions.ts';
+import type { StreamingServiceOptions } from '$lib/requests/models/StreamingServiceOptions.ts';
 
 export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
   'onDemand': [

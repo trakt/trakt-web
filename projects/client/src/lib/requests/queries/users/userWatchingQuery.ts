@@ -11,7 +11,7 @@ import {
 } from '$lib/requests/models/NowPlayingItem.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { WatchingResponse } from '@trakt/api';
-import { assertDefined } from '../../../utils/assert/assertDefined.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 
 type UserProfileParams = { slug: string } & ApiParams;
 

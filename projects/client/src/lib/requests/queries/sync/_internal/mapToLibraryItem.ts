@@ -1,9 +1,9 @@
 import type { CollectionResponse } from '@trakt/api';
-import { assertDefined } from '../../../../utils/assert/assertDefined.ts';
-import { mapToEpisodeEntry } from '../../../_internal/mapToEpisodeEntry.ts';
-import { mapToMovieEntry } from '../../../_internal/mapToMovieEntry.ts';
-import { mapToShowEntry } from '../../../_internal/mapToShowEntry.ts';
-import type { LibraryItem } from '../../../models/LibraryItem.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
+import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
+import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
+import type { LibraryItem } from '$lib/requests/models/LibraryItem.ts';
 
 export function mapToLibraryItem(item: CollectionResponse): LibraryItem {
   if (item.type === 'show') {

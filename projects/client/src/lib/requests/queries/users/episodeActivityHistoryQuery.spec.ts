@@ -3,7 +3,7 @@ import { createTestBedInfiniteQuery } from '$test/beds/query/createTestBedInfini
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { mapToEntries } from '$test/utils/mapToEntries.ts';
 import { describe, expect, it } from 'vitest';
-import { EpisodeActivityHistoryMappedMock } from '../../../../mocks/data/users/mapped/EpisodeActivityHistoryMappedMock.ts';
+import { EpisodeActivityHistoryMappedMock } from '$mocks/data/users/mapped/EpisodeActivityHistoryMappedMock.ts';
 import { episodeActivityHistoryQuery } from './episodeActivityHistoryQuery.ts';
 
 describe('episodeActivityHistoryQuery', () => {

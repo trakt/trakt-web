@@ -5,7 +5,7 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import ExternalLinkIcon from "../../../components/icons/ExternalLinkIcon.svelte";
+  import ExternalLinkIcon from "$lib/components/icons/ExternalLinkIcon.svelte";
 
   const { slug, source }: { slug: string; source: string } = $props();
 

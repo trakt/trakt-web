@@ -1,6 +1,6 @@
-import type { MediaType } from '../../../models/MediaType.ts';
-import type { MovieSchema } from '../../../search/schema/MovieSchema.ts';
-import type { ShowSchema } from '../../../search/schema/ShowSchema.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { MovieSchema } from '$lib/requests/search/schema/MovieSchema.ts';
+import type { ShowSchema } from '$lib/requests/search/schema/ShowSchema.ts';
 import { toMovie } from './toMovie.ts';
 import { toShow } from './toShow.ts';
 

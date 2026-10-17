@@ -3,7 +3,7 @@ import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/res
 import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_SEARCH_LIMIT } from '../../../utils/constants.ts';
+import { DEFAULT_SEARCH_LIMIT } from '$lib/utils/constants.ts';
 import { searchMediaQuery } from './searchMediaQuery.ts';
 
 describe('searchMediaQuery', () => {

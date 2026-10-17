@@ -1,5 +1,5 @@
-import type { MovieSchema } from '../../../search/schema/MovieSchema.ts';
-import type { ShowSchema } from '../../../search/schema/ShowSchema.ts';
+import type { MovieSchema } from '$lib/requests/search/schema/MovieSchema.ts';
+import type { ShowSchema } from '$lib/requests/search/schema/ShowSchema.ts';
 import { toIds } from './toIds.ts';
 import { toImageArray } from './toImageArray.ts';
 

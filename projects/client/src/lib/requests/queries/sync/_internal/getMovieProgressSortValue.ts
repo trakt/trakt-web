@@ -1,5 +1,5 @@
 import type { UpNextSortBy } from '$lib/sections/lists/progress/UpNextSortBy.ts';
-import type { MovieProgressEntry } from '../../../models/MovieProgressEntry.ts';
+import type { MovieProgressEntry } from '$lib/requests/models/MovieProgressEntry.ts';
 
 export function getMovieProgressSortValue(
   entry: MovieProgressEntry,

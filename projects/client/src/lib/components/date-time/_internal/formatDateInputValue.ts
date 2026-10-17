@@ -1,5 +1,5 @@
-import { formatLocalDate } from '../../../utils/date/formatLocalDate.ts';
-import { formatLocalDateTime } from '../../../utils/date/formatLocalDateTime.ts';
+import { formatLocalDate } from '$lib/utils/date/formatLocalDate.ts';
+import { formatLocalDateTime } from '$lib/utils/date/formatLocalDateTime.ts';
 import type { DateInputType } from './DateInputProps.ts';
 
 export function formatDateInputValue(

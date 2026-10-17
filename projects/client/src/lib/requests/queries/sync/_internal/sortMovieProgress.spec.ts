@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { MovieProgressEntry } from '../../../models/MovieProgressEntry.ts';
+import type { MovieProgressEntry } from '$lib/requests/models/MovieProgressEntry.ts';
 import { sortMovieProgress } from './sortMovieProgress.ts';
 
 const createMovie = (

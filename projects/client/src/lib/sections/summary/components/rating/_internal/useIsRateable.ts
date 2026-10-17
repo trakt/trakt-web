@@ -1,7 +1,7 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { map } from 'rxjs';
-import { useIsWatched } from '../../../../media-actions/mark-as-watched/useIsWatched.ts';
+import { useIsWatched } from '$lib/sections/media-actions/mark-as-watched/useIsWatched.ts';
 
 export type IsRateableProps = ExtendedMediaStoreProps;
 

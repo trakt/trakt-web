@@ -11,7 +11,7 @@ import {
   userRatingsQuery,
 } from '$lib/requests/queries/users/userRatingsQuery.ts';
 import { map } from 'rxjs';
-import { usePaginatedListQuery } from '../../../lists/stores/usePaginatedListQuery.ts';
+import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 
 export type ActivityEntry = UserCommentEntry | UserRatingEntry;
 

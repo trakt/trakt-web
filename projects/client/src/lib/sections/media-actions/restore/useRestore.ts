@@ -6,7 +6,7 @@ import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { restoreShowCalendarRequest } from '$lib/requests/queries/users/restoreShowCalendarRequest.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
-import { restoreShowProgressRequest } from '../../../requests/queries/users/restoreShowProgressRequest.ts';
+import { restoreShowProgressRequest } from '$lib/requests/queries/users/restoreShowProgressRequest.ts';
 import { toBulkPayload } from '../_internal/toBulkPayload.ts';
 
 export type RestoreStoreProps = {

@@ -4,7 +4,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
 import { z } from 'zod';
-import { time } from '../../../utils/timing/time.ts';
+import { time } from '$lib/utils/timing/time.ts';
 
 export const UserNetworkSchema = z.object({
   following: z.array(UserProfileSchema),

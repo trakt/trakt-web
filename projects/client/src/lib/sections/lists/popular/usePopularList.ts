@@ -11,8 +11,8 @@ import {
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
 import { addYear } from '$lib/utils/date/addYear.ts';
-import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
-import { mediaPopularQuery } from '../../../requests/queries/media/mediaPopularQuery.ts';
+import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
+import { mediaPopularQuery } from '$lib/requests/queries/media/mediaPopularQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 
 export type PopularEntry = ShowEntry | MovieEntry;

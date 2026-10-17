@@ -6,7 +6,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ListPrivacy } from '$lib/requests/models/ListPrivacy.ts';
 import { createListRequest } from '$lib/requests/queries/users/createListRequest.ts';
 import type { SortDirection } from '../models/SortDirection.ts';
-import { updateListRequest } from '../../../../requests/queries/users/updateListRequest.ts';
+import { updateListRequest } from '$lib/requests/queries/users/updateListRequest.ts';
 
 type SaveListProps = {
   name: string;

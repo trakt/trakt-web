@@ -1,6 +1,6 @@
 import { BehaviorSubject, distinctUntilChanged } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
-import { time } from '../../../utils/timing/time.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import type { TraktButtonProps } from '../TraktButtonProps.ts';
 
 type ButtonColor = Exclude<TraktButtonProps['color'], Nil>;

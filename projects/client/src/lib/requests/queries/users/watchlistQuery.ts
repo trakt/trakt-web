@@ -10,8 +10,8 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
-import type { SortBy } from '../../../sections/lists/user/models/SortBy.ts';
-import type { SortDirection } from '../../../sections/lists/user/models/SortDirection.ts';
+import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
+import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { ListItemSchema } from '../../models/ListItem.ts';
 
 type WatchlistParams =

@@ -2,7 +2,7 @@
   import * as m from "$lib/features/i18n/messages";
   import type { YirCompany } from "$lib/requests/models/YirDetail";
   import { formatNumber } from "$lib/utils/format/formatNumber";
-  import { yirMediaUnit } from "../../../_internal/yirMediaUnit";
+  import { yirMediaUnit } from "$lib/sections/yir/_internal/yirMediaUnit";
   import YirCountUp from "./YirCountUp.svelte";
   import YirRankBars from "./YirRankBars.svelte";
   import YirScene from "./YirScene.svelte";
