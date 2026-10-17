@@ -1,9 +1,6 @@
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/assets.ts';
-import { findDefined } from '$lib/utils/string/findDefined.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { MediaEntry } from '../models/MediaEntry.ts';
-import { mediumUrl } from './mediumUrl.ts';
-import { thumbUrl } from './thumbUrl.ts';
+import { toImageUrls } from './toImageUrls.ts';
 
 type Images = {
   poster?: string[];
@@ -12,20 +9,9 @@ type Images = {
 export function mapToPoster(
   images: Images | Nil,
 ): MediaEntry['poster'] {
-  const posterCandidate = findDefined(
-    ...(images?.poster ?? []),
-  );
-
-  return {
-    url: {
-      medium: prependHttps(
-        mediumUrl(posterCandidate),
-        MEDIA_POSTER_PLACEHOLDER,
-      ),
-      thumb: prependHttps(
-        thumbUrl(posterCandidate),
-        MEDIA_POSTER_PLACEHOLDER,
-      ),
-    },
-  };
+  return toImageUrls({
+    candidates: images?.poster,
+    mediumPlaceholder: MEDIA_POSTER_PLACEHOLDER,
+    thumbPlaceholder: MEDIA_POSTER_PLACEHOLDER,
+  });
 }
