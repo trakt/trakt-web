@@ -16,6 +16,7 @@ import {
   scan,
   startWith,
 } from 'rxjs';
+import { mergeMixtapeFits } from './_internal/mergeMixtapeFits.ts';
 import { scoreLocalFits } from './_internal/scoreLocalFits.ts';
 import { toSearchTerms } from './_internal/toSearchTerms.ts';
 import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
@@ -153,12 +154,7 @@ export function useMixtape(
     ),
   );
   const fits$ = combineLatest([localFits$, deepFits$]).pipe(
-    map(([local, deepFits]) =>
-      dedupe(
-        ({ id }) => id,
-        [...(local ?? []), ...deepFits.map(({ id, score }) => ({ id, score }))],
-      )
-    ),
+    map(([local, deepFits]) => mergeMixtapeFits(local ?? [], deepFits)),
   );
   const isFitsSettling$ = combineLatest([request$, localFits$, deep]).pipe(
     map(([{ picks }, local, query]) =>
