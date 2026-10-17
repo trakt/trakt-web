@@ -9,6 +9,7 @@ type GetMediaProps = {
   limit: number;
   types: MediaType[];
   config: TypesenseConfig;
+  signal?: AbortSignal;
 };
 
 export async function getMedia({
@@ -16,6 +17,7 @@ export async function getMedia({
   limit,
   types,
   config,
+  signal,
 }: GetMediaProps): Promise<SearchResultResponse[]> {
   const { hits } = await lookup({
     key: config.keys.media.default,
@@ -23,6 +25,7 @@ export async function getMedia({
     query,
     limit,
     types,
+    signal,
   });
 
   return hits.flatMap((hit) => {

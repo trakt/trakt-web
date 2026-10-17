@@ -17,6 +17,7 @@ type SearchParams = {
   limit: number;
   type?: MediaType;
   exact: boolean;
+  signal?: AbortSignal;
 } & ApiParams;
 
 const MediaResultSchema = z
@@ -66,6 +67,7 @@ const searchRequest = ({
   limit,
   exact,
   fetch,
+  signal,
 }: SearchParams) => {
   const queryParams = {
     query,
@@ -92,6 +94,7 @@ const searchRequest = ({
     ...queryParams,
     config,
     types: types.split(',') as MediaType[],
+    signal,
   })
     .then((body) => ({
       body,

@@ -3,12 +3,14 @@ import { useQueryClient } from '$lib/features/query/_internal/queryClientContext
 import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { QueryClient, QueryKey } from '@tanstack/query-core';
 import { BehaviorSubject, combineLatest, from, merge, of } from 'rxjs';
 import {
   catchError,
   debounceTime,
   distinctUntilChanged,
   filter,
+  finalize,
   ignoreElements,
   map,
   shareReplay,
@@ -43,13 +45,25 @@ const QUERY_DEBOUNCE = time.seconds(0.13);
 // keyboard exceeds 250ms, so sharing one reports a search per character.
 const TRACK_DEBOUNCE = time.seconds(1);
 
-function modeToQuery(
-  query: string,
-  mode: SearchMode,
-  config: TypesenseConfig,
-  exact: boolean,
-) {
+type ModeQueryProps = {
+  query: string;
+  mode: SearchMode;
+  config: TypesenseConfig;
+  exact: boolean;
+  signal: AbortSignal;
+};
+
+function withSignal(signal: AbortSignal) {
+  return ((input, init) =>
+    globalThis.fetch(input, {
+      ...init,
+      signal: init?.signal ? AbortSignal.any([init.signal, signal]) : signal,
+    })) as typeof fetch;
+}
+
+function modeToQuery({ query, mode, config, exact, signal }: ModeQueryProps) {
   const limit = DEFAULT_SEARCH_LIMIT;
+  const fetch = withSignal(signal);
 
   switch (mode) {
     case 'media':
@@ -62,6 +76,8 @@ function modeToQuery(
         config,
         limit,
         exact,
+        signal,
+        fetch,
       }) as CreateQueryOptions<SearchResponse>;
     }
     case 'people':
@@ -69,18 +85,27 @@ function modeToQuery(
         query,
         config,
         limit,
+        signal,
+        fetch,
       }) as CreateQueryOptions<SearchResponse>;
     case 'lists':
       return searchListsQuery({
         query,
         limit,
+        fetch,
       }) as CreateQueryOptions<SearchResponse>;
     default:
       throw new Error(`Unsupported search mode: ${mode}`);
   }
 }
 
-function modeToTrendingQuery(query: string, mode: SearchMode) {
+type TrendingQueryProps = {
+  query: string;
+  mode: SearchMode;
+  signal: AbortSignal;
+};
+
+function modeToTrendingQuery({ query, mode, signal }: TrendingQueryProps) {
   switch (mode) {
     case 'media':
     case 'movie':
@@ -89,11 +114,29 @@ function modeToTrendingQuery(query: string, mode: SearchMode) {
       return searchTrendingQuery({
         query,
         type,
+        fetch: withSignal(signal),
       }) as CreateQueryOptions<TrendingSearchesResult>;
     }
     default:
       throw new Error(`Unsupported trending search mode: ${mode}`);
   }
+}
+
+type CancelSearchQueriesProps = {
+  client: QueryClient;
+  controller: AbortController;
+  queryKeys: ReadonlyArray<QueryKey>;
+};
+
+function cancelSearchQueries({
+  client,
+  controller,
+  queryKeys,
+}: CancelSearchQueriesProps) {
+  queryKeys.forEach((queryKey) => {
+    client.cancelQueries({ queryKey, exact: true });
+  });
+  controller.abort();
 }
 
 export function useSearch() {
@@ -135,9 +178,15 @@ export function useSearch() {
     client == null
       ? of(null)
       : searchIntent$.pipe(
-          switchMap(([rawTerm, currentMode]) => {
-            const term = rawTerm.toLowerCase().trim();
-
+          map(([rawTerm, currentMode]) => ({
+            term: rawTerm.toLowerCase().trim(),
+            mode: currentMode,
+          })),
+          distinctUntilChanged(
+            (previous, next) =>
+              previous.term === next.term && previous.mode === next.mode,
+          ),
+          switchMap(({ term, mode: currentMode }) => {
             if (term.length === 0) {
               return of(null);
             }
@@ -146,25 +195,45 @@ export function useSearch() {
 
             return from(ensureFreshSearchKeys(config)).pipe(
               switchMap((freshConfig) => {
-                const searchQuery = client.fetchQuery(
-                  modeToQuery(term, currentMode, freshConfig, false),
-                );
+                const controller = new AbortController();
+                const { signal } = controller;
+                const searchOptions = modeToQuery({
+                  query: term,
+                  mode: currentMode,
+                  config: freshConfig,
+                  exact: false,
+                  signal,
+                });
 
                 if (currentMode === 'people' || currentMode === 'lists') {
-                  return searchQuery;
+                  return from(client.fetchQuery(searchOptions)).pipe(
+                    finalize(() =>
+                      cancelSearchQueries({
+                        client,
+                        controller,
+                        queryKeys: [searchOptions.queryKey],
+                      }),
+                    ),
+                  );
                 }
 
-                const trendingQuery = client.fetchQuery(
-                  modeToTrendingQuery(term, currentMode),
-                );
+                const trendingOptions = modeToTrendingQuery({
+                  query: term,
+                  mode: currentMode,
+                  signal,
+                });
+                const exactOptions = modeToQuery({
+                  query: term,
+                  mode: currentMode,
+                  config: freshConfig,
+                  exact: true,
+                  signal,
+                });
 
-                const exactQuery = client.fetchQuery(
-                  modeToQuery(term, currentMode, freshConfig, true),
-                );
                 return combineLatest([
-                  exactQuery,
-                  searchQuery,
-                  trendingQuery,
+                  client.fetchQuery(exactOptions),
+                  client.fetchQuery(searchOptions),
+                  client.fetchQuery(trendingOptions),
                 ]).pipe(
                   map(([exactResults, searchResults, trendingResults]) => {
                     // Only unambiguous exact hits lead; the deep catalog tail trails
@@ -184,6 +253,17 @@ export function useSearch() {
                       ),
                     };
                   }),
+                  finalize(() =>
+                    cancelSearchQueries({
+                      client,
+                      controller,
+                      queryKeys: [
+                        exactOptions.queryKey,
+                        searchOptions.queryKey,
+                        trendingOptions.queryKey,
+                      ],
+                    }),
+                  ),
                 );
               }),
               // Contain a failed lookup to this search. Without this the error
