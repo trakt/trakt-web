@@ -4,7 +4,7 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { UserNote } from "$lib/requests/models/UserNote";
   import DeleteNoteButton from "./DeleteNoteButton.svelte";
-  import EditNoteButton from "./EditNoteButton.svelte";
+  import EditActionItem from "$lib/sections/summary/components/_internal/EditActionItem.svelte";
 
   type NoteActionsProps = {
     note: UserNote;
@@ -21,7 +21,11 @@
   title={m.button_label_popup_menu_notes()}
 >
   {#snippet items()}
-    <EditNoteButton onclick={onEdit} />
+    <EditActionItem
+      label={m.button_label_edit_note()}
+      text={m.button_text_edit_note()}
+      onclick={onEdit}
+    />
     <DeleteNoteButton {note} {media} />
   {/snippet}
 </PopupMenu>

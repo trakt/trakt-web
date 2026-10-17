@@ -3,8 +3,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { CommentableMediaType } from "$lib/requests/models/CommentableMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
+  import EditActionItem from "$lib/sections/summary/components/_internal/EditActionItem.svelte";
   import DeleteCommentButton from "./_internal/comment-actions/DeleteCommentButton.svelte";
-  import EditCommentButton from "./_internal/comment-actions/EditCommentButton.svelte";
   import ReportCommentButton from "./_internal/comment-actions/ReportCommentButton.svelte";
 
   type CommentActionsProps = {
@@ -24,7 +24,11 @@
 >
   {#snippet items()}
     {#if isOwnComment}
-      <EditCommentButton onclick={onEdit} />
+      <EditActionItem
+        label={m.button_label_edit_comment()}
+        text={m.button_text_edit_comment()}
+        onclick={onEdit}
+      />
       <DeleteCommentButton {comment} {type} />
     {:else}
       <ReportCommentButton {comment} />
