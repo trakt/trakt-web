@@ -3,6 +3,10 @@ import type { ActionReturn } from 'svelte/action';
 
 type Callback = () => void;
 
+type WhenInViewportParams =
+  | Callback
+  | { readonly callback: Callback; readonly rootMargin?: string };
+
 type Pool = {
   readonly observer: IntersectionObserver;
   readonly callbacks: WeakMap<Element, Callback>;
@@ -34,13 +38,17 @@ function getPool(options: IntersectionObserverInit): Pool {
 
 export function whenInViewport(
   element: HTMLElement,
-  callback: Callback,
+  params: WhenInViewportParams,
 ): ActionReturn<undefined> {
   if (!element) {
     return { destroy: NOOP_FN };
   }
 
-  const pool = getPool({ threshold: 0.1 });
+  const { callback, rootMargin } = typeof params === 'function'
+    ? { callback: params, rootMargin: undefined }
+    : params;
+
+  const pool = getPool({ threshold: 0.1, rootMargin });
   pool.callbacks.set(element, callback);
   pool.observer.observe(element);
 
