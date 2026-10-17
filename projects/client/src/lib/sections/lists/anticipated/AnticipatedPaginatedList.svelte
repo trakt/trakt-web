@@ -18,7 +18,7 @@
 </script>
 
 <DrilledMediaList
-  id="view-all-anticipated-${type}"
+  id="view-all-anticipated-{type}"
   {title}
   {type}
   filter={$filterMap}
