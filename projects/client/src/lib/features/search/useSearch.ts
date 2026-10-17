@@ -38,7 +38,7 @@ import { splitExactByConfidence } from './_internal/splitExactByConfidence.ts';
 import { ensureFreshSearchKeys } from './ensureFreshSearchKeys.ts';
 import type { SearchResponse } from './models/SearchResponse.ts';
 
-const QUERY_DEBOUNCE = 250;
+const QUERY_DEBOUNCE = time.seconds(0.13);
 // Deliberately longer than the query debounce: a keystroke gap on a touch
 // keyboard exceeds 250ms, so sharing one reports a search per character.
 const TRACK_DEBOUNCE = time.seconds(1);
