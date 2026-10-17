@@ -1,7 +1,7 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { StreamOn } from '$lib/requests/models/StreamOn.ts';
 import { streamEpisodeQuery } from '$lib/requests/queries/episode/streamEpisodeQuery.ts';
-import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferredStreamingService.ts';
+import { toStreamOn } from '$lib/stores/toStreamOn.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { combineLatest, map, type Observable } from 'rxjs';
@@ -18,20 +18,13 @@ export function useEpisodeStreamOn(params$: Observable<EpisodeSummaryParams>) {
 
   return {
     streamOn: combineLatest([query, favorites, country]).pipe(
-      map(([$query, $favorites, $country]): StreamOn | undefined => {
-        if (!$query.data) {
-          return;
-        }
-
-        return {
+      map(([$query, $favorites, $country]): StreamOn | undefined =>
+        toStreamOn({
           services: $query.data,
-          preferred: findPreferredStreamingService({
-            services: $query.data,
-            favorites: $favorites,
-            countryCode: $country,
-          }),
-        };
-      }),
+          favorites: $favorites,
+          countryCode: $country,
+        })
+      ),
     ),
     isLoading: query.pipe(map(toLoadingState)),
   };

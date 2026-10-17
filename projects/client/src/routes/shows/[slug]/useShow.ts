@@ -13,7 +13,7 @@ import { showSentimentQuery } from '$lib/requests/queries/shows/showSentimentQue
 import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { streamShowQuery } from '$lib/requests/queries/shows/streamShowQuery.ts';
-import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferredStreamingService.ts';
+import { toStreamOn } from '$lib/stores/toStreamOn.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
@@ -106,20 +106,13 @@ export function useShow(slug$: Observable<string>) {
       ),
     ),
     streamOn: combineLatest([streamOnQuery, favorites, country]).pipe(
-      map(([$streamOn, $favorites, $country]) => {
-        if (!$streamOn.data) {
-          return;
-        }
-
-        return {
+      map(([$streamOn, $favorites, $country]) =>
+        toStreamOn({
           services: $streamOn.data,
-          preferred: findPreferredStreamingService({
-            services: $streamOn.data,
-            favorites: $favorites,
-            countryCode: $country,
-          }),
-        };
-      }),
+          favorites: $favorites,
+          countryCode: $country,
+        })
+      ),
     ),
   };
 }
