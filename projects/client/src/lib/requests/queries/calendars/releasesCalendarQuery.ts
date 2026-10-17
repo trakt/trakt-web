@@ -1,17 +1,11 @@
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
-import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
-import { mapToUpcomingEpisodeEntry } from '$lib/requests/_internal/mapToUpcomingEpisodeEntry.ts';
+import { mapToCalendarMedia } from '$lib/requests/_internal/mapToCalendarMedia.ts';
 import { type ApiParams, unauthorizedApi } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type {
-  CalendarMovieResponse,
-  CalendarShowResponse,
-  HotReleaseResponse,
-} from '@trakt/api';
 import { z } from 'zod';
 import { UpcomingEpisodeEntrySchema } from './upcomingEpisodesQuery.ts';
 
@@ -30,18 +24,6 @@ const ReleasesCalendarEntrySchema = z.union([
 ]);
 
 export type ReleasesCalendarEntry = z.infer<typeof ReleasesCalendarEntrySchema>;
-
-function isCalendarMovie(
-  entry: HotReleaseResponse,
-): entry is CalendarMovieResponse {
-  return 'movie' in entry;
-}
-
-function isCalendarShow(
-  entry: HotReleaseResponse,
-): entry is CalendarShowResponse {
-  return 'episode' in entry;
-}
 
 const releasesCalendarRequest = (
   { fetch, startDate, days, type, filter }: ReleasesCalendarParams,
@@ -74,20 +56,7 @@ export const releasesCalendarQuery = defineQuery({
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: releasesCalendarRequest,
-  mapper: (response) => {
-    const movies = response.body
-      .filter(isCalendarMovie)
-      .map((entry) => mapToMovieEntry(entry.movie));
-
-    const episodes = response.body
-      .filter(isCalendarShow)
-      .map(mapToUpcomingEpisodeEntry);
-
-    return [...episodes, ...movies]
-      .toSorted((a, b) =>
-        a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime()
-      );
-  },
+  mapper: (response) => mapToCalendarMedia(response.body),
   schema: ReleasesCalendarEntrySchema.array(),
   ttl: time.minutes(30),
   refetchOnWindowFocus: true,
