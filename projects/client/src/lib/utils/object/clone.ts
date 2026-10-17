@@ -1,8 +1,5 @@
 export function clone<T>(obj: T): T {
   if (obj === null || typeof obj !== 'object') {
-    if (typeof obj === 'bigint') {
-      return obj;
-    }
     return obj;
   }
 
