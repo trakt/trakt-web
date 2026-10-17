@@ -1,10 +1,12 @@
+import { isHttpUrl } from '$lib/utils/url/isHttpUrl.ts';
+
 type WarmPosterProps = {
   posterUrl: string;
   fetch: typeof globalThis.fetch;
 };
 
 export function warmPoster({ posterUrl, fetch }: WarmPosterProps) {
-  if (!/^https?:\/\//.test(posterUrl)) {
+  if (!isHttpUrl(posterUrl)) {
     return Promise.resolve();
   }
 
