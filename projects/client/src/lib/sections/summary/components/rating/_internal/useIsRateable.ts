@@ -2,12 +2,13 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { map } from 'rxjs';
 import { useIsWatched } from '$lib/sections/media-actions/mark-as-watched/useIsWatched.ts';
+import { toArray } from '$lib/utils/array/toArray.ts';
 
 export type IsRateableProps = ExtendedMediaStoreProps;
 
 export function useIsRateable(props: IsRateableProps) {
   const { type } = props;
-  const media = Array.isArray(props.media) ? props.media : [props.media];
+  const media = toArray(props.media);
   const { history } = useUser();
 
   if (type === 'show') {

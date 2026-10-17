@@ -5,12 +5,13 @@ import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import { useOfflineActions } from '$lib/features/offline/useOfflineActions.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { combineLatest, map } from 'rxjs';
+import { toArray } from '$lib/utils/array/toArray.ts';
 
 export type IsWatchlistedStoreProps = MediaStoreProps;
 
 export function useIsWatchlisted(props: IsWatchlistedStoreProps) {
   const { type } = props;
-  const media = Array.isArray(props.media) ? props.media : [props.media];
+  const media = toArray(props.media);
   const { watchlist } = useUser();
   const { actions } = useOfflineActions();
 
