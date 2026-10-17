@@ -2,11 +2,13 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
+import { server } from '$mocks/server.ts';
 import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
+import { respondWithMalformedJson } from '$test/beds/request/respondWithMalformedJson.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
-import { firstValueFrom } from 'rxjs';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { firstValueFrom, type Observable } from 'rxjs';
+import { beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import {
   type MarkAsWatchedStoreProps,
   useMarkAsWatched,
@@ -19,6 +21,14 @@ vi.mock('$lib/requests/sync/removeRatingRequest.ts', () => ({
 vi.mock('$lib/requests/sync/removeWatchedRequest.ts', () => ({
   removeWatchedRequest: () => Promise.resolve(true),
 }));
+
+function recordEmissions<T>(source: Observable<T>) {
+  const values: T[] = [];
+  const subscription = source.subscribe((value) => values.push(value));
+  onTestFinished(() => subscription.unsubscribe());
+
+  return values;
+}
 
 describe('useMarkAsWatched', () => {
   beforeEach(() => {
@@ -115,6 +125,107 @@ describe('useMarkAsWatched', () => {
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(true);
+    });
+  });
+
+  describe('pending state', () => {
+    it('should show a movie as watched while the add is in flight', async () => {
+      const { isWatched, markAsWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          type: 'movie' as const,
+          media: { id: 1, effectiveReleaseDate: new Date('2020-01-01') },
+        }),
+      );
+
+      expect(await waitForEmission(isWatched, 2)).toBe(false);
+
+      const emissions = recordEmissions(isWatched);
+      await markAsWatched();
+
+      expect(emissions).toContain(true);
+    });
+
+    it('should show an episode as watched while the add is in flight', async () => {
+      const { isWatched, markAsWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          type: 'episode' as const,
+          media: {
+            id: 2,
+            season: 1,
+            number: 2,
+            effectiveReleaseDate: new Date('2020-01-01'),
+          },
+          show: ShowSiloMappedMock,
+        }),
+      );
+
+      expect(await waitForEmission(isWatched, 2)).toBe(false);
+
+      const emissions = recordEmissions(isWatched);
+      await markAsWatched();
+
+      expect(emissions).toContain(true);
+    });
+
+    it('should show a movie as not watched while the remove is in flight', async () => {
+      const { isWatched, removeWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          type: 'movie' as const,
+          media: MovieHereticMappedMock,
+        }),
+      );
+
+      expect(await waitForEmission(isWatched, 2)).toBe(true);
+
+      const removal = removeWatched();
+      expect(await firstValueFrom(isWatched)).toBe(false);
+
+      await removal;
+    });
+
+    it('should show a show as not watched while the remove is in flight', async () => {
+      const { isWatched, removeWatched } = await renderStore(() =>
+        useMarkAsWatched({ type: 'show' as const, media: ShowDevsMappedMock }),
+      );
+
+      expect(await waitForEmission(isWatched, 2)).toBe(true);
+
+      const removal = removeWatched();
+      expect(await firstValueFrom(isWatched)).toBe(false);
+
+      await removal;
+    });
+
+    it('should NOT show a show as watched while the add is in flight', async () => {
+      const { isWatched, markAsWatched } = await renderStore(() =>
+        useMarkAsWatched({ type: 'show' as const, media: ShowSiloMappedMock }),
+      );
+
+      expect(await waitForEmission(isWatched, 2)).toBe(false);
+
+      const emissions = recordEmissions(isWatched);
+      await markAsWatched();
+
+      expect(emissions).not.toContain(true);
+    });
+
+    it('should revert to the real state when the add fails', async () => {
+      server.use(respondWithMalformedJson('http://localhost/sync/history'));
+
+      const { isWatched, markAsWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          type: 'movie' as const,
+          media: { id: 1, effectiveReleaseDate: new Date('2020-01-01') },
+        }),
+      );
+
+      expect(await waitForEmission(isWatched, 2)).toBe(false);
+
+      const emissions = recordEmissions(isWatched);
+      await expect(markAsWatched()).rejects.toThrow();
+
+      expect(emissions).toContain(true);
+      expect(await firstValueFrom(isWatched)).toBe(false);
     });
   });
 
