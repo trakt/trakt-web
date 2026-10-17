@@ -233,6 +233,32 @@
   );
 
   /*
+   * Today entry (navbar glass pill)
+   */
+  --background-today-entry: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--shade-900) 3%, transparent),
+    color-mix(in srgb, var(--shade-900) 7%, transparent)
+  );
+  --shadow-today-entry: inset 0 var(--ni-1) 0 var(--shade-10),
+    inset 0 0 0 var(--ni-1) color-mix(in srgb, var(--shade-900) 12%, transparent);
+  --shadow-today-entry-hover: inset 0 var(--ni-1) 0 var(--shade-10),
+    inset 0 0 0 var(--ni-1) color-mix(in srgb, var(--purple-500) 45%, transparent);
+  --color-today-entry-count-background: color-mix(
+    in srgb,
+    var(--purple-500) 14%,
+    transparent
+  );
+  --color-today-entry-count-ring: color-mix(
+    in srgb,
+    var(--purple-500) 40%,
+    transparent
+  );
+  --color-today-entry-count-text: var(--purple-700);
+  --color-today-entry-shine: var(--purple-400);
+  --color-today-entry-shine-core: var(--purple-600);
+
+  /*
    * Where to watch
    */
   --streaming-service-logo-filter: brightness(0);
@@ -799,6 +825,38 @@
     var(--shade-10) 8%,
     transparent
   );
+
+  /*
+   * Today entry (navbar glass pill)
+   */
+  --background-today-entry: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--shade-10) 7%, transparent),
+    color-mix(in srgb, var(--shade-10) 2.5%, transparent)
+  );
+  --shadow-today-entry: inset 0 var(--ni-1) 0
+      color-mix(in srgb, var(--shade-10) 12%, transparent),
+    inset 0 0 0 var(--ni-1) color-mix(in srgb, var(--shade-10) 8%, transparent),
+    0 var(--ni-4) var(--ni-12)
+      color-mix(in srgb, var(--shade-1000) 35%, transparent);
+  --shadow-today-entry-hover: inset 0 var(--ni-1) 0
+      color-mix(in srgb, var(--shade-10) 14%, transparent),
+    inset 0 0 0 var(--ni-1) color-mix(in srgb, var(--purple-400) 45%, transparent),
+    0 var(--ni-4) var(--ni-12)
+      color-mix(in srgb, var(--shade-1000) 35%, transparent);
+  --color-today-entry-count-background: color-mix(
+    in srgb,
+    var(--purple-500) 28%,
+    transparent
+  );
+  --color-today-entry-count-ring: color-mix(
+    in srgb,
+    var(--purple-400) 50%,
+    transparent
+  );
+  --color-today-entry-count-text: var(--purple-100);
+  --color-today-entry-shine: var(--purple-300);
+  --color-today-entry-shine-core: var(--shade-10);
 
   /*
    * Where to watch

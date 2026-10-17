@@ -16,7 +16,6 @@
   const MAX_FACES = 3;
   const MAX_POSTERS = 2;
 
-
   const { filterMap } = useFilter();
   const { titles, forYou } = $derived(
     useTodayStories({ type: "media", filter: $filterMap }),
@@ -64,29 +63,32 @@
       navigationType={DpadNavigationType.Item}
       color="inherit"
     >
-      <div class="entry-ring">
-        <span class="entry-glow" aria-hidden="true"></span>
-        <span class="entry-spin" aria-hidden="true"></span>
-        <div class="entry-body">
-          <span class="entry-sheen" aria-hidden="true"></span>
-          <div class="entry-posters">
-            {#each posters as poster (poster.key)}
-              <div class="entry-poster">
-                <CrossOriginImage src={poster.poster.url.thumb} alt="" />
-              </div>
-            {/each}
-          </div>
+      <div
+        class="entry-pill"
+        class:has-faces={faces.length > 0}
+        class:has-count={unseen.length > 0}
+      >
+        <span class="entry-shine" aria-hidden="true"></span>
 
+        <div class="entry-posters">
+          {#each posters as poster (poster.key)}
+            <div class="entry-poster">
+              <CrossOriginImage src={poster.poster.url.thumb} alt="" />
+            </div>
+          {/each}
+        </div>
+
+        {#if faces.length > 0}
           <div class="entry-faces">
             <TodayFaces users={faces} size="small" />
           </div>
+        {/if}
 
-          <span class="bold entry-label">{m.list_title_today()}</span>
+        <span class="entry-label">{m.list_title_today()}</span>
 
-          {#if unseen.length > 0}
-            <span class="bold entry-badge">{unseen.length}</span>
-          {/if}
-        </div>
+        {#if unseen.length > 0}
+          <span class="bold entry-badge">{unseen.length}</span>
+        {/if}
       </div>
     </Link>
   </div>
@@ -96,151 +98,100 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-today-navbar-entry {
-    --entry-ring: conic-gradient(
-      from 210deg,
-      var(--purple-300),
-      var(--purple-600),
-      var(--purple-400),
-      var(--purple-300)
-    );
-    --entry-size: var(--ni-40);
-    --entry-cycle: calc(var(--transition-duration-short) * 20);
-    --entry-cycle-delay: calc(var(--transition-duration-short) * 3);
-    --entry-cycle-count: 3;
+    --entry-size: var(--segmented-select-segment-height);
+    --entry-count-size: var(--ni-20);
+    --entry-shine-cycle: 60s;
+    --entry-shine-delay: 3s;
 
     display: flex;
 
-    &[data-seen="true"] {
-      --entry-ring: var(--color-border);
-    }
+    .entry-pill {
+      --entry-inset-start: var(--ni-12);
+      --entry-inset-end: var(--ni-12);
 
-    .entry-ring {
       position: relative;
-      isolation: isolate;
-
       display: inline-flex;
-      box-sizing: border-box;
-      height: var(--entry-size);
-      padding: var(--border-thickness-xs);
-
-      border-radius: var(--border-radius-xxl);
-      background: var(--entry-ring);
-    }
-
-    .entry-glow,
-    .entry-spin,
-    .entry-sheen {
-      display: none;
-      pointer-events: none;
-    }
-
-    &[data-seen="false"] {
-      .entry-ring {
-        background: none;
-      }
-
-      .entry-glow {
-        display: block;
-        position: absolute;
-        inset: calc(-1 * var(--ni-2));
-        z-index: -1;
-
-        border-radius: inherit;
-        background: var(--entry-ring);
-        filter: blur(var(--ni-8));
-        opacity: 0.35;
-
-        animation: today-entry-breathe calc(var(--transition-duration-short) * 12)
-          ease-in-out infinite alternate;
-      }
-
-      .entry-spin,
-      .entry-sheen {
-        display: block;
-        position: absolute;
-        inset: 0;
-        overflow: hidden;
-
-        border-radius: inherit;
-      }
-
-      .entry-spin {
-        &::before {
-          content: "";
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 150%;
-          aspect-ratio: 1;
-
-          background: var(--entry-ring);
-          transform: translate(-50%, -50%);
-          animation: today-entry-spin calc(var(--transition-duration-short) * 30)
-            linear infinite;
-        }
-      }
-
-      .entry-sheen {
-        &::before {
-          content: "";
-          position: absolute;
-          inset-block: 0;
-          left: 0;
-          width: 40%;
-
-          background: linear-gradient(
-            100deg,
-            transparent,
-            color-mix(in srgb, var(--purple-200) 30%, transparent),
-            transparent
-          );
-          transform: translateX(-120%);
-
-          animation: today-entry-sheen var(--entry-cycle) ease-in-out
-            var(--entry-cycle-delay) var(--entry-cycle-count);
-        }
-      }
-
-      .entry-badge {
-        animation: today-entry-pop var(--entry-cycle) ease-out
-          var(--entry-cycle-delay) var(--entry-cycle-count);
-
-        &::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-
-          border: var(--border-thickness-xs) solid var(--purple-300);
-          border-radius: inherit;
-          opacity: 0;
-
-          animation: today-entry-ripple var(--entry-cycle) ease-out
-            var(--entry-cycle-delay) var(--entry-cycle-count);
-        }
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .entry-glow,
-      .entry-spin::before,
-      .entry-sheen::before,
-      .entry-badge,
-      .entry-badge::after {
-        animation: none;
-      }
-    }
-
-    .entry-body {
-      position: relative;
-      display: flex;
       align-items: center;
+      vertical-align: top;
       gap: var(--gap-xs);
 
-      padding-inline: var(--ni-8) var(--ni-12);
+      box-sizing: border-box;
+      height: var(--entry-size);
+      padding-inline: var(--entry-inset-start) var(--entry-inset-end);
 
-      border-radius: var(--border-radius-xxl);
-      background: var(--color-background);
+      border-radius: calc(var(--entry-size) / 2);
+      background:
+        var(--background-today-entry),
+        color-mix(in srgb, var(--color-background-navbar) 75%, transparent);
+      backdrop-filter: blur(var(--ni-8));
+      box-shadow: var(--shadow-today-entry);
       color: var(--color-text-primary);
+
+      transition: box-shadow var(--transition-increment) ease-in-out;
+
+      &.has-faces {
+        --entry-inset-start: var(--ni-3);
+      }
+
+      &.has-count {
+        --entry-inset-end: calc(
+          (var(--entry-size) - var(--entry-count-size)) / 2
+        );
+      }
+
+      @include for-mouse {
+        &:hover {
+          box-shadow: var(--shadow-today-entry-hover);
+        }
+      }
+    }
+
+    .entry-shine {
+      display: none;
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: var(--border-thickness-xxs);
+      pointer-events: none;
+
+      border-radius: inherit;
+      mask:
+        linear-gradient(black 0 0) content-box,
+        linear-gradient(black 0 0);
+      mask-composite: exclude;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 150%;
+        aspect-ratio: 1;
+
+        background: conic-gradient(
+          transparent 0deg,
+          var(--color-today-entry-shine) 22deg,
+          var(--color-today-entry-shine-core) 32deg,
+          var(--color-today-entry-shine) 42deg,
+          transparent 66deg
+        );
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-40deg);
+      }
+    }
+
+    &[data-seen="false"] .entry-shine {
+      display: block;
+
+      &::before {
+        animation: today-entry-shine var(--entry-shine-cycle) linear
+          var(--entry-shine-delay) infinite;
+
+        @media (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
+      }
     }
 
     .entry-posters {
@@ -249,39 +200,38 @@
 
     .entry-faces {
       display: flex;
-      padding-inline-start: var(--ni-4);
     }
 
     .entry-label {
       color: inherit;
+      font-weight: 500;
     }
 
     .entry-badge {
-      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
 
-      min-width: var(--ni-22);
-      height: var(--ni-22);
+      min-width: var(--entry-count-size);
+      height: var(--entry-count-size);
       padding-inline: var(--ni-6);
       box-sizing: border-box;
 
-      border-radius: var(--border-radius-xxl);
-      background: var(--purple-500);
-      color: var(--shade-10);
+      border-radius: calc(var(--entry-count-size) / 2);
+      background: var(--color-today-entry-count-background);
+      box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+        var(--color-today-entry-count-ring);
+      color: var(--color-today-entry-count-text);
       font-size: var(--font-size-tag);
+      font-variant-numeric: tabular-nums;
     }
 
     @include for-mobile {
-      .entry-ring {
-        width: var(--entry-size);
-      }
+      --entry-count-size: var(--ni-18);
 
-      .entry-body {
-        position: relative;
+      .entry-pill {
         justify-content: center;
-        width: 100%;
+        width: var(--entry-size);
         padding-inline: 0;
       }
 
@@ -325,66 +275,32 @@
         top: calc(-1 * var(--ni-6));
         inset-inline-end: calc(-1 * var(--ni-6));
 
-        min-width: var(--ni-18);
-        height: var(--ni-18);
         padding-inline: var(--ni-4);
 
         border: var(--border-thickness-xs) solid var(--color-background);
+        background:
+          linear-gradient(
+            var(--color-today-entry-count-background),
+            var(--color-today-entry-count-background)
+          ),
+          var(--color-background);
       }
     }
   }
 
-  @keyframes today-entry-spin {
-    to {
-      transform: translate(-50%, -50%) rotate(1turn);
-    }
-  }
-
-  @keyframes today-entry-breathe {
-    from {
-      opacity: 0.25;
-    }
-    to {
-      opacity: 0.6;
-    }
-  }
-
-  @keyframes today-entry-pop {
-    0%,
-    70%,
-    82%,
-    100% {
-      transform: scale(1);
-    }
-    75% {
-      transform: scale(1.22);
-    }
-  }
-
-  @keyframes today-entry-ripple {
-    0%,
-    70% {
+  @keyframes today-entry-shine {
+    0% {
       opacity: 0;
-      transform: scale(1);
+      transform: translate(-50%, -50%) rotate(-40deg);
     }
-    71% {
-      opacity: 0.8;
-      transform: scale(1);
+    0.6%,
+    4.4% {
+      opacity: 1;
     }
-    84%,
+    5%,
     100% {
       opacity: 0;
-      transform: scale(2);
-    }
-  }
-
-  @keyframes today-entry-sheen {
-    0%,
-    70% {
-      transform: translateX(-120%);
-    }
-    100% {
-      transform: translateX(300%);
+      transform: translate(-50%, -50%) rotate(320deg);
     }
   }
 </style>
