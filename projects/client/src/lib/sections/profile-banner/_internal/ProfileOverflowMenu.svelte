@@ -17,7 +17,7 @@
   import ModerateAction from "$lib/sections/components/admin/ModerateAction.svelte";
   import type { DisplayableProfileProps } from "$lib/sections/profile/DisplayableProfileProps";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
-  import { useBlockUser } from "./useBlockUser";
+  import { useBlockUser } from "../useBlockUser.ts";
   import { useFollowUserRequest } from "./useFollowUser";
 
   const { profile, slug }: DisplayableProfileProps = $props();

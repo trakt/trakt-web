@@ -3,7 +3,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
-  import { useBlockUser } from "$lib/sections/profile-banner/_internal/useBlockUser";
+  import { useBlockUser } from "$lib/sections/profile-banner/useBlockUser.ts";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
