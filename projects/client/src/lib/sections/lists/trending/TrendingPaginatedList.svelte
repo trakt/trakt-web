@@ -18,7 +18,7 @@
 </script>
 
 <DrilledMediaList
-  id="view-all-trending-${type}"
+  id="view-all-trending-{type}"
   {title}
   {type}
   filter={$filterMap}

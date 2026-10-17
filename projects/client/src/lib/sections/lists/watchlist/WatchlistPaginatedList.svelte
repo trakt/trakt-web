@@ -30,7 +30,7 @@
 </script>
 
 <DrilledMediaList
-  id="view-all-watchlist-${type}-${intent}"
+  id="view-all-watchlist-{type}-{intent}"
   {title}
   {type}
   filter={$filterMap}
