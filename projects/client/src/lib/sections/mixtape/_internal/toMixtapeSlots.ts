@@ -1,8 +1,8 @@
+import { MIXTAPE_SLOT_COUNT } from './MIXTAPE_SLOT_COUNT.ts';
+
 type Suggestion = { media: { id: number }; match: number };
 
 type SlotState<T> = { slots: T[]; queue: T[] };
-
-const SLOT_COUNT = 3;
 
 function replaceSkipped<T extends Suggestion>(
   { slots, queue }: SlotState<T>,
@@ -24,12 +24,12 @@ export function toMixtapeSlots<T extends Suggestion>(
   skips: ReadonlyArray<number>,
 ): T[] {
   const opening = suggestions
-    .slice(0, SLOT_COUNT)
+    .slice(0, MIXTAPE_SLOT_COUNT)
     .toSorted((a, b) => b.match - a.match);
 
   const initial: SlotState<T> = {
     slots: opening,
-    queue: suggestions.slice(SLOT_COUNT),
+    queue: suggestions.slice(MIXTAPE_SLOT_COUNT),
   };
 
   return skips.reduce((state, id) => replaceSkipped(state, id), initial).slots;
