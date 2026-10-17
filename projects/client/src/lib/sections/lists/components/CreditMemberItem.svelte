@@ -285,6 +285,10 @@
     :global(.trakt-button) {
       justify-self: end;
       transform-origin: right center;
+
+      &:dir(rtl) {
+        transform-origin: left center;
+      }
     }
   }
 
