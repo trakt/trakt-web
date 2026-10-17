@@ -97,27 +97,17 @@ export function useMovie(slug$: Observable<string>) {
     ),
   );
 
-  const queries = [movie, studios, crew, intl, videos];
+  const queries = [movie, studios, crew, intl];
 
   const isQueriesLoading = combineLatest(queries).pipe(
     map(($queries) => $queries.some(toLoadingState)),
-  );
-  const isSentimentLoading = sentiment.pipe(
-    map((query) => (query ? toLoadingState(query) : false)),
   );
   // Keep isLoading true until the core movie payload is present -
   // queries can flip to !fetching while `data` is still undefined
   // (errored or empty), which would otherwise let the page render
   // a half-populated summary.
-  const isLoading = combineLatest([
-    isQueriesLoading,
-    isSentimentLoading,
-    movie,
-  ]).pipe(
-    map(
-      ([queriesLoading, sentimentLoading, $movie]) =>
-        queriesLoading || sentimentLoading || $movie.data == null,
-    ),
+  const isLoading = combineLatest([isQueriesLoading, movie]).pipe(
+    map(([queriesLoading, $movie]) => queriesLoading || $movie.data == null),
   );
 
   return {

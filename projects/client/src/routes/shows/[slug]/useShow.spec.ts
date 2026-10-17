@@ -5,7 +5,10 @@ import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/
 import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';
 import { ShowSiloStudiosMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStudiosMappedMock.ts';
 import { ShowSiloTranslationsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloTranslationsMappedMock.ts';
+import { server } from '$mocks/server.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { delay, http } from 'msw';
 import { describe, expect, it } from 'vitest';
 import { useShow } from './useShow.ts';
 
@@ -61,6 +64,24 @@ describe('store: useShow', () => {
       });
 
       expect(result).to.deep.equal(ShowSiloSeasonsMappedMock);
+    });
+
+    it('should finish loading while sentiment is still pending', async () => {
+      setAuthorization(true);
+      server.use(
+        http.get(
+          `http://localhost/v3/media/show/${ShowSiloMappedMock.slug}/info/0/version/2`,
+          () => delay('infinite'),
+        ),
+      );
+
+      const result = await runQuery({
+        factory: () =>
+          useShow(valueObservable(ShowSiloMappedMock.slug)).isLoading,
+        waitFor: (isLoading) => !isLoading,
+      });
+
+      expect(result).to.equal(false);
     });
 
     it('should return studios', async () => {
