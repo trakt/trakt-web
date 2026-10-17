@@ -13469,18 +13469,6 @@
       "default": "Another",
       "description": "Label under the left button of a Mixtape card. Swaps the suggestion for the next one."
     },
-    "text_mixtape_swipe_hint": {
-      "default": "Swipe {right} for watchlist, {left} for another",
-      "description": "One-time hint under the first Mixtape card. {right} and {left} are the bold words from text_mixtape_swipe_right and text_mixtape_swipe_left."
-    },
-    "text_mixtape_swipe_right": {
-      "default": "right",
-      "description": "Bold direction word inside text_mixtape_swipe_hint."
-    },
-    "text_mixtape_swipe_left": {
-      "default": "left",
-      "description": "Bold direction word inside text_mixtape_swipe_hint."
-    },
     "text_mixtape_or_swipe": {
       "default": "or swipe",
       "description": "Text between the two Mixtape card buttons, saying the card can also be swiped."

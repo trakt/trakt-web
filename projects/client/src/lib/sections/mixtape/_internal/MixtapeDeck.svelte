@@ -3,7 +3,6 @@
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
-  import SwipeHandIcon from "$lib/components/icons/SwipeHandIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
@@ -14,7 +13,6 @@
   import type { MixtapeResultsProps } from "./MixtapeResultsProps.ts";
   import MixtapeSwipeCard from "./MixtapeSwipeCard.svelte";
   import { SWIPE_COMMIT_DISTANCE } from "./SWIPE_COMMIT_DISTANCE.ts";
-  import { toHintParts } from "./toHintParts.ts";
   import { toMixtapeMeta } from "./toMixtapeMeta.ts";
 
   const SLOT_COUNT = 3;
@@ -63,14 +61,6 @@
   const isDone = $derived(position >= SLOT_COUNT || current == null);
   const isHinting = $derived(!isHintSeen && position === 0 && !isDone);
   const strength = $derived(Math.min(Math.abs(dx) / SWIPE_COMMIT_DISTANCE, 1));
-
-  const hintParts = $derived(
-    toHintParts({
-      format: m.text_mixtape_swipe_hint,
-      right: m.text_mixtape_swipe_right(),
-      left: m.text_mixtape_swipe_left(),
-    }),
-  );
 
   const markHintSeen = () => {
     if (isHintSeen) return;
@@ -238,17 +228,6 @@
           {/key}
         </div>
       </div>
-
-      {#if isHinting}
-        <div class="deck-coach">
-          <SwipeHandIcon />
-          <span>
-            {#each hintParts as part, index (index)}
-              {#if part.isEmphasis}<b>{part.text}</b>{:else}{part.text}{/if}
-            {/each}
-          </span>
-        </div>
-      {/if}
 
       <div class="deck-text">
         {#if titleOf(current.because)}
@@ -511,22 +490,8 @@
     }
   }
 
-  .deck-coach {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--gap-xs);
-    padding: var(--ni-8) var(--ni-12);
-
-    border-radius: var(--border-radius-xxl);
-    background: color-mix(in srgb, var(--purple-500) 22%, transparent);
-    color: var(--color-text-primary);
-    font-size: var(--font-size-text-small);
-    text-align: center;
-
-    :global(svg) {
-      flex: none;
-    }
+  .deck-kicker {
+    color: var(--color-text-emphasis);
   }
 
   .deck-text {
