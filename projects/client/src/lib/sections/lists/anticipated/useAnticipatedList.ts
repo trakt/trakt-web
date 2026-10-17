@@ -13,6 +13,7 @@ import {
   showAnticipatedQuery,
 } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
 import { addYear } from '$lib/utils/date/addYear.ts';
+import { withDefaultDateRange } from '$lib/sections/lists/stores/withDefaultDateRange.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import { mediaAnticipatedQuery } from '$lib/requests/queries/media/mediaAnticipatedQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
@@ -26,15 +27,11 @@ type AnticipatedListStoreProps = {
   FilterParams &
   SearchParams;
 
-function typeToQuery({ type, ...params }: AnticipatedListStoreProps) {
-  if (!params.filter?.years && !params.theme) {
-    // FIXME: remove this when behavior is uplifted to the server
-    params.filter = params.filter ?? {};
-    // biome-ignore format: @ts-expect-error only covers the next line
-    // @ts-expect-error we are extending the object to dedupe
-    params.filter.end_date = params.filter?.end_date ??
-      addYear(new Date(), 1).toISOString();
-  }
+function typeToQuery({ type, ...rest }: AnticipatedListStoreProps) {
+  const params = withDefaultDateRange({
+    params: rest,
+    range: { end: addYear(new Date(), 1) },
+  });
 
   switch (type) {
     case 'movie':
