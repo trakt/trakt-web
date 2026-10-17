@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { hierarchy, pack } from "d3";
@@ -10,7 +11,7 @@
   } from "./models/BubbleChartProps";
 
   const chartPadding = 12;
-  const { items, tooltip, label = "Bubble chart" }: BubbleChartProps = $props();
+  const { items, tooltip, label = m.chart_label_bubble_chart() }: BubbleChartProps = $props();
 
   type HierarchyDatum = {
     item?: BubbleChartItem;
