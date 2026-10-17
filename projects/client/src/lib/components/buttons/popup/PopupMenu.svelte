@@ -4,7 +4,7 @@
   import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
-  import { slide } from "svelte/transition";
+  import { scale } from "svelte/transition";
   import type { PopupMenuProps } from "./PopupMenuProps";
   import { closeOnSelect } from "./_internal/closeOnSelect";
   import { usePopupMenu } from "./_internal/usePopupMenu";
@@ -65,7 +65,7 @@
     <div
       use:portal
       class="trakt-popup-menu-container"
-      transition:slide={{ duration: 150 }}
+      transition:scale={{ duration: 150, start: 0.96 }}
     >
       <div class="spacer"></div>
       <DropdownGroup>
@@ -197,9 +197,18 @@
     background: var(--color-popup-menu-background);
 
     position: absolute;
+    transform-origin: top;
     box-shadow:
       0 0 0 var(--ni-1) var(--color-popup-menu-background),
       var(--shadow-menu);
+
+    &[data-popup-position="left"] {
+      transform-origin: top right;
+    }
+
+    &[data-popup-position="right"] {
+      transform-origin: top left;
+    }
 
     div.spacer {
       height: calc($button-size + $button-padding * 2);
