@@ -14,19 +14,12 @@ export const NOOP_FN = () => {
   // noop
 };
 
-/**
- * Explicit space for template text joins, where a raw ' ' literal is
- * easy to misquote and stray whitespace is collapsed by the compiler.
- */
-export const EMPTY_SPACE = ' ';
-
 export const DEFAULT_PAGE_SIZE = 10;
 
 export const DEFAULT_DRILL_SIZE = 100;
 export const RECOMMENDED_UPPER_LIMIT = DEFAULT_DRILL_SIZE;
 export const COMMENTS_DRILL_SIZE = 25;
 export const DEFAULT_SEARCH_LIMIT = 50;
-export const PAGE_UPPER_LIMIT = 3;
 
 // FIXME: reduce limit when calendar layouts are paginated
 export const HISTORY_UPPER_LIMIT = 250;

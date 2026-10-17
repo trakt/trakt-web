@@ -55,16 +55,6 @@ function encodeRecord(
   return encodeURIComponent(JSON.stringify(params));
 }
 
-export function decodeRecord(
-  params: string,
-): Record<string, string | number | boolean> {
-  try {
-    return JSON.parse(decodeURIComponent(params));
-  } catch (_) {
-    return {};
-  }
-}
-
 function sanitizeParams(
   params: Omit<WellKnownQueryParams, 'search'> & SearchParams,
 ): WellKnownQueryParams {
