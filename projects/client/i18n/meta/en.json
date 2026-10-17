@@ -13517,17 +13517,166 @@
       "default": "That's your mixtape",
       "description": "Heading on the Mixtape end screen after three titles were added to the watchlist. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
-    "text_mixtape_done": {
-      "default": "Done",
-      "description": "Small text under Your mixtape on the end screen."
-    },
-    "header_mixtape_added": {
-      "default": "On your watchlist now",
-      "description": "Heading above the posters added to the watchlist from this Mixtape."
-    },
     "button_text_mixtape_show_more": {
-      "default": "Show 3 more",
-      "description": "Button on the Mixtape end screen that deals three new suggestions for the same picks."
+      "default": "Find 3 more",
+      "description": "Button on the Mixtape end screen that starts a new round of three suggestions for the same picks. What you kept so far stays in the mixtape."
+    },
+    "header_mixtape_find_more": {
+      "default": "Find {total} more",
+      "description": "Heading of the Mixtape deck from the second round on. {total} is a number (3).",
+      "variables": {
+        "total": {
+          "type": "number",
+          "description": "How many titles to keep this round.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_round_kept": {
+      "default": "{kept} of {total} this round, {sofar} so far",
+      "description": "Progress under the Mixtape deck heading from the second round on. {kept} and {total} are this round's numbers, {sofar} is the whole mixtape so far.",
+      "variables": {
+        "kept": {
+          "type": "number",
+          "description": "Titles kept this round.",
+          "required": true
+        },
+        "total": {
+          "type": "number",
+          "description": "Titles to keep this round.",
+          "required": true
+        },
+        "sofar": {
+          "type": "number",
+          "description": "Titles kept in the whole session.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_count_one": {
+      "default": "1 title",
+      "description": "Size of the Mixtape on its end screen when it holds one title."
+    },
+    "text_mixtape_count": {
+      "default": "{count} titles",
+      "description": "Size of the Mixtape on its end screen. {count} is 2 or more.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Titles in the mixtape.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_round": {
+      "default": "Round {round}",
+      "description": "Divider above each round of kept titles on the Mixtape end screen.",
+      "variables": {
+        "round": {
+          "type": "number",
+          "description": "Round number, starting at 1.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_saved_to": {
+      "default": "Saved to {name}",
+      "description": "Line on the Mixtape end screen saying which list the kept titles are in. {name} is Watchlist or a list name.",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "List name, or Watchlist.",
+          "required": true
+        }
+      }
+    },
+    "button_text_mixtape_change_target": {
+      "default": "Change",
+      "description": "Next to 'Saved to ...' on the Mixtape end screen. Opens the choice of another list to move the titles to."
+    },
+    "header_mixtape_move": {
+      "default": "Where should these go?",
+      "description": "Title of the sheet that moves the whole Mixtape to another list."
+    },
+    "text_mixtape_move_current": {
+      "default": "Where they are now",
+      "description": "Under the currently selected list in the Mixtape move sheet."
+    },
+    "button_text_mixtape_new_list": {
+      "default": "New list",
+      "description": "Option in the Mixtape move sheet that creates a new private list for the mixtape."
+    },
+    "input_label_mixtape_list_name": {
+      "default": "List name",
+      "description": "Label of the name field for a new list in the Mixtape move sheet."
+    },
+    "text_mixtape_new_list_name": {
+      "default": "Mixtape: {picks}",
+      "description": "Suggested name for a new list made from a Mixtape. {picks} is the picked titles joined with ' + '.",
+      "variables": {
+        "picks": {
+          "type": "string",
+          "description": "Picked titles joined with ' + '.",
+          "required": true
+        }
+      }
+    },
+    "button_text_mixtape_move": {
+      "default": "Move to {name}",
+      "description": "Confirms moving the whole Mixtape to the chosen list.",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "Destination list name.",
+          "required": true
+        }
+      }
+    },
+    "button_text_mixtape_stay": {
+      "default": "Keep in {name}",
+      "description": "Closes the Mixtape move sheet without moving anything.",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "Current list name, or Watchlist.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_moved": {
+      "default": "Moved {count} to {name}",
+      "description": "Toast after moving a Mixtape to another list, with an Undo button. {count} is a number.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Titles moved.",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Destination list name.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_keep_failed": {
+      "default": "Couldn't save {title}. Try again.",
+      "description": "Error toast when keeping a Mixtape suggestion to a list fails. {title} is the movie or show title.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Title that failed to save.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_move_failed": {
+      "default": "Couldn't move your mixtape. Try again.",
+      "description": "Error toast when moving a Mixtape to another list fails."
+    },
+    "button_text_mixtape_finish": {
+      "default": "Done",
+      "description": "Closes the Mixtape from its end screen."
     },
     "smart_list_template_hidden_gems_name": {
       "default": "Hidden Gems",

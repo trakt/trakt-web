@@ -25,7 +25,11 @@
   import { parseMixtapeParams } from "./_internal/parseMixtapeParams.ts";
   import { toMixtapeSlots } from "./_internal/toMixtapeSlots.ts";
   import { toPickerItems } from "./_internal/toPickerItems.ts";
+  import type { MixtapeTarget } from "./_internal/MixtapeTarget.ts";
+  import { useMixtapeSave } from "./_internal/useMixtapeSave.ts";
   import { useMixtape } from "./useMixtape.ts";
+  import type { MovieEntry } from "$lib/requests/models/MovieEntry.ts";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
 
   const params = $derived(parseMixtapeParams(page.url.searchParams));
   const request$ = fromRune(() => ({
@@ -123,13 +127,44 @@
   const titleOf = (id: number) =>
     $picked.find((media) => media.id === id)?.title ?? null;
 
-  const replaceSkips = (skips: ReadonlyArray<number>) =>
-    // eslint-disable-next-line svelte/no-navigation-without-resolve
-    goto(href({ view: "results", skips: [...skips] }), {
-      replaceState: true,
-      noScroll: true,
-      keepFocus: true,
+  const { keep } = useMixtapeSave();
+
+  const replaceResults = (
+    overrides: {
+      skips?: ReadonlyArray<number>;
+      kept?: ReadonlyArray<ReadonlyArray<number>>;
+      savedTo?: MixtapeTarget;
+    },
+  ) => {
+    const url = href({
+      view: "results",
+      skips: params.skips,
+      kept: params.kept,
+      savedTo: params.savedTo,
+      ...overrides,
     });
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
+    return goto(url, { replaceState: true, noScroll: true, keepFocus: true });
+  };
+
+  const rounds = $derived(
+    params.kept.map((ids) =>
+      ids.flatMap((id) => {
+        const suggestion = $mixtape.suggestions.find(
+          ({ media }) => media.id === id,
+        );
+        return suggestion ? [suggestion.media] : [];
+      }),
+    ),
+  );
+
+  const keepMedia = async (media: MovieEntry | ShowEntry) => {
+    const finished = params.kept.slice(0, -1);
+    const current = params.kept.at(-1) ?? [];
+    const saving = keep(params.savedTo, media);
+    if (params.savedTo != null && !(await saving)) return;
+    replaceResults({ kept: [...finished, [...current, media.id]] });
+  };
 
   onMount(() => {
     trackOpen({ source: params.source ?? "direct", type: params.type });
@@ -159,9 +194,17 @@
     closeHref={UrlBuilder.discover()}
     changeHref={href({})}
     startOverHref={UrlBuilder.mixtape({ type: params.type })}
-    onSkip={(id) => replaceSkips([...params.skips, id])}
-    onUndo={() => replaceSkips(params.skips.slice(0, -1))}
-    onMore={(ids) => replaceSkips([...params.skips, ...ids])}
+    {rounds}
+    savedTo={params.savedTo}
+    onKeep={keepMedia}
+    onMoved={(savedTo) => replaceResults({ savedTo })}
+    onSkip={(id) => replaceResults({ skips: [...params.skips, id] })}
+    onUndo={() => replaceResults({ skips: params.skips.slice(0, -1) })}
+    onMore={(ids) =>
+      replaceResults({
+        skips: [...params.skips, ...ids],
+        kept: [...params.kept, []],
+      })}
     onResult={(action, position) =>
       trackResult({ action, position: String(position), type: params.type })}
   />

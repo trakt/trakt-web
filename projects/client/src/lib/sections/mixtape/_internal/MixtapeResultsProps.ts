@@ -1,6 +1,7 @@
 import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import type { MixtapeSlot } from './MixtapeSlot.ts';
+import type { MixtapeTarget } from './MixtapeTarget.ts';
 
 export type MixtapeResultAction = 'open' | 'skip' | 'watchlist';
 
@@ -17,4 +18,8 @@ export type MixtapeResultsProps = {
   onUndo: () => void;
   onMore: (ids: ReadonlyArray<number>) => void;
   onResult: (action: MixtapeResultAction, position: number) => void;
+  rounds: ReadonlyArray<ReadonlyArray<MovieEntry | ShowEntry>>;
+  savedTo: MixtapeTarget;
+  onKeep: (media: MovieEntry | ShowEntry) => void;
+  onMoved: (target: MixtapeTarget) => void;
 };

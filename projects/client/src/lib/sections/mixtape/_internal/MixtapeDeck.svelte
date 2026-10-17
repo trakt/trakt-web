@@ -7,17 +7,14 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist.ts";
   import { portalToBody } from "$lib/utils/actions/portalToBody.ts";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage.ts";
   import { onDestroy } from "svelte";
   import MixtapeDone from "./MixtapeDone.svelte";
   import type { MixtapeResultsProps } from "./MixtapeResultsProps.ts";
-  import type { MixtapeSlot } from "./MixtapeSlot.ts";
   import MixtapeSwipeCard from "./MixtapeSwipeCard.svelte";
   import { SWIPE_COMMIT_DISTANCE } from "./SWIPE_COMMIT_DISTANCE.ts";
   import { toHintParts } from "./toHintParts.ts";
-  import { toMediaStoreProps } from "./toMediaStoreProps.ts";
   import { toMixtapeMeta } from "./toMixtapeMeta.ts";
 
   const SLOT_COUNT = 3;
@@ -36,10 +33,12 @@
     onSkip,
     onMore,
     onResult,
+    rounds,
+    savedTo,
+    onKeep,
+    onMoved,
   }: Omit<MixtapeResultsProps, "isLoading" | "onUndo"> = $props();
 
-  let position = $state(0);
-  let kept = $state<MixtapeSlot[]>([]);
   let dx = $state(0);
   let dragStart = $state<number | null>(null);
   let hasMoved = false;
@@ -55,20 +54,15 @@
     clearTimeout(toastTimer);
   });
 
+  const round = $derived(rounds.at(-1) ?? []);
+  const position = $derived(round.length);
+  const isFirstRound = $derived(rounds.length <= 1);
+  const keptSoFar = $derived(rounds.flat().length);
   const current = $derived(slots.at(position));
   const next = $derived(slots.at(position + 1));
   const isDone = $derived(position >= SLOT_COUNT || current == null);
   const isHinting = $derived(!isHintSeen && position === 0 && !isDone);
   const strength = $derived(Math.min(Math.abs(dx) / SWIPE_COMMIT_DISTANCE, 1));
-
-  const watchlist = $derived(
-    current
-      ? useWatchlist({
-          ...toMediaStoreProps(current.media),
-          isToastEnabled: false,
-        })
-      : null,
-  );
 
   const hintParts = $derived(
     toHintParts({
@@ -97,7 +91,6 @@
 
     markHintSeen();
     leaving = direction;
-    if (direction === "right") watchlist?.addToWatchlist();
 
     leaveTimer = setTimeout(() => {
       leaving = null;
@@ -105,10 +98,9 @@
       isFlipped = false;
 
       if (direction === "right") {
-        kept = [...kept, slot];
         onResult("watchlist", position + 1);
-        position += 1;
-        showToast(slot.media.title, SLOT_COUNT - kept.length);
+        showToast(slot.media.title, SLOT_COUNT - position - 1);
+        onKeep(slot.media);
         return;
       }
 
@@ -149,8 +141,6 @@
 
   const showMore = () => {
     onMore(slots.map(({ media }) => media.id));
-    position = 0;
-    kept = [];
   };
 </script>
 
@@ -163,38 +153,48 @@
 
   {#if isDone}
     <MixtapeDone
-      {kept}
+      {rounds}
       {picked}
+      {savedTo}
       {closeHref}
       {changeHref}
       {startOverHref}
       onMore={slots.length > 0 ? showMore : null}
+      {onMoved}
     />
   {:else if current}
     <div class="deck-layout">
       <header class="deck-header">
         <div class="deck-heading">
           <h2 class="ellipsis">
-            {SLOT_COUNT - kept.length === 1
+            {SLOT_COUNT - position === 1
               ? m.header_mixtape_find_last()
-              : m.header_mixtape_find({ total: SLOT_COUNT })}
+              : isFirstRound
+                ? m.header_mixtape_find({ total: SLOT_COUNT })
+                : m.header_mixtape_find_more({ total: SLOT_COUNT })}
           </h2>
           <p class="small secondary">
             <b class="deck-count">
-              {m.text_mixtape_kept({ kept: kept.length, total: SLOT_COUNT })}
+              {isFirstRound
+                ? m.text_mixtape_kept({ kept: position, total: SLOT_COUNT })
+                : m.text_mixtape_round_kept({
+                    kept: position,
+                    total: SLOT_COUNT,
+                    sofar: keptSoFar,
+                  })}
             </b>
           </p>
         </div>
         <ol class="deck-slots" aria-hidden="true">
           {#each Array.from({ length: SLOT_COUNT }, (_, index) => index) as index (index)}
-            {@const keptSlot = kept.at(index)}
+            {@const keptMedia = round.at(index)}
             <li
               class="deck-slot"
-              class:is-kept={keptSlot != null}
-              class:is-next={index === kept.length}
+              class:is-kept={keptMedia != null}
+              class:is-next={index === position}
             >
-              {#if keptSlot}
-                <CrossOriginImage src={keptSlot.media.poster.url.thumb} alt="" />
+              {#if keptMedia}
+                <CrossOriginImage src={keptMedia.poster.url.thumb} alt="" />
               {:else}
                 <BookmarkIcon state="missing" />
               {/if}
@@ -367,7 +367,7 @@
   }
 
   .deck-count {
-    color: var(--color-text-emphasis);
+    color: var(--color-text-primary);
   }
 
   .deck-slots {
