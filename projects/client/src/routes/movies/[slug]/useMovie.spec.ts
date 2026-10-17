@@ -4,7 +4,10 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
 import { MovieHereticStudiosMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticStudiosMappedMock.ts';
 import { MovieHereticTranslationsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticTranslationsMappedMock.ts';
+import { server } from '$mocks/server.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import { delay, http } from 'msw';
 import { describe, expect, it } from 'vitest';
 import { useMovie } from './useMovie.ts';
 
@@ -46,6 +49,41 @@ describe('store: useMovie', () => {
         MovieHereticTranslationsMappedMock
           .get('pt')!;
       expect(result).to.deep.equal(expected);
+    });
+
+    it('should finish loading while videos are still pending', async () => {
+      server.use(
+        http.get(
+          `http://localhost/movies/${MovieHereticMappedMock.slug}/videos`,
+          () => delay('infinite'),
+        ),
+      );
+
+      const result = await runQuery({
+        factory: () =>
+          useMovie(valueObservable(MovieHereticMappedMock.slug)).isLoading,
+        waitFor: (isLoading) => !isLoading,
+      });
+
+      expect(result).to.equal(false);
+    });
+
+    it('should finish loading while sentiment is still pending', async () => {
+      setAuthorization(true);
+      server.use(
+        http.get(
+          `http://localhost/v3/media/movie/${MovieHereticMappedMock.slug}/info/0/version/2`,
+          () => delay('infinite'),
+        ),
+      );
+
+      const result = await runQuery({
+        factory: () =>
+          useMovie(valueObservable(MovieHereticMappedMock.slug)).isLoading,
+        waitFor: (isLoading) => !isLoading,
+      });
+
+      expect(result).to.equal(false);
     });
 
     it('should return studios', async () => {
