@@ -2,6 +2,7 @@
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
+  import CassetteIcon from "$lib/components/icons/CassetteIcon.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -41,7 +42,10 @@
   let dx = $state(0);
   let dragStart = $state<number | null>(null);
   let hasMoved = false;
-  let leaving = $state<"left" | "right" | null>(null);
+  let leavingFor = $state<{ id: number; direction: "left" | "right" } | null>(
+    null,
+  );
+  let hasEntered = $state(false);
   let isFlipped = $state(false);
   let isHintSeen = $state(safeLocalStorage.getItem(HINT_SEEN_KEY) === "true");
   let leaveTimer: ReturnType<typeof setTimeout> | undefined;
@@ -60,6 +64,17 @@
   const current = $derived(slots.at(position));
   const next = $derived(slots.at(position + 1));
   const isDone = $derived(position >= MIXTAPE_SLOT_COUNT || current == null);
+  const leaving = $derived(
+    leavingFor?.id === current?.media.id ? (leavingFor?.direction ?? null) : null,
+  );
+  const entrance = $derived(
+    leavingFor && !leaving && !hasEntered ? leavingFor.direction : null,
+  );
+  const isSkipping = $derived(
+    leaving === "left" ||
+      entrance === "left" ||
+      (dragStart != null && dx < 0),
+  );
   const isHinting = $derived(!isHintSeen && position === 0 && !isDone);
   const strength = $derived(Math.min(Math.abs(dx) / SWIPE_COMMIT_DISTANCE, 1));
 
@@ -81,17 +96,19 @@
     if (!slot || leaving) return;
 
     markHintSeen();
-    leaving = direction;
+    leavingFor = { id: slot.media.id, direction };
+    hasEntered = false;
 
     leaveTimer = setTimeout(() => {
-      leaving = null;
       dx = 0;
       isFlipped = false;
 
       if (direction === "right") {
         onResult("watchlist", position + 1);
         showToast(slot.media.title, MIXTAPE_SLOT_COUNT - position - 1);
-        onKeep(slot.media);
+        onKeep(slot.media).finally(() => {
+          if (current?.media.id === slot.media.id) leavingFor = null;
+        });
         return;
       }
 
@@ -197,20 +214,37 @@
           {onpointerup}
           onpointercancel={onpointerup}
         >
-          {#if next}
-            <div class="deck-behind" aria-hidden="true">
-              <CrossOriginImage src={next.media.poster.url.medium} alt="" />
+          {#if next || isSkipping}
+            <div
+              class="deck-behind"
+              class:is-skipping={isSkipping}
+              aria-hidden="true"
+            >
+              {#if next}
+                <CrossOriginImage src={next.media.poster.url.medium} alt="" />
+              {/if}
+              <div class="deck-mystery">
+                <span class="deck-mystery-icon"><CassetteIcon /></span>
+              </div>
             </div>
           {/if}
           {#key current.media.id}
-            <MixtapeSwipeCard
-              slot={current}
-              {dx}
-              {leaving}
-              isDragging={dragStart != null}
-              {isFlipped}
-              {isHinting}
-            />
+            <div
+              class="deck-card-enter"
+              data-entrance={entrance}
+              onanimationend={(event) => {
+                if (event.target === event.currentTarget) hasEntered = true;
+              }}
+            >
+              <MixtapeSwipeCard
+                slot={current}
+                {dx}
+                {leaving}
+                isDragging={dragStart != null}
+                {isFlipped}
+                {isHinting}
+              />
+            </div>
           {/key}
         </div>
       </div>
@@ -424,11 +458,117 @@
     box-shadow: var(--shadow-base);
     opacity: 0.55;
     transform: translateY(var(--ni-10)) scale(0.94);
+    transition:
+      opacity var(--transition-increment) ease-out,
+      transform calc(2 * var(--transition-increment))
+        cubic-bezier(0.34, 1.56, 0.64, 1);
 
     :global(img) {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    &.is-skipping {
+      opacity: 1;
+      transform: translateY(var(--ni-6)) scale(0.97);
+
+      .deck-mystery {
+        opacity: 1;
+
+        &::after {
+          animation: deck-mystery-sweep calc(10 * var(--transition-increment))
+            ease-in-out infinite;
+
+          @media (prefers-reduced-motion: reduce) {
+            animation: none;
+          }
+        }
+      }
+
+      .deck-mystery-icon {
+        transform: scale(1);
+      }
+    }
+  }
+
+  .deck-mystery {
+    position: absolute;
+    inset: 0;
+
+    display: grid;
+    place-items: center;
+
+    background:
+      radial-gradient(
+        120% 80% at 50% 0%,
+        color-mix(in srgb, var(--purple-500) 55%, transparent),
+        transparent 70%
+      ),
+      linear-gradient(160deg, var(--purple-800), var(--shade-940));
+    opacity: 0;
+    transition: opacity var(--transition-increment) ease-out;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background: linear-gradient(
+        105deg,
+        transparent 35%,
+        color-mix(in srgb, var(--shade-10) 18%, transparent) 50%,
+        transparent 65%
+      );
+      transform: translateX(-100%);
+    }
+  }
+
+  .deck-mystery-icon {
+    display: flex;
+    color: color-mix(in srgb, var(--shade-10) 85%, transparent);
+    transform: scale(0.7);
+    transition: transform calc(2 * var(--transition-increment))
+      cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    :global(svg) {
+      width: var(--ni-64);
+      height: var(--ni-64);
+    }
+  }
+
+  @keyframes deck-mystery-sweep {
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  .deck-card-enter {
+    position: absolute;
+    inset: 0;
+
+    &[data-entrance="right"] {
+      animation: deck-card-advance calc(2 * var(--transition-increment))
+        cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    &[data-entrance="left"] {
+      animation: deck-card-swap calc(3 * var(--transition-increment))
+        cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+  }
+
+  @keyframes deck-card-advance {
+    from {
+      opacity: 0.55;
+      transform: translateY(var(--ni-10)) scale(0.94);
+    }
+  }
+
+  @keyframes deck-card-swap {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
     }
   }
 
