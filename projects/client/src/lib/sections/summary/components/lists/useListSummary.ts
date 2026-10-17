@@ -3,6 +3,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { movieListsQuery } from '$lib/requests/queries/movies/movieListsQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { useStableArray } from '$lib/sections/lists/stores/useStableArray.ts';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { combineLatest, map } from 'rxjs';
 import { showListsQuery } from '../../../../requests/queries/shows/showListsQuery.ts';
 import { MAX_LISTS } from './_internal/constants.ts';
@@ -41,12 +42,10 @@ export function useListSummary(
     typeToQuery({ slug, type }, 'official', limit),
   );
 
-  const isLoading = combineLatest([
+  const isLoading = anyTrue([
     personalLists.isLoading,
     officialLists.isLoading,
-  ]).pipe(
-    map(($states) => $states.some(Boolean)),
-  );
+  ]);
 
   const { list: stablePersonalList } = useStableArray(
     isSameList,
@@ -61,12 +60,10 @@ export function useListSummary(
     map(([$personal, $official]) => [...$official, ...$personal]),
   );
 
-  const hasNextPage = combineLatest([
+  const hasNextPage = anyTrue([
     personalLists.hasNextPage,
     officialLists.hasNextPage,
-  ]).pipe(
-    map(($states) => $states.some(Boolean)),
-  );
+  ]);
 
   const fetchNextPage = async () => {
     await Promise.all([

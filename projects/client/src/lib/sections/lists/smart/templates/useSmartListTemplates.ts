@@ -4,6 +4,7 @@ import { smartListTemplatesQuery } from '$lib/requests/queries/smart-lists/smart
 import { useBannerDismissal } from '$lib/sections/banner/useBannerDismissal.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { combineLatest, map, type Observable } from 'rxjs';
 import { usePaginatedListQuery } from '../../stores/usePaginatedListQuery.ts';
 import { getVisibleSmartListTemplates } from './getVisibleSmartListTemplates.ts';
@@ -33,10 +34,10 @@ export function useSmartListTemplates(mode$: Observable<DiscoverMode>) {
     ),
   );
 
-  const isLoading = combineLatest([
+  const isLoading = anyTrue([
     areListsLoading,
     query.pipe(map(toLoadingState)),
-  ]).pipe(map((states) => states.some(Boolean)));
+  ]);
 
   return { templates, isLoading, hide: dismiss };
 }

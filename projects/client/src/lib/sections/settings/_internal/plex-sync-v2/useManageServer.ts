@@ -6,7 +6,8 @@ import {
   updateMediaSyncConnectionRequest,
 } from '$lib/requests/media-sync/updateMediaSyncConnectionRequest.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { combineLatest, map } from 'rxjs';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
+
 import { useSyncAccounts } from './useSyncAccounts.ts';
 
 export function useManageServer(connectionId: number) {
@@ -37,8 +38,6 @@ export function useManageServer(connectionId: number) {
         .then((result) => result.ok)
         .catch(() => false),
     remove: () => remove.mutate().catch(() => false),
-    isBusy: combineLatest([update.isPending, remove.isPending]).pipe(
-      map((pending) => pending.some(Boolean)),
-    ),
+    isBusy: anyTrue([update.isPending, remove.isPending]),
   };
 }

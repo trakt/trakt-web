@@ -4,7 +4,7 @@ import { resyncMediaSyncConnectionRequest } from '$lib/requests/media-sync/resyn
 import { retryMediaSyncConnectionRequest } from '$lib/requests/media-sync/retryMediaSyncConnectionRequest.ts';
 import { syncNowMediaSyncConnectionRequest } from '$lib/requests/media-sync/syncNowMediaSyncConnectionRequest.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { combineLatest, map } from 'rxjs';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 
 export function useServerActions(connectionId: number) {
   const invalidations = [
@@ -34,12 +34,10 @@ export function useServerActions(connectionId: number) {
     syncNow: () => syncSoon.mutate(),
     importPastWatches: () => resync.mutate(),
     retry: () => retry.mutate(),
-    isBusy: combineLatest([
+    isBusy: anyTrue([
       syncSoon.isPending,
       resync.isPending,
       retry.isPending,
-    ]).pipe(
-      map((pending) => pending.some(Boolean)),
-    ),
+    ]),
   };
 }

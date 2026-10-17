@@ -11,6 +11,7 @@ import { addDays } from '$lib/utils/date/addDays.ts';
 import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
 import { subtractDays } from '$lib/utils/date/subtractDays.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
+import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { combineLatest, map, type Observable } from 'rxjs';
 import { getGraphItems } from './getGraphItems.ts';
 import { getSectionPriority } from './getSectionPriority.ts';
@@ -172,9 +173,7 @@ export function useWeeklyPulse({ mode }: { mode: DiscoverMode }): {
     multicast(),
   );
 
-  const isLoading = combineLatest([isLoadingMovies, isLoadingShows]).pipe(
-    map((states) => states.some(Boolean)),
-  );
+  const isLoading = anyTrue([isLoadingMovies, isLoadingShows]);
 
   return { items, isLoading, dateRange: displayRange };
 }
