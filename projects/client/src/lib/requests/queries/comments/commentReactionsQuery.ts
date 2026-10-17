@@ -5,7 +5,7 @@ import { reactionsSchema, type ReactionsSummaryResponse } from '@trakt/api';
 import z from 'zod';
 import { InvalidateAction } from '../../models/InvalidateAction.ts';
 
-type CommentRepliesParams =
+type CommentReactionsParams =
   & {
     id: number;
   }
@@ -32,7 +32,7 @@ const commentReactionsRequest = (
   {
     fetch,
     id,
-  }: CommentRepliesParams,
+  }: CommentReactionsParams,
 ) =>
   api({ fetch })
     .comments
