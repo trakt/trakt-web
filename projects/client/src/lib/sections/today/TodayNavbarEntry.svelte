@@ -151,7 +151,7 @@
         opacity: 0.35;
 
         animation: today-entry-breathe calc(var(--transition-duration-short) * 12)
-          ease-in-out infinite alternate;
+          ease-in-out var(--entry-cycle-count) alternate forwards;
       }
 
       .entry-spin,
@@ -176,7 +176,7 @@
           background: var(--entry-ring);
           transform: translate(-50%, -50%);
           animation: today-entry-spin calc(var(--transition-duration-short) * 30)
-            linear infinite;
+            linear var(--entry-cycle-count);
         }
       }
 
