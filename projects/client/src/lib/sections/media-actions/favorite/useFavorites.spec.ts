@@ -4,7 +4,9 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
+import { server } from '$mocks/server.ts';
 import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
+import { respondWithMalformedJson } from '$test/beds/request/respondWithMalformedJson.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { firstValueFrom } from 'rxjs';
@@ -139,6 +141,62 @@ describe('useFavorites', () => {
       );
 
       expect(await waitForEmission(isFavorited, 2)).toBe(false);
+    });
+  });
+
+  describe('pending state', () => {
+    it('should show as favorited while an add is in flight', async () => {
+      const { isFavorited, addToFavorites } = await renderStore(() =>
+        useFavorites({
+          type: 'movie',
+          id: MovieMatrixMappedMock.id,
+          title: MovieMatrixMappedMock.title,
+        }),
+      );
+
+      expect(await waitForEmission(isFavorited, 2)).toBe(false);
+
+      const addition = addToFavorites();
+      expect(await firstValueFrom(isFavorited)).toBe(true);
+
+      await addition;
+    });
+
+    it('should show as not favorited while a remove is in flight', async () => {
+      const { isFavorited, removeFromFavorites } = await renderStore(() =>
+        useFavorites({
+          type: 'movie',
+          id: MovieHereticMappedMock.id,
+          title: MovieHereticMappedMock.title,
+        }),
+      );
+
+      expect(await waitForEmission(isFavorited, 2)).toBe(true);
+
+      const removal = removeFromFavorites();
+      expect(await firstValueFrom(isFavorited)).toBe(false);
+
+      await removal;
+    });
+
+    it('should revert to the real state when the add fails', async () => {
+      server.use(respondWithMalformedJson('http://localhost/sync/favorites'));
+
+      const { isFavorited, addToFavorites } = await renderStore(() =>
+        useFavorites({
+          type: 'movie',
+          id: MovieMatrixMappedMock.id,
+          title: MovieMatrixMappedMock.title,
+        }),
+      );
+
+      expect(await waitForEmission(isFavorited, 2)).toBe(false);
+
+      const addition = addToFavorites();
+      expect(await firstValueFrom(isFavorited)).toBe(true);
+
+      await expect(addition).rejects.toThrow();
+      expect(await firstValueFrom(isFavorited)).toBe(false);
     });
   });
 });
