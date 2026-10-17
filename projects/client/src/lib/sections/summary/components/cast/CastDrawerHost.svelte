@@ -5,7 +5,7 @@
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType.ts";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
   import CreditMemberItem from "$lib/sections/lists/components/CreditMemberItem.svelte";
-  import type { CreditMember } from "$lib/sections/lists/models/CreditMember.ts";
+  import { toCreditMemberKey } from "../toCreditMemberKey.ts";
   import CreditGroupHeader from "$lib/sections/summary/components/CreditGroupHeader.svelte";
   import CreditsToggler from "$lib/sections/summary/components/CreditsToggler.svelte";
   import { toActiveCreditsType } from "$lib/sections/summary/components/toActiveCreditsType.ts";
@@ -41,8 +41,6 @@
     toActiveCreditsType({ groups: creditGroups, creditsType }),
   );
 
-  const toCreditMemberKey = (member: CreditMember) =>
-    `${member.key}-${member.positions ? "cast" : "crew"}`;
   const toCreditGroupHeaderId = (group: { id: string }) =>
     `cast-list-${type}-${isSearching ? "search" : activeCreditsType}-${group.id}-header`;
 
