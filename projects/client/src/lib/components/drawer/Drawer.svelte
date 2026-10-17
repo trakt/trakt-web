@@ -374,7 +374,10 @@
       inset-inline-start: 0;
 
       width: initial;
-      height: calc(var(--mobile-drawer-height) - var(--drag-offset, 0px));
+      height: calc(
+        var(--mobile-drawer-height) - min(var(--drag-offset, 0px), 0px)
+      );
+      translate: 0 max(var(--drag-offset, 0px), 0px);
 
       border-end-start-radius: initial;
       border-start-end-radius: var(--drawer-border-radius);
@@ -382,7 +385,9 @@
       border-top: var(--ni-1) solid var(--color-drawer-border);
 
       &:global(:not(.is-dragging)) {
-        transition: height var(--transition-increment) ease-in-out;
+        transition:
+          height var(--transition-increment) ease-in-out,
+          translate var(--transition-increment) ease-in-out;
       }
 
       &:global(.is-fullscreen),
