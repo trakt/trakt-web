@@ -1,4 +1,3 @@
-type Nil = null | undefined;
 import { multicast } from '$lib/utils/store/multicast.ts';
 import {
   BehaviorSubject,
