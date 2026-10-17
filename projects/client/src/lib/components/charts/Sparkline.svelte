@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { resampleSeries } from "$lib/utils/number/resampleSeries.ts";
   import { time } from "$lib/utils/timing/time";
@@ -19,7 +20,7 @@
     seriesIndex = 0,
     color,
     showArea = false,
-    label = "Sparkline",
+    label = m.chart_label_sparkline(),
     height = "var(--ni-32)",
   }: SparklineProps = $props();
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { resampleSeries } from "$lib/utils/number/resampleSeries.ts";
@@ -34,7 +35,7 @@
     fillColor,
     dotColor,
     dotHaloColor,
-    label = "Line chart",
+    label = m.chart_label_line_chart(),
     height = "var(--height-area-chart)",
   }: LineChartProps = $props();
 
@@ -158,7 +159,7 @@
     height={height$}
     role="img"
     aria-label={label}
-    aria-roledescription="interactive line chart"
+    aria-roledescription={m.chart_role_interactive_line_chart()}
     tabindex="0"
     class="line-chart-plot"
     onpointerdown={interaction.handlers.pointerdown}

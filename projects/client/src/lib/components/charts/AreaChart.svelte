@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
   import LineChart from "./LineChart.svelte";
   import type { AreaChartProps } from "./models/AreaChartProps.ts";
 
@@ -14,7 +15,7 @@
     fillColor,
     dotColor,
     dotHaloColor,
-    label = "Area chart",
+    label = m.chart_label_area_chart(),
     height = "var(--height-area-chart)",
   }: AreaChartProps = $props();
 </script>
