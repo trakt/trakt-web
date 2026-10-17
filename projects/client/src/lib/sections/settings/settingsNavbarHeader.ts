@@ -1,7 +1,7 @@
 import * as m from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { activeSettingsPageTitle } from './_internal/activeSettingsPageTitle.ts';
-import { settingsPages } from './_internal/settingsPages.ts';
+import { findSettingsPage } from './_internal/findSettingsPage.ts';
 
 type SettingsNavbarHeader = {
   title: string;
@@ -18,10 +18,7 @@ type SettingsNavbarHeader = {
 function backHrefFor(pathname: string): string {
   const hubHref = UrlBuilder.settings.general();
 
-  const match = settingsPages.find((page) => {
-    const href = page.hubHref ?? page.href;
-    return page.nested ? pathname.startsWith(href) : pathname === href;
-  });
+  const match = findSettingsPage(pathname);
 
   if (!match) {
     return hubHref;
