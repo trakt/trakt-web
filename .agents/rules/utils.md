@@ -205,7 +205,6 @@ safeLocalStorage.setItem('key', value);
 | `buildParamString(params)`        | Serialise record into query string (`?foo=bar&baz=1`)                 |
 | `toUrl(value)`                    | Parse into a `URL`, or `null` when the value is malformed             |
 | `prependHttps(url, placeholder?)` | Ensure URL starts with `https://`                                     |
-| `prependHttpOrHttps(url)`         | Same, but allows `http://` for localhost                              |
 | `setCacheBuster(url)`             | Append `_cb` timestamp to bust CDN caches                             |
 
 **Rules:**
