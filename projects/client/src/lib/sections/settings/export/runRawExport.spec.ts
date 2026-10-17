@@ -3,10 +3,10 @@ import { server } from '$mocks/server.ts';
 import { unzipSync } from 'fflate';
 import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { downloadFile } from './downloadFile.ts';
+import { downloadFile } from '$lib/utils/file/downloadFile.ts';
 import { runRawExport } from './runRawExport.ts';
 
-vi.mock('./downloadFile.ts', () => ({ downloadFile: vi.fn() }));
+vi.mock('$lib/utils/file/downloadFile.ts', () => ({ downloadFile: vi.fn() }));
 
 const SLUG = 'mega-collector';
 const FAILING_ENDPOINT = `http://localhost/users/${SLUG}/collection/shows`;

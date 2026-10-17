@@ -4,11 +4,11 @@ import { server } from '$mocks/server.ts';
 import { strFromU8, unzipSync } from 'fflate';
 import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { downloadFile } from './downloadFile.ts';
+import { downloadFile } from '$lib/utils/file/downloadFile.ts';
 import { runCustomLibraryExport } from './runCustomLibraryExport.ts';
 import { runExportGate } from './runExportGate.ts';
 
-vi.mock('./downloadFile.ts', () => ({ downloadFile: vi.fn() }));
+vi.mock('$lib/utils/file/downloadFile.ts', () => ({ downloadFile: vi.fn() }));
 
 const movie = {
   type: 'movie',
