@@ -9,6 +9,7 @@ import { isValidItem } from './utils/isValidItem.ts';
 import { parseJsonFile } from './utils/parseJsonFile.ts';
 import { toImportIds } from './utils/toImportIds.ts';
 import { toImportISOString } from './utils/toImportISOString.ts';
+import { toArray } from '$lib/utils/array/toArray.ts';
 
 type TraktJsonIds = {
   trakt?: string | number;
@@ -247,7 +248,7 @@ async function parseTraktZip(file: File): Promise<UniversalImportItem[]> {
     .flatMap(([filename, data]) => {
       const text = decoder.decode(data);
       const raw = JSON.parse(text);
-      const entries = Array.isArray(raw) ? raw : [raw];
+      const entries = toArray(raw);
       const action = inferActionFromPath(filename);
 
       return parseEntries(
@@ -278,7 +279,7 @@ export const TraktJsonParser: FileParser = {
     }
 
     const raw = await parseJsonFile(file);
-    const entries = Array.isArray(raw) ? raw : [raw];
+    const entries = toArray(raw);
     return parseEntries(entries as TraktJsonEntry[]);
   },
 };

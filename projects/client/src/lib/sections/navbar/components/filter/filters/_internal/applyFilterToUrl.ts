@@ -1,5 +1,6 @@
 import type { FilterKey } from '$lib/features/filters/models/Filter.ts';
 import type { AdditionalKey } from '$lib/features/filters/models/FilterOptions.ts';
+import { toArray } from '$lib/utils/array/toArray.ts';
 
 type BaseProps = {
   key: FilterKey;
@@ -43,7 +44,7 @@ export function applyFilterToUrl(
   url: URL,
   props: ApplyFilterToUrlProps | ApplyFilterToUrlProps[],
 ): URL {
-  const propsArray = Array.isArray(props) ? props : [props];
+  const propsArray = toArray(props);
   const values = propsArray.flatMap(getFilterValues);
 
   values.forEach(({ key, value }) => {

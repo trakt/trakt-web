@@ -1,4 +1,5 @@
 import type { ImportType, UniversalImportItem } from '../../ImportTypes.ts';
+import { isPositionalItem } from '../../isPositionalItem.ts';
 import {
   type IdPriority,
   MOVIE_IDS,
@@ -18,11 +19,6 @@ const PRIORITY_BY_TYPE: Record<
   episode: toEpisodeIdPriority,
 };
 
-function hasPositionalKey(item: UniversalImportItem): boolean {
-  return (item.showTvdb != null || item.showImdb != null) &&
-    item.season != null && item.episode != null;
-}
-
 // An id its type cannot resolve by is no better than no id at all: the item
 // would sail through review, inflate the imported count and never reach a
 // payload. Seasons carrying only an imdb id are the common case.
@@ -31,5 +27,5 @@ export function isValidItem(item: UniversalImportItem): boolean {
     null;
   const hasTitleAndYear = Boolean(item.title) && Boolean(item.year);
 
-  return hasUsableId || hasTitleAndYear || hasPositionalKey(item);
+  return hasUsableId || hasTitleAndYear || isPositionalItem(item);
 }

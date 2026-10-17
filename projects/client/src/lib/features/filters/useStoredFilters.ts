@@ -2,6 +2,7 @@ import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { persistDebounced } from '$lib/utils/storage/persistDebounced.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
+import { safeJsonParse } from '$lib/utils/json/safeJsonParse.ts';
 import { BehaviorSubject } from 'rxjs';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
@@ -30,7 +31,7 @@ export function createStoredFiltersStore(
   initialFilters: StoredFilter,
 ) {
   const filters = new BehaviorSubject<StoredFilter>(
-    JSON.parse(safeLocalStorage.getItem(key) ?? JSON.stringify(initialFilters)),
+    safeJsonParse(safeLocalStorage.getItem(key), initialFilters),
   );
 
   return {

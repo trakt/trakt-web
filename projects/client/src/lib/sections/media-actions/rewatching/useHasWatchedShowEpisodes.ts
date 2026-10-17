@@ -1,6 +1,7 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { map, of } from 'rxjs';
+import { toArray } from '$lib/utils/array/toArray.ts';
 
 type HasWatchedShowEpisodesProps = MediaStoreProps;
 
@@ -8,7 +9,7 @@ export function useHasWatchedShowEpisodes(
   props: HasWatchedShowEpisodesProps,
 ) {
   const { type } = props;
-  const media = Array.isArray(props.media) ? props.media : [props.media];
+  const media = toArray(props.media);
   const { history } = useUser();
 
   if (type !== 'show') {

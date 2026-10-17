@@ -1079,6 +1079,68 @@
         }
       }
     },
+    "chart_label_bar_chart": {
+      "default": "Bar chart",
+      "description": "Default accessible name for a bar chart when the screen gives it no title."
+    },
+    "chart_label_line_chart": {
+      "default": "Line chart",
+      "description": "Default accessible name for a line chart when the screen gives it no title."
+    },
+    "chart_label_area_chart": {
+      "default": "Area chart",
+      "description": "Default accessible name for an area chart when the screen gives it no title."
+    },
+    "chart_label_sparkline": {
+      "default": "Sparkline",
+      "description": "Default accessible name for a small inline trend chart (sparkline) when the screen gives it no title."
+    },
+    "chart_label_stacked_bar_chart": {
+      "default": "Stacked bar chart",
+      "description": "Default accessible name for a stacked bar chart when the screen gives it no title."
+    },
+    "chart_label_segmented_distribution": {
+      "default": "Segmented distribution",
+      "description": "Default accessible name for a horizontal bar split into proportional segments when the screen gives it no title."
+    },
+    "chart_label_country_map": {
+      "default": "Country map",
+      "description": "Default accessible name for a world map that shades countries when the screen gives it no title."
+    },
+    "chart_label_bubble_chart": {
+      "default": "Bubble chart",
+      "description": "Default accessible name for a bubble chart when the screen gives it no title."
+    },
+    "chart_role_interactive_bar_chart": {
+      "default": "interactive bar chart",
+      "description": "Screen reader role description announced for a bar chart whose bars can be focused. Lowercase, read after the chart name."
+    },
+    "chart_role_interactive_line_chart": {
+      "default": "interactive line chart",
+      "description": "Screen reader role description announced for a line chart whose points can be focused. Lowercase, read after the chart name."
+    },
+    "chart_role_interactive_stacked_bar_chart": {
+      "default": "interactive stacked bar chart",
+      "description": "Screen reader role description announced for a stacked bar chart whose bars can be focused. Lowercase, read after the chart name."
+    },
+    "button_label_expand_list": {
+      "default": "Expand {title} list",
+      "description": "Aria-label for the button that expands a collapsed list section. {title} is the list's title.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_collapse_list": {
+      "default": "Collapse {title} list",
+      "description": "Aria-label for the button that collapses a list section. {title} is the list's title.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "header_premiered": {
       "default": "Premiered",
       "description": "Header for the premiered section."
@@ -8605,30 +8667,6 @@
     "welcome_banner_action": {
       "default": "Import your data",
       "description": "Call-to-action on the welcome banner that takes the user to the data import settings page."
-    },
-    "tv_time_banner_heading": {
-      "default": "Coming from TV Time?",
-      "description": "Heading on the banner shown to users who joined Trakt around the TV Time shutdown announcement, promoting the TV Time-style companion app."
-    },
-    "tv_time_banner_description": {
-      "default": "Feel right at home with our familiar companion app, powered by your Trakt account.",
-      "description": "Description on the TV Time migration banner explaining that tvtime.trakt.tv is a familiar companion app backed by Trakt."
-    },
-    "tv_time_banner_action": {
-      "default": "tvtime.trakt.tv",
-      "description": "Call-to-action link on the TV Time migration banner that opens the tvtime.trakt.tv companion app in a new tab."
-    },
-    "tv_time_import_banner_heading": {
-      "default": "Your TV Time import, improved",
-      "description": "Heading on the banner shown to users who joined during the TV Time migration, telling them the importer has been upgraded."
-    },
-    "tv_time_import_banner_description": {
-      "default": "We've upgraded the importer. If some shows or episodes are missing, import your TV Time export again to pull them in. Still missing after that? Delete the old plays first, then import once more.",
-      "description": "Description on the TV Time importer-update banner explaining that re-importing now recovers missing show/episode data, and to delete old plays before re-importing if issues persist."
-    },
-    "tv_time_import_banner_action": {
-      "default": "Import again",
-      "description": "Call-to-action button on the TV Time importer-update banner that opens the data import settings page."
     },
     "auto_tracking_card_heading": {
       "default": "Automatically track across your streaming services",

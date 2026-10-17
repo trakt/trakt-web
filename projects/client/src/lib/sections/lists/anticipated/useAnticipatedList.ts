@@ -1,6 +1,5 @@
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
-import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
@@ -16,6 +15,7 @@ import { addYear } from '$lib/utils/date/addYear.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import { mediaAnticipatedQuery } from '$lib/requests/queries/media/mediaAnticipatedQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
+import { withListOverlay } from '$lib/sections/lists/stores/withListOverlay.ts';
 
 export type AnticipatedEntry = AnticipatedMovie | AnticipatedShow;
 export type AnticipatedMediaList = Array<AnticipatedEntry>;
@@ -28,15 +28,21 @@ type AnticipatedListStoreProps =
   & FilterParams
   & SearchParams;
 
+type DatedFilter = NonNullable<AnticipatedListStoreProps['filter']> & {
+  end_date?: string;
+};
+
 function typeToQuery(
   { type, ...params }: AnticipatedListStoreProps,
 ) {
   if (!params.filter?.years && !params.theme) {
     // FIXME: remove this when behavior is uplifted to the server
-    params.filter = params.filter ?? {};
-    // @ts-expect-error we are extending the object to dedupe
-    params.filter.end_date = params.filter?.end_date ??
-      addYear(new Date(), 1).toISOString();
+    const current: DatedFilter = params.filter ?? {};
+    const dated: DatedFilter = {
+      ...current,
+      end_date: current.end_date ?? addYear(new Date(), 1).toISOString(),
+    };
+    params.filter = dated;
   }
 
   switch (type) {
@@ -58,12 +64,8 @@ function typeToQuery(
 export function useAnticipatedList(
   props: AnticipatedListStoreProps,
 ) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(typeToQuery(props));
-  const overlay = createBulkMediaIntl<AnticipatedEntry>();
-  return {
-    list: baseList.pipe(overlay.operator),
-    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
-    ...rest,
-  };
+  return withListOverlay(
+    usePaginatedListQuery(typeToQuery(props)),
+    createBulkMediaIntl<AnticipatedEntry>(),
+  );
 }

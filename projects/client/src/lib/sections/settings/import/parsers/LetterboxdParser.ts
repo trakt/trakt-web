@@ -23,27 +23,33 @@ type LetterboxdRatingsRow = {
   Rating?: string;
 };
 
-type LetterboxdWatchedRow = {
+type LetterboxdDatedRow = {
   Date?: string;
   Name?: string;
   Year?: string;
   'Letterboxd URI'?: string;
 };
 
-type LetterboxdWatchlistRow = {
-  Date?: string;
-  Name?: string;
-  Year?: string;
-  'Letterboxd URI'?: string;
-};
+function toLetterboxdRating(raw: string | undefined): number | undefined {
+  const rating = raw ? parseFloat(raw) * 2 : undefined;
+  return rating && rating >= 1 ? Math.round(rating) : undefined;
+}
+
+function toValidItems<T>(
+  rows: T[],
+  parse: (row: T) => UniversalImportItem | null,
+): UniversalImportItem[] {
+  return rows
+    .map(parse)
+    .filter((r): r is UniversalImportItem => r !== null)
+    .filter(isValidItem);
+}
 
 function parseDiaryRow(row: LetterboxdDiaryRow): UniversalImportItem | null {
   if (!row.Name) return null;
 
   const year = row.Year ? parseInt(row.Year, 10) : undefined;
   const watchedAt = toImportISOString(row['Watched Date']);
-  const rating = row.Rating ? parseFloat(row.Rating) * 2 : undefined;
-
   return {
     action: 'history',
     type: 'movie',
@@ -51,7 +57,7 @@ function parseDiaryRow(row: LetterboxdDiaryRow): UniversalImportItem | null {
     title: row.Name,
     year,
     watched_at: watchedAt,
-    rating: rating && rating >= 1 ? Math.round(rating) : undefined,
+    rating: toLetterboxdRating(row.Rating),
   };
 }
 
@@ -60,21 +66,19 @@ function parseRatingsRow(
 ): UniversalImportItem | null {
   if (!row.Name) return null;
 
-  const rating = row.Rating ? parseFloat(row.Rating) * 2 : undefined;
-
   return {
     action: 'ratings',
     type: 'movie',
     ids: {},
     title: row.Name,
     year: row.Year ? parseInt(row.Year, 10) : undefined,
-    rating: rating && rating >= 1 ? Math.round(rating) : undefined,
+    rating: toLetterboxdRating(row.Rating),
     rated_at: toImportISOString(row.Date),
   };
 }
 
 function parseWatchedRow(
-  row: LetterboxdWatchedRow,
+  row: LetterboxdDatedRow,
 ): UniversalImportItem | null {
   if (!row.Name) return null;
 
@@ -89,7 +93,7 @@ function parseWatchedRow(
 }
 
 function parseWatchlistRow(
-  row: LetterboxdWatchlistRow,
+  row: LetterboxdDatedRow,
 ): UniversalImportItem | null {
   if (!row.Name) return null;
 
@@ -156,10 +160,7 @@ async function parseLetterboxdZip(
     const rows = await parseCsvText(
       csvTexts['diary.csv'],
     ) as LetterboxdDiaryRow[];
-    const diaryItems = rows
-      .map(parseDiaryRow)
-      .filter((r): r is UniversalImportItem => r !== null)
-      .filter(isValidItem);
+    const diaryItems = toValidItems(rows, parseDiaryRow);
 
     for (const item of diaryItems) {
       if (item.title) diaryNames.add(item.title);
@@ -171,12 +172,9 @@ async function parseLetterboxdZip(
   if (csvTexts['watched.csv']) {
     const rows = await parseCsvText(
       csvTexts['watched.csv'],
-    ) as LetterboxdWatchedRow[];
+    ) as LetterboxdDatedRow[];
     items.push(
-      ...rows
-        .map(parseWatchedRow)
-        .filter((r): r is UniversalImportItem => r !== null)
-        .filter(isValidItem)
+      ...toValidItems(rows, parseWatchedRow)
         .filter((r) => !diaryNames.has(r.title ?? '')),
     );
   }
@@ -186,22 +184,16 @@ async function parseLetterboxdZip(
       csvTexts['ratings.csv'],
     ) as LetterboxdRatingsRow[];
     items.push(
-      ...rows
-        .map(parseRatingsRow)
-        .filter((r): r is UniversalImportItem => r !== null)
-        .filter(isValidItem),
+      ...toValidItems(rows, parseRatingsRow),
     );
   }
 
   if (csvTexts['watchlist.csv']) {
     const rows = await parseCsvText(
       csvTexts['watchlist.csv'],
-    ) as LetterboxdWatchlistRow[];
+    ) as LetterboxdDatedRow[];
     items.push(
-      ...rows
-        .map(parseWatchlistRow)
-        .filter((r): r is UniversalImportItem => r !== null)
-        .filter(isValidItem),
+      ...toValidItems(rows, parseWatchlistRow),
     );
   }
 

@@ -1,13 +1,13 @@
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { listItemTargets } from '$lib/features/intl-overlay/listItemTargets.ts';
-import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { listItemsQuery } from '$lib/requests/queries/lists/listItemsQuery.ts';
 import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
+import { withListOverlay } from '$lib/sections/lists/stores/withListOverlay.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import type { SortBy } from './models/SortBy.ts';
@@ -70,14 +70,10 @@ function listToQuery(
 }
 
 export function useListItems(props: UseListItemsProps) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(listToQuery(props));
-  const overlay = createBulkIntlOverlay<ListItem>({
-    getTargets: listItemTargets,
-  });
-  return {
-    list: baseList.pipe(overlay.operator),
-    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
-    ...rest,
-  };
+  return withListOverlay(
+    usePaginatedListQuery(listToQuery(props)),
+    createBulkIntlOverlay<ListItem>({
+      getTargets: listItemTargets,
+    }),
+  );
 }

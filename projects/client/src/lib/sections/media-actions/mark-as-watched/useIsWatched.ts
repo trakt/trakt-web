@@ -7,12 +7,13 @@ import { useOfflineActions } from '$lib/features/offline/useOfflineActions.ts';
 import { getShowWatchState } from '$lib/utils/media/getShowWatchState.ts';
 import { combineLatest, map, shareReplay } from 'rxjs';
 import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
+import { toArray } from '$lib/utils/array/toArray.ts';
 
 export type IsWatchedProps = ExtendedMediaStoreProps;
 
 export function useIsWatched(props: IsWatchedProps) {
   const { type } = props;
-  const media = Array.isArray(props.media) ? props.media : [props.media];
+  const media = toArray(props.media);
   const { history } = useUser();
   const { actions } = useOfflineActions();
 
@@ -41,16 +42,10 @@ export function useIsWatched(props: IsWatchedProps) {
     };
   };
 
-  const episodes = props.type === 'episode'
-    ? Array.isArray(props.media) ? props.media : [props.media]
-    : [];
+  const episodes = props.type === 'episode' ? toArray(props.media) : [];
   const showId = 'show' in props ? props.show.id : -1;
-  const seasons = props.type === 'season'
-    ? Array.isArray(props.media) ? props.media : [props.media]
-    : [];
-  const shows = props.type === 'show'
-    ? Array.isArray(props.media) ? props.media : [props.media]
-    : [];
+  const seasons = props.type === 'season' ? toArray(props.media) : [];
+  const shows = props.type === 'show' ? toArray(props.media) : [];
 
   const watchState = combineLatest([history, actions]).pipe(
     map(([$history, $actions]) => {

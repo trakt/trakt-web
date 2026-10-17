@@ -1,3 +1,4 @@
+import { toHistoryQueryParams } from '$lib/requests/_internal/toHistoryQueryParams.ts';
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
@@ -42,15 +43,14 @@ export function episodeActivityHistoryRequest(
   { fetch, slug, startDate, endDate, limit, id, page, filter, syncId }:
     EpisodeActivityHistoryParams,
 ) {
-  const queryParams = {
-    extended: 'full,images' as const,
-    start_at: startDate?.toISOString(),
-    end_at: endDate?.toISOString(),
+  const queryParams = toHistoryQueryParams({
+    startDate,
+    endDate,
     limit,
     page,
-    sync_id: syncId,
-    ...filter,
-  };
+    syncId,
+    filter,
+  });
 
   return id
     ? api({ fetch }).users.history.episode({

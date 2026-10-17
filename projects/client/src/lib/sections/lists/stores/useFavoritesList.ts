@@ -1,7 +1,6 @@
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkIntlOverlay } from '$lib/features/intl-overlay/createBulkIntlOverlay.ts';
 import { makeTargets } from '$lib/features/intl-overlay/makeTargets.ts';
-import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FavoritedEntry } from '$lib/requests/models/FavoritedEntry.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { mediaFavoritesQuery } from '$lib/requests/queries/media/mediaFavoritesQuery.ts';
@@ -11,6 +10,7 @@ import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
 import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { usePaginatedListQuery } from './usePaginatedListQuery.ts';
+import { withListOverlay } from '$lib/sections/lists/stores/withListOverlay.ts';
 
 export type UseFavoritesProps = {
   type?: DiscoverMode;
@@ -49,16 +49,12 @@ export function useFavoritesList(
   { type, slug, filter, limit = DEFAULT_PAGE_SIZE, sortBy, sortHow }:
     UseFavoritesProps,
 ) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
+  return withListOverlay(
     usePaginatedListQuery(
       typeToQuery({ type, slug, filter, limit, sortBy, sortHow }),
-    );
-  const overlay = createBulkIntlOverlay<FavoritedEntry>({
-    getTargets: favoritedEntryTargets,
-  });
-  return {
-    list: baseList.pipe(overlay.operator),
-    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
-    ...rest,
-  };
+    ),
+    createBulkIntlOverlay<FavoritedEntry>({
+      getTargets: favoritedEntryTargets,
+    }),
+  );
 }

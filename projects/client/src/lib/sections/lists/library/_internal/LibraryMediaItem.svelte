@@ -52,4 +52,8 @@
     transform: scale(0.75);
     transform-origin: bottom left;
   }
+
+  .trakt-added-at-tag:dir(rtl) {
+    transform-origin: bottom right;
+  }
 </style>

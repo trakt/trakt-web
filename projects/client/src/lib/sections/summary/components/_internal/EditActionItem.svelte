@@ -1,16 +1,16 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
 
-  const { onclick }: { onclick: () => void } = $props();
+  const {
+    label,
+    text,
+    onclick,
+  }: { label: string; text: string; onclick: () => void } = $props();
 </script>
 
-<DropdownItem
-  {onclick}
-  label={m.button_label_edit_note()}
->
-  {`${m.button_text_edit_note()}…`}
+<DropdownItem {onclick} {label}>
+  {`${text}…`}
   {#snippet icon()}
     <RenameIcon />
   {/snippet}

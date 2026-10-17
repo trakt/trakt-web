@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { time } from "$lib/utils/timing/time";
   import { scaleBand, scaleLinear } from "d3";
@@ -25,7 +26,7 @@
     barSpacing = 2,
     seriesIndex = 0,
     highlightPeak = true,
-    label = "Bar chart",
+    label = m.chart_label_bar_chart(),
     height = "var(--height-bar-chart)",
   }: BarChartProps = $props();
 
@@ -136,7 +137,7 @@
     height={height$}
     role="img"
     aria-label={label}
-    aria-roledescription="interactive bar chart"
+    aria-roledescription={m.chart_role_interactive_bar_chart()}
     tabindex="0"
     class="bar-chart-plot"
     onpointerdown={interaction.handlers.pointerdown}

@@ -1,5 +1,4 @@
 import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
-import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
@@ -10,6 +9,7 @@ import {
   showRelatedQuery,
 } from '$lib/requests/queries/shows/showRelatedQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
+import { withListOverlay } from '$lib/sections/lists/stores/withListOverlay.ts';
 import { DEFAULT_RELATED_LIMIT } from '$lib/utils/constants.ts';
 
 export type RelatedEntry = RelatedShow | MovieEntry;
@@ -40,12 +40,8 @@ function typeToQuery(
 export function useRelatedList(
   props: RelatedListStoreProps,
 ) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(typeToQuery(props));
-  const overlay = createBulkMediaIntl<RelatedEntry>();
-  return {
-    list: baseList.pipe(overlay.operator),
-    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
-    ...rest,
-  };
+  return withListOverlay(
+    usePaginatedListQuery(typeToQuery(props)),
+    createBulkMediaIntl<RelatedEntry>(),
+  );
 }

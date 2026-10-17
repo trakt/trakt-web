@@ -21,7 +21,7 @@
     <CrossOriginImage
       loading="eager"
       src={coverData?.src}
-      alt={`Background for ${coverData?.type}`}
+      alt=""
     />
   </div>
 {/if}

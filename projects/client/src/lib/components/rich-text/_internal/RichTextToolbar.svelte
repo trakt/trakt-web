@@ -15,7 +15,8 @@
   import { toolbarActions } from "./toolbarActions.ts";
 
   const maxMentionMatches = 20;
-  const mentionListId = `trakt-mention-list-${crypto.randomUUID().slice(0, 8)}`;
+  const uid = $props.id();
+  const mentionListId = `trakt-mention-list-${uid}`;
 
   const {
     editor,

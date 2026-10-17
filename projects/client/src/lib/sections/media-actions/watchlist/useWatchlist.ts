@@ -16,6 +16,7 @@ import { manageListsDrawerStore } from '$lib/sections/components/lists-drawer/ma
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useIsWatchlisted } from '$lib/stores/useIsWatchlisted.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
+import { toArray } from '$lib/utils/array/toArray.ts';
 // The "change list" drawer needs a full entry; bulk mutations may only carry
 // an `{ id }`.
 function isListableEntry(item: { id: number }): item is MediaEntry {
@@ -32,7 +33,7 @@ type UseWatchlistProps = MediaStoreProps & {
 
 export function useWatchlist(props: UseWatchlistProps) {
   const { type, isToastEnabled = true } = props;
-  const media = Array.isArray(props.media) ? props.media : [props.media];
+  const media = toArray(props.media);
   const { track } = useTrack(AnalyticsEvent.Watchlist);
   const notify = toGatedNotify(useActionToast().notify, isToastEnabled);
 

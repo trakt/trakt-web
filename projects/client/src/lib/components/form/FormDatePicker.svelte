@@ -5,7 +5,7 @@
   import type { FormDatePickerProps } from "./models/FormDatePickerProps";
   import type { ValidationProps } from "./models/ValidationProps";
 
-  const randomId = crypto.randomUUID().slice(0, 8);
+  const randomId = $props.id();
   const errorLabelId = `trakt-date-picker-error-${randomId}`;
 
   const {

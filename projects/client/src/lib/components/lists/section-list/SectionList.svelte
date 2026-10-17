@@ -125,7 +125,9 @@
     {#if !$isEditModeEnabled}
       <ActionButton
         onclick={toggle}
-        label={isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
+        label={isCollapsed
+          ? m.button_label_expand_list({ title: title ?? "" })
+          : m.button_label_collapse_list({ title: title ?? "" })}
         style="ghost"
         color="default"
       >

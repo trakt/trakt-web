@@ -1,5 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
+import { safeJsonParse } from '$lib/utils/json/safeJsonParse.ts';
 import { BehaviorSubject, distinctUntilChanged, map } from 'rxjs';
 
 export function useStreamingPreferences() {
@@ -7,7 +8,7 @@ export function useStreamingPreferences() {
 
   const showOnlyFavorites = new BehaviorSubject(
     Boolean(
-      JSON.parse(safeLocalStorage.getItem('show-only-favorites') ?? 'false'),
+      safeJsonParse(safeLocalStorage.getItem('show-only-favorites'), false),
     ),
   );
 

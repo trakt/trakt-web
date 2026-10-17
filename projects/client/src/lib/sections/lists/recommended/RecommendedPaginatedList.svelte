@@ -19,7 +19,7 @@
 </script>
 
 <DrilledMediaList
-  id="view-all-recommended-${type}"
+  id="view-all-recommended-{type}"
   {title}
   {type}
   filter={{

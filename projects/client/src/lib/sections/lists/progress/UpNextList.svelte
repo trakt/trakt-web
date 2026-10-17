@@ -32,7 +32,9 @@
     source={{
       id: "up-next",
     }}
-    drilldownLabel="drill label"
+    drilldownLabel={m.button_label_view_all_items_in({
+      title: m.list_title_up_next(),
+    })}
     filter={$filterMap}
     useList={(listParams) =>
       useStablePaginated({

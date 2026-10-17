@@ -3,13 +3,16 @@ import type {
   AvailableLanguage,
   AvailableLocale,
 } from '$lib/features/i18n/index.ts';
+import { createNumberFormatCache } from './_internal/createNumberFormatCache.ts';
+
+const getFormatter = createNumberFormatCache({
+  style: 'percent',
+  maximumFractionDigits: 0,
+});
 
 export function toPercentage(
   value: number,
   locale: AvailableLocale | AvailableLanguage | string = 'en',
 ) {
-  return new Intl.NumberFormat(getIntlLocale(locale as AvailableLanguage), {
-    style: 'percent',
-    maximumFractionDigits: 0,
-  }).format(value);
+  return getFormatter(getIntlLocale(locale as AvailableLanguage)).format(value);
 }

@@ -2,12 +2,13 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { getShowWatchState } from '$lib/utils/media/getShowWatchState.ts';
 import { map, of } from 'rxjs';
+import { toArray } from '$lib/utils/array/toArray.ts';
 
 type IsStartedProps = MediaStoreProps;
 
 export function useIsStarted(props: IsStartedProps) {
   const { type } = props;
-  const media = Array.isArray(props.media) ? props.media : [props.media];
+  const media = toArray(props.media);
   const { history } = useUser();
 
   if (type === 'show') {

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { geoNaturalEarth1, geoPath } from "d3";
   import { onMount } from "svelte";
@@ -12,7 +13,7 @@
     CountryMapTooltipArgs,
   } from "./models/CountryMapProps.ts";
 
-  const { data, tooltip, label = "Country map" }: CountryMapProps = $props();
+  const { data, tooltip, label = m.chart_label_country_map() }: CountryMapProps = $props();
 
   // When the pointer is within this many px of the map's top edge, flip the
   // tooltip below the pointer so it isn't clipped by the map's container.

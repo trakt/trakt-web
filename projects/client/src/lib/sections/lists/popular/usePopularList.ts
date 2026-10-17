@@ -1,6 +1,5 @@
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
-import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -14,6 +13,7 @@ import { addYear } from '$lib/utils/date/addYear.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import { mediaPopularQuery } from '$lib/requests/queries/media/mediaPopularQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
+import { withListOverlay } from '$lib/sections/lists/stores/withListOverlay.ts';
 
 export type PopularEntry = ShowEntry | MovieEntry;
 export type PopularMediaList = Array<PopularEntry>;
@@ -26,18 +26,23 @@ type PopularListStoreProps =
   & FilterParams
   & SearchParams;
 
+type DatedFilter = NonNullable<PopularListStoreProps['filter']> & {
+  start_date?: string;
+  end_date?: string;
+};
+
 function typeToQuery(
   { type, ...params }: PopularListStoreProps,
 ) {
   if (!params.filter?.years && !params.theme) {
     // FIXME: remove this when behavior is uplifted to the server
-    params.filter = params.filter ?? {};
-    // @ts-expect-error we are extending the object to dedupe
-    params.filter.start_date = params.filter?.start_date ??
-      addYear(new Date(), -1).toISOString();
-    // @ts-expect-error we are extending the object to dedupe
-    params.filter.end_date = params.filter?.end_date ??
-      addYear(new Date(), 0).toISOString();
+    const current: DatedFilter = params.filter ?? {};
+    const dated: DatedFilter = {
+      ...current,
+      start_date: current.start_date ?? addYear(new Date(), -1).toISOString(),
+      end_date: current.end_date ?? addYear(new Date(), 0).toISOString(),
+    };
+    params.filter = dated;
   }
 
   switch (type) {
@@ -57,12 +62,8 @@ function typeToQuery(
 export function usePopularList(
   props: PopularListStoreProps,
 ) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(typeToQuery(props));
-  const overlay = createBulkMediaIntl<PopularEntry>();
-  return {
-    list: baseList.pipe(overlay.operator),
-    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
-    ...rest,
-  };
+  return withListOverlay(
+    usePaginatedListQuery(typeToQuery(props)),
+    createBulkMediaIntl<PopularEntry>(),
+  );
 }
