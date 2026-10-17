@@ -131,8 +131,6 @@
     &.has-contextual-content {
       gap: var(--gap-m);
     }
-
-    backdrop-filter: blur(var(--ni-8));
   }
 
   .trakt-mobile-navbar-links {
