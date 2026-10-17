@@ -1,22 +1,13 @@
 import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
-import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQuery.ts';
 import { watchlistQuery } from '$lib/requests/queries/users/watchlistQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { dedupe } from '$lib/utils/array/dedupe.ts';
 import { map } from 'rxjs';
 import type { ReorderListSource } from '../models/ReorderListSource.ts';
 import { mapListItemToReorderableItem } from './reorderListItems.ts';
 
 const reorderPageSize = 100;
-
-function uniqueByKey(entries: ListItem[]): ListItem[] {
-  const seen = new Set<string>();
-  return entries.filter((item) => {
-    if (seen.has(item.key)) return false;
-    seen.add(item.key);
-    return true;
-  });
-}
 
 export function useReorderList(source: ReorderListSource) {
   const query = useAllPagesInfiniteQuery(
@@ -49,7 +40,9 @@ export function useReorderList(source: ReorderListSource) {
       }
 
       const entries = $query.data?.pages.flatMap((page) => page.entries) ?? [];
-      return uniqueByKey(entries).map(mapListItemToReorderableItem);
+      return dedupe((item) => item.key, entries).map(
+        mapListItemToReorderableItem,
+      );
     }),
   );
 
