@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from '$lib/features/query/useQuery.ts';
 import { rethrowUnlessCancelled } from '$lib/features/query/rethrowUnlessCancelled.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
+import { dedupe } from '$lib/utils/array/dedupe.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import type { CreateInfiniteQueryOptions } from '$lib/features/query/types.ts';
 import type { InfiniteData, QueryKey } from '@tanstack/query-core';
@@ -31,15 +32,10 @@ export function usePaginatedListQuery<
       }
 
       // Dedupe across pages to counter offset pagination drift
-      return $query.data.pages
-        .flatMap((page) => page.entries)
-        .filter(
-          ((seen) => (entry) => {
-            if (seen.has(entry.key)) return false;
-            seen.add(entry.key);
-            return true;
-          })(new Set<string>()),
-        );
+      return dedupe(
+        (entry) => entry.key,
+        $query.data.pages.flatMap((page) => page.entries),
+      );
     }),
   );
 

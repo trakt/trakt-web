@@ -11,6 +11,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { personMovieCreditsQuery } from '$lib/requests/queries/people/personMovieCreditsQuery.ts';
 import { personShowCreditsQuery } from '$lib/requests/queries/people/personShowCreditsQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { dedupe } from '$lib/utils/array/dedupe.ts';
 import { combineLatest, map, type Observable } from 'rxjs';
 import { toLoadingState } from '../../../../utils/requests/toLoadingState.ts';
 
@@ -84,13 +85,7 @@ export function useHistoryCreditsList(
       const crewCredits = credits.filter((credit) => credit.type === 'crew');
       const allCredits = [...castCredits, ...crewCredits];
 
-      const seen = new Set();
-      const historyCredits = allCredits.filter((credit) => {
-        if (seen.has(credit.media.id)) return false;
-
-        seen.add(credit.media.id);
-        return true;
-      });
+      const historyCredits = dedupe((credit) => credit.media.id, allCredits);
 
       return historyCredits.sort((entryA, entryB) => {
         const aDate = getWatchedAt(entryA.media, historyResult);
