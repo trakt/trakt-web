@@ -1,7 +1,7 @@
 import { error } from '$lib/utils/console/print.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { strToU8, zip, type Zippable } from 'fflate';
-import { downloadFile } from './downloadFile.ts';
+import { downloadFile } from '$lib/utils/file/downloadFile.ts';
 import type { ExportOptions } from './models/ExportOptions.ts';
 import type { Pagination } from './models/Pagination.ts';
 import { processEndpoint } from './processEndpoint.ts';

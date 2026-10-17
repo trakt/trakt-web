@@ -4,8 +4,8 @@
   import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
   import LogoText from "$lib/components/logo/LogoText.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { downloadFile } from "$lib/sections/settings/export/downloadFile.ts";
-  import { toSvgBlob } from "$lib/sections/settings/export/toSvgBlob.ts";
+  import { downloadFile } from "$lib/utils/file/downloadFile.ts";
+  import { toSvgBlob } from "$lib/utils/file/toSvgBlob.ts";
 
   function handleDownload(event: MouseEvent, filename: string) {
     const target = event.currentTarget as HTMLElement;
