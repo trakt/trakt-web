@@ -1,8 +1,7 @@
 import { rawApiFetch } from '$lib/requests/api.ts';
 import type { ManageSubscriptionResult } from '$lib/requests/models/ManageSubscriptionResult.ts';
-import z from 'zod';
 import { isMissingSubscription } from './_internal/isMissingSubscription.ts';
-import { isStripeUrl } from './_internal/isStripeUrl.ts';
+import { StripeCheckoutResponseSchema } from './_internal/StripeCheckoutResponseSchema.ts';
 import { subscriptionRequestError } from './_internal/subscriptionRequestError.ts';
 
 const noContent = 204;
@@ -10,12 +9,6 @@ const noContent = 204;
 type ManageSubscriptionParams = {
   returnUrl: string;
 };
-
-const ManageSubscriptionResponseSchema = z.object({
-  checkout_url: z.string().refine(isStripeUrl, {
-    message: 'Checkout URL must be a valid Stripe URL',
-  }),
-});
 
 export async function manageSubscriptionQuery(
   { returnUrl }: ManageSubscriptionParams,
@@ -42,6 +35,6 @@ export async function manageSubscriptionQuery(
     return { kind: 'unavailable' };
   }
 
-  const body = ManageSubscriptionResponseSchema.parse(await response.json());
+  const body = StripeCheckoutResponseSchema.parse(await response.json());
   return { kind: 'redirect', url: body.checkout_url };
 }
