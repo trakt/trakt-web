@@ -2,6 +2,7 @@ import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toImportISOString } from './utils/toImportISOString.ts';
+import { collectFileTexts } from './utils/collectFileTexts.ts';
 import { toInt } from './utils/toInt.ts';
 import { toEpisodeIds } from './utils/toEpisodeIds.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
@@ -290,19 +291,6 @@ function unzipExportTexts(buffer: ArrayBuffer): Entry[] {
   }
 }
 
-async function collectEntries(files: ReadonlyArray<File>): Promise<Entry[]> {
-  const entries = await Promise.all(
-    files.map(async (file) => {
-      if (file.name.endsWith('.zip')) {
-        return unzipExportTexts(await file.arrayBuffer());
-      }
-      return [{ basename: file.name, text: await file.text() }];
-    }),
-  );
-
-  return entries.flat();
-}
-
 // A watch is identified by what it targets, not which file it came from, so
 // the same episode/movie present in both the CSV and JSON exports collapses to
 // one item.
@@ -367,7 +355,7 @@ export const TvTimeExportParser: FileParser = {
   },
 
   async parse(files) {
-    const entries = await collectEntries(files);
+    const entries = await collectFileTexts({ files, unzip: unzipExportTexts });
 
     const results = await Promise.all(
       entries.map(async (entry) => {

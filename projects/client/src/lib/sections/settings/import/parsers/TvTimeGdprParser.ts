@@ -2,6 +2,7 @@ import type { UniversalImportItem } from '../ImportTypes.ts';
 import type { FileParser } from './ParserInterface.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toImportISOString } from './utils/toImportISOString.ts';
+import { collectFileTexts } from './utils/collectFileTexts.ts';
 import { toInt } from './utils/toInt.ts';
 import { toEpisodeIds } from './utils/toEpisodeIds.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
@@ -485,19 +486,6 @@ function unzipGdprCsvTexts(buffer: ArrayBuffer) {
   }
 }
 
-async function collectCsvTexts(files: ReadonlyArray<File>) {
-  const entries = await Promise.all(
-    files.map(async (file) => {
-      if (file.name.endsWith('.zip')) {
-        return unzipGdprCsvTexts(await file.arrayBuffer());
-      }
-      return [{ basename: file.name, text: await file.text() }];
-    }),
-  );
-
-  return entries.flat();
-}
-
 export const TvTimeGdprParser: FileParser = {
   name: 'TV Time GDPR',
 
@@ -511,7 +499,7 @@ export const TvTimeGdprParser: FileParser = {
   },
 
   async parse(files) {
-    const entries = await collectCsvTexts(files);
+    const entries = await collectFileTexts({ files, unzip: unzipGdprCsvTexts });
     const parsed = await Promise.all(
       entries.map(async (entry) => ({
         basename: entry.basename,
