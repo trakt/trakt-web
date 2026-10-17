@@ -1,8 +1,5 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import EpisodeDrawerHost from "../episode-drawer/EpisodeDrawerHost.svelte";
-  import SeasonGlanceHost from "./_internal/SeasonGlanceHost.svelte";
-  import MediaGlanceDrawerHost from "./MediaGlanceDrawerHost.svelte";
   import { MediaGlanceDrawers } from "./MediaGlanceDrawers.ts";
   import { mediaGlanceNavigation } from "./mediaGlanceNavigation.ts";
 
@@ -13,16 +10,22 @@
 
 {#if slug}
   {#if drawer === MediaGlanceDrawers.Media && type}
-    <MediaGlanceDrawerHost {type} {slug} onClose={close} />
+    {#await import("./MediaGlanceDrawerHost.svelte") then { default: MediaGlanceDrawerHost }}
+      <MediaGlanceDrawerHost {type} {slug} onClose={close} />
+    {/await}
   {:else if drawer === MediaGlanceDrawers.Episode && season != null && episode != null}
-    <EpisodeDrawerHost
-      {slug}
-      {season}
-      {episode}
-      variant="glance"
-      onClose={close}
-    />
+    {#await import("../episode-drawer/EpisodeDrawerHost.svelte") then { default: EpisodeDrawerHost }}
+      <EpisodeDrawerHost
+        {slug}
+        {season}
+        {episode}
+        variant="glance"
+        onClose={close}
+      />
+    {/await}
   {:else if drawer === MediaGlanceDrawers.Season && season != null}
-    <SeasonGlanceHost {slug} {season} onClose={close} />
+    {#await import("./_internal/SeasonGlanceHost.svelte") then { default: SeasonGlanceHost }}
+      <SeasonGlanceHost {slug} {season} onClose={close} />
+    {/await}
   {/if}
 {/if}
