@@ -117,7 +117,7 @@
   );
 
   const currentSeasonCount = $derived(
-    orderedSeasons.at(currentIndex)?.episodes.count ?? 0,
+    orderedSeasons.find((s) => s.number === season)?.episodes.count ?? 0,
   );
 
   const previousTarget = $derived.by(() => {
