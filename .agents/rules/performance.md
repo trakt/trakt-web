@@ -319,6 +319,11 @@ re-creates the entire observer chain on every reactive flush.
 - **Load heavy clients inside the async function that needs them.** `lookup()`
   already returns a promise, so `await import('./createSearcher.ts')` keeps
   typesense and axios out of boot. Server-side callers keep the static import.
+- **Drawer hosts the root layout renders on a URL param load on first open.**
+  The glance drawer hosts in `MediaGlanceProvider` pulled marked, d3 and the
+  rich-text editor into boot. They now load with `{#await import(...)}`; the
+  accepted cost is that a shared URL with a drawer param renders no drawer shell
+  during SSR, and the first open waits for one chunk.
 - **Run cleanup at idle, not in a load function.** The persisted query cache
   sweep reads every IndexedDB entry; it runs in `requestIdleCallback` (capped by
   its `timeout` option) so hydration does not wait on it. Browsers without
