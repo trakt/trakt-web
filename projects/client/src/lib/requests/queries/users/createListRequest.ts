@@ -13,7 +13,7 @@ type CreateListRequestParams =
 
 export function createListRequest(
   { userId, name, fetch, description, privacy }: CreateListRequestParams,
-): Promise<boolean> {
+): Promise<number | null> {
   return api({ fetch })
     .users
     .lists
@@ -27,5 +27,5 @@ export function createListRequest(
         privacy,
       },
     })
-    .then(({ status }) => status === 201);
+    .then(({ status, body }) => status === 201 ? body.ids.trakt : null);
 }

@@ -97,7 +97,10 @@ describe('store: useSaveList', () => {
           'http://localhost/users/me/lists',
           async ({ request }) => {
             requestBody = await request.json();
-            return HttpResponse.json({}, { status: 201 });
+            return HttpResponse.json(
+              { ids: { trakt: 1, slug: 'my-list' } },
+              { status: 201 },
+            );
           },
         ),
       );
@@ -121,7 +124,11 @@ describe('store: useSaveList', () => {
       server.use(
         http.post(
           'http://localhost/users/me/lists',
-          () => HttpResponse.json({}, { status: 201 }),
+          () =>
+            HttpResponse.json(
+              { ids: { trakt: 1, slug: 'my-list' } },
+              { status: 201 },
+            ),
         ),
       );
 

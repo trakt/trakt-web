@@ -1,58 +1,134 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import WatchlistedTag from "$lib/components/media/tags/WatchlistedTag.svelte";
-  import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { useQuery } from "$lib/features/query/useQuery.ts";
+  import { userListsQuery } from "$lib/requests/queries/users/userListsQuery.ts";
+  import { map } from "rxjs";
   import type { MixtapeDoneProps } from "./MixtapeDoneProps.ts";
+  import type { MixtapeMoveChoice } from "./MixtapeMoveSheetProps.ts";
+  import MixtapeMoveSheet from "./MixtapeMoveSheet.svelte";
   import MixtapePicks from "./MixtapePicks.svelte";
+  import { useMixtapeSave } from "./useMixtapeSave.ts";
 
-  const { kept, picked, closeHref, changeHref, startOverHref, onMore }: MixtapeDoneProps =
-    $props();
+  const {
+    rounds,
+    picked,
+    savedTo,
+    closeHref,
+    changeHref,
+    startOverHref,
+    onMore,
+    onMoved,
+  }: MixtapeDoneProps = $props();
+
+  const lists = useQuery(userListsQuery()).pipe(
+    map((query) => query.data ?? []),
+  );
+  const { move, createList, isMoving } = useMixtapeSave();
+
+  let isSheetOpen = $state(false);
+  let moved = $state<{ target: number; name: string } | null>(null);
+
+  const kept = $derived(rounds.flat());
+  const newestFirst = $derived(
+    rounds
+      .map((media, index) => ({ media, round: index + 1 }))
+      .filter(({ media }) => media.length > 0)
+      .reverse(),
+  );
+  const isMultiRound = $derived(newestFirst.length > 1);
+  const savedToName = $derived(
+    savedTo == null
+      ? m.page_title_watchlist()
+      : ($lists.find(({ id }) => id === savedTo)?.name ??
+          (moved?.target === savedTo ? moved.name : null)),
+  );
+  const suggestedName = $derived(
+    m.text_mixtape_new_list_name({
+      picks: picked.map(({ title }) => title).join(" + "),
+    }),
+  );
+
+  const confirmMove = async (choice: MixtapeMoveChoice) => {
+    const destination =
+      "newName" in choice
+        ? { target: await createList(choice.newName), name: choice.newName }
+        : choice;
+    if ("newName" in choice && destination.target == null) return;
+
+    const isMoved = await move({
+      from: savedTo,
+      to: destination.target,
+      toName: destination.name,
+      media: kept,
+      onMoved,
+    });
+    if (!isMoved) return;
+    if (destination.target != null) {
+      moved = { target: destination.target, name: destination.name };
+    }
+    isSheetOpen = false;
+  };
 </script>
 
 <div class="trakt-mixtape-done">
-  <div class="done-progress">
-    {#each [0, 1, 2] as index (index)}
-      <div class="done-segment"></div>
-    {/each}
-  </div>
-
   <header class="done-header">
     <div class="done-heading">
-      <p class="bold">{m.header_mixtape_results()}</p>
-      <p class="small secondary">{m.text_mixtape_done()}</p>
+      <h2>{m.header_mixtape_done()}</h2>
+      <p class="small secondary">
+        {kept.length === 1
+          ? m.text_mixtape_count_one()
+          : m.text_mixtape_count({ count: kept.length })}
+      </p>
     </div>
     <Link href={closeHref} color="inherit" label={m.button_label_close()}>
       <span class="done-close"><CloseIcon /></span>
     </Link>
   </header>
 
-  <div class="done-intro">
-    <h2>{m.header_mixtape_done()}</h2>
-    <MixtapePicks {picked} />
-  </div>
+  <MixtapePicks {picked} />
 
   {#if kept.length > 0}
-    <div class="done-kept">
-      <p class="tag uppercase bold done-kicker">{m.header_mixtape_added()}</p>
-      <div class="done-thumbs">
-        {#each kept as { media } (media.id)}
-          <div class="done-thumb">
+    {#if savedToName}
+      <button
+        type="button"
+        class="done-saved"
+        aria-haspopup="dialog"
+        onclick={() => (isSheetOpen = true)}
+      >
+        <BookmarkIcon state="added" />
+        <span class="done-saved-text">
+          {m.text_mixtape_saved_to({ name: savedToName })}
+        </span>
+        <span class="small secondary">{m.button_text_mixtape_change_target()}</span>
+      </button>
+    {/if}
+
+    <div class="done-rounds">
+      {#each newestFirst as { media, round }, index (round)}
+        {#if isMultiRound}
+          <p class="done-round small secondary">
+            {m.text_mixtape_round({ round })}
+          </p>
+        {/if}
+        <div class="done-thumbs">
+          {#each media as item (item.id)}
             <div class="done-cover">
               <CrossOriginImage
-                src={media.poster.url.medium}
-                alt={m.image_alt_media_poster({ title: media.title })}
+                src={item.poster.url.medium}
+                alt={m.image_alt_media_poster({ title: item.title })}
               />
+              {#if isMultiRound && index === 0}
+                <span class="done-new">{m.tag_text_new()}</span>
+              {/if}
             </div>
-            <IndicatorTags>
-              <WatchlistedTag />
-            </IndicatorTags>
-          </div>
-        {/each}
-      </div>
+          {/each}
+        </div>
+      {/each}
     </div>
   {:else}
     <p class="secondary">{m.text_mixtape_results_empty()}</p>
@@ -61,19 +137,29 @@
   <span class="done-spacer"></span>
 
   <div class="done-buttons">
-    {#if onMore}
+    <div class="done-row">
+      {#if onMore}
+        <Button
+          color="purple"
+          label={m.button_text_mixtape_show_more()}
+          onclick={onMore}
+        >
+          {m.button_text_mixtape_show_more()}
+        </Button>
+      {/if}
       <Button
-        color="purple"
-        label={m.button_text_mixtape_show_more()}
-        onclick={onMore}
+        href={closeHref}
+        variant="secondary"
+        label={m.button_text_mixtape_finish()}
       >
-        {m.button_text_mixtape_show_more()}
+        {m.button_text_mixtape_finish()}
       </Button>
-    {/if}
+    </div>
     <div class="done-row">
       <Button
         href={changeHref}
         variant="secondary"
+        style="ghost"
         label={m.button_text_mixtape_change_picks()}
       >
         {m.button_text_mixtape_change_picks()}
@@ -81,6 +167,7 @@
       <Button
         href={startOverHref}
         variant="secondary"
+        style="ghost"
         label={m.button_text_mixtape_start_over()}
       >
         {m.button_text_mixtape_start_over()}
@@ -88,6 +175,18 @@
     </div>
   </div>
 </div>
+
+{#if isSheetOpen}
+  <MixtapeMoveSheet
+    current={savedTo}
+    currentName={savedToName ?? m.page_title_watchlist()}
+    lists={$lists}
+    {suggestedName}
+    isMoving={$isMoving}
+    onClose={() => (isSheetOpen = false)}
+    onConfirm={confirmMove}
+  />
+{/if}
 
 <style lang="scss">
   .trakt-mixtape-done {
@@ -112,18 +211,6 @@
     h2 {
       margin: 0;
     }
-  }
-
-  .done-progress {
-    display: flex;
-    gap: var(--gap-xxs);
-  }
-
-  .done-segment {
-    flex: 1;
-    height: var(--ni-3);
-    border-radius: var(--border-radius-xs);
-    background: var(--color-foreground);
   }
 
   .done-header {
@@ -155,21 +242,66 @@
     }
   }
 
-  .done-intro {
+  .done-saved {
+    all: unset;
+    box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: var(--gap-xs);
-    margin-block-start: var(--gap-l);
+    padding: var(--ni-12) var(--ni-14);
+
+    border-radius: var(--border-radius-m);
+    background: var(--color-card-background);
+    box-shadow: inset 0 0 0 var(--border-thickness-xxs) var(--color-border);
+    color: var(--color-text-primary);
+    cursor: pointer;
+
+    :global(svg) {
+      flex: none;
+      color: var(--purple-400);
+    }
+
+    &:focus-visible {
+      outline: var(--border-thickness-xs) solid var(--purple-300);
+      outline-offset: var(--ni-2);
+    }
   }
 
-  .done-kept {
+  .done-saved-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .done-rounds {
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
+    overflow-y: auto;
   }
 
-  .done-kicker {
-    color: var(--color-text-emphasis);
+  .done-round {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+
+    &::after {
+      content: "";
+      flex: 1;
+      border-block-start: var(--border-thickness-xxs) solid var(--color-border);
+    }
+  }
+
+  .done-new {
+    position: absolute;
+    inset-block-start: var(--ni-6);
+    inset-inline-start: var(--ni-6);
+    padding: var(--ni-2) var(--ni-8);
+
+    border-radius: var(--border-radius-xxl);
+    background: var(--purple-500);
+    color: var(--purple-50);
+    font-size: var(--font-size-tag);
+    font-weight: 700;
   }
 
   .done-thumbs {
@@ -178,11 +310,8 @@
     gap: var(--gap-s);
   }
 
-  .done-thumb {
-    --width-override-card: 100%;
-  }
-
   .done-cover {
+    position: relative;
     aspect-ratio: 2 / 3;
     overflow: hidden;
 

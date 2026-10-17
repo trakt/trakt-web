@@ -29,12 +29,19 @@ type MixtapeUrlParams = {
   type?: MediaType;
   picks?: ReadonlyArray<number>;
   skips?: ReadonlyArray<number>;
+  kept?: ReadonlyArray<ReadonlyArray<number>>;
+  savedTo?: number | null;
   view?: 'results';
   source?: string;
 };
 
 const toIdList = (ids?: ReadonlyArray<number>) =>
   ids && ids.length > 0 ? ids.join(',') : undefined;
+
+const toRoundList = (rounds?: ReadonlyArray<ReadonlyArray<number>>) =>
+  rounds && rounds.length > 0
+    ? rounds.map((round) => round.join(',')).join('~')
+    : undefined;
 
 type DiscoverUrlParams = SearchParams & {
   mode?: DiscoverMode;
@@ -165,6 +172,8 @@ export const UrlBuilder = {
         type: params.type,
         picks: toIdList(params.picks),
         skips: toIdList(params.skips),
+        kept: toRoundList(params.kept),
+        to: params.savedTo ?? undefined,
         view: params.view,
         source: params.source,
       })
