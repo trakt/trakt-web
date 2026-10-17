@@ -45,28 +45,36 @@
       }),
       {
         replaceState: true,
+        noScroll: true,
+        keepFocus: true,
       },
     );
   };
 
-  $effect.pre(() => {
-    if (!isNaN(currentSeason)) return;
-    if ($seasons == null || $show == null) return;
-    if ($seasons.length === 0) return;
+  const effectiveSeason = $derived.by(() => {
+    if (!isNaN(currentSeason)) return currentSeason;
+    if ($seasons == null || $seasons.length === 0) return NaN;
 
-    const activeSeason = findActiveSeason({
+    return findActiveSeason({
       seasons: $seasons,
       lastWatchedSeason: $lastWatchedSeason,
     });
+  });
 
-    goToSeason($show.slug, activeSeason);
+  $effect.pre(() => {
+    if (!isNaN(currentSeason)) return;
+    if ($show == null || isNaN(effectiveSeason)) return;
+
+    goToSeason($show.slug, effectiveSeason);
   });
 
   const hasCoreData = $derived(
     $show != null && $intl != null && $studios != null && $crew != null &&
       $seasons != null,
   );
-  const isReady = $derived(!$isLoading && !isNaN(currentSeason) && hasCoreData);
+  const isReady = $derived(
+    !$isLoading && !isNaN(effectiveSeason) && hasCoreData,
+  );
 </script>
 
 <TraktPage
@@ -91,7 +99,7 @@
       streamOn={$streamOn}
       videos={$videos}
       sentiment={$sentiment}
-      {currentSeason}
+      currentSeason={effectiveSeason}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->
