@@ -216,6 +216,22 @@ safeLocalStorage.setItem('key', value);
 
 ---
 
+## Arrays and Files (`array/`, `file/`)
+
+| Export                      | Purpose                                                     |
+| --------------------------- | ----------------------------------------------------------- |
+| `toArray(value)`            | Wrap a single value in an array, pass an array through      |
+| `dedupe(keygen, ...arrays)` | Keep the first item per key, in original order              |
+| `chunk(array, size)`        | Split an array into consecutive slices of `size`            |
+| `toMap(entries, map, key)`  | Map entries and index the results by a derived key          |
+| `shuffle(items)`            | Return a randomly reordered copy                            |
+| `dailyShuffle(entries)`     | Rotate the order by an offset that changes once a day       |
+| `pickRandom(items)`         | Pick one random item, `undefined` when empty                |
+| `downloadFile(blob, name)`  | Save a `Blob` to the user's device under a file name        |
+| `toSvgBlob(element)`        | Serialize the first `<svg>` in an element, CSS vars inlined |
+
+---
+
 ## Constants (`constants.ts`, `assets.ts`)
 
 - `constants.ts` - global values (dates, sizes, limits, `NOOP_FN`). Add new
