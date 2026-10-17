@@ -21,9 +21,6 @@
 </div>
 
 <style lang="scss">
-  // Styles are :global so the same classes can be reused by Carbon's
-  // tooltip customHTML callback (see yirTooltipHTML.ts), which renders
-  // outside this component's DOM.
   :global(.trakt-yir-tooltip) {
     background: var(--color-yir-tooltip-background);
     border: var(--border-thickness-xxs) solid var(--color-yir-separator);
