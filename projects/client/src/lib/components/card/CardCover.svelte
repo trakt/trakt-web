@@ -93,7 +93,6 @@
     &.trakt-card-cover-loading {
       .trakt-card-cover-image {
         opacity: 0;
-        filter: blur(var(--ni-4));
       }
     }
 
@@ -156,9 +155,7 @@
     position: relative;
     height: var(--height-override-card-cover, var(--height-card-cover));
     align-self: stretch;
-    transition:
-      opacity calc(var(--transition-increment) * 2) ease-in-out,
-      filter var(--transition-increment) ease-in-out;
+    transition: opacity calc(var(--transition-increment) * 2) ease-in-out;
 
     :global(.trakt-logo-overlay) {
       position: absolute;
