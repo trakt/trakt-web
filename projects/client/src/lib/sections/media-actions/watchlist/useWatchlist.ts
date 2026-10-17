@@ -14,6 +14,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import { manageListsDrawerStore } from '$lib/sections/components/lists-drawer/manageListsDrawerStore.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
+import { withPendingIntent } from '$lib/sections/media-actions/_internal/withPendingIntent.ts';
 import { useIsWatchlisted } from '$lib/stores/useIsWatchlisted.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 // The "change list" drawer needs a full entry; bulk mutations may only carry
@@ -44,7 +45,7 @@ export function useWatchlist(props: UseWatchlistProps) {
   const singleEntry =
     soleItem && isListableEntry(soleItem) ? soleItem : undefined;
 
-  const { isWatchlisted } = useIsWatchlisted(props);
+  const { isWatchlisted: isWatchlistedOnServer } = useIsWatchlisted(props);
   const { isQueued } = useIsQueued({
     domain: 'watchlist',
     keys: ids.map((id) => toMediaKey(type, id)),
@@ -83,6 +84,11 @@ export function useWatchlist(props: UseWatchlistProps) {
   );
 
   const isWatchlistUpdating = anyTrue([addition.isPending, removal.isPending]);
+  const isWatchlisted = withPendingIntent({
+    current: isWatchlistedOnServer,
+    isAdding: addition.isPending,
+    isRemoving: removal.isPending,
+  });
 
   const addToWatchlist = async () => {
     if (type === 'episode') {

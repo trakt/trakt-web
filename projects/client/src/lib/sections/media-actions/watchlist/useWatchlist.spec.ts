@@ -8,6 +8,7 @@ import { lastActionToast } from '$test/beds/action-toast/lastActionToast.ts';
 import { server } from '$mocks/server.ts';
 import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
 import { captureRequests } from '$test/beds/request/captureRequests.ts';
+import { respondWithMalformedJson } from '$test/beds/request/respondWithMalformedJson.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { http, HttpResponse } from 'msw';
@@ -135,6 +136,50 @@ describe('useWatchlist', () => {
       );
 
       expect(await waitForEmission(isWatchlisted, 2)).toBe(false);
+    });
+  });
+
+  describe('pending state', () => {
+    it('should show as watchlisted while an add is in flight', async () => {
+      const { isWatchlisted, addToWatchlist } = await renderStore(() =>
+        useWatchlist({ type: 'show', media: ShowDevsMappedMock }),
+      );
+
+      expect(await waitForEmission(isWatchlisted, 2)).toBe(false);
+
+      const addition = addToWatchlist();
+      expect(await firstValueFrom(isWatchlisted)).toBe(true);
+
+      await addition;
+    });
+
+    it('should show as not watchlisted while a remove is in flight', async () => {
+      const { isWatchlisted, removeFromWatchlist } = await renderStore(() =>
+        useWatchlist({ type: 'movie', media: MovieMatrixMappedMock }),
+      );
+
+      expect(await waitForEmission(isWatchlisted, 2)).toBe(true);
+
+      const removal = removeFromWatchlist();
+      expect(await firstValueFrom(isWatchlisted)).toBe(false);
+
+      await removal;
+    });
+
+    it('should revert to the real state when the add fails', async () => {
+      server.use(respondWithMalformedJson('http://localhost/sync/watchlist'));
+
+      const { isWatchlisted, addToWatchlist } = await renderStore(() =>
+        useWatchlist({ type: 'show', media: ShowDevsMappedMock }),
+      );
+
+      expect(await waitForEmission(isWatchlisted, 2)).toBe(false);
+
+      const addition = addToWatchlist();
+      expect(await firstValueFrom(isWatchlisted)).toBe(true);
+
+      await expect(addition).rejects.toThrow();
+      expect(await firstValueFrom(isWatchlisted)).toBe(false);
     });
   });
 
