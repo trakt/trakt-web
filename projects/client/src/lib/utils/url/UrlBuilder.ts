@@ -310,7 +310,6 @@ export const UrlBuilder = {
     android: () =>
       'https://play.google.com/store/apps/details?id=tv.trakt.trakt',
     ios: () => 'https://apps.apple.com/us/app/trakt/id1514873602',
-    tvTime: () => 'https://tvtime.trakt.tv',
   },
   developer: {
     home: () => 'https://developer.trakt.tv',
