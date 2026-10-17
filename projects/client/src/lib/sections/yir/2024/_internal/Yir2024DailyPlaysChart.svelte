@@ -62,11 +62,5 @@
   .trakt-yir-2024-daily-plays-chart {
     --height-bar-chart: var(--ni-300);
     width: 100%;
-
-    :global(.cds--chart-holder) {
-      --cds-charts-font-family: "Spline Sans", Helvetica, Arial, sans-serif;
-      --cds-charts-font-family-condensed:
-        "Spline Sans", Helvetica, Arial, sans-serif;
-    }
   }
 </style>

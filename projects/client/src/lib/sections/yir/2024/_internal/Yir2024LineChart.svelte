@@ -15,13 +15,5 @@
   .trakt-yir-2024-line-chart {
     width: 100%;
     height: 100%;
-
-    // Match the 2024 template's body font; the shared AreaChart wrapper
-    // defaults to whatever Carbon picks otherwise.
-    :global(.cds--chart-holder) {
-      --cds-charts-font-family: "Spline Sans", Helvetica, Arial, sans-serif;
-      --cds-charts-font-family-condensed:
-        "Spline Sans", Helvetica, Arial, sans-serif;
-    }
   }
 </style>
