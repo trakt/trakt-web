@@ -1,3 +1,4 @@
+import { toHistoryQueryParams } from '$lib/requests/_internal/toHistoryQueryParams.ts';
 import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -37,15 +38,14 @@ const showHistoryRequest = ({
   filter,
   syncId,
 }: ShowActivityHistoryParams) => {
-  const queryParams = {
-    extended: 'full,images' as const,
-    start_at: startDate?.toISOString(),
-    end_at: endDate?.toISOString(),
+  const queryParams = toHistoryQueryParams({
+    startDate,
+    endDate,
     limit,
     page,
-    sync_id: syncId,
-    ...filter,
-  };
+    syncId,
+    filter,
+  });
 
   return id
     ? api({ fetch }).users.history.show({
