@@ -17,10 +17,7 @@ import type {
 import type { SortBy } from '../models/SortBy.ts';
 import type { SortDirection } from '../models/SortDirection.ts';
 import type { Sorting } from '../models/Sorting.ts';
-
-function mapToDirection(value: string | Nil): SortDirection | undefined {
-  return value === 'asc' || value === 'desc' ? value : undefined;
-}
+import { toSortDirection } from '../toSortDirection.ts';
 
 function mapToSortBy(
   value: string | Nil,
@@ -100,7 +97,7 @@ export function useListSorting(
         const defaultDirection = getDefaultDirection(props);
         const sortBy = mapToSortBy($params.sortBy, options) ??
           getDefaultSortBy(props);
-        const sortHow = mapToDirection($params.sortHow) ?? defaultDirection;
+        const sortHow = toSortDirection($params.sortHow) ?? defaultDirection;
 
         const sorting = options.find(
           (option) => option.value === sortBy,

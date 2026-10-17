@@ -11,6 +11,7 @@ import type {
 } from './models/ListUrlBuilder.ts';
 import type { SortDirection } from './models/SortDirection.ts';
 import type { Sorting } from './models/Sorting.ts';
+import { toSortDirection } from './toSortDirection.ts';
 
 type UserListsSorting = {
   current: Observable<{
@@ -25,10 +26,6 @@ type UseUserListsSortingProps = {
   slug: string;
 };
 
-function mapToDirection(value: string | Nil): SortDirection | undefined {
-  return value === 'asc' || value === 'desc' ? value : undefined;
-}
-
 function mapToSortBy(value: string | Nil): UserListsSortBy | undefined {
   const sortBy = userListsSortOptions.find((option) => option.value === value);
   return sortBy?.value;
@@ -42,7 +39,7 @@ export function useUserListsSorting(
     current: useSortParams().pipe(
       map(($params) => {
         const sortBy = mapToSortBy($params.sortBy) ?? 'rank';
-        const sortHow = mapToDirection($params.sortHow) ??
+        const sortHow = toSortDirection($params.sortHow) ??
           defaultDirection(sortBy);
         const sorting = userListsSortOptions.find(
           (option) => option.value === sortBy,
