@@ -28,15 +28,21 @@ type AnticipatedListStoreProps =
   & FilterParams
   & SearchParams;
 
+type DatedFilter = NonNullable<AnticipatedListStoreProps['filter']> & {
+  end_date?: string;
+};
+
 function typeToQuery(
   { type, ...params }: AnticipatedListStoreProps,
 ) {
   if (!params.filter?.years && !params.theme) {
     // FIXME: remove this when behavior is uplifted to the server
-    params.filter = params.filter ?? {};
-    // @ts-expect-error we are extending the object to dedupe
-    params.filter.end_date = params.filter?.end_date ??
-      addYear(new Date(), 1).toISOString();
+    const current: DatedFilter = params.filter ?? {};
+    const dated: DatedFilter = {
+      ...current,
+      end_date: current.end_date ?? addYear(new Date(), 1).toISOString(),
+    };
+    params.filter = dated;
   }
 
   switch (type) {

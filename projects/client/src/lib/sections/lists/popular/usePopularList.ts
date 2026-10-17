@@ -26,18 +26,23 @@ type PopularListStoreProps =
   & FilterParams
   & SearchParams;
 
+type DatedFilter = NonNullable<PopularListStoreProps['filter']> & {
+  start_date?: string;
+  end_date?: string;
+};
+
 function typeToQuery(
   { type, ...params }: PopularListStoreProps,
 ) {
   if (!params.filter?.years && !params.theme) {
     // FIXME: remove this when behavior is uplifted to the server
-    params.filter = params.filter ?? {};
-    // @ts-expect-error we are extending the object to dedupe
-    params.filter.start_date = params.filter?.start_date ??
-      addYear(new Date(), -1).toISOString();
-    // @ts-expect-error we are extending the object to dedupe
-    params.filter.end_date = params.filter?.end_date ??
-      addYear(new Date(), 0).toISOString();
+    const current: DatedFilter = params.filter ?? {};
+    const dated: DatedFilter = {
+      ...current,
+      start_date: current.start_date ?? addYear(new Date(), -1).toISOString(),
+      end_date: current.end_date ?? addYear(new Date(), 0).toISOString(),
+    };
+    params.filter = dated;
   }
 
   switch (type) {
