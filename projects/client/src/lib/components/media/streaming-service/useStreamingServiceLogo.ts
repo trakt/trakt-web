@@ -48,7 +48,7 @@ export function useStreamingServiceLogo(
         return mapToLogo(service);
       }
 
-      const allServices = Array.from($query.data.values() ?? []).flat();
+      const allServices = Array.from($query.data.values()).flat();
       const fallbackService = allServices.find((s) => s.source === source);
       return fallbackService ? mapToLogo(fallbackService) : undefined;
     }),
