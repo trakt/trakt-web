@@ -8,7 +8,9 @@ import { mapToMixtapeMedia } from './_internal/mapToMixtapeMedia.ts';
 import { MixtapeMediaResponseSchema } from './_internal/MixtapeMediaResponseSchema.ts';
 
 const MixtapeResponseSchema = z.object({
-  fits: z.array(z.object({ id: z.number(), score: z.number() })),
+  fits: z.array(
+    MixtapeMediaResponseSchema.extend({ id: z.number(), score: z.number() }),
+  ),
   suggestions: z.array(
     MixtapeMediaResponseSchema.extend({
       because: z.number(),
@@ -21,10 +23,11 @@ type MixtapeParams = {
   type: MediaType;
   picks: ReadonlyArray<number>;
   candidates: ReadonlyArray<number>;
+  suggestions: boolean;
 } & ApiParams;
 
 const mixtapeRequest = async (
-  { fetch, type, picks, candidates }: MixtapeParams,
+  { fetch, type, picks, candidates, suggestions }: MixtapeParams,
 ) => {
   const response = await rawApiFetch({
     fetch,
@@ -32,7 +35,7 @@ const mixtapeRequest = async (
     init: {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ type, picks, candidates }),
+      body: JSON.stringify({ type, picks, candidates, suggestions }),
     },
   });
 
@@ -51,10 +54,15 @@ export const mixtapeQuery = defineQuery({
     params.type,
     params.picks.join(','),
     params.candidates.join(','),
+    params.suggestions,
   ],
   request: mixtapeRequest,
   mapper: (response): Mixtape => ({
-    fits: response.body?.fits ?? [],
+    fits: (response.body?.fits ?? []).map((fit) => ({
+      id: fit.id,
+      score: fit.score,
+      media: mapToMixtapeMedia(fit) ?? undefined,
+    })),
     suggestions: (response.body?.suggestions ?? []).flatMap((suggestion) => {
       const media = mapToMixtapeMedia(suggestion);
       return media

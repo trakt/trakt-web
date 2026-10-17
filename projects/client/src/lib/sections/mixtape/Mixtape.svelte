@@ -43,6 +43,9 @@
     searchResults,
     isSearchLoading,
     picked,
+    known,
+    fits,
+    isFitsSettling,
     isHistoryLoading,
     mixtape,
     isMixtapeLoading,
@@ -84,12 +87,13 @@
     toPickerItems({
       history: $history,
       searchResults: $searchResults,
+      fitMedia: $known,
       picks: params.picks,
-      fits: $mixtape.fits,
+      fits: $fits,
       query,
     }),
   );
-  const isSettling = $derived(picker.kind === "fits" && $isMixtapeLoading);
+  const isSettling = $derived(picker.kind === "fits" && $isFitsSettling);
   const heldPicker$ = fromRune(() => ({
     picker,
     isSettling,
@@ -245,7 +249,7 @@
           trackMix({
             type: params.type,
             picks: params.picks.length,
-            fits: $mixtape.fits.length,
+            fits: $fits.length,
           })}
       >
         <MixtapeTray

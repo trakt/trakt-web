@@ -4,17 +4,19 @@ import { mixtapeHistoryQuery } from '$lib/requests/queries/mixtape/mixtapeHistor
 import type { Mixtape } from '$lib/requests/models/Mixtape.ts';
 import { mixtapePicksQuery } from '$lib/requests/queries/mixtape/mixtapePicksQuery.ts';
 import { mixtapeQuery } from '$lib/requests/queries/mixtape/mixtapeQuery.ts';
+import { mixtapeVectorsQuery } from '$lib/requests/queries/mixtape/mixtapeVectorsQuery.ts';
 import { keepPreviousData } from '@tanstack/query-core';
 import { dedupe } from '$lib/utils/array/dedupe.ts';
 import {
   combineLatest,
   distinctUntilChanged,
   map,
+  merge,
   type Observable,
   scan,
   startWith,
 } from 'rxjs';
-import { MAX_MIXTAPE_CANDIDATES } from './_internal/MAX_MIXTAPE_CANDIDATES.ts';
+import { scoreLocalFits } from './_internal/scoreLocalFits.ts';
 import { toSearchTerms } from './_internal/toSearchTerms.ts';
 import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
@@ -65,39 +67,103 @@ export function useMixtape(
     ),
   );
 
+  const deep = useQuery(
+    request$.pipe(
+      map(({ type, picks }) =>
+        mixtapeQuery({ type, picks, candidates: [], suggestions: false })
+      ),
+    ),
+  );
   const mixtape = useQuery(
-    combineLatest([request$, history, searchResults$]).pipe(
-      map(([{ type, picks }, historyQuery, searched]) => {
-        const options = mixtapeQuery({
-          type,
-          picks,
-          candidates: dedupe(
-            (id) => id,
-            [...searched, ...(historyQuery.data ?? [])].map(({ id }) => id),
-          ).slice(0, MAX_MIXTAPE_CANDIDATES),
-        });
-        return {
-          ...options,
-          enabled: options.enabled && !historyQuery.isLoading,
-          placeholderData: keepPreviousData,
-        };
-      }),
+    request$.pipe(
+      map(({ type, picks }) => ({
+        ...mixtapeQuery({ type, picks, candidates: [], suggestions: true }),
+        placeholderData: keepPreviousData,
+      })),
+    ),
+  );
+  const deepFits$ = combineLatest([deep, mixtape]).pipe(
+    map(([fitsOnly, full]) =>
+      dedupe(({ id }) => id, [
+        ...(fitsOnly.data?.fits ?? []),
+        ...(full.isPlaceholderData ? [] : full.data?.fits ?? []),
+      ])
     ),
   );
 
-  const seenHits$ = searchResults$.pipe(
+  const seen$ = merge(
+    searchResults$,
+    deepFits$.pipe(
+      map((fits) => fits.flatMap(({ media }) => (media ? [media] : []))),
+    ),
+  ).pipe(
     scan(
-      (seen: ReadonlyArray<MovieEntry | ShowEntry>, hits) =>
-        dedupe(({ id }) => id, [...hits], [...seen]),
+      (seen: ReadonlyArray<MovieEntry | ShowEntry>, found) =>
+        dedupe(({ id }) => id, [...found], [...seen]),
       [],
     ),
     startWith([]),
   );
-  const known$ = combineLatest([history$, seenHits$, type$]).pipe(
+  const known$ = combineLatest([history$, seen$, type$]).pipe(
     map(([items, seen, type]) => [
       ...items,
       ...seen.filter((media) => media.type === type),
     ]),
+  );
+
+  const toSortedIds = (ids: ReadonlyArray<number>) =>
+    [...new Set(ids)].sort((a, b) => a - b);
+  const recentVectors = useQuery(
+    combineLatest([type$, history$]).pipe(
+      map(([type, items]) =>
+        mixtapeVectorsQuery({
+          type,
+          ids: toSortedIds(items.map(({ id }) => id)),
+        })
+      ),
+    ),
+  );
+  const extraVectors = useQuery(
+    combineLatest([request$, searchResults$, history$]).pipe(
+      map(([{ type, picks }, hits, recent]) => {
+        const recentIds = new Set(recent.map(({ id }) => id));
+        return mixtapeVectorsQuery({
+          type,
+          ids: toSortedIds([...picks, ...hits.map(({ id }) => id)])
+            .filter((id) => !recentIds.has(id)),
+        });
+      }),
+    ),
+  );
+  const localFits$ = combineLatest([
+    request$,
+    known$,
+    recentVectors,
+    extraVectors,
+  ]).pipe(
+    map(([{ picks }, items, recent, extra]) =>
+      picks.length === 0 ? [] : scoreLocalFits({
+        picks,
+        candidates: items.map(({ id }) => id),
+        vectors: {
+          cutoff: recent.data?.cutoff ?? extra.data?.cutoff ?? 1,
+          vectors: { ...recent.data?.vectors, ...extra.data?.vectors },
+        },
+      })
+    ),
+  );
+  const fits$ = combineLatest([localFits$, deepFits$]).pipe(
+    map(([local, deepFits]) =>
+      dedupe(
+        ({ id }) => id,
+        [...(local ?? []), ...deepFits.map(({ id, score }) => ({ id, score }))],
+      )
+    ),
+  );
+  const isFitsSettling$ = combineLatest([request$, localFits$, deep]).pipe(
+    map(([{ picks }, local, query]) =>
+      picks.length > 0 && (local?.length ?? 0) === 0 && query.isLoading
+    ),
   );
 
   const missingPicks = useQuery(
@@ -129,6 +195,9 @@ export function useMixtape(
     searchResults: searchResults$,
     isSearchLoading: isSearchLoading$,
     picked: picked$,
+    known: known$,
+    fits: fits$,
+    isFitsSettling: isFitsSettling$,
     isHistoryLoading: history.pipe(map((query) => query.isLoading)),
     mixtape: mixtape.pipe(map((query) => query.data ?? EMPTY_MIXTAPE)),
     isMixtapeLoading: mixtape.pipe(
