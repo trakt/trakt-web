@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useToggler } from "$lib/components/toggles/useToggler";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage";
+  import { safeJsonParse } from "$lib/utils/json/safeJsonParse.ts";
   import { firstValueFrom } from "rxjs";
   import { onMount } from "svelte";
   import { SEASONAL_STORAGE_KEY } from "./_internal/constants";
@@ -9,8 +10,9 @@
 
   const { children }: ChildrenProps = $props();
 
-  const useSeasonalFilters = JSON.parse(
-    safeLocalStorage.getItem(SEASONAL_STORAGE_KEY) ?? "true",
+  const useSeasonalFilters = safeJsonParse(
+    safeLocalStorage.getItem(SEASONAL_STORAGE_KEY),
+    true,
   );
 
   const { restoreFilters } = useStoredFilters();
