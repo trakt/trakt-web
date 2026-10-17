@@ -31,13 +31,5 @@
   .trakt-yir-2024-weekly-plays-chart {
     --height-bar-chart: var(--ni-300);
     width: 100%;
-
-    // Match the 2024 template's body font; the shared BarChart wrapper
-    // defaults to Roboto otherwise.
-    :global(.cds--chart-holder) {
-      --cds-charts-font-family: "Spline Sans", Helvetica, Arial, sans-serif;
-      --cds-charts-font-family-condensed:
-        "Spline Sans", Helvetica, Arial, sans-serif;
-    }
   }
 </style>
