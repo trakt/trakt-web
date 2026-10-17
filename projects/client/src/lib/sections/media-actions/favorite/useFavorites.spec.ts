@@ -4,9 +4,11 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
+import { server } from '$mocks/server.ts';
 import { captureInvalidations } from '$test/beds/query/captureInvalidations.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
+import { http, HttpResponse } from 'msw';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { type FavoritesStoreProps, useFavorites } from './useFavorites.ts';
@@ -139,6 +141,71 @@ describe('useFavorites', () => {
       );
 
       expect(await waitForEmission(isFavorited, 2)).toBe(false);
+    });
+  });
+
+  describe('pending state', () => {
+    it('should show as favorited while an add is in flight', async () => {
+      const { isFavorited, addToFavorites } = await renderStore(() =>
+        useFavorites({
+          type: 'movie',
+          id: MovieMatrixMappedMock.id,
+          title: MovieMatrixMappedMock.title,
+        })
+      );
+
+      expect(await waitForEmission(isFavorited, 2)).toBe(false);
+
+      const addition = addToFavorites();
+      expect(await firstValueFrom(isFavorited)).toBe(true);
+
+      await addition;
+    });
+
+    it('should show as not favorited while a remove is in flight', async () => {
+      const { isFavorited, removeFromFavorites } = await renderStore(() =>
+        useFavorites({
+          type: 'movie',
+          id: MovieHereticMappedMock.id,
+          title: MovieHereticMappedMock.title,
+        })
+      );
+
+      expect(await waitForEmission(isFavorited, 2)).toBe(true);
+
+      const removal = removeFromFavorites();
+      expect(await firstValueFrom(isFavorited)).toBe(false);
+
+      await removal;
+    });
+
+    it('should revert to the real state when the add fails', async () => {
+      server.use(
+        http.post(
+          'http://localhost/sync/favorites',
+          () =>
+            new HttpResponse('{', {
+              status: 201,
+              headers: { 'content-type': 'application/json' },
+            }),
+        ),
+      );
+
+      const { isFavorited, addToFavorites } = await renderStore(() =>
+        useFavorites({
+          type: 'movie',
+          id: MovieMatrixMappedMock.id,
+          title: MovieMatrixMappedMock.title,
+        })
+      );
+
+      expect(await waitForEmission(isFavorited, 2)).toBe(false);
+
+      const addition = addToFavorites();
+      expect(await firstValueFrom(isFavorited)).toBe(true);
+
+      await expect(addition).rejects.toThrow();
+      expect(await firstValueFrom(isFavorited)).toBe(false);
     });
   });
 });

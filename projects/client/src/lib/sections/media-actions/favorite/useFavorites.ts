@@ -10,7 +10,8 @@ import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import { combineLatest, map } from 'rxjs';
+import { withPendingIntent } from '$lib/sections/media-actions/_internal/withPendingIntent.ts';
+import { combineLatest, distinctUntilChanged, map } from 'rxjs';
 
 export type FavoritesStoreProps = {
   type: MediaType;
@@ -38,7 +39,7 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
     keys: [toMediaKey(type, id)],
   });
 
-  const isFavorited = combineLatest([favorites, actions]).pipe(
+  const isFavoritedOnServer = combineLatest([favorites, actions]).pipe(
     map(([$favorites, $actions]) => {
       const pending = findPendingOverride({
         actions: $actions,
@@ -74,6 +75,17 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
       }),
     invalidations: whenExecuted([InvalidateAction.Favorited(type)]),
   }));
+
+  const pendingAction = favoriting.result.pipe(
+    map(({ isPending, variables }) => isPending ? variables : undefined),
+    distinctUntilChanged(),
+  );
+
+  const isFavorited = withPendingIntent({
+    current: isFavoritedOnServer,
+    isAdding: pendingAction.pipe(map((action) => action === 'add')),
+    isRemoving: pendingAction.pipe(map((action) => action === 'remove')),
+  });
 
   return {
     isUpdatingFavorite: favoriting.isPending,
