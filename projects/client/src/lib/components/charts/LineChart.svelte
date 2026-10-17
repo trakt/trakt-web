@@ -77,6 +77,7 @@
 
   const ticks = $derived(
     (tickLabels ?? []).map((text, index) => ({
+      index,
       text,
       x: points[index]?.x ?? margin,
     })).filter((tick) => tick.text !== ""),
@@ -207,7 +208,7 @@
         {/each}
       {/if}
 
-      {#each ticks as tick (tick.text)}
+      {#each ticks as tick (tick.index)}
         <text
           class="line-tick"
           x={tick.x}
