@@ -3,8 +3,7 @@
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import type { NowPlayingItem } from "$lib/requests/models/NowPlayingItem";
   import ToastEpisodeCover from "./ToastEpisodeCover.svelte";
-  import ToastMovieCover from "./ToastMovieCover.svelte";
-  import ToastShowCover from "./ToastShowCover.svelte";
+  import ToastMediaCover from "./ToastMediaCover.svelte";
 
   const { item }: { item: NowPlayingItem | LastWatchedItem } = $props();
 </script>
@@ -16,7 +15,7 @@
   --height-card-cover="var(--height-toast-card)"
 >
   {#if item.type === "movie"}
-    <ToastMovieCover movie={item.media} />
+    <ToastMediaCover type="movie" media={item.media} />
   {/if}
 
   {#if item.type === "episode"}
@@ -24,6 +23,6 @@
   {/if}
 
   {#if item.type === "show"}
-    <ToastShowCover show={item.media} />
+    <ToastMediaCover type="show" media={item.media} />
   {/if}
 </Card>
