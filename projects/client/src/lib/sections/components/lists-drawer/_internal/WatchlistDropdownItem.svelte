@@ -2,7 +2,6 @@
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import * as m from "$lib/features/i18n/messages.ts";
   import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
   import {
     type BackgroundFlash,
