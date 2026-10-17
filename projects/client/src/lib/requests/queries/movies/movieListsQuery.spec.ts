@@ -4,7 +4,7 @@ import { createTestBedInfiniteQuery } from '$test/beds/query/createTestBedInfini
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { mapToEntries } from '$test/utils/mapToEntries.ts';
 import { describe, expect, it } from 'vitest';
-import { HereticListsMappedMock } from '../../../../mocks/data/summary/movies/heretic/mapped/HereticListsMappedMock.ts';
+import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/HereticListsMappedMock.ts';
 import { movieListsQuery } from './movieListsQuery.ts';
 
 describe('movieListsQuery', () => {

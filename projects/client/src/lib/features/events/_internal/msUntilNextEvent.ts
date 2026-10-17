@@ -1,4 +1,4 @@
-import { assertDefined } from '../../../utils/assert/assertDefined.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import type { EventConfig } from '../models/EventConfig.ts';
 import type { EventDateFn } from '../models/EventDateFn.ts';
 import type { Events } from '../models/Events.ts';

@@ -2,10 +2,10 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import TrackAction from "$lib/sections/media-actions/mark-as-watched/TrackAction.svelte";
-  import SummaryActionsBar from "../../../_internal/SummaryActionsBar.svelte";
-  import BookmarkAction from "../../../_internal/BookmarkAction.svelte";
+  import SummaryActionsBar from "$lib/sections/summary/components/_internal/SummaryActionsBar.svelte";
+  import BookmarkAction from "$lib/sections/summary/components/_internal/BookmarkAction.svelte";
   import MediaPopupActions from "./MediaPopupActions.svelte";
-  import TrailerButton from "../../../_internal/TrailerButton.svelte";
+  import TrailerButton from "$lib/sections/summary/components/_internal/TrailerButton.svelte";
 
   const { media, title }: { media: MediaEntry; title: string } = $props();
 

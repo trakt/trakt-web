@@ -8,7 +8,7 @@ import {
 } from '$lib/features/i18n/index.ts';
 import { BehaviorSubject, type PartialObserver, type Subscription } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { NOOP_FN } from '../../../utils/constants.ts';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 
 const LOCALE_CONTEXT_KEY = 'locale';
 

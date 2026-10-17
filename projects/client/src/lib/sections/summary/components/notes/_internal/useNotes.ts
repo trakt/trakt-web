@@ -2,7 +2,7 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map } from 'rxjs';
-import { userNotesNotesQuery } from '../../../../../requests/queries/users/userNotesQuery.ts';
+import { userNotesNotesQuery } from '$lib/requests/queries/users/userNotesQuery.ts';
 
 type UseNotesProps = {
   media: MediaEntry;

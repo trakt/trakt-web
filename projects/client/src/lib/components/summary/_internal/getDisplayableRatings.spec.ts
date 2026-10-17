@@ -1,7 +1,7 @@
 import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { describe, expect, it } from 'vitest';
-import type { MovieEntry } from '../../../requests/models/MovieEntry.ts';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import {
   EMPTY_RATINGS,
   getDisplayableRatings,

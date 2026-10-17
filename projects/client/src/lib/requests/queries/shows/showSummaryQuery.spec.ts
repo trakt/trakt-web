@@ -1,7 +1,7 @@
 import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { describe, expect, it } from 'vitest';
-import { ShowSiloMappedMock } from '../../../../mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
+import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { showSummaryQuery } from './showSummaryQuery.ts';
 
 describe('showSummaryQuery', () => {

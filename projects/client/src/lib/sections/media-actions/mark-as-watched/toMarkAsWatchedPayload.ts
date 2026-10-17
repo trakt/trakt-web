@@ -1,5 +1,5 @@
-import type { MarkAsWatchedAt } from '../../../models/MarkAsWatchedAt.ts';
-import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
+import type { MarkAsWatchedAt } from '$lib/models/MarkAsWatchedAt.ts';
+import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 
 type WatchedPayload = {
   ids: { trakt: number };

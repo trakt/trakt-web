@@ -3,8 +3,8 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
 import type { FavoriteMovieResponse, FavoriteShowResponse } from '@trakt/api';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../../requests/api.ts';
-import { time } from '../../../utils/timing/time.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
+import { time } from '$lib/utils/timing/time.ts';
 
 const UserFavoritedMediaSchema = z.object({
   favoritedAt: z.date(),

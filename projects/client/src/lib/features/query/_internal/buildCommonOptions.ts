@@ -1,4 +1,4 @@
-import type { ApiParams } from '../../../requests/api.ts';
+import type { ApiParams } from '$lib/requests/api.ts';
 
 export function buildCommonOptions<TRequestParams extends ApiParams>(
   params: {

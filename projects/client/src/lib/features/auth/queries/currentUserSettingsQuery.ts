@@ -18,7 +18,7 @@ import {
   upNextSortOptionSchema,
 } from '@trakt/api';
 import { z } from 'zod';
-import { time } from '../../../utils/timing/time.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { Theme } from '../../theme/models/Theme.ts';
 
 export const UserSettingsSchema = z.object({

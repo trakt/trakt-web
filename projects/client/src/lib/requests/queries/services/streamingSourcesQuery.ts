@@ -5,7 +5,7 @@ import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { WatchNowSourceResponse } from '@trakt/api';
 import { z } from 'zod';
-import { time } from '../../../utils/timing/time.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import {
   type StreamingSource,
   StreamingSourceSchema,

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { Snippet } from "svelte";
-  import TextCard from "../../../components/text-card/TextCard.svelte";
+  import TextCard from "$lib/sections/components/text-card/TextCard.svelte";
   import ReactAction from "./_internal/comment-actions/ReactAction.svelte";
   import ViewRepliesAction from "./_internal/comment-actions/ViewRepliesAction.svelte";
   import CommentBody from "./_internal/CommentBody.svelte";

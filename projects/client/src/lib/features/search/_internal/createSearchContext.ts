@@ -2,7 +2,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { UrlBuilder } from '../../../utils/url/UrlBuilder.ts';
+import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { SearchContext } from './SearchContext.ts';
 import { searchKeyFactory } from './searchKeyFactory.ts';
 

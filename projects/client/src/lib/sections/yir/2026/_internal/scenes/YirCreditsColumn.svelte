@@ -9,7 +9,7 @@
   import { PLACEHOLDERS } from "$lib/utils/assets";
   import { DEFAULT_AVATAR } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { useYirPeople } from "../../../_internal/useYirPeople";
+  import { useYirPeople } from "$lib/sections/yir/_internal/useYirPeople";
   import { cubicOut } from "svelte/easing";
   import { slide } from "svelte/transition";
 

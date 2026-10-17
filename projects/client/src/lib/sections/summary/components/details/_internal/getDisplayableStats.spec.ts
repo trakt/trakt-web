@@ -1,9 +1,9 @@
 import type { MediaStats } from '$lib/requests/models/MediaStats.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { describe, expect, it } from 'vitest';
-import type { EpisodeEntry } from '../../../../../requests/models/EpisodeEntry.ts';
-import type { MovieEntry } from '../../../../../requests/models/MovieEntry.ts';
-import type { EpisodeStats } from '../../../../../requests/models/EpisodeStats.ts';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { EpisodeStats } from '$lib/requests/models/EpisodeStats.ts';
 import {
   EMPTY_EPISODE_STATS,
   EMPTY_MEDIA_STATS,

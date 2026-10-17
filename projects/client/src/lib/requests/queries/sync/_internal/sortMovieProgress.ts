@@ -1,6 +1,6 @@
 import type { UpNextSortBy } from '$lib/sections/lists/progress/UpNextSortBy.ts';
 import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
-import type { MovieProgressEntry } from '../../../models/MovieProgressEntry.ts';
+import type { MovieProgressEntry } from '$lib/requests/models/MovieProgressEntry.ts';
 import { getMovieProgressSortValue } from './getMovieProgressSortValue.ts';
 
 type SortMovieProgressProps = {

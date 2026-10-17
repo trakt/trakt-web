@@ -5,7 +5,7 @@ import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedLi
 import { useStableArray } from '$lib/sections/lists/stores/useStableArray.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { combineLatest, map } from 'rxjs';
-import { showListsQuery } from '../../../../requests/queries/shows/showListsQuery.ts';
+import { showListsQuery } from '$lib/requests/queries/shows/showListsQuery.ts';
 import { MAX_LISTS } from './_internal/constants.ts';
 
 type ListSummaryProps = {

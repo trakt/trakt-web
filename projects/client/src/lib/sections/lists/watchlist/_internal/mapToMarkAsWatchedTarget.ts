@@ -1,6 +1,6 @@
 import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
-import type { MarkAsWatchedStoreProps } from '../../../media-actions/mark-as-watched/useMarkAsWatched.ts';
+import type { MarkAsWatchedStoreProps } from '$lib/sections/media-actions/mark-as-watched/useMarkAsWatched.ts';
 
 export function mapToMarkAsWatchedTarget(
   entry: MovieEntry | ShowEntry,

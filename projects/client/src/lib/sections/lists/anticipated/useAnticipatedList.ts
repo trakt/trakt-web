@@ -13,8 +13,8 @@ import {
   showAnticipatedQuery,
 } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
 import { addYear } from '$lib/utils/date/addYear.ts';
-import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
-import { mediaAnticipatedQuery } from '../../../requests/queries/media/mediaAnticipatedQuery.ts';
+import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
+import { mediaAnticipatedQuery } from '$lib/requests/queries/media/mediaAnticipatedQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 
 export type AnticipatedEntry = AnticipatedMovie | AnticipatedShow;

@@ -1,4 +1,4 @@
-import type { ExtendedMediaType } from '../../../requests/models/ExtendedMediaType.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { DismissedItem } from './DismissedItem.ts';
 
 export type StoredDismissalsV1 = {

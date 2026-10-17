@@ -4,7 +4,7 @@ import { createTestBedInfiniteQuery } from '$test/beds/query/createTestBedInfini
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { mapToEntries } from '$test/utils/mapToEntries.ts';
 import { describe, expect, it } from 'vitest';
-import { SiloListsMappedMock } from '../../../../mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
+import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
 import { showListsQuery } from './showListsQuery.ts';
 
 describe('showListsQuery', () => {

@@ -1,4 +1,4 @@
-import type { StreamingSource } from '../../../../lib/requests/models/StreamingSource.ts';
+import type { StreamingSource } from '$lib/requests/models/StreamingSource.ts';
 
 export const StreamingSourcesMappedMock: Map<
   string,

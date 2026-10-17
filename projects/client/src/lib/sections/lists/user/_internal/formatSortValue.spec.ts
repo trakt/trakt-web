@@ -3,7 +3,7 @@ import { listItemTargets } from '$lib/features/intl-overlay/listItemTargets.ts';
 import type { BulkIntl } from '$lib/requests/models/BulkIntl.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import { describe, expect, it } from 'vitest';
-import { MAX_DATE } from '../../../../utils/constants.ts';
+import { MAX_DATE } from '$lib/utils/constants.ts';
 import {
   formatSortValue,
   groupByReleased,

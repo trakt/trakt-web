@@ -6,8 +6,8 @@
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import RestoreAction from "$lib/sections/media-actions/restore/RestoreAction.svelte";
   import { of } from "rxjs";
-  import DropAction from "../../../media-actions/drop/DropAction.svelte";
-  import MarkAsWatchedAction from "../../../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
+  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeItem from "../../components/EpisodeItem.svelte";
   import MovieProgressItem from "./MovieProgressItem.svelte";
   import UpNextSwipe from "./UpNextSwipe.svelte";

@@ -1,8 +1,8 @@
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
-import type { SortBy } from '../../../user/models/SortBy.ts';
-import type { SortDirection } from '../../../user/models/SortDirection.ts';
+import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
+import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 
 type ListProps = {
   type: 'watchlist';

@@ -1,6 +1,6 @@
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import type { NoteType } from '$lib/requests/models/NoteType.ts';
-import { isValidResponse } from '../../../features/query/_internal/isValidResponse.ts';
+import { isValidResponse } from '$lib/features/query/_internal/isValidResponse.ts';
 
 type EditNoteParams = {
   id: number;

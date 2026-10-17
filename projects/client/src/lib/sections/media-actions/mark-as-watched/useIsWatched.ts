@@ -6,7 +6,7 @@ import { toMediaKey } from '$lib/features/offline/toMediaKey.ts';
 import { useOfflineActions } from '$lib/features/offline/useOfflineActions.ts';
 import { getShowWatchState } from '$lib/utils/media/getShowWatchState.ts';
 import { combineLatest, map, shareReplay } from 'rxjs';
-import type { ExtendedMediaStoreProps } from '../../../models/MediaStoreProps.ts';
+import type { ExtendedMediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 
 export type IsWatchedProps = ExtendedMediaStoreProps;
 

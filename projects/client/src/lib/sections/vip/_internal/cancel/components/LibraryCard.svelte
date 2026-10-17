@@ -5,7 +5,7 @@
   import type { VipCancelLimit } from "../models/VipCancelLimit.ts";
   import DeckCard from "./DeckCard.svelte";
   import DeckCardHeading from "./DeckCardHeading.svelte";
-  import UsageLimitItem from "../../../UsageLimitItem.svelte";
+  import UsageLimitItem from "$lib/sections/vip/UsageLimitItem.svelte";
   import type { LibraryCardProps } from "./LibraryCardProps.ts";
   import VipCancelButton from "./VipCancelButton.svelte";
 

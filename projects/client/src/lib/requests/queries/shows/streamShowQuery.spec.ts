@@ -2,7 +2,7 @@ import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSi
 import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { describe, expect, it } from 'vitest';
-import { ShowSiloStreamingServiceOptionsMappedMock } from '../../../../mocks/data/summary/shows/silo/mapped/ShowSiloStreamingServiceOptionsMappedMock.ts';
+import { ShowSiloStreamingServiceOptionsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStreamingServiceOptionsMappedMock.ts';
 import { streamShowQuery } from './streamShowQuery.ts';
 
 describe('streamShowQuery', () => {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import YirTooltip from "../../../_internal/YirTooltip.svelte";
+  import YirTooltip from "$lib/sections/yir/_internal/YirTooltip.svelte";
   import { tooltipEdge } from "./tooltipEdge";
 
   type Bar = {

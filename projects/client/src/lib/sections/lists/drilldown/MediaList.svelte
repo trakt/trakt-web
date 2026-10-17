@@ -4,7 +4,7 @@
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { checksum } from "$lib/utils/string/checksum";
-  import SkeletonList from "../../../components/lists/SkeletonList.svelte";
+  import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import NoFilterResultsPlaceholder from "./NoFilterResultsPlaceholder.svelte";
   import type { MediaListProps } from "./MediaListProps";

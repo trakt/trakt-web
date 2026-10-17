@@ -7,7 +7,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { useAllTimeStatsDetails } from "../../../stores/useAllTimeStatsDetails.ts";
+  import { useAllTimeStatsDetails } from "$lib/sections/profile/stores/useAllTimeStatsDetails.ts";
   import AllTimeReviewLink from "../AllTimeReviewLink.svelte";
   import AllTimeStatTile from "../AllTimeStatTile.svelte";
   import type { StatIconKey } from "../StatIconKey.ts";

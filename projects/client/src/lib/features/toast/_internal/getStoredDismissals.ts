@@ -1,4 +1,4 @@
-import { safeLocalStorage } from '../../../utils/storage/safeStorage.ts';
+import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { DISMISSAL_STORAGE_KEY } from '../constants/index.ts';
 import type {
   StoredDismissalsV1,

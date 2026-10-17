@@ -5,8 +5,8 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../../requests/api.ts';
-import { time } from '../../../utils/timing/time.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import {
   MediaPlayHistorySchema,
   WatchedMediaSchema,

@@ -4,12 +4,12 @@ import type { FavoritedEntry } from '$lib/requests/models/FavoritedEntry.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import type { ProgressEntry } from '$lib/requests/models/ProgressEntry.ts';
 import { toSortableTitle } from '$lib/utils/formatting/string/toSortableTitle.ts';
-import { getLocale, languageTag } from '../../../../features/i18n/index.ts';
-import { isMaxDate } from '../../../../utils/date/isMaxDate.ts';
-import { toHumanDay } from '../../../../utils/formatting/date/toHumanDay.ts';
-import { toHumanDuration } from '../../../../utils/formatting/date/toHumanDuration.ts';
-import { toTraktRating } from '../../../../utils/formatting/number/toTraktRating.ts';
-import { toUserRating } from '../../../../utils/formatting/number/toUserRating.ts';
+import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
+import { isMaxDate } from '$lib/utils/date/isMaxDate.ts';
+import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
+import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
+import { toTraktRating } from '$lib/utils/formatting/number/toTraktRating.ts';
+import { toUserRating } from '$lib/utils/formatting/number/toUserRating.ts';
 import type { SortBy } from '../models/SortBy.ts';
 
 export type SortInput = ListItem | FavoritedEntry | ProgressEntry;

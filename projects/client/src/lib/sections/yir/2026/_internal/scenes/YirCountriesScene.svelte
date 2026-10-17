@@ -4,9 +4,9 @@
   import type { YirCountriesGroup } from "$lib/requests/models/YirDetail";
   import { formatNumber } from "$lib/utils/format/formatNumber";
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
-  import YirCountriesMap from "../../../_internal/YirCountriesMap.svelte";
-  import YirTooltip from "../../../_internal/YirTooltip.svelte";
-  import { yirMediaUnit } from "../../../_internal/yirMediaUnit";
+  import YirCountriesMap from "$lib/sections/yir/_internal/YirCountriesMap.svelte";
+  import YirTooltip from "$lib/sections/yir/_internal/YirTooltip.svelte";
+  import { yirMediaUnit } from "$lib/sections/yir/_internal/yirMediaUnit";
   import YirCountUp from "./YirCountUp.svelte";
   import YirRankBars from "./YirRankBars.svelte";
   import YirScene from "./YirScene.svelte";

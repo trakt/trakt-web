@@ -13,8 +13,8 @@ import {
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
 import { map } from 'rxjs';
-import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
-import { mediaTrendingQuery } from '../../../requests/queries/media/mediaTrendingQuery.ts';
+import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
+import { mediaTrendingQuery } from '$lib/requests/queries/media/mediaTrendingQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 
 export type TrendingEntry = TrendingMovie | TrendingShow;

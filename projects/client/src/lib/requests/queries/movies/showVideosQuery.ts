@@ -3,7 +3,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaVideoSchema } from '$lib/requests/models/MediaVideo.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { VideoResponse } from '@trakt/api';
-import { castNumberAsString } from '../../../utils/requests/castNumberAsString.ts';
+import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { mapToMediaVideo } from '../../_internal/mapToMediaVideo.ts';
 
 type ShowVideosParams = {

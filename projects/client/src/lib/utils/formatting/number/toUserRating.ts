@@ -1,4 +1,4 @@
-import { STAR_RATINGS } from '../../../sections/summary/components/rating/constants/index.ts';
+import { STAR_RATINGS } from '$lib/sections/summary/components/rating/constants/index.ts';
 import { toHumanNumber } from './toHumanNumber.ts';
 
 const MAX_RATING = 10;

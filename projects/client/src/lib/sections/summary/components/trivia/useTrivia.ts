@@ -1,9 +1,9 @@
 import { combineLatest, map } from 'rxjs';
-import { getLocale } from '../../../../features/i18n/index.ts';
-import { useQuery } from '../../../../features/query/useQuery.ts';
-import type { MediaType } from '../../../../requests/models/MediaType.ts';
-import { movieTriviaQuery } from '../../../../requests/queries/movies/movieTriviaQuery.ts';
-import { showTriviaQuery } from '../../../../requests/queries/shows/showTriviaQuery.ts';
+import { getLocale } from '$lib/features/i18n/index.ts';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { movieTriviaQuery } from '$lib/requests/queries/movies/movieTriviaQuery.ts';
+import { showTriviaQuery } from '$lib/requests/queries/shows/showTriviaQuery.ts';
 
 type UseTriviaProps = {
   slug: string;

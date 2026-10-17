@@ -11,8 +11,8 @@ import type {
 } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { hasEnded } from '$lib/utils/media/hasEnded.ts';
 import { map } from 'rxjs';
-import { DEFAULT_PAGE_SIZE } from '../../../../utils/constants.ts';
-import { usePaginatedListQuery } from '../../../lists/stores/usePaginatedListQuery.ts';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 
 export type ProgressListType =
   | 'in-progress'

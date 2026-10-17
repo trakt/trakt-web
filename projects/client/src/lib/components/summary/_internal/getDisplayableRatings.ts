@@ -1,7 +1,7 @@
 import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
-import type { EpisodeEntry } from '../../../requests/models/EpisodeEntry.ts';
-import type { MediaEntry } from '../../../requests/models/MediaEntry.ts';
-import { hasAired } from '../../../utils/media/hasAired.ts';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import { hasAired } from '$lib/utils/media/hasAired.ts';
 
 type GetDisplayableRatingsProps = {
   ratings: MediaRating;

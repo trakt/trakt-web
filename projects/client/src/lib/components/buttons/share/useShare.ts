@@ -1,10 +1,10 @@
 import { browser } from '$app/environment';
 import { take } from 'rxjs';
-import { AnalyticsEvent } from '../../../features/analytics/events/AnalyticsEvent.ts';
-import { useTrack } from '../../../features/analytics/useTrack.ts';
-import { useUser } from '../../../features/auth/stores/useUser.ts';
-import type { DrilldownSource } from '../../../sections/lists/components/models/DrilldownSource.ts';
-import { toShareUrl } from '../../../utils/url/toShareUrl.ts';
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import type { DrilldownSource } from '$lib/sections/lists/components/models/DrilldownSource.ts';
+import { toShareUrl } from '$lib/utils/url/toShareUrl.ts';
 
 type ShareData = {
   title: string;

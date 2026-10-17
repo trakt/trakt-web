@@ -2,7 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { z } from 'zod';
-import { time } from '../../../utils/timing/time.ts';
+import { time } from '$lib/utils/timing/time.ts';
 
 const WatchlistMinimalResponseSchema = z.object({
   movies: z.array(z.number()),

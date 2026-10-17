@@ -2,7 +2,7 @@ import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts'
 import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
 import { useSortParams } from '$lib/sections/lists/stores/useSortParams.ts';
 import { map, type Observable } from 'rxjs';
-import { assertDefined } from '../../../../utils/assert/assertDefined.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import {
   getListUrl,
 } from '../../components/list-summary/_internal/getListUrl.ts';

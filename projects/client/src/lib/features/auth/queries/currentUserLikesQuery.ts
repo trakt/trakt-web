@@ -5,7 +5,7 @@ import { toMap } from '$lib/utils/array/toMap.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import type { LikedListItemResponse } from '@trakt/api';
 import { z } from 'zod';
-import { time } from '../../../utils/timing/time.ts';
+import { time } from '$lib/utils/timing/time.ts';
 
 const UserLikesSchema = z.object({
   lists: z.map(

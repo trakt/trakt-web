@@ -4,7 +4,7 @@ import { showJustWatchUrlQuery } from '$lib/requests/queries/shows/showJustWatch
 import { showSeasonJustWatchUrlQuery } from '$lib/requests/queries/shows/showSeasonJustWatchUrlQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map } from 'rxjs';
-import type { MetaInfoProps } from '../../../summary/components/media/useMediaMetaInfo.ts';
+import type { MetaInfoProps } from '$lib/sections/summary/components/media/useMediaMetaInfo.ts';
 
 type UseJustWatchUrlProps = {
   country: string;

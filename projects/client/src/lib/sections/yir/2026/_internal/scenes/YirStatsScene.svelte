@@ -9,7 +9,7 @@
   import { toHumanShortDate } from "$lib/utils/formatting/date/toHumanShortDate";
   import { addDays } from "date-fns/addDays";
   import { setMonth } from "date-fns/setMonth";
-  import { yirMediaUnit } from "../../../_internal/yirMediaUnit";
+  import { yirMediaUnit } from "$lib/sections/yir/_internal/yirMediaUnit";
   import { peakHour } from "./peakHour";
   import { peakWeek } from "./peakWeek";
   import { weekStart } from "./weekStart";

@@ -1,5 +1,5 @@
 import { getContext } from 'svelte';
-import { assertDefined } from '../../../utils/assert/assertDefined.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import {
   PLAYER_CONTEXT_KEY,
   type PlayerContextType,
