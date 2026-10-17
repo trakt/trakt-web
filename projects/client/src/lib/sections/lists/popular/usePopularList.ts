@@ -1,6 +1,5 @@
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
-import { withOverlayLoading } from '$lib/features/intl-overlay/withOverlayLoading.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -14,6 +13,7 @@ import { addYear } from '$lib/utils/date/addYear.ts';
 import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import { mediaPopularQuery } from '$lib/requests/queries/media/mediaPopularQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
+import { withListOverlay } from '$lib/sections/lists/stores/withListOverlay.ts';
 
 export type PopularEntry = ShowEntry | MovieEntry;
 export type PopularMediaList = Array<PopularEntry>;
@@ -62,12 +62,8 @@ function typeToQuery(
 export function usePopularList(
   props: PopularListStoreProps,
 ) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(typeToQuery(props));
-  const overlay = createBulkMediaIntl<PopularEntry>();
-  return {
-    list: baseList.pipe(overlay.operator),
-    isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
-    ...rest,
-  };
+  return withListOverlay(
+    usePaginatedListQuery(typeToQuery(props)),
+    createBulkMediaIntl<PopularEntry>(),
+  );
 }
