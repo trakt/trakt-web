@@ -88,7 +88,7 @@ export function useHistoryCreditsList({
       const crewCredits = credits.filter((credit) => credit.type === 'crew');
       const allCredits = [...castCredits, ...crewCredits];
 
-      const historyCredits = dedupe((credit) => credit.media.id, allCredits);
+      const historyCredits = dedupe((credit) => credit.media.key, allCredits);
 
       return historyCredits.sort((entryA, entryB) => {
         const aDate = getWatchedAt(entryA.media, historyResult);
