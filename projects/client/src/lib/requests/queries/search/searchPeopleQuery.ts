@@ -16,6 +16,7 @@ type SearchParams = {
   query: string;
   limit: number;
   config: TypesenseConfig;
+  signal?: AbortSignal;
 } & ApiParams;
 
 const PeopleSearchResultSchema = z.object({
@@ -52,7 +53,7 @@ function mapToSearchResultEntry(
 }
 
 const searchRequest = async (
-  { query, config, limit, fetch }: SearchParams,
+  { query, config, limit, fetch, signal }: SearchParams,
 ) => {
   const queryParams = {
     query,
@@ -62,6 +63,7 @@ const searchRequest = async (
   const response = await getPeople({
     ...queryParams,
     config,
+    signal,
   })
     .then((body) => ({
       body,

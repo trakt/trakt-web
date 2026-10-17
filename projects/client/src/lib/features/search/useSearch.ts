@@ -3,12 +3,14 @@ import { useQueryClient } from '$lib/features/query/_internal/queryClientContext
 import type { CreateQueryOptions } from '$lib/features/query/types.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { QueryClient, QueryKey } from '@tanstack/query-core';
 import { BehaviorSubject, combineLatest, from, merge, of } from 'rxjs';
 import {
   catchError,
   debounceTime,
   distinctUntilChanged,
   filter,
+  finalize,
   ignoreElements,
   map,
   shareReplay,
@@ -47,13 +49,25 @@ const QUERY_DEBOUNCE = 130;
 // keyboard exceeds 250ms, so sharing one reports a search per character.
 const TRACK_DEBOUNCE = time.seconds(1);
 
-function modeToQuery(
-  query: string,
-  mode: SearchMode,
-  config: TypesenseConfig,
-  exact: boolean,
-) {
+type ModeQueryProps = {
+  query: string;
+  mode: SearchMode;
+  config: TypesenseConfig;
+  exact: boolean;
+  signal: AbortSignal;
+};
+
+function withSignal(signal: AbortSignal) {
+  return ((input, init) =>
+    globalThis.fetch(input, {
+      ...init,
+      signal: init?.signal ?? signal,
+    })) as typeof fetch;
+}
+
+function modeToQuery({ query, mode, config, exact, signal }: ModeQueryProps) {
   const limit = DEFAULT_SEARCH_LIMIT;
+  const fetch = withSignal(signal);
 
   switch (mode) {
     case 'media':
@@ -66,14 +80,20 @@ function modeToQuery(
         config,
         limit,
         exact,
+        signal,
+        fetch,
       }) as CreateQueryOptions<SearchResponse>;
     }
     case 'people':
-      return searchPeopleQuery({ query, config, limit }) as CreateQueryOptions<
-        SearchResponse
-      >;
+      return searchPeopleQuery({
+        query,
+        config,
+        limit,
+        signal,
+        fetch,
+      }) as CreateQueryOptions<SearchResponse>;
     case 'lists':
-      return searchListsQuery({ query, limit }) as CreateQueryOptions<
+      return searchListsQuery({ query, limit, fetch }) as CreateQueryOptions<
         SearchResponse
       >;
     default:
@@ -81,19 +101,36 @@ function modeToQuery(
   }
 }
 
-function modeToTrendingQuery(query: string, mode: SearchMode) {
+function modeToTrendingQuery(
+  query: string,
+  mode: SearchMode,
+  signal: AbortSignal,
+) {
   switch (mode) {
     case 'media':
     case 'movie':
     case 'show': {
       const type = mode !== 'media' ? mode : undefined;
-      return searchTrendingQuery({ query, type }) as CreateQueryOptions<
-        TrendingSearchesResult
-      >;
+      return searchTrendingQuery({
+        query,
+        type,
+        fetch: withSignal(signal),
+      }) as CreateQueryOptions<TrendingSearchesResult>;
     }
     default:
       throw new Error(`Unsupported trending search mode: ${mode}`);
   }
+}
+
+function cancelSearchQueries(
+  client: QueryClient,
+  controller: AbortController,
+  queryKeys: ReadonlyArray<QueryKey>,
+) {
+  queryKeys.forEach((queryKey) => {
+    client.cancelQueries({ queryKey, exact: true });
+  });
+  controller.abort();
 }
 
 export function useSearch() {
@@ -143,10 +180,24 @@ export function useSearch() {
 
       isSearching.next(true);
 
+      const controller = new AbortController();
+      const queryKeys: QueryKey[] = [];
+      const tracked = <T extends { queryKey: QueryKey }>(options: T): T => {
+        queryKeys.push(options.queryKey);
+        return options;
+      };
+
       return from(ensureFreshSearchKeys(config)).pipe(
         switchMap((freshConfig) => {
+          const { signal } = controller;
           const searchQuery = client.fetchQuery(
-            modeToQuery(term, currentMode, freshConfig, false),
+            tracked(modeToQuery({
+              query: term,
+              mode: currentMode,
+              config: freshConfig,
+              exact: false,
+              signal,
+            })),
           );
 
           if (currentMode === 'people' || currentMode === 'lists') {
@@ -154,11 +205,17 @@ export function useSearch() {
           }
 
           const trendingQuery = client.fetchQuery(
-            modeToTrendingQuery(term, currentMode),
+            tracked(modeToTrendingQuery(term, currentMode, signal)),
           );
 
           const exactQuery = client.fetchQuery(
-            modeToQuery(term, currentMode, freshConfig, true),
+            tracked(modeToQuery({
+              query: term,
+              mode: currentMode,
+              config: freshConfig,
+              exact: true,
+              signal,
+            })),
           );
           return combineLatest([exactQuery, searchQuery, trendingQuery]).pipe(
             map(([exactResults, searchResults, trendingResults]) => {
@@ -185,6 +242,7 @@ export function useSearch() {
         // propagates through switchMap and terminates the whole stream, so
         // every later search silently returns nothing until remount.
         catchError(() => of(null)),
+        finalize(() => cancelSearchQueries(client, controller, queryKeys)),
       );
     }),
     tap(() => isSearching.next(false)),
