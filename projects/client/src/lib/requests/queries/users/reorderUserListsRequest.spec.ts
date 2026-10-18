@@ -8,12 +8,13 @@ describe('reorderUserListsRequest', () => {
     let requestBody: unknown;
 
     server.use(
-      http.post('http://localhost/users/me/lists/reorder', async (
-        { request },
-      ) => {
-        requestBody = await request.json();
-        return HttpResponse.json({ updated: 2, skipped_ids: [] });
-      }),
+      http.post(
+        'http://localhost/users/me/lists/reorder',
+        async ({ request }) => {
+          requestBody = await request.json();
+          return HttpResponse.json({ updated: 2, skipped_ids: [] });
+        },
+      ),
     );
 
     const result = await reorderUserListsRequest({

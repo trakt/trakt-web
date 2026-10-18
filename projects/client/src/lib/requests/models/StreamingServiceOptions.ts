@@ -15,9 +15,7 @@ export const StreamingSubscriptionSchema = z.object({
   type: z.literal('streaming'),
   key: z.string(),
 });
-export type StreamNow = z.infer<
-  typeof StreamingSubscriptionSchema
->;
+export type StreamNow = z.infer<typeof StreamingSubscriptionSchema>;
 
 export const OnDemandStreamingSchema = z.object({
   link: HttpsUrlSchema,

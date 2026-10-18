@@ -28,37 +28,29 @@ function paginated<T>(request: Request, items: T[]) {
 }
 
 export const streamingSync = [
-  http.get(
-    'http://localhost/younify/connections',
-    () => HttpResponse.json(StreamingConnectionsResponseMock),
+  http.get('http://localhost/younify/connections', () =>
+    HttpResponse.json(StreamingConnectionsResponseMock),
   ),
-  http.get(
-    'http://localhost/users/syncs/younify',
-    ({ request }) => paginated(request, DataSyncsResponseMock),
+  http.get('http://localhost/users/syncs/younify', ({ request }) =>
+    paginated(request, DataSyncsResponseMock),
   ),
-  http.get(
-    'http://localhost/users/syncs/:id/paused',
-    ({ request }) => paginated(request, SyncPausedItemsResponseMock),
+  http.get('http://localhost/users/syncs/:id/paused', ({ request }) =>
+    paginated(request, SyncPausedItemsResponseMock),
   ),
-  http.get(
-    'http://localhost/users/syncs/:id/skipped',
-    ({ request }) => paginated(request, SyncSkippedItemsResponseMock),
+  http.get('http://localhost/users/syncs/:id/skipped', ({ request }) =>
+    paginated(request, SyncSkippedItemsResponseMock),
   ),
-  http.get(
-    'http://localhost/users/syncs/:id',
-    ({ params }) => {
-      const id = Number(params.id);
-      const sync = DataSyncsResponseMock.find((entry) => entry.id === id) ??
-        DataSyncsResponseMock[0];
-      return HttpResponse.json(sync);
-    },
-  ),
-  http.post(
-    'http://localhost/younify/connect',
-    () =>
-      HttpResponse.json({
-        url: 'https://younify.tv/auth/amazon?token=mock',
-      }),
+  http.get('http://localhost/users/syncs/:id', ({ params }) => {
+    const id = Number(params.id);
+    const sync =
+      DataSyncsResponseMock.find((entry) => entry.id === id) ??
+      DataSyncsResponseMock[0];
+    return HttpResponse.json(sync);
+  }),
+  http.post('http://localhost/younify/connect', () =>
+    HttpResponse.json({
+      url: 'https://younify.tv/auth/amazon?token=mock',
+    }),
   ),
   http.post(
     'http://localhost/younify/users/refresh/:serviceId/:allData',

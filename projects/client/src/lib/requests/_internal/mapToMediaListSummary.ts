@@ -26,8 +26,9 @@ function mapToPrivacy(privacy: string): ListPrivacy {
 export function mapToMediaListSummary(
   listResponse: ListResponse,
 ): MediaListSummary {
-  const posters = (listResponse.images?.posters ?? [])
-    .map((poster) => mapToPoster({ poster: [poster] }));
+  const posters = (listResponse.images?.posters ?? []).map((poster) =>
+    mapToPoster({ poster: [poster] }),
+  );
 
   return {
     id: listResponse.ids.trakt,

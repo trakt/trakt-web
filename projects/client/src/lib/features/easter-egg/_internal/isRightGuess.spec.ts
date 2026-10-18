@@ -12,9 +12,7 @@ describe('util: isRightGuess', () => {
   });
 
   it('should accept lower when the mystery rating is lower', () => {
-    expect(isRightGuess({ known: 85, mystery: 70, guess: 'lower' })).toBe(
-      true,
-    );
+    expect(isRightGuess({ known: 85, mystery: 70, guess: 'lower' })).toBe(true);
     expect(isRightGuess({ known: 85, mystery: 70, guess: 'higher' })).toBe(
       false,
     );
@@ -24,8 +22,6 @@ describe('util: isRightGuess', () => {
     expect(isRightGuess({ known: 80, mystery: 80, guess: 'higher' })).toBe(
       true,
     );
-    expect(isRightGuess({ known: 80, mystery: 80, guess: 'lower' })).toBe(
-      true,
-    );
+    expect(isRightGuess({ known: 80, mystery: 80, guess: 'lower' })).toBe(true);
   });
 });

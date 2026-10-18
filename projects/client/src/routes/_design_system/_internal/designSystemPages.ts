@@ -169,8 +169,8 @@ export const DESIGN_SYSTEM_GROUPS: DesignSystemGroup[] = [
   },
 ];
 
-export const DESIGN_SYSTEM_PAGES = DESIGN_SYSTEM_GROUPS.flatMap((group) =>
-  group.pages
+export const DESIGN_SYSTEM_PAGES = DESIGN_SYSTEM_GROUPS.flatMap(
+  (group) => group.pages,
 );
 
 export const findDesignSystemPage = (pathname: string) =>

@@ -9,9 +9,7 @@ import { UserProfileSchema } from '../../models/UserProfile.ts';
 type BlockedUsersParams = ApiParams;
 
 const blockedUsersRequest = ({ fetch }: BlockedUsersParams) =>
-  api({ fetch })
-    .users
-    .blocked();
+  api({ fetch }).users.blocked();
 
 export const blockedUsersQuery = defineQuery({
   key: 'blockedUsers',

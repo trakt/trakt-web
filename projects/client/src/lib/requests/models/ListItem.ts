@@ -12,31 +12,39 @@ const BaseListItemSchema = z.object({
   listedAt: z.date(),
 });
 
-const ListedMovieSchema = z.object({
-  type: z.literal('movie'),
-  entry: MovieEntrySchema,
-}).merge(BaseListItemSchema);
+const ListedMovieSchema = z
+  .object({
+    type: z.literal('movie'),
+    entry: MovieEntrySchema,
+  })
+  .merge(BaseListItemSchema);
 
-const ListedShowSchema = z.object({
-  type: z.literal('show'),
-  entry: ShowEntrySchema,
-}).merge(BaseListItemSchema);
+const ListedShowSchema = z
+  .object({
+    type: z.literal('show'),
+    entry: ShowEntrySchema,
+  })
+  .merge(BaseListItemSchema);
 
-const ListedEpisodeSchema = z.object({
-  type: z.literal('episode'),
-  entry: z.object({
-    episode: EpisodeEntrySchema,
-    show: ShowEntrySchema,
-  }),
-}).merge(BaseListItemSchema);
+const ListedEpisodeSchema = z
+  .object({
+    type: z.literal('episode'),
+    entry: z.object({
+      episode: EpisodeEntrySchema,
+      show: ShowEntrySchema,
+    }),
+  })
+  .merge(BaseListItemSchema);
 
-const ListedSeasonSchema = z.object({
-  type: z.literal('season'),
-  entry: z.object({
-    season: SeasonSchema,
-    show: ShowEntrySchema,
-  }),
-}).merge(BaseListItemSchema);
+const ListedSeasonSchema = z
+  .object({
+    type: z.literal('season'),
+    entry: z.object({
+      season: SeasonSchema,
+      show: ShowEntrySchema,
+    }),
+  })
+  .merge(BaseListItemSchema);
 
 export const ListItemSchema = z.discriminatedUnion('type', [
   ListedMovieSchema,

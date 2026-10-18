@@ -62,9 +62,9 @@ export const users = [
     return HttpResponse.json(UserStatsResponseMock);
   }),
   http.get(
-    `http://localhost/users/${
-      assertDefined(ExtendedUserProfileHarryResponseMock.ids.slug)
-    }`,
+    `http://localhost/users/${assertDefined(
+      ExtendedUserProfileHarryResponseMock.ids.slug,
+    )}`,
     () => {
       return HttpResponse.json(ExtendedUserProfileHarryResponseMock);
     },
@@ -208,9 +208,12 @@ export const users = [
       assertDefined(SiloListsMappedMock.at(0)).slug
     }/smart-list-draft/convert`,
     () => {
-      return HttpResponse.json({
-        ids: { trakt: 99999, slug: 'new-smart-list' },
-      }, { status: 201 });
+      return HttpResponse.json(
+        {
+          ids: { trakt: 99999, slug: 'new-smart-list' },
+        },
+        { status: 201 },
+      );
     },
   ),
   http.get(
@@ -232,9 +235,8 @@ export const users = [
       const { searchParams } = new URL(response.request.url);
       const limit = searchParams.get('limit');
 
-      const responseMock = limit === 'all'
-        ? AllListedShowsResponseMock
-        : ListedShowsResponseMock;
+      const responseMock =
+        limit === 'all' ? AllListedShowsResponseMock : ListedShowsResponseMock;
 
       return HttpResponse.json(responseMock);
     },
@@ -263,9 +265,12 @@ export const users = [
     return HttpResponse.json(SmartListDefinitionsResponseMock);
   }),
   http.post('http://localhost/users/:id/smart-lists', () => {
-    return HttpResponse.json({
-      ids: { trakt: 99999, slug: 'new-smart-list' },
-    }, { status: 201 });
+    return HttpResponse.json(
+      {
+        ids: { trakt: 99999, slug: 'new-smart-list' },
+      },
+      { status: 201 },
+    );
   }),
   http.delete('http://localhost/users/:id/smart-lists/:list_id/', () => {
     return new HttpResponse(null, { status: 204 });
@@ -275,12 +280,9 @@ export const users = [
       headers: { 'x-pagination-item-count': '81' },
     });
   }),
-  http.get(
-    'http://localhost/smart-lists/:list_id/items',
-    () => {
-      return HttpResponse.json(SmartListItemsResponseMock);
-    },
-  ),
+  http.get('http://localhost/smart-lists/:list_id/items', () => {
+    return HttpResponse.json(SmartListItemsResponseMock);
+  }),
   http.get('http://localhost/smart-lists/templates', () => {
     return HttpResponse.json(SmartListTemplatesResponseMock);
   }),

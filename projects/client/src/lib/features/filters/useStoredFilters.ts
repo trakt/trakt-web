@@ -60,12 +60,9 @@ export function useStoredFilters() {
   const { track } = useTrack(AnalyticsEvent.Filters);
 
   const applyFilters = (url: URL, filters: StoredFilter) => {
-    processFilterParams(
-      Object.entries(filters),
-      (key, value) => {
-        url.searchParams.set(key, String(value));
-      },
-    );
+    processFilterParams(Object.entries(filters), (key, value) => {
+      url.searchParams.set(key, String(value));
+    });
   };
 
   const goToUrl = (url: URL) => {
@@ -90,12 +87,9 @@ export function useStoredFilters() {
 
     const filtersObject: StoredFilter = {};
 
-    processFilterParams(
-      currentSearchParams.entries(),
-      (key, value) => {
-        filtersObject[key] = value;
-      },
-    );
+    processFilterParams(currentSearchParams.entries(), (key, value) => {
+      filtersObject[key] = value;
+    });
 
     storedFiltersStore.update(filtersObject);
   };

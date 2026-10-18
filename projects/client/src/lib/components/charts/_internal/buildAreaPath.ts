@@ -13,9 +13,10 @@ type BuildAreaPathProps = {
  * `points`. Shares the monotone curve with {@link buildLinePath} so a line and
  * its area fill trace the same crest.
  */
-export function buildAreaPath(
-  { points, baseline }: BuildAreaPathProps,
-): string {
+export function buildAreaPath({
+  points,
+  baseline,
+}: BuildAreaPathProps): string {
   const generator = area<Point>()
     .x((point) => point.x)
     .y0(baseline)

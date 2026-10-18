@@ -21,10 +21,7 @@ import MediaDetails from './MediaDetails.svelte';
 describe('MediaDetails', () => {
   const mediaTests = (props: MediaDetailsProps & { type: MediaType }) => {
     it('should display the media details sections', async () => {
-      renderComponent(
-        MediaDetails,
-        { props },
-      );
+      renderComponent(MediaDetails, { props });
 
       await waitFor(() => {
         const premieredLabel = screen.getByText('Premiered');
@@ -49,18 +46,15 @@ describe('MediaDetails', () => {
       const nextYear = new Date();
       nextYear.setFullYear(nextYear.getFullYear() + 1);
 
-      renderComponent(
-        MediaDetails,
-        {
-          props: {
-            ...props,
-            media: {
-              ...props.media,
-              airDate: nextYear,
-            },
-          } as MediaDetailsProps,
-        },
-      );
+      renderComponent(MediaDetails, {
+        props: {
+          ...props,
+          media: {
+            ...props.media,
+            airDate: nextYear,
+          },
+        } as MediaDetailsProps,
+      });
 
       await waitFor(() => {
         const premiereLabel = screen.getByText('Expected Premiere');
@@ -69,19 +63,16 @@ describe('MediaDetails', () => {
     });
 
     it('should show the status if there is no known year for an item', async () => {
-      renderComponent(
-        MediaDetails,
-        {
-          props: {
-            ...props,
-            media: {
-              ...props.media,
-              year: undefined,
-              airDate: MAX_DATE,
-            },
-          } as MediaDetailsProps,
-        },
-      );
+      renderComponent(MediaDetails, {
+        props: {
+          ...props,
+          media: {
+            ...props.media,
+            year: undefined,
+            airDate: MAX_DATE,
+          },
+        } as MediaDetailsProps,
+      });
 
       await waitFor(() => {
         const statusLabel = screen.getByText('Status');
@@ -93,18 +84,15 @@ describe('MediaDetails', () => {
     });
 
     it('should hide undefined values', async () => {
-      renderComponent(
-        MediaDetails,
-        {
-          props: {
-            ...props,
-            media: {
-              ...props.media,
-              country: undefined,
-            },
-          } as MediaDetailsProps,
-        },
-      );
+      renderComponent(MediaDetails, {
+        props: {
+          ...props,
+          media: {
+            ...props.media,
+            country: undefined,
+          },
+        } as MediaDetailsProps,
+      });
 
       await waitFor(() => {
         const countryLabel = screen.queryByText('Country');
@@ -113,18 +101,15 @@ describe('MediaDetails', () => {
     });
 
     it('should not show the original title if it is equal to the title', async () => {
-      renderComponent(
-        MediaDetails,
-        {
-          props: {
-            ...props,
-            media: {
-              ...props.media,
-              originalTitle: props.media.title,
-            },
-          } as MediaDetailsProps,
-        },
-      );
+      renderComponent(MediaDetails, {
+        props: {
+          ...props,
+          media: {
+            ...props.media,
+            originalTitle: props.media.title,
+          },
+        } as MediaDetailsProps,
+      });
 
       await waitFor(() => {
         const originalTitleLabel = screen.queryByText('Original Title');
@@ -133,18 +118,15 @@ describe('MediaDetails', () => {
     });
 
     it('should show the original title if it differs from the title', async () => {
-      renderComponent(
-        MediaDetails,
-        {
-          props: {
-            ...props,
-            media: {
-              ...props.media,
-              originalTitle: 'random media title',
-            },
-          } as MediaDetailsProps,
-        },
-      );
+      renderComponent(MediaDetails, {
+        props: {
+          ...props,
+          media: {
+            ...props.media,
+            originalTitle: 'random media title',
+          },
+        } as MediaDetailsProps,
+      });
 
       await waitFor(() => {
         const originalTitleLabel = screen.getByText('Original Title');
@@ -164,10 +146,7 @@ describe('MediaDetails', () => {
     mediaTests(defaultProps);
 
     it('should display the director instead of creator', async () => {
-      renderComponent(
-        MediaDetails,
-        { props: defaultProps },
-      );
+      renderComponent(MediaDetails, { props: defaultProps });
 
       await waitFor(() => {
         const directorLabel = screen.getByText('Director');
@@ -191,10 +170,7 @@ describe('MediaDetails', () => {
     mediaTests(defaultProps);
 
     it('should display the network', async () => {
-      renderComponent(
-        MediaDetails,
-        { props: defaultProps },
-      );
+      renderComponent(MediaDetails, { props: defaultProps });
 
       await waitFor(() => {
         const networkLabel = screen.getByText('Network');
@@ -206,10 +182,7 @@ describe('MediaDetails', () => {
     });
 
     it('should display the total runtime for a show', async () => {
-      renderComponent(
-        MediaDetails,
-        { props: defaultProps },
-      );
+      renderComponent(MediaDetails, { props: defaultProps });
 
       await waitFor(() => {
         const totalRuntimeLabel = screen.getByText('Total Runtime');
@@ -221,18 +194,15 @@ describe('MediaDetails', () => {
     });
 
     it('should hide total runtime when data is unavailable', async () => {
-      renderComponent(
-        MediaDetails,
-        {
-          props: {
-            ...defaultProps,
-            media: {
-              ...defaultProps.media,
-              totalRuntime: NaN,
-            },
-          } as MediaDetailsProps,
-        },
-      );
+      renderComponent(MediaDetails, {
+        props: {
+          ...defaultProps,
+          media: {
+            ...defaultProps.media,
+            totalRuntime: NaN,
+          },
+        } as MediaDetailsProps,
+      });
 
       await waitFor(() => {
         const totalRuntimeLabel = screen.queryByText('Total Runtime');
@@ -241,12 +211,9 @@ describe('MediaDetails', () => {
     });
 
     it('should display the creator instead of director', async () => {
-      renderComponent(
-        MediaDetails,
-        {
-          props: defaultProps,
-        },
-      );
+      renderComponent(MediaDetails, {
+        props: defaultProps,
+      });
 
       await waitFor(() => {
         const directorLabel = screen.queryByText('Director');
@@ -326,10 +293,7 @@ describe('MediaDetails', () => {
       });
 
       it('should display the airs day and time for a currently airing show', async () => {
-        renderComponent(
-          MediaDetails,
-          { props: defaultProps },
-        );
+        renderComponent(MediaDetails, { props: defaultProps });
 
         await waitFor(() => {
           const airsLabel = screen.getByText('Airs');
@@ -341,18 +305,15 @@ describe('MediaDetails', () => {
       });
 
       it('should hide airs for an ended show', async () => {
-        renderComponent(
-          MediaDetails,
-          {
-            props: {
-              ...defaultProps,
-              media: {
-                ...defaultProps.media,
-                status: 'ended',
-              },
-            } as MediaDetailsProps,
-          },
-        );
+        renderComponent(MediaDetails, {
+          props: {
+            ...defaultProps,
+            media: {
+              ...defaultProps.media,
+              status: 'ended',
+            },
+          } as MediaDetailsProps,
+        });
 
         await waitFor(() => {
           const airsLabel = screen.queryByText('Airs');
@@ -364,18 +325,15 @@ describe('MediaDetails', () => {
         const nextYear = new Date();
         nextYear.setFullYear(nextYear.getFullYear() + 1);
 
-        renderComponent(
-          MediaDetails,
-          {
-            props: {
-              ...defaultProps,
-              media: {
-                ...defaultProps.media,
-                airDate: nextYear,
-              },
-            } as MediaDetailsProps,
-          },
-        );
+        renderComponent(MediaDetails, {
+          props: {
+            ...defaultProps,
+            media: {
+              ...defaultProps.media,
+              airDate: nextYear,
+            },
+          } as MediaDetailsProps,
+        });
 
         await waitFor(() => {
           const airsLabel = screen.queryByText('Airs');
@@ -384,18 +342,15 @@ describe('MediaDetails', () => {
       });
 
       it('should hide airs when airs data is missing', async () => {
-        renderComponent(
-          MediaDetails,
-          {
-            props: {
-              ...defaultProps,
-              media: {
-                ...defaultProps.media,
-                airs: undefined,
-              },
-            } as MediaDetailsProps,
-          },
-        );
+        renderComponent(MediaDetails, {
+          props: {
+            ...defaultProps,
+            media: {
+              ...defaultProps.media,
+              airs: undefined,
+            },
+          } as MediaDetailsProps,
+        });
 
         await waitFor(() => {
           const airsLabel = screen.queryByText('Airs');
@@ -415,12 +370,9 @@ describe('MediaDetails', () => {
     };
 
     it('should display the episode details', async () => {
-      renderComponent(
-        MediaDetails,
-        {
-          props: defaultProps,
-        },
-      );
+      renderComponent(MediaDetails, {
+        props: defaultProps,
+      });
 
       await waitFor(() => {
         const directorLabel = screen.getByText('Director');
@@ -436,10 +388,7 @@ describe('MediaDetails', () => {
     });
 
     it('should display the network from the show', async () => {
-      renderComponent(
-        MediaDetails,
-        { props: defaultProps },
-      );
+      renderComponent(MediaDetails, { props: defaultProps });
 
       await waitFor(() => {
         const networkLabel = screen.getByText('Network');
@@ -454,19 +403,16 @@ describe('MediaDetails', () => {
       const nextYear = new Date();
       nextYear.setFullYear(nextYear.getFullYear() + 1);
 
-      renderComponent(
-        MediaDetails,
-        {
-          props: {
-            ...defaultProps,
-            episode: {
-              ...defaultProps.episode,
-              airDate: nextYear,
-              effectiveReleaseDate: nextYear,
-            },
-          } as MediaDetailsProps,
-        },
-      );
+      renderComponent(MediaDetails, {
+        props: {
+          ...defaultProps,
+          episode: {
+            ...defaultProps.episode,
+            airDate: nextYear,
+            effectiveReleaseDate: nextYear,
+          },
+        } as MediaDetailsProps,
+      });
 
       await waitFor(() => {
         const airsLabel = screen.getByText('Airs');

@@ -6,7 +6,7 @@ const ERROR_COMMENT_MAP = {
 } as const;
 
 export function toTranslatedErrorComment(
-  error: string | (keyof typeof ERROR_COMMENT_MAP),
+  error: string | keyof typeof ERROR_COMMENT_MAP,
   data?: Record<string, unknown>,
 ): string {
   const translationFn =

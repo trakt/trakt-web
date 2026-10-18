@@ -46,10 +46,9 @@ describe('createMarkerFetch', () => {
 
     await markerFetch('https://api.example.com/data', { method: 'POST' });
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      'https://api.example.com/data',
-      { method: 'POST' },
-    );
+    expect(mockFetch).toHaveBeenCalledWith('https://api.example.com/data', {
+      method: 'POST',
+    });
   });
 
   it('should not add marker to PUT requests', async () => {
@@ -57,10 +56,9 @@ describe('createMarkerFetch', () => {
 
     await markerFetch('https://api.example.com/data', { method: 'PUT' });
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      'https://api.example.com/data',
-      { method: 'PUT' },
-    );
+    expect(mockFetch).toHaveBeenCalledWith('https://api.example.com/data', {
+      method: 'PUT',
+    });
   });
 
   it('should not add marker to DELETE requests', async () => {
@@ -68,10 +66,9 @@ describe('createMarkerFetch', () => {
 
     await markerFetch('https://api.example.com/data', { method: 'DELETE' });
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      'https://api.example.com/data',
-      { method: 'DELETE' },
-    );
+    expect(mockFetch).toHaveBeenCalledWith('https://api.example.com/data', {
+      method: 'DELETE',
+    });
   });
 
   it('should handle non-string input by passing through', async () => {

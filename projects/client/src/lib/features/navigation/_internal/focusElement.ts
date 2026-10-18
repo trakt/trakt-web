@@ -1,6 +1,4 @@
-export const focusElement = (
-  element?: Element | null,
-) => {
+export const focusElement = (element?: Element | null) => {
   if (!element) return;
   if (!(element instanceof HTMLElement)) return;
 

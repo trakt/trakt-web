@@ -7,9 +7,11 @@ export type SearchCategory = MediaType | 'person';
 
 type SchemaForCategory<T extends SearchCategory> = T extends 'movie'
   ? MovieSchema
-  : T extends 'show' ? ShowSchema
-  : T extends 'person' ? PersonSchema
-  : never;
+  : T extends 'show'
+    ? ShowSchema
+    : T extends 'person'
+      ? PersonSchema
+      : never;
 
 type SearchParams<T extends SearchCategory> = {
   key: string;
@@ -43,18 +45,19 @@ export async function lookup<T extends SearchCategory>({
   const { hits, found } = await createSearcher({
     key,
     server,
-  })
-    .multiSearch
-    .perform<SchemaForCategory<T>[]>({
+  }).multiSearch.perform<SchemaForCategory<T>[]>(
+    {
       searches: types.map((type) => ({
         collection: COLLECTION_MAP[type],
         preset: PRESET_MAP[type],
       })),
       union: true,
-    }, {
+    },
+    {
       q,
       limit,
-    });
+    },
+  );
 
   return {
     hits: hits ?? [],

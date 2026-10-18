@@ -12,11 +12,13 @@ type DeleteListProps = {
 export function useDeleteSmartList() {
   const { track } = useTrack(AnalyticsEvent.SmartListDelete);
 
-  const deletion = useMutation(defineMutation({
-    key: 'smart-list:delete',
-    request: ({ slug }: DeleteListProps) => deleteSmartListRequest({ slug }),
-    invalidations: [InvalidateAction.SmartList.Deleted],
-  }));
+  const deletion = useMutation(
+    defineMutation({
+      key: 'smart-list:delete',
+      request: ({ slug }: DeleteListProps) => deleteSmartListRequest({ slug }),
+      invalidations: [InvalidateAction.SmartList.Deleted],
+    }),
+  );
 
   const deleteList = async ({ slug }: DeleteListProps) => {
     track();

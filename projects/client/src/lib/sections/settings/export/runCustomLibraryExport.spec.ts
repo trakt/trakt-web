@@ -75,14 +75,12 @@ describe('runCustomLibraryExport', () => {
   it('should block clearing when any export page fails', async () => {
     vi.spyOn(console, 'error').mockImplementation(NOOP_FN);
     server.use(
-      http.get(
-        'http://localhost/sync/collection/media',
-        ({ request }) =>
-          new URL(request.url).searchParams.get('page') === '1'
-            ? HttpResponse.json([movie], {
+      http.get('http://localhost/sync/collection/media', ({ request }) =>
+        new URL(request.url).searchParams.get('page') === '1'
+          ? HttpResponse.json([movie], {
               headers: { 'X-Pagination-Page-Count': '2' },
             })
-            : HttpResponse.json({}, { status: 403 }),
+          : HttpResponse.json({}, { status: 403 }),
       ),
     );
     const { result, onCollection } = await exportLibrary();
@@ -93,10 +91,8 @@ describe('runCustomLibraryExport', () => {
 
   it('should refuse a response containing Plex items', async () => {
     server.use(
-      http.get(
-        'http://localhost/sync/collection/media',
-        () =>
-          HttpResponse.json([{ ...movie, available_on: [{ name: 'plex' }] }]),
+      http.get('http://localhost/sync/collection/media', () =>
+        HttpResponse.json([{ ...movie, available_on: [{ name: 'plex' }] }]),
       ),
     );
     const { result, onCollection } = await exportLibrary();
@@ -107,9 +103,8 @@ describe('runCustomLibraryExport', () => {
 
   it('should block clearing when the download fails', async () => {
     server.use(
-      http.get(
-        'http://localhost/sync/collection/media',
-        () => HttpResponse.json([movie]),
+      http.get('http://localhost/sync/collection/media', () =>
+        HttpResponse.json([movie]),
       ),
     );
     vi.mocked(downloadFile).mockImplementation(() => {

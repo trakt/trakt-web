@@ -9,9 +9,10 @@ type RecordShareClickParams = {
   body: { code: string; url: string };
 } & ApiParams;
 
-export async function recordShareClickRequest(
-  { fetch, body }: RecordShareClickParams,
-): Promise<ShareClickOutcome | null> {
+export async function recordShareClickRequest({
+  fetch,
+  body,
+}: RecordShareClickParams): Promise<ShareClickOutcome | null> {
   const response = await rawApiFetch({
     fetch,
     path: '/v3/shares/click',
@@ -24,8 +25,8 @@ export async function recordShareClickRequest(
 
   if (!response.ok) return null;
 
-  const parsed = z.object({ outcome: ShareClickOutcomeSchema }).safeParse(
-    await response.json(),
-  );
+  const parsed = z
+    .object({ outcome: ShareClickOutcomeSchema })
+    .safeParse(await response.json());
   return parsed.success ? parsed.data.outcome : null;
 }

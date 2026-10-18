@@ -11,9 +11,10 @@ type PostNoteParams = {
   };
 } & ApiParams;
 
-export async function postNoteRequest(
-  { fetch, body }: PostNoteParams,
-): Promise<boolean> {
+export async function postNoteRequest({
+  fetch,
+  body,
+}: PostNoteParams): Promise<boolean> {
   const response = await rawApiFetch({
     fetch,
     path: '/v3/users/me/notes',

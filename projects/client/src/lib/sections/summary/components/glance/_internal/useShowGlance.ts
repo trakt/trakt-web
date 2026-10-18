@@ -6,9 +6,7 @@ import { combineLatest, type Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export function useShowGlance(slug$: Observable<string>) {
-  const show = useQuery(
-    slug$.pipe(map((slug) => showSummaryQuery({ slug }))),
-  );
+  const show = useQuery(slug$.pipe(map((slug) => showSummaryQuery({ slug }))));
 
   const seasons = useQuery(
     slug$.pipe(map((slug) => showSeasonsQuery({ slug }))),
@@ -18,9 +16,10 @@ export function useShowGlance(slug$: Observable<string>) {
     show: show.pipe(map(($show) => $show.data)),
     seasons: seasons.pipe(map(($seasons) => $seasons.data)),
     isLoading: combineLatest([show, seasons]).pipe(
-      map(($queries) =>
-        $queries.some(toLoadingState) ||
-        $queries.some(($query) => $query.data == null)
+      map(
+        ($queries) =>
+          $queries.some(toLoadingState) ||
+          $queries.some(($query) => $query.data == null),
       ),
     ),
   };

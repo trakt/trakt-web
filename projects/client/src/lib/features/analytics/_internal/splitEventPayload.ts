@@ -24,8 +24,9 @@ const METRIC_KEYS: ReadonlySet<string> = new Set([
 
 function isMetric(entry: [string, string | number]): entry is [string, number] {
   const [key, value] = entry;
-  return METRIC_KEYS.has(key) && typeof value === 'number' &&
-    Number.isFinite(value);
+  return (
+    METRIC_KEYS.has(key) && typeof value === 'number' && Number.isFinite(value)
+  );
 }
 
 export function splitEventPayload(data: AnalyticsData) {

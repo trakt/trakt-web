@@ -29,12 +29,10 @@ const GENRE_FILTER: Filter = {
         return settings.genres.loved.join(',');
       },
     },
-    ...GENRES
-      .map((genre) => ({
-        label: () => toTranslatedGenre(genre),
-        value: genre,
-      }))
-      .toSorted((a, b) => a.label().localeCompare(b.label(), languageTag())),
+    ...GENRES.map((genre) => ({
+      label: () => toTranslatedGenre(genre),
+      value: genre,
+    })).toSorted((a, b) => a.label().localeCompare(b.label(), languageTag())),
   ],
   advanced: {
     type: 'multi-select',

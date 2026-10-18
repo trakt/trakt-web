@@ -8,9 +8,8 @@ import { useIsDropped } from './useIsDropped.ts';
 
 function serveDropped(ids: number[]) {
   server.use(
-    http.get(
-      'http://localhost/v3/users/me/dropped/minimal',
-      () => HttpResponse.json(ids),
+    http.get('http://localhost/v3/users/me/dropped/minimal', () =>
+      HttpResponse.json(ids),
     ),
   );
 }

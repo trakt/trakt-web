@@ -8,10 +8,9 @@ import {
 export function createDiscoverContext(useSeasonalFilters: boolean) {
   const ctx = setContext(
     DISCOVER_CONTEXT_KEY,
-    getContext<DiscoverContext>(DISCOVER_CONTEXT_KEY) ??
-      {
-        useSeasonalFilters: new BehaviorSubject(useSeasonalFilters),
-      },
+    getContext<DiscoverContext>(DISCOVER_CONTEXT_KEY) ?? {
+      useSeasonalFilters: new BehaviorSubject(useSeasonalFilters),
+    },
   );
 
   return ctx;

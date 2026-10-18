@@ -5,8 +5,9 @@ type ReorderWatchlistParams = {
   rank: number[];
 } & ApiParams;
 
-export function reorderWatchlistRequest(
-  { fetch, rank }: ReorderWatchlistParams,
-): Promise<boolean> {
+export function reorderWatchlistRequest({
+  fetch,
+  rank,
+}: ReorderWatchlistParams): Promise<boolean> {
   return postReorderRequest({ fetch, path: '/sync/watchlist/reorder', rank });
 }

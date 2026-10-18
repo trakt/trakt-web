@@ -10,9 +10,11 @@ interface GetGraphItemsParams {
   readonly wakingHoursPerDay: number;
 }
 
-export function getGraphItems(
-  { thisWeek, now, wakingHoursPerDay }: GetGraphItemsParams,
-): PulseGraphItem[] {
+export function getGraphItems({
+  thisWeek,
+  now,
+  wakingHoursPerDay,
+}: GetGraphItemsParams): PulseGraphItem[] {
   const locale = getLocale();
   const twAll = [...thisWeek.movieDates, ...thisWeek.showDates];
 

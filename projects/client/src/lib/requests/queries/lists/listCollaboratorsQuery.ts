@@ -11,9 +11,10 @@ const CollaboratorsResponseSchema = z.array(profileResponseSchema);
 
 type ListCollaboratorsParams = { listId: number } & ApiParams;
 
-const listCollaboratorsRequest = async (
-  { fetch, listId }: ListCollaboratorsParams,
-) => {
+const listCollaboratorsRequest = async ({
+  fetch,
+  listId,
+}: ListCollaboratorsParams) => {
   const response = await rawApiFetch({
     fetch,
     path: `/lists/${listId}/collaborators`,
@@ -21,9 +22,9 @@ const listCollaboratorsRequest = async (
 
   return response.ok
     ? {
-      body: CollaboratorsResponseSchema.parse(await response.json()),
-      status: 200 as const,
-    }
+        body: CollaboratorsResponseSchema.parse(await response.json()),
+        status: 200 as const,
+      }
     : { body: [], status: 200 as const };
 };
 

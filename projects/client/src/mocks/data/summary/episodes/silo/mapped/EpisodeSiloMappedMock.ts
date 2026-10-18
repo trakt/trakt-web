@@ -2,27 +2,26 @@ import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import { EpisodePremiereType } from '$lib/requests/models/EpisodeType.ts';
 
 export const EpisodeSiloMappedMock: EpisodeEntry = {
-  'id': 5165667,
-  'imdbId': 'tt14693272',
-  'key': 'episode-5165667',
-  'type': EpisodePremiereType.series_premiere,
-  'title': 'Freedom Day',
-  'overview':
+  id: 5165667,
+  imdbId: 'tt14693272',
+  key: 'episode-5165667',
+  type: EpisodePremiereType.series_premiere,
+  title: 'Freedom Day',
+  overview:
     "Sheriff Becker's plans for the future are thrown off course after his wife meets a hacker with information about the silo.",
-  'season': 1,
-  'genres': [],
-  'number': 1,
-  'runtime': 60,
-  'rating': 0.7753,
-  'votes': 4186,
-  'updatedAt': new Date('2025-01-20T03:49:10.000Z'),
-  'cover': {
-    'url':
-      'https://media.trakt.tv/images/episodes/005/165/667/screenshots/thumb/e035db5f06.jpg.webp',
+  season: 1,
+  genres: [],
+  number: 1,
+  runtime: 60,
+  rating: 0.7753,
+  votes: 4186,
+  updatedAt: new Date('2025-01-20T03:49:10.000Z'),
+  cover: {
+    url: 'https://media.trakt.tv/images/episodes/005/165/667/screenshots/thumb/e035db5f06.jpg.webp',
   },
-  'airDate': new Date('2023-05-05T01:00:00.000Z'),
-  'releaseDate': new Date('2023-05-05T01:00:00.000Z'),
-  'effectiveReleaseDate': new Date('2023-05-05T01:00:00.000Z'),
-  'year': 2023,
-  'postCredits': [],
+  airDate: new Date('2023-05-05T01:00:00.000Z'),
+  releaseDate: new Date('2023-05-05T01:00:00.000Z'),
+  effectiveReleaseDate: new Date('2023-05-05T01:00:00.000Z'),
+  year: 2023,
+  postCredits: [],
 };

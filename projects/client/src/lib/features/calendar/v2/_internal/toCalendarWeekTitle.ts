@@ -19,9 +19,11 @@ const RELATIVE_WEEK_TITLES = new Map<number, () => string>([
   [1, m.header_calendar_next_week],
 ]);
 
-export function toCalendarWeekTitle(
-  { start, today, locale }: CalendarWeekTitleParams,
-): string {
+export function toCalendarWeekTitle({
+  start,
+  today,
+  locale,
+}: CalendarWeekTitleParams): string {
   const weekStart = getStartOfWeek(start, locale);
   const weekOffset = Math.round(
     differenceInCalendarDays(weekStart, getStartOfWeek(today, locale)) /
@@ -34,6 +36,5 @@ export function toCalendarWeekTitle(
   return new Intl.DateTimeFormat(getIntlLocale(locale), {
     month: 'short',
     day: 'numeric',
-  })
-    .formatRange(weekStart, addDays(weekStart, DAYS_IN_WEEK - 1));
+  }).formatRange(weekStart, addDays(weekStart, DAYS_IN_WEEK - 1));
 }

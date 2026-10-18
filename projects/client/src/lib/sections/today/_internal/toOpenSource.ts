@@ -8,9 +8,10 @@ type ToOpenSourceParams = {
   routeId: string | Nil;
 };
 
-export function toOpenSource(
-  { navigationType, routeId }: ToOpenSourceParams,
-): TodayOpenSource {
+export function toOpenSource({
+  navigationType,
+  routeId,
+}: ToOpenSourceParams): TodayOpenSource {
   if (navigationType !== 'link') return 'link';
 
   return routeId === OVERVIEW_ROUTE_ID ? 'overview' : 'navbar';

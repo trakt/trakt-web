@@ -18,8 +18,13 @@ type VerticalDragProps = {
 
 export function verticalDrag(
   node: HTMLElement,
-  { onClose, parentClass, fullscreenClass, dragClass, offsetVariable }:
-    VerticalDragProps,
+  {
+    onClose,
+    parentClass,
+    fullscreenClass,
+    dragClass,
+    offsetVariable,
+  }: VerticalDragProps,
 ) {
   const parent = assertDefined(
     node.closest<HTMLElement>(`.${parentClass}`),

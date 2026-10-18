@@ -52,7 +52,7 @@ export function useShow(slug$: Observable<string>) {
             slug,
             locale: activeLocale,
             enabled: authorized,
-          })
+          }),
         ),
       ),
     ),
@@ -68,24 +68,18 @@ export function useShow(slug$: Observable<string>) {
   const intl = useQuery(
     slug$.pipe(
       map((slug) =>
-        showIntlQuery({ slug, language, enabled: !isLocaleSkipped })
+        showIntlQuery({ slug, language, enabled: !isLocaleSkipped }),
       ),
     ),
   );
 
-  const queries = [
-    show,
-    intl,
-    studios,
-    crew,
-    seasons,
-  ];
+  const queries = [show, intl, studios, crew, seasons];
 
   const isQueriesLoading = combineLatest(queries).pipe(
     map(($queries) => $queries.some(toLoadingState)),
   );
   const isSentimentLoading = sentiment.pipe(
-    map((query) => query ? toLoadingState(query) : false),
+    map((query) => (query ? toLoadingState(query) : false)),
   );
   const isLoading = anyTrue([isQueriesLoading, isSentimentLoading]);
 
@@ -102,7 +96,7 @@ export function useShow(slug$: Observable<string>) {
           type: 'show',
           translations: $intl.data,
           fallback: $show.data,
-        })
+        }),
       ),
     ),
     streamOn: combineLatest([streamOnQuery, favorites, country]).pipe(
@@ -111,7 +105,7 @@ export function useShow(slug$: Observable<string>) {
           services: $streamOn.data,
           favorites: $favorites,
           countryCode: $country,
-        })
+        }),
       ),
     ),
   };

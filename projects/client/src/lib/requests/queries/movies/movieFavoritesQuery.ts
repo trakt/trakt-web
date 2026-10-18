@@ -16,35 +16,36 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { FavoriteMovieResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 
-type FavoriteMoviesParams =
-  & {
-    slug: string;
-    sortBy?: SortBy;
-    sortHow?: SortDirection;
-  }
-  & PaginationParams
-  & ApiParams
-  & FilterParams;
+type FavoriteMoviesParams = {
+  slug: string;
+  sortBy?: SortBy;
+  sortHow?: SortDirection;
+} & PaginationParams &
+  ApiParams &
+  FilterParams;
 
-const favoritedMoviesRequest = (
-  { fetch, slug, limit, page, filter, sortBy, sortHow }: FavoriteMoviesParams,
-) =>
-  api({ fetch })
-    .users
-    .favorites
-    .movies({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,images,colors',
-        sort_by: sortBy ?? 'added',
-        sort_how: sortHow ?? 'desc',
-        page,
-        limit,
-        ...filter,
-      },
-    });
+const favoritedMoviesRequest = ({
+  fetch,
+  slug,
+  limit,
+  page,
+  filter,
+  sortBy,
+  sortHow,
+}: FavoriteMoviesParams) =>
+  api({ fetch }).users.favorites.movies({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,images,colors',
+      sort_by: sortBy ?? 'added',
+      sort_how: sortHow ?? 'desc',
+      page,
+      limit,
+      ...filter,
+    },
+  });
 
 export function mapToFavoriteMovie(
   entry: FavoriteMovieResponse,

@@ -8,7 +8,7 @@ export function typeLines(
 ): Observable<ReadonlyArray<string>> {
   return concat(
     ...frames.map(({ typed, wait }) =>
-      concat(of(typed), timer(wait).pipe(ignoreElements()))
+      concat(of(typed), timer(wait).pipe(ignoreElements())),
     ),
   );
 }

@@ -9,10 +9,10 @@ type PulseGraphItemBase = {
 
 export type PulseGraphItem =
   | (PulseGraphItemBase & {
-    readonly kind: 'peakHours';
-    readonly data: PeakHoursData;
-  })
+      readonly kind: 'peakHours';
+      readonly data: PeakHoursData;
+    })
   | (PulseGraphItemBase & {
-    readonly kind: 'screenTimeDaily';
-    readonly data: ScreenTimeDailyData;
-  });
+      readonly kind: 'screenTimeDaily';
+      readonly data: ScreenTimeDailyData;
+    });

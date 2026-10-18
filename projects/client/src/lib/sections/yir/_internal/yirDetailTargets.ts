@@ -58,17 +58,17 @@ function mapYirEntries(detail: YirDetail, mapEntry: EntryMapper): YirDetail {
     },
     trends: detail.trends
       ? {
-        shows: mapItems(detail.trends.shows),
-        movies: mapItems(detail.trends.movies),
-      }
+          shows: mapItems(detail.trends.shows),
+          movies: mapItems(detail.trends.movies),
+        }
       : detail.trends,
     firstWatched: mapWatched(detail.firstWatched),
     lastWatched: mapWatched(detail.lastWatched),
     thanks: detail.thanks
       ? {
-        shows: detail.thanks.shows.map(mapEntry),
-        movies: detail.thanks.movies.map(mapEntry),
-      }
+          shows: detail.thanks.shows.map(mapEntry),
+          movies: detail.thanks.movies.map(mapEntry),
+        }
       : detail.thanks,
   };
 }
@@ -92,12 +92,10 @@ export function yirDetailTargets(
       id: entry.id,
       type: entry.type,
       apply: (target, title) =>
-        mapYirEntries(
-          target,
-          (candidate) =>
-            candidate.id === entry.id && candidate.type === entry.type
-              ? { ...candidate, title }
-              : candidate,
+        mapYirEntries(target, (candidate) =>
+          candidate.id === entry.id && candidate.type === entry.type
+            ? { ...candidate, title }
+            : candidate,
         ),
     });
   });

@@ -67,10 +67,12 @@ const PlexSettingsSchema = z.object({
     serverLimit: z.number().nullable(),
     selection: z.object({
       serverIds: z.string().array(),
-      libraryIds: z.array(z.object({
-        serverId: z.string(),
-        uuid: z.string(),
-      })),
+      libraryIds: z.array(
+        z.object({
+          serverId: z.string(),
+          uuid: z.string(),
+        }),
+      ),
       userIds: z.string().array(),
     }),
     toggles: plexSyncTogglesSchema,
@@ -105,12 +107,12 @@ function mapToPlexSettings(body: PlexSettingsResponse): PlexSettings {
       serverLimit: body.sync.server_limit,
       selection: {
         serverIds: body.sync.selection.server_ids,
-        libraryIds: body.sync.selection.library_ids.map((
-          { server_id, uuid },
-        ) => ({
-          serverId: server_id,
-          uuid,
-        })),
+        libraryIds: body.sync.selection.library_ids.map(
+          ({ server_id, uuid }) => ({
+            serverId: server_id,
+            uuid,
+          }),
+        ),
         userIds: body.sync.selection.user_ids,
       },
       toggles: body.sync.toggles,

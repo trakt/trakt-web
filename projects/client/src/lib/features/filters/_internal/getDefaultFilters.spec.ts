@@ -4,9 +4,7 @@ import { STORED_FILTERS_KEY } from '../useStoredFilters.ts';
 import { getDefaultFilters } from './getDefaultFilters.ts';
 
 describe('getDefaultFilters', () => {
-  const filters: Array<[string, string]> = [
-    [FilterKey.Genres, 'action'],
-  ];
+  const filters: Array<[string, string]> = [[FilterKey.Genres, 'action']];
 
   beforeEach(() => {
     localStorage.clear();

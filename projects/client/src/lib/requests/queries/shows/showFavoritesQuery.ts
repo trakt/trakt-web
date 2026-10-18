@@ -16,39 +16,38 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { FavoriteShowResponse } from '@trakt/api';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 
-type FavoriteShowsParams =
-  & {
-    slug: string;
-    sortBy?: SortBy;
-    sortHow?: SortDirection;
-  }
-  & PaginationParams
-  & ApiParams
-  & FilterParams;
+type FavoriteShowsParams = {
+  slug: string;
+  sortBy?: SortBy;
+  sortHow?: SortDirection;
+} & PaginationParams &
+  ApiParams &
+  FilterParams;
 
-const favoritedShowsRequest = (
-  { fetch, slug, limit, page, filter, sortBy, sortHow }: FavoriteShowsParams,
-) =>
-  api({ fetch })
-    .users
-    .favorites
-    .shows({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,images,colors',
-        sort_by: sortBy ?? 'added',
-        sort_how: sortHow ?? 'desc',
-        page,
-        limit,
-        ...filter,
-      },
-    });
+const favoritedShowsRequest = ({
+  fetch,
+  slug,
+  limit,
+  page,
+  filter,
+  sortBy,
+  sortHow,
+}: FavoriteShowsParams) =>
+  api({ fetch }).users.favorites.shows({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,images,colors',
+      sort_by: sortBy ?? 'added',
+      sort_how: sortHow ?? 'desc',
+      page,
+      limit,
+      ...filter,
+    },
+  });
 
-export function mapToFavoriteShow(
-  entry: FavoriteShowResponse,
-): FavoritedEntry {
+export function mapToFavoriteShow(entry: FavoriteShowResponse): FavoritedEntry {
   return {
     key: `show-${entry.show.ids.trakt}`,
     favoritedAt: new Date(entry.listed_at),

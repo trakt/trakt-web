@@ -30,10 +30,7 @@ describe('smartListQuery', () => {
 
   it('should request smart lists', async () => {
     const result = await runQuery({
-      factory: () =>
-        createTestBedInfiniteQuery(
-          smartListQuery({}),
-        ),
+      factory: () => createTestBedInfiniteQuery(smartListQuery({})),
       mapper: mapToEntries,
     });
 

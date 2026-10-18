@@ -14,8 +14,8 @@ import { renderShareCard } from './renderShareCard.ts';
 vi.mock('$lib/features/share/models/ShareType.ts', () => ({
   SHARE_TYPE_DIMENSIONS: {
     'open-graph': { width: 600, height: 315, padding: 25 },
-    'feed': { width: 540, height: 540, padding: 20 },
-    'story': { width: 540, height: 960, padding: 30 },
+    feed: { width: 540, height: 540, padding: 20 },
+    story: { width: 540, height: 960, padding: 30 },
   },
 }));
 
@@ -55,31 +55,32 @@ function renderCard(variant: ShareType, format: 'jpeg' | 'raw') {
     html: toCardHtml(variant),
     variant,
     format,
-    fonts: [{
-      name: 'Inter',
-      data: new Uint8Array(loadSystemFont()).buffer,
-      weight: 400,
-      style: 'normal',
-    }],
+    fonts: [
+      {
+        name: 'Inter',
+        data: new Uint8Array(loadSystemFont()).buffer,
+        weight: 400,
+        style: 'normal',
+      },
+    ],
     images: [],
   });
 }
 
 function countPosterPixels(rgba: Uint8Array): number {
-  return Array.from({ length: rgba.length / 4 }, (_, i) => i * 4)
-    .filter((i) =>
+  return Array.from({ length: rgba.length / 4 }, (_, i) => i * 4).filter(
+    (i) =>
       (rgba[i] ?? 255) < 40 &&
       (rgba[i + 1] ?? 0) > 215 &&
-      (rgba[i + 2] ?? 255) < 40
-    )
-    .length;
+      (rgba[i + 2] ?? 255) < 40,
+  ).length;
 }
 
 function expectedPosterArea(variant: ShareType): number {
   const { height, padding } = SHARE_TYPE_DIMENSIONS[variant];
   const posterHeight = {
-    'feed': height / 1.25,
-    'story': height / 1.75,
+    feed: height / 1.25,
+    story: height / 1.75,
     'open-graph': height - padding * 2,
   }[variant];
 
@@ -108,8 +109,9 @@ describe.skipIf(!process.env.CI)('component: ShareCard through takumi', () => {
     it(`should draw the ${variant} poster`, async () => {
       const rgba = await renderCard(variant, 'raw');
 
-      expect(countPosterPixels(rgba) / expectedPosterArea(variant))
-        .toBeGreaterThan(0.9);
+      expect(
+        countPosterPixels(rgba) / expectedPosterArea(variant),
+      ).toBeGreaterThan(0.9);
     });
   }
 });

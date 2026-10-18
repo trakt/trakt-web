@@ -24,8 +24,9 @@ describe('TvTimeExtractorParser', () => {
     });
 
     it('should reject multiple files', () => {
-      expect(TvTimeExtractorParser.canParse([csvFile(''), csvFile('')]))
-        .toBe(false);
+      expect(TvTimeExtractorParser.canParse([csvFile(''), csvFile('')])).toBe(
+        false,
+      );
     });
   });
 

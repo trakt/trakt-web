@@ -26,9 +26,14 @@ function toCsv(ids: ReadonlyArray<number>): string {
   return ids.join(',');
 }
 
-const bulkIntlRequest = async (
-  { fetch, language, region, movieIds, showIds, episodeIds }: BulkIntlParams,
-) => {
+const bulkIntlRequest = async ({
+  fetch,
+  language,
+  region,
+  movieIds,
+  showIds,
+  episodeIds,
+}: BulkIntlParams) => {
   const params = new URLSearchParams({ language, country: region });
 
   if (movieIds.length > 0) params.set('m', toCsv(movieIds));

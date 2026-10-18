@@ -26,22 +26,26 @@ export function useRewatching({ show }: UseRewatchingProps) {
   const rewatchingInvalidations = ({ data }: { data: boolean }) =>
     data
       ? [
-        InvalidateAction.Rewatching('show'),
-        InvalidateAction.MarkAsWatched('show'),
-      ]
+          InvalidateAction.Rewatching('show'),
+          InvalidateAction.MarkAsWatched('show'),
+        ]
       : [];
 
-  const start = useMutation(defineMutation({
-    key: 'show:start-rewatching',
-    request: () => startShowRewatchingRequest({ id: show.id }),
-    invalidations: rewatchingInvalidations,
-  }));
+  const start = useMutation(
+    defineMutation({
+      key: 'show:start-rewatching',
+      request: () => startShowRewatchingRequest({ id: show.id }),
+      invalidations: rewatchingInvalidations,
+    }),
+  );
 
-  const stop = useMutation(defineMutation({
-    key: 'show:stop-rewatching',
-    request: () => stopShowRewatchingRequest({ id: show.id }),
-    invalidations: rewatchingInvalidations,
-  }));
+  const stop = useMutation(
+    defineMutation({
+      key: 'show:stop-rewatching',
+      request: () => stopShowRewatchingRequest({ id: show.id }),
+      invalidations: rewatchingInvalidations,
+    }),
+  );
 
   const startRewatching = async () => {
     if (!(await firstValueFrom(isRewatchingFeatureEnabled))) {

@@ -17,9 +17,7 @@ const toDistinctSeasonTitle = (item: SeasonsResponse[0]): string | null => {
 };
 
 export const mapToSeason = (item: SeasonsResponse[0]): Season => {
-  const poster = findDefined(
-    ...(item.images?.poster ?? []),
-  );
+  const poster = findDefined(...(item.images?.poster ?? []));
 
   const episodeCount = item.episode_count ?? 0;
 

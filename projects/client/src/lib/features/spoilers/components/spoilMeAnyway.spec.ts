@@ -60,7 +60,7 @@ describe('action: spoilMeAnyway', () => {
     commentNode.classList.add(SPOILER_CLASS_NAME);
 
     const component = await renderStore(() =>
-      spoilMeAnyway(commentNode, false)
+      spoilMeAnyway(commentNode, false),
     );
     commentNode.dispatchEvent(new Event('click'));
 

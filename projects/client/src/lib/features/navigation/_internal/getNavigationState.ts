@@ -15,9 +15,7 @@ export function getNavigationState(
   );
 
   const currentList = assertDefined(
-    currentItem.closest(
-      `[data-dpad-navigation="${target}"]`,
-    ),
+    currentItem.closest(`[data-dpad-navigation="${target}"]`),
     'No current list was found',
   );
 

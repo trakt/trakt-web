@@ -21,9 +21,7 @@ export function useBulkAddSources(targetListId: number) {
         name: m.list_title_watchlist(),
         request: { type: 'watchlist' },
       } satisfies BulkAddSource,
-      ...$lists
-        .filter(({ id }) => id !== targetListId)
-        .map(toListSource),
+      ...$lists.filter(({ id }) => id !== targetListId).map(toListSource),
     ]),
   );
 

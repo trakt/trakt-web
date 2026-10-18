@@ -146,9 +146,9 @@ if (import.meta.main) {
   const source = await readSource();
   const all: Array<Mismatch> = [];
 
-  for (
-    const entry of await readdir(I18N_MESSAGES_DIR, { withFileTypes: true })
-  ) {
+  for (const entry of await readdir(I18N_MESSAGES_DIR, {
+    withFileTypes: true,
+  })) {
     if (!entry.isFile() || !entry.name.endsWith('.json')) continue;
 
     const target = await readLocale(entry.name);

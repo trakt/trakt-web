@@ -15,10 +15,25 @@ describe('countWatchedEpisodes', () => {
   });
 
   it('should sum episodes across multiple regular seasons', () => {
-    expect(countWatchedEpisodes(new Map([[1, 10], [2, 8]]))).toBe(18);
+    expect(
+      countWatchedEpisodes(
+        new Map([
+          [1, 10],
+          [2, 8],
+        ]),
+      ),
+    ).toBe(18);
   });
 
   it('should exclude specials but include regular seasons', () => {
-    expect(countWatchedEpisodes(new Map([[0, 2], [1, 6], [2, 4]]))).toBe(10);
+    expect(
+      countWatchedEpisodes(
+        new Map([
+          [0, 2],
+          [1, 6],
+          [2, 4],
+        ]),
+      ),
+    ).toBe(10);
   });
 });

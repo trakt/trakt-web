@@ -28,9 +28,11 @@ function mapToUserMediaReactions(
   });
 }
 
-const userMediaReactionsRequest = async (
-  { fetch, type, id }: UserMediaReactionsParams,
-) => {
+const userMediaReactionsRequest = async ({
+  fetch,
+  type,
+  id,
+}: UserMediaReactionsParams) => {
   const response = await rawApiFetch({
     fetch,
     path: `/v3/users/me/${type}/${id}`,
@@ -38,9 +40,9 @@ const userMediaReactionsRequest = async (
 
   return response.ok
     ? {
-      body: UserMediaReactionsResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: UserMediaReactionsResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: [] as UserMediaReactionsResponse, status: 200 };
 };
 

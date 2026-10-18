@@ -26,13 +26,15 @@ function toEnvelope(header: Record<string, unknown>): string {
   ].join('\n');
 }
 
-function toRequest(
-  { body, headers, method = 'POST' }: {
-    body?: BodyInit;
-    headers?: HeadersInit;
-    method?: string;
-  },
-): Request {
+function toRequest({
+  body,
+  headers,
+  method = 'POST',
+}: {
+  body?: BodyInit;
+  headers?: HeadersInit;
+  method?: string;
+}): Request {
   return new Request(TUNNEL_URL, { method, headers, body });
 }
 
@@ -42,17 +44,15 @@ function callHandle(
 ): ReturnType<Handle> {
   const resolve = vi.fn(() => new Response('page'));
 
-  return handle(
-    {
-      event: mockRequestEvent({ url, request }),
-      resolve,
-    } as unknown as Parameters<Handle>[0],
-  );
+  return handle({
+    event: mockRequestEvent({ url, request }),
+    resolve,
+  } as unknown as Parameters<Handle>[0]);
 }
 
-function serveIngest(
-  responder: Parameters<typeof http.post>[1],
-): { bodies: string[] } {
+function serveIngest(responder: Parameters<typeof http.post>[1]): {
+  bodies: string[];
+} {
   const bodies: string[] = [];
 
   server.use(
@@ -69,15 +69,13 @@ describe('handle: sentry', () => {
   it('should pass unrelated paths through to the next handler', async () => {
     const resolve = vi.fn(() => new Response('page'));
 
-    const response = await handle(
-      {
-        event: mockRequestEvent({
-          url: 'http://localhost/movies/heretic-2024',
-          request: new Request('http://localhost/movies/heretic-2024'),
-        }),
-        resolve,
-      } as unknown as Parameters<Handle>[0],
-    );
+    const response = await handle({
+      event: mockRequestEvent({
+        url: 'http://localhost/movies/heretic-2024',
+        request: new Request('http://localhost/movies/heretic-2024'),
+      }),
+      resolve,
+    } as unknown as Parameters<Handle>[0]);
 
     expect(resolve).toHaveBeenCalledOnce();
     expect(await response.text()).toBe('page');
@@ -92,7 +90,7 @@ describe('handle: sentry', () => {
 
   it('should relay a known envelope and mirror the ingest status', async () => {
     const { bodies } = serveIngest(() =>
-      HttpResponse.json({ id: 'abc' }, { status: 200 })
+      HttpResponse.json({ id: 'abc' }, { status: 200 }),
     );
     const envelope = toEnvelope({ dsn: SENTRY_DSN });
 
@@ -104,14 +102,15 @@ describe('handle: sentry', () => {
   });
 
   it('should forward the rate limit headers back to the client', async () => {
-    serveIngest(() =>
-      new HttpResponse(null, {
-        status: 429,
-        headers: {
-          'retry-after': '60',
-          'x-sentry-rate-limits': '60:error:organization',
-        },
-      })
+    serveIngest(
+      () =>
+        new HttpResponse(null, {
+          status: 429,
+          headers: {
+            'retry-after': '60',
+            'x-sentry-rate-limits': '60:error:organization',
+          },
+        }),
     );
 
     const response = await callHandle(

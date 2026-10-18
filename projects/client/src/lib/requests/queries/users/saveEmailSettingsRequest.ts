@@ -6,9 +6,11 @@ type SaveEmailSettingsParams = {
   enabled: boolean;
 } & ApiParams;
 
-export async function saveEmailSettingsRequest(
-  { category, enabled, fetch }: SaveEmailSettingsParams,
-): Promise<boolean> {
+export async function saveEmailSettingsRequest({
+  category,
+  enabled,
+  fetch,
+}: SaveEmailSettingsParams): Promise<boolean> {
   const response = await rawApiFetch({
     fetch,
     path: '/users/settings/emails',

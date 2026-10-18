@@ -17,21 +17,25 @@ const fitsMode = (template: SmartListTemplate, mode: DiscoverMode) =>
   matchesDiscoverMode({ mediaType: template.mediaType, mode });
 
 const isCovered = (template: SmartListTemplate, lists: SmartList[]) =>
-  lists.some((list) =>
-    list.source === template.source &&
-    list.mediaType === template.mediaType &&
-    isSameSmartListFilters(
-      closeOpenSmartListRanges(list.filters),
-      closeOpenSmartListRanges(template.filters),
-    )
+  lists.some(
+    (list) =>
+      list.source === template.source &&
+      list.mediaType === template.mediaType &&
+      isSameSmartListFilters(
+        closeOpenSmartListRanges(list.filters),
+        closeOpenSmartListRanges(template.filters),
+      ),
   );
 
-export function getVisibleSmartListTemplates(
-  { templates, lists, mode }: VisibleSmartListTemplatesProps,
-): SmartListTemplate[] {
-  return templates.filter((template) =>
-    getSmartListTemplateCopy(template.id) !== undefined &&
-    fitsMode(template, mode) &&
-    !isCovered(template, lists)
+export function getVisibleSmartListTemplates({
+  templates,
+  lists,
+  mode,
+}: VisibleSmartListTemplatesProps): SmartListTemplate[] {
+  return templates.filter(
+    (template) =>
+      getSmartListTemplateCopy(template.id) !== undefined &&
+      fitsMode(template, mode) &&
+      !isCovered(template, lists),
   );
 }

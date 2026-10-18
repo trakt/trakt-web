@@ -38,8 +38,8 @@ const SERIES_HEADER = [
 ];
 
 function toCsv(header: string[], rows: Record<string, string>[]): string {
-  const lines = rows.map(
-    (row) => header.map((column) => row[column] ?? '').join(','),
+  const lines = rows.map((row) =>
+    header.map((column) => row[column] ?? '').join(','),
   );
   return [header.join(','), ...lines].join('\n');
 }
@@ -207,23 +207,27 @@ describe('TvTimeExportParser', () => {
 
   describe('json', () => {
     it('should import watched episodes nested in the series json', async () => {
-      const shows = [{
-        id: { tvdb: 346328, imdb: null },
-        title: 'Elite',
-        status: 'continuing',
-        seasons: [{
-          number: 1,
-          episodes: [
+      const shows = [
+        {
+          id: { tvdb: 346328, imdb: null },
+          title: 'Elite',
+          status: 'continuing',
+          seasons: [
             {
-              id: { tvdb: 6671792 },
               number: 1,
-              is_watched: true,
-              watched_at: '2019-10-04T03:43:42Z',
+              episodes: [
+                {
+                  id: { tvdb: 6671792 },
+                  number: 1,
+                  is_watched: true,
+                  watched_at: '2019-10-04T03:43:42Z',
+                },
+                { id: { tvdb: 6671793 }, number: 2, is_watched: false },
+              ],
             },
-            { id: { tvdb: 6671793 }, number: 2, is_watched: false },
           ],
-        }],
-      }];
+        },
+      ];
 
       const result = await TvTimeExportParser.parse([
         new File([JSON.stringify(shows)], 'tvtime-series-2026-07-07.json'),
@@ -321,15 +325,21 @@ describe('TvTimeExportParser', () => {
           toCsv(EPISODES_HEADER, [episodeRow()]),
         ),
       });
-      const shows = [{
-        id: { tvdb: 346328 },
-        title: 'Elite',
-        status: 'continuing',
-        seasons: [{
-          number: 1,
-          episodes: [{ id: { tvdb: 6671792 }, number: 1, is_watched: true }],
-        }],
-      }];
+      const shows = [
+        {
+          id: { tvdb: 346328 },
+          title: 'Elite',
+          status: 'continuing',
+          seasons: [
+            {
+              number: 1,
+              episodes: [
+                { id: { tvdb: 6671792 }, number: 1, is_watched: true },
+              ],
+            },
+          ],
+        },
+      ];
       const jsonZip = zipSync({
         'tvtime-series-2026-07-07.json': encoder.encode(JSON.stringify(shows)),
       });
@@ -351,12 +361,14 @@ describe('TvTimeExportParser', () => {
       });
       // The JSON series export also carries the watchlist (not-started shows),
       // which the episodes CSV does not. It must survive the merge.
-      const shows = [{
-        id: { tvdb: 111 },
-        title: 'Wanted',
-        status: 'not_started_yet',
-        seasons: [],
-      }];
+      const shows = [
+        {
+          id: { tvdb: 111 },
+          title: 'Wanted',
+          status: 'not_started_yet',
+          seasons: [],
+        },
+      ];
       const jsonZip = zipSync({
         'tvtime-series-2026-07-07.json': encoder.encode(JSON.stringify(shows)),
       });
@@ -384,20 +396,26 @@ describe('TvTimeExportParser', () => {
           toCsv(EPISODES_HEADER, [episodeRow({ watched_at: '' })]),
         ),
       });
-      const shows = [{
-        id: { tvdb: 346328 },
-        title: 'Elite',
-        status: 'continuing',
-        seasons: [{
-          number: 1,
-          episodes: [{
-            id: { tvdb: 6671792 },
-            number: 1,
-            is_watched: true,
-            watched_at: '2019-10-04T03:43:42Z',
-          }],
-        }],
-      }];
+      const shows = [
+        {
+          id: { tvdb: 346328 },
+          title: 'Elite',
+          status: 'continuing',
+          seasons: [
+            {
+              number: 1,
+              episodes: [
+                {
+                  id: { tvdb: 6671792 },
+                  number: 1,
+                  is_watched: true,
+                  watched_at: '2019-10-04T03:43:42Z',
+                },
+              ],
+            },
+          ],
+        },
+      ];
       const jsonZip = zipSync({
         'tvtime-series-2026-07-07.json': encoder.encode(JSON.stringify(shows)),
       });

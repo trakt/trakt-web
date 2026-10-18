@@ -19,14 +19,16 @@ type DeleteNoteProps = {
 export function useDeleteNote() {
   const { track } = useTrack(AnalyticsEvent.DeleteNote);
 
-  const deletion = useMutation(defineMutation({
-    key: 'note:delete',
-    request: ({ id, type }: DeleteNoteProps) =>
-      deleteNoteRequest({ id, body: { type } }),
-    invalidations: (
-      { variables },
-    ) => [InvalidateAction.Note.Delete(variables.media.type)],
-  }));
+  const deletion = useMutation(
+    defineMutation({
+      key: 'note:delete',
+      request: ({ id, type }: DeleteNoteProps) =>
+        deleteNoteRequest({ id, body: { type } }),
+      invalidations: ({ variables }) => [
+        InvalidateAction.Note.Delete(variables.media.type),
+      ],
+    }),
+  );
 
   const deleteNote = async ({ id, media, type }: DeleteNoteProps) => {
     track({ type });

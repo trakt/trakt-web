@@ -6,9 +6,11 @@ import { getRelevantItem } from './_internal/getRelevantItem.ts';
 import { DpadNavigationType } from './models/DpadNavigationType.ts';
 
 function getItemInView() {
-  const items = Array.from(document.querySelectorAll(
-    `[data-dpad-navigation="${DpadNavigationType.List}"] [data-dpad-navigation="${DpadNavigationType.Item}"]`,
-  ));
+  const items = Array.from(
+    document.querySelectorAll(
+      `[data-dpad-navigation="${DpadNavigationType.List}"] [data-dpad-navigation="${DpadNavigationType.Item}"]`,
+    ),
+  );
 
   const item = items.find((item) => {
     const rect = item.getBoundingClientRect();

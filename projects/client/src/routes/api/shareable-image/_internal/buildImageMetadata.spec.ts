@@ -32,20 +32,23 @@ describe('util: buildImageMetadata', () => {
     });
 
     it('should anchor on the max date when the release date is unknown', () => {
-      expect(buildFor({ effectiveReleaseDate: MAX_DATE }).releasedAt)
-        .toBe(MAX_DATE.toISOString());
+      expect(buildFor({ effectiveReleaseDate: MAX_DATE }).releasedAt).toBe(
+        MAX_DATE.toISOString(),
+      );
     });
   });
 
   describe('for shows', () => {
     it('should anchor on the last aired episode', () => {
-      expect(buildFor({ lastAired: LAST_AIRED }).releasedAt)
-        .toBe('2026-05-30T00:00:00.000Z');
+      expect(buildFor({ lastAired: LAST_AIRED }).releasedAt).toBe(
+        '2026-05-30T00:00:00.000Z',
+      );
     });
 
     it('should anchor on the release date when nothing has aired yet', () => {
-      expect(buildFor({ lastAired: null }).releasedAt)
-        .toBe('2022-02-04T00:00:00.000Z');
+      expect(buildFor({ lastAired: null }).releasedAt).toBe(
+        '2022-02-04T00:00:00.000Z',
+      );
     });
   });
 });

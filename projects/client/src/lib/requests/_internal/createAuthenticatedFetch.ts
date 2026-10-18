@@ -44,10 +44,10 @@ async function renewSession(rejectedToken: string): Promise<string | null> {
   }
 }
 
-export function createAuthenticatedFetch<
-  T extends typeof fetch,
->(baseFetch: T): T {
-  return (function authenticatedFetch(
+export function createAuthenticatedFetch<T extends typeof fetch>(
+  baseFetch: T,
+): T {
+  return function authenticatedFetch(
     input: Parameters<T>[0],
     init?: Parameters<T>[1],
   ): Promise<Response> {
@@ -58,13 +58,10 @@ export function createAuthenticatedFetch<
         headers.set('Authorization', `Bearer ${token}`);
       }
 
-      return baseFetch(
-        input,
-        {
-          ...init,
-          headers,
-        } as Parameters<T>[1],
-      );
+      return baseFetch(input, {
+        ...init,
+        headers,
+      } as Parameters<T>[1]);
     };
 
     try {
@@ -80,12 +77,12 @@ export function createAuthenticatedFetch<
         }
 
         return renewSession(token).then((renewed) =>
-          renewed == null || renewed === token ? response : send(renewed)
+          renewed == null || renewed === token ? response : send(renewed),
         );
       });
     } catch (e) {
       error('Fetch interceptor error:', e);
       return baseFetch(input, init);
     }
-  }) as unknown as T;
+  } as unknown as T;
 }

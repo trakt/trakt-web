@@ -9,18 +9,17 @@ type ShowJustWatchUrlParams = {
   country: string;
 } & ApiParams;
 
-const showJustWatchUrlRequest = (
-  { fetch, slug, country }: ShowJustWatchUrlParams,
-) =>
-  api({ fetch })
-    .shows
-    .justwatch
-    .link({
-      params: {
-        id: slug,
-        country,
-      },
-    });
+const showJustWatchUrlRequest = ({
+  fetch,
+  slug,
+  country,
+}: ShowJustWatchUrlParams) =>
+  api({ fetch }).shows.justwatch.link({
+    params: {
+      id: slug,
+      country,
+    },
+  });
 
 export const showJustWatchUrlQuery = defineQuery({
   key: 'showJustWatchUrl',

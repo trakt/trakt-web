@@ -17,9 +17,11 @@ type ToFavoritesWithConnectionParams = {
  * Returns `null` when the service is already a favorite so the caller can skip
  * a redundant save.
  */
-export function toFavoritesWithConnection(
-  { serviceId, country, favorites }: ToFavoritesWithConnectionParams,
-): string[] | null {
+export function toFavoritesWithConnection({
+  serviceId,
+  country,
+  favorites,
+}: ToFavoritesWithConnectionParams): string[] | null {
   if (!country || !favorites) {
     return null;
   }

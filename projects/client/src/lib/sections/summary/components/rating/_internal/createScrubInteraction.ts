@@ -26,9 +26,13 @@ type ScrubInteraction = {
 // Pure stream wiring for the scrub-to-rate gesture, decoupled from the DOM so it
 // can be marble-tested. Each pointerdown owns the pointerup that ends it; a
 // pointercancel aborts the gesture without committing.
-export function createScrubInteraction(
-  { down$, move$, up$, cancel$, leave$ }: ScrubSources,
-): ScrubInteraction {
+export function createScrubInteraction({
+  down$,
+  move$,
+  up$,
+  cancel$,
+  leave$,
+}: ScrubSources): ScrubInteraction {
   const preview$ = merge(
     move$.pipe(map((event) => event.clientX as number | null)),
     merge(leave$, cancel$).pipe(map(() => null)),
@@ -40,7 +44,7 @@ export function createScrubInteraction(
         takeUntil(cancel$),
         take(1),
         map((up) => ({ down, up })),
-      )
+      ),
     ),
   );
 

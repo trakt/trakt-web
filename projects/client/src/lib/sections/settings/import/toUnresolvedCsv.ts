@@ -14,7 +14,7 @@ export function toUnresolvedCsv(
       toCsvField(item.year),
       toCsvField(item.action),
       toCsvField(item.watched_at),
-    ].join(',')
+    ].join(','),
   );
 
   return ['title,year,action,watched_at', ...rows].join('\n');

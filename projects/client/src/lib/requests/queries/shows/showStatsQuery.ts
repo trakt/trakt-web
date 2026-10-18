@@ -8,16 +8,12 @@ type ShowStatsParams = {
   slug: string;
 } & ApiParams;
 
-const showStatsRequest = (
-  { fetch, slug }: ShowStatsParams,
-) =>
-  api({ fetch })
-    .shows
-    .stats({
-      params: {
-        id: slug,
-      },
-    });
+const showStatsRequest = ({ fetch, slug }: ShowStatsParams) =>
+  api({ fetch }).shows.stats({
+    params: {
+      id: slug,
+    },
+  });
 
 export const showStatsQuery = defineQuery({
   key: 'showStats',

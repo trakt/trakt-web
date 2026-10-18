@@ -4,12 +4,12 @@ type UnblockUserRequest = {
   slug: string;
 } & ApiParams;
 
-export function unblockUserRequest(
-  { slug, fetch }: UnblockUserRequest,
-): Promise<boolean> {
+export function unblockUserRequest({
+  slug,
+  fetch,
+}: UnblockUserRequest): Promise<boolean> {
   return api({ fetch })
-    .users
-    .unblock({
+    .users.unblock({
       params: {
         id: slug,
       },

@@ -3,11 +3,9 @@ import { isPageFilling } from './isPageFilling.ts';
 
 describe('isPageFilling', () => {
   beforeEach(() => {
-    vi.spyOn(globalThis.window, 'innerHeight', 'get')
-      .mockReturnValue(800);
+    vi.spyOn(globalThis.window, 'innerHeight', 'get').mockReturnValue(800);
 
-    vi.spyOn(globalThis.window, 'scrollY', 'get')
-      .mockReturnValue(200);
+    vi.spyOn(globalThis.window, 'scrollY', 'get').mockReturnValue(200);
   });
 
   afterEach(() => {

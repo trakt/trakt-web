@@ -40,15 +40,17 @@ describe('TvTimeLiberatorParser', () => {
 
   describe('parse', () => {
     it('adds a movie to history when is_watched=true', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'false',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: 'tt1375666',
+          tvdb_id: '113',
+          type: 'movie',
+          title: 'Inception',
+          is_watched: 'true',
+          watched_at: '2023-01-01T00:00:00Z',
+          is_watchlisted: 'false',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 
@@ -63,15 +65,17 @@ describe('TvTimeLiberatorParser', () => {
     });
 
     it('adds a movie to watchlist when is_watchlisted=true', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'false',
-        watched_at: '',
-        is_watchlisted: 'true',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: 'tt1375666',
+          tvdb_id: '113',
+          type: 'movie',
+          title: 'Inception',
+          is_watched: 'false',
+          watched_at: '',
+          is_watchlisted: 'true',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 
@@ -85,15 +89,17 @@ describe('TvTimeLiberatorParser', () => {
     });
 
     it('emits both history and watchlist when both flags are true', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'true',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: 'tt1375666',
+          tvdb_id: '113',
+          type: 'movie',
+          title: 'Inception',
+          is_watched: 'true',
+          watched_at: '2023-01-01T00:00:00Z',
+          is_watchlisted: 'true',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 
@@ -105,14 +111,16 @@ describe('TvTimeLiberatorParser', () => {
     });
 
     it('skips rows where both flags are false', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'false',
-        is_watchlisted: 'false',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: 'tt1375666',
+          tvdb_id: '113',
+          type: 'movie',
+          title: 'Inception',
+          is_watched: 'false',
+          is_watchlisted: 'false',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 
@@ -120,15 +128,17 @@ describe('TvTimeLiberatorParser', () => {
     });
 
     it('treats imdb_id of -1 as absent', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: '-1',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'false',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: '-1',
+          tvdb_id: '113',
+          type: 'movie',
+          title: 'Inception',
+          is_watched: 'true',
+          watched_at: '2023-01-01T00:00:00Z',
+          is_watchlisted: 'false',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 
@@ -138,15 +148,17 @@ describe('TvTimeLiberatorParser', () => {
     });
 
     it('skips rows with no valid ids', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: '-1',
-        tvdb_id: '',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'false',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: '-1',
+          tvdb_id: '',
+          type: 'movie',
+          title: 'Inception',
+          is_watched: 'true',
+          watched_at: '2023-01-01T00:00:00Z',
+          is_watchlisted: 'false',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 
@@ -154,17 +166,19 @@ describe('TvTimeLiberatorParser', () => {
     });
 
     it('correctly parses season and episode for episodes', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt0903747',
-        tvdb_id: '81189',
-        type: 'episode',
-        title: 'Breaking Bad',
-        season: '3',
-        episode: '7',
-        is_watched: 'true',
-        watched_at: '2023-06-01T00:00:00Z',
-        is_watchlisted: 'false',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: 'tt0903747',
+          tvdb_id: '81189',
+          type: 'episode',
+          title: 'Breaking Bad',
+          season: '3',
+          episode: '7',
+          is_watched: 'true',
+          watched_at: '2023-06-01T00:00:00Z',
+          is_watchlisted: 'false',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 
@@ -178,16 +192,18 @@ describe('TvTimeLiberatorParser', () => {
     });
 
     it('emits a rating alongside history for rated movies', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'false',
-        rating: '8',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: 'tt1375666',
+          tvdb_id: '113',
+          type: 'movie',
+          title: 'Inception',
+          is_watched: 'true',
+          watched_at: '2023-01-01T00:00:00Z',
+          is_watchlisted: 'false',
+          rating: '8',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 
@@ -201,18 +217,20 @@ describe('TvTimeLiberatorParser', () => {
     });
 
     it('skips episode ratings', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt0903747',
-        tvdb_id: '81189',
-        type: 'episode',
-        title: 'Breaking Bad',
-        season: '3',
-        episode: '7',
-        is_watched: 'true',
-        watched_at: '2023-06-01T00:00:00Z',
-        is_watchlisted: 'false',
-        rating: '9',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: 'tt0903747',
+          tvdb_id: '81189',
+          type: 'episode',
+          title: 'Breaking Bad',
+          season: '3',
+          episode: '7',
+          is_watched: 'true',
+          watched_at: '2023-06-01T00:00:00Z',
+          is_watchlisted: 'false',
+          rating: '9',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 
@@ -221,16 +239,18 @@ describe('TvTimeLiberatorParser', () => {
     });
 
     it('ignores empty and invalid ratings', async () => {
-      mockParseCsvFile.mockResolvedValue([{
-        imdb_id: 'tt1375666',
-        tvdb_id: '113',
-        type: 'movie',
-        title: 'Inception',
-        is_watched: 'true',
-        watched_at: '2023-01-01T00:00:00Z',
-        is_watchlisted: 'false',
-        rating: '',
-      }]);
+      mockParseCsvFile.mockResolvedValue([
+        {
+          imdb_id: 'tt1375666',
+          tvdb_id: '113',
+          type: 'movie',
+          title: 'Inception',
+          is_watched: 'true',
+          watched_at: '2023-01-01T00:00:00Z',
+          is_watchlisted: 'false',
+          rating: '',
+        },
+      ]);
 
       const result = await TvTimeLiberatorParser.parse([dummyFile]);
 

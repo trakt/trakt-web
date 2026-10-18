@@ -13,7 +13,7 @@ export function useStreamingServiceLookup() {
     map((query) => {
       const entries = new Map<string, StreamingConnection>();
       (query.data ?? []).forEach((connection) =>
-        entries.set(connection.id, connection)
+        entries.set(connection.id, connection),
       );
       return entries;
     }),

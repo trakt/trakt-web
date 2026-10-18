@@ -78,11 +78,11 @@ describe('I18nGenerator', () => {
 
         const content = JSON.parse(firstItem(results).content);
         expect(content).toEqual({
-          '$schema': 'https://inlang.com/schema/inlang-message-format',
-          'simple_message': 'Hello World',
-          'greeting': 'Hello, {name}!',
-          'count_message': '{count} items remaining',
-          'mixed_variables': 'User {userName} has {count} messages',
+          $schema: 'https://inlang.com/schema/inlang-message-format',
+          simple_message: 'Hello World',
+          greeting: 'Hello, {name}!',
+          count_message: '{count} items remaining',
+          mixed_variables: 'User {userName} has {count} messages',
         });
       });
 
@@ -129,16 +129,18 @@ describe('I18nGenerator', () => {
 
   describe('edge cases', () => {
     it('should handle messages without variables', async () => {
-      const simpleGenerator = new I18nGenerator([{
-        meta: {
-          locale: 'en',
-          direction: 'ltr',
-          generator: {
-            inlang: { enabled: true, outputPath: './messages/{locale}.json' },
+      const simpleGenerator = new I18nGenerator([
+        {
+          meta: {
+            locale: 'en',
+            direction: 'ltr',
+            generator: {
+              inlang: { enabled: true, outputPath: './messages/{locale}.json' },
+            },
           },
+          messages: { simple: { default: 'Hello' } },
         },
-        messages: { simple: { default: 'Hello' } },
-      }]);
+      ]);
 
       const results = await simpleGenerator.generatePlatforms(
         [Platform.WEB],

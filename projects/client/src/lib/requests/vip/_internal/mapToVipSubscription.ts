@@ -42,10 +42,10 @@ export function mapToVipSubscription(
     manageUrl: response.manage_url ?? null,
     retentionOffer: response.retention_offer
       ? {
-        planCode: response.retention_offer.plan_code,
-        amount: response.retention_offer.amount,
-        discountedAmount: response.retention_offer.discounted_amount,
-      }
+          planCode: response.retention_offer.plan_code,
+          amount: response.retention_offer.amount,
+          discountedAmount: response.retention_offer.discounted_amount,
+        }
       : null,
     transactions: response.transactions.map(mapToTransaction),
   };

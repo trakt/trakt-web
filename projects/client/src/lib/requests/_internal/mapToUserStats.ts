@@ -36,15 +36,16 @@ export function mapToUserStats(response: UserStatsResponse): UserStats {
     },
     progress: response.progress
       ? {
-        started: response.progress.started,
-        finished: response.progress.finished,
-        dropped: response.progress.dropped,
-      }
+          started: response.progress.started,
+          finished: response.progress.finished,
+          dropped: response.progress.dropped,
+        }
       : null,
     lists: response.lists ?? null,
-    totalMinutes: response.total_minutes ??
+    totalMinutes:
+      response.total_minutes ??
       response.movies.minutes + response.episodes.minutes,
-    totalPlays: response.total_plays ??
-      response.movies.plays + response.episodes.plays,
+    totalPlays:
+      response.total_plays ?? response.movies.plays + response.episodes.plays,
   };
 }

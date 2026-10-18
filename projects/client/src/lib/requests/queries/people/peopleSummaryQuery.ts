@@ -6,19 +6,15 @@ import { mapToPersonSummary } from '../../_internal/mapToPersonSummary.ts';
 
 type PersonSummaryParams = { slug: string } & ApiParams;
 
-const peopleSummaryRequest = (
-  { fetch, slug }: PersonSummaryParams,
-) =>
-  api({ fetch })
-    .people
-    .summary({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,images,markdown',
-      },
-    });
+const peopleSummaryRequest = ({ fetch, slug }: PersonSummaryParams) =>
+  api({ fetch }).people.summary({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,images,markdown',
+    },
+  });
 
 export const peopleSummaryQuery = defineQuery({
   key: 'peopleSummary:v3',

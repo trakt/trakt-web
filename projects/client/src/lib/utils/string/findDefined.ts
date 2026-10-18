@@ -1,5 +1,3 @@
-export function findDefined(
-  ...values: Array<string | Nil>
-) {
+export function findDefined(...values: Array<string | Nil>) {
   return values.find((value) => value?.trim());
 }

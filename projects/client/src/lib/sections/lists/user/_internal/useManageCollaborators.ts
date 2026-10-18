@@ -64,39 +64,44 @@ export function useManageCollaborators(
         followers: followerProfiles,
         following: followingProfiles,
         collaborators: collaboratorProfiles,
-      })
+      }),
     ),
   );
 
   const collaboratorInvalidations = [InvalidateAction.List.Collaborators];
 
-  const add = useMutation(defineMutation({
-    key: 'list:add-collaborator',
-    request: async (profile: UserProfile) => {
-      const { listId } = await firstValueFrom(target$);
-      return addListCollaboratorRequest({
-        listId,
-        userSlug: toUserSlug(profile),
-      });
-    },
-    invalidations: collaboratorInvalidations,
-  }));
+  const add = useMutation(
+    defineMutation({
+      key: 'list:add-collaborator',
+      request: async (profile: UserProfile) => {
+        const { listId } = await firstValueFrom(target$);
+        return addListCollaboratorRequest({
+          listId,
+          userSlug: toUserSlug(profile),
+        });
+      },
+      invalidations: collaboratorInvalidations,
+    }),
+  );
 
-  const remove = useMutation(defineMutation({
-    key: 'list:remove-collaborator',
-    request: async (profile: UserProfile) => {
-      const { listId } = await firstValueFrom(target$);
-      return removeListCollaboratorRequest({
-        listId,
-        userSlug: toUserSlug(profile),
-      });
-    },
-    invalidations: collaboratorInvalidations,
-  }));
+  const remove = useMutation(
+    defineMutation({
+      key: 'list:remove-collaborator',
+      request: async (profile: UserProfile) => {
+        const { listId } = await firstValueFrom(target$);
+        return removeListCollaboratorRequest({
+          listId,
+          userSlug: toUserSlug(profile),
+        });
+      },
+      invalidations: collaboratorInvalidations,
+    }),
+  );
 
   const pendingUserId = combineLatest([add.result, remove.result]).pipe(
-    map((results) =>
-      results.find((result) => result.isPending)?.variables?.id ?? null
+    map(
+      (results) =>
+        results.find((result) => result.isPending)?.variables?.id ?? null,
     ),
     distinctUntilChanged(),
   );

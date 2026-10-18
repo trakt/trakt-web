@@ -62,9 +62,11 @@ function inferAction(row: TraktCsvRow): ImportAction {
 function toType(value?: string): ImportType {
   const normalized = (value ?? 'movie').toLowerCase();
   if (
-    normalized === 'show' || normalized === 'series' ||
+    normalized === 'show' ||
+    normalized === 'series' ||
     normalized === 'tv series'
-  ) return 'show';
+  )
+    return 'show';
   if (normalized === 'season') return 'season';
   if (normalized === 'episode') return 'episode';
   return 'movie';
@@ -86,14 +88,15 @@ function extractIds(row: TraktCsvRow) {
 }
 
 function hasAnyId(ids: ReturnType<typeof extractIds>): boolean {
-  return Boolean(ids.trakt) || Boolean(ids.imdb) || Boolean(ids.tmdb) ||
-    Boolean(ids.tvdb);
+  return (
+    Boolean(ids.trakt) ||
+    Boolean(ids.imdb) ||
+    Boolean(ids.tmdb) ||
+    Boolean(ids.tvdb)
+  );
 }
 
-function buildBaseItem(
-  row: TraktCsvRow,
-  ids: ReturnType<typeof extractIds>,
-) {
+function buildBaseItem(row: TraktCsvRow, ids: ReturnType<typeof extractIds>) {
   return {
     type: toType(row.type),
     ids,
@@ -116,13 +119,15 @@ type RowItemContext = {
 function buildExplicitActionItems(ctx: RowItemContext): UniversalImportItem[] {
   const { base, row, watchedAt, rating, ratedAt } = ctx;
   const action = inferAction(row);
-  return [{
-    ...base,
-    action,
-    watched_at: watchedAt,
-    rating: action === 'ratings' ? rating : undefined,
-    rated_at: action === 'ratings' ? ratedAt : undefined,
-  }];
+  return [
+    {
+      ...base,
+      action,
+      watched_at: watchedAt,
+      rating: action === 'ratings' ? rating : undefined,
+      rated_at: action === 'ratings' ? ratedAt : undefined,
+    },
+  ];
 }
 
 function buildInferredItems(ctx: RowItemContext): UniversalImportItem[] {
@@ -154,9 +159,7 @@ function buildInferredItems(ctx: RowItemContext): UniversalImportItem[] {
   return items;
 }
 
-function parseTraktCsvRow(
-  raw: Record<string, unknown>,
-): UniversalImportItem[] {
+function parseTraktCsvRow(raw: Record<string, unknown>): UniversalImportItem[] {
   const row = normalizeRowKeys(raw);
   const ids = extractIds(row);
   const title = row.title ?? row.name ?? undefined;
@@ -188,9 +191,7 @@ export const TraktCsvParser: FileParser = {
   async parse(files) {
     const [file] = files;
     if (!file) return [];
-    const rows = await parseCsvFile(file) as Record<string, unknown>[];
-    return rows
-      .flatMap(parseTraktCsvRow)
-      .filter(isValidItem);
+    const rows = (await parseCsvFile(file)) as Record<string, unknown>[];
+    return rows.flatMap(parseTraktCsvRow).filter(isValidItem);
   },
 };

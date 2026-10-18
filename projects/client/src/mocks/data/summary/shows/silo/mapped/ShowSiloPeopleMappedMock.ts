@@ -1,385 +1,341 @@
 import type { MediaCrew } from '$lib/requests/models/MediaCrew.ts';
 
 export const ShowSiloPeopleMappedMock: MediaCrew = {
-  'cast': [
+  cast: [
     {
-      'characterName': 'Juliette Nichols',
-      'episodeCount': 19,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Juliette Nichols',
+      episodeCount: 19,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/447/271/headshots/medium/d7e3e2fc64.jpg.webp',
         },
       },
-      'key': 'rebecca-ferguson',
-      'name': 'Rebecca Ferguson',
+      key: 'rebecca-ferguson',
+      name: 'Rebecca Ferguson',
     },
     {
-      'characterName': 'Robert Sims',
-      'episodeCount': 19,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Robert Sims',
+      episodeCount: 19,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/412/328/headshots/medium/35b36ce399.jpg.webp',
         },
       },
-      'key': 'common',
-      'name': 'Common',
+      key: 'common',
+      name: 'Common',
     },
     {
-      'characterName': 'Martha Walker',
-      'episodeCount': 19,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Martha Walker',
+      episodeCount: 19,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/016/797/headshots/medium/987b640c84.jpg.webp',
         },
       },
-      'key': 'harriet-walter',
-      'name': 'Harriet Walter',
+      key: 'harriet-walter',
+      name: 'Harriet Walter',
     },
     {
-      'characterName': 'Paul Billings',
-      'episodeCount': 19,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Paul Billings',
+      episodeCount: 19,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/748/739/headshots/medium/628b796714.jpg.webp',
         },
       },
-      'key': 'chinaza-uche',
-      'name': 'Chinaza Uche',
+      key: 'chinaza-uche',
+      name: 'Chinaza Uche',
     },
     {
-      'characterName': 'Lukas Kyle',
-      'episodeCount': 19,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Lukas Kyle',
+      episodeCount: 19,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/627/038/headshots/thumb/ba0377d6b0.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/627/038/headshots/medium/ba0377d6b0.jpg.webp',
         },
       },
-      'key': 'avi-nash',
-      'name': 'Avi Nash',
+      key: 'avi-nash',
+      name: 'Avi Nash',
     },
     {
-      'characterName': 'Patrick Kennedy',
-      'episodeCount': 19,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Patrick Kennedy',
+      episodeCount: 19,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/014/904/headshots/medium/d67b0392d8.jpg.webp',
         },
       },
-      'key': 'rick-gomez',
-      'name': 'Rick Gomez',
+      key: 'rick-gomez',
+      name: 'Rick Gomez',
     },
     {
-      'characterName': 'Bernard Holland',
-      'episodeCount': 19,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Bernard Holland',
+      episodeCount: 19,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/015/518/headshots/medium/7aa5eb6e65.jpg.webp',
         },
       },
-      'key': 'tim-robbins',
-      'name': 'Tim Robbins',
+      key: 'tim-robbins',
+      name: 'Tim Robbins',
     },
     {
-      'characterName': 'Knox',
-      'episodeCount': 9,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Knox',
+      episodeCount: 9,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/431/779/headshots/thumb/d9ba2e0cd9.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/431/779/headshots/medium/d9ba2e0cd9.jpg.webp',
         },
       },
-      'key': 'shane-mcrae',
-      'name': 'Shane McRae',
+      key: 'shane-mcrae',
+      name: 'Shane McRae',
     },
     {
-      'characterName': 'Hank',
-      'episodeCount': 9,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Hank',
+      episodeCount: 9,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/668/720/headshots/thumb/f9a6bc12fd.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/668/720/headshots/medium/f9a6bc12fd.jpg.webp',
         },
       },
-      'key': 'billy-postlethwaite',
-      'name': 'Billy Postlethwaite',
+      key: 'billy-postlethwaite',
+      name: 'Billy Postlethwaite',
     },
     {
-      'characterName': 'Shirley',
-      'episodeCount': 9,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Shirley',
+      episodeCount: 9,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/001/477/761/headshots/thumb/32559bdf7c.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/001/477/761/headshots/medium/32559bdf7c.jpg.webp',
         },
       },
-      'key': 'remmie-milner',
-      'name': 'Remmie Milner',
+      key: 'remmie-milner',
+      name: 'Remmie Milner',
     },
     {
-      'characterName': 'Camille Sims',
-      'episodeCount': 9,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Camille Sims',
+      episodeCount: 9,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/001/350/141/headshots/thumb/862651c2ae.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/001/350/141/headshots/medium/862651c2ae.jpg.webp',
         },
       },
-      'key': 'alexandria-riley',
-      'name': 'Alexandria Riley',
+      key: 'alexandria-riley',
+      name: 'Alexandria Riley',
     },
     {
-      'characterName': 'Carla McLain',
-      'episodeCount': 9,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Carla McLain',
+      episodeCount: 9,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/107/387/headshots/thumb/9f71e2f97c.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/107/387/headshots/medium/9f71e2f97c.jpg.webp',
         },
       },
-      'key': 'clare-perkins',
-      'name': 'Clare Perkins',
+      key: 'clare-perkins',
+      name: 'Clare Perkins',
     },
     {
-      'characterName': 'Solo',
-      'episodeCount': 9,
-      'headshot': {
-        'url': {
-          'thumb':
+      characterName: 'Solo',
+      episodeCount: 9,
+      headshot: {
+        url: {
+          thumb:
             'https://media.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
-          'medium':
+          medium:
             'https://media.trakt.tv/images/people/000/014/103/headshots/medium/2e92bf71ee.jpg.webp',
         },
       },
-      'key': 'steve-zahn',
-      'name': 'Steve Zahn',
+      key: 'steve-zahn',
+      name: 'Steve Zahn',
     },
     {
-      'episodeCount': 2,
-      'characterName': 'Gloria Hildebrandt',
-      'headshot': {
-        'url': {
-          'thumb':
+      episodeCount: 2,
+      characterName: 'Gloria Hildebrandt',
+      headshot: {
+        url: {
+          thumb:
             'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
-          'medium':
+          medium:
             'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/medium/2e92bf71ee.jpg.webp',
         },
       },
-      'key': 'sophie-thompson',
-      'name': 'Sophie Thompson',
+      key: 'sophie-thompson',
+      name: 'Sophie Thompson',
     },
   ],
-  'guestStars': [],
-  'directors': [
+  guestStars: [],
+  directors: [
     {
-      'key': 'rhiannon-preece-towey',
-      'episodeCount': 10,
-      'jobs': [
-        'Script Supervisor',
-      ],
-      'name': 'Rhiannon Preece-Towey',
+      key: 'rhiannon-preece-towey',
+      episodeCount: 10,
+      jobs: ['Script Supervisor'],
+      name: 'Rhiannon Preece-Towey',
     },
     {
-      'key': 'bert',
-      'episodeCount': 5,
-      'jobs': [
-        'Director',
-      ],
-      'name': 'Bert',
+      key: 'bert',
+      episodeCount: 5,
+      jobs: ['Director'],
+      name: 'Bert',
     },
     {
-      'key': 'michael-dinner',
-      'episodeCount': 4,
-      'jobs': [
-        'Director',
-      ],
-      'name': 'Michael Dinner',
+      key: 'michael-dinner',
+      episodeCount: 4,
+      jobs: ['Director'],
+      name: 'Michael Dinner',
     },
     {
-      'key': 'morten-tyldum',
-      'episodeCount': 3,
-      'jobs': [
-        'Director',
-      ],
-      'name': 'Morten Tyldum',
+      key: 'morten-tyldum',
+      episodeCount: 3,
+      jobs: ['Director'],
+      name: 'Morten Tyldum',
     },
     {
-      'key': 'adam-bernstein-5c662b3b-7930-4ca7-82a4-b0342f518e01',
-      'episodeCount': 3,
-      'jobs': [
-        'Director',
-      ],
-      'name': 'Adam Bernstein',
+      key: 'adam-bernstein-5c662b3b-7930-4ca7-82a4-b0342f518e01',
+      episodeCount: 3,
+      jobs: ['Director'],
+      name: 'Adam Bernstein',
     },
     {
-      'key': 'david-semel',
-      'episodeCount': 2,
-      'jobs': [
-        'Director',
-      ],
-      'name': 'David Semel',
+      key: 'david-semel',
+      episodeCount: 2,
+      jobs: ['Director'],
+      name: 'David Semel',
     },
     {
-      'key': 'bertie',
-      'episodeCount': 2,
-      'jobs': [
-        'Director',
-      ],
-      'name': 'Bertie',
+      key: 'bertie',
+      episodeCount: 2,
+      jobs: ['Director'],
+      name: 'Bertie',
     },
     {
-      'key': 'aric-avelino',
-      'episodeCount': 2,
-      'jobs': [
-        'Director',
-      ],
-      'name': 'Aric Avelino',
+      key: 'aric-avelino',
+      episodeCount: 2,
+      jobs: ['Director'],
+      name: 'Aric Avelino',
     },
   ],
-  'writers': [
+  writers: [
     {
-      'key': 'hugh-howey',
-      'episodeCount': 17,
-      'jobs': [
-        'Book',
-      ],
-      'name': 'Hugh Howey',
+      key: 'hugh-howey',
+      episodeCount: 17,
+      jobs: ['Book'],
+      name: 'Hugh Howey',
     },
     {
-      'key': 'graham-yost',
-      'episodeCount': 3,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Graham Yost',
+      key: 'graham-yost',
+      episodeCount: 3,
+      jobs: ['Writer'],
+      name: 'Graham Yost',
     },
     {
-      'key': 'cassie-pappas',
-      'episodeCount': 2,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Cassie Pappas',
+      key: 'cassie-pappas',
+      episodeCount: 2,
+      jobs: ['Writer'],
+      name: 'Cassie Pappas',
     },
     {
-      'key': 'jessica-blaire-c7557156-391c-48b4-b128-8f7ef2d2a94b',
-      'episodeCount': 2,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Jessica Blaire',
+      key: 'jessica-blaire-c7557156-391c-48b4-b128-8f7ef2d2a94b',
+      episodeCount: 2,
+      jobs: ['Writer'],
+      name: 'Jessica Blaire',
     },
     {
-      'key': 'ingrid-escajeda',
-      'episodeCount': 2,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Ingrid Escajeda',
+      key: 'ingrid-escajeda',
+      episodeCount: 2,
+      jobs: ['Writer'],
+      name: 'Ingrid Escajeda',
     },
     {
-      'key': 'jeffery-wang',
-      'episodeCount': 2,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Jeffery Wang',
+      key: 'jeffery-wang',
+      episodeCount: 2,
+      jobs: ['Writer'],
+      name: 'Jeffery Wang',
     },
     {
-      'key': 'fred-golan',
-      'episodeCount': 2,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Fred Golan',
+      key: 'fred-golan',
+      episodeCount: 2,
+      jobs: ['Writer'],
+      name: 'Fred Golan',
     },
     {
-      'key': 'remi-aubuchon',
-      'episodeCount': 1,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Remi Aubuchon',
+      key: 'remi-aubuchon',
+      episodeCount: 1,
+      jobs: ['Writer'],
+      name: 'Remi Aubuchon',
     },
     {
-      'key': 'aric-avelino',
-      'episodeCount': 1,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Aric Avelino',
+      key: 'aric-avelino',
+      episodeCount: 1,
+      jobs: ['Writer'],
+      name: 'Aric Avelino',
     },
     {
-      'key': 'lekethia-dalcoe',
-      'episodeCount': 1,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Lekethia Dalcoe',
+      key: 'lekethia-dalcoe',
+      episodeCount: 1,
+      jobs: ['Writer'],
+      name: 'Lekethia Dalcoe',
     },
     {
-      'key': 'sal-calleros',
-      'episodeCount': 1,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Sal Calleros',
+      key: 'sal-calleros',
+      episodeCount: 1,
+      jobs: ['Writer'],
+      name: 'Sal Calleros',
     },
     {
-      'key': 'jenny-dearmitt',
-      'episodeCount': 1,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Jenny DeArmitt',
+      key: 'jenny-dearmitt',
+      episodeCount: 1,
+      jobs: ['Writer'],
+      name: 'Jenny DeArmitt',
     },
     {
-      'key': 'katherine-disavino',
-      'episodeCount': 1,
-      'jobs': [
-        'Writer',
-      ],
-      'name': 'Katherine DiSavino',
+      key: 'katherine-disavino',
+      episodeCount: 1,
+      jobs: ['Writer'],
+      name: 'Katherine DiSavino',
     },
   ],
-  'creators': [
+  creators: [
     {
-      'key': 'graham-yost',
-      'episodeCount': 17,
-      'jobs': [
-        'Creator',
-      ],
-      'name': 'Graham Yost',
+      key: 'graham-yost',
+      episodeCount: 17,
+      jobs: ['Creator'],
+      name: 'Graham Yost',
     },
   ],
 };

@@ -7,15 +7,12 @@ import { listIdsRequest } from './_internal/listIdsRequest.ts';
 
 type UserSeasonListIdsParams = { id: number } & ApiParams;
 
-const userSeasonListIdsRequest = (
-  { fetch, id }: UserSeasonListIdsParams,
-) => listIdsRequest({ fetch, path: `/v3/seasons/${id}/me/lists` });
+const userSeasonListIdsRequest = ({ fetch, id }: UserSeasonListIdsParams) =>
+  listIdsRequest({ fetch, path: `/v3/seasons/${id}/me/lists` });
 
 export const userSeasonListIdsQuery = defineQuery({
   key: 'userSeasonListIds',
-  invalidations: [
-    InvalidateAction.Listed('season'),
-  ],
+  invalidations: [InvalidateAction.Listed('season')],
   dependencies: (params) => [params.id],
   request: userSeasonListIdsRequest,
   mapper: (response) => response.body,

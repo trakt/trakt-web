@@ -8,20 +8,16 @@ export type YearInReviewParams = {
   year: number;
 } & ApiParams;
 
-const yearInReviewRequest = (
-  { fetch, year, slug }: YearInReviewParams,
-) =>
-  api({ fetch })
-    .users
-    .year_in_review({
-      params: {
-        id: slug,
-        year,
-      },
-      query: {
-        extended: 'images',
-      },
-    });
+const yearInReviewRequest = ({ fetch, year, slug }: YearInReviewParams) =>
+  api({ fetch }).users.year_in_review({
+    params: {
+      id: slug,
+      year,
+    },
+    query: {
+      extended: 'images',
+    },
+  });
 
 export const yearInReviewQuery = defineQuery({
   key: 'yearInReview',

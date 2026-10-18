@@ -12,9 +12,10 @@ type ResolveSelectedPositionParams = {
   credits?: MediaCredits;
 };
 
-export function resolveSelectedPosition(
-  { requested, credits }: ResolveSelectedPositionParams,
-): CrewPosition {
+export function resolveSelectedPosition({
+  requested,
+  credits,
+}: ResolveSelectedPositionParams): CrewPosition {
   if (credits?.get(requested)?.length) return requested;
 
   const available = Array.from(credits?.entries() ?? []).filter(
@@ -28,6 +29,6 @@ export function resolveSelectedPosition(
   const candidates = preferred.length > 0 ? preferred : available;
 
   return candidates.reduce((max, current) =>
-    current[1].length > max[1].length ? current : max
+    current[1].length > max[1].length ? current : max,
   )[0];
 }

@@ -25,8 +25,9 @@ export function useTvTimeBanner() {
   const hasExpired = new Date() >= TV_TIME_BANNER_END;
 
   const isVisible = combineLatest([user, isDismissed]).pipe(
-    map(([$user, $isDismissed]) =>
-      !hasExpired && !$isDismissed && joinedAfterAnnouncement($user)
+    map(
+      ([$user, $isDismissed]) =>
+        !hasExpired && !$isDismissed && joinedAfterAnnouncement($user),
     ),
   );
 

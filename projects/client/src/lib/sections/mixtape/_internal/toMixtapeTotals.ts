@@ -10,13 +10,12 @@ export function toMixtapeTotals(
     const match = matchOf(id);
     return match == null ? [] : [match];
   });
-  const isAllMovies = media.length > 0 &&
-    media.every(({ type }) => type === 'movie');
+  const isAllMovies =
+    media.length > 0 && media.every(({ type }) => type === 'movie');
 
   return {
     minutes: isAllMovies ? sum(media.map(({ runtime }) => runtime)) : null,
-    match: matches.length > 0
-      ? Math.round(sum(matches) / matches.length)
-      : null,
+    match:
+      matches.length > 0 ? Math.round(sum(matches) / matches.length) : null,
   };
 }

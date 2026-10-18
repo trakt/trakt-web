@@ -23,11 +23,10 @@ const MediaCreditSchema = z.discriminatedUnion('type', [
   CrewSchema,
 ]);
 
-export const MediaCreditsSchema = z
-  .map(
-    crewPositionSchema,
-    MediaCreditSchema.array(),
-  );
+export const MediaCreditsSchema = z.map(
+  crewPositionSchema,
+  MediaCreditSchema.array(),
+);
 
 export type MediaCredit = z.infer<typeof MediaCreditSchema>;
 export type MediaCredits = z.infer<typeof MediaCreditsSchema>;

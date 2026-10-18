@@ -4,33 +4,34 @@ import type { SmartListMediaType } from '$lib/requests/models/SmartListMediaType
 import type { SmartListSource } from '$lib/requests/models/SmartListSource.ts';
 import { buildParamString } from '$lib/utils/url/buildParamString.ts';
 
-type SmartListPreviewItemsParams =
-  & {
-    source: SmartListSource;
-    mediaType: SmartListMediaType;
-    filters: Record<string, string>;
-    extended: string;
-    page?: number;
-    limit?: number;
-  }
-  & ApiParams;
+type SmartListPreviewItemsParams = {
+  source: SmartListSource;
+  mediaType: SmartListMediaType;
+  filters: Record<string, string>;
+  extended: string;
+  page?: number;
+  limit?: number;
+} & ApiParams;
 
-export async function smartListPreviewItemsRequest(
-  { fetch, source, mediaType, filters, extended, page, limit }:
-    SmartListPreviewItemsParams,
-) {
+export async function smartListPreviewItemsRequest({
+  fetch,
+  source,
+  mediaType,
+  filters,
+  extended,
+  page,
+  limit,
+}: SmartListPreviewItemsParams) {
   const response = await rawApiFetch({
     fetch,
-    path: `/smart-lists/preview/items${
-      buildParamString({
-        ...filters,
-        source,
-        media_type: mediaType,
-        extended,
-        page,
-        limit,
-      })
-    }`,
+    path: `/smart-lists/preview/items${buildParamString({
+      ...filters,
+      source,
+      media_type: mediaType,
+      extended,
+      page,
+      limit,
+    })}`,
   });
 
   if (!response.ok) {

@@ -77,9 +77,11 @@ function drawPiece(
   context.restore();
 }
 
-export function burstConfetti(
-  { canvas, origin, colors }: BurstConfettiParams,
-): () => void {
+export function burstConfetti({
+  canvas,
+  origin,
+  colors,
+}: BurstConfettiParams): () => void {
   const context = canvas.getContext('2d');
   if (!context) return NOOP_FN;
 
@@ -90,9 +92,8 @@ export function burstConfetti(
   context.setTransform(ratio, 0, 0, ratio, 0, 0);
 
   const scale = clamp({ value: width / REFERENCE_WIDTH, min: 0.7, max: 1.6 });
-  const pieces = Array.from(
-    { length: PIECE_COUNT },
-    () => createPiece(scale, colors),
+  const pieces = Array.from({ length: PIECE_COUNT }, () =>
+    createPiece(scale, colors),
   );
   const start = performance.now();
 

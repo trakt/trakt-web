@@ -39,7 +39,7 @@ const APP_CALLBACK_PATH = '/callback/app/';
 
 function hasWebviewParam(url: URL): boolean {
   return Object.values(WEBVIEW_PARAMS).some((param) =>
-    url.searchParams.has(param)
+    url.searchParams.has(param),
   );
 }
 
@@ -64,8 +64,8 @@ export const handleReferrerPolicy: Handle = async ({ event, resolve }) => {
 export const handleCacheControl: Handle = async ({ event, resolve }) => {
   const response = await resolve(event);
 
-  const isHtml = response.headers.get('content-type')?.includes('text/html') ??
-    false;
+  const isHtml =
+    response.headers.get('content-type')?.includes('text/html') ?? false;
   const isRedirect = REDIRECT_STATUSES.has(response.status);
 
   if (!isHtml && !isRedirect) {

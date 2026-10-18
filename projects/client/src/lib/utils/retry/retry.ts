@@ -7,12 +7,9 @@ export function retry<T>(
   fn: () => Promise<T>,
   signal?: AbortSignal,
 ): Promise<T> {
-  return tsRetry<T>(
-    fn,
-    {
-      maxTry: MAX_RETRIES,
-      delay: ({ currentTry }) =>
-        signal?.aborted ? 0 : retryDelay(currentTry - 1),
-    },
-  );
+  return tsRetry<T>(fn, {
+    maxTry: MAX_RETRIES,
+    delay: ({ currentTry }) =>
+      signal?.aborted ? 0 : retryDelay(currentTry - 1),
+  });
 }

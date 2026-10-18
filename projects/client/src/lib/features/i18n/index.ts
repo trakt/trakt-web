@@ -12,9 +12,11 @@ const DEFAULT_REGION_EN = 'us';
 const FALLBACK_LOCALE = `en-${DEFAULT_REGION_EN}`;
 
 type ExtractLanguage<T> = T extends `${infer Lang}-${string}` ? Lang : T;
-type ExtractRegion<T> = T extends 'en' ? 'us'
-  : T extends `${string}-${infer Region}` ? Region
-  : T;
+type ExtractRegion<T> = T extends 'en'
+  ? 'us'
+  : T extends `${string}-${infer Region}`
+    ? Region
+    : T;
 
 export type AvailableLocale = Locale;
 export type AvailableLanguage = ExtractLanguage<AvailableLocale>;
@@ -25,7 +27,7 @@ export const defaultLocale = baseLocale;
 
 function sanitizeLocale(locale: string): AvailableLocale {
   return availableLocales.includes(locale as AvailableLocale)
-    ? locale as AvailableLocale
+    ? (locale as AvailableLocale)
     : defaultLocale;
 }
 

@@ -68,28 +68,32 @@ export function mediaGlanceNavigation(searchParams?: URLSearchParams) {
     season: mapToNumber(searchParams?.get(GLANCE_SEASON_PARAM)),
     episode: mapToNumber(searchParams?.get(GLANCE_EPISODE_PARAM)),
     close,
-    buildMediaGlanceLink: (
-      { type, slug }: { type: MediaType; slug: string },
-    ) =>
+    buildMediaGlanceLink: ({ type, slug }: { type: MediaType; slug: string }) =>
       buildDrawerLink(MediaGlanceDrawers.Media, {
         [GLANCE_TYPE_PARAM]: type,
         [GLANCE_SLUG_PARAM]: slug,
       }),
-    buildEpisodeGlanceLink: (
-      { slug, season, episode }: {
-        slug: string;
-        season: number;
-        episode: number;
-      },
-    ) =>
+    buildEpisodeGlanceLink: ({
+      slug,
+      season,
+      episode,
+    }: {
+      slug: string;
+      season: number;
+      episode: number;
+    }) =>
       buildDrawerLink(MediaGlanceDrawers.Episode, {
         [GLANCE_SLUG_PARAM]: slug,
         [GLANCE_SEASON_PARAM]: String(season),
         [GLANCE_EPISODE_PARAM]: String(episode),
       }),
-    buildSeasonGlanceLink: (
-      { slug, season }: { slug: string; season: number },
-    ) =>
+    buildSeasonGlanceLink: ({
+      slug,
+      season,
+    }: {
+      slug: string;
+      season: number;
+    }) =>
       buildDrawerLink(MediaGlanceDrawers.Season, {
         [GLANCE_SLUG_PARAM]: slug,
         [GLANCE_SEASON_PARAM]: String(season),

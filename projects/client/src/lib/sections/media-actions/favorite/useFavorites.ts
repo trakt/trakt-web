@@ -18,9 +18,10 @@ export type FavoritesStoreProps = {
   title: string;
 };
 
-function getFavoritesPayload(
-  { type, id }: Pick<FavoritesStoreProps, 'type' | 'id'>,
-) {
+function getFavoritesPayload({
+  type,
+  id,
+}: Pick<FavoritesStoreProps, 'type' | 'id'>) {
   switch (type) {
     case 'movie':
       return { movies: [{ ids: { trakt: id } }] };
@@ -63,17 +64,19 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
     }),
   );
 
-  const favoriting = useMutation(defineMutation({
-    key: 'favorites:write',
-    request: (action: 'add' | 'remove') =>
-      executeOrEnqueue({
-        endpoint: action === 'add' ? 'favorites:add' : 'favorites:remove',
-        keys: [toMediaKey(type, id)],
-        body: getFavoritesPayload({ type, id }),
-        invalidations: [InvalidateAction.Favorited(type)],
-      }),
-    invalidations: whenExecuted([InvalidateAction.Favorited(type)]),
-  }));
+  const favoriting = useMutation(
+    defineMutation({
+      key: 'favorites:write',
+      request: (action: 'add' | 'remove') =>
+        executeOrEnqueue({
+          endpoint: action === 'add' ? 'favorites:add' : 'favorites:remove',
+          keys: [toMediaKey(type, id)],
+          body: getFavoritesPayload({ type, id }),
+          invalidations: [InvalidateAction.Favorited(type)],
+        }),
+      invalidations: whenExecuted([InvalidateAction.Favorited(type)]),
+    }),
+  );
 
   return {
     isUpdatingFavorite: favoriting.isPending,

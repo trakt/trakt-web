@@ -117,9 +117,8 @@ export function snowRenderer(canvas: HTMLCanvasElement) {
   setup();
   draw();
 
-  const unregisterResize = GlobalEventBus.getInstance().register(
-    'resize',
-    () => setup(),
+  const unregisterResize = GlobalEventBus.getInstance().register('resize', () =>
+    setup(),
   );
 
   return {

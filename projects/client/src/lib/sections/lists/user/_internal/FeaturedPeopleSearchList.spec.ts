@@ -15,12 +15,7 @@ describe('FeaturedPeopleSearchList', () => {
   it('should show all featured people, search names, and restore the list', async () => {
     const user = userEvent.setup();
     const requestPerson = vi.fn(() => HttpResponse.json({}));
-    server.use(
-      http.get(
-        'http://localhost/people/:slug',
-        requestPerson,
-      ),
-    );
+    server.use(http.get('http://localhost/people/:slug', requestPerson));
     renderComponent(FeaturedPeopleSearchList, {
       props: {
         people: [
@@ -46,31 +41,33 @@ describe('FeaturedPeopleSearchList', () => {
     const search = await screen.findByRole('searchbox', {
       name: 'Search people',
     });
-    expect(screen.getByRole('link', { name: /Rebecca Ferguson/ }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: /Rebecca Ferguson/ }),
+    ).toBeInTheDocument();
     expect(screen.getByText('Hugh Grant')).toBeInTheDocument();
 
-    expect(screen.getByRole('img', { name: /Rebecca Ferguson/ }))
-      .toHaveAttribute(
-        'src',
-        'https://walter.trakt.tv/images/people/2/headshots/thumb/rebecca.webp',
-      );
+    expect(
+      screen.getByRole('img', { name: /Rebecca Ferguson/ }),
+    ).toHaveAttribute(
+      'src',
+      'https://walter.trakt.tv/images/people/2/headshots/thumb/rebecca.webp',
+    );
 
     await user.type(search, '  REBECCA  ');
     await waitFor(() =>
-      expect(screen.queryByText('Hugh Grant')).not.toBeInTheDocument()
+      expect(screen.queryByText('Hugh Grant')).not.toBeInTheDocument(),
     );
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
 
     await user.clear(search);
     await user.type(search, 'no matching person');
     await waitFor(() =>
-      expect(screen.queryByRole('listitem')).not.toBeInTheDocument()
+      expect(screen.queryByRole('listitem')).not.toBeInTheDocument(),
     );
 
     await user.clear(search);
     await waitFor(() =>
-      expect(screen.getAllByRole('listitem')).toHaveLength(2)
+      expect(screen.getAllByRole('listitem')).toHaveLength(2),
     );
     expect(requestPerson).not.toHaveBeenCalled();
   });

@@ -4,12 +4,12 @@ type CheckinEpisodeParams = {
   body: ShowCheckinRequest;
 } & ApiParams;
 
-export function checkinEpisodeRequest(
-  { body, fetch }: CheckinEpisodeParams,
-): Promise<boolean> {
+export function checkinEpisodeRequest({
+  body,
+  fetch,
+}: CheckinEpisodeParams): Promise<boolean> {
   return api({ fetch })
-    .checkin
-    .start({
+    .checkin.start({
       body,
     })
     .then(({ status }) => status === 201);

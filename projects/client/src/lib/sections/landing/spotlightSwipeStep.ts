@@ -6,9 +6,11 @@ type SpotlightSwipeStepParams = {
   isRtl: boolean;
 };
 
-export function spotlightSwipeStep(
-  { dx, isTap, isRtl }: SpotlightSwipeStepParams,
-): number {
+export function spotlightSwipeStep({
+  dx,
+  isTap,
+  isRtl,
+}: SpotlightSwipeStepParams): number {
   if (isTap) return 1;
   if (Math.abs(dx) < SWIPE_THRESHOLD) return 0;
 

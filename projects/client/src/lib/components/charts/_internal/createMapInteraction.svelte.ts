@@ -23,9 +23,11 @@ type MapInteractionConfig = {
  * Countries are matched by code, never object reference: assigning to `$state`
  * proxies the value, so it's never identity-equal to the raw rendered entries.
  */
-export function createMapInteraction(
-  { stops, resolvePointer, centreOf }: MapInteractionConfig,
-) {
+export function createMapInteraction({
+  stops,
+  resolvePointer,
+  centreOf,
+}: MapInteractionConfig) {
   let activeCode = $state<string | null>(null);
   let pointer = $state<Point>({ x: 0, y: 0 });
 
@@ -38,12 +40,16 @@ export function createMapInteraction(
   function step(delta: number) {
     const list = stops();
     if (list.length === 0) return;
-    const current = activeCode != null
-      ? list.findIndex((stop) => stop.code === activeCode)
-      : -1;
-    const next = current === -1
-      ? (delta > 0 ? 0 : list.length - 1)
-      : Math.min(Math.max(current + delta, 0), list.length - 1);
+    const current =
+      activeCode != null
+        ? list.findIndex((stop) => stop.code === activeCode)
+        : -1;
+    const next =
+      current === -1
+        ? delta > 0
+          ? 0
+          : list.length - 1
+        : Math.min(Math.max(current + delta, 0), list.length - 1);
     const stop = list.at(next);
     if (stop) activate(stop.code);
   }
@@ -86,8 +92,8 @@ export function createMapInteraction(
     // Horizontal arrows follow the reading direction; mirror them in RTL so
     // ArrowRight always moves toward the visual start.
     const target = event.currentTarget;
-    const rtl = target instanceof Element &&
-      getComputedStyle(target).direction === 'rtl';
+    const rtl =
+      target instanceof Element && getComputedStyle(target).direction === 'rtl';
     const forward = rtl ? -1 : 1;
 
     switch (event.key) {

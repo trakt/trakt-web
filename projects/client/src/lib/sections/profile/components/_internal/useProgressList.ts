@@ -6,9 +6,7 @@ import type { ProgressEntry } from '$lib/requests/models/ProgressEntry.ts';
 import { progressWatchedQuery } from '$lib/requests/queries/sync/progressWatchedQuery.ts';
 import { droppedShowsQuery } from '$lib/requests/queries/users/droppedShowsQuery.ts';
 import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
-import type {
-  SortDirection,
-} from '$lib/sections/lists/user/models/SortDirection.ts';
+import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { hasEnded } from '$lib/utils/media/hasEnded.ts';
 import { map } from 'rxjs';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
@@ -71,9 +69,11 @@ function toStatusPredicate(
 }
 
 export function useProgressList(props: UseProgressListProps) {
-  const { list, isLoading: baseLoading, ...rest } = usePaginatedListQuery(
-    typeToQuery(props),
-  );
+  const {
+    list,
+    isLoading: baseLoading,
+    ...rest
+  } = usePaginatedListQuery(typeToQuery(props));
 
   const overlay = createBulkIntlOverlay<ProgressEntry>({
     getTargets: progressEntryTargets,

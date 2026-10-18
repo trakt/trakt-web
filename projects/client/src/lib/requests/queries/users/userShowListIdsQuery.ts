@@ -7,15 +7,12 @@ import { listIdsRequest } from './_internal/listIdsRequest.ts';
 
 type UserShowListIdsParams = { slug: string } & ApiParams;
 
-const userShowListIdsRequest = (
-  { fetch, slug }: UserShowListIdsParams,
-) => listIdsRequest({ fetch, path: `/v3/shows/${slug}/me/lists` });
+const userShowListIdsRequest = ({ fetch, slug }: UserShowListIdsParams) =>
+  listIdsRequest({ fetch, path: `/v3/shows/${slug}/me/lists` });
 
 export const userShowListIdsQuery = defineQuery({
   key: 'userShowListIds',
-  invalidations: [
-    InvalidateAction.Listed('show'),
-  ],
+  invalidations: [InvalidateAction.Listed('show')],
   dependencies: (params) => [params.slug],
   request: userShowListIdsRequest,
   mapper: (response) => response.body,

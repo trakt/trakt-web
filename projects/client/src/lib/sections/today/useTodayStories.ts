@@ -47,30 +47,26 @@ function isEpisodeProgress(entry: object): entry is UpNextEntry {
   return 'show' in entry;
 }
 
-export function useTodayStories(
-  {
-    type,
-    filter,
-    range = new BehaviorSubject(getTodayWindow(new Date())),
-    ranges = range.pipe(map(($range) => [$range])),
-  }: TodayStoriesProps,
-) {
-  const activityQueries = Array.from(
-    { length: TODAY_WEEK_LENGTH },
-    (_, slot) =>
-      useAllPagesInfiniteQuery(
-        ranges.pipe(
-          map(($ranges) => ({
-            ...followingActivityQuery({
-              limit: TODAY_ACTIVITY_LIMIT,
-              ...toActivityWindow(
-                $ranges.at(slot) ?? assertDefined($ranges.at(0)),
-              ),
-            }),
-            placeholderData: keepPreviousData,
-          })),
-        ),
+export function useTodayStories({
+  type,
+  filter,
+  range = new BehaviorSubject(getTodayWindow(new Date())),
+  ranges = range.pipe(map(($range) => [$range])),
+}: TodayStoriesProps) {
+  const activityQueries = Array.from({ length: TODAY_WEEK_LENGTH }, (_, slot) =>
+    useAllPagesInfiniteQuery(
+      ranges.pipe(
+        map(($ranges) => ({
+          ...followingActivityQuery({
+            limit: TODAY_ACTIVITY_LIMIT,
+            ...toActivityWindow(
+              $ranges.at(slot) ?? assertDefined($ranges.at(0)),
+            ),
+          }),
+          placeholderData: keepPreviousData,
+        })),
       ),
+    ),
   );
   const activeQueries = combineLatest([ranges, ...activityQueries]).pipe(
     map(([$ranges, ...$queries]) => $queries.slice(0, $ranges.length)),
@@ -81,18 +77,21 @@ export function useTodayStories(
     map(($data) =>
       dedupe(
         (entry) => entry.key,
-        $data.flatMap((data) =>
-          data?.pages.flatMap((page) => page.entries) ?? []
+        $data.flatMap(
+          (data) => data?.pages.flatMap((page) => page.entries) ?? [],
         ),
-      )
+      ),
     ),
   );
   const isActivityLoading = activeQueries.pipe(
     map(($queries) =>
-      $queries.some(($query) =>
-        $query.isPending || $query.isPlaceholderData ||
-        $query.isFetchingNextPage || $query.hasNextPage
-      )
+      $queries.some(
+        ($query) =>
+          $query.isPending ||
+          $query.isPlaceholderData ||
+          $query.isFetchingNextPage ||
+          $query.hasNextPage,
+      ),
     ),
   );
   const overlay = createBulkIntlOverlay<FollowingActivity>({
@@ -127,7 +126,7 @@ export function useTodayStories(
         upNext: $upNext.filter(isEpisodeProgress),
         watchlist: $watchlist,
         range: $range,
-      })
+      }),
     ),
   );
 

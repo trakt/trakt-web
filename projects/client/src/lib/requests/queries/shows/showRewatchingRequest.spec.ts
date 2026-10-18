@@ -12,7 +12,7 @@ describe('show rewatching requests', () => {
     vi.setSystemTime(new Date('2026-06-18T12:00:00.000Z'));
 
     const fetch = vi.fn(() =>
-      Promise.resolve(new Response(null, { status: 204 }))
+      Promise.resolve(new Response(null, { status: 204 })),
     ) as unknown as typeof globalThis.fetch;
 
     const result = await startShowRewatchingRequest({
@@ -32,7 +32,7 @@ describe('show rewatching requests', () => {
 
   it('should stop a rewatch session', async () => {
     const fetch = vi.fn(() =>
-      Promise.resolve(new Response(null, { status: 204 }))
+      Promise.resolve(new Response(null, { status: 204 })),
     ) as unknown as typeof globalThis.fetch;
 
     const result = await stopShowRewatchingRequest({

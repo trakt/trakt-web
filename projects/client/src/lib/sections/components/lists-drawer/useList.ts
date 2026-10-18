@@ -23,17 +23,21 @@ export function useList({ list, type, media }: UseListProps) {
   };
   const invalidations = [InvalidateAction.Listed(type)];
 
-  const addition = useMutation(defineMutation({
-    key: 'list:add',
-    request: () => addToListRequest(target),
-    invalidations,
-  }));
+  const addition = useMutation(
+    defineMutation({
+      key: 'list:add',
+      request: () => addToListRequest(target),
+      invalidations,
+    }),
+  );
 
-  const removal = useMutation(defineMutation({
-    key: 'list:remove',
-    request: () => removeFromListRequest(target),
-    invalidations,
-  }));
+  const removal = useMutation(
+    defineMutation({
+      key: 'list:remove',
+      request: () => removeFromListRequest(target),
+      invalidations,
+    }),
+  );
 
   const addToList = async () => {
     track({ action: 'add' });

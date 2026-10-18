@@ -6,10 +6,7 @@ type Callback = (
 (globalThis as Record<string, unknown>).IntersectionObserver =
   class MockIntersectionObserver {
     #callback: Callback;
-    constructor(
-      callback: Callback,
-      _options?: IntersectionObserverInit,
-    ) {
+    constructor(callback: Callback, _options?: IntersectionObserverInit) {
       this.#callback = callback;
     }
     observe(target: Element) {

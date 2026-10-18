@@ -7,10 +7,11 @@ import { time } from '$lib/utils/timing/time.ts';
 import { klipyGifsRequest } from './_internal/klipyGifsRequest.ts';
 import { toGifPage } from './_internal/toGifPage.ts';
 
-type GifSearchParams =
-  & { query: string; customerId: string }
-  & PaginationParams
-  & ApiParams;
+type GifSearchParams = {
+  query: string;
+  customerId: string;
+} & PaginationParams &
+  ApiParams;
 
 export const gifSearchQuery = defineInfiniteQuery({
   key: 'gifSearch',

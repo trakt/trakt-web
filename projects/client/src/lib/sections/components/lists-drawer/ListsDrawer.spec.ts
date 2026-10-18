@@ -40,14 +40,16 @@ describe('ListsDrawer', () => {
 
       server.use(
         http.get('http://localhost/v3/users/me/lists', () => {
-          return HttpResponse.json([{
-            id: LIST_ID,
-            name: LIST_NAME,
-            count: 3,
-            type: 'standard',
-            display_order: 1,
-            owner_id: OWNER_ID,
-          }]);
+          return HttpResponse.json([
+            {
+              id: LIST_ID,
+              name: LIST_NAME,
+              count: 3,
+              type: 'standard',
+              display_order: 1,
+              owner_id: OWNER_ID,
+            },
+          ]);
         }),
         http.post(
           `http://localhost/users/${OWNER_ID}/lists/${LIST_ID}/items`,

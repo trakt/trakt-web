@@ -10,16 +10,12 @@ import { FeatureFlag } from './models/FeatureFlag.ts';
 import { useFeatureFlag } from './useFeatureFlag.ts';
 
 function mockDirector(isDirector: boolean) {
-  const user = deepAssign(
-    clone(ExtendedUsersResponseMock),
-    { user: { director: isDirector } },
-  );
+  const user = deepAssign(clone(ExtendedUsersResponseMock), {
+    user: { director: isDirector },
+  });
 
   server.use(
-    http.get(
-      'http://localhost/users/settings',
-      () => HttpResponse.json(user),
-    ),
+    http.get('http://localhost/users/settings', () => HttpResponse.json(user)),
   );
 }
 
@@ -37,8 +33,9 @@ describe('store: useFeatureFlag', () => {
     expect(await waitForValue(isEnabled(FeatureFlag.EditMode), true)).toBe(
       true,
     );
-    expect(await waitForValue(isEnabled(FeatureFlag.Rewatching), true))
-      .toBe(true);
+    expect(await waitForValue(isEnabled(FeatureFlag.Rewatching), true)).toBe(
+      true,
+    );
   });
 
   it('should default every flag to disabled for non-director accounts', async () => {

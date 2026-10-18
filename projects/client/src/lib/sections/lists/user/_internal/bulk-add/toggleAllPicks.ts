@@ -12,8 +12,5 @@ export function toggleAllPicks(
     return picks.filter(({ key }) => !candidateKeys.has(key));
   }
 
-  return [
-    ...picks,
-    ...candidates.filter(({ key }) => !pickedKeys.has(key)),
-  ];
+  return [...picks, ...candidates.filter(({ key }) => !pickedKeys.has(key))];
 }

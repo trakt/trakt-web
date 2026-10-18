@@ -5,13 +5,12 @@ type DropShowRequest = {
   body: HiddenMediaRequest;
 } & ApiParams;
 
-export function dropShowRequest(
-  { body, fetch }: DropShowRequest,
-): Promise<boolean> {
+export function dropShowRequest({
+  body,
+  fetch,
+}: DropShowRequest): Promise<boolean> {
   return api({ fetch })
-    .users
-    .hidden
-    .add({
+    .users.hidden.add({
       params: {
         section: 'dropped',
       },

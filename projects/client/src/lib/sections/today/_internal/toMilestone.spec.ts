@@ -27,15 +27,20 @@ describe('util: toMilestone', () => {
   });
 
   it('should mark a season premiere as starting that season', () => {
-    expect(toMilestone({ ...episode, number: 1, type: 'season_premiere' }))
-      .toEqual({ type: 'season-start', season: 2 });
+    expect(
+      toMilestone({ ...episode, number: 1, type: 'season_premiere' }),
+    ).toEqual({ type: 'season-start', season: 2 });
   });
 
   it('should mark finales as finishing the season or the show', () => {
-    expect(toMilestone({ ...episode, type: 'season_finale' }))
-      .toEqual({ type: 'season-end', season: 2 });
-    expect(toMilestone({ ...episode, type: 'series_finale' }))
-      .toEqual({ type: 'series-end', season: 2 });
+    expect(toMilestone({ ...episode, type: 'season_finale' })).toEqual({
+      type: 'season-end',
+      season: 2,
+    });
+    expect(toMilestone({ ...episode, type: 'series_finale' })).toEqual({
+      type: 'series-end',
+      season: 2,
+    });
   });
 
   it('should pick the biggest milestone from a binge', () => {

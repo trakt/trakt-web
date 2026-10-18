@@ -124,9 +124,7 @@ describe('renewAccessToken', () => {
 
     expect(request).toHaveBeenCalledWith(
       'trakt-auth-renew',
-      expect.any(
-        Function,
-      ),
+      expect.any(Function),
     );
   });
 

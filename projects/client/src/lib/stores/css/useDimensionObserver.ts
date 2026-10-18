@@ -29,9 +29,8 @@ export const useDimensionObserver = (
   const observeDimension = (node: HTMLElement) => {
     const update = () =>
       setObservedDimension(node, dimension, observedDimension);
-    const debouncedUpdate = debounceMs != null
-      ? debounce(update, debounceMs)
-      : update;
+    const debouncedUpdate =
+      debounceMs != null ? debounce(update, debounceMs) : update;
 
     // Initial size
     update();

@@ -36,11 +36,11 @@ describe('toRottenTomatoRating', () => {
   it('should return "stale" when rating is less than 60', () => {
     expect(toRottenAudienceRating(0.59)).toBe('stale');
     expect(toRottenAudienceRating(0.1)).toBe('stale');
-    expect(toRottenAudienceRating(0.30)).toBe('stale');
+    expect(toRottenAudienceRating(0.3)).toBe('stale');
   });
 
   it('should return "hot" when rating is 60 or greater', () => {
-    expect(toRottenAudienceRating(0.60)).toBe('hot');
+    expect(toRottenAudienceRating(0.6)).toBe('hot');
     expect(toRottenAudienceRating(0.75)).toBe('hot');
     expect(toRottenAudienceRating(1)).toBe('hot');
   });

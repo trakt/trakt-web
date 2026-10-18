@@ -6,31 +6,36 @@ vi.mock('./retryWithRateLimit.ts', () => ({
 }));
 
 const identity = <T>(x: T) => x;
-const succeed = <T>(value: T) => () => Promise.resolve(value);
+const succeed =
+  <T>(value: T) =>
+  () =>
+    Promise.resolve(value);
 const fail = (message: string) => () => Promise.reject(new Error(message));
 
 describe('processChunks', () => {
   describe('happy path', () => {
     it('returns zero errors when all chunks succeed', async () => {
-      const chunks = [[1, 2], [3, 4]];
-      const result = await processChunks(
-        chunks,
-        identity,
-        succeed('ok'),
-        { onProgress: vi.fn(), onError: vi.fn() },
-      );
+      const chunks = [
+        [1, 2],
+        [3, 4],
+      ];
+      const result = await processChunks(chunks, identity, succeed('ok'), {
+        onProgress: vi.fn(),
+        onError: vi.fn(),
+      });
 
       expect(result.errors).toBe(0);
     });
 
     it('returns total processed count', async () => {
-      const chunks = [[1, 2], [3, 4]];
-      const result = await processChunks(
-        chunks,
-        identity,
-        succeed('ok'),
-        { onProgress: vi.fn(), onError: vi.fn() },
-      );
+      const chunks = [
+        [1, 2],
+        [3, 4],
+      ];
+      const result = await processChunks(chunks, identity, succeed('ok'), {
+        onProgress: vi.fn(),
+        onError: vi.fn(),
+      });
 
       expect(result.processed).toBe(4);
     });
@@ -51,7 +56,10 @@ describe('processChunks', () => {
 
   describe('error handling', () => {
     it('counts failed items as errors', async () => {
-      const chunks = [[1, 2], [3, 4]];
+      const chunks = [
+        [1, 2],
+        [3, 4],
+      ];
       const result = await processChunks(
         chunks,
         identity,
@@ -138,12 +146,10 @@ describe('processChunks', () => {
 
   describe('edge cases', () => {
     it('returns zero processed and errors for empty chunks', async () => {
-      const result = await processChunks(
-        [],
-        identity,
-        succeed('ok'),
-        { onProgress: vi.fn(), onError: vi.fn() },
-      );
+      const result = await processChunks([], identity, succeed('ok'), {
+        onProgress: vi.fn(),
+        onError: vi.fn(),
+      });
 
       expect(result).toEqual({ processed: 0, errors: 0 });
     });

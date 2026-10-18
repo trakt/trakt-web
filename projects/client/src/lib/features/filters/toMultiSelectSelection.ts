@@ -17,8 +17,9 @@ export function toMultiSelectSelection(
   raw: string | Nil,
 ): MultiSelectSelection {
   const tokens = raw ? raw.split(',').filter(Boolean).map(toToken) : [];
-  const unique = tokens.filter((token, index) =>
-    tokens.findIndex(({ value }) => value === token.value) === index
+  const unique = tokens.filter(
+    (token, index) =>
+      tokens.findIndex(({ value }) => value === token.value) === index,
   );
 
   return {

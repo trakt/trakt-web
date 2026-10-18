@@ -19,9 +19,11 @@ type SearchParams = {
   exact: boolean;
 } & ApiParams;
 
-const MediaResultSchema = z.object({
-  score: z.number(),
-}).merge(MediaEntrySchema);
+const MediaResultSchema = z
+  .object({
+    score: z.number(),
+  })
+  .merge(MediaEntrySchema);
 
 const MediaSearchResultSchema = z.object({
   type: z.literal('media'),
@@ -36,13 +38,10 @@ function isGarbage(value: MediaEntry): boolean {
   const isInvalidRelease = isReleased && value?.year == null;
   const hasNoGenres = !value?.genres.length;
 
-  return isInvalidRelease ||
-    hasNoGenres;
+  return isInvalidRelease || hasNoGenres;
 }
 
-function mapToSearchResultEntry(
-  item: SearchResultResponse,
-): MediaResult {
+function mapToSearchResultEntry(item: SearchResultResponse): MediaResult {
   const { type } = item;
   switch (type) {
     case 'show':
@@ -60,9 +59,14 @@ function mapToSearchResultEntry(
   }
 }
 
-const searchRequest = (
-  { query, type, config, limit, exact, fetch }: SearchParams,
-) => {
+const searchRequest = ({
+  query,
+  type,
+  config,
+  limit,
+  exact,
+  fetch,
+}: SearchParams) => {
   const queryParams = {
     query,
     limit,
@@ -73,17 +77,15 @@ const searchRequest = (
   // Exact matches are served by the API's exact endpoint. The fuzzy pass keeps
   // querying the search index directly and falls back to the API on failure.
   if (exact) {
-    return api({ fetch })
-      .search
-      .exact({
-        query: {
-          ...queryParams,
-          extended: 'full,images',
-        },
-        params: {
-          type: types,
-        },
-      });
+    return api({ fetch }).search.exact({
+      query: {
+        ...queryParams,
+        extended: 'full,images',
+      },
+      params: {
+        type: types,
+      },
+    });
   }
 
   return getMedia({
@@ -96,32 +98,32 @@ const searchRequest = (
       status: 200,
     }))
     .catch(() =>
-      api({ fetch })
-        .search
-        .query({
-          query: {
-            ...queryParams,
-            extended: 'full,images',
-          },
-          params: {
-            type: types,
-          },
-        })
+      api({ fetch }).search.query({
+        query: {
+          ...queryParams,
+          extended: 'full,images',
+        },
+        params: {
+          type: types,
+        },
+      }),
     );
 };
 
 export const searchMediaQuery = defineQuery({
   key: 'searchMedia',
   invalidations: [],
-  dependencies: (
-    params,
-  ) => [params.query, params.type, params.limit, params.exact],
+  dependencies: (params) => [
+    params.query,
+    params.type,
+    params.limit,
+    params.exact,
+  ],
   request: searchRequest,
   mapper: (response) => {
     return {
       type: 'media' as const,
-      items: response
-        .body
+      items: response.body
         .map(mapToSearchResultEntry)
         .filter((value) => !isGarbage(value)),
     };

@@ -35,11 +35,10 @@ function initializeReadFeatures(): ReadonlyArray<string> {
 export function createFeatureFlagContext() {
   const ctx = setContext(
     FEATURE_FLAG_CONTEXT_KEY,
-    getContext<FeatureFlagContext>(FEATURE_FLAG_CONTEXT_KEY) ??
-      {
-        overrides: new BehaviorSubject(initializeOverrides()),
-        readFeatures: new BehaviorSubject(initializeReadFeatures()),
-      },
+    getContext<FeatureFlagContext>(FEATURE_FLAG_CONTEXT_KEY) ?? {
+      overrides: new BehaviorSubject(initializeOverrides()),
+      readFeatures: new BehaviorSubject(initializeReadFeatures()),
+    },
   );
 
   return ctx;

@@ -17,14 +17,11 @@ describe('Button', () => {
 
   describe('type: button', () => {
     it('should render a button element', async () => {
-      renderComponent(
-        Button,
-        {
-          props: {
-            ...defaultProps,
-          },
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
         },
-      );
+      });
 
       await waitFor(() => {
         const button = screen.getByRole('button', { name: 'Test Button' });
@@ -167,15 +164,12 @@ describe('Button', () => {
 
   describe('type: link', () => {
     it('should render a link component', async () => {
-      renderComponent(
-        Button,
-        {
-          props: {
-            ...defaultProps,
-            href: '/',
-          },
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          href: '/',
         },
-      );
+      });
 
       await waitFor(() => {
         const link = screen.getByRole('link', { name: 'Test Button' });
@@ -185,15 +179,12 @@ describe('Button', () => {
     });
 
     it('should have a trakt-active-class when same url', async () => {
-      renderComponent(
-        Button,
-        {
-          props: {
-            ...defaultProps,
-            href: '/',
-          },
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          href: '/',
         },
-      );
+      });
 
       await waitFor(() => {
         const link = screen.getByRole('link', { name: 'Test Button' });
@@ -202,15 +193,12 @@ describe('Button', () => {
     });
 
     it('should not have a trakt-active-class when different url', async () => {
-      renderComponent(
-        Button,
-        {
-          props: {
-            ...defaultProps,
-            href: '/test',
-          },
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          href: '/test',
         },
-      );
+      });
 
       await waitFor(() => {
         const link = screen.getByRole('link', { name: 'Test Button' });
@@ -219,15 +207,12 @@ describe('Button', () => {
     });
 
     it('should stay focused when clicked', async () => {
-      renderComponent(
-        Button,
-        {
-          props: {
-            ...defaultProps,
-            href: '/',
-          },
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          href: '/',
         },
-      );
+      });
 
       await waitFor(() => {
         const link = screen.getByRole('link', { name: 'Test Button' });

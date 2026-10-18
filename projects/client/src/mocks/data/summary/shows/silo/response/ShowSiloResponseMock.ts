@@ -1,46 +1,44 @@
 import type { ShowResponse } from '@trakt/api';
 
 export const ShowSiloResponseMock: ShowResponse = {
-  'title': 'Silo',
-  'original_title': 'Silo',
-  'year': 2023,
-  'ids': {
-    'trakt': 180770,
-    'slug': 'silo',
-    'tvdb': 403245,
-    'imdb': 'tt14688458',
-    'tmdb': 125988,
-    'plex': {
-      'guid': '23rvas4r3qt3',
-      'slug': 'silo',
+  title: 'Silo',
+  original_title: 'Silo',
+  year: 2023,
+  ids: {
+    trakt: 180770,
+    slug: 'silo',
+    tvdb: 403245,
+    imdb: 'tt14688458',
+    tmdb: 125988,
+    plex: {
+      guid: '23rvas4r3qt3',
+      slug: 'silo',
     },
   },
-  'aired_episodes': 15,
-  'tagline': 'The truth will surface.',
-  'overview':
+  aired_episodes: 15,
+  tagline: 'The truth will surface.',
+  overview:
     'In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.',
-  'first_aired': '2023-05-05T01:00:00.000Z',
-  'airs': {
-    'day': 'Thursday',
-    'time': '21:00',
-    'timezone': 'America/New_York',
+  first_aired: '2023-05-05T01:00:00.000Z',
+  airs: {
+    day: 'Thursday',
+    time: '21:00',
+    timezone: 'America/New_York',
   },
-  'runtime': 60,
-  'certification': 'TV-MA',
-  'network': 'Apple TV+',
-  'country': 'us',
-  'trailer': 'https://youtube.com/watch?v=8ZYhuvIv1pA',
-  'homepage': 'https://tv.apple.com/show/umc.cmc.3yksgc857px0k0rqe5zd4jice',
-  'status': 'returning series',
-  'rating': 8.161225370343736,
-  'votes': 6953,
-  'comment_count': 99,
-  'updated_at': '2024-12-15T15:36:02.000Z',
-  'language': 'en',
-  'languages': [
-    'en',
-  ],
-  'available_translations': [
+  runtime: 60,
+  certification: 'TV-MA',
+  network: 'Apple TV+',
+  country: 'us',
+  trailer: 'https://youtube.com/watch?v=8ZYhuvIv1pA',
+  homepage: 'https://tv.apple.com/show/umc.cmc.3yksgc857px0k0rqe5zd4jice',
+  status: 'returning series',
+  rating: 8.161225370343736,
+  votes: 6953,
+  comment_count: 99,
+  updated_at: '2024-12-15T15:36:02.000Z',
+  language: 'en',
+  languages: ['en'],
+  available_translations: [
     'ar',
     'bg',
     'ca',
@@ -79,45 +77,39 @@ export const ShowSiloResponseMock: ShowResponse = {
     'vi',
     'zh',
   ],
-  'genres': [
-    'drama',
-    'science-fiction',
-  ],
-  'images': {
-    'fanart': [
+  genres: ['drama', 'science-fiction'],
+  images: {
+    fanart: [
       'media.trakt.tv/images/shows/000/180/770/fanarts/medium/80d39f8578.jpg.webp',
       'image.tmdb.org/t/p/w1280/n5FPNMJ0eRoiQrKGfUQQRAZeaxg.jpg',
     ],
-    'poster': [
+    poster: [
       'media.trakt.tv/images/shows/000/180/770/posters/thumb/5312f1d1cf.jpg.webp',
       'image.tmdb.org/t/p/w342/tlliQuCupf8fpTH7RAor3aKMGy.jpg',
     ],
-    'logo': [
+    logo: [
       'media.trakt.tv/images/shows/000/180/770/logos/medium/b0c9a10541.png.webp',
       'assets.fanart.tv/fanart/tv/403245/hdtvlogo/wool-640b57ff556b2.png',
     ],
-    'clearart': [
+    clearart: [
       'media.trakt.tv/images/shows/000/180/770/cleararts/medium/924d053dc2.png.webp',
       'assets.fanart.tv/fanart/tv/403245/hdclearart/silo-644fec3fe0fe0.png',
     ],
-    'banner': [
+    banner: [
       'media.trakt.tv/images/shows/000/180/770/banners/medium/24d0a4847e.jpg.webp',
       'assets.fanart.tv/fanart/tv/403245/tvbanner/silo-640f4c666e9f7.jpg',
     ],
-    'thumb': [
+    thumb: [
       'media.trakt.tv/images/shows/000/180/770/thumbs/medium/dddaaead2f.jpg.webp',
     ],
   },
-  'colors': {
-    'poster': [
-      '#D29D40',
-      '#1E2E2F',
-    ],
+  colors: {
+    poster: ['#D29D40', '#1E2E2F'],
   },
-  'social_ids': {
-    'twitter': null,
-    'facebook': null,
-    'instagram': null,
-    'wikipedia': 'Silo_(TV_series)',
+  social_ids: {
+    twitter: null,
+    facebook: null,
+    instagram: null,
+    wikipedia: 'Silo_(TV_series)',
   },
 };

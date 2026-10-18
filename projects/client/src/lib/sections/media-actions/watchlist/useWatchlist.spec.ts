@@ -29,7 +29,7 @@ describe('useWatchlist', () => {
   const runCommonTests = (props: MediaStoreProps, invalidation: string) => {
     it('should NOT be updating watchlist when first requested', async () => {
       const { isWatchlistUpdating } = await renderStore(() =>
-        useWatchlist(props)
+        useWatchlist(props),
       );
 
       expect(await firstValueFrom(isWatchlistUpdating)).toBe(false);
@@ -37,7 +37,7 @@ describe('useWatchlist', () => {
 
     it('should be updating watchlist when adding', async () => {
       const { isWatchlistUpdating, addToWatchlist } = await renderStore(() =>
-        useWatchlist(props)
+        useWatchlist(props),
       );
 
       addToWatchlist();
@@ -46,7 +46,7 @@ describe('useWatchlist', () => {
 
     it('should NOT be updating watchlist after add request is completed', async () => {
       const { isWatchlistUpdating, addToWatchlist } = await renderStore(() =>
-        useWatchlist(props)
+        useWatchlist(props),
       );
 
       await addToWatchlist();
@@ -81,7 +81,7 @@ describe('useWatchlist', () => {
 
     it('should call invalidate after removing from watchlist', async () => {
       const { removeFromWatchlist } = await renderStore(() =>
-        useWatchlist(props)
+        useWatchlist(props),
       );
 
       const invalidations = await captureInvalidations(removeFromWatchlist);
@@ -106,7 +106,7 @@ describe('useWatchlist', () => {
 
     it('should know The Matrix is watchlisted', async () => {
       const { isWatchlisted } = await renderStore(() =>
-        useWatchlist({ ...props, media: MovieMatrixMappedMock })
+        useWatchlist({ ...props, media: MovieMatrixMappedMock }),
       );
 
       expect(await waitForEmission(isWatchlisted, 2)).toBe(true);
@@ -123,7 +123,7 @@ describe('useWatchlist', () => {
 
     it('should be watchlisted if it is Silo', async () => {
       const { isWatchlisted } = await renderStore(() =>
-        useWatchlist({ ...props, media: ShowSiloMappedMock })
+        useWatchlist({ ...props, media: ShowSiloMappedMock }),
       );
 
       expect(await waitForEmission(isWatchlisted, 2)).toBe(true);
@@ -131,7 +131,7 @@ describe('useWatchlist', () => {
 
     it('should NOT be watchlisted if it is Devs', async () => {
       const { isWatchlisted } = await renderStore(() =>
-        useWatchlist({ ...props, media: ShowDevsMappedMock })
+        useWatchlist({ ...props, media: ShowDevsMappedMock }),
       );
 
       expect(await waitForEmission(isWatchlisted, 2)).toBe(false);
@@ -145,7 +145,7 @@ describe('useWatchlist', () => {
           type: 'movie',
           media: MovieMatrixMappedMock,
           isToastEnabled: false,
-        })
+        }),
       );
 
       await addToWatchlist();
@@ -158,7 +158,7 @@ describe('useWatchlist', () => {
   describe('action confirmation', () => {
     it('should NOT raise an action toast on removal', async () => {
       const { removeFromWatchlist } = await renderStore(() =>
-        useWatchlist({ type: 'movie', media: MovieMatrixMappedMock })
+        useWatchlist({ type: 'movie', media: MovieMatrixMappedMock }),
       );
 
       await removeFromWatchlist();
@@ -168,7 +168,7 @@ describe('useWatchlist', () => {
 
     it('should offer to change the list when adding', async () => {
       const { addToWatchlist } = await renderStore(() =>
-        useWatchlist({ type: 'movie', media: MovieMatrixMappedMock })
+        useWatchlist({ type: 'movie', media: MovieMatrixMappedMock }),
       );
 
       const addRequests = await captureRequests(() => addToWatchlist());
@@ -181,9 +181,8 @@ describe('useWatchlist', () => {
 
     it('should NOT raise an action toast when the addition is queued offline', async () => {
       server.use(
-        http.post(
-          'http://localhost/sync/watchlist',
-          () => HttpResponse.error(),
+        http.post('http://localhost/sync/watchlist', () =>
+          HttpResponse.error(),
         ),
       );
 
@@ -191,7 +190,7 @@ describe('useWatchlist', () => {
         useWatchlist({
           type: 'movie',
           media: { ...MovieMatrixMappedMock, id: 999_998 },
-        })
+        }),
       );
 
       await addToWatchlist();

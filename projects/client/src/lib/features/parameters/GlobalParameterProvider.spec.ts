@@ -16,9 +16,8 @@ describe('GlobalParameterProvider', () => {
       props: { href: '?mode=movie', parameter: 'mode' },
     });
 
-    const params = new URL(
-      (getByTestId('link') as HTMLAnchorElement).href,
-    ).searchParams;
+    const params = new URL((getByTestId('link') as HTMLAnchorElement).href)
+      .searchParams;
 
     expect(params.get('mode')).toBe('movie');
     expect(params.get('sort_by')).toBe('rank');

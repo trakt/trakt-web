@@ -18,7 +18,8 @@ export const SmartListFiltersSchema = z.object({
   studios: list,
   people: list,
   people_operator: operator,
-  people_role: z.enum(['any', 'cast', 'directing', 'writing', 'producing'])
+  people_role: z
+    .enum(['any', 'cast', 'directing', 'writing', 'producing'])
     .optional(),
   watchnow: list,
   watchnow_country: z.string().optional(),

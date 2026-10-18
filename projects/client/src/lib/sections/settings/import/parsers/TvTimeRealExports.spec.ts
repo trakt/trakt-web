@@ -102,12 +102,13 @@ describe('TvTimeCsvParser: real anonymized exports', () => {
     // All 8 go out by their own episode TVDB id, none positionally under shows.
     expect(payload.episodes).toHaveLength(8);
     expect(
-      payload.episodes?.every((episode) =>
-        'ids' in episode && episode.ids != null && 'tvdb' in episode.ids
+      payload.episodes?.every(
+        (episode) =>
+          'ids' in episode && episode.ids != null && 'tvdb' in episode.ids,
       ),
     ).toBe(true);
     const positionalEpisodes = (payload.shows ?? [])
-      .flatMap((show) => ('seasons' in show ? show.seasons ?? [] : []))
+      .flatMap((show) => ('seasons' in show ? (show.seasons ?? []) : []))
       .flatMap((season) => season.episodes ?? []);
     expect(positionalEpisodes).toHaveLength(0);
   });
@@ -128,11 +129,10 @@ describe('TvTimeCsvParser: real anonymized exports', () => {
   });
 
   it('imports a real current-format export from a tvtime-export zip', async () => {
-    const zip = zipFixtures([
-      'tvtime-series-episodes.csv',
-      'tvtime-movies.csv',
-      'tvtime-series.csv',
-    ], 'tvtime-export-2026-07-05.zip');
+    const zip = zipFixtures(
+      ['tvtime-series-episodes.csv', 'tvtime-movies.csv', 'tvtime-series.csv'],
+      'tvtime-export-2026-07-05.zip',
+    );
 
     const result = await TvTimeCsvParser.parse([zip]);
 
@@ -187,10 +187,16 @@ describe('TvTimeCsvParser: real anonymized exports', () => {
   });
 
   it('imports custom lists from a real GDPR zip alongside tracking data', async () => {
-    const zip = zipNamed([
-      ['gdpr-v2-tracking-prod-records-v2.csv', 'tracking-prod-records-v2.csv'],
-      ['gdpr-lists-prod-lists.csv', 'lists-prod-lists.csv'],
-    ], 'gdpr-data.zip');
+    const zip = zipNamed(
+      [
+        [
+          'gdpr-v2-tracking-prod-records-v2.csv',
+          'tracking-prod-records-v2.csv',
+        ],
+        ['gdpr-lists-prod-lists.csv', 'lists-prod-lists.csv'],
+      ],
+      'gdpr-data.zip',
+    );
 
     const result = await TvTimeCsvParser.parse([zip]);
 
@@ -199,9 +205,9 @@ describe('TvTimeCsvParser: real anonymized exports', () => {
     expect(t['history:episode']).toBe(8);
     expect(t['list:show']).toBe(8);
     expect(
-      result.filter((i) => i.action === 'list').every((i) =>
-        i.listName != null && i.ids.tvdb != null
-      ),
+      result
+        .filter((i) => i.action === 'list')
+        .every((i) => i.listName != null && i.ids.tvdb != null),
     ).toBe(true);
   });
 });

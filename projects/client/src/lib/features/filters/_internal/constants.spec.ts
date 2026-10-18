@@ -4,8 +4,8 @@ import { FILTERS } from './constants.ts';
 
 describe('FILTERS', () => {
   it('should include the streaming free availability option', () => {
-    const streamingFilter = FILTERS.find((filter) =>
-      filter.key === FilterKey.Streaming && filter.type === 'list'
+    const streamingFilter = FILTERS.find(
+      (filter) => filter.key === FilterKey.Streaming && filter.type === 'list',
     );
 
     if (streamingFilter?.type !== 'list') {
@@ -18,8 +18,8 @@ describe('FILTERS', () => {
   });
 
   it('should not allow exclusions on the streaming filter', () => {
-    const streamingFilter = FILTERS.find((filter) =>
-      filter.key === FilterKey.Streaming && filter.type === 'list'
+    const streamingFilter = FILTERS.find(
+      (filter) => filter.key === FilterKey.Streaming && filter.type === 'list',
     );
 
     if (streamingFilter?.type !== 'list') {
@@ -34,8 +34,8 @@ describe('FILTERS', () => {
   });
 
   it('should allow exclusions on other multi-select filters', () => {
-    const genreFilter = FILTERS.find((filter) =>
-      filter.key === FilterKey.Genres
+    const genreFilter = FILTERS.find(
+      (filter) => filter.key === FilterKey.Genres,
     );
 
     if (genreFilter?.type !== 'list') {

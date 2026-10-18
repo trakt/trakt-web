@@ -80,13 +80,15 @@ const build = (
 
 describe('util: toVipCancelSummary', () => {
   it('should not allow cancelling a lifetime membership', () => {
-    expect(build({ subscription: { ...subscription, type: 'life' } }))
-      .toBeNull();
+    expect(
+      build({ subscription: { ...subscription, type: 'life' } }),
+    ).toBeNull();
   });
 
   it('should not allow cancelling an already cancelled subscription', () => {
-    expect(build({ subscription: { ...subscription, isCancelled: true } }))
-      .toBeNull();
+    expect(
+      build({ subscription: { ...subscription, isCancelled: true } }),
+    ).toBeNull();
   });
 
   it('should not allow cancelling without a subscription', () => {
@@ -123,11 +125,12 @@ describe('util: toVipCancelSummary', () => {
   });
 
   it('should list Plex scrobbling and the extra Plex servers', () => {
-    expect(build({ plex: { scrobbleEvents: 12, syncedServers: 3 } })?.losses)
-      .toEqual([
-        { kind: 'plex-scrobbling' },
-        { kind: 'plex-servers', count: 2 },
-      ]);
+    expect(
+      build({ plex: { scrobbleEvents: 12, syncedServers: 3 } })?.losses,
+    ).toEqual([
+      { kind: 'plex-scrobbling' },
+      { kind: 'plex-servers', count: 2 },
+    ]);
   });
 
   it('should offer the bigger of the retention offer and a campaign', () => {

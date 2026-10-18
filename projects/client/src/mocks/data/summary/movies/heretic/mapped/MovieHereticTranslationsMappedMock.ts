@@ -5,34 +5,34 @@ export const MovieHereticTranslationsMappedMock: Map<string, MediaIntl> =
     [
       'en',
       {
-        'country': 'us',
-        'language': 'en',
-        'title': null,
-        'overview':
+        country: 'us',
+        language: 'en',
+        title: null,
+        overview:
           'Two young missionaries are forced to prove their faith when they knock on the wrong door and are greeted by a diabolical Mr. Reed, becoming ensnared in his deadly game of cat-and-mouse.',
-        'tagline': 'Question everything.',
+        tagline: 'Question everything.',
       },
     ],
     [
       'nl',
       {
-        'country': 'nl',
-        'language': 'nl',
-        'title': null,
-        'overview':
+        country: 'nl',
+        language: 'nl',
+        title: null,
+        overview:
           'Twee jonge missionarissen worden gedwongen om hun geloof te bewijzen wanneer ze aankloppen bij de verkeerde deur, begroet worden door de duivelse Mr. Reed en vervolgens verstrikt raken in zijn dodelijke kat-en-muisspel.',
-        'tagline': null,
+        tagline: null,
       },
     ],
     [
       'pt',
       {
-        'country': 'br',
-        'language': 'pt',
-        'overview':
+        country: 'br',
+        language: 'pt',
+        overview:
           'Duas jovens missionárias são forçadas a provar sua fé quando batem na porta errada e são recebidas pelo diabólico Sr. Reed, ficando presas em seu jogo mortal de gato e rato.',
-        'tagline': 'Questione tudo.',
-        'title': 'Herege',
+        tagline: 'Questione tudo.',
+        title: 'Herege',
       },
     ],
   ]);

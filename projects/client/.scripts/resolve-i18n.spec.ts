@@ -16,14 +16,13 @@ describe('resolve-i18n', () => {
       }
       `);
 
-    expect(result)
-      .toEqual({
-        key: 'value',
-        key2: 'value2',
-        key3: 'value3',
-        key4: 'value4',
-        key5: 'value5',
-      });
+    expect(result).toEqual({
+      key: 'value',
+      key2: 'value2',
+      key3: 'value3',
+      key4: 'value4',
+      key5: 'value5',
+    });
   });
 
   it('should resolve conflicts in i18n messages at the end', () => {
@@ -76,14 +75,13 @@ describe('resolve-i18n', () => {
         "key5": "value5"
       }`);
 
-    expect(result)
-      .toEqual({
-        key: 'value',
-        key2: 'value2',
-        key3: 'value3',
-        key4: 'value4',
-        key5: 'value5',
-      });
+    expect(result).toEqual({
+      key: 'value',
+      key2: 'value2',
+      key3: 'value3',
+      key4: 'value4',
+      key5: 'value5',
+    });
   });
 
   it('should resolve conflicts with empty object', () => {
@@ -105,14 +103,13 @@ describe('resolve-i18n', () => {
         "key5":     "value5"
       }`);
 
-    expect(result)
-      .toEqual({
-        key: 'value',
-        key2: 'value2',
-        key3: 'value3',
-        key4: 'value4',
-        key5: 'value5',
-      });
+    expect(result).toEqual({
+      key: 'value',
+      key2: 'value2',
+      key3: 'value3',
+      key4: 'value4',
+      key5: 'value5',
+    });
   });
 
   it('should resolve conflicts with a lot of new lines', () => {
@@ -135,13 +132,12 @@ describe('resolve-i18n', () => {
         "key5": "value5"
       }`);
 
-    expect(result)
-      .toEqual({
-        key: 'value',
-        key2: 'value2',
-        key3: 'value3',
-        key4: 'value4',
-        key5: 'value5',
-      });
+    expect(result).toEqual({
+      key: 'value',
+      key2: 'value2',
+      key3: 'value3',
+      key4: 'value4',
+      key5: 'value5',
+    });
   });
 });

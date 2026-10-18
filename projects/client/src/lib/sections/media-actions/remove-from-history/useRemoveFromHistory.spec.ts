@@ -28,7 +28,7 @@ describe('useRemoveFromHistory', () => {
   ) => {
     it('should NOT be removing when first requested', async () => {
       const { isRemoving } = await renderStore(() =>
-        useRemoveFromHistory(props)
+        useRemoveFromHistory(props),
       );
 
       expect(await firstValueFrom(isRemoving)).toBe(false);
@@ -36,7 +36,7 @@ describe('useRemoveFromHistory', () => {
 
     it('should be marking as removing when removing', async () => {
       const { isRemoving, removeFromHistory } = await renderStore(() =>
-        useRemoveFromHistory(props)
+        useRemoveFromHistory(props),
       );
 
       removeFromHistory();
@@ -45,7 +45,7 @@ describe('useRemoveFromHistory', () => {
 
     it('should call invalidate after removing', async () => {
       const { removeFromHistory } = await renderStore(() =>
-        useRemoveFromHistory(props)
+        useRemoveFromHistory(props),
       );
 
       const invalidations = await captureInvalidations(removeFromHistory);
@@ -70,7 +70,7 @@ describe('useRemoveFromHistory', () => {
           id: 42,
           // Heretic (916302): single play in history, carries a rating.
           movie: { id: 916302 },
-        })
+        }),
       );
 
       await removeFromHistory();
@@ -82,7 +82,7 @@ describe('useRemoveFromHistory', () => {
 
     it('should NOT remove a rating for an unrated movie', async () => {
       const { removeFromHistory } = await renderStore(() =>
-        useRemoveFromHistory(props)
+        useRemoveFromHistory(props),
       );
 
       await removeFromHistory();

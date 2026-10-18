@@ -10,18 +10,21 @@ import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 import { PaginatableSchemaFactory } from '../../models/Paginatable.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
-type PersonalListsParams =
-  & {
-    slug: string;
-    sortBy?: UserListsSortBy | Nil;
-    sortHow?: SortDirection | Nil;
-  }
-  & ApiParams
-  & PaginationParams;
+type PersonalListsParams = {
+  slug: string;
+  sortBy?: UserListsSortBy | Nil;
+  sortHow?: SortDirection | Nil;
+} & ApiParams &
+  PaginationParams;
 
-const personalListsRequest = (
-  { fetch, slug, page, limit, sortBy, sortHow }: PersonalListsParams,
-) => {
+const personalListsRequest = ({
+  fetch,
+  slug,
+  page,
+  limit,
+  sortBy,
+  sortHow,
+}: PersonalListsParams) => {
   const query = {
     extended: 'images' as const,
     page,
@@ -30,15 +33,12 @@ const personalListsRequest = (
     sort_how: sortHow,
   };
 
-  return api({ fetch })
-    .users
-    .lists
-    .personal({
-      params: {
-        id: slug,
-      },
-      query,
-    });
+  return api({ fetch }).users.lists.personal({
+    params: {
+      id: slug,
+    },
+    query,
+  });
 };
 
 export const personalListsQuery = defineInfiniteQuery({

@@ -14,9 +14,10 @@ export type RegisteredPlexPin = {
   expiresIn: number;
 };
 
-export async function registerPlexPinRequest(
-  { fetch, pin }: { pin: PlexPin } & ApiParams,
-): Promise<RegisteredPlexPin> {
+export async function registerPlexPinRequest({
+  fetch,
+  pin,
+}: { pin: PlexPin } & ApiParams): Promise<RegisteredPlexPin> {
   const response = await rawApiFetch({
     fetch,
     path: '/v3/users/me/sync/plex/pin',

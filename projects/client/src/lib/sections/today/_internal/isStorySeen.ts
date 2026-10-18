@@ -18,7 +18,7 @@ function latestActivityAt(group: TodayStoryGroup): number {
   return Math.max(
     0,
     ...group.frames.map((frame) =>
-      frame.type === 'for-you' ? releasedAt(frame.item) : 0
+      frame.type === 'for-you' ? releasedAt(frame.item) : 0,
     ),
   );
 }

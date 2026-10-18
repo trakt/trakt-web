@@ -36,9 +36,7 @@ function isGarbage(value: PersonSummary): boolean {
   return !relevantPositions.includes(value?.knownFor ?? 'unknown');
 }
 
-function mapToSearchResultEntry(
-  item: SearchResultResponse,
-) {
+function mapToSearchResultEntry(item: SearchResultResponse) {
   const { type } = item;
   switch (type) {
     case 'person':
@@ -51,9 +49,7 @@ function mapToSearchResultEntry(
   }
 }
 
-const searchRequest = async (
-  { query, config, limit, fetch }: SearchParams,
-) => {
+const searchRequest = async ({ query, config, limit, fetch }: SearchParams) => {
   const queryParams = {
     query,
     limit,
@@ -71,17 +67,15 @@ const searchRequest = async (
       api({
         fetch,
         cancellable: true,
-      })
-        .search
-        .query({
-          query: {
-            ...queryParams,
-            extended: 'full,images',
-          },
-          params: {
-            type: 'person',
-          },
-        })
+      }).search.query({
+        query: {
+          ...queryParams,
+          extended: 'full,images',
+        },
+        params: {
+          type: 'person',
+        },
+      }),
     );
 
   return response;
@@ -94,8 +88,7 @@ export const searchPeopleQuery = defineQuery({
   request: searchRequest,
   mapper: (response) => ({
     type: 'people' as const,
-    items: response
-      .body
+    items: response.body
       .map(mapToSearchResultEntry)
       .filter((value) => !isGarbage(value)),
   }),

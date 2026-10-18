@@ -37,8 +37,10 @@ function groupByList(
 ): Map<string, ListGroup> {
   return listItems.reduce((groups, item) => {
     if (!item.listName) return groups;
-    const group = groups.get(item.listName) ??
-      { isPublic: item.listIsPublic === true, items: [] };
+    const group = groups.get(item.listName) ?? {
+      isPublic: item.listIsPublic === true,
+      items: [],
+    };
     return groups.set(item.listName, {
       ...group,
       items: [...group.items, item],
@@ -139,8 +141,8 @@ export async function syncToTrakt(
     );
 
     const historyItems = resolvedItems.filter((i) => i.action === 'history');
-    const watchlistItems = resolvedItems.filter((i) =>
-      i.action === 'watchlist'
+    const watchlistItems = resolvedItems.filter(
+      (i) => i.action === 'watchlist',
     );
     const ratingItems = resolvedItems.filter((i) => i.action === 'ratings');
     const listItems = resolvedItems.filter((i) => i.action === 'list');

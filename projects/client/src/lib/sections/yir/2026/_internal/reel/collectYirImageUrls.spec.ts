@@ -28,20 +28,20 @@ describe('util: collectYirImageUrls', () => {
         ...YirDetailMappedMock.mostWatched,
         shows: first
           ? [
-            first,
-            {
-              ...first,
-              entry: {
-                ...first.entry,
-                poster: {
-                  url: {
-                    medium: MEDIA_POSTER_PLACEHOLDER,
-                    thumb: MEDIA_POSTER_PLACEHOLDER,
+              first,
+              {
+                ...first,
+                entry: {
+                  ...first.entry,
+                  poster: {
+                    url: {
+                      medium: MEDIA_POSTER_PLACEHOLDER,
+                      thumb: MEDIA_POSTER_PLACEHOLDER,
+                    },
                   },
                 },
               },
-            },
-          ]
+            ]
           : [],
       },
     };

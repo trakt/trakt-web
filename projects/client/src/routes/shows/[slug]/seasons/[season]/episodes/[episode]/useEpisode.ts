@@ -24,15 +24,11 @@ export type UseEpisodeParams = {
 export function useEpisode(params$: Observable<UseEpisodeParams>) {
   const { country, favorites } = useStreamingPreferences();
 
-  const episode = useQuery(
-    params$.pipe(map((p) => episodeSummaryQuery(p))),
-  );
+  const episode = useQuery(params$.pipe(map((p) => episodeSummaryQuery(p))));
   const show = useQuery(
     params$.pipe(map((p) => showSummaryQuery({ slug: p.slug }))),
   );
-  const seasons = useQuery(
-    params$.pipe(map((p) => showSeasonsQuery(p))),
-  );
+  const seasons = useQuery(params$.pipe(map((p) => showSeasonsQuery(p))));
   const crew = useQuery(
     params$.pipe(
       map((params) => episodePeopleQuery({ ...params, guestStars: true })),
@@ -46,14 +42,14 @@ export function useEpisode(params$: Observable<UseEpisodeParams>) {
   const intl = useQuery(
     params$.pipe(
       map((p) =>
-        episodeIntlQuery({ ...p, language, enabled: !isLocaleSkipped })
+        episodeIntlQuery({ ...p, language, enabled: !isLocaleSkipped }),
       ),
     ),
   );
   const showIntl = useQuery(
     params$.pipe(
       map((p) =>
-        showIntlQuery({ slug: p.slug, language, enabled: !isLocaleSkipped })
+        showIntlQuery({ slug: p.slug, language, enabled: !isLocaleSkipped }),
       ),
     ),
   );
@@ -64,14 +60,7 @@ export function useEpisode(params$: Observable<UseEpisodeParams>) {
     ),
   );
 
-  const queries = [
-    episode,
-    show,
-    seasons,
-    intl,
-    showIntl,
-    crew,
-  ];
+  const queries = [episode, show, seasons, intl, showIntl, crew];
 
   const coreQueries = [episode, show];
 
@@ -83,9 +72,10 @@ export function useEpisode(params$: Observable<UseEpisodeParams>) {
     combineLatest(queries),
     combineLatest(coreQueries),
   ]).pipe(
-    map(([$queries, $coreQueries]) =>
-      $queries.some(toLoadingState) ||
-      $coreQueries.some(($query) => $query.data == null)
+    map(
+      ([$queries, $coreQueries]) =>
+        $queries.some(toLoadingState) ||
+        $coreQueries.some(($query) => $query.data == null),
     ),
   );
 
@@ -101,7 +91,7 @@ export function useEpisode(params$: Observable<UseEpisodeParams>) {
           type: 'episode',
           translations: $intl.data,
           fallback: $episode.data,
-        })
+        }),
       ),
     ),
     showIntl: combineLatest([showIntl, show]).pipe(
@@ -110,7 +100,7 @@ export function useEpisode(params$: Observable<UseEpisodeParams>) {
           type: 'show',
           translations: $showIntl.data,
           fallback: $show.data,
-        })
+        }),
       ),
     ),
     // FIXME: move these to the 'where to watch' component
@@ -120,7 +110,7 @@ export function useEpisode(params$: Observable<UseEpisodeParams>) {
           services: $streamOn.data,
           favorites: $favorites,
           countryCode: $country,
-        })
+        }),
       ),
     ),
   };

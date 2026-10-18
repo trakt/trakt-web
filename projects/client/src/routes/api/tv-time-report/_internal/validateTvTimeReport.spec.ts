@@ -50,9 +50,8 @@ describe('util: validateTvTimeReport', () => {
   });
 
   it('should reject too many files', () => {
-    const files = Array.from(
-      { length: 11 },
-      (_, index) => fileOf(`file-${index}.csv`, 1),
+    const files = Array.from({ length: 11 }, (_, index) =>
+      fileOf(`file-${index}.csv`, 1),
     );
 
     const result = validateTvTimeReport({ message: 'help', files });
@@ -88,9 +87,8 @@ describe('util: validateTvTimeReport', () => {
   });
 
   it('should reject when the combined size exceeds the total cap', () => {
-    const files = Array.from(
-      { length: 3 },
-      (_, index) => fileOf(`part-${index}.zip`, 9 * 1024 * 1024),
+    const files = Array.from({ length: 3 }, (_, index) =>
+      fileOf(`part-${index}.zip`, 9 * 1024 * 1024),
     );
 
     const result = validateTvTimeReport({ message: 'help', files });

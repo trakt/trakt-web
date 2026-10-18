@@ -60,9 +60,8 @@ describe('ShowCastDrawerHost', () => {
         { name: /^Main Cast/ },
         { timeout: SPLIT_CREDITS_TIMEOUT },
       ),
-    )
-      .toHaveAccessibleName(
-        `Main Cast ${ShowSiloSplitPeopleMappedMock.cast.length} people`,
-      );
+    ).toHaveAccessibleName(
+      `Main Cast ${ShowSiloSplitPeopleMappedMock.cast.length} people`,
+    );
   });
 });

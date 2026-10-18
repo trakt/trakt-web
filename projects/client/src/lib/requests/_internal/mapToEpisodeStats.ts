@@ -1,9 +1,7 @@
 import type { EpisodeStatsResponse } from '@trakt/api';
 import type { EpisodeStats } from '../models/EpisodeStats.ts';
 
-export function mapToEpisodeStats(
-  stats: EpisodeStatsResponse,
-): EpisodeStats {
+export function mapToEpisodeStats(stats: EpisodeStatsResponse): EpisodeStats {
   return {
     watchers: stats.watchers,
     plays: stats.plays,

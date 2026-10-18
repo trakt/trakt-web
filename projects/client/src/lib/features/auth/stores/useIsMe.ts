@@ -7,11 +7,10 @@ export function useIsMe(slug: string) {
   const { user } = useUser();
 
   return {
-    isMe: combineLatest(
-      [user, isAuthorized],
-    ).pipe(
-      map(([$user, $isAuthorized]) =>
-        $isAuthorized && (slug === 'me' || slug === $user?.slug)
+    isMe: combineLatest([user, isAuthorized]).pipe(
+      map(
+        ([$user, $isAuthorized]) =>
+          $isAuthorized && (slug === 'me' || slug === $user?.slug),
       ),
     ),
   };

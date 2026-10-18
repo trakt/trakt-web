@@ -39,15 +39,16 @@ describe('scoreLocalFits', () => {
 
   it('should skip picks and candidates without a vector', () => {
     expect(
-      scoreLocalFits({ picks: [1], candidates: [1, 9, 2], vectors })?.map((
-        { id },
-      ) => id),
+      scoreLocalFits({ picks: [1], candidates: [1, 9, 2], vectors })?.map(
+        ({ id }) => id,
+      ),
     ).toEqual([2]);
   });
 
   it('should wait while a pick has no vector yet', () => {
-    expect(scoreLocalFits({ picks: [1, 9], candidates: [2], vectors }))
-      .toBeNull();
+    expect(
+      scoreLocalFits({ picks: [1, 9], candidates: [2], vectors }),
+    ).toBeNull();
     expect(scoreLocalFits({ picks: [], candidates: [2], vectors })).toBeNull();
   });
 });

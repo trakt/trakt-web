@@ -15,9 +15,10 @@ function dedupeSubgenres(subgenres: Subgenre[]): Subgenre[] {
 export function mapToRecommendationSource(
   source: Source,
 ): RecommendationSource {
-  const base = 'movie' in source
-    ? { mediaType: 'movie' as const, media: mapToMovieEntry(source.movie) }
-    : { mediaType: 'show' as const, media: mapToShowEntry(source.show) };
+  const base =
+    'movie' in source
+      ? { mediaType: 'movie' as const, media: mapToMovieEntry(source.movie) }
+      : { mediaType: 'show' as const, media: mapToShowEntry(source.show) };
 
   if (source.type === 'subgenre') {
     return {

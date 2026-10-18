@@ -61,19 +61,15 @@ function mapToNowPlayingItem(response: WatchingResponse): NowPlayingItem {
   };
 }
 
-const userWatchingRequest = (
-  { fetch, slug }: UserProfileParams,
-) =>
-  api({ fetch })
-    .users
-    .watching({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,images',
-      },
-    });
+const userWatchingRequest = ({ fetch, slug }: UserProfileParams) =>
+  api({ fetch }).users.watching({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,images',
+    },
+  });
 
 export const userWatchingQuery = defineQuery({
   key: 'userWatching',

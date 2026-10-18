@@ -62,10 +62,10 @@ export function createCalendarAccumulator(order: CalendarOrder) {
 
       if (clearedToKey && key !== clearedToKey) {
         return sortPeriods(
-          Array.from(
-            accumulatedMap,
-            ([k, cal]) => ({ key: k, calendar: cal as Calendar<T> }),
-          ),
+          Array.from(accumulatedMap, ([k, cal]) => ({
+            key: k,
+            calendar: cal as Calendar<T>,
+          })),
           order,
         );
       }
@@ -80,10 +80,10 @@ export function createCalendarAccumulator(order: CalendarOrder) {
     }
 
     return sortPeriods(
-      Array.from(
-        accumulatedMap,
-        ([key, cal]) => ({ key, calendar: cal as Calendar<T> }),
-      ),
+      Array.from(accumulatedMap, ([key, cal]) => ({
+        key,
+        calendar: cal as Calendar<T>,
+      })),
       order,
     );
   }

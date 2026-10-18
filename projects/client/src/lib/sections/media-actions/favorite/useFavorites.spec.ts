@@ -23,7 +23,7 @@ describe('useFavorites', () => {
   const runCommonTests = (props: FavoritesStoreProps, invalidation: string) => {
     it('should NOT be updating favorites when first requested', async () => {
       const { isUpdatingFavorite } = await renderStore(() =>
-        useFavorites(props)
+        useFavorites(props),
       );
 
       expect(await firstValueFrom(isUpdatingFavorite)).toBe(false);
@@ -31,7 +31,7 @@ describe('useFavorites', () => {
 
     it('should be updating favorites when adding', async () => {
       const { isUpdatingFavorite, addToFavorites } = await renderStore(() =>
-        useFavorites(props)
+        useFavorites(props),
       );
 
       addToFavorites();
@@ -40,7 +40,7 @@ describe('useFavorites', () => {
 
     it('should NOT be updating favorites after add request is completed', async () => {
       const { isUpdatingFavorite, addToFavorites } = await renderStore(() =>
-        useFavorites(props)
+        useFavorites(props),
       );
 
       await addToFavorites();
@@ -75,7 +75,7 @@ describe('useFavorites', () => {
 
     it('should call invalidate after removing from favorites', async () => {
       const { removeFromFavorites } = await renderStore(() =>
-        useFavorites(props)
+        useFavorites(props),
       );
 
       const invalidations = await captureInvalidations(removeFromFavorites);
@@ -101,7 +101,7 @@ describe('useFavorites', () => {
 
     it('should know Heretic is favorited', async () => {
       const { isFavorited } = await renderStore(() =>
-        useFavorites({ ...props, id: MovieHereticMappedMock.id })
+        useFavorites({ ...props, id: MovieHereticMappedMock.id }),
       );
 
       expect(await waitForEmission(isFavorited, 2)).toBe(true);
@@ -109,7 +109,7 @@ describe('useFavorites', () => {
 
     it('should NOT be favorited if it is The Matrix', async () => {
       const { isFavorited } = await renderStore(() =>
-        useFavorites({ ...props, id: MovieMatrixMappedMock.id })
+        useFavorites({ ...props, id: MovieMatrixMappedMock.id }),
       );
 
       expect(await waitForEmission(isFavorited, 2)).toBe(false);
@@ -127,7 +127,7 @@ describe('useFavorites', () => {
 
     it('should know Silo is favorited', async () => {
       const { isFavorited } = await renderStore(() =>
-        useFavorites({ ...props, id: ShowSiloMappedMock.id })
+        useFavorites({ ...props, id: ShowSiloMappedMock.id }),
       );
 
       expect(await waitForEmission(isFavorited, 2)).toBe(true);
@@ -135,7 +135,7 @@ describe('useFavorites', () => {
 
     it('should NOT be favorited if it is Devs', async () => {
       const { isFavorited } = await renderStore(() =>
-        useFavorites({ ...props, id: ShowDevsMappedMock.id })
+        useFavorites({ ...props, id: ShowDevsMappedMock.id }),
       );
 
       expect(await waitForEmission(isFavorited, 2)).toBe(false);

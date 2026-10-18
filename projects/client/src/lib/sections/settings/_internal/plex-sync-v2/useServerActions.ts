@@ -12,32 +12,34 @@ export function useServerActions(connectionId: number) {
     InvalidateAction.MediaSync.Runs,
   ];
 
-  const syncSoon = useMutation(defineMutation({
-    key: 'media-sync:sync-now-connection',
-    request: () => syncNowMediaSyncConnectionRequest({ connectionId }),
-    invalidations,
-  }));
+  const syncSoon = useMutation(
+    defineMutation({
+      key: 'media-sync:sync-now-connection',
+      request: () => syncNowMediaSyncConnectionRequest({ connectionId }),
+      invalidations,
+    }),
+  );
 
-  const resync = useMutation(defineMutation({
-    key: 'media-sync:resync-connection',
-    request: () => resyncMediaSyncConnectionRequest({ connectionId }),
-    invalidations,
-  }));
+  const resync = useMutation(
+    defineMutation({
+      key: 'media-sync:resync-connection',
+      request: () => resyncMediaSyncConnectionRequest({ connectionId }),
+      invalidations,
+    }),
+  );
 
-  const retry = useMutation(defineMutation({
-    key: 'media-sync:retry-connection',
-    request: () => retryMediaSyncConnectionRequest({ connectionId }),
-    invalidations,
-  }));
+  const retry = useMutation(
+    defineMutation({
+      key: 'media-sync:retry-connection',
+      request: () => retryMediaSyncConnectionRequest({ connectionId }),
+      invalidations,
+    }),
+  );
 
   return {
     syncNow: () => syncSoon.mutate(),
     importPastWatches: () => resync.mutate(),
     retry: () => retry.mutate(),
-    isBusy: anyTrue([
-      syncSoon.isPending,
-      resync.isPending,
-      retry.isPending,
-    ]),
+    isBusy: anyTrue([syncSoon.isPending, resync.isPending, retry.isPending]),
   };
 }

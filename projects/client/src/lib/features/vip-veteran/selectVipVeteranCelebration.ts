@@ -33,12 +33,12 @@ function highestTitle(
   return (toRank(a) >= toRank(b) ? a : b) ?? null;
 }
 
-function isAnniversaryDue(
-  { veteran, memory, today }: SelectCelebrationParams,
-) {
-  return veteran.years >= 1 &&
+function isAnniversaryDue({ veteran, memory, today }: SelectCelebrationParams) {
+  return (
+    veteran.years >= 1 &&
     memory?.anniversaryYear !== today.getUTCFullYear() &&
-    isStreakAnniversary(veteran.since, today);
+    isStreakAnniversary(veteran.since, today)
+  );
 }
 
 export function selectVipVeteranCelebration(
@@ -47,8 +47,8 @@ export function selectVipVeteranCelebration(
   const { veteran, memory, today } = params;
   const previous = memory ?? EMPTY_MEMORY;
   const isAnniversary = isAnniversaryDue(params);
-  const isPromotion = memory != null &&
-    toRank(veteran.title) > toRank(memory.title);
+  const isPromotion =
+    memory != null && toRank(veteran.title) > toRank(memory.title);
 
   const next: VipVeteranMemory = {
     ...previous,

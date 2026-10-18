@@ -33,9 +33,8 @@ export async function fetchCatalogSlugs({
     : 0;
 
   const remainingResponses = await Promise.all(
-    Array.from(
-      { length: Math.max(remainingPages, 0) },
-      (_, index) => requestPage(index + 2),
+    Array.from({ length: Math.max(remainingPages, 0) }, (_, index) =>
+      requestPage(index + 2),
     ),
   );
 

@@ -6,9 +6,8 @@ describe('rawApiFetch', () => {
   afterEach(() => setToken(null));
 
   function spyFetch() {
-    return vi.fn(
-      (_input: RequestInfo | URL, _init?: RequestInit) =>
-        Promise.resolve(new Response(null, { status: 200 })),
+    return vi.fn((_input: RequestInfo | URL, _init?: RequestInit) =>
+      Promise.resolve(new Response(null, { status: 200 })),
     );
   }
 

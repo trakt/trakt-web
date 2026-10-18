@@ -31,7 +31,7 @@ function setupZip(files: Record<string, unknown[]>) {
   );
 
   mockParseCsvText.mockImplementation((text: string) =>
-    Promise.resolve(files[text] ?? [])
+    Promise.resolve(files[text] ?? []),
   );
 }
 
@@ -42,15 +42,15 @@ describe('LetterboxdParser', () => {
     });
 
     it('rejects non-zip files', () => {
-      expect(
-        LetterboxdParser.canParse([new File([''], 'data.csv')]),
-      ).toBe(false);
+      expect(LetterboxdParser.canParse([new File([''], 'data.csv')])).toBe(
+        false,
+      );
     });
 
     it('rejects multiple files', () => {
-      expect(
-        LetterboxdParser.canParse([makeZipFile(), makeZipFile()]),
-      ).toBe(false);
+      expect(LetterboxdParser.canParse([makeZipFile(), makeZipFile()])).toBe(
+        false,
+      );
     });
   });
 
@@ -163,9 +163,7 @@ describe('LetterboxdParser', () => {
         'diary.csv': [],
         'watched.csv': [],
         'ratings.csv': [],
-        'watchlist.csv': [
-          { Name: 'Dune', Year: '2021' },
-        ],
+        'watchlist.csv': [{ Name: 'Dune', Year: '2021' }],
       });
 
       const result = await LetterboxdParser.parse([makeZipFile()]);

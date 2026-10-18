@@ -41,7 +41,7 @@ describe('mutationBridge', () => {
     );
 
     const statuses = collect<string>((push) =>
-      bridge.result$.subscribe(({ status }) => push(status))
+      bridge.result$.subscribe(({ status }) => push(status)),
     );
 
     expect(statuses).to.deep.equal(['idle']);
@@ -72,7 +72,7 @@ describe('mutationBridge', () => {
     );
 
     const statuses = collect<string>((push) =>
-      bridge.result$.subscribe(({ status }) => push(status))
+      bridge.result$.subscribe(({ status }) => push(status)),
     );
 
     await expect(bridge.mutate({ value: 'boom' })).rejects.toThrow('nope');
@@ -95,7 +95,7 @@ describe('mutationBridge', () => {
     );
 
     const pending = collect<boolean>((push) =>
-      bridge.result$.subscribe(({ isPending }) => push(isPending))
+      bridge.result$.subscribe(({ isPending }) => push(isPending)),
     );
 
     const mutated = bridge.mutate({ value: 'done' });

@@ -19,11 +19,10 @@ export const AnticipatedMovieSchema = MovieEntrySchema.extend({
 });
 export type AnticipatedMovie = z.infer<typeof AnticipatedMovieSchema>;
 
-type MovieAnticipatedParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & SearchParams;
+type MovieAnticipatedParams = PaginationParams &
+  ApiParams &
+  FilterParams &
+  SearchParams;
 
 export function mapToAnticipatedMovie({
   list_count,
@@ -35,21 +34,24 @@ export function mapToAnticipatedMovie({
   };
 }
 
-export const movieAnticipatedRequest = (
-  { fetch, limit, page, filter, theme, search }: MovieAnticipatedParams,
-) => {
-  return api({ fetch })
-    .movies
-    .anticipated({
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        theme,
-        ...filter,
-        ...search,
-      },
-    });
+export const movieAnticipatedRequest = ({
+  fetch,
+  limit,
+  page,
+  filter,
+  theme,
+  search,
+}: MovieAnticipatedParams) => {
+  return api({ fetch }).movies.anticipated({
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      theme,
+      ...filter,
+      ...search,
+    },
+  });
 };
 
 export const movieAnticipatedQuery = defineInfiniteQuery({
@@ -58,9 +60,7 @@ export const movieAnticipatedQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (
-    params,
-  ) => [
+  dependencies: (params) => [
     params.limit,
     params.page,
     ...getGlobalFilterDependencies(params.filter),

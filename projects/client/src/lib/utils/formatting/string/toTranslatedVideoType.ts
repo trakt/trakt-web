@@ -14,11 +14,12 @@ const VIDEO_TYPE_MAP = {
 } as const;
 
 export function toTranslatedVideoType(
-  videoType: string | (keyof typeof VIDEO_TYPE_MAP),
+  videoType: string | keyof typeof VIDEO_TYPE_MAP,
   data?: Record<string, unknown>,
 ): string {
-  const translationFn = VIDEO_TYPE_MAP[
-    normalizeTranslationKey(videoType) as keyof typeof VIDEO_TYPE_MAP
-  ];
+  const translationFn =
+    VIDEO_TYPE_MAP[
+      normalizeTranslationKey(videoType) as keyof typeof VIDEO_TYPE_MAP
+    ];
   return translationFn?.(data) ?? videoType;
 }

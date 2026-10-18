@@ -7,31 +7,31 @@ import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import type { FilterParams } from '../../models/FilterParams.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
-export type CalendarMoviesParams =
-  & {
-    startDate: string;
-    days: number;
-    target?: 'my' | 'all';
-  }
-  & ApiParams
-  & FilterParams;
+export type CalendarMoviesParams = {
+  startDate: string;
+  days: number;
+  target?: 'my' | 'all';
+} & ApiParams &
+  FilterParams;
 
-export const upcomingMoviesRequest = (
-  { fetch, startDate, days, filter, target = 'my' }: CalendarMoviesParams,
-) => {
-  return api({ fetch })
-    .calendars
-    .movies({
-      query: {
-        extended: 'full,images',
-        ...filter,
-      },
-      params: {
-        target,
-        start_date: startDate,
-        days,
-      },
-    });
+export const upcomingMoviesRequest = ({
+  fetch,
+  startDate,
+  days,
+  filter,
+  target = 'my',
+}: CalendarMoviesParams) => {
+  return api({ fetch }).calendars.movies({
+    query: {
+      extended: 'full,images',
+      ...filter,
+    },
+    params: {
+      target,
+      start_date: startDate,
+      days,
+    },
+  });
 };
 
 export const upcomingMoviesQuery = defineQuery({
@@ -40,9 +40,7 @@ export const upcomingMoviesQuery = defineQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (
-    params,
-  ) => [
+  dependencies: (params) => [
     params.target,
     params.startDate,
     params.days,

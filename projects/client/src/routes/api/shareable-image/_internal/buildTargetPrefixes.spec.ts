@@ -16,8 +16,9 @@ describe('util: buildTargetPrefixes', () => {
   it('should scope every prefix under the share root', () => {
     const prefixes = buildTargetPrefixes();
 
-    expect(prefixes.every((prefix) => prefix.startsWith('images/share/')))
-      .toBe(true);
+    expect(prefixes.every((prefix) => prefix.startsWith('images/share/'))).toBe(
+      true,
+    );
   });
 
   it('should end every prefix with a separator so it cannot match sibling keys', () => {

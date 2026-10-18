@@ -9,8 +9,9 @@ describe('util: reelPosters', () => {
   });
 
   it('should pad missing posters with null', () => {
-    expect(reelPosters(YirDetailMappedMock).filter((url) => url === null))
-      .toHaveLength(5);
+    expect(
+      reelPosters(YirDetailMappedMock).filter((url) => url === null),
+    ).toHaveLength(5);
   });
 
   it('should order posters by plays', () => {

@@ -12,5 +12,8 @@ export function warmPoster({ posterUrl, fetch }: WarmPosterProps) {
 
   return fetch(posterUrl)
     .then((response) => response.arrayBuffer())
-    .then(() => undefined, () => undefined);
+    .then(
+      () => undefined,
+      () => undefined,
+    );
 }

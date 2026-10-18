@@ -13,9 +13,11 @@ type ShowSoundtrackParams = {
   locale: AvailableLocale;
 } & ApiParams;
 
-const showSoundtrackRequest = async (
-  { fetch, slug, locale }: ShowSoundtrackParams,
-) => {
+const showSoundtrackRequest = async ({
+  fetch,
+  slug,
+  locale,
+}: ShowSoundtrackParams) => {
   const response = await rawApiFetch({
     fetch,
     path: toMediaInfoPath({ type: 'show', slug, locale, ...SOUNDTRACK_INFO }),

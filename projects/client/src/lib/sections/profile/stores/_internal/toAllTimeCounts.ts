@@ -28,8 +28,8 @@ export function toAllTimeCounts(stats: UserStats | Nil): AllTimeStatsDetails {
     movieCount: movies.watched,
     showCount: shows.watched,
     episodeCount: episodes.watched,
-    commentCount: movies.comments + shows.comments + seasons.comments +
-      episodes.comments,
+    commentCount:
+      movies.comments + shows.comments + seasons.comments + episodes.comments,
     ratingCount: ratings.total,
     listCount: stats.lists,
     startedCount: progress?.started ?? null,

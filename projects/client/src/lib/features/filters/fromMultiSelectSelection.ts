@@ -1,9 +1,10 @@
 import type { MultiSelectSelection } from '$lib/components/select/models/MultiSelectSelection.ts';
 import { EXCLUSION_PREFIX } from './exclusionPrefix.ts';
 
-export function fromMultiSelectSelection(
-  { included, excluded }: MultiSelectSelection,
-): string | null {
+export function fromMultiSelectSelection({
+  included,
+  excluded,
+}: MultiSelectSelection): string | null {
   const tokens = [
     ...included,
     ...excluded.map((value) => `${EXCLUSION_PREFIX}${value}`),

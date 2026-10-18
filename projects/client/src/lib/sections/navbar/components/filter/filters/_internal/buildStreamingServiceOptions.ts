@@ -58,35 +58,33 @@ function toBrandKey(source: string): string {
 function toBrandOptions(
   services: ReadonlyArray<StreamingSource>,
 ): StreamingBrandOption[] {
-  const grouped = sortStreamingServices(services).reduce(
-    (acc, service) => {
-      const key = toBrandKey(service.source);
-      const current = acc.get(key);
+  const grouped = sortStreamingServices(services).reduce((acc, service) => {
+    const key = toBrandKey(service.source);
+    const current = acc.get(key);
 
-      if (current) {
-        acc.set(key, {
-          ...current,
-          source: current.hasLogo || service.logoUrl == null
+    if (current) {
+      acc.set(key, {
+        ...current,
+        source:
+          current.hasLogo || service.logoUrl == null
             ? current.source
             : service.source,
-          slugs: [...current.slugs, service.source],
-          hasLogo: current.hasLogo || service.logoUrl != null,
-        });
-        return acc;
-      }
-
-      acc.set(key, {
-        key,
-        name: service.name,
-        source: service.source,
-        color: service.color ?? undefined,
-        slugs: [service.source],
-        hasLogo: service.logoUrl != null,
+        slugs: [...current.slugs, service.source],
+        hasLogo: current.hasLogo || service.logoUrl != null,
       });
       return acc;
-    },
-    new Map<string, StreamingBrandOption>(),
-  );
+    }
+
+    acc.set(key, {
+      key,
+      name: service.name,
+      source: service.source,
+      color: service.color ?? undefined,
+      slugs: [service.source],
+      hasLogo: service.logoUrl != null,
+    });
+    return acc;
+  }, new Map<string, StreamingBrandOption>());
 
   return [...grouped.values()];
 }

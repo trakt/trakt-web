@@ -65,10 +65,12 @@ export const handle: Handle = async ({ event, resolve }) => {
   // locale-blind cache key, so a localized render would be served to every
   // subsequent visitor on that URL. Pin bots to the default locale to keep
   // cached HTML neutral.
-  const isCacheableBot = event.locals.isLegitimateBot ||
+  const isCacheableBot =
+    event.locals.isLegitimateBot ||
     isBotAgent(event.request.headers.get('user-agent'));
 
-  const requestedLocale = event.cookies.get(LOCALE_COOKIE_NAME) ??
+  const requestedLocale =
+    event.cookies.get(LOCALE_COOKIE_NAME) ??
     getPreferredLocale(event.request.headers);
   const locale = setLocale(isCacheableBot ? defaultLocale : requestedLocale);
   const direction = getTextDirection(locale);
@@ -81,5 +83,6 @@ export const handle: Handle = async ({ event, resolve }) => {
           .replace(LANG_PLACEHOLDER, locale)
           .replace(DIR_PLACEHOLDER, direction);
       },
-    }));
+    }),
+  );
 };

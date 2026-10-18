@@ -26,9 +26,7 @@ describe('util: loadPosterImages', () => {
     expect(rest).toEqual([]);
     expect(image?.src).toBe(POSTER_URL);
     expect([...new Uint8Array(image?.data as ArrayBuffer)]).toEqual([
-      255,
-      216,
-      255,
+      255, 216, 255,
     ]);
   });
 

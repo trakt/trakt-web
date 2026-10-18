@@ -17,9 +17,11 @@ type BuildWatchUntilHereMediaProps = {
   timestamps: ReadonlyArray<WatchUntilTimestamp>;
 };
 
-export function buildWatchUntilHereMedia(
-  { showId, showReleaseDate, timestamps }: BuildWatchUntilHereMediaProps,
-): WatchUntilHereMedia {
+export function buildWatchUntilHereMedia({
+  showId,
+  showReleaseDate,
+  timestamps,
+}: BuildWatchUntilHereMediaProps): WatchUntilHereMedia {
   const seasons = new Map<number, SeasonEpisodes>();
 
   for (const { episode, watchedAt } of timestamps) {
@@ -37,8 +39,8 @@ export function buildWatchUntilHereMedia(
   return {
     id: showId,
     effectiveReleaseDate: showReleaseDate,
-    seasons: Array.from(seasons.values()).toSorted((a, b) =>
-      a.number - b.number
+    seasons: Array.from(seasons.values()).toSorted(
+      (a, b) => a.number - b.number,
     ),
   };
 }

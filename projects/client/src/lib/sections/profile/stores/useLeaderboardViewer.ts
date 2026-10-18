@@ -21,9 +21,12 @@ export function useLeaderboardViewer() {
 
   const viewer = combineLatest([user, isAuthorized, history, ratings]).pipe(
     map(
-      (
-        [currentUser, authorized, userHistory, userRatings],
-      ): LeaderboardViewer | null => {
+      ([
+        currentUser,
+        authorized,
+        userHistory,
+        userRatings,
+      ]): LeaderboardViewer | null => {
         if (!authorized || !currentUser || currentUser.isVip) {
           return null;
         }

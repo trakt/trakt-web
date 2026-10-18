@@ -22,9 +22,9 @@ function countRatingsSince(
   const inRange = (entries: UserRatings['movies']) =>
     [...entries.values()].filter((entry) => entry.ratedAt >= since).length;
 
-  return inRange(ratings.movies) +
-    inRange(ratings.shows) +
-    inRange(ratings.episodes);
+  return (
+    inRange(ratings.movies) + inRange(ratings.shows) + inRange(ratings.episodes)
+  );
 }
 
 export function useMonthToDate({ slug }: UseMonthToDateProps) {
@@ -52,15 +52,14 @@ export function useMonthToDate({ slug }: UseMonthToDateProps) {
 
   return {
     monthToDate: combineLatest([movies, shows, ratings, isMe]).pipe(
-      map(
-        ([$movies, $shows, $ratings, $isMe]) =>
-          mapToMonthToDateDetails({
-            movies: $movies,
-            episodes: $shows,
-            ratingCount: $isMe
-              ? countRatingsSince($ratings, monthStart)
-              : undefined,
-          }),
+      map(([$movies, $shows, $ratings, $isMe]) =>
+        mapToMonthToDateDetails({
+          movies: $movies,
+          episodes: $shows,
+          ratingCount: $isMe
+            ? countRatingsSince($ratings, monthStart)
+            : undefined,
+        }),
       ),
     ),
     isLoading: combineLatest([isLoadingMovies, isLoadingShows]).pipe(

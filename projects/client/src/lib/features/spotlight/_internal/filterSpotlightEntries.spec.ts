@@ -55,20 +55,23 @@ describe('util: filterSpotlightEntries', () => {
       {
         id: 'movies',
         url: '/movies',
-        label: () => locale === 'en' ? 'Movies' : 'Films',
-        keywords: [() => locale === 'en' ? 'cinema' : 'bioscoop'],
+        label: () => (locale === 'en' ? 'Movies' : 'Films'),
+        keywords: [() => (locale === 'en' ? 'cinema' : 'bioscoop')],
       },
     ];
 
-    expect(filterSpotlightEntries(translated, 'films').map((r) => r.id))
-      .toEqual([]);
+    expect(
+      filterSpotlightEntries(translated, 'films').map((r) => r.id),
+    ).toEqual([]);
 
     locale = 'nl';
 
-    expect(filterSpotlightEntries(translated, 'films').map((r) => r.id))
-      .toEqual(['movies']);
-    expect(filterSpotlightEntries(translated, 'bioscoop').map((r) => r.id))
-      .toEqual(['movies']);
+    expect(
+      filterSpotlightEntries(translated, 'films').map((r) => r.id),
+    ).toEqual(['movies']);
+    expect(
+      filterSpotlightEntries(translated, 'bioscoop').map((r) => r.id),
+    ).toEqual(['movies']);
   });
 
   it('should rank label prefix matches ahead of keyword matches', () => {

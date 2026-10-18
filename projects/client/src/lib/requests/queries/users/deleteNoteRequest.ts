@@ -9,9 +9,11 @@ type DeleteNoteParams = {
   };
 } & ApiParams;
 
-export async function deleteNoteRequest(
-  { fetch, id, body }: DeleteNoteParams,
-): Promise<boolean> {
+export async function deleteNoteRequest({
+  fetch,
+  id,
+  body,
+}: DeleteNoteParams): Promise<boolean> {
   const response = await rawApiFetch({
     fetch,
     path: `/v3/users/me/notes/${id}`,

@@ -17,7 +17,7 @@ describe('util: toActivityRanges', () => {
     ranges.forEach((range) =>
       expect(range.end.getTime() - range.start.getTime()).toBeLessThanOrEqual(
         DAY,
-      )
+      ),
     );
   });
 

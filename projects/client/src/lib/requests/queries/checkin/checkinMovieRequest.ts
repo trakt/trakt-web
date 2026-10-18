@@ -5,12 +5,12 @@ type CheckinMovieParams = {
   body: MovieCheckinRequest;
 } & ApiParams;
 
-export function checkinMovieRequest(
-  { body, fetch }: CheckinMovieParams,
-): Promise<boolean> {
+export function checkinMovieRequest({
+  body,
+  fetch,
+}: CheckinMovieParams): Promise<boolean> {
   return api({ fetch })
-    .checkin
-    .start({
+    .checkin.start({
       body,
     })
     .then(({ status }) => status === 201);

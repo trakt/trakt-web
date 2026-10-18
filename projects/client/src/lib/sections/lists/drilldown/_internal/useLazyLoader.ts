@@ -36,9 +36,8 @@ export function useLazyLoader({ loadMore, parent }: UseLazyLoaderProps) {
     };
   }
 
-  const { observedDimension, observeDimension } = useDimensionObserver(
-    'height',
-  );
+  const { observedDimension, observeDimension } =
+    useDimensionObserver('height');
 
   function loadMoreOnScroll() {
     if (!isScrolledFarEnough(parent)) {
@@ -83,14 +82,12 @@ export function useLazyLoader({ loadMore, parent }: UseLazyLoaderProps) {
       };
     }
 
-    const subscription = observedDimension.subscribe(
-      (dimension) => {
-        if (dimension === 0) {
-          return;
-        }
-        loadOnResize.schedule();
-      },
-    );
+    const subscription = observedDimension.subscribe((dimension) => {
+      if (dimension === 0) {
+        return;
+      }
+      loadOnResize.schedule();
+    });
 
     const unregister = registerEvents();
 

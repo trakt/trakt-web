@@ -29,9 +29,9 @@ export function safeMarkdownExtension(): MarkedExtension {
 
         if (!href) return content;
 
-        return `<a href="${href}"${
-          toTitleAttribute(token.title)
-        }>${content}</a>`;
+        return `<a href="${href}"${toTitleAttribute(
+          token.title,
+        )}>${content}</a>`;
       },
       image(token: Tokens.Image) {
         const alt = escapeHtml(token.text);
@@ -39,9 +39,9 @@ export function safeMarkdownExtension(): MarkedExtension {
 
         if (!src) return alt;
 
-        return `<img src="${src}" alt="${alt}"${
-          toTitleAttribute(token.title)
-        }>`;
+        return `<img src="${src}" alt="${alt}"${toTitleAttribute(
+          token.title,
+        )}>`;
       },
       text(token: Tokens.Text | Tokens.Escape) {
         if ('escaped' in token && token.escaped) return escapeHtml(token.text);

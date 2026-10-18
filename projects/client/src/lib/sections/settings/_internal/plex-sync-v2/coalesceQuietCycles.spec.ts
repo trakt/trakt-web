@@ -42,8 +42,11 @@ describe('coalesceQuietCycles', () => {
       cycle(6),
     ]);
 
-    expect(merged.map(({ id, quietCount }) => [id, quietCount])).to.deep
-      .equal([[9, 1], [8, 1], [7, 2]]);
+    expect(merged.map(({ id, quietCount }) => [id, quietCount])).to.deep.equal([
+      [9, 1],
+      [8, 1],
+      [7, 2],
+    ]);
   });
 
   it('never folds failed syncs or library checks', () => {

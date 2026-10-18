@@ -8,16 +8,12 @@ type ShowStudiosParams = {
   slug: string;
 } & ApiParams;
 
-const showStudiosRequest = (
-  { fetch, slug }: ShowStudiosParams,
-) =>
-  api({ fetch })
-    .shows
-    .studios({
-      params: {
-        id: slug,
-      },
-    });
+const showStudiosRequest = ({ fetch, slug }: ShowStudiosParams) =>
+  api({ fetch }).shows.studios({
+    params: {
+      id: slug,
+    },
+  });
 
 export const showStudiosQuery = defineQuery({
   key: 'showStudios',

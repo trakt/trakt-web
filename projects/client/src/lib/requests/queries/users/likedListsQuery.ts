@@ -12,19 +12,15 @@ import type { PaginationParams } from '../../models/PaginationParams.ts';
 type PersonalListsParams = ApiParams & PaginationParams;
 
 // FIXME: add support for non 'me' users
-const likedListsRequest = (
-  { fetch, page, limit }: PersonalListsParams,
-) =>
-  api({ fetch })
-    .users
-    .likes({
-      params: { id: 'me', type: 'lists' },
-      query: {
-        extended: 'full,images',
-        page,
-        limit,
-      },
-    });
+const likedListsRequest = ({ fetch, page, limit }: PersonalListsParams) =>
+  api({ fetch }).users.likes({
+    params: { id: 'me', type: 'lists' },
+    query: {
+      extended: 'full,images',
+      page,
+      limit,
+    },
+  });
 
 export const likedListsQuery = defineInfiniteQuery({
   key: 'likedLists',

@@ -38,14 +38,11 @@ describe('createSafeMarked', () => {
     ];
 
     payloads.forEach((payload) => {
-      it(
-        `should build no dangerous element for ${JSON.stringify(payload)}`,
-        () => {
-          const container = toDom(renderComment(payload));
+      it(`should build no dangerous element for ${JSON.stringify(payload)}`, () => {
+        const container = toDom(renderComment(payload));
 
-          expect(container.querySelector(DANGEROUS_ELEMENTS)).toBeNull();
-        },
-      );
+        expect(container.querySelector(DANGEROUS_ELEMENTS)).toBeNull();
+      });
 
       it(`should build no event handler for ${JSON.stringify(payload)}`, () => {
         const container = toDom(renderComment(payload));
@@ -61,13 +58,15 @@ describe('createSafeMarked', () => {
     });
 
     it('should not lose the content of a block level tag', () => {
-      expect(toDom(renderComment('<div>my entire review</div>')).textContent)
-        .toContain('my entire review');
+      expect(
+        toDom(renderComment('<div>my entire review</div>')).textContent,
+      ).toContain('my entire review');
     });
 
     it('should not leave a raw html comment in the output', () => {
-      expect(renderComment('<!-- <img src=x onerror=alert(1)> -->'))
-        .not.toContain('<!--');
+      expect(
+        renderComment('<!-- <img src=x onerror=alert(1)> -->'),
+      ).not.toContain('<!--');
     });
   });
 
@@ -91,15 +90,12 @@ describe('createSafeMarked', () => {
         expect(container.textContent).toContain('click');
       });
 
-      it(
-        `should resolve no unsafe protocol for ${JSON.stringify(payload)}`,
-        () => {
-          const container = toDom(renderComment(payload));
-          const anchors = Array.from(container.querySelectorAll('a'));
+      it(`should resolve no unsafe protocol for ${JSON.stringify(payload)}`, () => {
+        const container = toDom(renderComment(payload));
+        const anchors = Array.from(container.querySelectorAll('a'));
 
-          expect(anchors.map((anchor) => anchor.protocol)).toEqual([]);
-        },
-      );
+        expect(anchors.map((anchor) => anchor.protocol)).toEqual([]);
+      });
     });
 
     it('should build no image for an unsafe source', () => {
@@ -136,8 +132,9 @@ describe('createSafeMarked', () => {
     });
 
     it('should escape an ampersand in an image source', () => {
-      const image = toDom(renderComment('![alt](/i.png?a=1&b=2)'))
-        .querySelector('img');
+      const image = toDom(
+        renderComment('![alt](/i.png?a=1&b=2)'),
+      ).querySelector('img');
 
       expect(image).toHaveAttribute('src', '/i.png?a=1&b=2');
     });
@@ -171,8 +168,9 @@ describe('createSafeMarked', () => {
     });
 
     it('should render an https link', () => {
-      expect(toDom(renderComment('[ok](https://trakt.tv)')).querySelector('a'))
-        .toHaveAttribute('href', 'https://trakt.tv');
+      expect(
+        toDom(renderComment('[ok](https://trakt.tv)')).querySelector('a'),
+      ).toHaveAttribute('href', 'https://trakt.tv');
     });
 
     it('should render a relative link', () => {
@@ -182,8 +180,9 @@ describe('createSafeMarked', () => {
     });
 
     it('should render a fragment link', () => {
-      expect(toDom(renderComment('[ok](#section)')).querySelector('a'))
-        .toHaveAttribute('href', '#section');
+      expect(
+        toDom(renderComment('[ok](#section)')).querySelector('a'),
+      ).toHaveAttribute('href', '#section');
     });
 
     it('should render a mailto link', () => {
@@ -195,8 +194,9 @@ describe('createSafeMarked', () => {
     });
 
     it('should render an autolink', () => {
-      expect(toDom(renderComment('<https://trakt.tv>')).querySelector('a'))
-        .toHaveAttribute('href', 'https://trakt.tv');
+      expect(
+        toDom(renderComment('<https://trakt.tv>')).querySelector('a'),
+      ).toHaveAttribute('href', 'https://trakt.tv');
     });
 
     it('should preserve query parameters', () => {

@@ -34,7 +34,5 @@ export function getActiveSlotKey(
     }
   }
 
-  return (
-    history.find((slot) => isSlotInRange(slot))?.key ?? null
-  );
+  return history.find((slot) => isSlotInRange(slot))?.key ?? null;
 }

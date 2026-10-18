@@ -5,15 +5,9 @@ import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts'
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { activityHistoryQuery } from '$lib/requests/queries/users/activityHistoryQuery.ts';
-import {
-  episodeActivityHistoryQuery,
-} from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
-import {
-  movieActivityHistoryQuery,
-} from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
-import {
-  showActivityHistoryQuery,
-} from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
+import { episodeActivityHistoryQuery } from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
+import { movieActivityHistoryQuery } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
+import { showActivityHistoryQuery } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { map } from 'rxjs';
@@ -31,19 +25,15 @@ type MediaHistory = {
   type: 'media';
 };
 
-type RecentlyWatchedListStoreProps =
-  & {
-    limit?: number;
-    slug?: string;
-    page?: number;
-    syncId?: number;
-  }
-  & FilterParams
-  & (SpecificHistory | MediaHistory);
+type RecentlyWatchedListStoreProps = {
+  limit?: number;
+  slug?: string;
+  page?: number;
+  syncId?: number;
+} & FilterParams &
+  (SpecificHistory | MediaHistory);
 
-function typeToQuery(
-  props: RecentlyWatchedListStoreProps,
-) {
+function typeToQuery(props: RecentlyWatchedListStoreProps) {
   const params = {
     limit: props.limit ?? DEFAULT_PAGE_SIZE,
     slug: props.slug ?? 'me',
@@ -57,36 +47,28 @@ function typeToQuery(
       return movieActivityHistoryQuery({
         ...params,
         id: props.id,
-      }) as InfiniteQuery<
-        HistoryEntry
-      >;
+      }) as InfiniteQuery<HistoryEntry>;
     case 'episode':
       return episodeActivityHistoryQuery({
         ...params,
         id: props.id,
-      }) as InfiniteQuery<
-        HistoryEntry
-      >;
+      }) as InfiniteQuery<HistoryEntry>;
     case 'show':
       return showActivityHistoryQuery({
         ...params,
         id: props.id,
-      }) as InfiniteQuery<
-        HistoryEntry
-      >;
+      }) as InfiniteQuery<HistoryEntry>;
     default:
-      return activityHistoryQuery(params) as InfiniteQuery<
-        HistoryEntry
-      >;
+      return activityHistoryQuery(params) as InfiniteQuery<HistoryEntry>;
   }
 }
 
-export function useRecentlyWatchedList(
-  params: RecentlyWatchedListStoreProps,
-) {
-  const { list, isLoading: baseLoading, ...rest } = usePaginatedListQuery(
-    typeToQuery(params),
-  );
+export function useRecentlyWatchedList(params: RecentlyWatchedListStoreProps) {
+  const {
+    list,
+    isLoading: baseLoading,
+    ...rest
+  } = usePaginatedListQuery(typeToQuery(params));
 
   const overlay = createBulkIntlOverlay<HistoryEntry>({
     getTargets: activityEntryTargets,
@@ -94,9 +76,7 @@ export function useRecentlyWatchedList(
 
   const localized = list.pipe(overlay.operator);
 
-  const periods = localized.pipe(
-    map((items) => mapToCalendarPeriods(items)),
-  );
+  const periods = localized.pipe(map((items) => mapToCalendarPeriods(items)));
 
   return {
     list: localized,

@@ -15,9 +15,10 @@ function writeIfChanged(file: string, content: string) {
   fs.writeFileSync(file, content);
 }
 
-export function prepareTestI18nProject(
-  { i18nDir, testDir }: PrepareTestI18nProjectParams,
-): string {
+export function prepareTestI18nProject({
+  i18nDir,
+  testDir,
+}: PrepareTestI18nProjectParams): string {
   const settingsFile = path.join(i18nDir, 'project.inlang', 'settings.json');
   const settings = fs.readFileSync(settingsFile, 'utf8');
   const { baseLocale } = JSON.parse(settings);

@@ -19,9 +19,9 @@ describe('util: toSwipeGuess', () => {
   });
 
   it('should ignore a swipe without a start or an end', () => {
-    expect(toSwipeGuess({ startY: null, endY: 100, threshold: 40 }))
-      .toBeNull();
-    expect(toSwipeGuess({ startY: 100, endY: undefined, threshold: 40 }))
-      .toBeNull();
+    expect(toSwipeGuess({ startY: null, endY: 100, threshold: 40 })).toBeNull();
+    expect(
+      toSwipeGuess({ startY: 100, endY: undefined, threshold: 40 }),
+    ).toBeNull();
   });
 });

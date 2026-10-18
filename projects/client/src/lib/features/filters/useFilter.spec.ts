@@ -29,7 +29,8 @@ async function setup(isVip = true) {
           vip_ep: false,
           director: false,
         },
-      })),
+      }),
+    ),
   );
   const stores = await renderStore(() => {
     const parameters = useParameters();

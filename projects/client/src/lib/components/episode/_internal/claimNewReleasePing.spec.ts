@@ -24,8 +24,9 @@ describe('util: claimNewReleasePing', () => {
   it('should not ping the same episode twice', () => {
     const storage = memoryStorage();
     claimNewReleasePing({ key: 'ep-1', storage, now: NOW });
-    expect(claimNewReleasePing({ key: 'ep-1', storage, now: NOW + 1000 }))
-      .toBe(false);
+    expect(claimNewReleasePing({ key: 'ep-1', storage, now: NOW + 1000 })).toBe(
+      false,
+    );
   });
 
   it('should forget pings older than a week', () => {

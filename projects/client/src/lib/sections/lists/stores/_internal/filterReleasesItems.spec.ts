@@ -58,10 +58,7 @@ describe('filterReleasesItems', () => {
       now: releaseDate(2),
     });
 
-    expect(result).to.deep.equal([
-      todayMovie,
-      firstShowEpisode,
-    ]);
+    expect(result).to.deep.equal([todayMovie, firstShowEpisode]);
   });
 
   it('should return no items when the limit is not positive', () => {

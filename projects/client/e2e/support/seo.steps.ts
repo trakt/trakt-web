@@ -45,8 +45,10 @@ Then(
     );
 
     const description = await metaContent(page, 'meta[name="description"]');
-    expect(description.length, 'description should not be empty')
-      .toBeGreaterThan(0);
+    expect(
+      description.length,
+      'description should not be empty',
+    ).toBeGreaterThan(0);
 
     const [ogTitle, ogDescription, ogImage, ogUrl, ogSiteName, ogLocale] =
       await Promise.all([
@@ -59,8 +61,10 @@ Then(
       ]);
 
     expect(ogTitle.length, 'og:title should not be empty').toBeGreaterThan(0);
-    expect(ogDescription.length, 'og:description should not be empty')
-      .toBeGreaterThan(0);
+    expect(
+      ogDescription.length,
+      'og:description should not be empty',
+    ).toBeGreaterThan(0);
     expect(ogImage.length, 'og:image should not be empty').toBeGreaterThan(0);
     expect(ogUrl, 'og:url should match canonical').toBe(canonical);
     expect(ogSiteName, 'og:site_name').toBe('Trakt Web');
@@ -85,14 +89,14 @@ Then(
     expect(twitterCard, 'twitter:card').toBe('summary_large_image');
     expect(twitterSite, 'twitter:site').toBe('@trakt');
     expect(twitterTitle, 'twitter:title should match og:title').toBe(ogTitle);
-    expect(twitterImage.length, 'twitter:image should not be empty')
-      .toBeGreaterThan(0);
+    expect(
+      twitterImage.length,
+      'twitter:image should not be empty',
+    ).toBeGreaterThan(0);
     expect(
       twitterDescription,
       'twitter:description should match og:description',
-    ).toBe(
-      ogDescription,
-    );
+    ).toBe(ogDescription);
   },
 );
 
@@ -166,7 +170,7 @@ Then(
   async function (this: TraktWorld) {
     const titleEl = this.page.getByTestId('summary-media-title');
     await expect(titleEl).toBeVisible();
-    const visibleTitle = (await titleEl.textContent() ?? '').trim();
+    const visibleTitle = ((await titleEl.textContent()) ?? '').trim();
 
     await expect(
       metaLocator(this.page, 'meta[property="og:title"]'),
@@ -216,14 +220,18 @@ Then(
 Then(
   'the JSON-LD should include a search action',
   async function (this: TraktWorld) {
-    await expect.poll(async () => {
-      const jsonLd = await getJsonLd(this.page);
-      const action = jsonLd['potentialAction'] as
-        | Record<string, unknown>
-        | undefined;
-      const target = action?.['target'] as Record<string, unknown> | undefined;
-      return String(target?.['urlTemplate'] ?? '');
-    }).toMatch(/search.*search_term_string/);
+    await expect
+      .poll(async () => {
+        const jsonLd = await getJsonLd(this.page);
+        const action = jsonLd['potentialAction'] as
+          | Record<string, unknown>
+          | undefined;
+        const target = action?.['target'] as
+          | Record<string, unknown>
+          | undefined;
+        return String(target?.['urlTemplate'] ?? '');
+      })
+      .toMatch(/search.*search_term_string/);
 
     const jsonLd = await getJsonLd(this.page);
     const action = jsonLd['potentialAction'] as
@@ -236,25 +244,29 @@ Then(
 Then(
   'the JSON-LD should include genre and year',
   async function (this: TraktWorld) {
-    await expect.poll(async () => {
-      const jsonLd = await getJsonLd(this.page);
-      const genres = jsonLd['genre'];
-      return Array.isArray(genres) ? genres.length : 0;
-    }).toBeGreaterThan(0);
+    await expect
+      .poll(async () => {
+        const jsonLd = await getJsonLd(this.page);
+        const genres = jsonLd['genre'];
+        return Array.isArray(genres) ? genres.length : 0;
+      })
+      .toBeGreaterThan(0);
 
-    await expect.poll(async () => {
-      const jsonLd = await getJsonLd(this.page);
-      return String(jsonLd['datePublished'] ?? '');
-    }).toMatch(/^\d{4}$/);
+    await expect
+      .poll(async () => {
+        const jsonLd = await getJsonLd(this.page);
+        return String(jsonLd['datePublished'] ?? '');
+      })
+      .toMatch(/^\d{4}$/);
   },
 );
 
 Then(
   'the JSON-LD should be of type {string}',
   async function (this: TraktWorld, schemaType: string) {
-    await expect.poll(() =>
-      getJsonLd(this.page).then((jsonLd) => jsonLd['@type'])
-    ).toBe(schemaType);
+    await expect
+      .poll(() => getJsonLd(this.page).then((jsonLd) => jsonLd['@type']))
+      .toBe(schemaType);
 
     const jsonLd = await getJsonLd(this.page);
     expect(jsonLd['@context'], 'JSON-LD @context').toBe('https://schema.org');
@@ -269,9 +281,11 @@ Then(
         'content',
       )) ?? '';
 
-    await expect.poll(() =>
-      getJsonLd(this.page).then((jsonLd) => String(jsonLd['name'] ?? ''))
-    ).toBe(ogTitle);
+    await expect
+      .poll(() =>
+        getJsonLd(this.page).then((jsonLd) => String(jsonLd['name'] ?? '')),
+      )
+      .toBe(ogTitle);
   },
 );
 

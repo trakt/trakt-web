@@ -11,12 +11,13 @@ describe('store: useSaveList', () => {
     setAuthorization(true);
   });
 
-  const isInvalidated = (
-    { client, action }: {
-      client: ReturnType<typeof useQueryClient>;
-      action: string;
-    },
-  ) => client.getQueryState([action])?.isInvalidated;
+  const isInvalidated = ({
+    client,
+    action,
+  }: {
+    client: ReturnType<typeof useQueryClient>;
+    action: string;
+  }) => client.getQueryState([action])?.isInvalidated;
 
   const renderSeeded = (props: Parameters<typeof useSaveList>[0]) =>
     renderStore(() => {
@@ -47,7 +48,7 @@ describe('store: useSaveList', () => {
       );
 
       const { saveList } = await renderStore(() =>
-        useSaveList({ type: 'update', listId: 'some-list' })
+        useSaveList({ type: 'update', listId: 'some-list' }),
       );
 
       await saveList({
@@ -65,9 +66,8 @@ describe('store: useSaveList', () => {
 
     it('should invalidate the list-edited and listed caches after saving', async () => {
       server.use(
-        http.put(
-          'http://localhost/users/me/lists/some-list/',
-          () => HttpResponse.json({ ids: { slug: 'some-list' } }),
+        http.put('http://localhost/users/me/lists/some-list/', () =>
+          HttpResponse.json({ ids: { slug: 'some-list' } }),
         ),
       );
 
@@ -93,20 +93,17 @@ describe('store: useSaveList', () => {
       let requestBody: unknown;
 
       server.use(
-        http.post(
-          'http://localhost/users/me/lists',
-          async ({ request }) => {
-            requestBody = await request.json();
-            return HttpResponse.json(
-              { ids: { trakt: 1, slug: 'my-list' } },
-              { status: 201 },
-            );
-          },
-        ),
+        http.post('http://localhost/users/me/lists', async ({ request }) => {
+          requestBody = await request.json();
+          return HttpResponse.json(
+            { ids: { trakt: 1, slug: 'my-list' } },
+            { status: 201 },
+          );
+        }),
       );
 
       const { saveList } = await renderStore(() =>
-        useSaveList({ type: 'create' })
+        useSaveList({ type: 'create' }),
       );
 
       await saveList({
@@ -122,13 +119,11 @@ describe('store: useSaveList', () => {
 
     it('should invalidate the list-created cache after saving', async () => {
       server.use(
-        http.post(
-          'http://localhost/users/me/lists',
-          () =>
-            HttpResponse.json(
-              { ids: { trakt: 1, slug: 'my-list' } },
-              { status: 201 },
-            ),
+        http.post('http://localhost/users/me/lists', () =>
+          HttpResponse.json(
+            { ids: { trakt: 1, slug: 'my-list' } },
+            { status: 201 },
+          ),
         ),
       );
 

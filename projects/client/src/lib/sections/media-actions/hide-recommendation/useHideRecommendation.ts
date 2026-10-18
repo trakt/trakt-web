@@ -24,14 +24,16 @@ function typeToRequest(type: MediaType) {
 export function useHideRecommendation() {
   const { track } = useTrack(AnalyticsEvent.HideRecommendation);
 
-  const hiding = useMutation(defineMutation({
-    key: 'recommendation:hide',
-    request: ({ slug, type }: HideRecommendationParams) =>
-      typeToRequest(type)({ slug }),
-    invalidations: ({ variables }) => [
-      InvalidateAction.HideRecommended(variables.type),
-    ],
-  }));
+  const hiding = useMutation(
+    defineMutation({
+      key: 'recommendation:hide',
+      request: ({ slug, type }: HideRecommendationParams) =>
+        typeToRequest(type)({ slug }),
+      invalidations: ({ variables }) => [
+        InvalidateAction.HideRecommended(variables.type),
+      ],
+    }),
+  );
 
   const hide = async (params: HideRecommendationParams) => {
     track({ type: params.type });

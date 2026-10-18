@@ -10,7 +10,8 @@ import { webviewStorageKey } from './webviewStorageKey.ts';
 // Both paths yield the same value, so the first client render matches SSR. An
 // empty param normalises to undefined so `?slurm=` never counts as a value.
 export function readWebviewParam(param: WebviewParam): string | undefined {
-  const value = safeSessionStorage.getItem(webviewStorageKey(param)) ??
+  const value =
+    safeSessionStorage.getItem(webviewStorageKey(param)) ??
     page.url.searchParams.get(WEBVIEW_PARAMS[param]);
   return value ? value : undefined;
 }

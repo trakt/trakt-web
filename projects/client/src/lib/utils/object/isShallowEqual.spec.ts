@@ -17,8 +17,7 @@ describe('isShallowEqual', () => {
   it('should return false when key counts differ', () => {
     expect(
       isShallowEqual({ a: 1 }, { a: 1, b: 2 } as { a: number; b?: number }),
-    )
-      .toBe(false);
+    ).toBe(false);
   });
 
   it('should treat nested objects by reference identity', () => {

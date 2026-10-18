@@ -5,13 +5,12 @@ type RemoveFromWatchlistParams = {
   body: WatchlistRequest;
 } & ApiParams;
 
-export function removeFromWatchlistRequest(
-  { body, fetch }: RemoveFromWatchlistParams,
-): Promise<boolean> {
+export function removeFromWatchlistRequest({
+  body,
+  fetch,
+}: RemoveFromWatchlistParams): Promise<boolean> {
   return api({ fetch })
-    .sync
-    .watchlist
-    .remove({
+    .sync.watchlist.remove({
       body,
     })
     .then(({ status }) => {

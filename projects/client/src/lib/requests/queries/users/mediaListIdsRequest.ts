@@ -7,9 +7,11 @@ type MediaListIdsParams = {
   slug: string;
 } & ApiParams;
 
-export async function mediaListIdsRequest(
-  { fetch, type, slug }: MediaListIdsParams,
-): Promise<ListId[]> {
+export async function mediaListIdsRequest({
+  fetch,
+  type,
+  slug,
+}: MediaListIdsParams): Promise<ListId[]> {
   const { body } = await listIdsRequest({
     fetch,
     path: `/v3/${type}s/${slug}/me/lists`,

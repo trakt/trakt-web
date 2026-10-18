@@ -3,18 +3,18 @@ import { ShowSiloMinimalMappedMock } from '$mocks/data/summary/shows/silo/mapped
 
 export const AllListedShowsMappedMock: ListItem[] = [
   {
-    'entry': {
+    entry: {
       ...ShowSiloMinimalMappedMock,
-      'colors': undefined,
-      'episode': {
-        'count': 20,
+      colors: undefined,
+      episode: {
+        count: 20,
       },
     },
-    'id': 1234,
-    'key': 'show-1234',
-    'listedAt': new Date('2024-12-27T21:34:14.000Z'),
-    'notes': null,
-    'rank': 1,
-    'type': 'show',
+    id: 1234,
+    key: 'show-1234',
+    listedAt: new Date('2024-12-27T21:34:14.000Z'),
+    notes: null,
+    rank: 1,
+    type: 'show',
   },
 ];

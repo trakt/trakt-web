@@ -21,12 +21,13 @@ describe('addListCollaboratorRequest', () => {
 
   it('should report limit-reached on a 420', async () => {
     server.use(
-      http.post(
-        'http://localhost/lists/1/collaborators/harry',
-        () =>
-          HttpResponse.json({ error: 'Collaborator limit reached (10)' }, {
+      http.post('http://localhost/lists/1/collaborators/harry', () =>
+        HttpResponse.json(
+          { error: 'Collaborator limit reached (10)' },
+          {
             status: 420,
-          }),
+          },
+        ),
       ),
     );
 
@@ -37,12 +38,13 @@ describe('addListCollaboratorRequest', () => {
 
   it('should reject on an unexpected error response', async () => {
     server.use(
-      http.post(
-        'http://localhost/lists/1/collaborators/harry',
-        () =>
-          HttpResponse.json({ error: 'unable to add collaborator' }, {
+      http.post('http://localhost/lists/1/collaborators/harry', () =>
+        HttpResponse.json(
+          { error: 'unable to add collaborator' },
+          {
             status: 403,
-          }),
+          },
+        ),
       ),
     );
 

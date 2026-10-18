@@ -10,16 +10,11 @@ import { mapToDataSync } from './_internal/mapToDataSync.ts';
 
 type DataSyncsParams = PaginationParams & ApiParams;
 
-const dataSyncsRequest = (
-  { fetch, limit, page }: DataSyncsParams,
-) =>
-  api({ fetch })
-    .users
-    .syncs
-    .listByType({
-      params: { type: 'younify' },
-      query: { page, limit },
-    });
+const dataSyncsRequest = ({ fetch, limit, page }: DataSyncsParams) =>
+  api({ fetch }).users.syncs.listByType({
+    params: { type: 'younify' },
+    query: { page, limit },
+  });
 
 export const dataSyncsQuery = defineInfiniteQuery({
   key: 'dataSyncs',

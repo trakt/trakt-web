@@ -7,8 +7,9 @@ type MatchesDiscoverModeProps = {
   mode: DiscoverMode;
 };
 
-export function matchesDiscoverMode(
-  { mediaType, mode }: MatchesDiscoverModeProps,
-): boolean {
+export function matchesDiscoverMode({
+  mediaType,
+  mode,
+}: MatchesDiscoverModeProps): boolean {
   return mode === 'media' || toDiscoverMode(mediaType) === mode;
 }

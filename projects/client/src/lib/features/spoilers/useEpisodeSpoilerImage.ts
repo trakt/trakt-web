@@ -19,11 +19,13 @@ const SHOW_COVER_VARIANTS: readonly EpisodeCardProps['variant'][] = [
 export function useEpisodeSpoilerImage(props: SpoilerImageProps) {
   const { episode, show, variant } = props;
 
-  const isSpoilerHidden = props.isSpoilerHidden ?? useMediaSpoiler({
-    show,
-    media: episode,
-    type: 'episode',
-  }).isSpoilerHidden;
+  const isSpoilerHidden =
+    props.isSpoilerHidden ??
+    useMediaSpoiler({
+      show,
+      media: episode,
+      type: 'episode',
+    }).isSpoilerHidden;
 
   return isSpoilerHidden.pipe(
     map(($isSpoilerHidden) => {
@@ -38,7 +40,7 @@ export function useEpisodeSpoilerImage(props: SpoilerImageProps) {
         default:
           return $isSpoilerHidden
             ? show.cover.url.thumb
-            : episode.cover.url ?? show.cover.url.thumb;
+            : (episode.cover.url ?? show.cover.url.thumb);
       }
     }),
   );

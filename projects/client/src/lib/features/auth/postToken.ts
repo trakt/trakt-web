@@ -11,16 +11,15 @@ export function postToken({ value, expiresAt }: Token) {
     return inflight.promise;
   }
 
-  const promise = retry(
-    () =>
-      fetch('/api/store-token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          token: value,
-          expiresAt,
-        }),
+  const promise = retry(() =>
+    fetch('/api/store-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        token: value,
+        expiresAt,
       }),
+    }),
   )
     .catch(() => null)
     .finally(() => {

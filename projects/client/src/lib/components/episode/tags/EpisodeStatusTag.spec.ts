@@ -13,286 +13,232 @@ vi.mock('$lib/stores/useMarkAsWatched');
 
 describe('EpisodeStatusTag', () => {
   test('it renders the season finale tag', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodeFinaleType.season_finale,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodeFinaleType.season_finale,
       },
-    );
+    });
 
-    const tagLabel = screen.getByText(
-      EpisodeIntlProvider.finaleText(),
-    );
+    const tagLabel = screen.getByText(EpisodeIntlProvider.finaleText());
     expect(tagLabel).toBeInTheDocument();
   });
 
   test('it renders the series finale tag', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodeFinaleType.series_finale,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodeFinaleType.series_finale,
       },
-    );
+    });
 
-    const tagLabel = screen.getByText(
-      EpisodeIntlProvider.finaleText(),
-    );
+    const tagLabel = screen.getByText(EpisodeIntlProvider.finaleText());
     expect(tagLabel).toBeInTheDocument();
   });
 
   test('it renders the mid season finale tag', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodeFinaleType.mid_season_finale,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodeFinaleType.mid_season_finale,
       },
-    );
+    });
 
-    const tagLabel = screen.getByText(
-      EpisodeIntlProvider.finaleText(),
-    );
+    const tagLabel = screen.getByText(EpisodeIntlProvider.finaleText());
     expect(tagLabel).toBeInTheDocument();
   });
 
   test('it hides the mid season finale tag when not the latest aired', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodeFinaleType.mid_season_finale,
-          isLatestAired: false,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodeFinaleType.mid_season_finale,
+        isLatestAired: false,
       },
-    );
+    });
 
-    expect(screen.queryByText(EpisodeIntlProvider.finaleText()))
-      .not.toBeInTheDocument();
+    expect(
+      screen.queryByText(EpisodeIntlProvider.finaleText()),
+    ).not.toBeInTheDocument();
   });
 
   test('it hides the mid season premiere tag when not the latest aired', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodePremiereType.mid_season_premiere,
-          isLatestAired: false,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodePremiereType.mid_season_premiere,
+        isLatestAired: false,
       },
-    );
+    });
 
-    expect(screen.queryByText(EpisodeIntlProvider.premiereText()))
-      .not.toBeInTheDocument();
+    expect(
+      screen.queryByText(EpisodeIntlProvider.premiereText()),
+    ).not.toBeInTheDocument();
   });
 
   test('it renders the season premiere tag', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodePremiereType.season_premiere,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodePremiereType.season_premiere,
       },
-    );
+    });
 
-    const tagLabel = screen.getByText(
-      EpisodeIntlProvider.premiereText(),
-    );
+    const tagLabel = screen.getByText(EpisodeIntlProvider.premiereText());
     expect(tagLabel).toBeInTheDocument();
   });
 
   test('it renders the mid season premiere tag', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodePremiereType.mid_season_premiere,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodePremiereType.mid_season_premiere,
       },
-    );
+    });
 
-    const tagLabel = screen.getByText(
-      EpisodeIntlProvider.premiereText(),
-    );
+    const tagLabel = screen.getByText(EpisodeIntlProvider.premiereText());
     expect(tagLabel).toBeInTheDocument();
   });
 
   test('it renders the series premiere tag', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodePremiereType.series_premiere,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodePremiereType.series_premiere,
       },
-    );
+    });
 
-    const tagLabel = screen.getByText(
-      EpisodeIntlProvider.premiereText(),
-    );
+    const tagLabel = screen.getByText(EpisodeIntlProvider.premiereText());
     expect(tagLabel).toBeInTheDocument();
   });
 
   test('it renders the premiere tag for a coalesced multi-episode premiere day', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: 'multiple_episodes',
-          releaseDate: new Date(Date.now() + time.days(1)),
-          episodes: [
-            { type: EpisodePremiereType.season_premiere },
-            { type: 'standard' },
-          ],
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: 'multiple_episodes',
+        releaseDate: new Date(Date.now() + time.days(1)),
+        episodes: [
+          { type: EpisodePremiereType.season_premiere },
+          { type: 'standard' },
+        ],
       },
-    );
+    });
 
-    const tagLabel = screen.getByText(
-      EpisodeIntlProvider.premiereText(),
-    );
+    const tagLabel = screen.getByText(EpisodeIntlProvider.premiereText());
     expect(tagLabel).toBeInTheDocument();
   });
 
   test('it renders the premiere tag for a full season release', () => {
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: 'full_season',
-          episodes: [
-            { type: EpisodePremiereType.season_premiere },
-            { type: EpisodeFinaleType.season_finale },
-          ],
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: 'full_season',
+        episodes: [
+          { type: EpisodePremiereType.season_premiere },
+          { type: EpisodeFinaleType.season_finale },
+        ],
       },
-    );
+    });
 
-    const tagLabel = screen.getByText(
-      EpisodeIntlProvider.premiereText(),
-    );
+    const tagLabel = screen.getByText(EpisodeIntlProvider.premiereText());
     expect(tagLabel).toBeInTheDocument();
   });
 
   test('it renders the new tag when release date is within 7 days', () => {
     const threeDaysAgo = new Date(Date.now() - time.days(3));
 
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: 'standard',
-          releaseDate: threeDaysAgo,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: 'standard',
+        releaseDate: threeDaysAgo,
       },
-    );
+    });
 
-    const tagLabel = screen.getByText(
-      EpisodeIntlProvider.newText(),
-    );
+    const tagLabel = screen.getByText(EpisodeIntlProvider.newText());
     expect(tagLabel).toBeInTheDocument();
   });
 
   test('it renders a single combined new premiere tag', () => {
     const threeDaysAgo = new Date(Date.now() - time.days(3));
 
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodePremiereType.season_premiere,
-          releaseDate: threeDaysAgo,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodePremiereType.season_premiere,
+        releaseDate: threeDaysAgo,
       },
-    );
+    });
 
-    expect(screen.getByText(EpisodeIntlProvider.newPremiereText()))
-      .toBeInTheDocument();
-    expect(screen.queryByText(EpisodeIntlProvider.newText()))
-      .not.toBeInTheDocument();
-    expect(screen.queryByText(EpisodeIntlProvider.premiereText()))
-      .not.toBeInTheDocument();
+    expect(
+      screen.getByText(EpisodeIntlProvider.newPremiereText()),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(EpisodeIntlProvider.newText()),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(EpisodeIntlProvider.premiereText()),
+    ).not.toBeInTheDocument();
   });
 
   test('it renders a combined new premiere tag for a coalesced premiere day', () => {
     const threeDaysAgo = new Date(Date.now() - time.days(3));
 
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: 'multiple_episodes',
-          releaseDate: threeDaysAgo,
-          episodes: [
-            { type: EpisodePremiereType.season_premiere },
-            { type: 'standard' },
-          ],
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: 'multiple_episodes',
+        releaseDate: threeDaysAgo,
+        episodes: [
+          { type: EpisodePremiereType.season_premiere },
+          { type: 'standard' },
+        ],
       },
-    );
+    });
 
-    expect(screen.getByText(EpisodeIntlProvider.newPremiereText()))
-      .toBeInTheDocument();
-    expect(screen.queryByText(EpisodeIntlProvider.newText()))
-      .not.toBeInTheDocument();
-    expect(screen.queryByText(EpisodeIntlProvider.premiereText()))
-      .not.toBeInTheDocument();
+    expect(
+      screen.getByText(EpisodeIntlProvider.newPremiereText()),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(EpisodeIntlProvider.newText()),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(EpisodeIntlProvider.premiereText()),
+    ).not.toBeInTheDocument();
   });
 
   test('it keeps the new tag when the mid season gate drops the premiere', () => {
     const threeDaysAgo = new Date(Date.now() - time.days(3));
 
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: EpisodePremiereType.mid_season_premiere,
-          releaseDate: threeDaysAgo,
-          isLatestAired: false,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: EpisodePremiereType.mid_season_premiere,
+        releaseDate: threeDaysAgo,
+        isLatestAired: false,
       },
-    );
+    });
 
-    expect(screen.getByText(EpisodeIntlProvider.newText()))
-      .toBeInTheDocument();
-    expect(screen.queryByText(EpisodeIntlProvider.premiereText()))
-      .not.toBeInTheDocument();
+    expect(screen.getByText(EpisodeIntlProvider.newText())).toBeInTheDocument();
+    expect(
+      screen.queryByText(EpisodeIntlProvider.premiereText()),
+    ).not.toBeInTheDocument();
   });
 
   test('it does not render the new tag when release date is older than 7 days', () => {
     const tenDaysAgo = new Date(Date.now() - time.days(10));
 
-    render(
-      EpisodeStatusTag,
-      {
-        props: {
-          i18n: EpisodeIntlProvider,
-          episodeType: 'standard',
-          releaseDate: tenDaysAgo,
-        },
+    render(EpisodeStatusTag, {
+      props: {
+        i18n: EpisodeIntlProvider,
+        episodeType: 'standard',
+        releaseDate: tenDaysAgo,
       },
-    );
+    });
 
-    expect(screen.queryByText(EpisodeIntlProvider.newText()))
-      .not.toBeInTheDocument();
+    expect(
+      screen.queryByText(EpisodeIntlProvider.newText()),
+    ).not.toBeInTheDocument();
   });
 });

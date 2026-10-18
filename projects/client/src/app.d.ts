@@ -38,7 +38,8 @@ declare global {
     [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : Partial<T[P]>;
   };
 
-  type DistributiveOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K>
+  type DistributiveOmit<T, K extends keyof T> = T extends unknown
+    ? Omit<T, K>
     : never;
 
   type DistributivePartial<T, K extends keyof T> = T extends unknown
@@ -160,25 +161,21 @@ declare global {
     audience: 'authenticated' | 'public' | 'all' | 'director' | 'vip' | 'free';
   };
 
-  export type ButtonProps =
-    & {
-      label: string;
-      'aria-pressed'?: 'true' | 'false' | 'mixed';
-      'aria-expanded'?: boolean;
-      'aria-controls'?: string;
-      type?: 'button' | 'submit' | 'reset';
-      value?: string;
-    }
-    & HTMLElementProps
-    & ChildrenProps;
+  export type ButtonProps = {
+    label: string;
+    'aria-pressed'?: 'true' | 'false' | 'mixed';
+    'aria-expanded'?: boolean;
+    'aria-controls'?: string;
+    type?: 'button' | 'submit' | 'reset';
+    value?: string;
+  } & HTMLElementProps &
+    ChildrenProps;
 
-  export type CheckboxProps =
-    & {
-      label: string;
-      checked?: boolean;
-    }
-    & HTMLInputElementProps
-    & HTMLElementProps;
+  export type CheckboxProps = {
+    label: string;
+    checked?: boolean;
+  } & HTMLInputElementProps &
+    HTMLElementProps;
 
   export type TypesenseConfig = {
     keys: {
@@ -223,15 +220,15 @@ declare global {
       /**
        * Works only in conjunction with the `clickOutside` action.
        */
-      'onclickoutside'?: (ev: CustomEvent) => void;
+      onclickoutside?: (ev: CustomEvent) => void;
       /**
        * Works only in conjunction with the `unlockOnHorizontalWheel` action.
        */
-      'onhorizontalwheel'?: (ev: CustomEvent) => void;
+      onhorizontalwheel?: (ev: CustomEvent) => void;
       /**
        * Works only in conjunction with the `trackVisibleRange` action.
        */
-      'onvisiblerange'?: (
+      onvisiblerange?: (
         ev: CustomEvent<
           import('$lib/utils/actions/VisibleRange.ts').VisibleRange
         >,
@@ -239,8 +236,8 @@ declare global {
       /**
        * Works only in conjunction with the `touchScroll` action.
        */
-      'ontouchscroll'?: (ev: CustomEvent) => void;
-      'onfiles'?: (ev: CustomEvent<{ files: FileList }>) => void;
+      ontouchscroll?: (ev: CustomEvent) => void;
+      onfiles?: (ev: CustomEvent<{ files: FileList }>) => void;
     }
 
     interface IntrinsicElements {

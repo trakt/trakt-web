@@ -12,51 +12,43 @@ import { time } from '$lib/utils/timing/time.ts';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { typeToListMethod } from '../../_internal/typeToListMethod.ts';
 
-type UserListItemsParams =
-  & {
-    userId: string;
-    listId: string;
-    type?: MediaType;
-    sortBy?: string | Nil;
-    sortHow?: 'asc' | 'desc' | Nil;
-  }
-  & PaginationParams
-  & ApiParams
-  & FilterParams;
+type UserListItemsParams = {
+  userId: string;
+  listId: string;
+  type?: MediaType;
+  sortBy?: string | Nil;
+  sortHow?: 'asc' | 'desc' | Nil;
+} & PaginationParams &
+  ApiParams &
+  FilterParams;
 
-const userListItemsRequest = (
-  {
-    fetch,
-    userId,
-    listId,
-    limit,
-    page,
-    filter,
-    type,
-    sortBy,
-    sortHow,
-  }: UserListItemsParams,
-) => {
+const userListItemsRequest = ({
+  fetch,
+  userId,
+  listId,
+  limit,
+  page,
+  filter,
+  type,
+  sortBy,
+  sortHow,
+}: UserListItemsParams) => {
   const method = typeToListMethod(type);
 
-  return api({ fetch })
-    .users
-    .lists
-    .list
-    .items[method]({
-      params: {
-        id: userId,
-        list_id: listId,
-      },
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        sort_by: sortBy,
-        sort_how: sortHow,
-        ...filter,
-      },
-    });
+  return api({ fetch }).users.lists.list.items[method]({
+    params: {
+      id: userId,
+      list_id: listId,
+    },
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      sort_by: sortBy,
+      sort_how: sortHow,
+      ...filter,
+    },
+  });
 };
 
 export const userListItemsQuery = defineInfiniteQuery({
@@ -65,9 +57,7 @@ export const userListItemsQuery = defineInfiniteQuery({
     InvalidateAction.Listed('movie'),
     InvalidateAction.Listed('show'),
   ],
-  dependencies: (
-    params,
-  ) => [
+  dependencies: (params) => [
     params.userId,
     params.listId,
     params.limit,

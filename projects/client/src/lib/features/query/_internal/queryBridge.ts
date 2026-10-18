@@ -101,15 +101,13 @@ function resolveInfiniteQueryOptions<
       TQueryFnData,
       TQueryKey
     >,
-  ) as unknown as
-    & InfiniteQueryObserverOptions<
-      TQueryFnData,
-      TError,
-      TData,
-      TQueryKey,
-      TPageParam
-    >
-    & { _optimisticResults?: 'optimistic' | 'isRestoring' };
+  ) as unknown as InfiniteQueryObserverOptions<
+    TQueryFnData,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  > & { _optimisticResults?: 'optimistic' | 'isRestoring' };
   resolved._optimisticResults = 'optimistic';
   return resolved;
 }
@@ -161,12 +159,12 @@ function reactiveObserverBridge<
   TOptions,
   TResult,
   TObserver extends ReadableObserver<TResult>,
->(
-  { options$, onOptions, create, update }: ReactiveObserverBridgeParams<
-    TOptions,
-    TObserver
-  >,
-): Observable<TResult> {
+>({
+  options$,
+  onOptions,
+  create,
+  update,
+}: ReactiveObserverBridgeParams<TOptions, TObserver>): Observable<TResult> {
   return new Observable<TResult>((subscriber) => {
     let observer: TObserver | undefined;
     let cleanup: (() => void) | undefined;
@@ -207,7 +205,7 @@ export function queryBridge<TOutput, TError extends Error>(
           client,
           resolveQueryOptions(client, optionsAccessor()),
         ),
-    )
+    ),
   );
 }
 

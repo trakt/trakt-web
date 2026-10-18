@@ -7,9 +7,13 @@ describe('util: resolveProjection', () => {
   const RATE_PER_DAY = 8_640; // exactly one per 10 seconds
   const WALL_NOW = Date.parse('2026-07-28T19:00:00.000Z');
 
-  const serverAt = (
-    { total, ageMs = 0 }: { total: number; ageMs?: number },
-  ): RegisteredMemberCount => ({
+  const serverAt = ({
+    total,
+    ageMs = 0,
+  }: {
+    total: number;
+    ageMs?: number;
+  }): RegisteredMemberCount => ({
     total,
     anchoredAt: WALL_NOW - ageMs,
     ratePerDay: RATE_PER_DAY,
@@ -37,21 +41,17 @@ describe('util: resolveProjection', () => {
       const server = serverAt({ total: 17_002_054 });
       const start = 1_000;
 
-      const targets = [10, 20, 30, 40].map((seconds) =>
-        resolveProjection({
-          local: { value: 17_002_054, at: start },
-          server,
-          now: start + time.seconds(seconds),
-          wallNow: WALL_NOW,
-        }).target
+      const targets = [10, 20, 30, 40].map(
+        (seconds) =>
+          resolveProjection({
+            local: { value: 17_002_054, at: start },
+            server,
+            now: start + time.seconds(seconds),
+            wallNow: WALL_NOW,
+          }).target,
       );
 
-      expect(targets).toEqual([
-        17_002_055,
-        17_002_056,
-        17_002_057,
-        17_002_058,
-      ]);
+      expect(targets).toEqual([17_002_055, 17_002_056, 17_002_057, 17_002_058]);
     });
   });
 

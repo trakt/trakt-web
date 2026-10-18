@@ -8,10 +8,9 @@ import {
 export function createEditModeContext() {
   const ctx = setContext<EditModeContext>(
     EDIT_MODE_CONTEXT_KEY,
-    getContext<EditModeContext>(EDIT_MODE_CONTEXT_KEY) ??
-      {
-        isEditMode: new BehaviorSubject(false),
-      },
+    getContext<EditModeContext>(EDIT_MODE_CONTEXT_KEY) ?? {
+      isEditMode: new BehaviorSubject(false),
+    },
   );
 
   return ctx;

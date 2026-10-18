@@ -4,8 +4,8 @@ import { ShowDevsMappedMock } from '../../devs/ShowDevsMappedMock.ts';
 export const ShowSiloRelatedMappedMock: RelatedShow[] = [
   {
     ...ShowDevsMappedMock,
-    'episode': {
-      'count': 8,
+    episode: {
+      count: 8,
     },
   },
 ];

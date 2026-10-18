@@ -7,9 +7,11 @@ type ToUnitFormatterProps = {
   options?: UnitFormatOptions;
 };
 
-function createUnitFormat(
-  { locale, unit, options }: Omit<ToUnitFormatterProps, 'suffix'>,
-): Intl.NumberFormat | null {
+function createUnitFormat({
+  locale,
+  unit,
+  options,
+}: Omit<ToUnitFormatterProps, 'suffix'>): Intl.NumberFormat | null {
   try {
     return new Intl.NumberFormat(locale, { ...options, style: 'unit', unit });
   } catch {
@@ -17,9 +19,12 @@ function createUnitFormat(
   }
 }
 
-export function toUnitFormatter(
-  { locale, unit, suffix, options }: ToUnitFormatterProps,
-): (value: number) => string {
+export function toUnitFormatter({
+  locale,
+  unit,
+  suffix,
+  options,
+}: ToUnitFormatterProps): (value: number) => string {
   const unitFormat = createUnitFormat({ locale, unit, options });
   const decimalFormat = new Intl.NumberFormat(locale, options);
   const toFallback = (value: number) =>

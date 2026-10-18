@@ -88,7 +88,7 @@ const JOB_MAP = {
 } as const;
 
 export function toTranslatedJob(
-  job: string | (keyof typeof JOB_MAP),
+  job: string | keyof typeof JOB_MAP,
   data?: Record<string, unknown>,
 ): string {
   const translationFn =

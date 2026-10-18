@@ -22,16 +22,14 @@ import {
   MovieActivityHistorySchema,
 } from './movieActivityHistoryQuery.ts';
 
-type ActivityHistoryParams =
-  & {
-    slug: string;
-    startDate?: Date;
-    endDate?: Date;
-    syncId?: number;
-  }
-  & ApiParams
-  & PaginationParams
-  & FilterParams;
+type ActivityHistoryParams = {
+  slug: string;
+  startDate?: Date;
+  endDate?: Date;
+  syncId?: number;
+} & ApiParams &
+  PaginationParams &
+  FilterParams;
 
 const HistorySchema = z.discriminatedUnion('type', [
   EpisodeActivityHistorySchema,
@@ -39,10 +37,16 @@ const HistorySchema = z.discriminatedUnion('type', [
 ]);
 export type ActivityHistory = z.infer<typeof HistorySchema>;
 
-export function activityHistoryRequest(
-  { fetch, slug, startDate, endDate, limit, page, filter, syncId }:
-    ActivityHistoryParams,
-) {
+export function activityHistoryRequest({
+  fetch,
+  slug,
+  startDate,
+  endDate,
+  limit,
+  page,
+  filter,
+  syncId,
+}: ActivityHistoryParams) {
   const queryParams = {
     extended: 'full,images' as const,
     start_at: startDate?.toISOString(),
@@ -66,8 +70,10 @@ type ValidHistoryItemResponse =
 function isValidHistoryItemResponse(
   response: ActivityHistoryResponse,
 ): response is ValidHistoryItemResponse {
-  return (response.type === 'movie' && Boolean(response.movie)) ||
-    (response.type === 'episode' && Boolean(response.episode));
+  return (
+    (response.type === 'movie' && Boolean(response.movie)) ||
+    (response.type === 'episode' && Boolean(response.episode))
+  );
 }
 
 export const activityHistoryQuery = defineInfiniteQuery({
@@ -93,7 +99,7 @@ export const activityHistoryQuery = defineInfiniteQuery({
       .map((item) =>
         item.type === 'movie'
           ? mapToMovieActivityHistory(item)
-          : mapToEpisodeActivityHistory(item)
+          : mapToEpisodeActivityHistory(item),
       ),
     page: extractPageMeta(response.headers),
   }),

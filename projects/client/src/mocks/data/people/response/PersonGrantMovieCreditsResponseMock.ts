@@ -2,13 +2,11 @@ import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/res
 import type { PeopleMovieCreditsResponse } from '@trakt/api';
 
 export const PersonGrantMovieCreditsResponseMock: PeopleMovieCreditsResponse = {
-  'cast': [
+  cast: [
     {
-      'character': 'Mr. Reed',
-      'characters': [
-        'Mr. Reed',
-      ],
-      'movie': MovieHereticResponseMock,
+      character: 'Mr. Reed',
+      characters: ['Mr. Reed'],
+      movie: MovieHereticResponseMock,
     },
   ],
 };

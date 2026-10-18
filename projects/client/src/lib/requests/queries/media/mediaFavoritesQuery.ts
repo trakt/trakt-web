@@ -17,35 +17,36 @@ import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDepe
 import { mapToFavoriteMovie } from '../movies/movieFavoritesQuery.ts';
 import { mapToFavoriteShow } from '../shows/showFavoritesQuery.ts';
 
-type FavoriteMediaParams =
-  & {
-    slug: string;
-    sortBy?: SortBy;
-    sortHow?: SortDirection;
-  }
-  & PaginationParams
-  & ApiParams
-  & FilterParams;
+type FavoriteMediaParams = {
+  slug: string;
+  sortBy?: SortBy;
+  sortHow?: SortDirection;
+} & PaginationParams &
+  ApiParams &
+  FilterParams;
 
-const favoritedMediaRequest = (
-  { fetch, slug, limit, page, filter, sortBy, sortHow }: FavoriteMediaParams,
-) =>
-  api({ fetch })
-    .users
-    .favorites
-    .media({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,images,colors',
-        sort_by: sortBy ?? 'added',
-        sort_how: sortHow ?? 'desc',
-        page,
-        limit,
-        ...filter,
-      },
-    });
+const favoritedMediaRequest = ({
+  fetch,
+  slug,
+  limit,
+  page,
+  filter,
+  sortBy,
+  sortHow,
+}: FavoriteMediaParams) =>
+  api({ fetch }).users.favorites.media({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,images,colors',
+      sort_by: sortBy ?? 'added',
+      sort_how: sortHow ?? 'desc',
+      page,
+      limit,
+      ...filter,
+    },
+  });
 
 function mapToFavoriteEntry(
   entry: FavoriteMovieResponse | FavoriteShowResponse,

@@ -14,19 +14,13 @@ describe('util: isCacheableDocument', () => {
   // A cached error is replayed as the page, so the visitor keeps seeing it
   // after the origin recovers.
   describe('when the origin errors', () => {
-    it.each([500, 502, 503, 504])(
-      'should not cache a %i',
-      (status) => {
-        expect(isCacheableDocument({ status, redirected: false })).toBe(false);
-      },
-    );
+    it.each([500, 502, 503, 504])('should not cache a %i', (status) => {
+      expect(isCacheableDocument({ status, redirected: false })).toBe(false);
+    });
 
-    it.each([401, 403, 404, 429])(
-      'should not cache a %i',
-      (status) => {
-        expect(isCacheableDocument({ status, redirected: false })).toBe(false);
-      },
-    );
+    it.each([401, 403, 404, 429])('should not cache a %i', (status) => {
+      expect(isCacheableDocument({ status, redirected: false })).toBe(false);
+    });
   });
 
   it('should not cache an opaque response', () => {

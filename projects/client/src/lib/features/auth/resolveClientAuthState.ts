@@ -36,9 +36,12 @@ function parseStoredUser(raw: string): StoredOidcUser | null {
 
 // `UserManager.getUser()` wraps this same `localStorage.getItem` in a promise,
 // and that one-tick delay is long enough to paint the wrong audience.
-export function resolveClientAuthState(
-  { store, authority, clientId, now = Date.now() }: ResolveClientAuthStateProps,
-): ClientAuthState {
+export function resolveClientAuthState({
+  store,
+  authority,
+  clientId,
+  now = Date.now(),
+}: ResolveClientAuthStateProps): ClientAuthState {
   const raw = store.getItem(oidcUserStoreKey({ authority, clientId }));
   if (raw == null) {
     return NO_SESSION;
@@ -49,9 +52,8 @@ export function resolveClientAuthState(
     return NO_SESSION;
   }
 
-  const expiresAt = user.expires_at == null
-    ? null
-    : time.seconds(user.expires_at);
+  const expiresAt =
+    user.expires_at == null ? null : time.seconds(user.expires_at);
 
   return {
     hasSession: true,

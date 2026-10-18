@@ -33,12 +33,11 @@ type MediaTypeCta = Extract<
 >;
 
 type CtaMap = {
-  [K in CtaType]: K extends MediaTypeCta ? { type: K; mediaType?: MediaType }
-    : (
-      K extends 'personal-list'
-        ? { type: K; action: CtaAction; mediaType?: MediaType }
-        : { type: K }
-    );
+  [K in CtaType]: K extends MediaTypeCta
+    ? { type: K; mediaType?: MediaType }
+    : K extends 'personal-list'
+      ? { type: K; action: CtaAction; mediaType?: MediaType }
+      : { type: K };
 };
 
 export type Cta = CtaMap[CtaType];

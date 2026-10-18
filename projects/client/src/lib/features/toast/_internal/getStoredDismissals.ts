@@ -43,11 +43,13 @@ function parseStoredDismissals(raw: string | Nil): StoredDismissalsV2 | null {
       }
       case 1: {
         const data = parsed as StoredDismissalsV1;
-        const normalized = normalizeDismissalItems([{
-          id: data.id.toString(),
-          type: data.type,
-          dismissedAt: data.dismissedAt,
-        }]);
+        const normalized = normalizeDismissalItems([
+          {
+            id: data.id.toString(),
+            type: data.type,
+            dismissedAt: data.dismissedAt,
+          },
+        ]);
 
         return {
           ...EMPTY_DATA,
@@ -63,7 +65,8 @@ function parseStoredDismissals(raw: string | Nil): StoredDismissalsV2 | null {
 }
 
 export function getStoredDismissals(): StoredDismissalsV2 {
-  return parseStoredDismissals(
-    safeLocalStorage.getItem(DISMISSAL_STORAGE_KEY),
-  ) ?? EMPTY_DATA;
+  return (
+    parseStoredDismissals(safeLocalStorage.getItem(DISMISSAL_STORAGE_KEY)) ??
+    EMPTY_DATA
+  );
 }

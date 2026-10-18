@@ -38,11 +38,14 @@ export function useSettings() {
   const { user } = useUser();
   const { track } = useTrack(AnalyticsEvent.Settings);
 
-  const settingsChange = useMutation(defineMutation({
-    key: 'user:save-settings',
-    request: ({ request }: HandleSettingsProps) => request(),
-    invalidations: ({ data }) => data ? [InvalidateAction.User.Settings] : [],
-  }));
+  const settingsChange = useMutation(
+    defineMutation({
+      key: 'user:save-settings',
+      request: ({ request }: HandleSettingsProps) => request(),
+      invalidations: ({ data }) =>
+        data ? [InvalidateAction.User.Settings] : [],
+    }),
+  );
 
   const handleSettingsChange = async (
     props: HandleSettingsProps,
@@ -98,95 +101,109 @@ export function useSettings() {
 
   return {
     isSavingSettings: settingsChange.isPending,
-    spoilers: user.pipe(map(($user) => ({
-      isHidden: Boolean($user.preferences.isSpoilerHidden),
-      set: async (isEnabled: boolean) => {
-        const spoilerStatus = isEnabled ? 'hide' as const : 'show' as const;
+    spoilers: user.pipe(
+      map(($user) => ({
+        isHidden: Boolean($user.preferences.isSpoilerHidden),
+        set: async (isEnabled: boolean) => {
+          const spoilerStatus = isEnabled
+            ? ('hide' as const)
+            : ('show' as const);
 
-        const payload = {
-          browsing: {
-            spoilers: {
-              episodes: spoilerStatus,
-              shows: spoilerStatus,
-              movies: spoilerStatus,
+          const payload = {
+            browsing: {
+              spoilers: {
+                episodes: spoilerStatus,
+                shows: spoilerStatus,
+                movies: spoilerStatus,
+              },
             },
-          },
-        };
+          };
 
-        await handleSettingsChange({
-          request: () => saveSettingsRequest({ body: payload }),
-          action: 'spoilers',
-        });
-      },
-    }))),
-    email: user.pipe(map(($user) => ({
-      value: $user.email,
-      set: (email: string) => {
-        if (!$user.email) return Promise.resolve(false);
+          await handleSettingsChange({
+            request: () => saveSettingsRequest({ body: payload }),
+            action: 'spoilers',
+          });
+        },
+      })),
+    ),
+    email: user.pipe(
+      map(($user) => ({
+        value: $user.email,
+        set: (email: string) => {
+          if (!$user.email) return Promise.resolve(false);
 
-        return handleSettingsChange({
-          request: () => changeEmailRequest({ email }),
-          action: 'email',
-        });
-      },
-    }))),
-    profile: user.pipe(map(($user) => ({
-      isPrivate: Boolean($user.isPrivate),
-      displayName: $user.name.full,
-      location: $user.location ?? '',
-      about: $user.about ?? '',
-      birthday: $user.birthday,
-      username: $user.username,
-      set: (settings: UserSettingsRequest) => {
-        const payload: SettingsRequest = {
-          user: { ...settings },
-        };
+          return handleSettingsChange({
+            request: () => changeEmailRequest({ email }),
+            action: 'email',
+          });
+        },
+      })),
+    ),
+    profile: user.pipe(
+      map(($user) => ({
+        isPrivate: Boolean($user.isPrivate),
+        displayName: $user.name.full,
+        location: $user.location ?? '',
+        about: $user.about ?? '',
+        birthday: $user.birthday,
+        username: $user.username,
+        set: (settings: UserSettingsRequest) => {
+          const payload: SettingsRequest = {
+            user: { ...settings },
+          };
 
-        return handleSettingsChange({
-          request: () => saveSettingsRequest({ body: payload }),
-          action: 'profile',
-        });
-      },
-    }))),
-    genres: user.pipe(map(($user) => ({
-      loved: ($user?.genres?.loved ?? []).filter((genre) =>
-        GENRES.includes(genre)
-      ),
-    }))),
+          return handleSettingsChange({
+            request: () => saveSettingsRequest({ body: payload }),
+            action: 'profile',
+          });
+        },
+      })),
+    ),
+    genres: user.pipe(
+      map(($user) => ({
+        loved: ($user?.genres?.loved ?? []).filter((genre) =>
+          GENRES.includes(genre),
+        ),
+      })),
+    ),
     setLovedGenres,
     theme: { set: setTheme },
-    watchAgain: user.pipe(map(($user) => ({
-      hasWatchAgain: $user.preferences.hasWatchAgain,
+    watchAgain: user.pipe(
+      map(($user) => ({
+        hasWatchAgain: $user.preferences.hasWatchAgain,
 
-      set: async (hasWatchAgain: boolean) => {
-        const payload = {
-          browsing: {
-            watch_only_once: !hasWatchAgain,
-          },
-        };
+        set: async (hasWatchAgain: boolean) => {
+          const payload = {
+            browsing: {
+              watch_only_once: !hasWatchAgain,
+            },
+          };
 
-        await handleSettingsChange({
-          request: () => saveSettingsRequest({ body: payload }),
-          action: 'watch_only_once',
-        });
-      },
-    }))),
-    ratingPrompt: user.pipe(map(($user) => ({
-      showRatingPrompt: $user.preferences.showRatingPrompt,
+          await handleSettingsChange({
+            request: () => saveSettingsRequest({ body: payload }),
+            action: 'watch_only_once',
+          });
+        },
+      })),
+    ),
+    ratingPrompt: user.pipe(
+      map(($user) => ({
+        showRatingPrompt: $user.preferences.showRatingPrompt,
 
-      set: async (showRatingPrompt: boolean) => {
-        const payload = {
-          browsing: {
-            show_rating_prompt: showRatingPrompt,
-          },
-        };
+        set: async (showRatingPrompt: boolean) => {
+          const payload = {
+            browsing: {
+              show_rating_prompt: showRatingPrompt,
+            },
+          };
 
-        await handleSettingsChange({
-          request: () => saveSettingsRequest({ body: payload }),
-          action: 'show_rating_prompt',
-        });
-      },
-    }))),
+          await handleSettingsChange({
+            request: () => saveSettingsRequest({ body: payload }),
+            action: 'show_rating_prompt',
+          });
+        },
+      })),
+    ),
     locale: { set: setLocale },
   };
 }

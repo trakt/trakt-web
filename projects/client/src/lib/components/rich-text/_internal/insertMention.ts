@@ -18,8 +18,7 @@ export function insertMention({ editor, mention, range }: InsertMentionProps) {
   ];
   const chain = editor.chain().focus();
 
-  return (range
-    ? chain.insertContentAt(range, content)
-    : chain.insertContent(content))
-    .run();
+  return (
+    range ? chain.insertContentAt(range, content) : chain.insertContent(content)
+  ).run();
 }

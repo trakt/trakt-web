@@ -18,11 +18,13 @@ export function useUserListSummary(props: UseUserListSummaryProps) {
     };
   }
 
-  const query = useQuery(userListSummaryQuery({
-    userId: props.userId,
-    listId: props.listId,
-    withPosters: props.withPosters,
-  }));
+  const query = useQuery(
+    userListSummaryQuery({
+      userId: props.userId,
+      listId: props.listId,
+      withPosters: props.withPosters,
+    }),
+  );
 
   return {
     list: query.pipe(map(($query) => $query.data)),

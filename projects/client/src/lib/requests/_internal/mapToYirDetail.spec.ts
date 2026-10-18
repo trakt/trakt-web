@@ -43,18 +43,23 @@ function baseResponse(overrides: Partial<RawYirResponse> = {}): RawYirResponse {
 describe('mapToYirDetail', () => {
   describe('all-time fields', () => {
     it('should map release_years years and decades per type', () => {
-      const result = mapToYirDetail(baseResponse({
-        release_years: {
-          shows: {
-            years: [{ year: 2010, count: 3 }, { year: 2011, count: 5 }],
-            decades: [{ decade: 2010, count: 8 }],
+      const result = mapToYirDetail(
+        baseResponse({
+          release_years: {
+            shows: {
+              years: [
+                { year: 2010, count: 3 },
+                { year: 2011, count: 5 },
+              ],
+              decades: [{ decade: 2010, count: 8 }],
+            },
+            movies: {
+              years: [{ year: 1999, count: 2 }],
+              decades: [{ decade: 1990, count: 2 }],
+            },
           },
-          movies: {
-            years: [{ year: 1999, count: 2 }],
-            decades: [{ decade: 1990, count: 2 }],
-          },
-        },
-      }));
+        }),
+      );
 
       expect(result.releaseYears?.shows.years).toEqual([
         { year: 2010, count: 3 },
@@ -69,48 +74,59 @@ describe('mapToYirDetail', () => {
     });
 
     it('should map list_progress entries per type', () => {
-      const result = mapToYirDetail(baseResponse({
-        list_progress: {
-          shows: [{
-            id: 1,
-            site: 'trakt',
-            title: 'Trakt Top 250',
-            logo: 'https://assets.trakt.tv/lists/trakt/logo.png',
-            total: 250,
-            watched: 120,
-            percentage: 48,
-          }],
-          movies: [],
-        },
-      }));
+      const result = mapToYirDetail(
+        baseResponse({
+          list_progress: {
+            shows: [
+              {
+                id: 1,
+                site: 'trakt',
+                title: 'Trakt Top 250',
+                logo: 'https://assets.trakt.tv/lists/trakt/logo.png',
+                total: 250,
+                watched: 120,
+                percentage: 48,
+              },
+            ],
+            movies: [],
+          },
+        }),
+      );
 
-      expect(result.listProgress?.shows).toEqual([{
-        id: 1,
-        site: 'trakt',
-        title: 'Trakt Top 250',
-        logo: 'https://assets.trakt.tv/lists/trakt/logo.png',
-        total: 250,
-        watched: 120,
-        percentage: 48,
-      }]);
+      expect(result.listProgress?.shows).toEqual([
+        {
+          id: 1,
+          site: 'trakt',
+          title: 'Trakt Top 250',
+          logo: 'https://assets.trakt.tv/lists/trakt/logo.png',
+          total: 250,
+          watched: 120,
+          percentage: 48,
+        },
+      ]);
       expect(result.listProgress?.movies).toEqual([]);
     });
 
     it('should pass through the yearly plays distribution', () => {
-      const result = mapToYirDetail(baseResponse({
-        stats: {
-          all: { ...rawCategory(), lists_counts: rawStats() },
-          shows: rawCategory({
-            distributions: {
-              weekly: [],
-              monthly: [],
-              days: [],
-              yearly: [{ year: 2010, count: 5 }, { year: 2011, count: 9 }],
-            },
-          }),
-          movies: rawCategory(),
-        },
-      }));
+      const result = mapToYirDetail(
+        baseResponse({
+          stats: {
+            all: { ...rawCategory(), lists_counts: rawStats() },
+            shows: rawCategory({
+              distributions: {
+                weekly: [],
+                monthly: [],
+                days: [],
+                yearly: [
+                  { year: 2010, count: 5 },
+                  { year: 2011, count: 9 },
+                ],
+              },
+            }),
+            movies: rawCategory(),
+          },
+        }),
+      );
 
       expect(result.stats.shows.distributions?.yearly).toEqual([
         { year: 2010, count: 5 },
@@ -119,18 +135,20 @@ describe('mapToYirDetail', () => {
     });
 
     it('should pass through the per-type ratings distribution', () => {
-      const result = mapToYirDetail(baseResponse({
-        stats: {
-          all: { ...rawCategory(), lists_counts: rawStats() },
-          shows: rawCategory({
-            ratings_distribution: [
-              { rating: 8, count: 12 },
-              { rating: 10, count: 30 },
-            ],
-          }),
-          movies: rawCategory(),
-        },
-      }));
+      const result = mapToYirDetail(
+        baseResponse({
+          stats: {
+            all: { ...rawCategory(), lists_counts: rawStats() },
+            shows: rawCategory({
+              ratings_distribution: [
+                { rating: 8, count: 12 },
+                { rating: 10, count: 30 },
+              ],
+            }),
+            movies: rawCategory(),
+          },
+        }),
+      );
 
       expect(result.stats.shows.ratingsDistribution).toEqual([
         { rating: 8, count: 12 },

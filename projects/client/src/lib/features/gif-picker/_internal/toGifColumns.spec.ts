@@ -22,15 +22,17 @@ describe('util: toGifColumns', () => {
       2,
     );
 
-    expect(ids(columns)).to.deep.equal([['a', 'c', 'e'], ['b', 'd']]);
+    expect(ids(columns)).to.deep.equal([
+      ['a', 'c', 'e'],
+      ['b', 'd'],
+    ]);
   });
 
   it('should always append to the shortest column', () => {
-    const columns = toGifColumns([
-      gif('tall', 100, 300),
-      gif('short', 100, 50),
-      gif('next', 100, 50),
-    ], 2);
+    const columns = toGifColumns(
+      [gif('tall', 100, 300), gif('short', 100, 50), gif('next', 100, 50)],
+      2,
+    );
 
     // `tall` is three times the height of `short`, so the second column keeps
     // taking gifs until it catches up.

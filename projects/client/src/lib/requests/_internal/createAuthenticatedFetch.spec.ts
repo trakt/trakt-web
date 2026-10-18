@@ -21,20 +21,16 @@ function makeRenewedUser(): User {
   } as User;
 }
 
-function stubUserManager(
-  signinSilent: () => Promise<User | null>,
-) {
+function stubUserManager(signinSilent: () => Promise<User | null>) {
   const removeUser = vi.fn().mockResolvedValue(undefined);
 
-  setUserManager(
-    {
-      // Lapsed, so `renewAccessToken` never short-circuits into adopting it.
-      getUser: vi.fn().mockResolvedValue(null),
-      signinSilent: vi.fn(signinSilent),
-      removeUser,
-      settings: { accessTokenExpiringNotificationTimeInSeconds: 60 },
-    } as unknown as UserManager,
-  );
+  setUserManager({
+    // Lapsed, so `renewAccessToken` never short-circuits into adopting it.
+    getUser: vi.fn().mockResolvedValue(null),
+    signinSilent: vi.fn(signinSilent),
+    removeUser,
+    settings: { accessTokenExpiringNotificationTimeInSeconds: 60 },
+  } as unknown as UserManager);
 
   return { removeUser };
 }
@@ -42,9 +38,11 @@ function stubUserManager(
 const BACKGROUND_COOLDOWN = time.seconds(30);
 const clock = { value: 0 };
 
-function stubRenewGuard(
-  { maxConsecutiveFailures = 3 }: { maxConsecutiveFailures?: number } = {},
-) {
+function stubRenewGuard({
+  maxConsecutiveFailures = 3,
+}: {
+  maxConsecutiveFailures?: number;
+} = {}) {
   clock.value = 0;
 
   setSilentRenewGuard(
@@ -74,9 +72,9 @@ describe('createAuthenticatedFetch', () => {
   });
 
   it('should attach the current bearer', async () => {
-    const baseFetch = vi.fn<typeof fetch>().mockResolvedValue(
-      new Response(null),
-    );
+    const baseFetch = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(new Response(null));
 
     await createAuthenticatedFetch(baseFetch as unknown as typeof fetch)('/x');
 
@@ -85,7 +83,8 @@ describe('createAuthenticatedFetch', () => {
 
   it('should retry a 401 with the renewed bearer', async () => {
     stubUserManager(() => Promise.resolve(makeRenewedUser()));
-    const baseFetch = vi.fn<typeof fetch>()
+    const baseFetch = vi
+      .fn<typeof fetch>()
       .mockResolvedValueOnce(new Response(null, { status: 401 }))
       .mockResolvedValueOnce(new Response(null, { status: 200 }));
 
@@ -101,11 +100,11 @@ describe('createAuthenticatedFetch', () => {
 
   it('should keep the session when a renewal fails transiently', async () => {
     const { removeUser } = stubUserManager(() =>
-      Promise.reject(new TypeError('Failed to fetch'))
+      Promise.reject(new TypeError('Failed to fetch')),
     );
-    const baseFetch = vi.fn().mockResolvedValue(
-      new Response(null, { status: 401 }),
-    );
+    const baseFetch = vi
+      .fn()
+      .mockResolvedValue(new Response(null, { status: 401 }));
 
     const response = await createAuthenticatedFetch(
       baseFetch as unknown as typeof fetch,
@@ -118,11 +117,11 @@ describe('createAuthenticatedFetch', () => {
 
   it('should clear the session when the grant is refused', async () => {
     const { removeUser } = stubUserManager(() =>
-      Promise.reject(new ErrorResponse({ error: 'invalid_grant' }))
+      Promise.reject(new ErrorResponse({ error: 'invalid_grant' })),
     );
-    const baseFetch = vi.fn().mockResolvedValue(
-      new Response(null, { status: 401 }),
-    );
+    const baseFetch = vi
+      .fn()
+      .mockResolvedValue(new Response(null, { status: 401 }));
 
     await createAuthenticatedFetch(baseFetch as unknown as typeof fetch)('/x');
 
@@ -132,11 +131,11 @@ describe('createAuthenticatedFetch', () => {
   it('should not renew for a request that carried no bearer', async () => {
     setToken(null);
     const { removeUser } = stubUserManager(() =>
-      Promise.reject(new ErrorResponse({ error: 'invalid_grant' }))
+      Promise.reject(new ErrorResponse({ error: 'invalid_grant' })),
     );
-    const baseFetch = vi.fn().mockResolvedValue(
-      new Response(null, { status: 401 }),
-    );
+    const baseFetch = vi
+      .fn()
+      .mockResolvedValue(new Response(null, { status: 401 }));
 
     await createAuthenticatedFetch(baseFetch as unknown as typeof fetch)('/x');
 
@@ -153,12 +152,13 @@ describe('createAuthenticatedFetch', () => {
     const baseFetch = vi.fn().mockImplementation((_input, init) =>
       Promise.resolve(
         new Response(null, {
-          status: new Headers(init?.headers).get('Authorization') ===
-              `Bearer ${RENEWED_TOKEN}`
-            ? 200
-            : 401,
+          status:
+            new Headers(init?.headers).get('Authorization') ===
+            `Bearer ${RENEWED_TOKEN}`
+              ? 200
+              : 401,
         }),
-      )
+      ),
     );
 
     const authenticatedFetch = createAuthenticatedFetch(
@@ -178,9 +178,9 @@ describe('createAuthenticatedFetch', () => {
       renewals = renewals + 1;
       return Promise.reject(new TypeError('Failed to fetch'));
     });
-    const baseFetch = vi.fn().mockResolvedValue(
-      new Response(null, { status: 401 }),
-    );
+    const baseFetch = vi
+      .fn()
+      .mockResolvedValue(new Response(null, { status: 401 }));
     const authenticatedFetch = createAuthenticatedFetch(
       baseFetch as unknown as typeof fetch,
     );
@@ -197,7 +197,8 @@ describe('createAuthenticatedFetch', () => {
     await getSilentRenewGuard()?.renew(() => Promise.resolve(null));
 
     clock.value = time.seconds(6);
-    const baseFetch = vi.fn<typeof fetch>()
+    const baseFetch = vi
+      .fn<typeof fetch>()
       .mockResolvedValueOnce(new Response(null, { status: 401 }))
       .mockResolvedValueOnce(new Response(null, { status: 200 }));
 
@@ -217,9 +218,9 @@ describe('createAuthenticatedFetch', () => {
       renewals = renewals + 1;
       return Promise.resolve(makeRenewedUser());
     });
-    const baseFetch = vi.fn().mockResolvedValue(
-      new Response(null, { status: 401 }),
-    );
+    const baseFetch = vi
+      .fn()
+      .mockResolvedValue(new Response(null, { status: 401 }));
     const authenticatedFetch = createAuthenticatedFetch(
       baseFetch as unknown as typeof fetch,
     );
@@ -234,11 +235,11 @@ describe('createAuthenticatedFetch', () => {
   it('should return the 401 untouched when no guard is mounted', async () => {
     setSilentRenewGuard(null);
     const { removeUser } = stubUserManager(() =>
-      Promise.resolve(makeRenewedUser())
+      Promise.resolve(makeRenewedUser()),
     );
-    const baseFetch = vi.fn().mockResolvedValue(
-      new Response(null, { status: 401 }),
-    );
+    const baseFetch = vi
+      .fn()
+      .mockResolvedValue(new Response(null, { status: 401 }));
 
     const response = await createAuthenticatedFetch(
       baseFetch as unknown as typeof fetch,

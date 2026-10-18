@@ -10,21 +10,21 @@ import { type TriviaResponse } from '../../models/TriviaResponse.ts';
 
 type MovieTriviaParams = { slug: string; locale: AvailableLocale } & ApiParams;
 
-const movieTriviaRequest = async (
-  { fetch, slug, locale }: MovieTriviaParams,
-) => {
-  const response = await rawApiFetch(
-    {
-      fetch,
-      path: toMediaInfoPath({
-        type: 'movie',
-        slug,
-        infoType: 5,
-        infoVersion: 2,
-        locale,
-      }),
-    },
-  );
+const movieTriviaRequest = async ({
+  fetch,
+  slug,
+  locale,
+}: MovieTriviaParams) => {
+  const response = await rawApiFetch({
+    fetch,
+    path: toMediaInfoPath({
+      type: 'movie',
+      slug,
+      infoType: 5,
+      infoVersion: 2,
+      locale,
+    }),
+  });
 
   const body = response.ok ? await response.json() : { summary: [], items: [] };
 
@@ -41,7 +41,7 @@ export const movieTriviaQuery = defineQuery({
   request: movieTriviaRequest,
   mapper: (response) => ({
     items: response.body.items.map((entry) =>
-      mapToTrivia('movie_trivia', entry)
+      mapToTrivia('movie_trivia', entry),
     ),
     summary: response.body.summary,
   }),

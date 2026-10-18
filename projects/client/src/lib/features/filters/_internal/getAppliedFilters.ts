@@ -1,6 +1,6 @@
 import { FILTERS } from './constants.ts';
 
-type AppliedFilter = typeof FILTERS[number];
+type AppliedFilter = (typeof FILTERS)[number];
 
 export function getAppliedFilters(
   params: URLSearchParams,

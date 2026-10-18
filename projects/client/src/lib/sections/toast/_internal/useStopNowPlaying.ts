@@ -11,11 +11,13 @@ export function useStopNowPlaying(nowPlaying: NowPlayingItem) {
 
   const isStoppable = nowPlaying.action === 'checkin';
 
-  const stopping = useMutation(defineMutation({
-    key: 'check-in:stop',
-    request: () => deleteCheckinRequest({}),
-    invalidations: [InvalidateAction.CheckIn],
-  }));
+  const stopping = useMutation(
+    defineMutation({
+      key: 'check-in:stop',
+      request: () => deleteCheckinRequest({}),
+      invalidations: [InvalidateAction.CheckIn],
+    }),
+  );
 
   const deleteCheckin = async () => {
     if (!isStoppable) {

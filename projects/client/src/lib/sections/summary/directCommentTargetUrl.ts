@@ -9,9 +9,10 @@ type DirectCommentTargetUrlParams = {
   target: DirectCommentTarget;
 };
 
-export function directCommentTargetUrl(
-  { commentId, target }: DirectCommentTargetUrlParams,
-): string {
+export function directCommentTargetUrl({
+  commentId,
+  target,
+}: DirectCommentTargetUrlParams): string {
   const params = {
     [DRAWER_VIEW_PARAM]: SummaryDrawers.Review,
     [COMMENT_ID_PARAM]: commentId,

@@ -9,10 +9,12 @@ import { useSeasonPeople } from './useSeasonPeople.ts';
 
 it('should load split season credits with guest stars', async () => {
   const { crew } = await renderStore(() =>
-    useSeasonPeople(valueObservable({
-      slug: ShowSiloResponseMock.ids.slug,
-      season: EpisodeSiloResponseMock.season,
-    }))
+    useSeasonPeople(
+      valueObservable({
+        slug: ShowSiloResponseMock.ids.slug,
+        season: EpisodeSiloResponseMock.season,
+      }),
+    ),
   );
 
   const split = await firstValueFrom(

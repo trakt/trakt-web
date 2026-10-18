@@ -1,8 +1,6 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useAllPagesInfiniteQuery } from '$lib/features/query/useQuery.ts';
-import {
-  showActivityHistoryQuery,
-} from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
+import { showActivityHistoryQuery } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import { map, of, switchMap } from 'rxjs';
 
 type UseShowWatchedEpisodesProps = {
@@ -11,9 +9,9 @@ type UseShowWatchedEpisodesProps = {
 
 type WatchedBySeason = Map<number, Set<number>>;
 
-export function useShowWatchedEpisodes(
-  { showId }: UseShowWatchedEpisodesProps,
-) {
+export function useShowWatchedEpisodes({
+  showId,
+}: UseShowWatchedEpisodesProps) {
   const { isAuthorized } = useAuth();
 
   const query = useAllPagesInfiniteQuery(
@@ -26,8 +24,8 @@ export function useShowWatchedEpisodes(
 
       return query.pipe(
         map(($query) => {
-          const entries = $query.data?.pages.flatMap((page) => page.entries) ??
-            [];
+          const entries =
+            $query.data?.pages.flatMap((page) => page.entries) ?? [];
 
           return entries.reduce((acc, entry) => {
             const { season, number } = entry.episode;

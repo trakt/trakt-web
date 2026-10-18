@@ -19,13 +19,15 @@ vi.mock('$lib/features/i18n/index.ts', async (importOriginal) => ({
   getLocale: () => 'en',
 }));
 
-const createContext = (
-  { start, active, visible = null }: {
-    start: Date;
-    active: Date;
-    visible?: Date | null;
-  },
-): CalendarContext => ({
+const createContext = ({
+  start,
+  active,
+  visible = null,
+}: {
+  start: Date;
+  active: Date;
+  visible?: Date | null;
+}): CalendarContext => ({
   startDate: new BehaviorSubject(start),
   activeDate: new BehaviorSubject(active),
   visibleDate: new BehaviorSubject<Date | null>(visible),

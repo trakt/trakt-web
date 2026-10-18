@@ -12,27 +12,20 @@ type MovieIntlParams = {
   enabled: boolean;
 } & ApiParams;
 
-const movieIntlRequest = (
-  { fetch, slug, language }: MovieIntlParams,
-) =>
-  api({ fetch })
-    .movies
-    .translations({
-      params: {
-        id: slug,
-      },
-      query: {
-        language,
-      },
-    });
+const movieIntlRequest = ({ fetch, slug, language }: MovieIntlParams) =>
+  api({ fetch }).movies.translations({
+    params: {
+      id: slug,
+    },
+    query: {
+      language,
+    },
+  });
 
 export const movieIntlQuery = defineQuery({
   key: 'movieIntl',
   invalidations: [],
-  dependencies: (params) => [
-    params.slug,
-    params.language,
-  ],
+  dependencies: (params) => [params.slug, params.language],
   request: movieIntlRequest,
   mapper: (response) => response.body.map(mapToMediaIntl),
   schema: z.array(MediaIntlSchema),

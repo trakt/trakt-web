@@ -7,9 +7,11 @@ type ToStreamOnProps = {
   countryCode: string;
 };
 
-export function toStreamOn(
-  { services, favorites, countryCode }: ToStreamOnProps,
-) {
+export function toStreamOn({
+  services,
+  favorites,
+  countryCode,
+}: ToStreamOnProps) {
   if (!services) {
     return;
   }

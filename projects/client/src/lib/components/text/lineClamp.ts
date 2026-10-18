@@ -7,10 +7,10 @@ type LineClampProps = {
   isClamped?: WritableSubject<boolean>;
 };
 
-export function lineClamp(node: HTMLElement, {
-  lines,
-  isClamped,
-}: LineClampProps) {
+export function lineClamp(
+  node: HTMLElement,
+  { lines, isClamped }: LineClampProps,
+) {
   node.style.setProperty('display', '-webkit-box');
   node.style.setProperty('-webkit-line-clamp', String(lines));
   node.style.setProperty('-webkit-box-orient', 'vertical');
@@ -24,9 +24,7 @@ export function lineClamp(node: HTMLElement, {
   };
 
   const cleanup = isObserved
-    ? GlobalEventBus
-      .getInstance()
-      .register('resize', computeClamped)
+    ? GlobalEventBus.getInstance().register('resize', computeClamped)
     : NOOP_FN;
 
   computeClamped();

@@ -3,9 +3,9 @@ import { netFlowByDay } from './netFlowByDay.ts';
 
 describe('util: netFlowByDay', () => {
   it('should compute net as added minus removed', () => {
-    expect(
-      netFlowByDay([{ day: '2026-01-01', added: 5, removed: 2 }]),
-    ).toEqual([{ day: '2026-01-01', net: 3 }]);
+    expect(netFlowByDay([{ day: '2026-01-01', added: 5, removed: 2 }])).toEqual(
+      [{ day: '2026-01-01', net: 3 }],
+    );
   });
 
   it('should merge entries sharing a day', () => {
@@ -32,9 +32,9 @@ describe('util: netFlowByDay', () => {
   });
 
   it('should yield negative net when removals dominate', () => {
-    expect(
-      netFlowByDay([{ day: '2026-01-01', added: 1, removed: 4 }]),
-    ).toEqual([{ day: '2026-01-01', net: -3 }]);
+    expect(netFlowByDay([{ day: '2026-01-01', added: 1, removed: 4 }])).toEqual(
+      [{ day: '2026-01-01', net: -3 }],
+    );
   });
 
   it('should return an empty array for no entries', () => {

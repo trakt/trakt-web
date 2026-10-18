@@ -87,7 +87,7 @@ describe('zodToHash', () => {
       z.object({
         value: z.string(),
         children: z.array(nodeSchema),
-      })
+      }),
     );
 
     const hash1 = zodToHash(nodeSchema);
@@ -104,10 +104,12 @@ describe('zodToHash', () => {
         float: z.number(),
         positive: z.number().positive(),
       }),
-      arrays: z.array(z.object({
-        id: z.number(),
-        tags: z.array(z.string()),
-      })),
+      arrays: z.array(
+        z.object({
+          id: z.number(),
+          tags: z.array(z.string()),
+        }),
+      ),
       optional: z.object({
         maybe: z.string().optional(),
         nullable: z.boolean().nullable(),

@@ -15,29 +15,34 @@ describe('toMixtapeSlots', () => {
   });
 
   it('should put the next suggestion in the skipped slot', () => {
-    const slots = toMixtapeSlots([1, 2, 3, 4, 5].map((id) => suggestion(id)), [
-      2,
-    ]);
+    const slots = toMixtapeSlots(
+      [1, 2, 3, 4, 5].map((id) => suggestion(id)),
+      [2],
+    );
     expect(ids(slots)).toEqual([1, 4, 3]);
   });
 
   it('should keep replacing the same slot in order', () => {
-    const slots = toMixtapeSlots([1, 2, 3, 4, 5].map((id) => suggestion(id)), [
-      2,
-      4,
-    ]);
+    const slots = toMixtapeSlots(
+      [1, 2, 3, 4, 5].map((id) => suggestion(id)),
+      [2, 4],
+    );
     expect(ids(slots)).toEqual([1, 5, 3]);
   });
 
   it('should drop a slot once the list runs out', () => {
-    const slots = toMixtapeSlots([1, 2, 3].map((id) => suggestion(id)), [2]);
+    const slots = toMixtapeSlots(
+      [1, 2, 3].map((id) => suggestion(id)),
+      [2],
+    );
     expect(ids(slots)).toEqual([1, 3]);
   });
 
   it('should ignore skips that are not showing', () => {
-    const slots = toMixtapeSlots([1, 2, 3, 4].map((id) => suggestion(id)), [
-      9,
-    ]);
+    const slots = toMixtapeSlots(
+      [1, 2, 3, 4].map((id) => suggestion(id)),
+      [9],
+    );
     expect(ids(slots)).toEqual([1, 2, 3]);
   });
 });

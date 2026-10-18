@@ -29,9 +29,10 @@ function toWatchedAt(
  * A queued watch is a duplicate when the server recorded a play for one of
  * its targets after it was queued (same thing watched from another device).
  */
-export function findDuplicateWatch(
-  { action, watched }: FindDuplicateWatchParams,
-): boolean {
+export function findDuplicateWatch({
+  action,
+  watched,
+}: FindDuplicateWatchParams): boolean {
   if (action.endpoint !== 'history:add') {
     return false;
   }

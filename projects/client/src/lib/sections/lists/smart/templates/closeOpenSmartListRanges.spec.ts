@@ -3,8 +3,9 @@ import { closeOpenSmartListRanges } from './closeOpenSmartListRanges.ts';
 
 describe('util: closeOpenSmartListRanges', () => {
   it('should add the ceiling to a range with only a minimum', () => {
-    expect(closeOpenSmartListRanges({ ratings: [78], imdb_ratings: [7] }))
-      .toEqual({ ratings: [78, 100], imdb_ratings: [7, 10] });
+    expect(
+      closeOpenSmartListRanges({ ratings: [78], imdb_ratings: [7] }),
+    ).toEqual({ ratings: [78, 100], imdb_ratings: [7, 10] });
   });
 
   it('should keep a bounded range', () => {

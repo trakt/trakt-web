@@ -13,9 +13,10 @@ const FeaturedResponseSchema = z.object({
 
 type ListFeaturedPeopleParams = { listId: number } & ApiParams;
 
-const listFeaturedPeopleRequest = async (
-  { fetch, listId }: ListFeaturedPeopleParams,
-) => {
+const listFeaturedPeopleRequest = async ({
+  fetch,
+  listId,
+}: ListFeaturedPeopleParams) => {
   const response = await rawApiFetch({
     fetch,
     path: `/lists/${listId}?extended=featured`,
@@ -23,9 +24,10 @@ const listFeaturedPeopleRequest = async (
 
   return {
     status: response.status,
-    body: response.status === 200
-      ? FeaturedResponseSchema.parse(await response.json())
-      : undefined,
+    body:
+      response.status === 200
+        ? FeaturedResponseSchema.parse(await response.json())
+        : undefined,
   };
 };
 

@@ -10,32 +10,23 @@ type ShowVideosParams = {
   slug: string;
 } & ApiParams;
 
-const showVideoRequest = (
-  { fetch, slug }: ShowVideosParams,
-) => {
-  const showVideos = api({ fetch })
-    .shows
-    .videos({
-      params: {
-        id: slug,
-      },
-    });
+const showVideoRequest = ({ fetch, slug }: ShowVideosParams) => {
+  const showVideos = api({ fetch }).shows.videos({
+    params: {
+      id: slug,
+    },
+  });
 
-  const allSeasonVideos = api({ fetch })
-    .shows
-    .season
-    .videos({
-      params: {
-        id: slug,
-        season: castNumberAsString('all'),
-      },
-    });
+  const allSeasonVideos = api({ fetch }).shows.season.videos({
+    params: {
+      id: slug,
+      season: castNumberAsString('all'),
+    },
+  });
 
-  return Promise.all([showVideos, allSeasonVideos])
-    .then(([showResponse, seasonResponse]) => {
-      if (
-        showResponse.status !== 200 || seasonResponse.status !== 200
-      ) {
+  return Promise.all([showVideos, allSeasonVideos]).then(
+    ([showResponse, seasonResponse]) => {
+      if (showResponse.status !== 200 || seasonResponse.status !== 200) {
         return {
           body: [],
           status: 400,
@@ -49,7 +40,8 @@ const showVideoRequest = (
         ].flat() as VideoResponse[],
         status: 200,
       };
-    });
+    },
+  );
 };
 
 export const showVideosQuery = defineQuery({
@@ -60,8 +52,7 @@ export const showVideosQuery = defineQuery({
   mapper: (response) => {
     const seen = new Set<string>();
 
-    return response
-      .body
+    return response.body
       .filter((video) => video.site === 'youtube')
       .map(mapToMediaVideo)
       .filter((video) => {
@@ -73,8 +64,7 @@ export const showVideosQuery = defineQuery({
       })
       .toSorted((a, b) => {
         return (
-          new Date(a.publishedAt).getTime() -
-          new Date(b.publishedAt).getTime()
+          new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()
         );
       });
   },

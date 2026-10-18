@@ -6,16 +6,12 @@ import { time } from '$lib/utils/timing/time.ts';
 
 type MovieWatchersParams = { slug: string } & ApiParams;
 
-export function movieWatchersRequest(
-  { fetch, slug }: MovieWatchersParams,
-) {
-  return api({ fetch })
-    .movies
-    .watching({
-      params: {
-        id: slug,
-      },
-    });
+export function movieWatchersRequest({ fetch, slug }: MovieWatchersParams) {
+  return api({ fetch }).movies.watching({
+    params: {
+      id: slug,
+    },
+  });
 }
 
 export const movieWatchersQuery = defineQuery({

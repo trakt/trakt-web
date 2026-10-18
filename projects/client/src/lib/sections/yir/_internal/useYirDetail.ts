@@ -12,9 +12,7 @@ type UseYirDetailProps = {
 };
 
 export function useYirDetail(props: UseYirDetailProps) {
-  const query = useQuery(
-    yirDetailQuery({ ...props, slurm: resolveSlurm() }),
-  );
+  const query = useQuery(yirDetailQuery({ ...props, slurm: resolveSlurm() }));
 
   return withYirIntlOverlay(
     query.pipe(map(($query) => $query.data)),

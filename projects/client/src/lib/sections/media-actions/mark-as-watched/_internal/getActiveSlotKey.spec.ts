@@ -84,15 +84,15 @@ describe('getActiveSlotKey', () => {
     ];
 
     it('sticky key holds when date equals the zero-width slot bounds', () => {
-      expect(
-        getActiveSlotKey({ date: time, key: 'e1-e2' }, dupeHistory),
-      ).toBe('e1-e2');
+      expect(getActiveSlotKey({ date: time, key: 'e1-e2' }, dupeHistory)).toBe(
+        'e1-e2',
+      );
     });
 
     it('sticky key holds for the earlier adjacent slot at the same time', () => {
-      expect(
-        getActiveSlotKey({ date: time, key: 'now-e1' }, dupeHistory),
-      ).toBe('now-e1');
+      expect(getActiveSlotKey({ date: time, key: 'now-e1' }, dupeHistory)).toBe(
+        'now-e1',
+      );
     });
   });
 });

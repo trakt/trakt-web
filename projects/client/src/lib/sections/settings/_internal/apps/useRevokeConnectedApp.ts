@@ -13,11 +13,13 @@ type RevokeTarget = {
 export function useRevokeConnectedApp() {
   const { confirm } = useConfirm();
 
-  const revocation = useMutation(defineMutation({
-    key: 'app:revoke',
-    request: ({ id }: RevokeTarget) => revokeConnectedAppRequest({ id }),
-    invalidations: [InvalidateAction.App.Revoke],
-  }));
+  const revocation = useMutation(
+    defineMutation({
+      key: 'app:revoke',
+      request: ({ id }: RevokeTarget) => revokeConnectedAppRequest({ id }),
+      invalidations: [InvalidateAction.App.Revoke],
+    }),
+  );
 
   const revoke = (app: RevokeTarget) =>
     confirm({

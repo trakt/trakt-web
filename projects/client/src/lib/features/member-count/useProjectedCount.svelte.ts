@@ -55,12 +55,14 @@ export function useProjectedCount(anchor: () => RegisteredMemberCount) {
       });
       local = resolved.local;
 
-      advanceTo(approachTarget({
-        current: floor,
-        target: resolved.target,
-        deltaMs: now - previous,
-        halfLifeMs: REANCHOR_HALF_LIFE,
-      }));
+      advanceTo(
+        approachTarget({
+          current: floor,
+          target: resolved.target,
+          deltaMs: now - previous,
+          halfLifeMs: REANCHOR_HALF_LIFE,
+        }),
+      );
 
       previous = now;
       frame = requestAnimationFrame(tick);

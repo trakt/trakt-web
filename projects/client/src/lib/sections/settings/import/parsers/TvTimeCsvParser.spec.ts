@@ -43,11 +43,13 @@ function zipFile(entries: Record<string, string>, name: string): File {
 describe('TvTimeCsvParser', () => {
   describe('canParse', () => {
     it('should accept csv and zip files', () => {
-      expect(TvTimeCsvParser.canParse([
-        csvFile('', 'liberator.csv'),
-        csvFile('', 'tracking-prod-records.csv'),
-        new File([''], 'gdpr-data.zip'),
-      ])).toBe(true);
+      expect(
+        TvTimeCsvParser.canParse([
+          csvFile('', 'liberator.csv'),
+          csvFile('', 'tracking-prod-records.csv'),
+          new File([''], 'gdpr-data.zip'),
+        ]),
+      ).toBe(true);
     });
 
     it('should reject unsupported file types', () => {
@@ -190,10 +192,7 @@ describe('TvTimeCsvParser', () => {
     });
 
     it('should reject zips that match no known TV Time export', async () => {
-      const file = zipFile(
-        { 'random.csv': 'a,b\n1,2' },
-        'unknown.zip',
-      );
+      const file = zipFile({ 'random.csv': 'a,b\n1,2' }, 'unknown.zip');
 
       await expect(TvTimeCsvParser.parse([file])).rejects.toThrow(
         /does not look like a TV Time export/,
@@ -287,10 +286,12 @@ describe('TvTimeCsvParser', () => {
     });
 
     it('should reject uploads with no recognizable TV Time files', async () => {
-      await expect(TvTimeCsvParser.parse([
-        csvFile('device_id,device_type\nabc,ios', 'device_data.csv'),
-        csvFile('', 'empty.csv'),
-      ])).rejects.toThrow(/look like a TV Time export/);
+      await expect(
+        TvTimeCsvParser.parse([
+          csvFile('device_id,device_type\nabc,ios', 'device_data.csv'),
+          csvFile('', 'empty.csv'),
+        ]),
+      ).rejects.toThrow(/look like a TV Time export/);
     });
   });
 
@@ -358,10 +359,12 @@ describe('TvTimeCsvParser', () => {
     });
 
     it('should reject files from different export formats', async () => {
-      await expect(TvTimeCsvParser.parse([
-        csvFile(LIBERATOR_CSV, 'tv-time-liberator.csv'),
-        csvFile(GDPR_V2_CSV, 'tracking-prod-records-v2.csv'),
-      ])).rejects.toThrow(/not both at once/);
+      await expect(
+        TvTimeCsvParser.parse([
+          csvFile(LIBERATOR_CSV, 'tv-time-liberator.csv'),
+          csvFile(GDPR_V2_CSV, 'tracking-prod-records-v2.csv'),
+        ]),
+      ).rejects.toThrow(/not both at once/);
     });
 
     it('should parse both gdpr tracking files as one export', async () => {

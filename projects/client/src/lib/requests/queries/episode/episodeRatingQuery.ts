@@ -11,22 +11,22 @@ type EpisodeRatingParams = {
   episode: number;
 } & ApiParams;
 
-const episodeRatingRequest = (
-  { fetch, slug, season, episode }: EpisodeRatingParams,
-) =>
-  api({ fetch })
-    .shows
-    .episode
-    .ratings({
-      params: {
-        id: slug,
-        season: castNumberAsString(season),
-        episode,
-      },
-      query: {
-        extended: 'all',
-      },
-    });
+const episodeRatingRequest = ({
+  fetch,
+  slug,
+  season,
+  episode,
+}: EpisodeRatingParams) =>
+  api({ fetch }).shows.episode.ratings({
+    params: {
+      id: slug,
+      season: castNumberAsString(season),
+      episode,
+    },
+    query: {
+      extended: 'all',
+    },
+  });
 
 export const episodeRatingQuery = defineQuery({
   key: 'episodeRating',

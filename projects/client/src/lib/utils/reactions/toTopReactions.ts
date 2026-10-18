@@ -7,9 +7,10 @@ type ToTopReactionsParams<T extends AnyReaction> = {
 
 const PREVIEW_LIMIT = 3;
 
-export function toTopReactions<T extends AnyReaction>(
-  { distribution, reactions }: ToTopReactionsParams<T>,
-): ReadonlyArray<T> {
+export function toTopReactions<T extends AnyReaction>({
+  distribution,
+  reactions,
+}: ToTopReactionsParams<T>): ReadonlyArray<T> {
   const countOf = (reaction: T) => distribution[reaction] ?? 0;
 
   return reactions

@@ -13,49 +13,35 @@ const UserFavoritedMediaSchema = z.object({
 
 export type UserFavoritedEntry = z.infer<typeof UserFavoritedMediaSchema>;
 
-function mapMovie(
-  entry: FavoriteMovieResponse,
-): UserFavoritedEntry {
+function mapMovie(entry: FavoriteMovieResponse): UserFavoritedEntry {
   return {
     id: entry.movie.ids.trakt,
     favoritedAt: new Date(entry.listed_at),
   };
 }
 
-const favoritedMoviesRequest = (
-  { fetch }: ApiParams,
-) =>
-  api({ fetch })
-    .users
-    .favorites
-    .movies({
-      params: {
-        id: 'me',
-        sort: 'rank',
-      },
-    });
+const favoritedMoviesRequest = ({ fetch }: ApiParams) =>
+  api({ fetch }).users.favorites.movies({
+    params: {
+      id: 'me',
+      sort: 'rank',
+    },
+  });
 
-function mapShow(
-  entry: FavoriteShowResponse,
-): UserFavoritedEntry {
+function mapShow(entry: FavoriteShowResponse): UserFavoritedEntry {
   return {
     id: entry.show.ids.trakt,
     favoritedAt: new Date(entry.listed_at),
   };
 }
 
-const favoritedShowsRequest = (
-  { fetch }: ApiParams,
-) =>
-  api({ fetch })
-    .users
-    .favorites
-    .shows({
-      params: {
-        id: 'me',
-        sort: 'rank',
-      },
-    });
+const favoritedShowsRequest = ({ fetch }: ApiParams) =>
+  api({ fetch }).users.favorites.shows({
+    params: {
+      id: 'me',
+      sort: 'rank',
+    },
+  });
 
 const UserFavoritesSchema = z.object({
   movies: z.map(z.number(), UserFavoritedMediaSchema),
@@ -76,16 +62,8 @@ export const currentUserFavoritesQuery = defineQuery({
   dependencies: [],
   mapper: ([movieResponse, showResponse]) => {
     return {
-      movies: toMap(
-        movieResponse.body,
-        mapMovie,
-        (entry) => entry.id,
-      ),
-      shows: toMap(
-        showResponse.body,
-        mapShow,
-        (entry) => entry.id,
-      ),
+      movies: toMap(movieResponse.body, mapMovie, (entry) => entry.id),
+      shows: toMap(showResponse.body, mapShow, (entry) => entry.id),
     };
   },
   schema: UserFavoritesSchema,

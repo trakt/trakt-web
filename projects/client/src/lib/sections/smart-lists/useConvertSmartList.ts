@@ -14,9 +14,7 @@ type ConvertListProps = {
   privacy: SmartListWriteRequest['privacy'];
 };
 
-function toConvertRequest(
-  { listId, name, draft, privacy }: ConvertListProps,
-) {
+function toConvertRequest({ listId, name, draft, privacy }: ConvertListProps) {
   return convertToSmartListRequest({
     listId,
     body: {
@@ -32,14 +30,16 @@ function toConvertRequest(
 export function useConvertSmartList() {
   const { track } = useTrack(AnalyticsEvent.SmartListCreate);
 
-  const conversion = useMutation(defineMutation({
-    key: 'smart-list:convert',
-    request: toConvertRequest,
-    invalidations: [
-      InvalidateAction.SmartList.Created,
-      InvalidateAction.List.Edited,
-    ],
-  }));
+  const conversion = useMutation(
+    defineMutation({
+      key: 'smart-list:convert',
+      request: toConvertRequest,
+      invalidations: [
+        InvalidateAction.SmartList.Created,
+        InvalidateAction.List.Edited,
+      ],
+    }),
+  );
 
   const convertList = async (props: ConvertListProps) => {
     track();

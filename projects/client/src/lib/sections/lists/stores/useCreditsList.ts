@@ -19,13 +19,15 @@ type UseCreditsListProps = {
   mode$: Observable<DiscoverMode>;
 };
 
-function typeToQuery(
-  { type, slug, filter }: {
-    type: MediaType;
-    slug: string;
-    filter: Record<string, string>;
-  },
-) {
+function typeToQuery({
+  type,
+  slug,
+  filter,
+}: {
+  type: MediaType;
+  slug: string;
+  filter: Record<string, string>;
+}) {
   const params = { slug, filter };
 
   switch (type) {
@@ -36,9 +38,7 @@ function typeToQuery(
   }
 }
 
-function flattenCredits(
-  credits: MediaCredits | undefined,
-): FlatCredit[] {
+function flattenCredits(credits: MediaCredits | undefined): FlatCredit[] {
   if (!credits) return [];
   const flat: FlatCredit[] = [];
   for (const [position, list] of credits.entries()) {
@@ -81,9 +81,12 @@ function rebuildCredits(
   return grouped;
 }
 
-export function useCreditsList(
-  { type$, slug$, filter$, mode$ }: UseCreditsListProps,
-) {
+export function useCreditsList({
+  type$,
+  slug$,
+  filter$,
+  mode$,
+}: UseCreditsListProps) {
   const query = useQuery(
     combineLatest([type$, slug$, filter$]).pipe(
       map(([type, slug, filter]) => typeToQuery({ type, slug, filter })),
@@ -106,7 +109,7 @@ export function useCreditsList(
       ).pipe(
         overlay.operator,
         map(($flat) => rebuildCredits($query.data, $flat)),
-      )
+      ),
     ),
   );
 

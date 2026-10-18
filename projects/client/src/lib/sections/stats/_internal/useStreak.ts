@@ -23,16 +23,10 @@ export function computeStreak(
   }
 
   const daysWithActivity = new Set(
-    watchedDates
-      .toSorted((a, b) => b.getTime() - a.getTime())
-      .map(getDayKey),
+    watchedDates.toSorted((a, b) => b.getTime() - a.getTime()).map(getDayKey),
   );
 
-  const today = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate(),
-  );
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
   const yesterday = new Date(
     today.getFullYear(),

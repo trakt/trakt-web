@@ -8,10 +8,12 @@ const pagedResponse = (endpoint: string, pageCount: number) =>
     const page = new URL(request.url).searchParams.get('page');
 
     return HttpResponse.json(
-      [{
-        title: `Title ${page}`,
-        ids: { trakt: Number(page), slug: `slug-${page}` },
-      }],
+      [
+        {
+          title: `Title ${page}`,
+          ids: { trakt: Number(page), slug: `slug-${page}` },
+        },
+      ],
       { headers: { 'x-pagination-page-count': `${pageCount}` } },
     );
   });

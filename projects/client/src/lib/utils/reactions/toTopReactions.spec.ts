@@ -33,8 +33,9 @@ describe('util: toTopReactions', () => {
   });
 
   it('should report nothing for a title nobody has reacted to', () => {
-    expect(toTopReactions({ distribution: distribution({}), reactions }))
-      .toEqual([]);
+    expect(
+      toTopReactions({ distribution: distribution({}), reactions }),
+    ).toEqual([]);
   });
 
   it('should treat reactions missing from a partial distribution as unused', () => {

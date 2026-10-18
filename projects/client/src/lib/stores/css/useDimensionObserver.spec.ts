@@ -25,7 +25,7 @@ describe('useDimensionObserver', () => {
   function resize(node: HTMLElement) {
     const entry = { target: node } as unknown as ResizeObserverEntry;
     resizeCallbacks.forEach((callback) =>
-      callback([entry], {} as ResizeObserver)
+      callback([entry], {} as ResizeObserver),
     );
   }
 
@@ -49,16 +49,16 @@ describe('useDimensionObserver', () => {
 
   it('should observe width changes of the node', async () => {
     const node = document.createElement('div');
-    const { observeDimension, observedDimension } = useDimensionObserver(
-      'width',
-    );
+    const { observeDimension, observedDimension } =
+      useDimensionObserver('width');
 
     const component = await renderStore(() => observeDimension(node));
     expect(observedDimension.value).toBe(0);
 
     const width = 100;
-    vi.spyOn(node, 'getBoundingClientRect')
-      .mockReturnValueOnce(getDomRect(0, 0, width));
+    vi.spyOn(node, 'getBoundingClientRect').mockReturnValueOnce(
+      getDomRect(0, 0, width),
+    );
     resize(node);
 
     expect(await waitForEmission(observedDimension, 2)).toBe(width);
@@ -68,16 +68,16 @@ describe('useDimensionObserver', () => {
 
   it('should observe height changes of the node', async () => {
     const node = document.createElement('div');
-    const { observeDimension, observedDimension } = useDimensionObserver(
-      'height',
-    );
+    const { observeDimension, observedDimension } =
+      useDimensionObserver('height');
 
     const component = await renderStore(() => observeDimension(node));
     expect(observedDimension.value).toBe(0);
 
     const height = 120;
-    vi.spyOn(node, 'getBoundingClientRect')
-      .mockReturnValueOnce(getDomRect(0, 0, height));
+    vi.spyOn(node, 'getBoundingClientRect').mockReturnValueOnce(
+      getDomRect(0, 0, height),
+    );
     resize(node);
 
     expect(await waitForEmission(observedDimension, 2)).toBe(height);
@@ -87,16 +87,17 @@ describe('useDimensionObserver', () => {
 
   it('should observe bottom changes of the node', async () => {
     const node = document.createElement('div');
-    const { observeDimension, observedDimension } = useDimensionObserver(
-      'bottom',
-    );
+    const { observeDimension, observedDimension } =
+      useDimensionObserver('bottom');
 
     const component = await renderStore(() => observeDimension(node));
     expect(observedDimension.value).toBe(0);
 
     const bottom = 150;
-    vi.spyOn(node, 'getBoundingClientRect')
-      .mockReturnValueOnce({ ...getDomRect(0, 0, 100), bottom });
+    vi.spyOn(node, 'getBoundingClientRect').mockReturnValueOnce({
+      ...getDomRect(0, 0, 100),
+      bottom,
+    });
     resize(node);
 
     expect(await waitForEmission(observedDimension, 2)).toBe(bottom);

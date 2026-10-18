@@ -45,8 +45,8 @@ describe('followingActivityQuery', () => {
     });
     server.events.removeListener('request:start', record);
 
-    const url = urls.find((candidate) =>
-      candidate.pathname === '/v3/users/me/following/activities'
+    const url = urls.find(
+      (candidate) => candidate.pathname === '/v3/users/me/following/activities',
     );
     expect(url?.searchParams.get('start_at')).toBe(startDate.toISOString());
     expect(url?.searchParams.get('end_at')).toBe(endDate.toISOString());
@@ -68,8 +68,8 @@ describe('followingActivityQuery', () => {
     });
     server.events.removeListener('request:start', record);
 
-    const url = urls.find((candidate) =>
-      candidate.pathname === '/v3/users/me/following/activities'
+    const url = urls.find(
+      (candidate) => candidate.pathname === '/v3/users/me/following/activities',
     );
     expect(url?.searchParams.has('start_at')).toBe(false);
     expect(url?.searchParams.has('end_at')).toBe(false);
@@ -77,13 +77,11 @@ describe('followingActivityQuery', () => {
 
   it('should drop entries it does not understand', async () => {
     server.use(
-      http.get(
-        'http://localhost/v3/users/me/following/activities',
-        () =>
-          HttpResponse.json(
-            [...FollowingActivityResponseMock, { id: 5, action: 'like' }],
-            { headers: { 'X-Pagination-Page-Count': '1' } },
-          ),
+      http.get('http://localhost/v3/users/me/following/activities', () =>
+        HttpResponse.json(
+          [...FollowingActivityResponseMock, { id: 5, action: 'like' }],
+          { headers: { 'X-Pagination-Page-Count': '1' } },
+        ),
       ),
     );
 

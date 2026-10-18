@@ -43,9 +43,7 @@ describe('buildWatchUntilHereMedia', () => {
       seasons: [
         {
           number: 1,
-          episodes: [
-            { number: 4, watched_at: '2024-01-30T10:00:00.000Z' },
-          ],
+          episodes: [{ number: 4, watched_at: '2024-01-30T10:00:00.000Z' }],
         },
         {
           number: 2,

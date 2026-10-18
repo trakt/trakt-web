@@ -4,12 +4,12 @@ type BlockUserRequest = {
   slug: string;
 } & ApiParams;
 
-export function blockUserRequest(
-  { slug, fetch }: BlockUserRequest,
-): Promise<boolean> {
+export function blockUserRequest({
+  slug,
+  fetch,
+}: BlockUserRequest): Promise<boolean> {
   return api({ fetch })
-    .users
-    .block({
+    .users.block({
       params: {
         id: slug,
       },

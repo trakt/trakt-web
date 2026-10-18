@@ -44,9 +44,15 @@ function toDayKey(date: Date) {
   return date.toISOString().slice(0, 10);
 }
 
-function resolveMoments(
-  { veteran, key, now }: { veteran: VipVeteran; key: string; now: Date },
-): VipVeteranMoments {
+function resolveMoments({
+  veteran,
+  key,
+  now,
+}: {
+  veteran: VipVeteran;
+  key: string;
+  now: Date;
+}): VipVeteranMoments {
   const selected = selectVipVeteranCelebration({
     veteran,
     memory: readMemory(key),
@@ -55,9 +61,8 @@ function resolveMoments(
 
   const daysLeft = toVipGraceDaysLeft(veteran.graceEndsAt, now);
   const today = toDayKey(now);
-  const graceDaysLeft = selected.memory.graceShownOn === today
-    ? null
-    : daysLeft;
+  const graceDaysLeft =
+    selected.memory.graceShownOn === today ? null : daysLeft;
 
   const memory: VipVeteranMemory = {
     ...selected.memory,
@@ -68,26 +73,29 @@ function resolveMoments(
   return { celebration: selected.celebration, graceDaysLeft };
 }
 
-export function useVipVeteranMoments(
-  { veteran, isMe }: UseVipVeteranMomentsParams,
-) {
+export function useVipVeteranMoments({
+  veteran,
+  isMe,
+}: UseVipVeteranMomentsParams) {
   const { user } = useUser();
 
   const moments = combineLatest([veteran, isMe, user]).pipe(
     filter(([$veteran, $isMe]) => $isMe && $veteran != null),
     take(1),
     map(([$veteran, , $user]) =>
-      $veteran == null ? null : resolveMoments({
-        veteran: $veteran,
-        key: `${MEMORY_KEY_PREFIX}:${$user.id}`,
-        now: new Date(),
-      })
+      $veteran == null
+        ? null
+        : resolveMoments({
+            veteran: $veteran,
+            key: `${MEMORY_KEY_PREFIX}:${$user.id}`,
+            now: new Date(),
+          }),
     ),
     shareReplay({ bufferSize: 1, refCount: true }),
   );
 
   const ownMoments = combineLatest([moments, isMe]).pipe(
-    map(([$moments, $isMe]) => $isMe ? $moments : null),
+    map(([$moments, $isMe]) => ($isMe ? $moments : null)),
   );
 
   return {

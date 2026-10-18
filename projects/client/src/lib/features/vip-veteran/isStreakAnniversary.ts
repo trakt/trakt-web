@@ -10,6 +10,8 @@ function toAnniversaryDay(since: Date, year: number) {
 export function isStreakAnniversary(since: Date, today: Date): boolean {
   if (today.getUTCFullYear() <= since.getUTCFullYear()) return false;
 
-  return today.getUTCMonth() === since.getUTCMonth() &&
-    today.getUTCDate() === toAnniversaryDay(since, today.getUTCFullYear());
+  return (
+    today.getUTCMonth() === since.getUTCMonth() &&
+    today.getUTCDate() === toAnniversaryDay(since, today.getUTCFullYear())
+  );
 }

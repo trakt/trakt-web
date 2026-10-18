@@ -78,32 +78,38 @@ describe('util: starsFromRects', () => {
     ];
 
     it('should resolve to the nearest star instead of returning null', () => {
-      expect(starsFromRects({
-        rects: GAPPED,
-        clientX: 21,
-        allowHalf: true,
-        isRtl: false,
-        max: 2,
-      })).not.toBeNull();
+      expect(
+        starsFromRects({
+          rects: GAPPED,
+          clientX: 21,
+          allowHalf: true,
+          isRtl: false,
+          max: 2,
+        }),
+      ).not.toBeNull();
     });
 
     it('should pick the star whose center is closest', () => {
       // 21 is nearer star 0's center (10) than star 1's (34) -> full star 1.
-      expect(starsFromRects({
-        rects: GAPPED,
-        clientX: 21,
-        allowHalf: true,
-        isRtl: false,
-        max: 2,
-      })).toBe(1);
+      expect(
+        starsFromRects({
+          rects: GAPPED,
+          clientX: 21,
+          allowHalf: true,
+          isRtl: false,
+          max: 2,
+        }),
+      ).toBe(1);
       // 26 is nearer star 1's center -> its near (left) half.
-      expect(starsFromRects({
-        rects: GAPPED,
-        clientX: 26,
-        allowHalf: true,
-        isRtl: false,
-        max: 2,
-      })).toBe(1.5);
+      expect(
+        starsFromRects({
+          rects: GAPPED,
+          clientX: 26,
+          allowHalf: true,
+          isRtl: false,
+          max: 2,
+        }),
+      ).toBe(1.5);
     });
   });
 

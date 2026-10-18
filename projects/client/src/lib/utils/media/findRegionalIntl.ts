@@ -67,7 +67,7 @@ export function findRegionalIntl(props: ToMediaOrEpisodeIntlProps) {
   );
   const matchedCountry =
     props.translations?.find((intl) => intl.country === regionCode)?.country ??
-      '';
+    '';
 
   const common = {
     title: title ?? props.fallback?.title ?? '',

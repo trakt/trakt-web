@@ -21,12 +21,13 @@ export type ListParams = {
   id?: number;
 };
 
-type UseListItemsProps = PaginationParams & FilterParams & {
-  list: ListParams;
-  type?: DiscoverMode;
-  sortBy?: SortBy | Nil;
-  sortHow?: SortDirection | Nil;
-};
+type UseListItemsProps = PaginationParams &
+  FilterParams & {
+    list: ListParams;
+    type?: DiscoverMode;
+    sortBy?: SortBy | Nil;
+    sortHow?: SortDirection | Nil;
+  };
 
 // FIXME: remove when official lists are sluggable
 function mapListParamsToQueryParams(list: ListParams) {
@@ -42,9 +43,15 @@ function mapListParamsToQueryParams(list: ListParams) {
   };
 }
 
-function listToQuery(
-  { list, limit, type, page, filter, sortBy, sortHow }: UseListItemsProps,
-) {
+function listToQuery({
+  list,
+  limit,
+  type,
+  page,
+  filter,
+  sortBy,
+  sortHow,
+}: UseListItemsProps) {
   const commonParams = {
     type: type === 'media' ? undefined : type,
     page,
@@ -70,8 +77,11 @@ function listToQuery(
 }
 
 export function useListItems(props: UseListItemsProps) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(listToQuery(props));
+  const {
+    list: baseList,
+    isLoading: baseLoading,
+    ...rest
+  } = usePaginatedListQuery(listToQuery(props));
   const overlay = createBulkIntlOverlay<ListItem>({
     getTargets: listItemTargets,
   });

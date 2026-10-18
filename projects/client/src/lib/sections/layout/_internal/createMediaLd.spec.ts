@@ -16,14 +16,16 @@ const HERETIC: MediaInfo = {
 const parse = (json: string) => JSON.parse(json);
 
 const createMovieLd = (info: MediaInfo) =>
-  parse(createMediaLd({
-    type: 'movie',
-    title: 'Heretic',
-    url: 'https://app.trakt.tv/movies/heretic-2024',
-    description: 'Two young missionaries are forced to prove their faith.',
-    image: 'https://media.trakt.tv/heretic.webp',
-    info,
-  }));
+  parse(
+    createMediaLd({
+      type: 'movie',
+      title: 'Heretic',
+      url: 'https://app.trakt.tv/movies/heretic-2024',
+      description: 'Two young missionaries are forced to prove their faith.',
+      image: 'https://media.trakt.tv/heretic.webp',
+      info,
+    }),
+  );
 
 describe('util: createMediaLd', () => {
   describe('movie: Heretic (2024)', () => {
@@ -72,13 +74,15 @@ describe('util: createMediaLd', () => {
     });
 
     it('should be omitted when there are no votes', () => {
-      expect(createMovieLd({ ...HERETIC, votes: undefined }))
-        .to.not.have.property('aggregateRating');
+      expect(
+        createMovieLd({ ...HERETIC, votes: undefined }),
+      ).to.not.have.property('aggregateRating');
     });
 
     it('should be omitted when there is no rating', () => {
-      expect(createMovieLd({ ...HERETIC, rating: null }))
-        .to.not.have.property('aggregateRating');
+      expect(createMovieLd({ ...HERETIC, rating: null })).to.not.have.property(
+        'aggregateRating',
+      );
     });
   });
 
@@ -99,20 +103,22 @@ describe('util: createMediaLd', () => {
 
   describe('show: Silo', () => {
     it('should describe the show', () => {
-      const showLd = parse(createMediaLd({
-        type: 'show',
-        title: 'Silo',
-        url: 'https://app.trakt.tv/shows/silo',
-        description: 'Thousands live in a giant silo deep underground.',
-        image: 'https://media.trakt.tv/silo.webp',
-        info: {
-          overview: 'Thousands live in a giant silo deep underground.',
-          year: 2023,
-          genres: ['drama'],
-          rating: 0.8154,
-          votes: 20254,
-        },
-      }));
+      const showLd = parse(
+        createMediaLd({
+          type: 'show',
+          title: 'Silo',
+          url: 'https://app.trakt.tv/shows/silo',
+          description: 'Thousands live in a giant silo deep underground.',
+          image: 'https://media.trakt.tv/silo.webp',
+          info: {
+            overview: 'Thousands live in a giant silo deep underground.',
+            year: 2023,
+            genres: ['drama'],
+            rating: 0.8154,
+            votes: 20254,
+          },
+        }),
+      );
 
       expect(showLd).to.deep.equal({
         '@context': 'https://schema.org',
@@ -136,18 +142,20 @@ describe('util: createMediaLd', () => {
 
   describe('episode: Silo - Freedom Day', () => {
     it('should describe the episode', () => {
-      const episodeLd = parse(createMediaLd({
-        type: 'episode',
-        title: 'Freedom Day',
-        url: 'https://app.trakt.tv/shows/silo/seasons/1/episodes/1',
-        description: "Sheriff Becker's plans are thrown off course.",
-        image: 'https://media.trakt.tv/freedom-day.webp',
-        info: {
-          overview: "Sheriff Becker's plans are thrown off course.",
-          rating: 0.7753,
-          votes: 4186,
-        },
-      }));
+      const episodeLd = parse(
+        createMediaLd({
+          type: 'episode',
+          title: 'Freedom Day',
+          url: 'https://app.trakt.tv/shows/silo/seasons/1/episodes/1',
+          description: "Sheriff Becker's plans are thrown off course.",
+          image: 'https://media.trakt.tv/freedom-day.webp',
+          info: {
+            overview: "Sheriff Becker's plans are thrown off course.",
+            rating: 0.7753,
+            votes: 4186,
+          },
+        }),
+      );
 
       expect(episodeLd).to.deep.equal({
         '@context': 'https://schema.org',

@@ -20,10 +20,10 @@ export function toVipStreakLadder(veteran: VipVeteran): VipStreakLadder {
     rungs,
     next: next
       ? {
-        tier: next.tier,
-        title: next.title,
-        yearsLeft: next.tier - veteran.years,
-      }
+          tier: next.tier,
+          title: next.title,
+          yearsLeft: next.tier - veteran.years,
+        }
       : null,
   };
 }

@@ -29,15 +29,18 @@ const FALLBACK_UNIT_SUFFIX = {
 
 type FormattedUnit = keyof typeof FALLBACK_UNIT_SUFFIX;
 
-export function toHumanDuration({
-  days = 0,
-  hours = 0,
-  minutes = 0,
-  unitDisplay = 'narrow',
-  separator = ' ',
-  clampAt,
-}: ToHumanDurationProps, locale: AvailableLanguage = 'en') {
-  const totalMinutes = minutes + (hours * 60) + (days * 24 * 60);
+export function toHumanDuration(
+  {
+    days = 0,
+    hours = 0,
+    minutes = 0,
+    unitDisplay = 'narrow',
+    separator = ' ',
+    clampAt,
+  }: ToHumanDurationProps,
+  locale: AvailableLanguage = 'en',
+) {
+  const totalMinutes = minutes + hours * 60 + days * 24 * 60;
   const totalHours = Math.floor(totalMinutes / 60);
   const totalDays = Math.floor(totalHours / 24);
 

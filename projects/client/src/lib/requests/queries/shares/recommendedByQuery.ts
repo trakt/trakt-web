@@ -26,15 +26,13 @@ export type RecommendedByResponseInput = z.input<
 function mapToRecommendedBy(response: RecommendedByResponse): RecommendedBy {
   return {
     users: response.users.map((user) =>
-      mapToUserProfile(user as ProfileResponse)
+      mapToUserProfile(user as ProfileResponse),
     ),
     otherCount: response.other_count,
   };
 }
 
-const recommendedByRequest = async (
-  { fetch, url }: RecommendedByParams,
-) => {
+const recommendedByRequest = async ({ fetch, url }: RecommendedByParams) => {
   const response = await rawApiFetch({
     fetch,
     path: `/v3/shares/recommended?${new URLSearchParams({ url })}`,
@@ -42,9 +40,9 @@ const recommendedByRequest = async (
 
   return response.ok
     ? {
-      body: RecommendedByResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: RecommendedByResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 

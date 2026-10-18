@@ -7,9 +7,9 @@ const BaseProgressEntrySchema = z.object({
   show: ShowEntrySchema,
 });
 
-export const WatchedProgressEntrySchema = BaseProgressEntrySchema
-  .merge(z.object({ type: z.literal('watched') }))
-  .merge(ShowProgressSchema);
+export const WatchedProgressEntrySchema = BaseProgressEntrySchema.merge(
+  z.object({ type: z.literal('watched') }),
+).merge(ShowProgressSchema);
 
 export const DroppedProgressEntrySchema = BaseProgressEntrySchema.merge(
   z.object({

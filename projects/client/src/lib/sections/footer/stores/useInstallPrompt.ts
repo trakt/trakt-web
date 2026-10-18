@@ -10,9 +10,8 @@ export function useInstallPrompt() {
 
   if (browser) {
     onDestroy(
-      GlobalEventBus.getInstance().register(
-        'beforeinstallprompt',
-        (event) => promptStore.next(event),
+      GlobalEventBus.getInstance().register('beforeinstallprompt', (event) =>
+        promptStore.next(event),
       ),
     );
   }

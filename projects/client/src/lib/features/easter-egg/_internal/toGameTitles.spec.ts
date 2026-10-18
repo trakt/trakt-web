@@ -17,12 +17,14 @@ describe('util: toGameTitles', () => {
   });
 
   it('should drop entries without a rating', () => {
-    expect(toGameTitles([{ ...MovieHereticMappedMock, rating: null }]))
-      .toHaveLength(0);
+    expect(
+      toGameTitles([{ ...MovieHereticMappedMock, rating: null }]),
+    ).toHaveLength(0);
   });
 
   it('should drop entries with too few votes', () => {
-    expect(toGameTitles([{ ...MovieHereticMappedMock, votes: 12 }]))
-      .toHaveLength(0);
+    expect(
+      toGameTitles([{ ...MovieHereticMappedMock, votes: 12 }]),
+    ).toHaveLength(0);
   });
 });

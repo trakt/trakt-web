@@ -6,9 +6,10 @@ type HasWatchedTooParams = {
   media: TodayMedia;
 };
 
-export function hasWatchedToo(
-  { history, media }: HasWatchedTooParams,
-): boolean {
+export function hasWatchedToo({
+  history,
+  media,
+}: HasWatchedTooParams): boolean {
   if (!history) return false;
 
   if (media.type === 'movie') return history.movies.has(media.id);

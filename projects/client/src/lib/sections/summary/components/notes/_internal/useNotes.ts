@@ -16,8 +16,9 @@ export function useNotes({ media }: UseNotesProps) {
   return {
     notes: query.pipe(
       map(($query) =>
-        ($query.data ?? [])
-          .toSorted((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+        ($query.data ?? []).toSorted(
+          (a, b) => b.updatedAt.getTime() - a.updatedAt.getTime(),
+        ),
       ),
     ),
     isLoading: query.pipe(map(toLoadingState)),

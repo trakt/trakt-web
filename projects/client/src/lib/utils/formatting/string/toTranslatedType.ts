@@ -6,7 +6,7 @@ const TYPE_MAP = {
 } as const;
 
 export function toTranslatedType(
-  type: string | (keyof typeof TYPE_MAP),
+  type: string | keyof typeof TYPE_MAP,
   data?: Record<string, unknown>,
 ): string {
   const translationFn = TYPE_MAP[type as keyof typeof TYPE_MAP];

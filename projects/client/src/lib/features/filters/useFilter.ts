@@ -25,9 +25,7 @@ export function useFilter() {
         }),
       );
     },
-    activeFilterCount: combineLatest(
-      [search, storedFilters, state],
-    ).pipe(
+    activeFilterCount: combineLatest([search, storedFilters, state]).pipe(
       map(([$search, $storedFilters, $state]) => {
         if (!$state.hasFilters) return 0;
 
@@ -39,9 +37,7 @@ export function useFilter() {
         }).length;
       }),
     ),
-    hasActiveFilter: combineLatest(
-      [search, storedFilters, state],
-    ).pipe(
+    hasActiveFilter: combineLatest([search, storedFilters, state]).pipe(
       map(([$search, $storedFilters, $state]) => {
         if (!$state.hasFilters) {
           return false;
@@ -51,9 +47,7 @@ export function useFilter() {
         return isDifferentFilterSet(defaultFilters, $search);
       }),
     ),
-    isFiltered: combineLatest(
-      [search, state],
-    ).pipe(
+    isFiltered: combineLatest([search, state]).pipe(
       map(([$search, $state]) => {
         if (!$state.hasFilters) {
           return false;
@@ -62,29 +56,25 @@ export function useFilter() {
         return getAppliedFilters($search).length > 0;
       }),
     ),
-    hasAnyAdvancedFilter: combineLatest(
-      [search, state],
-    ).pipe(
+    hasAnyAdvancedFilter: combineLatest([search, state]).pipe(
       map(([$search, $state]) => {
         if (!$state.hasFilters) {
           return false;
         }
 
-        return FILTERS
-          .filter((filter) => 'advanced' in filter)
-          .some((filter) => $search.has(filter.key));
+        return FILTERS.filter((filter) => 'advanced' in filter).some((filter) =>
+          $search.has(filter.key),
+        );
       }),
     ),
-    filterMap: combineLatest(
-      [search, user, state],
-    ).pipe(
+    filterMap: combineLatest([search, user, state]).pipe(
       map(([$search, $user, $state]) => {
         if (!$state.hasFilters) {
           return {};
         }
 
-        return getAppliedFilters($search)
-          .reduce((filterMap, filter) => {
+        return getAppliedFilters($search).reduce(
+          (filterMap, filter) => {
             filterMap[filter.key] = mapToSearchParamValue({
               filter,
               value: $search.get(filter.key),
@@ -98,7 +88,9 @@ export function useFilter() {
             });
 
             return filterMap;
-          }, {} as Record<string, string>);
+          },
+          {} as Record<string, string>,
+        );
       }),
       /*
         combineLatest includes `user`, which can refresh after any action
@@ -109,8 +101,9 @@ export function useFilter() {
       distinctUntilChanged((a, b) => {
         const aKeys = Object.keys(a);
         const bKeys = Object.keys(b);
-        return aKeys.length === bKeys.length &&
-          aKeys.every((k) => a[k] === b[k]);
+        return (
+          aKeys.length === bKeys.length && aKeys.every((k) => a[k] === b[k])
+        );
       }),
     ),
   };

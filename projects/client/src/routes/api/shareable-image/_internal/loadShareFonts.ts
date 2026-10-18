@@ -11,9 +11,9 @@ type LoadShareFontsProps = {
 
 let cachedFonts: ShareFonts | undefined;
 
-export async function loadShareFonts(
-  { bucket }: LoadShareFontsProps,
-): Promise<ShareFonts | undefined> {
+export async function loadShareFonts({
+  bucket,
+}: LoadShareFontsProps): Promise<ShareFonts | undefined> {
   if (cachedFonts) {
     return cachedFonts;
   }

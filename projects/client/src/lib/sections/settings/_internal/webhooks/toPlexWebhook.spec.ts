@@ -11,35 +11,43 @@ describe('toPlexWebhook', () => {
   });
 
   it('returns null when no active plex connection exposes an address', () => {
-    expect(toPlexWebhook([{ ...connection!, webhookUrl: null }], UNNAMED))
-      .toBeNull();
+    expect(
+      toPlexWebhook([{ ...connection!, webhookUrl: null }], UNNAMED),
+    ).toBeNull();
   });
 
   it('ignores inactive connections', () => {
-    expect(toPlexWebhook([{ ...connection!, status: 'paused' }], UNNAMED))
-      .toBeNull();
+    expect(
+      toPlexWebhook([{ ...connection!, status: 'paused' }], UNNAMED),
+    ).toBeNull();
   });
 
   it('includes webhook only connections', () => {
-    const result = toPlexWebhook([
-      { ...connection!, serverName: 'A', webhookUrl: 'https://a' },
-      {
-        ...connection!,
-        id: 8,
-        serverName: 'B',
-        status: 'webhook_only',
-        webhookUrl: 'https://b',
-      },
-    ], UNNAMED);
+    const result = toPlexWebhook(
+      [
+        { ...connection!, serverName: 'A', webhookUrl: 'https://a' },
+        {
+          ...connection!,
+          id: 8,
+          serverName: 'B',
+          status: 'webhook_only',
+          webhookUrl: 'https://b',
+        },
+      ],
+      UNNAMED,
+    );
 
     expect(result).toEqual({ url: 'https://a', serverNames: ['A', 'B'] });
   });
 
   it('uses the first active address and lists active server names', () => {
-    const result = toPlexWebhook([
-      { ...connection!, serverName: 'A', webhookUrl: 'https://a' },
-      { ...connection!, id: 8, serverName: 'B', webhookUrl: 'https://b' },
-    ], UNNAMED);
+    const result = toPlexWebhook(
+      [
+        { ...connection!, serverName: 'A', webhookUrl: 'https://a' },
+        { ...connection!, id: 8, serverName: 'B', webhookUrl: 'https://b' },
+      ],
+      UNNAMED,
+    );
 
     expect(result).toEqual({ url: 'https://a', serverNames: ['A', 'B'] });
   });

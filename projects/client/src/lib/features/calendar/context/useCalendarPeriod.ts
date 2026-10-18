@@ -15,9 +15,8 @@ type Direction = 'next' | 'previous';
 
 function getNextOrPreviousPeriod(date: Date, direction: Direction) {
   const weekStart = getStartOfWeek(date, getLocale());
-  const targetWeek = direction === 'previous'
-    ? subWeeks(weekStart, 1)
-    : addWeeks(weekStart, 1);
+  const targetWeek =
+    direction === 'previous' ? subWeeks(weekStart, 1) : addWeeks(weekStart, 1);
 
   return getStartOfWeek(targetWeek, getLocale());
 }
@@ -33,9 +32,7 @@ function getActiveDate(weekStart: Date, order: CalendarOrder): Date {
 }
 
 // FIXME: calendar navigation should be reflected in url
-export function useCalendarPeriod(
-  options?: { order?: CalendarOrder },
-) {
+export function useCalendarPeriod(options?: { order?: CalendarOrder }) {
   const { order = 'chronological' } = options ?? {};
   const { startDate, activeDate, visibleDate } = getCalendarContext();
   const { track } = useTrack(AnalyticsEvent.CalendarPeriod);
@@ -57,9 +54,8 @@ export function useCalendarPeriod(
       return;
     }
 
-    const direction: Direction = order === 'chronological'
-      ? 'next'
-      : 'previous';
+    const direction: Direction =
+      order === 'chronological' ? 'next' : 'previous';
     const newStart = getNextOrPreviousPeriod(startDate.value, direction);
     startDate.next(newStart);
   };

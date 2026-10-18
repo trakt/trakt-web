@@ -8,19 +8,15 @@ type MoviePeopleParams = {
   slug: string;
 } & ApiParams;
 
-const moviePeopleRequest = (
-  { fetch, slug }: MoviePeopleParams,
-) =>
-  api({ fetch })
-    .movies
-    .people({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'images',
-      },
-    });
+const moviePeopleRequest = ({ fetch, slug }: MoviePeopleParams) =>
+  api({ fetch }).movies.people({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'images',
+    },
+  });
 
 export const moviePeopleQuery = defineQuery({
   key: 'moviePeople',

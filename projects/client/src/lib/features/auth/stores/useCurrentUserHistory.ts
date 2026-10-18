@@ -21,9 +21,7 @@ export type UserHistory = {
   shows: Map<number, WatchedShow>;
 };
 
-function toWatchedMap<T extends { id: number }>(
-  entries: T[],
-): Map<number, T> {
+function toWatchedMap<T extends { id: number }>(entries: T[]): Map<number, T> {
   return new Map(entries.map((entry) => [entry.id, entry]));
 }
 
@@ -41,11 +39,12 @@ export function useCurrentUserHistory(): UseCurrentUserHistoryResult {
   );
 
   const history = combineLatest([moviesQuery, showsQuery]).pipe(
-    map(([movies, shows]) =>
-      [settledData(movies), settledData(shows)] as const
+    map(
+      ([movies, shows]) => [settledData(movies), settledData(shows)] as const,
     ),
-    distinctUntilChanged(([prevMovies, prevShows], [movies, shows]) =>
-      prevMovies === movies && prevShows === shows
+    distinctUntilChanged(
+      ([prevMovies, prevShows], [movies, shows]) =>
+        prevMovies === movies && prevShows === shows,
     ),
     map(([movies, shows]) => {
       if (movies === null || shows === null) {

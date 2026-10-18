@@ -7,10 +7,7 @@ import { streamingSourcesQuery } from './streamingSourcesQuery.ts';
 describe('streamingSourcesQuery', () => {
   it('should query all streaming sources', async () => {
     const result = await runQuery({
-      factory: () =>
-        createTestBedQuery(
-          streamingSourcesQuery({}),
-        ),
+      factory: () => createTestBedQuery(streamingSourcesQuery({})),
       mapper: (response) => response?.data,
     });
 

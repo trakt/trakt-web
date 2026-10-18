@@ -9,9 +9,11 @@ type IsNudgeDismissedProps = {
   maxDismissals: number;
 };
 
-export function isNudgeDismissed(
-  { record, now, maxDismissals }: IsNudgeDismissedProps,
-): boolean {
+export function isNudgeDismissed({
+  record,
+  now,
+  maxDismissals,
+}: IsNudgeDismissedProps): boolean {
   if (!record) {
     return false;
   }

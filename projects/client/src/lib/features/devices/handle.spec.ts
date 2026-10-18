@@ -6,9 +6,7 @@ describe('handle: devices', () => {
   it('should replace initial scale placeholder with the default scaling', async () => {
     const html = `<html>${DEVICE_SCALE_PLACEHOLDER}</html>`;
 
-    const { transformPageChunk } = await interceptHandleResolveOptions(
-      handle,
-    );
+    const { transformPageChunk } = await interceptHandleResolveOptions(handle);
 
     const transformed = transformPageChunk?.({ html, done: true });
 

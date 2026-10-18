@@ -11,9 +11,11 @@ type FetchReviewResourceParams = {
 // present it is the sole authorization: no Bearer is sent, so a different
 // signed-in account can never mix into the request, and a 401 cannot tear down
 // the web session. Single place the review queries share this contract.
-export function fetchReviewResource(
-  { fetch, path, slurm }: FetchReviewResourceParams,
-) {
+export function fetchReviewResource({
+  fetch,
+  path,
+  slurm,
+}: FetchReviewResourceParams) {
   return rawApiFetch({
     fetch,
     path: `${path}?extended=images${toSlurmQuery(slurm)}`,

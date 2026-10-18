@@ -14,16 +14,14 @@ import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
 import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { ListItemSchema } from '../../models/ListItem.ts';
 
-type WatchlistParams =
-  & {
-    sortBy: SortBy;
-    sortHow?: SortDirection | Nil;
-    type?: MediaType;
-    hide?: 'unreleased';
-  }
-  & PaginationParams
-  & ApiParams
-  & FilterParams;
+type WatchlistParams = {
+  sortBy: SortBy;
+  sortHow?: SortDirection | Nil;
+  type?: MediaType;
+  hide?: 'unreleased';
+} & PaginationParams &
+  ApiParams &
+  FilterParams;
 
 export type WatchlistedItem = z.infer<typeof ListItemSchema>;
 
@@ -40,27 +38,32 @@ function typeToWatchlistMethod(type?: MediaType) {
   }
 }
 
-const watchlistRequest = (
-  { fetch, sortBy, sortHow, type, limit, page, filter, hide }: WatchlistParams,
-) => {
+const watchlistRequest = ({
+  fetch,
+  sortBy,
+  sortHow,
+  type,
+  limit,
+  page,
+  filter,
+  hide,
+}: WatchlistParams) => {
   const method = typeToWatchlistMethod(type);
 
-  return api({ fetch })
-    .users
-    .watchlist[method]({
-      params: {
-        id: 'me',
-      },
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        sort_by: sortBy,
-        sort_how: sortHow,
-        hide,
-        ...filter,
-      },
-    });
+  return api({ fetch }).users.watchlist[method]({
+    params: {
+      id: 'me',
+    },
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      sort_by: sortBy,
+      sort_how: sortHow,
+      hide,
+      ...filter,
+    },
+  });
 };
 
 export const watchlistQuery = defineInfiniteQuery({
@@ -72,9 +75,7 @@ export const watchlistQuery = defineInfiniteQuery({
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (
-    params: WatchlistParams,
-  ) => [
+  dependencies: (params: WatchlistParams) => [
     params.type,
     params.sortBy,
     params.sortHow,

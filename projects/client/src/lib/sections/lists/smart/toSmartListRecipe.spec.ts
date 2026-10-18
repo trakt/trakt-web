@@ -42,11 +42,10 @@ describe('toSmartListRecipe', () => {
       },
     });
 
-    expect(includes.map(({ label, details }) => ({ label, details })))
-      .toEqual([
-        { label: 'Genre', details: ['Match: Any'] },
-        { label: 'Keywords', details: ['Match: All'] },
-      ]);
+    expect(includes.map(({ label, details }) => ({ label, details }))).toEqual([
+      { label: 'Genre', details: ['Match: Any'] },
+      { label: 'Keywords', details: ['Match: All'] },
+    ]);
   });
 
   it('should skip the match detail for a single value', () => {
@@ -92,10 +91,12 @@ describe('toSmartListRecipe', () => {
       'Trakt 70% to 100%',
       '5,000+ IMDb votes',
     ]);
-    expect(recipe.hidden).toEqual([{
-      key: 'ignore_watched',
-      label: 'Watched',
-    }]);
+    expect(recipe.hidden).toEqual([
+      {
+        key: 'ignore_watched',
+        label: 'Watched',
+      },
+    ]);
   });
 
   it('should key values on the raw filter value', () => {

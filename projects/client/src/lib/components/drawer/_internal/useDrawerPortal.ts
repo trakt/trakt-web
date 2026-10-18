@@ -9,9 +9,11 @@ type DrawerPortalProps = {
   elevated?: boolean;
 };
 
-export function useDrawerPortal(
-  { hasAutoClose, onClose, elevated }: DrawerPortalProps,
-) {
+export function useDrawerPortal({
+  hasAutoClose,
+  onClose,
+  elevated,
+}: DrawerPortalProps) {
   const portal = (element: HTMLElement) => {
     // The route the drawer was opened on. When a cached page mounts the drawer
     // synchronously during the arriving navigation, afterNavigate would fire

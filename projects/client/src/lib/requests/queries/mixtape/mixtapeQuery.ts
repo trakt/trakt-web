@@ -26,9 +26,13 @@ type MixtapeParams = {
   suggestions: boolean;
 } & ApiParams;
 
-const mixtapeRequest = async (
-  { fetch, type, picks, candidates, suggestions }: MixtapeParams,
-) => {
+const mixtapeRequest = async ({
+  fetch,
+  type,
+  picks,
+  candidates,
+  suggestions,
+}: MixtapeParams) => {
   const response = await rawApiFetch({
     fetch,
     path: '/v3/mixtape?extended=full,images',
@@ -41,9 +45,9 @@ const mixtapeRequest = async (
 
   return response.ok
     ? {
-      body: MixtapeResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: MixtapeResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 

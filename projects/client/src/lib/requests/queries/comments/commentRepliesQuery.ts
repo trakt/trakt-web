@@ -8,33 +8,27 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
-type CommentRepliesParams =
-  & {
-    id: number;
-  }
-  & PaginationParams
-  & ApiParams;
+type CommentRepliesParams = {
+  id: number;
+} & PaginationParams &
+  ApiParams;
 
-const userCommentRepliesRequest = (
-  {
-    fetch,
-    id,
-    limit,
-    page,
-  }: CommentRepliesParams,
-) =>
-  api({ fetch })
-    .comments
-    .replies({
-      params: {
-        id: `${id}`,
-      },
-      query: {
-        extended: 'images',
-        page,
-        limit,
-      },
-    });
+const userCommentRepliesRequest = ({
+  fetch,
+  id,
+  limit,
+  page,
+}: CommentRepliesParams) =>
+  api({ fetch }).comments.replies({
+    params: {
+      id: `${id}`,
+    },
+    query: {
+      extended: 'images',
+      page,
+      limit,
+    },
+  });
 
 export const commentRepliesQuery = defineInfiniteQuery({
   key: 'commentReplies',
@@ -44,13 +38,7 @@ export const commentRepliesQuery = defineInfiniteQuery({
     InvalidateAction.Comment.Reply('episode'),
     InvalidateAction.Comment.Reply('season'),
   ],
-  dependencies: (
-    params,
-  ) => [
-    params.id,
-    params.limit,
-    params.page,
-  ],
+  dependencies: (params) => [params.id, params.limit, params.page],
   request: userCommentRepliesRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToMediaComment),

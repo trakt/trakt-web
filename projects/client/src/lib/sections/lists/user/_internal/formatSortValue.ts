@@ -113,10 +113,10 @@ export function formatSortValue(
       const addedAt = getAddedAt(item);
       return addedAt
         ? toHumanDay({
-          date: addedAt,
-          locale: getLocale(),
-          format: 'short',
-        })
+            date: addedAt,
+            locale: getLocale(),
+            format: 'short',
+          })
         : undefined;
     }
     case 'runtime': {

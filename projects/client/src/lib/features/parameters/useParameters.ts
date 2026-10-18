@@ -20,12 +20,11 @@ export function useParameters() {
   function update(params: Record<string, ParameterType>) {
     const current = parameters.value;
 
-    Array.from(current.entries())
-      .forEach(([key]) => {
-        if (!(key in params)) {
-          current.delete(key);
-        }
-      });
+    Array.from(current.entries()).forEach(([key]) => {
+      if (!(key in params)) {
+        current.delete(key);
+      }
+    });
 
     for (const [key, value] of Object.entries(params)) {
       current.set(key, value);

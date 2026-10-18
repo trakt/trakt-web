@@ -32,7 +32,7 @@ describe('useEmailSettings', () => {
     const { set } = await renderStore(() => useEmailSettings());
 
     const invalidations = await captureInvalidations(() =>
-      set('marketing', true)
+      set('marketing', true),
     );
 
     expect(invalidations).toContain(InvalidateAction.User.EmailSettings);
@@ -49,7 +49,7 @@ describe('useEmailSettings', () => {
     const { set } = await renderStore(() => useEmailSettings());
 
     const invalidations = await captureInvalidations(() =>
-      set('notifications', false)
+      set('notifications', false),
     );
 
     expect(invalidations).toContain(InvalidateAction.User.EmailSettings);

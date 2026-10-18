@@ -2,9 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { spotlightPosition } from './spotlightPosition.ts';
 
 const positionsFor = (active: number, count: number) =>
-  Array.from(
-    { length: count },
-    (_, index) => spotlightPosition({ index, active, count }),
+  Array.from({ length: count }, (_, index) =>
+    spotlightPosition({ index, active, count }),
   );
 
 describe('util: spotlightPosition', () => {

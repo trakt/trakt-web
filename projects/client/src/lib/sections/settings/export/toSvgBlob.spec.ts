@@ -50,9 +50,8 @@ describe('toSvgBlob', () => {
       '<svg xmlns="http://www.w3.org/2000/svg"><rect fill="var(--my-color)" /></svg>',
     );
     vi.spyOn(window, 'getComputedStyle').mockReturnValue({
-      getPropertyValue: (
-        prop: string,
-      ) => (prop === '--my-color' ? '#ff0000' : ''),
+      getPropertyValue: (prop: string) =>
+        prop === '--my-color' ? '#ff0000' : '',
       color: 'rgb(0,0,0)',
     } as unknown as CSSStyleDeclaration);
 

@@ -10,46 +10,39 @@ import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
 import { PaginatableSchemaFactory } from '../../models/Paginatable.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
-type EpisodeCommentsParams =
-  & {
-    slug: string;
-    season: number;
-    episode: number;
-    sort: CommentSortType;
-    language?: string;
-  }
-  & ApiParams
-  & PaginationParams;
+type EpisodeCommentsParams = {
+  slug: string;
+  season: number;
+  episode: number;
+  sort: CommentSortType;
+  language?: string;
+} & ApiParams &
+  PaginationParams;
 
-const showCommentsRequest = (
-  {
-    fetch,
-    slug,
-    season,
-    episode,
-    limit,
-    page,
-    sort,
-    language,
-  }: EpisodeCommentsParams,
-) =>
-  api({ fetch })
-    .shows
-    .episode
-    .comments({
-      params: {
-        id: slug,
-        season: castNumberAsString(season),
-        episode,
-        sort,
-      },
-      query: {
-        extended: 'images',
-        limit,
-        page,
-        language,
-      },
-    });
+const showCommentsRequest = ({
+  fetch,
+  slug,
+  season,
+  episode,
+  limit,
+  page,
+  sort,
+  language,
+}: EpisodeCommentsParams) =>
+  api({ fetch }).shows.episode.comments({
+    params: {
+      id: slug,
+      season: castNumberAsString(season),
+      episode,
+      sort,
+    },
+    query: {
+      extended: 'images',
+      limit,
+      page,
+      language,
+    },
+  });
 
 export const episodeCommentsQuery = defineInfiniteQuery({
   key: 'episodeComments',
@@ -57,9 +50,7 @@ export const episodeCommentsQuery = defineInfiniteQuery({
     InvalidateAction.Comment.Post('episode'),
     InvalidateAction.Comment.Reply('episode'),
   ],
-  dependencies: (
-    params,
-  ) => [
+  dependencies: (params) => [
     params.slug,
     params.season,
     params.episode,

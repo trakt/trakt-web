@@ -52,7 +52,7 @@ function removeFrom(target: MixtapeTarget, media: ReadonlyArray<Media>) {
 }
 
 async function transferRequest({ to, add, from, remove }: Transfer) {
-  return await addTo(to, add) && await removeFrom(from, remove);
+  return (await addTo(to, add)) && (await removeFrom(from, remove));
 }
 
 async function notYetIn(target: MixtapeTarget, media: ReadonlyArray<Media>) {
@@ -66,37 +66,45 @@ async function notYetIn(target: MixtapeTarget, media: ReadonlyArray<Media>) {
 export function useMixtapeSave() {
   const { notify } = useActionToast();
 
-  const watchlisting = useMutation(defineMutation({
-    key: 'mixtape:keep-watchlist',
-    request: (media: Media) =>
-      executeOrEnqueue({
-        endpoint: 'watchlist:add',
-        keys: [toMediaKey(media.type, media.id)],
-        body: toMixtapePayload([media]),
-        invalidations: watchlistInvalidations,
-      }),
-    invalidations: whenExecuted(watchlistInvalidations),
-  }));
-  const listing = useMutation(defineMutation({
-    key: 'mixtape:keep-list',
-    request: ({ target, media }: { target: number; media: Media }) =>
-      addToListRequest({ body: toMixtapePayload([media]), listId: target }),
-    invalidations: [
-      InvalidateAction.Listed('movie'),
-      InvalidateAction.Listed('show'),
-    ],
-  }));
-  const transferring = useMutation(defineMutation({
-    key: 'mixtape:move',
-    request: transferRequest,
-    invalidations: [...invalidations, InvalidateAction.List.Edited],
-  }));
-  const creating = useMutation(defineMutation({
-    key: 'mixtape:create-list',
-    request: (name: string) =>
-      createListRequest({ userId: 'me', name, privacy: 'private' }),
-    invalidations: [InvalidateAction.List.Created],
-  }));
+  const watchlisting = useMutation(
+    defineMutation({
+      key: 'mixtape:keep-watchlist',
+      request: (media: Media) =>
+        executeOrEnqueue({
+          endpoint: 'watchlist:add',
+          keys: [toMediaKey(media.type, media.id)],
+          body: toMixtapePayload([media]),
+          invalidations: watchlistInvalidations,
+        }),
+      invalidations: whenExecuted(watchlistInvalidations),
+    }),
+  );
+  const listing = useMutation(
+    defineMutation({
+      key: 'mixtape:keep-list',
+      request: ({ target, media }: { target: number; media: Media }) =>
+        addToListRequest({ body: toMixtapePayload([media]), listId: target }),
+      invalidations: [
+        InvalidateAction.Listed('movie'),
+        InvalidateAction.Listed('show'),
+      ],
+    }),
+  );
+  const transferring = useMutation(
+    defineMutation({
+      key: 'mixtape:move',
+      request: transferRequest,
+      invalidations: [...invalidations, InvalidateAction.List.Edited],
+    }),
+  );
+  const creating = useMutation(
+    defineMutation({
+      key: 'mixtape:create-list',
+      request: (name: string) =>
+        createListRequest({ userId: 'me', name, privacy: 'private' }),
+      invalidations: [InvalidateAction.List.Created],
+    }),
+  );
 
   const keep = async (target: MixtapeTarget, media: Media) => {
     if (target == null) {
@@ -113,15 +121,19 @@ export function useMixtapeSave() {
     return isKept;
   };
 
-  const move = async (
-    { from, to, toName, media, onMoved }: {
-      from: MixtapeTarget;
-      to: MixtapeTarget;
-      toName: string;
-      media: ReadonlyArray<Media>;
-      onMoved: (target: MixtapeTarget) => void;
-    },
-  ) => {
+  const move = async ({
+    from,
+    to,
+    toName,
+    media,
+    onMoved,
+  }: {
+    from: MixtapeTarget;
+    to: MixtapeTarget;
+    toName: string;
+    media: ReadonlyArray<Media>;
+    onMoved: (target: MixtapeTarget) => void;
+  }) => {
     if (from === to) return true;
 
     const added = await notYetIn(to, media);

@@ -6,7 +6,9 @@ import type { ExecuteOrEnqueueOutcome } from './executeOrEnqueue.ts';
  * queued action carries its own tokens and invalidates when it replays.
  */
 export function whenExecuted(actions: InvalidateActionOptions[]) {
-  return (
-    { data }: { data: ExecuteOrEnqueueOutcome },
-  ): InvalidateActionOptions[] => data === 'executed' ? actions : [];
+  return ({
+    data,
+  }: {
+    data: ExecuteOrEnqueueOutcome;
+  }): InvalidateActionOptions[] => (data === 'executed' ? actions : []);
 }

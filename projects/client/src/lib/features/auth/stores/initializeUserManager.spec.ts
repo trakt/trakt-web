@@ -33,9 +33,9 @@ const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 const { cooldownMs, failureResetMs, maxConsecutiveFailures } =
   silentRenewPolicy;
 
-const openBreaker = async (
-  stub: { signinSilent: ReturnType<typeof vi.fn> },
-) => {
+const openBreaker = async (stub: {
+  signinSilent: ReturnType<typeof vi.fn>;
+}) => {
   await vi.advanceTimersByTimeAsync(cooldownMs * (maxConsecutiveFailures - 1));
   expect(stub.signinSilent).toHaveBeenCalledTimes(maxConsecutiveFailures);
 
@@ -103,7 +103,7 @@ function renderUserManager() {
   return new Promise<ReturnType<typeof initializeUserManager>>((resolve) =>
     render(UserManagerTestBed, {
       props: { params: { ctx, isResolved: false }, output: resolve },
-    })
+    }),
   );
 }
 
@@ -118,8 +118,8 @@ async function renderGate() {
 }
 
 const bustedNavigationCache = () =>
-  postMessage.mock.calls.some(([message]) =>
-    message?.type === WorkerMessage.CacheBust
+  postMessage.mock.calls.some(
+    ([message]) => message?.type === WorkerMessage.CacheBust,
   );
 
 describe('initializeUserManager', () => {
@@ -191,10 +191,11 @@ describe('initializeUserManager', () => {
 
     it('should hold the gate while a renewal another holder started is in flight', async () => {
       let settle: (value: User | null) => void = () => {};
-      const { raiseAccessTokenExpired } = stubUserManager(() =>
-        new Promise<User | null>((resolve) => {
-          settle = resolve;
-        })
+      const { raiseAccessTokenExpired } = stubUserManager(
+        () =>
+          new Promise<User | null>((resolve) => {
+            settle = resolve;
+          }),
       );
 
       const isInitializing = await renderGate();
@@ -214,7 +215,7 @@ describe('initializeUserManager', () => {
 
     it('should clear a refused grant out of storage', async () => {
       const { stub } = stubUserManager(() =>
-        Promise.reject(new ErrorResponse({ error: 'invalid_grant' }))
+        Promise.reject(new ErrorResponse({ error: 'invalid_grant' })),
       );
 
       const isInitializing = await renderGate();
@@ -225,7 +226,7 @@ describe('initializeUserManager', () => {
 
     it('should keep a session whose refresh token survived a transient failure', async () => {
       const { stub } = stubUserManager(() =>
-        Promise.reject(new TypeError('Failed to fetch'))
+        Promise.reject(new TypeError('Failed to fetch')),
       );
 
       await renderGate();
@@ -236,7 +237,7 @@ describe('initializeUserManager', () => {
     it('should retry once the cooldown lapses', async () => {
       vi.useFakeTimers({ shouldAdvanceTime: true });
       const { stub } = stubUserManager(() =>
-        Promise.reject(new TypeError('Failed to fetch'))
+        Promise.reject(new TypeError('Failed to fetch')),
       );
 
       await renderGate();
@@ -250,7 +251,7 @@ describe('initializeUserManager', () => {
 
     it('should let a reconnect renew without waiting out the cooldown', async () => {
       const { stub } = stubUserManager(() =>
-        Promise.reject(new TypeError('Failed to fetch'))
+        Promise.reject(new TypeError('Failed to fetch')),
       );
 
       await renderGate();
@@ -266,7 +267,7 @@ describe('initializeUserManager', () => {
     it('should let a reconnect renew past an open breaker', async () => {
       vi.useFakeTimers({ shouldAdvanceTime: true });
       const { stub } = stubUserManager(() =>
-        Promise.reject(new TypeError('Failed to fetch'))
+        Promise.reject(new TypeError('Failed to fetch')),
       );
 
       await renderGate();
@@ -283,7 +284,7 @@ describe('initializeUserManager', () => {
     it('should keep retrying until an open breaker resets', async () => {
       vi.useFakeTimers({ shouldAdvanceTime: true });
       const { stub } = stubUserManager(() =>
-        Promise.reject(new TypeError('Failed to fetch'))
+        Promise.reject(new TypeError('Failed to fetch')),
       );
 
       await renderGate();

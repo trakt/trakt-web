@@ -10,7 +10,7 @@ import { WEBVIEW_PARAMS } from '$lib/utils/url/webviewParams.ts';
 export function stripWebviewParams(url: URL): URL {
   const sanitized = new URL(url);
   Object.values(WEBVIEW_PARAMS).forEach((param) =>
-    sanitized.searchParams.delete(param)
+    sanitized.searchParams.delete(param),
   );
   return sanitized;
 }

@@ -31,10 +31,12 @@ describe('useLibrarySelection', () => {
     await firstValueFrom(cached.pipe(filter((query) => query.isSuccess)));
     populated = true;
     const values: string[] = [];
-    const result = await firstValueFrom(selection.pipe(
-      tap((value) => values.push(value.value)),
-      filter((value) => !value.isLoading),
-    ));
+    const result = await firstValueFrom(
+      selection.pipe(
+        tap((value) => values.push(value.value)),
+        filter((value) => !value.isLoading),
+      ),
+    );
     expect(result.value).toBe('other');
     expect(result.options).toHaveLength(2);
     expect(values).not.toContain('plex');
@@ -65,9 +67,8 @@ describe('useLibrarySelection', () => {
 
   it('should hide the custom library while the probe is in flight', async () => {
     server.use(
-      http.get(
-        'http://localhost/sync/collection/media',
-        () => HttpResponse.json(MediaLibraryResponseMock.slice(0, 1)),
+      http.get('http://localhost/sync/collection/media', () =>
+        HttpResponse.json(MediaLibraryResponseMock.slice(0, 1)),
       ),
     );
 
@@ -82,9 +83,8 @@ describe('useLibrarySelection', () => {
 
   it('should retain custom library when it contains an item', async () => {
     server.use(
-      http.get(
-        'http://localhost/sync/collection/media',
-        () => HttpResponse.json(MediaLibraryResponseMock.slice(0, 1)),
+      http.get('http://localhost/sync/collection/media', () =>
+        HttpResponse.json(MediaLibraryResponseMock.slice(0, 1)),
       ),
     );
 

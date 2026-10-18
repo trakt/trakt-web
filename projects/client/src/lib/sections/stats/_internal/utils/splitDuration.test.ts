@@ -18,11 +18,7 @@ describe('splitDuration', () => {
 
   describe('spaced format (space between number and unit)', () => {
     it('splits Dutch duration', () => {
-      expect(splitDuration('7 d 24 u 59 m')).toEqual([
-        '7 d',
-        '24 u',
-        '59 m',
-      ]);
+      expect(splitDuration('7 d 24 u 59 m')).toEqual(['7 d', '24 u', '59 m']);
     });
 
     it('splits German duration', () => {

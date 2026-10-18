@@ -11,13 +11,15 @@ describe('episodeCommentsQuery', () => {
   it('should query for comments on an episode', async () => {
     const result = await runQuery({
       factory: () =>
-        createTestBedInfiniteQuery(episodeCommentsQuery({
-          slug: ShowSiloMappedMock.slug,
-          season: EpisodeSiloResponseMock.season,
-          episode: EpisodeSiloResponseMock.number,
-          limit: 10,
-          sort: 'likes',
-        })),
+        createTestBedInfiniteQuery(
+          episodeCommentsQuery({
+            slug: ShowSiloMappedMock.slug,
+            season: EpisodeSiloResponseMock.season,
+            episode: EpisodeSiloResponseMock.number,
+            limit: 10,
+            sort: 'likes',
+          }),
+        ),
       mapper: mapToEntries,
     });
 

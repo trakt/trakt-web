@@ -14,9 +14,7 @@ type RangeProp = {
   range: { min: number; max: number } | null;
 };
 
-export type ApplyFilterToUrlProps =
-  & BaseProps
-  & (ValueProp | RangeProp);
+export type ApplyFilterToUrlProps = BaseProps & (ValueProp | RangeProp);
 
 type FilterValue = { key: FilterKey; value: string | null };
 
@@ -26,15 +24,16 @@ function getFilterValues(props: ApplyFilterToUrlProps): FilterValue[] {
   }
 
   const value = props.range ? `${props.range.min}-${props.range.max}` : null;
-  const additionalValues = (props.additionalKeys ?? [])
-    .map(({ key, mapper }) => {
+  const additionalValues = (props.additionalKeys ?? []).map(
+    ({ key, mapper }) => {
       if (!mapper) return { key, value };
 
       return {
         key,
         value: props.range ? mapper(props.range) : value,
       };
-    });
+    },
+  );
 
   return [{ key: props.key, value }, ...additionalValues];
 }

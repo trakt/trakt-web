@@ -15,9 +15,11 @@ export function useReport() {
   const isSubmitting = new BehaviorSubject(false);
   const error = new BehaviorSubject<ReportError | null>(null);
 
-  const submit = async (
-    { params, reason, message }: ReportProps,
-  ): Promise<boolean> => {
+  const submit = async ({
+    params,
+    reason,
+    message,
+  }: ReportProps): Promise<boolean> => {
     isSubmitting.next(true);
     error.next(null);
 

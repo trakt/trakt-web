@@ -22,10 +22,12 @@ export function useSpotlightTick() {
 
   const autoplay = useMedia(WellKnownMediaQuery.reducedMotion).pipe(
     switchMap((isReducedMotion) =>
-      isReducedMotion ? EMPTY : steps.pipe(
-        startWith(0),
-        switchMap(() => interval(SPOTLIGHT_INTERVAL_MS).pipe(map(() => 1))),
-      )
+      isReducedMotion
+        ? EMPTY
+        : steps.pipe(
+            startWith(0),
+            switchMap(() => interval(SPOTLIGHT_INTERVAL_MS).pipe(map(() => 1))),
+          ),
     ),
   );
 

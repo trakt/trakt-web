@@ -16,16 +16,12 @@ import {
   tap,
 } from 'rxjs/operators';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
-import {
-  searchListsQuery,
-} from '../../requests/queries/search/searchListsQuery.ts';
+import { searchListsQuery } from '../../requests/queries/search/searchListsQuery.ts';
 import {
   type MediaSearchResult,
   searchMediaQuery,
 } from '../../requests/queries/search/searchMediaQuery.ts';
-import {
-  searchPeopleQuery,
-} from '../../requests/queries/search/searchPeopleQuery.ts';
+import { searchPeopleQuery } from '../../requests/queries/search/searchPeopleQuery.ts';
 import {
   searchTrendingQuery,
   type TrendingSearchesResult,
@@ -69,13 +65,16 @@ function modeToQuery(
       }) as CreateQueryOptions<SearchResponse>;
     }
     case 'people':
-      return searchPeopleQuery({ query, config, limit }) as CreateQueryOptions<
-        SearchResponse
-      >;
+      return searchPeopleQuery({
+        query,
+        config,
+        limit,
+      }) as CreateQueryOptions<SearchResponse>;
     case 'lists':
-      return searchListsQuery({ query, limit }) as CreateQueryOptions<
-        SearchResponse
-      >;
+      return searchListsQuery({
+        query,
+        limit,
+      }) as CreateQueryOptions<SearchResponse>;
     default:
       throw new Error(`Unsupported search mode: ${mode}`);
   }
@@ -87,9 +86,10 @@ function modeToTrendingQuery(query: string, mode: SearchMode) {
     case 'movie':
     case 'show': {
       const type = mode !== 'media' ? mode : undefined;
-      return searchTrendingQuery({ query, type }) as CreateQueryOptions<
-        TrendingSearchesResult
-      >;
+      return searchTrendingQuery({
+        query,
+        type,
+      }) as CreateQueryOptions<TrendingSearchesResult>;
     }
     default:
       throw new Error(`Unsupported trending search mode: ${mode}`);
@@ -103,10 +103,7 @@ export function useSearch() {
 
   const searchTerm$ = new BehaviorSubject<string>('');
 
-  const searchIntent$ = combineLatest([
-    searchTerm$,
-    mode,
-  ]).pipe(
+  const searchIntent$ = combineLatest([searchTerm$, mode]).pipe(
     debounceTime(QUERY_DEBOUNCE),
     multicast(),
   );
@@ -122,8 +119,9 @@ export function useSearch() {
       mode: currentMode,
     })),
     debounceTime(TRACK_DEBOUNCE),
-    distinctUntilChanged((previous, next) =>
-      previous.term === next.term && previous.mode === next.mode
+    distinctUntilChanged(
+      (previous, next) =>
+        previous.term === next.term && previous.mode === next.mode,
     ),
     // After the dedupe, not before: clearing the box has to reach
     // `distinctUntilChanged` so searching the same term again still counts.
@@ -133,63 +131,70 @@ export function useSearch() {
     multicast(),
   );
 
-  const searchResults$ = client == null ? of(null) : searchIntent$.pipe(
-    switchMap(([rawTerm, currentMode]) => {
-      const term = rawTerm.toLowerCase().trim();
+  const searchResults$ =
+    client == null
+      ? of(null)
+      : searchIntent$.pipe(
+          switchMap(([rawTerm, currentMode]) => {
+            const term = rawTerm.toLowerCase().trim();
 
-      if (term.length === 0) {
-        return of(null);
-      }
+            if (term.length === 0) {
+              return of(null);
+            }
 
-      isSearching.next(true);
+            isSearching.next(true);
 
-      return from(ensureFreshSearchKeys(config)).pipe(
-        switchMap((freshConfig) => {
-          const searchQuery = client.fetchQuery(
-            modeToQuery(term, currentMode, freshConfig, false),
-          );
+            return from(ensureFreshSearchKeys(config)).pipe(
+              switchMap((freshConfig) => {
+                const searchQuery = client.fetchQuery(
+                  modeToQuery(term, currentMode, freshConfig, false),
+                );
 
-          if (currentMode === 'people' || currentMode === 'lists') {
-            return searchQuery;
-          }
+                if (currentMode === 'people' || currentMode === 'lists') {
+                  return searchQuery;
+                }
 
-          const trendingQuery = client.fetchQuery(
-            modeToTrendingQuery(term, currentMode),
-          );
+                const trendingQuery = client.fetchQuery(
+                  modeToTrendingQuery(term, currentMode),
+                );
 
-          const exactQuery = client.fetchQuery(
-            modeToQuery(term, currentMode, freshConfig, true),
-          );
-          return combineLatest([exactQuery, searchQuery, trendingQuery]).pipe(
-            map(([exactResults, searchResults, trendingResults]) => {
-              // Only unambiguous exact hits lead; the deep catalog tail trails
-              // the fuzzy results instead of displacing them.
-              const { confident, deep } = splitExactByConfidence(
-                (exactResults as MediaSearchResult).items,
-              );
+                const exactQuery = client.fetchQuery(
+                  modeToQuery(term, currentMode, freshConfig, true),
+                );
+                return combineLatest([
+                  exactQuery,
+                  searchQuery,
+                  trendingQuery,
+                ]).pipe(
+                  map(([exactResults, searchResults, trendingResults]) => {
+                    // Only unambiguous exact hits lead; the deep catalog tail trails
+                    // the fuzzy results instead of displacing them.
+                    const { confident, deep } = splitExactByConfidence(
+                      (exactResults as MediaSearchResult).items,
+                    );
 
-              return {
-                type: 'media' as const,
-                items: dedupe(
-                  (item) => item.key,
-                  confident,
-                  trendingResults?.items ?? [],
-                  (searchResults as MediaSearchResult).items,
-                  deep,
-                ),
-              };
-            }),
-          );
-        }),
-        // Contain a failed lookup to this search. Without this the error
-        // propagates through switchMap and terminates the whole stream, so
-        // every later search silently returns nothing until remount.
-        catchError(() => of(null)),
-      );
-    }),
-    tap(() => isSearching.next(false)),
-    multicast(),
-  );
+                    return {
+                      type: 'media' as const,
+                      items: dedupe(
+                        (item) => item.key,
+                        confident,
+                        trendingResults?.items ?? [],
+                        (searchResults as MediaSearchResult).items,
+                        deep,
+                      ),
+                    };
+                  }),
+                );
+              }),
+              // Contain a failed lookup to this search. Without this the error
+              // propagates through switchMap and terminates the whole stream, so
+              // every later search silently returns nothing until remount.
+              catchError(() => of(null)),
+            );
+          }),
+          tap(() => isSearching.next(false)),
+          multicast(),
+        );
 
   // Tracking rides the results subscription, so it needs no separate teardown.
   const results = merge(searchResults$, trackedSearch$);
@@ -209,9 +214,7 @@ export function useSearch() {
     shareReplay(1),
   );
 
-  const coverSrc = localizedResults.pipe(
-    map(mapToSearchCover),
-  );
+  const coverSrc = localizedResults.pipe(map(mapToSearchCover));
 
   function search(term: string, searchMode: SearchMode) {
     mode.next(searchMode);

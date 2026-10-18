@@ -14,9 +14,11 @@ type MixtapeVectorsParams = {
 
 const EMPTY_VECTORS: MixtapeVectors = { cutoff: 1, vectors: {} };
 
-const mixtapeVectorsRequest = async (
-  { fetch, type, ids }: MixtapeVectorsParams,
-) => {
+const mixtapeVectorsRequest = async ({
+  fetch,
+  type,
+  ids,
+}: MixtapeVectorsParams) => {
   const query = new URLSearchParams({ type, ids: ids.join(',') });
   const response = await rawApiFetch({
     fetch,
@@ -26,9 +28,9 @@ const mixtapeVectorsRequest = async (
 
   return response.ok
     ? {
-      body: MixtapeVectorsSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: MixtapeVectorsSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 

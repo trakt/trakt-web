@@ -18,9 +18,8 @@ export function useScrollHistoryAction(
       scrollPosition.next(readScrollState(restoreId));
 
     const handleSnapshot = (snapshotId: string) => {
-      const position = type === 'horizontal'
-        ? container.scrollLeft
-        : container.scrollTop;
+      const position =
+        type === 'horizontal' ? container.scrollLeft : container.scrollTop;
       writeScrollState(snapshotId, position);
     };
 
@@ -39,9 +38,7 @@ export function useScrollHistoryAction(
 
     resetHandlers(id);
 
-    const subscription = scrollPosition.subscribe(
-      updateScrollPosition,
-    );
+    const subscription = scrollPosition.subscribe(updateScrollPosition);
 
     return {
       update: (updatedId: string) => {

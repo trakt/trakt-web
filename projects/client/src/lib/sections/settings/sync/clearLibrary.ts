@@ -32,9 +32,8 @@ function removeFromCollection(
     const { deleted } = collectionRemovalResponseSchema.parse(
       await response.json(),
     );
-    const expected = 'movies' in body
-      ? body.movies.length
-      : body.episodes.length;
+    const expected =
+      'movies' in body ? body.movies.length : body.episodes.length;
     const removed = 'movies' in body ? deleted.movies : deleted.episodes;
     if (removed !== expected) {
       throw new Error('Not all custom library items were removed.');

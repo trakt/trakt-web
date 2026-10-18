@@ -9,18 +9,17 @@ type MovieJustWatchUrlParams = {
   country: string;
 } & ApiParams;
 
-const movieJustWatchUrlRequest = (
-  { fetch, slug, country }: MovieJustWatchUrlParams,
-) =>
-  api({ fetch })
-    .movies
-    .justwatch
-    .link({
-      params: {
-        id: slug,
-        country,
-      },
-    });
+const movieJustWatchUrlRequest = ({
+  fetch,
+  slug,
+  country,
+}: MovieJustWatchUrlParams) =>
+  api({ fetch }).movies.justwatch.link({
+    params: {
+      id: slug,
+      country,
+    },
+  });
 
 export const movieJustWatchUrlQuery = defineQuery({
   key: 'movieJustWatchUrl',

@@ -22,7 +22,7 @@ describe('util: resampleSeries', () => {
   it('should stay exact for linear data (no overshoot)', () => {
     const result = resampleSeries({ values: [0, 2, 4, 6], targetLength: 7 });
     [0, 1, 2, 3, 4, 5, 6].forEach((expected, index) =>
-      expect(result[index]).toBeCloseTo(expected)
+      expect(result[index]).toBeCloseTo(expected),
     );
   });
 
@@ -55,10 +55,7 @@ describe('util: resampleSeries', () => {
 
   it('should fill from a single value', () => {
     expect(resampleSeries({ values: [5], targetLength: 4 })).toEqual([
-      5,
-      5,
-      5,
-      5,
+      5, 5, 5, 5,
     ]);
   });
 

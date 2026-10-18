@@ -14,8 +14,8 @@ export function useSortParams(): Observable<SortParams> {
       sortBy: $url.searchParams.get('sort_by'),
       sortHow: $url.searchParams.get('sort_how'),
     })),
-    distinctUntilChanged((a, b) =>
-      a.sortBy === b.sortBy && a.sortHow === b.sortHow
+    distinctUntilChanged(
+      (a, b) => a.sortBy === b.sortBy && a.sortHow === b.sortHow,
     ),
   );
 }

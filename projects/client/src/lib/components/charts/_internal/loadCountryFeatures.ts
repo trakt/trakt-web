@@ -80,17 +80,18 @@ function buildPolygon(topology: Topology, rings: number[][]): Position[][] {
 function toFeature(topology: Topology, geometry: TopoGeometry): CountryFeature {
   const properties = { code: geometry.properties.NAME };
 
-  const shape: Polygon | MultiPolygon = geometry.type === 'MultiPolygon'
-    ? {
-      type: 'MultiPolygon',
-      coordinates: geometry.arcs.map((polygon) =>
-        buildPolygon(topology, polygon)
-      ),
-    }
-    : {
-      type: 'Polygon',
-      coordinates: buildPolygon(topology, geometry.arcs),
-    };
+  const shape: Polygon | MultiPolygon =
+    geometry.type === 'MultiPolygon'
+      ? {
+          type: 'MultiPolygon',
+          coordinates: geometry.arcs.map((polygon) =>
+            buildPolygon(topology, polygon),
+          ),
+        }
+      : {
+          type: 'Polygon',
+          coordinates: buildPolygon(topology, geometry.arcs),
+        };
 
   return { type: 'Feature', id: properties.code, properties, geometry: shape };
 }
@@ -99,7 +100,7 @@ function decode(topology: Topology): CountryFeatureCollection {
   return {
     type: 'FeatureCollection',
     features: topology.objects.countries.geometries.map((geometry) =>
-      toFeature(topology, geometry)
+      toFeature(topology, geometry),
     ),
   };
 }
@@ -110,9 +111,7 @@ export function loadCountryFeatures(): Promise<CountryFeatureCollection> {
   cached = fetch(geoAssetUrl)
     .then((response) => {
       if (!response.ok) {
-        throw new Error(
-          `Failed to fetch map geometry: ${response.statusText}`,
-        );
+        throw new Error(`Failed to fetch map geometry: ${response.statusText}`);
       }
       return response.json() as Promise<Topology>;
     })

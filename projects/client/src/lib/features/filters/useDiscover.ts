@@ -38,7 +38,7 @@ export function useDiscover() {
       assertDefined(
         options.find((o) => o.value === value),
         `Invalid discover mode: ${value}`,
-      )
+      ),
     ),
   );
 
@@ -52,9 +52,7 @@ export function useDiscover() {
     current: currentOption,
     onModeChange,
     mode,
-    useSeasonalFilters: combineLatest(
-      [useSeasonalFilters, activeTheme],
-    ).pipe(
+    useSeasonalFilters: combineLatest([useSeasonalFilters, activeTheme]).pipe(
       map(([$useSeasonalFilters, $activeTheme]) => {
         if ($activeTheme === null) {
           return false;

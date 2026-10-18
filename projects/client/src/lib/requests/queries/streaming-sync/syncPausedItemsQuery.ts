@@ -9,16 +9,16 @@ import { mapToSyncItem } from './_internal/mapToSyncItem.ts';
 
 type SyncPausedItemsParams = { id: number } & PaginationParams & ApiParams;
 
-const syncPausedItemsRequest = (
-  { fetch, id, limit, page }: SyncPausedItemsParams,
-) =>
-  api({ fetch })
-    .users
-    .syncs
-    .paused({
-      params: { id },
-      query: { page, limit },
-    });
+const syncPausedItemsRequest = ({
+  fetch,
+  id,
+  limit,
+  page,
+}: SyncPausedItemsParams) =>
+  api({ fetch }).users.syncs.paused({
+    params: { id },
+    query: { page, limit },
+  });
 
 export const syncPausedItemsQuery = defineInfiniteQuery({
   key: 'syncPausedItems',

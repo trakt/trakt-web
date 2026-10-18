@@ -11,29 +11,24 @@ type UserListSummaryParams = {
   withPosters?: boolean;
 } & ApiParams;
 
-const userListSummaryRequest = (
-  { fetch, userId, listId, withPosters }: UserListSummaryParams,
-) =>
-  api({ fetch })
-    .users
-    .lists
-    .list
-    .summary({
-      params: {
-        id: userId,
-        list_id: listId,
-      },
-      query: withPosters ? { extended: 'images' } : undefined,
-    });
+const userListSummaryRequest = ({
+  fetch,
+  userId,
+  listId,
+  withPosters,
+}: UserListSummaryParams) =>
+  api({ fetch }).users.lists.list.summary({
+    params: {
+      id: userId,
+      list_id: listId,
+    },
+    query: withPosters ? { extended: 'images' } : undefined,
+  });
 
 export const userListSummaryQuery = defineQuery({
   key: 'userListSummary',
   invalidations: [InvalidateAction.List.Edited, InvalidateAction.List.Like],
-  dependencies: (params) => [
-    params.userId,
-    params.listId,
-    params.withPosters,
-  ],
+  dependencies: (params) => [params.userId, params.listId, params.withPosters],
   request: userListSummaryRequest,
   mapper: (response) => mapToMediaListSummary(response.body),
   schema: MediaListSummarySchema,

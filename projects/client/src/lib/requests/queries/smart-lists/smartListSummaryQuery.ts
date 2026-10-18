@@ -9,19 +9,13 @@ import { time } from '$lib/utils/timing/time.ts';
 
 type SmartListSummaryParams = { listId: string } & ApiParams;
 
-const smartListSummaryRequest = (
-  { fetch, listId }: SmartListSummaryParams,
-) =>
-  api({ fetch })
-    .users
-    .smartLists
-    .smartList
-    .summary({
-      params: {
-        id: 'me',
-        list_id: listId,
-      },
-    });
+const smartListSummaryRequest = ({ fetch, listId }: SmartListSummaryParams) =>
+  api({ fetch }).users.smartLists.smartList.summary({
+    params: {
+      id: 'me',
+      list_id: listId,
+    },
+  });
 
 export const smartListSummaryQuery = defineQuery({
   key: 'smartListSummary',

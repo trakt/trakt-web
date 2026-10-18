@@ -7,18 +7,18 @@ function mediaUrls(detail: YirDetail, type: Media): string[] {
   const companies = type === 'shows' ? detail.networks : detail.studios;
 
   return [
-    ...detail.mostWatched[type].slice(0, 1).map((item) =>
-      item.entry.cover.url.medium
-    ),
-    ...detail.mostWatched[type].slice(1, 10).map((item) =>
-      item.entry.poster.url.medium
-    ),
+    ...detail.mostWatched[type]
+      .slice(0, 1)
+      .map((item) => item.entry.cover.url.medium),
+    ...detail.mostWatched[type]
+      .slice(1, 10)
+      .map((item) => item.entry.poster.url.medium),
     ...companies.slice(0, 10).map((company) => company.imageUrl ?? ''),
-    ...detail.topRated[type].slice(0, 10).map((item) =>
-      item.entry.poster.url.medium
-    ),
-    ...(detail.trends?.[type] ?? []).map((item) =>
-      item.entry.poster.url.medium
+    ...detail.topRated[type]
+      .slice(0, 10)
+      .map((item) => item.entry.poster.url.medium),
+    ...(detail.trends?.[type] ?? []).map(
+      (item) => item.entry.poster.url.medium,
     ),
   ];
 }
@@ -37,7 +37,7 @@ export function collectYirImageUrls(detail: YirDetail | null): string[] {
     ].map((entry) => entry.poster.url.medium),
   ];
 
-  return [...new Set(urls)].filter((url) =>
-    url !== '' && !PLACEHOLDERS.includes(url)
+  return [...new Set(urls)].filter(
+    (url) => url !== '' && !PLACEHOLDERS.includes(url),
   );
 }

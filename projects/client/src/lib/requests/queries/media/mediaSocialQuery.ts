@@ -37,10 +37,7 @@ export type MediaSocialQueryTarget =
   | MediaSocialShowTarget
   | MediaSocialEpisodeTarget;
 
-type MediaSocialParams =
-  & MediaSocialQueryTarget
-  & PaginationParams
-  & ApiParams;
+type MediaSocialParams = MediaSocialQueryTarget & PaginationParams & ApiParams;
 
 const MediaSocialRatingResponseSchema = z.object({
   rating: z.number(),
@@ -188,9 +185,10 @@ function mapToSocialWatched(
 function mapToMediaSocial(entry: MediaSocialEntryResponse): MediaSocial {
   const user = mapToUserProfile(entry.user as ProfileResponse);
   const watched = mapToSocialWatched(entry.watched);
-  const watchlisted = entry.watchlisted == null
-    ? undefined
-    : { listedAt: new Date(entry.watchlisted.listed_at) };
+  const watchlisted =
+    entry.watchlisted == null
+      ? undefined
+      : { listedAt: new Date(entry.watchlisted.listed_at) };
 
   return {
     key: `media-social-${user.id}`,
@@ -201,9 +199,7 @@ function mapToMediaSocial(entry: MediaSocialEntryResponse): MediaSocial {
   };
 }
 
-const mediaSocialRequest = async (
-  { fetch, ...params }: MediaSocialParams,
-) => {
+const mediaSocialRequest = async ({ fetch, ...params }: MediaSocialParams) => {
   const response = await rawApiFetch({
     fetch,
     path: `${toSocialPath(params)}${toSocialSearchParams(params)}`,
@@ -240,9 +236,7 @@ export const mediaSocialQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('show'),
     ...getInvalidations(),
   ],
-  dependencies: (
-    params: MediaSocialParams,
-  ) => [
+  dependencies: (params: MediaSocialParams) => [
     ...getTargetDependencies(params),
     params.page,
     params.limit,

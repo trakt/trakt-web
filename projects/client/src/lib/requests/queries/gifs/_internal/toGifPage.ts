@@ -10,9 +10,10 @@ type ToGifPageParams = {
 // Klipy answers with `has_next` rather than a total, so the total is faked one
 // page ahead while there is more to fetch - which is all `getNextPageParam`
 // reads.
-export function toGifPage(
-  { body, page }: ToGifPageParams,
-): Paginatable<GifEntry> {
+export function toGifPage({
+  body,
+  page,
+}: ToGifPageParams): Paginatable<GifEntry> {
   return {
     entries: body?.entries ?? [],
     page: {

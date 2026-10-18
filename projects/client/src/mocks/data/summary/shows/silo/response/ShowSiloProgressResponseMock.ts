@@ -1,217 +1,217 @@
 import type { ShowProgressResponse } from '@trakt/api';
 
 export const ShowSiloProgressResponseMock: ShowProgressResponse = {
-  'aired': 17,
-  'completed': 11,
-  'last_watched_at': '2024-12-27T19:40:28.000Z',
-  'reset_at': null,
-  'stats': {
-    'play_count': 12,
-    'minutes_watched': 605,
-    'minutes_left': 301,
+  aired: 17,
+  completed: 11,
+  last_watched_at: '2024-12-27T19:40:28.000Z',
+  reset_at: null,
+  stats: {
+    play_count: 12,
+    minutes_watched: 605,
+    minutes_left: 301,
   },
-  'seasons': [
+  seasons: [
     {
-      'number': 1,
-      'title': null,
-      'aired': 10,
-      'completed': 10,
-      'stats': {
-        'play_count': 11,
-        'minutes_watched': 559,
-        'minutes_left': 0,
+      number: 1,
+      title: null,
+      aired: 10,
+      completed: 10,
+      stats: {
+        play_count: 11,
+        minutes_watched: 559,
+        minutes_left: 0,
       },
-      'episodes': [
+      episodes: [
         {
-          'number': 1,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 2,
-            'minutes_watched': 120,
+          number: 1,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 2,
+            minutes_watched: 120,
           },
         },
         {
-          'number': 2,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 48,
+          number: 2,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 48,
           },
         },
         {
-          'number': 3,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 62,
+          number: 3,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 62,
           },
         },
         {
-          'number': 4,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 46,
+          number: 4,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 46,
           },
         },
         {
-          'number': 5,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 51,
+          number: 5,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 51,
           },
         },
         {
-          'number': 6,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 51,
+          number: 6,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 51,
           },
         },
         {
-          'number': 7,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 48,
+          number: 7,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 48,
           },
         },
         {
-          'number': 8,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 44,
+          number: 8,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 44,
           },
         },
         {
-          'number': 9,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 44,
+          number: 9,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 44,
           },
         },
         {
-          'number': 10,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:26.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 45,
+          number: 10,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:26.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 45,
           },
         },
       ],
     },
     {
-      'number': 2,
-      'title': null,
-      'aired': 7,
-      'completed': 1,
-      'stats': {
-        'play_count': 1,
-        'minutes_watched': 46,
-        'minutes_left': 301,
+      number: 2,
+      title: null,
+      aired: 7,
+      completed: 1,
+      stats: {
+        play_count: 1,
+        minutes_watched: 46,
+        minutes_left: 301,
       },
-      'episodes': [
+      episodes: [
         {
-          'number': 1,
-          'completed': true,
-          'last_watched_at': '2024-12-27T19:40:28.000Z',
-          'stats': {
-            'play_count': 1,
-            'minutes_watched': 46,
+          number: 1,
+          completed: true,
+          last_watched_at: '2024-12-27T19:40:28.000Z',
+          stats: {
+            play_count: 1,
+            minutes_watched: 46,
           },
         },
         {
-          'number': 2,
-          'completed': false,
-          'last_watched_at': null,
-          'stats': {
-            'play_count': 0,
-            'minutes_watched': 0,
+          number: 2,
+          completed: false,
+          last_watched_at: null,
+          stats: {
+            play_count: 0,
+            minutes_watched: 0,
           },
         },
         {
-          'number': 3,
-          'completed': false,
-          'last_watched_at': null,
-          'stats': {
-            'play_count': 0,
-            'minutes_watched': 0,
+          number: 3,
+          completed: false,
+          last_watched_at: null,
+          stats: {
+            play_count: 0,
+            minutes_watched: 0,
           },
         },
         {
-          'number': 4,
-          'completed': false,
-          'last_watched_at': null,
-          'stats': {
-            'play_count': 0,
-            'minutes_watched': 0,
+          number: 4,
+          completed: false,
+          last_watched_at: null,
+          stats: {
+            play_count: 0,
+            minutes_watched: 0,
           },
         },
         {
-          'number': 5,
-          'completed': false,
-          'last_watched_at': null,
-          'stats': {
-            'play_count': 0,
-            'minutes_watched': 0,
+          number: 5,
+          completed: false,
+          last_watched_at: null,
+          stats: {
+            play_count: 0,
+            minutes_watched: 0,
           },
         },
         {
-          'number': 6,
-          'completed': false,
-          'last_watched_at': null,
-          'stats': {
-            'play_count': 0,
-            'minutes_watched': 0,
+          number: 6,
+          completed: false,
+          last_watched_at: null,
+          stats: {
+            play_count: 0,
+            minutes_watched: 0,
           },
         },
         {
-          'number': 7,
-          'completed': false,
-          'last_watched_at': null,
-          'stats': {
-            'play_count': 0,
-            'minutes_watched': 0,
+          number: 7,
+          completed: false,
+          last_watched_at: null,
+          stats: {
+            play_count: 0,
+            minutes_watched: 0,
           },
         },
       ],
     },
   ],
-  'hidden_seasons': [],
-  'next_episode': {
-    'season': 2,
-    'number': 2,
-    'title': 'Order',
-    'ids': {
-      'trakt': 12105048,
-      'tvdb': 10608307,
-      'imdb': 'tt28100075',
-      'tmdb': 5501095,
+  hidden_seasons: [],
+  next_episode: {
+    season: 2,
+    number: 2,
+    title: 'Order',
+    ids: {
+      trakt: 12105048,
+      tvdb: 10608307,
+      imdb: 'tt28100075',
+      tmdb: 5501095,
     },
-    'number_abs': null,
-    'overview':
+    number_abs: null,
+    overview:
       "In Silo 18, shock and unrest take hold in the wake of Juliette doing what no one's done before.",
-    'rating': 7.45647,
-    'votes': 1838,
-    'comment_count': 21,
-    'first_aired': '2024-11-22T02:00:00.000Z',
-    'released': '2024-11-22T02:00:00.000Z',
-    'updated_at': '2024-12-27T19:32:56.000Z',
-    'available_translations': [
+    rating: 7.45647,
+    votes: 1838,
+    comment_count: 21,
+    first_aired: '2024-11-22T02:00:00.000Z',
+    released: '2024-11-22T02:00:00.000Z',
+    updated_at: '2024-12-27T19:32:56.000Z',
+    available_translations: [
       'ar',
       'cs',
       'da',
@@ -241,34 +241,34 @@ export const ShowSiloProgressResponseMock: ShowProgressResponse = {
       'vi',
       'zh',
     ],
-    'runtime': 42,
-    'episode_type': 'standard',
-    'images': {
-      'screenshot': [
+    runtime: 42,
+    episode_type: 'standard',
+    images: {
+      screenshot: [
         'media.trakt.tv/images/episodes/012/105/048/screenshots/medium/2f894ac614.jpg.webp',
         'image.tmdb.org/t/p/w1280/gB2lEpKUvTshTdq00IRjQHFgG4J.jpg',
       ],
     },
   },
-  'last_episode': {
-    'season': 2,
-    'number': 1,
-    'title': 'The Engineer',
-    'ids': {
-      'trakt': 12105047,
-      'tvdb': 10232256,
-      'imdb': 'tt28077708',
-      'tmdb': 5501094,
+  last_episode: {
+    season: 2,
+    number: 1,
+    title: 'The Engineer',
+    ids: {
+      trakt: 12105047,
+      tvdb: 10232256,
+      imdb: 'tt28077708',
+      tmdb: 5501094,
     },
-    'number_abs': null,
-    'overview':
+    number_abs: null,
+    overview:
       "Juliette finds sanctuary in a silo long ago destroyed by war, thinking she's alone.",
-    'rating': 7.4293,
-    'votes': 2143,
-    'comment_count': 39,
-    'first_aired': '2024-11-15T02:00:00.000Z',
-    'updated_at': '2024-12-27T19:39:54.000Z',
-    'available_translations': [
+    rating: 7.4293,
+    votes: 2143,
+    comment_count: 39,
+    first_aired: '2024-11-15T02:00:00.000Z',
+    updated_at: '2024-12-27T19:39:54.000Z',
+    available_translations: [
       'ar',
       'cs',
       'da',
@@ -298,10 +298,10 @@ export const ShowSiloProgressResponseMock: ShowProgressResponse = {
       'vi',
       'zh',
     ],
-    'runtime': 46,
-    'episode_type': 'season_premiere',
-    'images': {
-      'screenshot': [
+    runtime: 46,
+    episode_type: 'season_premiere',
+    images: {
+      screenshot: [
         'media.trakt.tv/images/episodes/012/105/047/screenshots/medium/bbe831c174.jpg.webp',
         'image.tmdb.org/t/p/w1280/kB5wWdEknKlBJ8iGEYQyTJWTSZv.jpg',
       ],

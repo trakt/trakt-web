@@ -42,9 +42,7 @@ const currentUserRewatchingRequest = async ({ fetch }: ApiParams) => {
 
 export const currentUserRewatchingQuery = defineQuery({
   key: 'currentUserRewatching',
-  invalidations: [
-    InvalidateAction.Rewatching('show'),
-  ],
+  invalidations: [InvalidateAction.Rewatching('show')],
   dependencies: [],
   request: currentUserRewatchingRequest,
   mapper: (response) => ({

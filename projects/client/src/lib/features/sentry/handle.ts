@@ -25,9 +25,8 @@ const INGEST = parseSentryDsn(SENTRY_DSN);
 function toEnvelopeDsn(payload: ArrayBuffer): string | null {
   const bytes = new Uint8Array(payload);
   const lineFeedIndex = bytes.indexOf(LINE_FEED);
-  const headerBytes = lineFeedIndex === -1
-    ? bytes
-    : bytes.subarray(0, lineFeedIndex);
+  const headerBytes =
+    lineFeedIndex === -1 ? bytes : bytes.subarray(0, lineFeedIndex);
 
   try {
     const header = EnvelopeHeaderSchema.safeParse(
@@ -47,8 +46,7 @@ function isKnownEnvelope(
   const envelopeDsn = toEnvelopeDsn(payload);
   const parsed = envelopeDsn ? parseSentryDsn(envelopeDsn) : null;
 
-  return parsed?.host === ingest.host &&
-    parsed?.projectId === ingest.projectId;
+  return parsed?.host === ingest.host && parsed?.projectId === ingest.projectId;
 }
 
 function isOversizedContentLength(contentLength: string | null): boolean {

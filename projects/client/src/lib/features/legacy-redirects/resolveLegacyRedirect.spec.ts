@@ -243,12 +243,12 @@ describe('util: resolveLegacyRedirect', () => {
   });
 
   describe('numeric-id lists fall back to the user lists landing', () => {
-    it.each([
-      '/lists/12345',
-      '/watchlist/12345',
-    ])('should redirect %s to /users/me/lists', (path) => {
-      expect(resolveLegacyRedirect(path)).toBe('/users/me/lists');
-    });
+    it.each(['/lists/12345', '/watchlist/12345'])(
+      'should redirect %s to /users/me/lists',
+      (path) => {
+        expect(resolveLegacyRedirect(path)).toBe('/users/me/lists');
+      },
+    );
   });
 
   describe('native paths pass through untouched', () => {

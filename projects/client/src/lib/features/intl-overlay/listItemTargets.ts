@@ -43,9 +43,9 @@ export const listItemTargets = <T extends ListUnion>(item: T) =>
       patch: (e, title) =>
         e.type === 'episode'
           ? ({
-            ...e,
-            entry: { ...e.entry, show: { ...e.entry.show, title } },
-          } as T)
+              ...e,
+              entry: { ...e.entry, show: { ...e.entry.show, title } },
+            } as T)
           : e,
     },
     {
@@ -56,9 +56,9 @@ export const listItemTargets = <T extends ListUnion>(item: T) =>
       patch: (e, title) =>
         e.type === 'episode'
           ? ({
-            ...e,
-            entry: { ...e.entry, episode: { ...e.entry.episode, title } },
-          } as T)
+              ...e,
+              entry: { ...e.entry, episode: { ...e.entry.episode, title } },
+            } as T)
           : e,
     },
     {
@@ -67,9 +67,9 @@ export const listItemTargets = <T extends ListUnion>(item: T) =>
       patch: (e, title) =>
         e.type === 'season'
           ? ({
-            ...e,
-            entry: { ...e.entry, show: { ...e.entry.show, title } },
-          } as T)
+              ...e,
+              entry: { ...e.entry, show: { ...e.entry.show, title } },
+            } as T)
           : e,
     },
   )(item);

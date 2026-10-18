@@ -38,8 +38,5 @@ export function forceOnScreen(
   popupContainer.style.right = 'initial';
   popupContainer.style.left = `${unalignedLeft}px`;
   const correction = unalignedLeft - popupRect.left;
-  popupContainer.style.setProperty(
-    '--alignment-correction',
-    `${correction}px`,
-  );
+  popupContainer.style.setProperty('--alignment-correction', `${correction}px`);
 }

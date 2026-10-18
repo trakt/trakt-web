@@ -6,9 +6,11 @@ type SyncRunnerCallbacks = {
   signal?: AbortSignal;
 };
 
-export function createSyncRunner(
-  { onProgress, onError, signal }: SyncRunnerCallbacks,
-) {
+export function createSyncRunner({
+  onProgress,
+  onError,
+  signal,
+}: SyncRunnerCallbacks) {
   let processedCount = 0;
   let errorCount = 0;
 

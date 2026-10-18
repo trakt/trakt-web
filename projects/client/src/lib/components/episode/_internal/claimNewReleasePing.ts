@@ -13,19 +13,21 @@ function readPings(storage: ClaimNewReleasePingParams['storage']) {
   try {
     const parsed: unknown = JSON.parse(storage.getItem(STORAGE_KEY) ?? '{}');
     return parsed && typeof parsed === 'object'
-      ? parsed as Record<string, number>
+      ? (parsed as Record<string, number>)
       : {};
   } catch {
     return {};
   }
 }
 
-export function claimNewReleasePing(
-  { key, storage, now }: ClaimNewReleasePingParams,
-): boolean {
+export function claimNewReleasePing({
+  key,
+  storage,
+  now,
+}: ClaimNewReleasePingParams): boolean {
   const recent = Object.fromEntries(
-    Object.entries(readPings(storage)).filter(([, playedAt]) =>
-      now - playedAt < PING_MEMORY
+    Object.entries(readPings(storage)).filter(
+      ([, playedAt]) => now - playedAt < PING_MEMORY,
     ),
   );
 

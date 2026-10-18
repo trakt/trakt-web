@@ -40,9 +40,9 @@ const groups: TodayStoryGroup[] = toStoryGroups({
 });
 
 function eventsOf(key: string) {
-  return tracked.filter((event) => event.key === key).map((event) =>
-    event.data
-  );
+  return tracked
+    .filter((event) => event.key === key)
+    .map((event) => event.data);
 }
 
 async function renderViewer(onClose = vi.fn()) {
@@ -124,9 +124,7 @@ describe('TodayStoryViewer telemetry', () => {
     const user = userEvent.setup();
     await renderViewer();
 
-    await user.click(
-      screen.getByRole('button', { name: /Watchlist/ }),
-    );
+    await user.click(screen.getByRole('button', { name: /Watchlist/ }));
 
     expect(eventsOf('today.action')).toEqual([
       { action: 'watchlist', frame: 'friend' },

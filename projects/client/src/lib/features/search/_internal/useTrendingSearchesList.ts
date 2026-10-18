@@ -26,25 +26,19 @@ type TrendingSearches =
   | PeopleThisMonthResult
   | ListsSearchResult;
 
-function modeToQuery(
-  mode: SearchMode,
-) {
+function modeToQuery(mode: SearchMode) {
   switch (mode) {
     case 'lists':
-      return searchListsQuery({ limit: LIST_LIMIT }) as CreateQueryOptions<
-        TrendingSearches
-      >;
+      return searchListsQuery({
+        limit: LIST_LIMIT,
+      }) as CreateQueryOptions<TrendingSearches>;
     case 'people':
-      return peopleThisMonthQuery() as CreateQueryOptions<
-        TrendingSearches
-      >;
+      return peopleThisMonthQuery() as CreateQueryOptions<TrendingSearches>;
     default:
       return searchTrendingQuery({
         limit: LIST_LIMIT,
         type: mode !== 'media' ? mode : undefined,
-      }) as CreateQueryOptions<
-        TrendingSearches
-      >;
+      }) as CreateQueryOptions<TrendingSearches>;
   }
 }
 
@@ -68,10 +62,9 @@ export function useTrendingSearchesList(mode: SearchMode) {
         }
 
         if ($query.data.type === 'people') {
-          return ($query.data.items as PersonSummary[])
-            .toSorted((a, b) =>
-              Number(hasBirthday(b)) - Number(hasBirthday(a))
-            );
+          return ($query.data.items as PersonSummary[]).toSorted(
+            (a, b) => Number(hasBirthday(b)) - Number(hasBirthday(a)),
+          );
         }
 
         const mediaData = $query.data as { type: 'media'; items: MediaEntry[] };

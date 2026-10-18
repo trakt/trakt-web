@@ -5,8 +5,8 @@ export function reelPosters(
 ): ReadonlyArray<string | null> {
   const urls = detail
     ? [...detail.mostWatched.shows, ...detail.mostWatched.movies]
-      .sort((a, b) => b.plays - a.plays)
-      .map((item) => item.entry.poster.url.medium)
+        .sort((a, b) => b.plays - a.plays)
+        .map((item) => item.entry.poster.url.medium)
     : [];
 
   return Array.from({ length: 9 }, (_, index) => urls.at(index) ?? null);

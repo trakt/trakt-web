@@ -25,23 +25,24 @@ function mapToEpisodePlays(response?: WatchedShowPlaysResponse) {
       Object.entries(episodes).map(([episodeId, plays]) => ({
         id: Number(episodeId),
         plays: mapToWatchedPlays(plays),
-      }))
-    )
+      })),
+    ),
   );
 }
 
-const currentUserWatchedShowPlaysRequest = async (
-  { fetch }: CurrentUserWatchedShowPlaysParams,
-) => {
-  const response = await rawApiFetch(
-    { fetch, path: '/v3/users/me/watched/shows/plays?limit=all' },
-  );
+const currentUserWatchedShowPlaysRequest = async ({
+  fetch,
+}: CurrentUserWatchedShowPlaysParams) => {
+  const response = await rawApiFetch({
+    fetch,
+    path: '/v3/users/me/watched/shows/plays?limit=all',
+  });
 
   return response.ok
     ? {
-      body: WatchedShowPlaysResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: WatchedShowPlaysResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 

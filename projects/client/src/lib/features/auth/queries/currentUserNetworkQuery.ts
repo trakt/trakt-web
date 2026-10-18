@@ -12,13 +12,11 @@ export const UserNetworkSchema = z.object({
 export type UserNetwork = z.infer<typeof UserNetworkSchema>;
 
 const currentUserFollowingRequest = ({ fetch }: ApiParams) =>
-  api({ fetch })
-    .users
-    .following({
-      params: {
-        id: 'me',
-      },
-    });
+  api({ fetch }).users.following({
+    params: {
+      id: 'me',
+    },
+  });
 
 export const currentUserNetworkQuery = defineQuery({
   key: 'currentUserNetwork',
@@ -27,7 +25,7 @@ export const currentUserNetworkQuery = defineQuery({
   dependencies: [],
   mapper: (response) => ({
     following: response.body.map((following) =>
-      mapToUserProfile(following.user)
+      mapToUserProfile(following.user),
     ),
   }),
   schema: UserNetworkSchema,

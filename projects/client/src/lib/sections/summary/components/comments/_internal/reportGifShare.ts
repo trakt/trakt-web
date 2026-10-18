@@ -10,9 +10,10 @@ type ReportGifShareParams = {
  * Klipy ranks on usage, so a gif counts only once its comment is live. No slug
  * means it came off a stored comment and was counted when it was first picked.
  */
-export function reportGifShare(
-  { gif, customerId }: ReportGifShareParams,
-): void {
+export function reportGifShare({
+  gif,
+  customerId,
+}: ReportGifShareParams): void {
   if (!gif?.slug) {
     return;
   }

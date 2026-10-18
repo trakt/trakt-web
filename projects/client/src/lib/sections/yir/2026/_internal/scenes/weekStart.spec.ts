@@ -6,9 +6,7 @@ describe('util: weekStart', () => {
     const date = weekStart(2026, 0);
 
     expect([date.getFullYear(), date.getMonth(), date.getDate()]).toEqual([
-      2026,
-      0,
-      1,
+      2026, 0, 1,
     ]);
   });
 

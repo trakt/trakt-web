@@ -11,9 +11,7 @@ describe('util: toPersonaStat', () => {
   });
 
   it('should suffix shares with a percent sign', () => {
-    expect(toPersonaStat({ kind: 'anime-share', value: 97 }).value).toBe(
-      '97%',
-    );
+    expect(toPersonaStat({ kind: 'anime-share', value: 97 }).value).toBe('97%');
   });
 
   it('should keep one decimal for decimal kinds', () => {

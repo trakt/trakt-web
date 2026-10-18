@@ -12,21 +12,21 @@ type ShowSeasonPeopleParams = {
   guestStars?: boolean;
 } & ApiParams;
 
-const showSeasonPeopleRequest = (
-  { fetch, slug, season, guestStars = false }: ShowSeasonPeopleParams,
-) =>
-  api({ fetch })
-    .shows
-    .season
-    .people({
-      params: {
-        id: slug,
-        season: castNumberAsString(season),
-      },
-      query: {
-        extended: getPeopleExtended(guestStars),
-      },
-    });
+const showSeasonPeopleRequest = ({
+  fetch,
+  slug,
+  season,
+  guestStars = false,
+}: ShowSeasonPeopleParams) =>
+  api({ fetch }).shows.season.people({
+    params: {
+      id: slug,
+      season: castNumberAsString(season),
+    },
+    query: {
+      extended: getPeopleExtended(guestStars),
+    },
+  });
 
 export const showSeasonPeopleQuery = defineQuery({
   key: 'showSeasonPeople',

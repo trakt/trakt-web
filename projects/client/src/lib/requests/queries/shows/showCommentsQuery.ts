@@ -9,28 +9,33 @@ import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
 import { PaginatableSchemaFactory } from '../../models/Paginatable.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
-type ShowCommentsParams =
-  & { slug: string; sort: CommentSortType; language?: string }
-  & ApiParams
-  & PaginationParams;
+type ShowCommentsParams = {
+  slug: string;
+  sort: CommentSortType;
+  language?: string;
+} & ApiParams &
+  PaginationParams;
 
-const showCommentsRequest = (
-  { fetch, slug, limit, page, sort, language }: ShowCommentsParams,
-) =>
-  api({ fetch })
-    .shows
-    .comments({
-      params: {
-        id: slug,
-        sort,
-      },
-      query: {
-        extended: 'images',
-        page,
-        limit,
-        language,
-      },
-    });
+const showCommentsRequest = ({
+  fetch,
+  slug,
+  limit,
+  page,
+  sort,
+  language,
+}: ShowCommentsParams) =>
+  api({ fetch }).shows.comments({
+    params: {
+      id: slug,
+      sort,
+    },
+    query: {
+      extended: 'images',
+      page,
+      limit,
+      language,
+    },
+  });
 
 export const showCommentsQuery = defineInfiniteQuery({
   key: 'showComments',
@@ -38,9 +43,13 @@ export const showCommentsQuery = defineInfiniteQuery({
     InvalidateAction.Comment.Post('show'),
     InvalidateAction.Comment.Reply('show'),
   ],
-  dependencies: (
-    params,
-  ) => [params.slug, params.page, params.limit, params.sort, params.language],
+  dependencies: (params) => [
+    params.slug,
+    params.page,
+    params.limit,
+    params.sort,
+    params.language,
+  ],
   request: showCommentsRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToMediaComment),

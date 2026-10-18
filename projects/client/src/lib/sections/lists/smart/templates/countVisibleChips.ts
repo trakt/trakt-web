@@ -6,12 +6,11 @@ type CountVisibleChipsProps = {
   moreWidth: number;
 };
 
-function countRows(
-  { widths, available, gap }: Pick<
-    CountVisibleChipsProps,
-    'widths' | 'available' | 'gap'
-  >,
-): number {
+function countRows({
+  widths,
+  available,
+  gap,
+}: Pick<CountVisibleChipsProps, 'widths' | 'available' | 'gap'>): number {
   const { rows } = widths.reduce(
     ({ rows, used }, width) => {
       const clamped = Math.min(width, available);
@@ -27,9 +26,13 @@ function countRows(
   return rows;
 }
 
-export function countVisibleChips(
-  { widths, available, gap, maxRows, moreWidth }: CountVisibleChipsProps,
-): number {
+export function countVisibleChips({
+  widths,
+  available,
+  gap,
+  maxRows,
+  moreWidth,
+}: CountVisibleChipsProps): number {
   const fitsAll = countRows({ widths, available, gap }) <= maxRows;
   if (fitsAll) {
     return widths.length;
@@ -38,12 +41,13 @@ export function countVisibleChips(
   const fitting = Array.from(
     { length: widths.length },
     (_, index) => widths.length - 1 - index,
-  ).find((count) =>
-    countRows({
-      widths: [...widths.slice(0, count), moreWidth],
-      available,
-      gap,
-    }) <= maxRows
+  ).find(
+    (count) =>
+      countRows({
+        widths: [...widths.slice(0, count), moreWidth],
+        available,
+        gap,
+      }) <= maxRows,
   );
 
   return fitting ?? 0;

@@ -5,9 +5,10 @@ type OmitTemplateFiltersProps = {
   searchParams: URLSearchParams;
 };
 
-export function omitTemplateFilters(
-  { filters, searchParams }: OmitTemplateFiltersProps,
-): Record<string, string> {
+export function omitTemplateFilters({
+  filters,
+  searchParams,
+}: OmitTemplateFiltersProps): Record<string, string> {
   if (!fromSmartListTemplateParams(searchParams).target) {
     return filters;
   }

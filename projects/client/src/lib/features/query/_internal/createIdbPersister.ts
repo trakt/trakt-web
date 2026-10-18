@@ -52,26 +52,20 @@ function createIdbStorage(): AsyncStorage<PersistedQuery> {
   const store = createIdbStore(DB_NAME, STORE_NAME);
 
   return {
-    getItem: monitor(
-      (key: string) => {
-        trackStorage('restore', key);
-        return orUndefined(() => get<PersistedQuery>(key, store));
-      },
-      'IDB Restorer',
-    ),
-    setItem: monitor(
-      (key: string, value: PersistedQuery) => {
-        trackStorage('persist', key);
-        return orUndefined(() => set(key, value, store));
-      },
-      'IDB Persister',
-    ),
+    getItem: monitor((key: string) => {
+      trackStorage('restore', key);
+      return orUndefined(() => get<PersistedQuery>(key, store));
+    }, 'IDB Restorer'),
+    setItem: monitor((key: string, value: PersistedQuery) => {
+      trackStorage('persist', key);
+      return orUndefined(() => set(key, value, store));
+    }, 'IDB Persister'),
     removeItem: (key: string) => orUndefined(() => del(key, store)),
     entries: async () =>
-      await orUndefined(async () => {
+      (await orUndefined(async () => {
         const rows = await entries<string, PersistedQuery>(store);
         return rows.map(([k, v]) => [String(k), v] as [string, PersistedQuery]);
-      }) ?? [],
+      })) ?? [],
   };
 }
 

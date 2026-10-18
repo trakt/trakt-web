@@ -61,12 +61,7 @@ export const spotlightRoutes: ReadonlyArray<SpotlightRoute> = [
     id: 'anticipated',
     url: UrlBuilder.anticipated(),
     label: m.page_title_anticipated_media,
-    keywords: [
-      'anticipated',
-      'awaited',
-      'soon',
-      m.list_title_most_anticipated,
-    ],
+    keywords: ['anticipated', 'awaited', 'soon', m.list_title_most_anticipated],
   },
   {
     id: 'recommended',

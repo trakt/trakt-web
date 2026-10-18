@@ -14,9 +14,10 @@ export function toPlexWebhook(
   connections: MediaSyncConnection[] | undefined,
   unnamedServer: string,
 ): PlexWebhook | null {
-  const eligible = (connections ?? []).filter((connection) =>
-    connection.provider === 'plex' &&
-    WEBHOOK_STATUSES.includes(connection.status)
+  const eligible = (connections ?? []).filter(
+    (connection) =>
+      connection.provider === 'plex' &&
+      WEBHOOK_STATUSES.includes(connection.status),
   );
   const url = eligible.find((connection) => connection.webhookUrl)?.webhookUrl;
 
@@ -26,8 +27,8 @@ export function toPlexWebhook(
 
   return {
     url,
-    serverNames: eligible.map((connection) =>
-      connection.serverName || unnamedServer
+    serverNames: eligible.map(
+      (connection) => connection.serverName || unnamedServer,
     ),
   };
 }

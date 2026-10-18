@@ -19,8 +19,9 @@ function toShareTypePath(shareType: ShareType): string {
   }
 }
 
-export function shareImagePrefix(
-  { shareType, type }: ShareImagePrefixProps,
-): string {
+export function shareImagePrefix({
+  shareType,
+  type,
+}: ShareImagePrefixProps): string {
   return `${ROOT_PATH}/${toShareTypePath(shareType)}/${type}/`;
 }

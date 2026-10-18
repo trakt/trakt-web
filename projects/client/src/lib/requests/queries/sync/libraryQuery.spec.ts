@@ -8,10 +8,7 @@ import { libraryQuery } from './libraryQuery.ts';
 describe('libraryQuery', () => {
   it('should query library', async () => {
     const result = await runQuery({
-      factory: () =>
-        createTestBedInfiniteQuery(
-          libraryQuery(),
-        ),
+      factory: () => createTestBedInfiniteQuery(libraryQuery()),
       mapper: mapToEntries,
     });
 

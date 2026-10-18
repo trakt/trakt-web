@@ -6,11 +6,9 @@ import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { type CommentResponse, commentResponseSchema } from '@trakt/api';
 
-type CommentParams =
-  & {
-    id: number;
-  }
-  & ApiParams;
+type CommentParams = {
+  id: number;
+} & ApiParams;
 
 const commentRequest = async ({ fetch, id }: CommentParams) => {
   const response = await rawApiFetch({

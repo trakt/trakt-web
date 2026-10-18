@@ -11,9 +11,11 @@ type FindPendingOverrideParams = {
  * Queued action overriding server state for the given keys - the queue is
  * FIFO, so the last covering action reflects the user's latest intent.
  */
-export function findPendingOverride(
-  { actions, domain, keys }: FindPendingOverrideParams,
-): OfflineAction | null {
+export function findPendingOverride({
+  actions,
+  domain,
+  keys,
+}: FindPendingOverrideParams): OfflineAction | null {
   if (keys.length === 0) {
     return null;
   }

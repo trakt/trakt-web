@@ -10,7 +10,8 @@ import { QueryClient } from '@tanstack/query-core';
 // IDB and structuredClone are missing on some restricted engines (PS4,
 // in-app WebViews); guard before touching idb-keyval so query init doesn't
 // crash. The query client falls back to an in-memory cache when unset.
-const canPersist = browser &&
+const canPersist =
+  browser &&
   typeof indexedDB !== 'undefined' &&
   typeof structuredClone !== 'undefined';
 const persister = canPersist ? createIdbPersister() : undefined;

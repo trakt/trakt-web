@@ -27,26 +27,31 @@ export function useVipCancelSummary() {
     filter((results) => isSettled(results)),
     take(1),
     map(
-      (
-        [subscription, plans, limits, stats, streaming, plex],
-      ): VipCancelState => {
+      ([
+        subscription,
+        plans,
+        limits,
+        stats,
+        streaming,
+        plex,
+      ]): VipCancelState => {
         const summary = toVipCancelSummary({
           subscription: subscription.data,
           dealPlan: findTwoYearDealPlan(plans.data ?? []),
           limits: limits.data,
           stats: stats.data
             ? {
-              plays: stats.data.totalPlays,
-              minutes: stats.data.totalMinutes,
-              ratings: stats.data.ratings.total,
-            }
+                plays: stats.data.totalPlays,
+                minutes: stats.data.totalMinutes,
+                ratings: stats.data.ratings.total,
+              }
             : null,
           streaming: streaming.data ?? [],
           plex: plex.data
             ? {
-              scrobbleEvents: plex.data.webhook.eventCount,
-              syncedServers: plex.data.sync.selection.serverIds.length,
-            }
+                scrobbleEvents: plex.data.webhook.eventCount,
+                syncedServers: plex.data.sync.selection.serverIds.length,
+              }
             : null,
           now: new Date(),
         });

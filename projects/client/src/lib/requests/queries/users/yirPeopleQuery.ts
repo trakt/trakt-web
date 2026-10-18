@@ -13,9 +13,13 @@ export type YirPeopleParams = {
   slurm?: string;
 } & ApiParams;
 
-const yirPeopleRequest = async (
-  { fetch, slug, year, type, slurm }: YirPeopleParams,
-) => {
+const yirPeopleRequest = async ({
+  fetch,
+  slug,
+  year,
+  type,
+  slurm,
+}: YirPeopleParams) => {
   const response = await fetchReviewResource({
     fetch,
     path: `/users/${slug}/yir/${year}/people/${type}`,
@@ -30,9 +34,12 @@ const yirPeopleRequest = async (
 export const yirPeopleQuery = defineQuery({
   key: 'yirPeople',
   invalidations: [],
-  dependencies: (
-    params,
-  ) => [params.slug, params.year, params.type, params.slurm],
+  dependencies: (params) => [
+    params.slug,
+    params.year,
+    params.type,
+    params.slurm,
+  ],
   request: yirPeopleRequest,
   mapper: (response) => mapToYirPeople(response.body),
   schema: YirPersonSchema.array(),

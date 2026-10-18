@@ -5,9 +5,10 @@ type RedirectParaglideParams = {
   to: string;
 };
 
-export function redirectParaglide(
-  { from, to }: RedirectParaglideParams,
-): Plugin {
+export function redirectParaglide({
+  from,
+  to,
+}: RedirectParaglideParams): Plugin {
   const prefixes = ['$lib/paraglide/', `${from}/`];
 
   return {
@@ -19,11 +20,10 @@ export function redirectParaglide(
         return null;
       }
 
-      return this.resolve(
-        `${to}/${source.slice(prefix.length)}`,
-        importer,
-        { ...options, skipSelf: true },
-      );
+      return this.resolve(`${to}/${source.slice(prefix.length)}`, importer, {
+        ...options,
+        skipSelf: true,
+      });
     },
   };
 }

@@ -51,32 +51,30 @@ describe('engine: resolveMovieIds', () => {
   });
 
   it('should collect ambiguous movies with their candidates', async () => {
-    const match = vi.fn().mockResolvedValue(
-      [
-        {
-          index: 0,
-          status: 'ambiguous',
-          match: null,
-          candidates: [
-            {
-              title: 'Split',
-              year: 2017,
-              score: 21573,
-              poster:
-                'media.trakt.tv/images/movies/000/254/263/posters/medium/aaa0f03e5e.jpg.webp',
-              ids: { trakt: 254263, imdb: 'tt4972582', tmdb: 381288 },
-            },
-            {
-              title: 'Split',
-              year: 2016,
-              score: 2582,
-              poster: null,
-              ids: { trakt: 247643, imdb: 'tt3315656', tmdb: 358364 },
-            },
-          ],
-        },
-      ] satisfies MovieMatchResult[],
-    );
+    const match = vi.fn().mockResolvedValue([
+      {
+        index: 0,
+        status: 'ambiguous',
+        match: null,
+        candidates: [
+          {
+            title: 'Split',
+            year: 2017,
+            score: 21573,
+            poster:
+              'media.trakt.tv/images/movies/000/254/263/posters/medium/aaa0f03e5e.jpg.webp',
+            ids: { trakt: 254263, imdb: 'tt4972582', tmdb: 381288 },
+          },
+          {
+            title: 'Split',
+            year: 2016,
+            score: 2582,
+            poster: null,
+            ids: { trakt: 247643, imdb: 'tt3315656', tmdb: 358364 },
+          },
+        ],
+      },
+    ] satisfies MovieMatchResult[]);
 
     const { items, ambiguous } = await resolveMovieIds({
       items: [movie()],
@@ -104,11 +102,11 @@ describe('engine: resolveMovieIds', () => {
   });
 
   it('should leave not_found movies unresolved', async () => {
-    const match = vi.fn().mockResolvedValue(
-      [
+    const match = vi
+      .fn()
+      .mockResolvedValue([
         { index: 0, status: 'not_found', match: null },
-      ] satisfies MovieMatchResult[],
-    );
+      ] satisfies MovieMatchResult[]);
 
     const { items, ambiguous } = await resolveMovieIds({
       items: [movie()],

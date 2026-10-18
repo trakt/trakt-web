@@ -17,13 +17,14 @@ export function useFeatureFlag() {
   // Director accounts get every flag defaulted to on; overrides (manual
   // toggles persisted to localStorage) always win.
   const flags = combineLatest([overrides, isDirector]).pipe(
-    map(([overrideValues, isDirectorValue]) =>
-      Object.fromEntries(
-        Object.values(FeatureFlag).map((flag) => [
-          flag,
-          overrideValues[flag] ?? isDirectorValue,
-        ]),
-      ) as Record<FeatureFlag, boolean>
+    map(
+      ([overrideValues, isDirectorValue]) =>
+        Object.fromEntries(
+          Object.values(FeatureFlag).map((flag) => [
+            flag,
+            overrideValues[flag] ?? isDirectorValue,
+          ]),
+        ) as Record<FeatureFlag, boolean>,
     ),
   );
 

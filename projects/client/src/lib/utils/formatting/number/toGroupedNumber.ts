@@ -12,8 +12,8 @@ export function toGroupedNumber(
 ) {
   const intlLocale = getIntlLocale(locale as AvailableLanguage);
   const cached = formatters.get(intlLocale);
-  const formatter = cached ??
-    new Intl.NumberFormat(intlLocale, { maximumFractionDigits: 0 });
+  const formatter =
+    cached ?? new Intl.NumberFormat(intlLocale, { maximumFractionDigits: 0 });
 
   if (!cached) formatters.set(intlLocale, formatter);
 

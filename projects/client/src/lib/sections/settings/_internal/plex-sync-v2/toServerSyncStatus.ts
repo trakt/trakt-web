@@ -3,14 +3,14 @@ import type { ServerSyncStatus } from './models/ServerSyncStatus.ts';
 
 const UNREACHABLE_AFTER_FAILURES = 2;
 
-function isFailingToReach(
-  { failureCount, lastFailureKind }: Pick<
-    MediaSyncConnection,
-    'failureCount' | 'lastFailureKind'
-  >,
-): boolean {
-  return lastFailureKind === 'unreachable' &&
-    failureCount >= UNREACHABLE_AFTER_FAILURES;
+function isFailingToReach({
+  failureCount,
+  lastFailureKind,
+}: Pick<MediaSyncConnection, 'failureCount' | 'lastFailureKind'>): boolean {
+  return (
+    lastFailureKind === 'unreachable' &&
+    failureCount >= UNREACHABLE_AFTER_FAILURES
+  );
 }
 
 export function toServerSyncStatus(

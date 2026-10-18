@@ -27,11 +27,13 @@ export function useRecommendedBy(target$: Observable<MediaSocialQueryTarget>) {
     map(($query) => $query.data ?? null),
   );
 
-  const mute = useMutation(defineMutation({
-    key: 'share:mute',
-    request: (sharerId: number) => muteSharerRequest({ sharerId }),
-    invalidations: [InvalidateAction.Share.Mute],
-  }));
+  const mute = useMutation(
+    defineMutation({
+      key: 'share:mute',
+      request: (sharerId: number) => muteSharerRequest({ sharerId }),
+      invalidations: [InvalidateAction.Share.Mute],
+    }),
+  );
 
   return {
     recommendedBy,

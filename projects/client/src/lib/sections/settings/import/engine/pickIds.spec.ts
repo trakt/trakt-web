@@ -10,8 +10,9 @@ import {
 describe('pickIds', () => {
   describe('with MOVIE_IDS priority', () => {
     it('should return imdb first when available', () => {
-      expect(pickIds({ imdb: 'tt1234567', tmdb: 1, trakt: 2 }, MOVIE_IDS))
-        .toEqual({ imdb: 'tt1234567' });
+      expect(
+        pickIds({ imdb: 'tt1234567', tmdb: 1, trakt: 2 }, MOVIE_IDS),
+      ).toEqual({ imdb: 'tt1234567' });
     });
 
     it('should fall back to tmdb when imdb is absent', () => {
@@ -29,8 +30,9 @@ describe('pickIds', () => {
 
   describe('with SHOW_IDS priority', () => {
     it('should return imdb first when available', () => {
-      expect(pickIds({ imdb: 'tt9876543', tvdb: 5, trakt: 6 }, SHOW_IDS))
-        .toEqual({ imdb: 'tt9876543' });
+      expect(
+        pickIds({ imdb: 'tt9876543', tvdb: 5, trakt: 6 }, SHOW_IDS),
+      ).toEqual({ imdb: 'tt9876543' });
     });
 
     it('should fall back to tvdb when imdb is absent', () => {

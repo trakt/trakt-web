@@ -7,16 +7,12 @@ import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 
 type ListSummaryParams = { listId: string } & ApiParams;
 
-const listSummaryRequest = (
-  { fetch, listId }: ListSummaryParams,
-) =>
-  api({ fetch })
-    .lists
-    .summary({
-      params: {
-        id: listId,
-      },
-    });
+const listSummaryRequest = ({ fetch, listId }: ListSummaryParams) =>
+  api({ fetch }).lists.summary({
+    params: {
+      id: listId,
+    },
+  });
 
 export const listSummaryQuery = defineQuery({
   key: 'listSummary',

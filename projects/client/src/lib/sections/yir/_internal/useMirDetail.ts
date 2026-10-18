@@ -12,9 +12,7 @@ type UseMirDetailProps = {
 };
 
 export function useMirDetail(props: UseMirDetailProps) {
-  const query = useQuery(
-    mirDetailQuery({ ...props, slurm: resolveSlurm() }),
-  );
+  const query = useQuery(mirDetailQuery({ ...props, slurm: resolveSlurm() }));
 
   return withYirIntlOverlay(
     query.pipe(map(($query) => $query.data)),

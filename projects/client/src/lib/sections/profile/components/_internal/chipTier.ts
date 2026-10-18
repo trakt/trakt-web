@@ -27,10 +27,7 @@ export type ChipTier = 'unicorn' | 'rare' | 'notable' | 'common';
 // for "globally distinctive" rather than "just popular on one side".
 const UNICORN_THRESHOLD = 0.5;
 
-export function chipTier(
-  index: number,
-  rarity: number | undefined,
-): ChipTier {
+export function chipTier(index: number, rarity: number | undefined): ChipTier {
   if (rarity != null && rarity >= UNICORN_THRESHOLD) return 'unicorn';
   if (index <= 0) return 'rare';
   if (index <= 2) return 'notable';

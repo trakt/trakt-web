@@ -13,9 +13,10 @@ export async function klipyRequest<TSchema extends z.ZodType>({
   params,
   schema,
   fetch = globalThis.fetch,
-}: KlipyRequestParams<TSchema>): Promise<
-  { status: 200; body: z.infer<TSchema> | undefined }
-> {
+}: KlipyRequestParams<TSchema>): Promise<{
+  status: 200;
+  body: z.infer<TSchema> | undefined;
+}> {
   const response = await fetch(klipyUrl(path, params));
 
   if (!response.ok) {

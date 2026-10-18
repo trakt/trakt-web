@@ -11,10 +11,7 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "bundler",
-    "types": [
-      "vitest/globals",
-      "@testing-library/jest-dom"
-    ],
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
     "disableSizeLimit": true
   }
   // Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias

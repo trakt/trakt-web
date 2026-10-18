@@ -14,9 +14,14 @@ type SmartListWriteProps = {
   privacy?: SmartListWriteRequest['privacy'];
 };
 
-export function toSmartListWrite(
-  { name, type, target, filterMap, baseFilters, privacy }: SmartListWriteProps,
-): SmartListWriteRequest {
+export function toSmartListWrite({
+  name,
+  type,
+  target,
+  filterMap,
+  baseFilters,
+  privacy,
+}: SmartListWriteProps): SmartListWriteRequest {
   return {
     name: name.trim(),
     source: target as SmartListWriteRequest['source'],

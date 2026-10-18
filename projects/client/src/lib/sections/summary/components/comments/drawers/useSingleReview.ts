@@ -10,9 +10,9 @@ type UseSingleReviewParams = {
   commentId: number;
 };
 
-export function useSingleReview(
-  { commentId }: UseSingleReviewParams,
-): PaginatableStore<MediaComment, string> {
+export function useSingleReview({
+  commentId,
+}: UseSingleReviewParams): PaginatableStore<MediaComment, string> {
   return () => {
     const query = useQuery(commentQuery({ id: commentId }));
 

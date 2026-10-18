@@ -36,9 +36,9 @@ const userNotesRequest = async ({ fetch, type, slug }: UserNotesParams) => {
 
   return response.ok
     ? {
-      body: UserNotesResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: UserNotesResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: [] as UserNotesResponse, status: 200 };
 };
 

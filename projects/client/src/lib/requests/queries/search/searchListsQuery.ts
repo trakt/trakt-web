@@ -19,9 +19,7 @@ const ListsSearchResultSchema = z.object({
 
 export type ListsSearchResult = z.infer<typeof ListsSearchResultSchema>;
 
-function mapToSearchResultEntry(
-  item: SearchResultResponse,
-) {
+function mapToSearchResultEntry(item: SearchResultResponse) {
   const { type } = item;
   switch (type) {
     case 'list':
@@ -38,18 +36,16 @@ const searchRequest = ({ query, limit, fetch }: SearchParams) => {
   return api({
     fetch,
     cancellable: true,
-  })
-    .search
-    .query({
-      query: {
-        query,
-        limit,
-        extended: 'full,images',
-      },
-      params: {
-        type: 'list',
-      },
-    });
+  }).search.query({
+    query: {
+      query,
+      limit,
+      extended: 'full,images',
+    },
+    params: {
+      type: 'list',
+    },
+  });
 };
 
 export const searchListsQuery = defineQuery({
@@ -59,9 +55,7 @@ export const searchListsQuery = defineQuery({
   request: searchRequest,
   mapper: (response) => ({
     type: 'lists' as const,
-    items: response
-      .body
-      .map(mapToSearchResultEntry),
+    items: response.body.map(mapToSearchResultEntry),
   }),
   schema: ListsSearchResultSchema,
   ttl: time.minutes(30),

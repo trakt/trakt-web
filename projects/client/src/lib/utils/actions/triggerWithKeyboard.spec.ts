@@ -15,7 +15,7 @@ describe('triggerWithKeyboard', () => {
 
   it('should trigger click on Enter key', () => {
     let clicked = false;
-    element.addEventListener('click', () => clicked = true);
+    element.addEventListener('click', () => (clicked = true));
 
     triggerWithKeyboard(element);
 
@@ -26,7 +26,7 @@ describe('triggerWithKeyboard', () => {
 
   it('should trigger click on Space key', () => {
     let clicked = false;
-    element.addEventListener('click', () => clicked = true);
+    element.addEventListener('click', () => (clicked = true));
 
     triggerWithKeyboard(element);
 
@@ -37,7 +37,7 @@ describe('triggerWithKeyboard', () => {
 
   it('should not trigger click on other keys', () => {
     let clicked = false;
-    element.addEventListener('click', () => clicked = true);
+    element.addEventListener('click', () => (clicked = true));
 
     triggerWithKeyboard(element);
 
@@ -48,7 +48,7 @@ describe('triggerWithKeyboard', () => {
 
   it('should cleanup event listeners on destroy', () => {
     let clicked = false;
-    element.addEventListener('click', () => clicked = true);
+    element.addEventListener('click', () => (clicked = true));
 
     const action = triggerWithKeyboard(element);
     action.destroy();

@@ -20,14 +20,16 @@ type EditNoteProps = {
 export function useEditNote() {
   const { track } = useTrack(AnalyticsEvent.EditNote);
 
-  const edit = useMutation(defineMutation({
-    key: 'note:edit',
-    request: ({ id, notes, type }: EditNoteProps) =>
-      editNoteRequest({ id, body: { type, notes } }),
-    invalidations: (
-      { variables },
-    ) => [InvalidateAction.Note.Edit(variables.media.type)],
-  }));
+  const edit = useMutation(
+    defineMutation({
+      key: 'note:edit',
+      request: ({ id, notes, type }: EditNoteProps) =>
+        editNoteRequest({ id, body: { type, notes } }),
+      invalidations: ({ variables }) => [
+        InvalidateAction.Note.Edit(variables.media.type),
+      ],
+    }),
+  );
 
   const editNote = async ({ id, notes, media, type }: EditNoteProps) => {
     const trimmed = notes.trim();

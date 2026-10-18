@@ -81,7 +81,10 @@ function toTitleStory(group: TitleGroup): TodayTitleStory {
     key: media.key,
     media,
     actions,
-    users: dedupe((user) => user.key, actions.map((action) => action.user)),
+    users: dedupe(
+      (user) => user.key,
+      actions.map((action) => action.user),
+    ),
     averageRating: toAverageRating(actions),
     milestone: strongestMilestone(actions.map((action) => action.milestone)),
     latestAt: actions.at(0)?.activityAt ?? new Date(0),

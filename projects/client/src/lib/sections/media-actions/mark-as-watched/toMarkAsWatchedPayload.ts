@@ -29,9 +29,8 @@ export function toMarkAsWatchedPayload(
   target: MediaStoreProps,
   watchedAt?: MarkAsWatchedAt,
 ): MediaTypeMap {
-  const watchedAtDate = watchedAt instanceof Date
-    ? watchedAt.toISOString()
-    : watchedAt;
+  const watchedAtDate =
+    watchedAt instanceof Date ? watchedAt.toISOString() : watchedAt;
 
   if (target.type === 'show') {
     const shows = Array.isArray(target.media) ? target.media : [target.media];

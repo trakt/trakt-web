@@ -4,12 +4,12 @@ type UnfollowUserRequest = {
   slug: string;
 } & ApiParams;
 
-export function unfollowUserRequest(
-  { slug, fetch }: UnfollowUserRequest,
-): Promise<boolean> {
+export function unfollowUserRequest({
+  slug,
+  fetch,
+}: UnfollowUserRequest): Promise<boolean> {
   return api({ fetch })
-    .users
-    .unfollow({
+    .users.unfollow({
       params: {
         id: slug,
       },

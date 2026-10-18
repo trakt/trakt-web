@@ -16,8 +16,9 @@ export function useLargeScreenCards(): Observable<boolean> {
     useMedia(WellKnownMediaQuery.tabletLarge),
     useMedia(WellKnownMediaQuery.desktop),
   ]).pipe(
-    map(([isFlagEnabled, isTabletLarge, isDesktop]) =>
-      isFlagEnabled && (isTabletLarge || isDesktop)
+    map(
+      ([isFlagEnabled, isTabletLarge, isDesktop]) =>
+        isFlagEnabled && (isTabletLarge || isDesktop),
     ),
     distinctUntilChanged(),
   );

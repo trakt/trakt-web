@@ -35,11 +35,13 @@ export const UserStatsResponseSchema = z.object({
     total: z.number().int(),
     distribution: RatingDistributionSchema,
   }),
-  progress: z.object({
-    started: z.number().int(),
-    finished: z.number().int(),
-    dropped: z.number().int(),
-  }).optional(),
+  progress: z
+    .object({
+      started: z.number().int(),
+      finished: z.number().int(),
+      dropped: z.number().int(),
+    })
+    .optional(),
   lists: z.number().int().optional(),
   total_minutes: z.number().int().optional(),
   total_plays: z.number().int().optional(),
@@ -53,9 +55,7 @@ type UserStatsParams = { slug: string } & ApiParams;
 // short-circuit to an empty body instead of letting `isValidResponse` throw a
 // fetch error. An empty 2xx (e.g. `204`) is treated the same way, since
 // `response.json()` would throw on it.
-const userStatsRequest = async (
-  { fetch, slug }: UserStatsParams,
-) => {
+const userStatsRequest = async ({ fetch, slug }: UserStatsParams) => {
   const response = await rawApiFetch({
     fetch,
     path: `/users/${slug}/stats`,
@@ -65,9 +65,9 @@ const userStatsRequest = async (
 
   return text
     ? {
-      body: UserStatsResponseSchema.parse(JSON.parse(text)),
-      status: 200 as const,
-    }
+        body: UserStatsResponseSchema.parse(JSON.parse(text)),
+        status: 200 as const,
+      }
     : { body: undefined, status: 200 as const };
 };
 
@@ -76,7 +76,7 @@ export const userStatsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: userStatsRequest,
-  mapper: (response) => response.body ? mapToUserStats(response.body) : null,
+  mapper: (response) => (response.body ? mapToUserStats(response.body) : null),
   schema: UserStatsSchema.nullable(),
   ttl: time.minutes(30),
 });

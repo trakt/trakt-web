@@ -22,8 +22,9 @@ describe('component: SmartListNudgeBarContent', () => {
   it('should start collapsed with the count of convertible lists', async () => {
     await renderBar();
 
-    expect(screen.getByText('3 of your lists can update themselves'))
-      .toBeInTheDocument();
+    expect(
+      screen.getByText('3 of your lists can update themselves'),
+    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Review' })).toHaveAttribute(
       'aria-expanded',
       'false',

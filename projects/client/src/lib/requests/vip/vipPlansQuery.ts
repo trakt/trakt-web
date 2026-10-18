@@ -19,32 +19,30 @@ const PLAN_ORDER: ReadonlyArray<VipPlan['type']> = [
   'monthly',
 ];
 
-function toPlans(
-  response: ReadonlyArray<VipPlanResponse>,
-): VipPlan[] {
-  const plans = response.map((plan): VipPlan => ({
-    type: plan.duration,
-    monthlyPrice: plan.amount_monthly,
-    totalPrice: plan.amount,
-    durationInMonths: plan.months_in_term,
-    isPopular: plan.duration === 'yearly',
-    discount: plan.discount
-      ? {
-        discountedAmount: plan.discount.discounted_amount,
-        discountedAmountMonthly: plan.discount.discounted_amount_monthly,
-        firstTermOnly: plan.discount.first_term_only,
-      }
-      : null,
-  }));
+function toPlans(response: ReadonlyArray<VipPlanResponse>): VipPlan[] {
+  const plans = response.map(
+    (plan): VipPlan => ({
+      type: plan.duration,
+      monthlyPrice: plan.amount_monthly,
+      totalPrice: plan.amount,
+      durationInMonths: plan.months_in_term,
+      isPopular: plan.duration === 'yearly',
+      discount: plan.discount
+        ? {
+            discountedAmount: plan.discount.discounted_amount,
+            discountedAmountMonthly: plan.discount.discounted_amount_monthly,
+            firstTermOnly: plan.discount.first_term_only,
+          }
+        : null,
+    }),
+  );
 
-  return plans.toSorted((a, b) =>
-    PLAN_ORDER.indexOf(a.type) - PLAN_ORDER.indexOf(b.type)
+  return plans.toSorted(
+    (a, b) => PLAN_ORDER.indexOf(a.type) - PLAN_ORDER.indexOf(b.type),
   );
 }
 
-const vipPlansRequest = async (
-  { fetch }: VipPlansParams,
-) => {
+const vipPlansRequest = async ({ fetch }: VipPlansParams) => {
   const response = await rawApiFetch({
     fetch,
     path: '/vip/plans',
@@ -52,9 +50,9 @@ const vipPlansRequest = async (
 
   return response.ok
     ? {
-      body: VipPlansResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: VipPlansResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: [] as VipPlanResponse[], status: 200 };
 };
 

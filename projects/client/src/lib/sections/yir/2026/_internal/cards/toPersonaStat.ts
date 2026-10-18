@@ -66,8 +66,9 @@ function formatValue(value: number, unit: HighlightFormat['unit']) {
     case 'percent':
       return `${toGroupedNumber(value, locale)}%`;
     case 'decimal':
-      return new Intl.NumberFormat(locale, { maximumFractionDigits: 1 })
-        .format(value);
+      return new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(
+        value,
+      );
     case 'year':
       return String(value);
     default:

@@ -10,10 +10,7 @@ describe('util: toMonthGridRange', () => {
   });
 
   it('should follow the month the active week ends in', () => {
-    const { reference, start } = toMonthGridRange(
-      new Date(2026, 10, 30),
-      'en',
-    );
+    const { reference, start } = toMonthGridRange(new Date(2026, 10, 30), 'en');
 
     expect(reference.getMonth()).toBe(11);
     expect(start.toDateString()).toBe('Sun Nov 29 2026');

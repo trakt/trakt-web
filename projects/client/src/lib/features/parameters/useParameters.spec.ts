@@ -15,10 +15,10 @@ describe('useParameters', () => {
   it('should update parameters correctly', async () => {
     const { search, update } = await renderStore(() => useParameters());
 
-    update({ 'foo': 'bar' });
+    update({ foo: 'bar' });
     expect((await firstValueFrom(search)).get('foo')).toBe('bar');
 
-    update({ 'num': 42 });
+    update({ num: 42 });
     expect((await firstValueFrom(search)).get('num')).toBe('42');
   });
 });

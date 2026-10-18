@@ -1,37 +1,35 @@
 import type { MovieResponse } from '@trakt/api';
 
 export const MovieMatrixResponseMock: MovieResponse = {
-  'title': 'The Matrix',
-  'original_title': 'The Matrix',
-  'year': 1999,
-  'ids': {
-    'trakt': 481,
-    'slug': 'the-matrix-1999',
-    'imdb': 'tt0133093',
-    'tmdb': 603,
-    'plex': {
-      'guid': '23rvas4r3qt3',
-      'slug': 'the-matrix-1999',
+  title: 'The Matrix',
+  original_title: 'The Matrix',
+  year: 1999,
+  ids: {
+    trakt: 481,
+    slug: 'the-matrix-1999',
+    imdb: 'tt0133093',
+    tmdb: 603,
+    plex: {
+      guid: '23rvas4r3qt3',
+      slug: 'the-matrix-1999',
     },
   },
-  'tagline': 'The fight for the future begins.',
-  'overview':
+  tagline: 'The fight for the future begins.',
+  overview:
     'Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.',
-  'released': '1999-03-31',
-  'runtime': 136,
-  'country': 'us',
-  'trailer': 'https://youtube.com/watch?v=d0XTFAMmhrE',
-  'homepage': 'https://www.warnerbros.com/matrix',
-  'status': 'released',
-  'rating': 8.755000530761416,
-  'votes': 65943,
-  'comment_count': 133,
-  'updated_at': '2024-12-27T15:30:51.000Z',
-  'language': 'en',
-  'languages': [
-    'en',
-  ],
-  'available_translations': [
+  released: '1999-03-31',
+  runtime: 136,
+  country: 'us',
+  trailer: 'https://youtube.com/watch?v=d0XTFAMmhrE',
+  homepage: 'https://www.warnerbros.com/matrix',
+  status: 'released',
+  rating: 8.755000530761416,
+  votes: 65943,
+  comment_count: 133,
+  updated_at: '2024-12-27T15:30:51.000Z',
+  language: 'en',
+  languages: ['en'],
+  available_translations: [
     'ar',
     'bg',
     'bs',
@@ -76,45 +74,39 @@ export const MovieMatrixResponseMock: MovieResponse = {
     'vi',
     'zh',
   ],
-  'genres': [
-    'action',
-    'science-fiction',
-  ],
-  'certification': 'R',
-  'images': {
-    'fanart': [
+  genres: ['action', 'science-fiction'],
+  certification: 'R',
+  images: {
+    fanart: [
       'media.trakt.tv/images/movies/000/000/481/fanarts/medium/c556867276.jpg.webp',
     ],
-    'poster': [
+    poster: [
       'media.trakt.tv/images/movies/000/000/481/posters/thumb/373310d2ee.jpg.webp',
     ],
-    'logo': [
+    logo: [
       'media.trakt.tv/images/movies/000/000/481/logos/medium/f5e05ed291.png.webp',
       'assets.fanart.tv/fanart/movies/603/hdmovielogo/the-matrix-5190bfebe0bcf.png',
     ],
-    'clearart': [
+    clearart: [
       'media.trakt.tv/images/movies/000/000/481/cleararts/medium/a01dd6ff88.png.webp',
       'assets.fanart.tv/fanart/movies/603/hdmovieclearart/the-matrix-5197b6d243b93.png',
     ],
-    'banner': [
+    banner: [
       'media.trakt.tv/images/movies/000/000/481/banners/medium/035f31fce0.jpg.webp',
       'assets.fanart.tv/fanart/movies/603/moviebanner/the-matrix-514dc837d1387.jpg',
     ],
-    'thumb': [
+    thumb: [
       'media.trakt.tv/images/movies/000/000/481/thumbs/medium/f81f544f62.jpg.webp',
       'assets.fanart.tv/fanart/movies/603/moviethumb/the-matrix-58678e15757df.jpg',
     ],
   },
-  'colors': {
-    'poster': [
-      '#9AAAB4',
-      '#141A2A',
-    ],
+  colors: {
+    poster: ['#9AAAB4', '#141A2A'],
   },
-  'social_ids': {
-    'twitter': null,
-    'facebook': 'TheMatrixMovie',
-    'instagram': null,
-    'wikipedia': 'The_Matrix',
+  social_ids: {
+    twitter: null,
+    facebook: 'TheMatrixMovie',
+    instagram: null,
+    wikipedia: 'The_Matrix',
   },
 };

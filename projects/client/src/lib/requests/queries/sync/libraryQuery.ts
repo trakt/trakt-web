@@ -20,21 +20,23 @@ const mapToEndpoint = (type?: DiscoverMode) => {
   }
 };
 
-const mediaLibraryRequest = (
-  { fetch, page = 1, limit, availableOn, type }: LibraryParams,
-) => {
+const mediaLibraryRequest = ({
+  fetch,
+  page = 1,
+  limit,
+  availableOn,
+  type,
+}: LibraryParams) => {
   const endpoint = mapToEndpoint(type);
 
-  return api({ fetch })
-    .sync
-    .collection[endpoint]({
-      query: {
-        extended: 'full,images,available_on',
-        page,
-        limit,
-        available_on: availableOn,
-      },
-    });
+  return api({ fetch }).sync.collection[endpoint]({
+    query: {
+      extended: 'full,images,available_on',
+      page,
+      limit,
+      available_on: availableOn,
+    },
+  });
 };
 
 export const libraryQuery = defineInfiniteQuery({
@@ -43,9 +45,12 @@ export const libraryQuery = defineInfiniteQuery({
     InvalidateAction.Collected('movie'),
     InvalidateAction.Collected('episode'),
   ],
-  dependencies: (
-    params,
-  ) => [params.page, params.limit, params.availableOn, params.type],
+  dependencies: (params) => [
+    params.page,
+    params.limit,
+    params.availableOn,
+    params.type,
+  ],
   request: mediaLibraryRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToLibraryItem),

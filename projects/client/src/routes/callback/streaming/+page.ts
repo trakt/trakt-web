@@ -29,9 +29,11 @@ function toConnection(
 }
 
 function toService(url: URL): string | null {
-  return YC_SERVICE_PARAMS
-    .map((param) => url.searchParams.get(param))
-    .find((value) => value != null) ?? null;
+  return (
+    YC_SERVICE_PARAMS.map((param) => url.searchParams.get(param)).find(
+      (value) => value != null,
+    ) ?? null
+  );
 }
 
 /**

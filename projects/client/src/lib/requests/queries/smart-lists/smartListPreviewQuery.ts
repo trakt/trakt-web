@@ -12,14 +12,12 @@ import type { SmartListMediaType } from '$lib/requests/models/SmartListMediaType
 import type { SmartListSource } from '$lib/requests/models/SmartListSource.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
-type SmartListPreviewParams =
-  & {
-    source: SmartListSource;
-    mediaType: SmartListMediaType;
-    filters: Record<string, string>;
-  }
-  & PaginationParams
-  & ApiParams;
+type SmartListPreviewParams = {
+  source: SmartListSource;
+  mediaType: SmartListMediaType;
+  filters: Record<string, string>;
+} & PaginationParams &
+  ApiParams;
 
 const smartListPreviewRequest = (params: SmartListPreviewParams) =>
   smartListPreviewItemsRequest({

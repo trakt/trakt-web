@@ -10,18 +10,21 @@ const server = (id: string, reachable: boolean) => ({
 
 describe('toDefaultServerId', () => {
   it('picks the only reachable server', () => {
-    expect(toDefaultServerId([server('a', false), server('b', true)]))
-      .to.equal('b');
+    expect(toDefaultServerId([server('a', false), server('b', true)])).to.equal(
+      'b',
+    );
   });
 
   it('leaves the choice to the user when several are reachable', () => {
-    expect(toDefaultServerId([server('a', true), server('b', true)]))
-      .to.equal(null);
+    expect(toDefaultServerId([server('a', true), server('b', true)])).to.equal(
+      null,
+    );
   });
 
   it('ignores the watchlist-only entry', () => {
-    expect(toDefaultServerId([server('a', true), server('plex.tv', true)]))
-      .to.equal('a');
+    expect(
+      toDefaultServerId([server('a', true), server('plex.tv', true)]),
+    ).to.equal('a');
   });
 
   it('picks nothing when no server is reachable', () => {

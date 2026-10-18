@@ -38,25 +38,24 @@ type ScrollHistoryData = {
 };
 
 export function useScrollHistory() {
-  const history = getContext<ScrollHistoryData>(SCROLL_HISTORY_CONTEXT_KEY) ??
+  const history =
+    getContext<ScrollHistoryData>(SCROLL_HISTORY_CONTEXT_KEY) ??
     setContext(
       SCROLL_HISTORY_CONTEXT_KEY,
-      getContext<ScrollHistoryData>(SCROLL_HISTORY_CONTEXT_KEY) ??
-        {
-          readScrollState: (id: string) => {
-            return parseInt(
-              safeSessionStorage.getItem(`${SCROLL_HISTORY_PREFIX}-${id}`) ??
-                '0',
-            );
-          },
-          writeScrollState: (id: string, value: number) => {
-            safeSessionStorage.setItem(
-              `${SCROLL_HISTORY_PREFIX}-${id}`,
-              value.toString(),
-            );
-          },
-          event: new EventBus(),
+      getContext<ScrollHistoryData>(SCROLL_HISTORY_CONTEXT_KEY) ?? {
+        readScrollState: (id: string) => {
+          return parseInt(
+            safeSessionStorage.getItem(`${SCROLL_HISTORY_PREFIX}-${id}`) ?? '0',
+          );
         },
+        writeScrollState: (id: string, value: number) => {
+          safeSessionStorage.setItem(
+            `${SCROLL_HISTORY_PREFIX}-${id}`,
+            value.toString(),
+          );
+        },
+        event: new EventBus(),
+      },
     );
 
   return history;

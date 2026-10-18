@@ -11,5 +11,5 @@ type ProgressEntryBase = {
 export const progressEntryTargets = <T extends ProgressEntryBase>(entry: T) =>
   makeTargets<T>({
     get: (e) => ({ id: e.show.id, type: 'show' }),
-    patch: (e, title) => ({ ...e, show: { ...e.show, title } } as T),
+    patch: (e, title) => ({ ...e, show: { ...e.show, title } }) as T,
   })(entry);

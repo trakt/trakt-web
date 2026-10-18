@@ -42,19 +42,12 @@ function mapStreamingSourceResponse(
   };
 }
 
-function extractCountryCode(
-  response: Record<string, unknown>,
-) {
+function extractCountryCode(response: Record<string, unknown>) {
   return assertDefined(Object.keys(response).at(0));
 }
 
-const streamingSourcesRequest = (
-  { fetch }: StreamingSourcesParams,
-) =>
-  api({ fetch })
-    .watchnow
-    .sources
-    .all();
+const streamingSourcesRequest = ({ fetch }: StreamingSourcesParams) =>
+  api({ fetch }).watchnow.sources.all();
 
 export const streamingSourcesQuery = defineQuery({
   key: 'streamingSources',
@@ -62,12 +55,16 @@ export const streamingSourcesQuery = defineQuery({
   dependencies: () => [],
   request: streamingSourcesRequest,
   mapper: (response) =>
-    toMap(response.body, (data) => {
-      const countryCode = extractCountryCode(data);
-      const countrySources = data[countryCode];
+    toMap(
+      response.body,
+      (data) => {
+        const countryCode = extractCountryCode(data);
+        const countrySources = data[countryCode];
 
-      return countrySources?.map(mapStreamingSourceResponse) ?? [];
-    }, (_, entry) => extractCountryCode(entry)),
+        return countrySources?.map(mapStreamingSourceResponse) ?? [];
+      },
+      (_, entry) => extractCountryCode(entry),
+    ),
   schema: StreamingSourceListSchema,
   ttl: time.hours(12),
 });

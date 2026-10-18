@@ -18,10 +18,9 @@ function action(activityAt: Date, episode = EpisodeSiloMappedMock) {
 
 describe('util: toFriendActionText', () => {
   it('should show only the time for activity from today', () => {
-    expect(toFriendActionText(action(new Date(2026, 8, 28, 9, 30)), now))
-      .toBe(
-        `Watched S${EpisodeSiloMappedMock.season} • E${EpisodeSiloMappedMock.number} · 9:30 AM`,
-      );
+    expect(toFriendActionText(action(new Date(2026, 8, 28, 9, 30)), now)).toBe(
+      `Watched S${EpisodeSiloMappedMock.season} • E${EpisodeSiloMappedMock.number} · 9:30 AM`,
+    );
   });
 
   it('should say yesterday for activity from the day before', () => {

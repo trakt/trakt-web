@@ -16,8 +16,9 @@ describe('component: Popover', () => {
   it('should not mount its content before the first open', async () => {
     render(Popover, { props: { children, content, label: 'More' } });
 
-    expect(await screen.findByRole('button', { name: 'More' }))
-      .toBeInTheDocument();
+    expect(
+      await screen.findByRole('button', { name: 'More' }),
+    ).toBeInTheDocument();
     expect(screen.queryByText('Popover body')).not.toBeInTheDocument();
   });
 

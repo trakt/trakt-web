@@ -24,9 +24,11 @@ function cosine(a: Int8Array, b: Int8Array): number {
   return normA === 0 || normB === 0 ? 0 : dot / Math.sqrt(normA * normB);
 }
 
-export function scoreLocalFits(
-  { picks, candidates, vectors }: LocalFitsParams,
-): Fit[] | null {
+export function scoreLocalFits({
+  picks,
+  candidates,
+  vectors,
+}: LocalFitsParams): Fit[] | null {
   const decode = (id: number) => {
     const encoded = vectors.vectors[String(id)];
     return encoded ? decodeMixtapeVector(encoded) : null;

@@ -7,20 +7,19 @@ import {
 describe('check-i18n-placeholders', () => {
   describe('extractPlaceholders', () => {
     it('should extract single placeholder', () => {
-      expect(extractPlaceholders('Remove {title}'))
-        .toEqual(new Set(['title']));
+      expect(extractPlaceholders('Remove {title}')).toEqual(new Set(['title']));
     });
 
     it('should extract multiple placeholders', () => {
-      expect(extractPlaceholders('{count} of {total}'))
-        .toEqual(new Set(['count', 'total']));
+      expect(extractPlaceholders('{count} of {total}')).toEqual(
+        new Set(['count', 'total']),
+      );
     });
 
     it('should extract ICU plural placeholder name', () => {
       expect(
         extractPlaceholders('{count, plural, one {episode} other {episodes}}'),
-      )
-        .toEqual(new Set(['count']));
+      ).toEqual(new Set(['count']));
     });
 
     it('should extract ICU select placeholder name', () => {
@@ -28,8 +27,7 @@ describe('check-i18n-placeholders', () => {
         extractPlaceholders(
           '{gender, select, male {he} female {she} other {they}}',
         ),
-      )
-        .toEqual(new Set(['gender']));
+      ).toEqual(new Set(['gender']));
     });
 
     it('should extract nested placeholders inside ICU plural form content', () => {
@@ -47,8 +45,7 @@ describe('check-i18n-placeholders', () => {
     });
 
     it('should ignore mangled placeholder with backslash', () => {
-      expect(extractPlaceholders('Remove "{\\s_title}"'))
-        .toEqual(new Set());
+      expect(extractPlaceholders('Remove "{\\s_title}"')).toEqual(new Set());
     });
 
     it('should return empty set for text without placeholders', () => {

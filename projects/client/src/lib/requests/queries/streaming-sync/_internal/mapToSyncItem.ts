@@ -30,9 +30,9 @@ function mapTraktReference(
         url: UrlBuilder.show(traktItem.ids.slug),
       };
     case 'episode': {
-      const code = `S${padNumber(traktItem.season)}E${
-        padNumber(traktItem.number)
-      }`;
+      const code = `S${padNumber(traktItem.season)}E${padNumber(
+        traktItem.number,
+      )}`;
       const showTitle = traktItem.show?.title;
       return {
         label: showTitle
@@ -40,20 +40,17 @@ function mapTraktReference(
           : `${code}: ${traktItem.title}`,
         url: traktItem.show
           ? UrlBuilder.episodeDrawer(
-            traktItem.show.ids.slug,
-            traktItem.season,
-            traktItem.number,
-          )
+              traktItem.show.ids.slug,
+              traktItem.season,
+              traktItem.number,
+            )
           : undefined,
       };
     }
   }
 }
 
-export function mapToSyncItem(
-  item: SyncItemResponse,
-  index: number,
-): SyncItem {
+export function mapToSyncItem(item: SyncItemResponse, index: number): SyncItem {
   return {
     key: `sync-item-${index}-${item.content_id ?? item.tmdb_id ?? 'unknown'}`,
     kind: item.kind,

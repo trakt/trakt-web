@@ -18,6 +18,4 @@ export const UserLimitsSchema = z.object({
   connectedApps: LimitsSchema,
 });
 
-export type UserLimits = z.infer<
-  typeof UserLimitsSchema
->;
+export type UserLimits = z.infer<typeof UserLimitsSchema>;

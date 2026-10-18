@@ -31,16 +31,18 @@ function msUntilNextTransition(
  * Return the milliseconds until the next transition for any known scope, or null if none.
  * This is the minimum positive msUntilNextTransition across all scopes.
  */
-export function msUntilNextEvent(
-  { events, now, dateFn }: UntilNextEventProps,
-): number | null {
+export function msUntilNextEvent({
+  events,
+  now,
+  dateFn,
+}: UntilNextEventProps): number | null {
   const times = Object.keys(events)
     .map((k) =>
       msUntilNextTransition(
         now,
         dateFn,
         assertDefined(events[k], 'Event config not found'),
-      )
+      ),
     )
     .filter((v): v is number => typeof v === 'number' && v > 0);
 

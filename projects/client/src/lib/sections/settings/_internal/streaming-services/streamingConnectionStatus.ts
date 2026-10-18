@@ -12,6 +12,5 @@ export type StreamingConnectionStatus = {
  * failure) and by the streaming connect callback route (`yc_status`), cleared
  * on dismiss.
  */
-export const streamingConnectionStatus = writable<
-  StreamingConnectionStatus | null
->(null);
+export const streamingConnectionStatus =
+  writable<StreamingConnectionStatus | null>(null);

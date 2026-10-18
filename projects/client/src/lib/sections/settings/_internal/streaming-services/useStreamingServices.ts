@@ -11,25 +11,27 @@ import { toFavoriteId } from './toFavoriteId.ts';
 export function useStreamingServices() {
   const { country, favorites } = useStreamingPreferences();
 
-  const savePreferences = useMutation(defineMutation({
-    key: 'streaming:save-preferences',
-    request: (
-      preferences: Parameters<typeof saveStreamingPreferencesRequest>[0],
-    ) => saveStreamingPreferencesRequest(preferences),
-    invalidations: [InvalidateAction.User.Settings],
-  }));
+  const savePreferences = useMutation(
+    defineMutation({
+      key: 'streaming:save-preferences',
+      request: (
+        preferences: Parameters<typeof saveStreamingPreferencesRequest>[0],
+      ) => saveStreamingPreferencesRequest(preferences),
+      invalidations: [InvalidateAction.User.Settings],
+    }),
+  );
 
   const sources = useQuery(streamingSourcesQuery()).pipe(
     map((query) => query.data),
   );
 
   const availableCountries = sources.pipe(
-    map((sourceMap) => sourceMap ? [...sourceMap.keys()] : undefined),
+    map((sourceMap) => (sourceMap ? [...sourceMap.keys()] : undefined)),
   );
 
   const countrySources = combineLatest([country, sources]).pipe(
     map(([countryCode, sourceMap]) =>
-      sourceMap ? (sourceMap.get(countryCode) ?? []) : undefined
+      sourceMap ? (sourceMap.get(countryCode) ?? []) : undefined,
     ),
   );
 
@@ -38,7 +40,7 @@ export function useStreamingServices() {
       if (!sourceMap) return undefined;
       const favoriteSet = new Set(favoriteIds);
       return (sourceMap.get(countryCode) ?? []).filter((source) =>
-        favoriteSet.has(toFavoriteId(countryCode, source.source))
+        favoriteSet.has(toFavoriteId(countryCode, source.source)),
       );
     }),
   );

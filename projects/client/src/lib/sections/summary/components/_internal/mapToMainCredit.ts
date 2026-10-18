@@ -38,15 +38,16 @@ function mapToDirector(
   crew: MediaCrew,
 ): MainCredit | null {
   const directors = crew.directors?.filter((person) =>
-    person.jobs.some((job) => job.toLowerCase() === 'director')
+    person.jobs.some((job) => job.toLowerCase() === 'director'),
   );
 
   const [first, ...rest] = directors ?? [];
   if (!first) return null;
 
-  const positions = type === 'movie'
-    ? { movies: 'directing' as const }
-    : { shows: 'directing' as const };
+  const positions =
+    type === 'movie'
+      ? { movies: 'directing' as const }
+      : { shows: 'directing' as const };
 
   return {
     text: m.text_directed_by({ name: first.name }),

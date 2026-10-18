@@ -2,9 +2,9 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { map, type Observable, of } from 'rxjs';
 import type { WatchListStoreProps } from './useWatchList.ts';
 
-export function useWatchListItemCount(
-  props: WatchListStoreProps,
-): { itemCount: Observable<number | undefined> } {
+export function useWatchListItemCount(props: WatchListStoreProps): {
+  itemCount: Observable<number | undefined>;
+} {
   const { watchlist } = useUser();
 
   const hasFilters = Object.keys(props.filter ?? {}).length > 0;

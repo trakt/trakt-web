@@ -1,10 +1,6 @@
 import type { Observable } from 'rxjs';
 
-export function waitForValue<T>(
-  store: Observable<T>,
-  value: T,
-  timeout = 100,
-) {
+export function waitForValue<T>(store: Observable<T>, value: T, timeout = 100) {
   let lastValue: T;
 
   return new Promise<T>((resolve) => {

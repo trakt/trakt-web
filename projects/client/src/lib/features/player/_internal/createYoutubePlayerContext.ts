@@ -18,13 +18,12 @@ export function createPlayerContext() {
 
   const ctx = setContext(
     PLAYER_CONTEXT_KEY,
-    getContext<PlayerContextType>(PLAYER_CONTEXT_KEY) ??
-      {
-        embedId,
-        isLoading,
-        isPreloaded,
-        shouldAutoplay,
-      },
+    getContext<PlayerContextType>(PLAYER_CONTEXT_KEY) ?? {
+      embedId,
+      isLoading,
+      isPreloaded,
+      shouldAutoplay,
+    },
   );
 
   return ctx;

@@ -7,9 +7,11 @@ type RedirectForAudienceParams = {
   search: string;
 };
 
-export function redirectForAudience(
-  { audience, hasSession, search }: RedirectForAudienceParams,
-) {
+export function redirectForAudience({
+  audience,
+  hasSession,
+  search,
+}: RedirectForAudienceParams) {
   if (audience === 'authenticated' && !hasSession) {
     return redirect(307, `${UrlBuilder.landing()}${search}`);
   }

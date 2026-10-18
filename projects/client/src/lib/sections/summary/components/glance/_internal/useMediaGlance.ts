@@ -24,9 +24,7 @@ type IntlQueryParams = {
 export type MediaGlanceQueries<T extends MediaEntry> = {
   type: T['type'];
   summary: (params: { slug: string }) => CreateQueryOptions<T, Error>;
-  people: (
-    params: { slug: string },
-  ) => CreateQueryOptions<MediaCrew, Error>;
+  people: (params: { slug: string }) => CreateQueryOptions<MediaCrew, Error>;
   intl: (
     params: IntlQueryParams,
   ) => CreateQueryOptions<Array<MediaIntl>, Error>;
@@ -49,14 +47,12 @@ export function useMediaGlance<T extends MediaEntry>(
     slug$.pipe(map((slug) => queries.summary({ slug }))),
   );
 
-  const crew = useQuery(
-    slug$.pipe(map((slug) => queries.people({ slug }))),
-  );
+  const crew = useQuery(slug$.pipe(map((slug) => queries.people({ slug }))));
 
   const intl = useQuery(
     slug$.pipe(
       map((slug) =>
-        queries.intl({ slug, language, enabled: !isLocaleSkipped })
+        queries.intl({ slug, language, enabled: !isLocaleSkipped }),
       ),
     ),
   );
@@ -70,15 +66,16 @@ export function useMediaGlance<T extends MediaEntry>(
           type: queries.type,
           translations: $intl.data,
           fallback: $summary.data,
-        })
+        }),
       ),
     ),
     isLoading: combineLatest([summary, crew, isHistoryPending]).pipe(
-      map(([$summary, $crew, $isHistoryPending]) =>
-        toLoadingState($summary) ||
-        $summary.data == null ||
-        toLoadingState($crew) ||
-        $isHistoryPending
+      map(
+        ([$summary, $crew, $isHistoryPending]) =>
+          toLoadingState($summary) ||
+          $summary.data == null ||
+          toLoadingState($crew) ||
+          $isHistoryPending,
       ),
     ),
   };

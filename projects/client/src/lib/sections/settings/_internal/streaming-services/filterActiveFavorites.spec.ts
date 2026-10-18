@@ -4,10 +4,7 @@ import { filterActiveFavorites } from './filterActiveFavorites.ts';
 describe('util: filterActiveFavorites', () => {
   it('should filter out favorite slugs not present in active country sources', () => {
     const favorites = ['us-netflix', 'us-amazon_prime_video', 'us-disney_plus'];
-    const activeSources = [
-      { source: 'netflix' },
-      { source: 'disney_plus' },
-    ];
+    const activeSources = [{ source: 'netflix' }, { source: 'disney_plus' }];
 
     const result = filterActiveFavorites({
       favorites,
@@ -59,10 +56,7 @@ describe('util: filterActiveFavorites', () => {
 
   it('should ignore favorites from other countries', () => {
     const favorites = ['us-netflix', 'tr-blutv', 'us-disney_plus'];
-    const activeSources = [
-      { source: 'netflix' },
-      { source: 'disney_plus' },
-    ];
+    const activeSources = [{ source: 'netflix' }, { source: 'disney_plus' }];
 
     const result = filterActiveFavorites({
       favorites,
@@ -75,10 +69,7 @@ describe('util: filterActiveFavorites', () => {
 
   it('should handle duplicate favorite slugs by preserving them', () => {
     const favorites = ['us-netflix', 'us-netflix', 'us-disney_plus'];
-    const activeSources = [
-      { source: 'netflix' },
-      { source: 'disney_plus' },
-    ];
+    const activeSources = [{ source: 'netflix' }, { source: 'disney_plus' }];
 
     const result = filterActiveFavorites({
       favorites,

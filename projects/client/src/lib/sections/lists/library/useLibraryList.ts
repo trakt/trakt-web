@@ -47,24 +47,31 @@ const libraryItemTargets = makeTargets<LibraryItem>(
 export function useLibraryList(props: UseLibraryListProps) {
   const refreshed = useCollectedRefresh({ refetchType: 'none' });
 
-  const { list: baseList, isLoading: baseLoading, hasNextPage, fetchNextPage } =
-    usePaginatedListQuery({
-      ...libraryQuery({
-        page: props.page ?? 1,
-        limit: props.limit ?? DEFAULT_PAGE_SIZE,
-        availableOn: toLibraryAvailableOn(props.library),
-        type: props.type,
-      }),
-      refetchOnMount: 'always',
-      persister: undefined,
-    });
+  const {
+    list: baseList,
+    isLoading: baseLoading,
+    hasNextPage,
+    fetchNextPage,
+  } = usePaginatedListQuery({
+    ...libraryQuery({
+      page: props.page ?? 1,
+      limit: props.limit ?? DEFAULT_PAGE_SIZE,
+      availableOn: toLibraryAvailableOn(props.library),
+      type: props.type,
+    }),
+    refetchOnMount: 'always',
+    persister: undefined,
+  });
 
   const overlay = createBulkIntlOverlay<LibraryItem>({
     getTargets: libraryItemTargets,
   });
 
   return {
-    list: refreshed.pipe(switchMap(() => baseList), overlay.operator),
+    list: refreshed.pipe(
+      switchMap(() => baseList),
+      overlay.operator,
+    ),
     isLoading: refreshed.pipe(
       switchMap(() => withOverlayLoading(baseLoading, overlay.intlLoading$)),
       startWith(true),

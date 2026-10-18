@@ -19,6 +19,4 @@ export const TriviaResponseSchema = z.object({
   summary: z.array(z.string()),
 });
 
-export type TriviaResponse = z.infer<
-  typeof TriviaResponseSchema
->;
+export type TriviaResponse = z.infer<typeof TriviaResponseSchema>;

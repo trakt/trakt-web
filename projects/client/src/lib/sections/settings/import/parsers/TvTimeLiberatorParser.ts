@@ -94,9 +94,11 @@ export const TvTimeLiberatorParser: FileParser = {
 
   canParse(files) {
     const [file] = files;
-    return files.length === 1 &&
+    return (
+      files.length === 1 &&
       (file?.name.endsWith('.csv') === true ||
-        file?.name.endsWith('.zip') === true);
+        file?.name.endsWith('.zip') === true)
+    );
   },
 
   async parse(files) {

@@ -13,9 +13,11 @@ const MixtapeHistoryResponseSchema = z.array(MixtapeMediaResponseSchema);
 
 type MixtapeHistoryParams = { type: MediaType; search?: string } & ApiParams;
 
-const mixtapeHistoryRequest = async (
-  { fetch, type, search }: MixtapeHistoryParams,
-) => {
+const mixtapeHistoryRequest = async ({
+  fetch,
+  type,
+  search,
+}: MixtapeHistoryParams) => {
   const query = new URLSearchParams({ type, extended: 'full,images' });
   if (search) query.set('query', search);
 
@@ -26,9 +28,9 @@ const mixtapeHistoryRequest = async (
 
   return response.ok
     ? {
-      body: MixtapeHistoryResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: MixtapeHistoryResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 

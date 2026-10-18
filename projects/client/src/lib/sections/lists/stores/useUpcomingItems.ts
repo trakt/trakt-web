@@ -70,8 +70,9 @@ export function useUpcomingItems(props: UseUpcomingItemsProps) {
   const list = query.pipe(
     map(($query) => {
       const startOfToday = getStartOfDay(new Date()).getTime();
-      return ($query.data ?? [])
-        .filter((d) => d.effectiveReleaseDate.getTime() >= startOfToday);
+      return ($query.data ?? []).filter(
+        (d) => d.effectiveReleaseDate.getTime() >= startOfToday,
+      );
     }),
     filterByEpisodeType(props.episodeType),
     map((items) => items.slice(0, props.limit)),

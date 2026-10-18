@@ -6,8 +6,10 @@ type IsRightGuessParams = {
   guess: Guess;
 };
 
-export function isRightGuess(
-  { known, mystery, guess }: IsRightGuessParams,
-): boolean {
+export function isRightGuess({
+  known,
+  mystery,
+  guess,
+}: IsRightGuessParams): boolean {
   return guess === 'higher' ? mystery >= known : mystery <= known;
 }

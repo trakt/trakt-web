@@ -15,17 +15,22 @@ type UseCoverImageProps = {
   coverUrl?: HttpsUrl | Nil;
 };
 
-export function useCoverImage(
-  { type, id, title, coverUrl }: UseCoverImageProps,
-) {
+export function useCoverImage({
+  type,
+  id,
+  title,
+  coverUrl,
+}: UseCoverImageProps) {
   const { confirm } = useConfirm();
   const { track } = useTrack(AnalyticsEvent.CoverImage);
 
-  const setting = useMutation(defineMutation({
-    key: 'user:set-cover-image',
-    request: () => setCoverImageRequest({ type, id }),
-    invalidations: [InvalidateAction.User.CoverImage],
-  }));
+  const setting = useMutation(
+    defineMutation({
+      key: 'user:set-cover-image',
+      request: () => setCoverImageRequest({ type, id }),
+      invalidations: [InvalidateAction.User.CoverImage],
+    }),
+  );
 
   const setCoverImage = confirm({
     type: ConfirmationType.SetCoverImage,

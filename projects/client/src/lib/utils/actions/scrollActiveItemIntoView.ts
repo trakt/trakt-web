@@ -34,8 +34,8 @@ export function scrollActiveItemIntoView(
     const parentRight = parent.scrollLeft + parent.clientWidth;
     const elementLeft = element.offsetLeft;
     const elementRight = elementLeft + element.offsetWidth;
-    const isOutOfView = elementRight > parentRight ||
-      elementLeft < parent.scrollLeft;
+    const isOutOfView =
+      elementRight > parentRight || elementLeft < parent.scrollLeft;
 
     if (!isOutOfView) return;
 

@@ -32,12 +32,15 @@ export function useTraktTeam(
     ]).pipe(
       map(([data, $following]) => {
         const team = data ?? [];
-        const unfollowedMembers = team.filter((member) =>
-          !$following.some((user) => user.username === member.username)
+        const unfollowedMembers = team.filter(
+          (member) =>
+            !$following.some((user) => user.username === member.username),
         );
 
-        return shuffle(unfollowedMembers)
-          .slice(0, limit ?? unfollowedMembers.length);
+        return shuffle(unfollowedMembers).slice(
+          0,
+          limit ?? unfollowedMembers.length,
+        );
       }),
     ),
   };

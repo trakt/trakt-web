@@ -88,7 +88,8 @@ export async function generateFromMeta(
   }
 
   const generator = new I18nGenerator(metaMessagesList);
-  const targetPlatforms = platforms ??
+  const targetPlatforms =
+    platforms ??
     GeneratorFactory.getEnabledPlatforms(firstItem(metaMessagesList));
 
   const results = await generator.generatePlatforms(targetPlatforms, outputDir);

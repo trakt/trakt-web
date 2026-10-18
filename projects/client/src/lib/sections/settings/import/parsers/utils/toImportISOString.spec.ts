@@ -4,9 +4,7 @@ import { toImportISOString } from './toImportISOString.ts';
 describe('util: toImportISOString', () => {
   describe('date-only values', () => {
     it('should anchor a date-only value to noon local time', () => {
-      expect(toImportISOString('2026-07-20')).toBe(
-        '2026-07-20T12:00:00.000Z',
-      );
+      expect(toImportISOString('2026-07-20')).toBe('2026-07-20T12:00:00.000Z');
     });
 
     it('should keep the calendar day in the local timezone', () => {

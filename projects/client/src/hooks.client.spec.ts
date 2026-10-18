@@ -35,7 +35,7 @@ describe('hooks.client', () => {
       .filter((file) => {
         const contents = readFileSync(file, 'utf8');
         return REPLAY_ENABLEMENT_TOKENS.some((token) =>
-          contents.includes(token)
+          contents.includes(token),
         );
       })
       .map((file) => file.replace(process.cwd(), ''));

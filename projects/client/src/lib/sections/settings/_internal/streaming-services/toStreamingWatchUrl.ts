@@ -9,9 +9,11 @@ type WatchUrlParams = {
  * v2 `younify_content_link` helper. Returns undefined when the service is
  * unknown or the content id is missing.
  */
-export function toStreamingWatchUrl(
-  { serviceId, contentId, idType }: WatchUrlParams,
-): string | undefined {
+export function toStreamingWatchUrl({
+  serviceId,
+  contentId,
+  idType,
+}: WatchUrlParams): string | undefined {
   if (!serviceId || !contentId) {
     return undefined;
   }

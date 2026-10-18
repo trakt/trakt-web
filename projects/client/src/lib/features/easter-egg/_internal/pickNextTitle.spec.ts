@@ -12,12 +12,7 @@ const title = (key: string, rating: number): GameTitle => ({
 });
 
 const current = title('current', 80);
-const pool = [
-  current,
-  title('far', 60),
-  title('mid', 72),
-  title('close', 78),
-];
+const pool = [current, title('far', 60), title('mid', 72), title('close', 78)];
 
 const first = () => 0;
 

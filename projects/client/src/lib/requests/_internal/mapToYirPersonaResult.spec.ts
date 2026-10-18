@@ -39,8 +39,9 @@ describe('util: mapToYirPersonaResult', () => {
   });
 
   it('should keep a null runner up for a non-hybrid persona', () => {
-    expect(mapToYirPersonaResult({ ...response, runner_up: null }).runnerUp)
-      .toBeNull();
+    expect(
+      mapToYirPersonaResult({ ...response, runner_up: null }).runnerUp,
+    ).toBeNull();
   });
 
   it('should map a missing streak start to null', () => {

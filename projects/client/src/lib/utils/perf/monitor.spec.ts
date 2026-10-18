@@ -3,10 +3,7 @@ import { monitor } from './monitor.ts';
 
 describe('monitor', () => {
   beforeEach(() => {
-    localStorage.setItem(
-      'debug:monitor',
-      'true',
-    );
+    localStorage.setItem('debug:monitor', 'true');
   });
 
   afterEach(() => {

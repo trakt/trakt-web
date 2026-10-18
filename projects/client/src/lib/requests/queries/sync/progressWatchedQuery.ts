@@ -11,24 +11,18 @@ import {
   WatchedProgressEntrySchema,
 } from '$lib/requests/models/ProgressEntry.ts';
 import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
-import type {
-  SortDirection,
-} from '$lib/sections/lists/user/models/SortDirection.ts';
+import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { UpNextResponse } from '@trakt/api';
 
-type ProgressWatchedParams =
-  & {
-    intent: 'continue' | 'completed';
-    sortBy?: SortBy;
-    sortHow?: SortDirection;
-  }
-  & PaginationParams
-  & ApiParams;
+type ProgressWatchedParams = {
+  intent: 'continue' | 'completed';
+  sortBy?: SortBy;
+  sortHow?: SortDirection;
+} & PaginationParams &
+  ApiParams;
 
-function mapToWatchedProgressEntry(
-  item: UpNextResponse,
-): WatchedProgressEntry {
+function mapToWatchedProgressEntry(item: UpNextResponse): WatchedProgressEntry {
   const show = mapToShowEntry(item.show);
 
   return {
@@ -44,27 +38,29 @@ function mapToNitroSortBy(sortBy: SortBy | undefined): string | undefined {
   return sortBy;
 }
 
-const progressWatchedRequest = (
-  { fetch, page, limit, intent, sortBy, sortHow }: ProgressWatchedParams,
-) => {
-  const defaultSort = intent === 'continue'
-    ? { sort_by: 'remaining', sort_how: 'asc' as const }
-    : {};
+const progressWatchedRequest = ({
+  fetch,
+  page,
+  limit,
+  intent,
+  sortBy,
+  sortHow,
+}: ProgressWatchedParams) => {
+  const defaultSort =
+    intent === 'continue'
+      ? { sort_by: 'remaining', sort_how: 'asc' as const }
+      : {};
 
-  return api({ fetch })
-    .sync
-    .progress
-    .upNext
-    .nitro({
-      query: {
-        page,
-        limit,
-        intent,
-        ...defaultSort,
-        ...(sortBy ? { sort_by: mapToNitroSortBy(sortBy) } : {}),
-        ...(sortHow ? { sort_how: sortHow } : {}),
-      },
-    });
+  return api({ fetch }).sync.progress.upNext.nitro({
+    query: {
+      page,
+      limit,
+      intent,
+      ...defaultSort,
+      ...(sortBy ? { sort_by: mapToNitroSortBy(sortBy) } : {}),
+      ...(sortHow ? { sort_how: sortHow } : {}),
+    },
+  });
 };
 
 export const progressWatchedQuery = defineInfiniteQuery({

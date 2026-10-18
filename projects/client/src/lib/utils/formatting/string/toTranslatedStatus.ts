@@ -17,7 +17,7 @@ const STATUS_MAP = {
 } as const;
 
 export function toTranslatedStatus(
-  status: string | (keyof typeof STATUS_MAP),
+  status: string | keyof typeof STATUS_MAP,
   data?: Record<string, unknown>,
 ): string {
   const translationFn =

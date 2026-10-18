@@ -14,15 +14,13 @@ const HISTORY_REQUEST = `GET /users/me/history/shows/${ShowSiloMappedMock.id}`;
 describe('store: useShowWatchedEpisodes', () => {
   beforeEach(() => {
     server.use(
-      http.get(
-        'http://localhost/users/me/history/shows/*',
-        () =>
-          HttpResponse.json(ShowActivityHistoryResponseMock, {
-            headers: {
-              'X-Pagination-Page': '1',
-              'X-Pagination-Page-Count': '1',
-            },
-          }),
+      http.get('http://localhost/users/me/history/shows/*', () =>
+        HttpResponse.json(ShowActivityHistoryResponseMock, {
+          headers: {
+            'X-Pagination-Page': '1',
+            'X-Pagination-Page-Count': '1',
+          },
+        }),
       ),
     );
   });
@@ -41,10 +39,12 @@ describe('store: useShowWatchedEpisodes', () => {
       });
 
       expect(result).to.deep.equal(
-        new Map([[
-          EpisodeSiloMappedMock.season,
-          new Set([EpisodeSiloMappedMock.number]),
-        ]]),
+        new Map([
+          [
+            EpisodeSiloMappedMock.season,
+            new Set([EpisodeSiloMappedMock.number]),
+          ],
+        ]),
       );
     });
   });
@@ -60,7 +60,7 @@ describe('store: useShowWatchedEpisodes', () => {
           factory: () =>
             useShowWatchedEpisodes({ showId: ShowSiloMappedMock.id })
               .watchedBySeason,
-        })
+        }),
       );
 
       expect(requests).not.toContain(HISTORY_REQUEST);

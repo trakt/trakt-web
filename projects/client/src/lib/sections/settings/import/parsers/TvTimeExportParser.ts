@@ -168,7 +168,8 @@ function parseCsvRows(
   }
   // series-episodes must be checked before series (both start "tvtime-series").
   if (
-    basename.includes('series-episodes') || 'series_tvdb_id' in (rows[0] ?? {})
+    basename.includes('series-episodes') ||
+    'series_tvdb_id' in (rows[0] ?? {})
   ) {
     return rows
       .map((row) => parseEpisodeRow(row as EpisodeRow))
@@ -206,17 +207,19 @@ function parseJsonShows(shows: JsonShow[]): UniversalImportItem[] {
             episode: episode.number,
           });
           if (ids == null) return [];
-          return [{
-            action: 'history',
-            type: 'episode',
-            ids,
-            showTvdb,
-            showImdb,
-            title: show.title || undefined,
-            season: season.number,
-            episode: episode.number,
-            watched_at: toImportISOString(episode.watched_at),
-          }];
+          return [
+            {
+              action: 'history',
+              type: 'episode',
+              ids,
+              showTvdb,
+              showImdb,
+              title: show.title || undefined,
+              season: season.number,
+              episode: episode.number,
+              watched_at: toImportISOString(episode.watched_at),
+            },
+          ];
         });
     });
 
@@ -224,12 +227,15 @@ function parseJsonShows(shows: JsonShow[]): UniversalImportItem[] {
 
     if (showTvdb == null && !showImdb) return episodes;
 
-    return [...episodes, {
-      action: 'watchlist',
-      type: 'show',
-      ids: { tvdb: showTvdb, imdb: showImdb },
-      title: show.title || undefined,
-    }];
+    return [
+      ...episodes,
+      {
+        action: 'watchlist',
+        type: 'show',
+        ids: { tvdb: showTvdb, imdb: showImdb },
+        title: show.title || undefined,
+      },
+    ];
   });
 }
 
@@ -240,14 +246,16 @@ function parseJsonMovies(movies: JsonMovie[]): UniversalImportItem[] {
       const tvdbId = toTvdb(movie.id?.tvdb);
       const imdbId = toImdb(movie.id?.imdb);
       if (tvdbId == null && !imdbId) return [];
-      return [{
-        action: 'history',
-        type: 'movie',
-        ids: { tvdb: tvdbId, imdb: imdbId },
-        title: movie.title || undefined,
-        year: movie.year,
-        watched_at: toImportISOString(movie.watched_at),
-      }];
+      return [
+        {
+          action: 'history',
+          type: 'movie',
+          ids: { tvdb: tvdbId, imdb: imdbId },
+          title: movie.title || undefined,
+          year: movie.year,
+          watched_at: toImportISOString(movie.watched_at),
+        },
+      ];
     });
 }
 
@@ -283,12 +291,14 @@ function unzipExportTexts(buffer: ArrayBuffer): Entry[] {
 }
 
 async function collectEntries(files: ReadonlyArray<File>): Promise<Entry[]> {
-  const entries = await Promise.all(files.map(async (file) => {
-    if (file.name.endsWith('.zip')) {
-      return unzipExportTexts(await file.arrayBuffer());
-    }
-    return [{ basename: file.name, text: await file.text() }];
-  }));
+  const entries = await Promise.all(
+    files.map(async (file) => {
+      if (file.name.endsWith('.zip')) {
+        return unzipExportTexts(await file.arrayBuffer());
+      }
+      return [{ basename: file.name, text: await file.text() }];
+    }),
+  );
 
   return entries.flat();
 }
@@ -303,15 +313,16 @@ function itemKey(item: UniversalImportItem): string {
   if (
     item.type === 'episode' &&
     (item.showTvdb != null || item.showImdb != null) &&
-    item.season != null && item.episode != null
+    item.season != null &&
+    item.episode != null
   ) {
     // Prefer tvdb (else imdb) so a watch present in both serializations, one
     // carrying imdb and one not, keys the same and dedupes.
-    const showKey = item.showTvdb != null
-      ? `tvdb-${item.showTvdb}`
-      : `imdb-${item.showImdb}`;
-    return [item.action, item.type, showKey, item.season, item.episode]
-      .join('-');
+    const showKey =
+      item.showTvdb != null ? `tvdb-${item.showTvdb}` : `imdb-${item.showImdb}`;
+    return [item.action, item.type, showKey, item.season, item.episode].join(
+      '-',
+    );
   }
   return [
     item.action,
@@ -347,25 +358,29 @@ export const TvTimeExportParser: FileParser = {
   name: 'TV Time export',
 
   canParse(files) {
-    return files.length > 0 &&
+    return (
+      files.length > 0 &&
       files.every(
         (file) => file.name.endsWith('.csv') || file.name.endsWith('.zip'),
-      );
+      )
+    );
   },
 
   async parse(files) {
     const entries = await collectEntries(files);
 
-    const results = await Promise.all(entries.map(async (entry) => {
-      if (entry.basename.endsWith('.csv')) {
-        const rows = await parseCsvText(entry.text) as Record<
-          string,
-          unknown
-        >[];
-        return parseCsvRows(entry.basename, rows);
-      }
-      return parseJson(entry.basename, entry.text);
-    }));
+    const results = await Promise.all(
+      entries.map(async (entry) => {
+        if (entry.basename.endsWith('.csv')) {
+          const rows = (await parseCsvText(entry.text)) as Record<
+            string,
+            unknown
+          >[];
+          return parseCsvRows(entry.basename, rows);
+        }
+        return parseJson(entry.basename, entry.text);
+      }),
+    );
 
     return dedupeItems(results.flat());
   },

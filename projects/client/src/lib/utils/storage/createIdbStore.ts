@@ -42,6 +42,6 @@ export function createIdbStore(dbName: string, storeName: string): UseStore {
 
   return (txMode, callback) =>
     getDatabase().then((db) =>
-      callback(db.transaction(storeName, txMode).objectStore(storeName))
+      callback(db.transaction(storeName, txMode).objectStore(storeName)),
     );
 }

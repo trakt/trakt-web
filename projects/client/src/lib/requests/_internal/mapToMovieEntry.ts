@@ -22,9 +22,7 @@ function mapMovieCertificationResponse(
   return certification;
 }
 
-export function mapToMovieEntry(
-  movie: MovieResponse,
-): MovieEntry {
+export function mapToMovieEntry(movie: MovieResponse): MovieEntry {
   const poster = mapToPoster(movie.images);
   const cover = mapToCover(movie.images);
   const logo = mapToLogo(movie.images);

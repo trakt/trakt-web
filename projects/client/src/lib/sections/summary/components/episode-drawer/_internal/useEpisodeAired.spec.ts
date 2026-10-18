@@ -20,12 +20,14 @@ function respondWithUnairedSeason() {
     http.get(
       `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${firstEpisode.season}*`,
       () =>
-        HttpResponse.json([{
-          ...firstResponse,
-          'first_aired': releaseDate,
-          'released': releaseDate,
-          'effective_release_date': releaseDate,
-        }]),
+        HttpResponse.json([
+          {
+            ...firstResponse,
+            first_aired: releaseDate,
+            released: releaseDate,
+            effective_release_date: releaseDate,
+          },
+        ]),
     ),
   );
 }

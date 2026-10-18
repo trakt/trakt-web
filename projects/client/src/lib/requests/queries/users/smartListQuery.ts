@@ -36,9 +36,7 @@ export const SmartListSchema = z.object({
 });
 export type SmartList = z.infer<typeof SmartListSchema>;
 
-export function mapToSmartList(
-  entry: SmartListDefinitionResponse,
-): SmartList {
+export function mapToSmartList(entry: SmartListDefinitionResponse): SmartList {
   return {
     key: `smart-list-${entry.ids.slug}`,
     title: entry.name,
@@ -53,21 +51,14 @@ export function mapToSmartList(
   };
 }
 
-type SmartListParams =
-  & { userId?: string }
-  & ApiParams;
+type SmartListParams = { userId?: string } & ApiParams;
 
-const smartListRequest = (
-  { fetch, userId }: SmartListParams,
-) =>
-  api({ fetch })
-    .users
-    .smartLists
-    .personal({
-      params: {
-        id: userId ?? 'me',
-      },
-    });
+const smartListRequest = ({ fetch, userId }: SmartListParams) =>
+  api({ fetch }).users.smartLists.personal({
+    params: {
+      id: userId ?? 'me',
+    },
+  });
 
 export const smartListQuery = defineInfiniteQuery({
   key: (params: SmartListParams) => `smartLists-${params.userId ?? 'me'}`,
@@ -76,11 +67,7 @@ export const smartListQuery = defineInfiniteQuery({
     InvalidateAction.SmartList.Edited,
     InvalidateAction.SmartList.Deleted,
   ],
-  dependencies: (
-    params: SmartListParams,
-  ) => [
-    params.userId ?? 'me',
-  ],
+  dependencies: (params: SmartListParams) => [params.userId ?? 'me'],
   request: smartListRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToSmartList),

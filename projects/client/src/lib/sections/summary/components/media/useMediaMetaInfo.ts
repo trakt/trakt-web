@@ -43,11 +43,7 @@ export function useMediaMetaInfo(props: MetaInfoProps) {
   const ratings = useQuery(typeToRatingsQuery(props));
 
   return {
-    ratings: ratings.pipe(
-      map(($ratings) => $ratings.data ?? EMPTY_RATINGS),
-    ),
-    isLoading: ratings.pipe(
-      map(($ratings) => $ratings.isLoading),
-    ),
+    ratings: ratings.pipe(map(($ratings) => $ratings.data ?? EMPTY_RATINGS)),
+    isLoading: ratings.pipe(map(($ratings) => $ratings.isLoading)),
   };
 }

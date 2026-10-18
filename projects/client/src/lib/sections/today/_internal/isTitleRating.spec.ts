@@ -4,8 +4,9 @@ import { isTitleRating } from './isTitleRating.ts';
 
 describe('util: isTitleRating', () => {
   it('should accept ratings of movies and shows', () => {
-    expect(isTitleRating(buildFriendAction({ kind: 'rating', rating: 8 })))
-      .toBe(true);
+    expect(
+      isTitleRating(buildFriendAction({ kind: 'rating', rating: 8 })),
+    ).toBe(true);
     expect(
       isTitleRating(
         buildFriendAction({ kind: 'rating', rating: 8, target: 'show' }),

@@ -35,19 +35,13 @@ When(
   },
 );
 
-When(
-  'I open the shows section',
-  async function (this: TraktWorld) {
-    await this.page.goto(TestUrlBuilder.shows());
-  },
-);
+When('I open the shows section', async function (this: TraktWorld) {
+  await this.page.goto(TestUrlBuilder.shows());
+});
 
-When(
-  'I open the movies section',
-  async function (this: TraktWorld) {
-    await this.page.goto(TestUrlBuilder.movies());
-  },
-);
+When('I open the movies section', async function (this: TraktWorld) {
+  await this.page.goto(TestUrlBuilder.movies());
+});
 
 Then(
   'I should see the {string} element on the page',

@@ -21,7 +21,7 @@ describe('useRatings', () => {
       useRatings({
         type: 'movie',
         id: MovieHereticMappedMock.id,
-      })
+      }),
     );
 
     addRating(2);
@@ -33,7 +33,7 @@ describe('useRatings', () => {
       useRatings({
         type: 'movie',
         id: MovieHereticMappedMock.id,
-      })
+      }),
     );
 
     expect(await firstValueFrom(pendingRating)).toBe(null);
@@ -44,7 +44,7 @@ describe('useRatings', () => {
       useRatings({
         type: 'movie',
         id: MovieHereticMappedMock.id,
-      })
+      }),
     );
 
     const value = await waitForValue(current, {
@@ -61,7 +61,7 @@ describe('useRatings', () => {
       useRatings({
         type: 'season',
         id: season.id,
-      })
+      }),
     );
 
     const value = await waitForValue(current, {
@@ -76,7 +76,7 @@ describe('useRatings', () => {
       useRatings({
         type: 'movie',
         id: MovieMatrixMappedMock.id,
-      })
+      }),
     );
 
     const value = await waitForEmission(current, 2);
@@ -88,7 +88,7 @@ describe('useRatings', () => {
       useRatings({
         type: 'movie',
         id: MovieMatrixMappedMock.id,
-      })
+      }),
     );
 
     const invalidations = await captureInvalidations(async () => {
@@ -109,7 +109,7 @@ describe('useRatings', () => {
       useRatings({
         type: 'season',
         id: season.id,
-      })
+      }),
     );
 
     const invalidations = await captureInvalidations(async () => {

@@ -18,18 +18,16 @@ type CreatePlexConnectionParams = {
   webhookOnly: boolean;
 } & ApiParams;
 
-export async function createMediaSyncConnectionRequest(
-  {
-    fetch,
-    attemptId,
-    serverId,
-    libraryIds,
-    feeds,
-    syncAccountId,
-    importHistory,
-    webhookOnly,
-  }: CreatePlexConnectionParams,
-): Promise<MediaSyncResult<MediaSyncConnection>> {
+export async function createMediaSyncConnectionRequest({
+  fetch,
+  attemptId,
+  serverId,
+  libraryIds,
+  feeds,
+  syncAccountId,
+  importHistory,
+  webhookOnly,
+}: CreatePlexConnectionParams): Promise<MediaSyncResult<MediaSyncConnection>> {
   const response = await rawApiFetch({
     fetch,
     path: '/v3/users/me/sync/connections',

@@ -17,7 +17,7 @@ describe('findActiveSeason', () => {
     seasonData: Array<{ number: number; episodeCount: number }>,
   ): Season[] =>
     seasonData.map(({ number, episodeCount }) =>
-      createSeason(number, episodeCount)
+      createSeason(number, episodeCount),
     );
 
   const seasons = createSeasons([
@@ -26,9 +26,7 @@ describe('findActiveSeason', () => {
     { number: 3, episodeCount: 8 },
   ]);
 
-  const specialsOnly = createSeasons([
-    { number: 0, episodeCount: 1 },
-  ]);
+  const specialsOnly = createSeasons([{ number: 0, episodeCount: 1 }]);
 
   it('should return season 1 if there is no watched season', () => {
     const result = findActiveSeason({

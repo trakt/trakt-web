@@ -82,10 +82,7 @@ async function loadManifest(
 
 async function main(): Promise<void> {
   const KEEP = Number.parseInt(process.env.KEEP_RELEASES ?? '10', 10);
-  const MIN_AGE_HOURS = Number.parseInt(
-    process.env.MIN_AGE_HOURS ?? '24',
-    10,
-  );
+  const MIN_AGE_HOURS = Number.parseInt(process.env.MIN_AGE_HOURS ?? '24', 10);
   const DRY_RUN = process.env.DRY_RUN === '1';
 
   if (!Number.isFinite(KEEP) || KEEP < 1) {

@@ -91,26 +91,22 @@ describe('useSearch: tracking volume', () => {
     trackSpy.mockClear();
   });
 
-  it(
-    'should report one search for a query typed a character at a time',
-    async () => {
-      const { search } = await renderTrackedSearch();
+  it('should report one search for a query typed a character at a time', async () => {
+    const { search } = await renderTrackedSearch();
 
-      // 300ms between keystrokes is slower than the query debounce, which is
-      // what a touch keyboard looks like.
-      const query = 'silo';
-      for (let length = 1; length <= query.length; length++) {
-        search(query.slice(0, length), 'media');
-        await settle(300);
-      }
+    // 300ms between keystrokes is slower than the query debounce, which is
+    // what a touch keyboard looks like.
+    const query = 'silo';
+    for (let length = 1; length <= query.length; length++) {
+      search(query.slice(0, length), 'media');
+      await settle(300);
+    }
 
-      await settle(1400);
+    await settle(1400);
 
-      expect(trackSpy).toHaveBeenCalledTimes(1);
-      expect(trackSpy).toHaveBeenCalledWith({ mode: 'media' });
-    },
-    15000,
-  );
+    expect(trackSpy).toHaveBeenCalledTimes(1);
+    expect(trackSpy).toHaveBeenCalledWith({ mode: 'media' });
+  }, 15000);
 
   it('should report each query when typing settles between them', async () => {
     const { search } = await renderTrackedSearch();
@@ -139,19 +135,15 @@ describe('useSearch: tracking volume', () => {
     expect(trackSpy).toHaveBeenCalledTimes(1);
   }, 15000);
 
-  it(
-    'should report once regardless of how many consumers subscribe',
-    async () => {
-      const { search, results } = await renderTrackedSearch();
-      subscriptions.push(results.subscribe(), results.subscribe());
+  it('should report once regardless of how many consumers subscribe', async () => {
+    const { search, results } = await renderTrackedSearch();
+    subscriptions.push(results.subscribe(), results.subscribe());
 
-      search('silo', 'media');
-      await settle(1400);
+    search('silo', 'media');
+    await settle(1400);
 
-      expect(trackSpy).toHaveBeenCalledTimes(1);
-    },
-    15000,
-  );
+    expect(trackSpy).toHaveBeenCalledTimes(1);
+  }, 15000);
 
   it('should report the same term again after the box is cleared', async () => {
     const { search, clear } = await renderTrackedSearch();

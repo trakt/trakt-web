@@ -7,15 +7,17 @@ import {
 describe('isScrolledFarEnough', () => {
   const scrollHeight = 1000;
   const innerHeight = 500;
-  const threshold = (scrollHeight - innerHeight) *
-    LOAD_MORE_AT_SCROLL_PERCENTAGE;
+  const threshold =
+    (scrollHeight - innerHeight) * LOAD_MORE_AT_SCROLL_PERCENTAGE;
 
   beforeEach(() => {
-    vi.spyOn(globalThis.window, 'innerHeight', 'get')
-      .mockReturnValue(innerHeight);
+    vi.spyOn(globalThis.window, 'innerHeight', 'get').mockReturnValue(
+      innerHeight,
+    );
 
-    vi.spyOn(document.documentElement, 'scrollHeight', 'get')
-      .mockReturnValue(scrollHeight);
+    vi.spyOn(document.documentElement, 'scrollHeight', 'get').mockReturnValue(
+      scrollHeight,
+    );
   });
 
   afterEach(() => {
@@ -23,21 +25,22 @@ describe('isScrolledFarEnough', () => {
   });
 
   it('should return false when not scrolled far enough', () => {
-    vi.spyOn(globalThis.window, 'scrollY', 'get')
-      .mockReturnValue(threshold - 1);
+    vi.spyOn(globalThis.window, 'scrollY', 'get').mockReturnValue(
+      threshold - 1,
+    );
 
     expect(isScrolledFarEnough()).toBe(false);
   });
 
   it('should return false when scrolled exactly at threshold', () => {
-    vi.spyOn(globalThis.window, 'scrollY', 'get')
-      .mockReturnValue(threshold);
+    vi.spyOn(globalThis.window, 'scrollY', 'get').mockReturnValue(threshold);
     expect(isScrolledFarEnough()).toBe(false);
   });
 
   it('should return true when scrolled past threshold', () => {
-    vi.spyOn(globalThis.window, 'scrollY', 'get')
-      .mockReturnValue(threshold + 1);
+    vi.spyOn(globalThis.window, 'scrollY', 'get').mockReturnValue(
+      threshold + 1,
+    );
     expect(isScrolledFarEnough()).toBe(true);
   });
 
@@ -45,8 +48,8 @@ describe('isScrolledFarEnough', () => {
     const container = {
       scrollHeight,
       clientHeight: innerHeight,
-      scrollTop: (scrollHeight - innerHeight) * LOAD_MORE_AT_SCROLL_PERCENTAGE +
-        1,
+      scrollTop:
+        (scrollHeight - innerHeight) * LOAD_MORE_AT_SCROLL_PERCENTAGE + 1,
     } as HTMLElement;
 
     expect(isScrolledFarEnough(container)).toBe(true);
@@ -56,8 +59,8 @@ describe('isScrolledFarEnough', () => {
     const container = {
       scrollHeight,
       clientHeight: innerHeight,
-      scrollTop: (scrollHeight - innerHeight) * LOAD_MORE_AT_SCROLL_PERCENTAGE -
-        1,
+      scrollTop:
+        (scrollHeight - innerHeight) * LOAD_MORE_AT_SCROLL_PERCENTAGE - 1,
     } as HTMLElement;
 
     expect(isScrolledFarEnough(container)).toBe(false);
@@ -67,8 +70,7 @@ describe('isScrolledFarEnough', () => {
     const container = {
       scrollHeight,
       clientHeight: innerHeight,
-      scrollTop: (scrollHeight - innerHeight) *
-        LOAD_MORE_AT_SCROLL_PERCENTAGE,
+      scrollTop: (scrollHeight - innerHeight) * LOAD_MORE_AT_SCROLL_PERCENTAGE,
     } as HTMLElement;
 
     expect(isScrolledFarEnough(container)).toBe(false);

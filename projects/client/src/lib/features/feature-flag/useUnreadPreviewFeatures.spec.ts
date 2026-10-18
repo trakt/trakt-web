@@ -12,7 +12,7 @@ describe('store: useUnreadPreviewFeatures', () => {
 
   it('should report unread features for a first-time visitor', async () => {
     const { hasUnreadFeatures } = await renderStore(() =>
-      useUnreadPreviewFeatures()
+      useUnreadPreviewFeatures(),
     );
 
     expect(await waitForValue(hasUnreadFeatures, true)).toBe(true);
@@ -25,22 +25,23 @@ describe('store: useUnreadPreviewFeatures', () => {
     );
 
     const { hasUnreadFeatures } = await renderStore(() =>
-      useUnreadPreviewFeatures()
+      useUnreadPreviewFeatures(),
     );
 
     expect(await waitForValue(hasUnreadFeatures, false)).toBe(false);
   });
 
   it('should acknowledge only the features shipped after the last acknowledgement', async () => {
-    const previouslyShippedFeatures = Object.values(FeatureFlag)
-      .filter((feature) => feature !== FeatureFlag.Rewatching);
+    const previouslyShippedFeatures = Object.values(FeatureFlag).filter(
+      (feature) => feature !== FeatureFlag.Rewatching,
+    );
     localStorage.setItem(
       READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY,
       JSON.stringify(previouslyShippedFeatures),
     );
 
     const { acknowledgeUnread } = await renderStore(() =>
-      useUnreadPreviewFeatures()
+      useUnreadPreviewFeatures(),
     );
 
     expect(acknowledgeUnread()).toEqual([FeatureFlag.Rewatching]);
@@ -48,7 +49,7 @@ describe('store: useUnreadPreviewFeatures', () => {
 
   it('should clear the unread state when acknowledgeUnread is called', async () => {
     const { hasUnreadFeatures, acknowledgeUnread } = await renderStore(() =>
-      useUnreadPreviewFeatures()
+      useUnreadPreviewFeatures(),
     );
 
     acknowledgeUnread();
@@ -69,7 +70,7 @@ describe('store: useUnreadPreviewFeatures', () => {
 
   it('should persist read features to localStorage', async () => {
     const { acknowledgeUnread } = await renderStore(() =>
-      useUnreadPreviewFeatures()
+      useUnreadPreviewFeatures(),
     );
 
     acknowledgeUnread();
@@ -85,7 +86,7 @@ describe('store: useUnreadPreviewFeatures', () => {
     localStorage.setItem(READ_PREVIEW_FEATURES_LOCAL_STORAGE_KEY, 'not-json{');
 
     const { hasUnreadFeatures } = await renderStore(() =>
-      useUnreadPreviewFeatures()
+      useUnreadPreviewFeatures(),
     );
 
     expect(await waitForValue(hasUnreadFeatures, true)).toBe(true);

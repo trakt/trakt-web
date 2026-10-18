@@ -22,9 +22,12 @@ type ExecuteOrEnqueueParams<TEndpoint extends OfflineActionEndpoint> = {
  */
 export async function executeOrEnqueue<
   TEndpoint extends OfflineActionEndpoint,
->(
-  { endpoint, keys, body, invalidations }: ExecuteOrEnqueueParams<TEndpoint>,
-): Promise<ExecuteOrEnqueueOutcome> {
+>({
+  endpoint,
+  keys,
+  body,
+  invalidations,
+}: ExecuteOrEnqueueParams<TEndpoint>): Promise<ExecuteOrEnqueueOutcome> {
   const action: OfflineAction = {
     id: crypto.randomUUID(),
     endpoint,

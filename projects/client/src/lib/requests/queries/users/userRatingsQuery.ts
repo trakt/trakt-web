@@ -65,7 +65,7 @@ export const UserRatingEntrySchema = z.discriminatedUnion('type', [
 export type UserRatingEntry = z.infer<typeof UserRatingEntrySchema>;
 
 const SUPPORTED_RATING_TYPES = ['movie', 'show', 'episode', 'season'] as const;
-type SupportedRatingType = typeof SUPPORTED_RATING_TYPES[number];
+type SupportedRatingType = (typeof SUPPORTED_RATING_TYPES)[number];
 type SupportedRatingResponse = Extract<
   RatedItemResponse,
   { type: SupportedRatingType }
@@ -111,10 +111,7 @@ const mapToRatingEntry = (item: SupportedRatingResponse): UserRatingEntry => {
         assertDefined(item.show, 'Expected show in episode rating'),
       );
       const episode = mapToEpisodeEntry(
-        assertDefined(
-          item.episode,
-          'Expected episode in episode rating',
-        ),
+        assertDefined(item.episode, 'Expected episode in episode rating'),
       );
       return {
         ...common,
@@ -144,14 +141,14 @@ const mapToRatingEntry = (item: SupportedRatingResponse): UserRatingEntry => {
   }
 };
 
-type UserRatingsParams =
-  & { slug: string }
-  & ApiParams
-  & PaginationParams;
+type UserRatingsParams = { slug: string } & ApiParams & PaginationParams;
 
-const userRatingsRequest = (
-  { fetch, slug, page, limit }: UserRatingsParams,
-) => {
+const userRatingsRequest = ({
+  fetch,
+  slug,
+  page,
+  limit,
+}: UserRatingsParams) => {
   // FIXME: add support for querying by type when we have support for multi-type
   return api({ fetch }).users.ratings.all({
     params: {
@@ -173,14 +170,10 @@ export const userRatingsQuery = defineInfiniteQuery({
     InvalidateAction.Rated('show'),
     InvalidateAction.Rated('movie'),
   ],
-  dependencies: (
-    params: UserRatingsParams,
-  ) => [params.slug, params.limit],
+  dependencies: (params: UserRatingsParams) => [params.slug, params.limit],
   request: userRatingsRequest,
   mapper: (response) => ({
-    entries: response.body
-      .filter(isSupportedRating)
-      .map(mapToRatingEntry),
+    entries: response.body.filter(isSupportedRating).map(mapToRatingEntry),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(UserRatingEntrySchema),

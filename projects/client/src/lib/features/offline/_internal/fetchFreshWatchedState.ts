@@ -14,9 +14,9 @@ import type { FreshWatchedState } from './FreshWatchedState.ts';
 const MOVIES_LIMIT = 10000;
 const SHOWS_LIMIT = 1000;
 
-type PageFetcher<T> = (context: { pageParam: number }) => Promise<
-  Paginatable<T>
->;
+type PageFetcher<T> = (context: {
+  pageParam: number;
+}) => Promise<Paginatable<T>>;
 
 function fetchFirstPage<T>(queryFn: unknown): Promise<T[]> {
   const fetchPage = queryFn as PageFetcher<T>;
@@ -42,9 +42,9 @@ export async function fetchFreshWatchedState(): Promise<FreshWatchedState> {
     shows: new Map(shows.map((show) => [show.id, show.watchedAt])),
     episodes: new Map(
       shows.flatMap((show) =>
-        show.episodes.map((episode) =>
-          [episode.episodeId, episode.watchedAt] as const
-        )
+        show.episodes.map(
+          (episode) => [episode.episodeId, episode.watchedAt] as const,
+        ),
       ),
     ),
   };

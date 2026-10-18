@@ -2,59 +2,58 @@ import type { UserSettings } from '$lib/features/auth/queries/currentUserSetting
 import { Theme } from '$lib/features/theme/models/Theme.ts';
 
 export const ExtendedUserMappedMock: UserSettings = {
-  'id': 41152,
-  'key': 'user-41152',
-  'slug': 'tequila_sunset',
-  'username': 'harrier_dubois',
-  'email': 'harry@example.com',
-  'token': null,
-  'shareCode': 'Xk3mPq2Bf9aQ',
-  'joinedAt': new Date('2021-03-15T08:00:00.000Z'),
-  'birthday': new Date('1977-03-21'),
-  'avatar': {
-    'url':
-      'https://media.trakt.tv/images/users/014/366/083/avatars/large/disco_cop.png',
+  id: 41152,
+  key: 'user-41152',
+  slug: 'tequila_sunset',
+  username: 'harrier_dubois',
+  email: 'harry@example.com',
+  token: null,
+  shareCode: 'Xk3mPq2Bf9aQ',
+  joinedAt: new Date('2021-03-15T08:00:00.000Z'),
+  birthday: new Date('1977-03-21'),
+  avatar: {
+    url: 'https://media.trakt.tv/images/users/014/366/083/avatars/large/disco_cop.png',
   },
-  'cover': {
-    'url': 'https://whirling_in_rags.jpg',
+  cover: {
+    url: 'https://whirling_in_rags.jpg',
   },
-  'about': "Sorry about the amnesia. I'm actually a superstar detective.",
-  'isVip': true,
-  'isDirector': false,
-  'isPrivate': false,
-  'location': 'Martinaise, Revachol West',
-  'name': {
-    'first': 'Harry',
-    'full': 'Harry Du Bois',
-    'last': 'Du Bois',
+  about: "Sorry about the amnesia. I'm actually a superstar detective.",
+  isVip: true,
+  isDirector: false,
+  isPrivate: false,
+  location: 'Martinaise, Revachol West',
+  name: {
+    first: 'Harry',
+    full: 'Harry Du Bois',
+    last: 'Du Bois',
   },
-  'preferences': {
-    'progress': {
-      'sort': {
-        'by': 'added',
-        'direction': 'asc',
+  preferences: {
+    progress: {
+      sort: {
+        by: 'added',
+        direction: 'asc',
       },
     },
-    'watch': {
-      'action': 'now',
+    watch: {
+      action: 'now',
     },
-    'isSpoilerHidden': false,
-    'hasWatchAgain': true,
-    'showRatingPrompt': false,
+    isSpoilerHidden: false,
+    hasWatchAgain: true,
+    showRatingPrompt: false,
   },
-  'services': {
-    'country': 'us',
-    'favorites': ['netflix', 'max'],
-    'showOnlyFavorites': true,
+  services: {
+    country: 'us',
+    favorites: ['netflix', 'max'],
+    showOnlyFavorites: true,
   },
-  'genres': { loved: [] },
-  'permissions': ['comment', 'like', 'follow'],
-  'limits': {
-    'lists': {
-      'limit': 100,
-      'itemLimit': 1000,
+  genres: { loved: [] },
+  permissions: ['comment', 'like', 'follow'],
+  limits: {
+    lists: {
+      limit: 100,
+      itemLimit: 1000,
     },
   },
-  'preferredTheme': Theme.Light,
-  'locale': 'fr-FR',
+  preferredTheme: Theme.Light,
+  locale: 'fr-FR',
 };

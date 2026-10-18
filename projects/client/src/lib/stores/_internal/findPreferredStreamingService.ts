@@ -19,12 +19,11 @@ export function findPreferredStreamingService({
   favorites,
   countryCode,
 }: FindPreferredStreamingServiceProps) {
-  const favoriteSubscriptionMatch = services.streaming
-    .find(
-      (subscription) =>
-        favorites.includes(`${countryCode}-${subscription.source}`),
-    );
+  const favoriteSubscriptionMatch = services.streaming.find((subscription) =>
+    favorites.includes(`${countryCode}-${subscription.source}`),
+  );
 
-  return favoriteSubscriptionMatch ??
-    findViablePreferredService(services.streaming);
+  return (
+    favoriteSubscriptionMatch ?? findViablePreferredService(services.streaming)
+  );
 }

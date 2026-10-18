@@ -18,16 +18,17 @@ describe('parseMixtapeParams', () => {
   });
 
   it('should read shows, picks, skips, the results view and the source', () => {
-    expect(parse('type=show&picks=1,2&skips=9&view=results&source=related'))
-      .toEqual({
-        type: 'show',
-        picks: [1, 2],
-        skips: [9],
-        kept: [],
-        savedTo: null,
-        view: 'results',
-        source: 'related',
-      });
+    expect(
+      parse('type=show&picks=1,2&skips=9&view=results&source=related'),
+    ).toEqual({
+      type: 'show',
+      picks: [1, 2],
+      skips: [9],
+      kept: [],
+      savedTo: null,
+      view: 'results',
+      source: 'related',
+    });
   });
 
   it('should drop junk and duplicate ids and keep at most five picks', () => {

@@ -28,9 +28,7 @@ describe('computeStreak', () => {
 
   it('returns none when gap is more than one day', () => {
     const now = new Date('2024-01-15T12:00:00Z');
-    const dates = [
-      new Date('2024-01-12T10:00:00Z'),
-    ];
+    const dates = [new Date('2024-01-12T10:00:00Z')];
     expect(computeStreak(dates, now)).toEqual({ count: 0 });
   });
 

@@ -14,17 +14,15 @@ import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import type { SearchParams } from '../../models/SearchParams.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
-export const TrendingShowSchema = ShowEntrySchema
-  .extend({
-    watchers: z.number(),
-  });
+export const TrendingShowSchema = ShowEntrySchema.extend({
+  watchers: z.number(),
+});
 export type TrendingShow = z.infer<typeof TrendingShowSchema>;
 
-type ShowTrendingParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & SearchParams;
+type ShowTrendingParams = PaginationParams &
+  ApiParams &
+  FilterParams &
+  SearchParams;
 
 export function mapToTrendingShow({
   watchers,
@@ -36,21 +34,24 @@ export function mapToTrendingShow({
   };
 }
 
-export const showTrendingRequest = (
-  { fetch, limit, page, filter, theme, search }: ShowTrendingParams,
-) => {
-  return api({ fetch })
-    .shows
-    .trending({
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        theme,
-        ...filter,
-        ...search,
-      },
-    });
+export const showTrendingRequest = ({
+  fetch,
+  limit,
+  page,
+  filter,
+  theme,
+  search,
+}: ShowTrendingParams) => {
+  return api({ fetch }).shows.trending({
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      theme,
+      ...filter,
+      ...search,
+    },
+  });
 };
 
 export const showTrendingQuery = defineInfiniteQuery({
@@ -60,9 +61,7 @@ export const showTrendingQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (
-    params,
-  ) => [
+  dependencies: (params) => [
     params.limit,
     params.page,
     ...getGlobalFilterDependencies(params.filter),

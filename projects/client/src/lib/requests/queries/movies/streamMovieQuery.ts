@@ -9,20 +9,16 @@ type StreamMovieParams = {
   country: string;
 } & ApiParams;
 
-const streamMovieRequest = (
-  { fetch, slug, country }: StreamMovieParams,
-) =>
-  api({ fetch })
-    .movies
-    .watchnow({
-      params: {
-        id: slug,
-        country,
-      },
-      query: {
-        extended: 'streaming_ranks',
-      },
-    });
+const streamMovieRequest = ({ fetch, slug, country }: StreamMovieParams) =>
+  api({ fetch }).movies.watchnow({
+    params: {
+      id: slug,
+      country,
+    },
+    query: {
+      extended: 'streaming_ranks',
+    },
+  });
 
 export const streamMovieQuery = defineQuery({
   key: 'streamMovie',

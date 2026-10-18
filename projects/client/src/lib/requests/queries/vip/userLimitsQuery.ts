@@ -23,13 +23,9 @@ export const UserLimitsResponseSchema = z.object({
   connected_apps: LimitsSchema,
 });
 
-type UserLimitsResponse = z.infer<
-  typeof UserLimitsResponseSchema
->;
+type UserLimitsResponse = z.infer<typeof UserLimitsResponseSchema>;
 
-function mapToUserLimits(
-  response?: UserLimitsResponse,
-): UserLimits | Nil {
+function mapToUserLimits(response?: UserLimitsResponse): UserLimits | Nil {
   if (!response) {
     return null;
   }
@@ -47,18 +43,14 @@ function mapToUserLimits(
   };
 }
 
-const userLimitsRequest = async (
-  { fetch }: UserLimitsParams,
-) => {
-  const response = await rawApiFetch(
-    { fetch, path: '/v3/users/me/usage' },
-  );
+const userLimitsRequest = async ({ fetch }: UserLimitsParams) => {
+  const response = await rawApiFetch({ fetch, path: '/v3/users/me/usage' });
 
   return response.ok
     ? {
-      body: UserLimitsResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: UserLimitsResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 

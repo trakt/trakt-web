@@ -30,8 +30,7 @@ import {
 } from './_internal/manifest.ts';
 import { r2FromEnv } from './_internal/r2.ts';
 
-const SOURCE_DIR = process.env.IMMUTABLE_SOURCE_DIR ??
-  '.svelte-kit/cloudflare';
+const SOURCE_DIR = process.env.IMMUTABLE_SOURCE_DIR ?? '.svelte-kit/cloudflare';
 const CONCURRENCY = 64;
 
 async function uploadOne(

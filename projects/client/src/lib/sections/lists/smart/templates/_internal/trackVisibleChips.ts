@@ -9,7 +9,7 @@ let sharedObserver: ResizeObserver | undefined;
 
 function getSharedObserver(): ResizeObserver {
   sharedObserver ??= new ResizeObserver((entries) =>
-    entries.forEach((entry) => measurements.get(entry.target)?.())
+    entries.forEach((entry) => measurements.get(entry.target)?.()),
   );
 
   return sharedObserver;

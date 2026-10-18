@@ -5,21 +5,23 @@ export function useAllTimeStats() {
   const { details, isLoading } = useAllTimeStatsDetails();
 
   const stats = details.pipe(
-    map(({
-      playCount,
-      movieCount,
-      showCount,
-      episodeCount,
-      ratingCount,
-      commentCount,
-    }) => ({
-      playCount,
-      movieCount,
-      showCount,
-      episodeCount,
-      ratingCount,
-      commentCount,
-    })),
+    map(
+      ({
+        playCount,
+        movieCount,
+        showCount,
+        episodeCount,
+        ratingCount,
+        commentCount,
+      }) => ({
+        playCount,
+        movieCount,
+        showCount,
+        episodeCount,
+        ratingCount,
+        commentCount,
+      }),
+    ),
   );
 
   return {

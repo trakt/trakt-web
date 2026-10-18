@@ -11,12 +11,14 @@ type ToStoryGroupsParams = {
 };
 
 function toTitleFrames(story: TodayTitleStory): TodayStoryFrame[] {
-  const friendFrames = story.actions.map((action): TodayStoryFrame => ({
-    key: `${story.key}-${action.key}`,
-    type: 'friend',
-    story,
-    action,
-  }));
+  const friendFrames = story.actions.map(
+    (action): TodayStoryFrame => ({
+      key: `${story.key}-${action.key}`,
+      type: 'friend',
+      story,
+      action,
+    }),
+  );
 
   if (story.users.length < 2) return friendFrames;
 
@@ -26,15 +28,18 @@ function toTitleFrames(story: TodayTitleStory): TodayStoryFrame[] {
   ];
 }
 
-export function toStoryGroups(
-  { forYou, titles }: ToStoryGroupsParams,
-): TodayStoryGroup[] {
-  const titleGroups = titles.map((story): TodayStoryGroup => ({
-    key: story.key,
-    type: 'title',
-    story,
-    frames: toTitleFrames(story),
-  }));
+export function toStoryGroups({
+  forYou,
+  titles,
+}: ToStoryGroupsParams): TodayStoryGroup[] {
+  const titleGroups = titles.map(
+    (story): TodayStoryGroup => ({
+      key: story.key,
+      type: 'title',
+      story,
+      frames: toTitleFrames(story),
+    }),
+  );
 
   if (forYou.length === 0) return titleGroups;
 

@@ -12,13 +12,10 @@ function createProductionUri(uri: string) {
 }
 
 function createDevelopmentUri(uri: string) {
-  return fetch(
-    ImageEndpoint.Gimme,
-    {
-      method: 'POST',
-      body: JSON.stringify({ url: uri }),
-    },
-  )
+  return fetch(ImageEndpoint.Gimme, {
+    method: 'POST',
+    body: JSON.stringify({ url: uri }),
+  })
     .then((response) => response.json() as Promise<SerializedImageResponse>)
     .catch(() => emptyResponse);
 }

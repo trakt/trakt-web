@@ -25,26 +25,25 @@ function mapToMoviePlays(response?: WatchedMoviePlaysResponse) {
   }));
 }
 
-const currentUserWatchedMoviePlaysRequest = async (
-  { fetch }: CurrentUserWatchedMoviePlaysParams,
-) => {
-  const response = await rawApiFetch(
-    { fetch, path: '/v3/users/me/watched/movies/plays?limit=all' },
-  );
+const currentUserWatchedMoviePlaysRequest = async ({
+  fetch,
+}: CurrentUserWatchedMoviePlaysParams) => {
+  const response = await rawApiFetch({
+    fetch,
+    path: '/v3/users/me/watched/movies/plays?limit=all',
+  });
 
   return response.ok
     ? {
-      body: WatchedMoviePlaysResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: WatchedMoviePlaysResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 
 export const currentUserWatchedMoviePlaysQuery = defineQuery({
   key: 'currentUserWatchedMoviePlays',
-  invalidations: [
-    InvalidateAction.MarkAsWatched('movie'),
-  ],
+  invalidations: [InvalidateAction.MarkAsWatched('movie')],
   dependencies: [],
   request: currentUserWatchedMoviePlaysRequest,
   mapper: (response) => mapToMoviePlays(response.body),

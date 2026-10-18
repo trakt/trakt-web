@@ -64,10 +64,12 @@ describe('util: getShowWatchState', () => {
       { season: 1, episodeId: 2 },
     ]);
 
-    expect(getShowWatchState({ watchedShow, episodeCount: null }).isWatched)
-      .toBe(false);
-    expect(getShowWatchState({ watchedShow, episodeCount: 0 }).isWatched)
-      .toBe(false);
+    expect(
+      getShowWatchState({ watchedShow, episodeCount: null }).isWatched,
+    ).toBe(false);
+    expect(getShowWatchState({ watchedShow, episodeCount: 0 }).isWatched).toBe(
+      false,
+    );
   });
 
   it('should ignore specials (season 0) for completion', () => {

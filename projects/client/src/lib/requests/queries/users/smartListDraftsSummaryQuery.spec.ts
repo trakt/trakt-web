@@ -18,14 +18,12 @@ describe('smartListDraftsSummaryQuery', () => {
 
   it('should map an account with nothing to convert', async () => {
     server.use(
-      http.get(
-        'http://localhost/users/me/smart-list-drafts',
-        () =>
-          HttpResponse.json({
-            convertible_count: 0,
-            best_confidence: null,
-            lists: [],
-          }),
+      http.get('http://localhost/users/me/smart-list-drafts', () =>
+        HttpResponse.json({
+          convertible_count: 0,
+          best_confidence: null,
+          lists: [],
+        }),
       ),
     );
 

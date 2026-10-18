@@ -25,8 +25,8 @@ describe('util: toggleAllPicks', () => {
   });
 
   it('should keep picks from other sources when removing', () => {
-    expect(
-      toggleAllPicks([pick(9, 'list:1'), pick(1)], [pick(1)]),
-    ).toEqual([pick(9, 'list:1')]);
+    expect(toggleAllPicks([pick(9, 'list:1'), pick(1)], [pick(1)])).toEqual([
+      pick(9, 'list:1'),
+    ]);
   });
 });

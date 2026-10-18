@@ -59,27 +59,25 @@ describe('generateFromMeta', () => {
     it('should throw error for non-existent directory', async () => {
       const nonExistentDir = path.join(tempDir, 'does-not-exist');
 
-      await expect(
-        generateFromMeta(nonExistentDir, tempDir),
-      ).rejects.toThrow();
+      await expect(generateFromMeta(nonExistentDir, tempDir)).rejects.toThrow();
     });
 
     it('should throw error for file input instead of directory', async () => {
       const filePath = path.join(tempDir, 'not-a-directory.txt');
       await fs.promises.writeFile(filePath, 'content');
 
-      await expect(
-        generateFromMeta(filePath, tempDir),
-      ).rejects.toThrow('Input must be a directory containing meta files');
+      await expect(generateFromMeta(filePath, tempDir)).rejects.toThrow(
+        'Input must be a directory containing meta files',
+      );
     });
 
     it('should throw error for directory with no JSON files', async () => {
       const emptyDir = path.join(tempDir, 'empty');
       await fs.promises.mkdir(emptyDir);
 
-      await expect(
-        generateFromMeta(emptyDir, tempDir),
-      ).rejects.toThrow('No JSON files found in directory');
+      await expect(generateFromMeta(emptyDir, tempDir)).rejects.toThrow(
+        'No JSON files found in directory',
+      );
     });
 
     it('should ignore non-JSON files in directory', async () => {
@@ -206,9 +204,9 @@ describe('generateFromMeta', () => {
       await fs.promises.writeFile(
         path.join(messagesDir, 'fr-fr.json'),
         JSON.stringify({
-          '$schema': 'https://inlang.com/schema/inlang-message-format',
-          'hello': 'Bonjour le monde',
-          'stale_key': 'Ce texte est périmé',
+          $schema: 'https://inlang.com/schema/inlang-message-format',
+          hello: 'Bonjour le monde',
+          stale_key: 'Ce texte est périmé',
         }),
       );
 
@@ -232,10 +230,7 @@ describe('generateFromMeta', () => {
 
       const messagesDir = path.join(tempDir, 'messages');
       const enContent = JSON.parse(
-        await fs.promises.readFile(
-          path.join(messagesDir, 'en.json'),
-          'utf-8',
-        ),
+        await fs.promises.readFile(path.join(messagesDir, 'en.json'), 'utf-8'),
       );
       expect(enContent.hello).toBe('Hello World');
     });
@@ -244,9 +239,7 @@ describe('generateFromMeta', () => {
       await createMetaFile('en', { hello: { default: 'Hello World' } });
 
       const outputDir = path.join(tempDir, 'fresh-output');
-      await expect(
-        generateFromMeta(metaDir, outputDir),
-      ).resolves.not.toThrow();
+      await expect(generateFromMeta(metaDir, outputDir)).resolves.not.toThrow();
     });
   });
 });

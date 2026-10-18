@@ -11,10 +11,12 @@ describe('commentRepliesQuery', () => {
   it('should query for comment replies', async () => {
     const result = await runQuery({
       factory: () =>
-        createTestBedInfiniteQuery(commentRepliesQuery({
-          id: assertDefined(EpisodeSiloCommentsMappedMock.at(0)).id,
-          limit: 10,
-        })),
+        createTestBedInfiniteQuery(
+          commentRepliesQuery({
+            id: assertDefined(EpisodeSiloCommentsMappedMock.at(0)).id,
+            limit: 10,
+          }),
+        ),
       mapper: mapToEntries,
     });
 

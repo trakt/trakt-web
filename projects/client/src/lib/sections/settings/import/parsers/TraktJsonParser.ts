@@ -65,10 +65,12 @@ function inferType(entry: TraktJsonEntry): ImportType {
 }
 
 function isWatchlisted(entry: TraktJsonEntry): boolean {
-  return entry.listed_at !== undefined ||
+  return (
+    entry.listed_at !== undefined ||
     entry.watchlisted_at !== undefined ||
     entry.is_watchlisted === true ||
-    entry.is_watchlisted === 'true';
+    entry.is_watchlisted === 'true'
+  );
 }
 
 function inferAction(entry: TraktJsonEntry): ImportAction {
@@ -115,10 +117,7 @@ function toFlatIds(id: TraktJsonEntry['id']): TraktJsonIds {
   return typeof id === 'object' && id !== null ? id : {};
 }
 
-function toFlatBase(
-  entry: TraktJsonEntry,
-  ids: TraktJsonIds,
-): ImportItemBase {
+function toFlatBase(entry: TraktJsonEntry, ids: TraktJsonIds): ImportItemBase {
   return {
     type: resolveType(entry),
     ids: toImportIds(ids),
@@ -144,8 +143,8 @@ function toNestedBase(entry: TraktJsonEntry): ImportItemBase {
   const media = type === 'episode' ? entry.show : (entry.movie ?? entry.show);
   const episodeData = type === 'episode' ? entry.episode : undefined;
   const seasonData = type === 'season' ? entry.season : undefined;
-  const ids: TraktJsonIds = episodeData?.ids ?? seasonData?.ids ?? media?.ids ??
-    {};
+  const ids: TraktJsonIds =
+    episodeData?.ids ?? seasonData?.ids ?? media?.ids ?? {};
 
   return {
     type,
@@ -176,45 +175,51 @@ function parseTraktJsonEntry(entry: TraktJsonEntry): UniversalImportItem[] {
   const ratedAt = toImportISOString(entry.rated_at);
 
   if (entry.action) {
-    return [{
-      ...base,
-      action: inferAction(entry),
-      watched_at: watchedAt ?? toWatchedAt(entry.created_at),
-      rating: entry.rating,
-      rated_at: ratedAt,
-    }];
+    return [
+      {
+        ...base,
+        action: inferAction(entry),
+        watched_at: watchedAt ?? toWatchedAt(entry.created_at),
+        rating: entry.rating,
+        rated_at: ratedAt,
+      },
+    ];
   }
 
   const items: UniversalImportItem[] = [
-    ...watchedAt
+    ...(watchedAt
       ? [{ ...base, action: 'history' as const, watched_at: watchedAt }]
-      : [],
-    ...(entry.rating ?? 0) > 0
-      ? [{
-        ...base,
-        action: 'ratings' as const,
-        rating: entry.rating,
-        rated_at: ratedAt,
-      }]
-      : [],
-    ...isWatchlisted(entry) ? [{ ...base, action: 'watchlist' as const }] : [],
+      : []),
+    ...((entry.rating ?? 0) > 0
+      ? [
+          {
+            ...base,
+            action: 'ratings' as const,
+            rating: entry.rating,
+            rated_at: ratedAt,
+          },
+        ]
+      : []),
+    ...(isWatchlisted(entry)
+      ? [{ ...base, action: 'watchlist' as const }]
+      : []),
   ];
 
   if (items.length > 0) return items;
 
-  return [{
-    ...base,
-    action: inferAction(entry),
-    watched_at: toWatchedAt(entry.created_at),
-    rating: entry.rating,
-    rated_at: ratedAt,
-  }];
+  return [
+    {
+      ...base,
+      action: inferAction(entry),
+      watched_at: toWatchedAt(entry.created_at),
+      rating: entry.rating,
+      rated_at: ratedAt,
+    },
+  ];
 }
 
 function parseEntries(entries: TraktJsonEntry[]): UniversalImportItem[] {
-  return entries
-    .flatMap(parseTraktJsonEntry)
-    .filter(isValidItem);
+  return entries.flatMap(parseTraktJsonEntry).filter(isValidItem);
 }
 
 function toComparablePath(filename: string): string {
@@ -223,9 +228,11 @@ function toComparablePath(filename: string): string {
 
 function isRelevantJsonFile(filename: string): boolean {
   const path = toComparablePath(filename);
-  return path.startsWith('watched-history') ||
+  return (
+    path.startsWith('watched-history') ||
     path.startsWith('lists-watchlist') ||
-    path.startsWith('ratings-');
+    path.startsWith('ratings-')
+  );
 }
 
 function inferActionFromPath(filename: string): ImportAction {
@@ -241,8 +248,9 @@ async function parseTraktZip(file: File): Promise<UniversalImportItem[]> {
   const decoder = new TextDecoder('utf-8');
 
   return Object.entries(unzipped)
-    .filter(([filename]) =>
-      filename.endsWith('.json') && isRelevantJsonFile(filename)
+    .filter(
+      ([filename]) =>
+        filename.endsWith('.json') && isRelevantJsonFile(filename),
     )
     .flatMap(([filename, data]) => {
       const text = decoder.decode(data);
@@ -264,9 +272,11 @@ export const TraktJsonParser: FileParser = {
 
   canParse(files) {
     const [file] = files;
-    return files.length === 1 &&
+    return (
+      files.length === 1 &&
       (file?.name.endsWith('.json') === true ||
-        file?.name.endsWith('.zip') === true);
+        file?.name.endsWith('.zip') === true)
+    );
   },
 
   async parse(files) {

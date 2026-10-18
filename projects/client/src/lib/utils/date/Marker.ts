@@ -16,9 +16,7 @@ export const setMarker = (action: InvalidateActionOptions) => {
 };
 
 export const getMarker = (action: InvalidateActionOptions) => {
-  const stored = safeLocalStorage.getItem(
-    keyForInvalidateAction(action),
-  );
+  const stored = safeLocalStorage.getItem(keyForInvalidateAction(action));
 
   if (stored) {
     const parsed = parseInt(stored, 10);

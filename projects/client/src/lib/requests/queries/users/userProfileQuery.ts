@@ -6,19 +6,15 @@ import { time } from '$lib/utils/timing/time.ts';
 
 type UserProfileParams = { slug: string; enabled?: boolean } & ApiParams;
 
-const userProfileRequest = (
-  { fetch, slug }: UserProfileParams,
-) =>
-  api({ fetch })
-    .users
-    .profile({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,vip,images' as 'full,vip',
-      },
-    });
+const userProfileRequest = ({ fetch, slug }: UserProfileParams) =>
+  api({ fetch }).users.profile({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,vip,images' as 'full,vip',
+    },
+  });
 
 export const userProfileQuery = defineQuery({
   key: 'userProfile',

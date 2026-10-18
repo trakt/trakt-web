@@ -3,25 +3,24 @@ import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfile
 
 export const EpisodeSiloCommentReplyMappedMock: MediaComment[] = [
   {
-    'comment': 'This is a reply to another comment.',
-    'gif': {
-      'url':
-        'https://static.klipy.com/ii/8ce8357c78ea940b9c2015daf05ce1a5/ea/72/WGDcNWlt.gif',
+    comment: 'This is a reply to another comment.',
+    gif: {
+      url: 'https://static.klipy.com/ii/8ce8357c78ea940b9c2015daf05ce1a5/ea/72/WGDcNWlt.gif',
     },
-    'createdAt': new Date('2023-03-11T06:25:15.000Z'),
-    'id': 421,
-    'key': 'comment-421',
-    'isReview': false,
-    'isSpoiler': false,
-    'likeCount': 1,
-    'parentId': 420,
-    'replyCount': 0,
-    'updatedAt': new Date('2023-03-11T06:25:15.000Z'),
-    'user': {
+    createdAt: new Date('2023-03-11T06:25:15.000Z'),
+    id: 421,
+    key: 'comment-421',
+    isReview: false,
+    isSpoiler: false,
+    likeCount: 1,
+    parentId: 420,
+    replyCount: 0,
+    updatedAt: new Date('2023-03-11T06:25:15.000Z'),
+    user: {
       ...UserProfileHarryMappedMock,
-      'stats': {
-        'completedCount': 11,
-        'rating': null,
+      stats: {
+        completedCount: 11,
+        rating: null,
       },
     },
   },

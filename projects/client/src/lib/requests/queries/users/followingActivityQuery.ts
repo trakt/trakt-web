@@ -29,11 +29,11 @@ type FollowingActivityWindow =
   | { startDate: Date; endDate: Date }
   | { startDate?: never; endDate?: never };
 
-type FollowingActivityParams =
-  & PaginationParams
-  & ApiParams
-  & FollowingActivityWindow
-  & { actions?: ReadonlyArray<FollowingActivityAction> };
+type FollowingActivityParams = PaginationParams &
+  ApiParams &
+  FollowingActivityWindow & {
+    actions?: ReadonlyArray<FollowingActivityAction>;
+  };
 
 const BaseResponseSchema = z.object({
   id: z.number(),
@@ -60,11 +60,13 @@ const FollowingActivityResponseSchema = z.discriminatedUnion('action', [
     comment: z.object({
       id: z.number(),
       comment: z.string(),
-      gif: z.object({
-        url: z.string(),
-        width: z.number().nullish(),
-        height: z.number().nullish(),
-      }).nullish(),
+      gif: z
+        .object({
+          url: z.string(),
+          width: z.number().nullish(),
+          height: z.number().nullish(),
+        })
+        .nullish(),
       spoiler: z.boolean(),
       review: z.boolean(),
       likes: z.number(),
@@ -90,18 +92,18 @@ function mapToTarget(
     case 'season':
       return show && season
         ? {
-          type: 'season',
-          show: mapToShowEntry(show),
-          season: mapToSeason(season),
-        }
+            type: 'season',
+            show: mapToShowEntry(show),
+            season: mapToSeason(season),
+          }
         : null;
     case 'episode':
       return show && episode
         ? {
-          type: 'episode',
-          show: mapToShowEntry(show),
-          episode: mapToEpisodeEntry(episode),
-        }
+            type: 'episode',
+            show: mapToShowEntry(show),
+            episode: mapToEpisodeEntry(episode),
+          }
         : null;
   }
 }
@@ -148,9 +150,13 @@ function mapToFollowingActivity(
   };
 }
 
-function toSearch(
-  { startDate, endDate, actions, page, limit }: FollowingActivityParams,
-) {
+function toSearch({
+  startDate,
+  endDate,
+  actions,
+  page,
+  limit,
+}: FollowingActivityParams) {
   const search = new URLSearchParams({ extended: 'full,images' });
 
   if (startDate && endDate) {

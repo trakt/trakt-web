@@ -8,9 +8,11 @@ type ToCalendarParams<T> = {
   days: number;
 };
 
-export function toCalendar<T extends { effectiveReleaseDate: Date }>(
-  { items, start, days }: ToCalendarParams<T>,
-): Calendar<T> {
+export function toCalendar<T extends { effectiveReleaseDate: Date }>({
+  items,
+  start,
+  days,
+}: ToCalendarParams<T>): Calendar<T> {
   return Array.from({ length: days }, (_, i) => {
     const date = addDays(start, i);
 

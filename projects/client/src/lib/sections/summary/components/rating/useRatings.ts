@@ -48,10 +48,7 @@ function toAddPayload(
   return { [key]: [payload] };
 }
 
-function toRemovePayload(
-  type: RateableType,
-  id: number,
-): RemoveRatingsParams {
+function toRemovePayload(type: RateableType, id: number): RemoveRatingsParams {
   const payload = { ids: { trakt: id } };
   const key = `${type}s` as const;
   return { [key]: [payload] };
@@ -136,9 +133,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     }),
   );
 
-  const current = combineLatest(
-    [rating, isFavorited],
-  ).pipe(
+  const current = combineLatest([rating, isFavorited]).pipe(
     map(([$rating, $isFavorited]) => {
       if (!$rating) {
         return;
@@ -174,53 +169,59 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
 
   // Tracking rides inside the write: the "changed vs added" dimension reads
   // the pre-write rating, which the submitted state has to cover too.
-  const ratingAdd = useMutation(defineMutation({
-    key: 'rating:add',
-    request: async (newRating: number) => {
-      track({
-        action: await hasRating() ? 'changed' : 'added',
-        rating: newRating,
-      });
+  const ratingAdd = useMutation(
+    defineMutation({
+      key: 'rating:add',
+      request: async (newRating: number) => {
+        track({
+          action: (await hasRating()) ? 'changed' : 'added',
+          rating: newRating,
+        });
 
-      return await executeOrEnqueue({
-        endpoint: 'rating:add',
-        keys: [toMediaKey(type, id)],
-        body: toAddPayload(type, id, newRating),
-        invalidations: ratedInvalidations,
-      });
-    },
-    invalidations: whenExecuted(ratedInvalidations),
-  }));
+        return await executeOrEnqueue({
+          endpoint: 'rating:add',
+          keys: [toMediaKey(type, id)],
+          body: toAddPayload(type, id, newRating),
+          invalidations: ratedInvalidations,
+        });
+      },
+      invalidations: whenExecuted(ratedInvalidations),
+    }),
+  );
 
-  const ratingRemove = useMutation(defineMutation({
-    key: 'rating:remove',
-    request: () =>
-      executeOrEnqueue({
-        endpoint: 'rating:remove',
-        keys: [toMediaKey(type, id)],
-        body: toRemovePayload(type, id),
-        invalidations: ratedInvalidations,
-      }),
-    invalidations: whenExecuted(ratedInvalidations),
-  }));
+  const ratingRemove = useMutation(
+    defineMutation({
+      key: 'rating:remove',
+      request: () =>
+        executeOrEnqueue({
+          endpoint: 'rating:remove',
+          keys: [toMediaKey(type, id)],
+          body: toRemovePayload(type, id),
+          invalidations: ratedInvalidations,
+        }),
+      invalidations: whenExecuted(ratedInvalidations),
+    }),
+  );
 
   const isSubmitting = ratingAdd.isPending;
   const ratingSubject = new Subject<number | null>();
 
-  ratingSubject.pipe(
-    debounceTime(postDelay),
-    filter((v): v is number => v !== null),
-  ).subscribe(async (newRating) => {
-    const outcome = await ratingAdd.mutate(newRating);
+  ratingSubject
+    .pipe(
+      debounceTime(postDelay),
+      filter((v): v is number => v !== null),
+    )
+    .subscribe(async (newRating) => {
+      const outcome = await ratingAdd.mutate(newRating);
 
-    if (outcome === 'executed' && type !== 'season') {
-      dismiss(id, type, 'rating');
-    }
+      if (outcome === 'executed' && type !== 'season') {
+        dismiss(id, type, 'rating');
+      }
 
-    // Always clear: a queued rating stays flagged via isQueued, and leaving
-    // these pinned would re-disable the stars once it syncs and dequeues.
-    pendingRating.next(null);
-  });
+      // Always clear: a queued rating stays flagged via isQueued, and leaving
+      // these pinned would re-disable the stars once it syncs and dequeues.
+      pendingRating.next(null);
+    });
 
   const addRating = (newRating: number) => {
     pendingRating.next(newRating);

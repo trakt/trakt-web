@@ -32,7 +32,8 @@ export function toHumanETA(
     return year;
   }
 
-  const isSameDay = today.getFullYear() === targetDate.getFullYear() &&
+  const isSameDay =
+    today.getFullYear() === targetDate.getFullYear() &&
     today.getMonth() === targetDate.getMonth() &&
     today.getDate() === targetDate.getDate();
 

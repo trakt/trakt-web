@@ -24,10 +24,7 @@ const daysToFetch = 30;
 
 export function useReleasesItems(props: UseReleasesItemsProps) {
   const [yyyyMmDd] = new Date().toISOString().split('T');
-  const startDate = assertDefined(
-    yyyyMmDd,
-    'Could not extract current date.',
-  );
+  const startDate = assertDefined(yyyyMmDd, 'Could not extract current date.');
 
   const query = useQuery(
     releasesCalendarQuery({
@@ -52,7 +49,7 @@ export function useReleasesItems(props: UseReleasesItemsProps) {
         entries,
         limit: props.limit,
         now: new Date(),
-      })
+      }),
     ),
     overlay.operator,
   );

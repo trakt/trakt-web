@@ -17,9 +17,11 @@ function toDomain(endpoint: OfflineAction['endpoint']) {
 // Same domain + same key set = the newer action supersedes the older one
 // (e.g. mark watched then unmark while offline leaves only the unmark).
 function isSuperseded(queued: OfflineAction, incoming: OfflineAction): boolean {
-  return toDomain(queued.endpoint) === toDomain(incoming.endpoint) &&
+  return (
+    toDomain(queued.endpoint) === toDomain(incoming.endpoint) &&
     queued.keys.length === incoming.keys.length &&
-    queued.keys.every((key) => incoming.keys.includes(key));
+    queued.keys.every((key) => incoming.keys.includes(key))
+  );
 }
 
 export function createOfflineActionsStore(

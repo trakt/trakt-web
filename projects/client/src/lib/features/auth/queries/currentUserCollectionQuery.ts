@@ -9,17 +9,18 @@ import type { CollectionMinimalResponse } from '@trakt/api';
 import { z } from 'zod';
 import { toCollectionTraktIds } from './_internal/toCollectionTraktIds.ts';
 
-type CurrentUserCollectionParams =
-  & {
-    type: 'movies' | 'episodes';
-  }
-  & PaginationParams
-  & ApiParams;
+type CurrentUserCollectionParams = {
+  type: 'movies' | 'episodes';
+} & PaginationParams &
+  ApiParams;
 
 // FIXME: use api().sync.collection.minimal[type] once @trakt/api types page & limit
-const currentUserCollectionRequest = async (
-  { fetch, type, page = 1, limit }: CurrentUserCollectionParams,
-) => {
+const currentUserCollectionRequest = async ({
+  fetch,
+  type,
+  page = 1,
+  limit,
+}: CurrentUserCollectionParams) => {
   const query = new URLSearchParams({
     page: `${page}`,
     limit: `${limit}`,

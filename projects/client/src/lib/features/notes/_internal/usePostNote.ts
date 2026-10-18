@@ -19,13 +19,15 @@ type PostNoteProps = {
 export function usePostNote() {
   const { track } = useTrack(AnalyticsEvent.AddNote);
 
-  const post = useMutation(defineMutation({
-    key: 'note:post',
-    request: (body: PostNoteProps) => postNoteRequest({ body }),
-    invalidations: (
-      { variables },
-    ) => [InvalidateAction.Note.Add(variables.media.type)],
-  }));
+  const post = useMutation(
+    defineMutation({
+      key: 'note:post',
+      request: (body: PostNoteProps) => postNoteRequest({ body }),
+      invalidations: ({ variables }) => [
+        InvalidateAction.Note.Add(variables.media.type),
+      ],
+    }),
+  );
 
   const postNote = async (props: PostNoteProps) => {
     const notes = props.notes.trim();

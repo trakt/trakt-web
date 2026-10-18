@@ -7,17 +7,20 @@ type BuildUrlSetParams = {
   lastmod: string;
 };
 
-export function buildUrlSet(
-  { origin, entries, lastmod }: BuildUrlSetParams,
-): string {
+export function buildUrlSet({
+  origin,
+  entries,
+  lastmod,
+}: BuildUrlSetParams): string {
   const urls = entries
-    .map(({ path, priority, changefreq }) =>
-      `  <url>
+    .map(
+      ({ path, priority, changefreq }) =>
+        `  <url>
     <loc>${escapeXml(`${origin}${path}`)}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
-  </url>`
+  </url>`,
     )
     .join('\n');
 

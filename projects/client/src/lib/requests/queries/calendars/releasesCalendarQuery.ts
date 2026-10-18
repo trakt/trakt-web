@@ -9,14 +9,12 @@ import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { UpcomingEpisodeEntrySchema } from './upcomingEpisodesQuery.ts';
 
-export type ReleasesCalendarParams =
-  & {
-    startDate: string;
-    days: number;
-    type: DiscoverMode;
-  }
-  & ApiParams
-  & FilterParams;
+export type ReleasesCalendarParams = {
+  startDate: string;
+  days: number;
+  type: DiscoverMode;
+} & ApiParams &
+  FilterParams;
 
 const ReleasesCalendarEntrySchema = z.union([
   UpcomingEpisodeEntrySchema,
@@ -25,31 +23,31 @@ const ReleasesCalendarEntrySchema = z.union([
 
 export type ReleasesCalendarEntry = z.infer<typeof ReleasesCalendarEntrySchema>;
 
-const releasesCalendarRequest = (
-  { fetch, startDate, days, type, filter }: ReleasesCalendarParams,
-) => {
-  return unauthorizedApi({ fetch })
-    .calendars
-    .releasesHot({
-      query: {
-        extended: 'full,images',
-        group: 'day',
-        ...filter,
-        ...(type === 'media' ? {} : { type }),
-      },
-      params: {
-        start_date: startDate,
-        days,
-      },
-    });
+const releasesCalendarRequest = ({
+  fetch,
+  startDate,
+  days,
+  type,
+  filter,
+}: ReleasesCalendarParams) => {
+  return unauthorizedApi({ fetch }).calendars.releasesHot({
+    query: {
+      extended: 'full,images',
+      group: 'day',
+      ...filter,
+      ...(type === 'media' ? {} : { type }),
+    },
+    params: {
+      start_date: startDate,
+      days,
+    },
+  });
 };
 
 export const releasesCalendarQuery = defineQuery({
   key: 'releasesCalendar',
   invalidations: [],
-  dependencies: (
-    params: ReleasesCalendarParams,
-  ) => [
+  dependencies: (params: ReleasesCalendarParams) => [
     params.type,
     params.startDate,
     params.days,

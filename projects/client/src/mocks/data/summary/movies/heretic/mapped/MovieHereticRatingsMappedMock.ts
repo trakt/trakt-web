@@ -1,10 +1,10 @@
 import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
 
 export const MovieHereticRatingsMappedMock: MediaRating = {
-  'trakt': {
-    'rating': 0.7226,
-    'votes': 3803,
-    'distribution': {
+  trakt: {
+    rating: 0.7226,
+    votes: 3803,
+    distribution: {
       '1': 22,
       '2': 20,
       '3': 31,
@@ -17,17 +17,17 @@ export const MovieHereticRatingsMappedMock: MediaRating = {
       '10': 262,
     },
   },
-  'rotten': undefined,
-  'imdb': {
-    'rating': 7.1,
-    'votes': 49905,
-    'url': 'https://www.imdb.com/title/tt28015403',
+  rotten: undefined,
+  imdb: {
+    rating: 7.1,
+    votes: 49905,
+    url: 'https://www.imdb.com/title/tt28015403',
   },
-  'tmdb': {
-    'rating': 7.14,
-    'votes': 563,
-    'url': 'https://www.themoviedb.org/movie/1138194',
+  tmdb: {
+    rating: 7.14,
+    votes: 563,
+    url: 'https://www.themoviedb.org/movie/1138194',
   },
-  'mal': undefined,
-  'letterboxd': undefined,
+  mal: undefined,
+  letterboxd: undefined,
 };

@@ -25,15 +25,12 @@ function mapToReaction(response: ReactedCommentResponse) {
 }
 
 const currentUserCommentReactionsRequest = ({ fetch }: ApiParams) =>
-  api({ fetch })
-    .users
-    .reactions
-    .comments({
-      query: {
-        limit: 'all',
-        extended: 'min',
-      },
-    });
+  api({ fetch }).users.reactions.comments({
+    query: {
+      limit: 'all',
+      extended: 'min',
+    },
+  });
 
 export const currentUserCommentReactionsQuery = defineQuery({
   key: 'currentUserReactions',
@@ -41,11 +38,7 @@ export const currentUserCommentReactionsQuery = defineQuery({
   invalidations: [InvalidateAction.React],
   dependencies: [],
   mapper: (response) =>
-    toMap(
-      response.body,
-      mapToReaction,
-      (entry) => entry.id,
-    ),
+    toMap(response.body, mapToReaction, (entry) => entry.id),
   schema: UserReactionsSchema,
   ttl: time.hours(12),
 });

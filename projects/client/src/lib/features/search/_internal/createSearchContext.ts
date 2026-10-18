@@ -12,20 +12,21 @@ type SearchContextProps = {
   config: TypesenseConfig;
 };
 
-export function createSearchContext(
-  { mode, mediaType, config }: SearchContextProps,
-) {
+export function createSearchContext({
+  mode,
+  mediaType,
+  config,
+}: SearchContextProps) {
   const ctx = setContext(
     searchKeyFactory(),
-    getContext<SearchContext>(searchKeyFactory()) ??
-      {
-        mode: new BehaviorSubject(mode ?? 'media'),
-        mediaType: new BehaviorSubject(mediaType),
-        isSearching: new BehaviorSubject(false),
-        pathName: UrlBuilder.search(),
-        query: new BehaviorSubject(''),
-        config: new BehaviorSubject(config),
-      },
+    getContext<SearchContext>(searchKeyFactory()) ?? {
+      mode: new BehaviorSubject(mode ?? 'media'),
+      mediaType: new BehaviorSubject(mediaType),
+      isSearching: new BehaviorSubject(false),
+      pathName: UrlBuilder.search(),
+      query: new BehaviorSubject(''),
+      config: new BehaviorSubject(config),
+    },
   );
 
   return ctx;

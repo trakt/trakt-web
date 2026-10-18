@@ -8,9 +8,11 @@ export const MediaCommentSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   comment: z.string(),
-  gif: z.object({
-    url: z.string(),
-  }).nullish(),
+  gif: z
+    .object({
+      url: z.string(),
+    })
+    .nullish(),
   isSpoiler: z.boolean(),
   isReview: z.boolean(),
   replyCount: z.number(),

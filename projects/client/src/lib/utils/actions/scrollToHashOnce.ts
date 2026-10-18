@@ -16,7 +16,7 @@ export function scrollToHashOnce(
 
     isDone = true;
     frameId = requestAnimationFrame(() =>
-      node.scrollIntoView({ block: 'start' })
+      node.scrollIntoView({ block: 'start' }),
     );
   };
 

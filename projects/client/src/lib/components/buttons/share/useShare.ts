@@ -46,8 +46,8 @@ export function useShare(source: DrilldownSource) {
       ...data,
       url: toShareUrl({ url: data.url, shareCode: currentShareCode() }),
     };
-    const isShareable = browser && Boolean(navigator.canShare) &&
-      navigator.canShare(shareData);
+    const isShareable =
+      browser && Boolean(navigator.canShare) && navigator.canShare(shareData);
     if (!isShareable) {
       return;
     }

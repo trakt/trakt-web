@@ -1,6 +1,4 @@
-export function mediaListHeightResolver(
-  type: 'landscape' | 'portrait',
-) {
+export function mediaListHeightResolver(type: 'landscape' | 'portrait') {
   switch (type) {
     case 'landscape':
       return 'var(--height-landscape-list)';

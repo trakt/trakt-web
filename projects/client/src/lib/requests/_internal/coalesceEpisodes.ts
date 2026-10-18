@@ -41,47 +41,52 @@ export function coalesceEpisodes(
       string,
       {
         episodes: typeof episodes;
-        show: typeof episodes[0]['show'];
+        show: (typeof episodes)[0]['show'];
         season: number;
       }
     >,
   );
 
-  const coalesced = Object.values(grouped).flatMap((
-    { episodes, show, season },
-  ) => {
-    const hasSeasonPremiere = episodes.some((ep) =>
-      FULL_SEASON_PREMIERE_TYPES.includes(ep.type)
-    );
-    const hasSeasonFinale = episodes.some((ep) =>
-      FULL_SEASON_FINALE_TYPES.includes(ep.type)
-    );
+  const coalesced = Object.values(grouped).flatMap(
+    ({ episodes, show, season }) => {
+      const hasSeasonPremiere = episodes.some((ep) =>
+        FULL_SEASON_PREMIERE_TYPES.includes(ep.type),
+      );
+      const hasSeasonFinale = episodes.some((ep) =>
+        FULL_SEASON_FINALE_TYPES.includes(ep.type),
+      );
 
-    if (hasSeasonPremiere && hasSeasonFinale) {
-      return [{
-        ...assertDefined(episodes[0]),
-        type: EpisodeComputedType.full_season,
-        season,
-        show,
-        episodes,
-      }];
-    }
+      if (hasSeasonPremiere && hasSeasonFinale) {
+        return [
+          {
+            ...assertDefined(episodes[0]),
+            type: EpisodeComputedType.full_season,
+            season,
+            show,
+            episodes,
+          },
+        ];
+      }
 
-    // FIXME: add support for multiple episodes over multiple seasons
-    if (episodes.length > 1) {
-      return [{
-        ...assertDefined(episodes[0]),
-        type: EpisodeComputedType.multiple_episodes,
-        season,
-        show,
-        episodes,
-      }];
-    }
+      // FIXME: add support for multiple episodes over multiple seasons
+      if (episodes.length > 1) {
+        return [
+          {
+            ...assertDefined(episodes[0]),
+            type: EpisodeComputedType.multiple_episodes,
+            season,
+            show,
+            episodes,
+          },
+        ];
+      }
 
-    return episodes;
-  });
+      return episodes;
+    },
+  );
 
-  return coalesced.toSorted((a, b) =>
-    a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime()
+  return coalesced.toSorted(
+    (a, b) =>
+      a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime(),
   );
 }

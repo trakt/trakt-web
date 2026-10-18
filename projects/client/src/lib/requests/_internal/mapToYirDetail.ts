@@ -245,9 +245,7 @@ function mapWatchedItem(raw: RawWatchedItem | null): YirWatchedItem | null {
   return item;
 }
 
-function mapMostWatchedShows(
-  raw: RawMostWatchedShow[],
-): YirMostWatchedItem[] {
+function mapMostWatchedShows(raw: RawMostWatchedShow[]): YirMostWatchedItem[] {
   return raw.map((item) => ({
     plays: item.plays,
     minutes: item.minutes,
@@ -340,9 +338,10 @@ function mapGlobalTopMovies(raw: RawGlobalTopMovie[]): YirGlobalTopItem[] {
   }));
 }
 
-function mapThanks(
-  raw: RawThanks,
-): { shows: MediaEntry[]; movies: MediaEntry[] } {
+function mapThanks(raw: RawThanks): {
+  shows: MediaEntry[];
+  movies: MediaEntry[];
+} {
   return {
     shows: raw.shows?.map((item) => mapToShowEntry(item.show)) ?? [],
     movies: raw.movies?.map((item) => mapToMovieEntry(item.movie)) ?? [],
@@ -420,15 +419,15 @@ export function mapToYirDetail(response: RawYirResponse): YirDetail {
     },
     releaseYears: response.release_years
       ? {
-        shows: response.release_years.shows ?? { years: [], decades: [] },
-        movies: response.release_years.movies ?? { years: [], decades: [] },
-      }
+          shows: response.release_years.shows ?? { years: [], decades: [] },
+          movies: response.release_years.movies ?? { years: [], decades: [] },
+        }
       : undefined,
     listProgress: response.list_progress
       ? {
-        shows: mapListProgress(response.list_progress.shows ?? []),
-        movies: mapListProgress(response.list_progress.movies ?? []),
-      }
+          shows: mapListProgress(response.list_progress.shows ?? []),
+          movies: mapListProgress(response.list_progress.movies ?? []),
+        }
       : undefined,
     trends: {
       shows: mapTrendShows(response.trends?.shows ?? []),
@@ -436,9 +435,9 @@ export function mapToYirDetail(response: RawYirResponse): YirDetail {
     },
     globalTop: response.global_top
       ? {
-        shows: mapGlobalTopShows(response.global_top.shows ?? []),
-        movies: mapGlobalTopMovies(response.global_top.movies ?? []),
-      }
+          shows: mapGlobalTopShows(response.global_top.shows ?? []),
+          movies: mapGlobalTopMovies(response.global_top.movies ?? []),
+        }
       : undefined,
     thanks: mapThanks(response.thanks ?? {}),
     streamingServices: mapStreamingServices(response.streaming_services),

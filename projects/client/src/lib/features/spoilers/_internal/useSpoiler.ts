@@ -6,9 +6,7 @@ export function useSpoiler() {
   const { isAuthorized } = useAuth();
   const { user } = useUser();
 
-  const isSpoilerHidden = combineLatest(
-    [isAuthorized, user],
-  ).pipe(
+  const isSpoilerHidden = combineLatest([isAuthorized, user]).pipe(
     map(([$isAuthorized, $user]) => {
       if (!$isAuthorized) {
         return false;

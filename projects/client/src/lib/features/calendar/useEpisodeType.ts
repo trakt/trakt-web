@@ -9,8 +9,9 @@ export function useEpisodeType() {
   const { mode } = useDiscover();
 
   const episodeType = combineLatest([current, mode]).pipe(
-    map(([$current, $mode]): EpisodeTypeFilter =>
-      $mode === 'movie' ? 'all' : $current.value
+    map(
+      ([$current, $mode]): EpisodeTypeFilter =>
+        $mode === 'movie' ? 'all' : $current.value,
     ),
     distinctUntilChanged(),
   );
@@ -20,7 +21,7 @@ export function useEpisodeType() {
       assertDefined(
         options.find((option) => option.value === value),
         `Invalid episode type: ${value}`,
-      )
+      ),
     ),
   );
 

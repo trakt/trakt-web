@@ -10,35 +10,33 @@ import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts'
 import { SmartListItemSchema } from '$lib/requests/models/SmartListItem.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
-type SmartListItemsParams =
-  & { slug: string }
-  & PaginationParams
-  & ApiParams
-  & FilterParams;
+type SmartListItemsParams = { slug: string } & PaginationParams &
+  ApiParams &
+  FilterParams;
 
-const smartListItemsRequest = (
-  { fetch, slug, limit, page, filter }: SmartListItemsParams,
-) =>
-  api({ fetch })
-    .smart_lists
-    .items({
-      params: {
-        list_id: slug,
-      },
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        ...filter,
-      },
-    });
+const smartListItemsRequest = ({
+  fetch,
+  slug,
+  limit,
+  page,
+  filter,
+}: SmartListItemsParams) =>
+  api({ fetch }).smart_lists.items({
+    params: {
+      list_id: slug,
+    },
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      ...filter,
+    },
+  });
 
 export const smartListItemsQuery = defineInfiniteQuery({
   key: 'smartListItems',
   invalidations: [InvalidateAction.SmartList.Edited],
-  dependencies: (
-    params: SmartListItemsParams,
-  ) => [
+  dependencies: (params: SmartListItemsParams) => [
     params.slug,
     params.limit,
     params.page,

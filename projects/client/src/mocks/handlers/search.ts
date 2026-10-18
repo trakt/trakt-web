@@ -6,30 +6,25 @@ import { SearchHereticResponseMock } from '../data/search/response/SearchHeretic
 import { MovieHereticResponseMock } from '../data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
 
 export const search = [
-  http.get(
-    'http://localhost/search/recent_by_id/global/movies',
-    () => HttpResponse.json(TrendingSearchedMoviesResponseMock),
+  http.get('http://localhost/search/recent_by_id/global/movies', () =>
+    HttpResponse.json(TrendingSearchedMoviesResponseMock),
   ),
-  http.get(
-    'http://localhost/search/recent_by_id/global/shows',
-    () => HttpResponse.json(TrendingSearchedShowsResponseMock),
+  http.get('http://localhost/search/recent_by_id/global/shows', () =>
+    HttpResponse.json(TrendingSearchedShowsResponseMock),
   ),
-  http.get(
-    'http://localhost/search/*',
-    ({ request }) => {
-      const url = new URL(request.url);
-      const searchQuery = url.searchParams.get('query');
+  http.get('http://localhost/search/*', ({ request }) => {
+    const url = new URL(request.url);
+    const searchQuery = url.searchParams.get('query');
 
-      if (
-        searchQuery?.toLowerCase() ===
-          MovieHereticResponseMock.title.toLowerCase()
-      ) {
-        return HttpResponse.json(SearchHereticResponseMock);
-      }
+    if (
+      searchQuery?.toLowerCase() ===
+      MovieHereticResponseMock.title.toLowerCase()
+    ) {
+      return HttpResponse.json(SearchHereticResponseMock);
+    }
 
-      return new HttpResponse(null, {
-        status: 200,
-      });
-    },
-  ),
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
 ];

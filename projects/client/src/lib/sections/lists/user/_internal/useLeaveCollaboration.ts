@@ -15,21 +15,23 @@ export function useLeaveCollaboration(
 ) {
   const { user } = useUser();
 
-  const leave = useMutation(defineMutation({
-    key: 'list:leave-collaboration',
-    request: async () => {
-      const [{ listId }, currentUser] = await Promise.all([
-        firstValueFrom(target$),
-        firstValueFrom(user),
-      ]);
+  const leave = useMutation(
+    defineMutation({
+      key: 'list:leave-collaboration',
+      request: async () => {
+        const [{ listId }, currentUser] = await Promise.all([
+          firstValueFrom(target$),
+          firstValueFrom(user),
+        ]);
 
-      return removeListCollaboratorRequest({
-        listId,
-        userSlug: toUserSlug(currentUser),
-      });
-    },
-    invalidations: [InvalidateAction.List.Collaborators],
-  }));
+        return removeListCollaboratorRequest({
+          listId,
+          userSlug: toUserSlug(currentUser),
+        });
+      },
+      invalidations: [InvalidateAction.List.Collaborators],
+    }),
+  );
 
   const leaveCollaboration = async () => {
     await leave.mutate();

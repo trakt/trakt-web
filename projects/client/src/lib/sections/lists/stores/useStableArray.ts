@@ -6,8 +6,8 @@ export function useStableArray<T>(
   source: Observable<T[]>,
 ) {
   const updateList = (previous: Array<T>, update: Array<T>) => {
-    const updatedList = previous.filter(
-      (prevItem) => update.some((newItem) => compareFn(prevItem, newItem)),
+    const updatedList = previous.filter((prevItem) =>
+      update.some((newItem) => compareFn(prevItem, newItem)),
     );
 
     update.forEach((newItem, updateIndex) => {
@@ -20,7 +20,7 @@ export function useStableArray<T>(
       const successor = update
         .slice(updateIndex + 1)
         .find((nextItem) =>
-          updatedList.some((item) => compareFn(item, nextItem))
+          updatedList.some((item) => compareFn(item, nextItem)),
         );
 
       const insertAt = successor

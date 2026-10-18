@@ -17,14 +17,12 @@ describe('store: useSpotlightMedia', () => {
     search(MovieHereticResponseMock.title);
     const resolved = await waitForEmission(media, 3, 2000);
 
-    expect(
-      [...resolved.movies, ...resolved.shows].length,
-    ).toBeGreaterThan(0);
+    expect([...resolved.movies, ...resolved.shows].length).toBeGreaterThan(0);
   });
 
   it('should drop the previous media before the next request', async () => {
     const { media, search, isSearching } = await renderStore(() =>
-      useSpotlightMedia()
+      useSpotlightMedia(),
     );
 
     search(MovieHereticResponseMock.title);

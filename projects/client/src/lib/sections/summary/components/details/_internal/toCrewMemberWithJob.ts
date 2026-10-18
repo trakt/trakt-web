@@ -10,9 +10,11 @@ type ToCrewMemberWithJobProps = {
   position: CrewPosition;
 };
 
-export function toCrewMemberWithJob(
-  { type, person, position }: ToCrewMemberWithJobProps,
-) {
+export function toCrewMemberWithJob({
+  type,
+  person,
+  position,
+}: ToCrewMemberWithJobProps) {
   const jobs = person.jobs.map((job) => toTranslatedJob(job));
   const positions = {
     movies: type === 'movie' ? position : undefined,

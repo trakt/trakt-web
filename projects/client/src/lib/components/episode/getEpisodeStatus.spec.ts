@@ -99,9 +99,12 @@ describe('getEpisodeStatus', () => {
   });
 
   describe('no status', () => {
-    it.each(
-      ['standard', 'unknown', 'full_season', 'multiple_episodes'] as const,
-    )('returns undefined for %s', (type) => {
+    it.each([
+      'standard',
+      'unknown',
+      'full_season',
+      'multiple_episodes',
+    ] as const)('returns undefined for %s', (type) => {
       expect(getEpisodeStatus(type)).toBeUndefined();
     });
   });
@@ -111,22 +114,16 @@ describe('getEpisodeStatus', () => {
       EpisodeFinaleType.mid_season_finale,
       EpisodePremiereType.mid_season_premiere,
     ])('returns undefined for %s when not the latest aired', (type) => {
-      expect(
-        getEpisodeStatus(type, { isLatestAired: false }),
-      ).toBeUndefined();
+      expect(getEpisodeStatus(type, { isLatestAired: false })).toBeUndefined();
     });
 
-    it.each(
-      [
-        [EpisodeFinaleType.mid_season_finale, 'finale'],
-        [EpisodePremiereType.mid_season_premiere, 'premiere'],
-      ] as const,
-    )(
+    it.each([
+      [EpisodeFinaleType.mid_season_finale, 'finale'],
+      [EpisodePremiereType.mid_season_premiere, 'premiere'],
+    ] as const)(
       'returns %s status for %s when it is the latest aired',
       (type, expected) => {
-        expect(
-          getEpisodeStatus(type, { isLatestAired: true }),
-        ).toBe(expected);
+        expect(getEpisodeStatus(type, { isLatestAired: true })).toBe(expected);
       },
     );
 
@@ -136,8 +133,9 @@ describe('getEpisodeStatus', () => {
       EpisodePremiereType.series_premiere,
       EpisodePremiereType.season_premiere,
     ])('does not gate non-mid-season %s', (type) => {
-      expect(getEpisodeStatus(type, { isLatestAired: false }))
-        .toBe(type.endsWith('finale') ? 'finale' : 'premiere');
+      expect(getEpisodeStatus(type, { isLatestAired: false })).toBe(
+        type.endsWith('finale') ? 'finale' : 'premiere',
+      );
     });
   });
 
@@ -154,17 +152,17 @@ describe('getEpisodeStatus', () => {
     it('returns "new" for standard episodes released within 7 days', () => {
       const threeDaysAgo = new Date(Date.now() - time.days(3));
 
-      expect(
-        getEpisodeStatus('standard', { releaseDate: threeDaysAgo }),
-      ).toBe('new');
+      expect(getEpisodeStatus('standard', { releaseDate: threeDaysAgo })).toBe(
+        'new',
+      );
     });
 
     it('returns "new" for episodes released exactly 7 days ago', () => {
       const sevenDaysAgo = new Date(Date.now() - time.days(7));
 
-      expect(
-        getEpisodeStatus('standard', { releaseDate: sevenDaysAgo }),
-      ).toBe('new');
+      expect(getEpisodeStatus('standard', { releaseDate: sevenDaysAgo })).toBe(
+        'new',
+      );
     });
 
     it('returns undefined for episodes released more than 7 days ago', () => {

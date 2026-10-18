@@ -31,7 +31,7 @@ export async function readAuthMarker(): Promise<boolean> {
   }
 
   try {
-    return await get<boolean>(MARKER_KEY, current) ?? false;
+    return (await get<boolean>(MARKER_KEY, current)) ?? false;
   } catch {
     return false;
   }

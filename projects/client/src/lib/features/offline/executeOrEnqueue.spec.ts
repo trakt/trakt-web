@@ -44,10 +44,7 @@ describe('util: executeOrEnqueue', () => {
 
   it('should queue the action when the network is unreachable', async () => {
     server.use(
-      http.post(
-        'http://localhost/sync/watchlist',
-        () => HttpResponse.error(),
-      ),
+      http.post('http://localhost/sync/watchlist', () => HttpResponse.error()),
     );
 
     const result = await addToWatchlist();

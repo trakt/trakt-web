@@ -62,9 +62,7 @@ describe('runRawExport', () => {
   it('should describe every failure in _errors.json', async () => {
     const { files } = await exportFor();
 
-    const errors = JSON.parse(
-      new TextDecoder().decode(files['_errors.json']),
-    );
+    const errors = JSON.parse(new TextDecoder().decode(files['_errors.json']));
 
     expect(errors).to.deep.equal([
       {

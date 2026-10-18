@@ -4,9 +4,11 @@ type StepActiveIndexProps = {
   count: number;
 };
 
-export function stepActiveIndex(
-  { key, activeIndex, count }: StepActiveIndexProps,
-): number | null {
+export function stepActiveIndex({
+  key,
+  activeIndex,
+  count,
+}: StepActiveIndexProps): number | null {
   if (count === 0) return null;
   if (key !== 'ArrowDown' && key !== 'ArrowUp') return null;
 

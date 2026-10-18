@@ -1,7 +1,4 @@
-export function disableNavigation(
-  node: HTMLElement,
-  disabled?: boolean,
-) {
+export function disableNavigation(node: HTMLElement, disabled?: boolean) {
   function handleClick(ev: MouseEvent) {
     if (!disabled) {
       return;

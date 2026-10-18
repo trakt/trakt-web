@@ -9,13 +9,11 @@ function triggerShortcut(
   trigger: ShortcutTrigger | undefined,
   originalEvent: KeyboardEvent,
 ) {
-  trigger?.callback?.(
-    {
-      node: document.body,
-      trigger,
-      originalEvent,
-    } satisfies ShortcutEventDetail,
-  );
+  trigger?.callback?.({
+    node: document.body,
+    trigger,
+    originalEvent,
+  } satisfies ShortcutEventDetail);
 }
 
 describe('util: createArrowNavTriggers', () => {

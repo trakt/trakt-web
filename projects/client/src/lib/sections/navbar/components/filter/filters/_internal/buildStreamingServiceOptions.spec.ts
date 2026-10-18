@@ -40,9 +40,7 @@ describe('buildStreamingServiceOptions', () => {
     const result = buildStreamingServiceOptions({
       countryCode: 'us',
       favorites: ['netflix'],
-      sourceMap: new Map([
-        ['us', [source('netflix', 'Netflix')]],
-      ]),
+      sourceMap: new Map([['us', [source('netflix', 'Netflix')]]]),
     });
 
     expect(result.top.map((option) => option.source)).toEqual(['netflix']);
@@ -52,23 +50,17 @@ describe('buildStreamingServiceOptions', () => {
     const result = buildStreamingServiceOptions({
       countryCode: 'us',
       favorites: ['prime-video'],
-      sourceMap: new Map([
-        ['us', [source('prime-video', 'Prime Video')]],
-      ]),
+      sourceMap: new Map([['us', [source('prime-video', 'Prime Video')]]]),
     });
 
-    expect(result.top.map((option) => option.source)).toEqual([
-      'prime-video',
-    ]);
+    expect(result.top.map((option) => option.source)).toEqual(['prime-video']);
   });
 
   it('should exclude favorites that are unavailable in the selected country', () => {
     const result = buildStreamingServiceOptions({
       countryCode: 'us',
       favorites: ['us-netflix'],
-      sourceMap: new Map([
-        ['us', [source('hulu', 'Hulu')]],
-      ]),
+      sourceMap: new Map([['us', [source('hulu', 'Hulu')]]]),
     });
 
     expect(result.top.map((option) => option.source)).toEqual(['hulu']);
@@ -212,9 +204,7 @@ describe('buildStreamingServiceOptions', () => {
     const result = buildStreamingServiceOptions({
       countryCode: 'us',
       favorites: [],
-      sourceMap: new Map([
-        ['us', [{ ...source('hulu', 'Hulu'), type: null }]],
-      ]),
+      sourceMap: new Map([['us', [{ ...source('hulu', 'Hulu'), type: null }]]]),
     });
 
     expect(result.all.map((option) => option.source)).toEqual(['hulu']);

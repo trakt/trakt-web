@@ -30,10 +30,7 @@ function overrideShowSpoiler(shows: 'hide_title' | null) {
   });
 
   server.use(
-    http.get(
-      'http://localhost/users/settings',
-      () => HttpResponse.json(user),
-    ),
+    http.get('http://localhost/users/settings', () => HttpResponse.json(user)),
   );
 }
 
@@ -62,7 +59,7 @@ function renderTitle(target = show) {
     useSpoilerFreeEpisodeTitle({
       episode: EpisodeSiloMappedMock,
       show: target,
-    })
+    }),
   );
 }
 
@@ -73,8 +70,9 @@ describe('store: useSpoilerFreeEpisodeTitle', () => {
 
     const title = await renderTitle();
 
-    expect(await waitForValue(title, EpisodeSiloMappedMock.title))
-      .toBe(EpisodeSiloMappedMock.title);
+    expect(await waitForValue(title, EpisodeSiloMappedMock.title)).toBe(
+      EpisodeSiloMappedMock.title,
+    );
   });
 
   it('should mask the title with its season/episode label when spoilers are hidden', async () => {
@@ -94,7 +92,8 @@ describe('store: useSpoilerFreeEpisodeTitle', () => {
 
     const title = await renderTitle(watchedShow);
 
-    expect(await waitForValue(title, EpisodeSiloMappedMock.title))
-      .toBe(EpisodeSiloMappedMock.title);
+    expect(await waitForValue(title, EpisodeSiloMappedMock.title)).toBe(
+      EpisodeSiloMappedMock.title,
+    );
   });
 });

@@ -20,11 +20,12 @@ export function useIsStarted(props: IsStartedProps) {
 
           // "started" only depends on whether any regular episode is watched,
           // so the episode count is irrelevant here.
-          return media.every((m) =>
-            getShowWatchState({
-              watchedShow: $history.shows.get(m.id),
-              episodeCount: undefined,
-            }).isStarted
+          return media.every(
+            (m) =>
+              getShowWatchState({
+                watchedShow: $history.shows.get(m.id),
+                episodeCount: undefined,
+              }).isStarted,
           );
         }),
       ),

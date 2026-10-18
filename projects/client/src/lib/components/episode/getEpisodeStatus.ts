@@ -55,9 +55,11 @@ function resolveEpisodeType(
 
   const childTypes = episodes?.map((episode) => episode.type) ?? [];
 
-  return childTypes.find((child) => PREMIERE_TYPES.has(child)) ??
+  return (
+    childTypes.find((child) => PREMIERE_TYPES.has(child)) ??
     childTypes.find((child) => FINALE_TYPES.has(child)) ??
-    type;
+    type
+  );
 }
 
 function resolveMilestone(
@@ -84,8 +86,8 @@ export function getEpisodeStatus(
 ): EpisodeStatus | Nil {
   const resolvedType = resolveEpisodeType(type, options.episodes);
   const milestone = resolveMilestone(resolvedType, options.isLatestAired);
-  const isNew = options.releaseDate != null &&
-    isEpisodeNew(options.releaseDate);
+  const isNew =
+    options.releaseDate != null && isEpisodeNew(options.releaseDate);
 
   if (!isNew) {
     return milestone;

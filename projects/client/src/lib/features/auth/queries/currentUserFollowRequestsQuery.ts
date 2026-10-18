@@ -19,14 +19,11 @@ type CurrentUserFollowRequestsParams = {
 } & ApiParams;
 
 const currentUserFollowRequestsRequest = ({ fetch }: ApiParams) =>
-  api({ fetch })
-    .users
-    .requests
-    .follow({
-      query: {
-        extended: 'full',
-      },
-    });
+  api({ fetch }).users.requests.follow({
+    query: {
+      extended: 'full',
+    },
+  });
 
 export const currentUserFollowRequestsQuery = defineQuery({
   key: 'currentUserFollowRequests',

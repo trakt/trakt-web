@@ -5,14 +5,13 @@ type DeleteListRequest = {
   listId: string;
 } & ApiParams;
 
-export function deleteListRequest(
-  { userId, listId, fetch }: DeleteListRequest,
-): Promise<boolean> {
+export function deleteListRequest({
+  userId,
+  listId,
+  fetch,
+}: DeleteListRequest): Promise<boolean> {
   return api({ fetch })
-    .users
-    .lists
-    .list
-    .delete({
+    .users.lists.list.delete({
       params: {
         id: userId,
         list_id: listId,

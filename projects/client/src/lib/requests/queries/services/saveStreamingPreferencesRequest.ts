@@ -11,9 +11,11 @@ type SaveStreamingPreferencesParams = {
  * country and/or the list of favorite services - via the settings endpoint.
  * Only the provided fields are sent, leaving the rest untouched.
  */
-export function saveStreamingPreferencesRequest(
-  { fetch, country, favorites }: SaveStreamingPreferencesParams,
-): Promise<boolean> {
+export function saveStreamingPreferencesRequest({
+  fetch,
+  country,
+  favorites,
+}: SaveStreamingPreferencesParams): Promise<boolean> {
   return saveSettingsRequest({
     fetch,
     body: {

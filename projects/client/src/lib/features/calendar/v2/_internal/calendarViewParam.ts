@@ -9,9 +9,9 @@ const VIEW_PARAM = 'view';
 
 export function calendarViewParam(searchParams: URLSearchParams) {
   return {
-    view: CalendarViewSchema.nullable().catch(null).parse(
-      searchParams.get(VIEW_PARAM),
-    ),
+    view: CalendarViewSchema.nullable()
+      .catch(null)
+      .parse(searchParams.get(VIEW_PARAM)),
     setView: (view: CalendarView) => {
       const url = new URL(page.url);
       url.searchParams.set(VIEW_PARAM, view);

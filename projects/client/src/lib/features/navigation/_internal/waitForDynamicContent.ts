@@ -8,9 +8,9 @@ export const CHECK_INTERVAL = time.fps(30);
 export function waitForDynamicContent() {
   const scope = getNavigationScope();
 
-  const dynamicElements = Array.from(scope.querySelectorAll(
-    '[data-dynamic-selector]',
-  ));
+  const dynamicElements = Array.from(
+    scope.querySelectorAll('[data-dynamic-selector]'),
+  );
 
   if (dynamicElements.length === 0) return Promise.resolve(null);
 

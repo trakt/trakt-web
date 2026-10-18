@@ -23,9 +23,11 @@ import type { MarkAsWatchedAt } from '$lib/models/MarkAsWatchedAt.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 
-export type MarkAsWatchedStoreProps = MediaStoreProps<
-  { id: number; effectiveReleaseDate: Date; status?: MediaStatus }
->;
+export type MarkAsWatchedStoreProps = MediaStoreProps<{
+  id: number;
+  effectiveReleaseDate: Date;
+  status?: MediaStatus;
+}>;
 
 function ratedBucket(
   ratings: UserRatings,
@@ -41,9 +43,7 @@ function ratedBucket(
   }
 }
 
-export function useMarkAsWatched(
-  props: MarkAsWatchedStoreProps,
-) {
+export function useMarkAsWatched(props: MarkAsWatchedStoreProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const mediaKeys = media.map((item) => toMediaKey(type, item.id));
@@ -56,17 +56,19 @@ export function useMarkAsWatched(
   const watchedInvalidations = [InvalidateAction.MarkAsWatched(type)];
   const ratedInvalidations = [InvalidateAction.Rated(type)];
 
-  const watchedAdd = useMutation(defineMutation({
-    key: 'history:add',
-    request: (watchedAt: MarkAsWatchedAt) =>
-      executeOrEnqueue({
-        endpoint: 'history:add',
-        keys: mediaKeys,
-        body: toMarkAsWatchedPayload(props, watchedAt),
-        invalidations: watchedInvalidations,
-      }),
-    invalidations: whenExecuted(watchedInvalidations),
-  }));
+  const watchedAdd = useMutation(
+    defineMutation({
+      key: 'history:add',
+      request: (watchedAt: MarkAsWatchedAt) =>
+        executeOrEnqueue({
+          endpoint: 'history:add',
+          keys: mediaKeys,
+          body: toMarkAsWatchedPayload(props, watchedAt),
+          invalidations: watchedInvalidations,
+        }),
+      invalidations: whenExecuted(watchedInvalidations),
+    }),
+  );
 
   // A removal wipes every play of the target, so a rated item that is
   // currently watched always loses its rating too. Read pre-removal, hence
@@ -92,7 +94,8 @@ export function useMarkAsWatched(
           return currentHistory.shows.has(item.id);
         case 'episode':
           return Boolean(
-            currentHistory.shows.get(props.show.id)
+            currentHistory.shows
+              .get(props.show.id)
               ?.episodes.some((entry) => entry.episodeId === item.id),
           );
       }
@@ -107,35 +110,39 @@ export function useMarkAsWatched(
 
   // The orphaned ratings have to be read before the request, and the
   // submitted state has to cover that read, so it happens inside the write.
-  const watchedRemove = useMutation(defineMutation({
-    key: 'history:remove',
-    request: async () => {
-      const orphanedRatingIds = await getOrphanedRatingIds();
+  const watchedRemove = useMutation(
+    defineMutation({
+      key: 'history:remove',
+      request: async () => {
+        const orphanedRatingIds = await getOrphanedRatingIds();
 
-      const outcome = await executeOrEnqueue({
-        endpoint: 'history:remove',
-        keys: mediaKeys,
-        body: toMarkAsWatchedPayload(props),
-        invalidations: watchedInvalidations,
-      });
+        const outcome = await executeOrEnqueue({
+          endpoint: 'history:remove',
+          keys: mediaKeys,
+          body: toMarkAsWatchedPayload(props),
+          invalidations: watchedInvalidations,
+        });
 
-      return { orphanedRatingIds, outcome };
-    },
-    invalidations: ({ data }) =>
-      whenExecuted(watchedInvalidations)({ data: data.outcome }),
-  }));
+        return { orphanedRatingIds, outcome };
+      },
+      invalidations: ({ data }) =>
+        whenExecuted(watchedInvalidations)({ data: data.outcome }),
+    }),
+  );
 
-  const ratingRemove = useMutation(defineMutation({
-    key: 'rating:remove',
-    request: (ids: ReadonlyArray<number>) =>
-      executeOrEnqueue({
-        endpoint: 'rating:remove',
-        keys: ids.map((id) => toMediaKey(type, id)),
-        body: toRemoveRatingsPayload(type, ids),
-        invalidations: ratedInvalidations,
-      }),
-    invalidations: whenExecuted(ratedInvalidations),
-  }));
+  const ratingRemove = useMutation(
+    defineMutation({
+      key: 'rating:remove',
+      request: (ids: ReadonlyArray<number>) =>
+        executeOrEnqueue({
+          endpoint: 'rating:remove',
+          keys: ids.map((id) => toMediaKey(type, id)),
+          body: toRemoveRatingsPayload(type, ids),
+          invalidations: ratedInvalidations,
+        }),
+      invalidations: whenExecuted(ratedInvalidations),
+    }),
+  );
 
   const isMarkingAsWatched = anyTrue([
     watchedAdd.isPending,

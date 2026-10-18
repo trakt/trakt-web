@@ -21,7 +21,8 @@ describe('fetchWithRetry', () => {
             'X-Pagination-Page': '3',
             'X-Pagination-Page-Count': '58',
           },
-        })),
+        }),
+      ),
     );
 
     const result = await fetchWithRetry({ url: PATH, page: 3 });
@@ -37,7 +38,8 @@ describe('fetchWithRetry', () => {
       http.get(ENDPOINT, () =>
         HttpResponse.json([], {
           headers: { 'X-Pagination-Page-Count': 'not-a-number' },
-        })),
+        }),
+      ),
     );
 
     const result = await fetchWithRetry({ url: PATH });
@@ -53,8 +55,9 @@ describe('fetchWithRetry', () => {
       }),
     );
 
-    const result = await fetchWithRetry({ url: PATH, ...FAST })
-      .catch((error: Error) => error);
+    const result = await fetchWithRetry({ url: PATH, ...FAST }).catch(
+      (error: Error) => error,
+    );
 
     expect((result as Error).name).to.equal('TimeoutError');
   });
@@ -68,8 +71,9 @@ describe('fetchWithRetry', () => {
       }),
     );
 
-    const result = await fetchWithRetry({ url: PATH, ...FAST })
-      .catch((error: Error) => error);
+    const result = await fetchWithRetry({ url: PATH, ...FAST }).catch(
+      (error: Error) => error,
+    );
 
     expect(calls).to.equal(1);
     expect((result as Error).message).to.equal('HTTP 404');

@@ -68,9 +68,7 @@ describe('formatSortValue', () => {
         type: 'movie',
         entry: { airDate: new Date('2023-02-01') },
       } as unknown as ListItem;
-      expect(formatSortValue(validDateItem, 'released')).toBe(
-        'Feb 1, 2023',
-      );
+      expect(formatSortValue(validDateItem, 'released')).toBe('Feb 1, 2023');
     });
 
     it('should return TBA if max date', () => {

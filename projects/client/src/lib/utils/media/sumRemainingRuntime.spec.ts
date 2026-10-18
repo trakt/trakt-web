@@ -81,7 +81,10 @@ describe('util: sumRemainingRuntime', () => {
   it('should ignore episodes with an unknown runtime', () => {
     expect(
       sumRemainingRuntime({
-        episodes: [{ number: 1, runtime: NaN }, { number: 2, runtime: 47 }],
+        episodes: [
+          { number: 1, runtime: NaN },
+          { number: 2, runtime: 47 },
+        ],
         airedCount: 2,
         watchedEpisodeNumbers: new Set(),
       }),

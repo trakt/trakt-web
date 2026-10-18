@@ -3,9 +3,7 @@ import { ListIdSchema } from '$lib/requests/models/ListId.ts';
 
 type ListIdsRequestParams = { path: string } & ApiParams;
 
-export const listIdsRequest = async (
-  { fetch, path }: ListIdsRequestParams,
-) => {
+export const listIdsRequest = async ({ fetch, path }: ListIdsRequestParams) => {
   const response = await rawApiFetch({ fetch, path });
 
   return {

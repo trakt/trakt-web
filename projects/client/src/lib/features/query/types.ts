@@ -16,13 +16,7 @@ export type CreateQueryOptions<
   TError = DefaultError,
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
-> = QueryObserverOptions<
-  TQueryFnData,
-  TError,
-  TData,
-  TQueryFnData,
-  TQueryKey
->;
+> = QueryObserverOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>;
 
 export type CreateInfiniteQueryOptions<
   TQueryFnData = unknown,
@@ -42,9 +36,4 @@ export type CreateMutationOptions<
   TData = unknown,
   TError = DefaultError,
   TVariables = void,
-> = MutationObserverOptions<
-  TData,
-  TError,
-  TVariables,
-  unknown
->;
+> = MutationObserverOptions<TData, TError, TVariables, unknown>;

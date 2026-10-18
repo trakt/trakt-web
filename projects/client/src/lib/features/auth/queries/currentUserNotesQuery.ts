@@ -23,7 +23,10 @@ const currentUserNotesRequest = async ({ fetch }: ApiParams) => {
   });
 
   return response.ok
-    ? { body: await response.json() as UserNoteMinimalResponse[], status: 200 }
+    ? {
+        body: (await response.json()) as UserNoteMinimalResponse[],
+        status: 200,
+      }
     : { body: [] as UserNoteMinimalResponse[], status: 200 };
 };
 

@@ -67,10 +67,10 @@ export function useEditMode(): UseEditModeReturn {
           const isHidden = section.isCollapsed;
 
           const editModeSubscription = isEditMode.subscribe((value) =>
-            node.classList.toggle(editModeClass, value)
+            node.classList.toggle(editModeClass, value),
           );
           const hiddenSubscription = isHidden.subscribe((value) =>
-            node.classList.toggle(editModeHiddenClass, value)
+            node.classList.toggle(editModeHiddenClass, value),
           );
 
           return {

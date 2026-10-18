@@ -34,9 +34,6 @@ function mapToPayload(item: SearchItem, query: string) {
   };
 }
 
-export function postRecentSearch(
-  item: SearchItem,
-  query: string,
-) {
+export function postRecentSearch(item: SearchItem, query: string) {
   recentSearchRequest({ body: mapToPayload(item, query) });
 }

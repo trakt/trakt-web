@@ -11,7 +11,7 @@ export function useStreamingConnections() {
     map((list) =>
       list.filter(
         (connection) => connection.isConnected || connection.isConnectable,
-      )
+      ),
     ),
   );
 
@@ -19,7 +19,7 @@ export function useStreamingConnections() {
     map((list) =>
       list.filter(
         (connection) => !connection.isConnected && !connection.isConnectable,
-      )
+      ),
     ),
   );
 

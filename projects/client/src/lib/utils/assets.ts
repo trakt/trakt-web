@@ -32,9 +32,6 @@ export const DEFAULT_SHARE_MOVIE_COVER = UrlBuilder.api
 export const DEFAULT_SHARE_COVER = assertDefined(
   // Bracket access instead of .at(): this runs at module-eval on the boot
   // path and Array.prototype.at throws on old/spoofed WebView engines.
-  shuffle([
-    DEFAULT_SHARE_SHOW_COVER,
-    DEFAULT_SHARE_MOVIE_COVER,
-  ])[0],
+  shuffle([DEFAULT_SHARE_SHOW_COVER, DEFAULT_SHARE_MOVIE_COVER])[0],
   'Default share cover is required',
 );

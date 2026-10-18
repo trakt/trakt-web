@@ -4,8 +4,8 @@ import type { CalendarShowResponse } from '@trakt/api';
 
 export const UpcomingEpisodesResponseMock: CalendarShowResponse[] = [
   {
-    'first_aired': '2023-05-05T01:00:00.000Z',
-    'episode': EpisodeSiloResponseMock,
-    'show': ShowSiloResponseMock,
+    first_aired: '2023-05-05T01:00:00.000Z',
+    episode: EpisodeSiloResponseMock,
+    show: ShowSiloResponseMock,
   },
 ];

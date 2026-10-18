@@ -33,42 +33,52 @@ export function useVip() {
   const plansResult = useQuery(vipPlansQuery());
   const plans = plansResult.pipe(map(($plans) => $plans.data ?? []));
 
-  const checkout = useMutation(defineMutation({
-    key: 'vip:start-checkout',
-    request: (plan: VipPlan) =>
-      startCheckoutQuery({
-        duration: plan.type,
-        returnUrl: getReturnUrl(),
-      }),
-    invalidations: [],
-  }));
+  const checkout = useMutation(
+    defineMutation({
+      key: 'vip:start-checkout',
+      request: (plan: VipPlan) =>
+        startCheckoutQuery({
+          duration: plan.type,
+          returnUrl: getReturnUrl(),
+        }),
+      invalidations: [],
+    }),
+  );
 
-  const management = useMutation(defineMutation({
-    key: 'vip:manage-subscription',
-    request: () => manageSubscriptionQuery({ returnUrl: getReturnUrl() }),
-    invalidations: [],
-  }));
+  const management = useMutation(
+    defineMutation({
+      key: 'vip:manage-subscription',
+      request: () => manageSubscriptionQuery({ returnUrl: getReturnUrl() }),
+      invalidations: [],
+    }),
+  );
 
-  const cancellation = useMutation(defineMutation({
-    key: 'vip:cancel-subscription',
-    request: () => cancelSubscriptionQuery(),
-    invalidations: [InvalidateAction.Vip.Canceled],
-  }));
+  const cancellation = useMutation(
+    defineMutation({
+      key: 'vip:cancel-subscription',
+      request: () => cancelSubscriptionQuery(),
+      invalidations: [InvalidateAction.Vip.Canceled],
+    }),
+  );
 
-  const retentionOffer = useMutation(defineMutation({
-    key: 'vip:claim-retention-offer',
-    request: () => claimRetentionOfferQuery(),
-    invalidations: [InvalidateAction.Vip.Updated],
-  }));
+  const retentionOffer = useMutation(
+    defineMutation({
+      key: 'vip:claim-retention-offer',
+      request: () => claimRetentionOfferQuery(),
+      invalidations: [InvalidateAction.Vip.Updated],
+    }),
+  );
 
-  const confirmation = useMutation(defineMutation({
-    key: 'vip:confirm-checkout',
-    request: (sessionId: string) => confirmCheckoutQuery({ sessionId }),
-    invalidations: [
-      InvalidateAction.Vip.Updated,
-      InvalidateAction.User.Settings,
-    ],
-  }));
+  const confirmation = useMutation(
+    defineMutation({
+      key: 'vip:confirm-checkout',
+      request: (sessionId: string) => confirmCheckoutQuery({ sessionId }),
+      invalidations: [
+        InvalidateAction.Vip.Updated,
+        InvalidateAction.User.Settings,
+      ],
+    }),
+  );
 
   const isFetching = anyTrue([
     checkout.isPending,

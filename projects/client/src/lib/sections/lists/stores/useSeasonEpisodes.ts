@@ -7,10 +7,12 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { map } from 'rxjs';
 
 export const useSeasonEpisodes = (slug: string, season: number) => {
-  const query = useQuery(showSeasonEpisodesQuery({
-    slug,
-    season,
-  }));
+  const query = useQuery(
+    showSeasonEpisodesQuery({
+      slug,
+      season,
+    }),
+  );
 
   const overlay = createBulkEpisodeIntl<EpisodeEntry>();
 

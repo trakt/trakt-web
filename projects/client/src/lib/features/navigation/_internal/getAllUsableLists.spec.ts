@@ -36,10 +36,7 @@ describe('getAllUsableLists', () => {
     list.appendChild(item);
 
     const trap = document.createElement('div');
-    trap.setAttribute(
-      'data-dpad-navigation',
-      DpadNavigationType.Trap,
-    );
+    trap.setAttribute('data-dpad-navigation', DpadNavigationType.Trap);
 
     const trappedList = createList(true);
     const trappedItem = document.createElement('button');

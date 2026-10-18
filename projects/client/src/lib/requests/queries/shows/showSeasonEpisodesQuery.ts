@@ -10,21 +10,20 @@ type ShowSeasonEpisodeParams = {
   season: number;
 } & ApiParams;
 
-const showSeasonEpisodesRequest = (
-  { fetch, slug, season }: ShowSeasonEpisodeParams,
-) =>
-  api({ fetch })
-    .shows
-    .season
-    .episodes({
-      params: {
-        id: slug,
-        season: castNumberAsString(season),
-      },
-      query: {
-        extended: 'full,images',
-      },
-    });
+const showSeasonEpisodesRequest = ({
+  fetch,
+  slug,
+  season,
+}: ShowSeasonEpisodeParams) =>
+  api({ fetch }).shows.season.episodes({
+    params: {
+      id: slug,
+      season: castNumberAsString(season),
+    },
+    query: {
+      extended: 'full,images',
+    },
+  });
 
 export const showSeasonEpisodesQuery = defineQuery({
   key: 'showSeasonEpisodes',

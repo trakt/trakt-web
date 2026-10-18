@@ -13,15 +13,9 @@ const SEPARATOR = '•';
 function mapToDuration(props: MapToSubtitleProps) {
   switch (props.type) {
     case 'movie':
-      return toHumanDuration(
-        { minutes: props.media.runtime },
-        languageTag(),
-      );
+      return toHumanDuration({ minutes: props.media.runtime }, languageTag());
     case 'episode':
-      return toHumanDuration(
-        { minutes: props.episode.runtime },
-        languageTag(),
-      );
+      return toHumanDuration({ minutes: props.episode.runtime }, languageTag());
     default:
       return;
   }
@@ -53,13 +47,7 @@ export function mapToSummarySubtitle(props: MapToSubtitleProps) {
   const episodeCount = mapToEpisodeCount(props);
   const year = mapToYear(props);
 
-  return [
-    year,
-    duration,
-    episodeCount,
-    props.media.certification,
-    genre,
-  ]
+  return [year, duration, episodeCount, props.media.certification, genre]
     .filter(Boolean)
     .join(` ${SEPARATOR} `);
 }

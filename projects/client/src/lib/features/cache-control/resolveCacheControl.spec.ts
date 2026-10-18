@@ -29,13 +29,13 @@ describe('util: resolveCacheControl', () => {
 
   describe('for a public path', () => {
     it('should keep a short private cache for social bots', () => {
-      expect(resolve({ isSocialBot: true }))
-        .toBe('private, max-age=120');
+      expect(resolve({ isSocialBot: true })).toBe('private, max-age=120');
     });
 
     it('should keep the long public cache for verified crawlers', () => {
-      expect(resolve({ isLegitimateBot: true }))
-        .toBe('public, max-age=3600, s-maxage=3600');
+      expect(resolve({ isLegitimateBot: true })).toBe(
+        'public, max-age=3600, s-maxage=3600',
+      );
     });
 
     it('should not publicly cache a social bot request with a session', () => {
@@ -48,8 +48,9 @@ describe('util: resolveCacheControl', () => {
   });
 
   it('should never store a webview response', () => {
-    expect(resolve({ hasWebviewParam: true, isLegitimateBot: true }))
-      .toBe(NO_STORE);
+    expect(resolve({ hasWebviewParam: true, isLegitimateBot: true })).toBe(
+      NO_STORE,
+    );
   });
 
   it('should not store a regular browser response', () => {

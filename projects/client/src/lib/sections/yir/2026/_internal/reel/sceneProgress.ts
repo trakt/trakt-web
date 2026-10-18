@@ -11,10 +11,13 @@ type SceneProgressProps = {
 const LEAD = 0.6;
 const PINNED_SHARE = 0.85;
 
-export function sceneProgress(
-  { scrollTop, sceneTop, sceneHeight, viewportHeight, isPinnedOnly = false }:
-    SceneProgressProps,
-): number {
+export function sceneProgress({
+  scrollTop,
+  sceneTop,
+  sceneHeight,
+  viewportHeight,
+  isPinnedOnly = false,
+}: SceneProgressProps): number {
   const pinned = Math.max(1, sceneHeight - viewportHeight);
   const scrolled = scrollTop - sceneTop;
 

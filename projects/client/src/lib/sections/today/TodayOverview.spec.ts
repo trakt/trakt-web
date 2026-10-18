@@ -11,8 +11,9 @@ describe('TodayOverview', () => {
   it('should group friend activity by title by default', async () => {
     renderComponent(TodayOverview, { props: {} });
 
-    expect(await screen.findByText('From people you follow'))
-      .toBeInTheDocument();
+    expect(
+      await screen.findByText('From people you follow'),
+    ).toBeInTheDocument();
     expect(
       await screen.findByRole('button', { name: MovieHereticMappedMock.title }),
     ).toBeInTheDocument();
@@ -52,7 +53,7 @@ describe('TodayOverview', () => {
     const mostActive = await waitFor(() =>
       assertDefined(
         document.querySelector<HTMLElement>('.trakt-today-most-active'),
-      )
+      ),
     );
     const person = assertDefined(
       within(mostActive).getAllByRole('button').at(0),
@@ -60,8 +61,9 @@ describe('TodayOverview', () => {
     await user.click(person);
 
     await waitFor(() => {
-      expect(document.querySelector('.trakt-today-person-drawer'))
-        .toBeInTheDocument();
+      expect(
+        document.querySelector('.trakt-today-person-drawer'),
+      ).toBeInTheDocument();
     });
   });
 });

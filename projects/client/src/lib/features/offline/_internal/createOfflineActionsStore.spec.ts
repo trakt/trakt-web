@@ -112,7 +112,8 @@ describe('store: createOfflineActionsStore', () => {
     const storage = createMemoryStorage();
     const failOnce = {
       ...storage,
-      write: vi.fn()
+      write: vi
+        .fn()
         .mockRejectedValueOnce(new Error('quota exceeded'))
         .mockImplementation(storage.write),
     };

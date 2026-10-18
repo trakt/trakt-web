@@ -12,8 +12,7 @@ function findValue(
   highlights: ReadonlyArray<YirHighlight>,
   kind: YirHighlightKind,
 ) {
-  return highlights.find((highlight) => highlight.kind === kind)?.value ??
-    null;
+  return highlights.find((highlight) => highlight.kind === kind)?.value ?? null;
 }
 
 type ToPersonaCardDataProps = {
@@ -22,9 +21,11 @@ type ToPersonaCardDataProps = {
   highlights: ReadonlyArray<YirHighlight>;
 };
 
-export function toPersonaCardData(
-  { result, persona, highlights }: ToPersonaCardDataProps,
-): PersonaCardData {
+export function toPersonaCardData({
+  result,
+  persona,
+  highlights,
+}: ToPersonaCardDataProps): PersonaCardData {
   const copy = personaCopy(persona);
 
   return {

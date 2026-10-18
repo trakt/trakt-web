@@ -7,31 +7,43 @@ export const UserRatedMappedMock: {
   episodes: Map<number, RatedEntry>;
 } = {
   movies: new Map([
-    [916302, {
-      'id': 916302,
-      'ratedAt': new Date('2025-01-16T17:39:23.000Z'),
-      'rating': 10,
-    }],
+    [
+      916302,
+      {
+        id: 916302,
+        ratedAt: new Date('2025-01-16T17:39:23.000Z'),
+        rating: 10,
+      },
+    ],
   ]),
   shows: new Map([
-    [180770, {
-      'id': 180770,
-      'ratedAt': new Date('2025-01-16T17:39:23.000Z'),
-      'rating': 9,
-    }],
+    [
+      180770,
+      {
+        id: 180770,
+        ratedAt: new Date('2025-01-16T17:39:23.000Z'),
+        rating: 9,
+      },
+    ],
   ]),
   seasons: new Map([
-    [257490, {
-      'id': 257490,
-      'ratedAt': new Date('2025-01-16T17:41:12.000Z'),
-      'rating': 8,
-    }],
+    [
+      257490,
+      {
+        id: 257490,
+        ratedAt: new Date('2025-01-16T17:41:12.000Z'),
+        rating: 8,
+      },
+    ],
   ]),
   episodes: new Map([
-    [5165667, {
-      'id': 5165667,
-      'ratedAt': new Date('2025-01-16T17:40:52.000Z'),
-      'rating': 10,
-    }],
+    [
+      5165667,
+      {
+        id: 5165667,
+        ratedAt: new Date('2025-01-16T17:40:52.000Z'),
+        rating: 10,
+      },
+    ],
   ]),
 };

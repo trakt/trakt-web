@@ -8,16 +8,10 @@ type ToDisplayNameProps = {
   type: DisplayNamesType;
 };
 
-export function toDisplayName({
-  code,
-  languageTag,
-  type,
-}: ToDisplayNameProps) {
+export function toDisplayName({ code, languageTag, type }: ToDisplayNameProps) {
   try {
     const displayNames = new Intl.DisplayNames(languageTag, { type });
-    const displayName = displayNames.of(
-      code.toUpperCase(),
-    );
+    const displayName = displayNames.of(code.toUpperCase());
 
     return displayName ?? code;
   } catch {

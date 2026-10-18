@@ -1,9 +1,7 @@
 import type { StudioResponse } from '@trakt/api';
 import type { MediaStudio } from '../models/MediaStudio.ts';
 
-export function mapToMediaStudio(
-  studio: StudioResponse,
-): MediaStudio {
+export function mapToMediaStudio(studio: StudioResponse): MediaStudio {
   return {
     name: studio.name,
     country: studio.country,

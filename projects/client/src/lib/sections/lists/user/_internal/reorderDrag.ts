@@ -85,8 +85,8 @@ export function reorderDrag(
     const containerRect = scrollContainer.getBoundingClientRect();
     const distanceFromTop = dragClientY - containerRect.top;
     const distanceFromBottom = containerRect.bottom - dragClientY;
-    const maxScrollTop = scrollContainer.scrollHeight -
-      scrollContainer.clientHeight;
+    const maxScrollTop =
+      scrollContainer.scrollHeight - scrollContainer.clientHeight;
 
     if (distanceFromTop < autoScrollEdgeSize && scrollContainer.scrollTop > 0) {
       return -scrollStep(distanceFromTop);
@@ -195,9 +195,7 @@ export function reorderDrag(
     const target = event.target as HTMLElement;
     if (!target.closest(handleSelector)) return;
 
-    const row = target.closest<HTMLTableRowElement>(
-      `[${rowAttr}]`,
-    );
+    const row = target.closest<HTMLTableRowElement>(`[${rowAttr}]`);
     const key = row?.dataset[rowDatasetKey];
     if (!key) return;
 

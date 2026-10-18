@@ -33,9 +33,12 @@ function toOwnKeys(value: unknown): ReadonlyArray<string> {
   return attempt(() => Object.getOwnPropertyNames(value).slice(0, 10), []);
 }
 
-export function toHandledErrorContext(
-  { error, status, message, event }: HandledErrorInput,
-): HandledErrorContext {
+export function toHandledErrorContext({
+  error,
+  status,
+  message,
+  event,
+}: HandledErrorInput): HandledErrorContext {
   return {
     route: event.route.id,
     status,

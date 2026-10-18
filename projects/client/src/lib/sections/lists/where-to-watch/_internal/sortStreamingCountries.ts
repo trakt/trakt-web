@@ -18,8 +18,8 @@ export function sortStreamingCountries<T extends WithCountry>(
     if (a.country === preferredCountry) return -1;
     if (b.country === preferredCountry) return 1;
 
-    const difference = getPopularityIndex(a.country) -
-      getPopularityIndex(b.country);
+    const difference =
+      getPopularityIndex(a.country) - getPopularityIndex(b.country);
     if (difference !== 0) return difference;
 
     return a.countryName.localeCompare(b.countryName);

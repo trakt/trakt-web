@@ -35,25 +35,17 @@ function mediaTypeToQuery(type: MediaType, isFuture?: boolean) {
   if (isFuture) {
     switch (type) {
       case 'movie':
-        return movieAnticipatedQuery(params) as InfiniteQuery<
-          PreviewItem
-        >;
+        return movieAnticipatedQuery(params) as InfiniteQuery<PreviewItem>;
       case 'show':
-        return showAnticipatedQuery(params) as InfiniteQuery<
-          PreviewItem
-        >;
+        return showAnticipatedQuery(params) as InfiniteQuery<PreviewItem>;
     }
   }
 
   switch (type) {
     case 'movie':
-      return movieTrendingQuery(params) as InfiniteQuery<
-        PreviewItem
-      >;
+      return movieTrendingQuery(params) as InfiniteQuery<PreviewItem>;
     case 'show':
-      return showTrendingQuery(params) as InfiniteQuery<
-        PreviewItem
-      >;
+      return showTrendingQuery(params) as InfiniteQuery<PreviewItem>;
   }
 }
 
@@ -75,9 +67,7 @@ function ctaToQuery(cta: MediaCta | ListCta) {
   }
 }
 
-export function usePlaceholderCover(
-  cta: MediaCta | ListCta,
-) {
+export function usePlaceholderCover(cta: MediaCta | ListCta) {
   const { list } = usePaginatedListQuery(ctaToQuery(cta));
 
   return {

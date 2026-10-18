@@ -18,11 +18,9 @@ import {
   UpNextEntrySchema,
 } from '../../models/UpNextEntry.ts';
 
-type UpNextParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & {
+type UpNextParams = PaginationParams &
+  ApiParams &
+  FilterParams & {
     sortBy?: UpNextSortBy;
     sortHow?: SortDirection;
   };
@@ -46,7 +44,7 @@ export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
    *  exists beyond the displayed one. Replace once the API surfaces an absolute
    *  "latest aired episode" reference.
    */
-  const isLatestAired = (item.progress.aired - item.progress.completed) <= 1;
+  const isLatestAired = item.progress.aired - item.progress.completed <= 1;
 
   return {
     show,
@@ -56,25 +54,19 @@ export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   };
 }
 
-export const upNextNitroRequest = (
-  params: UpNextParams,
-) => {
+export const upNextNitroRequest = (params: UpNextParams) => {
   const { fetch, limit, page, filter, sortBy, sortHow } = params;
 
-  return api({ fetch })
-    .sync
-    .progress
-    .upNext
-    .nitro({
-      query: {
-        page,
-        limit,
-        intent: 'continue',
-        ...filter,
-        ...(sortBy ? { sort_by: mapToNitroSortBy(sortBy) } : {}),
-        ...(sortHow ? { sort_how: sortHow } : {}),
-      },
-    });
+  return api({ fetch }).sync.progress.upNext.nitro({
+    query: {
+      page,
+      limit,
+      intent: 'continue',
+      ...filter,
+      ...(sortBy ? { sort_by: mapToNitroSortBy(sortBy) } : {}),
+      ...(sortHow ? { sort_how: sortHow } : {}),
+    },
+  });
 };
 
 export const upNextNitroQuery = defineInfiniteQuery({
@@ -86,9 +78,7 @@ export const upNextNitroQuery = defineInfiniteQuery({
     InvalidateAction.Restore,
     InvalidateAction.Watchlisted('show'),
   ],
-  dependencies: (
-    params: UpNextParams,
-  ) => [
+  dependencies: (params: UpNextParams) => [
     params.page,
     params.limit,
     params.sortBy,

@@ -15,9 +15,12 @@ type MediaParentalGuideParams = {
   locale: AvailableLocale;
 } & ApiParams;
 
-const mediaParentalGuideRequest = async (
-  { fetch, type, slug, locale }: MediaParentalGuideParams,
-) => {
+const mediaParentalGuideRequest = async ({
+  fetch,
+  type,
+  slug,
+  locale,
+}: MediaParentalGuideParams) => {
   const response = await rawApiFetch({
     fetch,
     path: toMediaInfoPath({ type, slug, infoType: 16, locale }),

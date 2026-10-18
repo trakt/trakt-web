@@ -17,12 +17,14 @@ const MovieMatchCandidateSchema = z.object({
 });
 
 const MovieMatchResponseSchema = z.object({
-  results: z.object({
-    index: z.number(),
-    status: z.enum(['matched', 'ambiguous', 'not_found', 'invalid']),
-    match: MovieMatchCandidateSchema.nullish(),
-    candidates: MovieMatchCandidateSchema.array().nullish(),
-  }).array(),
+  results: z
+    .object({
+      index: z.number(),
+      status: z.enum(['matched', 'ambiguous', 'not_found', 'invalid']),
+      match: MovieMatchCandidateSchema.nullish(),
+      candidates: MovieMatchCandidateSchema.array().nullish(),
+    })
+    .array(),
 });
 
 export type MovieMatchQuery = {

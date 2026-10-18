@@ -36,10 +36,7 @@ describe('dailyOrderArray', () => {
   });
 
   it('should order array using cached order from today', () => {
-    localStorage.setItem(
-      'test-key',
-      JSON.stringify({ [TODAY]: [2, 1] }),
-    );
+    localStorage.setItem('test-key', JSON.stringify({ [TODAY]: [2, 1] }));
 
     scheduler.run(({ cold, expectObservable }) => {
       const source$ = cold('a|', { a: [item1, item2] });
@@ -70,10 +67,7 @@ describe('dailyOrderArray', () => {
   });
 
   it('should append new items to the end', () => {
-    localStorage.setItem(
-      'test-key',
-      JSON.stringify({ [TODAY]: [2, 1] }),
-    );
+    localStorage.setItem('test-key', JSON.stringify({ [TODAY]: [2, 1] }));
 
     scheduler.run(({ cold, expectObservable }) => {
       const source$ = cold('a|', { a: [item1, item2, item3] });
@@ -87,10 +81,7 @@ describe('dailyOrderArray', () => {
   });
 
   it('should handle removed items', () => {
-    localStorage.setItem(
-      'test-key',
-      JSON.stringify({ [TODAY]: [3, 2, 1] }),
-    );
+    localStorage.setItem('test-key', JSON.stringify({ [TODAY]: [3, 2, 1] }));
 
     scheduler.run(({ cold, expectObservable }) => {
       const source$ = cold('a|', { a: [item1, item3] });

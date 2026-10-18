@@ -10,11 +10,9 @@ describe('action: setScrollInfo', () => {
     node: HTMLDivElement,
     location: 'top' | 'middle' | 'bottom',
   ) {
-    vi.spyOn(node, 'scrollHeight', 'get')
-      .mockReturnValueOnce(100);
+    vi.spyOn(node, 'scrollHeight', 'get').mockReturnValueOnce(100);
 
-    vi.spyOn(node, 'clientHeight', 'get')
-      .mockReturnValueOnce(50);
+    vi.spyOn(node, 'clientHeight', 'get').mockReturnValueOnce(50);
 
     switch (location) {
       case 'top':

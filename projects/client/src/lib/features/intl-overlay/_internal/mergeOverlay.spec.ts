@@ -15,11 +15,13 @@ type NestedShape = {
 };
 
 const mediaOptions: BulkIntlOverlayOptions<MediaShape> = {
-  getTargets: (entry) => [{
-    id: entry.id,
-    type: entry.type,
-    apply: (acc, title) => ({ ...acc, title }),
-  }],
+  getTargets: (entry) => [
+    {
+      id: entry.id,
+      type: entry.type,
+      apply: (acc, title) => ({ ...acc, title }),
+    },
+  ],
 };
 
 const nestedOptions: BulkIntlOverlayOptions<NestedShape> = {

@@ -28,17 +28,17 @@ export default ts.config(
     ignores: ['build/', '.svelte-kit/', 'dist/', 'node_modules/'],
   },
   {
-    'rules': {
+    rules: {
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
-          'args': 'all',
-          'argsIgnorePattern': '^_',
-          'caughtErrors': 'all',
-          'caughtErrorsIgnorePattern': '^_',
-          'destructuredArrayIgnorePattern': '^_',
-          'varsIgnorePattern': '^_',
-          'ignoreRestSiblings': true,
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
         },
       ],
     },
@@ -51,11 +51,11 @@ export default ts.config(
       'no-restricted-imports': [
         'error',
         {
-          'paths': [
+          paths: [
             {
-              'name': 'marked',
-              'importNames': ['Marked', 'marked', 'parse', 'parseInline'],
-              'message':
+              name: 'marked',
+              importNames: ['Marked', 'marked', 'parse', 'parseInline'],
+              message:
                 'Raw marked output is not XSS safe. Use createSafeMarked from $lib/utils/markdown/createSafeMarked.ts instead.',
             },
           ],

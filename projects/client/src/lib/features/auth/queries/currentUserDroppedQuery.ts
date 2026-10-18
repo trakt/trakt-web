@@ -23,9 +23,7 @@ const currentUserDroppedRequest = async ({ fetch }: ApiParams) => {
 
 export const currentUserDroppedQuery = defineQuery({
   key: 'currentUserDropped',
-  invalidations: [
-    InvalidateAction.Drop('show'),
-  ],
+  invalidations: [InvalidateAction.Drop('show')],
   dependencies: [],
   request: currentUserDroppedRequest,
   mapper: (response) => ({

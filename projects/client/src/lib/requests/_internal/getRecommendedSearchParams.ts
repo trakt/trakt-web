@@ -5,9 +5,10 @@ type RecommendedProps = LimitParams & {
   filterParams: DeepPartial<FilterParam> | undefined;
 };
 
-export function getRecommendedSearchParams(
-  { limit, filterParams }: RecommendedProps,
-) {
+export function getRecommendedSearchParams({
+  limit,
+  filterParams,
+}: RecommendedProps) {
   const params = {
     extended: 'full,images,colors',
     ignore_collected: true,

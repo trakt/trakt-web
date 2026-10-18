@@ -27,9 +27,7 @@ const getAuth = (auth: Nil | OidcAuthToken) => {
   };
 };
 
-export const load: LayoutServerLoad = (
-  { request, locals },
-) => {
+export const load: LayoutServerLoad = ({ request, locals }) => {
   const defaultResponse = {
     theme: locals.theme,
     oidcAuth: getAuth(locals.oidcAuth),

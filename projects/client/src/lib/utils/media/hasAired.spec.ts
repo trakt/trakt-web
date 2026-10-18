@@ -92,46 +92,36 @@ describe('hasAired', () => {
 
     it('returns true for items that aired yesterday', () => {
       const yesterday = addDays(new Date(), -1);
-      expect(
-        hasAired({ effectiveReleaseDate: yesterday, type }),
-      ).toBe(true);
+      expect(hasAired({ effectiveReleaseDate: yesterday, type })).toBe(true);
     });
 
     it('returns true for items that aired 1 week ago', () => {
       const oneWeekAgo = addDays(new Date(), -7);
-      expect(
-        hasAired({ effectiveReleaseDate: oneWeekAgo, type }),
-      ).toBe(true);
+      expect(hasAired({ effectiveReleaseDate: oneWeekAgo, type })).toBe(true);
     });
 
     if (type !== 'episode') {
       it('returns false for items that will air tomorrow', () => {
         const tomorrow = addDays(new Date(), 1);
-        expect(
-          hasAired({ effectiveReleaseDate: tomorrow, type }),
-        ).toBe(false);
+        expect(hasAired({ effectiveReleaseDate: tomorrow, type })).toBe(false);
       });
     }
 
     it('returns false for items that will air in 2 days', () => {
       const inTwoDays = addDays(new Date(), 2);
-      expect(
-        hasAired({ effectiveReleaseDate: inTwoDays, type }),
-      ).toBe(false);
+      expect(hasAired({ effectiveReleaseDate: inTwoDays, type })).toBe(false);
     });
 
     it('returns false for items that will air in 7 days', () => {
       const sevenDaysFromNow = addDays(new Date(), 7);
-      expect(
-        hasAired({ effectiveReleaseDate: sevenDaysFromNow, type }),
-      ).toBe(false);
+      expect(hasAired({ effectiveReleaseDate: sevenDaysFromNow, type })).toBe(
+        false,
+      );
     });
 
     it('returns true for items released on streaming with a future air date', () => {
       const yesterday = addDays(new Date(), -1);
-      expect(
-        hasAired({ effectiveReleaseDate: yesterday, type }),
-      ).toBe(true);
+      expect(hasAired({ effectiveReleaseDate: yesterday, type })).toBe(true);
     });
   };
 

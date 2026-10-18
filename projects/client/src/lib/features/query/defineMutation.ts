@@ -2,16 +2,22 @@ import type { CreateMutationOptions } from '$lib/features/query/types.ts';
 import type { DefineMutationProps } from './models/DefineMutationProps.ts';
 import type { MutationMeta } from './models/MutationMeta.ts';
 
-export function defineMutation<TData, TVariables = void>(
-  { key, request, invalidations }: DefineMutationProps<TData, TVariables>,
-): CreateMutationOptions<TData, Error, TVariables> {
+export function defineMutation<TData, TVariables = void>({
+  key,
+  request,
+  invalidations,
+}: DefineMutationProps<TData, TVariables>): CreateMutationOptions<
+  TData,
+  Error,
+  TVariables
+> {
   const meta: MutationMeta = {
     resolveInvalidations: ({ data, variables }) =>
       typeof invalidations === 'function'
         ? invalidations({
-          data: data as TData,
-          variables: variables as TVariables,
-        })
+            data: data as TData,
+            variables: variables as TVariables,
+          })
         : invalidations,
   };
 

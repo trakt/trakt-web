@@ -23,7 +23,7 @@ export function useEpisodeStreamOn(params$: Observable<EpisodeSummaryParams>) {
           services: $query.data,
           favorites: $favorites,
           countryCode: $country,
-        })
+        }),
       ),
     ),
     isLoading: query.pipe(map(toLoadingState)),

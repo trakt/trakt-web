@@ -3,8 +3,9 @@ import { isRateLimitError } from './isRateLimitError.ts';
 
 describe('isRateLimitError', () => {
   it('should match a status carried in the message', () => {
-    expect(isRateLimitError(new Error('Too Many Requests (429): {}')))
-      .toBe(true);
+    expect(isRateLimitError(new Error('Too Many Requests (429): {}'))).toBe(
+      true,
+    );
   });
 
   it('should not match a longer number containing the status', () => {

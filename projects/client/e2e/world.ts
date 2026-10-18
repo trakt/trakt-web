@@ -42,8 +42,8 @@ export class TraktWorld extends World {
 setWorldConstructor(TraktWorld);
 
 Before(async function (this: TraktWorld, { pickle }: ITestCaseHookParameter) {
-  const isBot = pickle.tags.some((tag) =>
-    tag.name === '@bot' || tag.name === '@seo'
+  const isBot = pickle.tags.some(
+    (tag) => tag.name === '@bot' || tag.name === '@seo',
   );
   await this.init({ isBot });
 });

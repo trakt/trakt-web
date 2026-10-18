@@ -32,9 +32,11 @@ function typeToQuery(
 const isSameList = (left: MediaListSummary, right: MediaListSummary) =>
   left.key === right.key;
 
-export function useListSummary(
-  { slug, type, limit = MAX_LISTS }: ListSummaryProps,
-) {
+export function useListSummary({
+  slug,
+  type,
+  limit = MAX_LISTS,
+}: ListSummaryProps) {
   const personalLists = usePaginatedListQuery(
     typeToQuery({ slug, type }, 'personal', limit),
   );
@@ -42,10 +44,7 @@ export function useListSummary(
     typeToQuery({ slug, type }, 'official', limit),
   );
 
-  const isLoading = anyTrue([
-    personalLists.isLoading,
-    officialLists.isLoading,
-  ]);
+  const isLoading = anyTrue([personalLists.isLoading, officialLists.isLoading]);
 
   const { list: stablePersonalList } = useStableArray(
     isSameList,

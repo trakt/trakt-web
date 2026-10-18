@@ -14,9 +14,9 @@ export const followingActivityTargets = makeTargets<FollowingActivity>(
     patch: (entry, title) =>
       entry.target.type === 'movie'
         ? withTarget(entry, {
-          ...entry.target,
-          movie: { ...entry.target.movie, title },
-        })
+            ...entry.target,
+            movie: { ...entry.target.movie, title },
+          })
         : entry,
   },
   {
@@ -25,9 +25,9 @@ export const followingActivityTargets = makeTargets<FollowingActivity>(
     patch: (entry, title) =>
       entry.target.type !== 'movie'
         ? withTarget(entry, {
-          ...entry.target,
-          show: { ...entry.target.show, title },
-        })
+            ...entry.target,
+            show: { ...entry.target.show, title },
+          })
         : entry,
   },
   {
@@ -38,9 +38,9 @@ export const followingActivityTargets = makeTargets<FollowingActivity>(
     patch: (entry, title) =>
       entry.target.type === 'episode'
         ? withTarget(entry, {
-          ...entry.target,
-          episode: { ...entry.target.episode, title },
-        })
+            ...entry.target,
+            episode: { ...entry.target.episode, title },
+          })
         : entry,
   },
 );

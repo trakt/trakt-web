@@ -14,9 +14,12 @@ type ApplyPendingReactionsParams = ReactionsSnapshot & {
 const toEntries = (pending: PendingReactions) =>
   Object.entries(pending) as ReadonlyArray<[MediaReaction, PendingReaction]>;
 
-export function applyPendingReactions(
-  { held, distribution, totalCount, pending }: ApplyPendingReactionsParams,
-) {
+export function applyPendingReactions({
+  held,
+  distribution,
+  totalCount,
+  pending,
+}: ApplyPendingReactionsParams) {
   const entries = toEntries(pending);
   const presenceOf = (reaction: MediaReaction) =>
     pending[reaction]?.isPresent ?? held.includes(reaction);
@@ -39,8 +42,8 @@ export function applyPendingReactions(
     chosen: [
       ...held.filter(presenceOf),
       ...entries
-        .filter(([reaction, entry]) =>
-          entry.isPresent && !held.includes(reaction)
+        .filter(
+          ([reaction, entry]) => entry.isPresent && !held.includes(reaction),
         )
         .map(([reaction]) => reaction),
     ],

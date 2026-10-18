@@ -20,30 +20,30 @@ interface GetStatItemsParams {
   readonly mode: DiscoverMode;
 }
 
-export function getStatItems(
-  { thisWeek, lastWeek, mode }: GetStatItemsParams,
-): PulseStatItem[] {
+export function getStatItems({
+  thisWeek,
+  lastWeek,
+  mode,
+}: GetStatItemsParams): PulseStatItem[] {
   const locale = getLocale();
   const twAll = allDates(thisWeek);
   const lwAll = allDates(lastWeek);
 
   const twActiveDays = countUniqueDays(twAll);
   const twActiveDayCount = Math.max(twActiveDays, 1);
-  const avgMinutesPerDay = twActiveDays > 0
-    ? Math.round(thisWeek.totalMinutes / twActiveDayCount)
-    : 0;
+  const avgMinutesPerDay =
+    twActiveDays > 0 ? Math.round(thisWeek.totalMinutes / twActiveDayCount) : 0;
   const lastWeekActiveDays = countUniqueDays(lwAll);
-  const lastWeekAvgMinutes = lastWeekActiveDays > 0
-    ? Math.round(lastWeek.totalMinutes / Math.max(lastWeekActiveDays, 1))
-    : 0;
+  const lastWeekAvgMinutes =
+    lastWeekActiveDays > 0
+      ? Math.round(lastWeek.totalMinutes / Math.max(lastWeekActiveDays, 1))
+      : 0;
 
   const wakingMinutesPerWeek = WAKING_HOURS_PER_DAY * 7 * 60;
-  const screenTimeShareValue = wakingMinutesPerWeek > 0
-    ? thisWeek.totalMinutes / wakingMinutesPerWeek
-    : 0;
-  const lastWeekShareValue = wakingMinutesPerWeek > 0
-    ? lastWeek.totalMinutes / wakingMinutesPerWeek
-    : 0;
+  const screenTimeShareValue =
+    wakingMinutesPerWeek > 0 ? thisWeek.totalMinutes / wakingMinutesPerWeek : 0;
+  const lastWeekShareValue =
+    wakingMinutesPerWeek > 0 ? lastWeek.totalMinutes / wakingMinutesPerWeek : 0;
 
   const commonStats: PulseStat[] = [
     {

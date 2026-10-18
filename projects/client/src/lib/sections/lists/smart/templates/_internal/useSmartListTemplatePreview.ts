@@ -23,10 +23,11 @@ export function useSmartListTemplatePreview(
   );
 
   return combineLatest([template$, query$]).pipe(
-    map(([template, $query]): SmartListTemplatePreview =>
-      template.personal
-        ? ($query.data ?? { total: null, posters: [] })
-        : { total: template.total, posters: template.posters }
+    map(
+      ([template, $query]): SmartListTemplatePreview =>
+        template.personal
+          ? ($query.data ?? { total: null, posters: [] })
+          : { total: template.total, posters: template.posters },
     ),
   );
 }

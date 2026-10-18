@@ -28,8 +28,9 @@ describe('alignPopupContainer', () => {
     const popupRect = getDomRect(900, 0, 1000);
     const targetRect = getDomRect(900, 500, 50);
 
-    vi.spyOn(popupContainer, 'getBoundingClientRect')
-      .mockReturnValueOnce(popupRect);
+    vi.spyOn(popupContainer, 'getBoundingClientRect').mockReturnValueOnce(
+      popupRect,
+    );
 
     alignPopupContainer({
       node: popupContainer,
@@ -46,8 +47,9 @@ describe('alignPopupContainer', () => {
     const popupRect = getDomRect(1500, 0, 600);
     const targetRect = getDomRect(100, 500, 50);
 
-    vi.spyOn(popupContainer, 'getBoundingClientRect')
-      .mockReturnValueOnce(popupRect);
+    vi.spyOn(popupContainer, 'getBoundingClientRect').mockReturnValueOnce(
+      popupRect,
+    );
 
     alignPopupContainer({
       node: popupContainer,
@@ -64,8 +66,9 @@ describe('alignPopupContainer', () => {
     const popupRect = getDomRect(500, -200, 300);
     const targetRect = getDomRect(500, 100, 50);
 
-    vi.spyOn(popupContainer, 'getBoundingClientRect')
-      .mockReturnValueOnce(popupRect);
+    vi.spyOn(popupContainer, 'getBoundingClientRect').mockReturnValueOnce(
+      popupRect,
+    );
 
     alignPopupContainer({
       node: popupContainer,
@@ -82,8 +85,9 @@ describe('alignPopupContainer', () => {
     const popupRect = getDomRect(500, 900, 300);
     const targetRect = getDomRect(500, 500, 50);
 
-    vi.spyOn(popupContainer, 'getBoundingClientRect')
-      .mockReturnValueOnce(popupRect);
+    vi.spyOn(popupContainer, 'getBoundingClientRect').mockReturnValueOnce(
+      popupRect,
+    );
 
     alignPopupContainer({
       node: popupContainer,

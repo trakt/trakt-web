@@ -69,10 +69,12 @@ export const YirPersonaResultSchema = z.object({
     longest: z.number(),
     startedAt: z.coerce.date().nullable(),
   }),
-  monthly: z.object({
-    month: z.number(),
-    persona: YirPersonaIdSchema,
-  }).array(),
+  monthly: z
+    .object({
+      month: z.number(),
+      persona: YirPersonaIdSchema,
+    })
+    .array(),
 });
 
 export type YirPersonaResult = z.infer<typeof YirPersonaResultSchema>;

@@ -21,8 +21,11 @@ export function closeOpenSmartListRanges(
   return Object.fromEntries(
     Object.entries(filters).map(([key, value]) => {
       const ceiling = RANGE_CEILINGS[key as keyof SmartListFilters];
-      const isOpenRange = ceiling !== undefined && Array.isArray(value) &&
-        value.length === 1 && typeof value[0] === 'number';
+      const isOpenRange =
+        ceiling !== undefined &&
+        Array.isArray(value) &&
+        value.length === 1 &&
+        typeof value[0] === 'number';
 
       return [key, isOpenRange ? [...value, ceiling] : value];
     }),

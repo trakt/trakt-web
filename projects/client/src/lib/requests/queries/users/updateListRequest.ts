@@ -3,7 +3,7 @@ import { z } from 'zod';
 import type { ListPrivacy } from '../../models/ListPrivacy.ts';
 
 const UpdatedListSchema = z.preprocess(
-  (body) => Array.isArray(body) ? body.at(0) : body,
+  (body) => (Array.isArray(body) ? body.at(0) : body),
   z.object({
     ids: z.object({ slug: z.string() }),
   }),
@@ -19,23 +19,18 @@ type UpdateListRequest = {
   sortHow?: 'asc' | 'desc';
 } & ApiParams;
 
-export function updateListRequest(
-  {
-    userId,
-    listId,
-    name,
-    fetch,
-    description,
-    privacy,
-    sortBy,
-    sortHow,
-  }: UpdateListRequest,
-): Promise<string | Nil> {
+export function updateListRequest({
+  userId,
+  listId,
+  name,
+  fetch,
+  description,
+  privacy,
+  sortBy,
+  sortHow,
+}: UpdateListRequest): Promise<string | Nil> {
   return api({ fetch })
-    .users
-    .lists
-    .list
-    .update({
+    .users.lists.list.update({
       params: {
         id: userId,
         list_id: listId,

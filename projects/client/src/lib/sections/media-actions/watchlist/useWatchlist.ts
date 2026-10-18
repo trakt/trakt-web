@@ -21,9 +21,11 @@ import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 function isListableEntry(item: { id: number }): item is MediaEntry {
   const candidate = item as Partial<MediaEntry>;
 
-  return (candidate.type === 'movie' || candidate.type === 'show') &&
+  return (
+    (candidate.type === 'movie' || candidate.type === 'show') &&
     typeof candidate.slug === 'string' &&
-    typeof candidate.title === 'string';
+    typeof candidate.title === 'string'
+  );
 }
 
 type UseWatchlistProps = MediaStoreProps & {
@@ -39,9 +41,8 @@ export function useWatchlist(props: UseWatchlistProps) {
   const ids = media.map(({ id }) => id);
 
   const soleItem = media.length === 1 ? media.at(0) : undefined;
-  const singleEntry = soleItem && isListableEntry(soleItem)
-    ? soleItem
-    : undefined;
+  const singleEntry =
+    soleItem && isListableEntry(soleItem) ? soleItem : undefined;
 
   const { isWatchlisted } = useIsWatchlisted(props);
   const { isQueued } = useIsQueued({
@@ -50,33 +51,36 @@ export function useWatchlist(props: UseWatchlistProps) {
   });
   const body = toBulkPayload(type, ids);
 
-  const watchlistInvalidations = type === 'episode'
-    ? []
-    : [InvalidateAction.Watchlisted(type)];
+  const watchlistInvalidations =
+    type === 'episode' ? [] : [InvalidateAction.Watchlisted(type)];
 
-  const addition = useMutation(defineMutation({
-    key: 'watchlist:add',
-    request: () =>
-      executeOrEnqueue({
-        endpoint: 'watchlist:add',
-        keys: ids.map((id) => toMediaKey(type, id)),
-        body,
-        invalidations: watchlistInvalidations,
-      }),
-    invalidations: whenExecuted(watchlistInvalidations),
-  }));
+  const addition = useMutation(
+    defineMutation({
+      key: 'watchlist:add',
+      request: () =>
+        executeOrEnqueue({
+          endpoint: 'watchlist:add',
+          keys: ids.map((id) => toMediaKey(type, id)),
+          body,
+          invalidations: watchlistInvalidations,
+        }),
+      invalidations: whenExecuted(watchlistInvalidations),
+    }),
+  );
 
-  const removal = useMutation(defineMutation({
-    key: 'watchlist:remove',
-    request: () =>
-      executeOrEnqueue({
-        endpoint: 'watchlist:remove',
-        keys: ids.map((id) => toMediaKey(type, id)),
-        body,
-        invalidations: watchlistInvalidations,
-      }),
-    invalidations: whenExecuted(watchlistInvalidations),
-  }));
+  const removal = useMutation(
+    defineMutation({
+      key: 'watchlist:remove',
+      request: () =>
+        executeOrEnqueue({
+          endpoint: 'watchlist:remove',
+          keys: ids.map((id) => toMediaKey(type, id)),
+          body,
+          invalidations: watchlistInvalidations,
+        }),
+      invalidations: whenExecuted(watchlistInvalidations),
+    }),
+  );
 
   const isWatchlistUpdating = anyTrue([addition.isPending, removal.isPending]);
 
@@ -99,14 +103,16 @@ export function useWatchlist(props: UseWatchlistProps) {
         : m.action_toast_added_to_watchlist_generic(),
       action: singleEntry
         ? {
-          text: m.action_toast_action_change_list(),
-          label: m.action_toast_label_change_list({ title: singleEntry.title }),
-          onAction: () =>
-            manageListsDrawerStore.open({
-              target: { type: singleEntry.type, media: singleEntry },
+            text: m.action_toast_action_change_list(),
+            label: m.action_toast_label_change_list({
               title: singleEntry.title,
             }),
-        }
+            onAction: () =>
+              manageListsDrawerStore.open({
+                target: { type: singleEntry.type, media: singleEntry },
+                title: singleEntry.title,
+              }),
+          }
         : undefined,
     });
 

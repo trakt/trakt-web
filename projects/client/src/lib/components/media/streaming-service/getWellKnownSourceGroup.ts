@@ -9,9 +9,9 @@ function containsSegments(
   }
 
   return sourceSegments.some((_, index) =>
-    slugSegments.every((segment, offset) =>
-      sourceSegments.at(index + offset) === segment
-    )
+    slugSegments.every(
+      (segment, offset) => sourceSegments.at(index + offset) === segment,
+    ),
   );
 }
 
@@ -23,7 +23,7 @@ export function getWellKnownSourceGroup(source: string): string | undefined {
   const sourceSegments = source.split('_');
 
   const group = Object.entries(WELL_KNOWN_SERVICES).find(([, slugs]) =>
-    slugs.some((slug) => containsSegments(sourceSegments, slug.split('_')))
+    slugs.some((slug) => containsSegments(sourceSegments, slug.split('_'))),
   );
 
   if (!group) {

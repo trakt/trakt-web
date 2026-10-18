@@ -21,8 +21,9 @@ describe('component: FormInput', () => {
     const describedBy = input.getAttribute('aria-describedby');
 
     expect(describedBy).not.toBeNull();
-    expect(container.querySelector(`#${describedBy}`)?.textContent?.trim())
-      .toBe('Value must be ok.');
+    expect(
+      container.querySelector(`#${describedBy}`)?.textContent?.trim(),
+    ).toBe('Value must be ok.');
   });
 
   it('should not throw when unmounted before the autofocus frame', () => {

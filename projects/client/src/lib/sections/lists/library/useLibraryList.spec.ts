@@ -10,18 +10,16 @@ import { describe, expect, it } from 'vitest';
 import { useLibraryList } from './useLibraryList.ts';
 
 describe('useLibraryList', () => {
-  it.each(
-    [
-      { type: 'movie', endpoint: 'movies', entryType: 'movie' },
-      { type: 'show', endpoint: 'episodes', entryType: 'episode' },
-    ] as const,
-  )(
+  it.each([
+    { type: 'movie', endpoint: 'movies', entryType: 'movie' },
+    { type: 'show', endpoint: 'episodes', entryType: 'episode' },
+  ] as const)(
     'should refresh a cached empty $type library with a new marker',
     async ({ type, endpoint, entryType }) => {
       let populated = false;
       const markers: Array<string | null> = [];
-      const entry = MediaLibraryResponseMock.find((item) =>
-        item.type === entryType
+      const entry = MediaLibraryResponseMock.find(
+        (item) => item.type === entryType,
       );
       server.use(
         http.get(
@@ -81,14 +79,15 @@ describe('useLibraryList', () => {
         const page = url.searchParams.get('page') ?? '1';
         requests.push({ page, marker: url.searchParams.get('marker') });
         const type = page === '1' ? 'movie' : 'episode';
-        return HttpResponse.json([
-          MediaLibraryResponseMock.find((entry) => entry.type === type),
-        ], {
-          headers: {
-            'X-Pagination-Page': page,
-            'X-Pagination-Page-Count': '2',
+        return HttpResponse.json(
+          [MediaLibraryResponseMock.find((entry) => entry.type === type)],
+          {
+            headers: {
+              'X-Pagination-Page': page,
+              'X-Pagination-Page-Count': '2',
+            },
           },
-        });
+        );
       }),
     );
     const { list, isLoading, hasNextPage, fetchNextPage } = await renderStore(

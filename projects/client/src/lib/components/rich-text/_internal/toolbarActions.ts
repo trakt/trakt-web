@@ -32,7 +32,11 @@ export function toolbarActions(): ReadonlyArray<ToolbarAction> {
       label: m.button_label_format_bullet_list(),
       icon: BulletListIcon,
       run: (editor) =>
-        editor.chain().focus().command(isolateCursorLine).toggleBulletList()
+        editor
+          .chain()
+          .focus()
+          .command(isolateCursorLine)
+          .toggleBulletList()
           .run(),
     },
     {
@@ -40,7 +44,11 @@ export function toolbarActions(): ReadonlyArray<ToolbarAction> {
       label: m.button_label_format_quote(),
       icon: QuoteIcon,
       run: (editor) =>
-        editor.chain().focus().command(isolateCursorLine).toggleBlockquote()
+        editor
+          .chain()
+          .focus()
+          .command(isolateCursorLine)
+          .toggleBlockquote()
           .run(),
     },
   ];

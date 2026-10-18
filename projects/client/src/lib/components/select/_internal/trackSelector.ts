@@ -12,10 +12,7 @@ const morphDuration = time.seconds(0.3);
 
 const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
 
-export function trackSelector(
-  row: HTMLElement,
-  initial: TrackSelectorParams,
-) {
+export function trackSelector(row: HTMLElement, initial: TrackSelectorParams) {
   let params = initial;
   let isMorphing = false;
   let morphFrame = 0;

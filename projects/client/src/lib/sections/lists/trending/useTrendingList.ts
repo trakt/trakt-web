@@ -19,34 +19,29 @@ import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 
 export type TrendingEntry = TrendingMovie | TrendingShow;
 
-type TrendingListStoreProps = PaginationParams & FilterParams & SearchParams & {
-  type: DiscoverMode;
-};
+type TrendingListStoreProps = PaginationParams &
+  FilterParams &
+  SearchParams & {
+    type: DiscoverMode;
+  };
 
-function typeToQuery(
-  params: TrendingListStoreProps,
-) {
+function typeToQuery(params: TrendingListStoreProps) {
   switch (params.type) {
     case 'movie':
-      return movieTrendingQuery(params) as InfiniteQuery<
-        TrendingEntry
-      >;
+      return movieTrendingQuery(params) as InfiniteQuery<TrendingEntry>;
     case 'show':
-      return showTrendingQuery(params) as InfiniteQuery<
-        TrendingEntry
-      >;
+      return showTrendingQuery(params) as InfiniteQuery<TrendingEntry>;
     case 'media':
-      return mediaTrendingQuery(params) as InfiniteQuery<
-        TrendingEntry
-      >;
+      return mediaTrendingQuery(params) as InfiniteQuery<TrendingEntry>;
   }
 }
 
-export function useTrendingList(
-  props: TrendingListStoreProps,
-) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(typeToQuery(props));
+export function useTrendingList(props: TrendingListStoreProps) {
+  const {
+    list: baseList,
+    isLoading: baseLoading,
+    ...rest
+  } = usePaginatedListQuery(typeToQuery(props));
 
   const overlay = createBulkMediaIntl<TrendingEntry>();
 

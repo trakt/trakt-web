@@ -8,8 +8,7 @@ import { http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
 import { movieSoundtrackQuery } from './movieSoundtrackQuery.ts';
 
-const path =
-  `http://localhost/v3/media/movie/${MovieHereticMappedMock.slug}/info/15/version/2`;
+const path = `http://localhost/v3/media/movie/${MovieHereticMappedMock.slug}/info/15/version/2`;
 
 function query(locale: 'en' | 'pt-BR' = 'en') {
   return createTestBedQuery(
@@ -23,9 +22,10 @@ describe('movieSoundtrackQuery', () => {
       http.get(path, () =>
         HttpResponse.json(
           MovieHereticSoundtrackResponseMock.map((entry, index) =>
-            index === 0 ? { ...entry, matched_on: 'writer' } : entry
+            index === 0 ? { ...entry, matched_on: 'writer' } : entry,
           ),
-        )),
+        ),
+      ),
     );
 
     const result = await runQuery({
@@ -48,9 +48,8 @@ describe('movieSoundtrackQuery', () => {
   it('should order tracks by position regardless of payload order', async () => {
     server.use(
       http.get(path, () =>
-        HttpResponse.json(
-          [...MovieHereticSoundtrackResponseMock].reverse(),
-        )),
+        HttpResponse.json([...MovieHereticSoundtrackResponseMock].reverse()),
+      ),
     );
 
     const result = await runQuery({
@@ -62,9 +61,7 @@ describe('movieSoundtrackQuery', () => {
   });
 
   it('should return an empty list when the endpoint denies access', async () => {
-    server.use(
-      http.get(path, () => new HttpResponse(null, { status: 401 })),
-    );
+    server.use(http.get(path, () => new HttpResponse(null, { status: 401 })));
 
     const result = await runQuery({
       factory: () => query(),

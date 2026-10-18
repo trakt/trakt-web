@@ -9,9 +9,8 @@ if (typeof Array.prototype.at !== 'function') {
     value<T>(this: ArrayLike<T>, index: number): T | undefined {
       const length = this.length;
       const relativeIndex = Math.trunc(index) || 0;
-      const resolvedIndex = relativeIndex < 0
-        ? length + relativeIndex
-        : relativeIndex;
+      const resolvedIndex =
+        relativeIndex < 0 ? length + relativeIndex : relativeIndex;
 
       return resolvedIndex < 0 || resolvedIndex >= length
         ? undefined

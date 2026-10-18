@@ -22,14 +22,16 @@ function isDateInScope(
 /**
  * Return an array of active scope ids at the given time. Order is the insertion order of SCOPES keys.
  */
-export function activeEvent(
-  { events, now, dateFn }: ActiveEventProps,
-): string[] {
+export function activeEvent({
+  events,
+  now,
+  dateFn,
+}: ActiveEventProps): string[] {
   return Object.keys(events).filter((k) =>
     isDateInScope(
       now,
       assertDefined(events[k], 'Event config not found'),
       dateFn,
-    )
+    ),
   );
 }

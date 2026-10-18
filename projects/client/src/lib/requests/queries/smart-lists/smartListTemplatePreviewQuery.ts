@@ -11,13 +11,11 @@ import { z } from 'zod';
 
 const PREVIEW_LIMIT = 3;
 
-type SmartListTemplatePreviewParams =
-  & {
-    source: SmartListSource;
-    mediaType: SmartListMediaType;
-    filters: Record<string, string>;
-  }
-  & ApiParams;
+type SmartListTemplatePreviewParams = {
+  source: SmartListSource;
+  mediaType: SmartListMediaType;
+  filters: Record<string, string>;
+} & ApiParams;
 
 const SmartListTemplatePreviewSchema = z.object({
   total: z.number(),

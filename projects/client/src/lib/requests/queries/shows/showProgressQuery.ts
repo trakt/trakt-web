@@ -16,24 +16,19 @@ import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { ShowProgressResponse } from '@trakt/api';
 import { mapToPostCredits } from '../../_internal/mapToPostCredits.ts';
 
-const showProgressRequest = (
-  { fetch, slug }: { slug: string } & ApiParams,
-) =>
-  api({ fetch })
-    .shows
-    .progress
-    .watched({
-      query: {
-        count_specials: false,
-        specials: false,
-        hidden: false,
-        extended: 'full,images',
-        include_stats: true,
-      },
-      params: {
-        id: slug,
-      },
-    });
+const showProgressRequest = ({ fetch, slug }: { slug: string } & ApiParams) =>
+  api({ fetch }).shows.progress.watched({
+    query: {
+      count_specials: false,
+      specials: false,
+      hidden: false,
+      extended: 'full,images',
+      include_stats: true,
+    },
+    params: {
+      id: slug,
+    },
+  });
 
 function mapShowProgressResponse(
   item: ShowProgressResponse,
@@ -71,8 +66,8 @@ function mapShowProgressResponse(
     //  As a proxy, treat the next episode as the latest aired when remaining (aired -
     //  completed) is 1 or less. Replace once the API surfaces an absolute "latest aired
     //  episode" reference.
-    isLatestAired: (item.aired - item.completed) <= 1,
-    type: episode?.episode_type as EpisodeType ?? EpisodeUnknownType.unknown,
+    isLatestAired: item.aired - item.completed <= 1,
+    type: (episode?.episode_type as EpisodeType) ?? EpisodeUnknownType.unknown,
     genres: [],
     overview: episode?.overview ?? '',
     year: airDate.getFullYear(),

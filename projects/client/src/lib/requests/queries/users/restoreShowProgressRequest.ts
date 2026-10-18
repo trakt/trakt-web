@@ -5,14 +5,12 @@ type RestoreShowRequest = {
   body: HiddenMediaRequest;
 } & ApiParams;
 
-export function restoreShowProgressRequest(
-  { body, fetch }: RestoreShowRequest,
-): Promise<boolean> {
+export function restoreShowProgressRequest({
+  body,
+  fetch,
+}: RestoreShowRequest): Promise<boolean> {
   return api({ fetch })
-    .users
-    .hidden
-    .remove
-    .progress({
+    .users.hidden.remove.progress({
       body,
     })
     .then(({ status }) => status === 200);

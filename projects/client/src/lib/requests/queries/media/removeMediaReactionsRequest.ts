@@ -9,9 +9,12 @@ type RemoveMediaReactionsParams = {
   ids: ReadonlyArray<number>;
 } & ApiParams;
 
-export async function removeMediaReactionsRequest(
-  { fetch, type, slug, ids }: RemoveMediaReactionsParams,
-): Promise<boolean> {
+export async function removeMediaReactionsRequest({
+  fetch,
+  type,
+  slug,
+  ids,
+}: RemoveMediaReactionsParams): Promise<boolean> {
   const response = await rawApiFetch({
     fetch,
     path: `${toMediaReactionsPath(type, slug)}/${ids.join(',')}`,

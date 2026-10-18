@@ -16,21 +16,25 @@ type ReactParams = MediaTarget & { reaction: MediaReaction };
 export function useMediaReaction() {
   const { track } = useTrack(AnalyticsEvent.React);
 
-  const removal = useMutation(defineMutation({
-    key: 'media:remove-reaction',
-    request: (params: RemoveParams) => removeMediaReactionsRequest(params),
-    invalidations: ({ variables }) => [
-      InvalidateAction.MediaReact(variables.type),
-    ],
-  }));
+  const removal = useMutation(
+    defineMutation({
+      key: 'media:remove-reaction',
+      request: (params: RemoveParams) => removeMediaReactionsRequest(params),
+      invalidations: ({ variables }) => [
+        InvalidateAction.MediaReact(variables.type),
+      ],
+    }),
+  );
 
-  const reaction = useMutation(defineMutation({
-    key: 'media:react',
-    request: (params: ReactParams) => reactMediaRequest(params),
-    invalidations: ({ variables }) => [
-      InvalidateAction.MediaReact(variables.type),
-    ],
-  }));
+  const reaction = useMutation(
+    defineMutation({
+      key: 'media:react',
+      request: (params: ReactParams) => reactMediaRequest(params),
+      invalidations: ({ variables }) => [
+        InvalidateAction.MediaReact(variables.type),
+      ],
+    }),
+  );
 
   const remove = async (params: RemoveParams) => {
     if (params.ids.length === 0) return false;

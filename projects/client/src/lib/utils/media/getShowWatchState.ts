@@ -25,19 +25,23 @@ const EMPTY_STATE: ShowWatchState = {
  * never disagree. "Watched" means every regular (non-special) episode has been
  * seen at least once; a missing/zero episode count can never be "watched".
  */
-export function getShowWatchState(
-  { watchedShow, episodeCount }: ShowWatchStateProps,
-): ShowWatchState {
+export function getShowWatchState({
+  watchedShow,
+  episodeCount,
+}: ShowWatchStateProps): ShowWatchState {
   if (!watchedShow) {
     return EMPTY_STATE;
   }
 
   const watchedEpisodeCount = countWatchedEpisodes(watchedShow.playsPerSeason);
   const regularEpisodes = watchedShow.episodes.filter((e) => e.season !== 0);
-  const minPlays = regularEpisodes.length > 0
-    ? Math.min(...regularEpisodes.map((e) => e.plays))
-    : 0;
-  const isWatched = episodeCount != null && episodeCount > 0 &&
+  const minPlays =
+    regularEpisodes.length > 0
+      ? Math.min(...regularEpisodes.map((e) => e.plays))
+      : 0;
+  const isWatched =
+    episodeCount != null &&
+    episodeCount > 0 &&
     watchedEpisodeCount >= episodeCount;
 
   return {

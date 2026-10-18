@@ -40,9 +40,13 @@ function recentSunday(now: Date): number {
  * (e.g. "America/New_York") and returns the equivalent day and formatted time
  * in the user's browser timezone, localized to the provided locale.
  */
-export function toHumanDayTime(
-  { day, time, timezone, locale, now = new Date() }: ToHumanDayTimeProps,
-): { day: string; time: string } | undefined {
+export function toHumanDayTime({
+  day,
+  time,
+  timezone,
+  locale,
+  now = new Date(),
+}: ToHumanDayTimeProps): { day: string; time: string } | undefined {
   const dayIndex = DAYS_INDEX[day];
   if (dayIndex == null) return;
 
@@ -80,8 +84,7 @@ export function toHumanDayTime(
 
   const refDay = new Date(refUtcMs).getUTCDate();
   const dayDiffMinutes = (refDay - sourceDay) * 24 * 60;
-  const timeDiffMinutes = (hour * 60 + minute) -
-    (sourceHour * 60 + sourceMinute);
+  const timeDiffMinutes = hour * 60 + minute - (sourceHour * 60 + sourceMinute);
   const offsetMs = (dayDiffMinutes + timeDiffMinutes) * 60 * 1000;
 
   const utcDate = new Date(refUtcMs + offsetMs);
@@ -89,8 +92,7 @@ export function toHumanDayTime(
   const dayStr = new Intl.DateTimeFormat(
     getIntlLocale(locale as AvailableLanguage),
     { weekday: 'long' },
-  )
-    .format(utcDate);
+  ).format(utcDate);
   const timeStr = new Intl.DateTimeFormat(
     getIntlLocale(locale as AvailableLanguage),
     {

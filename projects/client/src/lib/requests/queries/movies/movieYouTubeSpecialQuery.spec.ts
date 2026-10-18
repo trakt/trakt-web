@@ -9,8 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { movieYouTubeSpecialQuery } from './movieYouTubeSpecialQuery.ts';
 
 const MOVIE_SLUG = MovieHereticResponseMock.ids.slug;
-const YOUTUBE_SPECIAL_PATH =
-  `http://localhost/v3/media/movie/${MOVIE_SLUG}/info/17/version/1`;
+const YOUTUBE_SPECIAL_PATH = `http://localhost/v3/media/movie/${MOVIE_SLUG}/info/17/version/1`;
 
 describe('movieYouTubeSpecialQuery', () => {
   it('should query for the movie YouTube special', async () => {
@@ -31,13 +30,11 @@ describe('movieYouTubeSpecialQuery', () => {
 
   it('should default the source to official when the response omits it', async () => {
     server.use(
-      http.get(
-        YOUTUBE_SPECIAL_PATH,
-        () =>
-          HttpResponse.json({
-            ...MovieHereticYouTubeSpecialResponseMock,
-            source: undefined,
-          }),
+      http.get(YOUTUBE_SPECIAL_PATH, () =>
+        HttpResponse.json({
+          ...MovieHereticYouTubeSpecialResponseMock,
+          source: undefined,
+        }),
       ),
     );
 

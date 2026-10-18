@@ -47,23 +47,27 @@ const SAMPLED_ERROR_PATTERNS = [
 const SAMPLED_ERROR_RATE = 0.01;
 
 function isServiceWorkerRejection(event: SentryErrorEvent): boolean {
-  return event.exception?.values?.some(({ type, value, stacktrace }) => {
-    const isRejected = type === 'Rejected' || value === 'Rejected';
-    const isServiceWorker = stacktrace?.frames?.some(
-      (frame) =>
-        frame.filename?.includes('service-worker') ||
-        frame.function?.includes('navigator.serviceWorker.register') ||
-        frame.function?.includes('ServiceWorkerContainer.register'),
-    );
+  return (
+    event.exception?.values?.some(({ type, value, stacktrace }) => {
+      const isRejected = type === 'Rejected' || value === 'Rejected';
+      const isServiceWorker = stacktrace?.frames?.some(
+        (frame) =>
+          frame.filename?.includes('service-worker') ||
+          frame.function?.includes('navigator.serviceWorker.register') ||
+          frame.function?.includes('ServiceWorkerContainer.register'),
+      );
 
-    return isRejected && isServiceWorker;
-  }) ?? false;
+      return isRejected && isServiceWorker;
+    }) ?? false
+  );
 }
 
 function isSampledError(event: SentryErrorEvent): boolean {
-  return event.exception?.values?.some(({ value }) =>
-    SAMPLED_ERROR_PATTERNS.some((pattern) => pattern.test(value ?? ''))
-  ) ?? false;
+  return (
+    event.exception?.values?.some(({ value }) =>
+      SAMPLED_ERROR_PATTERNS.some((pattern) => pattern.test(value ?? '')),
+    ) ?? false
+  );
 }
 
 Sentry.init({
@@ -122,10 +126,7 @@ Sentry.init({
       return null;
     }
 
-    if (
-      isSampledError(event) &&
-      Math.random() >= SAMPLED_ERROR_RATE
-    ) {
+    if (isSampledError(event) && Math.random() >= SAMPLED_ERROR_RATE) {
       return null;
     }
 
@@ -168,8 +169,7 @@ function hasChunkPath(path?: string): boolean {
   // SvelteKit emits immutable chunk URLs under `/_app/immutable/`.
   // Match both the absolute prefix and the relative form so the recovery
   // also catches errors triggered from cross-origin or relative resolutions.
-  return path.includes('/_app/immutable/') ||
-    path.includes('_app/immutable/');
+  return path.includes('/_app/immutable/') || path.includes('_app/immutable/');
 }
 
 function getRejectionUrl(reason: unknown): string | undefined {

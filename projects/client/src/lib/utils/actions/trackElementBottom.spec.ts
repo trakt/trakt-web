@@ -80,10 +80,7 @@ describe('action: trackElementBottom', () => {
 
   it('should not rewrite the variable when the bottom is unchanged', async () => {
     const action = trackElementBottom(node, VAR_NAME);
-    const setProperty = vi.spyOn(
-      document.documentElement.style,
-      'setProperty',
-    );
+    const setProperty = vi.spyOn(document.documentElement.style, 'setProperty');
 
     scroll();
     await nextFrame();

@@ -19,19 +19,14 @@ import {
 } from './movieProgressQuery.ts';
 import { mapUpNextResponse, upNextNitroRequest } from './upNextNitroQuery.ts';
 
-type MediaProgressParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & {
+type MediaProgressParams = PaginationParams &
+  ApiParams &
+  FilterParams & {
     sortBy?: UpNextSortBy;
     sortHow?: SortDirection;
   };
 
-const MediaProgressSchema = z.union([
-  UpNextEntrySchema,
-  MovieProgressSchema,
-]);
+const MediaProgressSchema = z.union([UpNextEntrySchema, MovieProgressSchema]);
 
 export const mediaProgressQuery = defineInfiniteQuery({
   key: 'mediaProgress:v2',
@@ -45,9 +40,7 @@ export const mediaProgressQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.Drop('movie'),
   ],
-  dependencies: (
-    params: MediaProgressParams,
-  ) => [
+  dependencies: (params: MediaProgressParams) => [
     params.page,
     params.limit,
     params.sortBy,
@@ -55,17 +48,13 @@ export const mediaProgressQuery = defineInfiniteQuery({
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: (params) =>
-    Promise.all([
-      upNextNitroRequest(params),
-      movieProgressRequest(params),
-    ]),
+    Promise.all([upNextNitroRequest(params), movieProgressRequest(params)]),
   mapper: ([upNextResponse, movieProgressResponse], { sortBy, sortHow }) => {
     const episodes = upNextResponse.body
       .filter((item) => item.progress.next_episode != null)
       .map(mapUpNextResponse);
 
-    const movies = movieProgressResponse.body
-      .map(mapToMovieProgressEntry);
+    const movies = movieProgressResponse.body.map(mapToMovieProgressEntry);
 
     return {
       entries: interleaveMediaProgress({

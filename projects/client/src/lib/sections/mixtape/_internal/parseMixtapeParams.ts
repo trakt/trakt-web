@@ -42,9 +42,10 @@ export function parseMixtapeParams(
     skips: toIds(searchParams.get('skips')),
     kept: toRounds(searchParams.get('kept')),
     savedTo: toListId(searchParams.get('to')),
-    view: searchParams.get('view') === 'results' && picks.length > 0
-      ? 'results'
-      : 'pick',
+    view:
+      searchParams.get('view') === 'results' && picks.length > 0
+        ? 'results'
+        : 'pick',
     source: searchParams.get('source'),
   };
 }

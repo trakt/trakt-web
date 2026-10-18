@@ -24,18 +24,19 @@ export async function getPeople({
     types: [type],
   });
 
-  return hits
-    .flatMap((hit) => {
-      const { document } = hit;
+  return hits.flatMap((hit) => {
+    const { document } = hit;
 
-      if (!hasSlug(document)) {
-        return [];
-      }
+    if (!hasSlug(document)) {
+      return [];
+    }
 
-      return [{
+    return [
+      {
         score: Number(hit.text_match_info?.score ?? -1),
         type,
         [type]: toPerson(document),
-      }];
-    });
+      },
+    ];
+  });
 }

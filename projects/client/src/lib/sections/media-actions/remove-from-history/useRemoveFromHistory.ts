@@ -15,11 +15,11 @@ type OrphanedRating = number | undefined;
 export type UseRemoveFromHistoryProps =
   | { type: 'movie'; id: number; movie: { id: number } }
   | {
-    type: 'episode';
-    id: number;
-    episode: { id: number };
-    show: { id: number };
-  };
+      type: 'episode';
+      id: number;
+      episode: { id: number };
+      show: { id: number };
+    };
 
 export function useRemoveFromHistory(props: UseRemoveFromHistoryProps) {
   const { id, type } = props;
@@ -49,7 +49,8 @@ export function useRemoveFromHistory(props: UseRemoveFromHistoryProps) {
           ? currentRatings.movies.get(traktId)?.rating
           : undefined;
       case 'episode': {
-        const episode = currentHistory.shows.get(props.show.id)
+        const episode = currentHistory.shows
+          .get(props.show.id)
           ?.episodes.find((entry) => entry.episodeId === traktId);
         return episode?.plays === 1
           ? currentRatings.episodes.get(traktId)?.rating
@@ -63,23 +64,25 @@ export function useRemoveFromHistory(props: UseRemoveFromHistoryProps) {
       ? [InvalidateAction.MarkAsWatched(type)]
       : [InvalidateAction.Rated(type), InvalidateAction.MarkAsWatched(type)];
 
-  const removal = useMutation(defineMutation({
-    key: 'history:remove',
-    request: async (): Promise<OrphanedRating> => {
-      const orphanedRating = await getOrphanedRating();
+  const removal = useMutation(
+    defineMutation({
+      key: 'history:remove',
+      request: async (): Promise<OrphanedRating> => {
+        const orphanedRating = await getOrphanedRating();
 
-      await removeWatchedRequest({ body: { ids: [id] } });
+        await removeWatchedRequest({ body: { ids: [id] } });
 
-      if (orphanedRating != null) {
-        await removeRatingRequest({
-          body: toRemoveRatingsPayload(type, [traktId]),
-        });
-      }
+        if (orphanedRating != null) {
+          await removeRatingRequest({
+            body: toRemoveRatingsPayload(type, [traktId]),
+          });
+        }
 
-      return orphanedRating;
-    },
-    invalidations: ({ data }) => historyInvalidations(data),
-  }));
+        return orphanedRating;
+      },
+      invalidations: ({ data }) => historyInvalidations(data),
+    }),
+  );
 
   const removeFromHistory = async () => {
     track();

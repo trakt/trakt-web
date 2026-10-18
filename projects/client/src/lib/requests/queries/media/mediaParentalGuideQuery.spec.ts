@@ -8,15 +8,13 @@ import { http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
 
 const MOVIE_SLUG = MovieHereticResponseMock.ids.slug;
-const PARENTAL_GUIDE_PATH =
-  `http://localhost/v3/media/movie/${MOVIE_SLUG}/info/16/version/1`;
+const PARENTAL_GUIDE_PATH = `http://localhost/v3/media/movie/${MOVIE_SLUG}/info/16/version/1`;
 
 describe('mediaParentalGuideQuery', () => {
   it('should query for a movie parental guide by slug', async () => {
     server.use(
-      http.get(
-        PARENTAL_GUIDE_PATH,
-        () => HttpResponse.json(MediaParentalGuideResponseMock),
+      http.get(PARENTAL_GUIDE_PATH, () =>
+        HttpResponse.json(MediaParentalGuideResponseMock),
       ),
     );
 

@@ -33,9 +33,13 @@ function backHrefFor(pathname: string): string {
  * pages surface the active page title with a back affordance to the parent; the
  * hub itself and the desktop layout keep the plain "Settings" title.
  */
-export function settingsNavbarHeader(
-  { pathname, isCompact }: { pathname: string; isCompact: boolean },
-): SettingsNavbarHeader {
+export function settingsNavbarHeader({
+  pathname,
+  isCompact,
+}: {
+  pathname: string;
+  isCompact: boolean;
+}): SettingsNavbarHeader {
   const hubHref = UrlBuilder.settings.general();
 
   if (!isCompact || pathname === hubHref) {

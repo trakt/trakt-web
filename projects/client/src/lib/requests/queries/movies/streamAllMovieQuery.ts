@@ -8,16 +8,12 @@ type StreamAllMovieParams = {
   slug: string;
 } & ApiParams;
 
-const streamAllMovieRequest = (
-  { fetch, slug }: StreamAllMovieParams,
-) =>
-  api({ fetch })
-    .movies
-    .watchnow({
-      params: {
-        id: slug,
-      },
-    });
+const streamAllMovieRequest = ({ fetch, slug }: StreamAllMovieParams) =>
+  api({ fetch }).movies.watchnow({
+    params: {
+      id: slug,
+    },
+  });
 
 export const streamAllMovieQuery = defineQuery({
   key: 'streamAllMovie',

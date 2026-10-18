@@ -16,9 +16,7 @@ describe('listIdsRequest', () => {
   });
 
   it('should return no ids when the request fails', async () => {
-    server.use(
-      http.get(URL, () => HttpResponse.json([], { status: 500 })),
-    );
+    server.use(http.get(URL, () => HttpResponse.json([], { status: 500 })));
 
     const response = await listIdsRequest({ path: PATH });
 

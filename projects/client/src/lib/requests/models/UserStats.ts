@@ -45,11 +45,13 @@ export const UserStatsSchema = z.object({
     total: z.number(),
     distribution: RatingDistributionSchema,
   }),
-  progress: z.object({
-    started: z.number(),
-    finished: z.number(),
-    dropped: z.number(),
-  }).nullable(),
+  progress: z
+    .object({
+      started: z.number(),
+      finished: z.number(),
+      dropped: z.number(),
+    })
+    .nullable(),
   lists: z.number().nullable(),
   totalMinutes: z.number(),
   totalPlays: z.number(),

@@ -39,9 +39,10 @@ function getServiceGroups(
 }
 
 function toServiceAvailability(userCountry: string) {
-  return (
-    [source, countries]: readonly [string, ServiceInCountry[]],
-  ): ServiceAvailability => ({
+  return ([source, countries]: readonly [
+    string,
+    ServiceInCountry[],
+  ]): ServiceAvailability => ({
     key: `service-${source}`,
     source,
     countries: sortStreamingCountries(countries, userCountry),
@@ -71,14 +72,16 @@ function groupServices(
   ) as GroupedServices;
 }
 
-export function getGroupedServices(
-  { services, userCountry, favoriteSources }: GetGroupedServicesProps,
-): GroupedServices {
+export function getGroupedServices({
+  services,
+  userCountry,
+  favoriteSources,
+}: GetGroupedServicesProps): GroupedServices {
   const favoriteSet = new Set(favoriteSources);
 
   const categorizedServices = services
     .flatMap((entry) =>
-      entry.services.map(toServiceInCountry(entry.country, entry.countryName))
+      entry.services.map(toServiceInCountry(entry.country, entry.countryName)),
     )
     .reduce(
       (acc, entry) => {

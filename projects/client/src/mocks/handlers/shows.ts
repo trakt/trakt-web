@@ -54,19 +54,14 @@ function paginatedSocial(request: Request) {
 }
 
 export const shows = [
-  http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}`,
-    () => {
-      return HttpResponse.json(ShowSiloResponseMock);
-    },
-  ),
+  http.get(`http://localhost/shows/${ShowSiloResponseMock.ids.slug}`, () => {
+    return HttpResponse.json(ShowSiloResponseMock);
+  }),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations`,
     ({ request }) => {
       const language = new URL(request.url).searchParams.get('language') ?? '';
-      return HttpResponse.json(
-        ShowSiloTranslationsResponseMock.get(language),
-      );
+      return HttpResponse.json(ShowSiloTranslationsResponseMock.get(language));
     },
   ),
   http.get(
@@ -118,22 +113,16 @@ export const shows = [
       return HttpResponse.json(ShowSiloProgressResponseMock);
     },
   ),
-  http.post(
-    'http://localhost/shows/:id/progress/watched/reset',
-    () => {
-      return new HttpResponse(null, {
-        status: 204,
-      });
-    },
-  ),
-  http.delete(
-    'http://localhost/shows/:id/progress/watched/reset',
-    () => {
-      return new HttpResponse(null, {
-        status: 204,
-      });
-    },
-  ),
+  http.post('http://localhost/shows/:id/progress/watched/reset', () => {
+    return new HttpResponse(null, {
+      status: 204,
+    });
+  }),
+  http.delete('http://localhost/shows/:id/progress/watched/reset', () => {
+    return new HttpResponse(null, {
+      status: 204,
+    });
+  }),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons`,
     () => {
@@ -193,7 +182,7 @@ export const shows = [
       }
       if (
         new URL(request.url).searchParams.get('extended') !==
-          'images,guest_stars'
+        'images,guest_stars'
       ) {
         return new HttpResponse(null, { status: 400 });
       }
@@ -218,7 +207,7 @@ export const shows = [
       }
       if (
         new URL(request.url).searchParams.get('extended') !==
-          'images,guest_stars'
+        'images,guest_stars'
       ) {
         return new HttpResponse(null, { status: 400 });
       }
@@ -246,24 +235,15 @@ export const shows = [
       return HttpResponse.json(ShowSiloSeasonEpisodesResponseMock);
     },
   ),
-  http.get(
-    'http://localhost/shows/trending*',
-    () => {
-      return HttpResponse.json(ShowsTrendingResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/shows/popular*',
-    () => {
-      return HttpResponse.json(ShowsPopularResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/shows/anticipated*',
-    () => {
-      return HttpResponse.json(ShowsAnticipatedResponseMock);
-    },
-  ),
+  http.get('http://localhost/shows/trending*', () => {
+    return HttpResponse.json(ShowsTrendingResponseMock);
+  }),
+  http.get('http://localhost/shows/popular*', () => {
+    return HttpResponse.json(ShowsPopularResponseMock);
+  }),
+  http.get('http://localhost/shows/anticipated*', () => {
+    return HttpResponse.json(ShowsAnticipatedResponseMock);
+  }),
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/related*`,
     () => {

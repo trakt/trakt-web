@@ -1,9 +1,6 @@
 import { GlobalEventBus } from '../events/GlobalEventBus.ts';
 
-export function trackElementBottom(
-  node: HTMLElement,
-  cssVarName: string,
-) {
+export function trackElementBottom(node: HTMLElement, cssVarName: string) {
   let frame = 0;
   let written: number | null = null;
 

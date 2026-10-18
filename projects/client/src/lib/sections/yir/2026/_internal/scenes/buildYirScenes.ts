@@ -24,11 +24,11 @@ export type YirSceneSpec =
   | { kind: 'trends'; id: string; type: MediaType; items: YirTrendItem[] }
   | { kind: 'credits'; id: string }
   | {
-    kind: 'thanks';
-    id: string;
-    shows: MediaEntry[];
-    movies: MediaEntry[];
-  };
+      kind: 'thanks';
+      id: string;
+      shows: MediaEntry[];
+      movies: MediaEntry[];
+    };
 
 function mediaScenes(
   detail: YirDetail,
@@ -43,52 +43,64 @@ function mediaScenes(
   return [
     { kind: 'stats', id: `section-${type}-stats`, type, stats },
     ...(detail.mostWatched[type].length > 0
-      ? [{
-        kind: 'top' as const,
-        id: `section-${type}-most-watched`,
-        type,
-        items: detail.mostWatched[type].slice(0, 10),
-      }]
+      ? [
+          {
+            kind: 'top' as const,
+            id: `section-${type}-most-watched`,
+            type,
+            items: detail.mostWatched[type].slice(0, 10),
+          },
+        ]
       : []),
     ...(companies.length > 0
-      ? [{
-        kind: 'companies' as const,
-        id: `section-${type}-companies`,
-        type,
-        companies,
-      }]
+      ? [
+          {
+            kind: 'companies' as const,
+            id: `section-${type}-companies`,
+            type,
+            companies,
+          },
+        ]
       : []),
     ...(detail.genres[type].itemCount > 0
-      ? [{
-        kind: 'genres' as const,
-        id: `section-${type}-genres`,
-        type,
-        group: detail.genres[type],
-      }]
+      ? [
+          {
+            kind: 'genres' as const,
+            id: `section-${type}-genres`,
+            type,
+            group: detail.genres[type],
+          },
+        ]
       : []),
     ...(detail.topRated[type].length > 0
-      ? [{
-        kind: 'rated' as const,
-        id: `section-${type}-rated`,
-        type,
-        items: detail.topRated[type],
-      }]
+      ? [
+          {
+            kind: 'rated' as const,
+            id: `section-${type}-rated`,
+            type,
+            items: detail.topRated[type],
+          },
+        ]
       : []),
     ...(detail.countries[type].countryCount > 0
-      ? [{
-        kind: 'countries' as const,
-        id: `section-${type}-countries`,
-        type,
-        group: detail.countries[type],
-      }]
+      ? [
+          {
+            kind: 'countries' as const,
+            id: `section-${type}-countries`,
+            type,
+            group: detail.countries[type],
+          },
+        ]
       : []),
     ...(trends.length > 0
-      ? [{
-        kind: 'trends' as const,
-        id: `section-${type}-trends`,
-        type,
-        items: trends,
-      }]
+      ? [
+          {
+            kind: 'trends' as const,
+            id: `section-${type}-trends`,
+            type,
+            items: trends,
+          },
+        ]
       : []),
   ];
 }
@@ -102,31 +114,37 @@ export function buildYirScenes(
 
   return [
     ...(detail.firstWatched
-      ? [{
-        kind: 'play' as const,
-        id: 'section-first-play',
-        moment: 'first' as const,
-        item: detail.firstWatched,
-      }]
+      ? [
+          {
+            kind: 'play' as const,
+            id: 'section-first-play',
+            moment: 'first' as const,
+            item: detail.firstWatched,
+          },
+        ]
       : []),
     ...mediaScenes(detail, 'shows'),
     ...mediaScenes(detail, 'movies'),
     { kind: 'credits', id: 'section-people' },
     ...(detail.lastWatched
-      ? [{
-        kind: 'play' as const,
-        id: 'section-last-play',
-        moment: 'last' as const,
-        item: detail.lastWatched,
-      }]
+      ? [
+          {
+            kind: 'play' as const,
+            id: 'section-last-play',
+            moment: 'last' as const,
+            item: detail.lastWatched,
+          },
+        ]
       : []),
     ...(thanks && (thanks.shows.length > 0 || thanks.movies.length > 0)
-      ? [{
-        kind: 'thanks' as const,
-        id: 'section-thanks',
-        shows: thanks.shows,
-        movies: thanks.movies,
-      }]
+      ? [
+          {
+            kind: 'thanks' as const,
+            id: 'section-thanks',
+            shows: thanks.shows,
+            movies: thanks.movies,
+          },
+        ]
       : []),
   ];
 }

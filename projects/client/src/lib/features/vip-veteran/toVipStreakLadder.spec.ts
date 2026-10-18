@@ -36,7 +36,8 @@ describe('util: toVipStreakLadder', () => {
   });
 
   it('should colour each rung by its tier', () => {
-    expect(toVipStreakLadder(veteran(1, 1)).rungs.map((rung) => rung.tone))
-      .to.deep.equal(['vip', 'deep', 'copper', 'silver', 'gold']);
+    expect(
+      toVipStreakLadder(veteran(1, 1)).rungs.map((rung) => rung.tone),
+    ).to.deep.equal(['vip', 'deep', 'copper', 'silver', 'gold']);
   });
 });

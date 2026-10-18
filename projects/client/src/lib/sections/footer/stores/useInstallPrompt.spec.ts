@@ -12,7 +12,7 @@ async function renderInstallPrompt() {
   const store = await renderStore(() => useInstallPrompt());
 
   let current: BeforeInstallPromptEvent | null = null;
-  store.subscribe((value) => current = value);
+  store.subscribe((value) => (current = value));
 
   return () => current;
 }

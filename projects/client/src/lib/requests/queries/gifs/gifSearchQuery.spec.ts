@@ -9,11 +9,13 @@ describe('gifSearchQuery', () => {
   it('should query for gifs matching the term', async () => {
     const result = await runQuery({
       factory: () =>
-        createTestBedInfiniteQuery(gifSearchQuery({
-          query: 'thursday',
-          customerId: 'test-device',
-          limit: 24,
-        })),
+        createTestBedInfiniteQuery(
+          gifSearchQuery({
+            query: 'thursday',
+            customerId: 'test-device',
+            limit: 24,
+          }),
+        ),
       mapper: mapToEntries,
     });
 
@@ -23,11 +25,13 @@ describe('gifSearchQuery', () => {
   it('should return nothing for a term klipy has no gifs for', async () => {
     const result = await runQuery({
       factory: () =>
-        createTestBedInfiniteQuery(gifSearchQuery({
-          query: 'nothing here',
-          customerId: 'test-device',
-          limit: 24,
-        })),
+        createTestBedInfiniteQuery(
+          gifSearchQuery({
+            query: 'nothing here',
+            customerId: 'test-device',
+            limit: 24,
+          }),
+        ),
       mapper: mapToEntries,
     });
 

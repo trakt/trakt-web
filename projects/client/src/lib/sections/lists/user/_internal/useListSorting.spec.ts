@@ -39,7 +39,7 @@ describe('store: useListSorting', () => {
         factory: () =>
           useListSorting(props).current.pipe(
             tap(({ sorting, sortHow }) =>
-              emissions.push(`${sorting.value}-${sortHow}`)
+              emissions.push(`${sorting.value}-${sortHow}`),
             ),
           ),
       });

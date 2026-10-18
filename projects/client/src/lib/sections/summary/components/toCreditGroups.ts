@@ -15,13 +15,16 @@ type CreditGroupsProps = {
  * there is a main cast to split from; otherwise all cast members are folded
  * into a single "Cast" group.
  */
-export function toCreditGroups(
-  { crew, type }: CreditGroupsProps,
-): CreditGroup[] {
+export function toCreditGroups({
+  crew,
+  type,
+}: CreditGroupsProps): CreditGroup[] {
   const { cast, crew: crewMembers } = toCreditMembers({ crew, type });
-  const supportingCast = type === 'movie'
-    ? []
-    : toCreditMembers({ crew: { ...crew, cast: crew.guestStars }, type }).cast;
+  const supportingCast =
+    type === 'movie'
+      ? []
+      : toCreditMembers({ crew: { ...crew, cast: crew.guestStars }, type })
+          .cast;
   const isSplit = cast.length > 0 && supportingCast.length > 0;
 
   const groups: CreditGroup[] = [

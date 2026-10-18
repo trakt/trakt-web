@@ -4,9 +4,9 @@ type ChangeEmailParams = {
   email: string;
 };
 
-export async function changeEmailRequest(
-  { email }: ChangeEmailParams,
-): Promise<boolean> {
+export async function changeEmailRequest({
+  email,
+}: ChangeEmailParams): Promise<boolean> {
   const response = await rawApiFetch({
     path: '/users/email',
     init: {

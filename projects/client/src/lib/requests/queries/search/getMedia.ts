@@ -25,20 +25,21 @@ export async function getMedia({
     types,
   });
 
-  return hits
-    .flatMap((hit) => {
-      const { document } = hit;
+  return hits.flatMap((hit) => {
+    const { document } = hit;
 
-      if (!hasSlug(document)) {
-        return [];
-      }
+    if (!hasSlug(document)) {
+      return [];
+    }
 
-      const type = 'episode_count' in document ? 'show' : 'movie';
+    const type = 'episode_count' in document ? 'show' : 'movie';
 
-      return [{
+    return [
+      {
         score: Number(hit.text_match_info?.score ?? -1),
         type,
         [type]: toMedia(type, document),
-      }];
-    });
+      },
+    ];
+  });
 }

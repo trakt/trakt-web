@@ -13,19 +13,25 @@ type PickerParams<T extends Media> = {
   query: string;
 };
 
-export function toPickerItems<T extends Media>(
-  { history, searchResults, fitMedia, picks, fits, query }: PickerParams<T>,
-): PickerItems<T> {
+export function toPickerItems<T extends Media>({
+  history,
+  searchResults,
+  fitMedia,
+  picks,
+  fits,
+  query,
+}: PickerParams<T>): PickerItems<T> {
   const unpicked = history.filter(({ id }) => !picks.includes(id));
   const fitIds = new Set(fits.map(({ id }) => id));
   const needle = query.trim().toLowerCase();
 
   if (needle) {
     const recentMatches = unpicked.filter(({ title }) =>
-      title.toLowerCase().includes(needle)
+      title.toLowerCase().includes(needle),
     );
-    const olderMatches = searchResults.filter(({ id, title }) =>
-      !picks.includes(id) && title.toLowerCase().includes(needle)
+    const olderMatches = searchResults.filter(
+      ({ id, title }) =>
+        !picks.includes(id) && title.toLowerCase().includes(needle),
     );
     const items = dedupe(({ id }) => id, [...recentMatches, ...olderMatches])
       .map((media) => ({

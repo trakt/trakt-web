@@ -17,9 +17,11 @@ const STACK_POSITIONS: ReadonlyArray<SpotlightPosition> = [
   'after',
 ];
 
-export function spotlightPosition(
-  { index, active, count }: SpotlightPositionParams,
-): SpotlightPosition {
+export function spotlightPosition({
+  index,
+  active,
+  count,
+}: SpotlightPositionParams): SpotlightPosition {
   const offset = (index - active + count) % count;
 
   if (count > STACK_POSITIONS.length && offset === count - 1) {

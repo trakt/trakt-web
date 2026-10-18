@@ -32,12 +32,7 @@ describe('sortStreamingCountries', () => {
     const sorted = sortStreamingCountries(list, 'fr');
     const countries = sorted.map((entry) => entry.country);
 
-    expect(countries).toEqual([
-      'fr',
-      'us',
-      'gb',
-      'de',
-    ]);
+    expect(countries).toEqual(['fr', 'us', 'gb', 'de']);
   });
 
   it('sorts alphabetically', () => {
@@ -48,9 +43,6 @@ describe('sortStreamingCountries', () => {
     const sorted = sortStreamingCountries(list, '');
     const countries = sorted.map((entry) => entry.country);
 
-    expect(countries).toEqual([
-      'au',
-      'bb',
-    ]);
+    expect(countries).toEqual(['au', 'bb']);
   });
 });

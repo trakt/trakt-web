@@ -10,19 +10,12 @@ const LANGUAGE_TYPES = {
   movie: ['movies'],
   show: ['shows'],
   media: ['movies', 'shows'],
-} as const satisfies Record<
-  DiscoverMode,
-  ReadonlyArray<'movies' | 'shows'>
->;
+} as const satisfies Record<DiscoverMode, ReadonlyArray<'movies' | 'shows'>>;
 
-const smartListLanguagesRequest = (
-  { fetch, type }: SmartListLanguagesParams,
-) =>
+const smartListLanguagesRequest = ({ fetch, type }: SmartListLanguagesParams) =>
   Promise.all(
     LANGUAGE_TYPES[type].map((languageType) =>
-      api({ fetch })
-        .languages
-        .list({ params: { type: languageType } })
+      api({ fetch }).languages.list({ params: { type: languageType } }),
     ),
   );
 

@@ -5,13 +5,12 @@ type RemoveWatchedParams = {
   body: HistoryRemoveRequest;
 } & ApiParams;
 
-export function removeWatchedRequest(
-  { body, fetch }: RemoveWatchedParams,
-): Promise<boolean> {
+export function removeWatchedRequest({
+  body,
+  fetch,
+}: RemoveWatchedParams): Promise<boolean> {
   return api({ fetch })
-    .sync
-    .history
-    .remove({
+    .sync.history.remove({
       body,
     })
     .then(({ status }) => {

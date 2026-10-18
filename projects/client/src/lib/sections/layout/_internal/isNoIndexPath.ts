@@ -9,7 +9,7 @@ export function isNoIndexPath(pathname: string): boolean {
     return false;
   }
 
-  return NO_INDEX_PREFIXES.some((prefix) =>
-    pathname === prefix || pathname.startsWith(`${prefix}/`)
+  return NO_INDEX_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
   );
 }
