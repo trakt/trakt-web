@@ -6,14 +6,14 @@
 #
 # Strategy:
 #   Phase 1 (fast, typecheck-only): apply the FULL candidate set, run
-#     `deno install --allow-scripts` + `deno task check`. If green, adopt
+#     `bun install` + `bun run check`. If green, adopt
 #     all. If red, split in halves and recurse. Singletons that fail get
 #     recorded as rejected; the rest of the tree keeps adopting green
 #     subsets on a rolling baseline.
-#   Phase 2 (final tests): run `deno task test:doctor` on the adopted set.
+#   Phase 2 (final tests): run `bun run test:doctor` on the adopted set.
 #     If it regresses at runtime, re-bisect the adopted set with full
 #     verify (check + tests in parallel) to isolate the offender.
-#   Phase 3 (build sanity): one `deno task build:doctor` on the survivors.
+#   Phase 3 (build sanity): one `bun run build:doctor` on the survivors.
 #
 # Per-probe cost is one verify, not one per package, so a clean 30-package
 # run finishes in ~1 probe instead of ~30. Worst case for K candidates
@@ -45,7 +45,7 @@ ORIGINAL_LOCK="/tmp/bisect.lock.original"
 BASELINE_PKG="/tmp/bisect.pkg.baseline"
 BASELINE_LOCK="/tmp/bisect.lock.baseline"
 cp "$CLIENT/package.json" "$ORIGINAL_PKG"
-cp "$ROOT/deno.lock"      "$ORIGINAL_LOCK"
+cp "$ROOT/bun.lock"      "$ORIGINAL_LOCK"
 cp "$ORIGINAL_PKG"  "$BASELINE_PKG"
 cp "$ORIGINAL_LOCK" "$BASELINE_LOCK"
 
@@ -53,7 +53,7 @@ reset_baseline_to_original() {
   cp "$ORIGINAL_PKG"  "$BASELINE_PKG"
   cp "$ORIGINAL_LOCK" "$BASELINE_LOCK"
   cp "$ORIGINAL_PKG"  "$CLIENT/package.json"
-  cp "$ORIGINAL_LOCK" "$ROOT/deno.lock"
+  cp "$ORIGINAL_LOCK" "$ROOT/bun.lock"
 }
 
 TOTAL=$(jq 'length' "$INPUT_JSON")
@@ -93,12 +93,12 @@ apply_set() {
 
 revert_to_baseline() {
   cp "$BASELINE_PKG"  "$CLIENT/package.json"
-  cp "$BASELINE_LOCK" "$ROOT/deno.lock"
+  cp "$BASELINE_LOCK" "$ROOT/bun.lock"
 }
 
 commit_baseline() {
   cp "$CLIENT/package.json" "$BASELINE_PKG"
-  cp "$ROOT/deno.lock"      "$BASELINE_LOCK"
+  cp "$ROOT/bun.lock"      "$BASELINE_LOCK"
 }
 
 # VERIFY_MODE controls which checks each probe runs.
@@ -111,13 +111,13 @@ verify() {
   local log_file="$LOG_DIR/probe-$(printf '%03d' "$PROBE_COUNT")-${label}.log"
 
   log "  ⤷ install + check $([ "$VERIFY_MODE" = "full" ] && echo "+ tests") (mode=$VERIFY_MODE, log: $log_file)"
-  if ! (cd "$ROOT" && deno install --allow-scripts) > "$log_file" 2>&1; then
+  if ! (cd "$ROOT" && bun install) > "$log_file" 2>&1; then
     log "  ✗ install failed"
     return 1
   fi
 
   if [ "$VERIFY_MODE" = "fast" ]; then
-    if ! (cd "$CLIENT" && deno task check) >> "$log_file" 2>&1; then
+    if ! (cd "$CLIENT" && bun run check) >> "$log_file" 2>&1; then
       log "  ✗ check failed"
       dump_probe_log "$log_file"
       return 1
@@ -129,9 +129,9 @@ verify() {
   # full mode: check + test in parallel.
   local check_log="${log_file%.log}.check.log"
   local test_log="${log_file%.log}.test.log"
-  (cd "$CLIENT" && deno task check) > "$check_log" 2>&1 &
+  (cd "$CLIENT" && bun run check) > "$check_log" 2>&1 &
   local check_pid=$!
-  (cd "$CLIENT" && deno task test:doctor) > "$test_log" 2>&1 &
+  (cd "$CLIENT" && bun run test:doctor) > "$test_log" 2>&1 &
   local test_pid=$!
 
   local check_ok=0 test_ok=0
@@ -219,7 +219,7 @@ VERIFY_MODE=fast find_adoptable "$(cat "$INPUT_JSON")"
 log ""
 log "▶ Phase 2: final verify (tests + build) on adopted set"
 TESTS_OK=0
-if (cd "$CLIENT" && deno task test:doctor) > "$LOG_DIR/final-tests.log" 2>&1; then
+if (cd "$CLIENT" && bun run test:doctor) > "$LOG_DIR/final-tests.log" 2>&1; then
   log "  ✓ tests passed"
 else
   log "  ✗ tests failed - re-bisecting adopted set with full verify"
@@ -241,7 +241,7 @@ fi
 log ""
 log "▶ Phase 3: final build:doctor on adopted set"
 FINAL_BUILD_OK=0
-if (cd "$CLIENT" && deno task build:doctor) > "$LOG_DIR/final-build.log" 2>&1; then
+if (cd "$CLIENT" && bun run build:doctor) > "$LOG_DIR/final-build.log" 2>&1; then
   log "  ✓ final build passed"
 else
   log "  ✗ final build failed (log: $LOG_DIR/final-build.log)"

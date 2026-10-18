@@ -20,8 +20,8 @@
  *   IMMUTABLE_SOURCE_DIR   (defaults to `.svelte-kit/cloudflare`)
  */
 
-import { walk } from '@std/fs/walk';
-import { relative } from '@std/path';
+import { readdir, readFile, stat } from 'node:fs/promises';
+import { join, relative } from 'node:path';
 import { contentTypeFor } from './_internal/content-type.ts';
 import {
   IMMUTABLE_PREFIX,
@@ -30,7 +30,7 @@ import {
 } from './_internal/manifest.ts';
 import { r2FromEnv } from './_internal/r2.ts';
 
-const SOURCE_DIR = Deno.env.get('IMMUTABLE_SOURCE_DIR') ??
+const SOURCE_DIR = process.env.IMMUTABLE_SOURCE_DIR ??
   '.svelte-kit/cloudflare';
 const CONCURRENCY = 64;
 
@@ -43,7 +43,7 @@ async function uploadOne(
 
   if (await r2.head(key)) return { key, status: 'skipped' };
 
-  const body = await Deno.readFile(fullPath);
+  const body = await readFile(fullPath);
   await r2.put(key, body, {
     'content-type': contentTypeFor(key),
     'cache-control': 'public, immutable, max-age=31536000',
@@ -52,30 +52,28 @@ async function uploadOne(
 }
 
 async function main(): Promise<void> {
-  const releaseSha = Deno.env.get('RELEASE_SHA');
+  const releaseSha = process.env.RELEASE_SHA;
   if (!releaseSha) {
     console.error('Missing RELEASE_SHA');
-    Deno.exit(1);
+    process.exit(1);
   }
 
   const r2 = r2FromEnv();
   const immutableDir = `${SOURCE_DIR}/${IMMUTABLE_PREFIX}`;
   try {
-    await Deno.stat(immutableDir);
+    await stat(immutableDir);
   } catch {
     console.error(`No immutable assets directory at ${immutableDir}`);
-    Deno.exit(1);
+    process.exit(1);
   }
 
-  const queue: string[] = [];
-  for await (
-    const entry of walk(immutableDir, {
-      includeDirs: false,
-      includeFiles: true,
-    })
-  ) {
-    queue.push(entry.path);
-  }
+  const entries = await readdir(immutableDir, {
+    recursive: true,
+    withFileTypes: true,
+  });
+  const queue = entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => join(entry.parentPath, entry.name));
 
   let uploaded = 0;
   let skipped = 0;
@@ -106,7 +104,7 @@ async function main(): Promise<void> {
 
   if (failed > 0) {
     console.error('Skipping manifest write because of upload failures.');
-    Deno.exit(1);
+    process.exit(1);
   }
 
   const manifest: ReleaseManifest = {

@@ -28,8 +28,6 @@ jobs:
           allowed-endpoints: >
             api.github.com:443
             codeload.github.com:443
-            deno.com:443
-            dl.deno.land:443
             github.com:443
             jsr.io:443
             npm.jsr.io:443
@@ -41,8 +39,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Deno Environment
-        uses: ./.github/actions/setup-deno
+      - name: Setup Bun Environment
+        uses: ./.github/actions/setup-bun
 
       - name: Enforce Exact Version Pins aka Forbid Semver Ranges
         run: |
@@ -69,20 +67,20 @@ jobs:
         run: |
           set -euo pipefail
           git fetch origin "${{ github.event.pull_request.base.ref }}" --depth=1
-          BEFORE=$(git show "origin/${{ github.event.pull_request.base.ref }}":deno.json | jq '.allowScripts | length')
-          AFTER=$(jq '.allowScripts | length' deno.json)
+          BEFORE=$( (git show "origin/${{ github.event.pull_request.base.ref }}":package.json 2>/dev/null || echo '{}') | jq '.trustedDependencies // [] | length')
+          AFTER=$(jq '.trustedDependencies | length' package.json)
           if [ "$AFTER" -gt "$BEFORE" ]; then
             if gh pr view "$PR_NUMBER" --json labels -q '.labels[].name' | grep -qx 'allowlist-change'; then
-              echo "allowScripts grew from $BEFORE to $AFTER — label present, allowed."
+              echo "trustedDependencies grew from $BEFORE to $AFTER — label present, allowed."
             else
-              echo "::error::allowScripts grew from $BEFORE to $AFTER without 'allowlist-change' label."
+              echo "::error::trustedDependencies grew from $BEFORE to $AFTER without 'allowlist-change' label."
               echo "Add the 'allowlist-change' label after manual review of every new entry."
               exit 1
             fi
           fi
 
       - name: Frozen Install aka Verify Lockfile Integrity
-        run: deno task install
+        run: bun install --frozen-lockfile
 
       - name: Verify NPM Provenance aka Audit Signatures
         working-directory: projects/client
@@ -95,7 +93,7 @@ jobs:
               exit 0
             }
           else
-            echo "::warning::node_modules not present after deno install — skipping signature audit."
+            echo "::warning::node_modules not present after bun install — skipping signature audit."
           fi
 
   dependency-review:
@@ -115,8 +113,6 @@ jobs:
             api.deps.dev:443
             api.github.com:443
             codeload.github.com:443
-            deno.com:443
-            dl.deno.land:443
             github.com:443
             jsr.io:443
             npm.jsr.io:443

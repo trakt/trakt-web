@@ -1,3 +1,4 @@
+import { readdir, readFile } from 'node:fs/promises';
 import { I18N_MESSAGES_DIR, I18N_META_DIR } from './_internal/constants.ts';
 
 const IDENTIFIER_RE = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
@@ -127,7 +128,7 @@ export function findMismatches(
 }
 
 async function readSource(): Promise<Record<string, string>> {
-  const raw = await Deno.readTextFile(`${I18N_META_DIR}/en.json`);
+  const raw = await readFile(`${I18N_META_DIR}/en.json`, 'utf8');
   const parsed = JSON.parse(raw) as {
     messages: Record<string, { default: string }>;
   };
@@ -137,7 +138,7 @@ async function readSource(): Promise<Record<string, string>> {
 }
 
 async function readLocale(file: string): Promise<Record<string, string>> {
-  const raw = await Deno.readTextFile(`${I18N_MESSAGES_DIR}/${file}`);
+  const raw = await readFile(`${I18N_MESSAGES_DIR}/${file}`, 'utf8');
   return JSON.parse(raw) as Record<string, string>;
 }
 
@@ -145,8 +146,10 @@ if (import.meta.main) {
   const source = await readSource();
   const all: Array<Mismatch> = [];
 
-  for await (const entry of Deno.readDir(I18N_MESSAGES_DIR)) {
-    if (!entry.isFile || !entry.name.endsWith('.json')) continue;
+  for (
+    const entry of await readdir(I18N_MESSAGES_DIR, { withFileTypes: true })
+  ) {
+    if (!entry.isFile() || !entry.name.endsWith('.json')) continue;
 
     const target = await readLocale(entry.name);
     const locale = entry.name.replace(/\.json$/, '');
@@ -155,7 +158,7 @@ if (import.meta.main) {
 
   if (all.length === 0) {
     console.log('All i18n placeholders consistent with source.');
-    Deno.exit(0);
+    process.exit(0);
   }
 
   console.error(`Found ${all.length} placeholder mismatch(es):\n`);
@@ -165,5 +168,5 @@ if (import.meta.main) {
     console.error(`    source: ${m.source}`);
     console.error(`    target: ${m.target}\n`);
   }
-  Deno.exit(1);
+  process.exit(1);
 }

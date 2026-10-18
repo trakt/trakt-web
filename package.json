@@ -1,0 +1,28 @@
+{
+  "name": "trakt-web-workspace",
+  "private": true,
+  "workspaces": [
+    "projects/client"
+  ],
+  "scripts": {
+    "reinstall": "bun install --force",
+    "install:frozen": "bun install --frozen-lockfile",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "client:dev": "cd projects/client && bun run dev",
+    "client:dev:contrib": "cd projects/client && bun run dev:contrib",
+    "client:i18n:resolve": "cd projects/client && bun run i18n:resolve"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15"
+  },
+  "trustedDependencies": [
+    "@sentry/cli",
+    "core-js",
+    "esbuild",
+    "fsevents",
+    "msw",
+    "sharp",
+    "workerd"
+  ]
+}

@@ -44,7 +44,7 @@ describe('toMeasurement', () => {
     it('converts meters to feet for Myanmar', () => {
       vi.stubGlobal('navigator', { language: 'my-MM' });
       const result = toMeasurement(1.75, 'my-MM');
-      expect(result).toContain('5.74');
+      expect(result).toContain('၅.၇၄');
       expect(result).toContain('ft');
     });
   });

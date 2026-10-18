@@ -2,7 +2,8 @@
  * CLI script to generate platform-specific i18n resources from meta files
  */
 
-import { parseArgs } from '@std/cli/parse-args';
+import { watch } from 'node:fs/promises';
+import { parseArgs } from 'node:util';
 import { generateFromMeta } from './core/generateFromMeta.ts';
 import { Platform } from './model/Platform.ts';
 
@@ -55,14 +56,14 @@ async function watchFiles(
   // Initial generation
   await generateFiles(input, outputDir, platforms);
 
-  const watcher = Deno.watchFs([input]);
+  const watcher = watch(input, { recursive: true });
 
   for await (const event of watcher) {
-    if (event.kind === 'modify' || event.kind === 'create') {
+    if (event.eventType === 'change' || event.eventType === 'rename') {
       // Only react to .json files
-      const hasJsonFiles = event.paths.some((path) => path.endsWith('.json'));
+      const hasJsonFiles = event.filename?.endsWith('.json');
       if (hasJsonFiles) {
-        console.log(`\n🔄 Files changed: ${event.paths.join(', ')}`);
+        console.log(`\n🔄 Files changed: ${event.filename}`);
         console.log('🚀 Regenerating...');
 
         try {
@@ -76,24 +77,15 @@ async function watchFiles(
 }
 
 async function main() {
-  const args = parseArgs(Deno.args, {
-    string: ['platforms', 'input', 'output'],
-    boolean: ['watch', 'help'],
-    alias: {
-      p: 'platforms',
-      w: 'watch',
-      h: 'help',
-      i: 'input',
-      o: 'output',
+  const { values: args } = parseArgs({
+    options: {
+      platforms: { type: 'string', short: 'p' },
+      input: { type: 'string', short: 'i' },
+      output: { type: 'string', short: 'o' },
+      watch: { type: 'boolean', short: 'w' },
+      help: { type: 'boolean', short: 'h' },
     },
-    unknown: (arg: string) => {
-      if (arg.startsWith('-')) {
-        console.error(`❌ Error: Unknown option: ${arg}`);
-        showUsage();
-        throw new Error(`Unknown option: ${arg}`);
-      }
-      return true;
-    },
+    allowPositionals: true,
   });
 
   if (args.help) {

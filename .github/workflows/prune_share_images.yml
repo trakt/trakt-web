@@ -24,8 +24,6 @@ jobs:
           allowed-endpoints: >
             api.github.com:443
             codeload.github.com:443
-            deno.com:443
-            dl.deno.land:443
             github.com:443
             jsr.io:443
             npm.jsr.io:443
@@ -36,12 +34,12 @@ jobs:
       - name: Secure the Evidence aka Checkout Code
         uses: actions/checkout@v5
 
-      - name: Setup Deno Environment
-        uses: ./.github/actions/setup-deno
+      - name: Setup Bun Environment
+        uses: ./.github/actions/setup-bun
 
       - name: Purge the Stale Visions aka Prune Share Images
         working-directory: projects/client
-        run: 'deno task prune:share-images'
+        run: 'bun run prune:share-images'
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}

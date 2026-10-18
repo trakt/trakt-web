@@ -6,11 +6,11 @@ import { pruneShareImages } from './prune-share-images.ts';
 const HEAD_CHUNK_SIZE = 50;
 
 function requireEnv(name: string): string {
-  const value = Deno.env.get(name);
+  const value = process.env[name];
 
   if (!value) {
     console.error(`Missing required env var: ${name}`);
-    Deno.exit(1);
+    process.exit(1);
   }
 
   return value;
@@ -63,5 +63,5 @@ console.log(
 );
 
 if (result.errors > 0) {
-  Deno.exit(1);
+  process.exit(1);
 }

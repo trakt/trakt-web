@@ -28,7 +28,7 @@ runs:
         path: |
           projects/client/i18n/project.inlang
           projects/client/src/lib/paraglide
-        key: paraglide-v2${{ inputs.variant && format('-{0}', inputs.variant) || '' }}-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}
+        key: paraglide-v2${{ inputs.variant && format('-{0}', inputs.variant) || '' }}-${{ hashFiles('bun.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}
 
     - name: Recalling the Runes aka Restore Paraglide Cache
       id: restore
@@ -38,7 +38,7 @@ runs:
         path: |
           projects/client/i18n/project.inlang
           projects/client/src/lib/paraglide
-        key: paraglide-v2${{ inputs.variant && format('-{0}', inputs.variant) || '' }}-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}
+        key: paraglide-v2${{ inputs.variant && format('-{0}', inputs.variant) || '' }}-${{ hashFiles('bun.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/messages/**', 'projects/client/i18n/generator/**') }}
 
     - name: Recalling the Runes aka Restore & Save Test Paraglide Cache
       id: save-test
@@ -46,7 +46,7 @@ runs:
       uses: actions/cache@v4
       with:
         path: projects/client/node_modules/vitest-i18n
-        key: paraglide-v4-test-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/generator/**') }}
+        key: paraglide-v4-test-${{ hashFiles('bun.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/generator/**') }}
 
     - name: Recalling the Runes aka Restore Test Paraglide Cache
       id: restore-test
@@ -54,4 +54,4 @@ runs:
       uses: actions/cache/restore@v4
       with:
         path: projects/client/node_modules/vitest-i18n
-        key: paraglide-v4-test-${{ hashFiles('deno.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/generator/**') }}
+        key: paraglide-v4-test-${{ hashFiles('bun.lock', 'projects/client/i18n/project.inlang/settings.json', 'projects/client/i18n/meta/**', 'projects/client/i18n/generator/**') }}
