@@ -11146,6 +11146,10 @@
       "default": "Show details",
       "description": "Aria-label for the area in the story viewer that flips the poster to show ratings, overview and sentiment."
     },
+    "tag_today_tap_details": {
+      "default": "Tap the middle for details",
+      "description": "Chip on a Today story poster, shown on touch screens until the first flip, saying a tap in the middle of the story flips the poster to show details."
+    },
     "button_label_hide_details": {
       "default": "Hide details",
       "description": "Aria-label for the area in the story viewer that flips the poster back."

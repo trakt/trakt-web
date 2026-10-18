@@ -56,7 +56,7 @@
     -webkit-tap-highlight-color: transparent;
 
     @include for-touch {
-      --tap-edge: 15%;
+      --tap-edge: 30%;
     }
 
     &[data-zone="previous"] {

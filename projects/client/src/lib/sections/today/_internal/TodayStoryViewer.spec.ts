@@ -57,6 +57,7 @@ async function tap(name: 'Next story' | 'Previous story') {
 describe('TodayStoryViewer', () => {
   beforeEach(() => {
     setAuthorization(true);
+    localStorage.removeItem('trakt-today-flip-hint-seen');
   });
 
   it('should open on the requested story', async () => {
@@ -162,6 +163,29 @@ describe('TodayStoryViewer', () => {
       screen.getByRole('button', { name: 'Hide details' }),
     ).toHaveAttribute('aria-pressed', 'true');
     expect(document.querySelector('.segment-timer')).toHaveClass('is-paused');
+  });
+
+  it('should hint that a tap in the middle flips the poster', async () => {
+    await renderViewer(null);
+
+    expect(screen.getByText('Tap the middle for details')).toBeInTheDocument();
+  });
+
+  it('should stop hinting once the poster has been flipped', async () => {
+    await renderViewer(null);
+
+    await fireEvent.click(screen.getByRole('button', { name: 'Show details' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Hide details' }));
+
+    expect(screen.queryByText('Tap the middle for details')).toBeNull();
+  });
+
+  it('should not hint again after the poster was flipped before', async () => {
+    localStorage.setItem('trakt-today-flip-hint-seen', 'true');
+
+    await renderViewer(null);
+
+    expect(screen.queryByText('Tap the middle for details')).toBeNull();
   });
 
   it('should flip the poster on a touch tap reported as a mouse click', async () => {
