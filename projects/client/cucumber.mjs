@@ -15,6 +15,7 @@ export default {
     './e2e/features/*.feature',
   ],
   import: [
+    './e2e/resolveLibAlias.mjs',
     './e2e/world.ts',
     './e2e/support/*.ts',
   ],

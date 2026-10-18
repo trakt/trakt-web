@@ -1,0 +1,29 @@
+name: Setup Bun Environment
+description: Prepares a Bun development environment with dependencies
+
+inputs:
+  bun-version:
+    description: 'Bun version to install'
+    required: false
+    default: '1.3.14'
+
+runs:
+  using: composite
+  steps:
+    - name: Secure the Evidence aka Checkout Code
+      id: checkout
+      uses: actions/checkout@v5
+
+    - name: Awaken the Node Ancient aka Install Node
+      uses: actions/setup-node@v6
+      with:
+        node-version: '24'
+
+    - name: Summon the Digital Oracle aka Install Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: ${{ inputs.bun-version }}
+
+    - name: Gather the Tools aka Install Dependencies
+      shell: bash
+      run: 'bun install --frozen-lockfile'

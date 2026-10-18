@@ -1,3 +1,4 @@
+import { readdir, readFile } from 'node:fs/promises';
 import { I18N_META_DIR } from './_internal/constants.ts';
 import { writeJsonFile } from './_internal/writeJsonFile.ts';
 
@@ -70,11 +71,11 @@ export function resolveJSONConflicts(input: string): Record<string, string> {
 
 if (import.meta.main) {
   for (const dir of [I18N_META_DIR]) {
-    for await (const dirEntry of Deno.readDir(dir)) {
-      if (dirEntry.isFile) {
+    for (const dirEntry of await readdir(dir, { withFileTypes: true })) {
+      if (dirEntry.isFile()) {
         const filePath = `${dir}/${dirEntry.name}`;
         try {
-          const data = await Deno.readTextFile(filePath);
+          const data = await readFile(filePath, 'utf8');
           const resolvedData = resolveJSONConflicts(data);
           await writeJsonFile(
             filePath,

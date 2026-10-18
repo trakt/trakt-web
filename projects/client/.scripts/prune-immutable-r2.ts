@@ -81,20 +81,20 @@ async function loadManifest(
 }
 
 async function main(): Promise<void> {
-  const KEEP = Number.parseInt(Deno.env.get('KEEP_RELEASES') ?? '10', 10);
+  const KEEP = Number.parseInt(process.env.KEEP_RELEASES ?? '10', 10);
   const MIN_AGE_HOURS = Number.parseInt(
-    Deno.env.get('MIN_AGE_HOURS') ?? '24',
+    process.env.MIN_AGE_HOURS ?? '24',
     10,
   );
-  const DRY_RUN = Deno.env.get('DRY_RUN') === '1';
+  const DRY_RUN = process.env.DRY_RUN === '1';
 
   if (!Number.isFinite(KEEP) || KEEP < 1) {
     console.error('KEEP_RELEASES must be a positive integer.');
-    Deno.exit(1);
+    process.exit(1);
   }
   if (!Number.isFinite(MIN_AGE_HOURS) || MIN_AGE_HOURS < 0) {
     console.error('MIN_AGE_HOURS must be a non-negative integer.');
-    Deno.exit(1);
+    process.exit(1);
   }
 
   const r2 = r2FromEnv();
@@ -133,7 +133,7 @@ async function main(): Promise<void> {
         `✗ failed to load manifest ${m}: ${(err as Error).message}`,
       );
       console.error('Aborting prune to avoid deleting live keys.');
-      Deno.exit(1);
+      process.exit(1);
     }
   }
 

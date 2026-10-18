@@ -4,7 +4,7 @@
  *
  * Caller supplies credentials + bucket. We sign requests with AWS SigV4
  * (the auth scheme R2 inherits from its S3 compatibility) and issue raw
- * fetch() calls — no aws-sdk dependency, runs in plain Deno on GitHub
+ * fetch() calls — no aws-sdk dependency, runs in plain Bun on GitHub
  * Actions runners.
  */
 
@@ -297,16 +297,16 @@ ${
 }
 
 export function r2FromEnv(): R2Client {
-  const accountId = Deno.env.get('CLOUDFLARE_ACCOUNT_ID');
-  const accessKey = Deno.env.get('R2_ACCESS_KEY_ID');
-  const secretKey = Deno.env.get('R2_SECRET_ACCESS_KEY');
-  const bucket = Deno.env.get('R2_IMMUTABLE_BUCKET') ?? 'trakt-web-immutable';
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  const accessKey = process.env.R2_ACCESS_KEY_ID;
+  const secretKey = process.env.R2_SECRET_ACCESS_KEY;
+  const bucket = process.env.R2_IMMUTABLE_BUCKET ?? 'trakt-web-immutable';
 
   if (!accountId || !accessKey || !secretKey) {
     console.error(
       'Missing CLOUDFLARE_ACCOUNT_ID / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY',
     );
-    Deno.exit(1);
+    process.exit(1);
   }
 
   return new R2Client({ accountId, accessKey, secretKey, bucket });

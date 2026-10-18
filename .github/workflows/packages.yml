@@ -45,12 +45,12 @@ jobs:
         with:
           token: ${{ steps.generate-token.outputs.token }}
 
-      - name: Setup Deno Environment
-        uses: ./.github/actions/setup-deno
+      - name: Setup Bun Environment
+        uses: ./.github/actions/setup-bun
 
       - name: Forge i18n Artifacts Once
         working-directory: projects/client
-        run: deno task i18n:prepare
+        run: bun run i18n:prepare
 
       - name: Decide Major Cadence
         id: cadence
@@ -72,7 +72,7 @@ jobs:
         working-directory: projects/client
         run: |
           set -euo pipefail
-          deno run -A npm:npm-check-updates@latest \
+          bun x npm-check-updates@latest \
             -p npm \
             --target minor \
             --jsonUpgraded > /tmp/minors.json
@@ -97,9 +97,9 @@ jobs:
         working-directory: projects/client
         run: |
           set -euo pipefail
-          deno run -A npm:npm-check-updates@latest \
+          bun x npm-check-updates@latest \
             -p npm --target latest  --jsonUpgraded > /tmp/all.json
-          deno run -A npm:npm-check-updates@latest \
+          bun x npm-check-updates@latest \
             -p npm --target minor   --jsonUpgraded > /tmp/minor.json
           # Majors = all-upgrades minus minor-upgrades (by key), computed
           # against the already-minor-bumped tree so we never re-offer a pin

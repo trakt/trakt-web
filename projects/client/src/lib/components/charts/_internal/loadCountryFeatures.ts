@@ -1,7 +1,7 @@
 import geoAssetUrl from '../assets/world-countries-50m.topojson?url';
 
 // Minimal GeoJSON shapes (RFC 7946), declared locally so the chart doesn't
-// depend on `@types/geojson` (not part of the Deno workspace). Only the polygon
+// depend on `@types/geojson` (not a declared dependency). Only the polygon
 // geometry the country map renders is modelled.
 type Position = number[];
 type Polygon = { type: 'Polygon'; coordinates: Position[][] };

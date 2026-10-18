@@ -5,11 +5,20 @@ describe('safeStorage', () => {
     vi.resetModules();
     vi.doMock('$app/environment', () => ({ browser: true }));
 
+    const entries = new Map<string, string>();
+    vi.stubGlobal('localStorage', {
+      getItem: (key: string) => entries.get(key) ?? null,
+      setItem: (key: string, value: string) => entries.set(key, value),
+      removeItem: (key: string) => entries.delete(key),
+    });
+
     const { safeLocalStorage } = await import('./safeStorage.ts');
 
     safeLocalStorage.setItem('test-key', 'test-value');
     expect(safeLocalStorage.getItem('test-key')).toBe('test-value');
     safeLocalStorage.removeItem('test-key');
+
+    vi.unstubAllGlobals();
   });
 
   it('falls back to a noop storage when accessing localStorage throws', async () => {
