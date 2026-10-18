@@ -16,14 +16,16 @@ describe('util: toDigitPosition', () => {
     });
 
     it('should settle onto the next digit as the step completes', () => {
-      expect(toDigitPosition({ value: 100.999, place: 0 }))
-        .toBeGreaterThan(0.99);
+      expect(toDigitPosition({ value: 100.999, place: 0 })).toBeGreaterThan(
+        0.99,
+      );
       expect(toDigitPosition({ value: 101, place: 0 })).toBe(1);
     });
 
     it('should wrap from nine to the repeated strip origin', () => {
-      expect(toDigitPosition({ value: 109.99, place: 0 }))
-        .toBeGreaterThan(9.99);
+      expect(toDigitPosition({ value: 109.99, place: 0 })).toBeGreaterThan(
+        9.99,
+      );
       expect(toDigitPosition({ value: 110, place: 0 })).toBe(0);
     });
   });
@@ -40,8 +42,10 @@ describe('util: toDigitPosition', () => {
     it('should travel through the carry window', () => {
       // Dividing a 17M value down loses low-order bits, so this is compared at
       // far more precision than a sub-pixel roll offset needs.
-      expect(toDigitPosition({ value: 17_002_059, place: 1 }))
-        .toBeCloseTo(5.5, 5);
+      expect(toDigitPosition({ value: 17_002_059, place: 1 })).toBeCloseTo(
+        5.5,
+        5,
+      );
     });
 
     it('should land flush on the next digit after the carry', () => {

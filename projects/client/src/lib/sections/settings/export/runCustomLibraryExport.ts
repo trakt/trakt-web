@@ -9,15 +9,21 @@ const mediaSchema = z.object({
   ids: z.object({ trakt: z.number().int().positive() }),
 });
 const entriesSchema = z.array(
-  z.discriminatedUnion('type', [
-    z.object({ type: z.literal('movie'), movie: mediaSchema }),
-    z.object({ type: z.literal('episode'), episode: mediaSchema }),
-  ]).and(z.object({
-    available_on: z.array(z.object({ name: z.string() })).refine(
-      (services) => services.every((service) => service.name !== 'plex'),
-      'Plex items cannot be exported for custom library removal.',
+  z
+    .discriminatedUnion('type', [
+      z.object({ type: z.literal('movie'), movie: mediaSchema }),
+      z.object({ type: z.literal('episode'), episode: mediaSchema }),
+    ])
+    .and(
+      z.object({
+        available_on: z
+          .array(z.object({ name: z.string() }))
+          .refine(
+            (services) => services.every((service) => service.name !== 'plex'),
+            'Plex items cannot be exported for custom library removal.',
+          ),
+      }),
     ),
-  })),
 );
 
 type CustomLibraryExportOptions = ExportOptions & {
@@ -40,8 +46,7 @@ export async function runCustomLibraryExport({
     signal?.throwIfAborted();
     onStatus({ type: 'fetch', item: 'custom-library' });
     await processEndpoint({
-      path:
-        'sync/collection/media?available_on=other&extended=metadata,gdpr,available_on',
+      path: 'sync/collection/media?available_on=other&extended=metadata,gdpr,available_on',
       signal,
       onPage: (data, { page, pageCount }) => {
         const entries = entriesSchema.parse(data);
@@ -60,7 +65,7 @@ export async function runCustomLibraryExport({
     signal?.throwIfAborted();
     onStatus({ type: 'zip' });
     const archive = await new Promise<Uint8Array>((resolve, reject) => {
-      zip(files, (err, out) => err ? reject(err) : resolve(out));
+      zip(files, (err, out) => (err ? reject(err) : resolve(out)));
     });
     signal?.throwIfAborted();
     downloadFile(

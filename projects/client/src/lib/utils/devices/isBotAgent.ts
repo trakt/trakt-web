@@ -52,6 +52,6 @@ const bots = [
 
 export function isBotAgent(userAgent: string | Nil): boolean {
   return bots.some((bot) =>
-    Boolean(userAgent?.toLowerCase().includes(bot.toLowerCase()))
+    Boolean(userAgent?.toLowerCase().includes(bot.toLowerCase())),
   );
 }

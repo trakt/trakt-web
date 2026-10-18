@@ -31,8 +31,4 @@ export const YirPersonSchema = z.object({
 export type YirPerson = z.infer<typeof YirPersonSchema>;
 export type YirPersonTitle = z.infer<typeof YirPersonTitleSchema>;
 
-export type YirPeopleType =
-  | 'actors'
-  | 'actresses'
-  | 'directors'
-  | 'writers';
+export type YirPeopleType = 'actors' | 'actresses' | 'directors' | 'writers';

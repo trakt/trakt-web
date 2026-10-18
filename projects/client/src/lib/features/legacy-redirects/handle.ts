@@ -14,9 +14,10 @@ export const handle: Handle = ({ event, resolve }) => {
   const search = event.url.search;
   // Merge the incoming query string, accounting for targets (e.g. the episode
   // drawer) that already carry their own params.
-  const location = search && target.includes('?')
-    ? `${target}&${search.slice(1)}`
-    : `${target}${search}`;
+  const location =
+    search && target.includes('?')
+      ? `${target}&${search.slice(1)}`
+      : `${target}${search}`;
 
   return new Response(null, {
     status: 301,

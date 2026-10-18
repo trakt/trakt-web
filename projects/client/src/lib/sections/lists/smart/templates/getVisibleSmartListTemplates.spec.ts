@@ -37,8 +37,7 @@ describe('util: getVisibleSmartListTemplates', () => {
 
     expect(
       getVisibleSmartListTemplates({ templates, lists: [], mode: 'media' }),
-    )
-      .toEqual(templates);
+    ).toEqual(templates);
   });
 
   it('should keep showing templates to a user with many lists', () => {
@@ -127,8 +126,9 @@ describe('util: getVisibleSmartListTemplates', () => {
     ];
 
     expect(
-      getVisibleSmartListTemplates({ templates, lists: [], mode: 'show' })
-        .map(({ id }) => id),
+      getVisibleSmartListTemplates({ templates, lists: [], mode: 'show' }).map(
+        ({ id }) => id,
+      ),
     ).toEqual(['whodunits', 'time-twisters']);
   });
 });

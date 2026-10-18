@@ -11,9 +11,10 @@ export const EPISODE_IDS: IdPriority = ['tvdb', 'trakt', 'tmdb', 'imdb'];
 // trusted as episode ids when no positional numbers accompany them.
 export const POSITIONAL_EPISODE_IDS: IdPriority = ['tvdb', 'trakt'];
 
-export function toEpisodeIdPriority(
-  item: { season?: number; episode?: number },
-): IdPriority {
+export function toEpisodeIdPriority(item: {
+  season?: number;
+  episode?: number;
+}): IdPriority {
   const isPositionalShaped = item.season != null && item.episode != null;
   return isPositionalShaped ? POSITIONAL_EPISODE_IDS : EPISODE_IDS;
 }

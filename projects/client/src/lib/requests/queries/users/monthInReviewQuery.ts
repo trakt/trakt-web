@@ -30,9 +30,7 @@ export type UserReview = z.infer<typeof UserReviewSchema>;
 // `streaming_services`) reuse the same mapper.
 type ReviewStats = Pick<MonthInReviewResponse, 'stats' | 'first_watched'>;
 
-export function mapToFirstPlay(
-  response: ReviewStats,
-): MediaEntry | null {
+export function mapToFirstPlay(response: ReviewStats): MediaEntry | null {
   if (!response.first_watched) {
     return null;
   }
@@ -42,9 +40,7 @@ export function mapToFirstPlay(
     : mapToMovieEntry(response.first_watched.movie);
 }
 
-export function mapToUserReview(
-  response: ReviewStats,
-): UserReview {
+export function mapToUserReview(response: ReviewStats): UserReview {
   return {
     playCount: response.stats.all.play_counts.total,
     hoursWatched: Math.round(response.stats.all.minutes.total / 60),
@@ -56,21 +52,22 @@ export function mapToUserReview(
   };
 }
 
-const monthInReviewRequest = (
-  { fetch, month, year, slug }: MonthInReviewParams,
-) =>
-  api({ fetch })
-    .users
-    .month_in_review({
-      params: {
-        id: slug,
-        month,
-        year,
-      },
-      query: {
-        extended: 'images',
-      },
-    });
+const monthInReviewRequest = ({
+  fetch,
+  month,
+  year,
+  slug,
+}: MonthInReviewParams) =>
+  api({ fetch }).users.month_in_review({
+    params: {
+      id: slug,
+      month,
+      year,
+    },
+    query: {
+      extended: 'images',
+    },
+  });
 
 export const monthInReviewQuery = defineQuery({
   key: 'monthInReview:v2',

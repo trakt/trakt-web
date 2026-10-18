@@ -56,8 +56,6 @@ function mapPerson(raw: RawYirPerson): YirPerson {
   };
 }
 
-export function mapToYirPeople(
-  response: RawYirPerson[],
-): YirPerson[] {
+export function mapToYirPeople(response: RawYirPerson[]): YirPerson[] {
   return response.map(mapPerson);
 }

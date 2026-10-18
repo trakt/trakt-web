@@ -31,14 +31,12 @@ export function useLocale(): LocaleStore {
   }
   const locale =
     getContext<BehaviorSubject<AvailableLocale>>(LOCALE_CONTEXT_KEY) ??
-      setContext(
-        LOCALE_CONTEXT_KEY,
-        new BehaviorSubject(
-          setLocale(
-            globalThis?.document?.documentElement?.lang ?? defaultLocale,
-          ),
-        ),
-      );
+    setContext(
+      LOCALE_CONTEXT_KEY,
+      new BehaviorSubject(
+        setLocale(globalThis?.document?.documentElement?.lang ?? defaultLocale),
+      ),
+    );
 
   return {
     subscribe: locale.subscribe.bind(locale),

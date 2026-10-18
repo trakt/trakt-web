@@ -30,26 +30,26 @@ export function useSmartListTemplates(mode$: Observable<DiscoverMode>) {
         templates: $templates,
         lists: $lists,
         mode: $mode,
-      })
+      }),
     ),
   );
 
-  const presentation = combineLatest([lists, areListsLoading, isDismissed])
-    .pipe(
-      filter(([, $isLoading]) => !$isLoading),
-      map(([$lists, , $isHidden]) =>
-        getSmartListTemplatesPresentation({
-          listCount: $lists.length,
-          isHidden: $isHidden,
-        })
-      ),
-      startWith(null),
-    );
-
-  const isLoading = anyTrue([
+  const presentation = combineLatest([
+    lists,
     areListsLoading,
-    query.pipe(map(toLoadingState)),
-  ]);
+    isDismissed,
+  ]).pipe(
+    filter(([, $isLoading]) => !$isLoading),
+    map(([$lists, , $isHidden]) =>
+      getSmartListTemplatesPresentation({
+        listCount: $lists.length,
+        isHidden: $isHidden,
+      }),
+    ),
+    startWith(null),
+  );
+
+  const isLoading = anyTrue([areListsLoading, query.pipe(map(toLoadingState))]);
 
   return { templates, presentation, isLoading, hide: dismiss };
 }

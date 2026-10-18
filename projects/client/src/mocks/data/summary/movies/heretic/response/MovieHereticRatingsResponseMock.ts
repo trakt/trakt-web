@@ -1,10 +1,10 @@
 import type { RatingsResponse } from '@trakt/api';
 
 export const MovieHereticRatingsResponseMock: RatingsResponse = {
-  'trakt': {
-    'rating': 7.22561,
-    'votes': 3803,
-    'distribution': {
+  trakt: {
+    rating: 7.22561,
+    votes: 3803,
+    distribution: {
       '1': 22,
       '2': 20,
       '3': 31,
@@ -17,25 +17,25 @@ export const MovieHereticRatingsResponseMock: RatingsResponse = {
       '10': 262,
     },
   },
-  'tmdb': {
-    'rating': 7.14,
-    'votes': 563,
-    'link': 'https://www.themoviedb.org/movie/1138194',
+  tmdb: {
+    rating: 7.14,
+    votes: 563,
+    link: 'https://www.themoviedb.org/movie/1138194',
   },
-  'imdb': {
-    'rating': 7.1,
-    'votes': 49905,
-    'link': 'https://www.imdb.com/title/tt28015403',
+  imdb: {
+    rating: 7.1,
+    votes: 49905,
+    link: 'https://www.imdb.com/title/tt28015403',
   },
-  'metascore': {
-    'rating': 71,
-    'link': 'https://www.imdb.com/title/tt28015403/criticreviews',
+  metascore: {
+    rating: 71,
+    link: 'https://www.imdb.com/title/tt28015403/criticreviews',
   },
-  'rotten_tomatoes': {
-    'rating': 0,
-    'user_rating': 0,
-    'link': 'https://www.rottentomatoes.com/m/heretic_2023',
-    'state': null,
-    'user_state': null,
+  rotten_tomatoes: {
+    rating: 0,
+    user_rating: 0,
+    link: 'https://www.rottentomatoes.com/m/heretic_2023',
+    state: null,
+    user_state: null,
   },
 };

@@ -76,10 +76,12 @@ describe('getStoredDismissals', () => {
 
     expect(getStoredDismissals()).toEqual({
       version: 2,
-      items: [{
-        ...v1,
-        id: v1.id.toString(),
-      }],
+      items: [
+        {
+          ...v1,
+          id: v1.id.toString(),
+        },
+      ],
     });
   });
 

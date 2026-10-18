@@ -22,16 +22,18 @@ function getUnwatchedEpisodesForSeason(
   return { number: seasonNumber, episodes };
 }
 
-export function getEpisodesUntil(
-  { previousSeasons, episode, watchedBySeason }: GetEpisodesUntilProps,
-) {
+export function getEpisodesUntil({
+  previousSeasons,
+  episode,
+  watchedBySeason,
+}: GetEpisodesUntilProps) {
   const previousSeasonEpisodes = previousSeasons
     .map((season) =>
       getUnwatchedEpisodesForSeason(
         season.number,
         season.episodes.count,
         watchedBySeason.get(season.number) ?? new Set(),
-      )
+      ),
     )
     .filter((season) => season.episodes.length > 0);
 

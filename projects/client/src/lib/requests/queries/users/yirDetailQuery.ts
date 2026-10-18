@@ -12,9 +12,12 @@ export type YirDetailParams = {
   slurm?: string;
 } & ApiParams;
 
-const yirDetailRequest = async (
-  { fetch, slug, year, slurm }: YirDetailParams,
-) => {
+const yirDetailRequest = async ({
+  fetch,
+  slug,
+  year,
+  slurm,
+}: YirDetailParams) => {
   const response = await fetchReviewResource({
     fetch,
     path: `/users/${slug}/yir/${year}`,
@@ -31,7 +34,7 @@ export const yirDetailQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.year, params.slurm],
   request: yirDetailRequest,
-  mapper: (response) => response.body ? mapToYirDetail(response.body) : null,
+  mapper: (response) => (response.body ? mapToYirDetail(response.body) : null),
   schema: YirDetailSchema.nullable(),
   ttl: time.hours(1),
 });

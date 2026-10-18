@@ -3,8 +3,9 @@ type HasReactionRoomParams = {
   limit?: number;
 };
 
-export function hasReactionRoom(
-  { count, limit }: HasReactionRoomParams,
-): boolean {
+export function hasReactionRoom({
+  count,
+  limit,
+}: HasReactionRoomParams): boolean {
   return limit == null || count < limit;
 }

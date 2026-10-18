@@ -4,13 +4,13 @@ import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSi
 
 export const UpNextMappedMock: UpNextEntry[] = [
   {
-    'completed': 0,
-    'remaining': 20,
-    'show': ShowSiloMappedMock,
-    'total': 20,
-    'minutesLeft': 471,
-    'lastWatchedAt': new Date('2025-01-28T12:53:21.000Z'),
-    'isLatestAired': false,
+    completed: 0,
+    remaining: 20,
+    show: ShowSiloMappedMock,
+    total: 20,
+    minutesLeft: 471,
+    lastWatchedAt: new Date('2025-01-28T12:53:21.000Z'),
+    isLatestAired: false,
     ...EpisodeSiloMappedMock,
   },
 ];

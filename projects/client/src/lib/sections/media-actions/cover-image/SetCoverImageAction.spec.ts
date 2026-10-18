@@ -60,8 +60,9 @@ describe('SetCoverImageAction', () => {
       expect(dialog.querySelector('img')).toHaveAttribute('src', COVER_URL);
     });
 
-    expect(within(dialog).getByText('Heretic', { exact: false }))
-      .toBeInTheDocument();
+    expect(
+      within(dialog).getByText('Heretic', { exact: false }),
+    ).toBeInTheDocument();
     expect(requests).to.deep.equal([]);
   });
 
@@ -70,14 +71,10 @@ describe('SetCoverImageAction', () => {
 
     const { user, dialog } = await openConfirmation();
 
-    await user.click(
-      within(dialog).getByRole('button', { name: /^yes$/i }),
-    );
+    await user.click(within(dialog).getByRole('button', { name: /^yes$/i }));
 
     await waitFor(() => {
-      expect(requests).to.deep.equal([
-        { cover_type: 'movie', cover_id: 1000 },
-      ]);
+      expect(requests).to.deep.equal([{ cover_type: 'movie', cover_id: 1000 }]);
     });
   });
 });

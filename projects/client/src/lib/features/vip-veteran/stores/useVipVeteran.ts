@@ -15,7 +15,7 @@ export function useVipVeteran(slug$: Observable<string>) {
   return {
     veteran: combineLatest([response, isEnabled]).pipe(
       map(([$response, enabled]) =>
-        enabled ? $response.data?.veteran ?? null : null
+        enabled ? ($response.data?.veteran ?? null) : null,
       ),
     ),
   };

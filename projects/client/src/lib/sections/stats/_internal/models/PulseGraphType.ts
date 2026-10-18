@@ -1,3 +1,1 @@
-export type PulseGraphType =
-  | 'peakHours'
-  | 'screenTimeDaily';
+export type PulseGraphType = 'peakHours' | 'screenTimeDaily';

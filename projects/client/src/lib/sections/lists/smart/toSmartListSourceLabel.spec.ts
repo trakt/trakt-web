@@ -8,8 +8,8 @@ describe('toSmartListSourceLabel', () => {
   });
 
   it.each(SmartListSourceSchema.options)('labels %s', (source) => {
-    expect(toSmartListSourceLabel(source)).to.be.a('string').with.length.above(
-      0,
-    );
+    expect(toSmartListSourceLabel(source))
+      .to.be.a('string')
+      .with.length.above(0);
   });
 });

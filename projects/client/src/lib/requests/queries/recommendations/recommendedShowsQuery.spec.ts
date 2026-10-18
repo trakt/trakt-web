@@ -7,10 +7,7 @@ import { recommendedShowsQuery } from './recommendedShowsQuery.ts';
 describe('recommendedShowsQuery', () => {
   it('should query recommended shows', async () => {
     const result = await runQuery({
-      factory: () =>
-        createTestBedQuery(
-          recommendedShowsQuery(),
-        ),
+      factory: () => createTestBedQuery(recommendedShowsQuery()),
       mapper: (response) => response?.data,
     });
 

@@ -5,13 +5,12 @@ type RemoveFromFavoritesParams = {
   body: FavoritesRequest;
 } & ApiParams;
 
-export function removeFromFavoritesRequest(
-  { body, fetch }: RemoveFromFavoritesParams,
-): Promise<boolean> {
+export function removeFromFavoritesRequest({
+  body,
+  fetch,
+}: RemoveFromFavoritesParams): Promise<boolean> {
   return api({ fetch })
-    .sync
-    .favorites
-    .remove({
+    .sync.favorites.remove({
       body,
     })
     .then(({ status }) => status === 200);

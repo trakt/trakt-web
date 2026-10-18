@@ -28,7 +28,7 @@ export function useTodayDayCounts({ days, now }: TodayDayCountsParams) {
     const rangeCounts = ranges.map((range) =>
       useInfiniteQuery(
         followingActivityQuery({ limit: 1, ...toActivityWindow(range) }),
-      ).pipe(map(($query) => toCount($query.data?.pages.at(0))))
+      ).pipe(map(($query) => toCount($query.data?.pages.at(0)))),
     );
 
     return combineLatest(rangeCounts).pipe(
@@ -37,8 +37,8 @@ export function useTodayDayCounts({ days, now }: TodayDayCountsParams) {
   });
 
   return combineLatest(counts).pipe(
-    map((entries): Record<string, number | null> =>
-      Object.fromEntries(entries)
+    map(
+      (entries): Record<string, number | null> => Object.fromEntries(entries),
     ),
   );
 }

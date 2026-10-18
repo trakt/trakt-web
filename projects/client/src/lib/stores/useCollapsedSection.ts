@@ -1,10 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { safeLocalStorage } from '../utils/storage/safeStorage.ts';
 
-export function useCollapsedSection(
-  key: string,
-  defaultValue = false,
-) {
+export function useCollapsedSection(key: string, defaultValue = false) {
   const isCollapsed = new BehaviorSubject(
     JSON.parse(safeLocalStorage.getItem(key) ?? JSON.stringify(defaultValue)),
   );
@@ -13,10 +10,7 @@ export function useCollapsedSection(
     isCollapsed: isCollapsed.asObservable(),
     toggle: () => {
       const newValue = !isCollapsed.value;
-      safeLocalStorage.setItem(
-        key,
-        JSON.stringify(newValue),
-      );
+      safeLocalStorage.setItem(key, JSON.stringify(newValue));
       isCollapsed.next(newValue);
     },
   };

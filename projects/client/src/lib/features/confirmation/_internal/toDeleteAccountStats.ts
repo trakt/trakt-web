@@ -7,11 +7,13 @@ type ToDeleteAccountStatsParams = {
   now: Date;
 };
 
-const toKnownCount = (count: number) => count > 0 ? count : null;
+const toKnownCount = (count: number) => (count > 0 ? count : null);
 
-export function toDeleteAccountStats(
-  { joinedAt, stats, now }: ToDeleteAccountStatsParams,
-) {
+export function toDeleteAccountStats({
+  joinedAt,
+  stats,
+  now,
+}: ToDeleteAccountStatsParams) {
   return {
     years: toKnownCount(joinedAt ? getYearsDifference(now, joinedAt) : 0),
     hours: toKnownCount(Math.floor((stats?.totalMinutes ?? 0) / 60)),

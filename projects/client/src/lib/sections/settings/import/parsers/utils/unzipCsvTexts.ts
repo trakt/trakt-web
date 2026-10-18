@@ -10,9 +10,10 @@ interface CsvText {
   text: string;
 }
 
-export function unzipCsvTexts(
-  { buffer, isMatch }: UnzipCsvTextsParams,
-): CsvText[] {
+export function unzipCsvTexts({
+  buffer,
+  isMatch,
+}: UnzipCsvTextsParams): CsvText[] {
   const unzipped = unzipSync(new Uint8Array(buffer), {
     filter: (file) => isMatch(file.name.split('/').at(-1) ?? ''),
   });

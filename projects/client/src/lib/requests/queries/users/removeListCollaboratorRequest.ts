@@ -6,9 +6,11 @@ type RemoveListCollaboratorParams = {
   userSlug: string;
 } & ApiParams;
 
-export async function removeListCollaboratorRequest(
-  { fetch, listId, userSlug }: RemoveListCollaboratorParams,
-): Promise<boolean> {
+export async function removeListCollaboratorRequest({
+  fetch,
+  listId,
+  userSlug,
+}: RemoveListCollaboratorParams): Promise<boolean> {
   const response = await rawApiFetch({
     fetch,
     path: `/lists/${listId}/collaborators/${userSlug}`,

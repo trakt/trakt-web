@@ -12,7 +12,7 @@ export function useTitlePool() {
 
   const titles = query.pipe(
     map(($query) =>
-      toGameTitles($query.data?.pages.flatMap((page) => page.entries) ?? [])
+      toGameTitles($query.data?.pages.flatMap((page) => page.entries) ?? []),
     ),
   );
 

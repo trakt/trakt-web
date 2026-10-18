@@ -47,9 +47,7 @@ describe('store: useFreshRatings', () => {
 
   it('should vouch for a watch older than the snapshot', async () => {
     const { hasCheckedRatingsSince, invalidateQueries } =
-      await renderFreshRatings(
-        new Date(watchedAt.getTime() + time.minutes(1)),
-      );
+      await renderFreshRatings(new Date(watchedAt.getTime() + time.minutes(1)));
 
     expect(hasCheckedRatingsSince(watchedAt)).toBe(true);
     expect(invalidateQueries).not.toHaveBeenCalled();
@@ -71,9 +69,7 @@ describe('store: useFreshRatings', () => {
 
   it('should refresh the snapshot once per watch', async () => {
     const { hasCheckedRatingsSince, invalidateQueries } =
-      await renderFreshRatings(
-        staleSnapshot,
-      );
+      await renderFreshRatings(staleSnapshot);
 
     hasCheckedRatingsSince(watchedAt);
     hasCheckedRatingsSince(watchedAt);
@@ -90,9 +86,7 @@ describe('store: useFreshRatings', () => {
 
   it('should refresh again for a watch newer than the last refresh', async () => {
     const { hasCheckedRatingsSince, invalidateQueries } =
-      await renderFreshRatings(
-        staleSnapshot,
-      );
+      await renderFreshRatings(staleSnapshot);
 
     hasCheckedRatingsSince(watchedAt);
     hasCheckedRatingsSince(new Date(watchedAt.getTime() + time.minutes(1)));

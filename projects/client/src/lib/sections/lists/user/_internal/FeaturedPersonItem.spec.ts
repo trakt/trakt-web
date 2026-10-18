@@ -25,11 +25,12 @@ describe('FeaturedPersonItem', () => {
       },
     });
 
-    expect(await screen.findByRole('img', { name: /Rebecca Ferguson/ }))
-      .toHaveAttribute(
-        'src',
-        'https://walter.trakt.tv/images/people/2/headshots/thumb/rebecca.webp',
-      );
+    expect(
+      await screen.findByRole('img', { name: /Rebecca Ferguson/ }),
+    ).toHaveAttribute(
+      'src',
+      'https://walter.trakt.tv/images/people/2/headshots/thumb/rebecca.webp',
+    );
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     expect(requestPerson).not.toHaveBeenCalled();
   });

@@ -6,9 +6,11 @@ type ToSwipeGuessParams = {
   threshold: number;
 };
 
-export function toSwipeGuess(
-  { startY, endY, threshold }: ToSwipeGuessParams,
-): Guess | null {
+export function toSwipeGuess({
+  startY,
+  endY,
+  threshold,
+}: ToSwipeGuessParams): Guess | null {
   if (startY === null || endY === undefined) return null;
 
   const distance = endY - startY;

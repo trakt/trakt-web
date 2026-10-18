@@ -17,12 +17,10 @@ import type { UserCommentResponse } from '@trakt/api';
 import { z } from 'zod';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
-type UserCommentsParams =
-  & {
-    slug: string;
-  }
-  & ApiParams
-  & PaginationParams;
+type UserCommentsParams = {
+  slug: string;
+} & ApiParams &
+  PaginationParams;
 
 const MovieShowCommentEntrySchema = z.object({
   key: z.string(),
@@ -48,13 +46,13 @@ export const UserCommentEntrySchema = z.discriminatedUnion('type', [
 export type UserCommentEntry = z.infer<typeof UserCommentEntrySchema>;
 
 const SUPPORTED_COMMENT_TYPES = ['movie', 'show', 'episode'] as const;
-type SupportedCommentType = typeof SUPPORTED_COMMENT_TYPES[number];
+type SupportedCommentType = (typeof SUPPORTED_COMMENT_TYPES)[number];
 // 0.4.27 flattened the discriminated comment union into one flat object with
 // nullish media fields, so narrow the `type` via intersection (Extract would
 // collapse a non-union object to `never`); guard the nullish fields at use.
-type SupportedCommentResponse =
-  & UserCommentResponse
-  & { type: SupportedCommentType };
+type SupportedCommentResponse = UserCommentResponse & {
+  type: SupportedCommentType;
+};
 
 const isSupportedComment = (
   item: UserCommentResponse,
@@ -99,15 +97,16 @@ const mapToCommentEntry = (
   }
 };
 
-const userCommentsRequest = (
-  { fetch, slug, limit, page }: UserCommentsParams,
-) =>
-  api({ fetch })
-    .users
-    .comments({
-      params: { id: slug, comment_type: 'all', type: 'all' },
-      query: { extended: 'full,images', page, limit },
-    });
+const userCommentsRequest = ({
+  fetch,
+  slug,
+  limit,
+  page,
+}: UserCommentsParams) =>
+  api({ fetch }).users.comments({
+    params: { id: slug, comment_type: 'all', type: 'all' },
+    query: { extended: 'full,images', page, limit },
+  });
 
 export const userCommentsQuery = defineInfiniteQuery({
   key: 'userComments',
@@ -123,9 +122,7 @@ export const userCommentsQuery = defineInfiniteQuery({
   ],
   request: userCommentsRequest,
   mapper: (response) => ({
-    entries: response.body
-      .filter(isSupportedComment)
-      .map(mapToCommentEntry),
+    entries: response.body.filter(isSupportedComment).map(mapToCommentEntry),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(UserCommentEntrySchema),

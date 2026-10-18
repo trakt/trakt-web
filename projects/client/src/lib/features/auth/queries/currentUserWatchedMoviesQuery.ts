@@ -14,9 +14,10 @@ export const WatchMovieSchema = WatchedMediaSchema.extend({
 });
 export type WatchedMovie = z.infer<typeof WatchMovieSchema>;
 
-export function mapWatchedMovieResponse(
-  [id, timestamps]: [string, string[]],
-): WatchedMovie {
+export function mapWatchedMovieResponse([id, timestamps]: [
+  string,
+  string[],
+]): WatchedMovie {
   return {
     id: Number(id),
     watchedAt: getLastWatchedAt(timestamps),
@@ -27,32 +28,28 @@ export function mapWatchedMovieResponse(
 
 type CurrentUserWatchedMoviesParams = PaginationParams & ApiParams;
 
-const currentUserWatchedMoviesRequest = (
-  { fetch, page = 1, limit }: CurrentUserWatchedMoviesParams,
-) => {
+const currentUserWatchedMoviesRequest = ({
+  fetch,
+  page = 1,
+  limit,
+}: CurrentUserWatchedMoviesParams) => {
   const pagination = {
     page,
     limit,
   };
 
-  return api({ fetch })
-    .users
-    .watched
-    .minimal
-    .movies({
-      params: { id: 'me' },
-      query: {
-        extended: 'min',
-        ...pagination,
-      },
-    });
+  return api({ fetch }).users.watched.minimal.movies({
+    params: { id: 'me' },
+    query: {
+      extended: 'min',
+      ...pagination,
+    },
+  });
 };
 
 export const currentUserWatchedMoviesQuery = defineInfiniteQuery({
   key: 'currentUserWatchedMovies',
-  invalidations: [
-    InvalidateAction.MarkAsWatched('movie'),
-  ],
+  invalidations: [InvalidateAction.MarkAsWatched('movie')],
   dependencies: (params) => [params.limit],
   request: currentUserWatchedMoviesRequest,
   mapper: (response, { page = 1 }) => ({

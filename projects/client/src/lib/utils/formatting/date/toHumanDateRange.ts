@@ -9,9 +9,11 @@ type ToHumanDateRangeParams = {
   locale: AvailableLocale;
 };
 
-export function toHumanDateRange(
-  { start, end, locale }: ToHumanDateRangeParams,
-): string {
+export function toHumanDateRange({
+  start,
+  end,
+  locale,
+}: ToHumanDateRangeParams): string {
   return new Intl.DateTimeFormat(getIntlLocale(locale), {
     day: 'numeric',
     month: 'long',

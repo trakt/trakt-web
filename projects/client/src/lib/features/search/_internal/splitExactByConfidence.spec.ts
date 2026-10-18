@@ -4,7 +4,7 @@ import { splitExactByConfidence } from './splitExactByConfidence.ts';
 
 type ExactItem = MediaSearchResult['items'][number];
 
-const item = (key: string, score: number) => ({ key, score } as ExactItem);
+const item = (key: string, score: number) => ({ key, score }) as ExactItem;
 
 describe('splitExactByConfidence', () => {
   it('should lead with a unique or year-pinned hit', () => {

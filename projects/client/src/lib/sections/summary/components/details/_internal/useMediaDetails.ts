@@ -26,9 +26,11 @@ import { toCrewMemberWithJob } from './toCrewMemberWithJob.ts';
 const ENDED_STATUSES = new Set(['ended', 'canceled']);
 
 function isCurrentlyAiring(show: ShowEntry, now: Date): boolean {
-  return !isMaxDate(show.airDate) &&
+  return (
+    !isMaxDate(show.airDate) &&
     show.airDate <= now &&
-    !ENDED_STATUSES.has(show.status);
+    !ENDED_STATUSES.has(show.status)
+  );
 }
 
 function originalTitle(media: MediaEntry) {
@@ -60,9 +62,10 @@ function mediaStatus(media: MediaEntry) {
   return {
     key: 'status',
     title: m.header_status(),
-    values: media.year && media.type === 'movie'
-      ? undefined
-      : [toTranslatedStatus(media.status)],
+    values:
+      media.year && media.type === 'movie'
+        ? undefined
+        : [toTranslatedStatus(media.status)],
   };
 }
 
@@ -97,11 +100,13 @@ function episodeAirDate(episode: EpisodeEntry) {
     key: 'air-date',
     title: isUpcomingItem ? m.header_airs() : m.header_aired(),
     values: [
-      isTba ? m.tag_text_tba() : toHumanDay({
-        date: episode.effectiveReleaseDate,
-        locale: getLocale(),
-        format: 'long-with-time',
-      }),
+      isTba
+        ? m.tag_text_tba()
+        : toHumanDay({
+            date: episode.effectiveReleaseDate,
+            locale: getLocale(),
+            format: 'long-with-time',
+          }),
     ],
   };
 }
@@ -161,12 +166,11 @@ function postCredits(entry: MediaEntry | EpisodeEntry) {
   return {
     key: 'post-credits',
     title: m.header_post_credits(),
-    values: entry.postCredits
-      .map((scene) => {
-        return scene === 'during'
-          ? m.text_during_credits()
-          : m.text_after_credits();
-      }),
+    values: entry.postCredits.map((scene) => {
+      return scene === 'during'
+        ? m.text_during_credits()
+        : m.text_after_credits();
+    }),
   };
 }
 
@@ -188,7 +192,7 @@ function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
                 person: director,
                 position: 'directing',
                 type,
-              })
+              }),
             ),
         };
       case 'show':
@@ -202,7 +206,7 @@ function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
                 person: creator,
                 position: 'created by',
                 type,
-              })
+              }),
             ),
         };
     }
@@ -218,16 +222,13 @@ function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
           person: writer,
           position: 'writing',
           type,
-        })
+        }),
       ),
     },
   ];
 }
 
-function metaDetails(
-  media: MediaEntry,
-  studios: MediaStudio[],
-) {
+function metaDetails(media: MediaEntry, studios: MediaStudio[]) {
   return [
     {
       key: 'country',
@@ -240,7 +241,7 @@ function metaDetails(
       key: 'language',
       title: m.header_language(),
       values: media.languages?.map((language) =>
-        toLanguageName(language, languageTag())
+        toLanguageName(language, languageTag()),
       ),
     },
     {
@@ -287,15 +288,12 @@ export function useMediaDetails(
   }
 
   const now = new Date();
-  const showAirsDetails = props.type === 'show'
-    ? [showAirs(props.media, now)]
-    : [];
-  const totalRuntimeDetails = props.type === 'show'
-    ? [totalRuntime(props.media)]
-    : [];
-  const endingDetails = props.type === 'show' && isEndingEnabled
-    ? [showEnding(props.media)]
-    : [];
+  const showAirsDetails =
+    props.type === 'show' ? [showAirs(props.media, now)] : [];
+  const totalRuntimeDetails =
+    props.type === 'show' ? [totalRuntime(props.media)] : [];
+  const endingDetails =
+    props.type === 'show' && isEndingEnabled ? [showEnding(props.media)] : [];
 
   return [
     ...showAirsDetails,

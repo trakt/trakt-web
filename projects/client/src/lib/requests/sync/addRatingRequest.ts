@@ -5,13 +5,12 @@ type AddRatingParams = {
   body: RatingsSyncRequest;
 } & ApiParams;
 
-export function addRatingRequest(
-  { body, fetch }: AddRatingParams,
-): Promise<boolean> {
+export function addRatingRequest({
+  body,
+  fetch,
+}: AddRatingParams): Promise<boolean> {
   return api({ fetch })
-    .sync
-    .ratings
-    .add({
+    .sync.ratings.add({
       body,
     })
     .then(({ status }) => status === 201);

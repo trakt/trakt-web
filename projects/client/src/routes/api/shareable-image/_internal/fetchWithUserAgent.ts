@@ -3,9 +3,10 @@ type FetchWithUserAgentProps<TFetch extends typeof globalThis.fetch> = {
   fetch: TFetch;
 };
 
-export function fetchWithUserAgent<TFetch extends typeof globalThis.fetch>(
-  { userAgent, fetch }: FetchWithUserAgentProps<TFetch>,
-): TFetch {
+export function fetchWithUserAgent<TFetch extends typeof globalThis.fetch>({
+  userAgent,
+  fetch,
+}: FetchWithUserAgentProps<TFetch>): TFetch {
   return ((input: Parameters<TFetch>[0], init?: Parameters<TFetch>[1]) => {
     const headers = new Headers(init?.headers);
     if (userAgent) {

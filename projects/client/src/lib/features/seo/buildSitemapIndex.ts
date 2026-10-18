@@ -6,15 +6,18 @@ type BuildSitemapIndexParams = {
   lastmod: string;
 };
 
-export function buildSitemapIndex(
-  { origin, paths, lastmod }: BuildSitemapIndexParams,
-): string {
+export function buildSitemapIndex({
+  origin,
+  paths,
+  lastmod,
+}: BuildSitemapIndexParams): string {
   const sitemaps = paths
-    .map((path) =>
-      `  <sitemap>
+    .map(
+      (path) =>
+        `  <sitemap>
     <loc>${escapeXml(`${origin}${path}`)}</loc>
     <lastmod>${lastmod}</lastmod>
-  </sitemap>`
+  </sitemap>`,
     )
     .join('\n');
 

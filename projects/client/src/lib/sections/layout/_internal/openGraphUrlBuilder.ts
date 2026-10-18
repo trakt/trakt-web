@@ -7,9 +7,11 @@ type OpenGraphUrlBuilderProps = {
   slug: string;
 };
 
-export function openGraphUrlBuilder(
-  { url, type, slug }: OpenGraphUrlBuilderProps,
-): HttpsUrl {
+export function openGraphUrlBuilder({
+  url,
+  type,
+  slug,
+}: OpenGraphUrlBuilderProps): HttpsUrl {
   const root = url.origin;
   const urlBuilder = UrlBuilder.api.shareableImage;
 

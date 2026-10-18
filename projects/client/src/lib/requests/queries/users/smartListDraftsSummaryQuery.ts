@@ -9,15 +9,12 @@ import {
 
 type SmartListDraftsSummaryParams = ApiParams;
 
-const smartListDraftsSummaryRequest = (
-  { fetch }: SmartListDraftsSummaryParams,
-) =>
-  api({ fetch })
-    .users
-    .smartListDrafts
-    .summary({
-      params: { id: 'me' },
-    });
+const smartListDraftsSummaryRequest = ({
+  fetch,
+}: SmartListDraftsSummaryParams) =>
+  api({ fetch }).users.smartListDrafts.summary({
+    params: { id: 'me' },
+  });
 
 export const smartListDraftsSummaryQuery = defineQuery({
   key: 'smartListDraftsSummary',

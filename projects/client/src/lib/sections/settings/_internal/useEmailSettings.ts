@@ -18,12 +18,14 @@ export function useEmailSettings() {
   const query = useQuery(emailSettingsQuery());
   const { track } = useTrack(AnalyticsEvent.Settings);
 
-  const change = useMutation(defineMutation({
-    key: 'user:save-email-settings',
-    request: (variables: EmailSettingsChange) =>
-      saveEmailSettingsRequest(variables),
-    invalidations: [InvalidateAction.User.EmailSettings],
-  }));
+  const change = useMutation(
+    defineMutation({
+      key: 'user:save-email-settings',
+      request: (variables: EmailSettingsChange) =>
+        saveEmailSettingsRequest(variables),
+      invalidations: [InvalidateAction.User.EmailSettings],
+    }),
+  );
 
   const set = async (category: EmailCategory, enabled: boolean) => {
     const success = await change.mutate({ category, enabled });

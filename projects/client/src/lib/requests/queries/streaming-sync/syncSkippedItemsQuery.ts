@@ -9,16 +9,16 @@ import { mapToSyncItem } from './_internal/mapToSyncItem.ts';
 
 type SyncSkippedItemsParams = { id: number } & PaginationParams & ApiParams;
 
-const syncSkippedItemsRequest = (
-  { fetch, id, limit, page }: SyncSkippedItemsParams,
-) =>
-  api({ fetch })
-    .users
-    .syncs
-    .skipped({
-      params: { id },
-      query: { page, limit },
-    });
+const syncSkippedItemsRequest = ({
+  fetch,
+  id,
+  limit,
+  page,
+}: SyncSkippedItemsParams) =>
+  api({ fetch }).users.syncs.skipped({
+    params: { id },
+    query: { page, limit },
+  });
 
 export const syncSkippedItemsQuery = defineInfiniteQuery({
   key: 'syncSkippedItems',

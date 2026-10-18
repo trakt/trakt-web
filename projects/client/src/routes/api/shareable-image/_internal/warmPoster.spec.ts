@@ -21,10 +21,11 @@ function trackPosterRequests(respond: () => Response) {
 
 describe('util: warmPoster', () => {
   it('should fetch a remote poster', async () => {
-    const requested = trackPosterRequests(() =>
-      new HttpResponse(new Uint8Array([255, 216, 255]), {
-        headers: { 'content-type': 'image/jpeg' },
-      })
+    const requested = trackPosterRequests(
+      () =>
+        new HttpResponse(new Uint8Array([255, 216, 255]), {
+          headers: { 'content-type': 'image/jpeg' },
+        }),
     );
 
     await warmPoster({ posterUrl: POSTER_URL, fetch: globalThis.fetch });

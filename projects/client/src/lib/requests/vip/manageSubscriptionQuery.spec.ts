@@ -10,9 +10,8 @@ const RETURN_URL = 'https://app.trakt.tv/vip';
 describe('manageSubscriptionQuery', () => {
   it('should return the checkout url', async () => {
     server.use(
-      http.post(
-        'http://localhost/vip/stripe/update',
-        () => HttpResponse.json({ checkout_url: CHECKOUT_URL }),
+      http.post('http://localhost/vip/stripe/update', () =>
+        HttpResponse.json({ checkout_url: CHECKOUT_URL }),
       ),
     );
 
@@ -23,12 +22,13 @@ describe('manageSubscriptionQuery', () => {
 
   it('should report a missing subscription', async () => {
     server.use(
-      http.post(
-        'http://localhost/vip/stripe/update',
-        () =>
-          HttpResponse.json({
+      http.post('http://localhost/vip/stripe/update', () =>
+        HttpResponse.json(
+          {
             message: 'No active Stripe subscriptions found',
-          }, { status: 404 }),
+          },
+          { status: 404 },
+        ),
       ),
     );
 
@@ -39,12 +39,13 @@ describe('manageSubscriptionQuery', () => {
 
   it('should throw when the subscription cannot be updated', async () => {
     server.use(
-      http.post(
-        'http://localhost/vip/stripe/update',
-        () =>
-          HttpResponse.json({
+      http.post('http://localhost/vip/stripe/update', () =>
+        HttpResponse.json(
+          {
             message: 'User is not a Stripe VIP',
-          }, { status: 400 }),
+          },
+          { status: 400 },
+        ),
       ),
     );
 
@@ -63,8 +64,9 @@ describe('manageSubscriptionQuery', () => {
     const onFetchError = vi.fn();
     globalThis.window.addEventListener(FETCH_ERROR_EVENT, onFetchError);
 
-    await expect(manageSubscriptionQuery({ returnUrl: RETURN_URL })).rejects
-      .toThrow('(500)');
+    await expect(
+      manageSubscriptionQuery({ returnUrl: RETURN_URL }),
+    ).rejects.toThrow('(500)');
 
     globalThis.window.removeEventListener(FETCH_ERROR_EVENT, onFetchError);
     expect(onFetchError).not.toHaveBeenCalled();

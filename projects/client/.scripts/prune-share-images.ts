@@ -43,9 +43,7 @@ function isStale({ cachedAt, releasedAt, now }: IsStaleProps): boolean {
 }
 
 type R2Bucket = {
-  list: (
-    opts?: { cursor?: string; prefix?: string },
-  ) => Promise<{
+  list: (opts?: { cursor?: string; prefix?: string }) => Promise<{
     objects: Array<{
       key: string;
       customMetadata?: Record<string, string>;
@@ -86,8 +84,8 @@ export async function pruneShareImages(
         }
 
         // Entries predating `releasedAt` get rewritten with full metadata.
-        const shouldDelete = Number.isNaN(releasedAt) ||
-          isStale({ cachedAt, releasedAt, now });
+        const shouldDelete =
+          Number.isNaN(releasedAt) || isStale({ cachedAt, releasedAt, now });
 
         if (!shouldDelete) {
           result.skipped++;

@@ -21,9 +21,5 @@ export function moveReorderableItem({
   const withoutItem = items.filter((entry) => entry.key !== key);
   const index = clamp({ value: targetIndex, min: 0, max: withoutItem.length });
 
-  return [
-    ...withoutItem.slice(0, index),
-    item,
-    ...withoutItem.slice(index),
-  ];
+  return [...withoutItem.slice(0, index), item, ...withoutItem.slice(index)];
 }

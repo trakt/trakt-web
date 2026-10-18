@@ -23,13 +23,13 @@ type UseStatsProps = MediaDetailsProps;
 function toQuery(props: UseStatsProps) {
   switch (props.type) {
     case 'movie':
-      return movieStatsQuery({ slug: props.media.slug }) as CreateQueryOptions<
-        Stats
-      >;
+      return movieStatsQuery({
+        slug: props.media.slug,
+      }) as CreateQueryOptions<Stats>;
     case 'show':
-      return showStatsQuery({ slug: props.media.slug }) as CreateQueryOptions<
-        Stats
-      >;
+      return showStatsQuery({
+        slug: props.media.slug,
+      }) as CreateQueryOptions<Stats>;
     case 'episode':
       return episodeStatsQuery({
         slug: props.show.slug,
@@ -48,15 +48,17 @@ export function useStats(props: UseStatsProps) {
   const entry = toEntry(props);
 
   return {
-    stats: query.pipe(map(($query) => {
-      if (!$query.data) {
-        return props.type === 'episode'
-          ? EMPTY_EPISODE_STATS
-          : EMPTY_MEDIA_STATS;
-      }
+    stats: query.pipe(
+      map(($query) => {
+        if (!$query.data) {
+          return props.type === 'episode'
+            ? EMPTY_EPISODE_STATS
+            : EMPTY_MEDIA_STATS;
+        }
 
-      return getDisplayableStats({ stats: $query.data, entry });
-    })),
+        return getDisplayableStats({ stats: $query.data, entry });
+      }),
+    ),
     isLoading: query.pipe(map(toLoadingState)),
   };
 }

@@ -6,9 +6,11 @@ type ReorderUserListsParams = {
   rank: number[];
 } & ApiParams;
 
-export function reorderUserListsRequest(
-  { fetch, userId, rank }: ReorderUserListsParams,
-): Promise<boolean> {
+export function reorderUserListsRequest({
+  fetch,
+  userId,
+  rank,
+}: ReorderUserListsParams): Promise<boolean> {
   return postReorderRequest({
     fetch,
     path: `/users/${encodeURIComponent(`${userId}`)}/lists/reorder`,

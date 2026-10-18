@@ -45,10 +45,8 @@ export type ToggleFilter = BaseFilter & {
   isInverted?: boolean;
 };
 
-export type RatingsFilter =
-  & Omit<BaseFilter, 'label'>
-  & SliderOption
-  & {
+export type RatingsFilter = Omit<BaseFilter, 'label'> &
+  SliderOption & {
     advanced: AdvancedSliderOption;
   };
 

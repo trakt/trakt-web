@@ -20,11 +20,16 @@ export type UseFavoritesProps = {
   sortHow?: SortDirection;
 } & FilterParams;
 
-function typeToQuery(
-  { type, slug, filter, limit, sortBy, sortHow }: UseFavoritesProps & {
-    limit: number;
-  },
-) {
+function typeToQuery({
+  type,
+  slug,
+  filter,
+  limit,
+  sortBy,
+  sortHow,
+}: UseFavoritesProps & {
+  limit: number;
+}) {
   const params = { slug, filter, limit, sortBy, sortHow };
 
   switch (type) {
@@ -45,14 +50,21 @@ const favoritedEntryTargets = makeTargets<FavoritedEntry>({
   }),
 });
 
-export function useFavoritesList(
-  { type, slug, filter, limit = DEFAULT_PAGE_SIZE, sortBy, sortHow }:
-    UseFavoritesProps,
-) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(
-      typeToQuery({ type, slug, filter, limit, sortBy, sortHow }),
-    );
+export function useFavoritesList({
+  type,
+  slug,
+  filter,
+  limit = DEFAULT_PAGE_SIZE,
+  sortBy,
+  sortHow,
+}: UseFavoritesProps) {
+  const {
+    list: baseList,
+    isLoading: baseLoading,
+    ...rest
+  } = usePaginatedListQuery(
+    typeToQuery({ type, slug, filter, limit, sortBy, sortHow }),
+  );
   const overlay = createBulkIntlOverlay<FavoritedEntry>({
     getTargets: favoritedEntryTargets,
   });

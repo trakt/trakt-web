@@ -1,9 +1,11 @@
 import type { SyncCycle } from './models/SyncCycle.ts';
 
 function isQuiet(cycle: SyncCycle): boolean {
-  return cycle.status === 'done' &&
+  return (
+    cycle.status === 'done' &&
     cycle.kind !== 'invalidate' &&
-    Object.keys(cycle.addedByFeed).length === 0;
+    Object.keys(cycle.addedByFeed).length === 0
+  );
 }
 
 export function coalesceQuietCycles(cycles: SyncCycle[]): SyncCycle[] {

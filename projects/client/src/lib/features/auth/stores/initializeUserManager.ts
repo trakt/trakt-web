@@ -33,14 +33,12 @@ type InitializeUserManagerParams = {
   isResolved?: boolean;
 };
 
-export function initializeUserManager(
-  {
-    ctx,
-    tokenFromServer,
-    hasServerSession = false,
-    isResolved = false,
-  }: InitializeUserManagerParams,
-) {
+export function initializeUserManager({
+  ctx,
+  tokenFromServer,
+  hasServerSession = false,
+  isResolved = false,
+}: InitializeUserManagerParams) {
   if (!browser) {
     return {
       isInitializing: of(false),
@@ -59,9 +57,7 @@ export function initializeUserManager(
       toAuthority: resolveOidcAuthority(),
     });
 
-    const manager = new UserManager(
-      getOidcConfig(),
-    );
+    const manager = new UserManager(getOidcConfig());
 
     let retryHandle: ReturnType<typeof setTimeout> | null = null;
 
@@ -77,9 +73,13 @@ export function initializeUserManager(
       postToken(mapToToken(user));
     };
 
-    const setAuthState = (
-      { token, isExpired }: { token: Token; isExpired: boolean },
-    ) => {
+    const setAuthState = ({
+      token,
+      isExpired,
+    }: {
+      token: Token;
+      isExpired: boolean;
+    }) => {
       setToken(token);
       ctx.token.next(token);
 
@@ -195,7 +195,8 @@ export function initializeUserManager(
     // A tab that opens already focused never fires `focus`, so a failed
     // renewal would sit lapsed until a manual reload.
     function renewIfLapsed() {
-      manager.getUser()
+      manager
+        .getUser()
         .then((user) => {
           if (!user?.expired) {
             return;
@@ -219,15 +220,12 @@ export function initializeUserManager(
       renewIfLapsed();
     };
 
-    const disposeExpiring = manager.events.addAccessTokenExpiring(
-      renewSilently,
-    );
-    const disposeExpired = manager.events.addAccessTokenExpired(
-      renewSilently,
-    );
+    const disposeExpiring =
+      manager.events.addAccessTokenExpiring(renewSilently);
+    const disposeExpired = manager.events.addAccessTokenExpired(renewSilently);
     const disposeUserLoaded = manager.events.addUserLoaded(handleUserEvent);
-    const disposeUserUnloaded = manager.events.addUserUnloaded(
-      () => handleUserEvent(null),
+    const disposeUserUnloaded = manager.events.addUserUnloaded(() =>
+      handleUserEvent(null),
     );
 
     manager.getUser().then(initializeUser);

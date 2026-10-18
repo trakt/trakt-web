@@ -7,14 +7,17 @@ type ReorderListParams = {
   rank: number[];
 } & ApiParams;
 
-export function reorderListRequest(
-  { fetch, userId, listId, rank }: ReorderListParams,
-): Promise<boolean> {
+export function reorderListRequest({
+  fetch,
+  userId,
+  listId,
+  rank,
+}: ReorderListParams): Promise<boolean> {
   return postReorderRequest({
     fetch,
-    path: `/users/${encodeURIComponent(`${userId}`)}/lists/${
-      encodeURIComponent(`${listId}`)
-    }/items/reorder`,
+    path: `/users/${encodeURIComponent(`${userId}`)}/lists/${encodeURIComponent(
+      `${listId}`,
+    )}/items/reorder`,
     rank,
   });
 }

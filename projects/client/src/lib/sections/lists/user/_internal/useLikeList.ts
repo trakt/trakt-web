@@ -14,17 +14,21 @@ export function useLikeList(list: MediaListSummary) {
   const { track } = useTrack(AnalyticsEvent.ListLike);
   const { likes } = useUser();
 
-  const like = useMutation(defineMutation({
-    key: 'list:like',
-    request: likeListRequest,
-    invalidations: [InvalidateAction.List.Like],
-  }));
+  const like = useMutation(
+    defineMutation({
+      key: 'list:like',
+      request: likeListRequest,
+      invalidations: [InvalidateAction.List.Like],
+    }),
+  );
 
-  const unlike = useMutation(defineMutation({
-    key: 'list:unlike',
-    request: unlikeListRequest,
-    invalidations: [InvalidateAction.List.Like],
-  }));
+  const unlike = useMutation(
+    defineMutation({
+      key: 'list:unlike',
+      request: unlikeListRequest,
+      invalidations: [InvalidateAction.List.Like],
+    }),
+  );
 
   const isLiked = likes.pipe(
     map(($likes) => {

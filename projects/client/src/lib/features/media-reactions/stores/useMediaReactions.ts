@@ -23,9 +23,9 @@ const EMPTY_SUMMARY: MediaReactionSummary = {
   top: [],
 };
 
-export function useMediaReactions(
-  { target$ }: UseMediaReactionsProps,
-): MediaReactions {
+export function useMediaReactions({
+  target$,
+}: UseMediaReactionsProps): MediaReactions {
   const summary = useQuery(
     target$.pipe(
       map(({ type, slug }) => mediaReactionsSummaryQuery({ type, slug })),

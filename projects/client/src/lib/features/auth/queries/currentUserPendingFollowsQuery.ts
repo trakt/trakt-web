@@ -7,10 +7,7 @@ import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
 const currentUserPendingFollowsRequest = ({ fetch }: ApiParams) =>
-  api({ fetch })
-    .users
-    .requests
-    .following();
+  api({ fetch }).users.requests.following();
 
 export const currentUserPendingFollowsQuery = defineQuery({
   key: 'currentUserPendingFollows',

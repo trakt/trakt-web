@@ -14,9 +14,13 @@ type StarsFromRectsParams = {
 // over. The active star is the one whose center is nearest the pointer, so a
 // pointer in the gap between two stars still resolves cleanly. Pure (rects are
 // measured by the caller) so it can be unit-tested.
-export function starsFromRects(
-  { rects, clientX, allowHalf, isRtl, max }: StarsFromRectsParams,
-): number | null {
+export function starsFromRects({
+  rects,
+  clientX,
+  allowHalf,
+  isRtl,
+  max,
+}: StarsFromRectsParams): number | null {
   if (rects.length === 0) return null;
 
   const inlineStart = Math.min(...rects.map((rect) => rect.left));
@@ -31,9 +35,8 @@ export function starsFromRects(
       distance: Math.abs(clientX - (rect.left + rect.width / 2)),
     }))
     .reduce((best, current) =>
-      current.distance < best.distance ? current : best
-    )
-    .index;
+      current.distance < best.distance ? current : best,
+    ).index;
 
   const rect = rects.at(hitIndex);
   if (!rect) return null;

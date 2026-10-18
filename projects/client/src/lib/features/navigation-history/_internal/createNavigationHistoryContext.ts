@@ -10,10 +10,9 @@ export type NavigationHistoryContext = {
 export function createNavigationHistoryContext() {
   const ctx = setContext<NavigationHistoryContext>(
     NAVIGATION_HISTORY_CONTEXT_KEY,
-    getContext<NavigationHistoryContext>(NAVIGATION_HISTORY_CONTEXT_KEY) ??
-      {
-        internalNavigations: new BehaviorSubject(0),
-      },
+    getContext<NavigationHistoryContext>(NAVIGATION_HISTORY_CONTEXT_KEY) ?? {
+      internalNavigations: new BehaviorSubject(0),
+    },
   );
 
   return ctx;

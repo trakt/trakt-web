@@ -26,12 +26,12 @@ export function useCustomLibrary() {
       return {
         movies: new Set(
           entries.flatMap((item) =>
-            item.type === 'movie' ? [item.media.id] : []
+            item.type === 'movie' ? [item.media.id] : [],
           ),
         ),
         episodes: new Set(
           entries.flatMap((item) =>
-            item.type === 'episode' ? [item.episode.id] : []
+            item.type === 'episode' ? [item.episode.id] : [],
           ),
         ),
       };

@@ -34,9 +34,10 @@ export async function klipyGifsRequest({
   customerId,
   query,
   fetch,
-}: KlipyGifsRequestParams): Promise<
-  { status: 200; body: KlipyGifsPage | undefined }
-> {
+}: KlipyGifsRequestParams): Promise<{
+  status: 200;
+  body: KlipyGifsPage | undefined;
+}> {
   const params = new URLSearchParams({
     customer_id: customerId,
     page: `${page}`,

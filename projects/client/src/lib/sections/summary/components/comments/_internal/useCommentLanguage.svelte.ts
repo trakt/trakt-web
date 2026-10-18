@@ -31,12 +31,11 @@ let preference = $state<string | null>(toStoredPreference());
  */
 export function useCommentLanguage() {
   const value = $derived(
-    page.url.searchParams.get(REVIEW_LANGUAGE_PARAM) ?? preference ??
+    page.url.searchParams.get(REVIEW_LANGUAGE_PARAM) ??
+      preference ??
       languageTag(),
   );
-  const filter = $derived(
-    value === COMMENT_LANGUAGE_ALL ? undefined : value,
-  );
+  const filter = $derived(value === COMMENT_LANGUAGE_ALL ? undefined : value);
 
   function set(next: string) {
     preference = next;

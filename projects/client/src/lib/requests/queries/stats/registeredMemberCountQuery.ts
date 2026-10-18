@@ -23,9 +23,9 @@ type RegisteredMemberCountResponse = z.infer<
   typeof RegisteredMemberCountResponseSchema
 >;
 
-const mapToRegisteredMemberCount = (
-  { registered }: RegisteredMemberCountResponse,
-): RegisteredMemberCount => ({
+const mapToRegisteredMemberCount = ({
+  registered,
+}: RegisteredMemberCountResponse): RegisteredMemberCount => ({
   total: registered.total,
   anchoredAt: Date.parse(registered.updated_at),
   ratePerDay: registered.rate_per_day,
@@ -42,9 +42,9 @@ const registeredMemberCountRequest = async ({ fetch }: ApiParams) => {
 
   return response.ok
     ? {
-      body: RegisteredMemberCountResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: RegisteredMemberCountResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 
@@ -53,7 +53,7 @@ export const registeredMemberCountQuery = defineQuery({
   invalidations: [],
   dependencies: [],
   request: registeredMemberCountRequest,
-  mapper: ({ body }) => body ? mapToRegisteredMemberCount(body) : null,
+  mapper: ({ body }) => (body ? mapToRegisteredMemberCount(body) : null),
   schema: RegisteredMemberCountSchema.nullable(),
   // Staleness and poll cadence are deliberately the same value: the endpoint is
   // uncached and moves between requests, and the counter interpolates the digits

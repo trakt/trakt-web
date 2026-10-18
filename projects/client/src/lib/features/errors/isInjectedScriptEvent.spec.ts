@@ -24,8 +24,9 @@ describe('util: isInjectedScriptEvent', () => {
   });
 
   it('should flag a frame without a file name', () => {
-    expect(isInjectedScriptEvent(toEvent({ filename: 'undefined' })))
-      .toBe(true);
+    expect(isInjectedScriptEvent(toEvent({ filename: 'undefined' }))).toBe(
+      true,
+    );
     expect(isInjectedScriptEvent(toEvent({ lineno: 269 }))).toBe(true);
   });
 

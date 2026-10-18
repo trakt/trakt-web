@@ -6,19 +6,15 @@ import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
 type ShowSummaryParams = { slug: string } & ApiParams;
 
-const showSummaryRequest = (
-  { fetch, slug }: ShowSummaryParams,
-) =>
-  api({ fetch })
-    .shows
-    .summary({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,images,colors,streaming_ids',
-      },
-    });
+const showSummaryRequest = ({ fetch, slug }: ShowSummaryParams) =>
+  api({ fetch }).shows.summary({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,images,colors,streaming_ids',
+    },
+  });
 
 export const showSummaryQuery = defineQuery({
   key: 'showSummary:v2',

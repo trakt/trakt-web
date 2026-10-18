@@ -11,18 +11,20 @@ import { map } from 'rxjs';
 export function useDeleteList(list: MediaListSummary) {
   const { track } = useTrack(AnalyticsEvent.ListDelete);
 
-  const deletion = useMutation(defineMutation({
-    key: 'list:delete',
-    request: () =>
-      deleteListRequest({
-        userId: assertDefined(
-          list.user.slug,
-          'Expected user list to have a user slug',
-        ),
-        listId: list.slug,
-      }),
-    invalidations: [InvalidateAction.List.Deleted],
-  }));
+  const deletion = useMutation(
+    defineMutation({
+      key: 'list:delete',
+      request: () =>
+        deleteListRequest({
+          userId: assertDefined(
+            list.user.slug,
+            'Expected user list to have a user slug',
+          ),
+          listId: list.slug,
+        }),
+      invalidations: [InvalidateAction.List.Deleted],
+    }),
+  );
 
   const deleteList = async () => {
     track();

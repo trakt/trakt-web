@@ -4,9 +4,7 @@ import { getNavigationState } from './getNavigationState.ts';
 import { getNextIndex } from './getNextIndex.ts';
 
 export function handleNavbarNavigation(key: 'ArrowUp' | 'ArrowDown') {
-  const { items, focusedIndex } = getNavigationState(
-    DpadNavigationType.Navbar,
-  );
+  const { items, focusedIndex } = getNavigationState(DpadNavigationType.Navbar);
 
   const newIndex = getNextIndex(
     focusedIndex,

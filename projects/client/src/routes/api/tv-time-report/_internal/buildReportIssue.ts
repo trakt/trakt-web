@@ -34,21 +34,18 @@ const toFileLine = (file: ReportedFile): string =>
  * lookup key, and keeping PII out of tickets is preferable even in a private
  * repo.
  */
-export function buildReportIssue(
-  {
-    reportId,
-    source,
-    sourceName,
-    userId,
-    username,
-    message,
-    files,
-    storagePrefix,
-  }: BuildReportIssueInput,
-): GitHubIssue {
-  const fileLines = files.length > 0
-    ? files.map(toFileLine).join('\n')
-    : '- (none)';
+export function buildReportIssue({
+  reportId,
+  source,
+  sourceName,
+  userId,
+  username,
+  message,
+  files,
+  storagePrefix,
+}: BuildReportIssueInput): GitHubIssue {
+  const fileLines =
+    files.length > 0 ? files.map(toFileLine).join('\n') : '- (none)';
 
   const body = [
     `**Source:** ${sourceName} (${source})`,

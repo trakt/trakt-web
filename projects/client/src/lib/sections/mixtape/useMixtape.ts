@@ -56,22 +56,23 @@ export function useMixtape(
     ),
   );
   const searchResults$ = combineLatest([searchTerm$, search]).pipe(
-    map(([term, query]) => (term ? query.data ?? [] : [])),
+    map(([term, query]) => (term ? (query.data ?? []) : [])),
   );
   const isSearchLoading$ = combineLatest([
     typedTerm$,
     searchTerm$,
     search,
   ]).pipe(
-    map(([typed, term, query]) =>
-      typed.length > 0 && (typed !== term || query.isLoading)
+    map(
+      ([typed, term, query]) =>
+        typed.length > 0 && (typed !== term || query.isLoading),
     ),
   );
 
   const deep = useQuery(
     request$.pipe(
       map(({ type, picks }) =>
-        mixtapeQuery({ type, picks, candidates: [], suggestions: false })
+        mixtapeQuery({ type, picks, candidates: [], suggestions: false }),
       ),
     ),
   );
@@ -85,10 +86,13 @@ export function useMixtape(
   );
   const deepFits$ = combineLatest([deep, mixtape]).pipe(
     map(([fitsOnly, full]) =>
-      dedupe(({ id }) => id, [
-        ...(fitsOnly.data?.fits ?? []),
-        ...(full.isPlaceholderData ? [] : full.data?.fits ?? []),
-      ])
+      dedupe(
+        ({ id }) => id,
+        [
+          ...(fitsOnly.data?.fits ?? []),
+          ...(full.isPlaceholderData ? [] : (full.data?.fits ?? [])),
+        ],
+      ),
     ),
   );
 
@@ -120,7 +124,7 @@ export function useMixtape(
         mixtapeVectorsQuery({
           type,
           ids: toSortedIds(items.map(({ id }) => id)),
-        })
+        }),
       ),
     ),
   );
@@ -130,8 +134,9 @@ export function useMixtape(
         const recentIds = new Set(recent.map(({ id }) => id));
         return mixtapeVectorsQuery({
           type,
-          ids: toSortedIds([...picks, ...hits.map(({ id }) => id)])
-            .filter((id) => !recentIds.has(id)),
+          ids: toSortedIds([...picks, ...hits.map(({ id }) => id)]).filter(
+            (id) => !recentIds.has(id),
+          ),
         });
       }),
     ),
@@ -143,22 +148,25 @@ export function useMixtape(
     extraVectors,
   ]).pipe(
     map(([{ picks }, items, recent, extra]) =>
-      picks.length === 0 ? [] : scoreLocalFits({
-        picks,
-        candidates: items.map(({ id }) => id),
-        vectors: {
-          cutoff: recent.data?.cutoff ?? extra.data?.cutoff ?? 1,
-          vectors: { ...recent.data?.vectors, ...extra.data?.vectors },
-        },
-      })
+      picks.length === 0
+        ? []
+        : scoreLocalFits({
+            picks,
+            candidates: items.map(({ id }) => id),
+            vectors: {
+              cutoff: recent.data?.cutoff ?? extra.data?.cutoff ?? 1,
+              vectors: { ...recent.data?.vectors, ...extra.data?.vectors },
+            },
+          }),
     ),
   );
   const fits$ = combineLatest([localFits$, deepFits$]).pipe(
     map(([local, deepFits]) => mergeMixtapeFits(local ?? [], deepFits)),
   );
   const isFitsSettling$ = combineLatest([request$, localFits$, deep]).pipe(
-    map(([{ picks }, local, query]) =>
-      picks.length > 0 && (local?.length ?? 0) === 0 && query.isLoading
+    map(
+      ([{ picks }, local, query]) =>
+        picks.length > 0 && (local?.length ?? 0) === 0 && query.isLoading,
     ),
   );
 
@@ -168,7 +176,7 @@ export function useMixtape(
         mixtapePicksQuery({
           type,
           ids: picks.filter((id) => !items.some((media) => media.id === id)),
-        })
+        }),
       ),
     ),
   );
@@ -179,10 +187,11 @@ export function useMixtape(
   ]).pipe(
     map(([{ picks }, items, fetched]) =>
       picks.flatMap((id) => {
-        const media = items.find((item) => item.id === id) ??
+        const media =
+          items.find((item) => item.id === id) ??
           fetched.find((item) => item.id === id);
         return media ? [media] : [];
-      })
+      }),
     ),
   );
 

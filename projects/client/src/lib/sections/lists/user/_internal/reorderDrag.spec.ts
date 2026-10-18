@@ -68,8 +68,8 @@ describe('action: reorderDrag', () => {
     (node as unknown as Record<string, unknown>).hasPointerCapture = vi
       .fn()
       .mockReturnValue(false);
-    (node as unknown as Record<string, unknown>).releasePointerCapture = vi
-      .fn();
+    (node as unknown as Record<string, unknown>).releasePointerCapture =
+      vi.fn();
 
     rowA = makeRow('a', 0, 50);
     rowB = makeRow('b', 50, 50);
@@ -277,9 +277,8 @@ describe('action: reorderDrag', () => {
   describe('update', () => {
     it('should use the new params for subsequent drag events', () => {
       const action = createAction();
-      const newOnDragStart = vi.fn<
-        (key: string, ghost: DragGhost, fromIndex: number) => void
-      >();
+      const newOnDragStart =
+        vi.fn<(key: string, ghost: DragGhost, fromIndex: number) => void>();
       action.update({
         getItems: () => items,
         onDragStart: newOnDragStart,

@@ -8,9 +8,7 @@ describe('collaborationListsQuery', () => {
   it('should query list summary', async () => {
     const result = await runQuery({
       factory: () =>
-        createTestBedQuery(
-          collaborationListsQuery({ slug: 'me' }),
-        ),
+        createTestBedQuery(collaborationListsQuery({ slug: 'me' })),
       mapper: (response) => response?.data,
     });
 

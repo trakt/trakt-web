@@ -10,24 +10,29 @@ describe('util: isAnchorStale', () => {
   });
 
   it('should keep a normal poll cadence fresh', () => {
-    expect(isAnchorStale({ anchoredAt, now: anchoredAt + time.seconds(10) }))
-      .toBe(false);
+    expect(
+      isAnchorStale({ anchoredAt, now: anchoredAt + time.seconds(10) }),
+    ).toBe(false);
   });
 
   it('should still be fresh just inside the window', () => {
-    expect(isAnchorStale({
-      anchoredAt,
-      now: anchoredAt + time.minutes(5) - 1,
-    })).toBe(false);
+    expect(
+      isAnchorStale({
+        anchoredAt,
+        now: anchoredAt + time.minutes(5) - 1,
+      }),
+    ).toBe(false);
   });
 
   it('should go stale once polling has clearly stopped', () => {
-    expect(isAnchorStale({ anchoredAt, now: anchoredAt + time.minutes(6) }))
-      .toBe(true);
+    expect(
+      isAnchorStale({ anchoredAt, now: anchoredAt + time.minutes(6) }),
+    ).toBe(true);
   });
 
   it('should not be stale when the client clock lags the server', () => {
-    expect(isAnchorStale({ anchoredAt, now: anchoredAt - time.minutes(30) }))
-      .toBe(false);
+    expect(
+      isAnchorStale({ anchoredAt, now: anchoredAt - time.minutes(30) }),
+    ).toBe(false);
   });
 });

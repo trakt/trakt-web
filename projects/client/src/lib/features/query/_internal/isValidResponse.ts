@@ -10,7 +10,10 @@ import { isSuccessResponse } from './isSuccessResponse.ts';
 
 // FIXME: extend with error schemas
 class FetchError<TInput> extends Error {
-  constructor(public response: RequestResponse<TInput>, key?: string) {
+  constructor(
+    public response: RequestResponse<TInput>,
+    key?: string,
+  ) {
     super(`Failed to fetch data: ${key}`);
 
     printError(this.message);
@@ -23,9 +26,10 @@ class FetchError<TInput> extends Error {
           detail: {
             status,
             key,
-            message: status === 503 && typeof body === 'object'
-              ? body.message
-              : undefined,
+            message:
+              status === 503 && typeof body === 'object'
+                ? body.message
+                : undefined,
           },
         }),
       );

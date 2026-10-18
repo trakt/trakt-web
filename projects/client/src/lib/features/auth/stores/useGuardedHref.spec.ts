@@ -9,16 +9,16 @@ describe('store: useGuardedHref', () => {
     setAuthorization(false);
   });
 
-  it.each([
-    UrlBuilder.developer.home(),
-    UrlBuilder.developer.apps(),
-  ])('should allow signed-out visitors to open %s', async (href) => {
-    const result = await runQuery({
-      factory: () => useGuardedHref(href).guardedHref,
-    });
+  it.each([UrlBuilder.developer.home(), UrlBuilder.developer.apps()])(
+    'should allow signed-out visitors to open %s',
+    async (href) => {
+      const result = await runQuery({
+        factory: () => useGuardedHref(href).guardedHref,
+      });
 
-    expect(result).toBe(href);
-  });
+      expect(result).toBe(href);
+    },
+  );
 
   it('should still guard settings for signed-out visitors', async () => {
     const result = await runQuery({

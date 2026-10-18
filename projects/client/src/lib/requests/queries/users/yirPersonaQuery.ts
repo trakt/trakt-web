@@ -17,9 +17,13 @@ export type YirPersonaParams = {
   };
 } & ApiParams;
 
-const yirPersonaRequest = async (
-  { fetch, slug, year, slurm, preview }: YirPersonaParams,
-) => {
+const yirPersonaRequest = async ({
+  fetch,
+  slug,
+  year,
+  slurm,
+  preview,
+}: YirPersonaParams) => {
   if (preview) {
     return {
       body: dummyYirPersonaResult(preview),

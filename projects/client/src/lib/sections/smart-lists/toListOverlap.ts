@@ -10,9 +10,10 @@ export type ListOverlap = {
   total: number;
 };
 
-export function toListOverlap(
-  { count, confidence }: ListOverlapProps,
-): ListOverlap | null {
+export function toListOverlap({
+  count,
+  confidence,
+}: ListOverlapProps): ListOverlap | null {
   const total = Math.min(count, MAX_CHECKED_TITLES);
 
   if (total <= 0) {

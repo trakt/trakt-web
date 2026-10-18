@@ -1,8 +1,10 @@
 import { initSync, Renderer } from '@takumi-rs/wasm';
 
 function isWorkerRuntime(): boolean {
-  return typeof navigator !== 'undefined' &&
-    navigator.userAgent === 'Cloudflare-Workers';
+  return (
+    typeof navigator !== 'undefined' &&
+    navigator.userAgent === 'Cloudflare-Workers'
+  );
 }
 
 async function loadShareWasm() {

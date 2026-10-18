@@ -9,9 +9,11 @@ type FormatDateInputBoundParams = {
   edge: 'min' | 'max';
 };
 
-export function formatDateInputBound(
-  { date, type, edge }: FormatDateInputBoundParams,
-): string | undefined {
+export function formatDateInputBound({
+  date,
+  type,
+  edge,
+}: FormatDateInputBoundParams): string | undefined {
   if (!date) return undefined;
   if (type === 'date') return formatDateInputValue(date, type);
 

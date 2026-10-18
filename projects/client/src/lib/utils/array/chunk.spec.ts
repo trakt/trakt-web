@@ -3,7 +3,11 @@ import { chunk } from './chunk.ts';
 
 describe('chunk', () => {
   it('should split an array into chunks of the given size', () => {
-    expect(chunk([1, 2, 3, 4, 5, 6], 2)).toEqual([[1, 2], [3, 4], [5, 6]]);
+    expect(chunk([1, 2, 3, 4, 5, 6], 2)).toEqual([
+      [1, 2],
+      [3, 4],
+      [5, 6],
+    ]);
   });
 
   it('should include a smaller final chunk when the array is not evenly divisible', () => {
@@ -27,9 +31,9 @@ describe('chunk', () => {
     const elementB = { id: 2 };
     const elementC = { id: 3 };
 
-    expect(chunk([elementA, elementB, elementC], 2)).toEqual([[
-      elementA,
-      elementB,
-    ], [elementC]]);
+    expect(chunk([elementA, elementB, elementC], 2)).toEqual([
+      [elementA, elementB],
+      [elementC],
+    ]);
   });
 });

@@ -5,7 +5,7 @@ export function filterBySeason(
   season: number | null,
 ): ReadonlyArray<SoundtrackTrack> {
   if (season === null) return tracks;
-  return tracks.filter((track) =>
-    track.season == null || track.season === season
+  return tracks.filter(
+    (track) => track.season == null || track.season === season,
   );
 }

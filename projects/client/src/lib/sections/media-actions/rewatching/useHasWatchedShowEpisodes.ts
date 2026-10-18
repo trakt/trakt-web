@@ -4,9 +4,7 @@ import { map, of } from 'rxjs';
 
 type HasWatchedShowEpisodesProps = MediaStoreProps;
 
-export function useHasWatchedShowEpisodes(
-  props: HasWatchedShowEpisodesProps,
-) {
+export function useHasWatchedShowEpisodes(props: HasWatchedShowEpisodesProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const { history } = useUser();

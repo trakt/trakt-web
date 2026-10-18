@@ -4,34 +4,40 @@ import { findPreferredStreamingService } from './findPreferredStreamingService.t
 
 describe('findPreferredStreamingService', () => {
   it('should return undefined if there are no subscription services', () => {
-    expect(findPreferredStreamingService({
-      services: { streaming: [], onDemand: [], free: [] },
-      favorites: ['netflix'],
-      countryCode: 'nl',
-    })).toBe(undefined);
+    expect(
+      findPreferredStreamingService({
+        services: { streaming: [], onDemand: [], free: [] },
+        favorites: ['netflix'],
+        countryCode: 'nl',
+      }),
+    ).toBe(undefined);
   });
 
   it('should return the first available if there are no matching favorite subscriptions', () => {
-    expect(findPreferredStreamingService({
-      services: {
-        streaming: [{
-          link: 'https://www.netflix.com/',
-          source: 'netflix',
-          is4k: false,
-          type: 'streaming',
-          key: 'streaming-netflix',
-        }],
-        onDemand: [],
-        free: [],
-      },
-      favorites: ['us-netflix'],
-      countryCode: 'nl',
-    })).toStrictEqual({
-      'is4k': false,
-      'link': 'https://www.netflix.com/',
-      'source': 'netflix',
-      'type': 'streaming',
-      'key': 'streaming-netflix',
+    expect(
+      findPreferredStreamingService({
+        services: {
+          streaming: [
+            {
+              link: 'https://www.netflix.com/',
+              source: 'netflix',
+              is4k: false,
+              type: 'streaming',
+              key: 'streaming-netflix',
+            },
+          ],
+          onDemand: [],
+          free: [],
+        },
+        favorites: ['us-netflix'],
+        countryCode: 'nl',
+      }),
+    ).toStrictEqual({
+      is4k: false,
+      link: 'https://www.netflix.com/',
+      source: 'netflix',
+      type: 'streaming',
+      key: 'streaming-netflix',
     });
   });
 
@@ -44,14 +50,16 @@ describe('findPreferredStreamingService', () => {
       key: 'streaming-netflix',
     };
 
-    expect(findPreferredStreamingService({
-      services: {
-        streaming: [subscription],
-        onDemand: [],
-        free: [],
-      },
-      favorites: ['nl-netflix'],
-      countryCode: 'nl',
-    })).toBe(subscription);
+    expect(
+      findPreferredStreamingService({
+        services: {
+          streaming: [subscription],
+          onDemand: [],
+          free: [],
+        },
+        favorites: ['nl-netflix'],
+        countryCode: 'nl',
+      }),
+    ).toBe(subscription);
   });
 });

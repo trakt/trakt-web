@@ -36,7 +36,7 @@ export function useCreditsPositionSelector({
         resolveSelectedPosition({
           requested: parseRequestedPosition($url, type),
           credits: $credits,
-        })
+        }),
       ),
     ),
     buildPositionHref: (position: CrewPosition) => {

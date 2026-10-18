@@ -13,5 +13,5 @@ export const OfflineActionEndpointSchema = z.enum([
 
 export type OfflineActionEndpoint = z.infer<typeof OfflineActionEndpointSchema>;
 
-export type OfflineActionDomain = OfflineActionEndpoint extends
-  `${infer TDomain}:${string}` ? TDomain : never;
+export type OfflineActionDomain =
+  OfflineActionEndpoint extends `${infer TDomain}:${string}` ? TDomain : never;

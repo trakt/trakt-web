@@ -18,11 +18,12 @@ describe('transition: slideFade', () => {
   it('transitions the width correctly', () => {
     const node = { style: { opacity: '1' } } as unknown as Element;
 
-    globalThis.getComputedStyle = () => ({
-      opacity: '1',
-      width: '100',
-      height: '50',
-    } as CSSStyleDeclaration);
+    globalThis.getComputedStyle = () =>
+      ({
+        opacity: '1',
+        width: '100',
+        height: '50',
+      }) as CSSStyleDeclaration;
 
     const transition = slideFade(node, { axis: 'x' });
 
@@ -37,11 +38,12 @@ describe('transition: slideFade', () => {
   it('transitions the height correctly', () => {
     const node = { style: { opacity: '1' } } as unknown as Element;
 
-    globalThis.getComputedStyle = () => ({
-      opacity: '1',
-      width: '100',
-      height: '50',
-    } as CSSStyleDeclaration);
+    globalThis.getComputedStyle = () =>
+      ({
+        opacity: '1',
+        width: '100',
+        height: '50',
+      }) as CSSStyleDeclaration;
 
     const transition = slideFade(node, { axis: 'y' });
 

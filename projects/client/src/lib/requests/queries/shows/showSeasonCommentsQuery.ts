@@ -10,36 +10,36 @@ import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
 import { PaginatableSchemaFactory } from '../../models/Paginatable.ts';
 import type { PaginationParams } from '../../models/PaginationParams.ts';
 
-type ShowSeasonCommentsParams =
-  & {
-    slug: string;
-    season: number;
-    sort: CommentSortType;
-    language?: string;
-  }
-  & ApiParams
-  & PaginationParams;
+type ShowSeasonCommentsParams = {
+  slug: string;
+  season: number;
+  sort: CommentSortType;
+  language?: string;
+} & ApiParams &
+  PaginationParams;
 
-const showSeasonCommentsRequest = (
-  { fetch, slug, season, limit, page, sort, language }:
-    ShowSeasonCommentsParams,
-) =>
-  api({ fetch })
-    .shows
-    .season
-    .comments({
-      params: {
-        id: slug,
-        season: castNumberAsString(season),
-        sort,
-      },
-      query: {
-        extended: 'images',
-        limit,
-        page,
-        language,
-      },
-    });
+const showSeasonCommentsRequest = ({
+  fetch,
+  slug,
+  season,
+  limit,
+  page,
+  sort,
+  language,
+}: ShowSeasonCommentsParams) =>
+  api({ fetch }).shows.season.comments({
+    params: {
+      id: slug,
+      season: castNumberAsString(season),
+      sort,
+    },
+    query: {
+      extended: 'images',
+      limit,
+      page,
+      language,
+    },
+  });
 
 export const showSeasonCommentsQuery = defineInfiniteQuery({
   key: 'showSeasonComments',

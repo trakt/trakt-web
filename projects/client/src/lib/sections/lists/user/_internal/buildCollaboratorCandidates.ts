@@ -13,9 +13,11 @@ function candidateRank(candidate: CollaboratorCandidate): number {
   return 2;
 }
 
-export function buildCollaboratorCandidates(
-  { followers, following, collaborators }: BuildCollaboratorCandidatesParams,
-): CollaboratorCandidate[] {
+export function buildCollaboratorCandidates({
+  followers,
+  following,
+  collaborators,
+}: BuildCollaboratorCandidatesParams): CollaboratorCandidate[] {
   const collaboratorIds = new Set(collaborators.map((profile) => profile.id));
   const followerIds = new Set(followers.map((profile) => profile.id));
   const followingIds = new Set(following.map((profile) => profile.id));

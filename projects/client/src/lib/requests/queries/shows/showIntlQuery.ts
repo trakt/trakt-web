@@ -12,27 +12,20 @@ type ShowIntlParams = {
   enabled: boolean;
 } & ApiParams;
 
-const showIntlRequest = (
-  { fetch, slug, language }: ShowIntlParams,
-) =>
-  api({ fetch })
-    .shows
-    .translations({
-      params: {
-        id: slug,
-      },
-      query: {
-        language,
-      },
-    });
+const showIntlRequest = ({ fetch, slug, language }: ShowIntlParams) =>
+  api({ fetch }).shows.translations({
+    params: {
+      id: slug,
+    },
+    query: {
+      language,
+    },
+  });
 
 export const showIntlQuery = defineQuery({
   key: 'showIntl',
   invalidations: [],
-  dependencies: (params) => [
-    params.slug,
-    params.language,
-  ],
+  dependencies: (params) => [params.slug, params.language],
   request: showIntlRequest,
   mapper: (response) => response.body.map(mapToMediaIntl),
   schema: z.array(MediaIntlSchema),

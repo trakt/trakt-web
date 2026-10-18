@@ -7617,74 +7617,47 @@
     "calendar_view_day": {
       "default": "Day",
       "description": "Label for the Day option in the calendar view selector dropdown.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "calendar_view_week": {
       "default": "Week",
       "description": "Label for the Week option in the calendar view selector dropdown (month grid view).",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "header_calendar_this_week": {
       "default": "This week",
       "description": "Title of the calendar week that contains today.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "header_calendar_next_week": {
       "default": "Next week",
       "description": "Title of the calendar week right after the current one.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "header_calendar_last_week": {
       "default": "Last week",
       "description": "Title of the calendar week right before the current one.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "text_calendar_today": {
       "default": "Today",
       "description": "Label shown instead of the weekday for today's column in the calendar.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "text_calendar_nothing_scheduled": {
       "default": "Nothing scheduled",
       "description": "Placeholder for a calendar day without any episodes or movies.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "text_calendar_up_next": {
       "default": "Up next",
       "description": "Label on the line in today's calendar column that marks where the releases still to come start.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "button_label_calendar_view": {
       "default": "Calendar view",
       "description": "Accessibility label for the calendar view selector dropdown (Day / Week).",
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "calendar_day_item_count_one": {
       "default": "{count} Item",
@@ -7694,10 +7667,7 @@
           "type": "number"
         }
       },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "calendar_day_item_count_other": {
       "default": "{count} Items",
@@ -7707,10 +7677,7 @@
           "type": "number"
         }
       },
-      "exclude": [
-        "android",
-        "ios"
-      ]
+      "exclude": ["android", "ios"]
     },
     "warning_prompt_simple_filters": {
       "default": "Switching to simple filters will reset all your current filters. Are you sure you want to proceed?",

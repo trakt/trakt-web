@@ -6,9 +6,11 @@ type ToReactionShareParams = {
   locale: string;
 };
 
-export function toReactionShare(
-  { count, total, locale }: ToReactionShareParams,
-): string {
+export function toReactionShare({
+  count,
+  total,
+  locale,
+}: ToReactionShareParams): string {
   if (total <= 0 || count <= 0) return toPercentage(0, locale);
 
   const share = count / total;

@@ -62,7 +62,7 @@ function weaveViewer(
   );
   if (ownIndex !== -1) {
     return entries.map((entry, index) =>
-      index === ownIndex ? { ...entry, isViewer: true } : entry
+      index === ownIndex ? { ...entry, isViewer: true } : entry,
     );
   }
 
@@ -92,11 +92,15 @@ export function useLeaderboard({ slug, limit }: UseLeaderboardProps) {
     user,
     isAuthorized,
     ownStats,
-  ])
-    .pipe(
-      map((
-        [loaded, loading, currentUser, authorized, stats],
-      ): LeaderboardEntry[] => {
+  ]).pipe(
+    map(
+      ([
+        loaded,
+        loading,
+        currentUser,
+        authorized,
+        stats,
+      ]): LeaderboardEntry[] => {
         // Hold the list until the first page and the viewer's own stats
         // settle, so the woven VIP row is painted in its final sorted position
         // instead of showing alone above the spinner and re-sorting the list.
@@ -107,20 +111,21 @@ export function useLeaderboard({ slug, limit }: UseLeaderboardProps) {
         const viewer: LeaderboardEntry | null =
           authorized && currentUser?.isVip && stats.data
             ? {
-              key: 'leaderboard-viewer',
-              rank: null,
-              user: toViewerProfile(currentUser),
-              totalMinutes: stats.data.totalMinutes,
-              totalPlays: stats.data.totalPlays,
-              locked: false,
-              isViewer: true,
-            }
+                key: 'leaderboard-viewer',
+                rank: null,
+                user: toViewerProfile(currentUser),
+                totalMinutes: stats.data.totalMinutes,
+                totalPlays: stats.data.totalPlays,
+                locked: false,
+                isViewer: true,
+              }
             : null;
 
         return weaveViewer(loaded, viewer);
-      }),
-      multicast(),
-    );
+      },
+    ),
+    multicast(),
+  );
 
   // Keep the spinner up until both the list and the viewer's stats are ready,
   // so nothing paints in a half-sorted state.

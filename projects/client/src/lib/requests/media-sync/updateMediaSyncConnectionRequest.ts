@@ -10,11 +10,14 @@ export type MediaSyncConnectionChanges = {
   syncAccountId?: string;
 };
 
-export async function updateMediaSyncConnectionRequest(
-  { fetch, connectionId, changes }:
-    & { connectionId: number; changes: MediaSyncConnectionChanges }
-    & ApiParams,
-): Promise<MediaSyncResult<null>> {
+export async function updateMediaSyncConnectionRequest({
+  fetch,
+  connectionId,
+  changes,
+}: {
+  connectionId: number;
+  changes: MediaSyncConnectionChanges;
+} & ApiParams): Promise<MediaSyncResult<null>> {
   const response = await rawApiFetch({
     fetch,
     path: `/v3/users/me/sync/connections/${connectionId}`,

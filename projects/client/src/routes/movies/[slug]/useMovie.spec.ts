@@ -43,8 +43,7 @@ describe('store: useMovie', () => {
       });
 
       const { language: _language, ...expected } =
-        MovieHereticTranslationsMappedMock
-          .get('pt')!;
+        MovieHereticTranslationsMappedMock.get('pt')!;
       expect(result).to.deep.equal(expected);
     });
 

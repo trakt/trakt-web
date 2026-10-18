@@ -9,10 +9,12 @@ describe('gifTrendingQuery', () => {
   it('should query for trending gifs', async () => {
     const result = await runQuery({
       factory: () =>
-        createTestBedInfiniteQuery(gifTrendingQuery({
-          customerId: 'test-device',
-          limit: 24,
-        })),
+        createTestBedInfiniteQuery(
+          gifTrendingQuery({
+            customerId: 'test-device',
+            limit: 24,
+          }),
+        ),
       mapper: mapToEntries,
     });
 

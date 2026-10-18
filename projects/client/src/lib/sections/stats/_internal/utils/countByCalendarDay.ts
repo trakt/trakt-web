@@ -7,17 +7,18 @@ import { toHumanDayOfWeek } from '$lib/utils/formatting/date/toHumanDayOfWeek.ts
 
 const daysInWeek = 7;
 
-export function countByCalendarDay(
-  { dates, now, locale }: {
-    dates: ReadonlyArray<Date>;
-    now: Date;
-    locale: AvailableLocale;
-  },
-): { readonly days: readonly number[]; readonly labels: readonly string[] } {
+export function countByCalendarDay({
+  dates,
+  now,
+  locale,
+}: {
+  dates: ReadonlyArray<Date>;
+  now: Date;
+  locale: AvailableLocale;
+}): { readonly days: readonly number[]; readonly labels: readonly string[] } {
   const today = getStartOfDay(now);
-  const dayRange = Array.from(
-    { length: daysInWeek },
-    (_, idx) => subtractDays(today, daysInWeek - 1 - idx),
+  const dayRange = Array.from({ length: daysInWeek }, (_, idx) =>
+    subtractDays(today, daysInWeek - 1 - idx),
   );
 
   const days = dayRange.map((day) => {
@@ -28,7 +29,7 @@ export function countByCalendarDay(
   const labels = dayRange.map((day, idx) =>
     idx === daysInWeek - 1
       ? m.text_stats_today()
-      : toHumanDayOfWeek(day, locale)
+      : toHumanDayOfWeek(day, locale),
   );
 
   return { days, labels };

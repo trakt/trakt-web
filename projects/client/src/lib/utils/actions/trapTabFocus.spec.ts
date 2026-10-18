@@ -22,15 +22,11 @@ describe('action: trapTabFocus', () => {
     `;
     document.body.appendChild(container);
 
-    first = assertDefined(
-      container.querySelector<HTMLButtonElement>('#first'),
-    );
+    first = assertDefined(container.querySelector<HTMLButtonElement>('#first'));
     second = assertDefined(
       container.querySelector<HTMLButtonElement>('#second'),
     );
-    last = assertDefined(
-      container.querySelector<HTMLButtonElement>('#last'),
-    );
+    last = assertDefined(container.querySelector<HTMLButtonElement>('#last'));
     destroy = trapTabFocus(container).destroy;
   });
 

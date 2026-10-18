@@ -13,9 +13,7 @@ type UseYirPeopleProps = {
 };
 
 export function useYirPeople(props: UseYirPeopleProps) {
-  const query = useQuery(
-    yirPeopleQuery({ ...props, slurm: resolveSlurm() }),
-  );
+  const query = useQuery(yirPeopleQuery({ ...props, slurm: resolveSlurm() }));
 
   return {
     people: query.pipe(map(($query) => $query.data)),

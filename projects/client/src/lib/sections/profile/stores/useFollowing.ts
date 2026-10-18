@@ -18,9 +18,10 @@ export function useFollowing(slug: string, type: ProfileSocialListType) {
     };
   }
 
-  const query = type === 'following'
-    ? useQuery(followingQuery({ slug }))
-    : useQuery(followersQuery({ slug }));
+  const query =
+    type === 'following'
+      ? useQuery(followingQuery({ slug }))
+      : useQuery(followersQuery({ slug }));
 
   return {
     profiles: query.pipe(map(($query) => $query.data ?? [])),

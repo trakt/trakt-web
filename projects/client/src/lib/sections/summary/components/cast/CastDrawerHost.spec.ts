@@ -38,8 +38,9 @@ describe.skip('CastDrawerHost', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByRole('searchbox', { name: 'Search people' }))
-        .toBeInTheDocument();
+      expect(
+        screen.getByRole('searchbox', { name: 'Search people' }),
+      ).toBeInTheDocument();
     });
 
     expect(document.querySelector('.trakt-drawer')).toHaveAttribute(
@@ -52,13 +53,14 @@ describe.skip('CastDrawerHost', () => {
         name: `Main Cast ${crew.cast.length} people`,
       }),
     ).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Supporting Cast 1 person' }))
-      .not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('heading', { name: 'Supporting Cast 1 person' }),
+    ).not.toBeInTheDocument();
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
-    expect(screen.getByText('Juliette Nichols'))
-      .toBeInTheDocument();
-    expect(screen.queryByText('Juliette Nichols (voice)')).not
-      .toBeInTheDocument();
+    expect(screen.getByText('Juliette Nichols')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Juliette Nichols (voice)'),
+    ).not.toBeInTheDocument();
     const moreCharactersButton = screen.getByRole('button', {
       name: 'Expand Characters',
     });
@@ -67,8 +69,9 @@ describe.skip('CastDrawerHost', () => {
     await user.click(moreCharactersButton);
 
     expect(screen.getByText('Juliette Nichols (voice)')).toBeInTheDocument();
-    expect(screen.getByText('Juliette Nichols (archive footage)'))
-      .toBeInTheDocument();
+    expect(
+      screen.getByText('Juliette Nichols (archive footage)'),
+    ).toBeInTheDocument();
     expect(moreCharactersButton).toHaveTextContent(/-\s*2 more/);
 
     const searchInput = screen.getByRole('searchbox', {
@@ -81,10 +84,12 @@ describe.skip('CastDrawerHost', () => {
         name: 'Main Cast 1 person',
       }),
     ).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: /Supporting Cast/ })).not
-      .toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: /^Crew/ })).not
-      .toBeInTheDocument();
+    expect(
+      screen.queryByRole('heading', { name: /Supporting Cast/ }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('heading', { name: /^Crew/ }),
+    ).not.toBeInTheDocument();
     expect(screen.getByText('Juliette Nichols (voice)')).toBeInTheDocument();
 
     await user.clear(searchInput);
@@ -100,17 +105,20 @@ describe.skip('CastDrawerHost', () => {
 
     await user.click(moreCharactersButton);
 
-    expect(screen.queryByText('Juliette Nichols (voice)')).not
-      .toBeInTheDocument();
-    expect(screen.getByAltText('Headshot of Rebecca Ferguson'))
-      .toBeInTheDocument();
+    expect(
+      screen.queryByText('Juliette Nichols (voice)'),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByAltText('Headshot of Rebecca Ferguson'),
+    ).toBeInTheDocument();
     expect(screen.queryByText('Graham Yost')).not.toBeInTheDocument();
-    expect(screen.getByRole('radio', { name: 'Main Cast' }))
-      .toHaveTextContent('');
-    expect(screen.getByRole('radio', { name: 'Supporting Cast' }))
-      .toHaveTextContent('');
-    expect(screen.getByRole('radio', { name: 'Crew' }))
-      .toHaveTextContent('');
+    expect(screen.getByRole('radio', { name: 'Main Cast' })).toHaveTextContent(
+      '',
+    );
+    expect(
+      screen.getByRole('radio', { name: 'Supporting Cast' }),
+    ).toHaveTextContent('');
+    expect(screen.getByRole('radio', { name: 'Crew' })).toHaveTextContent('');
 
     await user.click(screen.getByRole('radio', { name: 'Crew' }));
 
@@ -119,8 +127,9 @@ describe.skip('CastDrawerHost', () => {
     });
     expect(screen.getByText('Creator, Writer')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /^Crew/ })).toBeInTheDocument();
-    expect(screen.queryByAltText('Headshot of Graham Yost'))
-      .not.toBeInTheDocument();
+    expect(
+      screen.queryByAltText('Headshot of Graham Yost'),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText('Rebecca Ferguson')).not.toBeInTheDocument();
 
     const search = screen.getByRole('searchbox', {
@@ -136,11 +145,13 @@ describe.skip('CastDrawerHost', () => {
     await user.clear(search);
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /^Crew/ }))
-        .toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: /^Crew/ }),
+      ).toBeInTheDocument();
     });
-    expect(screen.getByRole('radio', { name: 'Main Cast' }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('radio', { name: 'Main Cast' }),
+    ).toBeInTheDocument();
     expect(screen.getByRole('radio', { name: 'Crew' })).toBeInTheDocument();
   });
 
@@ -155,8 +166,9 @@ describe.skip('CastDrawerHost', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByRole('searchbox', { name: 'Search people' }))
-        .toBeInTheDocument();
+      expect(
+        screen.getByRole('searchbox', { name: 'Search people' }),
+      ).toBeInTheDocument();
     });
 
     expect(
@@ -169,8 +181,7 @@ describe.skip('CastDrawerHost', () => {
 
     expect(
       await screen.findByRole('heading', {
-        name:
-          `Supporting Cast ${EpisodeSiloPeopleMappedMock.guestStars.length} person`,
+        name: `Supporting Cast ${EpisodeSiloPeopleMappedMock.guestStars.length} person`,
       }),
     ).toBeInTheDocument();
     expect(screen.getByText('Sophie Thompson')).toBeInTheDocument();
@@ -192,8 +203,9 @@ describe.skip('CastDrawerHost', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByRole('searchbox', { name: 'Search people' }))
-        .toBeInTheDocument();
+      expect(
+        screen.getByRole('searchbox', { name: 'Search people' }),
+      ).toBeInTheDocument();
     });
 
     expect(
@@ -201,10 +213,12 @@ describe.skip('CastDrawerHost', () => {
         name: `Cast ${crew.guestStars.length} person`,
       }),
     ).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: /Main Cast/ })).not
-      .toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: /Supporting Cast/ })).not
-      .toBeInTheDocument();
+    expect(
+      screen.queryByRole('heading', { name: /Main Cast/ }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('heading', { name: /Supporting Cast/ }),
+    ).not.toBeInTheDocument();
   });
 
   it('should use Cast as the show cast header before supporting cast is available', async () => {
@@ -235,8 +249,9 @@ describe.skip('CastDrawerHost', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByRole('searchbox', { name: 'Search people' }))
-        .toBeInTheDocument();
+      expect(
+        screen.getByRole('searchbox', { name: 'Search people' }),
+      ).toBeInTheDocument();
     });
 
     expect(
@@ -244,7 +259,8 @@ describe.skip('CastDrawerHost', () => {
         name: `Cast ${MovieHereticPeopleMappedMock.cast.length} people`,
       }),
     ).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: /Main Cast/ })).not
-      .toBeInTheDocument();
+    expect(
+      screen.queryByRole('heading', { name: /Main Cast/ }),
+    ).not.toBeInTheDocument();
   });
 });

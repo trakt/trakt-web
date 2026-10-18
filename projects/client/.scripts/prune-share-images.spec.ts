@@ -371,7 +371,8 @@ describe('pruneShareImages', () => {
         },
       ];
 
-      const listMock = vi.fn()
+      const listMock = vi
+        .fn()
         .mockResolvedValueOnce({
           objects: page1,
           truncated: true,

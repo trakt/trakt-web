@@ -3,26 +3,22 @@ import type { PeopleShowCreditsResponse } from '@trakt/api';
 
 export const PersonFergusonShowCreditsResponseMock: PeopleShowCreditsResponse =
   {
-    'cast': [
+    cast: [
       {
-        'character': 'Juliette Nichols',
-        'characters': [
-          'Juliette Nichols',
-        ],
-        'episode_count': 20,
-        'series_regular': true,
-        'show': ShowSiloResponseMock,
+        character: 'Juliette Nichols',
+        characters: ['Juliette Nichols'],
+        episode_count: 20,
+        series_regular: true,
+        show: ShowSiloResponseMock,
       },
     ],
-    'crew': {
-      'production': [
+    crew: {
+      production: [
         {
-          'job': 'Executive Producer',
-          'jobs': [
-            'Executive Producer',
-          ],
-          'episode_count': 20,
-          'show': ShowSiloResponseMock,
+          job: 'Executive Producer',
+          jobs: ['Executive Producer'],
+          episode_count: 20,
+          show: ShowSiloResponseMock,
         },
       ],
     },

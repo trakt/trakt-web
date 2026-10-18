@@ -7,11 +7,10 @@ let cached: Buffer | undefined;
 
 function queryFontconfig(): string {
   try {
-    return execFileSync(
-      'fc-match',
-      ['sans-serif', '--format=%{file}'],
-      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] },
-    ).trim();
+    return execFileSync('fc-match', ['sans-serif', '--format=%{file}'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
   } catch {
     throw new Error('fc-match not found. Install fontconfig.');
   }

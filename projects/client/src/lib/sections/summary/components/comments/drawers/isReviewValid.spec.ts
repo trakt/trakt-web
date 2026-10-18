@@ -19,8 +19,9 @@ describe('isReviewValid', () => {
   });
 
   it('should return true for a typical comment', () => {
-    expect(isReviewValid('This movie was absolutely fantastic and I loved it'))
-      .toBe(true);
+    expect(
+      isReviewValid('This movie was absolutely fantastic and I loved it'),
+    ).toBe(true);
   });
 
   it('should not count extra whitespace as words', () => {
@@ -36,9 +37,7 @@ describe('isReviewValid', () => {
   });
 
   it('should not count punctuation-only tokens as words', () => {
-    expect(isReviewValid('... !! ?? -- :: ;; one two three four')).toBe(
-      false,
-    );
+    expect(isReviewValid('... !! ?? -- :: ;; one two three four')).toBe(false);
   });
 
   it('should count words separated by newlines correctly', () => {
@@ -50,16 +49,12 @@ describe('isReviewValid', () => {
   });
 
   it('should not count standalone emojis as words', () => {
-    expect(isReviewValid('😀 🎉 🔥 🌟 💯 one two three four')).toBe(
-      false,
-    );
+    expect(isReviewValid('😀 🎉 🔥 🌟 💯 one two three four')).toBe(false);
   });
 
   it('should count enough real words even when emojis are present', () => {
     expect(
-      isReviewValid(
-        '😀 This 🎉 film 🔥 was 🌟 truly 💯 amazing and wonderful',
-      ),
+      isReviewValid('😀 This 🎉 film 🔥 was 🌟 truly 💯 amazing and wonderful'),
     ).toBe(true);
   });
 

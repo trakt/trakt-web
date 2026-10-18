@@ -20,8 +20,7 @@ function toDominantPerformer(tracks: ReadonlyArray<SoundtrackTrack>) {
     return acc.set(performer, (acc.get(performer) ?? 0) + 1);
   }, new Map<string, number>());
 
-  const [dominant] = Array.from(counts.entries())
-    .sort(([, a], [, b]) => b - a);
+  const [dominant] = Array.from(counts.entries()).sort(([, a], [, b]) => b - a);
 
   if (!dominant) {
     return null;

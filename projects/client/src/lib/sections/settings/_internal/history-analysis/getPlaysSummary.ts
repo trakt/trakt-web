@@ -13,9 +13,10 @@ type GetPlaysSummaryProps = {
   keep: PlayRetention;
 };
 
-export function getPlaysSummary(
-  { entries, keep }: GetPlaysSummaryProps,
-): PlaysSummary {
+export function getPlaysSummary({
+  entries,
+  keep,
+}: GetPlaysSummaryProps): PlaysSummary {
   const duplicateIds = entries.flatMap(({ plays }) => {
     if (plays.length <= 1) {
       return [];
@@ -24,9 +25,8 @@ export function getPlaysSummary(
     const chronological = [...plays].sort(
       (a, b) => a.watchedAt.getTime() - b.watchedAt.getTime(),
     );
-    const removable = keep === 'oldest'
-      ? chronological.slice(1)
-      : chronological.slice(0, -1);
+    const removable =
+      keep === 'oldest' ? chronological.slice(1) : chronological.slice(0, -1);
 
     return removable.map((play) => play.id);
   });

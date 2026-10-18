@@ -9,17 +9,12 @@ type DangerProps = {
   color: ButtonColor;
   isActive: boolean;
 };
-export function useDangerButton({
-  color: seed,
-  isActive,
-}: DangerProps) {
+export function useDangerButton({ color: seed, isActive }: DangerProps) {
   const stateToColor = (isActive: boolean) => (isActive ? 'red' : seed);
 
   const activeColor$ = new BehaviorSubject<ButtonColor | null>(null);
 
-  const color$ = activeColor$.pipe(
-    map((activeColor) => activeColor ?? seed),
-  );
+  const color$ = activeColor$.pipe(map((activeColor) => activeColor ?? seed));
 
   const variant: ButtonVariant = isActive ? 'primary' : 'secondary';
 

@@ -5,13 +5,12 @@ type RemoveRatingParams = {
   body: RemoveRatingsParams;
 } & ApiParams;
 
-export function removeRatingRequest(
-  { body, fetch }: RemoveRatingParams,
-): Promise<boolean> {
+export function removeRatingRequest({
+  body,
+  fetch,
+}: RemoveRatingParams): Promise<boolean> {
   return api({ fetch })
-    .sync
-    .ratings
-    .remove({
+    .sync.ratings.remove({
       body,
     })
     .then(({ status }) => status === 200);

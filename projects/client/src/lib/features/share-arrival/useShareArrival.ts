@@ -27,9 +27,13 @@ export function useShareArrival() {
     });
   };
 
-  const outcomeOf = async (
-    { code, url }: { code: string; url: URL },
-  ): Promise<ShareArrivalOutcome> => {
+  const outcomeOf = async ({
+    code,
+    url,
+  }: {
+    code: string;
+    url: URL;
+  }): Promise<ShareArrivalOutcome> => {
     if (!SHARE_CODE_PATTERN.test(code)) return 'uncredited';
     if (!isAuthorized.value) return 'anonymous';
 
@@ -42,9 +46,7 @@ export function useShareArrival() {
     return outcome ?? 'failed';
   };
 
-  const report = async (
-    { url, route }: { url: URL; route: string | null },
-  ) => {
+  const report = async ({ url, route }: { url: URL; route: string | null }) => {
     const code = url.searchParams.get(PREFETCH_SHARE_PARAM);
     if (code == null) return;
 

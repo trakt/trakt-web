@@ -26,9 +26,10 @@ export function useAddNoteDrawer() {
       }
 
       const currentNotes = await resolve(notes);
-      const mediaNotes = props.mediaType === 'movie'
-        ? currentNotes.movies.get(props.id)
-        : currentNotes.shows.get(props.id);
+      const mediaNotes =
+        props.mediaType === 'movie'
+          ? currentNotes.movies.get(props.id)
+          : currentNotes.shows.get(props.id);
 
       // FIXME: remove this when notes are editable
       if (mediaNotes?.includes(mapToNoteType(props.type))) {

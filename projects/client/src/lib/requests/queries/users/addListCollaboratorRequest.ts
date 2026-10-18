@@ -8,9 +8,11 @@ type AddListCollaboratorParams = {
 
 export type AddListCollaboratorResult = 'added' | 'limit-reached' | 'failed';
 
-export async function addListCollaboratorRequest(
-  { fetch, listId, userSlug }: AddListCollaboratorParams,
-): Promise<AddListCollaboratorResult> {
+export async function addListCollaboratorRequest({
+  fetch,
+  listId,
+  userSlug,
+}: AddListCollaboratorParams): Promise<AddListCollaboratorResult> {
   const response = await rawApiFetch({
     fetch,
     path: `/lists/${listId}/collaborators/${userSlug}`,

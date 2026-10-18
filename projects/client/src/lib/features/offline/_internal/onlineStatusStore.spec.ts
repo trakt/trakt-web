@@ -39,8 +39,9 @@ describe('store: onlineStatusStore', () => {
     onlineManager.setOnline(false);
 
     const states: boolean[] = [];
-    const subscription = onlineStatusStore.isOnline$
-      .subscribe((isOnline) => states.push(isOnline));
+    const subscription = onlineStatusStore.isOnline$.subscribe((isOnline) =>
+      states.push(isOnline),
+    );
 
     onlineManager.setOnline(true);
     subscription.unsubscribe();
@@ -63,8 +64,9 @@ describe('store: onlineStatusStore', () => {
     const { store, manager } = await bootStore();
 
     const states: boolean[] = [];
-    const subscription = store.isOnline$
-      .subscribe((isOnline) => states.push(isOnline));
+    const subscription = store.isOnline$.subscribe((isOnline) =>
+      states.push(isOnline),
+    );
 
     manager.setOnline(true);
     subscription.unsubscribe();

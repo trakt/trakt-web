@@ -18,9 +18,12 @@ type ResolveProjectionParams = {
  * The server only ever pushes the anchor forward: a total ahead of the
  * projection re-anchors it, a total behind it leaves local motion intact.
  */
-export function resolveProjection(
-  { local, server, now, wallNow }: ResolveProjectionParams,
-): { local: LocalAnchor; target: number } {
+export function resolveProjection({
+  local,
+  server,
+  now,
+  wallNow,
+}: ResolveProjectionParams): { local: LocalAnchor; target: number } {
   // A response too old to project from holds the last reported total. Parking
   // the clock at `now` means a recovered endpoint resumes from here instead of
   // leaping forward by the whole outage.

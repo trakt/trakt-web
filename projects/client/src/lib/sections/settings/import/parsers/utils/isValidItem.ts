@@ -19,16 +19,19 @@ const PRIORITY_BY_TYPE: Record<
 };
 
 function hasPositionalKey(item: UniversalImportItem): boolean {
-  return (item.showTvdb != null || item.showImdb != null) &&
-    item.season != null && item.episode != null;
+  return (
+    (item.showTvdb != null || item.showImdb != null) &&
+    item.season != null &&
+    item.episode != null
+  );
 }
 
 // An id its type cannot resolve by is no better than no id at all: the item
 // would sail through review, inflate the imported count and never reach a
 // payload. Seasons carrying only an imdb id are the common case.
 export function isValidItem(item: UniversalImportItem): boolean {
-  const hasUsableId = pickIds(item.ids, PRIORITY_BY_TYPE[item.type](item)) !=
-    null;
+  const hasUsableId =
+    pickIds(item.ids, PRIORITY_BY_TYPE[item.type](item)) != null;
   const hasTitleAndYear = Boolean(item.title) && Boolean(item.year);
 
   return hasUsableId || hasTitleAndYear || hasPositionalKey(item);

@@ -5,9 +5,10 @@ type PickDailyEntryProps<T> = {
   date: Date;
 };
 
-export function pickDailyEntry<T>(
-  { entries, date }: PickDailyEntryProps<T>,
-): T | undefined {
+export function pickDailyEntry<T>({
+  entries,
+  date,
+}: PickDailyEntryProps<T>): T | undefined {
   if (entries.length === 0) return;
 
   const dayIndex = Math.floor(date.getTime() / time.days(1));

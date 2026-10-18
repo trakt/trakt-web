@@ -22,7 +22,7 @@ export function captureWebviewSession(): void {
   const url = new URL(window.location.href);
 
   const present = WEBVIEW_PARAM_KEYS.filter((param) =>
-    url.searchParams.has(WEBVIEW_PARAMS[param])
+    url.searchParams.has(WEBVIEW_PARAMS[param]),
   );
   if (present.length === 0) {
     return;

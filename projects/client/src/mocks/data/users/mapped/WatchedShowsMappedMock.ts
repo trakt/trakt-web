@@ -73,7 +73,10 @@ export const WatchedShowsMappedMock: WatchedShow[] = [
       new Date('2024-12-27T16:28:32.000Z'),
       new Date('2024-12-27T16:28:32.000Z'),
     ],
-    playsPerSeason: new Map([[0, 1], [1, 8]]),
+    playsPerSeason: new Map([
+      [0, 1],
+      [1, 8],
+    ]),
   },
   {
     id: 180770,

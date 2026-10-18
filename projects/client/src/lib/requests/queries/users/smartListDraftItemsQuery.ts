@@ -10,19 +10,22 @@ import { SmartListItemResponseSchema } from '$lib/requests/models/SmartListItemR
 import { time } from '$lib/utils/timing/time.ts';
 import { buildParamString } from '$lib/utils/url/buildParamString.ts';
 
-type SmartListDraftItemsParams =
-  & { listId: string }
-  & PaginationParams
-  & ApiParams;
+type SmartListDraftItemsParams = { listId: string } & PaginationParams &
+  ApiParams;
 
-const smartListDraftItemsRequest = async (
-  { fetch, listId, limit, page }: SmartListDraftItemsParams,
-) => {
+const smartListDraftItemsRequest = async ({
+  fetch,
+  listId,
+  limit,
+  page,
+}: SmartListDraftItemsParams) => {
   const response = await rawApiFetch({
     fetch,
-    path: `/users/me/lists/${listId}/smart-list-draft/items${
-      buildParamString({ extended: 'full,images,colors', page, limit })
-    }`,
+    path: `/users/me/lists/${listId}/smart-list-draft/items${buildParamString({
+      extended: 'full,images,colors',
+      page,
+      limit,
+    })}`,
   });
 
   if (!response.ok) {

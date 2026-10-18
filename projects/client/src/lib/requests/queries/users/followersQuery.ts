@@ -8,33 +8,27 @@ import { UserProfileSchema } from '../../models/UserProfile.ts';
 
 type FollowersParams = { slug: string } & ApiParams;
 
-const followersRequest = (
-  { fetch, slug }: FollowersParams,
-) =>
-  api({ fetch })
-    .users
-    .followers({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,vip',
-      },
-    });
+const followersRequest = ({ fetch, slug }: FollowersParams) =>
+  api({ fetch }).users.followers({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,vip',
+    },
+  });
 
 export const followersQuery = defineQuery({
   key: 'followers',
   invalidations: [InvalidateAction.User.Follow],
-  dependencies: (
-    params: FollowersParams,
-  ) => [params.slug],
+  dependencies: (params: FollowersParams) => [params.slug],
   request: followersRequest,
   mapper: (response) => {
     /**
      * FIXME: remove once Trakt API returns unique followers
      */
     const profiles = response.body.map((follower) =>
-      mapToUserProfile(follower.user)
+      mapToUserProfile(follower.user),
     );
     const uniqueProfiles = Array.from(
       new Map(profiles.map((profile) => [profile.slug, profile])).values(),

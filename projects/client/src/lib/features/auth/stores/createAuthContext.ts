@@ -18,11 +18,10 @@ export function createAuthContext(initial: {
 
   const ctx = setContext(
     AUTH_CONTEXT_KEY,
-    getContext<AuthContextType>(AUTH_CONTEXT_KEY) ??
-      {
-        isAuthorized,
-        token,
-      },
+    getContext<AuthContextType>(AUTH_CONTEXT_KEY) ?? {
+      isAuthorized,
+      token,
+    },
   );
 
   return ctx;

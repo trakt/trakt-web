@@ -7,35 +7,32 @@ import { time } from '$lib/utils/timing/time.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
-type MovieRelatedParams =
-  & {
-    slug: string;
-  }
-  & PaginationParams
-  & ApiParams;
+type MovieRelatedParams = {
+  slug: string;
+} & PaginationParams &
+  ApiParams;
 
-const movieRelatedRequest = (
-  { fetch, slug, limit, page }: MovieRelatedParams,
-) =>
-  api({ fetch })
-    .movies
-    .related({
-      query: {
-        extended: 'full,images,colors',
-        limit,
-        page,
-      },
-      params: {
-        id: slug,
-      },
-    });
+const movieRelatedRequest = ({
+  fetch,
+  slug,
+  limit,
+  page,
+}: MovieRelatedParams) =>
+  api({ fetch }).movies.related({
+    query: {
+      extended: 'full,images,colors',
+      limit,
+      page,
+    },
+    params: {
+      id: slug,
+    },
+  });
 
 export const movieRelatedQuery = defineInfiniteQuery({
   key: 'movieRelated',
   invalidations: [],
-  dependencies: (
-    params,
-  ) => [params.slug, params.page, params.limit],
+  dependencies: (params) => [params.slug, params.page, params.limit],
   request: movieRelatedRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToMovieEntry),

@@ -2,12 +2,12 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 
 type LikeListParams = { listId: number } & ApiParams;
 
-export function likeListRequest(
-  { fetch, listId }: LikeListParams,
-): Promise<boolean> {
+export function likeListRequest({
+  fetch,
+  listId,
+}: LikeListParams): Promise<boolean> {
   return api({ fetch })
-    .lists
-    .like({
+    .lists.like({
       params: {
         id: `${listId}`,
       },

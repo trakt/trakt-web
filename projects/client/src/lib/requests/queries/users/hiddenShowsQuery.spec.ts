@@ -7,10 +7,7 @@ import { hiddenShowsQuery } from './hiddenShowsQuery.ts';
 describe('hiddenShowQuery', () => {
   it('should query hidden items', async () => {
     const result = await runQuery({
-      factory: () =>
-        createTestBedQuery(
-          hiddenShowsQuery(),
-        ),
+      factory: () => createTestBedQuery(hiddenShowsQuery()),
       mapper: (response) => response?.data,
     });
 

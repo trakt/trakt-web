@@ -21,10 +21,7 @@ function getDismissedBanners(): DismissalMap {
 }
 
 function saveDismissedBanners(dismissals: DismissalMap) {
-  safeLocalStorage.setItem(
-    LOCAL_STORAGE_KEY,
-    JSON.stringify(dismissals),
-  );
+  safeLocalStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dismissals));
 }
 
 export function useBannerDismissal(id: string, value: string) {

@@ -6,12 +6,12 @@ import { mapToMediaComment } from '../../_internal/mapToMediaComment.ts';
 
 type PostCommentParams = { body: CommentPostParams } & ApiParams;
 
-export function postCommentRequest(
-  { fetch, body }: PostCommentParams,
-): Promise<MediaComment> {
+export function postCommentRequest({
+  fetch,
+  body,
+}: PostCommentParams): Promise<MediaComment> {
   return api({ fetch })
-    .comments
-    .post({
+    .comments.post({
       body,
     })
     .then((response) => {

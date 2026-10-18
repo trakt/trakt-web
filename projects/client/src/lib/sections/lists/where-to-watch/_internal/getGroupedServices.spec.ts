@@ -64,9 +64,7 @@ describe('getGroupedServices', () => {
 
   it('should group streaming services under Subscription', () => {
     const result = getGroupedServices({
-      services: [
-        namedServices('us', 'United States', [streaming('netflix')]),
-      ],
+      services: [namedServices('us', 'United States', [streaming('netflix')])],
       userCountry,
       favoriteSources: noFavorites,
     });
@@ -78,9 +76,7 @@ describe('getGroupedServices', () => {
 
   it('should group free services under Free', () => {
     const result = getGroupedServices({
-      services: [
-        namedServices('us', 'United States', [free('tubi')]),
-      ],
+      services: [namedServices('us', 'United States', [free('tubi')])],
       userCountry,
       favoriteSources: noFavorites,
     });
@@ -123,9 +119,7 @@ describe('getGroupedServices', () => {
 
   it('should add favorited services to Favorite group', () => {
     const result = getGroupedServices({
-      services: [
-        namedServices('us', 'United States', [streaming('netflix')]),
-      ],
+      services: [namedServices('us', 'United States', [streaming('netflix')])],
       userCountry,
       favoriteSources: ['us-netflix'],
     });
@@ -137,9 +131,7 @@ describe('getGroupedServices', () => {
 
   it('should not add to Favorite when source is not in favorites', () => {
     const result = getGroupedServices({
-      services: [
-        namedServices('us', 'United States', [streaming('netflix')]),
-      ],
+      services: [namedServices('us', 'United States', [streaming('netflix')])],
       userCountry,
       favoriteSources: ['gb-netflix'],
     });
@@ -188,9 +180,7 @@ describe('getGroupedServices', () => {
     };
 
     const result = getGroupedServices({
-      services: [
-        namedServices('de', 'Germany', [amazon1, amazon2]),
-      ],
+      services: [namedServices('de', 'Germany', [amazon1, amazon2])],
       userCountry: 'de',
       favoriteSources: noFavorites,
     });

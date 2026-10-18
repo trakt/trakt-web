@@ -8,13 +8,17 @@ type SmartListTemplateChipsProps = {
   showcase: keyof SmartListFilters;
 };
 
-const toFilterLabels = (
-  { source, filters }: Pick<SmartListTemplateChipsProps, 'source' | 'filters'>,
-) => getSmartListFilterLabels({ source, filters }).slice(1);
+const toFilterLabels = ({
+  source,
+  filters,
+}: Pick<SmartListTemplateChipsProps, 'source' | 'filters'>) =>
+  getSmartListFilterLabels({ source, filters }).slice(1);
 
-export function toSmartListTemplateChips(
-  { source, filters, showcase }: SmartListTemplateChipsProps,
-): string[] {
+export function toSmartListTemplateChips({
+  source,
+  filters,
+  showcase,
+}: SmartListTemplateChipsProps): string[] {
   const labels = toFilterLabels({ source, filters });
   const [showcaseLabel] = toFilterLabels({
     source,

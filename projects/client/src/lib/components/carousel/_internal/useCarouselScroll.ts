@@ -18,9 +18,11 @@ const INITIAL_SCROLL_STATE: ScrollState = {
 // negative toward the end). Normalizing on the absolute value keeps the
 // scroll-affordance math direction-agnostic.
 const distanceFromStart = ({ scrollLeft }: ScrollState) => Math.abs(scrollLeft);
-const distanceFromEnd = (
-  { scrollLeft, scrollWidth, clientWidth }: ScrollState,
-) => scrollWidth - clientWidth - Math.abs(scrollLeft);
+const distanceFromEnd = ({
+  scrollLeft,
+  scrollWidth,
+  clientWidth,
+}: ScrollState) => scrollWidth - clientWidth - Math.abs(scrollLeft);
 
 export function useCarouselScroll() {
   const scrollState$ = new BehaviorSubject<ScrollState>(INITIAL_SCROLL_STATE);

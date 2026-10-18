@@ -7,13 +7,15 @@ const second: TodayStoryGroup = { key: 'second', type: 'for-you', frames: [] };
 
 describe('toOpenState', () => {
   it('should be unseen when no story was seen', () => {
-    expect(toOpenState({ groups: [first, second], seenStories: {} }))
-      .toBe('unseen');
+    expect(toOpenState({ groups: [first, second], seenStories: {} })).toBe(
+      'unseen',
+    );
   });
 
   it('should be unseen when only some stories were seen', () => {
-    expect(toOpenState({ groups: [first, second], seenStories: { first: 1 } }))
-      .toBe('unseen');
+    expect(
+      toOpenState({ groups: [first, second], seenStories: { first: 1 } }),
+    ).toBe('unseen');
   });
 
   it('should be seen when every story was seen', () => {

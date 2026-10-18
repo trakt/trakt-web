@@ -30,8 +30,8 @@ describe('streamingConnectionsQuery', () => {
       new Date('2025-05-28T14:51:00.000Z'),
     );
 
-    const appleTv = connections?.find((connection) =>
-      connection.id === 'appletv'
+    const appleTv = connections?.find(
+      (connection) => connection.id === 'appletv',
     );
     // black is a valid brand background and is preserved
     expect(appleTv?.color).to.equal('#000000');

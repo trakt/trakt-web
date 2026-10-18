@@ -27,21 +27,18 @@ describe('store: useSpoiler', () => {
   });
 
   it('should return true if shows contain `hide`', async () => {
-    const user = deepAssign(
-      clone(ExtendedUsersResponseMock),
-      {
-        browsing: {
-          spoilers: {
-            actors: null,
-            comments: null,
-            episodes: null,
-            movies: null,
-            ratings: null,
-            shows: 'hide_title',
-          },
+    const user = deepAssign(clone(ExtendedUsersResponseMock), {
+      browsing: {
+        spoilers: {
+          actors: null,
+          comments: null,
+          episodes: null,
+          movies: null,
+          ratings: null,
+          shows: 'hide_title',
         },
       },
-    );
+    });
 
     server.use(
       http.get('http://localhost/users/settings', () => {
@@ -57,21 +54,18 @@ describe('store: useSpoiler', () => {
   });
 
   it('should return true if movies contain `hide`', async () => {
-    const user = deepAssign(
-      clone(ExtendedUsersResponseMock),
-      {
-        browsing: {
-          spoilers: {
-            actors: null,
-            comments: null,
-            episodes: null,
-            movies: 'hide',
-            ratings: null,
-            shows: null,
-          },
+    const user = deepAssign(clone(ExtendedUsersResponseMock), {
+      browsing: {
+        spoilers: {
+          actors: null,
+          comments: null,
+          episodes: null,
+          movies: 'hide',
+          ratings: null,
+          shows: null,
         },
       },
-    );
+    });
 
     server.use(
       http.get('http://localhost/users/settings', () => {
@@ -87,21 +81,18 @@ describe('store: useSpoiler', () => {
   });
 
   it('should return true if episodes contain `hide`', async () => {
-    const user = deepAssign(
-      clone(ExtendedUsersResponseMock),
-      {
-        browsing: {
-          spoilers: {
-            actors: null,
-            comments: null,
-            episodes: 'hide',
-            movies: null,
-            ratings: null,
-            shows: null,
-          },
+    const user = deepAssign(clone(ExtendedUsersResponseMock), {
+      browsing: {
+        spoilers: {
+          actors: null,
+          comments: null,
+          episodes: 'hide',
+          movies: null,
+          ratings: null,
+          shows: null,
         },
       },
-    );
+    });
 
     server.use(
       http.get('http://localhost/users/settings', () => {
@@ -117,21 +108,18 @@ describe('store: useSpoiler', () => {
   });
 
   it('should return false if actors contain `hide`', async () => {
-    const user = deepAssign(
-      clone(ExtendedUsersResponseMock),
-      {
-        browsing: {
-          spoilers: {
-            actors: 'hide',
-            comments: null,
-            episodes: null,
-            movies: null,
-            ratings: null,
-            shows: null,
-          },
+    const user = deepAssign(clone(ExtendedUsersResponseMock), {
+      browsing: {
+        spoilers: {
+          actors: 'hide',
+          comments: null,
+          episodes: null,
+          movies: null,
+          ratings: null,
+          shows: null,
         },
       },
-    );
+    });
 
     server.use(
       http.get('http://localhost/users/settings', () => {
@@ -147,21 +135,18 @@ describe('store: useSpoiler', () => {
   });
 
   it('should return false if comments contain `hide`', async () => {
-    const user = deepAssign(
-      clone(ExtendedUsersResponseMock),
-      {
-        browsing: {
-          spoilers: {
-            actors: null,
-            comments: 'hide',
-            episodes: null,
-            movies: null,
-            ratings: null,
-            shows: null,
-          },
+    const user = deepAssign(clone(ExtendedUsersResponseMock), {
+      browsing: {
+        spoilers: {
+          actors: null,
+          comments: 'hide',
+          episodes: null,
+          movies: null,
+          ratings: null,
+          shows: null,
         },
       },
-    );
+    });
 
     server.use(
       http.get('http://localhost/users/settings', () => {
@@ -177,21 +162,18 @@ describe('store: useSpoiler', () => {
   });
 
   it('should return false if ratings contain `hide`', async () => {
-    const user = deepAssign(
-      clone(ExtendedUsersResponseMock),
-      {
-        browsing: {
-          spoilers: {
-            actors: null,
-            comments: null,
-            episodes: null,
-            movies: null,
-            ratings: 'hide',
-            shows: null,
-          },
+    const user = deepAssign(clone(ExtendedUsersResponseMock), {
+      browsing: {
+        spoilers: {
+          actors: null,
+          comments: null,
+          episodes: null,
+          movies: null,
+          ratings: 'hide',
+          shows: null,
         },
       },
-    );
+    });
 
     server.use(
       http.get('http://localhost/users/settings', () => {

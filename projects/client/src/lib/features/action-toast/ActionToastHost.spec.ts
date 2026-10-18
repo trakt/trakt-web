@@ -24,7 +24,7 @@ describe('component: ActionToastHost', () => {
     getByLabelText('Undo adding to favorites').click();
 
     await waitFor(() =>
-      expect(container.querySelector('[data-variant="error"]')).not.toBeNull()
+      expect(container.querySelector('[data-variant="error"]')).not.toBeNull(),
     );
   });
 });

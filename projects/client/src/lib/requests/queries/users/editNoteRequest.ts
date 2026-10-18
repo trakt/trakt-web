@@ -10,9 +10,11 @@ type EditNoteParams = {
   };
 } & ApiParams;
 
-export async function editNoteRequest(
-  { fetch, id, body }: EditNoteParams,
-): Promise<boolean> {
+export async function editNoteRequest({
+  fetch,
+  id,
+  body,
+}: EditNoteParams): Promise<boolean> {
   const response = await rawApiFetch({
     fetch,
     path: `/v3/users/me/notes/${id}`,

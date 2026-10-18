@@ -10,9 +10,12 @@ export function useCollectedRefresh(
   const { invalidateAll } = useInvalidator();
 
   return defer(() =>
-    invalidateAll([
-      InvalidateAction.Collected('movie'),
-      InvalidateAction.Collected('episode'),
-    ], options)
+    invalidateAll(
+      [
+        InvalidateAction.Collected('movie'),
+        InvalidateAction.Collected('episode'),
+      ],
+      options,
+    ),
   ).pipe(multicast());
 }

@@ -44,7 +44,8 @@ describe('processEndpoint', () => {
             'X-Pagination-Page': '1',
             'X-Pagination-Page-Count': '4',
           },
-        })),
+        }),
+      ),
     );
 
     const pages: Array<number> = [];
@@ -63,7 +64,8 @@ describe('processEndpoint', () => {
       http.get(ENDPOINT, () =>
         HttpResponse.json([], {
           headers: { 'X-Pagination-Page-Count': 'not-a-number' },
-        })),
+        }),
+      ),
     );
 
     const pages: Array<number> = [];
@@ -87,10 +89,9 @@ describe('processEndpoint', () => {
     server.use(
       http.get(ENDPOINT, ({ request }) => {
         const page = new URL(request.url).searchParams.get('page') ?? '1';
-        return HttpResponse.json(
-          pageOf(sizes[page] ?? 0),
-          { headers: { 'X-Pagination-Page-Count': '1' } },
-        );
+        return HttpResponse.json(pageOf(sizes[page] ?? 0), {
+          headers: { 'X-Pagination-Page-Count': '1' },
+        });
       }),
     );
 
@@ -109,10 +110,9 @@ describe('processEndpoint', () => {
     server.use(
       http.get(ENDPOINT, ({ request }) => {
         const page = new URL(request.url).searchParams.get('page') ?? '1';
-        return HttpResponse.json(
-          page === '1' ? pageOf(PAGE_LIMIT) : [],
-          { headers: { 'X-Pagination-Page-Count': '1' } },
-        );
+        return HttpResponse.json(page === '1' ? pageOf(PAGE_LIMIT) : [], {
+          headers: { 'X-Pagination-Page-Count': '1' },
+        });
       }),
     );
 
@@ -132,13 +132,13 @@ describe('processEndpoint', () => {
       http.get(ENDPOINT, () =>
         HttpResponse.json(pageOf(PAGE_LIMIT), {
           headers: { 'X-Pagination-Page-Count': '1' },
-        })),
+        }),
+      ),
     );
 
-    await expect(processEndpoint({ path: PATH, onPage: NOOP_FN })).rejects
-      .toThrow(
-        /past its reported page count/,
-      );
+    await expect(
+      processEndpoint({ path: PATH, onPage: NOOP_FN }),
+    ).rejects.toThrow(/past its reported page count/);
   });
 
   it('should stop after a single page when there is nothing to paginate', async () => {

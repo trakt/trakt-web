@@ -31,11 +31,13 @@ export function useLibrarySelection(value?: Observable<Library>) {
   ]).pipe(
     map(([requested, query]) => {
       const isLoading = !query || query.isPending || query.isFetching;
-      const hasCustomLibrary = !isLoading && query?.isSuccess &&
+      const hasCustomLibrary =
+        !isLoading &&
+        query?.isSuccess &&
         query.data.pages.some((page) => page.entries.length > 0);
       const isEmpty = !isLoading && query?.isSuccess && !hasCustomLibrary;
-      const available = options.filter((option) =>
-        option.value !== 'other' || hasCustomLibrary
+      const available = options.filter(
+        (option) => option.value !== 'other' || hasCustomLibrary,
       );
       const active = requested === 'other' && isEmpty ? 'plex' : requested;
 

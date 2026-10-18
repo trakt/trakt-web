@@ -12,9 +12,7 @@ import type {
 } from '../models/StreamingServiceOptions.ts';
 import { sortStreamingServices } from './sortStreamingServices.ts';
 
-function mapToStreamNow(
-  serviceResponse: WatchNowServiceResponse,
-): StreamNow {
+function mapToStreamNow(serviceResponse: WatchNowServiceResponse): StreamNow {
   return {
     type: 'streaming',
     link: prependHttps(serviceResponse.link),
@@ -50,9 +48,7 @@ function mapToStreamOnDemand(
   };
 }
 
-function mapToStreamFree(
-  serviceResponse: WatchNowServiceResponse,
-): StreamFree {
+function mapToStreamFree(serviceResponse: WatchNowServiceResponse): StreamFree {
   return {
     type: 'free',
     link: prependHttps(serviceResponse.link),

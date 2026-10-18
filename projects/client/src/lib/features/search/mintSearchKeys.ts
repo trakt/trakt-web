@@ -13,24 +13,23 @@ type MintSearchKeysParams = {
   server: string;
 };
 
-export function mintSearchKeys(
-  { key, server }: MintSearchKeysParams,
-): TypesenseConfig {
+export function mintSearchKeys({
+  key,
+  server,
+}: MintSearchKeysParams): TypesenseConfig {
   const typesense = createSearcher({ key, server });
   const expires_at = Math.floor(
     (Date.now() + SEARCH_KEY_LIFETIME.ttl) / time.seconds(1),
   );
 
   const scope = (preset: string) =>
-    typesense
-      .keys()
-      .generateScopedSearchKey(key, {
-        preset,
-        limit_hits: DEFAULT_SEARCH_LIMIT,
-        per_page: DEFAULT_SEARCH_LIMIT,
-        search_cutoff_ms: SEARCH_CUTOFF_MS,
-        expires_at,
-      });
+    typesense.keys().generateScopedSearchKey(key, {
+      preset,
+      limit_hits: DEFAULT_SEARCH_LIMIT,
+      per_page: DEFAULT_SEARCH_LIMIT,
+      search_cutoff_ms: SEARCH_CUTOFF_MS,
+      expires_at,
+    });
 
   return {
     keys: {

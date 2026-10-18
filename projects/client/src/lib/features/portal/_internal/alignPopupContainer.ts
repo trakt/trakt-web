@@ -4,9 +4,12 @@ import { getOppositePosition } from './getOppositePosition.ts';
 import { getTargetArea } from './getTargetArea.ts';
 import { positionAroundTarget } from './positionAroundTarget.ts';
 
-export function alignPopupContainer(
-  { node, targetRect, targetNode, placement }: PortalProps,
-) {
+export function alignPopupContainer({
+  node,
+  targetRect,
+  targetNode,
+  placement,
+}: PortalProps) {
   if (!placement) {
     return;
   }
@@ -20,9 +23,8 @@ export function alignPopupContainer(
       ? popupRect.right > viewport.width || popupRect.left < 0
       : popupRect.bottom > viewport.height || popupRect.top < 0;
 
-  const direction = position === 'left' || position === 'right'
-    ? 'horizontal'
-    : 'vertical';
+  const direction =
+    position === 'left' || position === 'right' ? 'horizontal' : 'vertical';
 
   if (!isOverflowed(direction)) {
     forceOnScreen(node, targetNode, position);

@@ -68,9 +68,7 @@ export function useUpNextSorting(user: string): UpNextSorting {
         const sortBy = mapToSortBy($params.sortBy, $options);
         const sortHow = toSortDirection($params.sortHow);
 
-        const sorting = $options.find(
-          (option) => option.value === sortBy,
-        );
+        const sorting = $options.find((option) => option.value === sortBy);
 
         return {
           sorting: assertDefined(

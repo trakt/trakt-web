@@ -123,10 +123,10 @@ describe('calculateWatchUntilTimestamps', () => {
 
   it('throws when anchor is missing for custom-start and custom-end modes', () => {
     expect(() =>
-      calculateWatchUntilTimestamps({ episodes, mode: 'custom-start' })
+      calculateWatchUntilTimestamps({ episodes, mode: 'custom-start' }),
     ).toThrowError(/anchor/);
     expect(() =>
-      calculateWatchUntilTimestamps({ episodes, mode: 'custom-end' })
+      calculateWatchUntilTimestamps({ episodes, mode: 'custom-end' }),
     ).toThrowError(/anchor/);
   });
 });

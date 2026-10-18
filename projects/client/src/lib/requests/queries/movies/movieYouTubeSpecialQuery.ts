@@ -15,26 +15,26 @@ type MovieYouTubeSpecialParams = {
   enabled: boolean;
 } & ApiParams;
 
-const movieYouTubeSpecialRequest = async (
-  { fetch, slug, locale }: MovieYouTubeSpecialParams,
-) => {
-  const response = await rawApiFetch(
-    {
-      fetch,
-      path: toMediaInfoPath({
-        type: 'movie',
-        slug,
-        infoType: YOUTUBE_SPECIAL_INFO_TYPE,
-        locale,
-      }),
-    },
-  );
+const movieYouTubeSpecialRequest = async ({
+  fetch,
+  slug,
+  locale,
+}: MovieYouTubeSpecialParams) => {
+  const response = await rawApiFetch({
+    fetch,
+    path: toMediaInfoPath({
+      type: 'movie',
+      slug,
+      infoType: YOUTUBE_SPECIAL_INFO_TYPE,
+      locale,
+    }),
+  });
 
   return response.ok
     ? {
-      body: YouTubeSpecialResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: YouTubeSpecialResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 

@@ -11,8 +11,10 @@ const DEFAULT_LANGUAGE = 'en';
  */
 function displayLanguageName(language: string): string {
   try {
-    return new Intl.DisplayNames([getLocale()], { type: 'language' })
-      .of(language) ?? language;
+    return (
+      new Intl.DisplayNames([getLocale()], { type: 'language' }).of(language) ??
+      language
+    );
   } catch {
     return language;
   }

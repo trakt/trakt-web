@@ -10,18 +10,17 @@ export function createHistoryCalendar<T>(
 ) {
   if (!startDate) return [];
 
-  return Array.from({ length: daysInWeek })
-    .map((_, i) => {
-      const date = new Date(startDate);
-      date.setDate(date.getDate() + i);
-      const key = getDayKey(date);
-      const items = groups.get(key) ?? [];
+  return Array.from({ length: daysInWeek }).map((_, i) => {
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + i);
+    const key = getDayKey(date);
+    const items = groups.get(key) ?? [];
 
-      return {
-        date,
-        items: items.toSorted((a, b) =>
-          getActivityTime(b).getTime() - getActivityTime(a).getTime()
-        ),
-      };
-    });
+    return {
+      date,
+      items: items.toSorted(
+        (a, b) => getActivityTime(b).getTime() - getActivityTime(a).getTime(),
+      ),
+    };
+  });
 }

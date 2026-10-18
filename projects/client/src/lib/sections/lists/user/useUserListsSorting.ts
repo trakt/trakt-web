@@ -39,8 +39,8 @@ export function useUserListsSorting(
     current: useSortParams().pipe(
       map(($params) => {
         const sortBy = mapToSortBy($params.sortBy) ?? 'rank';
-        const sortHow = toSortDirection($params.sortHow) ??
-          defaultDirection(sortBy);
+        const sortHow =
+          toSortDirection($params.sortHow) ?? defaultDirection(sortBy);
         const sorting = userListsSortOptions.find(
           (option) => option.value === sortBy,
         );
@@ -51,9 +51,7 @@ export function useUserListsSorting(
         };
       }),
     ),
-    urlBuilder: (
-      { sortBy, sortHow }: ListUrlBuilderParams<UserListsSortBy>,
-    ) =>
+    urlBuilder: ({ sortBy, sortHow }: ListUrlBuilderParams<UserListsSortBy>) =>
       UrlBuilder.lists.all(props.slug, 'personal', {
         ...(sortBy ? { sort_by: sortBy } : {}),
         ...(sortHow ? { sort_how: sortHow } : {}),

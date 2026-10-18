@@ -9,9 +9,12 @@ export type PortalProps = {
   placement?: PopupPlacement;
 };
 
-export function bodyPortal(
-  { node, targetRect, targetNode, placement }: PortalProps,
-) {
+export function bodyPortal({
+  node,
+  targetRect,
+  targetNode,
+  placement,
+}: PortalProps) {
   node.style.position = 'absolute';
   node.style.zIndex = 'var(--layer-menu)';
 

@@ -21,9 +21,7 @@ function mapToSearchMode(value: string | null): SearchMode | undefined {
   }
 }
 
-export function toSearchTarget(
-  mode: string | null,
-): SearchTarget {
+export function toSearchTarget(mode: string | null): SearchTarget {
   return {
     mode: mapToSearchMode(mode),
   };

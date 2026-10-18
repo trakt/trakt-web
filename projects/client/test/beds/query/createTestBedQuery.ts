@@ -7,9 +7,7 @@ export function createTestBedQuery<
   TError extends Error = Error,
   TData = TQueryFnData,
   TQueryKey extends readonly unknown[] = [],
->(
-  options: CreateQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
-) {
+>(options: CreateQueryOptions<TQueryFnData, TError, TData, TQueryKey>) {
   const client = useQueryClient();
   return queryBridge<TData, TError>(
     () => options as unknown as CreateQueryOptions<TData, TError>,

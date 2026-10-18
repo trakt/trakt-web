@@ -19,15 +19,16 @@ function readDismissals(): DismissalMap {
   try {
     const stored = safeLocalStorage.getItem(STORAGE_KEY);
 
-    return stored ? JSON.parse(stored) ?? {} : {};
+    return stored ? (JSON.parse(stored) ?? {}) : {};
   } catch {
     return {};
   }
 }
 
-export function useNudgeDismissal(
-  { id, maxDismissals = Number.POSITIVE_INFINITY }: UseNudgeDismissalProps,
-) {
+export function useNudgeDismissal({
+  id,
+  maxDismissals = Number.POSITIVE_INFINITY,
+}: UseNudgeDismissalProps) {
   const dismissals = new BehaviorSubject(readDismissals());
   const { track } = useTrack(AnalyticsEvent.BannerDismiss);
   const { user } = useUser();
@@ -57,7 +58,7 @@ export function useNudgeDismissal(
           record: $dismissals[$key],
           now: Date.now(),
           maxDismissals,
-        })
+        }),
       ),
     ),
   };

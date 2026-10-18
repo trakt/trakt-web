@@ -16,28 +16,32 @@ import { useUpNextList } from '../progress/useUpNextList.ts';
 import type { SortBy } from '../user/models/SortBy.ts';
 import type { SortDirection } from '../user/models/SortDirection.ts';
 
-export type WatchListStoreProps = PaginationParams & FilterParams & {
-  type?: DiscoverMode;
-  sortBy?: SortBy;
-  sortHow?: SortDirection;
-  limit?: number;
-  intent?: WatchListIntent;
-};
+export type WatchListStoreProps = PaginationParams &
+  FilterParams & {
+    type?: DiscoverMode;
+    sortBy?: SortBy;
+    sortHow?: SortDirection;
+    limit?: number;
+    intent?: WatchListIntent;
+  };
 
 export function useWatchList(params: WatchListStoreProps) {
   const defaultSort = params.intent === 'default' ? 'added' : 'released';
 
-  const { list: items, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(
-      watchlistQuery({
-        limit: params.limit ?? DEFAULT_PAGE_SIZE,
-        type: params.type === 'media' ? undefined : params.type,
-        sortBy: params.sortBy ?? defaultSort,
-        sortHow: params.sortHow ?? 'desc',
-        filter: params.filter,
-        hide: params.intent === 'start' ? 'unreleased' : undefined,
-      }),
-    );
+  const {
+    list: items,
+    isLoading: baseLoading,
+    ...rest
+  } = usePaginatedListQuery(
+    watchlistQuery({
+      limit: params.limit ?? DEFAULT_PAGE_SIZE,
+      type: params.type === 'media' ? undefined : params.type,
+      sortBy: params.sortBy ?? defaultSort,
+      sortHow: params.sortHow ?? 'desc',
+      filter: params.filter,
+      hide: params.intent === 'start' ? 'unreleased' : undefined,
+    }),
+  );
 
   const overlay = createBulkIntlOverlay<WatchlistedItem>({
     getTargets: listItemTargets,
@@ -46,7 +50,7 @@ export function useWatchList(params: WatchListStoreProps) {
   const localizedList = items.pipe(
     overlay.operator,
     map(($items) =>
-      $items.filter((item) => item.type === 'movie' || item.type === 'show')
+      $items.filter((item) => item.type === 'movie' || item.type === 'show'),
     ),
   );
 
@@ -74,7 +78,7 @@ export function useWatchList(params: WatchListStoreProps) {
     map(([$startList, $continueList]) => {
       const continueIds = new Set(
         $continueList.map((entry) =>
-          'show' in entry ? entry.show.key : entry.key
+          'show' in entry ? entry.show.key : entry.key,
         ),
       );
       return $startList.filter((item) => !continueIds.has(item.entry.key));
@@ -85,8 +89,9 @@ export function useWatchList(params: WatchListStoreProps) {
     ...result,
     list: filteredList,
     isLoading: combineLatest([result.isLoading, continueQuery.isLoading]).pipe(
-      map(([$startLoading, $continueLoading]) =>
-        $startLoading || $continueLoading
+      map(
+        ([$startLoading, $continueLoading]) =>
+          $startLoading || $continueLoading,
       ),
     ),
   };

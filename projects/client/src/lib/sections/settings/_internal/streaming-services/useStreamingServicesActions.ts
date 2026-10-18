@@ -14,31 +14,43 @@ import { streamingConnectionStatus } from './streamingConnectionStatus.ts';
 export function useStreamingServicesActions() {
   const { confirm } = useConfirm();
 
-  const refresh = useMutation(defineMutation({
-    key: 'streaming:refresh',
-    request: (
-      { serviceId, allData }: { serviceId: string; allData: boolean },
-    ) => refreshStreamingRequest({ serviceId, allData }),
-    invalidations: [InvalidateAction.StreamingSync.Connection],
-  }));
+  const refresh = useMutation(
+    defineMutation({
+      key: 'streaming:refresh',
+      request: ({
+        serviceId,
+        allData,
+      }: {
+        serviceId: string;
+        allData: boolean;
+      }) => refreshStreamingRequest({ serviceId, allData }),
+      invalidations: [InvalidateAction.StreamingSync.Connection],
+    }),
+  );
 
-  const disconnect = useMutation(defineMutation({
-    key: 'streaming:disconnect',
-    request: (serviceId: string) => disconnectStreamingRequest({ serviceId }),
-    invalidations: [InvalidateAction.StreamingSync.Connection],
-  }));
+  const disconnect = useMutation(
+    defineMutation({
+      key: 'streaming:disconnect',
+      request: (serviceId: string) => disconnectStreamingRequest({ serviceId }),
+      invalidations: [InvalidateAction.StreamingSync.Connection],
+    }),
+  );
 
-  const undoSync = useMutation(defineMutation({
-    key: 'streaming:undo-sync',
-    request: (syncId: number) => undoSyncRequest({ syncId }),
-    invalidations: [InvalidateAction.StreamingSync.Sync],
-  }));
+  const undoSync = useMutation(
+    defineMutation({
+      key: 'streaming:undo-sync',
+      request: (syncId: number) => undoSyncRequest({ syncId }),
+      invalidations: [InvalidateAction.StreamingSync.Sync],
+    }),
+  );
 
   // Younify returns to the dedicated callback route, which normalises its
   // result params before redirecting back to the settings page.
   const buildReturnUrl = () =>
-    new URL(UrlBuilder.settings.streamingServicesCallback(), page.url.origin)
-      .toString();
+    new URL(
+      UrlBuilder.settings.streamingServicesCallback(),
+      page.url.origin,
+    ).toString();
 
   const connect = async (serviceId: string) => {
     const url = await connectStreamingRequest({

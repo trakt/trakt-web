@@ -56,11 +56,11 @@ export function useTrivia(props: UseTriviaProps) {
     list,
     categories: list.pipe(
       map(($list) =>
-        Array.from(new Set($list.map((trivia) => trivia.category)))
+        Array.from(new Set($list.map((trivia) => trivia.category))),
       ),
     ),
     summary: query.pipe(
-      map(($query) => $query.data ? $query.data.summary : []),
+      map(($query) => ($query.data ? $query.data.summary : [])),
     ),
     hasSpoilers,
   };

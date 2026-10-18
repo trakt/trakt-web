@@ -31,9 +31,8 @@ const mergeCrewMembers = (
     currentMember.episodeCount,
     nextMember.episodeCount,
   ].filter((count): count is number => count != null);
-  const episodeCount = episodeCounts.length > 0
-    ? Math.max(...episodeCounts)
-    : undefined;
+  const episodeCount =
+    episodeCounts.length > 0 ? Math.max(...episodeCounts) : undefined;
 
   return {
     ...currentMember,
@@ -61,12 +60,14 @@ const toCrewCreditMember = (crewMember: CrewMember): CreditMember => ({
   name: crewMember.name,
 });
 
-export function toCreditMembers(
-  { crew, type }: ToCreditMembersProps,
-): CreditMembers {
-  const castPositions = type === 'movie'
-    ? { movies: 'acting' as const }
-    : { shows: 'acting' as const };
+export function toCreditMembers({
+  crew,
+  type,
+}: ToCreditMembersProps): CreditMembers {
+  const castPositions =
+    type === 'movie'
+      ? { movies: 'acting' as const }
+      : { shows: 'acting' as const };
 
   const toCastCreditMember = (castMember: CastMember): CreditMember => {
     const descriptionItems = toCastDescriptionItems(castMember);

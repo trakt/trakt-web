@@ -7,20 +7,15 @@ import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 
 type CollaborationListsParams = { slug: string } & ApiParams;
 
-const collaborationListsRequest = (
-  { fetch, slug }: CollaborationListsParams,
-) =>
-  api({ fetch })
-    .users
-    .lists
-    .collaborations({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'images',
-      },
-    });
+const collaborationListsRequest = ({ fetch, slug }: CollaborationListsParams) =>
+  api({ fetch }).users.lists.collaborations({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'images',
+    },
+  });
 
 export const collaborationListsQuery = defineQuery({
   key: 'collaborationLists',

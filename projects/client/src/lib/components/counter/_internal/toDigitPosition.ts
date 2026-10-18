@@ -13,9 +13,13 @@ const smoothstep = (t: number) => t * t * (3 - 2 * t);
  * column derives its own offset from the same raw value, so no two can disagree
  * about a carry.
  */
-export function toDigitPosition(
-  { value, place }: { value: number; place: number },
-): number {
+export function toDigitPosition({
+  value,
+  place,
+}: {
+  value: number;
+  place: number;
+}): number {
   const scaled = Math.max(0, value) / Math.pow(10, place);
   const digit = Math.floor(scaled) % 10;
   const fraction = scaled - Math.floor(scaled);

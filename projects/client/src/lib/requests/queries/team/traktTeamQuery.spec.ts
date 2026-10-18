@@ -7,10 +7,7 @@ import { traktTeamQuery } from './traktTeamQuery.ts';
 describe('traktTeamQuery', () => {
   it('should query for the trakt team', async () => {
     const result = await runQuery({
-      factory: () =>
-        createTestBedQuery(
-          traktTeamQuery(),
-        ),
+      factory: () => createTestBedQuery(traktTeamQuery()),
       mapper: (response) => response?.data,
     });
 

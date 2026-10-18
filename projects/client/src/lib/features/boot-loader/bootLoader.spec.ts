@@ -11,15 +11,14 @@ function mountBootLoader() {
     return link;
   });
 
-  document.body.innerHTML = `${
-    bootLoaderTemplate
-      .replace('%boot.css%', `${STYLESHEET_COUNT}`)
-      .replace('%boot.js%', '1')
-      .replaceAll('%boot.delay%', '1000')
-  }<div class="app">page</div>`;
+  document.body.innerHTML = `${bootLoaderTemplate
+    .replace('%boot.css%', `${STYLESHEET_COUNT}`)
+    .replace('%boot.js%', '1')
+    .replaceAll('%boot.delay%', '1000')}<div class="app">page</div>`;
 
-  Array.from(document.body.querySelectorAll('script'))
-    .forEach((script) => new Function(script.textContent ?? '')());
+  Array.from(document.body.querySelectorAll('script')).forEach((script) =>
+    new Function(script.textContent ?? '')(),
+  );
 
   return stylesheets;
 }
@@ -29,7 +28,7 @@ function settle(links: ReadonlyArray<HTMLLinkElement>) {
     Object.defineProperty(link, 'sheet', {
       configurable: true,
       value: {},
-    })
+    }),
   );
 }
 
@@ -38,7 +37,7 @@ function unsettle(links: ReadonlyArray<HTMLLinkElement>) {
     Object.defineProperty(link, 'sheet', {
       configurable: true,
       value: null,
-    })
+    }),
   );
 }
 
@@ -60,7 +59,8 @@ describe('boot loader', () => {
   afterEach(() => {
     vi.useRealTimers();
     vi.restoreAllMocks();
-    document.head.querySelectorAll('link[data-boot-css]')
+    document.head
+      .querySelectorAll('link[data-boot-css]')
       .forEach((link) => link.remove());
     document.body.innerHTML = '';
     delete document.documentElement.dataset.boot;

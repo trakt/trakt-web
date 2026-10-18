@@ -13,7 +13,7 @@ describe('util: hasSeasonTitles', () => {
 
   it('should return true when a single season has a title', () => {
     const seasons = ShowSiloSeasonsMappedMock.map((season, index) =>
-      index === 0 ? { ...season, title: 'Murder House' } : season
+      index === 0 ? { ...season, title: 'Murder House' } : season,
     );
 
     expect(hasSeasonTitles(seasons)).toBe(true);

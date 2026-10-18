@@ -11,9 +11,11 @@ type VisibleCreditGroupsProps = {
  * Narrows credit groups to what the drawer shows: the selected group when
  * browsing, or every matching member across all groups when searching.
  */
-export function toVisibleCreditGroups(
-  { groups, searchTerm, creditsType }: VisibleCreditGroupsProps,
-) {
+export function toVisibleCreditGroups({
+  groups,
+  searchTerm,
+  creditsType,
+}: VisibleCreditGroupsProps) {
   const isSearching = searchTerm.length > 0;
 
   return groups
@@ -22,8 +24,8 @@ export function toVisibleCreditGroups(
       ...group,
       members: isSearching
         ? group.members.filter(({ description, name }) =>
-          `${name} ${description}`.toLocaleLowerCase().includes(searchTerm)
-        )
+            `${name} ${description}`.toLocaleLowerCase().includes(searchTerm),
+          )
         : group.members,
     }))
     .filter((group) => group.members.length > 0);

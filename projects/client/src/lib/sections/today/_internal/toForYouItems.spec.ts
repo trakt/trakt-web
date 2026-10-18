@@ -58,11 +58,13 @@ describe('util: toForYouItems', () => {
       range: getTodayWindow(now),
     });
 
-    expect(items).toEqual([{
-      key: `start-watching-movie-${released.id}`,
-      type: 'start-watching',
-      media: released,
-    }]);
+    expect(items).toEqual([
+      {
+        key: `start-watching-movie-${released.id}`,
+        type: 'start-watching',
+        media: released,
+      },
+    ]);
   });
 
   it('should list new episodes before watchlist releases', () => {

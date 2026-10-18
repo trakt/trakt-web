@@ -21,7 +21,9 @@ export function createSpotlightTriggers({
       callback: ({ originalEvent }) => {
         if (isTextInputTarget(originalEvent.target)) return;
         if (
-          originalEvent.ctrlKey || originalEvent.metaKey || originalEvent.altKey
+          originalEvent.ctrlKey ||
+          originalEvent.metaKey ||
+          originalEvent.altKey
         ) {
           return;
         }

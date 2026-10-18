@@ -42,9 +42,10 @@ function mapToMediaSyncRun(run: MediaSyncRunResponse): MediaSyncRun {
   };
 }
 
-const mediaSyncRunsRequest = async (
-  { fetch, connectionId }: MediaSyncRunsParams,
-) => {
+const mediaSyncRunsRequest = async ({
+  fetch,
+  connectionId,
+}: MediaSyncRunsParams) => {
   const response = await rawApiFetch({
     fetch,
     path: `/v3/users/me/sync/connections/${connectionId}/runs`,

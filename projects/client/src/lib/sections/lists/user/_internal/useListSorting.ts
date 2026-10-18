@@ -3,9 +3,7 @@ import type { WatchListIntent } from '$lib/requests/models/WatchListIntent.ts';
 import { useSortParams } from '$lib/sections/lists/stores/useSortParams.ts';
 import { map, type Observable } from 'rxjs';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import {
-  getListUrl,
-} from '../../components/list-summary/_internal/getListUrl.ts';
+import { getListUrl } from '../../components/list-summary/_internal/getListUrl.ts';
 import {
   LIST_SORT_OPTIONS,
   WATCHLIST_SORT_OPTIONS,
@@ -36,19 +34,23 @@ type ListSorting = {
   urlBuilder: ListUrlBuilder;
 };
 
-type UseListSortingProps = {
-  type: 'user-list';
-  list: MediaListSummary | undefined;
-} | {
-  type: 'watchlist';
-  intent: WatchListIntent;
-} | {
-  type: 'favorites';
-  slug: string;
-} | {
-  type: 'progress';
-  slug: string;
-};
+type UseListSortingProps =
+  | {
+      type: 'user-list';
+      list: MediaListSummary | undefined;
+    }
+  | {
+      type: 'watchlist';
+      intent: WatchListIntent;
+    }
+  | {
+      type: 'favorites';
+      slug: string;
+    }
+  | {
+      type: 'progress';
+      slug: string;
+    };
 
 function getDefaultSortBy(props: UseListSortingProps): SortBy | undefined {
   if (props.type === 'favorites') {
@@ -62,11 +64,7 @@ function getDefaultDirection(props: UseListSortingProps): SortDirection {
     return 'desc';
   }
 
-  if (
-    props.type === 'favorites' ||
-    props.type === 'progress' ||
-    !props.list
-  ) {
+  if (props.type === 'favorites' || props.type === 'progress' || !props.list) {
     return 'desc';
   }
 
@@ -85,9 +83,7 @@ function getSortOptions(props: UseListSortingProps) {
   return LIST_SORT_OPTIONS;
 }
 
-export function useListSorting(
-  props: UseListSortingProps,
-): ListSorting {
+export function useListSorting(props: UseListSortingProps): ListSorting {
   const options = getSortOptions(props);
 
   return {
@@ -95,13 +91,11 @@ export function useListSorting(
     current: useSortParams().pipe(
       map(($params) => {
         const defaultDirection = getDefaultDirection(props);
-        const sortBy = mapToSortBy($params.sortBy, options) ??
-          getDefaultSortBy(props);
+        const sortBy =
+          mapToSortBy($params.sortBy, options) ?? getDefaultSortBy(props);
         const sortHow = toSortDirection($params.sortHow) ?? defaultDirection;
 
-        const sorting = options.find(
-          (option) => option.value === sortBy,
-        );
+        const sorting = options.find((option) => option.value === sortBy);
 
         return {
           sorting: assertDefined(sorting, 'Expected valid sorting option'),

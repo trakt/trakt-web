@@ -6,9 +6,7 @@ import { mapToEpisodeEntry } from './mapToEpisodeEntry.ts';
 import { mapToMovieEntry } from './mapToMovieEntry.ts';
 import { mapToShowEntry } from './mapToShowEntry.ts';
 
-function mapListDetails(
-  listedItem: ListedAllResponse,
-) {
+function mapListDetails(listedItem: ListedAllResponse) {
   return {
     id: listedItem.id,
     key: `${listedItem.type}-${listedItem.id}`,
@@ -79,9 +77,7 @@ function mapToListEntry(itemResponse: ListedAllResponse) {
   }
 }
 
-export function mapToListItem(
-  itemResponse: ListedAllResponse,
-): ListItem {
+export function mapToListItem(itemResponse: ListedAllResponse): ListItem {
   return {
     ...mapListDetails(itemResponse),
     ...mapToListEntry(itemResponse),

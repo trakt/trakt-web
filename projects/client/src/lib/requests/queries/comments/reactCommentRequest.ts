@@ -3,13 +3,13 @@ import { type ReactionType } from '@trakt/api';
 
 type ReactCommentParams = { id: number } & ReactionType & ApiParams;
 
-export function reactCommentRequest(
-  { fetch, id, reaction_type }: ReactCommentParams,
-): Promise<boolean> {
+export function reactCommentRequest({
+  fetch,
+  id,
+  reaction_type,
+}: ReactCommentParams): Promise<boolean> {
   return api({ fetch })
-    .comments
-    .reactions
-    .add({
+    .comments.reactions.add({
       params: {
         id: `${id}`,
         reaction_type,

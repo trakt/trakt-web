@@ -32,7 +32,7 @@ describe('useMarkAsWatched', () => {
   ) => {
     it('should NOT be marking as watched when first requested', async () => {
       const { isMarkingAsWatched } = await renderStore(() =>
-        useMarkAsWatched(props)
+        useMarkAsWatched(props),
       );
 
       expect(await firstValueFrom(isMarkingAsWatched)).toBe(false);
@@ -40,7 +40,7 @@ describe('useMarkAsWatched', () => {
 
     it('should be marking as watched when adding', async () => {
       const { isMarkingAsWatched, markAsWatched } = await renderStore(() =>
-        useMarkAsWatched(props)
+        useMarkAsWatched(props),
       );
 
       markAsWatched();
@@ -49,7 +49,7 @@ describe('useMarkAsWatched', () => {
 
     it('should NOT be marking as watched after add request is completed', async () => {
       const { isMarkingAsWatched, markAsWatched } = await renderStore(() =>
-        useMarkAsWatched(props)
+        useMarkAsWatched(props),
       );
 
       await markAsWatched();
@@ -58,7 +58,7 @@ describe('useMarkAsWatched', () => {
 
     it('should be marking as watched when removing', async () => {
       const { isMarkingAsWatched, removeWatched } = await renderStore(() =>
-        useMarkAsWatched(props)
+        useMarkAsWatched(props),
       );
 
       removeWatched();
@@ -67,7 +67,7 @@ describe('useMarkAsWatched', () => {
 
     it('should NOT be marking as watched after remove request is completed', async () => {
       const { isMarkingAsWatched, removeWatched } = await renderStore(() =>
-        useMarkAsWatched(props)
+        useMarkAsWatched(props),
       );
 
       await removeWatched();
@@ -76,7 +76,7 @@ describe('useMarkAsWatched', () => {
 
     it('should call invalidate after marking as watched', async () => {
       const { removeWatched } = await renderStore(() =>
-        useMarkAsWatched(props)
+        useMarkAsWatched(props),
       );
 
       const invalidations = await captureInvalidations(removeWatched);
@@ -86,7 +86,7 @@ describe('useMarkAsWatched', () => {
 
     it('should call invalidate after removing watched', async () => {
       const { removeWatched } = await renderStore(() =>
-        useMarkAsWatched(props)
+        useMarkAsWatched(props),
       );
 
       const invalidations = await captureInvalidations(removeWatched);
@@ -111,7 +111,7 @@ describe('useMarkAsWatched', () => {
 
     it('should know Heretic is watched', async () => {
       const { isWatched } = await renderStore(() =>
-        useMarkAsWatched({ ...props, media: MovieHereticMappedMock })
+        useMarkAsWatched({ ...props, media: MovieHereticMappedMock }),
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(true);
@@ -125,7 +125,7 @@ describe('useMarkAsWatched', () => {
           type: 'movie' as const,
           // Heretic (916302): single play in history, carries a rating.
           media: { id: 916302, effectiveReleaseDate: new Date('2020-01-01') },
-        })
+        }),
       );
 
       await removeWatched();
@@ -140,7 +140,7 @@ describe('useMarkAsWatched', () => {
         useMarkAsWatched({
           type: 'movie' as const,
           media: { id: 1, effectiveReleaseDate: new Date('2020-01-01') },
-        })
+        }),
       );
 
       await removeWatched();
@@ -154,7 +154,7 @@ describe('useMarkAsWatched', () => {
           type: 'show' as const,
           // Silo (180770): watched + rated; the main action wipes all plays.
           media: { id: 180770, effectiveReleaseDate: new Date('2020-01-01') },
-        })
+        }),
       );
 
       await removeWatched();
@@ -175,7 +175,7 @@ describe('useMarkAsWatched', () => {
 
     it('should NOT be watched if it is Silo', async () => {
       const { isWatched } = await renderStore(() =>
-        useMarkAsWatched({ ...props, media: ShowSiloMappedMock })
+        useMarkAsWatched({ ...props, media: ShowSiloMappedMock }),
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(false);
@@ -183,7 +183,7 @@ describe('useMarkAsWatched', () => {
 
     it('should be watched if it is Devs', async () => {
       const { isWatched } = await renderStore(() =>
-        useMarkAsWatched({ ...props, media: ShowDevsMappedMock })
+        useMarkAsWatched({ ...props, media: ShowDevsMappedMock }),
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(true);
@@ -215,7 +215,7 @@ describe('useMarkAsWatched', () => {
             effectiveReleaseDate: new Date(),
           },
           show: ShowSiloMappedMock,
-        })
+        }),
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(true);
@@ -258,7 +258,7 @@ describe('useMarkAsWatched', () => {
             },
           ],
           show: ShowSiloMappedMock,
-        })
+        }),
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(false);
@@ -275,7 +275,7 @@ describe('useMarkAsWatched', () => {
             effectiveReleaseDate: new Date(),
           },
           show: ShowSiloMappedMock,
-        })
+        }),
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(false);
@@ -336,7 +336,7 @@ describe('useMarkAsWatched', () => {
             },
           ],
           show: ShowDevsMappedMock,
-        })
+        }),
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(true);

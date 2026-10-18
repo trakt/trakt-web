@@ -114,9 +114,7 @@ const CLEANUP_TIMEOUT_MS = time.seconds(3);
 async function deleteNavigationCaches(isDeletable: (key: string) => boolean) {
   const keys = await caches.keys().catch(() => []);
 
-  await Promise.all(
-    keys.filter(isDeletable).map((key) => deleteCache(key)),
-  );
+  await Promise.all(keys.filter(isDeletable).map((key) => deleteCache(key)));
 }
 
 const isNavigationCache = (key: string) => key.startsWith(CacheKey.navigation);
@@ -131,8 +129,8 @@ const withCleanupTimeout = (cleanup: Promise<void>) =>
 // documents.
 function evictStaleNavigationCaches() {
   return withCleanupTimeout(
-    deleteNavigationCaches((key) =>
-      isNavigationCache(key) && key !== navigationCacheName
+    deleteNavigationCaches(
+      (key) => isNavigationCache(key) && key !== navigationCacheName,
     ),
   );
 }
@@ -152,10 +150,9 @@ self.addEventListener('install', () => {
 // `activating` while the spec queues every fetch behind it.
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    Promise.all([
-      self.clients.claim(),
-      evictStaleNavigationCaches(),
-    ]).catch(() => undefined),
+    Promise.all([self.clients.claim(), evictStaleNavigationCaches()]).catch(
+      () => undefined,
+    ),
   );
 });
 
@@ -276,9 +273,11 @@ registerRoute(
     if (!isSameOriginAsset(url)) {
       return false;
     }
-    return AssetPattern.static.test(url.pathname) ||
+    return (
+      AssetPattern.static.test(url.pathname) ||
       AssetPattern.media.test(url.pathname) ||
-      AssetPattern.documents.test(url.pathname);
+      AssetPattern.documents.test(url.pathname)
+    );
   },
   new CacheFirst({
     cacheName: CacheKey.static,

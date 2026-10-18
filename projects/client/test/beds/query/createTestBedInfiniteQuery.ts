@@ -25,8 +25,5 @@ export function createTestBedInfiniteQuery<
     TData,
     TQueryKey,
     TPageParam
-  >(
-    () => options,
-    client,
-  );
+  >(() => options, client);
 }

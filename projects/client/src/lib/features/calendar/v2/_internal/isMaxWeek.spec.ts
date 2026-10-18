@@ -10,12 +10,14 @@ describe('util: isMaxWeek', () => {
   });
 
   it('should use Sunday-first weeks for en', () => {
-    expect(isMaxWeek({ date: sunday, maxDate: monday, locale: 'en' }))
-      .toBe(true);
+    expect(isMaxWeek({ date: sunday, maxDate: monday, locale: 'en' })).toBe(
+      true,
+    );
   });
 
   it('should use Monday-first weeks for a Monday-first locale', () => {
-    expect(isMaxWeek({ date: sunday, maxDate: monday, locale: 'nl-NL' }))
-      .toBe(false);
+    expect(isMaxWeek({ date: sunday, maxDate: monday, locale: 'nl-NL' })).toBe(
+      false,
+    );
   });
 });

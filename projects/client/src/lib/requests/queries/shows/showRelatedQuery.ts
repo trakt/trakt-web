@@ -8,38 +8,30 @@ import type { z } from 'zod';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
-type ShowRelatedParams =
-  & {
-    slug: string;
-  }
-  & PaginationParams
-  & ApiParams;
+type ShowRelatedParams = {
+  slug: string;
+} & PaginationParams &
+  ApiParams;
 
 const RelatedShowSchema = ShowEntrySchema;
 export type RelatedShow = z.infer<typeof RelatedShowSchema>;
 
-const showRelatedRequest = (
-  { fetch, slug, limit, page }: ShowRelatedParams,
-) =>
-  api({ fetch })
-    .shows
-    .related({
-      query: {
-        extended: 'full,images,colors',
-        limit,
-        page,
-      },
-      params: {
-        id: slug,
-      },
-    });
+const showRelatedRequest = ({ fetch, slug, limit, page }: ShowRelatedParams) =>
+  api({ fetch }).shows.related({
+    query: {
+      extended: 'full,images,colors',
+      limit,
+      page,
+    },
+    params: {
+      id: slug,
+    },
+  });
 
 export const showRelatedQuery = defineInfiniteQuery({
   key: 'showRelated',
   invalidations: [],
-  dependencies: (
-    params,
-  ) => [params.slug, params.page, params.limit],
+  dependencies: (params) => [params.slug, params.page, params.limit],
   request: showRelatedRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToShowEntry),

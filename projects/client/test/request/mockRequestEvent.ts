@@ -7,11 +7,10 @@ class InMemoryCookies {
   private store: Map<string, string> = new Map();
 
   getAll() {
-    return Array.from(this.store.entries())
-      .map(([name, value]) => ({
-        name,
-        value,
-      }));
+    return Array.from(this.store.entries()).map(([name, value]) => ({
+      name,
+      value,
+    }));
   }
 
   get(name: string): string | null {
@@ -33,8 +32,8 @@ class InMemoryCookies {
   ): string {
     const optionsStr = options
       ? Object.entries(options)
-        .map(([key, val]) => `;${key}=${val}`)
-        .join('')
+          .map(([key, val]) => `;${key}=${val}`)
+          .join('')
       : '';
     return `${name}=${value}${optionsStr}`;
   }

@@ -10,8 +10,8 @@ function filterSocialOptions(
   options: ToggleOption<ProfileSocialListType>[],
   hasFollowRequests: boolean,
 ): ToggleOption<ProfileSocialListType>[] {
-  return options.filter((option) =>
-    option.value !== 'requests' || hasFollowRequests
+  return options.filter(
+    (option) => option.value !== 'requests' || hasFollowRequests,
   );
 }
 
@@ -19,9 +19,11 @@ function findCurrentOption(
   options: ToggleOption<ProfileSocialListType>[],
   value: ProfileSocialListType,
 ) {
-  return options.find((option) => option.value === value) ??
+  return (
+    options.find((option) => option.value === value) ??
     options.find((option) => option.value === 'following') ??
-    options.at(0);
+    options.at(0)
+  );
 }
 
 export function useProfileSocialToggler(slug: string) {
@@ -35,7 +37,7 @@ export function useProfileSocialToggler(slug: string) {
   );
 
   const followRequests = combineLatest([isMe, followRequestsQuery]).pipe(
-    map(([$isMe, $query]) => $isMe ? $query.data ?? [] : []),
+    map(([$isMe, $query]) => ($isMe ? ($query.data ?? []) : [])),
   );
 
   const visibleOptions = followRequests.pipe(
@@ -43,13 +45,14 @@ export function useProfileSocialToggler(slug: string) {
       filterSocialOptions(
         options as ToggleOption<ProfileSocialListType>[],
         $followRequests.length > 0,
-      )
+      ),
     ),
   );
 
   const visibleCurrent = combineLatest([current, visibleOptions]).pipe(
-    map(([$current, $options]) =>
-      findCurrentOption($options, $current.value) ?? $current
+    map(
+      ([$current, $options]) =>
+        findCurrentOption($options, $current.value) ?? $current,
     ),
   );
 

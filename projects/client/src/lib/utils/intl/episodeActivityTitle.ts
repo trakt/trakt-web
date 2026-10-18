@@ -9,10 +9,7 @@ type Show = {
 };
 
 // FIXME: refactor this away when changing month to date
-export function episodeActivityTitle(
-  episode: EpisodeEntry,
-  show?: Show,
-) {
+export function episodeActivityTitle(episode: EpisodeEntry, show?: Show) {
   switch (episode.type) {
     case EpisodeComputedType.full_season:
       return seasonLabel(episode.season, show?.title);
@@ -23,11 +20,9 @@ export function episodeActivityTitle(
         show?.title,
       );
     default:
-      return `${
-        episodeNumberLabel({
-          seasonNumber: episode.season,
-          episodeNumber: episode.number,
-        })
-      } - ${show?.title ?? episode.title}`;
+      return `${episodeNumberLabel({
+        seasonNumber: episode.season,
+        episodeNumber: episode.number,
+      })} - ${show?.title ?? episode.title}`;
   }
 }

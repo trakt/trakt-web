@@ -11,22 +11,22 @@ type EpisodeSummaryParams = {
   episode: number;
 } & ApiParams;
 
-const episodeSummaryRequest = (
-  { fetch, slug, season, episode }: EpisodeSummaryParams,
-) =>
-  api({ fetch })
-    .shows
-    .episode
-    .summary({
-      params: {
-        id: slug,
-        season: castNumberAsString(season),
-        episode,
-      },
-      query: {
-        extended: 'full,images',
-      },
-    });
+const episodeSummaryRequest = ({
+  fetch,
+  slug,
+  season,
+  episode,
+}: EpisodeSummaryParams) =>
+  api({ fetch }).shows.episode.summary({
+    params: {
+      id: slug,
+      season: castNumberAsString(season),
+      episode,
+    },
+    query: {
+      extended: 'full,images',
+    },
+  });
 
 export const episodeSummaryQuery = defineQuery({
   key: 'episodeSummary',

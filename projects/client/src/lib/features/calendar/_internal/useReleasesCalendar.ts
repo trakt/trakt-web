@@ -33,10 +33,7 @@ export function useReleasesCalendar(
   props: UseReleasesCalendarParams,
 ): ReleasesCalendarResult {
   const [yyyyMmDd] = props.start.toISOString().split('T');
-  const startDate = assertDefined(
-    yyyyMmDd,
-    'Could not extract start date.',
-  );
+  const startDate = assertDefined(yyyyMmDd, 'Could not extract start date.');
 
   const query = useQuery(
     releasesCalendarQuery({
@@ -47,17 +44,13 @@ export function useReleasesCalendar(
     }),
   );
 
-  const baseLoading = query.pipe(
-    map(toLoadingState),
-  );
+  const baseLoading = query.pipe(map(toLoadingState));
 
   const overlay = createBulkIntlOverlay<ReleasesCalendarEntry>({
     getTargets: episodeWithShowOrMovieTargets,
   });
 
-  const items = query.pipe(
-    map(($query) => $query.data ?? []),
-  );
+  const items = query.pipe(map(($query) => $query.data ?? []));
 
   const filteredItems = items.pipe(
     filterByEpisodeType(props.episodeType),
@@ -73,7 +66,7 @@ export function useReleasesCalendar(
           items: $items,
           start: props.start,
           days: props.days,
-        })
+        }),
       ),
     ),
   };

@@ -15,20 +15,16 @@ type ShowResponseWithLastAired = ShowResponse & {
   last_aired?: string | null;
 };
 
-export function mapToShowEntry(
-  show: ShowResponseWithLastAired,
-): ShowEntry {
+export function mapToShowEntry(show: ShowResponseWithLastAired): ShowEntry {
   const poster = mapToPoster(show.images);
   const cover = mapToCover(show.images);
   const logo = mapToLogo(show.images);
 
-  const thumbCandidate = findDefined(
-    ...(show.images?.thumb ?? []),
-  );
+  const thumbCandidate = findDefined(...(show.images?.thumb ?? []));
 
   const runtime = show.runtime ?? NaN;
   const episodeCount = show.aired_episodes ?? NaN;
-  const totalRuntime = show.total_runtime ?? (runtime * episodeCount);
+  const totalRuntime = show.total_runtime ?? runtime * episodeCount;
   const effectiveReleaseDate = new Date(show.first_aired ?? MAX_DATE);
   const ending = ShowEndingSchema.safeParse(show.ending).data;
 
@@ -51,12 +47,7 @@ export function mapToShowEntry(
     logo,
     colors: mapToColors(show.colors?.poster),
     thumb: {
-      url: prependHttps(
-        findDefined(
-          thumbCandidate,
-        ),
-        cover.url.thumb,
-      ),
+      url: prependHttps(findDefined(thumbCandidate), cover.url.thumb),
     },
     genres: show.genres ?? [],
     status: show.status ?? 'unknown',
@@ -79,13 +70,14 @@ export function mapToShowEntry(
     totalRuntime,
     rating: mapToTraktRating(show.rating),
     network: show.network,
-    airs: show.airs?.day && show.airs.time && show.airs.timezone
-      ? {
-        day: show.airs.day,
-        time: show.airs.time,
-        timezone: show.airs.timezone,
-      }
-      : undefined,
+    airs:
+      show.airs?.day && show.airs.time && show.airs.timezone
+        ? {
+            day: show.airs.day,
+            time: show.airs.time,
+            timezone: show.airs.timezone,
+          }
+        : undefined,
     homepage: prependHttps(show.homepage),
     socialMedia: mapToSocialMedia(show),
     updatedAt: show.updated_at ? new Date(show.updated_at) : undefined,

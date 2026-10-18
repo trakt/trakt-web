@@ -21,10 +21,7 @@ type PersonalListsParams = {
   sortHow?: SortDirection | Nil;
 } & Partial<PaginationParams>;
 
-function sortByUpdatedAt(
-  lists: MediaListSummary[],
-  sortHow: SortDirection,
-) {
+function sortByUpdatedAt(lists: MediaListSummary[], sortHow: SortDirection) {
   return lists.toSorted((a, b) => {
     const diff = a.updatedAt.getTime() - b.updatedAt.getTime();
     return sortHow === 'asc' ? diff : -diff;
@@ -35,11 +32,15 @@ function defaultSortBy(type: PersonalListType): UserListsSortBy {
   return type === 'personal' ? 'rank' : 'updated_at';
 }
 
-function typeToQuery(
-  { type, slug, limit, sortBy, sortHow }: PersonalListsParams & {
-    type: Exclude<PersonalListType, 'collaboration'>;
-  },
-) {
+function typeToQuery({
+  type,
+  slug,
+  limit,
+  sortBy,
+  sortHow,
+}: PersonalListsParams & {
+  type: Exclude<PersonalListType, 'collaboration'>;
+}) {
   const paginationProps = {
     limit: limit ?? DEFAULT_LISTS_PAGE_SIZE,
   };
@@ -78,15 +79,13 @@ function useListsQuery(params: PersonalListsParams) {
   return usePaginatedListQuery(typeToQuery({ ...params, type }));
 }
 
-export function usePersonalListsSummary(
-  {
-    type,
-    slug,
-    limit,
-    sortBy,
-    sortHow,
-  }: PersonalListsParams,
-) {
+export function usePersonalListsSummary({
+  type,
+  slug,
+  limit,
+  sortBy,
+  sortHow,
+}: PersonalListsParams) {
   const resolvedSortBy = sortBy ?? defaultSortBy(type);
   const resolvedSortHow = sortHow ?? defaultDirection(resolvedSortBy);
   const { list, ...rest } = useListsQuery({
@@ -100,18 +99,16 @@ export function usePersonalListsSummary(
   return {
     ...rest,
     list: list.pipe(
-      map(
-        ($list) => {
-          // FIXME: figure out the root cause of duplicates
-          const deduped = dedupe((item) => item.id, $list);
+      map(($list) => {
+        // FIXME: figure out the root cause of duplicates
+        const deduped = dedupe((item) => item.id, $list);
 
-          if (type === 'personal' || resolvedSortBy !== 'updated_at') {
-            return deduped;
-          }
+        if (type === 'personal' || resolvedSortBy !== 'updated_at') {
+          return deduped;
+        }
 
-          return sortByUpdatedAt(deduped, resolvedSortHow);
-        },
-      ),
+        return sortByUpdatedAt(deduped, resolvedSortHow);
+      }),
     ),
   };
 }

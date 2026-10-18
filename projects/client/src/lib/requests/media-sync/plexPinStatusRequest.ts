@@ -4,12 +4,16 @@ import z from 'zod';
 const PlexPinStatusSchema = z.object({
   status: z.enum(['pending', 'claimed']),
   account_name: z.string().nullable(),
-  servers: z.array(z.object({
-    id: z.string(),
-    name: z.string(),
-    owned: z.boolean(),
-    reachable: z.boolean(),
-  })).nullable(),
+  servers: z
+    .array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        owned: z.boolean(),
+        reachable: z.boolean(),
+      }),
+    )
+    .nullable(),
 });
 
 export type PlexServerOption = {
@@ -22,14 +26,15 @@ export type PlexServerOption = {
 export type PlexPinStatus =
   | { status: 'pending' }
   | {
-    status: 'claimed';
-    accountName: string | null;
-    servers: PlexServerOption[];
-  };
+      status: 'claimed';
+      accountName: string | null;
+      servers: PlexServerOption[];
+    };
 
-export async function plexPinStatusRequest(
-  { fetch, attemptId }: { attemptId: string } & ApiParams,
-): Promise<PlexPinStatus> {
+export async function plexPinStatusRequest({
+  fetch,
+  attemptId,
+}: { attemptId: string } & ApiParams): Promise<PlexPinStatus> {
   const response = await rawApiFetch({
     fetch,
     path: `/v3/users/me/sync/plex/pin/${attemptId}`,
@@ -38,9 +43,11 @@ export async function plexPinStatusRequest(
     throw new Error(`Failed to check Plex sign-in: ${response.status}`);
   }
   const body = PlexPinStatusSchema.parse(await response.json());
-  return body.status === 'pending' ? { status: 'pending' } : {
-    status: 'claimed',
-    accountName: body.account_name,
-    servers: body.servers ?? [],
-  };
+  return body.status === 'pending'
+    ? { status: 'pending' }
+    : {
+        status: 'claimed',
+        accountName: body.account_name,
+        servers: body.servers ?? [],
+      };
 }

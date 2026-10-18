@@ -71,9 +71,10 @@ async function detectZipFormat(file: File): Promise<TvTimeFormat> {
   if (basenames.includes(LIBERATOR_ZIP_MARKER)) return 'liberator';
   if (basenames.includes(EXTRACTOR_ZIP_MARKER)) return 'extractor';
   if (
-    basenames.some((name) =>
-      name.startsWith('tvtime-') &&
-      (name.endsWith('.csv') || name.endsWith('.json'))
+    basenames.some(
+      (name) =>
+        name.startsWith('tvtime-') &&
+        (name.endsWith('.csv') || name.endsWith('.json')),
     )
   ) {
     return 'export';
@@ -85,36 +86,42 @@ async function detectZipFormat(file: File): Promise<TvTimeFormat> {
 async function detectFormat(file: File): Promise<TvTimeFormat> {
   if (file.name.endsWith('.zip')) return detectZipFormat(file);
 
-  const [first] = await parseCsvFile(file) as Record<string, unknown>[];
+  const [first] = (await parseCsvFile(file)) as Record<string, unknown>[];
   if (!first) return 'unknown';
   if (isExportCsv(file, first)) return 'export';
   if (EXTRACTOR_MARKER in first) return 'extractor';
   if ('imdb_id' in first) return 'liberator';
   if (
-    'type-uuid-n' in first || 'key' in first ||
-    'notification_offset' in first || 'vote_key' in first
+    'type-uuid-n' in first ||
+    'key' in first ||
+    'notification_offset' in first ||
+    'vote_key' in first
   ) {
     return 'gdpr';
   }
 
-  const isNative = 'episode_id' in first &&
+  const isNative =
+    'episode_id' in first &&
     NATIVE_COMPANION_COLUMNS.some((column) => column in first);
   return isNative ? 'native' : 'unknown';
 }
 
 function parsePerFile(parser: FileParser, files: ReadonlyArray<File>) {
-  return Promise.all(files.map((file) => parser.parse([file])))
-    .then((results) => results.flat());
+  return Promise.all(files.map((file) => parser.parse([file]))).then(
+    (results) => results.flat(),
+  );
 }
 
 export const TvTimeCsvParser: FileParser = {
   name: 'TV Time',
 
   canParse(files) {
-    return files.length > 0 &&
+    return (
+      files.length > 0 &&
       files.every(
         (file) => file.name.endsWith('.csv') || file.name.endsWith('.zip'),
-      );
+      )
+    );
   },
 
   async parse(files) {
@@ -124,12 +131,8 @@ export const TvTimeCsvParser: FileParser = {
     // sidecars); unrecognized files are ignored instead of breaking the
     // import.
     const formats = await Promise.all(files.map(detectFormat));
-    const recognized = files.filter(
-      (_, index) => formats[index] !== 'unknown',
-    );
-    const distinct = new Set(
-      formats.filter((format) => format !== 'unknown'),
-    );
+    const recognized = files.filter((_, index) => formats[index] !== 'unknown');
+    const distinct = new Set(formats.filter((format) => format !== 'unknown'));
 
     if (distinct.size === 0) {
       throw new Error(m.import_error_tvtime_no_files());

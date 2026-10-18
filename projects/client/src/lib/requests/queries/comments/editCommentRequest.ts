@@ -6,12 +6,13 @@ import { mapToMediaComment } from '../../_internal/mapToMediaComment.ts';
 
 type EditCommentParams = { id: number; body: CommentReplyParams } & ApiParams;
 
-export function editCommentRequest(
-  { fetch, id, body }: EditCommentParams,
-): Promise<MediaComment> {
+export function editCommentRequest({
+  fetch,
+  id,
+  body,
+}: EditCommentParams): Promise<MediaComment> {
   return api({ fetch })
-    .comments
-    .edit({
+    .comments.edit({
       params: {
         id: `${id}`,
       },

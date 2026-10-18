@@ -4,16 +4,12 @@ import { time } from '$lib/utils/timing/time.ts';
 import { mapToUserProfile } from '../../_internal/mapToUserProfile.ts';
 import { UserProfileSchema } from '../../models/UserProfile.ts';
 
-const traktTeamRequest = (
-  { fetch }: ApiParams,
-) =>
-  api({ fetch })
-    .team
-    .members({
-      query: {
-        extended: 'full,images',
-      },
-    });
+const traktTeamRequest = ({ fetch }: ApiParams) =>
+  api({ fetch }).team.members({
+    query: {
+      extended: 'full,images',
+    },
+  });
 
 export const traktTeamQuery = defineQuery({
   key: 'traktTeam',

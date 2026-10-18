@@ -21,9 +21,11 @@ type MixtapePicksBody = {
 
 const SUMMARY_QUERY = { extended: 'full,images' } as const;
 
-const mixtapePicksRequest = async (
-  { fetch, type, ids }: MixtapePicksParams,
-): Promise<{ body: MixtapePicksBody; status: number }> => {
+const mixtapePicksRequest = async ({
+  fetch,
+  type,
+  ids,
+}: MixtapePicksParams): Promise<{ body: MixtapePicksBody; status: number }> => {
   const client = api({ fetch });
 
   if (type === 'movie') {
@@ -32,22 +34,25 @@ const mixtapePicksRequest = async (
         client.movies.summary({
           params: { id: String(id) },
           query: SUMMARY_QUERY,
-        })
+        }),
       ),
     );
     const movies = responses.flatMap((response) =>
-      response.status === 200 ? [response.body] : []
+      response.status === 200 ? [response.body] : [],
     );
     return { body: { movies, shows: [] }, status: 200 };
   }
 
   const responses = await Promise.all(
     ids.map((id) =>
-      client.shows.summary({ params: { id: String(id) }, query: SUMMARY_QUERY })
+      client.shows.summary({
+        params: { id: String(id) },
+        query: SUMMARY_QUERY,
+      }),
     ),
   );
   const shows = responses.flatMap((response) =>
-    response.status === 200 ? [response.body] : []
+    response.status === 200 ? [response.body] : [],
   );
   return { body: { movies: [], shows }, status: 200 };
 };

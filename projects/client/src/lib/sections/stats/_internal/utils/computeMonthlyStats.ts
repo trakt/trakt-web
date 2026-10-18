@@ -27,18 +27,14 @@ function areConsecutiveDays(dateA: Date, dateB: Date): boolean {
   return nextDay.getTime() === dateB.getTime();
 }
 
-function deduplicateAndSort(
-  dates: ReadonlyArray<Date>,
-): ReadonlyArray<Date> {
+function deduplicateAndSort(dates: ReadonlyArray<Date>): ReadonlyArray<Date> {
   const uniqueByDay = new Map(
     dates.map((date) => {
       const normalized = toMidnight(date);
       return [getDayKey(normalized), normalized];
     }),
   );
-  return [...uniqueByDay.values()].sort(
-    (a, b) => a.getTime() - b.getTime(),
-  );
+  return [...uniqueByDay.values()].sort((a, b) => a.getTime() - b.getTime());
 }
 
 function buildStreakSegments(
@@ -56,7 +52,9 @@ function buildStreakSegments(
       const lastSegment = segments.at(-1);
 
       if (
-        !previousDay || !lastSegment || !areConsecutiveDays(previousDay, day)
+        !previousDay ||
+        !lastSegment ||
+        !areConsecutiveDays(previousDay, day)
       ) {
         return [...segments, { end: day, length: 1 }];
       }
@@ -83,13 +81,13 @@ export function computeMonthlyStats(
   const sortedDays = deduplicateAndSort(watchedDates);
   const totalElapsedDaysThisMonth = today.getDate();
 
-  const activeDaysThisMonth = sortedDays
-    .filter((d) =>
-      d.getMonth() === currentMonth && d.getFullYear() === currentYear
-    ).length;
+  const activeDaysThisMonth = sortedDays.filter(
+    (d) => d.getMonth() === currentMonth && d.getFullYear() === currentYear,
+  ).length;
 
-  const activeDaysThisYear = sortedDays
-    .filter((d) => d.getFullYear() === currentYear).length;
+  const activeDaysThisYear = sortedDays.filter(
+    (d) => d.getFullYear() === currentYear,
+  ).length;
 
   const segments = buildStreakSegments(sortedDays);
 
@@ -99,13 +97,13 @@ export function computeMonthlyStats(
       segment.end.getTime() === yesterday.getTime(),
   );
 
-  const currentStreak = activeSegmentIndex >= 0
-    ? segments[activeSegmentIndex]?.length ?? 0
-    : 0;
+  const currentStreak =
+    activeSegmentIndex >= 0 ? (segments[activeSegmentIndex]?.length ?? 0) : 0;
 
-  const previousStreak = activeSegmentIndex > 0
-    ? segments[activeSegmentIndex - 1]?.length ?? 0
-    : 0;
+  const previousStreak =
+    activeSegmentIndex > 0
+      ? (segments[activeSegmentIndex - 1]?.length ?? 0)
+      : 0;
 
   const droppedStreaksThisMonth = segments.filter((segment, index) => {
     if (index === activeSegmentIndex) return false;

@@ -19,8 +19,9 @@ export function useWelcomeBanner() {
   );
 
   const isVisible = combineLatest([limits, isDismissed]).pipe(
-    map(([$limits, $isDismissed]) =>
-      !$isDismissed && $limits != null && hasNoActivity($limits)
+    map(
+      ([$limits, $isDismissed]) =>
+        !$isDismissed && $limits != null && hasNoActivity($limits),
     ),
   );
 

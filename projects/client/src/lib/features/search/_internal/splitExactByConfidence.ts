@@ -12,9 +12,10 @@ const isConfident = (item: ExactItems[number]) => item.score >= CONFIDENT_SCORE;
  * catalog tail that must not. Scores are only comparable within a source, so
  * bucket on the threshold rather than sorting across sources by raw score.
  */
-export function splitExactByConfidence(
-  items: ExactItems,
-): { confident: ExactItems; deep: ExactItems } {
+export function splitExactByConfidence(items: ExactItems): {
+  confident: ExactItems;
+  deep: ExactItems;
+} {
   return {
     confident: items.filter(isConfident),
     deep: items.filter((item) => !isConfident(item)),

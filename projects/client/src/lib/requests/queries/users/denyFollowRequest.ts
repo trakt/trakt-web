@@ -4,13 +4,12 @@ type DenyFollowRequestParams = {
   requestId: number;
 } & ApiParams;
 
-export function denyFollowRequest(
-  { fetch, requestId }: DenyFollowRequestParams,
-): Promise<boolean> {
+export function denyFollowRequest({
+  fetch,
+  requestId,
+}: DenyFollowRequestParams): Promise<boolean> {
   return api({ fetch })
-    .users
-    .requests
-    .deny({
+    .users.requests.deny({
       params: {
         id: String(requestId),
       },

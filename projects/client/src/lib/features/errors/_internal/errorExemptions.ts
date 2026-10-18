@@ -10,8 +10,8 @@ type Exemption = {
 // Route ids (with dynamic segments) that handle service errors inline rather
 // than replacing the page with the global "service unreachable" page.
 const streamingServicesRoute = UrlBuilder.settings.streamingServices();
-const streamingServicesDetailRoute = UrlBuilder.settings
-  .streamingServicesDetail('[id]');
+const streamingServicesDetailRoute =
+  UrlBuilder.settings.streamingServicesDetail('[id]');
 
 // FIXME: remove this exemption when we can do clean up natively
 const exemptions: Exemption[] = [

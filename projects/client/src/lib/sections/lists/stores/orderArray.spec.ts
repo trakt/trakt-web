@@ -61,9 +61,7 @@ describe('orderArray', () => {
       ];
       const source$ = cold('a|', { a: items });
       const expected = 'a|';
-      const result$ = source$.pipe(
-        orderArray((item) => item.id, [2, 1]),
-      );
+      const result$ = source$.pipe(orderArray((item) => item.id, [2, 1]));
 
       expectObservable(result$).toBe(expected, {
         a: [

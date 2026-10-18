@@ -4,15 +4,18 @@ import { toSharedPillState } from './toSharedPillState.ts';
 
 describe('toSharedPillState', () => {
   it('should not flag a share without recommendations', () => {
-    expect(toSharedPillState({ activityCount: 2, recommendedBy: null }))
-      .toEqual({ isShared: false, isSharedOnly: false });
+    expect(
+      toSharedPillState({ activityCount: 2, recommendedBy: null }),
+    ).toEqual({ isShared: false, isSharedOnly: false });
   });
 
   it('should not flag a share when nobody shared', () => {
     const recommendedBy = { users: [], otherCount: 0 };
 
-    expect(toSharedPillState({ activityCount: 0, recommendedBy }))
-      .toEqual({ isShared: false, isSharedOnly: false });
+    expect(toSharedPillState({ activityCount: 0, recommendedBy })).toEqual({
+      isShared: false,
+      isSharedOnly: false,
+    });
   });
 
   it('should flag a share next to followed activity', () => {
@@ -36,7 +39,8 @@ describe('toSharedPillState', () => {
   it('should count sharers that are only in the remainder', () => {
     const recommendedBy = { users: [], otherCount: 2 };
 
-    expect(toSharedPillState({ activityCount: 0, recommendedBy }).isShared)
-      .toBe(true);
+    expect(
+      toSharedPillState({ activityCount: 0, recommendedBy }).isShared,
+    ).toBe(true);
   });
 });

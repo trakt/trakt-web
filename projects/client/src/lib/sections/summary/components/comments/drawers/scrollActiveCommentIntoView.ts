@@ -29,8 +29,8 @@ export function scrollActiveCommentIntoView(
         const currentTargetPosition = target.offsetTop;
         const totalDistance = currentTargetPosition - startScrollTop;
 
-        container.scrollTop = startScrollTop +
-          totalDistance * cubicOut(progress);
+        container.scrollTop =
+          startScrollTop + totalDistance * cubicOut(progress);
       },
     });
 

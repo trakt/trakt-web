@@ -8,10 +8,11 @@ export function getNoteValidation(note: string) {
     isValid: (value: string) =>
       trimmed(value).length > 0 &&
       trimmed(value).length <= NOTE_CHARACTER_LIMIT,
-    errorText: trimmed(note).length >= NOTE_CHARACTER_LIMIT
-      ? m.validation_text_note_character_limit({
-        limit: NOTE_CHARACTER_LIMIT,
-      })
-      : m.validation_text_note(),
+    errorText:
+      trimmed(note).length >= NOTE_CHARACTER_LIMIT
+        ? m.validation_text_note_character_limit({
+            limit: NOTE_CHARACTER_LIMIT,
+          })
+        : m.validation_text_note(),
   };
 }

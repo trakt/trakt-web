@@ -32,9 +32,10 @@ export function mapToMediaSyncAccount(
   };
 }
 
-const mediaSyncAccountsRequest = async (
-  { fetch, connectionId }: MediaSyncAccountsParams,
-) => {
+const mediaSyncAccountsRequest = async ({
+  fetch,
+  connectionId,
+}: MediaSyncAccountsParams) => {
   const response = await rawApiFetch({
     fetch,
     path: `/v3/users/me/sync/connections/${connectionId}/accounts`,

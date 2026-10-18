@@ -4,13 +4,12 @@ type ApproveFollowRequestParams = {
   requestId: number;
 } & ApiParams;
 
-export function approveFollowRequest(
-  { fetch, requestId }: ApproveFollowRequestParams,
-): Promise<boolean> {
+export function approveFollowRequest({
+  fetch,
+  requestId,
+}: ApproveFollowRequestParams): Promise<boolean> {
   return api({ fetch })
-    .users
-    .requests
-    .approve({
+    .users.requests.approve({
       params: {
         id: String(requestId),
       },

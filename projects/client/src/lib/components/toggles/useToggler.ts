@@ -46,7 +46,8 @@ export function useToggler<T extends TogglerId, K = TogglerValueMap[T]>(id: T) {
     default: toggler.default as K,
     current: current.pipe(
       map(($current) => {
-        const option = toggler.options.find((o) => o.value === $current) ??
+        const option =
+          toggler.options.find((o) => o.value === $current) ??
           assertDefined(
             toggler.options.find((o) => o.value === toggler.default),
             'Default toggler option must exist',

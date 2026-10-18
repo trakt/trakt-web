@@ -8,16 +8,12 @@ type MovieStatsParams = {
   slug: string;
 } & ApiParams;
 
-const movieStatsRequest = (
-  { fetch, slug }: MovieStatsParams,
-) =>
-  api({ fetch })
-    .movies
-    .stats({
-      params: {
-        id: slug,
-      },
-    });
+const movieStatsRequest = ({ fetch, slug }: MovieStatsParams) =>
+  api({ fetch }).movies.stats({
+    params: {
+      id: slug,
+    },
+  });
 
 export const movieStatsQuery = defineQuery({
   key: 'movieStats',

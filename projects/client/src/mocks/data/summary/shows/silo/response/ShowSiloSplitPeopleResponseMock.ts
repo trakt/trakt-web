@@ -6,10 +6,11 @@ const guestStars = (ShowSiloPeopleResponseMock.cast ?? []).filter(
 
 export const ShowSiloSplitPeopleResponseMock = {
   ...ShowSiloPeopleResponseMock,
-  cast: (ShowSiloPeopleResponseMock.cast ?? []).filter((member) =>
-    !guestStars.some((guest) =>
-      guest.person.ids.slug === member.person.ids.slug
-    )
+  cast: (ShowSiloPeopleResponseMock.cast ?? []).filter(
+    (member) =>
+      !guestStars.some(
+        (guest) => guest.person.ids.slug === member.person.ids.slug,
+      ),
   ),
   guest_stars: guestStars,
 };

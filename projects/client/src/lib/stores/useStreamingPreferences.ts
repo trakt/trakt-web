@@ -13,19 +13,14 @@ export function useStreamingPreferences() {
 
   return {
     showOnlyFavorites: showOnlyFavorites.asObservable(),
-    favorites: user.pipe(
-      map((u) => u?.services.favorites ?? []),
-    ),
+    favorites: user.pipe(map((u) => u?.services.favorites ?? [])),
     country: user.pipe(
       map((u) => u?.services.country || 'us'),
       distinctUntilChanged(),
     ),
     toggleShowOnlyFavorites: () => {
       const newValue = !showOnlyFavorites.value;
-      safeLocalStorage.setItem(
-        'show-only-favorites',
-        JSON.stringify(newValue),
-      );
+      safeLocalStorage.setItem('show-only-favorites', JSON.stringify(newValue));
       showOnlyFavorites.next(newValue);
     },
   };

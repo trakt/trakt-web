@@ -9,8 +9,12 @@ const GITHUB_API = 'https://api.github.com';
 
 /** Normalises an importer source id into a safe key/label segment. */
 function sanitizeSource(source: string): string {
-  return source.replace(/[^a-z0-9-]+/gi, '').toLowerCase().slice(0, 32) ||
-    'unknown';
+  return (
+    source
+      .replace(/[^a-z0-9-]+/gi, '')
+      .toLowerCase()
+      .slice(0, 32) || 'unknown'
+  );
 }
 
 export const POST: RequestHandler = async ({ request, locals, platform }) => {
@@ -28,9 +32,9 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
   const username = (form.get('username') ?? '').toString();
   const source = sanitizeSource((form.get('source') ?? '').toString());
   const sourceName = (form.get('sourceName') ?? '').toString() || source;
-  const files = form.getAll('files').filter((entry): entry is File =>
-    entry instanceof File
-  );
+  const files = form
+    .getAll('files')
+    .filter((entry): entry is File => entry instanceof File);
 
   const validation = validateTvTimeReport({ message, files });
   if (!validation.ok) {
@@ -61,7 +65,7 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
               contentType: file.type || 'application/octet-stream',
             },
           },
-        )
+        ),
       ),
     );
 
@@ -103,8 +107,8 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
       {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${platform.env.IMPORT_REPORTS_TOKEN}`,
-          'Accept': 'application/vnd.github+json',
+          Authorization: `Bearer ${platform.env.IMPORT_REPORTS_TOKEN}`,
+          Accept: 'application/vnd.github+json',
           'Content-Type': 'application/json',
           'User-Agent': 'trakt-web',
         },

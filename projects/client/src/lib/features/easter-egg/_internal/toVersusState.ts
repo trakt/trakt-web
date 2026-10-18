@@ -7,9 +7,10 @@ type ToVersusStateParams = {
   result: GuessResult | null;
 };
 
-export function toVersusState(
-  { phase, result }: ToVersusStateParams,
-): VersusState {
+export function toVersusState({
+  phase,
+  result,
+}: ToVersusStateParams): VersusState {
   if (phase === 'reveal') return 'reveal';
   if (phase === 'result' || phase === 'over') return result ?? 'idle';
 

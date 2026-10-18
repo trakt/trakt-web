@@ -7,8 +7,8 @@ type ToOpenStateParams = {
 };
 
 export function toOpenState({ groups, seenStories }: ToOpenStateParams) {
-  const hasUnseen = groups.some((group) =>
-    !isStorySeen({ group, seenStories })
+  const hasUnseen = groups.some(
+    (group) => !isStorySeen({ group, seenStories }),
   );
 
   return hasUnseen ? 'unseen' : 'seen';

@@ -6,12 +6,13 @@ import { mapToMediaComment } from '../../_internal/mapToMediaComment.ts';
 
 type ReplyCommentParams = { id: number; body: CommentReplyParams } & ApiParams;
 
-export function replyCommentRequest(
-  { fetch, id, body }: ReplyCommentParams,
-): Promise<MediaComment> {
+export function replyCommentRequest({
+  fetch,
+  id,
+  body,
+}: ReplyCommentParams): Promise<MediaComment> {
   return api({ fetch })
-    .comments
-    .reply({
+    .comments.reply({
       params: {
         id: `${id}`,
       },

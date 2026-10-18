@@ -21,12 +21,13 @@ type Activity = ActivityMovie | ActivityShow;
 export const activityEntryTargets = <T extends Activity>(entry: T) =>
   makeTargets<T>(
     {
-      get: (e) => e.type === 'movie' ? { id: e.movie.id, type: 'movie' } : null,
+      get: (e) =>
+        e.type === 'movie' ? { id: e.movie.id, type: 'movie' } : null,
       patch: (e, title) =>
         e.type === 'movie' ? ({ ...e, movie: { ...e.movie, title } } as T) : e,
     },
     {
-      get: (e) => e.type !== 'movie' ? { id: e.show.id, type: 'show' } : null,
+      get: (e) => (e.type !== 'movie' ? { id: e.show.id, type: 'show' } : null),
       patch: (e, title) =>
         e.type !== 'movie' ? ({ ...e, show: { ...e.show, title } } as T) : e,
     },

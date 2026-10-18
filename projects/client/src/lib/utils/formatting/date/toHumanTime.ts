@@ -7,8 +7,6 @@ type ToHumanTimeProps = {
   locale: AvailableLocale;
 };
 
-export function toHumanTime(
-  { date, locale }: ToHumanTimeProps,
-): string {
+export function toHumanTime({ date, locale }: ToHumanTimeProps): string {
   return format(date, 'p', { locale: LOCALE_MAP[locale] });
 }

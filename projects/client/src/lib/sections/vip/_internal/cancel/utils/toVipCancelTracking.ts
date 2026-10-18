@@ -18,9 +18,12 @@ const toTenure = (vipMonths: number) => {
   return '2y_plus';
 };
 
-export function toVipCancelTracking(
-  { reason, vipMonths, offer, gateway }: ToVipCancelTrackingParams,
-): AnalyticsEventDataMap[typeof AnalyticsEvent.VipCancel] {
+export function toVipCancelTracking({
+  reason,
+  vipMonths,
+  offer,
+  gateway,
+}: ToVipCancelTrackingParams): AnalyticsEventDataMap[typeof AnalyticsEvent.VipCancel] {
   return {
     reason: reason ?? 'none',
     tenure: toTenure(vipMonths),

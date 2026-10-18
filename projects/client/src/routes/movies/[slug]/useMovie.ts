@@ -46,7 +46,7 @@ export function useMovie(slug$: Observable<string>) {
             slug,
             locale: activeLocale,
             enabled: authorized,
-          })
+          }),
         ),
       ),
     ),
@@ -73,13 +73,11 @@ export function useMovie(slug$: Observable<string>) {
             slug,
             locale: activeLocale,
             enabled: authorized && comedy,
-          })
+          }),
         ),
       ),
     ),
-  ]).pipe(
-    map(([authorized, query]) => (authorized ? query.data : null)),
-  );
+  ]).pipe(map(([authorized, query]) => (authorized ? query.data : null)));
 
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
@@ -88,7 +86,7 @@ export function useMovie(slug$: Observable<string>) {
   const intl = useQuery(
     slug$.pipe(
       map((slug) =>
-        movieIntlQuery({ slug, language, enabled: !isLocaleSkipped })
+        movieIntlQuery({ slug, language, enabled: !isLocaleSkipped }),
       ),
     ),
   );
@@ -99,19 +97,13 @@ export function useMovie(slug$: Observable<string>) {
     ),
   );
 
-  const queries = [
-    movie,
-    studios,
-    crew,
-    intl,
-    videos,
-  ];
+  const queries = [movie, studios, crew, intl, videos];
 
   const isQueriesLoading = combineLatest(queries).pipe(
     map(($queries) => $queries.some(toLoadingState)),
   );
   const isSentimentLoading = sentiment.pipe(
-    map((query) => query ? toLoadingState(query) : false),
+    map((query) => (query ? toLoadingState(query) : false)),
   );
   // Keep isLoading true until the core movie payload is present -
   // queries can flip to !fetching while `data` is still undefined
@@ -122,8 +114,9 @@ export function useMovie(slug$: Observable<string>) {
     isSentimentLoading,
     movie,
   ]).pipe(
-    map(([queriesLoading, sentimentLoading, $movie]) =>
-      queriesLoading || sentimentLoading || $movie.data == null
+    map(
+      ([queriesLoading, sentimentLoading, $movie]) =>
+        queriesLoading || sentimentLoading || $movie.data == null,
     ),
   );
 
@@ -141,7 +134,7 @@ export function useMovie(slug$: Observable<string>) {
           type: 'movie',
           translations: $intl.data,
           fallback: $movie.data,
-        })
+        }),
       ),
     ),
     streamOn: combineLatest([streamOnQuery, favorites, country]).pipe(
@@ -150,7 +143,7 @@ export function useMovie(slug$: Observable<string>) {
           services: $streamOn.data,
           favorites: $favorites,
           countryCode: $country,
-        })
+        }),
       ),
     ),
   };

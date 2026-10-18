@@ -85,17 +85,14 @@ describe('util: getPlaysSummary', () => {
   it.each<[PlayRetention, number[]]>([
     ['oldest', [102, 101, 200]],
     ['newest', [100, 102, 201]],
-  ])(
-    'should keep only the %s play of each entry',
-    (keep, duplicateIds) => {
-      const summary = getPlaysSummary({ entries: REWATCHED_ENTRIES, keep });
+  ])('should keep only the %s play of each entry', (keep, duplicateIds) => {
+    const summary = getPlaysSummary({ entries: REWATCHED_ENTRIES, keep });
 
-      expect(summary.unique).toBe(2);
-      expect(summary.total).toBe(5);
-      expect(summary.duplicates).toBe(3);
-      expect(summary.duplicateIds).toEqual(duplicateIds);
-    },
-  );
+    expect(summary.unique).toBe(2);
+    expect(summary.total).toBe(5);
+    expect(summary.duplicates).toBe(3);
+    expect(summary.duplicateIds).toEqual(duplicateIds);
+  });
 
   it.each<[PlayRetention, number, number[]]>([
     ['oldest', 100, [101, 102, 103]],

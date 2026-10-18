@@ -13,9 +13,7 @@ describe('mapToSearchCover', () => {
   it('maps media response cover correctly', () => {
     const mockResponse = {
       type: 'media',
-      items: [
-        { cover: { url: { medium: coverUrl('media') } } },
-      ],
+      items: [{ cover: { url: { medium: coverUrl('media') } } }],
     } as unknown as SearchResponse;
 
     const result = mapToSearchCover(mockResponse);
@@ -25,9 +23,7 @@ describe('mapToSearchCover', () => {
   it('maps people response headshot correctly', () => {
     const mockResponse = {
       type: 'people',
-      items: [
-        { headshot: { url: { medium: coverUrl('people') } } },
-      ],
+      items: [{ headshot: { url: { medium: coverUrl('people') } } }],
     } as unknown as SearchResponse;
 
     const result = mapToSearchCover(mockResponse);
@@ -37,9 +33,7 @@ describe('mapToSearchCover', () => {
   it('maps lists response poster correctly', () => {
     const mockResponse = {
       type: 'lists',
-      items: [
-        { posters: [{ url: { medium: coverUrl('lists') } }] },
-      ],
+      items: [{ posters: [{ url: { medium: coverUrl('lists') } }] }],
     } as unknown as SearchResponse;
 
     const result = mapToSearchCover(mockResponse);

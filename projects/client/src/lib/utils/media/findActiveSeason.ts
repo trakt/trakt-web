@@ -20,19 +20,21 @@ export function findActiveSeason({
 }: FindActiveSeasonProps) {
   const ordered = [...seasons].sort((a, b) => a.number - b.number);
 
-  const fallbackSeason = ordered.find((s) => s.number === FIRST_SEASON) ??
+  const fallbackSeason =
+    ordered.find((s) => s.number === FIRST_SEASON) ??
     ordered.find((s) => s.number !== SPECIAL_SEASON) ??
     ordered.at(0);
 
-  const hasWatchedHistory = lastWatchedSeason.number >= SPECIAL_SEASON &&
+  const hasWatchedHistory =
+    lastWatchedSeason.number >= SPECIAL_SEASON &&
     lastWatchedSeason.episodes.count > 0;
 
   if (!hasWatchedHistory) {
     return fallbackSeason?.number ?? FIRST_SEASON;
   }
 
-  const lastWatched = ordered.find((s) =>
-    s.number === lastWatchedSeason.number
+  const lastWatched = ordered.find(
+    (s) => s.number === lastWatchedSeason.number,
   );
 
   const active = assertDefined(

@@ -22,12 +22,14 @@ type CreateListProps = {
 export function useCreateSmartList() {
   const { track } = useTrack(AnalyticsEvent.SmartListCreate);
 
-  const creation = useMutation(defineMutation({
-    key: 'smart-list:create',
-    request: (props: CreateListProps) =>
-      createSmartListRequest({ body: toSmartListWrite(props) }),
-    invalidations: [InvalidateAction.SmartList.Created],
-  }));
+  const creation = useMutation(
+    defineMutation({
+      key: 'smart-list:create',
+      request: (props: CreateListProps) =>
+        createSmartListRequest({ body: toSmartListWrite(props) }),
+      invalidations: [InvalidateAction.SmartList.Created],
+    }),
+  );
 
   const createList = async (props: CreateListProps) => {
     track();

@@ -50,7 +50,10 @@ export const SpoilerMark = Mark.create({
 
   addCommands() {
     return {
-      toggleSpoiler: () => ({ commands }) => commands.toggleMark(this.name),
+      toggleSpoiler:
+        () =>
+        ({ commands }) =>
+          commands.toggleMark(this.name),
     };
   },
 });

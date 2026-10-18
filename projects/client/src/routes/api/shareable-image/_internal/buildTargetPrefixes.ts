@@ -9,6 +9,8 @@ export function buildTargetPrefixes(): ReadonlyArray<string> {
   const shareTypes = Object.keys(SHARE_TYPE_DIMENSIONS) as ShareType[];
 
   return shareTypes.flatMap((shareType) =>
-    MediaTypeSchema.options.map((type) => shareImagePrefix({ shareType, type }))
+    MediaTypeSchema.options.map((type) =>
+      shareImagePrefix({ shareType, type }),
+    ),
   );
 }

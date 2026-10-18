@@ -26,10 +26,13 @@ type RespondWithMediaShareImageProps = {
   cacheControl: string;
 };
 
-export async function respondWithMediaShareImage(
-  { event, type, slug, shareType, cacheControl }:
-    RespondWithMediaShareImageProps,
-): Promise<Response> {
+export async function respondWithMediaShareImage({
+  event,
+  type,
+  slug,
+  shareType,
+  cacheControl,
+}: RespondWithMediaShareImageProps): Promise<Response> {
   const { request, url, fetch, platform } = event;
 
   if (!IS_DEV && !platform?.env?.R2_WALTER) {
@@ -50,9 +53,8 @@ export async function respondWithMediaShareImage(
       : imageHeaders;
 
   if (!IS_DEV && platform) {
-    const cachedImage = await timing.measure(
-      'cache',
-      () => platform.env.R2_WALTER.get(imagePath),
+    const cachedImage = await timing.measure('cache', () =>
+      platform.env.R2_WALTER.get(imagePath),
     );
     if (cachedImage) {
       /*
@@ -68,11 +70,11 @@ export async function respondWithMediaShareImage(
   const fontsRequest = timing.measure(
     'fonts',
     async () =>
-      await loadShareFonts({ bucket: platform?.env?.R2_WALTER }) ??
-        await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
-          error('Failed to load fallback share fonts:', e);
-          return [];
-        }),
+      (await loadShareFonts({ bucket: platform?.env?.R2_WALTER })) ??
+      (await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
+        error('Failed to load fallback share fonts:', e);
+        return [];
+      })),
   );
 
   const fetchFn = fetchWithUserAgent({
@@ -80,20 +82,19 @@ export async function respondWithMediaShareImage(
     fetch,
   });
 
-  const mediaDataRequest = timing.measure(
-    'data',
-    () =>
-      fetchMediaData({
-        type,
-        slug,
-        fetch: fetchFn,
-        onSummary: (media) =>
-          timing.measure('poster', () =>
-            warmPoster({
-              posterUrl: resolvePosterSource(media.poster.url.medium),
-              fetch: globalThis.fetch,
-            })),
-      }).catch(() => null),
+  const mediaDataRequest = timing.measure('data', () =>
+    fetchMediaData({
+      type,
+      slug,
+      fetch: fetchFn,
+      onSummary: (media) =>
+        timing.measure('poster', () =>
+          warmPoster({
+            posterUrl: resolvePosterSource(media.poster.url.medium),
+            fetch: globalThis.fetch,
+          }),
+        ),
+    }).catch(() => null),
   );
 
   const [mediaData, fonts] = await Promise.all([
@@ -107,9 +108,8 @@ export async function respondWithMediaShareImage(
 
   const { media, ratings, crew } = mediaData;
   const toBuffer = async (posterUrl: string) => {
-    const images = await timing.measure(
-      'images',
-      () => loadPosterImages({ posterUrl, fetch: globalThis.fetch }),
+    const images = await timing.measure('images', () =>
+      loadPosterImages({ posterUrl, fetch: globalThis.fetch }),
     );
     const { body, head } = render(ShareCard, {
       props: { media, crew, ratings, posterUrl, variant: shareType },
@@ -133,12 +133,10 @@ export async function respondWithMediaShareImage(
     });
 
     if (!IS_DEV && platform) {
-      const cached = platform.env.R2_WALTER
-        .put(imagePath, buffer, {
-          httpMetadata: { contentType: 'image/jpeg' },
-          customMetadata: buildImageMetadata({ media, cachedAt: new Date() }),
-        })
-        .catch((e: unknown) => error('Failed to cache image in R2:', e));
+      const cached = platform.env.R2_WALTER.put(imagePath, buffer, {
+        httpMetadata: { contentType: 'image/jpeg' },
+        customMetadata: buildImageMetadata({ media, cachedAt: new Date() }),
+      }).catch((e: unknown) => error('Failed to cache image in R2:', e));
 
       if (platform.context) {
         platform.context.waitUntil(cached);

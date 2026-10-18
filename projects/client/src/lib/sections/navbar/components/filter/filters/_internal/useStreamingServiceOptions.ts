@@ -11,9 +11,7 @@ const emptyStreamingServiceOptions: StreamingServiceOptions = {
   hasFavorites: false,
 };
 
-export function useStreamingServiceOptions(): Observable<
-  StreamingServiceOptions
-> {
+export function useStreamingServiceOptions(): Observable<StreamingServiceOptions> {
   const { country, favorites } = useStreamingPreferences();
   const query = useQuery(streamingSourcesQuery());
 

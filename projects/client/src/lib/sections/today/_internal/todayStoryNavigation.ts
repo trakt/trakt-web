@@ -15,7 +15,7 @@ export function todayStoryNavigation(searchParams?: URLSearchParams) {
 
   return {
     isOpen,
-    storyKey: isOpen ? searchParams?.get(TODAY_STORY_PARAM) ?? null : null,
+    storyKey: isOpen ? (searchParams?.get(TODAY_STORY_PARAM) ?? null) : null,
     storyLink: (storyKey: string) =>
       navigation.buildDrawerLink(TODAY_STORY_VIEW, {
         [TODAY_STORY_PARAM]: storyKey,

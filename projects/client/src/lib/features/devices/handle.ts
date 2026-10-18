@@ -10,9 +10,7 @@ const SCALE_MAP: Record<DeviceType, string> = {
   mobile: '1',
 } as const;
 
-export const handle: Handle = (
-  { event, resolve },
-) => {
+export const handle: Handle = ({ event, resolve }) => {
   const agent = event.request.headers.get('user-agent');
   const deviceType = getDeviceType(agent);
 

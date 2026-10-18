@@ -4,15 +4,13 @@ type HideRecommendedMovieParams = {
   slug: string;
 } & ApiParams;
 
-export async function hideRecommendedMovieRequest(
-  { slug, fetch }: HideRecommendedMovieParams,
-): Promise<boolean> {
-  const { status } = await api({ fetch })
-    .recommendations
-    .movies
-    .hide({
-      params: { id: slug },
-    });
+export async function hideRecommendedMovieRequest({
+  slug,
+  fetch,
+}: HideRecommendedMovieParams): Promise<boolean> {
+  const { status } = await api({ fetch }).recommendations.movies.hide({
+    params: { id: slug },
+  });
 
   return status === 204;
 }

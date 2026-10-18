@@ -12,14 +12,15 @@ type UseIsQueuedParams = {
  * True while a queued (not-yet-synced) offline action covers these media
  * keys - lets the UI flag the action as pending rather than just disabled.
  */
-export function useIsQueued(
-  { domain, keys }: UseIsQueuedParams,
-): { isQueued: Observable<boolean> } {
+export function useIsQueued({ domain, keys }: UseIsQueuedParams): {
+  isQueued: Observable<boolean>;
+} {
   const { actions } = useOfflineActions();
 
   const isQueued = actions.pipe(
-    map((queued) =>
-      findPendingOverride({ actions: queued, domain, keys }) != null
+    map(
+      (queued) =>
+        findPendingOverride({ actions: queued, domain, keys }) != null,
     ),
   );
 

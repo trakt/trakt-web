@@ -10,19 +10,25 @@ type MediaShape = {
 };
 
 const options: BulkIntlOverlayOptions<MediaShape> = {
-  getTargets: (entry) => [{
-    id: entry.id,
-    type: entry.type,
-    apply: (acc, title) => ({ ...acc, title }),
-  }],
+  getTargets: (entry) => [
+    {
+      id: entry.id,
+      type: entry.type,
+      apply: (acc, title) => ({ ...acc, title }),
+    },
+  ],
 };
 
 function overlay(entries: MediaShape[], translations: Array<[number, string]>) {
-  return mergeOverlay(entries, {
-    movie: new Map(translations),
-    show: new Map(),
-    episode: new Map(),
-  }, options);
+  return mergeOverlay(
+    entries,
+    {
+      movie: new Map(translations),
+      show: new Map(),
+      episode: new Map(),
+    },
+    options,
+  );
 }
 
 describe('util: toCanonicalEntry', () => {

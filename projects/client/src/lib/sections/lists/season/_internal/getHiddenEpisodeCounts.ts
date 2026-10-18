@@ -9,9 +9,10 @@ type HiddenEpisodeCountsParams = {
  * How many episodes sit out of view before and after the visible range.
  * Without a measured range nothing is claimed hidden.
  */
-export function getHiddenEpisodeCounts(
-  { total, range }: HiddenEpisodeCountsParams,
-) {
+export function getHiddenEpisodeCounts({
+  total,
+  range,
+}: HiddenEpisodeCountsParams) {
   if (!range) return { before: 0, after: 0 };
 
   return {

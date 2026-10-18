@@ -25,13 +25,13 @@ export const episodeWithShowOrMovieTargets = <
 ) =>
   makeTargets<T>(
     {
-      get: (e) => 'show' in e ? { id: e.show.id, type: 'show' } : null,
+      get: (e) => ('show' in e ? { id: e.show.id, type: 'show' } : null),
       patch: (e, title) =>
         'show' in e ? ({ ...e, show: { ...e.show, title } } as T) : e,
     },
     {
-      get: (e) => 'show' in e ? { id: e.id, type: 'episode' } : null,
-      patch: (e, title) => 'show' in e ? ({ ...e, title } as T) : e,
+      get: (e) => ('show' in e ? { id: e.id, type: 'episode' } : null),
+      patch: (e, title) => ('show' in e ? ({ ...e, title } as T) : e),
     },
     {
       get: (e) => {
@@ -42,6 +42,6 @@ export const episodeWithShowOrMovieTargets = <
             : 'movie';
         return { id: e.id, type: standaloneType };
       },
-      patch: (e, title) => ({ ...e, title } as T),
+      patch: (e, title) => ({ ...e, title }) as T,
     },
   )(entry);

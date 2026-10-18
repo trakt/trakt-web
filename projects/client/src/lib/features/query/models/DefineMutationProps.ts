@@ -11,6 +11,6 @@ export type DefineMutationProps<TData, TVariables = void> = {
   invalidations:
     | InvalidateActionOptions[]
     | ((
-      props: InvalidationProps<TData, TVariables>,
-    ) => InvalidateActionOptions[]);
+        props: InvalidationProps<TData, TVariables>,
+      ) => InvalidateActionOptions[]);
 };

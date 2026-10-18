@@ -23,8 +23,10 @@ describe('util: anyTrue', () => {
     const source = new BehaviorSubject(true);
     const states: boolean[] = [];
 
-    const subscription = anyTrue([source, new BehaviorSubject(false)])
-      .subscribe((value) => states.push(value));
+    const subscription = anyTrue([
+      source,
+      new BehaviorSubject(false),
+    ]).subscribe((value) => states.push(value));
     source.next(false);
     subscription.unsubscribe();
 

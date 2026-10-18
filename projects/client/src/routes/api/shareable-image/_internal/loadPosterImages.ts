@@ -6,9 +6,10 @@ type LoadPosterImagesProps = {
   fetch: typeof globalThis.fetch;
 };
 
-export async function loadPosterImages(
-  { posterUrl, fetch }: LoadPosterImagesProps,
-): Promise<ImageSource[]> {
+export async function loadPosterImages({
+  posterUrl,
+  fetch,
+}: LoadPosterImagesProps): Promise<ImageSource[]> {
   if (!isHttpUrl(posterUrl)) {
     return [];
   }

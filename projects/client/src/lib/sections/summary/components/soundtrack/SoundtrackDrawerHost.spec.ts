@@ -15,14 +15,18 @@ function renderDrawer(currentSeason?: number) {
 }
 
 async function rowTexts() {
-  const title = await screen.findByText('Silo Main Title', {}, {
-    timeout: SOUNDTRACK_TIMEOUT,
-  });
+  const title = await screen.findByText(
+    'Silo Main Title',
+    {},
+    {
+      timeout: SOUNDTRACK_TIMEOUT,
+    },
+  );
   const list = title.closest('ul');
   if (!list) throw new Error('the song rows render outside a list');
-  return within(list).getAllByRole('listitem').map((row) =>
-    row.textContent?.replace(/\s+/g, ' ').trim()
-  );
+  return within(list)
+    .getAllByRole('listitem')
+    .map((row) => row.textContent?.replace(/\s+/g, ' ').trim());
 }
 
 describe('SoundtrackDrawerHost', () => {

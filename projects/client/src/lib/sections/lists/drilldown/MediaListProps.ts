@@ -21,13 +21,14 @@ export type MediaListProps<T, M> = {
   contentKey?: string;
 } & FilterParams;
 
-export type DrilledMediaListProps<T, M> =
-  & Omit<MediaListProps<T, M>, 'useList' | 'actions' | 'id' | 'contentKey'>
-  & {
-    id: string;
-    useList: PaginatableStore<T, M>;
-    actions?: Snippet<[]>;
-    listActions?: Snippet;
-    groupBy?: (item: T) => string;
-    groupHeader?: Snippet<[string]>;
-  };
+export type DrilledMediaListProps<T, M> = Omit<
+  MediaListProps<T, M>,
+  'useList' | 'actions' | 'id' | 'contentKey'
+> & {
+  id: string;
+  useList: PaginatableStore<T, M>;
+  actions?: Snippet<[]>;
+  listActions?: Snippet;
+  groupBy?: (item: T) => string;
+  groupHeader?: Snippet<[string]>;
+};

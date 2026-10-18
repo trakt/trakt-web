@@ -6,17 +6,17 @@ type SetCoverImageRequestParams = {
   id: number;
 } & ApiParams;
 
-export async function setCoverImageRequest(
-  { type, id, fetch }: SetCoverImageRequestParams,
-): Promise<boolean> {
-  const { status } = await api({ fetch })
-    .users
-    .cover({
-      body: {
-        cover_type: type,
-        cover_id: id,
-      },
-    });
+export async function setCoverImageRequest({
+  type,
+  id,
+  fetch,
+}: SetCoverImageRequestParams): Promise<boolean> {
+  const { status } = await api({ fetch }).users.cover({
+    body: {
+      cover_type: type,
+      cover_id: id,
+    },
+  });
 
   return status === 204;
 }

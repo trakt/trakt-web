@@ -28,7 +28,10 @@ describe('toPickerItems', () => {
       fitMedia: [],
       searchResults: [],
       picks: [1],
-      fits: [{ id: 3, score: 0.7 }, { id: 2, score: 0.6 }],
+      fits: [
+        { id: 3, score: 0.7 },
+        { id: 2, score: 0.6 },
+      ],
       query: '',
     });
 
@@ -42,7 +45,10 @@ describe('toPickerItems', () => {
       fitMedia: [],
       searchResults: [],
       picks: [1],
-      fits: [{ id: 1, score: 1 }, { id: 2, score: 0.6 }],
+      fits: [
+        { id: 1, score: 1 },
+        { id: 2, score: 0.6 },
+      ],
       query: '',
     });
 
@@ -106,7 +112,10 @@ describe('toPickerItems', () => {
       fitMedia: [gladiator],
       searchResults: [],
       picks: [1],
-      fits: [{ id: 2, score: 0.8 }, { id: 5, score: 0.77 }],
+      fits: [
+        { id: 2, score: 0.8 },
+        { id: 5, score: 0.77 },
+      ],
       query: '',
     });
 

@@ -11,17 +11,19 @@ type IsShowRatingCandidateProps = {
   now: Date;
 };
 
-export function isShowRatingCandidate(
-  { episode, episodeWatchDates, now }: IsShowRatingCandidateProps,
-) {
+export function isShowRatingCandidate({
+  episode,
+  episodeWatchDates,
+  now,
+}: IsShowRatingCandidateProps) {
   const bingeStart = now.getTime() - SHOW_BINGE_WINDOW;
 
   const isFinale = Object.values(EpisodeFinaleType).includes(
     episode.type as EpisodeFinaleType,
   );
-  const isBinge = episodeWatchDates.filter(
-    (date) => date.getTime() >= bingeStart,
-  ).length >= SHOW_BINGE_EPISODE_THRESHOLD;
+  const isBinge =
+    episodeWatchDates.filter((date) => date.getTime() >= bingeStart).length >=
+    SHOW_BINGE_EPISODE_THRESHOLD;
 
   return isFinale || isBinge;
 }

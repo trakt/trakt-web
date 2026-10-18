@@ -6,14 +6,14 @@ import { toHumanETA } from '$lib/utils/formatting/date/toHumanETA.ts';
 
 function toCalendarReleaseEstimate(airDate: Date): string {
   const now = new Date();
-  const airedEarlierToday = airDate.getTime() < now.getTime() &&
+  const airedEarlierToday =
+    airDate.getTime() < now.getTime() &&
     airDate.getTime() >= getStartOfDay(now).getTime();
 
   if (airedEarlierToday) {
     return new Intl.RelativeTimeFormat(getIntlLocale(getLocale()), {
       numeric: 'auto',
-    })
-      .format(0, 'day');
+    }).format(0, 'day');
   }
 
   return toHumanETA(now, airDate, getLocale());

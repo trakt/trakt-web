@@ -50,9 +50,10 @@ function toDistribution(ratings: UserRatings): RatingDistribution {
  * server-only aggregates (minutes, comments, network, progress, lists) stay `0`
  * and the panel hides zero-valued stats rather than surfacing misleading data.
  */
-export function computeUserStats(
-  { history, ratings }: ComputeUserStatsInput,
-): UserStats {
+export function computeUserStats({
+  history,
+  ratings,
+}: ComputeUserStatsInput): UserStats {
   const moviePlays = Array.from(history.movies.values()).reduce(
     (sum, movie) => sum + movie.plays,
     0,
@@ -69,8 +70,11 @@ export function computeUserStats(
     0,
   );
 
-  const ratingsTotal = ratings.movies.size + ratings.shows.size +
-    ratings.seasons.size + ratings.episodes.size;
+  const ratingsTotal =
+    ratings.movies.size +
+    ratings.shows.size +
+    ratings.seasons.size +
+    ratings.episodes.size;
 
   return {
     movies: {

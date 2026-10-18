@@ -10,9 +10,7 @@ import {
   toEpisodeIdPriority,
 } from './pickIds.ts';
 
-type WatchlistEntry =
-  | { ids: ResolvedIds }
-  | { title: string; year: number };
+type WatchlistEntry = { ids: ResolvedIds } | { title: string; year: number };
 
 function toWatchlistEntry(
   { ids }: UniversalImportItem,
@@ -50,9 +48,8 @@ export function buildWatchlistPayload(
     movies: collect('movie', (item) => toWatchlistEntry(item, MOVIE_IDS)),
     shows: collect('show', toWatchlistShow),
     seasons: collect('season', (item) => toWatchlistEntry(item, SEASON_IDS)),
-    episodes: collect(
-      'episode',
-      (item) => toWatchlistEntry(item, toEpisodeIdPriority(item)),
+    episodes: collect('episode', (item) =>
+      toWatchlistEntry(item, toEpisodeIdPriority(item)),
     ),
   } as WatchlistRequest;
 }

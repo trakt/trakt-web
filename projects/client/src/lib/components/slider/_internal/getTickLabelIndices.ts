@@ -3,9 +3,10 @@ type TickLabelIndicesProps = {
   count: number;
 };
 
-export function getTickLabelIndices(
-  { total, count }: TickLabelIndicesProps,
-): number[] {
+export function getTickLabelIndices({
+  total,
+  count,
+}: TickLabelIndicesProps): number[] {
   if (count >= total) {
     return Array.from({ length: total }, (_, i) => i);
   }

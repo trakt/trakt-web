@@ -35,22 +35,20 @@ const categories = [
   },
 ];
 
-export const parentalGuideFilters: ReadonlyArray<RatingsFilter> = categories
-  .map(
-    ({ key, label }) => {
-      const slider: SliderOption = {
-        type: 'slider',
-        label,
-        range: { min: 0, max: severities.length - 1 },
-        ticks: { count: severities.length, formatter: formatSeverity },
-        formatLabel: ({ min, max }) =>
-          m.advanced_filter_label_parental_guide({
-            category: label(),
-            min: formatSeverity(min),
-            max: formatSeverity(max),
-          }),
-      };
+export const parentalGuideFilters: ReadonlyArray<RatingsFilter> =
+  categories.map(({ key, label }) => {
+    const slider: SliderOption = {
+      type: 'slider',
+      label,
+      range: { min: 0, max: severities.length - 1 },
+      ticks: { count: severities.length, formatter: formatSeverity },
+      formatLabel: ({ min, max }) =>
+        m.advanced_filter_label_parental_guide({
+          category: label(),
+          min: formatSeverity(min),
+          max: formatSeverity(max),
+        }),
+    };
 
-      return { key, advancedOnly: true, ...slider, advanced: slider };
-    },
-  );
+    return { key, advancedOnly: true, ...slider, advanced: slider };
+  });

@@ -11,10 +11,7 @@ import { upNextNitroQuery } from './upNextNitroQuery.ts';
 describe('upNextNitroQuery', () => {
   it('should query up next', async () => {
     const result = await runQuery({
-      factory: () =>
-        createTestBedInfiniteQuery(
-          upNextNitroQuery(),
-        ),
+      factory: () => createTestBedInfiniteQuery(upNextNitroQuery()),
       mapper: mapToEntries,
     });
 

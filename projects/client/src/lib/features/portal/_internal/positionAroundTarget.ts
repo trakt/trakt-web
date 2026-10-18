@@ -16,10 +16,7 @@ type TargetProps = {
   viewport: Viewport;
 };
 
-export function positionAroundTarget(
-  node: HTMLElement,
-  target: TargetProps,
-) {
+export function positionAroundTarget(node: HTMLElement, target: TargetProps) {
   const { targetRect, targetNode, placement, viewport } = target;
   const { position, mode } = placement;
 

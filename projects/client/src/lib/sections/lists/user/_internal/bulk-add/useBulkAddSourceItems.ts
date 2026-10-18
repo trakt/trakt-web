@@ -24,9 +24,8 @@ function useSourceQuery({ request }: BulkAddSource) {
 }
 
 export function useBulkAddSourceItems(source: BulkAddSource) {
-  const { list, isLoading, hasNextPage, fetchNextPage } = useSourceQuery(
-    source,
-  );
+  const { list, isLoading, hasNextPage, fetchNextPage } =
+    useSourceQuery(source);
 
   return {
     items: list.pipe(map(($list) => $list.flatMap(toBulkAddItem))),

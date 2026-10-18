@@ -13,27 +13,27 @@ export type RestoreStoreProps = {
   ids: number[];
 };
 
-export function useRestore(
-  props: RestoreStoreProps,
-) {
+export function useRestore(props: RestoreStoreProps) {
   const { ids } = props;
   const { user } = useUser();
   const { track } = useTrack(AnalyticsEvent.Restore);
 
-  const restoration = useMutation(defineMutation({
-    key: 'show:restore',
-    request: () => {
-      const payload = {
-        body: toBulkPayload('show', ids),
-      };
+  const restoration = useMutation(
+    defineMutation({
+      key: 'show:restore',
+      request: () => {
+        const payload = {
+          body: toBulkPayload('show', ids),
+        };
 
-      return Promise.all([
-        restoreShowProgressRequest(payload),
-        restoreShowCalendarRequest(payload),
-      ]);
-    },
-    invalidations: [InvalidateAction.Restore],
-  }));
+        return Promise.all([
+          restoreShowProgressRequest(payload),
+          restoreShowCalendarRequest(payload),
+        ]);
+      },
+      invalidations: [InvalidateAction.Restore],
+    }),
+  );
 
   const restore = async () => {
     const current = await resolve(user);

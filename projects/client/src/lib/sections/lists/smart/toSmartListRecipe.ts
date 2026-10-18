@@ -163,17 +163,19 @@ function toOperatorDetails(
     return [];
   }
 
-  const value = filters[row.operator] === 'and'
-    ? m.option_text_match_all()
-    : m.option_text_match_any();
+  const value =
+    filters[row.operator] === 'and'
+      ? m.option_text_match_all()
+      : m.option_text_match_any();
 
   return [toDetail(m.label_smart_list_match(), value)];
 }
 
 function toRowDetails(row: IncludeRow, filters: SmartListFilters) {
   const values = filters[row.key] ?? [];
-  const included =
-    values.filter((value) => !value.startsWith(EXCLUSION_PREFIX)).length;
+  const included = values.filter(
+    (value) => !value.startsWith(EXCLUSION_PREFIX),
+  ).length;
   const operator = toOperatorDetails(row, { filters, included });
 
   if (row.key === 'people' && filters.people_role) {
@@ -200,27 +202,32 @@ function toRowDetails(row: IncludeRow, filters: SmartListFilters) {
 }
 
 function toIncludes(filters: SmartListFilters) {
-  return INCLUDE_ROWS
-    .filter((row) => (filters[row.key]?.length ?? 0) > 0)
-    .map((row) => ({
+  return INCLUDE_ROWS.filter((row) => (filters[row.key]?.length ?? 0) > 0).map(
+    (row) => ({
       key: row.key,
       label: row.label(),
       values: (filters[row.key] ?? []).map((raw) => toValue(row.format, raw)),
       details: toRowDetails(row, filters),
-    }));
+    }),
+  );
 }
 
 function toLimits(filters: SmartListFilters) {
   const ranges = LIMIT_KEYS.flatMap((key) =>
-    toSmartListFilterLabel(key, filters[key])
-      .map((label, index) => ({ key: `${key}-${index}`, label }))
+    toSmartListFilterLabel(key, filters[key]).map((label, index) => ({
+      key: `${key}-${index}`,
+      label,
+    })),
   );
 
   return filters.parental_include_unrated
-    ? [...ranges, {
-      key: 'parental_include_unrated',
-      label: m.toggle_text_include_unrated_parental(),
-    }]
+    ? [
+        ...ranges,
+        {
+          key: 'parental_include_unrated',
+          label: m.toggle_text_include_unrated_parental(),
+        },
+      ]
     : ranges;
 }
 
@@ -232,8 +239,8 @@ export function toSmartListRecipe(
     mediaType: toSmartListMediaTypeLabel(list.mediaType),
     includes: toIncludes(list.filters),
     limits: toLimits(list.filters),
-    hidden: HIDE_TOGGLES
-      .filter(({ key }) => list.filters[key] === true)
-      .map(({ key, label }) => ({ key, label: label() })),
+    hidden: HIDE_TOGGLES.filter(({ key }) => list.filters[key] === true).map(
+      ({ key, label }) => ({ key, label: label() }),
+    ),
   };
 }

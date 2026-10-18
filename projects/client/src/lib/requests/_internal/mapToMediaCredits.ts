@@ -17,11 +17,13 @@ type MediaCreditsResponse =
   | PeopleMovieCreditsResponse
   | PeopleShowCreditsResponse;
 
-type EntryResponse = {
-  movie: MovieResponse;
-} | {
-  show: ShowResponse;
-};
+type EntryResponse =
+  | {
+      movie: MovieResponse;
+    }
+  | {
+      show: ShowResponse;
+    };
 
 const WELL_KNOWN_ROLES: Partial<
   Record<CrewPosition, (value: string) => boolean>
@@ -71,9 +73,9 @@ export function mapToMediaCredits(
   (response.cast ?? []).forEach((entry) => {
     const character = entry.character.toLowerCase();
 
-    const wellKnownRole = Object.entries(WELL_KNOWN_ROLES)
-      .find(([role, isMatch]) => character === role || isMatch(character))
-      ?.[0] as CrewPosition | undefined;
+    const wellKnownRole = Object.entries(WELL_KNOWN_ROLES).find(
+      ([role, isMatch]) => character === role || isMatch(character),
+    )?.[0] as CrewPosition | undefined;
 
     const key = wellKnownRole ?? 'acting';
     const entries = credits.get(key) ?? credits.set(key, []).get(key);

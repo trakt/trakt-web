@@ -16,26 +16,26 @@ const IDS = { trakt: 99999, slug: 'silos-smart' };
 describe('convertToSmartListRequest', () => {
   it('should return the new smart list slug on 201', async () => {
     server.use(
-      http.post(
-        CONVERT_URL,
-        () => HttpResponse.json({ ids: IDS }, { status: 201 }),
+      http.post(CONVERT_URL, () =>
+        HttpResponse.json({ ids: IDS }, { status: 201 }),
       ),
     );
 
-    expect(await convertToSmartListRequest({ listId: 'silos', body: BODY }))
-      .to.equal('silos-smart');
+    expect(
+      await convertToSmartListRequest({ listId: 'silos', body: BODY }),
+    ).to.equal('silos-smart');
   });
 
   it('should return the existing smart list slug on 200', async () => {
     server.use(
-      http.post(
-        CONVERT_URL,
-        () => HttpResponse.json({ ids: IDS }, { status: 200 }),
+      http.post(CONVERT_URL, () =>
+        HttpResponse.json({ ids: IDS }, { status: 200 }),
       ),
     );
 
-    expect(await convertToSmartListRequest({ listId: 'silos', body: BODY }))
-      .to.equal('silos-smart');
+    expect(
+      await convertToSmartListRequest({ listId: 'silos', body: BODY }),
+    ).to.equal('silos-smart');
   });
 
   it('should send the body as given', async () => {
@@ -54,14 +54,13 @@ describe('convertToSmartListRequest', () => {
 
   it('should return null when the list is not convertible', async () => {
     server.use(
-      http.post(
-        CONVERT_URL,
-        () =>
-          HttpResponse.json({ error: 'list_not_convertible' }, { status: 404 }),
+      http.post(CONVERT_URL, () =>
+        HttpResponse.json({ error: 'list_not_convertible' }, { status: 404 }),
       ),
     );
 
-    expect(await convertToSmartListRequest({ listId: 'silos', body: BODY }))
-      .to.equal(null);
+    expect(
+      await convertToSmartListRequest({ listId: 'silos', body: BODY }),
+    ).to.equal(null);
   });
 });

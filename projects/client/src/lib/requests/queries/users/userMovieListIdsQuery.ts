@@ -7,15 +7,12 @@ import { listIdsRequest } from './_internal/listIdsRequest.ts';
 
 type UserMovieListIdsParams = { slug: string } & ApiParams;
 
-const userMovieListIdsRequest = (
-  { fetch, slug }: UserMovieListIdsParams,
-) => listIdsRequest({ fetch, path: `/v3/movies/${slug}/me/lists` });
+const userMovieListIdsRequest = ({ fetch, slug }: UserMovieListIdsParams) =>
+  listIdsRequest({ fetch, path: `/v3/movies/${slug}/me/lists` });
 
 export const userMovieListIdsQuery = defineQuery({
   key: 'userMovieListIds',
-  invalidations: [
-    InvalidateAction.Listed('movie'),
-  ],
+  invalidations: [InvalidateAction.Listed('movie')],
   dependencies: (params) => [params.slug],
   request: userMovieListIdsRequest,
   mapper: (response) => response.body,

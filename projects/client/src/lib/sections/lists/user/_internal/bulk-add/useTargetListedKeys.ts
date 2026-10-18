@@ -20,18 +20,20 @@ export function useTargetListedKeys(list: MediaListSummary) {
   );
 
   const isLoading = query.pipe(
-    map(($query) =>
-      $query.isPending || $query.isFetchingNextPage || $query.hasNextPage
+    map(
+      ($query) =>
+        $query.isPending || $query.isFetchingNextPage || $query.hasNextPage,
     ),
   );
 
   const listedKeys = query.pipe(
-    map(($query) =>
-      new Set(
-        ($query.data?.pages ?? [])
-          .flatMap((page) => page.entries)
-          .flatMap((item) => toListedKey(item) ?? []),
-      )
+    map(
+      ($query) =>
+        new Set(
+          ($query.data?.pages ?? [])
+            .flatMap((page) => page.entries)
+            .flatMap((item) => toListedKey(item) ?? []),
+        ),
     ),
   );
 

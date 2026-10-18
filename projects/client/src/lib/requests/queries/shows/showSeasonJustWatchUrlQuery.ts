@@ -10,20 +10,19 @@ type ShowSeasonJustWatchUrlParams = {
   season: number;
 } & ApiParams;
 
-const showSeasonJustWatchUrlRequest = (
-  { fetch, slug, country, season }: ShowSeasonJustWatchUrlParams,
-) =>
-  api({ fetch })
-    .shows
-    .season
-    .justwatch
-    .link({
-      params: {
-        id: slug,
-        country,
-        season: `${season}`,
-      },
-    });
+const showSeasonJustWatchUrlRequest = ({
+  fetch,
+  slug,
+  country,
+  season,
+}: ShowSeasonJustWatchUrlParams) =>
+  api({ fetch }).shows.season.justwatch.link({
+    params: {
+      id: slug,
+      country,
+      season: `${season}`,
+    },
+  });
 
 export const showSeasonJustWatchUrlQuery = defineQuery({
   key: 'showSeasonJustWatchUrl',

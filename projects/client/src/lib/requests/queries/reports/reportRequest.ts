@@ -9,9 +9,7 @@ type ReportRequestParams = {
   message: string;
 } & ApiParams;
 
-export type ReportRequestResult =
-  | { ok: true }
-  | { ok: false; status: number };
+export type ReportRequestResult = { ok: true } | { ok: false; status: number };
 
 // The SDK router is the pluralized type for every reportable except person,
 // which lives under the `people` router. Mapped explicitly so the key stays a
@@ -27,16 +25,18 @@ const reportRouter = {
   [ReportableType.User]: 'users',
 } as const satisfies Record<ReportableType, string>;
 
-export async function reportRequest(
-  { fetch, params, reason, message }: ReportRequestParams,
-): Promise<ReportRequestResult> {
-  const response = await api({ fetch })[reportRouter[params.type]]
-    .report({
-      params: { id: `${params.id}` },
-      // FIXME: typings here need to be tied to the type, e.g. if type
-      // is comment, it reason should be typed to comment reasons
-      body: { reason: reason as 'other', message },
-    });
+export async function reportRequest({
+  fetch,
+  params,
+  reason,
+  message,
+}: ReportRequestParams): Promise<ReportRequestResult> {
+  const response = await api({ fetch })[reportRouter[params.type]].report({
+    params: { id: `${params.id}` },
+    // FIXME: typings here need to be tied to the type, e.g. if type
+    // is comment, it reason should be typed to comment reasons
+    body: { reason: reason as 'other', message },
+  });
 
   if (response.status === 201) {
     return { ok: true };

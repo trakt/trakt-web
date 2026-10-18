@@ -18,9 +18,11 @@ type ToServiceInfoParams = {
  * lookup, falling back to the application name or raw id when the service is
  * not (or no longer) connected.
  */
-export function toServiceInfo(
-  { serviceId, connections, application }: ToServiceInfoParams,
-): ServiceInfo | undefined {
+export function toServiceInfo({
+  serviceId,
+  connections,
+  application,
+}: ToServiceInfoParams): ServiceInfo | undefined {
   if (!serviceId) {
     return undefined;
   }

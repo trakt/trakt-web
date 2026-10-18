@@ -13,23 +13,24 @@ export function useReorderList(source: ReorderListSource) {
   const query = useAllPagesInfiniteQuery(
     source.type === 'watchlist'
       ? watchlistQuery({
-        limit: reorderPageSize,
-        sortBy: 'rank',
-        sortHow: 'asc',
-      })
+          limit: reorderPageSize,
+          sortBy: 'rank',
+          sortHow: 'asc',
+        })
       : userListItemsQuery({
-        userId: assertDefined(
-          source.list.user.slug,
-          'Expected user list to have a user slug',
-        ),
-        listId: source.list.slug,
-        limit: reorderPageSize,
-      }),
+          userId: assertDefined(
+            source.list.user.slug,
+            'Expected user list to have a user slug',
+          ),
+          listId: source.list.slug,
+          limit: reorderPageSize,
+        }),
   );
 
   const isLoading = query.pipe(
-    map(($query) =>
-      $query.isPending || $query.isFetchingNextPage || $query.hasNextPage
+    map(
+      ($query) =>
+        $query.isPending || $query.isFetchingNextPage || $query.hasNextPage,
     ),
   );
 

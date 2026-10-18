@@ -30,22 +30,21 @@ function filterUnwatched(
   maxNumber?: number,
 ) {
   return episodes
-    .filter((episode) =>
-      !watched.has(episode.number) &&
-      (maxNumber === undefined || episode.number <= maxNumber)
+    .filter(
+      (episode) =>
+        !watched.has(episode.number) &&
+        (maxNumber === undefined || episode.number <= maxNumber),
     )
     .toSorted((a, b) => a.number - b.number);
 }
 
-export function useWatchUntilHereEpisodes(
-  {
-    showSlug,
-    targetEpisode,
-    previousSeasons,
-    currentSeasonEpisodes,
-    watchedBySeason,
-  }: UseWatchUntilHereEpisodesProps,
-) {
+export function useWatchUntilHereEpisodes({
+  showSlug,
+  targetEpisode,
+  previousSeasons,
+  currentSeasonEpisodes,
+  watchedBySeason,
+}: UseWatchUntilHereEpisodesProps) {
   const previousResults = previousSeasons
     .filter((season) => season.number < targetEpisode.season)
     .toSorted((a, b) => a.number - b.number)
@@ -56,25 +55,27 @@ export function useWatchUntilHereEpisodes(
       return {
         list: list.pipe(
           map((episodes) =>
-            filterUnwatched(episodes, watched).map(toWatchUntilEpisode)
+            filterUnwatched(episodes, watched).map(toWatchUntilEpisode),
           ),
         ),
         isLoading,
       };
     });
 
-  const currentWatched = watchedBySeason.get(targetEpisode.season) ??
-    new Set<number>();
+  const currentWatched =
+    watchedBySeason.get(targetEpisode.season) ?? new Set<number>();
   const currentList = of(
-    filterUnwatched(currentSeasonEpisodes, currentWatched, targetEpisode.number)
-      .map(toWatchUntilEpisode),
+    filterUnwatched(
+      currentSeasonEpisodes,
+      currentWatched,
+      targetEpisode.number,
+    ).map(toWatchUntilEpisode),
   );
 
-  const episodes = combineLatest(
-    [...previousResults.map((entry) => entry.list), currentList],
-  ).pipe(
-    map((groups) => groups.flat()),
-  );
+  const episodes = combineLatest([
+    ...previousResults.map((entry) => entry.list),
+    currentList,
+  ]).pipe(map((groups) => groups.flat()));
 
   const isLoading = anyTrue(previousResults.map((entry) => entry.isLoading));
 

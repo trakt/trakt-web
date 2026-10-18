@@ -11,12 +11,7 @@ const title = (key: string, rating: number): GameTitle => ({
   poster: `https://example.com/${key}.jpg`,
 });
 
-const pool = [
-  title('a', 90),
-  title('b', 70),
-  title('c', 50),
-  title('d', 30),
-];
+const pool = [title('a', 90), title('b', 70), title('c', 50), title('d', 30)];
 
 const first = () => 0;
 

@@ -51,15 +51,11 @@ const initialNavbarState: NavbarState = {
   },
 };
 
-const navbarStateStore = new BehaviorSubject<NavbarState>(
-  initialNavbarState,
-);
+const navbarStateStore = new BehaviorSubject<NavbarState>(initialNavbarState);
 
 export function useNavbarState() {
   return {
-    state: combineLatest(
-      [navbarStateStore, globalNavbarStateStore],
-    ).pipe(
+    state: combineLatest([navbarStateStore, globalNavbarStateStore]).pipe(
       map(([$navbarStateStore, $globalNavbarStateStore]) => ({
         ...$navbarStateStore,
         ...$globalNavbarStateStore,

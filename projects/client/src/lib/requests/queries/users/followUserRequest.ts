@@ -4,12 +4,12 @@ type FollowUserRequest = {
   slug: string;
 } & ApiParams;
 
-export function followUserRequest(
-  { slug, fetch }: FollowUserRequest,
-): Promise<boolean> {
+export function followUserRequest({
+  slug,
+  fetch,
+}: FollowUserRequest): Promise<boolean> {
   return api({ fetch })
-    .users
-    .follow({
+    .users.follow({
       params: {
         id: slug,
       },

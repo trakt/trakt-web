@@ -109,10 +109,15 @@ describe('util: createIdbPersister', () => {
 
     it('should sweep a busted entry', async () => {
       const key = `tanstack-query-${persistedQuery.queryHash}`;
-      idb.entries.mockResolvedValue([[key, {
-        ...persistedQuery,
-        buster: 'v2',
-      }]]);
+      idb.entries.mockResolvedValue([
+        [
+          key,
+          {
+            ...persistedQuery,
+            buster: 'v2',
+          },
+        ],
+      ]);
 
       const persister = await importPersister();
       await persister.persisterGc();

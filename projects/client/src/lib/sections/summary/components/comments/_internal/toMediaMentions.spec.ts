@@ -23,10 +23,7 @@ describe('util: toMediaMentions', () => {
 
   it('should list a member once when they have several credits', () => {
     const result = toMediaMentions({
-      cast: [
-        member('jo-doe', 'Jo Doe', 'A'),
-        member('jo-doe', 'Jo Doe', 'B'),
-      ],
+      cast: [member('jo-doe', 'Jo Doe', 'A'), member('jo-doe', 'Jo Doe', 'B')],
     });
 
     expect(result).toHaveLength(1);

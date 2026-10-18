@@ -9,16 +9,13 @@ const wordPattern = /[\p{L}\p{N}]+/gu;
 const spoilerTagPattern = /\[\/?spoiler\]/gi;
 const linkTargetPattern = /\]\([^)]*\)/g;
 
-const segmenter = typeof Intl.Segmenter === 'function'
-  ? new Intl.Segmenter(undefined, { granularity: 'word' })
-  : null;
+const segmenter =
+  typeof Intl.Segmenter === 'function'
+    ? new Intl.Segmenter(undefined, { granularity: 'word' })
+    : null;
 
-function countWithSegmenter(
-  review: string,
-  segmenter: Intl.Segmenter,
-): number {
-  return [...segmenter.segment(review)]
-    .filter((segment) => segment.isWordLike)
+function countWithSegmenter(review: string, segmenter: Intl.Segmenter): number {
+  return [...segmenter.segment(review)].filter((segment) => segment.isWordLike)
     .length;
 }
 
@@ -30,9 +27,7 @@ function countWithoutSegmenter(review: string): number {
 }
 
 function toReadableText(review: string): string {
-  return review
-    .replace(spoilerTagPattern, ' ')
-    .replace(linkTargetPattern, ']');
+  return review.replace(spoilerTagPattern, ' ').replace(linkTargetPattern, ']');
 }
 
 export function isReviewValid(review: string): boolean {

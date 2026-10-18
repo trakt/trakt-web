@@ -1,9 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { scrollActiveCommentIntoView } from './scrollActiveCommentIntoView.ts';
 
-function createMockElement(
-  { offsetTop = 0, scrollTop = 0, className = '' } = {},
-) {
+function createMockElement({
+  offsetTop = 0,
+  scrollTop = 0,
+  className = '',
+} = {}) {
   return {
     offsetTop,
     scrollTop,

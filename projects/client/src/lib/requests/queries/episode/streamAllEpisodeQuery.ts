@@ -11,26 +11,24 @@ type StreamAllEpisodeParams = {
   episode: number;
 } & ApiParams;
 
-const streamAllEpisodeRequest = (
-  { fetch, slug, season, episode }: StreamAllEpisodeParams,
-) =>
-  api({ fetch })
-    .shows
-    .episode
-    .watchnow({
-      params: {
-        id: slug,
-        season: castNumberAsString(season),
-        episode,
-      },
-    });
+const streamAllEpisodeRequest = ({
+  fetch,
+  slug,
+  season,
+  episode,
+}: StreamAllEpisodeParams) =>
+  api({ fetch }).shows.episode.watchnow({
+    params: {
+      id: slug,
+      season: castNumberAsString(season),
+      episode,
+    },
+  });
 
 export const streamAllEpisodeQuery = defineQuery({
   key: 'streamAllEpisode',
   invalidations: [],
-  dependencies: (
-    params,
-  ) => [params.slug, params.season, params.episode],
+  dependencies: (params) => [params.slug, params.season, params.episode],
   request: streamAllEpisodeRequest,
   mapper: (response) => mapToCountryStreamingServices(response.body),
   schema: CountryStreamingServiceOptionsSchema.array(),

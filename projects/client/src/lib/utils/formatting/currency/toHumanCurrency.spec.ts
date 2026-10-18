@@ -5,7 +5,7 @@ import { toHumanCurrency } from './toHumanCurrency.ts';
 describe('toHumanCurrency', () => {
   it('will display dollars', () => {
     const currencyParams = {
-      price: 3.50,
+      price: 3.5,
       currency: 'usd',
       locale: 'en' as AvailableLanguage,
     };
@@ -15,7 +15,7 @@ describe('toHumanCurrency', () => {
 
   it('will display euro', () => {
     const currencyParams = {
-      price: 3.50,
+      price: 3.5,
       currency: 'eur',
       locale: 'en' as AvailableLanguage,
     };
@@ -25,7 +25,7 @@ describe('toHumanCurrency', () => {
 
   it('will display dollars in a different locale', () => {
     const currencyParams = {
-      price: 3.50,
+      price: 3.5,
       currency: 'usd',
       locale: 'nl' as AvailableLanguage,
     };
@@ -35,7 +35,7 @@ describe('toHumanCurrency', () => {
 
   it('will display euro in a different locale', () => {
     const currencyParams = {
-      price: 3.50,
+      price: 3.5,
       currency: 'eur',
       locale: 'nl' as AvailableLanguage,
     };

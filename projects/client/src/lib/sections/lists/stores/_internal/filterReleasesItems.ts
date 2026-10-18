@@ -28,8 +28,9 @@ export function filterReleasesItems({
 
   return entries
     .filter((entry) => entry.effectiveReleaseDate.getTime() >= startOfToday)
-    .toSorted((a, b) =>
-      a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime()
+    .toSorted(
+      (a, b) =>
+        a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime(),
     )
     .filter((entry) => {
       if (!isUpcomingEpisodeEntry(entry)) {

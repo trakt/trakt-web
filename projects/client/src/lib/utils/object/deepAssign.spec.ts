@@ -94,21 +94,22 @@ describe('deepAssign', () => {
       },
     };
 
-    expect(deepAssign(target, source as unknown as Partial<typeof target>))
-      .toEqual({
-        dates: { created: date, updated: date },
-        collections: {
-          map: new Map([[2, 'two']]),
-          set: new Set([4]),
-          array: [3, 4, { nested: 'new' }],
-        },
-        deep: {
-          level1: {
-            level2: {
-              mixed: [{ a: 2 }, new Set([5]), new Map([[3, 'three']])],
-            },
+    expect(
+      deepAssign(target, source as unknown as Partial<typeof target>),
+    ).toEqual({
+      dates: { created: date, updated: date },
+      collections: {
+        map: new Map([[2, 'two']]),
+        set: new Set([4]),
+        array: [3, 4, { nested: 'new' }],
+      },
+      deep: {
+        level1: {
+          level2: {
+            mixed: [{ a: 2 }, new Set([5]), new Map([[3, 'three']])],
           },
         },
-      });
+      },
+    });
   });
 });

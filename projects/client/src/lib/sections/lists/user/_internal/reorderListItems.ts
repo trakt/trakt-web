@@ -33,8 +33,8 @@ export function mapListItemToReorderableItem(
       rank: item.rank,
       title: item.entry.show.title,
       subtitle: seasonLabel(item.entry.season.number),
-      posterUrl: item.entry.season.poster?.url.thumb ??
-        mediaPosterUrl(item.entry.show),
+      posterUrl:
+        item.entry.season.poster?.url.thumb ?? mediaPosterUrl(item.entry.show),
     };
   }
 
@@ -43,12 +43,10 @@ export function mapListItemToReorderableItem(
     listItemId: item.id,
     rank: item.rank,
     title: item.entry.show.title,
-    subtitle: `${
-      episodeNumberLabel({
-        seasonNumber: item.entry.episode.season,
-        episodeNumber: item.entry.episode.number,
-      })
-    } - ${item.entry.episode.title}`,
+    subtitle: `${episodeNumberLabel({
+      seasonNumber: item.entry.episode.season,
+      episodeNumber: item.entry.episode.number,
+    })} - ${item.entry.episode.title}`,
     posterUrl: mediaPosterUrl(item.entry.show),
   };
 }

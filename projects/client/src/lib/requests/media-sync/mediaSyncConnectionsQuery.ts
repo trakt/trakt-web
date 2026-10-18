@@ -25,14 +25,16 @@ export const MediaSyncConnectionResponseSchema = z.object({
   webhook_url: z.string().nullish(),
   account_name: z.string().nullable(),
   feeds: z.array(MediaSyncFeedSchema),
-  libraries: z.array(z.object({
-    id: z.number(),
-    external_id: z.string(),
-    kind: z.enum(['movies', 'shows']),
-    title: z.string(),
-    enabled: z.boolean(),
-    item_count: z.number().nullable(),
-  })),
+  libraries: z.array(
+    z.object({
+      id: z.number(),
+      external_id: z.string(),
+      kind: z.enum(['movies', 'shows']),
+      title: z.string(),
+      enabled: z.boolean(),
+      item_count: z.number().nullable(),
+    }),
+  ),
   failure_count: z.number(),
   last_failure_kind: z.string().nullable(),
   collection_limit_reached: z.boolean(),
@@ -67,9 +69,10 @@ export function mapToMediaSyncConnection(
     failureCount: connection.failure_count,
     lastFailureKind: connection.last_failure_kind,
     collectionLimitReached: connection.collection_limit_reached,
-    lastSyncedAt: connection.last_synced_at == null
-      ? null
-      : new Date(connection.last_synced_at),
+    lastSyncedAt:
+      connection.last_synced_at == null
+        ? null
+        : new Date(connection.last_synced_at),
     nextSyncAt: new Date(connection.next_sync_at),
   };
 }
@@ -85,9 +88,9 @@ const mediaSyncConnectionsRequest = async ({ fetch }: ApiParams) => {
     );
   }
   return {
-    body: z.array(MediaSyncConnectionResponseSchema).parse(
-      await response.json(),
-    ),
+    body: z
+      .array(MediaSyncConnectionResponseSchema)
+      .parse(await response.json()),
     status: 200,
   };
 };

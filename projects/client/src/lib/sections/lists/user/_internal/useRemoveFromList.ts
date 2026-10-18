@@ -24,15 +24,16 @@ export function useRemoveFromList(props: UseRemoveFromListProps) {
 
   const body = toBulkPayload(type, ids);
 
-  const invalidationType = type === 'episode' || type === 'season'
-    ? 'show'
-    : type;
+  const invalidationType =
+    type === 'episode' || type === 'season' ? 'show' : type;
 
-  const removal = useMutation(defineMutation({
-    key: 'list:remove',
-    request: () => removeFromListRequest({ body, listId: props.listId }),
-    invalidations: [InvalidateAction.Listed(invalidationType)],
-  }));
+  const removal = useMutation(
+    defineMutation({
+      key: 'list:remove',
+      request: () => removeFromListRequest({ body, listId: props.listId }),
+      invalidations: [InvalidateAction.Listed(invalidationType)],
+    }),
+  );
 
   const removeFromList = async () => {
     track({ action: 'remove' });

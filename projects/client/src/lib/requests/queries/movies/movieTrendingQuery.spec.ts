@@ -20,10 +20,12 @@ describe('movieTrendingQuery', () => {
       parental_frightening: '3-3',
     };
     let requestedUrl: URL | undefined;
-    server.use(http.get('http://localhost/movies/trending', ({ request }) => {
-      requestedUrl = new URL(request.url);
-      return HttpResponse.json([]);
-    }));
+    server.use(
+      http.get('http://localhost/movies/trending', ({ request }) => {
+        requestedUrl = new URL(request.url);
+        return HttpResponse.json([]);
+      }),
+    );
 
     await movieTrendingRequest({ filter, limit: 10 });
 
@@ -34,10 +36,7 @@ describe('movieTrendingQuery', () => {
 
   it('should query trending movies', async () => {
     const result = await runQuery({
-      factory: () =>
-        createTestBedInfiniteQuery(
-          movieTrendingQuery(),
-        ),
+      factory: () => createTestBedInfiniteQuery(movieTrendingQuery()),
       mapper: mapToEntries,
     });
 

@@ -23,11 +23,12 @@ const POSITION_MAP = {
 } as const;
 
 export function toTranslatedPosition(
-  position: string | (keyof typeof POSITION_MAP),
+  position: string | keyof typeof POSITION_MAP,
   data?: Record<string, unknown>,
 ): string {
-  const translationFn = POSITION_MAP[
-    normalizeTranslationKey(position) as keyof typeof POSITION_MAP
-  ];
+  const translationFn =
+    POSITION_MAP[
+      normalizeTranslationKey(position) as keyof typeof POSITION_MAP
+    ];
   return translationFn?.(data) ?? position;
 }

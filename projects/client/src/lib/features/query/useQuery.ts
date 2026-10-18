@@ -57,9 +57,8 @@ function invalidationHook<T>(
         return value;
       }
 
-      const queryKey = typeof queryKeyOrFn === 'function'
-        ? queryKeyOrFn()
-        : queryKeyOrFn;
+      const queryKey =
+        typeof queryKeyOrFn === 'function' ? queryKeyOrFn() : queryKeyOrFn;
 
       if (!queryKey) {
         return value;
@@ -100,8 +99,7 @@ function invalidationHook<T>(
         const isNotReady = () => {
           const state = client.getQueryState(queryKey);
 
-          return state?.status !== 'success' ||
-            state?.fetchStatus !== 'idle';
+          return state?.status !== 'success' || state?.fetchStatus !== 'idle';
         };
 
         let attempts = 0;
@@ -121,10 +119,7 @@ function invalidationHook<T>(
   );
 }
 
-export function useQuery<
-  TOutput,
-  TError extends Error,
->(
+export function useQuery<TOutput, TError extends Error>(
   props:
     | CreateQueryOptions<TOutput, TError>
     | Observable<CreateQueryOptions<TOutput, TError>>,
@@ -169,8 +164,8 @@ export function useInfiniteQuery<
   props:
     | InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
     | Observable<
-      InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
-    >,
+        InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
+      >,
 ): Observable<InfiniteQueryObserverResult<TData, TError>> {
   const client = useQueryClient();
 
@@ -194,10 +189,7 @@ export function useInfiniteQuery<
     TData,
     TQueryKey,
     TPageParam
-  >(() => props, client).pipe(
-    invalidationHook(props.queryKey),
-    multicast(),
-  );
+  >(() => props, client).pipe(invalidationHook(props.queryKey), multicast());
 }
 
 /**
@@ -216,8 +208,8 @@ export function useAllPagesInfiniteQuery<
   props:
     | InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
     | Observable<
-      InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
-    >,
+        InfiniteQueryProps<TOutput, TError, TData, TQueryKey, TPageParam>
+      >,
 ): Observable<InfiniteQueryObserverResult<TData, TError>> {
   const client = useQueryClient();
   const ref = { current: isObservable(props) ? undefined : props };

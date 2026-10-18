@@ -20,6 +20,6 @@ export function matchesServiceSlug(
 
 export function isWellKnownSource(source: string): boolean {
   return Object.values(WELL_KNOWN_SERVICES).some((serviceKeys) =>
-    matchesServiceSlug(serviceKeys, source)
+    matchesServiceSlug(serviceKeys, source),
   );
 }

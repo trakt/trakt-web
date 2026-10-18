@@ -27,9 +27,14 @@ export function useTvTimeReport() {
   const isSubmitting = new BehaviorSubject(false);
   const error = new BehaviorSubject<TvTimeReportError | null>(null);
 
-  const submit = async (
-    { message, files, userId, username, source, sourceName }: SubmitProps,
-  ): Promise<boolean> => {
+  const submit = async ({
+    message,
+    files,
+    userId,
+    username,
+    source,
+    sourceName,
+  }: SubmitProps): Promise<boolean> => {
     isSubmitting.next(true);
     error.next(null);
 
@@ -48,7 +53,8 @@ export function useTvTimeReport() {
         return true;
       }
 
-      const reason = await response.json()
+      const reason = await response
+        .json()
         .then((payload: { reason?: string } | null) => payload?.reason)
         .catch(() => null);
       error.next(mapReason(reason));

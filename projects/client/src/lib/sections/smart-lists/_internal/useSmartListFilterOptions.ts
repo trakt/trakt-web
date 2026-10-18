@@ -17,9 +17,10 @@ type UseSmartListFilterOptionsProps = {
   query$: Observable<string>;
 };
 
-export function useSmartListFilterOptions(
-  { kind, query$ }: UseSmartListFilterOptionsProps,
-) {
+export function useSmartListFilterOptions({
+  kind,
+  query$,
+}: UseSmartListFilterOptionsProps) {
   const settled$ = query$.pipe(
     map((value) => value.trim()),
     debounceTime(time.seconds(0.3)),
@@ -38,8 +39,9 @@ export function useSmartListFilterOptions(
     settled$.pipe(startWith('')),
     query.pipe(startWith(undefined)),
   ]).pipe(
-    map(([value, settled, $query]) =>
-      value.trim() !== settled || ($query?.isFetching ?? false)
+    map(
+      ([value, settled, $query]) =>
+        value.trim() !== settled || ($query?.isFetching ?? false),
     ),
     distinctUntilChanged(),
   );

@@ -12,12 +12,14 @@ describe('util: stepActiveIndex', () => {
   });
 
   it('should ignore keys other than the arrows', () => {
-    expect(stepActiveIndex({ key: 'Enter', activeIndex: 0, count: 3 }))
-      .toBeNull();
+    expect(
+      stepActiveIndex({ key: 'Enter', activeIndex: 0, count: 3 }),
+    ).toBeNull();
   });
 
   it('should ignore arrows when there are no options', () => {
-    expect(stepActiveIndex({ key: 'ArrowDown', activeIndex: 0, count: 0 }))
-      .toBeNull();
+    expect(
+      stepActiveIndex({ key: 'ArrowDown', activeIndex: 0, count: 0 }),
+    ).toBeNull();
   });
 });

@@ -7,15 +7,16 @@ export function isDifferentFilterSet(
   searchParams: URLSearchParams,
 ) {
   const filterKeys = FILTERS.map((filter) => filter.key);
-  const filterParams = Array.from(searchParams.entries())
-    .filter(([key]) => filterKeys.includes(key as FilterKey));
+  const filterParams = Array.from(searchParams.entries()).filter(([key]) =>
+    filterKeys.includes(key as FilterKey),
+  );
 
   const currentFilters = Object.fromEntries(filterParams);
 
   return (
     Object.keys(filters).length !== filterParams.length ||
-    Object.entries(filters).some(([key, value]) =>
-      currentFilters[key] !== value
+    Object.entries(filters).some(
+      ([key, value]) => currentFilters[key] !== value,
     )
   );
 }

@@ -25,9 +25,10 @@ function countPerBucket(dates: ReadonlyArray<Date>): ReadonlyArray<number> {
   );
 }
 
-export function bucketByTimeOfDay(
-  { movieDates, showDates }: BucketByTimeOfDayParams,
-): ReadonlyArray<PeakHoursBucket> {
+export function bucketByTimeOfDay({
+  movieDates,
+  showDates,
+}: BucketByTimeOfDayParams): ReadonlyArray<PeakHoursBucket> {
   const movies = countPerBucket(movieDates);
   const episodes = countPerBucket(showDates);
 

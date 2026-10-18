@@ -51,11 +51,13 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     return loading;
   }
 
-  const create = useMutation(defineMutation({
-    key: 'media-sync:create-connection',
-    request: createMediaSyncConnectionRequest,
-    invalidations: [InvalidateAction.MediaSync.Connections],
-  }));
+  const create = useMutation(
+    defineMutation({
+      key: 'media-sync:create-connection',
+      request: createMediaSyncConnectionRequest,
+      invalidations: [InvalidateAction.MediaSync.Connections],
+    }),
+  );
 
   function stopPolling() {
     clearTimeout(pollTimer);
@@ -175,9 +177,10 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       libraryIds: [],
       accounts: null,
       accountId: null,
-      feeds: serverId === PLEX_ACCOUNT_SERVER_ID
-        ? ['watchlist']
-        : MediaSyncFeedSchema.options,
+      feeds:
+        serverId === PLEX_ACCOUNT_SERVER_ID
+          ? ['watchlist']
+          : MediaSyncFeedSchema.options,
     });
 
     const { libraries, accounts } = await loadServer(
@@ -198,8 +201,8 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       libraries,
       libraryIds: libraries.map((library) => library.externalId),
       accounts,
-      accountId: accounts.find((account) => account.selected)?.accountId ??
-        null,
+      accountId:
+        accounts.find((account) => account.selected)?.accountId ?? null,
     });
   }
 
@@ -246,15 +249,17 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     const webhookOnly = isWebhookOnlyServer(current.servers, current.serverId);
     state.next({ step: 'connecting', isWebhookOnly: webhookOnly });
 
-    const result = await create.mutate({
-      attemptId: current.attemptId,
-      serverId: current.serverId,
-      libraryIds: current.libraryIds,
-      feeds: current.feeds,
-      syncAccountId: current.accountId,
-      importHistory: current.importHistory,
-      webhookOnly,
-    }).catch(() => null);
+    const result = await create
+      .mutate({
+        attemptId: current.attemptId,
+        serverId: current.serverId,
+        libraryIds: current.libraryIds,
+        feeds: current.feeds,
+        syncAccountId: current.accountId,
+        importHistory: current.importHistory,
+        webhookOnly,
+      })
+      .catch(() => null);
 
     if (!result?.ok) {
       state.next({ step: 'failed', error: result?.error ?? 'connect_failed' });

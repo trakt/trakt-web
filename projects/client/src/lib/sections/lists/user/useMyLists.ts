@@ -23,7 +23,7 @@ export function useMyLists({ type, slug, mode }: UseMyListsParams) {
             key: entry.key,
             kind: 'smart',
             list: entry,
-          }))
+          })),
         ),
       ),
     };
@@ -39,7 +39,7 @@ export function useMyLists({ type, slug, mode }: UseMyListsParams) {
           key: entry.key,
           kind: 'custom',
           list: entry,
-        }))
+        })),
       ),
     ),
   };

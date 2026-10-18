@@ -12,8 +12,8 @@ export function drawerNavigation<
   const persistentKeys = new Set(options?.persistentKeys ?? []);
   const cleanupKeys = params
     ? Object.values(params)
-      .flatMap((p) => (p ? Object.keys(p) : []))
-      .filter((key) => !persistentKeys.has(key))
+        .flatMap((p) => (p ? Object.keys(p) : []))
+        .filter((key) => !persistentKeys.has(key))
     : [];
 
   const buildDrawerLink = <D extends T>(

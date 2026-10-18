@@ -27,8 +27,8 @@ export function mapToCalendarMedia(entries: HotReleaseResponse[]) {
     .filter(isCalendarMovie)
     .map((entry) => mapToMovieEntry(entry.movie));
 
-  return [...episodes, ...movies]
-    .toSorted((a, b) =>
-      a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime()
-    );
+  return [...episodes, ...movies].toSorted(
+    (a, b) =>
+      a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime(),
+  );
 }

@@ -26,14 +26,16 @@ export type ResolvedMovies = {
 };
 
 function hasAnyId(ids: ImportIds): boolean {
-  return ids.trakt != null || ids.imdb != null || ids.tmdb != null ||
-    ids.tvdb != null;
+  return (
+    ids.trakt != null ||
+    ids.imdb != null ||
+    ids.tmdb != null ||
+    ids.tvdb != null
+  );
 }
 
 function needsResolution(item: UniversalImportItem): boolean {
-  return item.type === 'movie' &&
-    !hasAnyId(item.ids) &&
-    Boolean(item.title);
+  return item.type === 'movie' && !hasAnyId(item.ids) && Boolean(item.title);
 }
 
 function toQueryKey(item: UniversalImportItem): string {
@@ -67,9 +69,12 @@ function toCandidates(
   }));
 }
 
-export async function resolveMovieIds(
-  { items, match, onProgress, signal }: ResolveMovieIdsParams,
-): Promise<ResolvedMovies> {
+export async function resolveMovieIds({
+  items,
+  match,
+  onProgress,
+  signal,
+}: ResolveMovieIdsParams): Promise<ResolvedMovies> {
   const queries = new Map<string, MovieMatchQuery>();
 
   items.filter(needsResolution).forEach((item) => {

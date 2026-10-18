@@ -7,12 +7,8 @@ import { mapToStreamingConnection } from './_internal/mapToStreamingConnection.t
 
 type StreamingConnectionsParams = ApiParams;
 
-const streamingConnectionsRequest = (
-  { fetch }: StreamingConnectionsParams,
-) =>
-  api({ fetch })
-    .younify
-    .connections();
+const streamingConnectionsRequest = ({ fetch }: StreamingConnectionsParams) =>
+  api({ fetch }).younify.connections();
 
 export const streamingConnectionsQuery = defineQuery({
   key: 'streamingConnections',

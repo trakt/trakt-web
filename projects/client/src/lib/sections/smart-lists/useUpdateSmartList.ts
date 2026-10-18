@@ -29,12 +29,14 @@ function toUpdateBody({ slug: _slug, ...props }: UpdateListProps) {
 export function useUpdateSmartList() {
   const { track } = useTrack(AnalyticsEvent.SmartListUpdate);
 
-  const update = useMutation(defineMutation({
-    key: 'smart-list:update',
-    request: (props: UpdateListProps) =>
-      updateSmartListRequest({ slug: props.slug, body: toUpdateBody(props) }),
-    invalidations: [InvalidateAction.SmartList.Edited],
-  }));
+  const update = useMutation(
+    defineMutation({
+      key: 'smart-list:update',
+      request: (props: UpdateListProps) =>
+        updateSmartListRequest({ slug: props.slug, body: toUpdateBody(props) }),
+      invalidations: [InvalidateAction.SmartList.Edited],
+    }),
+  );
 
   const updateList = async (props: UpdateListProps) => {
     track();

@@ -20,9 +20,9 @@ type CommentReactions = {
   isLoading: Observable<boolean>;
 };
 
-export function useCommentReactions(
-  { id }: UseCommentReactionsProps,
-): CommentReactions {
+export function useCommentReactions({
+  id,
+}: UseCommentReactionsProps): CommentReactions {
   const { reactions } = useUser();
 
   const summary = useQuery(commentReactionsQuery({ id }));

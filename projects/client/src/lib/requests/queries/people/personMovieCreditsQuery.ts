@@ -8,20 +8,20 @@ import { mapToMediaCredits } from '../../_internal/mapToMediaCredits.ts';
 
 type PersonMovieCreditsParams = { slug: string } & ApiParams & FilterParams;
 
-const personMovieCreditsRequest = (
-  { fetch, slug, filter }: PersonMovieCreditsParams,
-) =>
-  api({ fetch })
-    .people
-    .movies({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,images',
-        ...filter,
-      },
-    });
+const personMovieCreditsRequest = ({
+  fetch,
+  slug,
+  filter,
+}: PersonMovieCreditsParams) =>
+  api({ fetch }).people.movies({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,images',
+      ...filter,
+    },
+  });
 
 export const personMovieCreditsQuery = defineQuery({
   key: 'personMovieCredits:v2',

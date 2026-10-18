@@ -12,7 +12,7 @@ export function useDefaultCardVariant<M>(type: M) {
 
       const isDPad = $navigation === 'dpad';
 
-      return isDPad ? 'landscape' as const : 'portrait' as const;
+      return isDPad ? ('landscape' as const) : ('portrait' as const);
     }),
   );
 }

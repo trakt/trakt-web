@@ -30,40 +30,50 @@ const OPTION_SOURCES: Record<
   keywords: {
     path: '/smart-lists/filter-options/keywords',
     toOptions: (body) =>
-      NamedOptionSchema.array().parse(body).map(({ name }) => ({
-        value: name,
-        label: name,
-      })),
+      NamedOptionSchema.array()
+        .parse(body)
+        .map(({ name }) => ({
+          value: name,
+          label: name,
+        })),
   },
   networks: {
     path: '/smart-lists/filter-options/networks',
     toOptions: (body) =>
-      NamedOptionSchema.array().parse(body).map(({ name }) => ({
-        value: name,
-        label: name,
-      })),
+      NamedOptionSchema.array()
+        .parse(body)
+        .map(({ name }) => ({
+          value: name,
+          label: name,
+        })),
   },
   studios: {
     path: '/smart-lists/filter-options/studios',
     toOptions: (body) =>
-      StudioOptionSchema.array().parse(body).map(({ slug, name }) => ({
-        value: slug,
-        label: name,
-      })),
+      StudioOptionSchema.array()
+        .parse(body)
+        .map(({ slug, name }) => ({
+          value: slug,
+          label: name,
+        })),
   },
   people: {
     path: '/search/person',
     toOptions: (body) =>
-      PersonResultSchema.array().parse(body).map(({ person }) => ({
-        value: person.ids.slug,
-        label: person.name,
-      })),
+      PersonResultSchema.array()
+        .parse(body)
+        .map(({ person }) => ({
+          value: person.ids.slug,
+          label: person.name,
+        })),
   },
 };
 
-const smartListFilterOptionsRequest = async (
-  { fetch, kind, query }: SmartListFilterOptionsParams,
-) => {
+const smartListFilterOptionsRequest = async ({
+  fetch,
+  kind,
+  query,
+}: SmartListFilterOptionsParams) => {
   const source = OPTION_SOURCES[kind];
   const response = await rawApiFetch({
     fetch,

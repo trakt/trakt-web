@@ -22,6 +22,4 @@ export const SentimentResponseSchema = z.object({
   highlight: z.string().optional(),
 });
 
-export type SentimentResponse = z.infer<
-  typeof SentimentResponseSchema
->;
+export type SentimentResponse = z.infer<typeof SentimentResponseSchema>;

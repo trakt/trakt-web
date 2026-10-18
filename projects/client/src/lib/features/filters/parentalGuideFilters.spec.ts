@@ -18,8 +18,9 @@ describe('parentalGuideFilters', () => {
     parentalGuideFilters.forEach((filter) => {
       expect(filter.advancedOnly).toBe(true);
       expect(filter.range).toEqual({ min: 0, max: 3 });
-      expect([0, 1, 2, 3].map((value) => filter.ticks?.formatter(value)))
-        .toEqual(['None', 'Mild', 'Moderate', 'Severe']);
+      expect(
+        [0, 1, 2, 3].map((value) => filter.ticks?.formatter(value)),
+      ).toEqual(['None', 'Mild', 'Moderate', 'Severe']);
       expect(filter.formatLabel({ min: 0, max: 0 })).toContain('None to None');
     });
   });
@@ -37,7 +38,8 @@ describe('parentalGuideFilters', () => {
   });
 
   it.each(keys)('should invalidate queries when %s changes', (key) => {
-    expect(getGlobalFilterDependencies({ [key]: '0-0' }))
-      .not.toEqual(getGlobalFilterDependencies({ [key]: '0-1' }));
+    expect(getGlobalFilterDependencies({ [key]: '0-0' })).not.toEqual(
+      getGlobalFilterDependencies({ [key]: '0-1' }),
+    );
   });
 });

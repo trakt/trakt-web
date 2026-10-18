@@ -12,9 +12,10 @@ type SentimentSummary = {
   aspects: string[];
 };
 
-export function mapToSentimentSummary(
-  { pros, cons }: MapToSentimentSummaryProps,
-): SentimentSummary {
+export function mapToSentimentSummary({
+  pros,
+  cons,
+}: MapToSentimentSummaryProps): SentimentSummary {
   const selected = toSentimentAspects({
     pros,
     cons,

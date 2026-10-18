@@ -6,8 +6,10 @@ type HasSwipeGestureProps = {
   isMouse: boolean;
 };
 
-export function hasSwipeGesture(
-  { style, isLargeScreenCards, isMouse }: HasSwipeGestureProps,
-) {
+export function hasSwipeGesture({
+  style,
+  isLargeScreenCards,
+  isMouse,
+}: HasSwipeGestureProps) {
   return style === 'summary' && !(isLargeScreenCards && isMouse);
 }

@@ -61,7 +61,9 @@ export function resolveJSONConflicts(input: string): Record<string, string> {
 
   if (!success) {
     throw new Error(
-      'Failed to parse resolved JSON: ' + parseError?.message + '\n\n' +
+      'Failed to parse resolved JSON: ' +
+        parseError?.message +
+        '\n\n' +
         resolved.substring(0, 500),
     );
   }
@@ -77,10 +79,7 @@ if (import.meta.main) {
         try {
           const data = await readFile(filePath, 'utf8');
           const resolvedData = resolveJSONConflicts(data);
-          await writeJsonFile(
-            filePath,
-            resolvedData,
-          );
+          await writeJsonFile(filePath, resolvedData);
           console.log(`Conflicts resolved in file: ${dirEntry.name}`);
         } catch (err) {
           console.error(`Error processing file ${dirEntry.name}:`, err);

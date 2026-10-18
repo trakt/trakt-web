@@ -21,16 +21,19 @@ function mapListToReorderableItem(
 }
 
 export function useReorderUserLists(slug: string) {
-  const query = useAllPagesInfiniteQuery(personalListsQuery({
-    slug,
-    limit: reorderPageSize,
-    sortBy: 'rank',
-    sortHow: 'asc',
-  }));
+  const query = useAllPagesInfiniteQuery(
+    personalListsQuery({
+      slug,
+      limit: reorderPageSize,
+      sortBy: 'rank',
+      sortHow: 'asc',
+    }),
+  );
 
   const isLoading = query.pipe(
-    map(($query) =>
-      $query.isPending || $query.isFetchingNextPage || $query.hasNextPage
+    map(
+      ($query) =>
+        $query.isPending || $query.isFetchingNextPage || $query.hasNextPage,
     ),
     startWith(true),
   );

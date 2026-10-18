@@ -10,14 +10,11 @@ export function createCalendarContext() {
 
   const ctx = setContext(
     CALENDAR_CONTEXT_KEY,
-    getContext<CalendarContext>(CALENDAR_CONTEXT_KEY) ??
-      {
-        startDate: new BehaviorSubject(
-          getStartOfWeek(now, getLocale()),
-        ),
-        activeDate: new BehaviorSubject<Date>(now),
-        visibleDate: new BehaviorSubject<Date | null>(null),
-      },
+    getContext<CalendarContext>(CALENDAR_CONTEXT_KEY) ?? {
+      startDate: new BehaviorSubject(getStartOfWeek(now, getLocale())),
+      activeDate: new BehaviorSubject<Date>(now),
+      visibleDate: new BehaviorSubject<Date | null>(null),
+    },
   );
 
   return ctx;

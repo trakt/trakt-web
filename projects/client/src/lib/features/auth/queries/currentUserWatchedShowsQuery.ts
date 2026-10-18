@@ -19,37 +19,38 @@ export const WatchedEpisodeSchema = MediaPlayHistorySchema.extend({
 });
 export type WatchedEpisode = z.infer<typeof WatchedEpisodeSchema>;
 
-export const WatchedShowSchema = WatchedMediaSchema.omit({ plays: true })
-  .extend({
-    episodes: z.array(WatchedEpisodeSchema),
-    watchedDates: z.array(z.date()),
-    playsPerSeason: z.map(z.number(), z.number()),
-  });
+export const WatchedShowSchema = WatchedMediaSchema.omit({
+  plays: true,
+}).extend({
+  episodes: z.array(WatchedEpisodeSchema),
+  watchedDates: z.array(z.date()),
+  playsPerSeason: z.map(z.number(), z.number()),
+});
 export type WatchedShow = z.infer<typeof WatchedShowSchema>;
 
-export function mapWatchedShowResponse(
-  [showId, seasons]: [string, Record<string, Record<string, string[]>>],
-): WatchedShow {
+export function mapWatchedShowResponse([showId, seasons]: [
+  string,
+  Record<string, Record<string, string[]>>,
+]): WatchedShow {
   const id = Number(showId);
 
-  const episodes = Object.entries(seasons)
-    .flatMap(([seasonId, episodeMap]) =>
-      Object.entries(episodeMap).map(([episodeId, timestamps]) => {
-        const seasonNumber = Number(
-          assertDefined(
-            seasonId.split('|').at(1),
-            'Expected season key to contain season number',
-          ),
-        );
+  const episodes = Object.entries(seasons).flatMap(([seasonId, episodeMap]) =>
+    Object.entries(episodeMap).map(([episodeId, timestamps]) => {
+      const seasonNumber = Number(
+        assertDefined(
+          seasonId.split('|').at(1),
+          'Expected season key to contain season number',
+        ),
+      );
 
-        return {
-          season: seasonNumber,
-          episodeId: Number(episodeId),
-          watchedAt: getLastWatchedAt(timestamps),
-          plays: timestamps.length,
-        };
-      })
-    );
+      return {
+        season: seasonNumber,
+        episodeId: Number(episodeId),
+        watchedAt: getLastWatchedAt(timestamps),
+        plays: timestamps.length,
+      };
+    }),
+  );
 
   const playsPerSeason = episodes.reduce(
     (acc, { season }) => acc.set(season, (acc.get(season) ?? 0) + 1),
@@ -59,10 +60,10 @@ export function mapWatchedShowResponse(
   const watchedDates = Object.values(seasons)
     .flatMap((episodeMap) => Object.values(episodeMap))
     .flatMap((timestamps) =>
-      timestamps.map((timestamp) => new Date(timestamp))
+      timestamps.map((timestamp) => new Date(timestamp)),
     );
   const watchedAt = watchedDates.reduce(
-    (max, date) => date > max ? date : max,
+    (max, date) => (date > max ? date : max),
     new Date(0),
   );
 
@@ -77,27 +78,25 @@ export function mapWatchedShowResponse(
 
 type CurrentUserWatchedShowsParams = PaginationParams & ApiParams;
 
-const currentUserWatchedShowsRequest = (
-  { fetch, page = 1, limit }: CurrentUserWatchedShowsParams,
-) => {
+const currentUserWatchedShowsRequest = ({
+  fetch,
+  page = 1,
+  limit,
+}: CurrentUserWatchedShowsParams) => {
   const pagination = {
     page,
     limit,
   };
 
-  return api({ fetch })
-    .users
-    .watched
-    .minimal
-    .shows({
-      params: { id: 'me' },
-      query: {
-        specials: true,
-        extended: 'min',
-        season_numbers: true,
-        ...pagination,
-      },
-    });
+  return api({ fetch }).users.watched.minimal.shows({
+    params: { id: 'me' },
+    query: {
+      specials: true,
+      extended: 'min',
+      season_numbers: true,
+      ...pagination,
+    },
+  });
 };
 
 export const currentUserWatchedShowsQuery = defineInfiniteQuery({

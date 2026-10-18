@@ -10,19 +10,19 @@ type ShowPeopleParams = {
   guestStars?: boolean;
 } & ApiParams;
 
-const showPeopleRequest = (
-  { fetch, slug, guestStars = false }: ShowPeopleParams,
-) =>
-  api({ fetch })
-    .shows
-    .people({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: getPeopleExtended(guestStars),
-      },
-    });
+const showPeopleRequest = ({
+  fetch,
+  slug,
+  guestStars = false,
+}: ShowPeopleParams) =>
+  api({ fetch }).shows.people({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: getPeopleExtended(guestStars),
+    },
+  });
 
 export const showPeopleQuery = defineQuery({
   key: 'showPeople',

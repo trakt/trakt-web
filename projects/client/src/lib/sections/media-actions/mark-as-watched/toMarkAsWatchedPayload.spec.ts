@@ -132,10 +132,14 @@ describe('toMarkAsWatchedPayload', () => {
       shows: testIds.map((id, index) => ({
         ids: { trakt: id },
         watched_at: undefined,
-        seasons: [{
-          number: 1,
-          episodes: [{ number: index + 1, watched_at: testDate.toISOString() }],
-        }],
+        seasons: [
+          {
+            number: 1,
+            episodes: [
+              { number: index + 1, watched_at: testDate.toISOString() },
+            ],
+          },
+        ],
       })),
     });
   });

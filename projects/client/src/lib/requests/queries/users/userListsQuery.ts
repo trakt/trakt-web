@@ -26,9 +26,7 @@ const UserListsResponseSchema = z.object({
 
 type UserListsResponse = z.infer<typeof UserListsResponseSchema>;
 
-const mapToUserList = (
-  response: UserListsResponse,
-): UserList => {
+const mapToUserList = (response: UserListsResponse): UserList => {
   return {
     id: response.id,
     name: response.name,
@@ -37,12 +35,8 @@ const mapToUserList = (
   };
 };
 
-const userListsRequest = async (
-  { fetch }: UserListsParams,
-) => {
-  const response = await rawApiFetch(
-    { fetch, path: '/v3/users/me/lists' },
-  );
+const userListsRequest = async ({ fetch }: UserListsParams) => {
+  const response = await rawApiFetch({ fetch, path: '/v3/users/me/lists' });
 
   const body = response.ok ? await response.json() : [];
 

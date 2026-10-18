@@ -5,13 +5,12 @@ type AddToWatchlistParams = {
   body: WatchlistRequest;
 } & ApiParams;
 
-export function addToWatchlistRequest(
-  { body, fetch }: AddToWatchlistParams,
-): Promise<boolean> {
+export function addToWatchlistRequest({
+  body,
+  fetch,
+}: AddToWatchlistParams): Promise<boolean> {
   return api({ fetch })
-    .sync
-    .watchlist
-    .add({
+    .sync.watchlist.add({
       body,
     })
     .then(({ status }) => {

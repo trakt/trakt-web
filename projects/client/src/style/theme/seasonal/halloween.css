@@ -1,5 +1,5 @@
 :root {
-  &[data-seasonal-theme='halloween'] {
+  &[data-seasonal-theme="halloween"] {
     --purple-50: var(--orange-50);
     --purple-60: var(--orange-60);
     --purple-70: var(--orange-70);

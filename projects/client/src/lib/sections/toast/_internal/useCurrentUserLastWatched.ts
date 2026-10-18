@@ -1,7 +1,5 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import {
-  RECENTLY_WATCHED_WINDOW,
-} from '$lib/features/toast/constants/index.ts';
+import { RECENTLY_WATCHED_WINDOW } from '$lib/features/toast/constants/index.ts';
 import { useDismissals } from '$lib/features/toast/useDismissals.ts';
 import {
   type EpisodeActivityHistory,
@@ -22,13 +20,13 @@ function toLastWatchedMedia(
 ) {
   return 'episode' in activity
     ? {
-      type: 'show' as const,
-      media: activity.show,
-    }
+        type: 'show' as const,
+        media: activity.show,
+      }
     : {
-      type: 'movie' as const,
-      media: activity.movie,
-    };
+        type: 'movie' as const,
+        media: activity.movie,
+      };
 }
 
 export function useCurrentUserLastWatched() {
@@ -54,52 +52,49 @@ export function useCurrentUserLastWatched() {
     map(([movies, episodes]) =>
       [...movies, ...episodes].sort(
         (a, b) => b.watchedAt.getTime() - a.watchedAt.getTime(),
-      )
+      ),
     ),
   );
 
   return {
-    lastWatchedItem: combineLatest(
-      [list$, ratings, history, user],
-    ).pipe(
-      map(
-        ([$list, $ratings, $history, $user]) => {
-          if (!$ratings || !$user.preferences.showRatingPrompt) {
-            return null;
-          }
+    lastWatchedItem: combineLatest([list$, ratings, history, user]).pipe(
+      map(([$list, $ratings, $history, $user]) => {
+        if (!$ratings || !$user.preferences.showRatingPrompt) {
+          return null;
+        }
 
-          const unratedItem = $list
-            .filter((activity) => !wasDismissed(activity))
-            .find((activity) => {
-              switch (activity.type) {
-                case 'movie':
-                  return !$ratings.movies.has(activity.movie.id);
-                case 'episode': {
-                  const showHistory = $history?.shows.get(activity.show.id);
-                  const episodeWatchDates = showHistory?.episodes.map(
-                    (episode) => episode.watchedAt,
-                  ) ?? [];
-                  const isRatingCandidate = isShowRatingCandidate({
-                    episode: activity.episode,
-                    episodeWatchDates,
-                    now: new Date(),
-                  });
+        const unratedItem = $list
+          .filter((activity) => !wasDismissed(activity))
+          .find((activity) => {
+            switch (activity.type) {
+              case 'movie':
+                return !$ratings.movies.has(activity.movie.id);
+              case 'episode': {
+                const showHistory = $history?.shows.get(activity.show.id);
+                const episodeWatchDates =
+                  showHistory?.episodes.map((episode) => episode.watchedAt) ??
+                  [];
+                const isRatingCandidate = isShowRatingCandidate({
+                  episode: activity.episode,
+                  episodeWatchDates,
+                  now: new Date(),
+                });
 
-                  return isRatingCandidate &&
-                    !$ratings.shows.has(activity.show.id);
-                }
-                default:
-                  return false;
+                return (
+                  isRatingCandidate && !$ratings.shows.has(activity.show.id)
+                );
               }
-            });
+              default:
+                return false;
+            }
+          });
 
-          if (!unratedItem || !hasCheckedRatingsSince(unratedItem.watchedAt)) {
-            return null;
-          }
+        if (!unratedItem || !hasCheckedRatingsSince(unratedItem.watchedAt)) {
+          return null;
+        }
 
-          return toLastWatchedMedia(unratedItem);
-        },
-      ),
+        return toLastWatchedMedia(unratedItem);
+      }),
     ),
   };
 }

@@ -41,11 +41,9 @@ const CommentItemResponseSchema = z.discriminatedUnion('type', [
 
 type CommentItemResponse = z.infer<typeof CommentItemResponseSchema>;
 
-type CommentItemParams =
-  & {
-    id: number;
-  }
-  & ApiParams;
+type CommentItemParams = {
+  id: number;
+} & ApiParams;
 
 const commentItemRequest = async ({ fetch, id }: CommentItemParams) => {
   const response = await rawApiFetch({

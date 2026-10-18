@@ -1,11 +1,7 @@
 import { createBulkMediaIntl } from '$lib/features/intl-overlay/createBulkMediaIntl.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import {
-  movieTrendingQuery,
-} from '$lib/requests/queries/movies/movieTrendingQuery.ts';
-import {
-  showTrendingQuery,
-} from '$lib/requests/queries/shows/showTrendingQuery.ts';
+import { movieTrendingQuery } from '$lib/requests/queries/movies/movieTrendingQuery.ts';
+import { showTrendingQuery } from '$lib/requests/queries/shows/showTrendingQuery.ts';
 import { map } from 'rxjs';
 import type { InfiniteQuery } from '../../features/query/models/InfiniteQuery.ts';
 import { dailyShuffle } from '../../utils/array/dailyShuffle.ts';
@@ -21,13 +17,9 @@ function typeToQuery(type: MediaType) {
 
   switch (type) {
     case 'movie':
-      return movieTrendingQuery(params) as InfiniteQuery<
-        TrendingEntry
-      >;
+      return movieTrendingQuery(params) as InfiniteQuery<TrendingEntry>;
     case 'show':
-      return showTrendingQuery(params) as InfiniteQuery<
-        TrendingEntry
-      >;
+      return showTrendingQuery(params) as InfiniteQuery<TrendingEntry>;
   }
 }
 

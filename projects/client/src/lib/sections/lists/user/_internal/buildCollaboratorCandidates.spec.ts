@@ -21,8 +21,9 @@ function toProfile(id: number): UserProfile {
   };
 }
 
-const [oneWayFollower, mutualFollower, unfollowedCollaborator] = [1, 2, 3]
-  .map(toProfile);
+const [oneWayFollower, mutualFollower, unfollowedCollaborator] = [1, 2, 3].map(
+  toProfile,
+);
 
 describe('util: buildCollaboratorCandidates', () => {
   it('should mark followers who are not followed back as one-way, not mutual', () => {

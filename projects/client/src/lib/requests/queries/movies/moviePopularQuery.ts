@@ -12,27 +12,29 @@ import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts'
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
-type MoviePopularParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & SearchParams;
+type MoviePopularParams = PaginationParams &
+  ApiParams &
+  FilterParams &
+  SearchParams;
 
-const moviePopularRequest = (
-  { fetch, limit, page, filter, theme, search }: MoviePopularParams,
-) => {
-  return api({ fetch })
-    .movies
-    .popular({
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        theme,
-        ...filter,
-        ...search,
-      },
-    });
+const moviePopularRequest = ({
+  fetch,
+  limit,
+  page,
+  filter,
+  theme,
+  search,
+}: MoviePopularParams) => {
+  return api({ fetch }).movies.popular({
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      theme,
+      ...filter,
+      ...search,
+    },
+  });
 };
 
 export const moviePopularQuery = defineInfiniteQuery({
@@ -41,9 +43,7 @@ export const moviePopularQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (
-    params,
-  ) => [
+  dependencies: (params) => [
     params.limit,
     params.page,
     ...getGlobalFilterDependencies(params.filter),

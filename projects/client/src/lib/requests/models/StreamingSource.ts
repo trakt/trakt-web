@@ -12,6 +12,4 @@ export const StreamingSourceSchema = z.object({
   color: z.string().nullish(),
 });
 
-export type StreamingSource = z.infer<
-  typeof StreamingSourceSchema
->;
+export type StreamingSource = z.infer<typeof StreamingSourceSchema>;

@@ -65,19 +65,17 @@ const searchTrendingRequest = (
 ) => {
   const queryString = query ? { query } : {};
 
-  return api({ fetch })
-    .search
-    .trending({
-      params: {
-        type,
-      },
-      query: {
-        extended: 'full,images',
-        page: 1,
-        limit,
-        ...queryString,
-      },
-    });
+  return api({ fetch }).search.trending({
+    params: {
+      type,
+    },
+    query: {
+      extended: 'full,images',
+      page: 1,
+      limit,
+      ...queryString,
+    },
+  });
 };
 
 export const searchTrendingQuery = defineQuery({
@@ -86,8 +84,9 @@ export const searchTrendingQuery = defineQuery({
   dependencies: (params) => [params.limit, params.query, params.type],
   request: (params: SearchTrendingParams) =>
     Promise.all(
-      toTrendingTypes(params.type)
-        .map((type) => searchTrendingRequest(params, type)),
+      toTrendingTypes(params.type).map((type) =>
+        searchTrendingRequest(params, type),
+      ),
     ),
   mapper: (responses) => {
     const data = responses.flatMap((response) => response.body);

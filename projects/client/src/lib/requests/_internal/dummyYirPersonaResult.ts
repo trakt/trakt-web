@@ -152,7 +152,8 @@ function monthlyPersonas(
   persona: YirPersonaId,
   runnerUp: YirPersonaId | null,
 ): YirPersonaResult['monthly'] {
-  const alternate = runnerUp ??
+  const alternate =
+    runnerUp ??
     ORDER.at((ORDER.indexOf(persona) + 3) % ORDER.length) ??
     persona;
   const pattern = [persona, persona, alternate, persona, persona, alternate];
@@ -191,9 +192,10 @@ type DummyYirPersonaResultProps = {
   runnerUp?: YirPersonaId | null;
 };
 
-export function dummyYirPersonaResult(
-  { persona, runnerUp }: DummyYirPersonaResultProps,
-): YirPersonaResult {
+export function dummyYirPersonaResult({
+  persona,
+  runnerUp,
+}: DummyYirPersonaResultProps): YirPersonaResult {
   const fixture = FIXTURES[persona];
   const resolvedRunnerUp = runnerUp === undefined ? fixture.runnerUp : runnerUp;
 

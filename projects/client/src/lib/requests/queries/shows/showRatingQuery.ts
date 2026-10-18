@@ -8,19 +8,15 @@ type ShowRatingParams = {
   slug: string;
 } & ApiParams;
 
-const showRatingRequest = (
-  { fetch, slug }: ShowRatingParams,
-) =>
-  api({ fetch })
-    .shows
-    .ratings({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'all',
-      },
-    });
+const showRatingRequest = ({ fetch, slug }: ShowRatingParams) =>
+  api({ fetch }).shows.ratings({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'all',
+    },
+  });
 
 export const showRatingQuery = defineQuery({
   key: 'showRating',

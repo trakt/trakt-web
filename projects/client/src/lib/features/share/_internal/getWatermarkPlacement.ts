@@ -13,8 +13,8 @@ type Placement = Box;
 
 const PLACEMENTS: Record<ShareType, Placement> = {
   'open-graph': { left: 0.3, top: -0.5, width: 1, height: 2 },
-  'feed': { left: -0.25, top: 0, width: 1, height: 1 },
-  'story': { left: -0.55, top: 0.05, width: 2, height: 1 },
+  feed: { left: -0.25, top: 0, width: 1, height: 1 },
+  story: { left: -0.55, top: 0.05, width: 2, height: 1 },
 };
 
 function fitLogo(box: Box): Box {
@@ -60,16 +60,15 @@ export function getWatermarkPlacement(variant: ShareType) {
 
   const viewBox = [
     LOGO_VIEW_BOX.left +
-    ((visible.left - box.left) / box.width) * LOGO_VIEW_BOX.width,
+      ((visible.left - box.left) / box.width) * LOGO_VIEW_BOX.width,
     LOGO_VIEW_BOX.top +
-    ((visible.top - box.top) / box.height) * LOGO_VIEW_BOX.height,
+      ((visible.top - box.top) / box.height) * LOGO_VIEW_BOX.height,
     (visible.width / box.width) * LOGO_VIEW_BOX.width,
     (visible.height / box.height) * LOGO_VIEW_BOX.height,
   ].map(round);
 
   return {
-    style:
-      `top: ${visible.top}px; left: ${visible.left}px; width: ${visible.width}px; height: ${visible.height}px;`,
+    style: `top: ${visible.top}px; left: ${visible.left}px; width: ${visible.width}px; height: ${visible.height}px;`,
     viewBox: viewBox.join(' '),
   };
 }

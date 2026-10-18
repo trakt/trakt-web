@@ -14,7 +14,7 @@ function story(users: Array<typeof ron>): TodayTitleStory {
     key: `movie-${users.length}`,
     media: MovieHereticMappedMock,
     actions: users.map((user) =>
-      buildFriendAction({ key: user.key, user, activityAt: at })
+      buildFriendAction({ key: user.key, user, activityAt: at }),
     ),
     users,
     averageRating: null,

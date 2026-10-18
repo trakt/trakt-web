@@ -8,7 +8,5 @@ export function isTargetContained(container: HTMLElement | null, event: Event) {
     return false;
   }
 
-  return container?.contains(
-    closeEvent.detail.source as Node,
-  );
+  return container?.contains(closeEvent.detail.source as Node);
 }

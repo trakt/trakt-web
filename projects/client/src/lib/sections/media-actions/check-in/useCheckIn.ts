@@ -22,9 +22,10 @@ type MovieProps = {
   id: number;
 };
 
-function mapToEpisodePayload(
-  { show, episode }: EpisodeProps,
-): ShowCheckinRequest {
+function mapToEpisodePayload({
+  show,
+  episode,
+}: EpisodeProps): ShowCheckinRequest {
   return {
     show: {
       ids: {
@@ -58,29 +59,31 @@ export function useCheckIn(props: UseCheckInProps) {
     throw new Error('Cannot check in multiple media items at once.');
   }
 
-  const checkingIn = useMutation(defineMutation({
-    key: 'media:check-in',
-    request: async () => {
-      if (Array.isArray(props.media)) return;
+  const checkingIn = useMutation(
+    defineMutation({
+      key: 'media:check-in',
+      request: async () => {
+        if (Array.isArray(props.media)) return;
 
-      switch (type) {
-        case 'episode': {
-          await checkinEpisodeRequest({
-            body: mapToEpisodePayload({
-              episode: props.media,
-              show: props.show,
-            }),
-          });
-          return;
+        switch (type) {
+          case 'episode': {
+            await checkinEpisodeRequest({
+              body: mapToEpisodePayload({
+                episode: props.media,
+                show: props.show,
+              }),
+            });
+            return;
+          }
+          case 'movie': {
+            await checkinMovieRequest({ body: mapToMoviePayload(props.media) });
+            return;
+          }
         }
-        case 'movie': {
-          await checkinMovieRequest({ body: mapToMoviePayload(props.media) });
-          return;
-        }
-      }
-    },
-    invalidations: [InvalidateAction.CheckIn],
-  }));
+      },
+      invalidations: [InvalidateAction.CheckIn],
+    }),
+  );
 
   const checkin = async () => {
     if (Array.isArray(props.media)) return;

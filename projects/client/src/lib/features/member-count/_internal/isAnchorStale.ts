@@ -9,8 +9,12 @@ const MAX_ANCHOR_AGE = time.minutes(5);
 /**
  * Whether the last server response is too old to keep projecting from.
  */
-export function isAnchorStale(
-  { anchoredAt, now }: { anchoredAt: number; now: number },
-): boolean {
+export function isAnchorStale({
+  anchoredAt,
+  now,
+}: {
+  anchoredAt: number;
+  now: number;
+}): boolean {
   return now - anchoredAt > MAX_ANCHOR_AGE;
 }

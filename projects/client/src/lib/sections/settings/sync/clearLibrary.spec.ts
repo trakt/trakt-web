@@ -11,7 +11,7 @@ describe('clearLibrary', () => {
       http.post(
         'http://localhost/sync/collection/remove',
         async ({ request }) => {
-          const body = await request.json() as {
+          const body = (await request.json()) as {
             movies?: unknown[];
             episodes?: unknown[];
           };
@@ -26,11 +26,14 @@ describe('clearLibrary', () => {
       ),
     );
     const onComplete = vi.fn();
-    await clearLibrary({ movies: new Set([1, 3]), episodes: new Set([2]) }, {
-      onProgress: NOOP_FN,
-      onError: NOOP_FN,
-      onComplete,
-    });
+    await clearLibrary(
+      { movies: new Set([1, 3]), episodes: new Set([2]) },
+      {
+        onProgress: NOOP_FN,
+        onError: NOOP_FN,
+        onComplete,
+      },
+    );
     expect(bodies).toEqual([
       { movies: [{ ids: { trakt: 1 } }, { ids: { trakt: 3 } }] },
       { episodes: [{ ids: { trakt: 2 } }] },
@@ -40,18 +43,20 @@ describe('clearLibrary', () => {
 
   it('should report failure when the API does not remove the requested items', async () => {
     server.use(
-      http.post(
-        'http://localhost/sync/collection/remove',
-        () => HttpResponse.json({ deleted: { movies: 0, episodes: 0 } }),
+      http.post('http://localhost/sync/collection/remove', () =>
+        HttpResponse.json({ deleted: { movies: 0, episodes: 0 } }),
       ),
     );
     const onComplete = vi.fn();
     const onError = vi.fn();
-    await clearLibrary({ movies: new Set([1]), episodes: new Set() }, {
-      onProgress: NOOP_FN,
-      onError,
-      onComplete,
-    });
+    await clearLibrary(
+      { movies: new Set([1]), episodes: new Set() },
+      {
+        onProgress: NOOP_FN,
+        onError,
+        onComplete,
+      },
+    );
     expect(onError).toHaveBeenCalled();
     expect(onComplete).toHaveBeenCalledWith(false, 1);
   });
@@ -62,12 +67,15 @@ describe('clearLibrary', () => {
     const controller = new AbortController();
     controller.abort();
     const onComplete = vi.fn();
-    await clearLibrary({ movies: new Set([1]), episodes: new Set([2]) }, {
-      onProgress: NOOP_FN,
-      onError: NOOP_FN,
-      onComplete,
-      signal: controller.signal,
-    });
+    await clearLibrary(
+      { movies: new Set([1]), episodes: new Set([2]) },
+      {
+        onProgress: NOOP_FN,
+        onError: NOOP_FN,
+        onComplete,
+        signal: controller.signal,
+      },
+    );
     expect(handler).not.toHaveBeenCalled();
     expect(onComplete).toHaveBeenCalledWith(false, 0);
   });

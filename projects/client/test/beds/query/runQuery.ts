@@ -21,6 +21,6 @@ export function runQuery<T>({
         waitFor,
         output: (value: unknown) => resolve(value as T),
       },
-    })
+    }),
   );
 }

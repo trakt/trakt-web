@@ -96,30 +96,21 @@ export const movies = [
       return HttpResponse.json(MovieHereticWatchNowResponseMock);
     },
   ),
-  http.get(
-    'http://localhost/movies/trending*',
-    () => {
-      return HttpResponse.json(MoviesTrendingResponseMock);
-    },
-  ),
+  http.get('http://localhost/movies/trending*', () => {
+    return HttpResponse.json(MoviesTrendingResponseMock);
+  }),
   http.get(
     `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/related*`,
     () => {
       return HttpResponse.json(MovieHereticRelatedResponseMock);
     },
   ),
-  http.get(
-    'http://localhost/movies/popular*',
-    () => {
-      return HttpResponse.json(MoviesPopularResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/movies/anticipated*',
-    () => {
-      return HttpResponse.json(MoviesAnticipatedResponseMock);
-    },
-  ),
+  http.get('http://localhost/movies/popular*', () => {
+    return HttpResponse.json(MoviesPopularResponseMock);
+  }),
+  http.get('http://localhost/movies/anticipated*', () => {
+    return HttpResponse.json(MoviesAnticipatedResponseMock);
+  }),
   http.get(
     `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/lists/personal/popular*`,
     () => {

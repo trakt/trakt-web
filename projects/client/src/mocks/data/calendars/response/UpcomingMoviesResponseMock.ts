@@ -3,7 +3,7 @@ import { MovieHereticResponseMock } from '../../summary/movies/heretic/response/
 
 export const UpcomingMoviesResponseMock: CalendarMovieResponse[] = [
   {
-    'released': '2024-11-08',
-    'movie': MovieHereticResponseMock,
+    released: '2024-11-08',
+    movie: MovieHereticResponseMock,
   },
 ];

@@ -13,11 +13,14 @@ type FilterRowProps = {
   readonly names: ReadonlyMap<string, string>;
 };
 
-function filterRow(
-  { row, term, names }: FilterRowProps,
-): ServiceAvailability | null {
+function filterRow({
+  row,
+  term,
+  names,
+}: FilterRowProps): ServiceAvailability | null {
   const serviceName = names.get(row.source) ?? row.source;
-  const serviceMatches = serviceName.toLocaleLowerCase().includes(term) ||
+  const serviceMatches =
+    serviceName.toLocaleLowerCase().includes(term) ||
     row.source.toLocaleLowerCase().includes(term);
 
   if (serviceMatches) {
@@ -25,7 +28,7 @@ function filterRow(
   }
 
   const countries = row.countries.filter((entry) =>
-    entry.countryName.toLocaleLowerCase().includes(term)
+    entry.countryName.toLocaleLowerCase().includes(term),
   );
 
   if (countries.length === 0) {
@@ -35,9 +38,11 @@ function filterRow(
   return { ...row, countries };
 }
 
-export function filterGroupedServices(
-  { grouped, term, names }: FilterGroupedServicesProps,
-): GroupedServices {
+export function filterGroupedServices({
+  grouped,
+  term,
+  names,
+}: FilterGroupedServicesProps): GroupedServices {
   return Object.fromEntries(
     Object.entries(grouped).map(([group, rows]) => [
       group,

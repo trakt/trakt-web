@@ -36,7 +36,7 @@ export function useSocialActivities(
     map(($query) =>
       sortMediaSocialEntries(
         $query.data?.pages.flatMap((page) => page.entries) ?? [],
-      )
+      ),
     ),
   );
 

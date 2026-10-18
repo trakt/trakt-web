@@ -7,10 +7,7 @@ const wakingMinutesPerWeek = WAKING_HOURS_PER_DAY * 7 * 60;
 
 const emptyWeek = buildWeekData();
 
-function getKey(
-  items: ReturnType<typeof getStatItems>,
-  key: string,
-) {
+function getKey(items: ReturnType<typeof getStatItems>, key: string) {
   return items.find((item) => item.key === key);
 }
 

@@ -69,8 +69,8 @@ export function usePopupHelpers(placement?: PopupPlacement) {
     const newUnderlay = createUnderlay();
     underlay.next(newUnderlay);
 
-    const underlayTarget = document.querySelector('dialog[open]') ??
-      document.body;
+    const underlayTarget =
+      document.querySelector('dialog[open]') ?? document.body;
     underlayTarget.appendChild(newUnderlay);
 
     if (!isTargetContained) {

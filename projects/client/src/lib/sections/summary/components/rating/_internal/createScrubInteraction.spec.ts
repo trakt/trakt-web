@@ -2,7 +2,7 @@ import { TestScheduler } from 'rxjs/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { createScrubInteraction } from './createScrubInteraction.ts';
 
-const pointerAt = (clientX: number) => ({ clientX } as PointerEvent);
+const pointerAt = (clientX: number) => ({ clientX }) as PointerEvent;
 
 describe('util: createScrubInteraction', () => {
   let scheduler: TestScheduler;

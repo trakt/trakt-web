@@ -64,7 +64,7 @@ const COPY: Record<SmartListTemplateId, SmartListTemplateCopy> = {
     pitch: m.smart_list_template_beyond_the_stars_pitch,
     showcase: 'genres',
   },
-  'whodunits': {
+  whodunits: {
     name: m.smart_list_template_whodunits_name,
     pitch: m.smart_list_template_whodunits_pitch,
     showcase: 'genres',

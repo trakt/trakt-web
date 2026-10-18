@@ -23,17 +23,13 @@ function updateList(
 
 describe('updateListRequest', () => {
   it('should return the regenerated slug from an object response', async () => {
-    server.use(
-      http.put(UPDATE_URL, () => HttpResponse.json(RENAMED_LIST)),
-    );
+    server.use(http.put(UPDATE_URL, () => HttpResponse.json(RENAMED_LIST)));
 
     expect(await updateList()).to.equal('new-name');
   });
 
   it('should return the regenerated slug from an array response', async () => {
-    server.use(
-      http.put(UPDATE_URL, () => HttpResponse.json([RENAMED_LIST])),
-    );
+    server.use(http.put(UPDATE_URL, () => HttpResponse.json([RENAMED_LIST])));
 
     expect(await updateList()).to.equal('new-name');
   });

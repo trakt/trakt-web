@@ -16,13 +16,15 @@ export function useMonthlyStats({ mode }: UseMonthlyStatsParams) {
     map(($history) => {
       if (!$history) return null;
 
-      const movieDates = mode !== 'show'
-        ? [...$history.movies.values()].flatMap((m) => m.watchedDates)
-        : [];
+      const movieDates =
+        mode !== 'show'
+          ? [...$history.movies.values()].flatMap((m) => m.watchedDates)
+          : [];
 
-      const showDates = mode !== 'movie'
-        ? [...$history.shows.values()].flatMap((s) => s.watchedDates)
-        : [];
+      const showDates =
+        mode !== 'movie'
+          ? [...$history.shows.values()].flatMap((s) => s.watchedDates)
+          : [];
 
       return computeMonthlyStats([...movieDates, ...showDates], now);
     }),

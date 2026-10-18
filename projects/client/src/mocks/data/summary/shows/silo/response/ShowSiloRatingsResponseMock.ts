@@ -1,10 +1,10 @@
 import type { RatingsResponse } from '@trakt/api';
 
 export const ShowSiloRatingsResponseMock: RatingsResponse = {
-  'trakt': {
-    'rating': 8.15357,
-    'votes': 7241,
-    'distribution': {
+  trakt: {
+    rating: 8.15357,
+    votes: 7241,
+    distribution: {
       '1': 40,
       '2': 21,
       '3': 26,
@@ -17,25 +17,25 @@ export const ShowSiloRatingsResponseMock: RatingsResponse = {
       '10': 1130,
     },
   },
-  'tmdb': {
-    'rating': 8.2,
-    'votes': 1181,
-    'link': 'https://www.themoviedb.org/tv/125988',
+  tmdb: {
+    rating: 8.2,
+    votes: 1181,
+    link: 'https://www.themoviedb.org/tv/125988',
   },
-  'imdb': {
-    'rating': 8.1,
-    'votes': 144574,
-    'link': 'https://www.imdb.com/title/tt14688458',
+  imdb: {
+    rating: 8.1,
+    votes: 144574,
+    link: 'https://www.imdb.com/title/tt14688458',
   },
-  'metascore': {
-    'rating': null,
-    'link': 'https://www.imdb.com/title/tt14688458/criticreviews',
+  metascore: {
+    rating: null,
+    link: 'https://www.imdb.com/title/tt14688458/criticreviews',
   },
-  'rotten_tomatoes': {
-    'rating': 92,
-    'user_rating': 64,
-    'link': 'https://www.rottentomatoes.com/tv/silo',
-    'state': null,
-    'user_state': null,
+  rotten_tomatoes: {
+    rating: 92,
+    user_rating: 64,
+    link: 'https://www.rottentomatoes.com/tv/silo',
+    state: null,
+    user_state: null,
   },
 };

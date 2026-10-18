@@ -11,19 +11,19 @@ type EpisodeStatsParams = {
   episode: number;
 } & ApiParams;
 
-const episodeStatsRequest = (
-  { fetch, slug, season, episode }: EpisodeStatsParams,
-) =>
-  api({ fetch })
-    .shows
-    .episode
-    .stats({
-      params: {
-        id: slug,
-        season: castNumberAsString(season),
-        episode,
-      },
-    });
+const episodeStatsRequest = ({
+  fetch,
+  slug,
+  season,
+  episode,
+}: EpisodeStatsParams) =>
+  api({ fetch }).shows.episode.stats({
+    params: {
+      id: slug,
+      season: castNumberAsString(season),
+      episode,
+    },
+  });
 
 export const episodeStatsQuery = defineQuery({
   key: 'episodeStats',

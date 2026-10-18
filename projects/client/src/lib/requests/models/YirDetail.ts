@@ -173,9 +173,11 @@ const YirWatchedItemSchema = z.discriminatedUnion('type', [
 
 export const YirDetailSchema = z.object({
   stats: z.object({
-    all: YirStatsCategorySchema.merge(z.object({
-      listsCounts: YirStatsSchema,
-    })),
+    all: YirStatsCategorySchema.merge(
+      z.object({
+        listsCounts: YirStatsSchema,
+      }),
+    ),
     shows: YirStatsCategorySchema,
     movies: YirStatsCategorySchema,
   }),
@@ -204,31 +206,41 @@ export const YirDetailSchema = z.object({
     movies: YirCountriesGroupSchema,
   }),
   // All-time only: release-year/decade histograms per type.
-  releaseYears: z.object({
-    shows: YirReleaseYearsGroupSchema,
-    movies: YirReleaseYearsGroupSchema,
-  }).nullish(),
+  releaseYears: z
+    .object({
+      shows: YirReleaseYearsGroupSchema,
+      movies: YirReleaseYearsGroupSchema,
+    })
+    .nullish(),
   // All-time only: completion progress through curated top lists per type.
-  listProgress: z.object({
-    shows: YirListProgressSchema.array(),
-    movies: YirListProgressSchema.array(),
-  }).nullish(),
-  trends: z.object({
-    shows: YirTrendItemSchema.array(),
-    movies: YirTrendItemSchema.array(),
-  }).nullish(),
+  listProgress: z
+    .object({
+      shows: YirListProgressSchema.array(),
+      movies: YirListProgressSchema.array(),
+    })
+    .nullish(),
+  trends: z
+    .object({
+      shows: YirTrendItemSchema.array(),
+      movies: YirTrendItemSchema.array(),
+    })
+    .nullish(),
   // All-time only: most-watched titles globally, compared to the user's
   // all-time watched set.
-  globalTop: z.object({
-    shows: YirGlobalTopItemSchema.array(),
-    movies: YirGlobalTopItemSchema.array(),
-  }).nullish(),
+  globalTop: z
+    .object({
+      shows: YirGlobalTopItemSchema.array(),
+      movies: YirGlobalTopItemSchema.array(),
+    })
+    .nullish(),
   // Popular titles the user hasn't watched yet, recommended in the closing
   // "thanks" section.
-  thanks: z.object({
-    shows: MediaEntrySchema.array(),
-    movies: MediaEntrySchema.array(),
-  }).nullish(),
+  thanks: z
+    .object({
+      shows: MediaEntrySchema.array(),
+      movies: MediaEntrySchema.array(),
+    })
+    .nullish(),
   // Month in Review only: subscription services the period's plays were
   // available on.
   streamingServices: YirStreamingServicesSchema.nullish(),

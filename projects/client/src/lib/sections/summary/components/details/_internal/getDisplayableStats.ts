@@ -25,9 +25,10 @@ export const EMPTY_MEDIA_STATS: MediaStats = Object.freeze({
   votes: 0,
 });
 
-export function getDisplayableStats(
-  { stats, entry }: GetDisplayableStatsProps,
-): Stats {
+export function getDisplayableStats({
+  stats,
+  entry,
+}: GetDisplayableStatsProps): Stats {
   if (hasAired(entry)) {
     return stats;
   }

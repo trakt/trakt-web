@@ -14,9 +14,7 @@ function mapToDrawer(value: string | Nil) {
   }
 }
 
-export function dashboardDrawerNavigation(
-  searchParams?: URLSearchParams,
-) {
+export function dashboardDrawerNavigation(searchParams?: URLSearchParams) {
   const drawer = mapToDrawer(searchParams?.get(DRAWER_VIEW_PARAM));
 
   return {

@@ -21,9 +21,10 @@ async function fetchShowSlugs({ fetch }: ApiParams) {
   return response.body.map(({ show }) => show.ids.slug);
 }
 
-export function fetchTrendingSlugs(
-  { type, fetch }: FetchTrendingSlugsParams,
-): Promise<ReadonlyArray<string>> {
+export function fetchTrendingSlugs({
+  type,
+  fetch,
+}: FetchTrendingSlugsParams): Promise<ReadonlyArray<string>> {
   return type === 'movie'
     ? fetchMovieSlugs({ fetch })
     : fetchShowSlugs({ fetch });

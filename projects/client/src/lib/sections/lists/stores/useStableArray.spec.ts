@@ -44,9 +44,9 @@ describe('useStableArray', () => {
   const subscriptions: Array<{ unsubscribe: () => void }> = [];
 
   afterEach(() => {
-    subscriptions.splice(0).forEach((subscription) =>
-      subscription.unsubscribe()
-    );
+    subscriptions
+      .splice(0)
+      .forEach((subscription) => subscription.unsubscribe());
     vi.useRealTimers();
   });
 
@@ -59,10 +59,9 @@ describe('useStableArray', () => {
 
   it('should return a store with an empty array', async () => {
     const source = new BehaviorSubject<MockItem[]>([]);
-    expect(await firstValueFrom(useStableArray(compareFn, source).list))
-      .toEqual(
-        [],
-      );
+    expect(
+      await firstValueFrom(useStableArray(compareFn, source).list),
+    ).toEqual([]);
   });
 
   it('should update the store with a new item', () => {
@@ -108,11 +107,7 @@ describe('useStableArray', () => {
   it('should update the store with multiple items with the same item', () => {
     const source = new BehaviorSubject<MockItem[]>([]);
     const latest = collect(useStableArray(compareFn, source).list);
-    const items = [
-      item1,
-      item1,
-      item1,
-    ];
+    const items = [item1, item1, item1];
 
     source.next(items);
 
@@ -126,11 +121,7 @@ describe('useStableArray', () => {
     source.next([item1, item2]);
     source.next([item3, item1, item2]);
 
-    expect(latest()).toEqual([
-      item3,
-      item1,
-      item2,
-    ]);
+    expect(latest()).toEqual([item3, item1, item2]);
   });
 
   it('should insert new item at its server-sorted position when it is in the middle', () => {
@@ -140,11 +131,7 @@ describe('useStableArray', () => {
     source.next([item1, item3]);
     source.next([item1, item2, item3]);
 
-    expect(latest()).toEqual([
-      item1,
-      item2,
-      item3,
-    ]);
+    expect(latest()).toEqual([item1, item2, item3]);
   });
 
   it('should append new item at the end when server places it last', () => {
@@ -154,11 +141,7 @@ describe('useStableArray', () => {
     source.next([item1, item2]);
     source.next([item1, item2, item3]);
 
-    expect(latest()).toEqual([
-      item1,
-      item2,
-      item3,
-    ]);
+    expect(latest()).toEqual([item1, item2, item3]);
   });
 
   it('should remove items that are not in the new list', () => {

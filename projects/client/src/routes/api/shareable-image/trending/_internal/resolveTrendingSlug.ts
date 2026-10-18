@@ -35,9 +35,8 @@ const readPick = async (bucket: SlugStore | Nil, key: string) => {
 };
 
 async function findRecentPick({ type, now, bucket }: FindRecentPickProps) {
-  const days = Array.from(
-    { length: LOOKBACK_DAYS },
-    (_, index) => toDay(new Date(now.getTime() - time.days(index + 1))),
+  const days = Array.from({ length: LOOKBACK_DAYS }, (_, index) =>
+    toDay(new Date(now.getTime() - time.days(index + 1))),
   );
   const picks = await Promise.all(
     days.map((day) => readPick(bucket, toKey(type, day))),

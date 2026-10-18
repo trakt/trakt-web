@@ -6,9 +6,7 @@ const dismissalStore = createDismissalStore();
 
 export function useDismissals() {
   return {
-    dismissals: dismissalStore.dismissals.pipe(
-      map((store) => store.items),
-    ),
+    dismissals: dismissalStore.dismissals.pipe(map((store) => store.items)),
     dismiss: dismissalStore.dismiss,
     wasDismissed: (activity: ActivityHistory) => {
       const dismissedItems = dismissalStore.dismissals.value.items;

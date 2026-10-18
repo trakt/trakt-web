@@ -22,13 +22,15 @@ function createBucket(entries: Record<string, string> = {}) {
   };
 }
 
-function resolve(
-  { bucket, date = TODAY, slugs = ['reacher'] }: {
-    bucket: ReturnType<typeof createBucket> | null;
-    date?: Date;
-    slugs?: string[];
-  },
-) {
+function resolve({
+  bucket,
+  date = TODAY,
+  slugs = ['reacher'],
+}: {
+  bucket: ReturnType<typeof createBucket> | null;
+  date?: Date;
+  slugs?: string[];
+}) {
   return resolveTrendingSlug({
     type: 'show',
     date,
@@ -54,8 +56,9 @@ describe('util: resolveTrendingSlug', () => {
 
     await resolve({ bucket });
 
-    expect(bucket.store.get('images/share/trending/show/2026-10-04.txt'))
-      .toBe('reacher');
+    expect(bucket.store.get('images/share/trending/show/2026-10-04.txt')).toBe(
+      'reacher',
+    );
   });
 
   it('should fall back to the pick for today for days without a pick', async () => {
@@ -84,8 +87,9 @@ describe('util: resolveTrendingSlug', () => {
     await resolveYesterday();
 
     expect(fetchSlugs).toHaveBeenCalledTimes(1);
-    expect(bucket.store.has('images/share/trending/show/2026-10-03.txt'))
-      .toBe(false);
+    expect(bucket.store.has('images/share/trending/show/2026-10-03.txt')).toBe(
+      false,
+    );
   });
 
   it('should return the pick when storing it fails', async () => {

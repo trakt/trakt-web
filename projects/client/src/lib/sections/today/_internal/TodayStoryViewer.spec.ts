@@ -62,8 +62,9 @@ describe('TodayStoryViewer', () => {
   it('should open on the requested story', async () => {
     await renderViewer(`show-${ShowSiloMappedMock.id}`);
 
-    expect(screen.getByRole('dialog', { name: ShowSiloMappedMock.title }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('dialog', { name: ShowSiloMappedMock.title }),
+    ).toBeInTheDocument();
   });
 
   it('should move to the next title after its last frame', async () => {
@@ -71,8 +72,9 @@ describe('TodayStoryViewer', () => {
 
     await tap('Next story');
 
-    expect(screen.getByRole('dialog', { name: ShowSiloMappedMock.title }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('dialog', { name: ShowSiloMappedMock.title }),
+    ).toBeInTheDocument();
   });
 
   it('should go back to the previous title', async () => {
@@ -80,8 +82,9 @@ describe('TodayStoryViewer', () => {
 
     await tap('Previous story');
 
-    expect(screen.getByRole('dialog', { name: MovieHereticMappedMock.title }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('dialog', { name: MovieHereticMappedMock.title }),
+    ).toBeInTheDocument();
   });
 
   it('should keep its stories when the list changes while open', async () => {
@@ -101,8 +104,9 @@ describe('TodayStoryViewer', () => {
     stories.set(groups.slice(0, 1));
     await tick();
 
-    expect(screen.getByRole('dialog', { name: ShowSiloMappedMock.title }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('dialog', { name: ShowSiloMappedMock.title }),
+    ).toBeInTheDocument();
   });
 
   it('should close after the last story', async () => {
@@ -129,8 +133,9 @@ describe('TodayStoryViewer', () => {
       assertDefined(document.querySelector('.segment-timer')),
     );
 
-    expect(screen.getByRole('dialog', { name: ShowSiloMappedMock.title }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('dialog', { name: ShowSiloMappedMock.title }),
+    ).toBeInTheDocument();
   });
 
   it('should pause the timer while the story is held', async () => {
@@ -151,12 +156,11 @@ describe('TodayStoryViewer', () => {
   it('should flip the poster on tap and pause', async () => {
     await renderViewer(null);
 
-    await fireEvent.click(
-      screen.getByRole('button', { name: 'Show details' }),
-    );
+    await fireEvent.click(screen.getByRole('button', { name: 'Show details' }));
 
-    expect(screen.getByRole('button', { name: 'Hide details' }))
-      .toHaveAttribute('aria-pressed', 'true');
+    expect(
+      screen.getByRole('button', { name: 'Hide details' }),
+    ).toHaveAttribute('aria-pressed', 'true');
     expect(document.querySelector('.segment-timer')).toHaveClass('is-paused');
   });
 
@@ -206,23 +210,23 @@ describe('TodayStoryViewer', () => {
     await renderViewer(null);
 
     await waitFor(() => {
-      expect(document.querySelector('.trakt-today-poster-details'))
-        .not.toBeNull();
+      expect(
+        document.querySelector('.trakt-today-poster-details'),
+      ).not.toBeNull();
     });
   });
 
   it('should keep the back out of reach until it is flipped', async () => {
     await renderViewer(null);
     const back = assertDefined(
-      document.querySelector('.poster-face.is-back')
+      document
+        .querySelector('.poster-face.is-back')
         ?.closest<HTMLElement>('.flip-card-face'),
     );
 
     expect(back.inert).toBe(true);
 
-    await fireEvent.click(
-      screen.getByRole('button', { name: 'Show details' }),
-    );
+    await fireEvent.click(screen.getByRole('button', { name: 'Show details' }));
 
     expect(back.inert).toBe(false);
   });
@@ -230,8 +234,9 @@ describe('TodayStoryViewer', () => {
   it('should link to everything from today', async () => {
     await renderViewer(null);
 
-    expect(screen.getByRole('link', { name: 'View everything from today' }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'View everything from today' }),
+    ).toBeInTheDocument();
   });
 
   it('should highlight a movie the user also watched', async () => {
@@ -245,27 +250,24 @@ describe('TodayStoryViewer', () => {
       },
     });
 
-    expect(await screen.findByText('Watched'))
-      .toBeInTheDocument();
+    expect(await screen.findByText('Watched')).toBeInTheDocument();
   });
 
   it('should not highlight a movie the user has not watched', async () => {
     await renderViewer(null);
 
-    expect(document.querySelector('.poster-watched')).not
-      .toBeInTheDocument();
+    expect(document.querySelector('.poster-watched')).not.toBeInTheDocument();
   });
 
   it('should flip back when moving to the next title', async () => {
     await renderViewer(null);
 
-    await fireEvent.click(
-      screen.getByRole('button', { name: 'Show details' }),
-    );
+    await fireEvent.click(screen.getByRole('button', { name: 'Show details' }));
     await tap('Next story');
 
-    expect(screen.getByRole('button', { name: 'Show details' }))
-      .toHaveAttribute('aria-pressed', 'false');
+    expect(
+      screen.getByRole('button', { name: 'Show details' }),
+    ).toHaveAttribute('aria-pressed', 'false');
   });
 
   it('should call out a friend finishing a show', async () => {
@@ -275,14 +277,16 @@ describe('TodayStoryViewer', () => {
       props: {
         groups: toStoryGroups({
           forYou: [],
-          titles: [{
-            ...finished,
-            milestone,
-            actions: finished.actions.map((action) => ({
-              ...action,
+          titles: [
+            {
+              ...finished,
               milestone,
-            })),
-          }],
+              actions: finished.actions.map((action) => ({
+                ...action,
+                milestone,
+              })),
+            },
+          ],
         }),
         startKey: null,
         source: 'link',
@@ -290,8 +294,9 @@ describe('TodayStoryViewer', () => {
       },
     });
 
-    expect(await screen.findByRole('img', { name: 'Finished the show' }))
-      .toBeInTheDocument();
+    expect(
+      await screen.findByRole('img', { name: 'Finished the show' }),
+    ).toBeInTheDocument();
   });
 
   it('should show a friend comment with a link to it', async () => {
@@ -300,24 +305,26 @@ describe('TodayStoryViewer', () => {
       props: {
         groups: toStoryGroups({
           forYou: [],
-          titles: [{
-            ...commented,
-            actions: [
-              buildFriendAction({
-                key: 'comment:9',
-                kind: 'comment',
-                comment: {
-                  id: 9,
-                  text: 'That ending though.',
-                  gif: null,
-                  isSpoiler: false,
-                  isReview: false,
-                  likeCount: 0,
-                  replyCount: 0,
-                },
-              }),
-            ],
-          }],
+          titles: [
+            {
+              ...commented,
+              actions: [
+                buildFriendAction({
+                  key: 'comment:9',
+                  kind: 'comment',
+                  comment: {
+                    id: 9,
+                    text: 'That ending though.',
+                    gif: null,
+                    isSpoiler: false,
+                    isReview: false,
+                    likeCount: 0,
+                    replyCount: 0,
+                  },
+                }),
+              ],
+            },
+          ],
         }),
         startKey: null,
         source: 'link',
@@ -326,8 +333,9 @@ describe('TodayStoryViewer', () => {
     });
 
     expect(await screen.findByText('That ending though.')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Open the comment' }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'Open the comment' }),
+    ).toBeInTheDocument();
   });
 
   it('should close on escape while focus is inside', async () => {
@@ -387,7 +395,7 @@ describe('TodayStoryViewer', () => {
       expect(document.activeElement).toHaveAttribute(
         'aria-label',
         'Next story',
-      )
+      ),
     );
   });
 });

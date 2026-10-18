@@ -18,23 +18,28 @@ export function useManageServer(connectionId: number) {
 
   const accounts = useSyncAccounts(connectionId);
 
-  const update = useMutation(defineMutation({
-    key: 'media-sync:update-connection',
-    request: (changes: MediaSyncConnectionChanges) =>
-      updateMediaSyncConnectionRequest({ connectionId, changes }),
-    invalidations,
-  }));
+  const update = useMutation(
+    defineMutation({
+      key: 'media-sync:update-connection',
+      request: (changes: MediaSyncConnectionChanges) =>
+        updateMediaSyncConnectionRequest({ connectionId, changes }),
+      invalidations,
+    }),
+  );
 
-  const remove = useMutation(defineMutation({
-    key: 'media-sync:delete-connection',
-    request: () => deleteMediaSyncConnectionRequest({ connectionId }),
-    invalidations,
-  }));
+  const remove = useMutation(
+    defineMutation({
+      key: 'media-sync:delete-connection',
+      request: () => deleteMediaSyncConnectionRequest({ connectionId }),
+      invalidations,
+    }),
+  );
 
   return {
     accounts,
     save: (changes: MediaSyncConnectionChanges) =>
-      update.mutate(changes)
+      update
+        .mutate(changes)
         .then((result) => result.ok)
         .catch(() => false),
     remove: () => remove.mutate().catch(() => false),

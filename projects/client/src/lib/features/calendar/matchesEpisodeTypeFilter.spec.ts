@@ -16,8 +16,9 @@ const movie = () => ({ type: 'movie' }) as unknown as MediaEntry;
 
 describe('util: matchesEpisodeTypeFilter', () => {
   it('should keep everything when showing all', () => {
-    expect(matchesEpisodeTypeFilter(episode({ type: 'standard' }), 'all'))
-      .toBe(true);
+    expect(matchesEpisodeTypeFilter(episode({ type: 'standard' }), 'all')).toBe(
+      true,
+    );
     expect(matchesEpisodeTypeFilter(movie(), 'all')).toBe(true);
   });
 
@@ -30,8 +31,9 @@ describe('util: matchesEpisodeTypeFilter', () => {
       ];
 
       premieres.forEach((type) => {
-        expect(matchesEpisodeTypeFilter(episode({ type }), 'premieres'))
-          .toBe(true);
+        expect(matchesEpisodeTypeFilter(episode({ type }), 'premieres')).toBe(
+          true,
+        );
       });
     });
 
@@ -43,14 +45,16 @@ describe('util: matchesEpisodeTypeFilter', () => {
       ];
 
       finales.forEach((type) => {
-        expect(matchesEpisodeTypeFilter(episode({ type }), 'finales'))
-          .toBe(true);
+        expect(matchesEpisodeTypeFilter(episode({ type }), 'finales')).toBe(
+          true,
+        );
       });
     });
 
     it('should drop a standard episode from both filters', () => {
-      expect(matchesEpisodeTypeFilter(episode({ type: 'standard' }), 'finales'))
-        .toBe(false);
+      expect(
+        matchesEpisodeTypeFilter(episode({ type: 'standard' }), 'finales'),
+      ).toBe(false);
       expect(
         matchesEpisodeTypeFilter(episode({ type: 'standard' }), 'premieres'),
       ).toBe(false);

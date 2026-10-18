@@ -45,9 +45,9 @@ function resolveStorage(getStorage: () => Storage | null): Storage {
   }
 }
 
-export const safeLocalStorage: Storage = resolveStorage(() =>
-  globalThis.localStorage
+export const safeLocalStorage: Storage = resolveStorage(
+  () => globalThis.localStorage,
 );
-export const safeSessionStorage: Storage = resolveStorage(() =>
-  globalThis.sessionStorage
+export const safeSessionStorage: Storage = resolveStorage(
+  () => globalThis.sessionStorage,
 );

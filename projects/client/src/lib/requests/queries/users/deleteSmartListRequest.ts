@@ -1,19 +1,15 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 
-type DeleteSmartListRequestParams =
-  & {
-    slug: string;
-  }
-  & ApiParams;
+type DeleteSmartListRequestParams = {
+  slug: string;
+} & ApiParams;
 
-export function deleteSmartListRequest(
-  { slug, fetch }: DeleteSmartListRequestParams,
-): Promise<boolean> {
+export function deleteSmartListRequest({
+  slug,
+  fetch,
+}: DeleteSmartListRequestParams): Promise<boolean> {
   return api({ fetch })
-    .users
-    .smartLists
-    .smartList
-    .delete({
+    .users.smartLists.smartList.delete({
       params: {
         id: 'me',
         list_id: slug,

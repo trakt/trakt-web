@@ -33,9 +33,8 @@ export function useFilterSetter() {
 
   return {
     gotoFilteredState: (props: GoToFilteredStateProps) => {
-      const hasValue = 'range' in props
-        ? Boolean(props.range)
-        : Boolean(props.value);
+      const hasValue =
+        'range' in props ? Boolean(props.range) : Boolean(props.value);
 
       track({
         id: props.key,
@@ -58,7 +57,8 @@ export function useFilterSetter() {
 
         const additionalKeys = getAdditionalKeys(filter);
         const hasAdditionalKeys = additionalKeys.length > 0;
-        const isAdvancedMultiSelect = 'advanced' in filter &&
+        const isAdvancedMultiSelect =
+          'advanced' in filter &&
           filter.advanced.type === 'multi-select' &&
           filter.advanced.options != null;
 

@@ -119,9 +119,7 @@ describe('computeDailyMinutes', () => {
 
   it('assigns minutes to correct day bucket', () => {
     const now = new Date('2024-01-21T12:00:00Z');
-    const entries = [
-      makeMovieEntry(new Date('2024-01-21T10:00:00Z'), 120),
-    ];
+    const entries = [makeMovieEntry(new Date('2024-01-21T10:00:00Z'), 120)];
     const result = computeDailyMinutes(entries, now);
     expect(result[6]).toBe(120);
   });
@@ -138,9 +136,7 @@ describe('computeDailyMinutes', () => {
 
   it('ignores entries outside the 7-day window', () => {
     const now = new Date('2024-01-21T12:00:00Z');
-    const entries = [
-      makeMovieEntry(new Date('2024-01-10T10:00:00Z'), 120),
-    ];
+    const entries = [makeMovieEntry(new Date('2024-01-10T10:00:00Z'), 120)];
     const result = computeDailyMinutes(entries, now);
     expect(result.every((v) => v === 0)).toBe(true);
   });

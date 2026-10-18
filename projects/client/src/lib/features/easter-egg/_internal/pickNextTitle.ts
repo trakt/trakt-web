@@ -25,16 +25,20 @@ function isInBand(gap: number, { min, max }: GapBand) {
   return gap >= min && gap <= max;
 }
 
-export function pickNextTitle(
-  { pool, current, usedKeys, streak, random }: PickNextTitleParams,
-): GameTitle | undefined {
+export function pickNextTitle({
+  pool,
+  current,
+  usedKeys,
+  streak,
+  random,
+}: PickNextTitleParams): GameTitle | undefined {
   const others = pool.filter((title) => title.key !== current.key);
   const fresh = others.filter((title) => !usedKeys.has(title.key));
   const candidates = fresh.length > 0 ? fresh : others;
 
   const band = gapBandFor(streak);
   const inBand = candidates.filter((title) =>
-    isInBand(Math.abs(title.rating - current.rating), band)
+    isInBand(Math.abs(title.rating - current.rating), band),
   );
   const choices = inBand.length > 0 ? inBand : candidates;
 

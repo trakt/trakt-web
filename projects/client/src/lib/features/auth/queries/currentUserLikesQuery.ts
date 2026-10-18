@@ -19,15 +19,13 @@ const UserLikesSchema = z.object({
 export type UserLikes = z.infer<typeof UserLikesSchema>;
 
 const currentUserListLikesRequest = ({ fetch }: ApiParams) =>
-  api({ fetch })
-    .users
-    .likes({
-      params: { id: 'me', type: 'lists' },
-      query: {
-        limit: 'all',
-        extended: 'min',
-      },
-    });
+  api({ fetch }).users.likes({
+    params: { id: 'me', type: 'lists' },
+    query: {
+      limit: 'all',
+      extended: 'min',
+    },
+  });
 
 export const currentUserLikesQuery = defineQuery({
   key: 'currentUserLikes',

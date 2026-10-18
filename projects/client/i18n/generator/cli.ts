@@ -8,9 +8,7 @@ import { generateFromMeta } from './core/generateFromMeta.ts';
 import { Platform } from './model/Platform.ts';
 
 function showUsage() {
-  console.log(
-    'Usage: generate-i18n <meta-file-path> [output-dir] [options]',
-  );
+  console.log('Usage: generate-i18n <meta-file-path> [output-dir] [options]');
   console.log('');
   console.log('Options:');
   console.log('  --platforms, -p  Comma-separated platforms (web,android,ios)');
@@ -94,8 +92,7 @@ async function main() {
   }
 
   const input = args.input;
-  const outputDir = args.output ??
-    './.output/generated';
+  const outputDir = args.output ?? './.output/generated';
   let platforms: Platform[] | undefined;
 
   if (!input) {

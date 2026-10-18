@@ -25,9 +25,11 @@ describe('resetCoverImageRequest', () => {
 
     await resetCoverImageRequest();
 
-    expect(requests).to.deep.equal([{
-      pathname: '/users/set_cover',
-      body: { cover_type: 'show', cover_id: 0 },
-    }]);
+    expect(requests).to.deep.equal([
+      {
+        pathname: '/users/set_cover',
+        body: { cover_type: 'show', cover_id: 0 },
+      },
+    ]);
   });
 });

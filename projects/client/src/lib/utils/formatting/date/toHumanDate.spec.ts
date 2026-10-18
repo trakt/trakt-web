@@ -44,9 +44,7 @@ describe('toHumanDate', () => {
 
     const nextWeek = addDays(wednesday, 6);
 
-    expect(toHumanDate(wednesday, nextWeek, 'en')).toBe(
-      'Tuesday at 12:00 AM',
-    );
+    expect(toHumanDate(wednesday, nextWeek, 'en')).toBe('Tuesday at 12:00 AM');
   });
 
   it('will display the relative date if it is 6 days in the past', () => {

@@ -8,8 +8,7 @@ export function buildAppCallbackIntent(
     return null;
   }
 
-  const target =
-    `${callbackUrl.host}${callbackUrl.pathname}${callbackUrl.search}`;
+  const target = `${callbackUrl.host}${callbackUrl.pathname}${callbackUrl.search}`;
   const extras = [
     `scheme=${callbackUrl.protocol.replace(':', '')}`,
     `package=${ANDROID_PACKAGE}`,

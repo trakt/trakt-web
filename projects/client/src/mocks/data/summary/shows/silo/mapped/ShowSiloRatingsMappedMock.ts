@@ -1,10 +1,10 @@
 import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
 
 export const ShowSiloRatingsMappedMock: MediaRating = {
-  'trakt': {
-    'rating': 0.8154,
-    'votes': 7241,
-    'distribution': {
+  trakt: {
+    rating: 0.8154,
+    votes: 7241,
+    distribution: {
       '1': 40,
       '2': 21,
       '3': 26,
@@ -17,21 +17,21 @@ export const ShowSiloRatingsMappedMock: MediaRating = {
       '10': 1130,
     },
   },
-  'rotten': {
-    'critic': 0.92,
-    'audience': 0.64,
-    'url': 'https://www.rottentomatoes.com/tv/silo',
+  rotten: {
+    critic: 0.92,
+    audience: 0.64,
+    url: 'https://www.rottentomatoes.com/tv/silo',
   },
-  'imdb': {
-    'rating': 8.1,
-    'votes': 144574,
-    'url': 'https://www.imdb.com/title/tt14688458',
+  imdb: {
+    rating: 8.1,
+    votes: 144574,
+    url: 'https://www.imdb.com/title/tt14688458',
   },
-  'tmdb': {
-    'rating': 8.2,
-    'votes': 1181,
-    'url': 'https://www.themoviedb.org/tv/125988',
+  tmdb: {
+    rating: 8.2,
+    votes: 1181,
+    url: 'https://www.themoviedb.org/tv/125988',
   },
-  'mal': undefined,
-  'letterboxd': undefined,
+  mal: undefined,
+  letterboxd: undefined,
 };

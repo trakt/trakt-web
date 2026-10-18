@@ -12,10 +12,11 @@ describe('handle: boot-loader', () => {
   it('should move stylesheets from the head to after the loader', async () => {
     const { transformPageChunk } = await interceptHandleResolveOptions(handle);
 
-    const transformed = await transformPageChunk?.({
-      html: page(STYLESHEET),
-      done: true,
-    }) ?? '';
+    const transformed =
+      (await transformPageChunk?.({
+        html: page(STYLESHEET),
+        done: true,
+      })) ?? '';
     const [head = '', body = ''] = transformed.split('</head>');
     const bootStylesheet =
       '<link href="/_app/immutable/assets/a.css" rel="stylesheet" data-boot-css';
@@ -30,9 +31,8 @@ describe('handle: boot-loader', () => {
   });
 
   it('should inject the loader with the stylesheet and script totals', async () => {
-    const { preload, transformPageChunk } = await interceptHandleResolveOptions(
-      handle,
-    );
+    const { preload, transformPageChunk } =
+      await interceptHandleResolveOptions(handle);
 
     preload?.({ type: 'js', path: '/_app/immutable/entry/start.js' });
     preload?.({ type: 'js', path: '/_app/immutable/entry/app.js' });

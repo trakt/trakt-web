@@ -14,16 +14,23 @@ export const RatedMediaSchema = z.object({
 });
 export type RatedEntry = z.infer<typeof RatedMediaSchema>;
 
-const RatedSeasonResponseSchema = z.object({
-  rated_at: z.string().datetime(),
-  rating: z.number().int().min(1).max(10),
-  type: z.literal('season'),
-  season: z.object({
-    ids: z.object({
-      trakt: z.number().int(),
-    }).passthrough(),
-  }).passthrough().nullish(),
-}).passthrough();
+const RatedSeasonResponseSchema = z
+  .object({
+    rated_at: z.string().datetime(),
+    rating: z.number().int().min(1).max(10),
+    type: z.literal('season'),
+    season: z
+      .object({
+        ids: z
+          .object({
+            trakt: z.number().int(),
+          })
+          .passthrough(),
+      })
+      .passthrough()
+      .nullish(),
+  })
+  .passthrough();
 const RatedSeasonsResponseSchema = z.array(RatedSeasonResponseSchema);
 type RatedSeasonResponse = z.infer<typeof RatedSeasonResponseSchema>;
 
@@ -43,9 +50,8 @@ function mapRatedItemResponse(response: RatedItemResponse): RatedEntry {
     case 'show':
       return {
         ...common,
-        id:
-          assertDefined(response.show, 'Expected show in RatedItemResponse').ids
-            .trakt,
+        id: assertDefined(response.show, 'Expected show in RatedItemResponse')
+          .ids.trakt,
       };
     case 'episode':
       return {
@@ -70,36 +76,25 @@ function mapRatedSeasonResponse(response: RatedSeasonResponse): RatedEntry {
   return {
     rating: response.rating,
     ratedAt: new Date(response.rated_at),
-    id: assertDefined(
-      response.season,
-      'Expected season in RatedSeasonResponse',
-    ).ids.trakt,
+    id: assertDefined(response.season, 'Expected season in RatedSeasonResponse')
+      .ids.trakt,
   };
 }
 
 const currentUserRatedMoviesRequest = ({ fetch }: ApiParams) =>
-  api({ fetch })
-    .users
-    .ratings
-    .movies({
-      params: { id: 'me' },
-    });
+  api({ fetch }).users.ratings.movies({
+    params: { id: 'me' },
+  });
 
 const currentUserRatedShowsRequest = ({ fetch }: ApiParams) =>
-  api({ fetch })
-    .users
-    .ratings
-    .shows({
-      params: { id: 'me' },
-    });
+  api({ fetch }).users.ratings.shows({
+    params: { id: 'me' },
+  });
 
 const currentUserRatedEpisodesRequest = ({ fetch }: ApiParams) =>
-  api({ fetch })
-    .users
-    .ratings
-    .episodes({
-      params: { id: 'me' },
-    });
+  api({ fetch }).users.ratings.episodes({
+    params: { id: 'me' },
+  });
 
 const currentUserRatedSeasonsRequest = async ({ fetch }: ApiParams) => {
   const response = await rawApiFetch({
@@ -109,9 +104,9 @@ const currentUserRatedSeasonsRequest = async ({ fetch }: ApiParams) => {
 
   return response.ok
     ? {
-      body: RatedSeasonsResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: RatedSeasonsResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: [], status: 200 };
 };
 
@@ -139,9 +134,12 @@ export const currentUserRatingsQuery = defineQuery({
     InvalidateAction.Rated('movie'),
   ],
   dependencies: [],
-  mapper: (
-    [moviesResponse, showsResponse, seasonsResponse, episodesResponse],
-  ) => ({
+  mapper: ([
+    moviesResponse,
+    showsResponse,
+    seasonsResponse,
+    episodesResponse,
+  ]) => ({
     movies: toMap(
       moviesResponse.body,
       mapRatedItemResponse,

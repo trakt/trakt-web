@@ -11,9 +11,7 @@ describe('util: toReactionShare', () => {
   });
 
   it('should mark a share too small to round up as under 1%', () => {
-    expect(toReactionShare({ count: 1, total: 400, locale: 'en' })).toBe(
-      '<1%',
-    );
+    expect(toReactionShare({ count: 1, total: 400, locale: 'en' })).toBe('<1%');
   });
 
   it('should report 0% without a total', () => {

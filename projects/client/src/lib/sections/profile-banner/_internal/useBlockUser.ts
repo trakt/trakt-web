@@ -9,17 +9,24 @@ import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 export function useBlockUser() {
   const { track } = useTrack(AnalyticsEvent.Block);
 
-  const block = useMutation(defineMutation({
-    key: 'user:block',
-    request: (slug: string) => blockUserRequest({ slug }),
-    invalidations: [InvalidateAction.User.Block, InvalidateAction.User.Follow],
-  }));
+  const block = useMutation(
+    defineMutation({
+      key: 'user:block',
+      request: (slug: string) => blockUserRequest({ slug }),
+      invalidations: [
+        InvalidateAction.User.Block,
+        InvalidateAction.User.Follow,
+      ],
+    }),
+  );
 
-  const unblock = useMutation(defineMutation({
-    key: 'user:unblock',
-    request: (slug: string) => unblockUserRequest({ slug }),
-    invalidations: [InvalidateAction.User.Block],
-  }));
+  const unblock = useMutation(
+    defineMutation({
+      key: 'user:unblock',
+      request: (slug: string) => unblockUserRequest({ slug }),
+      invalidations: [InvalidateAction.User.Block],
+    }),
+  );
 
   const blockUser = async (slug: string) => {
     track({ action: 'block' });

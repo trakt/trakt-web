@@ -12,8 +12,9 @@ describe('toConnectSteps', () => {
   });
 
   it('skips the profile step for a watchlist-only connection', () => {
-    expect(toConnectSteps({ hasProfiles: true, isAccountOnly: true }))
-      .to.deep.equal(['sign-in', 'server', 'sync']);
+    expect(
+      toConnectSteps({ hasProfiles: true, isAccountOnly: true }),
+    ).to.deep.equal(['sign-in', 'server', 'sync']);
   });
 
   it('skips the profile step when there is only one profile', () => {
@@ -25,17 +26,20 @@ describe('toConnectSteps', () => {
   });
 
   it('adds the history step last when the history feed is on', () => {
-    expect(toConnectSteps({ hasProfiles: true, hasHistory: true }))
-      .to.deep.equal(['sign-in', 'server', 'profile', 'sync', 'history']);
+    expect(
+      toConnectSteps({ hasProfiles: true, hasHistory: true }),
+    ).to.deep.equal(['sign-in', 'server', 'profile', 'sync', 'history']);
   });
 
   it('adds the history step to a watchlist-only-free single profile flow', () => {
-    expect(toConnectSteps({ hasProfiles: false, hasHistory: true }))
-      .to.deep.equal(['sign-in', 'server', 'sync', 'history']);
+    expect(
+      toConnectSteps({ hasProfiles: false, hasHistory: true }),
+    ).to.deep.equal(['sign-in', 'server', 'sync', 'history']);
   });
 
   it('stops at the server step for a webhook-only server', () => {
-    expect(toConnectSteps({ hasProfiles: true, isWebhookOnly: true }))
-      .to.deep.equal(['sign-in', 'server']);
+    expect(
+      toConnectSteps({ hasProfiles: true, isWebhookOnly: true }),
+    ).to.deep.equal(['sign-in', 'server']);
   });
 });

@@ -73,12 +73,12 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
       ? parsedCommentId
       : undefined;
   const episodeNumber = searchParams?.get(EPISODE_PARAM);
-  const parsedEpisode = episodeNumber != null
-    ? Number(episodeNumber)
-    : undefined;
-  const sourceEpisode = parsedEpisode != null && !Number.isNaN(parsedEpisode)
-    ? parsedEpisode
-    : undefined;
+  const parsedEpisode =
+    episodeNumber != null ? Number(episodeNumber) : undefined;
+  const sourceEpisode =
+    parsedEpisode != null && !Number.isNaN(parsedEpisode)
+      ? parsedEpisode
+      : undefined;
 
   return {
     drawer,
@@ -90,13 +90,17 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
         ? closeParams(COMMENT_ID_PARAM)
         : close(),
     buildDrawerLink,
-    buildEpisodeDrawerLink: (
-      { season, episode }: { season: number; episode: number },
-    ) =>
-      buildDrawerLink(
-        SummaryDrawers.Episode,
-        { [EPISODE_PARAM]: String(episode), [SEASON_PARAM]: String(season) },
-      ),
+    buildEpisodeDrawerLink: ({
+      season,
+      episode,
+    }: {
+      season: number;
+      episode: number;
+    }) =>
+      buildDrawerLink(SummaryDrawers.Episode, {
+        [EPISODE_PARAM]: String(episode),
+        [SEASON_PARAM]: String(season),
+      }),
     /** The seasons drawer, optionally opened on a given episode. */
     buildSeasonsDrawerLink: (episode?: number) =>
       buildDrawerLink(
@@ -109,14 +113,10 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
         id != null ? { [COMMENT_ID_PARAM]: String(id) } : undefined,
       ),
     buildReviewDrawerLink: (id: number) =>
-      buildDrawerLink(
-        SummaryDrawers.Review,
-        { [COMMENT_ID_PARAM]: String(id) },
-      ),
+      buildDrawerLink(SummaryDrawers.Review, {
+        [COMMENT_ID_PARAM]: String(id),
+      }),
     openReviewDrawer: (id: number) =>
-      openDrawer(
-        SummaryDrawers.Review,
-        { [COMMENT_ID_PARAM]: String(id) },
-      ),
+      openDrawer(SummaryDrawers.Review, { [COMMENT_ID_PARAM]: String(id) }),
   };
 }

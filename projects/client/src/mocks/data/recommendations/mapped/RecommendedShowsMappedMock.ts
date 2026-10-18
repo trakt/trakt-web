@@ -4,8 +4,8 @@ import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSi
 export const RecommendedShowsMappedMock: RecommendedShow[] = [
   {
     ...ShowSiloMappedMock,
-    'episode': {
-      'count': 15,
+    episode: {
+      count: 15,
     },
     sources: [],
   },

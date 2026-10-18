@@ -22,14 +22,11 @@ const currentUserDigitalLibraryRequest = (
   { fetch }: ApiParams,
   type: 'movies' | 'shows' | 'episodes',
 ) =>
-  api({ fetch })
-    .sync
-    .collection
-    .minimal[type]({
-      query: {
-        available_on: 'digital',
-      },
-    });
+  api({ fetch }).sync.collection.minimal[type]({
+    query: {
+      available_on: 'digital',
+    },
+  });
 
 export const currentUserDigitalLibraryQuery = defineQuery({
   key: 'currentUserDigitalLibrary',

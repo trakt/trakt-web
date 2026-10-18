@@ -101,11 +101,7 @@ export function usePortal(props?: PortalProps) {
     }
 
     popupContainer.next(node);
-    return openPopupContainer(
-      node,
-      target,
-      placement,
-    );
+    return openPopupContainer(node, target, placement);
   };
 
   return {

@@ -21,25 +21,21 @@ function mapToHiddenShowItem(item: HiddenShowItemResponse): HiddenShow {
 }
 
 export const DEFAULT_HIDDEN_PAGE_SIZE = 1000;
-const hiddenShowsRequest = (
-  { fetch, limit = DEFAULT_HIDDEN_PAGE_SIZE }: HiddenShowsParams,
-) =>
-  api({ fetch })
-    .users
-    .hidden
-    .get({
-      query: {
-        limit,
-        type: 'show',
-      },
-    });
+const hiddenShowsRequest = ({
+  fetch,
+  limit = DEFAULT_HIDDEN_PAGE_SIZE,
+}: HiddenShowsParams) =>
+  api({ fetch }).users.hidden.get({
+    query: {
+      limit,
+      type: 'show',
+    },
+  });
 
 export const hiddenShowsQuery = defineQuery({
   key: 'hiddenShows',
   invalidations: [InvalidateAction.Restore],
-  dependencies: (
-    params: HiddenShowsParams,
-  ) => [params.limit],
+  dependencies: (params: HiddenShowsParams) => [params.limit],
   request: hiddenShowsRequest,
   mapper: (response) => response.body.map(mapToHiddenShowItem),
   schema: HiddenShowSchema.array(),

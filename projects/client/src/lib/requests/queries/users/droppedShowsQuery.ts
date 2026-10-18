@@ -28,30 +28,19 @@ function mapToDroppedProgressEntry(
   };
 }
 
-const droppedShowsRequest = (
-  { fetch, page = 1, limit }: DroppedShowsParams,
-) =>
-  api({ fetch })
-    .users
-    .hidden
-    .dropped({
-      query: {
-        page,
-        limit,
-        extended: 'full,images',
-      },
-    });
+const droppedShowsRequest = ({ fetch, page = 1, limit }: DroppedShowsParams) =>
+  api({ fetch }).users.hidden.dropped({
+    query: {
+      page,
+      limit,
+      extended: 'full,images',
+    },
+  });
 
 export const droppedShowsQuery = defineInfiniteQuery({
   key: 'droppedShows',
-  invalidations: [
-    InvalidateAction.Drop('show'),
-    InvalidateAction.Restore,
-  ],
-  dependencies: (params: DroppedShowsParams) => [
-    params.page,
-    params.limit,
-  ],
+  invalidations: [InvalidateAction.Drop('show'), InvalidateAction.Restore],
+  dependencies: (params: DroppedShowsParams) => [params.page, params.limit],
   request: droppedShowsRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToDroppedProgressEntry),

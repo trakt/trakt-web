@@ -17,11 +17,9 @@ import {
 } from '../../models/MovieProgressEntry.ts';
 import { sortMovieProgress } from './_internal/sortMovieProgress.ts';
 
-type MovieProgressParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & {
+type MovieProgressParams = PaginationParams &
+  ApiParams &
+  FilterParams & {
     sortBy?: UpNextSortBy;
     sortHow?: SortDirection;
   };
@@ -37,26 +35,25 @@ export const mapToMovieProgressEntry = (
     playbackId: response.id,
     progress: response.progress,
     minutesElapsed,
-    minutesLeft: runtime -
-      minutesElapsed,
+    minutesLeft: runtime - minutesElapsed,
     lastWatchedAt: response.paused_at ? new Date(response.paused_at) : null,
   };
 };
 
-export const movieProgressRequest = (
-  { fetch, limit, page, filter }: MovieProgressParams,
-) => {
-  return api({ fetch })
-    .sync
-    .progress
-    .movies({
-      query: {
-        page,
-        limit,
-        extended: 'full,images',
-        ...filter,
-      },
-    });
+export const movieProgressRequest = ({
+  fetch,
+  limit,
+  page,
+  filter,
+}: MovieProgressParams) => {
+  return api({ fetch }).sync.progress.movies({
+    query: {
+      page,
+      limit,
+      extended: 'full,images',
+      ...filter,
+    },
+  });
 };
 
 export const movieProgressQuery = defineInfiniteQuery({
@@ -66,9 +63,7 @@ export const movieProgressQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.Drop('movie'),
   ],
-  dependencies: (
-    params: MovieProgressParams,
-  ) => [
+  dependencies: (params: MovieProgressParams) => [
     params.page,
     params.limit,
     params.sortBy,
@@ -77,8 +72,7 @@ export const movieProgressQuery = defineInfiniteQuery({
   ],
   request: movieProgressRequest,
   mapper: (response, { sortBy, sortHow }) => {
-    const entries = response.body
-      .map(mapToMovieProgressEntry);
+    const entries = response.body.map(mapToMovieProgressEntry);
 
     return {
       entries: sortMovieProgress({ entries, sortBy, sortHow }),

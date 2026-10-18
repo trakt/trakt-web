@@ -7,14 +7,14 @@ type RemoveFromListParams = {
   userId?: string | number | Nil;
 } & ApiParams;
 
-export function removeFromListRequest(
-  { body, fetch, listId, userId }: RemoveFromListParams,
-): Promise<boolean> {
+export function removeFromListRequest({
+  body,
+  fetch,
+  listId,
+  userId,
+}: RemoveFromListParams): Promise<boolean> {
   return api({ fetch })
-    .users
-    .lists
-    .list
-    .remove({
+    .users.lists.list.remove({
       params: {
         id: `${userId ?? 'me'}`,
         list_id: `${listId}`,

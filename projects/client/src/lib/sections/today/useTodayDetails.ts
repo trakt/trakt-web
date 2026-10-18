@@ -15,7 +15,7 @@ export function useTodayDetails(media$: Observable<TodayMedia>) {
       map(({ type, slug }) =>
         type === 'movie'
           ? movieRatingQuery({ slug })
-          : showRatingQuery({ slug })
+          : showRatingQuery({ slug }),
       ),
     ),
   );
@@ -25,7 +25,7 @@ export function useTodayDetails(media$: Observable<TodayMedia>) {
       map(({ type, slug }) =>
         type === 'movie'
           ? movieSentimentQuery({ slug, locale, enabled: true })
-          : showSentimentQuery({ slug, locale, enabled: true })
+          : showSentimentQuery({ slug, locale, enabled: true }),
       ),
     ),
   );

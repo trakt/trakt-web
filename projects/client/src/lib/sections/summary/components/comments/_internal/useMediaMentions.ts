@@ -30,8 +30,9 @@ export function useMediaMentions(source$: Observable<MediaMentionSource>) {
 
   return {
     mentions: query.pipe(
-      map(($query): ReadonlyArray<RichTextMention> =>
-        $query.data ? toMediaMentions($query.data) : []
+      map(
+        ($query): ReadonlyArray<RichTextMention> =>
+          $query.data ? toMediaMentions($query.data) : [],
       ),
     ),
   };

@@ -4,10 +4,7 @@ import { createCalendarAccumulator } from './createCalendarAccumulator.ts';
 
 type TestItem = { key: string };
 
-function mockCalendar(
-  startDate: string,
-  days: number,
-): Calendar<TestItem> {
+function mockCalendar(startDate: string, days: number): Calendar<TestItem> {
   return Array.from({ length: days }, (_, i) => {
     const date = new Date(startDate);
     date.setDate(date.getDate() + i);
@@ -68,9 +65,7 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should sort periods in reverse-chronological order', () => {
-      const { accumulate } = createCalendarAccumulator(
-        'reverse-chronological',
-      );
+      const { accumulate } = createCalendarAccumulator('reverse-chronological');
       const week1 = mockCalendar('2024-01-01', 7);
       const week2 = mockCalendar('2024-01-08', 7);
 
@@ -104,9 +99,7 @@ describe('createCalendarAccumulator', () => {
 
   describe('clear', () => {
     it('should remove accumulated periods', () => {
-      const { accumulate, clear } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, clear } = createCalendarAccumulator('chronological');
       const week1 = mockCalendar('2024-01-01', 7);
 
       accumulate({ calendar: week1, fingerprint: 'a' });
@@ -117,9 +110,7 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should reset fingerprint tracking', () => {
-      const { accumulate, clear } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, clear } = createCalendarAccumulator('chronological');
       const week1 = mockCalendar('2024-01-01', 7);
       const week2 = mockCalendar('2024-01-08', 7);
 
@@ -135,9 +126,7 @@ describe('createCalendarAccumulator', () => {
 
   describe('clearedToKey', () => {
     it('should reject data that does not match the target date', () => {
-      const { accumulate, clear } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, clear } = createCalendarAccumulator('chronological');
       const week1 = mockCalendar('2024-01-01', 7);
       const week2 = mockCalendar('2024-01-08', 7);
 
@@ -152,9 +141,7 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should accept data matching the target date', () => {
-      const { accumulate, clear } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, clear } = createCalendarAccumulator('chronological');
       const week1 = mockCalendar('2024-01-01', 7);
 
       clear(new Date('2024-01-01'));
@@ -166,9 +153,7 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should resume normal accumulation after matching key arrives', () => {
-      const { accumulate, clear } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, clear } = createCalendarAccumulator('chronological');
       const week1 = mockCalendar('2024-01-01', 7);
       const week2 = mockCalendar('2024-01-08', 7);
 
@@ -181,9 +166,7 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should preserve stale data while rejecting mismatched keys', () => {
-      const { accumulate, clear } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, clear } = createCalendarAccumulator('chronological');
       const week1 = mockCalendar('2024-01-01', 7);
       const week2 = mockCalendar('2024-01-08', 7);
       const week3 = mockCalendar('2024-01-15', 7);
@@ -214,9 +197,8 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should return false after 5 consecutive empty periods', () => {
-      const { accumulate, canLoadMore } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, canLoadMore } =
+        createCalendarAccumulator('chronological');
 
       for (let i = 0; i < 5; i++) {
         const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);
@@ -227,9 +209,8 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should return true if there is a non-empty period before 5 empty ones', () => {
-      const { accumulate, canLoadMore } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, canLoadMore } =
+        createCalendarAccumulator('chronological');
 
       for (let i = 0; i < 4; i++) {
         const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);
@@ -251,9 +232,8 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should keep loading when a period is only empty after client side filtering', () => {
-      const { accumulate, canLoadMore } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, canLoadMore } =
+        createCalendarAccumulator('chronological');
 
       for (let i = 0; i < 5; i++) {
         const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);
@@ -268,9 +248,8 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should stop loading when the upstream period is empty', () => {
-      const { accumulate, canLoadMore } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, canLoadMore } =
+        createCalendarAccumulator('chronological');
 
       for (let i = 0; i < 5; i++) {
         const period = mockCalendar(`2024-01-0${i + 1}`, 1);
@@ -282,9 +261,8 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should reset consecutive empty periods counter upon clearing', () => {
-      const { accumulate, clear, canLoadMore } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, clear, canLoadMore } =
+        createCalendarAccumulator('chronological');
 
       for (let i = 0; i < 5; i++) {
         const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);
@@ -297,9 +275,8 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should reset consecutive empty periods counter upon fingerprint change', () => {
-      const { accumulate, canLoadMore } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, canLoadMore } =
+        createCalendarAccumulator('chronological');
 
       for (let i = 0; i < 5; i++) {
         const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);
@@ -313,9 +290,8 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should reset empty periods count when an empty period is updated with data', () => {
-      const { accumulate, canLoadMore } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, canLoadMore } =
+        createCalendarAccumulator('chronological');
 
       for (let i = 0; i < 5; i++) {
         const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);
@@ -334,9 +310,8 @@ describe('createCalendarAccumulator', () => {
     });
 
     it('should not reset empty periods count when an empty period is updated but remains empty', () => {
-      const { accumulate, canLoadMore } = createCalendarAccumulator(
-        'chronological',
-      );
+      const { accumulate, canLoadMore } =
+        createCalendarAccumulator('chronological');
 
       for (let i = 0; i < 5; i++) {
         const emptyPeriod = mockCalendar(`2024-01-0${i + 1}`, 1);

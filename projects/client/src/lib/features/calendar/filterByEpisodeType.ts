@@ -11,13 +11,11 @@ import type { EpisodeTypeFilter } from './models/EpisodeTypeFilter.ts';
 
 export function filterByEpisodeType<
   T extends UpcomingEpisodeEntry | MediaEntry,
->(
-  episodeType: Observable<EpisodeTypeFilter>,
-): OperatorFunction<T[], T[]> {
+>(episodeType: Observable<EpisodeTypeFilter>): OperatorFunction<T[], T[]> {
   return (source) =>
     combineLatest([source, episodeType]).pipe(
       map(([$items, $episodeType]) =>
-        $items.filter((item) => matchesEpisodeTypeFilter(item, $episodeType))
+        $items.filter((item) => matchesEpisodeTypeFilter(item, $episodeType)),
       ),
     );
 }

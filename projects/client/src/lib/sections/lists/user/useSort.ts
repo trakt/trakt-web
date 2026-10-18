@@ -25,6 +25,6 @@ export function useSort(sortBy?: SortBy) {
 
   return {
     groupBy,
-    toTag: (snippet: Snippet | undefined) => hasSortTag ? snippet : undefined,
+    toTag: (snippet: Snippet | undefined) => (hasSortTag ? snippet : undefined),
   };
 }

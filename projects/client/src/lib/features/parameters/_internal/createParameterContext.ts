@@ -11,11 +11,10 @@ export const PARAMETER_ESCAPE_KEY = Symbol('parameters_escape');
 export function createParameterContext() {
   const ctx = setContext(
     PARAMETER_CONTEXT_KEY,
-    getContext<ParameterContextData>(PARAMETER_CONTEXT_KEY) ??
-      {
-        parameters: new BehaviorSubject(new Map<string, ParameterType>()),
-        url: new BehaviorSubject(page.url),
-      },
+    getContext<ParameterContextData>(PARAMETER_CONTEXT_KEY) ?? {
+      parameters: new BehaviorSubject(new Map<string, ParameterType>()),
+      url: new BehaviorSubject(page.url),
+    },
   );
 
   const override = setContext(

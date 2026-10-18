@@ -10,10 +10,7 @@ describe('Switch', () => {
   };
 
   it('should render a switch element', () => {
-    render(
-      Switch,
-      defaultProps,
-    );
+    render(Switch, defaultProps);
 
     const switchToggle = screen.getByRole('switch', { name: 'Test Switch' });
     expect(switchToggle).toBeInTheDocument();
@@ -54,7 +51,8 @@ describe('Switch', () => {
       checked: true,
     });
 
-    expect(screen.getByRole('switch').closest('label')?.textContent?.trim())
-      .toBe('');
+    expect(
+      screen.getByRole('switch').closest('label')?.textContent?.trim(),
+    ).toBe('');
   });
 });

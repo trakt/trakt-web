@@ -7,14 +7,14 @@ type AddToListParams = {
   userId?: string | number | Nil;
 } & ApiParams;
 
-export function addToListRequest(
-  { body, fetch, listId, userId }: AddToListParams,
-): Promise<boolean> {
+export function addToListRequest({
+  body,
+  fetch,
+  listId,
+  userId,
+}: AddToListParams): Promise<boolean> {
   return api({ fetch })
-    .users
-    .lists
-    .list
-    .add({
+    .users.lists.list.add({
       params: {
         id: `${userId ?? 'me'}`,
         list_id: `${listId}`,

@@ -20,19 +20,21 @@ export function useBulkAddToList(list: MediaListSummary) {
   const { track } = useTrack(AnalyticsEvent.List);
   const { notify } = useActionToast();
 
-  const addition = useMutation(defineMutation({
-    key: 'list:bulk-add',
-    request: (picks: ReadonlyArray<BulkAddPick>) =>
-      addToListRequest({
-        listId: list.id,
-        userId: list.user.slug,
-        body: toBulkAddPayload(picks),
-      }),
-    invalidations: [
-      InvalidateAction.Listed('movie'),
-      InvalidateAction.Listed('show'),
-    ],
-  }));
+  const addition = useMutation(
+    defineMutation({
+      key: 'list:bulk-add',
+      request: (picks: ReadonlyArray<BulkAddPick>) =>
+        addToListRequest({
+          listId: list.id,
+          userId: list.user.slug,
+          body: toBulkAddPayload(picks),
+        }),
+      invalidations: [
+        InvalidateAction.Listed('movie'),
+        InvalidateAction.Listed('show'),
+      ],
+    }),
+  );
 
   const addPicks = async (picks: ReadonlyArray<BulkAddPick>) => {
     if (picks.length === 0) return false;
@@ -45,9 +47,9 @@ export function useBulkAddToList(list: MediaListSummary) {
       isAdded
         ? { message: toAddedMessage({ count: picks.length, name: list.name }) }
         : {
-          message: m.text_failed_to_add_titles({ name: list.name }),
-          variant: 'error',
-        },
+            message: m.text_failed_to_add_titles({ name: list.name }),
+            variant: 'error',
+          },
     );
 
     return isAdded;

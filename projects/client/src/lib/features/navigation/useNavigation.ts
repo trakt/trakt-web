@@ -13,8 +13,8 @@ type Controller = (node: HTMLElement) => void;
 type NavigationContextData = BehaviorSubject<NavigationType>;
 
 const navigationControllers: Record<NavigationType, Controller | undefined> = {
-  'default': undefined,
-  'dpad': dpadController,
+  default: undefined,
+  dpad: dpadController,
 };
 
 export function initializeNavigation() {
@@ -24,10 +24,10 @@ export function initializeNavigation() {
 
   const navigation =
     getContext<NavigationContextData>(NAVIGATION_CONTEXT_KEY) ??
-      setContext<NavigationContextData>(
-        NAVIGATION_CONTEXT_KEY,
-        new BehaviorSubject(navigationType),
-      );
+    setContext<NavigationContextData>(
+      NAVIGATION_CONTEXT_KEY,
+      new BehaviorSubject(navigationType),
+    );
 
   return {
     controller: navigationControllers[navigation.value],

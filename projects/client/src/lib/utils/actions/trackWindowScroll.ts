@@ -19,10 +19,7 @@ export function trackWindowScroll(node: HTMLElement, className: string) {
 
   update();
 
-  const unregister = GlobalEventBus.getInstance().register(
-    'scroll',
-    schedule,
-  );
+  const unregister = GlobalEventBus.getInstance().register('scroll', schedule);
 
   return {
     destroy() {

@@ -31,15 +31,13 @@ export function defineQuery<
   TOutput extends ZodType,
   TError extends Error,
   TRequestParams extends ApiParams,
->(
-  {
-    request,
-    mapper,
-    schema,
-    invalidations,
-    ...params
-  }: DefineQueryProps<TInput, TOutput, TRequestParams>,
-) {
+>({
+  request,
+  mapper,
+  schema,
+  invalidations,
+  ...params
+}: DefineQueryProps<TInput, TOutput, TRequestParams>) {
   const hash = schemaId(monitor(zodToHash, `${params.key} hashing`)(schema));
 
   return (
@@ -121,28 +119,26 @@ export function defineInfiniteQuery<
           ...requestParams,
           page: pageParam,
           fetch: createMarkerFetch(marker, requestParams.fetch),
-        })
-          .then((response) => {
-            const isValid = isValidResponse(response, queryKey.at(0));
+        }).then((response) => {
+          const isValid = isValidResponse(response, queryKey.at(0));
 
-            if (!isValid) {
-              return {
-                entries: [],
-                page: { type: 'paginated', current: 1, total: 1 },
-              } as z.infer<
-                TOutput
-              >;
-            }
+          if (!isValid) {
+            return {
+              entries: [],
+              page: { type: 'paginated', current: 1, total: 1 },
+            } as z.infer<TOutput>;
+          }
 
-            return mapper(response, { ...requestParams, page: pageParam });
-          });
+          return mapper(response, { ...requestParams, page: pageParam });
+        });
       },
       initialPageParam: requestParams.page ?? 1,
       getNextPageParam: (lastPage) => {
         const { page, entries } = lastPage as Paginatable<TEntry>;
-        const hasMore = page.type === 'infinite'
-          ? entries.length > 0
-          : page.current < page.total;
+        const hasMore =
+          page.type === 'infinite'
+            ? entries.length > 0
+            : page.current < page.total;
         return hasMore ? page.current + 1 : undefined;
       },
       ...buildCommonOptions(params, requestParams),

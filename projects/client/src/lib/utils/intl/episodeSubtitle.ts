@@ -9,10 +9,7 @@ export function episodeSubtitle(episode: EpisodeEntry) {
     case EpisodeComputedType.full_season:
       return seasonLabel(episode.season);
     case EpisodeComputedType.multiple_episodes:
-      return multiEpisodeLabel(
-        episode.episodes ?? [],
-        episode.season,
-      );
+      return multiEpisodeLabel(episode.episodes ?? [], episode.season);
     default:
       return episodeNumberLabel({
         seasonNumber: episode.season,

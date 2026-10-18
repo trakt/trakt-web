@@ -14,7 +14,7 @@ function preloadAvatars(accounts: MediaSyncAccount[] | undefined) {
 
 export function useSyncAccounts(connectionId: number) {
   return useQuery(mediaSyncAccountsQuery({ connectionId })).pipe(
-    map(({ data, isError }) => isError ? [] : data),
+    map(({ data, isError }) => (isError ? [] : data)),
     tap(preloadAvatars),
   );
 }

@@ -41,16 +41,25 @@ export function useIsWatched(props: IsWatchedProps) {
     };
   };
 
-  const episodes = props.type === 'episode'
-    ? Array.isArray(props.media) ? props.media : [props.media]
-    : [];
+  const episodes =
+    props.type === 'episode'
+      ? Array.isArray(props.media)
+        ? props.media
+        : [props.media]
+      : [];
   const showId = 'show' in props ? props.show.id : -1;
-  const seasons = props.type === 'season'
-    ? Array.isArray(props.media) ? props.media : [props.media]
-    : [];
-  const shows = props.type === 'show'
-    ? Array.isArray(props.media) ? props.media : [props.media]
-    : [];
+  const seasons =
+    props.type === 'season'
+      ? Array.isArray(props.media)
+        ? props.media
+        : [props.media]
+      : [];
+  const shows =
+    props.type === 'show'
+      ? Array.isArray(props.media)
+        ? props.media
+        : [props.media]
+      : [];
 
   const watchState = combineLatest([history, actions]).pipe(
     map(([$history, $actions]) => {
@@ -75,22 +84,24 @@ export function useIsWatched(props: IsWatchedProps) {
 
           return {
             isWatched: episodes.every((episode) =>
-              watchedEpisodes.some((e) => e.episodeId === episode.id)
+              watchedEpisodes.some((e) => e.episodeId === episode.id),
             ),
             isPartiallyWatched: false,
           };
         }
         case 'season': {
-          const countBySeason = $history.shows.get(showId)?.playsPerSeason ??
+          const countBySeason =
+            $history.shows.get(showId)?.playsPerSeason ??
             new Map<number, number>();
 
-          const watchedCount = seasons.filter((season) =>
-            season.episodes.aired > 0 &&
-            (countBySeason.get(season.number) ?? 0) >= season.episodes.aired
+          const watchedCount = seasons.filter(
+            (season) =>
+              season.episodes.aired > 0 &&
+              (countBySeason.get(season.number) ?? 0) >= season.episodes.aired,
           ).length;
 
-          const hasSomeCompleteSeasons = watchedCount > 0 &&
-            watchedCount < seasons.length;
+          const hasSomeCompleteSeasons =
+            watchedCount > 0 && watchedCount < seasons.length;
           const hasSomePartialSeasons = seasons.some((season) => {
             const count = countBySeason.get(season.number) ?? 0;
             return count > 0 && count < season.episodes.aired;
@@ -106,14 +117,12 @@ export function useIsWatched(props: IsWatchedProps) {
             getShowWatchState({
               watchedShow: $history.shows.get(show.id),
               episodeCount: show.episode?.count,
-            })
+            }),
           );
 
-          const isWatched = states.every((state) =>
-            state.isWatched
-          );
-          const isPartiallyWatched = !isWatched &&
-            states.some((state) => state.isStarted);
+          const isWatched = states.every((state) => state.isWatched);
+          const isPartiallyWatched =
+            !isWatched && states.some((state) => state.isStarted);
 
           return { isWatched, isPartiallyWatched };
         }

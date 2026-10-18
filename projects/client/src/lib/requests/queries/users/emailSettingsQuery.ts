@@ -19,9 +19,9 @@ const emailSettingsRequest = async ({ fetch }: ApiParams) => {
 
   return response.ok
     ? {
-      body: EmailSettingsResponseSchema.parse(await response.json()),
-      status: 200,
-    }
+        body: EmailSettingsResponseSchema.parse(await response.json()),
+        status: 200,
+      }
     : { body: null, status: response.status };
 };
 

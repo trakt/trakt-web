@@ -31,6 +31,4 @@ export const VipSubscriptionSchema = z.object({
   transactions: z.array(VipTransactionSchema),
 });
 
-export type VipSubscription = z.infer<
-  typeof VipSubscriptionSchema
->;
+export type VipSubscription = z.infer<typeof VipSubscriptionSchema>;

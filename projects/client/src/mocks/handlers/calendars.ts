@@ -4,46 +4,28 @@ import { UpcomingEpisodesResponseMock } from '../data/calendars/response/Upcomin
 import { UpcomingMoviesResponseMock } from '../data/calendars/response/UpcomingMoviesResponseMock.ts';
 
 export const calendars = [
-  http.get(
-    'http://localhost/calendars/my/shows/*',
-    () => {
-      return HttpResponse.json(UpcomingEpisodesResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/calendars/all/shows/*',
-    () => {
-      return HttpResponse.json(UpcomingEpisodesResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/calendars/my/movies/*',
-    () => {
-      return HttpResponse.json(UpcomingMoviesResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/calendars/all/movies/*',
-    () => {
-      return HttpResponse.json(UpcomingMoviesResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/calendars/releases/hot/*',
-    () => {
-      return HttpResponse.json([
-        ...UpcomingEpisodesResponseMock,
-        ...UpcomingMoviesResponseMock,
-      ]);
-    },
-  ),
-  http.get(
-    'http://localhost/calendars/:target/media/*',
-    () => {
-      return HttpResponse.json([
-        ...UpcomingEpisodesResponseMock,
-        ...UpcomingMoviesResponseMock,
-      ]);
-    },
-  ),
+  http.get('http://localhost/calendars/my/shows/*', () => {
+    return HttpResponse.json(UpcomingEpisodesResponseMock);
+  }),
+  http.get('http://localhost/calendars/all/shows/*', () => {
+    return HttpResponse.json(UpcomingEpisodesResponseMock);
+  }),
+  http.get('http://localhost/calendars/my/movies/*', () => {
+    return HttpResponse.json(UpcomingMoviesResponseMock);
+  }),
+  http.get('http://localhost/calendars/all/movies/*', () => {
+    return HttpResponse.json(UpcomingMoviesResponseMock);
+  }),
+  http.get('http://localhost/calendars/releases/hot/*', () => {
+    return HttpResponse.json([
+      ...UpcomingEpisodesResponseMock,
+      ...UpcomingMoviesResponseMock,
+    ]);
+  }),
+  http.get('http://localhost/calendars/:target/media/*', () => {
+    return HttpResponse.json([
+      ...UpcomingEpisodesResponseMock,
+      ...UpcomingMoviesResponseMock,
+    ]);
+  }),
 ];

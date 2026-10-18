@@ -23,7 +23,7 @@ export function useSpotlightItems() {
   return {
     items: combineLatest([shows, movies]).pipe(
       map(([$shows, $movies]) =>
-        interleave($shows, $movies).slice(0, SPOTLIGHT_COUNT)
+        interleave($shows, $movies).slice(0, SPOTLIGHT_COUNT),
       ),
     ),
   };

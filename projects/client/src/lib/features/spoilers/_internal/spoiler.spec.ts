@@ -17,21 +17,18 @@ describe('action: spoiler', () => {
   it('should add spoiler class when isSpoilerHidden is true', async () => {
     setAuthorization(true);
 
-    const user = deepAssign(
-      clone(ExtendedUsersResponseMock),
-      {
-        browsing: {
-          spoilers: {
-            actors: null,
-            comments: null,
-            episodes: null,
-            movies: null,
-            ratings: null,
-            shows: 'hide_title',
-          },
+    const user = deepAssign(clone(ExtendedUsersResponseMock), {
+      browsing: {
+        spoilers: {
+          actors: null,
+          comments: null,
+          episodes: null,
+          movies: null,
+          ratings: null,
+          shows: 'hide_title',
         },
       },
-    );
+    });
 
     server.use(
       http.get('http://localhost/users/settings', () => {
@@ -44,13 +41,13 @@ describe('action: spoiler', () => {
       useMediaSpoiler({
         type: 'show',
         media: { id: 1337 },
-      })
+      }),
     );
 
     spoiler(node, isSpoilerHidden);
 
     await waitFor(() =>
-      expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(true)
+      expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(true),
     );
   });
 
@@ -62,7 +59,7 @@ describe('action: spoiler', () => {
       useMediaSpoiler({
         type: 'movie',
         media: { id: 1337 },
-      })
+      }),
     );
 
     node.classList.add(SPOILER_CLASS_NAME);
@@ -74,21 +71,18 @@ describe('action: spoiler', () => {
   it('should remove the spoiler class when a movie is watched', async () => {
     setAuthorization(true);
 
-    const user = deepAssign(
-      clone(ExtendedUsersResponseMock),
-      {
-        browsing: {
-          spoilers: {
-            actors: null,
-            comments: null,
-            episodes: null,
-            movies: 'hide',
-            ratings: null,
-            shows: null,
-          },
+    const user = deepAssign(clone(ExtendedUsersResponseMock), {
+      browsing: {
+        spoilers: {
+          actors: null,
+          comments: null,
+          episodes: null,
+          movies: 'hide',
+          ratings: null,
+          shows: null,
         },
       },
-    );
+    });
 
     server.use(
       http.get('http://localhost/users/settings', () => {
@@ -105,15 +99,15 @@ describe('action: spoiler', () => {
             assertDefined(Object.keys(WatchedMoviesResponseMock).at(0)),
           ),
         },
-      })
+      }),
     );
 
     spoiler(node, isSpoilerHidden);
 
     node.classList.add(SPOILER_CLASS_NAME);
 
-    await waitFor(
-      () => expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false),
+    await waitFor(() =>
+      expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false),
     );
   });
 

@@ -11,12 +11,11 @@ import { mapToConnectedApp } from './_internal/mapToConnectedApp.ts';
 
 type ConnectedAppsParams = ApiParams;
 
-const connectedAppsRequest = async (
-  { fetch }: ConnectedAppsParams,
-) => {
-  const response = await rawApiFetch(
-    { fetch, path: '/v3/users/me/connected-apps' },
-  );
+const connectedAppsRequest = async ({ fetch }: ConnectedAppsParams) => {
+  const response = await rawApiFetch({
+    fetch,
+    path: '/v3/users/me/connected-apps',
+  });
 
   const body = response.ok
     ? ConnectedAppResponseSchema.array().parse(await response.json())

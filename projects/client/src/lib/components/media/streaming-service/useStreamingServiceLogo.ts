@@ -70,7 +70,7 @@ function useSourceLookup(): Observable<SourceLookup | undefined> {
   const lookup = useQuery(streamingSourcesQuery({})).pipe(
     map(($query) => $query.data),
     distinctUntilChanged(),
-    map((data) => data ? toSourceLookup(data) : undefined),
+    map((data) => (data ? toSourceLookup(data) : undefined)),
     shareReplay({ bufferSize: 1, refCount: true }),
   );
 
@@ -78,24 +78,23 @@ function useSourceLookup(): Observable<SourceLookup | undefined> {
   return lookup;
 }
 
-export function useStreamingServiceLogo(
-  { source, country }: UseStreamingServicesProps,
-): Observable<ServiceLogo | undefined> {
+export function useStreamingServiceLogo({
+  source,
+  country,
+}: UseStreamingServicesProps): Observable<ServiceLogo | undefined> {
   const { country: userCountry } = useStreamingPreferences();
   const lookup = useSourceLookup();
 
   const activeCountry = country ? of(country) : userCountry;
 
-  return combineLatest([
-    activeCountry,
-    lookup,
-  ]).pipe(
+  return combineLatest([activeCountry, lookup]).pipe(
     map(([countryCode, $lookup]) => {
       if (!$lookup) {
         return undefined;
       }
 
-      const service = $lookup.byCountry.get(countryCode)?.get(source) ??
+      const service =
+        $lookup.byCountry.get(countryCode)?.get(source) ??
         $lookup.anyCountry.get(source);
 
       return service ? mapToLogo(service) : undefined;

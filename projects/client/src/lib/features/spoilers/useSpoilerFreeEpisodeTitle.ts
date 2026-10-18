@@ -14,15 +14,17 @@ export function useSpoilerFreeEpisodeTitle(
 ) {
   const { episode, show } = props;
 
-  const isSpoilerHidden = props.isSpoilerHidden ?? useMediaSpoiler({
-    show,
-    media: episode,
-    type: 'episode',
-  }).isSpoilerHidden;
+  const isSpoilerHidden =
+    props.isSpoilerHidden ??
+    useMediaSpoiler({
+      show,
+      media: episode,
+      type: 'episode',
+    }).isSpoilerHidden;
 
   return isSpoilerHidden.pipe(
     map(($isSpoilerHidden) =>
-      $isSpoilerHidden ? episodeSubtitle(episode) : episode.title
+      $isSpoilerHidden ? episodeSubtitle(episode) : episode.title,
     ),
   );
 }

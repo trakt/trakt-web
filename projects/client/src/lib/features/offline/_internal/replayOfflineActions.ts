@@ -56,8 +56,8 @@ export async function replayOfflineActions({
   execute = executeOfflineAction,
   fetchWatched = fetchFreshWatchedState,
 }: ReplayOfflineActionsParams): Promise<ReplayOutcome> {
-  const needsReconcile = reconcile &&
-    actions.some((action) => action.endpoint === 'history:add');
+  const needsReconcile =
+    reconcile && actions.some((action) => action.endpoint === 'history:add');
 
   const watched = needsReconcile
     ? await resolveWatchedState(fetchWatched)
@@ -67,9 +67,10 @@ export async function replayOfflineActions({
     return ABORTED_OUTCOME;
   }
 
-  const duplicates = watched === null
-    ? []
-    : actions.filter((action) => findDuplicateWatch({ action, watched }));
+  const duplicates =
+    watched === null
+      ? []
+      : actions.filter((action) => findDuplicateWatch({ action, watched }));
   const duplicateIds = new Set(duplicates.map(({ id }) => id));
 
   const executedIds: string[] = [];
@@ -91,7 +92,7 @@ export async function replayOfflineActions({
 
       executedIds.push(action.id);
       action.invalidations.forEach((invalidation) =>
-        invalidations.add(invalidation)
+        invalidations.add(invalidation),
       );
     } catch (candidate) {
       if (isNetworkError(candidate)) {

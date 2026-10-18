@@ -39,8 +39,7 @@ describe('util: findDuplicateWatch', () => {
   it('should not flag a movie without any server plays', () => {
     expect(
       findDuplicateWatch({ action: buildAction(), watched: buildWatched() }),
-    )
-      .toBe(false);
+    ).toBe(false);
   });
 
   it('should flag an episode watched elsewhere after it was queued', () => {

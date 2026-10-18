@@ -1,11 +1,9 @@
 export function buildParamString(
   params: Record<string, string | number | Nil>,
 ): string {
-  const values = Object
-    .entries(params)
-    .filter(
-      ([_, value]) => value !== undefined && value !== null,
-    );
+  const values = Object.entries(params).filter(
+    ([_, value]) => value !== undefined && value !== null,
+  );
 
   if (!values.length) {
     return '';

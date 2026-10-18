@@ -10,14 +10,17 @@ type ToTypingFramesParams = {
   endPause: number;
 };
 
-function lineFrames(
-  { lines, index, characterDelay, linePause }: {
-    lines: ReadonlyArray<string>;
-    index: number;
-    characterDelay: number;
-    linePause: number;
-  },
-): ReadonlyArray<TypingFrame> {
+function lineFrames({
+  lines,
+  index,
+  characterDelay,
+  linePause,
+}: {
+  lines: ReadonlyArray<string>;
+  index: number;
+  characterDelay: number;
+  linePause: number;
+}): ReadonlyArray<TypingFrame> {
   const line = lines.at(index) ?? '';
   const previous = lines.slice(0, index);
 
@@ -27,13 +30,16 @@ function lineFrames(
   }));
 }
 
-export function toTypingFrames(
-  { lines, characterDelay, linePause, endPause }: ToTypingFramesParams,
-): ReadonlyArray<TypingFrame> {
+export function toTypingFrames({
+  lines,
+  characterDelay,
+  linePause,
+  endPause,
+}: ToTypingFramesParams): ReadonlyArray<TypingFrame> {
   if (characterDelay === 0) return [{ typed: lines, wait: 0 }];
 
   const frames = lines.flatMap((_, index) =>
-    lineFrames({ lines, index, characterDelay, linePause })
+    lineFrames({ lines, index, characterDelay, linePause }),
   );
   const last = frames.at(-1) ?? { typed: [], wait: 0 };
 

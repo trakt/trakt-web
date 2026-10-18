@@ -8,29 +8,25 @@ type BuildQueryKeyParams<
   TInput,
   TOutput extends ZodType,
   TRequestParams extends ApiParams,
-> =
-  & {
-    requestParams: TRequestParams;
-    hash: string;
-  }
-  & Pick<
-    DefineQueryProps<TInput, TOutput, TRequestParams>,
-    'key' | 'dependencies' | 'invalidations'
-  >;
+> = {
+  requestParams: TRequestParams;
+  hash: string;
+} & Pick<
+  DefineQueryProps<TInput, TOutput, TRequestParams>,
+  'key' | 'dependencies' | 'invalidations'
+>;
 
 export function buildQueryKeys<
   TInput,
   TOutput extends ZodType,
   TRequestParams extends ApiParams,
->(
-  {
-    hash,
-    requestParams,
-    key,
-    dependencies,
-    invalidations,
-  }: BuildQueryKeyParams<TInput, TOutput, TRequestParams>,
-) {
+>({
+  hash,
+  requestParams,
+  key,
+  dependencies,
+  invalidations,
+}: BuildQueryKeyParams<TInput, TOutput, TRequestParams>) {
   const queryKey = queryId(
     typeof key === 'function' ? key(requestParams) : key,
   );
@@ -43,10 +39,5 @@ export function buildQueryKeys<
     .filter((dependency) => dependency != null)
     .map((dependency) => dependencyId(dependency));
 
-  return [
-    queryKey,
-    hash,
-    ...filteredDependencies,
-    ...invalidations,
-  ] as const;
+  return [queryKey, hash, ...filteredDependencies, ...invalidations] as const;
 }

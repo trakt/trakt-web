@@ -12,9 +12,13 @@ type UseOptimisticReactionsParams = {
   limit: number;
 };
 
-export function useOptimisticReactions(
-  { live, idsOf, react, remove, limit }: UseOptimisticReactionsParams,
-) {
+export function useOptimisticReactions({
+  live,
+  idsOf,
+  react,
+  remove,
+  limit,
+}: UseOptimisticReactionsParams) {
   let snapshot = $state<ReactionsSnapshot | null>(null);
   let pending = $state<PendingReactions>({});
   let inFlight = $state(0);

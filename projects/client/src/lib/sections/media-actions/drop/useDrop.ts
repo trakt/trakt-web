@@ -39,22 +39,22 @@ function requestDrop(props: DropProps) {
   return dropMovieRequest({ id: props.playbackId });
 }
 
-export function useDrop(
-  props: DropStoreProps,
-) {
+export function useDrop(props: DropStoreProps) {
   const { title, context = 'drop', ...target } = props;
   const { user } = useUser();
   const dropNote = useDropNotePrompt();
 
   const { track } = useTrack(AnalyticsEvent.Drop);
 
-  const dropping = useMutation(defineMutation({
-    key: 'media:drop',
-    request: async () => {
-      await requestDrop(target);
-    },
-    invalidations: [InvalidateAction.Drop(target.type)],
-  }));
+  const dropping = useMutation(
+    defineMutation({
+      key: 'media:drop',
+      request: async () => {
+        await requestDrop(target);
+      },
+      invalidations: [InvalidateAction.Drop(target.type)],
+    }),
+  );
 
   const drop = async () => {
     const current = await resolve(user);

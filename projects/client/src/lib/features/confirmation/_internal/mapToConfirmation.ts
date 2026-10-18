@@ -186,12 +186,13 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   [ConfirmationType.ProceedAfterPartialExport]: (props) => ({
     title: m.confirmation_title_proceed_after_partial_export(),
     buttonText: m.button_text_continue(),
-    message: props.failed === 1
-      ? m.warning_prompt_partial_export_one({ total: props.total })
-      : m.warning_prompt_partial_export_other({
-        failed: props.failed,
-        total: props.total,
-      }),
+    message:
+      props.failed === 1
+        ? m.warning_prompt_partial_export_one({ total: props.total })
+        : m.warning_prompt_partial_export_other({
+            failed: props.failed,
+            total: props.total,
+          }),
     operation: 'destructive',
   }),
   [ConfirmationType.ClearData]: (props) => ({
@@ -208,9 +209,10 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   [ConfirmationType.CleanUpHistory]: (props) => ({
     title: m.confirmation_title_clean_up_history(),
     buttonText: m.button_text_clean_up(),
-    message: props.keeps === 'oldest'
-      ? m.warning_prompt_clean_up_history({ count: props.count })
-      : m.warning_prompt_clean_up_history_newest({ count: props.count }),
+    message:
+      props.keeps === 'oldest'
+        ? m.warning_prompt_clean_up_history({ count: props.count })
+        : m.warning_prompt_clean_up_history_newest({ count: props.count }),
     operation: 'destructive',
     preflight: toExportFirstPreflight(),
   }),

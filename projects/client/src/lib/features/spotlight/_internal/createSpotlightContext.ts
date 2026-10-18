@@ -13,12 +13,11 @@ export function createSpotlightContext(): SpotlightContext {
 
   return setContext(
     SPOTLIGHT_CONTEXT_KEY,
-    getContext<SpotlightContext>(SPOTLIGHT_CONTEXT_KEY) ??
-      {
-        isOpen,
-        open,
-        close,
-        toggle,
-      },
+    getContext<SpotlightContext>(SPOTLIGHT_CONTEXT_KEY) ?? {
+      isOpen,
+      open,
+      close,
+      toggle,
+    },
   );
 }

@@ -12,20 +12,20 @@ type UseDeleteCommentProps = {
   type: CommentableMediaType;
 };
 
-export function useDeleteComment(
-  { comment, type }: UseDeleteCommentProps,
-) {
+export function useDeleteComment({ comment, type }: UseDeleteCommentProps) {
   const { track } = useTrack(AnalyticsEvent.DeleteComment);
 
-  const deletion = useMutation(defineMutation({
-    key: 'comment:delete',
-    request: () => deleteCommentRequest({ id: comment.id }),
-    invalidations: [
-      comment.parentId > 0
-        ? InvalidateAction.Comment.Reply(type)
-        : InvalidateAction.Comment.Post(type),
-    ],
-  }));
+  const deletion = useMutation(
+    defineMutation({
+      key: 'comment:delete',
+      request: () => deleteCommentRequest({ id: comment.id }),
+      invalidations: [
+        comment.parentId > 0
+          ? InvalidateAction.Comment.Reply(type)
+          : InvalidateAction.Comment.Post(type),
+      ],
+    }),
+  );
 
   const deleteComment = async () => {
     track();

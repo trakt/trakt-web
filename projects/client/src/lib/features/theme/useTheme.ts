@@ -15,13 +15,11 @@ import { ThemeEndpoint } from './ThemeEndpoint.ts';
 const systemTheme = new BehaviorSubject<Theme | undefined>(undefined);
 
 if (browser) {
-  globalThis.matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener(
-      'change',
-      (e) => {
-        systemTheme.next(e.matches ? Theme.Dark : Theme.Light);
-      },
-    );
+  globalThis
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (e) => {
+      systemTheme.next(e.matches ? Theme.Dark : Theme.Light);
+    });
 }
 
 export function useTheme() {
@@ -39,7 +37,7 @@ export function useTheme() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ theme: value }),
-      })
+      }),
     );
 
     if (!response.ok) {
@@ -58,20 +56,12 @@ export function useTheme() {
   return {
     set,
     theme: theme.asObservable(),
-    color: combineLatest(
-      [theme, systemTheme],
-    ).pipe(
+    color: combineLatest([theme, systemTheme]).pipe(
       map(() => {
         return {
-          navbar: computeVariable(
-            '--color-background-navbar-base',
-          ),
-          background: computeVariable(
-            '--color-background',
-          ),
-          text: computeVariable(
-            '--color-foreground',
-          ),
+          navbar: computeVariable('--color-background-navbar-base'),
+          background: computeVariable('--color-background'),
+          text: computeVariable('--color-foreground'),
         };
       }),
     ),

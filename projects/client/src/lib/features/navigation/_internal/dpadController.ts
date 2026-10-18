@@ -68,9 +68,7 @@ export function dpadController(_: HTMLElement) {
     const isSameRoute = nav.from?.route.id === nav.to?.route.id;
     const isLinkNavigation = ['link', 'popstate'].includes(nav.type);
 
-    if (
-      !isLinkNavigation || nav.willUnload || isSameRoute
-    ) {
+    if (!isLinkNavigation || nav.willUnload || isSameRoute) {
       return;
     }
 

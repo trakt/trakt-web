@@ -16,28 +16,30 @@ function hasSameLibraries(
   enabledLibraryIds: number[],
 ): boolean {
   const current = libraries.filter((library) => library.enabled);
-  return current.length === enabledLibraryIds.length &&
-    current.every((library) => enabledLibraryIds.includes(library.id));
+  return (
+    current.length === enabledLibraryIds.length &&
+    current.every((library) => enabledLibraryIds.includes(library.id))
+  );
 }
 
 function hasSameFeeds(
   currentFeeds: MediaSyncFeed[],
   feeds: MediaSyncFeed[],
 ): boolean {
-  return currentFeeds.length === feeds.length &&
-    currentFeeds.every((feed) => feeds.includes(feed));
+  return (
+    currentFeeds.length === feeds.length &&
+    currentFeeds.every((feed) => feeds.includes(feed))
+  );
 }
 
-export function toManageChanges(
-  {
-    libraries,
-    enabledLibraryIds,
-    currentFeeds,
-    feeds,
-    currentAccountId,
-    accountId,
-  }: ManageDraft,
-): MediaSyncConnectionChanges {
+export function toManageChanges({
+  libraries,
+  enabledLibraryIds,
+  currentFeeds,
+  feeds,
+  currentAccountId,
+  accountId,
+}: ManageDraft): MediaSyncConnectionChanges {
   const isAccountChanged = accountId != null && accountId !== currentAccountId;
 
   return {

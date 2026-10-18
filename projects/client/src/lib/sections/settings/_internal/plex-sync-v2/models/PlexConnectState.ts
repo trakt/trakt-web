@@ -8,17 +8,17 @@ export type PlexConnectState =
   | { step: 'starting' }
   | { step: 'waiting'; attemptId: string; authUrl: string }
   | {
-    step: 'choosing';
-    attemptId: string;
-    servers: PlexServerOption[];
-    serverId: string | null;
-    libraries: PlexLibraryOption[] | null;
-    libraryIds: string[];
-    accounts: MediaSyncAccount[] | null;
-    accountId: string | null;
-    feeds: MediaSyncFeed[];
-    importHistory: boolean;
-  }
+      step: 'choosing';
+      attemptId: string;
+      servers: PlexServerOption[];
+      serverId: string | null;
+      libraries: PlexLibraryOption[] | null;
+      libraryIds: string[];
+      accounts: MediaSyncAccount[] | null;
+      accountId: string | null;
+      feeds: MediaSyncFeed[];
+      importHistory: boolean;
+    }
   | { step: 'connecting'; isWebhookOnly: boolean }
   | { step: 'expired' }
   | { step: 'failed'; error: string };

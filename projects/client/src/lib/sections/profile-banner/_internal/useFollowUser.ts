@@ -30,35 +30,43 @@ export function useFollowUserRequest(slug: string) {
   const pendingFollowsQuerySignal = useQuery(currentUserPendingFollowsQuery());
   const followRequestsQuerySignal = useQuery(currentUserFollowRequestsQuery());
 
-  const follow = useMutation(defineMutation({
-    key: 'user:follow',
-    request: () => followUserRequest({ slug }),
-    invalidations: followInvalidations,
-  }));
+  const follow = useMutation(
+    defineMutation({
+      key: 'user:follow',
+      request: () => followUserRequest({ slug }),
+      invalidations: followInvalidations,
+    }),
+  );
 
-  const unfollow = useMutation(defineMutation({
-    key: 'user:unfollow',
-    request: () => unfollowUserRequest({ slug }),
-    invalidations: followInvalidations,
-  }));
+  const unfollow = useMutation(
+    defineMutation({
+      key: 'user:unfollow',
+      request: () => unfollowUserRequest({ slug }),
+      invalidations: followInvalidations,
+    }),
+  );
 
-  const approve = useMutation(defineMutation({
-    key: 'user:approve-follow-request',
-    request: (requestId: number) => approveFollowRequest({ requestId }),
-    invalidations: ({ data }) => data ? followInvalidations : [],
-  }));
+  const approve = useMutation(
+    defineMutation({
+      key: 'user:approve-follow-request',
+      request: (requestId: number) => approveFollowRequest({ requestId }),
+      invalidations: ({ data }) => (data ? followInvalidations : []),
+    }),
+  );
 
-  const deny = useMutation(defineMutation({
-    key: 'user:deny-follow-request',
-    request: (requestId: number) => denyFollowRequest({ requestId }),
-    invalidations: ({ data }) => data ? followInvalidations : [],
-  }));
+  const deny = useMutation(
+    defineMutation({
+      key: 'user:deny-follow-request',
+      request: (requestId: number) => denyFollowRequest({ requestId }),
+      invalidations: ({ data }) => (data ? followInvalidations : []),
+    }),
+  );
 
   const pendingFollows = isAuthorized.pipe(
     switchMap((authorized) =>
       authorized
         ? pendingFollowsQuerySignal.pipe(map((query) => query.data))
-        : of<UserProfile[]>([])
+        : of<UserProfile[]>([]),
     ),
   );
 
@@ -66,13 +74,14 @@ export function useFollowUserRequest(slug: string) {
     switchMap((authorized) =>
       authorized
         ? followRequestsQuerySignal.pipe(map((query) => query.data ?? []))
-        : of<UserFollowRequest[]>([])
+        : of<UserFollowRequest[]>([]),
     ),
   );
 
   const incomingFollowRequest = followRequests.pipe(
-    map((requests) =>
-      requests.find((request) => request.user.slug === slug) ?? null
+    map(
+      (requests) =>
+        requests.find((request) => request.user.slug === slug) ?? null,
     ),
   );
 
@@ -93,8 +102,9 @@ export function useFollowUserRequest(slug: string) {
   );
 
   const isFollowStateUnsettled = followState.pipe(
-    map(([$network, $pendingFollows]) =>
-      $network == null || $pendingFollows == null
+    map(
+      ([$network, $pendingFollows]) =>
+        $network == null || $pendingFollows == null,
     ),
   );
 

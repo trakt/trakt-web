@@ -107,9 +107,9 @@ describe('util: buildMonthMatrix', () => {
       localeKey: 'en',
     });
 
-    const cell = weeks.flatMap((week) => week.cells).find((c) =>
-      c.date.getDate() === 12
-    );
+    const cell = weeks
+      .flatMap((week) => week.cells)
+      .find((c) => c.date.getDate() === 12);
 
     expect(cell?.items).toEqual(['episode']);
     expect(

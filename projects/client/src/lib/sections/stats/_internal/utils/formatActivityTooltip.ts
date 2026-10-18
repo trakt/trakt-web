@@ -7,9 +7,12 @@ type FormatActivityTooltipParams = {
   locale: string;
 };
 
-export function formatActivityTooltip(
-  { now, date, count, locale }: FormatActivityTooltipParams,
-): string {
+export function formatActivityTooltip({
+  now,
+  date,
+  count,
+  locale,
+}: FormatActivityTooltipParams): string {
   const label = date.toLocaleDateString(locale, {
     weekday: 'short',
     month: 'short',

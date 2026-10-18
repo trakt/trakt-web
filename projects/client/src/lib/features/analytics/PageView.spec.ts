@@ -30,7 +30,7 @@ describe('PageView', () => {
     renderComponent(PageView, { props: {} });
 
     await waitFor(() =>
-      expect(trackSpy).toHaveBeenCalledWith({ route: '/movies/[slug]' })
+      expect(trackSpy).toHaveBeenCalledWith({ route: '/movies/[slug]' }),
     );
   });
 

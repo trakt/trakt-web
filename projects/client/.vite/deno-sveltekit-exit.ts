@@ -19,8 +19,8 @@ export default function close(): Plugin {
         '.svelte-kit/output/server/manifest.js',
       );
 
-      const isBuildComplete = existsSync(manifestFullPath) &&
-        existsSync(manifestPath);
+      const isBuildComplete =
+        existsSync(manifestFullPath) && existsSync(manifestPath);
 
       if (!isBuildComplete) return;
 

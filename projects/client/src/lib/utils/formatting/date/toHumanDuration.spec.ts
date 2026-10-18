@@ -106,17 +106,18 @@ describe('toHumanDuration', () => {
     const NumberFormat = Intl.NumberFormat;
 
     beforeEach(() => {
-      vi.spyOn(Intl, 'NumberFormat').mockImplementation(
-        function (locale?: string, options?: Intl.NumberFormatOptions) {
-          if (options?.style === 'unit') {
-            throw new RangeError(
-              'Value unit out of range for Intl.NumberFormat options property style',
-            );
-          }
+      vi.spyOn(Intl, 'NumberFormat').mockImplementation(function (
+        locale?: string,
+        options?: Intl.NumberFormatOptions,
+      ) {
+        if (options?.style === 'unit') {
+          throw new RangeError(
+            'Value unit out of range for Intl.NumberFormat options property style',
+          );
+        }
 
-          return new NumberFormat(locale, options);
-        } as unknown as typeof Intl.NumberFormat,
-      );
+        return new NumberFormat(locale, options);
+      } as unknown as typeof Intl.NumberFormat);
     });
 
     afterEach(() => {

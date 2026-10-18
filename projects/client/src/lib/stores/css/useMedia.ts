@@ -12,10 +12,8 @@ import { map, shareReplay, startWith } from 'rxjs/operators';
 
 export const WellKnownMediaQuery = {
   mobile: `(max-width: ${breakpointMobile})`,
-  tabletSmall:
-    `(min-width: ${breakpointTabletSmMin}) and (max-width: ${breakpointTabletSmMax})`,
-  tabletLarge:
-    `(min-width: ${breakpointTabletLgMin}) and (max-width: ${breakpointTabletLgMax})`,
+  tabletSmall: `(min-width: ${breakpointTabletSmMin}) and (max-width: ${breakpointTabletSmMax})`,
+  tabletLarge: `(min-width: ${breakpointTabletLgMin}) and (max-width: ${breakpointTabletLgMax})`,
   desktop: `(min-width: ${breakpointDesktop})`,
   mouse: '(hover: hover) and (pointer: fine)',
   touch: '(hover: none) and (pointer: coarse)',
@@ -47,12 +45,14 @@ class MediaQueryManager {
     if (!cached) {
       const mediaQuery = globalThis.matchMedia(query);
 
-      const observer = fromEvent<MediaQueryListEvent>(mediaQuery, 'change')
-        .pipe(
-          map((event) => event.matches),
-          startWith(mediaQuery.matches),
-          shareReplay(1),
-        );
+      const observer = fromEvent<MediaQueryListEvent>(
+        mediaQuery,
+        'change',
+      ).pipe(
+        map((event) => event.matches),
+        startWith(mediaQuery.matches),
+        shareReplay(1),
+      );
 
       this.queries.set(query, observer);
       return observer;

@@ -1,10 +1,7 @@
 import { useNavigation } from '$lib/features/navigation/useNavigation.ts';
 import { onMount } from 'svelte';
 
-export function dPadTrigger(
-  element: HTMLElement,
-  targetSelector: string,
-) {
+export function dPadTrigger(element: HTMLElement, targetSelector: string) {
   const { navigation } = useNavigation();
 
   const handler = (event: KeyboardEvent) => {

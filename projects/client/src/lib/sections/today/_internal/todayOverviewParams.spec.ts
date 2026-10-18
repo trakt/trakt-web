@@ -15,16 +15,15 @@ describe('util: todayOverviewParams', () => {
   });
 
   it('should ignore unknown values', () => {
-    const params = todayOverviewParams(
-      new URLSearchParams('group=nope'),
-    );
+    const params = todayOverviewParams(new URLSearchParams('group=nope'));
 
     expect(params.grouping).toBe('title');
   });
 
   it('should read the chosen day from the url', () => {
-    expect(todayOverviewParams(new URLSearchParams('day=2026-09-25')).day)
-      .toBe('2026-09-25');
+    expect(todayOverviewParams(new URLSearchParams('day=2026-09-25')).day).toBe(
+      '2026-09-25',
+    );
     expect(todayOverviewParams(new URLSearchParams()).day).toBeNull();
   });
 });

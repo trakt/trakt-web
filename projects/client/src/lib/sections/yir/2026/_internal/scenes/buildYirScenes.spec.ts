@@ -8,8 +8,8 @@ describe('util: buildYirScenes', () => {
   });
 
   it('should order scenes from first play to thanks', () => {
-    const kinds = buildYirScenes(YirDetailMappedMock).map((scene) =>
-      scene.kind
+    const kinds = buildYirScenes(YirDetailMappedMock).map(
+      (scene) => scene.kind,
     );
 
     expect(kinds.at(0)).toBe('play');

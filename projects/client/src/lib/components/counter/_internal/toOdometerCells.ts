@@ -4,16 +4,19 @@ import type { AvailableLanguage } from '$lib/features/i18n/index.ts';
 type OdometerCell =
   // `place` is the power of ten this column renders, so a cell derives its own
   // roll offset from the raw value without being told its digit.
-  | { kind: 'digit'; place: number }
-  | { kind: 'separator'; text: string };
+  { kind: 'digit'; place: number } | { kind: 'separator'; text: string };
 
 /**
  * Split a number into odometer columns. Grouping comes from `formatToParts`, so
  * `1,234,567`, `1.234.567`, and the Indic `12,34,567` all lay out correctly.
  */
-export function toOdometerCells(
-  { value, locale }: { value: number; locale: string },
-): OdometerCell[] {
+export function toOdometerCells({
+  value,
+  locale,
+}: {
+  value: number;
+  locale: string;
+}): OdometerCell[] {
   const parts = new Intl.NumberFormat(
     getIntlLocale(locale as AvailableLanguage),
     { maximumFractionDigits: 0 },
@@ -24,16 +27,16 @@ export function toOdometerCells(
   const chars = parts.flatMap((part) =>
     part.type === 'integer'
       ? [...part.value].map((char) => ({ char, isDigit: true }))
-      : [{ char: part.value, isDigit: false }]
+      : [{ char: part.value, isDigit: false }],
   );
 
   return chars.map(({ char, isDigit }, index) =>
     isDigit
-      // A digit's place is however many digits follow it.
-      ? {
-        kind: 'digit',
-        place: chars.slice(index + 1).filter((entry) => entry.isDigit).length,
-      }
-      : { kind: 'separator', text: char }
+      ? // A digit's place is however many digits follow it.
+        {
+          kind: 'digit',
+          place: chars.slice(index + 1).filter((entry) => entry.isDigit).length,
+        }
+      : { kind: 'separator', text: char },
   );
 }

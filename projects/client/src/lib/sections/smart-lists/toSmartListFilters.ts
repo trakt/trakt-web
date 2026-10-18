@@ -39,7 +39,10 @@ const isBooleanKey = (key: string): key is BooleanKey =>
   (BOOLEAN_KEYS as readonly string[]).includes(key);
 
 const toList = (value: string): string[] =>
-  value.split(',').map((item) => item.trim()).filter(Boolean);
+  value
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
 
 const toRange = (value: string): number[] =>
   value

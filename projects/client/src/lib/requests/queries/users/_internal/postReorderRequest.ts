@@ -5,9 +5,11 @@ type PostReorderParams = {
   rank: number[];
 } & ApiParams;
 
-export function postReorderRequest(
-  { fetch, path, rank }: PostReorderParams,
-): Promise<boolean> {
+export function postReorderRequest({
+  fetch,
+  path,
+  rank,
+}: PostReorderParams): Promise<boolean> {
   return rawApiFetch({
     fetch,
     path,

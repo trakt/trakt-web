@@ -70,16 +70,16 @@ const TEST_I18N_DIR = path.join(
 
 const PARAGLIDE = IS_VITEST
   ? {
-    project: prepareTestI18nProject({
-      i18nDir: path.join(import.meta.dirname, 'i18n'),
-      testDir: TEST_I18N_DIR,
-    }),
-    outdir: path.join(TEST_I18N_DIR, 'paraglide'),
-  }
+      project: prepareTestI18nProject({
+        i18nDir: path.join(import.meta.dirname, 'i18n'),
+        testDir: TEST_I18N_DIR,
+      }),
+      outdir: path.join(TEST_I18N_DIR, 'paraglide'),
+    }
   : {
-    project: './i18n/project.inlang',
-    outdir: './src/lib/paraglide',
-  };
+      project: './i18n/project.inlang',
+      outdir: './src/lib/paraglide',
+    };
 
 // Utility folders whose specs never touch the DOM run without jsdom and its
 // browser-API mocks. Folders that need a DOM (actions, devices, events,
@@ -104,17 +104,17 @@ const NODE_UTILS = [
   'transitions',
   'url',
 ];
-const NODE_SPECS = NODE_UTILS.map((dir) =>
-  `src/lib/utils/${dir}/**/*.{test,spec}.{js,ts}`
+const NODE_SPECS = NODE_UTILS.map(
+  (dir) => `src/lib/utils/${dir}/**/*.{test,spec}.{js,ts}`,
 );
 
 export default defineConfig(({ mode }) => ({
   define: {
-    'TRAKT_CLIENT_ID': `"${process.env.TRAKT_CLIENT_ID}"`,
-    'KLIPY_API_KEY': `"${process.env.KLIPY_API_KEY}"`,
-    'TRAKT_MODE': `"${mode}${process.env.IS_PREVIEW ? '-preview' : ''}"`,
-    'TRAKT_TARGET_ENVIRONMENT': `"${TRAKT_TARGET_ENVIRONMENT}"`,
-    'TRAKT_GIT_SHA': `"${GIT_COMMIT_HASH}"`,
+    TRAKT_CLIENT_ID: `"${process.env.TRAKT_CLIENT_ID}"`,
+    KLIPY_API_KEY: `"${process.env.KLIPY_API_KEY}"`,
+    TRAKT_MODE: `"${mode}${process.env.IS_PREVIEW ? '-preview' : ''}"`,
+    TRAKT_TARGET_ENVIRONMENT: `"${TRAKT_TARGET_ENVIRONMENT}"`,
+    TRAKT_GIT_SHA: `"${GIT_COMMIT_HASH}"`,
   },
 
   server: {
@@ -134,10 +134,11 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     // Sentry source map upload requires SENTRY_AUTH_TOKEN; skipped under
     // IS_DOCTOR so the dep-update loop runs without that secret.
-    !IS_DOCTOR && sentrySvelteKit({
-      org: 'trakt-tv',
-      project: 'trakt-web',
-    }),
+    !IS_DOCTOR &&
+      sentrySvelteKit({
+        org: 'trakt-tv',
+        project: 'trakt-web',
+      }),
     sveltekit(),
     {
       name: 'vite-plugin-unwasm',
@@ -150,10 +151,11 @@ export default defineConfig(({ mode }) => ({
       }),
     },
     paraglideVitePlugin(PARAGLIDE),
-    IS_VITEST && redirectParaglide({
-      from: path.join(import.meta.dirname, 'src/lib/paraglide'),
-      to: PARAGLIDE.outdir,
-    }),
+    IS_VITEST &&
+      redirectParaglide({
+        from: path.join(import.meta.dirname, 'src/lib/paraglide'),
+        to: PARAGLIDE.outdir,
+      }),
     denoSveltekitExit(),
     SvelteKitPWA({
       injectRegister: 'script-defer',
@@ -169,10 +171,7 @@ export default defineConfig(({ mode }) => ({
           'client/pwa/{android,ios,shortcuts}/*.{png,svg}',
           'client/placeholders/*.png',
         ],
-        globIgnores: [
-          'server/**',
-          'client/_app/**',
-        ],
+        globIgnores: ['server/**', 'client/_app/**'],
       },
       devOptions: {
         enabled: true,
@@ -232,7 +231,7 @@ export default defineConfig(({ mode }) => ({
 
   resolve: IS_VITEST
     ? {
-      conditions: ['browser'],
-    }
+        conditions: ['browser'],
+      }
     : undefined,
 }));

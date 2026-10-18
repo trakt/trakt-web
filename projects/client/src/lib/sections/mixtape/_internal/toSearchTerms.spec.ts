@@ -10,8 +10,9 @@ describe('toSearchTerms', () => {
     const { debounced$ } = toSearchTerms(new BehaviorSubject(''), 300);
     const seen: string[] = [];
 
-    const subscription = combineLatest([of('ready'), debounced$])
-      .subscribe(([, term]) => seen.push(term));
+    const subscription = combineLatest([of('ready'), debounced$]).subscribe(
+      ([, term]) => seen.push(term),
+    );
 
     expect(seen).toEqual(['']);
     subscription.unsubscribe();

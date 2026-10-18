@@ -14,9 +14,7 @@ export function useSmartListPreview(list: SmartList) {
     isLoading,
     posters: items.pipe(
       map((entries) =>
-        entries
-          .map((entry) => entry.poster.url.thumb)
-          .slice(0, previewLimit)
+        entries.map((entry) => entry.poster.url.thumb).slice(0, previewLimit),
       ),
     ),
   };

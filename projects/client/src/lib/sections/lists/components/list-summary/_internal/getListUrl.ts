@@ -4,19 +4,23 @@ import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { SortBy } from '$lib/sections/lists/user/models/SortBy.ts';
 import type { SortDirection } from '$lib/sections/lists/user/models/SortDirection.ts';
 
-type ListProps = {
-  type: 'watchlist';
-  intent: WatchListIntent;
-} | {
-  type: 'user-list';
-  list: MediaListSummary;
-} | {
-  type: 'favorites';
-  slug: string;
-} | {
-  type: 'progress';
-  slug: string;
-};
+type ListProps =
+  | {
+      type: 'watchlist';
+      intent: WatchListIntent;
+    }
+  | {
+      type: 'user-list';
+      list: MediaListSummary;
+    }
+  | {
+      type: 'favorites';
+      slug: string;
+    }
+  | {
+      type: 'progress';
+      slug: string;
+    };
 
 type ListUrlProps = {
   sortBy?: SortBy;

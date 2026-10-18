@@ -16,9 +16,7 @@ export type UsageCategory = {
   items: UsageCategoryItem[];
 };
 
-export function mapToUsageCategories(
-  props: UserLimits | Nil,
-): UsageCategory[] {
+export function mapToUsageCategories(props: UserLimits | Nil): UsageCategory[] {
   const limits = props ?? USER_LIMITS_PLACEHOLDER;
 
   return [

@@ -9,12 +9,14 @@ export function toBulkAddItem(item: ListItem): BulkAddItem[] {
 
   const { entry } = item;
 
-  return [{
-    key,
-    type: item.type,
-    id: entry.id,
-    title: entry.title,
-    year: entry.year,
-    posterUrl: entry.poster.url.thumb,
-  }];
+  return [
+    {
+      key,
+      type: item.type,
+      id: entry.id,
+      title: entry.title,
+      year: entry.year,
+      posterUrl: entry.poster.url.thumb,
+    },
+  ];
 }

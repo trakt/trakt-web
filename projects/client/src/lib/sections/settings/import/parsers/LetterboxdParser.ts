@@ -114,8 +114,10 @@ const IGNORED_FOLDERS = ['deleted', 'orphaned'];
 function isExportFile(path: string): boolean {
   const segments = path.split('/');
 
-  return EXPORT_FILES.includes(segments.at(-1) ?? '') &&
-    !IGNORED_FOLDERS.includes(segments.at(-2) ?? '');
+  return (
+    EXPORT_FILES.includes(segments.at(-1) ?? '') &&
+    !IGNORED_FOLDERS.includes(segments.at(-2) ?? '')
+  );
 }
 
 function toDepth(path: string): number {
@@ -134,9 +136,7 @@ function toExportRoot(paths: ReadonlyArray<string>): string {
   );
 }
 
-async function parseLetterboxdZip(
-  file: File,
-): Promise<UniversalImportItem[]> {
+async function parseLetterboxdZip(file: File): Promise<UniversalImportItem[]> {
   const buffer = await file.arrayBuffer();
   const unzipped = unzipSync(new Uint8Array(buffer));
   const decoder = new TextDecoder('utf-8');
@@ -153,9 +153,9 @@ async function parseLetterboxdZip(
   const diaryNames = new Set<string>();
 
   if (csvTexts['diary.csv']) {
-    const rows = await parseCsvText(
+    const rows = (await parseCsvText(
       csvTexts['diary.csv'],
-    ) as LetterboxdDiaryRow[];
+    )) as LetterboxdDiaryRow[];
     const diaryItems = rows
       .map(parseDiaryRow)
       .filter((r): r is UniversalImportItem => r !== null)
@@ -169,9 +169,9 @@ async function parseLetterboxdZip(
   }
 
   if (csvTexts['watched.csv']) {
-    const rows = await parseCsvText(
+    const rows = (await parseCsvText(
       csvTexts['watched.csv'],
-    ) as LetterboxdWatchedRow[];
+    )) as LetterboxdWatchedRow[];
     items.push(
       ...rows
         .map(parseWatchedRow)
@@ -182,9 +182,9 @@ async function parseLetterboxdZip(
   }
 
   if (csvTexts['ratings.csv']) {
-    const rows = await parseCsvText(
+    const rows = (await parseCsvText(
       csvTexts['ratings.csv'],
-    ) as LetterboxdRatingsRow[];
+    )) as LetterboxdRatingsRow[];
     items.push(
       ...rows
         .map(parseRatingsRow)
@@ -194,9 +194,9 @@ async function parseLetterboxdZip(
   }
 
   if (csvTexts['watchlist.csv']) {
-    const rows = await parseCsvText(
+    const rows = (await parseCsvText(
       csvTexts['watchlist.csv'],
-    ) as LetterboxdWatchlistRow[];
+    )) as LetterboxdWatchlistRow[];
     items.push(
       ...rows
         .map(parseWatchlistRow)

@@ -6,15 +6,16 @@ const NumberFormat = Intl.NumberFormat;
 function mockUnitStyle(
   unitFormat: (locale?: string, options?: Intl.NumberFormatOptions) => unknown,
 ) {
-  vi.spyOn(Intl, 'NumberFormat').mockImplementation(
-    function (locale?: string, options?: Intl.NumberFormatOptions) {
-      if (options?.style === 'unit') {
-        return unitFormat(locale, options);
-      }
+  vi.spyOn(Intl, 'NumberFormat').mockImplementation(function (
+    locale?: string,
+    options?: Intl.NumberFormatOptions,
+  ) {
+    if (options?.style === 'unit') {
+      return unitFormat(locale, options);
+    }
 
-      return new NumberFormat(locale, options);
-    } as unknown as typeof Intl.NumberFormat,
-  );
+    return new NumberFormat(locale, options);
+  } as unknown as typeof Intl.NumberFormat);
 }
 
 describe('util: toUnitFormatter', () => {

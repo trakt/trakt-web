@@ -1,19 +1,16 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { SmartListWriteRequest } from '@trakt/api';
 
-type CreateSmartListRequestParams =
-  & {
-    body: SmartListWriteRequest;
-  }
-  & ApiParams;
+type CreateSmartListRequestParams = {
+  body: SmartListWriteRequest;
+} & ApiParams;
 
-export function createSmartListRequest(
-  { body, fetch }: CreateSmartListRequestParams,
-): Promise<string | Nil> {
+export function createSmartListRequest({
+  body,
+  fetch,
+}: CreateSmartListRequestParams): Promise<string | Nil> {
   return api({ fetch })
-    .users
-    .smartLists
-    .create({
+    .users.smartLists.create({
       params: {
         id: 'me',
       },

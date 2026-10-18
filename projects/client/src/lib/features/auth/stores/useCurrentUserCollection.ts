@@ -26,11 +26,13 @@ export function useCurrentUserCollection(): Observable<UserCollection | null> {
   );
 
   return combineLatest([moviesQuery, episodesQuery]).pipe(
-    map(([movies, episodes]) =>
-      [settledData(movies), settledData(episodes)] as const
+    map(
+      ([movies, episodes]) =>
+        [settledData(movies), settledData(episodes)] as const,
     ),
-    distinctUntilChanged(([prevMovies, prevEpisodes], [movies, episodes]) =>
-      prevMovies === movies && prevEpisodes === episodes
+    distinctUntilChanged(
+      ([prevMovies, prevEpisodes], [movies, episodes]) =>
+        prevMovies === movies && prevEpisodes === episodes,
     ),
     map(([movies, episodes]) => {
       if (movies === null || episodes === null) {

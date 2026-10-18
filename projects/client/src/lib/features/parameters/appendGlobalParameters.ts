@@ -67,41 +67,48 @@ export function appendGlobalParameters(
 
     const isSamePath = target.pathname === $url.pathname;
 
-    const localParams = isSamePath && Boolean($override)
-      ? Array.from($url.searchParams.entries())
-        .filter(([key]) => LOCAL_PARAMS.includes(key))
-      : [];
+    const localParams =
+      isSamePath && Boolean($override)
+        ? Array.from($url.searchParams.entries()).filter(([key]) =>
+            LOCAL_PARAMS.includes(key),
+          )
+        : [];
 
     // Same-path navigation (type/sort toggles, etc.) must reflect the user's
     // live filter edits. Only outbound (different-path) links fall back to the
     // frozen local snapshot, so navigating away restores the global filters.
-    const effectiveSearch = isSamePath ? $search : buildEffectiveSearch({
-      search: $search,
-      filterScope: $filterScope,
-      overrideKey: $override,
-    });
+    const effectiveSearch = isSamePath
+      ? $search
+      : buildEffectiveSearch({
+          search: $search,
+          filterScope: $filterScope,
+          overrideKey: $override,
+        });
 
     const params = Object.fromEntries([
       ...localParams,
-      ...Array.from(target.searchParams.entries())
-        .filter(([key]) =>
-          key === $override || !WHITE_LISTED_PARAMS.includes(key)
-        ),
+      ...Array.from(target.searchParams.entries()).filter(
+        ([key]) => key === $override || !WHITE_LISTED_PARAMS.includes(key),
+      ),
       ...effectiveSearch.entries(),
     ]);
 
-    const nextHref = `${target.pathname}${
-      buildParamString(params)
-    }${target.hash}`;
+    const nextHref = `${target.pathname}${buildParamString(
+      params,
+    )}${target.hash}`;
 
     if (anchor.getAttribute('href') === nextHref) return;
 
     anchor.href = nextHref;
   };
 
-  const subscription = combineLatest(
-    [search, override, isEscaped, filterScopeStore, url],
-  ).subscribe({
+  const subscription = combineLatest([
+    search,
+    override,
+    isEscaped,
+    filterScopeStore,
+    url,
+  ]).subscribe({
     next: (values: ParameterSnapshot) => {
       latestValues = values;
       applyParams();

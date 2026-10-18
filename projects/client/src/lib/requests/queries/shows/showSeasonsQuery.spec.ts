@@ -9,9 +9,7 @@ describe('showSeasonsQuery', () => {
   it('should query seasons for Silo (2023)', async () => {
     const result = await runQuery({
       factory: () =>
-        createTestBedQuery(
-          showSeasonsQuery({ slug: ShowSiloMappedMock.slug }),
-        ),
+        createTestBedQuery(showSeasonsQuery({ slug: ShowSiloMappedMock.slug })),
       mapper: (response) => response?.data,
     });
 

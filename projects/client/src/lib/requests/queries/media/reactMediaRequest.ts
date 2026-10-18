@@ -10,9 +10,12 @@ type ReactMediaParams = {
   reaction: MediaReaction;
 } & ApiParams;
 
-export async function reactMediaRequest(
-  { fetch, type, slug, reaction }: ReactMediaParams,
-): Promise<boolean> {
+export async function reactMediaRequest({
+  fetch,
+  type,
+  slug,
+  reaction,
+}: ReactMediaParams): Promise<boolean> {
   const response = await rawApiFetch({
     fetch,
     path: `${toMediaReactionsPath(type, slug)}/${reaction}`,

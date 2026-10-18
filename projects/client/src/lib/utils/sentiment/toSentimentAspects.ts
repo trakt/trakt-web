@@ -13,9 +13,11 @@ type SentimentAspects = {
   cons: ReadonlyArray<string>;
 };
 
-export function toSentimentAspects(
-  { pros, cons, limit }: ToSentimentAspectsParams,
-): SentimentAspects {
+export function toSentimentAspects({
+  pros,
+  cons,
+  limit,
+}: ToSentimentAspectsParams): SentimentAspects {
   const verdict = toSentimentVerdict({ pros, cons });
 
   if (verdict === 'positive') {

@@ -10,9 +10,10 @@ type StretchedPercentageProps = {
  * Applies a sigmoid like transformation to emphasize small values
  * and de-emphasize large values.
  */
-export function stretchedPercentage(
-  { value, total }: StretchedPercentageProps,
-): number {
+export function stretchedPercentage({
+  value,
+  total,
+}: StretchedPercentageProps): number {
   const progress = value / total;
   if (progress === 0 || progress === 1) {
     return progress * 100;

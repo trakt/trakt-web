@@ -11,9 +11,7 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { SmartListTemplateResponse } from '@trakt/api';
 
 const smartListTemplatesRequest = ({ fetch }: ApiParams) =>
-  api({ fetch })
-    .smart_lists
-    .templates({ query: { extended: 'images' } });
+  api({ fetch }).smart_lists.templates({ query: { extended: 'images' } });
 
 function mapToSmartListTemplate(
   template: SmartListTemplateResponse,

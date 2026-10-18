@@ -33,10 +33,7 @@ describe('filterImportItemsByActionSelection', () => {
       },
     });
 
-    expect(result.map((item) => item.action)).toEqual([
-      'watchlist',
-      'ratings',
-    ]);
+    expect(result.map((item) => item.action)).toEqual(['watchlist', 'ratings']);
   });
 
   it('should return an empty array when every import action is skipped', () => {

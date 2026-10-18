@@ -3,9 +3,11 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 import { userWatchingQuery } from '$lib/requests/queries/users/userWatchingQuery.ts';
 
 export function useCurrentUserNowWatching() {
-  const response = useQuery(userWatchingQuery({
-    slug: 'me',
-  }));
+  const response = useQuery(
+    userWatchingQuery({
+      slug: 'me',
+    }),
+  );
 
   return {
     nowWatching: response.pipe(map(($response) => $response.data ?? null)),

@@ -8,10 +8,7 @@ import { showTrendingQuery } from './showTrendingQuery.ts';
 describe('showTrendingQuery', () => {
   it('should query for trending shows', async () => {
     const result = await runQuery({
-      factory: () =>
-        createTestBedInfiniteQuery(
-          showTrendingQuery(),
-        ),
+      factory: () => createTestBedInfiniteQuery(showTrendingQuery()),
       mapper: mapToEntries,
     });
 

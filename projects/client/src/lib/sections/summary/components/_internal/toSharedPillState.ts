@@ -6,9 +6,10 @@ type SharedPillStateParams = {
   recommendedBy: RecommendedBy | null;
 };
 
-export function toSharedPillState(
-  { activityCount, recommendedBy }: SharedPillStateParams,
-) {
+export function toSharedPillState({
+  activityCount,
+  recommendedBy,
+}: SharedPillStateParams) {
   const isShared = hasSharers(recommendedBy);
 
   return {

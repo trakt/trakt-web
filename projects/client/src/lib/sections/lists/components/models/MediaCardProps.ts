@@ -6,32 +6,32 @@ import type { BaseItemProps } from './BaseItemProps.ts';
 import type { CardUrlOverride } from './CardUrlOverride.ts';
 
 export type MediaItemVariant<T> =
-  | { variant?: Nil } & MediaInput<T>
-  | {
-    variant: 'activity';
-    date: Date;
-    activityType: ActivityType;
-    subtitle?: string;
-  } & MediaInput<T>
-  | { variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>
-  | { variant: 'start' } & MediaInput<T>
-  | { variant: 'progress' } & MediaInput<T>
-  | { variant: 'credit'; role: string } & MediaInput<T>;
+  | ({ variant?: Nil } & MediaInput<T>)
+  | ({
+      variant: 'activity';
+      date: Date;
+      activityType: ActivityType;
+      subtitle?: string;
+    } & MediaInput<T>)
+  | ({ variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>)
+  | ({ variant: 'start' } & MediaInput<T>)
+  | ({ variant: 'progress' } & MediaInput<T>)
+  | ({ variant: 'credit'; role: string } & MediaInput<T>);
 
-type BaseMediaProps<T> = BaseItemProps & MediaItemVariant<T> & {
-  coverTag?: Snippet;
-  mode?: 'standalone' | 'mixed';
-  onclick?: (item: T) => void;
-  urlOverride?: CardUrlOverride;
-};
+type BaseMediaProps<T> = BaseItemProps &
+  MediaItemVariant<T> & {
+    coverTag?: Snippet;
+    mode?: 'standalone' | 'mixed';
+    onclick?: (item: T) => void;
+    urlOverride?: CardUrlOverride;
+  };
 
-export type MediaCardProps<T = MediaInputDefault> =
-  & BaseMediaProps<T>
-  & (
+export type MediaCardProps<T = MediaInputDefault> = BaseMediaProps<T> &
+  (
     | { type: MediaType }
     | {
-      variant: 'start';
-      type: 'show';
-      episode: { season: number; number: number };
-    }
+        variant: 'start';
+        type: 'show';
+        episode: { season: number; number: number };
+      }
   );

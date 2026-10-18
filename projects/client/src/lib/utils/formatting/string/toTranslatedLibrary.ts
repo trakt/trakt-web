@@ -6,7 +6,7 @@ const LIBRARY_MAP = {
 } as const;
 
 export function toTranslatedLibrary(
-  library: string | (keyof typeof LIBRARY_MAP),
+  library: string | keyof typeof LIBRARY_MAP,
   data?: Record<string, unknown>,
 ): string {
   const translationFn = LIBRARY_MAP[library as keyof typeof LIBRARY_MAP];

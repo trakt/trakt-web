@@ -9,15 +9,13 @@ describe('toServerSyncStatus', () => {
 
     expect(
       toServerSyncStatus({ ...healthy, status: 'active', lastSyncedAt: at }),
-    )
-      .to.deep.equal({ kind: 'synced', at });
+    ).to.deep.equal({ kind: 'synced', at });
   });
 
   it('reports a server that has not synced yet', () => {
     expect(
       toServerSyncStatus({ ...healthy, status: 'active', lastSyncedAt: null }),
-    )
-      .to.deep.equal({ kind: 'never' });
+    ).to.deep.equal({ kind: 'never' });
   });
 
   it('surfaces the states that need the user', () => {
@@ -29,21 +27,18 @@ describe('toServerSyncStatus', () => {
         status: 'unreachable',
         lastSyncedAt: at,
       }).kind,
-    )
-      .to.equal('unreachable');
+    ).to.equal('unreachable');
     expect(
       toServerSyncStatus({
         ...healthy,
         status: 'unauthorized',
         lastSyncedAt: at,
       }).kind,
-    )
-      .to.equal('unauthorized');
+    ).to.equal('unauthorized');
     expect(
       toServerSyncStatus({ ...healthy, status: 'paused', lastSyncedAt: at })
         .kind,
-    )
-      .to.equal('paused');
+    ).to.equal('paused');
   });
 
   it('should show an active server as unreachable once it keeps failing to reach it', () => {
@@ -80,7 +75,6 @@ describe('toServerSyncStatus', () => {
         status: 'webhook_only',
         lastSyncedAt: null,
       }),
-    )
-      .to.deep.equal({ kind: 'webhook-only' });
+    ).to.deep.equal({ kind: 'webhook-only' });
   });
 });

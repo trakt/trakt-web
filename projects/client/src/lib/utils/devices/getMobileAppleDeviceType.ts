@@ -19,8 +19,8 @@ export function getMobileAppleDeviceType(): AppleMobileDevice {
   }
 
   // By default since iOS 13, the platform is returned as 'MacIntel'
-  const isDesktopClassIpad = navigator.platform === 'MacIntel' &&
-    navigator.maxTouchPoints > 1;
+  const isDesktopClassIpad =
+    navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
 
   // Respected only by Chromium broswers (Chrome, Edge)
   const isIpad = navigator.platform === 'iPad';

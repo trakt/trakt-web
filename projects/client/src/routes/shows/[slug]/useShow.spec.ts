@@ -26,9 +26,9 @@ describe('store: useShow', () => {
       });
 
       expect(result).to.include({
-        'overview': ShowSiloMappedMock.overview,
-        'tagline': ShowSiloMappedMock.tagline,
-        'title': ShowSiloMappedMock.title,
+        overview: ShowSiloMappedMock.overview,
+        tagline: ShowSiloMappedMock.tagline,
+        title: ShowSiloMappedMock.title,
       });
     });
 
@@ -41,8 +41,7 @@ describe('store: useShow', () => {
       });
 
       const { language: _language, ...expected } =
-        ShowSiloTranslationsMappedMock
-          .get('ja')!;
+        ShowSiloTranslationsMappedMock.get('ja')!;
       expect(result).to.deep.equal(expected);
     });
 

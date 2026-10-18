@@ -6,9 +6,10 @@ type ActiveCreditsTypeProps = {
   creditsType: CreditsType;
 };
 
-export function toActiveCreditsType(
-  { groups, creditsType }: ActiveCreditsTypeProps,
-): CreditsType {
+export function toActiveCreditsType({
+  groups,
+  creditsType,
+}: ActiveCreditsTypeProps): CreditsType {
   if (groups.some((group) => group.type === creditsType)) return creditsType;
 
   return groups.at(0)?.type ?? 'main';

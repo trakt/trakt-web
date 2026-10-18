@@ -13,16 +13,11 @@ const DataSyncsSummarySchema = z.object({
 
 type DataSyncsSummaryParams = ApiParams;
 
-const dataSyncsSummaryRequest = (
-  { fetch }: DataSyncsSummaryParams,
-) =>
-  api({ fetch })
-    .users
-    .syncs
-    .listByType({
-      params: { type: 'younify' },
-      query: { page: 1, limit: 1 },
-    });
+const dataSyncsSummaryRequest = ({ fetch }: DataSyncsSummaryParams) =>
+  api({ fetch }).users.syncs.listByType({
+    params: { type: 'younify' },
+    query: { page: 1, limit: 1 },
+  });
 
 export const dataSyncsSummaryQuery = defineQuery({
   key: 'dataSyncsSummary',
@@ -33,8 +28,7 @@ export const dataSyncsSummaryQuery = defineQuery({
     const latest = response.body.at(0);
     return {
       count: Number(
-        response.headers.get('x-pagination-item-count') ??
-          response.body.length,
+        response.headers.get('x-pagination-item-count') ?? response.body.length,
       ),
       latest: latest ? mapToDataSync(latest) : null,
     };

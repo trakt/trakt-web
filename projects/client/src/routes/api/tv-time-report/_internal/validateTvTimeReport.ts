@@ -16,9 +16,7 @@ type ValidationFailure =
   | 'file-too-large'
   | 'total-too-large';
 
-type ValidationResult =
-  | { ok: true }
-  | { ok: false; reason: ValidationFailure };
+type ValidationResult = { ok: true } | { ok: false; reason: ValidationFailure };
 
 type TvTimeReportInput = {
   message: string;
@@ -27,12 +25,13 @@ type TvTimeReportInput = {
 
 const hasAllowedExtension = (name: string): boolean =>
   LIMITS.allowedExtensions.some((extension) =>
-    name.toLowerCase().endsWith(extension)
+    name.toLowerCase().endsWith(extension),
   );
 
-export function validateTvTimeReport(
-  { message, files }: TvTimeReportInput,
-): ValidationResult {
+export function validateTvTimeReport({
+  message,
+  files,
+}: TvTimeReportInput): ValidationResult {
   if (message.trim().length === 0) {
     return { ok: false, reason: 'message-required' };
   }
@@ -45,8 +44,8 @@ export function validateTvTimeReport(
     return { ok: false, reason: 'too-many-files' };
   }
 
-  const hasInvalidExtension = files.some((file) =>
-    !hasAllowedExtension(file.name)
+  const hasInvalidExtension = files.some(
+    (file) => !hasAllowedExtension(file.name),
   );
   if (hasInvalidExtension) return { ok: false, reason: 'invalid-extension' };
 

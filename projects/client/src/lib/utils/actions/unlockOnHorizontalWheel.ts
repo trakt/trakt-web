@@ -10,10 +10,7 @@ const GESTURE_END_DELAY_MS = 150;
  * unlocking gesture itself would be lost on an `overflow: hidden` node. It is
  * scrolled manually until the gesture ends; later gestures scroll natively.
  */
-export function unlockOnHorizontalWheel(
-  node: HTMLElement,
-  isUnlocked = false,
-) {
+export function unlockOnHorizontalWheel(node: HTMLElement, isUnlocked = false) {
   const state = {
     unlocked: isUnlocked,
     timeout: undefined as ReturnType<typeof setTimeout> | undefined,

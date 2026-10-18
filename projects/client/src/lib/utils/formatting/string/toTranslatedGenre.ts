@@ -43,7 +43,7 @@ const GENRE_MAP = {
 } as const;
 
 export function toTranslatedGenre(
-  genre: string | (keyof typeof GENRE_MAP),
+  genre: string | keyof typeof GENRE_MAP,
   data?: Record<string, unknown>,
 ): string {
   const translationFn =

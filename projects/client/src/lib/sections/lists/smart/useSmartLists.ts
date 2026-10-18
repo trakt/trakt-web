@@ -21,10 +21,10 @@ export function useSmartLists({ mode, limit }: UseSmartListsProps) {
     map((lists) =>
       lists
         .filter((entry) =>
-          matchesDiscoverMode({ mediaType: entry.mediaType, mode })
+          matchesDiscoverMode({ mediaType: entry.mediaType, mode }),
         )
         .toSorted((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
-        .slice(0, effectiveLimit)
+        .slice(0, effectiveLimit),
     ),
   );
 

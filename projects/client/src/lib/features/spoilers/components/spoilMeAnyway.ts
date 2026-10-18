@@ -9,7 +9,8 @@ export function spoilMeAnyway(node: HTMLElement, isDismissible = true) {
     }
 
     const { target } = e;
-    const isHidden = node.classList.contains(SPOILER_CLASS_NAME) ||
+    const isHidden =
+      node.classList.contains(SPOILER_CLASS_NAME) ||
       target.classList.contains(SPOILER_CLASS_NAME);
 
     if (!isHidden) {

@@ -9,9 +9,10 @@ type MapHistoryToSlotsParams = {
   list: HistoryEntry[];
 };
 
-export function buildHistorySlots(
-  { now, list }: MapHistoryToSlotsParams,
-): SlottedEntry[] {
+export function buildHistorySlots({
+  now,
+  list,
+}: MapHistoryToSlotsParams): SlottedEntry[] {
   // FIXME: find the root cause of duplicates
   const seen = new Set<string>();
   const uniqueList = list.filter((entry) => {

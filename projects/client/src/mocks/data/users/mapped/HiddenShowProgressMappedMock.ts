@@ -3,11 +3,11 @@ import { ShowSiloMinimalMappedMock } from '$mocks/data/summary/shows/silo/mapped
 
 export const HiddenShowProgressMappedMock: HiddenShow[] = [
   {
-    'hiddenAt': new Date('2025-02-26T12:55:10.000Z'),
-    'show': {
+    hiddenAt: new Date('2025-02-26T12:55:10.000Z'),
+    show: {
       ...ShowSiloMinimalMappedMock,
-      'colors': undefined,
-      'updatedAt': undefined,
+      colors: undefined,
+      updatedAt: undefined,
     },
   },
 ];

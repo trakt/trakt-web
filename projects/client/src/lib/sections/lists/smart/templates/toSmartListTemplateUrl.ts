@@ -9,9 +9,10 @@ type SmartListTemplateUrlProps = {
   name: string;
 };
 
-export function toSmartListTemplateUrl(
-  { template, name }: SmartListTemplateUrlProps,
-): string {
+export function toSmartListTemplateUrl({
+  template,
+  name,
+}: SmartListTemplateUrlProps): string {
   return UrlBuilder.lists.smart.create({
     ...toSmartListFilterParams(closeOpenSmartListRanges(template.filters)),
     name,

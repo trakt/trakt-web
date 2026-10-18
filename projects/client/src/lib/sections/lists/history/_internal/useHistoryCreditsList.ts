@@ -44,9 +44,11 @@ const getWatchedAt = (media: MediaEntry, history: UserHistory) => {
   return historyEntry.watchedAt;
 };
 
-export function useHistoryCreditsList(
-  { slug$, filter$, mode$ }: UseHistoryCreditsListProps,
-) {
+export function useHistoryCreditsList({
+  slug$,
+  filter$,
+  mode$,
+}: UseHistoryCreditsListProps) {
   const { history } = useUser();
 
   const movieQuery = useQuery(
@@ -76,9 +78,10 @@ export function useHistoryCreditsList(
 
       const credits = Array.from(mediaCredits.values())
         .flatMap((entries) => entries)
-        .filter((credit) =>
-          isInHistory(credit.media, historyResult) &&
-          (mode === 'media' || credit.media.type === mode)
+        .filter(
+          (credit) =>
+            isInHistory(credit.media, historyResult) &&
+            (mode === 'media' || credit.media.type === mode),
         );
 
       const castCredits = credits.filter((credit) => credit.type === 'cast');

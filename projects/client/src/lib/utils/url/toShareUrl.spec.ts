@@ -29,10 +29,12 @@ describe('toShareUrl', () => {
   });
 
   it('will append the share code to a relative url', () => {
-    expect(toShareUrl({ url: '/users/sean', shareCode: 'Xk3mPq2Bf9aQ' }))
-      .toBe('/users/sean?share=Xk3mPq2Bf9aQ');
-    expect(toShareUrl({ url: '/users/sean?tab=lists', shareCode: null }))
-      .toBe('/users/sean?tab=lists&share=true');
+    expect(toShareUrl({ url: '/users/sean', shareCode: 'Xk3mPq2Bf9aQ' })).toBe(
+      '/users/sean?share=Xk3mPq2Bf9aQ',
+    );
+    expect(toShareUrl({ url: '/users/sean?tab=lists', shareCode: null })).toBe(
+      '/users/sean?tab=lists&share=true',
+    );
   });
 
   it('will leave an empty url empty', () => {

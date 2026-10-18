@@ -10,26 +10,33 @@ import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts'
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
-const rawUserSchema = z.object({
-  ids: z.object({
-    slug: z.string().nullish(),
-    trakt: z.number(),
-  }).passthrough(),
-  images: z.object({
-    avatar: z.object({ full: z.string().nullish() }).passthrough(),
-  }).passthrough().nullish(),
-  username: z.string(),
-  name: z.string().nullish(),
-  private: z.boolean(),
-  deleted: z.boolean(),
-  joined_at: z.string().nullish(),
-  location: z.string().nullish(),
-  about: z.string().nullish(),
-  vip: z.boolean().nullish(),
-  vip_ep: z.boolean().nullish(),
-  vip_cover_image: z.string().nullish(),
-  director: z.boolean().nullish(),
-}).passthrough();
+const rawUserSchema = z
+  .object({
+    ids: z
+      .object({
+        slug: z.string().nullish(),
+        trakt: z.number(),
+      })
+      .passthrough(),
+    images: z
+      .object({
+        avatar: z.object({ full: z.string().nullish() }).passthrough(),
+      })
+      .passthrough()
+      .nullish(),
+    username: z.string(),
+    name: z.string().nullish(),
+    private: z.boolean(),
+    deleted: z.boolean(),
+    joined_at: z.string().nullish(),
+    location: z.string().nullish(),
+    about: z.string().nullish(),
+    vip: z.boolean().nullish(),
+    vip_ep: z.boolean().nullish(),
+    vip_cover_image: z.string().nullish(),
+    director: z.boolean().nullish(),
+  })
+  .passthrough();
 
 const leaderboardEntryResponseSchema = z.object({
   rank: z.number().nullable(),
@@ -56,9 +63,12 @@ function toPageMeta(headers: Headers, page: number, limit: number): PageMeta {
 
 // The leaderboard is viewer-only: a non-self or unauthenticated request `404`s.
 // Treat that as an empty page rather than a fetch error.
-const userLeaderboardRequest = async (
-  { fetch, slug, page = 1, limit = 10 }: UserLeaderboardParams,
-) => {
+const userLeaderboardRequest = async ({
+  fetch,
+  slug,
+  page = 1,
+  limit = 10,
+}: UserLeaderboardParams) => {
   const response = await rawApiFetch({
     fetch,
     path: `/users/${slug}/leaderboard?page=${page}&limit=${limit}`,

@@ -7,8 +7,8 @@ const guestStars = ShowSiloPeopleMappedMock.cast.filter(
 
 export const ShowSiloSplitPeopleMappedMock: MediaCrew = {
   ...ShowSiloPeopleMappedMock,
-  cast: ShowSiloPeopleMappedMock.cast.filter((member) =>
-    !guestStars.some((guest) => guest.key === member.key)
+  cast: ShowSiloPeopleMappedMock.cast.filter(
+    (member) => !guestStars.some((guest) => guest.key === member.key),
   ),
   guestStars,
 };

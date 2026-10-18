@@ -28,7 +28,9 @@
   --segmented-select-minimal-segment-height: var(--ni-28);
   --segmented-select-extension-inset: var(--gap-xs);
   --segmented-select-extension-height: calc(
-    var(--segmented-select-segment-height) + 2 *
-      var(--segmented-select-extension-inset) + var(--border-thickness-xxs)
+    var(--segmented-select-segment-height) +
+    2 *
+    var(--segmented-select-extension-inset) +
+    var(--border-thickness-xxs)
   );
 }

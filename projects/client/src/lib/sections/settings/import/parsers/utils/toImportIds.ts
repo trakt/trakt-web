@@ -10,9 +10,10 @@ type RawImportIds = {
 };
 
 function toNumericId(value: RawId): number | undefined {
-  const parsed = typeof value === 'number'
-    ? value
-    : Number.parseInt(String(value ?? '').trim(), 10);
+  const parsed =
+    typeof value === 'number'
+      ? value
+      : Number.parseInt(String(value ?? '').trim(), 10);
 
   if (!Number.isInteger(parsed) || parsed <= 0) return undefined;
   return parsed;

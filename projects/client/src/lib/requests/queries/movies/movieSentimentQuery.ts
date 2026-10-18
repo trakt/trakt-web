@@ -13,27 +13,27 @@ type MovieSentimentParams = {
   enabled: boolean;
 } & ApiParams;
 
-const movieSentimentRequest = async (
-  { fetch, slug, locale }: MovieSentimentParams,
-) => {
-  const response = await rawApiFetch(
-    {
-      fetch,
-      path: toMediaInfoPath({
-        type: 'movie',
-        slug,
-        infoType: 0,
-        infoVersion: 2,
-        locale,
-      }),
-    },
-  );
+const movieSentimentRequest = async ({
+  fetch,
+  slug,
+  locale,
+}: MovieSentimentParams) => {
+  const response = await rawApiFetch({
+    fetch,
+    path: toMediaInfoPath({
+      type: 'movie',
+      slug,
+      infoType: 0,
+      infoVersion: 2,
+      locale,
+    }),
+  });
 
   return response.ok
     ? {
-      body: await response.json() as SentimentResponse,
-      status: 200,
-    }
+        body: (await response.json()) as SentimentResponse,
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 

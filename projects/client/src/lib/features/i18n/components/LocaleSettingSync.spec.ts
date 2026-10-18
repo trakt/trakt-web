@@ -75,7 +75,7 @@ describe('LocaleSettingSync', () => {
       expect(applyLocalePreference).toHaveBeenCalledWith({
         value: 'fr-FR',
         setLocale: localeStore.set,
-      })
+      }),
     );
   });
 
@@ -108,7 +108,7 @@ describe('LocaleSettingSync', () => {
       renderComponent(LocaleSettingSync, { props: {} });
 
       await waitFor(() =>
-        expect(setLocaleSetting).toHaveBeenCalledWith('fr-FR')
+        expect(setLocaleSetting).toHaveBeenCalledWith('fr-FR'),
       );
     });
 

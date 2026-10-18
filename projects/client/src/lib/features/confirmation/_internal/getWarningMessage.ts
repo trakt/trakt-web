@@ -51,8 +51,10 @@ export function getWarningMessage(
   target: MarkAsWatchedStoreProps,
 ): string | null {
   const isShow = target.type === 'show';
-  const episodeCount = target.type === 'episode' &&
-    Array.isArray(target.media) && target.media.length;
+  const episodeCount =
+    target.type === 'episode' &&
+    Array.isArray(target.media) &&
+    target.media.length;
   const isMultipleEpisodes = episodeCount && episodeCount > 1;
 
   const isDangerousAction = isShow || isMultipleEpisodes;
@@ -63,7 +65,7 @@ export function getWarningMessage(
 
   return target.type === 'episode'
     ? m.warning_prompt_mark_as_watched_multiple_episodes({
-      count: episodeCount,
-    })
+        count: episodeCount,
+      })
     : getShowWarningMessage(title, target);
 }

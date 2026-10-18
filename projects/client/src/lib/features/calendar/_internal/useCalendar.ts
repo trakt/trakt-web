@@ -47,25 +47,18 @@ function typeToQueries({ start, days, type, filter }: UseCalendarParams) {
 
   switch (type) {
     case 'movie':
-      return [
-        upcomingMoviesQuery(params) as CreateQueryOptions<CalendarItems>,
-      ];
+      return [upcomingMoviesQuery(params) as CreateQueryOptions<CalendarItems>];
     case 'show':
       return [
         upcomingEpisodesQuery(params) as CreateQueryOptions<CalendarItems>,
       ];
     case 'media':
-      return [
-        upcomingMediaQuery(params) as CreateQueryOptions<CalendarItems>,
-      ];
+      return [upcomingMediaQuery(params) as CreateQueryOptions<CalendarItems>];
   }
 }
 
-export function useCalendar(
-  props: UseCalendarParams,
-): CalendarResult {
-  const queries = typeToQueries(props)
-    .map((query) => useQuery(query));
+export function useCalendar(props: UseCalendarParams): CalendarResult {
+  const queries = typeToQueries(props).map((query) => useQuery(query));
 
   const baseLoading = combineLatest(queries).pipe(
     map(($queries) => $queries.some(toLoadingState)),
@@ -77,10 +70,13 @@ export function useCalendar(
 
   const sorted = combineLatest(queries).pipe(
     map(($queries) => {
-      return $queries.flatMap((query) => query.data ?? []).toSorted((a, b) => {
-        return a.effectiveReleaseDate.getTime() -
-          b.effectiveReleaseDate.getTime();
-      });
+      return $queries
+        .flatMap((query) => query.data ?? [])
+        .toSorted((a, b) => {
+          return (
+            a.effectiveReleaseDate.getTime() - b.effectiveReleaseDate.getTime()
+          );
+        });
     }),
   );
 
@@ -98,7 +94,7 @@ export function useCalendar(
           items: $allItems,
           start: props.start,
           days: props.days,
-        })
+        }),
       ),
     ),
   };

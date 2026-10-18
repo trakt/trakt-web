@@ -95,11 +95,9 @@ export class R2Client {
       Object.entries(headers).map(([k, v]) => [k.toLowerCase(), v.trim()]),
     );
     const sortedHeaderNames = Object.keys(normalizedHeaders).sort();
-    const canonicalHeaders = `${
-      sortedHeaderNames
-        .map((h) => `${h}:${normalizedHeaders[h]}`)
-        .join('\n')
-    }\n`;
+    const canonicalHeaders = `${sortedHeaderNames
+      .map((h) => `${h}:${normalizedHeaders[h]}`)
+      .join('\n')}\n`;
     const signedHeaders = sortedHeaderNames.join(';');
 
     const canonicalRequest = [
@@ -158,10 +156,7 @@ export class R2Client {
     return Object.fromEntries(
       [...res.headers.entries()]
         .filter(([name]) => name.startsWith(META_HEADER_PREFIX))
-        .map(([name, value]) => [
-          name.slice(META_HEADER_PREFIX.length),
-          value,
-        ]),
+        .map(([name, value]) => [name.slice(META_HEADER_PREFIX.length), value]),
     );
   }
 
@@ -196,9 +191,13 @@ export class R2Client {
     return res.text();
   }
 
-  async listPage(
-    { prefix, cursor }: { prefix?: string; cursor?: string },
-  ): Promise<{ keys: string[]; cursor?: string }> {
+  async listPage({
+    prefix,
+    cursor,
+  }: {
+    prefix?: string;
+    cursor?: string;
+  }): Promise<{ keys: string[]; cursor?: string }> {
     const params = new URLSearchParams({ 'list-type': '2' });
     if (prefix) params.set('prefix', prefix);
     if (cursor) params.set('continuation-token', cursor);
@@ -211,10 +210,10 @@ export class R2Client {
 
     const pathSuffix = `/${this.config.bucket}`;
     const headers = await this.sign('GET', pathSuffix, query, null);
-    const res = await fetch(
-      `${this.endpoint}${pathSuffix}?${query}`,
-      { method: 'GET', headers },
-    );
+    const res = await fetch(`${this.endpoint}${pathSuffix}?${query}`, {
+      method: 'GET',
+      headers,
+    });
     if (!res.ok) {
       throw new Error(
         `LIST ${prefix ?? 'root'} → ${res.status} ${await res.text()}`,
@@ -223,7 +222,7 @@ export class R2Client {
 
     const xml = await res.text();
     const keys = [...xml.matchAll(/<Key>([^<]+)<\/Key>/g)].map((m) =>
-      xmlUnescape(m[1] ?? '')
+      xmlUnescape(m[1] ?? ''),
     );
     const isTruncated = /<IsTruncated>true<\/IsTruncated>/.test(xml);
     const token = xml.match(
@@ -257,15 +256,10 @@ export class R2Client {
       const batch = keys.slice(i, i + 1000);
       const xmlBody = `<?xml version="1.0" encoding="UTF-8"?>
 <Delete>
-${
-        batch.map((k) => `  <Object><Key>${xmlEscape(k)}</Key></Object>`).join(
-          '\n',
-        )
-      }
+${batch.map((k) => `  <Object><Key>${xmlEscape(k)}</Key></Object>`).join('\n')}
 </Delete>`;
       const body = new TextEncoder().encode(xmlBody);
-      const md5 = await crypto.subtle.digest('MD5', body)
-        .catch(() => null);
+      const md5 = await crypto.subtle.digest('MD5', body).catch(() => null);
       const headers: Record<string, string> = {
         'content-type': 'application/xml',
       };
@@ -288,9 +282,7 @@ ${
         body,
       });
       if (!res.ok) {
-        throw new Error(
-          `DELETE batch → ${res.status} ${await res.text()}`,
-        );
+        throw new Error(`DELETE batch → ${res.status} ${await res.text()}`);
       }
     }
   }

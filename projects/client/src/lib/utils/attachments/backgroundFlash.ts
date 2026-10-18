@@ -5,8 +5,9 @@ export type BackgroundFlash = { color: 'purple' | 'red' };
 const FLASH_ANIMATION = 'background-flash';
 
 function isFlashAnimation(animation: Animation) {
-  return 'animationName' in animation &&
-    animation.animationName === FLASH_ANIMATION;
+  return (
+    'animationName' in animation && animation.animationName === FLASH_ANIMATION
+  );
 }
 
 export function backgroundFlash(
@@ -29,7 +30,8 @@ export function backgroundFlash(
     node.addEventListener('animationend', clear);
     node.dataset.backgroundFlash = flash.color;
 
-    node.getAnimations?.({ subtree: true })
+    node
+      .getAnimations?.({ subtree: true })
       .filter(isFlashAnimation)
       .forEach((animation) => {
         animation.currentTime = 0;

@@ -9,11 +9,12 @@ const base = {
 
 describe('util: toCalendarFeedUrl', () => {
   it('should point the shows calendar at the shows feed with the token', () => {
-    expect(toCalendarFeedUrl({ ...base, mode: 'show', episodeType: 'all' }))
-      .toEqual({
-        https: 'https://trakt.tv/calendars/my/shows.ics?slurm=abc123',
-        webcal: 'webcal://trakt.tv/calendars/my/shows.ics?slurm=abc123',
-      });
+    expect(
+      toCalendarFeedUrl({ ...base, mode: 'show', episodeType: 'all' }),
+    ).toEqual({
+      https: 'https://trakt.tv/calendars/my/shows.ics?slurm=abc123',
+      webcal: 'webcal://trakt.tv/calendars/my/shows.ics?slurm=abc123',
+    });
   });
 
   it('should use the movies feed in movie mode whatever the episode type', () => {
@@ -26,17 +27,14 @@ describe('util: toCalendarFeedUrl', () => {
   it('should use the merged feed in media mode', () => {
     expect(
       toCalendarFeedUrl({ ...base, mode: 'media', episodeType: 'all' }).https,
-    )
-      .toBe('https://trakt.tv/calendars/my/media.ics?slurm=abc123');
+    ).toBe('https://trakt.tv/calendars/my/media.ics?slurm=abc123');
   });
 
   it('should narrow episodes to premieres or finales', () => {
     expect(
       toCalendarFeedUrl({ ...base, mode: 'media', episodeType: 'premieres' })
         .https,
-    ).toBe(
-      'https://trakt.tv/calendars/my/shows/premieres.ics?slurm=abc123',
-    );
+    ).toBe('https://trakt.tv/calendars/my/shows/premieres.ics?slurm=abc123');
     expect(
       toCalendarFeedUrl({ ...base, mode: 'show', episodeType: 'finales' })
         .https,

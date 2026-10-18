@@ -19,50 +19,41 @@ export const EMPTY_CREW: Readonly<MediaCrew> = {
 };
 
 function toMember(response: CrewResponse | CastResponse) {
-  return ({
+  return {
     name: response.person.name,
     key: response.person.ids.slug,
     ...(response.episode_count != null
       ? { episodeCount: response.episode_count }
       : {}),
-  });
+  };
 }
 
-function toCrewMember(
-  crewResponse: CrewResponse,
-): CrewMember {
-  return ({
+function toCrewMember(crewResponse: CrewResponse): CrewMember {
+  return {
     ...toMember(crewResponse),
     jobs: crewResponse.jobs,
-  });
+  };
 }
 
-function toCastMember(
-  castResponse: CastResponse,
-): CastMember {
+function toCastMember(castResponse: CastResponse): CastMember {
   const characters = castResponse.characters ?? [];
 
-  return ({
+  return {
     ...toMember(castResponse),
     characterName: castResponse.character ?? characters.at(0) ?? '',
     ...(characters.length > 1 ? { characters } : {}),
     headshot: mapToHeadshot(castResponse.person.images),
-  });
+  };
 }
 
 export function mapToMediaCrew(
   response: PeopleResponseWithGuestStars,
 ): MediaCrew {
   return {
-    directors: (response.crew?.directing ?? [])
-      .map(toCrewMember),
-    writers: (response.crew?.writing ?? [])
-      .map(toCrewMember),
-    creators: (response.crew?.['created by'] ?? [])
-      .map(toCrewMember),
-    cast: (response.cast ?? [])
-      .map(toCastMember),
-    guestStars: (response.guest_stars ?? [])
-      .map(toCastMember),
+    directors: (response.crew?.directing ?? []).map(toCrewMember),
+    writers: (response.crew?.writing ?? []).map(toCrewMember),
+    creators: (response.crew?.['created by'] ?? []).map(toCrewMember),
+    cast: (response.cast ?? []).map(toCastMember),
+    guestStars: (response.guest_stars ?? []).map(toCastMember),
   };
 }

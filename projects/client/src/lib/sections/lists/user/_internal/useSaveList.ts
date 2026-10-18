@@ -60,20 +60,28 @@ export function useSaveList(props: UseSaveListProps) {
     isCreating ? AnalyticsEvent.ListCreate : AnalyticsEvent.ListEdit,
   );
 
-  const save = useMutation(defineMutation({
-    key: `list:${props.type}`,
-    request: (variables: SaveListProps) =>
-      saveRequest({ ...props, ...variables }),
-    invalidations: isCreating ? [InvalidateAction.List.Created] : [
-      InvalidateAction.List.Edited,
-      InvalidateAction.Listed('movie'),
-      InvalidateAction.Listed('show'),
-    ],
-  }));
+  const save = useMutation(
+    defineMutation({
+      key: `list:${props.type}`,
+      request: (variables: SaveListProps) =>
+        saveRequest({ ...props, ...variables }),
+      invalidations: isCreating
+        ? [InvalidateAction.List.Created]
+        : [
+            InvalidateAction.List.Edited,
+            InvalidateAction.Listed('movie'),
+            InvalidateAction.Listed('show'),
+          ],
+    }),
+  );
 
-  const saveList = async (
-    { name, description, privacy, sortBy, sortHow }: SaveListProps,
-  ) => {
+  const saveList = async ({
+    name,
+    description,
+    privacy,
+    sortBy,
+    sortHow,
+  }: SaveListProps) => {
     const newName = name.trim();
     if (!newName) {
       return;

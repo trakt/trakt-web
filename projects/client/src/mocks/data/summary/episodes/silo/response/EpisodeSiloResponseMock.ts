@@ -1,26 +1,26 @@
 import type { EpisodeResponse } from '@trakt/api';
 
 export const EpisodeSiloResponseMock: EpisodeResponse = {
-  'season': 1,
-  'number': 1,
-  'number_abs': null,
-  'title': 'Freedom Day',
-  'ids': {
-    'trakt': 5165667,
-    'tvdb': 8440385,
-    'imdb': 'tt14693272',
-    'tmdb': 2964686,
+  season: 1,
+  number: 1,
+  number_abs: null,
+  title: 'Freedom Day',
+  ids: {
+    trakt: 5165667,
+    tvdb: 8440385,
+    imdb: 'tt14693272',
+    tmdb: 2964686,
   },
-  'overview':
+  overview:
     "Sheriff Becker's plans for the future are thrown off course after his wife meets a hacker with information about the silo.",
-  'rating': 7.75346,
-  'votes': 4186,
-  'comment_count': 31,
-  'first_aired': '2023-05-05T01:00:00.000Z',
-  'released': '2023-05-05T01:00:00.000Z',
-  'effective_release_date': '2023-05-05T01:00:00.000Z',
-  'updated_at': '2025-01-20T03:49:10.000Z',
-  'available_translations': [
+  rating: 7.75346,
+  votes: 4186,
+  comment_count: 31,
+  first_aired: '2023-05-05T01:00:00.000Z',
+  released: '2023-05-05T01:00:00.000Z',
+  effective_release_date: '2023-05-05T01:00:00.000Z',
+  updated_at: '2025-01-20T03:49:10.000Z',
+  available_translations: [
     'ar',
     'ca',
     'cs',
@@ -52,10 +52,10 @@ export const EpisodeSiloResponseMock: EpisodeResponse = {
     'vi',
     'zh',
   ],
-  'runtime': 60,
-  'episode_type': 'series_premiere',
-  'images': {
-    'screenshot': [
+  runtime: 60,
+  episode_type: 'series_premiere',
+  images: {
+    screenshot: [
       'media.trakt.tv/images/episodes/005/165/667/screenshots/medium/e035db5f06.jpg.webp',
       'image.tmdb.org/t/p/w1280/rpZhJcWPpyLvPC5Vid61GD6JHVu.jpg',
     ],

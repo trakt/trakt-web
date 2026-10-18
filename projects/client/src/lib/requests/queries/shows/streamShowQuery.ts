@@ -9,20 +9,16 @@ type StreamShowParams = {
   country: string;
 } & ApiParams;
 
-const showWatchNowRequest = (
-  { fetch, slug, country }: StreamShowParams,
-) =>
-  api({ fetch })
-    .shows
-    .watchnow({
-      params: {
-        id: slug,
-        country,
-      },
-      query: {
-        extended: 'streaming_ranks',
-      },
-    });
+const showWatchNowRequest = ({ fetch, slug, country }: StreamShowParams) =>
+  api({ fetch }).shows.watchnow({
+    params: {
+      id: slug,
+      country,
+    },
+    query: {
+      extended: 'streaming_ranks',
+    },
+  });
 
 export const streamShowQuery = defineQuery({
   key: 'streamShow',

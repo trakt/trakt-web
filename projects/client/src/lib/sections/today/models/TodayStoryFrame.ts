@@ -6,8 +6,8 @@ export type TodayStoryFrame =
   | Readonly<{ key: string; type: 'for-you'; item: TodayForYouItem }>
   | Readonly<{ key: string; type: 'summary'; story: TodayTitleStory }>
   | Readonly<{
-    key: string;
-    type: 'friend';
-    story: TodayTitleStory;
-    action: TodayFriendAction;
-  }>;
+      key: string;
+      type: 'friend';
+      story: TodayTitleStory;
+      action: TodayFriendAction;
+    }>;

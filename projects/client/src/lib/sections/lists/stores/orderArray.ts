@@ -21,17 +21,13 @@ export function orderArray<T>(
       return items;
     }
 
-    const itemMap = new Map(
-      items.map((item) => [getId(item), item]),
-    );
+    const itemMap = new Map(items.map((item) => [getId(item), item]));
 
     const orderedItems = order
       .map((id) => itemMap.get(id))
       .filter((item): item is T => item !== undefined);
 
-    const newItems = items.filter(
-      (item) => !order.includes(getId(item)),
-    );
+    const newItems = items.filter((item) => !order.includes(getId(item)));
 
     return [...orderedItems, ...newItems];
   });

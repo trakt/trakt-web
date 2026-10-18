@@ -21,12 +21,12 @@ export function countSkippedEpisodes({
 }: CountSkippedEpisodesProps): number {
   const watchedHere = watchedBySeason.get(target.season) ?? new Set<number>();
 
-  const inThisSeason =
-    currentSeasonEpisodes.filter((candidate) =>
+  const inThisSeason = currentSeasonEpisodes.filter(
+    (candidate) =>
       candidate.number < target.number &&
       !watchedHere.has(candidate.number) &&
-      candidate.effectiveReleaseDate <= now
-    ).length;
+      candidate.effectiveReleaseDate <= now,
+  ).length;
 
   const inEarlierSeasons = previousSeasons
     .filter((season) => season.number < target.season)

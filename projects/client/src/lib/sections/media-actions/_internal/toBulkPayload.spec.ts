@@ -18,10 +18,7 @@ describe('toBulkPayload', () => {
     const result = toBulkPayload('show', [4, 5]);
 
     expect(result).toEqual({
-      shows: [
-        { ids: { trakt: 4 } },
-        { ids: { trakt: 5 } },
-      ],
+      shows: [{ ids: { trakt: 4 } }, { ids: { trakt: 5 } }],
     });
   });
 
@@ -29,9 +26,7 @@ describe('toBulkPayload', () => {
     const result = toBulkPayload('episode', [6]);
 
     expect(result).toEqual({
-      episodes: [
-        { ids: { trakt: 6 } },
-      ],
+      episodes: [{ ids: { trakt: 6 } }],
     });
   });
 });

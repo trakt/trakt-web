@@ -26,9 +26,7 @@ export function scrollIntoViewWhen(node: HTMLElement, active: boolean) {
       return;
     }
 
-    const container = node.closest<HTMLElement>(
-      `.${scrollContainerClassName}`,
-    );
+    const container = node.closest<HTMLElement>(`.${scrollContainerClassName}`);
 
     if (container == null) {
       return;

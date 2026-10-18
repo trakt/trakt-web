@@ -60,7 +60,8 @@ export function createBulkIntlOverlay<T>(
         isAuthorized.pipe(
           switchMap((authorized) => {
             const ids = collectIds(entries, opts);
-            const hasIds = ids.movieIds.length > 0 ||
+            const hasIds =
+              ids.movieIds.length > 0 ||
               ids.showIds.length > 0 ||
               ids.episodeIds.length > 0;
 
@@ -89,7 +90,7 @@ export function createBulkIntlOverlay<T>(
               }),
             );
           }),
-        )
+        ),
       ),
       startWith([] as T[]),
     );

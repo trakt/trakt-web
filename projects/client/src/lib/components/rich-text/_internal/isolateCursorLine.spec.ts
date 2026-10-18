@@ -34,8 +34,7 @@ describe('util: isolateCursorLine', () => {
     created.commands.keyboardShortcut('Shift-Enter');
     created.commands.insertContent('item');
 
-    created.chain().focus().command(isolateCursorLine).toggleBulletList()
-      .run();
+    created.chain().focus().command(isolateCursorLine).toggleBulletList().run();
 
     expect(toBlocks(created)).toEqual(['paragraph', 'bulletList', 'paragraph']);
     expect(created.getMarkdown()).toMatch(/^hello\n\n- item\n/);
@@ -48,8 +47,7 @@ describe('util: isolateCursorLine', () => {
     created.commands.insertContent('after');
     created.commands.setTextSelection(3);
 
-    created.chain().focus().command(isolateCursorLine).toggleBlockquote()
-      .run();
+    created.chain().focus().command(isolateCursorLine).toggleBlockquote().run();
 
     expect(toBlocks(created)).toEqual(['blockquote', 'paragraph']);
   });
@@ -58,8 +56,7 @@ describe('util: isolateCursorLine', () => {
     const created = await createEditor();
     created.commands.insertContent('hello');
 
-    created.chain().focus().command(isolateCursorLine).toggleBulletList()
-      .run();
+    created.chain().focus().command(isolateCursorLine).toggleBulletList().run();
 
     expect(toBlocks(created)).toEqual(['bulletList', 'paragraph']);
     expect(created.getMarkdown()).toMatch(/^- hello\n/);

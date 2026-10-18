@@ -9,19 +9,15 @@ type ShowSeasonsParams = {
   slug: string;
 } & ApiParams;
 
-const showSeasonsRequest = (
-  { fetch, slug }: ShowSeasonsParams,
-) =>
-  api({ fetch })
-    .shows
-    .seasons({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,images',
-      },
-    });
+const showSeasonsRequest = ({ fetch, slug }: ShowSeasonsParams) =>
+  api({ fetch }).shows.seasons({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,images',
+    },
+  });
 
 export const showSeasonsQuery = defineQuery({
   key: 'showSeasons',

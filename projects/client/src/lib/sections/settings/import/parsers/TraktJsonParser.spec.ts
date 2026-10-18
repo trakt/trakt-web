@@ -620,10 +620,7 @@ describe('TraktJsonParser', () => {
 
       const result = await TraktJsonParser.parse([makeFile('export.json')]);
 
-      expect(result.map((item) => item.action)).toEqual([
-        'history',
-        'ratings',
-      ]);
+      expect(result.map((item) => item.action)).toEqual(['history', 'ratings']);
       expect(result.every((item) => item.type === 'show')).toBe(true);
     });
   });

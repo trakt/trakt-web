@@ -13,7 +13,10 @@ function toBootStylesheet(href: string) {
   return `<link href="${href}" rel="stylesheet" data-boot-css onerror="this.dataset.bootFailed=''">`;
 }
 
-function renderBootLoader({ html, scriptCount }: {
+function renderBootLoader({
+  html,
+  scriptCount,
+}: {
   html: string;
   scriptCount: number;
 }) {

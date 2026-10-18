@@ -13,9 +13,10 @@ type ResampleSeriesProps = {
  * Fritsch, F. N.; Carlson, R. E. (1980), "Monotone Piecewise Cubic
  * Interpolation", SIAM Journal on Numerical Analysis.
  */
-export function resampleSeries(
-  { values, targetLength }: ResampleSeriesProps,
-): number[] {
+export function resampleSeries({
+  values,
+  targetLength,
+}: ResampleSeriesProps): number[] {
   const length = values.length;
 
   if (targetLength <= 0 || length === 0) {
@@ -99,14 +100,20 @@ type HermiteProps = {
 };
 
 /** Cubic Hermite basis evaluation on a unit interval. */
-function hermite(
-  { t, from, to, tangentFrom, tangentTo }: HermiteProps,
-): number {
+function hermite({
+  t,
+  from,
+  to,
+  tangentFrom,
+  tangentTo,
+}: HermiteProps): number {
   const t2 = t * t;
   const t3 = t2 * t;
 
-  return (2 * t3 - 3 * t2 + 1) * from +
+  return (
+    (2 * t3 - 3 * t2 + 1) * from +
     (t3 - 2 * t2 + t) * tangentFrom +
     (-2 * t3 + 3 * t2) * to +
-    (t3 - t2) * tangentTo;
+    (t3 - t2) * tangentTo
+  );
 }

@@ -13,27 +13,27 @@ type ShowSentimentParams = {
   enabled: boolean;
 } & ApiParams;
 
-const showSentimentRequest = async (
-  { fetch, slug, locale }: ShowSentimentParams,
-) => {
-  const response = await rawApiFetch(
-    {
-      fetch,
-      path: toMediaInfoPath({
-        type: 'show',
-        slug,
-        infoType: 0,
-        infoVersion: 2,
-        locale,
-      }),
-    },
-  );
+const showSentimentRequest = async ({
+  fetch,
+  slug,
+  locale,
+}: ShowSentimentParams) => {
+  const response = await rawApiFetch({
+    fetch,
+    path: toMediaInfoPath({
+      type: 'show',
+      slug,
+      infoType: 0,
+      infoVersion: 2,
+      locale,
+    }),
+  });
 
   return response.ok
     ? {
-      body: await response.json() as SentimentResponse,
-      status: 200,
-    }
+        body: (await response.json()) as SentimentResponse,
+        status: 200,
+      }
     : { body: undefined, status: 200 };
 };
 

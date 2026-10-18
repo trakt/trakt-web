@@ -1,6 +1,4 @@
-import {
-  type MediaSocialResponseInput,
-} from '$lib/requests/queries/media/mediaSocialQuery.ts';
+import { type MediaSocialResponseInput } from '$lib/requests/queries/media/mediaSocialQuery.ts';
 import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
 
 const HarryDuBoisResponseMock = {

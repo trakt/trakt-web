@@ -65,8 +65,8 @@ function toDisplayableCategories(
   parentalGuide: Guide | null | undefined,
 ): DisplayableCategory[] {
   return Object.entries(CATEGORY_LABEL).map(([category, toCategoryLabel]) => {
-    const entry = parentalGuide?.guide.find((item) =>
-      item.category === category
+    const entry = parentalGuide?.guide.find(
+      (item) => item.category === category,
     );
 
     if (!entry) {
@@ -91,14 +91,16 @@ function toDisplayableCategories(
   });
 }
 
-export function useParentalGuideCategories(
-  { target$ }: { target$: Observable<ParentalGuideTarget> },
-) {
+export function useParentalGuideCategories({
+  target$,
+}: {
+  target$: Observable<ParentalGuideTarget>;
+}) {
   const query = useQuery(
     target$.pipe(
       distinctUntilChanged(isShallowEqual),
       map(({ type, slug }) =>
-        mediaParentalGuideQuery({ type, slug, locale: getLocale() })
+        mediaParentalGuideQuery({ type, slug, locale: getLocale() }),
       ),
     ),
   );

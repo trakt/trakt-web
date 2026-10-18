@@ -38,13 +38,13 @@ export function computeActivityHeatmap(
   const year = today.getFullYear();
   const month = today.getMonth();
 
-  const iterStart = period === 'week'
-    ? getStartOfWeek(today, locale)
-    : new Date(year, month, 1);
+  const iterStart =
+    period === 'week'
+      ? getStartOfWeek(today, locale)
+      : new Date(year, month, 1);
 
-  const iterCount = period === 'week'
-    ? 7
-    : new Date(year, month + 1, 0).getDate();
+  const iterCount =
+    period === 'week' ? 7 : new Date(year, month + 1, 0).getDate();
 
   const gridStart = getStartOfWeek(iterStart, locale);
   const msPerDay = 1000 * 60 * 60 * 24;
@@ -71,20 +71,18 @@ export function computeActivityHeatmap(
 
   const totalRows = (cells.at(-1)?.row ?? -1) + 1;
 
-  const monthLabel = period === 'month'
-    ? new Intl.DateTimeFormat(getIntlLocale(locale), {
-      month: 'long',
-      year: 'numeric',
-    }).format(new Date(year, month, 1))
-    : '';
+  const monthLabel =
+    period === 'month'
+      ? new Intl.DateTimeFormat(getIntlLocale(locale), {
+          month: 'long',
+          year: 'numeric',
+        }).format(new Date(year, month, 1))
+      : '';
 
-  const dayLabels = Array.from(
-    { length: 7 },
-    (_, i) =>
-      new Intl.DateTimeFormat(getIntlLocale(locale), { weekday: 'short' })
-        .format(
-          addDays(gridStart, i),
-        ),
+  const dayLabels = Array.from({ length: 7 }, (_, i) =>
+    new Intl.DateTimeFormat(getIntlLocale(locale), { weekday: 'short' }).format(
+      addDays(gridStart, i),
+    ),
   );
 
   return { cells, monthLabel, dayLabels, totalRows };

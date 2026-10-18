@@ -8,23 +8,17 @@ type MovieVideosParams = {
   slug: string;
 } & ApiParams;
 
-const movieVideoRequest = (
-  { fetch, slug }: MovieVideosParams,
-) =>
-  api({ fetch })
-    .movies
-    .videos({
-      params: {
-        id: slug,
-      },
-    });
+const movieVideoRequest = ({ fetch, slug }: MovieVideosParams) =>
+  api({ fetch }).movies.videos({
+    params: {
+      id: slug,
+    },
+  });
 
 export const movieVideosQuery = defineQuery({
   key: 'movieVideos',
   invalidations: [],
-  dependencies: (params) => [
-    params.slug,
-  ],
+  dependencies: (params) => [params.slug],
   request: movieVideoRequest,
   mapper: (response) =>
     response.body
@@ -32,8 +26,7 @@ export const movieVideosQuery = defineQuery({
       .map(mapToMediaVideo)
       .toSorted((a, b) => {
         return (
-          new Date(a.publishedAt).getTime() -
-          new Date(b.publishedAt).getTime()
+          new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()
         );
       }),
   schema: MediaVideoSchema.array(),

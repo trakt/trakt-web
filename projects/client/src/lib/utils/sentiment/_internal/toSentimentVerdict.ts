@@ -5,9 +5,10 @@ type ToSentimentVerdictParams = {
   cons: ReadonlyArray<string>;
 };
 
-export function toSentimentVerdict(
-  { pros, cons }: ToSentimentVerdictParams,
-): SentimentVerdict {
+export function toSentimentVerdict({
+  pros,
+  cons,
+}: ToSentimentVerdictParams): SentimentVerdict {
   if (pros.length > cons.length) return 'positive';
   if (cons.length > pros.length) return 'negative';
 

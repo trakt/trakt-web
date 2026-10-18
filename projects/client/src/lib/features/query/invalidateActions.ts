@@ -11,9 +11,11 @@ type InvalidateActionsParams = {
   refetchType?: InvalidateQueryFilters['refetchType'];
 };
 
-export async function invalidateActions(
-  { client, actions, refetchType }: InvalidateActionsParams,
-): Promise<void> {
+export async function invalidateActions({
+  client,
+  actions,
+  refetchType,
+}: InvalidateActionsParams): Promise<void> {
   if (actions.length === 0) {
     return;
   }

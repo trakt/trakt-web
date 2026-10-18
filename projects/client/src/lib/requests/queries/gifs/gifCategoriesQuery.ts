@@ -10,11 +10,13 @@ import { klipyRequest } from './_internal/klipyRequest.ts';
 
 const KlipyCategoriesResponseSchema = z.object({
   data: z.object({
-    categories: z.array(z.object({
-      category: z.string(),
-      query: z.string(),
-      preview_url: z.string(),
-    })),
+    categories: z.array(
+      z.object({
+        category: z.string(),
+        query: z.string(),
+        preview_url: z.string(),
+      }),
+    ),
   }),
 });
 

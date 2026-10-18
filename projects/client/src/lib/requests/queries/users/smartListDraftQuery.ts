@@ -11,19 +11,17 @@ import { SmartListSourceSchema } from '../../models/SmartListSource.ts';
 
 type SmartListDraftParams = { userId: string; listId: string } & ApiParams;
 
-const smartListDraftRequest = async (
-  { fetch, userId, listId }: SmartListDraftParams,
-) => {
-  const response = await api({ fetch })
-    .users
-    .lists
-    .list
-    .smartListDraft({
-      params: {
-        id: userId,
-        list_id: listId,
-      },
-    });
+const smartListDraftRequest = async ({
+  fetch,
+  userId,
+  listId,
+}: SmartListDraftParams) => {
+  const response = await api({ fetch }).users.lists.list.smartListDraft({
+    params: {
+      id: userId,
+      list_id: listId,
+    },
+  });
 
   if (response.status === 404) {
     return { ...response, status: 204 as const, body: undefined };

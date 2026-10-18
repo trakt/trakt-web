@@ -12,9 +12,10 @@ function withRenewLock<T>(task: () => Promise<T>): Promise<T> {
   // rather than `T | PromiseLike<T>`, even though the spec awaits it - so TS
   // can't infer through the promise `task` returns. The runtime does flatten
   // it, hence the cast.
-  return navigator.locks.request(RENEW_LOCK_NAME, task) as unknown as Promise<
-    T
-  >;
+  return navigator.locks.request(
+    RENEW_LOCK_NAME,
+    task,
+  ) as unknown as Promise<T>;
 }
 
 // Refresh tokens rotate on use, so a second concurrent renewal presents a
@@ -32,10 +33,14 @@ export function renewAccessToken(
   return withRenewLock(async () => {
     const current = await manager.getUser();
 
-    const expiringAt = Date.now() + time.seconds(
-      manager.settings.accessTokenExpiringNotificationTimeInSeconds,
-    );
-    const didAnotherHolderRenew = current != null && !current.expired &&
+    const expiringAt =
+      Date.now() +
+      time.seconds(
+        manager.settings.accessTokenExpiringNotificationTimeInSeconds,
+      );
+    const didAnotherHolderRenew =
+      current != null &&
+      !current.expired &&
       current.access_token !== rejectedToken &&
       time.seconds(current.expires_at ?? 0) > expiringAt;
 

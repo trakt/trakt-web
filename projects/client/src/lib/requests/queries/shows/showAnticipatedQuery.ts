@@ -14,26 +14,25 @@ import type { ShowAnticipatedResponse } from '@trakt/api';
 import { z } from 'zod';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 
-export const AnticipatedShowSchema = ShowEntrySchema
-  .extend({
-    score: z.number(),
-  });
+export const AnticipatedShowSchema = ShowEntrySchema.extend({
+  score: z.number(),
+});
 export type AnticipatedShow = z.infer<typeof AnticipatedShowSchema>;
 
-type ShowAnticipatedParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & SearchParams;
+type ShowAnticipatedParams = PaginationParams &
+  ApiParams &
+  FilterParams &
+  SearchParams;
 
 export function mapToAnticipatedShow({
   list_count,
   show,
 }: ShowAnticipatedResponse): AnticipatedShow {
   const { aired_episodes } = show;
-  const episodeCount = aired_episodes && aired_episodes > 0
-    ? { episode: { count: aired_episodes } }
-    : {};
+  const episodeCount =
+    aired_episodes && aired_episodes > 0
+      ? { episode: { count: aired_episodes } }
+      : {};
 
   return {
     score: list_count,
@@ -42,21 +41,24 @@ export function mapToAnticipatedShow({
   };
 }
 
-export const showAnticipatedRequest = (
-  { fetch, limit, page, filter, theme, search }: ShowAnticipatedParams,
-) => {
-  return api({ fetch })
-    .shows
-    .anticipated({
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        theme,
-        ...filter,
-        ...search,
-      },
-    });
+export const showAnticipatedRequest = ({
+  fetch,
+  limit,
+  page,
+  filter,
+  theme,
+  search,
+}: ShowAnticipatedParams) => {
+  return api({ fetch }).shows.anticipated({
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      theme,
+      ...filter,
+      ...search,
+    },
+  });
 };
 
 export const showAnticipatedQuery = defineInfiniteQuery({
@@ -66,9 +68,7 @@ export const showAnticipatedQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (
-    params,
-  ) => [
+  dependencies: (params) => [
     params.limit,
     params.page,
     ...getGlobalFilterDependencies(params.filter),

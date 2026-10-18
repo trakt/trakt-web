@@ -24,10 +24,14 @@ const list: UserList = {
 const season = assertDefined(ShowSiloSeasonsMappedMock.at(0));
 
 const targets: [string, string, ListTarget][] = [
-  ['season', `http://localhost/v3/seasons/${season.id}/me/lists`, {
-    type: 'season',
-    media: season,
-  }],
+  [
+    'season',
+    `http://localhost/v3/seasons/${season.id}/me/lists`,
+    {
+      type: 'season',
+      media: season,
+    },
+  ],
   [
     'episode',
     `http://localhost/v3/episodes/${EpisodeSiloMappedMock.id}/me/lists`,

@@ -193,10 +193,7 @@ const buildTraktGuidelineFields = (
   },
 ];
 
-export const IMPORT_SOURCE_CONFIGS: Record<
-  ImportSource,
-  ImportSourceConfig
-> = {
+export const IMPORT_SOURCE_CONFIGS: Record<ImportSource, ImportSourceConfig> = {
   tvtime: {
     id: 'tvtime',
     name: 'TV Time',

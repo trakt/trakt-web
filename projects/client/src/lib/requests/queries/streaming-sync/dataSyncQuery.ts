@@ -7,15 +7,10 @@ import { mapToDataSync } from './_internal/mapToDataSync.ts';
 
 type DataSyncParams = { id: number } & ApiParams;
 
-const dataSyncRequest = (
-  { fetch, id }: DataSyncParams,
-) =>
-  api({ fetch })
-    .users
-    .syncs
-    .details({
-      params: { id },
-    });
+const dataSyncRequest = ({ fetch, id }: DataSyncParams) =>
+  api({ fetch }).users.syncs.details({
+    params: { id },
+  });
 
 export const dataSyncQuery = defineQuery({
   key: 'dataSync',

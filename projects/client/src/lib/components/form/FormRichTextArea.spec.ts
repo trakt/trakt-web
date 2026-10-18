@@ -48,14 +48,15 @@ describe('component: FormRichTextArea', () => {
 
     await fireEvent.focusOut(screen.getByRole('textbox'));
 
-    const describedBy = screen.getByRole('textbox').getAttribute(
-      'aria-describedby',
-    );
+    const describedBy = screen
+      .getByRole('textbox')
+      .getAttribute('aria-describedby');
 
     expect(field.classList.contains('has-error')).toBe(true);
     expect(describedBy).not.toBeNull();
-    expect(container.querySelector(`#${describedBy}`)?.textContent?.trim())
-      .toBe('Reviews must be at least 5 words.');
+    expect(
+      container.querySelector(`#${describedBy}`)?.textContent?.trim(),
+    ).toBe('Reviews must be at least 5 words.');
   });
 
   it('should not flag an empty value once the field is left', async () => {

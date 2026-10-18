@@ -8,8 +8,9 @@ interface FilterImportItemsByActionSelectionParams {
   selectedActions: ImportActionSelection;
 }
 
-export function filterImportItemsByActionSelection(
-  { items, selectedActions }: FilterImportItemsByActionSelectionParams,
-): UniversalImportItem[] {
+export function filterImportItemsByActionSelection({
+  items,
+  selectedActions,
+}: FilterImportItemsByActionSelectionParams): UniversalImportItem[] {
   return items.filter((item) => selectedActions[item.action]);
 }

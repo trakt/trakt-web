@@ -5,9 +5,11 @@ import type { SyncCycle } from './models/SyncCycle.ts';
 const CYCLE_WINDOW = time.minutes(1);
 
 function isSameCycle(first: MediaSyncRun, run: MediaSyncRun): boolean {
-  return run.kind === first.kind &&
+  return (
+    run.kind === first.kind &&
     Math.abs(first.createdAt.getTime() - run.createdAt.getTime()) <=
-      CYCLE_WINDOW;
+      CYCLE_WINDOW
+  );
 }
 
 type RunGroup = [MediaSyncRun, ...MediaSyncRun[]];
@@ -46,7 +48,7 @@ function toAddedByFeed(runs: MediaSyncRun[]): Record<string, number> {
 function toCycle(runs: RunGroup): SyncCycle {
   const [first] = runs;
   const startedAt = runs.reduce(
-    (earliest, run) => run.createdAt < earliest ? run.createdAt : earliest,
+    (earliest, run) => (run.createdAt < earliest ? run.createdAt : earliest),
     first.createdAt,
   );
   return {
@@ -63,8 +65,8 @@ function toCycle(runs: RunGroup): SyncCycle {
 }
 
 export function toSyncCycles(runs: MediaSyncRun[]): SyncCycle[] {
-  const newestFirst = [...runs].sort((a, b) =>
-    b.createdAt.getTime() - a.createdAt.getTime()
+  const newestFirst = [...runs].sort(
+    (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
   );
   return groupRuns(newestFirst).map(toCycle);
 }

@@ -51,29 +51,30 @@ describe('queryBridge', () => {
 
     const subscriptions: Array<Subscription> = [];
     teardown.push(() =>
-      subscriptions.forEach((subscription) => subscription.unsubscribe())
+      subscriptions.forEach((subscription) => subscription.unsubscribe()),
     );
 
     const writer = createStateWriter();
     let status = 'pending';
     subscriptions.push(
-      queryBridge<string, Error>(buildOptions, client)
-        .subscribe((result) => {
-          status = result.status;
-          writer.write();
-        }),
+      queryBridge<string, Error>(buildOptions, client).subscribe((result) => {
+        status = result.status;
+        writer.write();
+      }),
     );
 
     await vi.waitFor(() => expect(status).to.equal('success'));
 
     const writesBefore = writer.writes;
 
-    teardown.push(runInDerived(() => {
-      subscriptions.push(
-        queryBridge<string, Error>(buildOptions, client).subscribe(() => {}),
-      );
-      return true;
-    }));
+    teardown.push(
+      runInDerived(() => {
+        subscriptions.push(
+          queryBridge<string, Error>(buildOptions, client).subscribe(() => {}),
+        );
+        return true;
+      }),
+    );
 
     await flushUnhandledErrorReports();
 

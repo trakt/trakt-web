@@ -8,7 +8,9 @@ export function parseRequestedPosition(
   url: URL,
   type: MediaType,
 ): CrewPosition {
-  return crewPositionSchema.safeParse(
-    url.searchParams.get(`${type}s`)?.toLowerCase(),
-  ).data ?? 'acting';
+  return (
+    crewPositionSchema.safeParse(
+      url.searchParams.get(`${type}s`)?.toLowerCase(),
+    ).data ?? 'acting'
+  );
 }

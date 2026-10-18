@@ -25,9 +25,11 @@ type SourceType = { source: string };
 type PageViewType = { route: string };
 
 type ActionType = { action: 'add' | 'remove' };
-type RatingType = { action: 'added' | 'changed'; rating: number } | {
-  action: 'removed';
-};
+type RatingType =
+  | { action: 'added' | 'changed'; rating: number }
+  | {
+      action: 'removed';
+    };
 type FilterType = { id: string; action: 'set' | 'reset'; mode: FilterMode };
 type FiltersType = { action: 'save' | 'reset' };
 type CheckInType = { type: 'episode' | 'movie'; action: 'start' | 'stop' };

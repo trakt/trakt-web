@@ -7,15 +7,12 @@ import { listIdsRequest } from './_internal/listIdsRequest.ts';
 
 type UserEpisodeListIdsParams = { id: number } & ApiParams;
 
-const userEpisodeListIdsRequest = (
-  { fetch, id }: UserEpisodeListIdsParams,
-) => listIdsRequest({ fetch, path: `/v3/episodes/${id}/me/lists` });
+const userEpisodeListIdsRequest = ({ fetch, id }: UserEpisodeListIdsParams) =>
+  listIdsRequest({ fetch, path: `/v3/episodes/${id}/me/lists` });
 
 export const userEpisodeListIdsQuery = defineQuery({
   key: 'userEpisodeListIds',
-  invalidations: [
-    InvalidateAction.Listed('episode'),
-  ],
+  invalidations: [InvalidateAction.Listed('episode')],
   dependencies: (params) => [params.id],
   request: userEpisodeListIdsRequest,
   mapper: (response) => response.body,

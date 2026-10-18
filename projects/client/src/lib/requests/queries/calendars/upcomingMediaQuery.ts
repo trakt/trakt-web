@@ -9,14 +9,12 @@ import type { FilterParams } from '../../models/FilterParams.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 import { UpcomingEpisodeEntrySchema } from './upcomingEpisodesQuery.ts';
 
-export type CalendarMediaParams =
-  & {
-    startDate: string;
-    days: number;
-    target?: 'my' | 'all';
-  }
-  & ApiParams
-  & FilterParams;
+export type CalendarMediaParams = {
+  startDate: string;
+  days: number;
+  target?: 'my' | 'all';
+} & ApiParams &
+  FilterParams;
 
 const UpcomingMediaSchema = z.union([
   UpcomingEpisodeEntrySchema,
@@ -33,29 +31,25 @@ export const upcomingMediaQuery = defineQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (
-    params: CalendarMediaParams,
-  ) => [
+  dependencies: (params: CalendarMediaParams) => [
     params.target,
     params.startDate,
     params.days,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: ({ fetch, startDate, days, target = 'my', filter }) =>
-    api({ fetch })
-      .calendars
-      .media({
-        query: {
-          extended: 'full,images',
-          group: 'day',
-          ...filter,
-        },
-        params: {
-          target,
-          start_date: startDate,
-          days,
-        },
-      }),
+    api({ fetch }).calendars.media({
+      query: {
+        extended: 'full,images',
+        group: 'day',
+        ...filter,
+      },
+      params: {
+        target,
+        start_date: startDate,
+        days,
+      },
+    }),
   mapper: (response) => mapToCalendarMedia(response.body),
   schema: UpcomingMediaSchema.array(),
   ttl: time.minutes(30),

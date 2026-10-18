@@ -52,9 +52,11 @@ describe('createSilentRenewGuard', () => {
     const clock = { value: 0 };
     const guard = makeGuard(clock);
 
-    const attempt = vi.fn().mockImplementation(() =>
-      new Promise((resolve) => setTimeout(resolve, 0))
-    );
+    const attempt = vi
+      .fn()
+      .mockImplementation(
+        () => new Promise((resolve) => setTimeout(resolve, 0)),
+      );
 
     const first = guard.renew(attempt);
     clock.value = cooldown;
@@ -68,8 +70,9 @@ describe('createSilentRenewGuard', () => {
     const clock = { value: 0 };
     const error = new Error('nope');
 
-    await expect(makeGuard(clock).renew(() => Promise.reject(error)))
-      .rejects.toThrow(error);
+    await expect(
+      makeGuard(clock).renew(() => Promise.reject(error)),
+    ).rejects.toThrow(error);
   });
 
   it('should stop attempting after consecutive failures', async () => {
@@ -157,10 +160,11 @@ describe('createSilentRenewGuard', () => {
     const guard = makeGuard(clock);
 
     let settle: (value: string) => void = () => {};
-    const owner = guard.renew(() =>
-      new Promise<string>((resolve) => {
-        settle = resolve;
-      })
+    const owner = guard.renew(
+      () =>
+        new Promise<string>((resolve) => {
+          settle = resolve;
+        }),
     );
 
     const deferred = guard.renew(() => Promise.resolve('second'));
@@ -175,10 +179,11 @@ describe('createSilentRenewGuard', () => {
     const guard = makeGuard(clock);
 
     let reject: (reason: unknown) => void = () => {};
-    const owner = guard.renew(() =>
-      new Promise<string>((_, fail) => {
-        reject = fail;
-      })
+    const owner = guard.renew(
+      () =>
+        new Promise<string>((_, fail) => {
+          reject = fail;
+        }),
     );
     const deferred = guard.renew(() => Promise.resolve('second'));
 

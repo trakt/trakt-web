@@ -6,7 +6,6 @@ export const ExtendedUserProfileHarryMappedMock: UserProfile = {
   location: 'San Francisco, CA',
   about: 'I am a Lieutenant',
   cover: {
-    url:
-      'https://media.trakt.tv/images/users/014/366/083/headers/original/disco_cop.png',
+    url: 'https://media.trakt.tv/images/users/014/366/083/headers/original/disco_cop.png',
   },
 };

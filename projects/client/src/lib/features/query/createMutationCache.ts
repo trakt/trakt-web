@@ -6,10 +6,11 @@ export function createMutationCache(): MutationCache {
     onSuccess: (data, variables, _onMutateResult, mutation, context) =>
       invalidateActions({
         client: context.client,
-        actions: mutation.options.meta?.resolveInvalidations?.({
-          data,
-          variables,
-        }) ?? [],
+        actions:
+          mutation.options.meta?.resolveInvalidations?.({
+            data,
+            variables,
+          }) ?? [],
       }),
   });
 }

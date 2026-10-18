@@ -15,37 +15,31 @@ const commentResponseMocks = [
 ];
 
 export const comments = [
-  http.get(
-    'http://localhost/comments/:id/item',
-    ({ params }) => {
-      const id = Number(params.id);
-      const hasComment = MovieHereticCommentsResponseMock.some((comment) =>
-        comment.id === id
-      );
+  http.get('http://localhost/comments/:id/item', ({ params }) => {
+    const id = Number(params.id);
+    const hasComment = MovieHereticCommentsResponseMock.some(
+      (comment) => comment.id === id,
+    );
 
-      if (!hasComment) {
-        return HttpResponse.json(null, { status: 404 });
-      }
+    if (!hasComment) {
+      return HttpResponse.json(null, { status: 404 });
+    }
 
-      return HttpResponse.json({
-        type: 'movie',
-        movie: MovieHereticResponseMock,
-      });
-    },
-  ),
-  http.get(
-    'http://localhost/comments/:id',
-    ({ params }) => {
-      const id = Number(params.id);
-      const comment = commentResponseMocks.find((comment) => comment.id === id);
+    return HttpResponse.json({
+      type: 'movie',
+      movie: MovieHereticResponseMock,
+    });
+  }),
+  http.get('http://localhost/comments/:id', ({ params }) => {
+    const id = Number(params.id);
+    const comment = commentResponseMocks.find((comment) => comment.id === id);
 
-      if (comment == null) {
-        return HttpResponse.json(null, { status: 404 });
-      }
+    if (comment == null) {
+      return HttpResponse.json(null, { status: 404 });
+    }
 
-      return HttpResponse.json(comment);
-    },
-  ),
+    return HttpResponse.json(comment);
+  }),
   http.get(
     `http://localhost/comments/${
       assertDefined(EpisodeSiloCommentsMappedMock.at(0)).id
@@ -54,10 +48,7 @@ export const comments = [
       return HttpResponse.json(EpisodeSiloCommentReplyResponseMock);
     },
   ),
-  http.get(
-    'http://localhost/comments/*/reactions/summary',
-    () => {
-      return HttpResponse.json(EpisodeSiloCommentReactionsResponseMock);
-    },
-  ),
+  http.get('http://localhost/comments/*/reactions/summary', () => {
+    return HttpResponse.json(EpisodeSiloCommentReactionsResponseMock);
+  }),
 ];

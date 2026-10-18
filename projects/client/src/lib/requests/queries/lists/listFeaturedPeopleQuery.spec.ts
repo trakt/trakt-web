@@ -56,12 +56,15 @@ describe('listFeaturedPeopleQuery', () => {
       server.use(
         http.get(`http://localhost/lists/${listId}`, () =>
           HttpResponse.json({
-            featured: [{
-              name: 'Hugh Grant',
-              ids: { trakt: 1, slug: 'hugh-grant' },
-              images,
-            }],
-          })),
+            featured: [
+              {
+                name: 'Hugh Grant',
+                ids: { trakt: 1, slug: 'hugh-grant' },
+                images,
+              },
+            ],
+          }),
+        ),
       );
 
       const result = await readFeaturedPeople();
@@ -73,9 +76,8 @@ describe('listFeaturedPeopleQuery', () => {
     'should return no people for an empty or unavailable extension (%s)',
     async (featured) => {
       server.use(
-        http.get(
-          `http://localhost/lists/${listId}`,
-          () => HttpResponse.json({ featured }),
+        http.get(`http://localhost/lists/${listId}`, () =>
+          HttpResponse.json({ featured }),
         ),
       );
 
@@ -91,8 +93,9 @@ describe('listFeaturedPeopleQuery', () => {
       ),
     );
 
-    await expect(listFeaturedPeopleQuery({ listId }).execute()).resolves
-      .toBeNull();
+    await expect(
+      listFeaturedPeopleQuery({ listId }).execute(),
+    ).resolves.toBeNull();
   });
 
   it('should reject failed requests instead of caching them as an empty list', async () => {
@@ -103,7 +106,8 @@ describe('listFeaturedPeopleQuery', () => {
       ),
     );
 
-    await expect(listFeaturedPeopleQuery({ listId }).execute()).rejects
-      .toThrow();
+    await expect(
+      listFeaturedPeopleQuery({ listId }).execute(),
+    ).rejects.toThrow();
   });
 });

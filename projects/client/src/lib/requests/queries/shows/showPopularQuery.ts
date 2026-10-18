@@ -12,27 +12,29 @@ import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { getRecordDependencies } from '../../_internal/getRecordDependencies.ts';
 
-type ShowPopularParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & SearchParams;
+type ShowPopularParams = PaginationParams &
+  ApiParams &
+  FilterParams &
+  SearchParams;
 
-const showPopularRequest = (
-  { fetch, limit, page, filter, theme, search }: ShowPopularParams,
-) => {
-  return api({ fetch })
-    .shows
-    .popular({
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        theme,
-        ...filter,
-        ...search,
-      },
-    });
+const showPopularRequest = ({
+  fetch,
+  limit,
+  page,
+  filter,
+  theme,
+  search,
+}: ShowPopularParams) => {
+  return api({ fetch }).shows.popular({
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      theme,
+      ...filter,
+      ...search,
+    },
+  });
 };
 
 export const showPopularQuery = defineInfiniteQuery({
@@ -42,9 +44,7 @@ export const showPopularQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (
-    params,
-  ) => [
+  dependencies: (params) => [
     params.limit,
 
     params.page,

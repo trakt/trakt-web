@@ -9,9 +9,10 @@ type ToCountRangesParams = {
   now: Date;
 };
 
-export function toCountRanges(
-  { dayKey, now }: ToCountRangesParams,
-): ReadonlyArray<TodayRange> {
+export function toCountRanges({
+  dayKey,
+  now,
+}: ToCountRangesParams): ReadonlyArray<TodayRange> {
   if (dayKey !== WEEK_DAY_KEY) return [getDayRange({ dayKey, now })];
 
   return [

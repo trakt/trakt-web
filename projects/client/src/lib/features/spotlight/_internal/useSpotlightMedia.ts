@@ -41,57 +41,63 @@ export function useSpotlightMedia() {
   const searchTerm$ = new BehaviorSubject<string>('');
   const isSearching = new BehaviorSubject<boolean>(false);
 
-  const media = client == null ? of(EMPTY) : searchTerm$.pipe(
-    map((rawTerm) => rawTerm.toLowerCase().trim()),
-    distinctUntilChanged(),
-    switchMap((term) => {
-      if (term.length === 0) {
-        isSearching.next(false);
-        return of(EMPTY);
-      }
+  const media =
+    client == null
+      ? of(EMPTY)
+      : searchTerm$.pipe(
+          map((rawTerm) => rawTerm.toLowerCase().trim()),
+          distinctUntilChanged(),
+          switchMap((term) => {
+            if (term.length === 0) {
+              isSearching.next(false);
+              return of(EMPTY);
+            }
 
-      isSearching.next(true);
+            isSearching.next(true);
 
-      const fetchType = (type: MediaType, searchConfig: TypesenseConfig) =>
-        client.fetchQuery(
-          searchMediaQuery({
-            query: term,
-            type,
-            config: searchConfig,
-            limit: MEDIA_LIMIT,
-            exact: false,
+            const fetchType = (
+              type: MediaType,
+              searchConfig: TypesenseConfig,
+            ) =>
+              client.fetchQuery(
+                searchMediaQuery({
+                  query: term,
+                  type,
+                  config: searchConfig,
+                  limit: MEDIA_LIMIT,
+                  exact: false,
+                }),
+              );
+
+            return timer(QUERY_DEBOUNCE).pipe(
+              switchMap(() => from(ensureFreshSearchKeys(config))),
+              switchMap((freshConfig) =>
+                combineLatest([
+                  fetchType('movie', freshConfig),
+                  fetchType('show', freshConfig),
+                ]),
+              ),
+              map(([movies, shows]) => [
+                ...movies.items.slice(0, MEDIA_LIMIT),
+                ...shows.items.slice(0, MEDIA_LIMIT),
+              ]),
+              overlay.operator,
+              skip(1),
+              map(toSpotlightMedia),
+              tap(() => isSearching.next(false)),
+              catchError(() => {
+                isSearching.next(false);
+                return of(EMPTY);
+              }),
+              // Prepended after the taps above, so the cleared value does not settle
+              // the searching state: a new term drops the previous term's media
+              // before its replacement is requested.
+              startWith(EMPTY),
+            );
           }),
+          startWith(EMPTY),
+          multicast(),
         );
-
-      return timer(QUERY_DEBOUNCE).pipe(
-        switchMap(() => from(ensureFreshSearchKeys(config))),
-        switchMap((freshConfig) =>
-          combineLatest([
-            fetchType('movie', freshConfig),
-            fetchType('show', freshConfig),
-          ])
-        ),
-        map(([movies, shows]) => [
-          ...movies.items.slice(0, MEDIA_LIMIT),
-          ...shows.items.slice(0, MEDIA_LIMIT),
-        ]),
-        overlay.operator,
-        skip(1),
-        map(toSpotlightMedia),
-        tap(() => isSearching.next(false)),
-        catchError(() => {
-          isSearching.next(false);
-          return of(EMPTY);
-        }),
-        // Prepended after the taps above, so the cleared value does not settle
-        // the searching state: a new term drops the previous term's media
-        // before its replacement is requested.
-        startWith(EMPTY),
-      );
-    }),
-    startWith(EMPTY),
-    multicast(),
-  );
 
   const search = (term: string) => searchTerm$.next(term);
   const clear = () => {

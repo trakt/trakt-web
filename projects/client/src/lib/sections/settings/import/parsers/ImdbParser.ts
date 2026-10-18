@@ -80,9 +80,7 @@ function isRatingsFile(rows: unknown[]): boolean {
   return Boolean(first?.['Your Rating']);
 }
 
-async function parseImdbFile(
-  file: File,
-): Promise<UniversalImportItem[]> {
+async function parseImdbFile(file: File): Promise<UniversalImportItem[]> {
   const rows = await parseCsvFile(file);
 
   if (rows.length === 0) return [];

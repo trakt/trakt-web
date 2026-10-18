@@ -22,11 +22,10 @@ export function createConfirmationContext(): ConfirmationContext {
 
   return setContext(
     CONFIRMATION_CONTEXT_KEY,
-    getContext<ConfirmationContext>(CONFIRMATION_CONTEXT_KEY) ??
-      {
-        showConfirmation,
-        hideConfirmation,
-        activeConfirmation,
-      },
+    getContext<ConfirmationContext>(CONFIRMATION_CONTEXT_KEY) ?? {
+      showConfirmation,
+      hideConfirmation,
+      activeConfirmation,
+    },
   );
 }

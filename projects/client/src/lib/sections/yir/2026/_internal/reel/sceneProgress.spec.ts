@@ -18,7 +18,7 @@ describe('util: sceneProgress', () => {
 
   it('should grow monotonically', () => {
     const values = [400, 600, 800, 1000, 1200, 1400].map((scrollTop) =>
-      sceneProgress({ ...scene, scrollTop })
+      sceneProgress({ ...scene, scrollTop }),
     );
 
     expect(values).toEqual([...values].sort((a, b) => a - b));

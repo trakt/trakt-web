@@ -68,29 +68,33 @@ describe('getDisplayableRatings', () => {
     it('should hide tmdb when it has fewer votes than trakt', () => {
       const tmdbRatings = withTmdb({ rating: 8, votes: 2 });
 
-      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
-        .to.deep.equal({ ...tmdbRatings, tmdb: undefined });
+      expect(
+        getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }),
+      ).to.deep.equal({ ...tmdbRatings, tmdb: undefined });
     });
 
     it('should get tmdb when it has more votes than trakt', () => {
       const tmdbRatings = withTmdb({ rating: 8, votes: 10 });
 
-      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
-        .to.deep.equal(tmdbRatings);
+      expect(
+        getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }),
+      ).to.deep.equal(tmdbRatings);
     });
 
     it('should get tmdb when the vote counts are equal', () => {
       const tmdbRatings = withTmdb({ rating: 8, votes: 3 });
 
-      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
-        .to.deep.equal(tmdbRatings);
+      expect(
+        getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }),
+      ).to.deep.equal(tmdbRatings);
     });
 
     it('should hide tmdb when its vote count is missing and trakt has votes', () => {
       const tmdbRatings = withTmdb({ rating: 8 });
 
-      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
-        .to.deep.equal({ ...tmdbRatings, tmdb: undefined });
+      expect(
+        getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }),
+      ).to.deep.equal({ ...tmdbRatings, tmdb: undefined });
     });
 
     it('should get tmdb when there is no trakt rating', () => {
@@ -99,8 +103,9 @@ describe('getDisplayableRatings', () => {
         trakt: undefined,
       };
 
-      expect(getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }))
-        .to.deep.equal(tmdbRatings);
+      expect(
+        getDisplayableRatings({ ratings: tmdbRatings, entry: airedEntry }),
+      ).to.deep.equal(tmdbRatings);
     });
   });
 });

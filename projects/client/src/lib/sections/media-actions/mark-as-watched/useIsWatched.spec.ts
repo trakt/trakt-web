@@ -12,9 +12,8 @@ const MOVIE_ID = 999_999;
 function failHistorySync() {
   server.use(
     http.post('http://localhost/sync/history', () => HttpResponse.error()),
-    http.post(
-      'http://localhost/sync/history/remove',
-      () => HttpResponse.error(),
+    http.post('http://localhost/sync/history/remove', () =>
+      HttpResponse.error(),
     ),
   );
 }
@@ -36,7 +35,7 @@ describe('store: useIsWatched', () => {
       });
 
       const { isWatched } = await renderStore(() =>
-        useIsWatched({ type: 'movie', media: { id: MOVIE_ID } })
+        useIsWatched({ type: 'movie', media: { id: MOVIE_ID } }),
       );
 
       expect(await firstValueFrom(isWatched)).toBe(true);
@@ -53,7 +52,7 @@ describe('store: useIsWatched', () => {
       });
 
       const { isWatched } = await renderStore(() =>
-        useIsWatched({ type: 'movie', media: { id: MOVIE_ID } })
+        useIsWatched({ type: 'movie', media: { id: MOVIE_ID } }),
       );
 
       expect(await firstValueFrom(isWatched)).toBe(false);

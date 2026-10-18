@@ -30,12 +30,16 @@ describe('useCustomLibrary', () => {
     await firstValueFrom(cached.pipe(filter((result) => result.isSuccess)));
     populated = true;
     const emissions: Array<number | null> = [];
-    const result = await firstValueFrom(collection.pipe(
-      tap((value) =>
-        emissions.push(value ? value.movies.size + value.episodes.size : null)
+    const result = await firstValueFrom(
+      collection.pipe(
+        tap((value) =>
+          emissions.push(
+            value ? value.movies.size + value.episodes.size : null,
+          ),
+        ),
+        filter((value) => value !== null),
       ),
-      filter((value) => value !== null),
-    ));
+    );
 
     expect(markers).toHaveLength(2);
     expect(markers.at(0)).toBeTruthy();
@@ -46,11 +50,11 @@ describe('useCustomLibrary', () => {
   });
 
   it('should collect all non-Plex pages before exposing IDs for the clear option', async () => {
-    const movie = MediaLibraryResponseMock.find((item) =>
-      item.type === 'movie'
+    const movie = MediaLibraryResponseMock.find(
+      (item) => item.type === 'movie',
     );
-    const episode = MediaLibraryResponseMock.find((item) =>
-      item.type === 'episode'
+    const episode = MediaLibraryResponseMock.find(
+      (item) => item.type === 'episode',
     );
     const pages: string[] = [];
     server.use(
@@ -80,14 +84,12 @@ describe('useCustomLibrary', () => {
 
   it('should expose an empty custom library even when Plex has items', async () => {
     server.use(
-      http.get(
-        'http://localhost/sync/collection/media',
-        ({ request }) =>
-          HttpResponse.json(
-            new URL(request.url).searchParams.get('available_on') === 'other'
-              ? []
-              : MediaLibraryResponseMock,
-          ),
+      http.get('http://localhost/sync/collection/media', ({ request }) =>
+        HttpResponse.json(
+          new URL(request.url).searchParams.get('available_on') === 'other'
+            ? []
+            : MediaLibraryResponseMock,
+        ),
       ),
     );
     const result = await runQuery({

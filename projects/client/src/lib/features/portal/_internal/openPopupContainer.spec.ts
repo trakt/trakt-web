@@ -38,7 +38,7 @@ describe('action: usePortal', () => {
     popupNode.getBoundingClientRect = () => popupRect;
 
     const component = await renderStore(() =>
-      openPopupContainer(popupNode, targetNode, { position: 'right' })
+      openPopupContainer(popupNode, targetNode, { position: 'right' }),
     );
 
     forceOnScreen(popupNode, targetNode, 'left');
@@ -56,7 +56,7 @@ describe('action: usePortal', () => {
     popupNode.getBoundingClientRect = () => popupRect;
 
     const component = await renderStore(() =>
-      openPopupContainer(popupNode, targetNode, { position: 'right' })
+      openPopupContainer(popupNode, targetNode, { position: 'right' }),
     );
 
     forceOnScreen(popupNode, targetNode, 'left');
@@ -73,7 +73,7 @@ describe('action: usePortal', () => {
     popupNode.getBoundingClientRect = getBoundingClientRect;
 
     const component = await renderStore(() =>
-      openPopupContainer(popupNode, targetNode, { position: 'right' })
+      openPopupContainer(popupNode, targetNode, { position: 'right' }),
     );
 
     vi.advanceTimersByTime(16);
@@ -107,7 +107,7 @@ describe('action: usePortal', () => {
     popupNode.getBoundingClientRect = getBoundingClientRect;
 
     const component = await renderStore(() =>
-      openPopupContainer(popupNode, targetNode, { position: 'right' })
+      openPopupContainer(popupNode, targetNode, { position: 'right' }),
     );
 
     vi.advanceTimersByTime(16);

@@ -7,14 +7,10 @@ describe('util: calendarFeedOrigin', () => {
     expect(calendarFeedOrigin(Environment.production_private)).toBe(
       'https://trakt.tv',
     );
-    expect(calendarFeedOrigin(Environment.production)).toBe(
-      'https://trakt.tv',
-    );
+    expect(calendarFeedOrigin(Environment.production)).toBe('https://trakt.tv');
   });
 
   it('should keep the staging api host on staging', () => {
-    expect(calendarFeedOrigin(Environment.staging)).toBe(
-      Environment.staging,
-    );
+    expect(calendarFeedOrigin(Environment.staging)).toBe(Environment.staging);
   });
 });

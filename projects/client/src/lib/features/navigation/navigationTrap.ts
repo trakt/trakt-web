@@ -22,10 +22,7 @@ export function navigationTrap(
 
     currentElement.next(document.activeElement);
 
-    element.setAttribute(
-      'data-dpad-navigation',
-      DpadNavigationType.Trap,
-    );
+    element.setAttribute('data-dpad-navigation', DpadNavigationType.Trap);
 
     const selectableElement = element.querySelector(
       `${itemParentSelector} [data-dpad-navigation='${DpadNavigationType.Item}']`,

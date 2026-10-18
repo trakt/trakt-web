@@ -13,9 +13,12 @@ describe('util: isSameSmartListFilters', () => {
 
   it('should detect a changed value', () => {
     expect(
-      isSameSmartListFilters({ votes: [100, 999_999_999] }, {
-        votes: [1_000, 999_999_999],
-      }),
+      isSameSmartListFilters(
+        { votes: [100, 999_999_999] },
+        {
+          votes: [1_000, 999_999_999],
+        },
+      ),
     ).toBe(false);
   });
 

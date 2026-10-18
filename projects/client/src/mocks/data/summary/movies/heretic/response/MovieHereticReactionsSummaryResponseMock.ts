@@ -1,7 +1,7 @@
 import type { MediaReactionsSummaryResponse } from '$lib/requests/models/MediaReactionsSummaryResponse.ts';
 
-export const MovieHereticReactionsSummaryResponseMock:
-  MediaReactionsSummaryResponse = {
+export const MovieHereticReactionsSummaryResponseMock: MediaReactionsSummaryResponse =
+  {
     reaction_count: 25,
     user_count: 18,
     distribution: {

@@ -9,10 +9,12 @@ type BuildServiceTilesParams = {
   isMobile: boolean;
 };
 
-export function buildServiceTiles(
-  { justWatchServices, plexServices, youtubeTile, isMobile }:
-    BuildServiceTilesParams,
-) {
+export function buildServiceTiles({
+  justWatchServices,
+  plexServices,
+  youtubeTile,
+  isMobile,
+}: BuildServiceTilesParams) {
   const tiles = isMobile
     ? [...plexServices, ...justWatchServices]
     : justWatchServices;

@@ -19,32 +19,34 @@ import {
   mapToAnticipatedShow,
 } from '../shows/showAnticipatedQuery.ts';
 
-type MediaAnticipatedParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & SearchParams;
+type MediaAnticipatedParams = PaginationParams &
+  ApiParams &
+  FilterParams &
+  SearchParams;
 
 const AnticipatedMediaSchema = z.union([
   AnticipatedMovieSchema,
   AnticipatedShowSchema,
 ]);
 
-const mediaAnticipatedRequest = (
-  { fetch, limit, page, filter, theme, search }: MediaAnticipatedParams,
-) => {
-  return api({ fetch })
-    .media
-    .anticipated({
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        theme,
-        ...filter,
-        ...search,
-      },
-    });
+const mediaAnticipatedRequest = ({
+  fetch,
+  limit,
+  page,
+  filter,
+  theme,
+  search,
+}: MediaAnticipatedParams) => {
+  return api({ fetch }).media.anticipated({
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      theme,
+      ...filter,
+      ...search,
+    },
+  });
 };
 
 export const mediaAnticipatedQuery = defineInfiniteQuery({
@@ -56,9 +58,7 @@ export const mediaAnticipatedQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (
-    params: MediaAnticipatedParams,
-  ) => [
+  dependencies: (params: MediaAnticipatedParams) => [
     params.limit,
     params.page,
     ...getGlobalFilterDependencies(params.filter),
@@ -71,8 +71,8 @@ export const mediaAnticipatedQuery = defineInfiniteQuery({
       show
         ? [mapToAnticipatedShow({ ...rest, show })]
         : movie
-        ? [mapToAnticipatedMovie({ ...rest, movie })]
-        : []
+          ? [mapToAnticipatedMovie({ ...rest, movie })]
+          : [],
     ),
     page: extractPageMeta(response.headers),
   }),

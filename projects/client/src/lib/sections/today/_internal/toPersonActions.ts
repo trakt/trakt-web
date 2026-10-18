@@ -7,10 +7,12 @@ export function toPersonActions(
 ): TodayPersonAction[] {
   return stories
     .flatMap((story) =>
-      story.actions.map((action): TodayPersonAction => ({
-        ...action,
-        media: story.media,
-      }))
+      story.actions.map(
+        (action): TodayPersonAction => ({
+          ...action,
+          media: story.media,
+        }),
+      ),
     )
     .toSorted(byMostRecent);
 }

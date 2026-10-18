@@ -44,13 +44,14 @@ describe('ImportSummary', () => {
   it('should show an enabled switch for every import action with items', () => {
     render(ImportSummary, baseProps());
 
-    expect(screen.getByRole('switch', { name: '2 items for History' }))
-      .toBeChecked();
-    expect(screen.getByRole('switch', { name: '3 items for Watchlist' }))
-      .toBeChecked();
+    expect(
+      screen.getByRole('switch', { name: '2 items for History' }),
+    ).toBeChecked();
+    expect(
+      screen.getByRole('switch', { name: '3 items for Watchlist' }),
+    ).toBeChecked();
     expect(screen.getByRole('switch', { name: '1 ratings' })).toBeChecked();
-    expect(screen.getByRole('switch', { name: '1 list items' }))
-      .toBeChecked();
+    expect(screen.getByRole('switch', { name: '1 list items' })).toBeChecked();
   });
 
   it('should request skipping an import action when its switch is clicked', async () => {

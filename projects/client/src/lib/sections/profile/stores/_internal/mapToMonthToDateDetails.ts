@@ -18,7 +18,7 @@ function sumRuntime(
   movies: MovieActivityHistory[],
   episodes: EpisodeActivityHistory[],
 ): number {
-  const runtimeOf = (value: number) => Number.isNaN(value) ? 0 : value;
+  const runtimeOf = (value: number) => (Number.isNaN(value) ? 0 : value);
   const movieMinutes = movies.reduce(
     (sum, m) => sum + runtimeOf(m.movie.runtime),
     0,
@@ -30,18 +30,19 @@ function sumRuntime(
   return movieMinutes + episodeMinutes;
 }
 
-export function mapToMonthToDateDetails(
-  { movies, episodes, ratingCount }: MapToMonthToDateDetailsParams,
-): MonthToDateDetails {
-  const allActivity = [...movies, ...episodes]
-    .toSorted((a, b) => {
-      return a.watchedAt.getTime() - b.watchedAt.getTime();
-    });
+export function mapToMonthToDateDetails({
+  movies,
+  episodes,
+  ratingCount,
+}: MapToMonthToDateDetailsParams): MonthToDateDetails {
+  const allActivity = [...movies, ...episodes].toSorted((a, b) => {
+    return a.watchedAt.getTime() - b.watchedAt.getTime();
+  });
 
   const movieCount = movies.length;
   const episodeCount = episodes.length;
-  const showCount =
-    new Set(episodes.map((activity) => activity.show.slug)).size;
+  const showCount = new Set(episodes.map((activity) => activity.show.slug))
+    .size;
 
   const firstWatchActivity = allActivity.at(0);
   return {

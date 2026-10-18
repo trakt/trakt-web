@@ -25,7 +25,7 @@ const FAMILIES: Record<YirPersonaId, string> = {
 export function personaFonts(ids: ReadonlyArray<YirPersonaId>): string {
   const families = [...new Set(ids.map((id) => FAMILIES[id]))];
 
-  return `https://fonts.googleapis.com/css2?${
-    [BASE, ...families].join('&')
-  }&display=swap`;
+  return `https://fonts.googleapis.com/css2?${[BASE, ...families].join(
+    '&',
+  )}&display=swap`;
 }

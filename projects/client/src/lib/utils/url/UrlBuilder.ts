@@ -47,10 +47,9 @@ type DiscoverUrlParams = SearchParams & {
   mode?: DiscoverMode;
 };
 
-type UrlBuilderParams =
-  & TypeParams
-  & Omit<WellKnownQueryParams, 'search'>
-  & SearchParams;
+type UrlBuilderParams = TypeParams &
+  Omit<WellKnownQueryParams, 'search'> &
+  SearchParams;
 
 function encodeRecord(
   params?: Record<string, string | number | boolean>,
@@ -89,7 +88,8 @@ const discoverDrilldownFactory =
   };
 
 const categoryDrilldownFactory =
-  (category: string) => ({ type, ...params }: UrlBuilderParams) => {
+  (category: string) =>
+  ({ type, ...params }: UrlBuilderParams) => {
     const baseUrl = `/${category}/${type}s`;
     return baseUrl + buildParamString(sanitizeParams(params));
   };
@@ -167,17 +167,15 @@ export const UrlBuilder = {
   home: () => '/home',
   today: () => '/today',
   mixtape: (params: MixtapeUrlParams = {}) =>
-    `/discover/mixtape${
-      buildParamString({
-        type: params.type,
-        picks: toIdList(params.picks),
-        skips: toIdList(params.skips),
-        kept: toRoundList(params.kept),
-        to: params.savedTo ?? undefined,
-        view: params.view,
-        source: params.source,
-      })
-    }`,
+    `/discover/mixtape${buildParamString({
+      type: params.type,
+      picks: toIdList(params.picks),
+      skips: toIdList(params.skips),
+      kept: toRoundList(params.kept),
+      to: params.savedTo ?? undefined,
+      view: params.view,
+      source: params.source,
+    })}`,
   comment: (id: number) => `/comments/${id}`,
   welcome: () => '/welcome',
   game: () => '/play/rated-higher',
@@ -243,21 +241,21 @@ export const UrlBuilder = {
     user: (username: string) => `/profile/${username}`,
     me: () => UrlBuilder.profile.user('me'),
     favorites: (username: string, params: Record<string, string> = {}) =>
-      `/profile/${username}/favorites${
-        buildParamString(sanitizeParams(params))
-      }`,
+      `/profile/${username}/favorites${buildParamString(
+        sanitizeParams(params),
+      )}`,
     history: (username: string) => `/profile/${username}/history`,
     social: (username: string) => `/profile/${username}/social`,
     progress: (username: string, params: Record<string, string> = {}) =>
-      `/profile/${username}/progress${
-        buildParamString(sanitizeParams(params))
-      }`,
+      `/profile/${username}/progress${buildParamString(
+        sanitizeParams(params),
+      )}`,
   },
   users: (id: string) => ({
     lists: (slug: string, params: Record<string, string> = {}) =>
-      `/users/${id}/lists/${slug}${
-        buildParamString({ ...sanitizeParams(params) })
-      }`,
+      `/users/${id}/lists/${slug}${buildParamString({
+        ...sanitizeParams(params),
+      })}`,
     yearToDate: (year: number) => `/users/${id}/year/${year}`,
     allTime: () => `/users/${id}/year/all`,
     monthInReview: (year: number, month: number) =>
@@ -281,9 +279,10 @@ export const UrlBuilder = {
       view: (slug: string) => `/lists/smart/view/${slug}`,
     },
     official: (slug: string, params: Record<string, string | number> = {}) =>
-      `/lists/official/${slug}${
-        buildParamString({ ...sanitizeParams(params), type: params.type })
-      }`,
+      `/lists/official/${slug}${buildParamString({
+        ...sanitizeParams(params),
+        type: params.type,
+      })}`,
     user: (user: string, params?: UrlBuilderParams) => {
       if (!params) {
         return `/users/${user}/lists`;
@@ -292,18 +291,18 @@ export const UrlBuilder = {
       return categoryDrilldownFactory(`users/${user}/lists`)(params);
     },
     watchlist: (user: string, params: Record<string, string | number> = {}) => {
-      return `/users/${user}/watchlist${
-        buildParamString(sanitizeParams(params))
-      }`;
+      return `/users/${user}/watchlist${buildParamString(
+        sanitizeParams(params),
+      )}`;
     },
     all: (
       user: string,
       type: PersonalListType,
       params: Pick<WellKnownQueryParams, 'sort_by' | 'sort_how'> = {},
     ) =>
-      `${listsDrilldownFactory(user)(type)}${
-        buildParamString(sanitizeParams(params))
-      }`,
+      `${listsDrilldownFactory(user)(type)}${buildParamString(
+        sanitizeParams(params),
+      )}`,
   },
   app: {
     android: () =>

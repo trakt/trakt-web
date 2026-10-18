@@ -5,9 +5,10 @@ type StopShowRewatchingParams = {
   id: number | string;
 } & ApiParams;
 
-export async function stopShowRewatchingRequest(
-  { fetch, id }: StopShowRewatchingParams,
-): Promise<boolean> {
+export async function stopShowRewatchingRequest({
+  fetch,
+  id,
+}: StopShowRewatchingParams): Promise<boolean> {
   const response = await rawApiFetch({
     fetch,
     path: `/shows/${encodeURIComponent(`${id}`)}/progress/watched/reset`,

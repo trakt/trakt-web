@@ -27,29 +27,25 @@ function withSummaryHook<T extends MediaEntry>(
   });
 }
 
-function resolveMediaData(
-  { type, slug, fetch, onSummary }: FetchMediaDataParams,
-) {
+function resolveMediaData({
+  type,
+  slug,
+  fetch,
+  onSummary,
+}: FetchMediaDataParams) {
   if (type === 'movie') {
-    return Promise.all(
-      [
-        withSummaryHook(
-          movieSummaryQuery({ slug, fetch }).execute(),
-          onSummary,
-        ),
-        movieRatingQuery({ slug, fetch }).execute(),
-        moviePeopleQuery({ slug, fetch }).execute(),
-      ] as const,
-    );
+    return Promise.all([
+      withSummaryHook(movieSummaryQuery({ slug, fetch }).execute(), onSummary),
+      movieRatingQuery({ slug, fetch }).execute(),
+      moviePeopleQuery({ slug, fetch }).execute(),
+    ] as const);
   }
 
-  return Promise.all(
-    [
-      withSummaryHook(showSummaryQuery({ slug, fetch }).execute(), onSummary),
-      showRatingQuery({ slug, fetch }).execute(),
-      showPeopleQuery({ slug, fetch }).execute(),
-    ] as const,
-  );
+  return Promise.all([
+    withSummaryHook(showSummaryQuery({ slug, fetch }).execute(), onSummary),
+    showRatingQuery({ slug, fetch }).execute(),
+    showPeopleQuery({ slug, fetch }).execute(),
+  ] as const);
 }
 
 export async function fetchMediaData(params: FetchMediaDataParams) {

@@ -60,9 +60,12 @@ function shouldInsertBefore(
   return (movieValue - episodeValue) * direction < 0;
 }
 
-export function interleaveMediaProgress(
-  { episodes, movies, sortBy, sortHow = 'desc' }: SortMediaProgressProps,
-) {
+export function interleaveMediaProgress({
+  episodes,
+  movies,
+  sortBy,
+  sortHow = 'desc',
+}: SortMediaProgressProps) {
   const sortedMovies = sortBy
     ? sortMovieProgress({ entries: movies, sortBy, sortHow })
     : movies;
@@ -91,8 +94,8 @@ export function interleaveMediaProgress(
     },
   );
 
-  const remainingMovies = sortedMovies.filter((movie) =>
-    !insertedKeys.has(movie.key)
+  const remainingMovies = sortedMovies.filter(
+    (movie) => !insertedKeys.has(movie.key),
   );
 
   return [...result, ...remainingMovies];

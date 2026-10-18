@@ -21,9 +21,9 @@ describe('focusSomething', () => {
 
     focusSomething();
 
-    expect(document.activeElement).toBe(list.querySelector(
-      `[data-dpad-navigation="${DpadNavigationType.Item}"]`,
-    ));
+    expect(document.activeElement).toBe(
+      list.querySelector(`[data-dpad-navigation="${DpadNavigationType.Item}"]`),
+    );
   });
 
   it('should not focus anything if an element is already focused', () => {

@@ -10,9 +10,10 @@ type UseCanAddFromListsProps = {
   userSlug: string;
 };
 
-export function useCanAddFromLists(
-  { list$, userSlug }: UseCanAddFromListsProps,
-) {
+export function useCanAddFromLists({
+  list$,
+  userSlug,
+}: UseCanAddFromListsProps) {
   const collaborationLists = useQuery(
     collaborationListsQuery({ slug: userSlug }),
   );
@@ -20,17 +21,13 @@ export function useCanAddFromLists(
     list$.pipe(map(({ id }) => listCollaboratorsQuery({ listId: id }))),
   );
 
-  const access = combineLatest([
-    list$,
-    collaborationLists,
-    collaborators,
-  ]).pipe(
+  const access = combineLatest([list$, collaborationLists, collaborators]).pipe(
     map(([list, $lists, $collaborators]) =>
       toAddFromListsAccess({
         isOwner: list.user.slug === userSlug,
         isCollaborator: ($lists.data ?? []).some(({ id }) => id === list.id),
         hasCollaborators: ($collaborators.data ?? []).length > 0,
-      })
+      }),
     ),
   );
 

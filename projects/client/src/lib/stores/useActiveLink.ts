@@ -8,11 +8,7 @@ type ActiveLinkOptions = {
   nested?: boolean;
 };
 
-const isMatch = (
-  href: string | Nil,
-  route: string | Nil,
-  nested: boolean,
-) => {
+const isMatch = (href: string | Nil, route: string | Nil, nested: boolean) => {
   if (href == null || route == null) {
     return false;
   }
@@ -31,11 +27,7 @@ export function useActiveLink(href: string | Nil, options?: ActiveLinkOptions) {
   );
 
   afterNavigate((nav) => {
-    isActive.next(isMatch(
-      href,
-      nav.to?.url.pathname,
-      nested,
-    ));
+    isActive.next(isMatch(href, nav.to?.url.pathname, nested));
   });
 
   return {

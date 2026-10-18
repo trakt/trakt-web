@@ -4,11 +4,13 @@ import { FollowingActivityMappedMock } from '$mocks/data/users/mapped/FollowingA
 import { describe, expect, it } from 'vitest';
 import { toTodayStories } from './toTodayStories.ts';
 
-const forYou: TodayForYouItem[] = [{
-  key: 'start-watching-movie-1',
-  type: 'start-watching',
-  media: MovieHereticMappedMock,
-}];
+const forYou: TodayForYouItem[] = [
+  {
+    key: 'start-watching-movie-1',
+    type: 'start-watching',
+    media: MovieHereticMappedMock,
+  },
+];
 
 describe('util: toTodayStories', () => {
   it('should put the for you story first, then the titles', () => {
@@ -21,7 +23,7 @@ describe('util: toTodayStories', () => {
       groups.map((group) =>
         group.type === 'for-you'
           ? 'for-you'
-          : group.story.actions.map((action) => action.kind).join(',')
+          : group.story.actions.map((action) => action.kind).join(','),
       ),
     ).toEqual(['for-you', 'watch,rating', 'comment']);
   });

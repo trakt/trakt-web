@@ -23,19 +23,19 @@ function toYear(value?: string): number | undefined {
   return isNaN(year) ? undefined : year;
 }
 
-function parseExtractorRow(
-  row: TvTimeExtractorRow,
-): UniversalImportItem[] {
+function parseExtractorRow(row: TvTimeExtractorRow): UniversalImportItem[] {
   if (row.type !== 'watch' || row.media_type !== 'movie') return [];
 
-  return [{
-    action: 'history',
-    type: 'movie',
-    ids: toImportIds({ imdb: row.imdb_id, tmdb: row.tmdb_id }),
-    title: row.title || undefined,
-    year: toYear(row.year),
-    watched_at: toImportISOString(row.watched_at),
-  }];
+  return [
+    {
+      action: 'history',
+      type: 'movie',
+      ids: toImportIds({ imdb: row.imdb_id, tmdb: row.tmdb_id }),
+      title: row.title || undefined,
+      year: toYear(row.year),
+      watched_at: toImportISOString(row.watched_at),
+    },
+  ];
 }
 
 async function readCsvTexts(file: File): Promise<string[]> {
@@ -52,9 +52,11 @@ export const TvTimeExtractorParser: FileParser = {
 
   canParse(files) {
     const [file] = files;
-    return files.length === 1 &&
+    return (
+      files.length === 1 &&
       (file?.name.endsWith('.csv') === true ||
-        file?.name.endsWith('.zip') === true);
+        file?.name.endsWith('.zip') === true)
+    );
   },
 
   async parse(files) {

@@ -3,10 +3,7 @@ import { EpisodeEntrySchema } from './EpisodeEntry.ts';
 import { MovieEntrySchema } from './MovieEntry.ts';
 import { ShowEntrySchema } from './ShowEntry.ts';
 
-const NowPlayingActionSchema = z.enum([
-  'checkin',
-  'scrobble',
-]);
+const NowPlayingActionSchema = z.enum(['checkin', 'scrobble']);
 
 const NowPlayingBaseSchema = z.object({
   startedAt: z.date(),

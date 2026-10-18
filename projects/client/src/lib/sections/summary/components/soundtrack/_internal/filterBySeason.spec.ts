@@ -26,8 +26,9 @@ describe('util: filterBySeason', () => {
   });
 
   it('should keep the season and the series-wide tracks', () => {
-    expect(filterBySeason(tracks, 2).map(({ position }) => position))
-      .to.deep.equal([0, 2]);
+    expect(
+      filterBySeason(tracks, 2).map(({ position }) => position),
+    ).to.deep.equal([0, 2]);
   });
 
   it('should treat a missing season as series-wide', () => {

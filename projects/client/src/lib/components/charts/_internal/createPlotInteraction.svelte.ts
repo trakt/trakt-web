@@ -22,9 +22,10 @@ type PlotInteractionConfig = {
  * Returns reactive getters plus a ready-to-spread handler bag so every chart
  * gets identical behaviour without forking it.
  */
-export function createPlotInteraction(
-  { resolveIndex, count }: PlotInteractionConfig,
-) {
+export function createPlotInteraction({
+  resolveIndex,
+  count,
+}: PlotInteractionConfig) {
   let activeIndex = $state<number | null>(null);
   let pinned = $state(false);
   let dragging = $state(false);
@@ -90,8 +91,8 @@ export function createPlotInteraction(
     // Horizontal arrows follow the reading direction; mirror them in RTL so
     // ArrowRight always moves toward the visual start. Vertical arrows don't flip.
     const target = event.currentTarget;
-    const rtl = target instanceof Element &&
-      getComputedStyle(target).direction === 'rtl';
+    const rtl =
+      target instanceof Element && getComputedStyle(target).direction === 'rtl';
     const forward = rtl ? -1 : 1;
 
     switch (event.key) {

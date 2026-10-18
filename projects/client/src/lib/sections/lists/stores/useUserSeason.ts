@@ -12,8 +12,7 @@ export function useUserSeason(showId$: Observable<number | Nil>) {
     map(([showId, authorized, $history]) => {
       if (!showId || !authorized || !$history) return EMPTY_SEASON_INFO;
 
-      const episodes = $history.shows.get(showId)?.episodes ??
-        [{ season: -1 }];
+      const episodes = $history.shows.get(showId)?.episodes ?? [{ season: -1 }];
       const season = Math.max(...episodes.map((episode) => episode.season));
 
       return {

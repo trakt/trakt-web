@@ -7,13 +7,19 @@ type Bounds = {
   right: number;
 };
 
-function isFullyVisible(
-  { child, container }: { child: Element; container: Bounds },
-) {
+function isFullyVisible({
+  child,
+  container,
+}: {
+  child: Element;
+  container: Bounds;
+}) {
   const rect = child.getBoundingClientRect();
 
-  return rect.left >= container.left - EDGE_TOLERANCE_PX &&
-    rect.right <= container.right + EDGE_TOLERANCE_PX;
+  return (
+    rect.left >= container.left - EDGE_TOLERANCE_PX &&
+    rect.right <= container.right + EDGE_TOLERANCE_PX
+  );
 }
 
 function getContentBounds(node: HTMLElement): Bounds {

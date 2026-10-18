@@ -12,8 +12,9 @@ describe('NoveltySwitch', () => {
   it('should render a switch element', () => {
     render(NoveltySwitch, defaultProps);
 
-    expect(screen.getByRole('switch', { name: 'Test Switch' }))
-      .toBeInTheDocument();
+    expect(
+      screen.getByRole('switch', { name: 'Test Switch' }),
+    ).toBeInTheDocument();
   });
 
   it('should render inner text', () => {

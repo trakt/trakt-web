@@ -1,10 +1,10 @@
 import type { RatingsResponse } from '@trakt/api';
 
 export const EpisodeSiloRatingsResponseMock: RatingsResponse = {
-  'trakt': {
-    'rating': 8.15357,
-    'votes': 7241,
-    'distribution': {
+  trakt: {
+    rating: 8.15357,
+    votes: 7241,
+    distribution: {
       '1': 40,
       '2': 21,
       '3': 26,
@@ -17,25 +17,25 @@ export const EpisodeSiloRatingsResponseMock: RatingsResponse = {
       '10': 1130,
     },
   },
-  'tmdb': {
-    'rating': 8.2,
-    'votes': 1181,
-    'link': 'https://www.themoviedb.org/tv/125988/season/1/episode/1',
+  tmdb: {
+    rating: 8.2,
+    votes: 1181,
+    link: 'https://www.themoviedb.org/tv/125988/season/1/episode/1',
   },
-  'imdb': {
-    'rating': 8.1,
-    'votes': 144574,
-    'link': 'https://www.imdb.com/title/tt14693272',
+  imdb: {
+    rating: 8.1,
+    votes: 144574,
+    link: 'https://www.imdb.com/title/tt14693272',
   },
-  'metascore': {
-    'rating': null,
-    'link': 'https://www.imdb.com/title/tt14693272/criticreviews',
+  metascore: {
+    rating: null,
+    link: 'https://www.imdb.com/title/tt14693272/criticreviews',
   },
-  'rotten_tomatoes': {
-    'rating': 92,
-    'user_rating': 64,
-    'link': null,
-    'state': null,
-    'user_state': null,
+  rotten_tomatoes: {
+    rating: 92,
+    user_rating: 64,
+    link: null,
+    state: null,
+    user_state: null,
   },
 };

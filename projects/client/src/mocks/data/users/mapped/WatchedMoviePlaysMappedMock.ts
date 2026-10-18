@@ -11,8 +11,6 @@ export const WatchedMoviePlaysMappedMock: MediaPlays[] = [
   },
   {
     id: 294963,
-    plays: [
-      { id: 9004, watchedAt: new Date('2024-04-05T18:00:00.000Z') },
-    ],
+    plays: [{ id: 9004, watchedAt: new Date('2024-04-05T18:00:00.000Z') }],
   },
 ];

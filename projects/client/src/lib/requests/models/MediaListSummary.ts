@@ -13,18 +13,22 @@ export const MediaListSummarySchema = z.object({
   user: UserProfileSchema,
   count: z.number(),
   likeCount: z.number(),
-  posters: z.array(z.object({
-    url: ImageUrlsSchema,
-  })),
+  posters: z.array(
+    z.object({
+      url: ImageUrlsSchema,
+    }),
+  ),
   updatedAt: z.date(),
   sortHow: z.enum(['asc', 'desc']),
   sortBy: z.string(),
   type: ListTypeSchema,
   privacy: ListPrivacySchema,
-  staleOrigin: z.object({
-    name: z.string(),
-    url: z.string().nullable(),
-  }).nullable(),
+  staleOrigin: z
+    .object({
+      name: z.string(),
+      url: z.string().nullable(),
+    })
+    .nullable(),
   convertedTo: z.object({ slug: z.string() }).nullable(),
 });
 

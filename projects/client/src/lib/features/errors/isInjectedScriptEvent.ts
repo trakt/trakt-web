@@ -31,9 +31,10 @@ function isInjectedFrame(frame: StackFrame): boolean {
 }
 
 export function isInjectedScriptEvent(event: SentryErrorEvent): boolean {
-  const frames = event.exception?.values?.flatMap(
-    ({ stacktrace }) => stacktrace?.frames ?? [],
-  ) ?? [];
+  const frames =
+    event.exception?.values?.flatMap(
+      ({ stacktrace }) => stacktrace?.frames ?? [],
+    ) ?? [];
 
   if (frames.length === 0) return false;
 

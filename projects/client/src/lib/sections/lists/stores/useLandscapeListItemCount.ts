@@ -10,7 +10,8 @@ const FALLBACK_MAX_ITEM_COUNT = 7;
  * Non-scrollable (masked) lists render exactly this many cards.
  */
 export function useLandscapeListItemCount(): Observable<number> {
-  const maxCount = Number(computeVariable('--max-list-landscape-item-count')) ||
+  const maxCount =
+    Number(computeVariable('--max-list-landscape-item-count')) ||
     FALLBACK_MAX_ITEM_COUNT;
 
   const innerWidth = useVarToPixels('var(--list-inner-width)', false);

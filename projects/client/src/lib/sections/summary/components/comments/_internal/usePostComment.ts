@@ -75,9 +75,10 @@ function addCommentRequest(props: PostCommentProps) {
     });
   }
 
-  const traktId = props.type === 'episode' || props.type === 'season'
-    ? props.id
-    : props.media.id;
+  const traktId =
+    props.type === 'episode' || props.type === 'season'
+      ? props.id
+      : props.media.id;
   return postCommentRequest({
     body: {
       ...commonProps,
@@ -112,11 +113,13 @@ export function usePostComment() {
   const error = new BehaviorSubject<CommentError | null>(null);
   const { track } = useTrack(AnalyticsEvent.AddComment);
 
-  const comment = useMutation(defineMutation({
-    key: 'comment:post',
-    request: (props: PostCommentProps) => addCommentRequest(props),
-    invalidations: ({ variables }) => toInvalidations(variables),
-  }));
+  const comment = useMutation(
+    defineMutation({
+      key: 'comment:post',
+      request: (props: PostCommentProps) => addCommentRequest(props),
+      invalidations: ({ variables }) => toInvalidations(variables),
+    }),
+  );
 
   const postComment = async (props: PostCommentProps) => {
     const current = await resolve(user);

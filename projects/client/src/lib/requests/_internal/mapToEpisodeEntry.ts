@@ -37,8 +37,7 @@ export function mapToEpisodeEntry(
     id: episode.ids.trakt,
     imdbId: episode.ids.imdb,
     key: `episode-${episode.ids.trakt}`,
-    type: episode.episode_type as EpisodeType ??
-      EpisodeUnknownType.unknown,
+    type: (episode.episode_type as EpisodeType) ?? EpisodeUnknownType.unknown,
     title: episode.title ?? '',
     overview: episode.overview ?? '',
     season: episode.season,
@@ -46,9 +45,7 @@ export function mapToEpisodeEntry(
     number: episode.number,
     runtime: episode.runtime ?? NaN,
     cover: {
-      url: prependHttps(
-        thumbUrl(posterCandidate),
-      ),
+      url: prependHttps(thumbUrl(posterCandidate)),
     },
     airDate,
     releaseDate,

@@ -32,10 +32,12 @@ type BuildMonthMatrixParams<T> = {
 
 const DAYS_IN_WEEK = 7;
 
-export function buildMonthMatrix<T>(
-  { referenceDate, activeDate, allDays, localeKey = 'en' }:
-    BuildMonthMatrixParams<T>,
-): MonthMatrix<T> {
+export function buildMonthMatrix<T>({
+  referenceDate,
+  activeDate,
+  allDays,
+  localeKey = 'en',
+}: BuildMonthMatrixParams<T>): MonthMatrix<T> {
   const monthEnd = endOfMonth(referenceDate);
   const gridStart = getStartOfWeek(startOfMonth(referenceDate), localeKey);
   const weekCount = Math.ceil(
@@ -57,9 +59,8 @@ export function buildMonthMatrix<T>(
 
     return {
       key: dateKey(weekStart),
-      cells: Array.from(
-        { length: DAYS_IN_WEEK },
-        (_, day) => addDays(weekStart, day),
+      cells: Array.from({ length: DAYS_IN_WEEK }, (_, day) =>
+        addDays(weekStart, day),
       )
         .filter((date) => date <= monthEnd)
         .map(toCell),
@@ -67,7 +68,7 @@ export function buildMonthMatrix<T>(
   });
 
   const activeWeekIndex = weeks.findIndex((week) =>
-    week.cells.some((cell) => isSameDay(cell.date, activeDate))
+    week.cells.some((cell) => isSameDay(cell.date, activeDate)),
   );
 
   return { weeks, activeWeekIndex };

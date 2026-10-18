@@ -133,9 +133,7 @@ function createUseUserInstance() {
   );
   const favoritesQuerySignal = useQuery(currentUserFavoritesQuery());
   const followingQuerySignal = useQuery(currentUserNetworkQuery());
-  const digitalLibraryQuerySignal = useQuery(
-    currentUserDigitalLibraryQuery(),
-  );
+  const digitalLibraryQuerySignal = useQuery(currentUserDigitalLibraryQuery());
   const likesQuerySignal = useQuery(currentUserLikesQuery());
   const limitsQuerySignal = useQuery(userLimitsQuery());
   const notesQuerySignal = useQuery(currentUserNotesQuery());
@@ -252,12 +250,13 @@ function createUseUserInstance() {
         blocked: blockedQuerySignal.pipe(
           map((blocked) => blocked.data),
           distinctUntilChanged(),
-          map((blocked) =>
-            new Set(
-              (blocked ?? [])
-                .map((profile) => profile.slug)
-                .filter((slug): slug is string => Boolean(slug)),
-            )
+          map(
+            (blocked) =>
+              new Set(
+                (blocked ?? [])
+                  .map((profile) => profile.slug)
+                  .filter((slug): slug is string => Boolean(slug)),
+              ),
           ),
         ),
       });

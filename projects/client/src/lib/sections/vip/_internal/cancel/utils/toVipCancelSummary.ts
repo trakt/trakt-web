@@ -37,11 +37,11 @@ const toRetentionOffer = (
 ): VipRetentionOffer | null =>
   offer
     ? {
-      source: 'retention',
-      discountedAmount: offer.discountedAmount,
-      totalPrice: offer.amount,
-      monthlyAmount: offer.discountedAmount / TWO_YEAR_MONTHS,
-    }
+        source: 'retention',
+        discountedAmount: offer.discountedAmount,
+        totalPrice: offer.amount,
+        monthlyAmount: offer.discountedAmount / TWO_YEAR_MONTHS,
+      }
     : null;
 
 const toDealOffer = (
@@ -50,11 +50,11 @@ const toDealOffer = (
 ): VipRetentionOffer | null =>
   plan
     ? {
-      source,
-      discountedAmount: plan.discount.discountedAmount,
-      totalPrice: plan.totalPrice,
-      monthlyAmount: plan.discount.discountedAmountMonthly,
-    }
+        source,
+        discountedAmount: plan.discount.discountedAmount,
+        totalPrice: plan.totalPrice,
+        monthlyAmount: plan.discount.discountedAmountMonthly,
+      }
     : null;
 
 const toStreamingLoss = (
@@ -62,8 +62,9 @@ const toStreamingLoss = (
 ): VipCancelLoss | null => {
   const connected = connections
     .filter(({ isConnected }) => isConnected)
-    .toSorted((a, b) =>
-      (b.lastSyncedAt?.getTime() ?? 0) - (a.lastSyncedAt?.getTime() ?? 0)
+    .toSorted(
+      (a, b) =>
+        (b.lastSyncedAt?.getTime() ?? 0) - (a.lastSyncedAt?.getTime() ?? 0),
     );
   const unlinked = connected.slice(1).map(({ name }) => name);
 
@@ -75,12 +76,12 @@ const toPlexLosses = (
 ): ReadonlyArray<VipCancelLoss> => {
   if (!plex) return [];
 
-  const scrobbling: ReadonlyArray<VipCancelLoss> = plex.scrobbleEvents > 0
-    ? [{ kind: 'plex-scrobbling' }]
-    : [];
-  const servers: ReadonlyArray<VipCancelLoss> = plex.syncedServers > 1
-    ? [{ kind: 'plex-servers', count: plex.syncedServers - 1 }]
-    : [];
+  const scrobbling: ReadonlyArray<VipCancelLoss> =
+    plex.scrobbleEvents > 0 ? [{ kind: 'plex-scrobbling' }] : [];
+  const servers: ReadonlyArray<VipCancelLoss> =
+    plex.syncedServers > 1
+      ? [{ kind: 'plex-servers', count: plex.syncedServers - 1 }]
+      : [];
 
   return [...scrobbling, ...servers];
 };
@@ -137,7 +138,7 @@ export function toVipCancelSummary(
     manageUrl: subscription.manageUrl,
     offer: toOffer(subscription, params.dealPlan),
     switchPlan: isPaypalGateway(subscription.gateway)
-      ? params.dealPlan ?? null
+      ? (params.dealPlan ?? null)
       : null,
     stats: {
       plays: params.stats?.plays ?? 0,

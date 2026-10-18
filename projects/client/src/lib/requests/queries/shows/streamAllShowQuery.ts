@@ -8,16 +8,12 @@ type StreamAllShowParams = {
   slug: string;
 } & ApiParams;
 
-const showAllWatchNowRequest = (
-  { fetch, slug }: StreamAllShowParams,
-) =>
-  api({ fetch })
-    .shows
-    .watchnow({
-      params: {
-        id: slug,
-      },
-    });
+const showAllWatchNowRequest = ({ fetch, slug }: StreamAllShowParams) =>
+  api({ fetch }).shows.watchnow({
+    params: {
+      id: slug,
+    },
+  });
 
 export const streamAllShowQuery = defineQuery({
   key: 'streamAllShow',

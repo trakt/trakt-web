@@ -24,10 +24,9 @@ type HalEvent = {
 // `text/plain` keeps the request CORS-simple, so it never preflights. It is also
 // the only content type `sendBeacon` can produce without one.
 function sendBatch(endpoint: string, events: ReadonlyArray<HalEvent>) {
-  const body = new Blob(
-    [JSON.stringify({ sentAt: Date.now(), events })],
-    { type: 'text/plain;charset=UTF-8' },
-  );
+  const body = new Blob([JSON.stringify({ sentAt: Date.now(), events })], {
+    type: 'text/plain;charset=UTF-8',
+  });
 
   if (navigator.sendBeacon?.(endpoint, body)) {
     return;
@@ -55,13 +54,11 @@ type CreateHalEngineProps = {
   enrich?: () => AnalyticsData;
 };
 
-export function createHalEngine(
-  {
-    endpoint = `${HAL_ENDPOINT}?trakt-api-key=${TRAKT_CLIENT_ID}`,
-    send = IS_REPORTING_ENABLED ? sendBatch : logBatch,
-    enrich = () => ({}),
-  }: CreateHalEngineProps = {},
-): AnalyticsEngine & { destroy: () => void } {
+export function createHalEngine({
+  endpoint = `${HAL_ENDPOINT}?trakt-api-key=${TRAKT_CLIENT_ID}`,
+  send = IS_REPORTING_ENABLED ? sendBatch : logBatch,
+  enrich = () => ({}),
+}: CreateHalEngineProps = {}): AnalyticsEngine & { destroy: () => void } {
   let buffered: ReadonlyArray<HalEvent> = [];
   let flushTimer: ReturnType<typeof setTimeout> | Nil = null;
 
@@ -79,7 +76,7 @@ export function createHalEngine(
     buffered = [];
 
     chunk(pending, MAX_EVENTS_PER_BATCH).forEach((batch) =>
-      send(endpoint, batch)
+      send(endpoint, batch),
     );
   };
 

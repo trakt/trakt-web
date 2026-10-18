@@ -4,8 +4,9 @@ type OidcUserStoreKeyProps = {
 };
 
 // Key shape is dictated by oidc-client-ts, not by us.
-export function oidcUserStoreKey(
-  { authority, clientId }: OidcUserStoreKeyProps,
-): string {
+export function oidcUserStoreKey({
+  authority,
+  clientId,
+}: OidcUserStoreKeyProps): string {
   return `oidc.user:${authority}:${clientId}`;
 }

@@ -1,21 +1,18 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { SmartListWriteRequest } from '@trakt/api';
 
-type ConvertToSmartListRequestParams =
-  & {
-    listId: string;
-    body: SmartListWriteRequest;
-  }
-  & ApiParams;
+type ConvertToSmartListRequestParams = {
+  listId: string;
+  body: SmartListWriteRequest;
+} & ApiParams;
 
-export function convertToSmartListRequest(
-  { listId, body, fetch }: ConvertToSmartListRequestParams,
-): Promise<string | Nil> {
+export function convertToSmartListRequest({
+  listId,
+  body,
+  fetch,
+}: ConvertToSmartListRequestParams): Promise<string | Nil> {
   return api({ fetch })
-    .users
-    .lists
-    .list
-    .convertToSmartList({
+    .users.lists.list.convertToSmartList({
       params: {
         id: 'me',
         list_id: listId,

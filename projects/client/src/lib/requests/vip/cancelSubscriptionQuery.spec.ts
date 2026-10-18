@@ -20,12 +20,13 @@ describe('cancelSubscriptionQuery', () => {
 
   it('should return false when there is no active subscription', async () => {
     server.use(
-      http.post(
-        'http://localhost/vip/stripe/cancel',
-        () =>
-          HttpResponse.json({
+      http.post('http://localhost/vip/stripe/cancel', () =>
+        HttpResponse.json(
+          {
             message: 'No active Stripe subscriptions found',
-          }, { status: 404 }),
+          },
+          { status: 404 },
+        ),
       ),
     );
 
@@ -36,12 +37,13 @@ describe('cancelSubscriptionQuery', () => {
 
   it('should throw when the subscription cannot be updated', async () => {
     server.use(
-      http.post(
-        'http://localhost/vip/stripe/cancel',
-        () =>
-          HttpResponse.json({
+      http.post('http://localhost/vip/stripe/cancel', () =>
+        HttpResponse.json(
+          {
             message: 'User is not a Stripe VIP',
-          }, { status: 400 }),
+          },
+          { status: 400 },
+        ),
       ),
     );
 

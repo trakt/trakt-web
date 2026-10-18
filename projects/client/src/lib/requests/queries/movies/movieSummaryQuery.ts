@@ -6,19 +6,15 @@ import { time } from '$lib/utils/timing/time.ts';
 
 type MovieSummaryParams = { slug: string } & ApiParams;
 
-const movieSummaryRequest = (
-  { fetch, slug }: MovieSummaryParams,
-) =>
-  api({ fetch })
-    .movies
-    .summary({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,images,colors,streaming_ids',
-      },
-    });
+const movieSummaryRequest = ({ fetch, slug }: MovieSummaryParams) =>
+  api({ fetch }).movies.summary({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'full,images,colors,streaming_ids',
+    },
+  });
 
 export const movieSummaryQuery = defineQuery({
   key: 'movieSummary:v2',

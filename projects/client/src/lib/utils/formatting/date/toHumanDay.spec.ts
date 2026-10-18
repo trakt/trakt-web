@@ -21,9 +21,7 @@ describe('toHumanDay', () => {
   it('will display the day only', () => {
     const day = new Date('December 17, 1995 03:24:00');
 
-    expect(toHumanDay({ date: day, locale: 'en' })).toBe(
-      'December 17th, 1995',
-    );
+    expect(toHumanDay({ date: day, locale: 'en' })).toBe('December 17th, 1995');
   });
 
   it('will display September 19th, 2023', () => {
@@ -39,8 +37,6 @@ describe('toHumanDay', () => {
 
     expect(
       toHumanDay({ date: day, locale: 'en', format: 'long-with-time' }),
-    ).toBe(
-      'September 19th, 2023 9:00 PM',
-    );
+    ).toBe('September 19th, 2023 9:00 PM');
   });
 });

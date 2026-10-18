@@ -3,10 +3,7 @@ import { manifestKeyFor, manifestKeyToDate } from './manifest.ts';
 
 describe('manifestKeyFor', () => {
   it('builds an ISO-prefixed key sortable lexicographically by time', () => {
-    const earlier = manifestKeyFor(
-      'abc1234',
-      new Date('2026-01-01T00:00:00Z'),
-    );
+    const earlier = manifestKeyFor('abc1234', new Date('2026-01-01T00:00:00Z'));
     const later = manifestKeyFor('def5678', new Date('2026-01-02T00:00:00Z'));
     expect(earlier < later).toBe(true);
     expect(earlier).toMatch(
@@ -25,8 +22,9 @@ describe('manifestKeyToDate', () => {
 
   it('returns null for malformed keys', () => {
     expect(manifestKeyToDate('releases/garbage.json')).toBeNull();
-    expect(manifestKeyToDate('releases/2026-99-99T99-99-99-999Z_x.json'))
-      .toBeNull();
+    expect(
+      manifestKeyToDate('releases/2026-99-99T99-99-99-999Z_x.json'),
+    ).toBeNull();
     expect(manifestKeyToDate('something-else.json')).toBeNull();
   });
 });

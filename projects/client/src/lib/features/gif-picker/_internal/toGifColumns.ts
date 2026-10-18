@@ -32,10 +32,10 @@ export function toGifColumns(
 
     return {
       columns: layout.columns.map((column, index) =>
-        index === shortest ? [...column, gif] : column
+        index === shortest ? [...column, gif] : column,
       ),
       heights: layout.heights.map((height, index) =>
-        index === shortest ? height + ratio : height
+        index === shortest ? height + ratio : height,
       ),
     };
   }, empty).columns;

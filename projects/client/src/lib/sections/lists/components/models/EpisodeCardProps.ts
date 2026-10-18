@@ -9,31 +9,32 @@ type EpisodeContext = 'show' | 'standalone';
 
 export type EpisodeItemVariant =
   | {
-    variant: 'next';
-    episode: EpisodeProgressEntry;
-    context?: EpisodeContext;
-    coverUrl?: string;
-  }
+      variant: 'next';
+      episode: EpisodeProgressEntry;
+      context?: EpisodeContext;
+      coverUrl?: string;
+    }
   | {
-    variant: 'default' | 'upcoming' | 'calendar';
-    episode: EpisodeEntry;
-    context?: EpisodeContext;
-    coverUrl?: string;
-  }
+      variant: 'default' | 'upcoming' | 'calendar';
+      episode: EpisodeEntry;
+      context?: EpisodeContext;
+      coverUrl?: string;
+    }
   | {
-    variant: 'activity';
-    episode: EpisodeEntry;
-    date: Date;
-    activityType: ActivityType;
-  }
+      variant: 'activity';
+      episode: EpisodeEntry;
+      date: Date;
+      activityType: ActivityType;
+    }
   | { variant: 'list-item'; episode: EpisodeEntry };
 
-export type EpisodeCardProps = BaseItemProps & EpisodeItemVariant & {
-  media: ShowInput;
-  urlOverride?: CardUrlOverride;
-  onWatched?: () => void;
-  /**
-   * FIXME: We should migrate these on the backend and remove from the client.
-   */
-  status?: 'watching' | 'hidden';
-};
+export type EpisodeCardProps = BaseItemProps &
+  EpisodeItemVariant & {
+    media: ShowInput;
+    urlOverride?: CardUrlOverride;
+    onWatched?: () => void;
+    /**
+     * FIXME: We should migrate these on the backend and remove from the client.
+     */
+    status?: 'watching' | 'hidden';
+  };

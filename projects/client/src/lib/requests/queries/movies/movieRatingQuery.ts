@@ -6,19 +6,15 @@ import { mapToMediaRating } from '../../_internal/mapToMediaRating.ts';
 
 type MovieRatingParams = { slug: string } & ApiParams;
 
-const movieRatingRequest = (
-  { fetch, slug }: MovieRatingParams,
-) =>
-  api({ fetch })
-    .movies
-    .ratings({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'all',
-      },
-    });
+const movieRatingRequest = ({ fetch, slug }: MovieRatingParams) =>
+  api({ fetch }).movies.ratings({
+    params: {
+      id: slug,
+    },
+    query: {
+      extended: 'all',
+    },
+  });
 
 export const movieRatingQuery = defineQuery({
   key: 'movieRating',

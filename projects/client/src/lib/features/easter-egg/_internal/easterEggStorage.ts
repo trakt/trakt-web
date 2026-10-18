@@ -3,9 +3,11 @@ import z from 'zod';
 
 const EASTER_EGG_KEY = 'trakt-easter-eggs';
 
-const EasterEggProgressSchema = z.object({
-  rated_higher_streak: z.number().int().nonnegative().optional(),
-}).passthrough();
+const EasterEggProgressSchema = z
+  .object({
+    rated_higher_streak: z.number().int().nonnegative().optional(),
+  })
+  .passthrough();
 
 type EasterEggProgress = z.infer<typeof EasterEggProgressSchema>;
 

@@ -30,21 +30,19 @@ function typeToQuery(props: UseMyActivityListProps) {
 
   switch (props.type) {
     case 'reviews':
-      return userCommentsQuery(common) as InfiniteQuery<
-        ActivityEntry
-      >;
+      return userCommentsQuery(common) as InfiniteQuery<ActivityEntry>;
     case 'ratings': {
-      return userRatingsQuery(common) as InfiniteQuery<
-        ActivityEntry
-      >;
+      return userRatingsQuery(common) as InfiniteQuery<ActivityEntry>;
     }
   }
 }
 
 export function useMyActivityList(props: UseMyActivityListProps) {
-  const { list, isLoading: baseLoading, ...rest } = usePaginatedListQuery(
-    typeToQuery(props),
-  );
+  const {
+    list,
+    isLoading: baseLoading,
+    ...rest
+  } = usePaginatedListQuery(typeToQuery(props));
 
   const overlay = createBulkIntlOverlay<ActivityEntry>({
     getTargets: profileActivityTargets,
@@ -59,8 +57,11 @@ export function useMyActivityList(props: UseMyActivityListProps) {
 
       return $list.filter((entry) => {
         if (props.mode === 'show') {
-          return entry.type === 'show' || entry.type === 'episode' ||
-            entry.type === 'season';
+          return (
+            entry.type === 'show' ||
+            entry.type === 'episode' ||
+            entry.type === 'season'
+          );
         }
 
         return entry.type === 'movie';

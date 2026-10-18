@@ -20,20 +20,17 @@ import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 export type AnticipatedEntry = AnticipatedMovie | AnticipatedShow;
 export type AnticipatedMediaList = Array<AnticipatedEntry>;
 
-type AnticipatedListStoreProps =
-  & {
-    type: DiscoverMode;
-  }
-  & PaginationParams
-  & FilterParams
-  & SearchParams;
+type AnticipatedListStoreProps = {
+  type: DiscoverMode;
+} & PaginationParams &
+  FilterParams &
+  SearchParams;
 
-function typeToQuery(
-  { type, ...params }: AnticipatedListStoreProps,
-) {
+function typeToQuery({ type, ...params }: AnticipatedListStoreProps) {
   if (!params.filter?.years && !params.theme) {
     // FIXME: remove this when behavior is uplifted to the server
     params.filter = params.filter ?? {};
+    // biome-ignore format: @ts-expect-error only covers the next line
     // @ts-expect-error we are extending the object to dedupe
     params.filter.end_date = params.filter?.end_date ??
       addYear(new Date(), 1).toISOString();
@@ -41,25 +38,20 @@ function typeToQuery(
 
   switch (type) {
     case 'movie':
-      return movieAnticipatedQuery(params) as InfiniteQuery<
-        AnticipatedEntry
-      >;
+      return movieAnticipatedQuery(params) as InfiniteQuery<AnticipatedEntry>;
     case 'show':
-      return showAnticipatedQuery(params) as InfiniteQuery<
-        AnticipatedEntry
-      >;
+      return showAnticipatedQuery(params) as InfiniteQuery<AnticipatedEntry>;
     case 'media':
-      return mediaAnticipatedQuery(params) as InfiniteQuery<
-        AnticipatedEntry
-      >;
+      return mediaAnticipatedQuery(params) as InfiniteQuery<AnticipatedEntry>;
   }
 }
 
-export function useAnticipatedList(
-  props: AnticipatedListStoreProps,
-) {
-  const { list: baseList, isLoading: baseLoading, ...rest } =
-    usePaginatedListQuery(typeToQuery(props));
+export function useAnticipatedList(props: AnticipatedListStoreProps) {
+  const {
+    list: baseList,
+    isLoading: baseLoading,
+    ...rest
+  } = usePaginatedListQuery(typeToQuery(props));
   const overlay = createBulkMediaIntl<AnticipatedEntry>();
   return {
     list: baseList.pipe(overlay.operator),

@@ -14,11 +14,13 @@ export function useResetCoverImage() {
   const { confirm } = useConfirm();
   const { track } = useTrack(AnalyticsEvent.Settings);
 
-  const reset = useMutation(defineMutation({
-    key: 'user:reset-cover-image',
-    request: () => resetCoverImageRequest({}),
-    invalidations: [InvalidateAction.User.CoverImage],
-  }));
+  const reset = useMutation(
+    defineMutation({
+      key: 'user:reset-cover-image',
+      request: () => resetCoverImageRequest({}),
+      invalidations: [InvalidateAction.User.CoverImage],
+    }),
+  );
 
   const resetCoverImage = confirm({
     type: ConfirmationType.ResetCoverImage,

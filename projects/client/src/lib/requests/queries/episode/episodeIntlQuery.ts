@@ -29,22 +29,23 @@ function mapEpisodeIntlResponse(
   };
 }
 
-const episodeIntlRequest = (
-  { fetch, slug, language, season, episode }: EpisodeIntlParams,
-) =>
-  api({ fetch })
-    .shows
-    .episode
-    .translations({
-      params: {
-        id: slug,
-        season: castNumberAsString(season),
-        episode,
-      },
-      query: {
-        language,
-      },
-    });
+const episodeIntlRequest = ({
+  fetch,
+  slug,
+  language,
+  season,
+  episode,
+}: EpisodeIntlParams) =>
+  api({ fetch }).shows.episode.translations({
+    params: {
+      id: slug,
+      season: castNumberAsString(season),
+      episode,
+    },
+    query: {
+      language,
+    },
+  });
 
 export const episodeIntlQuery = defineQuery({
   key: 'episodeIntl',

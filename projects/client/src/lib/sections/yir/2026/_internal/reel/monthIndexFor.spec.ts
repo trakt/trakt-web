@@ -12,9 +12,8 @@ describe('util: monthIndexFor', () => {
   });
 
   it('should step through every month once', () => {
-    const indexes = Array.from(
-      { length: 101 },
-      (_, step) => monthIndexFor(step / 100, 9),
+    const indexes = Array.from({ length: 101 }, (_, step) =>
+      monthIndexFor(step / 100, 9),
     );
 
     expect([...new Set(indexes)]).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);

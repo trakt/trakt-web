@@ -17,7 +17,7 @@ export function toShareUrl({ url, shareCode }: ToShareUrlParams): string {
   }
 
   const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}${PREFETCH_SHARE_PARAM}=${
-    encodeURIComponent(value)
-  }`;
+  return `${url}${separator}${PREFETCH_SHARE_PARAM}=${encodeURIComponent(
+    value,
+  )}`;
 }

@@ -55,11 +55,7 @@ describe('clone', () => {
           },
         },
       },
-      mix: [
-        { a: 1 },
-        [{ b: 2 }],
-        3,
-      ],
+      mix: [{ a: 1 }, [{ b: 2 }], 3],
     };
     const cloned = clone(original);
 
@@ -81,7 +77,10 @@ describe('clone', () => {
   it('should clone complex objects with Sets, Maps, and BigInts', () => {
     const original = {
       set: new Set([1, 2, 3]),
-      map: new Map([['a', 1], ['b', 2]]),
+      map: new Map([
+        ['a', 1],
+        ['b', 2],
+      ]),
       bigInt: BigInt('9007199254740991'),
       nested: {
         set: new Set(['x', 'y']),

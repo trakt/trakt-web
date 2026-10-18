@@ -7,9 +7,8 @@ describe('util: peakHour', () => {
   });
 
   it('should return the busiest hour', () => {
-    const hourly = Array.from(
-      { length: 24 },
-      (_, hour) => (hour === 22 ? 40 : 1),
+    const hourly = Array.from({ length: 24 }, (_, hour) =>
+      hour === 22 ? 40 : 1,
     );
 
     expect(peakHour(hourly)).toBe(22);

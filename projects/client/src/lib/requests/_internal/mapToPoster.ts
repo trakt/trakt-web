@@ -9,12 +9,8 @@ type Images = {
   poster?: string[];
 };
 
-export function mapToPoster(
-  images: Images | Nil,
-): MediaEntry['poster'] {
-  const posterCandidate = findDefined(
-    ...(images?.poster ?? []),
-  );
+export function mapToPoster(images: Images | Nil): MediaEntry['poster'] {
+  const posterCandidate = findDefined(...(images?.poster ?? []));
 
   return {
     url: {
@@ -22,10 +18,7 @@ export function mapToPoster(
         mediumUrl(posterCandidate),
         MEDIA_POSTER_PLACEHOLDER,
       ),
-      thumb: prependHttps(
-        thumbUrl(posterCandidate),
-        MEDIA_POSTER_PLACEHOLDER,
-      ),
+      thumb: prependHttps(thumbUrl(posterCandidate), MEDIA_POSTER_PLACEHOLDER),
     },
   };
 }

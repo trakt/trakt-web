@@ -32,9 +32,11 @@ export type EpisodeWindow = {
  * empty - reaching the finale should fill the row, not show one card and four
  * gaps.
  */
-export function getEpisodeWindow(
-  { total, slots, anchorIndex }: EpisodeWindowParams,
-): EpisodeWindow {
+export function getEpisodeWindow({
+  total,
+  slots,
+  anchorIndex,
+}: EpisodeWindowParams): EpisodeWindow {
   const size = Math.max(Math.min(slots, total), 0);
 
   if (size === 0) {

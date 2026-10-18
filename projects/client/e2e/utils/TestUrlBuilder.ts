@@ -3,9 +3,7 @@ import { prefixPathWithBaseUrl } from './prefixPathWithBaseUrl.ts';
 
 export function prefixBuilderPaths<
   T extends Record<string, (arg: string) => string>,
->(
-  builder: T,
-): { [K in keyof T]: (arg?: string) => string } {
+>(builder: T): { [K in keyof T]: (arg?: string) => string } {
   return Object.fromEntries(
     Object.entries(builder).map(([key, fn]) => [
       key,

@@ -13,8 +13,8 @@ import { useShareRenderer } from './useShareRenderer.ts';
 
 const QUALITY: Record<ShareType, number> = {
   'open-graph': 96,
-  'feed': 92,
-  'story': 92,
+  feed: 92,
+  story: 92,
 };
 
 type RenderShareCardProps = {
@@ -28,10 +28,7 @@ type RenderShareCardProps = {
 
 const registeredFonts = new WeakMap<Renderer, Set<string>>();
 
-function registerFonts(
-  renderer: Renderer,
-  fonts: ReadonlyArray<FontDetails>,
-) {
+function registerFonts(renderer: Renderer, fonts: ReadonlyArray<FontDetails>) {
   const registered = registeredFonts.get(renderer) ?? new Set<string>();
   registeredFonts.set(renderer, registered);
 
@@ -47,10 +44,14 @@ function registerFonts(
     });
 }
 
-export async function renderShareCard(
-  { html, variant, fonts, images, debug = false, format = 'jpeg' }:
-    RenderShareCardProps,
-): Promise<Uint8Array<ArrayBuffer>> {
+export async function renderShareCard({
+  html,
+  variant,
+  fonts,
+  images,
+  debug = false,
+  format = 'jpeg',
+}: RenderShareCardProps): Promise<Uint8Array<ArrayBuffer>> {
   const renderer = await useShareRenderer();
   const { width, height } = SHARE_TYPE_DIMENSIONS[variant];
 

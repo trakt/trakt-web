@@ -19,29 +19,31 @@ import {
   TrendingShowSchema,
 } from '../shows/showTrendingQuery.ts';
 
-type MediaTrendingParams =
-  & PaginationParams
-  & ApiParams
-  & FilterParams
-  & SearchParams;
+type MediaTrendingParams = PaginationParams &
+  ApiParams &
+  FilterParams &
+  SearchParams;
 
 const TrendingMediaSchema = z.union([TrendingShowSchema, TrendingMovieSchema]);
 
-const mediaTrendingRequest = (
-  { fetch, limit, page, filter, theme, search }: MediaTrendingParams,
-) => {
-  return api({ fetch })
-    .media
-    .trending({
-      query: {
-        extended: 'full,images,colors',
-        page,
-        limit,
-        theme,
-        ...filter,
-        ...search,
-      },
-    });
+const mediaTrendingRequest = ({
+  fetch,
+  limit,
+  page,
+  filter,
+  theme,
+  search,
+}: MediaTrendingParams) => {
+  return api({ fetch }).media.trending({
+    query: {
+      extended: 'full,images,colors',
+      page,
+      limit,
+      theme,
+      ...filter,
+      ...search,
+    },
+  });
 };
 
 export const mediaTrendingQuery = defineInfiniteQuery({
@@ -53,9 +55,7 @@ export const mediaTrendingQuery = defineInfiniteQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (
-    params: MediaTrendingParams,
-  ) => [
+  dependencies: (params: MediaTrendingParams) => [
     params.limit,
     params.page,
     ...getGlobalFilterDependencies(params.filter),
@@ -68,8 +68,8 @@ export const mediaTrendingQuery = defineInfiniteQuery({
       show
         ? [mapToTrendingShow({ ...rest, show })]
         : movie
-        ? [mapToTrendingMovie({ ...rest, movie })]
-        : []
+          ? [mapToTrendingMovie({ ...rest, movie })]
+          : [],
     ),
     page: extractPageMeta(response.headers),
   }),

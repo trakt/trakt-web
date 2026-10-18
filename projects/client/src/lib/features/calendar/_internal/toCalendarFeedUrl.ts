@@ -12,18 +12,23 @@ type ToCalendarFeedUrlParams = {
   filters: Readonly<Record<string, string>>;
 };
 
-function feedPath(
-  { mode, episodeType }: Pick<ToCalendarFeedUrlParams, 'mode' | 'episodeType'>,
-): string {
+function feedPath({
+  mode,
+  episodeType,
+}: Pick<ToCalendarFeedUrlParams, 'mode' | 'episodeType'>): string {
   if (mode === 'movie') return 'my/movies';
   if (episodeType === 'premieres') return 'my/shows/premieres';
   if (episodeType === 'finales') return 'my/shows/finales';
   return mode === 'media' ? 'my/media' : 'my/shows';
 }
 
-export function toCalendarFeedUrl(
-  { origin, token, mode, episodeType, filters }: ToCalendarFeedUrlParams,
-): { https: string; webcal: string } {
+export function toCalendarFeedUrl({
+  origin,
+  token,
+  mode,
+  episodeType,
+  filters,
+}: ToCalendarFeedUrlParams): { https: string; webcal: string } {
   const path = feedPath({ mode, episodeType });
   const query = buildParamString({ [FEED_TOKEN_PARAM]: token, ...filters });
   const https = `${origin}/calendars/${path}.ics${query}`;

@@ -6,7 +6,7 @@ export function createMarkerFetch<T extends typeof fetch>(
 ): T {
   const fetchImpl = baseFetch || globalThis.fetch;
 
-  return (function markerFetch(
+  return function markerFetch(
     input: Parameters<T>[0],
     init?: Parameters<T>[1],
   ): Promise<Response> {
@@ -24,5 +24,5 @@ export function createMarkerFetch<T extends typeof fetch>(
     }
 
     return fetchImpl(input, init);
-  }) as unknown as T;
+  } as unknown as T;
 }

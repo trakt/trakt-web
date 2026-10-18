@@ -3,11 +3,7 @@ type WellKnownServices = {
 };
 
 export const WELL_KNOWN_SERVICES: WellKnownServices = {
-  amazon: [
-    'amazon_prime',
-    'amazon_prime_video',
-    'amazon_prime_video_with_ads',
-  ],
+  amazon: ['amazon_prime', 'amazon_prime_video', 'amazon_prime_video_with_ads'],
   crunchyroll: ['crunchyroll'],
   disneyPlus: ['disney_plus'],
   fandango: ['fandango'],

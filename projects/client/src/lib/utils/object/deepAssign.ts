@@ -32,22 +32,24 @@ export function deepAssign<T extends object>(
 
     if (Array.isArray(targetValue)) {
       result[key] = Array.isArray(sourceValue)
-        ? [...sourceValue] as T[typeof key]
-        : [...targetValue] as T[typeof key];
+        ? ([...sourceValue] as T[typeof key])
+        : ([...targetValue] as T[typeof key]);
       continue;
     }
 
     if (targetValue instanceof Set) {
-      result[key] = sourceValue instanceof Set
-        ? new Set(sourceValue) as T[typeof key]
-        : new Set(targetValue) as T[typeof key];
+      result[key] =
+        sourceValue instanceof Set
+          ? (new Set(sourceValue) as T[typeof key])
+          : (new Set(targetValue) as T[typeof key]);
       continue;
     }
 
     if (targetValue instanceof Map) {
-      result[key] = sourceValue instanceof Map
-        ? new Map(sourceValue) as T[typeof key]
-        : new Map(targetValue) as T[typeof key];
+      result[key] =
+        sourceValue instanceof Map
+          ? (new Map(sourceValue) as T[typeof key])
+          : (new Map(targetValue) as T[typeof key]);
       continue;
     }
 

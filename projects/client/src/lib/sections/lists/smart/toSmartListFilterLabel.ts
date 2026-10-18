@@ -166,14 +166,12 @@ const PLAIN_RANGE_SOURCES: Record<string, string> = {
 };
 
 function formatRange(key: string, range: number[]): string[] {
-  const parentalFilter = parentalGuideFilters.find((filter) =>
-    filter.key === key
+  const parentalFilter = parentalGuideFilters.find(
+    (filter) => filter.key === key,
   );
   if (parentalFilter) {
-    const [
-      min = parentalFilter.range.min,
-      max = parentalFilter.range.max,
-    ] = range;
+    const [min = parentalFilter.range.min, max = parentalFilter.range.max] =
+      range;
     return [parentalFilter.formatLabel({ min, max })];
   }
 
@@ -202,10 +200,7 @@ function formatRange(key: string, range: number[]): string[] {
   }
 }
 
-export function toSmartListFilterLabel(
-  key: string,
-  value: unknown,
-): string[] {
+export function toSmartListFilterLabel(key: string, value: unknown): string[] {
   if (Array.isArray(value)) {
     return value.every((item) => typeof item === 'string')
       ? formatList(key, value as string[])
