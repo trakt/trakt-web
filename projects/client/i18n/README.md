@@ -9,7 +9,7 @@ Define messages once, generate for multiple platforms (web, Android, iOS).
 npm run i18n:generate
 
 # Generate specific platforms
-deno run --allow-read --allow-write i18n/generator/cli.ts meta/ --platforms web,android,ios
+bun i18n/generator/cli.ts -i i18n/meta/ --platforms web,android,ios
 ```
 
 ## Message Format
@@ -50,8 +50,8 @@ npm run test:unit -- i18n/   # Run tests
 
 ## Removing a message
 
-Delete the key from `meta/en.json`, then run `deno task i18n:web` in
+Delete the key from `meta/en.json`, then run `bun run i18n:web` in
 `projects/client`. The generator prunes the key from every locale catalog under
 `messages/` (a deletion-only change), and the PR check that blocks hand-edited
-translations allows it. `deno task i18n:resolve` is only for merge conflicts in
+translations allows it. `bun run i18n:resolve` is only for merge conflicts in
 the catalogs and does not prune anything.
