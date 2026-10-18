@@ -17,11 +17,11 @@ ask for permission first, just dive in. See
 
 ## Project Structure
 
-This [workspace](https://docs.deno.com/runtime/fundamentals/workspaces/) is
+This [workspace](https://bun.com/docs/install/workspaces) is
 composed the following projects:
 
 - **`client`:** The frontend of our application. This project houses the Trakt
-  Web client, built with Deno and SvelteKit. It's designed to be efficient and
+  Web client, built with Bun and SvelteKit. It's designed to be efficient and
   user-friendly, providing quick access to media insights.
 
 ## Environment Variables
@@ -59,26 +59,25 @@ Want to contribute to Trakt Web? Great! Here's how to get set up:
 
 ## Getting Started
 
-This is a Deno project, so you need to have Deno installed on your machine
-please refer to the
-[Deno installation guide](https://docs.deno.com/runtime/getting_started/installation/).
+This is a Bun project, so you need to have Bun installed on your machine
+please refer to the [Bun installation guide](https://bun.com/docs/installation).
 
 1. **Clone the repository**
-1. **Install dependencies:** `deno task install`
+1. **Install dependencies:** `bun run install:frozen`
 1. **Run tasks:**
 
 - Workspace:
-  - Format & Lint: `deno task format`
+  - Format: `bun run format`
 
 - Client:
-  - Development: `deno task client:dev`
-  - Contributors: `deno task client:dev:contrib`
+  - Development: `bun run client:dev`
+  - Contributors: `bun run client:dev:contrib`
 
 ## Client Environment - Development Setup
 
 ### Web Development
 
-For web development, run `deno task dev` or `deno task dev:contrib` (for
+For web development, run `bun run dev` or `bun run dev:contrib` (for
 external contributors) in the `projects/client` directory. Then open your
 browser to see your work.
 
@@ -115,7 +114,7 @@ To build the Trakt Web client, run:
 
 ```sh
 cd projects/client/
-[deno|npm|bun] run build
+bun run build
 ```
 
 ## Production Preview
@@ -125,7 +124,7 @@ cd projects/client/
 Run the following command:
 
 ```sh
-[deno|npm|bun] run build:preview && [deno|npm|bun] run preview
+bun run build:preview && bun run preview
 ```
 
 ## Dependency Updates
@@ -145,16 +144,16 @@ Both flows enumerate candidates with `ncu --jsonUpgraded`, then run
 **Bisection strategy (full set first, halve on failure):**
 
 1. **Phase 1 (fast, typecheck-only):** apply the whole candidate set, run
-   `deno install --allow-scripts` + `deno task check`. If green, adopt all. If
+   `bun install` + `bun run check`. If green, adopt all. If
    red, split the set in half and recurse on each half. Singletons that fail are
    recorded as rejected; everything green stacks on a rolling baseline. Worst
    case for K candidates with F failures is roughly `F + log2(K)` probes (a
    clean batch of 30 = 1 probe; F=1 = ~6-9 probes).
-2. **Phase 2 (final tests):** run `deno task test:doctor` (vitest, no coverage,
+2. **Phase 2 (final tests):** run `bun run test:doctor` (vitest, no coverage,
    parallel) on the adopted set. If it fails, re-bisect the adopted set with
    full verify (check + tests) to identify which adopted bump regressed at
    runtime.
-3. **Phase 3 (build):** run `deno task build:doctor` (vite build with Sentry
+3. **Phase 3 (build):** run `bun run build:doctor` (vite build with Sentry
    plugin off, no minify, no sourcemap; validates the module graph compiles
    end-to-end without network/auth side effects).
 
@@ -163,7 +162,7 @@ wall time (vs. ~60 min for sequential per-package).
 
 `ncu --doctor` is not used: it spawns `npm install --no-save <pkg>@<ver>` per
 candidate, which conflicts with this project's peer-dep state and would not
-actually exercise the deno-managed test runtime even if it succeeded.
+actually exercise the bun-managed install even if it succeeded.
 
 i18n is generated once at the start of the workflow (the per-task `pretest` /
 `prebuild` hooks are skipped by the doctor variants).
@@ -192,11 +191,10 @@ i18n is generated once at the start of the workflow (the per-task `pretest` /
 If you need to run `ncu` locally, install it once:
 
 ```bash
-deno install -g --allow-all -n ncu npm:npm-check-updates
+bun add -g npm-check-updates
 ```
 
-NOTE: For the client project pass `-p npm` on every invocation since the svelte
-project is defined via `package.json` (the workspace itself uses deno). Run the
+NOTE: For the client project pass `-p npm` on every invocation. Run the
 commands below from `projects/client/`.
 
 #### Minor
@@ -211,8 +209,8 @@ commands below from `projects/client/`.
 - For each entry: `ncu -p npm <ENTRY> -u -t latest`, then build, fix breaks,
   test, commit.
 
-After any local bump, refresh the lockfile with `deno install --allow-scripts`
-before committing.
+After any local bump, refresh the lockfile with `bun install` before
+committing.
 
 ## Resolving i18n Conflicts
 
@@ -227,17 +225,17 @@ internationalization.
 
 To resolve these conflicts:
 
-1. **Make sure you have the `deno` CLI installed**
+1. **Make sure you have the `bun` CLI installed**
 2. **Run the resolution command** from the project root:
 
    ```bash
-   deno task client:i18n:resolve
+   bun run client:i18n:resolve
    ```
 
    Or if you're in the `projects/client` directory:
 
    ```bash
-   deno task i18n:resolve
+   bun run i18n:resolve
    ```
 
 These commands will resolve conflicts in the `i18n/messages/*.json` files and

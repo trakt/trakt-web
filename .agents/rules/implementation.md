@@ -105,7 +105,8 @@ on a query — use `useAllPagesInfiniteQuery` instead.
 
 ## Tooling (CRITICAL)
 
-- **Formatting**: NEVER run `prettier`. ALWAYS run `deno fmt`.
+- **Formatting**: ALWAYS run `bun run format` (Biome). Prettier is only for
+  `.svelte` files.
 - **Rule frontmatter quoting**: YAML frontmatter properties (`globs`, `applyTo`,
   `description`, `paths`) MUST use **single quotes** (`'`), never double quotes
   (`"`). Accepted by Copilot, Antigravity (Gemini), Claude. Never change `'` to

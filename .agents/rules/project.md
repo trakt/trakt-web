@@ -10,7 +10,7 @@ applyTo: '**'
 ## Tech Stack
 
 SvelteKit + TypeScript app (Svelte 5, runes mode) deployed to Cloudflare
-Workers. Monorepo using Deno workspaces with app at `projects/client/`.
+Workers. Monorepo using Bun workspaces with app at `projects/client/`.
 
 ## Project Structure
 
@@ -122,9 +122,9 @@ Always use aliases over deep relative paths (`../../../`).
 
 ## Tooling
 
-- **Formatter**: Use `deno fmt`, not prettier.
+- **Formatter**: Use `bun run format` (Biome). Prettier is only for `.svelte`.
 - **Linter**: ESLint with TypeScript + Svelte plugins. Config at
   `eslint.config.js`.
 - **Build**: Vite + SvelteKit adapter-cloudflare. Paraglide generates i18n
   before build.
-- **Dev**: `deno task client:dev` starts the dev server.
+- **Dev**: `bun run client:dev` starts the dev server.

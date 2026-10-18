@@ -2,13 +2,13 @@
 
 ## Developing
 
-Install dependencies with `deno install`, start a development server:
+Install dependencies with `bun install`, start a development server:
 
 ```bash
-deno task dev
+bun run dev
 
 # or start the server and open the app in a new browser tab
-deno task dev -- --open
+bun run dev -- --open
 ```
 
 ## Building
@@ -16,11 +16,11 @@ deno task dev -- --open
 To create a production version of your app:
 
 ```bash
-deno task build
+bun run build
 ```
 
 You can preview the production build with
-`deno task build && deno task preview`.
+`bun run build && bun run preview`.
 
 > To deploy your app, you may need to install an
 > [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
@@ -30,12 +30,12 @@ You can preview the production build with
 Install the browsers:
 
 ```bash
-deno run -A npm:@playwright/test install chromium
+bun x playwright install chromium
 ```
 
 First, make sure a dev server is running.
 
-You can run the end-to-end tests as follows: `deno task test:e2e`.
+You can run the end-to-end tests as follows: `bun run test:e2e`.
 
 Optionally, you can set the following environment variables:
 

@@ -31,10 +31,6 @@ To run a development preview, you'll need two terminals:
 [npx|bunx] wrangler pages dev .svelte-kit/cloudflare
 ```
 
-**NOTE:** Deno currently doesn't support VM modules
-([see issue](https://github.com/denoland/deno/issues/26349)), so wrangler can
-only be previewed using `npm` or `bun`.
-
 #### Production Preview
 
 Navigate to the `projects/client/` directory and run:
@@ -45,7 +41,7 @@ echo "$TRAKT_CLIENT_ID" | npx wrangler secret put TRAKT_CLIENT_ID
 echo "$TRAKT_CLIENT_SECRET" | npx wrangler secret put TRAKT_CLIENT_SECRET
 
 # This will build the client and deploy it to Cloudflare Workers
-[deno|npm|bun] task build && npx wrangler deploy
+bun run build && npx wrangler deploy
 ```
 
 **NOTE:** Try to avoid running production deployments from your local machine.
