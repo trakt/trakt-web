@@ -11,6 +11,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { trapTabFocus } from "$lib/utils/actions/trapTabFocus.ts";
+  import { safeLocalStorage } from "$lib/utils/storage/safeStorage.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { onMount, tick, untrack } from "svelte";
@@ -28,6 +29,7 @@
   import { toOpenState } from "./toOpenState.ts";
 
   const FRAME_DURATION = time.seconds(10);
+  const FLIP_HINT_SEEN_KEY = "trakt-today-flip-hint-seen";
   const HOLD_THRESHOLD = time.seconds(0.3);
 
   const { groups: initialGroups, startKey, source, onClose }:
@@ -65,6 +67,9 @@
   const cover = $derived(frame ? toFrameMedia(frame).cover.url.medium : null);
 
   let isFlipped = $state(false);
+  let isFlipHintSeen = $state(
+    safeLocalStorage.getItem(FLIP_HINT_SEEN_KEY) === "true",
+  );
   let isHeld = $state(false);
   let isPageHidden = $state(false);
   let isUsingAction = $state(false);
@@ -76,8 +81,17 @@
     isHeld || isPageHidden || isUsingAction || isFlipped,
   );
 
+  const isHinting = $derived(!isFlipHintSeen && currentFrame === 0);
+
+  const markFlipHintSeen = () => {
+    if (isFlipHintSeen) return;
+    isFlipHintSeen = true;
+    safeLocalStorage.setItem(FLIP_HINT_SEEN_KEY, "true");
+  };
+
   const toggleFlip = () => {
     isFlipped = !isFlipped;
+    markFlipHintSeen();
   };
 
   const returnFocusAfterPointer = (event: MouseEvent) => {
@@ -352,6 +366,7 @@
         {#key frame.key}
           <TodayStoryFrameContent
             {frame}
+            {isHinting}
             bind:isFlipped
             onTap={tapZone}
             onPressStart={press}

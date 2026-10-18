@@ -7,6 +7,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import FlipCard from "$lib/components/card/FlipCard.svelte";
+  import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
@@ -33,6 +34,7 @@
   let {
     frame,
     isFlipped = $bindable(false),
+    isHinting = false,
     onTap,
     onPressStart,
     onPressEnd,
@@ -99,6 +101,11 @@
         {#if isWatchedToo && !isFlipped}
           <div class="poster-watched">
             <WatchedTag variant="full" />
+          </div>
+        {:else if isHinting && !isFlipped}
+          <div class="poster-hint">
+            <InfoIcon />
+            <span>{m.tag_today_tap_details()}</span>
           </div>
         {/if}
         <FlipCard
@@ -215,6 +222,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-today-story-frame-content {
     display: flex;
     flex-direction: column;
@@ -252,6 +261,39 @@
       bottom: var(--gap-s);
       inset-inline-end: var(--gap-s);
       z-index: var(--layer-floating);
+    }
+
+    .poster-hint {
+      position: absolute;
+      inset-block-end: var(--gap-s);
+      inset-inline: 0;
+      z-index: var(--layer-floating);
+
+      width: fit-content;
+      max-width: 40%;
+      margin-inline: auto;
+      padding: var(--ni-4) var(--ni-10);
+
+      display: none;
+      align-items: center;
+      gap: var(--ni-4);
+
+      border-radius: var(--border-radius-xxl);
+      background: color-mix(in srgb, var(--shade-940) 70%, transparent);
+      color: var(--shade-10);
+      font-size: var(--font-size-text-small);
+      font-weight: 700;
+      text-align: center;
+      white-space: normal;
+
+      :global(svg) {
+        width: var(--ni-14);
+        height: var(--ni-14);
+      }
+
+      @include for-touch {
+        display: flex;
+      }
     }
 
     .poster-watched {
