@@ -523,7 +523,7 @@
     button {
       all: unset;
       padding: var(--ni-2) var(--ni-6);
-      border-radius: var(--border-radius-s);
+      border-radius: var(--border-radius-pill);
       color: var(--purple-300);
       font-weight: 700;
       cursor: pointer;

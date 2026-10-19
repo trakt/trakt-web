@@ -325,7 +325,7 @@
 
     background: transparent;
     border: none;
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-pill);
     color: currentColor;
     opacity: 0;
     cursor: pointer;

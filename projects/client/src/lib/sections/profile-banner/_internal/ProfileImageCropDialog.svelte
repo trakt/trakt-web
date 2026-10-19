@@ -362,7 +362,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--border-radius-s);
+    border-radius: var(--border-radius-pill);
     font-size: var(--font-size-l);
     color: var(--color-text-primary);
     transition: background-color var(--transition-increment) ease-in-out;
