@@ -59,6 +59,7 @@ export const recommendedMediaQuery = defineQuery({
   dependencies: (params: RecommendedMediaParams) => [
     params.limit,
     params.filter?.watch_window,
+    params.filter?.mode,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: recommendedMediaRequest,

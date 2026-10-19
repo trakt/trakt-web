@@ -1,3 +1,4 @@
+import BrainIcon from '$lib/components/icons/BrainIcon.svelte';
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
@@ -94,5 +95,12 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_show_ending(),
     addedAt: new Date('2026-10-16'),
     description: () => m.preview_feature_description_show_ending(),
+  },
+  [FeatureFlag.SmartRecommendations]: {
+    icon: BrainIcon,
+    title: () => m.preview_feature_title_smart_recommendations(),
+    addedAt: new Date('2026-10-19'),
+    description: () => m.preview_feature_description_smart_recommendations(),
+    audience: 'director',
   },
 };

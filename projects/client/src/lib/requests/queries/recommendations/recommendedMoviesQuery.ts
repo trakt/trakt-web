@@ -53,6 +53,7 @@ export const recommendedMoviesQuery = defineQuery({
   dependencies: (params) => [
     params.limit,
     params.filter?.watch_window,
+    params.filter?.mode,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: recommendedMoviesRequest,

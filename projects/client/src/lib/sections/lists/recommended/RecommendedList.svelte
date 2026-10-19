@@ -2,11 +2,15 @@
   import { page } from "$app/state";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import RecommendationModeMetaInfo from "$lib/features/recommendations/RecommendationModeMetaInfo.svelte";
+  import RecommendationModeToggles from "$lib/features/recommendations/RecommendationModeToggles.svelte";
+  import { useRecommendationMode } from "$lib/features/recommendations/useRecommendationMode";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
+  import { toModeFilter } from "./toModeFilter";
   import { useRecommendedList } from "./useRecommendedList";
 
   type RecommendationListProps = {
@@ -21,12 +25,17 @@
     type,
   }: RecommendationListProps = $props();
   const { filterMap } = useFilter();
+  const { requestMode } = useRecommendationMode();
 
   const cta = $derived({
     type: "recommended" as const,
     mediaType: type === "media" ? undefined : type,
   });
 </script>
+
+{#snippet metaInfo()}
+  <RecommendationModeMetaInfo />
+{/snippet}
 
 <DrillableMediaList
   --height-override-card="var(--height-portrait-card-sm)"
@@ -42,9 +51,11 @@
   filter={{
     ...$filterMap,
     ...extractWatchWindowParam(page.url.searchParams),
+    ...toModeFilter($requestMode),
   }}
   useList={(params) => useRecommendedList(params)}
   urlBuilder={() => UrlBuilder.recommended()}
+  {metaInfo}
 >
   {#snippet item(media)}
     <RecommendedListItem
@@ -52,6 +63,10 @@
       {media}
       mode={type === "media" ? "mixed" : "standalone"}
     />
+  {/snippet}
+
+  {#snippet actions()}
+    <RecommendationModeToggles />
   {/snippet}
 
   {#snippet ctaItem()}
