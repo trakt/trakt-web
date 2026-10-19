@@ -21,6 +21,7 @@ import type { CalendarOrder } from '../models/CalendarOrder.ts';
 import type { CalendarPeriodOptions } from '../models/CalendarPeriodOptions.ts';
 import type { CalendarWindow } from '../models/CalendarWindow.ts';
 import { getCalendarContext } from './getCalendarContext.ts';
+import { openCalendarAt } from './openCalendarAt.ts';
 
 type Direction = 'next' | 'previous';
 
@@ -58,7 +59,8 @@ export function useCalendarPeriod(options?: CalendarPeriodOptions) {
     fingerprint,
     minLater,
   } = options ?? {};
-  const { range, activeDate, visibleDate } = getCalendarContext();
+  const context = getCalendarContext();
+  const { range, activeDate, visibleDate } = context;
   const { track } = useTrack(AnalyticsEvent.CalendarPeriod);
 
   const currentMinLater = new BehaviorSubject(0);
@@ -102,8 +104,7 @@ export function useCalendarPeriod(options?: CalendarPeriodOptions) {
   };
 
   const canExtend = (direction: 'earlier' | 'later') =>
-    toChunks(toExtendedWindow(direction)).length >
-    toChunks(range.value).length;
+    toChunks(toExtendedWindow(direction)).length > toChunks(range.value).length;
 
   const extend = (direction: 'earlier' | 'later') => {
     if (!canExtend(direction)) return false;
@@ -112,11 +113,7 @@ export function useCalendarPeriod(options?: CalendarPeriodOptions) {
     return true;
   };
 
-  const jumpTo = (date: Date) => {
-    visibleDate.next(null);
-    activeDate.next(date);
-    open(date);
-  };
+  const jumpTo = (date: Date) => openCalendarAt(context, date);
 
   if (upperBound && range.value.anchor > upperBound) {
     jumpTo(isCurrentWeek(upperBound, getLocale()) ? new Date() : upperBound);

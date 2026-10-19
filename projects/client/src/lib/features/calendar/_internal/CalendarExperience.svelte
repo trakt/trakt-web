@@ -116,9 +116,7 @@
   async function handleNavigation(action: () => void) {
     action();
     await tick();
-    const target = document.getElementById(dateKey(activeDate.value));
-    if (target) target.scrollIntoView({ block: "start" });
-    else globalThis.window.scrollTo({ top: 0 });
+    if (board.value.isInitialLoad) window.scrollTo({ top: 0 });
   }
 
   const toggleView = () => {

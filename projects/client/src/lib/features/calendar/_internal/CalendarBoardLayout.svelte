@@ -9,8 +9,10 @@
   import CalendarItems from "./CalendarItems.svelte";
   import CalendarWeekItems from "./CalendarWeekItems.svelte";
   import { getLocale } from "$lib/features/i18n";
+  import { getStartOfWeek } from "$lib/utils/date/getStartOfWeek.ts";
   import { isCurrentWeek } from "$lib/utils/date/isCurrentWeek.ts";
   import { loadAboveViewport } from "./loadAboveViewport.ts";
+  import { afterNavigate } from "$app/navigation";
 
   const {
     activeDate,
@@ -51,11 +53,25 @@
     externalInitialLoad ?? (isInitialPeriod && isLoading),
   );
 
+  const scrollTargetId = $derived(
+    view === "week"
+      ? `week-${dateKey(getStartOfWeek(activeDate, getLocale()))}`
+      : dateKey(activeDate),
+  );
+
+  afterNavigate(({ type }) => {
+    if (type !== "popstate") return;
+
+    document.getElementById(scrollTargetId)?.scrollIntoView({ block: "start" });
+  });
+
+  const isActiveWeekCurrent = $derived(isCurrentWeek(activeDate, getLocale()));
+
   const topEdge = $derived({
     firstKey: periods.at(0)?.key,
     lastKey: periods.at(-1)?.key,
     canLoad: !isInitialLoad && !isLoadingAbove,
-    isArmed: !isCurrentWeek(activeDate, getLocale()),
+    isArmed: !isActiveWeekCurrent,
     onLoad: onLoadPrevious,
   });
 </script>
@@ -72,8 +88,8 @@
   {:else}
     <ScrollSpy
       selector=".calendar-day-anchor"
-      initialId={dateKey(activeDate)}
-      skipVisible={view === "week"}
+      initialId={scrollTargetId}
+      skipVisible={view === "week" && isActiveWeekCurrent}
       onUpdate={handleScrollSpyUpdate}
     >
       {#each periods as period (period.key)}
