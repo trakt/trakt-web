@@ -11,13 +11,11 @@
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
   import SettingsGroupRow from "../SettingsGroupRow.svelte";
   import SettingsGroupRowSkeleton from "../SettingsGroupRowSkeleton.svelte";
-  import SettingsSection from "../SettingsSection.svelte";
   import SettingsStatusBadge from "../SettingsStatusBadge.svelte";
   import SettingsVipUpsell from "../SettingsVipUpsell.svelte";
   import SyncLoadError from "../SyncLoadError.svelte";
   import PlexConnectDrawer from "./PlexConnectDrawer.svelte";
-  import PlexSyncRuns from "./PlexSyncRuns.svelte";
-  import PlexSyncServerRow from "./PlexSyncServerRow.svelte";
+  import SyncedServers from "./SyncedServers.svelte";
   import { usePlexConnect } from "./usePlexConnect.ts";
 
   const query = useQuery(mediaSyncConnectionsQuery({}));
@@ -137,20 +135,12 @@
   {/if}
 
   {#if isConnected}
-    <SettingsSection
+    <SyncedServers
       title={m.header_plex_synced_servers()}
       description={m.description_plex_synced_servers()}
-    >
-      <SettingsGroupCard>
-        {#each $connections ?? [] as connection (connection.id)}
-          <PlexSyncServerRow {connection} onReconnect={startConnect} />
-        {/each}
-      </SettingsGroupCard>
-    </SettingsSection>
-
-    {#each $connections ?? [] as connection (connection.id)}
-      <PlexSyncRuns {connection} />
-    {/each}
+      connections={$connections ?? []}
+      onReconnect={startConnect}
+    />
   {/if}
 </div>
 
