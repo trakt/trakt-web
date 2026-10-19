@@ -7333,31 +7333,6 @@
       "default": "View VIP plans and switch to credit card",
       "description": "Aria-label for the button that opens the VIP plans page so a PayPal subscriber can switch to credit card."
     },
-    "tag_text_vip_deal_welcome_back": {
-      "default": "Welcome back offer",
-      "description": "Eyebrow label on the deal card shown to former VIPs who rejoin, above the headline. This should be as short as possible."
-    },
-    "header_vip_deal_welcome_back": {
-      "default": "Get 2 years of VIP for {price}",
-      "description": "Headline showing the discounted total price for the first 2 years of VIP.",
-      "variables": {
-        "price": {
-          "type": "string"
-        }
-      }
-    },
-    "text_vip_deal_welcome_back": {
-      "default": "{price} upfront for 2 years, then auto-renews at {renewalPrice} every 2 years. Discount applied at checkout.",
-      "description": "Fine print on the deal card shown to former VIPs who rejoin. {renewalPrice} is the full 2 year plan price the plan renews at.",
-      "variables": {
-        "price": {
-          "type": "string"
-        },
-        "renewalPrice": {
-          "type": "string"
-        }
-      }
-    },
     "tag_text_vip_deal_paypal_switch": {
       "default": "PayPal to card offer",
       "description": "Eyebrow label on the deal card shown to PayPal subscribers switching to credit card, above the headline. This should be as short as possible."
