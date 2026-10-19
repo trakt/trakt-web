@@ -83,7 +83,10 @@
       </RenderFor>
 
       <RenderFor audience="free">
-        <UpsellCta source="soundtrack" title={m.text_soundtrack_upsell()}>
+        <UpsellCta
+          source="soundtrack-drawer"
+          title={m.text_soundtrack_upsell()}
+        >
           {m.vip_feature_description_soundtrack()}
         </UpsellCta>
       </RenderFor>

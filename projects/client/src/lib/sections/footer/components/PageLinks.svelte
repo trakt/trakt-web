@@ -4,9 +4,16 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import FooterVipLink from "./FooterVipLink.svelte";
 
   const { user } = useUser();
 </script>
+
+{#snippet vipLink()}
+  <Link href={UrlBuilder.vip()}>
+    <span class="bold">VIP</span>
+  </Link>
+{/snippet}
 
 <div class="trakt-page-links">
   <div class="trakt-link-group">
@@ -14,9 +21,9 @@
     <Link href={UrlBuilder.about()}>
       <span class="bold">{m.link_text_about()}</span>
     </Link>
-    <Link href={UrlBuilder.vip()}>
-      <span class="bold">VIP</span>
-    </Link>
+    <RenderFor audience="free"><FooterVipLink /></RenderFor>
+    <RenderFor audience="public">{@render vipLink()}</RenderFor>
+    <RenderFor audience="vip">{@render vipLink()}</RenderFor>
     <Link
       href={UrlBuilder.developer.home()}
       target="_blank"

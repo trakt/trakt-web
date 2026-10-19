@@ -76,8 +76,15 @@ export const AnalyticsEvent = {
 
   BannerDismiss: buildEventKey(BANNER_ACTION_PREFIX, 'dismiss'),
   VipUpsell: buildEventKey(ACTION_PREFIX, 'vip-upsell'),
+  VipUpsellImpression: buildEventKey(ACTION_PREFIX, 'vip-upsell-impression'),
 
+  VipView: buildEventKey(VIP_ACTION_PREFIX, 'vip-view'),
   VipUpgrade: buildEventKey(VIP_ACTION_PREFIX, 'vip-upgrade'),
+  VipCheckoutFailed: buildEventKey(VIP_ACTION_PREFIX, 'checkout-failed'),
+  VipCheckoutCanceled: buildEventKey(VIP_ACTION_PREFIX, 'checkout-canceled'),
+  VipConfirmed: buildEventKey(VIP_ACTION_PREFIX, 'vip-confirmed'),
+  VipConfirmFailed: buildEventKey(VIP_ACTION_PREFIX, 'confirm-failed'),
+  VipGate: buildEventKey(VIP_ACTION_PREFIX, 'vip-gate'),
   VipManage: buildEventKey(VIP_ACTION_PREFIX, 'vip-manage'),
   VipCancel: buildEventKey(VIP_ACTION_PREFIX, 'vip-cancel'),
 

@@ -31,4 +31,20 @@ describe('util: UrlBuilder', () => {
       expect(url).to.equal('/shows/silo?view=seasons&season=0');
     });
   });
+
+  describe('vip', () => {
+    it('should point at the plain vip page without a source', () => {
+      expect(UrlBuilder.vip()).to.equal('/vip');
+    });
+
+    it('should point at the plain vip page for a direct visit', () => {
+      expect(UrlBuilder.vip('direct')).to.equal('/vip');
+    });
+
+    it('should carry the upsell source as a query param', () => {
+      expect(UrlBuilder.vip('navbar-mobile')).to.equal(
+        '/vip?source=navbar-mobile',
+      );
+    });
+  });
 });

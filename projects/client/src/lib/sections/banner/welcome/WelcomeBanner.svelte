@@ -2,9 +2,8 @@
   import SparkleStarIcon from "$lib/components/icons/SparkleStarIcon.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useVipUpsell } from "$lib/features/upsell/useVipUpsell";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import BannerContainer from "../_internal/BannerContainer.svelte";
@@ -13,7 +12,7 @@
   import { useWelcomeBanner } from "./_internal/useWelcomeBanner.ts";
 
   const { isVisible, dismiss } = useWelcomeBanner();
-  const { track } = useTrack(AnalyticsEvent.VipUpsell);
+  const { trackClick, trackImpression } = useVipUpsell(() => "welcome-banner");
 </script>
 
 {#if $isVisible}
@@ -69,12 +68,12 @@
             </div>
           </div>
 
-          <div class="upsell-cta">
+          <div class="upsell-cta" use:trackImpression>
             <BannerCta
-              href={UrlBuilder.vip()}
+              href={UrlBuilder.vip("welcome-banner")}
               label={m.link_label_get_vip()}
               iconPosition="leading"
-              onclick={() => track({ source: "welcome-banner" })}
+              onclick={trackClick}
             >
               {#snippet icon()}
                 <SparkleStarIcon />

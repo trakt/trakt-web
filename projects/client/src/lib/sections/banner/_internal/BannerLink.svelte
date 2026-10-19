@@ -3,6 +3,8 @@
   import Link from "$lib/components/link/Link.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import type { VipUpsellSource } from "$lib/features/upsell/models/VipUpsellSource";
+  import { useVipUpsell } from "$lib/features/upsell/useVipUpsell";
   import type { Snippet } from "svelte";
 
   const {
@@ -10,28 +12,36 @@
     href,
     target,
     source,
+    upsellSource,
     tag,
   }: ChildrenProps &
     Pick<HTMLAnchorProps, "href" | "target"> & {
-      source: string;
       tag?: Snippet;
-    } = $props();
+    } & (
+      | { source: string; upsellSource?: undefined }
+      | { source?: undefined; upsellSource: VipUpsellSource }
+    ) = $props();
   const { track } = useTrack(AnalyticsEvent.Link);
+  const { trackClick, trackImpression } = useVipUpsell(() => upsellSource);
+
+  const onclick = () => {
+    if (upsellSource) {
+      trackClick();
+      return;
+    }
+
+    track({ source, target: href ?? "banner-link" });
+  };
 
   const isExternal = $derived(target === "_blank");
 </script>
 
-<div class="trakt-banner-link">
+<div class="trakt-banner-link" use:trackImpression>
   {#if tag}
     {@render tag()}
   {/if}
 
-  <Link
-    {href}
-    {target}
-    color="inherit"
-    onclick={() => track({ source, target: href ?? "banner-link" })}
-  >
+  <Link {href} {target} color="inherit" {onclick}>
     {#if isExternal}
       <ExternalLinkIcon size="small" />
     {/if}
