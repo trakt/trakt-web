@@ -247,13 +247,12 @@
 
   :global(#{$b}[data-size=small]) {
     --button-height: var(--ni-40);
-    border-radius: calc(var(--border-radius-m) * 0.8);
-    padding: var(--ni-12);
+    padding: var(--ni-12) var(--ni-16);
     gap: var(--ni-12);
   }
 
   :global(#{$b}[data-size=tag]) {
-    --button-height: var(--ni-18);
+    --button-height: var(--ni-20);
     padding: var(--ni-2) var(--ni-10);
     min-width: var(--ni-48);
     box-sizing: border-box;
@@ -268,7 +267,7 @@
   :global(#{$b}:active[disabled]) {
     height: var(--button-height);
     box-sizing: border-box;
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-pill);
   }
 
   :global(#{$b}::before) {
