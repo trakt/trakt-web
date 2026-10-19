@@ -37,6 +37,17 @@ describe('util: toFriendActionText', () => {
     ).toBe('Watched · yesterday, 9:15 PM');
   });
 
+  it('should say a watched episode was also rated', () => {
+    expect(
+      toFriendActionText(
+        { ...action(new Date(2026, 8, 28, 9, 30)), rating: 8 },
+        now,
+      ),
+    ).toBe(
+      `Watched and rated S${EpisodeSiloMappedMock.season} • E${EpisodeSiloMappedMock.number} · 9:30 AM`,
+    );
+  });
+
   it('should count the episodes of a binge', () => {
     expect(
       toFriendActionText(

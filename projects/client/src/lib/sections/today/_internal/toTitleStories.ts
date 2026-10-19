@@ -66,6 +66,7 @@ function isRatingOfWatch({ watch, rating }: RatingMatch): boolean {
   if (watch.kind !== 'watch' || rating.kind !== 'rating') return false;
   if (watch.user.key !== rating.user.key) return false;
   if (watch.target !== rating.target) return false;
+  if (watch.episodeCount > 1) return false;
 
   return watch.episode?.id === rating.episode?.id;
 }

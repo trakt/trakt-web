@@ -159,6 +159,25 @@ describe('util: toTitleStories', () => {
     ]);
   });
 
+  it('should keep a rating apart from a binge', () => {
+    const latest = { ...EpisodeSiloMappedMock, id: 99, number: 3 };
+    const [story] = toTitleStories([
+      episodeWatch('watch:1', 9),
+      episodeWatch('watch:2', 11, latest),
+      buildFollowingActivity({
+        key: 'rating:1',
+        activityAt: at(12),
+        target: { type: 'episode', show: ShowSiloMappedMock, episode: latest },
+        detail: { action: 'rating', rating: 7 },
+      }),
+    ]);
+
+    expect(story?.actions.map((action) => action.kind).toSorted()).toEqual([
+      'rating',
+      'watch',
+    ]);
+  });
+
   it('should keep a rating apart from another friend watch', () => {
     const [story] = toTitleStories([
       buildFollowingActivity({ key: 'watch:1', activityAt: at(9) }),

@@ -12,6 +12,12 @@ function toWatchText(action: TodayFriendAction, time: string): string {
   }
 
   const episode = action.episode ? toFriendItemLabel(action) : null;
+  if (action.rating != null) {
+    return episode
+      ? m.text_today_watched_rated_episode_at({ episode, time })
+      : m.text_today_watched_rated_at({ time });
+  }
+
   return episode
     ? m.text_today_watched_episode_at({ episode, time })
     : m.text_today_watched_at({ time });
