@@ -1,12 +1,15 @@
 <script lang="ts">
+  import ListLabel from "$lib/components/lists/ListLabel.svelte";
   import type { Snippet } from "svelte";
 
   const {
     title,
+    count,
     metaInfo,
     actions,
   }: {
     title: string;
+    count?: number;
     metaInfo?: Snippet;
     actions?: Snippet;
   } = $props();
@@ -14,7 +17,7 @@
 
 <div class="drawer-tab-title">
   <div class="drawer-tab-title-main">
-    <span class="title ellipsis">{title}</span>
+    <ListLabel {title} {count} />
     {#if metaInfo}
       {@render metaInfo()}
     {/if}
@@ -39,10 +42,6 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
-
-    .title {
-      min-width: 0;
-    }
   }
 
   .drawer-tab-title-actions {

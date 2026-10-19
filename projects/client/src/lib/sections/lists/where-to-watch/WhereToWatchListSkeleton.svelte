@@ -33,11 +33,3 @@
     {/snippet}
   </SectionList>
 </div>
-
-<style>
-  .trakt-where-to-watch-list {
-    :global(.trakt-list-title) {
-      gap: var(--gap-xs);
-    }
-  }
-</style>

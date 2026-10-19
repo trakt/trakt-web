@@ -1,16 +1,14 @@
 <script lang="ts">
-  import ListTitle from "$lib/components/lists/_internal/ListTitle.svelte";
-  import type { ListDrilldownProps } from "$lib/components/lists/section-list/models/ListDrilldownProps";
+  import ListLabel from "$lib/components/lists/ListLabel.svelte";
   import type { Snippet } from "svelte";
 
   type ListsHeaderProps = {
     title: string;
     icon?: Snippet;
     actions?: Snippet;
-    drilldown?: ListDrilldownProps;
   };
 
-  const { title, icon, actions, drilldown }: ListsHeaderProps = $props();
+  const { title, icon, actions }: ListsHeaderProps = $props();
 </script>
 
 <div class="trakt-lists-header">
@@ -21,11 +19,7 @@
       </div>
     {/if}
 
-    {#if drilldown}
-      <ListTitle {title} {drilldown} />
-    {:else}
-      <span class="title secondary">{title}</span>
-    {/if}
+    <ListLabel {title} />
   </div>
 
   {#if actions}
@@ -63,6 +57,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
+    min-width: 0;
 
     color: var(--color-text-secondary);
   }
@@ -72,15 +67,9 @@
     align-items: center;
     justify-content: center;
 
-    width: var(--ni-32);
-    height: var(--ni-32);
-
-    /* To visually align the icon with the title */
-    margin-bottom: var(--ni-2);
-
     :global(svg) {
-      width: var(--ni-24);
-      height: var(--ni-24);
+      width: var(--ni-16);
+      height: var(--ni-16);
     }
   }
 
