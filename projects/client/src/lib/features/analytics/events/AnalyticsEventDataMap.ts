@@ -250,4 +250,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.MixtapeNoFits]: MixtapeNoFitsType;
   [AnalyticsEvent.MixtapeMix]: MixtapeMixType;
   [AnalyticsEvent.MixtapeResult]: MixtapeResultType;
+
+  [AnalyticsEvent.Favorite]: ActionType;
+  [AnalyticsEvent.Rewatching]: { action: 'start' | 'stop' };
 };
