@@ -183,7 +183,7 @@
   const monthStart = $derived(monthRange.start.getTime());
   const monthDays = $derived(monthRange.days);
 
-  const { calendar: monthCalendar } = $derived(
+  const { calendar: monthCalendar, isLoading: isMonthLoading } = $derived(
     useSource({
       start: new Date(monthStart),
       days: monthDays,
@@ -276,6 +276,7 @@
           {#if calendarView === "day"}
             <CalendarDays
               calendar={visiblePeriodCalendar}
+              isLoading={$isLoading}
               {navigation}
               activeDate={selectedDate}
             />
@@ -285,6 +286,7 @@
               activeDate={selectedDate}
               preview={monthPreview}
               variant={isMonthOnly ? "fill" : "default"}
+              isLoading={isMonthOnly && $isMonthLoading}
               onSelectDay={isMonthOnly
                 ? (day) => (selectedDay = day)
                 : jumpToDay}
@@ -415,7 +417,7 @@
       aspect-ratio: 2 / 3;
 
       object-fit: cover;
-      border-radius: var(--ni-2);
+      border-radius: var(--border-radius-xs);
     }
   }
 

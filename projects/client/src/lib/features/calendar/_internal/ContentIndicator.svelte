@@ -1,5 +1,10 @@
 <script lang="ts">
-  const { itemCount }: { itemCount: number } = $props();
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+
+  const { itemCount, isLoading = false }: {
+    itemCount: number;
+    isLoading?: boolean;
+  } = $props();
 
   const maxPreviewItems = 2;
 
@@ -9,6 +14,14 @@
 </script>
 
 <div class="trakt-content-indicator">
+  {#if isLoading}
+    <Skeleton
+      width="var(--ni-20)"
+      height="var(--ni-8)"
+      radius="var(--border-radius-xxl)"
+    />
+  {/if}
+
   {#each indicators as _, i (i)}
     <span class="circle"></span>
   {/each}

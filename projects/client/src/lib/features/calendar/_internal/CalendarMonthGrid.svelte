@@ -1,4 +1,5 @@
 <script lang="ts" generics="T extends { key: string }">
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
@@ -18,12 +19,14 @@
     activeDate,
     preview,
     variant = "default",
+    isLoading = false,
     onSelectDay,
   }: {
     allDays: Calendar<T>;
     activeDate: Date;
     preview?: Snippet<[T[]]>;
     variant?: "default" | "mini" | "fill";
+    isLoading?: boolean;
     onSelectDay?: (day: { date: Date; items: T[] }) => void;
   } = $props();
 
@@ -66,17 +69,21 @@
           aria-label={m.button_label_go_to_calendar_day({
             day: toHumanDay({ date: cell.date, locale: getLocale() }),
           })}
-          disabled={cell.items.length === 0}
+          disabled={isLoading || cell.items.length === 0}
           onclick={() =>
             onSelectDay ? onSelectDay(cell) : scrollToCalendarDay(cell.date)}
         >
           <span class="month-day-number">{cell.date.getDate()}</span>
           <span
             class="month-day-preview"
-            data-count={Math.min(cell.items.length, MAX_PREVIEW_ITEMS)}
+            data-count={isLoading
+              ? 1
+              : Math.min(cell.items.length, MAX_PREVIEW_ITEMS)}
             aria-hidden="true"
           >
-            {#if cell.items.length > 0 && preview}
+            {#if isLoading}
+              <Skeleton height="100%" radius="var(--border-radius-xs)" />
+            {:else if cell.items.length > 0 && preview}
               {@render preview(cell.items.slice(0, MAX_PREVIEW_ITEMS))}
             {:else if cell.items.length > 0}
               <span class="dot"></span>
