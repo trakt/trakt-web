@@ -263,6 +263,19 @@ describe('TodayStoryViewer', () => {
     ).toBeInTheDocument();
   });
 
+  it('should link the avatar to the profile of its user', async () => {
+    await renderViewer(null);
+
+    const avatar = screen.getByAltText(
+      `${UserProfileHarryMappedMock.username}'s avatar`,
+    );
+
+    expect(avatar.closest('a')).toHaveAttribute(
+      'href',
+      expect.stringContaining(`/profile/${UserProfileHarryMappedMock.slug}`),
+    );
+  });
+
   it('should highlight a movie the user also watched', async () => {
     const watched = { ...MovieHereticMappedMock, id: 916302 };
     renderComponent(TodayStoryViewer, {
