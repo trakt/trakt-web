@@ -23,6 +23,7 @@
     seasons,
     currentSeason,
     currentEpisode,
+    scrollToEpisode,
     showSeasonSelector = false,
     buildEpisodeLink,
   }: {
@@ -30,6 +31,7 @@
     seasons: Season[];
     currentSeason: number;
     currentEpisode?: number;
+    scrollToEpisode?: number;
     showSeasonSelector?: boolean;
     buildEpisodeLink?: (
       target: { season: number; episode: number },
@@ -137,6 +139,8 @@
             watchedBySeason={$watchedBySeason}
             isWatchedLoading={$isWatchedLoading}
             isCurrentEpisode={episode.number === currentEpisode}
+            isScrollTarget={episode.number ===
+              (scrollToEpisode ?? currentEpisode)}
             urlOverride={buildLink({
               season: episode.season,
               episode: episode.number,

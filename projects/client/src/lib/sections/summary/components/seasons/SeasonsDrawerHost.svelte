@@ -81,7 +81,7 @@
     {show}
     {seasons}
     {currentSeason}
-    currentEpisode={sourceEpisode}
+    scrollToEpisode={sourceEpisode}
   />
 {/snippet}
 

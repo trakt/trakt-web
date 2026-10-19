@@ -186,6 +186,7 @@
       watchedBySeason={$watchedBySeason}
       isWatchedLoading={$isWatchedLoading}
       isCurrentEpisode={episode.number === activeEpisode}
+      isScrollTarget={episode.number === activeEpisode}
       isConcealed={episode.number < concealBefore}
       urlOverride={buildEpisodeDrawerLink({
         season: episode.season,
