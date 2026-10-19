@@ -53,7 +53,9 @@
     });
 
   const cancel = async () => {
-    const isCancelled = await cancelSubscription(tracking());
+    const isCancelled = await cancelSubscription(tracking()).catch(
+      () => false,
+    );
 
     if (!isCancelled) {
       error = "cancel";
