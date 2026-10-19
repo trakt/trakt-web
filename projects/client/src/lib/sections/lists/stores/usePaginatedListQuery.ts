@@ -1,4 +1,7 @@
-import { useInfiniteQuery } from '$lib/features/query/useQuery.ts';
+import {
+  useAllPagesInfiniteQuery,
+  useInfiniteQuery,
+} from '$lib/features/query/useQuery.ts';
 import { rethrowUnlessCancelled } from '$lib/features/query/rethrowUnlessCancelled.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import { dedupe } from '$lib/utils/array/dedupe.ts';
@@ -18,8 +21,11 @@ export function usePaginatedListQuery<
     QueryKey,
     number
   >,
+  options?: { allPages?: boolean },
 ) {
-  const query = useInfiniteQuery(props);
+  const query = options?.allPages
+    ? useAllPagesInfiniteQuery(props)
+    : useInfiniteQuery(props);
 
   const isLoading = query.pipe(
     map(($query) => toLoadingState($query) || $query.isFetchingNextPage),

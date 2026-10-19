@@ -106,6 +106,18 @@ describe('util: toCalendarChunks', () => {
     expect(toStarts(chunks)).toEqual(['Sun Sep 06 2026', 'Sun Sep 13 2026']);
   });
 
+  it('should keep an earlier chunk that contains the lower bound', () => {
+    const chunks = toCalendarChunks({
+      range: { anchor: new Date(2026, 9, 21), earlier: 2, later: 0 },
+      weeksPerStep: 4,
+      order: 'reverse-chronological',
+      locale: 'en',
+      lowerBound: new Date(2026, 8, 10),
+    });
+
+    expect(toStarts(chunks)).toEqual(['Sun Aug 30 2026', 'Sun Sep 27 2026']);
+  });
+
   it('should load at least the minimum number of later chunks', () => {
     const chunks = toCalendarChunks({
       range: { anchor: new Date(2026, 9, 21), earlier: 0, later: 1 },

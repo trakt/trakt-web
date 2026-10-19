@@ -23,8 +23,8 @@
     view = "day",
     periods,
     onLoadMore,
-    isInitialLoad: externalInitialLoad,
-    isLoadingAbove = false,
+    isInitialLoad,
+    isLoadingAbove,
     onLoadPrevious,
   }: CalendarBoardLayoutProps<T> = $props();
 
@@ -47,11 +47,6 @@
   };
 
   const { observeDimension } = useLazyLoader({ loadMore, parent: null });
-
-  const isInitialPeriod = $derived(periods.length <= 1);
-  const isInitialLoad = $derived(
-    externalInitialLoad ?? (isInitialPeriod && isLoading),
-  );
 
   const scrollTargetId = $derived(
     view === "week"

@@ -48,7 +48,10 @@ export function toCalendarChunks({
       ({ offset, start }) => offset === 0 || !upperBound || start <= upperBound,
     )
     .filter(
-      ({ offset, start }) => offset >= 0 || !lowerBound || start >= lowerBound,
+      ({ offset, start }) =>
+        offset >= 0 ||
+        !lowerBound ||
+        addWeeks(start, weeksPerStep) > lowerBound,
     )
     .map(({ offset, start }) => ({
       key: dateKey(start),

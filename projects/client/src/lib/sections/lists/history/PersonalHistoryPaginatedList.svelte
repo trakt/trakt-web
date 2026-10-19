@@ -1,51 +1,41 @@
 <script lang="ts">
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import HistoryCalendar from "$lib/features/calendar/HistoryCalendar.svelte";
-  import { useCalendarPeriod } from "$lib/features/calendar/context/useCalendarPeriod";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import { HISTORY_UPPER_LIMIT } from "$lib/utils/constants";
-  import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
+  import { useHistoryCalendar } from "../stores/useHistoryCalendar.ts";
   import { toRecentlyWatchedType } from "./_internal/toRecentlyWatchedType";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";
 
   const { mode, syncId }: { mode?: DiscoverMode; syncId?: number } = $props();
 
-  const order = "reverse-chronological" as const;
-
-  const { activeDate } = useCalendarPeriod({ order });
-
   const historyType = $derived(toRecentlyWatchedType(mode));
 
   const { filterMap } = useFilter();
+  const { user } = useUser();
 
-  const { periods, isLoading, hasNextPage, fetchNextPage } = $derived(
-    useRecentlyWatchedList({
-      type: historyType,
-      slug: "me",
-      limit: HISTORY_UPPER_LIMIT,
-      filter: $filterMap,
-      syncId,
-    }),
+  const sourceKey = $derived(
+    `${historyType}:${JSON.stringify($filterMap)}:${syncId}`,
   );
 
-  const loadMore = $derived(() => {
-    if (!$hasNextPage) return;
-    fetchNextPage();
-  });
+  const useSource = ({ start, days }: { start: Date; days: number }) =>
+    useHistoryCalendar({
+      start,
+      days,
+      type: historyType,
+      filter: $filterMap,
+      syncId,
+    });
 
   const now = new Date();
-
-  // FIXME: add support for prev/next/reset to this paginated variant
 </script>
 
 <HistoryCalendar
-  activeDate={$activeDate}
-  isLoading={$isLoading}
-  onLoadMore={loadMore}
-  periods={$periods}
+  {useSource}
+  {sourceKey}
   layout="list"
   maxDate={now}
-  {order}
+  minDate={$user?.joinedAt}
 >
   {#snippet item(media)}
     <RecentlyWatchedItem {media} style="summary" isActionable />

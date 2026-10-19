@@ -10,8 +10,6 @@ import { movieActivityHistoryQuery } from '$lib/requests/queries/users/movieActi
 import { showActivityHistoryQuery } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
-import { map } from 'rxjs';
-import { mapToCalendarPeriods } from './_internal/mapToCalendarPeriods.ts';
 import type { HistoryEntry } from './models/HistoryEntry.ts';
 
 export type RecentlyWatchedType = ExtendedMediaType | 'media';
@@ -30,6 +28,9 @@ type RecentlyWatchedListStoreProps = {
   slug?: string;
   page?: number;
   syncId?: number;
+  startDate?: Date;
+  endDate?: Date;
+  allPages?: boolean;
 } & FilterParams &
   (SpecificHistory | MediaHistory);
 
@@ -40,6 +41,8 @@ function typeToQuery(props: RecentlyWatchedListStoreProps) {
     page: props.page ?? 1,
     filter: props.filter,
     syncId: props.syncId,
+    startDate: props.startDate,
+    endDate: props.endDate,
   };
 
   switch (props.type) {
@@ -68,7 +71,9 @@ export function useRecentlyWatchedList(params: RecentlyWatchedListStoreProps) {
     list,
     isLoading: baseLoading,
     ...rest
-  } = usePaginatedListQuery(typeToQuery(params));
+  } = usePaginatedListQuery(typeToQuery(params), {
+    allPages: params.allPages,
+  });
 
   const overlay = createBulkIntlOverlay<HistoryEntry>({
     getTargets: activityEntryTargets,
@@ -76,11 +81,8 @@ export function useRecentlyWatchedList(params: RecentlyWatchedListStoreProps) {
 
   const localized = list.pipe(overlay.operator);
 
-  const periods = localized.pipe(map((items) => mapToCalendarPeriods(items)));
-
   return {
     list: localized,
-    periods,
     isLoading: withOverlayLoading(baseLoading, overlay.intlLoading$),
     ...rest,
   };
