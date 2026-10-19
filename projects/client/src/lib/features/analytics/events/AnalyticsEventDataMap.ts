@@ -294,4 +294,6 @@ export type AnalyticsEventDataMap = {
     type: OfflineActionEndpoint;
     outcome: 'done' | 'failed';
   };
+
+  [AnalyticsEvent.PwaInstall]: { outcome: 'accepted' | 'dismissed' };
 };

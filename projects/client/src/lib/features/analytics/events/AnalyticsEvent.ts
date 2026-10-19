@@ -146,4 +146,6 @@ export const AnalyticsEvent = {
 
   OfflineQueued: 'offline.queued',
   OfflineReplayed: 'offline.replayed',
+
+  PwaInstall: buildEventKey(ACTION_PREFIX, 'pwa-install'),
 } as const;
