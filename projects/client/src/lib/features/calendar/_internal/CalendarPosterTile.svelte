@@ -117,9 +117,8 @@
         color-mix(in srgb, var(--shade-1000) 85%, transparent)
       );
 
-      :global(.trakt-tag) {
-        background: var(--color-background-cover-tag);
-      }
+      --color-background-stem-tag: var(--color-background-cover-tag);
+      --shadow-stem-tag: var(--shadow-cover-tag);
     }
 
     .tile-title {

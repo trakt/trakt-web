@@ -42,6 +42,7 @@
 
       background: var(--color-background-stem-tag);
       color: var(--color-foreground-stem-tag);
+      box-shadow: var(--shadow-stem-tag, none);
     }
 
     :global(p) {

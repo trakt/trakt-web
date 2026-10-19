@@ -314,8 +314,7 @@
 
     gap: var(--gap-micro);
 
-    :global(.trakt-tag) {
-      background: var(--color-background-cover-tag);
-    }
+    --color-background-stem-tag: var(--color-background-cover-tag);
+    --shadow-stem-tag: var(--shadow-cover-tag);
   }
 </style>
