@@ -180,8 +180,8 @@
     input {
       width: 100%;
       min-width: 0;
-      height: var(--ni-36);
-      padding-inline: var(--ni-10);
+      height: var(--ni-40);
+      padding-inline: var(--ni-12);
       box-sizing: border-box;
       font-size: var(--font-size-text);
 
@@ -219,7 +219,7 @@
     justify-content: center;
 
     width: var(--ni-36);
-    height: var(--ni-36);
+    height: var(--ni-40);
 
     color: var(--color-select-muted-foreground);
 
