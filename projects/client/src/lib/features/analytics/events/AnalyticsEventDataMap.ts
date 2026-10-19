@@ -154,6 +154,11 @@ type PlexSettingType = {
   state: 'on' | 'off';
 };
 
+type StreamingServiceType = {
+  action: 'connect' | 'sync' | 'unlink' | 'undo';
+  service?: string;
+};
+
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.PageView]: PageViewType;
   [AnalyticsEvent.EnterLite]: never;
@@ -277,4 +282,6 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.PlexSync]: { action: 'sync-now' | 'retry' };
   [AnalyticsEvent.PlexServer]: { action: 'save' | 'remove' };
   [AnalyticsEvent.PlexSetting]: PlexSettingType;
+
+  [AnalyticsEvent.StreamingService]: StreamingServiceType;
 };

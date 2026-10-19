@@ -139,4 +139,6 @@ export const AnalyticsEvent = {
   PlexSync: 'plex-action.sync',
   PlexServer: 'plex-action.server',
   PlexSetting: 'plex-action.setting',
+
+  StreamingService: 'streaming-action.service',
 } as const;
