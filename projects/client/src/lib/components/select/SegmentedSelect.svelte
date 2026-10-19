@@ -597,8 +597,6 @@
     --segment-height: var(--segmented-select-minimal-segment-height);
     --segment-inset: var(--ni-0);
     --segment-font-size: var(--font-size-text-small);
-    --track-radius: var(--border-radius-m);
-    --segment-radius: var(--border-radius-m);
     --track-shadow: none;
     --segment-block-inset: var(--gap-xs);
     --selector-shadow:
