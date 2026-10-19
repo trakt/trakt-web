@@ -164,8 +164,7 @@
     flex-shrink: 0;
 
     display: inline-block;
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-s);
+    @include tag-box;
 
     font-size: var(--font-size-tag);
     text-transform: capitalize;

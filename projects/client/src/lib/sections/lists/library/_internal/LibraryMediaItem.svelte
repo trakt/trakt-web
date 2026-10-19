@@ -33,9 +33,7 @@
 </script>
 
 {#snippet addedAtTag()}
-  <div class="trakt-added-at-tag">
-    <DateTag date={item.addedAt} i18n={TagIntlProvider} type="tag" />
-  </div>
+  <DateTag date={item.addedAt} i18n={TagIntlProvider} type="tag" />
 {/snippet}
 
 <MediaItem
@@ -46,10 +44,3 @@
   coverTag={addedAtTag}
   tag={isSummary ? addedAtTag : undefined}
 />
-
-<style>
-  .trakt-added-at-tag {
-    transform: scale(0.75);
-    transform-origin: bottom left;
-  }
-</style>

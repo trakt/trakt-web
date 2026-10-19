@@ -385,3 +385,9 @@
     0 var(--ni-2) var(--ni-12) color-mix(in srgb, #{$color} 18%, transparent);
   font-weight: 600;
 }
+
+@mixin tag-box {
+  padding: var(--ni-4) var(--ni-8);
+  border-radius: var(--border-radius-pill);
+  line-height: var(--ni-12);
+}
