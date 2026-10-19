@@ -147,7 +147,7 @@
 
   .trakt-select-trigger {
     --color-foreground-select: var(--color-foreground);
-    --color-border-select: var(--shade-300);
+    --color-border-select: var(--color-border);
     --button-height: var(--ni-40);
 
     all: unset;
@@ -182,7 +182,7 @@
     padding: var(--ni-12);
     box-sizing: border-box;
 
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-l);
     border: var(--border-thickness-xxs) solid var(--color-border-select);
 
     background-color: var(--color-background-select);
@@ -195,16 +195,12 @@
 
     &:not([data-disabled]) {
       @include for-mouse {
-        &:hover,
-        &:focus-visible {
-          background-color: var(--color-foreground-select);
-          color: var(--color-background-select);
-          border-color: var(--color-background-select);
+        &:hover {
+          border-color: var(--color-text-secondary);
         }
 
         &:focus-visible {
-          outline: var(--border-thickness-xs) solid
-            var(--color-foreground-select);
+          outline: var(--border-thickness-xs) solid var(--color-input-focus);
         }
       }
     }
