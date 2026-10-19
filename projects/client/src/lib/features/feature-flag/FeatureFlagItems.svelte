@@ -3,6 +3,8 @@
   import Link from "$lib/components/link/Link.svelte";
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { m } from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
@@ -20,6 +22,7 @@
   const { classList = "" }: FeatureFlagItemsProps = $props();
 
   const { flags, setFlag } = useFeatureFlag();
+  const { track } = useTrack(AnalyticsEvent.PreviewFeature);
   const { acknowledgeUnread } = useUnreadPreviewFeatures();
   const featureFlags = Object.values(FeatureFlag);
   const hasFlags = featureFlags.length > 0;
@@ -29,6 +32,11 @@
   onMount(() => {
     newFeatures = acknowledgeUnread();
   });
+
+  const toggleFlag = (key: FeatureFlag, isOn: boolean) => {
+    track({ id: key, state: isOn ? "off" : "on" });
+    setFlag(key, !isOn);
+  };
 </script>
 
 {#if hasFlags}
@@ -71,7 +79,7 @@
             <Switch
               label={title}
               checked={value}
-              onclick={() => setFlag(key, !value)}
+              onclick={() => toggleFlag(key, value)}
             />
 
             <span
