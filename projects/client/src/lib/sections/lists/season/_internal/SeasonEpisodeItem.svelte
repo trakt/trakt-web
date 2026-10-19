@@ -35,13 +35,14 @@
     watchedBySeason: ReadonlyMap<number, ReadonlySet<number>>;
     isWatchedLoading: boolean;
     isCurrentEpisode?: boolean;
+    isScrollTarget?: boolean;
     isConcealed?: boolean;
     style?: BaseItemProps["style"];
     source: string;
     urlOverride?: CardUrlOverride;
     /**
-     * Which way this item's container scrolls when it is the current
-     * episode. The rail is a horizontal strip; the seasons drawer is a
+     * Which way this item's container scrolls when it is the scroll
+     * target. The rail is a horizontal strip; the seasons drawer is a
      * vertical list several levels inside a scrolling body.
      */
     scrollAxis?: "inline" | "block" | "none";
@@ -56,6 +57,7 @@
     watchedBySeason,
     isWatchedLoading,
     isCurrentEpisode = false,
+    isScrollTarget = false,
     isConcealed = false,
     style,
     source,
@@ -194,11 +196,11 @@
 <!--
   Keep a single, stable render position for the episode item. Branching on
   isCurrentEpisode would remount EpisodeItem (image reload/blink) whenever the
-  active episode changes. The scroll action is a no-op when not current.
+  active episode changes. The scroll action is a no-op when not the target.
 -->
 <div
   use:scrollActiveItemIntoView={{
-    active: isCurrentEpisode && scrollAxis !== "none",
+    active: isScrollTarget && scrollAxis !== "none",
     axis: scrollAxis === "block" ? "block" : "inline",
   }}
   class="trakt-season-episode-item"
