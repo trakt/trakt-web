@@ -174,13 +174,18 @@
   const href = $derived.by(() => {
     if (urlOverride) return urlOverride.href;
 
-    return rest.type === "episode"
-      ? UrlBuilder.episodeDrawer(
+    switch (rest.type) {
+      case "episode":
+        return UrlBuilder.episodeDrawer(
           media.slug,
           rest.episode.season,
           rest.episode.number,
-        )
-      : UrlBuilder.media(media.type, media.slug);
+        );
+      case "season":
+        return UrlBuilder.seasonDrawer(media.slug, rest.season.number);
+      default:
+        return UrlBuilder.media(media.type, media.slug);
+    }
   });
 </script>
 
