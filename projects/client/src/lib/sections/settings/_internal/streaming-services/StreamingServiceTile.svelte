@@ -253,9 +253,9 @@
     justify-content: center;
 
     height: var(--ni-40);
-    padding: 0 var(--ni-12);
+    padding: 0 var(--ni-16);
     box-sizing: border-box;
-    border-radius: calc(var(--border-radius-m) * 0.8);
+    border-radius: var(--border-radius-pill);
 
     background: var(--color-background-purple);
     color: var(--color-foreground-purple);

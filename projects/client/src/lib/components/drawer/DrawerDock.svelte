@@ -26,9 +26,7 @@
     padding: var(--drawer-dock-padding);
 
     border: var(--border-thickness-xxs) solid var(--color-drawer-border);
-    border-radius: calc(
-      var(--border-radius-m) * 0.8 + var(--drawer-dock-padding)
-    );
+    border-radius: calc(var(--border-radius-pill) + var(--drawer-dock-padding));
 
     background: var(--drawer-dock-surface);
     backdrop-filter: blur(var(--ni-12));
