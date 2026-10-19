@@ -7,9 +7,11 @@
   import type { Snippet } from "svelte";
   import type { Calendar } from "../models/Calendar.ts";
   import CalendarDayHeader from "./CalendarDayHeader.svelte";
+  import CalendarWeekHead from "./CalendarWeekHead.svelte";
   import { dateKey } from "./dateKey.ts";
   import { toCalendarItemCountLabel } from "./toCalendarItemCountLabel.ts";
   import { toCalendarWeekTitle } from "./toCalendarWeekTitle.ts";
+  import { toWeekTimelineName } from "./toWeekTimelineName.ts";
 
   const {
     calendar,
@@ -33,12 +35,15 @@
     });
   });
 
+  const weekStart = $derived.by(() => {
+    const firstDay = calendar.at(0);
+    return firstDay ? dateKey(firstDay.date) : undefined;
+  });
+
   const count = $derived(
     calendar.reduce((total, day) => total + day.items.length, 0),
   );
   const countLabel = $derived(toCalendarItemCountLabel(count));
-
-  let headHeight = $state(0);
 
   const toAirTime = (media: T) =>
     "airDate" in media && media.airDate instanceof Date
@@ -57,25 +62,20 @@
   </div>
 {/snippet}
 
-<section
-  class="trakt-calendar-week"
-  style:--week-head-height="{headHeight}px"
->
+<section class="trakt-calendar-week">
   <header class="week-heading">
     <h2 class="week-title">{title}</h2>
     <span class="week-count secondary">{countLabel}</span>
   </header>
 
-  <div class="week-days-head" bind:offsetHeight={headHeight}>
-    {#each calendar as day (dateKey(day.date))}
-      <div class="week-day-head" class:is-today={isToday(day.date)}>
-        <CalendarDayHeader
-          date={day.date}
-          count={day.items.length}
-          variant="column"
-        />
-      </div>
-    {/each}
+  <div
+    class="week-days-head"
+    data-week-start={weekStart}
+    style:view-timeline-name={weekStart
+      ? toWeekTimelineName(weekStart)
+      : undefined}
+  >
+    <CalendarWeekHead {calendar} />
   </div>
 
   <div class="week-days">
@@ -151,7 +151,6 @@
     }
   }
 
-  .week-days-head,
   .week-days {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -159,23 +158,10 @@
   }
 
   .week-days-head {
-    position: sticky;
-    top: var(--calendar-sticky-top, 0px);
-    z-index: var(--layer-raised);
+    view-timeline-inset: var(--calendar-bar-bottom, 0px) 0px;
 
-    background-color: var(--color-background);
     box-shadow: 0 var(--border-thickness-xxs) 0
       var(--color-calendar-active-background);
-  }
-
-  .week-day-head {
-    padding: var(--gap-xs) var(--week-column-padding);
-    border-start-start-radius: var(--border-radius-l);
-    border-start-end-radius: var(--border-radius-l);
-
-    &.is-today {
-      background-color: var(--color-week-today-tint);
-    }
   }
 
   .week-day {
@@ -187,9 +173,7 @@
     border-end-start-radius: var(--border-radius-l);
     border-end-end-radius: var(--border-radius-l);
 
-    scroll-margin-top: calc(
-      var(--calendar-sticky-top, 0px) + var(--week-head-height, 0px)
-    );
+    scroll-margin-top: var(--calendar-sticky-top, 0px);
 
     transition: opacity var(--transition-increment) ease-in-out;
 

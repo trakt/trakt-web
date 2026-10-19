@@ -98,8 +98,6 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-history-calendar {
-    --calendar-day-header-position: static;
-
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);

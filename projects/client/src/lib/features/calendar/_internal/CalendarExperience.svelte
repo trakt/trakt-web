@@ -5,6 +5,7 @@
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { getDaysDifference } from "$lib/utils/date/getDaysDifference";
+  import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { startOfMonth } from "date-fns/startOfMonth";
   import { addMonths } from "date-fns/addMonths";
@@ -23,6 +24,9 @@
   import { toMonthGridRange } from "./toMonthGridRange.ts";
   import { calendarViewParam } from "./calendarViewParam.ts";
   import CalendarWeekdayRow from "./CalendarWeekdayRow.svelte";
+  import CalendarWeekHead from "./CalendarWeekHead.svelte";
+  import { trackStuckWeekHead } from "./trackStuckWeekHead.ts";
+  import { toWeekTimelineName } from "./toWeekTimelineName.ts";
   import { dateKey } from "./dateKey";
   import { useEpisodeType } from "../useEpisodeType";
   import type { CalendarItem as CalendarItemEntry } from "./useCalendar";
@@ -201,6 +205,51 @@
   const isBarPinned = $derived($isDocked || calendarView === "day");
 
   let barHeight = $state(0);
+  let stuckWeekStart = $state<string | null>(null);
+
+  const toWeekIndex = (start: string | null) =>
+    periods.findIndex((period) => {
+      const firstDay = period.calendar.at(0);
+      return firstDay && dateKey(firstDay.date) === start;
+    });
+
+  const stuckWeekIndex = $derived(toWeekIndex(stuckWeekStart));
+  const hasStuckWeek = $derived(stuckWeekIndex !== -1);
+  const stuckWeek = $derived(
+    hasStuckWeek ? periods.at(stuckWeekIndex)?.calendar : undefined,
+  );
+  const incomingWeek = $derived(
+    hasStuckWeek ? periods.at(stuckWeekIndex + 1)?.calendar : undefined,
+  );
+
+  const setStuckWeek = (start: string | null) => {
+    stuckWeekStart = start;
+    if (layoutView !== "week") return;
+
+    const index = toWeekIndex(start);
+    const firstDay =
+      index === -1 ? undefined : periods.at(index)?.calendar.at(0);
+    visibleDate.next(firstDay?.date ?? null);
+  };
+
+  const toWeekStart = (period: CalendarPeriod<T> | undefined) => {
+    const firstDay = period?.calendar.at(0);
+    return firstDay ? dateKey(firstDay.date) : undefined;
+  };
+
+  const weekTimelines = $derived(
+    periods
+      .map(toWeekStart)
+      .filter((start) => start !== undefined)
+      .map(toWeekTimelineName)
+      .join(", ") || "none",
+  );
+  const incomingTimeline = $derived.by(() => {
+    const start = hasStuckWeek
+      ? toWeekStart(periods.at(stuckWeekIndex + 1))
+      : undefined;
+    return start ? toWeekTimelineName(start) : undefined;
+  });
 
   const closeToHome = () =>
     // eslint-disable-next-line svelte/no-navigation-without-resolve
@@ -243,6 +292,7 @@
       allDays={monthAllDays}
       activeDate={selectedDate}
       variant="mini"
+      isActiveWeekPinned
       onSelectDay={jumpToDay}
     />
   </div>
@@ -250,9 +300,13 @@
 
 <div
   class="calendar-page-layout"
+  use:trackWindowScroll={"is-scrolled"}
   class:is-docked={$isDocked}
   class:is-bar-pinned={isBarPinned}
+  class:has-stuck-week={layoutView === "week" && hasStuckWeek}
   style:--calendar-bar-height="{barHeight}px"
+  style:timeline-scope={weekTimelines}
+  use:trackStuckWeekHead={{ onChange: setStuckWeek }}
 >
   <div class="calendar-main">
     <div
@@ -269,6 +323,22 @@
         view={calendarView}
         onToggleView={toggleView}
       />
+
+      {#if layoutView === "week" && stuckWeek}
+        <div class="calendar-bar-week">
+          {#key `${weekTimelines}|${incomingTimeline}`}
+            <div
+              class="calendar-bar-week-slot"
+              style:animation-timeline={incomingTimeline}
+            >
+              <CalendarWeekHead calendar={stuckWeek} />
+              {#if incomingWeek}
+                <CalendarWeekHead calendar={incomingWeek} />
+              {/if}
+            </div>
+          {/key}
+        </div>
+      {/if}
 
       {#if !$isDocked}
         <div class="calendar-bar-dates">
@@ -326,6 +396,16 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  @keyframes calendar-week-push {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(calc(-1 * var(--calendar-week-head-height)));
+    }
+  }
+
   .calendar-page-layout {
     --calendar-bar-top: var(--navbar-height);
     --calendar-sticky-top: var(--calendar-bar-top);
@@ -348,10 +428,21 @@
       grid-template-columns: minmax(0, 1fr) var(--drawer-width);
     }
 
+    --calendar-bar-bottom: calc(
+      var(--calendar-bar-top) + var(--calendar-bar-height)
+    );
+
     &.is-bar-pinned {
       --calendar-sticky-top: calc(
         var(--calendar-bar-top) + var(--calendar-bar-height) -
           var(--border-thickness-xxs)
+      );
+    }
+
+    &.has-stuck-week {
+      --calendar-sticky-top: calc(
+        var(--calendar-bar-top) + var(--calendar-bar-height) +
+          var(--calendar-week-head-height)
       );
     }
   }
@@ -373,8 +464,6 @@
 
     padding-block: var(--gap-s) var(--gap-m);
 
-    background-color: var(--color-background);
-
     @include for-tablet-sm-and-below {
       gap: var(--gap-s);
       padding-bottom: var(--gap-xs);
@@ -382,6 +471,11 @@
 
     .is-docked & {
       --page-top-offset: calc(var(--gap-m) + env(safe-area-inset-top, 0px));
+      --calendar-card-top: calc(var(--page-top-offset) - var(--gap-s));
+      --calendar-card-bottom: calc(
+        var(--gap-m) - var(--gap-s) -
+          (var(--side-navbar-actions-height) - var(--ni-48)) / 2
+      );
 
       margin-top: calc(-1 * var(--page-top-offset));
       padding-top: calc(
@@ -398,12 +492,57 @@
     &::before {
       content: "";
       position: absolute;
-      inset-inline: calc(-1 * var(--layout-distance-side));
-      bottom: 100%;
+      z-index: -1;
+      inset-inline: calc(-1 * var(--gap-s));
+      inset-block: var(--calendar-card-top, var(--gap-xs))
+        var(--calendar-card-bottom, 0px);
 
-      height: var(--calendar-bar-top);
+      .has-stuck-week & {
+        inset-block-end: calc(-1 * var(--calendar-week-head-height));
+      }
 
-      background-color: var(--color-background);
+      border-radius: var(--border-radius-xl);
+
+      transition:
+        background-color var(--transition-duration-short) ease-out,
+        box-shadow var(--transition-duration-short) ease-out,
+        inset-block-end var(--transition-duration-short)
+          cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .calendar-page-layout:not(.is-docked) & {
+      padding-top: calc(var(--gap-s) + var(--gap-xs));
+    }
+
+    .calendar-page-layout.is-bar-pinned:global(.is-scrolled) &::before {
+      background-color: var(--color-calendar-background);
+      box-shadow: var(--shadow-raised);
+      backdrop-filter: blur(var(--ni-16));
+    }
+
+    .calendar-page-layout.is-docked.is-bar-pinned:global(.is-scrolled)
+      &::before {
+      background-color: var(--color-background-navbar-base);
+      backdrop-filter: none;
+    }
+
+    .calendar-bar-week {
+      position: absolute;
+      inset-inline: 0;
+      top: 100%;
+
+      overflow: hidden;
+      height: var(--calendar-week-head-height);
+    }
+
+    .calendar-bar-week-slot {
+      transform: translateY(calc(-1 * var(--calendar-week-push, 0px)));
+
+      @supports (animation-timeline: view()) {
+        animation: calendar-week-push linear both;
+        animation-range: exit calc(-1 * var(--calendar-week-head-height)) exit
+          0%;
+      }
     }
 
     :global(.calendar-month-poster) {
