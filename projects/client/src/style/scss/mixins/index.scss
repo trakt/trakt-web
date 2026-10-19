@@ -273,7 +273,7 @@
   :global(#{$selector}) {
     box-sizing: border-box;
     padding: var(--ni-6);
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-pill);
 
     cursor: pointer;
     user-select: none;

@@ -41,6 +41,10 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-summary-actions-bar {
+    --actions-bar-height: var(--ni-56);
+    --actions-bar-inset: calc((var(--actions-bar-height) - var(--ni-40)) / 2);
+    --actions-bar-radius: calc(var(--actions-bar-height) / 2);
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -48,14 +52,14 @@
 
     position: relative;
 
-    height: var(--ni-56);
+    height: var(--actions-bar-height);
     width: var(--ni-280);
 
-    padding: var(--ni-8) var(--ni-10);
+    padding: var(--actions-bar-inset);
     box-sizing: border-box;
 
     background-color: var(--color-actions-bar-background);
-    border-radius: var(--border-radius-l);
+    border-radius: var(--actions-bar-radius);
     box-shadow: var(--shadow-raised);
 
     transition: border-radius var(--popup-transition-duration) ease-in-out;
@@ -82,7 +86,7 @@
     @include for-tablet-sm-and-below {
       width: var(--summary-poster-width);
       &:global(:has(.trakt-media-actions-popup-button.is-opened)) {
-        border-radius: var(--border-radius-l);
+        border-radius: var(--actions-bar-radius);
       }
     }
   }
