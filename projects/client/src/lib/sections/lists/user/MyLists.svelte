@@ -10,12 +10,11 @@
   import CtaItem from "../components/cta/CtaItem.svelte";
   import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
-  import CreateSmartListButton from "../smart/CreateSmartListButton.svelte";
   import SmartListSummaryItem from "../smart/SmartListSummaryItem.svelte";
   import SmartListTemplates from "../smart/templates/SmartListTemplates.svelte";
   import SmartListTemplatesLink from "../smart/templates/SmartListTemplatesLink.svelte";
   import { useSmartListTemplates } from "../smart/templates/useSmartListTemplates.ts";
-  import CreateListAction from "./_internal/CreateListAction.svelte";
+  import CreateListMenu from "./_internal/CreateListMenu.svelte";
   import LeaveCollaborationButton from "./_internal/LeaveCollaborationButton.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useMyLists } from "./useMyLists.ts";
@@ -77,11 +76,7 @@
 {/snippet}
 
 {#snippet actions()}
-  {#if type === "smart"}
-    <CreateSmartListButton />
-  {:else if type === "personal"}
-    <CreateListAction />
-  {/if}
+  <CreateListMenu />
 {/snippet}
 
 <SectionList
