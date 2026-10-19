@@ -6,6 +6,7 @@ import { endOfMonth } from 'date-fns/endOfMonth';
 import { isSameDay } from 'date-fns/isSameDay';
 import { startOfMonth } from 'date-fns/startOfMonth';
 import { dateKey } from './dateKey.ts';
+import { DAYS_IN_WEEK } from '$lib/utils/constants.ts';
 
 type MonthCell<T> = {
   date: Date;
@@ -29,8 +30,6 @@ type BuildMonthMatrixParams<T> = {
   allDays: ReadonlyArray<{ date: Date; items: T[] }>;
   localeKey?: AvailableLocale;
 };
-
-const DAYS_IN_WEEK = 7;
 
 export function buildMonthMatrix<T>({
   referenceDate,

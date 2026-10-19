@@ -14,6 +14,8 @@ export const NOOP_FN = () => {
   // noop
 };
 
+export const DAYS_IN_WEEK = 7;
+
 export const DEFAULT_PAGE_SIZE = 10;
 
 export const DEFAULT_DRILL_SIZE = 100;

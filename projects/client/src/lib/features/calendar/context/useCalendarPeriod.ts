@@ -4,11 +4,22 @@ import { isCurrentWeek } from '$lib/utils/date/isCurrentWeek.ts';
 import { addDays } from 'date-fns/addDays';
 import { addWeeks } from 'date-fns/addWeeks';
 import { subWeeks } from 'date-fns/subWeeks';
-import { map } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  type Observable,
+  skip,
+} from 'rxjs';
+import { onDestroy } from 'svelte';
 import { AnalyticsEvent } from '../../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../../analytics/useTrack.ts';
-import { createCalendarAccumulator } from '../_internal/createCalendarAccumulator.ts';
+import { toCalendarChunks } from '../_internal/toCalendarChunks.ts';
+import { toLoadDirection } from '../_internal/toLoadDirection.ts';
+import type { CalendarChunk } from '../models/CalendarChunk.ts';
 import type { CalendarOrder } from '../models/CalendarOrder.ts';
+import type { CalendarWindow } from '../models/CalendarWindow.ts';
 import { getCalendarContext } from './getCalendarContext.ts';
 
 type Direction = 'next' | 'previous';
@@ -31,82 +42,134 @@ function getActiveDate(weekStart: Date, order: CalendarOrder): Date {
   return weekStart;
 }
 
-// FIXME: calendar navigation should be reflected in url
-export function useCalendarPeriod(options?: { order?: CalendarOrder }) {
-  const { order = 'chronological' } = options ?? {};
-  const { startDate, activeDate, visibleDate } = getCalendarContext();
+const sameChunks = (
+  previous: ReadonlyArray<CalendarChunk>,
+  current: ReadonlyArray<CalendarChunk>,
+) =>
+  previous.length === current.length &&
+  previous.every((chunk, index) => chunk.key === current.at(index)?.key);
+
+type CalendarPeriodOptions = {
+  order?: CalendarOrder;
+  weeksPerStep?: number;
+  upperBound?: Date;
+  fingerprint?: Observable<string>;
+  minLater?: Observable<number>;
+};
+
+export function useCalendarPeriod(options?: CalendarPeriodOptions) {
+  const {
+    order = 'chronological',
+    weeksPerStep = 1,
+    upperBound,
+    fingerprint,
+    minLater,
+  } = options ?? {};
+  const { range, activeDate, visibleDate } = getCalendarContext();
   const { track } = useTrack(AnalyticsEvent.CalendarPeriod);
-  const { accumulate, clear, canLoadMore } = createCalendarAccumulator(order);
+
+  const currentMinLater = new BehaviorSubject(0);
+
+  if (minLater) {
+    const subscription = minLater.subscribe(currentMinLater);
+    onDestroy(() => subscription.unsubscribe());
+  }
+
+  const toChunks = (value: CalendarWindow) =>
+    toCalendarChunks({
+      range: value,
+      weeksPerStep,
+      order,
+      locale: getLocale(),
+      upperBound,
+      minLater: currentMinLater.value,
+    });
+
+  const chunks = combineLatest([range, currentMinLater]).pipe(
+    map(([value]) => toChunks(value)),
+    distinctUntilChanged(sameChunks),
+  );
+
+  const open = (anchor: Date) => {
+    range.next({ anchor, earlier: 0, later: 0 });
+  };
+
+  const toExtendedWindow = (direction: 'earlier' | 'later'): CalendarWindow => {
+    const current = range.value;
+
+    if (direction === 'earlier') {
+      return { ...current, earlier: current.earlier + 1 };
+    }
+
+    return {
+      ...current,
+      later: Math.max(current.later, currentMinLater.value) + 1,
+    };
+  };
+
+  const canExtend = (direction: 'earlier' | 'later') =>
+    toChunks(toExtendedWindow(direction)).length >
+    toChunks(range.value).length;
+
+  const extend = (direction: 'earlier' | 'later') => {
+    if (!canExtend(direction)) return false;
+
+    range.next(toExtendedWindow(direction));
+    return true;
+  };
+
+  const jumpTo = (date: Date) => {
+    visibleDate.next(null);
+    activeDate.next(date);
+    open(date);
+  };
+
+  if (upperBound && range.value.anchor > upperBound) {
+    jumpTo(isCurrentWeek(upperBound, getLocale()) ? new Date() : upperBound);
+  }
 
   const navigate = (direction: Direction) => {
     track({ action: direction });
-    const referenceDate = visibleDate.value ?? startDate.value;
+    const referenceDate = visibleDate.value ?? range.value.anchor;
     const newStart = getNextOrPreviousPeriod(referenceDate, direction);
 
-    clear(newStart);
-    visibleDate.next(null);
-    activeDate.next(getActiveDate(newStart, order));
-    startDate.next(newStart);
-  };
-
-  const loadMore = () => {
-    if (!canLoadMore()) {
-      return;
-    }
-
-    const direction: Direction =
-      order === 'chronological' ? 'next' : 'previous';
-    const newStart = getNextOrPreviousPeriod(startDate.value, direction);
-    startDate.next(newStart);
+    jumpTo(getActiveDate(newStart, order));
   };
 
   const goTo = (date: Date, direction: Direction) => {
     track({ action: direction });
-    const newStart = getStartOfWeek(date, getLocale());
-
-    clear(newStart);
-    visibleDate.next(null);
-    activeDate.next(date);
-    startDate.next(newStart);
+    jumpTo(date);
   };
 
-  const restart = () => {
-    const referenceDate = visibleDate.value ?? activeDate.value;
-    const newStart = getStartOfWeek(referenceDate, getLocale());
-
-    clear(newStart);
-    visibleDate.next(null);
-    activeDate.next(referenceDate);
-    startDate.next(newStart);
-  };
+  const restart = () => jumpTo(visibleDate.value ?? activeDate.value);
 
   const reset = () => {
     track({ action: 'reset' });
-    const referenceDate = visibleDate.value ?? startDate.value;
+    const referenceDate = visibleDate.value ?? range.value.anchor;
 
-    if (isCurrentWeek(referenceDate, getLocale())) {
-      visibleDate.next(null);
-      activeDate.next(new Date());
-      return;
-    }
-
-    const newStart = getStartOfWeek(new Date(), getLocale());
-    clear(newStart);
     visibleDate.next(null);
-    startDate.next(newStart);
     activeDate.next(new Date());
+
+    if (isCurrentWeek(referenceDate, getLocale())) return;
+
+    open(new Date());
   };
 
+  if (fingerprint) {
+    const subscription = fingerprint
+      .pipe(distinctUntilChanged(), skip(1))
+      .subscribe(restart);
+    onDestroy(() => subscription.unsubscribe());
+  }
+
   return {
-    startDate: startDate.asObservable(),
-    endDate: startDate.pipe(map((date) => addWeeks(date, 1))),
+    chunks,
+    activeDate,
     next: () => navigate('next'),
     previous: () => navigate('previous'),
-    loadMore,
-    accumulate,
-    activeDate,
+    loadMore: () => extend(toLoadDirection(order, 'more')),
+    loadPrevious: () => extend(toLoadDirection(order, 'previous')),
     reset,
-    restart,
     goTo,
   };
 }
