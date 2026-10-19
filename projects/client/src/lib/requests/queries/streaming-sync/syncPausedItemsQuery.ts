@@ -25,10 +25,16 @@ export const syncPausedItemsQuery = defineInfiniteQuery({
   invalidations: [],
   dependencies: (params) => [params.id, params.limit, params.page],
   request: syncPausedItemsRequest,
-  mapper: (response) => ({
-    entries: response.body.map(mapToSyncItem),
-    page: extractPageMeta(response.headers),
-  }),
+  mapper: (response, { page = 1, limit }) => {
+    const offset = (page - 1) * limit;
+
+    return {
+      entries: response.body.map((item, index) =>
+        mapToSyncItem(item, offset + index),
+      ),
+      page: extractPageMeta(response.headers, page),
+    };
+  },
   schema: PaginatableSchemaFactory(SyncItemSchema),
   ttl: time.minutes(30),
   enabled: (params) => Number.isFinite(params.id),
