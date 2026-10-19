@@ -44,6 +44,7 @@
     calendar.reduce((total, day) => total + day.items.length, 0),
   );
   const countLabel = $derived(toCalendarItemCountLabel(count));
+  const isEmptyWeek = $derived(count === 0);
 
   const toAirTime = (media: T) =>
     "airDate" in media && media.airDate instanceof Date
@@ -62,7 +63,7 @@
   </div>
 {/snippet}
 
-<section class="trakt-calendar-week">
+<section class="trakt-calendar-week" class:is-empty={isEmptyWeek}>
   <header class="week-heading">
     <h2 class="week-title">{title}</h2>
     <span class="week-count secondary">{countLabel}</span>
@@ -103,7 +104,9 @@
             {@render item(media)}
           {:else}
             <p class="week-day-empty secondary">
-              {m.text_calendar_nothing_scheduled()}
+              <span class="week-day-empty-label">
+                {m.text_calendar_nothing_scheduled()}
+              </span>
             </p>
           {/each}
           {#if day.items.length > 0 && upNextIndex === day.items.length}
@@ -113,6 +116,10 @@
       </div>
     {/each}
   </div>
+
+  {#if isEmptyWeek}
+    <p class="week-empty secondary">{m.text_calendar_nothing_scheduled()}</p>
+  {/if}
 </section>
 
 <style lang="scss">
@@ -125,11 +132,14 @@
       transparent
     );
     --week-column-padding: var(--ni-6);
+    --week-empty-line: color-mix(
+      in srgb,
+      var(--color-foreground) 14%,
+      transparent
+    );
 
     display: flex;
     flex-direction: column;
-
-    padding-bottom: var(--gap-xxl);
   }
 
   .week-heading {
@@ -261,6 +271,69 @@
 
     cursor: default;
     user-select: none;
+  }
+
+  .week-empty {
+    display: none;
+  }
+
+  @include for-desktop {
+    .week-day-empty {
+      aspect-ratio: 2 / 3;
+      min-height: 0;
+      padding: 0;
+
+      border: var(--border-thickness-xxs) solid var(--week-empty-line);
+      border-radius: var(--border-radius-m);
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+
+      .week-day-empty-label {
+        @include visually-hidden;
+      }
+    }
+
+    .trakt-calendar-week.is-empty {
+      .week-day {
+        padding-bottom: 0;
+      }
+
+      .week-day-items {
+        display: none;
+      }
+
+      .week-empty {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-m);
+
+        margin: 0;
+        padding-block: var(--gap-m) var(--gap-l);
+
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-tag);
+
+        &::before,
+        &::after {
+          content: "";
+          flex: 1;
+          height: var(--border-thickness-xxs);
+
+          background: linear-gradient(
+            to right,
+            transparent,
+            var(--week-empty-line)
+          );
+        }
+
+        &::before {
+          transform: scaleX(var(--rtl-sign));
+        }
+
+        &::after {
+          transform: scaleX(calc(-1 * var(--rtl-sign)));
+        }
+      }
+    }
   }
 
   @include for-tablet-lg {
