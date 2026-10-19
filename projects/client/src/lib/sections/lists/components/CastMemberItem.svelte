@@ -62,6 +62,9 @@
 <style lang="scss">
   .trakt-cast-member-item {
     display: contents;
+
+    --color-background-stem-tag: var(--color-background-cover-tag);
+    --shadow-stem-tag: var(--shadow-cover-tag);
   }
 
   .trakt-cast-name {

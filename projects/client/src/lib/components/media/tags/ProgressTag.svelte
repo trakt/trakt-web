@@ -80,7 +80,7 @@
       }
 
       position: relative;
-      background: var(--color-background-cover-tag);
+      background: var(--color-background-progress-track-tag);
       color: var(--color-text-progress-tag);
     }
 
