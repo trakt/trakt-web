@@ -143,7 +143,7 @@
     background: transparent;
     border: var(--ni-1) solid
       color-mix(in srgb, var(--color-mir-banner-accent) 45%, transparent);
-    border-radius: var(--border-radius-s);
+    border-radius: var(--border-radius-pill);
     transition: background var(--transition-increment) ease,
       border-color var(--transition-increment) ease;
 
