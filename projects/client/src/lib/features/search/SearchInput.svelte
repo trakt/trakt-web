@@ -198,8 +198,25 @@
       }
 
       &.search-is-loading .trakt-search-loader {
-        bottom: calc(-1 * var(--ni-4));
-        height: var(--ni-1);
+        --search-loader-color: var(--color-input-focus-progress);
+
+        width: auto;
+        inset-inline: var(--segmented-select-extension-indicator-inset);
+        bottom: calc(-1 * var(--segmented-select-extension-indicator-offset));
+        height: var(--segmented-select-extension-indicator-radius);
+
+        border-radius: 0;
+        border-end-start-radius: var(
+          --segmented-select-extension-indicator-radius
+        );
+        border-end-end-radius: var(
+          --segmented-select-extension-indicator-radius
+        );
+
+        &::after {
+          top: auto;
+          height: var(--ni-2);
+        }
       }
     }
 
@@ -298,12 +315,12 @@
 
           background: linear-gradient(
             90deg,
-            var(--color-foreground) 0%,
-            var(--color-foreground) 33.3333%,
+            var(--search-loader-color, var(--color-foreground)) 0%,
+            var(--search-loader-color, var(--color-foreground)) 33.3333%,
             transparent 33.3333%,
             transparent 66.6667%,
-            var(--color-foreground) 66.6667%,
-            var(--color-foreground) 100%
+            var(--search-loader-color, var(--color-foreground)) 66.6667%,
+            var(--search-loader-color, var(--color-foreground)) 100%
           );
           animation: slide-left-to-right calc(var(--transition-increment) * 5)
             linear infinite;
@@ -315,7 +332,7 @@
           z-index: calc(var(--layer-top) + var(--layer-overlay));
         }
 
-        &:has(input:focus-within) {
+        &:not([data-variant="embedded"]):has(input:focus-within) {
           .trakt-search-loader {
             width: calc(
               var(--mobile-search-focus-width) - var(--search-side-distance)

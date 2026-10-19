@@ -35,4 +35,16 @@
     var(--segmented-select-extension-inset) +
     var(--border-thickness-xxs)
   );
+  --segmented-select-extension-indicator-offset: calc(
+    var(--segmented-select-extension-inset) -
+    var(--border-thickness-xxs)
+  );
+  --segmented-select-extension-indicator-inset: calc(
+    var(--border-thickness-xxs) -
+    var(--ni-4)
+  );
+  --segmented-select-extension-indicator-radius: calc(
+    var(--segmented-select-extension-radius) -
+    var(--border-thickness-xxs)
+  );
 }

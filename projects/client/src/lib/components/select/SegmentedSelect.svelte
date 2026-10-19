@@ -534,7 +534,6 @@
   }
 
   .trakt-segmented-select[data-variant="selected-icon"] {
-
     --scroll-inset: var(--segmented-select-scroll-inset, var(--segment-inset));
     --scroll-fade: var(--segmented-select-scroll-fade, var(--ni-0));
     --scroll-fade-dir: to right;
@@ -646,12 +645,16 @@
       content: "";
 
       position: absolute;
-      inset-inline: 0;
-      bottom: 0;
-      height: var(--ni-2);
+      inset-inline: var(--segmented-select-extension-indicator-inset);
+      bottom: calc(-1 * var(--segmented-select-extension-indicator-offset));
+      height: var(--segmented-select-extension-indicator-radius);
 
-      border-radius: var(--border-radius-pill);
-      background: var(--color-input-focus);
+      box-sizing: border-box;
+      border-block-end: var(--ni-2) solid var(--color-input-focus);
+      border-end-start-radius: var(
+        --segmented-select-extension-indicator-radius
+      );
+      border-end-end-radius: var(--segmented-select-extension-indicator-radius);
 
       transform: scaleX(0);
       transition: transform var(--transition-increment) ease-in-out;
