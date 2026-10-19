@@ -1,12 +1,22 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { whenInViewport } from "$lib/utils/actions/whenInViewport.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import ImporterCard from "./_internal/ImporterCard.svelte";
   import TvTimeNotice from "./_internal/TvTimeNotice.svelte";
+
+  const { track } = useTrack(AnalyticsEvent.OnboardingStep);
+
+  const trackImportPicked = () => track({ step: "import", action: "complete" });
 </script>
 
-<section class="trakt-welcome-import">
+<section
+  class="trakt-welcome-import"
+  use:whenInViewport={() => track({ step: "import", action: "view" })}
+>
   <div class="welcome-import-header">
     <h2 class="welcome-import-heading">{m.welcome_import_heading()}</h2>
     <p class="secondary welcome-import-description">
@@ -14,16 +24,18 @@
     </p>
   </div>
 
-  <TvTimeNotice />
+  <TvTimeNotice onclick={trackImportPicked} />
 
   <div class="welcome-import-cards">
     <ImporterCard
       source="imdb"
       description={m.welcome_import_imdb_description()}
+      onclick={trackImportPicked}
     />
     <ImporterCard
       source="letterboxd"
       description={m.welcome_import_letterboxd_description()}
+      onclick={trackImportPicked}
     />
   </div>
 
@@ -35,6 +47,7 @@
       style="flat"
       size="small"
       label={m.welcome_import_browse_all()}
+      onclick={trackImportPicked}
     >
       {m.welcome_import_browse_all()}
     </Button>

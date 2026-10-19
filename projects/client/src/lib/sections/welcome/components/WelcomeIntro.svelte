@@ -1,9 +1,13 @@
 <script lang="ts">
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { whenInViewport } from "$lib/utils/actions/whenInViewport.ts";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
 
   const { user } = useUser();
+  const { track } = useTrack(AnalyticsEvent.OnboardingStep);
 
   const displayName = $derived(
     $user?.username ? toDisplayableName($user) : null,
@@ -16,7 +20,10 @@
   );
 </script>
 
-<section class="trakt-welcome-intro">
+<section
+  class="trakt-welcome-intro"
+  use:whenInViewport={() => track({ step: "intro", action: "view" })}
+>
   <h1 class="welcome-intro-heading">{heading}</h1>
   <p class="secondary welcome-intro-description">{m.welcome_intro()}</p>
 </section>

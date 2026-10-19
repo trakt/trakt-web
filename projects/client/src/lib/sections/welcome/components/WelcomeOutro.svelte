@@ -1,12 +1,20 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import PopcornIcon from "$lib/components/icons/PopcornIcon.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { whenInViewport } from "$lib/utils/actions/whenInViewport.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import WelcomeVipUpsell from "./WelcomeVipUpsell.svelte";
+
+  const { track } = useTrack(AnalyticsEvent.OnboardingStep);
 </script>
 
-<div class="trakt-welcome-outro">
+<div
+  class="trakt-welcome-outro"
+  use:whenInViewport={() => track({ step: "outro", action: "view" })}
+>
   <h1 class="welcome-outro-heading bold">{m.welcome_outro_heading()}</h1>
 
   <div class="welcome-outro-actions">
@@ -19,6 +27,7 @@
       style="flat"
       size="small"
       label={m.welcome_get_started()}
+      onclick={() => track({ step: "outro", action: "complete" })}
     >
       {m.welcome_get_started()}
       {#snippet icon()}

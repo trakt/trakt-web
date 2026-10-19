@@ -3,6 +3,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { importSourceHref } from "./importSourceHref.ts";
 
+  const { onclick }: { onclick?: () => void } = $props();
+
   const importHref = importSourceHref("tvtime");
 </script>
 
@@ -24,6 +26,7 @@
         variant="primary"
         style="flat"
         label={m.welcome_tvtime_import_cta()}
+        {onclick}
       >
         {m.welcome_tvtime_import_cta()}
       </Button>
