@@ -1657,6 +1657,7 @@
   "tag_text_watch_count": "观看次数",
   "tag_text_watched": "已观看",
   "tag_text_watchlisted": "已加入待看列表",
+  "tag_today_tap_details": "轻触中间查看详情",
   "text_about": "关于我",
   "text_about_tagline": "Trakt 会自动追踪您在所有设备和应用程序上观看的内容，为您提供一个集中地，查看您的全部观看历史、发现接下来要看什么，并与全球数百万电影和电视爱好者社区建立联系。",
   "text_about_user": "关于 {username}",
