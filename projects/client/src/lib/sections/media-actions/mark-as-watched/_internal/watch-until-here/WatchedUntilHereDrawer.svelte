@@ -7,6 +7,7 @@
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
+  import QuestionIcon from "$lib/components/icons/QuestionIcon.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
@@ -148,6 +149,20 @@
             </IconWrapper>
           {/snippet}
         </DropdownItem>
+
+        <DropdownItem
+          onclick={() => handleModeChange("unknown")}
+          label={m.button_label_mark_as_watched_unknown_date()}
+          disabled={mode === "unknown"}
+          end={mode === "unknown" ? activeCheck : undefined}
+        >
+          {m.button_text_mark_as_watched_unknown_date()}
+          {#snippet icon()}
+            <IconWrapper isLoading={false}>
+              <QuestionIcon />
+            </IconWrapper>
+          {/snippet}
+        </DropdownItem>
       </DropdownGroup>
 
       {#if isCustom}
@@ -203,7 +218,9 @@
             </div>
             <TextTag classList="preview-row-tag">
               <p>
-                {toHumanShortDate(watchedAt)} · {toHumanClockTime(watchedAt)}
+                {watchedAt === "unknown"
+                  ? m.button_text_mark_as_watched_unknown_date()
+                  : `${toHumanShortDate(watchedAt)} · ${toHumanClockTime(watchedAt)}`}
               </p>
             </TextTag>
           </li>
