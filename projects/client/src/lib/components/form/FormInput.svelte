@@ -73,7 +73,7 @@
     padding: var(--ni-8) var(--ni-16);
     box-sizing: border-box;
 
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-field);
     background: var(--color-input-background);
 
     outline: var(--border-thickness-xxs) solid var(--color-border);
