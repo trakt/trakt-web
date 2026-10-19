@@ -15,6 +15,7 @@
   import EpisodeRailCountLabel from "./EpisodeRailCountLabel.svelte";
   import { getHiddenEpisodeCounts } from "./getHiddenEpisodeCounts.ts";
   import type { VisibleRange } from "$lib/utils/actions/VisibleRange.ts";
+  import { findNextEpisodeToWatch } from "./findNextEpisodeToWatch.ts";
   import { getEpisodeWindow } from "./getEpisodeWindow.ts";
   import SeasonEpisodeItem from "./SeasonEpisodeItem.svelte";
   import { useShowWatchedEpisodes } from "./useShowWatchedEpisodes";
@@ -52,19 +53,25 @@
   );
 
   /*
-    Where the viewer is at: the furthest episode they have watched in this
-    season. An explicit currentEpisode (the episode being viewed) wins.
+    Where the viewer is at: the episode after the newest one they have
+    watched. An explicit currentEpisode (the episode being viewed) wins.
   */
   const season = $derived(episodes.at(0)?.season);
   const contentHash = $derived(`${show.slug}-${season}`);
 
-  const lastWatchedEpisode = $derived.by(() => {
+  const nextEpisodeToWatch = $derived.by(() => {
     if (season == null) return undefined;
 
-    const watched = $watchedBySeason.get(season);
-    return watched?.size ? Math.max(...watched) : undefined;
+    return findNextEpisodeToWatch({
+      season,
+      episodes,
+      watchedBySeason: $watchedBySeason,
+      previousSeasonEpisodeCount: previousSeasons.find(
+        (previous) => previous.number === season - 1,
+      )?.episodes.count,
+    });
   });
-  const activeEpisode = $derived(currentEpisode ?? lastWatchedEpisode);
+  const activeEpisode = $derived(currentEpisode ?? nextEpisodeToWatch);
 
   const { buildDrawerLink, buildEpisodeDrawerLink, buildSeasonsDrawerLink } =
     summaryDrawerNavigation();
