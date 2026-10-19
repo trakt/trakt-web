@@ -67,8 +67,6 @@
     value={type}
     onChange={set}
     {options}
-    variant="selected-icon"
-    style="minimal"
     --segmented-select-scroll-inset="var(--list-actions-inset)"
     --segmented-select-scroll-fade="var(--list-actions-inset)"
     ariaLabel={m.list_title_personal_lists()}

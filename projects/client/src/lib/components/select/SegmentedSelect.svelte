@@ -616,6 +616,78 @@
     }
   }
 
+  /* No track: each option is its own 26px pill inside a 44px target. */
+  .trakt-segmented-select[data-style="pills"] {
+    --segment-height: calc(var(--ni-24) + var(--ni-2));
+    --segment-inset: var(--ni-0);
+    --segment-block-inset: calc((var(--ni-44) - var(--segment-height)) / 2);
+    --segment-gap: var(--ni-6);
+    --segment-radius: var(--border-radius-pill);
+    --selector-shadow: inset 0 0 0 var(--border-thickness-xxs)
+      var(--color-segmented-selector-border);
+
+    background-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+
+    .segment {
+      padding-inline: var(--ni-12);
+      color: var(--color-pill-foreground);
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset-block: calc(-1 * var(--segment-block-inset));
+        inset-inline: 0;
+      }
+
+      &:not(.is-selected) {
+        background-color: var(--color-pill-background);
+
+        @include for-mouse {
+          &:hover {
+            background-color: color-mix(
+              in srgb,
+              var(--color-foreground) 10%,
+              transparent
+            );
+            color: var(--color-text-primary);
+          }
+        }
+      }
+
+      &.is-selected {
+        color: var(--color-segmented-selector-foreground);
+      }
+
+      /* Set on the span itself: the global sheet sizes every bare span. */
+      .label-text {
+        font-size: var(--font-size-text-small);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .segment-icon :global(svg) {
+        width: var(--ni-14);
+        height: var(--ni-14);
+      }
+    }
+
+    &[data-variant="selected-icon"] .segment {
+      .segment-icon {
+        width: var(--ni-14);
+        margin-inline-end: var(--ni-6);
+      }
+
+      &:not(.is-selected) .segment-icon {
+        width: 0;
+        margin-inline-end: 0;
+      }
+    }
+  }
+
   .segment-extension {
     box-sizing: border-box;
     height: var(--segmented-select-extension-height);

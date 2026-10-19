@@ -247,6 +247,8 @@
   --color-segmented-selector-border: var(--purple-500);
   --color-segmented-selector-foreground: var(--purple-900);
   --color-segmented-segment-foreground: var(--shade-600);
+  --color-pill-background: color-mix(in srgb, var(--shade-900) 9%, transparent);
+  --color-pill-foreground: var(--shade-600);
 
   /*
    * Today entry (navbar glass pill)
@@ -848,6 +850,8 @@
   --color-segmented-selector-border: var(--purple-400);
   --color-segmented-selector-foreground: var(--shade-10);
   --color-segmented-segment-foreground: var(--color-text-secondary);
+  --color-pill-background: color-mix(in srgb, var(--shade-10) 6%, transparent);
+  --color-pill-foreground: var(--shade-300);
 
   /*
    * Today entry (navbar glass pill)
