@@ -1,7 +1,7 @@
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { Observable } from 'rxjs';
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
-import type { Calendar } from './Calendar.ts';
+import type { CalendarChunkResult } from './CalendarChunkResult.ts';
 import type { EpisodeTypeFilter } from './EpisodeTypeFilter.ts';
 
 export type CalendarSourceParams = {
@@ -11,8 +11,6 @@ export type CalendarSourceParams = {
   episodeType: Observable<EpisodeTypeFilter>;
 } & FilterParams;
 
-export type CalendarSource<T> = (params: CalendarSourceParams) => {
-  isLoading: Observable<boolean>;
-  calendar: Observable<Calendar<T>>;
-  hasUpstreamItems: Observable<boolean>;
-};
+export type CalendarSource<T> = (
+  params: CalendarSourceParams,
+) => CalendarChunkResult<T>;

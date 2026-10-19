@@ -1,8 +1,7 @@
 import type { ActivityEntry } from '$lib/sections/lists/stores/models/ActivityEntry.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { getActivityTime } from './getActivityTime.ts';
-
-const daysInWeek = 7;
+import { DAYS_IN_WEEK } from '$lib/utils/constants.ts';
 
 export function createHistoryCalendar<T>(
   groups: Map<string, ActivityEntry<T>[]>,
@@ -10,7 +9,7 @@ export function createHistoryCalendar<T>(
 ) {
   if (!startDate) return [];
 
-  return Array.from({ length: daysInWeek }).map((_, i) => {
+  return Array.from({ length: DAYS_IN_WEEK }).map((_, i) => {
     const date = new Date(startDate);
     date.setDate(date.getDate() + i);
     const key = getDayKey(date);

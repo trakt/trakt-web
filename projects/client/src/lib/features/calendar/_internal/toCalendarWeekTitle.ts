@@ -4,14 +4,13 @@ import * as m from '$lib/features/i18n/messages.ts';
 import { getStartOfWeek } from '$lib/utils/date/getStartOfWeek.ts';
 import { addDays } from 'date-fns/addDays';
 import { differenceInCalendarDays } from 'date-fns/differenceInCalendarDays';
+import { DAYS_IN_WEEK } from '$lib/utils/constants.ts';
 
 type CalendarWeekTitleParams = {
   start: Date;
   today: Date;
   locale: AvailableLocale;
 };
-
-const DAYS_IN_WEEK = 7;
 
 const RELATIVE_WEEK_TITLES = new Map<number, () => string>([
   [-1, m.header_calendar_last_week],

@@ -4,8 +4,7 @@ import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { getStartOfDay } from '$lib/utils/date/getStartOfDay.ts';
 import { subtractDays } from '$lib/utils/date/subtractDays.ts';
 import { toHumanDayOfWeek } from '$lib/utils/formatting/date/toHumanDayOfWeek.ts';
-
-const daysInWeek = 7;
+import { DAYS_IN_WEEK } from '$lib/utils/constants.ts';
 
 export function countByCalendarDay({
   dates,
@@ -17,8 +16,8 @@ export function countByCalendarDay({
   locale: AvailableLocale;
 }): { readonly days: readonly number[]; readonly labels: readonly string[] } {
   const today = getStartOfDay(now);
-  const dayRange = Array.from({ length: daysInWeek }, (_, idx) =>
-    subtractDays(today, daysInWeek - 1 - idx),
+  const dayRange = Array.from({ length: DAYS_IN_WEEK }, (_, idx) =>
+    subtractDays(today, DAYS_IN_WEEK - 1 - idx),
   );
 
   const days = dayRange.map((day) => {
@@ -27,7 +26,7 @@ export function countByCalendarDay({
   });
 
   const labels = dayRange.map((day, idx) =>
-    idx === daysInWeek - 1
+    idx === DAYS_IN_WEEK - 1
       ? m.text_stats_today()
       : toHumanDayOfWeek(day, locale),
   );

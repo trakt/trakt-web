@@ -4,13 +4,12 @@
   import { getLocale } from "$lib/features/i18n";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { getDaysDifference } from "$lib/utils/date/getDaysDifference";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { startOfMonth } from "date-fns/startOfMonth";
   import { addMonths } from "date-fns/addMonths";
   import { isBefore } from "date-fns/isBefore";
-  import { tick, untrack } from "svelte";
+  import { tick } from "svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
   import CalendarDays from "./CalendarDays.svelte";
   import CalendarPosterTile from "./CalendarPosterTile.svelte";
@@ -35,7 +34,9 @@
   import CalendarTitleActions from "../CalendarTitleActions.svelte";
   import CalendarBoardLayout from "./CalendarBoardLayout.svelte";
   import { getCalendarContext } from "../context/getCalendarContext";
-  import { useCalendarPeriod } from "../context/useCalendarPeriod";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
+  import CalendarChunkSources from "./CalendarChunkSources.svelte";
+  import { useCalendarBoard } from "./useCalendarBoard.ts";
   import type { CalendarPeriod } from "../models/CalendarLayoutProps";
   import type { CalendarView } from "../models/CalendarView.ts";
 
@@ -51,58 +52,47 @@
     hasFeed?: boolean;
   } = $props();
 
-  const {
-    startDate,
-    endDate,
-    next,
-    previous,
-    reset,
-    loadMore,
-    accumulate,
-    activeDate,
-    restart,
-    goTo,
-  } = useCalendarPeriod();
   const { mode } = useDiscover();
-
-  const days = $derived(getDaysDifference($startDate, $endDate));
-
   const { filterMap } = useFilter();
-
   const { episodeType } = useEpisodeType();
-
-  const { isLoading, calendar, hasUpstreamItems } = $derived(
-    useSource({
-      start: $startDate,
-      days,
-      type: $mode,
-      filter: $filterMap,
-      episodeType,
-    }),
-  );
 
   const fingerprint = $derived(
     `${sourceKey}:${$mode}:${JSON.stringify($filterMap)}:${$episodeType}`,
   );
 
-  let previousFingerprint: string | undefined;
+  const isDocked = useIsCalendarDocked();
 
-  $effect(() => {
-    const current = fingerprint;
-    const hasChanged = previousFingerprint !== undefined &&
-      previousFingerprint !== current;
-    previousFingerprint = current;
+  const viewParam = $derived(calendarViewParam(page.url.searchParams));
+  const calendarView = $derived<CalendarView>(
+    viewParam.view ?? ($isDocked ? "week" : "day"),
+  );
 
-    if (hasChanged) untrack(restart);
+  const isCompact = $derived(!$isDocked);
+  const layoutView = $derived(isCompact ? "day" : calendarView);
+  const isMonthOnly = $derived(isCompact && calendarView === "week");
+
+  const WEEK_VIEW_LATER_WEEKS = 3;
+  const EMPTY_WEEK_LIMIT = 5;
+
+  const {
+    board,
+    sources,
+    register,
+    next,
+    previous,
+    reset,
+    loadMore,
+    activeDate,
+    goTo,
+  } = useCalendarBoard<T>({
+    emptyWeekLimit: EMPTY_WEEK_LIMIT,
+    fingerprint: fromRune(() => fingerprint),
+    minLater: fromRune(() =>
+      layoutView === "week" ? WEEK_VIEW_LATER_WEEKS : 0,
+    ),
   });
 
-  const periods: CalendarPeriod<T>[] = $derived(
-    accumulate({
-      calendar: $calendar,
-      fingerprint,
-      isEmpty: !$hasUpstreamItems,
-    }),
-  );
+  const periods: CalendarPeriod<T>[] = $derived($board.periods);
 
   const { visibleDate } = getCalendarContext();
 
@@ -128,13 +118,6 @@
       ?.scrollIntoView({ block: "start" });
   }
 
-  const isDocked = useIsCalendarDocked();
-
-  const viewParam = $derived(calendarViewParam(page.url.searchParams));
-  const calendarView = $derived<CalendarView>(
-    viewParam.view ?? ($isDocked ? "week" : "day"),
-  );
-
   const toggleView = () => {
     const nextView = calendarView === "day" ? "week" : "day";
     viewParam.setView(nextView);
@@ -142,15 +125,11 @@
     if (isCompact && nextView === "week") window.scrollTo({ top: 0 });
   };
 
-  const isCompact = $derived(!$isDocked);
-  const layoutView = $derived(isCompact ? "day" : calendarView);
-  const isMonthOnly = $derived(isCompact && calendarView === "week");
-
   const jumpToDay = ({ date }: { date: Date }) => {
     if (scrollToCalendarDay(date)) return;
 
     handleNavigation(() =>
-      goTo(date, isBefore(date, selectedDate) ? "previous" : "next")
+      goTo(date, isBefore(date, selectedDate) ? "previous" : "next"),
     );
   };
 
@@ -174,15 +153,6 @@
         },
   );
 
-  const WEEK_VIEW_PRELOAD_TARGET = 4;
-
-  $effect(() => {
-    if (layoutView !== "week") return;
-    if (periods.length >= WEEK_VIEW_PRELOAD_TARGET) return;
-    if ($isLoading) return;
-    loadMore();
-  });
-
   const monthRange = $derived(toMonthGridRange(selectedDate, getLocale()));
   const monthStart = $derived(monthRange.start.getTime());
   const monthDays = $derived(monthRange.days);
@@ -199,9 +169,7 @@
 
   const monthAllDays = $derived($monthCalendar ?? []);
 
-  let selectedDay = $state<{ date: Date; items: T[] } | null>(
-    null,
-  );
+  let selectedDay = $state<{ date: Date; items: T[] } | null>(null);
   const isBarPinned = $derived($isDocked || calendarView === "day");
 
   let barHeight = $state(0);
@@ -273,7 +241,9 @@
     <CrossOriginImage
       classList="calendar-month-poster"
       animate={false}
-      src={"show" in media ? media.show.poster.url.thumb : media.poster.url.thumb}
+      src={"show" in media
+        ? media.show.poster.url.thumb
+        : media.poster.url.thumb}
       alt=""
     />
   {/each}
@@ -346,7 +316,7 @@
           {#if calendarView === "day"}
             <CalendarDays
               calendar={visiblePeriodCalendar}
-              isLoading={$isLoading}
+              isLoading={$board.isInitialLoad}
               {navigation}
               activeDate={selectedDate}
             />
@@ -366,15 +336,28 @@
       {/if}
     </div>
 
-    {#if !isMonthOnly}
-    <CalendarBoardLayout
-      activeDate={$activeDate}
-      isLoading={$isLoading}
-      onLoadMore={loadMore}
-      {periods}
-      view={layoutView}
-      item={layoutView === "week" ? posterItem : summaryItem}
+    <CalendarChunkSources
+      sources={$sources}
+      load={(chunk) =>
+        useSource({
+          start: chunk.start,
+          days: chunk.days,
+          type: $mode,
+          filter: $filterMap,
+          episodeType,
+        })}
+      {register}
     />
+
+    {#if !isMonthOnly}
+      <CalendarBoardLayout
+        activeDate={$activeDate}
+        isLoading={$board.isInitialLoad || $board.isLoadingBelow}
+        onLoadMore={loadMore}
+        {periods}
+        view={layoutView}
+        item={layoutView === "week" ? posterItem : summaryItem}
+      />
     {/if}
   </div>
 
@@ -434,8 +417,8 @@
 
     &.is-bar-pinned {
       --calendar-sticky-top: calc(
-        var(--calendar-bar-top) + var(--calendar-bar-height) -
-          var(--border-thickness-xxs)
+        var(--calendar-bar-top) +
+          var(--calendar-bar-height) - var(--border-thickness-xxs)
       );
     }
 
@@ -565,8 +548,9 @@
 
     @include for-mobile {
       min-height: calc(
-        100dvh - var(--calendar-bar-top) - var(--mobile-navbar-height) -
-          var(--gap-m)
+        100dvh - var(--calendar-bar-top) - var(--mobile-navbar-height) - var(
+            --gap-m
+          )
       );
     }
 

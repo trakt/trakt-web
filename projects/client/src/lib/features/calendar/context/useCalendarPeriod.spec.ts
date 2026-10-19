@@ -1,4 +1,6 @@
-import { BehaviorSubject } from 'rxjs';
+import { getStartOfWeek } from '$lib/utils/date/getStartOfWeek.ts';
+import { addWeeks } from 'date-fns/addWeeks';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { CalendarContext } from './CalendarContext.ts';
 import { useCalendarPeriod } from './useCalendarPeriod.ts';
@@ -20,87 +22,154 @@ vi.mock('$lib/features/i18n/index.ts', async (importOriginal) => ({
 }));
 
 const createContext = ({
-  start,
-  active,
+  anchor,
+  active = anchor,
   visible = null,
 }: {
-  start: Date;
-  active: Date;
+  anchor: Date;
+  active?: Date;
   visible?: Date | null;
 }): CalendarContext => ({
-  startDate: new BehaviorSubject(start),
+  range: new BehaviorSubject({ anchor, earlier: 0, later: 0 }),
   activeDate: new BehaviorSubject(active),
   visibleDate: new BehaviorSubject<Date | null>(visible),
 });
+
+const chunkStarts = async (period: ReturnType<typeof useCalendarPeriod>) =>
+  (await firstValueFrom(period.chunks)).map((chunk) =>
+    chunk.start.toDateString(),
+  );
 
 describe('store: useCalendarPeriod', () => {
   beforeEach(() => {
     track.mockClear();
   });
 
+  describe('upperBound', () => {
+    it('should move an anchor past the bound back to today', async () => {
+      const today = new Date();
+      const ctx = createContext({ anchor: addWeeks(today, 3) });
+      context.current = ctx;
+      const period = useCalendarPeriod({
+        upperBound: getStartOfWeek(today, 'en'),
+      });
+
+      expect(await chunkStarts(period)).toEqual([
+        getStartOfWeek(today, 'en').toDateString(),
+      ]);
+      expect(ctx.activeDate.value.toDateString()).toEqual(today.toDateString());
+      expect(ctx.range.value.anchor.toDateString()).toEqual(
+        today.toDateString(),
+      );
+    });
+  });
+
   describe('goTo', () => {
-    it('should jump to the week of the given date', () => {
+    it('should open a new window at the given date', async () => {
       const ctx = createContext({
-        start: new Date(2026, 9, 11),
-        active: new Date(2026, 9, 12),
+        anchor: new Date(2026, 9, 12),
         visible: new Date(2026, 9, 14),
       });
       context.current = ctx;
+      const period = useCalendarPeriod();
 
-      useCalendarPeriod().goTo(new Date(2026, 10, 19), 'next');
+      period.loadMore();
+      period.goTo(new Date(2026, 10, 19), 'next');
 
-      expect(ctx.startDate.value).toEqual(new Date(2026, 10, 15));
+      expect(await chunkStarts(period)).toEqual(['Sun Nov 15 2026']);
       expect(ctx.activeDate.value).toEqual(new Date(2026, 10, 19));
       expect(ctx.visibleDate.value).toBeNull();
       expect(track).toHaveBeenCalledWith({ action: 'next' });
     });
   });
 
-  describe('restart', () => {
-    it('should restart from the week of the visible date', () => {
+  describe('next and previous', () => {
+    it('should move a week from the visible date', async () => {
       const ctx = createContext({
-        start: new Date(2026, 9, 4),
-        active: new Date(2026, 9, 5),
+        anchor: new Date(2026, 9, 12),
         visible: new Date(2026, 9, 21),
       });
       context.current = ctx;
+      const period = useCalendarPeriod();
 
-      useCalendarPeriod().restart();
+      period.next();
 
-      expect(ctx.startDate.value).toEqual(new Date(2026, 9, 18));
-      expect(ctx.activeDate.value).toEqual(new Date(2026, 9, 21));
-      expect(ctx.visibleDate.value).toBeNull();
-      expect(track).not.toHaveBeenCalled();
+      expect(await chunkStarts(period)).toEqual(['Sun Oct 25 2026']);
+      expect(ctx.activeDate.value).toEqual(new Date(2026, 9, 25));
+      expect(track).toHaveBeenCalledWith({ action: 'next' });
     });
 
-    it('should fall back to the active date without a visible date', () => {
-      const ctx = createContext({
-        start: new Date(2026, 9, 4),
-        active: new Date(2026, 9, 14),
-      });
+    it('should activate the last day of the week for reverse lists', () => {
+      const ctx = createContext({ anchor: new Date(2026, 9, 12) });
       context.current = ctx;
 
-      useCalendarPeriod().restart();
+      useCalendarPeriod({ order: 'reverse-chronological' }).previous();
 
-      expect(ctx.startDate.value).toEqual(new Date(2026, 9, 11));
-      expect(ctx.activeDate.value).toEqual(new Date(2026, 9, 14));
+      expect(ctx.activeDate.value).toEqual(new Date(2026, 9, 10));
+    });
+  });
+
+  describe('loadMore and loadPrevious', () => {
+    it('should grow the window in both directions', async () => {
+      context.current = createContext({ anchor: new Date(2026, 9, 12) });
+      const period = useCalendarPeriod();
+
+      period.loadMore();
+      period.loadPrevious();
+
+      expect(await chunkStarts(period)).toEqual([
+        'Sun Oct 04 2026',
+        'Sun Oct 11 2026',
+        'Sun Oct 18 2026',
+      ]);
+    });
+
+    it('should stop loading newer chunks at the upper bound', async () => {
+      context.current = createContext({ anchor: new Date(2026, 8, 9) });
+      const period = useCalendarPeriod({
+        order: 'reverse-chronological',
+        weeksPerStep: 2,
+        upperBound: new Date(2026, 8, 20),
+      });
+
+      expect(await chunkStarts(period)).toEqual(['Sun Aug 30 2026']);
+
+      expect(period.loadMore()).toBe(true);
+      expect(period.loadPrevious()).toBe(true);
+      expect(period.loadPrevious()).toBe(false);
+
+      expect(await chunkStarts(period)).toEqual([
+        'Sun Aug 16 2026',
+        'Sun Aug 30 2026',
+        'Sun Sep 13 2026',
+      ]);
     });
   });
 
   describe('reset', () => {
-    it('should clear the visible date when already in the current week', () => {
+    it('should keep the window when already in the current week', async () => {
       const today = new Date();
-      const ctx = createContext({
-        start: today,
-        active: today,
-        visible: today,
-      });
+      const ctx = createContext({ anchor: today, visible: today });
       context.current = ctx;
+      const period = useCalendarPeriod();
 
-      useCalendarPeriod().reset();
+      period.loadMore();
+      period.reset();
 
+      expect(await chunkStarts(period)).toHaveLength(2);
       expect(ctx.visibleDate.value).toBeNull();
       expect(track).toHaveBeenCalledWith({ action: 'reset' });
+    });
+
+    it('should open a window at today from another week', async () => {
+      context.current = createContext({ anchor: new Date(2020, 0, 8) });
+      const period = useCalendarPeriod();
+
+      period.reset();
+
+      expect(await chunkStarts(period)).toEqual([
+        getStartOfWeek(new Date(), 'en').toDateString(),
+      ]);
     });
   });
 });
