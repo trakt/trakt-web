@@ -20,6 +20,22 @@ function createMemoryStorage(
 }
 
 describe('store: createOfflineActionsStore', () => {
+  it('should announce enqueued actions but not hydrated ones', async () => {
+    const stored = buildOfflineAction();
+    const store = createOfflineActionsStore(createMemoryStorage([stored]));
+    const announced: OfflineAction[] = [];
+    const subscription = store.enqueued$.subscribe((action) =>
+      announced.push(action),
+    );
+
+    await store.refresh();
+    const queued = buildOfflineAction();
+    await store.enqueue(queued);
+
+    expect(announced).toEqual([queued]);
+    subscription.unsubscribe();
+  });
+
   it('should hydrate queued actions from storage', async () => {
     const action = buildOfflineAction();
     const store = createOfflineActionsStore(createMemoryStorage([action]));

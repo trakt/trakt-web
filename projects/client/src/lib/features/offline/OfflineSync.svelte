@@ -1,5 +1,7 @@
 <script lang="ts">
   import Snackbar from "$lib/components/snackbar/Snackbar.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator.ts";
   import { distinctUntilChanged, filter, pairwise } from "rxjs";
@@ -10,6 +12,7 @@
     replayOfflineActions,
     type ReplayOutcome,
   } from "./_internal/replayOfflineActions.ts";
+  import { toReplayTracking } from "./_internal/toReplayTracking.ts";
   import type { OfflineAction } from "./models/OfflineAction.ts";
   import { time } from "$lib/utils/timing/time.ts";
 
@@ -22,12 +25,19 @@
     | { kind: "failed"; count: number };
 
   const { invalidateAll } = useInvalidator();
+  const { track: trackQueued } = useTrack(AnalyticsEvent.OfflineQueued);
+  const { track: trackReplayed } = useTrack(AnalyticsEvent.OfflineReplayed);
 
   let notice = $state<Notice | null>(null);
   let duplicates = $state<OfflineAction[]>([]);
   let isReplaying = false;
 
-  const applyOutcome = async (outcome: ReplayOutcome) => {
+  const applyOutcome = async (
+    outcome: ReplayOutcome,
+    replayed: OfflineAction[],
+  ) => {
+    toReplayTracking({ actions: replayed, outcome }).forEach(trackReplayed);
+
     await offlineActionsStore.remove([
       ...outcome.executedIds,
       ...outcome.failedIds,
@@ -56,7 +66,7 @@
     }
 
     const outcome = await replayOfflineActions({ actions });
-    await applyOutcome(outcome);
+    await applyOutcome(outcome, actions);
     duplicates = outcome.duplicates;
   };
 
@@ -101,7 +111,7 @@
       actions: approved,
       reconcile: false,
     });
-    await applyOutcome(outcome);
+    await applyOutcome(outcome, approved);
   };
 
   const skipDuplicates = async () => {
@@ -134,9 +144,14 @@
         }
       });
 
+    const queuedTracking = offlineActionsStore.enqueued$.subscribe(
+      ({ endpoint }) => trackQueued({ type: endpoint }),
+    );
+
     return () => {
       replayTrigger.unsubscribe();
       queuedNotice.unsubscribe();
+      queuedTracking.unsubscribe();
     };
   });
 
