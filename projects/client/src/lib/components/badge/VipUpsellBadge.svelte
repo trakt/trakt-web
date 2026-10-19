@@ -15,9 +15,9 @@
     gap: var(--gap-xs);
 
     padding: var(--ni-8) var(--ni-12);
-    height: var(--ni-28);
+    height: var(--segmented-select-segment-height);
     box-sizing: border-box;
-    border-radius: var(--border-radius-xl);
+    border-radius: var(--border-radius-pill);
 
     // Inviting purple gradient + soft glow instead of the flat red - the upsell
     // should feel aspirational, not like a paywall.
