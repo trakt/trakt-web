@@ -2,10 +2,9 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import IconWrapper from "$lib/components/icons/IconWrapper.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
+  import { useActionToast } from "$lib/features/action-toast/useActionToast.ts";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -25,6 +24,8 @@
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
   import { episodeMetaInfo } from "$lib/utils/intl/episodeMetaInfo";
+  import { onDestroy } from "svelte";
+  import { time } from "$lib/utils/timing/time.ts";
 
   type SeasonEpisodeItemProps = {
     show: ShowEntry;
@@ -106,22 +107,30 @@
 
   let isWatchUntilDrawerOpen = $state(false);
 
-  const { confirm } = useConfirm();
-  const confirmFillGap = $derived(
-    confirm({
-      type: ConfirmationType.WatchedUntilHere,
-      title: episode.title,
-      onConfirm: () => (isWatchUntilDrawerOpen = true),
-    }),
-  );
+  const { notify, dismiss } = useActionToast();
+  let gapToastId: string | null = null;
 
   const offerGapFill = () => {
     if (skippedCount === 0) {
       return;
     }
 
-    confirmFillGap();
+    gapToastId = notify({
+      message: m.confirmation_title_watched_until_here(),
+      durationMs: time.seconds(10),
+      action: {
+        text: m.button_text_watched_until_here(),
+        label: m.button_label_watched_until_here({ title: show.title }),
+        onAction: () => {
+          isWatchUntilDrawerOpen = true;
+        },
+      },
+    });
   };
+
+  onDestroy(() => {
+    if (gapToastId) dismiss(gapToastId);
+  });
 
   const watchUntilResolver = $derived.by(() => {
     if (!isWatchUntilDrawerOpen) return null;

@@ -2603,7 +2603,6 @@
   "warning_prompt_stop_checkin": "Czy na pewno chcesz przestać oglądać \"{title}\"?",
   "warning_prompt_track_show_episode_count": "Czy na pewno chcesz dodać \"{title}\" jako obejrzany? Spowoduje to dodanie {count} odcinków.",
   "warning_prompt_unfollow_user": "Czy na pewno chcesz przestać obserwować {username}?",
-  "warning_prompt_watched_until_here": "Oznaczenie \"{title}\" jako obejrzanego pozostawiło wcześniejsze odcinki nieobejrzane. Oznaczyć również wszystko do tego momentu jako obejrzane?",
   "warning_prompt_younify_unlink": "Czy na pewno chcesz rozłączyć {service}?",
   "warning_smart_lists_limit": "Osiągnąłeś limit inteligentnych list",
   "welcome_banner_action": "Importuj swoje dane",

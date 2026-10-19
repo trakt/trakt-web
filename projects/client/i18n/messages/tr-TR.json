@@ -2603,7 +2603,6 @@
   "warning_prompt_stop_checkin": "\"{title}\" izlemeyi durdurmak istediğinizden emin misiniz?",
   "warning_prompt_track_show_episode_count": "\"{title}\" öğesini izlendi olarak işaretlemek istediğinizden emin misiniz? Bu, {count} bölümü izlendi olarak işaretleyecektir.",
   "warning_prompt_unfollow_user": "{username} takibi bırakmak istediğinizden emin misiniz?",
-  "warning_prompt_watched_until_here": "\"{title}\" bölümünü izlendi olarak işaretlediniz. Ancak bu, önceki bölümlerin izlenmemiş kalmasına neden oldu. Bu bölüme kadar olan tüm bölümleri de izlendi olarak işaretleyelim mi?",
   "warning_prompt_younify_unlink": "{service} bağlantısını kesmek istediğinizden emin misiniz?",
   "warning_smart_lists_limit": "Akıllı liste limitinize ulaştınız",
   "welcome_banner_action": "Verilerinizi içe aktarın",

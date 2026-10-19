@@ -2603,7 +2603,6 @@
   "warning_prompt_stop_checkin": "Сигурни ли сте, че искате да спрете да гледате \"{title}\"?",
   "warning_prompt_track_show_episode_count": "Сигурни ли сте, че искате да маркирате \"{title}\" като гледан? Това ще маркира {count} епизода като гледани.",
   "warning_prompt_unfollow_user": "Сигурни ли сте, че искате да прекратите следването на {username}?",
-  "warning_prompt_watched_until_here": "Маркирането на \"{title}\" като гледан остави по-ранни епизоди негледани. Да маркирам ли и всичко до него като гледано?",
   "warning_prompt_younify_unlink": "Сигурни ли сте, че искате да откачите {service}?",
   "warning_smart_lists_limit": "Достигнали сте лимита си за интелигентни списъци",
   "welcome_banner_action": "Импортирайте данните си",

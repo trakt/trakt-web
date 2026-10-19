@@ -2603,7 +2603,6 @@
   "warning_prompt_stop_checkin": "Er du sikker på, at du vil stoppe med at se \"{title}\"?",
   "warning_prompt_track_show_episode_count": "Er du sikker på, at du vil markere \"{title}\" som set? Dette vil markere {count} afsnit som set.",
   "warning_prompt_unfollow_user": "Er du sikker på, at du vil stoppe med at følge {username}?",
-  "warning_prompt_watched_until_here": "Markering af \"{title}\" som set efterlod tidligere episoder usete. Skal alt op til den også markeres som set?",
   "warning_prompt_younify_unlink": "Er du sikker på, at du vil frakoble {service}?",
   "warning_smart_lists_limit": "Du har nået din grænse for smarte lister",
   "welcome_banner_action": "Importer dine data",
