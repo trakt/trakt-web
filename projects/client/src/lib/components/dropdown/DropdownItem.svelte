@@ -31,8 +31,8 @@
   const hasHandler = $derived(
     Object.keys(props).some((propName) => propName.startsWith("on")),
   );
-  const tabIndex = $derived(hasHandler ? 0 : -1);
   const href = $derived((props as DropdownItemAnchorProps).href);
+  const tabIndex = $derived(hasHandler && !href ? 0 : -1);
   const itemRole = $derived(hasHandler && !href ? "button" : undefined);
   const noscroll = $derived((props as DropdownItemAnchorProps).noscroll);
   const replacestate = $derived(
