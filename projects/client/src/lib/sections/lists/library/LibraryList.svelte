@@ -61,7 +61,7 @@
       <LibraryMediaItem {item} />
     {/snippet}
 
-    {#snippet actions()}
+    {#snippet filters()}
       <LibraryToggler library={librarySelection} />
     {/snippet}
 

@@ -71,7 +71,7 @@
       {/if}
     {/snippet}
 
-    {#snippet actions()}
+    {#snippet filters()}
       <Toggler
         value={$sortType.value}
         onChange={(value) => {
@@ -79,7 +79,9 @@
         }}
         {options}
       />
+    {/snippet}
 
+    {#snippet actions()}
       <CommentLanguageSelect
         value={commentLanguage.value}
         onChange={commentLanguage.set}

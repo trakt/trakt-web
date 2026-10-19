@@ -19,6 +19,8 @@ export type MediaListProps<T, M> = {
   variant?: 'portrait' | 'landscape';
   titleAction?: Snippet;
   contentKey?: string;
+  /** Narrows the list, beside its label. */
+  filters?: Snippet;
 } & FilterParams;
 
 export type DrilledMediaListProps<T, M> = Omit<

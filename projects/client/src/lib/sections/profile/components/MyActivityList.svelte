@@ -94,7 +94,7 @@
     {/if}
   {/snippet}
 
-  {#snippet actions()}
+  {#snippet filters()}
     <Toggler value={$activityType.value} onChange={set} {options} />
   {/snippet}
 </SectionList>

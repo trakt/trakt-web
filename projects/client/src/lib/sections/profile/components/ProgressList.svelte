@@ -44,7 +44,7 @@
         <ProgressItem {entry} type={$current.value} />
       {/snippet}
 
-      {#snippet actions()}
+      {#snippet filters()}
         <Toggler
           value={$current.value}
           onChange={set}
