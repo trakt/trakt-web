@@ -143,6 +143,11 @@ type MixtapeResultType = {
   type: MediaType;
 };
 
+type OnboardingStepType = {
+  step: 'intro' | 'import' | 'outro';
+  action: 'view' | 'skip' | 'complete';
+};
+
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.PageView]: PageViewType;
   [AnalyticsEvent.EnterLite]: never;
@@ -259,4 +264,6 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.LoginComplete]: never;
   [AnalyticsEvent.LoginFailed]: { error: string };
   [AnalyticsEvent.Logout]: never;
+
+  [AnalyticsEvent.OnboardingStep]: OnboardingStepType;
 };

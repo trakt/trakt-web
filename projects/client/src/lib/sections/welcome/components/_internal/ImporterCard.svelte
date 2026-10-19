@@ -10,9 +10,11 @@
   const {
     description,
     source,
+    onclick,
   }: {
     description: string;
     source: ImportSource;
+    onclick: () => void;
   } = $props();
 
   const name = $derived(IMPORT_SOURCE_CONFIGS[source].name);
@@ -32,6 +34,7 @@
     style="flat"
     size="small"
     label={actionLabel}
+    {onclick}
   >
     {actionLabel}
   </Button>

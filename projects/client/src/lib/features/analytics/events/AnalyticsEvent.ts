@@ -132,4 +132,6 @@ export const AnalyticsEvent = {
   LoginComplete: 'auth-action.login-complete',
   LoginFailed: 'auth-action.login-failed',
   Logout: 'auth-action.logout',
+
+  OnboardingStep: 'onboarding.step',
 } as const;
