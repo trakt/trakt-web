@@ -2,7 +2,7 @@ import { chunk as toGroups } from '$lib/utils/array/chunk.ts';
 import { DAYS_IN_WEEK } from '$lib/utils/constants.ts';
 import type { CalendarChunk } from '../models/CalendarChunk.ts';
 import type { CalendarChunkState } from '../models/CalendarChunkState.ts';
-import type { CalendarPeriod } from '../models/CalendarLayoutProps.ts';
+import type { CalendarPeriod } from '../models/CalendarPeriod.ts';
 import type { CalendarOrder } from '../models/CalendarOrder.ts';
 import { dateKey } from './dateKey.ts';
 import { toChunkStateKey } from './toChunkStateKey.ts';

@@ -1,30 +1,47 @@
 <script lang="ts" generics="T extends { key: string }">
+  import { getLocale } from "$lib/features/i18n";
   import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
-  import { tick } from "svelte";
+  import { getStartOfWeek } from "$lib/utils/date/getStartOfWeek.ts";
+  import { untrack } from "svelte";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
+  import CalendarChunkSources from "./_internal/CalendarChunkSources.svelte";
   import { dateKey } from "./_internal/dateKey";
+  import { useCalendarBoard } from "./_internal/useCalendarBoard.ts";
   import { getCalendarContext } from "./context/getCalendarContext";
-  import type { CalendarLayoutProps } from "./models/CalendarLayoutProps";
+  import type { HistoryCalendarProps } from "./models/HistoryCalendarProps";
   import CalendarBoardLayout from "./_internal/CalendarBoardLayout.svelte";
   import CalendarDays from "./_internal/CalendarDays.svelte";
-  import CalendarHeader from "./_internal/CalendarHeader.svelte";
   import CalendarWeekdayRow from "./_internal/CalendarWeekdayRow.svelte";
 
   const {
-    activeDate,
-    isLoading,
-    navigation: externalNavigation,
+    useSource,
+    sourceKey,
     item,
     layout = "list",
     maxDate,
-    order = "chronological",
-    periods,
-    onLoadMore,
-  }: CalendarLayoutProps<T> = $props();
+    minDate,
+  }: HistoryCalendarProps<T> = $props();
+
+  const order = "reverse-chronological" as const;
+  const WEEKS_PER_STEP = 4;
+  const EMPTY_WEEK_LIMIT = 52;
+
+  const { board, sources, register, activeDate, loadMore, loadPrevious } =
+    useCalendarBoard<T>({
+      order,
+      weeksPerStep: WEEKS_PER_STEP,
+      upperBound: getStartOfWeek(new Date(), getLocale()),
+      lowerBound: untrack(() => minDate) ?? undefined,
+      emptyWeekLimit: EMPTY_WEEK_LIMIT,
+      fingerprint: fromRune(() => sourceKey),
+    });
+
+  const periods = $derived($board.periods);
 
   const { visibleDate } = getCalendarContext();
 
-  const selectedDate = $derived($visibleDate ?? activeDate);
+  const selectedDate = $derived($visibleDate ?? $activeDate);
 
   const visiblePeriodCalendar = $derived.by(() => {
     const firstPeriod = periods.at(0)?.calendar ?? [];
@@ -32,29 +49,10 @@
 
     const scrollKey = dateKey($visibleDate);
     const match = periods.find((period) =>
-      period.calendar.some((day) => dateKey(day.date) === scrollKey)
+      period.calendar.some((day) => dateKey(day.date) === scrollKey),
     );
 
     return match?.calendar ?? firstPeriod;
-  });
-
-  async function handleNavigation(action: () => void) {
-    visibleDate.next(null);
-    action();
-    await tick();
-    document
-      .getElementById(dateKey(activeDate))
-      ?.scrollIntoView({ block: "start" });
-  }
-
-  const navigation = $derived.by(() => {
-    if (!externalNavigation) return;
-
-    return {
-      onNext: () => handleNavigation(externalNavigation.onNext),
-      onPrevious: () => handleNavigation(externalNavigation.onPrevious),
-      onReset: () => handleNavigation(externalNavigation.onReset),
-    };
   });
 </script>
 
@@ -64,29 +62,30 @@
     use:trackWindowScroll={"is-scrolled"}
     use:trackElementBottom={"--calendar-sticky-top"}
   >
-    {#if navigation}
-      <CalendarHeader
-        {navigation}
-        {maxDate}
-        activeDate={selectedDate}
-      />
-    {/if}
     <div class="history-calendar-dates">
       <CalendarWeekdayRow />
       <CalendarDays
         calendar={visiblePeriodCalendar}
-        {isLoading}
-        {navigation}
+        isLoading={$board.isInitialLoad}
         {maxDate}
         activeDate={selectedDate}
       />
     </div>
   </div>
 
+  <CalendarChunkSources
+    sources={$sources}
+    load={(chunk) => useSource({ start: chunk.start, days: chunk.days })}
+    {register}
+  />
+
   <CalendarBoardLayout
-    {activeDate}
-    {isLoading}
-    {onLoadMore}
+    activeDate={$activeDate}
+    isLoading={$board.isLoadingBelow}
+    isInitialLoad={$board.isInitialLoad}
+    isLoadingAbove={$board.isLoadingAbove}
+    onLoadMore={loadMore}
+    onLoadPrevious={loadPrevious}
     {periods}
     {order}
     {layout}

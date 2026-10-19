@@ -38,7 +38,7 @@
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import CalendarChunkSources from "./CalendarChunkSources.svelte";
   import { useCalendarBoard } from "./useCalendarBoard.ts";
-  import type { CalendarPeriod } from "../models/CalendarLayoutProps";
+  import type { CalendarPeriod } from "../models/CalendarPeriod";
   import type { CalendarView } from "../models/CalendarView.ts";
 
   const {

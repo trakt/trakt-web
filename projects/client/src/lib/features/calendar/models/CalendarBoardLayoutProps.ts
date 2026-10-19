@@ -1,6 +1,6 @@
 import type { Snippet } from 'svelte';
 import type { CalendarOrder } from './CalendarOrder.ts';
-import type { CalendarPeriod } from './CalendarLayoutProps.ts';
+import type { CalendarPeriod } from './CalendarPeriod.ts';
 import type { CalendarView } from './CalendarView.ts';
 
 export type CalendarBoardLayoutProps<T> = {
@@ -12,7 +12,7 @@ export type CalendarBoardLayoutProps<T> = {
   view?: CalendarView;
   periods: ReadonlyArray<CalendarPeriod<T>>;
   onLoadMore: () => void;
-  isInitialLoad?: boolean;
-  isLoadingAbove?: boolean;
-  onLoadPrevious?: () => boolean;
+  isInitialLoad: boolean;
+  isLoadingAbove: boolean;
+  onLoadPrevious: () => boolean;
 };
