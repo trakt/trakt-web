@@ -7,14 +7,13 @@ import type { PageLoad } from '$types/people/[slug]/$types.d.ts';
 export const load: PageLoad = async ({ parent, params, fetch, url }) => {
   const { queryClient, isBot } = await parent();
 
-  const slug = assertDefined(params.slug, 'Slug is required');
-
   if (shouldPrefetch({ isBot, url })) {
+    const slug = assertDefined(params.slug, 'Slug is required');
     await queryClient.prefetchQuery(peopleSummaryQuery({ slug, fetch }));
     return;
   }
 
-  if (browser) {
-    void queryClient.prefetchQuery(peopleSummaryQuery({ slug }));
+  if (browser && params.slug) {
+    void queryClient.prefetchQuery(peopleSummaryQuery({ slug: params.slug }));
   }
 };
