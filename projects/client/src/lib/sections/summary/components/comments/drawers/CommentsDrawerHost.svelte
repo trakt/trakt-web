@@ -35,7 +35,6 @@
   onClose={() => activeCommentState.discardDraftThen(onClose)}
   title={m.dialog_title_comment()}
   size="large"
-  metaInfo={$sortType.text()}
   onOpened={() => isOpened.set(true)}
 >
   {#if $isOpened}

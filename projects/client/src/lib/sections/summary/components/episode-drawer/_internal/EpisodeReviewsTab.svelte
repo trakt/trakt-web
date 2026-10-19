@@ -4,7 +4,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import DrawerTabTitle from "$lib/sections/summary/components/_internal/DrawerTabTitle.svelte";
   import CommentLanguageSelect from "$lib/sections/summary/components/comments/_internal/CommentLanguageSelect.svelte";
   import { useCommentLanguage } from "$lib/sections/summary/components/comments/_internal/useCommentLanguage.svelte.ts";
@@ -28,9 +27,6 @@
 
 <div class="episode-reviews-tab">
   <DrawerTabTitle title={m.tab_text_seasons_reviews()}>
-    {#snippet metaInfo()}
-      <ListMetaInfo text={$sort.text()} />
-    {/snippet}
 
     {#snippet actions()}
       <Toggler value={$sort.value} onChange={setSort} {options} />

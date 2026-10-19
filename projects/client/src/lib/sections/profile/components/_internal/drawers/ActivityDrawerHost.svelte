@@ -50,7 +50,6 @@
   onClose={() => discardDraftThen(onClose)}
   title={m.list_title_activity()}
   size="large"
-  metaInfo={$activityType.text()}
   {badge}
   onOpened={() => (isOpened = true)}
 >

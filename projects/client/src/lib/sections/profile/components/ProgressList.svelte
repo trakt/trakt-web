@@ -3,7 +3,6 @@
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { m } from "$lib/features/i18n/messages.ts";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import DrillableMediaList from "$lib/sections/lists/drilldown/DrillableMediaList.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
@@ -25,10 +24,6 @@
   );
 </script>
 
-{#snippet metaInfo()}
-  <ListMetaInfo text={$current.text()} />
-{/snippet}
-
 {#if mode !== "movie"}
   <div class="trakt-progress-list-wrapper" transition:slide={{ duration: 500 }}>
     <DrillableMediaList
@@ -44,7 +39,6 @@
       type="show"
       useList={() => useProgressList({ type: $current.value })}
       urlBuilder={() => UrlBuilder.profile.progress("me")}
-      {metaInfo}
     >
       {#snippet item(entry)}
         <ProgressItem {entry} type={$current.value} />
