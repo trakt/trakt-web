@@ -4,17 +4,16 @@
   import BrainIcon from "$lib/components/icons/BrainIcon.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useVipUpsell } from "$lib/features/upsell/useVipUpsell";
   import { useAllPersonalLists } from "$lib/stores/useAllPersonalLists";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import SaveListDrawer from "./SaveListDrawer.svelte";
 
   const { user } = useUser();
   const { lists, isLoading } = useAllPersonalLists();
-  const { track } = useTrack(AnalyticsEvent.VipUpsell);
+  const { trackClick, trackImpression } = useVipUpsell(() => "lists");
 
   const isAtLimit = $derived(
     !$isLoading && $lists.length >= $user.limits.lists.limit,
@@ -48,11 +47,11 @@
 
     {#if isAtLimit}
       <DropdownItem
-        href={UrlBuilder.vip()}
+        href={UrlBuilder.vip("lists")}
         label={m.link_label_get_vip()}
-        onclick={() => track({ source: "lists" })}
+        onclick={trackClick}
       >
-        {m.button_text_personal()}
+        <span use:trackImpression>{m.button_text_personal()}</span>
 
         {#snippet icon()}
           <ProfileIcon />

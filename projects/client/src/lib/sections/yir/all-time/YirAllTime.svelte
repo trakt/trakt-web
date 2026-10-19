@@ -162,4 +162,4 @@
   <YirTotalsSection stats={null} year="all" />
 {/if}
 
-<YirUpgradeSection {slug} />
+<YirUpgradeSection {slug} source="yir-all-time" />

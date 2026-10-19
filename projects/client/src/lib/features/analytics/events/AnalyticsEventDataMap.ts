@@ -15,6 +15,8 @@ import type { TodayOpenSource } from '$lib/sections/today/models/TodayOpenSource
 import type { TodayStoryAction } from '$lib/sections/today/models/TodayStoryAction.ts';
 import type { TodayStoryFrame } from '$lib/sections/today/models/TodayStoryFrame.ts';
 import type { TodayStoryGroup } from '$lib/sections/today/models/TodayStoryGroup.ts';
+import type { VipFlow } from '$lib/features/upsell/models/VipFlow.ts';
+import type { VipUpsellSource } from '$lib/features/upsell/models/VipUpsellSource.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
 type SourceType = { source: string };
@@ -68,8 +70,13 @@ type LinkType = SourceType & { target: string };
 type BannerDismissType = { id: string; value: string };
 type SortType = { sortBy: string; sortHow: string };
 type LikeType = { action: 'like' | 'unlike' };
-type VipUpsellType = SourceType;
+type VipUpsellType = { source: VipUpsellSource };
+type VipFunnelType = { source: VipUpsellSource; flow: VipFlow };
 type VipUpgradeType = { plan: string };
+type VipCheckoutType = VipFunnelType & { plan: string };
+type VipCheckoutFailedType = VipCheckoutType & { error: string };
+type VipConfirmFailedType = VipCheckoutType & { error: string };
+type VipGateType = { feature: 'notes' };
 type VipCancelType = {
   reason?: string;
   tenure?: string;
@@ -195,8 +202,15 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.BannerDismiss]: BannerDismissType;
 
   [AnalyticsEvent.VipUpsell]: VipUpsellType;
+  [AnalyticsEvent.VipUpsellImpression]: VipUpsellType;
 
+  [AnalyticsEvent.VipView]: VipFunnelType;
   [AnalyticsEvent.VipUpgrade]: VipUpgradeType;
+  [AnalyticsEvent.VipCheckoutFailed]: VipCheckoutFailedType;
+  [AnalyticsEvent.VipCheckoutCanceled]: VipCheckoutType;
+  [AnalyticsEvent.VipConfirmed]: VipCheckoutType;
+  [AnalyticsEvent.VipConfirmFailed]: VipConfirmFailedType;
+  [AnalyticsEvent.VipGate]: VipGateType;
   [AnalyticsEvent.VipManage]: never;
   [AnalyticsEvent.VipCancel]: VipCancelType;
 

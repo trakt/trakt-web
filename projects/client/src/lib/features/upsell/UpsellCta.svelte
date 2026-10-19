@@ -3,8 +3,8 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { AnalyticsEvent } from "../analytics/events/AnalyticsEvent";
-  import { useTrack } from "../analytics/useTrack";
+  import type { VipUpsellSource } from "./models/VipUpsellSource";
+  import { useVipUpsell } from "./useVipUpsell";
 
   const {
     source,
@@ -12,20 +12,24 @@
     title,
     variant = "default",
   }: {
-    source: string;
+    source: VipUpsellSource;
     title?: string;
     variant?: "default" | "small";
   } & ChildrenProps = $props();
 
-  const { track } = useTrack(AnalyticsEvent.VipUpsell);
+  const { trackClick, trackImpression } = useVipUpsell(() => source);
 </script>
 
-<div class="trakt-vip-upsell-cta" data-variant={variant}>
+<div
+  class="trakt-vip-upsell-cta"
+  data-variant={variant}
+  use:trackImpression
+>
   <Link
-    href={UrlBuilder.vip()}
+    href={UrlBuilder.vip(source)}
     label={m.link_label_get_vip()}
     color="inherit"
-    onclick={() => track({ source })}
+    onclick={trackClick}
   >
     <div>
       {#if variant === "default"}

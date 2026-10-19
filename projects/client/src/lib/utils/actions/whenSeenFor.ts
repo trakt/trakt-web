@@ -10,6 +10,10 @@ type Watch = WhenSeenForParams & {
   timer?: ReturnType<typeof setTimeout>;
 };
 
+// The first observer callback reports `isIntersecting` for any overlap, so the
+// ratio is checked too. A full view can round to a hair under 1.
+const FULLY_VISIBLE_RATIO = 0.99;
+
 const watches = new WeakMap<Element, Watch>();
 let sharedObserver: IntersectionObserver | undefined;
 
@@ -20,12 +24,12 @@ function stopWatching(element: Element) {
 }
 
 function onIntersection(entries: IntersectionObserverEntry[]) {
-  entries.forEach(({ target, isIntersecting }) => {
+  entries.forEach(({ target, isIntersecting, intersectionRatio }) => {
     const watch = watches.get(target);
     if (!watch) return;
 
     clearTimeout(watch.timer);
-    if (!isIntersecting) return;
+    if (!isIntersecting || intersectionRatio < FULLY_VISIBLE_RATIO) return;
 
     watch.timer = setTimeout(() => {
       stopWatching(target);
@@ -36,7 +40,7 @@ function onIntersection(entries: IntersectionObserverEntry[]) {
 
 function getObserver() {
   sharedObserver ??= new IntersectionObserver(onIntersection, {
-    threshold: 1,
+    threshold: FULLY_VISIBLE_RATIO,
   });
   return sharedObserver;
 }

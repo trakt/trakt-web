@@ -26,9 +26,13 @@ vi.stubGlobal(
   },
 );
 
-function emit(target: Element, isIntersecting: boolean) {
+function emit(
+  target: Element,
+  isIntersecting: boolean,
+  intersectionRatio = isIntersecting ? 1 : 0,
+) {
   observer.callback?.([
-    { target, isIntersecting } as IntersectionObserverEntry,
+    { target, isIntersecting, intersectionRatio } as IntersectionObserverEntry,
   ]);
 }
 
@@ -59,6 +63,16 @@ describe('action: whenSeenFor', () => {
     vi.advanceTimersByTime(DURATION);
 
     expect(callback).toHaveBeenCalledOnce();
+    action.destroy?.();
+  });
+
+  it('should not fire while the element is only partly in view', () => {
+    const { node, callback, action } = mount();
+
+    emit(node, true, 0.5);
+    vi.advanceTimersByTime(DURATION * 2);
+
+    expect(callback).not.toHaveBeenCalled();
     action.destroy?.();
   });
 

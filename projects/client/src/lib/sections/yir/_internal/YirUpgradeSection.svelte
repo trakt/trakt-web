@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import type { VipUpsellSource } from "$lib/features/upsell/models/VipUpsellSource";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { m } from "$lib/paraglide/messages";
@@ -12,7 +13,7 @@
     /** Profile being viewed; the upsell only shows on your own page. */
     slug: string;
     /** Analytics source for the upsell CTA (e.g. "yir" or "mir"). */
-    source?: string;
+    source?: VipUpsellSource;
   } = $props();
 
   const { isMe } = $derived(useIsMe(slug));

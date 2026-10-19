@@ -1,22 +1,22 @@
 <script lang="ts">
   import VipUpsellBadge from "$lib/components/badge/VipUpsellBadge.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages";
+  import type { VipUpsellSource } from "$lib/features/upsell/models/VipUpsellSource";
+  import { useVipUpsell } from "$lib/features/upsell/useVipUpsell";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
-  const { source }: { source: string } = $props();
+  const { source }: { source: VipUpsellSource } = $props();
 
-  const { track } = useTrack(AnalyticsEvent.VipUpsell);
+  const { trackClick, trackImpression } = useVipUpsell(() => source);
 </script>
 
-<trakt-get-vip-link>
+<trakt-get-vip-link use:trackImpression>
   <Link
-    href={UrlBuilder.vip()}
+    href={UrlBuilder.vip(source)}
     label={m.link_label_get_vip()}
     color="inherit"
-    onclick={() => track({ source })}
+    onclick={trackClick}
   >
     <VipUpsellBadge />
   </Link>

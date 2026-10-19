@@ -52,7 +52,7 @@
         {/if}
       {/if}
     </RenderFor>
-    <RenderFor audience="free"><GetVIPLink source="navbar" /></RenderFor>
+    <RenderFor audience="free"><GetVIPLink source="navbar-mobile" /></RenderFor>
     <RenderFor audience="public">
       <JoinTraktButton size="small">
         {#snippet icon()}

@@ -1,4 +1,5 @@
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
+import type { VipUpsellSource } from '$lib/features/upsell/models/VipUpsellSource.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import type { PersonalListType } from '$lib/sections/lists/user/models/PersonalListType.ts';
@@ -325,7 +326,10 @@ export const UrlBuilder = {
   socialMedia: {
     reddit: () => 'https://www.reddit.com/r/trakt',
   },
-  vip: () => '/vip',
+  vip: (source?: VipUpsellSource) =>
+    source && source !== 'direct'
+      ? `/vip?${new URLSearchParams({ source })}`
+      : '/vip',
   vipCancel: () => '/vip/cancel',
   terms: () => '/terms',
   privacy: () => '/privacy',
