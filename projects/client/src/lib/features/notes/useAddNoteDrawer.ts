@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { UserLimits } from '$lib/requests/models/UserLimits.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
@@ -15,6 +17,7 @@ const isAtLimit = (limits: UserLimits, isVip: boolean) => {
 
 export function useAddNoteDrawer() {
   const { notes, limits, user } = useUser();
+  const { track: trackGate } = useTrack(AnalyticsEvent.VipGate);
 
   return {
     open: async (props: NoteDrawerProps) => {
@@ -22,6 +25,7 @@ export function useAddNoteDrawer() {
       const usageLimits = await resolve(limits);
 
       if (isAtLimit(usageLimits, currentUser.isVip)) {
+        if (!currentUser.isVip) trackGate({ feature: 'notes' });
         return;
       }
 
