@@ -26,6 +26,20 @@ describe('GlobalEventBus', () => {
     unregister();
   });
 
+  it('should listen to scroll gestures passively', () => {
+    const addEventListener = vi.spyOn(globalThis, 'addEventListener');
+
+    const unregister = eventBus.register('wheel', vi.fn());
+
+    expect(addEventListener).toHaveBeenCalledWith(
+      'wheel',
+      expect.any(Function),
+      { passive: true },
+    );
+    unregister();
+    addEventListener.mockRestore();
+  });
+
   it('should unregister an event handler', () => {
     const handler = vi.fn();
     const eventType = 'click';

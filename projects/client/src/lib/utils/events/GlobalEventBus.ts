@@ -2,6 +2,15 @@ import { assertDefined } from '../assert/assertDefined.ts';
 
 type EventHandler<T extends Event> = (event: T) => void;
 
+const PASSIVE_EVENTS: ReadonlySet<string> = new Set([
+  'wheel',
+  'touchstart',
+  'touchmove',
+]);
+
+const toListenerOptions = (eventType: string) =>
+  PASSIVE_EVENTS.has(eventType) ? { passive: true } : undefined;
+
 class GlobalEventBus {
   private static instance: GlobalEventBus;
   private handlers: Map<string, Set<EventHandler<Event>>> = new Map();
@@ -23,7 +32,11 @@ class GlobalEventBus {
   ): () => void {
     if (!this.handlers.has(eventType)) {
       this.handlers.set(eventType, new Set());
-      globalThis.addEventListener(eventType, this._dispatch);
+      globalThis.addEventListener(
+        eventType,
+        this._dispatch,
+        toListenerOptions(eventType),
+      );
     }
 
     const ref = assertDefined(

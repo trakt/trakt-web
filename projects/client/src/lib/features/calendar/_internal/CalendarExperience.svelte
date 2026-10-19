@@ -2,6 +2,7 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import { getLocale } from "$lib/features/i18n";
+  import { getStartOfWeek } from "$lib/utils/date/getStartOfWeek.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll.ts";
@@ -82,9 +83,11 @@
     previous,
     reset,
     loadMore,
+    loadPrevious,
     activeDate,
     goTo,
   } = useCalendarBoard<T>({
+    lowerBound: getStartOfWeek(new Date(), getLocale()),
     emptyWeekLimit: EMPTY_WEEK_LIMIT,
     fingerprint: fromRune(() => fingerprint),
     minLater: fromRune(() =>
@@ -113,9 +116,9 @@
   async function handleNavigation(action: () => void) {
     action();
     await tick();
-    document
-      .getElementById(dateKey(activeDate.value))
-      ?.scrollIntoView({ block: "start" });
+    const target = document.getElementById(dateKey(activeDate.value));
+    if (target) target.scrollIntoView({ block: "start" });
+    else globalThis.window.scrollTo({ top: 0 });
   }
 
   const toggleView = () => {
@@ -352,8 +355,11 @@
     {#if !isMonthOnly}
       <CalendarBoardLayout
         activeDate={$activeDate}
-        isLoading={$board.isInitialLoad || $board.isLoadingBelow}
+        isLoading={$board.isLoadingBelow}
+        isInitialLoad={$board.isInitialLoad}
+        isLoadingAbove={$board.isLoadingAbove}
         onLoadMore={loadMore}
+        onLoadPrevious={loadPrevious}
         {periods}
         view={layoutView}
         item={layoutView === "week" ? posterItem : summaryItem}

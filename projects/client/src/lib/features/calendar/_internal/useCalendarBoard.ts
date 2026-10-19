@@ -1,35 +1,22 @@
 import { BehaviorSubject, combineLatest, map, type Observable } from 'rxjs';
 import { onDestroy } from 'svelte';
 import { useCalendarPeriod } from '../context/useCalendarPeriod.ts';
-import type { CalendarOrder } from '../models/CalendarOrder.ts';
+import type { CalendarPeriodOptions } from '../models/CalendarPeriodOptions.ts';
 import { createCalendarChunkRegistry } from './createCalendarChunkRegistry.ts';
 import { toCalendarPeriods } from './toCalendarPeriods.ts';
 import { toChunkStateKey } from './toChunkStateKey.ts';
 
-type UseCalendarBoardParams = {
-  order?: CalendarOrder;
-  weeksPerStep?: number;
-  upperBound?: Date;
+type UseCalendarBoardParams = CalendarPeriodOptions & {
   emptyWeekLimit: number;
   fingerprint: Observable<string>;
-  minLater?: Observable<number>;
 };
 
 export function useCalendarBoard<T>({
-  order = 'chronological',
-  weeksPerStep,
-  upperBound,
   emptyWeekLimit,
-  fingerprint,
-  minLater,
+  ...options
 }: UseCalendarBoardParams) {
-  const period = useCalendarPeriod({
-    order,
-    weeksPerStep,
-    upperBound,
-    fingerprint,
-    minLater,
-  });
+  const { order = 'chronological', fingerprint } = options;
+  const period = useCalendarPeriod(options);
   const registry = createCalendarChunkRegistry<T>();
 
   const sources = combineLatest([period.chunks, fingerprint]).pipe(

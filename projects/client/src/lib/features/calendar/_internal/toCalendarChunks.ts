@@ -14,6 +14,7 @@ type ToCalendarChunksParams = {
   order: CalendarOrder;
   locale: AvailableLocale;
   upperBound?: Date;
+  lowerBound?: Date;
   minLater?: number;
 };
 
@@ -23,6 +24,7 @@ export function toCalendarChunks({
   order,
   locale,
   upperBound,
+  lowerBound,
   minLater = 0,
 }: ToCalendarChunksParams): ReadonlyArray<CalendarChunk> {
   const anchor =
@@ -44,6 +46,9 @@ export function toCalendarChunks({
     }))
     .filter(
       ({ offset, start }) => offset === 0 || !upperBound || start <= upperBound,
+    )
+    .filter(
+      ({ offset, start }) => offset >= 0 || !lowerBound || start >= lowerBound,
     )
     .map(({ offset, start }) => ({
       key: dateKey(start),
