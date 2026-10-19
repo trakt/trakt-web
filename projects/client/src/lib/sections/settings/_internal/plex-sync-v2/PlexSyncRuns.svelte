@@ -123,6 +123,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-plex-sync-runs {
     display: flex;
     flex-direction: column;
@@ -152,8 +154,7 @@
   .cycle-status {
     flex-shrink: 0;
 
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-xl);
+    @include tag-box;
 
     --status-color: var(--green-500);
     background: color-mix(in srgb, var(--status-color) 10%, transparent);

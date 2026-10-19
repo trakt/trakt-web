@@ -10,14 +10,15 @@
 </span>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-settings-status-badge {
     display: inline-flex;
     align-items: center;
     gap: var(--gap-xxs);
     flex-shrink: 0;
 
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-xl);
+    @include tag-box;
 
     background: color-mix(in srgb, var(--green-500) 10%, transparent);
     color: var(--green-500);

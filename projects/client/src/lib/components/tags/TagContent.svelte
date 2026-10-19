@@ -6,15 +6,17 @@
   {@render children()}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-tag {
+    @include tag-box;
+
     display: flex;
     align-items: center;
 
     height: var(--ni-12);
-    line-height: var(--ni-12);
     margin: 0;
-    padding: var(--ni-4) var(--ni-8);
 
     border-radius: var(--border-radius-tag, var(--border-radius-pill));
   }

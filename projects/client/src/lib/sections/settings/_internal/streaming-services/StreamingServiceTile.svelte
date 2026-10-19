@@ -269,8 +269,7 @@
   span.tag {
     flex-shrink: 0;
 
-    padding: var(--ni-2) var(--ni-6);
-    border-radius: var(--border-radius-s);
+    @include tag-box;
 
     font-size: var(--font-size-tag);
     text-transform: uppercase;

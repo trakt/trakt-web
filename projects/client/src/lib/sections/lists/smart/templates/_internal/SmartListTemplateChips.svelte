@@ -47,7 +47,7 @@
     height: var(--ni-20);
     padding-inline: var(--ni-8);
 
-    border-radius: var(--border-radius-s);
+    border-radius: var(--border-radius-pill);
     background-color: color-mix(
       in srgb,
       var(--color-foreground) 8%,

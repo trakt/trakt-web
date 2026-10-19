@@ -235,8 +235,7 @@
 
   .pill {
     display: inline-block;
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-s);
+    @include tag-box;
 
     font-size: var(--font-size-tag);
     white-space: nowrap;
@@ -295,8 +294,7 @@
 
   span.tag.undone {
     display: inline-block;
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-s);
+    @include tag-box;
 
     background-color: color-mix(
       in srgb,

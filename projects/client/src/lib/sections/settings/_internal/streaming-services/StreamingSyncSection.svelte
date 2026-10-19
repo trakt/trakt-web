@@ -17,9 +17,10 @@
 </SettingsSection>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   span.tag.beta {
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-s);
+    @include tag-box;
 
     background-color: color-mix(
       in srgb,

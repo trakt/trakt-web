@@ -9,11 +9,12 @@
 </TextTag>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   :global(.trakt-settings-pill) {
     flex-shrink: 0;
 
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-xl);
+    @include tag-box;
 
     background: color-mix(in srgb, var(--color-foreground) 10%, transparent);
   }

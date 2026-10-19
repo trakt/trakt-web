@@ -143,11 +143,12 @@
 {/if}
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .needs-attention {
     flex-shrink: 0;
 
-    padding: var(--ni-2) var(--ni-8);
-    border-radius: var(--border-radius-xl);
+    @include tag-box;
 
     background: color-mix(in srgb, var(--orange-500) 10%, transparent);
     color: var(--orange-500);

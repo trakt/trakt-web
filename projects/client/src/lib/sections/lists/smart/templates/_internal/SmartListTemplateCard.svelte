@@ -174,9 +174,7 @@
   }
 
   .template-badge {
-    height: var(--ni-16);
-    padding-inline: var(--gap-xs);
-    border-radius: var(--border-radius-s);
+    @include tag-box;
 
     background-color: color-mix(
       in srgb,
@@ -187,7 +185,6 @@
 
     font-size: var(--font-size-tag);
     font-weight: 600;
-    line-height: var(--ni-16);
 
     &.is-personal {
       background-color: var(--color-filter-chip-background);

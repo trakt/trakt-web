@@ -129,8 +129,7 @@
     .fan-upload-pill {
       flex-shrink: 0;
       margin-block-start: var(--gap-xxs);
-      padding: var(--ni-2) var(--ni-6);
-      border-radius: var(--border-radius-s);
+      @include tag-box;
       background-color: var(--color-background-indicator-tag);
       color: var(--color-text-indicator-tag);
     }
