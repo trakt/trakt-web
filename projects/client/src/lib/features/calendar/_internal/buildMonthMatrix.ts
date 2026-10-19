@@ -60,10 +60,8 @@ export function buildMonthMatrix<T>({
     return {
       key: dateKey(weekStart),
       cells: Array.from({ length: DAYS_IN_WEEK }, (_, day) =>
-        addDays(weekStart, day),
-      )
-        .filter((date) => date <= monthEnd)
-        .map(toCell),
+        toCell(addDays(weekStart, day)),
+      ),
     };
   });
 

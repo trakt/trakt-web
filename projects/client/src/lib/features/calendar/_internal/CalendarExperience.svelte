@@ -132,7 +132,10 @@
   );
 
   const toggleView = () => {
-    viewParam.setView(calendarView === "day" ? "week" : "day");
+    const nextView = calendarView === "day" ? "week" : "day";
+    viewParam.setView(nextView);
+
+    if (isCompact && nextView === "week") window.scrollTo({ top: 0 });
   };
 
   const isCompact = $derived(!$isDocked);

@@ -8,10 +8,11 @@ import { startOfMonth } from 'date-fns/startOfMonth';
 export function toMonthGridRange(date: Date, locale: AvailableLocale) {
   const reference = getEndOfWeek(date, locale);
   const start = getStartOfWeek(startOfMonth(reference), locale);
+  const end = getEndOfWeek(endOfMonth(reference), locale);
 
   return {
     reference,
     start,
-    days: differenceInDays(endOfMonth(reference), start) + 1,
+    days: differenceInDays(end, start) + 1,
   };
 }
