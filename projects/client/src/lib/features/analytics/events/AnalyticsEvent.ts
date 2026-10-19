@@ -141,4 +141,6 @@ export const AnalyticsEvent = {
   PlexSetting: 'plex-action.setting',
 
   StreamingService: 'streaming-action.service',
+
+  PreviewFeature: buildEventKey(USER_ACTION_PREFIX, 'preview-feature'),
 } as const;
