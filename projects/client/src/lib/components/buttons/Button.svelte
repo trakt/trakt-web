@@ -83,7 +83,9 @@
   <div class="button-label">
     <p
       class="ellipsis bold"
-      class:small={subtitle != null || style === "underlined"}
+      class:small={subtitle != null ||
+        style === "underlined" ||
+        style === "ghost"}
       class:capitalize={text === "capitalize"}
       class:uppercase={text === "uppercase"}
     >
@@ -259,10 +261,6 @@
     box-sizing: border-box;
   }
 
-  :global(#{$b}[data-size=tag][data-style=ghost]) {
-    margin: 0;
-  }
-
   :global(#{$b}),
   :global(#{$b}::before),
   :global(#{$b}:active[disabled]) {
@@ -317,9 +315,19 @@
   }
 
   :global(#{$b}[data-style=ghost]) {
-    margin: var(--ni-neg-4) var(--ni-neg-10);
-    transform: scale(calc(var(--scale-factor-button) * 0.76925));
+    transform: scale(var(--scale-factor-button));
     background: transparent;
+  }
+
+  :global(#{$b}[data-style=ghost]:not([data-size=tag])) {
+    --button-height: var(--ni-32);
+    padding: var(--ni-8) var(--ni-12);
+    gap: var(--gap-xs);
+  }
+
+  :global(#{$b}[data-style=ghost]:not([data-size=tag]) .button-icon svg) {
+    width: auto;
+    height: var(--ni-16);
   }
 
   :global(#{$b}[data-style=ghost]:not([data-variant=secondary])) {
@@ -354,11 +362,19 @@
   }
 
   :global(#{$b}[data-style=ghost]:active#{$on}) {
-    transform: scale(calc(var(--scale-factor-button) * 0.7));
+    transform: scale(calc(var(--scale-factor-button) * 0.92));
   }
 
   :global(#{$b}[data-style=ghost][data-size=tag]) {
+    --button-height: var(--ni-14);
+    margin-block: var(--ni-2);
+    padding: 0 var(--ni-8);
+    min-width: var(--ni-36);
     outline: var(--border-thickness-xxs) solid var(--color-foreground);
+  }
+
+  :global(#{$b}[data-style=ghost][data-size=tag] .button-label p) {
+    font-size: var(--font-size-tag);
   }
 
   @include flat-outline-button(
