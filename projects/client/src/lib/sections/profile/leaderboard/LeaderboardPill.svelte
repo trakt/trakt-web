@@ -32,8 +32,8 @@
   <div class="trakt-leaderboard-pill">
     <Skeleton
       width="var(--ni-160)"
-      height="var(--ni-36)"
-      radius="var(--border-radius-xxl)"
+      height="var(--segmented-select-segment-height)"
+      radius="var(--border-radius-pill)"
     />
   </div>
 {:else if following.length > 0}

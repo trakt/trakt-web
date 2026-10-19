@@ -123,10 +123,10 @@
     display: inline-flex;
     align-items: center;
     gap: var(--ni-4);
-    height: var(--ni-36);
+    height: var(--segmented-select-segment-height);
     padding: 0 var(--ni-8);
     box-sizing: border-box;
-    border-radius: var(--border-radius-xxl);
+    border-radius: var(--border-radius-pill);
 
     border: var(--ni-1) solid
       color-mix(in srgb, var(--color-border) 40%, transparent);

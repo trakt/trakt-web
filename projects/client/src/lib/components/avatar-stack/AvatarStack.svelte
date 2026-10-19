@@ -45,6 +45,10 @@
       --avatar-stack-base-size: var(--ni-22);
     }
 
+    &[data-size="medium"] {
+      --avatar-stack-base-size: var(--ni-24);
+    }
+
     &[data-variant="cutout"] {
       --avatar-stack-size: calc(
         var(--avatar-stack-base-size) + 2 * var(--border-thickness-xs)

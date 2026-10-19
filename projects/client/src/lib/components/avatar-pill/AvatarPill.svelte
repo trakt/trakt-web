@@ -26,13 +26,18 @@
 {#snippet pill()}
   <span
     class="trakt-avatar-pill"
+    class:has-avatars={hasAvatars}
     style:--pill-avatar-count={avatars.length}
     style:--pill-mobile-avatar-limit={MOBILE_AVATAR_LIMIT}
   >
     {#if hasAvatars}
       <span class="pill-avatars" class:has-badge={badge != null}>
         <span class="pill-stack">
-          <AvatarStack {avatars} mobileLimit={MOBILE_AVATAR_LIMIT} />
+          <AvatarStack
+            {avatars}
+            size="medium"
+            mobileLimit={MOBILE_AVATAR_LIMIT}
+          />
         </span>
         {#if badge}
           <span class="pill-badge" aria-hidden="true">
@@ -106,17 +111,17 @@
 
   .trakt-avatar-pill {
     --height-pill-label: calc(var(--font-size-text) + var(--ni-2));
-    --pill-avatar-size: var(--ni-28);
+    --pill-avatar-size: var(--ni-24);
 
     display: inline-flex;
     align-items: center;
     gap: var(--ni-4);
-    height: var(--ni-36);
+    height: var(--segmented-select-segment-height);
     max-width: 100%;
     min-width: 0;
     padding: 0 var(--ni-8);
     box-sizing: border-box;
-    border-radius: var(--border-radius-xxl);
+    border-radius: var(--border-radius-pill);
 
     background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
 
@@ -133,6 +138,10 @@
 
     &:active {
       transform: scale(0.97);
+    }
+
+    &.has-avatars {
+      padding-inline-start: var(--ni-3);
     }
   }
 

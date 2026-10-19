@@ -84,7 +84,7 @@
     height: var(--ni-28);
     padding: 0 var(--ni-12);
     box-sizing: border-box;
-    border-radius: var(--border-radius-xxl);
+    border-radius: var(--border-radius-pill);
 
     /* Background is the progress encoding: the score percent of the pill
        width is filled with a soft accent tint, the rest is neutral. Reads
