@@ -71,6 +71,7 @@
 
   <div
     class="week-days-head"
+    id={weekStart ? `week-${weekStart}` : undefined}
     data-week-start={weekStart}
     style:view-timeline-name={weekStart
       ? toWeekTimelineName(weekStart)
@@ -168,6 +169,9 @@
   }
 
   .week-days-head {
+    scroll-margin-top: calc(
+      var(--calendar-bar-bottom, 0px) - var(--border-thickness-xxs)
+    );
     view-timeline-inset: var(--calendar-bar-bottom, 0px) 0px;
 
     box-shadow: 0 var(--border-thickness-xxs) 0
