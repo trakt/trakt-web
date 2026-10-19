@@ -19,8 +19,8 @@
     value,
     onChange,
     options,
-    variant = "icon",
-    style = "default",
+    variant = "selected-icon",
+    style,
     ariaLabel,
     fill = false,
   }: TogglerProps = $props();
@@ -33,6 +33,11 @@
       ...(option.count != null ? { count: option.count } : {}),
       ...(option.href ? { href: option.href } : {}),
     })),
+  );
+
+  // Word-only toggles, like a settings switch between two modes, keep the track.
+  const selectStyle = $derived<SelectStyle>(
+    style ?? (variant === "text" ? "default" : "pills"),
   );
 
   const selectVariant = $derived.by(() => {
@@ -61,7 +66,7 @@
 
 <SegmentedSelect
   variant={selectVariant}
-  {style}
+  style={selectStyle}
   {value}
   options={segmentedOptions}
   {ariaLabel}
