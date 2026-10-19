@@ -27,6 +27,7 @@
   }}
   items={cast}
   {title}
+  count={cast.length}
   drilldown={{
     ...castDrawerLink,
     source: { id: "social" },

@@ -6,7 +6,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import SeasonDropdown from "$lib/sections/lists/season/SeasonDropdown.svelte";
   import SeasonEpisodeItem from "$lib/sections/lists/season/_internal/SeasonEpisodeItem.svelte";
   import { useShowWatchedEpisodes } from "$lib/sections/lists/season/_internal/useShowWatchedEpisodes";
@@ -111,15 +110,10 @@
   </div>
 
   <div class="season-episodes-tab-section">
-    <DrawerTabTitle title={m.tab_text_seasons_episodes()}>
-      {#snippet metaInfo()}
-        {#if !$isLoading}
-          <ListMetaInfo
-            text={m.tag_text_number_of_episodes({ count: $episodes.length })}
-          />
-        {/if}
-      {/snippet}
-    </DrawerTabTitle>
+    <DrawerTabTitle
+      title={m.tab_text_seasons_episodes()}
+      count={$isLoading ? undefined : $episodes.length}
+    />
 
     {#if $isLoading}
       <LoadingIndicator size="large" />
