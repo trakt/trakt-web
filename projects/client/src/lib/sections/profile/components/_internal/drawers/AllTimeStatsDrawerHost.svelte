@@ -11,6 +11,7 @@
   import AllTimeReviewLink from "../AllTimeReviewLink.svelte";
   import AllTimeStatTile from "../AllTimeStatTile.svelte";
   import type { StatIconKey } from "../StatIconKey.ts";
+  import { onMount } from "svelte";
 
   const ANALYTICS_SOURCE = "all-time-stats";
 
@@ -31,6 +32,9 @@
   const yearInReviewHref = UrlBuilder.users("me").yearToDate(previousYear);
 
   const { track } = useTrack(AnalyticsEvent.Link);
+  const { track: trackDrilldown } = useTrack(AnalyticsEvent.Drilldown);
+
+  onMount(() => trackDrilldown({ source: "stats", type: "all-time" }));
 
   type StatTile = {
     key: StatIconKey;
