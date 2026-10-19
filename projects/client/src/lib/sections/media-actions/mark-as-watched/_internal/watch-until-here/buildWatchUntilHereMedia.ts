@@ -31,7 +31,7 @@ export function buildWatchUntilHereMedia({
     };
     existing.episodes.push({
       number: episode.number,
-      watched_at: watchedAt.toISOString(),
+      watched_at: watchedAt === 'unknown' ? watchedAt : watchedAt.toISOString(),
     });
     seasons.set(episode.season, existing);
   }

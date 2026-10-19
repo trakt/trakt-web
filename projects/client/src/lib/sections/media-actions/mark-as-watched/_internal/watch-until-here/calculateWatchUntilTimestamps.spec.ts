@@ -47,10 +47,10 @@ describe('calculateWatchUntilTimestamps', () => {
       now,
     });
 
-    expect(result.map((entry) => entry.watchedAt.toISOString())).toEqual([
-      new Date(now.getTime() - 60 * 60_000 - 45 * 60_000).toISOString(),
-      new Date(now.getTime() - 45 * 60_000).toISOString(),
-      now.toISOString(),
+    expect(result.map((entry) => entry.watchedAt)).toEqual([
+      new Date(now.getTime() - 60 * 60_000 - 45 * 60_000),
+      new Date(now.getTime() - 45 * 60_000),
+      now,
     ]);
   });
 
@@ -100,6 +100,17 @@ describe('calculateWatchUntilTimestamps', () => {
 
     expect(result.map((entry) => entry.watchedAt)).toEqual(
       episodes.map((entry) => entry.effectiveReleaseDate),
+    );
+  });
+
+  it('marks every episode with an unknown date when in unknown mode', () => {
+    const result = calculateWatchUntilTimestamps({
+      episodes,
+      mode: 'unknown',
+    });
+
+    expect(result.map((entry) => entry.watchedAt)).toEqual(
+      episodes.map(() => 'unknown'),
     );
   });
 

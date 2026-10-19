@@ -56,6 +56,18 @@ describe('buildWatchUntilHereMedia', () => {
     });
   });
 
+  it('keeps unknown watched dates as unknown', () => {
+    const result = buildWatchUntilHereMedia({
+      showId: 7,
+      showReleaseDate: SHOW_RELEASE,
+      timestamps: [{ episode: episode(1, 1), watchedAt: 'unknown' }],
+    });
+
+    expect(result.seasons).toEqual([
+      { number: 1, episodes: [{ number: 1, watched_at: 'unknown' }] },
+    ]);
+  });
+
   it('returns an empty seasons array when no timestamps are provided', () => {
     const result = buildWatchUntilHereMedia({
       showId: 1,

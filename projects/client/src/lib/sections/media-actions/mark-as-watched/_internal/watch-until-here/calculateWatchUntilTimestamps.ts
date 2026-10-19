@@ -2,7 +2,8 @@ export type WatchUntilMode =
   | 'just-now'
   | 'custom-end'
   | 'custom-start'
-  | 'released';
+  | 'released'
+  | 'unknown';
 
 export type WatchUntilEpisode = {
   id: number;
@@ -12,9 +13,14 @@ export type WatchUntilEpisode = {
   effectiveReleaseDate: Date;
 };
 
-export type WatchUntilTimestamp = {
+type DatedWatchUntilTimestamp = {
   episode: WatchUntilEpisode;
   watchedAt: Date;
+};
+
+export type WatchUntilTimestamp = {
+  episode: WatchUntilEpisode;
+  watchedAt: Date | 'unknown';
 };
 
 type CalculateWatchUntilTimestampsParams = {
@@ -41,6 +47,10 @@ export function calculateWatchUntilTimestamps({
 }: CalculateWatchUntilTimestampsParams): ReadonlyArray<WatchUntilTimestamp> {
   if (episodes.length === 0) return [];
 
+  if (mode === 'unknown') {
+    return episodes.map((episode) => ({ episode, watchedAt: 'unknown' }));
+  }
+
   if (mode === 'released') {
     return episodes.map((episode) => ({
       episode,
@@ -61,7 +71,7 @@ export function calculateWatchUntilTimestamps({
   if (!finishAnchor) throw new Error('custom-end mode requires an anchor date');
 
   const lastIndex = episodes.length - 1;
-  const result = new Array<WatchUntilTimestamp>(episodes.length);
+  const result = new Array<DatedWatchUntilTimestamp>(episodes.length);
 
   const lastEpisode = episodes.at(lastIndex);
   if (!lastEpisode) return result;
