@@ -156,6 +156,7 @@
 <style lang="scss">
   .trakt-activity-comment-poster {
     flex-shrink: 0;
+    min-width: 0;
     border-radius: var(--border-radius-xs);
     overflow: hidden;
     box-shadow: var(--shadow-floating);
