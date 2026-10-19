@@ -93,13 +93,7 @@
     }
 
     &[data-variant="row"] {
-      position: var(--calendar-day-header-position, sticky);
-      top: var(--calendar-sticky-top, 0px);
-      z-index: var(--layer-raised);
-
-      padding-block: var(--gap-s);
-
-      background-color: var(--color-background);
+      padding: var(--gap-s) var(--layout-distance-side);
 
       .day-number {
         min-width: var(--ni-40);

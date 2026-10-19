@@ -20,6 +20,7 @@
     preview,
     variant = "default",
     isLoading = false,
+    isActiveWeekPinned = false,
     onSelectDay,
   }: {
     allDays: Calendar<T>;
@@ -27,6 +28,7 @@
     preview?: Snippet<[T[]]>;
     variant?: "default" | "mini" | "fill";
     isLoading?: boolean;
+    isActiveWeekPinned?: boolean;
     onSelectDay?: (day: { date: Date; items: T[] }) => void;
   } = $props();
 
@@ -48,7 +50,9 @@
   const todayStart = startOfDay(new Date());
 
   const activeWeekIndex = $derived(
-    isSameMonth(referenceDate, todayStart) ? matrix.activeWeekIndex : -1,
+    isActiveWeekPinned || isSameMonth(referenceDate, todayStart)
+      ? matrix.activeWeekIndex
+      : -1,
   );
 </script>
 

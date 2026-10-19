@@ -25,6 +25,8 @@
   const allDays = $derived(periods.flatMap((p) => p.calendar));
 
   function handleScrollSpyUpdate(id: string) {
+    if (view === "week") return;
+
     const entry = allDays.find((d) => dateKey(d.date) === id);
     if (!entry) return;
     visibleDate.next(entry.date);
@@ -50,6 +52,7 @@
     <ScrollSpy
       selector=".calendar-day-anchor"
       initialId={dateKey(activeDate)}
+      skipVisible={view === "week"}
       onUpdate={handleScrollSpyUpdate}
     >
       {#each periods as period (period.key)}

@@ -4,6 +4,7 @@ export function scrollSpy(
     selector: string;
     onUpdate: (id: string) => void;
     initialId?: string;
+    skipVisible?: boolean;
   },
 ) {
   const visibilityMap = new Map<Element, number>();
@@ -53,12 +54,18 @@ export function scrollSpy(
     });
   }
 
+  function isInViewport(element: Element) {
+    const { top } = element.getBoundingClientRect();
+    return top >= 0 && top < globalThis.window.innerHeight;
+  }
+
   function scrollToId(id: string) {
     requestAnimationFrame(() => {
-      document.getElementById(id)?.scrollIntoView({
-        block: 'start',
-        behavior: 'auto',
-      });
+      const element = document.getElementById(id);
+      if (!element) return;
+      if (currentParams.skipVisible && isInViewport(element)) return;
+
+      element.scrollIntoView({ block: 'start', behavior: 'auto' });
     });
   }
 
