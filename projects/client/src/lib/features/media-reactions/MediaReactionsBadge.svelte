@@ -187,11 +187,11 @@
     align-items: center;
     gap: var(--gap-xs);
 
-    min-height: var(--ni-36);
+    min-height: var(--segmented-select-segment-height);
     box-sizing: border-box;
     padding: var(--ni-4) var(--ni-12);
 
-    border-radius: var(--border-radius-xxl);
+    border-radius: var(--border-radius-pill);
 
     background: none;
 
@@ -214,7 +214,7 @@
   }
 
   .trakt-media-reactions-badge.is-bare {
-    width: var(--ni-36);
+    width: var(--segmented-select-segment-height);
     padding-inline: 0;
     justify-content: center;
     border-radius: 50%;

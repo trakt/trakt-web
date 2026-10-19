@@ -63,7 +63,7 @@
     min-width: var(--ni-64);
 
     --reaction-emoji-box: var(--ni-18);
-    height: var(--ni-30);
+    height: var(--segmented-select-segment-height);
 
     color: var(--color-foreground);
     cursor: default;
@@ -71,7 +71,7 @@
     box-sizing: border-box;
     padding: var(--ni-2) var(--ni-8);
 
-    border-radius: var(--border-radius-xxl);
+    border-radius: var(--border-radius-pill);
 
     transition: background-color var(--transition-increment) ease-in-out;
 
