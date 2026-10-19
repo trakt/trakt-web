@@ -36,6 +36,18 @@ describe('util: getEpisodeWindow', () => {
       ).toEqual({ start: 11, end: 16, before: 11, after: 7 });
     });
 
+    it('should stay at the start while the viewer fits the opening window', () => {
+      expect(getEpisodeWindow({ total: 10, slots: 5, anchorIndex: 2 })).toEqual(
+        { start: 0, end: 5, before: 0, after: 5 },
+      );
+    });
+
+    it('should open on the anchor once it falls past the opening window', () => {
+      expect(
+        getEpisodeWindow({ total: 23, slots: 5, anchorIndex: 5 }).start,
+      ).toBe(5);
+    });
+
     it('should pull back from the end rather than leave empty slots', () => {
       const window = getEpisodeWindow({ total: 23, slots: 5, anchorIndex: 22 });
 

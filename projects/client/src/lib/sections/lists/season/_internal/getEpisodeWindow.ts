@@ -26,7 +26,8 @@ export type EpisodeWindow = {
  * The rail opens on the episode the viewer is up to rather than on episode
  * one: a season is watched from the middle outwards, and a rail that always
  * starts at the beginning makes someone on episode 12 scroll past eleven they
- * have seen.
+ * have seen. It only moves when that episode would not fit the opening
+ * window, so a viewer on episode 3 still sees the season from the start.
  *
  * The window is pulled back from the end so the last slots are never left
  * empty - reaching the finale should fill the row, not show one card and four
@@ -43,7 +44,7 @@ export function getEpisodeWindow({
     return { start: 0, end: 0, before: 0, after: total };
   }
 
-  const anchor = anchorIndex == null || anchorIndex < 0 ? 0 : anchorIndex;
+  const anchor = anchorIndex == null || anchorIndex < size ? 0 : anchorIndex;
   const start = Math.min(anchor, total - size);
 
   const end = start + size;
