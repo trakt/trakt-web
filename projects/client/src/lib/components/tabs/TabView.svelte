@@ -49,7 +49,8 @@
   .trakt-tab-view {
     --tab-list-padding: var(--ni-4);
     --tab-list-gap: var(--gap-xxs);
-    --tab-border-radius: var(--border-radius-m);
+    --tab-list-radius: var(--border-radius-pill);
+    --tab-radius: calc(var(--tab-list-radius) - var(--tab-list-padding));
 
     :global(.trakt-tabs-root) {
       display: flex;
@@ -60,7 +61,7 @@
     :global(.trakt-tabs-list) {
       background-color: var(--color-tablist-background);
       padding: var(--tab-list-padding);
-      border-radius: var(--tab-border-radius);
+      border-radius: var(--tab-list-radius);
 
       display: grid;
       grid-template-columns: repeat(var(--tab-count), minmax(0, 1fr));
@@ -92,9 +93,10 @@
 
       /* Shorthand so consumers can supply a gradient via the token. */
       background: var(--color-tab-background);
-      border-radius: var(--tab-border-radius);
+      border-radius: var(--tab-radius);
 
-      transition: transform var(--transition-increment) ease-in-out;
+      transition: transform var(--transition-spring-duration)
+        var(--transition-spring-ease);
       will-change: transform;
       pointer-events: none;
     }
@@ -107,14 +109,14 @@
       justify-content: center;
       gap: var(--gap-xxs);
 
-      min-height: var(--ni-40);
+      min-height: var(--segmented-select-segment-height);
       position: relative;
 
       border: none;
       background-color: transparent;
 
       color: var(--color-text-primary);
-      border-radius: var(--tab-border-radius);
+      border-radius: var(--tab-radius);
 
       transition: background-color var(--transition-increment) ease-in-out;
 
@@ -131,9 +133,8 @@
       }
 
       &:focus-visible {
-        outline: var(--border-thickness-xs) solid var(--shade-10);
-        color: var(--shade-10);
-        background-color: var(--shade-700);
+        outline: var(--border-thickness-xs) solid currentColor;
+        outline-offset: calc(-1 * var(--border-thickness-xs));
       }
     }
 
