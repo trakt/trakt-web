@@ -42,8 +42,10 @@
 
     background: var(--shade-940);
 
-    border-radius: var(--border-radius-s);
-    padding: var(--ni-8) var(--ni-10);
+    box-sizing: border-box;
+    min-height: var(--segmented-select-segment-height);
+    border-radius: var(--border-radius-pill);
+    padding: var(--ni-4) var(--ni-12);
 
     :global(svg) {
       width: var(--ni-18);
@@ -52,6 +54,7 @@
 
     &[data-variant="plain"] {
       background: transparent;
+      min-height: auto;
       padding: 0;
     }
   }

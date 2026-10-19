@@ -344,7 +344,7 @@
     align-items: center;
     gap: var(--ni-4);
     padding: var(--ni-4) var(--ni-10);
-    border-radius: var(--ni-12);
+    border-radius: var(--border-radius-pill);
     background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
     border: var(--border-thickness-xxs) solid transparent;
     transition:

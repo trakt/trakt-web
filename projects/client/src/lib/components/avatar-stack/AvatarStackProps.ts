@@ -7,7 +7,7 @@ export type AvatarStackUser = Pick<
 
 export type AvatarStackProps = {
   avatars: ReadonlyArray<{ key: string; user: AvatarStackUser }>;
-  size?: 'small' | 'normal';
+  size?: 'small' | 'medium' | 'normal';
   variant?: 'default' | 'cutout';
   linked?: boolean;
   mobileLimit?: number;

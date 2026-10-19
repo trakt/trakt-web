@@ -19,14 +19,9 @@
       background-color: var(--color-foreground-orange);
       color: var(--color-background-orange);
 
-      border-radius: var(--border-radius-xxl);
-      padding: var(--ni-8) var(--ni-10);
+      border-radius: var(--border-radius-pill);
+      padding: var(--ni-4) var(--ni-10);
       padding-inline-start: var(--ni-8);
-
-      :global(svg) {
-        width: var(--ni-14);
-        height: var(--ni-14);
-      }
     }
   }
 </style>
