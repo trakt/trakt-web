@@ -13,10 +13,16 @@ import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { type FavoritesStoreProps, useFavorites } from './useFavorites.ts';
 
+const { track } = vi.hoisted(() => ({ track: vi.fn() }));
+
 vi.mock('$lib/features/notes/useAddNoteDrawer.ts');
+vi.mock('$lib/features/analytics/useTrack.ts', () => ({
+  useTrack: () => ({ track }),
+}));
 
 describe('useFavorites', () => {
   beforeEach(() => {
+    track.mockClear();
     setAuthorization(true);
 
     (useAddNoteDrawer as Mock).mockReturnValue({ open: vi.fn() });
@@ -197,6 +203,28 @@ describe('useFavorites', () => {
 
       await expect(addition).rejects.toThrow();
       expect(await firstValueFrom(isFavorited)).toBe(false);
+    });
+  });
+
+  describe('tracking', () => {
+    const props = { type: 'movie' as const, id: 1, title: 'Some Movie' };
+
+    it('should track an add', async () => {
+      const { addToFavorites } = await renderStore(() => useFavorites(props));
+
+      await addToFavorites();
+
+      expect(track).toHaveBeenCalledExactlyOnceWith({ action: 'add' });
+    });
+
+    it('should track a removal', async () => {
+      const { removeFromFavorites } = await renderStore(() =>
+        useFavorites(props),
+      );
+
+      await removeFromFavorites();
+
+      expect(track).toHaveBeenCalledExactlyOnceWith({ action: 'remove' });
     });
   });
 });

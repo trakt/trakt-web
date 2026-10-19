@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
 import { findPendingOverride } from '$lib/features/offline/findPendingOverride.ts';
@@ -33,6 +35,7 @@ function getFavoritesPayload({
 
 export function useFavorites({ type, id }: FavoritesStoreProps) {
   const { favorites } = useUser();
+  const { track } = useTrack(AnalyticsEvent.Favorite);
 
   const { actions } = useOfflineActions();
   const { isQueued } = useIsQueued({
@@ -94,7 +97,15 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
     isUpdatingFavorite: favoriting.isPending,
     isFavorited,
     isQueued,
-    addToFavorites: async () => await favoriting.mutate('add'),
-    removeFromFavorites: async () => await favoriting.mutate('remove'),
+    addToFavorites: async () => {
+      track({ action: 'add' });
+
+      return await favoriting.mutate('add');
+    },
+    removeFromFavorites: async () => {
+      track({ action: 'remove' });
+
+      return await favoriting.mutate('remove');
+    },
   };
 }

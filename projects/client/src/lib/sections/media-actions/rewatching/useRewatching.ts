@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
 import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
@@ -17,6 +19,7 @@ type UseRewatchingProps = {
 
 export function useRewatching({ show }: UseRewatchingProps) {
   const { isEnabled } = useFeatureFlag();
+  const { track } = useTrack(AnalyticsEvent.Rewatching);
   const isRewatchingFeatureEnabled = isEnabled(FeatureFlag.Rewatching);
   const { isRewatching } = useIsRewatching({
     type: 'show',
@@ -52,6 +55,8 @@ export function useRewatching({ show }: UseRewatchingProps) {
       return false;
     }
 
+    track({ action: 'start' });
+
     return await start.mutate();
   };
 
@@ -59,6 +64,8 @@ export function useRewatching({ show }: UseRewatchingProps) {
     if (!(await firstValueFrom(isRewatchingFeatureEnabled))) {
       return false;
     }
+
+    track({ action: 'stop' });
 
     return await stop.mutate();
   };

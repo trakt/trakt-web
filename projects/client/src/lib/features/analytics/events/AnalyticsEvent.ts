@@ -124,4 +124,7 @@ export const AnalyticsEvent = {
   MixtapeNoFits: buildEventKey(MIXTAPE_PREFIX, 'no-fits'),
   MixtapeMix: buildEventKey(MIXTAPE_PREFIX, 'mix'),
   MixtapeResult: buildEventKey(MIXTAPE_PREFIX, 'result'),
+
+  Favorite: buildEventKey(MEDIA_ACTION_PREFIX, 'favorite'),
+  Rewatching: buildEventKey(MEDIA_ACTION_PREFIX, 'rewatching'),
 } as const;
