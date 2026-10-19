@@ -18,10 +18,12 @@
   }: ImageProps = $props();
 
   let uri = $state(iffy(() => src));
+  let lastSrc = iffy(() => src);
   let isImageLoaded = $state(false);
 
   $effect(() => {
     uri = src;
+    lastSrc = src;
   });
 
   const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
@@ -38,7 +40,7 @@
   src={uri}
   {alt}
   onerror={(ev) => {
-    resolveEnvironmentUri(src).then((next) => (uri = next.uri));
+    resolveEnvironmentUri(lastSrc).then((next) => (uri = next.uri));
     _onerror?.(ev);
   }}
   onload={_onload}
