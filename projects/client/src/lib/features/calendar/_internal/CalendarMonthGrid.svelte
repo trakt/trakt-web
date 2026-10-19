@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { isBefore } from "date-fns/isBefore";
+  import { isSameMonth } from "date-fns/isSameMonth";
   import { isToday } from "date-fns/isToday";
   import type { Snippet } from "svelte";
   import { startOfDay } from "date-fns/startOfDay";
@@ -28,9 +29,13 @@
 
   const MAX_PREVIEW_ITEMS = 4;
 
+  const referenceDate = $derived(
+    toMonthGridRange(activeDate, getLocale()).reference,
+  );
+
   const matrix = $derived(
     buildMonthMatrix({
-      referenceDate: toMonthGridRange(activeDate, getLocale()).reference,
+      referenceDate,
       activeDate,
       allDays,
       localeKey: getLocale(),
@@ -38,13 +43,17 @@
   );
 
   const todayStart = startOfDay(new Date());
+
+  const activeWeekIndex = $derived(
+    isSameMonth(referenceDate, todayStart) ? matrix.activeWeekIndex : -1,
+  );
 </script>
 
 <div class="calendar-month-grid" data-variant={variant}>
   {#each matrix.weeks as week, weekIndex (week.key)}
     <div
       class="week-row"
-      class:is-active-week={weekIndex === matrix.activeWeekIndex}
+      class:is-active-week={weekIndex === activeWeekIndex}
     >
       {#each week.cells as cell (dateKey(cell.date))}
         <button

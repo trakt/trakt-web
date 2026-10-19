@@ -74,6 +74,8 @@
     }
 
     @include for-tablet-sm-and-below {
+      flex-wrap: nowrap;
+
       &[data-view="week"] .toolbar-week {
         display: none;
       }
@@ -105,6 +107,9 @@
     white-space: nowrap;
 
     @include for-tablet-sm-and-below {
+      display: flex;
+      flex-direction: column-reverse;
+
       font-size: var(--ni-20);
     }
   }
@@ -112,6 +117,11 @@
   .toolbar-year {
     font-weight: 400;
     color: var(--color-calendar-item-indicator);
+
+    @include for-tablet-sm-and-below {
+      font-size: var(--font-size-text);
+      letter-spacing: normal;
+    }
   }
 
   .toolbar-week {

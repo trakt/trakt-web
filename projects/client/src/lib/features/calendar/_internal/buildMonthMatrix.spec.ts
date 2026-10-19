@@ -24,7 +24,7 @@ describe('util: buildMonthMatrix', () => {
     ]);
   });
 
-  it('should truncate the last week at the end of the month', () => {
+  it('should fill the last week with days of the next month', () => {
     const { weeks } = buildMonthMatrix({
       referenceDate: new Date(2026, 10, 1),
       activeDate: new Date(2026, 10, 1),
@@ -32,7 +32,16 @@ describe('util: buildMonthMatrix', () => {
       localeKey: 'en',
     });
 
-    expect(toDays(weeks).at(-1)).toEqual([29, 30]);
+    expect(toDays(weeks).at(-1)).toEqual([29, 30, 1, 2, 3, 4, 5]);
+    expect(weeks.at(-1)?.cells.map((cell) => cell.isOutsideMonth)).toEqual([
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+    ]);
     expect(weeks).toHaveLength(5);
   });
 
