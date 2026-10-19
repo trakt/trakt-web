@@ -1,6 +1,6 @@
 import type { InvalidateActionOptions } from '$lib/requests/models/InvalidateAction.ts';
 import { executeOfflineAction } from './_internal/executeOfflineAction.ts';
-import { isNetworkError } from './_internal/isNetworkError.ts';
+import { isNetworkError } from '$lib/utils/requests/isNetworkError.ts';
 import { offlineActionsStore } from './_internal/offlineActionsStore.ts';
 import { onlineStatusStore } from './_internal/onlineStatusStore.ts';
 import type { OfflineAction } from './models/OfflineAction.ts';

@@ -4,7 +4,7 @@ import { executeOfflineAction } from './executeOfflineAction.ts';
 import { fetchFreshWatchedState } from './fetchFreshWatchedState.ts';
 import { findDuplicateWatch } from './findDuplicateWatch.ts';
 import type { FreshWatchedState } from './FreshWatchedState.ts';
-import { isNetworkError } from './isNetworkError.ts';
+import { isNetworkError } from '$lib/utils/requests/isNetworkError.ts';
 
 export type ReplayOutcome = {
   executedIds: string[];
