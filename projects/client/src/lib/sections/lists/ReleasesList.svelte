@@ -39,7 +39,7 @@
     <ReleasesCalendarItem item={entry} />
   {/snippet}
 
-  {#snippet actions()}
+  {#snippet filters()}
     <EpisodeTypeToggles />
   {/snippet}
 </DrillableMediaList>

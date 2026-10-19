@@ -25,6 +25,7 @@
     variant: externalVariant,
     titleAction,
     contentKey,
+    filters,
   }: MediaListProps<T, M> = $props();
 
   const { list, isLoading } = $derived(
@@ -72,6 +73,7 @@
   {metaInfo}
   {drilldown}
   {titleAction}
+  {filters}
   actions={externalActions ? actions : undefined}
   {contentHash}
   --height-list={height}
