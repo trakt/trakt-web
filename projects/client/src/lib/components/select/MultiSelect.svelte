@@ -187,7 +187,7 @@
 
       border: var(--border-thickness-xxs) solid
         var(--color-select-search-border);
-      border-radius: var(--border-radius-s);
+      border-radius: var(--border-radius-field);
 
       background: var(--color-select-search-background);
       color: var(--color-select-search-foreground);

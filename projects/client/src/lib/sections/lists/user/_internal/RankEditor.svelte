@@ -183,7 +183,7 @@
     text-align: start;
     font-variant-numeric: tabular-nums;
     background: var(--color-input-background);
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-field);
     outline: var(--border-thickness-xxs) solid var(--color-border);
     outline-offset: calc(-1 * var(--border-thickness-xxs));
     transition: outline-color var(--transition-increment) ease-in-out;

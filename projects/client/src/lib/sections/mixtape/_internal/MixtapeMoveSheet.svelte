@@ -151,7 +151,7 @@
     padding: var(--ni-8) var(--ni-10);
 
     border: 0;
-    border-radius: var(--border-radius-s);
+    border-radius: var(--border-radius-field);
     background: var(--color-background);
     color: var(--color-text-primary);
     font: inherit;

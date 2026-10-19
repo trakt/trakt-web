@@ -182,7 +182,7 @@
     padding: var(--ni-12);
     box-sizing: border-box;
 
-    border-radius: var(--border-radius-l);
+    border-radius: var(--border-radius-field);
     border: var(--border-thickness-xxs) solid var(--color-border-select);
 
     background-color: var(--color-background-select);
