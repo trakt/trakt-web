@@ -6,14 +6,21 @@
   import TwoYearDealCard from "./TwoYearDealCard.svelte";
   import { useVip } from "./useVip";
   import { findTwoYearDealPlan } from "./utils/findTwoYearDealPlan";
+  import { isPaypalGateway } from "./utils/isPaypalGateway";
   import VipContentContainer from "./VipContentContainer.svelte";
   import VipHeader from "./VipHeader.svelte";
 
-  const { plans } = useVip();
+  const { plans, subscription } = useVip();
 
   const activePlans = $derived($plans.length > 0 ? $plans : VIP_PLANS);
 
-  const dealPlan = $derived(findTwoYearDealPlan(activePlans));
+  const isPaypalSwitch = $derived(
+    isPaypalGateway($subscription?.gateway) && !$subscription?.isCancelled,
+  );
+
+  const dealPlan = $derived(
+    isPaypalSwitch ? findTwoYearDealPlan(activePlans) : undefined,
+  );
 </script>
 
 <VipContentContainer>

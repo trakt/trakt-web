@@ -3,45 +3,25 @@
   import type { VipDealPlan } from "./models/VipDealPlan";
   import SubscriptionTag from "./SubscriptionTag.svelte";
   import UpgradeButton from "./UpgradeButton.svelte";
-  import { useVip } from "./useVip";
-  import { isPaypalGateway } from "./utils/isPaypalGateway";
   import { toVipPriceLabel } from "./utils/toVipPriceLabel";
 
   const { plan }: { plan: VipDealPlan } = $props();
 
-  const { subscription } = useVip();
-
-  // A cancelled PayPal subscription is already gone, so its owner is coming
-  // back rather than switching.
-  const isPaypalSwitch = $derived(
-    isPaypalGateway($subscription?.gateway) && !$subscription?.isCancelled,
-  );
-
   const price = $derived(toVipPriceLabel(plan.discount.discountedAmount));
   const renewalPrice = $derived(toVipPriceLabel(plan.totalPrice));
-
-  const copy = $derived(
-    isPaypalSwitch
-      ? {
-        eyebrow: m.tag_text_vip_deal_paypal_switch(),
-        header: m.header_vip_deal_paypal_switch({ price }),
-        description: m.text_vip_deal_paypal_switch({ price, renewalPrice }),
-      }
-      : {
-        eyebrow: m.tag_text_vip_deal_welcome_back(),
-        header: m.header_vip_deal_welcome_back({ price }),
-        description: m.text_vip_deal_welcome_back({ price, renewalPrice }),
-      },
-  );
 </script>
 
 <section class="trakt-two-year-deal-card">
   <SubscriptionTag variant="highlight">{m.tag_text_deal_price()}</SubscriptionTag>
 
   <div class="deal-copy">
-    <p class="deal-eyebrow tag bold uppercase">{copy.eyebrow}</p>
-    <h2 class="deal-header">{copy.header}</h2>
-    <p class="deal-description secondary">{copy.description}</p>
+    <p class="deal-eyebrow tag bold uppercase">
+      {m.tag_text_vip_deal_paypal_switch()}
+    </p>
+    <h2 class="deal-header">{m.header_vip_deal_paypal_switch({ price })}</h2>
+    <p class="deal-description secondary">
+      {m.text_vip_deal_paypal_switch({ price, renewalPrice })}
+    </p>
   </div>
 
   <div class="deal-offer">
