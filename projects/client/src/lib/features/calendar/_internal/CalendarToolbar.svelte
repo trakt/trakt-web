@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getLocale } from "$lib/features/i18n";
   import type { Snippet } from "svelte";
-  import type { CalendarNavigationProps } from "../../models/CalendarNavigationProps";
+  import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
   import type { CalendarView } from "../models/CalendarView.ts";
   import CalendarHeader from "./CalendarHeader.svelte";
   import { toCalendarDayParts } from "./toCalendarDayParts.ts";
@@ -52,7 +52,7 @@
   {/if}
 
   {#if hasControls}
-    <CalendarHeader {...headerProps} {activeDate} variant="bar" />
+    <CalendarHeader {...headerProps} {activeDate} />
   {/if}
 </div>
 

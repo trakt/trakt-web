@@ -48,7 +48,7 @@
     flex-shrink: 0;
   }
 
-  :global(.trakt-calendar-header[data-variant="bar"]) .trakt-calendar-view-selector {
+  :global(.trakt-calendar-header) .trakt-calendar-view-selector {
     --segmented-select-background: transparent;
   }
 </style>

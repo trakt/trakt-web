@@ -5,7 +5,7 @@ import { differenceInCalendarDays } from 'date-fns/differenceInCalendarDays';
 import { endOfMonth } from 'date-fns/endOfMonth';
 import { isSameDay } from 'date-fns/isSameDay';
 import { startOfMonth } from 'date-fns/startOfMonth';
-import { dateKey } from '../../_internal/dateKey.ts';
+import { dateKey } from './dateKey.ts';
 
 type MonthCell<T> = {
   date: Date;

@@ -1,6 +1,6 @@
 import type { Snippet } from 'svelte';
-import type { CalendarOrder } from '../../models/CalendarOrder.ts';
-import type { CalendarPeriod } from '../../models/CalendarLayoutProps.ts';
+import type { CalendarOrder } from './CalendarOrder.ts';
+import type { CalendarPeriod } from './CalendarLayoutProps.ts';
 import type { CalendarView } from './CalendarView.ts';
 
 export type CalendarBoardLayoutProps<T> = {

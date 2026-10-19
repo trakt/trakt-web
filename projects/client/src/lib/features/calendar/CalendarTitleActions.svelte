@@ -1,6 +1,6 @@
 <script lang="ts">
-  import CalendarFeedMenu from "../CalendarFeedMenu.svelte";
-  import EpisodeTypeToggles from "../EpisodeTypeToggles.svelte";
+  import CalendarFeedMenu from "./CalendarFeedMenu.svelte";
+  import EpisodeTypeToggles from "./EpisodeTypeToggles.svelte";
 
   const { hasFeed = false }: { hasFeed?: boolean } = $props();
 </script>

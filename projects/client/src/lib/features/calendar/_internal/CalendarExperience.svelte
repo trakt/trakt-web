@@ -23,16 +23,16 @@
   import { toMonthGridRange } from "./toMonthGridRange.ts";
   import { calendarViewParam } from "./calendarViewParam.ts";
   import CalendarWeekdayRow from "./CalendarWeekdayRow.svelte";
-  import { dateKey } from "../../_internal/dateKey";
-  import { useEpisodeType } from "../../useEpisodeType";
-  import type { CalendarItem as CalendarItemEntry } from "../../_internal/useCalendar";
+  import { dateKey } from "./dateKey";
+  import { useEpisodeType } from "../useEpisodeType";
+  import type { CalendarItem as CalendarItemEntry } from "./useCalendar";
   import type { Snippet } from "svelte";
   import type { CalendarSource } from "../models/CalendarSource";
   import CalendarTitleActions from "../CalendarTitleActions.svelte";
   import CalendarBoardLayout from "./CalendarBoardLayout.svelte";
-  import { getCalendarContext } from "../../context/getCalendarContext";
-  import { useCalendarPeriod } from "../../context/useCalendarPeriod";
-  import type { CalendarPeriod } from "../../models/CalendarLayoutProps";
+  import { getCalendarContext } from "../context/getCalendarContext";
+  import { useCalendarPeriod } from "../context/useCalendarPeriod";
+  import type { CalendarPeriod } from "../models/CalendarLayoutProps";
   import type { CalendarView } from "../models/CalendarView.ts";
 
   const {
@@ -234,7 +234,6 @@
       activeDate={selectedDate}
       view={calendarView}
       onToggleView={toggleView}
-      variant="bar"
     />
     <CalendarWeekdayRow />
     <CalendarMonthGrid

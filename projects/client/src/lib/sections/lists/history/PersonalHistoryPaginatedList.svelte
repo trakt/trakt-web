@@ -1,8 +1,5 @@
 <script lang="ts">
-  import CalendarLayout from "$lib/features/calendar/CalendarLayout.svelte";
-  import HistoryCalendar from "$lib/features/calendar/v2/HistoryCalendar.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
+  import HistoryCalendar from "$lib/features/calendar/HistoryCalendar.svelte";
   import { useCalendarPeriod } from "$lib/features/calendar/context/useCalendarPeriod";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
@@ -39,13 +36,9 @@
   const now = new Date();
 
   // FIXME: add support for prev/next/reset to this paginated variant
-
-  const { isEnabled } = useFeatureFlag();
-  const isRedesign = isEnabled(FeatureFlag.CalendarRedesign);
-  const Layout = $derived($isRedesign ? HistoryCalendar : CalendarLayout);
 </script>
 
-<Layout
+<HistoryCalendar
   activeDate={$activeDate}
   isLoading={$isLoading}
   onLoadMore={loadMore}
@@ -57,4 +50,4 @@
   {#snippet item(media)}
     <RecentlyWatchedItem {media} style="summary" isActionable />
   {/snippet}
-</Layout>
+</HistoryCalendar>

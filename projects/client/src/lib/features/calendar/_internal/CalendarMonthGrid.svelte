@@ -6,11 +6,11 @@
   import { isToday } from "date-fns/isToday";
   import type { Snippet } from "svelte";
   import { startOfDay } from "date-fns/startOfDay";
-  import type { Calendar } from "../../models/Calendar.ts";
+  import type { Calendar } from "../models/Calendar.ts";
   import { buildMonthMatrix } from "./buildMonthMatrix.ts";
   import { scrollToCalendarDay } from "./scrollToCalendarDay.ts";
   import { toMonthGridRange } from "./toMonthGridRange.ts";
-  import { dateKey } from "../../_internal/dateKey.ts";
+  import { dateKey } from "./dateKey.ts";
 
   const {
     allDays,
