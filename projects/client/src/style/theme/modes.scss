@@ -294,17 +294,14 @@
     var(--shade-900) 12%,
     transparent
   );
-  --color-filter-chip-background: color-mix(
+  --color-filter-chip-background: var(--color-segmented-selector-background);
+  --color-filter-chip-border: var(--color-segmented-selector-border);
+  --color-filter-chip-border-hover: color-mix(
     in srgb,
-    var(--purple-500) 12%,
+    var(--purple-500) 45%,
     transparent
   );
-  --color-filter-chip-border: color-mix(
-    in srgb,
-    var(--purple-500) 40%,
-    transparent
-  );
-  --color-filter-chip-text: var(--purple-700);
+  --color-filter-chip-text: var(--color-segmented-selector-foreground);
   --color-modal-background: var(--color-card-background);
   --color-option-list-background: var(--shade-30);
   --color-option-list-border: var(--shade-100);
@@ -897,17 +894,14 @@
     var(--shade-10) 12%,
     transparent
   );
-  --color-filter-chip-background: color-mix(
+  --color-filter-chip-background: var(--color-segmented-selector-background);
+  --color-filter-chip-border: var(--color-segmented-selector-border);
+  --color-filter-chip-border-hover: color-mix(
     in srgb,
-    var(--purple-500) 22%,
+    var(--purple-500) 45%,
     transparent
   );
-  --color-filter-chip-border: color-mix(
-    in srgb,
-    var(--purple-500) 55%,
-    transparent
-  );
-  --color-filter-chip-text: var(--shade-30);
+  --color-filter-chip-text: var(--color-segmented-selector-foreground);
   --color-modal-background: var(--color-card-background);
   --color-option-list-background: color-mix(
     in srgb,

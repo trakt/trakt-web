@@ -226,17 +226,29 @@
     }
 
     &[data-variant="chip"] {
+      --button-height: var(--segmented-select-segment-height);
+      --chip-background: var(
+        --select-chip-background,
+        var(--color-segmented-track-background)
+      );
+      --chip-border: var(
+        --select-chip-border,
+        var(--color-segmented-track-border)
+      );
+
       max-width: 100%;
-      padding: var(--ni-4) var(--ni-10);
+      padding: var(--ni-4) var(--ni-12);
       gap: var(--gap-xxs);
 
-      border-color: var(--select-chip-border, transparent);
-      background-color: transparent;
+      border-radius: var(--border-radius-pill);
+      border-color: var(--chip-border);
+      background-color: var(--chip-background);
       color: var(--color-text-secondary);
 
       &[data-has-value="true"] {
-        border-color: var(--color-filter-chip-border);
-        background-color: var(--color-filter-chip-background);
+        --chip-background: var(--color-filter-chip-background);
+        --chip-border: var(--color-filter-chip-border);
+
         color: var(--color-filter-chip-text);
       }
 
@@ -244,8 +256,12 @@
         @include for-mouse {
           &:hover,
           &:focus-visible {
-            border-color: var(--color-border);
-            background-color: transparent;
+            border-color: var(--chip-border);
+          }
+
+          &:not([data-has-value="true"]):hover,
+          &:not([data-has-value="true"]):focus-visible {
+            border-color: var(--color-filter-chip-border-hover);
             color: var(--color-text-primary);
           }
         }

@@ -91,7 +91,7 @@
         align-items: stretch;
         gap: 0;
 
-        border-radius: var(--border-radius-m);
+        border-radius: var(--border-radius-pill);
         box-shadow: inset 0 0 0 var(--border-thickness-xxs)
           var(--color-filter-group-border);
 
@@ -112,6 +112,7 @@
 
         .trakt-filter-control {
           --select-chip-border: transparent;
+          --select-chip-background: transparent;
           --color-filter-chip-border: transparent;
           --color-filter-chip-background: transparent;
 
