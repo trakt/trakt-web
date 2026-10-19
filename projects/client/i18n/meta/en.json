@@ -11888,14 +11888,6 @@
       "default": "VIP veteran status",
       "description": "Product feature name for the preview feature that marks members who have kept VIP without a break for years."
     },
-    "preview_feature_title_calendar_redesign": {
-      "default": "Calendar redesign",
-      "description": "Product feature name for the preview feature with the redesigned calendar and releases pages."
-    },
-    "preview_feature_description_calendar_redesign": {
-      "default": "A week board with posters, a month view, a docked sidebar with a mini calendar and collapsible filters, and a day drawer on phones.",
-      "description": "Description for the calendar redesign preview feature."
-    },
     "preview_feature_description_vip_veteran": {
       "default": "Shows how long members have kept VIP without a break, with a Veteran or Legend badge, a coloured avatar ring and a few celebrations on your own profile.",
       "description": "Description for the VIP veteran status preview feature."

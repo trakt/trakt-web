@@ -1,76 +1,14 @@
 <script lang="ts">
-  import { useDiscover } from "$lib/features/filters/useDiscover";
-  import { getDaysDifference } from "$lib/utils/date/getDaysDifference";
-  import { useFilter } from "../filters/useFilter";
-  import { useEpisodeType } from "./useEpisodeType";
   import {
     useCalendar,
     type CalendarItem as CalendarItemEntry,
   } from "./_internal/useCalendar";
-  import CalendarFeedMenu from "./CalendarFeedMenu.svelte";
   import CalendarItem from "./CalendarItem.svelte";
-  import CalendarLayout from "./CalendarLayout.svelte";
-  import { useCalendarPeriod } from "./context/useCalendarPeriod";
-  import type { CalendarPeriod } from "./models/CalendarLayoutProps";
-
-  const order = "chronological" as const;
-
-  const {
-    startDate,
-    endDate,
-    next,
-    previous,
-    reset,
-    loadMore,
-    accumulate,
-    activeDate,
-  } = useCalendarPeriod();
-  const { mode } = useDiscover();
-
-  const days = $derived(getDaysDifference($startDate, $endDate));
-
-  const { filterMap } = useFilter();
-
-  const { episodeType } = useEpisodeType();
-
-  const { isLoading, calendar, hasUpstreamItems } = $derived(
-    useCalendar({
-      start: $startDate,
-      days,
-      type: $mode,
-      filter: $filterMap,
-      episodeType,
-    }),
-  );
-
-  const periods: CalendarPeriod<CalendarItemEntry>[] = $derived(
-    accumulate({
-      calendar: $calendar,
-      fingerprint: `${$mode}:${JSON.stringify($filterMap)}:${$episodeType}`,
-      isEmpty: !$hasUpstreamItems,
-    }),
-  );
-
-  const navigation = $derived({
-    onNext: next,
-    onPrevious: previous,
-    onReset: reset,
-  });
+  import CalendarExperience from "./_internal/CalendarExperience.svelte";
 </script>
 
-<CalendarLayout
-  activeDate={$activeDate}
-  isLoading={$isLoading}
-  {navigation}
-  onLoadMore={loadMore}
-  {periods}
-  {order}
->
-  {#snippet actions()}
-    <CalendarFeedMenu />
-  {/snippet}
+{#snippet item(media: CalendarItemEntry)}
+  <CalendarItem item={media} variant="summary" />
+{/snippet}
 
-  {#snippet item(media)}
-    <CalendarItem item={media} variant="summary" />
-  {/snippet}
-</CalendarLayout>
+<CalendarExperience useSource={useCalendar} sourceKey="calendar" {item} hasFeed />

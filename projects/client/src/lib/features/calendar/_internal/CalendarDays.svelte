@@ -1,8 +1,9 @@
 <script lang="ts" generics="T extends { key: string }">
+  import { getLocale } from "$lib/features/i18n";
   import type { SwipeDirection } from "$lib/components/gestures/models/SwipeDirection";
-  import { isSameWeek } from "date-fns";
   import type { Calendar } from "../models/Calendar";
   import type { CalendarNavigationProps } from "../models/CalendarNavigationProps";
+  import { isMaxWeek } from "./isMaxWeek.ts";
   import CalendarSwipe from "./CalendarSwipe.svelte";
   import { dateKey } from "./dateKey";
   import Day from "./Day.svelte";
@@ -13,7 +14,7 @@
     $props();
 
   const isNextDisabled = $derived(
-    maxDate ? isSameWeek(activeDate, maxDate) : false,
+    isMaxWeek({ date: activeDate, maxDate, locale: getLocale() }),
   );
   const directions: SwipeDirection[] = $derived(
     isNextDisabled ? ["right"] : ["left", "right"],
@@ -48,16 +49,17 @@
     position: relative;
     width: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    align-items: start;
 
     gap: var(--gap-micro);
 
     border-radius: var(--border-radius-s);
 
     :global(.trakt-calendar-day-button) {
-      flex: 1;
+      width: 100%;
+      min-width: 0;
     }
   }
 </style>

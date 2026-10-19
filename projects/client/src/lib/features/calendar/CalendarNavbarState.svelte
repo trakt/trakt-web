@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import { useEpisodeType } from "../useEpisodeType";
+  import { useEpisodeType } from "./useEpisodeType";
   import CalendarTitleActions from "./CalendarTitleActions.svelte";
   import { useIsCalendarDocked } from "./useIsCalendarDocked";
 

@@ -1,26 +1,12 @@
 <script lang="ts">
+  import CalendarNavbarState from "$lib/features/calendar/CalendarNavbarState.svelte";
   import CalendarProvider from "$lib/features/calendar/CalendarProvider.svelte";
-  import EpisodeTypeToggles from "$lib/features/calendar/EpisodeTypeToggles.svelte";
   import ReleasesCalendar from "$lib/features/calendar/ReleasesCalendar.svelte";
-  import ReleasesCalendarV2 from "$lib/features/calendar/v2/ReleasesCalendar.svelte";
-  import CalendarNavbarState from "$lib/features/calendar/v2/CalendarNavbarState.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
-  import { useEpisodeType } from "$lib/features/calendar/useEpisodeType";
-  import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/assets";
-
-  const { current } = useDiscover();
-  const { current: episodeType, isApplicable } = useEpisodeType();
 </script>
-
-{#snippet episodeTypeToggles()}
-  <EpisodeTypeToggles />
-{/snippet}
 
 <TraktPage
   audience="authenticated"
@@ -29,25 +15,8 @@
   info={{ overview: m.page_description_releases() }}
 >
   <CalendarProvider>
-    <RenderForFeature flag={FeatureFlag.CalendarRedesign}>
-      {#snippet enabled()}
-        <CalendarNavbarState title={m.list_title_releases()} />
-        <TraktPageCoverSetter />
-        <ReleasesCalendarV2 />
-      {/snippet}
-
-    <NavbarStateSetter
-      hasFilters
-      header={{
-        title: m.list_title_releases(),
-        metaInfo: $isApplicable ? $episodeType.text() : $current.text(),
-        actions: episodeTypeToggles,
-      }}
-    />
-
+    <CalendarNavbarState title={m.list_title_releases()} />
     <TraktPageCoverSetter />
-
     <ReleasesCalendar />
-    </RenderForFeature>
   </CalendarProvider>
 </TraktPage>

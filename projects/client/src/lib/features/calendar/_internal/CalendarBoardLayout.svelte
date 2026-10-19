@@ -1,10 +1,10 @@
 <script lang="ts" generics="T extends { key: string }">
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import { useLazyLoader } from "$lib/sections/lists/drilldown/_internal/useLazyLoader";
-  import { dateKey } from "../../_internal/dateKey";
-  import EmptyPeriod from "../../_internal/EmptyPeriod.svelte";
-  import ScrollSpy from "../../_internal/ScrollSpy.svelte";
-  import { getCalendarContext } from "../../context/getCalendarContext";
+  import { dateKey } from "./dateKey";
+  import EmptyPeriod from "./EmptyPeriod.svelte";
+  import ScrollSpy from "./ScrollSpy.svelte";
+  import { getCalendarContext } from "../context/getCalendarContext";
   import type { CalendarBoardLayoutProps } from "../models/CalendarBoardLayoutProps";
   import CalendarItems from "./CalendarItems.svelte";
   import CalendarWeekItems from "./CalendarWeekItems.svelte";

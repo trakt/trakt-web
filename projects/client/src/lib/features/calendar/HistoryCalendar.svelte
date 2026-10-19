@@ -2,9 +2,9 @@
   import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import { tick } from "svelte";
-  import { dateKey } from "../_internal/dateKey";
-  import { getCalendarContext } from "../context/getCalendarContext";
-  import type { CalendarLayoutProps } from "../models/CalendarLayoutProps";
+  import { dateKey } from "./_internal/dateKey";
+  import { getCalendarContext } from "./context/getCalendarContext";
+  import type { CalendarLayoutProps } from "./models/CalendarLayoutProps";
   import CalendarBoardLayout from "./_internal/CalendarBoardLayout.svelte";
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarHeader from "./_internal/CalendarHeader.svelte";
@@ -69,7 +69,6 @@
         {navigation}
         {maxDate}
         activeDate={selectedDate}
-        variant="bar"
       />
     {/if}
     <div class="history-calendar-dates">
@@ -145,7 +144,7 @@
       &:global(.is-scrolled) {
         gap: var(--ni-0);
 
-        :global(.trakt-calendar-header[data-variant="bar"]) {
+        :global(.trakt-calendar-header) {
           height: var(--ni-0);
         }
       }

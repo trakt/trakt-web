@@ -1,4 +1,4 @@
-import { dateKey } from '../../_internal/dateKey.ts';
+import { dateKey } from './dateKey.ts';
 
 export function scrollToCalendarDay(date: Date) {
   const element = document.getElementById(dateKey(date));

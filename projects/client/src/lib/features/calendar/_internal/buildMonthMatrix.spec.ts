@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dateKey } from '../../_internal/dateKey.ts';
+import { dateKey } from './dateKey.ts';
 import { buildMonthMatrix } from './buildMonthMatrix.ts';
 
 const toDays = (

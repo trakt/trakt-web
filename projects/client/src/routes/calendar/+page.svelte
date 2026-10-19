@@ -1,26 +1,12 @@
 <script lang="ts">
   import Calendar from "$lib/features/calendar/Calendar.svelte";
-  import CalendarV2 from "$lib/features/calendar/v2/Calendar.svelte";
-  import CalendarNavbarState from "$lib/features/calendar/v2/CalendarNavbarState.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
-  import EpisodeTypeToggles from "$lib/features/calendar/EpisodeTypeToggles.svelte";
-  import { useEpisodeType } from "$lib/features/calendar/useEpisodeType";
-  import { useDiscover } from "$lib/features/filters/useDiscover";
+  import CalendarNavbarState from "$lib/features/calendar/CalendarNavbarState.svelte";
   import * as m from "$lib/features/i18n/messages";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
 
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
-
-  const { current } = useDiscover();
-  const { current: episodeType, isApplicable } = useEpisodeType();
 </script>
-
-{#snippet episodeTypeToggles()}
-  <EpisodeTypeToggles />
-{/snippet}
 
 <TraktPage
   audience="authenticated"
@@ -29,22 +15,6 @@
 >
   <TraktPageCoverSetter />
 
-  <RenderForFeature flag={FeatureFlag.CalendarRedesign}>
-    {#snippet enabled()}
-      <CalendarNavbarState title={m.header_calendar()} hasFeed />
-      <CalendarV2 />
-    {/snippet}
-
-  <ResponsiveNavbarStateSetter
-    contentToggle="discover"
-    hasFilters
-    header={{
-      title: m.header_calendar(),
-      metaInfo: $isApplicable ? $episodeType.text() : $current.text(),
-      actions: episodeTypeToggles,
-    }}
-  />
-
+  <CalendarNavbarState title={m.header_calendar()} hasFeed />
   <Calendar />
-  </RenderForFeature>
 </TraktPage>

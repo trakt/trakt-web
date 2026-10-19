@@ -5,9 +5,9 @@
   import { isToday } from "date-fns/isToday";
   import { startOfDay } from "date-fns/startOfDay";
   import type { Snippet } from "svelte";
-  import type { Calendar } from "../../models/Calendar.ts";
+  import type { Calendar } from "../models/Calendar.ts";
   import CalendarDayHeader from "./CalendarDayHeader.svelte";
-  import { dateKey } from "../../_internal/dateKey.ts";
+  import { dateKey } from "./dateKey.ts";
   import { toCalendarItemCountLabel } from "./toCalendarItemCountLabel.ts";
   import { toCalendarWeekTitle } from "./toCalendarWeekTitle.ts";
 
