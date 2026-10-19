@@ -1,3 +1,4 @@
+import type { HTMLInputAttributes } from 'svelte/elements';
 import type { ValidationProps } from './ValidationProps.ts';
 
 export type FormInputProps = {
@@ -8,4 +9,6 @@ export type FormInputProps = {
   placeholder: string;
   required?: boolean;
   validation?: ValidationProps;
+  type?: 'text' | 'url' | 'password';
+  autocomplete?: HTMLInputAttributes['autocomplete'];
 };

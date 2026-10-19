@@ -5,6 +5,7 @@
   import TabView from "$lib/components/tabs/TabView.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import JellyfinSync from "./_internal/plex-sync-v2/JellyfinSync.svelte";
   import PlexSyncV2 from "./_internal/plex-sync-v2/PlexSyncV2.svelte";
   import SettingsVipUpsell from "./_internal/SettingsVipUpsell.svelte";
   import SyncWebhooks from "./_internal/webhooks/SyncWebhooks.svelte";
@@ -30,7 +31,10 @@
 {/snippet}
 
 {#snippet serversTab()}
-  <PlexSyncV2 />
+  <div class="trakt-sync-servers">
+    <PlexSyncV2 />
+    <JellyfinSync />
+  </div>
 {/snippet}
 
 {#snippet webhooksTab()}
@@ -64,3 +68,12 @@
   ]}
   {onChange}
 />
+
+<style lang="scss">
+  .trakt-sync-servers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xl);
+    min-width: 0;
+  }
+</style>

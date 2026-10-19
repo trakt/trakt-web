@@ -15,6 +15,8 @@
     autofocus = false,
     required,
     validation,
+    type = "text",
+    autocomplete,
   }: FormInputProps = $props();
 
   let inputElement: HTMLInputElement;
@@ -49,7 +51,8 @@
     bind:this={inputElement}
     class="trakt-form-input"
     class:has-error={$hasError}
-    type="text"
+    {type}
+    {autocomplete}
     {placeholder}
     {disabled}
     {required}

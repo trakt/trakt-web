@@ -22,6 +22,7 @@
   import PlexProfilePicker from "./PlexProfilePicker.svelte";
   import PlexProfilePickerSkeleton from "./PlexProfilePickerSkeleton.svelte";
   import PlexWebhookOnlyNote from "./PlexWebhookOnlyNote.svelte";
+  import { toAvailableFeeds } from "./toAvailableFeeds.ts";
   import { toManageChanges } from "./toManageChanges.ts";
   import { useManageServer } from "./useManageServer.ts";
   import { useServerActions } from "./useServerActions.ts";
@@ -58,7 +59,10 @@
   const serverLabel = $derived(
     isAccountOnly
       ? m.label_media_sync_plex_watchlist()
-      : connection.serverName ?? m.label_plex_server(),
+      : connection.serverName ??
+        (connection.provider === "jellyfin"
+          ? m.label_jellyfin_server()
+          : m.label_plex_server()),
   );
   const isWebhookOnly = $derived(connection.status === "webhook_only");
   const needsLibraries = $derived(!isAccountOnly && !isWebhookOnly);
@@ -193,7 +197,7 @@
     {:else}
       <PlexFeedSwitches
         {feeds}
-        available={isAccountOnly ? ["watchlist"] : undefined}
+        available={toAvailableFeeds(connection)}
         onToggle={toggleFeed}
       />
     {/if}

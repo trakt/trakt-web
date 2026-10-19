@@ -1,10 +1,11 @@
 <script lang="ts">
-  import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
+  import MediaServerLogo from "$lib/components/icons/MediaServerLogo.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { mediaSyncRunsQuery } from "$lib/requests/media-sync/mediaSyncRunsQuery.ts";
+  import type { VipUpsellSource } from "$lib/features/upsell/models/VipUpsellSource.ts";
   import type { MediaSyncConnection } from "$lib/requests/media-sync/models/MediaSyncConnection.ts";
   import { iffy } from "$lib/utils/function/iffy.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate.ts";
@@ -20,6 +21,14 @@
 
   const { connection }: { connection: MediaSyncConnection } = $props();
 
+  const COLLECTION_LIMIT_SOURCE: Record<
+    MediaSyncConnection["provider"],
+    VipUpsellSource
+  > = {
+    plex: "plex-settings-collection-limit",
+    jellyfin: "jellyfin-settings-collection-limit",
+  };
+
   const query = useQuery(
     mediaSyncRunsQuery({ connectionId: iffy(() => connection.id) }),
   );
@@ -33,7 +42,12 @@
   );
   const hasFailed = query.pipe(map(({ isError }) => isError));
 
-  const serverLabel = $derived(connection.serverName ?? m.label_plex_server());
+  const serverLabel = $derived(
+    connection.serverName ??
+      (connection.provider === "jellyfin"
+        ? m.label_jellyfin_server()
+        : m.label_plex_server()),
+  );
 
   const STATUS_LABEL: Record<SyncCycle["status"], () => string> = {
     running: m.tag_media_sync_run_running,
@@ -78,18 +92,18 @@
   }
 </script>
 
-{#snippet plexIcon()}
-  <PlexLogo />
+{#snippet providerIcon()}
+  <MediaServerLogo provider={connection.provider} />
 {/snippet}
 
 <div class="trakt-plex-sync-runs">
   {#if connection.collectionLimitReached}
     <RenderFor audience="free">
       <SettingsVipUpsell
-        icon={plexIcon}
+        icon={providerIcon}
         title={m.header_media_sync_collection_limit()}
         description={m.description_media_sync_collection_limit()}
-        source="plex-settings-collection-limit"
+        source={COLLECTION_LIMIT_SOURCE[connection.provider]}
       />
     </RenderFor>
   {/if}

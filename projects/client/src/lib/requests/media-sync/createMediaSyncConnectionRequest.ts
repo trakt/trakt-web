@@ -8,7 +8,8 @@ import type { MediaSyncConnection } from './models/MediaSyncConnection.ts';
 import type { MediaSyncFeed } from './models/MediaSyncFeed.ts';
 import type { MediaSyncResult } from './models/MediaSyncResult.ts';
 
-type CreatePlexConnectionParams = {
+type CreatePlexConnection = {
+  provider?: 'plex';
   attemptId: string;
   serverId: string;
   libraryIds: string[];
@@ -16,34 +17,58 @@ type CreatePlexConnectionParams = {
   syncAccountId: string | null;
   importHistory: boolean;
   webhookOnly: boolean;
-} & ApiParams;
+};
+
+type CreateJellyfinConnection = {
+  provider: 'jellyfin';
+  attemptId: string;
+  libraryIds: string[];
+  feeds: MediaSyncFeed[];
+  importHistory: boolean;
+};
+
+type CreateMediaSyncConnectionParams = (
+  | CreatePlexConnection
+  | CreateJellyfinConnection
+) &
+  ApiParams;
+
+function toBody(connection: CreatePlexConnection | CreateJellyfinConnection) {
+  if (connection.provider === 'jellyfin') {
+    return {
+      provider: 'jellyfin',
+      attempt_id: connection.attemptId,
+      library_ids: connection.libraryIds,
+      feeds: connection.feeds,
+      import_history: connection.importHistory,
+    };
+  }
+
+  return {
+    provider: 'plex',
+    attempt_id: connection.attemptId,
+    server_id: connection.serverId,
+    library_ids: connection.libraryIds,
+    feeds: connection.feeds,
+    sync_account_id: connection.syncAccountId ?? undefined,
+    import_history: connection.importHistory,
+    webhook_only: connection.webhookOnly || undefined,
+  };
+}
 
 export async function createMediaSyncConnectionRequest({
   fetch,
-  attemptId,
-  serverId,
-  libraryIds,
-  feeds,
-  syncAccountId,
-  importHistory,
-  webhookOnly,
-}: CreatePlexConnectionParams): Promise<MediaSyncResult<MediaSyncConnection>> {
+  ...connection
+}: CreateMediaSyncConnectionParams): Promise<
+  MediaSyncResult<MediaSyncConnection>
+> {
   const response = await rawApiFetch({
     fetch,
     path: '/v3/users/me/sync/connections',
     init: {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        provider: 'plex',
-        attempt_id: attemptId,
-        server_id: serverId,
-        library_ids: libraryIds,
-        feeds,
-        sync_account_id: syncAccountId ?? undefined,
-        import_history: importHistory,
-        webhook_only: webhookOnly || undefined,
-      }),
+      body: JSON.stringify(toBody(connection)),
     },
   });
   if (!response.ok) {

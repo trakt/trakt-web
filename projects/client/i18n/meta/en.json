@@ -10433,10 +10433,6 @@
       "default": "Upgrade to VIP to automatically scrobble what you're watching in real time with Plex webhooks.",
       "description": "Body copy on the upsell card shown to free members in the Plex webhook tab."
     },
-    "label_plex_connection": {
-      "default": "Connection",
-      "description": "Label for the Plex connection row in settings."
-    },
     "label_plex_connected": {
       "default": "Connected to Plex",
       "description": "Status label shown when the user has a connected Plex account."
@@ -10495,9 +10491,9 @@
       "default": "Server",
       "description": "Label for the Plex server row in settings."
     },
-    "header_plex_synced_servers": {
-      "default": "Synced Servers",
-      "description": "Title of the settings card listing the Plex servers currently syncing."
+    "header_plex_servers": {
+      "default": "Plex Servers",
+      "description": "Heading above the list of connected Plex servers."
     },
     "description_plex_synced_servers": {
       "default": "Automatically sync your watched history, library, ratings and watchlist.",
@@ -13920,6 +13916,177 @@
     "text_mixtape_pick_prompt": {
       "default": "Tap a poster you loved",
       "description": "Shown in the Mixtape bottom bar before anything is picked."
+    },
+    "description_jellyfin_sync": {
+      "default": "Connect your Jellyfin server to sync watch history and collections with Trakt.",
+      "description": "Description on the Jellyfin card in the sync settings."
+    },
+    "button_connect_jellyfin": {
+      "default": "Connect Jellyfin",
+      "description": "Button that starts connecting a Jellyfin server."
+    },
+    "button_label_jellyfin_connect": {
+      "default": "Connect your Jellyfin server",
+      "description": "Accessible label for the button that starts connecting a Jellyfin server."
+    },
+    "button_label_jellyfin_add_server": {
+      "default": "Add a Jellyfin server",
+      "description": "Accessible label for the button that connects one more Jellyfin server."
+    },
+    "description_media_sync_add_jellyfin_server": {
+      "default": "Connect another Jellyfin server to sync it too.",
+      "description": "Description on the Jellyfin card once a server is connected, inviting the user to add another."
+    },
+    "header_jellyfin_vip_upsell": {
+      "default": "Jellyfin sync is a VIP beta",
+      "description": "Heading on the upsell card shown to free members on the Jellyfin card. Jellyfin sync is in beta for VIP members only."
+    },
+    "description_jellyfin_vip_upsell": {
+      "default": "Upgrade to VIP to sync watch history and collections from your Jellyfin server while it's in beta.",
+      "description": "Body copy on the upsell card shown to free members on the Jellyfin card."
+    },
+    "header_jellyfin_synced_servers": {
+      "default": "Jellyfin Servers",
+      "description": "Heading above the list of connected Jellyfin servers."
+    },
+    "description_jellyfin_synced_servers": {
+      "default": "Automatically sync your watch history and library.",
+      "description": "Description above the list of connected Jellyfin servers."
+    },
+    "label_jellyfin_server": {
+      "default": "Jellyfin server",
+      "description": "Fallback name for a connected Jellyfin server that has no name."
+    },
+    "description_media_sync_unauthorized_jellyfin": {
+      "default": "Jellyfin no longer accepts Trakt's access. Reconnect to keep syncing.",
+      "description": "Status of a Jellyfin server whose access was revoked."
+    },
+    "button_label_media_sync_reconnect_jellyfin": {
+      "default": "Sign in to Jellyfin again for this server",
+      "description": "Accessible label for the button that reconnects a Jellyfin server."
+    },
+    "button_label_jellyfin_sync_now": {
+      "default": "Sync Jellyfin now",
+      "description": "Accessible label for the button that syncs a Jellyfin server right away."
+    },
+    "header_media_sync_connect_jellyfin": {
+      "default": "Connect a Jellyfin server",
+      "description": "Title of the drawer that connects a Jellyfin server."
+    },
+    "header_media_sync_sign_in_jellyfin": {
+      "default": "Sign in to Jellyfin",
+      "description": "Heading of the first step of the Jellyfin connect wizard."
+    },
+    "label_jellyfin_server_url": {
+      "default": "Server address",
+      "description": "Label of the field where the user types their Jellyfin server address."
+    },
+    "input_placeholder_jellyfin_server_url": {
+      "default": "https://jellyfin.example.com",
+      "description": "Example address shown in the empty Jellyfin server address field. Keep it a valid web address."
+    },
+    "hint_jellyfin_server_url": {
+      "default": "The address you open Jellyfin with. Trakt has to reach it from the internet.",
+      "description": "Hint under the Jellyfin server address field."
+    },
+    "tab_text_jellyfin_quick_connect": {
+      "default": "Quick Connect",
+      "description": "Tab that signs in to Jellyfin with a Quick Connect code. Quick Connect is a Jellyfin feature name."
+    },
+    "tab_text_jellyfin_password": {
+      "default": "Password",
+      "description": "Tab that signs in to Jellyfin with a username and password."
+    },
+    "description_jellyfin_quick_connect": {
+      "default": "You get a code to approve in Jellyfin, so you never type your password here.",
+      "description": "Explains the Quick Connect sign-in option for Jellyfin."
+    },
+    "description_jellyfin_password": {
+      "default": "Sign in with the username and password you use in Jellyfin.",
+      "description": "Explains the password sign-in option for Jellyfin."
+    },
+    "label_jellyfin_username": {
+      "default": "Username",
+      "description": "Label of the Jellyfin username field."
+    },
+    "label_jellyfin_password": {
+      "default": "Password",
+      "description": "Label of the Jellyfin password field."
+    },
+    "button_label_jellyfin_sign_in": {
+      "default": "Sign in to this Jellyfin server",
+      "description": "Accessible label for the button that signs in to the Jellyfin server the user typed."
+    },
+    "description_jellyfin_quick_connect_code": {
+      "default": "In Jellyfin on <b>{server}</b>, open your profile, then Quick Connect, and enter:",
+      "description": "Instructions above the Quick Connect code. Keep the <b> tags around the server name.",
+      "variables": {
+        "server": {
+          "type": "string",
+          "description": "Name of the Jellyfin server.",
+          "required": true
+        }
+      }
+    },
+    "text_jellyfin_quick_connect_waiting": {
+      "default": "Waiting for you to approve it",
+      "description": "Shown under the Quick Connect code while Trakt waits for the user to approve it in Jellyfin."
+    },
+    "description_jellyfin_connect_expired": {
+      "default": "The Quick Connect code expired. Start again to connect your server.",
+      "description": "Shown when the Jellyfin Quick Connect code expired before the user approved it."
+    },
+    "button_label_jellyfin_connect_server": {
+      "default": "Connect this Jellyfin server",
+      "description": "Accessible label for the last button of the Jellyfin connect wizard."
+    },
+    "description_media_sync_history_always_full_jellyfin": {
+      "default": "Your collection always comes over in full.",
+      "description": "Note under the Jellyfin history choice: the collection always syncs in full."
+    },
+    "error_text_jellyfin_invalid_server_url": {
+      "default": "Enter your server's full address, like https://jellyfin.example.com.",
+      "description": "Error when the Jellyfin server address is not a valid address."
+    },
+    "error_text_jellyfin_unsupported_scheme": {
+      "default": "Start the address with https:// or http://.",
+      "description": "Error when the Jellyfin server address uses another scheme."
+    },
+    "error_text_jellyfin_raw_ip_address": {
+      "default": "Use your server's domain name. Trakt can't reach a bare IP address.",
+      "description": "Error when the Jellyfin server address is an IP address."
+    },
+    "error_text_jellyfin_unsupported_port": {
+      "default": "Use port 80, 443, 8096 or 8920, or put the server behind a reverse proxy.",
+      "description": "Error when the Jellyfin server address uses a port Trakt can't reach."
+    },
+    "error_text_jellyfin_embedded_credentials": {
+      "default": "Leave your username and password out of the address.",
+      "description": "Error when the Jellyfin server address contains a username or password."
+    },
+    "error_text_jellyfin_server_not_found": {
+      "default": "No Jellyfin server answered at that address. Check it and try again.",
+      "description": "Error when the address does not lead to a Jellyfin server."
+    },
+    "error_text_jellyfin_server_unreachable": {
+      "default": "Trakt can't reach that server. Make sure it's online and reachable from the internet.",
+      "description": "Error when Trakt cannot reach the Jellyfin server."
+    },
+    "error_text_jellyfin_invalid_credentials": {
+      "default": "That username and password didn't work.",
+      "description": "Error when Jellyfin rejects the username and password."
+    },
+    "error_text_jellyfin_quick_connect_disabled": {
+      "default": "Quick Connect is off on this server. Turn it on in the Jellyfin dashboard, or sign in with your password.",
+      "description": "Error when Quick Connect is turned off on the Jellyfin server."
+    },
+    "error_text_jellyfin_server_limit": {
+      "default": "Free accounts can sync 1 media server. Go VIP to add more.",
+      "description": "Shown when a free user tries to connect a Jellyfin server while another media server is already connected."
+    },
+    "error_text_jellyfin_vip_required": {
+      "default": "Jellyfin sync is a VIP beta for now.",
+      "description": "Error when a free member tries to connect a Jellyfin server."
     }
   }
 }
