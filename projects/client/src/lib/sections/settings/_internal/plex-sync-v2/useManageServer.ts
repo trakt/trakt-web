@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import { deleteMediaSyncConnectionRequest } from '$lib/requests/media-sync/deleteMediaSyncConnectionRequest.ts';
@@ -11,6 +13,8 @@ import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 import { useSyncAccounts } from './useSyncAccounts.ts';
 
 export function useManageServer(connectionId: number) {
+  const { track } = useTrack(AnalyticsEvent.PlexServer);
+
   const invalidations = [
     InvalidateAction.MediaSync.Connections,
     InvalidateAction.MediaSync.Runs,
@@ -37,12 +41,19 @@ export function useManageServer(connectionId: number) {
 
   return {
     accounts,
-    save: (changes: MediaSyncConnectionChanges) =>
-      update
+    save: (changes: MediaSyncConnectionChanges) => {
+      track({ action: 'save' });
+
+      return update
         .mutate(changes)
         .then((result) => result.ok)
-        .catch(() => false),
-    remove: () => remove.mutate().catch(() => false),
+        .catch(() => false);
+    },
+    remove: () => {
+      track({ action: 'remove' });
+
+      return remove.mutate().catch(() => false);
+    },
     isBusy: anyTrue([update.isPending, remove.isPending]),
   };
 }

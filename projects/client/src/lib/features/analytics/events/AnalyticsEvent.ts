@@ -134,4 +134,9 @@ export const AnalyticsEvent = {
   Logout: 'auth-action.logout',
 
   OnboardingStep: 'onboarding.step',
+
+  PlexConnect: 'plex-action.connect',
+  PlexSync: 'plex-action.sync',
+  PlexServer: 'plex-action.server',
+  PlexSetting: 'plex-action.setting',
 } as const;

@@ -148,6 +148,12 @@ type OnboardingStepType = {
   action: 'view' | 'skip' | 'complete';
 };
 
+type PlexSettingType = {
+  section: 'feeds' | 'libraries';
+  setting: string;
+  state: 'on' | 'off';
+};
+
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.PageView]: PageViewType;
   [AnalyticsEvent.EnterLite]: never;
@@ -266,4 +272,9 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Logout]: never;
 
   [AnalyticsEvent.OnboardingStep]: OnboardingStepType;
+
+  [AnalyticsEvent.PlexConnect]: { action: 'start' | 'complete' | 'fail' };
+  [AnalyticsEvent.PlexSync]: { action: 'sync-now' | 'retry' };
+  [AnalyticsEvent.PlexServer]: { action: 'save' | 'remove' };
+  [AnalyticsEvent.PlexSetting]: PlexSettingType;
 };
