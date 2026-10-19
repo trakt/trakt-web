@@ -1,1 +1,5 @@
-export type TodayStoryAction = 'watchlist' | 'mark-as-watched' | 'view-all';
+export type TodayStoryAction =
+  | 'watchlist'
+  | 'mark-as-watched'
+  | 'view-all'
+  | 'profile';
