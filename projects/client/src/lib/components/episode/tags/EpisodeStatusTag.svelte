@@ -28,9 +28,9 @@
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import { type EpisodeType } from "$lib/requests/models/EpisodeType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { whenSeenFor } from "$lib/utils/actions/whenSeenFor.ts";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage.ts";
   import { claimNewReleasePing } from "../_internal/claimNewReleasePing.ts";
-  import { whenSeenFor } from "../_internal/whenSeenFor.ts";
   import type { CoalescedEpisodes } from "../CoalescedEpisodes";
   import type { EpisodeIntl } from "../EpisodeIntl";
   import type { EpisodeStatus } from "../EpisodeStatus";
