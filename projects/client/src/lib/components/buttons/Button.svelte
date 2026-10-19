@@ -165,14 +165,14 @@
     );
 
     --scale-factor-button: 1;
-    --button-height: var(--ni-52);
+    --button-height: var(--ni-48);
 
     all: unset;
     display: flex;
     align-items: center;
     gap: var(--gap-m);
     min-width: var(--ni-40);
-    padding: var(--ni-16);
+    padding: var(--ni-16) var(--ni-20);
     flex-shrink: 0;
     cursor: pointer;
     user-select: none;
