@@ -215,7 +215,6 @@
     );
     --track-radius: var(--track-base-radius);
     --segment-radius: calc(var(--track-base-radius) - var(--segment-inset));
-    --segment-font-size: var(--font-size-text);
     --selector-shadow:
       inset 0 0 0 var(--border-thickness-xxs)
         var(--color-segmented-selector-border),
@@ -316,7 +315,7 @@
     cursor: pointer;
 
     color: var(--color-segmented-segment-foreground);
-    font-size: var(--segment-font-size);
+    font-size: var(--font-size-text);
     border-radius: var(--segment-radius);
 
     -webkit-tap-highlight-color: transparent;
@@ -595,7 +594,6 @@
   .trakt-segmented-select[data-style="minimal"] {
     --segment-height: var(--segmented-select-minimal-segment-height);
     --segment-inset: var(--ni-0);
-    --segment-font-size: var(--font-size-text-small);
     --track-shadow: none;
     --segment-block-inset: var(--gap-xs);
     --selector-shadow:
