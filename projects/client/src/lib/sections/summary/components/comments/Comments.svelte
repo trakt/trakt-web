@@ -5,7 +5,6 @@
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import CommentCard from "$lib/sections/summary/components/comments/CommentCard.svelte";
   import { writable } from "$lib/utils/store/WritableSubject.ts";
@@ -47,10 +46,6 @@
   };
 </script>
 
-{#snippet metaInfo()}
-  <ListMetaInfo text={$sortType.text()} />
-{/snippet}
-
 <RenderFor audience="all">
   <SectionList
     id={{
@@ -60,7 +55,6 @@
     items={$comments}
     title={m.list_title_comments()}
     --height-list="var(--height-comments-list)"
-    {metaInfo}
     drilldown={{
       ...buildCommentsDrawerLink(),
       label: m.button_label_view_all_comments(),
