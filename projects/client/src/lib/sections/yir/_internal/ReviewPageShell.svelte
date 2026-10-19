@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import type { Snippet } from "svelte";
+  import { trackReviewDrilldown } from "./trackReviewDrilldown.ts";
 
   const {
     id,
@@ -18,6 +21,10 @@
     spacious?: boolean;
     children: Snippet;
   } = $props();
+
+  const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
+
+  const source = $derived(id === "month-in-review" ? "mir" : "yir");
 </script>
 
 <div
@@ -25,6 +32,7 @@
   class="trakt-review-page"
   class:is-spacious={spacious}
   data-header-foreground={headerForeground}
+  use:trackReviewDrilldown={{ source, track }}
 >
   {@render children()}
 </div>

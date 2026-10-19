@@ -1,12 +1,15 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants.ts";
   import { useLeaderboard } from "../stores/useLeaderboard.ts";
   import { useLeaderboardViewer } from "../stores/useLeaderboardViewer.ts";
   import LeaderboardItem from "./_internal/LeaderboardItem.svelte";
   import LeaderboardViewerCard from "./_internal/LeaderboardViewerCard.svelte";
+  import { onMount } from "svelte";
 
   type LeaderboardDrawerHostProps = {
     slug: string;
@@ -14,6 +17,9 @@
   };
 
   const { slug, onClose }: LeaderboardDrawerHostProps = $props();
+  const { track } = useTrack(AnalyticsEvent.Drilldown);
+
+  onMount(() => track({ source: "leaderboard" }));
 
   const { viewer } = useLeaderboardViewer();
 

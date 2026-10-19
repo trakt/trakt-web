@@ -1,6 +1,8 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import { languageTag } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -9,8 +11,12 @@
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage.ts";
   import ActivityHeatmap from "./ActivityHeatmap.svelte";
   import { useMonthlyStats } from "./_internal/useMonthlyStats.ts";
+  import { onMount } from "svelte";
 
   const { onClose }: { onClose: () => void } = $props();
+  const { track } = useTrack(AnalyticsEvent.Drilldown);
+
+  onMount(() => track({ source: "stats", type: "streak" }));
 
   const { mode, current } = useDiscover();
   const { stats, isLoading } = $derived(useMonthlyStats({ mode: $mode }));
