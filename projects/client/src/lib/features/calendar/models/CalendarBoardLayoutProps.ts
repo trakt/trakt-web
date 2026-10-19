@@ -12,4 +12,7 @@ export type CalendarBoardLayoutProps<T> = {
   view?: CalendarView;
   periods: ReadonlyArray<CalendarPeriod<T>>;
   onLoadMore: () => void;
+  isInitialLoad?: boolean;
+  isLoadingAbove?: boolean;
+  onLoadPrevious?: () => boolean;
 };

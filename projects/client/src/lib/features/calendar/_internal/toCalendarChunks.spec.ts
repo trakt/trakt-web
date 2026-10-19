@@ -82,6 +82,30 @@ describe('util: toCalendarChunks', () => {
     expect(chunks).toHaveLength(1);
   });
 
+  it('should drop earlier chunks before the lower bound', () => {
+    const chunks = toCalendarChunks({
+      range: { anchor: new Date(2026, 9, 28), earlier: 3, later: 0 },
+      weeksPerStep: 1,
+      order: 'chronological',
+      locale: 'en',
+      lowerBound: new Date(2026, 9, 18),
+    });
+
+    expect(toStarts(chunks)).toEqual(['Sun Oct 18 2026', 'Sun Oct 25 2026']);
+  });
+
+  it('should keep an anchor before the lower bound as the first chunk', () => {
+    const chunks = toCalendarChunks({
+      range: { anchor: new Date(2026, 8, 9), earlier: 2, later: 1 },
+      weeksPerStep: 1,
+      order: 'chronological',
+      locale: 'en',
+      lowerBound: new Date(2026, 9, 18),
+    });
+
+    expect(toStarts(chunks)).toEqual(['Sun Sep 06 2026', 'Sun Sep 13 2026']);
+  });
+
   it('should load at least the minimum number of later chunks', () => {
     const chunks = toCalendarChunks({
       range: { anchor: new Date(2026, 9, 21), earlier: 0, later: 1 },

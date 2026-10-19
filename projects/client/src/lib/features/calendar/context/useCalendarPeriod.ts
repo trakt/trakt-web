@@ -9,7 +9,6 @@ import {
   combineLatest,
   distinctUntilChanged,
   map,
-  type Observable,
   skip,
 } from 'rxjs';
 import { onDestroy } from 'svelte';
@@ -19,6 +18,7 @@ import { toCalendarChunks } from '../_internal/toCalendarChunks.ts';
 import { toLoadDirection } from '../_internal/toLoadDirection.ts';
 import type { CalendarChunk } from '../models/CalendarChunk.ts';
 import type { CalendarOrder } from '../models/CalendarOrder.ts';
+import type { CalendarPeriodOptions } from '../models/CalendarPeriodOptions.ts';
 import type { CalendarWindow } from '../models/CalendarWindow.ts';
 import { getCalendarContext } from './getCalendarContext.ts';
 
@@ -49,19 +49,12 @@ const sameChunks = (
   previous.length === current.length &&
   previous.every((chunk, index) => chunk.key === current.at(index)?.key);
 
-type CalendarPeriodOptions = {
-  order?: CalendarOrder;
-  weeksPerStep?: number;
-  upperBound?: Date;
-  fingerprint?: Observable<string>;
-  minLater?: Observable<number>;
-};
-
 export function useCalendarPeriod(options?: CalendarPeriodOptions) {
   const {
     order = 'chronological',
     weeksPerStep = 1,
     upperBound,
+    lowerBound,
     fingerprint,
     minLater,
   } = options ?? {};
@@ -82,6 +75,7 @@ export function useCalendarPeriod(options?: CalendarPeriodOptions) {
       order,
       locale: getLocale(),
       upperBound,
+      lowerBound,
       minLater: currentMinLater.value,
     });
 

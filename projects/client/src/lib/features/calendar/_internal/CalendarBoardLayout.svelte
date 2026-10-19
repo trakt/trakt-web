@@ -8,6 +8,9 @@
   import type { CalendarBoardLayoutProps } from "../models/CalendarBoardLayoutProps";
   import CalendarItems from "./CalendarItems.svelte";
   import CalendarWeekItems from "./CalendarWeekItems.svelte";
+  import { getLocale } from "$lib/features/i18n";
+  import { isCurrentWeek } from "$lib/utils/date/isCurrentWeek.ts";
+  import { loadAboveViewport } from "./loadAboveViewport.ts";
 
   const {
     activeDate,
@@ -18,6 +21,9 @@
     view = "day",
     periods,
     onLoadMore,
+    isInitialLoad: externalInitialLoad,
+    isLoadingAbove = false,
+    onLoadPrevious,
   }: CalendarBoardLayoutProps<T> = $props();
 
   const { visibleDate } = getCalendarContext();
@@ -41,10 +47,24 @@
   const { observeDimension } = useLazyLoader({ loadMore, parent: null });
 
   const isInitialPeriod = $derived(periods.length <= 1);
-  const isInitialLoad = $derived(isInitialPeriod && isLoading);
+  const isInitialLoad = $derived(
+    externalInitialLoad ?? (isInitialPeriod && isLoading),
+  );
+
+  const topEdge = $derived({
+    firstKey: periods.at(0)?.key,
+    lastKey: periods.at(-1)?.key,
+    canLoad: !isInitialLoad && !isLoadingAbove,
+    isArmed: !isCurrentWeek(activeDate, getLocale()),
+    onLoad: onLoadPrevious,
+  });
 </script>
 
-<div class="trakt-calendar-board-layout" use:observeDimension>
+<div
+  class="trakt-calendar-board-layout"
+  use:observeDimension
+  use:loadAboveViewport={topEdge}
+>
   {#if isInitialLoad}
     <div class="loading-wrapper">
       <LoadingIndicator size="large" />
@@ -79,6 +99,8 @@
 
 <style>
   .trakt-calendar-board-layout {
+    overflow-anchor: none;
+
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
