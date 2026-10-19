@@ -53,7 +53,7 @@
   const onAsk = $derived(() => {
     markAsWatchedDrawerStore.open({
       title,
-      mediaStore: target,
+      mediaStore: { ...target },
       onWatched,
     });
   });
