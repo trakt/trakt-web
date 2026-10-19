@@ -9,4 +9,5 @@ export type ActionToast = {
   message: string;
   action?: ActionToastAction;
   variant?: 'default' | 'error';
+  durationMs?: number;
 };

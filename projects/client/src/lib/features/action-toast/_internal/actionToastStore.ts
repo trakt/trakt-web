@@ -8,10 +8,18 @@ function createActionToastStore() {
     subscribe: current.subscribe.bind(current),
 
     notify: (toast: Omit<ActionToast, 'id'>) => {
-      current.next({ ...toast, id: crypto.randomUUID() });
+      const id = crypto.randomUUID();
+      current.next({ ...toast, id });
+      return id;
     },
 
-    dismiss: () => current.next(null),
+    dismiss: (id?: string) => {
+      if (id && current.value?.id !== id) {
+        return;
+      }
+
+      current.next(null);
+    },
   };
 }
 

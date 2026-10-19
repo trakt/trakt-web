@@ -2603,7 +2603,6 @@
   "warning_prompt_stop_checkin": "Êtes-vous sûr de vouloir arrêter de regarder \"{title}\" ?",
   "warning_prompt_track_show_episode_count": "Êtes-vous sûr de vouloir marquer \"{title}\" comme vu ? Cela marquera {count} épisodes comme vus.",
   "warning_prompt_unfollow_user": "Êtes-vous sûr de vouloir ne plus suivre {username} ?",
-  "warning_prompt_watched_until_here": "En marquant \"{title}\" comme vu, des épisodes précédents n'ont pas été marqués. Souhaitez-vous marquer tout ce qui précède comme vu également ?",
   "warning_prompt_younify_unlink": "Êtes-vous sûr de vouloir délier {service} ?",
   "warning_smart_lists_limit": "Vous avez atteint la limite de vos listes intelligentes",
   "welcome_banner_action": "Importer vos données",

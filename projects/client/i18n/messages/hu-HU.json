@@ -2603,7 +2603,6 @@
   "warning_prompt_stop_checkin": "Biztosan leállítod a(z) \"{title}\" nézését?",
   "warning_prompt_track_show_episode_count": "Biztosan megtekintettként jelölöd a(z) \"{title}\" sorozatot? Ez {count} epizódot fog megtekintettként jelölni.",
   "warning_prompt_unfollow_user": "Biztosan megszünteti {username} követését?",
-  "warning_prompt_watched_until_here": "A(z) \"{title}\" megtekintettként jelölése korábbi epizódokat hagyott megtekintetlenül. Megjelölöd mindent addig megtekintettként is?",
   "warning_prompt_younify_unlink": "Biztosan leválasztod a(z) {service} szolgáltatást?",
   "warning_smart_lists_limit": "Elérted az okos listák korlátját",
   "welcome_banner_action": "Adataid importálása",

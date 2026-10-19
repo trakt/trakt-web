@@ -2603,7 +2603,6 @@
   "warning_prompt_stop_checkin": "Tens a certeza de que queres parar de ver \"{title}\"?",
   "warning_prompt_track_show_episode_count": "Tens a certeza de que queres marcar \"{title}\" como vista? Marcará {count} episódios como vistos.",
   "warning_prompt_unfollow_user": "Tens a certeza de que queres deixar de seguir {username}?",
-  "warning_prompt_watched_until_here": "Ao marcares \"{title}\" como visto, ficaram episódios anteriores por ver. Queres marcar também como vistos todos os episódios anteriores?",
   "warning_prompt_younify_unlink": "Tens a certeza de que queres desassociar {service}?",
   "warning_smart_lists_limit": "Atingiste o limite de listas inteligentes",
   "welcome_banner_action": "Importar os teus dados",

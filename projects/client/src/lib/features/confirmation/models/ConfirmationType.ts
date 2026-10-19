@@ -1,6 +1,5 @@
 export enum ConfirmationType {
   MarkAsWatched = 'mark-as-watched',
-  WatchedUntilHere = 'watched-until-here',
   RemoveFromWatched = 'remove-from-watched',
   RemoveFromHistory = 'remove-from-history',
   DropShow = 'drop-show',

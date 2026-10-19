@@ -2603,7 +2603,6 @@
   "warning_prompt_stop_checkin": "Estàs segur que vols deixar de veure \"{title}\"?",
   "warning_prompt_track_show_episode_count": "Estàs segur que vols marcar \"{title}\" com a vist? Això marcarà {count} episodis com a vists.",
   "warning_prompt_unfollow_user": "Estàs segur que vols deixar de seguir {username}?",
-  "warning_prompt_watched_until_here": "En marcar \"{title}\" com a vist, has deixat episodis anteriors sense veure. Vols marcar-los tots com a vistos fins a aquest?",
   "warning_prompt_younify_unlink": "Estàs segur que vols desvincular {service}?",
   "warning_smart_lists_limit": "Has arribat al límit de llistes intel·ligents",
   "welcome_banner_action": "Importa les teves dades",

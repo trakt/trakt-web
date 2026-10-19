@@ -2603,7 +2603,6 @@
   "warning_prompt_stop_checkin": "Ви впевнені, що хочете припинити перегляд \"{title}\"?",
   "warning_prompt_track_show_episode_count": "Ви впевнені, що хочете позначити \"{title}\" як переглянуте? Це позначить {count} епізодів як переглянуті.",
   "warning_prompt_unfollow_user": "Ви впевнені, що хочете відписатися від {username}?",
-  "warning_prompt_watched_until_here": "Позначення \"{title}\" як переглянутого залишило попередні епізоди непроглянутими. Позначити все до нього як переглянуте?",
   "warning_prompt_younify_unlink": "Ви впевнені, що хочете відв'язати {service}?",
   "warning_smart_lists_limit": "Ви досягли ліміту розумних списків",
   "welcome_banner_action": "Імпортувати ваші дані",
