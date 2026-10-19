@@ -44,7 +44,8 @@
       </span>
     {/if}
   {:else}
-    <span class="trakt-switch-thumb"></span>
+    <span class="switch-sheen"></span>
+    <span class="switch-thumb"></span>
   {/if}
 </label>
 
@@ -57,6 +58,9 @@
 
     --thumb-size: var(--ni-18);
     --thumb-inset: var(--ni-3);
+
+    --switch-sheen-duration: calc(var(--transition-increment) * 6);
+    --switch-sheen-delay: calc(var(--transition-increment) * 0.8);
 
     --thumb-travel: calc(
       var(--track-width) - var(--thumb-size) - 2 * var(--thumb-inset)
@@ -107,20 +111,58 @@
       outline-offset: var(--ni-2);
     }
 
-    &:has(input:checked) .trakt-switch-thumb {
+    &:has(input:checked) .switch-thumb {
       transform: translateX(calc(var(--rtl-sign) * var(--thumb-travel)));
     }
 
-    &:has(input:indeterminate) .trakt-switch-thumb {
+    &:has(input:indeterminate) .switch-thumb {
       transform: translateX(calc(var(--rtl-sign) * var(--thumb-travel) / 2));
     }
 
     /* :has() takes its argument's specificity, so live states exclude :disabled explicitly. */
     &:has(input:checked:not(:indeterminate):not(:disabled)) {
       background-color: var(--color-switch-track-on);
+      box-shadow: var(--shadow-switch-track-on);
 
-      .trakt-switch-thumb {
+      .switch-thumb {
         background-color: var(--color-switch-thumb-on);
+        box-shadow: var(--shadow-switch-thumb-on);
+      }
+    }
+
+    &:has(input:checked:not(:indeterminate)) .switch-sheen::before {
+      transform: translateX(calc(var(--rtl-sign) * 200%));
+      transition: transform var(--switch-sheen-duration)
+        cubic-bezier(0.25, 0.6, 0.3, 1) var(--switch-sheen-delay);
+    }
+
+    /*
+     * The sheen is a transition, not an animation: it only runs when the
+     * switch turns on, never on first paint, and turning off snaps it back.
+     */
+    .switch-sheen {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: inherit;
+      pointer-events: none;
+
+      &::before {
+        content: "";
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        inset-inline-start: 0;
+        width: 55%;
+
+        background: linear-gradient(
+          100deg,
+          transparent,
+          var(--color-switch-sheen),
+          transparent
+        );
+        transform: translateX(calc(var(--rtl-sign) * -110%));
       }
     }
 
@@ -137,12 +179,12 @@
       background-color: var(--color-switch-track-disabled);
       box-shadow: none;
 
-      .trakt-switch-thumb {
+      .switch-thumb {
         background-color: var(--color-switch-thumb-disabled);
       }
     }
 
-    .trakt-switch-thumb {
+    .switch-thumb {
       display: block;
       position: absolute;
       top: var(--thumb-inset);
@@ -155,7 +197,7 @@
       background-color: var(--color-switch-thumb);
 
       transition: var(--transition-increment) ease;
-      transition-property: transform, background-color;
+      transition-property: transform, background-color, box-shadow;
     }
   }
 

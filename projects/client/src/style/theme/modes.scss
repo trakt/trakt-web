@@ -196,8 +196,14 @@
   /*
    * Toggle switch (Switch)
    */
-  --color-switch-track-on: var(--purple-500);
+  --color-switch-track-on: var(--color-segmented-selector-background);
   --color-switch-thumb-on: var(--color-switch-thumb);
+  --shadow-switch-track-on: inset 0 0 0 var(--border-thickness-xxs)
+      var(--color-segmented-selector-border),
+    inset 0 var(--ni-1) 0 var(--shade-10);
+  --shadow-switch-thumb-on: 0 var(--ni-1) var(--ni-3)
+    color-mix(in srgb, var(--shade-1000) 25%, transparent);
+  --color-switch-sheen: color-mix(in srgb, var(--shade-10) 85%, transparent);
 
   --color-switch-track-off: color-mix(
     in srgb,
@@ -790,8 +796,15 @@
   /*
    * Toggle switch (Switch)
    */
-  --color-switch-track-on: var(--purple-500);
+  --color-switch-track-on: var(--color-segmented-selector-background);
   --color-switch-thumb-on: var(--color-switch-thumb);
+  --shadow-switch-track-on: inset 0 0 0 var(--border-thickness-xxs)
+      var(--color-segmented-selector-border),
+    inset 0 var(--ni-1) 0 color-mix(in srgb, var(--shade-10) 16%, transparent);
+  --shadow-switch-thumb-on: 0 var(--ni-1) var(--ni-3)
+      color-mix(in srgb, var(--shade-1000) 35%, transparent),
+    0 0 var(--ni-6) color-mix(in srgb, var(--purple-400) 35%, transparent);
+  --color-switch-sheen: color-mix(in srgb, var(--shade-10) 30%, transparent);
 
   --color-switch-track-off: color-mix(
     in srgb,
