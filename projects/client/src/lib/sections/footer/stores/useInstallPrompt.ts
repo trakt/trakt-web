@@ -1,9 +1,12 @@
 import { browser } from '$app/environment';
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { BehaviorSubject } from 'rxjs';
 import { onDestroy } from 'svelte';
 
 export function useInstallPrompt() {
+  const { track } = useTrack(AnalyticsEvent.PwaInstall);
   const promptStore = new BehaviorSubject<BeforeInstallPromptEvent | null>(
     globalThis.install ?? null,
   );
@@ -26,6 +29,8 @@ export function useInstallPrompt() {
       }
 
       const result = await event.prompt();
+
+      track({ outcome: result.outcome });
 
       const isAccepted = result.outcome === 'accepted';
 

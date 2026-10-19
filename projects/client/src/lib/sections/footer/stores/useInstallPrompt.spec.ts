@@ -1,10 +1,16 @@
 import { renderStore } from '$test/beds/store/renderStore.ts';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { useInstallPrompt } from './useInstallPrompt.ts';
 
-function buildPromptEvent() {
+const { track } = vi.hoisted(() => ({ track: vi.fn() }));
+
+vi.mock('$lib/features/analytics/useTrack.ts', () => ({
+  useTrack: () => ({ track }),
+}));
+
+function buildPromptEvent(outcome: 'accepted' | 'dismissed' = 'accepted') {
   const event = new Event('beforeinstallprompt') as BeforeInstallPromptEvent;
-  event.prompt = () => Promise.resolve({ outcome: 'accepted' as const });
+  event.prompt = () => Promise.resolve({ outcome });
   return event;
 }
 
@@ -20,6 +26,7 @@ async function renderInstallPrompt() {
 describe('store: useInstallPrompt', () => {
   afterEach(() => {
     globalThis.install = null;
+    track.mockClear();
   });
 
   it('should seed from an event stashed before mount', async () => {
@@ -39,5 +46,23 @@ describe('store: useInstallPrompt', () => {
     globalThis.dispatchEvent(event);
 
     expect(read()).toBe(event);
+  });
+
+  it('should track an accepted install', async () => {
+    globalThis.install = buildPromptEvent('accepted');
+    const store = await renderStore(() => useInstallPrompt());
+
+    await store.prompt();
+
+    expect(track).toHaveBeenCalledExactlyOnceWith({ outcome: 'accepted' });
+  });
+
+  it('should track a dismissed install', async () => {
+    globalThis.install = buildPromptEvent('dismissed');
+    const store = await renderStore(() => useInstallPrompt());
+
+    await store.prompt();
+
+    expect(track).toHaveBeenCalledExactlyOnceWith({ outcome: 'dismissed' });
   });
 });
