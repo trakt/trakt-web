@@ -7,4 +7,5 @@ export enum FeatureFlag {
   VipVeteran = 'vip-veteran',
   VipCancelFlow = 'vip-cancel-flow',
   ShowEnding = 'show-ending',
+  SmartRecommendations = 'smart-recommendations',
 }

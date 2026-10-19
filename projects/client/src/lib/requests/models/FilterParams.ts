@@ -1,3 +1,5 @@
+import type { RecommendationMode } from './RecommendationMode.ts';
+
 export type FilterParam = {
   /*
       FIXME:
@@ -15,6 +17,7 @@ export type FilterParam = {
   ignore_watched: boolean;
   ignore_watchlisted: boolean;
   watch_window: number;
+  mode: RecommendationMode;
 };
 
 export type FilterParams = DeepPartial<{
