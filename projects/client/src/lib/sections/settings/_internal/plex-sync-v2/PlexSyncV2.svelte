@@ -90,7 +90,7 @@
       <SettingsGroupRowSkeleton />
     {:else}
       <SettingsGroupRow
-        title={m.label_plex_connection()}
+        title={m.label_media_server_plex()}
         description={connectionDescription}
         variant="custom"
       >
@@ -136,7 +136,7 @@
 
   {#if isConnected}
     <SyncedServers
-      title={m.header_plex_synced_servers()}
+      title={m.header_plex_servers()}
       description={m.description_plex_synced_servers()}
       connections={$connections ?? []}
       onReconnect={startConnect}

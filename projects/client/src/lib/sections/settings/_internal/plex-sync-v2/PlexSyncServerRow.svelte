@@ -47,6 +47,8 @@
     connection.serverId === PLEX_ACCOUNT_SERVER_ID,
   );
 
+  const isJellyfin = $derived(connection.provider === "jellyfin");
+
   const libraryTitles = $derived(
     connection.libraries
       .filter((library) => library.enabled)
@@ -67,7 +69,9 @@
       case "unreachable":
         return m.description_media_sync_unreachable();
       case "unauthorized":
-        return m.description_media_sync_unauthorized();
+        return isJellyfin
+          ? m.description_media_sync_unauthorized_jellyfin()
+          : m.description_media_sync_unauthorized();
       case "webhook-only":
         return m.description_media_sync_webhook_only();
     }
@@ -81,7 +85,8 @@
 <SettingsGroupRow
   title={isAccountOnly
     ? m.label_media_sync_plex_watchlist()
-    : connection.serverName ?? m.label_plex_server()}
+    : connection.serverName ??
+      (isJellyfin ? m.label_jellyfin_server() : m.label_plex_server())}
   {description}
   variant="custom"
 >
@@ -110,7 +115,9 @@
     <Button
       size="small"
       color="purple"
-      label={m.button_label_media_sync_reconnect()}
+      label={isJellyfin
+        ? m.button_label_media_sync_reconnect_jellyfin()
+        : m.button_label_media_sync_reconnect()}
       onclick={onReconnect}
     >
       {m.button_media_sync_reconnect()}
@@ -120,7 +127,9 @@
       <Button
         size="small"
         color="purple"
-        label={m.button_label_plex_sync_now()}
+        label={isJellyfin
+          ? m.button_label_jellyfin_sync_now()
+          : m.button_label_plex_sync_now()}
         onclick={syncNow}
         disabled={$isBusy || status.kind === "paused"}
       >

@@ -42,4 +42,20 @@ describe('toConnectSteps', () => {
       toConnectSteps({ hasProfiles: true, isWebhookOnly: true }),
     ).to.deep.equal(['sign-in', 'server']);
   });
+
+  it('signs in then picks what to sync for a Jellyfin server', () => {
+    expect(
+      toConnectSteps({ provider: 'jellyfin', hasProfiles: true }),
+    ).to.deep.equal(['sign-in', 'sync']);
+  });
+
+  it('adds the history step last for Jellyfin when history is on', () => {
+    expect(
+      toConnectSteps({
+        provider: 'jellyfin',
+        hasProfiles: false,
+        hasHistory: true,
+      }),
+    ).to.deep.equal(['sign-in', 'sync', 'history']);
+  });
 });
