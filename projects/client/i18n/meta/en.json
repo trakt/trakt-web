@@ -8654,10 +8654,6 @@
       "default": "We couldn't find an active subscription to manage. It may have already been cancelled. <a>Contact support</a> if you think something's wrong.",
       "description": "Message of the snackbar shown when a VIP subscription can no longer be managed or cancelled because the payment provider has no active subscription for the account. The text wrapped in <a></a> becomes a link to support and must be kept."
     },
-    "text_vip_cancel_failed_title": {
-      "default": "Couldn't update your subscription",
-      "description": "Title of the snackbar shown when cancelling a VIP subscription failed for an unexpected reason."
-    },
     "text_vip_manage_failed_title": {
       "default": "Couldn't open your subscription settings",
       "description": "Title of the snackbar shown when opening the payment provider page to manage a VIP subscription failed for an unexpected reason."
@@ -12993,14 +12989,6 @@
     "button_text_game_play": {
       "default": "Play",
       "description": "Label on the hidden \"Rated Higher?\" game card in the spotlight search that starts the game."
-    },
-    "preview_feature_title_vip_cancel_flow": {
-      "default": "VIP cancel flow",
-      "description": "Product feature name for the preview feature that replaces the cancel VIP dialog with a short guided flow."
-    },
-    "preview_feature_description_vip_cancel_flow": {
-      "default": "A new way to cancel VIP: asks why, shows what changes and offers a deal to stay.",
-      "description": "Description of the VIP cancel flow preview feature."
     },
     "page_title_vip_cancel": {
       "default": "Cancel VIP",

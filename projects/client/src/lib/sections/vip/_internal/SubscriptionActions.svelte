@@ -8,21 +8,17 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import { getLocale } from "$lib/features/i18n";
   import { m } from "$lib/features/i18n/messages";
   import { type VipSubscription } from "$lib/requests/models/VipSubscription";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CrownIcon from "./icons/CrownIcon.svelte";
   import { useVip } from "./useVip";
 
-  type SubscriptionFailure = "missing" | "manage" | "cancel";
+  type SubscriptionFailure = "missing" | "manage";
 
   const { subscription }: { subscription: VipSubscription | Nil } = $props();
 
-  const { manageSubscription, cancelSubscription, isFetching } = useVip();
+  const { manageSubscription, isFetching } = useVip();
   const { track } = useTrack(AnalyticsEvent.VipManage);
   const { user } = useUser();
 
@@ -39,10 +35,7 @@
     }
 
     return {
-      title:
-        kind === "manage"
-          ? m.text_vip_manage_failed_title()
-          : m.text_vip_cancel_failed_title(),
+      title: m.text_vip_manage_failed_title(),
       message: m.text_vip_subscription_failed_message(),
     };
   }
@@ -71,27 +64,6 @@
 
     failure = result.kind === "missing-subscription" ? "missing" : "manage";
   };
-
-  const onCancel = async () => {
-    const isCancelled = await reportFailure(cancelSubscription, "cancel");
-    failure = isCancelled ? null : "missing";
-  };
-
-  const renewsOn = $derived(
-    toHumanDay({
-      date: subscription?.renewsAt ?? subscription?.expiresAt ?? new Date(),
-      locale: getLocale(),
-    }),
-  );
-
-  const { confirm } = useConfirm();
-  const confirmCancel = $derived(
-    confirm({
-      type: ConfirmationType.CancelVip,
-      renewsOn,
-      onConfirm: onCancel,
-    }),
-  );
 </script>
 
 <PopupMenu
@@ -116,17 +88,6 @@
           <RenameIcon />
         {/snippet}
       </DropdownItem>
-      <DropdownItem
-        disabled={$isFetching}
-        color="red"
-        onclick={confirmCancel}
-        label={m.button_label_cancel_vip()}
-      >
-        {m.button_text_cancel_vip()}
-        {#snippet icon()}
-          <SkullIcon />
-        {/snippet}
-      </DropdownItem>
     {:else if subscription?.renewsAt && subscription?.manageUrl}
       <DropdownItem
         href={subscription.manageUrl}
@@ -139,7 +100,19 @@
           <RenameIcon />
         {/snippet}
       </DropdownItem>
-    {:else if !subscription?.renewsAt}
+    {/if}
+    {#if subscription?.renewsAt}
+      <DropdownItem
+        href={UrlBuilder.vipCancel()}
+        color="red"
+        label={m.button_label_cancel_vip()}
+      >
+        {m.button_text_cancel_vip()}
+        {#snippet icon()}
+          <SkullIcon />
+        {/snippet}
+      </DropdownItem>
+    {:else}
       <DropdownItem
         href={UrlBuilder.renewVip()}
         label={m.button_label_renew_vip()}
