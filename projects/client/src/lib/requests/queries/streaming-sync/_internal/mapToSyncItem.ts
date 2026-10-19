@@ -50,9 +50,12 @@ function mapTraktReference(
   }
 }
 
-export function mapToSyncItem(item: SyncItemResponse, index: number): SyncItem {
+export function mapToSyncItem(
+  item: SyncItemResponse,
+  position: number,
+): SyncItem {
   return {
-    key: `sync-item-${index}-${item.content_id ?? item.tmdb_id ?? 'unknown'}`,
+    key: `sync-item-${position}`,
     kind: item.kind,
     type: item.type,
     serviceId: item.service_id,
