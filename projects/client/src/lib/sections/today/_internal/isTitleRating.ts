@@ -1,5 +1,5 @@
 import type { TodayFriendAction } from '../models/TodayFriendAction.ts';
 
-export function isTitleRating({ kind, target }: TodayFriendAction): boolean {
-  return kind === 'rating' && (target === 'movie' || target === 'show');
+export function isTitleRating({ rating, target }: TodayFriendAction): boolean {
+  return rating != null && (target === 'movie' || target === 'show');
 }

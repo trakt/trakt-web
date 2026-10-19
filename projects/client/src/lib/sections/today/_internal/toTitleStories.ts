@@ -60,6 +60,40 @@ function mergeWatches(
   return Array.from(merged.values()).toSorted(byMostRecent);
 }
 
+type RatingMatch = { watch: TodayFriendAction; rating: TodayFriendAction };
+
+function isRatingOfWatch({ watch, rating }: RatingMatch): boolean {
+  if (watch.kind !== 'watch' || rating.kind !== 'rating') return false;
+  if (watch.user.key !== rating.user.key) return false;
+  if (watch.target !== rating.target) return false;
+
+  return watch.episode?.id === rating.episode?.id;
+}
+
+function mergeRatings(
+  actions: ReadonlyArray<TodayFriendAction>,
+): TodayFriendAction[] {
+  const ratedWatches = actions.reduce((result, rating) => {
+    const watch = actions.find((candidate) =>
+      isRatingOfWatch({ watch: candidate, rating }),
+    );
+    if (!watch || result.has(watch.key)) return result;
+
+    return result.set(watch.key, rating);
+  }, new Map<string, TodayFriendAction>());
+
+  const foldedRatings = new Set(
+    Array.from(ratedWatches.values()).map((rating) => rating.key),
+  );
+
+  return actions
+    .filter((action) => !foldedRatings.has(action.key))
+    .map((action) => {
+      const rating = ratedWatches.get(action.key);
+      return rating ? { ...action, rating: rating.rating } : action;
+    });
+}
+
 function toAverageRating(
   actions: ReadonlyArray<TodayFriendAction>,
 ): number | null {
@@ -75,7 +109,7 @@ function toAverageRating(
 
 function toTitleStory(group: TitleGroup): TodayTitleStory {
   const { media } = group;
-  const actions = mergeWatches(group.actions);
+  const actions = mergeRatings(mergeWatches(group.actions));
 
   return {
     key: media.key,

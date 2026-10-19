@@ -27,7 +27,13 @@ describe('util: isTitleRating', () => {
     ).toBe(false);
   });
 
-  it('should reject other kinds of activity', () => {
+  it('should accept a movie watch that carries a rating', () => {
+    expect(isTitleRating(buildFriendAction({ kind: 'watch', rating: 8 }))).toBe(
+      true,
+    );
+  });
+
+  it('should reject activity without a rating', () => {
     expect(isTitleRating(buildFriendAction({ kind: 'watch' }))).toBe(false);
   });
 });

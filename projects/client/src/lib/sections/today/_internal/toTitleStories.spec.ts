@@ -105,6 +105,72 @@ describe('util: toTitleStories', () => {
     expect(story?.averageRating).toBe(8.5);
   });
 
+  it('should fold a friend rating into their watch of the same movie', () => {
+    const [story] = toTitleStories([
+      buildFollowingActivity({ key: 'watch:1', activityAt: at(9) }),
+      buildFollowingActivity({
+        key: 'rating:1',
+        activityAt: at(10),
+        detail: { action: 'rating', rating: 9 },
+      }),
+    ]);
+
+    expect(story?.actions).toHaveLength(1);
+    expect(story?.actions.at(0)?.kind).toBe('watch');
+    expect(story?.actions.at(0)?.rating).toBe(9);
+    expect(story?.averageRating).toBe(9);
+  });
+
+  it('should fold an episode rating into the watch of that episode', () => {
+    const [story] = toTitleStories([
+      episodeWatch('watch:1', 9),
+      buildFollowingActivity({
+        key: 'rating:1',
+        activityAt: at(10),
+        target: {
+          type: 'episode',
+          show: ShowSiloMappedMock,
+          episode: EpisodeSiloMappedMock,
+        },
+        detail: { action: 'rating', rating: 7 },
+      }),
+    ]);
+
+    expect(story?.actions).toHaveLength(1);
+    expect(story?.actions.at(0)?.rating).toBe(7);
+  });
+
+  it('should fold a rating into one watch when a movie was watched twice', () => {
+    const [story] = toTitleStories([
+      buildFollowingActivity({ key: 'watch:1', activityAt: at(8) }),
+      buildFollowingActivity({ key: 'watch:2', activityAt: at(9) }),
+      buildFollowingActivity({
+        key: 'rating:1',
+        activityAt: at(10),
+        detail: { action: 'rating', rating: 9 },
+      }),
+    ]);
+
+    expect(
+      story?.actions.map(({ key, kind, rating }) => ({ key, kind, rating })),
+    ).toEqual([
+      { key: 'watch:2', kind: 'watch', rating: 9 },
+      { key: 'watch:1', kind: 'watch', rating: null },
+    ]);
+  });
+
+  it('should keep a rating apart from another friend watch', () => {
+    const [story] = toTitleStories([
+      buildFollowingActivity({ key: 'watch:1', activityAt: at(9) }),
+      movieRating('rating:1', 9, ron),
+    ]);
+
+    expect(story?.actions.map((action) => action.kind).toSorted()).toEqual([
+      'rating',
+      'watch',
+    ]);
+  });
+
   it('should leave season ratings out of the title average', () => {
     const [show] = toTitleStories(FollowingActivityMappedMock);
 
