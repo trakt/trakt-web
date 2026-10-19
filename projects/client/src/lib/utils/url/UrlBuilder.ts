@@ -1,4 +1,5 @@
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
+import type { VipFlow } from '$lib/features/upsell/models/VipFlow.ts';
 import type { VipUpsellSource } from '$lib/features/upsell/models/VipUpsellSource.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
@@ -339,7 +340,8 @@ export const UrlBuilder = {
   },
   branding: () => '/branding',
   status: () => 'https://status.trakt.tv',
-  renewVip: () => 'vip/renew',
+  renewVip: (flow?: Extract<VipFlow, 'switch'>) =>
+    flow ? `vip/renew?${new URLSearchParams({ flow })}` : 'vip/renew',
   og: {
     support: (username?: string) => ogSupportFactory(username),
     forums: () => 'https://forums.trakt.tv/c/trakt',

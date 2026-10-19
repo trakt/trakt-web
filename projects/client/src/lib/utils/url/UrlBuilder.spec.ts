@@ -32,6 +32,16 @@ describe('util: UrlBuilder', () => {
     });
   });
 
+  describe('renewVip', () => {
+    it('should point at the renew page', () => {
+      expect(UrlBuilder.renewVip()).to.equal('vip/renew');
+    });
+
+    it('should carry the switch flow', () => {
+      expect(UrlBuilder.renewVip('switch')).to.equal('vip/renew?flow=switch');
+    });
+  });
+
   describe('vip', () => {
     it('should point at the plain vip page without a source', () => {
       expect(UrlBuilder.vip()).to.equal('/vip');

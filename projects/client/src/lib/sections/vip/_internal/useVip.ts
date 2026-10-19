@@ -1,3 +1,4 @@
+import { page } from '$app/state';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
@@ -15,9 +16,20 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { map } from 'rxjs';
+import type { VipFlow } from '$lib/features/upsell/models/VipFlow.ts';
+import type { VipUpsellSource } from '$lib/features/upsell/models/VipUpsellSource.ts';
 import type { AnalyticsEventDataMap } from '$lib/features/analytics/events/AnalyticsEventDataMap.ts';
 import type { VipPlan } from './models/VipPlan.ts';
+import { buildCheckoutReturnUrls } from './utils/buildCheckoutReturnUrls.ts';
+import { parseVipParams } from './utils/parseVipParams.ts';
+import { toVipFailureCode } from './utils/toVipFailureCode.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
+
+type CheckoutRequest = {
+  plan: VipPlan;
+  source: VipUpsellSource;
+  flow: VipFlow;
+};
 
 function getReturnUrl() {
   const url = new URL(UrlBuilder.vip(), globalThis.window.location.origin);
@@ -26,6 +38,9 @@ function getReturnUrl() {
 
 export function useVip() {
   const { track: trackUpgrade } = useTrack(AnalyticsEvent.VipUpgrade);
+  const { track: trackCheckoutFailed } = useTrack(
+    AnalyticsEvent.VipCheckoutFailed,
+  );
   const { track: trackManage } = useTrack(AnalyticsEvent.VipManage);
   const { track: trackCancel } = useTrack(AnalyticsEvent.VipCancel);
 
@@ -36,10 +51,15 @@ export function useVip() {
   const checkout = useMutation(
     defineMutation({
       key: 'vip:start-checkout',
-      request: (plan: VipPlan) =>
+      request: ({ plan, source, flow }: CheckoutRequest) =>
         startCheckoutQuery({
           duration: plan.type,
-          returnUrl: getReturnUrl(),
+          ...buildCheckoutReturnUrls({
+            origin: globalThis.window.location.origin,
+            plan: plan.type,
+            source,
+            flow,
+          }),
         }),
       invalidations: [],
     }),
@@ -90,9 +110,21 @@ export function useVip() {
   return {
     plans,
     startCheckout: async (plan: VipPlan) => {
-      trackUpgrade({ plan: plan.type });
+      const { source, flow } = parseVipParams(page.url);
+      const tracking = { plan: plan.type, source, flow };
+      trackUpgrade(tracking);
 
-      return await checkout.mutate(plan);
+      try {
+        const url = await checkout.mutate({ plan, source, flow });
+        if (!url) {
+          trackCheckoutFailed({ ...tracking, error: 'no_checkout_url' });
+        }
+
+        return url;
+      } catch (error) {
+        trackCheckoutFailed({ ...tracking, error: toVipFailureCode(error) });
+        throw error;
+      }
     },
     manageSubscription: async () => {
       trackManage();

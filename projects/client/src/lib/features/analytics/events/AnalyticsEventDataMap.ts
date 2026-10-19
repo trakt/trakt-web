@@ -72,7 +72,6 @@ type SortType = { sortBy: string; sortHow: string };
 type LikeType = { action: 'like' | 'unlike' };
 type VipUpsellType = { source: VipUpsellSource };
 type VipFunnelType = { source: VipUpsellSource; flow: VipFlow };
-type VipUpgradeType = { plan: string };
 type VipCheckoutType = VipFunnelType & { plan: string };
 type VipCheckoutFailedType = VipCheckoutType & { error: string };
 type VipConfirmFailedType = VipCheckoutType & { error: string };
@@ -205,7 +204,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.VipUpsellImpression]: VipUpsellType;
 
   [AnalyticsEvent.VipView]: VipFunnelType;
-  [AnalyticsEvent.VipUpgrade]: VipUpgradeType;
+  [AnalyticsEvent.VipUpgrade]: VipCheckoutType;
   [AnalyticsEvent.VipCheckoutFailed]: VipCheckoutFailedType;
   [AnalyticsEvent.VipCheckoutCanceled]: VipCheckoutType;
   [AnalyticsEvent.VipConfirmed]: VipCheckoutType;

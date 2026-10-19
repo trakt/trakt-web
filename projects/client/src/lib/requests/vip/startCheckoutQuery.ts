@@ -5,17 +5,17 @@ import { StripeCheckoutResponseSchema } from './_internal/StripeCheckoutResponse
 
 type StartCheckoutParams = {
   duration: VipPlanDuration;
-  returnUrl: string;
+  successUrl: string;
+  cancelUrl: string;
 };
 
 export async function startCheckoutQuery({
   duration,
-  returnUrl,
+  successUrl,
+  cancelUrl,
 }: StartCheckoutParams): Promise<string | Nil> {
-  const url = encodeURIComponent(returnUrl);
-
   const response = await rawApiFetch({
-    path: `/vip/stripe/create?duration=${duration}&success_url=${url}&cancel_url=${url}`,
+    path: `/vip/stripe/create?duration=${duration}&success_url=${encodeURIComponent(successUrl)}&cancel_url=${encodeURIComponent(cancelUrl)}`,
     init: {
       method: 'POST',
     },

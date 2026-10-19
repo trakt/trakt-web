@@ -40,7 +40,7 @@
         variant="primary"
         style="flat"
         text="uppercase"
-        href={UrlBuilder.renewVip()}
+        href={UrlBuilder.renewVip("switch")}
       >
         {m.button_text_vip_paypal_switch()}
       </Button>
