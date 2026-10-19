@@ -143,4 +143,7 @@ export const AnalyticsEvent = {
   StreamingService: 'streaming-action.service',
 
   PreviewFeature: buildEventKey(USER_ACTION_PREFIX, 'preview-feature'),
+
+  OfflineQueued: 'offline.queued',
+  OfflineReplayed: 'offline.replayed',
 } as const;

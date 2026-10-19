@@ -1,5 +1,6 @@
 import type { LoginSource } from '$lib/features/auth/models/LoginSource.ts';
 import type { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
+import type { OfflineActionEndpoint } from '$lib/features/offline/models/OfflineActionEndpoint.ts';
 import type { ShareArrivalOutcome } from '$lib/features/share-arrival/models/ShareArrivalOutcome.ts';
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
@@ -287,4 +288,10 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.StreamingService]: StreamingServiceType;
 
   [AnalyticsEvent.PreviewFeature]: { id: FeatureFlag; state: 'on' | 'off' };
+
+  [AnalyticsEvent.OfflineQueued]: { type: OfflineActionEndpoint };
+  [AnalyticsEvent.OfflineReplayed]: {
+    type: OfflineActionEndpoint;
+    outcome: 'done' | 'failed';
+  };
 };

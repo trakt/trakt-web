@@ -1,9 +1,10 @@
-import { BehaviorSubject, type Observable } from 'rxjs';
+import { BehaviorSubject, type Observable, Subject } from 'rxjs';
 import type { OfflineAction } from '../models/OfflineAction.ts';
 import type { OfflineActionsStorage } from './OfflineActionsStorage.ts';
 
 export type OfflineActionsStore = {
   actions$: Observable<OfflineAction[]>;
+  enqueued$: Observable<OfflineAction>;
   current: () => OfflineAction[];
   enqueue: (action: OfflineAction) => Promise<void>;
   remove: (ids: string[]) => Promise<void>;
@@ -28,6 +29,7 @@ export function createOfflineActionsStore(
   storage: OfflineActionsStorage,
 ): OfflineActionsStore {
   const actions = new BehaviorSubject<OfflineAction[]>([]);
+  const enqueued = new Subject<OfflineAction>();
 
   // A rejected link would brick every later mutation, so each one settles:
   // persistence is best-effort and the in-memory queue stays authoritative.
@@ -54,12 +56,16 @@ export function createOfflineActionsStore(
 
   return {
     actions$: actions.asObservable(),
+    enqueued$: enqueued.asObservable(),
     current: () => actions.getValue(),
-    enqueue: (action) =>
-      mutate((current) => [
+    enqueue: (action) => {
+      enqueued.next(action);
+
+      return mutate((current) => [
         ...current.filter((queued) => !isSuperseded(queued, action)),
         action,
-      ]),
+      ]);
+    },
     remove: (ids) =>
       mutate((current) => current.filter((queued) => !ids.includes(queued.id))),
     refresh: () => {
