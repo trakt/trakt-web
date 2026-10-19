@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { getLocale } from '$lib/features/i18n/index.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
@@ -9,6 +11,8 @@ import { loginErrorStore } from '../_internal/loginErrorStore.ts';
 import { writeAuthMarker } from '../authMarker.ts';
 import { mapToLoginError } from '../mapToLoginError.ts';
 import { LoginErrorType } from '../models/LoginErrorType.ts';
+import type { LoginSource } from '../models/LoginSource.ts';
+import { toLoginFailureCode } from '../toLoginFailureCode.ts';
 import { setToken } from '../token/index.ts';
 import { getAuthContext } from './getAuthContext.ts';
 import { getUserManager } from './userManager.ts';
@@ -36,6 +40,8 @@ function endProviderSession(manager: UserManager | null) {
 export function useAuth() {
   const { isAuthorized } = getAuthContext();
   const { invalidate } = useInvalidator();
+  const { track: trackLoginStart } = useTrack(AnalyticsEvent.LoginStart);
+  const { track: trackLoginFailed } = useTrack(AnalyticsEvent.LoginFailed);
 
   const logout = async () => {
     const manager = getUserManager();
@@ -57,14 +63,16 @@ export function useAuth() {
     await endProviderSession(manager);
   };
 
-  const login = async () => {
+  const login = async (source: LoginSource) => {
     const manager = getUserManager();
 
     loginErrorStore.clear();
+    trackLoginStart({ source });
 
     if (!manager) {
       printError('Failed to start sign-in: no user manager');
       loginErrorStore.set(LoginErrorType.Unreachable);
+      trackLoginFailed({ error: 'no_manager' });
       return;
     }
 
@@ -81,6 +89,7 @@ export function useAuth() {
     } catch (error) {
       printError('Failed to start sign-in:', error);
       loginErrorStore.set(mapToLoginError(error));
+      trackLoginFailed({ error: toLoginFailureCode(error) });
     }
   };
 

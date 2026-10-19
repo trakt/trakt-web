@@ -13,7 +13,7 @@
     style="flat"
     color="custom"
     navigationType={DpadNavigationType.Item}
-    onclick={login}
+    onclick={() => login("landing-get-started")}
     --color-background-custom="var(--purple-500)"
     --color-foreground-custom="var(--shade-10)"
   >

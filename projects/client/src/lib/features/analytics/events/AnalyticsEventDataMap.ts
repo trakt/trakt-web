@@ -1,3 +1,4 @@
+import type { LoginSource } from '$lib/features/auth/models/LoginSource.ts';
 import type { ShareArrivalOutcome } from '$lib/features/share-arrival/models/ShareArrivalOutcome.ts';
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
@@ -253,4 +254,9 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.Favorite]: ActionType;
   [AnalyticsEvent.Rewatching]: { action: 'start' | 'stop' };
+
+  [AnalyticsEvent.LoginStart]: { source: LoginSource };
+  [AnalyticsEvent.LoginComplete]: never;
+  [AnalyticsEvent.LoginFailed]: { error: string };
+  [AnalyticsEvent.Logout]: never;
 };
