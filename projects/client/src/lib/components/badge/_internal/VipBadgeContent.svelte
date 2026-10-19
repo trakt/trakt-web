@@ -32,7 +32,7 @@
     height: var(--ni-28);
     box-sizing: border-box;
 
-    border-radius: var(--border-radius-xl);
+    border-radius: var(--border-radius-pill);
     /* Same design language as VipUpsellBadge: purple gradient + soft glow,
        replacing the legacy flat red pill. The gradient range is wider and a
        glossy top edge is added because the pill is small and often sits on a
