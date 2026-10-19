@@ -12,6 +12,7 @@ type UseWatchUntilHereEpisodesProps = {
   previousSeasons: ReadonlyArray<SeasonRef>;
   currentSeasonEpisodes: ReadonlyArray<EpisodeEntry>;
   watchedBySeason: ReadonlyMap<number, ReadonlySet<number>>;
+  includesTarget: boolean;
 };
 
 function toWatchUntilEpisode(entry: EpisodeEntry): WatchUntilEpisode {
@@ -44,6 +45,7 @@ export function useWatchUntilHereEpisodes({
   previousSeasons,
   currentSeasonEpisodes,
   watchedBySeason,
+  includesTarget,
 }: UseWatchUntilHereEpisodesProps) {
   const previousResults = previousSeasons
     .filter((season) => season.number < targetEpisode.season)
@@ -68,7 +70,7 @@ export function useWatchUntilHereEpisodes({
     filterUnwatched(
       currentSeasonEpisodes,
       currentWatched,
-      targetEpisode.number,
+      includesTarget ? targetEpisode.number : targetEpisode.number - 1,
     ).map(toWatchUntilEpisode),
   );
 

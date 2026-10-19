@@ -105,7 +105,7 @@
     }),
   );
 
-  let isWatchUntilDrawerOpen = $state(false);
+  let watchUntilOpening = $state<"menu" | "toast" | null>(null);
 
   const { notify, dismiss } = useActionToast();
   let gapToastId: string | null = null;
@@ -122,7 +122,7 @@
         text: m.button_text_watched_until_here(),
         label: m.button_label_watched_until_here({ title: show.title }),
         onAction: () => {
-          isWatchUntilDrawerOpen = true;
+          watchUntilOpening = "toast";
         },
       },
     });
@@ -133,13 +133,14 @@
   });
 
   const watchUntilResolver = $derived.by(() => {
-    if (!isWatchUntilDrawerOpen) return null;
+    if (!watchUntilOpening) return null;
     return useWatchUntilHereEpisodes({
       showSlug: show.slug,
       targetEpisode: { season: episode.season, number: episode.number },
       previousSeasons,
       currentSeasonEpisodes,
       watchedBySeason,
+      includesTarget: watchUntilOpening === "menu",
     });
   });
   const resolvedEpisodes = $derived(watchUntilResolver?.episodes);
@@ -161,7 +162,7 @@
     {/if}
     {#if hasBulkMarkAsWatched}
       <DropdownItem
-        onclick={() => (isWatchUntilDrawerOpen = true)}
+        onclick={() => (watchUntilOpening = "menu")}
         label={m.button_label_watched_until_here({ title: show.title })}
         disabled={isWatchedLoading}
       >
@@ -220,13 +221,13 @@
   {@render episodeItem()}
 </div>
 
-{#if isWatchUntilDrawerOpen && resolvedEpisodes}
+{#if watchUntilOpening && resolvedEpisodes}
   <WatchedUntilHereDrawer
     {show}
     title={show.title}
     episodes={$resolvedEpisodes ?? []}
     isResolvingEpisodes={$isResolvingEpisodes ?? false}
-    onClose={() => (isWatchUntilDrawerOpen = false)}
+    onClose={() => (watchUntilOpening = null)}
   />
 {/if}
 
