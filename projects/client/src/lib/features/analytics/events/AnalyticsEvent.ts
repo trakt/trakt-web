@@ -127,4 +127,9 @@ export const AnalyticsEvent = {
 
   Favorite: buildEventKey(MEDIA_ACTION_PREFIX, 'favorite'),
   Rewatching: buildEventKey(MEDIA_ACTION_PREFIX, 'rewatching'),
+
+  LoginStart: 'auth-action.login-start',
+  LoginComplete: 'auth-action.login-complete',
+  LoginFailed: 'auth-action.login-failed',
+  Logout: 'auth-action.logout',
 } as const;

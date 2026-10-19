@@ -19,7 +19,7 @@
     navigationType={DpadNavigationType.Item}
     {size}
     {icon}
-    onclick={login}
+    onclick={() => login("navbar")}
   >
     {m.button_text_join_trakt()}
   </Button>

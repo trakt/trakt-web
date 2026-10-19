@@ -14,7 +14,7 @@
     size="small"
     color="custom"
     navigationType={DpadNavigationType.Item}
-    onclick={login}
+    onclick={() => login("landing-login")}
     --color-background-custom="color-mix(in srgb, var(--shade-10) 7%, transparent)"
     --color-foreground-custom="var(--shade-10)"
   >

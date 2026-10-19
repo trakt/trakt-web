@@ -46,7 +46,7 @@ export function useRedirect() {
     ].includes(ref as RedirectRef);
 
     if (shouldAutoSignin && !isAuthorized.value) {
-      login();
+      login('redirect');
       return;
     }
 

@@ -2,6 +2,8 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import LogoutIcon from "$lib/components/icons/LogoutIcon.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -13,12 +15,16 @@
   }: { style?: "normal" | "action" | "dropdown-item" } = $props();
 
   const { logout } = useAuth();
+  const { track } = useTrack(AnalyticsEvent.Logout);
 
   const { confirm } = useConfirm();
   const confirmLogout = $derived(
     confirm({
       type: ConfirmationType.Logout,
-      onConfirm: logout,
+      onConfirm: () => {
+        track();
+        return logout();
+      },
     }),
   );
 
