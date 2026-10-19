@@ -6,6 +6,8 @@
   import DeleteIcon from "$lib/components/icons/DeleteIcon.svelte";
   import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
   import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -36,6 +38,7 @@
     iffy(() => connection.id),
   );
   const { confirm } = useConfirm();
+  const { track: trackSetting } = useTrack(AnalyticsEvent.PlexSetting);
   const { importPastWatches } = useServerActions(iffy(() => connection.id));
 
   async function importPast() {
@@ -93,12 +96,24 @@
   }
 
   function toggleLibrary(libraryId: number) {
+    trackSetting({
+      section: "libraries",
+      setting: "library",
+      state: enabledLibraryIds.includes(libraryId) ? "off" : "on",
+    });
+
     enabledLibraryIds = enabledLibraryIds.includes(libraryId)
       ? enabledLibraryIds.filter((id) => id !== libraryId)
       : [...enabledLibraryIds, libraryId];
   }
 
   function toggleFeed(feed: MediaSyncFeed) {
+    trackSetting({
+      section: "feeds",
+      setting: feed,
+      state: feeds.includes(feed) ? "off" : "on",
+    });
+
     feeds = feeds.includes(feed)
       ? feeds.filter((current) => current !== feed)
       : [...feeds, feed];

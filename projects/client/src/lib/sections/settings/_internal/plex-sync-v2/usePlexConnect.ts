@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import { createMediaSyncConnectionRequest } from '$lib/requests/media-sync/createMediaSyncConnectionRequest.ts';
@@ -32,6 +34,7 @@ type ServerDetails = {
 };
 
 export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
+  const { track } = useTrack(AnalyticsEvent.PlexConnect);
   const state = new BehaviorSubject<PlexConnectState>({ step: 'idle' });
   const serverDetails = new Map<string, Promise<ServerDetails>>();
   let popup: Window | null = null;
@@ -59,6 +62,11 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     }),
   );
 
+  function fail(error: string) {
+    track({ action: 'fail' });
+    state.next({ step: 'failed', error });
+  }
+
   function stopPolling() {
     clearTimeout(pollTimer);
     pollTimer = undefined;
@@ -85,6 +93,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
 
     if (Date.now() > deadline) {
       closePopup();
+      track({ action: 'fail' });
       state.next({ step: 'expired' });
       return;
     }
@@ -121,6 +130,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
 
   async function start() {
     const startId = ++latestStartId;
+    track({ action: 'start' });
     stopPolling();
     serverDetails.clear();
     popup = globalThis.window.open('', POPUP_NAME, POPUP_FEATURES);
@@ -142,7 +152,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       if (startId !== latestStartId) return;
 
       closePopup();
-      state.next({ step: 'failed', error: 'sign_in_failed' });
+      fail('sign_in_failed');
     }
   }
 
@@ -192,7 +202,7 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     if (latest.step !== 'choosing' || latest.serverId !== serverId) return;
 
     if (!libraries || !accounts) {
-      state.next({ step: 'failed', error: 'server_details_failed' });
+      fail('server_details_failed');
       return;
     }
 
@@ -262,10 +272,11 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
       .catch(() => null);
 
     if (!result?.ok) {
-      state.next({ step: 'failed', error: result?.error ?? 'connect_failed' });
+      fail(result?.error ?? 'connect_failed');
       return;
     }
 
+    track({ action: 'complete' });
     state.next({ step: 'idle' });
     onConnected();
   }
