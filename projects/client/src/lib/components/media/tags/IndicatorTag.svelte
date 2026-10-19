@@ -30,7 +30,6 @@
   <StemTag
     --color-background-stem-tag="var(--color-background-indicator-tag)"
     --color-foreground-stem-tag="var(--color-text-indicator-tag)"
-    --border-radius-tag="var(--border-radius-s)"
     {icon}
   />
 </trakt-indicator-tag>
@@ -54,9 +53,16 @@
     }
 
     :global(.trakt-tag) {
-      width: var(--ni-10);
-      height: var(--ni-10);
-      line-height: var(--ni-10);
+      justify-content: center;
+
+      width: var(--ni-24);
+      height: var(--ni-16);
+      padding: 0;
+      line-height: var(--ni-16);
+
+      :global(trakt-tag-icon) {
+        display: flex;
+      }
 
       :global(trakt-tag-icon svg) {
         width: var(--ni-10);

@@ -29,7 +29,6 @@
 
 <PosterTags
   variant="full"
-  --border-radius-tag="var(--border-radius-s)"
   {isRewatching}
   isWatched={watchCount > 0}
   isPartiallyWatched={isStarted}
