@@ -1,4 +1,6 @@
 import { page } from '$app/state';
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
 import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
@@ -13,6 +15,7 @@ import { streamingConnectionStatus } from './streamingConnectionStatus.ts';
 
 export function useStreamingServicesActions() {
   const { confirm } = useConfirm();
+  const { track } = useTrack(AnalyticsEvent.StreamingService);
 
   const refresh = useMutation(
     defineMutation({
@@ -53,6 +56,8 @@ export function useStreamingServicesActions() {
     ).toString();
 
   const connect = async (serviceId: string) => {
+    track({ action: 'connect', service: serviceId });
+
     const url = await connectStreamingRequest({
       serviceId,
       returnUrl: buildReturnUrl(),
@@ -68,6 +73,8 @@ export function useStreamingServicesActions() {
   };
 
   const sync = async (serviceId: string, allData = false) => {
+    track({ action: 'sync', service: serviceId });
+
     await refresh.mutate({ serviceId, allData });
   };
 
@@ -75,13 +82,21 @@ export function useStreamingServicesActions() {
     confirm({
       type: ConfirmationType.UnlinkStreaming,
       service: service.name,
-      onConfirm: () => disconnect.mutate(service.id),
+      onConfirm: () => {
+        track({ action: 'unlink', service: service.id });
+
+        return disconnect.mutate(service.id);
+      },
     });
 
   const undo = (syncId: number) =>
     confirm({
       type: ConfirmationType.UndoSync,
-      onConfirm: () => undoSync.mutate(syncId),
+      onConfirm: () => {
+        track({ action: 'undo' });
+
+        return undoSync.mutate(syncId);
+      },
     });
 
   return { connect, sync, unlink, undo };
