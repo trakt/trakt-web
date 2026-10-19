@@ -2,11 +2,7 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
-  import PlexLibraryIcon from "$lib/components/icons/PlexLibraryIcon.svelte";
   import ServerIcon from "$lib/components/icons/ServerIcon.svelte";
-  import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
-  import TabView from "$lib/components/tabs/TabView.svelte";
-  import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaSyncFeed } from "$lib/requests/media-sync/models/MediaSyncFeed.ts";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
@@ -14,13 +10,14 @@
   import SyncLoadError from "../SyncLoadError.svelte";
   import type { PlexConnectState } from "./models/PlexConnectState.ts";
   import type { PlexConnectStep } from "./models/PlexConnectStep.ts";
+  import HistoryStartChoice from "./HistoryStartChoice.svelte";
   import PlexConnectProgress from "./PlexConnectProgress.svelte";
   import SettingsPill from "../SettingsPill.svelte";
-  import PlexFeedSwitches from "./PlexFeedSwitches.svelte";
   import PlexProfilePicker from "./PlexProfilePicker.svelte";
   import PlexWebhookOnlyNote from "./PlexWebhookOnlyNote.svelte";
   import { PLEX_ACCOUNT_SERVER_ID } from "./PLEX_ACCOUNT_SERVER_ID.ts";
   import { isWebhookOnlyServer } from "./isWebhookOnlyServer.ts";
+  import SyncChoices from "./SyncChoices.svelte";
   import { toConnectSteps } from "./toConnectSteps.ts";
 
   const {
@@ -142,17 +139,6 @@
     }
   }
 </script>
-
-{#snippet historySummary()}
-  {#if flow.step === "choosing"}
-    <p>
-      {flow.importHistory
-        ? m.description_media_sync_history_all()
-        : m.description_media_sync_history_today()}
-      <span class="secondary">{m.description_media_sync_history_always_full()}</span>
-    </p>
-  {/if}
-{/snippet}
 
 <Drawer {onClose} title={m.header_media_sync_connect()} size="auto">
   {#snippet footer()}
@@ -316,86 +302,20 @@
             hasTitle={false}
           />
         {:else if flow.step === "choosing" && step === "sync"}
-          <div class="sync-choices">
-            <PlexFeedSwitches
-              feeds={flow.feeds}
-              available={isAccountOnly ? ["watchlist"] : undefined}
-              onToggle={onToggleFeed}
-            />
-            {#if !isAccountOnly}
-            <SettingsGroupCard
-              variant="bare"
-              title={m.header_media_sync_choose_libraries()}
-            >
-              {#each flow.libraries ?? [] as library (library.externalId)}
-                <SettingsGroupRow title={library.title} variant="custom">
-                  {#snippet icon()}<PlexLibraryIcon />{/snippet}
-                  <Switch
-                    label={library.title}
-                    checked={flow.libraryIds.includes(library.externalId)}
-                    onclick={() =>
-                      onToggleLibrary(
-                        library.externalId,
-                        !flow.libraryIds.includes(library.externalId),
-                      )}
-                  />
-                </SettingsGroupRow>
-              {/each}
-            </SettingsGroupCard>
-            {/if}
-          </div>
+          <SyncChoices
+            feeds={flow.feeds}
+            available={isAccountOnly ? ["watchlist"] : undefined}
+            libraries={isAccountOnly ? undefined : (flow.libraries ?? [])}
+            libraryIds={flow.libraryIds}
+            {onToggleFeed}
+            {onToggleLibrary}
+          />
         {:else if flow.step === "choosing" && step === "history"}
-          <div class="history-start">
-            <p class="bold">{m.header_media_sync_history_start()}</p>
-            <div class="timeline">
-              <div class="track">
-                <div class="past" class:is-dimmed={!flow.importHistory}>
-                  <DistributionBar
-                    fraction={1}
-                    color="var(--purple-500)"
-                    fillStyle="flat"
-                    animated={false}
-                    label={m.label_media_sync_history_past()}
-                  />
-                </div>
-                <span class="today-marker"></span>
-                <div class="future">
-                  <DistributionBar
-                    fraction={1}
-                    color="var(--purple-500)"
-                    fillStyle="flat"
-                    animated={false}
-                    label={m.label_media_sync_history_from_now()}
-                  />
-                </div>
-              </div>
-              <div class="track-labels small secondary">
-                <span class="past">
-                  {flow.importHistory
-                    ? m.label_media_sync_history_first_play()
-                    : m.label_media_sync_history_skipped()}
-                </span>
-                <span class="future">{m.label_media_sync_history_today()}</span>
-              </div>
-            </div>
-            <TabView
-              value={flow.importHistory ? "all" : "today"}
-              onChange={(value) => onChooseImportHistory(value === "all")}
-              tabs={[
-                {
-                  value: "all",
-                  label: m.tab_text_media_sync_history_all(),
-                  content: historySummary,
-                },
-                {
-                  value: "today",
-                  label: m.tab_text_media_sync_history_today(),
-                  content: historySummary,
-                },
-              ]}
-            />
-            <p class="small secondary">{m.hint_media_sync_history_resync()}</p>
-          </div>
+          <HistoryStartChoice
+            importHistory={flow.importHistory}
+            alwaysFullNote={m.description_media_sync_history_always_full()}
+            onChoose={onChooseImportHistory}
+          />
         {:else}
           <div class="loading-container">
             <LoadingIndicator size="small" />
@@ -418,51 +338,10 @@
     }
   }
 
-  .sign-in,
-  .sync-choices,
-  .history-start {
+  .sign-in {
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
-  }
-
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xs);
-  }
-
-  .track,
-  .track-labels {
-    display: flex;
-    gap: var(--gap-xs);
-
-    .past {
-      flex: 7;
-    }
-
-    .future {
-      flex: 3;
-    }
-  }
-
-  .track {
-    align-items: center;
-
-    .past {
-      transition: opacity var(--transition-increment) ease-in-out;
-
-      &.is-dimmed {
-        opacity: 0.3;
-      }
-    }
-  }
-
-  .today-marker {
-    width: var(--ni-4);
-    height: var(--ni-16);
-    border-radius: var(--border-radius-xl);
-    background: var(--purple-500);
   }
 
   .wizard-actions {
