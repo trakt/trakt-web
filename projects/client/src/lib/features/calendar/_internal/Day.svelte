@@ -12,9 +12,11 @@
   const {
     day,
     isActiveDate,
+    isLoading = false,
   }: {
     day: { date: Date; items: T[] };
     isActiveDate: boolean;
+    isLoading?: boolean;
   } = $props();
 
   const itemCount = $derived(day.items.length);
@@ -28,6 +30,7 @@
   })}
   class:has-items={itemCount > 0}
   class:is-active={isActiveDate}
+  class:is-loading={isLoading}
   class:is-past={isPast}
   class:is-today={isToday(day.date)}
   onclick={() => scrollToCalendarDay(day.date)}
@@ -37,7 +40,7 @@
     <span class="month">{toHumanMonth(day.date, languageTag(), "short")}</span>
   </span>
 
-  <ContentIndicator {itemCount} />
+  <ContentIndicator {itemCount} {isLoading} />
 </button>
 
 <style lang="scss">
@@ -102,7 +105,10 @@
 
   .trakt-calendar-day-button:not(.has-items) {
     pointer-events: none;
-    opacity: 0.3;
+
+    &:not(.is-loading) {
+      opacity: 0.3;
+    }
   }
 
   .trakt-calendar-day-button:focus-visible .day-cell {

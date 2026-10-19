@@ -7,11 +7,25 @@
   import CalendarSwipe from "./CalendarSwipe.svelte";
   import { dateKey } from "./dateKey";
   import Day from "./Day.svelte";
+  import { toPlaceholderWeek } from "./toPlaceholderWeek.ts";
 
-  type CalendarDaysProps = { calendar: Calendar<T> } & CalendarNavigationProps;
+  type CalendarDaysProps = {
+    calendar: Calendar<T>;
+    isLoading?: boolean;
+  } & CalendarNavigationProps;
 
-  const { calendar, activeDate, navigation, maxDate }: CalendarDaysProps =
-    $props();
+  const {
+    calendar,
+    activeDate,
+    navigation,
+    maxDate,
+    isLoading = false,
+  }: CalendarDaysProps = $props();
+
+  const isPending = $derived(isLoading && calendar.length === 0);
+  const days = $derived(
+    isPending ? toPlaceholderWeek(activeDate, getLocale()) : calendar,
+  );
 
   const isNextDisabled = $derived(
     isMaxWeek({ date: activeDate, maxDate, locale: getLocale() }),
@@ -23,10 +37,11 @@
 
 {#snippet calendarDays()}
   <div class="trakt-calendar-days">
-    {#each calendar as day (dateKey(day.date))}
+    {#each days as day (dateKey(day.date))}
       <Day
         {day}
         isActiveDate={day.date.toDateString() === activeDate.toDateString()}
+        isLoading={isPending}
       />
     {/each}
   </div>

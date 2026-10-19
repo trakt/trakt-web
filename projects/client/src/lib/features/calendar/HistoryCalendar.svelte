@@ -75,6 +75,7 @@
       <CalendarWeekdayRow />
       <CalendarDays
         calendar={visiblePeriodCalendar}
+        {isLoading}
         {navigation}
         {maxDate}
         activeDate={selectedDate}
