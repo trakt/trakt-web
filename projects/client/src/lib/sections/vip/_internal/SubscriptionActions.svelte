@@ -62,7 +62,6 @@
   }
 
   const onManage = async () => {
-    track();
     const result = await reportFailure(manageSubscription, "manage");
 
     if (result.kind === "redirect") {
