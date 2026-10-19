@@ -10935,6 +10935,19 @@
         }
       }
     },
+    "text_today_watched_rated": {
+      "default": "Watched and rated",
+      "description": "What a followed person did: watched a movie and rated it. Shown on its own line in a Today story card, under the person's name and above the time."
+    },
+    "text_today_watched_rated_episode": {
+      "default": "Watched and rated {episode}",
+      "description": "What a followed person did: watched one episode and rated it, e.g. Watched and rated S1 • E1. Shown on its own line in a Today story card, under the person's name and above the time.",
+      "variables": {
+        "episode": {
+          "type": "string"
+        }
+      }
+    },
     "text_today_rated": {
       "default": "Rated",
       "description": "What a followed person did: rated a title. Shown on its own line in a Today story card, under the person's name and above the time."
@@ -10977,6 +10990,27 @@
     "text_today_watched_episode_at": {
       "default": "Watched {episode} · {time}",
       "description": "When a followed person watched an episode in the last 24 hours. The episode is a season and episode number, the time is a clock time, or a day and a clock time.",
+      "variables": {
+        "episode": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_watched_rated_at": {
+      "default": "Watched and rated · {time}",
+      "description": "When a followed person watched a movie and rated it in the last 24 hours. The time is a clock time, or a day and a clock time.",
+      "variables": {
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_today_watched_rated_episode_at": {
+      "default": "Watched and rated {episode} · {time}",
+      "description": "When a followed person watched an episode and rated it in the last 24 hours. The episode is a season and episode number, the time is a clock time, or a day and a clock time.",
       "variables": {
         "episode": {
           "type": "string"

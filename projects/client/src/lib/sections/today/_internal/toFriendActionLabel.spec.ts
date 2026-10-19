@@ -33,4 +33,22 @@ describe('util: toFriendActionLabel', () => {
       }),
     ).toBe('Watched');
   });
+
+  it('should say an episode was also rated', () => {
+    expect(toFriendActionLabel({ ...watch, rating: 8 })).toBe(
+      `Watched and rated S${EpisodeSiloMappedMock.season} • E${EpisodeSiloMappedMock.number}`,
+    );
+  });
+
+  it('should say a movie was also rated', () => {
+    expect(
+      toFriendActionLabel({
+        ...watch,
+        target: 'movie',
+        episode: null,
+        episodeCount: 0,
+        rating: 8,
+      }),
+    ).toBe('Watched and rated');
+  });
 });

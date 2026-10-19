@@ -8,6 +8,12 @@ function toWatchLabel(action: TodayFriendAction): string {
   }
 
   const episode = action.episode ? toFriendItemLabel(action) : null;
+  if (action.rating != null) {
+    return episode
+      ? m.text_today_watched_rated_episode({ episode })
+      : m.text_today_watched_rated();
+  }
+
   return episode
     ? m.text_today_watched_episode({ episode })
     : m.text_today_watched();
