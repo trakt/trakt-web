@@ -58,6 +58,31 @@ describe('util: toStoryGroups', () => {
     ]);
   });
 
+  it('should play the friend actions oldest first', () => {
+    const earlier = new Date('2026-09-28T08:00:00.000Z');
+    const [group] = toStoryGroups({
+      forYou: [],
+      titles: [
+        {
+          ...story([ron]),
+          actions: [
+            buildFriendAction({ key: 'latest', user: ron, activityAt: at }),
+            buildFriendAction({
+              key: 'oldest',
+              user: ron,
+              activityAt: earlier,
+            }),
+          ],
+        },
+      ],
+    });
+
+    expect(group?.frames.map((frame) => frame.key)).toEqual([
+      'movie-1-oldest',
+      'movie-1-latest',
+    ]);
+  });
+
   it('should show a single friend without a summary', () => {
     const [group] = toStoryGroups({ forYou: [], titles: [story([ron])] });
 

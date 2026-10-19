@@ -2,6 +2,7 @@ import type { TodayForYouItem } from '../models/TodayForYouItem.ts';
 import type { TodayStoryFrame } from '../models/TodayStoryFrame.ts';
 import type { TodayStoryGroup } from '../models/TodayStoryGroup.ts';
 import type { TodayTitleStory } from '../models/TodayTitleStory.ts';
+import { byMostRecent } from './byMostRecent.ts';
 
 const FOR_YOU_STORY_KEY = 'for-you';
 
@@ -11,14 +12,16 @@ type ToStoryGroupsParams = {
 };
 
 function toTitleFrames(story: TodayTitleStory): TodayStoryFrame[] {
-  const friendFrames = story.actions.map(
-    (action): TodayStoryFrame => ({
-      key: `${story.key}-${action.key}`,
-      type: 'friend',
-      story,
-      action,
-    }),
-  );
+  const friendFrames = story.actions
+    .toSorted((a, b) => byMostRecent(b, a))
+    .map(
+      (action): TodayStoryFrame => ({
+        key: `${story.key}-${action.key}`,
+        type: 'friend',
+        story,
+        action,
+      }),
+    );
 
   if (story.users.length < 2) return friendFrames;
 
