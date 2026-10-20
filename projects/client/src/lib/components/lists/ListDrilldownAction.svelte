@@ -43,6 +43,7 @@
 <style>
   .trakt-list-drilldown-action {
     appearance: none;
+    -webkit-tap-highlight-color: transparent;
     background: none;
     border: none;
     padding: 0;

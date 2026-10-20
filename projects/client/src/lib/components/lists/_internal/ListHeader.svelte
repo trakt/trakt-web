@@ -3,7 +3,7 @@
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import * as m from "$lib/features/i18n/messages.ts";
   import ListLabel from "../ListLabel.svelte";
-  import ListDrilldownAction from "./ListDrilldownAction.svelte";
+  import ListDrilldownAction from "../ListDrilldownAction.svelte";
   import type { ListHeaderProps } from "./ListHeaderProps.ts";
 
   const {
@@ -15,24 +15,19 @@
     navigationType,
     drilldown,
     listActions,
-    disabled,
     collapse,
     count,
     filters,
-    ...props
   }: ListHeaderProps = $props();
 
   const { isEditMode } = useEditMode();
 
-  const isViewAllVisible = $derived(
-    Boolean(drilldown) &&
-      !$isEditMode &&
-      !disabled &&
-      drilldown?.mode !== "disabled",
+  const viewAll = $derived(
+    $isEditMode || drilldown?.mode === "disabled" ? undefined : drilldown,
   );
 </script>
 
-<div class="trakt-list-inset-title" {...props}>
+<div class="trakt-list-inset-title">
   <div class="list-header" class:has-filters={Boolean(filters)}>
     <div class="label-start">
       <div class="label-line">
@@ -74,9 +69,9 @@
         </div>
       {/if}
 
-      {#if isViewAllVisible && drilldown}
+      {#if viewAll}
         <div class="view-all">
-          <ListDrilldownAction {drilldown}>
+          <ListDrilldownAction drilldown={viewAll}>
             <span class="view-all-text">{m.text_view_all()}</span>
             <CaretRightIcon />
           </ListDrilldownAction>
@@ -85,33 +80,34 @@
     </div>
   </div>
 
-  {#if listActions}
-    {@render listActions()}
-  {/if}
+  {@render listActions?.()}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   .trakt-list-inset-title {
-    margin: 0;
-    margin-inline-start: var(--layout-distance-side);
-    margin-inline-end: var(--layout-distance-side);
+    margin-block: 0;
+    margin-inline: var(--layout-distance-side);
     transition: margin-inline-start calc(var(--transition-increment) * 2)
       ease-in-out;
-
-    @include for-tablet-sm-and-below {
-      margin-inline-start: calc(var(--layout-distance-side));
-    }
   }
 
   .list-header {
+    --list-header-row-height: var(--ni-40);
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--gap-s);
-    min-height: var(--ni-40);
+    min-height: var(--list-header-row-height);
     user-select: none;
+
+    /* The first line matches the filters' 44px row, so when they wrap, View
+       all stays level with the label. */
+    &.has-filters {
+      --list-header-row-height: var(--ni-44);
+    }
   }
 
   .label-start {
@@ -148,7 +144,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-    min-height: var(--ni-40);
+    min-height: var(--list-header-row-height);
 
     :global(.trakt-action-button) {
       --button-size: var(--ni-32);
@@ -172,15 +168,17 @@
     }
   }
 
-  .label-plain {
+  .label-plain,
+  .label-toggle {
     display: flex;
     align-items: center;
     min-width: 0;
-    min-height: var(--ni-40);
+    min-height: var(--list-header-row-height);
   }
 
   .label-toggle {
     appearance: none;
+    -webkit-tap-highlight-color: transparent;
     background: none;
     border: none;
     margin: 0;
@@ -188,30 +186,12 @@
     font: inherit;
     color: inherit;
     cursor: pointer;
-
-    display: flex;
-    align-items: center;
     gap: var(--gap-micro);
-    min-width: 0;
-    min-height: var(--ni-40);
 
     &:focus-visible {
       outline: var(--border-thickness-xs) solid var(--color-input-focus);
       outline-offset: var(--ni-2);
       border-radius: var(--border-radius-xs);
-    }
-  }
-
-  /* The first line matches the filters' 44px row, so when they wrap, View
-     all stays level with the label. */
-  .list-header.has-filters {
-    .label-toggle,
-    .label-plain {
-      min-height: var(--ni-44);
-    }
-
-    .label-end {
-      min-height: var(--ni-44);
     }
   }
 
@@ -252,7 +232,7 @@
       display: flex;
       align-items: center;
       gap: var(--gap-micro);
-      min-height: var(--ni-40);
+      min-height: var(--list-header-row-height);
 
       text-decoration: none;
       color: var(--color-text-secondary);

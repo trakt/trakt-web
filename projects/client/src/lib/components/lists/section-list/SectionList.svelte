@@ -93,8 +93,6 @@
   const { isEnabled } = useFeatureFlag();
   const isEditModeEnabled = $derived(isEnabled(FeatureFlag.EditMode));
 
-  const isHeaderVisible = $derived(Boolean(title));
-
   const { navigation } = useNavigation();
   const isVisible = writable($navigation === "dpad");
   const isMounted = writable(false);
@@ -126,6 +124,12 @@
 
   const hasListActions = $derived(Boolean(externalListActions));
 
+  const headerDrilldown = $derived(
+    isCollapsed || (items.length === 0 && drilldown?.mode !== "always")
+      ? undefined
+      : drilldown,
+  );
+
   const collapse = $derived(
     variant === "default" && !$isEditModeEnabled && !externalTitleAction
       ? {
@@ -139,16 +143,11 @@
   );
 </script>
 
-
-{#snippet defaultActions()}
-  {@render _externalActions?.()}
-{/snippet}
-
 {#snippet actions()}
   <RenderForFeature flag={FeatureFlag.EditMode}>
     {#snippet enabled()}
       {#if !$isEditMode}
-        {@render defaultActions()}
+        {@render _externalActions?.()}
       {:else}
         <EditModeVisibilityButton
           isHidden={$isHidden}
@@ -160,7 +159,7 @@
       {/if}
     {/snippet}
 
-    {@render defaultActions()}
+    {@render _externalActions?.()}
   </RenderForFeature>
 {/snippet}
 
@@ -176,7 +175,7 @@
     class="section-list-container"
     class:section-list-container-collapsed={isCollapsed}
     class:section-list-container-mounted={$isMounted}
-    class:section-list-container-no-header={!isHeaderVisible}
+    class:section-list-container-no-header={!title}
     class:section-list-has-drilldown={Boolean(drilldown)}
     class:section-list-has-list-actions={hasListActions}
     class:section-list-has-multiple-items={items.length > 1}
@@ -187,7 +186,7 @@
       : undefined}
   >
     {#if $isVisible}
-      {#if isHeaderVisible && title}
+      {#if title}
         <div class="section-list-header" use:observeHeader>
           <ListHeader
             {title}
@@ -200,8 +199,7 @@
             actions={isCollapsed ? undefined : actions}
             listActions={hasListActions ? listActions : undefined}
             navigationType={headerNavigationType}
-            drilldown={isCollapsed ? undefined : drilldown}
-            disabled={items.length === 0 && drilldown?.mode !== "always"}
+            drilldown={headerDrilldown}
           />
         </div>
       {/if}
