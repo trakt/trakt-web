@@ -1,6 +1,8 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { GifEntry } from "$lib/requests/models/GifEntry.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
@@ -8,16 +10,20 @@
   import { GIF_SEARCH_DEBOUNCE } from "./_internal/constants.ts";
   import GifCategories from "./_internal/GifCategories.svelte";
   import GifResults from "./_internal/GifResults.svelte";
+  import type { GifPickerSource } from "./GifPickerSource.ts";
   import { klipyCustomerId } from "./klipyCustomerId.ts";
 
   type GifPickerDrawerHostProps = {
     onClose: () => void;
     onSelect: (gif: GifEntry) => void;
     suggestedQuery?: string;
+    source: GifPickerSource;
   };
 
-  const { onClose, onSelect, suggestedQuery }: GifPickerDrawerHostProps =
-    $props();
+  const { onClose, onSelect, suggestedQuery, source }:
+    GifPickerDrawerHostProps = $props();
+
+  const { track } = useTrack(AnalyticsEvent.GifPicker);
 
   const customerId = klipyCustomerId();
 
@@ -33,8 +39,14 @@
   const term = $derived($debouncedTerm ?? "");
   const query = $derived(term || suggestedQuery || "");
 
+  const selectCategory = (category: string) => {
+    track({ action: "category", source });
+    searchTerm = category;
+  };
+
   // Klipy hears about the gif only once the comment carrying it is posted.
   const select = (gif: GifEntry) => {
+    track({ action: "select", source });
     onSelect(gif);
     onClose();
   };
@@ -56,7 +68,7 @@
     />
 
     {#if !term}
-      <GifCategories {customerId} onSelect={(term) => (searchTerm = term)} />
+      <GifCategories {customerId} onSelect={selectCategory} />
     {/if}
 
     <!-- Keyed so each term builds its query observer once, at setup. -->

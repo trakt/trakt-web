@@ -80,6 +80,7 @@
 
 {#snippet actions()}
   <GifButton
+    source="comment"
     disabled={$isCommenting}
     suggestedQuery={gifSuggestedQuery}
     onSelect={(selected) => (gif = toCommentDraftGif(selected))}
