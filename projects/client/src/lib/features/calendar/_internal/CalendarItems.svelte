@@ -9,34 +9,27 @@
     item,
     layout,
     order = "chronological",
-    empty,
   }: {
     calendar: { date: Date; items: T[] }[];
     item: Snippet<[T]>;
-    empty: Snippet;
     layout: "list" | "grid";
     order?: "chronological" | "reverse-chronological";
   } = $props();
 
-  const isEmpty = $derived(calendar.every((day) => day.items.length === 0));
   const orderedCalendar = $derived(
     order === "chronological" ? calendar : calendar.toReversed(),
   );
 </script>
 
 <div class="trakt-calendar-items" data-layout={layout}>
-  {#if isEmpty}
-    {@render empty()}
-  {:else}
-    {#each orderedCalendar as day (dateKey(day.date))}
-      {#if day.items.length > 0}
-        <div id={dateKey(day.date)} class="calendar-day-anchor">
-          <CalendarDayHeader date={day.date} count={day.items.length} />
-          <GridList items={day.items} id={dateKey(day.date)} {item} />
-        </div>
-      {/if}
-    {/each}
-  {/if}
+  {#each orderedCalendar as day (dateKey(day.date))}
+    {#if day.items.length > 0}
+      <div id={dateKey(day.date)} class="calendar-day-anchor">
+        <CalendarDayHeader date={day.date} count={day.items.length} />
+        <GridList items={day.items} id={dateKey(day.date)} {item} />
+      </div>
+    {/if}
+  {/each}
 </div>
 
 <style lang="scss">
