@@ -28,7 +28,13 @@
   });
 </script>
 
-<SearchResultsGrid {title} items={$list} {type}>
+<SearchResultsGrid
+  {title}
+  items={$list}
+  {type}
+  source="search-trending"
+  trackPosition={false}
+>
   {#snippet empty()}
     {#if isLoading}
       <LoadingIndicator size="large" />

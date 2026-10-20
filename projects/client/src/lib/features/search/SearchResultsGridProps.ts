@@ -8,4 +8,6 @@ export type SearchResultsGridProps = {
   items: Array<SearchItem>;
   onclick?: (item: SearchItem) => void;
   type: 'media' | 'people' | 'lists';
+  source?: string;
+  trackPosition?: boolean;
 };
