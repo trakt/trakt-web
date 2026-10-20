@@ -591,9 +591,9 @@
     }
   }
 
-  /* No track: each option is its own chip-height pill inside a 44px target. */
+  /* No track: each option is its own 26px pill inside a 44px target. */
   .trakt-segmented-select[data-style="pills"] {
-    --segment-height: var(--segmented-select-segment-height);
+    --segment-height: calc(var(--ni-24) + var(--ni-2));
     --segment-inset: var(--ni-0);
     --segment-block-inset: calc((var(--ni-44) - var(--segment-height)) / 2);
     --segment-gap: var(--ni-6);
@@ -653,14 +653,14 @@
       }
 
       .segment-icon :global(svg) {
-        width: var(--ni-16);
-        height: var(--ni-16);
+        width: var(--ni-14);
+        height: var(--ni-14);
       }
     }
 
     &[data-variant="selected-icon"] .segment {
       .segment-icon {
-        width: var(--ni-16);
+        width: var(--ni-14);
         margin-inline-end: var(--ni-6);
       }
 
