@@ -5,5 +5,6 @@ export const RecommendedMoviesMappedMock: RecommendedMovie[] = [
   {
     ...MovieHereticMappedMock,
     sources: [],
+    people: [],
   },
 ];

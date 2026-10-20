@@ -96,6 +96,7 @@ type ShareType = DrilldownType;
 type CoverImageType = { type: ExtendedMediaType };
 type DiscoverType = SourceType & { mode: DiscoverMode };
 type RecommendationModeType = SourceType & { mode: RecommendationMode };
+type RecommendationWhyType = { reason: 'people' | 'titles' | 'empty' };
 type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
 type LinkType = SourceType & { target: string };
 type BannerDismissType = { id: string; value: string };
@@ -326,6 +327,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.PwaInstall]: { outcome: 'accepted' | 'dismissed' };
 
   [AnalyticsEvent.RecommendationMode]: RecommendationModeType;
+  [AnalyticsEvent.RecommendationWhy]: RecommendationWhyType;
 
   [AnalyticsEvent.ListCollaborator]: ListCollaboratorType;
   [AnalyticsEvent.MuteSharer]: never;

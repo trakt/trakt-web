@@ -1,13 +1,19 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import FavoriteIcon from "$lib/components/icons/FavoriteIcon.svelte";
+  import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import SparkleIcon from "$lib/components/icons/SparkleIcon.svelte";
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { createBulkIntlOverlay } from "$lib/features/intl-overlay/createBulkIntlOverlay.ts";
+  import type { RecommendationPeopleReason } from "$lib/requests/models/RecommendationPeopleReason.ts";
   import type { RecommendationSource } from "$lib/requests/models/RecommendationSource.ts";
+  import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import { toTranslatedSubgenre } from "$lib/utils/formatting/string/toTranslatedSubgenre.ts";
+  import { of } from "rxjs";
   import RecommendationSourceItem from "./RecommendationSourceItem.svelte";
+  import { peopleReasonTargets } from "./peopleReasonTargets.ts";
 
   type SubgenreGroup = {
     key: string;
@@ -17,12 +23,40 @@
 
   type RecommendationSourcesDrawerProps = {
     sources: RecommendationSource[];
+    people?: RecommendationPeopleReason[];
     title: string;
     onClose: () => void;
   };
 
-  const { sources, title, onClose }: RecommendationSourcesDrawerProps =
-    $props();
+  const {
+    sources,
+    people = [],
+    title,
+    onClose,
+  }: RecommendationSourcesDrawerProps = $props();
+
+  const peopleIntl = createBulkIntlOverlay<RecommendationPeopleReason>({
+    getTargets: peopleReasonTargets,
+  });
+  const localizedPeople = $derived(of(people).pipe(peopleIntl.operator));
+
+  const toRoleLine = ({ role, watchedCount: count }: RecommendationPeopleReason) => {
+    const one = count === 1;
+    switch (role) {
+      case "directing":
+        return one
+          ? m.text_recommendation_person_directing_one({ count })
+          : m.text_recommendation_person_directing_other({ count });
+      case "making":
+        return one
+          ? m.text_recommendation_person_making_one({ count })
+          : m.text_recommendation_person_making_other({ count });
+      case "acting":
+        return one
+          ? m.text_recommendation_person_acting_one({ count })
+          : m.text_recommendation_person_acting_other({ count });
+    }
+  };
 
   const activitySources = $derived(
     sources.filter((s) => s.type === "activity"),
@@ -50,11 +84,13 @@
 
 {#snippet sectionHeader(
   label: string,
-  type: "activity" | "favorite" | "subgenre",
+  type: "people" | "activity" | "favorite" | "subgenre",
 )}
   <div class="recommendation-sources-section-header" data-type={type}>
     <div class="recommendation-sources-section-icon">
-      {#if type === "activity"}
+      {#if type === "people"}
+        <ProfileIcon />
+      {:else if type === "activity"}
         <TrackIcon />
       {:else if type === "favorite"}
         <FavoriteIcon />
@@ -73,6 +109,41 @@
   metaInfo={m.drawer_title_recommendation_sources()}
 >
   <div class="trakt-recommendation-sources-drawer">
+    {#each $localizedPeople.length > 0 ? $localizedPeople : people as reason (reason.person.id)}
+      <div class="recommendation-sources-section">
+        {@render sectionHeader(
+          m.list_title_recommendation_sources_people(),
+          "people",
+        )}
+        <div class="recommendation-sources-person">
+          <img
+            class="recommendation-sources-person-headshot"
+            src={reason.person.headshot.url.thumb}
+            alt={m.image_alt_person_headshot({ person: reason.person.name })}
+          />
+          <div class="recommendation-sources-person-copy">
+            <span class="bold">{reason.person.name}</span>
+            <span class="secondary small">{toRoleLine(reason)}</span>
+          </div>
+        </div>
+        {#if reason.titles.length > 0}
+          <div class="recommendation-sources-items">
+            {#each reason.titles as title (title.media.key)}
+              <div class="trakt-recommendation-source-item">
+                <DefaultMediaItem
+                  type={title.mediaType}
+                  media={title.media}
+                  style="cover"
+                  source="recommendation-source"
+                  mode="standalone"
+                />
+              </div>
+            {/each}
+          </div>
+        {/if}
+      </div>
+    {/each}
+
     {#if activitySources.length > 0}
       <div class="recommendation-sources-section">
         {@render sectionHeader(
@@ -164,6 +235,10 @@
         transparent
       );
 
+    &[data-type="people"] {
+      --section-accent: var(--color-text-emphasis);
+    }
+
     &[data-type="activity"] {
       --section-accent: var(--list-meta-info-color);
     }
@@ -184,6 +259,36 @@
     :global(svg) {
       width: var(--ni-14);
       height: var(--ni-14);
+    }
+  }
+
+  .recommendation-sources-person {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
+    padding: var(--ni-4) var(--ni-2);
+  }
+
+  .recommendation-sources-person-headshot {
+    width: var(--ni-56);
+    height: var(--ni-56);
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .recommendation-sources-person-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+    min-width: 0;
+  }
+
+  .trakt-recommendation-source-item {
+    display: contents;
+
+    :global(.trakt-card-footer) {
+      display: none;
     }
   }
 

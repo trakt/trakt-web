@@ -8,13 +8,16 @@ import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { getRecommendedSearchParams } from '../../_internal/getRecommendedSearchParams.ts';
 import { mapToRecommendationSource } from '../../_internal/mapToRecommendationSource.ts';
+import { mapToRecommendationPeopleReason } from '../../_internal/mapToRecommendationPeopleReason.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import { RecommendationSourceSchema } from '../../models/RecommendationSource.ts';
+import { RecommendationPeopleReasonSchema } from '../../models/RecommendationPeopleReason.ts';
 import { RecommendationsShowResponseSchema } from '../../models/RecommendationsResponse.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
 export const RecommendedShowSchema = ShowEntrySchema.extend({
   sources: z.array(RecommendationSourceSchema),
+  people: z.array(RecommendationPeopleReasonSchema),
 });
 export type RecommendedShow = z.infer<typeof RecommendedShowSchema>;
 
@@ -62,6 +65,7 @@ export const recommendedShowsQuery = defineQuery({
     response.body?.map((item) => ({
       ...mapToShowEntry(item.show),
       sources: item.sources.map(mapToRecommendationSource),
+      people: (item.people ?? []).map(mapToRecommendationPeopleReason),
     })) ?? [],
   schema: RecommendedShowSchema.array(),
   ttl: time.hours(24),
