@@ -5,6 +5,7 @@
   import InstallIcon from "$lib/components/icons/InstallIcon.svelte";
   import RedditIcon from "$lib/components/icons/RedditIcon.svelte";
   import StatusIcon from "$lib/components/icons/StatusIcon.svelte";
+  import YouTubeLogoIcon from "$lib/components/icons/YouTubeLogoIcon.svelte";
 
   import Link from "$lib/components/link/Link.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
@@ -66,6 +67,15 @@
     onclick={() => trackLink("reddit")}
   >
     <RedditIcon />
+  </Link>
+
+  <Link
+    href={UrlBuilder.socialMedia.youtube()}
+    target="_blank"
+    label={m.link_label_youtube()}
+    onclick={() => trackLink("youtube")}
+  >
+    <YouTubeLogoIcon />
   </Link>
 
   <Link

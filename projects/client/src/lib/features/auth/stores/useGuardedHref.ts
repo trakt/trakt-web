@@ -10,6 +10,7 @@ const whitelistedUrls = [
   UrlBuilder.github.web(),
   UrlBuilder.developer.home(),
   UrlBuilder.socialMedia.reddit(),
+  UrlBuilder.socialMedia.youtube(),
   UrlBuilder.status(),
 ] as const;
 

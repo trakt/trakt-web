@@ -9893,6 +9893,10 @@
       "default": "Reddit",
       "description": "Text for the link to the Trakt Reddit page."
     },
+    "link_label_youtube": {
+      "default": "YouTube",
+      "description": "Text for the link to the Trakt YouTube channel."
+    },
     "link_label_github": {
       "default": "GitHub",
       "description": "Text for the link to the Trakt GitHub page."
