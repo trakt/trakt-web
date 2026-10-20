@@ -1,213 +1,252 @@
 <script lang="ts">
   import LockIcon from "$lib/components/icons/LockIcon.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp";
-  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
+  import { toGroupedNumber } from "$lib/utils/formatting/number/toGroupedNumber.ts";
   import type { VipAchievement } from "../models/VipAchievement.ts";
   import AchievementIcon from "./AchievementIcon.svelte";
 
-  const { achievement }: { achievement: VipAchievement } = $props();
+  const {
+    achievement,
+    revealIndex,
+  }: {
+    achievement: VipAchievement;
+    /** Set for a fresh unlock: its place in the drawer's reveal sequence. */
+    revealIndex: number | null;
+  } = $props();
 
+  const fmt = (value: number) => toGroupedNumber(value, languageTag());
+
+  const isNew = $derived(revealIndex !== null);
   const progressPercent = $derived(Math.round(achievement.progress * 100));
-  const fmt = (value: number) => toHumanNumber(value, languageTag());
 
-  // 0..1 across the tier ladder, driving how rich the card background reads:
-  // Tier 1 is a whisper of gold, the top tier a full bloom. Locked = flat.
+  // 0..1 across the tier ladder: the medal's glow widens as tiers stack up.
   const tierStrength = $derived(
     achievement.isUnlocked
       ? (achievement.tierIndex + 1) / achievement.tierCount
       : 0,
   );
 
-  const statusText = $derived(
-    achievement.isMaxed
-      ? m.vip_achievements_status_completed()
-      : achievement.isUnlocked
-      ? m.vip_achievements_tier_label({
-        tier: achievement.tierIndex + 1,
-        total: achievement.tierCount,
-      })
-      : m.vip_achievements_status_in_progress(),
-  );
-
-  // Tiered achievements that aren't maxed reveal their remaining goals on hover.
-  const hasTierGoals = $derived(
-    achievement.tierCount > 1 && !achievement.isMaxed,
-  );
+  const tierText = $derived.by(() => {
+    if (!achievement.isUnlocked) return m.vip_achievements_locked();
+    if (achievement.isMaxed) return m.vip_achievements_status_completed();
+    return m.vip_achievements_tier_label({
+      tier: achievement.tierIndex + 1,
+      total: achievement.tierCount,
+    });
+  });
 </script>
 
-{#snippet tierGoals()}
-  <div class="trakt-achievement-tier-tooltip">
-    {#each achievement.thresholds as threshold, index (index)}
-      <span
-        class="tier-row"
-        class:is-reached={index <= achievement.tierIndex}
-        class:is-next={index === achievement.tierIndex + 1}
-      >
-        <span>{m.vip_achievements_tier_short({ tier: index + 1 })}</span>
-        <span class="tier-goal">{fmt(threshold)}</span>
-      </span>
-    {/each}
-  </div>
-{/snippet}
-
-<div
+<article
   class="trakt-achievement-card"
   class:is-locked={!achievement.isUnlocked}
+  class:is-maxed={achievement.isMaxed}
+  class:is-new={isNew}
   style:--achievement-progress={`${progressPercent}%`}
   style:--tier-strength={tierStrength}
-  role="group"
-  aria-label={`${achievement.title} — ${statusText}`}
+  style:--reveal-index={revealIndex ?? 0}
+  aria-label={`${achievement.title}, ${tierText}`}
 >
-  <div class="card-body">
-    <span class="card-icon">
-      {#if achievement.isUnlocked}
-        <AchievementIcon id={achievement.id} />
-      {:else}
-        <LockIcon />
-      {/if}
+  <div class="card-medal" aria-hidden="true">
+    <span class="medal-face">
+      <AchievementIcon id={achievement.id} />
     </span>
-
-    <div class="card-content">
-      <span class="card-title bold ellipsis">{achievement.title}</span>
-      <p class="card-description" use:lineClamp={{ lines: 2 }}>
-        {achievement.description}
-      </p>
-      {#if achievement.nextStep}
-        <p class="card-step">
-          <span class="card-step-label">
-            {achievement.isUnlocked
-              ? m.vip_achievements_next_tier()
-              : m.vip_achievements_to_unlock()}
-          </span>
-          <span class="card-step-text">{achievement.nextStep}</span>
-        </p>
-      {/if}
-
-      <div class="card-track" aria-hidden="true">
-        <span class="card-track-fill"></span>
-      </div>
-
-      <div class="card-footer">
-        {#if hasTierGoals}
-          <Tooltip content={tierGoals}>
-            <span class="card-status" class:is-tier={achievement.isUnlocked}>
-              {statusText}
-            </span>
-          </Tooltip>
-        {:else}
-          <span class="card-status">{statusText}</span>
-        {/if}
-
-        {#if achievement.tierCount > 1}
-          <span class="card-percent bold">
-            {#if achievement.isMaxed}
-              {fmt(achievement.value)}
-            {:else}
-              {fmt(achievement.value)} / {fmt(
-                achievement.nextThreshold ?? achievement.value,
-              )}
-            {/if}
-          </span>
-        {/if}
-      </div>
-    </div>
+    {#if !achievement.isUnlocked}
+      <span class="medal-lock">
+        <LockIcon />
+      </span>
+    {/if}
   </div>
-</div>
+
+  <div class="card-content">
+    <div class="card-heading">
+      <span class="card-title bold ellipsis">{achievement.title}</span>
+      {#if isNew}
+        <span class="card-new">{m.vip_achievements_new()}</span>
+      {/if}
+    </div>
+
+    <div class="card-tier">
+      <span class="tier-pips" aria-hidden="true">
+        {#each achievement.thresholds as threshold, index (threshold)}
+          <span
+            class="tier-pip"
+            class:is-reached={index <= achievement.tierIndex}
+          ></span>
+        {/each}
+      </span>
+      <span class="tier-text">{tierText}</span>
+    </div>
+
+    <p class="card-description" use:lineClamp={{ lines: 2 }}>
+      {achievement.description}
+    </p>
+
+    {#if achievement.nextStep && achievement.nextThreshold !== null}
+      <div class="card-next">
+        <div class="card-track" aria-hidden="true">
+          <span class="card-track-fill"></span>
+        </div>
+        <div class="card-next-row">
+          <span class="card-next-step">
+            <span class="card-next-label">
+              {achievement.isUnlocked
+                ? m.vip_achievements_next_tier()
+                : m.vip_achievements_to_unlock()}
+            </span>
+            <span class="card-next-text">{achievement.nextStep}</span>
+          </span>
+          <span class="card-next-count">
+            {fmt(achievement.value)} / {fmt(achievement.nextThreshold)}
+          </span>
+        </div>
+      </div>
+    {/if}
+  </div>
+</article>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   .trakt-achievement-card {
-    --achievement-tint: color-mix(
+    --medal-size: var(--ni-52);
+    --medal-accent: var(--color-achievement-accent);
+    --muted-fill: color-mix(
       in srgb,
-      var(--color-achievement-accent) 10%,
-      transparent
+      var(--color-foreground) 6%,
+      var(--color-card-background)
     );
 
     position: relative;
     overflow: hidden;
 
-    padding: var(--ni-24);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap-s);
+
+    padding: var(--ni-16);
     border-radius: var(--border-radius-l);
-
     background: var(--color-card-background);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--color-achievement-accent) 22%, transparent);
+    box-shadow: var(--shadow-base);
 
-    // Tier-scaled purple lift, borrowed from the header's VIP dazzle: the glow
-    // blur widens with `--tier-strength`, so higher tiers carry a broader,
-    // softer halo while Tier 1 stays tight and quiet.
-    box-shadow: 0 var(--ni-2)
-      calc(var(--ni-6) + var(--tier-strength, 0) * var(--ni-20))
-      color-mix(in srgb, var(--purple-500) 13%, transparent);
-
-    // Companion inner sheen behind the content. A single symmetric (RTL-safe)
-    // gradient whose opacity also rides `--tier-strength`, kept faint so a grid
-    // of cards reads as a purple accent rather than a purple wash.
+    // Earned cards carry a faint wash of the medal's colour from the top,
+    // stronger as tiers stack up. Locked cards stay flat.
     &::before {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
       border-radius: inherit;
-
       background: radial-gradient(
         120% 90% at 50% 0%,
-        color-mix(in srgb, var(--color-achievement-accent) 16%, transparent),
+        color-mix(in srgb, var(--medal-accent) 18%, transparent),
         transparent 65%
       );
-      opacity: calc(var(--tier-strength, 0) * 0.4);
+      opacity: calc(0.25 + var(--tier-strength, 0) * 0.5);
     }
 
     &.is-locked {
-      background: var(--color-background);
-      border-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+      background: var(--muted-fill);
       box-shadow: none;
+
+      &::before {
+        content: none;
+      }
     }
   }
 
-  .card-body {
+  .card-medal {
     position: relative;
-    display: flex;
-    align-items: flex-start;
-    gap: var(--gap-s);
+    flex: none;
+    inline-size: var(--medal-size);
+    block-size: var(--medal-size);
   }
 
-  .card-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  .medal-face {
+    position: relative;
+    overflow: hidden;
 
-    width: var(--ni-56);
-    height: var(--ni-56);
-    border-radius: var(--border-radius-m);
+    display: grid;
+    place-items: center;
+    inline-size: 100%;
+    block-size: 100%;
+    border-radius: 50%;
 
-    background: var(--achievement-tint);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--color-achievement-accent) 18%, transparent);
-    color: var(--color-text-primary);
-
-    .is-locked & {
-      background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
-      border-color: color-mix(in srgb, var(--color-foreground) 10%, transparent);
-      color: var(--color-text-secondary);
-    }
+    color: var(--shade-10);
+    background: radial-gradient(
+      circle at 32% 28%,
+      color-mix(in srgb, var(--medal-accent) 55%, var(--shade-10)),
+      var(--medal-accent) 58%,
+      color-mix(in srgb, var(--medal-accent) 70%, var(--shade-1000))
+    );
+    box-shadow:
+      inset 0 0 0 var(--ni-1) color-mix(in srgb, var(--shade-10) 28%, transparent),
+      0 0 calc(var(--ni-4) + var(--tier-strength, 0) * var(--ni-16))
+        color-mix(in srgb, var(--medal-accent) 45%, transparent);
 
     :global(svg) {
-      width: var(--ni-28);
-      height: var(--ni-28);
+      width: var(--ni-24);
+      height: var(--ni-24);
+    }
+
+    // Every tier earned: the medal gets a framed ring.
+    .is-maxed & {
+      box-shadow:
+        inset 0 0 0 var(--ni-1) color-mix(in srgb, var(--shade-10) 28%, transparent),
+        0 0 0 var(--ni-2) var(--color-card-background),
+        0 0 0 calc(var(--ni-2) + var(--ni-1) * 1.5) var(--medal-accent),
+        0 0 var(--ni-20) color-mix(in srgb, var(--medal-accent) 45%, transparent);
+    }
+
+    .is-locked & {
+      color: var(--color-text-secondary);
+      background: var(--muted-fill);
+      box-shadow: inset 0 0 0 var(--ni-1)
+        color-mix(in srgb, var(--color-foreground) 10%, transparent);
+
+      :global(svg) {
+        opacity: 0.45;
+      }
+    }
+  }
+
+  .medal-lock {
+    position: absolute;
+    inset-block-end: calc(var(--ni-2) * -1);
+    inset-inline-end: calc(var(--ni-2) * -1);
+
+    display: grid;
+    place-items: center;
+    inline-size: var(--ni-20);
+    block-size: var(--ni-20);
+    border-radius: 50%;
+
+    color: var(--color-text-secondary);
+    background: var(--color-card-background);
+    box-shadow: var(--shadow-base);
+
+    :global(svg) {
+      width: var(--ni-10);
+      height: var(--ni-10);
     }
   }
 
   .card-content {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+
     display: flex;
     flex-direction: column;
+    gap: var(--ni-6);
+  }
+
+  .card-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
     min-width: 0;
-    flex: 1;
   }
 
   .card-title {
@@ -218,127 +257,187 @@
     }
   }
 
+  .card-new {
+    flex: none;
+    padding: var(--ni-2) var(--ni-6);
+    border-radius: var(--border-radius-pill);
+
+    font-size: var(--font-size-tag);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--shade-10);
+    background: var(--medal-accent);
+  }
+
+  .card-tier {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
+
+  .tier-pips {
+    display: flex;
+    gap: var(--ni-4);
+  }
+
+  .tier-pip {
+    inline-size: var(--ni-6);
+    block-size: var(--ni-6);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-foreground) 18%, transparent);
+
+    &.is-reached {
+      background: var(--color-text-primary);
+    }
+  }
+
+  .tier-text {
+    font-size: var(--font-size-tag);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+
+    .is-locked & {
+      color: var(--color-text-secondary);
+    }
+
+    .is-maxed & {
+      color: var(--medal-accent);
+    }
+  }
+
   .card-description {
-    margin: var(--ni-4) 0 0;
+    margin: 0;
     color: var(--color-text-secondary);
     font-size: var(--font-size-tag);
   }
 
-  .card-step {
-    margin: var(--ni-8) 0 0;
+  .card-next {
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    column-gap: var(--gap-xxs);
-
-    color: var(--color-text-primary);
-  }
-
-  .card-step-label,
-  .card-step-text {
-    font-size: var(--font-size-tag);
-  }
-
-  .card-step-label {
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--color-achievement-accent);
+    flex-direction: column;
+    gap: var(--ni-6);
+    margin-block-start: var(--ni-4);
   }
 
   .card-track {
-    margin-top: var(--ni-16);
-    width: 100%;
-    height: var(--ni-6);
-    border-radius: var(--border-radius-xxl);
+    inline-size: 100%;
+    block-size: var(--ni-4);
+    border-radius: var(--border-radius-pill);
     overflow: hidden;
-
     background: color-mix(in srgb, var(--color-foreground) 12%, transparent);
   }
 
   .card-track-fill {
     display: block;
-    height: 100%;
-    width: var(--achievement-progress, 0%);
+    block-size: 100%;
+    inline-size: var(--achievement-progress, 0%);
     border-radius: inherit;
+    background: color-mix(in srgb, var(--color-foreground) 55%, transparent);
 
-    background: color-mix(
-      in srgb,
-      var(--color-achievement-accent) 55%,
-      transparent
-    );
-
-    transition: width var(--transition-increment) ease-in-out;
-
-    .trakt-achievement-card:not(.is-locked) & {
-      background: var(--color-achievement-accent);
+    .is-locked & {
+      background: color-mix(in srgb, var(--color-foreground) 30%, transparent);
     }
   }
 
-  .card-footer {
-    margin-top: var(--ni-8);
+  .card-next-row {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
     gap: var(--gap-xs);
   }
 
-  .card-status {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--gap-xxs);
+  .card-next-step {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: var(--gap-xxs);
+    min-width: 0;
+  }
 
+  .card-next-label,
+  .card-next-text,
+  .card-next-count {
     font-size: var(--font-size-tag);
-    font-weight: 600;
+  }
+
+  .card-next-label {
+    font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
-
-    &.is-tier {
-      color: var(--color-achievement-accent);
-    }
-
-    :global(svg) {
-      width: var(--ni-12);
-      height: var(--ni-12);
-    }
   }
 
-  .card-percent {
-    font-size: var(--font-size-tag);
+  .card-next-text {
     color: var(--color-text-primary);
+
+    .is-locked & {
+      color: var(--color-text-secondary);
+    }
   }
 
-  // Tier-goals tooltip content is portalled out of the card, so it's styled
-  // globally by a unique class rather than scoped selectors.
-  :global(.trakt-achievement-tier-tooltip) {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-4);
-    min-width: var(--ni-120);
-  }
-
-  :global(.trakt-achievement-tier-tooltip .tier-row) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--gap-m);
-
-    font-size: var(--font-size-tag);
-    opacity: 0.5;
-  }
-
-  :global(.trakt-achievement-tier-tooltip .tier-row.is-reached) {
-    opacity: 0.85;
-  }
-
-  :global(.trakt-achievement-tier-tooltip .tier-row.is-next) {
-    opacity: 1;
-    color: var(--color-achievement-accent);
+  .card-next-count {
+    flex: none;
     font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-secondary);
   }
 
-  :global(.trakt-achievement-tier-tooltip .tier-goal) {
-    font-variant-numeric: tabular-nums;
+  // A fresh unlock pops its medal in, one after another, then a single shine
+  // passes over it. Everything already seen stays still.
+  @media (prefers-reduced-motion: no-preference) {
+    .is-new .medal-face {
+      animation: medal-pop 560ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      animation-delay: calc(360ms + var(--reveal-index) * 70ms);
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          115deg,
+          transparent 35%,
+          color-mix(in srgb, var(--shade-10) 55%, transparent) 50%,
+          transparent 65%
+        );
+        transform: translateX(-120%);
+        animation: medal-shine 700ms ease-out both;
+        animation-delay: calc(820ms + var(--reveal-index) * 70ms);
+      }
+    }
+
+    .is-new .card-new {
+      animation: new-in 320ms ease-out both;
+      animation-delay: calc(700ms + var(--reveal-index) * 70ms);
+    }
+  }
+
+  @keyframes medal-pop {
+    from {
+      transform: scale(0.4);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes medal-shine {
+    to {
+      transform: translateX(120%);
+    }
+  }
+
+  @keyframes new-in {
+    from {
+      transform: translateY(var(--ni-4));
+      opacity: 0;
+    }
+    to {
+      transform: none;
+      opacity: 1;
+    }
   }
 </style>

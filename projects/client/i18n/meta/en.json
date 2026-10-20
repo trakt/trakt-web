@@ -13902,11 +13902,7 @@
     },
     "vip_achievements_status_completed": {
       "default": "Completed",
-      "description": "Status shown on a VIP achievement card the member has unlocked. Displayed in uppercase."
-    },
-    "vip_achievements_status_in_progress": {
-      "default": "In progress",
-      "description": "Status shown on a VIP achievement card the member has not unlocked yet. Displayed in uppercase."
+      "description": "Status on an achievement whose every tier the member has earned. Displayed in uppercase."
     },
     "vip_achievements_empty": {
       "default": "Nothing here yet.",
@@ -13914,7 +13910,7 @@
     },
     "vip_achievements_tier_label": {
       "default": "Tier {tier} / {total}",
-      "description": "Tier indicator on a VIP achievement card showing the reached tier out of the total.",
+      "description": "Tier reached on an earned achievement out of its total tiers, e.g. 'Tier 2 / 4'. Displayed in uppercase.",
       "variables": {
         "tier": {
           "type": "number"
@@ -14019,15 +14015,6 @@
     "vip_achievement_list_maker_description": {
       "default": "Custom lists you have created.",
       "description": "Description of the 'Master Curator' VIP achievement."
-    },
-    "vip_achievements_tier_short": {
-      "default": "Tier {tier}",
-      "description": "Short tier label used in the achievement tier-goals tooltip, e.g. 'Tier 3'.",
-      "variables": {
-        "tier": {
-          "type": "number"
-        }
-      }
     },
     "vip_achievements_anchor_label": {
       "default": "{unlocked}/{total}",
@@ -14182,6 +14169,26 @@
       "variables": {
         "count": {
           "type": "string"
+        }
+      }
+    },
+    "vip_achievements_new": {
+      "default": "New",
+      "description": "Tag on an achievement the member earned (or reached a higher tier of) since they last opened the achievements drawer. Keep very short."
+    },
+    "vip_achievements_locked": {
+      "default": "Locked",
+      "description": "Status on an achievement the member has not unlocked yet. Displayed in uppercase."
+    },
+    "vip_achievements_earned_summary": {
+      "default": "{earned} of {total} earned",
+      "description": "Summary at the top of the achievements drawer, e.g. '8 of 12 earned'.",
+      "variables": {
+        "earned": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
         }
       }
     }

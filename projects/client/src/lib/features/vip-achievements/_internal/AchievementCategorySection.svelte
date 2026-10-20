@@ -4,8 +4,8 @@
   import AchievementCard from "./AchievementCard.svelte";
   import type { AchievementCategorySectionProps } from "./AchievementCategorySectionProps.ts";
 
-  const { section, isOpen, onToggle }: AchievementCategorySectionProps =
-    $props();
+  const { section, revealOrder, isOpen, onToggle }:
+    AchievementCategorySectionProps = $props();
 
   const bodyId = $derived(`achievement-category-${section.id}`);
   const counts = $derived({
@@ -37,7 +37,10 @@
   <div id={bodyId} class="section-body" inert={!isOpen}>
     <div class="section-cards">
       {#each section.achievements as achievement (achievement.id)}
-        <AchievementCard {achievement} />
+        <AchievementCard
+          {achievement}
+          revealIndex={revealOrder.get(achievement.id) ?? null}
+        />
       {/each}
     </div>
   </div>

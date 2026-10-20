@@ -1,27 +1,41 @@
 <script lang="ts">
   import AchievementsAnchor from "./AchievementsAnchor.svelte";
   import AchievementsDrawer from "./AchievementsDrawer.svelte";
+  import type { VipAchievementId } from "./models/VipAchievementId.ts";
+  import { useSeenAchievementTiers } from "./stores/useSeenAchievementTiers.ts";
   import { useVipAchievements } from "./stores/useVipAchievements.ts";
+  import { toNewAchievementIds } from "./_internal/toNewAchievementIds.ts";
 
   const { achievements } = useVipAchievements();
+  const { readSeen, markSeen } = useSeenAchievementTiers();
 
   let isDrawerOpen = $state(false);
+  let newIds = $state<ReadonlySet<VipAchievementId>>(new Set());
 
   const list = $derived($achievements ?? []);
   const unlockedCount = $derived(
     list.filter((achievement) => achievement.isUnlocked).length,
   );
+
+  const openDrawer = () => {
+    newIds = toNewAchievementIds({ achievements: list, seen: readSeen() });
+    if (list.length > 0) {
+      markSeen(list);
+    }
+    isDrawerOpen = true;
+  };
 </script>
 
 <AchievementsAnchor
   {unlockedCount}
   totalCount={list.length}
-  onclick={() => (isDrawerOpen = true)}
+  onclick={openDrawer}
 />
 
 {#if isDrawerOpen}
   <AchievementsDrawer
     achievements={list}
+    {newIds}
     onClose={() => (isDrawerOpen = false)}
   />
 {/if}
