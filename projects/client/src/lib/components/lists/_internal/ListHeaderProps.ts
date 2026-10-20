@@ -12,7 +12,6 @@ export type ListHeaderProps = {
   title: string;
   subtitle?: string;
   metaInfo?: Snippet;
-  titleAction?: Snippet;
   actions?: Snippet;
   listActions?: Snippet;
   navigationType?: DpadNavigationType;

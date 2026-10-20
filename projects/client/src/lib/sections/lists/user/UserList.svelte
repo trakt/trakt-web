@@ -1,10 +1,14 @@
 <script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import DismissIcon from "$lib/components/icons/DismissIcon.svelte";
+  import StemTag from "$lib/components/tags/StemTag.svelte";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
-  import ListMeta from "$lib/sections/lists/components/ListMeta.svelte";
   import { useListItems } from "$lib/sections/lists/user/useListItems";
+  import { toUserSlug } from "$lib/utils/profile/toUserSlug.ts";
   import type { Snippet } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -14,7 +18,7 @@
   type UserListProps = {
     list: MediaListSummary;
     type?: DiscoverMode;
-    titleAction?: Snippet;
+    onDismiss?: () => void;
     scope?: string;
     popupActions?: Snippet;
     markOwned?: boolean;
@@ -23,11 +27,14 @@
   const {
     list,
     type,
-    titleAction,
+    onDismiss,
     scope,
     popupActions,
-    markOwned,
+    markOwned = false,
   }: UserListProps = $props();
+
+  const { isMe } = $derived(useIsMe(toUserSlug(list.user)));
+  const isOwned = $derived(markOwned && $isMe);
 
   const { filterMap } = useFilter();
 
@@ -43,8 +50,8 @@
   });
 </script>
 
-{#snippet listMetaInfo()}
-  <ListMeta {list} showOwner={false} {markOwned} />
+{#snippet ownedTag()}
+  <StemTag text={m.tag_text_owned_list()} />
 {/snippet}
 
 <DrillableMediaList
@@ -61,14 +68,25 @@
   useList={(params) => useListItems({ list, ...params })}
   urlBuilder={() => getListUrl({ type: "user-list", list })}
   title={list.name}
-  metaInfo={listMetaInfo}
-  {titleAction}
+  count={list.count}
+  metaInfo={isOwned ? ownedTag : undefined}
+  collapsible={!onDismiss}
 >
   {#snippet item(media)}
     <UserListItem listedItem={media} style="cover" {list} />
   {/snippet}
 
   {#snippet actions()}
+    {#if onDismiss}
+      <ActionButton
+        onclick={onDismiss}
+        label={m.button_label_dismiss()}
+        style="ghost"
+        color="default"
+      >
+        <DismissIcon />
+      </ActionButton>
+    {/if}
     <ListActions {list} {popupActions} />
   {/snippet}
 

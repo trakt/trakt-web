@@ -1,8 +1,5 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import DismissIcon from "$lib/components/icons/DismissIcon.svelte";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
-  import * as m from "$lib/features/i18n/messages.ts";
   import UserList from "./UserList.svelte";
   import { usePinnedListDismissal } from "./_internal/usePinnedListDismissal.ts";
   import { useUserListSummary } from "./useUserListSummary.ts";
@@ -28,21 +25,5 @@
 </script>
 
 {#if !$isLoading && $list && !$isDismissed}
-  {#snippet dismissAction()}
-    <ActionButton
-      onclick={dismiss}
-      label={m.button_label_dismiss()}
-      style="ghost"
-      color="default"
-    >
-      <DismissIcon />
-    </ActionButton>
-  {/snippet}
-
-  <UserList
-    list={$list}
-    type={mode}
-    titleAction={dismissAction}
-    scope="pinned-list"
-  />
+  <UserList list={$list} type={mode} onDismiss={dismiss} scope="pinned-list" />
 {/if}

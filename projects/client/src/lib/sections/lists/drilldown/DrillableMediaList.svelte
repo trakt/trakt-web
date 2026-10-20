@@ -11,7 +11,6 @@
       empty?: Snippet;
       badge?: Snippet;
       source: DrilldownSource;
-      titleAction?: Snippet;
     };
 
   const {
@@ -19,7 +18,6 @@
     source,
     urlBuilder,
     actions: externalActions,
-    titleAction,
     ...props
   }: DrillableList<T, M> = $props();
 
@@ -36,7 +34,7 @@
   });
 </script>
 
-<MediaList {...props} {drilldown} {titleAction}>
+<MediaList {...props} {drilldown}>
   {#snippet actions(items)}
     {@render externalActions?.(items, props.type)}
   {/snippet}

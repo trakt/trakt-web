@@ -79,14 +79,13 @@
         }}
         {options}
       />
-    {/snippet}
-
-    {#snippet actions()}
       <CommentLanguageSelect
         value={commentLanguage.value}
         onChange={commentLanguage.set}
       />
+    {/snippet}
 
+    {#snippet actions()}
       <AddCommentAction
         onclick={() => {
           isPostReviewOpen.set(true);

@@ -101,7 +101,7 @@
     {/if}
   {/snippet}
 
-  {#snippet actions()}
+  {#snippet filters()}
     <CreditsPositionDropdown
       {selectedPosition}
       allPositions={$allPositions}

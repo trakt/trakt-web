@@ -38,7 +38,7 @@
     headerNavigationType?: DpadNavigationType;
     subtitle?: string;
     variant?: ListVariant;
-    titleAction?: Snippet;
+    collapsible?: boolean;
     drilldown?: ListDrilldownProps;
     contentHash?: string;
     trailingItem?: Snippet;
@@ -70,7 +70,7 @@
     headerNavigationType,
     subtitle,
     variant = "default",
-    titleAction: externalTitleAction,
+    collapsible = true,
     contentHash,
     scrollToIndex,
     onVisibleRange,
@@ -115,7 +115,7 @@
   });
 
   const isCollapsed = $derived.by(() => {
-    if (variant !== "default" || $isEditMode) {
+    if (variant !== "default" || $isEditMode || !collapsible) {
       return false;
     }
 
@@ -131,7 +131,7 @@
   );
 
   const collapse = $derived(
-    variant === "default" && !$isEditModeEnabled && !externalTitleAction
+    variant === "default" && !$isEditModeEnabled && collapsible
       ? {
           isCollapsed,
           toggle,
@@ -191,10 +191,9 @@
           <ListHeader
             {title}
             {subtitle}
-            titleAction={externalTitleAction}
             {collapse}
             {count}
-            filters={isCollapsed ? undefined : filters}
+            {filters}
             {metaInfo}
             actions={isCollapsed ? undefined : actions}
             listActions={hasListActions ? listActions : undefined}
