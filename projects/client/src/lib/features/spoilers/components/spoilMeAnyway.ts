@@ -1,10 +1,20 @@
 import { SPOILER_CLASS_NAME } from '$lib/features/spoilers/constants.ts';
 
-export function spoilMeAnyway(node: HTMLElement, isDismissible = true) {
-  let canDismiss = isDismissible;
+type SpoilMeAnywayOptions = {
+  isDismissible?: boolean;
+  onReveal?: () => void;
+};
+
+const revealedEvents = new WeakSet<Event>();
+
+export function spoilMeAnyway(
+  node: HTMLElement,
+  options: SpoilMeAnywayOptions = {},
+) {
+  let { isDismissible = true, onReveal } = options;
 
   function handleClick(e: MouseEvent) {
-    if (!canDismiss || !(e.target instanceof HTMLElement)) {
+    if (!isDismissible || !(e.target instanceof HTMLElement)) {
       return;
     }
 
@@ -21,13 +31,20 @@ export function spoilMeAnyway(node: HTMLElement, isDismissible = true) {
 
     node.classList.remove(SPOILER_CLASS_NAME);
     target.classList.remove(SPOILER_CLASS_NAME);
+
+    if (!onReveal || revealedEvents.has(e)) {
+      return;
+    }
+
+    revealedEvents.add(e);
+    onReveal();
   }
 
   node.addEventListener('click', handleClick);
 
   return {
-    update(next = true) {
-      canDismiss = next;
+    update(next: SpoilMeAnywayOptions = {}) {
+      ({ isDismissible = true, onReveal } = next);
     },
     destroy() {
       node.removeEventListener('click', handleClick);

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { type IsWatchedProps } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { spoiler } from "../_internal/spoiler.ts";
   import { useMediaSpoiler } from "../useMediaSpoiler.ts";
@@ -11,12 +13,23 @@
   }: { variant?: "persistent" | "dismissible" } & ChildrenProps &
     IsWatchedProps = $props();
 
+  const { track } = useTrack(AnalyticsEvent.SpoilerReveal);
+
   const { isSpoilerHidden } = $derived(useMediaSpoiler(rest));
+
+  const trackReveal = () => {
+    if (rest.type === "season") return;
+
+    track({ type: rest.type });
+  };
 </script>
 
 <trakt-spoiler
   use:spoiler={isSpoilerHidden}
-  use:spoilMeAnyway={variant !== "persistent"}
+  use:spoilMeAnyway={{
+    isDismissible: variant !== "persistent",
+    onReveal: trackReveal,
+  }}
   data-variant={variant}
 >
   {@render children()}

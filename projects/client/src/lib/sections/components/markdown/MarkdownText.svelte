@@ -4,8 +4,11 @@
   import { createHeadingRenderer } from "./_internal/createHeadingRenderer.ts";
   import { spoilerExtension } from "./_internal/spoilerExtension.ts";
 
-  const { text, isSpoiler = false }: { text: string; isSpoiler?: boolean } =
-    $props();
+  const {
+    text,
+    isSpoiler = false,
+    onReveal,
+  }: { text: string; isSpoiler?: boolean; onReveal?: () => void } = $props();
 
   const marked = $derived(
     createSafeMarked({
@@ -17,7 +20,7 @@
   );
 </script>
 
-<div class="trakt-markdown-text" use:spoilMeAnyway>
+<div class="trakt-markdown-text" use:spoilMeAnyway={{ onReveal }}>
   <!--
     -gfm: to enable GitHub Flavored Markdown
     -breaks: to enable gfm line breaks
