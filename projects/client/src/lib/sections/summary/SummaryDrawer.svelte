@@ -149,7 +149,7 @@
   {/if}
 {/if}
 
-{#if drawer === SummaryDrawers.Videos && videos}
+{#if drawer === SummaryDrawers.Videos && videos?.length}
   <VideoDrawerHost {videos} slug={mediaSlug} onClose={close} />
 {/if}
 
