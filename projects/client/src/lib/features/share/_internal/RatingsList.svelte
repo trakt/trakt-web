@@ -92,7 +92,7 @@
   }
 
   .trakt-rating :global(svg) {
-    color: #9f42c6;
+    color: #6438d0;
   }
 
   .imdb-rating :global(svg) {

@@ -275,10 +275,9 @@
       }
     }
 
-    // Force canonical brand violet regardless of seasonal theme overrides
     &--branded {
-      --purple-600: #6438d0;
-      --circle-mark-bg: #6438d0;
+      --purple-600: var(--color-brand-violet);
+      --circle-mark-bg: var(--color-brand-violet);
       --circle-mark-fill: #ffffff;
     }
 
