@@ -2296,6 +2296,14 @@
         }
       }
     },
+    "button_label_comment_translate": {
+      "default": "Translate comment",
+      "description": "Aria-label for the button that translates a comment into the reader's language on the device."
+    },
+    "button_label_comment_show_original_hint": {
+      "default": "Show original comment",
+      "description": "Aria-label hint for the button that switches a translated comment back to the text its author wrote."
+    },
     "textarea_placeholder_reply": {
       "default": "Reply...",
       "description": "Placeholder text for the reply textarea in the review dialog."
@@ -4650,6 +4658,18 @@
     "switch_label_toggle_halloween_filters": {
       "default": "Toggle halloween filters",
       "description": "Aria-label for the switch that allows users to toggle halloween filters."
+    },
+    "header_seasonal_greeting_halloween": {
+      "default": "Happy Halloween",
+      "description": "Title of the welcome screen shown once on the first open during the Halloween season."
+    },
+    "text_seasonal_greeting_halloween": {
+      "default": "Our spooky picks are waiting for you!",
+      "description": "Body of the Halloween welcome screen. Closing the screen opens Discover, where the Halloween picks are."
+    },
+    "text_seasonal_greeting_signoff": {
+      "default": "From all of us at Trakt",
+      "description": "Sign-off under a seasonal welcome screen's message. Shown in uppercase."
     },
     "switch_label_toggle_christmas_filters": {
       "default": "Toggle christmas filters",
@@ -7712,6 +7732,24 @@
           "type": "string"
         },
         "max": {
+          "type": "string"
+        }
+      }
+    },
+    "filter_label_range_minimum": {
+      "default": "{name}, minimum",
+      "description": "Accessibility label for the lower handle of a range slider in the filters. {name} is what the slider filters, e.g. 'Nudity'.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "filter_label_range_maximum": {
+      "default": "{name}, maximum",
+      "description": "Accessibility label for the upper handle of a range slider in the filters. {name} is what the slider filters, e.g. 'Nudity'.",
+      "variables": {
+        "name": {
           "type": "string"
         }
       }
