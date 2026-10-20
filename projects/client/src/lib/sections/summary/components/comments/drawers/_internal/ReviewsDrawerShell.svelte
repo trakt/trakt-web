@@ -6,19 +6,24 @@
   import type { CommentsProps } from "../../CommentsProps";
   import CommentThreadCard from "../CommentThreadCard.svelte";
   import { THREAD_LIST_CLASS } from "../constants";
-  import { useActiveComment } from "../useActiveComment";
+  import type { useActiveComment } from "../useActiveComment";
 
   type ReviewsDrawerShellProps = {
     source?: ActiveComment;
     useList: PaginatableStore<MediaComment, string>;
+    activeCommentState: ReturnType<typeof useActiveComment>;
   } & CommentsProps;
 
-  const { source, useList, media, ...props }: ReviewsDrawerShellProps =
-    $props();
+  const {
+    source,
+    useList,
+    activeCommentState,
+    media,
+    ...props
+  }: ReviewsDrawerShellProps = $props();
 
-  const { reset, setReplying, activeComment } = $derived(
-    useActiveComment(source),
-  );
+  const { reset, setReplying, registerDraft, activeComment } =
+    $derived(activeCommentState);
 
   const isReplying = (id: number) =>
     $activeComment?.id === id && $activeComment?.isReplying;
@@ -33,6 +38,7 @@
           {media}
           {reset}
           {setReplying}
+          {registerDraft}
           {...props}
           isReplying={isReplying(comment.id)}
           shouldScrollIntoView={comment.id === source?.id}

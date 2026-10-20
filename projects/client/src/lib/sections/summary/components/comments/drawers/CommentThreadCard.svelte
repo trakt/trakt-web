@@ -22,6 +22,7 @@
     reset: () => void;
     isReplying: boolean;
     setReplying: (comment: MediaComment, isReplying: boolean) => void;
+    registerDraft: (hasDraft: () => boolean) => () => void;
     shouldScrollIntoView: boolean;
     header?: Snippet;
     scrollContainerClass?: string;
@@ -32,6 +33,7 @@
     media,
     isReplying,
     setReplying,
+    registerDraft,
     reset,
     shouldScrollIntoView,
     header,
@@ -97,6 +99,7 @@
         commentType="reply"
         onCommentPost={onReplyPost}
         onCancel={() => setReplying(comment, false)}
+        {registerDraft}
         placeholder={m.textarea_placeholder_reply()}
         label={m.button_label_post_reply()}
         type={typeProps.type}

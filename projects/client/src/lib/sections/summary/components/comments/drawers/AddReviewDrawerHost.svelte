@@ -3,6 +3,8 @@
   import DismissibleError from "$lib/components/errors/DismissibleError.svelte";
   import Form from "$lib/components/form/Form.svelte";
   import FormRichTextArea from "$lib/components/form/FormRichTextArea.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import GifButton from "$lib/features/gif-picker/GifButton.svelte";
   import { klipyCustomerId } from "$lib/features/gif-picker/klipyCustomerId.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -67,6 +69,33 @@
   let comment = $state(initialComment);
   let isSpoiler = $state(initialIsSpoiler);
   let gif = $state(initialGif);
+
+  const hasContent = $derived(comment.trim() !== "" || gif != null);
+
+  const hasChanges = $derived(
+    comment.trim() !== initialComment.trim() ||
+      gif?.url !== initialGif?.url ||
+      (hasContent && isSpoiler !== initialIsSpoiler),
+  );
+
+  const { confirm } = useConfirm();
+
+  function close() {
+    isOpen = false;
+    onClose();
+  }
+
+  function handleClose() {
+    if (!hasChanges) {
+      close();
+      return;
+    }
+
+    confirm({
+      type: ConfirmationType.DiscardChanges,
+      onConfirm: close,
+    })();
+  }
 
   const customerId = klipyCustomerId();
 
@@ -142,10 +171,7 @@
 {/snippet}
 
 <Drawer
-  onClose={() => {
-    isOpen = false;
-    onClose();
-  }}
+  onClose={handleClose}
   size="auto"
   title={m.dialog_title_comment()}
   classList="trakt-add-review-drawer"
@@ -153,7 +179,7 @@
 >
   <Form
     onSubmit={handleSubmit}
-    onCancel={onClose}
+    onCancel={handleClose}
     disabled={$isCommenting}
     isCancelDisabled={$isCommenting}
     isValid={isSubmittable}

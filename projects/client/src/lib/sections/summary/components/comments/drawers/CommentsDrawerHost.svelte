@@ -2,6 +2,7 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { COMMENTS_DRILL_SIZE } from "$lib/utils/constants";
   import { writable } from "svelte/store";
@@ -11,6 +12,7 @@
   import type { ActiveComment } from "../_internal/models/ActiveComment";
   import { useComments } from "../_internal/useComments";
   import ReviewsDrawerShell from "./_internal/ReviewsDrawerShell.svelte";
+  import { useActiveComment } from "./useActiveComment.ts";
 
   type CommentsDrawerProps = {
     source?: ActiveComment;
@@ -24,10 +26,13 @@
   const commentLanguage = useCommentLanguage();
 
   const isOpened = writable(false);
+
+  const { confirm } = useConfirm();
+  const activeCommentState = $derived(useActiveComment({ source, confirm }));
 </script>
 
 <Drawer
-  {onClose}
+  onClose={() => activeCommentState.discardDraftThen(onClose)}
   title={m.dialog_title_comment()}
   size="large"
   metaInfo={$sortType.text()}
@@ -36,6 +41,7 @@
   {#if $isOpened}
     <ReviewsDrawerShell
       {source}
+      {activeCommentState}
       useList={() =>
         useComments({
           slug: media.slug,

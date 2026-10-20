@@ -3,6 +3,7 @@
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import { useActiveComment } from "$lib/sections/summary/components/comments/drawers/useActiveComment.ts";
@@ -24,7 +25,9 @@
 
   const { mode } = useDiscover();
 
-  const { reset, setReplying, activeComment } = useActiveComment();
+  const { confirm } = useConfirm();
+  const { reset, setReplying, registerDraft, discardDraftThen, activeComment } =
+    useActiveComment({ confirm });
   const isReplying = (id: number) =>
     $activeComment?.id === id && $activeComment?.isReplying;
 
@@ -44,7 +47,7 @@
 {/snippet}
 
 <Drawer
-  {onClose}
+  onClose={() => discardDraftThen(onClose)}
   title={m.list_title_activity()}
   size="large"
   metaInfo={$activityType.text()}
@@ -74,6 +77,7 @@
                 shouldScrollIntoView={entry.comment.id === sourceCommentId}
                 isReplying={isReplying(entry.comment.id)}
                 {setReplying}
+                {registerDraft}
                 {reset}
               />
             {/if}

@@ -1,5 +1,6 @@
 <script lang="ts">
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
   import type { CommentSortType } from "$lib/requests/models/CommentSortType.ts";
   import { COMMENTS_DRILL_SIZE } from "$lib/utils/constants";
   import type { CommentsProps } from "./CommentsProps.ts";
@@ -12,7 +13,10 @@
     & CommentsProps
     & { sort: CommentSortType; language?: string } = $props();
 
-  const { reset, setReplying, activeComment } = useActiveComment();
+  const { confirm } = useConfirm();
+  const { reset, setReplying, registerDraft, activeComment } = useActiveComment(
+    { confirm },
+  );
 
   const isReplying = (id: number) =>
     $activeComment?.id === id && $activeComment?.isReplying;
@@ -43,6 +47,7 @@
             {media}
             {reset}
             {setReplying}
+            {registerDraft}
             {...props}
             isReplying={isReplying(comment.id)}
             shouldScrollIntoView={false}

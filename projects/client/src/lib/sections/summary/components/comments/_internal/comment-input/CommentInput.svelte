@@ -8,6 +8,7 @@
   import { klipyCustomerId } from "$lib/features/gif-picker/klipyCustomerId.ts";
   import { useMotionDuration } from "$lib/stores/css/useMotionDuration.ts";
   import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment";
+  import { onMount } from "svelte";
   import { slide } from "svelte/transition";
   import type { ActiveComment } from "../models/ActiveComment";
   import type { CommentDraftGif } from "../models/CommentDraftGif.ts";
@@ -26,6 +27,7 @@
     placeholder: string;
     onCommentPost: (comment: ActiveComment) => void;
     onCancel: () => void;
+    registerDraft: (hasDraft: () => boolean) => () => void;
     gifSuggestedQuery?: string;
     mentionSource: MediaMentionSource;
   } & UseAddCommentProps;
@@ -35,6 +37,7 @@
     placeholder,
     onCommentPost,
     onCancel,
+    registerDraft,
     gifSuggestedQuery,
     mentionSource,
     ...props
@@ -52,6 +55,8 @@
   const { mentions } = useMediaMentions(fromRune(() => mentionSource));
 
   const hasSomethingToSay = $derived(comment.trim().length > 0 || gif != null);
+
+  onMount(() => registerDraft(() => hasSomethingToSay));
 
   const postCommentHandler = async () => {
     const response = await postComment({

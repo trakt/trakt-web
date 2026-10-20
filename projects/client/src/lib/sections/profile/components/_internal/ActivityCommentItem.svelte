@@ -25,6 +25,7 @@
     isReplying?: boolean;
     setReplying?: (comment: MediaComment, isReplying: boolean) => void;
     reset?: () => void;
+    registerDraft?: (hasDraft: () => boolean) => () => void;
   };
 
   const {
@@ -35,6 +36,7 @@
     isReplying = false,
     setReplying,
     reset,
+    registerDraft,
   }: ActivityCommentItemProps = $props();
 
   let isEditOpen = $state(false);
@@ -126,6 +128,7 @@
     {isReplying}
     setReplying={setReplying ?? (() => {})}
     reset={reset ?? (() => {})}
+    registerDraft={registerDraft ?? (() => () => {})}
   >
     {#snippet header()}
       {@render mediaHeader()}
