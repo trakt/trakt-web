@@ -132,6 +132,23 @@ describe('calculateWatchUntilTimestamps', () => {
     expect(result[0]!.watchedAt).toEqual(new Date(now.getTime() - 30 * 60_000));
   });
 
+  it('keeps every timestamp valid when the show runtime is unknown too', () => {
+    const broken = [
+      episode({ id: 10, season: 1, number: 1, runtime: NaN }),
+      episode({ id: 11, season: 1, number: 2, runtime: NaN }),
+    ];
+    const now = new Date('2024-06-01T00:00:00.000Z');
+
+    const result = calculateWatchUntilTimestamps({
+      episodes: broken,
+      mode: 'just-now',
+      now,
+      fallbackRuntime: NaN,
+    });
+
+    expect(result.map(({ watchedAt }) => watchedAt)).toEqual([now, now]);
+  });
+
   it('throws when anchor is missing for custom-start and custom-end modes', () => {
     expect(() =>
       calculateWatchUntilTimestamps({ episodes, mode: 'custom-start' }),

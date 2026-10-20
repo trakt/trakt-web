@@ -33,9 +33,13 @@ type CalculateWatchUntilTimestampsParams = {
 
 const MINUTE_MS = 60_000;
 
+function toKnownMinutes(runtime: number) {
+  return Number.isFinite(runtime) && runtime > 0 ? runtime : 0;
+}
+
 function resolveRuntimeMs(runtime: number, fallback: number) {
-  const minutes = Number.isFinite(runtime) && runtime > 0 ? runtime : fallback;
-  return Math.max(0, minutes) * MINUTE_MS;
+  const minutes = toKnownMinutes(runtime) || toKnownMinutes(fallback);
+  return minutes * MINUTE_MS;
 }
 
 export function calculateWatchUntilTimestamps({
