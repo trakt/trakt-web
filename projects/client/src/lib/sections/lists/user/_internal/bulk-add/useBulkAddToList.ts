@@ -41,7 +41,7 @@ export function useBulkAddToList(list: MediaListSummary) {
 
     track({ action: 'add' });
 
-    const isAdded = await addition.mutate(picks);
+    const isAdded = await addition.mutate(picks).catch(() => false);
 
     notify(
       isAdded
