@@ -11,7 +11,6 @@ import { MovieHereticYouTubeSpecialResponseMock } from '$mocks/data/summary/movi
 import { MoviesAnticipatedResponseMock } from '../data/movies/response/MoviesAnticipatedResponseMock.ts';
 import { MoviesPopularResponseMock } from '../data/movies/response/MoviesPopularResponseMock.ts';
 import { MoviesTrendingResponseMock } from '../data/movies/response/MoviesTrendingResponseMock.ts';
-import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
 import { MediaSocialResponseMock } from '../data/summary/common/response/MediaSocialResponseMock.ts';
 import { HereticListsResponseMock } from '../data/summary/movies/heretic/response/HereticListsResponseMock.ts';
 import { MovieHereticPeopleResponseMock } from '../data/summary/movies/heretic/response/MovieHereticPeopleResponseMock.ts';
@@ -64,12 +63,6 @@ export const movies = [
     `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/stats`,
     () => {
       return HttpResponse.json(MovieHereticStatsResponseMock);
-    },
-  ),
-  http.get(
-    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/watching`,
-    () => {
-      return HttpResponse.json(MediaWatchingResponseMock);
     },
   ),
   http.get(

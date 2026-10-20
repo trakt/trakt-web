@@ -17,7 +17,6 @@ import { ShowSiloSoundtrackResponseMock } from '$mocks/data/summary/shows/silo/r
 import { ShowsAnticipatedResponseMock } from '../data/shows/response/ShowsAnticipatedResponseMock.ts';
 import { ShowsPopularResponseMock } from '../data/shows/response/ShowsPopularResponseMock.ts';
 import { ShowsTrendingResponseMock } from '../data/shows/response/ShowsTrendingResponseMock.ts';
-import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
 import { MediaSocialResponseMock } from '../data/summary/common/response/MediaSocialResponseMock.ts';
 import { EpisodeSiloRatingsResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloRatingsResponseMock.ts';
 import { EpisodeSiloResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
@@ -77,12 +76,6 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/watching`,
-    () => {
-      return HttpResponse.json(MediaWatchingResponseMock);
-    },
-  ),
-  http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/social*`,
     ({ request }) => {
       return paginatedSocial(request);
@@ -133,12 +126,6 @@ export const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/watchnow/*`,
     () => {
       return HttpResponse.json(ShowSiloWatchNowResponseMock);
-    },
-  ),
-  http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/watching`,
-    () => {
-      return HttpResponse.json(MediaWatchingResponseMock);
     },
   ),
   http.get(
