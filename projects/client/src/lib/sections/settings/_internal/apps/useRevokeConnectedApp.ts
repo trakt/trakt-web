@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
 import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
@@ -12,6 +14,7 @@ type RevokeTarget = {
 
 export function useRevokeConnectedApp() {
   const { confirm } = useConfirm();
+  const { track } = useTrack(AnalyticsEvent.RevokeApp);
 
   const revocation = useMutation(
     defineMutation({
@@ -21,11 +24,19 @@ export function useRevokeConnectedApp() {
     }),
   );
 
+  const revokeApp = async (app: RevokeTarget) => {
+    const isRevoked = await revocation.mutate(app);
+
+    if (isRevoked) {
+      track();
+    }
+  };
+
   const revoke = (app: RevokeTarget) =>
     confirm({
       type: ConfirmationType.RevokeApp,
       name: app.name,
-      onConfirm: () => revocation.mutate(app),
+      onConfirm: () => revokeApp(app),
     });
 
   return { revoke };
