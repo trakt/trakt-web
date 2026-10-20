@@ -5,23 +5,16 @@
   const {
     title,
     count,
-    metaInfo,
     actions,
   }: {
     title: string;
     count?: number;
-    metaInfo?: Snippet;
     actions?: Snippet;
   } = $props();
 </script>
 
 <div class="drawer-tab-title">
-  <div class="drawer-tab-title-main">
-    <ListLabel {title} {count} />
-    {#if metaInfo}
-      {@render metaInfo()}
-    {/if}
-  </div>
+  <ListLabel {title} {count} />
 
   {#if actions}
     <div class="drawer-tab-title-actions">
@@ -36,12 +29,6 @@
     align-items: center;
     gap: var(--gap-s);
     min-height: var(--ni-40);
-  }
-
-  .drawer-tab-title-main {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
   }
 
   .drawer-tab-title-actions {
