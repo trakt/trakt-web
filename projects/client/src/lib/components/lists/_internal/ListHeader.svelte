@@ -166,6 +166,10 @@
     :global(.trakt-link) {
       text-decoration: none;
     }
+
+    &:empty {
+      display: none;
+    }
   }
 
   .label-plain,
