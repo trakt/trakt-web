@@ -2,30 +2,22 @@
   class="trakt-loader-icon"
   width="24"
   height="24"
-  viewBox="0 0 61 61"
+  viewBox="-1 -1 63 63"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
     class="loader-ring"
     pathLength="100"
-    d="M37.12 3.44A27.5 27.5 0 1 0 56.56 37.12"
+    d="M36.19 3.20A27.5 27.5 0 1 0 56.00 38.95"
   />
-  <path
-    class="loader-check"
-    style:--pop-step={0}
-    d="M30.559 22.2299L27.3451 26.0599L19.685 19.6322L22.8988 15.8021L30.559 22.2299Z"
-  />
+  <path class="loader-check" style:--pop-step={0} d="M26.88 22.41L23.36 19.45" />
   <path
     class="loader-check"
     style:--pop-step={1}
-    d="M57.5434 5.70935L31.8305 36.3529L39.4906 42.7806L36.2768 46.6107L13.2563 27.2943L16.4701 23.4642L28.0004 33.139L53.7133 2.49548L57.5434 5.70935Z"
+    d="M16.93 27.11L35.82 42.96M29.92 34.75L53.89 6.17"
   />
-  <path
-    class="loader-check"
-    style:--pop-step={2}
-    d="M60.3432 17.85L42.6664 38.9164L38.8363 35.7015L56.5131 14.6361L60.3432 17.85Z"
-  />
+  <path class="loader-check" style:--pop-step={2} d="M56.69 18.31L42.49 35.24" />
 </svg>
 
 <style>
@@ -36,7 +28,8 @@
   .loader-ring {
     fill: none;
     stroke: currentColor;
-    stroke-width: 5;
+    stroke-width: 6;
+    stroke-linecap: round;
     stroke-dasharray: 100 100;
 
     animation: loader-ring var(--loader-duration) cubic-bezier(0.3, 0, 0.2, 1)
@@ -44,7 +37,11 @@
   }
 
   .loader-check {
-    fill: currentColor;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 
     transform-box: view-box;
     transform-origin: 30px 36px;
@@ -57,6 +54,9 @@
   @keyframes loader-ring {
     0% {
       stroke-dashoffset: 100;
+      opacity: 0;
+    }
+    3% {
       opacity: 1;
     }
     20%,

@@ -150,7 +150,7 @@
     </div>
     <div class="logo-grid">
       <div class="logo-item">
-        <div class="logo-preview logo-preview--light">
+        <div class="logo-preview logo-preview--light logo-preview--mono">
           <div class="logo-mark">
             <LogoMarkCircle />
           </div>
@@ -159,7 +159,7 @@
         <span class="secondary logo-label">Circle Mark — Light</span>
       </div>
       <div class="logo-item">
-        <div class="logo-preview logo-preview--dark">
+        <div class="logo-preview logo-preview--dark logo-preview--mono">
           <div class="logo-mark">
             <LogoMarkCircle />
           </div>
@@ -265,6 +265,7 @@
       // On dark+mono the square is white, so the inner mark must be dark
       &.logo-preview--mono {
         --logo-mark-fill: #111111;
+        --circle-mark-fill: #111111;
       }
 
       @include for-mouse {
@@ -274,16 +275,18 @@
       }
     }
 
-    // Force canonical brand purple regardless of seasonal theme overrides
+    // Force canonical brand violet regardless of seasonal theme overrides
     &--branded {
-      --purple-500: #9f42c6;
-      --color-foreground: #9f42c6;
-      --circle-mark-bg: #ffffff;
+      --purple-600: #6438d0;
+      --circle-mark-bg: #6438d0;
+      --circle-mark-fill: #ffffff;
     }
 
-    // Monochrome: square inherits the foreground color instead of brand purple
+    // Monochrome: the square and the circle take the foreground color instead of brand violet
     &--mono {
-      --purple-500: var(--color-foreground);
+      --purple-600: var(--color-foreground);
+      --circle-mark-bg: var(--color-foreground);
+      --circle-mark-fill: #ffffff;
     }
   }
 
