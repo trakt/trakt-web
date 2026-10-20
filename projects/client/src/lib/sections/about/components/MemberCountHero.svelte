@@ -1,5 +1,5 @@
 <script lang="ts">
-  import OdometerNumber from "$lib/components/counter/OdometerNumber.svelte";
+  import CounterNumber from "$lib/components/counter/CounterNumber.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MemberCountProps } from "./_internal/MemberCountProps.ts";
   import { toAnnounceValue } from "./_internal/toAnnounceValue.ts";
@@ -17,11 +17,7 @@
   </p>
 
   <div class="member-count-figure">
-    <OdometerNumber
-      value={count.value}
-      reserveFor={count.reserveFor}
-      {accessibleLabel}
-    />
+    <CounterNumber value={count.value} {accessibleLabel} />
   </div>
 
   <p class="member-count-tagline secondary">{m.text_member_count_tagline()}</p>
