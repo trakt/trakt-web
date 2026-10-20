@@ -5,8 +5,14 @@
   import { useSeenAchievementTiers } from "./stores/useSeenAchievementTiers.ts";
   import { useVipAchievements } from "./stores/useVipAchievements.ts";
   import { toNewAchievementIds } from "./_internal/toNewAchievementIds.ts";
+  import type { VipAchievementMilestone } from "./models/VipAchievementMilestone.ts";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
 
-  const { achievements } = useVipAchievements();
+  const {
+    milestones = new Set(),
+  }: { milestones?: ReadonlySet<VipAchievementMilestone> } = $props();
+
+  const { achievements } = useVipAchievements(fromRune(() => milestones));
   const { readSeen, markSeen } = useSeenAchievementTiers();
 
   let isDrawerOpen = $state(false);

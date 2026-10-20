@@ -1,6 +1,7 @@
 import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
 import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 import type { UserStats } from '$lib/requests/models/UserStats.ts';
+import type { VipAchievementMilestone } from '../models/VipAchievementMilestone.ts';
 
 /**
  * Everything the metric extractors read from. All fields are already-loaded
@@ -14,4 +15,6 @@ export type VipAchievementMetricInput = {
   history: UserHistory | Nil;
   /** Client-loaded ratings across movies/shows/seasons/episodes. */
   ratings: UserRatings | Nil;
+  /** Milestones other features have awarded the member. */
+  milestones: ReadonlySet<VipAchievementMilestone> | Nil;
 };

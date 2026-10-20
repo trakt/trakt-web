@@ -1,6 +1,7 @@
 <script lang="ts">
   import BoltIcon from "$lib/components/icons/BoltIcon.svelte";
   import ChainIcon from "$lib/components/icons/ChainIcon.svelte";
+  import ClapperboardIcon from "$lib/components/icons/ClapperboardIcon.svelte";
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import MoonIcon from "$lib/components/icons/MoonIcon.svelte";
@@ -14,7 +15,9 @@
   const { id }: { id: VipAchievementId } = $props();
 </script>
 
-{#if id === "time-spent-movies" || id === "double-feature"}
+{#if id === "opening-credits"}
+  <ClapperboardIcon />
+{:else if id === "time-spent-movies" || id === "double-feature"}
   <MovieIcon />
 {:else if id === "time-spent-episodes"}
   <ShowIcon />

@@ -14191,6 +14191,22 @@
           "type": "number"
         }
       }
+    },
+    "vip_achievements_category_getting_started": {
+      "default": "Getting started",
+      "description": "Section heading in the achievements drawer for achievements earned by finishing the Getting started steps. Matches the 'Getting started' menu item."
+    },
+    "vip_achievement_opening_credits_title": {
+      "default": "Opening Credits",
+      "description": "Title of the achievement awarded for finishing the 'First steps' set in Getting started. Same name as the reward shown there."
+    },
+    "vip_achievement_opening_credits_description": {
+      "default": "The five first steps that make Trakt yours.",
+      "description": "Description of the 'Opening Credits' achievement."
+    },
+    "vip_achievement_opening_credits_step": {
+      "default": "Finish the first steps in Getting started",
+      "description": "Instruction for unlocking the 'Opening Credits' achievement. 'Getting started' is the menu item that lists the steps."
     }
   }
 }

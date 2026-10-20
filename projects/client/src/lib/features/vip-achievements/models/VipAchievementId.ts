@@ -3,6 +3,8 @@
  * definitions, resolved state, and the icon lookup.
  */
 export type VipAchievementId =
+  // Getting started
+  | 'opening-credits'
   // Watching
   | 'century-club'
   | 'time-spent-episodes'

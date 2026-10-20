@@ -12,6 +12,7 @@ function makeInput(
     stats: null,
     history: null,
     ratings: null,
+    milestones: null,
     ...overrides,
   };
 }
@@ -164,6 +165,26 @@ describe('util: computeVipAchievements', () => {
     );
 
     expect(byId('century-club')(list)?.nextStep).toBe('Log 5,000 plays');
+  });
+
+  it('unlocks Opening Credits from its milestone', () => {
+    const locked = computeVipAchievements(makeInput());
+    const earned = computeVipAchievements(
+      makeInput({ milestones: new Set(['opening-credits']) }),
+    );
+
+    expect(byId('opening-credits')(locked)?.isUnlocked).toBe(false);
+    expect(byId('opening-credits')(locked)?.nextStep).toBe(
+      'Finish the first steps in Getting started',
+    );
+    expect(byId('opening-credits')(earned)?.isUnlocked).toBe(true);
+    expect(byId('opening-credits')(earned)?.isMaxed).toBe(true);
+  });
+
+  it('lists Opening Credits first', () => {
+    expect(computeVipAchievements(makeInput()).at(0)?.id).toBe(
+      'opening-credits',
+    );
   });
 
   it('degrades to all-locked with no data', () => {

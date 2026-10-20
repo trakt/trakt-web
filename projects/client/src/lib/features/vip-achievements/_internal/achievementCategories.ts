@@ -13,6 +13,10 @@ type AchievementCategoryDefinition = {
  */
 export const achievementCategories: ReadonlyArray<AchievementCategoryDefinition> =
   [
+    {
+      id: 'getting-started',
+      title: m.vip_achievements_category_getting_started,
+    },
     { id: 'watching', title: m.vip_achievements_category_watching },
     { id: 'habits', title: m.vip_achievements_category_habits },
     { id: 'ratings', title: m.vip_achievements_category_ratings },

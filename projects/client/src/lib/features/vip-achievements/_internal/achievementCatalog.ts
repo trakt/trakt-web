@@ -26,6 +26,15 @@ const toHours = (minutes: number | Nil) =>
  */
 export const achievementCatalog: ReadonlyArray<VipAchievementDefinition> = [
   {
+    id: 'opening-credits',
+    category: 'getting-started',
+    title: m.vip_achievement_opening_credits_title,
+    description: m.vip_achievement_opening_credits_description,
+    step: () => m.vip_achievement_opening_credits_step(),
+    thresholds: [1],
+    metric: ({ milestones }) => (milestones?.has('opening-credits') ? 1 : 0),
+  },
+  {
     id: 'century-club',
     category: 'watching',
     title: m.vip_achievement_century_club_title,

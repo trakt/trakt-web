@@ -19,6 +19,8 @@
   const fmt = (value: number) => toGroupedNumber(value, languageTag());
 
   const isNew = $derived(revealIndex !== null);
+  // A one-step goal ("Rate something 5/5") has no progress worth a bar.
+  const hasProgress = $derived((achievement.nextThreshold ?? 0) > 1);
   const progressPercent = $derived(Math.round(achievement.progress * 100));
 
   // 0..1 across the tier ladder: the medal's glow widens as tiers stack up.
@@ -85,9 +87,11 @@
 
     {#if achievement.nextStep && achievement.nextThreshold !== null}
       <div class="card-next">
-        <div class="card-track" aria-hidden="true">
-          <span class="card-track-fill"></span>
-        </div>
+        {#if hasProgress}
+          <div class="card-track" aria-hidden="true">
+            <span class="card-track-fill"></span>
+          </div>
+        {/if}
         <div class="card-next-row">
           <span class="card-next-step">
             <span class="card-next-label">
@@ -97,9 +101,11 @@
             </span>
             <span class="card-next-text">{achievement.nextStep}</span>
           </span>
-          <span class="card-next-count">
-            {fmt(achievement.value)} / {fmt(achievement.nextThreshold)}
-          </span>
+          {#if hasProgress}
+            <span class="card-next-count">
+              {fmt(achievement.value)} / {fmt(achievement.nextThreshold)}
+            </span>
+          {/if}
         </div>
       </div>
     {/if}

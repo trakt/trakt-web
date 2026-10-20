@@ -4,6 +4,7 @@
  * entry there.
  */
 export type VipAchievementCategory =
+  | 'getting-started'
   | 'watching'
   | 'habits'
   | 'ratings'
