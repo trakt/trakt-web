@@ -4,15 +4,15 @@ import type { RecommendationMode } from '$lib/requests/models/RecommendationMode
 import { combineLatest, distinctUntilChanged, map } from 'rxjs';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
-import { FeatureFlag } from '../feature-flag/models/FeatureFlag.ts';
-import { useFeatureFlag } from '../feature-flag/useFeatureFlag.ts';
+import { useUser } from '../auth/stores/useUser.ts';
 
 export function useRecommendationMode() {
   const { options, set, current } = useToggler('recommendationMode');
-  const { isEnabled } = useFeatureFlag();
+  const { user } = useUser();
   const { track } = useTrack(AnalyticsEvent.RecommendationMode);
 
-  const isApplicable = isEnabled(FeatureFlag.SmartRecommendations).pipe(
+  const isApplicable = user.pipe(
+    map(($user) => $user.isVip || $user.isDirector),
     distinctUntilChanged(),
   );
 

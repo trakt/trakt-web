@@ -11307,14 +11307,6 @@
       "default": "Your 2026 as a scroll-driven reel with a viewer persona, then a stats page styled to match it.",
       "description": "Description for the Year in Review 2026 preview feature."
     },
-    "preview_feature_title_smart_recommendations": {
-      "default": "Smart recommendations",
-      "description": "Product feature name for the preview feature that adds a Smart / Classic toggle to recommendations."
-    },
-    "preview_feature_description_smart_recommendations": {
-      "default": "Switch recommendations between Smart picks from the new model and the Classic ones.",
-      "description": "Description for the Smart recommendations preview feature."
-    },
     "preview_feature_title_large_screen_cards": {
       "default": "Large Screen Cards",
       "description": "Title for the Large Screen Cards preview feature."

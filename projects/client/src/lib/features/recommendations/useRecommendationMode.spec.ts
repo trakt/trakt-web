@@ -9,9 +9,9 @@ import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { useRecommendationMode } from './useRecommendationMode.ts';
 
-function mockDirector(isDirector: boolean) {
+function mockUser({ vip, director }: { vip: boolean; director: boolean }) {
   const user = deepAssign(clone(ExtendedUsersResponseMock), {
-    user: { director: isDirector },
+    user: { vip, vip_ep: vip, director },
   });
 
   server.use(
@@ -26,16 +26,24 @@ describe('store: useRecommendationMode', () => {
     setAuthorization(true);
   });
 
-  it('should request smart by default for directors', async () => {
-    mockDirector(true);
+  it('should request smart by default for VIPs', async () => {
+    mockUser({ vip: true, director: false });
 
     const { requestMode } = await renderStore(() => useRecommendationMode());
 
     expect(await waitForValue(requestMode, 'smart')).toBe('smart');
   });
 
-  it('should request no mode for everyone else', async () => {
-    mockDirector(false);
+  it('should request smart by default for directors', async () => {
+    mockUser({ vip: false, director: true });
+
+    const { requestMode } = await renderStore(() => useRecommendationMode());
+
+    expect(await waitForValue(requestMode, 'smart')).toBe('smart');
+  });
+
+  it('should request no mode for free users', async () => {
+    mockUser({ vip: false, director: false });
 
     const { requestMode, isApplicable } = await renderStore(() =>
       useRecommendationMode(),
@@ -45,8 +53,8 @@ describe('store: useRecommendationMode', () => {
     expect(await waitForValue(requestMode, undefined)).toBeUndefined();
   });
 
-  it('should request classic after a director switches to it', async () => {
-    mockDirector(true);
+  it('should request classic after a VIP switches to it', async () => {
+    mockUser({ vip: true, director: false });
 
     const { requestMode, onModeChange } = await renderStore(() =>
       useRecommendationMode(),
