@@ -7,6 +7,7 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages";
+  import type { SearchResultPosition } from "$lib/features/search/models/SearchResultPosition";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import DateWithAnniversary from "$lib/sections/components/DateWithAnniversary.svelte";
   import { isSameDayOfYear } from "$lib/utils/date/isSameDayOfYear";
@@ -16,11 +17,13 @@
   const {
     person,
     source,
+    position,
     onclick,
     variant = "default",
   }: {
     person: PersonSummary;
     source?: string;
+    position?: SearchResultPosition;
     onclick?: (item: PersonSummary) => void;
     variant?: "default" | "birthday";
   } = $props();
@@ -35,7 +38,8 @@
     href={UrlBuilder.people(person.slug)}
     onclick={() => {
       onclick?.(person);
-      source && track({ source, type: "person" });
+      source &&
+        track({ source, type: "person", ...(position && { position }) });
     }}
   >
     <CardCover

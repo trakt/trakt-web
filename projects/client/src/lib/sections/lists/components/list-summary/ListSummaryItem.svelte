@@ -1,6 +1,7 @@
 <script lang="ts">
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
+  import type { SearchResultPosition } from "$lib/features/search/models/SearchResultPosition.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import type { Snippet } from "svelte";
   import ListSummaryCard from "../ListSummaryCard.svelte";
@@ -10,11 +11,13 @@
   const {
     list,
     source,
+    position,
     onclick,
     popupActions,
   }: {
     list: MediaListSummary;
     source?: string;
+    position?: SearchResultPosition;
     onclick?: (list: MediaListSummary) => void;
     popupActions?: Snippet;
   } = $props();
@@ -25,7 +28,7 @@
     onclick?.(list);
 
     if (source) {
-      track({ source, type: "list" });
+      track({ source, type: "list", ...(position && { position }) });
     }
   };
 </script>

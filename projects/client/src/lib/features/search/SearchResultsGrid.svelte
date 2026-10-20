@@ -1,10 +1,28 @@
 <script lang="ts">
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import SearchResultItem from "./_internal/SearchResultItem.svelte";
+  import type { SearchResultPosition } from "./models/SearchResultPosition.ts";
   import type { SearchResultsGridProps } from "./SearchResultsGridProps.ts";
+  import { toSearchResultPosition } from "./toSearchResultPosition.ts";
 
-  const { title, items, empty, leadingItem, onclick, type }:
-    SearchResultsGridProps = $props();
+  const {
+    title,
+    items,
+    empty,
+    leadingItem,
+    onclick,
+    type,
+    source = "search",
+    trackPosition = true,
+  }: SearchResultsGridProps = $props();
+
+  const positions = $derived(
+    items.reduce(
+      (acc, { key }, index) =>
+        acc.has(key) ? acc : acc.set(key, toSearchResultPosition(index + 1)),
+      new Map<string, SearchResultPosition>(),
+    ),
+  );
 
   const cardWidthVariable = $derived.by(() => {
     switch (type) {
@@ -28,7 +46,12 @@
     --width-item={`var(--width-override-card, var(${cardWidthVariable}))`}
   >
     {#snippet item(item)}
-      <SearchResultItem {item} {onclick} />
+      <SearchResultItem
+        {item}
+        {onclick}
+        {source}
+        position={trackPosition ? positions.get(item.key) : undefined}
+      />
     {/snippet}
   </GridList>
 </div>

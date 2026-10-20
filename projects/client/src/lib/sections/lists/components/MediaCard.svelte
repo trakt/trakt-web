@@ -28,6 +28,7 @@
     action,
     popupActions,
     source,
+    position,
     indicators,
     coverWrapper,
     ...rest
@@ -83,7 +84,12 @@
     {...linkProps}
     onclick={() => {
       rest.onclick?.(media);
-      source && track({ source, type: media.type });
+      source &&
+        track({
+          source,
+          type: media.type,
+          ...(position && { position }),
+        });
     }}
   >
     {#if coverWrapper}

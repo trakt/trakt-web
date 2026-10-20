@@ -10,14 +10,19 @@
   import DefaultPersonItem from "$lib/sections/lists/components/DefaultPersonItem.svelte";
   import ListSummaryItem from "$lib/sections/lists/components/list-summary/ListSummaryItem.svelte";
   import type { SearchItem } from "../models/SearchItem";
+  import type { SearchResultPosition } from "../models/SearchResultPosition";
   import { useSearch } from "../useSearch";
 
   const {
     item,
     onclick,
+    source,
+    position,
   }: {
     item: SearchItem;
     onclick?: (item: SearchItem) => void;
+    source: string;
+    position?: SearchResultPosition;
   } = $props();
 
   const { mode } = useSearch();
@@ -52,7 +57,8 @@
     type={item.type}
     media={item}
     style="cover"
-    source="search"
+    {source}
+    {position}
     tag={mediaResultTag}
     mode={$mode === "media" ? "mixed" : "standalone"}
     {onclick}
@@ -60,13 +66,14 @@
 {:else if isPerson(item)}
   <DefaultPersonItem
     person={item}
-    source="search"
+    {source}
+    {position}
     variant="birthday"
     {onclick}
   />
 {:else}
   <trakt-search-result-list>
-    <ListSummaryItem list={item} source="search" {onclick} />
+    <ListSummaryItem list={item} {source} {position} {onclick} />
   </trakt-search-result-list>
 {/if}
 
