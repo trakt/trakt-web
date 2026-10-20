@@ -9,12 +9,15 @@ import { z } from 'zod';
 import { getRecommendedSearchParams } from '../../_internal/getRecommendedSearchParams.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { mapToRecommendationSource } from '../../_internal/mapToRecommendationSource.ts';
+import { mapToRecommendationPeopleReason } from '../../_internal/mapToRecommendationPeopleReason.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 import { RecommendationSourceSchema } from '../../models/RecommendationSource.ts';
+import { RecommendationPeopleReasonSchema } from '../../models/RecommendationPeopleReason.ts';
 import { RecommendationsMovieResponseSchema } from '../../models/RecommendationsResponse.ts';
 
 export const RecommendedMovieSchema = MovieEntrySchema.extend({
   sources: z.array(RecommendationSourceSchema),
+  people: z.array(RecommendationPeopleReasonSchema),
 });
 export type RecommendedMovie = z.infer<typeof RecommendedMovieSchema>;
 
@@ -61,6 +64,7 @@ export const recommendedMoviesQuery = defineQuery({
     response.body?.map((item) => ({
       ...mapToMovieEntry(item.movie),
       sources: item.sources.map(mapToRecommendationSource),
+      people: (item.people ?? []).map(mapToRecommendationPeopleReason),
     })) ?? [],
   schema: RecommendedMovieSchema.array(),
   ttl: time.hours(24),

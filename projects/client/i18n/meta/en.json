@@ -2232,6 +2232,64 @@
       "default": "You like",
       "description": "Section title for recommendation sources based on liked subgenres."
     },
+    "list_title_recommendation_sources_people": {
+      "default": "You keep watching",
+      "description": "Section title for a recommendation explained by a director, creator or actor the user has watched in several titles."
+    },
+    "text_recommendation_person_directing_one": {
+      "default": "Directed this · in {count} title you watched",
+      "description": "Line under the person in the You keep watching section: the person directed the recommended title and appears in one title the user watched.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_directing_other": {
+      "default": "Directed this · in {count} titles you watched",
+      "description": "Line under the person in the You keep watching section: the person directed the recommended title and appears in several titles the user watched.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_making_one": {
+      "default": "Made this · in {count} title you watched",
+      "description": "Line under the person in the You keep watching section: the person created or directed the recommended show and appears in one title the user watched.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_making_other": {
+      "default": "Made this · in {count} titles you watched",
+      "description": "Line under the person in the You keep watching section: the person created or directed the recommended show and appears in several titles the user watched.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_acting_one": {
+      "default": "Stars in this · in {count} title you watched",
+      "description": "Line under the person in the You keep watching section: the person stars in the recommended title and appears in one title the user watched.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_acting_other": {
+      "default": "Stars in this · in {count} titles you watched",
+      "description": "Line under the person in the You keep watching section: the person stars in the recommended title and appears in several titles the user watched.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "button_text_hide_recommendation": {
       "default": "Hide recommendation",
       "description": "Text for the button that hides a recommended movie or show from the user's recommendations list."

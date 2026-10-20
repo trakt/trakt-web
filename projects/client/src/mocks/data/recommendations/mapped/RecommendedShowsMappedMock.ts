@@ -8,5 +8,6 @@ export const RecommendedShowsMappedMock: RecommendedShow[] = [
       count: 15,
     },
     sources: [],
+    people: [],
   },
 ];

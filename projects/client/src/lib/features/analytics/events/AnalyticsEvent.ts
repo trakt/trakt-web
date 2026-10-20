@@ -151,6 +151,7 @@ export const AnalyticsEvent = {
   PwaInstall: buildEventKey(ACTION_PREFIX, 'pwa-install'),
 
   RecommendationMode: buildEventKey(RECOMMENDATIONS_PREFIX, 'mode'),
+  RecommendationWhy: buildEventKey(RECOMMENDATIONS_PREFIX, 'why'),
 
   ListCollaborator: buildEventKey(LIST_ACTION_PREFIX, 'collaborator'),
   MuteSharer: buildEventKey(USER_ACTION_PREFIX, 'mute-sharer'),

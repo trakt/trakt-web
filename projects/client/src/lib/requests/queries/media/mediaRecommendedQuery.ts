@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { getRecommendedSearchParams } from '../../_internal/getRecommendedSearchParams.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { mapToRecommendationSource } from '../../_internal/mapToRecommendationSource.ts';
+import { mapToRecommendationPeopleReason } from '../../_internal/mapToRecommendationPeopleReason.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import { RecommendationsResponseSchema } from '../../models/RecommendationsResponse.ts';
 import { RecommendedMovieSchema } from '../recommendations/recommendedMoviesQuery.ts';
@@ -69,6 +70,7 @@ export const recommendedMediaQuery = defineQuery({
         ? mapToMovieEntry(item.movie)
         : mapToShowEntry(item.show)),
       sources: item.sources.map(mapToRecommendationSource),
+      people: (item.people ?? []).map(mapToRecommendationPeopleReason),
     })) ?? [],
   schema: RecommendedMediaSchema.array(),
   ttl: time.hours(24),
