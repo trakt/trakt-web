@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
@@ -35,6 +37,7 @@ export function useManageCollaborators(
   target$: Observable<ManageCollaboratorsTarget>,
 ) {
   const { notify } = useActionToast();
+  const { track } = useTrack(AnalyticsEvent.ListCollaborator);
 
   const followersQuery$ = useQuery(
     target$.pipe(map(({ ownerSlug }) => followersQuery({ slug: ownerSlug }))),
@@ -109,7 +112,12 @@ export function useManageCollaborators(
   const addCollaborator = async (profile: UserProfile) => {
     const result = await add.mutate(profile);
 
+    if (result === 'added') {
+      track({ action: 'add' });
+    }
+
     if (result === 'limit-reached') {
+      track({ action: 'limit-reached' });
       notify({
         message: m.action_toast_collaborator_limit_reached(),
         variant: 'error',
@@ -118,7 +126,11 @@ export function useManageCollaborators(
   };
 
   const removeCollaborator = async (profile: UserProfile) => {
-    await remove.mutate(profile);
+    const isRemoved = await remove.mutate(profile);
+
+    if (isRemoved) {
+      track({ action: 'remove' });
+    }
   };
 
   return {
