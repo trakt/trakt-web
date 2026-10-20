@@ -1,7 +1,6 @@
 <script lang="ts" generics="T extends string">
   import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
   import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
-  import type { SelectStyle } from "$lib/components/select/models/SelectStyle.ts";
   import ToggleIcon from "./ToggleIcon.svelte";
   import type { ToggleOption } from "./ToggleOption.ts";
 
@@ -9,8 +8,7 @@
     value: T;
     onChange: (value: T) => void;
     options: ToggleOption<T>[];
-    variant?: "icon" | "text" | "selected-icon";
-    style?: SelectStyle;
+    variant?: "text" | "selected-icon";
     ariaLabel?: string;
     fill?: boolean;
   }
@@ -20,7 +18,6 @@
     onChange,
     options,
     variant = "selected-icon",
-    style,
     ariaLabel,
     fill = false,
   }: TogglerProps = $props();
@@ -36,20 +33,7 @@
   );
 
   // Word-only toggles, like a settings switch between two modes, keep the track.
-  const selectStyle = $derived<SelectStyle>(
-    style ?? (variant === "text" ? "default" : "pills"),
-  );
-
-  const selectVariant = $derived.by(() => {
-    switch (variant) {
-      case "text":
-        return "regular";
-      case "selected-icon":
-        return "selected-icon";
-      default:
-        return "compact";
-    }
-  });
+  const isText = $derived(variant === "text");
 
   const customIconFor = (optionValue: string) =>
     options.find((option) => option.value === optionValue)?.icon;
@@ -65,12 +49,12 @@
 {/snippet}
 
 <SegmentedSelect
-  variant={selectVariant}
-  style={selectStyle}
+  variant={isText ? "regular" : "selected-icon"}
+  style={isText ? "default" : "pills"}
   {value}
   options={segmentedOptions}
   {ariaLabel}
   {fill}
-  icon={variant === "text" ? undefined : iconSnippet}
+  icon={isText ? undefined : iconSnippet}
   {onChange}
 />
