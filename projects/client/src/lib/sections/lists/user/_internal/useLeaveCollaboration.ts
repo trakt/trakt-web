@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
@@ -14,6 +16,7 @@ export function useLeaveCollaboration(
   target$: Observable<LeaveCollaborationTarget>,
 ) {
   const { user } = useUser();
+  const { track } = useTrack(AnalyticsEvent.ListCollaborator);
 
   const leave = useMutation(
     defineMutation({
@@ -34,7 +37,11 @@ export function useLeaveCollaboration(
   );
 
   const leaveCollaboration = async () => {
-    await leave.mutate();
+    const hasLeft = await leave.mutate();
+
+    if (hasLeft) {
+      track({ action: 'leave' });
+    }
   };
 
   return {
