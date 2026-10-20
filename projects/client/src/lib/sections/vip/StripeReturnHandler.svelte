@@ -46,15 +46,8 @@
 
     confirmCheckout(sessionId)
       .then(
-        (isConfirmed) => {
-          if (!tracking) return;
-
-          if (isConfirmed) {
-            trackConfirmed(tracking);
-            return;
-          }
-
-          trackConfirmFailed({ ...tracking, error: "not_confirmed" });
+        () => {
+          if (tracking) trackConfirmed(tracking);
         },
         (error) => {
           if (tracking) {
