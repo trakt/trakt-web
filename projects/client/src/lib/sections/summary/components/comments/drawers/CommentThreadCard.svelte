@@ -10,6 +10,11 @@
   import CommentBody from "../_internal/CommentBody.svelte";
   import CommentFooter from "../_internal/CommentFooter.svelte";
   import CommentHeader from "../_internal/CommentHeader.svelte";
+  import { isTopLevelComment } from "../_internal/isTopLevelComment.ts";
+  import OwnCommentLabel from "../_internal/OwnCommentLabel.svelte";
+  import ReplyContext from "../_internal/ReplyContext.svelte";
+  import { toReplyThreadUrl } from "../_internal/toReplyThreadUrl.ts";
+  import { useOwnCommentHighlight } from "../_internal/useOwnCommentHighlight.ts";
   import { toGifSuggestedQuery } from "../_internal/toGifSuggestedQuery.ts";
   import type { CommentTypeProps } from "../CommentsProps";
   import CommentReplies from "./CommentReplies.svelte";
@@ -25,6 +30,7 @@
     shouldScrollIntoView: boolean;
     header?: Snippet;
     scrollContainerClass?: string;
+    highlightOwn?: boolean;
   } & CommentTypeProps;
 
   const {
@@ -36,6 +42,7 @@
     shouldScrollIntoView,
     header,
     scrollContainerClass = THREAD_LIST_CLASS,
+    highlightOwn = false,
     ...typeProps
   }: CommentThreadCardProps = $props();
 
@@ -46,6 +53,13 @@
 
     return scrollActiveCommentIntoView(node, scrollContainerClass);
   };
+
+  const isReply = $derived(!isTopLevelComment(comment));
+
+  const { highlightedUserId } = useOwnCommentHighlight();
+  const isHighlighted = $derived(
+    highlightOwn && comment.user.id === $highlightedUserId,
+  );
 
   let areRepliesExpanded = $state(false);
 
@@ -63,12 +77,25 @@
   --width-card="100%"
   --height-card="fit-content"
   classList="trakt-comment-thread-card"
+  variant={isHighlighted ? "tinted" : "opaque"}
   action={scrollIntoView}
 >
   <div class="trakt-comment-thread-container">
+    {#if isHighlighted}
+      <OwnCommentLabel />
+    {/if}
     {#if header}
       {@render header()}
     {:else}
+      {#if isReply}
+        <ReplyContext
+          href={toReplyThreadUrl({
+            parentId: comment.parentId,
+            media,
+            ...typeProps,
+          })}
+        />
+      {/if}
       <CommentHeader {comment} {media} {...typeProps} />
     {/if}
 
@@ -85,10 +112,12 @@
 
     <CommentFooter>
       <ReactAction {comment} />
-      <ReplyButton
-        {comment}
-        onClick={() => setReplying(comment, !isReplying)}
-      />
+      {#if !isReply}
+        <ReplyButton
+          {comment}
+          onClick={() => setReplying(comment, !isReplying)}
+        />
+      {/if}
     </CommentFooter>
 
     {#if isReplying}

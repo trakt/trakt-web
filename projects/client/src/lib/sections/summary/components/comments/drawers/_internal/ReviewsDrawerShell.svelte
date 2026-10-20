@@ -11,10 +11,12 @@
   type ReviewsDrawerShellProps = {
     source?: ActiveComment;
     useList: PaginatableStore<MediaComment, string>;
+    emptyText?: string;
+    highlightOwn?: boolean;
   } & CommentsProps;
 
-  const { source, useList, media, ...props }: ReviewsDrawerShellProps =
-    $props();
+  const { source, useList, emptyText, highlightOwn, media, ...props }:
+    ReviewsDrawerShellProps = $props();
 
   const { reset, setReplying, activeComment } = $derived(
     useActiveComment(source),
@@ -26,7 +28,10 @@
 
 <div class={THREAD_LIST_CLASS}>
   <PaginatedList type="reviews" target="parent" {useList}>
-    {#snippet items(items)}
+    {#snippet items(items, isLoading)}
+      {#if emptyText && items.length === 0 && !isLoading}
+        <p class="reviews-drawer-empty">{emptyText}</p>
+      {/if}
       {#each items as comment (comment.id)}
         <CommentThreadCard
           {comment}
@@ -36,6 +41,7 @@
           {...props}
           isReplying={isReplying(comment.id)}
           shouldScrollIntoView={comment.id === source?.id}
+          {highlightOwn}
         />
       {/each}
     {/snippet}
@@ -43,6 +49,10 @@
 </div>
 
 <style>
+  .reviews-drawer-empty {
+    color: var(--color-text-secondary);
+  }
+
   .trakt-comment-threads-list {
     overflow-y: auto;
     overscroll-behavior: contain;

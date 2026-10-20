@@ -13882,6 +13882,58 @@
     "text_mixtape_pick_prompt": {
       "default": "Tap a poster you loved",
       "description": "Shown in the Mixtape bottom bar before anything is picked."
+    },
+    "preview_feature_title_reviews_pin_mine": {
+      "default": "Pin my review",
+      "description": "Title for the reviews-pin-mine preview feature toggle in settings."
+    },
+    "preview_feature_description_reviews_pin_mine": {
+      "default": "Pins your own review at the top of a movie or show's reviews section.",
+      "description": "Description for the reviews-pin-mine preview feature toggle in settings."
+    },
+    "list_placeholder_reviews_mine": {
+      "default": "You haven't commented on this yet.",
+      "description": "Placeholder text shown in the 'My comments' tab of a reviews list when the viewer has not commented on or replied to anything on this title."
+    },
+    "button_label_mine_reviews": {
+      "default": "Your comments and replies",
+      "description": "Aria-label for the tab that filters a reviews list down to the viewer's own comments and replies."
+    },
+    "button_text_mine_reviews": {
+      "default": "My comments",
+      "description": "Text for the tab that filters a reviews list down to the viewer's own comments and replies. Keep it short: it sits next to 'Popular' and 'Recent'."
+    },
+    "preview_feature_title_reviews_mine_tab": {
+      "default": "My comments tab",
+      "description": "Title for the reviews-mine-tab preview feature toggle in settings."
+    },
+    "preview_feature_description_reviews_mine_tab": {
+      "default": "Adds a \"My comments\" tab to reviews, showing everything you wrote on a title, including replies.",
+      "description": "Description for the reviews-mine-tab preview feature toggle in settings."
+    },
+    "text_your_reply": {
+      "default": "Your reply",
+      "description": "Label above one of the viewer's own replies in the 'My comments' tab, telling them it is a reply to someone else's comment."
+    },
+    "link_text_view_thread": {
+      "default": "View thread",
+      "description": "Link next to 'Your reply' that opens the full conversation the reply belongs to."
+    },
+    "link_label_view_thread": {
+      "default": "Open the conversation this reply belongs to",
+      "description": "Aria-label for the 'View thread' link next to one of the viewer's own replies."
+    },
+    "preview_feature_title_reviews_highlight_mine": {
+      "default": "Highlight my comments",
+      "description": "Title for the reviews-highlight-mine preview feature toggle in settings."
+    },
+    "preview_feature_description_reviews_highlight_mine": {
+      "default": "Tints your own comments purple in a title's reviews so they're easy to spot.",
+      "description": "Description for the reviews-highlight-mine preview feature toggle in settings."
+    },
+    "text_your_comment": {
+      "default": "Your comment",
+      "description": "Screen reader text announced before one of the viewer's own comments when it is highlighted in a reviews list. Not shown on screen."
     }
   }
 }
