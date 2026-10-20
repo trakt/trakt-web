@@ -1,7 +1,7 @@
 <script lang="ts">
+  import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import SparkleStarIcon from "$lib/components/icons/SparkleStarIcon.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
-  import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useVipUpsell } from "$lib/features/upsell/useVipUpsell";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -25,7 +25,7 @@
       <div class="welcome-banner-main">
         <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
           <div class="welcome-banner-icon" aria-hidden="true">
-            <LogoMarkCircle />
+            <CircularLogo />
           </div>
         </RenderFor>
 
@@ -33,7 +33,7 @@
           <h2 class="bold welcome-banner-title">
             {m.welcome_banner_heading()}
             <RenderFor audience="all" device={["tablet-sm", "mobile"]}>
-              <LogoMarkCircle />
+              <CircularLogo />
             </RenderFor>
           </h2>
           <p class="secondary">

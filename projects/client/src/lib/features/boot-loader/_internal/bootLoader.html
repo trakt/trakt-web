@@ -7,7 +7,7 @@ document.documentElement.dataset.boot = 'loading';
 }
 
 html[data-boot] .boot-loader {
-  --boot-accent: oklch(56.1% 0.205 314.2);
+  --boot-accent: oklch(49% 0.217 289);
   --boot-background: oklch(99% 0.004 300);
   --boot-well: oklch(92% 0.008 300);
   --boot-mark: oklch(76% 0.012 300);
@@ -20,7 +20,7 @@ html[data-theme="dark"] .boot-loader {
   --boot-background: color-mix(
     in srgb,
     oklch(19.5% 0.009 300) 97%,
-    oklch(29% 0.1128 314.2)
+    oklch(29% 0.1128 289)
   );
   --boot-well: oklch(30% 0.011 300);
   --boot-mark: oklch(62% 0.01 300);
@@ -32,7 +32,7 @@ html[data-theme="dark"] .boot-loader {
     --boot-background: color-mix(
       in srgb,
       oklch(19.5% 0.009 300) 97%,
-      oklch(29% 0.1128 314.2)
+      oklch(29% 0.1128 289)
     );
     --boot-well: oklch(30% 0.011 300);
     --boot-mark: oklch(62% 0.01 300);
@@ -183,13 +183,14 @@ html[data-boot="styled"] .boot-loader.is-complete .boot-loader-bar {
     <div class="boot-loader-emblem">
       <svg class="boot-loader-logo" viewBox="0 0 48 48" aria-hidden="true">
         <defs>
-          <path id="boot-loader-shape"
-            d="M48 11.26v25.47C48 42.95 42.95 48 36.73 48H11.26C5.04 48 0 42.95 0 36.73V11.26C0 5.04 5.04 0 11.26 0h25.47c3.32 0 6.3 1.43 8.37 3.72.47.52.89 1.08 1.25 1.68.18.29.34.59.5.89.33.68.6 1.39.79 2.14.1.37.18.76.23 1.15.09.54.13 1.11.13 1.68Z" />
+          <rect id="boot-loader-shape" width="48" height="48" rx="10.8" />
           <clipPath id="boot-loader-square">
             <use href="#boot-loader-shape" />
           </clipPath>
-          <path id="boot-loader-mark" fill="currentColor"
-            d="m13.62 17.97 7.92 7.92 1.47-1.47-7.92-7.92-1.47 1.47Zm-.7.7-1.46 1.46 14.4 14.4 1.46-1.47L23 28.75 46.35 5.4c-.36-.6-.78-1.16-1.25-1.68L21.54 27.28l-8.62-8.61Zm15.09 13.7 1.47-1.46-2.16-2.16L47.64 8.43c-.19-.75-.46-1.46-.79-2.14L24.39 28.75l3.62 3.62ZM47.87 9.58 28.7 28.75l1.47 1.46L48 12.38v-1.12c0-.57-.04-1.14-.13-1.68ZM25.16 22.27l-7.92-7.92-1.47 1.47 7.92 7.92 1.47-1.47Zm16.16 12.85c0 3.42-2.78 6.2-6.2 6.2H12.88c-3.42 0-6.2-2.78-6.2-6.2V12.88c0-3.42 2.78-6.21 6.2-6.21h20.78V4.6H12.88c-4.56 0-8.28 3.71-8.28 8.28v22.24c0 4.56 3.71 8.28 8.28 8.28h22.24c4.56 0 8.28-3.71 8.28-8.28v-3.51h-2.07v3.51Z" />
+          <path id="boot-loader-mark" fill="none" stroke="currentColor"
+            stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+            transform="translate(9.6 9.6) scale(0.47213)"
+            d="M56.00 38.95A27.5 27.5 0 1 1 36.19 3.20M16.93 27.11L35.82 42.96M29.92 34.75L53.89 6.17M56.69 18.31L42.49 35.24M26.88 22.41L23.36 19.45" />
         </defs>
         <use class="boot-loader-well" href="#boot-loader-shape" />
         <g clip-path="url(#boot-loader-square)">

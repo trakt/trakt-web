@@ -1,8 +1,3 @@
-<!--
-  Trakt logomark with the brand gradient (purple → red), matching the v2
-  "Top Shows" card. The shared LogoMark is a flat purple-500 mark, so this
-  local variant adds the diagonal gradient fill.
--->
 <svg
   class="trakt-yir-top-logo"
   viewBox="0 0 48 48"
@@ -22,14 +17,14 @@
       <stop class="stop-end" offset="100%" />
     </linearGradient>
   </defs>
-  <path
-    class="logo-bg"
-    d="M48 11.26v25.47C48 42.95 42.95 48 36.73 48H11.26C5.04 48 0 42.95 0 36.73V11.26C0 5.04 5.04 0 11.26 0h25.47c3.32 0 6.3 1.43 8.37 3.72.47.52.89 1.08 1.25 1.68.18.29.34.59.5.89.33.68.6 1.39.79 2.14.1.37.18.76.23 1.15.09.54.13 1.11.13 1.68Z"
-  />
-  <path
+  <rect class="logo-bg" width="48" height="48" rx="10.8" />
+  <g
     class="logo-mark"
-    d="m13.62 17.97 7.92 7.92 1.47-1.47-7.92-7.92-1.47 1.47Zm-.7.7-1.46 1.46 14.4 14.4 1.46-1.47L23 28.75 46.35 5.4c-.36-.6-.78-1.16-1.25-1.68L21.54 27.28l-8.62-8.61Zm15.09 13.7 1.47-1.46-2.16-2.16L47.64 8.43c-.19-.75-.46-1.46-.79-2.14L24.39 28.75l3.62 3.62ZM47.87 9.58 28.7 28.75l1.47 1.46L48 12.38v-1.12c0-.57-.04-1.14-.13-1.68ZM25.16 22.27l-7.92-7.92-1.47 1.47 7.92 7.92 1.47-1.47Zm16.16 12.85c0 3.42-2.78 6.2-6.2 6.2H12.88c-3.42 0-6.2-2.78-6.2-6.2V12.88c0-3.42 2.78-6.21 6.2-6.21h20.78V4.6H12.88c-4.56 0-8.28 3.71-8.28 8.28v22.24c0 4.56 3.71 8.28 8.28 8.28h22.24c4.56 0 8.28-3.71 8.28-8.28v-3.51h-2.07v3.51Z"
-  />
+    transform="translate(9.600 9.600) scale(0.47213)"
+  >
+    <path d="M56.00 38.95A27.5 27.5 0 1 1 36.19 3.20" />
+    <path d="M16.93 27.11L35.82 42.96M29.92 34.75L53.89 6.17M56.69 18.31L42.49 35.24M26.88 22.41L23.36 19.45" />
+  </g>
 </svg>
 
 <style lang="scss">
@@ -52,6 +47,10 @@
   }
 
   .logo-mark {
-    fill: var(--shade-10);
+    fill: none;
+    stroke: var(--shade-10);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 </style>
