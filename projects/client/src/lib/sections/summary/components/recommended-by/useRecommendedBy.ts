@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
@@ -27,6 +29,8 @@ export function useRecommendedBy(target$: Observable<MediaSocialQueryTarget>) {
     map(($query) => $query.data ?? null),
   );
 
+  const { track } = useTrack(AnalyticsEvent.MuteSharer);
+
   const mute = useMutation(
     defineMutation({
       key: 'share:mute',
@@ -35,9 +39,19 @@ export function useRecommendedBy(target$: Observable<MediaSocialQueryTarget>) {
     }),
   );
 
+  const muteSharer = async (sharerId: number) => {
+    const isMuted = await mute.mutate(sharerId);
+
+    if (isMuted) {
+      track();
+    }
+
+    return isMuted;
+  };
+
   return {
     recommendedBy,
-    muteSharer: mute.mutate,
+    muteSharer,
     isMuting: mute.isPending,
   };
 }
