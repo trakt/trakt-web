@@ -4,6 +4,8 @@
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useAuth } from "$lib/features/auth/stores/useAuth.ts";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import { useClearInProgress } from "$lib/stores/useClearInProgress.ts";
@@ -25,6 +27,7 @@
   const { logout } = useAuth();
   const { clearInProgress } = useClearInProgress();
   const { user } = useUser();
+  const { track } = useTrack(AnalyticsEvent.DeleteAccount);
 
   const vipSubscription = useQuery(vipSubscriptionQuery()).pipe(
     map(($subscription) => $subscription.data),
@@ -41,6 +44,7 @@
   let isDeleting = $state(false);
   let hasError = $state(false);
   async function deleteAccount(shouldExport: boolean) {
+    track({ action: "confirm", exportFirst: shouldExport ? "yes" : "no" });
     isDeleting = true;
     hasError = false;
 
@@ -58,6 +62,7 @@
       const success = await deleteAccountRequest();
 
       if (!success) {
+        track({ action: "fail" });
         clearInProgress.next(false);
         isDeleting = false;
         hasError = true;
@@ -67,13 +72,25 @@
       // Deletion revokes the account's authorizations server-side, so the
       // current token is already dead. Log out to clear local state and end the
       // session.
+      track({ action: "complete" });
       clearInProgress.next(false);
       await logout();
     } catch {
+      track({ action: "fail" });
       clearInProgress.next(false);
       isDeleting = false;
       hasError = true;
     }
+  }
+
+  function startDeletion(event: MouseEvent) {
+    track({ action: "start" });
+
+    confirm({
+      type: ConfirmationType.DeleteAccount,
+      username: $user?.username ?? "",
+      onConfirm: deleteAccount,
+    })(event);
   }
 </script>
 
@@ -91,7 +108,7 @@
       <p class="vip-notice-text">
         <MessageWithLink
           message={m.notice_delete_account_vip()}
-          href={UrlBuilder.vip()}
+          href={UrlBuilder.vip("delete-account")}
           target="_self"
           color="inherit"
         />
@@ -113,11 +130,7 @@
       disabled={isDeleting || $clearInProgress ||
         $vipSubscription === undefined || hasActiveVip}
       icon={isDeleting ? loadingIcon : undefined}
-      onclick={confirm({
-        type: ConfirmationType.DeleteAccount,
-        username: $user?.username ?? "",
-        onConfirm: deleteAccount,
-      })}
+      onclick={startDeletion}
     >
       {m.button_text_delete_account()}
     </Button>
