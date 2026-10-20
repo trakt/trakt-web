@@ -26,7 +26,7 @@ function toMediaAction(activity: FollowingActivity): MediaAction {
       kind: detail.action,
       target: target.type,
       user: activity.user,
-      activityAt: activity.activityAt,
+      activityAt: new Date(activity.activityAt),
       rating: detail.action === 'rating' ? detail.rating : null,
       comment: detail.action === 'comment' ? detail.comment : null,
       episode,
