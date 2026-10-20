@@ -96,6 +96,21 @@ describe('util: toTitleStories', () => {
     expect(story?.actions.at(0)?.episodeCount).toBe(1);
   });
 
+  it('should sort actions whose activity date arrives as a string', () => {
+    const asString = (activity: FollowingActivity) =>
+      ({
+        ...activity,
+        activityAt: activity.activityAt.toISOString(),
+      }) as unknown as FollowingActivity;
+
+    const [story] = toTitleStories([
+      asString(movieRating('rating:1', 8)),
+      asString(buildFollowingActivity({ key: 'watch:1', activityAt: at(9) })),
+    ]);
+
+    expect(story?.latestAt).toBeInstanceOf(Date);
+  });
+
   it('should average the latest title rating of each friend', () => {
     const [story] = toTitleStories([
       movieRating('rating:1', 10),
