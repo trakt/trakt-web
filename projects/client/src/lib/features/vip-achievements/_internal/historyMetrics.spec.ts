@@ -1,8 +1,7 @@
 import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   computeLongestStreak,
-  countActiveDays,
   countDoubleFeatures,
   countMarathonDays,
   countNightOwlPlays,
@@ -41,16 +40,8 @@ function makeHistory(
 }
 
 describe('util: historyMetrics', () => {
-  it('countActiveDays counts distinct calendar days', () => {
-    const history = makeHistory([
-      {
-        id: 1,
-        dates: [at('2026-07-30T10:00:00Z'), at('2026-07-30T22:00:00Z')],
-      },
-      { id: 2, dates: [at('2026-07-31T10:00:00Z')] },
-    ]);
-
-    expect(countActiveDays(history)).toBe(2);
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it('computeLongestStreak finds the longest consecutive run', () => {
@@ -65,16 +56,37 @@ describe('util: historyMetrics', () => {
     expect(computeLongestStreak(history)).toBe(3);
   });
 
-  it('countNightOwlPlays counts 01:00-04:00 plays only', () => {
+  it('countNightOwlPlays counts midnight-04:00 plays only', () => {
     const history = makeHistory([
       {
         id: 1,
-        dates: [at('2026-07-30T02:30:00Z'), at('2026-07-30T14:00:00Z')],
+        dates: [at('2026-07-30T00:10:00Z'), at('2026-07-30T14:00:00Z')],
       },
       { id: 2, dates: [at('2026-07-31T03:59:00Z')] },
+      { id: 3, dates: [at('2026-07-31T04:00:00Z')] },
     ]);
 
     expect(countNightOwlPlays(history)).toBe(2);
+  });
+
+  it("countNightOwlPlays reads the hour in the member's timezone", () => {
+    vi.spyOn(Date.prototype, 'getTimezoneOffset').mockReturnValue(-120);
+    const history = makeHistory([
+      { id: 1, dates: [at('2026-07-30T22:30:00Z')] },
+      { id: 2, dates: [at('2026-07-30T02:30:00Z')] },
+    ]);
+
+    expect(countNightOwlPlays(history)).toBe(1);
+  });
+
+  it("computeLongestStreak buckets days in the member's timezone", () => {
+    vi.spyOn(Date.prototype, 'getTimezoneOffset').mockReturnValue(-120);
+    const history = makeHistory([
+      { id: 1, dates: [at('2026-07-01T10:00:00Z')] },
+      { id: 2, dates: [at('2026-07-02T23:00:00Z')] },
+    ]);
+
+    expect(computeLongestStreak(history)).toBe(1);
   });
 
   it('countDoubleFeatures counts days with 2+ distinct movies', () => {
@@ -98,7 +110,6 @@ describe('util: historyMetrics', () => {
   });
 
   it('degrades to 0 with no history', () => {
-    expect(countActiveDays(null)).toBe(0);
     expect(computeLongestStreak(null)).toBe(0);
     expect(countNightOwlPlays(undefined)).toBe(0);
     expect(countDoubleFeatures(null)).toBe(0);

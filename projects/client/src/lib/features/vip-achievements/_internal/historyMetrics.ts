@@ -1,12 +1,21 @@
 import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 
 // Cohesive module of pure watch-history metric extractors. Each degrades to `0`
-// / empty when history is absent (it loads as `null`). Day bucketing uses UTC
-// day indices so results are deterministic regardless of runtime timezone.
+// / empty when history is absent (it loads as `null`). Days and hours are the
+// member's own: a watch at 00:30 in Barcelona counts towards that calendar day
+// and that hour, not UTC's.
 
+const HOUR_MS = 3_600_000;
 const DAY_MS = 86_400_000;
+const NIGHT_END_HOUR = 4;
 
-const dayIndex = (date: Date): number => Math.floor(date.getTime() / DAY_MS);
+const toLocalTime = (date: Date): number =>
+  date.getTime() - date.getTimezoneOffset() * 60_000;
+
+const dayIndex = (date: Date): number => Math.floor(toLocalTime(date) / DAY_MS);
+
+const localHour = (date: Date): number =>
+  Math.floor((toLocalTime(date) - dayIndex(date) * DAY_MS) / HOUR_MS);
 
 /** Every watch timestamp across movies and show episodes. */
 export function collectWatchTimestamps(history: UserHistory | Nil): Date[] {
@@ -22,11 +31,6 @@ export function collectWatchTimestamps(history: UserHistory | Nil): Date[] {
     dates.push(...show.watchedDates);
   }
   return dates;
-}
-
-/** Distinct calendar days on which anything was watched. */
-export function countActiveDays(history: UserHistory | Nil): number {
-  return new Set(collectWatchTimestamps(history).map(dayIndex)).size;
 }
 
 /** Longest run of consecutive days with at least one watch (monotonic). */
@@ -47,12 +51,11 @@ export function computeLongestStreak(history: UserHistory | Nil): number {
   ).longest;
 }
 
-/** Plays logged between 01:00 and 04:00. */
+/** Plays logged between midnight and 04:00, local time. */
 export function countNightOwlPlays(history: UserHistory | Nil): number {
-  return collectWatchTimestamps(history).filter((date) => {
-    const hour = date.getUTCHours();
-    return hour >= 1 && hour < 4;
-  }).length;
+  return collectWatchTimestamps(history).filter((date) =>
+    localHour(date) < NIGHT_END_HOUR
+  ).length;
 }
 
 /** Days on which 2+ distinct movies were watched. */

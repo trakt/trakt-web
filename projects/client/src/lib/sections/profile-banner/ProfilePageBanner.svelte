@@ -107,7 +107,7 @@
         <LeaderboardPill />
       {/if}
       {#if $isMe && profile.isDirector && $vipAchievementsEnabled}
-        <AchievementsAnchorHost {profile} />
+        <AchievementsAnchorHost />
       {/if}
     </div>
     <div class="profile-actions">

@@ -1,19 +1,25 @@
-import type { VipAchievementBucket } from './VipAchievementBucket.ts';
+import type { VipAchievementCategory } from './VipAchievementCategory.ts';
 import type { VipAchievementId } from './VipAchievementId.ts';
 
 /**
- * A VIP achievement resolved against the member's current metrics. Achievements
+ * An achievement resolved against the member's current metrics. Achievements
  * are tiered: `value` is measured against a chain of thresholds, and the card
  * shows the reached tier plus progress toward the next one. All labels are
  * localized and progress is precomputed.
  */
 export type VipAchievement = {
   id: VipAchievementId;
-  bucket: VipAchievementBucket;
+  category: VipAchievementCategory;
   /** Localized achievement title. */
   title: string;
   /** Localized achievement description. */
   description: string;
+  /**
+   * Localized instruction for reaching the next tier ("Finish 10 shows"), or
+   * `null` once the top tier is reached. Locked achievements read it as "to
+   * unlock", unlocked ones as "next tier".
+   */
+  nextStep: string | null;
   /** Raw metric value backing this achievement. */
   value: number;
   /** Zero-based index of the highest reached tier, or `-1` while locked. */
@@ -30,10 +36,4 @@ export type VipAchievement = {
   isUnlocked: boolean;
   /** `true` once the highest tier is reached. */
   isMaxed: boolean;
-  /**
-   * `true` when a lapsed membership's streak is temporarily protected during
-   * the grace period. Only ever set on freezable achievements that are already
-   * unlocked.
-   */
-  isFrozen: boolean;
 };

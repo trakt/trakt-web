@@ -1,3 +1,5 @@
+import type { VipAchievementCategory } from '../models/VipAchievementCategory.ts';
+
 /**
  * Roster achievements we cannot compute client-side today. Each needs data the
  * app doesn't currently load, so they're parked here (documented, not wired)
@@ -7,7 +9,7 @@
 export type PendingBackendAchievement = {
   id: string;
   title: string;
-  bucket: string;
+  category: VipAchievementCategory;
   /** The data we'd need before this can become a real catalog entry. */
   needs: string;
 };
@@ -18,38 +20,38 @@ export const pendingBackendAchievements: ReadonlyArray<
   {
     id: 'release-day-episode',
     title: 'Premier Night',
-    bucket: 'timing',
+    category: 'habits',
     needs:
       'per-episode air date (first_aired) joined to watch history to diff against watched_at',
   },
   {
     id: 'release-day-season',
     title: 'Day-One Binger',
-    bucket: 'timing',
+    category: 'habits',
     needs: 'season episode air dates + same-day completion detection',
   },
   {
     id: 'release-day-movie',
     title: 'Opening Night',
-    bucket: 'timing',
+    category: 'habits',
     needs: 'per-movie release date joined to watch history',
   },
   {
     id: 'marathon-runner',
     title: 'Franchise Marathon',
-    bucket: 'timing',
+    category: 'habits',
     needs: 'collection/franchise membership (which titles form a collection)',
   },
   {
     id: 'genre-polymath',
     title: 'Diverse Palette',
-    bucket: 'volume',
+    category: 'watching',
     needs: 'per-watched-item genres (history does not carry genres)',
   },
   {
     id: 'list-popular',
     title: 'Taste Tastemaker',
-    bucket: 'curation',
+    category: 'lists',
     needs:
       "likes received on the member's own lists (only likes given are exposed client-side)",
   },

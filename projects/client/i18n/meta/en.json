@@ -13869,20 +13869,16 @@
       "description": "Shown in the Mixtape bottom bar before anything is picked."
     },
     "preview_feature_title_vip_achievements": {
-      "default": "VIP Achievements",
+      "default": "Achievements",
       "description": "Title for the VIP Achievements preview feature, shown in the preview features settings list. This feature adds loyalty badges and an achievements grid to the VIP member's own profile."
     },
     "preview_feature_description_vip_achievements": {
-      "default": "Earn milestone badges on your profile as your VIP membership grows.",
+      "default": "Earn achievements on your profile for what you watch, rate and create.",
       "description": "Description for the VIP Achievements preview feature, shown under its title in the preview features settings list."
     },
     "vip_achievements_section_title": {
       "default": "Achievements",
       "description": "Heading for the VIP achievements section on the member's own profile page."
-    },
-    "vip_achievements_subtitle": {
-      "default": "Track your years as a Trakt VIP.",
-      "description": "Subtitle shown under the VIP achievements heading inside the achievements drawer."
     },
     "vip_achievements_count": {
       "default": "{unlocked} / {total} unlocked",
@@ -13897,8 +13893,8 @@
       }
     },
     "vip_achievements_open_label": {
-      "default": "View all achievements",
-      "description": "Accessible label for the chevron button that opens the VIP achievements drawer."
+      "default": "View achievements",
+      "description": "Accessible label for the profile header link that opens the achievements drawer."
     },
     "vip_achievements_show_locked": {
       "default": "Show locked achievements",
@@ -13911,23 +13907,6 @@
     "vip_achievements_status_in_progress": {
       "default": "In progress",
       "description": "Status shown on a VIP achievement card the member has not unlocked yet. Displayed in uppercase."
-    },
-    "vip_achievements_frozen_label": {
-      "default": "Streak frozen",
-      "description": "Tag shown on a VIP achievement when the membership has lapsed but the loyalty streak is temporarily protected during a grace period. Keep short."
-    },
-    "vip_achievements_frozen_tooltip": {
-      "default": "Your VIP has lapsed. Your loyalty streak stays protected for a 7-day grace period.",
-      "description": "Tooltip explaining why a VIP loyalty streak is shown as frozen: the membership lapsed but the streak is preserved during a grace period before it resets."
-    },
-    "vip_achievements_badge_label": {
-      "default": "{title}, unlocked",
-      "description": "Accessible label for a pinned VIP achievement badge shown next to the handle in the profile header.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
     },
     "vip_achievements_empty": {
       "default": "Nothing here yet.",
@@ -13950,7 +13929,7 @@
       "description": "Title of the 'Cinephile Mileage' VIP achievement."
     },
     "vip_achievement_time_spent_movies_description": {
-      "default": "Total minutes spent watching movies.",
+      "default": "Hours spent watching movies.",
       "description": "Description of the 'Cinephile Mileage' VIP achievement."
     },
     "vip_achievement_time_spent_episodes_title": {
@@ -13958,7 +13937,7 @@
       "description": "Title of the 'TV Addict' VIP achievement."
     },
     "vip_achievement_time_spent_episodes_description": {
-      "default": "Total minutes spent watching episodes.",
+      "default": "Hours spent watching TV.",
       "description": "Description of the 'TV Addict' VIP achievement."
     },
     "vip_achievement_century_club_title": {
@@ -13968,14 +13947,6 @@
     "vip_achievement_century_club_description": {
       "default": "Total plays logged across everything.",
       "description": "Description of the 'Century Club' VIP achievement."
-    },
-    "vip_achievement_active_logger_title": {
-      "default": "Active Presence",
-      "description": "Title of the 'Active Presence' VIP achievement."
-    },
-    "vip_achievement_active_logger_description": {
-      "default": "Distinct days with something watched.",
-      "description": "Description of the 'Active Presence' VIP achievement."
     },
     "vip_achievement_daily_streak_title": {
       "default": "Unbroken Chain",
@@ -13990,7 +13961,7 @@
       "description": "Title of the 'Midnight Screening' VIP achievement."
     },
     "vip_achievement_night_owl_description": {
-      "default": "Plays logged between 1 and 4 AM.",
+      "default": "Plays logged between midnight and 4 AM, your time.",
       "description": "Description of the 'Midnight Screening' VIP achievement."
     },
     "vip_achievement_marathon_fever_title": {
@@ -14009,14 +13980,6 @@
       "default": "Shows you have finished.",
       "description": "Description of the 'Serial Completer' VIP achievement."
     },
-    "vip_achievement_re_watcher_title": {
-      "default": "Nostalgia Trip",
-      "description": "Title of the 'Nostalgia Trip' VIP achievement."
-    },
-    "vip_achievement_re_watcher_description": {
-      "default": "Rewatches logged across movies and episodes.",
-      "description": "Description of the 'Nostalgia Trip' VIP achievement."
-    },
     "vip_achievement_perfect_ten_title": {
       "default": "Flawless Masterpiece",
       "description": "Title of the 'Flawless Masterpiece' VIP achievement."
@@ -14024,14 +13987,6 @@
     "vip_achievement_perfect_ten_description": {
       "default": "Perfect 5/5 ratings you have awarded.",
       "description": "Description of the 'Flawless Masterpiece' VIP achievement."
-    },
-    "vip_achievement_harsh_critic_title": {
-      "default": "Hard to Please",
-      "description": "Title of the 'Hard to Please' VIP achievement."
-    },
-    "vip_achievement_harsh_critic_description": {
-      "default": "Ratings of 2 stars or lower you have given.",
-      "description": "Description of the 'Hard to Please' VIP achievement."
     },
     "vip_achievement_rating_machine_title": {
       "default": "Opinionated",
@@ -14049,14 +14004,6 @@
       "default": "Comments and reviews you have written.",
       "description": "Description of the 'Film Critic' VIP achievement."
     },
-    "vip_achievement_balanced_critic_title": {
-      "default": "Full Spectrum",
-      "description": "Title of the 'Full Spectrum' VIP achievement."
-    },
-    "vip_achievement_balanced_critic_description": {
-      "default": "Rated something at every star, 1 through 5.",
-      "description": "Description of the 'Full Spectrum' VIP achievement."
-    },
     "vip_achievement_double_feature_title": {
       "default": "Back-to-Back",
       "description": "Title of the 'Back-to-Back' VIP achievement."
@@ -14073,70 +14020,6 @@
       "default": "Custom lists you have created.",
       "description": "Description of the 'Master Curator' VIP achievement."
     },
-    "vip_achievement_vault_keeper_title": {
-      "default": "Deep Library",
-      "description": "Title of the 'Deep Library' VIP achievement."
-    },
-    "vip_achievement_vault_keeper_description": {
-      "default": "Total items across your lists.",
-      "description": "Description of the 'Deep Library' VIP achievement."
-    },
-    "vip_achievement_vip_limit_breaker_title": {
-      "default": "Limit Breaker",
-      "description": "Title of the 'Limit Breaker' VIP achievement."
-    },
-    "vip_achievement_vip_limit_breaker_description": {
-      "default": "Pushed past a free-tier limit. VIP only.",
-      "description": "Description of the 'Limit Breaker' VIP achievement."
-    },
-    "vip_achievement_plex_archivist_title": {
-      "default": "Media Hoarder",
-      "description": "Title of the 'Media Hoarder' VIP achievement."
-    },
-    "vip_achievement_plex_archivist_description": {
-      "default": "Items synced from your Plex library.",
-      "description": "Description of the 'Media Hoarder' VIP achievement."
-    },
-    "vip_achievement_vip_loyalty_title": {
-      "default": "Veteran Supporter",
-      "description": "Title of the 'Veteran Supporter' VIP achievement."
-    },
-    "vip_achievement_vip_loyalty_description": {
-      "default": "Years of continuous Trakt VIP membership.",
-      "description": "Description of the 'Veteran Supporter' VIP achievement."
-    },
-    "vip_achievement_trakt_veteran_title": {
-      "default": "Trakt Pioneer",
-      "description": "Title of the 'Trakt Pioneer' VIP achievement."
-    },
-    "vip_achievement_trakt_veteran_description": {
-      "default": "Years since you joined Trakt.",
-      "description": "Description of the 'Trakt Pioneer' VIP achievement."
-    },
-    "vip_achievement_life_backer_title": {
-      "default": "Executive Producer",
-      "description": "Title of the 'Executive Producer' VIP achievement."
-    },
-    "vip_achievement_life_backer_description": {
-      "default": "You hold a lifetime Trakt VIP plan.",
-      "description": "Description of the 'Executive Producer' VIP achievement."
-    },
-    "vip_achievement_phoenix_rescue_title": {
-      "default": "Phoenix Supporter",
-      "description": "Title of the 'Phoenix Supporter' VIP achievement."
-    },
-    "vip_achievement_phoenix_rescue_description": {
-      "default": "Came back within the VIP grace period.",
-      "description": "Description of the 'Phoenix Supporter' VIP achievement."
-    },
-    "vip_achievement_director_flair_title": {
-      "default": "Director's Cut",
-      "description": "Title of the 'Director's Cut' VIP achievement."
-    },
-    "vip_achievement_director_flair_description": {
-      "default": "You are a Trakt director.",
-      "description": "Description of the 'Director's Cut' VIP achievement."
-    },
     "vip_achievements_tier_short": {
       "default": "Tier {tier}",
       "description": "Short tier label used in the achievement tier-goals tooltip, e.g. 'Tier 3'.",
@@ -14148,13 +14031,157 @@
     },
     "vip_achievements_anchor_label": {
       "default": "{unlocked}/{total}",
-      "description": "Compact count on the achievements anchor pill in the profile banner (unlocked out of total), shown next to a trophy icon. Tapping the pill opens the achievements drawer.",
+      "description": "Compact count of unlocked achievements out of the total, shown on the profile header's achievements link and on each section heading in the achievements drawer, e.g. '5/12'.",
       "variables": {
         "unlocked": {
           "type": "number"
         },
         "total": {
           "type": "number"
+        }
+      }
+    },
+    "vip_achievements_category_watching": {
+      "default": "Watching",
+      "description": "Section heading in the achievements drawer grouping achievements about how much the member has watched."
+    },
+    "vip_achievements_category_habits": {
+      "default": "Habits",
+      "description": "Section heading in the achievements drawer grouping achievements about when and how the member watches (streaks, late nights, binges)."
+    },
+    "vip_achievements_category_ratings": {
+      "default": "Ratings and reviews",
+      "description": "Section heading in the achievements drawer grouping achievements about ratings and comments."
+    },
+    "vip_achievements_category_lists": {
+      "default": "Lists",
+      "description": "Section heading in the achievements drawer grouping achievements about the lists the member creates."
+    },
+    "vip_achievements_to_unlock": {
+      "default": "To unlock",
+      "description": "Label before the instruction on a locked achievement, e.g. 'To unlock: Finish 10 shows'. Displayed in uppercase."
+    },
+    "vip_achievements_next_tier": {
+      "default": "Next tier",
+      "description": "Label before the instruction for an unlocked achievement's next tier, e.g. 'Next tier: Finish 50 shows'. Displayed in uppercase."
+    },
+    "vip_achievement_century_club_step": {
+      "default": "Log {count} plays",
+      "description": "Instruction for reaching a tier of the 'Century Club' achievement. {count} is a formatted number, at least 1,000.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_time_spent_episodes_step": {
+      "default": "Watch {count} hours of TV",
+      "description": "Instruction for reaching a tier of the 'TV Addict' achievement. {count} is a formatted number of hours, at least 500.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_time_spent_movies_step": {
+      "default": "Watch {count} hours of movies",
+      "description": "Instruction for reaching a tier of the 'Cinephile Mileage' achievement. {count} is a formatted number of hours, at least 150.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_show_completionist_step": {
+      "default": "Finish {count} shows",
+      "description": "Instruction for reaching a tier of the 'Serial Completer' achievement. {count} is a formatted number, at least 10.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_daily_streak_step": {
+      "default": "Watch something {count} days in a row",
+      "description": "Instruction for reaching a tier of the 'Unbroken Chain' achievement. {count} is a formatted number of days, at least 7.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_night_owl_step": {
+      "default": "Watch {count} times between midnight and 4 AM",
+      "description": "Instruction for reaching a tier of the 'Midnight Screening' achievement. {count} is a formatted number, at least 5.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_marathon_fever_step_one": {
+      "default": "Watch 8 episodes of one show in a day",
+      "description": "Instruction for unlocking the 'Season in a Day' achievement."
+    },
+    "vip_achievement_marathon_fever_step_other": {
+      "default": "Watch 8 episodes of one show in a day, on {count} days",
+      "description": "Instruction for reaching a higher tier of the 'Season in a Day' achievement. {count} is a formatted number of days, at least 5.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_double_feature_step_one": {
+      "default": "Watch 2 movies on the same day",
+      "description": "Instruction for unlocking the 'Back-to-Back' achievement."
+    },
+    "vip_achievement_double_feature_step_other": {
+      "default": "Watch 2 movies on the same day, on {count} days",
+      "description": "Instruction for reaching a higher tier of the 'Back-to-Back' achievement. {count} is a formatted number of days, at least 5.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_rating_machine_step": {
+      "default": "Rate {count} titles",
+      "description": "Instruction for reaching a tier of the 'Opinionated' achievement. Titles are movies, shows, seasons or episodes. {count} is a formatted number, at least 100.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_perfect_ten_step_one": {
+      "default": "Give something a perfect 5/5",
+      "description": "Instruction for unlocking the 'Flawless Masterpiece' achievement: rate any title 5 out of 5 stars."
+    },
+    "vip_achievement_perfect_ten_step_other": {
+      "default": "Give {count} perfect 5/5 ratings",
+      "description": "Instruction for reaching a higher tier of the 'Flawless Masterpiece' achievement. {count} is a formatted number, at least 10.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_scribe_step": {
+      "default": "Write {count} comments",
+      "description": "Instruction for reaching a tier of the 'Film Critic' achievement. {count} is a formatted number, at least 5.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_list_maker_step": {
+      "default": "Create {count} lists",
+      "description": "Instruction for reaching a tier of the 'Master Curator' achievement. {count} is a formatted number, at least 3.",
+      "variables": {
+        "count": {
+          "type": "string"
         }
       }
     }

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import FrostIcon from "$lib/components/icons/FrostIcon.svelte";
   import LockIcon from "$lib/components/icons/LockIcon.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
@@ -57,7 +56,6 @@
 <div
   class="trakt-achievement-card"
   class:is-locked={!achievement.isUnlocked}
-  class:is-frozen={achievement.isFrozen}
   style:--achievement-progress={`${progressPercent}%`}
   style:--tier-strength={tierStrength}
   role="group"
@@ -77,20 +75,23 @@
       <p class="card-description" use:lineClamp={{ lines: 2 }}>
         {achievement.description}
       </p>
+      {#if achievement.nextStep}
+        <p class="card-step">
+          <span class="card-step-label">
+            {achievement.isUnlocked
+              ? m.vip_achievements_next_tier()
+              : m.vip_achievements_to_unlock()}
+          </span>
+          <span class="card-step-text">{achievement.nextStep}</span>
+        </p>
+      {/if}
 
       <div class="card-track" aria-hidden="true">
         <span class="card-track-fill"></span>
       </div>
 
       <div class="card-footer">
-        {#if achievement.isFrozen}
-          <Tooltip content={m.vip_achievements_frozen_tooltip()} variant="compact">
-            <span class="card-status is-frozen">
-              <FrostIcon />
-              {m.vip_achievements_frozen_label()}
-            </span>
-          </Tooltip>
-        {:else if hasTierGoals}
+        {#if hasTierGoals}
           <Tooltip content={tierGoals}>
             <span class="card-status" class:is-tier={achievement.isUnlocked}>
               {statusText}
@@ -165,7 +166,6 @@
       background: var(--color-background);
       border-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
       box-shadow: none;
-      opacity: 0.7;
     }
   }
 
@@ -224,6 +224,28 @@
     font-size: var(--font-size-tag);
   }
 
+  .card-step {
+    margin: var(--ni-8) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: var(--gap-xxs);
+
+    color: var(--color-text-primary);
+  }
+
+  .card-step-label,
+  .card-step-text {
+    font-size: var(--font-size-tag);
+  }
+
+  .card-step-label {
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-achievement-accent);
+  }
+
   .card-track {
     margin-top: var(--ni-16);
     width: 100%;
@@ -274,10 +296,6 @@
 
     &.is-tier {
       color: var(--color-achievement-accent);
-    }
-
-    &.is-frozen {
-      color: var(--blue-400);
     }
 
     :global(svg) {

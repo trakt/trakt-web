@@ -1,46 +1,17 @@
 import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
-import type { UserLimits } from '$lib/requests/models/UserLimits.ts';
 import type { UserStats } from '$lib/requests/models/UserStats.ts';
-import type { VipSubscription } from '$lib/requests/models/VipSubscription.ts';
 import { describe, expect, it } from 'vitest';
-import { GRACE_PERIOD_MS } from './constants.ts';
+import { achievementCatalog } from './achievementCatalog.ts';
 import { computeVipAchievements } from './computeVipAchievements.ts';
 import type { VipAchievementMetricInput } from './VipAchievementMetricInput.ts';
-
-const NOW = new Date('2026-07-30T00:00:00.000Z').getTime();
 
 function makeInput(
   overrides: Partial<VipAchievementMetricInput> = {},
 ): VipAchievementMetricInput {
   return {
-    subscription: null,
-    profile: null,
     stats: null,
     history: null,
     ratings: null,
-    limits: null,
-    plexLibrary: null,
-    now: NOW,
-    ...overrides,
-  };
-}
-
-function makeSubscription(
-  overrides: Partial<VipSubscription> = {},
-): VipSubscription {
-  return {
-    type: 'yearly',
-    plan: 'VIP',
-    memberSince: new Date('2019-01-01T00:00:00.000Z'),
-    renewsAt: new Date('2027-01-01T00:00:00.000Z'),
-    expiresAt: new Date('2027-01-01T00:00:00.000Z'),
-    gateway: 'stripe',
-    isCancelled: false,
-    vipYears: 5,
-    daysLeft: 120,
-    renewalPrice: null,
-    manageUrl: null,
-    transactions: [],
     ...overrides,
   };
 }
@@ -90,34 +61,15 @@ function makeStats(overrides: Partial<UserStats> = {}): UserStats {
   };
 }
 
-function makeLimits(
-  current: Partial<Record<keyof UserLimits, number>>,
-): UserLimits {
-  const domain = (key: keyof UserLimits) => ({
-    current: current[key] ?? 0,
-    free: 100,
-    vip: 100_000,
-  });
-  return {
-    history: domain('history'),
-    ratings: domain('ratings'),
-    watchlistItems: domain('watchlistItems'),
-    totalListItems: domain('totalListItems'),
-    staticLists: domain('staticLists'),
-    dynamicLists: domain('dynamicLists'),
-    digitalLibrary: domain('digitalLibrary'),
-    totalNotes: domain('totalNotes'),
-    connectedApps: domain('connectedApps'),
-  };
-}
-
 const byId =
   (id: string) => (list: ReturnType<typeof computeVipAchievements>) =>
     list.find((achievement) => achievement.id === id);
 
 describe('util: computeVipAchievements', () => {
   it('resolves one entry per catalog achievement', () => {
-    expect(computeVipAchievements(makeInput())).toHaveLength(24);
+    expect(computeVipAchievements(makeInput())).toHaveLength(
+      achievementCatalog.length,
+    );
   });
 
   it('resolves tier index, next threshold and progress for a tiered metric', () => {
@@ -136,91 +88,79 @@ describe('util: computeVipAchievements', () => {
     expect(club?.isMaxed).toBe(false);
   });
 
+  it('measures watch time in whole hours', () => {
+    const stats = makeStats({
+      episodes: {
+        plays: 0,
+        watched: 0,
+        minutes: 30_059,
+        ratings: 0,
+        comments: 0,
+      },
+    });
+    const tv = byId('time-spent-episodes')(
+      computeVipAchievements(makeInput({ stats })),
+    );
+
+    expect(tv?.value).toBe(500);
+    expect(tv?.isUnlocked).toBe(true);
+  });
+
   it('derives ratings metrics from the loaded ratings', () => {
     const ratings = makeRatings([10, 10, 3, 7, 10]);
     const list = computeVipAchievements(makeInput({ ratings }));
 
     expect(byId('perfect-ten')(list)?.value).toBe(3);
-    expect(byId('harsh-critic')(list)?.value).toBe(1);
     expect(byId('rating-machine')(list)?.value).toBe(5);
   });
 
-  it('unlocks balanced-critic only with a rating at every score', () => {
-    const full = makeRatings([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-    const partial = makeRatings([1, 2, 3, 4, 5]);
-
-    expect(
-      byId('balanced-critic')(
-        computeVipAchievements(makeInput({ ratings: full })),
-      )
-        ?.isUnlocked,
-    ).toBe(true);
-    expect(
-      byId('balanced-critic')(
-        computeVipAchievements(makeInput({ ratings: partial })),
-      )?.isUnlocked,
-    ).toBe(false);
-  });
-
-  it('counts rewatches from stats plays minus distinct watched', () => {
+  it('sums comments across every media type', () => {
     const stats = makeStats({
-      movies: { plays: 30, watched: 20, minutes: 0, ratings: 0, comments: 0 },
-      episodes: { plays: 15, watched: 10, minutes: 0, ratings: 0, comments: 0 },
+      movies: { plays: 0, watched: 0, minutes: 0, ratings: 0, comments: 2 },
+      shows: { watched: 0, ratings: 0, comments: 1 },
+      seasons: { ratings: 0, comments: 1 },
+      episodes: { plays: 0, watched: 0, minutes: 0, ratings: 0, comments: 1 },
     });
 
     expect(
-      byId('re-watcher')(computeVipAchievements(makeInput({ stats })))?.value,
-    )
-      .toBe(15);
+      byId('scribe')(computeVipAchievements(makeInput({ stats })))?.value,
+    ).toBe(5);
   });
 
-  it('unlocks vip-limit-breaker when a usage exceeds its free ceiling', () => {
-    const over = makeLimits({ history: 250 }); // free ceiling 100
-    const under = makeLimits({ history: 50 });
+  it('describes the step to the next tier', () => {
+    const locked = computeVipAchievements(makeInput());
+    const unlocked = computeVipAchievements(
+      makeInput({ stats: makeStats({ lists: 3 }) }),
+    );
+    const maxed = computeVipAchievements(
+      makeInput({ stats: makeStats({ lists: 25 }) }),
+    );
 
-    expect(
-      byId('vip-limit-breaker')(
-        computeVipAchievements(makeInput({ limits: over })),
-      )
-        ?.isUnlocked,
-    ).toBe(true);
-    expect(
-      byId('vip-limit-breaker')(
-        computeVipAchievements(makeInput({ limits: under })),
-      )?.isUnlocked,
-    ).toBe(false);
+    expect(byId('list-maker')(locked)?.nextStep).toBe('Create 3 lists');
+    expect(byId('list-maker')(unlocked)?.nextStep).toBe('Create 10 lists');
+    expect(byId('list-maker')(maxed)?.nextStep).toBeNull();
   });
 
-  it('resolves VIP prestige metrics', () => {
-    const list = computeVipAchievements(makeInput({
-      subscription: makeSubscription({ vipYears: 5, type: 'life' }),
-      profile: {
-        isDirector: true,
-        joinedAt: new Date('2016-07-30T00:00:00.000Z'),
-      },
-    }));
+  it('words a single first step without a count', () => {
+    const locked = computeVipAchievements(makeInput());
+    const unlocked = computeVipAchievements(
+      makeInput({ ratings: makeRatings([10]) }),
+    );
 
-    expect(byId('vip-loyalty')(list)?.value).toBe(5);
-    expect(byId('vip-loyalty')(list)?.tierIndex).toBe(1); // clears 2, 5
-    expect(byId('trakt-veteran')(list)?.value).toBe(10);
-    expect(byId('life-backer')(list)?.isUnlocked).toBe(true);
-    expect(byId('director-flair')(list)?.isUnlocked).toBe(true);
+    expect(byId('perfect-ten')(locked)?.nextStep).toBe(
+      'Give something a perfect 5/5',
+    );
+    expect(byId('perfect-ten')(unlocked)?.nextStep).toBe(
+      'Give 10 perfect 5/5 ratings',
+    );
   });
 
-  it('freezes only unlocked freezable achievements within the grace window', () => {
-    const list = computeVipAchievements(makeInput({
-      subscription: makeSubscription({
-        vipYears: 5,
-        expiresAt: new Date(NOW - GRACE_PERIOD_MS / 2),
-      }),
-    }));
+  it('groups thresholds in the step copy', () => {
+    const list = computeVipAchievements(
+      makeInput({ stats: makeStats({ totalPlays: 1_000 }) }),
+    );
 
-    // vip-loyalty is freezable + unlocked -> frozen.
-    expect(byId('vip-loyalty')(list)?.isFrozen).toBe(true);
-    // director-flair is not freezable.
-    expect(byId('director-flair')(list)?.isFrozen).toBe(false);
-    // phoenix-rescue unlocks from being in grace.
-    expect(byId('phoenix-rescue')(list)?.isUnlocked).toBe(true);
+    expect(byId('century-club')(list)?.nextStep).toBe('Log 5,000 plays');
   });
 
   it('degrades to all-locked with no data', () => {

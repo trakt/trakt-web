@@ -1,14 +1,9 @@
 <script lang="ts">
-  import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
-  import type { VipAchievementProfile } from "./models/VipAchievementProfile.ts";
   import AchievementsAnchor from "./AchievementsAnchor.svelte";
   import AchievementsDrawer from "./AchievementsDrawer.svelte";
   import { useVipAchievements } from "./stores/useVipAchievements.ts";
 
-  const { profile }: { profile: VipAchievementProfile } = $props();
-
-  const profile$ = fromRune(() => profile);
-  const { achievements } = useVipAchievements(profile$);
+  const { achievements } = useVipAchievements();
 
   let isDrawerOpen = $state(false);
 
