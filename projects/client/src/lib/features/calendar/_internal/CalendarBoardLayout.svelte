@@ -23,6 +23,7 @@
   const { visibleDate } = getCalendarContext();
 
   const allDays = $derived(periods.flatMap((p) => p.calendar));
+  const isEmpty = $derived(allDays.every((day) => day.items.length === 0));
 
   function handleScrollSpyUpdate(id: string) {
     if (view === "week") return;
@@ -58,16 +59,14 @@
       {#each periods as period (period.key)}
         {#if view === "week"}
           <CalendarWeekItems calendar={period.calendar} {item} />
-        {:else}
-          <CalendarItems calendar={period.calendar} {order} {item} {layout}>
-            {#snippet empty()}
-              {#if !isLoading}
-                <EmptyPeriod />
-              {/if}
-            {/snippet}
-          </CalendarItems>
+        {:else if period.calendar.some((day) => day.items.length > 0)}
+          <CalendarItems calendar={period.calendar} {order} {item} {layout} />
         {/if}
       {/each}
+
+      {#if view !== "week" && isEmpty && !isLoading}
+        <EmptyPeriod />
+      {/if}
     </ScrollSpy>
 
     {#if isLoading}
