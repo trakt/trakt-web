@@ -1,9 +1,12 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { reportRequest } from '$lib/requests/queries/reports/reportRequest.ts';
 import { BehaviorSubject } from 'rxjs';
 import type { ReportParams } from '../models/ReportParams.ts';
 import type { ReportReason } from '../models/ReportReason.ts';
 import { ReportError } from '../models/ReportError.ts';
 import { mapToReportError } from './mapToReportError.ts';
+import { toReportTracking } from './toReportTracking.ts';
 
 type ReportProps = {
   params: ReportParams;
@@ -12,6 +15,7 @@ type ReportProps = {
 };
 
 export function useReport() {
+  const { track } = useTrack(AnalyticsEvent.Report);
   const isSubmitting = new BehaviorSubject(false);
   const error = new BehaviorSubject<ReportError | null>(null);
 
@@ -27,12 +31,16 @@ export function useReport() {
       const result = await reportRequest({ params, reason, message });
 
       if (result.ok) {
+        track(toReportTracking({ params, reason, outcome: 'sent' }));
         return true;
       }
 
-      error.next(mapToReportError(result.status));
+      const reportError = mapToReportError(result.status);
+      track(toReportTracking({ params, reason, outcome: reportError }));
+      error.next(reportError);
       return false;
     } catch {
+      track(toReportTracking({ params, reason, outcome: ReportError.Unknown }));
       error.next(ReportError.Unknown);
       return false;
     } finally {
