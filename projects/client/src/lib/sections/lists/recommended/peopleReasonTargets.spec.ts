@@ -8,6 +8,7 @@ import { peopleReasonTargets } from './peopleReasonTargets.ts';
 const reason: RecommendationPeopleReason = {
   person: PersonFergusonMappedMock,
   role: 'acting',
+  watchedRoles: ['acting'],
   watchedCount: 2,
   titles: [
     { mediaType: 'movie', media: MovieHereticMappedMock },

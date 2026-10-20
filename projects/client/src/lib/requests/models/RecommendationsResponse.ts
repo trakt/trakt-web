@@ -43,6 +43,7 @@ export const SourceSchema = z.union([
 export const PeopleReasonSchema = z.object({
   person: personResponseSchema,
   role: z.enum(['directing', 'making', 'acting']),
+  watched_roles: z.array(z.enum(['directing', 'making', 'acting'])),
   watched_count: z.number(),
   titles: z.array(
     z.union([

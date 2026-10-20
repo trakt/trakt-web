@@ -40,22 +40,44 @@
   });
   const localizedPeople = $derived(of(people).pipe(peopleIntl.operator));
 
-  const toRoleLine = ({ role, watchedCount: count }: RecommendationPeopleReason) => {
-    const one = count === 1;
-    switch (role) {
-      case "directing":
-        return one
-          ? m.text_recommendation_person_directing_one({ count })
-          : m.text_recommendation_person_directing_other({ count });
-      case "making":
-        return one
-          ? m.text_recommendation_person_making_one({ count })
-          : m.text_recommendation_person_making_other({ count });
-      case "acting":
-        return one
-          ? m.text_recommendation_person_acting_one({ count })
-          : m.text_recommendation_person_acting_other({ count });
-    }
+  const ROLE_LINES = {
+    directing: [
+      m.text_recommendation_person_watched_directing_one,
+      m.text_recommendation_person_watched_directing_other,
+    ],
+    directing_acting: [
+      m.text_recommendation_person_watched_directing_acting_one,
+      m.text_recommendation_person_watched_directing_acting_other,
+    ],
+    making: [
+      m.text_recommendation_person_watched_making_one,
+      m.text_recommendation_person_watched_making_other,
+    ],
+    making_acting: [
+      m.text_recommendation_person_watched_making_acting_one,
+      m.text_recommendation_person_watched_making_acting_other,
+    ],
+    acting: [
+      m.text_recommendation_person_watched_acting_one,
+      m.text_recommendation_person_watched_acting_other,
+    ],
+  };
+
+  const toRoleKey = (
+    roles: RecommendationPeopleReason["watchedRoles"],
+  ): keyof typeof ROLE_LINES => {
+    const acted = roles.includes("acting");
+    if (roles.includes("directing")) return acted ? "directing_acting" : "directing";
+    if (roles.includes("making")) return acted ? "making_acting" : "making";
+    return "acting";
+  };
+
+  const toRoleLine = ({
+    watchedRoles,
+    watchedCount: count,
+  }: RecommendationPeopleReason) => {
+    const [one, other] = ROLE_LINES[toRoleKey(watchedRoles)];
+    return count === 1 ? one({ count }) : other({ count });
   };
 
   const activitySources = $derived(
@@ -139,6 +161,13 @@
                 />
               </div>
             {/each}
+            {#if reason.watchedCount > reason.titles.length}
+              <div class="recommendation-sources-more">
+                {m.text_recommendation_person_more_titles({
+                  count: reason.watchedCount - reason.titles.length,
+                })}
+              </div>
+            {/if}
           </div>
         {/if}
       </div>
@@ -290,6 +319,16 @@
     :global(.trakt-card-footer) {
       display: none;
     }
+  }
+
+  .recommendation-sources-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 2 / 3;
+    border-radius: var(--border-radius-m);
+    background: var(--color-background-default-hover);
+    font-weight: 700;
   }
 
   .recommendation-sources-items {

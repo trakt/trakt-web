@@ -18,6 +18,7 @@ describe('mapToRecommendationPeopleReason', () => {
           {
             person,
             role: 'directing',
+            watched_roles: ['directing', 'acting'],
             watched_count: 8,
             titles: [{ movie: base?.movie }],
           },
@@ -29,8 +30,20 @@ describe('mapToRecommendationPeopleReason', () => {
 
     expect(reason.person.name).toBe('Jon Favreau');
     expect(reason.role).toBe('directing');
+    expect(reason.watchedRoles).toEqual(['directing', 'acting']);
     expect(reason.watchedCount).toBe(8);
     expect(reason.titles.map((title) => title.mediaType)).toEqual(['movie']);
+  });
+
+  it('drops people without watched roles', () => {
+    const [item] = RecommendationsMovieResponseSchema.parse([
+      {
+        ...base,
+        people: [{ person, role: 'acting', watched_count: 2, titles: [] }],
+      },
+    ]);
+
+    expect(item!.people).toBeUndefined();
   });
 
   it('drops a malformed people field instead of rejecting the list', () => {
