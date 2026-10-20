@@ -14,8 +14,6 @@ const POLL_INTERVAL = time.seconds(10);
 const RegisteredMemberCountResponseSchema = z.object({
   registered: z.object({
     total: z.number().int(),
-    updated_at: z.string().datetime(),
-    rate_per_day: z.number(),
   }),
 });
 
@@ -27,8 +25,6 @@ const mapToRegisteredMemberCount = ({
   registered,
 }: RegisteredMemberCountResponse): RegisteredMemberCount => ({
   total: registered.total,
-  anchoredAt: Date.parse(registered.updated_at),
-  ratePerDay: registered.rate_per_day,
 });
 
 const registeredMemberCountRequest = async ({ fetch }: ApiParams) => {
@@ -56,8 +52,8 @@ export const registeredMemberCountQuery = defineQuery({
   mapper: ({ body }) => (body ? mapToRegisteredMemberCount(body) : null),
   schema: RegisteredMemberCountSchema.nullable(),
   // Staleness and poll cadence are deliberately the same value: the endpoint is
-  // uncached and moves between requests, and the counter interpolates the digits
-  // in between, so there is no reason to poll harder than it goes stale.
+  // uncached and moves between requests, so there is no reason to poll harder
+  // than it goes stale.
   ttl: POLL_INTERVAL,
   refetchInterval: POLL_INTERVAL,
   refetchOnWindowFocus: true,
