@@ -122,6 +122,7 @@
 
 {#snippet actions()}
   <GifButton
+    source="review"
     disabled={$isCommenting}
     suggestedQuery={toGifSuggestedQuery(media)}
     onSelect={(selected) => (gif = toCommentDraftGif(selected))}

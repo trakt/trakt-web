@@ -4,6 +4,7 @@ import type { ReportableType } from '$lib/features/report/models/ReportableType.
 import type { ReportError } from '$lib/features/report/models/ReportError.ts';
 import type { ReportReason } from '$lib/features/report/models/ReportReason.ts';
 import type { SearchResultPosition } from '$lib/features/search/models/SearchResultPosition.ts';
+import type { GifPickerSource } from '$lib/features/gif-picker/GifPickerSource.ts';
 import type { OfflineActionEndpoint } from '$lib/features/offline/models/OfflineActionEndpoint.ts';
 import type { ShareArrivalOutcome } from '$lib/features/share-arrival/models/ShareArrivalOutcome.ts';
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
@@ -85,7 +86,7 @@ type ReportType = {
 type SpoilerRevealType = { type: 'episode' | 'movie' | 'show' | 'comment' };
 type GifPickerType = {
   action: 'open' | 'category' | 'select';
-  source: 'comment' | 'review';
+  source: GifPickerSource;
 };
 type DeleteAccountType = {
   action: 'start' | 'confirm' | 'complete' | 'fail';
