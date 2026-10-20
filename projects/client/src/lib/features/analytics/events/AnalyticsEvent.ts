@@ -151,4 +151,13 @@ export const AnalyticsEvent = {
   PwaInstall: buildEventKey(ACTION_PREFIX, 'pwa-install'),
 
   RecommendationMode: buildEventKey(RECOMMENDATIONS_PREFIX, 'mode'),
+
+  ListCollaborator: buildEventKey(LIST_ACTION_PREFIX, 'collaborator'),
+  MuteSharer: buildEventKey(USER_ACTION_PREFIX, 'mute-sharer'),
+  ReportOpen: buildEventKey(ACTION_PREFIX, 'report-open'),
+  Report: buildEventKey(ACTION_PREFIX, 'report'),
+  SpoilerReveal: buildEventKey(ACTION_PREFIX, 'spoiler-reveal'),
+  GifPicker: buildEventKey(ACTION_PREFIX, 'gif-picker'),
+  RevokeApp: buildEventKey(USER_ACTION_PREFIX, 'revoke-app'),
+  DeleteAccount: buildEventKey(USER_ACTION_PREFIX, 'delete-account'),
 } as const;

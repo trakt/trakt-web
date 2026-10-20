@@ -1,5 +1,9 @@
 import type { LoginSource } from '$lib/features/auth/models/LoginSource.ts';
 import type { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
+import type { ReportableType } from '$lib/features/report/models/ReportableType.ts';
+import type { ReportError } from '$lib/features/report/models/ReportError.ts';
+import type { ReportReason } from '$lib/features/report/models/ReportReason.ts';
+import type { SearchResultPosition } from '$lib/features/search/models/SearchResultPosition.ts';
 import type { OfflineActionEndpoint } from '$lib/features/offline/models/OfflineActionEndpoint.ts';
 import type { ShareArrivalOutcome } from '$lib/features/share-arrival/models/ShareArrivalOutcome.ts';
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
@@ -64,8 +68,29 @@ type CalendarType = { action: 'reset' | 'next' | 'previous' };
 type CalendarFeedType = { action: 'subscribe' | 'copy'; mode: DiscoverMode };
 type StreamOnType = SourceType;
 type CtaDataType = { type: CtaType };
-type DrilldownType = SourceType & { type?: string };
+type DrilldownType = SourceType & {
+  type?: string;
+  position?: SearchResultPosition;
+};
 type SearchType = { mode: SearchMode };
+type ListCollaboratorType = {
+  action: 'add' | 'remove' | 'leave' | 'limit-reached';
+};
+type ReportOpenType = { type: ReportableType };
+type ReportType = {
+  type: ReportableType;
+  reason: ReportReason;
+  outcome: 'sent' | ReportError;
+};
+type SpoilerRevealType = { type: 'episode' | 'movie' | 'show' | 'comment' };
+type GifPickerType = {
+  action: 'open' | 'category' | 'select';
+  source: 'comment' | 'review';
+};
+type DeleteAccountType = {
+  action: 'start' | 'confirm' | 'complete' | 'fail';
+  exportFirst?: 'yes' | 'no';
+};
 type ShareType = DrilldownType;
 type CoverImageType = { type: ExtendedMediaType };
 type DiscoverType = SourceType & { mode: DiscoverMode };
@@ -300,4 +325,13 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.PwaInstall]: { outcome: 'accepted' | 'dismissed' };
 
   [AnalyticsEvent.RecommendationMode]: RecommendationModeType;
+
+  [AnalyticsEvent.ListCollaborator]: ListCollaboratorType;
+  [AnalyticsEvent.MuteSharer]: never;
+  [AnalyticsEvent.ReportOpen]: ReportOpenType;
+  [AnalyticsEvent.Report]: ReportType;
+  [AnalyticsEvent.SpoilerReveal]: SpoilerRevealType;
+  [AnalyticsEvent.GifPicker]: GifPickerType;
+  [AnalyticsEvent.RevokeApp]: never;
+  [AnalyticsEvent.DeleteAccount]: DeleteAccountType;
 };
