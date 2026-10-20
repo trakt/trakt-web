@@ -2072,6 +2072,7 @@
   "text_ratings_season_point": "{season} · {rating}",
   "text_ratings_votes": "{count} голосів",
   "text_raw_export": "Експорт вихідних даних",
+  "text_recommended_meta_info": "{media} · {mode}",
   "text_reconnect_streaming_warning": "Будь ласка, перепідключіть {services} нижче.",
   "text_rent": "Орендувати",
   "text_rewatching_next_episode_prompt": "Яку наступну серію ви хочете переглянути повторно?",

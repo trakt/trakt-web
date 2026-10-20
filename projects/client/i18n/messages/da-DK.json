@@ -2072,6 +2072,7 @@
   "text_ratings_season_point": "{season} · {rating}",
   "text_ratings_votes": "{count} stemmer",
   "text_raw_export": "Rå eksport",
+  "text_recommended_meta_info": "{media} · {mode}",
   "text_reconnect_streaming_warning": "Gendan forbindelse til {services} nedenfor.",
   "text_rent": "Lej",
   "text_rewatching_next_episode_prompt": "Hvilken episode vil du gense nu?",
