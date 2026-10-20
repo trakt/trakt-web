@@ -190,7 +190,7 @@
 
     <SettingsGroupRow
       title={m.button_text_manage_subscription()}
-      href={UrlBuilder.vip()}
+      href={UrlBuilder.vip("account-settings")}
       variant="link"
     >
       {#snippet icon()}<StarIcon fill="none" />{/snippet}

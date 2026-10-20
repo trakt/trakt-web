@@ -4,10 +4,13 @@ const PROMOTION_SOURCE_PATTERN = /^promotion-[a-z0-9-]{1,48}$/;
 
 export const VipUpsellSourceSchema = z.union([
   z.enum([
+    'account-settings',
     'all-time-stats',
     'connected-apps',
+    'delete-account',
     'direct',
     'footer',
+    'footer-link',
     'import',
     'jellyfin-settings-add-server',
     'jellyfin-settings-collection-limit',
@@ -24,6 +27,7 @@ export const VipUpsellSourceSchema = z.union([
     'plex-settings-webhook',
     'preview-features',
     'profile-settings',
+    'profile-settings-manage',
     'sentiment',
     'smart-list',
     'soundtrack',
