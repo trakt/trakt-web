@@ -10,7 +10,7 @@
 </script>
 
 {#snippet vipLink()}
-  <Link href={UrlBuilder.vip()}>
+  <Link href={UrlBuilder.vip("footer-link")}>
     <span class="bold">VIP</span>
   </Link>
 {/snippet}

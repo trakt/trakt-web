@@ -35,7 +35,7 @@
 
     {#if $user.isVip}
       <Link
-        href={UrlBuilder.vip()}
+        href={UrlBuilder.vip("profile-settings-manage")}
         color="inherit"
         label={m.button_label_manage_subscription()}
       >
