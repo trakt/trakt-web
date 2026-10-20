@@ -10,6 +10,7 @@ export function mapToRecommendationPeopleReason(
   return {
     person: mapToPersonSummary(reason.person),
     role: reason.role,
+    watchedRoles: reason.watched_roles,
     watchedCount: reason.watched_count,
     titles: reason.titles.map((title) =>
       'movie' in title

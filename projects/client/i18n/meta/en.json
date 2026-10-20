@@ -2236,54 +2236,99 @@
       "default": "You keep watching",
       "description": "Section title for a recommendation explained by a director, creator or actor the user has watched in several titles."
     },
-    "text_recommendation_person_directing_one": {
-      "default": "Directed this · in {count} title you watched",
-      "description": "Line under the person in the You keep watching section: the person directed the recommended title and appears in one title the user watched.",
+    "text_recommendation_person_watched_directing_one": {
+      "default": "Directed in {count} title you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person directed (movies) one title.",
       "variables": {
         "count": {
           "type": "number"
         }
       }
     },
-    "text_recommendation_person_directing_other": {
-      "default": "Directed this · in {count} titles you watched",
-      "description": "Line under the person in the You keep watching section: the person directed the recommended title and appears in several titles the user watched.",
+    "text_recommendation_person_watched_directing_other": {
+      "default": "Directed in {count} titles you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person directed (movies) several titles.",
       "variables": {
         "count": {
           "type": "number"
         }
       }
     },
-    "text_recommendation_person_making_one": {
-      "default": "Made this · in {count} title you watched",
-      "description": "Line under the person in the You keep watching section: the person created or directed the recommended show and appears in one title the user watched.",
+    "text_recommendation_person_watched_making_one": {
+      "default": "Created in {count} title you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person created (shows) one title.",
       "variables": {
         "count": {
           "type": "number"
         }
       }
     },
-    "text_recommendation_person_making_other": {
-      "default": "Made this · in {count} titles you watched",
-      "description": "Line under the person in the You keep watching section: the person created or directed the recommended show and appears in several titles the user watched.",
+    "text_recommendation_person_watched_making_other": {
+      "default": "Created in {count} titles you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person created (shows) several titles.",
       "variables": {
         "count": {
           "type": "number"
         }
       }
     },
-    "text_recommendation_person_acting_one": {
-      "default": "Stars in this · in {count} title you watched",
-      "description": "Line under the person in the You keep watching section: the person stars in the recommended title and appears in one title the user watched.",
+    "text_recommendation_person_watched_acting_one": {
+      "default": "Acted in {count} title you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person acted in (top-billed) one title.",
       "variables": {
         "count": {
           "type": "number"
         }
       }
     },
-    "text_recommendation_person_acting_other": {
-      "default": "Stars in this · in {count} titles you watched",
-      "description": "Line under the person in the You keep watching section: the person stars in the recommended title and appears in several titles the user watched.",
+    "text_recommendation_person_watched_acting_other": {
+      "default": "Acted in {count} titles you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person acted in (top-billed) several titles.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_watched_directing_acting_one": {
+      "default": "Directed and acted in {count} title you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person directed or acted in one title.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_watched_directing_acting_other": {
+      "default": "Directed and acted in {count} titles you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person directed or acted in several titles.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_watched_making_acting_one": {
+      "default": "Created and acted in {count} title you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person created (shows) or acted in one title.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_watched_making_acting_other": {
+      "default": "Created and acted in {count} titles you watched",
+      "description": "Line under the person in the You keep watching section of Why this?: across the titles the user watched, the person created (shows) or acted in several titles.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_recommendation_person_more_titles": {
+      "default": "+{count} more",
+      "description": "Last tile in the You keep watching posters when the person is in more watched titles than the drawer shows.",
       "variables": {
         "count": {
           "type": "number"
