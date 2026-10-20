@@ -12,23 +12,20 @@
     totalCount: number;
     onclick: () => void;
   } = $props();
+
+  const counts = $derived({ unlocked: unlockedCount, total: totalCount });
 </script>
 
 <button
   type="button"
   class="trakt-achievements-anchor"
   {onclick}
-  aria-label={m.vip_achievements_open_label()}
+  aria-label={`${m.vip_achievements_open_label()}, ${m.vip_achievements_count(counts)}`}
 >
   <span class="anchor-icon">
     <TrophyIcon />
   </span>
-  <span class="anchor-label bold">
-    {m.vip_achievements_anchor_label({
-      unlocked: unlockedCount,
-      total: totalCount,
-    })}
-  </span>
+  <span class="anchor-label">{m.vip_achievements_anchor_label(counts)}</span>
   <span class="anchor-caret">
     <CaretRightIcon />
   </span>
@@ -37,42 +34,52 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  // A quiet text link at rest, sized like the kicker it sits in. The padding is
+  // the hit area: negative inline margins keep the visible text on the
+  // kicker's rhythm, and on hover that area lights up as the purple pill.
   .trakt-achievements-anchor {
     all: unset;
     box-sizing: border-box;
     cursor: pointer;
 
     display: inline-flex;
+    flex: none;
     align-items: center;
-    gap: var(--gap-xxs);
+    gap: var(--ni-6);
 
-    height: var(--ni-36);
-    padding: 0 var(--ni-10);
-    border-radius: var(--border-radius-xxl);
+    block-size: calc(var(--ni-24) + var(--ni-2));
+    padding-inline: var(--ni-6);
+    margin-inline: calc(var(--ni-6) * -1);
+    border-radius: var(--border-radius-pill);
 
-    color: var(--color-text-primary);
-    background: color-mix(
-      in srgb,
-      var(--color-achievement-accent) 15%,
-      transparent
-    );
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--color-achievement-accent) 30%, transparent);
-
-    font-size: var(--font-size-tag);
+    color: var(--color-achievement-accent);
+    font-size: var(--font-size-text-small);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    font-variant-numeric: tabular-nums;
     white-space: nowrap;
 
     transition:
-      background-color var(--transition-increment) ease-in-out,
-      transform var(--transition-increment) ease-in-out;
+      background-color var(--transition-increment) ease-out,
+      box-shadow var(--transition-increment) ease-out,
+      color var(--transition-increment) ease-out,
+      transform var(--transition-increment) ease-out;
+
+    @include for-tablet-sm-and-below {
+      block-size: var(--ni-24);
+      font-size: var(--font-size-tag);
+    }
 
     @include for-mouse {
       &:hover {
+        color: var(--color-text-primary);
         background: color-mix(
           in srgb,
-          var(--color-achievement-accent) 24%,
+          var(--color-achievement-accent) 15%,
           transparent
         );
+        box-shadow: inset 0 0 0 var(--ni-1)
+          color-mix(in srgb, var(--color-achievement-accent) 32%, transparent);
       }
     }
 
@@ -80,14 +87,33 @@
       transform: scale(0.97);
     }
 
-    :global(svg) {
-      width: var(--ni-16);
-      height: var(--ni-16);
+    &:focus-visible {
+      outline: var(--border-thickness-xs) solid var(--color-foreground);
+      outline-offset: var(--ni-2);
     }
   }
 
   .anchor-icon {
     display: inline-flex;
+    color: var(--color-achievement-accent);
+
+    :global(svg) {
+      width: var(--ni-12);
+      height: var(--ni-12);
+
+      @include for-tablet-sm-and-below {
+        width: var(--ni-10);
+        height: var(--ni-10);
+      }
+    }
+  }
+
+  // A bare span picks up the global 14px span size, so it inherits the link's
+  // kicker type explicitly.
+  .anchor-label {
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
   }
 
   // Mirrors the avatar pill's caret: fades in and nudges along the reading
@@ -102,15 +128,23 @@
       opacity var(--transition-increment) ease-out;
 
     :global(svg) {
-      width: var(--ni-14);
-      height: var(--ni-14);
+      width: var(--ni-10);
+      height: var(--ni-10);
     }
   }
 
   @include for-mouse {
     .trakt-achievements-anchor:hover .anchor-caret {
       opacity: 0.9;
+      color: var(--color-achievement-accent);
       transform: translateX(calc(var(--rtl-sign) * var(--ni-2)));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trakt-achievements-anchor,
+    .anchor-caret {
+      transition: none;
     }
   }
 </style>
