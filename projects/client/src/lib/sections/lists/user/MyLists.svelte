@@ -69,6 +69,7 @@
     {options}
     --segmented-select-scroll-inset="var(--list-actions-inset)"
     --segmented-select-scroll-fade="var(--list-actions-inset)"
+    --segmented-select-overshoot-room="var(--ni-0)"
     ariaLabel={m.list_title_personal_lists()}
   />
 {/snippet}
@@ -84,7 +85,7 @@
   {drilldown}
   {actions}
   {listActions}
-  --list-actions-height="var(--segmented-select-minimal-segment-height)"
+  --list-actions-height="var(--segmented-select-segment-height)"
   --height-list="var(--height-lists-list)"
   --height-override-list={$items.length === 0
     ? hasStrip ? "0px" : "var(--height-poster-list-sm)"

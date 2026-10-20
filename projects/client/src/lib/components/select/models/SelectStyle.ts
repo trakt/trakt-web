@@ -1,1 +1,1 @@
-export type SelectStyle = 'default' | 'minimal' | 'pills';
+export type SelectStyle = 'default' | 'pills';

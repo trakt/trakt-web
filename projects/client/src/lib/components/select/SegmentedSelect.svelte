@@ -591,34 +591,9 @@
     }
   }
 
-  .trakt-segmented-select[data-style="minimal"] {
-    --segment-height: var(--segmented-select-minimal-segment-height);
-    --segment-inset: var(--ni-0);
-    --track-shadow: none;
-    --segment-block-inset: var(--gap-xs);
-    --selector-shadow:
-      inset 0 0 0 var(--border-thickness-xxs)
-        var(--color-segmented-selector-border),
-      var(--shadow-base);
-
-    margin-block: calc(-1 * var(--segment-block-inset));
-
-    background-color: transparent;
-    backdrop-filter: none;
-
-    .segment {
-      padding-inline: var(--ni-10);
-
-      .segment-icon :global(svg) {
-        width: var(--ni-16);
-        height: var(--ni-16);
-      }
-    }
-  }
-
-  /* No track: each option is its own 26px pill inside a 44px target. */
+  /* No track: each option is its own chip-height pill inside a 44px target. */
   .trakt-segmented-select[data-style="pills"] {
-    --segment-height: calc(var(--ni-24) + var(--ni-2));
+    --segment-height: var(--segmented-select-segment-height);
     --segment-inset: var(--ni-0);
     --segment-block-inset: calc((var(--ni-44) - var(--segment-height)) / 2);
     --segment-gap: var(--ni-6);
@@ -626,13 +601,22 @@
     --selector-shadow: inset 0 0 0 var(--border-thickness-xxs)
       var(--color-segmented-selector-border);
 
+    --overshoot-room: var(--segmented-select-overshoot-room, var(--ni-32));
+
+    padding-inline: calc(var(--scroll-inset) + var(--overshoot-room));
+    margin-inline: calc(-1 * var(--overshoot-room));
+    max-width: calc(100% + 2 * var(--overshoot-room));
+    pointer-events: none;
+
     background-color: transparent;
     box-shadow: none;
     backdrop-filter: none;
 
     .segment {
+      pointer-events: auto;
       padding-inline: var(--ni-12);
-      color: var(--color-pill-foreground);
+      color: var(--color-text-secondary);
+      transition-property: background-color, color, box-shadow;
 
       &::before {
         content: "";
@@ -642,15 +626,14 @@
       }
 
       &:not(.is-selected) {
-        background-color: var(--color-pill-background);
+        background-color: var(--color-segmented-track-background);
+        box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+          var(--color-segmented-track-border);
 
         @include for-mouse {
           &:hover {
-            background-color: color-mix(
-              in srgb,
-              var(--color-foreground) 10%,
-              transparent
-            );
+            box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+              var(--color-filter-chip-border-hover);
             color: var(--color-text-primary);
           }
         }
@@ -670,14 +653,14 @@
       }
 
       .segment-icon :global(svg) {
-        width: var(--ni-14);
-        height: var(--ni-14);
+        width: var(--ni-16);
+        height: var(--ni-16);
       }
     }
 
     &[data-variant="selected-icon"] .segment {
       .segment-icon {
-        width: var(--ni-14);
+        width: var(--ni-16);
         margin-inline-end: var(--ni-6);
       }
 
