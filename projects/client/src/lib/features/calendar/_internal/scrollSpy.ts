@@ -1,3 +1,5 @@
+const MIN_TOP_MARGIN = 0.2;
+
 export function scrollSpy(
   node: HTMLElement,
   params: {
@@ -17,32 +19,50 @@ export function scrollSpy(
       visibilityMap.set(entry.target, entry.intersectionRatio);
     });
 
-    let mostVisibleId = '';
-    let maxRatio = 0;
+    const topmostId =
+      Array.from(visibilityMap)
+        .filter(([, ratio]) => ratio > 0)
+        .map(([element]) => ({
+          id: element.id,
+          top: element.getBoundingClientRect().top,
+        }))
+        .toSorted((a, b) => a.top - b.top)
+        .at(0)?.id ?? '';
 
-    visibilityMap.forEach((ratio, element) => {
-      if (ratio > maxRatio) {
-        maxRatio = ratio;
-        mostVisibleId = element.id;
-      }
-    });
+    if (!topmostId || topmostId === lastId) return;
 
-    if (!mostVisibleId || mostVisibleId === lastId) return;
-
-    lastId = mostVisibleId;
-    currentParams.onUpdate(mostVisibleId);
+    lastId = topmostId;
+    currentParams.onUpdate(topmostId);
   };
 
-  const observer = new IntersectionObserver(observerCallback, {
-    threshold: [0, 0.25, 0.5, 0.75, 1.0],
-    rootMargin: '-20% 0px 0% 0px',
-  });
+  const createObserver = (topMargin: number) =>
+    new IntersectionObserver(observerCallback, {
+      threshold: [0, 0.25, 0.5, 0.75, 1.0],
+      rootMargin: `-${topMargin}px 0px 0% 0px`,
+    });
+
+  const toTopMargin = (element: Element | null) => {
+    const stickyTop = element
+      ? parseFloat(getComputedStyle(element).scrollMarginTop) || 0
+      : 0;
+    return Math.round(
+      Math.max(stickyTop, globalThis.window.innerHeight * MIN_TOP_MARGIN),
+    );
+  };
+
+  let topMargin = 0;
+  let observer = createObserver(topMargin);
 
   function observeElements() {
     observer.disconnect();
     visibilityMap.clear();
     lastId = '';
     const elements = node.querySelectorAll(currentParams.selector);
+    const nextMargin = toTopMargin(elements.item(0));
+    if (nextMargin !== topMargin) {
+      topMargin = nextMargin;
+      observer = createObserver(topMargin);
+    }
     elements.forEach((el) => observer.observe(el));
   }
 
