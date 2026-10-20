@@ -46,6 +46,18 @@ describe('store: createHalEngine', () => {
     ]);
   });
 
+  it('should send an event recorded after destroy right away', () => {
+    const { engine, send } = setup();
+
+    engine.destroy();
+    engine.record(AnalyticsEvent.Rate, { rating: 8 });
+
+    expect(send).toHaveBeenCalledTimes(1);
+    expect(send.mock.calls[0]?.[1]).toMatchObject([
+      { event: AnalyticsEvent.Rate },
+    ]);
+  });
+
   it('should drop an event name absent from the allowlist', () => {
     const { engine, send } = setup();
 

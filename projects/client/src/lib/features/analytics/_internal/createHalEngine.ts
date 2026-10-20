@@ -61,6 +61,7 @@ export function createHalEngine({
 }: CreateHalEngineProps = {}): AnalyticsEngine & { destroy: () => void } {
   let buffered: ReadonlyArray<HalEvent> = [];
   let flushTimer: ReturnType<typeof setTimeout> | Nil = null;
+  let isDestroyed = false;
 
   const flush = () => {
     if (flushTimer) {
@@ -128,15 +129,18 @@ export function createHalEngine({
         },
       ];
 
-      if (buffered.length >= MAX_EVENTS_PER_BATCH) {
+      if (isDestroyed || buffered.length >= MAX_EVENTS_PER_BATCH) {
         flush();
         return;
       }
 
       scheduleFlush();
     },
-    // Unlisten first, then flush, so the buffer is not sent twice.
+    // Unlisten first, then flush, so the buffer is not sent twice. A caller
+    // can still hold this engine after a provider remount, so late events go
+    // out straight away instead of waiting on listeners that are gone.
     destroy: () => {
+      isDestroyed = true;
       unlisten();
       flush();
     },
