@@ -9,8 +9,10 @@
   import CommentFooter from "./_internal/CommentFooter.svelte";
   import CommentHeader from "./_internal/CommentHeader.svelte";
   import { isTopLevelComment } from "./_internal/isTopLevelComment.ts";
+  import OwnCommentLabel from "./_internal/OwnCommentLabel.svelte";
   import ReplyContext from "./_internal/ReplyContext.svelte";
   import { toReplyThreadUrl } from "./_internal/toReplyThreadUrl.ts";
+  import { useOwnCommentHighlight } from "./_internal/useOwnCommentHighlight.ts";
   import type { ActiveComment } from "./_internal/models/ActiveComment";
   import type { CommentsProps } from "./CommentsProps";
 
@@ -18,6 +20,7 @@
     comment: MediaComment;
     onDrilldown: (comment: ActiveComment) => void;
     header?: Snippet;
+    highlightOwn?: boolean;
   } & CommentsProps;
 
   const {
@@ -25,10 +28,16 @@
     onDrilldown,
     media,
     header: externalHeader,
+    highlightOwn = false,
     ...typeProps
   }: CommentCardProps = $props();
 
   const isReply = $derived(!isTopLevelComment(comment));
+
+  const { highlightedUserId } = useOwnCommentHighlight();
+  const isHighlighted = $derived(
+    highlightOwn && comment.user.id === $highlightedUserId,
+  );
   const threadUrl = $derived(
     toReplyThreadUrl({ parentId: comment.parentId, media, ...typeProps }),
   );
@@ -46,8 +55,12 @@
 <TextCard
   --width-card="var(--width-comment-card)"
   --height-card="var(--height-comment-card)"
+  variant={isHighlighted ? "tinted" : "opaque"}
 >
   {#snippet header()}
+    {#if isHighlighted}
+      <OwnCommentLabel />
+    {/if}
     {#if externalHeader}
       {@render externalHeader()}
     {:else}

@@ -14,7 +14,7 @@
     action,
     eager = false,
   }: ChildrenProps & {
-    variant?: "transparent" | "opaque";
+    variant?: "transparent" | "opaque" | "tinted";
     classList?: string;
     action?: (element: HTMLElement) => void;
     eager?: boolean;
@@ -42,6 +42,7 @@
 >
   <div
     class="trakt-card-content"
+    data-variant={variant}
     class:trakt-card-transparent={variant === "transparent"}
     class:is-visible={isRendered}
   >
@@ -130,6 +131,14 @@
     &:not(.trakt-card-transparent) {
       background: var(--color-card-background);
       box-shadow: var(--shadow-base);
+    }
+
+    &[data-variant="tinted"] {
+      background: color-mix(
+        in srgb,
+        var(--color-official-list-background) 40%,
+        var(--color-background)
+      );
     }
   }
 </style>

@@ -76,6 +76,7 @@
             {...props}
             isReplying={isReplying(comment.id)}
             shouldScrollIntoView={false}
+            highlightOwn={!mineActive}
           />
         {/each}
       {/if}

@@ -9,4 +9,5 @@ export enum FeatureFlag {
   ShowEnding = 'show-ending',
   ReviewsPinMine = 'reviews-pin-mine',
   ReviewsMineTab = 'reviews-mine-tab',
+  ReviewsHighlightMine = 'reviews-highlight-mine',
 }

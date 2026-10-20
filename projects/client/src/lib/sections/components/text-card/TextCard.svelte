@@ -6,10 +6,15 @@
     header,
     footer,
     children,
-  }: { header: Snippet; footer?: Snippet } & ChildrenProps = $props();
+    variant = "opaque",
+  }: {
+    header: Snippet;
+    footer?: Snippet;
+    variant?: "opaque" | "tinted";
+  } & ChildrenProps = $props();
 </script>
 
-<Card>
+<Card {variant}>
   <div class="trakt-text-card-content" class:has-footer={Boolean(footer)}>
     {@render header()}
     {@render children()}

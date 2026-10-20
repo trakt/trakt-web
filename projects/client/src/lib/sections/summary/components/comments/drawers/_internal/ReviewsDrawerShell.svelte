@@ -12,9 +12,10 @@
     source?: ActiveComment;
     useList: PaginatableStore<MediaComment, string>;
     emptyText?: string;
+    highlightOwn?: boolean;
   } & CommentsProps;
 
-  const { source, useList, emptyText, media, ...props }:
+  const { source, useList, emptyText, highlightOwn, media, ...props }:
     ReviewsDrawerShellProps = $props();
 
   const { reset, setReplying, activeComment } = $derived(
@@ -40,6 +41,7 @@
           {...props}
           isReplying={isReplying(comment.id)}
           shouldScrollIntoView={comment.id === source?.id}
+          {highlightOwn}
         />
       {/each}
     {/snippet}

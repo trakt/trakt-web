@@ -13922,6 +13922,18 @@
     "link_label_view_thread": {
       "default": "Open the conversation this reply belongs to",
       "description": "Aria-label for the 'View thread' link next to one of the viewer's own replies."
+    },
+    "preview_feature_title_reviews_highlight_mine": {
+      "default": "Highlight my comments",
+      "description": "Title for the reviews-highlight-mine preview feature toggle in settings."
+    },
+    "preview_feature_description_reviews_highlight_mine": {
+      "default": "Tints your own comments purple in a title's reviews so they're easy to spot.",
+      "description": "Description for the reviews-highlight-mine preview feature toggle in settings."
+    },
+    "text_your_comment": {
+      "default": "Your comment",
+      "description": "Screen reader text announced before one of the viewer's own comments when it is highlighted in a reviews list. Not shown on screen."
     }
   }
 }

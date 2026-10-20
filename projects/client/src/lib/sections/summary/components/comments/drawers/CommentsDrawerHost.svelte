@@ -74,6 +74,7 @@
               ...props,
             })}
       emptyText={$mineActive ? m.list_placeholder_reviews_mine() : undefined}
+      highlightOwn={!$mineActive}
       {media}
       {...props}
     />

@@ -127,7 +127,13 @@
     }}
   >
     {#snippet item(comment)}
-      <CommentCard {comment} {media} {onDrilldown} {...props} />
+      <CommentCard
+        {comment}
+        {media}
+        {onDrilldown}
+        highlightOwn={!$mineActive}
+        {...props}
+      />
     {/snippet}
 
     {#snippet empty()}
