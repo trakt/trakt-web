@@ -33,6 +33,7 @@
     "prune:share-images": "svelte-kit sync && bun .scripts/prune-share-images.run.ts",
     "i18n:resolve": "bun .scripts/resolve-i18n.ts",
     "i18n:check": "bun .scripts/check-i18n-placeholders.ts",
+    "pwa:screenshots": "bun .scripts/capture-pwa-screenshots.ts",
     "i18n:generate": "svelte-kit sync && bun i18n/generator/cli.ts -i i18n/meta/ -o i18n/",
     "i18n:generate:watch": "svelte-kit sync && bun i18n/generator/cli.ts -i i18n/meta/ -o i18n/ --watch"
   },
