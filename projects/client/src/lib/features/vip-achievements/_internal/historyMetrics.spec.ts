@@ -15,26 +15,32 @@ function makeHistory(
 ): UserHistory {
   return {
     movies: new Map(
-      movies.map((movie) => [movie.id, {
-        id: movie.id,
-        watchedAt: movie.dates.at(-1) ?? at('2020-01-01T00:00:00Z'),
-        plays: movie.dates.length,
-        watchedDates: movie.dates,
-      }]),
+      movies.map((movie) => [
+        movie.id,
+        {
+          id: movie.id,
+          watchedAt: movie.dates.at(-1) ?? at('2020-01-01T00:00:00Z'),
+          plays: movie.dates.length,
+          watchedDates: movie.dates,
+        },
+      ]),
     ),
     shows: new Map(
-      shows.map((show) => [show.id, {
-        id: show.id,
-        watchedAt: at('2020-01-01T00:00:00Z'),
-        episodes: show.episodeDates.map((date, index) => ({
-          season: 1,
-          episodeId: index,
-          watchedAt: date,
-          plays: 1,
-        })),
-        watchedDates: show.episodeDates,
-        playsPerSeason: new Map<number, number>(),
-      }]),
+      shows.map((show) => [
+        show.id,
+        {
+          id: show.id,
+          watchedAt: at('2020-01-01T00:00:00Z'),
+          episodes: show.episodeDates.map((date, index) => ({
+            season: 1,
+            episodeId: index,
+            watchedAt: date,
+            plays: 1,
+          })),
+          watchedDates: show.episodeDates,
+          playsPerSeason: new Map<number, number>(),
+        },
+      ]),
     ),
   };
 }
@@ -100,9 +106,8 @@ describe('util: historyMetrics', () => {
   });
 
   it('countMarathonDays counts show/day pairs with 8+ episodes', () => {
-    const dates = Array.from(
-      { length: 9 },
-      (_, i) => at(`2026-07-30T${String(i + 8).padStart(2, '0')}:00:00Z`),
+    const dates = Array.from({ length: 9 }, (_, i) =>
+      at(`2026-07-30T${String(i + 8).padStart(2, '0')}:00:00Z`),
     );
     const history = makeHistory([], [{ id: 1, episodeDates: dates }]);
 

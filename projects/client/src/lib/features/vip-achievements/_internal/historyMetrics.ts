@@ -35,8 +35,9 @@ export function collectWatchTimestamps(history: UserHistory | Nil): Date[] {
 
 /** Longest run of consecutive days with at least one watch (monotonic). */
 export function computeLongestStreak(history: UserHistory | Nil): number {
-  const days = [...new Set(collectWatchTimestamps(history).map(dayIndex))]
-    .toSorted((a, b) => a - b);
+  const days = [
+    ...new Set(collectWatchTimestamps(history).map(dayIndex)),
+  ].toSorted((a, b) => a - b);
 
   return days.reduce(
     (acc, day, index) => {
@@ -53,8 +54,8 @@ export function computeLongestStreak(history: UserHistory | Nil): number {
 
 /** Plays logged between midnight and 04:00, local time. */
 export function countNightOwlPlays(history: UserHistory | Nil): number {
-  return collectWatchTimestamps(history).filter((date) =>
-    localHour(date) < NIGHT_END_HOUR
+  return collectWatchTimestamps(history).filter(
+    (date) => localHour(date) < NIGHT_END_HOUR,
   ).length;
 }
 

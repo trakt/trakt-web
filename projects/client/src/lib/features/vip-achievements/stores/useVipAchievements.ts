@@ -20,7 +20,7 @@ export function useVipAchievements() {
         stats: statsResult.data,
         history,
         ratings,
-      })
+      }),
     ),
   );
 

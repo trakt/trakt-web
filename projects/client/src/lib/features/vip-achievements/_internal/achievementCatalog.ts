@@ -96,8 +96,8 @@ export const achievementCatalog: ReadonlyArray<VipAchievementDefinition> = [
       threshold === 1
         ? m.vip_achievement_marathon_fever_step_one()
         : m.vip_achievement_marathon_fever_step_other({
-          count: toCount(threshold),
-        }),
+            count: toCount(threshold),
+          }),
     thresholds: [1, 5, 20],
     metric: ({ history }) => countMarathonDays(history),
   },
@@ -110,8 +110,8 @@ export const achievementCatalog: ReadonlyArray<VipAchievementDefinition> = [
       threshold === 1
         ? m.vip_achievement_double_feature_step_one()
         : m.vip_achievement_double_feature_step_other({
-          count: toCount(threshold),
-        }),
+            count: toCount(threshold),
+          }),
     thresholds: [1, 5, 10, 25],
     metric: ({ history }) => countDoubleFeatures(history),
   },
@@ -134,8 +134,8 @@ export const achievementCatalog: ReadonlyArray<VipAchievementDefinition> = [
       threshold === 1
         ? m.vip_achievement_perfect_ten_step_one()
         : m.vip_achievement_perfect_ten_step_other({
-          count: toCount(threshold),
-        }),
+            count: toCount(threshold),
+          }),
     thresholds: [1, 10, 50, 100],
     metric: ({ ratings }) =>
       collectRatingValues(ratings).filter((rating) => rating === 10).length,
@@ -150,8 +150,10 @@ export const achievementCatalog: ReadonlyArray<VipAchievementDefinition> = [
     thresholds: [5, 25, 100, 250],
     metric: ({ stats }) =>
       stats
-        ? stats.movies.comments + stats.shows.comments +
-          stats.seasons.comments + stats.episodes.comments
+        ? stats.movies.comments +
+          stats.shows.comments +
+          stats.seasons.comments +
+          stats.episodes.comments
         : 0,
   },
   {

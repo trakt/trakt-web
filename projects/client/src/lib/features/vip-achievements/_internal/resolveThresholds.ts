@@ -21,9 +21,10 @@ type ThresholdResolution = {
  * reached tier and fractional progress toward the next one. Pure and
  * locale-agnostic.
  */
-export function resolveThresholds(
-  { value, thresholds }: ResolveThresholdsParams,
-): ThresholdResolution {
+export function resolveThresholds({
+  value,
+  thresholds,
+}: ResolveThresholdsParams): ThresholdResolution {
   if (thresholds.length === 0) {
     return { tierIndex: -1, nextThreshold: null, progress: 1, isMaxed: true };
   }
@@ -39,7 +40,7 @@ export function resolveThresholds(
     return { tierIndex, nextThreshold: null, progress: 1, isMaxed: true };
   }
 
-  const floor = tierIndex >= 0 ? thresholds.at(tierIndex) ?? 0 : 0;
+  const floor = tierIndex >= 0 ? (thresholds.at(tierIndex) ?? 0) : 0;
   const span = nextThreshold - floor;
   const ratio = span <= 0 ? 0 : (value - floor) / span;
 

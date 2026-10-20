@@ -22,9 +22,10 @@ type ToAchievementSectionsParams = {
  * them back into catalog order, so rows already on screen stay put. Sections
  * with nothing to list are dropped.
  */
-export function toAchievementSections(
-  { achievements, showLocked }: ToAchievementSectionsParams,
-): AchievementSection[] {
+export function toAchievementSections({
+  achievements,
+  showLocked,
+}: ToAchievementSectionsParams): AchievementSection[] {
   return achievementCategories
     .map((category) => {
       const members = achievements.filter(

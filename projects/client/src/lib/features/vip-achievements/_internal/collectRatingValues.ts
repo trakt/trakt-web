@@ -9,6 +9,10 @@ export function collectRatingValues(ratings: UserRatings | Nil): number[] {
     return [];
   }
 
-  return [ratings.movies, ratings.shows, ratings.seasons, ratings.episodes]
-    .flatMap((map) => [...map.values()].map((entry) => entry.rating));
+  return [
+    ratings.movies,
+    ratings.shows,
+    ratings.seasons,
+    ratings.episodes,
+  ].flatMap((map) => [...map.values()].map((entry) => entry.rating));
 }

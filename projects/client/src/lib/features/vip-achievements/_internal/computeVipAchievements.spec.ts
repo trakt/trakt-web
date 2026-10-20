@@ -19,11 +19,14 @@ function makeInput(
 function makeRatings(values: number[]): UserRatings {
   return {
     movies: new Map(
-      values.map((rating, index) => [index, {
-        id: index,
-        rating,
-        ratedAt: new Date(0),
-      }]),
+      values.map((rating, index) => [
+        index,
+        {
+          id: index,
+          rating,
+          ratedAt: new Date(0),
+        },
+      ]),
     ),
     shows: new Map(),
     seasons: new Map(),
