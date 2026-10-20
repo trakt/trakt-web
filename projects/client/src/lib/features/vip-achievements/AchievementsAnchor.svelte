@@ -34,9 +34,9 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  // A quiet text link at rest, sized like the kicker it sits in. The padding is
-  // the hit area: negative inline margins keep the visible text on the
-  // kicker's rhythm, and on hover that area lights up as the purple pill.
+  // A quiet text link at rest, sized and coloured like the kicker it sits in.
+  // The padding is the hit area: negative inline margins keep the visible
+  // text on the kicker's rhythm, and on hover that area lights up as a pill.
   .trakt-achievements-anchor {
     all: unset;
     box-sizing: border-box;
@@ -52,7 +52,7 @@
     margin-inline: calc(var(--ni-6) * -1);
     border-radius: var(--border-radius-pill);
 
-    color: var(--color-achievement-accent);
+    color: var(--color-text-secondary);
     font-size: var(--font-size-text-small);
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -61,7 +61,6 @@
 
     transition:
       background-color var(--transition-increment) ease-out,
-      box-shadow var(--transition-increment) ease-out,
       color var(--transition-increment) ease-out,
       transform var(--transition-increment) ease-out;
 
@@ -73,13 +72,7 @@
     @include for-mouse {
       &:hover {
         color: var(--color-text-primary);
-        background: color-mix(
-          in srgb,
-          var(--color-achievement-accent) 15%,
-          transparent
-        );
-        box-shadow: inset 0 0 0 var(--ni-1)
-          color-mix(in srgb, var(--color-achievement-accent) 32%, transparent);
+        background: color-mix(in srgb, var(--color-foreground) 10%, transparent);
       }
     }
 
@@ -95,7 +88,7 @@
 
   .anchor-icon {
     display: inline-flex;
-    color: var(--color-achievement-accent);
+    color: var(--color-text-primary);
 
     :global(svg) {
       width: var(--ni-12);
@@ -136,7 +129,6 @@
   @include for-mouse {
     .trakt-achievements-anchor:hover .anchor-caret {
       opacity: 0.9;
-      color: var(--color-achievement-accent);
       transform: translateX(calc(var(--rtl-sign) * var(--ni-2)));
     }
   }
