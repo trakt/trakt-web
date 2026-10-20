@@ -23,4 +23,4 @@ export type ListHeaderProps = {
   count?: number;
   /** Narrows the list, beside the label. */
   filters?: Snippet;
-} & HTMLElementProps;
+};
