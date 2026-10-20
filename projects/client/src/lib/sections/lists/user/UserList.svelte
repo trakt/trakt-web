@@ -1,9 +1,10 @@
 <script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import DismissIcon from "$lib/components/icons/DismissIcon.svelte";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
-  import ListMeta from "$lib/sections/lists/components/ListMeta.svelte";
   import { useListItems } from "$lib/sections/lists/user/useListItems";
   import type { Snippet } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
@@ -14,12 +15,12 @@
   type UserListProps = {
     list: MediaListSummary;
     type?: DiscoverMode;
-    titleAction?: Snippet;
+    onDismiss?: () => void;
     scope?: string;
     popupActions?: Snippet;
   };
 
-  const { list, type, titleAction, scope, popupActions }: UserListProps =
+  const { list, type, onDismiss, scope, popupActions }: UserListProps =
     $props();
 
   const { filterMap } = useFilter();
@@ -36,10 +37,6 @@
   });
 </script>
 
-{#snippet listMetaInfo()}
-  <ListMeta {list} showOwner={false} />
-{/snippet}
-
 <DrillableMediaList
   --height-override-card="var(--height-portrait-card-sm)"
   --height-override-list="var(--height-poster-list-sm)"
@@ -54,14 +51,24 @@
   useList={(params) => useListItems({ list, ...params })}
   urlBuilder={() => getListUrl({ type: "user-list", list })}
   title={list.name}
-  metaInfo={listMetaInfo}
-  {titleAction}
+  count={list.count}
+  collapsible={!onDismiss}
 >
   {#snippet item(media)}
     <UserListItem listedItem={media} style="cover" {list} />
   {/snippet}
 
   {#snippet actions()}
+    {#if onDismiss}
+      <ActionButton
+        onclick={onDismiss}
+        label={m.button_label_dismiss()}
+        style="ghost"
+        color="default"
+      >
+        <DismissIcon />
+      </ActionButton>
+    {/if}
     <ListActions {list} {popupActions} />
   {/snippet}
 

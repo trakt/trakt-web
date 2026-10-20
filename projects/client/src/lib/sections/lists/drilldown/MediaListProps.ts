@@ -17,10 +17,12 @@ export type MediaListProps<T, M> = {
   metaInfo?: Snippet;
   drilldown?: ListDrilldownProps;
   variant?: 'portrait' | 'landscape';
-  titleAction?: Snippet;
+  collapsible?: boolean;
   contentKey?: string;
   /** Narrows the list, beside its label. */
   filters?: Snippet;
+  /** The size of the whole set, not only what the list shows. */
+  count?: number;
 } & FilterParams;
 
 export type DrilledMediaListProps<T, M> = Omit<

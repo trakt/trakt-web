@@ -46,7 +46,7 @@
       <VideoItem {video} {slug} />
     {/snippet}
 
-    {#snippet actions()}
+    {#snippet filters()}
       <VideoTypeDropdown
         {types}
         active={$active}

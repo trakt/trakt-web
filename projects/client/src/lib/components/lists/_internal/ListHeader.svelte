@@ -10,7 +10,6 @@
     title,
     subtitle,
     metaInfo,
-    titleAction,
     actions,
     navigationType,
     drilldown,
@@ -50,7 +49,7 @@
           </div>
         {/if}
 
-        {#if filters}
+        {#if filters && !collapse?.isCollapsed}
           <div class="list-filters">{@render filters()}</div>
         {/if}
       </div>
@@ -61,8 +60,6 @@
     </div>
 
     <div class="label-end">
-      {@render titleAction?.()}
-
       {#if actions}
         <div class="list-actions" data-dpad-navigation={navigationType}>
           {@render actions()}
@@ -133,6 +130,7 @@
   .list-filters {
     display: flex;
     align-items: center;
+    gap: var(--gap-xs);
     min-width: 0;
     max-width: 100%;
   }
