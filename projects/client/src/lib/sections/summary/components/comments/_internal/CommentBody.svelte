@@ -1,5 +1,7 @@
 <script lang="ts">
   import { lineClamp } from "$lib/components/text/lineClamp";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { spoilMeAnyway } from "$lib/features/spoilers/components/spoilMeAnyway";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
@@ -18,12 +20,19 @@
 
   const { comment, media, type, onClick }: CommentBodyProps = $props();
 
+  const { track } = useTrack(AnalyticsEvent.SpoilerReveal);
+  const trackReveal = () => track({ type: "comment" });
+
   // A gif is a comment on its own, so the body can be empty.
   const hasText = $derived(comment.comment.trim().length > 0);
 </script>
 
 {#snippet commentText()}
-  <MarkdownText text={comment.comment} isSpoiler={comment.isSpoiler} />
+  <MarkdownText
+    text={comment.comment}
+    isSpoiler={comment.isSpoiler}
+    onReveal={trackReveal}
+  />
 {/snippet}
 
 {#snippet commentGif(variant: "full" | "preview")}
@@ -37,7 +46,7 @@
     <div
       class="trakt-comment"
       class:trakt-spoiler={comment.isSpoiler}
-      use:spoilMeAnyway
+      use:spoilMeAnyway={{ onReveal: trackReveal }}
     >
       {@render commentText()}
       {@render commentGif("full")}
