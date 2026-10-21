@@ -215,7 +215,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
       const outcome = await ratingAdd.mutate(newRating);
 
       if (outcome === 'executed' && type !== 'season') {
-        dismiss(id, type, 'rating');
+        dismiss(id, type);
       }
 
       // Always clear: a queued rating stays flagged via isQueued, and leaving

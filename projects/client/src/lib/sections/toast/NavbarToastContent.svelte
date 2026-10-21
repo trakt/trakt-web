@@ -6,7 +6,8 @@
   import RateNowContent from "$lib/sections/toast/_internal/RateNowContent.svelte";
   import { useCurrentUserLastWatched } from "$lib/sections/toast/_internal/useCurrentUserLastWatched";
   import { useCurrentUserNowWatching } from "$lib/sections/toast/_internal/useCurrentUserNowWatching";
-  import { filter } from "rxjs";
+  import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
+  import { BehaviorSubject, combineLatest, map } from "rxjs";
   import { onMount } from "svelte";
 
   const { nowWatching } = useCurrentUserNowWatching();
@@ -15,13 +16,15 @@
   const { nowPlaying } = useNowPlaying();
   const { lastWatched } = useLastWatched();
 
+  const pinned = new BehaviorSubject<LastWatchedItem | null>(null);
+
   onMount(() => {
     const unsubscribeNowWatching = nowWatching.subscribe((val) =>
       nowPlaying.next(val),
     );
 
-    const unsubscribeLastWatched = lastWatchedItem
-      .pipe(filter((val) => val !== null))
+    const unsubscribeLastWatched = combineLatest([lastWatchedItem, pinned])
+      .pipe(map(([candidate, held]) => held ?? candidate))
       .subscribe((val) => lastWatched.next(val));
 
     return () => {
@@ -35,7 +38,13 @@
   {#if $nowPlaying}
     <NowPlayingContent nowPlaying={$nowPlaying} />
   {:else if $lastWatched}
-    <RateNowContent lastWatched={$lastWatched} />
+    {#key $lastWatched.media.key}
+      <RateNowContent
+        lastWatched={$lastWatched}
+        onHold={(item) => pinned.next(item)}
+        onRelease={() => pinned.next(null)}
+      />
+    {/key}
   {/if}
 {/snippet}
 
