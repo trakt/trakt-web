@@ -7944,11 +7944,11 @@
       "description": "Label for the neutral, unset position of a display filter toggle (e.g. Watched, Watchlisted) in the filters panel. Selecting it clears the filter so the app default applies."
     },
     "filter_toggle_state_on": {
-      "default": "On",
+      "default": "Yes",
       "description": "Label for the enabled position of a display filter toggle (e.g. Watched, Watchlisted) in the filters panel."
     },
     "filter_toggle_state_off": {
-      "default": "Off",
+      "default": "No",
       "description": "Label for the disabled position of a display filter toggle (e.g. Watched, Watchlisted) in the filters panel."
     },
     "advanced_filter_label_ratings": {
