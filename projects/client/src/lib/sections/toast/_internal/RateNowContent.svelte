@@ -9,17 +9,21 @@
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
   import { shuffle } from "$lib/utils/array/shuffle";
   import { time } from "$lib/utils/timing/time.ts";
+  import { onDestroy } from "svelte";
   import { getToastTitle } from "./getToastTitle";
+  import type { RateNowContentProps } from "./RateNowContentProps";
   import ToastItemCard from "./ToastItemCard.svelte";
 
   const lingerDuration = time.seconds(3);
 
-  const { lastWatched }: { lastWatched: LastWatchedItem } = $props();
+  const { lastWatched, onHold, onRelease }: RateNowContentProps = $props();
 
   let interactionCounter = $state(0);
   let isReacting = $state(false);
 
   const { dismiss } = useLastWatched();
+
+  onDestroy(() => onRelease());
 
   const ratingPrompts = [
     m.text_rating_prompt_1(),
@@ -39,7 +43,13 @@
     const item: LastWatchedItem | null = lastWatched;
     if (!item) return;
 
-    dismiss(item.media.id, item.type, "manual");
+    dismiss(item.media.id, item.type);
+    onRelease();
+  };
+
+  const handleInteraction = () => {
+    interactionCounter += 1;
+    onHold(lastWatched);
   };
 </script>
 
@@ -75,21 +85,15 @@
       </div>
     </div>
     <div class="trakt-rate-now-container">
-      <RateNow
-        {...lastWatched}
-        variant="allow"
-        onclick={() => (interactionCounter += 1)}
+      <RateNow {...lastWatched} variant="allow" onclick={handleInteraction} />
+      <MediaReactionsBadge
+        type={lastWatched.type}
+        slug={lastWatched.media.slug}
+        id={lastWatched.media.id}
+        variant="compact"
+        onReact={handleInteraction}
+        onOpenChange={(isOpen) => (isReacting = isOpen)}
       />
-      {#key `${lastWatched.type}:${lastWatched.media.slug}`}
-        <MediaReactionsBadge
-          type={lastWatched.type}
-          slug={lastWatched.media.slug}
-          id={lastWatched.media.id}
-          variant="compact"
-          onReact={() => (interactionCounter += 1)}
-          onOpenChange={(isOpen) => (isReacting = isOpen)}
-        />
-      {/key}
     </div>
   </div>
 </div>

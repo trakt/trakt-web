@@ -31,7 +31,7 @@ function toLastWatchedMedia(
 
 export function useCurrentUserLastWatched() {
   const { ratings, history, user } = useUser();
-  const { wasDismissed } = useDismissals();
+  const { dismissals, wasDismissed } = useDismissals();
   const { hasCheckedRatingsSince } = useFreshRatings();
 
   const params = {
@@ -57,7 +57,13 @@ export function useCurrentUserLastWatched() {
   );
 
   return {
-    lastWatchedItem: combineLatest([list$, ratings, history, user]).pipe(
+    lastWatchedItem: combineLatest([
+      list$,
+      ratings,
+      history,
+      user,
+      dismissals,
+    ]).pipe(
       map(([$list, $ratings, $history, $user]) => {
         if (!$ratings || !$user.preferences.showRatingPrompt) {
           return null;
