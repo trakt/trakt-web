@@ -435,4 +435,18 @@ describe('TodayStoryViewer', () => {
       ),
     );
   });
+
+  it('should keep keyboard focus on the incoming story after it slides in', async () => {
+    await renderViewer(null);
+    const next = screen.getAllByRole('button', { name: 'Next story' })[0];
+    const zone = assertDefined(next);
+
+    zone.focus();
+    await fireEvent.click(zone, { detail: 0 });
+
+    await waitFor(() =>
+      expect(document.querySelectorAll('.viewer-slide')).toHaveLength(1),
+    );
+    expect(document.activeElement).toHaveAttribute('aria-label', 'Next story');
+  });
 });
