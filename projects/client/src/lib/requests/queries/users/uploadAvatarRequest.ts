@@ -4,17 +4,18 @@ type UserProfileImageRequest = {
   avatar: string;
 } & ApiParams;
 
-export async function uploadAvatarRequest({
+export function uploadAvatarRequest({
   avatar,
   fetch,
 }: UserProfileImageRequest): Promise<boolean> {
-  const { status } = await api({ fetch }).users.avatar({
-    body: {
-      user: {
-        avatar,
+  return api({ fetch })
+    .users.avatar({
+      body: {
+        user: {
+          avatar,
+        },
       },
-    },
-  });
-
-  return status >= 200 && status < 300;
+    })
+    .then(({ status }) => status >= 200 && status < 300)
+    .catch(() => false);
 }
