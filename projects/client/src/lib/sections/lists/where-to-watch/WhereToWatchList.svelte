@@ -111,12 +111,3 @@
     </SectionList>
   </div>
 {/if}
-
-<style>
-  .trakt-where-to-watch-list {
-    /* The default is overridden because the meta info has an icon and needs a bigger gap */
-    :global(.trakt-list-title) {
-      gap: var(--gap-xs);
-    }
-  }
-</style>

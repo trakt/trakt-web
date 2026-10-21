@@ -591,27 +591,82 @@
     }
   }
 
-  .trakt-segmented-select[data-style="minimal"] {
-    --segment-height: var(--segmented-select-minimal-segment-height);
+  /* No track: each option is its own 26px pill inside a 44px target. */
+  .trakt-segmented-select[data-style="pills"] {
+    --segment-height: calc(var(--ni-24) + var(--ni-2));
     --segment-inset: var(--ni-0);
-    --track-shadow: none;
-    --segment-block-inset: var(--gap-xs);
-    --selector-shadow:
-      inset 0 0 0 var(--border-thickness-xxs)
-        var(--color-segmented-selector-border),
-      var(--shadow-base);
+    --segment-block-inset: calc((var(--ni-44) - var(--segment-height)) / 2);
+    --segment-gap: var(--ni-6);
+    --segment-radius: var(--border-radius-pill);
+    --selector-shadow: inset 0 0 0 var(--border-thickness-xxs)
+      var(--color-segmented-selector-border);
 
-    margin-block: calc(-1 * var(--segment-block-inset));
+    --overshoot-room: var(--segmented-select-overshoot-room, var(--ni-32));
+
+    padding-inline: calc(var(--scroll-inset) + var(--overshoot-room));
+    margin-inline: calc(-1 * var(--overshoot-room));
+    max-width: calc(100% + 2 * var(--overshoot-room));
+    pointer-events: none;
 
     background-color: transparent;
+    box-shadow: none;
     backdrop-filter: none;
 
     .segment {
-      padding-inline: var(--ni-10);
+      pointer-events: auto;
+      padding-inline: var(--ni-12);
+      color: var(--color-text-secondary);
+      transition-property: background-color, color, box-shadow;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset-block: calc(-1 * var(--segment-block-inset));
+        inset-inline: 0;
+      }
+
+      &:not(.is-selected) {
+        background-color: var(--color-segmented-track-background);
+        box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+          var(--color-segmented-track-border);
+
+        @include for-mouse {
+          &:hover {
+            box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+              var(--color-filter-chip-border-hover);
+            color: var(--color-text-primary);
+          }
+        }
+      }
+
+      &.is-selected {
+        color: var(--color-segmented-selector-foreground);
+      }
+
+      /* Set on the span itself: the global sheet sizes every bare span. */
+      .label-text {
+        font-size: var(--font-size-text-small);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
 
       .segment-icon :global(svg) {
-        width: var(--ni-16);
-        height: var(--ni-16);
+        width: var(--ni-14);
+        height: var(--ni-14);
+      }
+    }
+
+    &[data-variant="selected-icon"] .segment {
+      .segment-icon {
+        width: var(--ni-14);
+        margin-inline-end: var(--ni-6);
+      }
+
+      &:not(.is-selected) .segment-icon {
+        width: 0;
+        margin-inline-end: 0;
       }
     }
   }

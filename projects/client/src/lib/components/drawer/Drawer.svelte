@@ -11,7 +11,7 @@
   import { onMount, type Snippet } from "svelte";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";
-  import ListTitle from "../lists/_internal/ListTitle.svelte";
+  import DrawerDrilldownTitle from "./_internal/DrawerDrilldownTitle.svelte";
   import type { ListDrilldownProps } from "../lists/section-list/models/ListDrilldownProps";
   import { useDrawerPortal } from "./_internal/useDrawerPortal";
   import { verticalDrag } from "./_internal/verticalDrag";
@@ -174,7 +174,7 @@
       <div class="trakt-drawer-title-container">
         <div class="trakt-drawer-title">
           {#if drilldown}
-            <ListTitle {title} {drilldown} />
+            <DrawerDrilldownTitle {title} {drilldown} />
           {:else}
             <h1 class="ellipsis">{title}</h1>
           {/if}

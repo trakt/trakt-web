@@ -9,7 +9,6 @@
   import type { FilterParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "./components/cta/CtaItem.svelte";
-  import EpisodeTypeMetaInfo from "./components/EpisodeTypeMetaInfo.svelte";
   import DrillableMediaList from "./drilldown/DrillableMediaList.svelte";
   import { useUpcomingItems } from "./stores/useUpcomingItems";
 
@@ -29,10 +28,6 @@
   });
 </script>
 
-{#snippet metaInfo()}
-  <EpisodeTypeMetaInfo />
-{/snippet}
-
 <DrillableMediaList
   id={{
     scope: "upcoming-list",
@@ -42,7 +37,6 @@
   variant="landscape"
   filter={$filterMap}
   {useList}
-  {metaInfo}
   urlBuilder={UrlBuilder.calendar}
   drilldownLabel={m.button_label_calendar()}
   title={m.list_title_upcoming_schedule()}
@@ -51,7 +45,7 @@
     <CalendarItem item={entry} />
   {/snippet}
 
-  {#snippet actions()}
+  {#snippet filters()}
     <EpisodeTypeToggles />
   {/snippet}
 

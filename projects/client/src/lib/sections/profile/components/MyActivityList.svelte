@@ -7,7 +7,6 @@
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import type { UserRatingEntry } from "$lib/requests/queries/users/userRatingsQuery.ts";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { profileDrawerNavigation } from "../_internal/profileDrawerNavigation.ts";
@@ -62,10 +61,6 @@
   );
 </script>
 
-{#snippet metaInfo()}
-  <ListMetaInfo text={$activityType.text()} />
-{/snippet}
-
 <SectionList
   id={{
     scope: "activity-list",
@@ -73,7 +68,6 @@
   }}
   items={$list}
   title={m.list_title_activity()}
-  {metaInfo}
   --height-list={heightList}
   {drilldown}
 >
@@ -100,7 +94,7 @@
     {/if}
   {/snippet}
 
-  {#snippet actions()}
+  {#snippet filters()}
     <Toggler value={$activityType.value} onChange={set} {options} />
   {/snippet}
 </SectionList>

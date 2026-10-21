@@ -8,7 +8,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { FilterParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import EpisodeTypeMetaInfo from "./components/EpisodeTypeMetaInfo.svelte";
   import DrillableMediaList from "./drilldown/DrillableMediaList.svelte";
   import { useReleasesItems } from "./stores/useReleasesItems";
 
@@ -22,10 +21,6 @@
   ) => useReleasesItems({ ...props, episodeType });
 </script>
 
-{#snippet metaInfo()}
-  <EpisodeTypeMetaInfo />
-{/snippet}
-
 <DrillableMediaList
   id={{
     scope: "releases-list",
@@ -36,7 +31,6 @@
   variant="landscape"
   filter={$filterMap}
   {useList}
-  {metaInfo}
   urlBuilder={({ type }) => UrlBuilder.releases({ mode: type })}
   drilldownLabel={m.button_label_view_releases()}
   title={m.list_title_releases()}
@@ -45,7 +39,7 @@
     <ReleasesCalendarItem item={entry} />
   {/snippet}
 
-  {#snippet actions()}
+  {#snippet filters()}
     <EpisodeTypeToggles />
   {/snippet}
 </DrillableMediaList>

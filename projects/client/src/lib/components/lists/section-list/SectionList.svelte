@@ -1,5 +1,4 @@
 <script lang="ts" generics="T extends { key: string }">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Crossfade from "$lib/components/Crossfade.svelte";
   import "$lib/features/edit-mode/edit-mode.css";
   import EditModeVisibilityButton from "$lib/features/edit-mode/EditModeVisibilityButton.svelte";
@@ -10,6 +9,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver.ts";
   import { scrollToChild } from "$lib/utils/actions/scrollToChild.ts";
   import { touchScroll } from "$lib/utils/actions/touchScroll.ts";
   import { trackVisibleRange } from "$lib/utils/actions/trackVisibleRange.ts";
@@ -24,7 +24,6 @@
   import type { ListProps } from "../ListProps";
   import { resetScroll } from "./_internal/resetScroll";
   import { useCollapsedList } from "./_internal/useCollapsedList";
-  import CollapseIcon from "./CollapseIcon.svelte";
   import type { ListVariant } from "./ListVariant";
   import type { ListDrilldownProps } from "./models/ListDrilldownProps";
   import type { SectionListId } from "./models/SectionListId";
@@ -39,7 +38,7 @@
     headerNavigationType?: DpadNavigationType;
     subtitle?: string;
     variant?: ListVariant;
-    titleAction?: Snippet;
+    collapsible?: boolean;
     drilldown?: ListDrilldownProps;
     contentHash?: string;
     trailingItem?: Snippet;
@@ -51,6 +50,10 @@
     /** Floats over the list, e.g. labels pinned to its corners. */
     overlay?: Snippet;
     listActions?: Snippet;
+    /** The size of the whole set, not only what the list shows. */
+    count?: number;
+    /** Narrows the list, beside its label. */
+    filters?: Snippet;
   };
 
   const {
@@ -67,13 +70,15 @@
     headerNavigationType,
     subtitle,
     variant = "default",
-    titleAction: externalTitleAction,
+    collapsible = true,
     contentHash,
     scrollToIndex,
     onVisibleRange,
     onUserScroll,
     overlay,
     listActions: externalListActions,
+    count,
+    filters,
   }: SectionListProps<T> = $props();
 
   const { isEditMode, section } = useEditMode();
@@ -88,8 +93,6 @@
   const { isEnabled } = useFeatureFlag();
   const isEditModeEnabled = $derived(isEnabled(FeatureFlag.EditMode));
 
-  const isHeaderVisible = $derived(Boolean(title));
-
   const { navigation } = useNavigation();
   const isVisible = writable($navigation === "dpad");
   const isMounted = writable(false);
@@ -103,12 +106,16 @@
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
+  // The header grows when its filters wrap or a credit sits under the label.
+  const { observedDimension: headerHeight, observeDimension: observeHeader } =
+    useDimensionObserver("height");
+
   onMount(() => {
     isMounted.set(true);
   });
 
   const isCollapsed = $derived.by(() => {
-    if (variant !== "default" || $isEditMode) {
+    if (variant !== "default" || $isEditMode || !collapsible) {
       return false;
     }
 
@@ -116,36 +123,31 @@
   });
 
   const hasListActions = $derived(Boolean(externalListActions));
+
+  const headerDrilldown = $derived(
+    isCollapsed || (items.length === 0 && drilldown?.mode !== "always")
+      ? undefined
+      : drilldown,
+  );
+
+  const collapse = $derived(
+    variant === "default" && !$isEditModeEnabled && collapsible
+      ? {
+          isCollapsed,
+          toggle,
+          label: isCollapsed
+            ? m.button_label_expand_list({ title: title ?? "" })
+            : m.button_label_collapse_list({ title: title ?? "" }),
+        }
+      : undefined,
+  );
 </script>
-
-{#snippet titleAction()}
-  {#if externalTitleAction}
-    {@render externalTitleAction()}
-  {:else if variant === "default"}
-    {#if !$isEditModeEnabled}
-      <ActionButton
-        onclick={toggle}
-        label={isCollapsed
-          ? m.button_label_expand_list({ title: title ?? "" })
-          : m.button_label_collapse_list({ title: title ?? "" })}
-        style="ghost"
-        color="default"
-      >
-        <CollapseIcon state={isCollapsed ? "collapsed" : "expanded"} />
-      </ActionButton>
-    {/if}
-  {/if}
-{/snippet}
-
-{#snippet defaultActions()}
-  {@render _externalActions?.()}
-{/snippet}
 
 {#snippet actions()}
   <RenderForFeature flag={FeatureFlag.EditMode}>
     {#snippet enabled()}
       {#if !$isEditMode}
-        {@render defaultActions()}
+        {@render _externalActions?.()}
       {:else}
         <EditModeVisibilityButton
           isHidden={$isHidden}
@@ -157,7 +159,7 @@
       {/if}
     {/snippet}
 
-    {@render defaultActions()}
+    {@render _externalActions?.()}
   </RenderForFeature>
 {/snippet}
 
@@ -173,26 +175,32 @@
     class="section-list-container"
     class:section-list-container-collapsed={isCollapsed}
     class:section-list-container-mounted={$isMounted}
-    class:section-list-container-no-header={!isHeaderVisible}
+    class:section-list-container-no-header={!title}
     class:section-list-has-drilldown={Boolean(drilldown)}
     class:section-list-has-list-actions={hasListActions}
     class:section-list-has-multiple-items={items.length > 1}
     data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${emptyStateClass}:not(:empty)`}
     data-variant={variant}
+    style:--section-list-header-height={$headerHeight > 0
+      ? `${$headerHeight}px`
+      : undefined}
   >
     {#if $isVisible}
-      {#if isHeaderVisible && title}
-        <ListHeader
-          {title}
-          {subtitle}
-          {titleAction}
-          {metaInfo}
-          actions={isCollapsed ? undefined : actions}
-          listActions={hasListActions ? listActions : undefined}
-          navigationType={headerNavigationType}
-          drilldown={isCollapsed ? undefined : drilldown}
-          disabled={items.length === 0 && drilldown?.mode !== "always"}
-        />
+      {#if title}
+        <div class="section-list-header" use:observeHeader>
+          <ListHeader
+            {title}
+            {subtitle}
+            {collapse}
+            {count}
+            {filters}
+            {metaInfo}
+            actions={isCollapsed ? undefined : actions}
+            listActions={hasListActions ? listActions : undefined}
+            navigationType={headerNavigationType}
+            drilldown={headerDrilldown}
+          />
+        </div>
       {/if}
       <div class="section-list" use:editModeAction>
         <Crossfade showA={items.length > 0}>

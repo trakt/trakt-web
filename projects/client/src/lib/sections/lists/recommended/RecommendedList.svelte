@@ -2,7 +2,6 @@
   import { page } from "$app/state";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import RecommendationModeMetaInfo from "$lib/features/recommendations/RecommendationModeMetaInfo.svelte";
   import RecommendationModeToggles from "$lib/features/recommendations/RecommendationModeToggles.svelte";
   import { useRecommendationMode } from "$lib/features/recommendations/useRecommendationMode";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -19,11 +18,7 @@
     type: DiscoverMode;
   };
 
-  const {
-    title,
-    drilldownLabel,
-    type,
-  }: RecommendationListProps = $props();
+  const { title, drilldownLabel, type }: RecommendationListProps = $props();
   const { filterMap } = useFilter();
   const { requestMode } = useRecommendationMode();
 
@@ -32,10 +27,6 @@
     mediaType: type === "media" ? undefined : type,
   });
 </script>
-
-{#snippet metaInfo()}
-  <RecommendationModeMetaInfo />
-{/snippet}
 
 <DrillableMediaList
   --height-override-card="var(--height-portrait-card-sm)"
@@ -55,7 +46,6 @@
   }}
   useList={(params) => useRecommendedList(params)}
   urlBuilder={() => UrlBuilder.recommended()}
-  {metaInfo}
 >
   {#snippet item(media)}
     <RecommendedListItem
@@ -65,7 +55,7 @@
     />
   {/snippet}
 
-  {#snippet actions()}
+  {#snippet filters()}
     <RecommendationModeToggles />
   {/snippet}
 

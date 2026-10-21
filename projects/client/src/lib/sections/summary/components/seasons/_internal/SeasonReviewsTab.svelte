@@ -1,7 +1,6 @@
 <script lang="ts">
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CommentLanguageSelect from "$lib/sections/summary/components/comments/_internal/CommentLanguageSelect.svelte";
   import { useCommentLanguage } from "$lib/sections/summary/components/comments/_internal/useCommentLanguage.svelte.ts";
   import AddCommentAction from "$lib/sections/summary/components/comments/_internal/comment-actions/AddCommentAction.svelte";
@@ -28,9 +27,6 @@
 
 <div class="season-reviews-tab">
   <DrawerTabTitle title={m.tab_text_seasons_reviews()}>
-    {#snippet metaInfo()}
-      <ListMetaInfo text={$sort.text()} />
-    {/snippet}
 
     {#snippet actions()}
       <Toggler value={$sort.value} onChange={setSort} {options} />

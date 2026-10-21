@@ -5069,6 +5069,10 @@
       "default": "You",
       "description": "Label marking the viewer's own entry in the leaderboard."
     },
+    "text_view_all": {
+      "default": "View all",
+      "description": "Text for the link at the end of a section header that opens every item in that section."
+    },
     "text_play_count": {
       "default": "{count} plays",
       "description": "Text shown to indicate the number of episode and movie plays a user had in a certain period.",

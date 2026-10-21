@@ -3,7 +3,6 @@
   import SkeletonList from "$lib/components/lists/SkeletonList.svelte";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages.ts";
-  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { toTranslatedLibrary } from "$lib/utils/formatting/string/toTranslatedLibrary";
@@ -21,6 +20,11 @@
   const librarySelection = useLibrarySelection();
   const { selection } = librarySelection;
   const activeLibrary: Library = $derived($selection.value);
+  const subtitle = $derived(
+    $selection.options.length > 1
+      ? undefined
+      : toTranslatedLibrary(activeLibrary),
+  );
 
   const { list, isLoading } = $derived(
     useLibraryList({
@@ -33,12 +37,7 @@
 </script>
 
 {#snippet metaInfo()}
-  <div class="trakt-library-meta">
-    <ListMetaInfo text={toTranslatedLibrary(activeLibrary)} />
-    {#if activeLibrary === "plex"}
-      <LibraryCollectionLimit />
-    {/if}
-  </div>
+  <LibraryCollectionLimit />
 {/snippet}
 
 <div class="trakt-library-list">
@@ -49,7 +48,8 @@
     }}
     items={$list}
     title={m.list_title_library()}
-    {metaInfo}
+    {subtitle}
+    metaInfo={activeLibrary === "plex" ? metaInfo : undefined}
     --height-list={mediaListHeightResolver("portrait")}
     drilldown={{
       href: UrlBuilder.library.me(activeLibrary),
@@ -61,7 +61,7 @@
       <LibraryMediaItem {item} />
     {/snippet}
 
-    {#snippet actions()}
+    {#snippet filters()}
       <LibraryToggler library={librarySelection} />
     {/snippet}
 
@@ -74,11 +74,3 @@
     {/snippet}
   </SectionList>
 </div>
-
-<style>
-  .trakt-library-meta {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xs);
-  }
-</style>
