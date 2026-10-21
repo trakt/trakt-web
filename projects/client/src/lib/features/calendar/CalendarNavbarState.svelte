@@ -21,9 +21,11 @@
   mode={$isDocked ? "minimal" : "full"}
   hasFilters
   showFilters={!$isDocked}
-  header={{
-    title,
-    metaInfo: $isApplicable ? $episodeType.text() : $current.text(),
-    actions: $isDocked ? undefined : titleActions,
-  }}
+  header={$isDocked
+    ? undefined
+    : {
+        title,
+        metaInfo: $isApplicable ? $episodeType.text() : $current.text(),
+        actions: titleActions,
+      }}
 />
