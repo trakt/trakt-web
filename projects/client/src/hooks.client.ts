@@ -35,6 +35,15 @@ const DYNAMIC_IMPORT_ERROR_PATTERNS: ReadonlyArray<RegExp> = [
   WEBKIT_MISSING_MODULE_PATTERN,
 ];
 
+const MODULE_LINK_ERROR_PATTERNS: ReadonlyArray<RegExp> = [
+  /does not provide an export named/,
+  /contains conflicting star exports/,
+  /ambiguous indirect export/,
+  /import not found/,
+  /Importing binding name '.*' is not found/,
+  /Importing binding name '.*' cannot be resolved by star export entries/,
+];
+
 const SAMPLED_ERROR_PATTERNS = [
   /^Failed to fetch( \((app|media)\.trakt\.tv\))?$/,
   /^Load failed( \((app|media)\.trakt\.tv\))?$/,
@@ -161,6 +170,15 @@ function isDynamicImportError(error: unknown): boolean {
   return DYNAMIC_IMPORT_ERROR_PATTERNS.some((pattern) => pattern.test(message));
 }
 
+function isModuleLinkError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error);
+  return MODULE_LINK_ERROR_PATTERNS.some((pattern) => pattern.test(message));
+}
+
+function isStaleChunkError(error: unknown): boolean {
+  return isDynamicImportError(error) || isModuleLinkError(error);
+}
+
 function hasChunkPath(path?: string): boolean {
   if (!path) {
     return false;
@@ -183,9 +201,15 @@ type RecoveryAction = 'purge-and-reload' | 'reload';
 function getRecoveryForRejection(
   event: PromiseRejectionEvent,
 ): RecoveryAction | undefined {
-  if (isDynamicImportError(event.reason)) return 'purge-and-reload';
+  if (isStaleChunkError(event.reason)) return 'purge-and-reload';
   if (hasChunkPath(getRejectionUrl(event.reason))) return 'purge-and-reload';
   return undefined;
+}
+
+function isChunkLinkError(event: ErrorEvent): boolean {
+  if (!hasChunkPath(event.filename)) return false;
+
+  return isModuleLinkError(event.message);
 }
 
 function getRecoveryForError(event: ErrorEvent): RecoveryAction | undefined {
@@ -197,7 +221,7 @@ function getRecoveryForError(event: ErrorEvent): RecoveryAction | undefined {
     return hasChunkPath(event.target.src) ? 'purge-and-reload' : undefined;
   }
 
-  return hasChunkPath(event.filename) ? 'reload' : undefined;
+  return isChunkLinkError(event) ? 'reload' : undefined;
 }
 
 function getRecoveryForClientEvent(
@@ -252,7 +276,7 @@ function triggerReloadOnce(action: RecoveryAction): void {
 }
 
 function reloadOnceForStaleDeploy(error: unknown): void {
-  if (!isDynamicImportError(error)) return;
+  if (!isStaleChunkError(error)) return;
   triggerReloadOnce('purge-and-reload');
 }
 
