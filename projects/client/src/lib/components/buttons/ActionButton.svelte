@@ -19,6 +19,7 @@
     disabled,
     tooltip = true,
     classList = "",
+    progress,
     ...props
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
 
@@ -64,6 +65,8 @@
       "data-size": size,
       "data-style": style,
       "data-dpad-navigation": navigationType,
+      "data-progress": progress ? "" : undefined,
+      style: progress ? `--action-button-progress: ${progress}` : undefined,
     }),
   });
 </script>
@@ -165,6 +168,53 @@
 
   :global(#{$b}:focus-visible) {
     outline-offset: var(--ni-2);
+  }
+
+  :global(#{$b}[data-progress]) {
+    --action-button-progress-inset: var(--ni-4);
+
+    position: relative;
+    isolation: isolate;
+  }
+
+  :global(#{$b}[data-progress]::before) {
+    --action-button-progress-min: calc(
+      var(--button-size) - 2 * var(--action-button-progress-inset)
+    );
+
+    content: "";
+    position: absolute;
+    inset-block: var(--action-button-progress-inset);
+    inset-inline-start: var(--action-button-progress-inset);
+    z-index: -1;
+
+    width: max(
+      var(--action-button-progress-min),
+      calc(
+        (100% - 2 * var(--action-button-progress-inset)) *
+          var(--action-button-progress) / 100
+      )
+    );
+    border-radius: var(--border-radius-pill);
+    background-color: color-mix(
+      in srgb,
+      var(--surface-action-button) 26%,
+      transparent
+    );
+
+    transition: var(--transition-increment) ease-in;
+    transition-property: width, background-color;
+  }
+
+  @include for-mouse {
+    :global(#{$b}[data-progress]:hover#{$on}::before),
+    :global(#{$b}[data-progress]:focus-visible#{$on}::before) {
+      background-color: color-mix(
+        in srgb,
+        var(--surface-action-button) 40%,
+        transparent
+      );
+    }
   }
 
   :global(#{$b}[disabled]),
