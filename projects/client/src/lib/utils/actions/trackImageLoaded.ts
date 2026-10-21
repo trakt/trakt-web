@@ -1,3 +1,5 @@
+import { untrack } from 'svelte';
+
 export type TrackImageLoadedProps = {
   src: string;
   onLoaded: (loaded: boolean) => void;
@@ -12,7 +14,8 @@ export function trackImageLoaded(
   // The browser does not refire `load` when a cached or unchanged src is
   // assigned, so reading `complete` is the only reliable signal. `naturalWidth`
   // guards against a completed-but-broken image.
-  const sync = () => notify(node.complete && node.naturalWidth > 0);
+  const sync = () =>
+    untrack(() => notify(node.complete && node.naturalWidth > 0));
 
   node.addEventListener('load', sync);
   node.addEventListener('error', sync);
