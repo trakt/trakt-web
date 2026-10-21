@@ -15,5 +15,5 @@ export function reactCommentRequest({
         reaction_type,
       },
     })
-    .then(({ status }) => status === 201);
+    .then(({ status }) => status === 204);
 }
