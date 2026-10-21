@@ -91,7 +91,15 @@
     }
 
     &[data-side="end"] {
-      inset-inline-end: var(--layout-distance-side);
+      --label-row-width: calc(
+        var(--list-landscape-item-count) *
+          (var(--width-landscape-card) + var(--list-gap)) - var(--list-gap)
+      );
+
+      inset-inline-end: max(
+        calc(100% - var(--layout-distance-side) - var(--label-row-width)),
+        var(--layout-distance-side)
+      );
     }
 
     /* In the strip the list reserves above the stills. */
