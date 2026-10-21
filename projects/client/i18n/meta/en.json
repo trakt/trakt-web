@@ -1596,6 +1596,94 @@
       "default": "Not started",
       "description": "Text shown when a user has not watched any episodes in a season."
     },
+    "text_watch_state_count": {
+      "default": "{watched} of {total}",
+      "description": "Count of watched episodes out of the aired episodes in a season, shown on each season row of the watch progress drawer.",
+      "variables": {
+        "watched": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "text_watch_state_fraction": {
+      "default": "{watched} / {total}",
+      "description": "Watched episodes out of all episodes of a show, shown next to the big percentage in the watch progress drawer.",
+      "variables": {
+        "watched": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "text_watch_state_episodes": {
+      "default": "episodes",
+      "description": "Small caption under the watched episode count (for example '19 / 22') in the watch progress drawer."
+    },
+    "button_text_finish_season": {
+      "default": "Finish",
+      "description": "Short button inside an expanded season of the watch progress drawer. Marks the remaining aired episodes of that season as watched. Keep it as short as possible."
+    },
+    "button_label_finish_season": {
+      "default": "Mark the remaining {count} episodes of {season} as watched",
+      "description": "Accessible label and tooltip for the finish season button in the watch progress drawer. The season is a name like 'Season 2' or 'Specials'.",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "season": {
+          "type": "string"
+        }
+      }
+    },
+    "text_watch_state_complete": {
+      "default": "Complete",
+      "description": "Status on a season row of the watch progress drawer when the user has watched every aired episode of that season."
+    },
+    "text_watch_state_not_aired": {
+      "default": "Not aired yet",
+      "description": "Status on a season row of the watch progress drawer when no episode of that season has aired yet."
+    },
+    "button_label_toggle_season_episodes": {
+      "default": "Show or hide the episodes of {season}",
+      "description": "Accessible label for the season row in the watch progress drawer, which expands to show the episodes of that season. The season is a name like 'Season 1' or 'Specials'.",
+      "variables": {
+        "season": {
+          "type": "string"
+        }
+      }
+    },
+    "text_episode_watch_state_watched": {
+      "default": "Episode {number}, watched",
+      "description": "Accessible label for an episode chip in the watch progress drawer when the user has watched that episode.",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "text_episode_watch_state_unwatched": {
+      "default": "Episode {number}, not watched",
+      "description": "Accessible label for an episode chip in the watch progress drawer when the user has not watched that episode yet.",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "text_episode_watch_state_upcoming": {
+      "default": "Episode {number}, not aired yet",
+      "description": "Accessible label for an episode chip in the watch progress drawer when the episode has not aired yet.",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
     "text_season_number": {
       "default": "Season {number}",
       "description": "Text for the season number of a show. This should be as short and concise as possible.",
