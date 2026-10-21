@@ -11,6 +11,8 @@
   } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { markAsWatchedDrawerStore } from "./_internal/markAsWatchedDrawerStore";
   import { useWatchProgress } from "./_internal/useWatchProgress";
+  import { toWatchStateShow } from "./_internal/watch-state/toWatchStateShow";
+  import { watchStateDrawerStore } from "./_internal/watch-state/watchStateDrawerStore";
 
   type TrackButtonProps = MarkAsWatchedStoreProps & {
     title: string;
@@ -42,7 +44,18 @@
     }),
   );
 
+  const watchStateShow = $derived(toWatchStateShow(target));
+
   const handler = (ev: MouseEvent) => {
+    if (watchStateShow) {
+      watchStateDrawerStore.open({
+        title,
+        show: watchStateShow,
+        mediaStore: { ...target },
+      });
+      return;
+    }
+
     if ($isWatched) {
       confirmRemoveWatched(ev);
       return;
@@ -55,7 +68,11 @@
 <trakt-track-action class:is-watchable={isWatchable}>
   <ActionButton
     disabled={$isMarkingAsWatched || !isWatchable}
-    label={i18n.label({ title, isRemovable: $isWatched, isRewatching: false })}
+    label={i18n.label({
+      title,
+      isRemovable: $isWatched && !watchStateShow,
+      isRewatching: false,
+    })}
     onclick={handler}
     variant={$isWatched ? "primary" : "secondary"}
     color="purple"

@@ -15,10 +15,16 @@
     title: string;
     metaInfo?: string;
     onConfirm: (watchedAt: Date) => void;
+    elevated?: boolean;
   };
 
-  const { onClose, title, metaInfo, onConfirm }: HistorySlotDrawerProps =
-    $props();
+  const {
+    onClose,
+    title,
+    metaInfo,
+    onConfirm,
+    elevated = false,
+  }: HistorySlotDrawerProps = $props();
 
   const now = new Date();
   let selectedDate = $state<Date | undefined>(undefined);
@@ -36,6 +42,7 @@
   {onClose}
   {title}
   {metaInfo}
+  {elevated}
   size={hasHistory ? "large" : "auto"}
   onOpened={() => (isOpen = true)}
 >

@@ -29,11 +29,13 @@
     onClose,
     title,
     onWatched,
+    elevated = false,
     ...target
   }: {
     onClose: () => void;
     title: string;
     onWatched?: () => void;
+    elevated?: boolean;
   } & MarkAsWatchedStoreProps = $props();
 
   const { confirm } = useConfirm();
@@ -140,7 +142,7 @@
   });
 </script>
 
-<Drawer {onClose} {title} {metaInfo}>
+<Drawer {onClose} {title} {metaInfo} {elevated}>
   <DropdownGroup>
     {#if isSingleMedia}
       <CheckInAction
@@ -210,6 +212,7 @@
 
 {#if showHistoryPicker}
   <HistorySlotDrawer
+    {elevated}
     onClose={() => (showHistoryPicker = false)}
     {title}
     {metaInfo}

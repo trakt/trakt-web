@@ -5,6 +5,7 @@ type MarkAsWatchedProps = {
   title: string;
   mediaStore: MarkAsWatchedStoreProps;
   onWatched?: () => void;
+  elevated?: boolean;
 };
 
 export type MarkAsWatchedDrawerState =

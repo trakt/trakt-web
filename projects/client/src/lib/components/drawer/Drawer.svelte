@@ -27,11 +27,13 @@
     title?: string;
     dismissal?: "auto" | "escape-only" | "manual";
     trapSelector?: string;
-    size?: "normal" | "large" | "auto";
+    size?: "normal" | "medium" | "large" | "auto";
     badge?: Snippet;
     leading?: Snippet;
     actions?: Snippet;
     footer?: Snippet;
+    footerDivider?: "solid" | "fading";
+    background?: Snippet;
     metaInfo?: string | Snippet;
     onOpened?: () => void;
     classList?: string;
@@ -55,6 +57,8 @@
     leading,
     actions,
     footer,
+    footerDivider = "solid",
+    background,
     metaInfo,
     onOpened,
     classList = "",
@@ -148,6 +152,12 @@
     <div class="trakt-drawer-vip-background"></div>
   {/if}
 
+  {#if background}
+    <div class="trakt-drawer-background" aria-hidden="true">
+      {@render background()}
+    </div>
+  {/if}
+
   <RenderFor audience="all" device={["mobile"]}>
     <div
       class="trakt-drawer-drag-handle"
@@ -215,7 +225,7 @@
   </div>
 
   {#if footer}
-    <div class="trakt-drawer-footer">
+    <div class="trakt-drawer-footer" data-divider={footerDivider}>
       {@render footer()}
     </div>
   {/if}
@@ -347,6 +357,10 @@
       }
     }
 
+    &[data-size="medium"] {
+      --drawer-size: var(--ni-440);
+    }
+
     &[data-size="large"] {
       --drawer-size: var(--ni-480);
     }
@@ -388,6 +402,13 @@
         transition:
           height var(--transition-increment) ease-in-out,
           translate var(--transition-increment) ease-in-out;
+      }
+
+      &[data-size="medium"] {
+        --mobile-drawer-height: min(
+          max(var(--ni-380), 75dvh),
+          calc(100dvh - env(safe-area-inset-top, 0px))
+        );
       }
 
       &:global(.is-fullscreen),
@@ -485,6 +506,24 @@
     padding-inline: var(--drawer-padding);
     padding-top: var(--gap-s);
     border-top: var(--ni-1) solid var(--color-drawer-border);
+
+    &[data-divider="fading"] {
+      position: relative;
+      border-top: none;
+
+      &::before {
+        @include fading-divider(var(--ni-1));
+      }
+    }
+  }
+
+  .trakt-drawer-background {
+    position: absolute;
+    inset: 0;
+    z-index: var(--layer-background);
+
+    overflow: hidden;
+    pointer-events: none;
   }
 
   .trakt-drawer-vip-background {
