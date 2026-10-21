@@ -3,6 +3,8 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
+  import type { SwipeDirection } from "$lib/components/gestures/models/SwipeDirection";
+  import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import GridIcon from "$lib/components/icons/GridIcon.svelte";
   import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
@@ -10,11 +12,14 @@
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { trapTabFocus } from "$lib/utils/actions/trapTabFocus.ts";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { onMount, tick, untrack } from "svelte";
+  import { cubicOut } from "svelte/easing";
+  import { fade, fly } from "svelte/transition";
   import type { TodayCloseReason } from "../models/TodayCloseReason.ts";
   import type { TodayStoryFrame } from "../models/TodayStoryFrame.ts";
   import type { TodayStoryGroup } from "../models/TodayStoryGroup.ts";
@@ -31,6 +36,9 @@
   const FRAME_DURATION = time.seconds(10);
   const FLIP_HINT_SEEN_KEY = "trakt-today-flip-hint-seen";
   const HOLD_THRESHOLD = time.seconds(0.3);
+  const STORY_TRANSITION = 150;
+  const SWIPE_DRAG_CAP = 0.25;
+  const SWIPE_DIRECTIONS: SwipeDirection[] = ["left", "right"];
 
   const { groups: initialGroups, startKey, source, onClose }:
     TodayStoryViewerProps = $props();
@@ -65,6 +73,32 @@
     group?.type === "title" ? group.story.media.title : m.text_today_for_you(),
   );
   const cover = $derived(frame ? toFrameMedia(frame).cover.url.medium : null);
+
+  const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
+  const isTouch = useMedia(WellKnownMediaQuery.touch);
+  let slideSign = $state(1);
+  let swipeOffset = $state(0);
+
+  const slideAway = (
+    _node: Element,
+    { from, to, duration }: { from: number; to: string; duration: number },
+  ) => ({
+    duration,
+    easing: cubicOut,
+    css: (t: number, u: number) =>
+      `transform: translateX(calc(${from}px + ${to} * ${u})); opacity: ${t}`,
+  });
+
+  const transitionDuration = $derived($isReducedMotion ? 0 : STORY_TRANSITION);
+  const slideIn = $derived({
+    x: `${slideSign * 33}%`,
+    duration: transitionDuration,
+  });
+  const slideOut = $derived({
+    from: swipeOffset,
+    to: `${-slideSign * 33}%`,
+    duration: transitionDuration,
+  });
 
   let isFlipped = $state(false);
   let isFlipHintSeen = $state(
@@ -104,7 +138,12 @@
     if (event.detail > 0) return;
 
     tick().then(() =>
-      dialog?.querySelector<HTMLElement>(`[data-zone="${zone}"]`)?.focus(),
+      [
+        ...(dialog?.querySelectorAll<HTMLElement>(`[data-zone="${zone}"]`) ??
+          []),
+      ]
+        .at(-1)
+        ?.focus(),
     );
   };
 
@@ -189,6 +228,7 @@
     if (!shown) return;
 
     resetFrameState();
+    slideSign = (index >= groupIndex ? 1 : -1) * (isRtl() ? -1 : 1);
     groupKey = shown.key;
     frameIndex = frame;
     enterGroup(shown);
@@ -237,6 +277,18 @@
   };
 
   const isRtl = () => document.dir === "rtl";
+
+  const swipeGroup = (
+    { direction }: { direction: SwipeDirection | "inactive" },
+  ) => {
+    const isTowardsStart = (direction === "right") !== isRtl();
+    const target = isTowardsStart ? groupIndex - 1 : groupIndex + 1;
+    if (target < 0 || target >= groups.length) return;
+
+    const sign = direction === "right" ? 1 : -1;
+    swipeOffset = sign * window.innerWidth * SWIPE_DRAG_CAP;
+    showGroup(target, 0);
+  };
 
   const keyTriggers = [
     { key: "ArrowRight", callback: () => (isRtl() ? previous() : next()) },
@@ -289,11 +341,17 @@
   use:portalToBody
   use:trapTabFocus
 >
-  {#if cover}
-    <div class="viewer-backdrop">
-      <CrossOriginImage src={cover} alt="" />
-    </div>
-  {/if}
+  {#key group?.key}
+    {#if cover}
+      <div
+        class="viewer-backdrop"
+        in:fade={{ duration: transitionDuration }}
+        out:fade={{ duration: transitionDuration }}
+      >
+        <CrossOriginImage src={cover} alt="" />
+      </div>
+    {/if}
+  {/key}
 
   <div class="viewer-side">
     <ActionButton
@@ -361,18 +419,20 @@
       </ActionButton>
     </header>
 
-    <div class="viewer-stage">
-      {#if frame}
-        {#key frame.key}
-          <TodayStoryFrameContent
-            {frame}
-            {isHinting}
-            bind:isFlipped
-            onTap={tapZone}
-            onPressStart={press}
-            onPressEnd={release}
-          />
-        {/key}
+    <div class="viewer-stage" class:is-swipe-release={swipeOffset !== 0}>
+      {#if $isTouch}
+        <SwipeX
+          classList="viewer-slides"
+          directions={SWIPE_DIRECTIONS}
+          onSwipe={swipeGroup}
+        >
+          {#snippet indicator()}{/snippet}
+          {@render slides()}
+        </SwipeX>
+      {:else}
+        <div class="viewer-slides">
+          {@render slides()}
+        </div>
       {/if}
     </div>
   </div>
@@ -388,6 +448,31 @@
     </ActionButton>
   </div>
 </dialog>
+
+{#snippet slides()}
+  {#key group?.key}
+    <div
+      class="viewer-slide"
+      in:fly={slideIn}
+      out:slideAway={slideOut}
+      onoutrostart={(event) => (event.currentTarget.inert = true)}
+      onoutroend={() => (swipeOffset = 0)}
+    >
+      {#if frame}
+        {#key frame.key}
+          <TodayStoryFrameContent
+            {frame}
+            {isHinting}
+            bind:isFlipped
+            onTap={tapZone}
+            onPressStart={press}
+            onPressEnd={release}
+          />
+        {/key}
+      {/if}
+    </div>
+  {/key}
+{/snippet}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -535,8 +620,26 @@
 
       display: flex;
       flex-direction: column;
-      gap: var(--gap-m);
       flex-grow: 1;
+      min-height: 0;
+
+      :global(.viewer-slides) {
+        display: grid;
+        grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+        flex-grow: 1;
+        min-height: 0;
+      }
+
+      &.is-swipe-release :global(.viewer-slides) {
+        transition: none;
+      }
+    }
+
+    .viewer-slide {
+      grid-area: 1 / 1;
+
+      display: flex;
+      flex-direction: column;
       min-height: 0;
     }
 
