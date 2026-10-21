@@ -114,7 +114,7 @@
 
   {#if style === "action"}
     <QueuedIndicator {isQueued}>
-      <ActionButton style="ghost" {...commonProps} variant={mode === "ask" ? "primary" : variant} {...props}>
+      <ActionButton style="ghost" {...commonProps} variant="primary" {...props}>
         {@render watchIcon("small")}
       </ActionButton>
     </QueuedIndicator>
