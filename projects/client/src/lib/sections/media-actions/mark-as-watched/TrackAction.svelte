@@ -10,6 +10,7 @@
     type MarkAsWatchedStoreProps,
   } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { markAsWatchedDrawerStore } from "./_internal/markAsWatchedDrawerStore";
+  import { useWatchProgress } from "./_internal/useWatchProgress";
 
   type TrackButtonProps = MarkAsWatchedStoreProps & {
     title: string;
@@ -24,6 +25,7 @@
 
   const { isMarkingAsWatched, isWatchable, isWatched, removeWatched } =
     $derived(useMarkAsWatched(target));
+  const { progress } = $derived(useWatchProgress(target));
 
   const { confirm } = useConfirm();
   const openMarkAsWatchedDrawer = $derived(() => {
@@ -57,6 +59,7 @@
     onclick={handler}
     variant={$isWatched ? "primary" : "secondary"}
     color="purple"
+    progress={$isWatched ? undefined : $progress}
   >
     <TrackIcon state={$isWatched ? "watched" : "unwatched"} />
   </ActionButton>

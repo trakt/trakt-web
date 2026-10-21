@@ -13,4 +13,5 @@ export type TraktActionButtonProps = ButtonProps & {
    * wraps the button in its own tooltip with bespoke copy or placement.
    */
   tooltip?: boolean;
+  progress?: number;
 };
