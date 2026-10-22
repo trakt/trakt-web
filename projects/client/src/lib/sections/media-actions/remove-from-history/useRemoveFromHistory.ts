@@ -4,11 +4,12 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { episodeActivityHistoryRequest } from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
+import { movieActivityHistoryRequest } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { removeRatingRequest } from '$lib/requests/sync/removeRatingRequest.ts';
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
 import { toRemoveRatingsPayload } from '$lib/requests/sync/toRemoveRatingsPayload.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
-import { filter } from 'rxjs';
 
 type OrphanedRating = number | undefined;
 
@@ -26,37 +27,33 @@ export function useRemoveFromHistory(props: UseRemoveFromHistoryProps) {
   // Trakt id of the media itself; `id` above is the history entry (play) id.
   const traktId = props.type === 'movie' ? props.movie.id : props.episode.id;
 
-  const { history, ratings } = useUser();
+  const { ratings } = useUser();
   const { track } = useTrack(AnalyticsEvent.RemoveFromHistory);
 
-  // Only a single remaining play counts as "last", so a rewatched item keeps
-  // its rating. Read pre-removal.
-  // `history` emits `null` while unsettled and resolve() only skips
-  // `undefined`, so gate on a settled value or we'd read an empty history.
+  const fetchPlays = async (): Promise<number | undefined> => {
+    const params = { slug: 'me', id: traktId, limit: 2 };
+    const response =
+      props.type === 'movie'
+        ? await movieActivityHistoryRequest(params)
+        : await episodeActivityHistoryRequest(params);
+
+    return response.status === 200 ? response.body.length : undefined;
+  };
+
   const getOrphanedRating = async (): Promise<number | undefined> => {
-    const [currentHistory, currentRatings] = await Promise.all([
-      resolve(history.pipe(filter((value) => value !== null))),
+    const [plays, currentRatings] = await Promise.all([
+      fetchPlays().catch(() => undefined),
       resolve(ratings),
     ]);
 
-    if (!currentHistory || !currentRatings) {
+    if (plays !== 1 || !currentRatings) {
       return undefined;
     }
 
-    switch (props.type) {
-      case 'movie':
-        return currentHistory.movies.get(traktId)?.plays === 1
-          ? currentRatings.movies.get(traktId)?.rating
-          : undefined;
-      case 'episode': {
-        const episode = currentHistory.shows
-          .get(props.show.id)
-          ?.episodes.find((entry) => entry.episodeId === traktId);
-        return episode?.plays === 1
-          ? currentRatings.episodes.get(traktId)?.rating
-          : undefined;
-      }
-    }
+    const rated =
+      props.type === 'movie' ? currentRatings.movies : currentRatings.episodes;
+
+    return rated.get(traktId)?.rating;
   };
 
   const historyInvalidations = (orphanedRating: OrphanedRating) =>
