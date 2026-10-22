@@ -40,6 +40,7 @@
 </script>
 
 <RecommendationSourcesDrawer
+  isLoading={!reasons}
   sources={reasons?.sources ?? []}
   people={reasons?.people ?? []}
   {title}
