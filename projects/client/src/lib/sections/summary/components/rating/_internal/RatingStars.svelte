@@ -153,6 +153,8 @@
     previewStars = null;
     clearLayout();
 
+    if (stars === committedStars) return;
+
     // Scrubbing (or clicking) to the leading edge yields 0, which clears the
     // rating.
     if (stars <= 0) {
