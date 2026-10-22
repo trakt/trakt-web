@@ -1,5 +1,6 @@
 <script lang="ts">
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import FavoriteIcon from "$lib/components/icons/FavoriteIcon.svelte";
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
   import SparkleIcon from "$lib/components/icons/SparkleIcon.svelte";
@@ -24,6 +25,7 @@
   type RecommendationSourcesDrawerProps = {
     sources: RecommendationSource[];
     people?: RecommendationPeopleReason[];
+    isLoading?: boolean;
     title: string;
     onClose: () => void;
   };
@@ -31,6 +33,7 @@
   const {
     sources,
     people = [],
+    isLoading = false,
     title,
     onClose,
   }: RecommendationSourcesDrawerProps = $props();
@@ -131,6 +134,11 @@
   metaInfo={m.drawer_title_recommendation_sources()}
 >
   <div class="trakt-recommendation-sources-drawer">
+    {#if isLoading}
+      <div class="recommendation-sources-loading">
+        <LoadingIndicator size="large" />
+      </div>
+    {/if}
     {#each $localizedPeople.length > 0 ? $localizedPeople : people as reason (reason.person.id)}
       <div class="recommendation-sources-section">
         {@render sectionHeader(
@@ -233,6 +241,12 @@
 </Drawer>
 
 <style lang="scss">
+  .recommendation-sources-loading {
+    display: flex;
+    justify-content: center;
+    padding: var(--gap-xl) 0;
+  }
+
   .trakt-recommendation-sources-drawer {
     display: flex;
     flex-direction: column;
