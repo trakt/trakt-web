@@ -1,7 +1,5 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
-  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import SparkleIcon from "$lib/components/icons/SparkleIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
@@ -10,17 +8,13 @@
   import DefaultMediaPopupActions from "../components/DefaultMediaPopupActions.svelte";
   import type { MediaCardProps } from "../components/models/MediaCardProps";
   import type { RecommendedEntry } from "./useRecommendedList";
-  import RecommendationSourcesDrawer from "./RecommendationSourcesDrawer.svelte";
-  import { toRecommendationWhyTracking } from "./toRecommendationWhyTracking.ts";
+  import RecommendationReasonsDrawerHost from "./RecommendationReasonsDrawerHost.svelte";
 
   const { type, media, style, mode }: MediaCardProps<RecommendedEntry> =
     $props();
 
   let isSourcesDrawerOpen = $state(false);
-  const { track } = useTrack(AnalyticsEvent.RecommendationWhy);
-
   const openSources = () => {
-    track(toRecommendationWhyTracking(media));
     isSourcesDrawerOpen = true;
   };
 </script>
@@ -57,7 +51,9 @@
 </DefaultMediaItem>
 
 {#if isSourcesDrawerOpen}
-  <RecommendationSourcesDrawer
+  <RecommendationReasonsDrawerHost
+    type={media.type}
+    id={media.id}
     sources={media.sources}
     people={media.people}
     title={media.title}
