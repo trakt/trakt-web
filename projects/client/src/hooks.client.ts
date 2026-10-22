@@ -5,6 +5,7 @@ import '$lib/polyfills/mapGroupBy.ts';
 import '$lib/polyfills/randomUUID.ts';
 import '$lib/polyfills/toReversed.ts';
 import '$lib/polyfills/toSorted.ts';
+import { isBlockedEmbedEvent } from '$lib/features/errors/isBlockedEmbedEvent.ts';
 import { isInjectedScriptEvent } from '$lib/features/errors/isInjectedScriptEvent.ts';
 import { toHandledErrorContext } from '$lib/features/errors/toHandledErrorContext.ts';
 import { captureWebviewSession } from '$lib/features/webview/captureWebviewSession.ts';
@@ -128,6 +129,10 @@ Sentry.init({
   denyUrls: [/\/plyr(\.[a-z]+)*\.js/, /www-widgetapi\.js/, /^userscript:/],
   beforeSend(event) {
     if (isServiceWorkerRejection(event)) {
+      return null;
+    }
+
+    if (isBlockedEmbedEvent(event)) {
       return null;
     }
 
