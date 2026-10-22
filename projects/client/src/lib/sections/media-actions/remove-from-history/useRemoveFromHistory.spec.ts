@@ -1,4 +1,7 @@
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { MovieActivityHistoryResponseMock } from '$mocks/data/users/response/MovieActivityHistoryResponseMock.ts';
+import { server } from '$mocks/server.ts';
+import { http, HttpResponse } from 'msw';
 import {
   useRemoveFromHistory,
   type UseRemoveFromHistoryProps,
@@ -12,14 +15,16 @@ const removeRatingSpy = vi.fn((_body?: unknown) => Promise.resolve(true));
 vi.mock('$lib/requests/sync/removeRatingRequest.ts', () => ({
   removeRatingRequest: (body: unknown) => removeRatingSpy(body),
 }));
+const removeWatchedSpy = vi.fn((_body?: unknown) => Promise.resolve(true));
 vi.mock('$lib/requests/sync/removeWatchedRequest.ts', () => ({
-  removeWatchedRequest: () => Promise.resolve(true),
+  removeWatchedRequest: (body: unknown) => removeWatchedSpy(body),
 }));
 
 describe('useRemoveFromHistory', () => {
   beforeEach(() => {
     setAuthorization(true);
     removeRatingSpy.mockClear();
+    removeWatchedSpy.mockClear();
   });
 
   const runCommonTests = (
@@ -87,6 +92,49 @@ describe('useRemoveFromHistory', () => {
 
       await removeFromHistory();
 
+      expect(removeRatingSpy).not.toHaveBeenCalled();
+    });
+
+    it('should keep the rating when other plays remain', async () => {
+      server.use(
+        http.get('http://localhost/users/me/history/movies*', () =>
+          HttpResponse.json([
+            ...MovieActivityHistoryResponseMock,
+            { ...MovieActivityHistoryResponseMock.at(0), id: 2 },
+          ]),
+        ),
+      );
+
+      const { removeFromHistory } = await renderStore(() =>
+        useRemoveFromHistory({
+          type: 'movie' as const,
+          id: 42,
+          movie: { id: 916302 },
+        }),
+      );
+
+      await removeFromHistory();
+
+      expect(removeRatingSpy).not.toHaveBeenCalled();
+    });
+
+    it('should still remove the play when the plays lookup fails', async () => {
+      server.use(
+        http.get('http://localhost/users/me/history/movies*', () =>
+          HttpResponse.error(),
+        ),
+      );
+
+      const { removeFromHistory } = await renderStore(() =>
+        useRemoveFromHistory({
+          type: 'movie' as const,
+          id: 42,
+          movie: { id: 916302 },
+        }),
+      );
+
+      await expect(removeFromHistory()).resolves.toBeUndefined();
+      expect(removeWatchedSpy).toHaveBeenCalled();
       expect(removeRatingSpy).not.toHaveBeenCalled();
     });
   });
