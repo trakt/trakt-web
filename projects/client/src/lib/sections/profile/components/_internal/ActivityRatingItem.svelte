@@ -1,9 +1,11 @@
 <script lang="ts">
   import type { UserRatingEntry } from "$lib/requests/queries/users/userRatingsQuery.ts";
-  import UserRating from "$lib/sections/components/UserRating.svelte";
+  import RateAction from "$lib/sections/media-actions/rating/RateAction.svelte";
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import MediaItem from "$lib/sections/lists/components/MediaItem.svelte";
   import MediaSummaryCard from "$lib/sections/lists/components/MediaSummaryCard.svelte";
+  import type { RateNowProps } from "$lib/sections/summary/components/rating/models/RateNowProps";
+  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
 
   const {
@@ -31,10 +33,40 @@
           : undefined,
       },
   );
+
+  const rateTarget = $derived.by<RateNowProps>(() => {
+    switch (entry.type) {
+      case "movie":
+        return { type: "movie", media: entry.movie };
+      case "show":
+        return { type: "show", media: entry.show };
+      case "season":
+        return { type: "season", media: entry.season, show: entry.show };
+      case "episode":
+        return { type: "episode", media: entry.episode, show: entry.show };
+    }
+  });
+
+  const rateTitle = $derived.by(() => {
+    switch (entry.type) {
+      case "movie":
+        return entry.movie.title;
+      case "show":
+        return entry.show.title;
+      case "season":
+        return seasonLabel(entry.season.number, entry.show.title);
+      case "episode":
+        return episodeActivityTitle(entry.episode, entry.show);
+    }
+  });
 </script>
 
 {#snippet action()}
-  <UserRating rating={entry.rating} />
+  <RateAction
+    target={rateTarget}
+    title={rateTitle}
+    style={style === "cover" ? "cover" : "summary"}
+  />
 {/snippet}
 
 {#if entry.type === "season" && style !== "cover"}
