@@ -4,13 +4,13 @@ import { toJellyfinErrorText } from './toJellyfinErrorText.ts';
 describe('toJellyfinErrorText', () => {
   it('explains an unreachable server', () => {
     expect(toJellyfinErrorText('server_unreachable')).to.equal(
-      "Trakt can't reach that server. Make sure it's online and reachable from the internet.",
+      "Trakt can't reach that server from the internet. Check that Jellyfin is online and set up for remote access, for example behind a reverse proxy, and that you entered its public address.",
     );
   });
 
   it('explains a rejected address', () => {
     expect(toJellyfinErrorText('raw_ip_address')).to.equal(
-      "Use your server's domain name. Trakt can't reach a bare IP address.",
+      "Trakt can't reach a local or IP address. Enter the public address you use to open Jellyfin from outside your home, like https://jellyfin.example.com.",
     );
   });
 

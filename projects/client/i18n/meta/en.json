@@ -14242,7 +14242,7 @@
       "description": "Example address shown in the empty Jellyfin server address field. Keep it a valid web address."
     },
     "hint_jellyfin_server_url": {
-      "default": "The address you open Jellyfin with. Trakt has to reach it from the internet.",
+      "default": "The public address you use to open Jellyfin from outside your home. Trakt reaches it over the internet, so local and IP addresses won't work.",
       "description": "Hint under the Jellyfin server address field."
     },
     "tab_text_jellyfin_quick_connect": {
@@ -14301,15 +14301,15 @@
       "description": "Note under the Jellyfin history choice: the collection always syncs in full."
     },
     "error_text_jellyfin_invalid_server_url": {
-      "default": "Enter your server's full address, like https://jellyfin.example.com.",
+      "default": "That isn't a web address Trakt can use. Enter the public address you use to open Jellyfin from outside your home, like https://jellyfin.example.com.",
       "description": "Error when the Jellyfin server address is not a valid address."
     },
     "error_text_jellyfin_unsupported_scheme": {
-      "default": "Start the address with https:// or http://.",
+      "default": "The address has to start with https:// or http://. Enter the public address you use to open Jellyfin from outside your home, like https://jellyfin.example.com.",
       "description": "Error when the Jellyfin server address uses another scheme."
     },
     "error_text_jellyfin_raw_ip_address": {
-      "default": "Use your server's domain name. Trakt can't reach a bare IP address.",
+      "default": "Trakt can't reach a local or IP address. Enter the public address you use to open Jellyfin from outside your home, like https://jellyfin.example.com.",
       "description": "Error when the Jellyfin server address is an IP address."
     },
     "error_text_jellyfin_unsupported_port": {
@@ -14325,7 +14325,7 @@
       "description": "Error when the address does not lead to a Jellyfin server."
     },
     "error_text_jellyfin_server_unreachable": {
-      "default": "Trakt can't reach that server. Make sure it's online and reachable from the internet.",
+      "default": "Trakt can't reach that server from the internet. Check that Jellyfin is online and set up for remote access, for example behind a reverse proxy, and that you entered its public address.",
       "description": "Error when Trakt cannot reach the Jellyfin server."
     },
     "error_text_jellyfin_invalid_credentials": {
