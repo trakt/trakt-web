@@ -5,6 +5,7 @@ import FlagIcon from '$lib/components/icons/FlagIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
+import TrackIcon from '$lib/components/icons/TrackIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { Component } from 'svelte';
@@ -82,5 +83,12 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_show_ending(),
     addedAt: new Date('2026-10-16'),
     description: () => m.preview_feature_description_show_ending(),
+  },
+  [FeatureFlag.ProgressManager]: {
+    icon: TrackIcon,
+    title: () => m.preview_feature_title_progress_manager(),
+    addedAt: new Date('2026-10-23'),
+    description: () => m.preview_feature_description_progress_manager(),
+    audience: 'vip',
   },
 };

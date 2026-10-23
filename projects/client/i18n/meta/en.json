@@ -545,6 +545,15 @@
         }
       }
     },
+    "button_label_manage_progress": {
+      "default": "Manage progress for \"{title}\"",
+      "description": "Aria-label and tooltip for the show track button when it opens the watch progress drawer instead of marking the show as watched.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "button_label_watched_until_here": {
       "default": "Mark \"{title}\" as watched until here",
       "description": "Aria-label for the button that marks a show as watched until a specific point.",
@@ -13671,6 +13680,14 @@
     "preview_feature_description_show_ending": {
       "default": "Shows an Ending row in a show's details: Complete when the story wrapped up, Unresolved when it did not.",
       "description": "Description of the show ending preview feature."
+    },
+    "preview_feature_title_progress_manager": {
+      "default": "Progress manager",
+      "description": "Product feature name for the preview feature that turns the show track button into a progress bar and opens a drawer to manage watch progress per season and episode."
+    },
+    "preview_feature_description_progress_manager": {
+      "default": "The track button on a show fills up as you watch, and opens a drawer with your progress per season and episode.",
+      "description": "Description of the progress manager preview feature."
     },
     "text_mixtape_fits_count": {
       "default": "{count} from your history",
