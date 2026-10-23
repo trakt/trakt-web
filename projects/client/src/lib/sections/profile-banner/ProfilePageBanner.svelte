@@ -76,12 +76,8 @@
               {promotion}
               isDirector={profile.isDirector}
             />
-          {:else}
-            <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-              {#if profile.isVip}
-                <VipBadge isDirector={profile.isDirector} />
-              {/if}
-            </RenderFor>
+          {:else if profile.isVip}
+            <VipBadge isDirector={profile.isDirector} />
           {/if}
         {/if}
       {/snippet}
