@@ -7479,7 +7479,18 @@
     },
     "label_usage_limit_with_vip": {
       "default": "{current} of {free}, {vip} with VIP",
-      "description": "Accessibility value for a usage limit row on the VIP upgrade screen. It reads the user's current usage, their free limit and the higher VIP limit."
+      "description": "Accessibility value for a usage limit row on the VIP upgrade screen. It reads the user's current usage, their free limit and the higher VIP limit.",
+      "variables": {
+        "current": {
+          "type": "string"
+        },
+        "free": {
+          "type": "string"
+        },
+        "vip": {
+          "type": "string"
+        }
+      }
     },
     "label_usage_limit_loading": {
       "default": "Loading your usage",
