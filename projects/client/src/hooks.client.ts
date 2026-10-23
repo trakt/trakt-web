@@ -6,6 +6,7 @@ import '$lib/polyfills/randomUUID.ts';
 import '$lib/polyfills/toReversed.ts';
 import '$lib/polyfills/toSorted.ts';
 import { isBlockedEmbedEvent } from '$lib/features/errors/isBlockedEmbedEvent.ts';
+import { isChunkParseError } from '$lib/features/errors/isChunkParseError.ts';
 import { isInjectedScriptEvent } from '$lib/features/errors/isInjectedScriptEvent.ts';
 import { toHandledErrorContext } from '$lib/features/errors/toHandledErrorContext.ts';
 import { captureWebviewSession } from '$lib/features/webview/captureWebviewSession.ts';
@@ -181,7 +182,11 @@ function isModuleLinkError(error: unknown): boolean {
 }
 
 function isStaleChunkError(error: unknown): boolean {
-  return isDynamicImportError(error) || isModuleLinkError(error);
+  return (
+    isDynamicImportError(error) ||
+    isModuleLinkError(error) ||
+    isChunkParseError(error)
+  );
 }
 
 function hasChunkPath(path?: string): boolean {
@@ -225,6 +230,8 @@ function getRecoveryForError(event: ErrorEvent): RecoveryAction | undefined {
   if (event.target instanceof HTMLScriptElement) {
     return hasChunkPath(event.target.src) ? 'purge-and-reload' : undefined;
   }
+
+  if (isChunkParseError(event.error)) return 'reload';
 
   return isChunkLinkError(event) ? 'reload' : undefined;
 }
