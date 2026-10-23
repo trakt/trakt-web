@@ -33,7 +33,7 @@
     height: var(--hero-size);
 
     &[data-season="halloween"] {
-      --hero-size: min(var(--ni-176), 26vh);
+      --hero-size: min(var(--ni-176), 26vh, 25vw);
       --hero-glow-color: var(--orange-400);
       --hero-glow-edge: var(--orange-700);
     }

@@ -11,7 +11,7 @@
   import ChristmasSnowflake from "./christmas/ChristmasSnowflake.svelte";
   import SeasonalGarland from "./decor/SeasonalGarland.svelte";
   import SantaSleigh from "./christmas/SantaSleigh.svelte";
-  import HalloweenGraveyard from "./halloween/HalloweenGraveyard.svelte";
+  import HalloweenFog from "./halloween/HalloweenFog.svelte";
   import HalloweenJackOLantern from "./halloween/HalloweenJackOLantern.svelte";
   import HalloweenMoon from "./halloween/HalloweenMoon.svelte";
   import NewYearMedallion from "./new-year/NewYearMedallion.svelte";
@@ -69,7 +69,7 @@
     {/if}
 
     {#if themeId === "halloween"}
-      <HalloweenGraveyard />
+      <HalloweenFog />
     {/if}
 
     {#if themeId === "christmas"}

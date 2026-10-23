@@ -1,4 +1,6 @@
 <script lang="ts">
+  import cloudsUrl from "./assets/halloween-clouds.webp";
+  import moonUrl from "./assets/halloween-moon.webp";
   import BatSilhouette from "./BatSilhouette.svelte";
 
   const bats = [
@@ -11,8 +13,12 @@
   ];
 </script>
 
-<div class="trakt-halloween-moon">
+<div
+  class="trakt-halloween-moon"
+  style="--moon-image: url({moonUrl}); --clouds-image: url({cloudsUrl})"
+>
   <div class="moon-disc"></div>
+  <div class="moon-clouds"></div>
 
   {#each bats as bat (bat.key)}
     <div
@@ -38,78 +44,7 @@
       inset: 0;
 
       border-radius: 50%;
-      background:
-        radial-gradient(
-          circle at 22% 60%,
-          color-mix(in srgb, var(--orange-500) 30%, transparent) 0 2.2%,
-          color-mix(in srgb, var(--yellow-50) 50%, transparent) 2.6% 3.2%,
-          transparent 3.6%
-        ),
-        radial-gradient(
-          circle at 84% 34%,
-          color-mix(in srgb, var(--orange-500) 28%, transparent) 0 1.6%,
-          color-mix(in srgb, var(--yellow-50) 45%, transparent) 2% 2.5%,
-          transparent 2.9%
-        ),
-        radial-gradient(
-          circle at 38% 86%,
-          color-mix(in srgb, var(--orange-500) 26%, transparent) 0 2.8%,
-          color-mix(in srgb, var(--yellow-50) 45%, transparent) 3.2% 3.8%,
-          transparent 4.2%
-        ),
-        radial-gradient(
-          circle at 72% 88%,
-          color-mix(in srgb, var(--orange-500) 22%, transparent) 0 1.2%,
-          transparent 1.8%
-        ),
-        radial-gradient(
-          circle at 90% 60%,
-          color-mix(in srgb, var(--orange-500) 22%, transparent) 0 1.8%,
-          transparent 2.4%
-        ),
-        radial-gradient(
-          circle at 46% 12%,
-          color-mix(in srgb, var(--orange-500) 20%, transparent) 0 1.2%,
-          transparent 1.8%
-        ),
-        radial-gradient(
-          circle at 12% 40%,
-          color-mix(in srgb, var(--orange-500) 18%, transparent) 0 1%,
-          transparent 1.5%
-        ),
-        radial-gradient(
-          ellipse 30% 20% at 26% 30%,
-          color-mix(in srgb, var(--orange-500) 34%, transparent) 0%,
-          color-mix(in srgb, var(--orange-400) 24%, transparent) 55%,
-          transparent 100%
-        ),
-        radial-gradient(
-          ellipse 16% 24% at 18% 72%,
-          color-mix(in srgb, var(--orange-500) 26%, transparent) 0%,
-          transparent 100%
-        ),
-        radial-gradient(
-          ellipse 24% 16% at 74% 70%,
-          color-mix(in srgb, var(--orange-500) 30%, transparent) 0%,
-          color-mix(in srgb, var(--orange-400) 18%, transparent) 60%,
-          transparent 100%
-        ),
-        radial-gradient(
-          ellipse 12% 9% at 66% 20%,
-          color-mix(in srgb, var(--orange-500) 22%, transparent) 0%,
-          transparent 100%
-        ),
-        radial-gradient(
-          circle at 50% 50%,
-          transparent 58%,
-          color-mix(in srgb, var(--orange-500) 35%, transparent) 100%
-        ),
-        radial-gradient(
-          circle at 38% 36%,
-          var(--yellow-50),
-          var(--yellow-200) 45%,
-          var(--orange-300) 100%
-        );
+      background: var(--moon-image) center / 103.5% no-repeat;
 
       animation: moon-rise 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
 
@@ -131,6 +66,28 @@
       }
     }
 
+    .moon-clouds {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 165%;
+      aspect-ratio: 800 / 446;
+      margin-top: calc(var(--moon-size) * -0.62);
+      margin-left: -82.5%;
+
+      background: var(--clouds-image) center / 100% 100% no-repeat;
+      mask-image: radial-gradient(
+        ellipse 50% 50% at 50% 50%,
+        black 55%,
+        transparent 100%
+      );
+
+      animation:
+        clouds-in 1600ms ease-out 400ms both,
+        clouds-drift 28s ease-in-out 2s infinite alternate both;
+    }
+
     .moon-bat {
       --bat-color: var(--shade-1000);
 
@@ -143,6 +100,21 @@
 
       opacity: 0;
       animation: bat-escape 5.5s ease-in var(--bat-delay) infinite;
+    }
+  }
+
+  @keyframes clouds-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes clouds-drift {
+    from {
+      transform: translateX(-4%);
+    }
+    to {
+      transform: translateX(4%);
     }
   }
 
@@ -187,7 +159,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .trakt-halloween-moon .moon-disc,
-    .trakt-halloween-moon .moon-disc::after {
+    .trakt-halloween-moon .moon-disc::after,
+    .trakt-halloween-moon .moon-clouds {
       animation: none;
     }
 
