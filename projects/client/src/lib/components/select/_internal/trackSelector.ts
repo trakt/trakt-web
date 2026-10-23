@@ -3,6 +3,7 @@ import { time } from '$lib/utils/timing/time.ts';
 export type TrackSelectorParams = {
   isFluid: boolean;
   shouldMorph: boolean;
+  isClipped: boolean;
   isReducedMotion: boolean;
   selector: HTMLElement | Nil;
   target: HTMLElement | Nil;
@@ -32,6 +33,13 @@ export function trackSelector(row: HTMLElement, initial: TrackSelectorParams) {
     const rect = element.getBoundingClientRect();
 
     return { x: rect.left - rowRect.left, width: rect.width };
+  };
+
+  const containInRow = ({ x, width }: { x: number; width: number }) => {
+    const start = Math.max(x, 0);
+    const end = Math.min(x + width, row.getBoundingClientRect().width);
+
+    return { x: start, width: Math.max(end - start, 0) };
   };
 
   const write = ({ x, width }: { x: number; width: number }) => {
@@ -81,10 +89,12 @@ export function trackSelector(row: HTMLElement, initial: TrackSelectorParams) {
       );
       const progress = easeOutSpring(elapsed);
 
-      write({
+      const frame = {
         x: from.x + (to.x - from.x) * progress,
         width: from.width + (to.width - from.width) * progress,
-      });
+      };
+
+      write(params.isClipped ? containInRow(frame) : frame);
 
       if (elapsed < 1) {
         morphFrame = requestAnimationFrame(step);

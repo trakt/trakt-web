@@ -100,6 +100,7 @@
   const selectorParams = $derived<TrackSelectorParams>({
     isFluid: expandable || isSelectedVariant,
     shouldMorph: isSelectedVariant,
+    isClipped: variant === "selected-icon",
     isReducedMotion: $isReducedMotion,
     selector: selectorEl,
     target: segmentEls[selectedIndex],
