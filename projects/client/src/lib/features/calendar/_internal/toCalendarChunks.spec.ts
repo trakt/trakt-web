@@ -118,18 +118,6 @@ describe('util: toCalendarChunks', () => {
     expect(toStarts(chunks)).toEqual(['Sun Aug 30 2026', 'Sun Sep 27 2026']);
   });
 
-  it('should load at least the minimum number of later chunks', () => {
-    const chunks = toCalendarChunks({
-      range: { anchor: new Date(2026, 9, 21), earlier: 0, later: 1 },
-      weeksPerStep: 1,
-      order: 'chronological',
-      locale: 'en',
-      minLater: 3,
-    });
-
-    expect(chunks).toHaveLength(4);
-  });
-
   it('should start on Monday for a Monday-first locale', () => {
     const chunks = toCalendarChunks({
       range: { anchor: new Date(2026, 9, 21), earlier: 0, later: 0 },

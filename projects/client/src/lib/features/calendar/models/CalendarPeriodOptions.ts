@@ -7,5 +7,4 @@ export type CalendarPeriodOptions = {
   upperBound?: Date;
   lowerBound?: Date;
   fingerprint?: Observable<string>;
-  minLater?: Observable<number>;
 };

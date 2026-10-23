@@ -15,7 +15,6 @@ type ToCalendarChunksParams = {
   locale: AvailableLocale;
   upperBound?: Date;
   lowerBound?: Date;
-  minLater?: number;
 };
 
 export function toCalendarChunks({
@@ -25,7 +24,6 @@ export function toCalendarChunks({
   locale,
   upperBound,
   lowerBound,
-  minLater = 0,
 }: ToCalendarChunksParams): ReadonlyArray<CalendarChunk> {
   const anchor =
     upperBound && range.anchor > upperBound ? upperBound : range.anchor;
@@ -34,10 +32,8 @@ export function toCalendarChunks({
     order === 'reverse-chronological'
       ? subWeeks(anchorWeek, weeksPerStep - 1)
       : anchorWeek;
-  const later = Math.max(range.later, minLater);
-
   return Array.from(
-    { length: range.earlier + later + 1 },
+    { length: range.earlier + range.later + 1 },
     (_, index) => index - range.earlier,
   )
     .map((offset) => ({

@@ -72,7 +72,7 @@
   const layoutView = $derived(isCompact ? "day" : calendarView);
   const isMonthOnly = $derived(isCompact && calendarView === "week");
 
-  const WEEK_VIEW_LATER_WEEKS = 3;
+  const WEEKS_PER_STEP = 4;
   const EMPTY_WEEK_LIMIT = 5;
 
   const {
@@ -87,12 +87,10 @@
     activeDate,
     goTo,
   } = useCalendarBoard<T>({
+    weeksPerStep: WEEKS_PER_STEP,
     lowerBound: getStartOfWeek(new Date(), getLocale()),
     emptyWeekLimit: EMPTY_WEEK_LIMIT,
     fingerprint: fromRune(() => fingerprint),
-    minLater: fromRune(() =>
-      layoutView === "week" ? WEEK_VIEW_LATER_WEEKS : 0,
-    ),
   });
 
   const periods: CalendarPeriod<T>[] = $derived($board.periods);
