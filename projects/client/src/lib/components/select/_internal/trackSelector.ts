@@ -35,8 +35,11 @@ export function trackSelector(row: HTMLElement, initial: TrackSelectorParams) {
   };
 
   const write = ({ x, width }: { x: number; width: number }) => {
-    row.style.setProperty('--selector-x', `${x}px`);
-    row.style.setProperty('--selector-w', `${width}px`);
+    const { selector } = params;
+    if (!selector) return;
+
+    selector.style.setProperty('--selector-x', `${x}px`);
+    selector.style.setProperty('--selector-w', `${width}px`);
   };
 
   const measure = () => {
