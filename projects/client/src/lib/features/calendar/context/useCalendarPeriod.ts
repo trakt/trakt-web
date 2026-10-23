@@ -4,13 +4,7 @@ import { isCurrentWeek } from '$lib/utils/date/isCurrentWeek.ts';
 import { addDays } from 'date-fns/addDays';
 import { addWeeks } from 'date-fns/addWeeks';
 import { subWeeks } from 'date-fns/subWeeks';
-import {
-  BehaviorSubject,
-  combineLatest,
-  distinctUntilChanged,
-  map,
-  skip,
-} from 'rxjs';
+import { distinctUntilChanged, map, skip } from 'rxjs';
 import { onDestroy } from 'svelte';
 import { AnalyticsEvent } from '../../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../../analytics/useTrack.ts';
@@ -57,18 +51,10 @@ export function useCalendarPeriod(options?: CalendarPeriodOptions) {
     upperBound,
     lowerBound,
     fingerprint,
-    minLater,
   } = options ?? {};
   const context = getCalendarContext();
   const { range, activeDate, visibleDate } = context;
   const { track } = useTrack(AnalyticsEvent.CalendarPeriod);
-
-  const currentMinLater = new BehaviorSubject(0);
-
-  if (minLater) {
-    const subscription = minLater.subscribe(currentMinLater);
-    onDestroy(() => subscription.unsubscribe());
-  }
 
   const toChunks = (value: CalendarWindow) =>
     toCalendarChunks({
@@ -78,11 +64,10 @@ export function useCalendarPeriod(options?: CalendarPeriodOptions) {
       locale: getLocale(),
       upperBound,
       lowerBound,
-      minLater: currentMinLater.value,
     });
 
-  const chunks = combineLatest([range, currentMinLater]).pipe(
-    map(([value]) => toChunks(value)),
+  const chunks = range.pipe(
+    map((value) => toChunks(value)),
     distinctUntilChanged(sameChunks),
   );
 
@@ -97,10 +82,7 @@ export function useCalendarPeriod(options?: CalendarPeriodOptions) {
       return { ...current, earlier: current.earlier + 1 };
     }
 
-    return {
-      ...current,
-      later: Math.max(current.later, currentMinLater.value) + 1,
-    };
+    return { ...current, later: current.later + 1 };
   };
 
   const canExtend = (direction: 'earlier' | 'later') =>
