@@ -7473,6 +7473,18 @@
       "default": "View more limits",
       "description": "Aria-label for the button that allows users to view more of their limits."
     },
+    "text_vip_limits_dashed_potential": {
+      "default": "The dashed areas show your potential with VIP",
+      "description": "Caption under the usage limits on the VIP upgrade screen, explaining that the dashed part of each bar is the extra room VIP unlocks."
+    },
+    "label_usage_limit_with_vip": {
+      "default": "{current} of {free}, {vip} with VIP",
+      "description": "Accessibility value for a usage limit row on the VIP upgrade screen. It reads the user's current usage, their free limit and the higher VIP limit."
+    },
+    "label_usage_limit_loading": {
+      "default": "Loading your usage",
+      "description": "Accessibility value for a usage limit row on the VIP upgrade screen while the user's usage is still loading."
+    },
     "button_text_month_in_review": {
       "default": "{month} in Review",
       "description": "Text for the button that allows users to view their month in review.",
