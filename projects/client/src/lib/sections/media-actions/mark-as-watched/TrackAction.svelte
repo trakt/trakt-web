@@ -5,6 +5,8 @@
   import TrackIcon from "$lib/components/icons/TrackIcon.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import { useProgressManagerEnabled } from "$lib/features/progress-manager/stores/useProgressManagerEnabled";
   import {
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,
@@ -28,6 +30,7 @@
   const { isMarkingAsWatched, isWatchable, isWatched, removeWatched } =
     $derived(useMarkAsWatched(target));
   const { progress } = $derived(useWatchProgress(target));
+  const isProgressManagerEnabled = useProgressManagerEnabled();
 
   const { confirm } = useConfirm();
   const openMarkAsWatchedDrawer = $derived(() => {
@@ -44,7 +47,9 @@
     }),
   );
 
-  const watchStateShow = $derived(toWatchStateShow(target));
+  const watchStateShow = $derived(
+    $isProgressManagerEnabled ? toWatchStateShow(target) : null,
+  );
 
   const handler = (ev: MouseEvent) => {
     if (watchStateShow) {
@@ -68,15 +73,13 @@
 <trakt-track-action class:is-watchable={isWatchable}>
   <ActionButton
     disabled={$isMarkingAsWatched || !isWatchable}
-    label={i18n.label({
-      title,
-      isRemovable: $isWatched && !watchStateShow,
-      isRewatching: false,
-    })}
+    label={watchStateShow
+      ? m.button_label_manage_progress({ title })
+      : i18n.label({ title, isRemovable: $isWatched, isRewatching: false })}
     onclick={handler}
     variant={$isWatched ? "primary" : "secondary"}
     color="purple"
-    progress={$isWatched ? undefined : $progress}
+    progress={$isWatched || !$isProgressManagerEnabled ? undefined : $progress}
   >
     <TrackIcon state={$isWatched ? "watched" : "unwatched"} />
   </ActionButton>
