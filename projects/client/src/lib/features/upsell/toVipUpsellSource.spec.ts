@@ -6,6 +6,10 @@ describe('util: toVipUpsellSource', () => {
     expect(toVipUpsellSource('navbar-mobile')).toBe('navbar-mobile');
   });
 
+  it('should keep the Reality Check source', () => {
+    expect(toVipUpsellSource('reality-check')).toBe('reality-check');
+  });
+
   it('should keep a promotion source', () => {
     expect(toVipUpsellSource('promotion-black-friday')).toBe(
       'promotion-black-friday',

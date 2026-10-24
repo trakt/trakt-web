@@ -28,6 +28,7 @@ export const VipUpsellSourceSchema = z.union([
     'preview-features',
     'profile-settings',
     'profile-settings-manage',
+    'reality-check',
     'sentiment',
     'smart-list',
     'soundtrack',

@@ -5,6 +5,7 @@
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
+  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import type { YouTubeSpecial } from "$lib/requests/models/YouTubeSpecial.ts";
@@ -34,6 +35,7 @@
 
   const {
     sentiment,
+    realityCheck,
     videos,
     seasons,
     currentSeason,
@@ -41,6 +43,7 @@
     ...details
   }: {
     sentiment?: SentimentAnalysis | null | undefined;
+    realityCheck?: RealityCheck | null | undefined;
     videos?: MediaVideo[];
     seasons?: Season[];
     currentSeason?: number;
@@ -126,6 +129,10 @@
     return { type: details.type, slug: details.media.slug };
   });
 
+  const hasInsights = $derived(
+    details.type !== "episode" && (sentiment !== null || realityCheck !== null),
+  );
+
   const socialTitle = $derived.by(() =>
     details.type === "episode"
       ? episodeActivityTitle(details.episode, details.show)
@@ -133,8 +140,8 @@
   );
 </script>
 
-{#if drawer === SummaryDrawers.Sentiment && sentiment}
-  <SentimentDrawer {sentiment} onClose={close} />
+{#if drawer === SummaryDrawers.Sentiment && hasInsights}
+  <SentimentDrawer {sentiment} {realityCheck} onClose={close} />
 {/if}
 
 {#if drawer === SummaryDrawers.Details}

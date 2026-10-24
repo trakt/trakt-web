@@ -123,6 +123,10 @@ export const movies = [
     },
   ),
   http.get(
+    `http://localhost/v3/media/movie/${MovieHereticResponseMock.ids.slug}/info/34/version/1`,
+    () => new HttpResponse(null, { status: 404 }),
+  ),
+  http.get(
     `http://localhost/v3/media/movie/${MovieHereticResponseMock.ids.slug}/info/0/version/2`,
     () => {
       return HttpResponse.json(MovieHereticSentimentResponseMock);

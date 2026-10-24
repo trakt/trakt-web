@@ -2,7 +2,9 @@ import { getLocale } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.ts';
 import { movieSentimentQuery } from '$lib/requests/queries/movies/movieSentimentQuery.ts';
+import { movieRealityCheckQuery } from '$lib/requests/queries/movies/movieRealityCheckQuery.ts';
 import { showRatingQuery } from '$lib/requests/queries/shows/showRatingQuery.ts';
+import { showRealityCheckQuery } from '$lib/requests/queries/shows/showRealityCheckQuery.ts';
 import { showSentimentQuery } from '$lib/requests/queries/shows/showSentimentQuery.ts';
 import { map, type Observable } from 'rxjs';
 import type { TodayMedia } from './models/TodayMedia.ts';
@@ -30,9 +32,22 @@ export function useTodayDetails(media$: Observable<TodayMedia>) {
     ),
   );
 
+  const realityCheck = useQuery(
+    media$.pipe(
+      map(({ type, slug }) =>
+        type === 'movie'
+          ? movieRealityCheckQuery({ slug, locale, enabled: true })
+          : showRealityCheckQuery({ slug, locale, enabled: true }),
+      ),
+    ),
+  );
+
   return {
     ratings: ratings.pipe(map((query) => query.data ?? null)),
     isRatingsLoading: ratings.pipe(map((query) => query.isLoading)),
     sentiment: sentiment.pipe(map((query) => query.data ?? null)),
+    realityCheck: realityCheck.pipe(
+      map((query) => (query.isLoading ? undefined : (query.data ?? null))),
+    ),
   };
 }

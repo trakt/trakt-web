@@ -7,6 +7,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
+  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import type { YouTubeSpecial } from "$lib/requests/models/YouTubeSpecial.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -32,12 +33,14 @@
     streamOn,
     videos,
     sentiment,
+    realityCheck,
     youtubeSpecial,
   }: {
     media: MovieEntry;
     studios: MediaStudio[];
     videos: MediaVideo[];
     sentiment: SentimentAnalysis | Nil;
+    realityCheck: RealityCheck | null | undefined;
     youtubeSpecial: YouTubeSpecial | Nil;
   } & CommonMediaSummaryProps = $props();
 
@@ -47,6 +50,7 @@
 
 <SummaryDrawer
   {sentiment}
+  {realityCheck}
   {studios}
   {crew}
   {media}
@@ -72,6 +76,7 @@
         />
         <Sentiment
           {sentiment}
+          {realityCheck}
           slug={media.slug}
           variant="inline"
           type="movie"
@@ -83,7 +88,7 @@
 
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="movie" {media} {streamOn} {youtubeSpecial} />
-  <Sentiment {sentiment} slug={media.slug} type="movie" />
+  <Sentiment {sentiment} {realityCheck} slug={media.slug} type="movie" />
 </RenderFor>
 
 <CastList

@@ -1,30 +1,77 @@
 <script lang="ts">
   import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+  import { lineClamp } from "$lib/components/text/lineClamp.ts";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
+  import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
+  import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
+  import RealityTierPill from "$lib/sections/components/reality-check/RealityTierPill.svelte";
+  import RealityTierPillSkeleton from "$lib/sections/components/reality-check/RealityTierPillSkeleton.svelte";
+  import { stripMarkdownLinks } from "$lib/utils/markdown/stripMarkdownLinks.ts";
   import { mapToSentimentSummary } from "./mapToSentimentSummary";
 
+  const SKELETON_LINE_WIDTHS = ["100%", "88%", "94%", "56%"];
+
   type SentimentProps = {
-    pros: string[];
-    cons: string[];
+    sentiment: SentimentAnalysis | Nil;
+    realityCheck: RealityCheck | null | undefined;
   };
 
-  const { pros, cons }: SentimentProps = $props();
+  const { sentiment, realityCheck }: SentimentProps = $props();
 
-  const { aspects, text } = $derived(mapToSentimentSummary({ pros, cons }));
+  const isLoading = $derived(
+    sentiment === undefined || realityCheck === undefined,
+  );
+
+  const summary = $derived(
+    sentiment
+      ? mapToSentimentSummary({
+          pros: sentiment.aspect.pros,
+          cons: sentiment.aspect.cons,
+        })
+      : null,
+  );
 </script>
 
 <div class="trakt-sentiment-summary">
-  <span class="capitalize bold">{text}</span>
+  {#if isLoading}
+    <Skeleton width="55%" height="var(--ni-18)" />
 
-  <div class="trakt-sentiment-aspects">
-    <ul>
-      {#each aspects as aspect}
-        <li><p class="capitalize">{aspect}</p></li>
+    <div class="trakt-sentiment-skeleton-lines">
+      {#each SKELETON_LINE_WIDTHS as width (width)}
+        <Skeleton {width} height="var(--ni-14)" />
       {/each}
-    </ul>
-  </div>
+    </div>
+  {:else if summary}
+    <span class="capitalize bold">{summary.text}</span>
+
+    <div class="trakt-sentiment-aspects">
+      <ul>
+        {#each summary.aspects as aspect}
+          <li><p class="capitalize">{aspect}</p></li>
+        {/each}
+      </ul>
+    </div>
+  {:else if realityCheck}
+    <span class="bold">{m.header_reality_check()}</span>
+
+    <div class="trakt-sentiment-aspects">
+      <p use:lineClamp={{ lines: 5 }}>
+        <InlineMarkdown text={stripMarkdownLinks(realityCheck.summary)} />
+      </p>
+    </div>
+  {/if}
 
   <div class="trakt-sentiment-footer">
-    <ArrowRightIcon />
+    {#if isLoading}
+      <RealityTierPillSkeleton />
+    {:else}
+      {#if realityCheck}
+        <RealityTierPill tier={realityCheck.verdict} />
+      {/if}
+      <span class="trakt-sentiment-arrow"><ArrowRightIcon /></span>
+    {/if}
   </div>
 </div>
 
@@ -67,8 +114,24 @@
     color: var(--color-text-primary);
   }
 
+  .trakt-sentiment-skeleton-lines {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+
   .trakt-sentiment-footer {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-xs);
+
+    min-height: var(--ni-24);
+  }
+
+  .trakt-sentiment-arrow {
+    display: flex;
+    flex-shrink: 0;
+    margin-inline-start: auto;
   }
 </style>

@@ -18,8 +18,17 @@
 
   const slug$ = fromRune(() => params.slug);
 
-  const { show, intl, studios, crew, seasons, streamOn, isLoading, sentiment } =
-    useShow(slug$);
+  const {
+    show,
+    intl,
+    studios,
+    crew,
+    seasons,
+    streamOn,
+    isLoading,
+    sentiment,
+    realityCheck,
+  } = useShow(slug$);
 
   const videos = useShowVideos({ slug: slug$ });
 
@@ -99,6 +108,7 @@
       streamOn={$streamOn}
       videos={$videos}
       sentiment={$sentiment}
+      realityCheck={$realityCheck}
       currentSeason={effectiveSeason}
     />
   {:else}

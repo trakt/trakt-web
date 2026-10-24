@@ -2741,6 +2741,122 @@
       "default": "Sentiment",
       "description": "Header for the section that shows the community sentiment for a movie, show, or episode."
     },
+    "header_insights": {
+      "default": "Insights",
+      "description": "Header for the section and the drawer that group the community sentiment and the Reality Check of a movie or show."
+    },
+    "header_reality_check": {
+      "default": "Reality Check",
+      "description": "Name of the feature that rates how true a movie or show based on real events is. Used as a tab label and a section label."
+    },
+    "button_label_view_reality_check": {
+      "default": "View Reality Check",
+      "description": "Aria-label for the card that opens the drawer with the Reality Check of a movie or show."
+    },
+    "text_reality_check_basis": {
+      "default": "Compared with Wikipedia and press coverage",
+      "description": "Subtitle under the Reality Check verdict explaining what the verdict was compared against."
+    },
+    "text_reality_tier_faithful": {
+      "default": "Faithful",
+      "description": "Reality Check verdict: the story closely follows what really happened."
+    },
+    "text_reality_tier_mostly_true": {
+      "default": "Mostly true",
+      "description": "Reality Check verdict: the story mostly follows what really happened with some changes."
+    },
+    "text_reality_tier_loose": {
+      "default": "Loosely based",
+      "description": "Reality Check verdict: the story is loosely based on what really happened."
+    },
+    "text_reality_tier_in_name_only": {
+      "default": "In name only",
+      "description": "Reality Check verdict: the story is based on real events in name only."
+    },
+    "text_reality_tier_unclear": {
+      "default": "Unclear",
+      "description": "Reality Check verdict: there is not enough information to tell how true the story is."
+    },
+    "text_reality_early_verdict": {
+      "default": "Early verdict",
+      "description": "Note under the Reality Check meter saying the verdict is preliminary because some parts are still unclear."
+    },
+    "label_reality_row_story": {
+      "default": "Story",
+      "description": "Label of the Reality Check row that grades the overall story."
+    },
+    "label_reality_row_protagonist": {
+      "default": "Protagonist",
+      "description": "Label under a person's name in the Reality Check rows, saying the row grades how true that main character is portrayed."
+    },
+    "text_reality_claim_accurate": {
+      "default": "Accurate",
+      "description": "Label on a Reality Check claim: what is shown on screen matches what happened."
+    },
+    "text_reality_claim_compressed": {
+      "default": "Compressed",
+      "description": "Label on a Reality Check claim: several real events were squeezed into one."
+    },
+    "text_reality_claim_composite": {
+      "default": "Composite",
+      "description": "Label on a Reality Check claim: several real people or events were merged into one."
+    },
+    "text_reality_claim_changed": {
+      "default": "Changed",
+      "description": "Label on a Reality Check claim: a real event was changed on screen."
+    },
+    "text_reality_claim_invented": {
+      "default": "Invented",
+      "description": "Label on a Reality Check claim: what is shown on screen never happened."
+    },
+    "text_reality_claim_minor": {
+      "default": "minor",
+      "description": "Small note next to a Reality Check claim label saying the difference is minor."
+    },
+    "header_reality_real_story": {
+      "default": "The real story",
+      "description": "Header for the section with a written breakdown of what really happened compared to the movie or show."
+    },
+    "header_reality_claims": {
+      "default": "On screen vs what happened",
+      "description": "Header for the section that lists claims made on screen next to what is documented."
+    },
+    "label_reality_on_screen": {
+      "default": "On screen:",
+      "description": "Label in front of what a movie or show shows on screen."
+    },
+    "label_reality_documented": {
+      "default": "Documented:",
+      "description": "Label in front of what is documented to have really happened."
+    },
+    "header_reality_people": {
+      "default": "People",
+      "description": "Header for the section that lists the people in a movie or show and whether they are real, composite or invented."
+    },
+    "text_reality_kind_real": {
+      "default": "Real",
+      "description": "Label for a character that is based on a real person."
+    },
+    "text_reality_kind_composite": {
+      "default": "Composite",
+      "description": "Label for a character that merges several real people."
+    },
+    "text_reality_kind_invented": {
+      "default": "Invented",
+      "description": "Label for a character that is made up."
+    },
+    "header_reality_timeline": {
+      "default": "Timeline",
+      "description": "Header for the section that explains how the movie or show reorders real events."
+    },
+    "header_reality_left_out": {
+      "default": "Left out",
+      "description": "Header for the section that lists what a movie or show leaves out of the real story."
+    },
+    "header_reality_sources": {
+      "default": "Sources",
+      "description": "Header for the list of sources used for the Reality Check."
+    },
     "button_text_manage_lists": {
       "default": "Manage lists",
       "description": "Text for the button that opens the lists drawer. This allows users to add or remove a movie, show, season or episode from their lists."
@@ -7334,11 +7450,11 @@
       "description": "Description for the VIP feature that allows creating more custom lists."
     },
     "vip_feature_title_sentiment_trivia": {
-      "default": "More Info: Sentiment & Trivia",
+      "default": "More Info: Sentiment, Reality Check & Trivia",
       "description": "Title for the VIP feature that provides sentiment analysis and trivia."
     },
     "vip_feature_description_sentiment_trivia": {
-      "default": "Unlock detailed sentiment analysis and fascinating trivia about the movies and shows you watch.",
+      "default": "Unlock detailed sentiment analysis, what really happened in true stories, and fascinating trivia about the movies and shows you watch.",
       "description": "Description for the VIP feature that provides sentiment analysis and trivia."
     },
     "vip_feature_title_api_apps": {
