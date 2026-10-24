@@ -14,6 +14,10 @@ describe('util: toVipUpsellSource', () => {
     expect(toVipUpsellSource('season-recap')).toBe('season-recap');
   });
 
+  it('should keep the Year in Review email source', () => {
+    expect(toVipUpsellSource('yir-email')).toBe('yir-email');
+  });
+
   it('should keep a promotion source', () => {
     expect(toVipUpsellSource('promotion-black-friday')).toBe(
       'promotion-black-friday',

@@ -55,4 +55,26 @@ describe('util: buildCheckoutReturnUrls', () => {
     expect(new URL(urls.successUrl).searchParams.has('source')).toBe(false);
     expect(parseVipParams(new URL(urls.successUrl)).source).toBe('direct');
   });
+
+  it('should carry the return path on both urls when given', () => {
+    const urls = buildCheckoutReturnUrls({
+      origin: ORIGIN,
+      plan: 'yearly',
+      source: 'yir-email',
+      flow: 'new',
+      returnTo: '/users/me/year/2025',
+    });
+
+    expect(new URL(urls.successUrl).searchParams.get('return')).toBe(
+      '/users/me/year/2025',
+    );
+    expect(new URL(urls.cancelUrl).searchParams.get('return')).toBe(
+      '/users/me/year/2025',
+    );
+  });
+
+  it('should leave the return param off without a return path', () => {
+    expect(new URL(successUrl).searchParams.has('return')).toBe(false);
+    expect(new URL(cancelUrl).searchParams.has('return')).toBe(false);
+  });
 });
