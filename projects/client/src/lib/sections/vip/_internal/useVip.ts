@@ -23,12 +23,14 @@ import type { VipPlan } from './models/VipPlan.ts';
 import { buildCheckoutReturnUrls } from './utils/buildCheckoutReturnUrls.ts';
 import { parseVipParams } from './utils/parseVipParams.ts';
 import { toVipFailureCode } from './utils/toVipFailureCode.ts';
+import { toYirEmailReturnPath } from './utils/toYirEmailReturnPath.ts';
 import { anyTrue } from '$lib/utils/store/anyTrue.ts';
 
 type CheckoutRequest = {
   plan: VipPlan;
   source: VipUpsellSource;
   flow: VipFlow;
+  returnTo: string | null;
 };
 
 function getReturnUrl() {
@@ -51,7 +53,7 @@ export function useVip() {
   const checkout = useMutation(
     defineMutation({
       key: 'vip:start-checkout',
-      request: ({ plan, source, flow }: CheckoutRequest) =>
+      request: ({ plan, source, flow, returnTo }: CheckoutRequest) =>
         startCheckoutQuery({
           duration: plan.type,
           ...buildCheckoutReturnUrls({
@@ -59,6 +61,7 @@ export function useVip() {
             plan: plan.type,
             source,
             flow,
+            returnTo,
           }),
         }),
       invalidations: [],
@@ -115,7 +118,12 @@ export function useVip() {
       trackUpgrade(tracking);
 
       try {
-        const url = await checkout.mutate({ plan, source, flow });
+        const url = await checkout.mutate({
+          plan,
+          source,
+          flow,
+          returnTo: toYirEmailReturnPath(page.url),
+        });
         if (!url) {
           trackCheckoutFailed({ ...tracking, error: 'no_checkout_url' });
         }
