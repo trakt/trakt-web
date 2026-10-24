@@ -4,38 +4,57 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import SentimentSummary from "./SentimentSummary.svelte";
 
-  const { sentiment }: { sentiment: SentimentAnalysis } = $props();
+  type SentimentCardProps = {
+    sentiment: SentimentAnalysis | Nil;
+    realityCheck: RealityCheck | null | undefined;
+  };
+
+  const { sentiment, realityCheck }: SentimentCardProps = $props();
+
+  const isLoading = $derived(
+    sentiment === undefined || realityCheck === undefined,
+  );
 
   const { buildDrawerLink } = summaryDrawerNavigation();
 
-  const pros = $derived(sentiment.aspect.pros);
-  const cons = $derived(sentiment.aspect.cons);
-
   const { track } = useTrack(AnalyticsEvent.Drilldown);
+
+  const source = $derived(sentiment ? "sentiment" : "reality-check");
 </script>
 
-<div class="trakt-sentiment-card">
-  <Link
-    {...buildDrawerLink(SummaryDrawers.Sentiment)}
-    label={m.button_label_view_sentiment_analysis()}
-    color="inherit"
-    onclick={() => track({ source: "sentiment" })}
+{#snippet card()}
+  <Card
+    --width-card="var(--width-sentiment-card)"
+    --height-card="var(--height-sentiment-card)"
+    variant="transparent"
   >
-    <Card
-      --width-card="var(--width-sentiment-card)"
-      --height-card="var(--height-sentiment-card)"
-      variant="transparent"
+    <div class="trakt-sentiment-container">
+      <SentimentSummary {sentiment} {realityCheck} />
+    </div>
+  </Card>
+{/snippet}
+
+<div class="trakt-sentiment-card">
+  {#if isLoading}
+    {@render card()}
+  {:else}
+    <Link
+      {...buildDrawerLink(SummaryDrawers.Sentiment)}
+      label={sentiment
+        ? m.button_label_view_sentiment_analysis()
+        : m.button_label_view_reality_check()}
+      color="inherit"
+      onclick={() => track({ source })}
     >
-      <div class="trakt-sentiment-container">
-        <SentimentSummary {pros} {cons} />
-      </div>
-    </Card>
-  </Link>
+      {@render card()}
+    </Link>
+  {/if}
 </div>
 
 <style lang="scss">

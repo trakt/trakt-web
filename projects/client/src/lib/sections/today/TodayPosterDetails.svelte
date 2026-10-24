@@ -1,5 +1,7 @@
 <script lang="ts">
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+  import RealityTierPill from "$lib/sections/components/reality-check/RealityTierPill.svelte";
+  import RealityTierPillSkeleton from "$lib/sections/components/reality-check/RealityTierPillSkeleton.svelte";
   import SentimentIcon from "$lib/components/icons/SentimentIcon.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp.ts";
@@ -18,9 +20,8 @@
   const { media, kicker = null }: { media: TodayMedia; kicker?: string | null } =
     $props();
 
-  const { ratings, isRatingsLoading, sentiment } = useTodayDetails(
-    fromRune(() => media),
-  );
+  const { ratings, isRatingsLoading, sentiment, realityCheck } =
+    useTodayDetails(fromRune(() => media));
 
   const meta = $derived(toMediaMeta(media));
 
@@ -99,6 +100,19 @@
         {/each}
       </div>
     {/if}
+
+    {#if $realityCheck !== null}
+      <div class="details-reality-check">
+        <p class="tag uppercase bold details-kicker">
+          {m.header_reality_check()}
+        </p>
+        {#if $realityCheck}
+          <RealityTierPill tier={$realityCheck.verdict} variant="compact" />
+        {:else}
+          <RealityTierPillSkeleton variant="compact" />
+        {/if}
+      </div>
+    {/if}
   </div>
 </div>
 
@@ -168,6 +182,17 @@
       flex-direction: column;
       gap: var(--gap-xs);
 
+      padding-top: var(--gap-s);
+      border-top: var(--border-thickness-xxs) solid var(--color-border);
+    }
+
+    .details-reality-check {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--gap-xs);
+
+      min-height: var(--ni-24);
       padding-top: var(--gap-s);
       border-top: var(--border-thickness-xxs) solid var(--color-border);
     }

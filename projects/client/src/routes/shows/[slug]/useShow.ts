@@ -9,6 +9,7 @@ import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
+import { showRealityCheckQuery } from '$lib/requests/queries/shows/showRealityCheckQuery.ts';
 import { showSentimentQuery } from '$lib/requests/queries/shows/showSentimentQuery.ts';
 import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
@@ -16,6 +17,7 @@ import { streamShowQuery } from '$lib/requests/queries/shows/streamShowQuery.ts'
 import { toStreamOn } from '$lib/stores/toStreamOn.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
+import { toLoadableData } from '$lib/utils/requests/toLoadableData.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { combineLatest, type Observable } from 'rxjs';
@@ -56,7 +58,29 @@ export function useShow(slug$: Observable<string>) {
       ),
     ),
   ]).pipe(
-    map(([authorized, query]) => (authorized ? query : undefined)),
+    map(([authorized, query]) =>
+      toLoadableData({ isAuthorized: authorized, query }),
+    ),
+    multicast(),
+  );
+
+  const realityCheck = combineLatest([
+    isAuthorized,
+    useQuery(
+      combineLatest([slug$, isAuthorized]).pipe(
+        map(([slug, authorized]) =>
+          showRealityCheckQuery({
+            slug,
+            locale: activeLocale,
+            enabled: authorized,
+          }),
+        ),
+      ),
+    ),
+  ]).pipe(
+    map(([authorized, query]) =>
+      toLoadableData({ isAuthorized: authorized, query }),
+    ),
     multicast(),
   );
 
@@ -84,7 +108,8 @@ export function useShow(slug$: Observable<string>) {
     studios: studios.pipe(map(($studios) => $studios.data ?? [])),
     crew: crew.pipe(map(($crew) => $crew.data ?? EMPTY_CREW)),
     seasons: seasons.pipe(map(($seasons) => $seasons.data)),
-    sentiment: sentiment.pipe(map(($sentiment) => $sentiment?.data)),
+    sentiment,
+    realityCheck,
     intl: combineLatest([intl, show]).pipe(
       map(([$intl, $show]) =>
         findRegionalIntl({

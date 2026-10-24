@@ -377,6 +377,16 @@
   );
 
   /*
+   * Reality Check
+   */
+  --color-reality-accurate-background: var(--green-90);
+  --color-reality-accurate-text: var(--green-900);
+  --color-reality-adjusted-background: var(--yellow-90);
+  --color-reality-adjusted-text: var(--yellow-900);
+  --color-reality-altered-background: var(--red-90);
+  --color-reality-altered-text: var(--red-800);
+
+  /*
    * VIP page
    */
   --background-vip-content: linear-gradient(
@@ -1011,6 +1021,28 @@
     var(--shade-10) 10%,
     transparent
   );
+
+  /*
+   * Reality Check
+   */
+  --color-reality-accurate-background: color-mix(
+    in srgb,
+    var(--green-300) 22%,
+    transparent
+  );
+  --color-reality-accurate-text: var(--green-200);
+  --color-reality-adjusted-background: color-mix(
+    in srgb,
+    var(--yellow-300) 22%,
+    transparent
+  );
+  --color-reality-adjusted-text: var(--yellow-200);
+  --color-reality-altered-background: color-mix(
+    in srgb,
+    var(--red-300) 22%,
+    transparent
+  );
+  --color-reality-altered-text: var(--red-100);
 
   /*
    * VIP page

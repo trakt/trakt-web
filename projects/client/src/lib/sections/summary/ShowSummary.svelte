@@ -7,6 +7,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
+  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -32,6 +33,7 @@
     videos: MediaVideo[];
     currentSeason: number;
     sentiment: SentimentAnalysis | Nil;
+    realityCheck: RealityCheck | null | undefined;
   } & CommonMediaSummaryProps;
 
   const {
@@ -44,6 +46,7 @@
     videos,
     currentSeason,
     sentiment,
+    realityCheck,
   }: ShowSummaryProps = $props();
 
   const relatedLink = $derived(UrlBuilder.related.show(media.slug));
@@ -62,6 +65,7 @@
 
 <SummaryDrawer
   {sentiment}
+  {realityCheck}
   {studios}
   {crew}
   {media}
@@ -81,7 +85,13 @@
     {#snippet contextualContent()}
       <RenderFor audience="all" device={["desktop"]}>
         <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
-        <Sentiment {sentiment} slug={media.slug} variant="inline" type="show" />
+        <Sentiment
+          {sentiment}
+          {realityCheck}
+          slug={media.slug}
+          variant="inline"
+          type="show"
+        />
       </RenderFor>
     {/snippet}
   </MediaSummary>
@@ -89,7 +99,7 @@
 
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="show" {media} {streamOn} />
-  <Sentiment {sentiment} slug={media.slug} type="show" />
+  <Sentiment {sentiment} {realityCheck} slug={media.slug} type="show" />
 </RenderFor>
 
 <SeasonList show={media} {seasons} {currentSeason} />

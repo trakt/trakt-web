@@ -62,4 +62,20 @@ describe('summaryDrawerNavigation', () => {
     expect(target.searchParams.get('comment_id')).toBeNull();
     expect(target.searchParams.get('season')).toBe('2');
   });
+
+  it('should drop the insights tab when the insights drawer closes', () => {
+    window.history.replaceState(
+      {},
+      '',
+      '/movies/heretic-2024?view=sentiment&tab=sentiment',
+    );
+    const searchParams = new URL(window.location.href).searchParams;
+    const { close } = summaryDrawerNavigation(searchParams);
+
+    close();
+
+    const target = new URL(vi.mocked(goto).mock.calls.at(0)?.[0] ?? '');
+    expect(target.searchParams.get('view')).toBeNull();
+    expect(target.searchParams.get('tab')).toBeNull();
+  });
 });

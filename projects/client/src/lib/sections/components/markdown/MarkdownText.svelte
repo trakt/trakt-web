@@ -7,8 +7,14 @@
   const {
     text,
     isSpoiler = false,
+    headings = "default",
     onReveal,
-  }: { text: string; isSpoiler?: boolean; onReveal?: () => void } = $props();
+  }: {
+    text: string;
+    isSpoiler?: boolean;
+    headings?: "default" | "subheading";
+    onReveal?: () => void;
+  } = $props();
 
   const marked = $derived(
     createSafeMarked({
@@ -20,7 +26,11 @@
   );
 </script>
 
-<div class="trakt-markdown-text" use:spoilMeAnyway={{ onReveal }}>
+<div
+  class="trakt-markdown-text"
+  data-headings={headings}
+  use:spoilMeAnyway={{ onReveal }}
+>
   <!--
     -gfm: to enable GitHub Flavored Markdown
     -breaks: to enable gfm line breaks
@@ -53,6 +63,19 @@
     :global(.trakt-markdown-heading) {
       text-transform: none;
       text-decoration: underline;
+    }
+
+    &[data-headings="subheading"] :global(.trakt-markdown-heading) {
+      display: block;
+      margin-top: var(--gap-s);
+
+      font-size: var(--font-size-text-small);
+      color: var(--color-text-emphasis);
+      text-decoration: none;
+
+      &:first-child {
+        margin-top: 0;
+      }
     }
 
     :global(span) {

@@ -18,6 +18,7 @@
     isLoading,
     videos,
     sentiment,
+    realityCheck,
     youtubeSpecial,
   } = useMovie(fromRune(() => params.slug));
 </script>
@@ -43,6 +44,7 @@
       streamOn={$streamOn}
       videos={$videos}
       sentiment={$sentiment}
+      realityCheck={$realityCheck}
       youtubeSpecial={$youtubeSpecial}
     />
   {:else}

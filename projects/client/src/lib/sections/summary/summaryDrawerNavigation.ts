@@ -5,6 +5,7 @@ import {
   COMMENT_ID_PARAM,
   EPISODE_PARAM,
   SEASON_PARAM,
+  TAB_PARAM,
 } from '$lib/sections/summary/constants.ts';
 
 const summaryDrawerParams = {
@@ -14,6 +15,7 @@ const summaryDrawerParams = {
   /* The seasons drawer can be asked to open on an episode - the rail's edge
      badges send the one its window cuts off at. */
   [SummaryDrawers.Seasons]: { [EPISODE_PARAM]: '' },
+  [SummaryDrawers.Sentiment]: { [TAB_PARAM]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 function mapToDrawer(value: string | Nil) {
