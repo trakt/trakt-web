@@ -45,14 +45,6 @@ export const RealityCheckResponseSchema = z.object({
     .optional(),
   timeline: z.string().optional(),
   leftOut: z.array(z.string()).optional(),
-  sources: z
-    .array(
-      z.object({
-        title: z.string(),
-        url: z.string(),
-      }),
-    )
-    .optional(),
 });
 
 export type RealityCheckResponse = z.infer<typeof RealityCheckResponseSchema>;

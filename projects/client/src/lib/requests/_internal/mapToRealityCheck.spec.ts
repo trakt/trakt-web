@@ -12,7 +12,7 @@ describe('mapper: mapToRealityCheck', () => {
     );
   });
 
-  it('should map the VIP shape with relative links, story claims and web sources only', () => {
+  it('should map the VIP shape with relative links and story claims', () => {
     expect(mapToRealityCheck(RealityCheckVipResponseMock)).to.deep.equal(
       RealityCheckVipMappedMock,
     );

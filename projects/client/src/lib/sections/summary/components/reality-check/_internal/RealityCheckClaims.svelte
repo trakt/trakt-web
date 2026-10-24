@@ -18,14 +18,16 @@
           </p>
         {/if}
       </div>
-      <p>
-        <span class="bold">{m.label_reality_on_screen()}</span>
-        <InlineMarkdown text={claim.onScreen} />
-      </p>
-      <p>
-        <span class="bold">{m.label_reality_documented()}</span>
-        <InlineMarkdown text={claim.documented} />
-      </p>
+      <dl class="reality-claim-text">
+        <dt>{m.label_reality_claim_on_screen()}</dt>
+        <dd class="on-screen">
+          <InlineMarkdown text={claim.onScreen} />
+        </dd>
+        <dt>{m.label_reality_claim_reality()}</dt>
+        <dd class="documented">
+          <InlineMarkdown text={claim.documented} />
+        </dd>
+      </dl>
     </li>
   {/each}
 </ul>
@@ -34,19 +36,28 @@
   .trakt-reality-check-claims {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
 
     margin: 0;
+    margin-top: var(--gap-xs);
     padding: 0;
     list-style: none;
 
     .reality-claim {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-xxs);
+      gap: var(--gap-xs);
+
+      padding-block: var(--ni-18);
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+      }
 
       &:not(:first-child) {
-        padding-top: var(--gap-m);
         border-top: var(--border-thickness-xxs) solid var(--color-border);
       }
     }
@@ -60,6 +71,42 @@
 
     p {
       font-size: var(--font-size-text);
+    }
+
+    .reality-claim-text {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      align-items: baseline;
+      gap: var(--gap-xs) var(--ni-10);
+
+      margin: 0;
+
+      dt {
+        font-size: var(--ni-11);
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+      }
+
+      dd {
+        margin: 0;
+        line-height: 1.6;
+
+        :global(.trakt-inline-markdown) {
+          font-size: inherit;
+        }
+      }
+
+      .on-screen {
+        font-size: var(--font-size-text-small);
+        color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
+      }
+
+      .documented {
+        font-size: var(--font-size-text);
+        color: var(--color-text-primary);
+      }
     }
   }
 </style>

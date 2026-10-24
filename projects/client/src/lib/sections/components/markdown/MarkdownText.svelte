@@ -8,11 +8,13 @@
     text,
     isSpoiler = false,
     headings = "default",
+    spacing = "default",
     onReveal,
   }: {
     text: string;
     isSpoiler?: boolean;
     headings?: "default" | "subheading";
+    spacing?: "default" | "relaxed";
     onReveal?: () => void;
   } = $props();
 
@@ -29,6 +31,7 @@
 <div
   class="trakt-markdown-text"
   data-headings={headings}
+  data-spacing={spacing}
   use:spoilMeAnyway={{ onReveal }}
 >
   <!--
@@ -75,6 +78,26 @@
 
       &:first-child {
         margin-top: 0;
+      }
+    }
+
+    &[data-spacing="relaxed"] {
+      line-height: 1.6;
+
+      > :global(* + *) {
+        margin-top: var(--ni-10);
+      }
+
+      :global(.trakt-markdown-heading) {
+        margin-top: var(--ni-24);
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      :global(.trakt-markdown-heading + *) {
+        margin-top: var(--gap-xs);
       }
     }
 

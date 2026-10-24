@@ -1,6 +1,5 @@
 <script lang="ts">
   import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
-  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { RealityCheckDetail } from "$lib/requests/models/RealityCheck.ts";
   import MarkdownText from "$lib/sections/components/markdown/MarkdownText.svelte";
@@ -15,7 +14,13 @@
   {#if detail.breakdown}
     <InfoCard variant="highlight">
       <p class="bold">{m.header_reality_real_story()}</p>
-      <MarkdownText text={detail.breakdown} headings="subheading" />
+      <div class="reality-breakdown">
+        <MarkdownText
+          text={detail.breakdown}
+          headings="subheading"
+          spacing="relaxed"
+        />
+      </div>
     </InfoCard>
   {/if}
 
@@ -29,7 +34,7 @@
   {#if detail.characters.length > 0}
     <InfoCard>
       <p class="bold">{m.header_reality_people()}</p>
-      <ul class="reality-list">
+      <ul class="reality-list reality-text">
         {#each detail.characters as character, index (index)}
           <li>
             <p>
@@ -50,31 +55,16 @@
   {#if detail.timeline}
     <InfoCard>
       <p class="bold">{m.header_reality_timeline()}</p>
-      <p><InlineMarkdown text={detail.timeline} /></p>
+      <p class="reality-text"><InlineMarkdown text={detail.timeline} /></p>
     </InfoCard>
   {/if}
 
   {#if detail.leftOut.length > 0}
     <InfoCard>
       <p class="bold">{m.header_reality_left_out()}</p>
-      <ul class="reality-bullets">
+      <ul class="reality-bullets reality-text">
         {#each detail.leftOut as item, index (index)}
           <li><InlineMarkdown text={item} /></li>
-        {/each}
-      </ul>
-    </InfoCard>
-  {/if}
-
-  {#if detail.sources.length > 0}
-    <InfoCard>
-      <p class="bold">{m.header_reality_sources()}</p>
-      <ul class="reality-sources">
-        {#each detail.sources as source, index (index)}
-          <li>
-            <Link href={source.url} target="_blank" rel="noopener noreferrer">
-              {source.title}
-            </Link>
-          </li>
         {/each}
       </ul>
     </InfoCard>
@@ -96,9 +86,12 @@
       padding: 0;
     }
 
-    .reality-list,
-    .reality-sources {
+    .reality-list {
       list-style: none;
+    }
+
+    .reality-text {
+      line-height: 1.6;
     }
 
     .reality-bullets {

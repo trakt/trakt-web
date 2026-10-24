@@ -35,12 +35,6 @@ export const RealityCheckDetailSchema = z.object({
   ),
   timeline: z.string(),
   leftOut: z.array(z.string()),
-  sources: z.array(
-    z.object({
-      title: z.string(),
-      url: z.string(),
-    }),
-  ),
 });
 
 export const RealityCheckSchema = z.object({
