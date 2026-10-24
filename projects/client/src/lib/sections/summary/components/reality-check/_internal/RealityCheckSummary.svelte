@@ -31,7 +31,7 @@
     <RealityCheckRows {realityCheck} />
   </InfoCard>
 
-  <p><InlineMarkdown text={realityCheck.summary} /></p>
+  <p class="reality-summary"><InlineMarkdown text={realityCheck.summary} /></p>
 </div>
 
 <style lang="scss">
@@ -44,6 +44,10 @@
       display: flex;
       flex-direction: column;
       gap: var(--gap-xs);
+    }
+
+    .reality-summary {
+      line-height: 1.6;
     }
 
     .reality-verdict {

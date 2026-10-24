@@ -1,6 +1,5 @@
 import { SEO_ORIGIN } from '$lib/features/seo/seoOrigin.ts';
 import { toRelativeMarkdownLinks } from '$lib/utils/markdown/toRelativeMarkdownLinks.ts';
-import { toUrl } from '$lib/utils/url/toUrl.ts';
 import type {
   RealityCheck,
   RealityCheckDetail,
@@ -8,15 +7,9 @@ import type {
 import type { RealityCheckResponse } from '../models/RealityCheckResponse.ts';
 
 const STORY_SUBJECT = 'story';
-const WEB_PROTOCOLS = ['http:', 'https:'];
 
 function toRelative(text: string) {
   return toRelativeMarkdownLinks(text, SEO_ORIGIN);
-}
-
-function isWebUrl(url: string) {
-  const protocol = toUrl(url)?.protocol;
-  return protocol !== undefined && WEB_PROTOCOLS.includes(protocol);
 }
 
 function mapToDetail(
@@ -44,7 +37,6 @@ function mapToDetail(
     })),
     timeline: toRelative(response.timeline ?? ''),
     leftOut: (response.leftOut ?? []).map(toRelative),
-    sources: (response.sources ?? []).filter((source) => isWebUrl(source.url)),
   };
 }
 

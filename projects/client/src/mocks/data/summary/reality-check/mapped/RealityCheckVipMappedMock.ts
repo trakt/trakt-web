@@ -43,11 +43,5 @@ export const RealityCheckVipMappedMock: RealityCheck = {
     ],
     timeline: 'The film uses the two lawsuits as a narrative framework.',
     leftOut: ['Co-founder Dustin Moskovitz.'],
-    sources: [
-      {
-        title: 'Wikipedia',
-        url: 'https://en.wikipedia.org/wiki/The_Social_Network',
-      },
-    ],
   },
 };
