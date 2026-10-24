@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { beforeNavigate } from "$app/navigation";
   import { page } from "$app/state";
   import { onMount } from "svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
@@ -27,6 +28,8 @@
   import NotesDrawerHost from "./components/notes/NotesDrawerHost.svelte";
   import RatingsDrawer from "./components/rating/RatingsDrawer.svelte";
   import SeasonsDrawerHost from "./components/seasons/SeasonsDrawerHost.svelte";
+  import { toInsightsOpenSource } from "./components/sentiment/toInsightsOpenSource.ts";
+  import type { InsightsOpenSource } from "./components/sentiment/models/InsightsOpenSource.ts";
   import SentimentDrawer from "./components/sentiment/SentimentDrawer.svelte";
   import SocialDrawerHost from "./components/social/SocialDrawerHost.svelte";
   import SoundtrackDrawerHost from "./components/soundtrack/SoundtrackDrawerHost.svelte";
@@ -57,6 +60,11 @@
     sourceCommentId,
     sourceEpisode,
   } = $derived(summaryDrawerNavigation(page.url.searchParams));
+
+  let insightsSource: InsightsOpenSource = $state("link");
+  beforeNavigate(({ type }) => {
+    insightsSource = toInsightsOpenSource(type);
+  });
 
   const navigationOnEntry = summaryDrawerNavigation(
     new URLSearchParams(page.url.search),
@@ -141,7 +149,12 @@
 </script>
 
 {#if drawer === SummaryDrawers.Sentiment && hasInsights}
-  <SentimentDrawer {sentiment} {realityCheck} onClose={close} />
+  <SentimentDrawer
+    {sentiment}
+    {realityCheck}
+    source={insightsSource}
+    onClose={close}
+  />
 {/if}
 
 {#if drawer === SummaryDrawers.Details}

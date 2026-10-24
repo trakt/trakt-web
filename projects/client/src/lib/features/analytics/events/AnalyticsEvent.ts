@@ -14,6 +14,7 @@ const DATA_CLEAR_ACTION_PREFIX = 'data-clear';
 const TODAY_PREFIX = 'today';
 const MIXTAPE_PREFIX = 'mixtape';
 const RECOMMENDATIONS_PREFIX = 'recommendations';
+const INSIGHTS_PREFIX = 'insights';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -125,6 +126,9 @@ export const AnalyticsEvent = {
   MixtapeNoFits: buildEventKey(MIXTAPE_PREFIX, 'no-fits'),
   MixtapeMix: buildEventKey(MIXTAPE_PREFIX, 'mix'),
   MixtapeResult: buildEventKey(MIXTAPE_PREFIX, 'result'),
+
+  InsightsOpen: buildEventKey(INSIGHTS_PREFIX, 'open'),
+  InsightsTab: buildEventKey(INSIGHTS_PREFIX, 'tab'),
 
   Favorite: buildEventKey(MEDIA_ACTION_PREFIX, 'favorite'),
   Rewatching: buildEventKey(MEDIA_ACTION_PREFIX, 'rewatching'),
