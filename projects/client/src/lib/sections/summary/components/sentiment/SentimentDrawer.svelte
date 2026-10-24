@@ -10,22 +10,27 @@
   import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import { TAB_PARAM } from "$lib/sections/summary/constants.ts";
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import RealityCheckTab from "../reality-check/RealityCheckTab.svelte";
+  import type { InsightsOpenSource } from "./models/InsightsOpenSource.ts";
+  import type { InsightsTab } from "./models/InsightsTab.ts";
   import SentimentContent from "./_internal/SentimentContent.svelte";
   import SentimentContentSkeleton from "./_internal/SentimentContentSkeleton.svelte";
   import SentimentUpsell from "./_internal/SentimentUpsell.svelte";
 
-  const REALITY_CHECK_TAB = "reality-check";
-  const SENTIMENT_TAB = "sentiment";
+  const REALITY_CHECK_TAB: InsightsTab = "reality-check";
+  const SENTIMENT_TAB: InsightsTab = "sentiment";
 
   const {
     onClose,
     sentiment,
     realityCheck,
+    source,
   }: {
     sentiment: SentimentAnalysis | Nil;
     realityCheck: RealityCheck | null | undefined;
+    source: InsightsOpenSource;
     onClose: () => void;
   } = $props();
 
@@ -36,11 +41,17 @@
       : REALITY_CHECK_TAB,
   );
 
-  const { track } = useTrack(AnalyticsEvent.Drilldown);
+  const { track: trackOpen } = useTrack(AnalyticsEvent.InsightsOpen);
+  const { track: trackTab } = useTrack(AnalyticsEvent.InsightsTab);
+
+  function toTab(value: string): InsightsTab {
+    return value === SENTIMENT_TAB ? SENTIMENT_TAB : REALITY_CHECK_TAB;
+  }
 
   function onTabChange(to: string) {
-    activeTab = to;
-    track({ source: to, type: "tab" });
+    const tab = toTab(to);
+    activeTab = tab;
+    trackTab({ tab });
 
     const url = new URL(page.url);
     url.searchParams.set(TAB_PARAM, to);
@@ -49,6 +60,13 @@
   }
 
   const hasTabs = $derived(sentiment !== null && realityCheck !== null);
+
+  const shownTab = $derived.by(() => {
+    if (hasTabs) return activeTab;
+    return sentiment !== null ? SENTIMENT_TAB : REALITY_CHECK_TAB;
+  });
+
+  onMount(() => trackOpen({ source, tab: shownTab }));
 </script>
 
 {#snippet sentimentView()}

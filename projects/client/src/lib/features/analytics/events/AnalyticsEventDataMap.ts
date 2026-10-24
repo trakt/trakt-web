@@ -17,6 +17,8 @@ import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
 import type { FilterMode } from '../../filters/models/FilterMode.ts';
+import type { InsightsOpenSource } from '$lib/sections/summary/components/sentiment/models/InsightsOpenSource.ts';
+import type { InsightsTab } from '$lib/sections/summary/components/sentiment/models/InsightsTab.ts';
 import type { TodayCloseReason } from '$lib/sections/today/models/TodayCloseReason.ts';
 import type { TodayDayKind } from '$lib/sections/today/models/TodayDayKind.ts';
 import type { TodayGrouping } from '$lib/sections/today/models/TodayGrouping.ts';
@@ -174,6 +176,9 @@ type MixtapeResultType = {
   type: MediaType;
 };
 
+type InsightsOpenType = { source: InsightsOpenSource; tab: InsightsTab };
+type InsightsTabType = { tab: InsightsTab };
+
 type OnboardingStepType = {
   step: 'intro' | 'import' | 'outro';
   action: 'view' | 'skip' | 'complete';
@@ -298,6 +303,9 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.MixtapeNoFits]: MixtapeNoFitsType;
   [AnalyticsEvent.MixtapeMix]: MixtapeMixType;
   [AnalyticsEvent.MixtapeResult]: MixtapeResultType;
+
+  [AnalyticsEvent.InsightsOpen]: InsightsOpenType;
+  [AnalyticsEvent.InsightsTab]: InsightsTabType;
 
   [AnalyticsEvent.Favorite]: ActionType;
   [AnalyticsEvent.Rewatching]: { action: 'start' | 'stop' };

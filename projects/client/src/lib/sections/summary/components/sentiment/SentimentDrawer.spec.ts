@@ -1,5 +1,6 @@
 import { RealityCheckPublicMappedMock } from '$mocks/data/summary/reality-check/mapped/RealityCheckPublicMappedMock.ts';
 import { goto } from '$app/navigation';
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { MovieHereticSentimentMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticSentimentMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
@@ -11,7 +12,9 @@ import SentimentDrawer from './SentimentDrawer.svelte';
 const { track } = vi.hoisted(() => ({ track: vi.fn() }));
 
 vi.mock('$lib/features/analytics/useTrack.ts', () => ({
-  useTrack: () => ({ track }),
+  useTrack: (event: string) => ({
+    track: (data: unknown) => track(event, data),
+  }),
 }));
 
 const onClose = vi.fn();
@@ -34,6 +37,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        source: 'card',
         onClose,
       },
     });
@@ -58,6 +62,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: undefined,
+        source: 'card',
         onClose,
       },
     });
@@ -74,6 +79,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: null,
+        source: 'card',
         onClose,
       },
     });
@@ -89,6 +95,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: null,
         realityCheck: RealityCheckPublicMappedMock,
+        source: 'card',
         onClose,
       },
     });
@@ -103,7 +110,12 @@ describe('SentimentDrawer', () => {
     const user = userEvent.setup();
 
     const { baseElement } = renderComponent(SentimentDrawer, {
-      props: { sentiment: undefined, realityCheck: undefined, onClose },
+      props: {
+        sentiment: undefined,
+        realityCheck: undefined,
+        source: 'card',
+        onClose,
+      },
     });
 
     expect(await screen.findByRole('tab', { name: 'Sentiment' })).toBeVisible();
@@ -121,7 +133,12 @@ describe('SentimentDrawer', () => {
 
   it('should show the sentiment skeleton without tabs while only it loads', async () => {
     const { baseElement } = renderComponent(SentimentDrawer, {
-      props: { sentiment: undefined, realityCheck: null, onClose },
+      props: {
+        sentiment: undefined,
+        realityCheck: null,
+        source: 'card',
+        onClose,
+      },
     });
 
     await waitFor(() =>
@@ -134,7 +151,12 @@ describe('SentimentDrawer', () => {
 
   it('should show the Reality Check skeleton without tabs while only it loads', async () => {
     const { baseElement } = renderComponent(SentimentDrawer, {
-      props: { sentiment: null, realityCheck: undefined, onClose },
+      props: {
+        sentiment: null,
+        realityCheck: undefined,
+        source: 'card',
+        onClose,
+      },
     });
 
     await waitFor(() =>
@@ -156,6 +178,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        source: 'card',
         onClose,
       },
     });
@@ -176,6 +199,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        source: 'card',
         onClose,
       },
     });
@@ -193,6 +217,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        source: 'card',
         onClose,
       },
     });
@@ -206,31 +231,99 @@ describe('SentimentDrawer', () => {
     expect(options).toMatchObject({ replaceState: true });
   });
 
-  it('should track a tab switch but not the initial tab', async () => {
+  it('should track the open once with the initial tab and source', async () => {
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await screen.findByRole('tab', { name: 'Reality Check' });
+
+    expect(track).toHaveBeenCalledTimes(1);
+    expect(track).toHaveBeenCalledWith(AnalyticsEvent.InsightsOpen, {
+      source: 'card',
+      tab: 'reality-check',
+    });
+  });
+
+  it('should track the open from a direct link on the tab named in the url', async () => {
+    window.history.replaceState(
+      {},
+      '',
+      '/movies/heretic-2024?view=sentiment&tab=sentiment',
+    );
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        source: 'link',
+        onClose,
+      },
+    });
+
+    await screen.findByRole('tab', { name: 'Sentiment' });
+
+    expect(track).toHaveBeenCalledTimes(1);
+    expect(track).toHaveBeenCalledWith(AnalyticsEvent.InsightsOpen, {
+      source: 'link',
+      tab: 'sentiment',
+    });
+  });
+
+  it('should track the open on the tab that is shown without tabs', async () => {
+    window.history.replaceState({}, '', '/movies/heretic-2024?view=sentiment');
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: null,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await screen.findByText(MovieHereticSentimentMappedMock.highlight);
+
+    expect(track).toHaveBeenCalledTimes(1);
+    expect(track).toHaveBeenCalledWith(AnalyticsEvent.InsightsOpen, {
+      source: 'card',
+      tab: 'sentiment',
+    });
+  });
+
+  it('should track a tab switch with the tab and no drilldown', async () => {
     const user = userEvent.setup();
 
     renderComponent(SentimentDrawer, {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        source: 'card',
         onClose,
       },
     });
 
     await screen.findByRole('tab', { name: 'Reality Check' });
-    expect(track).not.toHaveBeenCalled();
+    track.mockClear();
 
     await user.click(screen.getByRole('tab', { name: 'Sentiment' }));
-    expect(track).toHaveBeenLastCalledWith({
-      source: 'sentiment',
-      type: 'tab',
+    expect(track).toHaveBeenLastCalledWith(AnalyticsEvent.InsightsTab, {
+      tab: 'sentiment',
     });
 
     await user.click(screen.getByRole('tab', { name: 'Reality Check' }));
-    expect(track).toHaveBeenLastCalledWith({
-      source: 'reality-check',
-      type: 'tab',
+    expect(track).toHaveBeenLastCalledWith(AnalyticsEvent.InsightsTab, {
+      tab: 'reality-check',
     });
     expect(track).toHaveBeenCalledTimes(2);
+    expect(track).not.toHaveBeenCalledWith(
+      AnalyticsEvent.Drilldown,
+      expect.anything(),
+    );
   });
 });
