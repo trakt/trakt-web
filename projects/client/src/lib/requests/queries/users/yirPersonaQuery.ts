@@ -4,6 +4,7 @@ import { time } from '$lib/utils/timing/time.ts';
 import { fetchReviewResource } from '../../_internal/fetchReviewResource.ts';
 import { dummyYirPersonaResult } from '../../_internal/dummyYirPersonaResult.ts';
 import { mapToYirPersonaResult } from '../../_internal/mapToYirPersonaResult.ts';
+import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import type { YirPersonaId } from '../../models/YirPersonaId.ts';
 import { YirPersonaResultSchema } from '../../models/YirPersonaResult.ts';
 
@@ -44,7 +45,7 @@ const yirPersonaRequest = async ({
 
 export const yirPersonaQuery = defineQuery({
   key: 'yirPersona',
-  invalidations: [],
+  invalidations: [InvalidateAction.Vip.Updated],
   dependencies: (params) => [
     params.slug,
     params.year,
