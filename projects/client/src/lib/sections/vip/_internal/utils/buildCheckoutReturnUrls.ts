@@ -9,6 +9,7 @@ type CheckoutReturnParams = {
   plan: VipPlanDuration;
   source: VipUpsellSource;
   flow: VipFlow;
+  returnTo?: string | Nil;
 };
 
 export function buildCheckoutReturnUrls({
@@ -16,10 +17,12 @@ export function buildCheckoutReturnUrls({
   plan,
   source,
   flow,
+  returnTo,
 }: CheckoutReturnParams) {
   const success = new URL(UrlBuilder.vip(source), origin);
   success.searchParams.set('plan', plan);
   success.searchParams.set('flow', flow);
+  if (returnTo) success.searchParams.set('return', returnTo);
 
   const cancel = new URL(success);
   cancel.searchParams.set('checkout', 'canceled');

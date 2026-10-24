@@ -10,6 +10,10 @@ describe('util: toVipUpsellSource', () => {
     expect(toVipUpsellSource('reality-check')).toBe('reality-check');
   });
 
+  it('should keep the Year in Review email source', () => {
+    expect(toVipUpsellSource('yir-email')).toBe('yir-email');
+  });
+
   it('should keep a promotion source', () => {
     expect(toVipUpsellSource('promotion-black-friday')).toBe(
       'promotion-black-friday',

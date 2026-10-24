@@ -6,6 +6,7 @@
   import { onMount } from "svelte";
   import { parseVipParams } from "./_internal/utils/parseVipParams";
   import { toVipFailureCode } from "./_internal/utils/toVipFailureCode";
+  import { toYirEmailReturnPath } from "./_internal/utils/toYirEmailReturnPath";
   import { useVip } from "./_internal/useVip";
 
   // FIXME: should not be a Svelte component, but a route handler
@@ -44,19 +45,23 @@
       return;
     }
 
-    confirmCheckout(sessionId)
-      .then(
-        () => {
-          if (tracking) trackConfirmed(tracking);
-        },
-        (error) => {
-          if (tracking) {
-            trackConfirmFailed({ ...tracking, error: toVipFailureCode(error) });
-          }
+    const returnTo = toYirEmailReturnPath(page.url);
 
-          throw error;
-        },
-      )
-      .finally(cleanUrl);
+    confirmCheckout(sessionId).then(
+      () => {
+        if (tracking) trackConfirmed(tracking);
+
+        if (!returnTo) return cleanUrl();
+        goto(returnTo, { replaceState: true });
+      },
+      (error) => {
+        if (tracking) {
+          trackConfirmFailed({ ...tracking, error: toVipFailureCode(error) });
+        }
+
+        cleanUrl();
+        throw error;
+      },
+    );
   });
 </script>
