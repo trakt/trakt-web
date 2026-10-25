@@ -578,6 +578,11 @@
 
       &.is-finale {
         height: 110dvh;
+
+        @include short-stage {
+          height: auto;
+          min-height: 110dvh;
+        }
       }
 
       &.is-monthly {
