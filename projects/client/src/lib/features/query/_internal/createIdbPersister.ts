@@ -118,6 +118,15 @@ function refetchStaleRestores(persisterFn: PersisterFn): PersisterFn {
   };
 }
 
+const NATIVE_CODE = /\[native code\]/;
+
+function toIndexedDbOrigin(): string {
+  if (typeof indexedDB === 'undefined') return 'missing';
+
+  const source = Function.prototype.toString.call(indexedDB.open);
+  return NATIVE_CODE.test(source) ? 'native' : 'patched';
+}
+
 /**
  * Per-query IDB persister via TanStack's experimental_createQueryPersister.
  * Each query writes to its own IDB key, so writes never serialize the whole
@@ -125,6 +134,8 @@ function refetchStaleRestores(persisterFn: PersisterFn): PersisterFn {
  * subscribes.
  */
 export function createIdbPersister() {
+  Sentry.setTag('indexeddb', toIndexedDbOrigin());
+
   const persister = experimental_createQueryPersister<PersistedQuery>({
     storage: createIdbStorage(),
     serialize,
