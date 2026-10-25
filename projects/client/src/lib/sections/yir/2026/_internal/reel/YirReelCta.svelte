@@ -47,6 +47,7 @@
 
   .yir-reel-cta {
     pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
     position: relative;
     display: grid;
     grid-template-columns: 1fr auto;

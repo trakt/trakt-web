@@ -302,6 +302,7 @@
 
   .yir-2026-hero-replay {
     display: inline-flex;
+    -webkit-tap-highlight-color: transparent;
     align-items: center;
     justify-content: center;
     gap: var(--ni-6);
