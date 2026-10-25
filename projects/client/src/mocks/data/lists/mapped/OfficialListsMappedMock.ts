@@ -38,6 +38,7 @@ export const OfficialListsMappedMock: MediaListSummary[] = [
       veteran: null,
     },
     posters: [],
+    createdAt: new Date('2018-07-29T10:16:22.000Z'),
     updatedAt: new Date('2025-02-09T21:39:59.000Z'),
     type: 'official',
   },

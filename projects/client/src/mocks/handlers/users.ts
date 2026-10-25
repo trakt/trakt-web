@@ -161,7 +161,13 @@ export const users = [
     return HttpResponse.json(CollaborationListsResponseMock);
   }),
   http.get('http://localhost/users/me/lists*', () => {
-    return HttpResponse.json(PersonalListsResponseMock);
+    return HttpResponse.json(PersonalListsResponseMock, {
+      headers: {
+        'X-Pagination-Page': '1',
+        'X-Pagination-Page-Count': '1',
+        'X-Pagination-Item-Count': `${PersonalListsResponseMock.length}`,
+      },
+    });
   }),
   http.get('http://localhost/users/me/watching*', () => {
     return HttpResponse.json(UserWatchingResponseMock);

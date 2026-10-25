@@ -3491,6 +3491,10 @@
         }
       }
     },
+    "tag_text_owned_list": {
+      "default": "Yours",
+      "description": "Tag shown on a shared list in the collaborations section when the current user owns it. Keep short."
+    },
     "tag_text_follow_request_pending": {
       "default": "Pending",
       "description": "Tag shown on another user's avatar when the current user's follow request is awaiting their approval."

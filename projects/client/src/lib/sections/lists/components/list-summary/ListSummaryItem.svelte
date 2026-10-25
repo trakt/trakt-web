@@ -14,12 +14,14 @@
     position,
     onclick,
     popupActions,
+    markOwned,
   }: {
     list: MediaListSummary;
     source?: string;
     position?: SearchResultPosition;
     onclick?: (list: MediaListSummary) => void;
     popupActions?: Snippet;
+    markOwned?: boolean;
   } = $props();
 
   const { track } = useTrack(AnalyticsEvent.Drilldown);
@@ -34,6 +36,6 @@
 </script>
 
 <ListSummaryCard variant={list.type === "official" ? "official" : "default"}>
-  <ListHeader {list} onclick={handler} {popupActions} />
+  <ListHeader {list} onclick={handler} {popupActions} {markOwned} />
   <ListPosters {list} onclick={handler} />
 </ListSummaryCard>

@@ -23,11 +23,13 @@
     onClose,
     current,
     urlBuilder,
+    directionFor,
   }: {
     options: Sorting<T>[];
     onClose: () => void;
     current: { sortHow: SortDirection; sorting: Sorting<T> };
     urlBuilder: ListUrlBuilder<T>;
+    directionFor?: (value: T | undefined) => SortDirection;
   } = $props();
 
   const { track } = useTrack(AnalyticsEvent.ListSort);
@@ -42,6 +44,10 @@
   function sortHowForOption(optionValue: T | undefined): SortDirection {
     if (optionValue === current.sorting.value) {
       return reversedDirection;
+    }
+
+    if (directionFor) {
+      return directionFor(optionValue);
     }
 
     if (!usesWatchlistDirectionDefaults) {

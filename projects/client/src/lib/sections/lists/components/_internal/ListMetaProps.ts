@@ -9,4 +9,5 @@ export type ListMetaProps = {
   metaText?: string;
   countUrl?: string;
   onCountClick?: () => void;
+  markOwned?: boolean;
 };

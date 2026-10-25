@@ -3,12 +3,15 @@
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import StemTag from "$lib/components/tags/StemTag.svelte";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import { languageTag } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import { toGroupedNumber } from "$lib/utils/formatting/number/toGroupedNumber.ts";
+  import { toUserSlug } from "$lib/utils/profile/toUserSlug.ts";
   import type { ListMetaProps } from "./_internal/ListMetaProps.ts";
 
   const {
@@ -19,7 +22,11 @@
     metaText,
     countUrl,
     onCountClick,
+    markOwned = false,
   }: ListMetaProps = $props();
+
+  const { isMe } = $derived(useIsMe(list ? toUserSlug(list.user) : ""));
+  const isOwned = $derived(markOwned && $isMe);
 
   const CountIcon = $derived.by(() => {
     switch (type) {
@@ -41,7 +48,6 @@
 
     return toGroupedNumber(value, languageTag());
   });
-
 </script>
 
 {#snippet owner(ownedList: MediaListSummary)}
@@ -64,11 +70,15 @@
 {/snippet}
 
 <div class="trakt-list-meta">
+  {#if isOwned}
+    <StemTag text={m.tag_text_owned_list()} />
+  {/if}
+
   {#if metaText}
     <ListMetaInfo text={metaText} />
   {/if}
 
-  {#if showOwner && list}
+  {#if showOwner && list && !isOwned}
     {@render owner(list)}
   {/if}
 

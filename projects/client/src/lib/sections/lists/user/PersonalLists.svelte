@@ -54,6 +54,7 @@
 
   const isMine = $derived(type === "personal" && $isMe);
   const canLeave = $derived(type === "collaboration" && $isMe);
+  const showOwnedTag = $derived(type === "collaboration");
   const isPresentable = $derived(
     (display === "compact" ? $isMe : isMine) ||
       (!$isLoading && $lists.length > 0),
@@ -118,6 +119,7 @@
           {list}
           type={mode}
           popupActions={canLeave ? popupActions : undefined}
+          markOwned={showOwnedTag}
         />
       {/each}
     </div>
@@ -150,6 +152,7 @@
         <ListSummaryItem
           {list}
           popupActions={canLeave ? popupActions : undefined}
+          markOwned={showOwnedTag}
         />
       {/snippet}
 

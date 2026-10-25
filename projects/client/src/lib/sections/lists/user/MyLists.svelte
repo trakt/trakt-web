@@ -44,9 +44,7 @@
         : UrlBuilder.lists.all(slug, type),
     label: m.button_label_view_all_lists(),
     source:
-      type === "smart"
-        ? { id: "smart-lists" }
-        : { id: "personal-lists", type },
+      type === "smart" ? { id: "smart-lists" } : { id: "personal-lists", type },
     mode: "always" as const,
   });
 
@@ -89,7 +87,9 @@
   --list-actions-height="var(--segmented-select-minimal-segment-height)"
   --height-list="var(--height-lists-list)"
   --height-override-list={$items.length === 0
-    ? hasStrip ? "0px" : "var(--height-poster-list-sm)"
+    ? hasStrip
+      ? "0px"
+      : "var(--height-poster-list-sm)"
     : undefined}
 >
   {#snippet item(entry)}
@@ -103,6 +103,7 @@
       <ListSummaryItem
         list={entry.list}
         popupActions={type === "collaboration" ? popupActions : undefined}
+        markOwned={type === "collaboration"}
       />
     {/if}
   {/snippet}

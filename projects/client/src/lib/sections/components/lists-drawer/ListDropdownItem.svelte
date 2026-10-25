@@ -3,9 +3,11 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import CheckboxIcon from "$lib/components/icons/CheckboxIcon.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
+  import StemTag from "$lib/components/tags/StemTag.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
+  import * as m from "$lib/features/i18n/messages.ts";
   import {
     type BackgroundFlash,
     backgroundFlash,
@@ -21,6 +23,7 @@
     i18n = ListDropdownItemIntlProvider,
     target,
     isListed,
+    isOwned = false,
   }: ListDropdownItemProps = $props();
 
   const { user } = useUser();
@@ -56,22 +59,28 @@
   );
 
   const handler = $derived(isListed ? confirmRemove : add);
-  const { color, variant: _, ...events } = $derived(
-    useDangerButton({ isActive: isListed, color: "default" }),
-  );
+  const {
+    color,
+    variant: _,
+    ...events
+  } = $derived(useDangerButton({ isActive: isListed, color: "default" }));
 
   const itemProps: Omit<ButtonProps, "children"> = $derived({
-      label: i18n.label({ isListed, listName: list.name, title }),
-      "aria-pressed": isListed ? "true" : "false",
-      color: $color,
-      onclick: handler,
-      disabled: $isListUpdating || (!isListed && !isBelowLimit),
-      ...events,
-      [createAttachmentKey()]: backgroundFlash(flash),
-    });
+    label: i18n.label({ isListed, listName: list.name, title }),
+    "aria-pressed": isListed ? "true" : "false",
+    color: $color,
+    onclick: handler,
+    disabled: $isListUpdating || (!isListed && !isBelowLimit),
+    ...events,
+    [createAttachmentKey()]: backgroundFlash(flash),
+  });
 </script>
 
-<DropdownItem {...itemProps}>
+{#snippet ownedTag()}
+  <StemTag text={m.tag_text_owned_list()} />
+{/snippet}
+
+<DropdownItem {...itemProps} end={isOwned ? ownedTag : undefined}>
   {i18n.text({ isListed, listName: list.name, title })}
 
   {#snippet icon()}
@@ -81,5 +90,4 @@
       <CheckboxIcon state={isListed ? "checked" : "unchecked"} />
     {/if}
   {/snippet}
-
 </DropdownItem>

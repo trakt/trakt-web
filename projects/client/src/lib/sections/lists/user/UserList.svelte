@@ -17,10 +17,17 @@
     titleAction?: Snippet;
     scope?: string;
     popupActions?: Snippet;
+    markOwned?: boolean;
   };
 
-  const { list, type, titleAction, scope, popupActions }: UserListProps =
-    $props();
+  const {
+    list,
+    type,
+    titleAction,
+    scope,
+    popupActions,
+    markOwned,
+  }: UserListProps = $props();
 
   const { filterMap } = useFilter();
 
@@ -37,7 +44,7 @@
 </script>
 
 {#snippet listMetaInfo()}
-  <ListMeta {list} showOwner={false} />
+  <ListMeta {list} showOwner={false} {markOwned} />
 {/snippet}
 
 <DrillableMediaList
