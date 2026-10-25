@@ -526,6 +526,7 @@
 
   .yir-reel-skip {
     position: absolute;
+    -webkit-tap-highlight-color: transparent;
     top: calc(env(safe-area-inset-top, 0) + var(--ni-16));
     inset-inline-end: var(--ni-16);
     z-index: var(--layer-raised);
@@ -758,6 +759,7 @@
 
     button {
       padding: var(--ni-4) var(--ni-12);
+      -webkit-tap-highlight-color: transparent;
       border-radius: var(--border-radius-xxl);
       border: var(--ni-1) solid var(--color-yir-border-subtle);
       background: none;
