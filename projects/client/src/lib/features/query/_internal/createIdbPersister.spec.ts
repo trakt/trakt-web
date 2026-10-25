@@ -1,6 +1,6 @@
 import { delay } from '$lib/utils/timing/delay.ts';
 import { QueryClient, QueryObserver } from '@tanstack/query-core';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const idb = vi.hoisted(() => ({
   createStore: vi.fn(),
@@ -11,7 +11,9 @@ const idb = vi.hoisted(() => ({
 }));
 
 vi.mock('idb-keyval', () => idb);
-vi.mock('@sentry/sveltekit', () => ({ addBreadcrumb: vi.fn() }));
+const sentry = vi.hoisted(() => ({ addBreadcrumb: vi.fn(), setTag: vi.fn() }));
+
+vi.mock('@sentry/sveltekit', () => sentry);
 
 // What a storage-partitioned or locked-down context throws. `createStore` is
 // lazy, so this surfaces synchronously out of the idb-keyval call rather than
@@ -45,6 +47,28 @@ describe('util: createIdbPersister', () => {
     idb.entries.mockResolvedValue([]);
     idb.get.mockResolvedValue(undefined);
     idb.set.mockResolvedValue(undefined);
+  });
+
+  describe('indexeddb tag', () => {
+    afterEach(() => {
+      vi.unstubAllGlobals();
+    });
+
+    it('should tag a built-in indexeddb as native', async () => {
+      vi.stubGlobal('indexedDB', { open: Function.prototype.call });
+
+      await importPersister();
+
+      expect(sentry.setTag).toHaveBeenLastCalledWith('indexeddb', 'native');
+    });
+
+    it('should tag a replaced indexeddb as patched', async () => {
+      vi.stubGlobal('indexedDB', { open: () => undefined });
+
+      await importPersister();
+
+      expect(sentry.setTag).toHaveBeenLastCalledWith('indexeddb', 'patched');
+    });
   });
 
   describe('when storage is blocked', () => {
