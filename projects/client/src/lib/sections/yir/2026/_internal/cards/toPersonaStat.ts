@@ -34,6 +34,7 @@ const FORMATS: Record<YirHighlightKind, HighlightFormat> = {
     label: m.yir_2026_highlight_catalog_share,
     unit: 'percent',
   },
+  rewatches: { label: m.yir_2026_highlight_rewatches },
   'top-show-episodes': { label: m.yir_2026_highlight_top_show_episodes },
   apps: { label: m.yir_2026_highlight_apps },
   shows: { label: m.yir_2026_highlight_shows },
