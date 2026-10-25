@@ -20,6 +20,14 @@ describe('util: toPersonaStat', () => {
     );
   });
 
+  it('should group rewatches as a plain count', () => {
+    expect(toPersonaStat({ kind: 'rewatches', value: 1412 })).toEqual({
+      key: 'rewatches',
+      value: '1,412',
+      label: 'rewatches',
+    });
+  });
+
   it('should not group years', () => {
     expect(toPersonaStat({ kind: 'avg-vintage', value: 2007 }).value).toBe(
       '2007',

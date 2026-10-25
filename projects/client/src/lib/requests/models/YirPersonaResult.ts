@@ -11,6 +11,7 @@ export const YirHighlightKindSchema = z.enum([
   'binge-days',
   'plays-per-day',
   'catalog-share',
+  'rewatches',
   'top-show-episodes',
   'apps',
   'shows',

@@ -11912,6 +11912,10 @@
       "default": "catalog episodes",
       "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."
     },
+    "yir_2026_highlight_rewatches": {
+      "default": "rewatches",
+      "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately). Counts plays of an episode or movie the user had already watched before."
+    },
     "yir_2026_highlight_top_show_episodes": {
       "default": "episodes of your #1 show",
       "description": "Label under a persona highlight number on the 2026 Year in Review persona card (the number itself is shown separately)."

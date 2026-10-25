@@ -53,7 +53,7 @@ const FIXTURES: Record<YirPersonaId, PersonaFixture> = {
     streak: 5,
     traits: ['app-hopper'],
     highlights: [
-      { kind: 'catalog-share', value: 74 },
+      { kind: 'rewatches', value: 412 },
       { kind: 'top-show-episodes', value: 144 },
       { kind: 'apps', value: 8 },
     ],
