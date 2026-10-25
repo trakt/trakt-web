@@ -659,3 +659,639 @@
   descent-override: 36.89%;
   line-gap-override: 0%;
 }
+
+@font-face {
+  font-family: "JetBrains Mono Android Fallback";
+  src: local("Droid Sans Mono"), local("DroidSansMono");
+  font-weight: 100 500;
+  size-adjust: 99.98%;
+  ascent-override: 102.02%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Android Fallback";
+  src: local("Droid Sans Mono"), local("DroidSansMono");
+  font-weight: 600 900;
+  size-adjust: 99.98%;
+  ascent-override: 102.02%;
+  descent-override: 30.01%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Spline Sans Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 100.48%;
+  ascent-override: 95.54%;
+  descent-override: 23.89%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Spline Sans Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0030;
+  size-adjust: 105.7%;
+  ascent-override: 90.82%;
+  descent-override: 22.71%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Spline Sans Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0031-0039;
+  size-adjust: 102.84%;
+  ascent-override: 93.34%;
+  descent-override: 23.34%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Spline Sans Android Fallback";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  font-weight: 600 900;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 102.48%;
+  ascent-override: 93.67%;
+  descent-override: 23.42%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Spline Sans Android Fallback";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  font-weight: 600 900;
+  unicode-range: U+0030;
+  size-adjust: 107.32%;
+  ascent-override: 89.45%;
+  descent-override: 22.36%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Spline Sans Android Fallback";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  font-weight: 600 900;
+  unicode-range: U+0031-0039;
+  size-adjust: 100.71%;
+  ascent-override: 95.32%;
+  descent-override: 23.83%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Dela Gothic One Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 131.87%;
+  ascent-override: 87.97%;
+  descent-override: 21.99%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Dela Gothic One Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  unicode-range: U+0030;
+  size-adjust: 163.16%;
+  ascent-override: 71.09%;
+  descent-override: 17.77%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Dela Gothic One Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  unicode-range: U+0031-0039;
+  size-adjust: 160.14%;
+  ascent-override: 72.44%;
+  descent-override: 18.11%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Archivo Black Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 123.79%;
+  ascent-override: 71.09%;
+  descent-override: 16.96%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Archivo Black Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  unicode-range: U+0030-0039;
+  size-adjust: 118.68%;
+  ascent-override: 74.15%;
+  descent-override: 17.69%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Shrikhand Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 110.72%;
+  ascent-override: 93.03%;
+  descent-override: 38.84%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Shrikhand Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  unicode-range: U+0030;
+  size-adjust: 127.19%;
+  ascent-override: 80.98%;
+  descent-override: 33.81%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Shrikhand Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  unicode-range: U+0031-0039;
+  size-adjust: 116.31%;
+  ascent-override: 88.56%;
+  descent-override: 36.97%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "VT323 Android Fallback";
+  src: local("Droid Sans Mono"), local("DroidSansMono");
+  size-adjust: 66.69%;
+  ascent-override: 119.97%;
+  descent-override: 29.99%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Permanent Marker Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 112.64%;
+  ascent-override: 98.55%;
+  descent-override: 28.41%;
+  line-gap-override: 2.66%;
+}
+
+@font-face {
+  font-family: "Permanent Marker Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  unicode-range: U+0030;
+  size-adjust: 122.16%;
+  ascent-override: 90.87%;
+  descent-override: 26.2%;
+  line-gap-override: 2.46%;
+}
+
+@font-face {
+  font-family: "Permanent Marker Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  unicode-range: U+0031-0039;
+  size-adjust: 92.24%;
+  ascent-override: 120.34%;
+  descent-override: 34.69%;
+  line-gap-override: 3.25%;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 104.78%;
+  ascent-override: 90.14%;
+  descent-override: 26.51%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0030;
+  size-adjust: 115.43%;
+  ascent-override: 81.82%;
+  descent-override: 24.06%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0031-0039;
+  size-adjust: 106.8%;
+  ascent-override: 88.43%;
+  descent-override: 26.01%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque Android Fallback";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  font-weight: 600 900;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 102.8%;
+  ascent-override: 91.19%;
+  descent-override: 26.34%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque Android Fallback";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  font-weight: 600 900;
+  unicode-range: U+0030;
+  size-adjust: 110.77%;
+  ascent-override: 84.63%;
+  descent-override: 24.45%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque Android Fallback";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  font-weight: 600 900;
+  unicode-range: U+0031-0039;
+  size-adjust: 105%;
+  ascent-override: 89.29%;
+  descent-override: 25.79%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Abril Fatface Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 95.66%;
+  ascent-override: 110.81%;
+  descent-override: 30.32%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Abril Fatface Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  unicode-range: U+0030;
+  size-adjust: 118.78%;
+  ascent-override: 89.24%;
+  descent-override: 24.41%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Abril Fatface Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  unicode-range: U+0031-0039;
+  size-adjust: 96.09%;
+  ascent-override: 110.32%;
+  descent-override: 30.18%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display Android Fallback";
+  src: local("Noto Serif Bold"), local("NotoSerif-Bold");
+  font-weight: 100 800;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 91.13%;
+  ascent-override: 118.51%;
+  descent-override: 27.43%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display Android Fallback";
+  src: local("Noto Serif Bold"), local("NotoSerif-Bold");
+  font-weight: 100 800;
+  unicode-range: U+0030;
+  size-adjust: 114.19%;
+  ascent-override: 94.58%;
+  descent-override: 21.89%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display Android Fallback";
+  src: local("Noto Serif Bold"), local("NotoSerif-Bold");
+  font-weight: 100 800;
+  unicode-range: U+0031-0039;
+  size-adjust: 86.08%;
+  ascent-override: 125.46%;
+  descent-override: 29.04%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display Android Fallback";
+  src: local("Noto Serif Bold"), local("NotoSerif-Bold");
+  font-weight: 900;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 92.8%;
+  ascent-override: 116.38%;
+  descent-override: 26.94%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display Android Fallback";
+  src: local("Noto Serif Bold"), local("NotoSerif-Bold");
+  font-weight: 900;
+  unicode-range: U+0030;
+  size-adjust: 119.5%;
+  ascent-override: 90.38%;
+  descent-override: 20.92%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display Android Fallback";
+  src: local("Noto Serif Bold"), local("NotoSerif-Bold");
+  font-weight: 900;
+  unicode-range: U+0031-0039;
+  size-adjust: 90.28%;
+  ascent-override: 119.63%;
+  descent-override: 27.69%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display Android Fallback";
+  src: local("Noto Serif Italic"), local("NotoSerif-Italic");
+  font-style: italic;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 92.12%;
+  ascent-override: 117.23%;
+  descent-override: 27.14%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display Android Fallback";
+  src: local("Noto Serif Italic"), local("NotoSerif-Italic");
+  font-style: italic;
+  unicode-range: U+0030;
+  size-adjust: 101.06%;
+  ascent-override: 106.87%;
+  descent-override: 24.74%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display Android Fallback";
+  src: local("Noto Serif Italic"), local("NotoSerif-Italic");
+  font-style: italic;
+  unicode-range: U+0031-0039;
+  size-adjust: 82.41%;
+  ascent-override: 131.04%;
+  descent-override: 30.33%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Serif Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 70.34%;
+  ascent-override: 140.74%;
+  descent-override: 44.07%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Serif Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  unicode-range: U+0030;
+  size-adjust: 82.28%;
+  ascent-override: 120.32%;
+  descent-override: 37.68%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Serif Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  unicode-range: U+0031-0039;
+  size-adjust: 64.51%;
+  ascent-override: 153.46%;
+  descent-override: 48.05%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Serif Android Fallback";
+  src: local("Noto Serif Italic"), local("NotoSerif-Italic");
+  font-style: italic;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 75.41%;
+  ascent-override: 131.28%;
+  descent-override: 41.11%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Serif Android Fallback";
+  src: local("Noto Serif Italic"), local("NotoSerif-Italic");
+  font-style: italic;
+  unicode-range: U+0030;
+  size-adjust: 82.48%;
+  ascent-override: 120.03%;
+  descent-override: 37.59%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Serif Android Fallback";
+  src: local("Noto Serif Italic"), local("NotoSerif-Italic");
+  font-style: italic;
+  unicode-range: U+0031-0039;
+  size-adjust: 64.86%;
+  ascent-override: 152.64%;
+  descent-override: 47.8%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 100.93%;
+  ascent-override: 101.06%;
+  descent-override: 26.75%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Android Fallback";
+  src: local("Roboto"), local("Roboto-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0030-0039;
+  size-adjust: 106.76%;
+  ascent-override: 95.54%;
+  descent-override: 25.29%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Android Fallback";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  font-weight: 600 900;
+  size-adjust: 103.81%;
+  ascent-override: 98.26%;
+  descent-override: 26.01%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Android Fallback";
+  src: local("Roboto Italic"), local("Roboto-Italic");
+  font-style: italic;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 101.74%;
+  ascent-override: 100.26%;
+  descent-override: 26.54%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Android Fallback";
+  src: local("Roboto Italic"), local("Roboto-Italic");
+  font-style: italic;
+  unicode-range: U+0030-0039;
+  size-adjust: 110.01%;
+  ascent-override: 92.72%;
+  descent-override: 24.54%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 83.64%;
+  ascent-override: 110%;
+  descent-override: 34.67%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0030;
+  size-adjust: 85.33%;
+  ascent-override: 107.82%;
+  descent-override: 33.99%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond Android Fallback";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  font-weight: 100 500;
+  unicode-range: U+0031-0039;
+  size-adjust: 87.84%;
+  ascent-override: 104.74%;
+  descent-override: 33.02%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond Android Fallback";
+  src: local("Noto Serif Bold"), local("NotoSerif-Bold");
+  font-weight: 600 900;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 79.28%;
+  ascent-override: 116.05%;
+  descent-override: 36.58%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond Android Fallback";
+  src: local("Noto Serif Bold"), local("NotoSerif-Bold");
+  font-weight: 600 900;
+  unicode-range: U+0030;
+  size-adjust: 84.45%;
+  ascent-override: 108.94%;
+  descent-override: 34.34%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond Android Fallback";
+  src: local("Noto Serif Bold"), local("NotoSerif-Bold");
+  font-weight: 600 900;
+  unicode-range: U+0031-0039;
+  size-adjust: 86.93%;
+  ascent-override: 105.83%;
+  descent-override: 33.36%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond Android Fallback";
+  src: local("Noto Serif Bold Italic"), local("NotoSerif-BoldItalic");
+  font-style: italic;
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 71.54%;
+  ascent-override: 128.6%;
+  descent-override: 40.54%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond Android Fallback";
+  src: local("Noto Serif Bold Italic"), local("NotoSerif-BoldItalic");
+  font-style: italic;
+  unicode-range: U+0030;
+  size-adjust: 79.6%;
+  ascent-override: 115.58%;
+  descent-override: 36.43%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond Android Fallback";
+  src: local("Noto Serif Bold Italic"), local("NotoSerif-BoldItalic");
+  font-style: italic;
+  unicode-range: U+0031-0039;
+  size-adjust: 87.84%;
+  ascent-override: 104.74%;
+  descent-override: 33.02%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Caveat Android Fallback";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  unicode-range: U+0000-002F, U+003A-10FFFF;
+  size-adjust: 77.2%;
+  ascent-override: 124.36%;
+  descent-override: 38.86%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Caveat Android Fallback";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  unicode-range: U+0030-0039;
+  size-adjust: 78.42%;
+  ascent-override: 122.41%;
+  descent-override: 38.25%;
+  line-gap-override: 0%;
+}

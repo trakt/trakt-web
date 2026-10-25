@@ -8,36 +8,41 @@ type PersonaPalette = {
   body: string;
 };
 
-const BODY = '"Spline Sans", "Spline Sans Fallback", sans-serif';
-const PLEX = '"IBM Plex Sans", "IBM Plex Sans Fallback", sans-serif';
+const BODY =
+  '"Spline Sans", "Spline Sans Fallback", "Spline Sans Android Fallback", sans-serif';
+const PLEX =
+  '"IBM Plex Sans", "IBM Plex Sans Fallback", "IBM Plex Sans Android Fallback", sans-serif';
 
 const PALETTES: Record<YirPersonaId, PersonaPalette> = {
   'anime-voyager': {
     background: 'oklch(26.5% 0.088 287.0)',
     ink: 'oklch(100.0% 0.000 0.0)',
     accent: 'oklch(73.4% 0.186 355.3)',
-    display: '"Dela Gothic One", "Dela Gothic One Fallback", sans-serif',
+    display:
+      '"Dela Gothic One", "Dela Gothic One Fallback", "Dela Gothic One Android Fallback", sans-serif',
     body: BODY,
   },
   'day-one-devotee': {
     background: 'oklch(21.8% 0.021 352.3)',
     ink: 'oklch(100.0% 0.000 0.0)',
     accent: 'oklch(66.9% 0.219 20.9)',
-    display: '"Archivo Black", "Archivo Black Fallback", sans-serif',
+    display:
+      '"Archivo Black", "Archivo Black Fallback", "Archivo Black Android Fallback", sans-serif',
     body: BODY,
   },
   'weekend-marathoner': {
     background: 'oklch(91.1% 0.045 62.8)',
     ink: 'oklch(27.8% 0.089 9.1)',
     accent: 'oklch(53.9% 0.193 6.5)',
-    display: '"Shrikhand", "Shrikhand Fallback", serif',
+    display:
+      '"Shrikhand", "Shrikhand Fallback", "Shrikhand Android Fallback", serif',
     body: BODY,
   },
   'comfort-rewatcher': {
     background: 'oklch(25.6% 0.018 165.5)',
     ink: 'oklch(98.1% 0.030 154.7)',
     accent: 'oklch(90.3% 0.175 150.4)',
-    display: '"VT323", "VT323 Fallback", monospace',
+    display: '"VT323", "VT323 Fallback", "VT323 Android Fallback", monospace',
     body: BODY,
   },
   omnivore: {
@@ -45,35 +50,39 @@ const PALETTES: Record<YirPersonaId, PersonaPalette> = {
     ink: 'oklch(100.0% 0.000 0.0)',
     accent: 'oklch(78.6% 0.130 204.3)',
     display:
-      '"Bricolage Grotesque", "Bricolage Grotesque Fallback", sans-serif',
-    body: '"Bricolage Grotesque", "Bricolage Grotesque Fallback", sans-serif',
+      '"Bricolage Grotesque", "Bricolage Grotesque Fallback", "Bricolage Grotesque Android Fallback", sans-serif',
+    body: '"Bricolage Grotesque", "Bricolage Grotesque Fallback", "Bricolage Grotesque Android Fallback", sans-serif',
   },
   'opening-night': {
     background: 'oklch(22.3% 0.040 270.2)',
     ink: 'oklch(96.8% 0.033 83.7)',
     accent: 'oklch(84.3% 0.141 85.5)',
-    display: '"Abril Fatface", "Abril Fatface Fallback", serif',
+    display:
+      '"Abril Fatface", "Abril Fatface Fallback", "Abril Fatface Android Fallback", serif',
     body: BODY,
   },
   cinephile: {
     background: 'oklch(23.7% 0.009 75.2)',
     ink: 'oklch(95.3% 0.010 87.5)',
     accent: 'oklch(73.1% 0.132 73.9)',
-    display: '"Instrument Serif", "Instrument Serif Fallback", serif',
+    display:
+      '"Instrument Serif", "Instrument Serif Fallback", "Instrument Serif Android Fallback", serif',
     body: PLEX,
   },
   critic: {
     background: 'oklch(89.1% 0.034 86.3)',
     ink: 'oklch(21.8% 0.006 91.6)',
     accent: 'oklch(50.1% 0.178 28.7)',
-    display: '"Playfair Display", "Playfair Display Fallback", serif',
+    display:
+      '"Playfair Display", "Playfair Display Fallback", "Playfair Display Android Fallback", serif',
     body: PLEX,
   },
   loyalist: {
     background: 'oklch(23.8% 0.015 76.2)',
     ink: 'oklch(95.3% 0.026 90.1)',
     accent: 'oklch(78.6% 0.102 84.2)',
-    display: '"Cormorant Garamond", "Cormorant Garamond Fallback", serif',
+    display:
+      '"Cormorant Garamond", "Cormorant Garamond Fallback", "Cormorant Garamond Android Fallback", serif',
     body: PLEX,
   },
   curator: {
@@ -87,14 +96,15 @@ const PALETTES: Record<YirPersonaId, PersonaPalette> = {
     background: 'oklch(92.1% 0.026 305.8)',
     ink: 'oklch(22.8% 0.038 282.9)',
     accent: 'oklch(53.9% 0.193 6.5)',
-    display: '"Abril Fatface", "Abril Fatface Fallback", serif',
+    display:
+      '"Abril Fatface", "Abril Fatface Fallback", "Abril Fatface Android Fallback", serif',
     body: BODY,
   },
   'opening-act': {
     background: 'oklch(29.8% 0.017 86.9)',
     ink: 'oklch(95.1% 0.012 96.4)',
     accent: 'oklch(88.0% 0.135 86.1)',
-    display: '"Caveat", "Caveat Fallback", cursive',
+    display: '"Caveat", "Caveat Fallback", "Caveat Android Fallback", cursive',
     body: BODY,
   },
 };
