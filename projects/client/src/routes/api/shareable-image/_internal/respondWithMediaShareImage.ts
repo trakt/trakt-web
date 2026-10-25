@@ -61,7 +61,7 @@ export async function respondWithMediaShareImage({
         Cast needed due to structural mismatch between Cloudflare's ReadableStream
         and the DOM ReadableStream, they're the same at runtime.
       */
-      return new Response(cachedImage.body as BodyInit, {
+      return new Response(cachedImage.body as unknown as BodyInit, {
         headers: responseHeaders(),
       });
     }
