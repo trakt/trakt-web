@@ -1,5 +1,6 @@
 import '$lib/polyfills/at.ts';
 import '$lib/polyfills/findLast.ts';
+import '$lib/polyfills/findLastIndex.ts';
 import '$lib/polyfills/hasOwn.ts';
 import '$lib/polyfills/mapGroupBy.ts';
 import '$lib/polyfills/randomUUID.ts';
