@@ -65,7 +65,12 @@ export function useDrop(props: DropStoreProps) {
 
     track({ type: target.type });
 
-    await dropping.mutate();
+    const isDropped = await dropping
+      .mutate()
+      .then(() => true)
+      .catch(() => false);
+
+    if (!isDropped) return;
 
     if (context === 'drop') {
       dropNote?.show({ title, type: target.type, id: target.id });
