@@ -11,10 +11,12 @@
     list,
     onclick,
     popupActions,
+    markOwned,
   }: {
     list: MediaListSummary;
     onclick?: () => void;
     popupActions?: Snippet;
+    markOwned?: boolean;
   } = $props();
 
   const listUrl = $derived(getListUrl({ type: "user-list", list }));
@@ -30,11 +32,7 @@
       </p>
     </Link>
 
-    <ListMeta
-      {list}
-      countUrl={listUrl}
-      onCountClick={onclick}
-    />
+    <ListMeta {list} countUrl={listUrl} onCountClick={onclick} {markOwned} />
   </div>
 
   <ListActions {list} {popupActions} />

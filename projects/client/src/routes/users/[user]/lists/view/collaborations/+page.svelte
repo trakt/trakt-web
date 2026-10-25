@@ -3,7 +3,9 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
+  import ListSortActions from "$lib/sections/lists/user/ListSortActions.svelte";
   import PersonalListsPaginated from "$lib/sections/lists/user/PersonalListsPaginated.svelte";
+  import { useUserListsSorting } from "$lib/sections/lists/user/useUserListsSorting.ts";
   import ResponsiveNavbarStateSetter from "$lib/sections/navbar/ResponsiveNavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import type { PageProps } from "./$types";
@@ -11,6 +13,13 @@
   const { params }: PageProps = $props();
 
   const { current } = useDiscover();
+  const {
+    current: sorting,
+    options,
+    urlBuilder,
+  } = $derived(
+    useUserListsSorting({ slug: params.user, type: "collaboration" }),
+  );
 </script>
 
 <TraktPage
@@ -20,13 +29,23 @@
 >
   <TraktPageCoverSetter />
 
-  <ResponsiveNavbarStateSetter contentToggle="discover"
+  <ResponsiveNavbarStateSetter
+    contentToggle="discover"
     hasFilters
     header={{
       title: m.list_title_collaborative_lists(),
       metaInfo: $current.text(),
     }}
-  />
+  >
+    {#snippet headerActions()}
+      <ListSortActions {options} {urlBuilder} current={$sorting} />
+    {/snippet}
+  </ResponsiveNavbarStateSetter>
 
-  <PersonalListsPaginated type="collaboration" slug={params.user} />
+  <PersonalListsPaginated
+    type="collaboration"
+    slug={params.user}
+    sortBy={$sorting.sorting.value}
+    sortHow={$sorting.sortHow}
+  />
 </TraktPage>

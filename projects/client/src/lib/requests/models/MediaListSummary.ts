@@ -18,6 +18,7 @@ export const MediaListSummarySchema = z.object({
       url: ImageUrlsSchema,
     }),
   ),
+  createdAt: z.date(),
   updatedAt: z.date(),
   sortHow: z.enum(['asc', 'desc']),
   sortBy: z.string(),

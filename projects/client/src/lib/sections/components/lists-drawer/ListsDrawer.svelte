@@ -7,6 +7,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ListTarget } from "$lib/models/ListTarget";
+  import type { UserList } from "$lib/requests/queries/users/userListsQuery.ts";
   import { useAllPersonalLists } from "$lib/stores/useAllPersonalLists";
   import { useListedOnIds } from "$lib/stores/useListedOnIds";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
@@ -14,6 +15,7 @@
   import ListPreview from "./_internal/ListPreview.svelte";
   import type { ListPreviewTarget } from "./_internal/ListPreviewTarget";
   import PreviewListButton from "./_internal/PreviewListButton.svelte";
+  import { useSharedListIds } from "./_internal/useSharedListIds.ts";
   import WatchlistDropdownItem from "./_internal/WatchlistDropdownItem.svelte";
 
   const {
@@ -31,6 +33,7 @@
   const { lists, isLoading: isLoadingLists } = useAllPersonalLists();
   const target$ = fromRune(() => target);
   const { listedOnIds, isLoading: isLoadingIds } = useListedOnIds({ target$ });
+  const { sharedListIds, isLoading: isLoadingShared } = useSharedListIds();
 
   const listedOnIdsSet = $derived(new Set($listedOnIds));
   const sortedLists = $derived(
@@ -44,22 +47,25 @@
 
   const categoryIdPrefix = $props.id();
   const { user } = useUser();
+  const isOwned = (list: UserList) => list.ownerId === $user.id;
+  const isShared = (list: UserList) => $sharedListIds.has(list.id);
   const categories = $derived(
     [
       {
         key: "personal",
         title: m.list_title_personal_lists(),
-        lists: sortedLists.filter((list) => list.ownerId === $user.id),
+        lists: sortedLists.filter((list) => isOwned(list) && !isShared(list)),
       },
       {
         key: "collaborations",
         title: m.list_title_collaborative_lists(),
-        lists: sortedLists.filter((list) => list.ownerId !== $user.id),
+        lists: [
+          ...sortedLists.filter((list) => isOwned(list) && isShared(list)),
+          ...sortedLists.filter((list) => !isOwned(list)),
+        ],
       },
     ].filter((category) => category.lists.length > 0),
   );
-
-
 
   let preview = $state<ListPreviewTarget | null>(null);
   const drawerTitle = $derived.by(() => {
@@ -69,7 +75,8 @@
   });
   const isEmpty = $derived($lists.length === 0);
   const isLoading = $derived(
-    !$user.id || (isEmpty && ($isLoadingIds || $isLoadingLists)),
+    !$user.id ||
+      (isEmpty && ($isLoadingIds || $isLoadingLists || $isLoadingShared)),
   );
 </script>
 
@@ -141,6 +148,8 @@
                       {list}
                       {target}
                       isListed={listedOnIdsSet.has(list.id)}
+                      isOwned={category.key === "collaborations" &&
+                        isOwned(list)}
                     />
                   {/each}
                 </DropdownGroup>

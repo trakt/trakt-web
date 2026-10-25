@@ -7,5 +7,6 @@ export type ListDropdownItemProps = {
   target: ListTarget;
   title: string;
   isListed: boolean;
+  isOwned?: boolean;
   i18n?: ListDropdownItemIntl;
 };

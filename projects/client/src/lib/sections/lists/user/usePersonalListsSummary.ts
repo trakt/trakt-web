@@ -5,7 +5,7 @@ import { personalListsQuery } from '$lib/requests/queries/users/personalListsQue
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { dedupe } from '$lib/utils/array/dedupe.ts';
-import { map, of } from 'rxjs';
+import { combineLatest, map, of } from 'rxjs';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { likedListsQuery } from '$lib/requests/queries/users/likedListsQuery.ts';
 import { DEFAULT_LISTS_PAGE_SIZE } from '$lib/utils/constants.ts';
@@ -13,6 +13,8 @@ import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 import type { PersonalListType } from './models/PersonalListType.ts';
 import type { SortDirection } from './models/SortDirection.ts';
 import { defaultDirection } from './defaultDirection.ts';
+import { sortCollaborationLists } from './_internal/sortCollaborationLists.ts';
+import { useOwnSharedLists } from './useOwnSharedLists.ts';
 
 type PersonalListsParams = {
   type: PersonalListType;
@@ -21,6 +23,12 @@ type PersonalListsParams = {
   sortHow?: SortDirection | Nil;
 } & Partial<PaginationParams>;
 
+type CollaborationListsParams = {
+  slug: string;
+  sortBy?: UserListsSortBy | Nil;
+  sortHow: SortDirection;
+};
+
 function sortByUpdatedAt(lists: MediaListSummary[], sortHow: SortDirection) {
   return lists.toSorted((a, b) => {
     const diff = a.updatedAt.getTime() - b.updatedAt.getTime();
@@ -28,8 +36,15 @@ function sortByUpdatedAt(lists: MediaListSummary[], sortHow: SortDirection) {
   });
 }
 
-function defaultSortBy(type: PersonalListType): UserListsSortBy {
-  return type === 'personal' ? 'rank' : 'updated_at';
+function defaultSortBy(type: PersonalListType): UserListsSortBy | undefined {
+  switch (type) {
+    case 'personal':
+      return 'rank';
+    case 'liked':
+      return 'updated_at';
+    case 'collaboration':
+      return undefined;
+  }
 }
 
 function typeToQuery({
@@ -51,6 +66,7 @@ function typeToQuery({
     case 'personal':
       return personalListsQuery({
         slug,
+        collaborative: false,
         sortBy,
         sortHow,
         ...paginationProps,
@@ -58,22 +74,44 @@ function typeToQuery({
   }
 }
 
-function useCollaborationLists(slug: string) {
-  const query = useQuery(collaborationListsQuery({ slug }));
+function useCollaborationLists({
+  slug,
+  sortBy,
+  sortHow,
+}: CollaborationListsParams) {
+  const owned = useOwnSharedLists(slug);
+  const shared = useQuery(collaborationListsQuery({ slug }));
 
   return {
-    list: query.pipe(map(($query) => $query.data ?? [])),
-    isLoading: query.pipe(map(toLoadingState)),
+    list: combineLatest([
+      owned.list,
+      shared.pipe(map(($query) => $query.data ?? [])),
+    ]).pipe(
+      map(([$owned, $shared]) =>
+        sortCollaborationLists({
+          owned: $owned,
+          shared: $shared,
+          sortBy,
+          sortHow,
+        }),
+      ),
+    ),
+    isLoading: combineLatest([
+      owned.isLoading,
+      shared.pipe(map(toLoadingState)),
+    ]).pipe(map((states) => states.some(Boolean))),
     hasNextPage: of(false),
     fetchNextPage: () => Promise.resolve(),
   };
 }
 
-function useListsQuery(params: PersonalListsParams) {
+function useListsQuery(
+  params: PersonalListsParams & { sortHow: SortDirection },
+) {
   const { type } = params;
 
   if (type === 'collaboration') {
-    return useCollaborationLists(params.slug);
+    return useCollaborationLists(params);
   }
 
   return usePaginatedListQuery(typeToQuery({ ...params, type }));
@@ -103,7 +141,7 @@ export function usePersonalListsSummary({
         // FIXME: figure out the root cause of duplicates
         const deduped = dedupe((item) => item.id, $list);
 
-        if (type === 'personal' || resolvedSortBy !== 'updated_at') {
+        if (type !== 'liked' || resolvedSortBy !== 'updated_at') {
           return deduped;
         }
 

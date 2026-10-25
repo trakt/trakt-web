@@ -12,6 +12,7 @@ import type { PaginationParams } from '../../models/PaginationParams.ts';
 
 type PersonalListsParams = {
   slug: string;
+  collaborative?: boolean;
   sortBy?: UserListsSortBy | Nil;
   sortHow?: SortDirection | Nil;
 } & ApiParams &
@@ -20,6 +21,7 @@ type PersonalListsParams = {
 const personalListsRequest = ({
   fetch,
   slug,
+  collaborative,
   page,
   limit,
   sortBy,
@@ -31,6 +33,7 @@ const personalListsRequest = ({
     limit,
     sort_by: sortBy,
     sort_how: sortHow,
+    collaborative,
   };
 
   return api({ fetch }).users.lists.personal({
@@ -48,11 +51,13 @@ export const personalListsQuery = defineInfiniteQuery({
     InvalidateAction.List.Deleted,
     InvalidateAction.List.Created,
     InvalidateAction.List.Like,
+    InvalidateAction.List.Collaborators,
     InvalidateAction.Listed('movie'),
     InvalidateAction.Listed('show'),
   ],
   dependencies: (params) => [
     params.slug,
+    params.collaborative,
     params.page,
     params.limit,
     params.sortBy,

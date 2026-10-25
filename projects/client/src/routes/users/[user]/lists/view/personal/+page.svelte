@@ -17,8 +17,12 @@
 
   const { current } = useDiscover();
   const { isMe } = $derived(useIsMe(params.user));
-  const { current: sorting, options, urlBuilder } =
-    $derived(useUserListsSorting({ slug: params.user }));
+  const {
+    current: sorting,
+    options,
+    urlBuilder,
+    directionFor,
+  } = $derived(useUserListsSorting({ slug: params.user }));
 </script>
 
 {#snippet listActions()}
@@ -49,6 +53,7 @@
       <ListSortActions
         {options}
         {urlBuilder}
+        {directionFor}
         current={$sorting}
       />
     {/snippet}

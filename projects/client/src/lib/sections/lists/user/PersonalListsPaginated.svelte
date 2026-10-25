@@ -25,6 +25,7 @@
   const { mode } = useDiscover();
   const { isMe } = $derived(useIsMe(slug));
   const canLeave = $derived(type === "collaboration" && $isMe);
+  const showOwnedTag = $derived(type === "collaboration");
 </script>
 
 <div class="trakt-paginated-lists">
@@ -49,6 +50,7 @@
           {list}
           type={$mode}
           popupActions={canLeave ? popupActions : undefined}
+          markOwned={showOwnedTag}
         />
       {/each}
     {/snippet}

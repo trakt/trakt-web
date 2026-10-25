@@ -19,11 +19,13 @@
     current,
     urlBuilder,
     disabled,
+    directionFor,
   }: {
     options: Sorting<T>[];
     current: { sortHow: SortDirection; sorting: Sorting<T> };
     urlBuilder: ListUrlBuilder<T>;
     disabled?: boolean;
+    directionFor?: (value: T | undefined) => SortDirection;
   } = $props();
 
   const isOpen = writable(false);
@@ -43,6 +45,7 @@
     {options}
     {current}
     {urlBuilder}
+    {directionFor}
     onClose={() => isOpen.set(false)}
   />
 {/if}
