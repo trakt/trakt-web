@@ -195,6 +195,11 @@
     cursor: pointer;
     text-decoration: none;
     transition: color 0.2s;
+
+    @include for-touch {
+      padding: var(--ni-14);
+      margin: calc(-1 * var(--ni-8));
+    }
   }
 
   .review-header-center :global(.trakt-link):hover {
