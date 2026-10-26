@@ -42,7 +42,7 @@ function defaultSortBy(type: PersonalListType): UserListsSortBy | undefined {
       return 'rank';
     case 'liked':
       return 'updated_at';
-    case 'collaboration':
+    case 'shared':
       return undefined;
   }
 }
@@ -54,7 +54,7 @@ function typeToQuery({
   sortBy,
   sortHow,
 }: PersonalListsParams & {
-  type: Exclude<PersonalListType, 'collaboration'>;
+  type: Exclude<PersonalListType, 'shared'>;
 }) {
   const paginationProps = {
     limit: limit ?? DEFAULT_LISTS_PAGE_SIZE,
@@ -110,7 +110,7 @@ function useListsQuery(
 ) {
   const { type } = params;
 
-  if (type === 'collaboration') {
+  if (type === 'shared') {
     return useCollaborationLists(params);
   }
 

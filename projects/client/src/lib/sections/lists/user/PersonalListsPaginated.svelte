@@ -24,8 +24,8 @@
 
   const { mode } = useDiscover();
   const { isMe } = $derived(useIsMe(slug));
-  const canLeave = $derived(type === "collaboration" && $isMe);
-  const showOwnedTag = $derived(type === "collaboration");
+  const canLeave = $derived(type === "shared" && $isMe);
+  const showOwnedTag = $derived(type === "shared");
 </script>
 
 <div class="trakt-paginated-lists">

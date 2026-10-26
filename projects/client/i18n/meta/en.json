@@ -2203,6 +2203,10 @@
       "default": "Collaborations",
       "description": "Title for lists containing collaborative lists the user is part of. This title should be as short and concise as possible."
     },
+    "list_title_shared_lists": {
+      "default": "Shared",
+      "description": "Title for lists that have collaborators: the user's own lists with collaborators and lists the user collaborates on. This title should be as short and concise as possible."
+    },
     "list_title_liked_lists": {
       "default": "Liked",
       "description": "Title for lists containing the user's liked lists. This title should be as short and concise as possible."
@@ -3464,6 +3468,10 @@
     "description_manage_collaborators": {
       "default": "Collaborators can add and remove items on this list. Choose from people who follow you.",
       "description": "Description shown at the top of the manage collaborators drawer."
+    },
+    "description_manage_collaborators_shared": {
+      "default": "Collaborators can add and remove items on this list. Choose from people who follow you. Lists with collaborators show under Shared.",
+      "description": "Description shown at the top of the manage collaborators drawer. 'Shared' is the title of the section that holds lists with collaborators."
     },
     "list_title_collaborators": {
       "default": "Collaborators",

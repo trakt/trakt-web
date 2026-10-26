@@ -96,14 +96,8 @@ const categoryDrilldownFactory =
     return baseUrl + buildParamString(sanitizeParams(params));
   };
 
-const listsDrilldownFactory = (user: string) => (type: PersonalListType) => {
-  switch (type) {
-    case 'collaboration':
-      return `/users/${user}/lists/view/collaborations`;
-    default:
-      return `/users/${user}/lists/view/${type}`;
-  }
-};
+const listsDrilldownFactory = (user: string) => (type: PersonalListType) =>
+  `/users/${user}/lists/view/${type}`;
 
 const TRENDING_SHAREABLE_IMAGE_PATH = '/api/shareable-image/trending';
 

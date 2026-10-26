@@ -25,7 +25,7 @@ type ProgressToggleType = 'in-progress' | 'dropped' | 'completed' | 'ended';
 type ActivityToggleType = 'reviews' | 'ratings';
 type LibraryToggleType = 'plex' | 'other';
 type EpisodeTypeToggleType = EpisodeTypeFilter;
-type MyListsToggleType = 'smart' | 'personal' | 'liked' | 'collaboration';
+type MyListsToggleType = 'smart' | 'personal' | 'liked' | 'shared';
 type RecommendationModeToggleType = RecommendationMode;
 
 type Toggler<T, K> = {
@@ -230,9 +230,9 @@ const myLists: ToggleDefinition<'myLists'> = {
       label: m.list_title_liked_lists,
     },
     {
-      value: 'collaboration',
-      text: m.list_title_collaborative_lists,
-      label: m.list_title_collaborative_lists,
+      value: 'shared',
+      text: m.list_title_shared_lists,
+      label: m.list_title_shared_lists,
     },
   ],
 };

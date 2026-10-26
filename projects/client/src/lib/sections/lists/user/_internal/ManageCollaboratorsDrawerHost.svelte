@@ -79,7 +79,7 @@
 {/snippet}
 
 <Drawer {onClose} size="auto" title={m.page_title_manage_collaborators()}>
-  <p class="secondary">{m.description_manage_collaborators()}</p>
+  <p class="secondary">{m.description_manage_collaborators_shared()}</p>
 
   <DrawerSearchInput
     bind:value={searchTerm}

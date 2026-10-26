@@ -92,8 +92,8 @@
         m.list_title_liked_lists(),
       )}
       {@render navSubLink(
-        UrlBuilder.lists.all("me", "collaboration"),
-        m.list_title_collaborative_lists(),
+        UrlBuilder.lists.all("me", "shared"),
+        m.list_title_shared_lists(),
       )}
     </NavGroup>
   </RenderFor>

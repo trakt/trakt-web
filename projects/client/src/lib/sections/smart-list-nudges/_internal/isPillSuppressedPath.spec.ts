@@ -17,7 +17,7 @@ describe('isPillSuppressedPath', () => {
     '/discover',
     '/users/me/library',
     '/users/me/lists/view/liked',
-    '/users/me/lists/view/collaborations',
+    '/users/me/lists/view/shared',
     '/users/me/lists/silos/extra',
     '/lists/smart/view/silos',
   ])('keeps the pill on %s', (pathname) => {

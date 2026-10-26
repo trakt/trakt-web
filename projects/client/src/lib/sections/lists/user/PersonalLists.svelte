@@ -53,8 +53,8 @@
   });
 
   const isMine = $derived(type === "personal" && $isMe);
-  const canLeave = $derived(type === "collaboration" && $isMe);
-  const showOwnedTag = $derived(type === "collaboration");
+  const canLeave = $derived(type === "shared" && $isMe);
+  const showOwnedTag = $derived(type === "shared");
   const isPresentable = $derived(
     (display === "compact" ? $isMe : isMine) ||
       (!$isLoading && $lists.length > 0),
@@ -68,8 +68,8 @@
           : m.list_title_user_lists();
       case "liked":
         return m.list_title_liked_lists();
-      case "collaboration":
-        return m.list_title_collaborative_lists();
+      case "shared":
+        return m.list_title_shared_lists();
       default:
         return "";
     }
@@ -95,7 +95,7 @@
           {#snippet icon()}
             {#if type === "personal"}
               <ProfileIcon />
-            {:else if type === "collaboration"}
+            {:else if type === "shared"}
               <SocialIcon />
             {:else}
               <ThumbsUpIcon />

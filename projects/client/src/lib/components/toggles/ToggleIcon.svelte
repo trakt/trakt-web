@@ -146,6 +146,6 @@
   <ThumbsUpIcon />
 {/if}
 
-{#if option.value === "collaboration"}
+{#if option.value === "shared"}
   <SocialIcon />
 {/if}

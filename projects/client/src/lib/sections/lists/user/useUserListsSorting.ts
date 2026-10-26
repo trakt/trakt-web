@@ -14,7 +14,7 @@ import type { SortDirection } from './models/SortDirection.ts';
 import type { Sorting } from './models/Sorting.ts';
 import { toSortDirection } from './toSortDirection.ts';
 
-type SortableListType = 'personal' | 'collaboration';
+type SortableListType = 'personal' | 'shared';
 
 type UserListsSorting = {
   current: Observable<{
@@ -39,7 +39,7 @@ const SORTING_BY_TYPE: Record<
   }
 > = {
   personal: { options: userListsSortOptions, fallback: 'rank' },
-  collaboration: {
+  shared: {
     options: collaborationListsSortOptions,
     fallback: undefined,
   },
