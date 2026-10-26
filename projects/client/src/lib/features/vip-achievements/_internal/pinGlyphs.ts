@@ -115,6 +115,7 @@ const cardBack = (x: number, transform: string, knockout = true) =>
 /** One artwork per achievement theme, each in a 100-unit box. */
 export const pinGlyphs = {
   clapper: {
+    optical: 0.9,
     shapes: [
       fill(clapperBody + clapperBodyStripes),
       fill(clapperArm + clapperArmStripes, { transform: clapperTurn }),
@@ -126,6 +127,7 @@ export const pinGlyphs = {
     solid: [fill(ticketOuter, { transform: ticketTurn })],
   },
   tv: {
+    optical: 0.92,
     shapes: [
       fill(
         tvBody +
@@ -147,6 +149,7 @@ export const pinGlyphs = {
     solid: [fill(tvBody), tvAntenna, tvFeet],
   },
   reel: {
+    optical: 0.96,
     shapes: [fill(reelDisc + reelHoles), reelTail],
     solid: [fill(reelDisc), reelTail],
   },
@@ -186,6 +189,7 @@ export const pinGlyphs = {
     ],
   },
   sun: {
+    optical: 0.96,
     shapes: [
       fill(
         sunCore +
@@ -200,6 +204,7 @@ export const pinGlyphs = {
     solid: [fill(sunCore), stroke(sunRays, 6)],
   },
   double: {
+    optical: 0.88,
     shapes: [
       stroke(doubleBack, 6, {
         knockout: { d: doubleFront, width: 11, isFilled: true },
@@ -249,6 +254,7 @@ export const pinGlyphs = {
     solid: [fill(nibOuter, { transform: nibTurn }), nibCollar],
   },
   cards: {
+    optical: 0.88,
     shapes: [
       cardBack(22, 'rotate(-14 42 48)'),
       cardBack(38, 'rotate(14 58 48)'),
