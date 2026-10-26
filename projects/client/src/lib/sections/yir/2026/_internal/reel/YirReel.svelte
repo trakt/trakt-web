@@ -146,6 +146,8 @@
   const desktopRotation = $derived(flipRotation(flip.desktop, !!runner));
   const isMobileRunnerFace = $derived(flip.mobile < 0.6);
   const isDesktopRunnerFace = $derived(flip.desktop < 0.6);
+  const stampReveal = (rotation: number) =>
+    clamp({ value: (rotation - 135) / 45, min: 0, max: 1 });
   const mobileKicker = $derived(kicker(isMobileRunnerFace));
   const desktopKicker = $derived(kicker(isDesktopRunnerFace));
 
@@ -413,8 +415,14 @@
             <span class="yir-reel-big is-desktop">{primary.name}</span>
             <span class="yir-reel-sub is-desktop">{primary.tagline}</span>
 
-            {#if runner && flip.mobile > 0.8}
-              <YirHybridStamp name={runner.name} />
+            {#if runner}
+              <span
+                class="yir-reel-hybrid"
+                style:--reveal-mobile={stampReveal(mobileRotation)}
+                style:--reveal-desktop={stampReveal(desktopRotation)}
+              >
+                <YirHybridStamp name={runner.name} />
+              </span>
             {/if}
             <span class="yir-reel-sub">
               {m.yir_2026_rarity({
@@ -774,12 +782,23 @@
     }
   }
 
+  .yir-reel-hybrid {
+    --reveal: var(--reveal-mobile);
+
+    opacity: var(--reveal);
+    transform: translateY(calc((1 - var(--reveal)) * var(--ni-8)));
+  }
+
   .is-desktop,
   .yir-reel-side {
     display: none;
   }
 
   @include split-stage {
+    .yir-reel-hybrid {
+      --reveal: var(--reveal-desktop);
+    }
+
     .is-mobile {
       display: none;
     }
