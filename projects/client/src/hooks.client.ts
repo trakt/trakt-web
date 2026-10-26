@@ -10,6 +10,7 @@ import { isBlockedEmbedEvent } from '$lib/features/errors/isBlockedEmbedEvent.ts
 import { isChunkParseError } from '$lib/features/errors/isChunkParseError.ts';
 import { isInjectedScriptEvent } from '$lib/features/errors/isInjectedScriptEvent.ts';
 import { toHandledErrorContext } from '$lib/features/errors/toHandledErrorContext.ts';
+import { trackPageLifecycle } from '$lib/features/errors/trackPageLifecycle.ts';
 import { captureWebviewSession } from '$lib/features/webview/captureWebviewSession.ts';
 import { SentryEndpoint } from '$lib/features/sentry/SentryEndpoint.ts';
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
@@ -57,6 +58,9 @@ const SAMPLED_ERROR_PATTERNS = [
 ];
 
 const SAMPLED_ERROR_RATE = 0.01;
+
+const readPageLifecycle =
+  typeof window === 'undefined' ? undefined : trackPageLifecycle(window);
 
 function isServiceWorkerRejection(event: SentryErrorEvent): boolean {
   return (
@@ -144,6 +148,13 @@ Sentry.init({
 
     if (isSampledError(event) && Math.random() >= SAMPLED_ERROR_RATE) {
       return null;
+    }
+
+    if (readPageLifecycle) {
+      event.contexts = {
+        ...event.contexts,
+        page_lifecycle: readPageLifecycle(),
+      };
     }
 
     return event;
