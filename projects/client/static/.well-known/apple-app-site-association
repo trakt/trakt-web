@@ -18,7 +18,9 @@
                     "NOT /shows/*/?*",
                     "/shows/?*",
                     "NOT /people/*/?*",
-                    "/people/?*"
+                    "/people/?*",
+                    "NOT /comments/*/?*",
+                    "/comments/?*"
                 ]
             }
         ]
