@@ -99,6 +99,29 @@ describe('toSmartListRecipe', () => {
     ]);
   });
 
+  it('should show a value saved twice only once', () => {
+    const { includes } = toSmartListRecipe({
+      source: 'discover',
+      mediaType: 'movies',
+      filters: { genres: ['action', 'comedy', 'action'] },
+    });
+
+    expect(includes.at(0)?.values.map(({ key }) => key)).toEqual([
+      'action',
+      'comedy',
+    ]);
+  });
+
+  it('should skip the match detail for a value saved twice', () => {
+    const { includes } = toSmartListRecipe({
+      source: 'discover',
+      mediaType: 'movies',
+      filters: { genres: ['action', 'action'] },
+    });
+
+    expect(includes.at(0)?.details).toEqual([]);
+  });
+
   it('should key values on the raw filter value', () => {
     const { includes } = toSmartListRecipe({
       source: 'discover',

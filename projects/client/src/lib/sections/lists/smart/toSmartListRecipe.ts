@@ -3,6 +3,7 @@ import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { SmartListFilters } from '$lib/requests/models/SmartListFilters.ts';
 import type { SmartList } from '$lib/requests/queries/users/smartListQuery.ts';
+import { dedupe } from '$lib/utils/array/dedupe.ts';
 import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
 import { toLanguageName } from '$lib/utils/formatting/intl/toLanguageName.ts';
 import { toTitleCaseSlug } from '$lib/utils/formatting/string/toTitleCaseSlug.ts';
@@ -171,8 +172,15 @@ function toOperatorDetails(
   return [toDetail(m.label_smart_list_match(), value)];
 }
 
-function toRowDetails(row: IncludeRow, filters: SmartListFilters) {
-  const values = filters[row.key] ?? [];
+function toRowDetails({
+  row,
+  filters,
+  values,
+}: {
+  row: IncludeRow;
+  filters: SmartListFilters;
+  values: ReadonlyArray<string>;
+}) {
   const included = values.filter(
     (value) => !value.startsWith(EXCLUSION_PREFIX),
   ).length;
@@ -203,12 +211,16 @@ function toRowDetails(row: IncludeRow, filters: SmartListFilters) {
 
 function toIncludes(filters: SmartListFilters) {
   return INCLUDE_ROWS.filter((row) => (filters[row.key]?.length ?? 0) > 0).map(
-    (row) => ({
-      key: row.key,
-      label: row.label(),
-      values: (filters[row.key] ?? []).map((raw) => toValue(row.format, raw)),
-      details: toRowDetails(row, filters),
-    }),
+    (row) => {
+      const values = dedupe((raw) => raw, filters[row.key] ?? []);
+
+      return {
+        key: row.key,
+        label: row.label(),
+        values: values.map((raw) => toValue(row.format, raw)),
+        details: toRowDetails({ row, filters, values }),
+      };
+    },
   );
 }
 
