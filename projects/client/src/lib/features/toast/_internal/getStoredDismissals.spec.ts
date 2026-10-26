@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
   DISMISSAL_STORAGE_KEY,
-  RECENTLY_WATCHED_WINDOW,
+  SHOW_BINGE_WINDOW,
 } from '../constants/index.ts';
 import type {
   StoredDismissalsV1,
@@ -53,7 +53,7 @@ describe('getStoredDismissals', () => {
         {
           id: '2',
           type: 'movie',
-          dismissedAt: now - RECENTLY_WATCHED_WINDOW - 1,
+          dismissedAt: now - SHOW_BINGE_WINDOW - 1,
         },
       ],
     };
@@ -89,7 +89,7 @@ describe('getStoredDismissals', () => {
     const v1TooOld: StoredDismissalsV1 = {
       id: 1,
       type: 'movie',
-      dismissedAt: now - RECENTLY_WATCHED_WINDOW - 1,
+      dismissedAt: now - SHOW_BINGE_WINDOW - 1,
     };
 
     localStorage.setItem(DISMISSAL_STORAGE_KEY, JSON.stringify(v1TooOld));
