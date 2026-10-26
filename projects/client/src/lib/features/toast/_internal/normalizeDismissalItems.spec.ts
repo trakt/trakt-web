@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { RECENTLY_WATCHED_WINDOW } from '../constants/index.ts';
+import { SHOW_BINGE_WINDOW } from '../constants/index.ts';
 import type { DismissedItem } from '../models/DismissedItem.ts';
 import { normalizeDismissalItems } from './normalizeDismissalItems.ts';
 
@@ -11,11 +11,11 @@ describe('normalizeDismissalItems', () => {
     vi.spyOn(Date, 'now').mockReturnValue(now);
   });
 
-  it('should keep items dismissed within the recently watched window', () => {
+  it('should keep items dismissed within the binge window', () => {
     const withinWindow: DismissedItem = {
       id: '1',
       type: 'movie',
-      dismissedAt: now - RECENTLY_WATCHED_WINDOW + 1,
+      dismissedAt: now - SHOW_BINGE_WINDOW + 1,
     };
 
     expect(normalizeDismissalItems([withinWindow])).toEqual([withinWindow]);
@@ -25,7 +25,7 @@ describe('normalizeDismissalItems', () => {
     const tooOld: DismissedItem = {
       id: '1',
       type: 'movie',
-      dismissedAt: now - RECENTLY_WATCHED_WINDOW - 1,
+      dismissedAt: now - SHOW_BINGE_WINDOW - 1,
     };
 
     expect(normalizeDismissalItems([tooOld])).toEqual([]);
@@ -35,7 +35,7 @@ describe('normalizeDismissalItems', () => {
     const atCutoff: DismissedItem = {
       id: '1',
       type: 'movie',
-      dismissedAt: now - RECENTLY_WATCHED_WINDOW,
+      dismissedAt: now - SHOW_BINGE_WINDOW,
     };
 
     expect(normalizeDismissalItems([atCutoff])).toEqual([atCutoff]);
@@ -51,7 +51,7 @@ describe('normalizeDismissalItems', () => {
     const invalid: DismissedItem = {
       id: '2',
       type: 'movie',
-      dismissedAt: now - RECENTLY_WATCHED_WINDOW - 1,
+      dismissedAt: now - SHOW_BINGE_WINDOW - 1,
     };
 
     expect(normalizeDismissalItems([invalid, valid])).toEqual([valid]);
