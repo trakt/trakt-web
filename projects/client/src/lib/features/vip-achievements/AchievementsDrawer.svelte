@@ -6,9 +6,11 @@
   import type { VipAchievementCategory } from "./models/VipAchievementCategory.ts";
   import type { VipAchievementId } from "./models/VipAchievementId.ts";
   import AchievementCategorySection from "./_internal/AchievementCategorySection.svelte";
+  import AchievementPin from "./_internal/AchievementPin.svelte";
   import { toAchievementSections } from "./_internal/toAchievementSections.ts";
+  import { toShelfAchievements } from "./_internal/toShelfAchievements.ts";
 
-  const MAX_SEGMENTS = 40;
+  const SHELF_SIZE = 3;
 
   const {
     achievements,
@@ -47,32 +49,36 @@
     ),
   );
 
-  const segments = $derived(
-    achievements.length <= MAX_SEGMENTS
-      ? achievements.map((_, index) => index < earnedCount)
-      : [],
+  const shelf = $derived(
+    toShelfAchievements({ achievements, newIds, limit: SHELF_SIZE }),
   );
 </script>
 
 <Drawer title={m.vip_achievements_section_title()} {onClose}>
   <div class="achievements-drawer">
     <div class="achievements-drawer-summary">
-      <span class="summary-count bold">
-        {m.vip_achievements_earned_summary({
-          earned: earnedCount,
-          total: achievements.length,
-        })}
-      </span>
-      <span
-        class="summary-bar"
-        class:is-continuous={segments.length === 0}
-        style:--earned-share={`${(earnedCount / Math.max(achievements.length, 1)) * 100}%`}
-        aria-hidden="true"
-      >
-        {#each segments as isEarned, index (index)}
-          <span class="summary-segment" class:is-earned={isEarned}></span>
-        {/each}
-      </span>
+      {#if shelf.length > 0}
+        <div class="summary-shelf" aria-hidden="true">
+          {#each shelf as achievement (achievement.id)}
+            <span class="summary-pin">
+              <AchievementPin {achievement} hasStuds={false} />
+            </span>
+          {/each}
+        </div>
+      {/if}
+      <div class="summary-body">
+        <span class="summary-count bold">
+          {m.vip_achievements_earned_summary({
+            earned: earnedCount,
+            total: achievements.length,
+          })}
+        </span>
+        <span
+          class="summary-bar"
+          style:--earned-share={`${(earnedCount / Math.max(achievements.length, 1)) * 100}%`}
+          aria-hidden="true"
+        ></span>
+      </div>
     </div>
 
     <div class="achievements-drawer-controls">
@@ -102,17 +108,46 @@
 <style lang="scss">
   .achievements-drawer {
     --summary-track: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+    --summary-fill: color-mix(in srgb, var(--color-foreground) 70%, transparent);
 
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
   }
 
+  // One shelf of pins, the count and a single bar: it reads the same at 13
+  // achievements or 100.
   .achievements-drawer-summary {
     display: flex;
+    align-items: center;
+    gap: var(--gap-s);
+    padding: var(--ni-14) var(--ni-16);
+    border-radius: var(--border-radius-l);
+    background: var(--color-card-background);
+    box-shadow: var(--shadow-base);
+  }
+
+  .summary-shelf {
+    display: flex;
+    flex: none;
+  }
+
+  .summary-pin {
+    inline-size: var(--ni-40);
+    block-size: var(--ni-40);
+
+    & + & {
+      margin-inline-start: calc(var(--ni-8) * -1);
+    }
+  }
+
+  .summary-body {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
     flex-direction: column;
-    gap: var(--ni-10);
-    padding-block-end: var(--ni-4);
+    gap: var(--ni-8);
   }
 
   .summary-count {
@@ -120,35 +155,20 @@
   }
 
   .summary-bar {
-    display: flex;
-    gap: var(--ni-3);
     block-size: var(--ni-6);
+    border-radius: var(--border-radius-pill);
+    background: linear-gradient(
+      to right,
+      var(--summary-fill) var(--earned-share),
+      var(--summary-track) var(--earned-share)
+    );
 
-    &.is-continuous {
-      border-radius: var(--border-radius-pill);
+    &:dir(rtl) {
       background: linear-gradient(
-        to right,
-        var(--color-achievement-accent) var(--earned-share),
+        to left,
+        var(--summary-fill) var(--earned-share),
         var(--summary-track) var(--earned-share)
       );
-
-      &:dir(rtl) {
-        background: linear-gradient(
-          to left,
-          var(--color-achievement-accent) var(--earned-share),
-          var(--summary-track) var(--earned-share)
-        );
-      }
-    }
-  }
-
-  .summary-segment {
-    flex: 1 1 0;
-    border-radius: var(--border-radius-pill);
-    background: var(--summary-track);
-
-    &.is-earned {
-      background: var(--color-achievement-accent);
     }
   }
 
