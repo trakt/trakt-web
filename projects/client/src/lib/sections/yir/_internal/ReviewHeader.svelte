@@ -267,6 +267,7 @@
     );
     cursor: pointer;
     transition: color 0.2s;
+    -webkit-tap-highlight-color: transparent;
 
     &:hover {
       color: var(--color-yir-text-accent);
