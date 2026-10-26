@@ -29,7 +29,9 @@ export function mapToSearchParamValue({
         : mapped;
     };
 
-    return filterValue.split(',').flatMap(mapValue).join(',');
+    const tokens = filterValue.split(',').flatMap(mapValue);
+
+    return Array.from(new Set(tokens)).join(',');
   }
 
   return filterValue;

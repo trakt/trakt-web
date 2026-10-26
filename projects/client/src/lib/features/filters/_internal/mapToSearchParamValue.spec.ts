@@ -99,7 +99,17 @@ describe('mapToSearchParamValue', () => {
         user: mockUser,
       });
 
-      expect(result).toBe('action,comedy,drama,action');
+      expect(result).toBe('action,comedy,drama');
+    });
+
+    it('should drop a value repeated in the selection', () => {
+      const result = mapToSearchParamValue({
+        filter: listFilter,
+        value: 'action,comedy,action',
+        user: mockUser,
+      });
+
+      expect(result).toBe('action,comedy');
     });
 
     it('should keep the exclusion prefix on plain excluded values', () => {
