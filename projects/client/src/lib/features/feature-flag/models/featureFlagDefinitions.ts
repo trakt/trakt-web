@@ -3,7 +3,6 @@ import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FlagIcon from '$lib/components/icons/FlagIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
-import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
 import TrackIcon from '$lib/components/icons/TrackIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
@@ -63,13 +62,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
         UrlBuilder.trending(),
         m.preview_feature_title_large_screen_cards(),
       ),
-  },
-  [FeatureFlag.YearInReview2026]: {
-    icon: SparkleIcon,
-    title: () => m.preview_feature_title_year_in_review_2026(),
-    addedAt: new Date('2026-09-29'),
-    description: () => m.preview_feature_description_year_in_review_2026(),
-    audience: 'director',
   },
   [FeatureFlag.VipVeteran]: {
     icon: SparkleStarIcon,

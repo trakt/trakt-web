@@ -11621,14 +11621,6 @@
       "default": "Finished the show",
       "description": "Tag when a followed person watched the series finale of a show."
     },
-    "preview_feature_title_year_in_review_2026": {
-      "default": "Year in Review 2026",
-      "description": "Product feature name for the preview feature that shows the persona-based 2026 Year in Review."
-    },
-    "preview_feature_description_year_in_review_2026": {
-      "default": "Your 2026 as a scroll-driven reel with a viewer persona, then a stats page styled to match it.",
-      "description": "Description for the Year in Review 2026 preview feature."
-    },
     "preview_feature_title_large_screen_cards": {
       "default": "Large Screen Cards",
       "description": "Title for the Large Screen Cards preview feature."

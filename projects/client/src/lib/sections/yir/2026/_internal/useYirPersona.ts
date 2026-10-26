@@ -15,7 +15,8 @@ export function useYirPersona(params: Observable<YirPersonaParams>) {
   );
 
   return {
-    persona: query.pipe(map(($query) => $query.data ?? null)),
+    persona: query.pipe(map(($query) => $query.data?.result ?? null)),
+    isYearOpen: query.pipe(map(($query) => $query.data?.isYearOpen !== false)),
     isLoading: query.pipe(map(toLoadingState)),
   };
 }
