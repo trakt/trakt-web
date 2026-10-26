@@ -1,6 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { ExtendedMediaStoreProps } from "$lib/models/MediaStoreProps.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
@@ -12,9 +13,10 @@
     cast: CastMember[];
     slug: string;
     type: ExtendedMediaType;
+    spoiler?: ExtendedMediaStoreProps;
   };
 
-  const { title, cast, slug, type }: CastListProps = $props();
+  const { title, cast, slug, type, spoiler }: CastListProps = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const castDrawerLink = $derived(buildDrawerLink(SummaryDrawers.Cast));
@@ -35,6 +37,6 @@
   --height-list="var(--height-person-list)"
 >
   {#snippet item(castMember)}
-    <CastMemberItem {castMember} {type} />
+    <CastMemberItem {castMember} {type} {spoiler} />
   {/snippet}
 </SectionList>

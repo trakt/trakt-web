@@ -2,6 +2,7 @@
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType.ts";
+  import type { ExtendedMediaStoreProps } from "$lib/models/MediaStoreProps.ts";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew.ts";
   import CreditMemberItem from "$lib/sections/lists/components/CreditMemberItem.svelte";
   import { toCreditMemberKey } from "../toCreditMemberKey.ts";
@@ -17,10 +18,12 @@
   const {
     crew,
     type,
+    spoiler,
     isLoading = false,
   }: {
     crew: MediaCrew;
     type: ExtendedMediaType;
+    spoiler?: ExtendedMediaStoreProps;
     isLoading?: boolean;
   } = $props();
 
@@ -86,7 +89,7 @@
             aria-labelledby={`drawer-credit-${type}-${group.id}-header`}
           >
             {#each group.members as item (toCreditMemberKey(item))}
-              <CreditMemberItem member={item} {type} />
+              <CreditMemberItem member={item} {type} {spoiler} />
             {/each}
           </div>
         </section>

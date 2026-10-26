@@ -173,9 +173,21 @@
 
 {#if drawer === SummaryDrawers.Cast}
   {#if details.type === "show"}
-    <ShowCastDrawerHost slug={mediaSlug} crew={details.crew} onClose={close} />
+    <ShowCastDrawerHost
+      slug={mediaSlug}
+      crew={details.crew}
+      spoiler={{ type: "show", media: details.media }}
+      onClose={close}
+    />
   {:else}
-    <CastDrawerHost crew={details.crew} type={details.type} onClose={close} />
+    <CastDrawerHost
+      crew={details.crew}
+      type={details.type}
+      spoiler={details.type === "episode"
+        ? { type: "episode", media: details.episode, show: details.show }
+        : undefined}
+      onClose={close}
+    />
   {/if}
 {/if}
 

@@ -7,7 +7,7 @@
   import CastDrawerHost from "./CastDrawerHost.svelte";
   import type { ShowCastDrawerHostProps } from "./ShowCastDrawerHostProps.ts";
 
-  const { slug, crew, onClose }: ShowCastDrawerHostProps = $props();
+  const { slug, crew, spoiler, onClose }: ShowCastDrawerHostProps = $props();
 
   const people = useQuery(
     fromRune(() => slug).pipe(
@@ -19,6 +19,7 @@
 <CastDrawerHost
   crew={$people.data ?? crew}
   type="show"
+  {spoiler}
   isLoading={toLoadingState($people)}
   {onClose}
 />

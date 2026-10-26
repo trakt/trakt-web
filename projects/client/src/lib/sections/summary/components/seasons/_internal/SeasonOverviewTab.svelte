@@ -27,7 +27,12 @@
     <SeasonInfoSection {season} {show} />
   </div>
 
-  <DrawerCastSection crew={$crew} type="show" isLoading={$isLoading} />
+  <DrawerCastSection
+    crew={$crew}
+    type="show"
+    spoiler={{ type: "season", media: season, show }}
+    isLoading={$isLoading}
+  />
 </div>
 
 <style lang="scss">

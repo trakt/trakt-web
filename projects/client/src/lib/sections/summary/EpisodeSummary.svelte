@@ -113,6 +113,7 @@
   cast={actors}
   slug={show.slug}
   type="episode"
+  spoiler={{ type: "episode", media: episode, show }}
 />
 
 <Comments

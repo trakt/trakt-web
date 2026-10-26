@@ -7,6 +7,9 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import * as m from "$lib/features/i18n/messages";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import SpoilerBlur from "$lib/features/spoilers/components/SpoilerBlur.svelte";
+  import { useCreditSpoiler } from "$lib/features/spoilers/useCreditSpoiler.ts";
+  import type { ExtendedMediaStoreProps } from "$lib/models/MediaStoreProps.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { CreditMember } from "$lib/sections/lists/models/CreditMember";
   import { PLACEHOLDERS } from "$lib/utils/assets";
@@ -15,10 +18,12 @@
   type CreditMemberItemProps = {
     member: CreditMember;
     type?: ExtendedMediaType;
+    spoiler?: ExtendedMediaStoreProps;
   };
 
-  const { member, type }: CreditMemberItemProps = $props();
+  const { member, type, spoiler }: CreditMemberItemProps = $props();
   const maxDescriptionItems = 1;
+  const { isSpoilerHidden } = $derived(useCreditSpoiler(spoiler));
 
   let isDescriptionExpanded = $state(false);
 
@@ -61,11 +66,13 @@
 {#snippet tags()}
   {#if episodeCount != null}
     <div class="credit-member-tags">
-      <EpisodeCountTag
-        count={episodeCount}
-        i18n={TagIntlProvider}
-        type="tag"
-      />
+      <SpoilerBlur {isSpoilerHidden}>
+        <EpisodeCountTag
+          count={episodeCount}
+          i18n={TagIntlProvider}
+          type="tag"
+        />
+      </SpoilerBlur>
     </div>
   {/if}
 {/snippet}
