@@ -17,6 +17,7 @@ describe('util: toHandledErrorContext', () => {
       constructorName: null,
       ownKeys: [],
       hasStack: false,
+      stack: null,
     });
   });
 
@@ -41,6 +42,19 @@ describe('util: toHandledErrorContext', () => {
     expect(context.hasStack).toBe(true);
   });
 
+  it('should keep the top of the stack', () => {
+    const error = new SyntaxError('Unexpected end of input');
+    error.stack = [
+      'SyntaxError: Unexpected end of input',
+      ...Array.from({ length: 20 }, (_, index) => `    at frame${index}`),
+    ].join('\n');
+
+    const { stack } = toHandledErrorContext({ ...base, error });
+
+    expect(stack?.split('\n')).toHaveLength(12);
+    expect(stack?.split('\n').at(1)).toBe('    at frame0');
+  });
+
   it('should report null as its own type', () => {
     expect(toHandledErrorContext({ ...base, error: null }).valueType).toBe(
       'null',
@@ -57,5 +71,6 @@ describe('util: toHandledErrorContext', () => {
     expect(context.constructorName).toBeNull();
     expect(context.ownKeys).toEqual([]);
     expect(context.hasStack).toBe(false);
+    expect(context.stack).toBeNull();
   });
 });
