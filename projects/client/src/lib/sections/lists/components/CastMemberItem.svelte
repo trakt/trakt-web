@@ -6,6 +6,9 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import PersonCard from "$lib/components/people/card/PersonCard.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import SpoilerBlur from "$lib/features/spoilers/components/SpoilerBlur.svelte";
+  import { useCreditSpoiler } from "$lib/features/spoilers/useCreditSpoiler.ts";
+  import type { ExtendedMediaStoreProps } from "$lib/models/MediaStoreProps.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -13,12 +16,12 @@
   type CastMemberCardProps = {
     castMember: CastMember;
     type: ExtendedMediaType;
+    spoiler?: ExtendedMediaStoreProps;
   };
 
-  const {
-    castMember,
-    type,
-  }: CastMemberCardProps = $props();
+  const { castMember, type, spoiler }: CastMemberCardProps = $props();
+
+  const { isSpoilerHidden } = $derived(useCreditSpoiler(spoiler));
 
   const params = $derived({
     [`${type}s`]: "acting" as const,
@@ -27,11 +30,13 @@
 
 {#snippet tag()}
   {#if type === "show" && castMember.episodeCount}
-    <EpisodeCountTag
-      count={castMember.episodeCount}
-      i18n={TagIntlProvider}
-      type="tag"
-    />
+    <SpoilerBlur {isSpoilerHidden} focusable={false}>
+      <EpisodeCountTag
+        count={castMember.episodeCount}
+        i18n={TagIntlProvider}
+        type="tag"
+      />
+    </SpoilerBlur>
   {/if}
 {/snippet}
 

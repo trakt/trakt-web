@@ -4,6 +4,8 @@
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import * as m from "$lib/features/i18n/messages";
+  import SpoilerBlur from "$lib/features/spoilers/components/SpoilerBlur.svelte";
+  import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler.ts";
   import type { MediaCredit } from "$lib/requests/models/MediaCredits";
   import { toTranslatedJob } from "$lib/utils/formatting/string/toTranslatedJob";
   import DefaultMediaItem from "./DefaultMediaItem.svelte";
@@ -31,13 +33,21 @@
   };
 
   const media = $derived(mediaCredit.media);
+  const { isSpoilerHidden } = $derived(
+    useMediaSpoiler({ media, type: media.type }),
+  );
 </script>
 
 {#snippet tag()}
   <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} year={media.year} />
 
   {#if media.type === "show" && mediaCredit.episodeCount}
-    <EpisodeCountTag i18n={TagIntlProvider} count={mediaCredit.episodeCount} />
+    <SpoilerBlur {isSpoilerHidden}>
+      <EpisodeCountTag
+        i18n={TagIntlProvider}
+        count={mediaCredit.episodeCount}
+      />
+    </SpoilerBlur>
   {/if}
 
   {#if media.type === "movie"}

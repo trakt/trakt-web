@@ -2602,6 +2602,10 @@
       "default": "Spoiler",
       "description": "Text used to indicate that something is a spoiler."
     },
+    "button_label_reveal_spoiler": {
+      "default": "Reveal spoiler",
+      "description": "Aria-label for the control that reveals content hidden by the spoiler blur, such as an episode count."
+    },
     "toolbar_label_text_formatting": {
       "default": "Text formatting",
       "description": "Aria-label for the toolbar with formatting buttons above the review and reply editors."

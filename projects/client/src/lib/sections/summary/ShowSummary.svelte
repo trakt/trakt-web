@@ -109,6 +109,7 @@
   cast={crew.cast}
   slug={media.slug}
   type={media.type}
+  spoiler={{ type: "show", media }}
 />
 
 <Comments {media} type="show" />

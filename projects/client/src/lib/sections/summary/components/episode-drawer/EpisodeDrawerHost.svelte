@@ -244,6 +244,9 @@
     <DrawerCastSection
       crew={$crew}
       type="episode"
+      spoiler={$episodeEntry && resolvedShow
+        ? { type: "episode", media: $episodeEntry, show: resolvedShow }
+        : undefined}
       isLoading={$isPeopleLoading}
     />
   </div>
