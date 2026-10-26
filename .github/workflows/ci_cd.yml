@@ -50,6 +50,7 @@ jobs:
               - 'projects/client/svelte.config.js'
               - 'projects/client/vite.config.ts'
               - 'projects/client/.vite/**'
+              - 'projects/client/.scripts/prepare-base-i18n.ts'
               - 'projects/client/wrangler.jsonc'
             i18n_source:
               - 'projects/client/i18n/meta/**'
@@ -211,7 +212,7 @@ jobs:
       - name: Forging the Paraglide Runes aka Compile Paraglide
         if: steps.paraglide.outputs.cache-hit != 'true'
         working-directory: projects/client
-        run: 'bun run i18n:compile'
+        run: ${{ github.head_ref == 'i18n_crowdin_updates' && 'bun run i18n:compile' || 'bun run i18n:compile:base' }}
 
       - name: Consulting the Oracles of Type aka Type Check
         working-directory: projects/client

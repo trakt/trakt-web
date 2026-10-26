@@ -27,6 +27,7 @@
     "i18n:web": "bun run i18n:generate ./i18n --platforms web",
     "i18n:web:watch": "bun run i18n:generate:watch ./i18n --platforms web",
     "i18n:compile": "paraglide-js compile --project ./i18n/project.inlang --outdir ./src/lib/paraglide",
+    "i18n:compile:base": "bun .scripts/prepare-base-i18n.ts && paraglide-js compile --project ./node_modules/base-i18n/project.inlang --outdir ./src/lib/paraglide",
     "i18n:prepare": "bun run i18n:web && bun run i18n:compile",
     "sync:immutable": "bun .scripts/sync-immutable-to-r2.ts",
     "prune:immutable": "bun .scripts/prune-immutable-r2.ts",
