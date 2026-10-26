@@ -57,8 +57,8 @@
         lists: sortedLists.filter((list) => isOwned(list) && !isShared(list)),
       },
       {
-        key: "collaborations",
-        title: m.list_title_collaborative_lists(),
+        key: "shared",
+        title: m.list_title_shared_lists(),
         lists: [
           ...sortedLists.filter((list) => isOwned(list) && isShared(list)),
           ...sortedLists.filter((list) => !isOwned(list)),
@@ -148,8 +148,7 @@
                       {list}
                       {target}
                       isListed={listedOnIdsSet.has(list.id)}
-                      isOwned={category.key === "collaborations" &&
-                        isOwned(list)}
+                      isOwned={category.key === "shared" && isOwned(list)}
                     />
                   {/each}
                 </DropdownGroup>

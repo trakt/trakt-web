@@ -102,8 +102,8 @@
 
       <ListSummaryItem
         list={entry.list}
-        popupActions={type === "collaboration" ? popupActions : undefined}
-        markOwned={type === "collaboration"}
+        popupActions={type === "shared" ? popupActions : undefined}
+        markOwned={type === "shared"}
       />
     {/if}
   {/snippet}

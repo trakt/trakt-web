@@ -17,8 +17,9 @@
     current: sorting,
     options,
     urlBuilder,
+    directionFor,
   } = $derived(
-    useUserListsSorting({ slug: params.user, type: "collaboration" }),
+    useUserListsSorting({ slug: params.user, type: "shared" }),
   );
 </script>
 
@@ -33,17 +34,22 @@
     contentToggle="discover"
     hasFilters
     header={{
-      title: m.list_title_collaborative_lists(),
+      title: m.list_title_shared_lists(),
       metaInfo: $current.text(),
     }}
   >
     {#snippet headerActions()}
-      <ListSortActions {options} {urlBuilder} current={$sorting} />
+      <ListSortActions
+        {options}
+        {urlBuilder}
+        {directionFor}
+        current={$sorting}
+      />
     {/snippet}
   </ResponsiveNavbarStateSetter>
 
   <PersonalListsPaginated
-    type="collaboration"
+    type="shared"
     slug={params.user}
     sortBy={$sorting.sorting.value}
     sortHow={$sorting.sortHow}

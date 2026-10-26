@@ -59,7 +59,7 @@
 
 {#if !$isMe}
   <PersonalLists {slug} type="personal" mode={$mode} />
-  <PersonalLists {slug} type="collaboration" mode={$mode} />
+  <PersonalLists {slug} type="shared" mode={$mode} />
 {/if}
 
 <!-- FIXME: add library support to view other users libraries -->
