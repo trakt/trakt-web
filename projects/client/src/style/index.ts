@@ -1,3 +1,4 @@
+import './palette/achievement-pin.css';
 import './palette/blue.css';
 import './palette/green.css';
 import './palette/orange.css';

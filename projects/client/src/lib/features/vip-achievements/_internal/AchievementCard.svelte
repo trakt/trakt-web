@@ -1,11 +1,11 @@
 <script lang="ts">
-  import LockIcon from "$lib/components/icons/LockIcon.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { toGroupedNumber } from "$lib/utils/formatting/number/toGroupedNumber.ts";
   import type { VipAchievement } from "../models/VipAchievement.ts";
-  import AchievementIcon from "./AchievementIcon.svelte";
+  import AchievementPin from "./AchievementPin.svelte";
+  import { achievementPins } from "./achievementPins.ts";
 
   const {
     achievement,
@@ -23,7 +23,9 @@
   const hasProgress = $derived((achievement.nextThreshold ?? 0) > 1);
   const progressPercent = $derived(Math.round(achievement.progress * 100));
 
-  // 0..1 across the tier ladder: the medal's glow widens as tiers stack up.
+  const pinColor = $derived(`var(${achievementPins[achievement.id].color})`);
+
+  // 0..1 across the tier ladder: the card's wash deepens as tiers stack up.
   const tierStrength = $derived(
     achievement.isUnlocked
       ? (achievement.tierIndex + 1) / achievement.tierCount
@@ -46,19 +48,13 @@
   class:is-maxed={achievement.isMaxed}
   class:is-new={isNew}
   style:--achievement-progress={`${progressPercent}%`}
+  style:--achievement-color={pinColor}
   style:--tier-strength={tierStrength}
   style:--reveal-index={revealIndex ?? 0}
   aria-label={`${achievement.title}, ${tierText}`}
 >
   <div class="card-medal" aria-hidden="true">
-    <span class="medal-face">
-      <AchievementIcon id={achievement.id} />
-    </span>
-    {#if !achievement.isUnlocked}
-      <span class="medal-lock">
-        <LockIcon />
-      </span>
-    {/if}
+    <AchievementPin {achievement} hasShine={isNew} />
   </div>
 
   <div class="card-content">
@@ -70,14 +66,6 @@
     </div>
 
     <div class="card-tier">
-      <span class="tier-pips" aria-hidden="true">
-        {#each achievement.thresholds as threshold, index (threshold)}
-          <span
-            class="tier-pip"
-            class:is-reached={index <= achievement.tierIndex}
-          ></span>
-        {/each}
-      </span>
       <span class="tier-text">{tierText}</span>
     </div>
 
@@ -116,8 +104,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-achievement-card {
-    --medal-size: var(--ni-52);
-    --medal-accent: var(--color-achievement-accent);
+    --medal-size: var(--ni-64);
     --muted-fill: color-mix(
       in srgb,
       var(--color-foreground) 6%,
@@ -146,7 +133,7 @@
       border-radius: inherit;
       background: radial-gradient(
         120% 90% at 50% 0%,
-        color-mix(in srgb, var(--medal-accent) 18%, transparent),
+        color-mix(in srgb, var(--achievement-color) 18%, transparent),
         transparent 65%
       );
       opacity: calc(0.25 + var(--tier-strength, 0) * 0.5);
@@ -167,75 +154,6 @@
     flex: none;
     inline-size: var(--medal-size);
     block-size: var(--medal-size);
-  }
-
-  .medal-face {
-    position: relative;
-    overflow: hidden;
-
-    display: grid;
-    place-items: center;
-    inline-size: 100%;
-    block-size: 100%;
-    border-radius: 50%;
-
-    color: var(--shade-10);
-    background: radial-gradient(
-      circle at 32% 28%,
-      color-mix(in srgb, var(--medal-accent) 55%, var(--shade-10)),
-      var(--medal-accent) 58%,
-      color-mix(in srgb, var(--medal-accent) 70%, var(--shade-1000))
-    );
-    box-shadow:
-      inset 0 0 0 var(--ni-1) color-mix(in srgb, var(--shade-10) 28%, transparent),
-      0 0 calc(var(--ni-4) + var(--tier-strength, 0) * var(--ni-16))
-        color-mix(in srgb, var(--medal-accent) 45%, transparent);
-
-    :global(svg) {
-      width: var(--ni-24);
-      height: var(--ni-24);
-    }
-
-    // Every tier earned: the medal gets a framed ring.
-    .is-maxed & {
-      box-shadow:
-        inset 0 0 0 var(--ni-1) color-mix(in srgb, var(--shade-10) 28%, transparent),
-        0 0 0 var(--ni-2) var(--color-card-background),
-        0 0 0 calc(var(--ni-2) + var(--ni-1) * 1.5) var(--medal-accent),
-        0 0 var(--ni-20) color-mix(in srgb, var(--medal-accent) 45%, transparent);
-    }
-
-    .is-locked & {
-      color: var(--color-text-secondary);
-      background: var(--muted-fill);
-      box-shadow: inset 0 0 0 var(--ni-1)
-        color-mix(in srgb, var(--color-foreground) 10%, transparent);
-
-      :global(svg) {
-        opacity: 0.45;
-      }
-    }
-  }
-
-  .medal-lock {
-    position: absolute;
-    inset-block-end: calc(var(--ni-2) * -1);
-    inset-inline-end: calc(var(--ni-2) * -1);
-
-    display: grid;
-    place-items: center;
-    inline-size: var(--ni-20);
-    block-size: var(--ni-20);
-    border-radius: 50%;
-
-    color: var(--color-text-secondary);
-    background: var(--color-card-background);
-    box-shadow: var(--shadow-base);
-
-    :global(svg) {
-      width: var(--ni-10);
-      height: var(--ni-10);
-    }
   }
 
   .card-content {
@@ -273,29 +191,13 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--shade-10);
-    background: var(--medal-accent);
+    background: var(--color-achievement-accent);
   }
 
   .card-tier {
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-  }
-
-  .tier-pips {
-    display: flex;
-    gap: var(--ni-4);
-  }
-
-  .tier-pip {
-    inline-size: var(--ni-6);
-    block-size: var(--ni-6);
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--color-foreground) 18%, transparent);
-
-    &.is-reached {
-      background: var(--color-text-primary);
-    }
   }
 
   .tier-text {
@@ -307,10 +209,6 @@
 
     .is-locked & {
       color: var(--color-text-secondary);
-    }
-
-    .is-maxed & {
-      color: var(--medal-accent);
     }
   }
 
@@ -393,24 +291,11 @@
   // A fresh unlock pops its medal in, one after another, then a single shine
   // passes over it. Everything already seen stays still.
   @media (prefers-reduced-motion: no-preference) {
-    .is-new .medal-face {
+    .is-new .card-medal {
+      --pin-shine-delay: calc(820ms + var(--reveal-index) * 70ms);
+
       animation: medal-pop 560ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
       animation-delay: calc(360ms + var(--reveal-index) * 70ms);
-
-      &::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          115deg,
-          transparent 35%,
-          color-mix(in srgb, var(--shade-10) 55%, transparent) 50%,
-          transparent 65%
-        );
-        transform: translateX(-120%);
-        animation: medal-shine 700ms ease-out both;
-        animation-delay: calc(820ms + var(--reveal-index) * 70ms);
-      }
     }
 
     .is-new .card-new {
@@ -427,12 +312,6 @@
     to {
       transform: scale(1);
       opacity: 1;
-    }
-  }
-
-  @keyframes medal-shine {
-    to {
-      transform: translateX(120%);
     }
   }
 

@@ -1,0 +1,26 @@
+:root {
+  --achievement-pin-red: oklch(57.1% 0.2087 21.1);
+  --achievement-pin-cobalt: oklch(53.3% 0.221 265.8);
+  --achievement-pin-teal: oklch(63.7% 0.1068 194.8);
+  --achievement-pin-peach: oklch(79% 0.1315 47.2);
+  --achievement-pin-emerald: oklch(61.7% 0.1472 153.8);
+  --achievement-pin-tangerine: oklch(68.4% 0.1848 44.9);
+  --achievement-pin-midnight: oklch(33.4% 0.1038 270.5);
+  --achievement-pin-butter: oklch(84.7% 0.161 83.4);
+  --achievement-pin-lime: oklch(76% 0.1741 129.8);
+  --achievement-pin-sky: oklch(62.4% 0.1349 240.3);
+  --achievement-pin-rose: oklch(65.7% 0.1961 8);
+  --achievement-pin-brick: oklch(53.9% 0.1512 34.4);
+  --achievement-pin-slate: oklch(45% 0.0459 259.2);
+
+  --achievement-pin-silver-1: oklch(98.6% 0.0028 308.4);
+  --achievement-pin-silver-2: oklch(77.9% 0.0144 299.7);
+  --achievement-pin-silver-3: oklch(94.8% 0.0054 297.7);
+  --achievement-pin-silver-4: oklch(68.5% 0.0149 299.7);
+
+  --achievement-pin-holo-1: oklch(91% 0.0548 350.4);
+  --achievement-pin-holo-2: oklch(91.4% 0.0547 226.2);
+  --achievement-pin-holo-3: oklch(96.1% 0.0658 147);
+  --achievement-pin-holo-4: oklch(95.5% 0.065 93.1);
+  --achievement-pin-holo-5: oklch(89.6% 0.0561 38.8);
+}
