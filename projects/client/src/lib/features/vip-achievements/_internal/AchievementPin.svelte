@@ -3,6 +3,7 @@
   import AchievementPinShapes from "./AchievementPinShapes.svelte";
   import { achievementPins } from "./achievementPins.ts";
   import { pinPaths } from "./pinPaths.ts";
+  import { toPinGlyphFrame } from "./toPinGlyphFrame.ts";
 
   const {
     achievement,
@@ -36,6 +37,20 @@
   const uid = $props.id();
   const pin = $derived(achievementPins[achievement.id]);
   const solid = $derived(pin.glyph.solid ?? pin.glyph.shapes);
+  const frame = $derived(toPinGlyphFrame(pin.glyph));
+  const frameTransform = $derived(
+    `translate(${frame.x} ${frame.y}) scale(${frame.scale})`,
+  );
+  // Outlines are sized on the artboard, so every pin's metal edge and keyline
+  // match however much its artwork was scaled to fit.
+  const edge = (width: number) => width / frame.scale;
+  // Gradients span the artboard rather than the artwork: every pin is lit alike.
+  const span = $derived({
+    x1: -frame.x / frame.scale,
+    y1: -frame.y / frame.scale,
+    x2: (100 - frame.x) / frame.scale,
+    y2: (100 - frame.y) / frame.scale,
+  });
   // A single-tier achievement has nothing to count, so it gets no stud bar.
   const showStuds = $derived(hasStuds && achievement.tierCount > 1);
   const glyphBox = $derived.by(() => {
@@ -65,10 +80,10 @@
       <linearGradient
         id={`${uid}-metal`}
         gradientUnits="userSpaceOnUse"
-        x1="0"
-        y1="0"
-        x2="100"
-        y2="100"
+        x1={span.x1}
+        y1={span.y1}
+        x2={span.x2}
+        y2={span.y2}
       >
         {#each metal as color, index (index)}
           <stop offset={index / (metal.length - 1)} style:stop-color={color} />
@@ -92,10 +107,10 @@
       <linearGradient
         id={`${uid}-enamel`}
         gradientUnits="userSpaceOnUse"
-        x1="0"
-        y1="0"
-        x2="0"
-        y2="100"
+        x1={span.x1}
+        y1={span.y1}
+        x2={span.x1}
+        y2={span.y2}
       >
         <stop offset="0" style:stop-color={ENAMEL_LIGHT} />
         <stop offset="0.55" style:stop-color="var(--pin-color)" />
@@ -111,7 +126,13 @@
           height="120"
         >
           <g transform={glyphBox}>
-            <AchievementPinShapes shapes={solid} paint="white" grow={9} />
+            <g transform={frameTransform}>
+              <AchievementPinShapes
+                shapes={solid}
+                paint="white"
+                grow={edge(9)}
+              />
+            </g>
           </g>
         </mask>
       {/if}
@@ -119,34 +140,38 @@
 
     <g transform={glyphBox}>
       <g transform="translate(0 2.6)" opacity="0.3">
+        <g transform={frameTransform}>
+          <AchievementPinShapes
+            shapes={solid}
+            paint="var(--shade-1000)"
+            grow={edge(10)}
+          />
+        </g>
+      </g>
+      <g transform={frameTransform}>
+        <g opacity="0.4">
+          <AchievementPinShapes
+            shapes={solid}
+            paint="var(--shade-1000)"
+            grow={edge(11.6)}
+          />
+        </g>
         <AchievementPinShapes
           shapes={solid}
-          paint="var(--shade-1000)"
-          grow={10}
+          paint={`url(#${uid}-metal)`}
+          grow={edge(9)}
         />
-      </g>
-      <g opacity="0.4">
         <AchievementPinShapes
-          shapes={solid}
-          paint="var(--shade-1000)"
-          grow={11.6}
+          shapes={pin.glyph.shapes}
+          paint={ENAMEL_KEYLINE}
+          grow={edge(2.6)}
+        />
+        <AchievementPinShapes
+          shapes={pin.glyph.shapes}
+          paint={`url(#${uid}-enamel)`}
+          maskId={`${uid}-knockout`}
         />
       </g>
-      <AchievementPinShapes
-        shapes={solid}
-        paint={`url(#${uid}-metal)`}
-        grow={9}
-      />
-      <AchievementPinShapes
-        shapes={pin.glyph.shapes}
-        paint={ENAMEL_KEYLINE}
-        grow={2.6}
-      />
-      <AchievementPinShapes
-        shapes={pin.glyph.shapes}
-        paint={`url(#${uid}-enamel)`}
-        maskId={`${uid}-knockout`}
-      />
     </g>
 
     {#if showStuds}
@@ -224,19 +249,21 @@
     {/if}
   {:else}
     <g transform={glyphBox}>
-      <g opacity="0.2">
-        <AchievementPinShapes
-          shapes={solid}
-          paint="var(--shade-400)"
-          grow={9}
-        />
-      </g>
-      <g opacity="0.35">
-        <AchievementPinShapes
-          shapes={pin.glyph.shapes}
-          paint="var(--shade-400)"
-          maskId={`${uid}-knockout`}
-        />
+      <g transform={frameTransform}>
+        <g opacity="0.2">
+          <AchievementPinShapes
+            shapes={solid}
+            paint="var(--shade-400)"
+            grow={edge(9)}
+          />
+        </g>
+        <g opacity="0.35">
+          <AchievementPinShapes
+            shapes={pin.glyph.shapes}
+            paint="var(--shade-400)"
+            maskId={`${uid}-knockout`}
+          />
+        </g>
       </g>
     </g>
     {#if showStuds}

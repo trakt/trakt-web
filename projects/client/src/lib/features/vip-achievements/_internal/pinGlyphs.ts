@@ -99,8 +99,6 @@ const sunRays = ring(8, 1, [0, 0])
 const doubleBack = roundedRect(14, 14, 46, 46, 9);
 const doubleFront = roundedRect(36, 36, 48, 48, 10);
 
-const megaphoneShift = 'translate(-3 0)';
-
 const nibTurn = 'rotate(40 50 55)';
 const nibOuter = 'M50 90L32 57Q29 51 32 45L38 34H62L68 45Q71 51 68 57Z';
 const nibCollar = fill(roundedRect(36, 20, 28, 10, 3), { transform: nibTurn });
@@ -219,13 +217,11 @@ export const pinGlyphs = {
   },
   megaphone: {
     shapes: [
-      fill('M30 41L68 24.5Q75 21.5 75 29V71Q75 78.5 68 75.5L30 59Z', {
-        transform: megaphoneShift,
-      }),
-      fill(roundedRect(17, 39, 15, 22, 4.5), { transform: megaphoneShift }),
-      stroke('M42 62L46 76', 7, { transform: megaphoneShift }),
-      stroke('M83 39Q88 50 83 61', 4.5, { transform: megaphoneShift }),
-      stroke('M90 31Q98 50 90 69', 4.5, { transform: megaphoneShift }),
+      fill('M30 41L68 24.5Q75 21.5 75 29V71Q75 78.5 68 75.5L30 59Z'),
+      fill(roundedRect(17, 39, 15, 22, 4.5)),
+      stroke('M42 62L46 76', 7),
+      stroke('M83 39Q88 50 83 61', 4.5),
+      stroke('M90 31Q98 50 90 69', 4.5),
     ],
   },
   star: {
