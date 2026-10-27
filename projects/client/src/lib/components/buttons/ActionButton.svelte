@@ -179,7 +179,8 @@
 
   :global(#{$b}[data-progress]::before) {
     --action-button-progress-min: calc(
-      var(--button-size) - 2 * var(--action-button-progress-inset)
+      var(--button-size) - 2 * var(--action-button-progress-inset) +
+        var(--ni-4)
     );
 
     content: "";
@@ -206,6 +207,20 @@
     transition-property: width, background-color;
   }
 
+  :global(#{$b}[data-progress]::after) {
+    content: "";
+    position: absolute;
+    inset: var(--action-button-progress-inset);
+    z-index: -2;
+
+    border-radius: var(--border-radius-pill);
+    background-color: color-mix(
+      in srgb,
+      var(--surface-action-button) 10%,
+      transparent
+    );
+  }
+
   @include for-mouse {
     :global(#{$b}[data-progress]:hover#{$on}::before),
     :global(#{$b}[data-progress]:focus-visible#{$on}::before) {
@@ -228,7 +243,9 @@
   }
 
   :global(#{$b}[disabled]::before),
-  :global(#{$b}[aria-disabled=true]::before) {
+  :global(#{$b}[aria-disabled=true]::before),
+  :global(#{$b}[disabled]::after),
+  :global(#{$b}[aria-disabled=true]::after) {
     display: none;
   }
 
