@@ -11748,6 +11748,36 @@
       "default": "That didn't work. Please try again.",
       "description": "Confirmation toast shown when an action offered by a previous toast, such as Undo, fails."
     },
+    "action_toast_list_moved_to_shared": {
+      "default": "{title} moved to Shared",
+      "description": "Toast shown after adding the first collaborator to a personal list, since lists with collaborators show under Shared instead of Personal. {title} is the list name.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_action_view_lists": {
+      "default": "View",
+      "description": "Action on the toast shown after a list moved between Personal and Shared; opens the lists page it moved to."
+    },
+    "action_toast_label_view_shared_lists": {
+      "default": "Open your shared lists",
+      "description": "Accessible label for the action on the toast shown after a list moved to Shared."
+    },
+    "action_toast_list_moved_to_personal": {
+      "default": "{title} moved to Personal",
+      "description": "Toast shown after removing the last collaborator from a list, since lists without collaborators show under Personal instead of Shared. {title} is the list name.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "action_toast_label_view_personal_lists": {
+      "default": "Open your personal lists",
+      "description": "Accessible label for the action on the toast shown after a list moved to Personal."
+    },
     "action_toast_collaborator_limit_reached": {
       "default": "This list has reached its collaborator limit.",
       "description": "Error toast shown when adding a collaborator fails because the list already has the maximum number allowed."
