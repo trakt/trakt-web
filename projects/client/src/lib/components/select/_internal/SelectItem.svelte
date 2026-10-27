@@ -69,7 +69,7 @@
       {#if hasToggle}
         {@render sideToggle("excluded")}
       {:else if selected}
-        <CheckIcon />
+        <span class="item-check"><CheckIcon /></span>
       {/if}
     </div>
   {/snippet}
@@ -79,8 +79,8 @@
   @use "$style/scss/mixins/index.scss" as *;
 
   .trakt-select-item {
-    --color-background-item-hover: var(--color-select-item-hover);
-    --color-foreground-item: var(--color-select-muted-foreground);
+    --color-background-item-hover: var(--color-menu-item-hover);
+    --color-foreground-item: var(--color-text-primary);
     --select-item-height: var(--ni-40);
     --select-item-toggle-size: var(--ni-24);
 
@@ -93,10 +93,10 @@
     cursor: pointer;
 
     height: var(--select-item-height);
-    padding: var(--ni-8);
+    padding: var(--ni-8) var(--ni-12);
     box-sizing: border-box;
 
-    border-radius: var(--border-radius-s);
+    border-radius: var(--border-radius-menu-item);
 
     background-color: transparent;
     color: var(--color-foreground-item);
@@ -177,6 +177,12 @@
       height: var(--ni-16);
       flex-shrink: 0;
     }
+  }
+
+  .item-check {
+    display: flex;
+
+    color: var(--color-link-active);
   }
 
   .trakt-select-item-label {

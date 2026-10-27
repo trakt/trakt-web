@@ -22,6 +22,23 @@
   );
 }
 
+@mixin floating-surface(
+  $position: relative,
+  $radius: var(--border-radius-l)
+) {
+  position: $position;
+
+  border-radius: $radius;
+  background-color: var(--color-floating-surface);
+  box-shadow: var(--shadow-menu);
+}
+
+@mixin floating-list($position: relative) {
+  padding: calc(var(--border-radius-l) - var(--border-radius-menu-item));
+
+  @include floating-surface($position);
+}
+
 // Visually hide an element while keeping it available to screen readers
 // (e.g. a chart's <figcaption> summary).
 @mixin visually-hidden {

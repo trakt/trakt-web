@@ -55,7 +55,7 @@
   {#if $isOpened}
     <Drawer onClose={close} {title} size="auto" elevated>
       <div style="display: contents" use:closeOnSelect={close}>
-        <DropdownGroup>
+        <DropdownGroup style="menu">
           {@render items()}
         </DropdownGroup>
       </div>
@@ -69,7 +69,7 @@
       transition:scale={{ duration: time.seconds(0.15), start: 0.96 }}
     >
       <div class="spacer"></div>
-      <DropdownGroup>
+      <DropdownGroup style="menu">
         {@render items()}
       </DropdownGroup>
     </div>
@@ -187,21 +187,12 @@
   }
 
   .trakt-popup-menu-container {
-    --list-padding: var(--ni-8);
-    --dropdown-group-border-radius: var(--border-radius-m);
-
     min-width: var(--ni-156);
     max-width: var(--ni-240);
-    padding: var(--list-padding);
 
-    border-radius: var(--border-radius-m);
-    background: var(--color-popup-menu-background);
-
-    position: absolute;
     transform-origin: top;
-    box-shadow:
-      0 0 0 var(--ni-1) var(--color-popup-menu-background),
-      var(--shadow-menu);
+
+    @include floating-list(absolute);
 
     &:global([data-popup-position="left"]) {
       transform-origin: top right;
