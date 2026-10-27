@@ -177,6 +177,13 @@
     isolation: isolate;
   }
 
+  :global(#{$b}[data-progress][data-variant="primary"]) {
+    transition-property:
+      background-color, color, box-shadow, transform, outline, outline-offset;
+    transition-delay:
+      var(--transition-increment), var(--transition-increment), 0s, 0s, 0s, 0s;
+  }
+
   :global(#{$b}[data-progress]::before) {
     --action-button-progress-min: calc(
       var(--button-size) - 2 * var(--action-button-progress-inset) +
@@ -204,7 +211,7 @@
     );
 
     transition: var(--transition-increment) ease-in;
-    transition-property: width, background-color;
+    transition-property: width, background-color, opacity;
   }
 
   :global(#{$b}[data-progress]::after) {
@@ -219,6 +226,18 @@
       var(--surface-action-button) 10%,
       transparent
     );
+
+    transition: opacity var(--transition-increment) ease-in;
+  }
+
+  :global(#{$b}[data-progress][data-variant="primary"]::before) {
+    opacity: 0;
+    transition-delay: 0s, 0s, calc(2 * var(--transition-increment));
+  }
+
+  :global(#{$b}[data-progress][data-variant="primary"]::after) {
+    opacity: 0;
+    transition-delay: calc(2 * var(--transition-increment));
   }
 
   @include for-mouse {
