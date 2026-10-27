@@ -6,6 +6,7 @@
   import type { DateInputProps } from "./DateInputProps.ts";
   import { formatDateInputBound } from "./formatDateInputBound.ts";
   import { formatDateInputValue } from "./formatDateInputValue.ts";
+  import { openDatePicker } from "./openDatePicker.ts";
 
   const {
     type,
@@ -42,12 +43,7 @@
     const handler = () => {
       if (disabled) return;
 
-      if (typeof inputElement.showPicker === "function") {
-        inputElement.showPicker();
-        return;
-      }
-
-      inputElement.focus();
+      openDatePicker(inputElement);
     };
 
     node.addEventListener("click", handler);
