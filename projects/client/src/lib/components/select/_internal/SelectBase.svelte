@@ -281,14 +281,31 @@
     width: var(--bits-select-anchor-width);
     max-height: min(var(--ni-276), var(--bits-floating-available-height));
 
-    border-radius: var(--border-radius-m);
-    background-color: var(--color-modal-background);
-    box-shadow: var(--shadow-menu);
+    transform-origin: var(--bits-select-content-transform-origin);
 
-    padding: var(--ni-8);
+    @include floating-list;
 
     &[data-state="open"] {
-      animation: select-fade-in var(--transition-increment) ease-out;
+      animation: select-scale-in var(--transition-increment) ease-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &[data-state="open"] {
+        animation-name: select-fade-in;
+      }
+    }
+  }
+
+  @keyframes select-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+
+  @keyframes select-fade-in {
+    from {
+      opacity: 0;
     }
   }
 

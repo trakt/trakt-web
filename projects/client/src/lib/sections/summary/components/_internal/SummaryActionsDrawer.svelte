@@ -20,7 +20,7 @@
 
 {#if isOpen}
   <Drawer {onClose} {title} {metaInfo} size="auto">
-    <DropdownGroup>
+    <DropdownGroup style="menu">
       {@render children()}
     </DropdownGroup>
   </Drawer>

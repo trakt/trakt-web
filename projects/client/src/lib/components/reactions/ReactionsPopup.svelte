@@ -52,6 +52,8 @@
 {/if}
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-reactions-popup {
     position: absolute;
     width: var(--ni-340);
@@ -85,9 +87,7 @@
     display: flex;
     flex-direction: column;
 
-    background-color: var(--color-reaction-background);
-    border-radius: var(--border-radius-xxl);
-    box-shadow: var(--shadow-menu);
+    @include floating-surface($radius: var(--border-radius-xxl));
   }
 
   .reactions-popup-content {

@@ -32,7 +32,7 @@
       in:fade={{ duration: transitionDuration, delay: halfDuration }}
       out:fade={{ duration: transitionDuration }}
     >
-      <DropdownGroup style="flat">
+      <DropdownGroup style="menu">
         {@render children()}
       </DropdownGroup>
     </div>

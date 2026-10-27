@@ -1,4 +1,6 @@
 <script lang="ts">
+  import DropdownGroup from "$lib/components/dropdown/DropdownGroup.svelte";
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import CoverImageIcon from "$lib/components/icons/CoverImageIcon.svelte";
   import DeleteIcon from "$lib/components/icons/DeleteIcon.svelte";
   import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
@@ -34,38 +36,46 @@
   </Popover.Trigger>
   <Popover.Portal>
     <Popover.Content
-      class="profile-image-context-menu"
+      class="trakt-profile-image-context-menu"
       sideOffset={8}
       align="center"
     >
-      <button
-        class="menu-item"
-        onclick={closeAnd(onViewPhoto)}
-        aria-label={m.button_label_view_photo()}
-      >
-        <ProfileIcon />
-        <span>{m.button_text_view_photo()}</span>
-      </button>
+      <DropdownGroup style="menu">
+        <DropdownItem
+          onclick={closeAnd(onViewPhoto)}
+          label={m.button_label_view_photo()}
+        >
+          {m.button_text_view_photo()}
+          {#snippet icon()}
+            <ProfileIcon />
+          {/snippet}
+        </DropdownItem>
 
-      <button
-        class="menu-item"
-        onclick={closeAnd(onUploadPhoto)}
-        aria-label={m.button_label_upload_photo()}
-      >
-        <CoverImageIcon />
-        <span>{m.button_text_upload_photo()}</span>
-      </button>
+        <DropdownItem
+          onclick={closeAnd(onUploadPhoto)}
+          label={m.button_label_upload_photo()}
+        >
+          {m.button_text_upload_photo()}
+          {#snippet icon()}
+            <CoverImageIcon />
+          {/snippet}
+        </DropdownItem>
+      </DropdownGroup>
 
       <hr class="menu-divider" />
 
-      <button
-        class="menu-item menu-item--destructive"
-        onclick={closeAnd(onRemovePhoto)}
-        aria-label={m.button_label_remove_photo()}
-      >
-        <DeleteIcon />
-        <span>{m.button_text_remove_photo()}</span>
-      </button>
+      <DropdownGroup style="menu">
+        <DropdownItem
+          color="red"
+          onclick={closeAnd(onRemovePhoto)}
+          label={m.button_label_remove_photo()}
+        >
+          {m.button_text_remove_photo()}
+          {#snippet icon()}
+            <DeleteIcon />
+          {/snippet}
+        </DropdownItem>
+      </DropdownGroup>
     </Popover.Content>
   </Popover.Portal>
 </Popover.Root>
@@ -73,18 +83,13 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  :global(.profile-image-context-menu) {
+  :global(.trakt-profile-image-context-menu) {
     z-index: var(--layer-top);
-    background-color: var(--color-modal-background);
-    border-radius: var(--border-radius-l);
-    box-shadow: var(--shadow-menu);
-    padding: var(--ni-8);
     min-width: var(--ni-200);
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-2);
 
     animation: menuIn var(--transition-increment) ease-out forwards;
+
+    @include floating-list;
   }
 
   @keyframes menuIn {
@@ -98,54 +103,11 @@
     }
   }
 
-  .menu-item {
-    all: unset;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: var(--ni-12);
-    padding: var(--ni-12) var(--ni-16);
-    border-radius: var(--border-radius-m);
-    color: var(--color-text-primary);
-    font-size: var(--font-size-m);
-    font-weight: var(--font-weight-normal);
-    transition: background-color var(--transition-increment) ease-in-out;
-
-    @include for-mouse {
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--color-foreground) 8%,
-          transparent
-        );
-      }
-
-      &:focus-visible {
-        outline: var(--border-thickness-xs) solid var(--color-foreground);
-        outline-offset: -2px;
-      }
-    }
-
-    &--destructive {
-      color: var(--color-background-red);
-    }
-
-    :global(svg) {
-      width: var(--ni-20);
-      height: var(--ni-20);
-      flex-shrink: 0;
-    }
-  }
-
   .menu-divider {
     all: unset;
     display: block;
-    height: 1px;
-    background-color: color-mix(
-      in srgb,
-      var(--color-foreground) 10%,
-      transparent
-    );
+    height: var(--border-thickness-xxs);
+    background-color: var(--color-option-list-separator);
     margin: var(--ni-4) var(--ni-8);
   }
 </style>

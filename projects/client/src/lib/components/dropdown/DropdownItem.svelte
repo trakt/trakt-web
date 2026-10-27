@@ -217,4 +217,39 @@
       text-decoration: none;
     }
   }
+
+  :global(.trakt-dropdown-group[data-style="menu"]) li {
+    --item-padding-block: var(--ni-8);
+    --item-padding-inline: var(--ni-12);
+
+    min-height: var(--ni-40);
+    border-radius: var(--border-radius-menu-item);
+
+    &:not(:last-child) {
+      border-block-end: none;
+    }
+
+    &:not([data-color="red"]) .item-icon {
+      color: var(--color-text-secondary);
+    }
+
+    @include for-mouse {
+      &:hover:not([disabled="true"]) {
+        background: var(--color-menu-item-hover);
+      }
+    }
+
+    &:active {
+      background: var(--color-menu-item-hover);
+    }
+
+    &[data-color="red"] {
+      color: var(--red-600);
+    }
+
+    @include for-mobile {
+      min-height: var(--ni-52);
+      border-radius: var(--border-radius-m);
+    }
+  }
 </style>

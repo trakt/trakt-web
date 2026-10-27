@@ -7,6 +7,7 @@
   --border-radius-xxl: var(--ni-24);
   --border-radius-pill: var(--border-radius-xxl);
   --border-radius-field: var(--border-radius-l);
+  --border-radius-menu-item: var(--ni-10);
 
   --border-thickness-xxs: var(--ni-1);
   --border-thickness-xs: var(--ni-2);
