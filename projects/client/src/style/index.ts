@@ -1,3 +1,4 @@
+import './palette/aura.css';
 import './palette/blue.css';
 import './palette/green.css';
 import './palette/orange.css';
