@@ -27,11 +27,12 @@
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
   import type { EpisodeCardProps } from "./models/EpisodeCardProps";
   import PosterTags from "$lib/components/media/tags/PosterTags.svelte";
+  import { isUpcoming } from "$lib/utils/media/isUpcoming.ts";
 
   const { sortTag, ...props }: EpisodeCardProps & { sortTag?: Snippet } =
     $props();
 
-  const isFuture = $derived(props.episode.effectiveReleaseDate > new Date());
+  const isFuture = $derived(isUpcoming(props.episode));
   const isActivity = $derived(props.variant === "activity");
   const isHidden = $derived(props.status === "hidden");
   const isListItem = $derived(props.variant === "list-item");

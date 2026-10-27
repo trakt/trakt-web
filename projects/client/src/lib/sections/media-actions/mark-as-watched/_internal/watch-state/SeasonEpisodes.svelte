@@ -2,6 +2,7 @@
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes.ts";
   import EpisodeWatchChip from "./EpisodeWatchChip.svelte";
   import SeasonWatchAction from "./SeasonWatchAction.svelte";
+  import { isUpcoming } from "$lib/utils/media/isUpcoming.ts";
 
   const {
     showSlug,
@@ -32,7 +33,7 @@
   const remainingEpisodes = $derived(
     $episodes.filter(
       (episode) =>
-        episode.effectiveReleaseDate <= new Date() &&
+        !isUpcoming(episode) &&
         !watchedEpisodeIds.has(episode.id),
     ),
   );

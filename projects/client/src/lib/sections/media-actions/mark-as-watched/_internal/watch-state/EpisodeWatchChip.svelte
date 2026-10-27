@@ -7,6 +7,7 @@
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
   import { useMarkAsWatched } from "../../useMarkAsWatched.ts";
   import { markAsWatchedDrawerStore } from "../markAsWatchedDrawerStore.ts";
+  import { isUpcoming } from "$lib/utils/media/isUpcoming.ts";
 
   const {
     episode,
@@ -43,7 +44,7 @@
     }),
   );
 
-  const isFuture = $derived(episode.effectiveReleaseDate > new Date());
+  const isFuture = $derived(isUpcoming(episode));
 
   const state = $derived.by(() => {
     if ($isWatched) return "watched";

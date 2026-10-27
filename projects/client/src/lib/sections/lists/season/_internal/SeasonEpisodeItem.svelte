@@ -26,6 +26,7 @@
   import { episodeMetaInfo } from "$lib/utils/intl/episodeMetaInfo";
   import { onDestroy } from "svelte";
   import { time } from "$lib/utils/timing/time.ts";
+  import { isUpcoming } from "$lib/utils/media/isUpcoming.ts";
 
   type SeasonEpisodeItemProps = {
     show: ShowEntry;
@@ -66,7 +67,7 @@
     scrollAxis = "inline",
   }: SeasonEpisodeItemProps = $props();
 
-  const isFuture = $derived(episode.effectiveReleaseDate > new Date());
+  const isFuture = $derived(isUpcoming(episode));
   const hasBulkMarkAsWatched = $derived(
     hasUnseenEpisodes && episode.effectiveReleaseDate && !isFuture,
   );
