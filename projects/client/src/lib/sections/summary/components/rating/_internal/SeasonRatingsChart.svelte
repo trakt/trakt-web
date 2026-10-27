@@ -89,7 +89,9 @@
   </section>
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-season-ratings-chart {
     display: flex;
     flex-direction: column;
@@ -116,13 +118,12 @@
   .season-tooltip {
     display: block;
     white-space: nowrap;
-    background-color: var(--color-tooltip-background);
-    color: var(--color-tooltip-text);
+    color: var(--color-text-primary);
     font-size: var(--ni-12);
     line-height: 1;
     font-weight: 500;
-    border-radius: var(--border-radius-xs);
     padding: var(--ni-6) var(--ni-8);
-    box-shadow: var(--shadow-menu);
+
+    @include floating-surface($radius: var(--border-radius-s));
   }
 </style>

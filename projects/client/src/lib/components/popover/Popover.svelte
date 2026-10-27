@@ -55,6 +55,7 @@
             <div {...wrapperProps}>
               <div
                 {...props}
+                class="trakt-popover-content"
                 style="z-index: var(--layer-top)"
                 in:scale|global={{ duration: 250 }}
                 out:scale={{ duration: 250 }}
@@ -69,7 +70,15 @@
   {/if}
 </Popover.Root>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-popover-content {
+    padding: var(--ni-16);
+
+    @include floating-surface;
+  }
+
   :global(.trakt-popover-trigger) {
     all: unset;
     display: inline-flex;

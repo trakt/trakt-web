@@ -60,6 +60,7 @@
     <div class="trakt-note-prompt-popover-actions">
       <Button
         size="small"
+        style="ghost"
         color="default"
         label={m.button_label_cancel()}
         onclick={onDismiss}
@@ -68,7 +69,6 @@
       </Button>
       <Button
         size="small"
-        variant="primary"
         color="purple"
         label={m.button_label_add_note({ title })}
         onclick={handleAddNote}
@@ -110,13 +110,6 @@
     gap: var(--ni-12);
 
     min-width: var(--ni-240);
-    padding: var(--ni-16);
-
-    background-color: var(--color-modal-background);
-    border-radius: var(--border-radius-l);
-    box-shadow: var(--shadow-menu);
-
-    animation: fade-in var(--transition-increment) ease-out forwards;
   }
 
   .trakt-note-prompt-popover-header {

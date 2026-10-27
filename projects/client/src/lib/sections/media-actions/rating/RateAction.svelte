@@ -41,9 +41,7 @@
 </script>
 
 {#snippet rateContent()}
-  <div class="trakt-rate-action-popover">
-    <RateNow {...target} variant="allow" />
-  </div>
+  <RateNow {...target} variant="allow" />
 {/snippet}
 
 <div class="trakt-rate-action-root" data-style={style}>
@@ -101,12 +99,5 @@
       width: var(--ni-16);
       height: var(--ni-16);
     }
-  }
-
-  .trakt-rate-action-popover {
-    padding: var(--ni-12) var(--ni-16);
-    border-radius: var(--border-radius-l);
-    background-color: var(--color-modal-background);
-    box-shadow: var(--shadow-menu);
   }
 </style>

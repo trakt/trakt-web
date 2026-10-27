@@ -65,6 +65,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-pulse-graph-peak-hours {
     display: flex;
     flex-direction: column;
@@ -123,22 +125,20 @@
 
   // Breakdown popover above the bar; fades in on interaction.
   .peak-tooltip {
-    position: absolute;
     inset-block-end: calc(100% - var(--ni-6));
     inset-inline-start: calc(var(--ni-64) + var(--ni-8));
     z-index: var(--layer-top);
 
     white-space: nowrap;
-    background-color: var(--color-tooltip-background);
-    color: var(--color-tooltip-text);
+    color: var(--color-text-primary);
     font-weight: 500;
-    border-radius: var(--border-radius-xs);
     padding: var(--ni-6) var(--ni-8);
-    box-shadow: var(--shadow-menu);
 
     opacity: 0;
     transition: opacity var(--transition-increment) ease;
     pointer-events: none;
+
+    @include floating-surface(absolute, var(--border-radius-s));
   }
 
   .peak-row.is-active .peak-tooltip {
