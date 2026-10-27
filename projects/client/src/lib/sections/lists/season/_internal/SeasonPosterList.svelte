@@ -7,6 +7,7 @@
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { hasSeasonTitles } from "$lib/utils/media/hasSeasonTitles.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import SeasonPosterItem from "./SeasonPosterItem.svelte";
 
   type SeasonListProps = {
@@ -15,6 +16,7 @@
     title: string;
     subtitle: string;
     currentSeason: number;
+    actions?: Snippet;
   };
 
   const {
@@ -23,6 +25,7 @@
     title,
     subtitle,
     currentSeason,
+    actions,
   }: SeasonListProps = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
@@ -38,6 +41,7 @@
     key: show.slug,
   }}
   items={seasons}
+  {actions}
   drilldown={{
     ...buildDrawerLink(SummaryDrawers.Seasons),
     source: { id: "seasons" },

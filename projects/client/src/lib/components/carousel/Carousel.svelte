@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages";
   import ScrollLeftIcon from "../icons/ScrollLeftIcon.svelte";
   import ScrollRightIcon from "../icons/ScrollRightIcon.svelte";
-  import { useCarouselScroll } from "./_internal/useCarouselScroll";
+  import { useCarouselScroll } from "./useCarouselScroll";
 
   const { items }: { items: Snippet[] } = $props();
 

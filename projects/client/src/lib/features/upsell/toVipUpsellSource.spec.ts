@@ -10,6 +10,10 @@ describe('util: toVipUpsellSource', () => {
     expect(toVipUpsellSource('reality-check')).toBe('reality-check');
   });
 
+  it('should keep the season recap source', () => {
+    expect(toVipUpsellSource('season-recap')).toBe('season-recap');
+  });
+
   it('should keep a promotion source', () => {
     expect(toVipUpsellSource('promotion-black-friday')).toBe(
       'promotion-black-friday',

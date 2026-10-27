@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { scrollSign } from './scrollSign.ts';
+import { scrollSign } from './_internal/scrollSign.ts';
 
 type ScrollState = {
   readonly scrollLeft: number;
@@ -91,6 +91,7 @@ export function useCarouselScroll() {
   return {
     canScrollToStart,
     canScrollToEnd,
+    scrollState: scrollState$.asObservable(),
     scrollObserver,
     scroll,
   };

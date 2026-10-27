@@ -27,6 +27,7 @@
   import HistoryDrawerHost from "./components/history/HistoryDrawerHost.svelte";
   import NotesDrawerHost from "./components/notes/NotesDrawerHost.svelte";
   import RatingsDrawer from "./components/rating/RatingsDrawer.svelte";
+  import SeasonRecapDrawerHost from "./components/recap/SeasonRecapDrawerHost.svelte";
   import SeasonsDrawerHost from "./components/seasons/SeasonsDrawerHost.svelte";
   import { toInsightsOpenSource } from "./components/sentiment/toInsightsOpenSource.ts";
   import type { InsightsOpenSource } from "./components/sentiment/models/InsightsOpenSource.ts";
@@ -257,6 +258,19 @@
   <RenderForFeature flag={FeatureFlag.Rewatching}>
     {#snippet enabled()}
       <RewatchingDrawerHost show={showEntry} onClose={close} />
+    {/snippet}
+  </RenderForFeature>
+{/if}
+
+{#if drawer === SummaryDrawers.SeasonRecap && details.type === "show" && seasons && currentSeason != null && showEntry}
+  <RenderForFeature flag={FeatureFlag.SeasonRecap} audience="director">
+    {#snippet enabled()}
+      <SeasonRecapDrawerHost
+        show={showEntry}
+        {seasons}
+        season={currentSeason}
+        onClose={close}
+      />
     {/snippet}
   </RenderForFeature>
 {/if}

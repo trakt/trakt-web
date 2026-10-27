@@ -2,14 +2,19 @@
   import Card from "$lib/components/card/Card.svelte";
 
   type InfoCardProps = {
-    variant?: "default" | "highlight";
+    variant?: "default" | "highlight" | "dashed";
+    size?: "default" | "compact";
   } & ChildrenProps;
 
-  const { children, variant = "default" }: InfoCardProps = $props();
+  const {
+    children,
+    variant = "default",
+    size = "default",
+  }: InfoCardProps = $props();
 </script>
 
 <Card variant="transparent" --width-card="100%" --height-card="fit-content">
-  <div class="trakt-info-container" data-variant={variant}>
+  <div class="trakt-info-container" data-variant={variant} data-size={size}>
     {@render children()}
   </div>
 </Card>
@@ -36,6 +41,17 @@
 
     :global(li) {
       font-size: var(--font-size-text);
+    }
+
+    &[data-size="compact"] {
+      gap: var(--ni-10);
+      padding: var(--ni-14);
+    }
+
+    &[data-variant="dashed"] {
+      background: transparent;
+      border: var(--border-thickness-xxs) dashed
+        color-mix(in srgb, var(--color-vip-border-accent) 50%, transparent);
     }
 
     &[data-variant="highlight"] {
