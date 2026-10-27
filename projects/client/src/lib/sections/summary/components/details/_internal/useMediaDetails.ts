@@ -20,6 +20,7 @@ import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
 import { toLanguageName } from '$lib/utils/formatting/intl/toLanguageName.ts';
 import { toTranslatedStatus } from '$lib/utils/formatting/string/toTranslatedStatus.ts';
+import { isUpcoming } from '$lib/utils/media/isUpcoming.ts';
 import type { MediaDetailsProps } from '../MediaDetailsProps.ts';
 import { toCrewMemberWithJob } from './toCrewMemberWithJob.ts';
 
@@ -93,7 +94,7 @@ function episodeType(episode: EpisodeEntry): MediaDetail {
 }
 
 function episodeAirDate(episode: EpisodeEntry) {
-  const isUpcomingItem = episode.effectiveReleaseDate > new Date();
+  const isUpcomingItem = isUpcoming(episode);
   const isTba = isMaxDate(episode.effectiveReleaseDate);
 
   return {
