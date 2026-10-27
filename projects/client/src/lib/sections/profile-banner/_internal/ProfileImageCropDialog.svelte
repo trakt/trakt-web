@@ -1,9 +1,8 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import Button from "$lib/components/buttons/Button.svelte";
+  import DialogActions from "$lib/components/dialogs/DialogActions.svelte";
   import Modal from "$lib/components/dialogs/Modal.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
-  import CoverImageIcon from "$lib/components/icons/CoverImageIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { fromEvent, merge, Subject } from "rxjs";
   import { map, pairwise, scan, startWith, tap } from "rxjs/operators";
@@ -240,27 +239,15 @@
 <Modal {onClose}>
   <div class="crop-dialog">
     <div class="crop-header">
+      <h2>{m.dialog_title_adjust_photo()}</h2>
       <ActionButton
-        label={m.button_text_cancel()}
+        label={m.button_label_close()}
         color="default"
         style="ghost"
         onclick={onClose}
       >
         <CloseIcon />
       </ActionButton>
-      <span class="crop-hint">{m.label_drag_image_to_adjust()}</span>
-      <Button
-        label={m.button_text_upload_photo()}
-        color="default"
-        style="ghost"
-        size="small"
-        onclick={handleConfirm}
-      >
-        {#snippet icon()}
-          <CoverImageIcon />
-        {/snippet}
-        {m.button_text_upload_photo()}
-      </Button>
     </div>
 
     <div class="crop-canvas-wrapper">
@@ -277,7 +264,7 @@
     <div class="crop-zoom-controls">
       <button
         class="zoom-btn"
-        aria-label="Zoom out"
+        aria-label={m.button_label_zoom_out()}
         onclick={() => zoomButton$.next(-zoomScaleStep)}
         disabled={crop.scale <= minZoomScale}
       >
@@ -294,7 +281,7 @@
       </div>
       <button
         class="zoom-btn"
-        aria-label="Zoom in"
+        aria-label={m.button_label_zoom_in()}
         onclick={() => zoomButton$.next(zoomScaleStep)}
         disabled={crop.scale >= maxZoomScale}
       >
@@ -302,6 +289,18 @@
       </button>
     </div>
   </div>
+
+  {#snippet footer()}
+    <span class="crop-hint small secondary">{m.label_drag_image_to_adjust()}</span>
+    <DialogActions
+      secondary={{ label: m.button_text_cancel(), onclick: onClose }}
+      primary={{
+        label: m.button_text_upload_photo(),
+        onclick: handleConfirm,
+        color: "purple",
+      }}
+    />
+  {/snippet}
 </Modal>
 
 <style lang="scss">
@@ -310,31 +309,30 @@
   .crop-dialog {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-16);
-    padding: 0;
+    gap: var(--gap-m);
   }
 
   .crop-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--ni-8);
+    gap: var(--gap-s);
+    margin-block-start: calc(-1 * var(--gap-xs));
+    margin-inline-end: calc(-1 * var(--gap-xs));
   }
 
   .crop-hint {
-    font-size: var(--font-size-text);
-    color: var(--color-text-secondary);
     flex: 1;
-    text-align: center;
+    min-width: 0;
   }
 
   .crop-canvas-wrapper {
     position: relative;
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-l);
     overflow: hidden;
     aspect-ratio: 1;
     width: 100%;
-    background-color: var(--shade-900);
+    background-color: var(--color-dialog-inset);
   }
 
   .crop-canvas {

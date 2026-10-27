@@ -66,14 +66,12 @@
 <style lang="scss">
   .trakt-delete-account-stats {
     display: flex;
+    gap: var(--border-thickness-xxs);
     margin: 0;
 
-    box-sizing: border-box;
-
-    border: var(--border-thickness-xxs) solid
-      color-mix(in srgb, var(--color-text-primary) 8%, transparent);
-    border-radius: var(--border-radius-m);
-    background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
+    overflow: hidden;
+    border-radius: var(--border-radius-l);
+    background: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
   }
 
   .stat-tile {
@@ -82,18 +80,14 @@
 
     display: flex;
     flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-    gap: var(--ni-4);
+    justify-content: flex-end;
+    gap: var(--gap-micro);
 
-    padding: var(--gap-s) var(--gap-xs);
+    padding: var(--gap-s) var(--gap-m);
 
-    text-align: center;
-
-    + .stat-tile {
-      border-inline-start: var(--border-thickness-xxs) solid
-        color-mix(in srgb, var(--color-text-primary) 8%, transparent);
-    }
+    background:
+      linear-gradient(var(--color-dialog-inset), var(--color-dialog-inset)),
+      var(--color-modal-background);
 
     dt,
     dd {
@@ -101,13 +95,10 @@
     }
 
     dd {
-      display: flex;
-      justify-content: center;
-
       min-width: var(--ni-40);
 
+      font-size: var(--font-size-title);
       font-variant-numeric: tabular-nums;
-      color: var(--color-foreground-purple);
     }
   }
 </style>

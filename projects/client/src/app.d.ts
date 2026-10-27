@@ -72,6 +72,7 @@ declare global {
   type HTMLElementProps = {
     disabled?: boolean;
     'data-testid'?: string;
+    'data-autofocus'?: boolean;
 
     /** Keyboard */
     onkeydown?: (event: KeyboardEvent) => void;

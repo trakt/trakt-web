@@ -15,6 +15,14 @@ const toExportFirstPreflight = (): ConfirmationPreflight => ({
   isEnabledByDefault: true,
 });
 
+const toLeavePageConfirmation = (message: string) => ({
+  title: m.confirmation_title_leave_page(),
+  message,
+  buttonText: m.button_text_leave(),
+  cancelText: m.button_text_stay(),
+  operation: 'destructive' as const,
+});
+
 type ConfirmationBuilders = {
   [T in ConfirmationType]: ConfirmationBuilder<T>;
 };
@@ -24,71 +32,71 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     title: m.confirmation_title_mark_as_watched(),
     buttonText: m.button_text_mark_as_watched(),
     message: getWarningMessage(props.title, props.target),
-    operation: 'destructive',
+    operation: 'affirmative',
   }),
   [ConfirmationType.RemoveFromWatched]: (props) => ({
     title: m.confirmation_title_remove_from_watched(),
-    buttonText: m.button_text_remove_from_history(),
+    buttonText: m.button_text_remove(),
     message: m.warning_prompt_remove_from_watched({ title: props.title }),
     operation: 'destructive',
   }),
   [ConfirmationType.RemoveFromHistory]: (props) => ({
     title: m.confirmation_title_remove_play(),
-    buttonText: m.button_text_remove_from_history(),
+    buttonText: m.button_text_remove(),
     message: m.warning_prompt_remove_single_watched({ title: props.title }),
     operation: 'destructive',
   }),
   [ConfirmationType.DropShow]: (props) => ({
     title: m.confirmation_title_drop_show(),
-    buttonText: m.button_text_drop_show(),
+    buttonText: m.button_text_drop(),
     message: m.warning_prompt_drop_show({ title: props.title }),
     operation: 'destructive',
   }),
   [ConfirmationType.DropMovie]: (props) => ({
     title: m.confirmation_title_drop_movie(),
-    buttonText: m.button_text_drop_movie(),
+    buttonText: m.button_text_drop(),
     message: m.warning_prompt_drop_movie({ title: props.title }),
     operation: 'destructive',
   }),
   [ConfirmationType.RestoreShow]: (props) => ({
     title: m.confirmation_title_restore_show(),
-    buttonText: m.button_text_restore_show(),
+    buttonText: m.button_text_restore(),
     message: m.warning_prompt_restore_show({ title: props.title }),
     operation: 'affirmative',
   }),
   [ConfirmationType.StartRewatching]: (props) => ({
-    title: m.confirmation_title_rewatching_prompt({ title: props.title }),
-    buttonText: m.button_text_start_rewatching(),
-    message: m.confirmation_message_rewatching_prompt(),
+    title: m.confirmation_title_start_rewatching(),
+    buttonText: m.button_text_rewatch(),
+    message: m.confirmation_message_start_rewatching({ title: props.title }),
     operation: 'affirmative',
   }),
   [ConfirmationType.DeleteList]: (props) => ({
     title: m.confirmation_title_delete_list(),
-    buttonText: m.button_text_delete_list(),
+    buttonText: m.button_text_delete(),
     message: m.warning_prompt_delete_list({ name: props.name }),
     operation: 'destructive',
   }),
   [ConfirmationType.LeaveCollaboration]: (props) => ({
     title: m.confirmation_title_leave_collaboration(),
-    buttonText: m.button_text_leave_collaboration(),
+    buttonText: m.button_text_leave(),
     message: m.warning_prompt_leave_collaboration({ name: props.name }),
     operation: 'destructive',
   }),
   [ConfirmationType.RemoveFavorite]: (props) => ({
     title: m.confirmation_title_remove_favorite(),
-    buttonText: m.button_text_remove_from_favorites(),
+    buttonText: m.button_text_remove(),
     message: m.warning_prompt_remove_from_favorites({ title: props.title }),
     operation: 'destructive',
   }),
   [ConfirmationType.RemoveFromWatchList]: (props) => ({
     title: m.confirmation_title_remove_from_watchlist(),
-    buttonText: m.button_text_remove_from_watchlist(),
+    buttonText: m.button_text_remove(),
     message: m.warning_prompt_remove_from_watchlist({ title: props.title }),
     operation: 'destructive',
   }),
   [ConfirmationType.RemoveFromList]: (props) => ({
     title: m.confirmation_title_remove_from_list(),
-    buttonText: m.button_text_remove_from_list(),
+    buttonText: m.button_text_remove(),
     message: m.warning_prompt_remove_from_personal_list({
       list: props.name,
       title: props.title,
@@ -98,31 +106,33 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   [ConfirmationType.UnfollowUser]: (props) => ({
     title: m.confirmation_title_unfollow_user(),
     buttonText: m.button_text_unfollow(),
-    message: m.warning_prompt_unfollow_user({ username: props.username }),
+    message: m.warning_prompt_unfollow_user({
+      username: props.username,
+    }),
     operation: 'destructive',
   }),
   [ConfirmationType.BlockUser]: (props) => ({
     title: m.confirmation_title_block_user(),
     buttonText: m.button_text_block(),
-    message: m.warning_prompt_block_user({ username: props.username }),
-    detail: m.warning_prompt_block_user_detail(),
+    message: m.confirmation_message_block_user({ username: props.username }),
     operation: 'destructive',
   }),
   [ConfirmationType.StopCheckin]: (props) => ({
     title: m.confirmation_title_stop_checkin(),
-    buttonText: m.button_text_stop_check_in(),
+    buttonText: m.button_text_stop(),
+    cancelText: m.button_text_keep_watching(),
     message: m.warning_prompt_stop_checkin({ title: props.title }),
     operation: 'destructive',
   }),
   [ConfirmationType.DeleteComment]: () => ({
     title: m.confirmation_title_delete_comment(),
-    buttonText: m.button_text_delete_comment(),
+    buttonText: m.button_text_delete(),
     message: m.warning_prompt_delete_comment(),
     operation: 'destructive',
   }),
   [ConfirmationType.DeleteNote]: () => ({
     title: m.confirmation_title_delete_note(),
-    buttonText: m.button_text_delete_note(),
+    buttonText: m.button_text_delete(),
     message: m.warning_prompt_delete_note(),
     operation: 'destructive',
   }),
@@ -134,7 +144,7 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   }),
   [ConfirmationType.DeleteAccount]: (props) => ({
     title: m.confirmation_title_delete_account(),
-    buttonText: m.button_text_delete_account(),
+    buttonText: m.button_text_delete(),
     message: m.warning_prompt_delete_account(),
     operation: 'destructive',
     challenge: {
@@ -148,7 +158,7 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   }),
   [ConfirmationType.SimpleFilters]: () => ({
     title: m.confirmation_title_reset_filters(),
-    buttonText: m.button_text_reset_all_filters(),
+    buttonText: m.button_text_switch(),
     message: m.warning_prompt_simple_filters(),
     operation: 'destructive',
   }),
@@ -159,41 +169,34 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
     message: m.warning_prompt_cancel_vip({ date: props.renewsOn }),
     operation: 'preventative',
   }),
-  [ConfirmationType.CancelImport]: () => ({
-    title: m.confirmation_title_cancel_import(),
-    buttonText: m.button_text_cancel_import(),
-    message: m.warning_prompt_cancel_import(),
-    operation: 'destructive',
-  }),
-  [ConfirmationType.CancelClear]: () => ({
+  [ConfirmationType.CancelImport]: () =>
+    toLeavePageConfirmation(m.warning_prompt_cancel_import()),
+  [ConfirmationType.CancelClear]: () =>
+    toLeavePageConfirmation(m.warning_prompt_cancel_clear()),
+  [ConfirmationType.SwitchClearSource]: () => ({
     title: m.confirmation_title_stop_clear(),
-    buttonText: m.button_text_stop_clear(),
-    message: m.warning_prompt_cancel_clear(),
+    message: m.confirmation_message_switching_stops_clearing(),
+    buttonText: m.button_text_switch(),
+    cancelText: m.button_text_keep_clearing(),
     operation: 'destructive',
   }),
-  [ConfirmationType.CancelExport]: () => ({
-    title: m.confirmation_title_stop_export(),
-    buttonText: m.button_text_stop_export(),
-    message: m.warning_prompt_cancel_export(),
-    operation: 'destructive',
-  }),
+  [ConfirmationType.CancelExport]: () =>
+    toLeavePageConfirmation(m.warning_prompt_cancel_export()),
   [ConfirmationType.ProceedAfterPartialExport]: (props) => ({
-    title: m.confirmation_title_proceed_after_partial_export(),
-    buttonText: m.button_text_continue(),
-    message:
-      props.failed === 1
-        ? m.warning_prompt_partial_export_one({ total: props.total })
-        : m.warning_prompt_partial_export_other({
-            failed: props.failed,
-            total: props.total,
-          }),
+    title: m.confirmation_title_sections_failed({
+      failed: props.failed,
+      total: props.total,
+    }),
+    buttonText: m.button_text_continue_anyway(),
+    cancelText: m.button_text_go_back(),
+    message: m.confirmation_message_sections_failed(),
     operation: 'destructive',
   }),
   [ConfirmationType.ClearData]: (props) => ({
     title: m.confirmation_title_clear_data(),
     buttonText: props.isCustomLibrary
       ? m.button_export_clear_custom_library()
-      : m.button_text_clear_now(),
+      : m.button_text_clear(),
     message: props.isCustomLibrary
       ? m.warning_prompt_clear_custom_library()
       : m.warning_prompt_clear_data({ source: props.sourceText }),
@@ -202,7 +205,7 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   }),
   [ConfirmationType.CleanUpHistory]: (props) => ({
     title: m.confirmation_title_clean_up_history(),
-    buttonText: m.button_text_clean_up(),
+    buttonText: m.button_text_remove(),
     message:
       props.keeps === 'oldest'
         ? m.warning_prompt_clean_up_history({ count: props.count })
@@ -212,7 +215,7 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   }),
   [ConfirmationType.HideRecommendation]: (props) => ({
     title: m.confirmation_title_hide_recommendation(),
-    buttonText: m.button_text_hide_recommendation(),
+    buttonText: m.button_text_hide(),
     message: m.warning_prompt_hide_recommendation({ title: props.title }),
     operation: 'destructive',
   }),
@@ -233,25 +236,16 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   [ConfirmationType.DiscardChanges]: () => ({
     title: m.dialog_title_discard_changes(),
     buttonText: m.button_text_discard(),
+    cancelText: m.button_text_keep_editing(),
     message: m.warning_prompt_discard_changes(),
     operation: 'destructive',
   }),
-  [ConfirmationType.DisconnectPlex]: () => ({
-    title: m.confirmation_title_disconnect_plex(),
-    buttonText: m.button_disconnect_plex(),
-    message: m.confirmation_message_disconnect_plex(),
-    operation: 'destructive',
-  }),
-  [ConfirmationType.RemovePlexServer]: (props) => ({
-    title: m.confirmation_title_plex_remove_server({ server: props.server }),
-    buttonText: m.button_text_plex_remove_server(),
-    message: m.confirmation_message_plex_remove_server(),
-    operation: 'destructive',
-  }),
   [ConfirmationType.RemoveMediaSyncServer]: (props) => ({
-    title: m.confirmation_title_plex_remove_server({ server: props.server }),
-    buttonText: m.button_text_plex_remove_server(),
-    message: m.confirmation_message_media_sync_remove_server(),
+    title: m.confirmation_title_remove_server(),
+    buttonText: m.button_text_remove(),
+    message: m.confirmation_message_remove_named_server({
+      server: props.server,
+    }),
     operation: 'destructive',
   }),
   [ConfirmationType.ResetCoverImage]: () => ({
@@ -262,13 +256,13 @@ const CONFIRMATION_BUILDERS: ConfirmationBuilders = {
   }),
   [ConfirmationType.SetCoverImage]: (props) => ({
     title: m.button_text_set_cover_image(),
-    buttonText: m.button_text_yes(),
+    buttonText: m.button_text_set_as_cover(),
     message: m.warning_prompt_set_cover_image({ title: props.title }),
     operation: 'affirmative',
   }),
   [ConfirmationType.RevokeApp]: (props) => ({
     title: m.confirmation_title_revoke_app(),
-    buttonText: m.button_text_revoke_access(),
+    buttonText: m.button_text_revoke(),
     message: m.confirmation_message_revoke_app({ name: props.name }),
     operation: 'destructive',
   }),

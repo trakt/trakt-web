@@ -23,39 +23,85 @@ describe('mapToConfirmation', () => {
     expect(result.preflight?.isEnabledByDefault).toBe(true);
   });
 
-  it('should build a destructive confirmation for BlockUser with the username interpolated', () => {
+  it('should name the person in the body, not the title, when blocking', () => {
     const result = mapToConfirmation({
       type: ConfirmationType.BlockUser,
       username: 'harry',
     });
 
     expect(result.operation).toBe('destructive');
-    expect(result.buttonText).toBeTruthy();
+    expect(result.title).not.toContain('harry');
     expect(result.message).toContain('harry');
+    expect(result.buttonText).toBe('Block');
   });
 
-  it('should build a destructive confirmation for UnfollowUser with the username interpolated', () => {
+  it('should name the person in the body, not the title, when unfollowing', () => {
     const result = mapToConfirmation({
       type: ConfirmationType.UnfollowUser,
       username: 'harry',
     });
 
     expect(result.operation).toBe('destructive');
+    expect(result.title).not.toContain('harry');
     expect(result.message).toContain('harry');
   });
 
-  it('should build a destructive confirmation for DiscardChanges', () => {
+  it('should name the list in the body and keep the button to the verb when deleting a list', () => {
+    const result = mapToConfirmation({
+      type: ConfirmationType.DeleteList,
+      name: 'Comfort rewatches',
+    });
+
+    expect(result.title).not.toContain('Comfort rewatches');
+    expect(result.message).toContain('Comfort rewatches');
+    expect(result.buttonText).toBe('Delete');
+  });
+
+  it('should offer to keep editing when discarding changes', () => {
     const result = mapToConfirmation({
       type: ConfirmationType.DiscardChanges,
     });
 
     expect(result.operation).toBe('destructive');
-    expect(result.buttonText).toBeTruthy();
-    expect(result.message).toBeTruthy();
+    expect(result.buttonText).toBe('Discard');
+    expect(result.cancelText).toBe('Keep editing');
+  });
+
+  it('should protect the subscription when cancelling VIP', () => {
+    const result = mapToConfirmation({
+      type: ConfirmationType.CancelVip,
+      renewsOn: '14 Dec 2026',
+    });
+
+    expect(result.operation).toBe('preventative');
+    expect(result.buttonText).toBe('Cancel VIP');
+    expect(result.cancelText).toBe('Keep my premium perks');
+    expect(result.message).toContain('14 Dec 2026');
+  });
+
+  it.each([
+    ConfirmationType.CancelImport,
+    ConfirmationType.CancelClear,
+    ConfirmationType.CancelExport,
+  ] as const)('should offer to stay or leave for %s', (type) => {
+    const result = mapToConfirmation({ type });
+
+    expect(result.cancelText).toBe('Stay');
+    expect(result.buttonText).toBe('Leave');
+  });
+
+  it('should not mention leaving when switching the clear source', () => {
+    const result = mapToConfirmation({
+      type: ConfirmationType.SwitchClearSource,
+    });
+
+    expect(result.message).toBe('Switching sources stops it partway.');
+    expect(result.cancelText).toBe('Keep clearing');
+    expect(result.buttonText).toBe('Switch');
   });
 
   describe('for SetCoverImage', () => {
-    it('should ask affirmatively and name the media', () => {
+    it('should ask affirmatively and name the media in the body', () => {
       const result = mapToConfirmation({
         type: ConfirmationType.SetCoverImage,
         title: 'Heretic',
@@ -63,16 +109,9 @@ describe('mapToConfirmation', () => {
       });
 
       expect(result.operation).toBe('affirmative');
+      expect(result.buttonText).toBe('Set as cover');
+      expect(result.title).not.toContain('Heretic');
       expect(result.message).toContain('Heretic');
-    });
-
-    it('should still confirm when the media has no artwork to preview', () => {
-      const result = mapToConfirmation({
-        type: ConfirmationType.SetCoverImage,
-        title: 'Heretic',
-      });
-
-      expect(result.message).toBeTruthy();
     });
   });
 

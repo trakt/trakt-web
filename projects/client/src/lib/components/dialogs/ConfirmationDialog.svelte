@@ -1,17 +1,16 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
   import FormInput from "$lib/components/form/FormInput.svelte";
   import type { Confirmation } from "$lib/features/confirmation/models/Confirmation";
   import type { ConfirmationAction } from "$lib/features/confirmation/models/ConfirmationAction";
   import * as m from "$lib/features/i18n/messages.ts";
   import Switch from "$lib/components/toggles/Switch.svelte";
-  import type { Snippet } from "svelte";
+  import type { ComponentProps, Snippet } from "svelte";
+  import DialogActions from "./DialogActions.svelte";
   import Modal from "./Modal.svelte";
 
   const {
     title,
     message,
-    detail,
     buttonText,
     cancelText: externalCancelText,
     onAction,
@@ -25,8 +24,6 @@
     onAction: (action: ConfirmationAction, isPreflightEnabled: boolean) => void;
   } = $props();
 
-  const isDestructive = $derived(operation === "destructive");
-  const isPreventative = $derived(operation === "preventative");
   const cancelText = $derived(externalCancelText ?? m.button_text_cancel());
 
   let preflightOverride = $state<boolean | null>(null);
@@ -38,24 +35,58 @@
     challenge != null &&
       challengeInput.trim().toLowerCase() !== challenge.value.toLowerCase(),
   );
+
+  const cancel = () => onAction("cancel", isPreflightEnabled);
+  const confirm = () => onAction("confirm", isPreflightEnabled);
+
+  const cancelAction = $derived({ label: cancelText, onclick: cancel });
+  const confirmAction = $derived({
+    label: buttonText,
+    onclick: confirm,
+    disabled: isConfirmDisabled,
+  });
+
+  const actions: ComponentProps<typeof DialogActions> = $derived(
+    operation === "preventative"
+      ? {
+          secondary: confirmAction,
+          primary: { ...cancelAction, color: "purple", isAutofocused: true },
+        }
+      : {
+          secondary: cancelAction,
+          primary: {
+            ...confirmAction,
+            color: operation === "affirmative" ? "purple" : "red",
+          },
+        },
+  );
 </script>
 
-<Modal onClose={() => onAction("cancel", isPreflightEnabled)}>
+<Modal onClose={cancel}>
   <div class="trakt-confirmation-content">
-    <h2 class="title bold">{title}</h2>
-    <p class="trakt-confirmation-message secondary">{message}</p>
-    {#if detail}
-      <p class="trakt-confirmation-message secondary">{detail}</p>
-    {/if}
+    <div class="confirmation-copy">
+      <h2 class="confirmation-title">{title}</h2>
+      <p class="confirmation-message secondary">{message}</p>
+    </div>
 
     {#if content}
-      <div class="trakt-confirmation-slot">
-        {@render content()}
-      </div>
+      {@render content()}
+    {/if}
+
+    {#if challenge}
+      <label class="confirmation-challenge">
+        <span class="small secondary">{challenge.label}</span>
+        <FormInput
+          placeholder={challenge.placeholder ?? ""}
+          onChange={(value) => (challengeInput = value)}
+          disabled={false}
+          autofocus
+        />
+      </label>
     {/if}
 
     {#if preflight}
-      <div class="trakt-confirmation-preflight">
+      <div class="confirmation-preflight">
         <div class="preflight-copy">
           <p aria-hidden="true">{preflight.label}</p>
           {#if preflight.hint}
@@ -69,110 +100,61 @@
         />
       </div>
     {/if}
-
-    {#if challenge}
-      <label class="trakt-confirmation-challenge">
-        <span class="small secondary">{challenge.label}</span>
-        <FormInput
-          placeholder={challenge.placeholder ?? ""}
-          onChange={(value) => (challengeInput = value)}
-          disabled={false}
-          autofocus
-        />
-      </label>
-    {/if}
   </div>
 
   {#snippet footer()}
-    <div class="trakt-confirmation-actions" data-operation={operation}>
-      <Button
-        size="small"
-        style={isPreventative ? "flat" : "outline"}
-        color={isPreventative ? "purple" : "default"}
-        label={cancelText}
-        onclick={() => onAction("cancel", isPreflightEnabled)}
-      >
-        {cancelText}
-      </Button>
-      <Button
-        size="small"
-        style={isPreventative ? "outline" : "flat"}
-        variant="primary"
-        color={isDestructive ? "custom" : "default"}
-        label={buttonText}
-        disabled={isConfirmDisabled}
-        onclick={() => onAction("confirm", isPreflightEnabled)}
-      >
-        {buttonText}
-      </Button>
-    </div>
+    <DialogActions {...actions} />
   {/snippet}
 </Modal>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-confirmation-content {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-8);
-  }
-
-  .trakt-confirmation-slot {
-    margin-top: var(--ni-8);
-  }
-
-  .trakt-confirmation-preflight {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     gap: var(--gap-m);
 
-    box-sizing: border-box;
-    padding: var(--gap-m);
-    margin-top: var(--ni-8);
+    .confirmation-copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-xs);
+    }
 
-    border: var(--border-thickness-xxs) solid
-      color-mix(in srgb, var(--color-text-primary) 8%, transparent);
-    border-radius: var(--border-radius-m);
-    background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
-  }
+    .confirmation-title {
+      text-wrap: pretty;
+    }
 
-  .trakt-confirmation-preflight :global(.trakt-switch) {
-    flex-shrink: 0;
-  }
+    .confirmation-message {
+      line-height: 1.5;
+      text-wrap: pretty;
+    }
 
-  .preflight-copy {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-4);
-  }
+    .confirmation-challenge {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-xs);
+    }
 
-  .preflight-copy p {
-    margin: 0;
-  }
+    .confirmation-preflight {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--gap-m);
 
-  .trakt-confirmation-challenge {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-8);
+      box-sizing: border-box;
+      padding: var(--gap-s) var(--gap-m);
 
-    margin-top: var(--ni-8);
-  }
+      border-radius: var(--border-radius-l);
+      background: var(--color-dialog-inset);
 
-  .trakt-confirmation-actions {
-    display: inline-grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--ni-8);
-  }
+      :global(.trakt-switch) {
+        flex-shrink: 0;
+      }
+    }
 
-  .trakt-confirmation-actions :global(.trakt-button) {
-    padding-inline: var(--ni-10);
-    justify-content: center;
-  }
-
-  .trakt-confirmation-actions[data-operation="destructive"] {
-    --color-background-custom: var(--color-confirmation-destructive-background);
-    --color-foreground-custom: var(--color-confirmation-destructive-foreground);
+    .preflight-copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-micro);
+    }
   }
 </style>

@@ -20,7 +20,7 @@
       "description": "Button that exports the Custom Library to a file, then removes its items."
     },
     "warning_prompt_clear_custom_library": {
-      "default": "Your Custom Library will be exported to a file, then permanently cleared. Your Plex Library will not be changed. This cannot be undone.",
+      "default": "Your Custom Library will be exported to a file, then permanently cleared. Your Plex Library will not be changed. This can't be undone.",
       "description": "Confirmation before exporting and clearing the non-Plex Custom Library. Export is required before deletion."
     },
     "text_clear_data_failed": {
@@ -956,8 +956,8 @@
       }
     },
     "button_text_logout": {
-      "default": "Logout",
-      "description": "Text for the logout button."
+      "default": "Log out",
+      "description": "Confirm button that logs you out."
     },
     "button_label_logout": {
       "default": "Logout",
@@ -1522,8 +1522,8 @@
       }
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Are you sure you want to remove \"{title}\" from your History? All plays will be removed.",
-      "description": "Warning prompt shown when a user tries to remove a movie, show, or episode from their watch history.",
+      "default": "All plays of \"{title}\" will be removed. This can't be undone.",
+      "description": "Confirmation dialog body when removing every play of a title from history. {title} is the movie or show name.",
       "variables": {
         "title": {
           "type": "string"
@@ -1540,8 +1540,8 @@
       }
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Are you sure you want to remove this play of \"{title}\" from your History?",
-      "description": "Warning prompt shown when a user tries to remove a single play of a movie or episode from their watch history.",
+      "default": "This play of \"{title}\" will be removed. Other plays stay.",
+      "description": "Confirmation dialog body when removing one play from history. {title} is the movie or episode name.",
       "variables": {
         "title": {
           "type": "string"
@@ -2292,7 +2292,7 @@
       "description": "Text for the button that allows a user to drop an episode watching. Indicating that a user is no longer actively watching this episode."
     },
     "warning_prompt_restore_show": {
-      "default": "Are you sure you want to restore \"{title}\" show? This will restore it on your progress and calendar.",
+      "default": "Are you sure you want to restore \"{title}\"? This will restore it on your progress and calendar.",
       "description": "Warning prompt shown when a user tries to restore a hidden show.",
       "variables": {
         "title": {
@@ -2916,7 +2916,7 @@
       }
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Are you sure you want to remove \"{title}\" from {list}?",
+      "default": "Are you sure you want to remove \"{title}\" from \"{list}\"?",
       "description": "Warning prompt shown when a user tries to remove an item from a personal list.",
       "variables": {
         "title": {
@@ -3376,8 +3376,8 @@
       }
     },
     "warning_prompt_unfollow_user": {
-      "default": "Are you sure you want to unfollow {username}?",
-      "description": "Warning prompt shown when a user tries to unfollow a profile.",
+      "default": "You'll stop seeing {username}'s activity in your feed.",
+      "description": "Confirmation dialog body before unfollowing someone. {username} is their display name.",
       "variables": {
         "username": {
           "type": "string"
@@ -3626,8 +3626,8 @@
       }
     },
     "warning_prompt_delete_list": {
-      "default": "Are you sure you want to delete the list {name}?",
-      "description": "Warning prompt shown when a user tries to delete a list.",
+      "default": "\"{name}\" will be deleted. This can't be undone.",
+      "description": "Confirmation dialog body before deleting a list. {name} is the list name.",
       "variables": {
         "name": {
           "type": "string"
@@ -3648,8 +3648,8 @@
       }
     },
     "warning_prompt_leave_collaboration": {
-      "default": "Are you sure you want to remove yourself as a collaborator on {name}? You'll lose the ability to add or remove items from this list.",
-      "description": "Warning prompt shown when a collaborator tries to remove themselves from a list.",
+      "default": "You won't be able to add or remove titles in \"{name}\" anymore.",
+      "description": "Confirmation dialog body before leaving a shared list. {name} is the list name.",
       "variables": {
         "name": {
           "type": "string"
@@ -4500,8 +4500,8 @@
       "description": "Aria-label for the button that closes the review reaction popup."
     },
     "warning_prompt_stop_checkin": {
-      "default": "Are you sure you want to stop watching \"{title}\"?",
-      "description": "Warning prompt shown when a user stops a manually checked in movie or episode.",
+      "default": "Your check-in for \"{title}\" will be removed. It won't be added to your history.",
+      "description": "Confirmation dialog body before stopping a check-in. {title} is the movie or episode name.",
       "variables": {
         "title": {
           "type": "string"
@@ -4876,16 +4876,16 @@
       "description": "Aria-label for the button that allows a user to delete a review."
     },
     "warning_prompt_delete_comment": {
-      "default": "Are you sure you want to delete your review?",
-      "description": "Text for the warning prompt that appears when a user attempts to delete a review."
+      "default": "This can't be undone.",
+      "description": "Confirmation dialog body for an action that is permanent."
     },
     "warning_prompt_delete_reply": {
       "default": "Are you sure you want to delete your reply?",
       "description": "Text for the warning prompt that appears when a user attempts to delete a reply."
     },
     "warning_prompt_log_out": {
-      "default": "Are you sure you want to log out?",
-      "description": "Text for the warning prompt that appears when a user attempts to log out."
+      "default": "You can log back in any time.",
+      "description": "Confirmation dialog body before logging out."
     },
     "page_title_discover": {
       "default": "Discover",
@@ -5791,8 +5791,8 @@
       "description": "Title of the confirmation shown when navigating away while a data export is running."
     },
     "warning_prompt_cancel_export": {
-      "default": "Navigating away will stop exporting your data. Are you sure?",
-      "description": "Warning prompt shown when navigating away while a data export is running ahead of a destructive action."
+      "default": "Your export will stop.",
+      "description": "Confirmation dialog body when leaving the page would stop an import or export."
     },
     "header_import": {
       "default": "Import",
@@ -6278,12 +6278,12 @@
       "description": "Aria-label for the delete account button."
     },
     "confirmation_title_delete_account": {
-      "default": "Delete account?",
-      "description": "Title of the confirmation dialog shown before permanently deleting the user's account."
+      "default": "Delete your account?",
+      "description": "Confirmation dialog title before deleting your account."
     },
     "warning_prompt_delete_account": {
-      "default": "Are you sure you want to permanently delete your account? This will remove all of your data and cannot be undone.",
-      "description": "Confirmation prompt shown when a user attempts to permanently delete their account."
+      "default": "Everything goes with it. This can't be undone.",
+      "description": "Confirmation dialog body before deleting your account."
     },
     "error_text_delete_account": {
       "default": "Something went wrong deleting your account. Please try again.",
@@ -6318,8 +6318,8 @@
       "description": "Text for the button that stops an in-progress data clear when navigating away, e.g. when clearing watchlist, ratings, etc."
     },
     "warning_prompt_cancel_clear": {
-      "default": "Navigating away will stop clearing your data. Are you sure?",
-      "description": "Warning message shown when a user tries to navigate away while a watchlist clear is in progress."
+      "default": "Clearing will stop partway through.",
+      "description": "Confirmation dialog body when leaving the page would stop clearing data partway."
     },
     "import_vip_limit_exceeded": {
       "default": "Your import exceeds the free tier limit. Upgrade to VIP to import all {count} items.",
@@ -8109,8 +8109,8 @@
       "exclude": ["android", "ios"]
     },
     "warning_prompt_simple_filters": {
-      "default": "Switching to simple filters will reset all your current filters. Are you sure you want to proceed?",
-      "description": "Text for the warning prompt that appears when a user attempts to switch to simple filters, which would reset all their current filters."
+      "default": "All your current filters will be cleared.",
+      "description": "Confirmation dialog body before switching from advanced to simple filters."
     },
     "tab_text_simple_filters": {
       "default": "Simple",
@@ -8678,8 +8678,8 @@
       "description": "Aria-label for the button that allows users to delete a note on a show or movie."
     },
     "warning_prompt_delete_note": {
-      "default": "Are you sure you want to delete this note?",
-      "description": "Confirmation prompt shown when a user attempts to delete a note."
+      "default": "This can't be undone.",
+      "description": "Confirmation dialog body for an action that is permanent."
     },
     "button_label_popup_menu_notes": {
       "default": "Note actions",
@@ -8726,8 +8726,8 @@
       "description": "Text for the button that allows users to cancel their VIP subscription. This should be as short as possible."
     },
     "button_text_cancel_vip_prompt": {
-      "default": "Cancel anyway",
-      "description": "Text for the button that allows users to confirm the cancellation of their VIP subscription. This should be as short as possible."
+      "default": "Cancel VIP",
+      "description": "Confirm button that cancels the VIP subscription."
     },
     "button_text_keep_vip_prompt": {
       "default": "Keep my premium perks",
@@ -8906,8 +8906,8 @@
       "description": "Short text for a button that reveals the VIP usage limits. This should be as short as possible."
     },
     "warning_prompt_cancel_vip": {
-      "default": "Are you sure you want to cancel your VIP subscription? You'll keep your VIP benefits until {date}, after which you'll lose access to VIP features. Trakt does not offer refunds for cancelled subscriptions.",
-      "description": "Text for the warning prompt that appears when a user attempts to cancel their VIP subscription. The date is when their current paid period ends and access is lost.",
+      "default": "You keep VIP until {date}. Trakt doesn't refund cancelled subscriptions.",
+      "description": "Confirmation dialog body before cancelling VIP. {date} is when VIP ends.",
       "variables": {
         "date": {
           "type": "string"
@@ -9208,12 +9208,12 @@
       "description": "Text for the button that allows users to indicate they are done with the keyboard and want to dismiss it. This should be as short and concise as possible."
     },
     "dialog_title_discard_changes": {
-      "default": "Discard Changes?",
-      "description": "Title for the alert dialog that appears when a user attempts to dismiss a view with unsaved changes."
+      "default": "Discard your changes?",
+      "description": "Confirmation dialog title when closing with unsaved changes."
     },
     "warning_prompt_discard_changes": {
-      "default": "Are you sure you want to discard this? Any unsaved changes will be lost.",
-      "description": "Text for the warning prompt that appears when a user attempts to dismiss a view with unsaved input, warning them of data loss."
+      "default": "Your unsaved changes will be lost.",
+      "description": "Confirmation dialog body when closing with unsaved changes."
     },
     "button_text_discard": {
       "default": "Discard",
@@ -9659,8 +9659,8 @@
       "description": "Text for the button that stops an in-progress import when navigating away."
     },
     "warning_prompt_cancel_import": {
-      "default": "Your import is in progress. Navigating away will stop it. Are you sure?",
-      "description": "Warning message shown when a user tries to navigate away while an import is in progress."
+      "default": "Your import will stop.",
+      "description": "Confirmation dialog body when leaving the page would stop an import or export."
     },
     "text_source": {
       "default": "Source",
@@ -10170,7 +10170,7 @@
       }
     },
     "warning_prompt_clear_data": {
-      "default": "Are you sure you want to clear your {source}? This cannot be undone.",
+      "default": "Are you sure you want to clear your {source}? This can't be undone.",
       "description": "Warning prompt shown when a user tries to clear their data, such as watchlist, ratings, etc.",
       "variables": {
         "source": {
@@ -10231,11 +10231,11 @@
       "description": "Aria-label for the button that removes duplicate episode plays."
     },
     "confirmation_title_clean_up_history": {
-      "default": "Clean Up History",
-      "description": "Title of the confirmation dialog shown before removing duplicate plays from the watch history."
+      "default": "Remove duplicate plays?",
+      "description": "Confirmation dialog title before removing duplicate plays from history."
     },
     "warning_prompt_clean_up_history": {
-      "default": "This will permanently remove {count} duplicate plays, keeping only the oldest watch of each item. This cannot be undone.",
+      "default": "This will permanently remove {count} duplicate plays, keeping only the oldest watch of each item. This can't be undone.",
       "description": "Warning prompt shown when a user is about to remove duplicate plays from their watch history, keeping the oldest watch.",
       "variables": {
         "count": {
@@ -10244,7 +10244,7 @@
       }
     },
     "warning_prompt_clean_up_history_newest": {
-      "default": "This will permanently remove {count} duplicate plays, keeping only the newest watch of each item. This cannot be undone.",
+      "default": "This will permanently remove {count} duplicate plays, keeping only the newest watch of each item. This can't be undone.",
       "description": "Warning prompt shown when a user is about to remove duplicate plays from their watch history, keeping the newest watch.",
       "variables": {
         "count": {
@@ -10471,13 +10471,77 @@
       "default": "Restore show?",
       "description": "Title of the confirmation dialog shown before restoring a previously dropped show back to tracked."
     },
+    "confirmation_title_start_rewatching": {
+      "default": "Start rewatching?",
+      "description": "Confirmation dialog title before starting a rewatch of a show."
+    },
+    "confirmation_message_start_rewatching": {
+      "default": "Continue Watching will follow your rewatch of \"{title}\".",
+      "description": "Confirmation dialog body before starting a rewatch of a show. {title} is the show name."
+    },
+    "confirmation_message_block_user": {
+      "default": "{username} can't follow you or see your activity anymore.",
+      "description": "Confirmation dialog body before blocking someone. {username} is their display name."
+    },
+    "button_text_keep_watching": {
+      "default": "Keep watching",
+      "description": "Dismiss button that keeps a check-in running."
+    },
+    "confirmation_message_switching_stops_clearing": {
+      "default": "Switching sources stops it partway.",
+      "description": "Confirmation dialog body when picking another source would stop clearing data partway."
+    },
+    "button_text_keep_clearing": {
+      "default": "Keep clearing",
+      "description": "Dismiss button that keeps clearing data from the current source."
+    },
+    "button_text_stay": {
+      "default": "Stay",
+      "description": "Dismiss button that keeps you on the current page."
+    },
+    "confirmation_title_sections_failed": {
+      "default": "{failed} of {total} sections didn't export",
+      "description": "Confirmation dialog title when part of a data export failed."
+    },
+    "confirmation_message_sections_failed": {
+      "default": "If you continue, the sections that failed won't be in your backup.",
+      "description": "Confirmation dialog body when part of a data export failed."
+    },
+    "button_text_go_back": {
+      "default": "Go back",
+      "description": "Dismiss button that returns to the previous step."
+    },
+    "button_text_continue_anyway": {
+      "default": "Continue anyway",
+      "description": "Button that proceeds with clearing or deleting data even though some sections failed to export."
+    },
+    "button_text_keep_editing": {
+      "default": "Keep editing",
+      "description": "Dismiss button that returns to editing."
+    },
+    "button_text_set_as_cover": {
+      "default": "Set as cover",
+      "description": "Confirm button that sets the image as your profile cover."
+    },
+    "dialog_title_adjust_photo": {
+      "default": "Adjust your photo",
+      "description": "Title of the dialog where you crop and zoom a new profile photo before uploading."
+    },
+    "button_label_zoom_in": {
+      "default": "Zoom in",
+      "description": "Accessible label for the button that zooms into the photo being cropped."
+    },
+    "button_label_zoom_out": {
+      "default": "Zoom out",
+      "description": "Accessible label for the button that zooms out of the photo being cropped."
+    },
     "confirmation_title_delete_list": {
       "default": "Delete list?",
       "description": "Title of the confirmation dialog shown before permanently deleting a user's custom list."
     },
     "confirmation_title_leave_collaboration": {
-      "default": "Leave collaboration?",
-      "description": "Title of the confirmation dialog shown before a collaborator removes themselves from a list."
+      "default": "Leave list?",
+      "description": "Confirmation dialog title before leaving a shared list."
     },
     "confirmation_title_remove_favorite": {
       "default": "Remove favorite?",
@@ -10504,20 +10568,20 @@
       "description": "Title of the confirmation dialog shown before stopping an active check-in."
     },
     "confirmation_title_delete_comment": {
-      "default": "Delete review?",
-      "description": "Title of the confirmation dialog shown before permanently deleting the user's review or comment."
+      "default": "Delete your review?",
+      "description": "Confirmation dialog title before deleting your review."
     },
     "confirmation_title_delete_note": {
-      "default": "Delete note?",
-      "description": "Title of the confirmation dialog shown before permanently deleting one of the user's notes."
+      "default": "Delete this note?",
+      "description": "Confirmation dialog title before deleting a note."
     },
     "confirmation_title_log_out": {
-      "default": "Logout?",
-      "description": "Title of the confirmation dialog shown before logging the user out of their account."
+      "default": "Log out of Trakt?",
+      "description": "Confirmation dialog title before logging out."
     },
     "confirmation_title_reset_filters": {
-      "default": "Reset filters?",
-      "description": "Title of the confirmation dialog shown before resetting all active list filters."
+      "default": "Switch to simple filters?",
+      "description": "Confirmation dialog title before switching from advanced to simple filters."
     },
     "confirmation_title_cancel_vip": {
       "default": "Cancel VIP?",
@@ -10528,8 +10592,12 @@
       "description": "Title of the confirmation dialog shown before cancelling an in-progress import."
     },
     "confirmation_title_stop_clear": {
-      "default": "Stop clearing?",
-      "description": "Title of the confirmation dialog shown before stopping an in-progress clear-data operation."
+      "default": "Stop clearing your data?",
+      "description": "Confirmation dialog title when leaving the page or switching sources would stop clearing data."
+    },
+    "confirmation_title_leave_page": {
+      "default": "Leave this page?",
+      "description": "Title of the confirmation shown when navigating away while an import, export or data clear is still running."
     },
     "confirmation_title_clear_data": {
       "default": "Clear data?",
@@ -14789,6 +14857,54 @@
     "link_text_report_bug": {
       "default": "Report a Bug",
       "description": "Text for the link that takes users to the app's public issue tracker to report a bug or request a platform feature."
+    },
+    "confirmation_title_remove_server": {
+      "default": "Remove server?",
+      "description": "Confirmation dialog title before removing a media server from sync."
+    },
+    "confirmation_message_remove_named_server": {
+      "default": "This stops syncing {server} and removes what it added to your Trakt collection. Your plays and ratings stay.",
+      "description": "Confirmation dialog body before removing a media server from sync. {server} is the server name."
+    },
+    "button_text_remove": {
+      "default": "Remove",
+      "description": "Confirm button in a dialog that removes something."
+    },
+    "button_text_delete": {
+      "default": "Delete",
+      "description": "Confirm button in a dialog that deletes something for good."
+    },
+    "button_text_drop": {
+      "default": "Drop",
+      "description": "Confirm button in a dialog that drops a show or movie from progress."
+    },
+    "button_text_restore": {
+      "default": "Restore",
+      "description": "Confirm button in a dialog that restores a dropped show."
+    },
+    "button_text_rewatch": {
+      "default": "Rewatch",
+      "description": "Confirm button in a dialog that starts rewatching a show."
+    },
+    "button_text_stop": {
+      "default": "Stop",
+      "description": "Confirm button in a dialog that stops something in progress, like a check-in."
+    },
+    "button_text_leave": {
+      "default": "Leave",
+      "description": "Confirm button in a dialog that leaves a page or a shared list."
+    },
+    "button_text_switch": {
+      "default": "Switch",
+      "description": "Confirm button in a dialog that switches to another mode or source."
+    },
+    "button_text_clear": {
+      "default": "Clear",
+      "description": "Confirm button in a dialog that clears data."
+    },
+    "button_text_revoke": {
+      "default": "Revoke",
+      "description": "Confirm button in a dialog that revokes an app's access."
     }
   }
 }
