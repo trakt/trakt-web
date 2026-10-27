@@ -65,6 +65,7 @@
 
 <div
   class="trakt-leaderboard-item"
+  data-tier-aura-row
   class:is-viewer={entry.isViewer}
   class:is-free={isLockedFollow}
 >
