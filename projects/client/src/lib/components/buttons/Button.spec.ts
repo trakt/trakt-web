@@ -119,6 +119,26 @@ describe('Button', () => {
       });
     });
 
+    it.each([
+      { style: 'ghost', size: undefined, expected: 'small' },
+      { style: 'ghost', size: 'normal', expected: 'normal' },
+      { style: 'flat', size: undefined, expected: 'normal' },
+    ] as const)(
+      'should size a $style button as $expected when size is $size',
+      async ({ style, size, expected }) => {
+        renderComponent(Button, {
+          props: { ...defaultProps, style, size },
+        });
+
+        await waitFor(() => {
+          expect(screen.getByRole('button')).toHaveAttribute(
+            'data-size',
+            expected,
+          );
+        });
+      },
+    );
+
     it('should set button as disabled', async () => {
       renderComponent(Button, {
         props: {

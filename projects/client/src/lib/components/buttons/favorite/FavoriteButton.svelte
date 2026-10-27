@@ -19,7 +19,7 @@
     onAdd,
     onRemove,
     navigationType,
-    size = "normal",
+    size,
     ...props
   }: FavoriteButtonProps = $props();
 

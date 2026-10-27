@@ -326,6 +326,12 @@
   );
   --color-filter-chip-text: var(--color-segmented-selector-foreground);
   --color-modal-background: var(--color-card-background);
+
+  /*
+   * Dialogs
+   */
+  --color-dialog-inset: var(--shade-40);
+
   --color-option-list-background: var(--shade-30);
   --color-option-list-border: var(--shade-100);
   --color-option-list-separator: color-mix(
@@ -501,12 +507,6 @@
   --color-map-chart-border: var(--shade-400);
   --color-map-chart-border-hover: var(--shade-900);
   --color-map-chart-missing: var(--shade-200);
-
-  /*
-   * Confirmation
-   */
-  --color-confirmation-destructive-background: var(--red-300);
-  --color-confirmation-destructive-foreground: var(--red-1000);
 
   /*
    * Data visualization
@@ -963,6 +963,12 @@
   );
   --color-filter-chip-text: var(--color-segmented-selector-foreground);
   --color-modal-background: var(--color-card-background);
+
+  /*
+   * Dialogs
+   */
+  --color-dialog-inset: color-mix(in srgb, var(--shade-10) 4%, transparent);
+
   --color-option-list-background: color-mix(
     in srgb,
     var(--color-text-primary) 6%,
@@ -1166,12 +1172,6 @@
   --color-map-chart-border: var(--shade-950);
   --color-map-chart-border-hover: var(--shade-10);
   --color-map-chart-missing: var(--shade-800);
-
-  /*
-   * Confirmation
-   */
-  --color-confirmation-destructive-background: var(--red-200);
-  --color-confirmation-destructive-foreground: var(--red-1000);
 
   /*
    * Data visualization (dark surfaces)

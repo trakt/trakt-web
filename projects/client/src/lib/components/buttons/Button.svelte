@@ -18,13 +18,17 @@
     color = "custom",
     icon,
     subtitle,
-    size = "normal",
+    size,
     text = "capitalize",
     navigationType,
     disabled,
     "data-testid": dataTestId,
     ...props
   }: TraktButtonProps | TraktButtonAnchorProps = $props();
+
+  const resolvedSize = $derived(
+    size ?? (style === "ghost" ? "small" : "normal"),
+  );
 
   const { guardedHref, originalHref } = $derived(
     useGuardedHref((props as TraktButtonAnchorProps).href),
@@ -64,7 +68,7 @@
       "data-alignment": alignment,
       "data-style": style,
       "data-color": color,
-      "data-size": size,
+      "data-size": resolvedSize,
       "data-dpad-navigation": navigationType,
       "data-testid": dataTestId,
     }),
@@ -85,7 +89,7 @@
       class="ellipsis bold"
       class:small={subtitle != null ||
         style === "underlined" ||
-        style === "ghost"}
+        (style === "ghost" && resolvedSize !== "normal")}
       class:capitalize={text === "capitalize"}
       class:uppercase={text === "uppercase"}
     >
@@ -318,13 +322,13 @@
     background: transparent;
   }
 
-  :global(#{$b}[data-style=ghost]:not([data-size=tag])) {
+  :global(#{$b}[data-style=ghost][data-size=small]) {
     --button-height: var(--ni-32);
     padding: var(--ni-8) var(--ni-12);
     gap: var(--gap-xs);
   }
 
-  :global(#{$b}[data-style=ghost]:not([data-size=tag]) .button-icon svg) {
+  :global(#{$b}[data-style=ghost][data-size=small] .button-icon svg) {
     width: auto;
     height: var(--ni-16);
   }
