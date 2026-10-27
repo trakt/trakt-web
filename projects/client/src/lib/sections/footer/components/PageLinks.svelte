@@ -1,5 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -7,6 +9,7 @@
   import FooterVipLink from "./FooterVipLink.svelte";
 
   const { user } = useUser();
+  const { track } = useTrack(AnalyticsEvent.Link);
 </script>
 
 {#snippet vipLink()}
@@ -36,11 +39,12 @@
   <div class="trakt-link-group">
     <span class="secondary">{m.text_footer_category_community()}</span>
     <Link
-      href={UrlBuilder.og.forums()}
+      href={UrlBuilder.socialMedia.reddit()}
       target="_blank"
       rel="noopener noreferrer"
+      onclick={() => track({ target: "reddit", source: "footer" })}
     >
-      <span class="bold">{m.link_text_forums()}</span>
+      <span class="bold">{m.link_label_reddit()}</span>
     </Link>
     <RenderFor audience="vip">
       <Link
