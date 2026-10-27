@@ -2,8 +2,8 @@
   import { dPadTrigger } from "$lib/components/card/_internal/dPadTrigger";
   import Link from "$lib/components/link/Link.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
   import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import { toVipTier } from "$lib/features/vip-veteran/toVipTier.ts";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
@@ -12,14 +12,13 @@
 
   const { profile }: { profile: UserProfile } = $props();
   const { navigation } = useNavigation();
-  const isVeteranEnabled = useVipVeteranEnabled();
-  const ringTone = $derived(
-    $isVeteranEnabled ? toVipVeteranRingTone(profile.veteran) : null,
-  );
+  const isAuraShown = useVipVeteranEnabled();
+  const tier = $derived($isAuraShown ? toVipTier(profile) : null);
 </script>
 
 <div
   class="trakt-profile-item"
+  data-tier-aura-row
   role="button"
   tabindex="0"
   data-dpad-navigation={DpadNavigationType.Item}
@@ -37,7 +36,9 @@
       name={profile.name.first}
       src={profile.avatar.url}
       isVip={profile.isVip}
-      {ringTone}
+      {tier}
+      auraVariant="compact"
+      auraMotion="hover"
     />
   </Link>
   <div class="profile-footer">

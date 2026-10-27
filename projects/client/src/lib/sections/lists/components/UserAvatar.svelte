@@ -1,20 +1,23 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import TierAura from "$lib/components/tier-aura/TierAura.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
   import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import { toVipTier } from "$lib/features/vip-veteran/toVipTier.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
 
   type UserAvatarProps = {
     user: Pick<UserProfile, "avatar" | "slug" | "username" | "isVip"> &
-      Partial<Pick<UserProfile, "veteran">>;
+      Partial<Pick<UserProfile, "veteran" | "isDirector">>;
     size?: "small" | "large";
     icon?: Snippet;
     onClick?: () => void;
     linked?: boolean;
+    /** Off where avatars overlap or are clipped, which an aura cannot share. */
+    hasAura?: boolean;
   };
 
   const {
@@ -23,25 +26,35 @@
     icon,
     onClick,
     linked = true,
+    hasAura = true,
   }: UserAvatarProps = $props();
 
-  const isVeteranEnabled = useVipVeteranEnabled();
-  const ringTone = $derived(
-    $isVeteranEnabled && user.isVip ? toVipVeteranRingTone(user.veteran) : null,
-  );
+  const isAuraEnabled = useVipVeteranEnabled();
+  const isAuraShown = $derived($isAuraEnabled && hasAura);
+  const tier = $derived(toVipTier(user));
 </script>
+
+{#snippet face()}
+  <CrossOriginImage
+    src={user.avatar.url}
+    alt={m.image_alt_user_avatar({ username: user.username })}
+  />
+{/snippet}
 
 {#snippet avatar()}
   <div
     class="trakt-user-avatar"
     class:trakt-vip-user={user.isVip}
+    class:has-aura={isAuraShown}
     data-size={size}
-    data-ring-tone={ringTone}
   >
-    <CrossOriginImage
-      src={user.avatar.url}
-      alt={m.image_alt_user_avatar({ username: user.username })}
-    />
+    {#if isAuraShown}
+      <TierAura {tier}>
+        {@render face()}
+      </TierAura>
+    {:else}
+      {@render face()}
+    {/if}
 
     {#if icon}
       {@render icon()}
@@ -84,16 +97,9 @@
       }
     }
 
-    &[data-ring-tone="copper"] :global(img) {
-      border-color: var(--color-border-vip-avatar-copper);
-    }
-
-    &[data-ring-tone="silver"] :global(img) {
-      border-color: var(--color-border-vip-avatar-silver);
-    }
-
-    &[data-ring-tone="gold"] :global(img) {
-      border-color: var(--color-border-vip-avatar-gold);
+    /* The aura is the frame; the photo loses its own stroke. */
+    &.has-aura :global(img) {
+      border: none;
     }
   }
 </style>

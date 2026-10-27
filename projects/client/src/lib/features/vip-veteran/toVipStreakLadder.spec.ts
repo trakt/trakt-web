@@ -35,9 +35,15 @@ describe('util: toVipStreakLadder', () => {
     expect(toVipStreakLadder(veteran(13, 10)).next).to.equal(null);
   });
 
-  it('should colour each rung by its tier', () => {
+  it('should title each rung by its tier', () => {
     expect(
-      toVipStreakLadder(veteran(1, 1)).rungs.map((rung) => rung.tone),
-    ).to.deep.equal(['vip', 'deep', 'copper', 'silver', 'gold']);
+      toVipStreakLadder(veteran(1, 1)).rungs.map((rung) => rung.title),
+    ).to.deep.equal([null, 'pro', 'veteran', 'elite', 'legend']);
+  });
+
+  it('should give each rung its aura', () => {
+    expect(
+      toVipStreakLadder(veteran(1, 1)).rungs.map((rung) => rung.aura),
+    ).to.deep.equal(['vip', 'pro', 'veteran', 'elite', 'legend']);
   });
 });

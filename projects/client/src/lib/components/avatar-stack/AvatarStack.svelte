@@ -25,7 +25,12 @@
         ? avatars.length - index
         : undefined}
     >
-      <UserAvatar user={avatar.user} size="small" {linked} />
+      <UserAvatar
+        user={avatar.user}
+        size="small"
+        {linked}
+        hasAura={false}
+      />
     </span>
   {/each}
 </span>

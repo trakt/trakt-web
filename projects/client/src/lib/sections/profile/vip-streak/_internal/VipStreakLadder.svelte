@@ -35,7 +35,7 @@
         class="ladder-rung"
         class:is-reached={rung.isReached}
         class:is-current={rung.isCurrent}
-        data-tone={rung.tone}
+        data-tier={rung.aura}
         aria-current={rung.isCurrent ? "step" : undefined}
       >
         <span class="rung-dot" aria-hidden="true"></span>
@@ -77,20 +77,20 @@
 
     opacity: 0.45;
 
-    &[data-tone="deep"] {
-      --rung-color: var(--color-glow-vip-badge-deep);
+    &[data-tier="pro"] {
+      --rung-color: var(--aura-pro-light);
     }
 
-    &[data-tone="copper"] {
-      --rung-color: var(--color-glow-vip-badge-copper);
+    &[data-tier="veteran"] {
+      --rung-color: var(--aura-veteran-light);
     }
 
-    &[data-tone="silver"] {
-      --rung-color: var(--color-glow-vip-badge-silver);
+    &[data-tier="elite"] {
+      --rung-color: var(--aura-elite-light);
     }
 
-    &[data-tone="gold"] {
-      --rung-color: var(--color-glow-vip-badge-gold);
+    &[data-tier="legend"] {
+      --rung-color: var(--aura-legend-light);
     }
 
     &.is-reached {

@@ -1,16 +1,11 @@
 <script lang="ts">
-  import type { VipBadgeTone } from "../VipBadgeTone.ts";
   import BadgeSparkle from "./BadgeSparkle.svelte";
 
-  const {
-    children,
-    size,
-    tone,
-  }: { size?: "normal" | "large"; tone?: VipBadgeTone } & ChildrenProps =
+  const { children, size }: { size?: "normal" | "large" } & ChildrenProps =
     $props();
 </script>
 
-<div class="trakt-vip-badge" data-size={size} data-tone={tone}>
+<div class="trakt-vip-badge" data-size={size}>
   <BadgeSparkle />
   <p class="uppercase">
     {@render children()}
@@ -52,37 +47,6 @@
     p {
       font-weight: 700;
       white-space: nowrap;
-    }
-
-    &[data-tone="deep"] {
-      --vip-badge-start: var(--color-background-vip-badge-deep-start);
-      --vip-badge-end: var(--color-background-vip-badge-deep-end);
-      --vip-badge-glow: var(--color-glow-vip-badge-deep);
-      color: var(--color-foreground-vip-badge-deep);
-    }
-
-    &[data-tone="copper"] {
-      --vip-badge-start: var(--color-background-vip-badge-copper-start);
-      --vip-badge-end: var(--color-background-vip-badge-copper-end);
-      --vip-badge-glow: var(--color-glow-vip-badge-copper);
-      --vip-badge-highlight: var(--orange-100);
-      color: var(--color-foreground-vip-badge-copper);
-    }
-
-    &[data-tone="silver"] {
-      --vip-badge-start: var(--color-background-vip-badge-silver-start);
-      --vip-badge-end: var(--color-background-vip-badge-silver-end);
-      --vip-badge-glow: var(--color-glow-vip-badge-silver);
-      --vip-badge-highlight: var(--shade-10);
-      color: var(--color-foreground-vip-badge-silver);
-    }
-
-    &[data-tone="gold"] {
-      --vip-badge-start: var(--color-background-vip-badge-gold-start);
-      --vip-badge-end: var(--color-background-vip-badge-gold-end);
-      --vip-badge-glow: var(--color-glow-vip-badge-gold);
-      --vip-badge-highlight: var(--yellow-50);
-      color: var(--color-foreground-vip-badge-gold);
     }
 
     &[data-size="large"] {

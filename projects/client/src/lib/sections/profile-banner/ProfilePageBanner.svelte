@@ -4,13 +4,13 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
   import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import { useVipVeteran } from "$lib/features/vip-veteran/stores/useVipVeteran.ts";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import { toVipTier } from "$lib/features/vip-veteran/toVipTier.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import LeaderboardPill from "$lib/sections/profile/leaderboard/LeaderboardPill.svelte";
   import MatchPill from "$lib/sections/profile/components/MatchPill.svelte";
-  import VipStreakBadge from "$lib/sections/profile/vip-streak/VipStreakBadge.svelte";
   import ProfileAbout from "$lib/sections/profile/components/ProfileAbout.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
@@ -18,6 +18,7 @@
   import type { DisplayableProfileProps } from "../profile/DisplayableProfileProps";
   import BlockedUserTag from "./_internal/BlockedUserTag.svelte";
   import PendingFollowTag from "./_internal/PendingFollowTag.svelte";
+  import ProfileTierTag from "./_internal/ProfileTierTag.svelte";
   import ProfileOverflowMenu from "./_internal/ProfileOverflowMenu.svelte";
   import { useFollowUserRequest } from "./_internal/useFollowUser";
   import ProfileImage from "./ProfileImage.svelte";
@@ -40,7 +41,12 @@
 
   const { veteran } = useVipVeteran(fromRune(() => slug));
   const shownVeteran = $derived(profile.isVip ? $veteran : null);
-  const ringTone = $derived(toVipVeteranRingTone(shownVeteran));
+  const isAuraShown = useVipVeteranEnabled();
+  const tier = $derived(
+    $isAuraShown ? toVipTier({ ...profile, veteran: shownVeteran }) : null,
+  );
+  // A private profile hides its VIP status, so "free" would be a guess.
+  const isTierKnown = $derived(tier !== "free" || variant !== "private");
 
   const shareableSlug = $derived($isMe ? $user.slug : slug);
   const isBlocked = $derived($blocked.has(slug));
@@ -58,7 +64,7 @@
       name={profile.name.first}
       src={profile.avatar.url}
       isVip={profile.isVip}
-      {ringTone}
+      {tier}
       hasEntrance={shownVeteran != null}
     >
       {#snippet badge()}
@@ -70,12 +76,8 @@
           {/if}
         </RenderFor>
         {#if !isBlocked && !isPending}
-          {#if shownVeteran}
-            <VipStreakBadge
-              veteran={shownVeteran}
-              {promotion}
-              isDirector={profile.isDirector}
-            />
+          {#if tier && isTierKnown}
+            <ProfileTierTag {tier} veteran={shownVeteran} {promotion} />
           {:else if profile.isVip}
             <VipBadge isDirector={profile.isDirector} />
           {/if}
@@ -169,6 +171,13 @@
       :global(.trakt-pending-follow-tag) {
         z-index: var(--layer-base);
         margin-top: var(--ni-neg-16);
+      }
+
+      // Below the face, over the lower rim of the tier aura.
+      :global(.trakt-vip-tier-tag) {
+        position: relative;
+        z-index: var(--layer-base);
+        margin-top: var(--ni-neg-4);
       }
     }
 
