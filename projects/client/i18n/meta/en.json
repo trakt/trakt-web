@@ -7478,11 +7478,11 @@
       "description": "Description for the VIP feature that allows connecting more API apps."
     },
     "vip_feature_title_support": {
-      "default": "Better Support: Forum & Feedback",
+      "default": "Better Support: Help & Feedback",
       "description": "Title for the VIP feature that provides better support access."
     },
     "vip_feature_description_support": {
-      "default": "Get priority access to our support forums and have your feedback heard directly by the team.",
+      "default": "Get priority access to support and have your feedback heard directly by the team.",
       "description": "Description for the VIP feature that provides better support access."
     },
     "text_vip_built_to_last": {
