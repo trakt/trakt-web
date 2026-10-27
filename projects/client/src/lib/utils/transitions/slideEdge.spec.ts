@@ -26,6 +26,23 @@ describe('transition: slideEdge', () => {
     );
   });
 
+  it('should travel past the edge by the overshoot', () => {
+    const transition = slideEdge(node, { axis: 'y', overshoot: '48px' });
+
+    expect(transition.css?.(0, 1)).toBe(
+      'transform: translateY(calc(100% + 48px * 1));',
+    );
+    expect(transition.css?.(1, 0)).toBe(
+      'transform: translateY(calc(0% + 48px * 0));',
+    );
+  });
+
+  it('should use the given easing', () => {
+    const easing = (t: number) => t * t;
+
+    expect(slideEdge(node, { easing }).easing).toBe(easing);
+  });
+
   it('should keep the default duration', () => {
     expect(slideEdge(node).duration).toBe(150);
   });
