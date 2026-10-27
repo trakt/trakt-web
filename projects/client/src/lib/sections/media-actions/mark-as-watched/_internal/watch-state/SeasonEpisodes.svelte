@@ -1,6 +1,5 @@
 <script lang="ts">
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes.ts";
-  import { hasAired } from "$lib/utils/media/hasAired.ts";
   import EpisodeWatchChip from "./EpisodeWatchChip.svelte";
   import SeasonWatchAction from "./SeasonWatchAction.svelte";
 
@@ -33,7 +32,7 @@
   const remainingEpisodes = $derived(
     $episodes.filter(
       (episode) =>
-        hasAired({ ...episode, type: "episode" }) &&
+        episode.effectiveReleaseDate <= new Date() &&
         !watchedEpisodeIds.has(episode.id),
     ),
   );

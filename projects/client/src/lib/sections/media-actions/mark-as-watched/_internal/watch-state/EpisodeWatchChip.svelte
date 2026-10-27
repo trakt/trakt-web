@@ -43,9 +43,11 @@
     }),
   );
 
+  const isFuture = $derived(episode.effectiveReleaseDate > new Date());
+
   const state = $derived.by(() => {
     if ($isWatched) return "watched";
-    if (!isWatchable) return "upcoming";
+    if (isFuture || !isWatchable) return "upcoming";
 
     return "unwatched";
   });
@@ -83,7 +85,7 @@
   aria-label={label}
   aria-pressed={$isWatched}
   title={episode.title}
-  disabled={!isWatchable || $isMarkingAsWatched || $isQueued}
+  disabled={state === "upcoming" || $isMarkingAsWatched || $isQueued}
   onclick={handler}
 >
   <span class="chip-circle">
