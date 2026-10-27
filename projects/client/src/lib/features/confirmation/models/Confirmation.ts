@@ -5,7 +5,6 @@ import type { ConfirmationOperation } from './ConfirmationOperation.ts';
 export type Confirmation = {
   title: string;
   message: string | Nil;
-  detail?: string;
   buttonText: string;
   cancelText?: string;
   operation: ConfirmationOperation;

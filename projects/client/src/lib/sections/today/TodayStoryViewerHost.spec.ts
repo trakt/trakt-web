@@ -43,7 +43,7 @@ describe('TodayStoryViewerHost', () => {
     const confirmation = await screen.findByRole('dialog', { name: '' });
     await user.click(
       within(confirmation).getByRole('button', {
-        name: 'Remove from watchlist',
+        name: 'Remove',
       }),
     );
     await waitFor(() => {

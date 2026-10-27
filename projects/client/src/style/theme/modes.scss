@@ -331,6 +331,10 @@
    * Dialogs
    */
   --color-dialog-inset: var(--shade-40);
+  --background-dialog-edge: linear-gradient(
+    color-mix(in srgb, var(--shade-900) 8%, transparent),
+    color-mix(in srgb, var(--shade-900) 8%, transparent)
+  );
 
   --color-option-list-background: var(--shade-30);
   --color-option-list-border: var(--shade-100);
@@ -968,6 +972,10 @@
    * Dialogs
    */
   --color-dialog-inset: color-mix(in srgb, var(--shade-10) 4%, transparent);
+  --background-dialog-edge: linear-gradient(
+    color-mix(in srgb, var(--shade-10) 20%, transparent),
+    transparent 90%
+  );
 
   --color-option-list-background: color-mix(
     in srgb,

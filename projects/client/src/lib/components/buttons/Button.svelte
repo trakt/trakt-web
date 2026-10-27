@@ -27,7 +27,7 @@
   }: TraktButtonProps | TraktButtonAnchorProps = $props();
 
   const resolvedSize = $derived(
-    size ?? (style === "ghost" ? "small" : "normal"),
+    size ?? (style === "ghost" ? "compact" : "normal"),
   );
 
   const { guardedHref, originalHref } = $derived(
@@ -89,7 +89,7 @@
       class="ellipsis bold"
       class:small={subtitle != null ||
         style === "underlined" ||
-        (style === "ghost" && resolvedSize !== "normal")}
+        resolvedSize === "compact"}
       class:capitalize={text === "capitalize"}
       class:uppercase={text === "uppercase"}
     >
@@ -322,13 +322,13 @@
     background: transparent;
   }
 
-  :global(#{$b}[data-style=ghost][data-size=small]) {
+  :global(#{$b}[data-style=ghost][data-size=compact]) {
     --button-height: var(--ni-32);
     padding: var(--ni-8) var(--ni-12);
     gap: var(--gap-xs);
   }
 
-  :global(#{$b}[data-style=ghost][data-size=small] .button-icon svg) {
+  :global(#{$b}[data-style=ghost][data-size=compact] .button-icon svg) {
     width: auto;
     height: var(--ni-16);
   }

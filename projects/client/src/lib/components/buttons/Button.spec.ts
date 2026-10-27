@@ -120,7 +120,8 @@ describe('Button', () => {
     });
 
     it.each([
-      { style: 'ghost', size: undefined, expected: 'small' },
+      { style: 'ghost', size: undefined, expected: 'compact' },
+      { style: 'ghost', size: 'small', expected: 'small' },
       { style: 'ghost', size: 'normal', expected: 'normal' },
       { style: 'flat', size: undefined, expected: 'normal' },
     ] as const)(

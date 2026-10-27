@@ -27,7 +27,6 @@
 
 <Button
   style="ghost"
-  size="small"
   color="default"
   text="none"
   label={m.button_label_finish_season({

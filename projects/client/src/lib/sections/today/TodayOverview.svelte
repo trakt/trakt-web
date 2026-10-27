@@ -170,7 +170,6 @@
       noscroll={playAllLink.noscroll}
       replacestate={playAllLink.replacestate}
       label={m.button_label_play_all_stories()}
-      size="small"
       style="ghost"
       color="purple"
     >

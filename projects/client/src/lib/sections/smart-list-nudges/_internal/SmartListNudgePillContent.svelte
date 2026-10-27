@@ -37,7 +37,6 @@
       variant="secondary"
       style="ghost"
       color="purple"
-      size="small"
     >
       {m.button_text_show_me()}
     </Button>

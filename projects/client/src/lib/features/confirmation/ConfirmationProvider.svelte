@@ -26,7 +26,6 @@
   <ConfirmationDialog
     title={$activeConfirmation.title}
     message={$activeConfirmation.message}
-    detail={$activeConfirmation.detail}
     buttonText={$activeConfirmation.buttonText}
     cancelText={$activeConfirmation.cancelText}
     operation={$activeConfirmation.operation}

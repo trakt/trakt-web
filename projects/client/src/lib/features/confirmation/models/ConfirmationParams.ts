@@ -86,6 +86,9 @@ interface ConfirmationParamsMap {
   [ConfirmationType.CancelClear]: {
     type: ConfirmationType.CancelClear;
   };
+  [ConfirmationType.SwitchClearSource]: {
+    type: ConfirmationType.SwitchClearSource;
+  };
   [ConfirmationType.CancelExport]: {
     type: ConfirmationType.CancelExport;
   };
@@ -117,13 +120,6 @@ interface ConfirmationParamsMap {
   };
   [ConfirmationType.DiscardChanges]: {
     type: ConfirmationType.DiscardChanges;
-  };
-  [ConfirmationType.DisconnectPlex]: {
-    type: ConfirmationType.DisconnectPlex;
-  };
-  [ConfirmationType.RemovePlexServer]: {
-    type: ConfirmationType.RemovePlexServer;
-    server: string;
   };
   [ConfirmationType.RemoveMediaSyncServer]: {
     type: ConfirmationType.RemoveMediaSyncServer;

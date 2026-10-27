@@ -175,7 +175,7 @@
     }
 
     confirm({
-      type: ConfirmationType.CancelClear,
+      type: ConfirmationType.SwitchClearSource,
       onConfirm: () => {
         stopClear();
         applySourceChange(type);

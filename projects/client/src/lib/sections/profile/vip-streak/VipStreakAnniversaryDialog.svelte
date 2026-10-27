@@ -59,7 +59,12 @@
   </div>
 
   {#snippet footer()}
-    <Button onclick={onClose} color="purple" label={m.button_label_close()}>
+    <Button
+      onclick={onClose}
+      size="small"
+      color="purple"
+      label={m.button_label_close()}
+    >
       {m.button_label_close()}
     </Button>
   {/snippet}

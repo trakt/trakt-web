@@ -19,7 +19,7 @@
   <div class="view-dialog">
     <div class="view-header">
       <ActionButton
-        label={m.button_text_cancel()}
+        label={m.button_label_close()}
         color="default"
         style="ghost"
         onclick={onClose}
@@ -37,22 +37,23 @@
   .view-dialog {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-16);
-    padding: 0;
+    gap: var(--gap-m);
   }
 
   .view-header {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
+    margin-block-start: calc(-1 * var(--gap-xs));
+    margin-inline-end: calc(-1 * var(--gap-xs));
   }
 
   .view-image-wrapper {
-    border-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-l);
     overflow: hidden;
     aspect-ratio: 1;
     width: 100%;
-    background-color: var(--shade-900);
+    background-color: var(--color-dialog-inset);
   }
 
   .view-image {
