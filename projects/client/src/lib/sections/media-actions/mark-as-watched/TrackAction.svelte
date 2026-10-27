@@ -51,6 +51,14 @@
     $isProgressManagerEnabled ? toWatchStateShow(target) : null,
   );
 
+  const fill = $derived.by(() => {
+    if ($progress === undefined || !$isProgressManagerEnabled) {
+      return undefined;
+    }
+
+    return $isWatched ? 100 : $progress;
+  });
+
   const handler = (ev: MouseEvent) => {
     if (watchStateShow) {
       watchStateDrawerStore.open({
@@ -79,7 +87,7 @@
     onclick={handler}
     variant={$isWatched ? "primary" : "secondary"}
     color="purple"
-    progress={$isWatched || !$isProgressManagerEnabled ? undefined : $progress}
+    progress={fill}
   >
     <TrackIcon state={$isWatched ? "watched" : "unwatched"} />
   </ActionButton>
