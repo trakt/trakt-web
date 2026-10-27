@@ -26,12 +26,17 @@
   @use "$style/scss/mixins/index" as *;
 
   trakt-get-vip-link {
+    display: inline-flex;
+
     :global(.trakt-link) {
       text-decoration: none;
+      border-radius: var(--border-radius-pill);
 
-      &:hover {
-        text-decoration: underline;
-      }
+      transition: transform var(--transition-increment) ease-in-out;
+    }
+
+    :global(.trakt-link:active) {
+      transform: scale(0.98);
     }
   }
 </style>
