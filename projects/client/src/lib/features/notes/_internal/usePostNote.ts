@@ -37,7 +37,7 @@ export function usePostNote() {
 
     track({ type: props.type });
 
-    return await post.mutate({ ...props, notes });
+    return await post.mutate({ ...props, notes }).catch(() => false);
   };
 
   return {

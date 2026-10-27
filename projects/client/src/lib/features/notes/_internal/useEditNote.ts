@@ -39,7 +39,9 @@ export function useEditNote() {
 
     track({ type });
 
-    return await edit.mutate({ id, notes: trimmed, media, type });
+    return await edit
+      .mutate({ id, notes: trimmed, media, type })
+      .catch(() => false);
   };
 
   return {
