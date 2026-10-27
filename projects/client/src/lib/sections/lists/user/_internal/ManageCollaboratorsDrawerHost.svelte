@@ -18,6 +18,7 @@
   const target$ = fromRune(() => list).pipe(
     map((currentList) => ({
       listId: currentList.id,
+      listName: currentList.name,
       ownerSlug: toUserSlug(currentList.user),
     })),
   );

@@ -77,7 +77,7 @@ type DrilldownType = SourceType & {
 };
 type SearchType = { mode: SearchMode };
 type ListCollaboratorType = {
-  action: 'add' | 'remove' | 'leave' | 'limit-reached';
+  action: 'add' | 'remove' | 'leave' | 'limit-reached' | 'view-moved';
 };
 type ReportOpenType = { type: ReportableType };
 type ReportType = {
