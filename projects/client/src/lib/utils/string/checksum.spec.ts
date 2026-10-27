@@ -25,4 +25,14 @@ describe('checksum', () => {
     const input = '你好世界';
     expect(checksum(input)).toBeDefined();
   });
+
+  it('should keep the checksums it already produced', () => {
+    expect(checksum('test string')).toBe('2mt0onmfr6qv');
+    expect(checksum('{"type":"object"}')).toBe('2anrb51ppav9k2b6s3');
+    expect(checksum('x'.repeat(1000))).toBe('2s9ubarqm75polj3el90o3e7cucs1j00');
+  });
+
+  it('should hash a large input without growing the hash', () => {
+    expect(checksum('x'.repeat(1_000_000))).toHaveLength(32);
+  }, 2000);
 });

@@ -1,9 +1,21 @@
+const DIGITS = 32;
+const BITS = DIGITS * 5;
+const LIMIT = 1n << BigInt(BITS);
+
 export function checksum(input: string): string {
-  const data = Array.from(new TextEncoder().encode(input));
-  return data
-    .reduce((hash, byte) => {
-      return (hash << 5n) - hash + BigInt(byte);
-    }, BigInt(0))
-    .toString(32)
-    .slice(-32);
+  const { hash, hasOverflowed } = new TextEncoder().encode(input).reduce(
+    (state, byte) => {
+      const next = (state.hash << 5n) - state.hash + BigInt(byte);
+
+      return {
+        hash: BigInt.asUintN(BITS, next),
+        hasOverflowed: state.hasOverflowed || next >= LIMIT,
+      };
+    },
+    { hash: 0n, hasOverflowed: false },
+  );
+
+  const digits = hash.toString(32);
+
+  return hasOverflowed ? digits.padStart(DIGITS, '0') : digits;
 }
