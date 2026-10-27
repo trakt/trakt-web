@@ -3,7 +3,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { VipUpsellSource } from "./models/VipUpsellSource";
+  import type { UpsellCtaProps } from "./UpsellCtaProps.ts";
   import { useVipUpsell } from "./useVipUpsell";
 
   const {
@@ -11,11 +11,8 @@
     children,
     title,
     variant = "default",
-  }: {
-    source: VipUpsellSource;
-    title?: string;
-    variant?: "default" | "small";
-  } & ChildrenProps = $props();
+    surface = "card",
+  }: UpsellCtaProps = $props();
 
   const { trackClick, trackImpression } = useVipUpsell(() => source);
 </script>
@@ -23,6 +20,7 @@
 <div
   class="trakt-vip-upsell-cta"
   data-variant={variant}
+  data-surface={surface}
   use:trackImpression
 >
   <Link
@@ -82,6 +80,12 @@
           border-color: color-mix(in srgb, var(--purple-500) 50%, transparent);
         }
       }
+    }
+
+    &[data-surface="none"] :global(.trakt-link) {
+      padding: 0;
+      border: none;
+      background-color: transparent;
     }
   }
 </style>

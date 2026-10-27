@@ -17,7 +17,7 @@
   </ActionButton>
 
   {#snippet content()}
-    <UpsellCta source="lists">
+    <UpsellCta source="lists" surface="none">
       {m.link_text_vip_list_upsell()}
     </UpsellCta>
   {/snippet}

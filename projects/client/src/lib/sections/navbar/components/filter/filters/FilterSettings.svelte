@@ -72,10 +72,5 @@
     gap: var(--gap-xs);
 
     min-width: var(--ni-240);
-    padding: var(--ni-16);
-
-    background-color: var(--color-modal-background);
-    border-radius: var(--border-radius-l);
-    box-shadow: var(--shadow-menu);
   }
 </style>

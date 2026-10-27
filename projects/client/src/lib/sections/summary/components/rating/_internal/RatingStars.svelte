@@ -341,7 +341,6 @@
     // Mirrors the compact tooltip primitive (.trakt-tooltip-compact) so the
     // scrub value reads as a tooltip consistent with the rest of the app.
     .rating-preview {
-      position: absolute;
       bottom: calc(100% + var(--gap-xs));
       left: 50%;
       translate: var(--preview-x, 0px) 0;
@@ -350,15 +349,12 @@
       z-index: var(--layer-top);
       white-space: nowrap;
 
-      background-color: var(--color-tooltip-background);
-      color: var(--color-tooltip-text);
+      color: var(--color-text-primary);
       font-size: var(--ni-12);
       line-height: 1;
       font-weight: 500;
 
-      border-radius: var(--border-radius-xs);
       padding: var(--ni-6) var(--ni-8);
-      box-shadow: var(--shadow-menu);
 
       pointer-events: none;
       opacity: 0;
@@ -366,6 +362,8 @@
         translate var(--transition-increment) var(--ease-glide),
         transform var(--transition-increment) var(--ease-glide),
         opacity var(--transition-increment) ease;
+
+      @include floating-surface(absolute, var(--border-radius-s));
 
       &.is-visible {
         opacity: 1;
