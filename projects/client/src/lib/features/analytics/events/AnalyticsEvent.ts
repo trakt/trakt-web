@@ -15,6 +15,7 @@ const TODAY_PREFIX = 'today';
 const MIXTAPE_PREFIX = 'mixtape';
 const RECOMMENDATIONS_PREFIX = 'recommendations';
 const INSIGHTS_PREFIX = 'insights';
+const RECAP_PREFIX = 'recap';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -129,6 +130,11 @@ export const AnalyticsEvent = {
 
   InsightsOpen: buildEventKey(INSIGHTS_PREFIX, 'open'),
   InsightsTab: buildEventKey(INSIGHTS_PREFIX, 'tab'),
+
+  RecapOpen: buildEventKey(RECAP_PREFIX, 'open'),
+  RecapTab: buildEventKey(RECAP_PREFIX, 'tab'),
+  RecapReveal: buildEventKey(RECAP_PREFIX, 'reveal'),
+  RecapChapter: buildEventKey(RECAP_PREFIX, 'chapter'),
 
   Favorite: buildEventKey(MEDIA_ACTION_PREFIX, 'favorite'),
   Rewatching: buildEventKey(MEDIA_ACTION_PREFIX, 'rewatching'),

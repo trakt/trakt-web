@@ -102,7 +102,7 @@
   <Sentiment {sentiment} {realityCheck} slug={media.slug} type="show" />
 </RenderFor>
 
-<SeasonList show={media} {seasons} {currentSeason} />
+<SeasonList show={media} {seasons} {currentSeason} hasRecap />
 
 <CastList
   title={m.list_title_actors()}

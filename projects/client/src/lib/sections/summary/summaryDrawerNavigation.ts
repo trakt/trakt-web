@@ -16,6 +16,7 @@ const summaryDrawerParams = {
      badges send the one its window cuts off at. */
   [SummaryDrawers.Seasons]: { [EPISODE_PARAM]: '' },
   [SummaryDrawers.Sentiment]: { [TAB_PARAM]: '' },
+  [SummaryDrawers.SeasonRecap]: { [TAB_PARAM]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 function mapToDrawer(value: string | Nil) {
@@ -52,6 +53,8 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.Ratings;
     case SummaryDrawers.Rewatching:
       return SummaryDrawers.Rewatching;
+    case SummaryDrawers.SeasonRecap:
+      return SummaryDrawers.SeasonRecap;
     default:
       return null;
   }
@@ -118,6 +121,7 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
       buildDrawerLink(SummaryDrawers.Review, {
         [COMMENT_ID_PARAM]: String(id),
       }),
+    openSeasonRecapDrawer: () => openDrawer(SummaryDrawers.SeasonRecap),
     openReviewDrawer: (id: number) =>
       openDrawer(SummaryDrawers.Review, { [COMMENT_ID_PARAM]: String(id) }),
   };

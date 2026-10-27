@@ -14537,6 +14537,221 @@
     "error_text_jellyfin_vip_required": {
       "default": "Jellyfin sync is a VIP beta for now.",
       "description": "Error when a free member tries to connect a Jellyfin server."
+    },
+    "preview_feature_title_season_recap": {
+      "default": "Season recap",
+      "description": "Product feature name for the preview feature that adds a recap of a season to the show page."
+    },
+    "preview_feature_description_season_recap": {
+      "default": "Adds a Recap button next to the season picker on a show page. It opens a catch-up for that season: the key moments and where the characters stand.",
+      "description": "Description of the season recap preview feature."
+    },
+    "button_text_season_recap": {
+      "default": "Recap",
+      "description": "Small button on a show page, next to the season picker, that opens a catch-up of the selected season. Keep it to one short word."
+    },
+    "button_label_open_season_recap": {
+      "default": "Open the recap for {season}",
+      "description": "Accessible label of the Recap button on a show page. {season} is the season name, for example Season 2.",
+      "variables": {
+        "season": {
+          "type": "string",
+          "description": "Name of the season.",
+          "required": true
+        }
+      }
+    },
+    "header_season_recap": {
+      "default": "Previously on {title}",
+      "description": "Title of the season recap drawer, in the style of a TV show recap. {title} is the show title.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Title of the show.",
+          "required": true
+        }
+      }
+    },
+    "tab_text_season_recap": {
+      "default": "Recap",
+      "description": "Tab label in the season recap drawer for the recap of one season."
+    },
+    "tab_text_recap_story": {
+      "default": "Story so far",
+      "description": "Tab label in the season recap drawer for the whole story up to the season the viewer finished. Keep it short."
+    },
+    "header_recap_key_moments": {
+      "default": "Key moments",
+      "description": "Heading above the swipeable cards that list the biggest turns of a season."
+    },
+    "text_recap_key_moment_counter": {
+      "default": "{current} / {total}",
+      "description": "Counter next to the key moments arrows. {current} is the visible card, {total} is how many cards there are.",
+      "variables": {
+        "current": {
+          "type": "number",
+          "description": "Visible card, starting at 1.",
+          "required": true
+        },
+        "total": {
+          "type": "number",
+          "description": "Number of cards.",
+          "required": true
+        }
+      }
+    },
+    "header_recap_where_things_stand": {
+      "default": "Where things stand",
+      "description": "Heading above the list that says where each character and storyline ends up."
+    },
+    "text_recap_at_the_finale": {
+      "default": "At the finale",
+      "description": "Small label next to Where things stand, saying the list describes the end of the season."
+    },
+    "text_recap_before_season": {
+      "default": "Before season {number}",
+      "description": "Small label next to Where things stand on the story tab, saying the list describes the point right before the next season. {number} is the next season.",
+      "variables": {
+        "number": {
+          "type": "number",
+          "description": "Season that comes next.",
+          "required": true
+        }
+      }
+    },
+    "header_recap_open_thread": {
+      "default": "Open thread",
+      "description": "Label of a card about a storyline or question that is still unresolved at the end of a season."
+    },
+    "header_recap_in_depth": {
+      "default": "In depth",
+      "description": "Heading above the chapter-by-chapter breakdown of a season, a VIP feature."
+    },
+    "text_recap_in_depth_locked": {
+      "default": "Chapter-by-chapter breakdown",
+      "description": "Caption on the blurred preview of the in-depth breakdown that free members see."
+    },
+    "text_recap_source_wikipedia": {
+      "default": "Recap based on Wikipedia",
+      "description": "Link under a recap crediting the Wikipedia page it was written from."
+    },
+    "text_recap_spoiler_partial": {
+      "default": "You've watched {watched} of {total} episodes. This spoils the rest of season {number}.",
+      "description": "Warning on the recap of a season the viewer has not finished. {watched} and {total} are episode counts, {number} is the season.",
+      "variables": {
+        "watched": {
+          "type": "number",
+          "description": "Episodes watched.",
+          "required": true
+        },
+        "total": {
+          "type": "number",
+          "description": "Episodes aired.",
+          "required": true
+        },
+        "number": {
+          "type": "number",
+          "description": "Season number.",
+          "required": true
+        }
+      }
+    },
+    "text_recap_spoiler_unwatched": {
+      "default": "You haven't started season {number}. This spoils all of it.",
+      "description": "Warning on the recap of a season the viewer has not started. {number} is the season.",
+      "variables": {
+        "number": {
+          "type": "number",
+          "description": "Season number.",
+          "required": true
+        }
+      }
+    },
+    "button_text_recap_show_anyway": {
+      "default": "Show it anyway",
+      "description": "Button that reveals a recap hidden because it contains spoilers."
+    },
+    "text_recap_story_description": {
+      "default": "The whole story, up to the season you finished",
+      "description": "Subtitle on the story tab of the season recap drawer."
+    },
+    "text_recap_story_progress": {
+      "default": "{count} of {total} seasons",
+      "description": "Progress on the story tab. {count} is how many seasons the story covers, {total} is how many seasons the show has.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Seasons covered.",
+          "required": true
+        },
+        "total": {
+          "type": "number",
+          "description": "Seasons in the show.",
+          "required": true
+        }
+      }
+    },
+    "text_recap_story_stats": {
+      "default": "{episodes} episodes · about {duration}",
+      "description": "Under the progress on the story tab. {episodes} is the number of episodes covered, {duration} is the reading time, for example 6 min.",
+      "variables": {
+        "episodes": {
+          "type": "number",
+          "description": "Episodes covered.",
+          "required": true
+        },
+        "duration": {
+          "type": "string",
+          "description": "Reading time.",
+          "required": true
+        }
+      }
+    },
+    "text_recap_story_not_covered": {
+      "default": "Nothing from season {number} on.",
+      "description": "Under the progress on the story tab, saying the story does not include the season that comes next or later ones, so it stays spoiler free. {number} is the first season left out.",
+      "variables": {
+        "number": {
+          "type": "number",
+          "description": "First season left out.",
+          "required": true
+        }
+      }
+    },
+    "text_recap_story_up_next": {
+      "default": "Season {number} · up next",
+      "description": "Last step of the season timeline on the story tab. {number} is the season the viewer has not watched yet.",
+      "variables": {
+        "number": {
+          "type": "number",
+          "description": "Next season.",
+          "required": true
+        }
+      }
+    },
+    "text_recap_meta_pair": {
+      "default": "{first} · {second}",
+      "description": "Two short facts joined by a middle dot, for example Season 1 · 9 eps. Keep the middle dot.",
+      "variables": {
+        "first": {
+          "type": "string",
+          "description": "First fact.",
+          "required": true
+        },
+        "second": {
+          "type": "string",
+          "description": "Second fact.",
+          "required": true
+        }
+      }
+    },
+    "text_recap_upsell_in_depth": {
+      "default": "Get the full season breakdown with VIP",
+      "description": "Text of the VIP upsell under the locked in-depth section of the season recap drawer."
+    },
+    "text_recap_upsell_story": {
+      "default": "One story up to the last season you finished, with VIP",
+      "description": "Text of the VIP upsell on the story tab of the season recap drawer."
     }
   }
 }

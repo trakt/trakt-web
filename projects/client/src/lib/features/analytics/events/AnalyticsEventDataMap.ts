@@ -178,6 +178,7 @@ type MixtapeResultType = {
 
 type InsightsOpenType = { source: InsightsOpenSource; tab: InsightsTab };
 type InsightsTabType = { tab: InsightsTab };
+type RecapTabType = { tab: 'recap' | 'story' };
 
 type OnboardingStepType = {
   step: 'intro' | 'import' | 'outro';
@@ -306,6 +307,11 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.InsightsOpen]: InsightsOpenType;
   [AnalyticsEvent.InsightsTab]: InsightsTabType;
+
+  [AnalyticsEvent.RecapOpen]: never;
+  [AnalyticsEvent.RecapTab]: RecapTabType;
+  [AnalyticsEvent.RecapReveal]: never;
+  [AnalyticsEvent.RecapChapter]: never;
 
   [AnalyticsEvent.Favorite]: ActionType;
   [AnalyticsEvent.Rewatching]: { action: 'start' | 'stop' };
