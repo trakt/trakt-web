@@ -6,7 +6,6 @@
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { useProgressManagerEnabled } from "$lib/features/progress-manager/stores/useProgressManagerEnabled";
   import {
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,
@@ -30,7 +29,6 @@
   const { isMarkingAsWatched, isWatchable, isWatched, removeWatched } =
     $derived(useMarkAsWatched(target));
   const { progress } = $derived(useWatchProgress(target));
-  const isProgressManagerEnabled = useProgressManagerEnabled();
 
   const { confirm } = useConfirm();
   const openMarkAsWatchedDrawer = $derived(() => {
@@ -47,14 +45,10 @@
     }),
   );
 
-  const watchStateShow = $derived(
-    $isProgressManagerEnabled ? toWatchStateShow(target) : null,
-  );
+  const watchStateShow = $derived(toWatchStateShow(target));
 
   const fill = $derived.by(() => {
-    if ($progress === undefined || !$isProgressManagerEnabled) {
-      return undefined;
-    }
+    if ($progress === undefined) return undefined;
 
     return $isWatched ? 100 : $progress;
   });

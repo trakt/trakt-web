@@ -6,5 +6,4 @@ export enum FeatureFlag {
   LargeScreenCards = 'large-screen-cards',
   VipVeteran = 'vip-veteran',
   ShowEnding = 'show-ending',
-  ProgressManager = 'progress-manager',
 }

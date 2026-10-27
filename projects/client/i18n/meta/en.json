@@ -13824,14 +13824,6 @@
       "default": "Shows an Ending row in a show's details: Complete when the story wrapped up, Unresolved when it did not.",
       "description": "Description of the show ending preview feature."
     },
-    "preview_feature_title_progress_manager": {
-      "default": "Progress manager",
-      "description": "Product feature name for the preview feature that turns the show track button into a progress bar and opens a drawer to manage watch progress per season and episode."
-    },
-    "preview_feature_description_progress_manager": {
-      "default": "The track button on a show fills up as you watch, and opens a drawer with your progress per season and episode.",
-      "description": "Description of the progress manager preview feature."
-    },
     "text_mixtape_fits_count": {
       "default": "{count} from your history",
       "description": "Small text next to the Fits with your picks heading. {count} is how many watched titles still fit."
