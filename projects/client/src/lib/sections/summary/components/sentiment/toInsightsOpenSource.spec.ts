@@ -14,4 +14,8 @@ describe('toInsightsOpenSource', () => {
     expect(toInsightsOpenSource('popstate')).toBe('link');
     expect(toInsightsOpenSource('goto')).toBe('link');
   });
+
+  it('should skip a page that is being left', () => {
+    expect(toInsightsOpenSource('leave')).toBeNull();
+  });
 });

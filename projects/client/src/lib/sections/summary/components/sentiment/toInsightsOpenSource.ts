@@ -3,6 +3,10 @@ import type { InsightsOpenSource } from './models/InsightsOpenSource.ts';
 
 export function toInsightsOpenSource(
   navigationType: NavigationType,
-): InsightsOpenSource {
+): InsightsOpenSource | Nil {
+  if (navigationType === 'leave') {
+    return null;
+  }
+
   return navigationType === 'link' ? 'card' : 'link';
 }

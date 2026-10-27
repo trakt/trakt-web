@@ -63,7 +63,12 @@
 
   let insightsSource: InsightsOpenSource = $state("link");
   beforeNavigate(({ type }) => {
-    insightsSource = toInsightsOpenSource(type);
+    const source = toInsightsOpenSource(type);
+    if (!source) {
+      return;
+    }
+
+    insightsSource = source;
   });
 
   const navigationOnEntry = summaryDrawerNavigation(
