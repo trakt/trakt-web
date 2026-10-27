@@ -445,6 +445,11 @@
   --color-soundtrack-play-foreground: var(--shade-10);
 
   --color-vip-popular-tag: #fdc700;
+  --color-vip-thread-base: var(--purple-400);
+  --color-vip-thread-mid: var(--purple-500);
+  --color-vip-thread-glint: var(--purple-900);
+  --color-vip-thread-glint-faint: var(--purple-700);
+  --color-vip-thread-label-hover: var(--shade-950);
   --color-vip-border-accent: var(--purple-600);
   --color-vip-surface-muted: var(--purple-50);
   --background-vip-elevated-card: radial-gradient(
@@ -1113,6 +1118,15 @@
   --color-soundtrack-play-foreground: var(--shade-10);
 
   --color-vip-popular-tag: #fdc700;
+  --color-vip-thread-base: var(--purple-500);
+  --color-vip-thread-mid: var(--purple-400);
+  --color-vip-thread-glint: color-mix(in srgb, var(--shade-10) 80%, transparent);
+  --color-vip-thread-glint-faint: color-mix(
+    in srgb,
+    var(--shade-10) 45%,
+    transparent
+  );
+  --color-vip-thread-label-hover: var(--shade-10);
   --color-vip-border-accent: var(--purple-500);
   --color-vip-surface-muted: var(--purple-950);
   --background-vip-elevated-card: radial-gradient(

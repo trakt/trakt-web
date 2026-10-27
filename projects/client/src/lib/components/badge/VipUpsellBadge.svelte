@@ -1,38 +1,147 @@
 <script lang="ts">
-  import BadgeSparkle from "./_internal/BadgeSparkle.svelte";
   import * as m from "$lib/features/i18n/messages";
 </script>
 
-<div class="trakt-vip-upsell-badge">
-  <BadgeSparkle />
-  <p class="uppercase">{m.badge_text_get_vip()}</p>
-</div>
+<span class="trakt-vip-upsell-badge">
+  <span class="badge-ring" aria-hidden="true">
+    <span class="ring-spin"><span class="ring-sweep"></span></span>
+  </span>
+
+  <span class="badge-label uppercase">{m.badge_text_get_vip()}</span>
+</span>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-vip-upsell-badge {
+    --badge-label-color: var(--color-text-primary);
+    --badge-ring-weight: var(--ni-1);
+    --badge-intensity: 1;
+    --badge-boost: paused;
+
+    @include for-mouse {
+      :global(.trakt-link:hover) &,
+      :global(.trakt-link:focus-visible) & {
+        --badge-label-color: var(--color-vip-thread-label-hover);
+        --badge-ring-weight: var(--ni-2);
+        --badge-intensity: 1.4;
+        --badge-boost: running;
+      }
+    }
+
+    :global(.is-hidden) & {
+      --badge-boost: paused;
+
+      .ring-sweep {
+        animation-play-state: paused;
+      }
+    }
+
+    position: relative;
+    box-sizing: border-box;
+
     display: inline-flex;
     align-items: center;
-    gap: var(--gap-xs);
+    justify-content: center;
 
-    padding: var(--ni-8) var(--ni-12);
-    height: var(--segmented-select-segment-height);
-    box-sizing: border-box;
+    height: var(--ni-40);
+    padding-inline: var(--ni-20);
+
     border-radius: var(--border-radius-pill);
+    background: transparent;
 
-    // Inviting purple gradient + soft glow instead of the flat red - the upsell
-    // should feel aspirational, not like a paywall.
-    background: linear-gradient(
-      135deg,
-      var(--purple-400),
-      var(--purple-600)
-    );
-    color: var(--color-foreground-vip-badge);
-    box-shadow: 0 var(--ni-2) var(--ni-12)
-      color-mix(in srgb, var(--purple-500) 45%, transparent);
+    .badge-ring {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
 
-    p {
+      padding: var(--badge-ring-weight);
+      border-radius: inherit;
+
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask-composite: exclude;
+
+      pointer-events: none;
+    }
+
+    .ring-spin {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 260%;
+      aspect-ratio: 1;
+
+      transform: translate(-50%, -50%);
+
+      animation: vip-thread-boost 3s linear infinite;
+      animation-play-state: var(--badge-boost);
+    }
+
+    .ring-sweep {
+      display: block;
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+
+      background: conic-gradient(
+        from 0deg,
+        var(--color-vip-thread-base) 0deg,
+        var(--color-vip-thread-mid) 55deg,
+        var(--color-vip-thread-glint) 90deg,
+        var(--color-vip-thread-mid) 125deg,
+        var(--color-vip-thread-base) 180deg,
+        var(--color-vip-thread-mid) 235deg,
+        var(--color-vip-thread-glint-faint) 270deg,
+        var(--color-vip-thread-mid) 305deg,
+        var(--color-vip-thread-base) 360deg
+      );
+
+      animation: vip-thread-sweep 6s linear infinite;
+
+      filter: contrast(var(--badge-intensity));
+    }
+
+    .badge-label {
+      position: relative;
+
+      color: var(--badge-label-color);
+      font-size: var(--font-size-text-small);
       font-weight: 700;
+      letter-spacing: 0.14em;
       white-space: nowrap;
+
+      margin-inline-end: -0.14em;
+
+      transition: color var(--transition-increment) ease-in-out;
+    }
+  }
+
+  @keyframes vip-thread-sweep {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes vip-thread-boost {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trakt-vip-upsell-badge .ring-sweep,
+    .trakt-vip-upsell-badge .ring-spin {
+      animation: none;
     }
   }
 </style>

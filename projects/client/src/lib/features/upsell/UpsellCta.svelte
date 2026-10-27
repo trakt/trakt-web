@@ -70,7 +70,8 @@
 
       text-decoration: none;
 
-      transition: border-color var(--transition-increment) ease-in-out;
+      transition: var(--transition-increment) ease-in-out;
+      transition-property: border-color, transform;
     }
 
     @include for-mouse {
@@ -80,6 +81,10 @@
           border-color: color-mix(in srgb, var(--purple-500) 50%, transparent);
         }
       }
+    }
+
+    :global(.trakt-link:active) {
+      transform: scale(0.98);
     }
 
     &[data-surface="none"] :global(.trakt-link) {
