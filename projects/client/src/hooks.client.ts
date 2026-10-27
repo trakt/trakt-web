@@ -9,6 +9,7 @@ import '$lib/polyfills/toSorted.ts';
 import { isBlockedEmbedEvent } from '$lib/features/errors/isBlockedEmbedEvent.ts';
 import { isChunkParseError } from '$lib/features/errors/isChunkParseError.ts';
 import { isInjectedScriptEvent } from '$lib/features/errors/isInjectedScriptEvent.ts';
+import { isScriptedRejectionEvent } from '$lib/features/errors/isScriptedRejectionEvent.ts';
 import { toHandledErrorContext } from '$lib/features/errors/toHandledErrorContext.ts';
 import { toRejectionBreadcrumb } from '$lib/features/errors/toRejectionBreadcrumb.ts';
 import { trackPageLifecycle } from '$lib/features/errors/trackPageLifecycle.ts';
@@ -65,6 +66,11 @@ const readPageLifecycle =
 
 if (typeof window !== 'undefined') {
   window.addEventListener('unhandledrejection', (event) => {
+    if (isScriptedRejectionEvent(event)) {
+      event.stopImmediatePropagation();
+      return;
+    }
+
     Sentry.addBreadcrumb(
       toRejectionBreadcrumb({ event, dispatchProbe: new Error() }),
     );
