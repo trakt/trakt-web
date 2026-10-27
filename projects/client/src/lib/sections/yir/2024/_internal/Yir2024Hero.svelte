@@ -2,9 +2,12 @@
   import { map } from "rxjs";
 
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
+  import VipTierTag from "$lib/components/badge/VipTierTag.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { useQuery } from "$lib/features/query/useQuery";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import { toVipTier } from "$lib/features/vip-veteran/toVipTier.ts";
   import { m } from "$lib/paraglide/messages";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
@@ -36,6 +39,7 @@
 
   const profileQuery = $derived(useQuery(userProfileQuery({ slug })));
   const profile = $derived(profileQuery.pipe(map(($q) => $q.data)));
+  const isAuraShown = useVipVeteranEnabled();
 
   const now = new Date();
   const isCurrentYear = $derived(year === now.getFullYear());
@@ -82,7 +86,11 @@
     <div class="yir-2024-directed-by">
       <div class="yir-2024-avatar-stack">
         <UserAvatar user={$profile} size="large" />
-        {#if $profile.isVip || $profile.isDirector}
+        {#if $isAuraShown}
+          <span class="yir-2024-vip">
+            <VipTierTag tier={toVipTier($profile)} />
+          </span>
+        {:else if $profile.isVip || $profile.isDirector}
           <span class="yir-2024-vip">
             <VipBadge isDirector={$profile.isDirector} />
           </span>

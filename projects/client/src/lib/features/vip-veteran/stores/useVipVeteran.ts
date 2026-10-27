@@ -8,7 +8,9 @@ export function useVipVeteran(slug$: Observable<string>) {
 
   const response = useQuery(
     combineLatest([slug$, isEnabled]).pipe(
-      map(([slug, enabled]) => userProfileQuery({ slug, enabled })),
+      map(([slug, enabled]) =>
+        userProfileQuery({ slug, enabled: enabled && slug !== '' }),
+      ),
     ),
   );
 

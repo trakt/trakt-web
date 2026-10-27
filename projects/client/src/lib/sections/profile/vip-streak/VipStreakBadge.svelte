@@ -17,7 +17,6 @@
   import { toVipTierTitle } from "$lib/features/vip-veteran/toVipTierTitle.ts";
   import { toVipTitleTier } from "$lib/features/vip-veteran/toVipTitleTier.ts";
   import { toVipVeteranLabel } from "$lib/features/vip-veteran/toVipVeteranLabel.ts";
-  import type { VipTierTitle } from "$lib/features/vip-veteran/VipTierTitle.ts";
   import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import type { VipVeteran } from "$lib/requests/models/VipVeteran.ts";
   import { onMount } from "svelte";
@@ -37,8 +36,6 @@
   const tier = $derived(toVipLadderTier(veteran.tier));
   const title = $derived(toVipTierTitle(veteran.tier));
   const label = $derived(toVipVeteranLabel(title));
-  const toTagTitle = (from: VipTierTitle | null) =>
-    from ? toVipVeteranLabel(from) : null;
   const dots = burstDots();
 
   onMount(() => {
@@ -63,18 +60,14 @@
     {#if promotion}
       <span class="badge-flip">
         <span class="flip-face flip-front">
-          <VipTierTag
-            tier={toVipTitleTier(promotion.from)}
-            label="VIP"
-            title={toTagTitle(promotion.from)}
-          />
+          <VipTierTag tier={toVipTitleTier(promotion.from)} />
         </span>
         <span class="flip-face flip-back">
-          <VipTierTag {tier} label="VIP" title={toTagTitle(title)} />
+          <VipTierTag {tier} />
         </span>
       </span>
     {:else}
-      <VipTierTag {tier} label="VIP" title={toTagTitle(title)} />
+      <VipTierTag {tier} />
     {/if}
   </Link>
 

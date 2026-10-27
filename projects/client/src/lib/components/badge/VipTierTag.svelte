@@ -1,7 +1,30 @@
 <script lang="ts">
-  import type { VipTierTagProps } from "./_internal/VipTierTagProps.ts";
+  import type { TierAuraTier } from "$lib/components/tier-aura/TierAuraTier.ts";
+  import * as m from "$lib/features/i18n/messages.ts";
 
-  const { tier, label, title = null }: VipTierTagProps = $props();
+  const { tier }: { tier: TierAuraTier } = $props();
+
+  // One wording per tier, so every surface names a member the same way.
+  function toWords(shown: TierAuraTier): [string, string | null] {
+    switch (shown) {
+      case "free":
+        return [m.text_vip_tier_free(), null];
+      case "director":
+        return ["DIRECTOR", null];
+      case "pro":
+        return ["VIP", m.text_vip_veteran_title_pro()];
+      case "veteran":
+        return ["VIP", m.text_vip_veteran_title_veteran()];
+      case "elite":
+        return ["VIP", m.text_vip_veteran_title_elite()];
+      case "legend":
+        return ["VIP", m.text_vip_veteran_title_legend()];
+      default:
+        return ["VIP", null];
+    }
+  }
+
+  const [label, title] = $derived(toWords(tier));
 </script>
 
 <!--

@@ -7,22 +7,20 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import FlipCard from "$lib/components/card/FlipCard.svelte";
-  import Link from "$lib/components/link/Link.svelte";
   import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import UserRating from "$lib/sections/components/UserRating.svelte";
+  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { pointerWithin } from "$lib/utils/actions/pointerWithin.ts";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import { time } from "$lib/utils/timing/time.ts";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { onMount } from "svelte";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
   import TodayFaces from "./TodayFaces.svelte";
   import TodayForYouAction from "./TodayForYouAction.svelte";
   import TodayMilestoneChip from "./TodayMilestoneChip.svelte";
   import TodayPosterDetails from "../TodayPosterDetails.svelte";
-  import type { UserProfile } from "$lib/requests/models/UserProfile.ts";
   import type { TodayStoryFrameContentProps } from "./TodayStoryFrameContentProps.ts";
   import TodayStoryTapZones from "./TodayStoryTapZones.svelte";
   import { toFrameMedia } from "./toFrameMedia.ts";
@@ -189,23 +187,10 @@
     {#if frame.type === "friend"}
       <div class="frame-text">
         <div class="frame-person">
-          {#snippet avatar(user: UserProfile)}
-            <CrossOriginImage
-              src={user.avatar.url}
-              alt={m.image_alt_user_avatar({ username: user.username })}
-            />
-          {/snippet}
-          {#if frame.action.user.slug}
-            <Link
-              href={UrlBuilder.profile.user(frame.action.user.slug)}
-              onclick={() =>
-                trackAction({ action: "profile", frame: frame.type })}
-            >
-              {@render avatar(frame.action.user)}
-            </Link>
-          {:else}
-            {@render avatar(frame.action.user)}
-          {/if}
+          <UserAvatar
+            user={frame.action.user}
+            onClick={() => trackAction({ action: "profile", frame: frame.type })}
+          />
           <div class="frame-person-info">
             <p class="bold ellipsis">{toDisplayableName(frame.action.user)}</p>
             <p class="small ellipsis">{toFriendActionLabel(frame.action)}</p>
@@ -409,14 +394,6 @@
       flex-wrap: wrap;
       align-items: center;
       gap: var(--gap-s);
-
-      :global(img) {
-        width: var(--ni-44);
-        height: var(--ni-44);
-
-        border: var(--border-thickness-xs) solid var(--purple-500);
-        border-radius: 50%;
-      }
 
       :global(.trakt-link:focus-visible img) {
         outline: var(--border-thickness-xs) solid var(--color-link-active);

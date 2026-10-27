@@ -27,7 +27,8 @@
     name: string;
     src: string;
     isVip?: boolean;
-    tier?: TierAuraTier | null;
+    /** Every avatar wears its member's tier; null only while the preview is off. */
+    tier: TierAuraTier | null;
     auraVariant?: "compact" | "full";
     auraMotion?: "live" | "hover";
     hasEntrance?: boolean;

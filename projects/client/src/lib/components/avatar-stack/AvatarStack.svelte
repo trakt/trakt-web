@@ -29,7 +29,7 @@
         user={avatar.user}
         size="small"
         {linked}
-        hasAura={false}
+        auraVariant="inset"
       />
     </span>
   {/each}
@@ -59,6 +59,9 @@
         var(--avatar-stack-base-size) + 2 * var(--border-thickness-xs)
       );
       --avatar-stack-overlap: calc(-1 * var(--ni-8));
+
+      /* The tier band sits inside the cutout. */
+      --tier-aura-inset-gap: var(--border-thickness-xs);
 
       .avatar :global(.trakt-user-avatar img) {
         border: var(--border-thickness-xs) solid var(--color-background);

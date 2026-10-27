@@ -1,17 +1,25 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import { page } from "$app/state";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { useOwnVipTier } from "$lib/features/vip-veteran/stores/useOwnVipTier.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../../profile-banner/ProfileImage.svelte";
 
   const { isExpanded = false }: { isExpanded?: boolean } = $props();
 
   const { user } = useUser();
+  const { tier } = useOwnVipTier();
+
+  // On your own profile the aura plays, in place of the active outline.
+  const isOnProfile = $derived(
+    page.url.pathname.startsWith(UrlBuilder.profile.me()),
+  );
 </script>
 
-<trakt-profile-button data-hj-suppress data-sentry-mask>
+<trakt-profile-button data-hj-suppress data-sentry-mask data-tier-aura-row>
   <Link
     href={UrlBuilder.profile.me()}
     label={m.button_label_user_profile()}
@@ -23,6 +31,9 @@
       name={$user?.name?.first ?? ""}
       src={$user?.avatar?.url ?? ""}
       isVip={Boolean($user?.isVip)}
+      tier={$tier}
+      auraVariant="compact"
+      auraMotion={isOnProfile ? "live" : "hover"}
     />
     {#if isExpanded}
       <span class="trakt-profile-link-username">{$user?.username}</span>

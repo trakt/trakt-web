@@ -1,11 +1,9 @@
 <script lang="ts">
   import CompactAura from "./_internal/CompactAura.svelte";
-  import EliteAura from "./_internal/EliteAura.svelte";
-  import LegendAura from "./_internal/LegendAura.svelte";
-  import RingAura from "./_internal/RingAura.svelte";
   import DirectorAura from "./_internal/DirectorAura.svelte";
+  import FullAura from "./_internal/FullAura.svelte";
+  import InsetAura from "./_internal/InsetAura.svelte";
   import { tierAuraMotion } from "./_internal/tierAuraMotion.ts";
-  import VeteranAura from "./_internal/VeteranAura.svelte";
   import type { TierAuraProps } from "./TierAuraProps.ts";
 
   const {
@@ -15,8 +13,10 @@
     children,
   }: TierAuraProps = $props();
 
-  // Free is a plain hairline; it never moves.
-  const shownMotion = $derived(tier === "free" ? "still" : motion);
+  // Free is a plain hairline and an inset band has no room to move.
+  const shownMotion = $derived(
+    tier === "free" || variant === "inset" ? "still" : motion,
+  );
   const hasShine = $derived(shownMotion === "hover");
 </script>
 
@@ -39,21 +39,17 @@
     <DirectorAura isCompact />
   {:else if variant === "compact"}
     <CompactAura isStill={tier === "free"} />
-  {:else if tier === "veteran"}
-    <VeteranAura />
-  {:else if tier === "elite"}
-    <EliteAura />
-  {:else if tier === "legend"}
-    <LegendAura />
-  {:else if tier === "director"}
-    <DirectorAura />
-  {:else}
-    <RingAura {tier} />
+  {:else if variant === "full"}
+    <FullAura {tier} />
   {/if}
 
   <span class="aura-face">
     {@render children()}
   </span>
+
+  {#if variant === "inset"}
+    <InsetAura />
+  {/if}
 
   {#if hasShine}
     <span class="aura-shine" aria-hidden="true">

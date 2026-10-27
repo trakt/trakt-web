@@ -2,6 +2,8 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import { toVipTier } from "$lib/features/vip-veteran/toVipTier.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { useBlockUser } from "$lib/sections/profile-banner/useBlockUser.ts";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
@@ -12,12 +14,14 @@
 
   const slug = $derived(profile.slug ?? profile.username);
   const displayName = $derived(toDisplayableName(profile));
+  const isAuraShown = useVipVeteranEnabled();
+  const tier = $derived($isAuraShown ? toVipTier(profile) : null);
 
   const blockActions = useBlockUser();
   const { isRequestingBlock } = blockActions;
 </script>
 
-<div class="trakt-blocked-user-row">
+<div class="trakt-blocked-user-row" data-tier-aura-row>
   <Link href={UrlBuilder.profile.user(slug)} color="inherit">
     <div class="blocked-user-identity">
       <ProfileImage
@@ -26,6 +30,9 @@
         name={profile.name.first}
         src={profile.avatar.url}
         isVip={profile.isVip}
+        {tier}
+        auraVariant="compact"
+        auraMotion="hover"
       />
       <p class="ellipsis">{displayName}</p>
     </div>

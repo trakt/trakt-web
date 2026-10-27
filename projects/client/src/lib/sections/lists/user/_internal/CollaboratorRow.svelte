@@ -4,6 +4,8 @@
   import CheckboxIcon from "$lib/components/icons/CheckboxIcon.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import { toVipTier } from "$lib/features/vip-veteran/toVipTier.ts";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import type { CollaboratorCandidate } from "./useManageCollaborators";
@@ -20,6 +22,8 @@
 
   const { profile, isCollaborator } = $derived(candidate);
   const displayName = $derived(toDisplayableName(profile));
+  const isAuraShown = useVipVeteranEnabled();
+  const tier = $derived($isAuraShown ? toVipTier(profile) : null);
 
   const { color, variant: _variant, ...dangerEvents } = $derived(
     useDangerButton({ isActive: isCollaborator, color: "default" }),
@@ -54,6 +58,9 @@
       name={profile.name.first}
       src={profile.avatar.url}
       isVip={profile.isVip}
+      {tier}
+      auraVariant="compact"
+      auraMotion="hover"
     />
   {/snippet}
 

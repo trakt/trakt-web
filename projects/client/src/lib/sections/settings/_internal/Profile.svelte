@@ -1,8 +1,10 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
+  import VipTierTag from "$lib/components/badge/VipTierTag.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useOwnVipTier } from "$lib/features/vip-veteran/stores/useOwnVipTier.ts";
   import GetVIPLink from "$lib/sections/navbar/components/GetVIPLink.svelte";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -11,6 +13,7 @@
 
   const { user } = useUser();
   const { profile } = useSettings();
+  const { tier } = useOwnVipTier();
 </script>
 
 <SettingsGroupCard variant={$user.isVip ? "vip" : "muted"}>
@@ -22,6 +25,7 @@
       name={$user.name.first}
       src={$user.avatar.url}
       isVip={$user.isVip}
+      tier={$tier}
     />
 
     <div class="trakt-settings-profile-info">
@@ -39,7 +43,11 @@
         color="inherit"
         label={m.button_label_manage_subscription()}
       >
-        <VipBadge isDirector={$user.isDirector} />
+        {#if $tier}
+          <VipTierTag tier={$tier} />
+        {:else}
+          <VipBadge isDirector={$user.isDirector} />
+        {/if}
       </Link>
     {:else}
       <GetVIPLink source="profile-settings" />

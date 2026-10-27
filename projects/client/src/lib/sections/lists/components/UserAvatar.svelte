@@ -16,8 +16,8 @@
     icon?: Snippet;
     onClick?: () => void;
     linked?: boolean;
-    /** Off where avatars overlap or are clipped, which an aura cannot share. */
-    hasAura?: boolean;
+    /** Inset where avatars overlap or get clipped, as in stacks. */
+    auraVariant?: "compact" | "inset";
   };
 
   const {
@@ -26,11 +26,10 @@
     icon,
     onClick,
     linked = true,
-    hasAura = true,
+    auraVariant = "compact",
   }: UserAvatarProps = $props();
 
-  const isAuraEnabled = useVipVeteranEnabled();
-  const isAuraShown = $derived($isAuraEnabled && hasAura);
+  const isAuraShown = useVipVeteranEnabled();
   const tier = $derived(toVipTier(user));
 </script>
 
@@ -45,11 +44,11 @@
   <div
     class="trakt-user-avatar"
     class:trakt-vip-user={user.isVip}
-    class:has-aura={isAuraShown}
+    class:has-aura={$isAuraShown && auraVariant === "compact"}
     data-size={size}
   >
-    {#if isAuraShown}
-      <TierAura {tier}>
+    {#if $isAuraShown}
+      <TierAura {tier} variant={auraVariant}>
         {@render face()}
       </TierAura>
     {:else}

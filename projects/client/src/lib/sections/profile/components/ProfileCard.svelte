@@ -1,5 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import { toVipTier } from "$lib/features/vip-veteran/toVipTier.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile.ts";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
@@ -7,11 +9,13 @@
 
   const { profile }: { profile: UserProfile } = $props();
 
+  const isAuraShown = useVipVeteranEnabled();
+  const tier = $derived($isAuraShown ? toVipTier(profile) : null);
   const displayName = $derived(toDisplayableName(profile));
   const profileUrl = $derived(UrlBuilder.profile.user(profile.slug!));
 </script>
 
-<div class="trakt-profile-card">
+<div class="trakt-profile-card" data-tier-aura-row>
   <div class="trakt-profile-avatar-wrapper">
     <Link href={profileUrl}>
       <ProfileImage
@@ -20,6 +24,9 @@
         name={profile.name.first}
         src={profile.avatar.url}
         isVip={profile.isVip}
+        {tier}
+        auraVariant="compact"
+        auraMotion="hover"
       />
     </Link>
   </div>

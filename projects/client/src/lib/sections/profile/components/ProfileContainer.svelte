@@ -36,13 +36,6 @@
     border-radius: var(--border-radius-l);
     @include muted-card;
 
-    /* What the avatar's aura and tier tag are painted over. */
-    --tier-aura-surface: color-mix(
-      in srgb,
-      var(--color-foreground) 4%,
-      var(--color-card-background)
-    );
-
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--gap-m);
@@ -55,8 +48,6 @@
 
     &.is-vip {
       @include vip-glow-card;
-
-      --tier-aura-surface: var(--color-vip-card-surface);
     }
 
     &.is-narrow {
