@@ -13670,19 +13670,47 @@
     },
     "label_sync_webhooks_server_count": {
       "default": "{count} servers",
-      "description": "Pill on the Plex webhook card showing how many Plex servers the address covers. {count} is the number of servers."
-    },
-    "label_sync_webhooks_soon": {
-      "default": "Soon",
-      "description": "Pill on a webhook card for a media server that is not supported yet."
+      "description": "Pill on a media server webhook card showing how many servers the address covers. {count} is the number of servers."
     },
     "description_sync_webhooks_plex": {
       "default": "Paste this address once in Plex › Settings › Webhooks. It covers {servers}. Needs Plex Pass.",
       "description": "Instructions on the Plex webhook card. {servers} is a comma separated list of the user's Plex server names."
     },
-    "description_sync_webhooks_jellyfin": {
-      "default": "Live progress through the Jellyfin Webhook plugin is on the way.",
-      "description": "Text on the Jellyfin webhook card explaining the feature is coming."
+    "description_sync_webhooks_jellyfin_setup": {
+      "default": "Trakt shows what you're watching right now, and your library syncs a few minutes after you finish something. Set it up once in the Jellyfin Webhook plugin. It covers {servers}.",
+      "description": "Instructions on the Jellyfin webhook card. {servers} is a comma separated list of the user's Jellyfin server names. Webhook is the name of a Jellyfin plugin."
+    },
+    "header_jellyfin_webhook_steps": {
+      "default": "Set up in Jellyfin",
+      "description": "Heading above the numbered steps for adding the Trakt address to the Jellyfin Webhook plugin."
+    },
+    "text_jellyfin_webhook_step_install": {
+      "default": "In Jellyfin, open Dashboard > Plugins > Catalog, install \"Webhook\" and restart the server.",
+      "description": "Step 1 of the Jellyfin webhook setup. Dashboard, Plugins, Catalog and Webhook are names in the Jellyfin interface."
+    },
+    "text_jellyfin_webhook_step_add_destination": {
+      "default": "Open Dashboard > Plugins > Webhook and choose \"Add Generic Destination\".",
+      "description": "Step 2 of the Jellyfin webhook setup. Dashboard, Plugins, Webhook and Add Generic Destination are names in the Jellyfin interface."
+    },
+    "text_jellyfin_webhook_step_paste_url": {
+      "default": "Paste the address above into \"Webhook Url\".",
+      "description": "Step 3 of the Jellyfin webhook setup. Webhook Url is a field name in the Jellyfin interface."
+    },
+    "text_jellyfin_webhook_step_notification_types": {
+      "default": "Under notification types, tick \"Playback Start\" and \"Playback Stop\" only.",
+      "description": "Step 4 of the Jellyfin webhook setup. Playback Start and Playback Stop are option names in the Jellyfin interface."
+    },
+    "text_jellyfin_webhook_step_item_types": {
+      "default": "Under item types, tick \"Movies\" and \"Episodes\".",
+      "description": "Step 5 of the Jellyfin webhook setup. Movies and Episodes are option names in the Jellyfin interface."
+    },
+    "text_jellyfin_webhook_step_send_all_properties": {
+      "default": "Tick \"Send All Properties (ignores template)\".",
+      "description": "Step 6 of the Jellyfin webhook setup. The quoted text is an option name in the Jellyfin interface."
+    },
+    "text_jellyfin_webhook_step_user_filter": {
+      "default": "Under user filter, pick your own Jellyfin user, then save.",
+      "description": "Step 7 of the Jellyfin webhook setup."
     },
     "page_title_mixtape": {
       "default": "Mixtape",
