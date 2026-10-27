@@ -57,4 +57,18 @@ describe('util: UrlBuilder', () => {
       );
     });
   });
+
+  describe('og.support', () => {
+    it('should point signed-in users at the help center', () => {
+      expect(UrlBuilder.og.support('john')).to.equal(
+        'https://support.trakt.tv',
+      );
+    });
+
+    it('should open an email to support for signed-out users', () => {
+      expect(UrlBuilder.og.support()).to.match(
+        /^mailto:support@trakt\.tv\?subject=Trakt Support Request&body=/,
+      );
+    });
+  });
 });

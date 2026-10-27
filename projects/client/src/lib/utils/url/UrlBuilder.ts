@@ -108,22 +108,17 @@ const listsDrilldownFactory = (user: string) => (type: PersonalListType) => {
 const TRENDING_SHAREABLE_IMAGE_PATH = '/api/shareable-image/trending';
 
 const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
-  const page = globalThis.location?.href ?? 'https://app.trakt.tv';
-  const supportSubject = 'Trakt Support Request';
-  const supportBody = 'Please describe your issue...';
-  const supportDetails = username
-    ? `**Username:** ${username}\n**Page:** ${page}`
-    : `Page: ${page}`;
-
-  const encodedBody = encodeURIComponent(
-    `${supportBody}\n\n---\n\n${supportDetails}`,
-  );
-
-  if (!username) {
-    return `mailto:${SUPPORT_EMAIL}?subject=${supportSubject}&body=${encodedBody}`;
+  if (username) {
+    return 'https://support.trakt.tv';
   }
 
-  return `https://forums.trakt.tv/new-message?username=support&title=${supportSubject}&body=${encodedBody}`;
+  const page = globalThis.location?.href ?? 'https://app.trakt.tv';
+  const supportSubject = 'Trakt Support Request';
+  const encodedBody = encodeURIComponent(
+    `Please describe your issue...\n\n---\n\nPage: ${page}`,
+  );
+
+  return `mailto:${SUPPORT_EMAIL}?subject=${supportSubject}&body=${encodedBody}`;
 };
 
 export const UrlBuilder = {
@@ -344,7 +339,6 @@ export const UrlBuilder = {
     flow ? `vip/renew?${new URLSearchParams({ flow })}` : 'vip/renew',
   og: {
     support: (username?: string) => ogSupportFactory(username),
-    forums: () => 'https://forums.trakt.tv/c/trakt',
     watchnow: (id: string) => `https://watchnow.trakt.tv/watchnow/${id}`,
     widgets: {
       yir: (slug: string, year: string) =>
