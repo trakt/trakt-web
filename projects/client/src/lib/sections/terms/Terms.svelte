@@ -5,7 +5,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
-<LegalPage title="Trakt Terms of Use" lastUpdated="September 25, 2026">
+<LegalPage title="Trakt Terms of Use" lastUpdated="October 27, 2026">
   <svelte:fragment slot="intro">
     <p>
       Welcome to Trakt! These Terms of Use (or <b>"Terms"</b>) are a legally
@@ -249,7 +249,7 @@
       </li>
       <li>
         <b>Contents.</b> Unless otherwise expressly indicated, videos, audio clips,
-        written forum comments, information, data, text, photographs, software, scripts,
+        written comments, information, data, text, photographs, software, scripts,
         graphics, interactive features, User Submissions, and other materials, as
         well as names, logos, taglines, trade dress, and other trademarks generated,
         provided, or otherwise made accessible by Trakt or its partners on or through
@@ -286,7 +286,7 @@
       </li>
       <li>
         <b>User Submissions.</b> If you submit, add, upload, create, distribute or
-        post any feedback, reviews, content, videos, audio clips, written forum comments,
+        post any feedback, reviews, content, videos, audio clips, written comments,
         data, text, photographs, software, scripts, graphics, or other information
         to the Services ("User Submissions"), you grant Trakt an unrestricted, perpetual,
         irrevocable, non-exclusive, fully-paid, royalty-free right to exploit your
@@ -503,7 +503,7 @@
     <h2><span class="number">9</span>Interactive Features</h2>
     <p>
       The Services may contain message boards, chat rooms, personal web pages or
-      profiles, forums, bulletin boards, and other interactive features that
+      profiles, bulletin boards, and other interactive features that
       allow users to post, submit, publish, display, or transmit to other users
       or other persons (<b>"post"</b>) User Submissions on or through the
       Services. All User Submissions must comply with these Terms. User

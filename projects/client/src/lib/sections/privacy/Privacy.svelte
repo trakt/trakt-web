@@ -5,14 +5,14 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
-<LegalPage title="Trakt Privacy Policy" lastUpdated="August 20, 2024">
+<LegalPage title="Trakt Privacy Policy" lastUpdated="October 27, 2026">
   <svelte:fragment slot="intro">
     <p>
       Welcome to Trakt! This Privacy Policy explains how we at trakt, inc. (<b
         >"Trakt,"</b
       > <b>"us,"</b> <b>"our,"</b> or <b>"we"</b>) collect and treat information
       when you use trakt.tv or its subdomains, the Trakt mobile application (the
-      <b>"App"</b>), our user forums, and other features and services we offer
+      <b>"App"</b>), and other features and services we offer
       (collectively, our <b>"Services"</b>). This Privacy Policy is governed by
       and part of our Terms of Use. Any terms defined in the
       <Link href={UrlBuilder.terms()}>Terms of Use</Link>
@@ -167,8 +167,8 @@
         to the Services and to offer you software updates and product announcements.
         You can also include commercial information in your profile like your content
         preferences and interests, which we may use to generate inferences about you
-        as a user of our Services. If you participate in our user forum, VIP user
-        opportunities, or other interactive features, we will collect and process
+        as a user of our Services. If you participate in VIP user
+        opportunities or other interactive features, we will collect and process
         any Personal Information you submit for those purposes. We collect this information
         with your consent, and we use it to provide you with the Services you request,
         communicate with you about Trakt, and send you marketing messages according
@@ -299,11 +299,9 @@
       with your user account is retained until you delete it or cancel your
       account. If you cancel your account, Trakt will delete or anonymize all of
       your Personal Information then mark the account as private and schedule it
-      for deletion. An account cannot be restored once deleted. User comments
-      posted to Trakt forums are retained indefinitely unless you request
-      deletion. Data collected via cookies and similar technologies is kept for
-      up to 26 months. We may retain data, including Personal Information, for
-      longer periods if it is critical to our business and securely stores that
+      for deletion. An account cannot be restored once deleted. Data collected
+      via cookies and similar technologies is kept for up to 26 months.
+      We may retain data, including Personal Information, for longer periods if it is critical to our business and securely stores that
       retained data. For example, we may retain de-identified data about your
       content interactions in perpetuity for purposes like supporting our
       Discover feature, analyzing user behavior on an aggregate level, or
@@ -325,9 +323,8 @@
     </p>
     <ol type="a">
       <li>
-        <b>Other Trakt Users.</b> Personal Information you include in your user forum
-        messages and your public profile may be viewable or accessible by other Trakt
-        users. Please think carefully about the Personal Information you make available
+        <b>Other Trakt Users.</b> Personal Information you include in your public
+        profile may be viewable or accessible by other Trakt users. Please think carefully about the Personal Information you make available
         to others on the Services. You can review and revise your profile information
         at any time.
       </li>
