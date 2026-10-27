@@ -1,23 +1,35 @@
 import { cubicOut } from 'svelte/easing';
-import type { TransitionConfig } from 'svelte/transition';
+import type { EasingFunction, TransitionConfig } from 'svelte/transition';
 
 type SlideEdgeProps = {
   duration?: number;
   axis?: 'x' | 'y';
+  easing?: EasingFunction;
+  overshoot?: string;
 };
 
 export function slideEdge(
   _node: Element,
-  { duration = 150, axis = 'x' }: SlideEdgeProps = {},
+  {
+    duration = 150,
+    axis = 'x',
+    easing = cubicOut,
+    overshoot,
+  }: SlideEdgeProps = {},
 ): TransitionConfig {
-  const translate = (offset: number) =>
+  const distance = (progress: number) =>
+    overshoot
+      ? `calc(${progress * 100}% + ${overshoot} * ${progress})`
+      : `${progress * 100}%`;
+
+  const translate = (progress: number) =>
     axis === 'y'
-      ? `translateY(${offset}%)`
-      : `translateX(calc(var(--rtl-sign, 1) * ${offset}%))`;
+      ? `translateY(${distance(progress)})`
+      : `translateX(calc(var(--rtl-sign, 1) * ${distance(progress)}))`;
 
   return {
     duration,
-    easing: cubicOut,
-    css: (t) => `transform: ${translate((1 - t) * 100)};`,
+    easing,
+    css: (t) => `transform: ${translate(1 - t)};`,
   };
 }

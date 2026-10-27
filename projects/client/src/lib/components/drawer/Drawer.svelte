@@ -5,10 +5,13 @@
   import { navigationTrap } from "$lib/features/navigation/navigationTrap";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { useMotionDuration } from "$lib/stores/css/useMotionDuration.ts";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { writable } from "$lib/utils/store/WritableSubject";
+  import { time } from "$lib/utils/timing/time.ts";
   import { slideEdge } from "$lib/utils/transitions/slideEdge.ts";
   import { onMount, type Snippet } from "svelte";
+  import { cubicIn } from "svelte/easing";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";
   import ListTitle from "../lists/_internal/ListTitle.svelte";
@@ -82,8 +85,33 @@
   });
 
   const isOpening = writable(false);
+  const motionDuration = useMotionDuration();
+  const slideInDuration = $derived($motionDuration(time.seconds(0.26)));
+  const slideOutDuration = $derived($motionDuration(time.seconds(0.2)));
+
   let headerOverlayOpacity = $state(0);
   let drawerElement = $state<HTMLElement | null>(null);
+
+  const shareWidthWithDrawerBelow = (element: HTMLElement) => {
+    const drawers = [
+      ...document.querySelectorAll<HTMLElement>(".trakt-drawer"),
+    ];
+    const index = drawers.indexOf(element);
+    const below = index > 0 ? drawers.at(index - 1) : undefined;
+    if (!below) return;
+
+    below.style.setProperty(
+      "--drawer-stack-top-width",
+      `${element.offsetWidth}px`,
+    );
+  };
+
+  const markPresence = (isPresent: boolean) => {
+    if (!drawerElement) return;
+
+    drawerElement.dataset.present = String(isPresent);
+    if (isPresent) shareWidthWithDrawerBelow(drawerElement);
+  };
 
   const closeOnEscape = () => {
     if (dismissal === "manual") {
@@ -138,11 +166,27 @@
   data-elevated={elevated}
   data-header-variant={headerVariant}
   style:--drawer-header-overlay-opacity={headerOverlayOpacity}
-  transition:slideEdge={{ duration: 150, axis: slideAxis }}
+  style:--drawer-slide-in-duration="{slideInDuration}ms"
+  style:--drawer-slide-out-duration="{slideOutDuration}ms"
+  in:slideEdge={{
+    duration: slideInDuration,
+    axis: slideAxis,
+    overshoot: "var(--ni-36)",
+  }}
+  out:slideEdge={{
+    duration: slideOutDuration,
+    axis: slideAxis,
+    easing: cubicIn,
+    overshoot: "var(--ni-36)",
+  }}
   use:portal
   use:trap
   use:appendClassList={classList}
-  onintrostart={() => isOpening.set(true)}
+  onintrostart={() => {
+    isOpening.set(true);
+    markPresence(true);
+  }}
+  onoutrostart={() => markPresence(false)}
   onintroend={() => {
     isOpening.set(false);
     onOpened?.();
@@ -239,6 +283,13 @@
     --drawer-padding: var(--ni-16);
     --drawer-gap: var(--gap-m);
     --drawer-border-radius: var(--border-radius-xxl);
+    --drawer-edge-bleed: var(--border-thickness-xxs);
+    --drawer-stack-scale: 0.95;
+    --drawer-slide-in-ease: cubic-bezier(0.33, 1, 0.68, 1);
+    --drawer-slide-out-ease: cubic-bezier(0.32, 0, 0.67, 0);
+    --drawer-header-padding-end: calc(
+      var(--layout-distance-side) + var(--drawer-edge-bleed)
+    );
     --drawer-header-overlay-height: calc(
       var(--drawer-padding) * 2 + var(--ni-48)
     );
@@ -256,12 +307,12 @@
       z-index: calc(var(--layer-menu) + 3);
     }
 
-    top: 0;
-    bottom: 0;
-    inset-inline-end: 0;
+    top: calc(-1 * var(--drawer-edge-bleed));
+    bottom: calc(-1 * var(--drawer-edge-bleed));
+    inset-inline-end: calc(-1 * var(--drawer-edge-bleed));
 
     width: var(--drawer-size);
-    padding-top: var(--drawer-padding);
+    padding-top: calc(var(--drawer-padding) + var(--drawer-edge-bleed));
     padding-bottom: calc(
       var(--drawer-padding) + env(safe-area-inset-bottom, 0)
     );
@@ -277,9 +328,38 @@
     overflow: hidden;
     border-start-start-radius: var(--drawer-border-radius);
     border-end-start-radius: var(--drawer-border-radius);
-    border-inline-start: var(--ni-1) solid var(--color-drawer-border);
 
     backdrop-filter: blur(var(--ni-12));
+
+    transform-origin: right center;
+    transition-property: transform, border-radius;
+    transition-duration: var(--drawer-slide-out-duration);
+    transition-timing-function: var(--drawer-slide-out-ease);
+
+    &:dir(rtl) {
+      transform-origin: left center;
+    }
+
+    &::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      padding: var(--border-thickness-xxs);
+      border-radius: inherit;
+      background: var(--background-dialog-edge);
+      mask:
+        linear-gradient(black 0 0) content-box,
+        linear-gradient(black 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+
+      @include for-mobile {
+        padding: 0;
+        padding-block-start: var(--border-thickness-xxs);
+      }
+    }
 
     &[data-header-variant="overlay"] {
       gap: 0;
@@ -295,7 +375,7 @@
 
         box-sizing: border-box;
         min-height: var(--drawer-header-overlay-height);
-        padding-top: var(--drawer-padding);
+        padding-top: calc(var(--drawer-padding) + var(--drawer-edge-bleed));
         padding-bottom: var(--drawer-padding);
         pointer-events: none;
 
@@ -383,6 +463,8 @@
 
     @include for-mobile {
       --mobile-drawer-height: var(--drawer-size);
+      --drawer-edge-bleed: 0px;
+      --drawer-header-padding-end: var(--drawer-padding);
 
       top: initial;
       inset-inline-start: 0;
@@ -395,8 +477,6 @@
 
       border-end-start-radius: initial;
       border-start-end-radius: var(--drawer-border-radius);
-      border-inline-start: none;
-      border-top: var(--ni-1) solid var(--color-drawer-border);
 
       &:global(:not(.is-dragging)) {
         transition:
@@ -424,6 +504,31 @@
           --drawer-size: var(--initial-height);
         }
       }
+    }
+  }
+
+  :global(
+    .trakt-drawer:not([data-elevated="true"]):has(
+        ~ .trakt-drawer[data-elevated="true"][data-present="true"]
+      )
+  ) {
+    transition-duration: var(--drawer-slide-in-duration);
+    transition-timing-function: var(--drawer-slide-in-ease);
+    transform: translateX(
+        calc(
+          var(--rtl-sign, 1) *
+            (
+              var(--drawer-stack-scale) *
+                100% - var(--drawer-stack-top-width, 100%) - var(--ni-24)
+            )
+        )
+      )
+      scale(var(--drawer-stack-scale));
+    border-radius: var(--drawer-border-radius);
+
+    @include for-mobile {
+      transform: none;
+      border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0 0;
     }
   }
 
@@ -502,10 +607,14 @@
     padding-inline-end: var(--drawer-padding);
   }
 
+  .trakt-drawer-header {
+    padding-inline-end: var(--drawer-header-padding-end);
+  }
+
   .trakt-drawer-footer {
     padding-inline: var(--drawer-padding);
-    padding-top: var(--gap-s);
-    border-top: var(--ni-1) solid var(--color-drawer-border);
+    padding-top: var(--ni-16);
+    border-top: var(--border-thickness-xxs) solid var(--color-drawer-border);
 
     &[data-divider="fading"] {
       position: relative;
