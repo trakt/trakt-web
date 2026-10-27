@@ -42,12 +42,11 @@
     height: 100%;
 
     border-radius: inherit;
-    background-color: var(--color-watch-state-fill-done);
+    background-color: var(--color-watch-state-fill);
 
     transition: width var(--transition-duration-short) ease-out;
 
     [data-tone="lit"] > & {
-      background-color: var(--color-watch-state-fill);
       box-shadow: var(--shadow-watch-state-fill);
     }
   }

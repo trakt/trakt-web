@@ -290,7 +290,6 @@
   --color-watch-state-track: color-mix(in srgb, var(--shade-940) 8%, transparent);
   --color-watch-state-fill: var(--shade-940);
   --shadow-watch-state-fill: none;
-  --color-watch-state-fill-done: color-mix(in srgb, var(--shade-940) 30%, transparent);
 
   /*
    * Where to watch
@@ -928,7 +927,6 @@
   --color-watch-state-fill: var(--shade-10);
   --shadow-watch-state-fill: 0 0 var(--ni-12)
     color-mix(in srgb, var(--shade-10) 45%, transparent);
-  --color-watch-state-fill-done: color-mix(in srgb, var(--shade-10) 32%, transparent);
 
   /*
    * Where to watch
