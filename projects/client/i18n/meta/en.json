@@ -14752,6 +14752,10 @@
     "text_recap_upsell_story": {
       "default": "One story up to the last season you finished, with VIP",
       "description": "Text of the VIP upsell on the story tab of the season recap drawer."
+    },
+    "link_text_report_bug": {
+      "default": "Report a Bug",
+      "description": "Text for the link that takes users to the app's public issue tracker to report a bug or request a platform feature."
     }
   }
 }
