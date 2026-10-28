@@ -8,7 +8,7 @@
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import SummarySocialRow from "../../_internal/SummarySocialRow.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
-  import { useIsRateable } from "../../rating/_internal/useIsRateable";
+  import { useIsRateable } from "../../rating/useIsRateable";
   import type { MediaSummaryEntry } from "../models/MediaSummaryEntry";
   import MediaSummaryBody from "../MediaSummaryBody.svelte";
   import MediaActions from "./_internal/MediaActions.svelte";

@@ -13,6 +13,8 @@
   import type { PageProps } from "./$types";
   import { useShow } from "./useShow";
   import { useShowVideos } from "./useShowVideos";
+  import SummaryPageSkeleton from "$lib/sections/summary/SummaryPageSkeleton.svelte";
+  import { fade } from "svelte/transition";
 
   const { params }: PageProps = $props();
 
@@ -112,9 +114,23 @@
       currentSeason={effectiveSeason}
     />
   {:else}
-    <!-- TODO: remove this when we have empty state, currently prevents content jumps -->
+    <!--
+      Holds the page's height as the empty div used to, but with the header's
+      shape in it: a title you have not opened before was a blank screen for
+      as long as its request took.
+    -->
     <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-      <div style="height: 100dvh; display:flex"></div>
+      <div class="summary-loading" out:fade={{ duration: 200 }}>
+        <SummaryPageSkeleton />
+      </div>
     </RenderFor>
   {/if}
 </TraktPage>
+
+<style>
+  /* Keeps the page tall while the header is still a silhouette, so the lists
+     below do not slide up into place a moment later. */
+  .summary-loading {
+    min-height: 100dvh;
+  }
+</style>

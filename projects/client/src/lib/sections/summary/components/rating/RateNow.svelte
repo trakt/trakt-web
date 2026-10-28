@@ -9,21 +9,35 @@
   import { ratingDelight } from "./_internal/ratingDelight.ts";
   import RatingStars from "./_internal/RatingStars.svelte";
   import RottenTomato from "./_internal/RottenTomato.svelte";
-  import { useIsRateable } from "./_internal/useIsRateable";
+  import { useIsRateable } from "./useIsRateable";
   import type { RatingDelight } from "./models/RatingDelight.ts";
   import type { RateNowProps } from "./models/RateNowProps";
   import { useRatings } from "./useRatings";
 
   const {
     variant = "guard",
+    showFavorite = true,
     onclick,
     ...props
-  }: RateNowProps & { variant?: "allow" | "guard" } = $props();
+  }: RateNowProps & {
+    variant?: "allow" | "guard";
+    /**
+     * Whether the heart rides along with the stars. A caller that seats the
+     * favourite itself (the masthead puts it beside the rating mark) asks for
+     * `false` rather than getting it twice.
+     */
+    showFavorite?: boolean;
+  } = $props();
 
   const { isRateable } = $derived(useIsRateable(props));
 
   const type = $derived(props.type);
   const id = $derived(props.media.id);
+  // Seasons have no title of their own, so the toast falls back to a generic
+  // "Rated {rating}/10" message.
+  const title = $derived(
+    "title" in props.media ? props.media.title ?? undefined : undefined,
+  );
 
   const {
     pendingRating,
@@ -36,6 +50,7 @@
     useRatings({
       type,
       id,
+      title,
     }),
   );
 
@@ -94,7 +109,7 @@
 
       {#if $isQueued}<QueuedTag />{/if}
 
-      {#if props.type !== "episode" && props.type !== "season"}
+      {#if showFavorite && props.type !== "episode" && props.type !== "season"}
         <div
           class="trakt-favorite-action"
           transition:slideFade={{ duration: 300, axis: "x" }}

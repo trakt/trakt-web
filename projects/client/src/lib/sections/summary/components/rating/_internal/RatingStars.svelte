@@ -381,6 +381,9 @@
       gap: var(--gap-xs);
     }
 
+    // Every star keeps the same footprint at every state - the active one is
+    // called out with colour and opacity, never with size, so a selected row
+    // reads as one even sequence instead of one oversized trailing star.
     :global(.star-item) {
       display: inline-flex;
       cursor: pointer;
@@ -413,6 +416,7 @@
         bottom: calc(100% + var(--gap-l));
       }
 
+      // Lift only - no scale, so the star stays the size of its neighbours.
       :global(.star-item[data-highlighted]) {
         transform: translateY(-0.75rem) scale(1.2);
       }

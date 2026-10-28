@@ -14,7 +14,7 @@
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import SummaryTitle from "../../_internal/SummaryTitle.svelte";
   import { useMediaMetaInfo } from "../../media/useMediaMetaInfo";
-  import { useIsRateable } from "../../rating/_internal/useIsRateable";
+  import { useIsRateable } from "../../rating/useIsRateable";
   import type { EpisodeSummaryProps } from "./../../EpisodeSummaryProps";
   import EpisodeActions from "./EpisodeActions.svelte";
   import EpisodeSideActions from "./_internal/EpisodeSideActions.svelte";

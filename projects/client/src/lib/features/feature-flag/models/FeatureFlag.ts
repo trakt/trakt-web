@@ -7,4 +7,10 @@ export enum FeatureFlag {
   VipVeteran = 'vip-veteran',
   ShowEnding = 'show-ending',
   SeasonRecap = 'season-recap',
+  SummaryHeaderAnchored = 'summary-header-anchored',
+  SummaryHeaderMasthead = 'summary-header-masthead',
+  PeopleHeaderMasthead = 'people-header-masthead',
+  SummaryAwards = 'summary-awards',
+  SummaryGlanceStrip = 'summary-glance-strip',
+  PosterGradientBackdrop = 'poster-gradient-backdrop',
 }

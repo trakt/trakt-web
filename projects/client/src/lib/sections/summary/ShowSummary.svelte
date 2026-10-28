@@ -18,13 +18,13 @@
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
-  import MediaSummary from "./components/media/MediaSummary.svelte";
-  import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
+  import MediaSummaryHeader from "./components/media/header/MediaSummaryHeader.svelte";
   import Sentiment from "./components/sentiment/Sentiment.svelte";
   import SoundtrackList from "./components/soundtrack/SoundtrackList.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
   import SummaryDrawer from "./SummaryDrawer.svelte";
+  import { useIsRevampedSummaryHeader } from "./components/media/header/useIsRevampedSummaryHeader.ts";
 
   type ShowSummaryProps = {
     media: ShowEntry;
@@ -49,6 +49,13 @@
     realityCheck,
   }: ShowSummaryProps = $props();
 
+  /*
+    The revamped headers carry trivia themselves, at desktop only. Rendering the
+    section as well showed a title's trivia twice, so it stands down exactly where
+    the header covers it - see useIsRevampedSummaryHeader.
+  */
+  const isRevampedHeader = useIsRevampedSummaryHeader();
+
   const relatedLink = $derived(UrlBuilder.related.show(media.slug));
   const listsLink = $derived(UrlBuilder.popularLists.show(media.slug));
 
@@ -64,6 +71,7 @@
 </script>
 
 <SummaryDrawer
+  {streamOn}
   {sentiment}
   {realityCheck}
   {studios}
@@ -76,31 +84,46 @@
   type="show"
 />
 
-<RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  <MediaSummaryV2 {media} {intl} {crew} type="show" />
-</RenderFor>
+<MediaSummaryHeader
+  {media}
+  {intl}
+  {crew}
+  {streamOn}
+  {studios}
+  {sentiment}
+  {seasons}
+  type="show"
+>
+  {#snippet contextualContent()}
+    <RenderFor audience="all" device={["desktop"]}>
+      <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
+      <Sentiment
+        {sentiment}
+        {realityCheck}
+        slug={media.slug}
+        variant="inline"
+        type="show"
+      />
+    </RenderFor>
+  {/snippet}
+</MediaSummaryHeader>
 
-<RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-  <MediaSummary {media} {intl} {crew} {streamOn} type="show">
-    {#snippet contextualContent()}
-      <RenderFor audience="all" device={["desktop"]}>
-        <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
-        <Sentiment
-          {sentiment}
-          {realityCheck}
-          slug={media.slug}
-          variant="inline"
-          type="show"
-        />
-      </RenderFor>
-    {/snippet}
-  </MediaSummary>
-</RenderFor>
-
-<RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
-  <WhereToWatchList type="show" {media} {streamOn} />
-  <Sentiment {sentiment} {realityCheck} slug={media.slug} type="show" />
-</RenderFor>
+{#if $isRevampedHeader}
+  <!--
+    The masthead carries where-to-watch, sentiment and trivia itself down to
+    tablet-lg now (paged by the carousel), so the page's own copies render
+    only where the masthead does not: mobile and the small tablet.
+  -->
+  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    <WhereToWatchList type="show" {media} {streamOn} />
+    <Sentiment {sentiment} {realityCheck} slug={media.slug} type="show" />
+  </RenderFor>
+{:else}
+  <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
+    <WhereToWatchList type="show" {media} {streamOn} />
+    <Sentiment {sentiment} {realityCheck} slug={media.slug} type="show" />
+  </RenderFor>
+{/if}
 
 <SeasonList show={media} {seasons} {currentSeason} hasRecap />
 
@@ -136,4 +159,10 @@
   drilldownLink={listsLink}
 />
 
-<TriviaList {media} />
+{#if $isRevampedHeader}
+  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    <TriviaList {media} />
+  </RenderFor>
+{:else}
+  <TriviaList {media} />
+{/if}

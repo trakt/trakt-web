@@ -1,8 +1,11 @@
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
+import CrewIcon from '$lib/components/icons/CrewIcon.svelte';
+import DropIcon from '$lib/components/icons/DropIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FlagIcon from '$lib/components/icons/FlagIcon.svelte';
 import HourglassIcon from '$lib/components/icons/HourglassIcon.svelte';
+import IdIcon from '$lib/components/icons/IdIcon.svelte';
 import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
@@ -89,6 +92,48 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_season_recap(),
     addedAt: new Date('2026-10-27'),
     description: () => m.preview_feature_description_season_recap(),
+    audience: 'director',
+  },
+  [FeatureFlag.SummaryHeaderAnchored]: {
+    icon: IdIcon,
+    title: () => m.preview_feature_title_summary_header_anchored(),
+    addedAt: new Date('2026-10-28'),
+    description: () => m.preview_feature_description_summary_header_anchored(),
+    audience: 'director',
+  },
+  [FeatureFlag.SummaryHeaderMasthead]: {
+    icon: CoverImageIcon,
+    title: () => m.preview_feature_title_summary_header_masthead(),
+    addedAt: new Date('2026-10-28'),
+    description: () => m.preview_feature_description_summary_header_masthead(),
+    audience: 'director',
+  },
+  [FeatureFlag.PeopleHeaderMasthead]: {
+    icon: CrewIcon,
+    title: () => m.preview_feature_title_people_header_masthead(),
+    addedAt: new Date('2026-10-28'),
+    description: () => m.preview_feature_description_people_header_masthead(),
+    audience: 'director',
+  },
+  [FeatureFlag.SummaryAwards]: {
+    icon: SparkleStarIcon,
+    title: () => m.preview_feature_title_summary_awards(),
+    addedAt: new Date('2026-10-28'),
+    description: () => m.preview_feature_description_summary_awards(),
+    audience: 'director',
+  },
+  [FeatureFlag.SummaryGlanceStrip]: {
+    icon: SparkleStarIcon,
+    title: () => m.preview_feature_title_summary_glance_strip(),
+    addedAt: new Date('2026-10-28'),
+    description: () => m.preview_feature_description_summary_glance_strip(),
+    audience: 'director',
+  },
+  [FeatureFlag.PosterGradientBackdrop]: {
+    icon: DropIcon,
+    title: () => m.preview_feature_title_poster_gradient_backdrop(),
+    addedAt: new Date('2026-10-28'),
+    description: () => m.preview_feature_description_poster_gradient_backdrop(),
     audience: 'director',
   },
 };

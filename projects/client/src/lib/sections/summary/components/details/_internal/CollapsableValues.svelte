@@ -62,29 +62,52 @@
   </div>
 </div>
 
-<style>
-  .trakt-collapsable-values,
-  .trakt-collapsable-values-content {
+<style lang="scss">
+  /* Caps label over its values - one compact cell per fact. */
+  .trakt-collapsable-values {
     display: flex;
     flex-direction: column;
-    min-width: 0;
+    gap: var(--ni-4);
 
-    gap: var(--gap-xxs);
+    min-width: 0;
   }
 
   .trakt-collapsable-values-content {
-    .is-hidden {
+    display: flex;
+    flex-direction: column;
+    /*
+      Stretch, never flex-start: a start-aligned column sizes each row to its
+      CONTENT width, so a long value's box simply grew past the cell and over
+      the neighbouring column - unconstrained boxes neither wrap nor
+      ellipsize. Stretched, the row is the cell's width and the text handling
+      inside can finally do its job.
+    */
+    align-items: stretch;
+    text-align: start;
+    min-width: 0;
+
+    gap: var(--ni-2);
+
+    &.is-hidden {
       display: none;
     }
   }
 
   .trakt-displayable-value {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    align-items: baseline;
 
-    gap: var(--gap-xxs);
+    gap: var(--gap-xs);
 
     min-height: var(--ni-18);
+    min-width: 0;
+    max-width: 100%;
+
+    :global(.trakt-tooltip-trigger) {
+      display: flex;
+      min-width: 0;
+      max-width: 100%;
+    }
 
     :global(.trakt-link) {
       min-width: 0;

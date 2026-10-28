@@ -14905,6 +14905,228 @@
     "button_text_revoke": {
       "default": "Revoke",
       "description": "Confirm button in a dialog that revokes an app's access."
+    },
+    "action_toast_label_undo": {
+      "default": "Undo the last change",
+      "description": "Accessible label for the 'Undo' button in an action-confirmation toast."
+    },
+    "action_toast_rating_removed": {
+      "default": "Rating removed",
+      "description": "Confirmation toast shown after removing a rating."
+    },
+    "button_label_view_all_social_activity": {
+      "default": "View all social activity",
+      "description": "Aria-label for the button that allows users to view all social activity of the profiles they follow."
+    },
+    "button_label_view_awards": {
+      "default": "View all awards for {title}",
+      "description": "Aria-label for the control that opens the full awards view."
+    },
+    "button_label_view_recap": {
+      "default": "View your progress for {title}",
+      "description": "Aria-label for the control that opens the recap drawer."
+    },
+    "drawer_title_at_a_glance": {
+      "default": "{title} — at a glance",
+      "description": "Title of the side drawer summarizing every header section for a movie or show."
+    },
+    "header_awards": {
+      "default": "Awards",
+      "description": "Section label for the awards column in the summary header."
+    },
+    "header_credits_and_details": {
+      "default": "Credits & Details",
+      "description": "Section label in the summary header for the column holding the main credit and release facts. Its chevron opens the full media details drawer."
+    },
+    "header_nominations": {
+      "default": "Nominations",
+      "description": "Section label for award nominations that did not win."
+    },
+    "header_recap": {
+      "default": "Progress",
+      "description": "Section label for the viewer's own progress through a show - last seen episode, standing and time left."
+    },
+    "header_year": {
+      "default": "Year",
+      "description": "Field label for the release year in the summary header facts strip."
+    },
+    "link_label_view_person_credits": {
+      "default": "View all {credits} for {name}",
+      "description": "Aria-label for the linked credit counts in the person header. 'credits' is a category such as Movies or Shows; 'name' is the person."
+    },
+    "preview_feature_description_people_header_masthead": {
+      "default": "Rebuilds the person page as a magazine cover, with the headshot centre stage and their birth, age, height and socials centred beneath.",
+      "description": "Description for the masthead people header preview feature."
+    },
+    "preview_feature_description_poster_gradient_backdrop": {
+      "default": "Swaps the artwork behind the masthead's poster for a gradient drawn from the poster's own two dominant colours - and behind a person, from the poster of the title they are best known for - so the band always matches what stands in front of it.",
+      "description": "Description for the poster-colour backdrop preview feature."
+    },
+    "preview_feature_description_summary_awards": {
+      "default": "Surfaces awards and nominations in the movie and show header, alongside credits and sentiment.",
+      "description": "Description for the summary awards preview feature."
+    },
+    "preview_feature_description_summary_glance_strip": {
+      "default": "Folds the masthead's credits, listings, sentiment, awards, reactions and trivia columns into one compact pill that opens a drill-down drawer. Turn off to keep the full columns in the header.",
+      "description": "Description for the glance strip preview feature."
+    },
+    "preview_feature_description_summary_header_anchored": {
+      "default": "Rebuilds the movie and show header around one left edge, with facts in a ruled strip and actions rooted under the poster.",
+      "description": "Description for the anchored summary header preview feature."
+    },
+    "preview_feature_description_summary_header_masthead": {
+      "default": "Rebuilds the movie and show header as a magazine cover, with a backdrop band and centred title over a strip of credits, scores and listings.",
+      "description": "Description for the masthead summary header preview feature."
+    },
+    "preview_feature_title_people_header_masthead": {
+      "default": "Masthead person header",
+      "description": "Product feature name for the masthead people header preview feature."
+    },
+    "preview_feature_title_poster_gradient_backdrop": {
+      "default": "Poster-colour backdrop",
+      "description": "Product feature name for the preview that paints the masthead summary header's backdrop from the poster's colours instead of the artwork."
+    },
+    "preview_feature_title_summary_awards": {
+      "default": "Awards",
+      "description": "Product feature name for the summary awards preview feature."
+    },
+    "preview_feature_title_summary_glance_strip": {
+      "default": "At-a-glance strip",
+      "description": "Product feature name for the compact glance strip in the masthead summary header."
+    },
+    "preview_feature_title_summary_header_anchored": {
+      "default": "Anchored header",
+      "description": "Product feature name for the anchored summary header preview feature."
+    },
+    "preview_feature_title_summary_header_masthead": {
+      "default": "Masthead header",
+      "description": "Product feature name for the masthead summary header preview feature."
+    },
+    "text_award_nominated": {
+      "default": "Nominated",
+      "description": "Qualifier marking an award the title was nominated for but did not win."
+    },
+    "text_award_won": {
+      "default": "Won",
+      "description": "Qualifier marking an award the title won, shown before the category."
+    },
+    "text_friends_count": {
+      "default": "{count} friends",
+      "description": "Lead term of the social activity column's subline: how many people the viewer follows have activity on this title. Plural form.",
+      "variables": {
+        "count": {
+          "description": "Number of friends with activity on the title."
+        }
+      }
+    },
+    "text_friends_count_one": {
+      "default": "{count} friend",
+      "description": "Singular form of text_friends_count, used when exactly one friend has activity on the title.",
+      "variables": {
+        "count": {
+          "description": "Always 1."
+        }
+      }
+    },
+    "text_glance_drill_hint": {
+      "default": "Tap a section to drill down",
+      "description": "Hint at the foot of the at-a-glance drawer explaining that sections open detailed views."
+    },
+    "text_glance_fact_count": {
+      "default": "{count} facts",
+      "description": "Compact header token: how many trivia facts the drilldown holds."
+    },
+    "text_included": {
+      "default": "included",
+      "description": "Qualifier after a streaming offer, meaning the title is part of the subscription at no extra cost. Shown as 'Stream · included'."
+    },
+    "text_just_watch": {
+      "default": "JustWatch",
+      "description": "Lead term of the where-to-watch column's subline in the masthead summary header. 'JustWatch' is the data provider's brand name and must not be translated."
+    },
+    "text_just_watch_rank": {
+      "default": "JustWatch · rank {rank}",
+      "description": "Attribution subhead for the where-to-watch section. 'JustWatch' is the data provider's brand name and must not be translated; 'rank' is the title's popularity position."
+    },
+    "text_not_available_to_stream": {
+      "default": "Not available to stream",
+      "description": "Empty state shown in the summary header when no streaming provider carries the title in the user's region."
+    },
+    "text_person_awards_count": {
+      "default": "{count} Awards",
+      "description": "Golden pill on the person page counting awards won."
+    },
+    "text_person_awards_count_one": {
+      "default": "{count} Award",
+      "description": "Golden pill on the person page when exactly one award was won."
+    },
+    "text_person_nominations_count": {
+      "default": "{count} Nominations",
+      "description": "Golden pill on the person page counting nominations, shown when there are no wins."
+    },
+    "text_person_nominations_count_one": {
+      "default": "{count} Nomination",
+      "description": "Golden pill on the person page when there is exactly one nomination and no wins."
+    },
+    "text_rank": {
+      "default": "rank {rank}",
+      "description": "The JustWatch streaming rank, shown after 'JustWatch ·' on the where-to-watch column's subline. Lowercase because it continues the line.",
+      "variables": {
+        "rank": {
+          "description": "The title's current JustWatch streaming rank, e.g. 5."
+        }
+      }
+    },
+    "text_recap_behind": {
+      "default": "{count} behind",
+      "description": "How many aired episodes the viewer has not watched yet."
+    },
+    "text_recap_caught_up": {
+      "default": "Up to date",
+      "description": "Shown in place of the behind-count when the viewer has watched every aired episode."
+    },
+    "text_recap_last_seen": {
+      "default": "Last seen",
+      "description": "Label preceding the last watched episode marker in the recap section."
+    },
+    "text_recap_previously": {
+      "default": "{season} Recap",
+      "description": "Label for a season's overview in the recap - e.g. Season 2 Recap - used for the between-seasons blurb and the collapsible earlier-season rows."
+    },
+    "text_recap_time_left": {
+      "default": "{duration} left",
+      "description": "Remaining watch time for the show, e.g. 8h 20m left."
+    },
+    "text_share_person": {
+      "default": "Check out {name} on Trakt! 🎭",
+      "description": "Text for sharing a person (actor, director, etc.).",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_trivia_facts_count": {
+      "default": "{count} facts",
+      "description": "Lead term of the trivia column's subline in the masthead summary header: how many spoiler-free trivia facts the title has. Plural form.",
+      "variables": {
+        "count": {
+          "description": "Number of trivia facts."
+        }
+      }
+    },
+    "text_trivia_facts_count_one": {
+      "default": "{count} fact",
+      "description": "Singular form of text_trivia_facts_count, used when the title has exactly one trivia fact.",
+      "variables": {
+        "count": {
+          "description": "Always 1."
+        }
+      }
+    },
+    "tooltip_rate_requires_watch": {
+      "default": "Mark as watched before rating / adding to favorites",
+      "description": "Tooltip on the disabled rating star and favorite heart in the summary header, explaining that both need the title to be watched first."
     }
   }
 }

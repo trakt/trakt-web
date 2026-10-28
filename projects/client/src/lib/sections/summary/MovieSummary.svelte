@@ -17,13 +17,13 @@
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
-  import MediaSummary from "./components/media/MediaSummary.svelte";
-  import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
+  import MediaSummaryHeader from "./components/media/header/MediaSummaryHeader.svelte";
   import Sentiment from "./components/sentiment/Sentiment.svelte";
   import SoundtrackList from "./components/soundtrack/SoundtrackList.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
   import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
   import SummaryDrawer from "./SummaryDrawer.svelte";
+  import { useIsRevampedSummaryHeader } from "./components/media/header/useIsRevampedSummaryHeader.ts";
 
   const {
     media,
@@ -44,6 +44,13 @@
     youtubeSpecial: YouTubeSpecial | Nil;
   } & CommonMediaSummaryProps = $props();
 
+  /*
+    The revamped headers carry trivia themselves, at desktop only. Rendering the
+    section as well showed a title's trivia twice, so it stands down exactly where
+    the header covers it - see useIsRevampedSummaryHeader.
+  */
+  const isRevampedHeader = useIsRevampedSummaryHeader();
+
   const relatedLink = $derived(UrlBuilder.related.movie(media.slug));
   const listsLink = $derived(UrlBuilder.popularLists.movie(media.slug));
 </script>
@@ -59,37 +66,51 @@
   type="movie"
 />
 
-<RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  <MediaSummaryV2 {media} {crew} {intl} type="movie" />
-</RenderFor>
+<MediaSummaryHeader
+  {media}
+  {intl}
+  {streamOn}
+  {crew}
+  {studios}
+  {sentiment}
+  type="movie"
+>
+  {#snippet contextualContent()}
+    <RenderFor audience="all" device={["desktop"]}>
+      <WhereToWatchList
+        type="movie"
+        {media}
+        {streamOn}
+        {youtubeSpecial}
+        variant="inline"
+      />
+      <Sentiment
+        {sentiment}
+        {realityCheck}
+        slug={media.slug}
+        variant="inline"
+        type="movie"
+      />
+    </RenderFor>
+  {/snippet}
+</MediaSummaryHeader>
 
-<RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-  <MediaSummary {media} {intl} {streamOn} {crew} type="movie">
-    {#snippet contextualContent()}
-      <RenderFor audience="all" device={["desktop"]}>
-        <WhereToWatchList
-          type="movie"
-          {media}
-          {streamOn}
-          {youtubeSpecial}
-          variant="inline"
-        />
-        <Sentiment
-          {sentiment}
-          {realityCheck}
-          slug={media.slug}
-          variant="inline"
-          type="movie"
-        />
-      </RenderFor>
-    {/snippet}
-  </MediaSummary>
-</RenderFor>
-
-<RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
-  <WhereToWatchList type="movie" {media} {streamOn} {youtubeSpecial} />
-  <Sentiment {sentiment} {realityCheck} slug={media.slug} type="movie" />
-</RenderFor>
+{#if $isRevampedHeader}
+  <!--
+    The masthead carries where-to-watch, sentiment and trivia itself down to
+    tablet-lg (paged by the carousel), so the page's own copies render only
+    where the masthead does not: mobile and the small tablet.
+  -->
+  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    <WhereToWatchList type="movie" {media} {streamOn} {youtubeSpecial} />
+    <Sentiment {sentiment} {realityCheck} slug={media.slug} type="movie" />
+  </RenderFor>
+{:else}
+  <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
+    <WhereToWatchList type="movie" {media} {streamOn} {youtubeSpecial} />
+    <Sentiment {sentiment} {realityCheck} slug={media.slug} type="movie" />
+  </RenderFor>
+{/if}
 
 <CastList
   title={m.list_title_actors()}
@@ -123,4 +144,10 @@
   drilldownLink={listsLink}
 />
 
-<TriviaList {media} />
+{#if $isRevampedHeader}
+  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    <TriviaList {media} />
+  </RenderFor>
+{:else}
+  <TriviaList {media} />
+{/if}

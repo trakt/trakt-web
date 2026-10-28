@@ -6,7 +6,7 @@
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import MediaSummaryBody from "../../media/MediaSummaryBody.svelte";
   import type { MediaSummaryEntry } from "../../media/models/MediaSummaryEntry";
-  import { useIsRateable } from "../../rating/_internal/useIsRateable";
+  import { useIsRateable } from "../../rating/useIsRateable";
   import MediaGlanceActions from "./MediaGlanceActions.svelte";
 
   const {

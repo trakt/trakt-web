@@ -27,7 +27,7 @@
   import SpoilerSection from "$lib/sections/summary/components/_internal/SpoilerSection.svelte";
   import EpisodeActions from "$lib/sections/summary/components/episode/v2/EpisodeActions.svelte";
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
-  import { useIsRateable } from "$lib/sections/summary/components/rating/_internal/useIsRateable.ts";
+  import { useIsRateable } from "$lib/sections/summary/components/rating/useIsRateable.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";

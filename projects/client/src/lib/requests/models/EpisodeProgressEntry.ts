@@ -8,6 +8,18 @@ export const EpisodeProgressEntrySchema = EpisodeEntrySchema.merge(
     remaining: z.number(),
     minutesLeft: z.number(),
     isLatestAired: z.boolean(),
+    /*
+      The user's furthest watched episode - "what you saw last". Only the show
+      progress query populates it; up-next entries leave it unset.
+    */
+    lastEpisode: z
+      .object({
+        season: z.number(),
+        number: z.number(),
+        title: z.string(),
+        overview: z.string(),
+      })
+      .nullish(),
   }),
 );
 export type EpisodeProgressEntry = z.infer<typeof EpisodeProgressEntrySchema>;

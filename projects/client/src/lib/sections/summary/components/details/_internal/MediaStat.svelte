@@ -2,26 +2,20 @@
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-  import type { Snippet } from "svelte";
 
   type MediaStatProps = {
     value: number;
     text: string;
     isLoading: boolean;
-    icon: Snippet;
   };
 
-  const { value, text, isLoading, icon }: MediaStatProps = $props();
+  const { value, text, isLoading }: MediaStatProps = $props();
 </script>
 
 <div class="trakt-media-stat">
-  <div class="stat-icon">
-    {@render icon()}
-  </div>
+  <span class="stat-label">{text}</span>
 
-  <span class="secondary">{text}</span>
-
-  <span class="bold">
+  <span class="stat-value bold">
     {#if isLoading}
       <Skeleton width="var(--ni-32)" height="1lh" />
     {:else}
@@ -31,30 +25,34 @@
 </div>
 
 <style>
+  /*
+    A figure over its name, on its own dark panel. The panels do the
+    separating - from the description above, the details below - so the
+    stats row needs no hairline bands of its own.
+  */
   .trakt-media-stat {
-    box-shadow: var(--shadow-base);
-
-    background-color: var(--color-card-background);
-
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: var(--gap-xxs);
-
-    border-radius: var(--border-radius-m);
-
-    padding: var(--ni-12);
+    gap: var(--ni-4);
 
     flex: 1;
+
+    padding: var(--ni-10) var(--ni-12);
+    box-sizing: border-box;
+    border-radius: var(--border-radius-m);
+    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
   }
 
-  .stat-icon {
-    display: flex;
+  .stat-label {
+    font-size: var(--font-size-tag);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
     color: var(--color-text-secondary);
-
-    :global(svg) {
-      width: var(--ni-12);
-      height: var(--ni-12);
-    }
   }
+
+  .stat-value {
+    font-size: var(--ni-20);
+  }
+
 </style>

@@ -67,25 +67,22 @@
 </script>
 
 {#snippet badge()}
-  {#if $hasSpoilers || $categories.length > 1}
-    <div class="trivia-controls">
-      {#if $hasSpoilers}
-        <Toggler value={$triviaType.value} onChange={set} {options} />
-      {/if}
-      {#if $categories.length > 1}
-        <div class="category-filter">
-          <SingleSelect
-            options={categoryOptions}
-            value={effectiveCategory === "all" ? null : effectiveCategory}
-            placeholder={m.option_text_trivia_category_all()}
-            autoWidth
-            onChange={(value) =>
-              (activeCategory = value as TriviaCategory | "all")}
-          />
-        </div>
-      {/if}
-    </div>
-  {/if}
+  <div class="trivia-badge">
+    <span class="trivia-count">{$list.length}</span>
+    {#if $hasSpoilers}
+      <Toggler value={$triviaType.value} onChange={set} {options} />
+    {/if}
+    {#if $categories.length > 1}
+      <SingleSelect
+        options={categoryOptions}
+        value={effectiveCategory === "all" ? null : effectiveCategory}
+        placeholder={m.option_text_trivia_category_all()}
+        autoWidth
+        onChange={(value) =>
+          (activeCategory = value as TriviaCategory | "all")}
+      />
+    {/if}
+  </div>
 {/snippet}
 
 <Drawer
@@ -115,26 +112,31 @@
   {/if}
 </Drawer>
 
-<style>
-  .trivia-controls {
+<style lang="scss">
+  .trivia-badge {
     display: flex;
     align-items: center;
-    gap: var(--gap-xs);
-    flex: 1;
-    min-width: 0;
+    gap: var(--gap-s);
   }
 
-  .category-filter {
-    display: flex;
-    margin-inline-start: auto;
-    min-width: 0;
+  .trivia-count {
+    font-size: var(--font-size-tag);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    color: var(--color-text-secondary);
   }
 
   .trivia-drawer-list {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--ni-20);
 
-    padding: var(--ni-2);
+    /* The sentiment drawer's supplemental prose inset - one tuning. */
+    padding: 0 var(--gap-s) var(--gap-s);
+
+    :global(.trakt-trivia-card + .trakt-trivia-card) {
+      padding-top: var(--ni-20);
+      border-top: var(--ni-1) solid var(--color-hairline);
+    }
   }
 </style>

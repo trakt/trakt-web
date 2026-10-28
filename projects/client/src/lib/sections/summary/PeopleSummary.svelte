@@ -7,6 +7,9 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CreditsList from "../lists/CreditsList.svelte";
   import CreditsHistoryList from "../lists/history/CreditsHistoryList.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import PeopleMastheadHeader from "./components/people/PeopleMastheadHeader.svelte";
   import PeopleSummary from "./components/people/PeopleSummary.svelte";
   import PeopleSummaryV2 from "./components/people/v2/PeopleSummary.svelte";
 
@@ -21,13 +24,24 @@
   const { mode } = useDiscover();
 </script>
 
-<RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  <PeopleSummaryV2 {person} />
-</RenderFor>
+<!--
+  The masthead treatment carries every width itself, so it replaces both shipped
+  headers rather than only the desktop one - see MediaSummaryHeader for why the
+  device split is not left in two places.
+-->
+<RenderForFeature flag={FeatureFlag.PeopleHeaderMasthead} audience="director">
+  {#snippet enabled()}
+    <PeopleMastheadHeader {person} />
+  {/snippet}
 
-<RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-  <PeopleSummary {person} />
-</RenderFor>
+  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    <PeopleSummaryV2 {person} />
+  </RenderFor>
+
+  <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
+    <PeopleSummary {person} />
+  </RenderFor>
+</RenderForFeature>
 
 {#if $mode === "media" || $mode === "movie"}
   <CreditsList

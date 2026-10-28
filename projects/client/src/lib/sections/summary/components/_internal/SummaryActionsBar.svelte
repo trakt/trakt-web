@@ -53,14 +53,18 @@
     position: relative;
 
     height: var(--actions-bar-height);
-    width: var(--ni-280);
+    /* Configurable so a container can stretch the tray to its own measure -
+       the revamped header's poster rail fills its 264px column. */
+    width: var(--summary-actions-bar-width, var(--ni-280));
 
     padding: var(--actions-bar-inset);
     box-sizing: border-box;
 
     background-color: var(--color-actions-bar-background);
     border-radius: var(--actions-bar-radius);
-    box-shadow: var(--shadow-raised);
+    /* Configurable so a caller can opt out of the lift: on a flat surface the
+       raised shadow reads as a halo around the tray, not as elevation. */
+    box-shadow: var(--summary-actions-bar-shadow, var(--shadow-raised));
 
     transition: border-radius var(--popup-transition-duration) ease-in-out;
     transition-delay: calc(var(--popup-transition-duration) / 2);
@@ -84,7 +88,13 @@
     }
 
     @include for-tablet-sm-and-below {
-      width: var(--summary-poster-width);
+      /*
+        The configured width must keep winning here. Without it, a caller that
+        configures the tray (e.g. fit-content) got the poster width only below
+        tablet-sm - wider than its desktop size, so the tray grew as the window
+        shrank. Unconfigured callers keep matching the poster, as shipped.
+      */
+      width: var(--summary-actions-bar-width, var(--summary-poster-width));
       &:global(:has(.trakt-media-actions-popup-button.is-opened)) {
         border-radius: var(--actions-bar-radius);
       }

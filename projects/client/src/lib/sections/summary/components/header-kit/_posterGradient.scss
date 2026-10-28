@@ -1,0 +1,34 @@
+/*
+  The backdrop band painted from a poster's two dominant colours instead of
+  artwork, shared so the title and person mastheads cannot drift apart on it.
+
+  Two blooms, one per colour, anchored at the top corners and meeting over a
+  blend of the pair, so the band has a direction to it rather than reading as one
+  flat tint. The host applies its own dissolve on top - see _backdropDissolve.
+
+  Reads `--backdrop-color-one` / `--backdrop-color-two`; the colours are data
+  from the API, not theme tokens, which is why they arrive as custom properties.
+*/
+@mixin poster-gradient {
+  background:
+    radial-gradient(
+    80% 130% at 15% 0%,
+    var(--backdrop-color-one) 0%,
+    transparent 65%
+  ),
+    radial-gradient(
+    80% 130% at 85% 0%,
+    var(--backdrop-color-two) 0%,
+    transparent 65%
+  ),
+    linear-gradient(
+    180deg,
+    color-mix(
+      in srgb,
+      var(--backdrop-color-one) 55%,
+      var(--backdrop-color-two)
+    )
+    0%,
+    var(--backdrop-color-two) 100%
+  );
+}

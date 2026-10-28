@@ -16,4 +16,5 @@ export enum SummaryDrawers {
   Ratings = 'ratings',
   Rewatching = 'rewatching',
   SeasonRecap = 'season-recap',
+  Glance = 'glance',
 }

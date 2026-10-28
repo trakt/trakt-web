@@ -8,6 +8,7 @@
   import type { Season } from "$lib/requests/models/Season";
   import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
+  import type { StreamOn } from "$lib/requests/models/StreamOn";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import type { YouTubeSpecial } from "$lib/requests/models/YouTubeSpecial.ts";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
@@ -18,6 +19,7 @@
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import ShowCastDrawerHost from "./components/cast/ShowCastDrawerHost.svelte";
   import CastDrawerHost from "./components/cast/CastDrawerHost.svelte";
+  import GlanceDrawerHost from "./components/media/header/GlanceDrawerHost.svelte";
   import type { CommentsProps } from "./components/comments/CommentsProps";
   import CommentsDrawerHost from "./components/comments/drawers/CommentsDrawerHost.svelte";
   import ReviewDrawerHost from "./components/comments/drawers/ReviewDrawerHost.svelte";
@@ -43,6 +45,7 @@
     videos,
     seasons,
     currentSeason,
+    streamOn,
     youtubeSpecial,
     ...details
   }: {
@@ -51,6 +54,7 @@
     videos?: MediaVideo[];
     seasons?: Season[];
     currentSeason?: number;
+    streamOn?: StreamOn;
     youtubeSpecial?: YouTubeSpecial | Nil;
   } & MediaDetailsProps = $props();
 
@@ -247,6 +251,18 @@
     commentId={sourceCommentId}
     elevated={drawer === SummaryDrawers.Episode}
     onClose={closeCommentDrawer}
+  />
+{/if}
+
+{#if drawer === SummaryDrawers.Glance && details.type !== "episode"}
+  <GlanceDrawerHost
+    entry={details.type === "show"
+      ? { type: "show", media: details.media }
+      : { type: "movie", media: details.media }}
+    crew={details.crew}
+    {sentiment}
+    {streamOn}
+    onClose={close}
   />
 {/if}
 

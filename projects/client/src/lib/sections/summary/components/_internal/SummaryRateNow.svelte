@@ -18,6 +18,7 @@
 
     width: 100%;
 
+
     :global(.trakt-action-button[disabled]) {
       background-color: transparent;
       opacity: 0.3;
