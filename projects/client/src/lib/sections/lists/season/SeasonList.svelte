@@ -66,8 +66,15 @@
     hasRecap && $isSeasonRecapEnabled && (isLargeScreen || hasSingleSeason),
   );
 
+  /* One season needs no season label: the rail is simply the episodes, with
+     how many there are beside it. */
   const episodeProps = $derived.by(() => {
-    if (hasSingleSeason) return { title, subtitle };
+    if (hasSingleSeason) {
+      return {
+        title: m.list_title_episodes(),
+        count: seasons.at(0)?.episodes.count,
+      };
+    }
     return isLargeScreen ? { title } : {};
   });
 </script>

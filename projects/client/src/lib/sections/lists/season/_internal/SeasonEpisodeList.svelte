@@ -28,6 +28,7 @@
     /** The season picker and its recap, beside the label. */
     headerFilters?: Snippet;
     subtitle?: string;
+    count?: number;
     currentEpisode?: number;
   };
 
@@ -37,6 +38,7 @@
     episodes,
     title,
     subtitle,
+    count,
     headerFilters,
     currentEpisode,
   }: SeasonEpisodeListProps = $props();
@@ -168,6 +170,7 @@
   overlay={countLabels}
   {title}
   {subtitle}
+  {count}
   filters={headerFilters}
   --list-inset-top={isLargeScreen && hasMoved ? "var(--ni-28)" : undefined}
   --list-end-spacer={isLargeScreen ? '""' : undefined}
