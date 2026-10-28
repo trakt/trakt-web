@@ -124,7 +124,7 @@
         --poster-fan-step: var(--ni-18);
         --poster-fan-tilt: 6deg;
 
-        box-shadow: var(--shadow-today-entry-hover);
+        box-shadow: var(--shadow-navbar-entry-hover);
       }
     }
   }

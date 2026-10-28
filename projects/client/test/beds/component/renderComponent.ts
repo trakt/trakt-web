@@ -4,13 +4,14 @@ import ComponentTestBed from './ComponentTestBed.svelte';
 
 type RenderComponentProps<T extends Record<string, unknown>> = {
   props: T;
+  withFilters?: boolean;
 };
 
 export function renderComponent<T extends Record<string, unknown>>(
   component: Component<T>,
-  { props }: RenderComponentProps<T>,
+  { props, withFilters = false }: RenderComponentProps<T>,
 ) {
   return render(ComponentTestBed, {
-    props: { component, props },
+    props: { component, props, withFilters },
   });
 }

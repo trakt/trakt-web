@@ -44,19 +44,53 @@
 
   border-radius: var(--border-radius-pill);
   background:
-    var(--background-today-entry),
+    var(--background-navbar-entry),
     color-mix(in srgb, var(--color-background-navbar) 75%, transparent);
   backdrop-filter: blur(var(--ni-8));
-  box-shadow: var(--shadow-today-entry);
+  box-shadow: var(--shadow-navbar-entry);
   color: var(--color-text-primary);
 
   transition: box-shadow var(--transition-increment) ease-in-out;
 
   @include for-mouse {
     &:hover {
-      box-shadow: var(--shadow-today-entry-hover);
+      box-shadow: var(--shadow-navbar-entry-hover);
     }
   }
+}
+
+@mixin navbar-entry-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-xs);
+
+  box-sizing: border-box;
+  min-width: 0;
+  height: var(--navbar-entry-size);
+  padding-inline: var(--entry-inset-start) var(--entry-inset-end);
+
+  border-radius: inherit;
+  text-decoration: none;
+
+  @include for-mobile {
+    justify-content: center;
+    padding-inline: 0;
+  }
+}
+
+@mixin navbar-entry-corner-chip {
+  position: absolute;
+  top: calc(-1 * var(--ni-6));
+  inset-inline-end: calc(-1 * var(--ni-6));
+
+  border: var(--border-thickness-xs) solid var(--color-background);
+  background:
+    linear-gradient(
+      var(--color-navbar-entry-chip-background),
+      var(--color-navbar-entry-chip-background)
+    ),
+    var(--color-background);
 }
 
 @mixin floating-list($position: relative) {

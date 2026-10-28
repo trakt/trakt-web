@@ -9,11 +9,13 @@
     contentToggle,
     toastActions,
     mode,
+    entry,
     hasFilters,
     showFilters,
     smartListTarget,
     headerActions,
     leadingActions,
+    entryLeadingActions,
     header,
     sidebar,
   }: NavbarStateSetterProps = $props();
@@ -30,6 +32,7 @@
       smartListTarget,
       headerActions,
       leadingActions,
+      entryLeadingActions,
       header,
       sidebar,
     });
@@ -39,6 +42,7 @@
     globalSet({
       ...(toastActions !== undefined && { toastActions }),
       ...(mode !== undefined && { mode }),
+      ...(entry !== undefined && { entry }),
     });
   });
 
