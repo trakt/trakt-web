@@ -37,6 +37,7 @@
     placeholder={m.dropdown_label_person_position()}
     disabled={allPositions.length <= 1}
     autoWidth
+    variant="pill"
     onChange={onPositionChange}
   />
 {/if}

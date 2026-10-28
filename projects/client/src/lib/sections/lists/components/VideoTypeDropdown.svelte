@@ -26,6 +26,7 @@
     value={active}
     placeholder={m.dropdown_label_extras()}
     autoWidth
+    variant="pill"
     onChange={(value) => onchange(value as MediaVideo["type"])}
   />
 {/if}

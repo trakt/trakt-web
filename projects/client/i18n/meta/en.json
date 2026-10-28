@@ -5303,7 +5303,7 @@
       "description": "Label marking the viewer's own entry in the leaderboard."
     },
     "text_view_all": {
-      "default": "View all",
+      "default": "View All",
       "description": "Text for the link at the end of a section header that opens every item in that section."
     },
     "text_play_count": {

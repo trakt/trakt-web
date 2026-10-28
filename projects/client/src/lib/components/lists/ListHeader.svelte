@@ -241,9 +241,11 @@
       transition: color var(--transition-increment) ease-in-out;
     }
 
+    /* The words read white; the chevron keeps the quieter link colour. */
     .view-all-text {
       font-size: var(--font-size-text);
       font-weight: 400;
+      color: var(--color-text-primary);
     }
 
     :global(svg) {
