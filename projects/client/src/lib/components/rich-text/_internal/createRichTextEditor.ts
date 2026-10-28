@@ -16,6 +16,11 @@ export type CreateRichTextEditorProps = {
   onMentionKeyDown: (event: KeyboardEvent) => boolean;
 };
 
+function focusAtEnd(editor: Editor) {
+  editor.view.dom.focus({ preventScroll: true });
+  editor.commands.focus('end');
+}
+
 export async function createRichTextEditor({
   element,
   markdown,
@@ -46,7 +51,6 @@ export async function createRichTextEditor({
 
   return new Editor({
     element,
-    autofocus: autofocus ? 'end' : false,
     content: markdown,
     contentType: 'markdown',
     extensions: [
@@ -78,5 +82,9 @@ export async function createRichTextEditor({
     },
     onUpdate: ({ editor }) => onUpdate(editor),
     onTransaction: ({ editor }) => onTransaction(editor),
+    onCreate: ({ editor }) => {
+      if (!autofocus) return;
+      focusAtEnd(editor);
+    },
   });
 }
