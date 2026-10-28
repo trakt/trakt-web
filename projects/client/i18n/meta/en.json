@@ -6521,6 +6521,18 @@
       "default": "Highlight",
       "description": "Header for the section that displays the highlight of a movie or show sentiment analysis."
     },
+    "text_sentiment_the_verdict": {
+      "default": "The verdict",
+      "description": "Band label over the sentiment analysis prose in the sentiment drawer."
+    },
+    "header_sentiment_working": {
+      "default": "Pros",
+      "description": "Band label over what reviewers praise, in the sentiment drawer."
+    },
+    "header_sentiment_not_working": {
+      "default": "Cons",
+      "description": "Band label over what reviewers criticize, in the sentiment drawer."
+    },
     "header_sentiment_aspects": {
       "default": "Pros & Cons",
       "description": "Header for the section that displays the pros and cons of a movie or show sentiment analysis."

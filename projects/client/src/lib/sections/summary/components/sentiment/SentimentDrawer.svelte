@@ -13,8 +13,10 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import RealityCheckTab from "../reality-check/RealityCheckTab.svelte";
+  import { useIsRevampedSummaryHeader } from "../media/header/useIsRevampedSummaryHeader.ts";
   import type { InsightsOpenSource } from "./models/InsightsOpenSource.ts";
   import type { InsightsTab } from "./models/InsightsTab.ts";
+  import SentimentBands from "./_internal/SentimentBands.svelte";
   import SentimentContent from "./_internal/SentimentContent.svelte";
   import SentimentContentSkeleton from "./_internal/SentimentContentSkeleton.svelte";
   import SentimentUpsell from "./_internal/SentimentUpsell.svelte";
@@ -35,6 +37,9 @@
   } = $props();
 
   let isOpen = $state(false);
+
+  /* Behind the revamped headers, the drawer speaks their language too. */
+  const isRevampedHeader = useIsRevampedSummaryHeader();
   let activeTab = $state(
     page.url.searchParams.get(TAB_PARAM) === SENTIMENT_TAB
       ? SENTIMENT_TAB
@@ -72,7 +77,9 @@
 {#snippet sentimentView()}
   {#if sentiment !== null}
     <RenderFor audience="vip">
-      {#if sentiment}
+      {#if sentiment && $isRevampedHeader}
+        <SentimentBands {sentiment} />
+      {:else if sentiment}
         <SentimentContent {sentiment} />
       {:else}
         <SentimentContentSkeleton />
