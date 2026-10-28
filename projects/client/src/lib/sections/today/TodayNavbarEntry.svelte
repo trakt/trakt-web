@@ -54,7 +54,12 @@
 </script>
 
 {#if link}
-  <div class="trakt-today-navbar-entry" data-seen={unseen.length === 0}>
+  <div
+    class="trakt-today-navbar-entry"
+    class:has-faces={faces.length > 0}
+    class:has-count={unseen.length > 0}
+    data-seen={unseen.length === 0}
+  >
     <Link
       href={link.href}
       noscroll={link.noscroll}
@@ -63,33 +68,27 @@
       navigationType={DpadNavigationType.Item}
       color="inherit"
     >
-      <div
-        class="entry-pill"
-        class:has-faces={faces.length > 0}
-        class:has-count={unseen.length > 0}
-      >
-        <span class="entry-shine" aria-hidden="true"></span>
+      <span class="entry-shine" aria-hidden="true"></span>
 
-        <div class="entry-posters">
-          {#each posters as poster (poster.key)}
-            <div class="entry-poster">
-              <CrossOriginImage src={poster.poster.url.thumb} alt="" />
-            </div>
-          {/each}
-        </div>
+      <span class="entry-posters">
+        {#each posters as poster (poster.key)}
+          <span class="entry-poster">
+            <CrossOriginImage src={poster.poster.url.thumb} alt="" />
+          </span>
+        {/each}
+      </span>
 
-        {#if faces.length > 0}
-          <div class="entry-faces">
-            <TodayFaces users={faces} size="small" />
-          </div>
-        {/if}
+      {#if faces.length > 0}
+        <span class="entry-faces">
+          <TodayFaces users={faces} size="small" />
+        </span>
+      {/if}
 
-        <span class="entry-label">{m.list_title_today()}</span>
+      <span class="entry-label">{m.list_title_today()}</span>
 
-        {#if unseen.length > 0}
-          <span class="bold entry-badge">{unseen.length}</span>
-        {/if}
-      </div>
+      {#if unseen.length > 0}
+        <span class="bold entry-badge">{unseen.length}</span>
+      {/if}
     </Link>
   </div>
 {/if}
@@ -98,31 +97,28 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-today-navbar-entry {
-    --entry-size: var(--segmented-select-segment-height);
-    --entry-count-size: var(--ni-20);
+    --entry-inset-start: var(--ni-12);
+    --entry-inset-end: var(--ni-12);
     --entry-shine-cycle: 60s;
     --entry-shine-delay: 3s;
 
-    display: flex;
+    position: relative;
+    display: grid;
+    min-width: 0;
+    border-radius: inherit;
 
-    .entry-pill {
-      --entry-inset-start: var(--ni-12);
-      --entry-inset-end: var(--ni-12);
+    &.has-faces {
+      --entry-inset-start: var(--ni-3);
+    }
 
-      @include navbar-entry-surface;
+    &.has-count {
+      --entry-inset-end: calc(
+        (var(--navbar-entry-size) - var(--navbar-entry-chip-size)) / 2
+      );
+    }
 
-      vertical-align: top;
-      padding-inline: var(--entry-inset-start) var(--entry-inset-end);
-
-      &.has-faces {
-        --entry-inset-start: var(--ni-3);
-      }
-
-      &.has-count {
-        --entry-inset-end: calc(
-          (var(--entry-size) - var(--entry-count-size)) / 2
-        );
-      }
+    :global(.trakt-link) {
+      @include navbar-entry-link;
     }
 
     .entry-shine {
@@ -188,6 +184,7 @@
     .entry-label {
       color: inherit;
       font-weight: 500;
+      white-space: nowrap;
     }
 
     .entry-badge {
@@ -195,29 +192,21 @@
       align-items: center;
       justify-content: center;
 
-      min-width: var(--entry-count-size);
-      height: var(--entry-count-size);
+      min-width: var(--navbar-entry-chip-size);
+      height: var(--navbar-entry-chip-size);
       padding-inline: var(--ni-6);
       box-sizing: border-box;
 
       border-radius: var(--border-radius-pill);
-      background: var(--color-today-entry-count-background);
+      background: var(--color-navbar-entry-chip-background);
       box-shadow: inset 0 0 0 var(--border-thickness-xxs)
-        var(--color-today-entry-count-ring);
-      color: var(--color-today-entry-count-text);
+        var(--color-navbar-entry-chip-ring);
+      color: var(--color-navbar-entry-chip-text);
       font-size: var(--font-size-tag);
       font-variant-numeric: tabular-nums;
     }
 
     @include for-mobile {
-      --entry-count-size: var(--ni-18);
-
-      .entry-pill {
-        justify-content: center;
-        width: var(--entry-size);
-        padding-inline: 0;
-      }
-
       .entry-posters {
         display: flex;
         align-items: center;
@@ -254,19 +243,9 @@
       }
 
       .entry-badge {
-        position: absolute;
-        top: calc(-1 * var(--ni-6));
-        inset-inline-end: calc(-1 * var(--ni-6));
+        @include navbar-entry-corner-chip;
 
         padding-inline: var(--ni-4);
-
-        border: var(--border-thickness-xs) solid var(--color-background);
-        background:
-          linear-gradient(
-            var(--color-today-entry-count-background),
-            var(--color-today-entry-count-background)
-          ),
-          var(--color-background);
       }
     }
   }

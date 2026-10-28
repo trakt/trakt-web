@@ -84,7 +84,7 @@
 
     border-radius: var(--border-radius-xl);
     background: var(--background-mir-strip);
-    box-shadow: var(--shadow-today-entry);
+    box-shadow: var(--shadow-navbar-entry);
     color: var(--color-text-primary);
 
     transition:
@@ -100,7 +100,7 @@
         --poster-fan-step: var(--ni-24);
         --poster-fan-tilt: 12deg;
 
-        box-shadow: var(--shadow-today-entry-hover);
+        box-shadow: var(--shadow-navbar-entry-hover);
       }
     }
 
