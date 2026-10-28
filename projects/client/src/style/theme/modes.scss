@@ -325,6 +325,25 @@
     transparent
   );
   --color-filter-chip-text: var(--color-segmented-selector-foreground);
+
+  /*
+   * View all (ghost pill at the end of a section header)
+   */
+  --color-view-all-pill-ring: color-mix(
+    in srgb,
+    var(--shade-900) 14%,
+    transparent
+  );
+  --color-view-all-pill-ring-hover: color-mix(
+    in srgb,
+    var(--shade-900) 24%,
+    transparent
+  );
+  --color-view-all-pill-background-hover: color-mix(
+    in srgb,
+    var(--shade-900) 8%,
+    transparent
+  );
   --color-modal-background: var(--color-card-background);
 
   /*
@@ -966,6 +985,25 @@
     transparent
   );
   --color-filter-chip-text: var(--color-segmented-selector-foreground);
+
+  /*
+   * View all (ghost pill at the end of a section header)
+   */
+  --color-view-all-pill-ring: color-mix(
+    in srgb,
+    var(--shade-10) 14%,
+    transparent
+  );
+  --color-view-all-pill-ring-hover: color-mix(
+    in srgb,
+    var(--shade-10) 24%,
+    transparent
+  );
+  --color-view-all-pill-background-hover: color-mix(
+    in srgb,
+    var(--shade-10) 8%,
+    transparent
+  );
   --color-modal-background: var(--color-card-background);
 
   /*

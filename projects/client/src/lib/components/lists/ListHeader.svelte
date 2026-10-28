@@ -69,8 +69,12 @@
       {#if viewAll}
         <div class="view-all">
           <ListDrilldownAction drilldown={viewAll}>
-            <span class="view-all-text">{m.text_view_all()}</span>
-            <CaretRightIcon />
+            <span class="view-all-pill">
+              <span class="view-all-text small uppercase">
+                {m.text_view_all()}
+              </span>
+              <CaretRightIcon />
+            </span>
           </ListDrilldownAction>
         </div>
       {/if}
@@ -226,6 +230,9 @@
     }
   }
 
+  /* A ghost pill in the row's own family: the caps and height of the chips
+     beside the label, a hairline at rest, a fill that lifts on hover. The link
+     keeps the full row height as its hit area; only the pill is drawn. */
   .view-all {
     display: flex;
 
@@ -233,30 +240,57 @@
     :global(.trakt-list-drilldown-action) {
       display: flex;
       align-items: center;
-      gap: var(--gap-micro);
       min-height: var(--list-header-row-height);
 
       text-decoration: none;
-      color: var(--color-text-secondary);
-      transition: color var(--transition-increment) ease-in-out;
-    }
-
-    /* The words read white; the chevron keeps the quieter link colour. */
-    .view-all-text {
-      font-size: var(--font-size-text);
-      font-weight: 400;
       color: var(--color-text-primary);
     }
 
+    :global(.trakt-link:focus-visible),
+    :global(.trakt-list-drilldown-action:focus-visible) {
+      outline: none;
+    }
+
+    :global(.trakt-link:focus-visible .view-all-pill),
+    :global(.trakt-list-drilldown-action:focus-visible .view-all-pill) {
+      outline: var(--border-thickness-xs) solid var(--color-input-focus);
+      outline-offset: var(--ni-2);
+    }
+
+    .view-all-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ni-6);
+      height: calc(var(--ni-24) + var(--ni-2));
+      padding-inline: var(--ni-12) var(--ni-10);
+
+      border-radius: var(--border-radius-pill);
+      box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+        var(--color-view-all-pill-ring);
+      transition: var(--transition-increment) ease-in-out;
+      transition-property: background-color, box-shadow;
+    }
+
+    /* Set on the span itself: the global sheet sizes every bare span. */
+    .view-all-text {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
     :global(svg) {
+      flex-shrink: 0;
       width: var(--ni-10);
       height: var(--ni-10);
     }
 
     @include for-mouse {
-      :global(.trakt-link:hover),
-      :global(.trakt-list-drilldown-action:hover) {
-        color: var(--color-text-primary);
+      :global(.trakt-link:hover .view-all-pill),
+      :global(.trakt-list-drilldown-action:hover .view-all-pill) {
+        background-color: var(--color-view-all-pill-background-hover);
+        box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+          var(--color-view-all-pill-ring-hover);
       }
     }
   }
