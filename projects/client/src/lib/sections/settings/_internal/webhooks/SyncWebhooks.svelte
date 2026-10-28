@@ -41,6 +41,7 @@
 
   {#each $plexWebhooks ?? [] as webhook (webhook.url)}
     <WebhookCard
+      provider="plex"
       title={m.label_media_server_plex()}
       description={m.description_sync_webhooks_plex({
         servers: webhook.serverNames.join(", "),
@@ -53,6 +54,7 @@
 
   {#each $jellyfinWebhooks ?? [] as webhook (webhook.url)}
     <WebhookCard
+      provider="jellyfin"
       title={m.label_media_server_jellyfin()}
       description={m.description_sync_webhooks_jellyfin_setup({
         servers: webhook.serverNames.join(", "),

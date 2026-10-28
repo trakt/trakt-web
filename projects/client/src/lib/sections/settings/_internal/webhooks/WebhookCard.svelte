@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import Button from "$lib/components/buttons/Button.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { copyToClipboard } from "$lib/utils/clipboard/copyToClipboard.ts";
@@ -11,8 +13,15 @@
 
   const COPIED_RESET_DURATION = time.seconds(2);
 
-  const { title, description, webhook, logo, instructions }: WebhookCardProps =
-    $props();
+  const {
+    provider,
+    title,
+    description,
+    webhook,
+    logo,
+    instructions,
+  }: WebhookCardProps = $props();
+  const { track } = useTrack(AnalyticsEvent.CopyWebhook);
 
   let isCopied = $state(false);
   const copyLabel = $derived(
@@ -29,6 +38,7 @@
       return;
     }
 
+    track({ provider });
     isCopied = true;
     clearTimeout(resetTimer);
     resetTimer = setTimeout(() => (isCopied = false), COPIED_RESET_DURATION);

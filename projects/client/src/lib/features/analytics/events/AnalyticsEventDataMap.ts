@@ -213,6 +213,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.SummaryDrilldown]: DrilldownType;
   [AnalyticsEvent.Search]: SearchType;
   [AnalyticsEvent.Share]: ShareType;
+  [AnalyticsEvent.CopyWebhook]: { provider: 'plex' | 'jellyfin' };
   [AnalyticsEvent.ShareArrival]: {
     type: string;
     outcome: ShareArrivalOutcome;
