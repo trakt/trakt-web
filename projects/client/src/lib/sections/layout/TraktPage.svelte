@@ -291,7 +291,7 @@
     --content-gap: var(--gap-m);
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: gap, margin, padding;
+    transition-property: gap, margin;
 
     display: flex;
     flex-direction: column;

@@ -80,7 +80,7 @@
     margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: margin, padding;
+    transition-property: margin;
 
     @include for-tablet-sm-and-below {
       padding-inline-start: 0;
