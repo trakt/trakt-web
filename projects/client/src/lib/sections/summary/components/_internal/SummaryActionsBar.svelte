@@ -69,7 +69,7 @@
       color: var(--color-text-primary);
     }
 
-    :global(svg:not([data-seasonal-decoration] *)) {
+    :global(svg:not(:where([data-seasonal-decoration] *))) {
       height: var(--ni-16);
     }
 
