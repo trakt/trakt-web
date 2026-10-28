@@ -1,8 +1,8 @@
 <script lang="ts">
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import ListLabel from "$lib/components/lists/ListLabel.svelte";
   import type { Snippet } from "svelte";
-  import SummaryHeaderLabel from "../../../header-kit/SummaryHeaderLabel.svelte";
 
   /*
     Header for the two side sections (where to watch, sentiment): a label row with
@@ -11,8 +11,11 @@
 
     Attribution and rank belong in the subhead - the design deliberately moves them
     out of the body, where they read as a floating line. They sit on a second row
-    rather than beside the label because a sentence-case 12px detail next to a
-    tracked 10px uppercase label breaks the small-caps rhythm the header relies on.
+    rather than beside the label because a sentence-case detail next to a
+    tracked uppercase label breaks the small-caps rhythm the header relies on.
+
+    The label is the page's own section label, so a section reads the same in
+    the header as it does further down the page.
 
     Both directions use this one borderless header. It previously had a boxed
     variant for the anchored rail; that panel framing made the rail read heavier
@@ -53,7 +56,7 @@
       color="inherit"
     >
       <span class="section-label-row">
-        <SummaryHeaderLabel text={title} />
+        <ListLabel {title} />
 
         {#if trailing}
           {@render trailing()}
@@ -66,7 +69,7 @@
     </Link>
   {:else}
     <div class="section-label-row">
-      <SummaryHeaderLabel text={title} />
+      <ListLabel {title} />
 
       {#if trailing}
         {@render trailing()}
@@ -113,8 +116,6 @@
       and sits visibly higher than its neighbours.
     */
     min-height: var(--ni-24);
-
-    --summary-header-label-tracking: 0.16em;
   }
 
   .section-detail {
@@ -129,12 +130,7 @@
       max-width: 100%;
     }
 
-    /* Hovering anywhere on the row lights the label and warms the caret. */
-    :global(a:hover .section-label-row),
-    :global(a:focus-visible .section-label-row) {
-      --summary-header-label-color: var(--color-text-primary);
-    }
-
+    /* Hovering anywhere on the row warms the caret. */
     :global(a:hover .section-caret),
     :global(a:focus-visible .section-caret) {
       color: var(--color-text-primary);
@@ -156,7 +152,7 @@
       Anything larger overhangs the caps above and below and reads as
       misaligned rather than merely big.
     */
-    font-size: var(--font-size-tag);
+    font-size: var(--font-size-text-small);
 
     :global(svg) {
       height: 1em;

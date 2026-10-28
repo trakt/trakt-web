@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ListHeader from "$lib/components/lists/ListHeader.svelte";
   import SparkleIcon from "$lib/components/icons/SparkleIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
@@ -8,21 +9,23 @@
 
 {#snippet teaser()}
   <section class="trakt-trivia-upsell">
-    <h2 class="upsell-heading">{m.list_title_trivia()}</h2>
+    <ListHeader title={m.list_title_trivia()} />
 
-    <div class="upsell-board">
-      <ul class="upsell-list" aria-hidden="true">
-        {#each teaserFacts as fact (fact.key)}
-          <li class="upsell-fact">
-            <span class="fact-icon"><SparkleIcon /></span>
-            <p class="fact-body">{fact.text}</p>
-          </li>
-        {/each}
-      </ul>
+    <div class="upsell-body">
+      <div class="upsell-board">
+        <ul class="upsell-list" aria-hidden="true">
+          {#each teaserFacts as fact (fact.key)}
+            <li class="upsell-fact">
+              <span class="fact-icon"><SparkleIcon /></span>
+              <p class="fact-body">{fact.text}</p>
+            </li>
+          {/each}
+        </ul>
 
-      <UpsellCta source="trivia">
-        {m.vip_feature_description_trivia()}
-      </UpsellCta>
+        <UpsellCta source="trivia">
+          {m.vip_feature_description_trivia()}
+        </UpsellCta>
+      </div>
     </div>
   </section>
 {/snippet}
@@ -45,12 +48,10 @@
     display: flex;
     flex-direction: column;
     gap: var(--list-header-gap);
-
-    padding-inline: var(--layout-distance-side);
   }
 
-  .upsell-heading {
-    margin: 0;
+  .upsell-body {
+    padding-inline: var(--layout-distance-side);
   }
 
   .upsell-board {

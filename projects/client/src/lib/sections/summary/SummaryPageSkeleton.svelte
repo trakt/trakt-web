@@ -55,8 +55,7 @@
   .skeleton-rail {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
-
+    gap: var(--list-header-gap);
   }
 
   /* Clipped rather than scrollable: it is a placeholder, not a rail you can
@@ -76,14 +75,15 @@
     height: var(--height-portrait-card-cover);
   }
 
-  /* Stands in for the section's heading, at the width a title usually runs. */
+  /* Stands in for the section's caps label, centred in its 40px header row. */
   .skeleton-rail-title {
     position: relative;
     display: block;
 
-    width: var(--ni-160);
-    height: var(--ni-20);
+    width: var(--ni-104);
+    height: var(--ni-12);
 
+    margin-block: var(--ni-14);
     margin-inline-start: var(--layout-distance-side);
   }
 </style>
