@@ -18,8 +18,10 @@
     label={m.button_label_open_season_recap({
       season: m.text_season_number({ number: season }),
     })}
+    style="outline"
     color="purple"
-    size="small"
+    size="pill"
+    text="uppercase"
   >
     {m.button_text_season_recap()}
     {#snippet icon()}

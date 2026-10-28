@@ -263,6 +263,43 @@
         }
       }
     }
+
+    /* Beside a section label: the height, caps and stroke of its filter pills. */
+    &[data-variant="pill"] {
+      --button-height: calc(var(--ni-24) + var(--ni-2));
+
+      max-width: 100%;
+      padding: 0 var(--ni-12);
+      gap: var(--ni-6);
+
+      border-radius: var(--border-radius-pill);
+      border-color: var(--color-segmented-track-border);
+      background-color: var(--color-segmented-track-background);
+      color: var(--color-text-primary);
+
+      /* Set on the span itself: the global sheet sizes every bare span. */
+      .trigger-label {
+        font-size: var(--font-size-text-small);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      :global(.trakt-dropdown-caret) {
+        width: var(--ni-10);
+        height: var(--ni-10);
+      }
+
+      &:not([data-disabled]) {
+        @include for-mouse {
+          &:hover,
+          &:focus-visible {
+            border-color: var(--color-filter-chip-border-hover);
+          }
+        }
+      }
+    }
   }
 
   .trakt-select-content[data-auto-width="true"] {

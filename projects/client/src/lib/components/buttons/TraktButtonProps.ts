@@ -7,7 +7,7 @@ export type TraktButtonProps = ButtonProps & {
   style?: 'flat' | 'ghost' | 'underlined' | 'outline';
   icon?: Snippet;
   subtitle?: Snippet;
-  size?: 'normal' | 'small' | 'tag';
+  size?: 'normal' | 'small' | 'tag' | 'pill';
   text?: 'capitalize' | 'uppercase' | 'none';
   navigationType?: DpadNavigationType;
 };

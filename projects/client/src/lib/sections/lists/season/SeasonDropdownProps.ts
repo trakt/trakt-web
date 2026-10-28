@@ -5,4 +5,6 @@ export type SeasonDropdownProps = {
   seasons: Season[];
   currentSeason: number;
   urlBuilder?: (seasonNumber: number) => string;
+  /** `pill` sits beside a section label, the height of its filter pills. */
+  variant?: 'field' | 'pill';
 };

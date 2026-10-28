@@ -11,6 +11,7 @@
     seasons,
     currentSeason,
     urlBuilder,
+    variant = "field",
   }: SeasonDropdownProps = $props();
 
   const buildUrl = $derived(
@@ -49,6 +50,6 @@
   placeholder={m.list_title_seasons()}
   disabled={seasons.length < 2}
   autoWidth
+  variant={variant === "pill" ? "pill" : "default"}
   onChange={onSeasonChange}
 />
-

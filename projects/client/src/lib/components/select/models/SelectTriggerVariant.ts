@@ -1,1 +1,1 @@
-export type SelectTriggerVariant = 'default' | 'chip';
+export type SelectTriggerVariant = 'default' | 'chip' | 'pill';

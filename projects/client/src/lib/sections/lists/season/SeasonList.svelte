@@ -13,6 +13,7 @@
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import SeasonDropdown from "./SeasonDropdown.svelte";
   import SeasonEpisodeList from "./_internal/SeasonEpisodeList.svelte";
+  import SeasonPills from "./_internal/SeasonPills.svelte";
   import SeasonPosterList from "./_internal/SeasonPosterList.svelte";
 
   type SeasonListProps = {
@@ -39,6 +40,16 @@
   const subtitle = $derived(seasonLabel(currentSeason));
   const hasSingleSeason = $derived(seasons.length === 1);
 
+  /*
+    Up to this many, every season is a pill in plain view; past it the row
+    would run on, and a menu reads better. Specials are offered as a season
+    but not counted as one.
+  */
+  const pillLimit = 5;
+  const hasPills = $derived(
+    seasons.filter((s) => s.number > 0).length <= pillLimit,
+  );
+
   const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
   const isLargeScreen = $derived($isTabletLarge || $isDesktop);
@@ -50,7 +61,7 @@
     seasons.filter((s) => s.number > 0 && s.number < currentSeason),
   );
 
-  const hasDropdown = $derived(isLargeScreen && !hasSingleSeason);
+  const hasPicker = $derived(isLargeScreen && !hasSingleSeason);
   const isRecapShown = $derived(
     hasRecap && $isSeasonRecapEnabled && (isLargeScreen || hasSingleSeason),
   );
@@ -82,17 +93,20 @@
   {/if}
 </RenderFor>
 
-{#snippet headerActions()}
-  {#if isRecapShown}
-    {@render recapAction()}
-  {/if}
-
-  {#if hasDropdown}
+{#snippet headerFilters()}
+  {#if hasPicker && hasPills}
+    <SeasonPills showSlug={show.slug} {seasons} {currentSeason} />
+  {:else if hasPicker}
     <SeasonDropdown
       showSlug={show.slug}
       {seasons}
       {currentSeason}
+      variant="pill"
     />
+  {/if}
+
+  {#if isRecapShown}
+    {@render recapAction()}
   {/if}
 {/snippet}
 
@@ -101,6 +115,6 @@
   {previousSeasons}
   episodes={$episodes}
   {currentEpisode}
-  headerActions={hasDropdown || isRecapShown ? headerActions : undefined}
+  headerFilters={hasPicker || isRecapShown ? headerFilters : undefined}
   {...episodeProps}
 />

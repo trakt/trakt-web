@@ -25,7 +25,8 @@
     previousSeasons: Season[];
     episodes: EpisodeEntry[];
     title?: string;
-    headerActions?: Snippet;
+    /** The season picker and its recap, beside the label. */
+    headerFilters?: Snippet;
     subtitle?: string;
     currentEpisode?: number;
   };
@@ -36,7 +37,7 @@
     episodes,
     title,
     subtitle,
-    headerActions,
+    headerFilters,
     currentEpisode,
   }: SeasonEpisodeListProps = $props();
 
@@ -167,6 +168,7 @@
   overlay={countLabels}
   {title}
   {subtitle}
+  filters={headerFilters}
   --list-inset-top={isLargeScreen && hasMoved ? "var(--ni-28)" : undefined}
   --list-end-spacer={isLargeScreen ? '""' : undefined}
   --height-list={mediaListHeightResolver("landscape")}
@@ -195,11 +197,5 @@
       source="season-episode-list"
       scrollAxis={isLargeScreen ? "none" : "inline"}
     />
-  {/snippet}
-
-  {#snippet actions()}
-    {#if headerActions}
-      {@render headerActions()}
-    {/if}
   {/snippet}
 </SectionList>

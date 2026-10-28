@@ -264,6 +264,26 @@
     box-sizing: border-box;
   }
 
+  // Beside a section label: the height and caps of the section's filter pills.
+  :global(#{$b}[data-size=pill]) {
+    --button-height: calc(var(--ni-24) + var(--ni-2));
+    padding: 0 var(--ni-12);
+    gap: var(--ni-6);
+    min-width: 0;
+  }
+
+  :global(#{$b}[data-size=pill] .button-label p) {
+    font-size: var(--font-size-text-small);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+
+  :global(#{$b}[data-size=pill] .button-icon svg) {
+    width: var(--ni-14);
+    height: var(--ni-14);
+  }
+
   :global(#{$b}),
   :global(#{$b}::before),
   :global(#{$b}:active[disabled]) {
