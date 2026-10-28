@@ -9,6 +9,8 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { TriviaCategory } from "$lib/requests/models/MediaTrivia";
   import { fade } from "svelte/transition";
+  import { useIsRevampedSummaryHeader } from "../media/header/useIsRevampedSummaryHeader.ts";
+  import TriviaBand from "./_internal/TriviaBand.svelte";
   import TriviaCard from "./_internal/TriviaCard.svelte";
   import { useTrivia } from "./useTrivia";
 
@@ -16,6 +18,9 @@
     $props();
 
   let isOpen = $state(false);
+
+  /* Behind the revamped headers, each fact is a band in their language. */
+  const isRevampedHeader = useIsRevampedSummaryHeader();
   let activeCategory = $state<TriviaCategory | "all">("all");
 
   const { current: triviaType, set, options } = useToggler("trivia");
@@ -66,23 +71,10 @@
   }
 </script>
 
+<!-- The count stays beside the title; the filters take their own row under
+     it, so the title is never squeezed out by them. -->
 {#snippet badge()}
-  <div class="trivia-badge">
-    <span class="trivia-count">{$list.length}</span>
-    {#if $hasSpoilers}
-      <Toggler value={$triviaType.value} onChange={set} {options} />
-    {/if}
-    {#if $categories.length > 1}
-      <SingleSelect
-        options={categoryOptions}
-        value={effectiveCategory === "all" ? null : effectiveCategory}
-        placeholder={m.option_text_trivia_category_all()}
-        autoWidth
-        onChange={(value) =>
-          (activeCategory = value as TriviaCategory | "all")}
-      />
-    {/if}
-  </div>
+  <span class="trivia-count">{$list.length}</span>
 {/snippet}
 
 <Drawer
@@ -96,9 +88,36 @@
   {#if isOpen}
     <div transition:fade={{ duration: 150 }}>
       <RenderFor audience="vip">
+        {#if $hasSpoilers || $categories.length > 1}
+          <div class="trivia-filters">
+            {#if $hasSpoilers}
+              <Toggler value={$triviaType.value} onChange={set} {options} />
+            {/if}
+            {#if $categories.length > 1}
+              <SingleSelect
+                options={categoryOptions}
+                value={effectiveCategory === "all" ? null : effectiveCategory}
+                placeholder={m.option_text_trivia_category_all()}
+                autoWidth
+                variant="pill"
+                onChange={(value) =>
+                  (activeCategory = value as TriviaCategory | "all")}
+              />
+            {/if}
+          </div>
+        {/if}
+
         <div class="trivia-drawer-list">
           {#each filteredList as trivia (trivia.key)}
-            <TriviaCard {trivia} {media} />
+            {#if $isRevampedHeader}
+              <TriviaBand
+                {trivia}
+                {media}
+                categoryLabel={categoryLabel(trivia.category)}
+              />
+            {:else}
+              <TriviaCard {trivia} {media} />
+            {/if}
           {/each}
         </div>
       </RenderFor>
@@ -113,10 +132,13 @@
 </Drawer>
 
 <style lang="scss">
-  .trivia-badge {
+  .trivia-filters {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: var(--gap-s);
+    gap: var(--gap-xs);
+
+    padding-block-end: var(--ni-16);
   }
 
   .trivia-count {
@@ -131,10 +153,9 @@
     flex-direction: column;
     gap: var(--ni-20);
 
-    /* The sentiment drawer's supplemental prose inset - one tuning. */
-    padding: 0 var(--gap-s) var(--gap-s);
+    padding-block-end: var(--gap-s);
 
-    :global(.trakt-trivia-card + .trakt-trivia-card) {
+    :global(.trakt-trivia-band + .trakt-trivia-band) {
       padding-top: var(--ni-20);
       border-top: var(--ni-1) solid var(--color-hairline);
     }
