@@ -9,20 +9,35 @@ import type { PersonaStat } from './PersonaStat.ts';
 
 type HighlightFormat = {
   label: () => string;
+  monthsLabel?: () => string;
   unit?: 'percent' | 'decimal' | 'year';
 };
 
-const FORMATS: Record<YirHighlightKind, HighlightFormat> = {
+type ToPersonaStatParams = {
+  highlight: YirHighlight;
+  totalMonths: number | null;
+};
+
+const FORMATS: Record<
+  Exclude<YirHighlightKind, 'months-won'>,
+  HighlightFormat
+> = {
   'anime-episodes': { label: m.yir_2026_highlight_anime_episodes },
-  'anime-share': { label: m.yir_2026_highlight_anime_share, unit: 'percent' },
+  'anime-share': {
+    label: m.yir_2026_highlight_anime_share,
+    monthsLabel: m.yir_2026_highlight_anime_share_months,
+    unit: 'percent',
+  },
   'streak-days': { label: m.yir_2026_highlight_streak_days },
   'premiere-share': {
     label: m.yir_2026_highlight_premiere_share,
+    monthsLabel: m.yir_2026_highlight_premiere_share_months,
     unit: 'percent',
   },
   premieres: { label: m.yir_2026_highlight_premieres },
   'weekend-share': {
     label: m.yir_2026_highlight_weekend_share,
+    monthsLabel: m.yir_2026_highlight_weekend_share_months,
     unit: 'percent',
   },
   'binge-days': { label: m.yir_2026_highlight_binge_days },
@@ -32,6 +47,7 @@ const FORMATS: Record<YirHighlightKind, HighlightFormat> = {
   },
   'catalog-share': {
     label: m.yir_2026_highlight_catalog_share,
+    monthsLabel: m.yir_2026_highlight_catalog_share_months,
     unit: 'percent',
   },
   rewatches: { label: m.yir_2026_highlight_rewatches },
@@ -52,9 +68,14 @@ const FORMATS: Record<YirHighlightKind, HighlightFormat> = {
   'perfect-tens': { label: m.yir_2026_highlight_perfect_tens },
   'top-show-share': {
     label: m.yir_2026_highlight_top_show_share,
+    monthsLabel: m.yir_2026_highlight_top_show_share_months,
     unit: 'percent',
   },
-  'genre-share': { label: m.yir_2026_highlight_genre_share, unit: 'percent' },
+  'genre-share': {
+    label: m.yir_2026_highlight_genre_share,
+    monthsLabel: m.yir_2026_highlight_genre_share_months,
+    unit: 'percent',
+  },
   movies: { label: m.yir_2026_highlight_movies },
   plays: { label: m.yir_2026_highlight_plays },
   'personas-in-range': { label: m.yir_2026_highlight_personas_in_range },
@@ -77,12 +98,29 @@ function formatValue(value: number, unit: HighlightFormat['unit']) {
   }
 }
 
-export function toPersonaStat({ kind, value }: YirHighlight): PersonaStat {
+export function toPersonaStat({
+  highlight: { kind, value },
+  totalMonths,
+}: ToPersonaStatParams): PersonaStat {
+  if (kind === 'months-won') {
+    return {
+      key: kind,
+      value: formatValue(value, undefined),
+      label: m.yir_2026_highlight_months_won({
+        total: String(totalMonths ?? value),
+      }),
+    };
+  }
+
   const format = FORMATS[kind];
+  const label =
+    totalMonths != null && format.monthsLabel != null
+      ? format.monthsLabel
+      : format.label;
 
   return {
     key: kind,
     value: formatValue(value, format.unit),
-    label: format.label(),
+    label: label(),
   };
 }

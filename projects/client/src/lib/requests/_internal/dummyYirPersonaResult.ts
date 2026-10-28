@@ -75,8 +75,8 @@ const FIXTURES: Record<YirPersonaId, PersonaFixture> = {
     streak: 69,
     traits: ['live-checker', 'streak-keeper'],
     highlights: [
-      { kind: 'checkin-share', value: 95 },
       { kind: 'new-releases', value: 76 },
+      { kind: 'movies', value: 98 },
     ],
   },
   cinephile: {

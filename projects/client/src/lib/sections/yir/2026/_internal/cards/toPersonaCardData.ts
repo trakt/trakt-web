@@ -8,6 +8,22 @@ import type { PersonaCardData } from './PersonaCardData.ts';
 import { personaCopy } from '../persona/personaCopy.ts';
 import { toPersonaStat } from './toPersonaStat.ts';
 
+function toTotalMonths({
+  result,
+  highlights,
+}: {
+  result: YirPersonaResult;
+  highlights: ReadonlyArray<YirHighlight>;
+}) {
+  const isWonByMonths = highlights.some(
+    (highlight) => highlight.kind === 'months-won',
+  );
+  if (!isWonByMonths) return null;
+
+  return result.monthly.filter(({ persona }) => persona !== 'opening-act')
+    .length;
+}
+
 function findValue(
   highlights: ReadonlyArray<YirHighlight>,
   kind: YirHighlightKind,
@@ -27,13 +43,16 @@ export function toPersonaCardData({
   highlights,
 }: ToPersonaCardDataProps): PersonaCardData {
   const copy = personaCopy(persona);
+  const totalMonths = toTotalMonths({ result, highlights });
 
   return {
     persona,
     name: copy.name,
     tagline: copy.tagline,
     number: String(result.cardNumber).padStart(2, '0'),
-    stats: highlights.map(toPersonaStat),
+    stats: highlights.map((highlight) =>
+      toPersonaStat({ highlight, totalMonths }),
+    ),
     rating: findValue(highlights, 'avg-rating'),
     share: findValue(highlights, 'top-show-share'),
     scores: result.scores,
