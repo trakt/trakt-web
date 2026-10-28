@@ -29,6 +29,7 @@ export const YirHighlightKindSchema = z.enum([
   'movies',
   'plays',
   'personas-in-range',
+  'months-won',
 ]);
 
 export const YirTraitIdSchema = z.enum([

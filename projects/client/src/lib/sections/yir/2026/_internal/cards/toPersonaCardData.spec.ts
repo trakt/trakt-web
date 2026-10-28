@@ -37,4 +37,27 @@ describe('util: toPersonaCardData', () => {
     expect(card.share).toBeNull();
     expect(card.stats).toHaveLength(3);
   });
+
+  it('should count real months for a year won by months', () => {
+    const loyalist = dummyYirPersonaResult({ persona: 'loyalist' });
+    const card = toPersonaCardData({
+      result: {
+        ...loyalist,
+        monthly: [
+          { month: 1, persona: 'loyalist' },
+          { month: 2, persona: 'loyalist' },
+          { month: 3, persona: 'wildcard' },
+          { month: 4, persona: 'opening-act' },
+        ],
+      },
+      persona: 'loyalist',
+      highlights: [
+        { kind: 'months-won', value: 2 },
+        { kind: 'top-show-share', value: 69 },
+      ],
+    });
+
+    expect(card.stats.at(0)?.label).toBe('of 3 months');
+    expect(card.share).toBe(69);
+  });
 });
