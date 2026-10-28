@@ -4,6 +4,16 @@
    */
 
   /**
+   * Separator
+   *
+   * The thin rule that divides content without framing it: the summary headers'
+   * facts and bands, the drawers' trivia and sentiment bands, the person header's
+   * meta ticks. Far lighter than --color-border, which is for something enclosed.
+   * Derived from --color-foreground, so it follows light and dark on its own.
+   */
+  --color-hairline: color-mix(in srgb, var(--color-foreground) 7%, transparent);
+
+  /**
    * Badge
    */
   --color-background-vip-badge: var(--red-500);
