@@ -1,5 +1,5 @@
 import type { Editor } from '@tiptap/core';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createRichTextEditor } from './createRichTextEditor.ts';
 
 let editor: Editor | null = null;
@@ -48,5 +48,41 @@ describe('util: createRichTextEditor', () => {
 
   it('should return an empty string for an empty document', async () => {
     expect(await roundTrip('')).toBe('');
+  });
+
+  describe('on android', () => {
+    afterEach(() => {
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+      document.body.replaceChildren();
+    });
+
+    it('should autofocus at the end without a mismatched transaction', async () => {
+      vi.stubGlobal('navigator', {
+        ...navigator,
+        userAgent: 'Mozilla/5.0 (Linux; Android 10; K) Chrome/155.0.0.0',
+      });
+      vi.useFakeTimers({ toFake: ['setTimeout'] });
+
+      const element = document.createElement('div');
+      document.body.append(element);
+
+      editor = await createRichTextEditor({
+        element,
+        markdown: '- one\n- two',
+        placeholder: '',
+        label: '',
+        autofocus: true,
+        onUpdate: () => {},
+        onTransaction: () => {},
+        onMentionChange: () => {},
+        onMentionKeyDown: () => false,
+      });
+
+      expect(() => vi.runAllTimers()).not.toThrow();
+      expect(editor.state.selection.from).toBe(
+        editor.state.doc.content.size - 1,
+      );
+    });
   });
 });
