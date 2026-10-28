@@ -2,8 +2,8 @@
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import * as m from "$lib/features/i18n/messages.ts";
-  import ListLabel from "../ListLabel.svelte";
-  import ListDrilldownAction from "../ListDrilldownAction.svelte";
+  import ListLabel from "./ListLabel.svelte";
+  import ListDrilldownAction from "./ListDrilldownAction.svelte";
   import type { ListHeaderProps } from "./ListHeaderProps.ts";
 
   const {

@@ -19,7 +19,7 @@
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
   import "../_internal/list.css";
-  import ListHeader from "../_internal/ListHeader.svelte";
+  import ListHeader from "../ListHeader.svelte";
   import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
   import type { ListProps } from "../ListProps";
   import { resetScroll } from "./_internal/resetScroll";

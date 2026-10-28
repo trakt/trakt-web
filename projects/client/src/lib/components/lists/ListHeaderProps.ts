@@ -1,6 +1,6 @@
 import type { DpadNavigationType } from '$lib/features/navigation/models/DpadNavigationType.ts';
 import type { Snippet } from 'svelte';
-import type { ListDrilldownProps } from '../section-list/models/ListDrilldownProps.ts';
+import type { ListDrilldownProps } from './section-list/models/ListDrilldownProps.ts';
 
 type ListHeaderCollapse = {
   isCollapsed: boolean;
