@@ -39,7 +39,7 @@
   import GlanceStrip from "./_internal/GlanceStrip.svelte";
   import SummaryHeaderByline from "./_internal/SummaryHeaderByline.svelte";
   import SummaryHeaderKicker from "./_internal/SummaryHeaderKicker.svelte";
-  import SwipeCarousel from "$lib/sections/profile/components/SwipeCarousel.svelte";
+  import SwipeCarousel from "$lib/components/carousel/SwipeCarousel.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import SummaryHeaderRecap from "./_internal/SummaryHeaderRecap.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
@@ -746,11 +746,15 @@
       <RenderFor audience="all" device={["tablet-sm", "tablet-lg"]}>
         {#key `${tabletPages.length}-${tabletPageSize}`}
           <SwipeCarousel
-            slides={[tabletPageA, tabletPageB, tabletPageC].slice(
+            items={[tabletPageA, tabletPageB, tabletPageC].slice(
               0,
               tabletPages.length,
             )}
-          />
+          >
+            {#snippet item(page)}
+              {@render page()}
+            {/snippet}
+          </SwipeCarousel>
         {/key}
       </RenderFor>
 
