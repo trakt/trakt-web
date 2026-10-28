@@ -644,7 +644,7 @@
         <div class="strip-column strip-column-borrowed">
           <div class="column-head">
             <SummaryHeaderSectionHeader
-              title={m.header_community_sentiment()}
+              title={m.header_insights()}
               drilldown={{
                 ...sentimentLink,
                 label: m.button_label_view_sentiment_analysis(),

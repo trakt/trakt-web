@@ -141,7 +141,7 @@
     {#if headerSentiment}
       <section class="glance-section">
         <SummaryHeaderSectionHeader
-          title={m.header_community_sentiment()}
+          title={m.header_insights()}
           drilldown={{
             ...sentimentLink,
             label: m.button_label_view_sentiment_analysis(),

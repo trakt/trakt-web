@@ -121,7 +121,7 @@
               </span>
             </span>
             {#if labeled}
-              <span class="segment-label">{m.header_community_sentiment()}</span>
+              <span class="segment-label">{m.header_insights()}</span>
             {/if}
           </span>
         </Link>
