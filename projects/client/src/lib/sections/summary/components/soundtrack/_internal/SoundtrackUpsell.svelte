@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ListHeader from "$lib/components/lists/ListHeader.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -8,7 +9,7 @@
 
 {#snippet teaser()}
   <section class="trakt-soundtrack-upsell">
-    <h2 class="upsell-heading">{m.list_title_soundtrack()}</h2>
+    <ListHeader title={m.list_title_soundtrack()} />
 
     <div class="upsell-board">
       <ul class="upsell-list" aria-hidden="true">
@@ -45,18 +46,14 @@
     display: flex;
     flex-direction: column;
     gap: var(--list-header-gap);
-
-    padding-inline: var(--layout-distance-side);
-  }
-
-  .upsell-heading {
-    margin: 0;
   }
 
   .upsell-board {
     display: flex;
     flex-direction: column;
     gap: var(--ni-12);
+
+    padding-inline: var(--layout-distance-side);
   }
 
   .upsell-list {
