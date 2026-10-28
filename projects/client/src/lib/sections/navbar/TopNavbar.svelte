@@ -5,6 +5,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
+  import NavbarEntryStack from "./_internal/NavbarEntryStack.svelte";
   import NavbarHeader from "./_internal/NavbarHeader.svelte";
   import FilterButton from "./components/filter/FilterButton.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
@@ -46,6 +47,7 @@
         </RenderFor>
         <RenderFor audience="authenticated">
           {#if !$isEditMode}
+            <NavbarEntryStack />
             {@render $state.headerActions?.()}
             {#if $state.showFilters}
               <FilterButton

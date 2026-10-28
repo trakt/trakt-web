@@ -2,6 +2,7 @@ import type { NavbarMode } from '$lib/sections/navbar/useNavbarState.ts';
 import type { ListTarget } from '$lib/sections/smart-lists/models/ListTarget.ts';
 import type { Snippet } from 'svelte';
 import type { ContentToggleSurface } from '../_internal/ContentToggleSurface.ts';
+import type { NavbarEntry } from './NavbarEntry.ts';
 import type { NavbarHeaderState } from './NavbarHeaderState.ts';
 
 export type NavbarStateSetterProps = {
@@ -10,6 +11,7 @@ export type NavbarStateSetterProps = {
   contentToggle?: ContentToggleSurface | Nil;
   toastActions?: Snippet | Nil;
   mode?: NavbarMode;
+  entry?: NavbarEntry | null;
   hasFilters?: boolean;
   showFilters?: boolean;
   smartListTarget?: ListTarget | Nil;

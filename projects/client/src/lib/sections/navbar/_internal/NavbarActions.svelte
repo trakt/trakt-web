@@ -11,6 +11,7 @@
   import JoinTraktButton from "../components/JoinTraktButton.svelte";
   import { useNavbarState } from "../useNavbarState";
   import NavbarContentToggle from "./NavbarContentToggle.svelte";
+  import NavbarEntryStack from "./NavbarEntryStack.svelte";
   import NavbarHeader from "./NavbarHeader.svelte";
 
   const { state } = useNavbarState();
@@ -43,6 +44,7 @@
   <div class="trakt-navbar-actions-right">
     <RenderFor audience="authenticated">
       {#if !$isEditMode}
+        <NavbarEntryStack />
         {@render $state.headerActions?.()}
         {#if $state.showFilters}
           <FilterButton

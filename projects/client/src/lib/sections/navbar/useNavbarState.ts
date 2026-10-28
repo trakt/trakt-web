@@ -8,6 +8,7 @@ import {
 import type { Snippet } from 'svelte';
 import { isShallowEqual } from '$lib/utils/object/isShallowEqual.ts';
 import type { ListTarget } from '$lib/sections/smart-lists/models/ListTarget.ts';
+import type { NavbarEntry } from './models/NavbarEntry.ts';
 import type { NavbarHeaderState } from './models/NavbarHeaderState.ts';
 import type { ContentToggleSurface } from './_internal/ContentToggleSurface.ts';
 
@@ -30,11 +31,13 @@ type NavbarState = {
 type GlobalNavbarState = {
   toastActions: Snippet | Nil;
   mode: NavbarMode;
+  entry: NavbarEntry | null;
 };
 
 const globalNavbarStateStore = new BehaviorSubject<GlobalNavbarState>({
   toastActions: null,
   mode: 'hidden',
+  entry: null,
 });
 
 const initialNavbarState: NavbarState = {

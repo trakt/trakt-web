@@ -9,6 +9,7 @@
     contentToggle,
     toastActions,
     mode,
+    entry,
     hasFilters,
     showFilters,
     smartListTarget,
@@ -37,6 +38,7 @@
     globalSet({
       ...(toastActions !== undefined && { toastActions }),
       ...(mode !== undefined && { mode }),
+      ...(entry !== undefined && { entry }),
     });
   });
 

@@ -14599,7 +14599,7 @@
     },
     "button_text_make_mixtape": {
       "default": "Make a mixtape",
-      "description": "Title of the Discover strip that opens the Mixtape page. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
+      "description": "Accessible name of the Mixtape pill in the Discover header that opens the Mixtape page. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
     "button_text_start_mixtape_with_this": {
       "default": "Start a mixtape with this",
@@ -14607,7 +14607,7 @@
     },
     "text_mixtape_strip_description": {
       "default": "Pick titles you loved. Get 3 that feel the same.",
-      "description": "Short line on the Discover strip that opens the Mixtape page."
+      "description": "Tooltip under the Mixtape pill in the Discover header. One short line explaining what Mixtape does."
     },
     "header_ending": {
       "default": "Ending",
