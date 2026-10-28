@@ -13,11 +13,14 @@
     disabled = false,
     disableHoverableContent = false,
     openOnTap = false,
+    open: isForcedOpen = false,
   }: TooltipProps & ChildrenProps = $props();
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
   let open = $state(false);
+
+  const isOpen = $derived(isForcedOpen || open);
 
   const isTapToggle = $derived(openOnTap && !disabled && !$isMouse);
 
@@ -29,7 +32,8 @@
 <Tooltip.Provider>
   <Tooltip.Root
     {delayDuration}
-    bind:open
+    open={isOpen}
+    onOpenChange={(next) => (open = next)}
     disabled={disabled ?? false}
     {disableHoverableContent}
     ignoreNonKeyboardFocus

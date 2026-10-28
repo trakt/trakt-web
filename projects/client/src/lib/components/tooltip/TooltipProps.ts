@@ -16,4 +16,6 @@ export type TooltipProps = {
   */
   disableHoverableContent?: boolean;
   openOnTap?: boolean;
+  /* Keeps the tooltip open while true; hover, focus and tap own it otherwise. */
+  open?: boolean;
 };
