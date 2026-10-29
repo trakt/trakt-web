@@ -406,6 +406,10 @@
       );
     }
 
+    &:not(.is-docked) {
+      margin-top: calc(-1 * var(--content-offset-top, 0px));
+    }
+
     &.is-docked {
       --calendar-bar-top: 0px;
       --drawer-width: var(--ni-320);

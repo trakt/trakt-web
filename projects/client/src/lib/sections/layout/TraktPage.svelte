@@ -305,11 +305,13 @@
       --list-bleed-start: var(--layout-sidebar-distance);
     }
 
+    --content-offset-top: calc(var(--gap-m) + env(safe-area-inset-top));
+
     padding-inline-start: var(--layout-sidebar-distance);
-    margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
+    margin-top: var(--content-offset-top);
 
     @include for-tablet-sm-and-below {
-      margin-top: var(--content-gap);
+      --content-offset-top: var(--content-gap);
     }
 
     @include for-tablet-lg-and-below {
@@ -317,15 +319,15 @@
     }
 
     @include for-mobile {
-      margin-top: var(--gap-xxs);
+      --content-offset-top: var(--gap-xxs);
       --content-gap: var(--gap-s);
     }
 
     &[data-mode="content-only"] {
       --list-bleed-start: var(--ni-0);
+      --content-offset-top: 0px;
 
       padding-inline-start: 0;
-      margin-top: 0;
       gap: 0;
     }
   }
