@@ -20,9 +20,11 @@ export function refreshStreamingRequest({
   const request = allData
     ? client.refreshAll({
         params: { service_id: serviceId, all_data: 'true' },
+        body: {},
       })
     : client.refresh({
         params: { service_id: serviceId },
+        body: {},
       });
 
   return request.then(({ status }) => status === 201);
