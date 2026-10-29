@@ -4,6 +4,7 @@
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
 
   const { points }: { points: ReadonlyArray<string> } = $props();
@@ -89,7 +90,7 @@
     {#each points as point, index (index)}
       <li class="moment-card">
         <span class="moment-number">{String(index + 1).padStart(2, "0")}</span>
-        <p class="moment-text">{point}</p>
+        <p class="moment-text"><InlineMarkdown text={point} /></p>
       </li>
     {/each}
   </ul>
@@ -175,6 +176,10 @@
 
     .moment-text {
       line-height: var(--ni-20);
+
+      :global(.trakt-inline-markdown) {
+        font-size: inherit;
+      }
     }
 
     .moments-dots {

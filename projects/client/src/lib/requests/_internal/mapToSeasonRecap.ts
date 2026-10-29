@@ -20,7 +20,7 @@ export function mapToSeasonRecap(
   return {
     season: response.season,
     summary: toRelative(response.recap),
-    keyPoints: response.keyPoints,
+    keyPoints: response.keyPoints.map(toRelative),
     lines: response.whereThingsStand.map(mapToRecapLine),
     attribution: prependHttps(response.attribution) ?? null,
     chapters: toRecapChapters(response.expanded).map((chapter) => ({

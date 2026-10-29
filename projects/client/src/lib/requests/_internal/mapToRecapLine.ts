@@ -1,3 +1,5 @@
+import { SEO_ORIGIN } from '$lib/features/seo/seoOrigin.ts';
+import { toRelativeMarkdownLinks } from '$lib/utils/markdown/toRelativeMarkdownLinks.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { RecapLine } from '../models/RecapLine.ts';
@@ -10,7 +12,7 @@ export function mapToRecapLine(
 ): RecapLine {
   return {
     key: `recap-line-${index}`,
-    text: line.text,
+    text: toRelativeMarkdownLinks(line.text, SEO_ORIGIN),
     people: line.people.map(({ character, person }, personIndex) => ({
       key: `person-${person.ids.trakt}-${personIndex}`,
       name: person.name,

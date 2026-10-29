@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getIntlLocale, languageTag } from "$lib/features/i18n/index.ts";
   import type { RecapLine } from "$lib/requests/models/RecapLine.ts";
+  import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
   import InfoCard from "../../_internal/InfoCard.svelte";
   import RecapFace from "./RecapFace.svelte";
 
@@ -42,7 +43,9 @@
       </span>
     </div>
 
-    <p class="small secondary person-state">{line.text}</p>
+    <p class="small secondary person-state">
+      <InlineMarkdown text={line.text} />
+    </p>
   </InfoCard>
 </div>
 
@@ -88,6 +91,10 @@
 
     .person-state {
       line-height: var(--ni-18);
+
+      :global(.trakt-inline-markdown) {
+        font-size: inherit;
+      }
     }
   }
 </style>
