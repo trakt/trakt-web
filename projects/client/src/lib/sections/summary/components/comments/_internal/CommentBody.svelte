@@ -125,6 +125,10 @@
       flex-grow: 1;
       min-width: 0;
 
+      :global(*) {
+        margin-block: 0;
+      }
+
       :global(p) {
         line-height: calc(var(--preview-height) / var(--max-lines));
       }
