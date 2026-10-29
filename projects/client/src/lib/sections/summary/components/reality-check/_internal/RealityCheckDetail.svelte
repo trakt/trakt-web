@@ -6,6 +6,16 @@
   import { toTranslatedRealityCharacterKind } from "$lib/utils/formatting/string/toTranslatedRealityCharacterKind.ts";
   import InfoCard from "../../_internal/InfoCard.svelte";
   import RealityCheckClaims from "./RealityCheckClaims.svelte";
+  import RealityChip from "./RealityChip.svelte";
+  import type { RealityChipProps } from "./RealityChipProps.ts";
+
+  type CharacterKind = RealityCheckDetail["characters"][number]["kind"];
+
+  const KIND_TONE: Record<CharacterKind, RealityChipProps["tone"]> = {
+    real: "accurate",
+    composite: "adjusted",
+    invented: "altered",
+  };
 
   const { detail }: { detail: RealityCheckDetail } = $props();
 </script>
@@ -37,11 +47,12 @@
       <ul class="reality-list reality-text">
         {#each detail.characters as character, index (index)}
           <li>
-            <p>
+            <p class="reality-character-name">
               <span class="bold"><InlineMarkdown text={character.name} /></span>
-              <span class="secondary">
-                {toTranslatedRealityCharacterKind(character.kind)}
-              </span>
+              <RealityChip
+                text={toTranslatedRealityCharacterKind(character.kind)}
+                tone={KIND_TONE[character.kind]}
+              />
             </p>
             <p class="small secondary">
               <InlineMarkdown text={character.note} />
@@ -92,6 +103,13 @@
 
     .reality-text {
       line-height: 1.6;
+    }
+
+    .reality-character-name {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      column-gap: var(--gap-xs);
     }
 
     .reality-bullets {
