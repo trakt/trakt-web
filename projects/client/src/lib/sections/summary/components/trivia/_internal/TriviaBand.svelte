@@ -83,7 +83,8 @@
     letter-spacing: 0.13em;
     line-height: 1.6;
     text-transform: uppercase;
-    color: var(--color-text-secondary);
+    /* The bright line of each band; the fact below stays the quieter grey. */
+    color: var(--color-text-primary);
   }
 
   .trivia-text {
