@@ -27,12 +27,14 @@
   <div class="trakt-profile-info">
     <div class="trakt-profile-names">
       <Link href={profileUrl}>
-        <span class="trakt-profile-name">{displayName}</span>
+        <span class="trakt-profile-name ellipsis">{displayName}</span>
       </Link>
     </div>
 
     {#if profile.location}
-      <span class="secondary trakt-profile-location">{profile.location}</span>
+      <span class="secondary ellipsis trakt-profile-location">
+        {profile.location}
+      </span>
     {/if}
   </div>
 </div>
@@ -41,6 +43,8 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-profile-card {
+    min-width: 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,9 +81,18 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap-micro);
+
+    max-width: 100%;
+
+    :global(.trakt-link) {
+      display: block;
+      max-width: 100%;
+    }
   }
 
   .trakt-profile-name {
+    display: block;
+
     font-weight: 600;
     font-size: var(--font-size-title);
 
@@ -93,6 +106,8 @@
   }
 
   .trakt-profile-location {
+    max-width: 100%;
+
     font-size: var(--ni-12);
     color: var(--color-text-secondary);
 
