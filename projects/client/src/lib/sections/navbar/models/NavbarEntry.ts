@@ -1,1 +1,1 @@
-export type NavbarEntry = 'today' | 'mixtape';
+export type NavbarEntry = 'today' | 'mixtape' | 'mix';

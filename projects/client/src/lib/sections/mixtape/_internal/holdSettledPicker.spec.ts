@@ -4,7 +4,7 @@ import type { PickerItems } from './PickerItems.ts';
 
 const pickerOf = (kind: PickerItems<number>['kind'], ids: number[]) => ({
   kind,
-  items: ids.map((media) => ({ media, isOff: false })),
+  items: ids.map((media) => ({ media, isOff: false, slot: null })),
 });
 
 describe('util: holdSettledPicker', () => {

@@ -1,1 +1,1 @@
-export type ContentToggleSurface = 'discover' | 'search';
+export type ContentToggleSurface = 'discover' | 'search' | 'mixtape';

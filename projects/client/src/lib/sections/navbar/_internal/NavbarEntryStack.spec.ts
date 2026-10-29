@@ -36,13 +36,23 @@ describe('NavbarEntryStack', () => {
     );
   });
 
-  it('should keep both rows mounted so the slot can roll between them', async () => {
+  it('should hand the slot to the mix it entry on the mixtape page', async () => {
+    globalSet({ entry: 'mix' });
+
+    renderComponent(NavbarEntryStack, { props: {}, withFilters: true });
+
+    await screen.findByText('Mix it');
+    expect(document.querySelector(STACK)).toHaveAttribute('data-entry', 'mix');
+  });
+
+  it('should keep every row mounted so the slot can roll between them', async () => {
     globalSet({ entry: 'today' });
 
     renderComponent(NavbarEntryStack, { props: {}, withFilters: true });
 
     await screen.findByRole('link', { name: "Open today's stories" });
     await screen.findByRole('link', { name: 'Make a mixtape' });
+    await screen.findByText('Mix it');
     expect(document.querySelector(STACK)).toHaveAttribute(
       'data-entry',
       'today',

@@ -3,6 +3,7 @@
   import EditModeBar from "$lib/features/edit-mode/EditModeBar.svelte";
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import MixtapeNavbarDeck from "$lib/sections/mixtape/MixtapeNavbarDeck.svelte";
   import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import Toast from "../../toast/Toast.svelte";
@@ -13,6 +14,7 @@
   import NavbarContentToggle from "./NavbarContentToggle.svelte";
   import NavbarEntryStack from "./NavbarEntryStack.svelte";
   import NavbarHeader from "./NavbarHeader.svelte";
+  import { navbarSurfaceTransition } from "./navbarSurfaceTransition.ts";
 
   const { state } = useNavbarState();
 
@@ -34,9 +36,24 @@
     {#if $isEditMode}
       <EditModeBar />
     {:else}
-      {#if $state.contentToggle}
-        <NavbarContentToggle surface={$state.contentToggle} />
-      {/if}
+      <div class="navbar-content-surfaces">
+        {#if $state.contentToggle === "mixtape"}
+          <div
+            class="navbar-content-surface"
+            out:navbarSurfaceTransition|global
+          >
+            <MixtapeNavbarDeck />
+          </div>
+        {:else if $state.contentToggle}
+          <div
+            class="navbar-content-surface"
+            in:navbarSurfaceTransition|global
+            out:navbarSurfaceTransition|global
+          >
+            <NavbarContentToggle surface={$state.contentToggle} />
+          </div>
+        {/if}
+      </div>
       {@render $state.actions?.()}
     {/if}
   </div>
@@ -193,6 +210,21 @@
     display: flex;
     align-items: center;
     gap: var(--gap-s);
+  }
+
+  /*
+    The centre surfaces stack in one grid cell so a leaving surface can fade
+    out over the arriving one without shifting the bar.
+  */
+  .navbar-content-surfaces {
+    display: grid;
+    justify-items: center;
+  }
+
+  .navbar-content-surface {
+    grid-area: 1 / 1;
+    display: flex;
+    min-width: 0;
   }
 
   .trakt-navbar-actions.has-actions {
