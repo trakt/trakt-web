@@ -76,16 +76,27 @@
     @include for-tablet-sm-and-below {
       flex-wrap: nowrap;
 
-      &[data-view="week"] .toolbar-week {
-        display: none;
+      &[data-view="week"] {
+        .toolbar-title {
+          transform: translateY(calc(var(--toolbar-week-height) / 2));
+        }
+
+        .toolbar-week {
+          visibility: hidden;
+          opacity: 0;
+        }
       }
     }
   }
 
   .toolbar-title {
+    --toolbar-week-height: var(--ni-20);
+
     display: flex;
     flex-direction: column;
     min-width: 0;
+
+    transition: transform var(--transition-duration-short) ease-in-out;
   }
 
   .toolbar-filters {
@@ -126,5 +137,10 @@
 
   .toolbar-week {
     font-size: var(--font-size-text);
+    line-height: var(--toolbar-week-height);
+
+    transition:
+      opacity var(--transition-duration-short) ease-in-out,
+      visibility var(--transition-duration-short) ease-in-out;
   }
 </style>
