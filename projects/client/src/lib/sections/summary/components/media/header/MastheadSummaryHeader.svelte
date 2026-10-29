@@ -1422,13 +1422,11 @@
         grow with it - a 40px button in a 64px tray reads as a small thing in
         a large box.
 
-        Width follows the controls rather than a fixed measure: the bar
-        spreads its children edge to edge, so a measure wider than they need
-        parked one against each end and left the middle looking unaligned.
-        The row is what centres everything now.
+        The bar keeps the live page's width: the mark-as-watched pill grows
+        into it, and on a show that pill fills to show progress. Hugging the
+        controls instead collapsed it to a bare circle with nothing to fill.
       */
       --summary-actions-bar-height: var(--ni-64);
-      --summary-actions-bar-width: auto;
       --summary-actions-bar-padding: var(--ni-8) var(--ni-8);
       --action-button-size: var(--ni-48);
 
