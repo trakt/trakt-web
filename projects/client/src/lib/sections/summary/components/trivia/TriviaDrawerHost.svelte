@@ -75,10 +75,19 @@
   }
 </script>
 
-<!-- The count stays beside the title; the filters take their own row under
-     it, so the title is never squeezed out by them. -->
 {#snippet badge()}
   <span class="trivia-count">{$list.length}</span>
+{/snippet}
+
+<!-- Beside the close button, where the review composer keeps the same switch. -->
+{#snippet actions()}
+  {#if $hasSpoilers}
+    <SpoilerSwitch
+      isChecked={isSpoilers}
+      label={m.button_label_trivia_spoilers()}
+      onclick={() => set(isSpoilers ? "no-spoilers" : "spoilers")}
+    />
+  {/if}
 {/snippet}
 
 <Drawer
@@ -88,31 +97,23 @@
   variant="vip"
   size="auto"
   {badge}
+  {actions}
 >
   {#if isOpen}
     <div transition:fade={{ duration: 150 }}>
       <RenderFor audience="vip">
-        {#if $hasSpoilers || $categories.length > 1}
+        {#if $categories.length > 1}
           <div class="trivia-filters">
-            {#if $hasSpoilers}
-              <SpoilerSwitch
-                isChecked={isSpoilers}
-                label={m.button_label_trivia_spoilers()}
-                onclick={() => set(isSpoilers ? "no-spoilers" : "spoilers")}
-              />
-            {/if}
-            {#if $categories.length > 1}
-              <SingleSelect
-                options={categoryOptions}
-                value={effectiveCategory === "all" ? null : effectiveCategory}
-                placeholder={m.option_text_trivia_category_all()}
-                autoWidth
-                variant="pill"
-                disabled={isSpoilers}
-                onChange={(value) =>
-                  (activeCategory = value as TriviaCategory | "all")}
-              />
-            {/if}
+            <SingleSelect
+              options={categoryOptions}
+              value={effectiveCategory === "all" ? null : effectiveCategory}
+              placeholder={m.option_text_trivia_category_all()}
+              autoWidth
+              variant="pill"
+              disabled={isSpoilers}
+              onChange={(value) =>
+                (activeCategory = value as TriviaCategory | "all")}
+            />
           </div>
         {/if}
 
