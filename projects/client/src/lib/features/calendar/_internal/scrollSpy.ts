@@ -80,13 +80,15 @@ export function scrollSpy(
   }
 
   function scrollToId(id: string) {
-    requestAnimationFrame(() => {
-      const element = document.getElementById(id);
-      if (!element) return;
-      if (currentParams.skipVisible && isInViewport(element)) return;
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        const element = document.getElementById(id);
+        if (!element) return;
+        if (currentParams.skipVisible && isInViewport(element)) return;
 
-      element.scrollIntoView({ block: 'start', behavior: 'auto' });
-    });
+        element.scrollIntoView({ block: 'start', behavior: 'auto' });
+      }),
+    );
   }
 
   observeElements();
