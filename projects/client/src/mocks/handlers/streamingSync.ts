@@ -54,11 +54,11 @@ export const streamingSync = [
   ),
   http.post(
     'http://localhost/younify/users/refresh/:serviceId/:allData',
-    () => new HttpResponse(null, { status: 204 }),
+    () => new HttpResponse(null, { status: 201 }),
   ),
   http.post(
     'http://localhost/younify/users/refresh/:serviceId',
-    () => new HttpResponse(null, { status: 204 }),
+    () => new HttpResponse(null, { status: 201 }),
   ),
   http.delete(
     'http://localhost/younify/users/services/:serviceId',
