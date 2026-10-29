@@ -299,8 +299,10 @@
     --drawer-stack-scale: 0.95;
     --drawer-slide-in-ease: cubic-bezier(0.33, 1, 0.68, 1);
     --drawer-slide-out-ease: cubic-bezier(0.32, 0, 0.67, 0);
+    // Docked to the window, not the frame: the plain gutter, which is the
+    // side distance until the frame floats free on wide screens.
     --drawer-header-padding-end: calc(
-      var(--layout-distance-side) + var(--drawer-edge-bleed)
+      var(--layout-gutter) + var(--drawer-edge-bleed)
     );
     --drawer-header-overlay-height: calc(
       var(--drawer-padding) * 2 + var(--ni-48)
