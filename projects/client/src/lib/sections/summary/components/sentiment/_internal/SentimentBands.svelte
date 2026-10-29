@@ -2,19 +2,19 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
-  import { toSummarySentiment } from "../../header-kit/toSummarySentiment.ts";
 
   /*
-    The header's sentiment language, at drawer depth: the verdict pill answers
-    first, then hairline bands with letterspaced caps labels instead of framed
-    cards. The highlight leads - one primary-weight line worth reading on its
-    own - then the verdict prose, then what reviewers praise and pan as dotted
-    lists with the same dots the header's sentiment column wears. The rules
-    key on position, so a title with no highlight simply opens on the verdict.
+    The header's sentiment language, at drawer depth. The verdict pill sits
+    beside the drawer title, so the body opens straight on the highlight: a
+    lead paragraph, one size up, that needs no label. Then hairline bands with
+    letterspaced caps labels instead of framed cards: the verdict prose, then
+    what reviewers praise and pan as dotted lists with the same dots the
+    header's sentiment column wears. Labels stay grey; everything worth
+    reading is primary. The rules key on position, so a title with no
+    highlight simply opens on the verdict.
   */
   const { sentiment }: { sentiment: SentimentAnalysis } = $props();
 
-  const verdict = $derived(toSummarySentiment(sentiment));
   const pros = $derived(sentiment.aspect.pros);
   const cons = $derived(sentiment.aspect.cons);
 </script>
@@ -33,19 +33,10 @@
 {/snippet}
 
 <div class="trakt-sentiment-bands">
-  {#if verdict}
-    <span class="sentiment-verdict" data-verdict={verdict.verdict}>
-      {verdict.label}
-    </span>
-  {/if}
-
   {#if sentiment.highlight}
-    <section class="sentiment-band">
-      <h3 class="band-label">{m.header_sentiment_highlight()}</h3>
-      <p class="band-prose band-highlight">
-        <InlineMarkdown text={sentiment.highlight} />
-      </p>
-    </section>
+    <p class="sentiment-lead">
+      <InlineMarkdown text={sentiment.highlight} />
+    </p>
   {/if}
 
   <section class="sentiment-band">
@@ -72,6 +63,8 @@
 
 <style lang="scss">
   .trakt-sentiment-bands {
+    --sentiment-lead-size: var(--ni-16);
+
     display: flex;
     flex-direction: column;
     gap: var(--ni-24);
@@ -81,32 +74,16 @@
     font-size: var(--font-size-text);
   }
 
-  /* The summary screen's own verdict pill - one system, everywhere. */
-  .sentiment-verdict {
-    align-self: flex-start;
-    display: inline-flex;
+  .sentiment-lead {
+    margin: 0;
 
-    padding: var(--ni-4) var(--ni-10);
-    border-radius: var(--border-radius-pill);
+    font-size: var(--sentiment-lead-size);
+    line-height: 1.55;
+    color: var(--color-text-primary);
 
-    font-size: var(--font-size-tag);
-    font-weight: 700;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-
-    color: var(--sentiment-color);
-    background: color-mix(in srgb, var(--sentiment-color) 16%, transparent);
-
-    &[data-verdict="positive"] {
-      --sentiment-color: var(--green-400);
-    }
-
-    &[data-verdict="mixed"] {
-      --sentiment-color: var(--yellow-400);
-    }
-
-    &[data-verdict="negative"] {
-      --sentiment-color: var(--red-400);
+    /* The global sheet sizes bare spans; the markdown's runs follow the lead. */
+    :global(*) {
+      font-size: inherit;
     }
   }
 
@@ -118,12 +95,6 @@
     &:not(:first-child) {
       padding-top: var(--ni-24);
       border-top: var(--ni-1) solid var(--color-hairline);
-    }
-
-    /* The pill opens the drawer; the first band follows it without a rule. */
-    .sentiment-verdict + & {
-      padding-top: 0;
-      border-top: none;
     }
 
     /* Pros and cons are one conversation - no rule between them. */
@@ -154,13 +125,8 @@
   .band-prose {
     margin: 0;
 
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-  }
-
-  /* The one statement worth full weight - everything else stays quiet. */
-  .band-highlight {
     color: var(--color-text-primary);
+    line-height: 1.6;
   }
 
   .sentiment-aspects {
@@ -170,7 +136,7 @@
 
     display: flex;
     flex-direction: column;
-    gap: var(--ni-14);
+    gap: var(--ni-10);
 
     li {
       display: flex;
@@ -209,7 +175,7 @@
 
   /* Matches the marker box height, so the dot centres on the first line. */
   .aspect-text {
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     line-height: 1.5;
   }
 </style>

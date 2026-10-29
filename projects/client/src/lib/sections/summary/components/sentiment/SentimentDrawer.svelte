@@ -12,6 +12,8 @@
   import { TAB_PARAM } from "$lib/sections/summary/constants.ts";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import SummaryHeaderStatePill from "../header-kit/SummaryHeaderStatePill.svelte";
+  import { toSummarySentiment } from "../header-kit/toSummarySentiment.ts";
   import RealityCheckTab from "../reality-check/RealityCheckTab.svelte";
   import { useIsRevampedSummaryHeader } from "../media/header/useIsRevampedSummaryHeader.ts";
   import type { InsightsOpenSource } from "./models/InsightsOpenSource.ts";
@@ -71,8 +73,24 @@
     return sentiment !== null ? SENTIMENT_TAB : REALITY_CHECK_TAB;
   });
 
+  const verdict = $derived(toSummarySentiment(sentiment));
+  const isSentimentShown = $derived(
+    shownTab === SENTIMENT_TAB && $isRevampedHeader,
+  );
+
   onMount(() => trackOpen({ source, tab: shownTab }));
 </script>
+
+<!-- The verdict answers beside the title, and only while its tab is shown. -->
+{#snippet badge()}
+  <RenderFor audience="vip">
+    {#if verdict && isSentimentShown}
+      <span class="trakt-insights-verdict" transition:fade={{ duration: 150 }}>
+        <SummaryHeaderStatePill label={verdict.label} tone={verdict.verdict} />
+      </span>
+    {/if}
+  </RenderFor>
+{/snippet}
 
 {#snippet sentimentView()}
   {#if sentiment !== null}
@@ -102,6 +120,7 @@
   title={m.header_insights()}
   variant="vip"
   size="auto"
+  {badge}
 >
   {#if isOpen}
     <div transition:fade={{ duration: 150 }}>
@@ -130,3 +149,9 @@
     </div>
   {/if}
 </Drawer>
+
+<style>
+  .trakt-insights-verdict {
+    display: inline-flex;
+  }
+</style>
