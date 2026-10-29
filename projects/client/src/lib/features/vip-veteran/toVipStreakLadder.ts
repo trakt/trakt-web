@@ -1,10 +1,11 @@
 import type { VipVeteran } from '$lib/requests/models/VipVeteran.ts';
 import { VIP_VETERAN_LADDER } from './VIP_VETERAN_LADDER.ts';
 import type { VipStreakRung } from './VipStreakRung.ts';
+import type { VipLadderTier } from './VipLadderTier.ts';
 
 type VipStreakLadder = {
   rungs: ReadonlyArray<VipStreakRung>;
-  next: { tier: number; title: VipVeteran['title']; yearsLeft: number } | null;
+  next: { tier: number; aura: VipLadderTier; yearsLeft: number } | null;
 };
 
 export function toVipStreakLadder(veteran: VipVeteran): VipStreakLadder {
@@ -21,7 +22,7 @@ export function toVipStreakLadder(veteran: VipVeteran): VipStreakLadder {
     next: next
       ? {
           tier: next.tier,
-          title: next.title,
+          aura: next.aura,
           yearsLeft: next.tier - veteran.years,
         }
       : null,

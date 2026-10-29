@@ -25,7 +25,12 @@
         ? avatars.length - index
         : undefined}
     >
-      <UserAvatar user={avatar.user} size="small" {linked} />
+      <UserAvatar
+        user={avatar.user}
+        size="small"
+        {linked}
+        auraSize="stack"
+      />
     </span>
   {/each}
 </span>
@@ -54,6 +59,8 @@
         var(--avatar-stack-base-size) + 2 * var(--border-thickness-xs)
       );
       --avatar-stack-overlap: calc(-1 * var(--ni-8));
+
+      --tier-aura-inset-gap: var(--border-thickness-xs);
 
       .avatar :global(.trakt-user-avatar img) {
         border: var(--border-thickness-xs) solid var(--color-background);

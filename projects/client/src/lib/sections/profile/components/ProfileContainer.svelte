@@ -55,6 +55,8 @@
     }
 
     @include for-tablet-sm-and-below {
+      --tier-aura-surface: var(--color-background);
+
       padding: 0;
       border-radius: 0;
 
@@ -65,6 +67,8 @@
       height: auto;
 
       &.is-vip {
+        --tier-aura-surface: var(--color-background);
+
         background: none;
         border: none;
         box-shadow: none;

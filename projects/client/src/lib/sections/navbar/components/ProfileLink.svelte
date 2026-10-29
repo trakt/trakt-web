@@ -3,12 +3,14 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { useCurrentUserTier } from "$lib/features/vip-veteran/stores/useCurrentUserTier.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../../profile-banner/ProfileImage.svelte";
 
   const { isExpanded = false }: { isExpanded?: boolean } = $props();
 
   const { user } = useUser();
+  const { member } = useCurrentUserTier();
 </script>
 
 <trakt-profile-button data-hj-suppress data-sentry-mask>
@@ -22,7 +24,8 @@
       --border-width="var(--border-thickness-xs)"
       name={$user?.name?.first ?? ""}
       src={$user?.avatar?.url ?? ""}
-      isVip={Boolean($user?.isVip)}
+      member={$member}
+      auraSize="small"
     />
     {#if isExpanded}
       <span class="trakt-profile-link-username">{$user?.username}</span>

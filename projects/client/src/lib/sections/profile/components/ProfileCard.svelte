@@ -11,7 +11,7 @@
   const profileUrl = $derived(UrlBuilder.profile.user(profile.slug!));
 </script>
 
-<div class="trakt-profile-card">
+<div class="trakt-profile-card" data-tier-aura-row>
   <div class="trakt-profile-avatar-wrapper">
     <Link href={profileUrl}>
       <ProfileImage
@@ -19,7 +19,8 @@
         --border-width="var(--border-thickness-xs)"
         name={profile.name.first}
         src={profile.avatar.url}
-        isVip={profile.isVip}
+        member={profile}
+        auraSize="medium"
       />
     </Link>
   </div>
@@ -60,7 +61,7 @@
       transition: opacity var(--transition-increment) ease-in-out;
 
       @include for-mouse {
-        &:hover {
+        &:not(:has(:global(.trakt-tier-aura[data-variant="compact"]))):hover {
           opacity: 0.85;
         }
       }

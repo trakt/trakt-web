@@ -25,7 +25,8 @@
         --border-width="var(--border-thickness-xs)"
         name={profile.name.first}
         src={profile.avatar.url}
-        isVip={profile.isVip}
+        member={profile}
+        auraSize="small"
       />
       <p class="ellipsis">{displayName}</p>
     </div>

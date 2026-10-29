@@ -2,19 +2,20 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
-  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
+  import type { MemberAvatarSize } from "$lib/features/vip-veteran/MemberAvatarSize.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
 
   type UserAvatarProps = {
     user: Pick<UserProfile, "avatar" | "slug" | "username" | "isVip"> &
-      Partial<Pick<UserProfile, "veteran">>;
+      Partial<Pick<UserProfile, "veteran" | "isDirector">>;
     size?: "small" | "large";
     icon?: Snippet;
     onClick?: () => void;
     linked?: boolean;
+    auraSize?: Exclude<MemberAvatarSize, "large">;
   };
 
   const {
@@ -23,12 +24,8 @@
     icon,
     onClick,
     linked = true,
+    auraSize = "small",
   }: UserAvatarProps = $props();
-
-  const isVeteranEnabled = useVipVeteranEnabled();
-  const ringTone = $derived(
-    $isVeteranEnabled && user.isVip ? toVipVeteranRingTone(user.veteran) : null,
-  );
 </script>
 
 {#snippet avatar()}
@@ -36,12 +33,13 @@
     class="trakt-user-avatar"
     class:trakt-vip-user={user.isVip}
     data-size={size}
-    data-ring-tone={ringTone}
   >
-    <CrossOriginImage
-      src={user.avatar.url}
-      alt={m.image_alt_user_avatar({ username: user.username })}
-    />
+    <MemberAvatar member={user} size={auraSize}>
+      <CrossOriginImage
+        src={user.avatar.url}
+        alt={m.image_alt_user_avatar({ username: user.username })}
+      />
+    </MemberAvatar>
 
     {#if icon}
       {@render icon()}
@@ -84,16 +82,12 @@
       }
     }
 
-    &[data-ring-tone="copper"] :global(img) {
-      border-color: var(--color-border-vip-avatar-copper);
-    }
+    &:has(:global(.trakt-tier-aura[data-variant="compact"])) {
+      margin: var(--tier-aura-compact-bleed);
 
-    &[data-ring-tone="silver"] :global(img) {
-      border-color: var(--color-border-vip-avatar-silver);
-    }
-
-    &[data-ring-tone="gold"] :global(img) {
-      border-color: var(--color-border-vip-avatar-gold);
+      :global(img) {
+        border: none;
+      }
     }
   }
 </style>

@@ -1,8 +1,9 @@
 <script lang="ts">
-  import VipBadge from "$lib/components/badge/VipBadge.svelte";
+  import MemberBadge from "$lib/features/vip-veteran/MemberBadge.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/features/i18n/messages";
+  import { useCurrentUserTier } from "$lib/features/vip-veteran/stores/useCurrentUserTier.ts";
   import { type VipSubscription } from "$lib/requests/models/VipSubscription";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
   import { toHumanLongDate } from "$lib/utils/formatting/date/toHumanLongDate";
@@ -15,6 +16,7 @@
   const { subscription }: { subscription: VipSubscription | Nil } = $props();
 
   const { user } = useUser();
+  const { member } = useCurrentUserTier();
 
   const isLifeTime = $derived(subscription?.type === "life");
 </script>
@@ -27,12 +29,12 @@
         --border-width="var(--border-thickness-xs)"
         name={$user.name.first}
         src={$user.avatar.url}
-        isVip={$user.isVip}
+        member={$member}
       />
       <div class="vip-header-details">
         <div class="vip-profile-header-user-details">
           <h1>{toDisplayableName($user)}</h1>
-          <VipBadge isDirector={$user.isDirector} />
+          <MemberBadge member={$member} />
         </div>
         <div class="vip-profile-header-membership">
           {#if subscription?.memberSince}
