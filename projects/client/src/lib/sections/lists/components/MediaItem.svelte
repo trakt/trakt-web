@@ -6,6 +6,7 @@
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import type { Snippet } from "svelte";
+  import ActivityDateTag from "./_internal/ActivityDateTag.svelte";
   import MediaHoverCard from "./_internal/MediaHoverCard.svelte";
   import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import MediaCard from "./MediaCard.svelte";
@@ -39,7 +40,13 @@
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
   const hasHoverCard = $derived(
     isCover && $isMouse && style === "summary" &&
-      (props.variant == null || props.variant === "start"),
+      (props.variant == null || props.variant === "start" ||
+        props.variant === "credit" || props.variant === "progress" ||
+        props.variant === "next" || props.variant === "activity"),
+  );
+  const hasFooterTitle = $derived(
+    props.variant === "start" || props.variant === "progress" ||
+      props.variant === "activity" || props.variant === "next",
   );
 </script>
 
@@ -71,6 +78,12 @@
   </div>
 {/snippet}
 
+{#snippet activityDateTag()}
+  {#if props.variant === "activity"}
+    <ActivityDateTag date={props.date} activityType={props.activityType} />
+  {/if}
+{/snippet}
+
 {#snippet mediaCard(coverWrapper?: Snippet<[Snippet]>)}
   <MediaCard
     {...props}
@@ -86,8 +99,14 @@
   {#if hasHoverCard}
     <MediaHoverCard
       media={props.media}
-      title={props.variant === "start" ? undefined : props.media.title}
+      title={hasFooterTitle ? undefined : props.media.title}
       tag={hoverTag}
+      bottomTag={props.variant === "next" || props.variant === "progress"
+        ? coverTag
+        : undefined}
+      ratingTag={props.variant === "activity" ? activityDateTag : undefined}
+      hasRating={props.variant !== "activity" && props.variant !== "next"}
+      runtime={props.variant === "activity" ? props.media.runtime : undefined}
       children={mediaCard}
     />
   {:else}
