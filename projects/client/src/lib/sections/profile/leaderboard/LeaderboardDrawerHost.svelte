@@ -3,11 +3,14 @@
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import type { LeaderboardEntry } from "$lib/requests/models/LeaderboardEntry.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants.ts";
   import { useLeaderboard } from "../stores/useLeaderboard.ts";
   import { useLeaderboardViewer } from "../stores/useLeaderboardViewer.ts";
   import LeaderboardItem from "./_internal/LeaderboardItem.svelte";
+  import LeaderboardPodium from "./_internal/LeaderboardPodium.svelte";
   import LeaderboardViewerCard from "./_internal/LeaderboardViewerCard.svelte";
   import { onMount } from "svelte";
 
@@ -22,6 +25,10 @@
   onMount(() => track({ source: "leaderboard" }));
 
   const { viewer } = useLeaderboardViewer();
+  const hasPodium = useVipVeteranEnabled();
+
+  const isOnPodium = (entry: LeaderboardEntry) =>
+    $hasPodium && !entry.locked && entry.rank != null && entry.rank <= 3;
 
   let isOpened = $state(false);
 </script>
@@ -35,10 +42,15 @@
         useList={() => useLeaderboard({ slug, limit: DEFAULT_DRILL_SIZE })}
       >
         {#snippet items(entries)}
-          {@const firstFreeIndex = entries.findIndex(
+          {@const podium = entries.filter(isOnPodium)}
+          {@const listed = entries.filter((entry) => !isOnPodium(entry))}
+          {@const firstFreeIndex = listed.findIndex(
             (entry) => entry.locked && !entry.isViewer,
           )}
-          {#each entries as entry, index (entry.key)}
+          {#if podium.length > 0}
+            <LeaderboardPodium entries={podium} />
+          {/if}
+          {#each listed as entry, index (entry.key)}
             {#if index === firstFreeIndex}
               <div class="trakt-leaderboard-divider">
                 <span class="tag secondary bold">
