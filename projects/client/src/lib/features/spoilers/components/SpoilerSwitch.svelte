@@ -7,6 +7,8 @@
     onclick: (e: MouseEvent) => void;
     disabled?: boolean;
     size?: "normal" | "small";
+    /** What the switch does, for screen readers; marking a review by default. */
+    label?: string;
   };
 
   const {
@@ -14,6 +16,7 @@
     onclick,
     disabled,
     size = "normal",
+    label = m.switch_label_mark_as_spoiler(),
   }: SpoilerSwitchProps = $props();
 </script>
 
@@ -27,7 +30,7 @@
   </p>
   <span class="spoiler-switch-control">
     <Switch
-      label={m.switch_label_mark_as_spoiler()}
+      {label}
       checked={isChecked}
       {onclick}
       {disabled}

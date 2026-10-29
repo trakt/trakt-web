@@ -19,7 +19,7 @@
     type MediaMentionSource,
   } from "../useMediaMentions.ts";
   import ComposerGif from "./ComposerGif.svelte";
-  import SpoilerSwitch from "./SpoilerSwitch.svelte";
+  import SpoilerSwitch from "$lib/features/spoilers/components/SpoilerSwitch.svelte";
   import { toCommentDraftGif } from "./toCommentDraftGif.ts";
 
   type CommentInputProps = {

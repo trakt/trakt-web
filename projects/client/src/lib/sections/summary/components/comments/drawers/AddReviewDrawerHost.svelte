@@ -13,7 +13,7 @@
   import { iffy } from "$lib/utils/function/iffy.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import ComposerGif from "../_internal/comment-input/ComposerGif.svelte";
-  import SpoilerSwitch from "../_internal/comment-input/SpoilerSwitch.svelte";
+  import SpoilerSwitch from "$lib/features/spoilers/components/SpoilerSwitch.svelte";
   import { toCommentDraftGif } from "../_internal/comment-input/toCommentDraftGif.ts";
   import type { ActiveComment } from "../_internal/models/ActiveComment.ts";
   import type { CommentDraftGif } from "../_internal/models/CommentDraftGif.ts";
