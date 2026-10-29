@@ -2,6 +2,7 @@
   import QuestionIcon from "$lib/components/icons/QuestionIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { RecapLine } from "$lib/requests/models/RecapLine.ts";
+  import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
   import InfoCard from "../../_internal/InfoCard.svelte";
 
   const { lines }: { lines: ReadonlyArray<RecapLine> } = $props();
@@ -17,7 +18,9 @@
             <span class="small bold thread-label">
               {m.header_recap_open_thread()}
             </span>
-            <span class="small secondary thread-text">{line.text}</span>
+            <span class="small secondary thread-text">
+              <InlineMarkdown text={line.text} />
+            </span>
           </span>
         </li>
       {/each}
@@ -91,6 +94,10 @@
 
     .thread-text {
       line-height: var(--ni-18);
+
+      :global(.trakt-inline-markdown) {
+        font-size: inherit;
+      }
     }
   }
 </style>
