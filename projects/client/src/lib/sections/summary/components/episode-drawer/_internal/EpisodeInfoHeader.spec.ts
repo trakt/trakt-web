@@ -8,7 +8,6 @@ import { describe, expect, it, vi } from 'vitest';
 import EpisodeInfoHeader from './EpisodeInfoHeader.svelte';
 
 const baseProps: ComponentProps<typeof EpisodeInfoHeader> = {
-  slug: 'silo',
   show: ShowSiloMappedMock,
   seasons: ShowSiloSeasonsMappedMock,
   season: 1,
@@ -65,28 +64,9 @@ describe('component: EpisodeInfoHeader', () => {
     expect(screen.queryByRole('link', { name: 'Next episode' })).toBeNull();
   });
 
-  it('should hide the switcher links when episode navigation is disabled', async () => {
-    renderComponent(EpisodeInfoHeader, {
-      props: { ...baseProps, hasEpisodeNavigation: false },
-    });
-
-    await screen.findByText('Season 1 • Episode 3');
-    expect(screen.queryByRole('link', { name: 'Previous episode' })).toBeNull();
-    expect(screen.queryByRole('link', { name: 'Next episode' })).toBeNull();
-  });
-
-  it('should render the episode label as a link when a title href is given', async () => {
-    renderComponent(EpisodeInfoHeader, {
-      props: { ...baseProps, titleHref: '/shows/silo' },
-    });
-
-    const label = await screen.findByText('Season 1 • Episode 3');
-    expect(label.closest('a')).not.toBeNull();
-  });
-
   it('should render without an entry while loading', async () => {
     renderComponent(EpisodeInfoHeader, {
-      props: { ...baseProps, entry: undefined, show: undefined },
+      props: { ...baseProps, entry: undefined },
     });
 
     expect(await screen.findByText('Season 1 • Episode 3')).toBeInTheDocument();

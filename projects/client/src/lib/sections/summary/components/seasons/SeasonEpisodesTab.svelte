@@ -13,7 +13,6 @@
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
   import SeasonProgressCard from "$lib/sections/summary/components/seasons/SeasonProgressCard.svelte";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
-  import type { CardUrlOverride } from "$lib/sections/lists/components/models/CardUrlOverride.ts";
   import { countWatchedEpisodes } from "$lib/utils/media/countWatchedEpisodes";
   import { sumRemainingRuntime } from "$lib/utils/media/sumRemainingRuntime.ts";
   import DrawerTabTitle from "$lib/sections/summary/components/_internal/DrawerTabTitle.svelte";
@@ -25,7 +24,6 @@
     currentEpisode,
     scrollToEpisode,
     showSeasonSelector = false,
-    buildEpisodeLink,
   }: {
     show: ShowEntry;
     seasons: Season[];
@@ -33,18 +31,14 @@
     currentEpisode?: number;
     scrollToEpisode?: number;
     showSeasonSelector?: boolean;
-    buildEpisodeLink?: (
-      target: { season: number; episode: number },
-    ) => CardUrlOverride;
   } = $props();
 
   const { buildEpisodeDrawerLink } = summaryDrawerNavigation();
-  const buildLink = $derived(buildEpisodeLink ?? buildEpisodeDrawerLink);
 
   // Selecting a season jumps to its first episode, keeping the episode drawer
   // open while the list and progress card follow along.
   const buildSeasonLink = (seasonNumber: number) =>
-    buildLink({ season: seasonNumber, episode: 1 }).href;
+    buildEpisodeDrawerLink({ season: seasonNumber, episode: 1 }).href;
 
   const { list: episodes, isLoading } = $derived(
     useSeasonEpisodes(show.slug, currentSeason),
@@ -141,7 +135,7 @@
             isCurrentEpisode={episode.number === currentEpisode}
             isScrollTarget={episode.number ===
               (scrollToEpisode ?? currentEpisode)}
-            urlOverride={buildLink({
+            urlOverride={buildEpisodeDrawerLink({
               season: episode.season,
               episode: episode.number,
             })}
