@@ -9,6 +9,7 @@
   import type { ListTarget } from "$lib/models/ListTarget";
   import type { UserList } from "$lib/requests/queries/users/userListsQuery.ts";
   import { useAllPersonalLists } from "$lib/stores/useAllPersonalLists";
+  import { getRecentListIds } from "$lib/sections/lists/recent/getRecentListIds.ts";
   import { useListedOnIds } from "$lib/stores/useListedOnIds";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import ListDropdownItem from "./ListDropdownItem.svelte";
@@ -17,6 +18,9 @@
   import PreviewListButton from "./_internal/PreviewListButton.svelte";
   import { useSharedListIds } from "./_internal/useSharedListIds.ts";
   import WatchlistDropdownItem from "./_internal/WatchlistDropdownItem.svelte";
+
+  const MAX_SHOWN_RECENT_LISTS = 3;
+  const MIN_LISTS_FOR_RECENTS = 8;
 
   const {
     onClose,
@@ -45,12 +49,26 @@
     }),
   );
 
+  const recentListIds = getRecentListIds();
+  const recentLists = $derived(
+    recentListIds
+      .map((id) => sortedLists.find((list) => list.id === id))
+      .filter((list) => list != null)
+      .slice(0, MAX_SHOWN_RECENT_LISTS),
+  );
+  const showRecents = $derived(sortedLists.length > MIN_LISTS_FOR_RECENTS);
+
   const categoryIdPrefix = $props.id();
   const { user } = useUser();
   const isOwned = (list: UserList) => list.ownerId === $user.id;
   const isShared = (list: UserList) => $sharedListIds.has(list.id);
   const categories = $derived(
     [
+      {
+        key: "recent",
+        title: m.list_title_recent_lists(),
+        lists: showRecents ? recentLists : [],
+      },
       {
         key: "personal",
         title: m.list_title_personal_lists(),

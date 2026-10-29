@@ -1,3 +1,4 @@
+import { clearRecentLists } from '$lib/sections/lists/recent/clearRecentLists.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { getLocale } from '$lib/features/i18n/index.ts';
@@ -49,6 +50,7 @@ export function useAuth() {
     await revokeTokens(manager);
 
     setToken(null);
+    clearRecentLists();
     isAuthorized.next(false);
     // `signoutRedirect` marks storage via `addUserUnloaded`, but navigates away
     // on the next statement with that write unawaited. Await it here instead.

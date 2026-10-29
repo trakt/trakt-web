@@ -2207,6 +2207,10 @@
       "default": "Shared",
       "description": "Title for lists that have collaborators: the user's own lists with collaborators and lists the user collaborates on. This title should be as short and concise as possible."
     },
+    "list_title_recent_lists": {
+      "default": "Recent",
+      "description": "Title for the row of lists the user opened or added to most recently. This title should be as short and concise as possible."
+    },
     "list_title_liked_lists": {
       "default": "Liked",
       "description": "Title for lists containing the user's liked lists. This title should be as short and concise as possible."
