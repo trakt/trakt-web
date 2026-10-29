@@ -1924,7 +1924,6 @@
   "text_export_status_zipping": "Dateien werden gezippt…",
   "text_exporting": "Exportiere… {progress}",
   "text_failed_to_add_titles": "Titel konnten nicht zu {name} hinzugefügt werden",
-  "text_favorites_limit_reached": "Sie können bis zu {limit} Dienste auswählen",
   "text_featured_people_empty_hint": "Personen erscheinen hier, sobald sie in mehr als einem Titel dieser Liste vorkommen.",
   "text_footer_category_community": "Community",
   "text_footer_category_legal": "Rechtliches",

@@ -1924,7 +1924,6 @@
   "text_export_status_zipping": "A compactar ficheiros…",
   "text_exporting": "A exportar… {progress}",
   "text_failed_to_add_titles": "Não foi possível adicionar títulos a {name}",
-  "text_favorites_limit_reached": "Podes selecionar até {limit} serviços",
   "text_featured_people_empty_hint": "As pessoas aparecem aqui quando participam em mais do que um título desta lista.",
   "text_footer_category_community": "Comunidade",
   "text_footer_category_legal": "Legal",

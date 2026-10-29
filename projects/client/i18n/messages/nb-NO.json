@@ -1924,7 +1924,6 @@
   "text_export_status_zipping": "Komprimerer filer…",
   "text_exporting": "Eksporterer… {progress}",
   "text_failed_to_add_titles": "Kunne ikke legge til titler i {name}",
-  "text_favorites_limit_reached": "Du kan velge opptil {limit} tjenester",
   "text_featured_people_empty_hint": "Personer vises her når de dukker opp i mer enn én tittel på denne listen.",
   "text_footer_category_community": "Fellesskap",
   "text_footer_category_legal": "Juridisk",

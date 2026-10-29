@@ -1924,7 +1924,6 @@
   "text_export_status_zipping": "Архівація файлів…",
   "text_exporting": "Експортування… {progress}",
   "text_failed_to_add_titles": "Не вдалося додати назви до {name}",
-  "text_favorites_limit_reached": "Ви можете вибрати до {limit} сервісів",
   "text_featured_people_empty_hint": "Люди з'являються тут, якщо вони фігурують у більш ніж одному творі з цього списку.",
   "text_footer_category_community": "Спільнота",
   "text_footer_category_legal": "Правова інформація",

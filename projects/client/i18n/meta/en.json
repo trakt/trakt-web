@@ -127,10 +127,6 @@
       "default": "{count} / {total} selected · {country}",
       "description": "Shows how many streaming services are selected out of the total available, and the detected country."
     },
-    "text_favorites_limit_reached": {
-      "default": "You can select up to {limit} services",
-      "description": "Label shown under the filter input when the user has reached the maximum number of favorite streaming services."
-    },
     "text_no_services_match_filter": {
       "default": "No services match your filter.",
       "description": "Empty state shown in the favorites picker when the filter text matches no streaming services."

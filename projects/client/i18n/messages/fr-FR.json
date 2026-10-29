@@ -1924,7 +1924,6 @@
   "text_export_status_zipping": "Compression des fichiers…",
   "text_exporting": "Exportation en cours… {progress}",
   "text_failed_to_add_titles": "Impossible d'ajouter des titres à {name}",
-  "text_favorites_limit_reached": "Vous pouvez sélectionner jusqu'à {limit} services",
   "text_featured_people_empty_hint": "Les personnes s'affichent ici lorsqu'elles apparaissent dans plus d'un titre de cette liste.",
   "text_footer_category_community": "Communauté",
   "text_footer_category_legal": "Juridique",

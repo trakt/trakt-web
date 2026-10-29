@@ -1924,7 +1924,6 @@
   "text_export_status_zipping": "Компресиране на файлове…",
   "text_exporting": "Експортиране… {progress}",
   "text_failed_to_add_titles": "Неуспешно добавяне на заглавия към {name}",
-  "text_favorites_limit_reached": "Можете да изберете до {limit} услуги",
   "text_featured_people_empty_hint": "Хората се появяват тук, след като фигурират в повече от едно заглавие в този списък.",
   "text_footer_category_community": "Общност",
   "text_footer_category_legal": "Правни",

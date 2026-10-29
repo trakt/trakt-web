@@ -1924,7 +1924,6 @@
   "text_export_status_zipping": "Mengompres file…",
   "text_exporting": "Mengekspor… {progress}",
   "text_failed_to_add_titles": "Gagal menambahkan judul ke {name}",
-  "text_favorites_limit_reached": "Anda dapat memilih hingga {limit} layanan",
   "text_featured_people_empty_hint": "Orang akan muncul di sini setelah mereka tampil di lebih dari satu judul di daftar ini.",
   "text_footer_category_community": "Komunitas",
   "text_footer_category_legal": "Hukum",

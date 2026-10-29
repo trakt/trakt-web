@@ -1924,7 +1924,6 @@
   "text_export_status_zipping": "Архивирование файлов…",
   "text_exporting": "Экспорт… {progress}",
   "text_failed_to_add_titles": "Не удалось добавить названия в {name}",
-  "text_favorites_limit_reached": "Вы можете выбрать до {limit} сервисов",
   "text_featured_people_empty_hint": "Персоны отображаются здесь, когда они фигурируют более чем в одном наименовании из этого списка.",
   "text_footer_category_community": "Сообщество",
   "text_footer_category_legal": "Право",
