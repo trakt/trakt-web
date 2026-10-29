@@ -11641,14 +11641,6 @@
       "default": "Your 2026 as a scroll-driven reel with a viewer persona, then a stats page styled to match it.",
       "description": "Description for the Year in Review 2026 preview feature."
     },
-    "preview_feature_title_large_screen_cards": {
-      "default": "Large Screen Cards",
-      "description": "Title for the Large Screen Cards preview feature."
-    },
-    "preview_feature_description_large_screen_cards": {
-      "default": "On bigger screens, view all lists use the same cards as the rest of the app. Selecting one opens a quick glance instead of leaving the list.",
-      "description": "Description for the Large Screen Cards preview feature."
-    },
     "page_title_widget_background": {
       "default": "Background",
       "description": "Title for the widget background settings page."
