@@ -2,9 +2,7 @@
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { useRecommendationMode } from "./useRecommendationMode";
 
-  const { current, isApplicable } = useRecommendationMode();
+  const { current } = useRecommendationMode();
 </script>
 
-{#if $isApplicable}
-  <ListMetaInfo text={$current.text()} />
-{/if}
+<ListMetaInfo text={$current.text()} />

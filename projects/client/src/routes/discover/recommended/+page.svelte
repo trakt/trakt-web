@@ -12,15 +12,13 @@
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/assets";
 
   const { mode, current } = useDiscover();
-  const { current: recommendationMode, isApplicable } = useRecommendationMode();
+  const { current: recommendationMode } = useRecommendationMode();
 
   const metaInfo = $derived(
-    $isApplicable
-      ? m.text_recommended_meta_info({
-          media: $current.text(),
-          mode: $recommendationMode.text(),
-        })
-      : $current.text(),
+    m.text_recommended_meta_info({
+      media: $current.text(),
+      mode: $recommendationMode.text(),
+    }),
   );
 </script>
 

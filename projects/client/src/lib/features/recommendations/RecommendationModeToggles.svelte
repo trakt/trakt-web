@@ -4,8 +4,7 @@
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useRecommendationMode } from "./useRecommendationMode";
 
-  const { current, options, isApplicable, onModeChange } =
-    useRecommendationMode();
+  const { current, options, onModeChange } = useRecommendationMode();
 
   const togglerOptions = options.map((option) => ({
     ...option,
@@ -21,10 +20,8 @@
   <RecentIcon />
 {/snippet}
 
-{#if $isApplicable}
-  <Toggler
-    value={$current.value}
-    onChange={onModeChange}
-    options={togglerOptions}
-  />
-{/if}
+<Toggler
+  value={$current.value}
+  onChange={onModeChange}
+  options={togglerOptions}
+/>
