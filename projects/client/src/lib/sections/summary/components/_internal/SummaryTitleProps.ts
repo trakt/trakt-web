@@ -12,7 +12,4 @@ export type EpisodeSummaryEntry = {
 export type SummaryTitleProps = {
   title: string;
   crew: MediaCrew;
-  href?: string;
-  hasDetails?: boolean;
-  hasReservedRows?: boolean;
 } & (EpisodeSummaryEntry | MediaSummaryEntry);

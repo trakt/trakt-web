@@ -14,7 +14,6 @@
   import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { mediaGlanceNavigation } from "$lib/sections/summary/components/glance/mediaGlanceNavigation.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
@@ -45,17 +44,6 @@
   );
   const summaryCardLayout = $derived(
     style === "compact" || style === "minimal" ? style : "default",
-  );
-
-  const { buildEpisodeGlanceLink } = mediaGlanceNavigation();
-  const urlOverride = $derived(
-    $isLargeScreenCards && style === "summary"
-      ? buildEpisodeGlanceLink({
-        slug: props.media.slug,
-        season: props.episode.season,
-        episode: props.episode.number,
-      })
-      : props.urlOverride,
   );
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
@@ -254,7 +242,7 @@
         },
       }}
       popupActions={props.popupActions}
-      {urlOverride}
+      urlOverride={props.urlOverride}
       layout={summaryCardLayout}
       badge={action}
       {sortTag}
@@ -268,7 +256,7 @@
       {...props}
       {tag}
       {action}
-      {urlOverride}
+      urlOverride={props.urlOverride}
       {coverWrapper}
       indicators={hasIndicators ? indicatorTags : undefined}
     />

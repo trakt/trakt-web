@@ -5,7 +5,6 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { mediaGlanceNavigation } from "$lib/sections/summary/components/glance/mediaGlanceNavigation.ts";
   import type { Snippet } from "svelte";
   import MediaHoverCard from "./_internal/MediaHoverCard.svelte";
   import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
@@ -29,15 +28,6 @@
   const style = $derived(props.style ?? "cover");
   const resolvedStyle = $derived(
     resolveItemCardStyle(style, $isLargeScreenCards),
-  );
-  const { buildMediaGlanceLink } = mediaGlanceNavigation();
-  const urlOverride = $derived(
-    $isLargeScreenCards && style === "summary"
-      ? buildMediaGlanceLink({
-        type: props.media.type,
-        slug: props.media.slug,
-      })
-      : props.urlOverride,
   );
 
   const summaryCardLayout = $derived(
@@ -85,7 +75,6 @@
   <MediaCard
     {...props}
     {coverTag}
-    {urlOverride}
     {coverWrapper}
     style={resolvedStyle}
     action={props.action}

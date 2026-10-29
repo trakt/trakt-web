@@ -7,18 +7,10 @@
   import { mapToMainCredit } from "./mapToMainCredit";
   import { mapToSummaryStatus } from "./mapToSummaryStatus";
   import { mapToSummarySubtitle } from "./mapToSummarySubtitle";
-  import GlanceTitleLink from "./GlanceTitleLink.svelte";
   import ResponsiveTitle from "./ResponsiveTitle.svelte";
   import type { SummaryTitleProps } from "./SummaryTitleProps";
 
-  const {
-    title,
-    crew,
-    href,
-    hasDetails = true,
-    hasReservedRows = false,
-    ...target
-  }: SummaryTitleProps = $props();
+  const { title, crew, ...target }: SummaryTitleProps = $props();
 
   const subtitle = $derived(mapToSummarySubtitle(target));
   const mainCredit = $derived(mapToMainCredit(target.type, crew));
@@ -34,19 +26,10 @@
 </script>
 
 <div class="trakt-summary-title">
-  <div class="trakt-summary-title-slot">
-    {#if href}
-      <GlanceTitleLink {href}>
-        <ResponsiveTitle {title} />
-      </GlanceTitleLink>
-    {:else}
-      <ResponsiveTitle {title} />
-    {/if}
-  </div>
+  <ResponsiveTitle {title} />
 
-  {#if mainCredit || hasReservedRows}
+  {#if mainCredit}
     <p class="tiny trakt-media-main-credit">
-      {#if mainCredit}
       <MessageWithLink
         message={mainCredit.text}
         href={UrlBuilder.people(mainCredit.key, mainCredit.positions)}
@@ -58,7 +41,6 @@
           )}
           target="_self">{mainCredit.others[0].name}</Link
         >{/if}
-      {/if}
     </p>
   {/if}
 
@@ -67,29 +49,18 @@
       {subtitle}
     </p>
 
-    {#if hasDetails}
-      <DetailsButton style="action" size="small" {title} />
-    {/if}
+    <DetailsButton style="action" size="small" {title} />
   </div>
 
-  {#if status || hasReservedRows}
+  {#if status}
     <p class="capitalize bold trakt-media-status">
-      {status ? toTranslatedStatus(status) : ""}
+      {toTranslatedStatus(status)}
     </p>
   {/if}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-
-  @mixin compact-title {
-    gap: var(--gap-micro);
-    align-items: center;
-
-    :global(.trakt-responsive-title) {
-      text-align: center;
-    }
-  }
 
   .trakt-summary-title {
     display: flex;
@@ -99,29 +70,11 @@
     transition: gap var(--transition-increment) ease-in-out;
 
     @include for-tablet-sm-and-below {
-      @include compact-title;
-    }
+      gap: var(--gap-micro);
+      align-items: center;
 
-    :global(.trakt-summary[data-variant="drawer"]) & {
-      @include compact-title;
-
-      min-width: 0;
-      max-width: 100%;
-
-      .trakt-summary-title-slot {
-        display: flex;
-        align-items: flex-start;
-
-        min-width: 0;
-        max-width: 100%;
-
-        min-height: calc(var(--glance-title-lines) * 1lh);
-      }
-
-      .trakt-media-main-credit,
-      .trakt-media-status,
-      .trakt-summary-subtitle {
-        min-height: var(--glance-line-height);
+      :global(.trakt-responsive-title) {
+        text-align: center;
       }
     }
   }
