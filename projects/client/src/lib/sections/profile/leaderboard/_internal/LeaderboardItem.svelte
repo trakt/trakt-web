@@ -8,6 +8,7 @@
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { toStatLabel } from "./toStatLabel.ts";
+  import { toLeaderboardStats } from "./toLeaderboardStats.ts";
 
   const { entry }: { entry: LeaderboardEntry } = $props();
 
@@ -48,23 +49,13 @@
       ].join(" · ");
     }
 
-    if (entry.totalPlays == null && entry.totalMinutes == null) {
-      return null;
-    }
-
-    const parts: string[] = [];
-    if (entry.totalPlays != null) {
-      parts.push(toStatLabel(entry.totalPlays, "plays", locale));
-    }
-    if (entry.totalMinutes != null) {
-      parts.push(toStatLabel(Math.round(entry.totalMinutes / 60), "hours", locale));
-    }
-    return parts.join(" · ");
+    return toLeaderboardStats(entry, locale);
   });
 </script>
 
 <div
   class="trakt-leaderboard-item"
+  data-tier-aura-row
   class:is-viewer={entry.isViewer}
   class:is-free={isLockedFollow}
 >
@@ -81,7 +72,7 @@
       {/if}
     </div>
 
-    <UserAvatar user={entry.user} />
+    <UserAvatar user={entry.user} auraSize="medium" />
 
     <div class="item-copy">
       <div class="copy-heading">
@@ -145,7 +136,7 @@
 
   .item-grid {
     display: grid;
-    grid-template-columns: auto var(--ni-44) minmax(0, 1fr);
+    grid-template-columns: auto auto minmax(0, 1fr);
     align-items: center;
     gap: var(--gap-s);
     min-width: 0;
