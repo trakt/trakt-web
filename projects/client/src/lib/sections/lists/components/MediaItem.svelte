@@ -39,7 +39,8 @@
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
   const hasHoverCard = $derived(
     isCover && $isMouse && style === "summary" &&
-      (props.variant == null || props.variant === "start"),
+      (props.variant == null || props.variant === "start" ||
+        props.variant === "credit"),
   );
 </script>
 
