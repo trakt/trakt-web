@@ -299,6 +299,11 @@
           }
         }
       }
+
+      /* Its own colours bypass the disabled tokens above, so it dims instead. */
+      &[data-disabled] {
+        opacity: 0.4;
+      }
     }
   }
 
