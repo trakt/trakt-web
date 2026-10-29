@@ -19,6 +19,7 @@
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import type { Snippet } from "svelte";
+  import ActivityDateTag from "./_internal/ActivityDateTag.svelte";
   import MediaHoverCard from "./_internal/MediaHoverCard.svelte";
   import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
   import SummaryCardRating from "./SummaryCardRating.svelte";
@@ -48,7 +49,8 @@
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
   const hasHoverCard = $derived(
-    resolvedStyle === "cover" && $isMouse && style === "summary" && isListItem,
+    resolvedStyle === "cover" && $isMouse && style === "summary" &&
+      (isListItem || isActivity || props.variant === "next"),
   );
 
   const runtime = $derived(
@@ -76,6 +78,10 @@
   );
 
   const hoverSubtitle = $derived($spoilerFreeTitle || undefined);
+
+  const hasSingleEpisodeRuntime = $derived(
+    !["multiple_episodes", "full_season"].includes(props.episode.type),
+  );
 
   const hasMarkAsWatched = $derived.by(() => {
     if (isListItem || isFuture || isHidden || isActivity) {
@@ -124,6 +130,12 @@
     {#if style === "summary" && isListItem}
       <SummaryCardRating item={props.episode} />
     {/if}
+  {/if}
+{/snippet}
+
+{#snippet activityDateTag()}
+  {#if props.variant === "activity"}
+    <ActivityDateTag date={props.date} activityType={props.activityType} />
   {/if}
 {/snippet}
 
@@ -266,8 +278,14 @@
     {#if hasHoverCard}
       <MediaHoverCard
         media={props.media}
-        title={props.media.title}
-        subtitle={hoverSubtitle}
+        title={isListItem ? props.media.title : undefined}
+        subtitle={isListItem ? hoverSubtitle : undefined}
+        bottomTag={props.variant === "next"
+          ? tag
+          : undefined}
+        ratingTag={isActivity ? activityDateTag : undefined}
+        hasRating={isListItem}
+        runtime={isActivity && hasSingleEpisodeRuntime ? runtime : undefined}
         children={episodeCard}
       />
     {:else}

@@ -1,5 +1,6 @@
 <script lang="ts">
   import FlipCard from "$lib/components/card/FlipCard.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import type { Snippet } from "svelte";
@@ -12,17 +13,28 @@
     title,
     tag,
     subtitle,
+    bottomTag,
+    runtime,
+    ratingTag,
+    hasRating = true,
   }: {
     children: Snippet<[Snippet<[Snippet]>]>;
     media: MediaInputDefault;
     title?: string;
     tag?: Snippet;
     subtitle?: string;
+    bottomTag?: Snippet;
+    runtime?: number;
+    ratingTag?: Snippet;
+    hasRating?: boolean;
   } = $props();
 
   let isFlipped = $state(false);
   let hasFlipped = $state(false);
   let coverArea = $state<HTMLElement>();
+
+  const hasTitles = $derived(!!title || !!subtitle);
+  const isMetaInRatingRow = $derived(!hasTitles && !ratingTag);
 
   const hasDistinctOriginalTitle = $derived(
     title && media.originalTitle
@@ -98,41 +110,71 @@
         alt={media.title}
       />
 
-      <div class="hover-card-details">
-        <div class="hover-card-titles">
-          {#if title}
-            <p class="trakt-card-title">{title}</p>
-          {/if}
+      {#snippet genre(classList: string)}
+        <GenreList {classList} separator=", " genres={media.genres} />
+      {/snippet}
 
-          {#if subtitle}
-            <p class="trakt-card-subtitle small secondary">
-              <bdi dir="ltr">{subtitle}</bdi>
+      {#snippet meta()}
+        <div class="hover-card-meta">
+          {@render genre("small secondary")}
+          {#if runtime}
+            <p class="small secondary no-wrap" aria-hidden="true">•</p>
+            <p class="small secondary no-wrap">
+              {TagIntlProvider.toDuration(runtime)}
             </p>
-          {:else}
-            {#if hasDistinctOriginalTitle}
-              <p class="trakt-card-subtitle secondary">
-                ({media.originalTitle})
-              </p>
-            {/if}
-
-            <GenreList
-              classList="trakt-card-subtitle small secondary"
-              separator=", "
-              genres={media.genres}
-            />
           {/if}
         </div>
+      {/snippet}
 
-        {#if tag}
-          <div class="hover-card-tags">
-            {@render tag()}
-          </div>
+      {#if !isMetaInRatingRow || tag}
+        <div class="hover-card-details">
+          {#if hasTitles}
+            <div class="hover-card-titles">
+              {#if title}
+                <p class="trakt-card-title">{title}</p>
+              {/if}
+
+              {#if subtitle}
+                <p class="trakt-card-subtitle small secondary">
+                  <bdi dir="ltr">{subtitle}</bdi>
+                </p>
+              {:else}
+                {#if hasDistinctOriginalTitle}
+                  <p class="trakt-card-subtitle secondary">
+                    ({media.originalTitle})
+                  </p>
+                {/if}
+
+                {@render genre("trakt-card-subtitle small secondary")}
+              {/if}
+            </div>
+          {:else if !isMetaInRatingRow}
+            {@render meta()}
+          {/if}
+
+          {#if tag}
+            <div class="hover-card-tags">
+              {@render tag()}
+            </div>
+          {/if}
+        </div>
+      {/if}
+
+      <div class="hover-card-bottom">
+        {#if isMetaInRatingRow}
+          {@render meta()}
+        {/if}
+        {@render ratingTag?.()}
+        {#if hasRating}
+          <SummaryCardRating item={media} />
         {/if}
       </div>
 
-      <div class="hover-card-bottom">
-        <SummaryCardRating item={media} />
-      </div>
+      {#if bottomTag}
+        <div class="hover-card-bottom-tag">
+          {@render bottomTag()}
+        </div>
+      {/if}
     {/if}
   </div>
 {/snippet}
@@ -230,6 +272,15 @@
     }
   }
 
+  .hover-card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-micro);
+
+    min-width: 0;
+    color: var(--color-text-secondary);
+  }
+
   .hover-card-bottom {
     position: relative;
     z-index: var(--layer-raised);
@@ -244,5 +295,17 @@
     :global(.trakt-summary-card-rating) {
       margin-inline-start: auto;
     }
+
+    &:has(+ .hover-card-bottom-tag) {
+      padding-bottom: var(--gap-s);
+    }
+  }
+
+  .hover-card-bottom-tag {
+    position: relative;
+    z-index: var(--layer-raised);
+
+    padding: var(--ni-12);
+    padding-top: 0;
   }
 </style>
