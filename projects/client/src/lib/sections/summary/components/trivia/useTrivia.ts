@@ -52,13 +52,24 @@ export function useTrivia(props: UseTriviaProps) {
     }),
   );
 
+  // From the facts that aren't spoilers, so the menu holds still when the
+  // spoiler switch swaps the list underneath it.
+  const categories = query.pipe(
+    map(($query) => {
+      const items = $query.data?.items ?? [];
+      return Array.from(
+        new Set(
+          items
+            .filter((trivia) => !trivia.isSpoiler)
+            .map((trivia) => trivia.category),
+        ),
+      );
+    }),
+  );
+
   return {
     list,
-    categories: list.pipe(
-      map(($list) =>
-        Array.from(new Set($list.map((trivia) => trivia.category))),
-      ),
-    ),
+    categories,
     summary: query.pipe(
       map(($query) => ($query.data ? $query.data.summary : [])),
     ),

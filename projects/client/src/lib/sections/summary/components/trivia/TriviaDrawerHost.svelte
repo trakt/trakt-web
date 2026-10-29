@@ -1,9 +1,9 @@
 <script lang="ts">
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
+  import SpoilerSwitch from "$lib/features/spoilers/components/SpoilerSwitch.svelte";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
@@ -23,7 +23,11 @@
   const isRevampedHeader = useIsRevampedSummaryHeader();
   let activeCategory = $state<TriviaCategory | "all">("all");
 
-  const { current: triviaType, set, options } = useToggler("trivia");
+  const { current: triviaType, set } = useToggler("trivia");
+
+  /* Spoilers on shows only the spoiler facts; the category menu stays in
+     place, dimmed, rather than vanishing under it. */
+  const isSpoilers = $derived($triviaType.value === "spoilers");
 
   const { list, hasSpoilers, categories } = $derived(
     useTrivia({
@@ -40,7 +44,7 @@
   );
 
   const filteredList = $derived(
-    effectiveCategory === "all"
+    effectiveCategory === "all" || isSpoilers
       ? $list
       : $list.filter((trivia) => trivia.category === effectiveCategory),
   );
@@ -91,7 +95,11 @@
         {#if $hasSpoilers || $categories.length > 1}
           <div class="trivia-filters">
             {#if $hasSpoilers}
-              <Toggler value={$triviaType.value} onChange={set} {options} />
+              <SpoilerSwitch
+                isChecked={isSpoilers}
+                label={m.button_label_trivia_spoilers()}
+                onclick={() => set(isSpoilers ? "no-spoilers" : "spoilers")}
+              />
             {/if}
             {#if $categories.length > 1}
               <SingleSelect
@@ -100,6 +108,7 @@
                 placeholder={m.option_text_trivia_category_all()}
                 autoWidth
                 variant="pill"
+                disabled={isSpoilers}
                 onChange={(value) =>
                   (activeCategory = value as TriviaCategory | "all")}
               />
