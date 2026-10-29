@@ -1,0 +1,48 @@
+
+@mixin layer($inset: 0) {
+  position: absolute;
+  inset: calc(var(--u) * #{$inset});
+  display: block;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@mixin ring-mask($thickness) {
+  $edge: radial-gradient(
+    farthest-side,
+    transparent calc(100% - #{$thickness}),
+    #000 calc(100% - #{$thickness} + 0.5px)
+  );
+
+  -webkit-mask: $edge;
+  mask: $edge;
+}
+
+@mixin slot($core-inset) {
+  position: absolute;
+  inset: calc(var(--u) * -#{$core-inset});
+  pointer-events: none;
+}
+
+$spark: polygon(
+  50% 0,
+  60% 40%,
+  100% 50%,
+  60% 60%,
+  50% 100%,
+  40% 60%,
+  0 50%,
+  40% 40%
+);
+
+@mixin motion {
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.trakt-tier-aura:is([data-motion="live"], .is-awake)) & {
+      @content;
+    }
+
+    :global(.trakt-tier-aura:is(.is-awake:not(.is-playing), .is-offscreen)) & {
+      animation-play-state: paused;
+    }
+  }
+}
