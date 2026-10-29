@@ -40,7 +40,10 @@
   const hasHoverCard = $derived(
     isCover && $isMouse && style === "summary" &&
       (props.variant == null || props.variant === "start" ||
-        props.variant === "credit"),
+        props.variant === "credit" || props.variant === "progress"),
+  );
+  const hasFooterTitle = $derived(
+    props.variant === "start" || props.variant === "progress",
   );
 </script>
 
@@ -87,7 +90,7 @@
   {#if hasHoverCard}
     <MediaHoverCard
       media={props.media}
-      title={props.variant === "start" ? undefined : props.media.title}
+      title={hasFooterTitle ? undefined : props.media.title}
       tag={hoverTag}
       children={mediaCard}
     />
