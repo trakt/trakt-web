@@ -1895,7 +1895,6 @@
   "text_export_status_zipping": "Comprimint fitxers...",
   "text_exporting": "Exportant... {progress}",
   "text_failed_to_add_titles": "No s'han pogut afegir títols a {name}",
-  "text_favorites_limit_reached": "Pots seleccionar fins a {limit} serveis",
   "text_featured_people_empty_hint": "Les persones es mostraran aquí un cop apareguin en més d'un títol d'aquesta llista.",
   "text_footer_category_community": "Comunitat",
   "text_footer_category_legal": "Legal",

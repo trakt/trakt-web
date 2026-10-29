@@ -1895,7 +1895,6 @@
   "text_export_status_zipping": "Dosyalar sıkıştırılıyor…",
   "text_exporting": "Dışa aktarılıyor… {progress}",
   "text_failed_to_add_titles": "{name} listesine başlıklar eklenemedi",
-  "text_favorites_limit_reached": "En fazla {limit} platform seçebilirsiniz",
   "text_featured_people_empty_hint": "Kişiler, bu listede birden fazla başlıkta yer aldıklarında burada görünür.",
   "text_footer_category_community": "Topluluk",
   "text_footer_category_legal": "Yasal",

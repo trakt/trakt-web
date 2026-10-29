@@ -7,12 +7,10 @@
   const {
     source,
     isFavorite,
-    disabled = false,
     onToggle,
   }: {
     source: StreamingSource;
     isFavorite: boolean;
-    disabled?: boolean;
     onToggle: () => void;
   } = $props();
 </script>
@@ -23,7 +21,6 @@
   aria-pressed={isFavorite}
   aria-label={m.button_label_toggle_favorite_service({ service: source.name })}
   title={source.logoUrl ? source.name : undefined}
-  {disabled}
   onclick={onToggle}
 >
   <ServiceLogoBox
@@ -53,11 +50,6 @@
     border: none;
     cursor: pointer;
     color: inherit;
-
-    &:disabled {
-      cursor: not-allowed;
-      opacity: var(--de-emphasized-opacity);
-    }
   }
 
   .tile-check {

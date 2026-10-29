@@ -1895,7 +1895,6 @@
   "text_export_status_zipping": "Zippar filer…",
   "text_exporting": "Exporterar… {progress}",
   "text_failed_to_add_titles": "Kunde inte lägga till titlar i {name}",
-  "text_favorites_limit_reached": "Du kan välja upp till {limit} tjänster",
   "text_featured_people_empty_hint": "Personer visas här när de förekommer i mer än en titel på den här listan.",
   "text_footer_category_community": "Community",
   "text_footer_category_legal": "Juridiskt",

@@ -1895,7 +1895,6 @@
   "text_export_status_zipping": "Fájlok tömörítése…",
   "text_exporting": "Exportálás… {progress}",
   "text_failed_to_add_titles": "Nem sikerült hozzáadni a címeket ehhez: {name}",
-  "text_favorites_limit_reached": "Legfeljebb {limit} szolgáltatást választhat ki",
   "text_featured_people_empty_hint": "Azok a személyek jelennek meg itt, akik egynél több címnél szerepelnek ezen a listán.",
   "text_footer_category_community": "Közösség",
   "text_footer_category_legal": "Jogi",

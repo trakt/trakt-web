@@ -1895,7 +1895,6 @@
   "text_export_status_zipping": "Bestanden inpakken…",
   "text_exporting": "Exporteren… {progress}",
   "text_failed_to_add_titles": "Kon titels niet toevoegen aan {name}",
-  "text_favorites_limit_reached": "Je kunt maximaal {limit} diensten selecteren",
   "text_featured_people_empty_hint": "Personen verschijnen hier zodra ze in meer dan één titel op deze lijst voorkomen.",
   "text_footer_category_community": "Community",
   "text_footer_category_legal": "Juridisch",

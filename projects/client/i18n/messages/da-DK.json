@@ -1895,7 +1895,6 @@
   "text_export_status_zipping": "Zipper filer…",
   "text_exporting": "Eksporterer… {progress}",
   "text_failed_to_add_titles": "Kunne ikke tilføje titler til {name}",
-  "text_favorites_limit_reached": "Du kan vælge op til {limit} tjenester",
   "text_featured_people_empty_hint": "Folk dukker op her, når de optræder i mere end én titel på denne liste.",
   "text_footer_category_community": "Fællesskab",
   "text_footer_category_legal": "Juridisk",

@@ -1895,7 +1895,6 @@
   "text_export_status_zipping": "در حال فشرده‌سازی فایل‌ها...",
   "text_exporting": "در حال خروجی گرفتن... {progress}",
   "text_failed_to_add_titles": "امکان افزودن عنوان‌ها به {name} وجود نداشت",
-  "text_favorites_limit_reached": "شما می‌توانید تا {limit} سرویس را انتخاب کنید",
   "text_featured_people_empty_hint": "افراد زمانی در اینجا نمایش داده می‌شوند که در بیش از یک عنوان از این لیست حضور داشته باشند.",
   "text_footer_category_community": "جامعه",
   "text_footer_category_legal": "حقوقی",

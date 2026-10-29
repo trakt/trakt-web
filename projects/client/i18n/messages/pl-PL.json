@@ -1895,7 +1895,6 @@
   "text_export_status_zipping": "Kompresowanie plików…",
   "text_exporting": "Eksportowanie… {progress}",
   "text_failed_to_add_titles": "Nie udało się dodać tytułów do {name}",
-  "text_favorites_limit_reached": "Możesz wybrać maksymalnie {limit} usług",
   "text_featured_people_empty_hint": "Osoby pojawią się tutaj, gdy wystąpią w więcej niż jednym tytule na tej liście.",
   "text_footer_category_community": "Społeczność",
   "text_footer_category_legal": "Prawne",

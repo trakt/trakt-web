@@ -46,13 +46,10 @@
   // used purely for ordering so the grid doesn't reshuffle as items are toggled.
   const preselectedSlugs: ReadonlySet<string> = new Set(initialSlugs);
 
-  const favoriteServicesLimit = 5;
-
   const hasChanges = $derived(
     selected.size !== preselectedSlugs.size ||
       [...selected].some((s) => !preselectedSlugs.has(s)),
   );
-  const isAtLimit = $derived(selected.size >= favoriteServicesLimit);
 
   const normalizedFilter = $derived(filter.trim().toLowerCase());
 
@@ -72,7 +69,7 @@
   const toggle = (slug: string) => {
     if (selected.has(slug)) {
       selected.delete(slug);
-    } else if (!isAtLimit) {
+    } else {
       selected.add(slug);
     }
   };
@@ -132,12 +129,6 @@
         disabled={false}
         autofocus={$isMouse}
       />
-      <p
-        class="limit-label small secondary italic"
-        class:invisible={!isAtLimit}
-      >
-        {m.text_favorites_limit_reached({ limit: favoriteServicesLimit })}
-      </p>
     </div>
 
     {#if visibleSources.length === 0}
@@ -148,7 +139,6 @@
           <FavoriteServiceTile
             {source}
             isFavorite={selected.has(source.source)}
-            disabled={isAtLimit && !selected.has(source.source)}
             onToggle={() => toggle(source.source)}
           />
         {/each}
@@ -185,17 +175,6 @@
     padding-block: var(--gap-s);
 
     background: var(--color-drawer-background);
-  }
-
-  .limit-label {
-    margin: 0;
-    padding-top: var(--gap-xs);
-    padding-inline-end: var(--gap-xs);
-    text-align: end;
-
-    &.invisible {
-      visibility: hidden;
-    }
   }
 
   .empty-state {
