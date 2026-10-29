@@ -16,6 +16,7 @@
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
+  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
   import { onMount } from "svelte";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
   import TodayFaces from "./TodayFaces.svelte";
@@ -190,10 +191,14 @@
       <div class="frame-text">
         <div class="frame-person">
           {#snippet avatar(user: UserProfile)}
-            <CrossOriginImage
-              src={user.avatar.url}
-              alt={m.image_alt_user_avatar({ username: user.username })}
-            />
+            <span class="frame-avatar">
+              <MemberAvatar member={user} size="small">
+                <CrossOriginImage
+                  src={user.avatar.url}
+                  alt={m.image_alt_user_avatar({ username: user.username })}
+                />
+              </MemberAvatar>
+            </span>
           {/snippet}
           {#if frame.action.user.slug}
             <Link
@@ -410,6 +415,22 @@
       align-items: center;
       gap: var(--gap-s);
 
+      .frame-avatar {
+        display: contents;
+
+        &:has(:global(.trakt-tier-aura)) {
+          display: block;
+          flex-shrink: 0;
+          width: var(--ni-44);
+          height: var(--ni-44);
+          margin: var(--tier-aura-compact-bleed);
+
+          :global(img) {
+            border: none;
+          }
+        }
+      }
+
       :global(img) {
         width: var(--ni-44);
         height: var(--ni-44);
@@ -421,6 +442,12 @@
       :global(.trakt-link:focus-visible img) {
         outline: var(--border-thickness-xs) solid var(--color-link-active);
         outline-offset: var(--ni-2);
+      }
+
+      :global(
+        .trakt-link:focus-visible .frame-avatar:has(.trakt-tier-aura) img
+      ) {
+        outline-offset: calc(-1 * var(--border-thickness-xs));
       }
     }
 

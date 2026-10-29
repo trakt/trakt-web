@@ -2,11 +2,13 @@
   import LoaderIcon from "$lib/components/icons/LoaderIcon.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
+  import type { MemberAvatarSize } from "$lib/features/vip-veteran/MemberAvatarSize.ts";
+  import type { TieredMember } from "$lib/features/vip-veteran/TieredMember.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction";
   import { uploadAvatarRequest } from "$lib/requests/queries/users/uploadAvatarRequest";
   import { useInvalidator } from "$lib/stores/useInvalidator";
-  import type { VipVeteranRingTone } from "$lib/features/vip-veteran/VipVeteranRingTone.ts";
   import type { Snippet } from "svelte";
   import { fade } from "svelte/transition";
   import ProfileImageContextMenu from "./_internal/ProfileImageContextMenu.svelte";
@@ -16,21 +18,24 @@
     name,
     src,
     isEditable = false,
-    isVip = false,
-    ringTone,
+    member,
+    auraSize = "large",
+    isTierKnown = true,
     hasEntrance = false,
     badge,
   }: {
     name: string;
     src: string;
-    isVip?: boolean;
-    ringTone?: VipVeteranRingTone | null;
+    member?: TieredMember | Nil;
+    auraSize?: Exclude<MemberAvatarSize, "stack">;
+    isTierKnown?: boolean;
     hasEntrance?: boolean;
     isEditable?: boolean;
     badge?: Snippet;
   } = $props();
 
   const { invalidate } = useInvalidator();
+  const isVip = $derived(Boolean(member?.isVip));
 
   type Dialog = "none" | "view" | "crop";
 
@@ -102,7 +107,6 @@
   class="trakt-profile-image"
   class:is-vip={isVip}
   class:has-entrance={isVip && hasEntrance}
-  data-ring-tone={isVip ? ringTone : undefined}
 >
   <figure class="profile-image" data-sentry-block>
     <!-- This should be the first element, else: HierarchyRequestError -->
@@ -110,46 +114,14 @@
       {m.image_alt_user_avatar({ username: name })}
     </figcaption>
 
+    <MemberAvatar {member} size={auraSize} {isTierKnown}>
+      {@render picture()}
+    </MemberAvatar>
+
     {#if isEditable}
-      <ProfileImageContextMenu
-        onViewPhoto={() => (imageEdit.dialog = "view")}
-        onUploadPhoto={openFilePicker}
-        onRemovePhoto={handleRemovePhoto}
-      >
-        {#snippet trigger(props)}
-          <div
-            {...props}
-            class="editable-image-wrapper"
-            role="button"
-            tabindex="0"
-            aria-label={m.button_label_upload_photo()}
-            ondragover={(ev) => {
-              ev.preventDefault();
-              ev.currentTarget.classList.add("dragover");
-            }}
-            ondragleave={(ev) => ev.currentTarget.classList.remove("dragover")}
-            ondrop={(ev) => {
-              ev.preventDefault();
-              ev.currentTarget.classList.remove("dragover");
-              const { files } = ev.dataTransfer ?? {};
-              if (files?.length) handleFilesDropped(files);
-            }}
-          >
-            <CrossOriginImage
-              {src}
-              alt={m.image_alt_user_avatar({ username: name })}
-            />
-          </div>
-        {/snippet}
-      </ProfileImageContextMenu>
       <div class="edit-badge" aria-hidden="true">
         <RenameIcon />
       </div>
-    {:else}
-      <CrossOriginImage
-        {src}
-        alt={m.image_alt_user_avatar({ username: name })}
-      />
     {/if}
   </figure>
 
@@ -163,6 +135,47 @@
 
   {@render badge?.()}
 </div>
+
+{#snippet picture()}
+  {#if isEditable}
+    <ProfileImageContextMenu
+      onViewPhoto={() => (imageEdit.dialog = "view")}
+      onUploadPhoto={openFilePicker}
+      onRemovePhoto={handleRemovePhoto}
+    >
+      {#snippet trigger(props)}
+        <div
+          {...props}
+          class="editable-image-wrapper"
+          role="button"
+          tabindex="0"
+          aria-label={m.button_label_upload_photo()}
+          ondragover={(ev) => {
+            ev.preventDefault();
+            ev.currentTarget.classList.add("dragover");
+          }}
+          ondragleave={(ev) => ev.currentTarget.classList.remove("dragover")}
+          ondrop={(ev) => {
+            ev.preventDefault();
+            ev.currentTarget.classList.remove("dragover");
+            const { files } = ev.dataTransfer ?? {};
+            if (files?.length) handleFilesDropped(files);
+          }}
+        >
+          <CrossOriginImage
+            {src}
+            alt={m.image_alt_user_avatar({ username: name })}
+          />
+        </div>
+      {/snippet}
+    </ProfileImageContextMenu>
+  {:else}
+    <CrossOriginImage
+      {src}
+      alt={m.image_alt_user_avatar({ username: name })}
+    />
+  {/if}
+{/snippet}
 
 {#if imageEdit.dialog === "view"}
   <ProfileImageViewDialog
@@ -212,25 +225,7 @@
       }
     }
 
-    &[data-ring-tone="copper"] {
-      --color-border-avatar: var(--color-border-vip-avatar-copper);
-      --ring-glow-inner: var(--color-border-vip-avatar-copper);
-      --ring-glow-outer: var(--color-glow-vip-badge-copper);
-    }
-
-    &[data-ring-tone="silver"] {
-      --color-border-avatar: var(--color-border-vip-avatar-silver);
-      --ring-glow-inner: var(--color-border-vip-avatar-silver);
-      --ring-glow-outer: var(--color-glow-vip-badge-silver);
-    }
-
-    &[data-ring-tone="gold"] {
-      --color-border-avatar: var(--color-border-vip-avatar-gold);
-      --ring-glow-inner: var(--color-border-vip-avatar-gold);
-      --ring-glow-outer: var(--color-glow-vip-badge-gold);
-    }
-
-    &.has-entrance .profile-image {
+    &.has-entrance:not(:has(:global(.trakt-tier-aura))) .profile-image {
       animation: ring-swell 1.2s ease-out 0.2s both;
     }
 
@@ -282,6 +277,24 @@
     }
   }
 
+  .trakt-profile-image .profile-image:has(> :global(.trakt-tier-aura)) {
+    outline: none;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .trakt-profile-image:has(:global(.trakt-tier-aura[data-variant="compact"])) {
+    margin: var(--tier-aura-compact-bleed);
+  }
+
+  .trakt-profile-image:has(:global(.trakt-tier-aura[data-variant="full"])) {
+    --full-aura-setting: calc(
+      var(--image-size) * (1 / var(--tier-aura-full-face-share) - 1) / 2
+    );
+
+    margin: var(--full-aura-setting) var(--full-aura-setting) 0;
+  }
+
   .editable-image-wrapper {
     position: relative;
     display: block;
@@ -294,6 +307,10 @@
     &:focus-visible {
       outline: var(--border-thickness-xs) solid var(--color-foreground);
       outline-offset: 2px;
+    }
+
+    :global(.trakt-tier-aura) &:focus-visible {
+      outline-offset: calc(-1 * var(--border-thickness-xs));
     }
   }
 

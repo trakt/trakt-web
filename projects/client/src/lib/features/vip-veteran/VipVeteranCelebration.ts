@@ -1,5 +1,5 @@
-import type { VipVeteran } from '$lib/requests/models/VipVeteran.ts';
+import type { VipTierTitle } from './VipTierTitle.ts';
 
 export type VipVeteranCelebration =
-  | { kind: 'promotion'; from: VipVeteran['title'] }
+  | { kind: 'promotion'; from: VipTierTitle | null }
   | { kind: 'anniversary' };

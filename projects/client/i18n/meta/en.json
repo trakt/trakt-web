@@ -12477,6 +12477,18 @@
       "default": "Legend",
       "description": "Badge title for a member who has kept VIP for 10 or more years without a break. Shown in capitals inside a small pill. Keep it one short word."
     },
+    "text_vip_veteran_title_pro": {
+      "default": "Pro",
+      "description": "Badge title for a member who has kept VIP for 3 or more years without a break, the step before Veteran. Shown in capitals after \"VIP\" inside a small pill. Keep it one short word."
+    },
+    "text_vip_veteran_title_elite": {
+      "default": "Elite",
+      "description": "Badge title for a member who has kept VIP for 7 or more years without a break, between Veteran and Legend. Shown in capitals after \"VIP\" inside a small pill. Keep it one short word."
+    },
+    "text_vip_tier_free": {
+      "default": "Free",
+      "description": "Badge under the profile picture of a member without VIP. Shown in capitals inside a small pill. Keep it one short word."
+    },
     "button_label_open_vip_streak": {
       "default": "Show VIP streak",
       "description": "Accessible label for the VIP badge on a profile, which opens a sheet with how long the member has kept VIP."

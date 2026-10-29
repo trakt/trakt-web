@@ -2,8 +2,6 @@
   import { dPadTrigger } from "$lib/components/card/_internal/dPadTrigger";
   import Link from "$lib/components/link/Link.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
-  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
@@ -12,14 +10,11 @@
 
   const { profile }: { profile: UserProfile } = $props();
   const { navigation } = useNavigation();
-  const isVeteranEnabled = useVipVeteranEnabled();
-  const ringTone = $derived(
-    $isVeteranEnabled ? toVipVeteranRingTone(profile.veteran) : null,
-  );
 </script>
 
 <div
   class="trakt-profile-item"
+  data-tier-aura-row
   role="button"
   tabindex="0"
   data-dpad-navigation={DpadNavigationType.Item}
@@ -36,8 +31,8 @@
       --border-width="var(--border-thickness-xs)"
       name={profile.name.first}
       src={profile.avatar.url}
-      isVip={profile.isVip}
-      {ringTone}
+      member={profile}
+      auraSize="medium"
     />
   </Link>
   <div class="profile-footer">
@@ -64,6 +59,15 @@
 
     overflow: visible;
 
+    &:has(:global(.trakt-tier-aura[data-variant="compact"])) {
+      width: calc(
+        var(--width-profile-item) + 2 * var(--tier-aura-compact-bleed)
+      );
+      height: calc(
+        var(--height-profile-item) + 2 * var(--tier-aura-compact-bleed)
+      );
+    }
+
     &[data-navigation-type="dpad"] {
       &:focus-within {
         outline: var(--border-thickness-xs) solid var(--color-link-active);
@@ -75,7 +79,32 @@
   }
 
   .trakt-profile-item {
-    :global(.trakt-profile-image.is-vip)::before {
+    @include for-mouse {
+      :global(
+        .trakt-profile-image:not(
+            :has(.trakt-tier-aura[data-variant="compact"])
+          ):hover
+      ) {
+        :global(.profile-image) {
+          outline: var(--border-thickness-s) solid var(--color-border-avatar);
+        }
+
+        :global(.vip-badge) {
+          transform: scale(1.15);
+        }
+
+        &::before {
+          animation: fade-rotate calc(4 * var(--transition-increment))
+            ease-in-out;
+        }
+      }
+    }
+
+    :global(
+      .trakt-profile-image.is-vip:not(
+          :has(.trakt-tier-aura[data-variant="compact"])
+        )
+    )::before {
       --offset: calc(-1 * var(--border-thickness-s));
 
       content: "";
@@ -112,23 +141,6 @@
         transition: var(--transition-increment) ease-in-out;
         transition-property: transform;
         transform-origin: center;
-      }
-
-      @include for-mouse {
-        &:hover {
-          :global(.profile-image) {
-            outline: var(--border-thickness-s) solid var(--color-border-avatar);
-          }
-
-          :global(.vip-badge) {
-            transform: scale(1.15);
-          }
-
-          &::before {
-            animation: fade-rotate calc(4 * var(--transition-increment))
-              ease-in-out;
-          }
-        }
       }
     }
   }

@@ -450,6 +450,7 @@
   --color-vip-thread-glint: var(--purple-900);
   --color-vip-thread-glint-faint: var(--purple-700);
   --color-vip-thread-label-hover: var(--shade-950);
+  --color-vip-tier-tag-pro-title: var(--purple-700);
   --color-vip-border-accent: var(--purple-600);
   --color-vip-surface-muted: var(--purple-50);
   --background-vip-elevated-card: radial-gradient(
@@ -457,9 +458,10 @@
     var(--color-vip-surface-muted) 0%,
     var(--shade-100) 100%
   );
+  --color-vip-card-surface: var(--purple-60);
   --background-vip-card: linear-gradient(
     135deg,
-    var(--purple-60),
+    var(--color-vip-card-surface),
     var(--purple-90)
   );
   --color-vip-tablist-background: color-mix(
@@ -1127,6 +1129,7 @@
     transparent
   );
   --color-vip-thread-label-hover: var(--shade-10);
+  --color-vip-tier-tag-pro-title: var(--purple-100);
   --color-vip-border-accent: var(--purple-500);
   --color-vip-surface-muted: var(--purple-950);
   --background-vip-elevated-card: radial-gradient(
@@ -1134,9 +1137,14 @@
     var(--color-vip-surface-muted) 0%,
     var(--shade-1000) 100%
   );
+  --color-vip-card-surface: color-mix(
+    in srgb,
+    var(--purple-500) 10%,
+    var(--shade-910)
+  );
   --background-vip-card: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--purple-500) 10%, var(--shade-910)),
+    var(--color-vip-card-surface),
     color-mix(in srgb, var(--purple-500) 7%, var(--shade-940))
   );
   --color-vip-tablist-background: color-mix(

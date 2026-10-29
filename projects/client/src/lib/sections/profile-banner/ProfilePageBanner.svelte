@@ -1,16 +1,15 @@
 <script lang="ts">
-  import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import SettingsButton from "$lib/components/buttons/settings/SettingsButton.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { toVipVeteranRingTone } from "$lib/features/vip-veteran/toVipVeteranRingTone.ts";
   import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import { useVipVeteran } from "$lib/features/vip-veteran/stores/useVipVeteran.ts";
+  import MemberBadge from "$lib/features/vip-veteran/MemberBadge.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import LeaderboardPill from "$lib/sections/profile/leaderboard/LeaderboardPill.svelte";
-  import MatchPill from "$lib/sections/profile/components/MatchPill.svelte";
   import VipStreakBadge from "$lib/sections/profile/vip-streak/VipStreakBadge.svelte";
+  import MatchPill from "$lib/sections/profile/components/MatchPill.svelte";
   import ProfileAbout from "$lib/sections/profile/components/ProfileAbout.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
@@ -40,7 +39,11 @@
 
   const { veteran } = useVipVeteran(fromRune(() => slug));
   const shownVeteran = $derived(profile.isVip ? $veteran : null);
-  const ringTone = $derived(toVipVeteranRingTone(shownVeteran));
+  const member = $derived({ ...profile, veteran: shownVeteran });
+  const isTierKnown = $derived(
+    variant !== "private" || profile.isVip || Boolean(profile.isDirector),
+  );
+  const streakVeteran = $derived(profile.isDirector ? null : shownVeteran);
 
   const shareableSlug = $derived($isMe ? $user.slug : slug);
   const isBlocked = $derived($blocked.has(slug));
@@ -57,8 +60,8 @@
       --border-width="var(--border-thickness-s)"
       name={profile.name.first}
       src={profile.avatar.url}
-      isVip={profile.isVip}
-      {ringTone}
+      {member}
+      {isTierKnown}
       hasEntrance={shownVeteran != null}
     >
       {#snippet badge()}
@@ -70,14 +73,10 @@
           {/if}
         </RenderFor>
         {#if !isBlocked && !isPending}
-          {#if shownVeteran}
-            <VipStreakBadge
-              veteran={shownVeteran}
-              {promotion}
-              isDirector={profile.isDirector}
-            />
-          {:else if profile.isVip}
-            <VipBadge isDirector={profile.isDirector} />
+          {#if streakVeteran}
+            <VipStreakBadge veteran={streakVeteran} {promotion} />
+          {:else}
+            <MemberBadge {member} {isTierKnown} />
           {/if}
         {/if}
       {/snippet}
@@ -169,6 +168,12 @@
       :global(.trakt-pending-follow-tag) {
         z-index: var(--layer-base);
         margin-top: var(--ni-neg-16);
+      }
+
+      :global(.trakt-vip-tier-tag) {
+        position: relative;
+        z-index: var(--layer-base);
+        margin-top: var(--ni-neg-4);
       }
     }
 
