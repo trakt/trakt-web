@@ -15,7 +15,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { mediaGlanceNavigation } from "$lib/sections/summary/components/glance/mediaGlanceNavigation.ts";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
@@ -59,12 +58,6 @@
     resolvedStyle === "cover" && $isMouse && style === "summary",
   );
 
-  const { buildSeasonGlanceLink } = mediaGlanceNavigation();
-  const href = $derived(
-    $isLargeScreenCards && style === "summary"
-      ? buildSeasonGlanceLink({ slug: media.slug, season: season.number }).href
-      : urlBuilder(),
-  );
 
   const scrollToItem = (element: HTMLElement, active: boolean) => {
     if (variant === "list-item") return;
@@ -122,7 +115,7 @@
 
         <Link
           focusable={false}
-          {href}
+          href={urlBuilder()}
           onclick={() => source && track({ source, type: "season" })}
           noscroll
         >

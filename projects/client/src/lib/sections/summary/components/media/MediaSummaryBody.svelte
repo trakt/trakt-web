@@ -21,23 +21,15 @@
     crew,
     actions,
     sideActions,
-    variant = "page",
     color,
-    titleHref,
-    hasDetails = true,
-    hasReservedRows = false,
     ratingsDrilldown,
     ...target
   }: {
     intl: MediaIntl;
     crew: MediaCrew;
     actions?: Snippet;
-    sideActions?: Snippet;
-    variant?: "page" | "drawer";
+    sideActions: Snippet;
     color?: string;
-    titleHref?: string;
-    hasDetails?: boolean;
-    hasReservedRows?: boolean;
     ratingsDrilldown?: {
       href: string;
       noscroll: boolean;
@@ -67,69 +59,31 @@
   />
 {/snippet}
 
-<Summary {variant} {color} {sideActions}>
+<Summary {color} {sideActions}>
   {#snippet poster()}
     <SummaryPoster
       src={media.poster.url.medium}
       alt={title}
-      href={titleHref}
-      target={titleHref ? "_self" : undefined}
       {tags}
-      isPriority={variant === "page"}
+      isPriority
     />
   {/snippet}
 
 
   {#snippet meta()}
-    <SummaryTitle
-      {title}
-      {crew}
-      href={titleHref}
-      {hasDetails}
-      {hasReservedRows}
-      {...target}
-    />
+    <SummaryTitle {title} {crew} {...target} />
 
-    <div class="trakt-media-summary-ratings">
-      <RatingList
-        ratings={$ratings}
-        entry={media}
-        drilldown={ratingsDrilldown}
-        isLoading={$isLoading}
-      />
-    </div>
+    <RatingList
+      ratings={$ratings}
+      entry={media}
+      drilldown={ratingsDrilldown}
+      isLoading={$isLoading}
+    />
 
     {@render actions?.()}
   {/snippet}
 
-  <div class="trakt-media-summary-overview">
-    <SpoilerSection {media} type={media.type}>
-      <p class="secondary small">{intl?.overview ?? media.overview}</p>
-    </SpoilerSection>
-  </div>
+  <SpoilerSection {media} type={media.type}>
+    <p class="secondary small">{intl?.overview ?? media.overview}</p>
+  </SpoilerSection>
 </Summary>
-
-<style lang="scss">
-  :global(.trakt-summary[data-variant="drawer"]) {
-    .trakt-media-summary-ratings {
-      display: flex;
-      justify-content: center;
-
-      min-height: var(--glance-ratings-height);
-    }
-
-    .trakt-media-summary-overview {
-      min-height: var(--glance-overview-height);
-
-      :global(p) {
-        display: -webkit-box;
-
-        line-clamp: var(--glance-overview-lines);
-        -webkit-line-clamp: var(--glance-overview-lines);
-        -webkit-box-orient: vertical;
-
-        overflow: hidden;
-      }
-    }
-  }
-</style>
