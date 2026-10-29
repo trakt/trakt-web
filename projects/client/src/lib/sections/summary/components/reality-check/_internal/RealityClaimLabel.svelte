@@ -2,6 +2,16 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { RealityClaim } from "$lib/requests/models/RealityCheck.ts";
   import { toTranslatedRealityClaimLabel } from "$lib/utils/formatting/string/toTranslatedRealityClaimLabel.ts";
+  import RealityChip from "./RealityChip.svelte";
+  import type { RealityChipProps } from "./RealityChipProps.ts";
+
+  const LABEL_TONE: Record<RealityClaim["label"], RealityChipProps["tone"]> = {
+    accurate: "accurate",
+    compressed: "adjusted",
+    composite: "adjusted",
+    changed: "altered",
+    invented: "altered",
+  };
 
   const {
     label,
@@ -11,9 +21,11 @@
 </script>
 
 <span class="trakt-reality-claim-label">
-  <span class="reality-chip bold" data-label={label} data-impact={impact}>
-    {toTranslatedRealityClaimLabel(label)}
-  </span>
+  <RealityChip
+    text={toTranslatedRealityClaimLabel(label)}
+    tone={LABEL_TONE[label]}
+    muted={impact === "minor"}
+  />
   {#if impact === "minor"}
     <span class="small secondary">{m.text_reality_claim_minor()}</span>
   {/if}
@@ -24,36 +36,5 @@
     display: inline-flex;
     align-items: center;
     gap: var(--gap-xs);
-
-    .reality-chip {
-      padding: var(--ni-2) var(--ni-10);
-
-      font-size: var(--font-size-tag);
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-
-      border-radius: var(--border-radius-xxl);
-
-      &[data-label="accurate"] {
-        color: var(--color-reality-accurate-text);
-        background: var(--color-reality-accurate-background);
-      }
-
-      &[data-label="compressed"],
-      &[data-label="composite"] {
-        color: var(--color-reality-adjusted-text);
-        background: var(--color-reality-adjusted-background);
-      }
-
-      &[data-label="changed"],
-      &[data-label="invented"] {
-        color: var(--color-reality-altered-text);
-        background: var(--color-reality-altered-background);
-      }
-
-      &[data-impact="minor"] {
-        opacity: 0.75;
-      }
-    }
   }
 </style>
