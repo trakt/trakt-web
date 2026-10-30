@@ -130,6 +130,9 @@
                 {src}
                 alt={m.image_alt_user_avatar({ username: name })}
               />
+              <span class="edit-hint" aria-hidden="true">
+                <RenameIcon />
+              </span>
             </div>
           {/snippet}
         </ProfileImageContextMenu>
@@ -140,12 +143,6 @@
         />
       {/if}
     </UserTierRing>
-
-    {#if isEditable}
-      <div class="edit-badge" aria-hidden="true">
-        <RenameIcon />
-      </div>
-    {/if}
   </figure>
 
   {#if imageEdit.isUploading}
@@ -239,39 +236,28 @@
     }
   }
 
-  .edit-badge {
+  .edit-hint {
     position: absolute;
-    bottom: 0;
-    inset-inline-end: 0;
-    transform: translate(calc(var(--rtl-sign) * 15%), 15%);
-
-    width: var(--ni-24);
-    height: var(--ni-24);
-    border-radius: 50%;
-    background-color: var(--color-modal-background);
-    box-shadow: var(--shadow-dialog);
-
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: color-mix(in srgb, var(--shade-900) 55%, transparent);
     pointer-events: none;
 
     opacity: 0;
-    transition:
-      opacity var(--transition-increment) ease-in-out,
-      transform var(--transition-increment) ease-in-out;
+    transition: opacity var(--transition-increment) ease-in-out;
 
     :global(svg) {
-      width: var(--ni-12);
-      height: var(--ni-12);
-      color: var(--color-text-primary);
+      width: 30%;
+      height: 30%;
+      color: var(--shade-10);
     }
   }
 
-  .trakt-profile-image:has(.editable-image-wrapper:hover) .edit-badge,
-  .trakt-profile-image:has(.editable-image-wrapper:focus-visible) .edit-badge {
+  .editable-image-wrapper:hover .edit-hint,
+  .editable-image-wrapper:focus-visible .edit-hint {
     opacity: 1;
-    transform: translate(calc(var(--rtl-sign) * 15%), 15%) scale(1.1);
   }
 
   .upload-overlay {

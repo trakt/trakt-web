@@ -1,20 +1,13 @@
 <script lang="ts">
-  import VipBadge from "$lib/components/badge/VipBadge.svelte";
-  import { useVipVeteranEnabled } from "./stores/useVipVeteranEnabled.ts";
+  import UserTierTag from "./UserTierTag.svelte";
   import type { TieredUser } from "./TieredUser.ts";
-  import { toVipVeteranLabel } from "./toVipVeteranLabel.ts";
-  import { toVipVeteranTone } from "./toVipVeteranTone.ts";
+  import { toUserTier } from "./toUserTier.ts";
 
   const { member }: { member: TieredUser } = $props();
 
-  const isEnabled = useVipVeteranEnabled();
-  const veteran = $derived($isEnabled && member.isVip ? member.veteran : null);
+  const tier = $derived(toUserTier(member));
 </script>
 
-{#if member.isVip || member.isDirector}
-  <VipBadge
-    isDirector={member.isDirector}
-    tone={veteran ? toVipVeteranTone(veteran.tier) : null}
-    label={toVipVeteranLabel(veteran?.title)}
-  />
+{#if tier !== "free" || member.isDirector}
+  <UserTierTag {tier} isDirector={member.isDirector} />
 {/if}
