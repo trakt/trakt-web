@@ -2,7 +2,9 @@
   import { page } from "$app/state";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
   import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
+  import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
   import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
@@ -20,12 +22,18 @@
 
   const FLASH_DURATION = 420;
   const SHINE_DURATION = 1200;
+  /*
+    Below this width the labelled Movies / Shows toggle leaves no room for
+    the placeholder, so the narrowest phones get the icons instead.
+  */
+  const NARROW_PHONE_QUERY = "(max-width: 360px)";
 
   const { layout = "strip" }: { layout?: "strip" | "docked" } = $props();
 
   const { session, flights, update } = useMixtapeSession();
   const { options } = useDiscover();
   const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
+  const isNarrowPhone = useMedia(NARROW_PHONE_QUERY);
 
   const params = $derived(parseMixtapeParams(page.url.searchParams));
   const isResults = $derived(params.view === "results");
@@ -107,6 +115,10 @@
   });
 </script>
 
+{#snippet typeIcon(option: SegmentedSelectOption<MediaType>)}
+  <ToggleIcon {option} />
+{/snippet}
+
 <div
   class="trakt-mixtape-navbar-deck"
   data-layout={layout}
@@ -131,6 +143,8 @@
       <SegmentedSelect
         options={typeOptions}
         value={params.type}
+        variant={$isNarrowPhone ? "compact" : "regular"}
+        icon={$isNarrowPhone ? typeIcon : undefined}
         ariaLabel={m.page_title_mixtape()}
         onChange={() => update({ search: "" })}
       />
