@@ -67,6 +67,12 @@
 
 <style>
   .trakt-profiles-list {
+    &:has(:global(.trakt-tier-aura[data-variant="compact"])) {
+      --height-override-list: calc(
+        var(--height-profile-list) + 2 * var(--tier-aura-compact-bleed)
+      );
+    }
+
     :global(.trakt-list-item-container) {
       gap: var(--ni-0);
     }
