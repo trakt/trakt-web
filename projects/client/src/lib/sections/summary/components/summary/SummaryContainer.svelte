@@ -60,7 +60,14 @@
 
     &[data-variant="compact"] {
       padding-top: 0;
+      padding-block-end: var(--ni-16);
       margin-top: calc(-1 * var(--gap-m));
+
+      transition: padding var(--transition-increment) ease-in-out;
+
+      @include for-tablet-lg-and-below {
+        padding-block-end: var(--ni-8);
+      }
     }
 
     @include for-desktop {
