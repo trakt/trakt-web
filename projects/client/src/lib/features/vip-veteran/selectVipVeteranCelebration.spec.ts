@@ -10,7 +10,6 @@ const ORDINARY_DAY = new Date('2026-06-01T09:00:00Z');
 const legend: VipVeteran = {
   since: SINCE,
   years: 10,
-  tier: 10,
   title: 'legend',
 };
 
@@ -54,6 +53,20 @@ describe('util: selectVipVeteranCelebration', () => {
     expect(second.celebration).to.equal(null);
   });
 
+  it('should celebrate a promotion between the new titles', () => {
+    const result = selectVipVeteranCelebration({
+      veteran: { ...legend, years: 7, title: 'elite' },
+      memory: remembered({ title: 'veteran' }),
+      today: ORDINARY_DAY,
+    });
+
+    expect(result.celebration).to.deep.equal({
+      kind: 'promotion',
+      from: 'veteran',
+    });
+    expect(result.memory.title).to.equal('elite');
+  });
+
   it('should celebrate the anniversary once a year', () => {
     const first = selectVipVeteranCelebration({
       veteran: legend,
@@ -84,7 +97,7 @@ describe('util: selectVipVeteranCelebration', () => {
 
   it('should keep the highest title after a reset', () => {
     const result = selectVipVeteranCelebration({
-      veteran: { ...legend, years: 1, tier: 1, title: null },
+      veteran: { ...legend, years: 1, title: null },
       memory: remembered({ title: 'legend' }),
       today: ORDINARY_DAY,
     });
@@ -95,7 +108,7 @@ describe('util: selectVipVeteranCelebration', () => {
 
   it('should skip the anniversary before the first full year', () => {
     const result = selectVipVeteranCelebration({
-      veteran: { ...legend, years: 0, tier: 1, title: null },
+      veteran: { ...legend, years: 0, title: null },
       memory: remembered({ title: null }),
       today: ANNIVERSARY,
     });

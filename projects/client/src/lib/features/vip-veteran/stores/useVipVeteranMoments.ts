@@ -17,7 +17,8 @@ import {
   VipVeteranMemorySchema,
 } from '../VipVeteranMemory.ts';
 
-const MEMORY_KEY_PREFIX = 'trakt-vip-veteran-memory';
+const MEMORY_KEY_PREFIX = 'trakt-vip-veteran-memory-v2';
+const LEGACY_MEMORY_KEY_PREFIX = 'trakt-vip-veteran-memory';
 
 type VipVeteranMoments = {
   celebration: VipVeteranCelebration | null;
@@ -47,10 +48,12 @@ function toDayKey(date: Date) {
 function resolveMoments({
   veteran,
   key,
+  legacyKey,
   now,
 }: {
   veteran: VipVeteran;
   key: string;
+  legacyKey: string;
   now: Date;
 }): VipVeteranMoments {
   const selected = selectVipVeteranCelebration({
@@ -69,6 +72,7 @@ function resolveMoments({
     graceShownOn: graceDaysLeft != null ? today : selected.memory.graceShownOn,
   };
   safeLocalStorage.setItem(key, JSON.stringify(memory));
+  safeLocalStorage.removeItem(legacyKey);
 
   return { celebration: selected.celebration, graceDaysLeft };
 }
@@ -88,6 +92,7 @@ export function useVipVeteranMoments({
         : resolveMoments({
             veteran: $veteran,
             key: `${MEMORY_KEY_PREFIX}:${$user.id}`,
+            legacyKey: `${LEGACY_MEMORY_KEY_PREFIX}:${$user.id}`,
             now: new Date(),
           }),
     ),

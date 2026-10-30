@@ -1,29 +1,31 @@
 import type { VipVeteran } from '$lib/requests/models/VipVeteran.ts';
-import { VIP_VETERAN_LADDER } from './VIP_VETERAN_LADDER.ts';
+import { USER_TIER_LADDER } from './USER_TIER_LADDER.ts';
+import type { UserTierRung } from './UserTierRung.ts';
+import { toLadderTier } from './toLadderTier.ts';
 import type { VipStreakRung } from './VipStreakRung.ts';
 
 type VipStreakLadder = {
   rungs: ReadonlyArray<VipStreakRung>;
-  next: { tier: number; title: VipVeteran['title']; yearsLeft: number } | null;
+  next: (UserTierRung & { yearsLeft: number }) | null;
 };
 
 export function toVipStreakLadder(veteran: VipVeteran): VipStreakLadder {
-  const rungs = VIP_VETERAN_LADDER.map((rung) => ({
+  const current = toLadderTier(veteran.title);
+  const currentIndex = USER_TIER_LADDER.findIndex(
+    (rung) => rung.userTier === current,
+  );
+  const rungs = USER_TIER_LADDER.map((rung, index) => ({
     ...rung,
-    isReached: veteran.years >= rung.tier,
-    isCurrent: veteran.tier === rung.tier,
+    isReached: index <= currentIndex,
+    isCurrent: index === currentIndex,
   }));
 
-  const next = VIP_VETERAN_LADDER.find((rung) => rung.tier > veteran.years);
+  const next = USER_TIER_LADDER.at(currentIndex + 1);
 
   return {
     rungs,
     next: next
-      ? {
-          tier: next.tier,
-          title: next.title,
-          yearsLeft: next.tier - veteran.years,
-        }
+      ? { ...next, yearsLeft: Math.max(next.tier - veteran.years, 0) }
       : null,
   };
 }
