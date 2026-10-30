@@ -9654,6 +9654,10 @@
       "default": "Other Links",
       "description": "Header for the other links section, with additional links for a show or movie, like imdb, wikipedia, etc.."
     },
+    "button_label_official_website": {
+      "default": "Official website",
+      "description": "Label and tooltip for the icon button that opens the official website of a show or movie."
+    },
     "button_text_cancel_import": {
       "default": "Stop Import",
       "description": "Text for the button that stops an in-progress import when navigating away."
