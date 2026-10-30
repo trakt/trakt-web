@@ -445,6 +445,48 @@
   --color-soundtrack-play-foreground: var(--shade-10);
 
   --color-vip-popular-tag: #fdc700;
+  --color-user-tier-vip-ring: var(--user-tier-vip);
+  --color-user-tier-vip-ring-sheen: color-mix(
+    in srgb,
+    var(--user-tier-vip) 50%,
+    var(--user-tier-vip-sheen)
+  );
+  --color-user-tier-pro-ring: var(--user-tier-pro);
+  --color-user-tier-pro-ring-sheen: color-mix(
+    in srgb,
+    var(--user-tier-pro) 50%,
+    var(--user-tier-pro-sheen)
+  );
+  --color-user-tier-veteran-ring: var(--user-tier-veteran);
+  --color-user-tier-veteran-ring-sheen: color-mix(
+    in srgb,
+    var(--user-tier-veteran) 50%,
+    var(--user-tier-veteran-sheen)
+  );
+  --color-user-tier-elite-ring: var(--user-tier-elite);
+  --color-user-tier-elite-ring-sheen: color-mix(
+    in srgb,
+    var(--user-tier-elite) 50%,
+    var(--user-tier-elite-sheen)
+  );
+  --color-user-tier-legend-ring: var(--user-tier-legend);
+  --color-user-tier-legend-ring-sheen: color-mix(
+    in srgb,
+    var(--user-tier-legend) 50%,
+    var(--user-tier-legend-sheen)
+  );
+  --color-user-tier-legend-ring-fill: var(--user-tier-legend-ring-light);
+  --color-user-tier-free-glint: var(--shade-700);
+  --color-user-tier-free-ring: color-mix(
+    in srgb,
+    var(--shade-1000) 14%,
+    transparent
+  );
+  --shadow-user-tier-legend:
+    0 0 0 1px
+      color-mix(in srgb, var(--user-tier-legend-deep) 30%, transparent),
+    0 calc(3cqi) calc(10cqi)
+      color-mix(in srgb, var(--user-tier-legend) 30%, transparent);
   --color-vip-thread-base: var(--purple-400);
   --color-vip-thread-mid: var(--purple-500);
   --color-vip-thread-glint: var(--purple-900);
@@ -1118,6 +1160,25 @@
   --color-soundtrack-play-foreground: var(--shade-10);
 
   --color-vip-popular-tag: #fdc700;
+  --color-user-tier-vip-ring: var(--user-tier-vip);
+  --color-user-tier-vip-ring-sheen: var(--user-tier-vip-sheen);
+  --color-user-tier-pro-ring: var(--user-tier-pro);
+  --color-user-tier-pro-ring-sheen: var(--user-tier-pro-sheen);
+  --color-user-tier-veteran-ring: var(--user-tier-veteran);
+  --color-user-tier-veteran-ring-sheen: var(--user-tier-veteran-sheen);
+  --color-user-tier-elite-ring: var(--user-tier-elite);
+  --color-user-tier-elite-ring-sheen: var(--user-tier-elite-sheen);
+  --color-user-tier-legend-ring: var(--user-tier-legend);
+  --color-user-tier-legend-ring-sheen: var(--user-tier-legend-sheen);
+  --color-user-tier-legend-ring-fill: var(--user-tier-legend-ring);
+  --color-user-tier-free-glint: var(--shade-100);
+  --color-user-tier-free-ring: color-mix(
+    in srgb,
+    var(--shade-10) 12%,
+    transparent
+  );
+  --shadow-user-tier-legend: 0 0 calc(10cqi)
+    color-mix(in srgb, var(--user-tier-legend-sheen) 22%, transparent);
   --color-vip-thread-base: var(--purple-500);
   --color-vip-thread-mid: var(--purple-400);
   --color-vip-thread-glint: color-mix(in srgb, var(--shade-10) 80%, transparent);
