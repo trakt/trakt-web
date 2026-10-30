@@ -1,5 +1,7 @@
 import type { VipVeteran } from '$lib/requests/models/VipVeteran.ts';
 import { isStreakAnniversary } from './isStreakAnniversary.ts';
+import { USER_TIER_LADDER } from './USER_TIER_LADDER.ts';
+import { toLadderTier } from './toLadderTier.ts';
 import type { VipVeteranCelebration } from './VipVeteranCelebration.ts';
 import type { VipVeteranMemory } from './VipVeteranMemory.ts';
 
@@ -21,9 +23,8 @@ const EMPTY_MEMORY: VipVeteranMemory = {
 };
 
 function toRank(title: VipVeteran['title']) {
-  if (title === 'legend') return 2;
-  if (title === 'veteran') return 1;
-  return 0;
+  const tier = toLadderTier(title);
+  return USER_TIER_LADDER.findIndex((rung) => rung.userTier === tier);
 }
 
 function highestTitle(

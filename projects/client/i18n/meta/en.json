@@ -12790,14 +12790,6 @@
       "default": "The app didn't open automatically. Tap below to finish signing in.",
       "description": "Text on the mobile app sign-in handoff page on Android, above the button that opens the Trakt app to finish signing in."
     },
-    "text_vip_veteran_title_veteran": {
-      "default": "Veteran",
-      "description": "Badge title for a member who has kept VIP for 5 or more years without a break. Shown in capitals inside a small pill. Keep it one short word."
-    },
-    "text_vip_veteran_title_legend": {
-      "default": "Legend",
-      "description": "Badge title for a member who has kept VIP for 10 or more years without a break. Shown in capitals inside a small pill. Keep it one short word."
-    },
     "button_label_open_vip_streak": {
       "default": "Show VIP streak",
       "description": "Accessible label for the VIP badge on a profile, which opens a sheet with how long the member has kept VIP."
