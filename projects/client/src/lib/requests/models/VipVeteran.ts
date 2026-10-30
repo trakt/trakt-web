@@ -4,7 +4,6 @@ import z from 'zod';
 export const VipVeteranSchema = z.object({
   since: z.date(),
   years: z.number(),
-  tier: z.number(),
   title: VipVeteranTitleSchema.nullish(),
   graceEndsAt: z.date().nullish(),
 });
