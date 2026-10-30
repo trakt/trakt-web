@@ -5,9 +5,9 @@ export async function workerRequest(type: WorkerMessage) {
     return;
   }
 
-  const registration = await navigator.serviceWorker.ready;
+  const registration = await navigator.serviceWorker.ready.catch(() => null);
 
-  if (!registration.active) {
+  if (!registration?.active) {
     return;
   }
 
