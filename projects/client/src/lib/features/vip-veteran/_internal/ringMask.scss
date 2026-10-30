@@ -1,0 +1,10 @@
+@mixin ring-mask($thickness) {
+  $edge: radial-gradient(
+    farthest-side,
+    transparent calc(100% - #{$thickness}),
+    black calc(100% - #{$thickness} + 0.5px)
+  );
+
+  -webkit-mask: $edge;
+  mask: $edge;
+}

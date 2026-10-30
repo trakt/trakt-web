@@ -35,10 +35,7 @@
 <VipContentContainer>
   <div class="trakt-account-details">
     <div class="trakt-vip-profile-header">
-      <div
-        class="member-avatar-stage"
-        style:--member-aura="var(--color-glow-vip-badge-{auraTone})"
-      >
+      <div class="member-avatar-stage" style:--member-aura={auraTone}>
         <span class="member-aura"></span>
         <span class="member-thread"><ThreadRing /></span>
         <ProfileImage
@@ -47,6 +44,7 @@
           name={$user.name.first}
           src={$user.avatar.url}
           member={$member}
+          ringMotion="live"
         />
       </div>
       <div class="vip-header-details">

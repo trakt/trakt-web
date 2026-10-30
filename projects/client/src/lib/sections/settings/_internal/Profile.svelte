@@ -24,6 +24,7 @@
       name={$user.name.first}
       src={$user.avatar.url}
       member={$member}
+      ringMotion="live"
     />
 
     <div class="trakt-settings-profile-info">

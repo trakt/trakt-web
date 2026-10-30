@@ -1,19 +1,19 @@
-import type { VipBadgeTone } from '$lib/components/badge/VipBadgeTone.ts';
 import type { TieredUser } from '$lib/features/vip-veteran/TieredUser.ts';
-import { toVipVeteranTone } from '$lib/features/vip-veteran/toVipVeteranTone.ts';
+import { toUserTier } from '$lib/features/vip-veteran/toUserTier.ts';
 
 type ToMemberAuraToneParams = {
   member: TieredUser;
   isVeteranEnabled: boolean;
 };
 
+const VIP_AURA = 'var(--color-glow-vip-badge-vip)';
+
 export function toMemberAuraTone({
   member,
   isVeteranEnabled,
-}: ToMemberAuraToneParams): VipBadgeTone {
-  if (!isVeteranEnabled) return 'vip';
-  if (!member.isVip) return 'vip';
-  if (!member.veteran) return 'vip';
+}: ToMemberAuraToneParams): string {
+  if (!isVeteranEnabled) return VIP_AURA;
+  if (!member.isVip) return VIP_AURA;
 
-  return toVipVeteranTone(member.veteran.tier);
+  return `var(--color-user-tier-${toUserTier(member)}-ring)`;
 }
