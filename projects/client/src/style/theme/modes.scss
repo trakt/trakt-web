@@ -445,6 +445,23 @@
   --color-soundtrack-play-foreground: var(--shade-10);
 
   --color-vip-popular-tag: #fdc700;
+  --color-member-tier-free-ring: color-mix(
+    in srgb,
+    var(--shade-1000) 14%,
+    transparent
+  );
+  --shadow-member-tier-legend:
+    0 0 0 1px
+      color-mix(in srgb, var(--member-tier-legend-deep) 30%, transparent),
+    0 calc(3cqi) calc(10cqi)
+      color-mix(in srgb, var(--member-tier-legend) 30%, transparent);
+  --shadow-member-tier-original:
+    0 0 0 1px
+      color-mix(in srgb, var(--member-tier-original-rose-deep) 45%, transparent),
+    0 calc(4cqi) calc(14cqi)
+      color-mix(in srgb, var(--member-tier-original-rose-deep) 30%, transparent);
+  --background-member-tier-director-tag: var(--member-tier-director-tag-steel);
+  --color-member-tier-director-tag: var(--shade-10);
   --color-vip-thread-base: var(--purple-400);
   --color-vip-thread-mid: var(--purple-500);
   --color-vip-thread-glint: var(--purple-900);
@@ -1118,6 +1135,20 @@
   --color-soundtrack-play-foreground: var(--shade-10);
 
   --color-vip-popular-tag: #fdc700;
+  --color-member-tier-free-ring: color-mix(
+    in srgb,
+    var(--shade-10) 12%,
+    transparent
+  );
+  --shadow-member-tier-legend: 0 0 calc(10cqi)
+    color-mix(in srgb, var(--member-tier-legend-sheen) 22%, transparent);
+  --shadow-member-tier-original:
+    0 0 0 1px
+      color-mix(in srgb, var(--member-tier-original-rose) 55%, transparent),
+    0 0 calc(14cqi)
+      color-mix(in srgb, var(--member-tier-original-rose) 32%, transparent);
+  --background-member-tier-director-tag: var(--member-tier-director-tag-pale);
+  --color-member-tier-director-tag: var(--member-tier-director-ink);
   --color-vip-thread-base: var(--purple-500);
   --color-vip-thread-mid: var(--purple-400);
   --color-vip-thread-glint: color-mix(in srgb, var(--shade-10) 80%, transparent);

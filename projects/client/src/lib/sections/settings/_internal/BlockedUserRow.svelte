@@ -17,7 +17,7 @@
   const { isRequestingBlock } = blockActions;
 </script>
 
-<div class="trakt-blocked-user-row">
+<div class="trakt-blocked-user-row" data-member-row>
   <Link href={UrlBuilder.profile.user(slug)} color="inherit">
     <div class="blocked-user-identity">
       <ProfileImage

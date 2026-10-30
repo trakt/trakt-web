@@ -13,6 +13,7 @@
 </script>
 
 <div
+  data-member-row
   class="trakt-profile-item"
   role="button"
   tabindex="0"

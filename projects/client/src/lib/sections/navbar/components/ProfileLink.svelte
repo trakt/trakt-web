@@ -13,7 +13,7 @@
   const { member } = useCurrentUserTier();
 </script>
 
-<trakt-profile-button data-hj-suppress data-sentry-mask>
+<trakt-profile-button data-hj-suppress data-sentry-mask data-member-row>
   <Link
     href={UrlBuilder.profile.me()}
     label={m.button_label_user_profile()}

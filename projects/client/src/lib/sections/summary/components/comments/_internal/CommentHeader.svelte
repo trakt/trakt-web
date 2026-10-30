@@ -34,7 +34,7 @@
   );
 </script>
 
-<div class="trakt-comment-header">
+<div class="trakt-comment-header" data-member-row>
   <TextCardHeader {subTitle}>
     {#snippet icon()}
       <UserAvatar user={comment.user} size="small" />

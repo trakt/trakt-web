@@ -1,0 +1,142 @@
+/*
+  Member tier rings ("Set B"): each ladder tier is one colour with a lighter
+  sheen. Legend is gold, Original dark rose gold, Director a pale diamond.
+  The theme-dependent parts (the free hairline, halos, the director tag) are
+  picked per theme in theme/modes.scss.
+*/
+:root {
+  --member-tier-vip: #6a45e6;
+  --member-tier-vip-sheen: #b07bff;
+  --member-tier-pro: #c2287f;
+  --member-tier-pro-sheen: #ff6fb5;
+  --member-tier-veteran: #0d8a6c;
+  --member-tier-veteran-sheen: #3fd1a0;
+  --member-tier-elite: #1f5fd8;
+  --member-tier-elite-sheen: #4fb4ff;
+  --member-tier-legend: #a97800;
+  --member-tier-legend-sheen: #ffd54a;
+  --member-tier-legend-deep: #785000;
+  --member-tier-legend-ink: #2b1d00;
+
+  --member-tier-original-rose: #e7a98f;
+  --member-tier-original-rose-light: #f6cdb8;
+  --member-tier-original-rose-deep: #b8705a;
+  --member-tier-original-ink: #0c0a0e;
+
+  --member-tier-director-glow: #96c8f0;
+  --member-tier-director-ink: #0e1620;
+
+  --member-tier-legend-ring: conic-gradient(
+    from 180deg,
+    #8a6000 0deg,
+    #b88600 70deg,
+    #ffe27a 150deg,
+    #fff6cc 175deg,
+    #e0a800 210deg,
+    #8a6000 300deg,
+    #8a6000 360deg
+  );
+  --member-tier-original-ring: conic-gradient(
+    from 20deg,
+    #0c0a0e 0deg,
+    #2a1e27 40deg,
+    #f6d3c2 58deg,
+    #3a2733 74deg,
+    #0c0a0e 140deg,
+    #1e1620 200deg,
+    #e8b9a4 226deg,
+    #2e2029 242deg,
+    #0c0a0e 300deg,
+    #0c0a0e 360deg
+  );
+  --member-tier-original-tag: linear-gradient(
+    115deg,
+    #2a1e27 0%,
+    #3a2733 45%,
+    #0c0a0e 100%
+  );
+  --member-tier-director-facets: conic-gradient(
+    from 0deg,
+    #5e7f9c 0deg 12.86deg,
+    #a9d3e6 12.86deg 25.71deg,
+    #b9a7d9 25.71deg 38.57deg,
+    #f4faff 38.57deg 51.43deg,
+    #7e9db8 51.43deg 64.29deg,
+    #6f8fab 64.29deg 77.14deg,
+    #8fb0c9 77.14deg 90deg,
+    #eef0ff 90deg 102.86deg,
+    #dceff8 102.86deg 115.71deg,
+    #ffffff 115.71deg 128.57deg,
+    #5e7f9c 128.57deg 141.43deg,
+    #a9d3e6 141.43deg 154.29deg,
+    #b9a7d9 154.29deg 167.14deg,
+    #f4faff 167.14deg 180deg,
+    #7e9db8 180deg 192.86deg,
+    #6f8fab 192.86deg 205.71deg,
+    #8fb0c9 205.71deg 218.57deg,
+    #eef0ff 218.57deg 231.43deg,
+    #dceff8 231.43deg 244.29deg,
+    #ffffff 244.29deg 257.14deg,
+    #5e7f9c 257.14deg 270deg,
+    #a9d3e6 270deg 282.86deg,
+    #b9a7d9 282.86deg 295.71deg,
+    #f4faff 295.71deg 308.57deg,
+    #7e9db8 308.57deg 321.43deg,
+    #6f8fab 321.43deg 334.29deg,
+    #8fb0c9 334.29deg 347.14deg,
+    #eef0ff 347.14deg 360deg
+  );
+  --member-tier-director-facets-inner: conic-gradient(
+    from 6.43deg,
+    #ffffff 0deg 12.86deg,
+    #5e7f9c 12.86deg 25.71deg,
+    #a9d3e6 25.71deg 38.57deg,
+    #b9a7d9 38.57deg 51.43deg,
+    #f4faff 51.43deg 64.29deg,
+    #7e9db8 64.29deg 77.14deg,
+    #6f8fab 77.14deg 90deg,
+    #8fb0c9 90deg 102.86deg,
+    #eef0ff 102.86deg 115.71deg,
+    #dceff8 115.71deg 128.57deg,
+    #ffffff 128.57deg 141.43deg,
+    #5e7f9c 141.43deg 154.29deg,
+    #a9d3e6 154.29deg 167.14deg,
+    #b9a7d9 167.14deg 180deg,
+    #f4faff 180deg 192.86deg,
+    #7e9db8 192.86deg 205.71deg,
+    #6f8fab 205.71deg 218.57deg,
+    #8fb0c9 218.57deg 231.43deg,
+    #eef0ff 231.43deg 244.29deg,
+    #dceff8 244.29deg 257.14deg,
+    #ffffff 257.14deg 270deg,
+    #5e7f9c 270deg 282.86deg,
+    #a9d3e6 282.86deg 295.71deg,
+    #b9a7d9 295.71deg 308.57deg,
+    #f4faff 308.57deg 321.43deg,
+    #7e9db8 321.43deg 334.29deg,
+    #6f8fab 334.29deg 347.14deg,
+    #8fb0c9 347.14deg 360deg
+  );
+  --member-tier-director-tag-pale: linear-gradient(
+    115deg,
+    #dcebf5 0%,
+    #f6fbff 22%,
+    #c9ddeb 23%,
+    #eef4ff 46%,
+    #d6cceb 47%,
+    #f4faff 70%,
+    #cfe4f0 71%,
+    #e8f3fa 100%
+  );
+  --member-tier-director-tag-steel: linear-gradient(
+    115deg,
+    #2e4a63 0%,
+    #5e7f9c 22%,
+    #3b5874 23%,
+    #8fb0c9 46%,
+    #6b5f8f 47%,
+    #4f6f8c 70%,
+    #7fa3be 71%,
+    #2e4a63 100%
+  );
+}

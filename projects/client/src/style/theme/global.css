@@ -79,9 +79,6 @@
    */
   --color-border-avatar: var(--shade-50);
   --color-border-vip-avatar: var(--purple-400);
-  --color-border-vip-avatar-copper: var(--orange-400);
-  --color-border-vip-avatar-silver: var(--shade-200);
-  --color-border-vip-avatar-gold: var(--yellow-400);
 
   /**
    * Buttons

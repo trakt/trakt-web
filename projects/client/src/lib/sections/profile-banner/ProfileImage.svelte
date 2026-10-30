@@ -3,6 +3,7 @@
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
   import type { TieredMember } from "$lib/features/vip-veteran/TieredMember.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction";
@@ -18,12 +19,15 @@
     src,
     isEditable = false,
     member,
+    ringMotion = "hover",
     hasEntrance = false,
     badge,
   }: {
     name: string;
     src: string;
     member?: TieredMember | Nil;
+    /** Live on a profile's own header; elsewhere the ring plays on hover. */
+    ringMotion?: "live" | "hover";
     hasEntrance?: boolean;
     isEditable?: boolean;
     badge?: Snippet;
@@ -31,6 +35,7 @@
 
   const { invalidate } = useInvalidator();
   const isVip = $derived(Boolean(member?.isVip));
+  const hasRing = useVipVeteranEnabled();
 
   type Dialog = "none" | "view" | "crop";
 
@@ -98,18 +103,19 @@
   }
 </script>
 
-<MemberAvatar {member}>
-  <div
-    class="trakt-profile-image"
-    class:is-vip={isVip}
-    class:has-entrance={isVip && hasEntrance}
-  >
-    <figure class="profile-image" data-sentry-block>
-      <!-- This should be the first element, else: HierarchyRequestError -->
-      <figcaption class="visually-hidden">
-        {m.image_alt_user_avatar({ username: name })}
-      </figcaption>
+<div
+  class="trakt-profile-image"
+  class:is-vip={isVip}
+  class:has-entrance={isVip && hasEntrance && !$hasRing}
+  class:has-ring={$hasRing}
+>
+  <figure class="profile-image" data-sentry-block>
+    <!-- This should be the first element, else: HierarchyRequestError -->
+    <figcaption class="visually-hidden">
+      {m.image_alt_user_avatar({ username: name })}
+    </figcaption>
 
+    <MemberAvatar {member} motion={ringMotion} {hasEntrance}>
       {#if isEditable}
         <ProfileImageContextMenu
           onViewPhoto={() => (imageEdit.dialog = "view")}
@@ -143,28 +149,31 @@
             </div>
           {/snippet}
         </ProfileImageContextMenu>
-        <div class="edit-badge" aria-hidden="true">
-          <RenameIcon />
-        </div>
       {:else}
         <CrossOriginImage
           {src}
           alt={m.image_alt_user_avatar({ username: name })}
         />
       {/if}
-    </figure>
+    </MemberAvatar>
 
-    {#if imageEdit.isUploading}
-      <div class="upload-overlay" transition:fade={{ duration: 150 }}>
-        <div class="upload-spinner">
-          <LoaderIcon />
-        </div>
+    {#if isEditable}
+      <div class="edit-badge" aria-hidden="true">
+        <RenameIcon />
       </div>
     {/if}
+  </figure>
 
-    {@render badge?.()}
-  </div>
-</MemberAvatar>
+  {#if imageEdit.isUploading}
+    <div class="upload-overlay" transition:fade={{ duration: 150 }}>
+      <div class="upload-spinner">
+        <LoaderIcon />
+      </div>
+    </div>
+  {/if}
+
+  {@render badge?.()}
+</div>
 
 {#if imageEdit.dialog === "view"}
   <ProfileImageViewDialog
@@ -201,12 +210,9 @@
     position: relative;
 
     &.is-vip {
-      --color-border-avatar: var(
-        --member-avatar-ring,
-        var(--color-border-vip-avatar)
-      );
-      --ring-glow-inner: var(--member-avatar-ring, var(--purple-400));
-      --ring-glow-outer: var(--member-avatar-glow, var(--purple-500));
+      --color-border-avatar: var(--color-border-vip-avatar);
+      --ring-glow-inner: var(--purple-400);
+      --ring-glow-outer: var(--purple-500);
 
       .profile-image {
         box-shadow:
@@ -232,6 +238,13 @@
 
       z-index: var(--layer-raised);
     }
+  }
+
+  /* The member ring is the frame: no stroke, padding or glow of its own. */
+  .trakt-profile-image.has-ring .profile-image {
+    outline: none;
+    padding: 0;
+    box-shadow: none;
   }
 
   @keyframes ring-swell {

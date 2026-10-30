@@ -57,6 +57,7 @@
       name={profile.name.first}
       src={profile.avatar.url}
       {member}
+      ringMotion="live"
       hasEntrance={shownVeteran != null}
     >
       {#snippet badge()}

@@ -45,6 +45,7 @@
             name={spot.entry.user.name.first}
             src={spot.entry.user.avatar.url}
             member={spot.entry.user}
+            ringMotion="live"
           />
         </span>
       </Link>
