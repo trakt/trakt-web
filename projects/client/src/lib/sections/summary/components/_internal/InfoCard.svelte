@@ -1,19 +1,20 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
-
-  type InfoCardProps = {
-    variant?: "default" | "highlight" | "dashed";
-    size?: "default" | "compact";
-  } & ChildrenProps;
+  import type { InfoCardProps } from "./InfoCardProps.ts";
 
   const {
     children,
     variant = "default",
     size = "default",
+    fill = false,
   }: InfoCardProps = $props();
 </script>
 
-<Card variant="transparent" --width-card="100%" --height-card="fit-content">
+<Card
+  variant="transparent"
+  --width-card="100%"
+  --height-card={fill ? "100%" : "fit-content"}
+>
   <div class="trakt-info-container" data-variant={variant} data-size={size}>
     {@render children()}
   </div>
@@ -30,6 +31,7 @@
     gap: var(--gap-s);
 
     box-sizing: border-box;
+    height: 100%;
     padding: var(--ni-20) var(--ni-24);
 
     background: color-mix(in srgb, var(--color-text-primary) 4%, transparent);
