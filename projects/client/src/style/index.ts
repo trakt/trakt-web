@@ -1,5 +1,6 @@
 import './palette/blue.css';
 import './palette/green.css';
+import './palette/user-tier.css';
 import './palette/orange.css';
 import './palette/purple.css';
 import './palette/red.css';
