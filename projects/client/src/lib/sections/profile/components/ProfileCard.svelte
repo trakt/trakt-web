@@ -16,7 +16,6 @@
     <Link href={profileUrl}>
       <ProfileImage
         --image-size="var(--ni-80)"
-        --border-width="var(--border-thickness-xs)"
         name={profile.name.first}
         src={profile.avatar.url}
         member={profile}

@@ -26,11 +26,7 @@
 </script>
 
 {#snippet avatar()}
-  <div
-    class="trakt-user-avatar"
-    class:trakt-vip-user={user.isVip}
-    data-size={size}
-  >
+  <div class="trakt-user-avatar" data-size={size}>
     <UserTierRing member={user}>
       <CrossOriginImage
         src={user.avatar.url}
@@ -61,23 +57,6 @@
     &[data-size="small"] {
       width: var(--ni-32);
       height: var(--ni-32);
-    }
-
-    :global(img) {
-      border-radius: 50%;
-      box-sizing: border-box;
-
-      width: 100%;
-      height: 100%;
-
-      border: var(--ni-2) solid var(--shade-10);
-    }
-
-    &.trakt-vip-user {
-      :global(img) {
-        border: var(--ni-2) solid
-          var(--member-avatar-ring, var(--color-border-vip-avatar));
-      }
     }
   }
 </style>

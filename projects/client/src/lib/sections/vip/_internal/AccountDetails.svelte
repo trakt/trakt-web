@@ -26,10 +26,10 @@
     <div class="trakt-vip-profile-header">
       <ProfileImage
         --image-size="var(--ni-64)"
-        --border-width="var(--border-thickness-xs)"
         name={$user.name.first}
         src={$user.avatar.url}
         member={$member}
+        ringMotion="live"
       />
       <div class="vip-header-details">
         <div class="vip-profile-header-user-details">

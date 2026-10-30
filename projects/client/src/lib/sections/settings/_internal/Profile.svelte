@@ -20,10 +20,10 @@
     <ProfileImage
       isEditable
       --image-size="var(--ni-56)"
-      --border-width="var(--border-thickness-xs)"
       name={$user.name.first}
       src={$user.avatar.url}
       member={$member}
+      ringMotion="live"
     />
 
     <div class="trakt-settings-profile-info">

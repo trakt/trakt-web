@@ -7,7 +7,7 @@ export function useCurrentUserTier() {
   const { user } = useUser();
   const { veteran } = useVipVeteran(
     user.pipe(
-      map(($user) => $user.slug),
+      map(($user) => ($user.isVip ? $user.slug : '')),
       distinctUntilChanged(),
     ),
   );

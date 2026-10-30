@@ -1,24 +1,13 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { userProfileQuery } from '$lib/requests/queries/users/userProfileQuery.ts';
-import { combineLatest, map, type Observable } from 'rxjs';
-import { useVipVeteranEnabled } from './useVipVeteranEnabled.ts';
+import { map, type Observable } from 'rxjs';
 
 export function useVipVeteran(slug$: Observable<string>) {
-  const isEnabled = useVipVeteranEnabled();
-
   const response = useQuery(
-    combineLatest([slug$, isEnabled]).pipe(
-      map(([slug, enabled]) =>
-        userProfileQuery({ slug, enabled: enabled && slug !== '' }),
-      ),
-    ),
+    slug$.pipe(map((slug) => userProfileQuery({ slug, enabled: slug !== '' }))),
   );
 
   return {
-    veteran: combineLatest([response, isEnabled]).pipe(
-      map(([$response, enabled]) =>
-        enabled ? ($response.data?.veteran ?? null) : null,
-      ),
-    ),
+    veteran: response.pipe(map(($response) => $response.data?.veteran ?? null)),
   };
 }

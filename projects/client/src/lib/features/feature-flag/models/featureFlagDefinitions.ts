@@ -63,13 +63,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     description: () => m.preview_feature_description_year_in_review_2026(),
     audience: 'director',
   },
-  [FeatureFlag.VipVeteran]: {
-    icon: SparkleStarIcon,
-    title: () => m.preview_feature_title_vip_veteran(),
-    addedAt: new Date('2026-10-02'),
-    description: () => m.preview_feature_description_vip_veteran(),
-    audience: 'director',
-  },
   [FeatureFlag.SeasonRecap]: {
     icon: HourglassIcon,
     title: () => m.preview_feature_title_season_recap(),

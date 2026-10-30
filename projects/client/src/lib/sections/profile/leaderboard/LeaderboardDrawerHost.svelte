@@ -3,7 +3,6 @@
   import PaginatedList from "$lib/components/lists/PaginatedList.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
-  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
   import type { LeaderboardEntry } from "$lib/requests/models/LeaderboardEntry.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants.ts";
@@ -25,10 +24,9 @@
   onMount(() => track({ source: "leaderboard" }));
 
   const { viewer } = useLeaderboardViewer();
-  const hasPodium = useVipVeteranEnabled();
 
   const isOnPodium = (entry: LeaderboardEntry) =>
-    $hasPodium && !entry.locked && entry.rank != null && entry.rank <= 3;
+    !entry.locked && entry.rank != null && entry.rank <= 3;
 
   let isOpened = $state(false);
 </script>

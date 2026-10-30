@@ -21,7 +21,6 @@
   >
     <ProfileImage
       --image-size="var(--ni-32)"
-      --border-width="var(--border-thickness-xs)"
       name={$user?.name?.first ?? ""}
       src={$user?.avatar?.url ?? ""}
       member={$member}
@@ -55,12 +54,6 @@
         border-radius: var(--border-radius-xs);
         outline: var(--border-thickness-xs) solid var(--color-link-active);
         outline-offset: var(--gap-xs);
-      }
-    }
-
-    :global(.trakt-link-active) {
-      :global(.profile-image) {
-        --color-border-avatar: var(--color-link-active);
       }
     }
   }
