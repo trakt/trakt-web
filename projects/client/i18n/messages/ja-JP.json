@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count}のサーバー",
   "text_vip_cancel_value_service": "1つのサービス",
   "text_vip_cancel_value_services": "{count}のサービス",
+  "text_vip_checkout_failed_title": "チェックアウトを開始できませんでした",
   "text_vip_costs": "VIPは、Traktの運営にかかる実際の費用をカバーするのに役立ちます。これには以下が含まれます。",
   "text_vip_costs_clients": "すべてのファーストパーティおよびサードパーティのTraktクライアントのサポート",
   "text_vip_costs_infrastructure": "大規模なグローバルユーザーベースのためのカスタムAPIインフラストラクチャ",

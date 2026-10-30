@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} 个服务器",
   "text_vip_cancel_value_service": "1 项服务",
   "text_vip_cancel_value_services": "{count} 项服务",
+  "text_vip_checkout_failed_title": "无法开始结账",
   "text_vip_costs": "VIP 订阅有助于支付 Trakt 运营的实际成本，包括：",
   "text_vip_costs_clients": "支持所有第一方和第三方 Trakt 客户端",
   "text_vip_costs_infrastructure": "为庞大的全球用户群定制 API 基础设施",

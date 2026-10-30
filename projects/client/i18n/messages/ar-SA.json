@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} خوادم",
   "text_vip_cancel_value_service": "خدمة واحدة",
   "text_vip_cancel_value_services": "{count} خدمات",
+  "text_vip_checkout_failed_title": "تعذر بدء إتمام الشراء",
   "text_vip_costs": "تساعد VIP في تغطية التكاليف الحقيقية لتشغيل Trakt، بما في ذلك:",
   "text_vip_costs_clients": "دعم لجميع عملاء Trakt من الطرف الأول والثالث",
   "text_vip_costs_infrastructure": "البنية التحتية لواجهة برمجة التطبيقات (API) المخصصة لقاعدة مستخدمين عالمية ضخمة",

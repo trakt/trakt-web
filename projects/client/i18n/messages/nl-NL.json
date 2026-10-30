@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} servers",
   "text_vip_cancel_value_service": "1 service",
   "text_vip_cancel_value_services": "{count} services",
+  "text_vip_checkout_failed_title": "Kon afrekenen niet starten",
   "text_vip_costs": "VIP helpt de werkelijke kosten van het runnen van Trakt te dekken, waaronder:",
   "text_vip_costs_clients": "Ondersteuning voor alle Trakt-clients van eerste en derde partijen",
   "text_vip_costs_infrastructure": "Aangepaste API-infrastructuur voor een enorme wereldwijde gebruikersbasis",

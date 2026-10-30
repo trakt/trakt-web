@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} سرور",
   "text_vip_cancel_value_service": "۱ سرویس",
   "text_vip_cancel_value_services": "{count} سرویس",
+  "text_vip_checkout_failed_title": "امکان شروع پرداخت وجود ندارد",
   "text_vip_costs": "VIP به پوشش هزینه‌های واقعی اجرای Trakt کمک می‌کند، از جمله:",
   "text_vip_costs_clients": "پشتیبانی از تمام کلاینت‌های Trakt شخص اول و شخص ثالث",
   "text_vip_costs_infrastructure": "زیرساخت API سفارشی برای یک پایگاه کاربری جهانی عظیم",

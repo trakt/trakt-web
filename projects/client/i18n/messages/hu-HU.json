@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} szerver",
   "text_vip_cancel_value_service": "1 szolgáltatás",
   "text_vip_cancel_value_services": "{count} szolgáltatás",
+  "text_vip_checkout_failed_title": "Nem sikerült elindítani a fizetést",
   "text_vip_costs": "A VIP segít fedezni a Trakt működtetésének valós költségeit, többek között:",
   "text_vip_costs_clients": "Támogatás minden első és harmadik fél Trakt klienséhez",
   "text_vip_costs_infrastructure": "Egyedi API infrastruktúra hatalmas globális felhasználói bázishoz",

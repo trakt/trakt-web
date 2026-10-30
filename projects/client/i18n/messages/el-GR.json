@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} διακομιστές",
   "text_vip_cancel_value_service": "1 υπηρεσία",
   "text_vip_cancel_value_services": "{count} υπηρεσίες",
+  "text_vip_checkout_failed_title": "Δεν ήταν δυνατή η έναρξη ολοκλήρωσης αγοράς",
   "text_vip_costs": "Το VIP βοηθά στην κάλυψη των πραγματικών εξόδων λειτουργίας του Trakt, συμπεριλαμβανομένων:",
   "text_vip_costs_clients": "Υποστήριξη για όλους τους Trakt clients πρώτου και τρίτου μέρους",
   "text_vip_costs_infrastructure": "Προσαρμοσμένη υποδομή API για μια τεράστια παγκόσμια βάση χρηστών",

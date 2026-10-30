@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} sunucu",
   "text_vip_cancel_value_service": "1 hizmet",
   "text_vip_cancel_value_services": "{count} hizmet",
+  "text_vip_checkout_failed_title": "Ödeme başlatılamadı",
   "text_vip_costs": "VIP, Trakt'ı işletmenin gerçek maliyetlerini karşılamaya yardımcı olur, bunlar:",
   "text_vip_costs_clients": "Tüm birinci ve üçüncü taraf Trakt istemcileri için destek",
   "text_vip_costs_infrastructure": "Devasa global kullanıcı tabanı için özel API altyapısı",

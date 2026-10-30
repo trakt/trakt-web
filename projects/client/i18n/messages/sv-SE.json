@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} servrar",
   "text_vip_cancel_value_service": "1 tjänst",
   "text_vip_cancel_value_services": "{count} tjänster",
+  "text_vip_checkout_failed_title": "Kunde inte starta kassan",
   "text_vip_costs": "VIP hjälper till att täcka de verkliga kostnaderna för att driva Trakt, inklusive:",
   "text_vip_costs_clients": "Stöd för alla första- och tredjeparts Trakt-klienter",
   "text_vip_costs_infrastructure": "Anpassad API-infrastruktur för en massiv global användarbas",

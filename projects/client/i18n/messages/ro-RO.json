@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} servere",
   "text_vip_cancel_value_service": "1 serviciu",
   "text_vip_cancel_value_services": "{count} servicii",
+  "text_vip_checkout_failed_title": "Nu s-a putut începe finalizarea comenzii",
   "text_vip_costs": "VIP ajută la acoperirea costurilor reale de funcționare a Trakt, incluzând:",
   "text_vip_costs_clients": "Suport pentru toți clienții Trakt primari și terți",
   "text_vip_costs_infrastructure": "Infrastructură API personalizată pentru o bază masivă de utilizatori globali",

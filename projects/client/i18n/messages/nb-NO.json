@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} servere",
   "text_vip_cancel_value_service": "1 tjeneste",
   "text_vip_cancel_value_services": "{count} tjenester",
+  "text_vip_checkout_failed_title": "Kunne ikke starte utsjekking",
   "text_vip_costs": "VIP bidrar til å dekke de virkelige kostnadene ved å drive Trakt, inkludert:",
   "text_vip_costs_clients": "Støtte for alle første- og tredjeparts Trakt-klienter",
   "text_vip_costs_infrastructure": "Tilpasset API-infrastruktur for en massiv global brukerbase",

@@ -2402,6 +2402,7 @@
   "text_vip_cancel_value_servers": "{count} servere",
   "text_vip_cancel_value_service": "1 tjeneste",
   "text_vip_cancel_value_services": "{count} tjenester",
+  "text_vip_checkout_failed_title": "Kunne ikke starte betaling",
   "text_vip_costs": "VIP hjælper med at dække de reelle omkostninger ved at drive Trakt, herunder:",
   "text_vip_costs_clients": "Support til alle første- og tredjeparts Trakt-klienter",
   "text_vip_costs_infrastructure": "Brugerdefineret API-infrastruktur til en massiv global brugerbase",
