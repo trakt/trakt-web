@@ -1,6 +1,9 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import Snackbar from "$lib/components/snackbar/Snackbar.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import type { VipPlan } from "./models/VipPlan";
   import { useVip } from "./useVip";
@@ -23,13 +26,19 @@
   });
 
   const { startCheckout, isFetching } = useVip();
+  const { user } = useUser();
+
+  let hasFailed = $state(false);
 
   const onStartCheckout = async () => {
     if ($isFetching) return;
-    const url = await startCheckout(plan);
-    if (url) {
-      globalThis.window.location.href = url;
+    const url = await startCheckout(plan).catch(() => null);
+    if (!url) {
+      hasFailed = true;
+      return;
     }
+
+    globalThis.window.location.href = url;
   };
 </script>
 
@@ -51,6 +60,15 @@
     {/if}
   </Button>
 </trakt-vip-upgrade-button>
+
+<Snackbar
+  open={hasFailed}
+  onDismiss={() => (hasFailed = false)}
+  title={m.text_vip_checkout_failed_title()}
+  message={m.text_vip_subscription_failed_message()}
+  href={UrlBuilder.og.support($user?.slug)}
+  variant="error"
+/>
 
 <style>
   trakt-vip-upgrade-button {
