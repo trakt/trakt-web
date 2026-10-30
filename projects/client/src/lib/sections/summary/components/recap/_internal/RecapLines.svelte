@@ -11,6 +11,12 @@
 
   const personLines = $derived(lines.filter(({ people }) => people.length > 0));
   const openLines = $derived(lines.filter(({ people }) => people.length === 0));
+  const singleLines = $derived(
+    personLines.filter(({ people }) => people.length === 1),
+  );
+  const orphanKey = $derived(
+    singleLines.length % 2 === 1 ? singleLines.at(-1)?.key : undefined,
+  );
 </script>
 
 <section class="trakt-recap-lines">
@@ -21,7 +27,7 @@
 
   <div class="lines-grid">
     {#each personLines as line (line.key)}
-      <RecapPersonCard {line} />
+      <RecapPersonCard {line} isWide={line.key === orphanKey} />
     {/each}
 
     {#if openLines.length > 0}

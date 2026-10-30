@@ -5,7 +5,8 @@
   import InfoCard from "../../_internal/InfoCard.svelte";
   import RecapFace from "./RecapFace.svelte";
 
-  const { line }: { line: RecapLine } = $props();
+  const { line, isWide = false }: { line: RecapLine; isWide?: boolean } =
+    $props();
 
   const listFormat = new Intl.ListFormat(getIntlLocale(languageTag()), {
     type: "conjunction",
@@ -22,7 +23,7 @@
   );
 </script>
 
-<div class="trakt-recap-person-card" data-layout={isGroup ? "group" : "single"}>
+<div class="trakt-recap-person-card" data-wide={isGroup || isWide}>
   <InfoCard size="compact" fill>
     <div class="person-header">
       <span class="person-faces">
@@ -54,7 +55,7 @@
     display: grid;
     min-width: 0;
 
-    &[data-layout="group"] {
+    &[data-wide="true"] {
       grid-column: 1 / -1;
     }
 
