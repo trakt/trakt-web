@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import { toVipStreakLadder } from "$lib/features/vip-veteran/toVipStreakLadder.ts";
-  import { toVipVeteranLabel } from "$lib/features/vip-veteran/toVipVeteranLabel.ts";
+  import { toUserTierTitle } from "$lib/features/vip-veteran/toUserTierTitle.ts";
   import type { VipVeteran } from "$lib/requests/models/VipVeteran.ts";
 
   const { veteran }: { veteran: VipVeteran } = $props();
@@ -18,7 +18,7 @@
     const { next } = ladder;
     if (!next) return m.text_vip_streak_top();
 
-    const title = toVipVeteranLabel(next.title);
+    const title = toUserTierTitle(next.userTier);
     return next.yearsLeft === 1
       ? m.text_vip_streak_next_one({ title })
       : m.text_vip_streak_next_other({
@@ -35,12 +35,12 @@
         class="ladder-rung"
         class:is-reached={rung.isReached}
         class:is-current={rung.isCurrent}
-        data-tone={rung.tone}
+        data-user-tier={rung.userTier}
         aria-current={rung.isCurrent ? "step" : undefined}
       >
         <span class="rung-dot" aria-hidden="true"></span>
         <span class="rung-title uppercase bold">
-          {toVipVeteranLabel(rung.title)}
+          {toUserTierTitle(rung.userTier)}
         </span>
         <span class="rung-years secondary">{toRungYears(rung.tier)}</span>
       </li>
@@ -68,7 +68,7 @@
   }
 
   .ladder-rung {
-    --rung-color: var(--color-glow-vip-badge-vip);
+    --rung-color: var(--user-tier-color);
 
     display: grid;
     grid-template-columns: var(--ni-16) 1fr auto;
@@ -76,22 +76,6 @@
     gap: var(--gap-s);
 
     opacity: 0.45;
-
-    &[data-tone="deep"] {
-      --rung-color: var(--color-glow-vip-badge-deep);
-    }
-
-    &[data-tone="copper"] {
-      --rung-color: var(--color-glow-vip-badge-copper);
-    }
-
-    &[data-tone="silver"] {
-      --rung-color: var(--color-glow-vip-badge-silver);
-    }
-
-    &[data-tone="gold"] {
-      --rung-color: var(--color-glow-vip-badge-gold);
-    }
 
     &.is-reached {
       opacity: 1;

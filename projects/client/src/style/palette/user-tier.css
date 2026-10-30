@@ -23,6 +23,21 @@
     #8a6000 360deg
   );
 
+  --user-tier-legend-tag: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--yellow-200) 85%, var(--user-tier-legend)),
+    color-mix(in srgb, var(--yellow-600) 35%, var(--user-tier-legend))
+  );
+  --user-tier-legend-tag-shadow:
+    inset 0 var(--ni-1) 0 color-mix(in srgb, var(--yellow-50) 45%, transparent),
+    0 var(--ni-2) var(--ni-12)
+    color-mix(in srgb, var(--user-tier-legend) 40%, transparent);
+
+  --user-tier-legend-tag-engrave:
+    0 var(--ni-1) 0 color-mix(in srgb, var(--yellow-50) 55%, transparent),
+    0 calc(var(--ni-1) * -1) 0
+    color-mix(in srgb, var(--user-tier-legend-deep) 45%, transparent);
+
   --user-tier-legend-ring-light: conic-gradient(
     from 180deg,
     #8a6000 0deg,
