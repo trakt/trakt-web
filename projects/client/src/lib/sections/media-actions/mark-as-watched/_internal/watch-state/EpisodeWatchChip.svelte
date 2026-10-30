@@ -8,6 +8,7 @@
   import { useMarkAsWatched } from "../../useMarkAsWatched.ts";
   import { markAsWatchedDrawerStore } from "../markAsWatchedDrawerStore.ts";
   import { isUpcoming } from "$lib/utils/media/isUpcoming.ts";
+  import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
 
   const {
     episode,
@@ -28,6 +29,10 @@
   } = $derived(useMarkAsWatched({ type: "episode", media: episode, show }));
 
   const { confirm } = useConfirm();
+
+  const spoilerFreeTitle = $derived(
+    useSpoilerFreeEpisodeTitle({ episode, show }),
+  );
 
   const title = $derived(
     `${show.title} ${episodeNumberLabel({
@@ -85,7 +90,7 @@
   class:is-up-next={isUpNext && state === "unwatched"}
   aria-label={label}
   aria-pressed={$isWatched}
-  title={episode.title}
+  title={$spoilerFreeTitle}
   disabled={state === "upcoming" || $isMarkingAsWatched || $isQueued}
   onclick={handler}
 >
