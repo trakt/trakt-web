@@ -9,6 +9,7 @@
   import XIcon from "$lib/components/icons/XIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { m } from "$lib/features/i18n/messages.ts";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
@@ -53,13 +54,32 @@
   });
 
   const type = $derived(rest.type);
+
+  const label = $derived.by(() => {
+    switch (rest.type) {
+      case "x":
+        return "X";
+      case "instagram":
+        return "Instagram";
+      case "facebook":
+        return "Facebook";
+      case "wikipedia":
+        return "Wikipedia";
+      case "imdb-media":
+        return "IMDb";
+      case "tmdb-media":
+        return "TMDB";
+      case "homepage":
+        return m.button_label_official_website();
+    }
+  });
 </script>
 
 <ActionButton
   {href}
   {size}
   target="_blank"
-  label={type}
+  {label}
   style="ghost"
   onclick={() => track({ target: type, source })}
 >
