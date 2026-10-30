@@ -5,12 +5,23 @@ import {
   COMMENT_ID_PARAM,
   EPISODE_PARAM,
   SEASON_PARAM,
+  SHOW_REPLIES_PARAM,
   TAB_PARAM,
 } from '$lib/sections/summary/constants.ts';
 
+type CommentDrawerParams = {
+  [COMMENT_ID_PARAM]: string;
+  [SHOW_REPLIES_PARAM]?: string;
+};
+
+const commentDrawerParams: CommentDrawerParams = {
+  [COMMENT_ID_PARAM]: '',
+  [SHOW_REPLIES_PARAM]: '',
+};
+
 const summaryDrawerParams = {
-  [SummaryDrawers.Comments]: { [COMMENT_ID_PARAM]: '' },
-  [SummaryDrawers.Review]: { [COMMENT_ID_PARAM]: '' },
+  [SummaryDrawers.Comments]: commentDrawerParams,
+  [SummaryDrawers.Review]: commentDrawerParams,
   [SummaryDrawers.Episode]: { [EPISODE_PARAM]: '', [SEASON_PARAM]: '' },
   /* The seasons drawer can be asked to open on an episode - the rail's edge
      badges send the one its window cuts off at. */
@@ -18,6 +29,23 @@ const summaryDrawerParams = {
   [SummaryDrawers.Sentiment]: { [TAB_PARAM]: '' },
   [SummaryDrawers.SeasonRecap]: { [TAB_PARAM]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
+
+type CommentDrawerSource = {
+  id: number;
+  showReplies?: boolean;
+};
+
+function toCommentDrawerParams(
+  source?: CommentDrawerSource,
+): CommentDrawerParams | undefined {
+  if (source == null) return undefined;
+  if (!source.showReplies) return { [COMMENT_ID_PARAM]: String(source.id) };
+
+  return {
+    [COMMENT_ID_PARAM]: String(source.id),
+    [SHOW_REPLIES_PARAM]: 'true',
+  };
+}
 
 function mapToDrawer(value: string | Nil) {
   switch (value) {
@@ -77,6 +105,7 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
     parsedCommentId != null && Number.isFinite(parsedCommentId)
       ? parsedCommentId
       : undefined;
+  const showSourceReplies = searchParams?.get(SHOW_REPLIES_PARAM) === 'true';
   const episodeNumber = searchParams?.get(EPISODE_PARAM);
   const parsedEpisode =
     episodeNumber != null ? Number(episodeNumber) : undefined;
@@ -88,11 +117,12 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
   return {
     drawer,
     sourceCommentId,
+    showSourceReplies,
     sourceEpisode,
     close,
     closeCommentDrawer: () =>
       drawer === SummaryDrawers.Episode
-        ? closeParams(COMMENT_ID_PARAM)
+        ? closeParams(COMMENT_ID_PARAM, SHOW_REPLIES_PARAM)
         : close(),
     buildDrawerLink,
     buildEpisodeDrawerLink: ({
@@ -112,17 +142,14 @@ export function summaryDrawerNavigation(searchParams?: URLSearchParams) {
         SummaryDrawers.Seasons,
         episode != null ? { [EPISODE_PARAM]: String(episode) } : undefined,
       ),
-    buildCommentsDrawerLink: (id?: number) =>
-      buildDrawerLink(
-        SummaryDrawers.Comments,
-        id != null ? { [COMMENT_ID_PARAM]: String(id) } : undefined,
-      ),
+    buildCommentsDrawerLink: (source?: CommentDrawerSource) =>
+      buildDrawerLink(SummaryDrawers.Comments, toCommentDrawerParams(source)),
     buildReviewDrawerLink: (id: number) =>
       buildDrawerLink(SummaryDrawers.Review, {
         [COMMENT_ID_PARAM]: String(id),
       }),
     openSeasonRecapDrawer: () => openDrawer(SummaryDrawers.SeasonRecap),
-    openReviewDrawer: (id: number) =>
-      openDrawer(SummaryDrawers.Review, { [COMMENT_ID_PARAM]: String(id) }),
+    openReviewDrawer: (source: CommentDrawerSource) =>
+      openDrawer(SummaryDrawers.Review, toCommentDrawerParams(source)),
   };
 }

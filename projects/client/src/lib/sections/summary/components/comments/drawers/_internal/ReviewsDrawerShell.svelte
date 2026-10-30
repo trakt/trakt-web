@@ -42,6 +42,7 @@
           {...props}
           isReplying={isReplying(comment.id)}
           shouldScrollIntoView={comment.id === source?.id}
+          showReplies={comment.id === source?.id && source.showReplies}
         />
       {/each}
     {/snippet}

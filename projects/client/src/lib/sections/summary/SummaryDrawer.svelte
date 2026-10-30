@@ -59,6 +59,7 @@
     close,
     closeCommentDrawer,
     sourceCommentId,
+    showSourceReplies,
     sourceEpisode,
   } = $derived(summaryDrawerNavigation(page.url.searchParams));
 
@@ -86,7 +87,10 @@
       return;
     }
 
-    await navigationOnEntry.openReviewDrawer(commentIdOnEntry);
+    await navigationOnEntry.openReviewDrawer({
+      id: commentIdOnEntry,
+      showReplies: navigationOnEntry.showSourceReplies,
+    });
     isResolvingEntryComment = false;
   });
 
@@ -235,7 +239,11 @@
   <CommentsDrawerHost
     {...commentsProps}
     source={sourceCommentId != null
-      ? { id: sourceCommentId, isReplying: false }
+      ? {
+          id: sourceCommentId,
+          isReplying: false,
+          showReplies: showSourceReplies,
+        }
       : undefined}
     onClose={close}
   />
@@ -245,6 +253,7 @@
   <ReviewDrawerHost
     {...commentsProps}
     commentId={sourceCommentId}
+    showReplies={showSourceReplies}
     elevated={drawer === SummaryDrawers.Episode}
     onClose={closeCommentDrawer}
   />
