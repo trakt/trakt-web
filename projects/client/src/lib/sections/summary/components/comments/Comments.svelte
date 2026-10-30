@@ -39,7 +39,7 @@
   const onClosePostReview = () => isPostReviewOpen.set(false);
 
   const onDrilldown = (comment?: ActiveComment) => {
-    const link = buildCommentsDrawerLink(comment?.id);
+    const link = buildCommentsDrawerLink(comment);
     goto(link.href, {
       noScroll: link.noscroll,
       replaceState: link.replacestate,

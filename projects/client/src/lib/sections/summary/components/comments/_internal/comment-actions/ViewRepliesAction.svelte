@@ -19,7 +19,8 @@
 
 <Button
   label={m.button_label_comment_replies()}
-  onclick={() => onDrilldown?.({ id: comment.id, isReplying: false })}
+  onclick={() =>
+    onDrilldown?.({ id: comment.id, isReplying: false, showReplies: true })}
   style="ghost"
   color="purple"
   disabled={!onDrilldown}

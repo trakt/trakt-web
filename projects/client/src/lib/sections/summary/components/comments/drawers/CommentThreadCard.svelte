@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import type { Snippet } from "svelte";
+  import { untrack, type Snippet } from "svelte";
   import ReactAction from "../_internal/comment-actions/ReactAction.svelte";
   import ReplyButton from "../_internal/comment-actions/ReplyButton.svelte";
   import CommentInput from "../_internal/comment-input/CommentInput.svelte";
@@ -24,6 +24,7 @@
     setReplying: (comment: MediaComment, isReplying: boolean) => void;
     registerDraft: (hasDraft: () => boolean) => () => void;
     shouldScrollIntoView: boolean;
+    showReplies?: boolean;
     header?: Snippet;
     scrollContainerClass?: string;
   } & CommentTypeProps;
@@ -36,6 +37,7 @@
     registerDraft,
     reset,
     shouldScrollIntoView,
+    showReplies = false,
     header,
     scrollContainerClass = THREAD_LIST_CLASS,
     ...typeProps
@@ -49,7 +51,7 @@
     return scrollActiveCommentIntoView(node, scrollContainerClass);
   };
 
-  let areRepliesExpanded = $state(false);
+  let areRepliesExpanded = $state(untrack(() => showReplies));
 
   function toggleReplies() {
     areRepliesExpanded = !areRepliesExpanded;

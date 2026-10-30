@@ -9,12 +9,14 @@
 
   type ReviewDrawerProps = {
     commentId: number;
+    showReplies?: boolean;
     onClose: () => void;
     elevated?: boolean;
   } & CommentsProps;
 
   const {
     commentId,
+    showReplies = false,
     onClose,
     elevated = false,
     media,
@@ -38,6 +40,12 @@
   onOpened={() => (isOpened = true)}
 >
   {#if isOpened}
-    <ReviewsDrawerShell {useList} {activeCommentState} {media} {...props} />
+    <ReviewsDrawerShell
+      source={{ id: commentId, isReplying: false, showReplies }}
+      {useList}
+      {activeCommentState}
+      {media}
+      {...props}
+    />
   {/if}
 </Drawer>
