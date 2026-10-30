@@ -19,6 +19,7 @@ describe('util: toVipStreakLadder', () => {
       true,
       true,
       false,
+      false,
     ]);
     expect(rungs.find((rung) => rung.isCurrent)?.tier).to.equal(7);
   });
@@ -26,18 +27,31 @@ describe('util: toVipStreakLadder', () => {
   it('should point at the next rung', () => {
     expect(toVipStreakLadder(veteran(8, 7)).next).to.deep.equal({
       tier: 10,
-      title: 'legend',
+      memberTier: 'legend',
       yearsLeft: 2,
     });
   });
 
-  it('should have no next rung for legends', () => {
-    expect(toVipStreakLadder(veteran(13, 10)).next).to.equal(null);
+  it('should point legends at Original', () => {
+    expect(toVipStreakLadder(veteran(13, 10)).next).to.deep.equal({
+      tier: 15,
+      memberTier: 'original',
+      yearsLeft: 2,
+    });
   });
 
-  it('should colour each rung by its tier', () => {
+  it('should crown fifteen years as Original with no next rung', () => {
+    const ladder = toVipStreakLadder(veteran(16, 10));
+
+    expect(ladder.next).to.equal(null);
+    expect(ladder.rungs.find((rung) => rung.isCurrent)?.memberTier).to.equal(
+      'original',
+    );
+  });
+
+  it('should give each rung its tier', () => {
     expect(
-      toVipStreakLadder(veteran(1, 1)).rungs.map((rung) => rung.tone),
-    ).to.deep.equal(['vip', 'deep', 'copper', 'silver', 'gold']);
+      toVipStreakLadder(veteran(1, 1)).rungs.map((rung) => rung.memberTier),
+    ).to.deep.equal(['vip', 'pro', 'veteran', 'elite', 'legend', 'original']);
   });
 });

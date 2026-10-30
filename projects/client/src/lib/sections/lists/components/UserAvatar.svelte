@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
@@ -23,12 +24,15 @@
     onClick,
     linked = true,
   }: UserAvatarProps = $props();
+
+  const hasRing = useVipVeteranEnabled();
 </script>
 
 {#snippet avatar()}
   <div
     class="trakt-user-avatar"
     class:trakt-vip-user={user.isVip}
+    class:has-ring={$hasRing}
     data-size={size}
   >
     <MemberAvatar member={user}>
@@ -75,9 +79,13 @@
 
     &.trakt-vip-user {
       :global(img) {
-        border: var(--ni-2) solid
-          var(--member-avatar-ring, var(--color-border-vip-avatar));
+        border: var(--ni-2) solid var(--color-border-vip-avatar);
       }
+    }
+
+    /* The member ring is the frame; the photo loses its own stroke. */
+    &.has-ring :global(img) {
+      border: none;
     }
   }
 </style>

@@ -10,12 +10,12 @@
 </script>
 
 <script lang="ts">
-  import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { toVipVeteranLabel } from "$lib/features/vip-veteran/toVipVeteranLabel.ts";
-  import { toVipVeteranTitleTone } from "$lib/features/vip-veteran/toVipVeteranTitleTone.ts";
-  import { toVipVeteranTone } from "$lib/features/vip-veteran/toVipVeteranTone.ts";
+  import MemberTierTag from "$lib/features/vip-veteran/MemberTierTag.svelte";
+  import type { MemberTier } from "$lib/features/vip-veteran/MemberTier.ts";
+  import { toMemberTier } from "$lib/features/vip-veteran/toMemberTier.ts";
+  import { toMemberTierLabel } from "$lib/features/vip-veteran/toMemberTierLabel.ts";
   import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import type { VipVeteran } from "$lib/requests/models/VipVeteran.ts";
   import { onMount } from "svelte";
@@ -34,8 +34,12 @@
   const { buildVipStreakDrawerLink } = profileDrawerNavigation();
   const drawerLink = $derived(buildVipStreakDrawerLink());
 
-  const tone = $derived(toVipVeteranTone(veteran.tier));
-  const label = $derived(toVipVeteranLabel(veteran.title));
+  const tier = $derived(toMemberTier({ isVip: true, isDirector, veteran }));
+  const label = $derived(toMemberTierLabel(tier));
+  // The promotion remembers the API's title; it maps onto the rung it named.
+  const toPreviousTier = (
+    title: VipVeteranPromotion["from"],
+  ): MemberTier => title ?? "vip";
   const dots = burstDots();
 
   onMount(() => {
@@ -47,7 +51,7 @@
 <div
   class="trakt-vip-streak-badge"
   class:is-promotion={promotion != null}
-  data-tone={tone}
+  data-tier={tier}
 >
   <Link
     href={drawerLink.href}
@@ -60,18 +64,14 @@
     {#if promotion}
       <span class="badge-flip">
         <span class="flip-face flip-front">
-          <VipBadge
-            tone={toVipVeteranTitleTone(promotion.from)}
-            label={toVipVeteranLabel(promotion.from)}
-            {isDirector}
-          />
+          <MemberTierTag tier={toPreviousTier(promotion.from)} />
         </span>
         <span class="flip-face flip-back">
-          <VipBadge {tone} {label} {isDirector} />
+          <MemberTierTag {tier} />
         </span>
       </span>
     {:else}
-      <VipBadge {tone} {label} {isDirector} />
+      <MemberTierTag {tier} />
     {/if}
   </Link>
 
@@ -98,26 +98,28 @@
     display: flex;
     animation: vip-streak-pop 420ms cubic-bezier(0.3, 1.5, 0.6, 1) 200ms both;
 
-    &[data-tone="deep"] {
-      --burst-color: var(--color-glow-vip-badge-deep);
+    &[data-tier="pro"] {
+      --burst-color: var(--member-tier-pro-sheen);
     }
 
-    &[data-tone="copper"] {
-      --burst-color: var(--color-glow-vip-badge-copper);
+    &[data-tier="veteran"] {
+      --burst-color: var(--member-tier-veteran-sheen);
     }
 
-    &[data-tone="silver"] {
-      --burst-color: var(--color-glow-vip-badge-silver);
+    &[data-tier="elite"] {
+      --burst-color: var(--member-tier-elite-sheen);
     }
 
-    &[data-tone="gold"] {
-      --burst-color: var(--color-glow-vip-badge-gold);
+    &[data-tier="legend"] {
+      --burst-color: var(--member-tier-legend-sheen);
     }
 
-    :global(.trakt-link) {
-      display: flex;
-      text-decoration: none;
-      border-radius: var(--border-radius-xl);
+    &[data-tier="original"] {
+      --burst-color: var(--member-tier-original-rose);
+    }
+
+    &[data-tier="director"] {
+      --burst-color: var(--member-tier-director-glow);
     }
   }
 

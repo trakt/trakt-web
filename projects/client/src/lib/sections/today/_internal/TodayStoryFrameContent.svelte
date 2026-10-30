@@ -17,6 +17,7 @@
   import { time } from "$lib/utils/timing/time.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
   import { onMount } from "svelte";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
   import TodayFaces from "./TodayFaces.svelte";
@@ -44,6 +45,7 @@
   }: TodayStoryFrameContentProps = $props();
 
   const { history } = useUser();
+  const hasRing = useVipVeteranEnabled();
   const { track: trackAction } = useTrack(AnalyticsEvent.TodayAction);
 
   const trackActionTap = (event: MouseEvent) => {
@@ -187,12 +189,14 @@
       <div class="frame-text">
         <div class="frame-person">
           {#snippet avatar(user: UserProfile)}
-            <MemberAvatar member={user}>
-              <CrossOriginImage
-                src={user.avatar.url}
-                alt={m.image_alt_user_avatar({ username: user.username })}
-              />
-            </MemberAvatar>
+            <span class="frame-avatar" class:has-ring={$hasRing}>
+              <MemberAvatar member={user}>
+                <CrossOriginImage
+                  src={user.avatar.url}
+                  alt={m.image_alt_user_avatar({ username: user.username })}
+                />
+              </MemberAvatar>
+            </span>
           {/snippet}
           {#if frame.action.user.slug}
             <Link
@@ -409,13 +413,24 @@
       align-items: center;
       gap: var(--gap-s);
 
-      :global(img) {
+      .frame-avatar {
+        display: block;
         width: var(--ni-44);
         height: var(--ni-44);
 
-        border: var(--border-thickness-xs) solid
-          var(--member-avatar-ring, var(--purple-500));
-        border-radius: 50%;
+        :global(img) {
+          display: block;
+          width: 100%;
+          height: 100%;
+          box-sizing: border-box;
+          border: var(--border-thickness-xs) solid var(--purple-500);
+          border-radius: 50%;
+        }
+
+        /* The member ring is the frame; the photo loses its own stroke. */
+        &.has-ring :global(img) {
+          border: none;
+        }
       }
 
       :global(.trakt-link:focus-visible img) {

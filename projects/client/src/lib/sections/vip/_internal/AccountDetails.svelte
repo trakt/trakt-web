@@ -30,6 +30,7 @@
         name={$user.name.first}
         src={$user.avatar.url}
         member={$member}
+        ringMotion="live"
       />
       <div class="vip-header-details">
         <div class="vip-profile-header-user-details">

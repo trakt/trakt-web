@@ -54,6 +54,7 @@
 </script>
 
 <div
+  data-member-row
   class="trakt-leaderboard-item"
   class:is-viewer={entry.isViewer}
   class:is-free={isLockedFollow}

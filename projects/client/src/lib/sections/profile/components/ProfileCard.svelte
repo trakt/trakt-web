@@ -11,7 +11,7 @@
   const profileUrl = $derived(UrlBuilder.profile.user(profile.slug!));
 </script>
 
-<div class="trakt-profile-card">
+<div class="trakt-profile-card" data-member-row>
   <div class="trakt-profile-avatar-wrapper">
     <Link href={profileUrl}>
       <ProfileImage

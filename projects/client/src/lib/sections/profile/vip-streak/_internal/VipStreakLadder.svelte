@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import { toVipStreakLadder } from "$lib/features/vip-veteran/toVipStreakLadder.ts";
-  import { toVipVeteranLabel } from "$lib/features/vip-veteran/toVipVeteranLabel.ts";
+  import { toMemberTierLabel } from "$lib/features/vip-veteran/toMemberTierLabel.ts";
   import type { VipVeteran } from "$lib/requests/models/VipVeteran.ts";
 
   const { veteran }: { veteran: VipVeteran } = $props();
@@ -18,7 +18,7 @@
     const { next } = ladder;
     if (!next) return m.text_vip_streak_top();
 
-    const title = toVipVeteranLabel(next.title);
+    const title = toMemberTierLabel(next.memberTier);
     return next.yearsLeft === 1
       ? m.text_vip_streak_next_one({ title })
       : m.text_vip_streak_next_other({
@@ -35,12 +35,12 @@
         class="ladder-rung"
         class:is-reached={rung.isReached}
         class:is-current={rung.isCurrent}
-        data-tone={rung.tone}
+        data-tier={rung.memberTier}
         aria-current={rung.isCurrent ? "step" : undefined}
       >
         <span class="rung-dot" aria-hidden="true"></span>
         <span class="rung-title uppercase bold">
-          {toVipVeteranLabel(rung.title)}
+          {toMemberTierLabel(rung.memberTier)}
         </span>
         <span class="rung-years secondary">{toRungYears(rung.tier)}</span>
       </li>
@@ -77,20 +77,24 @@
 
     opacity: 0.45;
 
-    &[data-tone="deep"] {
-      --rung-color: var(--color-glow-vip-badge-deep);
+    &[data-tier="pro"] {
+      --rung-color: var(--member-tier-pro);
     }
 
-    &[data-tone="copper"] {
-      --rung-color: var(--color-glow-vip-badge-copper);
+    &[data-tier="veteran"] {
+      --rung-color: var(--member-tier-veteran);
     }
 
-    &[data-tone="silver"] {
-      --rung-color: var(--color-glow-vip-badge-silver);
+    &[data-tier="elite"] {
+      --rung-color: var(--member-tier-elite);
     }
 
-    &[data-tone="gold"] {
-      --rung-color: var(--color-glow-vip-badge-gold);
+    &[data-tier="legend"] {
+      --rung-color: var(--member-tier-legend);
+    }
+
+    &[data-tier="original"] {
+      --rung-color: var(--member-tier-original-rose);
     }
 
     &.is-reached {
