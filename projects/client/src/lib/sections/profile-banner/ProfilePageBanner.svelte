@@ -40,10 +40,6 @@
   const { veteran } = useVipVeteran(fromRune(() => slug));
   const shownVeteran = $derived(profile.isVip ? $veteran : null);
   const member = $derived({ ...profile, veteran: shownVeteran });
-  const isTierKnown = $derived(
-    variant !== "private" || profile.isVip || Boolean(profile.isDirector),
-  );
-  const streakVeteran = $derived(profile.isDirector ? null : shownVeteran);
 
   const shareableSlug = $derived($isMe ? $user.slug : slug);
   const isBlocked = $derived($blocked.has(slug));
@@ -61,7 +57,6 @@
       name={profile.name.first}
       src={profile.avatar.url}
       {member}
-      {isTierKnown}
       hasEntrance={shownVeteran != null}
     >
       {#snippet badge()}
@@ -73,10 +68,14 @@
           {/if}
         </RenderFor>
         {#if !isBlocked && !isPending}
-          {#if streakVeteran}
-            <VipStreakBadge veteran={streakVeteran} {promotion} />
+          {#if shownVeteran}
+            <VipStreakBadge
+              veteran={shownVeteran}
+              {promotion}
+              isDirector={profile.isDirector}
+            />
           {:else}
-            <MemberBadge {member} {isTierKnown} />
+            <MemberBadge {member} />
           {/if}
         {/if}
       {/snippet}
@@ -168,12 +167,6 @@
       :global(.trakt-pending-follow-tag) {
         z-index: var(--layer-base);
         margin-top: var(--ni-neg-16);
-      }
-
-      :global(.trakt-vip-tier-tag) {
-        position: relative;
-        z-index: var(--layer-base);
-        margin-top: var(--ni-neg-4);
       }
     }
 

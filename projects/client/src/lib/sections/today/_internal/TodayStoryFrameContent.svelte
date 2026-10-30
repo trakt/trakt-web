@@ -30,7 +30,6 @@
   import { hasWatchedToo } from "./hasWatchedToo.ts";
   import { toFriendActionLabel } from "./toFriendActionLabel.ts";
   import { toFriendActionTime } from "./toFriendActionTime.ts";
-  
 
   const HOVER_EXIT_MARGIN = 16;
   const BACK_PRELOAD_DELAY = time.seconds(0.25);
@@ -135,12 +134,7 @@
         </FlipCard>
       </div>
       {#if onTap && onPressStart && onPressEnd}
-        <TodayStoryTapZones
-          {isFlipped}
-          {onTap}
-          {onPressStart}
-          {onPressEnd}
-        />
+        <TodayStoryTapZones {isFlipped} {onTap} {onPressStart} {onPressEnd} />
       {/if}
     </div>
   </div>
@@ -162,8 +156,10 @@
           </span>
           {#if frame.item.type === "up-next"}
             <span class="tag secondary">
-              · {episodeNumberLabel({ seasonNumber: frame.item.entry.season, episodeNumber: frame.item.entry.number })} · {frame.item
-                .entry.title}
+              · {episodeNumberLabel({
+                seasonNumber: frame.item.entry.season,
+                episodeNumber: frame.item.entry.number,
+              })} · {frame.item.entry.title}
             </span>
           {/if}
         </p>
@@ -191,14 +187,12 @@
       <div class="frame-text">
         <div class="frame-person">
           {#snippet avatar(user: UserProfile)}
-            <span class="frame-avatar">
-              <MemberAvatar member={user} size="small">
-                <CrossOriginImage
-                  src={user.avatar.url}
-                  alt={m.image_alt_user_avatar({ username: user.username })}
-                />
-              </MemberAvatar>
-            </span>
+            <MemberAvatar member={user}>
+              <CrossOriginImage
+                src={user.avatar.url}
+                alt={m.image_alt_user_avatar({ username: user.username })}
+              />
+            </MemberAvatar>
           {/snippet}
           {#if frame.action.user.slug}
             <Link
@@ -415,39 +409,18 @@
       align-items: center;
       gap: var(--gap-s);
 
-      .frame-avatar {
-        display: contents;
-
-        &:has(:global(.trakt-tier-aura)) {
-          display: block;
-          flex-shrink: 0;
-          width: var(--ni-44);
-          height: var(--ni-44);
-          margin: var(--tier-aura-compact-bleed);
-
-          :global(img) {
-            border: none;
-          }
-        }
-      }
-
       :global(img) {
         width: var(--ni-44);
         height: var(--ni-44);
 
-        border: var(--border-thickness-xs) solid var(--purple-500);
+        border: var(--border-thickness-xs) solid
+          var(--member-avatar-ring, var(--purple-500));
         border-radius: 50%;
       }
 
       :global(.trakt-link:focus-visible img) {
         outline: var(--border-thickness-xs) solid var(--color-link-active);
         outline-offset: var(--ni-2);
-      }
-
-      :global(
-        .trakt-link:focus-visible .frame-avatar:has(.trakt-tier-aura) img
-      ) {
-        outline-offset: calc(-1 * var(--border-thickness-xs));
       }
     }
 
@@ -457,7 +430,6 @@
       flex: 1 1 var(--ni-120);
       min-width: 0;
     }
-
   }
 
   @keyframes today-milestone-glow {

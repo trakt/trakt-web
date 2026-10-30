@@ -3,7 +3,6 @@
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
-  import type { MemberAvatarSize } from "$lib/features/vip-veteran/MemberAvatarSize.ts";
   import type { TieredMember } from "$lib/features/vip-veteran/TieredMember.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction";
@@ -19,16 +18,12 @@
     src,
     isEditable = false,
     member,
-    auraSize = "large",
-    isTierKnown = true,
     hasEntrance = false,
     badge,
   }: {
     name: string;
     src: string;
     member?: TieredMember | Nil;
-    auraSize?: Exclude<MemberAvatarSize, "stack">;
-    isTierKnown?: boolean;
     hasEntrance?: boolean;
     isEditable?: boolean;
     badge?: Snippet;
@@ -103,79 +98,73 @@
   }
 </script>
 
-<div
-  class="trakt-profile-image"
-  class:is-vip={isVip}
-  class:has-entrance={isVip && hasEntrance}
->
-  <figure class="profile-image" data-sentry-block>
-    <!-- This should be the first element, else: HierarchyRequestError -->
-    <figcaption class="visually-hidden">
-      {m.image_alt_user_avatar({ username: name })}
-    </figcaption>
+<MemberAvatar {member}>
+  <div
+    class="trakt-profile-image"
+    class:is-vip={isVip}
+    class:has-entrance={isVip && hasEntrance}
+  >
+    <figure class="profile-image" data-sentry-block>
+      <!-- This should be the first element, else: HierarchyRequestError -->
+      <figcaption class="visually-hidden">
+        {m.image_alt_user_avatar({ username: name })}
+      </figcaption>
 
-    <MemberAvatar {member} size={auraSize} {isTierKnown}>
-      {@render picture()}
-    </MemberAvatar>
+      {#if isEditable}
+        <ProfileImageContextMenu
+          onViewPhoto={() => (imageEdit.dialog = "view")}
+          onUploadPhoto={openFilePicker}
+          onRemovePhoto={handleRemovePhoto}
+        >
+          {#snippet trigger(props)}
+            <div
+              {...props}
+              class="editable-image-wrapper"
+              role="button"
+              tabindex="0"
+              aria-label={m.button_label_upload_photo()}
+              ondragover={(ev) => {
+                ev.preventDefault();
+                ev.currentTarget.classList.add("dragover");
+              }}
+              ondragleave={(ev) =>
+                ev.currentTarget.classList.remove("dragover")}
+              ondrop={(ev) => {
+                ev.preventDefault();
+                ev.currentTarget.classList.remove("dragover");
+                const { files } = ev.dataTransfer ?? {};
+                if (files?.length) handleFilesDropped(files);
+              }}
+            >
+              <CrossOriginImage
+                {src}
+                alt={m.image_alt_user_avatar({ username: name })}
+              />
+            </div>
+          {/snippet}
+        </ProfileImageContextMenu>
+        <div class="edit-badge" aria-hidden="true">
+          <RenameIcon />
+        </div>
+      {:else}
+        <CrossOriginImage
+          {src}
+          alt={m.image_alt_user_avatar({ username: name })}
+        />
+      {/if}
+    </figure>
 
-    {#if isEditable}
-      <div class="edit-badge" aria-hidden="true">
-        <RenameIcon />
+    {#if imageEdit.isUploading}
+      <div class="upload-overlay" transition:fade={{ duration: 150 }}>
+        <div class="upload-spinner">
+          <LoaderIcon />
+        </div>
       </div>
     {/if}
-  </figure>
 
-  {#if imageEdit.isUploading}
-    <div class="upload-overlay" transition:fade={{ duration: 150 }}>
-      <div class="upload-spinner">
-        <LoaderIcon />
-      </div>
-    </div>
-  {/if}
-
-  {@render badge?.()}
-</div>
-
-{#snippet picture()}
-  {#if isEditable}
-    <ProfileImageContextMenu
-      onViewPhoto={() => (imageEdit.dialog = "view")}
-      onUploadPhoto={openFilePicker}
-      onRemovePhoto={handleRemovePhoto}
-    >
-      {#snippet trigger(props)}
-        <div
-          {...props}
-          class="editable-image-wrapper"
-          role="button"
-          tabindex="0"
-          aria-label={m.button_label_upload_photo()}
-          ondragover={(ev) => {
-            ev.preventDefault();
-            ev.currentTarget.classList.add("dragover");
-          }}
-          ondragleave={(ev) => ev.currentTarget.classList.remove("dragover")}
-          ondrop={(ev) => {
-            ev.preventDefault();
-            ev.currentTarget.classList.remove("dragover");
-            const { files } = ev.dataTransfer ?? {};
-            if (files?.length) handleFilesDropped(files);
-          }}
-        >
-          <CrossOriginImage
-            {src}
-            alt={m.image_alt_user_avatar({ username: name })}
-          />
-        </div>
-      {/snippet}
-    </ProfileImageContextMenu>
-  {:else}
-    <CrossOriginImage
-      {src}
-      alt={m.image_alt_user_avatar({ username: name })}
-    />
-  {/if}
-{/snippet}
+    {@render badge?.()}
+  </div>
+</MemberAvatar>
 
 {#if imageEdit.dialog === "view"}
   <ProfileImageViewDialog
@@ -212,9 +201,12 @@
     position: relative;
 
     &.is-vip {
-      --color-border-avatar: var(--color-border-vip-avatar);
-      --ring-glow-inner: var(--purple-400);
-      --ring-glow-outer: var(--purple-500);
+      --color-border-avatar: var(
+        --member-avatar-ring,
+        var(--color-border-vip-avatar)
+      );
+      --ring-glow-inner: var(--member-avatar-ring, var(--purple-400));
+      --ring-glow-outer: var(--member-avatar-glow, var(--purple-500));
 
       .profile-image {
         box-shadow:
@@ -225,7 +217,7 @@
       }
     }
 
-    &.has-entrance:not(:has(:global(.trakt-tier-aura))) .profile-image {
+    &.has-entrance .profile-image {
       animation: ring-swell 1.2s ease-out 0.2s both;
     }
 
@@ -277,24 +269,6 @@
     }
   }
 
-  .trakt-profile-image .profile-image:has(> :global(.trakt-tier-aura)) {
-    outline: none;
-    padding: 0;
-    box-shadow: none;
-  }
-
-  .trakt-profile-image:has(:global(.trakt-tier-aura[data-variant="compact"])) {
-    margin: var(--tier-aura-compact-bleed);
-  }
-
-  .trakt-profile-image:has(:global(.trakt-tier-aura[data-variant="full"])) {
-    --full-aura-setting: calc(
-      var(--image-size) * (1 / var(--tier-aura-full-face-share) - 1) / 2
-    );
-
-    margin: var(--full-aura-setting) var(--full-aura-setting) 0;
-  }
-
   .editable-image-wrapper {
     position: relative;
     display: block;
@@ -307,10 +281,6 @@
     &:focus-visible {
       outline: var(--border-thickness-xs) solid var(--color-foreground);
       outline-offset: 2px;
-    }
-
-    :global(.trakt-tier-aura) &:focus-visible {
-      outline-offset: calc(-1 * var(--border-thickness-xs));
     }
   }
 
@@ -344,8 +314,7 @@
   }
 
   .trakt-profile-image:has(.editable-image-wrapper:hover) .edit-badge,
-  .trakt-profile-image:has(.editable-image-wrapper:focus-visible)
-    .edit-badge {
+  .trakt-profile-image:has(.editable-image-wrapper:focus-visible) .edit-badge {
     opacity: 1;
     transform: translate(calc(var(--rtl-sign) * 15%), 15%) scale(1.1);
   }

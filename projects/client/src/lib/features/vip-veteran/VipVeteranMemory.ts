@@ -1,8 +1,8 @@
+import { VipVeteranTitleSchema } from '$lib/requests/models/VipVeteranTitle.ts';
 import z from 'zod';
-import { VipTierTitleSchema } from './VipTierTitle.ts';
 
 export const VipVeteranMemorySchema = z.object({
-  title: VipTierTitleSchema.nullable(),
+  title: VipVeteranTitleSchema.nullable(),
   anniversaryYear: z.number().nullable(),
   graceShownOn: z.string().nullable(),
 });

@@ -19,6 +19,7 @@ describe('util: mapToVipVeteran', () => {
       since: new Date('2016-03-01T10:00:00.000Z'),
       years: 10,
       tier: 10,
+      title: 'legend',
       graceEndsAt: null,
     });
   });
@@ -42,5 +43,14 @@ describe('util: mapToVipVeteran', () => {
         vip_veteran_tier: null,
       }),
     ).to.equal(null);
+  });
+
+  it('should drop titles it does not know', () => {
+    const result = mapToVipVeteran({
+      ...baseResponse,
+      vip_veteran_title: 'champion',
+    });
+
+    expect(result?.title).to.equal(null);
   });
 });

@@ -26,7 +26,6 @@
         name={profile.name.first}
         src={profile.avatar.url}
         member={profile}
-        auraSize="small"
       />
       <p class="ellipsis">{displayName}</p>
     </div>

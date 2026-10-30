@@ -82,9 +82,11 @@
     <div class="yir-2024-directed-by">
       <div class="yir-2024-avatar-stack">
         <UserAvatar user={$profile} size="large" />
-        <span class="yir-2024-vip">
-          <MemberBadge member={$profile} />
-        </span>
+        {#if $profile.isVip || $profile.isDirector}
+          <span class="yir-2024-vip">
+            <MemberBadge member={$profile} />
+          </span>
+        {/if}
       </div>
       <div class="yir-2024-directed-by-text">
         <p class="bold yir-2024-by-label bold">

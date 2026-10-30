@@ -25,7 +25,6 @@
       name={$user?.name?.first ?? ""}
       src={$user?.avatar?.url ?? ""}
       member={$member}
-      auraSize="small"
     />
     {#if isExpanded}
       <span class="trakt-profile-link-username">{$user?.username}</span>
