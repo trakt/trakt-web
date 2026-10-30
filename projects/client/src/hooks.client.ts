@@ -9,6 +9,7 @@ import '$lib/polyfills/toSorted.ts';
 import { isBlockedEmbedEvent } from '$lib/features/errors/isBlockedEmbedEvent.ts';
 import { isChunkParseError } from '$lib/features/errors/isChunkParseError.ts';
 import { isInjectedScriptEvent } from '$lib/features/errors/isInjectedScriptEvent.ts';
+import { ignoreScriptedRejectionCalls } from '$lib/features/errors/ignoreScriptedRejectionCalls.ts';
 import { isScriptedRejectionEvent } from '$lib/features/errors/isScriptedRejectionEvent.ts';
 import { toHandledErrorContext } from '$lib/features/errors/toHandledErrorContext.ts';
 import { toRejectionBreadcrumb } from '$lib/features/errors/toRejectionBreadcrumb.ts';
@@ -175,6 +176,10 @@ Sentry.init({
     return event;
   },
 });
+
+if (typeof window !== 'undefined') {
+  ignoreScriptedRejectionCalls(window);
+}
 
 // FIXME remove once we have custom paraglide handling for this
 // Remove PARAGLIDE_LOCALE cookie if it appears multiple times
