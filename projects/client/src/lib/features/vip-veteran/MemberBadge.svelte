@@ -2,22 +2,19 @@
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import { useVipVeteranEnabled } from "./stores/useVipVeteranEnabled.ts";
   import type { TieredMember } from "./TieredMember.ts";
-  import { toVipTier } from "./toVipTier.ts";
-  import VipTierTag from "./VipTierTag.svelte";
+  import { toVipVeteranLabel } from "./toVipVeteranLabel.ts";
+  import { toVipVeteranTone } from "./toVipVeteranTone.ts";
 
-  type MemberBadgeProps = {
-    member: TieredMember;
-    isTierKnown?: boolean;
-  };
-
-  const { member, isTierKnown = true }: MemberBadgeProps = $props();
+  const { member }: { member: TieredMember } = $props();
 
   const isEnabled = useVipVeteranEnabled();
-  const tier = $derived(isTierKnown && $isEnabled ? toVipTier(member) : null);
+  const veteran = $derived($isEnabled && member.isVip ? member.veteran : null);
 </script>
 
-{#if tier}
-  <VipTierTag {tier} />
-{:else if member.isVip || member.isDirector}
-  <VipBadge isDirector={member.isDirector} />
+{#if member.isVip || member.isDirector}
+  <VipBadge
+    isDirector={member.isDirector}
+    tone={veteran ? toVipVeteranTone(veteran.tier) : null}
+    label={toVipVeteranLabel(veteran?.title)}
+  />
 {/if}

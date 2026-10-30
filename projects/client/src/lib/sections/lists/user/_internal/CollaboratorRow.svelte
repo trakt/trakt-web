@@ -21,9 +21,11 @@
   const { profile, isCollaborator } = $derived(candidate);
   const displayName = $derived(toDisplayableName(profile));
 
-  const { color, variant: _variant, ...dangerEvents } = $derived(
-    useDangerButton({ isActive: isCollaborator, color: "default" }),
-  );
+  const {
+    color,
+    variant: _variant,
+    ...dangerEvents
+  } = $derived(useDangerButton({ isActive: isCollaborator, color: "default" }));
 
   const itemProps: Omit<ButtonProps, "children"> = $derived({
     label: isCollaborator
@@ -54,7 +56,6 @@
       name={profile.name.first}
       src={profile.avatar.url}
       member={profile}
-      auraSize="small"
     />
   {/snippet}
 

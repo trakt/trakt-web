@@ -18,7 +18,7 @@
     const { next } = ladder;
     if (!next) return m.text_vip_streak_top();
 
-    const title = toVipVeteranLabel(next.aura);
+    const title = toVipVeteranLabel(next.title);
     return next.yearsLeft === 1
       ? m.text_vip_streak_next_one({ title })
       : m.text_vip_streak_next_other({
@@ -35,12 +35,12 @@
         class="ladder-rung"
         class:is-reached={rung.isReached}
         class:is-current={rung.isCurrent}
-        data-member-tier={rung.aura}
+        data-tone={rung.tone}
         aria-current={rung.isCurrent ? "step" : undefined}
       >
         <span class="rung-dot" aria-hidden="true"></span>
         <span class="rung-title uppercase bold">
-          {toVipVeteranLabel(rung.aura)}
+          {toVipVeteranLabel(rung.title)}
         </span>
         <span class="rung-years secondary">{toRungYears(rung.tier)}</span>
       </li>
@@ -77,8 +77,20 @@
 
     opacity: 0.45;
 
-    &:not([data-member-tier="vip"]) {
-      --rung-color: var(--aura-light);
+    &[data-tone="deep"] {
+      --rung-color: var(--color-glow-vip-badge-deep);
+    }
+
+    &[data-tone="copper"] {
+      --rung-color: var(--color-glow-vip-badge-copper);
+    }
+
+    &[data-tone="silver"] {
+      --rung-color: var(--color-glow-vip-badge-silver);
+    }
+
+    &[data-tone="gold"] {
+      --rung-color: var(--color-glow-vip-badge-gold);
     }
 
     &.is-reached {

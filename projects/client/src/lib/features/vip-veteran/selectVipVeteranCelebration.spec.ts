@@ -11,6 +11,7 @@ const legend: VipVeteran = {
   since: SINCE,
   years: 10,
   tier: 10,
+  title: 'legend',
 };
 
 const remembered = (
@@ -81,34 +82,9 @@ describe('util: selectVipVeteranCelebration', () => {
     expect(result.memory.anniversaryYear).to.equal(2026);
   });
 
-  it('should celebrate VETERAN turning into ELITE at seven years', () => {
-    const result = selectVipVeteranCelebration({
-      veteran: { ...legend, years: 7, tier: 7 },
-      memory: remembered({ title: 'veteran' }),
-      today: ORDINARY_DAY,
-    });
-
-    expect(result.celebration).to.deep.equal({
-      kind: 'promotion',
-      from: 'veteran',
-    });
-    expect(result.memory.title).to.equal('elite');
-  });
-
-  it('should seed PRO for three year members the API leaves untitled', () => {
-    const result = selectVipVeteranCelebration({
-      veteran: { ...legend, years: 3, tier: 3 },
-      memory: null,
-      today: ORDINARY_DAY,
-    });
-
-    expect(result.celebration).to.equal(null);
-    expect(result.memory.title).to.equal('pro');
-  });
-
   it('should keep the highest title after a reset', () => {
     const result = selectVipVeteranCelebration({
-      veteran: { ...legend, years: 1, tier: 1 },
+      veteran: { ...legend, years: 1, tier: 1, title: null },
       memory: remembered({ title: 'legend' }),
       today: ORDINARY_DAY,
     });
@@ -119,7 +95,7 @@ describe('util: selectVipVeteranCelebration', () => {
 
   it('should skip the anniversary before the first full year', () => {
     const result = selectVipVeteranCelebration({
-      veteran: { ...legend, years: 0, tier: 1 },
+      veteran: { ...legend, years: 0, tier: 1, title: null },
       memory: remembered({ title: null }),
       today: ANNIVERSARY,
     });

@@ -55,7 +55,6 @@
 
 <div
   class="trakt-leaderboard-item"
-  data-tier-aura-row
   class:is-viewer={entry.isViewer}
   class:is-free={isLockedFollow}
 >
@@ -72,7 +71,7 @@
       {/if}
     </div>
 
-    <UserAvatar user={entry.user} auraSize="medium" />
+    <UserAvatar user={entry.user} />
 
     <div class="item-copy">
       <div class="copy-heading">

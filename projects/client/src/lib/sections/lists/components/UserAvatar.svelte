@@ -3,7 +3,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
-  import type { MemberAvatarSize } from "$lib/features/vip-veteran/MemberAvatarSize.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
@@ -15,7 +14,6 @@
     icon?: Snippet;
     onClick?: () => void;
     linked?: boolean;
-    auraSize?: Exclude<MemberAvatarSize, "large">;
   };
 
   const {
@@ -24,7 +22,6 @@
     icon,
     onClick,
     linked = true,
-    auraSize = "small",
   }: UserAvatarProps = $props();
 </script>
 
@@ -34,7 +31,7 @@
     class:trakt-vip-user={user.isVip}
     data-size={size}
   >
-    <MemberAvatar member={user} size={auraSize}>
+    <MemberAvatar member={user}>
       <CrossOriginImage
         src={user.avatar.url}
         alt={m.image_alt_user_avatar({ username: user.username })}
@@ -78,15 +75,8 @@
 
     &.trakt-vip-user {
       :global(img) {
-        border: var(--ni-2) solid var(--color-border-vip-avatar);
-      }
-    }
-
-    &:has(:global(.trakt-tier-aura[data-variant="compact"])) {
-      margin: var(--tier-aura-compact-bleed);
-
-      :global(img) {
-        border: none;
+        border: var(--ni-2) solid
+          var(--member-avatar-ring, var(--color-border-vip-avatar));
       }
     }
   }

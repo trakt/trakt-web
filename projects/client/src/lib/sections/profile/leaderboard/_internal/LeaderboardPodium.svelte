@@ -2,9 +2,8 @@
   import Link from "$lib/components/link/Link.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
   import type { LeaderboardEntry } from "$lib/requests/models/LeaderboardEntry.ts";
+  import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
@@ -40,16 +39,13 @@
         color="inherit"
       >
         <span class="podium-box">
-          <span class="podium-face">
-            <MemberAvatar member={spot.entry.user} size="large">
-              <CrossOriginImage
-                src={spot.entry.user.avatar.url}
-                alt={m.image_alt_user_avatar({
-                  username: spot.entry.user.username,
-                })}
-              />
-            </MemberAvatar>
-          </span>
+          <ProfileImage
+            --image-size="var(--podium-face)"
+            --border-width="var(--border-thickness-s)"
+            name={spot.entry.user.name.first}
+            src={spot.entry.user.avatar.url}
+            member={spot.entry.user}
+          />
         </span>
       </Link>
 
@@ -70,8 +66,6 @@
 
 <style lang="scss">
   .trakt-leaderboard-podium {
-    --tier-aura-surface: var(--color-drawer-background);
-
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(5, auto);
@@ -137,8 +131,8 @@
 
     display: grid;
     place-items: center;
-    inline-size: calc(var(--podium-face) / var(--tier-aura-full-face-share));
-    block-size: calc(var(--podium-face) / var(--tier-aura-full-face-share));
+    inline-size: var(--podium-face);
+    block-size: var(--podium-face);
   }
 
   .podium-box::before {
@@ -155,19 +149,6 @@
       transparent
     );
     pointer-events: none;
-  }
-
-  .podium-face {
-    display: block;
-    inline-size: var(--podium-face);
-    block-size: var(--podium-face);
-
-    :global(img) {
-      display: block;
-      inline-size: 100%;
-      block-size: 100%;
-      object-fit: cover;
-    }
   }
 
   .podium-rank {

@@ -6,6 +6,7 @@ const veteran = (years: number, tier: number): VipVeteran => ({
   since: new Date('2016-03-01T10:00:00.000Z'),
   years,
   tier,
+  title: null,
 });
 
 describe('util: toVipStreakLadder', () => {
@@ -25,7 +26,7 @@ describe('util: toVipStreakLadder', () => {
   it('should point at the next rung', () => {
     expect(toVipStreakLadder(veteran(8, 7)).next).to.deep.equal({
       tier: 10,
-      aura: 'legend',
+      title: 'legend',
       yearsLeft: 2,
     });
   });
@@ -34,9 +35,9 @@ describe('util: toVipStreakLadder', () => {
     expect(toVipStreakLadder(veteran(13, 10)).next).to.equal(null);
   });
 
-  it('should give each rung its aura', () => {
+  it('should colour each rung by its tier', () => {
     expect(
-      toVipStreakLadder(veteran(1, 1)).rungs.map((rung) => rung.aura),
-    ).to.deep.equal(['vip', 'pro', 'veteran', 'elite', 'legend']);
+      toVipStreakLadder(veteran(1, 1)).rungs.map((rung) => rung.tone),
+    ).to.deep.equal(['vip', 'deep', 'copper', 'silver', 'gold']);
   });
 });

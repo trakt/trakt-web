@@ -1,9 +1,6 @@
 import type { VipVeteran } from '$lib/requests/models/VipVeteran.ts';
 import { isStreakAnniversary } from './isStreakAnniversary.ts';
-import { toVipTierTitle } from './toVipTierTitle.ts';
-import { VIP_VETERAN_LADDER } from './VIP_VETERAN_LADDER.ts';
 import type { VipVeteranCelebration } from './VipVeteranCelebration.ts';
-import type { VipTierTitle } from './VipTierTitle.ts';
 import type { VipVeteranMemory } from './VipVeteranMemory.ts';
 
 type SelectCelebrationParams = {
@@ -23,13 +20,15 @@ const EMPTY_MEMORY: VipVeteranMemory = {
   graceShownOn: null,
 };
 
-function toRank(title: VipTierTitle | null) {
-  return VIP_VETERAN_LADDER.findIndex((rung) => rung.aura === (title ?? 'vip'));
+function toRank(title: VipVeteran['title']) {
+  if (title === 'legend') return 2;
+  if (title === 'veteran') return 1;
+  return 0;
 }
 
 function highestTitle(
-  a: VipTierTitle | null,
-  b: VipTierTitle | null,
+  a: VipVeteran['title'],
+  b: VipVeteran['title'],
 ): VipVeteranMemory['title'] {
   return (toRank(a) >= toRank(b) ? a : b) ?? null;
 }
@@ -46,14 +45,14 @@ export function selectVipVeteranCelebration(
   params: SelectCelebrationParams,
 ): SelectedCelebration {
   const { veteran, memory, today } = params;
-  const title = toVipTierTitle(veteran.tier);
   const previous = memory ?? EMPTY_MEMORY;
   const isAnniversary = isAnniversaryDue(params);
-  const isPromotion = memory != null && toRank(title) > toRank(memory.title);
+  const isPromotion =
+    memory != null && toRank(veteran.title) > toRank(memory.title);
 
   const next: VipVeteranMemory = {
     ...previous,
-    title: highestTitle(title, previous.title),
+    title: highestTitle(veteran.title, previous.title),
     anniversaryYear: isAnniversary
       ? today.getUTCFullYear()
       : previous.anniversaryYear,

@@ -14,7 +14,6 @@
 
 <div
   class="trakt-profile-item"
-  data-tier-aura-row
   role="button"
   tabindex="0"
   data-dpad-navigation={DpadNavigationType.Item}
@@ -32,7 +31,6 @@
       name={profile.name.first}
       src={profile.avatar.url}
       member={profile}
-      auraSize="medium"
     />
   </Link>
   <div class="profile-footer">
@@ -59,15 +57,6 @@
 
     overflow: visible;
 
-    &:has(:global(.trakt-tier-aura[data-variant="compact"])) {
-      width: calc(
-        var(--width-profile-item) + 2 * var(--tier-aura-compact-bleed)
-      );
-      height: calc(
-        var(--height-profile-item) + 2 * var(--tier-aura-compact-bleed)
-      );
-    }
-
     &[data-navigation-type="dpad"] {
       &:focus-within {
         outline: var(--border-thickness-xs) solid var(--color-link-active);
@@ -79,32 +68,7 @@
   }
 
   .trakt-profile-item {
-    @include for-mouse {
-      :global(
-        .trakt-profile-image:not(
-            :has(.trakt-tier-aura[data-variant="compact"])
-          ):hover
-      ) {
-        :global(.profile-image) {
-          outline: var(--border-thickness-s) solid var(--color-border-avatar);
-        }
-
-        :global(.vip-badge) {
-          transform: scale(1.15);
-        }
-
-        &::before {
-          animation: fade-rotate calc(4 * var(--transition-increment))
-            ease-in-out;
-        }
-      }
-    }
-
-    :global(
-      .trakt-profile-image.is-vip:not(
-          :has(.trakt-tier-aura[data-variant="compact"])
-        )
-    )::before {
+    :global(.trakt-profile-image.is-vip)::before {
       --offset: calc(-1 * var(--border-thickness-s));
 
       content: "";
@@ -141,6 +105,23 @@
         transition: var(--transition-increment) ease-in-out;
         transition-property: transform;
         transform-origin: center;
+      }
+
+      @include for-mouse {
+        &:hover {
+          :global(.profile-image) {
+            outline: var(--border-thickness-s) solid var(--color-border-avatar);
+          }
+
+          :global(.vip-badge) {
+            transform: scale(1.15);
+          }
+
+          &::before {
+            animation: fade-rotate calc(4 * var(--transition-increment))
+              ease-in-out;
+          }
+        }
       }
     }
   }
