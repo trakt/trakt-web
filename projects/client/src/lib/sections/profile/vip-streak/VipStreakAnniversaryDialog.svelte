@@ -1,10 +1,10 @@
 <script lang="ts" module>
   const PIECE_COUNT = 24;
   const PIECE_COLORS = [
-    "var(--color-background-vip-badge-silver-start)",
-    "var(--color-background-vip-badge-silver-end)",
+    "var(--color-vip-streak-confetti-silver-light)",
+    "var(--color-vip-streak-confetti-silver)",
     "var(--color-glow-vip-badge-vip)",
-    "var(--color-background-vip-badge-deep-end)",
+    "var(--color-vip-streak-confetti-deep)",
   ];
 
   function confetti() {
@@ -91,7 +91,7 @@
 
     background: linear-gradient(
       135deg,
-      var(--color-background-vip-badge-silver-start),
+      var(--color-vip-streak-confetti-silver-light),
       var(--color-glow-vip-badge-vip)
     );
     background-clip: text;
