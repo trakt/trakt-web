@@ -63,7 +63,7 @@
       height: var(--ni-32);
     }
 
-    :global(img) {
+    :global(.trakt-user-tier-ring.is-classic img) {
       border-radius: 50%;
       box-sizing: border-box;
 
@@ -74,9 +74,8 @@
     }
 
     &.trakt-vip-user {
-      :global(img) {
-        border: var(--ni-2) solid
-          var(--member-avatar-ring, var(--color-border-vip-avatar));
+      :global(.trakt-user-tier-ring.is-classic img) {
+        border: var(--ni-2) solid var(--color-border-vip-avatar);
       }
     }
   }

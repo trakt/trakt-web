@@ -68,7 +68,7 @@
   }
 
   .trakt-profile-item {
-    :global(.trakt-profile-image.is-vip)::before {
+    :global(.trakt-profile-image.is-classic.is-vip)::before {
       --offset: calc(-1 * var(--border-thickness-s));
 
       content: "";
@@ -96,25 +96,17 @@
       border-radius: 50%;
 
       box-shadow: var(--shadow-base);
+    }
 
+    :global(.trakt-profile-image.is-classic) {
       :global(.profile-image) {
         transition: outline var(--transition-increment) ease-in-out;
-      }
-
-      :global(.vip-badge) {
-        transition: var(--transition-increment) ease-in-out;
-        transition-property: transform;
-        transform-origin: center;
       }
 
       @include for-mouse {
         &:hover {
           :global(.profile-image) {
             outline: var(--border-thickness-s) solid var(--color-border-avatar);
-          }
-
-          :global(.vip-badge) {
-            transform: scale(1.15);
           }
 
           &::before {

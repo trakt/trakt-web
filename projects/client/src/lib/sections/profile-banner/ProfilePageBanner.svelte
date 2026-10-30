@@ -57,6 +57,7 @@
       name={profile.name.first}
       src={profile.avatar.url}
       {member}
+      ringMotion="live"
       hasEntrance={shownVeteran != null}
     >
       {#snippet badge()}
@@ -157,17 +158,6 @@
 
     :global(.trakt-profile-image) {
       grid-row: 1 / span 2;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      :global(.trakt-vip-badge),
-      :global(.trakt-blocked-user-tag),
-      :global(.trakt-pending-follow-tag) {
-        z-index: var(--layer-base);
-        margin-top: var(--ni-neg-16);
-      }
     }
 
     @include for-tablet-sm-and-below {

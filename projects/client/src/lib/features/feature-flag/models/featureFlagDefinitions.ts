@@ -67,9 +67,8 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
   [FeatureFlag.VipVeteran]: {
     icon: SparkleStarIcon,
     title: () => m.preview_feature_title_vip_veteran(),
-    addedAt: new Date('2026-10-02'),
+    addedAt: new Date('2026-11-09'),
     description: () => m.preview_feature_description_vip_veteran(),
-    audience: 'director',
   },
   [FeatureFlag.SeasonRecap]: {
     icon: HourglassIcon,

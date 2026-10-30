@@ -3,6 +3,8 @@
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import UserTierRing from "$lib/features/vip-veteran/UserTierRing.svelte";
+  import { useVipVeteranEnabled } from "$lib/features/vip-veteran/stores/useVipVeteranEnabled.ts";
+  import type { UserTierRingMotion } from "$lib/features/vip-veteran/UserTierRingMotion.ts";
   import type { TieredUser } from "$lib/features/vip-veteran/TieredUser.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction";
@@ -19,18 +21,22 @@
     src,
     isEditable = false,
     member,
+    ringMotion = "hover",
     hasEntrance = false,
     badge,
   }: {
     name: string;
     src: string;
     member?: TieredUser | Nil;
+    ringMotion?: UserTierRingMotion;
     hasEntrance?: boolean;
     isEditable?: boolean;
     badge?: Snippet;
   } = $props();
 
   const { invalidate } = useInvalidator();
+  const isTierEnabled = useVipVeteranEnabled();
+  const isClassic = $derived(!$isTierEnabled);
   const isVip = $derived(Boolean(member?.isVip));
 
   type Dialog = "none" | "view" | "crop";
@@ -90,18 +96,20 @@
   }
 </script>
 
-<UserTierRing {member}>
-  <div
-    class="trakt-profile-image"
-    class:is-vip={isVip}
-    class:has-entrance={isVip && hasEntrance}
-  >
-    <figure class="profile-image" data-sentry-block>
-      <!-- This should be the first element, else: HierarchyRequestError -->
-      <figcaption class="visually-hidden">
-        {m.image_alt_user_avatar({ username: name })}
-      </figcaption>
+<div
+  class="trakt-profile-image"
+  class:has-badge={badge != null}
+  class:is-classic={isClassic}
+  class:is-vip={isClassic && isVip}
+  class:has-entrance={isClassic && isVip && hasEntrance}
+>
+  <figure class="profile-image" data-sentry-block>
+    <!-- This should be the first element, else: HierarchyRequestError -->
+    <figcaption class="visually-hidden">
+      {m.image_alt_user_avatar({ username: name })}
+    </figcaption>
 
+    <UserTierRing {member} motion={ringMotion} {hasEntrance}>
       {#if isEditable}
         <ProfileImageContextMenu
           onViewPhoto={() => (imageEdit.dialog = "view")}
@@ -132,31 +140,42 @@
                 {src}
                 alt={m.image_alt_user_avatar({ username: name })}
               />
+              {#if !isClassic}
+                <span class="edit-hint" aria-hidden="true">
+                  <RenameIcon />
+                </span>
+              {/if}
             </div>
           {/snippet}
         </ProfileImageContextMenu>
-        <div class="edit-badge" aria-hidden="true">
-          <RenameIcon />
-        </div>
+        {#if isClassic}
+          <div class="edit-badge" aria-hidden="true">
+            <RenameIcon />
+          </div>
+        {/if}
       {:else}
         <CrossOriginImage
           {src}
           alt={m.image_alt_user_avatar({ username: name })}
         />
       {/if}
-    </figure>
+    </UserTierRing>
+  </figure>
 
-    {#if imageEdit.isUploading}
-      <div class="upload-overlay" transition:fade={{ duration: 150 }}>
-        <div class="upload-spinner">
-          <LoaderIcon />
-        </div>
+  {#if imageEdit.isUploading}
+    <div class="upload-overlay" transition:fade={{ duration: 150 }}>
+      <div class="upload-spinner">
+        <LoaderIcon />
       </div>
-    {/if}
+    </div>
+  {/if}
 
-    {@render badge?.()}
-  </div>
-</UserTierRing>
+  {#if badge}
+    <div class="profile-image-badge">
+      {@render badge()}
+    </div>
+  {/if}
+</div>
 
 {#if imageEdit.dialog === "view"}
   <ProfileImageViewDialog
@@ -192,13 +211,38 @@
   .trakt-profile-image {
     position: relative;
 
+    &.has-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .profile-image-badge {
+    display: flex;
+    justify-content: center;
+    z-index: var(--layer-base);
+    margin-block-start: var(--ni-neg-16);
+
+    &:not(:has(*)) {
+      display: none;
+    }
+  }
+
+  .profile-image {
+    margin: 0;
+    width: var(--image-size);
+    height: var(--image-size);
+
+    border-radius: 50%;
+    box-sizing: border-box;
+  }
+
+  .trakt-profile-image.is-classic {
     &.is-vip {
-      --color-border-avatar: var(
-        --member-avatar-ring,
-        var(--color-border-vip-avatar)
-      );
-      --ring-glow-inner: var(--member-avatar-ring, var(--purple-400));
-      --ring-glow-outer: var(--member-avatar-glow, var(--purple-500));
+      --color-border-avatar: var(--color-border-vip-avatar);
+      --ring-glow-inner: var(--purple-400);
+      --ring-glow-outer: var(--purple-500);
 
       .profile-image {
         box-shadow:
@@ -213,16 +257,21 @@
       animation: ring-swell 1.2s ease-out 0.2s both;
     }
 
-    :global(.vip-badge) {
-      position: absolute;
+    .profile-image {
+      outline: var(--border-width) solid var(--color-border-avatar);
+      outline-offset: calc(-1 * var(--border-width));
 
-      width: var(--ni-24);
-      height: var(--ni-24);
+      padding: var(--border-width);
 
-      top: var(--ni-neg-8);
-      inset-inline-end: var(--ni-neg-8);
+      :global(img) {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
 
-      z-index: var(--layer-raised);
+    .editable-image-wrapper:focus-visible {
+      outline-offset: 2px;
     }
   }
 
@@ -242,25 +291,6 @@
     }
   }
 
-  .profile-image {
-    margin: 0;
-    width: var(--image-size);
-    height: var(--image-size);
-
-    border-radius: 50%;
-    outline: var(--border-width) solid var(--color-border-avatar);
-    outline-offset: calc(-1 * var(--border-width));
-
-    padding: var(--border-width);
-    box-sizing: border-box;
-
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-    }
-  }
-
   .editable-image-wrapper {
     position: relative;
     display: block;
@@ -272,7 +302,26 @@
 
     &:focus-visible {
       outline: var(--border-thickness-xs) solid var(--color-foreground);
-      outline-offset: 2px;
+      outline-offset: calc(-1 * var(--border-thickness-xs));
+    }
+  }
+
+  .edit-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: color-mix(in srgb, var(--shade-900) 55%, transparent);
+    pointer-events: none;
+
+    opacity: 0;
+    transition: opacity var(--transition-increment) ease-in-out;
+
+    :global(svg) {
+      width: 30%;
+      height: 30%;
+      color: var(--shade-10);
     }
   }
 
@@ -309,6 +358,11 @@
   .trakt-profile-image:has(.editable-image-wrapper:focus-visible) .edit-badge {
     opacity: 1;
     transform: translate(calc(var(--rtl-sign) * 15%), 15%) scale(1.1);
+  }
+
+  .editable-image-wrapper:hover .edit-hint,
+  .editable-image-wrapper:focus-visible .edit-hint {
+    opacity: 1;
   }
 
   .upload-overlay {
