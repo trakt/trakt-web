@@ -23,7 +23,7 @@
 </script>
 
 <div class="trakt-recap-person-card" data-layout={isGroup ? "group" : "single"}>
-  <InfoCard size="compact">
+  <InfoCard size="compact" fill>
     <div class="person-header">
       <span class="person-faces">
         {#each people as person (person.key)}
@@ -51,6 +51,7 @@
 
 <style lang="scss">
   .trakt-recap-person-card {
+    display: grid;
     min-width: 0;
 
     &[data-layout="group"] {
