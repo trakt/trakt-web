@@ -315,8 +315,8 @@
 {:else}
   <div class="trakt-mixtape" data-phase={phase}>
     <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-      <div class="mixtape-deck-bar">
-        <MixtapeNavbarDeck />
+      <div class="mixtape-search-bar">
+        <MixtapeNavbarDeck layout="docked" />
       </div>
     </RenderFor>
 
@@ -371,7 +371,21 @@
     flex-direction: column;
     gap: var(--gap-m);
 
-    .mixtape-deck-bar {
+    @include for-tablet-sm-and-below {
+      --mixtape-dock-height: var(--ni-56);
+
+      padding-block-end: calc(var(--mixtape-dock-height) + 2 * var(--gap-s));
+    }
+
+    @include for-mobile {
+      --mixtape-dock-height: var(--ni-88);
+    }
+
+    /*
+      The glass lives on a pseudo-element: a backdrop-filter on the bar
+      itself would become the containing block of the deck's fixed slots.
+    */
+    .mixtape-search-bar {
       position: sticky;
       inset-block-start: calc(
         var(--navbar-height) + env(safe-area-inset-top, 0px)
@@ -380,12 +394,19 @@
 
       box-sizing: border-box;
       padding: var(--gap-xs) var(--layout-distance-side);
-      background: color-mix(
-        in srgb,
-        var(--color-background-navbar) 75%,
-        transparent
-      );
-      backdrop-filter: blur(var(--ni-10));
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: color-mix(
+          in srgb,
+          var(--color-background-navbar) 75%,
+          transparent
+        );
+        backdrop-filter: blur(var(--ni-10));
+      }
     }
 
     .mixtape-browse {

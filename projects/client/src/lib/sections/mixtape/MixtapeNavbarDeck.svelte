@@ -2,9 +2,7 @@
   import { page } from "$app/state";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
   import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
-  import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
   import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
@@ -23,9 +21,10 @@
   const FLASH_DURATION = 420;
   const SHINE_DURATION = 1200;
 
+  const { layout = "strip" }: { layout?: "strip" | "docked" } = $props();
+
   const { session, flights, update } = useMixtapeSession();
   const { options } = useDiscover();
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
 
   const params = $derived(parseMixtapeParams(page.url.searchParams));
@@ -108,12 +107,9 @@
   });
 </script>
 
-{#snippet typeIcon(option: SegmentedSelectOption<MediaType>)}
-  <ToggleIcon {option} />
-{/snippet}
-
 <div
   class="trakt-mixtape-navbar-deck"
+  data-layout={layout}
   data-view={params.view}
   data-full={isFull}
   data-shine={isShining}
@@ -135,8 +131,6 @@
       <SegmentedSelect
         options={typeOptions}
         value={params.type}
-        variant={$isMobile ? "compact" : "regular"}
-        icon={$isMobile ? typeIcon : undefined}
         ariaLabel={m.page_title_mixtape()}
         onChange={() => update({ search: "" })}
       />
@@ -202,19 +196,17 @@
     --deck-slot-width: var(--ni-20);
     --deck-slot-height: var(--ni-30);
     --deck-slot-gap: var(--ni-6);
+    --deck-slot-radius: var(--ni-4);
     --deck-slide-duration: calc(3 * var(--transition-increment));
     --deck-slide-ease: cubic-bezier(0.34, 1.3, 0.5, 1);
     --deck-slide-distance: calc(var(--rtl-sign, 1) * var(--ni-60));
+    --deck-slots-from: translateX(calc(-1 * var(--deck-slide-distance)));
     --deck-pop-ease: cubic-bezier(0.34, 1.8, 0.5, 1);
 
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
     min-width: 0;
-
-    @include for-tablet-sm-and-below {
-      width: 100%;
-    }
   }
 
   .deck-search,
@@ -247,11 +239,6 @@
 
     &:focus-within {
       box-shadow: var(--shadow-navbar-entry-hover);
-    }
-
-    @include for-tablet-sm-and-below {
-      flex: 1;
-      width: auto;
     }
   }
 
@@ -334,7 +321,7 @@
     width: var(--deck-slot-width);
     height: var(--deck-slot-height);
 
-    border-radius: var(--ni-4);
+    border-radius: var(--deck-slot-radius);
     overflow: hidden;
     background: color-mix(in srgb, var(--color-foreground) 4%, transparent);
     box-shadow: inset 0 0 0 var(--border-thickness-xxs)
@@ -401,6 +388,79 @@
     opacity: 0.35;
   }
 
+  /*
+    Docked: the phone keeps the search at the top and floats the deck above
+    the bottom navbar, where the thumbs are. The slots grow to match.
+  */
+  .trakt-mixtape-navbar-deck[data-layout="docked"] {
+    --deck-dock-height: var(--mixtape-dock-height, var(--ni-56));
+    --deck-slot-width: var(--ni-28);
+    --deck-slot-height: var(--ni-42);
+    --deck-slot-radius: var(--ni-6);
+    --deck-slots-from: translateY(var(--ni-24));
+
+    width: 100%;
+
+    .deck-search {
+      flex: 1;
+      width: auto;
+    }
+
+    .deck-slots {
+      position: fixed;
+      inset-inline: 0;
+      inset-block-end: calc(var(--mobile-navbar-height) + var(--gap-s));
+      z-index: var(--layer-floating);
+
+      width: fit-content;
+      height: var(--deck-dock-height);
+      margin-inline: auto;
+      padding-inline: var(--ni-12);
+
+      background:
+        var(--background-navbar-entry),
+        color-mix(in srgb, var(--color-background-navbar) 85%, transparent);
+      box-shadow: var(--shadow-navbar-entry), var(--shadow-floating);
+    }
+
+    &[data-full="true"] .deck-slots {
+      box-shadow: var(--shadow-mixtape-deck-loaded), var(--shadow-floating);
+    }
+
+    /*
+      Phones: the dock spans the screen inside the page gutter and the
+      slots grow to a real thumb target, spread edge to edge.
+    */
+    @include for-mobile {
+      --deck-slot-width: var(--ni-48);
+      --deck-slot-height: var(--ni-72);
+      --deck-slot-radius: var(--ni-8);
+
+      .deck-slots {
+        inset-inline: var(--layout-distance-side);
+        justify-content: space-between;
+
+        width: auto;
+        margin-inline: 0;
+        padding-inline: var(--ni-16);
+
+        border-radius: var(--border-radius-xxl);
+      }
+
+      .deck-slot-number {
+        font-size: var(--font-size-text);
+      }
+
+      .deck-search {
+        padding-inline-start: var(--ni-12);
+      }
+
+      .deck-search-field {
+        gap: var(--ni-6);
+      }
+    }
+  }
+
   @keyframes deck-search-in {
     from {
       opacity: 0;
@@ -411,7 +471,7 @@
   @keyframes deck-slots-in {
     from {
       opacity: 0;
-      transform: translateX(calc(-1 * var(--deck-slide-distance)));
+      transform: var(--deck-slots-from);
     }
   }
 </style>
