@@ -37,7 +37,11 @@
         gradientTransform="translate(38 -48) rotate(90) scale(95.5 129.607)"
       >
         {#each fillStops as stop (stop.color)}
-          <stop offset={stop.offset} stop-color={stop.color} />
+          <stop
+            class="flame-stop"
+            offset={stop.offset}
+            style:--stop-color={stop.color}
+          />
         {/each}
       </radialGradient>
       <radialGradient
@@ -49,7 +53,11 @@
         gradientTransform={strokeTransform}
       >
         {#each strokeStops as stop (stop.color)}
-          <stop offset={stop.offset} stop-color={stop.color} />
+          <stop
+            class="flame-stop"
+            offset={stop.offset}
+            style:--stop-color={stop.color}
+          />
         {/each}
       </radialGradient>
     </defs>
@@ -82,19 +90,34 @@
   )}
 {:else if count <= 7}
   {@render flame(
-    [{ color: "#A855F7" }, { offset: "1", color: "#633291" }],
-    [{ color: "#633291" }, { offset: "1", color: "#A855F7" }],
+    [
+      { color: "var(--color-streak-flame-lit-start)" },
+      { offset: "1", color: "var(--color-streak-flame-lit-end)" },
+    ],
+    [
+      { color: "var(--color-streak-flame-lit-end)" },
+      { offset: "1", color: "var(--color-streak-flame-lit-start)" },
+    ],
   )}
 {:else}
   {@render flame(
     [
-      { offset: "0.552885", color: "#240046" },
-      { offset: "1", color: "#5700AA" },
+      { offset: "0.552885", color: "var(--color-streak-flame-blaze-core)" },
+      { offset: "1", color: "var(--color-streak-flame-blaze-edge)" },
     ],
     [
-      { offset: "0.355769", color: "#BD85F2" },
-      { offset: "1", color: "#8F19FF" },
+      {
+        offset: "0.355769",
+        color: "var(--color-streak-flame-blaze-rim-start)",
+      },
+      { offset: "1", color: "var(--color-streak-flame-blaze-rim-end)" },
     ],
     "translate(24.25 2) rotate(79.0459) scale(31.5753 42.8522)",
   )}
 {/if}
+
+<style>
+  .flame-stop {
+    stop-color: var(--stop-color);
+  }
+</style>
