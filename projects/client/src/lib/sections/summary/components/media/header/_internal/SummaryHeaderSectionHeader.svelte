@@ -55,7 +55,7 @@
       label={drilldown.label}
       color="inherit"
     >
-      <span class="section-label-row">
+      <span class="section-label-row section-link">
         <ListLabel {title} />
 
         {#if trailing}
@@ -83,6 +83,8 @@
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-summary-header-section-header {
     display: flex;
     flex-direction: column;
@@ -118,6 +120,42 @@
     min-height: var(--ni-24);
   }
 
+  /*
+    The profile header's stat-column title, lit the same way: bare at rest, a
+    pill of wash on hover, the caret stepping forward. The inline padding is
+    handed back as negative margin, so the words stay flush with the column;
+    the pill keeps the row's 24px, so linked and plain headers line up.
+  */
+  .section-link {
+    box-sizing: border-box;
+    padding: var(--ni-4) var(--ni-8);
+    margin-inline: calc(-1 * var(--ni-8));
+    border-radius: var(--border-radius-pill);
+
+    transition:
+      transform var(--transition-increment) ease-out,
+      background-color var(--transition-increment) ease-in-out;
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    @include for-mouse {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 10%,
+          transparent
+        );
+
+        .section-caret {
+          opacity: 0.9;
+          transform: translateX(calc(var(--rtl-sign) * var(--ni-2)));
+        }
+      }
+    }
+  }
+
   .section-detail {
     font-size: var(--font-size-text-small);
     color: var(--color-text-secondary);
@@ -129,12 +167,6 @@
       display: inline-flex;
       max-width: 100%;
     }
-
-    /* Hovering anywhere on the row warms the caret. */
-    :global(a:hover .section-caret),
-    :global(a:focus-visible .section-caret) {
-      color: var(--color-text-primary);
-    }
   }
 
   .section-caret {
@@ -142,8 +174,11 @@
     display: inline-flex;
     align-items: center;
 
-    color: var(--color-text-secondary);
-    transition: color var(--transition-increment) ease-in-out;
+    color: var(--color-text-primary);
+    opacity: 0.55;
+    transition:
+      transform var(--transition-increment) ease-out,
+      opacity var(--transition-increment) ease-out;
 
     /*
       The caret wears the label's own type size, and its glyph is exactly 1em
