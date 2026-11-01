@@ -49,6 +49,10 @@
       font-size: var(--font-size-tag);
     }
 
+    :global(p.uppercase) {
+      text-box: trim-both cap alphabetic;
+    }
+
     trakt-tag-icon {
       :global(svg) {
         width: var(--ni-12);
