@@ -14492,13 +14492,17 @@
       "default": "Connect another Jellyfin server to sync it too.",
       "description": "Description on the Jellyfin card once a server is connected, inviting the user to add another."
     },
-    "header_jellyfin_vip_upsell": {
-      "default": "Jellyfin sync is a VIP beta",
-      "description": "Heading on the upsell card shown to free members on the Jellyfin card. Jellyfin sync is in beta for VIP members only."
+    "description_media_sync_add_jellyfin_server_free": {
+      "default": "Free accounts sync 1 media server. Go VIP to add more.",
+      "description": "Description on the Jellyfin card once a free member has a server connected."
     },
-    "description_jellyfin_vip_upsell": {
-      "default": "Upgrade to VIP to sync watch history and collections from your Jellyfin server while it's in beta.",
-      "description": "Body copy on the upsell card shown to free members on the Jellyfin card."
+    "header_jellyfin_vip_upsell_add_server": {
+      "default": "Multiple servers is a VIP feature",
+      "description": "Heading on the upsell card shown when a free member tries to add a second Jellyfin server."
+    },
+    "description_jellyfin_vip_upsell_add_server": {
+      "default": "Free accounts sync 1 media server once a day. Upgrade to VIP to sync unlimited servers every hour.",
+      "description": "Body copy on the upsell card shown when a free member tries to add a second Jellyfin server."
     },
     "header_jellyfin_synced_servers": {
       "default": "Jellyfin Servers",
