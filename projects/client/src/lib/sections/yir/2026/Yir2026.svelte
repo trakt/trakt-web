@@ -3,11 +3,14 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { useQuery } from "$lib/features/query/useQuery";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
   import { useWebviewSession } from "$lib/features/webview/useWebviewSession";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { IS_DEV } from "$lib/utils/env";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { map } from "rxjs";
   import { tick, type Snippet } from "svelte";
@@ -37,11 +40,20 @@
     fallback: Snippet;
   } = $props();
 
-  const { persona, isLoading: isPersonaLoading } = useYirPersona(
+  const { user } = useUser();
+
+  const {
+    persona,
+    isYearOpen,
+    isLoading: isPersonaLoading,
+  } = useYirPersona(
     fromRune(() => ({
       slug,
       year,
-      preview: parsePersonaPreview(page.url.searchParams),
+      preview:
+        $user?.isDirector || IS_DEV
+          ? parsePersonaPreview(page.url.searchParams)
+          : undefined,
     })),
   );
 
@@ -99,51 +111,56 @@
   };
 </script>
 
-<NavbarStateSetter mode={navbarMode} />
+{#if $isYearOpen}
+  <NavbarStateSetter mode={navbarMode} />
 
-{#if $persona}
-  <YirPersonaTheme persona={$persona.persona} runnerUp={$persona.runnerUp}>
-    <div class="yir-2026-page" class:is-covered={isReelOpen}>
-      <ReviewPageShell id="year-in-review" headerForeground="theme">
-        <YirHeader {slug} {year} />
-        {#key arrivals}
-          <Yir2026Hero
-            result={$persona}
-            {detail}
-            {name}
-            isMe={$isMe}
-            isMorphTarget={!isReelOpen}
-            hasArrived={arrivals > 0}
-            onreplay={() => setReel(true)}
-          />
-        {/key}
-        <Yir2026Scenes {detail} {slug} {year} />
-        <YirUpgradeSection {slug} source="yir" />
-      </ReviewPageShell>
-    </div>
+  {#if $persona}
+    <YirPersonaTheme persona={$persona.persona} runnerUp={$persona.runnerUp}>
+      <div class="yir-2026-page" class:is-covered={isReelOpen}>
+        <ReviewPageShell id="year-in-review" headerForeground="theme">
+          <YirHeader {slug} {year} />
+          {#key arrivals}
+            <Yir2026Hero
+              result={$persona}
+              {detail}
+              {name}
+              isMe={$isMe}
+              isMorphTarget={!isReelOpen}
+              hasArrived={arrivals > 0}
+              onreplay={() => setReel(true)}
+            />
+          {/key}
+          <Yir2026Scenes {detail} {slug} {year} />
+          <YirUpgradeSection {slug} source="yir" />
+        </ReviewPageShell>
+      </div>
 
-    {#if isReelOpen}
-      <YirReel result={$persona} {detail} {name} {year} onclose={closeReel}>
-        {#snippet overlay()}
-          {@render toggles(true)}
-        {/snippet}
-      </YirReel>
-    {:else}
-      {@render toggles(false)}
-    {/if}
-  </YirPersonaTheme>
-{:else if !$isPersonaLoading}
+      {#if isReelOpen}
+        <YirReel result={$persona} {detail} {name} {year} onclose={closeReel}>
+          {#snippet overlay()}
+            {@render toggles(true)}
+          {/snippet}
+        </YirReel>
+      {:else}
+        {@render toggles(false)}
+      {/if}
+    </YirPersonaTheme>
+  {:else if !$isPersonaLoading}
+    {@render fallback()}
+    {@render toggles(false)}
+  {/if}
+{:else}
   {@render fallback()}
-  {@render toggles(false)}
 {/if}
 
-
 {#snippet toggles(isRaised: boolean)}
-  <YirPersonaToggles
-    persona={$persona?.persona}
-    runnerUp={$persona?.runnerUp}
-    {isRaised}
-  />
+  <RenderFor audience="director">
+    <YirPersonaToggles
+      persona={$persona?.persona}
+      runnerUp={$persona?.runnerUp}
+      {isRaised}
+    />
+  </RenderFor>
 {/snippet}
 
 <style>

@@ -6,8 +6,6 @@
   import ReviewPageShell from "./_internal/ReviewPageShell.svelte";
   import YirHeader from "./_internal/YirHeader.svelte";
   import { useYirDetail } from "./_internal/useYirDetail";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import Yir2026 from "./2026/Yir2026.svelte";
   import YirAllTime from "./all-time/YirAllTime.svelte";
   import { getYirTemplate } from "./getYirTemplate";
@@ -48,18 +46,13 @@
 {/snippet}
 
 {#if year === 2026}
-  <RenderForFeature flag={FeatureFlag.YearInReview2026} audience="director">
-    {#snippet enabled()}
-      <Yir2026
-        detail={$detail ?? null}
-        isLoading={$isLoading}
-        {slug}
-        year={2026}
-        fallback={review}
-      />
-    {/snippet}
-    {@render review()}
-  </RenderForFeature>
+  <Yir2026
+    detail={$detail ?? null}
+    isLoading={$isLoading}
+    {slug}
+    year={2026}
+    fallback={review}
+  />
 {:else}
   {@render review()}
 {/if}

@@ -3,9 +3,9 @@ import type { ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { fetchReviewResource } from '../../_internal/fetchReviewResource.ts';
 import { dummyYirPersonaResult } from '../../_internal/dummyYirPersonaResult.ts';
-import { mapToYirPersonaResult } from '../../_internal/mapToYirPersonaResult.ts';
+import { toYirPersonaAnswer } from '../../_internal/toYirPersonaAnswer.ts';
+import { YirPersonaAnswerSchema } from '../../models/YirPersonaAnswer.ts';
 import type { YirPersonaId } from '../../models/YirPersonaId.ts';
-import { YirPersonaResultSchema } from '../../models/YirPersonaResult.ts';
 
 export type YirPersonaParams = {
   slug: string;
@@ -26,7 +26,7 @@ const yirPersonaRequest = async ({
 }: YirPersonaParams) => {
   if (preview) {
     return {
-      body: dummyYirPersonaResult(preview),
+      body: { isYearOpen: true, result: dummyYirPersonaResult(preview) },
       status: 200,
     };
   }
@@ -37,9 +37,7 @@ const yirPersonaRequest = async ({
     slurm,
   });
 
-  return response.ok
-    ? { body: mapToYirPersonaResult(await response.json()), status: 200 }
-    : { body: null, status: 200 };
+  return { body: await toYirPersonaAnswer(response), status: 200 };
 };
 
 export const yirPersonaQuery = defineQuery({
@@ -54,6 +52,6 @@ export const yirPersonaQuery = defineQuery({
   ],
   request: yirPersonaRequest,
   mapper: (response) => response.body,
-  schema: YirPersonaResultSchema.nullable(),
+  schema: YirPersonaAnswerSchema,
   ttl: time.hours(1),
 });
