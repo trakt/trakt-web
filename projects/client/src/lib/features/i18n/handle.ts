@@ -69,10 +69,15 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.isLegitimateBot ||
     isBotAgent(event.request.headers.get('user-agent'));
 
+  const isShareImage =
+    event.route.id?.startsWith('/api/shareable-image') ?? false;
+
   const requestedLocale =
     event.cookies.get(LOCALE_COOKIE_NAME) ??
     getPreferredLocale(event.request.headers);
-  const locale = setLocale(isCacheableBot ? defaultLocale : requestedLocale);
+  const locale = setLocale(
+    isCacheableBot || isShareImage ? defaultLocale : requestedLocale,
+  );
   const direction = getTextDirection(locale);
 
   return localeStorage.run({ locale }, () =>

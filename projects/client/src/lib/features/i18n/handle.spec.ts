@@ -248,4 +248,25 @@ describe('handle: i18n', () => {
 
     expect(transformed).toContain(`lang="${defaultLocale}"`);
   });
+
+  it('should render share images in the default locale', async () => {
+    const event = mockRequestEvent({
+      url: 'http://localhost/users/sean/mir.jpg',
+      routeId: '/api/shareable-image/mir/[slug]',
+      request: new Request('http://localhost/users/sean/mir.jpg', {
+        headers: new Headers({ 'Accept-Language': 'de-de' }),
+      }),
+    });
+
+    let renderedLocale: string | undefined;
+    await handle({
+      event,
+      resolve: () => {
+        renderedLocale = getLocale();
+        return Promise.resolve(new Response());
+      },
+    });
+
+    expect(renderedLocale).toBe(defaultLocale);
+  });
 });

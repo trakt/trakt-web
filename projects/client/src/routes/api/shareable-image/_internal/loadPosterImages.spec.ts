@@ -46,6 +46,23 @@ describe('util: loadPosterImages', () => {
     expect(requested).toEqual([]);
   });
 
+  it('should identify itself to the image host', async () => {
+    server.use(
+      http.get(POSTER_URL, ({ request }) =>
+        request.headers.get('user-agent') === 'trakt-web'
+          ? new HttpResponse(new Uint8Array([255, 216, 255]))
+          : new HttpResponse(null, { status: 403 }),
+      ),
+    );
+
+    const images = await loadPosterImages({
+      posterUrl: POSTER_URL,
+      fetch: globalThis.fetch,
+    });
+
+    expect(images.map((image) => image.src)).toEqual([POSTER_URL]);
+  });
+
   it('should reject when the poster is unavailable', async () => {
     server.use(
       http.get(POSTER_URL, () => new HttpResponse(null, { status: 404 })),

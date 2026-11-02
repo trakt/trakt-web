@@ -14,7 +14,9 @@ export async function loadPosterImages({
     return [];
   }
 
-  const response = await fetch(posterUrl);
+  const response = await fetch(posterUrl, {
+    headers: { 'User-Agent': 'trakt-web' },
+  });
 
   if (!response.ok) {
     throw new Error(`Failed to fetch poster: ${response.status}`);
