@@ -1,5 +1,6 @@
 import { getLocale } from '$lib/features/i18n/index.ts';
 import { getMonthKey } from '$lib/utils/date/getMonthKey.ts';
+import { getNextMonth } from '$lib/utils/date/getNextMonth.ts';
 import { getPreviousMonth } from '$lib/utils/date/getPreviousMonth.ts';
 import { getStartOfWeek } from '$lib/utils/date/getStartOfWeek.ts';
 import { isFirstWeekOfMonth } from '$lib/utils/date/isFirstWeekOfMonth.ts';
@@ -26,25 +27,29 @@ export function useReviewBanners(date: Date) {
   const previousMonth = getPreviousMonth(date);
   const year = previousMonth.getFullYear();
 
-  const { isDismissed: isMirDismissed, dismiss: dismissMir } =
-    useBannerDismissal(MIR_BANNER_ID, getMonthKey(date));
+  const {
+    isDismissed: isMirDismissed,
+    dismiss: dismissMir,
+    restore: restoreMir,
+  } = useBannerDismissal(MIR_BANNER_ID, getMonthKey(date));
   const { isDismissed: isYirDismissed, dismiss: dismissYir } =
     useBannerDismissal(YIR_BANNER_ID, `${year}`);
 
-  const hasMir = isMirDismissed.pipe(
-    map((isDismissed) => isFirstWeekOfMonth(date) && !isDismissed),
-  );
+  const isMirActive = isFirstWeekOfMonth(date);
 
   const hasYir = isYirDismissed.pipe(
     map((isDismissed) => isInYirRange(date) && !isDismissed),
   );
 
   return {
-    mir: hasMir.pipe(
-      map((isVisible) => ({
-        isVisible,
+    mir: isMirDismissed.pipe(
+      map((isDismissed) => ({
+        isActive: isMirActive,
+        isVisible: isMirActive && !isDismissed,
         dismiss: dismissMir,
+        restore: restoreMir,
         month: previousMonth,
+        hiddenUntil: getNextMonth(date),
       })),
     ),
     yir: hasYir.pipe(

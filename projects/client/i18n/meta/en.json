@@ -7022,29 +7022,42 @@
     },
     "mir_banner_in_review": {
       "default": "In Review",
-      "description": "Subtitle beneath the month name in the Month in Review banner pill."
+      "description": "Subtitle beneath the month name in the Month in Review pill in the home header."
     },
-    "mir_banner_body": {
-      "default": "Your monthly recap is ready. Here's what you watched in {month}.",
-      "description": "Body copy in the Month in Review banner. {month} is the formatted month name, e.g. 'June'.",
+    "mir_entry_tooltip_body": {
+      "default": "Your {month} recap is ready. Every show, film and late night, in one place.",
+      "description": "Body copy of the tooltip that opens when hovering the Month in Review pill in the home header. {month} is the formatted month name, e.g. 'October'.",
       "variables": {
         "month": {
           "type": "string"
         }
       }
     },
-    "mir_banner_body_short": {
-      "default": "Your {month} recap is ready.",
-      "description": "Condensed body copy in the Month in Review banner, shown on mobile where there is no room for the full sentence. {month} is the formatted month name, e.g. 'June'.",
+    "mir_entry_open": {
+      "default": "Open recap",
+      "description": "Link text inside the Month in Review pill tooltip that opens the recap page."
+    },
+    "mir_entry_hide_until": {
+      "default": "Hide until {month}",
+      "description": "Button text (and aria-label on mobile) that hides the Month in Review entry until the next recap arrives. {month} is the formatted name of the month in which the next recap arrives, e.g. 'December'.",
       "variables": {
         "month": {
           "type": "string"
         }
       }
     },
-    "mir_banner_explore": {
-      "default": "Explore",
-      "description": "Label inside the outlined explore button in the Month in Review banner. Only shown on wider viewports; narrower ones rely on the whole banner being tappable."
+    "mir_entry_hidden_until": {
+      "default": "Recap hidden until {month}.",
+      "description": "Toast shown after hiding the Month in Review strip on mobile, paired with an Undo button. {month} is the formatted name of the month in which the next recap arrives, e.g. 'December'.",
+      "variables": {
+        "month": {
+          "type": "string"
+        }
+      }
+    },
+    "mir_strip_title": {
+      "default": "Your month on Trakt",
+      "description": "Main line of the Month in Review strip on mobile, shown under the '{month} in Review' kicker. Keep it short; the strip is one line tall."
     },
     "mir_title_month_in_review": {
       "default": "Month in Review",

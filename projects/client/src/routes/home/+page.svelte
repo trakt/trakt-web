@@ -11,6 +11,7 @@
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
+  import MonthInReviewNavbarEntry from "$lib/sections/banner/month-in-review/MonthInReviewNavbarEntry.svelte";
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
   import TodayNavbarEntry from "$lib/sections/today/TodayNavbarEntry.svelte";
   import TodayStoryViewerHost from "$lib/sections/today/TodayStoryViewerHost.svelte";
@@ -25,6 +26,10 @@
       : m.button_label_view_all_recommended_movies(),
   );
 </script>
+
+{#snippet recapEntry()}
+  <MonthInReviewNavbarEntry />
+{/snippet}
 
 {#snippet todayEntry()}
   <TodayNavbarEntry />
@@ -41,6 +46,7 @@
   <NavbarStateSetter
     contentToggle="discover"
     hasFilters
+    leadingActions={recapEntry}
     headerActions={todayEntry}
   />
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import MonthInReview from "../month-in-review/MonthInReview.svelte";
   import YearInReview from "../year-in-review/YearInReview.svelte";
   import BannerContainer from "./BannerContainer.svelte";
@@ -14,8 +15,14 @@
   </BannerContainer>
 {/if}
 
-{#if $mir.isVisible}
-  <BannerContainer>
-    <MonthInReview onDismiss={$mir.dismiss} month={$mir.month} />
-  </BannerContainer>
+{#if $mir.isActive}
+  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    <MonthInReview
+      isVisible={$mir.isVisible}
+      month={$mir.month}
+      hiddenUntil={$mir.hiddenUntil}
+      onDismiss={$mir.dismiss}
+      onRestore={$mir.restore}
+    />
+  </RenderFor>
 {/if}
