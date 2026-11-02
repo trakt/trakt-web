@@ -117,8 +117,13 @@
   const isResults = $derived(params.view === "results");
   const slotsLeft = $derived(MAX_MIXTAPE_PICKS - params.picks.length);
 
+  /*
+    The hold re-arms only when the view itself changes: a keep or a swap
+    rewrites the results url too, and must not send the stage back into
+    the mixing theatre.
+  */
   const isHolding$ = combineLatest([
-    fromRune(() => params.view),
+    fromRune(() => params.view).pipe(distinctUntilChanged()),
     isReducedMotion,
   ]).pipe(
     switchMap(([view, isReduced]) =>
