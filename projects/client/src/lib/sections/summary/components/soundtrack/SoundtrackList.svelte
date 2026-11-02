@@ -1,14 +1,15 @@
 <script lang="ts">
-  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
-  import Link from "$lib/components/link/Link.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
+  import ListHeader from "$lib/components/lists/ListHeader.svelte";
+  import ListCollapseButton from "$lib/components/lists/section-list/ListCollapseButton.svelte";
+  import type { ListDrilldownProps } from "$lib/components/lists/section-list/models/ListDrilldownProps";
+  import { useCollapsedList } from "$lib/components/lists/section-list/useCollapsedList";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import type { Snippet } from "svelte";
   import { slide } from "svelte/transition";
   import SoundtrackBoard from "./_internal/SoundtrackBoard.svelte";
   import SoundtrackUpsell from "./_internal/SoundtrackUpsell.svelte";
@@ -24,77 +25,89 @@
   );
 
   const { buildDrawerLink } = summaryDrawerNavigation();
-  const { track } = useTrack(AnalyticsEvent.Drilldown);
+  const drilldown: ListDrilldownProps = $derived({
+    ...buildDrawerLink(SummaryDrawers.Soundtrack),
+    source: { id: "soundtrack" },
+    label: m.button_label_view_soundtrack(),
+  });
+
+  const { isCollapsed: isListCollapsed, toggle } = $derived(
+    useCollapsedList(`soundtrack-list-${media.type}-${media.slug}`),
+  );
+  const isCollapsed = $derived($isListCollapsed);
 
   const visibleTracks = $derived($tracks.slice(0, maxRows));
   const summary = $derived(toSoundtrackSummary($tracks));
   const hasMore = $derived($tracks.length > maxRows);
 </script>
 
-{#snippet title(withCaret: boolean)}
-  <span class="header-title">
-    <h2 class="header-heading">{m.list_title_soundtrack()}</h2>
-    {#if withCaret}
-      <CaretRightIcon />
-    {/if}
-  </span>
+{#snippet titleAction()}
+  <ListCollapseButton
+    title={m.list_title_soundtrack()}
+    {isCollapsed}
+    onclick={toggle}
+  />
 {/snippet}
 
-{#snippet header(withDrilldown: boolean)}
-  <div class="soundtrack-header">
-    {#if withDrilldown}
-      <Link
-        {...buildDrawerLink(SummaryDrawers.Soundtrack)}
-        label={m.button_label_view_soundtrack()}
-        color="inherit"
-        onclick={() => track({ source: "soundtrack" })}
-      >
-        {@render title(true)}
-      </Link>
-    {:else}
-      {@render title(false)}
+{#snippet upsell()}
+  <SoundtrackUpsell />
+{/snippet}
+
+{#snippet board()}
+  <SoundtrackBoard
+    {media}
+    tracks={visibleTracks}
+    {summary}
+    source="soundtrack-summary"
+  />
+{/snippet}
+
+{#snippet soundtrackSection(
+  content: Snippet,
+  sectionDrilldown?: ListDrilldownProps,
+)}
+  <section
+    class="trakt-soundtrack-section"
+    transition:slide={{ duration: 150 }}
+  >
+    <ListHeader
+      title={m.list_title_soundtrack()}
+      {titleAction}
+      drilldown={isCollapsed ? undefined : sectionDrilldown}
+    />
+    {#if !isCollapsed}
+      <div class="soundtrack-content" transition:slide={{ duration: 150 }}>
+        {@render content()}
+      </div>
     {/if}
-  </div>
+  </section>
 {/snippet}
 
 <RenderFor audience="vip">
   {#if $tracks.length > 0}
-    <section class="trakt-soundtrack-section" transition:slide={{ duration: 150 }}>
-      {@render header(hasMore)}
-      <SoundtrackBoard
-        {media}
-        tracks={visibleTracks}
-        {summary}
-        source="soundtrack-summary"
-      />
-    </section>
+    {@render soundtrackSection(board, hasMore ? drilldown : undefined)}
   {/if}
 </RenderFor>
 
-<SoundtrackUpsell />
+<!-- `free` is signed-in non-VIP, `public` is signed out. The endpoint returns
+     an empty list for both, so neither may be shown a section that reads as
+     "this title has no soundtrack". -->
+<RenderFor audience="free">
+  {@render soundtrackSection(upsell)}
+</RenderFor>
+
+<RenderFor audience="public">
+  {@render soundtrackSection(upsell)}
+</RenderFor>
 
 <style lang="scss">
   .trakt-soundtrack-section {
     display: flex;
     flex-direction: column;
     gap: var(--list-header-gap);
+  }
 
+  .soundtrack-content {
     padding-inline: var(--layout-distance-side);
-  }
-
-  .soundtrack-header {
-    display: flex;
-    gap: var(--ni-12);
-    align-items: baseline;
-  }
-
-  .header-title {
-    display: inline-flex;
-    gap: var(--ni-4);
-    align-items: center;
-  }
-
-  .header-heading {
-    margin: 0;
   }
 </style>

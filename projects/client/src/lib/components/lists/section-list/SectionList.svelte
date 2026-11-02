@@ -1,5 +1,4 @@
 <script lang="ts" generics="T extends { key: string }">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Crossfade from "$lib/components/Crossfade.svelte";
   import "$lib/features/edit-mode/edit-mode.css";
   import EditModeVisibilityButton from "$lib/features/edit-mode/EditModeVisibilityButton.svelte";
@@ -19,12 +18,12 @@
   import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
   import "../_internal/list.css";
-  import ListHeader from "../_internal/ListHeader.svelte";
+  import ListHeader from "../ListHeader.svelte";
   import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
   import type { ListProps } from "../ListProps";
   import { resetScroll } from "./_internal/resetScroll";
-  import { useCollapsedList } from "./_internal/useCollapsedList";
-  import CollapseIcon from "./CollapseIcon.svelte";
+  import { useCollapsedList } from "./useCollapsedList";
+  import ListCollapseButton from "./ListCollapseButton.svelte";
   import type { ListVariant } from "./ListVariant";
   import type { ListDrilldownProps } from "./models/ListDrilldownProps";
   import type { SectionListId } from "./models/SectionListId";
@@ -122,18 +121,11 @@
   {#if externalTitleAction}
     {@render externalTitleAction()}
   {:else if variant === "default"}
-    {#if !$isEditModeEnabled}
-      <ActionButton
-        onclick={toggle}
-        label={isCollapsed
-          ? m.button_label_expand_list({ title: title ?? "" })
-          : m.button_label_collapse_list({ title: title ?? "" })}
-        style="ghost"
-        color="default"
-      >
-        <CollapseIcon state={isCollapsed ? "collapsed" : "expanded"} />
-      </ActionButton>
-    {/if}
+    <ListCollapseButton
+      title={title ?? ""}
+      {isCollapsed}
+      onclick={toggle}
+    />
   {/if}
 {/snippet}
 

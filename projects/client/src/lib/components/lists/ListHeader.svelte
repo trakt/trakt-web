@@ -3,8 +3,8 @@
   import type { DeviceProps } from "$lib/guards/_internal/DeviceProps";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
-  import type { ListDrilldownProps } from "../section-list/models/ListDrilldownProps";
-  import ListTitle from "./ListTitle.svelte";
+  import ListTitle from "./_internal/ListTitle.svelte";
+  import type { ListDrilldownProps } from "./section-list/models/ListDrilldownProps";
 
   type ListHeaderProps = {
     title: string;
