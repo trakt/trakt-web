@@ -3305,13 +3305,25 @@
       "default": "Please visit the <a>advanced settings</a> to run a history analysis and unlock your account.",
       "description": "Text shown on the account locked page, informing the user that their account has been locked and how to unlock it."
     },
+    "error_text_locked_account_guide_plain": {
+      "default": "Please visit the advanced settings to run a history analysis and unlock your account.",
+      "description": "Plain version of error_text_locked_account_guide without link markup, for clients whose account locked screen has buttons for the links."
+    },
     "error_text_locked_account_collection_limit": {
       "default": "This user account has been locked because the collection has exceeded the limit. Please <a>contact support</a> to resolve this issue.",
       "description": "Text shown on the account locked page when the account is locked because the collection limit is exceeded."
     },
+    "error_text_locked_account_collection_limit_plain": {
+      "default": "This user account has been locked because the collection has exceeded the limit. Please contact support to resolve this issue.",
+      "description": "Plain version of error_text_locked_account_collection_limit without link markup, for clients whose account locked screen has a button for support."
+    },
     "error_text_locked_account_persists": {
       "default": "If the issue persists, please <a>contact support</a> to resolve this issue.",
       "description": "Text shown on the account locked page, informing the user that if they can't unlock their account, they should contact support for assistance."
+    },
+    "error_text_locked_account_persists_plain": {
+      "default": "If the issue persists, please contact support to resolve this issue.",
+      "description": "Plain version of error_text_locked_account_persists without link markup, for clients whose account locked screen has a button for support."
     },
     "error_text_lists_limit": {
       "default": "You have reached the limit of your personal lists. Upgrade to VIP for unlimited amount of lists!",
@@ -14953,6 +14965,14 @@
     "button_text_revoke": {
       "default": "Revoke",
       "description": "Confirm button in a dialog that revokes an app's access."
+    },
+    "button_text_open_advanced_settings": {
+      "default": "Open advanced settings",
+      "description": "Text for the button on the account locked screen that opens the advanced settings page, where the user can run a history analysis to unlock the account."
+    },
+    "list_title_recent_lists": {
+      "default": "Recent",
+      "description": "Title for the lists the user added items to most recently, shown first in the drawer for adding an item to lists. This title should be as short and concise as possible."
     }
   }
 }
