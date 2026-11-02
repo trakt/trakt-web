@@ -16,6 +16,7 @@ import {
   StaleWhileRevalidate,
 } from 'workbox-strategies';
 import { readAuthMarker } from './lib/features/auth/authMarker.ts';
+import { toShareImageRoute } from './lib/features/share/toShareImageRoute.ts';
 import { LOCALE_COOKIE_NAME } from './lib/features/i18n/constants.ts';
 import { delay } from './lib/utils/timing/delay.ts';
 import { time } from './lib/utils/timing/time.ts';
@@ -270,7 +271,7 @@ registerRoute(
 // Same-origin static assets, media and documents (CacheFirst)
 registerRoute(
   ({ url }) => {
-    if (!isSameOriginAsset(url)) {
+    if (!isSameOriginAsset(url) || toShareImageRoute(url.pathname)) {
       return false;
     }
     return (

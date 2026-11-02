@@ -18,7 +18,7 @@ export function fetchReviewResource({
 }: FetchReviewResourceParams) {
   return rawApiFetch({
     fetch,
-    path: `${path}?extended=images${toSlurmQuery(slurm)}`,
+    path: `${path}?extended=images,colors${toSlurmQuery(slurm)}`,
     authenticated: !slurm,
   });
 }
