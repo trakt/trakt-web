@@ -4,6 +4,5 @@ export enum FeatureFlag {
   YearInReview2026 = 'year-in-review-2026',
   LargeScreenCards = 'large-screen-cards',
   VipVeteran = 'vip-veteran',
-  ShowEnding = 'show-ending',
   SeasonRecap = 'season-recap',
 }
