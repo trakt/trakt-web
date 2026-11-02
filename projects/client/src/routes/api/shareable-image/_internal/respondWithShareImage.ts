@@ -38,7 +38,7 @@ type RespondWithShareImageProps<T> = {
     fetch: typeof globalThis.fetch;
     timing: ServerTiming;
   }) => Promise<T | null>;
-  prepare: (props: ShareStepProps<T>) => Promise<ShareCardInput>;
+  prepare: (props: ShareStepProps<T>) => Promise<ShareCardInput | null>;
   prepareFallback?: (props: ShareStepProps<T>) => Promise<ShareCardInput>;
   buildMetadata?: (data: T) => Record<string, string>;
 };
@@ -137,20 +137,22 @@ export async function respondWithShareImage<T>({
 
   const fonts = await fontsRequest;
 
-  const toBuffer = async ({
-    html,
-    images,
-    isComplete = true,
-  }: ShareCardInput) => ({
-    buffer: await renderShareCard({
-      html,
-      variant: shareType,
-      fonts,
-      images,
-      debug: IS_DEV && url.searchParams.get('debug') === 'true',
-    }),
-    isComplete,
-  });
+  const toBuffer = async (input: ShareCardInput | null) => {
+    if (!input) return null;
+
+    const { html, images, isComplete = true } = input;
+
+    return {
+      buffer: await renderShareCard({
+        html,
+        variant: shareType,
+        fonts,
+        images,
+        debug: IS_DEV && url.searchParams.get('debug') === 'true',
+      }),
+      isComplete,
+    };
+  };
 
   const renderWithFallback = () =>
     prepare({ data, timing })
@@ -165,7 +167,13 @@ export async function respondWithShareImage<T>({
       });
 
   try {
-    const { buffer, isComplete } = await renderWithFallback();
+    const rendered = await renderWithFallback();
+
+    if (!rendered) {
+      return new Response('Data not found', { status: 404 });
+    }
+
+    const { buffer, isComplete } = rendered;
 
     if (bucket && resolvedPath && isComplete) {
       const cached = bucket
