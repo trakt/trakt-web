@@ -120,4 +120,41 @@ describe('pruneVersionedShareImages', () => {
     expect(bucket.deleted).toEqual([]);
     expect(result.deleted).toBe(0);
   });
+
+  it('should keep only the newest month image per folder', async () => {
+    const bucket = makeBucket([
+      { key: 'images/share/mir/v2/feed/sean/2026-10/aaa.jpg', lastModified: 1 },
+      { key: 'images/share/mir/v2/feed/sean/2026-10/bbb.jpg', lastModified: 2 },
+      { key: 'images/share/mir/v2/feed/sean/2026-09/ccc.jpg', lastModified: 1 },
+    ]);
+
+    await pruneVersionedShareImages({
+      bucket,
+      targets: [{ ...mir, isLatestOnly: true }],
+    });
+
+    expect(bucket.deleted).toEqual([
+      'images/share/mir/v2/feed/sean/2026-10/aaa.jpg',
+    ]);
+  });
+
+  it('should delete images untouched for longer than the max age', async () => {
+    const bucket = makeBucket([
+      { key: 'images/share/mir/v2/feed/gone/2025-01/aaa.jpg', lastModified: 1 },
+      {
+        key: 'images/share/mir/v2/feed/sean/2026-10/bbb.jpg',
+        lastModified: 90,
+      },
+    ]);
+
+    await pruneVersionedShareImages({
+      bucket,
+      targets: [{ ...mir, isLatestOnly: true, maxAge: 50 }],
+      now: 100,
+    });
+
+    expect(bucket.deleted).toEqual([
+      'images/share/mir/v2/feed/gone/2025-01/aaa.jpg',
+    ]);
+  });
 });

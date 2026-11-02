@@ -20,12 +20,14 @@ type VersionedTarget = {
   root: string;
   current: string;
   isLatestOnly?: boolean;
+  maxAge?: number;
 };
 
 type PruneVersionedShareImagesProps = {
   bucket: VersionedBucket;
   targets: ReadonlyArray<VersionedTarget>;
   isDryRun?: boolean;
+  now?: number;
 };
 
 type PruneResult = {
@@ -58,20 +60,31 @@ function toOlderKeys(folder: ReadonlyArray<ListedObject>) {
   return folder.filter((object) => object !== newest).map(({ key }) => key);
 }
 
-function toStaleKeys(
-  objects: ReadonlyArray<ListedObject>,
-  target: VersionedTarget,
-): ReadonlyArray<string> {
+type ToStaleKeysProps = {
+  objects: ReadonlyArray<ListedObject>;
+  target: VersionedTarget;
+  now: number;
+};
+
+function toStaleKeys({
+  objects,
+  target,
+  now,
+}: ToStaleKeysProps): ReadonlyArray<string> {
   const isCurrent = (object: ListedObject) =>
     object.key.startsWith(target.current);
-  const outdated = objects.filter((object) => !isCurrent(object));
+  const isExpired = (object: ListedObject) =>
+    target.maxAge != null && now - object.lastModified > target.maxAge;
+  const outdated = objects.filter(
+    (object) => !isCurrent(object) || isExpired(object),
+  );
   const superseded = target.isLatestOnly
     ? [...groupByFolder(objects.filter(isCurrent)).values()].flatMap(
         toOlderKeys,
       )
     : [];
 
-  return [...outdated.map(({ key }) => key), ...superseded];
+  return [...new Set([...outdated.map(({ key }) => key), ...superseded])];
 }
 
 async function listAll(
@@ -112,12 +125,13 @@ export async function pruneVersionedShareImages({
   bucket,
   targets,
   isDryRun = false,
+  now = Date.now(),
 }: PruneVersionedShareImagesProps): Promise<PruneResult> {
   const result: PruneResult = { deleted: 0, kept: 0, errors: 0 };
 
   for (const target of targets) {
     const objects = await listAll(bucket, target.root);
-    const stale = toStaleKeys(objects, target).filter((key) =>
+    const stale = toStaleKeys({ objects, target, now }).filter((key) =>
       key.startsWith(target.root),
     );
     result.kept += objects.length - stale.length;

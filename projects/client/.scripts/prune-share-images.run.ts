@@ -1,5 +1,6 @@
 import { buildTargetPrefixes } from '../src/routes/api/shareable-image/_internal/buildTargetPrefixes.ts';
 import { versionedShareImagePrefix } from '../src/routes/api/shareable-image/_internal/versionedShareImagePrefix.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { R2Client } from './_internal/r2.ts';
 import { pruneShareImages } from './prune-share-images.ts';
 import { pruneVersionedShareImages } from './prune-versioned-share-images.ts';
@@ -80,7 +81,11 @@ const versionedBucket = {
 const versionedResult = await pruneVersionedShareImages({
   bucket: versionedBucket,
   targets: [
-    versionedShareImagePrefix('mir'),
+    {
+      ...versionedShareImagePrefix('mir'),
+      isLatestOnly: true,
+      maxAge: time.days(180),
+    },
     { ...versionedShareImagePrefix('profile'), isLatestOnly: true },
   ],
   isDryRun: process.env.DRY_RUN === '1',
