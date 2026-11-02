@@ -99,16 +99,20 @@ export async function respondWithShareImage<T>({
     typeof imagePath === 'string' ? await readCachedImage(imagePath) : null;
   if (cachedByPath) return cachedByPath;
 
-  const fontsRequest = timing.measure(
-    'fonts',
-    async () =>
-      (await loadShareFonts({ bucket: platform?.env?.R2_WALTER })) ??
-      (await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
-        error('Failed to load fallback share fonts:', e);
-        return [];
-      })),
-  );
-  fontsRequest.catch(NOOP_FN);
+  const loadFonts = () =>
+    timing.measure(
+      'fonts',
+      async () =>
+        (await loadShareFonts({ bucket: platform?.env?.R2_WALTER })) ??
+        (await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
+          error('Failed to load fallback share fonts:', e);
+          return [];
+        })),
+    );
+
+  const earlyFontsRequest =
+    typeof imagePath === 'function' ? null : loadFonts();
+  earlyFontsRequest?.catch(NOOP_FN);
 
   const data = await timing.measure('data', () =>
     loadData({
@@ -135,7 +139,7 @@ export async function respondWithShareImage<T>({
       : null;
   if (cachedByData) return cachedByData;
 
-  const fonts = await fontsRequest;
+  const fonts = await (earlyFontsRequest ?? loadFonts());
 
   const toBuffer = async (input: ShareCardInput | null) => {
     if (!input) return null;
