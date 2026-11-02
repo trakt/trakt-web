@@ -269,6 +269,7 @@
   --color-navbar-entry-chip-text: var(--purple-700);
   --color-today-entry-shine: var(--purple-400);
   --color-today-entry-shine-core: var(--purple-600);
+  --color-today-entry-accent: var(--purple-600);
   --shadow-navbar-entry-glow: 0 0 0 var(--ni-4)
       color-mix(in srgb, var(--purple-500) 12%, transparent),
     0 0 var(--ni-24) color-mix(in srgb, var(--purple-500) 25%, transparent);
@@ -1003,6 +1004,7 @@
   --color-navbar-entry-chip-text: var(--purple-100);
   --color-today-entry-shine: var(--purple-300);
   --color-today-entry-shine-core: var(--shade-10);
+  --color-today-entry-accent: var(--purple-300);
   --shadow-navbar-entry-glow: 0 0 0 var(--ni-4)
       color-mix(in srgb, var(--purple-500) 16%, transparent),
     0 0 var(--ni-24) color-mix(in srgb, var(--purple-500) 35%, transparent);

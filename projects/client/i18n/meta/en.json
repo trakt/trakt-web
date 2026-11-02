@@ -11840,6 +11840,18 @@
       "default": "Open today's stories",
       "description": "Aria-label for the button in the top bar that opens the Today stories."
     },
+    "today_entry_tooltip_body": {
+      "default": "What the people you follow watched today, plus your new episodes and releases.",
+      "description": "Body copy of the tooltip that opens when hovering the Today pill in the top bar."
+    },
+    "today_entry_open": {
+      "default": "Open stories",
+      "description": "Link text inside the Today pill tooltip that opens today's stories."
+    },
+    "today_entry_see_all": {
+      "default": "See everything",
+      "description": "Button text inside the Today pill tooltip that opens the Today page with all of today's activity."
+    },
     "button_label_view_all_today": {
       "default": "View everything from today",
       "description": "Aria-label for the link that opens the Today page with all of today's activity."

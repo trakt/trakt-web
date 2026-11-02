@@ -1,10 +1,17 @@
 <script lang="ts">
+  import Button from "$lib/components/buttons/Button.svelte";
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { dedupe } from "$lib/utils/array/dedupe.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { isStorySeen } from "./_internal/isStorySeen.ts";
   import TodayFaces from "./_internal/TodayFaces.svelte";
   import { todayStoryNavigation } from "./_internal/todayStoryNavigation.ts";
@@ -22,6 +29,11 @@
   );
   const { seenStories } = useTodaySeenStories();
   const { storyLink } = todayStoryNavigation();
+  const { track } = useTrack(AnalyticsEvent.Link);
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
+
+  const trackTooltipLink = (target: string) => () =>
+    track({ target, source: "today-navbar-tooltip" });
 
   const groups = $derived(
     toStoryGroups({ forYou: $forYou ?? [], titles: $titles ?? [] }),
@@ -54,42 +66,77 @@
 </script>
 
 {#if link}
+  {#snippet tooltip()}
+    <div class="entry-tooltip">
+      <p class="small">{m.today_entry_tooltip_body()}</p>
+      <div class="entry-tooltip-actions">
+        <Link
+          href={link.href}
+          noscroll={link.noscroll}
+          replacestate={link.replacestate}
+          onclick={trackTooltipLink("today-story")}
+          color="inherit"
+        >
+          <span class="small bold">{m.today_entry_open()}</span>
+          <CaretRightIcon />
+        </Link>
+        <Button
+          href={UrlBuilder.today()}
+          size="small"
+          style="ghost"
+          color="default"
+          label={m.button_label_view_all_today()}
+          onclick={trackTooltipLink(UrlBuilder.today())}
+        >
+          {m.today_entry_see_all()}
+        </Button>
+      </div>
+    </div>
+  {/snippet}
+
   <div
     class="trakt-today-navbar-entry"
     class:has-faces={faces.length > 0}
     class:has-count={unseen.length > 0}
     data-seen={unseen.length === 0}
   >
-    <Link
-      href={link.href}
-      noscroll={link.noscroll}
-      replacestate={link.replacestate}
-      label={m.button_label_open_today_stories()}
-      navigationType={DpadNavigationType.Item}
-      color="inherit"
+    <Tooltip
+      content={tooltip}
+      side="bottom"
+      sideOffset={10}
+      disabled={!$isMouse}
     >
-      <span class="entry-shine" aria-hidden="true"></span>
+      <Link
+        href={link.href}
+        noscroll={link.noscroll}
+        replacestate={link.replacestate}
+        label={m.button_label_open_today_stories()}
+        navigationType={DpadNavigationType.Item}
+        color="inherit"
+      >
+        <span class="entry-shine" aria-hidden="true"></span>
 
-      <span class="entry-posters">
-        {#each posters as poster (poster.key)}
-          <span class="entry-poster">
-            <CrossOriginImage src={poster.poster.url.thumb} alt="" />
-          </span>
-        {/each}
-      </span>
-
-      {#if faces.length > 0}
-        <span class="entry-faces">
-          <TodayFaces users={faces} size="small" />
+        <span class="entry-posters">
+          {#each posters as poster (poster.key)}
+            <span class="entry-poster">
+              <CrossOriginImage src={poster.poster.url.thumb} alt="" />
+            </span>
+          {/each}
         </span>
-      {/if}
 
-      <span class="entry-label">{m.list_title_today()}</span>
+        {#if faces.length > 0}
+          <span class="entry-faces">
+            <TodayFaces users={faces} size="small" />
+          </span>
+        {/if}
 
-      {#if unseen.length > 0}
-        <span class="bold entry-badge">{unseen.length}</span>
-      {/if}
-    </Link>
+        <span class="entry-label">{m.list_title_today()}</span>
+
+        {#if unseen.length > 0}
+          <span class="bold entry-badge">{unseen.length}</span>
+        {/if}
+      </Link>
+    </Tooltip>
   </div>
 {/if}
 
@@ -117,7 +164,13 @@
       );
     }
 
-    :global(.trakt-link) {
+    :global(.trakt-tooltip-trigger) {
+      min-width: 0;
+      border-radius: inherit;
+    }
+
+    :global(.trakt-tooltip-trigger > .trakt-link) {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -218,7 +271,7 @@
     }
 
     @include for-mobile {
-      :global(.trakt-link) {
+      :global(.trakt-tooltip-trigger > .trakt-link) {
         justify-content: center;
         padding-inline: 0;
       }
@@ -272,6 +325,40 @@
             var(--color-navbar-entry-chip-background)
           ),
           var(--color-background);
+      }
+    }
+  }
+
+  .entry-tooltip {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
+    width: var(--ni-240);
+    max-width: 100%;
+
+    p {
+      line-height: 1.45;
+      text-wrap: pretty;
+    }
+  }
+
+  .entry-tooltip-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-s);
+
+    :global(.trakt-link) {
+      display: flex;
+      align-items: center;
+      gap: var(--ni-4);
+
+      color: var(--color-today-entry-accent);
+      text-decoration: none;
+
+      :global(svg) {
+        width: var(--ni-12);
+        height: var(--ni-12);
       }
     }
   }
