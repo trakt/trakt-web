@@ -53,12 +53,20 @@
 {/snippet}
 
 {#snippet metaInfo()}
-  <ListMetaInfo
-    text={m.text_soundtrack_playable_ratio({
-      playable: summary.playable,
-      total: summary.total,
-    })}
-  />
+  <RenderFor audience="vip">
+    <ListMetaInfo
+      text={m.text_soundtrack_playable_ratio({
+        playable: summary.playable,
+        total: summary.total,
+      })}
+    />
+  </RenderFor>
+{/snippet}
+
+{#snippet upsell()}
+  <UpsellCta source="soundtrack-drawer" title={m.text_soundtrack_upsell()}>
+    {m.vip_feature_description_soundtrack()}
+  </UpsellCta>
 {/snippet}
 
 <Drawer
@@ -83,12 +91,11 @@
       </RenderFor>
 
       <RenderFor audience="free">
-        <UpsellCta
-          source="soundtrack-drawer"
-          title={m.text_soundtrack_upsell()}
-        >
-          {m.vip_feature_description_soundtrack()}
-        </UpsellCta>
+        {@render upsell()}
+      </RenderFor>
+
+      <RenderFor audience="public">
+        {@render upsell()}
       </RenderFor>
     </div>
   {/if}

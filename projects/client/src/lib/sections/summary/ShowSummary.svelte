@@ -1,9 +1,7 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
 
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
@@ -116,11 +114,7 @@
 
 <VideoList slug={media.slug} {videos} type="show" />
 
-<RenderForFeature flag={FeatureFlag.Soundtrack}>
-  {#snippet enabled()}
-    <SoundtrackList {media} />
-  {/snippet}
-</RenderForFeature>
+<SoundtrackList {media} />
 
 <RelatedList
   title={m.list_title_related_shows()}
