@@ -18,6 +18,8 @@
     variant,
     colors,
     backdropWidthRatio = 0.75,
+    backdrop,
+    hasWatermark = true,
     children,
   }: ShareCardFrameProps = $props();
 
@@ -65,6 +67,8 @@
   style="width: {width}px; height: {height}px; padding: {padding}px; background: linear-gradient(90deg, {gradientStart} 0%, {gradientEnd} 100%);"
   data-variant={variant}
 >
+  {@render backdrop?.()}
+
   {#if variant === "story"}
     <div
       class="share-card-backdrop"
@@ -72,9 +76,11 @@
     ></div>
   {/if}
 
-  <div class="share-card-background" style={watermark.style}>
-    <TraktLogoLarge viewBox={watermark.viewBox} fill={watermarkFill} />
-  </div>
+  {#if hasWatermark}
+    <div class="share-card-background" style={watermark.style}>
+      <TraktLogoLarge viewBox={watermark.viewBox} fill={watermarkFill} />
+    </div>
+  {/if}
   <div class="share-card-logo" style={logoStyle}>
     <TraktLogoText />
   </div>
