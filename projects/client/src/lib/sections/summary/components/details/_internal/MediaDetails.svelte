@@ -1,7 +1,5 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import type { MediaDetailsProps } from "../MediaDetailsProps";
   import CollapsableValues from "./CollapsableValues.svelte";
   import DetailsGrid from "./DetailsGrid.svelte";
@@ -9,12 +7,7 @@
 
   const { title, ...props }: { title?: string } & MediaDetailsProps = $props();
 
-  const { isEnabled } = useFeatureFlag();
-  const isEndingEnabled = $derived(isEnabled(FeatureFlag.ShowEnding));
-
-  const mediaDetails = $derived(
-    useMediaDetails(props, { isEndingEnabled: $isEndingEnabled }),
-  );
+  const mediaDetails = $derived(useMediaDetails(props));
 </script>
 
 <DetailsGrid>

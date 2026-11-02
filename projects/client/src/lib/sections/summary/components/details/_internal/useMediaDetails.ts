@@ -269,14 +269,7 @@ type MediaDetail = {
   values?: Array<string | { label: string; link: string }>;
 };
 
-type MediaDetailsOptions = {
-  isEndingEnabled: boolean;
-};
-
-export function useMediaDetails(
-  props: MediaDetailsProps,
-  { isEndingEnabled }: MediaDetailsOptions,
-): MediaDetail[] {
+export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
   if (props.type === 'episode') {
     return [
       episodeAirDate(props.episode),
@@ -293,8 +286,7 @@ export function useMediaDetails(
     props.type === 'show' ? [showAirs(props.media, now)] : [];
   const totalRuntimeDetails =
     props.type === 'show' ? [totalRuntime(props.media)] : [];
-  const endingDetails =
-    props.type === 'show' && isEndingEnabled ? [showEnding(props.media)] : [];
+  const endingDetails = props.type === 'show' ? [showEnding(props.media)] : [];
 
   return [
     ...showAirsDetails,
