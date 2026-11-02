@@ -36,7 +36,7 @@
 @mixin floating-list($position: relative) {
   padding: calc(var(--border-radius-l) - var(--border-radius-menu-item));
 
-  @include floating-surface($position);
+  @include floating-surface($position, var(--border-radius-m));
 }
 
 // Visually hide an element while keeping it available to screen readers
