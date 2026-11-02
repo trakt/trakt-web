@@ -48,7 +48,7 @@
   </RenderFor>
 
   {#if !$isLoading && $user}
-    <CoverImageSetter src={$user.cover?.url} type="main" />
+    <CoverImageSetter src={$user.cover?.url} type="main" resetOnDestroy />
     {#if isPrivateProfile}
       <PrivateProfile profile={$user} slug={$user.slug ?? ""} />
     {:else if isProfileVisible}
