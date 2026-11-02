@@ -5,20 +5,26 @@
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { spoilMeAnyway } from "$lib/features/spoilers/components/spoilMeAnyway";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import MarkdownText from "$lib/sections/components/markdown/MarkdownText.svelte";
+  import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched.ts";
+  import type { CommentsProps } from "../CommentsProps.ts";
   import CommentGif from "./CommentGif.svelte";
+  import { toCommentWatchProps } from "./toCommentWatchProps.ts";
 
   const maxPreviewLines = 3;
 
   type CommentBodyProps = {
-    media: MediaEntry;
     comment: MediaComment;
-    type: "full" | "preview";
+    variant: "full" | "preview";
     onClick?: () => void;
-  };
+  } & CommentsProps;
 
-  const { comment, media, type, onClick }: CommentBodyProps = $props();
+  const { comment, variant, onClick, ...commentProps }: CommentBodyProps =
+    $props();
+
+  const watchProps = $derived(toCommentWatchProps(commentProps));
+  const { isWatched } = $derived(useIsWatched(watchProps));
+  const isBlurred = $derived(comment.isSpoiler && !$isWatched);
 
   const { track } = useTrack(AnalyticsEvent.SpoilerReveal);
   const trackReveal = () => track({ type: "comment" });
@@ -30,7 +36,7 @@
 {#snippet commentText()}
   <MarkdownText
     text={comment.comment}
-    isSpoiler={comment.isSpoiler}
+    showInlineSpoilers={comment.isSpoiler || $isWatched}
     onReveal={trackReveal}
   />
 {/snippet}
@@ -41,11 +47,11 @@
   {/if}
 {/snippet}
 
-{#if type === "full"}
-  <Spoiler {media} type={media.type}>
+{#if variant === "full"}
+  <Spoiler {...watchProps}>
     <div
       class="trakt-comment"
-      class:trakt-spoiler={comment.isSpoiler}
+      class:trakt-spoiler={isBlurred}
       use:spoilMeAnyway={{ onReveal: trackReveal }}
     >
       {@render commentText()}
@@ -54,15 +60,12 @@
   </Spoiler>
 {:else}
   <button class="trakt-comment-preview" onclick={onClick}>
-    <Spoiler {media} type={media.type} variant="persistent">
+    <Spoiler {...watchProps} variant="persistent">
       <!--
         The gif is part of what a spoiler hides, so the blur sits on the row
         that holds both it and the text rather than on the text alone.
       -->
-      <div
-        class="trakt-comment-preview-row"
-        class:trakt-spoiler={comment.isSpoiler}
-      >
+      <div class="trakt-comment-preview-row" class:trakt-spoiler={isBlurred}>
         {#if hasText}
           <div
             class="trakt-comment trakt-comment-preview-content"

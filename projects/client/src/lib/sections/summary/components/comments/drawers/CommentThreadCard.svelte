@@ -77,7 +77,7 @@
     {/if}
 
     <div class="trakt-comment-thread">
-      <CommentBody {comment} {media} type="full" />
+      <CommentBody {comment} {media} {...typeProps} variant="full" />
       <CommentReplies
         {comment}
         {media}

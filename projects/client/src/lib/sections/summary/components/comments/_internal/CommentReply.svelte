@@ -16,7 +16,7 @@
 </script>
 
 <CommentHeader {comment} {media} {...typeProps} />
-<CommentBody {comment} {media} type="full" />
+<CommentBody {comment} {media} {...typeProps} variant="full" />
 <CommentFooter>
   <ReactAction {comment} />
 </CommentFooter>
