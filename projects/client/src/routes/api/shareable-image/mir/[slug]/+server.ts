@@ -59,7 +59,13 @@ export const GET: RequestHandler = (event) => {
     event,
     shareType,
     imagePath: ({ profile }) =>
-      toMirImagePath({ shape, slug, year, month, user: toShareUser(profile) }),
+      toMirImagePath({
+        shape,
+        slug: profile.slug ?? slug,
+        year,
+        month,
+        user: toShareUser(profile),
+      }),
     isFresh: (cachedAt) => isMirImageFresh({ cachedAt, now, settlesAt }),
     cacheControl:
       isSettled && hasExplicitMonth ? SETTLED_MONTH_CACHE : OPEN_MONTH_CACHE,
