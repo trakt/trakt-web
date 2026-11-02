@@ -1,17 +1,20 @@
 <script lang="ts">
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import { onDestroy } from "svelte";
   import { useCover } from "./_internal/useCover";
 
   type ImageBackgroundProps = {
     src?: string | Nil;
     type: MediaType | "main";
     colors?: [string, string];
+    resetOnDestroy?: boolean;
   };
 
   const {
     src,
     type,
     colors = ["var(--color-background)", "var(--color-background)"],
+    resetOnDestroy = false,
   }: ImageBackgroundProps = $props();
 
   const { cover } = useCover();
@@ -46,5 +49,14 @@
     });
 
     queueMicrotask(() => cover.next({ data, state: "ready" }));
+  });
+
+  onDestroy(() => {
+    if (!resetOnDestroy) return;
+
+    const current = cover.getValue();
+    if (current.state === "no-cover" || current.data.src !== src) return;
+
+    cover.next({ data: undefined, state: "no-cover" });
   });
 </script>
