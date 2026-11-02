@@ -84,9 +84,11 @@
       {#snippet icon()}{@render logo()}{/snippet}
       {#snippet tag()}
         <SettingsPill
-          label={m.label_sync_webhooks_server_count({
-            count: webhook.serverNames.length,
-          })}
+          label={webhook.serverNames.length === 1
+            ? m.label_sync_webhooks_server_count_one()
+            : m.label_sync_webhooks_server_count({
+                count: webhook.serverNames.length,
+              })}
         />
       {/snippet}
       {#snippet children()}{/snippet}
