@@ -18,7 +18,9 @@ describe('util: parseMirShareParams', () => {
       month: 10,
       shape: 'cover',
       shareType: 'feed',
-      isPastMonth: true,
+      isSettled: false,
+      settlesAt: new Date('2026-11-08T00:00:00Z'),
+      hasExplicitMonth: false,
     });
   });
 
@@ -38,8 +40,25 @@ describe('util: parseMirShareParams', () => {
     expect(parse('sean', 'shape=og')?.shareType).toBe('open-graph');
   });
 
+  it('should only treat a fully specified month as explicit', () => {
+    expect(parse('sean', 'year=2026&month=10')?.hasExplicitMonth).toBe(true);
+    expect(parse('sean', 'month=10')?.hasExplicitMonth).toBe(false);
+  });
+
   it('should reject the running month', () => {
     expect(parse('sean', 'year=2026&month=11')).toBeNull();
+  });
+
+  it('should settle a month a week after it ended', () => {
+    const settle = (date: string) =>
+      parseMirShareParams({
+        slug: 'sean',
+        searchParams: new URLSearchParams('year=2026&month=10'),
+        now: new Date(date),
+      })?.isSettled;
+
+    expect(settle('2026-11-07T23:59:59Z')).toBe(false);
+    expect(settle('2026-11-08T00:00:00Z')).toBe(true);
   });
 
   it('should reject future months', () => {

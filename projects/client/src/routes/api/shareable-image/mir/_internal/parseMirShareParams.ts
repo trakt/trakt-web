@@ -1,5 +1,8 @@
 import { isShareSlug } from '$lib/features/share/isShareSlug.ts';
 import type { ShareType } from '$lib/features/share/models/ShareType.ts';
+import { time } from '$lib/utils/timing/time.ts';
+
+const SETTLE_PERIOD = time.days(7);
 
 const SHAPES = {
   cover: 'feed',
@@ -21,7 +24,9 @@ type MirShareParams = {
   month: number;
   shape: MirShape;
   shareType: ShareType;
-  isPastMonth: boolean;
+  isSettled: boolean;
+  settlesAt: Date;
+  hasExplicitMonth: boolean;
 };
 
 function isShape(value: string): value is MirShape {
@@ -61,12 +66,16 @@ export function parseMirShareParams({
   const monthIndex = toMonthIndex(year, month);
   if (monthIndex >= currentIndex) return null;
 
+  const settlesAt = new Date(Date.UTC(year, month, 1) + SETTLE_PERIOD);
+
   return {
     slug,
     year,
     month,
     shape,
     shareType: SHAPES[shape],
-    isPastMonth: monthIndex < currentIndex,
+    isSettled: now.getTime() >= settlesAt.getTime(),
+    settlesAt,
+    hasExplicitMonth: searchParams.has('year') && searchParams.has('month'),
   };
 }

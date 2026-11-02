@@ -5,7 +5,7 @@ export const ShareUserSchema = z.object({
   username: z.string().nullish(),
   avatarUrl: z.string().nullish(),
   isVip: z.boolean(),
-  isDirector: z.boolean(),
+  badgeLabel: z.string().nullable(),
 });
 
 export type ShareUser = z.infer<typeof ShareUserSchema>;

@@ -27,9 +27,12 @@
       {initial}
     </div>
   {/if}
-  {#if user.isVip || user.isDirector}
+  {#if user.badgeLabel}
     <div class="share-user-avatar-vip">
-      <ShareVipBadge {user} size={size === "large" ? "normal" : "small"} />
+      <ShareVipBadge
+        label={user.badgeLabel}
+        size={size === "large" ? "normal" : "small"}
+      />
     </div>
   {/if}
 </div>

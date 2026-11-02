@@ -2,26 +2,17 @@
 
 <script lang="ts">
   import SparkleStarIcon from "$lib/components/icons/SparkleStarIcon.svelte";
-  import type { ShareUser } from "../models/ShareUser.ts";
 
   const {
-    user,
+    label,
     size = "normal",
-  }: { user: ShareUser; size?: "small" | "normal" } = $props();
-
-  const label = $derived.by(() => {
-    if (user.isDirector) return "DIRECTOR";
-    if (user.isVip) return "VIP";
-    return null;
-  });
+  }: { label: string; size?: "small" | "normal" } = $props();
 </script>
 
-{#if label}
-  <div class="trakt-share-vip-badge" data-size={size}>
-    <SparkleStarIcon />
-    <span>{label}</span>
-  </div>
-{/if}
+<div class="trakt-share-vip-badge" data-size={size}>
+  <SparkleStarIcon />
+  <span>{label}</span>
+</div>
 
 <style>
   .trakt-share-vip-badge {
