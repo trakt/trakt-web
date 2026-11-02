@@ -270,6 +270,7 @@
   "button_label_reset_smart_list_more_filters": "その他のフィルターをリセット",
   "button_label_restore_show": "番組「{title}」を復元",
   "button_label_retry": "再試行",
+  "button_label_reveal_spoiler": "ネタバレを表示",
   "button_label_revoke_app": "{name}のアクセスを取り消す",
   "button_label_save_filters": "フィルターをデフォルトとして設定",
   "button_label_search": "検索",

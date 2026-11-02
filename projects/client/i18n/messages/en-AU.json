@@ -270,6 +270,7 @@
   "button_label_reset_smart_list_more_filters": "Reset more filters",
   "button_label_restore_show": "Restore show \"{title}\"",
   "button_label_retry": "Retry",
+  "button_label_reveal_spoiler": "Reveal spoiler",
   "button_label_revoke_app": "Revoke access for {name}",
   "button_label_save_filters": "Set filters as default",
   "button_label_search": "Search",
