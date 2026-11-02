@@ -70,7 +70,9 @@ export const GET: RequestHandler = (event) => {
       return {
         profile,
         loadDetail: () =>
-          mirDetailQuery({ slug, year, month, fetch }).execute(),
+          mirDetailQuery({ slug, year, month, fetch })
+            .execute()
+            .catch(() => null),
       };
     },
     prepare: async ({ data: { profile, loadDetail }, timing }) => {
