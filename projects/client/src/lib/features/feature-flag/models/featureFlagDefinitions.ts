@@ -3,7 +3,6 @@ import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import FlagIcon from '$lib/components/icons/FlagIcon.svelte';
 import HourglassIcon from '$lib/components/icons/HourglassIcon.svelte';
-import MusicNoteIcon from '$lib/components/icons/MusicNoteIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
@@ -46,12 +45,6 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_rewatch(),
     addedAt: new Date('2026-06-19'),
     description: () => m.preview_feature_description_rewatch(),
-  },
-  [FeatureFlag.Soundtrack]: {
-    icon: MusicNoteIcon,
-    title: () => m.preview_feature_title_soundtrack(),
-    addedAt: new Date('2026-08-03'),
-    description: () => m.preview_feature_description_soundtrack(),
   },
   [FeatureFlag.LargeScreenCards]: {
     icon: CoverImageIcon,

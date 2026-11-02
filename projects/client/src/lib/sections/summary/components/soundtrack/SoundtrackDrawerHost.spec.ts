@@ -59,4 +59,18 @@ describe('SoundtrackDrawerHost', () => {
 
     expect(screen.queryByRole('switch')).not.toBeInTheDocument();
   });
+
+  it('should show the upsell without a track count to signed-out visitors', async () => {
+    setAuthorization(false);
+    renderDrawer();
+
+    expect(
+      await screen.findByText(
+        'Hear the score.',
+        {},
+        { timeout: SOUNDTRACK_TIMEOUT },
+      ),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/playable/)).not.toBeInTheDocument();
+  });
 });
