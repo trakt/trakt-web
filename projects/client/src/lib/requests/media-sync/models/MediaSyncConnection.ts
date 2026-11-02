@@ -10,6 +10,13 @@ export const MediaSyncLibrarySchema = z.object({
   itemCount: z.number().nullable(),
 });
 
+export const MediaSyncWebhookRefusalSchema = z.enum([
+  'unreadable_event',
+  'other_server',
+  'other_account',
+  'not_vip',
+]);
+
 export const MediaSyncConnectionSchema = z.object({
   id: z.number(),
   provider: z.enum(['plex', 'jellyfin']),
@@ -24,6 +31,8 @@ export const MediaSyncConnectionSchema = z.object({
   serverId: z.string(),
   serverName: z.string().nullable(),
   webhookUrl: z.string().nullable(),
+  webhookSeenAt: z.date().nullable(),
+  webhookRefusal: MediaSyncWebhookRefusalSchema.nullable(),
   accountName: z.string().nullable(),
   feeds: z.array(MediaSyncFeedSchema),
   libraries: z.array(MediaSyncLibrarySchema),
@@ -35,4 +44,7 @@ export const MediaSyncConnectionSchema = z.object({
 });
 
 export type MediaSyncLibrary = z.infer<typeof MediaSyncLibrarySchema>;
+export type MediaSyncWebhookRefusal = z.infer<
+  typeof MediaSyncWebhookRefusalSchema
+>;
 export type MediaSyncConnection = z.infer<typeof MediaSyncConnectionSchema>;

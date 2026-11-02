@@ -40,8 +40,8 @@ describe('toMediaServerWebhook', () => {
     ]);
 
     expect(result).toEqual([
-      { url: 'https://a', serverNames: ['A'] },
-      { url: 'https://b', serverNames: ['B'] },
+      { url: 'https://a', serverNames: ['A'], seenAt: null, refusal: null },
+      { url: 'https://b', serverNames: ['B'], seenAt: null, refusal: null },
     ]);
   });
 
@@ -52,8 +52,8 @@ describe('toMediaServerWebhook', () => {
     ]);
 
     expect(result).toEqual([
-      { url: 'https://a', serverNames: ['A'] },
-      { url: 'https://b', serverNames: ['B'] },
+      { url: 'https://a', serverNames: ['A'], seenAt: null, refusal: null },
+      { url: 'https://b', serverNames: ['B'], seenAt: null, refusal: null },
     ]);
   });
 
@@ -63,7 +63,14 @@ describe('toMediaServerWebhook', () => {
       { ...connection!, id: 8, serverName: 'B', webhookUrl: 'https://a' },
     ]);
 
-    expect(result).toEqual([{ url: 'https://a', serverNames: ['A', 'B'] }]);
+    expect(result).toEqual([
+      {
+        url: 'https://a',
+        serverNames: ['A', 'B'],
+        seenAt: null,
+        refusal: null,
+      },
+    ]);
   });
 
   it('labels active servers without a name instead of dropping them', () => {
@@ -71,7 +78,60 @@ describe('toMediaServerWebhook', () => {
       { ...connection!, serverName: null, webhookUrl: 'https://a' },
     ]);
 
-    expect(result).toEqual([{ url: 'https://a', serverNames: [UNNAMED] }]);
+    expect(result).toEqual([
+      { url: 'https://a', serverNames: [UNNAMED], seenAt: null, refusal: null },
+    ]);
+  });
+
+  it('carries when the last event arrived and why it was refused', () => {
+    const seenAt = new Date('2026-10-05T09:30:00.000Z');
+    const result = toPlexWebhooks([
+      {
+        ...connection!,
+        webhookUrl: 'https://a',
+        webhookSeenAt: seenAt,
+        webhookRefusal: 'other_server',
+      },
+    ]);
+
+    expect(result).toEqual([
+      {
+        url: 'https://a',
+        serverNames: ['Living Room'],
+        seenAt,
+        refusal: 'other_server',
+      },
+    ]);
+  });
+
+  it('takes the most recent event and its refusal when servers share an address', () => {
+    const older = new Date('2026-10-05T09:00:00.000Z');
+    const newer = new Date('2026-10-05T10:00:00.000Z');
+    const result = toPlexWebhooks([
+      {
+        ...connection!,
+        webhookUrl: 'https://a',
+        webhookSeenAt: older,
+        webhookRefusal: 'not_vip',
+      },
+      {
+        ...connection!,
+        id: 8,
+        webhookUrl: 'https://a',
+        webhookSeenAt: newer,
+        webhookRefusal: null,
+      },
+      { ...connection!, id: 9, webhookUrl: 'https://a' },
+    ]);
+
+    expect(result).toEqual([
+      {
+        url: 'https://a',
+        serverNames: ['Living Room', 'Living Room', 'Living Room'],
+        seenAt: newer,
+        refusal: null,
+      },
+    ]);
   });
 
   it('only reads connections of the requested provider', () => {
@@ -92,6 +152,13 @@ describe('toMediaServerWebhook', () => {
         provider: 'jellyfin',
         unnamedServer: UNNAMED,
       }),
-    ).toEqual([{ url: 'https://jellyfin', serverNames: ['Den'] }]);
+    ).toEqual([
+      {
+        url: 'https://jellyfin',
+        serverNames: ['Den'],
+        seenAt: null,
+        refusal: null,
+      },
+    ]);
   });
 });

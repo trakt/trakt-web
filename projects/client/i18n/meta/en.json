@@ -13855,6 +13855,30 @@
       "default": "Under user filter, pick your own Jellyfin user, then save.",
       "description": "Step 7 of the Jellyfin webhook setup."
     },
+    "text_jellyfin_webhook_status_never_received": {
+      "default": "Nothing received yet. Play something on Jellyfin to test it.",
+      "description": "Status line on the Jellyfin webhook card when no event has ever arrived for the address."
+    },
+    "text_jellyfin_webhook_status_working": {
+      "default": "Working. Last event {time}.",
+      "description": "Status line on the Jellyfin webhook card when events are being accepted. {time} is a relative time such as 5 minutes ago."
+    },
+    "text_jellyfin_webhook_status_unreadable_event": {
+      "default": "Jellyfin sent something Trakt can't read. Check that the destination is Generic Destination with Send All Properties on.",
+      "description": "Status line on the Jellyfin webhook card when the last event could not be read. Generic Destination and Send All Properties are names in the Jellyfin Webhook plugin."
+    },
+    "text_jellyfin_webhook_status_other_server": {
+      "default": "Events are coming from a different Jellyfin server. Copy this address into the server it belongs to.",
+      "description": "Status line on the Jellyfin webhook card when the last event came from a server other than the one this address belongs to."
+    },
+    "text_jellyfin_webhook_status_other_account": {
+      "default": "Events are coming from a different Jellyfin user. Set the user filter to your account.",
+      "description": "Status line on the Jellyfin webhook card when the last event came from a Jellyfin user other than the connected one. User filter is an option name in the Jellyfin Webhook plugin."
+    },
+    "text_jellyfin_webhook_status_not_vip": {
+      "default": "Webhooks are a VIP feature.",
+      "description": "Status line on the Jellyfin webhook card when the last event was refused because the member is not VIP."
+    },
     "page_title_mixtape": {
       "default": "Mixtape",
       "description": "Page title of the Mixtape page, where users pick watched titles and get three suggestions with the same feel. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."

@@ -6,6 +6,7 @@ import { InvalidateAction } from '../models/InvalidateAction.ts';
 import {
   type MediaSyncConnection,
   MediaSyncConnectionSchema,
+  MediaSyncWebhookRefusalSchema,
 } from './models/MediaSyncConnection.ts';
 import { MediaSyncFeedSchema } from './models/MediaSyncFeed.ts';
 
@@ -23,6 +24,8 @@ export const MediaSyncConnectionResponseSchema = z.object({
   server_id: z.string(),
   server_name: z.string().nullable(),
   webhook_url: z.string().nullish(),
+  webhook_seen_at: z.string().datetime().nullish().catch(undefined),
+  webhook_refusal: MediaSyncWebhookRefusalSchema.nullish().catch(undefined),
   account_name: z.string().nullable(),
   feeds: z.array(MediaSyncFeedSchema),
   libraries: z.array(
@@ -56,6 +59,11 @@ export function mapToMediaSyncConnection(
     serverId: connection.server_id,
     serverName: connection.server_name,
     webhookUrl: connection.webhook_url ?? null,
+    webhookSeenAt:
+      connection.webhook_seen_at == null
+        ? null
+        : new Date(connection.webhook_seen_at),
+    webhookRefusal: connection.webhook_refusal ?? null,
     accountName: connection.account_name,
     feeds: connection.feeds,
     libraries: connection.libraries.map((library) => ({

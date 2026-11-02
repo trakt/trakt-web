@@ -8,6 +8,8 @@ export const MediaSyncConnectionsMappedMock: MediaSyncConnection[] = [
     serverId: 'server-mock-1',
     serverName: 'Living Room',
     webhookUrl: 'https://sync.trakt.tv/webhooks/plex/mock-secret',
+    webhookSeenAt: null,
+    webhookRefusal: null,
     accountName: 'mock-user',
     feeds: ['history', 'ratings', 'collection', 'watchlist'],
     libraries: [
@@ -42,6 +44,8 @@ export const MediaSyncConnectionsMappedMock: MediaSyncConnection[] = [
     serverName: 'Den',
     webhookUrl:
       'https://sync.trakt.tv/webhooks/jellyfin/0123456789abcdef0123456789abcdef',
+    webhookSeenAt: new Date('2026-10-05T09:30:00.000Z'),
+    webhookRefusal: null,
     accountName: 'mock-user',
     feeds: ['history'],
     libraries: [],
