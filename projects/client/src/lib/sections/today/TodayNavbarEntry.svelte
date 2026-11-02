@@ -104,6 +104,7 @@
       content={tooltip}
       side="bottom"
       sideOffset={10}
+      collisionPadding={24}
       disabled={!$isMouse}
     >
       <Link

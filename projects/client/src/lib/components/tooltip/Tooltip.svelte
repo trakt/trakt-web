@@ -10,6 +10,7 @@
     side = "top",
     delayDuration = 150,
     sideOffset = 8,
+    collisionPadding = 0,
     disabled = false,
     disableHoverableContent = false,
     openOnTap = false,
@@ -50,7 +51,12 @@
       {/snippet}
     </Tooltip.Trigger>
     <Tooltip.Portal>
-      <Tooltip.Content class={tooltipClass} {side} {sideOffset}>
+      <Tooltip.Content
+        class={tooltipClass}
+        {side}
+        {sideOffset}
+        {collisionPadding}
+      >
         {#if typeof content === "function"}
           {@render content()}
         {:else if variant === "default"}
