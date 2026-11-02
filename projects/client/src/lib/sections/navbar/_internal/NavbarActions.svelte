@@ -61,6 +61,7 @@
   <div class="trakt-navbar-actions-right">
     <RenderFor audience="authenticated">
       {#if !$isEditMode}
+        {@render $state.entryLeadingActions?.()}
         <NavbarEntryStack />
         {@render $state.headerActions?.()}
         {#if $state.showFilters}

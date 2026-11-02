@@ -22,6 +22,7 @@ type NavbarState = {
   showFilters: boolean;
   smartListTarget: ListTarget | Nil;
   headerActions?: Snippet;
+  entryLeadingActions?: Snippet;
   header?: NavbarHeaderState;
   sidebar: {
     mode: 'default' | 'fixed';
@@ -48,6 +49,7 @@ const initialNavbarState: NavbarState = {
   showFilters: true,
   smartListTarget: undefined,
   headerActions: undefined,
+  entryLeadingActions: undefined,
   header: undefined,
   sidebar: {
     mode: 'default',

@@ -14,6 +14,7 @@
     showFilters,
     smartListTarget,
     headerActions,
+    entryLeadingActions,
     header,
     sidebar,
   }: NavbarStateSetterProps = $props();
@@ -29,6 +30,7 @@
       showFilters,
       smartListTarget,
       headerActions,
+      entryLeadingActions,
       header,
       sidebar,
     });

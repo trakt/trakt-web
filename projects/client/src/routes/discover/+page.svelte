@@ -50,7 +50,7 @@
   <SeasonalDiscoverDelight />
 
   <NavbarStateSetter contentToggle="discover" hasFilters={!$seasonalFilterTheme}>
-    {#snippet headerActions()}
+    {#snippet entryLeadingActions()}
       <SeasonalToggle />
     {/snippet}
   </NavbarStateSetter>
