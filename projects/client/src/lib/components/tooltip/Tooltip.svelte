@@ -7,6 +7,7 @@
     children,
     content,
     variant = "default",
+    width = "default",
     side = "top",
     delayDuration = 150,
     sideOffset = 8,
@@ -46,7 +47,12 @@
       {/snippet}
     </Tooltip.Trigger>
     <Tooltip.Portal>
-      <Tooltip.Content class={tooltipClass} {side} {sideOffset}>
+      <Tooltip.Content
+        class={tooltipClass}
+        data-width={width}
+        {side}
+        {sideOffset}
+      >
         {#if typeof content === "function"}
           {@render content()}
         {:else if variant === "default"}
@@ -75,6 +81,10 @@
     padding: var(--ni-10) var(--ni-12);
 
     @include floating-surface($radius: var(--border-radius-menu-item));
+  }
+
+  :global(.trakt-tooltip[data-width="content"]) {
+    max-width: var(--bits-floating-available-width, 100vw);
   }
 
   :global(.trakt-tooltip-compact) {

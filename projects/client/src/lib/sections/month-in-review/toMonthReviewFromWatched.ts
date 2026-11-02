@@ -2,9 +2,9 @@ import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistor
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { getDayKey } from '$lib/utils/date/getDayKey.ts';
 import { toMediaImageUrl } from '$lib/utils/url/toMediaImageUrl.ts';
-import type { MonthReview } from '../models/MonthReview.ts';
-import type { MonthReviewTitle } from '../models/MonthReviewTitle.ts';
-import { toMonthRange } from './toMonthRange.ts';
+import type { MonthReview } from './_internal/models/MonthReview.ts';
+import type { MonthReviewTitle } from './_internal/models/MonthReviewTitle.ts';
+import { toMonthRange } from './_internal/data/toMonthRange.ts';
 
 type ToMonthReviewFromWatchedParams = {
   history: UserHistory;

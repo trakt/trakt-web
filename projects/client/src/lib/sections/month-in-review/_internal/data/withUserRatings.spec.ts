@@ -1,6 +1,6 @@
 import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
 import { describe, expect, it } from 'vitest';
-import { toMonthReviewFromWatched } from './toMonthReviewFromWatched.ts';
+import { toMonthReviewFromWatched } from '$lib/sections/month-in-review/toMonthReviewFromWatched.ts';
 import { withUserRatings } from './withUserRatings.ts';
 
 const watchedAt = new Date(2026, 9, 4);

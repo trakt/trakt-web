@@ -27,6 +27,9 @@
 >
   <div class="trakt-navbar-actions-left">
     <NavbarHeader />
+    {#if !$isEditMode}
+      {@render $state.leadingActions?.()}
+    {/if}
   </div>
 
   <div class="trakt-navbar-actions-center">
@@ -177,6 +180,9 @@
   }
 
   .trakt-navbar-actions-left {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
     min-width: 0;
   }
 
