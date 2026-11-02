@@ -385,6 +385,15 @@ export const UrlBuilder = {
     profileShareableImagePath: () => PROFILE_SHAREABLE_IMAGE_PATH,
     profileShareableImage: (slug: string) =>
       `${PROFILE_SHAREABLE_IMAGE_PATH}/${slug}`,
+    mirShareableImage: ({
+      slug,
+      year,
+      month,
+    }: {
+      slug: string;
+      year: number;
+      month: number;
+    }) => `/users/${slug}/mir.jpg?year=${year}&month=${month}&shape=og`,
     trendingShareableImage: (type: 'movie' | 'show') => {
       const basePath = `${TRENDING_SHAREABLE_IMAGE_PATH}?type=${type}`;
       return {

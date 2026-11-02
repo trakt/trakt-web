@@ -16,6 +16,22 @@ describe('util: isOpenGraphShareImage', () => {
     ).toBe(true);
   });
 
+  it('should match a month in review link preview image', () => {
+    expect(
+      isOpenGraphShareImage(
+        toUrl('/users/sean/mir.jpg?year=2026&month=10&shape=og'),
+      ),
+    ).toBe(true);
+  });
+
+  it('should not match the square or story month in review images', () => {
+    expect(
+      isOpenGraphShareImage(
+        toUrl('/users/sean/mir.jpg?year=2026&month=10&shape=story'),
+      ),
+    ).toBe(false);
+  });
+
   it('should not match other images', () => {
     expect(isOpenGraphShareImage(toUrl('/assets/cover.jpg'))).toBe(false);
   });
