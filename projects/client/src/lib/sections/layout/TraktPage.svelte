@@ -16,7 +16,7 @@
   import { isNoIndexPath } from "./_internal/isNoIndexPath.ts";
   import type { MediaInfo } from "./_internal/MediaInfo.ts";
   import { openGraphUrlBuilder } from "./_internal/openGraphUrlBuilder";
-  import { isTrendingShareImage } from "./_internal/isTrendingShareImage.ts";
+  import { isOpenGraphShareImage } from "./_internal/isOpenGraphShareImage.ts";
   import { stampShareDate } from "./_internal/stampShareDate.ts";
 
   type TraktPageProps = {
@@ -175,7 +175,7 @@
 
   const isMediaPage = $derived(type === "movie" || type === "show");
   const hasOpenGraphDimensions = $derived(
-    isMediaPage || isTrendingShareImage(new URL(image)),
+    isMediaPage || isOpenGraphShareImage(new URL(image)),
   );
 
   const createWebsiteLd = (url: string) => {

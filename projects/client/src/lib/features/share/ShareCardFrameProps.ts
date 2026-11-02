@@ -4,7 +4,9 @@ import type { ShareType } from './models/ShareType.ts';
 
 export type ShareCardFrameProps = {
   variant: ShareType;
-  colors: MediaEntry['colors'];
+  colors?: MediaEntry['colors'];
   backdropWidthRatio?: number;
+  backdrop?: Snippet;
+  hasWatermark?: boolean;
   children: Snippet;
 };

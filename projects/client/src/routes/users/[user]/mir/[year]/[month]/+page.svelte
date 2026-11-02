@@ -5,7 +5,7 @@
   import MonthInReviewPage from "$lib/sections/month-in-review/MonthInReviewPage.svelte";
   import ReviewRouteLayout from "$lib/sections/yir/ReviewRouteLayout.svelte";
   import MirPage from "$lib/sections/yir/MirPage.svelte";
-  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
 
   const { params }: PageProps = $props();
@@ -17,7 +17,11 @@
 <ReviewRouteLayout
   user={params.user}
   title={m.page_title_month_in_review()}
-  image={DEFAULT_SHARE_COVER}
+  image={UrlBuilder.api.mirShareableImage({
+    slug: params.user,
+    year,
+    month,
+  })}
 >
   <RenderForFeature
     flag={FeatureFlag.MonthInReviewRedesign}

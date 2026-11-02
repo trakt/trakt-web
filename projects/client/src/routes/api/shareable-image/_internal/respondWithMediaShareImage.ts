@@ -12,6 +12,7 @@ import { buildImageMetadata } from './buildImageMetadata.ts';
 import { buildImagePath } from './buildImagePath.ts';
 import { createServerTiming } from './createServerTiming.ts';
 import { fetchMediaData } from './fetchMediaData.ts';
+import { fetchWithoutAuthorization } from './fetchWithoutAuthorization.ts';
 import { fetchWithUserAgent } from './fetchWithUserAgent.ts';
 import { loadFallbackShareFonts } from './loadFallbackShareFonts.ts';
 import { loadPosterImages } from './loadPosterImages.ts';
@@ -103,10 +104,12 @@ export async function respondWithMediaShareImage({
       })),
   );
 
-  const fetchFn = fetchWithUserAgent({
-    userAgent: request.headers.get('user-agent'),
-    fetch,
-  });
+  const fetchFn = fetchWithoutAuthorization(
+    fetchWithUserAgent({
+      userAgent: request.headers.get('user-agent'),
+      fetch,
+    }),
+  );
 
   const mediaDataRequest = timing.measure('data', () =>
     fetchMediaData({
