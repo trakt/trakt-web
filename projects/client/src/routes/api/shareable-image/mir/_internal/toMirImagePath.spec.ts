@@ -25,6 +25,18 @@ describe('util: toMirImagePath', () => {
     );
   });
 
+  it('should zero-pad the month so folders sort in order', async () => {
+    expect(
+      await toMirImagePath({
+        shape: 'cover',
+        slug: 'sean',
+        year: 2026,
+        month: 1,
+        user,
+      }),
+    ).toContain('/sean/2026-01/');
+  });
+
   it('should change when the avatar or name changes', async () => {
     expect(
       await toPath({ avatarUrl: 'https://media.trakt.tv/new.png' }),

@@ -18,6 +18,7 @@ export async function toMirImagePath({
   user,
 }: ToMirImagePathProps): Promise<string> {
   const { current } = versionedShareImagePrefix('mir');
+  const period = `${year}-${String(month).padStart(2, '0')}`;
 
-  return `${current}${shape}/${slug}/${year}-${month}/${await toContentHash(user)}.jpg`;
+  return `${current}${shape}/${slug}/${period}/${await toContentHash(user)}.jpg`;
 }
