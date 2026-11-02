@@ -1,9 +1,11 @@
 import type { ShareType } from '$lib/features/share/models/ShareType.ts';
 import { error } from '$lib/utils/console/print.ts';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import { IS_DEV } from '$lib/utils/env/index.ts';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { ImageSource } from '@takumi-rs/wasm';
 import { createServerTiming } from './createServerTiming.ts';
+import { fetchWithoutAuthorization } from './fetchWithoutAuthorization.ts';
 import { fetchWithUserAgent } from './fetchWithUserAgent.ts';
 import { loadFallbackShareFonts } from './loadFallbackShareFonts.ts';
 import { loadShareFonts } from './loadShareFonts.ts';
@@ -14,6 +16,7 @@ type ServerTiming = ReturnType<typeof createServerTiming>;
 type ShareCardInput = {
   html: string;
   images: ImageSource[];
+  isComplete?: boolean;
 };
 
 export type ShareStepProps<T> = {
@@ -24,8 +27,11 @@ export type ShareStepProps<T> = {
 type RespondWithShareImageProps<T> = {
   event: Pick<RequestEvent, 'request' | 'url' | 'fetch' | 'platform'>;
   shareType: ShareType;
-  /** R2 key for the rendered image, or null to skip the bucket cache. */
-  imagePath: string | null;
+  /**
+   * R2 key for the rendered image, or null to skip the bucket cache. A
+   * resolver keys the image on its data, at the cost of loading it first.
+   */
+  imagePath: string | null | ((data: T) => Promise<string>);
   cacheControl: string;
   loadData: (props: {
     fetch: typeof globalThis.fetch;
@@ -66,20 +72,24 @@ export async function respondWithShareImage<T>({
 
   const bucket = !IS_DEV && imagePath ? platform?.env?.R2_WALTER : null;
 
-  if (bucket && imagePath) {
-    const cachedImage = await timing.measure('cache', () =>
-      bucket.get(imagePath),
-    );
-    if (cachedImage) {
-      /*
-        Cast needed due to structural mismatch between Cloudflare's ReadableStream
-        and the DOM ReadableStream, they're the same at runtime.
-      */
-      return new Response(cachedImage.body as unknown as BodyInit, {
-        headers: responseHeaders(),
-      });
-    }
-  }
+  const readCachedImage = async (path: string) => {
+    if (!bucket) return null;
+
+    const cachedImage = await timing.measure('cache', () => bucket.get(path));
+    if (!cachedImage) return null;
+
+    /*
+      Cast needed due to structural mismatch between Cloudflare's ReadableStream
+      and the DOM ReadableStream, they're the same at runtime.
+    */
+    return new Response(cachedImage.body as unknown as BodyInit, {
+      headers: responseHeaders(),
+    });
+  };
+
+  const cachedByPath =
+    typeof imagePath === 'string' ? await readCachedImage(imagePath) : null;
+  if (cachedByPath) return cachedByPath;
 
   const fontsRequest = timing.measure(
     'fonts',
@@ -90,31 +100,49 @@ export async function respondWithShareImage<T>({
         return [];
       })),
   );
+  fontsRequest.catch(NOOP_FN);
 
-  const dataRequest = timing.measure('data', () =>
+  const data = await timing.measure('data', () =>
     loadData({
-      fetch: fetchWithUserAgent({
-        userAgent: request.headers.get('user-agent'),
-        fetch,
-      }),
+      fetch: fetchWithoutAuthorization(
+        fetchWithUserAgent({
+          userAgent: request.headers.get('user-agent'),
+          fetch,
+        }),
+      ),
       timing,
     }).catch(() => null),
   );
-
-  const [data, fonts] = await Promise.all([dataRequest, fontsRequest]);
 
   if (!data) {
     return new Response('Data not found', { status: 404 });
   }
 
-  const toBuffer = async ({ html, images }: ShareCardInput) =>
-    renderShareCard({
+  const resolvedPath =
+    typeof imagePath === 'function' ? await imagePath(data) : imagePath;
+
+  const cachedByData =
+    typeof imagePath === 'function' && resolvedPath
+      ? await readCachedImage(resolvedPath)
+      : null;
+  if (cachedByData) return cachedByData;
+
+  const fonts = await fontsRequest;
+
+  const toBuffer = async ({
+    html,
+    images,
+    isComplete = true,
+  }: ShareCardInput) => ({
+    buffer: await renderShareCard({
       html,
       variant: shareType,
       fonts,
       images,
       debug: IS_DEV && url.searchParams.get('debug') === 'true',
-    });
+    }),
+    isComplete,
+  });
 
   const renderWithFallback = () =>
     prepare({ data, timing })
@@ -129,11 +157,11 @@ export async function respondWithShareImage<T>({
       });
 
   try {
-    const buffer = await renderWithFallback();
+    const { buffer, isComplete } = await renderWithFallback();
 
-    if (bucket && imagePath) {
+    if (bucket && resolvedPath && isComplete) {
       const cached = bucket
-        .put(imagePath, buffer, {
+        .put(resolvedPath, buffer, {
           httpMetadata: { contentType: 'image/jpeg' },
           customMetadata: buildMetadata?.(data) ?? {
             cachedAt: new Date().toISOString(),

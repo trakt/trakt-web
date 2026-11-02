@@ -8,8 +8,8 @@
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
   import Profile from "$lib/sections/profile/Profile.svelte";
-  import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
   import { useProfile } from "./useProfile";
 
@@ -38,7 +38,7 @@
 
 <TraktPage
   audience="all"
-  image={DEFAULT_SHARE_COVER}
+  image={UrlBuilder.api.profileShareableImage(params.slug)}
   {title}
   hasDynamicContent={true}
   filterScope="global"

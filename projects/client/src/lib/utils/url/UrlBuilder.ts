@@ -100,6 +100,7 @@ const listsDrilldownFactory = (user: string) => (type: PersonalListType) =>
   `/users/${user}/lists/view/${type}`;
 
 const TRENDING_SHAREABLE_IMAGE_PATH = '/api/shareable-image/trending';
+const PROFILE_SHAREABLE_IMAGE_PATH = '/api/shareable-image/profile';
 
 const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
   if (username) {
@@ -381,6 +382,9 @@ export const UrlBuilder = {
       };
     },
     trendingShareableImagePath: () => TRENDING_SHAREABLE_IMAGE_PATH,
+    profileShareableImagePath: () => PROFILE_SHAREABLE_IMAGE_PATH,
+    profileShareableImage: (slug: string) =>
+      `${PROFILE_SHAREABLE_IMAGE_PATH}/${slug}`,
     trendingShareableImage: (type: 'movie' | 'show') => {
       const basePath = `${TRENDING_SHAREABLE_IMAGE_PATH}?type=${type}`;
       return {
