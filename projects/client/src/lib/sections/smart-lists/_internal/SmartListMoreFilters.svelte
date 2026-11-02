@@ -6,8 +6,7 @@
   type RangeKey =
     | "tmdb_ratings"
     | "letterboxd_ratings"
-    | "mal_ratings"
-    | "metascores";
+    | "mal_ratings";
 
   type ToggleKey =
     | "ignore_watching"
@@ -49,13 +48,6 @@
       range: { min: 0, max: 10 },
       step: 0.5,
       ticks: 6,
-    },
-    {
-      key: "metascores",
-      label: "Metascore",
-      range: { min: 0, max: 100 },
-      step: 5,
-      ticks: 5,
     },
   ];
 
