@@ -1,5 +1,6 @@
 <script lang="ts">
   import VipBadgeContent from "./_internal/VipBadgeContent.svelte";
+  import { toVipBadgeLabel } from "./toVipBadgeLabel.ts";
 
   const {
     isDirector = false,
@@ -8,5 +9,5 @@
 </script>
 
 <VipBadgeContent {size}>
-  {isDirector ? "DIRECTOR" : "VIP"}
+  {toVipBadgeLabel({ isDirector })}
 </VipBadgeContent>

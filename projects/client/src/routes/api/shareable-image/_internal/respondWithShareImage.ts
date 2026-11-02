@@ -19,7 +19,7 @@ type ShareCardInput = {
   isComplete?: boolean;
 };
 
-export type ShareStepProps<T> = {
+type ShareStepProps<T> = {
   data: T;
   timing: ServerTiming;
 };
@@ -29,13 +29,13 @@ type RespondWithShareImageProps<T> = {
   shareType: ShareType;
   imagePath: string | null | ((data: T) => Promise<string>);
   cacheControl: string;
+  isFresh?: (cachedAt: Date) => boolean;
+  toRedirect?: (data: T) => string | null;
   loadData: (props: {
     fetch: typeof globalThis.fetch;
     timing: ServerTiming;
   }) => Promise<T | null>;
-  prepare: (props: ShareStepProps<T>) => Promise<ShareCardInput>;
-  prepareFallback?: (props: ShareStepProps<T>) => Promise<ShareCardInput>;
-  buildMetadata?: (data: T) => Record<string, string>;
+  prepare: (props: ShareStepProps<T>) => Promise<ShareCardInput | null>;
 };
 
 export async function respondWithShareImage<T>({
@@ -43,10 +43,10 @@ export async function respondWithShareImage<T>({
   shareType,
   imagePath,
   cacheControl,
+  isFresh,
+  toRedirect,
   loadData,
   prepare,
-  prepareFallback,
-  buildMetadata,
 }: RespondWithShareImageProps<T>): Promise<Response> {
   const { request, url, fetch, platform } = event;
 
@@ -74,6 +74,12 @@ export async function respondWithShareImage<T>({
     const cachedImage = await timing.measure('cache', () => bucket.get(path));
     if (!cachedImage) return null;
 
+    const cachedAt = new Date(cachedImage.customMetadata?.cachedAt ?? '');
+    if (isFresh && !isFresh(cachedAt)) {
+      await cachedImage.body.cancel();
+      return null;
+    }
+
     /*
       Cast needed due to structural mismatch between Cloudflare's ReadableStream
       and the DOM ReadableStream, they're the same at runtime.
@@ -87,16 +93,20 @@ export async function respondWithShareImage<T>({
     typeof imagePath === 'string' ? await readCachedImage(imagePath) : null;
   if (cachedByPath) return cachedByPath;
 
-  const fontsRequest = timing.measure(
-    'fonts',
-    async () =>
-      (await loadShareFonts({ bucket: platform?.env?.R2_WALTER })) ??
-      (await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
-        error('Failed to load fallback share fonts:', e);
-        return [];
-      })),
-  );
-  fontsRequest.catch(NOOP_FN);
+  const loadFonts = () =>
+    timing.measure(
+      'fonts',
+      async () =>
+        (await loadShareFonts({ bucket: platform?.env?.R2_WALTER })) ??
+        (await loadFallbackShareFonts(globalThis.fetch).catch((e: unknown) => {
+          error('Failed to load fallback share fonts:', e);
+          return [];
+        })),
+    );
+
+  const earlyFontsRequest =
+    typeof imagePath === 'function' ? null : loadFonts();
+  earlyFontsRequest?.catch(NOOP_FN);
 
   const data = await timing.measure('data', () =>
     loadData({
@@ -114,6 +124,14 @@ export async function respondWithShareImage<T>({
     return new Response('Data not found', { status: 404 });
   }
 
+  const redirectUrl = toRedirect?.(data);
+  if (redirectUrl) {
+    return new Response(null, {
+      status: 302,
+      headers: { Location: redirectUrl },
+    });
+  }
+
   const resolvedPath =
     typeof imagePath === 'function' ? await imagePath(data) : imagePath;
 
@@ -123,45 +141,39 @@ export async function respondWithShareImage<T>({
       : null;
   if (cachedByData) return cachedByData;
 
-  const fonts = await fontsRequest;
+  const fonts = await (earlyFontsRequest ?? loadFonts());
 
-  const toBuffer = async ({
-    html,
-    images,
-    isComplete = true,
-  }: ShareCardInput) => ({
-    buffer: await renderShareCard({
-      html,
-      variant: shareType,
-      fonts,
-      images,
-      debug: IS_DEV && url.searchParams.get('debug') === 'true',
-    }),
-    isComplete,
-  });
+  const toBuffer = async (input: ShareCardInput | null) => {
+    if (!input) return null;
 
-  const renderWithFallback = () =>
-    prepare({ data, timing })
-      .then(toBuffer)
-      .catch((e: unknown) => {
-        if (!prepareFallback) {
-          throw e;
-        }
+    const { html, images, isComplete = true } = input;
 
-        error('Failed to render the share card, using the fallback:', e);
-        return prepareFallback({ data, timing }).then(toBuffer);
-      });
+    return {
+      buffer: await renderShareCard({
+        html,
+        variant: shareType,
+        fonts,
+        images,
+        debug: IS_DEV && url.searchParams.get('debug') === 'true',
+      }),
+      isComplete,
+    };
+  };
 
   try {
-    const { buffer, isComplete } = await renderWithFallback();
+    const rendered = await prepare({ data, timing }).then(toBuffer);
+
+    if (!rendered) {
+      return new Response('Data not found', { status: 404 });
+    }
+
+    const { buffer, isComplete } = rendered;
 
     if (bucket && resolvedPath && isComplete) {
       const cached = bucket
         .put(resolvedPath, buffer, {
           httpMetadata: { contentType: 'image/jpeg' },
-          customMetadata: buildMetadata?.(data) ?? {
-            cachedAt: new Date().toISOString(),
-          },
+          customMetadata: { cachedAt: new Date().toISOString() },
         })
         .catch((e: unknown) => error('Failed to cache image in R2:', e));
 
