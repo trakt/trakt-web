@@ -23,16 +23,28 @@ export function toMediaServerWebhook({
           {
             url: connection.webhookUrl,
             serverName: connection.serverName || unnamedServer,
+            seenAt: connection.webhookSeenAt,
+            refusal: connection.webhookRefusal,
           },
         ]
       : [],
   );
   const urls = [...new Set(addressed.map(({ url }) => url))];
 
-  return urls.map((url) => ({
-    url,
-    serverNames: addressed
-      .filter((entry) => entry.url === url)
-      .map(({ serverName }) => serverName),
-  }));
+  return urls.map((url) => {
+    const entries = addressed.filter((entry) => entry.url === url);
+    const latest = entries.reduce((best, entry) =>
+      (entry.seenAt?.getTime() ?? -Infinity) >
+      (best.seenAt?.getTime() ?? -Infinity)
+        ? entry
+        : best,
+    );
+
+    return {
+      url,
+      serverNames: entries.map(({ serverName }) => serverName),
+      seenAt: latest.seenAt,
+      refusal: latest.refusal,
+    };
+  });
 }

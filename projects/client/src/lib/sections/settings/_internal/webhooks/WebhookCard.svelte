@@ -2,8 +2,11 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import Button from "$lib/components/buttons/Button.svelte";
+  import { getLocale } from "$lib/features/i18n/index.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { MediaSyncWebhookRefusal } from "$lib/requests/media-sync/models/MediaSyncConnection.ts";
   import { copyToClipboard } from "$lib/utils/clipboard/copyToClipboard.ts";
+  import { toHumanTimeAgo } from "$lib/utils/formatting/date/toHumanTimeAgo.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { onDestroy } from "svelte";
   import SettingsGroupCard from "../SettingsGroupCard.svelte";
@@ -12,6 +15,12 @@
   import type { WebhookCardProps } from "./WebhookCardProps.ts";
 
   const COPIED_RESET_DURATION = time.seconds(2);
+  const REFUSAL_TEXT: Record<MediaSyncWebhookRefusal, () => string> = {
+    unreadable_event: m.text_jellyfin_webhook_status_unreadable_event,
+    other_server: m.text_jellyfin_webhook_status_other_server,
+    other_account: m.text_jellyfin_webhook_status_other_account,
+    not_vip: m.text_jellyfin_webhook_status_not_vip,
+  };
 
   const {
     provider,
@@ -22,6 +31,28 @@
     instructions,
   }: WebhookCardProps = $props();
   const { track } = useTrack(AnalyticsEvent.CopyWebhook);
+
+  const status = $derived.by(() => {
+    if (provider !== "jellyfin") return null;
+
+    if (webhook.refusal) {
+      return { text: REFUSAL_TEXT[webhook.refusal](), isWarning: true };
+    }
+
+    if (!webhook.seenAt) {
+      return {
+        text: m.text_jellyfin_webhook_status_never_received(),
+        isWarning: false,
+      };
+    }
+
+    return {
+      text: m.text_jellyfin_webhook_status_working({
+        time: toHumanTimeAgo(new Date(), webhook.seenAt, getLocale()),
+      }),
+      isWarning: false,
+    };
+  });
 
   let isCopied = $state(false);
   const copyLabel = $derived(
@@ -73,6 +104,15 @@
         {copyLabel}
       </Button>
     </div>
+    {#if status}
+      <p
+        class="webhook-status small"
+        class:secondary={!status.isWarning}
+        data-warning={status.isWarning}
+      >
+        {status.text}
+      </p>
+    {/if}
     {@render instructions?.()}
   </SettingsGroupCard>
 </div>
@@ -86,6 +126,15 @@
       min-width: 0;
 
       padding: var(--gap-s) var(--gap-m);
+    }
+
+    .webhook-status {
+      margin: 0;
+      padding: 0 var(--gap-m) var(--gap-s);
+
+      &[data-warning="true"] {
+        color: var(--orange-500);
+      }
     }
 
     .value {

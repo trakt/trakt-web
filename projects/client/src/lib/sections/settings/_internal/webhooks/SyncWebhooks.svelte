@@ -2,14 +2,30 @@
   import JellyfinLogo from "$lib/components/icons/JellyfinLogo.svelte";
   import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useInvalidator } from "$lib/stores/useInvalidator.ts";
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import { mediaSyncConnectionsQuery } from "$lib/requests/media-sync/mediaSyncConnectionsQuery.ts";
+  import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
+  import { time } from "$lib/utils/timing/time.ts";
   import { map } from "rxjs";
+  import { onMount } from "svelte";
   import JellyfinWebhookSteps from "./JellyfinWebhookSteps.svelte";
   import { toMediaServerWebhook } from "./toMediaServerWebhook.ts";
   import WebhookCard from "./WebhookCard.svelte";
 
+  const STATUS_POLL_INTERVAL = time.seconds(30);
+
   const query = useQuery(mediaSyncConnectionsQuery({}));
+  const { invalidate } = useInvalidator();
+
+  onMount(() => {
+    const timer = setInterval(() => {
+      if (document.visibilityState !== "visible") return;
+      invalidate(InvalidateAction.MediaSync.Connections);
+    }, STATUS_POLL_INTERVAL);
+
+    return () => clearInterval(timer);
+  });
   const plexWebhooks = query.pipe(
     map(({ data }) =>
       toMediaServerWebhook({
