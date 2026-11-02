@@ -14543,7 +14543,7 @@
     },
     "text_mixtape_pick_count": {
       "default": "{count} picked",
-      "description": "How many titles are picked on the Mixtape page. {count} is a number from 1 to 5."
+      "description": "How many titles are picked on the Mixtape page. {count} is a number from 1 to 3."
     },
     "button_text_mix_it": {
       "default": "Mix it",
@@ -14591,7 +14591,7 @@
     },
     "text_mixtape_deck_prompt_movies": {
       "default": "Pick up to {max} movies you loved",
-      "description": "Line under the Mixtape title in the page header while picking movies. {max} is how many slots the deck has (5).",
+      "description": "Line under the Mixtape title in the page header while picking movies. {max} is how many slots the deck has (3).",
       "variables": {
         "max": {
           "type": "number",
@@ -14602,7 +14602,7 @@
     },
     "text_mixtape_deck_prompt_shows": {
       "default": "Pick up to {max} shows you loved",
-      "description": "Line under the Mixtape title in the page header while picking shows. {max} is how many slots the deck has (5).",
+      "description": "Line under the Mixtape title in the page header while picking shows. {max} is how many slots the deck has (3).",
       "variables": {
         "max": {
           "type": "number",
@@ -14667,7 +14667,7 @@
     },
     "text_mixtape_deck_count": {
       "default": "{count}/{max}",
-      "description": "Small counter inside the Mix it button. {count} is how many titles are picked, {max} is the size of the deck (5).",
+      "description": "Small counter inside the Mix it button. {count} is how many titles are picked, {max} is the size of the deck (3).",
       "variables": {
         "count": {
           "type": "number",
@@ -14683,7 +14683,7 @@
     },
     "button_label_mixtape_empty_slot": {
       "default": "Empty slot {number}",
-      "description": "Accessible name of a free slot in the Mixtape deck. {number} is the slot position, 1 to 5.",
+      "description": "Accessible name of a free slot in the Mixtape deck. {number} is the slot position, 1 to 3.",
       "variables": {
         "number": {
           "type": "number",

@@ -32,7 +32,7 @@ describe('parseMixtapeParams', () => {
   });
 
   it('should drop junk and duplicate ids and keep at most five picks', () => {
-    expect(parse('picks=1,1,x,-3,0,2,3,4,5,6').picks).toEqual([1, 2, 3, 4, 5]);
+    expect(parse('picks=1,1,x,-3,0,2,3,4,5,6').picks).toEqual([1, 2, 3]);
   });
 
   it('should stay on the picker when results are asked for without picks', () => {

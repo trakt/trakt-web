@@ -32,7 +32,7 @@ describe('toMixAction', () => {
 
   it('should hold while mixing', () => {
     const action = toMixAction({
-      params: params('type=movie&picks=1,2,3,4,5&view=results'),
+      params: params('type=movie&picks=1,2,3&view=results'),
       isMixing: true,
     });
 

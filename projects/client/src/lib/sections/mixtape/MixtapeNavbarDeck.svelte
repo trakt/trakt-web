@@ -654,7 +654,7 @@
       }
 
       .deck-slots {
-        justify-content: space-between;
+        justify-content: space-evenly;
       }
 
       .deck-slot-number {
