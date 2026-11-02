@@ -13811,6 +13811,10 @@
       "default": "Jellyfin",
       "description": "Brand name of the Jellyfin media server, used as a card title."
     },
+    "label_sync_webhooks_server_count_one": {
+      "default": "1 server",
+      "description": "Pill on a media server webhook card when the address covers a single server."
+    },
     "label_sync_webhooks_server_count": {
       "default": "{count} servers",
       "description": "Pill on a media server webhook card showing how many servers the address covers. {count} is the number of servers."
@@ -13820,7 +13824,7 @@
       "description": "Instructions on the Plex webhook card. {servers} is a comma separated list of the user's Plex server names."
     },
     "description_sync_webhooks_jellyfin_setup": {
-      "default": "Trakt shows what you're watching right now, and your library syncs a few minutes after you finish something. Set it up once in the Jellyfin Webhook plugin. It covers {servers}.",
+      "default": "Trakt shows what you're watching right now and adds it to your history as soon as you finish. Set it up once in the Jellyfin Webhook plugin. It covers {servers}.",
       "description": "Instructions on the Jellyfin webhook card. {servers} is a comma separated list of the user's Jellyfin server names. Webhook is the name of a Jellyfin plugin."
     },
     "header_jellyfin_webhook_steps": {

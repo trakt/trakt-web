@@ -70,6 +70,15 @@ describe('WebhookCard', () => {
     expect(track).not.toHaveBeenCalled();
   });
 
+  it.each([
+    [['Home'], '1 server'],
+    [['Home', 'Cabin'], '2 servers'],
+  ])('should count %j as %s', async (serverNames, label) => {
+    renderCard('plex', { serverNames });
+
+    expect(await screen.findByText(label)).toBeInTheDocument();
+  });
+
   it('should say nothing was received yet on a jellyfin card', async () => {
     renderCard('jellyfin');
 
