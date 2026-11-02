@@ -6,54 +6,18 @@
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { MAX_MIXTAPE_PICKS } from "./_internal/MAX_MIXTAPE_PICKS.ts";
   import { parseMixtapeParams } from "./_internal/parseMixtapeParams.ts";
-  import { toMixState } from "./_internal/toMixState.ts";
+  import { toMixAction } from "./_internal/toMixAction.ts";
   import { useMixtapeSession } from "./_internal/useMixtapeSession.ts";
 
   const { session } = useMixtapeSession();
   const { track } = useTrack(AnalyticsEvent.MixtapeMix);
 
   const params = $derived(parseMixtapeParams(page.url.searchParams));
-  const count = $derived(params.picks.length);
-  const state = $derived(
-    toMixState({
-      count,
-      max: MAX_MIXTAPE_PICKS,
-      view: params.view,
-      isMixing: $session.isMixing,
-    }),
+  const action = $derived(
+    toMixAction({ params, isMixing: $session.isMixing }),
   );
-
-  const href = $derived.by(() => {
-    const base = {
-      type: params.type,
-      picks: params.picks,
-      source: params.source ?? undefined,
-    };
-    switch (state) {
-      case "picking":
-      case "ready":
-        return UrlBuilder.mixtape({ ...base, view: "results" });
-      case "done":
-        return UrlBuilder.mixtape(base);
-      default:
-        return undefined;
-    }
-  });
-
-  const label = $derived.by(() => {
-    switch (state) {
-      case "mixing":
-        return m.button_text_mixtape_mixing();
-      case "done":
-        return m.button_text_mixtape_remix();
-      default:
-        return m.button_text_mix_it();
-    }
-  });
-
+  const { state, href, label, count } = $derived(action);
   const hasCount = $derived(state === "picking" || state === "ready");
 </script>
 
@@ -62,7 +26,7 @@
   <span class="entry-label">{label}</span>
   {#if hasCount}
     <span class="entry-count">
-      {m.text_mixtape_deck_count({ count, max: MAX_MIXTAPE_PICKS })}
+      {m.text_mixtape_deck_count({ count, max: action.max })}
     </span>
   {/if}
 {/snippet}

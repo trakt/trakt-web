@@ -371,14 +371,28 @@
     flex-direction: column;
     gap: var(--gap-m);
 
+    /*
+      Clearance for the floating dock on small screens: the tray grows a
+      Mix it row once the deck is full, so the grid clears that too.
+    */
     @include for-tablet-sm-and-below {
-      --mixtape-dock-height: var(--ni-56);
+      --mixtape-dock-height: var(--ni-60);
 
       padding-block-end: calc(var(--mixtape-dock-height) + 2 * var(--gap-s));
+
+      &[data-phase="full"],
+      &[data-phase="mixing"] {
+        --mixtape-dock-height: var(--ni-120);
+      }
     }
 
     @include for-mobile {
       --mixtape-dock-height: var(--ni-88);
+
+      &[data-phase="full"],
+      &[data-phase="mixing"] {
+        --mixtape-dock-height: var(--ni-144);
+      }
     }
 
     /*

@@ -1,10 +1,13 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import Button from "$lib/components/buttons/Button.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
   import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
   import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
@@ -15,6 +18,7 @@
   import { flyPosterToSlot } from "./_internal/flyPosterToSlot.ts";
   import { MAX_MIXTAPE_PICKS } from "./_internal/MAX_MIXTAPE_PICKS.ts";
   import { parseMixtapeParams } from "./_internal/parseMixtapeParams.ts";
+  import { toMixAction } from "./_internal/toMixAction.ts";
   import {
     type MixtapeFlight,
     useMixtapeSession,
@@ -34,10 +38,17 @@
   const { options } = useDiscover();
   const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
   const isNarrowPhone = useMedia(NARROW_PHONE_QUERY);
+  const { track } = useTrack(AnalyticsEvent.MixtapeMix);
 
   const params = $derived(parseMixtapeParams(page.url.searchParams));
   const isResults = $derived(params.view === "results");
   const isFull = $derived(params.picks.length >= MAX_MIXTAPE_PICKS);
+  const action = $derived(toMixAction({ params, isMixing: $session.isMixing }));
+  const isReady = $derived(
+    action.state === "ready" || action.state === "mixing",
+  );
+  const trackMix = () =>
+    track({ type: params.type, picks: action.count, fits: $session.fitCount });
 
   const typeOptions = $derived(
     options
@@ -151,52 +162,69 @@
     </div>
   </div>
 
-  <div
-    class="deck-slots"
-    role="group"
-    aria-label={m.text_mixtape_pick_count({
-      count: String(params.picks.length),
-    })}
-    inert={isResults || undefined}
-  >
-    <span class="deck-shine" aria-hidden="true"></span>
-    {#each slots as slot (slot.index)}
-      <div
-        class="deck-slot"
-        bind:this={slotEls[slot.index]}
-        data-filled={slot.media != null}
-        data-landing={landing != null && landing === slot.id}
-        data-flash={flash === slot.index}
-      >
-        {#if slot.media}
-          <Link
-            href={removeHref(slot.media.id)}
+  <div class="deck-tray" data-ready={isReady}>
+    <div
+      class="deck-slots"
+      role="group"
+      aria-label={m.text_mixtape_pick_count({
+        count: String(params.picks.length),
+      })}
+      inert={isResults || undefined}
+    >
+      <span class="deck-shine" aria-hidden="true"></span>
+      {#each slots as slot (slot.index)}
+        <div
+          class="deck-slot"
+          bind:this={slotEls[slot.index]}
+          data-filled={slot.media != null}
+          data-landing={landing != null && landing === slot.id}
+          data-flash={flash === slot.index}
+        >
+          {#if slot.media}
+            <Link
+              href={removeHref(slot.media.id)}
+              noscroll
+              replacestate
+              color="inherit"
+              label={m.button_label_mixtape_remove_pick({
+                title: slot.media.title,
+              })}
+            >
+              <CrossOriginImage
+                src={slot.media.poster.url.thumb}
+                alt=""
+                loading="eager"
+                animate={false}
+              />
+            </Link>
+          {:else}
+            <span
+              class="deck-slot-number"
+              aria-label={m.button_label_mixtape_empty_slot({
+                number: slot.index + 1,
+              })}
+            >
+              {slot.index + 1}
+            </span>
+          {/if}
+        </div>
+      {/each}
+    </div>
+    {#if layout === "docked"}
+      <div class="deck-mix" inert={action.state !== "ready" || undefined}>
+        <div class="deck-mix-inner">
+          <Button
+            href={action.href}
+            color="purple"
+            label={action.label}
             noscroll
-            replacestate
-            color="inherit"
-            label={m.button_label_mixtape_remove_pick({
-              title: slot.media.title,
-            })}
+            onclick={() => action.state === "ready" && trackMix()}
           >
-            <CrossOriginImage
-              src={slot.media.poster.url.thumb}
-              alt=""
-              loading="eager"
-              animate={false}
-            />
-          </Link>
-        {:else}
-          <span
-            class="deck-slot-number"
-            aria-label={m.button_label_mixtape_empty_slot({
-              number: slot.index + 1,
-            })}
-          >
-            {slot.index + 1}
-          </span>
-        {/if}
+            {action.label}
+          </Button>
+        </div>
       </div>
-    {/each}
+    {/if}
   </div>
 </div>
 
@@ -404,10 +432,10 @@
 
   /*
     Docked: the phone keeps the search at the top and floats the deck above
-    the bottom navbar, where the thumbs are. The slots grow to match.
+    the bottom navbar, where the thumbs are. Once the deck is full the tray
+    grows a Mix it row, so the payoff sits under the thumb as well.
   */
   .trakt-mixtape-navbar-deck[data-layout="docked"] {
-    --deck-dock-height: var(--mixtape-dock-height, var(--ni-56));
     --deck-slot-width: var(--ni-28);
     --deck-slot-height: var(--ni-42);
     --deck-slot-radius: var(--ni-6);
@@ -420,29 +448,75 @@
       width: auto;
     }
 
-    .deck-slots {
+    .deck-tray {
       position: fixed;
       inset-inline: 0;
       inset-block-end: calc(var(--mobile-navbar-height) + var(--gap-s));
       z-index: var(--layer-floating);
 
+      display: grid;
+      grid-template-rows: auto 0fr;
+      box-sizing: border-box;
       width: fit-content;
-      height: var(--deck-dock-height);
       margin-inline: auto;
-      padding-inline: var(--ni-12);
+      padding: var(--gap-xs) var(--ni-12);
 
+      border-radius: var(--border-radius-xxl);
       background:
         var(--background-navbar-entry),
         color-mix(in srgb, var(--color-background-navbar) 85%, transparent);
+      backdrop-filter: blur(var(--ni-8));
       box-shadow: var(--shadow-navbar-entry), var(--shadow-floating);
+
+      animation: deck-slots-in var(--deck-slide-duration) var(--deck-slide-ease)
+        calc(var(--transition-increment) / 2) both;
+      transition:
+        grid-template-rows calc(3 * var(--transition-increment))
+          var(--deck-slide-ease),
+        box-shadow calc(2 * var(--transition-increment)) ease-in-out;
+
+      &[data-ready="true"] {
+        grid-template-rows: auto 1fr;
+      }
+    }
+
+    .deck-slots {
+      height: var(--deck-slot-height);
+      padding-inline: 0;
+
+      background: none;
+      backdrop-filter: none;
+      box-shadow: none;
+
+      animation: none;
+      transition: gap calc(2 * var(--transition-increment))
+        var(--deck-slide-ease);
+    }
+
+    .deck-mix {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .deck-mix-inner {
+      display: grid;
+      padding-block-start: var(--gap-xs);
+
+      :global(.trakt-button) {
+        width: 100%;
+      }
     }
 
     &[data-full="true"] .deck-slots {
+      box-shadow: none;
+    }
+
+    &[data-full="true"] .deck-tray {
       box-shadow: var(--shadow-mixtape-deck-loaded), var(--shadow-floating);
     }
 
     /*
-      Phones: the dock spans the screen inside the page gutter and the
+      Phones: the tray spans the screen inside the page gutter and the
       slots grow to a real thumb target, spread edge to edge.
     */
     @include for-mobile {
@@ -450,15 +524,15 @@
       --deck-slot-height: var(--ni-72);
       --deck-slot-radius: var(--ni-8);
 
-      .deck-slots {
+      .deck-tray {
         inset-inline: var(--layout-distance-side);
-        justify-content: space-between;
-
         width: auto;
         margin-inline: 0;
         padding-inline: var(--ni-16);
+      }
 
-        border-radius: var(--border-radius-xxl);
+      .deck-slots {
+        justify-content: space-between;
       }
 
       .deck-slot-number {
@@ -473,6 +547,10 @@
         gap: var(--ni-6);
       }
     }
+  }
+
+  .deck-tray {
+    display: contents;
   }
 
   @keyframes deck-search-in {
