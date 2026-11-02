@@ -1,35 +1,40 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import ResetFiltersIcon from "$lib/components/icons/ResetFiltersIcon.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
+  import type { MixtapeHeaderButtonProps } from "./MixtapeHeaderButtonProps.ts";
 
-  const { href, isDisabled }: { href: string; isDisabled: boolean } = $props();
+  const {
+    href,
+    label,
+    isDisabled = false,
+    replace = false,
+    children,
+  }: MixtapeHeaderButtonProps = $props();
 </script>
 
-<div class="trakt-mixtape-restart" class:is-disabled={isDisabled}>
+<div class="trakt-mixtape-header-button" class:is-disabled={isDisabled}>
   {#if isDisabled}
     <ActionButton
       style="ghost"
-      label={m.button_text_mixtape_start_over()}
+      {label}
       disabled
       --color-background-custom="transparent"
       --color-foreground-custom="var(--color-foreground)"
     >
-      <ResetFiltersIcon />
+      {@render children()}
     </ActionButton>
   {:else}
     <ActionButton
       style="ghost"
-      label={m.button_text_mixtape_start_over()}
+      {label}
       {href}
       noscroll
-      replacestate
+      replacestate={replace}
       navigationType={DpadNavigationType.Item}
       --color-background-custom="transparent"
       --color-foreground-custom="var(--color-foreground)"
     >
-      <ResetFiltersIcon />
+      {@render children()}
     </ActionButton>
   {/if}
 </div>
@@ -37,11 +42,11 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-mixtape-restart {
+  .trakt-mixtape-header-button {
     display: inline-flex;
     opacity: 1;
 
-    animation: mixtape-restart-in calc(4 * var(--transition-increment))
+    animation: mixtape-header-button-in calc(4 * var(--transition-increment))
       cubic-bezier(0.34, 1.3, 0.5, 1) var(--transition-increment) both;
     transition: opacity var(--transition-increment) ease-in-out;
 
@@ -63,7 +68,7 @@
     }
   }
 
-  @keyframes mixtape-restart-in {
+  @keyframes mixtape-header-button-in {
     from {
       opacity: 0;
       transform: rotate(90deg);

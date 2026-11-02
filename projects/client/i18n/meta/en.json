@@ -14561,17 +14561,9 @@
       "default": "Your history is empty. Mark a few titles as watched to make a mixtape.",
       "description": "Shown on the Mixtape page when the user has no watched titles of the chosen type. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
-    "text_mixtape_based_on": {
-      "default": "Mixed from {titles}",
-      "description": "Line on the Mixtape results naming the picked titles. {titles} is a list of titles."
-    },
     "text_mixtape_because": {
       "default": "Because you liked {title}",
       "description": "Line under a Mixtape suggestion naming the picked title it is closest to. {title} is the movie or show title."
-    },
-    "button_text_mixtape_not_this": {
-      "default": "Not this",
-      "description": "Label under the left button of a Mixtape card, and the stamp shown while swiping a card left. Swaps the suggestion for the next one."
     },
     "button_text_mixtape_change_picks": {
       "default": "Change picks",
@@ -14700,6 +14692,14 @@
         }
       }
     },
+    "button_text_mixtape_change": {
+      "default": "Change",
+      "description": "Tail of the picks pill in the header once the Mixtape results are shown. Opens the picker again with the same picks so they can be changed. Keep it to one short word."
+    },
+    "header_mixtape_list": {
+      "default": "Your mixtape",
+      "description": "Small heading above the list of kept titles on the Mixtape end screen. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling, and use the same form in every Mixtape string."
+    },
     "header_ending": {
       "default": "Ending",
       "description": "Header for the details row that says whether a show has reached its ending."
@@ -14715,6 +14715,13 @@
     "text_mixtape_fits_count": {
       "default": "{count} from your history",
       "description": "Small text next to the Fits with your picks heading. {count} is how many watched titles still fit."
+    "preview_feature_title_show_ending": {
+      "default": "Show ending",
+      "description": "Product feature name for the preview feature that shows whether a show has a complete ending in its details."
+    },
+    "preview_feature_description_show_ending": {
+      "default": "Shows an Ending row in a show's details: Complete when the story wrapped up, Unresolved when it did not.",
+      "description": "Description of the show ending preview feature."
     },
     "header_mixtape_find": {
       "default": "Find {total} to watch",
@@ -14747,45 +14754,13 @@
         }
       }
     },
-    "text_mixtape_kept_toast": {
-      "default": "{title} added, {left} to go",
-      "description": "Short confirmation after adding a Mixtape suggestion to the watchlist. {title} is the movie or show title, {left} is how many more to keep.",
-      "variables": {
-        "title": {
-          "type": "string",
-          "description": "Title that was added.",
-          "required": true
-        },
-        "left": {
-          "type": "number",
-          "description": "How many more to keep.",
-          "required": true
-        }
-      }
-    },
     "button_text_mixtape_keep": {
       "default": "Keep it",
       "description": "Label under the right button of a Mixtape card. Adds the suggestion to the watchlist."
     },
-    "button_text_mixtape_another": {
-      "default": "Another",
-      "description": "Label under the left button of a Mixtape card. Swaps the suggestion for the next one."
-    },
-    "text_mixtape_or_swipe": {
-      "default": "or swipe",
-      "description": "Text between the two Mixtape card buttons, saying the card can also be swiped."
-    },
-    "tag_mixtape_tap_details": {
-      "default": "Tap for details",
-      "description": "One-time chip on the first Mixtape card saying a tap flips it to show details."
-    },
     "tag_mixtape_match": {
       "default": "{match}% match",
       "description": "Tag on a Mixtape suggestion saying how closely it matches the picked titles. {match} is a number from 0 to 100."
-    },
-    "button_label_mixtape_another": {
-      "default": "Not this, show another",
-      "description": "Accessible label of the left button on a Mixtape card that swaps the suggestion for the next one."
     },
     "button_text_mixtape_show_another": {
       "default": "Show me another",
@@ -14835,21 +14810,6 @@
         "sofar": {
           "type": "number",
           "description": "Titles kept in the whole session.",
-          "required": true
-        }
-      }
-    },
-    "text_mixtape_count_one": {
-      "default": "1 title",
-      "description": "Size of the Mixtape on its end screen when it holds one title."
-    },
-    "text_mixtape_count": {
-      "default": "{count} titles",
-      "description": "Size of the Mixtape on its end screen. {count} is 2 or more.",
-      "variables": {
-        "count": {
-          "type": "number",
-          "description": "Titles in the mixtape.",
           "required": true
         }
       }
@@ -14978,17 +14938,6 @@
     "text_mixtape_saved_as_you_go": {
       "default": "Each keep is saved right away, so closing never loses it.",
       "description": "Rest of the bar under the desktop Mixtape fan, after the count."
-    },
-    "button_text_mixtape_finish_with": {
-      "default": "Finish with {count}",
-      "description": "Button in the bar under the desktop Mixtape fan that ends the round early and opens the end screen. {count} is how many were kept.",
-      "variables": {
-        "count": {
-          "type": "number",
-          "description": "Titles kept this round.",
-          "required": true
-        }
-      }
     },
     "text_mixtape_stat_titles_label": {
       "default": "Titles",

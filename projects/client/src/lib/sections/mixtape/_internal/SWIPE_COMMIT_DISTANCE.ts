@@ -1,1 +1,0 @@
-export const SWIPE_COMMIT_DISTANCE = 100;

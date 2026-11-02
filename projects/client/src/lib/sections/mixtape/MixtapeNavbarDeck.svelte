@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import Button from "$lib/components/buttons/Button.svelte";
+  import EditModeIcon from "$lib/components/icons/EditModeIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
@@ -81,6 +82,13 @@
       picks: params.picks.filter((pick) => pick !== id),
       source: params.source ?? undefined,
     });
+  const changeHref = $derived(
+    UrlBuilder.mixtape({
+      type: params.type,
+      picks: params.picks,
+      source: params.source ?? undefined,
+    }),
+  );
 
   let slotEls = $state<Array<HTMLElement | undefined>>([]);
   let landing = $state<number | null>(null);
@@ -169,7 +177,6 @@
       aria-label={m.text_mixtape_pick_count({
         count: String(params.picks.length),
       })}
-      inert={isResults || undefined}
     >
       <span class="deck-shine" aria-hidden="true"></span>
       {#each slots as slot (slot.index)}
@@ -179,6 +186,7 @@
           data-filled={slot.media != null}
           data-landing={landing != null && landing === slot.id}
           data-flash={flash === slot.index}
+          inert={isResults || undefined}
         >
           {#if slot.media}
             <Link
@@ -209,6 +217,19 @@
           {/if}
         </div>
       {/each}
+      {#if isResults}
+        <span class="deck-change">
+          <Link
+            href={changeHref}
+            noscroll
+            color="inherit"
+            label={m.button_text_mixtape_change_picks()}
+          >
+            <EditModeIcon />
+            {m.button_text_mixtape_change()}
+          </Link>
+        </span>
+      {/if}
     </div>
     {#if layout === "docked"}
       <div class="deck-mix" inert={action.state !== "ready" || undefined}>
@@ -277,7 +298,11 @@
       both;
     transition:
       box-shadow var(--transition-increment) ease-in-out,
-      opacity calc(2 * var(--transition-increment)) ease-in-out;
+      opacity calc(2 * var(--transition-increment)) ease-in-out,
+      width var(--deck-slide-duration) var(--deck-slide-ease),
+      flex-basis var(--deck-slide-duration) var(--deck-slide-ease),
+      padding var(--deck-slide-duration) var(--deck-slide-ease),
+      margin var(--deck-slide-duration) var(--deck-slide-ease);
 
     &:focus-within {
       box-shadow: var(--shadow-navbar-entry-hover);
@@ -426,8 +451,63 @@
       cubic-bezier(0.3, 0.7, 0.2, 1) calc(0.8 * var(--transition-increment));
   }
 
+  /*
+    Results: the search folds away and the loaded deck becomes the picks
+    pill, with a Change tail that leads back into the picker.
+  */
   .trakt-mixtape-navbar-deck[data-view="results"] .deck-search {
-    opacity: 0.35;
+    flex: 0 0 0;
+    width: 0;
+    min-width: 0;
+    padding-inline: 0;
+    margin-inline-end: calc(-1 * var(--gap-xs));
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .deck-change {
+    flex: none;
+    display: flex;
+    align-items: center;
+    margin-inline-start: var(--ni-4);
+
+    :global(.trakt-link) {
+      display: flex;
+      align-items: center;
+      gap: var(--ni-6);
+      height: var(--ni-28);
+      padding-inline: var(--ni-10);
+
+      border-radius: var(--border-radius-pill);
+      background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-text-small);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+
+      transition:
+        background var(--transition-increment) ease-in-out,
+        color var(--transition-increment) ease-in-out;
+    }
+
+    :global(svg) {
+      width: var(--ni-14);
+      height: var(--ni-14);
+    }
+
+    @include for-mouse {
+      :global(.trakt-link:hover),
+      :global(.trakt-link:focus-visible) {
+        background: color-mix(
+          in srgb,
+          var(--color-foreground) 10%,
+          transparent
+        );
+        color: var(--color-text-primary);
+      }
+    }
   }
 
   /*
@@ -513,6 +593,48 @@
 
     &[data-full="true"] .deck-tray {
       box-shadow: var(--shadow-mixtape-deck-loaded), var(--shadow-floating);
+    }
+
+    /*
+      Results on small screens: the tray leaves the bottom of the screen
+      and sits in the sticky bar as the picks pill.
+    */
+    &[data-view="results"] {
+      --deck-slot-width: var(--ni-22);
+      --deck-slot-height: var(--ni-32);
+      --deck-slot-radius: var(--ni-4);
+
+      justify-content: center;
+
+      .deck-search {
+        flex: 0 0 0;
+        width: 0;
+        padding-inline: 0;
+      }
+
+      .deck-tray {
+        position: static;
+        width: auto;
+        margin: 0;
+        padding: 0;
+
+        background: none;
+        backdrop-filter: none;
+        box-shadow: none;
+        animation: none;
+      }
+
+      .deck-slots {
+        justify-content: flex-start;
+        height: var(--deck-height);
+        padding-inline: var(--ni-10);
+
+        background:
+          var(--background-navbar-entry),
+          color-mix(in srgb, var(--color-background-navbar) 75%, transparent);
+        backdrop-filter: blur(var(--ni-8));
+        box-shadow: var(--shadow-mixtape-deck-loaded);
+      }
     }
 
     /*

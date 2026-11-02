@@ -1,6 +1,8 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import ResetFiltersIcon from "$lib/components/icons/ResetFiltersIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -26,8 +28,8 @@
   import { holdSettledPicker } from "./_internal/holdSettledPicker.ts";
   import { MAX_MIXTAPE_PICKS } from "./_internal/MAX_MIXTAPE_PICKS.ts";
   import { MIX_HOLD_DURATION } from "./_internal/MIX_HOLD_DURATION.ts";
+  import MixtapeHeaderButton from "./_internal/MixtapeHeaderButton.svelte";
   import MixtapePicker from "./_internal/MixtapePicker.svelte";
-  import MixtapeRestartButton from "./_internal/MixtapeRestartButton.svelte";
   import MixtapeResults from "./_internal/MixtapeResults.svelte";
   import type { MixtapeTarget } from "./_internal/MixtapeTarget.ts";
   import { parseMixtapeParams } from "./_internal/parseMixtapeParams.ts";
@@ -129,6 +131,7 @@
     ),
   );
   const isMixing = $derived(isResults && ($isHolding$ || $isMixtapeLoading));
+  const isShowingResults = $derived(isResults && !isMixing);
   const phase = $derived(isMixing ? "mixing" : isFull ? "full" : "pick");
 
   $effect(() => {
@@ -179,6 +182,9 @@
   const titleOf = (id: number) =>
     $picked.find((media) => media.id === id)?.title ?? null;
 
+  const suggestionOf = (id: number) =>
+    $mixtape.suggestions.find(({ media }) => media.id === id) ?? null;
+
   const { keep } = useMixtapeSave();
 
   const replaceResults = (
@@ -199,18 +205,10 @@
     return goto(url, { replaceState: true, noScroll: true, keepFocus: true });
   };
 
-  const matchById = $derived(
-    new Map(
-      $mixtape.suggestions.map(({ media, match }) => [media.id, match]),
-    ),
-  );
-
   const rounds = $derived(
     params.kept.map((ids) =>
       ids.flatMap((id) => {
-        const suggestion = $mixtape.suggestions.find(
-          ({ media }) => media.id === id,
-        );
+        const suggestion = suggestionOf(id);
         return suggestion ? [suggestion.media] : [];
       }),
     ),
@@ -280,46 +278,62 @@
   header={{ title: m.page_title_mixtape(), metaInfo: subtitleContent }}
 >
   {#snippet headerActions()}
-    <MixtapeRestartButton
+    <MixtapeHeaderButton
       href={UrlBuilder.mixtape({ type: params.type })}
+      label={m.button_text_mixtape_start_over()}
       isDisabled={params.picks.length === 0}
-    />
+      replace
+    >
+      <ResetFiltersIcon />
+    </MixtapeHeaderButton>
+    {#if isShowingResults}
+      <MixtapeHeaderButton
+        href={UrlBuilder.discover()}
+        label={m.button_label_close()}
+      >
+        <CloseIcon />
+      </MixtapeHeaderButton>
+    {/if}
   {/snippet}
 </NavbarStateSetter>
 
-{#if isResults && !isMixing}
-  <MixtapeResults
-    {slots}
-    {canSwap}
-    isLoading={$isMixtapeLoading}
-    picked={$picked}
-    {titleOf}
-    closeHref={UrlBuilder.discover()}
-    changeHref={href({})}
-    startOverHref={UrlBuilder.mixtape({ type: params.type })}
-    {rounds}
-    savedTo={params.savedTo}
-    onKeep={keepMedia}
-    matchOf={(id) => matchById.get(id) ?? null}
-    onMoved={(savedTo) => replaceResults({ savedTo })}
-    onSkip={(id) => replaceResults({ skips: [...params.skips, id] })}
-    onUndo={() => replaceResults({ skips: params.skips.slice(0, -1) })}
-    onMore={(ids) =>
-      replaceResults({
-        skips: [...params.skips, ...ids],
-        kept: [...params.kept, []],
-      })}
-    onResult={(action, position) =>
-      trackResult({ action, position: String(position), type: params.type })}
-  />
-{:else}
-  <div class="trakt-mixtape" data-phase={phase}>
-    <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-      <div class="mixtape-search-bar">
-        <MixtapeNavbarDeck layout="docked" />
-      </div>
-    </RenderFor>
+<div class="trakt-mixtape" data-phase={isShowingResults ? "results" : phase}>
+  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    <div class="mixtape-search-bar">
+      <MixtapeNavbarDeck layout="docked" />
+    </div>
+  </RenderFor>
 
+  {#if isShowingResults}
+    <MixtapeResults
+      {slots}
+      {canSwap}
+      isLoading={$isMixtapeLoading}
+      picked={$picked}
+      {titleOf}
+      closeHref={UrlBuilder.discover()}
+      changeHref={href({})}
+      startOverHref={UrlBuilder.mixtape({ type: params.type })}
+      {rounds}
+      savedTo={params.savedTo}
+      onKeep={keepMedia}
+      matchOf={(id) => suggestionOf(id)?.match ?? null}
+      becauseOf={(id) => {
+        const suggestion = suggestionOf(id);
+        return suggestion ? titleOf(suggestion.because) : null;
+      }}
+      onMoved={(savedTo) => replaceResults({ savedTo })}
+      onSkip={(id) => replaceResults({ skips: [...params.skips, id] })}
+      onUndo={() => replaceResults({ skips: params.skips.slice(0, -1) })}
+      onMore={(ids) =>
+        replaceResults({
+          skips: [...params.skips, ...ids],
+          kept: [...params.kept, []],
+        })}
+      onResult={(action, position) =>
+        trackResult({ action, position: String(position), type: params.type })}
+    />
+  {:else}
     <section class="mixtape-browse">
       <div class="mixtape-grid-head">
         <span class="mixtape-grid-label">{gridHead}</span>
@@ -339,8 +353,8 @@
         onPick={pick}
       />
     </section>
-  </div>
-{/if}
+  {/if}
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -373,7 +387,8 @@
 
     /*
       Clearance for the floating dock on small screens: the tray grows a
-      Mix it row once the deck is full, so the grid clears that too.
+      Mix it row once the deck is full, so the grid clears that too. The
+      results stage floats its own buttons and clears them itself.
     */
     @include for-tablet-sm-and-below {
       --mixtape-dock-height: var(--ni-60);
@@ -383,6 +398,10 @@
       &[data-phase="full"],
       &[data-phase="mixing"] {
         --mixtape-dock-height: var(--ni-120);
+      }
+
+      &[data-phase="results"] {
+        padding-block-end: 0;
       }
     }
 

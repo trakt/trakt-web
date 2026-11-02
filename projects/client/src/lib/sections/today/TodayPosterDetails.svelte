@@ -2,20 +2,15 @@
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import RealityTierPill from "$lib/sections/components/reality-check/RealityTierPill.svelte";
   import RealityTierPillSkeleton from "$lib/sections/components/reality-check/RealityTierPillSkeleton.svelte";
-  import SentimentIcon from "$lib/components/icons/SentimentIcon.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { stripMarkdownLinks } from "$lib/utils/markdown/stripMarkdownLinks.ts";
-  import { toSentimentAspects } from "$lib/utils/sentiment/toSentimentAspects.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { TodayMedia } from "./models/TodayMedia.ts";
+  import TodaySentimentInsights from "./TodaySentimentInsights.svelte";
   import { useTodayDetails } from "./useTodayDetails.ts";
   import { toMediaMeta } from "./_internal/toMediaMeta.ts";
-  import TodaySentimentVerdict from "./_internal/TodaySentimentVerdict.svelte";
-
-  const ASPECTS_LIMIT = 4;
 
   const { media, kicker = null }: { media: TodayMedia; kicker?: string | null } =
     $props();
@@ -24,25 +19,6 @@
     useTodayDetails(fromRune(() => media));
 
   const meta = $derived(toMediaMeta(media));
-
-  const selected = $derived(
-    $sentiment && $sentiment.aspect.pros.length + $sentiment.aspect.cons.length > 0
-      ? toSentimentAspects({
-          pros: $sentiment.aspect.pros,
-          cons: $sentiment.aspect.cons,
-          limit: ASPECTS_LIMIT,
-        })
-      : null,
-  );
-  const verdict = $derived(selected?.verdict ?? null);
-  const aspects = $derived(
-    selected
-      ? [
-          { key: "good" as const, items: selected.pros },
-          { key: "bad" as const, items: selected.cons },
-        ].filter((aspect) => aspect.items.length > 0)
-      : [],
-  );
 </script>
 
 <div class="trakt-today-poster-details">
@@ -76,28 +52,7 @@
 
     {#if $sentiment}
       <div class="details-sentiment">
-        <div class="details-sentiment-header">
-          <p class="tag uppercase bold details-kicker">
-            {m.header_community_sentiment()}
-          </p>
-          {#if verdict}
-            <TodaySentimentVerdict {verdict} />
-          {/if}
-        </div>
-        <p class="small" use:lineClamp={{ lines: 3 }}>
-          {stripMarkdownLinks($sentiment.highlight)}
-        </p>
-
-        {#each aspects as aspect (aspect.key)}
-          <div class="details-aspects" data-sentiment={aspect.key}>
-            <SentimentIcon sentiment={aspect.key} />
-            <ul>
-              {#each aspect.items as item, index (index)}
-                <li><p class="small capitalize ellipsis">{item}</p></li>
-              {/each}
-            </ul>
-          </div>
-        {/each}
+        <TodaySentimentInsights sentiment={$sentiment} />
       </div>
     {/if}
 
@@ -122,12 +77,12 @@
     display: flex;
     flex-direction: column;
 
-    height: 100%;
+    height: var(--height-poster-details, 100%);
     overflow: hidden;
 
     .details-header {
       position: relative;
-      flex: 0 0 max(var(--ni-120), 35%);
+      flex: 0 0 var(--height-poster-details-cover, max(var(--ni-120), 35%));
 
       :global(img) {
         position: absolute;
@@ -178,10 +133,6 @@
     }
 
     .details-sentiment {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-xs);
-
       padding-top: var(--gap-s);
       border-top: var(--border-thickness-xxs) solid var(--color-border);
     }
@@ -197,49 +148,8 @@
       border-top: var(--border-thickness-xxs) solid var(--color-border);
     }
 
-    .details-sentiment-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--gap-xs);
-    }
-
     .details-kicker {
       color: var(--color-text-emphasis);
-    }
-
-    .details-aspects {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--gap-xs);
-
-      color: var(--color-sentiment-good);
-
-      &[data-sentiment="bad"] {
-        color: var(--color-sentiment-bad);
-      }
-
-      :global(svg) {
-        flex-shrink: 0;
-        width: var(--ni-16);
-        height: var(--ni-16);
-      }
-
-      ul {
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-xxs);
-        min-width: 0;
-
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      li {
-        min-width: 0;
-        color: var(--color-text-primary);
-      }
     }
   }
 </style>

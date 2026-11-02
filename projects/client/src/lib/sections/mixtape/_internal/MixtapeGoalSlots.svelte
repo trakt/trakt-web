@@ -1,5 +1,4 @@
 <script lang="ts">
-  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
@@ -21,8 +20,6 @@
     >
       {#if keptMedia}
         <CrossOriginImage src={keptMedia.poster.url.thumb} alt="" />
-      {:else}
-        <BookmarkIcon state="missing" />
       {/if}
     </li>
   {/each}
@@ -39,37 +36,37 @@
 
   .goal-slot {
     box-sizing: border-box;
-    display: grid;
-    place-items: center;
-    width: var(--width-mixtape-goal-slot, var(--ni-30));
+    width: var(--width-mixtape-goal-slot, var(--ni-28));
     aspect-ratio: 2 / 3;
     overflow: hidden;
 
-    border: var(--border-thickness-xs) dashed
-      color-mix(in srgb, var(--purple-400) 70%, transparent);
     border-radius: var(--border-radius-xs);
-    color: color-mix(in srgb, var(--purple-300) 80%, transparent);
+    background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+    box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+      color-mix(in srgb, var(--color-foreground) 16%, transparent);
+    transform: scale(0.92);
 
-    :global(svg) {
-      width: var(--ni-14);
-      height: var(--ni-14);
-    }
+    transition:
+      transform calc(3 * var(--transition-increment))
+        cubic-bezier(0.34, 1.5, 0.5, 1),
+      box-shadow calc(2 * var(--transition-increment)) ease-in-out;
 
     :global(img) {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
     &.is-next {
-      border-color: var(--purple-300);
-      box-shadow: 0 0 0 var(--ni-3)
-        color-mix(in srgb, var(--purple-500) 35%, transparent);
+      box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+        color-mix(in srgb, var(--color-foreground) 40%, transparent);
     }
 
     &.is-kept {
-      border-style: solid;
-      border-color: var(--purple-400);
+      box-shadow: 0 0 0 var(--border-thickness-xxs)
+        color-mix(in srgb, var(--color-foreground) 30%, transparent);
+      transform: none;
     }
   }
 </style>
