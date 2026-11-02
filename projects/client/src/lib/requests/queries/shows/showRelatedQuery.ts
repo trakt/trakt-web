@@ -10,18 +10,26 @@ import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
 type ShowRelatedParams = {
   slug: string;
+  personalized?: boolean;
 } & PaginationParams &
   ApiParams;
 
 const RelatedShowSchema = ShowEntrySchema;
 export type RelatedShow = z.infer<typeof RelatedShowSchema>;
 
-const showRelatedRequest = ({ fetch, slug, limit, page }: ShowRelatedParams) =>
+const showRelatedRequest = ({
+  fetch,
+  slug,
+  limit,
+  page,
+  personalized,
+}: ShowRelatedParams) =>
   api({ fetch }).shows.related({
     query: {
       extended: 'full,images,colors',
       limit,
       page,
+      ...(personalized ? { personalized } : {}),
     },
     params: {
       id: slug,
@@ -31,7 +39,12 @@ const showRelatedRequest = ({ fetch, slug, limit, page }: ShowRelatedParams) =>
 export const showRelatedQuery = defineInfiniteQuery({
   key: 'showRelated',
   invalidations: [],
-  dependencies: (params) => [params.slug, params.page, params.limit],
+  dependencies: (params) => [
+    params.slug,
+    params.page,
+    params.limit,
+    params.personalized,
+  ],
   request: showRelatedRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToShowEntry),

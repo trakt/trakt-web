@@ -9,6 +9,7 @@ import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 type MovieRelatedParams = {
   slug: string;
+  personalized?: boolean;
 } & PaginationParams &
   ApiParams;
 
@@ -17,12 +18,14 @@ const movieRelatedRequest = ({
   slug,
   limit,
   page,
+  personalized,
 }: MovieRelatedParams) =>
   api({ fetch }).movies.related({
     query: {
       extended: 'full,images,colors',
       limit,
       page,
+      ...(personalized ? { personalized } : {}),
     },
     params: {
       id: slug,
@@ -32,7 +35,12 @@ const movieRelatedRequest = ({
 export const movieRelatedQuery = defineInfiniteQuery({
   key: 'movieRelated',
   invalidations: [],
-  dependencies: (params) => [params.slug, params.page, params.limit],
+  dependencies: (params) => [
+    params.slug,
+    params.page,
+    params.limit,
+    params.personalized,
+  ],
   request: movieRelatedRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToMovieEntry),

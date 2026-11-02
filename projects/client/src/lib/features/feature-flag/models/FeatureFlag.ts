@@ -5,4 +5,5 @@ export enum FeatureFlag {
   LargeScreenCards = 'large-screen-cards',
   VipVeteran = 'vip-veteran',
   SeasonRecap = 'season-recap',
+  PersonalizedRelated = 'personalized-related',
 }

@@ -17,6 +17,7 @@ export type RelatedEntry = RelatedShow | MovieEntry;
 type RelatedListStoreProps = PaginationParams & {
   type: MediaType;
   slug: string;
+  personalized?: boolean;
 };
 
 function typeToQuery(props: RelatedListStoreProps) {

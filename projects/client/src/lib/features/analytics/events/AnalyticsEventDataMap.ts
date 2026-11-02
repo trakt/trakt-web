@@ -13,6 +13,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { NoteType } from '$lib/requests/models/NoteType.ts';
 import type { RecommendationMode } from '$lib/requests/models/RecommendationMode.ts';
+import type { RelatedMode } from '$lib/requests/models/RelatedMode.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
 import type { DiscoverMode } from '../../filters/models/DiscoverMode.ts';
@@ -98,6 +99,7 @@ type ShareType = DrilldownType;
 type CoverImageType = { type: ExtendedMediaType };
 type DiscoverType = SourceType & { mode: DiscoverMode };
 type RecommendationModeType = SourceType & { mode: RecommendationMode };
+type RelatedModeType = SourceType & { mode: RelatedMode };
 type RecommendationWhyType = { reason: 'people' | 'titles' | 'empty' };
 type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
 type LinkType = SourceType & { target: string };
@@ -342,6 +344,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.PwaInstall]: { outcome: 'accepted' | 'dismissed' };
 
   [AnalyticsEvent.RecommendationMode]: RecommendationModeType;
+  [AnalyticsEvent.RelatedMode]: RelatedModeType;
   [AnalyticsEvent.RecommendationWhy]: RecommendationWhyType;
 
   [AnalyticsEvent.ListCollaborator]: ListCollaboratorType;

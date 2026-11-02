@@ -1800,6 +1800,22 @@
       "default": "Show classic recommendations",
       "description": "Accessible label for the recommendations toggle option that shows the original recommendations."
     },
+    "button_text_related_mode_personal": {
+      "default": "For you",
+      "description": "Related titles toggle option that re-orders the related titles toward what the user likes. Keep it as short as possible."
+    },
+    "button_label_related_mode_personal": {
+      "default": "Show related titles picked for you",
+      "description": "Accessible label for the related titles toggle option that re-orders them toward the user's taste."
+    },
+    "button_text_related_mode_standard": {
+      "default": "Standard",
+      "description": "Related titles toggle option for the same related titles in their usual order, the same for everyone. Keep it as short as possible."
+    },
+    "button_label_related_mode_standard": {
+      "default": "Show standard related titles",
+      "description": "Accessible label for the related titles toggle option that shows them in their usual order."
+    },
     "translated_value_status_released": {
       "default": "Released",
       "description": "Status value for released media items. The value is sent back from the Trakt API."
@@ -14662,6 +14678,14 @@
     "error_text_jellyfin_vip_required": {
       "default": "Jellyfin sync is a VIP beta for now.",
       "description": "Error when a free member tries to connect a Jellyfin server."
+    },
+    "preview_feature_title_personalized_related": {
+      "default": "Related titles for you",
+      "description": "Product feature name for the preview feature that re-orders related titles on movie and show pages toward the user's taste."
+    },
+    "preview_feature_description_personalized_related": {
+      "default": "Sorts the related titles on movie and show pages toward what you like. Switch between For you and Standard above the list.",
+      "description": "Description of the personalized related titles preview feature. For you and Standard are the toggle option names."
     },
     "preview_feature_title_season_recap": {
       "default": "Season recap",
