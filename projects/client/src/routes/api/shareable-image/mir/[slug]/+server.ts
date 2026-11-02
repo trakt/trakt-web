@@ -65,7 +65,7 @@ export const GET: RequestHandler = (event) => {
       isSettled && hasExplicitMonth ? SETTLED_MONTH_CACHE : OPEN_MONTH_CACHE,
     loadData: async ({ fetch }) => {
       const profile = await userProfileQuery({ slug, fetch }).execute();
-      if (!profile) return null;
+      if (!profile || profile.private || profile.isDeleted) return null;
 
       return {
         profile,
