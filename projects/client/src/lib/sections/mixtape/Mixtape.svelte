@@ -278,7 +278,7 @@
 {/snippet}
 
 <NavbarStateSetter
-  contentToggle="mixtape"
+  contentToggle={isShowingResults ? "mixtape-results" : "mixtape"}
   showFilters={false}
   header={{ title: m.page_title_mixtape(), metaInfo: subtitleContent }}
 >

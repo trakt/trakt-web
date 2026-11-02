@@ -4,6 +4,7 @@
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MixtapeNavbarDeck from "$lib/sections/mixtape/MixtapeNavbarDeck.svelte";
+  import MixtapeNavbarSearch from "$lib/sections/mixtape/MixtapeNavbarSearch.svelte";
   import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import Toast from "../../toast/Toast.svelte";
@@ -19,7 +20,16 @@
   const { state } = useNavbarState();
 
   const { isEditMode } = useEditMode();
+
+  const isMixtape = $derived(
+    $state.contentToggle === "mixtape" ||
+      $state.contentToggle === "mixtape-results",
+  );
 </script>
+
+{#snippet mixtapeSearch()}
+  <MixtapeNavbarSearch --width-mixtape-navbar-search="var(--ni-228)" />
+{/snippet}
 
 <div
   class="trakt-navbar-actions"
@@ -36,21 +46,31 @@
     {#if $isEditMode}
       <EditModeBar />
     {:else}
+      <!--
+        One surface for the toggle and the mixtape deck: Mixtape is a mode
+        of the toggle, so the switch morphs in place instead of swapping.
+      -->
       <div class="navbar-content-surfaces">
-        {#if $state.contentToggle === "mixtape"}
-          <div
-            class="navbar-content-surface"
-            out:navbarSurfaceTransition|global
-          >
-            <MixtapeNavbarDeck />
-          </div>
-        {:else if $state.contentToggle}
+        {#if $state.contentToggle}
           <div
             class="navbar-content-surface"
             in:navbarSurfaceTransition|global
             out:navbarSurfaceTransition|global
           >
-            <NavbarContentToggle surface={$state.contentToggle} />
+            {#if $state.contentToggle !== "mixtape-results"}
+              <div
+                class="navbar-content-toggle-slot"
+                transition:navbarSurfaceTransition|global
+              >
+                <NavbarContentToggle
+                  surface={$state.contentToggle}
+                  leading={mixtapeSearch}
+                />
+              </div>
+            {/if}
+            {#if isMixtape}
+              <MixtapeNavbarDeck />
+            {/if}
           </div>
         {/if}
       </div>
@@ -224,6 +244,13 @@
 
   .navbar-content-surface {
     grid-area: 1 / 1;
+    display: flex;
+    align-items: center;
+    gap: var(--ni-12);
+    min-width: 0;
+  }
+
+  .navbar-content-toggle-slot {
     display: flex;
     min-width: 0;
   }

@@ -9,4 +9,6 @@ export type SegmentedSelectOption<TValue extends string = string> = Omit<
   label?: string;
   href?: string;
   count?: number;
+  /** Folds the segment away (width 0, inert) while keeping its place. */
+  isFolded?: boolean;
 };

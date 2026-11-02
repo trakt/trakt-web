@@ -13,9 +13,13 @@
   import { useSearchMode } from "$lib/features/search/useSearchMode";
   import { buildParamString } from "$lib/utils/url/buildParamString";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import type { ContentToggleSurface } from "./ContentToggleSurface.ts";
 
-  const { surface }: { surface: ContentToggleSurface } = $props();
+  const {
+    surface,
+    leading,
+  }: { surface: ContentToggleSurface; leading?: Snippet } = $props();
 
   const {
     mode: discoverMode,
@@ -25,7 +29,17 @@
   const { mode: searchMode } = useSearchMode();
 
   const searchQuery = $derived(page.url.searchParams.get("q") ?? "");
+  const isMixtape = $derived(
+    surface === "mixtape" || surface === "mixtape-results",
+  );
+  const mixtapeType = $derived(
+    page.url.searchParams.get("type") === "show" ? "show" : "movie",
+  );
 
+  /*
+    Mixtape is a mode of the toggle: the Media segment folds away and the
+    Shows and Movies segments switch the mixtape's type instead.
+  */
   const options = $derived.by<SegmentedSelectOption[]>(() => {
     if (surface === "search") {
       return searchModeOptions().map((option) => ({
@@ -37,8 +51,15 @@
       }));
     }
 
+    const discover = discoverModeOptions(discoverOptions).map((option) => {
+      if (!isMixtape) return option;
+      return option.value === "movie" || option.value === "show"
+        ? { ...option, href: UrlBuilder.mixtape({ type: option.value }) }
+        : { ...option, isFolded: true };
+    });
+
     return [
-      ...discoverModeOptions(discoverOptions),
+      ...discover,
       ...searchModeOptions()
         .filter(({ value }) => value === "people" || value === "lists")
         .map((option) => ({
@@ -48,10 +69,16 @@
     ];
   });
 
-  const value = $derived(surface === "search" ? $searchMode : $discoverMode);
+  const value = $derived(
+    isMixtape
+      ? mixtapeType
+      : surface === "search"
+        ? $searchMode
+        : $discoverMode,
+  );
 
   const onChange = (next: string) => {
-    if (surface === "search") return;
+    if (surface === "search" || isMixtape) return;
     onModeChange(next as DiscoverMode);
   };
 </script>
@@ -70,6 +97,8 @@
       {value}
       icon={contentIcon}
       extension={searchExtension}
+      {leading}
+      isLeadingOpen={isMixtape}
       {onChange}
     />
   </div>

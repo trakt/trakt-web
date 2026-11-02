@@ -3,7 +3,6 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import EditModeIcon from "$lib/components/icons/EditModeIcon.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
-  import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
   import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
@@ -25,6 +24,7 @@
     type MixtapeFlight,
     useMixtapeSession,
   } from "./_internal/useMixtapeSession.ts";
+  import MixtapeNavbarSearch from "./MixtapeNavbarSearch.svelte";
 
   const FLASH_DURATION = 420;
   const SHINE_DURATION = 1200;
@@ -151,30 +151,21 @@
   data-full={isFull}
   data-shine={isShining}
 >
-  <div class="deck-search" inert={isResults || undefined}>
-    <label class="deck-search-field">
-      <SearchIcon />
-      <input
-        type="search"
-        value={$session.search}
-        aria-label={m.input_label_mixtape_search()}
-        placeholder={params.type === "show"
-          ? m.input_placeholder_mixtape_deck_shows()
-          : m.input_placeholder_mixtape_deck_movies()}
-        oninput={(event) => update({ search: event.currentTarget.value })}
-      />
-    </label>
-    <div class="deck-search-type">
-      <SegmentedSelect
-        options={typeOptions}
-        value={params.type}
-        variant={$isNarrowPhone ? "compact" : "regular"}
-        icon={$isNarrowPhone ? typeIcon : undefined}
-        ariaLabel={m.page_title_mixtape()}
-        onChange={() => update({ search: "" })}
-      />
+  {#if layout === "docked"}
+    <div class="deck-search" inert={isResults || undefined}>
+      <MixtapeNavbarSearch />
+      <div class="deck-search-type">
+        <SegmentedSelect
+          options={typeOptions}
+          value={params.type}
+          variant={$isNarrowPhone ? "compact" : "regular"}
+          icon={$isNarrowPhone ? typeIcon : undefined}
+          ariaLabel={m.page_title_mixtape()}
+          onChange={() => update({ search: "" })}
+        />
+      </div>
     </div>
-  </div>
+  {/if}
 
   <div class="deck-tray" data-ready={isReady}>
     <div
@@ -299,7 +290,7 @@
 
     width: var(--ni-320);
     min-width: 0;
-    padding-inline: var(--ni-14) var(--ni-4);
+    padding-inline: var(--ni-4);
 
     animation: deck-search-in var(--deck-slide-duration) var(--deck-slide-ease)
       both;
@@ -313,38 +304,6 @@
 
     &:focus-within {
       box-shadow: var(--shadow-navbar-entry-hover);
-    }
-  }
-
-  .deck-search-field {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xs);
-
-    min-width: 0;
-    height: 100%;
-    cursor: text;
-
-    :global(svg) {
-      flex: none;
-      width: var(--ni-18);
-      height: var(--ni-18);
-      color: var(--color-text-secondary);
-    }
-
-    input {
-      all: unset;
-      flex: 1;
-      min-width: 0;
-      height: 100%;
-
-      color: var(--color-text-primary);
-      font-size: var(--font-size-text);
-
-      &::placeholder {
-        color: var(--color-text-secondary);
-      }
     }
   }
 
@@ -681,14 +640,6 @@
       .deck-slots {
         justify-content: center;
         gap: var(--gap-s);
-      }
-
-      .deck-search {
-        padding-inline-start: var(--ni-12);
-      }
-
-      .deck-search-field {
-        gap: var(--ni-6);
       }
     }
   }
