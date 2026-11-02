@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   import Button from "$lib/components/buttons/Button.svelte";
   import EditModeIcon from "$lib/components/icons/EditModeIcon.svelte";
+  import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import type { SegmentedSelectOption } from "$lib/components/select/models/SegmentedSelectOption.ts";
@@ -65,16 +66,21 @@
       })),
   );
 
-  const slots = $derived(
-    Array.from({ length: MAX_MIXTAPE_PICKS }, (_, index) => {
-      const id = params.picks.at(index);
-      const media =
-        id == null
-          ? null
-          : ($session.picked.find((item) => item.id === id) ?? null);
-      return { index, id, media };
-    }),
-  );
+  /*
+    The deck shows the picks and one add slot that steps right as they
+    land; the add slot leaves once the deck is full or the mix is on.
+  */
+  const isAdding = $derived(!isFull && !isResults);
+  const slots = $derived([
+    ...params.picks.map((id, index) => ({
+      index,
+      id,
+      media: $session.picked.find((item) => item.id === id) ?? null,
+    })),
+    ...(isAdding
+      ? [{ index: params.picks.length, id: null, media: null }]
+      : []),
+  ]);
 
   const removeHref = (id: number) =>
     UrlBuilder.mixtape({
@@ -184,6 +190,7 @@
           class="deck-slot"
           bind:this={slotEls[slot.index]}
           data-filled={slot.media != null}
+          data-add={slot.id == null}
           data-landing={landing != null && landing === slot.id}
           data-flash={flash === slot.index}
           inert={isResults || undefined}
@@ -205,14 +212,15 @@
                 animate={false}
               />
             </Link>
-          {:else}
+          {:else if slot.id == null}
             <span
-              class="deck-slot-number"
-              aria-label={m.button_label_mixtape_empty_slot({
-                number: slot.index + 1,
-              })}
+              class="deck-slot-add"
+              role="img"
+              aria-label={params.type === "show"
+                ? m.button_label_mixtape_add_show()
+                : m.button_label_mixtape_add_movie()}
             >
-              {slot.index + 1}
+              <PlusIcon />
             </span>
           {/if}
         </div>
@@ -256,10 +264,10 @@
     --deck-height: calc(
       var(--segmented-select-segment-height) + 2 * var(--ni-4)
     );
-    --deck-slot-width: var(--ni-20);
-    --deck-slot-height: var(--ni-30);
-    --deck-slot-gap: var(--ni-6);
-    --deck-slot-radius: var(--ni-4);
+    --deck-slot-width: var(--ni-28);
+    --deck-slot-height: var(--ni-40);
+    --deck-slot-gap: var(--ni-4);
+    --deck-slot-radius: var(--ni-6);
     --deck-slide-duration: calc(3 * var(--transition-increment));
     --deck-slide-ease: cubic-bezier(0.34, 1.3, 0.5, 1);
     --deck-slide-distance: calc(var(--rtl-sign, 1) * var(--ni-60));
@@ -272,8 +280,7 @@
     min-width: 0;
   }
 
-  .deck-search,
-  .deck-slots {
+  .deck-search {
     box-sizing: border-box;
     height: var(--deck-height);
 
@@ -353,7 +360,7 @@
     align-items: center;
     gap: var(--deck-slot-gap);
 
-    padding-inline: var(--ni-10);
+    height: var(--deck-slot-height);
     overflow: hidden;
 
     animation: deck-slots-in var(--deck-slide-duration) var(--deck-slide-ease)
@@ -433,16 +440,42 @@
     }
   }
 
-  .deck-slot-number {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-tag);
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
+  .deck-slot[data-add="true"] {
+    background: color-mix(in srgb, var(--color-foreground) 2%, transparent);
+    box-shadow: inset 0 0 0 var(--border-thickness-xs)
+      color-mix(in srgb, var(--purple-400) 60%, transparent);
+  }
+
+  .deck-slot-add {
+    display: flex;
+    color: var(--purple-300);
+
+    :global(svg) {
+      width: var(--ni-14);
+      height: var(--ni-14);
+    }
   }
 
   .trakt-mixtape-navbar-deck[data-full="true"] .deck-slots {
     gap: var(--ni-3);
-    box-shadow: var(--shadow-mixtape-deck-loaded);
+  }
+
+  .trakt-mixtape-navbar-deck[data-view="results"] {
+    --deck-slot-width: var(--ni-22);
+    --deck-slot-height: var(--ni-32);
+    --deck-slot-radius: var(--ni-4);
+
+    /* The picks pill is barely there: a 3% wash and a hairline, no glass. */
+    .deck-slots {
+      box-sizing: border-box;
+      height: var(--deck-height);
+      padding-inline: var(--ni-10);
+
+      border-radius: var(--border-radius-pill);
+      background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+      box-shadow: inset 0 0 0 var(--border-thickness-xxs)
+        color-mix(in srgb, var(--color-foreground) 8%, transparent);
+    }
   }
 
   .trakt-mixtape-navbar-deck[data-shine="true"] .deck-shine {
@@ -626,14 +659,6 @@
 
       .deck-slots {
         justify-content: flex-start;
-        height: var(--deck-height);
-        padding-inline: var(--ni-10);
-
-        background:
-          var(--background-navbar-entry),
-          color-mix(in srgb, var(--color-background-navbar) 75%, transparent);
-        backdrop-filter: blur(var(--ni-8));
-        box-shadow: var(--shadow-mixtape-deck-loaded);
       }
     }
 
@@ -654,11 +679,8 @@
       }
 
       .deck-slots {
-        justify-content: space-evenly;
-      }
-
-      .deck-slot-number {
-        font-size: var(--font-size-text);
+        justify-content: center;
+        gap: var(--gap-s);
       }
 
       .deck-search {

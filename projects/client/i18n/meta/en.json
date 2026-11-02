@@ -14590,7 +14590,7 @@
       "description": "Tooltip under the Mixtape pill in the Discover header. One short line explaining what Mixtape does."
     },
     "text_mixtape_deck_prompt_movies": {
-      "default": "Pick up to {max} movies you loved",
+      "default": "Add up to {max} movies you loved",
       "description": "Line under the Mixtape title in the page header while picking movies. {max} is how many slots the deck has (3).",
       "variables": {
         "max": {
@@ -14601,7 +14601,7 @@
       }
     },
     "text_mixtape_deck_prompt_shows": {
-      "default": "Pick up to {max} shows you loved",
+      "default": "Add up to {max} shows you loved",
       "description": "Line under the Mixtape title in the page header while picking shows. {max} is how many slots the deck has (3).",
       "variables": {
         "max": {
@@ -14681,16 +14681,13 @@
         }
       }
     },
-    "button_label_mixtape_empty_slot": {
-      "default": "Empty slot {number}",
-      "description": "Accessible name of a free slot in the Mixtape deck. {number} is the slot position, 1 to 3.",
-      "variables": {
-        "number": {
-          "type": "number",
-          "description": "Position of the slot in the deck.",
-          "required": true
-        }
-      }
+    "button_label_mixtape_add_movie": {
+      "default": "Add a movie",
+      "description": "Accessible name of the empty add slot in the Mixtape deck while picking movies. Picks land in it from the grid or the search."
+    },
+    "button_label_mixtape_add_show": {
+      "default": "Add a show",
+      "description": "Accessible name of the empty add slot in the Mixtape deck while picking shows. Picks land in it from the grid or the search."
     },
     "button_text_mixtape_change": {
       "default": "Change",
