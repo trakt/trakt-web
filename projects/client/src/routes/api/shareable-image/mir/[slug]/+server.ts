@@ -3,6 +3,7 @@ import type { MirShareData } from '$lib/features/share/models/MirShareData.ts';
 import { mirDetailQuery } from '$lib/requests/queries/users/mirDetailQuery.ts';
 import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
 import { userProfileQuery } from '$lib/requests/queries/users/userProfileQuery.ts';
+import { DEFAULT_SHARE_COVER } from '$lib/utils/assets.ts';
 import { isHttpUrl } from '$lib/utils/url/isHttpUrl.ts';
 import type { RequestHandler } from '@sveltejs/kit';
 import { render } from 'svelte/server';
@@ -69,6 +70,8 @@ export const GET: RequestHandler = (event) => {
     isFresh: (cachedAt) => isMirImageFresh({ cachedAt, now, settlesAt }),
     cacheControl:
       isSettled && hasExplicitMonth ? SETTLED_MONTH_CACHE : OPEN_MONTH_CACHE,
+    toRedirect: ({ profile }) =>
+      profile.isVip || profile.isDirector ? null : DEFAULT_SHARE_COVER,
     loadData: async ({ fetch }) => {
       const profile = await userProfileQuery({ slug, fetch }).execute();
       if (!profile || profile.private || profile.isDeleted) return null;

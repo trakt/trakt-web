@@ -34,6 +34,7 @@ type RespondWithShareImageProps<T> = {
   imagePath: string | null | ((data: T) => Promise<string>);
   cacheControl: string;
   isFresh?: (cachedAt: Date) => boolean;
+  toRedirect?: (data: T) => string | null;
   loadData: (props: {
     fetch: typeof globalThis.fetch;
     timing: ServerTiming;
@@ -49,6 +50,7 @@ export async function respondWithShareImage<T>({
   imagePath,
   cacheControl,
   isFresh,
+  toRedirect,
   loadData,
   prepare,
   prepareFallback,
@@ -128,6 +130,14 @@ export async function respondWithShareImage<T>({
 
   if (!data) {
     return new Response('Data not found', { status: 404 });
+  }
+
+  const redirectUrl = toRedirect?.(data);
+  if (redirectUrl) {
+    return new Response(null, {
+      status: 302,
+      headers: { Location: redirectUrl },
+    });
   }
 
   const resolvedPath =
