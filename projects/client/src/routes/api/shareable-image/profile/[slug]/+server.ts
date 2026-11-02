@@ -28,7 +28,7 @@ export const GET: RequestHandler = (event) => {
     cacheControl: 'public, max-age=86400, s-maxage=604800',
     loadData: async ({ fetch }) => {
       const profile = await userProfileQuery({ slug, fetch }).execute();
-      if (!profile) return null;
+      if (!profile || profile.isDeleted) return null;
 
       return {
         canonicalSlug: profile.slug ?? slug,
