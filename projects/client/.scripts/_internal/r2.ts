@@ -197,7 +197,11 @@ export class R2Client {
   }: {
     prefix?: string;
     cursor?: string;
-  }): Promise<{ keys: string[]; cursor?: string }> {
+  }): Promise<{
+    keys: string[];
+    objects: Array<{ key: string; lastModified: number }>;
+    cursor?: string;
+  }> {
     const params = new URLSearchParams({ 'list-type': '2' });
     if (prefix) params.set('prefix', prefix);
     if (cursor) params.set('continuation-token', cursor);
@@ -221,8 +225,13 @@ export class R2Client {
     }
 
     const xml = await res.text();
-    const keys = [...xml.matchAll(/<Key>([^<]+)<\/Key>/g)].map((m) =>
-      xmlUnescape(m[1] ?? ''),
+    const objects = [...xml.matchAll(/<Contents>([\s\S]*?)<\/Contents>/g)].map(
+      (m) => ({
+        key: xmlUnescape(m[1]?.match(/<Key>([^<]+)<\/Key>/)?.[1] ?? ''),
+        lastModified: Date.parse(
+          m[1]?.match(/<LastModified>([^<]+)<\/LastModified>/)?.[1] ?? '',
+        ),
+      }),
     );
     const isTruncated = /<IsTruncated>true<\/IsTruncated>/.test(xml);
     const token = xml.match(
@@ -230,7 +239,8 @@ export class R2Client {
     )?.[1];
 
     return {
-      keys,
+      keys: objects.map(({ key }) => key),
+      objects,
       cursor: isTruncated && token ? xmlUnescape(token) : undefined,
     };
   }

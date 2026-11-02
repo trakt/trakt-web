@@ -1,6 +1,8 @@
 import { buildTargetPrefixes } from '../src/routes/api/shareable-image/_internal/buildTargetPrefixes.ts';
+import { versionedShareImagePrefix } from '../src/routes/api/shareable-image/_internal/versionedShareImagePrefix.ts';
 import { R2Client } from './_internal/r2.ts';
 import { pruneShareImages } from './prune-share-images.ts';
+import { pruneVersionedShareImages } from './prune-versioned-share-images.ts';
 
 // A full 1000-key page of HEAD requests exhausts sockets and trips rate limits.
 const HEAD_CHUNK_SIZE = 50;
@@ -62,6 +64,32 @@ console.log(
   `Prune complete. deleted: ${result.deleted}, skipped: ${result.skipped}, errors: ${result.errors}`,
 );
 
-if (result.errors > 0) {
+const versionedBucket = {
+  list: async (opts: { cursor?: string; prefix: string }) => {
+    const page = await r2.listPage(opts);
+
+    return {
+      objects: page.objects,
+      truncated: page.cursor !== undefined,
+      cursor: page.cursor,
+    };
+  },
+  delete: (key: string) => r2.delete(key),
+};
+
+const versionedResult = await pruneVersionedShareImages({
+  bucket: versionedBucket,
+  targets: [
+    versionedShareImagePrefix('mir'),
+    { ...versionedShareImagePrefix('profile'), isLatestOnly: true },
+  ],
+  isDryRun: process.env.DRY_RUN === '1',
+});
+
+console.log(
+  `Versioned prune complete. deleted: ${versionedResult.deleted}, kept: ${versionedResult.kept}, errors: ${versionedResult.errors}`,
+);
+
+if (result.errors > 0 || versionedResult.errors > 0) {
   process.exit(1);
 }

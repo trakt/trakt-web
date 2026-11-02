@@ -1,4 +1,5 @@
 import type { ProfileShareData } from '$lib/features/share/models/ProfileShareData.ts';
+import { versionedShareImagePrefix } from '../../_internal/versionedShareImagePrefix.ts';
 
 const HASH_LENGTH = 12;
 
@@ -21,5 +22,7 @@ export async function toProfileImagePath({
   slug,
   data,
 }: ToProfileImagePathProps): Promise<string> {
-  return `images/share/profile/og/${slug}/${await toContentHash(data)}.jpg`;
+  const { current } = versionedShareImagePrefix('profile');
+
+  return `${current}og/${slug}/${await toContentHash(data)}.jpg`;
 }

@@ -33,6 +33,7 @@ type RespondWithShareImageProps<T> = {
    */
   imagePath: string | null | ((data: T) => Promise<string>);
   cacheControl: string;
+  isFresh?: (cachedAt: Date) => boolean;
   loadData: (props: {
     fetch: typeof globalThis.fetch;
     timing: ServerTiming;
@@ -47,6 +48,7 @@ export async function respondWithShareImage<T>({
   shareType,
   imagePath,
   cacheControl,
+  isFresh,
   loadData,
   prepare,
   prepareFallback,
@@ -77,6 +79,12 @@ export async function respondWithShareImage<T>({
 
     const cachedImage = await timing.measure('cache', () => bucket.get(path));
     if (!cachedImage) return null;
+
+    const cachedAt = new Date(cachedImage.customMetadata?.cachedAt ?? '');
+    if (isFresh && !isFresh(cachedAt)) {
+      await cachedImage.body.cancel();
+      return null;
+    }
 
     /*
       Cast needed due to structural mismatch between Cloudflare's ReadableStream
