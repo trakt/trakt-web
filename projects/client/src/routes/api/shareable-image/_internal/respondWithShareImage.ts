@@ -179,7 +179,8 @@ export async function respondWithShareImage<T>({
       const cached = bucket
         .put(resolvedPath, buffer, {
           httpMetadata: { contentType: 'image/jpeg' },
-          customMetadata: buildMetadata?.(data) ?? {
+          customMetadata: {
+            ...buildMetadata?.(data),
             cachedAt: new Date().toISOString(),
           },
         })
