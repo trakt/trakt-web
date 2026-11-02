@@ -3,6 +3,7 @@ import type { Snippet } from 'svelte';
 export type TooltipProps = {
   content: string | Snippet;
   variant?: 'default' | 'compact';
+  width?: 'default' | 'content';
   side?: 'top' | 'right' | 'bottom' | 'left';
   delayDuration?: number;
   sideOffset?: number;

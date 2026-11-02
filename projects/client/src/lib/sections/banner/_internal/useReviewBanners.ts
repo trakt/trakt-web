@@ -1,5 +1,6 @@
 import { getLocale } from '$lib/features/i18n/index.ts';
 import { getMonthKey } from '$lib/utils/date/getMonthKey.ts';
+import { getNextMonth } from '$lib/utils/date/getNextMonth.ts';
 import { getPreviousMonth } from '$lib/utils/date/getPreviousMonth.ts';
 import { getStartOfWeek } from '$lib/utils/date/getStartOfWeek.ts';
 import { isFirstWeekOfMonth } from '$lib/utils/date/isFirstWeekOfMonth.ts';
@@ -45,6 +46,7 @@ export function useReviewBanners(date: Date) {
         isVisible,
         dismiss: dismissMir,
         month: previousMonth,
+        hiddenUntil: getNextMonth(date),
       })),
     ),
     yir: hasYir.pipe(

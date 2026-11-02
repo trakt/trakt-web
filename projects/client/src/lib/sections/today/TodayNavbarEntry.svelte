@@ -109,25 +109,10 @@
       --entry-inset-start: var(--ni-12);
       --entry-inset-end: var(--ni-12);
 
-      position: relative;
-      display: inline-flex;
-      align-items: center;
+      @include navbar-entry-surface;
+
       vertical-align: top;
-      gap: var(--gap-xs);
-
-      box-sizing: border-box;
-      height: var(--entry-size);
       padding-inline: var(--entry-inset-start) var(--entry-inset-end);
-
-      border-radius: var(--border-radius-pill);
-      background:
-        var(--background-today-entry),
-        color-mix(in srgb, var(--color-background-navbar) 75%, transparent);
-      backdrop-filter: blur(var(--ni-8));
-      box-shadow: var(--shadow-today-entry);
-      color: var(--color-text-primary);
-
-      transition: box-shadow var(--transition-increment) ease-in-out;
 
       &.has-faces {
         --entry-inset-start: var(--ni-3);
@@ -137,12 +122,6 @@
         --entry-inset-end: calc(
           (var(--entry-size) - var(--entry-count-size)) / 2
         );
-      }
-
-      @include for-mouse {
-        &:hover {
-          box-shadow: var(--shadow-today-entry-hover);
-        }
       }
     }
 

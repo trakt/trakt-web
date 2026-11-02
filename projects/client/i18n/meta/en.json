@@ -7099,27 +7099,31 @@
       "default": "In Review",
       "description": "Subtitle beneath the month name in the Month in Review banner pill."
     },
-    "mir_banner_body": {
-      "default": "Your monthly recap is ready. Here's what you watched in {month}.",
-      "description": "Body copy in the Month in Review banner. {month} is the formatted month name, e.g. 'June'.",
+    "mir_entry_tooltip_body": {
+      "default": "Your {month} in Review is ready. Every show, film and late night, in one place.",
+      "description": "Body copy of the tooltip that opens when hovering the Month in Review pill in the home header. {month} is the formatted month name, e.g. 'October'.",
       "variables": {
         "month": {
           "type": "string"
         }
       }
     },
-    "mir_banner_body_short": {
-      "default": "Your {month} recap is ready.",
-      "description": "Condensed body copy in the Month in Review banner, shown on mobile where there is no room for the full sentence. {month} is the formatted month name, e.g. 'June'.",
+    "mir_entry_open": {
+      "default": "Open review",
+      "description": "Link text inside the Month in Review pill tooltip that opens the Month in Review page."
+    },
+    "mir_entry_hide_until": {
+      "default": "Hide until {month}",
+      "description": "Button text (and aria-label on mobile) that hides the Month in Review entry until the next Month in Review arrives. {month} is the formatted name of the month in which the next Month in Review arrives, e.g. 'December'.",
       "variables": {
         "month": {
           "type": "string"
         }
       }
     },
-    "mir_banner_explore": {
-      "default": "Explore",
-      "description": "Label inside the outlined explore button in the Month in Review banner. Only shown on wider viewports; narrower ones rely on the whole banner being tappable."
+    "mir_strip_title": {
+      "default": "Your month on Trakt",
+      "description": "Main line of the Month in Review strip on mobile, shown under the '{month} in Review' kicker. Keep it short; the strip is one line tall."
     },
     "mir_title_month_in_review": {
       "default": "Month in Review",

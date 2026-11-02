@@ -33,6 +33,32 @@
   box-shadow: var(--shadow-menu);
 }
 
+@mixin navbar-entry-surface {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+
+  box-sizing: border-box;
+  height: var(--segmented-select-segment-height);
+
+  border-radius: var(--border-radius-pill);
+  background:
+    var(--background-today-entry),
+    color-mix(in srgb, var(--color-background-navbar) 75%, transparent);
+  backdrop-filter: blur(var(--ni-8));
+  box-shadow: var(--shadow-today-entry);
+  color: var(--color-text-primary);
+
+  transition: box-shadow var(--transition-increment) ease-in-out;
+
+  @include for-mouse {
+    &:hover {
+      box-shadow: var(--shadow-today-entry-hover);
+    }
+  }
+}
+
 @mixin floating-list($position: relative) {
   padding: calc(var(--border-radius-l) - var(--border-radius-menu-item));
 
