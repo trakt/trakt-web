@@ -40,7 +40,8 @@
   <CommentBody
     {comment}
     {media}
-    type="preview"
+    {...typeProps}
+    variant="preview"
     onClick={() => onDrilldown({ id: comment.id, isReplying: false })}
   />
 

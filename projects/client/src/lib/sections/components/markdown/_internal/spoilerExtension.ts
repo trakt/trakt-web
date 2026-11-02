@@ -9,14 +9,14 @@ export function matchSpoilerTag(src: string) {
   return rule.exec(src);
 }
 
-export function spoilerRenderer(text: string, isCommentSpoiler: boolean) {
-  if (isCommentSpoiler) return `<span>${text}</span>`;
+export function spoilerRenderer(text: string, isShown: boolean) {
+  if (isShown) return `<span>${text}</span>`;
 
   return `<span class="trakt-spoiler">${text}</span>`;
 }
 
 export function spoilerExtension(
-  isCommentSpoiler = false,
+  isShown = false,
 ): TokenizerAndRendererExtension {
   return {
     name: 'spoiler',
@@ -41,7 +41,7 @@ export function spoilerExtension(
     },
     renderer(token) {
       const parsedContent = this.parser.parseInline(token.tokens ?? []);
-      return spoilerRenderer(parsedContent, isCommentSpoiler);
+      return spoilerRenderer(parsedContent, isShown);
     },
   };
 }

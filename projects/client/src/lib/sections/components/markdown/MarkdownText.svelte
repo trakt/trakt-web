@@ -6,13 +6,13 @@
 
   const {
     text,
-    isSpoiler = false,
+    showInlineSpoilers = false,
     headings = "default",
     spacing = "default",
     onReveal,
   }: {
     text: string;
-    isSpoiler?: boolean;
+    showInlineSpoilers?: boolean;
     headings?: "default" | "subheading";
     spacing?: "default" | "relaxed";
     onReveal?: () => void;
@@ -20,7 +20,7 @@
 
   const marked = $derived(
     createSafeMarked({
-      extensions: [spoilerExtension(isSpoiler)],
+      extensions: [spoilerExtension(showInlineSpoilers)],
       renderer: {
         heading: createHeadingRenderer(),
       },
