@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
+  import RelatedModeToggles from "$lib/features/recommendations/RelatedModeToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import RelatedPaginatedList from "$lib/sections/lists/RelatedPaginatedList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
@@ -9,6 +10,10 @@
   const { params }: PageProps = $props();
 </script>
 
+{#snippet titleActions()}
+  <RelatedModeToggles />
+{/snippet}
+
 <TraktPage
   audience="all"
   title={m.list_title_related_shows()}
@@ -17,6 +22,7 @@
   <NavbarStateSetter
     header={{
       title: m.list_title_related_shows(),
+      actions: titleActions,
     }}
   />
 

@@ -163,6 +163,7 @@ export const AnalyticsEvent = {
 
   RecommendationMode: buildEventKey(RECOMMENDATIONS_PREFIX, 'mode'),
   RecommendationWhy: buildEventKey(RECOMMENDATIONS_PREFIX, 'why'),
+  RelatedMode: buildEventKey(RECOMMENDATIONS_PREFIX, 'related-mode'),
 
   ListCollaborator: buildEventKey(LIST_ACTION_PREFIX, 'collaborator'),
   MuteSharer: buildEventKey(USER_ACTION_PREFIX, 'mute-sharer'),
