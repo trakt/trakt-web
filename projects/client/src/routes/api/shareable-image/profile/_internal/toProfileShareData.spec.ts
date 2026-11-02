@@ -22,7 +22,7 @@ describe('util: toProfileShareData', () => {
   it('should carry the membership for the avatar ring and badge', () => {
     expect(data.user).toMatchObject({
       isVip: UserProfileHarryMappedMock.isVip,
-      isDirector: UserProfileHarryMappedMock.isDirector,
+      badgeLabel: 'VIP',
     });
   });
 });

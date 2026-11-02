@@ -6,7 +6,7 @@ const user = {
   username: null,
   avatarUrl: 'https://media.trakt.tv/sean.png',
   isVip: true,
-  isDirector: true,
+  badgeLabel: 'DIRECTOR',
 };
 
 const toPath = (overrides = {}) =>
