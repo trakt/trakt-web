@@ -22,11 +22,13 @@
 {#snippet content()}
   <span class="entry-icon"><CassetteIcon /></span>
   <span class="entry-label">{label}</span>
-  {#if hasCount}
-    <span class="entry-count">
-      {m.text_mixtape_deck_count({ count, max: action.max })}
-    </span>
-  {/if}
+  <span
+    class="entry-count"
+    class:is-hidden={!hasCount}
+    aria-hidden={!hasCount || undefined}
+  >
+    {m.text_mixtape_deck_count({ count, max: action.max })}
+  </span>
 {/snippet}
 
 <div
@@ -140,12 +142,13 @@
     }
 
     /*
-      The label owns the middle so it starts at the same x whether a count
-      follows it or not; the count keeps the end.
+      The count is always laid out (hidden when there is nothing to count)
+      so the label is centred in the same box in every state.
     */
     .entry-label {
       flex: 1;
       font-weight: 500;
+      text-align: center;
       white-space: nowrap;
     }
 
@@ -155,6 +158,10 @@
       font-weight: 700;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
+
+      &.is-hidden {
+        visibility: hidden;
+      }
     }
 
     &[data-state="empty"] {

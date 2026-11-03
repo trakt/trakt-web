@@ -95,6 +95,7 @@
     .entry-label {
       flex: 1;
       font-weight: 500;
+      text-align: center;
       white-space: nowrap;
     }
 
