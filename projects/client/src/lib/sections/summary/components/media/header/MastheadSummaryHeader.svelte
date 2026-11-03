@@ -1218,7 +1218,7 @@
     /* Larger than 1a's synopsis - it carries the centred composition. */
     font-size: var(--ni-20);
     line-height: 1.55;
-    color: var(--color-text-quiet);
+    color: var(--color-text-soft);
     text-wrap: pretty;
   }
 

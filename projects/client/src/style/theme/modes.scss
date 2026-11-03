@@ -22,6 +22,8 @@
   /* The quiet half of a two-tone line: the primary text, dimmed, so it keeps
      the primary's voice and takes on the surface behind it. */
   --color-text-quiet: color-mix(in srgb, var(--shade-900) 62%, transparent);
+  /* Running text a step under the primary: softer than a title, never grey. */
+  --color-text-soft: color-mix(in srgb, var(--shade-900) 80%, transparent);
 
   --color-medal-gold: var(--yellow-400);
   --color-medal-silver: var(--shade-400);
@@ -675,6 +677,7 @@
   --color-text-primary: var(--shade-10);
   --color-text-secondary: var(--shade-300);
   --color-text-quiet: color-mix(in srgb, var(--shade-10) 62%, transparent);
+  --color-text-soft: color-mix(in srgb, var(--shade-10) 80%, transparent);
 
   --color-medal-gold: var(--yellow-400);
   --color-medal-silver: var(--shade-400);

@@ -460,7 +460,7 @@
 
     font-size: var(--ni-16);
     line-height: 1.65;
-    color: var(--color-text-quiet);
+    color: var(--color-text-soft);
     text-wrap: pretty;
   }
 
