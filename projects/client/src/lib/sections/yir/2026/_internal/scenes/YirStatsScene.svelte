@@ -7,12 +7,11 @@
   import { toHumanClockTime } from "$lib/utils/formatting/date/toHumanClockTime";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
   import { toHumanShortDate } from "$lib/utils/formatting/date/toHumanShortDate";
-  import { addDays } from "date-fns/addDays";
   import { setMonth } from "date-fns/setMonth";
   import { yirMediaUnit } from "$lib/sections/yir/_internal/yirMediaUnit";
+  import { yirWeekRange } from "$lib/sections/yir/_internal/yirWeekRange";
   import { peakHour } from "./peakHour";
   import { peakWeek } from "./peakWeek";
-  import { weekStart } from "./weekStart";
   import YirBars from "./YirBars.svelte";
   import YirCountUp from "./YirCountUp.svelte";
   import YirScene from "./YirScene.svelte";
@@ -36,12 +35,12 @@
 
   const weekly = $derived(
     (stats.distributions?.weekly ?? []).map((value, week) => {
-      const start = weekStart(year, week);
+      const { start, end } = yirWeekRange(year, week);
       return {
         value,
         label: String(week + 1),
         main: m.yir_2024_stats_tooltip_plays({ count: formatNumber(value) }),
-        sub: `${m.yir_2024_stats_tooltip_week_label({ week: String(week + 1) })} · ${toHumanShortDate(start, languageTag())} - ${toHumanShortDate(addDays(start, 6), languageTag())}`,
+        sub: `${m.yir_2024_stats_tooltip_week_label({ week: String(week + 1) })} · ${toHumanShortDate(start, languageTag())} - ${toHumanShortDate(end, languageTag())}`,
       };
     }),
   );

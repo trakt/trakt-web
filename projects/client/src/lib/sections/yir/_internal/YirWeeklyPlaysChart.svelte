@@ -3,9 +3,8 @@
   import { languageTag } from "$lib/features/i18n";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { toHumanShortDate } from "$lib/utils/formatting/date/toHumanShortDate";
-  import { addDays } from "date-fns/addDays";
-  import { startOfYear } from "date-fns/startOfYear";
   import type { Snippet } from "svelte";
+  import { yirWeekRange } from "./yirWeekRange";
 
   type WeekTooltipArgs = {
     value: number;
@@ -32,13 +31,9 @@
 
   function getWeekDateRange(weekNumber: number): string {
     const locale = languageTag();
-    const weekStart = addDays(
-      startOfYear(new Date(year, 0, 1)),
-      (weekNumber - 1) * 7,
-    );
-    const weekEnd = addDays(weekStart, 6);
-    return `${toHumanShortDate(weekStart, locale)} - ${
-      toHumanShortDate(weekEnd, locale)
+    const { start, end } = yirWeekRange(year, weekNumber - 1);
+    return `${toHumanShortDate(start, locale)} - ${
+      toHumanShortDate(end, locale)
     }`;
   }
 
