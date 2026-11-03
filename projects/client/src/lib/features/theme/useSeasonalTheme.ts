@@ -6,6 +6,7 @@ import {
   Observable,
   shareReplay,
 } from 'rxjs';
+import { untrack } from 'svelte';
 import { z } from 'zod';
 import { safeLocalStorage } from '../../utils/storage/safeStorage.ts';
 import { SEASONAL_SPLASH_DISMISSAL_KEY, SEASONAL_THEMES } from './constants.ts';
@@ -56,11 +57,11 @@ const activeTheme = new Observable<SeasonalThemeId | null>((subscriber) => {
   subscriber.next(null);
   if (typeof document === 'undefined') return;
 
-  queueMicrotask(() => subscriber.next(readSeasonalTheme()));
+  const emitTheme = () => untrack(() => subscriber.next(readSeasonalTheme()));
 
-  const observer = new MutationObserver(() =>
-    subscriber.next(readSeasonalTheme()),
-  );
+  queueMicrotask(emitTheme);
+
+  const observer = new MutationObserver(emitTheme);
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: [SEASONAL_THEME_ATTRIBUTE],
