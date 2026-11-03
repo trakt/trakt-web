@@ -77,8 +77,11 @@
       height: var(--ni-16);
     }
 
+    /* Room for the mascot peeking over the bar. A caller that seats the bar
+       in a row of other controls clears it, or the bar alone drops off the
+       row's centre line, and makes the room above the row instead. */
     &.has-seasonal-theme {
-      margin-top: var(--ni-10);
+      margin-top: var(--summary-actions-bar-seasonal-headroom, var(--ni-10));
     }
 
     &:global(:has(.trakt-media-actions-popup-button.is-opened)) {

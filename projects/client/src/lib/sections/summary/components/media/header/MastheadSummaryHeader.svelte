@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import ArtworkPlaceholder from "$lib/components/skeleton/ArtworkPlaceholder.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
@@ -119,6 +120,8 @@
   const isAwardsEnabled = isEnabled(FeatureFlag.SummaryAwards);
 
   /* `?actions=fused` seats the stars on the action tray's own surface. */
+  const { activeTheme } = useSeasonalTheme();
+
   const actionsVariant = $derived(
     toHeaderActionsVariant(page.url.searchParams.get(HEADER_ACTIONS_PARAM)),
   );
@@ -531,7 +534,11 @@
         appeared for rateable titles and shifted everything under it when it
         did; side by side, an absent mark costs the row nothing.
       -->
-      <div class="masthead-actions" data-reveal-wave="4">
+      <div
+        class="masthead-actions"
+        data-reveal-wave="4"
+        data-seasonal={$activeTheme !== null}
+      >
         {#if actionsVariant === "fused"}
           <!--
             One tray: the stars share the action bar's dark surface, a hairline
@@ -1367,6 +1374,12 @@
 
     margin-top: var(--gap-xxs);
 
+    /* The seasonal mascot's room, taken above the tray rather than by the bar
+       inside it - see the action row below. */
+    &[data-seasonal="true"] {
+      margin-top: calc(var(--gap-xxs) + var(--ni-10));
+    }
+
     .fused-tray {
       display: flex;
       align-items: center;
@@ -1379,6 +1392,7 @@
 
       /* Inside a same-colour tray the bar's lift reads as a smudge. */
       --summary-actions-bar-shadow: none;
+      --summary-actions-bar-seasonal-headroom: 0;
     }
 
     .fused-divider {
@@ -1415,6 +1429,8 @@
       box-shadow: var(--shadow-raised);
 
       --summary-actions-bar-shadow: none;
+      /* The bar shares the row's centre line with the marks beside it. */
+      --summary-actions-bar-seasonal-headroom: 0;
 
       /*
         A bigger tray than the rail it was written for: this one anchors the

@@ -72,7 +72,7 @@
   .trivia-text {
     font-size: var(--font-size-text);
     line-height: 1.5;
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     text-wrap: pretty;
 
     :global(p) {
