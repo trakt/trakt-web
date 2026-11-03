@@ -1,5 +1,7 @@
 <script lang="ts">
   import CheckInButton from "$lib/components/buttons/check-in/CheckInButton.svelte";
+  import Snackbar from "$lib/components/snackbar/Snackbar.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { CheckInActionProps } from "./CheckInActionProps.ts";
   import { useCheckIn } from "./useCheckIn.ts";
 
@@ -17,8 +19,18 @@
     useCheckIn(target),
   );
 
+  let hasFailed = $state(false);
+
   const checkinHandler = async () => {
-    await checkin();
+    const hasCheckedIn = await checkin()
+      .then(() => true)
+      .catch(() => false);
+
+    if (!hasCheckedIn) {
+      hasFailed = true;
+      return;
+    }
+
     onCheckIn?.();
   };
 </script>
@@ -35,3 +47,11 @@
     checkin={checkinHandler}
   />
 {/if}
+
+<Snackbar
+  open={hasFailed}
+  onDismiss={() => (hasFailed = false)}
+  title={m.text_checkin_failed_title()}
+  message={m.text_checkin_failed_message()}
+  variant="error"
+/>
