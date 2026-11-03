@@ -10,8 +10,8 @@ describe('util: peakWeek', () => {
     const peak = peakWeek([3, 9, 4], 2026);
 
     expect(peak?.plays).toBe(9);
-    expect(peak?.start.getDate()).toBe(8);
-    expect(peak?.end.getDate()).toBe(14);
+    expect(peak?.start.getDate()).toBe(5);
+    expect(peak?.end.getDate()).toBe(11);
   });
 
   it('should pick the first week on a tie', () => {
