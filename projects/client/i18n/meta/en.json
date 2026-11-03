@@ -8921,6 +8921,14 @@
       "default": "Couldn't open your subscription settings",
       "description": "Title of the snackbar shown when opening the payment provider page to manage a VIP subscription failed for an unexpected reason."
     },
+    "text_checkin_failed_title": {
+      "default": "Couldn't check in",
+      "description": "Title of the snackbar shown when a check in failed, for example because the connection dropped."
+    },
+    "text_checkin_failed_message": {
+      "default": "Check your connection and try again.",
+      "description": "Message of the snackbar shown when a check in failed, for example because the connection dropped."
+    },
     "text_vip_checkout_failed_title": {
       "default": "Couldn't start checkout",
       "description": "Title of the snackbar shown when starting the VIP checkout failed, for example because the connection dropped."
