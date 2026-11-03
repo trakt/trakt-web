@@ -3,6 +3,8 @@
   import { m } from "$lib/features/i18n/messages";
   import { fade } from "svelte/transition";
   import { hideSeasonalCover } from "$lib/features/theme/_internal/hideSeasonalCover.ts";
+  import { delay } from "$lib/utils/timing/delay.ts";
+  import { time } from "$lib/utils/timing/time.ts";
 
   const {
     children,
@@ -11,19 +13,25 @@
   }: ChildrenProps & { hasSplashScreen: boolean; onDismiss: () => void } =
     $props();
 
-  const revealOnceShown = (node: HTMLElement) => {
-    requestAnimationFrame(() =>
-      Promise.allSettled(
-        node.getAnimations().map(({ finished }) => finished),
-      ).then(hideSeasonalCover),
+  const FADE_DURATION = time.seconds(0.15);
+
+  const waitForFade = (node: HTMLElement) => {
+    if (!node.getAnimations) return delay(FADE_DURATION);
+
+    return Promise.allSettled(
+      node.getAnimations().map(({ finished }) => finished),
     );
+  };
+
+  const revealOnceShown = (node: HTMLElement) => {
+    requestAnimationFrame(() => waitForFade(node).then(hideSeasonalCover));
   };
 </script>
 
 {#if hasSplashScreen}
   <div
     class="trakt-seasonal-splash-screen"
-    transition:fade={{ duration: 150 }}
+    transition:fade={{ duration: FADE_DURATION }}
     {@attach revealOnceShown}
   >
     {@render children()}
