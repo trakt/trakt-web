@@ -1,3 +1,5 @@
+import { pauseScrollSnap } from '$lib/utils/scroll/pauseScrollSnap.ts';
+
 const GESTURE_END_DELAY_MS = 150;
 
 /**
@@ -14,6 +16,12 @@ export function unlockOnHorizontalWheel(node: HTMLElement, isUnlocked = false) {
   const state = {
     unlocked: isUnlocked,
     timeout: undefined as ReturnType<typeof setTimeout> | undefined,
+    release: undefined as (() => void) | undefined,
+  };
+
+  const resumeSnapping = () => {
+    state.release?.();
+    state.release = undefined;
   };
 
   const handleWheel = (event: WheelEvent) => {
@@ -21,7 +29,7 @@ export function unlockOnHorizontalWheel(node: HTMLElement, isUnlocked = false) {
 
     event.preventDefault();
     /* Snapping would pull each small step back, which reads as being stuck. */
-    node.style.scrollSnapType = 'none';
+    state.release ??= pauseScrollSnap(node);
     node.scrollLeft += event.deltaX;
 
     if (!state.unlocked) {
@@ -31,14 +39,14 @@ export function unlockOnHorizontalWheel(node: HTMLElement, isUnlocked = false) {
 
     clearTimeout(state.timeout);
     state.timeout = setTimeout(() => {
-      node.style.scrollSnapType = '';
+      resumeSnapping();
       node.removeEventListener('wheel', handleWheel);
     }, GESTURE_END_DELAY_MS);
   };
 
   const arm = () => {
     clearTimeout(state.timeout);
-    node.style.scrollSnapType = '';
+    resumeSnapping();
     state.unlocked = false;
     node.addEventListener('wheel', handleWheel, { passive: false });
   };
@@ -52,7 +60,7 @@ export function unlockOnHorizontalWheel(node: HTMLElement, isUnlocked = false) {
     },
     destroy() {
       clearTimeout(state.timeout);
-      node.style.scrollSnapType = '';
+      resumeSnapping();
       node.removeEventListener('wheel', handleWheel);
     },
   };
