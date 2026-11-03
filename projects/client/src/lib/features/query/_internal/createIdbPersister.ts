@@ -12,6 +12,7 @@ import { del, entries, get, set } from 'idb-keyval';
 import { createIdbStore } from '$lib/utils/storage/createIdbStore.ts';
 import * as Sentry from '@sentry/sveltekit';
 import { toPersistedQueryName } from './toPersistedQueryName.ts';
+import { hasIndexedDb } from '$lib/utils/storage/hasIndexedDb.ts';
 
 const DB_NAME = 'trakt-query';
 const STORE_NAME = 'query-cache';
@@ -127,7 +128,7 @@ function refetchStaleRestores(persisterFn: PersisterFn): PersisterFn {
 const NATIVE_CODE = /\[native code\]/;
 
 function toIndexedDbOrigin(): string {
-  if (typeof indexedDB === 'undefined') return 'missing';
+  if (!hasIndexedDb()) return 'missing';
 
   const source = Function.prototype.toString.call(indexedDB.open);
   return NATIVE_CODE.test(source) ? 'native' : 'patched';

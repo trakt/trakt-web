@@ -5,6 +5,7 @@ import {
   type OfflineActionsStore,
 } from './createOfflineActionsStore.ts';
 import type { OfflineActionsStorage } from './OfflineActionsStorage.ts';
+import { hasIndexedDb } from '$lib/utils/storage/hasIndexedDb.ts';
 
 const memoryStorage: OfflineActionsStorage = {
   read: () => Promise.resolve([]),
@@ -12,7 +13,7 @@ const memoryStorage: OfflineActionsStorage = {
 };
 
 function resolveStorage(): OfflineActionsStorage {
-  if (!browser || typeof indexedDB === 'undefined') {
+  if (!browser || !hasIndexedDb()) {
     return memoryStorage;
   }
 
