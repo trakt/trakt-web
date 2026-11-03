@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
-  import type { StreamingServiceOption } from "$lib/requests/models/StreamingServiceOptions";
+  import type { HeaderProvider } from "./HeaderProvider.ts";
   import SummaryHeaderProviderRow from "./SummaryHeaderProviderRow.svelte";
 
   /*
@@ -11,8 +11,8 @@
     There is no "all options" footer - the section header's chevron already goes to
     the same place, and two affordances for one destination is just noise.
 
-    Row and logo size come from `--provider-row-height` / `--provider-logo-column`,
-    so a caller can tighten the list without a variant flag.
+    Rows share the strip's grid: `--summary-header-row-height` and
+    `--summary-header-tile`, 44px unless a caller tightens them.
 
     Empty state keeps the section and says so: a title with no provider is
     information, not a reason to hide the list.
@@ -21,7 +21,7 @@
     providers,
     country,
   }: {
-    providers: ReadonlyArray<StreamingServiceOption>;
+    providers: ReadonlyArray<HeaderProvider>;
     country: string;
   } = $props();
 </script>
@@ -34,7 +34,11 @@
   {:else}
     <div class="watch-options-list">
       {#each providers as provider (provider.key)}
-        <SummaryHeaderProviderRow service={provider} {country} />
+        <SummaryHeaderProviderRow
+          service={provider.service}
+          planCount={provider.planCount}
+          {country}
+        />
       {/each}
     </div>
   {/if}
@@ -51,6 +55,7 @@
   .watch-options-list {
     display: flex;
     flex-direction: column;
+    gap: var(--summary-header-row-gap, var(--ni-12));
   }
 
   .watch-options-empty {

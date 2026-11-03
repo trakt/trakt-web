@@ -9,13 +9,20 @@ const SEPARATOR = '·';
  * The offer line under a provider name in the header's watch list.
  *
  * Unlike the existing where-to-watch row - which shows a single price - this
- * renders the **full** offer on one line ("Rent 3.99 · Buy 9.99"). That is the
+ * renders the **full** offer on one line ("Rent 3.99 · Buy 9.99"). A row that
+ * folds several plans of one service says how many ("Stream · 2 plans"). That is the
  * point of the design's vertical list: it has the width to state every offer
  * type, which the old horizontal grid did not.
  */
-export function toProviderOffer(service: StreamingServiceOption): string {
+export function toProviderOffer(
+  service: StreamingServiceOption,
+  planCount = 1,
+): string {
   if (service.type === 'streaming') {
-    return `${m.text_stream()} ${SEPARATOR} ${m.text_included()}`;
+    const terms = planCount > 1
+      ? m.text_streaming_plan_count({ count: planCount })
+      : m.text_included();
+    return `${m.text_stream()} ${SEPARATOR} ${terms}`;
   }
 
   if (service.type === 'free') {

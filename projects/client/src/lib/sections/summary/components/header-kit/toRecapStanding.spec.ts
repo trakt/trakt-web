@@ -55,4 +55,23 @@ describe('util: toRecapStanding', () => {
       expect(standing.timeLeft).toBeNull();
     });
   });
+
+  describe('before the first episode', () => {
+    it('should report the episode count in a neutral pill', () => {
+      const standing = toRecapStanding(
+        progressWith({ completed: 0, remaining: 16, total: 16 }),
+      );
+
+      expect(standing.tone).toBe('neutral');
+      expect(standing.label).toMatchInlineSnapshot(`"16 episodes"`);
+    });
+
+    it('should report the whole runtime as the total', () => {
+      const standing = toRecapStanding(
+        progressWith({ completed: 0, remaining: 16, total: 16, minutesLeft: 432 }),
+      );
+
+      expect(standing.timeLeft).toMatchInlineSnapshot(`"7h 12m total"`);
+    });
+  });
 });

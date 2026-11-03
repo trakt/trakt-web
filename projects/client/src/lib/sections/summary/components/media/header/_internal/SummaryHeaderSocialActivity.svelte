@@ -28,20 +28,19 @@
 
       <span class="activity-info">
         <span class="activity-name ellipsis">{toDisplayableName(entry.user)}</span>
+        <span class="activity-label">{toSocialActivityLabel(entry)}</span>
+      </span>
 
-        <span class="activity-detail">
-          <!--
-            The score goes through UserRating, the same component the ratings
-            drawer and comments use. Ratings are stored 1-10 but shown as 5 stars,
-            so anything that prints the raw value disagrees with the drawer for the
-            very same entry.
-          -->
-          {#if entry.watched?.rating}
-            <UserRating rating={entry.watched.rating.rating} />
-          {/if}
-
-          <span class="activity-label">{toSocialActivityLabel(entry)}</span>
-        </span>
+      <!--
+        The score keeps a column of its own at the row's end, blank when the
+        friend has not rated, so every row holds the same grid. It goes
+        through UserRating, as the ratings drawer and comments do: ratings
+        are stored 1-10 but shown as 5 stars.
+      -->
+      <span class="activity-score">
+        {#if entry.watched?.rating}
+          <UserRating rating={entry.watched.rating.rating} />
+        {/if}
       </span>
     </div>
   {/each}
@@ -51,6 +50,7 @@
   .trakt-summary-header-social-activity {
     display: flex;
     flex-direction: column;
+    gap: var(--summary-header-row-gap, var(--ni-12));
 
     width: 100%;
   }
@@ -60,9 +60,8 @@
     align-items: center;
     gap: var(--gap-s);
 
-    /* Matches the provider rows, so the two columns scan at the same rhythm. */
-    min-height: var(--provider-row-height, var(--ni-52));
-    padding-block: var(--gap-xxs);
+    /* The strip's shared row, so every column scans at the same rhythm. */
+    min-height: var(--summary-header-row-height, var(--ni-44));
     box-sizing: border-box;
 
     min-width: 0;
@@ -73,54 +72,66 @@
     align-items: center;
     flex: none;
 
-    /* Same cell the provider marks occupy, so names line up across columns. */
-    width: var(--provider-logo-column, var(--ni-36));
+    justify-content: center;
+
+    /* The same 44px cell the provider tiles fill, so names line up across
+       columns; the avatar sits inside it with room for its tier ring. */
+    width: var(--summary-header-tile, var(--ni-44));
+    height: var(--summary-header-tile, var(--ni-44));
 
     :global(.trakt-user-avatar) {
-      width: var(--ni-28);
-      height: var(--ni-28);
+      width: calc(var(--ni-36) - var(--ni-2));
+      height: calc(var(--ni-36) - var(--ni-2));
     }
   }
 
   .activity-info {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-2);
 
     min-width: 0;
   }
 
   .activity-name {
     font-size: var(--font-size-text);
-    font-weight: 600;
+    font-weight: 700;
+    line-height: var(--ni-20);
     color: var(--color-text-primary);
-  }
-
-  .activity-detail {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xxs);
-
-    font-size: var(--font-size-text-small);
-    color: var(--color-text-quiet);
-    white-space: nowrap;
-
-    :global(.trakt-user-rating) {
-      font-size: var(--font-size-text-small);
-      color: var(--color-text-primary);
-      gap: var(--ni-2);
-
-      :global(svg) {
-        width: var(--ni-12);
-        height: var(--ni-12);
-      }
-    }
   }
 
   /* Sized on the span: the global sheet sets every bare span to 14px. */
   .activity-label {
     font-size: var(--font-size-text-small);
+    line-height: var(--ni-16);
+    color: var(--color-text-quiet);
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .activity-score {
+    display: flex;
+    justify-content: flex-end;
+    flex: none;
+
+    width: var(--ni-44);
+    margin-inline-start: auto;
+
+    font-variant-numeric: tabular-nums;
+
+    :global(.trakt-user-rating) {
+      gap: var(--ni-2);
+      color: var(--color-text-primary);
+    }
+
+    :global(.trakt-user-rating span) {
+      font-size: var(--font-size-text-small);
+      font-weight: 700;
+    }
+
+    :global(.trakt-user-rating svg) {
+      width: var(--ni-12);
+      height: var(--ni-12);
+    }
   }
 </style>

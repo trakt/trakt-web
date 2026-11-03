@@ -42,9 +42,8 @@
   import SummaryHeaderKicker from "./_internal/SummaryHeaderKicker.svelte";
   import SwipeCarousel from "$lib/components/carousel/SwipeCarousel.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import SummaryHeaderRecap from "./_internal/SummaryHeaderRecap.svelte";
+  import SummaryHeaderUpNext from "./_internal/SummaryHeaderUpNext.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
-  import { useSeasonRecap } from "$lib/sections/summary/components/recap/useSeasonRecap.ts";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { IS_DEV } from "$lib/utils/env";
@@ -58,6 +57,7 @@
   import SummaryHeaderSocialActivity from "./_internal/SummaryHeaderSocialActivity.svelte";
   import SummaryHeaderTrivia from "./_internal/SummaryHeaderTrivia.svelte";
   import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
+  import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
   import {
     HEADER_ACTIONS_PARAM,
     toHeaderActionsVariant,
@@ -127,7 +127,9 @@
   );
 
   /* The pill leads with one provider; the columns show two. */
-  const glanceProvider = $derived(toHeaderProviders(streamOn, 1).at(0) ?? null);
+  const glanceProvider = $derived(
+    toHeaderProviders(streamOn, 1).at(0)?.service ?? null,
+  );
   const providers = $derived(toHeaderProviders(streamOn, 2));
   const headerSentiment = $derived(toSummarySentiment(sentiment));
 
@@ -207,35 +209,6 @@
     : null;
   const progress$ = showProgress?.progress ?? of(undefined);
 
-  /*
-    Between seasons: the next episode opens a season the last one closed. The
-    finished season then takes the recap's blurb slot - the memory to jog is
-    the season, not one episode. Its recap leads, the same text the Progress
-    drawer opens with under the same label; the season overview stands in
-    when the recap job has none.
-  */
-  const finishedSeason = $derived.by(() => {
-    const lastEpisode = $progress$?.lastEpisode;
-    if (!$progress$ || !lastEpisode) return 0;
-    if (lastEpisode.season <= 0) return 0;
-    if ($progress$.season <= lastEpisode.season) return 0;
-
-    return lastEpisode.season;
-  });
-
-  const { recap: finishedSeasonRecap } = useSeasonRecap(
-    fromRune(() => ({ slug: media.slug, season: finishedSeason })),
-  );
-
-  const finishedSeasonBlurb = $derived(
-    finishedSeason === 0
-      ? null
-      : ($finishedSeasonRecap?.summary ??
-        seasons?.find((season) => season.number === finishedSeason)
-          ?.overview ??
-        null),
-  );
-
   const socialTarget = $derived({ type: target.type, slug: media.slug });
   const socialTarget$ = fromRune(() => socialTarget);
   const { entries: socialEntries } = useSocialActivities(socialTarget$);
@@ -292,10 +265,9 @@
   );
   const recapLink = $derived(buildDrawerLink(SummaryDrawers.SeasonRecap));
 
-  const justWatchRank = $derived.by(() => {
-    const rank = streamOn?.services?.streamingRank?.current;
-    return rank ? m.text_rank({ rank }) : null;
-  });
+  const justWatchRank = $derived(
+    streamOn?.services?.streamingRank?.current ?? null,
+  );
 
   /*
     The sublines - one 22px line under every column header, so the five columns
@@ -443,19 +415,6 @@
     </div>
 
     <!--
-      The scores read as part of the kicker's classification line - what it is,
-      then how it stands - before the title takes over. Logos over
-      dot-and-label, matching the anchored direction.
-    -->
-    <div class="masthead-scores" data-reveal-wave="3">
-      <RatingList
-        ratings={$ratings}
-        entry={media}
-        drilldown={ratingsLink}
-        isLoading={$isRatingsLoading}
-      />
-    </div>
-    <!--
       The title is the biggest touch target on the page, so it earns the most
       wanted destination: the details drawer, where the full description now
       lives. Same target as the credits chevron and the glance release token.
@@ -504,6 +463,19 @@
       </div>
     {/if}
 
+    <!--
+      The scores follow the credits: the kicker stays on the title it labels,
+      so the read is kicker, title, credits, scores, overview. Logos over
+      dot-and-label, matching the anchored direction.
+    -->
+    <div class="masthead-scores" data-reveal-wave="3">
+      <RatingList
+        ratings={$ratings}
+        entry={media}
+        drilldown={ratingsLink}
+        isLoading={$isRatingsLoading}
+      />
+    </div>
     <!--
       Two lines, then an ellipsis - the full text is one tap away in the
       details drawer (title, chevron or glance token). The old inline "+ more"
@@ -571,15 +543,16 @@
             <span class="action-row-divider" aria-hidden="true"></span>
 
             <!--
-              Score then heart, both hidden until the title has been watched -
-              the rule the star row followed here before. The heart leaves the
-              rating bubble: favouriting is its own answer, and burying it in
-              a popover meant opening the stars to reach it.
+              Score then heart. The score is a chip, so it reads as the
+              viewer's own rather than another community score; any title can
+              be rated, so it stays open before watching, just quieter. The
+              heart leaves the rating bubble: favouriting is its own answer,
+              and burying it in a popover meant opening the stars to reach it.
             -->
             <RatingBadge
               target={{ type: target.type, media }}
-              variant="guard"
               favorite
+              look="chip"
             />
           </div>
         {/if}
@@ -598,7 +571,17 @@
               label: m.button_label_view_all_where_to_watch(),
             }}
           />
-          <SummaryHeaderSubline lead={m.text_just_watch()} rest={justWatchRank} />
+          {#if justWatchRank}
+            <SummaryHeaderSubline>
+              <span class="watch-rank">
+                <MessageWithBold
+                  message={m.text_just_watch_chart_rank({ rank: justWatchRank })}
+                />
+              </span>
+            </SummaryHeaderSubline>
+          {:else}
+            <SummaryHeaderSubline lead={m.text_just_watch()} />
+          {/if}
         </div>
         <SummaryHeaderWatchOptions {providers} country={$country} />
       </div>
@@ -625,7 +608,7 @@
               </SummaryHeaderSubline>
             {/if}
           </div>
-          <SummaryHeaderRecap progress={$progress$} {finishedSeasonBlurb} />
+          <SummaryHeaderUpNext progress={$progress$} show={media} />
         </div>
       {/if}
     {/snippet}
@@ -686,7 +669,7 @@
     {/snippet}
 
     {@const hasRecap = Boolean(
-      $isAuthorized && $progress$ && $progress$.completed > 0,
+      $isAuthorized && $progress$ && $progress$.total > 0,
     )}
     <!--
       Five sections at most - progress, social, watch, sentiment, trivia -
@@ -1332,15 +1315,35 @@
     are exact complements, so nothing is shown twice and nothing goes missing.
   */
 
+  /*
+    One grid across the five: title row, the 22px meta line, then items on
+    44px rows 12px apart - so titles, meta lines, avatars, logo tiles and
+    first bullets land on the same horizontal lines in every column.
+  */
   .strip-column {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--ni-14);
+    gap: var(--ni-16);
 
     min-width: 0;
 
-    --sentiment-bullet-gap: var(--gap-xs);
+    --summary-header-row-height: var(--ni-44);
+    --summary-header-row-gap: var(--ni-12);
+    --summary-header-tile: var(--ni-44);
+    --sentiment-bullet-gap: var(--summary-header-row-gap);
+  }
+
+  /* "#12 on JustWatch": the rank leads in white, the rest stays quiet. */
+  .watch-rank {
+    font-size: var(--font-size-text-small);
+    color: var(--color-text-quiet);
+    white-space: nowrap;
+
+    :global(b) {
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
   }
 
   /*
@@ -1424,11 +1427,29 @@
       padding-inline: var(--ni-16);
       box-sizing: border-box;
 
-      background-color: var(--color-actions-bar-background);
+      /*
+        Lifted off the backdrop: a translucent wash with a lit top edge and a
+        hairline, over a blur of whatever sits behind, so the tray reads at a
+        glance on any artwork. The bar inside drops its own surface into it.
+      */
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground) 7%,
+        transparent
+      );
       border-radius: var(--border-radius-l);
-      box-shadow: var(--shadow-raised);
+      box-shadow:
+        inset 0 var(--ni-1) 0
+          color-mix(in srgb, var(--color-foreground) 10%, transparent),
+        inset 0 0 0 var(--ni-1)
+          color-mix(in srgb, var(--color-foreground) 10%, transparent),
+        0 var(--ni-12) var(--ni-32)
+          color-mix(in srgb, var(--color-shadow) 35%, transparent);
+      backdrop-filter: blur(var(--ni-20));
 
       --summary-actions-bar-shadow: none;
+      --summary-actions-bar-background: transparent;
+      --rating-badge-dot-ring: transparent;
       /* The bar shares the row's centre line with the marks beside it. */
       --summary-actions-bar-seasonal-headroom: 0;
 

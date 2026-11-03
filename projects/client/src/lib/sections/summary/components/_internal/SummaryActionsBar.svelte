@@ -60,7 +60,11 @@
     padding: var(--actions-bar-inset);
     box-sizing: border-box;
 
-    background-color: var(--color-actions-bar-background);
+    /* Configurable so a caller's own tray can carry the surface instead. */
+    background-color: var(
+      --summary-actions-bar-background,
+      var(--color-actions-bar-background)
+    );
     border-radius: var(--actions-bar-radius);
     /* Configurable so a caller can opt out of the lift: on a flat surface the
        raised shadow reads as a halo around the tray, not as elevation. */

@@ -15105,6 +15105,84 @@
       "default": "{season} Recap",
       "description": "Label for a season's overview in the recap - e.g. Season 2 Recap - used for the between-seasons blurb and the collapsible earlier-season rows."
     },
+    "text_recap_up_next": {
+      "default": "Up next",
+      "description": "Small caps label above the next episode to watch in the Progress column of the summary header."
+    },
+    "text_recap_start_with": {
+      "default": "Start with",
+      "description": "Small caps label above the first episode in the Progress column of the summary header, when the viewer has not started the show."
+    },
+    "text_recap_episodes": {
+      "default": "{count} episodes",
+      "description": "State pill in the Progress column of the summary header when the viewer has not started the show: how many episodes have aired. Plural form.",
+      "variables": {
+        "count": {
+          "description": "Number of aired episodes."
+        }
+      }
+    },
+    "text_recap_episodes_one": {
+      "default": "{count} episode",
+      "description": "Singular form of text_recap_episodes.",
+      "variables": {
+        "count": {
+          "description": "Always 1."
+        }
+      }
+    },
+    "text_recap_time_total": {
+      "default": "{duration} total",
+      "description": "Beside the episode count pill in the Progress column, when the viewer has not started the show: how long all aired episodes run.",
+      "variables": {
+        "duration": {
+          "description": "A short duration, such as 7h 12m."
+        }
+      }
+    },
+    "text_recap_progress_count": {
+      "default": "{watched} of {total}",
+      "description": "Under the progress bar in the Progress column of the summary header: episodes watched out of episodes aired.",
+      "variables": {
+        "watched": {
+          "description": "Episodes watched."
+        },
+        "total": {
+          "description": "Episodes aired."
+        }
+      }
+    },
+    "text_recap_last_seen_episode": {
+      "default": "last seen {episode}",
+      "description": "Under the progress bar in the Progress column, after the watched count: the last episode the viewer saw. Lower case because it follows a middot.",
+      "variables": {
+        "episode": {
+          "description": "An episode marker, such as S2 · E3."
+        }
+      }
+    },
+    "text_recap_not_started": {
+      "default": "not started",
+      "description": "Under the progress bar in the Progress column, after the watched count, when the viewer has not started the show. Lower case because it follows a middot."
+    },
+    "text_streaming_plan_count": {
+      "default": "{count} plans",
+      "description": "In the summary header's where-to-watch list, when one service offers the title on several plans (for example with and without ads). Always 2 or more.",
+      "variables": {
+        "count": {
+          "description": "Number of plans, 2 or more."
+        }
+      }
+    },
+    "text_just_watch_chart_rank": {
+      "default": "<b>#{rank}</b> on JustWatch",
+      "description": "Subline of the where-to-watch column in the summary header: the title's position in JustWatch's streaming chart. Keep the <b></b> tags around the rank. 'JustWatch' is a brand name and must not be translated.",
+      "variables": {
+        "rank": {
+          "description": "Chart position, such as 12."
+        }
+      }
+    },
     "text_recap_time_left": {
       "default": "{duration} left",
       "description": "Remaining watch time for the show, e.g. 8h 20m left."

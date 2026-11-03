@@ -7,7 +7,7 @@
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
   import RateNow from "./RateNow.svelte";
-  import type { RateNowProps } from "./models/RateNowProps.ts";
+  import type { RatingBadgeProps } from "./models/RatingBadgeProps.ts";
   import { useIsRateable } from "./useIsRateable.ts";
   import { useRatings } from "./useRatings.ts";
 
@@ -21,21 +21,12 @@
     controls competing with the actions beside them, and they state a score
     the reader has to count. "8 ★" says it in two glyphs.
   */
-  const { target, variant = "allow", favorite = false }: {
-    target: RateNowProps;
-    /**
-     * `guard` locks the mark - and the heart with it - until the title has
-     * been watched: rating is an opinion about something seen. Locked, not
-     * hidden, so the reader can see the two answers exist and what unlocks
-     * them; the tooltip says so.
-     */
-    variant?: "allow" | "guard";
-    /**
-     * Seats the heart beside the mark instead of inside the popover, for a
-     * surface with room to show both answers at once.
-     */
-    favorite?: boolean;
-  } = $props();
+  const {
+    target,
+    variant = "allow",
+    favorite = false,
+    look = "mark",
+  }: RatingBadgeProps = $props();
 
   const { isRateable } = $derived(useIsRateable(target));
   const isLocked = $derived(variant === "guard" && !$isRateable);
@@ -52,6 +43,9 @@
   );
 
   const rating = $derived($pendingRating ?? $current?.rating);
+  const state = $derived(
+    rating ? "rated" : $isRateable ? "invite" : "unseen",
+  );
 
   const label = $derived.by(() => {
     const named = title ?? "";
@@ -101,11 +95,19 @@
 {:else}
   <div class="trakt-rating-badge-cluster">
     <Popover content={rateContent} {label}>
-      <span class="trakt-rating-badge" class:is-rated={Boolean(rating)}>
+      <span
+        class="trakt-rating-badge"
+        class:is-rated={Boolean(rating)}
+        data-look={look}
+        data-state={state}
+      >
         {#if rating}
           <UserRating {rating} />
         {:else}
           <StarIcon fill="none" />
+        {/if}
+        {#if look === "chip" && state === "invite"}
+          <span class="rating-badge-dot" aria-hidden="true"></span>
         {/if}
       </span>
     </Popover>
@@ -182,6 +184,84 @@
     &:active {
       transform: scale(0.92);
     }
+  }
+
+  /*
+    The viewer's own score, set apart from the community scores it sits
+    beside: a tinted chip once rated; watched but unrated, an outlined star
+    with a dot that invites a rating; not watched, the same star kept quiet -
+    still a way in, since any title can be rated.
+  */
+  .trakt-rating-badge[data-look="chip"] {
+    position: relative;
+
+    min-width: var(--ni-44);
+    min-height: var(--ni-36);
+    padding: 0;
+    margin: 0;
+    border-radius: var(--border-radius-pill);
+
+    &:not(.is-rated) :global(svg) {
+      width: var(--ni-18);
+      height: var(--ni-18);
+    }
+
+    &[data-state="rated"] {
+      padding-inline: var(--ni-10) var(--ni-12);
+
+      background-color: color-mix(in srgb, var(--purple-500) 22%, transparent);
+      box-shadow: inset 0 0 0 var(--ni-1)
+        color-mix(in srgb, var(--purple-400) 50%, transparent);
+
+      :global(.trakt-user-rating span) {
+        font-weight: 700;
+      }
+
+      :global(.trakt-user-rating svg) {
+        width: var(--ni-14);
+        height: var(--ni-14);
+      }
+    }
+
+    &[data-state="invite"] {
+      background-color: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+      box-shadow: inset 0 0 0 var(--ni-1)
+        color-mix(in srgb, var(--purple-400) 55%, transparent);
+    }
+
+    &[data-state="unseen"] {
+      color: var(--color-text-quiet);
+      box-shadow: inset 0 0 0 var(--ni-1)
+        color-mix(in srgb, var(--color-foreground) 12%, transparent);
+    }
+
+    @include for-mouse() {
+      &[data-state="rated"]:hover,
+      &[data-state="invite"]:hover {
+        background-color: color-mix(in srgb, var(--purple-500) 32%, transparent);
+      }
+
+      &[data-state="unseen"]:hover {
+        color: var(--color-text-primary);
+        background-color: transparent;
+        box-shadow: inset 0 0 0 var(--ni-1)
+          color-mix(in srgb, var(--color-foreground) 30%, transparent);
+      }
+    }
+  }
+
+  .rating-badge-dot {
+    position: absolute;
+    inset-block-start: var(--ni-8);
+    inset-inline-end: var(--ni-8);
+
+    width: var(--ni-8);
+    height: var(--ni-8);
+    border-radius: var(--border-radius-pill);
+
+    background-color: var(--purple-300);
+    box-shadow: 0 0 0 var(--ni-2)
+      var(--rating-badge-dot-ring, var(--color-actions-bar-background));
   }
 
   .rating-badge-popover {
