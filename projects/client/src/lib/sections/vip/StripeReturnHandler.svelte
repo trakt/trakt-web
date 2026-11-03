@@ -44,19 +44,15 @@
       return;
     }
 
-    confirmCheckout(sessionId)
-      .then(
-        () => {
-          if (tracking) trackConfirmed(tracking);
-        },
-        (error) => {
-          if (tracking) {
-            trackConfirmFailed({ ...tracking, error: toVipFailureCode(error) });
-          }
-
-          throw error;
-        },
-      )
-      .finally(cleanUrl);
+    confirmCheckout(sessionId).then(
+      () => {
+        if (tracking) trackConfirmed(tracking);
+        cleanUrl();
+      },
+      (error) => {
+        if (!tracking) return;
+        trackConfirmFailed({ ...tracking, error: toVipFailureCode(error) });
+      },
+    );
   });
 </script>
