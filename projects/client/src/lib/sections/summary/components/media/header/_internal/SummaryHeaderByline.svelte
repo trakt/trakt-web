@@ -67,7 +67,7 @@
 <style lang="scss">
   .trakt-summary-header-byline {
     font-size: var(--byline-size, var(--ni-16));
-    color: var(--color-text-secondary);
+    color: var(--color-text-quiet);
 
     margin: 0;
 
@@ -87,6 +87,6 @@
 
   .byline-role {
     font-size: var(--font-size-text-small);
-    color: var(--color-text-secondary);
+    color: var(--color-text-quiet);
   }
 </style>

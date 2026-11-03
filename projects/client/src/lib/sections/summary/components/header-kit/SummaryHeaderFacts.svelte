@@ -85,7 +85,7 @@
         it sits under a label; on a row shared with other text it reads small.
       */
       font-size: var(--facts-inline-size, var(--font-size-text));
-      color: var(--color-text-secondary);
+      color: var(--color-text-quiet);
       text-wrap: pretty;
     }
 

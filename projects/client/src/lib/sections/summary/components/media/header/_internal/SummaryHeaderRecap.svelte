@@ -93,8 +93,6 @@
     width: 100%;
 
     font-size: var(--font-size-text);
-
-    --summary-header-label-color: var(--color-text-quiet);
   }
 
   .recap-last-seen {

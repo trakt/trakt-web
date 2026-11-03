@@ -146,7 +146,7 @@
   .kicker-separator {
     font-size: var(--font-size-tag);
     font-weight: 700;
-    color: var(--color-text-secondary);
+    color: var(--color-text-quiet);
   }
 
 </style>

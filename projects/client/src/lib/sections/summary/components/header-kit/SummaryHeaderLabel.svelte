@@ -20,7 +20,7 @@
     letter-spacing: var(--summary-header-label-tracking, 0.13em);
     text-transform: uppercase;
 
-    color: var(--summary-header-label-color, var(--color-text-secondary));
+    color: var(--summary-header-label-color, var(--color-text-quiet));
 
     white-space: nowrap;
   }

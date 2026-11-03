@@ -1164,11 +1164,11 @@
     flex-wrap: wrap;
     gap: var(--gap-xs);
 
-    color: var(--color-text-secondary);
+    color: var(--color-text-quiet);
     font-size: var(--ni-16);
 
     .byline-dot {
-      color: var(--color-text-secondary);
+      color: var(--color-text-quiet);
       opacity: 0.6;
     }
 
@@ -1218,7 +1218,7 @@
     /* Larger than 1a's synopsis - it carries the centred composition. */
     font-size: var(--ni-20);
     line-height: 1.55;
-    color: var(--color-text-secondary);
+    color: var(--color-text-quiet);
     text-wrap: pretty;
   }
 
