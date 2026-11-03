@@ -1,6 +1,7 @@
 <script lang="ts">
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import ListLabel from "$lib/components/lists/ListLabel.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import SpoilerSwitch from "$lib/features/spoilers/components/SpoilerSwitch.svelte";
@@ -12,6 +13,7 @@
   import { useIsRevampedSummaryHeader } from "../media/header/useIsRevampedSummaryHeader.ts";
   import TriviaBand from "./_internal/TriviaBand.svelte";
   import TriviaCard from "./_internal/TriviaCard.svelte";
+  import { toTriviaGroups } from "./_internal/toTriviaGroups.ts";
   import { useTrivia } from "./useTrivia";
 
   const { media, onClose }: { media: MediaEntry; onClose: () => void } =
@@ -48,6 +50,8 @@
       ? $list
       : $list.filter((trivia) => trivia.category === effectiveCategory),
   );
+
+  const triviaGroups = $derived(toTriviaGroups(filteredList));
 
   const categoryOptions = $derived([
     { value: "all", label: m.option_text_trivia_category_all() },
@@ -117,19 +121,29 @@
           </div>
         {/if}
 
-        <div class="trivia-drawer-list">
-          {#each filteredList as trivia (trivia.key)}
-            {#if $isRevampedHeader}
-              <TriviaBand
-                {trivia}
-                {media}
-                categoryLabel={categoryLabel(trivia.category)}
-              />
-            {:else}
+        {#if $isRevampedHeader}
+          <!-- Each category named once, above its facts, whether the menu
+               shows them all or just the one. -->
+          <div class="trivia-drawer-groups">
+            {#each triviaGroups as group (group.category)}
+              {@const label = categoryLabel(group.category)}
+              <section class="trivia-group" aria-label={label}>
+                <ListLabel title={label} />
+                <div class="trivia-group-facts">
+                  {#each group.facts as trivia (trivia.key)}
+                    <TriviaBand {trivia} {media} />
+                  {/each}
+                </div>
+              </section>
+            {/each}
+          </div>
+        {:else}
+          <div class="trivia-drawer-list">
+            {#each filteredList as trivia (trivia.key)}
               <TriviaCard {trivia} {media} />
-            {/if}
-          {/each}
-        </div>
+            {/each}
+          </div>
+        {/if}
       </RenderFor>
 
       <RenderFor audience="free">
@@ -164,10 +178,31 @@
     gap: var(--ni-20);
 
     padding-block-end: var(--gap-s);
+  }
 
-    :global(.trakt-trivia-band + .trakt-trivia-band) {
-      padding-top: var(--ni-20);
+  /* A hairline between categories; facts inside one are set apart by space. */
+  .trivia-drawer-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-24);
+
+    padding-block-end: var(--gap-s);
+  }
+
+  .trivia-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-12);
+
+    & + & {
+      padding-top: var(--ni-24);
       border-top: var(--ni-1) solid var(--color-hairline);
     }
+  }
+
+  .trivia-group-facts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-16);
   }
 </style>
