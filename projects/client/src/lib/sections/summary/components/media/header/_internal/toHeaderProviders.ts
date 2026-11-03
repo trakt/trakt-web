@@ -10,8 +10,10 @@ import type { HeaderProvider } from './HeaderProvider.ts';
  *
  * Plans of one service ("netflix" and "netflix_standard_with_ads") fold into a
  * single row that counts them, before the limit, so the rows shown are
- * distinct services. Only plan suffixes fold: channels sold through another
- * store ("mubi_amazon_channel") stay services of their own.
+ * distinct services. A channel sold through another store folds into the
+ * service it carries, as the same plan: "apple_tv_plus_amazon_channel" is
+ * Apple TV, and the header shows only the primary mark, so two rows would
+ * look identical. MUBI through Amazon stays MUBI, never Prime Video.
  *
  * The limit is a parameter because the two directions have different room for it
  * - the masthead's three-column strip holds fewer than the anchored info rail,
@@ -22,6 +24,8 @@ const HEADER_PROVIDER_LIMIT = 3;
 const PLAN_SUFFIX =
   /_(standard_with_ads|basic_with_ads|free_with_ads|with_ads|premium|standard|basic)$/;
 
+const CHANNEL_SUFFIX = /_(amazon_channel|apple_tv_channel)$/;
+
 /*
   Listings that are one service under two keys. Apple TV+ became Apple TV in
   2025, so both keys now show the same name; they are one row and one plan.
@@ -30,7 +34,10 @@ const SAME_SERVICE: Readonly<Record<string, string>> = {
   apple_tv_plus: 'apple_tv',
 };
 
-const toCanonicalSource = (source: string) => SAME_SERVICE[source] ?? source;
+const toCanonicalSource = (source: string) => {
+  const carried = source.replace(CHANNEL_SUFFIX, '');
+  return SAME_SERVICE[carried] ?? carried;
+};
 
 const toBaseSource = (source: string) =>
   toCanonicalSource(source).replace(PLAN_SUFFIX, '');

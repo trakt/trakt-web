@@ -72,4 +72,13 @@ describe('util: toHeaderProviders', () => {
     expect(providers.map(({ service, planCount }) => [service.source, planCount]))
       .toEqual([['apple_tv', 1]]);
   });
+
+  it('should fold a channel into the service it carries, as the same plan', () => {
+    const providers = toHeaderProviders(
+      streamOnWith(['apple_tv_plus', 'apple_tv_plus_amazon_channel']),
+    );
+
+    expect(providers.map(({ service, planCount }) => [service.source, planCount]))
+      .toEqual([['apple_tv_plus', 1]]);
+  });
 });
