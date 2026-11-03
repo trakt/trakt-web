@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "Het scherm is donker. Geen films. Geen afleveringen. Alleen u en de stilte.",
   "text_calendar_today": "Vandaag",
   "text_calendar_up_next": "Hierna",
+  "text_checkin_failed_message": "Controleer je verbinding en probeer het opnieuw.",
+  "text_checkin_failed_title": "Kon niet inchecken",
   "text_clear_data_failed": "Sommige items konden niet worden gewist. Probeer het opnieuw.",
   "text_clear_source_custom_library": "Aangepaste bibliotheek",
   "text_clear_source_history": "Geschiedenis",

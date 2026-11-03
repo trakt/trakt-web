@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "صفحه تاریک است. نه فیلمی. نه قسمتی. فقط شما و سکوت.",
   "text_calendar_today": "امروز",
   "text_calendar_up_next": "بعدی",
+  "text_checkin_failed_message": "اتصال خود را بررسی کرده و دوباره امتحان کنید.",
+  "text_checkin_failed_title": "امکان اعلام تماشا وجود نداشت",
   "text_clear_data_failed": "برخی از موارد قابل پاکسازی نبودند. لطفاً دوباره تلاش کنید.",
   "text_clear_source_custom_library": "کتابخانه سفارشی",
   "text_clear_source_history": "تاریخی",

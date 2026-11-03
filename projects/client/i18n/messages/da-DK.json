@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "Skærmen er mørk. Ingen film. Ingen afsnit. Kun dig og stilheden.",
   "text_calendar_today": "I dag",
   "text_calendar_up_next": "Snart",
+  "text_checkin_failed_message": "Tjek din forbindelse, og prøv igen.",
+  "text_checkin_failed_title": "Kunne ikke tjekke ind",
   "text_clear_data_failed": "Nogle elementer kunne ikke ryddes. Prøv venligst igen.",
   "text_clear_source_custom_library": "Tilpasset bibliotek",
   "text_clear_source_history": "Historie",

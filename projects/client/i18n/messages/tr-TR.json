@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "Ekran karanlık. Film yok. Bölüm yok. Sadece siz ve sessizlik.",
   "text_calendar_today": "Bugün",
   "text_calendar_up_next": "Sırada",
+  "text_checkin_failed_message": "Bağlantınızı kontrol edin ve tekrar deneyin.",
+  "text_checkin_failed_title": "Check-in yapılamadı",
   "text_clear_data_failed": "Bazı öğeler temizlenemedi. Lütfen tekrar deneyin.",
   "text_clear_source_custom_library": "Özel Kütüphane",
   "text_clear_source_history": "Geçmiş",

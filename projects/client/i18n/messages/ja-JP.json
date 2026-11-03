@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "画面は暗いまま。映画もエピソードもなし。ただあなたと静寂だけ。",
   "text_calendar_today": "今日",
   "text_calendar_up_next": "次に公開",
+  "text_checkin_failed_message": "接続を確認して、もう一度お試しください。",
+  "text_checkin_failed_title": "チェックインできませんでした",
   "text_clear_data_failed": "一部のアイテムをクリアできませんでした。もう一度お試しください。",
   "text_clear_source_custom_library": "カスタムライブラリ",
   "text_clear_source_history": "歴史",

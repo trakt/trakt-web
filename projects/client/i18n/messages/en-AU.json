@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "The screen is dark. No movies. No episodes. Just you and the silence.",
   "text_calendar_today": "Today",
   "text_calendar_up_next": "Up next",
+  "text_checkin_failed_message": "Check your connection and try again.",
+  "text_checkin_failed_title": "Couldn't check in",
   "text_clear_data_failed": "Some items couldn't be cleared. Please try again.",
   "text_clear_source_custom_library": "Custom Library",
   "text_clear_source_history": "History",

@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "A tela está escura. Sem filmes. Sem episódios. Apenas você e o silêncio.",
   "text_calendar_today": "Hoje",
   "text_calendar_up_next": "A seguir",
+  "text_checkin_failed_message": "Verifique sua conexão e tente novamente.",
+  "text_checkin_failed_title": "Não foi possível fazer check-in",
   "text_clear_data_failed": "Alguns itens não puderam ser apagados. Por favor, tente novamente.",
   "text_clear_source_custom_library": "Biblioteca Personalizada",
   "text_clear_source_history": "Histórico",

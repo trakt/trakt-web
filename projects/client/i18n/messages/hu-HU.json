@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "A képernyő sötét. Nincsenek filmek. Nincsenek epizódok. Csak te és a csend.",
   "text_calendar_today": "Ma",
   "text_calendar_up_next": "Következik",
+  "text_checkin_failed_message": "Ellenőrizze az internetkapcsolatát, majd próbálja újra.",
+  "text_checkin_failed_title": "Nem sikerült becsekkolni",
   "text_clear_data_failed": "Néhány elemet nem sikerült törölni. Kérjük, próbálja újra.",
   "text_clear_source_custom_library": "Egyéni könyvtár",
   "text_clear_source_history": "Történelmi",

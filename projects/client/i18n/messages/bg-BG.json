@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "Екранът е тъмен. Без филми. Без епизоди. Само вие и тишината.",
   "text_calendar_today": "Днес",
   "text_calendar_up_next": "Предстои",
+  "text_checkin_failed_message": "Проверете връзката си и опитайте отново.",
+  "text_checkin_failed_title": "Неуспешно чекиране",
   "text_clear_data_failed": "Някои елементи не можаха да бъдат изчистени. Моля, опитайте отново.",
   "text_clear_source_custom_library": "Персонализирана библиотека",
   "text_clear_source_history": "Исторически",

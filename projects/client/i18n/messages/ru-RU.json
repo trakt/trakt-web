@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "Экран темный. Нет фильмов. Нет эпизодов. Только вы и тишина.",
   "text_calendar_today": "Сегодня",
   "text_calendar_up_next": "Далее",
+  "text_checkin_failed_message": "Проверьте подключение и повторите попытку.",
+  "text_checkin_failed_title": "Не удалось отметиться",
   "text_clear_data_failed": "Некоторые элементы не удалось очистить. Повторите попытку.",
   "text_clear_source_custom_library": "Пользовательская библиотека",
   "text_clear_source_history": "История",

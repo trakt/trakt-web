@@ -1849,6 +1849,8 @@
   "text_calendar_placeholder_empty_period": "La pantalla és fosca. Sense pel·lícules. Sense episodis. Només tu i el silenci.",
   "text_calendar_today": "Avui",
   "text_calendar_up_next": "A continuació",
+  "text_checkin_failed_message": "Comprova la teva connexió i torna-ho a intentar.",
+  "text_checkin_failed_title": "No s'ha pogut fer el check-in",
   "text_clear_data_failed": "No s'han pogut esborrar alguns elements. Torna-ho a provar.",
   "text_clear_source_custom_library": "Biblioteca personalitzada",
   "text_clear_source_history": "Història",
