@@ -14,9 +14,7 @@
   const { track } = useTrack(AnalyticsEvent.MixtapeMix);
 
   const params = $derived(parseMixtapeParams(page.url.searchParams));
-  const action = $derived(
-    toMixAction({ params, isMixing: $session.isMixing }),
-  );
+  const action = $derived(toMixAction({ params, isMixing: $session.isMixing }));
   const { state, href, label, count } = $derived(action);
   const hasCount = $derived(state === "picking" || state === "ready");
 </script>
@@ -65,7 +63,8 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-mixtape-mix-entry {
-    --entry-inset: var(--ni-12);
+    --entry-inset-start: var(--ni-8);
+    --entry-inset-end: var(--ni-12);
     --entry-ring: transparent;
     --entry-wash: transparent;
     --mix-duration: calc(10 * var(--transition-increment));
@@ -86,7 +85,7 @@
       box-sizing: border-box;
       min-width: 0;
       height: var(--navbar-entry-size);
-      padding-inline: var(--entry-inset);
+      padding-inline: var(--entry-inset-start) var(--entry-inset-end);
 
       border-radius: inherit;
       background: var(--entry-wash);
@@ -140,7 +139,12 @@
       }
     }
 
+    /*
+      The label owns the middle so it starts at the same x whether a count
+      follows it or not; the count keeps the end.
+    */
     .entry-label {
+      flex: 1;
       font-weight: 500;
       white-space: nowrap;
     }
@@ -179,7 +183,8 @@
     }
 
     @include for-mobile {
-      --entry-inset: 0;
+      --entry-inset-start: 0;
+      --entry-inset-end: 0;
 
       :global(.trakt-link),
       .entry-static {
