@@ -38,6 +38,7 @@ const persistedQuery = {
   queryHash: '["movie"]',
   queryKey: ['movie'],
   state: { data: { title: 'Heretic' }, dataUpdatedAt: DATA_UPDATED_AT },
+  clonedAt: new Date(DATA_UPDATED_AT),
 };
 
 describe('util: createIdbPersister', () => {
@@ -131,6 +132,21 @@ describe('util: createIdbPersister', () => {
       await expect(persister.retrieveQuery('["movie"]')).resolves.toEqual(
         persistedQuery.state.data,
       );
+    });
+
+    it('should drop a stored query whose dates came back as text', async () => {
+      const key = `tanstack-query-${persistedQuery.queryHash}`;
+      idb.get.mockResolvedValue({
+        ...persistedQuery,
+        clonedAt: new Date(DATA_UPDATED_AT).toISOString(),
+      });
+
+      const persister = await importPersister();
+
+      await expect(
+        persister.retrieveQuery('["movie"]'),
+      ).resolves.toBeUndefined();
+      expect(idb.del).toHaveBeenCalledWith(key, expect.anything());
     });
 
     it('should sweep a busted entry', async () => {

@@ -50,33 +50,36 @@ async function orUndefined<T>(
 // Maps, Sets, and other built-ins survive rehydration. The default JSON
 // serializer would coerce them to plain strings/objects and break consumers
 // that depend on their prototypes.
-function createIdbStorage(): AsyncStorage<PersistedQuery> {
+type StoredQuery = PersistedQuery & { clonedAt: Date };
+
+function createIdbStorage(): AsyncStorage<StoredQuery> {
   const store = createIdbStore(DB_NAME, STORE_NAME);
 
   return {
     getItem: monitor((key: string) => {
       trackStorage('restore', key);
-      return orUndefined(() => get<PersistedQuery>(key, store));
+      return orUndefined(() => get<StoredQuery>(key, store));
     }, 'IDB Restorer'),
-    setItem: monitor((key: string, value: PersistedQuery) => {
+    setItem: monitor((key: string, value: StoredQuery) => {
       trackStorage('persist', key);
       return orUndefined(() => set(key, value, store));
     }, 'IDB Persister'),
     removeItem: (key: string) => orUndefined(() => del(key, store)),
     entries: async () =>
       (await orUndefined(async () => {
-        const rows = await entries<string, PersistedQuery>(store);
-        return rows.map(([k, v]) => [String(k), v] as [string, PersistedQuery]);
+        const rows = await entries<string, StoredQuery>(store);
+        return rows.map(([k, v]) => [String(k), v] as [string, StoredQuery]);
       })) ?? [],
   };
 }
 
-function isPersistedQuery(value: unknown): value is PersistedQuery {
+function isStoredQuery(value: unknown): value is StoredQuery {
   return (
     typeof value === 'object' &&
     value !== null &&
-    typeof (value as PersistedQuery).state === 'object' &&
-    (value as PersistedQuery).state !== null
+    typeof (value as StoredQuery).state === 'object' &&
+    (value as StoredQuery).state !== null &&
+    (value as StoredQuery).clonedAt instanceof Date
   );
 }
 
@@ -84,9 +87,12 @@ function isPersistedQuery(value: unknown): value is PersistedQuery {
 // round-trips through IDB structured clone, preserving Date/Map/Set prototypes.
 // Validate shape on read so stale JSON-string entries from prior deploys throw
 // inside the persister's deserialize-try block, which removes and skips them.
-const serialize = (value: PersistedQuery): PersistedQuery => value;
-const deserialize = (value: PersistedQuery): PersistedQuery => {
-  if (!isPersistedQuery(value)) {
+const serialize = (value: PersistedQuery): StoredQuery => ({
+  ...value,
+  clonedAt: new Date(),
+});
+const deserialize = (value: StoredQuery): PersistedQuery => {
+  if (!isStoredQuery(value)) {
     throw new TypeError('Invalid persisted query shape');
   }
   return value;
@@ -136,7 +142,7 @@ function toIndexedDbOrigin(): string {
 export function createIdbPersister() {
   Sentry.setTag('indexeddb', toIndexedDbOrigin());
 
-  const persister = experimental_createQueryPersister<PersistedQuery>({
+  const persister = experimental_createQueryPersister<StoredQuery>({
     storage: createIdbStorage(),
     serialize,
     deserialize,
