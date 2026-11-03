@@ -22,19 +22,38 @@ const HEADER_PROVIDER_LIMIT = 3;
 const PLAN_SUFFIX =
   /_(standard_with_ads|basic_with_ads|free_with_ads|with_ads|premium|standard|basic)$/;
 
-const toBaseSource = (source: string) => source.replace(PLAN_SUFFIX, '');
+/*
+  Listings that are one service under two keys. Apple TV+ became Apple TV in
+  2025, so both keys now show the same name; they are one row and one plan.
+*/
+const SAME_SERVICE: Readonly<Record<string, string>> = {
+  apple_tv_plus: 'apple_tv',
+};
+
+const toCanonicalSource = (source: string) => SAME_SERVICE[source] ?? source;
+
+const toBaseSource = (source: string) =>
+  toCanonicalSource(source).replace(PLAN_SUFFIX, '');
 
 const toServiceKey = (service: StreamingServiceOption) =>
   `${service.type}:${toBaseSource(service.source)}`;
 
-type PlanGroup = { lead: StreamingServiceOption; count: number };
+type PlanGroup = {
+  lead: StreamingServiceOption;
+  plans: ReadonlySet<string>;
+};
 
 /** The service's own plan leads its row; otherwise the first one listed. */
 function addPlan(group: PlanGroup | undefined, service: StreamingServiceOption) {
-  if (!group) return { lead: service, count: 1 };
+  const plan = toCanonicalSource(service.source);
+
+  if (!group) return { lead: service, plans: new Set([plan]) };
 
   const isBasePlan = service.source === toBaseSource(service.source);
-  return { lead: isBasePlan ? service : group.lead, count: group.count + 1 };
+  return {
+    lead: isBasePlan ? service : group.lead,
+    plans: new Set([...group.plans, plan]),
+  };
 }
 
 function foldPlans(
@@ -48,10 +67,10 @@ function foldPlans(
     new Map<string, PlanGroup>(),
   );
 
-  return [...groups].map(([key, { lead, count }]) => ({
+  return [...groups].map(([key, { lead, plans }]) => ({
     key,
     service: lead,
-    planCount: count,
+    planCount: plans.size,
   }));
 }
 

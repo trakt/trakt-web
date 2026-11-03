@@ -63,4 +63,13 @@ describe('util: toHeaderProviders', () => {
       'hbo_max',
     ]);
   });
+
+  it('should show one Apple TV, since Apple TV+ took its name', () => {
+    const providers = toHeaderProviders(
+      streamOnWith(['apple_tv_plus', 'apple_tv']),
+    );
+
+    expect(providers.map(({ service, planCount }) => [service.source, planCount]))
+      .toEqual([['apple_tv', 1]]);
+  });
 });
