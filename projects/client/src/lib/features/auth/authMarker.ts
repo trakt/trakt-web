@@ -1,5 +1,6 @@
 import { get, set, type UseStore } from 'idb-keyval';
 import { createIdbStore } from '$lib/utils/storage/createIdbStore.ts';
+import { hasIndexedDb } from '$lib/utils/storage/hasIndexedDb.ts';
 
 const DB_NAME = 'trakt-auth';
 const STORE_NAME = 'auth-marker';
@@ -10,7 +11,7 @@ const MARKER_KEY = 'is-authorized';
 let store: UseStore | undefined;
 
 function getStore(): UseStore | null {
-  if (typeof indexedDB === 'undefined') {
+  if (!hasIndexedDb()) {
     return null;
   }
 

@@ -63,6 +63,14 @@ describe('util: createIdbPersister', () => {
       expect(sentry.setTag).toHaveBeenLastCalledWith('indexeddb', 'native');
     });
 
+    it('should tag a null indexeddb as missing', async () => {
+      vi.stubGlobal('indexedDB', null);
+
+      await importPersister();
+
+      expect(sentry.setTag).toHaveBeenLastCalledWith('indexeddb', 'missing');
+    });
+
     it('should tag a replaced indexeddb as patched', async () => {
       vi.stubGlobal('indexedDB', { open: () => undefined });
 
