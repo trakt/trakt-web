@@ -14,6 +14,8 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
+  import { foldInline } from "$lib/utils/transitions/foldInline.ts";
+  import { nudgeInline } from "$lib/utils/transitions/nudgeInline.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { onDestroy } from "svelte";
   import { flyPosterToSlot } from "./_internal/flyPosterToSlot.ts";
@@ -28,6 +30,9 @@
 
   const FLASH_DURATION = 420;
   const SHINE_DURATION = 1200;
+  const SLOT_ARRIVE_DURATION = 320;
+  const SLOT_FOLD_DURATION = 300;
+  const TAIL_FOLD_DURATION = 360;
   /*
     Below this width the labelled Movies / Shows toggle leaves no room for
     the placeholder, so the narrowest phones get the icons instead.
@@ -41,6 +46,7 @@
   const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
   const isNarrowPhone = useMedia(NARROW_PHONE_QUERY);
   const { track } = useTrack(AnalyticsEvent.MixtapeMix);
+  const motion = (duration: number) => ($isReducedMotion ? 0 : duration);
 
   const params = $derived(parseMixtapeParams(page.url.searchParams));
   const isResults = $derived(params.view === "results");
@@ -68,7 +74,8 @@
 
   /*
     The deck shows the picks and one add slot that steps right as they
-    land; the add slot leaves once the deck is full or the mix is on.
+    land (a landing pick arrives under it and nudges it along); the add
+    slot folds away once the deck is full or the mix is on.
   */
   const isAdding = $derived(!isFull && !isResults);
   const slots = $derived([
@@ -176,10 +183,15 @@
       })}
     >
       <span class="deck-shine" aria-hidden="true"></span>
-      {#each slots as slot (slot.index)}
+      {#each slots as slot (slot.id ?? "add")}
         <div
           class="deck-slot"
           bind:this={slotEls[slot.index]}
+          in:nudgeInline={{ duration: motion(SLOT_ARRIVE_DURATION) }}
+          out:foldInline={{
+            side: "start",
+            duration: motion(SLOT_FOLD_DURATION),
+          }}
           data-filled={slot.media != null}
           data-add={slot.id == null}
           data-landing={landing != null && landing === slot.id}
@@ -217,7 +229,13 @@
         </div>
       {/each}
       {#if isResults}
-        <span class="deck-change">
+        <span
+          class="deck-change"
+          transition:foldInline={{
+            side: "start",
+            duration: motion(TAIL_FOLD_DURATION),
+          }}
+        >
           <Link
             href={changeHref}
             noscroll
@@ -264,6 +282,8 @@
     --deck-slide-distance: calc(var(--rtl-sign, 1) * var(--ni-60));
     --deck-slots-from: translateX(calc(-1 * var(--deck-slide-distance)));
     --deck-pop-ease: cubic-bezier(0.34, 1.8, 0.5, 1);
+    --deck-morph-duration: calc(2.4 * var(--transition-increment));
+    --deck-morph-ease: cubic-bezier(0.22, 1, 0.36, 1);
 
     display: flex;
     align-items: center;
@@ -326,7 +346,10 @@
       calc(var(--transition-increment) / 2) both;
     transition:
       gap calc(2 * var(--transition-increment)) var(--deck-slide-ease),
-      box-shadow calc(2 * var(--transition-increment)) ease-in-out;
+      box-shadow calc(2 * var(--transition-increment)) ease-in-out,
+      height var(--deck-morph-duration) var(--deck-morph-ease),
+      padding-inline var(--deck-morph-duration) var(--deck-morph-ease),
+      background var(--deck-morph-duration) var(--deck-morph-ease);
   }
 
   .deck-shine {
@@ -360,7 +383,11 @@
     box-shadow: inset 0 0 0 var(--border-thickness-xxs)
       color-mix(in srgb, var(--color-foreground) 14%, transparent);
 
-    transition: box-shadow calc(2 * var(--transition-increment)) ease-in-out;
+    transition:
+      box-shadow calc(2 * var(--transition-increment)) ease-in-out,
+      width var(--deck-morph-duration) var(--deck-morph-ease),
+      height var(--deck-morph-duration) var(--deck-morph-ease),
+      border-radius var(--deck-morph-duration) var(--deck-morph-ease);
 
     &[data-filled="true"] {
       box-shadow: 0 0 0 var(--border-thickness-xxs)
@@ -462,9 +489,12 @@
     flex: none;
     display: flex;
     align-items: center;
+    min-width: 0;
     margin-inline-start: var(--ni-4);
+    overflow: hidden;
 
     :global(.trakt-link) {
+      flex: none;
       display: flex;
       align-items: center;
       gap: var(--ni-6);

@@ -192,13 +192,11 @@
 
   const { keep } = useMixtapeSave();
 
-  const replaceResults = (
-    overrides: {
-      skips?: ReadonlyArray<number>;
-      kept?: ReadonlyArray<ReadonlyArray<number>>;
-      savedTo?: MixtapeTarget;
-    },
-  ) => {
+  const replaceResults = (overrides: {
+    skips?: ReadonlyArray<number>;
+    kept?: ReadonlyArray<ReadonlyArray<number>>;
+    savedTo?: MixtapeTarget;
+  }) => {
     const url = href({
       view: "results",
       skips: params.skips,
@@ -278,7 +276,7 @@
 {/snippet}
 
 <NavbarStateSetter
-  contentToggle={isShowingResults ? "mixtape-results" : "mixtape"}
+  contentToggle={isResults ? "mixtape-results" : "mixtape"}
   showFilters={false}
   header={{ title: m.page_title_mixtape(), metaInfo: subtitleContent }}
 >

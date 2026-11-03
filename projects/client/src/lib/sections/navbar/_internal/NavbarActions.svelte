@@ -7,6 +7,7 @@
   import MixtapeNavbarSearch from "$lib/sections/mixtape/MixtapeNavbarSearch.svelte";
   import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
+  import { nudgeInline } from "$lib/utils/transitions/nudgeInline.ts";
   import Toast from "../../toast/Toast.svelte";
   import FilterButton from "../components/filter/FilterButton.svelte";
   import GetVIPLink from "../components/GetVIPLink.svelte";
@@ -49,6 +50,9 @@
       <!--
         One surface for the toggle and the mixtape deck: Mixtape is a mode
         of the toggle, so the switch morphs in place instead of swapping.
+        On results the toggle gives its space up (and takes it back coming
+        home) through its end margin, never its width, so the picks pill
+        glides to the centre and the toggle keeps its own geometry.
       -->
       <div class="navbar-content-surfaces">
         {#if $state.contentToggle}
@@ -58,10 +62,7 @@
             out:navbarSurfaceTransition|global
           >
             {#if $state.contentToggle !== "mixtape-results"}
-              <div
-                class="navbar-content-toggle-slot"
-                transition:navbarSurfaceTransition|global
-              >
+              <div class="navbar-content-toggle-slot" transition:nudgeInline>
                 <NavbarContentToggle
                   surface={$state.contentToggle}
                   leading={mixtapeSearch}
@@ -69,7 +70,9 @@
               </div>
             {/if}
             {#if isMixtape}
-              <MixtapeNavbarDeck />
+              <div class="navbar-content-deck-slot" out:nudgeInline>
+                <MixtapeNavbarDeck />
+              </div>
             {/if}
           </div>
         {/if}
@@ -250,7 +253,8 @@
     min-width: 0;
   }
 
-  .navbar-content-toggle-slot {
+  .navbar-content-toggle-slot,
+  .navbar-content-deck-slot {
     display: flex;
     min-width: 0;
   }
