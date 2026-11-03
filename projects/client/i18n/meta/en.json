@@ -10205,6 +10205,21 @@
       "default": "Severe",
       "description": "Label for content with severe parental guide concerns."
     },
+    "text_parental_guide_nothing_flagged": {
+      "default": "Nothing flagged",
+      "description": "Chip in the compact parental guidance block (Mixtape results) when the guide exists but reports no concerns in any category."
+    },
+    "label_certification_rated": {
+      "default": "Rated {certification}",
+      "description": "Screen reader label for the maturity rating chip in the Mixtape results details. {certification} is the raw rating, e.g. R, PG-13, TV-MA.",
+      "variables": {
+        "certification": {
+          "type": "string",
+          "description": "The raw maturity rating as the API sends it.",
+          "required": true
+        }
+      }
+    },
     "advanced_filter_label_parental_guide": {
       "default": "{category}: {min} to {max}",
       "description": "Selected parental guidance severity range for a category.",

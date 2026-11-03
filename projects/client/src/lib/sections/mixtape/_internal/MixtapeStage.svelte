@@ -15,6 +15,7 @@
   import type { MixtapeResultsProps } from "./MixtapeResultsProps.ts";
   import MixtapeStageCard from "./MixtapeStageCard.svelte";
   import MixtapeStageDetails from "./MixtapeStageDetails.svelte";
+  import MixtapeStageGuidance from "./MixtapeStageGuidance.svelte";
   import { MIXTAPE_SLOT_COUNT } from "./MIXTAPE_SLOT_COUNT.ts";
   import { toCarouselOffset } from "./toCarouselOffset.ts";
 
@@ -361,6 +362,7 @@
   <Drawer onClose={() => (isDetailsOpen = false)} size="large">
     <div class="stage-sheet">
       <TodayPosterDetails media={current.media} {kicker} />
+      <MixtapeStageGuidance media={current.media} />
     </div>
   </Drawer>
 {/if}
@@ -672,6 +674,9 @@
   .stage-sheet {
     --height-poster-details: auto;
     --height-poster-details-cover: var(--ni-200);
+    --margin-mixtape-guidance: calc(var(--gap-s) - var(--gap-m));
+    --gap-mixtape-guidance: var(--gap-s);
+    --inset-mixtape-guidance: var(--gap-m);
   }
 
   @container mixtape-stage (width < 60rem) {

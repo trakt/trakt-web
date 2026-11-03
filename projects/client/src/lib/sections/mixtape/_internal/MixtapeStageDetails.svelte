@@ -7,6 +7,7 @@
   import { useTodayDetails } from "$lib/sections/today/useTodayDetails.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { MixtapeStageDetailsProps } from "./MixtapeStageDetailsProps.ts";
+  import MixtapeStageGuidance from "./MixtapeStageGuidance.svelte";
   import { toMixtapeMeta } from "./toMixtapeMeta.ts";
 
   const OVERVIEW_LINES = 3;
@@ -74,6 +75,8 @@
         />
       </div>
     {/if}
+
+    <MixtapeStageGuidance {media} />
   {/if}
 </div>
 
