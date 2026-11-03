@@ -102,7 +102,7 @@
     gap: var(--gap-xxs);
 
     font-size: var(--font-size-text-small);
-    color: var(--color-text-secondary);
+    color: var(--color-text-quiet);
     white-space: nowrap;
 
     :global(.trakt-user-rating) {
@@ -117,7 +117,9 @@
     }
   }
 
+  /* Sized on the span: the global sheet sets every bare span to 14px. */
   .activity-label {
+    font-size: var(--font-size-text-small);
     overflow: hidden;
     text-overflow: ellipsis;
   }

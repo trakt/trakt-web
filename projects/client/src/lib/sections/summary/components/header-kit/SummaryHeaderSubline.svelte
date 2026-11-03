@@ -56,23 +56,23 @@
   /*
     The size sits on the spans themselves, not the row: the global typography
     sheet sizes every bare `span` to body text (14px) with an element selector,
-    which beats anything they would inherit from this row. Both terms at 600 -
-    at 12px a 700 lead read as a size step up from the "time left" beside the
-    progress pill, and the row is meant to sit at one size. The colour split
-    alone carries the two-tone.
+    which beats anything they would inherit from this row. The lead at 600, the
+    rest at 400 in the dimmed primary: at 600 the grey half read as muddy
+    rather than quiet.
   */
   .subline-lead,
   .subline-rest {
     font-size: var(--font-size-text-small);
-    font-weight: 600;
   }
 
   .subline-lead {
+    font-weight: 600;
     color: var(--color-text-primary);
   }
 
   .subline-rest {
-    color: var(--color-text-secondary);
+    font-weight: 400;
+    color: var(--color-text-quiet);
 
     overflow: hidden;
     text-overflow: ellipsis;

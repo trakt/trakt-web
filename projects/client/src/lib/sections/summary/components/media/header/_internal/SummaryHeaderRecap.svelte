@@ -93,6 +93,8 @@
     width: 100%;
 
     font-size: var(--font-size-text);
+
+    --summary-header-label-color: var(--color-text-quiet);
   }
 
   .recap-last-seen {
@@ -107,7 +109,7 @@
     align-items: baseline;
     gap: var(--gap-xxs);
 
-    color: var(--color-text-secondary);
+    color: var(--color-text-quiet);
   }
 
   /* The episode marker is the same label, spoken louder than its prefix. */

@@ -36,8 +36,8 @@
   */
   .standing-note {
     font-size: var(--font-size-text-small);
-    font-weight: 600;
-    color: var(--color-text-secondary);
+    font-weight: 400;
+    color: var(--color-text-quiet);
     white-space: nowrap;
   }
 </style>
