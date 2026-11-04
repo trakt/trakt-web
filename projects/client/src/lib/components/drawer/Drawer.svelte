@@ -75,10 +75,14 @@
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const slideAxis = $derived($isMobile ? "y" : "x");
 
+  let isClosedByBrowser = $state(false);
+
   useDrawerHistoryTrap({
     isEnabled: () => $isMobile && dismissal !== "manual",
     isPresent: () => drawerElement?.dataset.present !== "false",
     onPop: () => onDismiss(),
+    onBrowserTransition: () => (isClosedByBrowser = true),
+    onKept: () => (isClosedByBrowser = false),
   });
 
   const { portal } = $derived(
@@ -171,6 +175,7 @@
   class={drawerClass}
   data-size={size}
   data-elevated={elevated}
+  class:is-closed-by-browser={isClosedByBrowser}
   data-header-variant={headerVariant}
   style:--drawer-header-overlay-opacity={headerOverlayOpacity}
   style:--drawer-slide-in-duration="{slideInDuration}ms"
@@ -181,7 +186,7 @@
     overshoot: "var(--ni-36)",
   }}
   out:slideEdge={{
-    duration: slideOutDuration,
+    duration: isClosedByBrowser ? 0 : slideOutDuration,
     axis: slideAxis,
     easing: cubicIn,
     overshoot: "var(--ni-36)",
@@ -310,6 +315,10 @@
 
     // Stacked above a base-layer drawer; its underlay (layer-menu + 2) must
     // still sit below it so outside taps land on the underlay, not the drawer.
+    &.is-closed-by-browser {
+      visibility: hidden;
+    }
+
     &[data-elevated="true"] {
       z-index: calc(var(--layer-menu) + 3);
     }

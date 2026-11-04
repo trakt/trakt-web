@@ -124,6 +124,49 @@ describe('drawerHistoryTrap', () => {
     expect(trap.isTrapped()).toBe(false);
   });
 
+  describe('browser transition', () => {
+    const popBack = (hasUAVisualTransition: boolean) => {
+      browser.index -= 1;
+      browser.pageUrl = current().url;
+      const event = new PopStateEvent('popstate');
+      Object.defineProperty(event, 'hasUAVisualTransition', {
+        value: hasUAVisualTransition,
+      });
+      globalThis.dispatchEvent(event);
+    };
+
+    it('should report it before the url is restored and the drawer closes', async () => {
+      const trap = await loadTrap();
+      const onPop = vi.fn();
+      const onBrowserTransition = vi.fn();
+      trap.push(onPop, onBrowserTransition);
+      replaceCurrent(`${PAGE_URL}?season=3`, current().state);
+      trap.restore();
+
+      popBack(true);
+
+      expect(onBrowserTransition).toHaveBeenCalledOnce();
+      expect(onPop).not.toHaveBeenCalled();
+
+      await settle();
+
+      expect(onPop).toHaveBeenCalledOnce();
+    });
+
+    it('should not report it when the browser did not animate the back', async () => {
+      const trap = await loadTrap();
+      const onPop = vi.fn();
+      const onBrowserTransition = vi.fn();
+      trap.push(onPop, onBrowserTransition);
+
+      popBack(false);
+      await settle();
+
+      expect(onBrowserTransition).not.toHaveBeenCalled();
+      expect(onPop).toHaveBeenCalledOnce();
+    });
+  });
+
   it('should only close the top drawer when stacked', async () => {
     const trap = await loadTrap();
     const onPopParent = vi.fn();
