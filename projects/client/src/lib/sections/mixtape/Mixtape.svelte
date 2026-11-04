@@ -7,6 +7,7 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useDiscover } from "$lib/features/filters/useDiscover.ts";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaInputDefault } from "$lib/models/MediaInput.ts";
@@ -202,6 +203,34 @@
   });
 </script>
 
+{#if params.view !== "results"}
+  <NavbarStateSetter>
+    {#snippet contextualActions()}
+      <div class="mixtape-dock" data-surface="own">
+        <MixtapeActionBar
+          pickCount={params.picks.length}
+          clearHref={UrlBuilder.mixtape({ type: params.type })}
+          mixHref={href({ view: "results" })}
+          onMix={() =>
+            trackMix({
+              type: params.type,
+              picks: params.picks.length,
+              fits: $fits.length,
+            })}
+        >
+          <MixtapeTray
+            picks={params.picks}
+            picked={$picked}
+            removeHref={(id) =>
+              href({ picks: params.picks.filter((pick) => pick !== id) })}
+            onAdd={() => searchBox?.querySelector("input")?.focus()}
+          />
+        </MixtapeActionBar>
+      </div>
+    {/snippet}
+  </NavbarStateSetter>
+{/if}
+
 {#if params.view === "results"}
   <MixtapeResults
     {slots}
@@ -301,28 +330,6 @@
         }}
       />
     </section>
-
-    <div class="mixtape-dock">
-      <MixtapeActionBar
-        pickCount={params.picks.length}
-        clearHref={UrlBuilder.mixtape({ type: params.type })}
-        mixHref={href({ view: "results" })}
-        onMix={() =>
-          trackMix({
-            type: params.type,
-            picks: params.picks.length,
-            fits: $fits.length,
-          })}
-      >
-        <MixtapeTray
-          picks={params.picks}
-          picked={$picked}
-          removeHref={(id) =>
-            href({ picks: params.picks.filter((pick) => pick !== id) })}
-          onAdd={() => searchBox?.querySelector("input")?.focus()}
-        />
-      </MixtapeActionBar>
-    </div>
   </div>
 {/if}
 
@@ -413,26 +420,9 @@
         margin: 0;
       }
     }
+  }
 
-    .mixtape-dock {
-      position: sticky;
-      inset-block-end: 0;
-      z-index: var(--layer-floating);
-
-      box-sizing: border-box;
-      width: 100%;
-      max-width: calc(
-        var(--mixtape-content-width) + 2 * var(--layout-distance-side)
-      );
-      margin-block-start: auto;
-      margin-inline: auto;
-      padding: var(--gap-s) var(--layout-distance-side);
-      padding-block-end: calc(var(--gap-s) + env(safe-area-inset-bottom));
-
-      @include for-tablet-sm-and-below {
-        inset-block-end: var(--mobile-navbar-height);
-        padding-block-end: var(--gap-s);
-      }
-    }
+  .mixtape-dock {
+    width: 100%;
   }
 </style>
