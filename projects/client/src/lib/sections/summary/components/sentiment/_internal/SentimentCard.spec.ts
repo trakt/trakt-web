@@ -1,10 +1,15 @@
+import { MatchResponseMock } from '$mocks/data/summary/match/response/MatchResponseMock.ts';
+import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock.ts';
 import { MovieHereticSentimentMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticSentimentMappedMock.ts';
 import { RealityCheckPublicMappedMock } from '$mocks/data/summary/reality-check/mapped/RealityCheckPublicMappedMock.ts';
+import { server } from '$mocks/server.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
+import { delay, http, HttpResponse } from 'msw';
 import type { ComponentProps } from 'svelte';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import SentimentCard from './SentimentCard.svelte';
 
 const { track } = vi.hoisted(() => ({ track: vi.fn() }));
@@ -16,13 +21,35 @@ vi.mock('$lib/features/analytics/useTrack.ts', () => ({
 const PILL = '.trakt-reality-tier-pill';
 const SKELETON = '.trakt-skeleton';
 
-async function renderCard(props: ComponentProps<typeof SentimentCard>) {
-  const view = renderComponent(SentimentCard, { props });
+const TARGET = { type: 'movie', id: 1 } as const;
+
+type CardProps = Omit<ComponentProps<typeof SentimentCard>, 'type' | 'id'>;
+
+async function renderCard(props: CardProps) {
+  const view = renderComponent(SentimentCard, {
+    props: { ...TARGET, ...props },
+  });
   await screen.findByRole('link');
   return view;
 }
 
+function serveMatch(match: number | null, status = 200) {
+  server.use(
+    http.get('http://localhost/movies/:id/match', () =>
+      status === 200
+        ? HttpResponse.json({ ...MatchResponseMock, match })
+        : new HttpResponse(null, { status }),
+    ),
+  );
+}
+
+const RING = '.trakt-match-ring';
+
 describe('SentimentCard', () => {
+  beforeEach(() => {
+    setAuthorization(true);
+  });
+
   afterEach(() => {
     track.mockClear();
   });
@@ -45,6 +72,7 @@ describe('SentimentCard', () => {
   it('should render a skeleton card without a link while the Reality Check loads', async () => {
     const { container } = renderComponent(SentimentCard, {
       props: {
+        ...TARGET,
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: undefined,
       },
@@ -60,7 +88,7 @@ describe('SentimentCard', () => {
 
   it('should render a skeleton card without a link while the sentiment loads', async () => {
     const { container } = renderComponent(SentimentCard, {
-      props: { sentiment: undefined, realityCheck: null },
+      props: { ...TARGET, sentiment: undefined, realityCheck: null },
     });
 
     await waitFor(() =>
@@ -74,7 +102,7 @@ describe('SentimentCard', () => {
       container.querySelector('svelte-css-wrapper')?.getAttribute('style');
 
     const loading = renderComponent(SentimentCard, {
-      props: { sentiment: undefined, realityCheck: undefined },
+      props: { ...TARGET, sentiment: undefined, realityCheck: undefined },
     });
     await waitFor(() =>
       expect(loading.container.querySelector(SKELETON)).toBeInTheDocument(),
@@ -150,5 +178,159 @@ describe('SentimentCard', () => {
     await user.click(screen.getByRole('link'));
 
     expect(track).toHaveBeenCalledWith({ source: 'reality-check' });
+  });
+
+  it('should show the match ring with the score and the viewer avatar', async () => {
+    serveMatch(91);
+    const { container } = await renderCard({
+      sentiment: MovieHereticSentimentMappedMock,
+      realityCheck: RealityCheckPublicMappedMock,
+    });
+
+    await waitFor(() =>
+      expect(container.querySelector(RING)).toHaveTextContent('91%'),
+    );
+    expect(
+      screen.getByRole('img', { name: '91% match for you' }),
+    ).toBeVisible();
+    expect(
+      container.querySelector(`${RING} .trakt-match-avatar`),
+    ).toBeInTheDocument();
+    expect(container.querySelector(PILL)).toHaveTextContent('Loosely based');
+  });
+
+  it('should hold the ring slot while the score loads', async () => {
+    server.use(
+      http.get('http://localhost/movies/:id/match', async () => {
+        await delay('infinite');
+        return HttpResponse.json(MatchResponseMock);
+      }),
+    );
+    const { container } = await renderCard({
+      sentiment: MovieHereticSentimentMappedMock,
+      realityCheck: null,
+    });
+
+    await waitFor(() =>
+      expect(
+        container.querySelector('.trakt-match-ring-skeleton'),
+      ).toBeInTheDocument(),
+    );
+    expect(container.querySelector('.has-ring')).toBeInTheDocument();
+  });
+
+  it('should show an empty ring when there is no score yet', async () => {
+    serveMatch(null);
+    const { container } = await renderCard({
+      sentiment: MovieHereticSentimentMappedMock,
+      realityCheck: null,
+    });
+
+    expect(
+      await screen.findByRole('img', { name: 'No match score for you yet' }),
+    ).toBeVisible();
+    expect(container.querySelector('.trakt-match-ring-value')).toBeNull();
+  });
+
+  it('should say there is not enough data on a match-only card', async () => {
+    serveMatch(null);
+    renderComponent(SentimentCard, {
+      props: { ...TARGET, sentiment: null, realityCheck: null },
+    });
+
+    expect(
+      await screen.findByText('Not enough data to match this to you yet.'),
+    ).toBeVisible();
+    expect(screen.queryByRole('link')).toBeNull();
+  });
+
+  it('should grey the ring for a low score', async () => {
+    serveMatch(12);
+    const { container } = await renderCard({
+      sentiment: MovieHereticSentimentMappedMock,
+      realityCheck: null,
+    });
+
+    await waitFor(() =>
+      expect(container.querySelector(RING)).toHaveClass('is-low'),
+    );
+  });
+
+  it('should show the ring for a score of zero', async () => {
+    serveMatch(0);
+    const { container } = await renderCard({
+      sentiment: MovieHereticSentimentMappedMock,
+      realityCheck: null,
+    });
+
+    await waitFor(() =>
+      expect(container.querySelector(RING)).toHaveTextContent('0%'),
+    );
+  });
+
+  it('should hold the ring for a director without VIP', async () => {
+    server.use(
+      http.get('http://localhost/users/settings', () =>
+        HttpResponse.json({
+          ...ExtendedUsersResponseMock,
+          user: {
+            ...ExtendedUsersResponseMock.user,
+            vip: false,
+            vip_ep: false,
+            director: true,
+          },
+        }),
+      ),
+    );
+    serveMatch(null);
+    renderComponent(SentimentCard, {
+      props: { ...TARGET, sentiment: null, realityCheck: null },
+    });
+
+    expect(
+      await screen.findByText('Not enough data to match this to you yet.'),
+    ).toBeVisible();
+  });
+
+  it('should look like today for a free user the match route refuses', async () => {
+    server.use(
+      http.get('http://localhost/users/settings', () =>
+        HttpResponse.json({
+          ...ExtendedUsersResponseMock,
+          user: {
+            ...ExtendedUsersResponseMock.user,
+            vip: false,
+            vip_ep: false,
+          },
+        }),
+      ),
+    );
+    serveMatch(null, 403);
+    const { container } = await renderCard({
+      sentiment: MovieHereticSentimentMappedMock,
+      realityCheck: null,
+    });
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    expect(container.querySelector(RING)).toBeNull();
+  });
+
+  it('should not ask for a match when signed out', async () => {
+    setAuthorization(false);
+    const requested = vi.fn();
+    server.use(
+      http.get('http://localhost/movies/:id/match', () => {
+        requested();
+        return HttpResponse.json(MatchResponseMock);
+      }),
+    );
+    const { container } = await renderCard({
+      sentiment: MovieHereticSentimentMappedMock,
+      realityCheck: null,
+    });
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    expect(requested).not.toHaveBeenCalled();
+    expect(container.querySelector(RING)).toBeNull();
   });
 });

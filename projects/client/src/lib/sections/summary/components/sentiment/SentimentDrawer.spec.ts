@@ -1,11 +1,16 @@
 import { RealityCheckPublicMappedMock } from '$mocks/data/summary/reality-check/mapped/RealityCheckPublicMappedMock.ts';
 import { goto } from '$app/navigation';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { MatchResponseMock } from '$mocks/data/summary/match/response/MatchResponseMock.ts';
+import { RecommendedMoviesResponseMock } from '$mocks/data/recommendations/response/RecommendedMoviesResponseMock.ts';
+import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock.ts';
+import { server } from '$mocks/server.ts';
 import { MovieHereticSentimentMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticSentimentMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
+import { http, HttpResponse } from 'msw';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import SentimentDrawer from './SentimentDrawer.svelte';
 
@@ -18,6 +23,48 @@ vi.mock('$lib/features/analytics/useTrack.ts', () => ({
 }));
 
 const onClose = vi.fn();
+
+const TARGET = { type: 'movie', id: 1 } as const;
+
+function serveMatch(match: number | null) {
+  server.use(
+    http.get('http://localhost/movies/:id/match', () =>
+      HttpResponse.json({ ...MatchResponseMock, match }),
+    ),
+  );
+}
+
+function serveReasons() {
+  const requested = vi.fn();
+  server.use(
+    http.get('http://localhost/v3/recommendations/movie/:id/reasons', () => {
+      requested();
+      return HttpResponse.json({
+        sources: [
+          {
+            id: 1,
+            type: 'favorite',
+            stars: null,
+            movie: RecommendedMoviesResponseMock[0]!.movie,
+          },
+        ],
+        people: [],
+      });
+    }),
+  );
+  return requested;
+}
+
+function serveFreeUser() {
+  server.use(
+    http.get('http://localhost/users/settings', () =>
+      HttpResponse.json({
+        ...ExtendedUsersResponseMock,
+        user: { ...ExtendedUsersResponseMock.user, vip: false, vip_ep: false },
+      }),
+    ),
+  );
+}
 
 describe('SentimentDrawer', () => {
   beforeEach(() => {
@@ -37,6 +84,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -62,6 +110,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: undefined,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -79,6 +128,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: null,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -95,6 +145,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: null,
         realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -113,6 +164,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: undefined,
         realityCheck: undefined,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -136,6 +188,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: undefined,
         realityCheck: null,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -154,6 +207,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: null,
         realityCheck: undefined,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -178,6 +232,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -199,6 +254,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -217,6 +273,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -236,6 +293,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -261,6 +319,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
         source: 'link',
         onClose,
       },
@@ -282,6 +341,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: null,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -303,6 +363,7 @@ describe('SentimentDrawer', () => {
       props: {
         sentiment: MovieHereticSentimentMappedMock,
         realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
         source: 'card',
         onClose,
       },
@@ -325,5 +386,231 @@ describe('SentimentDrawer', () => {
       AnalyticsEvent.Drilldown,
       expect.anything(),
     );
+  });
+
+  it('should add a Match tab after the others when there is a score', async () => {
+    serveMatch(91);
+    serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await waitFor(() =>
+      expect(
+        screen.getAllByRole('tab').map((tab) => tab.textContent?.trim()),
+      ).toEqual(['Sentiment', 'Reality Check', 'Match']),
+    );
+  });
+
+  it('should show tabs for sentiment and match without a Reality Check', async () => {
+    serveMatch(85);
+    serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: null,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    expect(await screen.findByRole('tab', { name: 'Match' })).toBeVisible();
+    expect(screen.getByRole('tab', { name: 'Sentiment' })).toBeVisible();
+  });
+
+  it('should show no Match tab without a score', async () => {
+    serveMatch(null);
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await screen.findByRole('tab', { name: 'Sentiment' });
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    expect(
+      screen.queryByRole('tab', { name: 'Match' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('should explain the score and list the reasons for VIP', async () => {
+    const user = userEvent.setup();
+    serveMatch(91);
+    const requested = serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await user.click(await screen.findByRole('tab', { name: 'Match' }));
+
+    expect(
+      await screen.findByText('Better match for you than 91% of titles'),
+    ).toBeVisible();
+    expect(
+      screen.getByText(
+        'From what you watched, rated and favorited. Nothing to rate.',
+      ),
+    ).toBeVisible();
+    expect(await screen.findByText('Why it fits you')).toBeVisible();
+    expect(requested).toHaveBeenCalled();
+  });
+
+  it('should hide the reasons below the low score threshold', async () => {
+    const user = userEvent.setup();
+    serveMatch(12);
+    const requested = serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await user.click(await screen.findByRole('tab', { name: 'Match' }));
+
+    expect(
+      await screen.findByText('Better match for you than 12% of titles'),
+    ).toBeVisible();
+    expect(screen.queryByText('Why it fits you')).not.toBeInTheDocument();
+    expect(requested).not.toHaveBeenCalled();
+  });
+
+  it('should show the score and the upsell instead of the reasons for free users', async () => {
+    const user = userEvent.setup();
+    serveFreeUser();
+    serveMatch(91);
+    const requested = serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await user.click(await screen.findByRole('tab', { name: 'Match' }));
+
+    expect(
+      await screen.findByText('Better match for you than 91% of titles'),
+    ).toBeVisible();
+    expect(
+      await screen.findByText(
+        'Your score is free. The reasons behind it are a VIP feature.',
+      ),
+    ).toBeVisible();
+    expect(
+      screen.getByText('Upgrade to VIP to unlock more insights.'),
+    ).toBeVisible();
+    expect(screen.queryByText('Why it fits you')).not.toBeInTheDocument();
+    expect(requested).not.toHaveBeenCalled();
+  });
+
+  it('should open on the Match tab named in the url', async () => {
+    serveMatch(91);
+    serveReasons();
+    window.history.replaceState(
+      {},
+      '',
+      '/movies/heretic-2024?view=sentiment&tab=match',
+    );
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'link',
+        onClose,
+      },
+    });
+
+    await waitFor(() =>
+      expect(screen.getByRole('tab', { name: 'Match' })).toHaveAttribute(
+        'data-state',
+        'active',
+      ),
+    );
+  });
+
+  it('should track the open on the Match tab named in the url', async () => {
+    serveMatch(91);
+    serveReasons();
+    window.history.replaceState(
+      {},
+      '',
+      '/movies/heretic-2024?view=sentiment&tab=match',
+    );
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'link',
+        onClose,
+      },
+    });
+
+    await waitFor(() =>
+      expect(track).toHaveBeenCalledWith(AnalyticsEvent.InsightsOpen, {
+        source: 'link',
+        tab: 'match',
+      }),
+    );
+    expect(
+      track.mock.calls.filter(
+        ([event]) => event === AnalyticsEvent.InsightsOpen,
+      ),
+    ).toHaveLength(1);
+  });
+
+  it('should track a switch to the Match tab', async () => {
+    const user = userEvent.setup();
+    serveMatch(91);
+    serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await user.click(await screen.findByRole('tab', { name: 'Match' }));
+
+    expect(track).toHaveBeenLastCalledWith(AnalyticsEvent.InsightsTab, {
+      tab: 'match',
+    });
   });
 });

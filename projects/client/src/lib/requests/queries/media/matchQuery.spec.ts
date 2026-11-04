@@ -1,0 +1,73 @@
+import { MatchMappedMock } from '$mocks/data/summary/match/mapped/MatchMappedMock.ts';
+import { MatchResponseMock } from '$mocks/data/summary/match/response/MatchResponseMock.ts';
+import { server } from '$mocks/server.ts';
+import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
+import { runQuery } from '$test/beds/query/runQuery.ts';
+import { http, HttpResponse } from 'msw';
+import { describe, expect, it } from 'vitest';
+import { InvalidateAction } from '../../models/InvalidateAction.ts';
+import { matchQuery } from './matchQuery.ts';
+
+function queryMatch(type: 'movie' | 'show') {
+  return runQuery({
+    factory: () =>
+      createTestBedQuery(matchQuery({ type, id: 1, enabled: true })),
+    mapper: (response) => ({
+      score: response?.data,
+      isSuccess: response?.isSuccess,
+    }),
+    waitFor: ({ isSuccess }) => isSuccess === true,
+  });
+}
+
+describe('matchQuery', () => {
+  it('should query the score of a movie', async () => {
+    server.use(
+      http.get('http://localhost/movies/:id/match', () =>
+        HttpResponse.json(MatchResponseMock),
+      ),
+    );
+
+    expect(await queryMatch('movie')).toMatchObject({ score: MatchMappedMock });
+  });
+
+  it('should query the score of a show', async () => {
+    server.use(
+      http.get('http://localhost/shows/:id/match', () =>
+        HttpResponse.json({ match: 0 }),
+      ),
+    );
+
+    expect(await queryMatch('show')).toMatchObject({ score: 0 });
+  });
+
+  it('should map a null score to null', async () => {
+    server.use(
+      http.get('http://localhost/movies/:id/match', () =>
+        HttpResponse.json({ match: null }),
+      ),
+    );
+
+    expect(await queryMatch('movie')).toMatchObject({ score: null });
+  });
+
+  it.each([401, 403, 404, 500])(
+    'should map a %i to no score',
+    async (status) => {
+      server.use(
+        http.get(
+          'http://localhost/movies/:id/match',
+          () => new HttpResponse(null, { status }),
+        ),
+      );
+
+      expect(await queryMatch('movie')).toMatchObject({ score: null });
+    },
+  );
+
+  it('should refetch when the VIP status changes', () => {
+    const { queryKey } = matchQuery({ type: 'movie', id: 1, enabled: true });
+
+    expect(queryKey).to.include(InvalidateAction.Vip.Updated);
+  });
+});

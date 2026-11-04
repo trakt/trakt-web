@@ -2765,6 +2765,48 @@
       "default": "Insights",
       "description": "Header for the section and the drawer that group the community sentiment and the Reality Check of a movie or show."
     },
+    "header_match": {
+      "default": "Match",
+      "description": "Tab label in the Insights drawer for the personal match score of a movie or show."
+    },
+    "header_match_reasons": {
+      "default": "Why it fits you",
+      "description": "Heading above the titles that explain the viewer's personal match score."
+    },
+    "text_match_better_than": {
+      "default": "Better match for you than {percent}% of titles",
+      "description": "Headline of the personal match score: the share of titles that this movie or show matches the viewer better than.",
+      "variables": {
+        "percent": {
+          "type": "number"
+        }
+      }
+    },
+    "text_match_basis": {
+      "default": "From what you watched, rated and favorited. Nothing to rate.",
+      "description": "Subtitle under the personal match score explaining what it is based on."
+    },
+    "text_match_basis_free": {
+      "default": "Your score is free. The reasons behind it are a VIP feature.",
+      "description": "Subtitle under the personal match score for non-VIP viewers, before the VIP upsell."
+    },
+    "text_match_not_enough_data": {
+      "default": "Not enough data to match this to you yet.",
+      "description": "Shown in place of the personal match score when the title is too new or too rarely watched to score for the viewer."
+    },
+    "image_alt_match_unknown": {
+      "default": "No match score for you yet",
+      "description": "Accessible label of the empty match ring shown when there is not enough data to score the title for the viewer."
+    },
+    "image_alt_match_score": {
+      "default": "{percent}% match for you",
+      "description": "Accessible label of the ring that shows the personal match score of a movie or show for the viewer.",
+      "variables": {
+        "percent": {
+          "type": "number"
+        }
+      }
+    },
     "header_reality_check": {
       "default": "Reality Check",
       "description": "Name of the feature that rates how true a movie or show based on real events is. Used as a tab label and a section label."
@@ -2772,6 +2814,10 @@
     "button_label_view_reality_check": {
       "default": "View Reality Check",
       "description": "Aria-label for the card that opens the drawer with the Reality Check of a movie or show."
+    },
+    "button_label_view_match": {
+      "default": "View your match",
+      "description": "Aria-label for the card that opens the drawer with the viewer's personal match score of a movie or show."
     },
     "text_reality_check_basis": {
       "default": "Compared with Wikipedia and press coverage",
