@@ -4,6 +4,7 @@ import { page } from '$app/state';
 type TrapEntry = {
   id: string;
   onPop: () => void;
+  onBrowserTransition?: () => void;
 };
 
 let entries: ReadonlyArray<TrapEntry> = [];
@@ -45,7 +46,7 @@ const jumpBack = (steps: number, onLanded: () => void) => {
   globalThis.history.go(-steps);
 };
 
-const handlePop = () => {
+const handlePop = (event: PopStateEvent) => {
   if (onJumpLanded) {
     const landed = onJumpLanded;
     onJumpLanded = undefined;
@@ -58,16 +59,23 @@ const handlePop = () => {
   if (popped.length === 0) return;
 
   entries = entries.filter((entry) => open.has(entry.id));
+  if (event.hasUAVisualTransition) {
+    popped.forEach((entry) => entry.onBrowserTransition?.());
+  }
+
   keepLatestUrl().then(() =>
     popped.toReversed().forEach((entry) => entry.onPop()),
   );
 };
 
-const push = (onPop: () => void) => {
+const push = (
+  onPop: TrapEntry['onPop'],
+  onBrowserTransition?: TrapEntry['onBrowserTransition'],
+) => {
   globalThis.addEventListener('popstate', handlePop);
 
   latestUrl = new URL(page.url);
-  const entry = { id: crypto.randomUUID(), onPop };
+  const entry = { id: crypto.randomUUID(), onPop, onBrowserTransition };
   entries = [...entries, entry];
   pushState('', {
     ...page.state,
