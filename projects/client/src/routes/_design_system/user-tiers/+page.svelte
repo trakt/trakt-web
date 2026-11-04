@@ -60,6 +60,7 @@
     "Stack",
     "Mobile navbar",
     "Small",
+    "Navbar, active",
     "Large",
     "Profile header",
     "Podium",
@@ -114,6 +115,13 @@
             {member}
           />
           <UserAvatar {user} size="small" />
+          <ProfileImage
+            --image-size="var(--ni-32)"
+            {name}
+            src={avatar.url}
+            {member}
+            isHighlighted
+          />
           <UserAvatar {user} />
           <span class="header-cell">
             <ProfileImage
@@ -177,7 +185,7 @@
 
   .user-tiers-grid {
     display: grid;
-    grid-template-columns: repeat(7, max-content);
+    grid-template-columns: repeat(8, max-content);
     align-items: center;
     justify-items: center;
     gap: var(--gap-m) var(--gap-xl);

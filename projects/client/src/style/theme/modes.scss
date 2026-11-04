@@ -476,6 +476,7 @@
     var(--user-tier-legend-sheen)
   );
   --color-user-tier-legend-ring-fill: var(--user-tier-legend-ring-light);
+  --user-tier-active-glow: 95%;
   --color-user-tier-free-glint: var(--shade-700);
   --color-user-tier-free-ring: color-mix(
     in srgb,
@@ -1171,6 +1172,7 @@
   --color-user-tier-legend-ring: var(--user-tier-legend);
   --color-user-tier-legend-ring-sheen: var(--user-tier-legend-sheen);
   --color-user-tier-legend-ring-fill: var(--user-tier-legend-ring);
+  --user-tier-active-glow: 70%;
   --color-user-tier-free-glint: var(--shade-100);
   --color-user-tier-free-ring: color-mix(
     in srgb,
