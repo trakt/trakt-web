@@ -4,12 +4,14 @@
   import { lineClamp } from "$lib/components/text/lineClamp.ts";
   import TodaySentimentInsights from "$lib/sections/today/TodaySentimentInsights.svelte";
   import { useTodayDetails } from "$lib/sections/today/useTodayDetails.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import type { MixtapeStageDetailsProps } from "./MixtapeStageDetailsProps.ts";
   import MixtapeStageGuidance from "./MixtapeStageGuidance.svelte";
   import { toMixtapeMeta } from "./toMixtapeMeta.ts";
 
   const OVERVIEW_LINES = 3;
+  const OVERVIEW_LINES_PHONE = 2;
   const HIGHLIGHT_LINES = 2;
 
   const { media, kicker }: MixtapeStageDetailsProps = $props();
@@ -18,7 +20,12 @@
     fromRune(() => media),
   );
 
+  const isPhone = useMedia(WellKnownMediaQuery.mobile);
+
   const meta = $derived(toMixtapeMeta(media));
+  const overviewLines = $derived(
+    $isPhone ? OVERVIEW_LINES_PHONE : OVERVIEW_LINES,
+  );
 </script>
 
 <div class="trakt-mixtape-stage-details">
@@ -43,7 +50,7 @@
   </div>
 
   {#if media.overview}
-    <p class="small details-overview" use:lineClamp={{ lines: OVERVIEW_LINES }}>
+    <p class="small details-overview" use:lineClamp={{ lines: overviewLines }}>
       {media.overview}
     </p>
   {/if}
@@ -53,6 +60,7 @@
       <TodaySentimentInsights
         sentiment={$sentiment}
         highlightLines={HIGHLIGHT_LINES}
+        variant={$isPhone ? "headline" : "full"}
       />
     </div>
   {/if}
@@ -101,19 +109,27 @@
       border-block-start: var(--border-thickness-xxs) solid var(--color-border);
     }
 
-    /* Phones: the heading stays a centred hero, the reading blocks run start-aligned under it. */
+    /*
+      Phones: a centred hero heading, then the reading blocks start-aligned
+      and tightened so the whole stage fits one screen without scrolling.
+    */
     @include for-mobile {
-      --gap-mixtape-guidance: var(--gap-s);
+      --gap-mixtape-guidance: var(--gap-xs);
 
-      gap: var(--gap-s);
+      gap: var(--gap-xs);
 
       .details-heading {
         align-items: center;
+        gap: var(--ni-4);
         text-align: center;
       }
 
       .details-title {
-        font-size: var(--ni-24);
+        font-size: var(--ni-22);
+      }
+
+      .details-ratings {
+        min-height: var(--ni-24);
       }
 
       .details-ratings :global(.trakt-summary-ratings) {
@@ -121,7 +137,7 @@
       }
 
       .details-insights {
-        padding-block-start: var(--gap-s);
+        padding-block-start: var(--gap-xs);
       }
     }
   }

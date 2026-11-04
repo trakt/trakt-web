@@ -683,25 +683,38 @@
     .stage-layout {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-s);
-      padding: var(--gap-s) var(--layout-distance-side)
+      gap: var(--gap-xs);
+      padding: var(--gap-xs) var(--layout-distance-side)
         calc(var(--ni-104) + var(--gap-m));
     }
 
+    /*
+      The goal is one line on phones, title at the start and the watchlist
+      count at the end; the dots and the footer already count the keeps.
+    */
     .stage-goal {
-      flex-direction: column;
+      align-items: baseline;
+      justify-content: space-between;
       gap: var(--gap-xs);
-      text-align: center;
     }
 
     .stage-goal-title {
-      font-size: var(--ni-24);
+      font-size: var(--ni-20);
+    }
+
+    .stage-goal-meta :global(.trakt-mixtape-goal-slots) {
+      display: none;
+    }
+
+    .stage-main {
+      gap: var(--gap-xs);
     }
 
     .stage-carousel {
-      --width-mixtape-stage-card: var(--ni-180);
-      --stage-card-step: var(--ni-136);
+      --width-mixtape-stage-card: var(--ni-152);
+      --stage-card-step: calc(var(--width-mixtape-stage-card) * 0.76);
 
+      height: calc(var(--width-mixtape-stage-card) * 1.5 + var(--ni-12));
       margin-inline: calc(-1 * var(--layout-distance-side));
     }
 

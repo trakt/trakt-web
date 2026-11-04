@@ -12,7 +12,14 @@
   const {
     sentiment,
     highlightLines = 3,
-  }: { sentiment: SentimentAnalysis; highlightLines?: number } = $props();
+    variant = "full",
+  }: {
+    sentiment: SentimentAnalysis;
+    highlightLines?: number;
+    variant?: "full" | "headline";
+  } = $props();
+
+  const isHeadline = $derived(variant === "headline");
 
   const selected = $derived(
     sentiment.aspect.pros.length + sentiment.aspect.cons.length > 0
@@ -34,7 +41,7 @@
   );
 </script>
 
-<div class="trakt-today-sentiment-insights">
+<div class="trakt-today-sentiment-insights" data-variant={variant}>
   <div class="insights-header">
     <p class="tag uppercase bold insights-kicker">
       {m.header_community_sentiment()}
@@ -43,11 +50,13 @@
       <TodaySentimentVerdict {verdict} />
     {/if}
   </div>
-  <p class="small" use:lineClamp={{ lines: highlightLines }}>
-    {stripMarkdownLinks(sentiment.highlight)}
-  </p>
+  {#if !isHeadline}
+    <p class="small" use:lineClamp={{ lines: highlightLines }}>
+      {stripMarkdownLinks(sentiment.highlight)}
+    </p>
+  {/if}
 
-  {#each aspects as aspect (aspect.key)}
+  {#each isHeadline ? [] : aspects as aspect (aspect.key)}
     <div class="insights-aspects" data-sentiment={aspect.key}>
       <SentimentIcon sentiment={aspect.key} />
       <ul>

@@ -166,5 +166,20 @@
     .guidance-accessible-label {
       @include visually-hidden;
     }
+
+    /* Phones: one row of chips that scrolls sideways, bleeding to the screen edge. */
+    @include for-mobile {
+      .guidance-chips {
+        flex-wrap: nowrap;
+        margin-inline: calc(-1 * var(--layout-distance-side));
+        padding-inline: var(--layout-distance-side);
+        overflow-x: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
   }
 </style>
