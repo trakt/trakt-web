@@ -15109,6 +15109,15 @@
       "default": "Up next",
       "description": "Small caps label above the next episode to watch in the Progress column of the summary header."
     },
+    "text_recap_previously": {
+      "default": "Previously · {episode}",
+      "description": "Small caps label above the last episode the user watched in the Progress column of the summary header, followed by its name and synopsis. 'episode' is the season and episode label, e.g. 'S2 • E3'.",
+      "variables": {
+        "episode": {
+          "type": "string"
+        }
+      }
+    },
     "text_recap_start_with": {
       "default": "Start with",
       "description": "Small caps label above the first episode in the Progress column of the summary header, when the viewer has not started the show."

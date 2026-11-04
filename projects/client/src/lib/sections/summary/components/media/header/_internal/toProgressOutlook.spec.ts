@@ -14,7 +14,12 @@ function progressWith(
     remaining: 5,
     minutesLeft: 276,
     isLatestAired: false,
-    lastEpisode: { season: 2, number: 3, title: '', overview: '' },
+    lastEpisode: {
+      season: 2,
+      number: 3,
+      title: 'Solo',
+      overview: 'Juliette reaches the silo next door.',
+    },
     ...overrides,
   } as EpisodeProgressEntry;
 }
@@ -28,17 +33,33 @@ describe('util: toProgressOutlook', () => {
       expect(next?.label).toMatchInlineSnapshot(`"S2 • E4"`);
     });
 
-    it('should count the watched episodes and the last one seen', () => {
-      const { foot, fraction } = toProgressOutlook(progressWith({}));
+    it('should name the last episode seen with its synopsis', () => {
+      const { previous } = toProgressOutlook(progressWith({}));
 
-      expect(foot).toMatchInlineSnapshot(`"11 of 16 · last seen S2 • E3"`);
-      expect(fraction).toBeCloseTo(11 / 16);
+      expect(previous).toEqual({
+        kicker: 'Previously · S2 • E3',
+        season: 2,
+        number: 3,
+        title: 'Solo',
+        overview: 'Juliette reaches the silo next door.',
+      });
+    });
+
+    it('should leave out a synopsis the API does not have', () => {
+      const { previous } = toProgressOutlook(
+        progressWith({
+          lastEpisode: { season: 2, number: 3, title: 'Solo', overview: ' ' },
+        }),
+      );
+
+      expect(previous?.title).toBe('Solo');
+      expect(previous?.overview).toBeNull();
     });
   });
 
   describe('before the first episode', () => {
-    it('should start with the first episode', () => {
-      const { next, foot, fraction } = toProgressOutlook(
+    it('should start with the first episode and recall nothing', () => {
+      const { next, previous } = toProgressOutlook(
         progressWith({
           season: 1,
           number: 1,
@@ -50,19 +71,24 @@ describe('util: toProgressOutlook', () => {
 
       expect(next?.kicker).toBe('Start with');
       expect(next?.label).toMatchInlineSnapshot(`"S1 • E1"`);
-      expect(foot).toMatchInlineSnapshot(`"0 of 16 · not started"`);
-      expect(fraction).toBe(0);
+      expect(previous).toBeNull();
     });
   });
 
   describe('when caught up', () => {
-    it('should offer no next episode and a full bar', () => {
-      const { next, fraction } = toProgressOutlook(
-        progressWith({ id: -1, season: -1, number: -1, completed: 16, remaining: 0 }),
+    it('should offer no next episode but still recall the last one', () => {
+      const { next, previous } = toProgressOutlook(
+        progressWith({
+          id: -1,
+          season: -1,
+          number: -1,
+          completed: 16,
+          remaining: 0,
+        }),
       );
 
       expect(next).toBeNull();
-      expect(fraction).toBe(1);
+      expect(previous?.kicker).toBe('Previously · S2 • E3');
     });
   });
 });
