@@ -23,6 +23,7 @@
     member,
     ringMotion = "hover",
     hasEntrance = false,
+    isHighlighted = false,
     badge,
   }: {
     name: string;
@@ -30,6 +31,7 @@
     member?: TieredUser | Nil;
     ringMotion?: UserTierRingMotion;
     hasEntrance?: boolean;
+    isHighlighted?: boolean;
     isEditable?: boolean;
     badge?: Snippet;
   } = $props();
@@ -109,7 +111,7 @@
       {m.image_alt_user_avatar({ username: name })}
     </figcaption>
 
-    <UserTierRing {member} motion={ringMotion} {hasEntrance}>
+    <UserTierRing {member} motion={ringMotion} {hasEntrance} {isHighlighted}>
       {#if isEditable}
         <ProfileImageContextMenu
           onViewPhoto={() => (imageEdit.dialog = "view")}

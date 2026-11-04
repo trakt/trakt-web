@@ -11,6 +11,7 @@
     member: TieredUser | Nil;
     motion?: UserTierRingMotion;
     hasEntrance?: boolean;
+    isHighlighted?: boolean;
     children: Snippet;
   };
 
@@ -18,6 +19,7 @@
     member,
     motion = "hover",
     hasEntrance = false,
+    isHighlighted = false,
     children,
   }: UserTierRingProps = $props();
 
@@ -30,6 +32,7 @@
   <span
     class="trakt-user-tier-ring"
     class:has-entrance={hasEntrance}
+    class:is-highlighted={isHighlighted}
     data-user-tier={tier}
     data-motion={shownMotion}
     {@attach userTierRingMotion(tier)}
@@ -111,6 +114,22 @@
       --ring-halo: var(--shadow-user-tier-legend);
     }
 
+    &.is-highlighted {
+      box-shadow: 0 0 var(--ni-10)
+        color-mix(
+          in srgb,
+          var(--highlight-color, var(--tier-sheen)) var(--user-tier-active-glow),
+          transparent
+        );
+    }
+
+    &.is-highlighted[data-user-tier="free"] {
+      --highlight-color: var(--color-link-active);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: box-shadow var(--transition-increment) ease-in-out;
+    }
 
     &::before {
       content: "";
