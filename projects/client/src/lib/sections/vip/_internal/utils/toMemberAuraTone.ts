@@ -1,9 +1,9 @@
 import type { VipBadgeTone } from '$lib/components/badge/VipBadgeTone.ts';
-import type { TieredMember } from '$lib/features/vip-veteran/TieredMember.ts';
+import type { TieredUser } from '$lib/features/vip-veteran/TieredUser.ts';
 import { toVipVeteranTone } from '$lib/features/vip-veteran/toVipVeteranTone.ts';
 
 type ToMemberAuraToneParams = {
-  member: TieredMember;
+  member: TieredUser;
   isVeteranEnabled: boolean;
 };
 

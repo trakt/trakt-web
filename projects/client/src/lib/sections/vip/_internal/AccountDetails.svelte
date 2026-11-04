@@ -1,6 +1,6 @@
 <script lang="ts">
   import ThreadRing from "$lib/components/badge/ThreadRing.svelte";
-  import MemberBadge from "$lib/features/vip-veteran/MemberBadge.svelte";
+  import UserTierBadge from "$lib/features/vip-veteran/UserTierBadge.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { languageTag } from "$lib/features/i18n";
   import { m } from "$lib/features/i18n/messages";
@@ -52,7 +52,7 @@
       <div class="vip-header-details">
         <div class="vip-profile-header-user-details">
           <h1>{toDisplayableName($user)}</h1>
-          <MemberBadge member={$member} />
+          <UserTierBadge member={$member} />
         </div>
         <div class="vip-profile-header-membership">
           {#if subscription?.memberSince}

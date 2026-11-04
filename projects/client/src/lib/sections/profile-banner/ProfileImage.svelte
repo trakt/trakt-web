@@ -2,8 +2,8 @@
   import LoaderIcon from "$lib/components/icons/LoaderIcon.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
-  import type { TieredMember } from "$lib/features/vip-veteran/TieredMember.ts";
+  import UserTierRing from "$lib/features/vip-veteran/UserTierRing.svelte";
+  import type { TieredUser } from "$lib/features/vip-veteran/TieredUser.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction";
   import { removeAvatarRequest } from "$lib/requests/queries/users/removeAvatarRequest";
@@ -24,7 +24,7 @@
   }: {
     name: string;
     src: string;
-    member?: TieredMember | Nil;
+    member?: TieredUser | Nil;
     hasEntrance?: boolean;
     isEditable?: boolean;
     badge?: Snippet;
@@ -90,7 +90,7 @@
   }
 </script>
 
-<MemberAvatar {member}>
+<UserTierRing {member}>
   <div
     class="trakt-profile-image"
     class:is-vip={isVip}
@@ -156,7 +156,7 @@
 
     {@render badge?.()}
   </div>
-</MemberAvatar>
+</UserTierRing>
 
 {#if imageEdit.dialog === "view"}
   <ProfileImageViewDialog
