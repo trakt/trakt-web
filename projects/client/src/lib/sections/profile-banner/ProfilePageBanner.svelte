@@ -5,7 +5,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import { useVipVeteran } from "$lib/features/vip-veteran/stores/useVipVeteran.ts";
-  import MemberBadge from "$lib/features/vip-veteran/MemberBadge.svelte";
+  import UserTierBadge from "$lib/features/vip-veteran/UserTierBadge.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import LeaderboardPill from "$lib/sections/profile/leaderboard/LeaderboardPill.svelte";
   import VipStreakBadge from "$lib/sections/profile/vip-streak/VipStreakBadge.svelte";
@@ -75,7 +75,7 @@
               isDirector={profile.isDirector}
             />
           {:else}
-            <MemberBadge {member} />
+            <UserTierBadge {member} />
           {/if}
         {/if}
       {/snippet}

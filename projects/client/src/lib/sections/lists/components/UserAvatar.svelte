@@ -2,7 +2,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
+  import UserTierRing from "$lib/features/vip-veteran/UserTierRing.svelte";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
@@ -31,12 +31,12 @@
     class:trakt-vip-user={user.isVip}
     data-size={size}
   >
-    <MemberAvatar member={user}>
+    <UserTierRing member={user}>
       <CrossOriginImage
         src={user.avatar.url}
         alt={m.image_alt_user_avatar({ username: user.username })}
       />
-    </MemberAvatar>
+    </UserTierRing>
 
     {#if icon}
       {@render icon()}

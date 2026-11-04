@@ -16,7 +16,7 @@
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
+  import UserTierRing from "$lib/features/vip-veteran/UserTierRing.svelte";
   import { onMount } from "svelte";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
   import TodayFaces from "./TodayFaces.svelte";
@@ -187,12 +187,12 @@
       <div class="frame-text">
         <div class="frame-person">
           {#snippet avatar(user: UserProfile)}
-            <MemberAvatar member={user}>
+            <UserTierRing member={user}>
               <CrossOriginImage
                 src={user.avatar.url}
                 alt={m.image_alt_user_avatar({ username: user.username })}
               />
-            </MemberAvatar>
+            </UserTierRing>
           {/snippet}
           {#if frame.action.user.slug}
             <Link
