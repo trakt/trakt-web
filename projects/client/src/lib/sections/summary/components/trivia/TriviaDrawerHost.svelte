@@ -53,6 +53,9 @@
 
   const triviaGroups = $derived(toTriviaGroups(filteredList));
 
+  /* One category picked: the menu already names it, so the list does not. */
+  const isSingleCategory = $derived(effectiveCategory !== "all" && !isSpoilers);
+
   const categoryOptions = $derived([
     { value: "all", label: m.option_text_trivia_category_all() },
     ...$categories
@@ -122,13 +125,15 @@
         {/if}
 
         {#if $isRevampedHeader}
-          <!-- Each category named once, above its facts, whether the menu
-               shows them all or just the one. -->
+          <!-- Each category named once, above its facts, when the menu
+               shows them all. -->
           <div class="trivia-drawer-groups">
             {#each triviaGroups as group (group.category)}
               {@const label = categoryLabel(group.category)}
               <section class="trivia-group" aria-label={label}>
-                <ListLabel title={label} />
+                {#if !isSingleCategory}
+                  <ListLabel title={label} />
+                {/if}
                 <div class="trivia-group-facts">
                   {#each group.facts as trivia (trivia.key)}
                     <TriviaBand {trivia} {media} />
