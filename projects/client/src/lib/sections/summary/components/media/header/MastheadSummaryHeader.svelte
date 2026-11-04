@@ -1428,13 +1428,14 @@
       box-sizing: border-box;
 
       /*
-        Lifted off the backdrop: a translucent wash with a lit top edge and a
-        hairline, over a blur of whatever sits behind, so the tray reads at a
-        glance on any artwork. The bar inside drops its own surface into it.
+        Lifted off the backdrop: a faint wash with a lit top edge and a
+        hairline, over a blur of whatever sits behind, so the tray holds
+        together on any artwork without shouting. The bar inside drops its
+        own surface into it.
       */
       background-color: color-mix(
         in srgb,
-        var(--color-foreground) 7%,
+        var(--color-foreground) 3.5%,
         transparent
       );
       border-radius: var(--border-radius-l);
