@@ -1,15 +1,15 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import { useVipVeteranEnabled } from "./stores/useVipVeteranEnabled.ts";
-  import type { TieredMember } from "./TieredMember.ts";
+  import type { TieredUser } from "./TieredUser.ts";
   import { toVipVeteranRingTone } from "./toVipVeteranRingTone.ts";
 
-  type MemberAvatarProps = {
-    member: TieredMember | Nil;
+  type UserTierRingProps = {
+    member: TieredUser | Nil;
     children: Snippet;
   };
 
-  const { member, children }: MemberAvatarProps = $props();
+  const { member, children }: UserTierRingProps = $props();
 
   const isEnabled = useVipVeteranEnabled();
   const tone = $derived(
@@ -17,12 +17,12 @@
   );
 </script>
 
-<span class="trakt-member-avatar" data-tone={tone}>
+<span class="trakt-user-tier-ring" data-tone={tone}>
   {@render children()}
 </span>
 
 <style>
-  .trakt-member-avatar {
+  .trakt-user-tier-ring {
     display: contents;
 
     &[data-tone="copper"] {
