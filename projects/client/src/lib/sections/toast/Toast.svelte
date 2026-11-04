@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { trackElementHeight } from "$lib/utils/actions/trackElementHeight.ts";
   import { fade } from "svelte/transition";
   import { useFooterHeight } from "./_internal/useFooterHeight";
   import { useScrollDistance } from "./_internal/useScrollDistance";
@@ -15,6 +16,7 @@
   aria-atomic="true"
   style="--distance-from-bottom: {$distanceFromBottom}px; --footer-height: {$footerHeight}px"
   transition:fade={{ duration: 300 }}
+  use:trackElementHeight={"--floating-toast-height"}
 >
   {@render children()}
 </div>
@@ -26,7 +28,6 @@
     --toast-padding: var(--ni-12);
     --toast-gap: var(--gap-m);
     --toast-bottom-distance: var(--ni-24);
-    --toast-height: calc(var(--height-toast-card) + 2 * var(--toast-padding));
 
     position: fixed;
     z-index: var(--layer-overlay);
@@ -36,7 +37,6 @@
     box-sizing: border-box;
     padding: var(--toast-padding);
 
-    max-height: var(--toast-height);
     width: min(var(--ni-480), 90dvw);
 
     bottom: max(
@@ -59,5 +59,13 @@
     transition-property: padding, gap;
 
     backdrop-filter: blur(var(--ni-16));
+
+    &:has(> :global([data-surface="own"])) {
+      padding: 0;
+      border: none;
+      background-color: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
   }
 </style>

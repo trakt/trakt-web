@@ -1,16 +1,10 @@
 <script lang="ts">
-  import { useLastWatched } from "$lib/features/toast/useLastWatched";
-  import { useNowPlaying } from "$lib/features/toast/useNowPlaying";
   import FooterContent from "./components/FooterContent.svelte";
   import { FOOTER_CLASS_NAME } from "./constants";
 
-  const { nowPlaying } = useNowPlaying();
-  const { lastWatched } = useLastWatched();
-
-  const hasToast = $derived(Boolean($nowPlaying || $lastWatched));
 </script>
 
-<footer class={FOOTER_CLASS_NAME} class:has-toast={hasToast}>
+<footer class={FOOTER_CLASS_NAME}>
   <FooterContent />
 </footer>
 
@@ -20,21 +14,13 @@
   .trakt-footer {
     height: var(--ni-256);
 
-    margin-top: var(--gap-xxl);
+    margin-top: calc(var(--floating-toast-height, 0px) + var(--gap-xxl));
     margin-inline-start: var(--layout-sidebar-distance);
 
     padding-inline-start: var(--layout-distance-side);
     padding-inline-end: var(--layout-distance-side);
 
-    &.has-toast {
-      margin-top: calc(var(--height-toast-card) + var(--gap-xxl));
-    }
-
     @include for-tablet-sm-and-below {
-      &.has-toast {
-        margin-top: 0;
-      }
-
       margin-top: 0;
       margin-bottom: var(--gap-l);
 
