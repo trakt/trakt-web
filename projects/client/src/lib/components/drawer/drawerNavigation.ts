@@ -1,6 +1,6 @@
-import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { DRAWER_VIEW_PARAM } from '$lib/components/drawer/constants/index.ts';
+import { replaceDrawerUrl } from './replaceDrawerUrl.ts';
 
 export function drawerNavigation<
   T extends string,
@@ -37,17 +37,12 @@ export function drawerNavigation<
   const openDrawer = <D extends T>(
     drawer: D,
     ...args: D extends keyof P ? [P[D]?] : []
-  ) =>
-    // eslint-disable-next-line svelte/no-navigation-without-resolve
-    goto(buildDrawerLink(drawer, ...args).href, {
-      noScroll: true,
-      replaceState: true,
-    });
+  ) => replaceDrawerUrl(buildDrawerLink(drawer, ...args).href);
 
   const closeParams = (...keys: string[]) => {
     const url = new URL(page.url);
     keys.forEach((key) => url.searchParams.delete(key));
-    goto(url, { noScroll: true, replaceState: true });
+    replaceDrawerUrl(url);
   };
 
   const close = () => closeParams(DRAWER_VIEW_PARAM, ...cleanupKeys);

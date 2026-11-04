@@ -202,6 +202,7 @@ declare global {
     interface PageState {
       preservedFilters?: Record<string, string>;
       isPlayingGame?: boolean;
+      drawerTraps?: string[];
     }
     // interface Platform {}
     interface Platform {

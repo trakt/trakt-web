@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
+  import { replaceDrawerUrl } from "$lib/components/drawer/replaceDrawerUrl.ts";
   import { page } from "$app/state";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
@@ -111,8 +111,9 @@
       const target = UrlBuilder.users(owner).lists(slug);
 
       if (target !== page.url.pathname) {
-        // eslint-disable-next-line svelte/no-navigation-without-resolve
-        await goto(`${target}${page.url.search}`, { replaceState: true });
+        await replaceDrawerUrl(`${target}${page.url.search}`, {
+          noScroll: false,
+        });
       }
     }
 
