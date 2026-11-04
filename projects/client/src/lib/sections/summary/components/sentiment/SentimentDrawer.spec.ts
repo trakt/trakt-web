@@ -1,6 +1,7 @@
 import { RealityCheckPublicMappedMock } from '$mocks/data/summary/reality-check/mapped/RealityCheckPublicMappedMock.ts';
 import { goto } from '$app/navigation';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import type { MatchResponse } from '$lib/requests/models/MatchResponse.ts';
 import { MatchResponseMock } from '$mocks/data/summary/match/response/MatchResponseMock.ts';
 import { RecommendedMoviesResponseMock } from '$mocks/data/recommendations/response/RecommendedMoviesResponseMock.ts';
 import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock.ts';
@@ -26,10 +27,13 @@ const onClose = vi.fn();
 
 const TARGET = { type: 'movie', id: 1 } as const;
 
-function serveMatch(match: number | null) {
+function serveMatch(
+  match: number | null,
+  taste: MatchResponse['taste'] = MatchResponseMock.taste,
+) {
   server.use(
     http.get('http://localhost/movies/:id/match', () =>
-      HttpResponse.json({ ...MatchResponseMock, match }),
+      HttpResponse.json({ match, taste }),
     ),
   );
 }
@@ -474,6 +478,75 @@ describe('SentimentDrawer', () => {
     ).toBeVisible();
     expect(await screen.findByText('Why it fits you')).toBeVisible();
     expect(requested).toHaveBeenCalled();
+  });
+
+  it('should show the shared subgenres as chips above the reasons', async () => {
+    const user = userEvent.setup();
+    serveMatch(91);
+    serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await user.click(await screen.findByRole('tab', { name: 'Match' }));
+
+    expect(await screen.findByText('Your taste')).toBeVisible();
+    expect(
+      screen.getAllByRole('listitem').map((item) => item.textContent),
+    ).toEqual(
+      expect.arrayContaining(['World War II', 'Biopic', 'Top Secret Project']),
+    );
+  });
+
+  it('should show the chips to free users above the upsell', async () => {
+    const user = userEvent.setup();
+    serveFreeUser();
+    serveMatch(91);
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await user.click(await screen.findByRole('tab', { name: 'Match' }));
+
+    expect(await screen.findByText('World War II')).toBeVisible();
+    expect(
+      screen.getByText('Upgrade to VIP to unlock more insights.'),
+    ).toBeVisible();
+  });
+
+  it('should render no taste row without shared subgenres', async () => {
+    const user = userEvent.setup();
+    serveMatch(91, []);
+    serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await user.click(await screen.findByRole('tab', { name: 'Match' }));
+
+    expect(await screen.findByText('Why it fits you')).toBeVisible();
+    expect(screen.queryByText('Your taste')).not.toBeInTheDocument();
   });
 
   it('should hide the reasons below the low score threshold', async () => {

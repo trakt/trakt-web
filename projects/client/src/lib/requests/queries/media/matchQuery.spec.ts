@@ -13,7 +13,8 @@ function queryMatch(type: 'movie' | 'show') {
     factory: () =>
       createTestBedQuery(matchQuery({ type, id: 1, enabled: true })),
     mapper: (response) => ({
-      score: response?.data,
+      score: response?.data?.score,
+      taste: response?.data?.taste,
       isSuccess: response?.isSuccess,
     }),
     waitFor: ({ isSuccess }) => isSuccess === true,
@@ -28,7 +29,10 @@ describe('matchQuery', () => {
       ),
     );
 
-    expect(await queryMatch('movie')).toMatchObject({ score: MatchMappedMock });
+    expect(await queryMatch('movie')).toMatchObject({
+      score: MatchMappedMock.score,
+      taste: MatchMappedMock.taste,
+    });
   });
 
   it('should query the score of a show', async () => {
@@ -39,6 +43,16 @@ describe('matchQuery', () => {
     );
 
     expect(await queryMatch('show')).toMatchObject({ score: 0 });
+  });
+
+  it('should default a missing taste to an empty list', async () => {
+    server.use(
+      http.get('http://localhost/movies/:id/match', () =>
+        HttpResponse.json({ match: 80 }),
+      ),
+    );
+
+    expect(await queryMatch('movie')).toMatchObject({ score: 80, taste: [] });
   });
 
   it('should map a null score to null', async () => {
@@ -61,7 +75,10 @@ describe('matchQuery', () => {
         ),
       );
 
-      expect(await queryMatch('movie')).toMatchObject({ score: null });
+      expect(await queryMatch('movie')).toMatchObject({
+        score: null,
+        taste: [],
+      });
     },
   );
 

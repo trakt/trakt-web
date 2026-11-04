@@ -6,7 +6,7 @@ import {
   type MatchResponse,
   MatchResponseSchema,
 } from '../../models/MatchResponse.ts';
-import { MatchScoreSchema } from '../../models/MatchScore.ts';
+import { MatchSchema } from '../../models/Match.ts';
 import type { MediaType } from '../../models/MediaType.ts';
 
 type MatchParams = {
@@ -15,7 +15,7 @@ type MatchParams = {
   enabled: boolean;
 } & ApiParams;
 
-const NO_MATCH: MatchResponse = { match: null };
+const NO_MATCH: MatchResponse = { match: null, taste: [] };
 
 const matchRequest = async ({ fetch, type, id }: MatchParams) => {
   const response = await rawApiFetch({
@@ -45,8 +45,11 @@ export const matchQuery = defineQuery({
   ],
   dependencies: (params) => [params.type, params.id],
   request: matchRequest,
-  mapper: (response) => response.body.match,
-  schema: MatchScoreSchema,
+  mapper: (response) => ({
+    score: response.body.match,
+    taste: response.body.taste,
+  }),
+  schema: MatchSchema,
   ttl: time.hours(1),
   enabled: (params) => params.enabled,
 });

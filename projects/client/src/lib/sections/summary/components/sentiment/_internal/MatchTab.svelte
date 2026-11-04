@@ -6,8 +6,9 @@
   import { MATCH_LOW_THRESHOLD } from "./constants/matchRing.ts";
   import MatchReasons from "./MatchReasons.svelte";
   import MatchRing from "./MatchRing.svelte";
+  import MatchTaste from "./MatchTaste.svelte";
 
-  const { score, type, id }: MatchTabProps = $props();
+  const { score, taste, type, id }: MatchTabProps = $props();
 
   const hasReasons = $derived(score >= MATCH_LOW_THRESHOLD);
 </script>
@@ -25,6 +26,8 @@
       </RenderFor>
     </div>
   </div>
+
+  <MatchTaste {taste} />
 
   <RenderFor audience="vip">
     {#if hasReasons}
