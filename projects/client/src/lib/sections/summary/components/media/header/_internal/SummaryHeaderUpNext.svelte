@@ -22,6 +22,27 @@
   } = $props();
 
   const outlook = $derived(toProgressOutlook(progress));
+
+  /*
+    The synopsis takes whatever height the strip's tallest column leaves it
+    and shows as many whole lines as fit there. Its box never grows with its
+    text (see `contain: size`), so resizing it to clamp cannot loop.
+  */
+  const fitLines = (node: HTMLElement) => {
+    const observer = new ResizeObserver(([entry]) => {
+      const lineHeight = parseFloat(getComputedStyle(node).lineHeight);
+      if (!entry || !lineHeight) return;
+
+      const lines = Math.max(
+        1,
+        Math.floor(entry.contentRect.height / lineHeight),
+      );
+      node.style.setProperty("--previous-overview-lines", String(lines));
+    });
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  };
 </script>
 
 <div class="trakt-summary-header-up-next">
@@ -54,30 +75,37 @@
           outlook.previous.number,
         )}
       >
-        <span class="previous-text">
-          <SummaryHeaderLabel text={outlook.previous.kicker} />
-          {#if outlook.previous.title}
-            <span class="previous-title">{outlook.previous.title}</span>
-          {/if}
-          {#if outlook.previous.overview}
-            <span class="previous-overview">{outlook.previous.overview}</span>
-          {/if}
+        <SummaryHeaderLabel text={outlook.previous.kicker} />
+
+        <span class="previous-heading">
+          <span class="previous-title">{outlook.previous.title ?? ""}</span>
+          <span class="previous-caret" aria-hidden="true">
+            <CaretRightIcon />
+          </span>
         </span>
 
-        <span class="previous-caret" aria-hidden="true">
-          <CaretRightIcon />
-        </span>
+        {#if outlook.previous.overview}
+          <span class="previous-overview-slot" {@attach fitLines}>
+            <span class="previous-overview">{outlook.previous.overview}</span>
+          </span>
+        {/if}
       </Link>
     </div>
   {/if}
 </div>
 
 <style lang="scss">
+  /*
+    Grows to the bottom of the column, which the strip stretches to its
+    tallest neighbour - that height is the synopsis's budget.
+  */
   .trakt-summary-header-up-next {
     display: flex;
     flex-direction: column;
     gap: var(--summary-header-row-gap, var(--ni-12));
 
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100%;
   }
 
@@ -90,8 +118,7 @@
     box-sizing: border-box;
   }
 
-  .up-next-text,
-  .previous-text {
+  .up-next-text {
     display: flex;
     flex-direction: column;
     gap: var(--ni-2);
@@ -108,6 +135,14 @@
     color: var(--color-text-primary);
   }
 
+  .previous-row {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
   /*
     The whole row is the way in, lit like the provider rows beside it: a soft
     wash on hover, padding traded for negative margin so the words stay flush
@@ -115,9 +150,10 @@
   */
   .previous-row :global(a) {
     display: flex;
-    align-items: center;
-    gap: var(--gap-s);
+    flex-direction: column;
+    gap: var(--ni-2);
 
+    flex: 1 1 auto;
     min-height: var(--summary-header-row-height, var(--ni-44));
     padding: var(--ni-4) var(--ni-8);
     margin: calc(-1 * var(--ni-4)) calc(-1 * var(--ni-8));
@@ -144,30 +180,58 @@
     }
   }
 
-  .previous-title,
-  .previous-overview {
+  /* The caret rides the name's line, so a long synopsis never drags it down. */
+  .previous-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
+  }
+
+  .previous-title {
+    flex: 1;
+    min-width: 0;
+
+    font-size: var(--font-size-text);
+    font-weight: 700;
+    line-height: var(--ni-20);
+    color: var(--color-text-primary);
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .previous-title {
-    font-size: var(--font-size-text);
-    font-weight: 700;
-    line-height: var(--ni-20);
-    color: var(--color-text-primary);
+  /*
+    The slot takes the leftover height; the text inside is clamped to the
+    whole lines that fit, so its own box ends on the last full line and no
+    sliver of the next one shows under the ellipsis.
+  */
+  .previous-overview-slot {
+    flex: 1 1 0;
+    min-height: var(--ni-16);
+    contain: size;
+    overflow: hidden;
+
+    font-size: var(--font-size-text-small);
+    line-height: var(--ni-16);
   }
 
   .previous-overview {
-    font-size: var(--font-size-text-small);
-    line-height: var(--ni-16);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--previous-overview-lines, 1);
+    line-clamp: var(--previous-overview-lines, 1);
+    overflow: hidden;
+
+    font-size: inherit;
+    line-height: inherit;
   }
 
   /*
     Two classes deep on purpose: Link sets every span inside it to inherit
     its colour, which would turn the label and the synopsis white.
   */
-  .previous-text {
+  .previous-row {
     :global(.trakt-summary-header-label) {
       color: var(--summary-header-label-color, var(--color-text-quiet));
     }
