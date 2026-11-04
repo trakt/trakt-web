@@ -1,5 +1,11 @@
 <script lang="ts">
-  import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
+  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
+  import { getEpisodeStatus } from "$lib/components/episode/getEpisodeStatus";
+  import EpisodeDurationTag from "$lib/components/episode/tags/EpisodeDurationTag.svelte";
+  import EpisodeRemainingTag from "$lib/components/episode/tags/EpisodeRemainingTag.svelte";
+  import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
+  import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import SummaryHeaderLabel from "../../../header-kit/SummaryHeaderLabel.svelte";
@@ -11,8 +17,9 @@
     episode already seen was the least useful thing here, so the last episode
     seen is down to one line under the bar.
 
-    Two 44px rows, the same rhythm as the friend and provider rows in the
-    columns beside it.
+    The bar and the check are Continue Watching's own - the progress tag with
+    the next episode's runtime and its status, and the small mark-watched -
+    so the same fact looks the same wherever it appears.
   */
   const {
     progress,
@@ -23,7 +30,36 @@
   } = $props();
 
   const outlook = $derived(toProgressOutlook(progress));
+
+  const status = $derived(
+    getEpisodeStatus(progress.type, {
+      isLatestAired: progress.isLatestAired,
+      releaseDate: progress.effectiveReleaseDate,
+      episodes: progress.episodes,
+    }),
+  );
 </script>
+
+{#snippet statusTag()}
+  <EpisodeStatusTag
+    i18n={EpisodeIntlProvider}
+    episodeType={progress.type}
+    episodes={progress.episodes}
+    isLatestAired={progress.isLatestAired}
+    releaseDate={progress.effectiveReleaseDate}
+  />
+{/snippet}
+
+{#snippet progressTags()}
+  <EpisodeRemainingTag
+    i18n={EpisodeIntlProvider}
+    remaining={progress.remaining}
+  />
+  <EpisodeDurationTag
+    i18n={EpisodeIntlProvider}
+    minutesLeft={progress.minutesLeft}
+  />
+{/snippet}
 
 <div class="trakt-summary-header-up-next">
   {#if outlook.next}
@@ -33,25 +69,29 @@
         <span class="up-next-episode">{outlook.next.label}</span>
       </div>
 
-      <span class="up-next-mark">
-        <MarkAsWatchedAction
-          style="action"
-          type="episode"
-          title={outlook.next.label}
-          {show}
-          media={progress}
-        />
-      </span>
+      <MarkAsWatchedAction
+        mode="hybrid"
+        style="action"
+        type="episode"
+        size="small"
+        title={outlook.next.label}
+        {show}
+        media={progress}
+      />
     </div>
   {/if}
 
   <div class="up-next-progress">
-    <DistributionBar
-      fraction={outlook.fraction}
-      fillStyle="flat"
-      color="var(--color-text-primary)"
-      label={outlook.foot}
-    />
+    {#if outlook.next}
+      <ShowProgressTag
+        i18n={TagIntlProvider}
+        progress={progress.completed}
+        total={progress.total}
+        runtime={progress.runtime}
+        tags={status ? statusTag : progressTags}
+        style="cover"
+      />
+    {/if}
     <span class="up-next-foot">{outlook.foot}</span>
   </div>
 </div>
@@ -94,28 +134,11 @@
     color: var(--color-text-primary);
   }
 
-  /* The design's outlined circle; the button inside keeps its own hover. */
-  .up-next-mark {
-    display: inline-flex;
-    flex: none;
-
-    border-radius: var(--border-radius-pill);
-    box-shadow: inset 0 0 0 var(--ni-1)
-      color-mix(in srgb, var(--color-text-primary) 22%, transparent);
-  }
-
   .up-next-progress {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: var(--ni-8);
-
-    --distribution-bar-thickness: var(--ni-4);
-    --distribution-bar-track: color-mix(
-      in srgb,
-      var(--color-text-primary) 8%,
-      transparent
-    );
   }
 
   .up-next-foot {
