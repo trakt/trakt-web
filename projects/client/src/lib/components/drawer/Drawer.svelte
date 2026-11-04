@@ -16,6 +16,7 @@
   import CloseIcon from "../icons/CloseIcon.svelte";
   import ListTitle from "../lists/_internal/ListTitle.svelte";
   import type { ListDrilldownProps } from "../lists/section-list/models/ListDrilldownProps";
+  import { useDrawerHistoryTrap } from "./_internal/useDrawerHistoryTrap.ts";
   import { useDrawerPortal } from "./_internal/useDrawerPortal";
   import { verticalDrag } from "./_internal/verticalDrag";
   import { isTopmostDrawer } from "./isTopmostDrawer.ts";
@@ -73,6 +74,12 @@
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const slideAxis = $derived($isMobile ? "y" : "x");
+
+  useDrawerHistoryTrap({
+    isEnabled: () => $isMobile && dismissal !== "manual",
+    isPresent: () => drawerElement?.dataset.present !== "false",
+    onPop: () => onDismiss(),
+  });
 
   const { portal } = $derived(
     useDrawerPortal({ hasAutoClose: dismissal === "auto", onClose, elevated }),
