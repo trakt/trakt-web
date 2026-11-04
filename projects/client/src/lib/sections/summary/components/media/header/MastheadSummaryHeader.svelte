@@ -543,9 +543,9 @@
             <span class="action-row-divider" aria-hidden="true"></span>
 
             <!--
-              Score then heart. The score is a chip, so it reads as the
-              viewer's own rather than another community score; any title can
-              be rated, so it stays open before watching, just quieter. The
+              Score then heart. The score stays clean, a grey pill only on
+              hover; any title can be rated, so it stays open before
+              watching, just quieter. The
               heart leaves the rating bubble: favouriting is its own answer,
               and burying it in a popover meant opening the stars to reach it.
             -->
@@ -1388,9 +1388,11 @@
       align-items: center;
       gap: var(--gap-s);
 
-      /* The stock bar's own surface and radius, stretched around both halves. */
+      /* The stock bar's own surface, stretched around both halves. */
       background-color: var(--color-actions-bar-background);
-      border-radius: var(--border-radius-l);
+      /* Fully round, like every pill, tag and toggle: the pill token stops
+         at 24px, which leaves a 56px tray with flat ends. */
+      border-radius: 999px;
       padding-inline-start: var(--ni-20);
 
       /* Inside a same-colour tray the bar's lift reads as a smudge. */
@@ -1438,7 +1440,7 @@
         var(--color-foreground) 3.5%,
         transparent
       );
-      border-radius: var(--border-radius-l);
+      border-radius: 999px;
       box-shadow:
         inset 0 var(--ni-1) 0
           color-mix(in srgb, var(--color-foreground) 10%, transparent),

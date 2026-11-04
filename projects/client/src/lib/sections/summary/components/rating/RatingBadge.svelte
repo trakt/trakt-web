@@ -187,10 +187,10 @@
   }
 
   /*
-    The viewer's own score, set apart from the community scores it sits
-    beside: an outlined chip once rated; watched but unrated, an outlined star
-    with a dot that invites a rating; not watched, the same star kept quiet -
-    still a way in, since any title can be rated.
+    The viewer's own score, kept clean: no frame at rest, a grey pill of
+    wash on hover so the press surface shows where it is. Watched but
+    unrated, a small dot invites a rating; not watched, the star stays
+    quiet - still a way in, since any title can be rated.
   */
   .trakt-rating-badge[data-look="chip"] {
     position: relative;
@@ -199,7 +199,7 @@
     min-height: var(--ni-36);
     padding: 0;
     margin: 0;
-    border-radius: var(--border-radius-pill);
+    border-radius: 999px;
 
     &:not(.is-rated) :global(svg) {
       width: var(--ni-18);
@@ -207,10 +207,7 @@
     }
 
     &[data-state="rated"] {
-      padding-inline: var(--ni-10) var(--ni-12);
-
-      box-shadow: inset 0 0 0 var(--ni-1)
-        color-mix(in srgb, var(--purple-400) 50%, transparent);
+      padding-inline: var(--ni-12);
 
       :global(.trakt-user-rating span) {
         font-weight: 700;
@@ -222,33 +219,18 @@
       }
     }
 
-    &[data-state="invite"] {
-      background-color: color-mix(in srgb, var(--color-foreground) 4%, transparent);
-      box-shadow: inset 0 0 0 var(--ni-1)
-        color-mix(in srgb, var(--purple-400) 55%, transparent);
-    }
-
     &[data-state="unseen"] {
       color: var(--color-text-quiet);
-      box-shadow: inset 0 0 0 var(--ni-1)
-        color-mix(in srgb, var(--color-foreground) 12%, transparent);
     }
 
     @include for-mouse() {
-      &[data-state="rated"]:hover,
-      &[data-state="invite"]:hover {
+      &:hover {
+        color: var(--color-text-primary);
         background-color: color-mix(
           in srgb,
           var(--color-foreground) 10%,
           transparent
         );
-      }
-
-      &[data-state="unseen"]:hover {
-        color: var(--color-text-primary);
-        background-color: transparent;
-        box-shadow: inset 0 0 0 var(--ni-1)
-          color-mix(in srgb, var(--color-foreground) 30%, transparent);
       }
     }
   }

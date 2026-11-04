@@ -128,8 +128,8 @@
   */
   .section-link {
     box-sizing: border-box;
-    padding: var(--ni-4) var(--ni-8);
-    margin-inline: calc(-1 * var(--ni-8));
+    padding: var(--ni-4) var(--ni-12);
+    margin-inline: calc(-1 * var(--ni-12));
     border-radius: var(--border-radius-pill);
 
     transition:
