@@ -1,13 +1,10 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import Drawer from "$lib/components/drawer/Drawer.svelte";
   import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import SwapIcon from "$lib/components/icons/SwapIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import TodayPosterDetails from "$lib/sections/today/TodayPosterDetails.svelte";
   import { time } from "$lib/utils/timing/time.ts";
   import { onDestroy } from "svelte";
   import MixtapeFinale from "./MixtapeFinale.svelte";
@@ -15,7 +12,6 @@
   import type { MixtapeResultsProps } from "./MixtapeResultsProps.ts";
   import MixtapeStageCard from "./MixtapeStageCard.svelte";
   import MixtapeStageDetails from "./MixtapeStageDetails.svelte";
-  import MixtapeStageGuidance from "./MixtapeStageGuidance.svelte";
   import { MIXTAPE_SLOT_COUNT } from "./MIXTAPE_SLOT_COUNT.ts";
   import { toCarouselOffset } from "./toCarouselOffset.ts";
 
@@ -49,7 +45,6 @@
   let keeping = $state<ReadonlyArray<number>>([]);
   let swapping = $state<number | null>(null);
   let swapped = $state<{ index: number; title: string } | null>(null);
-  let isDetailsOpen = $state(false);
   let dragStart: number | null = null;
   let hasDragged = false;
   let swapTimer: ReturnType<typeof setTimeout> | undefined;
@@ -297,25 +292,7 @@
 
       <div class="stage-side">
         {#key current.media.id}
-          <RenderFor audience="all" device={["mobile"]}>
-            <MixtapeStageDetails
-              media={current.media}
-              {kicker}
-              variant="brief"
-              onExpand={() => (isDetailsOpen = true)}
-            />
-          </RenderFor>
-          <RenderFor
-            audience="all"
-            device={["tablet-sm", "tablet-lg", "desktop"]}
-          >
-            <MixtapeStageDetails
-              media={current.media}
-              {kicker}
-              variant="full"
-              onExpand={() => (isDetailsOpen = true)}
-            />
-          </RenderFor>
+          <MixtapeStageDetails media={current.media} {kicker} />
         {/key}
 
         <div class="stage-footer">
@@ -357,15 +334,6 @@
     </div>
   {/if}
 </section>
-
-{#if isDetailsOpen && current}
-  <Drawer onClose={() => (isDetailsOpen = false)} size="large">
-    <div class="stage-sheet">
-      <TodayPosterDetails media={current.media} {kicker} />
-      <MixtapeStageGuidance media={current.media} />
-    </div>
-  </Drawer>
-{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -671,14 +639,6 @@
     }
   }
 
-  .stage-sheet {
-    --height-poster-details: auto;
-    --height-poster-details-cover: var(--ni-200);
-    --margin-mixtape-guidance: calc(var(--gap-s) - var(--gap-m));
-    --gap-mixtape-guidance: var(--gap-s);
-    --inset-mixtape-guidance: var(--gap-m);
-  }
-
   @container mixtape-stage (width < 60rem) {
     .stage-layout {
       grid-template-columns: minmax(0, 1fr);
@@ -693,8 +653,8 @@
 
   /*
     Phones: the stage runs edge to edge, the carousel is swiped, the details
-    are the short version and the verdict buttons float above the bottom
-    navbar, where the thumbs are.
+    read on below it with a centred heading, and the verdict buttons float
+    above the bottom navbar, where the thumbs are.
   */
   @include for-mobile {
     .trakt-mixtape-stage {
@@ -750,8 +710,7 @@
     }
 
     .stage-side {
-      align-items: center;
-      text-align: center;
+      align-items: stretch;
     }
 
     .stage-footer {

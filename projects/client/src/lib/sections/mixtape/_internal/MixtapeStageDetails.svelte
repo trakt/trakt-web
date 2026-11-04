@@ -1,5 +1,4 @@
 <script lang="ts">
-  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp.ts";
@@ -13,35 +12,21 @@
   const OVERVIEW_LINES = 3;
   const HIGHLIGHT_LINES = 2;
 
-  const { media, kicker, variant, onExpand }: MixtapeStageDetailsProps =
-    $props();
+  const { media, kicker }: MixtapeStageDetailsProps = $props();
 
   const { ratings, isRatingsLoading, sentiment } = useTodayDetails(
     fromRune(() => media),
   );
 
   const meta = $derived(toMixtapeMeta(media));
-  const isBrief = $derived(variant === "brief");
 </script>
 
-<div class="trakt-mixtape-stage-details" data-variant={variant}>
+<div class="trakt-mixtape-stage-details">
   <div class="details-heading">
     {#if kicker}
       <p class="tag uppercase bold ellipsis details-kicker">{kicker}</p>
     {/if}
-    {#if isBrief}
-      <button
-        type="button"
-        class="details-title-button"
-        aria-haspopup="dialog"
-        onclick={onExpand}
-      >
-        <h2 class="details-title ellipsis">{media.title}</h2>
-        <CaretRightIcon />
-      </button>
-    {:else}
-      <h2 class="details-title">{media.title}</h2>
-    {/if}
+    <h2 class="details-title">{media.title}</h2>
     <p class="small secondary ellipsis">{meta}</p>
   </div>
 
@@ -57,30 +42,27 @@
     {/if}
   </div>
 
-  {#if !isBrief}
-    {#if media.overview}
-      <p
-        class="small details-overview"
-        use:lineClamp={{ lines: OVERVIEW_LINES }}
-      >
-        {media.overview}
-      </p>
-    {/if}
-
-    {#if $sentiment}
-      <div class="details-insights">
-        <TodaySentimentInsights
-          sentiment={$sentiment}
-          highlightLines={HIGHLIGHT_LINES}
-        />
-      </div>
-    {/if}
-
-    <MixtapeStageGuidance {media} />
+  {#if media.overview}
+    <p class="small details-overview" use:lineClamp={{ lines: OVERVIEW_LINES }}>
+      {media.overview}
+    </p>
   {/if}
+
+  {#if $sentiment}
+    <div class="details-insights">
+      <TodaySentimentInsights
+        sentiment={$sentiment}
+        highlightLines={HIGHLIGHT_LINES}
+      />
+    </div>
+  {/if}
+
+  <MixtapeStageGuidance {media} />
 </div>
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-mixtape-stage-details {
     display: flex;
     flex-direction: column;
@@ -110,29 +92,6 @@
       text-wrap: balance;
     }
 
-    .details-title-button {
-      all: unset;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--gap-xs);
-      min-width: 0;
-      cursor: pointer;
-
-      :global(svg) {
-        flex: none;
-        width: var(--ni-16);
-        height: var(--ni-16);
-        color: var(--color-text-secondary);
-      }
-
-      &:focus-visible {
-        border-radius: var(--border-radius-s);
-        outline: var(--border-thickness-xs) solid var(--purple-300);
-        outline-offset: var(--ni-4);
-      }
-    }
-
     .details-ratings {
       min-height: var(--ni-32);
     }
@@ -142,13 +101,15 @@
       border-block-start: var(--border-thickness-xxs) solid var(--color-border);
     }
 
-    &[data-variant="brief"] {
-      align-items: center;
+    /* Phones: the heading stays a centred hero, the reading blocks run start-aligned under it. */
+    @include for-mobile {
+      --gap-mixtape-guidance: var(--gap-s);
+
       gap: var(--gap-s);
-      text-align: center;
 
       .details-heading {
         align-items: center;
+        text-align: center;
       }
 
       .details-title {
@@ -157,6 +118,10 @@
 
       .details-ratings :global(.trakt-summary-ratings) {
         justify-content: center;
+      }
+
+      .details-insights {
+        padding-block-start: var(--gap-s);
       }
     }
   }
