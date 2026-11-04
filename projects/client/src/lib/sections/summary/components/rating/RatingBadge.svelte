@@ -188,7 +188,7 @@
 
   /*
     The viewer's own score, set apart from the community scores it sits
-    beside: a tinted chip once rated; watched but unrated, an outlined star
+    beside: an outlined chip once rated; watched but unrated, an outlined star
     with a dot that invites a rating; not watched, the same star kept quiet -
     still a way in, since any title can be rated.
   */
@@ -209,7 +209,6 @@
     &[data-state="rated"] {
       padding-inline: var(--ni-10) var(--ni-12);
 
-      background-color: color-mix(in srgb, var(--purple-500) 22%, transparent);
       box-shadow: inset 0 0 0 var(--ni-1)
         color-mix(in srgb, var(--purple-400) 50%, transparent);
 
@@ -238,7 +237,11 @@
     @include for-mouse() {
       &[data-state="rated"]:hover,
       &[data-state="invite"]:hover {
-        background-color: color-mix(in srgb, var(--purple-500) 32%, transparent);
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 10%,
+          transparent
+        );
       }
 
       &[data-state="unseen"]:hover {
