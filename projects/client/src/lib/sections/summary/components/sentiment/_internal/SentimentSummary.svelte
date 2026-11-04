@@ -1,10 +1,9 @@
 <script lang="ts">
+  import type { SentimentSummaryProps } from "./SentimentSummaryProps.ts";
   import ArrowRightIcon from "$lib/components/icons/ArrowRightIcon.svelte";
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
-  import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
   import RealityTierPill from "$lib/sections/components/reality-check/RealityTierPill.svelte";
   import RealityTierPillSkeleton from "$lib/sections/components/reality-check/RealityTierPillSkeleton.svelte";
@@ -13,12 +12,8 @@
 
   const SKELETON_LINE_WIDTHS = ["100%", "88%", "94%", "56%"];
 
-  type SentimentProps = {
-    sentiment: SentimentAnalysis | Nil;
-    realityCheck: RealityCheck | null | undefined;
-  };
-
-  const { sentiment, realityCheck }: SentimentProps = $props();
+  const { sentiment, realityCheck, hasRing = false }: SentimentSummaryProps =
+    $props();
 
   const isLoading = $derived(
     sentiment === undefined || realityCheck === undefined,
@@ -34,7 +29,7 @@
   );
 </script>
 
-<div class="trakt-sentiment-summary">
+<div class="trakt-sentiment-summary" class:has-ring={hasRing}>
   {#if isLoading}
     <Skeleton width="55%" height="var(--ni-18)" />
 
@@ -86,6 +81,11 @@
     width: 100%;
 
     overflow: hidden;
+
+    &.has-ring > .bold:first-child,
+    &.has-ring li:first-child {
+      padding-inline-end: var(--ni-52);
+    }
   }
 
   ul {

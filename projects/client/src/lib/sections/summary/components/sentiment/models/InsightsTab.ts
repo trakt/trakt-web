@@ -1,1 +1,1 @@
-export type InsightsTab = 'sentiment' | 'reality-check';
+export type InsightsTab = 'sentiment' | 'reality-check' | 'match';

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { beforeNavigate } from "$app/navigation";
   import { page } from "$app/state";
   import { onMount } from "svelte";
@@ -29,6 +30,7 @@
   import RatingsDrawer from "./components/rating/RatingsDrawer.svelte";
   import SeasonRecapDrawerHost from "./components/recap/SeasonRecapDrawerHost.svelte";
   import SeasonsDrawerHost from "./components/seasons/SeasonsDrawerHost.svelte";
+  import { useMatch } from "./components/sentiment/useMatch.ts";
   import { toInsightsOpenSource } from "./components/sentiment/toInsightsOpenSource.ts";
   import type { InsightsOpenSource } from "./components/sentiment/models/InsightsOpenSource.ts";
   import SentimentDrawer from "./components/sentiment/SentimentDrawer.svelte";
@@ -147,8 +149,15 @@
     return { type: details.type, slug: details.media.slug };
   });
 
+  const { match } = useMatch(fromRune(() => ({
+    type: details.type === "show" ? "show" : "movie",
+    id: media?.id ?? 0,
+    enabled: details.type !== "episode" && media !== undefined,
+  })));
+
   const hasInsights = $derived(
-    details.type !== "episode" && (sentiment !== null || realityCheck !== null),
+    details.type !== "episode" &&
+      (sentiment !== null || realityCheck !== null || $match !== null),
   );
 
   const socialTitle = $derived.by(() =>
@@ -158,10 +167,12 @@
   );
 </script>
 
-{#if drawer === SummaryDrawers.Sentiment && hasInsights}
+{#if drawer === SummaryDrawers.Sentiment && hasInsights && media}
   <SentimentDrawer
     {sentiment}
     {realityCheck}
+    type={media.type}
+    id={media.id}
     source={insightsSource}
     onClose={close}
   />

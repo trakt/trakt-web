@@ -76,6 +76,7 @@
           {sentiment}
           {realityCheck}
           slug={media.slug}
+          id={media.id}
           variant="inline"
           type="movie"
         />
@@ -86,7 +87,12 @@
 
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="movie" {media} {streamOn} {youtubeSpecial} />
-  <Sentiment {sentiment} {realityCheck} slug={media.slug} type="movie" />
+  <Sentiment
+    {sentiment}
+    {realityCheck}
+    slug={media.slug}
+    id={media.id}
+    type="movie" />
 </RenderFor>
 
 <CastList

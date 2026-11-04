@@ -12,7 +12,7 @@ function renderSection(
   props: Pick<ComponentProps<typeof Sentiment>, 'sentiment' | 'realityCheck'>,
 ) {
   return renderComponent(Sentiment, {
-    props: { ...props, slug: 'heretic-2024', type: 'movie' },
+    props: { ...props, slug: 'heretic-2024', id: 1, type: 'movie' },
   });
 }
 

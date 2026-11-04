@@ -87,6 +87,7 @@
           {sentiment}
           {realityCheck}
           slug={media.slug}
+          id={media.id}
           variant="inline"
           type="show"
         />
@@ -97,7 +98,12 @@
 
 <RenderFor audience="all" device={["mobile", "tablet-sm", "tablet-lg"]}>
   <WhereToWatchList type="show" {media} {streamOn} />
-  <Sentiment {sentiment} {realityCheck} slug={media.slug} type="show" />
+  <Sentiment
+    {sentiment}
+    {realityCheck}
+    slug={media.slug}
+    id={media.id}
+    type="show" />
 </RenderFor>
 
 <SeasonList show={media} {seasons} {currentSeason} hasRecap />
