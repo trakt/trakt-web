@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "そのユーザー名とパスワードは無効です。",
   "error_text_jellyfin_invalid_server_url": "Traktで使用できるウェブアドレスではありません。自宅の外からJellyfinを開く際に使用するパブリックアドレス（例: https://jellyfin.example.com）を入力してください。",
   "error_text_jellyfin_quick_connect_disabled": "このサーバーではクイックコネクトがオフになっています。Jellyfinダッシュボードでオンにするか、パスワードでサインインしてください。",
+  "error_text_jellyfin_rate_limited": "サインインの試行回数が多すぎます。1分待ってからもう一度お試しください。",
   "error_text_jellyfin_raw_ip_address": "TraktはローカルアドレスやIPアドレスにアクセスできません。自宅の外からJellyfinを開く際に使用するパブリックアドレス（例: https://jellyfin.example.com）を入力してください。",
   "error_text_jellyfin_server_limit": "無料アカウントはメディアサーバーを1つ同期できます。追加するにはVIPに登録してください。",
   "error_text_jellyfin_server_not_found": "そのアドレスでJellyfinサーバーからの応答がありませんでした。確認してもう一度お試しください。",

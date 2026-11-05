@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "That username and password didn't work.",
   "error_text_jellyfin_invalid_server_url": "That isn't a web address Trakt can use. Enter the public address you use to open Jellyfin from outside your home, like https://jellyfin.example.com.",
   "error_text_jellyfin_quick_connect_disabled": "Quick Connect is off on this server. Turn it on in the Jellyfin dashboard, or sign in with your password.",
+  "error_text_jellyfin_rate_limited": "Too many sign-in attempts. Wait a minute and try again.",
   "error_text_jellyfin_raw_ip_address": "Trakt can't reach a local or IP address. Enter the public address you use to open Jellyfin from outside your home, like https://jellyfin.example.com.",
   "error_text_jellyfin_server_limit": "Free accounts can sync 1 media server. Go VIP to add more.",
   "error_text_jellyfin_server_not_found": "No Jellyfin server answered at that address. Check it and try again.",

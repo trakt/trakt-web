@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "Nama pengguna dan kata sandi tersebut tidak berfungsi.",
   "error_text_jellyfin_invalid_server_url": "Itu bukan alamat web yang dapat digunakan Trakt. Masukkan alamat publik yang Anda gunakan untuk membuka Jellyfin dari luar rumah, seperti https://jellyfin.example.com.",
   "error_text_jellyfin_quick_connect_disabled": "Quick Connect mati di server ini. Aktifkan di dasbor Jellyfin, atau masuk dengan kata sandi Anda.",
+  "error_text_jellyfin_rate_limited": "Terlalu banyak percobaan masuk. Tunggu satu menit dan coba lagi.",
   "error_text_jellyfin_raw_ip_address": "Trakt tidak dapat menjangkau alamat lokal atau IP. Masukkan alamat publik yang Anda gunakan untuk membuka Jellyfin dari luar rumah, seperti https://jellyfin.example.com.",
   "error_text_jellyfin_server_limit": "Akun gratis dapat menyinkronkan 1 server media. Tingkatkan ke VIP untuk menambahkan lebih banyak.",
   "error_text_jellyfin_server_not_found": "Tidak ada server Jellyfin yang merespons di alamat tersebut. Periksa dan coba lagi.",

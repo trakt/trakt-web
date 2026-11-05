@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "Numele de utilizator și parola introduse nu au funcționat.",
   "error_text_jellyfin_invalid_server_url": "Aceasta nu este o adresă web pe care Trakt o poate folosi. Introdu adresa publică pe care o folosești pentru a deschide Jellyfin din afara casei, de exemplu https://jellyfin.example.com.",
   "error_text_jellyfin_quick_connect_disabled": "Conectarea Rapidă este dezactivată pe acest server. Activați-o în tabloul de bord Jellyfin, sau conectați-vă cu parola dumneavoastră.",
+  "error_text_jellyfin_rate_limited": "Prea multe încercări de autentificare. Așteaptă un minut și încearcă din nou.",
   "error_text_jellyfin_raw_ip_address": "Trakt nu poate accesa o adresă locală sau o adresă IP. Introdu adresa publică pe care o folosești pentru a deschide Jellyfin din afara casei, de exemplu https://jellyfin.example.com.",
   "error_text_jellyfin_server_limit": "Conturile gratuite pot sincroniza 1 server media. Treceți la VIP pentru a adăuga mai multe.",
   "error_text_jellyfin_server_not_found": "Niciun server Jellyfin nu a răspuns la acea adresă. Verificați-o și încercați din nou.",

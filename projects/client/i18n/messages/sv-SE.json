@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "Det användarnamnet och lösenordet fungerade inte.",
   "error_text_jellyfin_invalid_server_url": "Det där är inte en webbadress som Trakt kan använda. Ange den publika adressen du använder för att öppna Jellyfin utanför hemmet, som https://jellyfin.example.com.",
   "error_text_jellyfin_quick_connect_disabled": "Quick Connect är avstängd på den här servern. Slå på den i Jellyfin-panelen, eller logga in med ditt lösenord.",
+  "error_text_jellyfin_rate_limited": "För många inloggningsförsök. Vänta en minut och försök igen.",
   "error_text_jellyfin_raw_ip_address": "Trakt kan inte nå en lokal adress eller IP-adress. Ange den publika adressen du använder för att öppna Jellyfin utanför hemmet, som https://jellyfin.example.com.",
   "error_text_jellyfin_server_limit": "Gratiskonton kan synkronisera 1 medieserver. Bli VIP för att lägga till fler.",
   "error_text_jellyfin_server_not_found": "Ingen Jellyfin-server svarade på den adressen. Kontrollera den och försök igen.",

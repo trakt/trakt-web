@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "Це ім'я користувача та пароль не підійшли.",
   "error_text_jellyfin_invalid_server_url": "Trakt не може використати цю вебадресу. Введіть публічну адресу, яку ви використовуєте, щоб відкривати Jellyfin поза домом, наприклад https://jellyfin.example.com.",
   "error_text_jellyfin_quick_connect_disabled": "Швидке підключення вимкнено на цьому сервері. Увімкніть його на інформаційній панелі Jellyfin або увійдіть за допомогою пароля.",
+  "error_text_jellyfin_rate_limited": "Забагато спроб входу. Зачекайте хвилину та спробуйте знову.",
   "error_text_jellyfin_raw_ip_address": "Trakt не може підключитися до локальної або IP-адреси. Введіть публічну адресу, яку ви використовуєте, щоб відкривати Jellyfin поза домом, наприклад https://jellyfin.example.com.",
   "error_text_jellyfin_server_limit": "Безкоштовні облікові записи можуть синхронізувати 1 медіасервер. Отримайте VIP-статус, щоб додати більше.",
   "error_text_jellyfin_server_not_found": "За цією адресою не відповів жоден сервер Jellyfin. Перевірте її та спробуйте ще раз.",

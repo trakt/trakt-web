@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "Ce nom d'utilisateur et ce mot de passe n'ont pas fonctionné.",
   "error_text_jellyfin_invalid_server_url": "Cette adresse Web n'est pas utilisable par Trakt. Saisissez l'adresse publique que vous utilisez pour accéder à Jellyfin depuis l'extérieur de chez vous, comme https://jellyfin.example.com.",
   "error_text_jellyfin_quick_connect_disabled": "Quick Connect est désactivé sur ce serveur. Activez-le dans le tableau de bord Jellyfin, ou connectez-vous avec votre mot de passe.",
+  "error_text_jellyfin_rate_limited": "Trop de tentatives de connexion. Attendez une minute et réessayez.",
   "error_text_jellyfin_raw_ip_address": "Trakt ne peut pas joindre une adresse locale ou une adresse IP. Saisissez l'adresse publique que vous utilisez pour accéder à Jellyfin depuis l'extérieur de chez vous, comme https://jellyfin.example.com.",
   "error_text_jellyfin_server_limit": "Les comptes gratuits peuvent synchroniser 1 serveur multimédia. Passez à VIP pour en ajouter d'autres.",
   "error_text_jellyfin_server_not_found": "Aucun serveur Jellyfin n'a répondu à cette adresse. Vérifiez et réessayez.",

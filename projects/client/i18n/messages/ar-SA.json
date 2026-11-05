@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "اسم المستخدم وكلمة المرور هذان لم يعملا.",
   "error_text_jellyfin_invalid_server_url": "هذا ليس عنوان ويب يمكن لـ Trakt استخدامه. أدخل العنوان العام الذي تستخدمه لفتح Jellyfin من خارج منزلك، مثل https://jellyfin.example.com.",
   "error_text_jellyfin_quick_connect_disabled": "الاتصال السريع معطّل على هذا الخادم. قم بتشغيله في لوحة تحكم Jellyfin، أو سجّل الدخول بكلمة مرورك.",
+  "error_text_jellyfin_rate_limited": "محاولات تسجيل دخول كثيرة جدًا. انتظر دقيقة ثم حاول مرة أخرى.",
   "error_text_jellyfin_raw_ip_address": "لا يمكن لـ Trakt الوصول إلى عنوان محلي أو عنوان IP. أدخل العنوان العام الذي تستخدمه لفتح Jellyfin من خارج منزلك، مثل https://jellyfin.example.com.",
   "error_text_jellyfin_server_limit": "يمكن للحسابات المجانية مزامنة خادم وسائط واحد. قم بالترقية إلى VIP لإضافة المزيد.",
   "error_text_jellyfin_server_not_found": "لم يستجب أي خادم Jellyfin على هذا العنوان. تحقق منه وحاول مرة أخرى.",

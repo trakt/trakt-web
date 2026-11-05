@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "用户名或密码不正确。",
   "error_text_jellyfin_invalid_server_url": "这不是 Trakt 可以使用的网络地址。请输入您在家庭网络外访问 Jellyfin 所使用的公网地址，例如 https://jellyfin.example.com。",
   "error_text_jellyfin_quick_connect_disabled": "此服务器上的快速连接已关闭。请在 Jellyfin 控制面板中将其打开，或使用您的密码登录。",
+  "error_text_jellyfin_rate_limited": "登录尝试次数过多。请稍候一分钟后再试。",
   "error_text_jellyfin_raw_ip_address": "Trakt 无法访问本地或 IP 地址。请输入您在家庭网络外访问 Jellyfin 所使用的公网地址，例如 https://jellyfin.example.com。",
   "error_text_jellyfin_server_limit": "免费账户只能同步 1 个媒体服务器。升级 VIP 以添加更多。",
   "error_text_jellyfin_server_not_found": "该地址没有 Jellyfin 服务器响应。请检查并重试。",

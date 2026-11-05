@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "Die gebruikersnaam en dat wachtwoord werkten niet.",
   "error_text_jellyfin_invalid_server_url": "Dat is geen webadres dat Trakt kan gebruiken. Voer het openbare adres in dat je gebruikt om Jellyfin buitenshuis te openen, zoals https://jellyfin.example.com.",
   "error_text_jellyfin_quick_connect_disabled": "Quick Connect staat uit op deze server. Schakel het in via het Jellyfin-dashboard, of meld je aan met je wachtwoord.",
+  "error_text_jellyfin_rate_limited": "Te veel inlogpogingen. Wacht een minuut en probeer het opnieuw.",
   "error_text_jellyfin_raw_ip_address": "Trakt kan geen lokaal adres of IP-adres bereiken. Voer het openbare adres in dat je gebruikt om Jellyfin buitenshuis te openen, zoals https://jellyfin.example.com.",
   "error_text_jellyfin_server_limit": "Gratis accounts kunnen 1 mediaserver synchroniseren. Ga VIP om meer toe te voegen.",
   "error_text_jellyfin_server_not_found": "Geen Jellyfin-server reageerde op dat adres. Controleer het en probeer het opnieuw.",

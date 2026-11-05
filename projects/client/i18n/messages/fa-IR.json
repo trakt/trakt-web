@@ -872,6 +872,7 @@
   "error_text_jellyfin_invalid_credentials": "نام کاربری و رمز عبور کار نکرد.",
   "error_text_jellyfin_invalid_server_url": "این آدرس وب برای Trakt قابل استفاده نیست. آدرس عمومی‌ای را وارد کنید که برای باز کردن Jellyfin از خارج از خانه استفاده می‌کنید، مانند https://jellyfin.example.com.",
   "error_text_jellyfin_quick_connect_disabled": "اتصال سریع در این سرور خاموش است. آن را در داشبورد Jellyfin روشن کنید، یا با رمز عبور خود وارد شوید.",
+  "error_text_jellyfin_rate_limited": "تعداد دفعات تلاش برای ورود بیش از حد مجاز است. یک دقیقه صبر کنید و دوباره تلاش کنید.",
   "error_text_jellyfin_raw_ip_address": "Trakt نمی‌تواند به یک آدرس محلی یا IP دسترسی پیدا کند. آدرس عمومی‌ای را وارد کنید که برای باز کردن Jellyfin از خارج از خانه استفاده می‌کنید، مانند https://jellyfin.example.com.",
   "error_text_jellyfin_server_limit": "حساب‌های رایگان می‌توانند ۱ سرور رسانه را همگام‌سازی کنند. برای افزودن بیشتر، VIP شوید.",
   "error_text_jellyfin_server_not_found": "هیچ سرور Jellyfin در آن آدرس پاسخ نداد. آن را بررسی کنید و دوباره امتحان کنید.",
