@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { page } from "$app/state";
+  import { navigating, page } from "$app/state";
   import { onDestroy, untrack, type Snippet } from "svelte";
   import { getSnapshotFilters } from "./_internal/getSnapshotFilters.ts";
+  import { resolveSnapshotFilters } from "./_internal/resolveSnapshotFilters.ts";
   import {
     acquireFilterScope,
     releaseFilterScope,
@@ -18,7 +19,11 @@
   const scope = untrack(() =>
     acquireFilterScope(
       filterScope === "local"
-        ? getSnapshotFilters(page.url.searchParams)
+        ? resolveSnapshotFilters({
+            url: page.url,
+            isHistoryNavigation: navigating.type === "popstate",
+            takeSnapshot: getSnapshotFilters,
+          })
         : null,
     ),
   );
