@@ -148,7 +148,13 @@
 
 {#snippet countLabels()}
   <EpisodeRailCountLabel side="start" count={hidden.before} link={earlierLink} isDocked={!hasMoved} />
-  <EpisodeRailCountLabel side="end" count={hidden.after} link={laterLink} isDocked={!hasMoved} />
+  <EpisodeRailCountLabel
+    side="end"
+    count={hidden.after}
+    link={laterLink}
+    isDocked={!hasMoved}
+    visibleCount={visibleRange && visibleRange.last - visibleRange.first + 1}
+  />
 {/snippet}
 
 <SectionList
