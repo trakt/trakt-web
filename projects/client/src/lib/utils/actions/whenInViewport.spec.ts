@@ -120,4 +120,26 @@ describe('action: whenInViewport', () => {
     expect(observers.at(0)?.observed.has(element)).toBe(false);
     expect(callback).not.toHaveBeenCalled();
   });
+
+  it('should call the callback right away when IntersectionObserver is missing', () => {
+    vi.stubGlobal('IntersectionObserver', undefined);
+    const callback = vi.fn<() => void>();
+
+    const action = whenInViewport(document.createElement('div'), callback);
+
+    expect(callback).toHaveBeenCalledOnce();
+    expect(() => action?.destroy?.()).not.toThrow();
+  });
+
+  it('should skip a callback that requires the observer when IntersectionObserver is missing', () => {
+    vi.stubGlobal('IntersectionObserver', undefined);
+    const callback = vi.fn<() => void>();
+
+    whenInViewport(document.createElement('div'), {
+      callback,
+      requiresObserver: true,
+    });
+
+    expect(callback).not.toHaveBeenCalled();
+  });
 });

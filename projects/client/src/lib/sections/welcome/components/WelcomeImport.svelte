@@ -15,7 +15,10 @@
 
 <section
   class="trakt-welcome-import"
-  use:whenInViewport={() => track({ step: "import", action: "view" })}
+  use:whenInViewport={{
+    callback: () => track({ step: "import", action: "view" }),
+    requiresObserver: true,
+  }}
 >
   <div class="welcome-import-header">
     <h2 class="welcome-import-heading">{m.welcome_import_heading()}</h2>

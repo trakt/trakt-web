@@ -72,7 +72,10 @@
     {#if $hasNextPage}
       <!-- The observer fires once, so the sentinel is rebuilt per page. -->
       {#key $pageCount}
-        <div class="gif-sentinel" use:whenInViewport={loadMore}></div>
+        <div
+          class="gif-sentinel"
+          use:whenInViewport={{ callback: loadMore, requiresObserver: true }}
+        ></div>
       {/key}
     {/if}
   {:else if !$isLoading}
