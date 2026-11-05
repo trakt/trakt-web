@@ -3,17 +3,17 @@
   import { getLocale } from "$lib/features/i18n";
   import { m } from "$lib/paraglide/messages";
   import { toHumanDayOfWeek } from "$lib/utils/formatting/date/toHumanDayOfWeek";
+  import { toLocaleWeekdays } from "./toLocaleWeekdays.ts";
   import { yirUnit } from "./yirUnit.ts";
-  import { setDay } from "date-fns/setDay";
   import YirTooltip from "./YirTooltip.svelte";
 
   const { data }: { data: number[] } = $props();
 
   const chartData = $derived.by(() => {
     const locale = getLocale();
-    return data.map((value, index) => ({
+    return toLocaleWeekdays(data, locale).map(({ value, date }) => ({
       value,
-      label: toHumanDayOfWeek(setDay(new Date(0), index), locale),
+      label: toHumanDayOfWeek(date, locale),
     }));
   });
 </script>
