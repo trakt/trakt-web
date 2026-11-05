@@ -14,6 +14,7 @@ const ERROR_TEXT: Record<string, () => string> = {
   vip_required: m.error_text_jellyfin_vip_required,
   server_limit_reached: m.error_text_jellyfin_server_limit,
   connection_removing: m.error_text_media_sync_server_removing,
+  rate_limited: m.error_text_jellyfin_rate_limited,
 };
 
 export function toJellyfinErrorText(error: string): string {

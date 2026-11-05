@@ -32,6 +32,12 @@ describe('toJellyfinErrorText', () => {
     );
   });
 
+  it('asks to wait when sign-in attempts are rate limited', () => {
+    expect(toJellyfinErrorText('rate_limited')).to.equal(
+      'Too many sign-in attempts. Wait a minute and try again.',
+    );
+  });
+
   it('falls back to the generic error for unknown codes', () => {
     expect(toJellyfinErrorText('http_500')).to.equal(
       'Something went wrong. Try again in a moment.',

@@ -14741,6 +14741,10 @@
       "default": "Quick Connect is off on this server. Turn it on in the Jellyfin dashboard, or sign in with your password.",
       "description": "Error when Quick Connect is turned off on the Jellyfin server."
     },
+    "error_text_jellyfin_rate_limited": {
+      "default": "Too many sign-in attempts. Wait a minute and try again.",
+      "description": "Error when Jellyfin sign-in is tried too many times in a short time."
+    },
     "error_text_jellyfin_server_limit": {
       "default": "Free accounts can sync 1 media server. Go VIP to add more.",
       "description": "Shown when a free user tries to connect a Jellyfin server while another media server is already connected."
