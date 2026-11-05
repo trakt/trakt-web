@@ -38,6 +38,22 @@ describe('util: toCoverMediaRef', () => {
     expect(original).toEqual(thumb);
   });
 
+  it('should recover a movie reference from an id-based fanart url', () => {
+    expect(
+      toCoverMediaRef(
+        'https://media.trakt.tv/movies/916302/medium/fanart.webp',
+      ),
+    ).toEqual({ type: 'movie', id: 916302 });
+  });
+
+  it('should ignore the size in an id-based url', () => {
+    expect(
+      toCoverMediaRef('https://media.trakt.tv/movies/916302/full/fanart.webp'),
+    ).toEqual(
+      toCoverMediaRef('https://media.trakt.tv/movies/916302/thumb/fanart.webp'),
+    );
+  });
+
   it('should return null for a non-media cover (e.g. a vip header)', () => {
     expect(
       toCoverMediaRef(

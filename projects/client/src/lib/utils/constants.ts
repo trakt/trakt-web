@@ -2,7 +2,7 @@
  * This cover is the Alien Isolation cover.
  */
 export const DEFAULT_COVER =
-  'https://media.trakt.tv/images/movies/000/759/944/fanarts/full/a12a59d031.jpg.webp';
+  'https://media.trakt.tv/movies/759944/full/fanart.webp';
 
 export const DEFAULT_AVATAR =
   'https://media.trakt.tv/hotlink-ok/placeholders/medium/zoidberg.png' as HttpsUrl;
