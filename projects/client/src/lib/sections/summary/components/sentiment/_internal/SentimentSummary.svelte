@@ -88,6 +88,8 @@
     overflow: hidden;
     position: relative;
 
+    --width-ring-reserve: calc(var(--width-sentiment-match-ring) + var(--gap-xs));
+
     &.has-floating-footer {
       ul {
         --clamp-items-end-reserve: calc(var(--ni-24) + var(--gap-xs));
@@ -102,7 +104,14 @@
 
     &.has-ring > .bold:first-child,
     &.has-ring li:first-child {
-      padding-inline-end: var(--ni-52);
+      padding-inline-end: var(--width-ring-reserve);
+    }
+
+    &.has-ring .trakt-sentiment-aspects > p::before {
+      content: "";
+      float: inline-end;
+      width: var(--width-ring-reserve);
+      height: 1lh;
     }
   }
 
