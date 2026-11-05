@@ -6,6 +6,7 @@
   import type { TieredMember } from "$lib/features/vip-veteran/TieredMember.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction";
+  import { removeAvatarRequest } from "$lib/requests/queries/users/removeAvatarRequest";
   import { uploadAvatarRequest } from "$lib/requests/queries/users/uploadAvatarRequest";
   import { useInvalidator } from "$lib/stores/useInvalidator";
   import type { Snippet } from "svelte";
@@ -80,18 +81,9 @@
     invalidate(InvalidateAction.User.Avatar);
   }
 
-  function generateTransparentAvatar(): string {
-    const canvas = document.createElement("canvas");
-    canvas.width = 1;
-    canvas.height = 1;
-    return canvas.toDataURL("image/png");
-  }
-
   async function handleRemovePhoto() {
     imageEdit.isUploading = true;
-    const success = await uploadAvatarRequest({
-      avatar: generateTransparentAvatar(),
-    });
+    const success = await removeAvatarRequest();
     imageEdit.isUploading = false;
     if (!success) return;
     invalidate(InvalidateAction.User.Avatar);
