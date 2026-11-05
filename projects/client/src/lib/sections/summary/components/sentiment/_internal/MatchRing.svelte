@@ -48,7 +48,7 @@
 
 <style>
   .trakt-match-ring {
-    --match-ring-size: var(--ni-44);
+    --match-ring-size: var(--width-sentiment-match-ring);
     --match-ring-font-size: var(--ni-12);
 
     position: relative;
