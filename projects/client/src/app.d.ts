@@ -239,6 +239,7 @@ declare global {
        * Works only in conjunction with the `touchScroll` action.
        */
       ontouchscroll?: (ev: CustomEvent) => void;
+      onscrollbarscroll?: (ev: CustomEvent) => void;
       onfiles?: (ev: CustomEvent<{ files: FileList }>) => void;
     }
 
