@@ -9,6 +9,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import { scrollbarScroll } from "$lib/utils/actions/scrollbarScroll.ts";
   import { scrollToChild } from "$lib/utils/actions/scrollToChild.ts";
   import { touchScroll } from "$lib/utils/actions/touchScroll.ts";
   import { trackVisibleRange } from "$lib/utils/actions/trackVisibleRange.ts";
@@ -205,6 +206,8 @@
               }}
               use:touchScroll={onUserScroll != null}
               ontouchscroll={onUserScroll}
+              use:scrollbarScroll={onUserScroll != null}
+              onscrollbarscroll={onUserScroll}
               data-horizontal-scroll={isHorizontalScrollUnlocked || undefined}
               class="trakt-list-item-container section-list-horizontal-scroll"
               data-dpad-navigation={DpadNavigationType.List}
