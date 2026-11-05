@@ -17,11 +17,13 @@
     count,
     link,
     isDocked,
+    visibleCount,
   }: {
     side: "start" | "end";
     count: number;
     link: CardUrlOverride;
     isDocked: boolean;
+    visibleCount?: number;
   } = $props();
 
   const label = $derived(
@@ -41,6 +43,7 @@
   data-docked={isDocked}
   data-visible={isVisible}
   inert={!isVisible}
+  style:--label-visible-count={visibleCount}
 >
   <Link
     href={link.href}
@@ -99,6 +102,18 @@
       inset-inline-end: max(
         calc(100% - var(--layout-distance-side) - var(--label-row-width)),
         var(--layout-distance-side)
+      );
+    }
+
+    &[data-side="end"][data-docked="true"] {
+      --label-row-width: calc(
+        var(--label-visible-count, var(--list-landscape-item-count)) *
+          (var(--width-landscape-card) + var(--list-gap)) - var(--list-gap)
+      );
+
+      inset-inline-end: max(
+        calc(100% - var(--layout-distance-side) - var(--label-row-width)),
+        var(--ni-0)
       );
     }
 
