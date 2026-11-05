@@ -5,7 +5,11 @@ type Callback = () => void;
 
 type WhenInViewportParams =
   | Callback
-  | { readonly callback: Callback; readonly rootMargin?: string };
+  | {
+      readonly callback: Callback;
+      readonly rootMargin?: string;
+      readonly requiresObserver?: boolean;
+    };
 
 type Pool = {
   readonly observer: IntersectionObserver;
@@ -44,10 +48,15 @@ export function whenInViewport(
     return { destroy: NOOP_FN };
   }
 
-  const { callback, rootMargin } =
+  const { callback, rootMargin, requiresObserver } =
     typeof params === 'function'
-      ? { callback: params, rootMargin: undefined }
+      ? { callback: params, rootMargin: undefined, requiresObserver: false }
       : params;
+
+  if (typeof IntersectionObserver === 'undefined') {
+    if (!requiresObserver) callback();
+    return { destroy: NOOP_FN };
+  }
 
   const pool = getPool({ threshold: 0.1, rootMargin });
   pool.callbacks.set(element, callback);

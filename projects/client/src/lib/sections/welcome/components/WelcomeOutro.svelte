@@ -13,7 +13,10 @@
 
 <div
   class="trakt-welcome-outro"
-  use:whenInViewport={() => track({ step: "outro", action: "view" })}
+  use:whenInViewport={{
+    callback: () => track({ step: "outro", action: "view" }),
+    requiresObserver: true,
+  }}
 >
   <h1 class="welcome-outro-heading bold">{m.welcome_outro_heading()}</h1>
 

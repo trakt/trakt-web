@@ -22,7 +22,10 @@
 
 <section
   class="trakt-welcome-intro"
-  use:whenInViewport={() => track({ step: "intro", action: "view" })}
+  use:whenInViewport={{
+    callback: () => track({ step: "intro", action: "view" }),
+    requiresObserver: true,
+  }}
 >
   <h1 class="welcome-intro-heading">{heading}</h1>
   <p class="secondary welcome-intro-description">{m.welcome_intro()}</p>
