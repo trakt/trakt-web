@@ -8,6 +8,7 @@
   import RealityTierPill from "$lib/sections/components/reality-check/RealityTierPill.svelte";
   import RealityTierPillSkeleton from "$lib/sections/components/reality-check/RealityTierPillSkeleton.svelte";
   import { stripMarkdownLinks } from "$lib/utils/markdown/stripMarkdownLinks.ts";
+  import { clampItemsToFit } from "./clampItemsToFit.ts";
   import { mapToSentimentSummary } from "./mapToSentimentSummary";
 
   const SKELETON_LINE_WIDTHS = ["100%", "88%", "94%", "56%"];
@@ -29,7 +30,11 @@
   );
 </script>
 
-<div class="trakt-sentiment-summary" class:has-ring={hasRing}>
+<div
+  class="trakt-sentiment-summary"
+  class:has-ring={hasRing}
+  class:has-floating-footer={!isLoading && !realityCheck}
+>
   {#if isLoading}
     <Skeleton width="55%" height="var(--ni-18)" />
 
@@ -42,7 +47,7 @@
     <span class="capitalize bold">{summary.text}</span>
 
     <div class="trakt-sentiment-aspects">
-      <ul>
+      <ul use:clampItemsToFit={summary.aspects}>
         {#each summary.aspects as aspect}
           <li><p class="capitalize">{aspect}</p></li>
         {/each}
@@ -81,6 +86,19 @@
     width: 100%;
 
     overflow: hidden;
+    position: relative;
+
+    &.has-floating-footer {
+      ul {
+        --clamp-items-end-reserve: calc(var(--ni-24) + var(--gap-xs));
+      }
+
+      .trakt-sentiment-footer {
+        position: absolute;
+        bottom: 0;
+        inset-inline-end: 0;
+      }
+    }
 
     &.has-ring > .bold:first-child,
     &.has-ring li:first-child {
@@ -92,6 +110,9 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-xxs);
+
+    height: 100%;
+    overflow: hidden;
 
     margin: 0;
     padding: 0;
