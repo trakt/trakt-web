@@ -45,7 +45,7 @@
   let isOpen = $state(false);
   let activeTab = $state(toTab(page.url.searchParams.get(TAB_PARAM)));
 
-  const { match, isLoading: isMatchLoading } = useMatch(fromRune(() => ({ type, id })));
+  const { match, taste, isLoading: isMatchLoading } = useMatch(fromRune(() => ({ type, id })));
 
   const { track: trackOpen } = useTrack(AnalyticsEvent.InsightsOpen);
   const { track: trackTab } = useTrack(AnalyticsEvent.InsightsTab);
@@ -126,7 +126,7 @@
 
 {#snippet matchView()}
   {#if $match !== null}
-    <MatchTab score={$match} {type} {id} />
+    <MatchTab score={$match} taste={$taste} {type} {id} />
   {/if}
 {/snippet}
 

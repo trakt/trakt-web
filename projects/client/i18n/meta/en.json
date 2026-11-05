@@ -2773,6 +2773,10 @@
       "default": "Why it fits you",
       "description": "Heading above the titles that explain the viewer's personal match score."
     },
+    "header_match_taste": {
+      "default": "Your taste",
+      "description": "Heading above the subgenres that the viewer's taste and the title share."
+    },
     "text_match_better_than": {
       "default": "Better match for you than {percent}% of titles",
       "description": "Headline of the personal match score: the share of titles that this movie or show matches the viewer better than.",

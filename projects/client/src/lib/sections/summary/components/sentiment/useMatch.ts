@@ -39,7 +39,14 @@ export function useMatch(target$: Observable<MatchTarget>) {
 
   return {
     match: combineLatest([query, isAuthorized]).pipe(
-      map(([state, authorized]) => (authorized ? (state.data ?? null) : null)),
+      map(([state, authorized]) =>
+        authorized ? (state.data?.score ?? null) : null,
+      ),
+    ),
+    taste: combineLatest([query, isAuthorized]).pipe(
+      map(([state, authorized]) =>
+        authorized ? (state.data?.taste ?? []) : [],
+      ),
     ),
     isLoading: query.pipe(map(toLoadingState)),
     isAvailable,

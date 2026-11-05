@@ -1,3 +1,7 @@
-import type { MatchScore } from '$lib/requests/models/MatchScore.ts';
+import type { Match } from '$lib/requests/models/Match.ts';
+import { MatchResponseMock } from '../response/MatchResponseMock.ts';
 
-export const MatchMappedMock: MatchScore = 91;
+export const MatchMappedMock: Match = {
+  score: MatchResponseMock.match,
+  taste: MatchResponseMock.taste,
+};
