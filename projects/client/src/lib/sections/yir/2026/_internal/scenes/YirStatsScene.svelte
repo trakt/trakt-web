@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
-  import { languageTag } from "$lib/features/i18n";
+  import { getLocale, languageTag } from "$lib/features/i18n";
+  import { toLocaleWeekdays } from "$lib/sections/yir/_internal/toLocaleWeekdays.ts";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
   import { formatDecimal } from "$lib/utils/format/formatDecimal";
   import { formatNumber } from "$lib/utils/format/formatNumber";
@@ -67,15 +68,14 @@
     const short = new Intl.DateTimeFormat(languageTag(), { weekday: "short" });
     const long = new Intl.DateTimeFormat(languageTag(), { weekday: "long" });
 
-    return (stats.distributions?.days ?? []).map((value, day) => {
-      const date = new Date(2026, 0, 4 + day);
-      return {
+    return toLocaleWeekdays(stats.distributions?.days ?? [], getLocale()).map(
+      ({ value, date }) => ({
         value,
         label: short.format(date),
         main: m.yir_2024_stats_tooltip_plays({ count: formatNumber(value) }),
         sub: long.format(date),
-      };
-    });
+      }),
+    );
   });
 
   const topWeek = $derived.by(() => {

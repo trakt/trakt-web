@@ -2,7 +2,8 @@
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
-  import { languageTag } from "$lib/features/i18n";
+  import { getLocale, languageTag } from "$lib/features/i18n";
+  import { toLocaleWeekdays } from "$lib/sections/yir/_internal/toLocaleWeekdays.ts";
   import { m } from "$lib/paraglide/messages";
   import type { YirStatsCategory } from "$lib/requests/models/YirDetail";
   import { formatDecimal } from "$lib/utils/format/formatDecimal";
@@ -29,7 +30,6 @@
     month: number;
     year: number;
   } = $props();
-
 
   const itemsCount = $derived(stats.itemsCount ?? 0);
   const hoursTotal = $derived(Math.round(stats.minutes.total / 60));
@@ -105,22 +105,16 @@
     }));
   });
 
-  // Plays card line chart — 7 day-of-week buckets. Reference dates pinned to a
-  // known week starting on Sunday (Jan 4, 2026) so index 0 = Sun … 6 = Sat.
-  const weekdayLabels = $derived.by(() => {
+  const dayOfWeekData = $derived.by(() => {
     const formatter = new Intl.DateTimeFormat(languageTag(), {
       weekday: "short",
     });
-    return Array.from({ length: 7 }, (_, i) =>
-      formatter.format(new Date(2026, 0, 4 + i)),
+    return toLocaleWeekdays(stats.distributions?.days ?? [], getLocale()).map(
+      ({ value, date }) => ({
+        value: Math.round(value),
+        label: formatter.format(date),
+      }),
     );
-  });
-  const dayOfWeekData = $derived.by(() => {
-    const days = stats.distributions?.days ?? [];
-    return days.map((value, index) => ({
-      value: Math.round(value),
-      label: weekdayLabels[index] ?? "",
-    }));
   });
 </script>
 
