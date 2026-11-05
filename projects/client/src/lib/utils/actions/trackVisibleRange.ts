@@ -22,22 +22,29 @@ function isFullyVisible({
   );
 }
 
-function getContentBounds(node: HTMLElement): Bounds {
+function getVisibleBounds(node: HTMLElement): Bounds {
   const rect = node.getBoundingClientRect();
   const style = getComputedStyle(node);
 
+  if (style.direction === 'rtl') {
+    return {
+      left: rect.left,
+      right: rect.right - (parseFloat(style.paddingRight) || 0),
+    };
+  }
+
   return {
     left: rect.left + (parseFloat(style.paddingLeft) || 0),
-    right: rect.right - (parseFloat(style.paddingRight) || 0),
+    right: rect.right,
   };
 }
 
 /**
  * Indices of the first and last children that sit fully inside the node's
- * viewport, between its gutters, or `undefined` when none do.
+ * viewport, past its inline-start gutter, or `undefined` when none do.
  */
 function getVisibleRange(node: HTMLElement): VisibleRange | undefined {
-  const container = getContentBounds(node);
+  const container = getVisibleBounds(node);
   const visible = Array.from(node.children)
     .map((child, index) => ({
       index,
