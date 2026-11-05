@@ -33,7 +33,7 @@ export function useMatch(target$: Observable<MatchTarget>) {
       ([current, authorized, $user]) =>
         authorized &&
         current.enabled !== false &&
-        ($user.isVip || $user.isDirector),
+        Boolean($user?.isVip || $user?.isDirector),
     ),
   );
 
