@@ -3264,6 +3264,66 @@
       "default": "Now Playing",
       "description": "Header for the 'now playing' toast that shows the movie or episode the user is currently watching."
     },
+    "header_watching_now": {
+      "default": "Watching Now",
+      "description": "Title of the drawer and section listing people the user follows who are watching a movie or episode right now."
+    },
+    "text_watching_now_following_count_one": {
+      "default": "1 person you follow",
+      "description": "Subtitle of the watching now drawer when exactly one person the user follows is watching something right now."
+    },
+    "text_watching_now_following_count_other": {
+      "default": "{count} people you follow",
+      "description": "Subtitle of the watching now drawer with the number of people the user follows who are watching something right now.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_watching_now": {
+      "default": "{count} people you follow are watching now. Show who is watching.",
+      "description": "Accessible label for the navbar pill that opens the list of followed people who are watching something right now.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "tag_text_watching_now_live": {
+      "default": "Watching Now",
+      "description": "Tag shown on a live watch that comes from a connected media player (scrobble), and label of the media page pill that counts everyone watching right now."
+    },
+    "link_label_watching_now_social": {
+      "default": "{count} people are watching {title} now. Show social activity.",
+      "description": "Accessible label for the media page pill that counts everyone watching this title right now and opens the social activity drawer.",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_watching_now_people_one": {
+      "default": "{count} Person",
+      "description": "Count on the right of the 'Watching Now' header in the social activity drawer when exactly one person is watching this title right now.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_watching_now_people_other": {
+      "default": "{count} People",
+      "description": "Count on the right of the 'Watching Now' header in the social activity drawer: how many people are watching this title right now.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "text_ends_at": {
       "default": "Ends at {time}",
       "description": "Text in the 'now playing' check-in toast indicating the clock time when the currently watched movie or episode will finish.",
