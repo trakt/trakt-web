@@ -10,7 +10,7 @@ import {
 } from 'rxjs';
 import { hasSameWatchingEntries } from './_internal/hasSameWatchingEntries.ts';
 import { isWatchingTarget } from './_internal/isWatchingTarget.ts';
-import { WATCHING_NOW_POLL_INTERVAL } from './_internal/WATCHING_NOW_POLL_INTERVAL.ts';
+import { watchingNowPollInterval } from './_internal/watchingNowPollInterval.ts';
 import { useFollowingWatching } from './useFollowingWatching.ts';
 
 export function useMediaWatching(target: Observable<MediaSocialQueryTarget>) {
@@ -18,7 +18,7 @@ export function useMediaWatching(target: Observable<MediaSocialQueryTarget>) {
     target.pipe(
       map(($target) => ({
         ...mediaWatchingQuery($target),
-        refetchInterval: WATCHING_NOW_POLL_INTERVAL,
+        refetchInterval: watchingNowPollInterval,
       })),
     ),
   ).pipe(map(($query) => $query.data?.length ?? 0));
