@@ -1420,6 +1420,13 @@
       max-width: 100%;
 
       /*
+        The blur below makes the tray its own stacking context, which would
+        trap the actions menu inside it and let the strip paint over it.
+      */
+      position: relative;
+      z-index: var(--layer-raised);
+
+      /*
         One tray across all three: the bar's own surface, stretched around the
         marks either side. They read as part of the same instrument rather
         than as two loose glyphs floating beside a box - the bar inside keeps
