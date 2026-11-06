@@ -26,6 +26,9 @@
     >
       <div class="trakt-navbar-left">
         <NavbarHeader />
+        {#if !$isEditMode}
+          {@render $state.leadingActions?.()}
+        {/if}
         {#if $isEditMode}
           <EditModeBar />
         {:else}

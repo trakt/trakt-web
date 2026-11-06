@@ -36,8 +36,17 @@ export function useBannerDismissal(id: string, value: string) {
     dismissed.next(current);
   };
 
+  const restore = () => {
+    const remaining = Object.fromEntries(
+      Object.entries(dismissed.value).filter(([key]) => key !== id),
+    );
+    saveDismissedBanners(remaining);
+    dismissed.next(remaining);
+  };
+
   return {
     dismiss,
+    restore,
     isDismissed: dismissed.pipe(map(($dismissed) => $dismissed[id] === value)),
   };
 }

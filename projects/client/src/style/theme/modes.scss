@@ -615,10 +615,14 @@
   --color-review-accent: var(--purple-500);
   --color-review-base: var(--purple-700);
   --color-review-base-deep: var(--purple-800);
-  --color-mir-banner-base: var(--shade-900);
-  --color-mir-banner-foreground: var(--shade-10);
-  --color-mir-banner-pill: var(--purple-600);
-  --color-mir-banner-accent: var(--purple-200);
+  // Month in Review entry (header pill + mobile strip)
+  --color-mir-accent: var(--purple-600);
+  --color-mir-entry-shine: color-mix(in srgb, var(--purple-300) 60%, transparent);
+  --background-mir-strip: linear-gradient(
+    calc(var(--rtl-sign) * 90deg),
+    color-mix(in srgb, var(--purple-500) 10%, transparent),
+    color-mix(in srgb, var(--shade-900) 3%, transparent) 55%
+  );
   // 2024 template: branded purple hero wordmark and purple-tinged stat panels
   // (charts themselves render through the shared --viz-* tokens).
   --color-yir-hero-gradient-start: var(--purple-400);
@@ -1273,10 +1277,14 @@
   --color-review-accent: var(--purple-500);
   --color-review-base: var(--shade-900);
   --color-review-base-deep: var(--shade-920);
-  --color-mir-banner-base: var(--shade-900);
-  --color-mir-banner-foreground: var(--shade-10);
-  --color-mir-banner-pill: var(--purple-600);
-  --color-mir-banner-accent: var(--purple-200);
+  // Month in Review entry (see light-theme)
+  --color-mir-accent: var(--purple-300);
+  --color-mir-entry-shine: color-mix(in srgb, var(--shade-10) 60%, transparent);
+  --background-mir-strip: linear-gradient(
+    calc(var(--rtl-sign) * 90deg),
+    color-mix(in srgb, var(--purple-500) 18%, transparent),
+    color-mix(in srgb, var(--shade-10) 3%, transparent) 55%
+  );
   // 2024 template (see light-theme for the rationale)
   --color-yir-hero-gradient-start: color-mix(
     in srgb,

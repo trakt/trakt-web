@@ -14,6 +14,7 @@ export type NavbarStateSetterProps = {
   showFilters?: boolean;
   smartListTarget?: ListTarget | Nil;
   headerActions?: Snippet;
+  leadingActions?: Snippet;
   header?: NavbarHeaderState;
   sidebar?: {
     mode: 'default' | 'fixed';
