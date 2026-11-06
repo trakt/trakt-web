@@ -5,6 +5,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
+  import WatchingNowSocialSection from "$lib/sections/watching-now/WatchingNowSocialSection.svelte";
   import { useSocialActivities } from "../_internal/useSocialActivities.ts";
   import { hasSharers } from "../recommended-by/hasSharers.ts";
   import { useRecommendedBy } from "../recommended-by/useRecommendedBy.ts";
@@ -52,6 +53,8 @@
 >
   <RenderFor audience="authenticated">
     <div class="trakt-social-activity-drawer">
+      <WatchingNowSocialSection {target} />
+
       {#if $isLoading && !hasEntries}
         <LoadingIndicator size="large" />
       {/if}

@@ -15,6 +15,7 @@
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
   import TodayNavbarEntry from "$lib/sections/today/TodayNavbarEntry.svelte";
   import TodayStoryViewerHost from "$lib/sections/today/TodayStoryViewerHost.svelte";
+  import WatchingNowNavbarPill from "$lib/sections/watching-now/WatchingNowNavbarPill.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   // FIXME: move to PersonalHistoryList when Profile also supports discover mode
@@ -32,6 +33,7 @@
 {/snippet}
 
 {#snippet todayEntry()}
+  <WatchingNowNavbarPill />
   <TodayNavbarEntry />
 {/snippet}
 
