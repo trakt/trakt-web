@@ -5,14 +5,7 @@
   --layout-gutter: var(--ni-24);
   --layout-sidebar-clearance: calc(var(--side-navbar-width) + var(--ni-16));
 
-  /*
-    Space left on each side once the frame and its gutters are centred in the
-    viewport; 0 while the viewport is narrower than the frame.
-  */
-  --layout-frame-margin: max(
-    var(--ni-0),
-    calc((100dvw - var(--layout-frame-width)) / 2 - var(--layout-gutter))
-  );
+  --layout-frame-margin: var(--ni-0);
 
   --layout-distance-side: calc(
     var(--layout-gutter) + var(--layout-frame-margin)
@@ -29,4 +22,16 @@
   @include for-tablet-sm-and-below {
     --layout-sidebar-clearance: var(--ni-0);
   }
+}
+
+/*
+  Behind the center-stage-frame flag: space left on each side once the frame
+  and its gutters are centred in the viewport; 0 while the viewport is
+  narrower than the frame.
+*/
+:root[data-layout-frame] {
+  --layout-frame-margin: max(
+    var(--ni-0),
+    calc((100dvw - var(--layout-frame-width)) / 2 - var(--layout-gutter))
+  );
 }

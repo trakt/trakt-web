@@ -1,6 +1,7 @@
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
+import GridIcon from '$lib/components/icons/GridIcon.svelte';
 import HourglassIcon from '$lib/components/icons/HourglassIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
@@ -82,6 +83,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_personalized_related(),
     addedAt: new Date('2026-11-02'),
     description: () => m.preview_feature_description_personalized_related(),
+    audience: 'director',
+  },
+  [FeatureFlag.CenterStageFrame]: {
+    icon: GridIcon,
+    title: () => m.preview_feature_title_center_stage_frame(),
+    addedAt: new Date('2026-11-06'),
+    description: () => m.preview_feature_description_center_stage_frame(),
     audience: 'director',
   },
 };
