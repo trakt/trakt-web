@@ -1,8 +1,13 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { userWatchingQuery } from '$lib/requests/queries/users/userWatchingQuery.ts';
-import { combineLatest, distinctUntilChanged, map, type Observable } from 'rxjs';
+import {
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  type Observable,
+} from 'rxjs';
 import { useWatchingClock } from './_internal/useWatchingClock.ts';
-import { WATCHING_NOW_POLL_INTERVAL } from './_internal/WATCHING_NOW_POLL_INTERVAL.ts';
+import { watchingNowPollInterval } from './_internal/watchingNowPollInterval.ts';
 
 export function useUserWatching(slug: Observable<string>) {
   const query = useQuery(
@@ -10,7 +15,7 @@ export function useUserWatching(slug: Observable<string>) {
       map(($slug) => ({
         ...userWatchingQuery({ slug: $slug }),
         retry: 0,
-        refetchInterval: WATCHING_NOW_POLL_INTERVAL,
+        refetchInterval: watchingNowPollInterval,
       })),
     ),
   );

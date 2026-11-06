@@ -4,12 +4,12 @@ import { combineLatest, distinctUntilChanged, map, shareReplay } from 'rxjs';
 import { hasSameWatchingEntries } from './_internal/hasSameWatchingEntries.ts';
 import { toWatchingNowEntries } from './_internal/toWatchingNowEntries.ts';
 import { useWatchingClock } from './_internal/useWatchingClock.ts';
-import { WATCHING_NOW_POLL_INTERVAL } from './_internal/WATCHING_NOW_POLL_INTERVAL.ts';
+import { watchingNowPollInterval } from './_internal/watchingNowPollInterval.ts';
 
 export function useFollowingWatching() {
   const query = useQuery({
     ...followingWatchingQuery({}),
-    refetchInterval: WATCHING_NOW_POLL_INTERVAL,
+    refetchInterval: watchingNowPollInterval,
   });
 
   return {
