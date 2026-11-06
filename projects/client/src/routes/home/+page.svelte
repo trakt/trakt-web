@@ -14,6 +14,7 @@
   import MonthInReviewNavbarEntry from "$lib/sections/banner/month-in-review/MonthInReviewNavbarEntry.svelte";
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
   import TodayStoryViewerHost from "$lib/sections/today/TodayStoryViewerHost.svelte";
+  import WatchingNowNavbarPill from "$lib/sections/watching-now/WatchingNowNavbarPill.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   // FIXME: move to PersonalHistoryList when Profile also supports discover mode
@@ -30,6 +31,10 @@
   <MonthInReviewNavbarEntry />
 {/snippet}
 
+{#snippet watchingNowEntry()}
+  <WatchingNowNavbarPill />
+{/snippet}
+
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
@@ -43,6 +48,7 @@
     contentToggle="discover"
     hasFilters
     leadingActions={monthInReviewEntry}
+    entryLeadingActions={watchingNowEntry}
   />
 
   <Banner />

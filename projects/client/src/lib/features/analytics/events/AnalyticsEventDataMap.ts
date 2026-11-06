@@ -34,6 +34,7 @@ import type { TodayStoryFrame } from '$lib/sections/today/models/TodayStoryFrame
 import type { TodayStoryGroup } from '$lib/sections/today/models/TodayStoryGroup.ts';
 import type { VipFlow } from '$lib/features/upsell/models/VipFlow.ts';
 import type { VipUpsellSource } from '$lib/features/upsell/models/VipUpsellSource.ts';
+import type { WatchingNowSource } from '$lib/sections/watching-now/models/WatchingNowSource.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
 type SourceType = { source: string };
@@ -197,6 +198,7 @@ type ReviewViewType = {
   tier: 'free' | 'vip';
   owner: 'me' | 'other';
 };
+type WatchingNowOpenType = { source: WatchingNowSource };
 
 type OnboardingStepType = {
   step: 'intro' | 'import' | 'outro';
@@ -337,6 +339,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.RecapTab]: RecapTabType;
   [AnalyticsEvent.RecapReveal]: never;
   [AnalyticsEvent.RecapChapter]: never;
+  [AnalyticsEvent.WatchingNowOpen]: WatchingNowOpenType;
 
   [AnalyticsEvent.BrandingDownload]: BrandingDownloadType;
 

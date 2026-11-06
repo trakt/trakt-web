@@ -4,6 +4,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ProfilePageBanner from "$lib/sections/profile-banner/ProfilePageBanner.svelte";
   import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
+  import type { NowPlayingItem } from "$lib/requests/models/NowPlayingItem.ts";
+  import WatchingNowProfilePanel from "$lib/sections/watching-now/WatchingNowProfilePanel.svelte";
   import type { DisplayableProfileProps } from "../DisplayableProfileProps";
   import AllTimeStats from "./AllTimeStats.svelte";
   import MonthToDate from "./MonthToDate.svelte";
@@ -14,8 +16,10 @@
     profile,
     slug,
     promotion,
+    nowPlaying = null,
   }: DisplayableProfileProps & {
     promotion?: VipVeteranPromotion | null;
+    nowPlaying?: NowPlayingItem | null;
   } = $props();
 
   const { isMe } = $derived(useIsMe(slug));
@@ -28,8 +32,16 @@
   <ThisMonth {slug} />
 {/snippet}
 
+{#snippet watchingPanel()}
+  {#if nowPlaying}
+    <WatchingNowProfilePanel {nowPlaying} />
+  {/if}
+{/snippet}
+
 {#snippet allTimeStats()}
-  {#if $isMe}
+  {#if nowPlaying}
+    {@render watchingPanel()}
+  {:else if $isMe}
     <AllTimeStats />
   {:else}
     <ThisYear {slug} source="profile" />
@@ -40,8 +52,22 @@
   class="trakt-profile-details"
   class:has-stats={hasStats}
   class:is-narrow={isFreeOtherProfile}
+  class:is-watching={nowPlaying != null}
 >
-  <ProfilePageBanner {profile} {slug} {promotion} />
+  <ProfilePageBanner
+    {profile}
+    {slug}
+    {promotion}
+    isWatching={nowPlaying != null}
+  />
+
+  {#if !hasStats && nowPlaying}
+    <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
+      <div class="trakt-profile-details-item">
+        {@render watchingPanel()}
+      </div>
+    </RenderFor>
+  {/if}
 
   {#if hasStats}
     <RenderFor audience="all" device={["desktop"]}>
@@ -59,6 +85,7 @@
   {/if}
 
   <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    {@render watchingPanel()}
     {#if hasStats}
       <MonthToDate {slug} />
     {/if}
@@ -84,6 +111,14 @@
 
     &.is-narrow {
       --details-column-count: 1;
+    }
+
+    &.is-narrow.is-watching {
+      --details-column-count: 2;
+
+      @include for-tablet-sm-and-below {
+        --details-column-count: 1;
+      }
     }
 
     @include for-tablet-lg {

@@ -24,6 +24,7 @@
   type ProfilePageBannerProps = DisplayableProfileProps & {
     variant?: "private" | "public";
     promotion?: VipVeteranPromotion | null;
+    isWatching?: boolean;
   };
 
   const {
@@ -31,6 +32,7 @@
     slug,
     variant = "public",
     promotion,
+    isWatching = false,
   }: ProfilePageBannerProps = $props();
 
   const { user, blocked } = useUser();
@@ -49,7 +51,7 @@
 </script>
 
 <div class="trakt-profile-page-banner">
-  <div class="profile-identity">
+  <div class="profile-identity" class:is-watching={isWatching}>
     <ProfileImage
       isEditable={$isMe}
       --image-size="var(--ni-64)"
@@ -185,6 +187,11 @@
     .user-location {
       color: var(--color-text-secondary);
     }
+  }
+
+  .profile-identity.is-watching :global(.trakt-profile-image .profile-image) {
+    outline: var(--border-thickness-s) solid var(--color-background-red);
+    outline-offset: var(--ni-2);
   }
 
   .profile-pill {
