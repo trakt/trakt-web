@@ -17,7 +17,7 @@
     size?: "card" | "drawer";
   } = $props();
 
-  const level = $derived(matchLevel(score));
+  const level = $derived(matchLevel(score, kind));
   const tier = $derived(level === 0 ? null : matchTiers(kind)[level]);
   const basisText = $derived.by(() => {
     if (kind !== "hype") return m.text_match_basis_history();

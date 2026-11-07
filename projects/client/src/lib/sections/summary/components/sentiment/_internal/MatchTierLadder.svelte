@@ -5,7 +5,7 @@
 
   const { score, kind }: { score: number; kind: MatchKind } = $props();
 
-  const level = $derived(matchLevel(score));
+  const level = $derived(matchLevel(score, kind));
   const steps = $derived(
     ([1, 2, 3, 4] as const).map((step) => ({
       step,

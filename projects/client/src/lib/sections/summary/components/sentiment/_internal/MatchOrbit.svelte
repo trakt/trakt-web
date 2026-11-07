@@ -15,7 +15,7 @@
     size?: "card" | "drawer";
   } = $props();
 
-  const level = $derived(matchLevel(score));
+  const level = $derived(matchLevel(score, kind));
   const tier = $derived(level === 0 ? null : matchTiers(kind)[level]);
   const isFlame = $derived(kind === "hype" && level > 1);
   const label = $derived.by(() => {
