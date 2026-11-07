@@ -19,7 +19,6 @@
     realityCheck,
     match,
     kind = "match",
-    basis = "series",
     hasRing = false,
     hasDrawer = true,
   }: InsightsSummaryProps = $props();
@@ -72,7 +71,7 @@
   {:else if match === undefined}
     <Skeleton width="80%" height="var(--ni-18)" />
   {:else}
-    <MatchTierHeading score={match} {kind} {basis} />
+    <MatchTierHeading score={match} {kind} />
   {/if}
 
   <div class="trakt-sentiment-footer">

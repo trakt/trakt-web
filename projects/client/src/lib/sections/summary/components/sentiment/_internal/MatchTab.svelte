@@ -1,10 +1,12 @@
 <script lang="ts">
   import type { MatchTabProps } from "./MatchTabProps.ts";
+  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { MATCH_LOW_THRESHOLD } from "./constants/matchRing.ts";
   import HypeStories from "./HypeStories.svelte";
+  import { matchHeadline } from "./matchHeadline.ts";
   import { matchLevel } from "./matchLevel.ts";
   import MatchStories from "./MatchStories.svelte";
   import { matchTiers } from "./matchTiers.ts";
@@ -16,13 +18,24 @@
   import MatchTierLadder from "./MatchTierLadder.svelte";
   import { useInsightsCard } from "../useInsightsCard.ts";
 
-  const { score, kind, basis, reasons, taste, media }: MatchTabProps = $props();
+  const { score, kind, reasons, taste, media }: MatchTabProps = $props();
 
   const { isInsightsCard } = useInsightsCard();
 
   const level = $derived(matchLevel(score, kind));
   const storyColor = $derived(
     level === 0 ? undefined : matchTiers(kind)[level].color,
+  );
+
+  const headline = $derived(
+    matchHeadline({
+      kind,
+      reasons,
+      taste,
+      rating: media.rating,
+      votes: media.votes,
+      locale: getLocale(),
+    }),
   );
 
   const hasReasons = $derived(
@@ -35,7 +48,7 @@
     <div class="trakt-match-tier">
       <div class="trakt-match-score">
         <MatchOrbit {score} {kind} size="drawer" />
-        <MatchTierHeading {score} {kind} {basis} size="drawer" />
+        <MatchTierHeading {score} {kind} {headline} size="drawer" />
       </div>
       <MatchTierLadder {score} {kind} />
     </div>

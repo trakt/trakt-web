@@ -15102,13 +15102,25 @@
       "default": "Looking good",
       "description": "Second tier for an unreleased title the user is predicted to look forward to, based on the series they watched. Keep it short."
     },
-    "text_hype_basis": {
-      "default": "Not out yet. From the films in this series you watched and rated.",
-      "description": "Explains what the user's hype tier for an unreleased movie is based on, shown under the tier in the match panel."
+    "text_headline_series_rated": {
+      "default": "You rated {title} {stars}/10.",
+      "description": "Line under the tier in the match panel for an unreleased movie: the user's own rating (1 to 10) of an earlier film in the same series. {title} is that film's title."
     },
-    "text_hype_basis_taste": {
-      "default": "Not out yet. From what you watched, rated and favorited.",
-      "description": "Explains that the user's hype tier for an unreleased title comes from their whole watch, rating and favorite history, shown under the tier in the match panel."
+    "text_headline_genre": {
+      "default": "{genre} is your thing.",
+      "description": "Line under the tier in the match panel: the title's genre is one the user watches and likes a lot. {genre} is a genre name such as Space Opera."
+    },
+    "text_headline_genres": {
+      "default": "{genres} are your thing.",
+      "description": "Line under the tier in the match panel: the title's genres are ones the user watches and likes a lot. {genres} is a list of two genre names, already joined, such as Satire and Monster."
+    },
+    "text_headline_lists": {
+      "default": "One of the most listed upcoming titles.",
+      "description": "Line under the tier in the match panel for an unreleased title: many users added it to their lists."
+    },
+    "text_headline_rating": {
+      "default": "Trakt users rate it {percent}.",
+      "description": "Line under the tier in the match panel: the title's average rating on Trakt is high. {percent} is a formatted percentage such as 72%."
     },
     "header_hype_why": {
       "default": "Why the hype",
