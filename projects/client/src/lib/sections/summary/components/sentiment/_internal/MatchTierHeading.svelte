@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { MatchBasis } from "$lib/requests/models/MatchBasis.ts";
   import type { MatchKind } from "$lib/requests/models/MatchKind.ts";
   import { matchLevel } from "./matchLevel.ts";
   import { matchTiers } from "./matchTiers.ts";
@@ -7,15 +8,21 @@
   const {
     score,
     kind,
+    basis,
     size = "card",
   }: {
     score: number | null;
     kind: MatchKind;
+    basis: MatchBasis;
     size?: "card" | "drawer";
   } = $props();
 
   const level = $derived(matchLevel(score));
   const tier = $derived(level === 0 ? null : matchTiers(kind)[level]);
+  const basisText = $derived.by(() => {
+    if (kind !== "hype") return m.text_match_basis_history();
+    return basis === "taste" ? m.text_hype_basis_taste() : m.text_hype_basis();
+  });
 </script>
 
 <div class="trakt-match-tier-heading" data-size={size}>
@@ -27,7 +34,7 @@
       {tier.label()}
     </b>
     <p class="secondary">
-      {kind === "hype" ? m.text_hype_basis() : m.text_match_basis_history()}
+      {basisText}
     </p>
   {:else}
     <p class="bold">{m.text_match_not_enough_data()}</p>

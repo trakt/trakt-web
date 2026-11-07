@@ -12,7 +12,7 @@
   import MatchTierLadder from "./MatchTierLadder.svelte";
   import { useInsightsCard } from "../useInsightsCard.ts";
 
-  const { score, kind, taste, type, id }: MatchTabProps = $props();
+  const { score, kind, basis, taste, type, id }: MatchTabProps = $props();
 
   const { isInsightsCard } = useInsightsCard();
 
@@ -26,7 +26,7 @@
     <div class="trakt-match-tier">
       <div class="trakt-match-score">
         <MatchOrbit {score} {kind} size="drawer" />
-        <MatchTierHeading {score} {kind} size="drawer" />
+        <MatchTierHeading {score} {kind} {basis} size="drawer" />
       </div>
       <MatchTierLadder {score} {kind} />
     </div>

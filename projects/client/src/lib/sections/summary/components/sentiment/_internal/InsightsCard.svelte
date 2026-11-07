@@ -19,6 +19,7 @@
   const {
     match,
     kind,
+    basis,
     isLoading: isMatchLoading,
     isAvailable,
   } = useMatch(fromRune(() => ({ type, id })));
@@ -53,6 +54,7 @@
     {hasDrawer}
     {score}
     kind={$kind}
+    basis={$basis}
     isMatchLoading={ring === "loading"}
   />
 {/snippet}

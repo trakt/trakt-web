@@ -15,6 +15,8 @@ function queryMatch(type: 'movie' | 'show') {
     mapper: (response) => ({
       score: response?.data?.score,
       taste: response?.data?.taste,
+      kind: response?.data?.kind,
+      basis: response?.data?.basis,
       isSuccess: response?.isSuccess,
     }),
     waitFor: ({ isSuccess }) => isSuccess === true,
@@ -53,6 +55,30 @@ describe('matchQuery', () => {
     );
 
     expect(await queryMatch('movie')).toMatchObject({ score: 80, taste: [] });
+  });
+
+  it('should map the basis of a hype score', async () => {
+    server.use(
+      http.get('http://localhost/movies/:id/match', () =>
+        HttpResponse.json({ kind: 'hype', match: 82, basis: 'taste' }),
+      ),
+    );
+
+    expect(await queryMatch('movie')).toMatchObject({
+      kind: 'hype',
+      score: 82,
+      basis: 'taste',
+    });
+  });
+
+  it('should default a missing basis to the series', async () => {
+    server.use(
+      http.get('http://localhost/movies/:id/match', () =>
+        HttpResponse.json({ kind: 'hype', match: 82 }),
+      ),
+    );
+
+    expect(await queryMatch('movie')).toMatchObject({ basis: 'series' });
   });
 
   it('should map a null score to null', async () => {
