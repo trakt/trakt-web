@@ -1508,6 +1508,10 @@
       "default": "Remove from History",
       "description": "Text for the button that allows users to remove a movie or episode from their watch history."
     },
+    "button_text_remove_play": {
+      "default": "Remove play",
+      "description": "Text for the button that removes a single play of a movie or episode from the user's watch history, shown on one entry of their history."
+    },
     "button_label_remove_from_watched": {
       "default": "Remove \"{title}\" from your History",
       "description": "Aria-label for the button that allows users to remove a movie, show, or episode from their watch history.",
