@@ -132,6 +132,7 @@
   .trakt-match-orbit-head {
     position: absolute;
     inset: 0;
+    z-index: 1;
     transform: rotate(var(--match-orbit-angle));
 
     &::after,
