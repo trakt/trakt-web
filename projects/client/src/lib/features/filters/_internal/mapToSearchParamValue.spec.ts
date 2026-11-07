@@ -11,7 +11,7 @@ import { mapToSearchParamValue } from './mapToSearchParamValue.ts';
 
 const mockUser: UserSettings = {
   ...ExtendedUserMappedMock,
-  genres: { loved: ['action', 'comedy', 'drama'] },
+  genres: { loved: ['action', 'comedy', 'drama'], disliked: [] },
 };
 
 describe('mapToSearchParamValue', () => {

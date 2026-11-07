@@ -11873,6 +11873,18 @@
       "default": "Select up to 5 genres which you'd like to see more of.",
       "description": "Subtitle shown under the loved genres drawer title."
     },
+    "header_genres_disliked": {
+      "default": "Genres you Dislike",
+      "description": "Section header for genres the user dislikes in settings."
+    },
+    "button_label_edit_disliked_genres": {
+      "default": "Edit genres you dislike",
+      "description": "Accessible label for the button that opens the disliked genres drawer."
+    },
+    "label_genres_drawer_subtitle_disliked": {
+      "default": "Select up to 5 genres which you'd like to see less of.",
+      "description": "Subtitle shown under the disliked genres drawer title."
+    },
     "label_genres_drawer_selected": {
       "default": "Selected",
       "description": "Section label above the selected genres row in the genres drawer."
