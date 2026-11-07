@@ -14,6 +14,4 @@
   const { match } = $derived(useMatch({ slug, mode: $mode }));
 </script>
 
-{#if $match}
-  <MatchDrawer match={$match} {profile} {onClose} />
-{/if}
+<MatchDrawer match={$match} {profile} {onClose} />

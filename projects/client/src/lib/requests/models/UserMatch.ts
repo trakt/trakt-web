@@ -14,6 +14,11 @@ export const UserMatchSharedSubgenreSchema = z.object({
   rarity: z.number().min(0).max(1).optional(),
 });
 
+const UserMatchSharedTitlesSchema = z.object({
+  movies: z.array(z.number()),
+  shows: z.array(z.number()),
+});
+
 export const UserMatchSchema = z.object({
   score: z.number().min(0).max(100),
   breakdown: z.object({
@@ -22,10 +27,8 @@ export const UserMatchSchema = z.object({
   }),
   shared: z.object({
     subgenres: z.array(UserMatchSharedSubgenreSchema),
-    favorites: z.object({
-      movies: z.array(z.number()),
-      shows: z.array(z.number()),
-    }),
+    favorites: UserMatchSharedTitlesSchema,
+    watched: UserMatchSharedTitlesSchema.optional(),
   }),
 });
 
