@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "شناسه همگام‌سازی {id}",
   "text_history_sync_filter_with_source": "شناسه همگام‌سازی {id} ({source})",
   "text_hype_basis": "هنوز منتشر نشده است. بر اساس فیلم‌هایی از این مجموعه که تماشا کرده‌اید و به آن‌ها امتیاز داده‌اید.",
+  "text_hype_basis_taste": "هنوز منتشر نشده است. بر اساس آنچه تماشا کرده‌اید، امتیاز داده‌اید و به علاقه‌مندی‌ها افزوده‌اید.",
   "text_info_blocked": "{username} مسدود شد.",
   "text_info_calendar_feed_copied": "لینک iCal کپی شد. برای اشتراک، آن را در برنامه تقویم خود جای‌گذاری کنید.",
   "text_info_cover_removed": "تصویر جلد پاک شد.",

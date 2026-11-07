@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "ID sincronizare {id}",
   "text_history_sync_filter_with_source": "ID sincronizare {id} ({source})",
   "text_hype_basis": "Nu este lansat încă. Bazat pe filmele din această serie pe care le-ai vizionat și evaluat.",
+  "text_hype_basis_taste": "Nu a apărut încă. Bazat pe ce ai vizionat, evaluat și adăugat la favorite.",
   "text_info_blocked": "{username} a fost blocat.",
   "text_info_calendar_feed_copied": "Linkul iCal a fost copiat. Lipește-l în aplicația ta de calendar pentru a te abona.",
   "text_info_cover_removed": "Imaginea de copertă a fost ștearsă.",

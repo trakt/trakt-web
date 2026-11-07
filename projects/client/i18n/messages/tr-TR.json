@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "Senkronizasyon Kimliği {id}",
   "text_history_sync_filter_with_source": "Senkronizasyon Kimliği {id} ({source})",
   "text_hype_basis": "Henüz çıkmadı. Bu seride izlediğiniz ve puanladığınız filmlere göre.",
+  "text_hype_basis_taste": "Henüz çıkmadı. İzlediklerinize, puanladıklarınıza ve favorilerinize göre.",
   "text_info_blocked": "{username} engellendi.",
   "text_info_calendar_feed_copied": "iCal bağlantısı kopyalandı. Abone olmak için takvim uygulamanıza yapıştırın.",
   "text_info_cover_removed": "Kapak resmi temizlendi.",

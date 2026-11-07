@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "ID sincronizzazione {id}",
   "text_history_sync_filter_with_source": "ID sincronizzazione {id} ({source})",
   "text_hype_basis": "Non ancora uscito. In base ai film di questa serie che hai guardato e valutato.",
+  "text_hype_basis_taste": "Non ancora uscito. In base a ciò che hai guardato, valutato e aggiunto ai preferiti.",
   "text_info_blocked": "{username} è stato bloccato.",
   "text_info_calendar_feed_copied": "Link iCal copiato. Incollalo nella tua app calendario per iscriverti.",
   "text_info_cover_removed": "L'immagine di copertina è stata rimossa.",

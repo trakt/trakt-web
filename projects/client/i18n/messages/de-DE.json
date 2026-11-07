@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "Synchronisierungs-ID {id}",
   "text_history_sync_filter_with_source": "Synchronisierungs-ID {id} ({source})",
   "text_hype_basis": "Noch nicht erschienen. Basierend auf den Filmen dieser Reihe, die du gesehen und bewertet hast.",
+  "text_hype_basis_taste": "Noch nicht erschienen. Basierend auf dem, was du gesehen, bewertet und favorisiert hast.",
   "text_info_blocked": "{username} wurde blockiert.",
   "text_info_calendar_feed_copied": "iCal-Link kopiert. Füge ihn in deine Kalender-App ein, um zu abonnieren.",
   "text_info_cover_removed": "Titelbild wurde gelöscht.",

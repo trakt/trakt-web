@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "同步 ID {id}",
   "text_history_sync_filter_with_source": "同步 ID {id} ({source})",
   "text_hype_basis": "尚未上映。基于你看过并评分的该系列电影。",
+  "text_hype_basis_taste": "尚未发布。基于你看过、评分和收藏的内容。",
   "text_info_blocked": "{username} 已被屏蔽。",
   "text_info_calendar_feed_copied": "iCal 链接已复制。粘贴到您的日历应用即可订阅。",
   "text_info_cover_removed": "封面图片已清除。",

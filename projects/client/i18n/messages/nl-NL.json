@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "Synchronisatie-ID {id}",
   "text_history_sync_filter_with_source": "Sync ID {id} ({source})",
   "text_hype_basis": "Nog niet uit. Op basis van de films in deze serie die je hebt bekeken en beoordeeld.",
+  "text_hype_basis_taste": "Nog niet uit. Op basis van wat je hebt bekeken, beoordeeld en aan favorieten toegevoegd.",
   "text_info_blocked": "{username} is geblokkeerd.",
   "text_info_calendar_feed_copied": "iCal-link gekopieerd. Plak het in je kalenderapp om je te abonneren.",
   "text_info_cover_removed": "Omslagafbeelding is gewist.",

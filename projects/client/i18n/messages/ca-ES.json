@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "ID de sincronització {id}",
   "text_history_sync_filter_with_source": "ID de sincronització {id} ({source})",
   "text_hype_basis": "Encara no s'ha estrenat. A partir de les pel·lícules d'aquesta saga que has vist i valorat.",
+  "text_hype_basis_taste": "Encara no ha sortit. A partir del que has vist, valorat i afegit a preferits.",
   "text_info_blocked": "{username} ha estat bloquejat.",
   "text_info_calendar_feed_copied": "Enllaç iCal copiat. Enganxa'l a la teva aplicació de calendari per subscriure't.",
   "text_info_cover_removed": "La imatge de portada s'ha esborrat.",

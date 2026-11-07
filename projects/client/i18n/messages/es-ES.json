@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "ID de sincronización {id}",
   "text_history_sync_filter_with_source": "ID de sincronización {id} ({source})",
   "text_hype_basis": "Aún no se ha estrenado. A partir de las películas de esta saga que has visto y calificado.",
+  "text_hype_basis_taste": "Aún no se ha estrenado. A partir de lo que has visto, calificado y añadido a favoritos.",
   "text_info_blocked": "{username} ha sido bloqueado.",
   "text_info_calendar_feed_copied": "Enlace iCal copiado. Pégalo en tu aplicación de calendario para suscribirte.",
   "text_info_cover_removed": "La imagen de portada ha sido eliminada.",

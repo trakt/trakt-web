@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "ID на синхронизация {id}",
   "text_history_sync_filter_with_source": "ID на синхронизация {id} ({source})",
   "text_hype_basis": "Все още не е излязъл. Въз основа на филмите от тази поредица, които сте гледали и оценили.",
+  "text_hype_basis_taste": "Все още не е излязло. Въз основа на това, което сте гледали, оценили и добавили в любими.",
   "text_info_blocked": "{username} е блокиран.",
   "text_info_calendar_feed_copied": "iCal връзката е копирана. Поставете я във вашето приложение за календар, за да се абонирате.",
   "text_info_cover_removed": "Заглавното изображение е изчистено.",

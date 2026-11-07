@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "Synkroniserings-ID {id}",
   "text_history_sync_filter_with_source": "Synkroniserings-ID {id} ({source})",
   "text_hype_basis": "Ikke udgivet endnu. Baseret på filmene i denne serie, som du har set og bedømt.",
+  "text_hype_basis_taste": "Ikke udkommet endnu. Baseret på hvad du har set, bedømt og føjet til favoritter.",
   "text_info_blocked": "{username} er blevet blokeret.",
   "text_info_calendar_feed_copied": "iCal-link kopieret. Indsæt det i din kalenderapp for at abonnere.",
   "text_info_cover_removed": "Forsidebilledet er fjernet.",

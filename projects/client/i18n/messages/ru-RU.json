@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "Идентификатор синхронизации {id}",
   "text_history_sync_filter_with_source": "Идентификатор синхронизации {id} ({source})",
   "text_hype_basis": "Еще не вышло. На основе просмотренных и оцененных вами фильмов этой серии.",
+  "text_hype_basis_taste": "Ещё не вышло. На основе того, что вы смотрели, оценивали и добавляли в избранное.",
   "text_info_blocked": "{username} заблокирован.",
   "text_info_calendar_feed_copied": "Ссылка iCal скопирована. Вставьте ее в приложение календаря, чтобы подписаться.",
   "text_info_cover_removed": "Обложка удалена.",

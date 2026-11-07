@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "معرف المزامنة {id}",
   "text_history_sync_filter_with_source": "معرف المزامنة {id} ({source})",
   "text_hype_basis": "لم يصدر بعد. استناداً إلى الأفلام التي شاهدتها وقيّمتها في هذه السلسلة.",
+  "text_hype_basis_taste": "لم يصدر بعد. استناداً إلى ما شاهدته وقيّمته وفضّلته.",
   "text_info_blocked": "تم حظر {username}.",
   "text_info_calendar_feed_copied": "تم نسخ رابط iCal. الصقه في تطبيق التقويم الخاص بك للاشتراك.",
   "text_info_cover_removed": "تم مسح صورة الغلاف.",

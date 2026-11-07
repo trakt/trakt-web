@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "ID Sinkronisasi {id}",
   "text_history_sync_filter_with_source": "ID Sinkronisasi {id} ({source})",
   "text_hype_basis": "Belum dirilis. Berdasarkan film dalam seri ini yang Anda tonton dan nilai.",
+  "text_hype_basis_taste": "Belum dirilis. Berdasarkan apa yang Anda tonton, nilai, dan favoritkan.",
   "text_info_blocked": "{username} telah diblokir.",
   "text_info_calendar_feed_copied": "Tautan iCal disalin. Tempelkan ke aplikasi kalender Anda untuk berlangganan.",
   "text_info_cover_removed": "Gambar sampul telah dihapus.",

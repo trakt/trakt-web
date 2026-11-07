@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "Synkroniserings-ID {id}",
   "text_history_sync_filter_with_source": "Synkroniserings-ID {id} ({source})",
   "text_hype_basis": "Inte släppt än. Baserat på filmerna i den här serien som du har sett och betygsatt.",
+  "text_hype_basis_taste": "Inte släppt än. Baserat på vad du sett, betygsatt och favoritmarkerat.",
   "text_info_blocked": "{username} har blockerats.",
   "text_info_calendar_feed_copied": "iCal-länk kopierad. Klistra in den i din kalenderapp för att prenumerera.",
   "text_info_cover_removed": "Omslagsbilden har rensats.",

@@ -1972,6 +1972,7 @@
   "text_history_sync_filter": "同期ID {id}",
   "text_history_sync_filter_with_source": "同期ID {id} ({source})",
   "text_hype_basis": "未公開です。あなたが視聴・評価したこのシリーズの映画に基づいています。",
+  "text_hype_basis_taste": "まだリリースされていません。視聴、評価、お気に入り登録した作品に基づいています。",
   "text_info_blocked": "{username}をブロックしました。",
   "text_info_calendar_feed_copied": "iCalリンクがコピーされました。購読するにはカレンダーアプリに貼り付けてください。",
   "text_info_cover_removed": "カバー画像がクリアされました。",
