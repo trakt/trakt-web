@@ -47,6 +47,7 @@ export const matchQuery = defineQuery({
   request: matchRequest,
   mapper: (response) => ({
     kind: response.body.kind ?? 'match',
+    basis: response.body.basis ?? 'series',
     score: response.body.match,
     taste: response.body.taste,
   }),

@@ -44,6 +44,7 @@ export function useMatch(target$: Observable<MatchTarget>) {
       ),
     ),
     kind: query.pipe(map((state) => state.data?.kind ?? 'match')),
+    basis: query.pipe(map((state) => state.data?.basis ?? 'series')),
     taste: combineLatest([query, isAuthorized]).pipe(
       map(([state, authorized]) =>
         authorized ? (state.data?.taste ?? []) : [],

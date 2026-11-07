@@ -15094,6 +15094,10 @@
       "default": "Not out yet. From the films in this series you watched and rated.",
       "description": "Explains what the user's hype tier for an unreleased movie is based on, shown under the tier in the match panel."
     },
+    "text_hype_basis_taste": {
+      "default": "Not out yet. From what you watched, rated and favorited.",
+      "description": "Explains that the user's hype tier for an unreleased title comes from their whole watch, rating and favorite history, shown under the tier in the match panel."
+    },
     "text_match_unreleased": {
       "default": "Unreleased",
       "description": "Small label above the hype tier in the match panel, saying the title is not out yet."

@@ -1,5 +1,6 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
+  import type { MatchBasis } from "$lib/requests/models/MatchBasis.ts";
   import type { MatchKind } from "$lib/requests/models/MatchKind.ts";
   import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
@@ -13,6 +14,7 @@
     hasDrawer,
     score,
     kind,
+    basis,
     isMatchLoading,
   }: {
     sentiment: SentimentAnalysis | Nil;
@@ -21,6 +23,7 @@
     hasDrawer: boolean;
     score: number | null;
     kind: MatchKind;
+    basis: MatchBasis;
     isMatchLoading: boolean;
   } = $props();
 </script>
@@ -38,6 +41,7 @@
       {hasDrawer}
       match={isMatchLoading ? undefined : score}
       {kind}
+      {basis}
     />
     {#if hasRing}
       <div class="trakt-sentiment-match">
