@@ -10527,21 +10527,29 @@
       "default": "How your taste overlaps",
       "description": "One-line subtitle shown under the tonal match label (e.g. 'Co-stars'). Explains in plain language what the score and label actually measure, so the cinematic vocabulary doesn't leave first-time visitors guessing."
     },
-    "match_drawer_breakdown_header": {
-      "default": "Details",
-      "description": "Section header inside the match drawer, above the per-signal bars that explain how the overall score is composed."
-    },
-    "match_drawer_breakdown_topics": {
-      "default": "Topics",
-      "description": "Label for the per-signal bar that shows what fraction of media topics (subgenres) the two users share."
-    },
     "match_drawer_breakdown_favorites": {
       "default": "Favorites",
       "description": "Label for the per-signal bar that shows what fraction of favorited movies and shows the two users share."
     },
-    "match_drawer_shared_topics_header": {
-      "default": "Shared topics",
-      "description": "Section header above the list of subgenre chips that both users have watched a lot of. 'Topics' is the user-facing label for the technical concept of subgenres."
+    "match_drawer_watched_together": {
+      "default": "Watched by you both",
+      "description": "Section header above the fanned posters in the match drawer. The posters show movies and shows both users have watched; the ones both users also favorited carry a heart badge."
+    },
+    "match_drawer_no_shared_topics": {
+      "default": "No topics in common yet",
+      "description": "Shown in the match drawer in place of the shared topics when the two users have no topics in common."
+    },
+    "match_drawer_nothing_watched_together": {
+      "default": "Nothing watched by you both yet",
+      "description": "Shown under empty poster outlines in the match drawer when the two users have not watched any of the same movies or shows."
+    },
+    "match_drawer_more_watched_together": {
+      "default": "+{count}",
+      "description": "Small chip next to the fanned posters in the match drawer. {count} is how many more movies and shows both users watched beyond the posters shown."
+    },
+    "match_drawer_more_watched_together_aria_label": {
+      "default": "{count} more watched by you both",
+      "description": "Screen reader label for the chip next to the fanned posters in the match drawer. {count} is how many more movies and shows both users watched beyond the posters shown."
     },
     "match_label_soulmates": {
       "default": "Soulmates",

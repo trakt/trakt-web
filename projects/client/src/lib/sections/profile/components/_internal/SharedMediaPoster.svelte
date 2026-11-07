@@ -1,79 +1,95 @@
 <script lang="ts">
+  import FavoriteIcon from "$lib/components/icons/FavoriteIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import { useQuery } from "$lib/features/query/useQuery";
-  import { movieSummaryQuery } from "$lib/requests/queries/movies/movieSummaryQuery";
-  import { showSummaryQuery } from "$lib/requests/queries/shows/showSummaryQuery";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { map } from "rxjs";
+  import type { SharedMediaPosterProps } from "./SharedMediaPosterProps.ts";
+  import { useSharedMedia } from "./useSharedMedia.ts";
 
-  const { id, type }: { id: number; type: "movie" | "show" } = $props();
+  const { id, type, isFavorite }: SharedMediaPosterProps = $props();
 
-  // Trakt's id-extractor accepts a numeric trakt id as the `slug` param, so we
-  // can hydrate by id without first looking up a slug.
-  const slugParam = $derived(id.toString());
-
-  const query = $derived(
-    type === "movie"
-      ? useQuery(movieSummaryQuery({ slug: slugParam }))
-      : useQuery(showSummaryQuery({ slug: slugParam })),
-  );
-
-  const media = $derived(query.pipe(map(($q) => $q.data)));
+  const media = useSharedMedia(fromRune(() => ({ id, type })));
 </script>
 
-<div class="trakt-shared-media-poster">
-  {#if $media}
-    <Link href={UrlBuilder.media(type, $media.slug)} color="inherit">
-      <img
-        src={$media.poster.url.medium}
-        alt={$media.title}
-        loading="lazy"
-        decoding="async"
-      />
-      <span class="title ellipsis bold small">{$media.title}</span>
-    </Link>
-  {:else}
-    <div class="placeholder"></div>
-  {/if}
-</div>
+{#if $media}
+    <div class="trakt-shared-media-poster">
+      <Link href={UrlBuilder.media(type, $media.slug)} color="inherit">
+        <img
+          src={$media.poster.url.medium}
+          alt={$media.title}
+          loading="lazy"
+          decoding="async"
+        />
+      </Link>
+      {#if isFavorite}
+        <span
+          class="badge"
+          role="img"
+          aria-label={m.match_drawer_breakdown_favorites()}
+        >
+          <FavoriteIcon size="small" />
+        </span>
+      {/if}
+    </div>
+{:else}
+  <Skeleton width="100%" height="100%" radius="0" />
+{/if}
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-shared-media-poster {
-    min-width: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
 
     :global(a) {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-xxs);
+      display: block;
+      width: 100%;
+      height: 100%;
       text-decoration: none;
     }
 
     img {
+      display: block;
       width: 100%;
-      aspect-ratio: 2 / 3;
-      border-radius: var(--border-radius-s, var(--ni-8));
+      height: 100%;
       object-fit: cover;
-      background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
-      transition: transform 200ms ease-out;
-    }
-
-    @include for-mouse {
-      :global(a:hover img) {
-        transform: translateY(-2px);
-      }
     }
   }
 
-  .title {
-    line-height: 1.2;
+  .badge {
+    position: absolute;
+    pointer-events: none;
+    inset-block-start: var(--ni-6);
+    inset-inline-end: var(--ni-6);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--ni-24);
+    height: var(--ni-24);
+    border-radius: 50%;
+
+    color: var(--shade-10);
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: match-heart-pop 420ms cubic-bezier(0.34, 1.8, 0.5, 1) 1350ms
+        backwards;
+    }
+    background: color-mix(in srgb, var(--shade-940) 82%, transparent);
+    box-shadow:
+      0 var(--ni-2) var(--ni-6)
+        color-mix(in srgb, var(--shade-1000) 40%, transparent),
+      inset 0 0 0 var(--ni-1)
+        color-mix(in srgb, var(--shade-10) 16%, transparent);
   }
 
-  .placeholder {
-    width: 100%;
-    aspect-ratio: 2 / 3;
-    border-radius: var(--border-radius-s, var(--ni-8));
-    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  @keyframes match-heart-pop {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
   }
 </style>
