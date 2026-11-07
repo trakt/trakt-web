@@ -14,6 +14,7 @@ import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import SentimentDrawer from './SentimentDrawer.svelte';
+import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 
 const { track } = vi.hoisted(() => ({ track: vi.fn() }));
 
@@ -25,7 +26,7 @@ vi.mock('$lib/features/analytics/useTrack.ts', () => ({
 
 const onClose = vi.fn();
 
-const TARGET = { type: 'movie', id: 1 } as const;
+const TARGET = { media: { ...MovieHereticMappedMock, id: 1 } };
 
 function serveMatch(
   match: number | null,
@@ -519,7 +520,7 @@ describe('SentimentDrawer', () => {
     expect(
       screen.queryByText('Better match for you than 91% of titles'),
     ).toBeNull();
-    expect(await screen.findByText('Why it fits you')).toBeVisible();
+    expect(await screen.findByText('Why it fits')).toBeVisible();
   });
 
   it('should show hype tiers without reasons for an unreleased movie', async () => {

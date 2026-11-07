@@ -15098,6 +15098,66 @@
       "default": "Not out yet. From what you watched, rated and favorited.",
       "description": "Explains that the user's hype tier for an unreleased title comes from their whole watch, rating and favorite history, shown under the tier in the match panel."
     },
+    "header_hype_why": {
+      "default": "Why the hype",
+      "description": "Heading above the cards that explain why an unreleased title got its hype tier, in the match panel."
+    },
+    "text_hype_series_rated": {
+      "default": "Earlier films you rated",
+      "description": "Card title next to the posters of earlier films in the same series that the user rated, each poster showing the user's rating."
+    },
+    "text_hype_series_above": {
+      "default": "Higher than you usually rate",
+      "description": "Under the earlier films card: the user rated the earlier films in this series higher than their usual ratings."
+    },
+    "text_hype_series_about": {
+      "default": "About your usual",
+      "description": "Under the earlier films card: the user rated the earlier films in this series about as high as they usually rate."
+    },
+    "text_hype_series_below": {
+      "default": "Lower than you usually rate",
+      "description": "Under the earlier films card: the user rated the earlier films in this series lower than their usual ratings."
+    },
+    "text_hype_lists_badge": {
+      "default": "Top {percent}%",
+      "description": "Short badge with the title's rank among upcoming titles on user lists, for example Top 3%. Keep it very short."
+    },
+    "text_hype_lists": {
+      "default": "One of the most listed upcoming titles",
+      "description": "Card title: many users added this unreleased title to their lists."
+    },
+    "text_hype_lists_detail": {
+      "default": "People keep adding it to their lists",
+      "description": "Line under the most listed card, explaining the signal in plain words."
+    },
+    "text_insights_taste": {
+      "default": "Fits your taste",
+      "description": "Card title in the match panel: the title matches genres and styles the user likes; the genres follow under it."
+    },
+    "header_match_why": {
+      "default": "Why it fits",
+      "description": "Heading above the cards that explain why a released title got its match tier, in the match panel."
+    },
+    "text_match_because_liked": {
+      "default": "Because you liked",
+      "description": "Card title next to posters of titles the user watched or rated that are similar to this one; their titles follow under it."
+    },
+    "text_match_rating_loved": {
+      "default": "Loved on Trakt",
+      "description": "Card title: Trakt users rate this title very highly (80% or more). The rating percent is shown next to it."
+    },
+    "text_match_rating_liked": {
+      "default": "Liked on Trakt",
+      "description": "Card title: Trakt users rate this title well (70% to 79%). The rating percent is shown next to it."
+    },
+    "text_match_rating_votes": {
+      "default": "From {count} ratings",
+      "description": "Line under the Trakt rating card with the number of user ratings, for example From 12,400 ratings. The count is already formatted."
+    },
+    "text_hype_out_on": {
+      "default": "Out {date}",
+      "description": "Release date of an unreleased title at the bottom of the hype cards, for example Out Dec 18, 2026."
+    },
     "text_match_unreleased": {
       "default": "Unreleased",
       "description": "Small label above the hype tier in the match panel, saying the title is not out yet."
