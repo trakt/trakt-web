@@ -43,6 +43,7 @@ export function useMatch(target$: Observable<MatchTarget>) {
         authorized ? (state.data?.score ?? null) : null,
       ),
     ),
+    kind: query.pipe(map((state) => state.data?.kind ?? 'match')),
     taste: combineLatest([query, isAuthorized]).pipe(
       map(([state, authorized]) =>
         authorized ? (state.data?.taste ?? []) : [],

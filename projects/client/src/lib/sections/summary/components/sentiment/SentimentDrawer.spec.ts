@@ -30,10 +30,22 @@ const TARGET = { type: 'movie', id: 1 } as const;
 function serveMatch(
   match: number | null,
   taste: MatchResponse['taste'] = MatchResponseMock.taste,
+  kind: 'match' | 'hype' = 'match',
 ) {
   server.use(
     http.get('http://localhost/movies/:id/match', () =>
-      HttpResponse.json({ match, taste }),
+      HttpResponse.json({ kind, match, taste }),
+    ),
+  );
+}
+
+function serveDirector() {
+  server.use(
+    http.get('http://localhost/users/settings', () =>
+      HttpResponse.json({
+        ...ExtendedUsersResponseMock,
+        user: { ...ExtendedUsersResponseMock.user, director: true },
+      }),
     ),
   );
 }
@@ -472,12 +484,63 @@ describe('SentimentDrawer', () => {
       await screen.findByText('Better match for you than 91% of titles'),
     ).toBeVisible();
     expect(
-      screen.getByText(
-        'From what you watched, rated and favorited. Nothing to rate.',
-      ),
+      screen.getByText('From what you watched, rated and favorited.'),
     ).toBeVisible();
     expect(await screen.findByText('Why it fits you')).toBeVisible();
     expect(requested).toHaveBeenCalled();
+  });
+
+  it('should show the tier ladder instead of a percentage for directors', async () => {
+    const user = userEvent.setup();
+    serveDirector();
+    serveMatch(91);
+    serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: RealityCheckPublicMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    await user.click(await screen.findByRole('tab', { name: 'Match' }));
+
+    const current = await waitFor(() => {
+      const step = document.querySelector(
+        '.trakt-match-tier-ladder [aria-current="true"]',
+      );
+      expect(step).not.toBeNull();
+      return step;
+    });
+    expect(current).toHaveTextContent('Top pick');
+    expect(
+      screen.queryByText('Better match for you than 91% of titles'),
+    ).toBeNull();
+    expect(await screen.findByText('Why it fits you')).toBeVisible();
+  });
+
+  it('should show hype tiers without reasons for an unreleased movie', async () => {
+    serveDirector();
+    serveMatch(75, [], 'hype');
+    const requested = serveReasons();
+
+    renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: null,
+        realityCheck: null,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    expect(await screen.findAllByText('Looking good')).not.toHaveLength(0);
+    expect(screen.getByText('Unreleased')).toBeVisible();
+    expect(screen.queryByText('Why it fits you')).toBeNull();
+    expect(requested).not.toHaveBeenCalled();
   });
 
   it('should show the shared subgenres as chips above the reasons', async () => {

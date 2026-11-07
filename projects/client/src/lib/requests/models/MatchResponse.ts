@@ -1,7 +1,9 @@
 import { z } from 'zod';
+import { MatchKindSchema } from './MatchKind.ts';
 import { MatchTasteSchema } from './MatchTaste.ts';
 
 export const MatchResponseSchema = z.object({
+  kind: MatchKindSchema.nullish(),
   match: z.number().int().min(0).max(100).nullable(),
   taste: z.array(MatchTasteSchema).default([]),
 });
