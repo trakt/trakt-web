@@ -58,6 +58,7 @@ export const UserSettingsSchema = z.object({
   }),
   genres: z.object({
     loved: genreOptionSchema.array(),
+    disliked: genreOptionSchema.array(),
   }),
   services: z.object({
     country: z.string().nullish(),
@@ -158,6 +159,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
     },
     genres: {
       loved: browsing?.genres?.favorites ?? [],
+      disliked: browsing?.genres?.disliked ?? [],
     },
     services: {
       country: browsing?.watchnow.country,

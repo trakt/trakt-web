@@ -16,9 +16,19 @@ type HandleSettingsProps = {
   action: string;
 };
 
+type SetGenresProps = {
+  loved: Genre[];
+  disliked: Genre[];
+  action: 'genres' | 'disliked_genres';
+};
+
 type UserSettingsRequest = SettingsRequest['user'] & {
   username?: string;
 };
+
+function toKnownGenres(genres: Genre[] | undefined): Genre[] {
+  return (genres ?? []).filter((genre) => GENRES.includes(genre));
+}
 
 function mapToDarkKnight(theme: Theme) {
   switch (theme) {
@@ -60,17 +70,17 @@ export function useSettings() {
     return true;
   };
 
-  const setLovedGenres = (genres: Genre[]) =>
+  const setGenres = ({ loved, disliked, action }: SetGenresProps) =>
     handleSettingsChange({
       request: () =>
         saveSettingsRequest({
           body: {
             browsing: {
-              genres: { favorites: genres },
+              genres: { favorites: loved, disliked },
             },
           },
         }),
-      action: 'genres',
+      action,
     });
 
   const setTheme = async (theme: Theme) => {
@@ -161,12 +171,11 @@ export function useSettings() {
     ),
     genres: user.pipe(
       map(($user) => ({
-        loved: ($user?.genres?.loved ?? []).filter((genre) =>
-          GENRES.includes(genre),
-        ),
+        loved: toKnownGenres($user?.genres?.loved),
+        disliked: toKnownGenres($user?.genres?.disliked),
       })),
     ),
-    setLovedGenres,
+    setGenres,
     theme: { set: setTheme },
     watchAgain: user.pipe(
       map(($user) => ({

@@ -1,50 +1,97 @@
 <script lang="ts">
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { Genre } from "@trakt/api";
   import { GENRE_LIMIT } from "./constants.ts";
   import GenreCard from "./GenreCard.svelte";
   import GenresDrawer from "./GenresDrawer.svelte";
   import SettingsGroupCard from "./SettingsGroupCard.svelte";
   import { useSettings } from "./useSettings.ts";
 
-  const { genres, isSavingSettings, setLovedGenres } = useSettings();
+  type GenreSlotsSection = {
+    title: string;
+    editLabel: string;
+    subtitle: string;
+    genres: Genre[];
+    onSave: (genres: Genre[]) => Promise<boolean>;
+  };
 
-  let isDrawerOpen = $state(false);
+  const { genres, isSavingSettings, setGenres } = useSettings();
+
+  let openDrawer = $state<"loved" | "disliked" | null>(null);
 
   const isSaving = $derived($isSavingSettings);
   const loved = $derived($genres?.loved ?? []);
+  const disliked = $derived($genres?.disliked ?? []);
+
+  const without = (genres: Genre[], removed: Genre[]) =>
+    genres.filter((genre) => !removed.includes(genre));
+
+  const sections = $derived({
+    loved: {
+      title: m.header_genres_loved(),
+      editLabel: m.button_label_edit_loved_genres(),
+      subtitle: m.label_genres_drawer_subtitle_loved(),
+      genres: loved,
+      onSave: (picked: Genre[]) =>
+        setGenres({
+          loved: picked,
+          disliked: without(disliked, picked),
+          action: "genres",
+        }),
+    },
+    disliked: {
+      title: m.header_genres_disliked(),
+      editLabel: m.button_label_edit_disliked_genres(),
+      subtitle: m.label_genres_drawer_subtitle_disliked(),
+      genres: disliked,
+      onSave: (picked: Genre[]) =>
+        setGenres({
+          loved: without(loved, picked),
+          disliked: picked,
+          action: "disliked_genres",
+        }),
+    },
+  } satisfies Record<"loved" | "disliked", GenreSlotsSection>);
 </script>
 
-<SettingsGroupCard title={m.header_genres_loved()}>
-  <button
-    class="trakt-genre-section"
-    type="button"
-    aria-label={m.button_label_edit_loved_genres()}
-    disabled={isSaving}
-    style="--genre-columns: {GENRE_LIMIT}"
-    onclick={() => (isDrawerOpen = true)}
-  >
-    <div class="slots-row">
-      {#each loved as genre (genre)}
-        <GenreCard {genre} />
-      {/each}
-      {#each { length: Math.max(0, GENRE_LIMIT - loved.length) } as _, i (i)}
-        <GenreCard />
-      {/each}
-    </div>
-    <span class="row-caret">
-      <CaretRightIcon />
-    </span>
-  </button>
-</SettingsGroupCard>
+{#snippet slots(kind: "loved" | "disliked")}
+  {@const section = sections[kind]}
+  <SettingsGroupCard title={section.title}>
+    <button
+      class="trakt-genre-section"
+      type="button"
+      aria-label={section.editLabel}
+      disabled={isSaving}
+      style="--genre-columns: {GENRE_LIMIT}"
+      onclick={() => (openDrawer = kind)}
+    >
+      <div class="slots-row">
+        {#each section.genres as genre (genre)}
+          <GenreCard {genre} />
+        {/each}
+        {#each { length: Math.max(0, GENRE_LIMIT - section.genres.length) } as _, i (i)}
+          <GenreCard />
+        {/each}
+      </div>
+      <span class="row-caret">
+        <CaretRightIcon />
+      </span>
+    </button>
+  </SettingsGroupCard>
+{/snippet}
 
-{#if isDrawerOpen}
+{@render slots("loved")}
+{@render slots("disliked")}
+
+{#if openDrawer}
+  {@const section = sections[openDrawer]}
   <GenresDrawer
-    title={m.header_genres_loved()}
-    subtitle={m.label_genres_drawer_subtitle_loved()}
-    current={loved}
-    onSave={setLovedGenres}
-    onClose={() => (isDrawerOpen = false)}
+    title={section.title}
+    subtitle={section.subtitle}
+    current={section.genres}
+    onSave={section.onSave}
+    onClose={() => (openDrawer = null)}
   />
 {/if}
 

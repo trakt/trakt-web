@@ -46,7 +46,7 @@ export const ExtendedUserMappedMock: UserSettings = {
     favorites: ['netflix', 'max'],
     showOnlyFavorites: true,
   },
-  genres: { loved: [] },
+  genres: { loved: [], disliked: [] },
   permissions: ['comment', 'like', 'follow'],
   limits: {
     lists: {
