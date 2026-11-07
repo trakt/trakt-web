@@ -10,12 +10,10 @@
   import InsightsStory from "./InsightsStory.svelte";
   import InsightsStorySkeleton from "./InsightsStorySkeleton.svelte";
   import StoryPoster from "./StoryPoster.svelte";
+  import { LIKED_ON_TRAKT } from "./constants/likedOnTrakt.ts";
   import { filter, map } from "rxjs";
 
   const MAX_POSTERS = 4;
-  const LIKED_FROM = 0.7;
-  const LOVED_FROM = 0.8;
-  const MIN_VOTES = 500;
 
   const {
     taste,
@@ -50,13 +48,13 @@
 
   const rating = $derived.by(() => {
     const { rating, votes } = media;
-    if (rating == null || votes < MIN_VOTES || rating < LIKED_FROM) {
+    if (rating == null || votes < LIKED_ON_TRAKT.minVotes || rating < LIKED_ON_TRAKT.from) {
       return null;
     }
     return {
       percent: toPercentage(rating, getLocale()),
       votes: votes.toLocaleString(getLocale()),
-      isLoved: rating >= LOVED_FROM,
+      isLoved: rating >= LIKED_ON_TRAKT.lovedFrom,
     };
   });
 

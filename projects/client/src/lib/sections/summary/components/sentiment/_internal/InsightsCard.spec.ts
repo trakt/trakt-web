@@ -297,8 +297,8 @@ describe('InsightsCard', () => {
 
     expect(await screen.findByText('Good fit')).toBeVisible();
     expect(
-      screen.getByText('From what you watched, rated and favorited.'),
-    ).toBeVisible();
+      screen.queryByText('From what you watched, rated and favorited.'),
+    ).toBeNull();
     expect(container).not.toHaveTextContent('80%');
     expect(
       screen.getByRole('link', { name: 'View your match' }),
