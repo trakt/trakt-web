@@ -14457,6 +14457,30 @@
       "default": "Ended series. No cliffhanger waiting.",
       "description": "One line pitch under the name of the official smart list template for well rated series that have finished airing. Keep it to one short sentence."
     },
+    "smart_list_template_still_running_name": {
+      "default": "Still Running",
+      "description": "Name of the official smart list template for well rated series that are still airing new seasons. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_still_running_pitch": {
+      "default": "Great shows still making new seasons.",
+      "description": "One line pitch under the name of the official smart list template for well rated series that are still airing new seasons. Keep it to one short sentence."
+    },
+    "smart_list_template_best_of_the_year_name": {
+      "default": "Best of the Year",
+      "description": "Name of the official smart list template for the best rated movies released in the last 12 months. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_best_of_the_year_pitch": {
+      "default": "The best rated movies from the last 12 months.",
+      "description": "One line pitch under the name of the official smart list template for the best rated movies released in the last 12 months. Keep it to one short sentence."
+    },
+    "smart_list_template_new_shows_worth_it_name": {
+      "default": "New Shows Worth It",
+      "description": "Name of the official smart list template for well rated series that premiered in the last 12 months. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
+    },
+    "smart_list_template_new_shows_worth_it_pitch": {
+      "default": "New series from the last 12 months that deliver.",
+      "description": "One line pitch under the name of the official smart list template for well rated series that premiered in the last 12 months. Keep it to one short sentence."
+    },
     "smart_list_template_short_and_sweet_name": {
       "default": "Short & Sweet",
       "description": "Name of the official smart list template for well rated movies shorter than 95 minutes. Shown on the template card and used as the default name of the new list. Keep it short; it is truncated on small screens."
