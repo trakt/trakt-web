@@ -84,11 +84,4 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     description: () => m.preview_feature_description_personalized_related(),
     audience: 'director',
   },
-  [FeatureFlag.InsightsCard]: {
-    icon: SparkleStarIcon,
-    title: () => m.preview_feature_title_insights_card(),
-    addedAt: new Date('2026-11-07'),
-    description: () => m.preview_feature_description_insights_card(),
-    audience: 'director',
-  },
 };

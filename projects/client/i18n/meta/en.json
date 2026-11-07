@@ -15062,14 +15062,6 @@
       "default": "Recent",
       "description": "Title for the lists the user added items to most recently, shown first in the drawer for adding an item to lists. This title should be as short and concise as possible."
     },
-    "preview_feature_title_insights_card": {
-      "default": "New insights card",
-      "description": "Product feature name for the preview feature that redesigns the insights card on movie and show pages, with the match shown as a ring around the user's avatar."
-    },
-    "preview_feature_description_insights_card": {
-      "default": "Shows your match as a ring around your avatar and keeps every part of the insights card in a fixed place.",
-      "description": "Description of the new insights card preview feature."
-    },
     "text_match_basis_history": {
       "default": "From what you watched, rated and favorited.",
       "description": "Explains what the user's match with a title is based on, under the match tier in the match panel."
