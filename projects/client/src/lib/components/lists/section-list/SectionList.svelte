@@ -305,6 +305,10 @@
 
       .section-list-empty-state {
         width: 100%;
+
+        &:not(:has(:global(.trakt-skeleton-list))) {
+          padding-inline: var(--inset-override-list-item, var(--ni-2));
+        }
       }
     }
   }
