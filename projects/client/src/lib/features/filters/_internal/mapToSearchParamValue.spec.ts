@@ -132,6 +132,26 @@ describe('mapToSearchParamValue', () => {
       expect(result).toBe('-action,-comedy,-drama');
     });
 
+    it('should skip an empty favorites list next to other values', () => {
+      const result = mapToSearchParamValue({
+        filter: listFilter,
+        value: 'favorites,action',
+        user: { ...mockUser, genres: { loved: [], disliked: [] } },
+      });
+
+      expect(result).toBe('action');
+    });
+
+    it('should not prefix an empty excluded favorites list', () => {
+      const result = mapToSearchParamValue({
+        filter: listFilter,
+        value: '-favorites,comedy',
+        user: { ...mockUser, genres: { loved: [], disliked: [] } },
+      });
+
+      expect(result).toBe('comedy');
+    });
+
     it('should throw error when value is undefined for list filter', () => {
       expect(() => {
         mapToSearchParamValue({

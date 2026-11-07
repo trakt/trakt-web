@@ -75,11 +75,12 @@ export function useFilter() {
 
         return getAppliedFilters($search).reduce(
           (filterMap, filter) => {
-            filterMap[filter.key] = mapToSearchParamValue({
+            const mapped = mapToSearchParamValue({
               filter,
               value: $search.get(filter.key),
               user: $user,
             });
+            if (mapped !== '') filterMap[filter.key] = mapped;
 
             getAdditionalKeys(filter).forEach(({ key }) => {
               const value = $search.get(key);

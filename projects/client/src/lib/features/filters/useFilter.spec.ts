@@ -75,3 +75,50 @@ describe('store: useFilter parental availability', () => {
     },
   );
 });
+
+async function setupMyFavorites(favorites: string[]) {
+  server.use(
+    http.get('http://localhost/users/settings', () =>
+      HttpResponse.json({
+        ...ExtendedUsersResponseMock,
+        browsing: {
+          ...ExtendedUsersResponseMock.browsing,
+          genres: { favorites, disliked: ['horror'] },
+        },
+      }),
+    ),
+  );
+  const stores = await renderStore(() => {
+    const parameters = useParameters();
+    parameters.update({ genres: 'favorites' });
+    return { ...useFilter(), ...useUser() };
+  });
+  await firstValueFrom(
+    stores.user.pipe(filter((user) => user.genres.disliked.length > 0)),
+  );
+  return stores;
+}
+
+describe('store: useFilter my favorites genres', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    setAuthorization(true);
+    useNavbarState().set({ hasFilters: true });
+  });
+
+  afterEach(() => useNavbarState().reset());
+
+  it('should send the liked genres', async () => {
+    const stores = await setupMyFavorites(['action', 'drama']);
+
+    expect(await firstValueFrom(stores.filterMap)).toEqual({
+      genres: 'action,drama',
+    });
+  });
+
+  it('should send no genres when nothing is liked', async () => {
+    const stores = await setupMyFavorites([]);
+
+    expect(await firstValueFrom(stores.filterMap)).toEqual({});
+  });
+});

@@ -22,7 +22,12 @@ export function mapToSearchParamValue({
       const v = isExcluded ? rawValue.slice(EXCLUSION_PREFIX.length) : rawValue;
 
       const option = filter.options.find((opt) => opt.value === v);
-      const mapped = option?.mapper ? option.mapper(user).split(',') : [v];
+      const mapped = option?.mapper
+        ? option
+            .mapper(user)
+            .split(',')
+            .filter((token) => token !== '')
+        : [v];
 
       return isExcluded
         ? mapped.map((token) => `${EXCLUSION_PREFIX}${token}`)
