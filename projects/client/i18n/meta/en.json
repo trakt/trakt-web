@@ -8803,23 +8803,23 @@
     },
     "label_rating_user": {
       "default": "Rated {rating} out of 5",
-      "description": "VoiceOver label for a person's rating of an item, e.g. \"Rated 3.5 out of 5\"."
+      "description": "Aria label for a person's rating of an item, e.g. \"Rated 3.5 out of 5\"."
     },
     "label_rating_average": {
       "default": "Average rating {rating} out of 5",
-      "description": "VoiceOver label for the average of several people's ratings of an item, e.g. friends' ratings."
+      "description": "Aria label for the average of several people's ratings of an item, e.g. friends' ratings."
     },
     "label_rating_community": {
       "default": "{percent} Trakt rating",
-      "description": "VoiceOver label for an item's community rating, e.g. \"78% Trakt rating\". {percent} is an already-formatted percentage (e.g. \"78%\"), formatted by the caller via a locale-aware percent formatter rather than this template, so the % sign's locale-specific spacing (e.g. German's \"78 %\") is correct."
+      "description": "Aria label for an item's community rating, e.g. \"78% Trakt rating\". {percent} is an already-formatted percentage (e.g. \"78%\"), formatted by the caller via a locale-aware percent formatter rather than this template, so the % sign's locale-specific spacing (e.g. German's \"78 %\") is correct."
     },
     "label_rating_hidden": {
       "default": "Rating hidden to avoid spoilers",
-      "description": "VoiceOver label for a community rating blurred by the user's spoiler settings."
+      "description": "Aria label for a community rating blurred by the user's spoiler settings."
     },
     "label_rating_hidden_hint": {
       "default": "Reveals the rating",
-      "description": "VoiceOver hint for a spoiler-hidden rating, describing what activating it does. Describes the result, not the gesture, because the control can be activated in other ways."
+      "description": "Aria-label hint for a spoiler-hidden rating, describing what activating it does. Describes the result, not the gesture, because the control can be activated in other ways."
     },
     "error_text_rating_save_failed": {
       "default": "Something went wrong saving your rating. Please try again.",
@@ -10929,6 +10929,30 @@
     "error_text_sync_load_failed": {
       "default": "We couldn't load this right now. Please try again.",
       "description": "Inline error message shown when a streaming sync detail or its items fail to load."
+    },
+    "error_text_offline": {
+      "default": "You're offline. Check your connection and try again.",
+      "description": "Inline error message shown in place of a section's content when the device can't reach Trakt."
+    },
+    "label_watcher_count": {
+      "default": "{count} watching",
+      "description": "Aria label for a card's count of people watching a title right now, e.g. '12.4K watching'. {count} is an already formatted, shortened number."
+    },
+    "label_episode_count_one": {
+      "default": "1 episode",
+      "description": "Aria label for a card's count of a show's aired episodes when the show has one episode, read instead of the short tag ('1 eps.')."
+    },
+    "label_episode_count": {
+      "default": "{count} episodes",
+      "description": "Aria label for a card's count of a show's aired episodes, read instead of the short tag ('62 eps.'). {count} is a number other than 1."
+    },
+    "label_anticipated_count_one": {
+      "default": "On 1 list",
+      "description": "Aria label for a card's count of people's lists an upcoming title is on, when it is on one list."
+    },
+    "label_anticipated_count": {
+      "default": "On {count} lists",
+      "description": "Aria label for a card's count of people's lists an upcoming title is on, e.g. 'On 12.4K lists'. {count} is an already formatted, shortened number other than 1."
     },
     "error_text_parental_guide_load_failed": {
       "default": "Loading Error",
