@@ -2811,6 +2811,19 @@
         }
       }
     },
+    "image_alt_hype_unknown": {
+      "default": "No hype score for you yet",
+      "description": "Accessible label of the empty hype ring shown for an unreleased movie when there is not enough data to score it for the viewer."
+    },
+    "image_alt_hype_score": {
+      "default": "{percent}% hype for you",
+      "description": "Accessible label of the ring that shows how much the viewer is likely to look forward to an unreleased movie.",
+      "variables": {
+        "percent": {
+          "type": "number"
+        }
+      }
+    },
     "header_reality_check": {
       "default": "Reality Check",
       "description": "Name of the feature that rates how true a movie or show based on real events is. Used as a tab label and a section label."
@@ -4765,6 +4778,19 @@
     "button_text_no_services": {
       "default": "No services",
       "description": "Text for the button that indicates there are no streaming services available for a movie or show."
+    },
+    "text_where_to_watch_not_streaming_yet": {
+      "default": "Not streaming yet",
+      "description": "Headline shown in the Where to Watch section of a movie or show that has not been released yet, in place of the streaming services."
+    },
+    "text_where_to_watch_release_date": {
+      "default": "Releases {date}",
+      "description": "Line under the not streaming yet headline in the Where to Watch section, with the date a movie or show is expected to release. {date} is a localized date.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
     },
     "header_get_trakt_app": {
       "default": "Get the trakt app",
@@ -15035,6 +15061,50 @@
     "list_title_recent_lists": {
       "default": "Recent",
       "description": "Title for the lists the user added items to most recently, shown first in the drawer for adding an item to lists. This title should be as short and concise as possible."
+    },
+    "preview_feature_title_insights_card": {
+      "default": "New insights card",
+      "description": "Product feature name for the preview feature that redesigns the insights card on movie and show pages, with the match shown as a ring around the user's avatar."
+    },
+    "preview_feature_description_insights_card": {
+      "default": "Shows your match as a ring around your avatar and keeps every part of the insights card in a fixed place.",
+      "description": "Description of the new insights card preview feature."
+    },
+    "text_match_basis_history": {
+      "default": "From what you watched, rated and favorited.",
+      "description": "Explains what the user's match with a title is based on, under the match tier in the match panel."
+    },
+    "match_tier_top_pick": {
+      "default": "Top pick",
+      "description": "Highest match tier for a title: it fits the user's taste very well. Keep it short."
+    },
+    "match_tier_good_fit": {
+      "default": "Good fit",
+      "description": "Second match tier for a title: it fits the user's taste well. Keep it short."
+    },
+    "match_tier_maybe": {
+      "default": "Maybe",
+      "description": "Third match tier for a title: the user may or may not like it. Keep it short."
+    },
+    "match_tier_not_your_usual": {
+      "default": "Not your usual",
+      "description": "Lowest match tier for a title: it is outside what the user usually watches, but not a reason to skip it. Keep it short."
+    },
+    "hype_tier_cant_wait": {
+      "default": "Can't wait",
+      "description": "Highest tier for an unreleased title the user is predicted to be very excited about, based on the series they watched. Keep it short."
+    },
+    "hype_tier_looking_good": {
+      "default": "Looking good",
+      "description": "Second tier for an unreleased title the user is predicted to look forward to, based on the series they watched. Keep it short."
+    },
+    "text_hype_basis": {
+      "default": "Not out yet. From the films in this series you watched and rated.",
+      "description": "Explains what the user's hype tier for an unreleased movie is based on, shown under the tier in the match panel."
+    },
+    "text_match_unreleased": {
+      "default": "Unreleased",
+      "description": "Small label above the hype tier in the match panel, saying the title is not out yet."
     }
   }
 }

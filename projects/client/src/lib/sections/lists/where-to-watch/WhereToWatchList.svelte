@@ -20,6 +20,8 @@
   import { whereToWatchListScope } from "./_internal/whereToWatchListScope.ts";
   import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
   import WhereToWatchSkeletonItems from "./_internal/WhereToWatchSkeletonItems.svelte";
+  import WhereToWatchUnreleased from "./_internal/WhereToWatchUnreleased.svelte";
+  import { useInsightsCard } from "$lib/sections/summary/components/sentiment/useInsightsCard.ts";
 
   const {
     streamOn,
@@ -77,23 +79,28 @@
         return hasAired(target.episode);
     }
   });
+
+  const { isInsightsCard } = useInsightsCard();
+  const isShown = $derived(
+    isAired || ($isInsightsCard && target.type !== "episode"),
+  );
 </script>
 
 {#snippet metaInfo()}
   <JustWatchInfo {...target} rank={streamOn?.services?.streamingRank} />
 {/snippet}
 
-{#if isAired}
+{#if isShown}
   <div transition:slide={{ duration: 150 }} class="trakt-where-to-watch-list">
     <SectionList
       id={{
         scope: whereToWatchListScope(target.type),
         key: target.media.slug,
       }}
-      items={services}
+      items={isAired ? services : []}
       title={m.list_title_where_to_watch()}
-      {drilldown}
-      {metaInfo}
+      drilldown={isAired ? drilldown : undefined}
+      metaInfo={isAired ? metaInfo : undefined}
       {variant}
       --height-list="var(--height-where-to-watch-list)"
     >
@@ -104,6 +111,8 @@
       {#snippet empty()}
         {#if isLoading}
           <WhereToWatchSkeletonItems />
+        {:else if !isAired}
+          <WhereToWatchUnreleased releaseDate={target.media.airDate} />
         {:else}
           <p class="secondary">{m.button_text_no_services()}</p>
         {/if}

@@ -6,7 +6,9 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
+  import InsightsCard from "./_internal/InsightsCard.svelte";
   import SentimentCard from "./_internal/SentimentCard.svelte";
+  import { useInsightsCard } from "./useInsightsCard.ts";
   import { useMatch } from "./useMatch.ts";
 
   type SentimentProps = {
@@ -22,6 +24,7 @@
     $props();
 
   const { match, isAvailable } = useMatch(fromRune(() => ({ type, id })));
+  const { isInsightsCard } = useInsightsCard();
 </script>
 
 {#if sentiment !== null || realityCheck !== null || $match !== null || $isAvailable}
@@ -36,7 +39,11 @@
     --height-list="var(--height-sentiment-list)"
   >
     {#snippet item()}
-      <SentimentCard {sentiment} {realityCheck} {type} {id} />
+      {#if $isInsightsCard}
+        <InsightsCard {sentiment} {realityCheck} {type} {id} />
+      {:else}
+        <SentimentCard {sentiment} {realityCheck} {type} {id} />
+      {/if}
     {/snippet}
   </SectionList>
 {/if}
