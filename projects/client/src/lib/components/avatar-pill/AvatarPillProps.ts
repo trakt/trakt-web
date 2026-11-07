@@ -6,11 +6,13 @@ type AvatarPillBaseProps = {
   countLabel: string | null;
   label: string;
   caption?: string;
-  ariaLabel: string;
   badge?: Snippet;
+  indicator?: Snippet;
+  color?: 'default' | 'red';
 };
 
 type AvatarPillLinkProps = AvatarPillBaseProps & {
+  ariaLabel: string;
   href: string;
   onclick?: undefined;
   noscroll?: boolean;
@@ -20,10 +22,22 @@ type AvatarPillLinkProps = AvatarPillBaseProps & {
 type AvatarPillButtonProps = AvatarPillBaseProps & {
   // When provided, the pill renders as a button instead of a link (used by the
   // episode drawer, which can't route without replacing itself).
+  ariaLabel: string;
   onclick: () => void;
   href?: undefined;
   noscroll?: undefined;
   replacestate?: undefined;
 };
 
-export type AvatarPillProps = AvatarPillLinkProps | AvatarPillButtonProps;
+type AvatarPillStaticProps = AvatarPillBaseProps & {
+  ariaLabel?: undefined;
+  href?: undefined;
+  onclick?: undefined;
+  noscroll?: undefined;
+  replacestate?: undefined;
+};
+
+export type AvatarPillProps =
+  | AvatarPillLinkProps
+  | AvatarPillButtonProps
+  | AvatarPillStaticProps;

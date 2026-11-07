@@ -13,6 +13,8 @@
     caption,
     ariaLabel,
     badge,
+    indicator,
+    color = "default",
     href,
     onclick,
     noscroll,
@@ -21,12 +23,15 @@
 
   const hasAvatars = $derived(avatars.length > 0);
   const hasCaption = $derived(caption != null);
+  const isStatic = $derived(onclick == null && href == null);
 </script>
 
 {#snippet pill()}
   <span
     class="trakt-avatar-pill"
+    data-color={color}
     class:has-avatars={hasAvatars}
+    class:is-static={isStatic}
     style:--pill-avatar-count={avatars.length}
     style:--pill-mobile-avatar-limit={MOBILE_AVATAR_LIMIT}
   >
@@ -52,15 +57,16 @@
       class:is-text-only={countLabel == null}
       class:has-caption={hasCaption}
     >
+      {#if indicator}
+        <span class="pill-indicator" aria-hidden="true">
+          {@render indicator()}
+        </span>
+      {/if}
       {#if countLabel != null}
         <span class="pill-count bold">{countLabel}</span>
       {/if}
       <span class="pill-lines">
-        <span
-          class="pill-text"
-          class:tag={hasCaption}
-          class:bold={hasCaption}
-        >
+        <span class="pill-text" class:tag={hasCaption} class:bold={hasCaption}>
           {label}
         </span>
         {#if hasCaption}
@@ -69,13 +75,17 @@
       </span>
     </span>
 
-    <span class="pill-caret" aria-hidden="true">
-      <CaretRightIcon />
-    </span>
+    {#if !isStatic}
+      <span class="pill-caret" aria-hidden="true">
+        <CaretRightIcon />
+      </span>
+    {/if}
   </span>
 {/snippet}
 
-{#if onclick != null}
+{#if isStatic}
+  {@render pill()}
+{:else if onclick != null}
   <button
     type="button"
     class="trakt-avatar-pill-button"
@@ -143,6 +153,37 @@
     &.has-avatars {
       padding-inline-start: var(--ni-3);
     }
+
+    &.is-static {
+      cursor: default;
+
+      &:active {
+        transform: none;
+      }
+    }
+
+    &[data-color="red"] {
+      background: color-mix(
+        in srgb,
+        var(--color-background-red) 18%,
+        transparent
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--color-background-red) 45%,
+        transparent
+      );
+
+      @include for-mouse {
+        &:not(.is-static):hover {
+          background: color-mix(
+            in srgb,
+            var(--color-background-red) 28%,
+            transparent
+          );
+        }
+      }
+    }
   }
 
   .pill-avatars {
@@ -206,8 +247,7 @@
 
     .pill-stack {
       mask: radial-gradient(
-        circle at
-          calc(50% + var(--rtl-sign) * (50% - var(--pill-badge-center)))
+        circle at calc(50% + var(--rtl-sign) * (50% - var(--pill-badge-center)))
           calc(100% - var(--pill-badge-center)),
         transparent var(--pill-badge-cutout),
         black calc(var(--pill-badge-cutout) + var(--ni-1) / 2)
@@ -274,6 +314,17 @@
   .pill-caption {
     opacity: 0.6;
     line-height: 1.2;
+  }
+
+  .pill-indicator {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    padding-inline-end: var(--ni-2);
+  }
+
+  .trakt-avatar-pill:not(.has-avatars) .pill-indicator {
+    padding-inline-start: var(--ni-4);
   }
 
   .pill-count {
