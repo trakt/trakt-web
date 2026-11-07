@@ -24,6 +24,21 @@ const COPY: Record<SmartListTemplateId, SmartListTemplateCopy> = {
     pitch: m.smart_list_template_finished_stories_pitch,
     showcase: 'statuses',
   },
+  'still-running': {
+    name: m.smart_list_template_still_running_name,
+    pitch: m.smart_list_template_still_running_pitch,
+    showcase: 'statuses',
+  },
+  'best-of-the-year': {
+    name: m.smart_list_template_best_of_the_year_name,
+    pitch: m.smart_list_template_best_of_the_year_pitch,
+    showcase: 'released_within_days',
+  },
+  'new-shows-worth-it': {
+    name: m.smart_list_template_new_shows_worth_it_name,
+    pitch: m.smart_list_template_new_shows_worth_it_pitch,
+    showcase: 'released_within_days',
+  },
   'short-and-sweet': {
     name: m.smart_list_template_short_and_sweet_name,
     pitch: m.smart_list_template_short_and_sweet_pitch,
