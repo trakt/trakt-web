@@ -37,7 +37,7 @@
 
     padding: var(--top-bottom-padding) var(--layout-distance-side);
 
-    transition: padding var(--transition-increment) ease-in-out;
+    transition: padding-block var(--transition-increment) ease-in-out;
 
     @include for-tablet-sm-and-below {
       --top-bottom-padding: var(--ni-24);

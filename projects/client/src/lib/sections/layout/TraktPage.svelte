@@ -291,7 +291,7 @@
     --content-gap: var(--gap-m);
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: gap, margin, padding;
+    transition-property: gap, margin;
 
     display: flex;
     flex-direction: column;
@@ -302,7 +302,7 @@
     --list-bleed-start: var(--ni-0);
 
     @supports selector(::-webkit-scrollbar) {
-      --list-bleed-start: var(--layout-sidebar-distance);
+      --list-bleed-start: var(--layout-sidebar-clearance);
     }
 
     --content-offset-top: calc(var(--gap-m) + env(safe-area-inset-top));

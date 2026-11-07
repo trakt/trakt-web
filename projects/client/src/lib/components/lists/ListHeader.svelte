@@ -70,7 +70,6 @@
     margin: 0;
     margin-inline-start: var(--layout-distance-side);
     margin-inline-end: var(--layout-distance-side);
-    transition: margin-inline-start calc(var(--transition-increment) * 2) ease-in-out;
 
     @include for-tablet-sm-and-below {
       margin-inline-start: calc(var(--layout-distance-side));

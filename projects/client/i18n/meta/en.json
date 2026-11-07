@@ -14787,6 +14787,14 @@
       "default": "Sorts the related titles on movie and show pages toward what you like. Switch between For you and Standard above the list.",
       "description": "Description of the personalized related titles preview feature. For you and Standard are the toggle option names."
     },
+    "preview_feature_title_center_stage_frame": {
+      "default": "Centred page frame",
+      "description": "Product feature name for the preview feature that centres every page inside a fixed-width frame on wide screens."
+    },
+    "preview_feature_description_center_stage_frame": {
+      "default": "Keeps every page inside a centred frame on wide screens. The side gutters grow with the window while cards keep their size, and lists fade out at the frame edge.",
+      "description": "Description of the centred page frame preview feature."
+    },
     "preview_feature_title_season_recap": {
       "default": "Season recap",
       "description": "Product feature name for the preview feature that adds a recap of a season to the show page."

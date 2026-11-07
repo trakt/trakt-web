@@ -295,6 +295,11 @@
       --list-mask-offset: 0;
       --list-bleed-start: var(--ni-0);
 
+      .section-list-horizontal-scroll {
+        --list-bleed-origin: var(--ni-0);
+        --list-frame-end: var(--ni-0);
+      }
+
       :global(.trakt-list-inset-title) {
         margin: 0;
       }
@@ -440,22 +445,26 @@
 
   .section-list-horizontal-scroll {
     --list-fade-dir: to right;
+    --list-bleed-origin: var(--ni-0);
     --list-bleed-fade: var(--ni-0);
     --list-end-fade: var(--ni-0);
+    --list-frame-end: var(--ni-0);
+    --list-end-clip: max(var(--list-end-fade), var(--list-frame-end));
 
     mask-image:
       linear-gradient(
         var(--list-fade-dir),
-        rgb(0 0 0 / var(--list-bleed-alpha)) 0,
+        transparent var(--list-bleed-origin),
+        rgb(0 0 0 / var(--list-bleed-alpha)) var(--list-bleed-origin),
         rgb(0 0 0 / calc(var(--list-bleed-alpha) + (1 - var(--list-bleed-alpha)) * 0.156))
-          calc(var(--list-bleed-fade) * 0.25),
+          calc(var(--list-bleed-origin) + var(--list-bleed-fade) * 0.25),
         rgb(0 0 0 / calc(var(--list-bleed-alpha) + (1 - var(--list-bleed-alpha)) * 0.5))
-          calc(var(--list-bleed-fade) * 0.5),
+          calc(var(--list-bleed-origin) + var(--list-bleed-fade) * 0.5),
         rgb(0 0 0 / calc(var(--list-bleed-alpha) + (1 - var(--list-bleed-alpha)) * 0.844))
-          calc(var(--list-bleed-fade) * 0.75),
-        black var(--list-bleed-fade),
-        black calc(100% - var(--list-end-fade)),
-        transparent calc(100% - var(--list-end-fade))
+          calc(var(--list-bleed-origin) + var(--list-bleed-fade) * 0.75),
+        black calc(var(--list-bleed-origin) + var(--list-bleed-fade)),
+        black calc(100% - var(--list-end-clip)),
+        transparent calc(100% - var(--list-end-clip))
       ),
       linear-gradient(black, black);
     mask-size:
@@ -476,13 +485,27 @@
   }
 
   :global(.trakt-content) .section-list-horizontal-scroll {
+    /*
+      The list may run under the side navbar while the frame still touches it;
+      once the frame floats free the bleed zone moves out to the frame edge and
+      anything past it is masked instead.
+    */
+    --list-bleed-shift: min(
+      var(--list-bleed-start),
+      var(--layout-sidebar-distance)
+    );
     --list-bleed-fade: calc(
       var(--list-bleed-start) + min(var(--list-bleed-start), var(--ni-64))
     );
+    --list-bleed-origin: max(
+      var(--ni-0),
+      calc(var(--layout-frame-margin) - var(--list-bleed-start))
+    );
+    --list-frame-end: var(--layout-frame-margin);
 
-    margin-inline-start: calc(-1 * var(--list-bleed-start));
+    margin-inline-start: calc(-1 * var(--list-bleed-shift));
     padding-inline-start: calc(
-      var(--layout-distance-side) + var(--list-bleed-start)
+      var(--layout-distance-side) + var(--list-bleed-shift)
     );
 
     @supports (animation-timeline: scroll()) {
@@ -492,12 +515,12 @@
     }
 
     &::-webkit-scrollbar-track {
-      margin-left: var(--list-bleed-start);
+      margin-left: var(--list-bleed-shift);
     }
 
     &:dir(rtl)::-webkit-scrollbar-track {
       margin-left: 0;
-      margin-right: var(--list-bleed-start);
+      margin-right: var(--list-bleed-shift);
     }
   }
 

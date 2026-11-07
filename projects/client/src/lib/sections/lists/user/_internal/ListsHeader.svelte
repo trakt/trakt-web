@@ -46,7 +46,6 @@
     user-select: none;
 
     margin: 0 var(--layout-distance-side);
-    transition: margin calc(var(--transition-increment) * 2) ease-in-out;
 
     :global(.trakt-action-button) {
       --button-size: var(--ni-32);
