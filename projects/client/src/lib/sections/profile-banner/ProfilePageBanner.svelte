@@ -5,7 +5,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import type { VipVeteranPromotion } from "$lib/features/vip-veteran/VipVeteranPromotion.ts";
   import { useVipVeteran } from "$lib/features/vip-veteran/stores/useVipVeteran.ts";
-  import MemberBadge from "$lib/features/vip-veteran/MemberBadge.svelte";
+  import UserTierBadge from "$lib/features/vip-veteran/UserTierBadge.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import LeaderboardPill from "$lib/sections/profile/leaderboard/LeaderboardPill.svelte";
   import VipStreakBadge from "$lib/sections/profile/vip-streak/VipStreakBadge.svelte";
@@ -53,10 +53,10 @@
     <ProfileImage
       isEditable={$isMe}
       --image-size="var(--ni-64)"
-      --border-width="var(--border-thickness-s)"
       name={profile.name.first}
       src={profile.avatar.url}
       {member}
+      ringMotion="live"
       hasEntrance={shownVeteran != null}
     >
       {#snippet badge()}
@@ -75,7 +75,7 @@
               isDirector={profile.isDirector}
             />
           {:else}
-            <MemberBadge {member} />
+            <UserTierBadge {member} />
           {/if}
         {/if}
       {/snippet}
@@ -157,17 +157,6 @@
 
     :global(.trakt-profile-image) {
       grid-row: 1 / span 2;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      :global(.trakt-vip-badge),
-      :global(.trakt-blocked-user-tag),
-      :global(.trakt-pending-follow-tag) {
-        z-index: var(--layer-base);
-        margin-top: var(--ni-neg-16);
-      }
     }
 
     @include for-tablet-sm-and-below {
@@ -180,7 +169,6 @@
       :global(.trakt-profile-image) {
         --width: var(--ni-40);
         --height: var(--ni-40);
-        --border-width: var(--border-thickness-xs);
       }
     }
   }

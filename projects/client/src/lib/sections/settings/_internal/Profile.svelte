@@ -1,5 +1,5 @@
 <script lang="ts">
-  import MemberBadge from "$lib/features/vip-veteran/MemberBadge.svelte";
+  import UserTierBadge from "$lib/features/vip-veteran/UserTierBadge.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -20,10 +20,10 @@
     <ProfileImage
       isEditable
       --image-size="var(--ni-56)"
-      --border-width="var(--border-thickness-xs)"
       name={$user.name.first}
       src={$user.avatar.url}
       member={$member}
+      ringMotion="live"
     />
 
     <div class="trakt-settings-profile-info">
@@ -41,7 +41,7 @@
         color="inherit"
         label={m.button_label_manage_subscription()}
       >
-        <MemberBadge member={$member} />
+        <UserTierBadge member={$member} />
       </Link>
     {:else}
       <GetVIPLink source="profile-settings" />

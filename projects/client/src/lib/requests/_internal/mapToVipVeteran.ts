@@ -12,7 +12,6 @@ export function mapToVipVeteran(user: ProfileResponse): VipVeteran | null {
   return {
     since: new Date(user.vip_veteran_since),
     years: user.vip_veteran_years ?? 0,
-    tier: user.vip_veteran_tier,
     title: toTitle(user.vip_veteran_title),
     graceEndsAt: user.vip_grace_ends_at
       ? new Date(user.vip_grace_ends_at)

@@ -2,8 +2,9 @@
   import LoaderIcon from "$lib/components/icons/LoaderIcon.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
-  import type { TieredMember } from "$lib/features/vip-veteran/TieredMember.ts";
+  import UserTierRing from "$lib/features/vip-veteran/UserTierRing.svelte";
+  import type { UserTierRingMotion } from "$lib/features/vip-veteran/UserTierRingMotion.ts";
+  import type { TieredUser } from "$lib/features/vip-veteran/TieredUser.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction";
   import { removeAvatarRequest } from "$lib/requests/queries/users/removeAvatarRequest";
@@ -19,19 +20,22 @@
     src,
     isEditable = false,
     member,
+    ringMotion = "hover",
     hasEntrance = false,
+    isHighlighted = false,
     badge,
   }: {
     name: string;
     src: string;
-    member?: TieredMember | Nil;
+    member?: TieredUser | Nil;
+    ringMotion?: UserTierRingMotion;
     hasEntrance?: boolean;
+    isHighlighted?: boolean;
     isEditable?: boolean;
     badge?: Snippet;
   } = $props();
 
   const { invalidate } = useInvalidator();
-  const isVip = $derived(Boolean(member?.isVip));
 
   type Dialog = "none" | "view" | "crop";
 
@@ -90,18 +94,14 @@
   }
 </script>
 
-<MemberAvatar {member}>
-  <div
-    class="trakt-profile-image"
-    class:is-vip={isVip}
-    class:has-entrance={isVip && hasEntrance}
-  >
-    <figure class="profile-image" data-sentry-block>
-      <!-- This should be the first element, else: HierarchyRequestError -->
-      <figcaption class="visually-hidden">
-        {m.image_alt_user_avatar({ username: name })}
-      </figcaption>
+<div class="trakt-profile-image" class:has-badge={badge != null}>
+  <figure class="profile-image" data-sentry-block>
+    <!-- This should be the first element, else: HierarchyRequestError -->
+    <figcaption class="visually-hidden">
+      {m.image_alt_user_avatar({ username: name })}
+    </figcaption>
 
+    <UserTierRing {member} motion={ringMotion} {hasEntrance} {isHighlighted}>
       {#if isEditable}
         <ProfileImageContextMenu
           onViewPhoto={() => (imageEdit.dialog = "view")}
@@ -132,31 +132,35 @@
                 {src}
                 alt={m.image_alt_user_avatar({ username: name })}
               />
+              <span class="edit-hint" aria-hidden="true">
+                <RenameIcon />
+              </span>
             </div>
           {/snippet}
         </ProfileImageContextMenu>
-        <div class="edit-badge" aria-hidden="true">
-          <RenameIcon />
-        </div>
       {:else}
         <CrossOriginImage
           {src}
           alt={m.image_alt_user_avatar({ username: name })}
         />
       {/if}
-    </figure>
+    </UserTierRing>
+  </figure>
 
-    {#if imageEdit.isUploading}
-      <div class="upload-overlay" transition:fade={{ duration: 150 }}>
-        <div class="upload-spinner">
-          <LoaderIcon />
-        </div>
+  {#if imageEdit.isUploading}
+    <div class="upload-overlay" transition:fade={{ duration: 150 }}>
+      <div class="upload-spinner">
+        <LoaderIcon />
       </div>
-    {/if}
+    </div>
+  {/if}
 
-    {@render badge?.()}
-  </div>
-</MemberAvatar>
+  {#if badge}
+    <div class="profile-image-badge">
+      {@render badge()}
+    </div>
+  {/if}
+</div>
 
 {#if imageEdit.dialog === "view"}
   <ProfileImageViewDialog
@@ -192,53 +196,21 @@
   .trakt-profile-image {
     position: relative;
 
-    &.is-vip {
-      --color-border-avatar: var(
-        --member-avatar-ring,
-        var(--color-border-vip-avatar)
-      );
-      --ring-glow-inner: var(--member-avatar-ring, var(--purple-400));
-      --ring-glow-outer: var(--member-avatar-glow, var(--purple-500));
-
-      .profile-image {
-        box-shadow:
-          0 0 var(--ni-8)
-            color-mix(in srgb, var(--ring-glow-inner) 60%, transparent),
-          0 0 var(--ni-16)
-            color-mix(in srgb, var(--ring-glow-outer) 50%, transparent);
-      }
-    }
-
-    &.has-entrance .profile-image {
-      animation: ring-swell 1.2s ease-out 0.2s both;
-    }
-
-    :global(.vip-badge) {
-      position: absolute;
-
-      width: var(--ni-24);
-      height: var(--ni-24);
-
-      top: var(--ni-neg-8);
-      inset-inline-end: var(--ni-neg-8);
-
-      z-index: var(--layer-raised);
+    &.has-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 
-  @keyframes ring-swell {
-    40% {
-      box-shadow:
-        0 0 var(--ni-16)
-          color-mix(in srgb, var(--ring-glow-inner) 80%, transparent),
-        0 0 var(--ni-40)
-          color-mix(in srgb, var(--ring-glow-outer) 60%, transparent);
-    }
-  }
+  .profile-image-badge {
+    display: flex;
+    justify-content: center;
+    z-index: var(--layer-base);
+    margin-block-start: var(--ni-neg-16);
 
-  @media (prefers-reduced-motion: reduce) {
-    .trakt-profile-image.has-entrance .profile-image {
-      animation: none;
+    &:not(:has(*)) {
+      display: none;
     }
   }
 
@@ -248,17 +220,7 @@
     height: var(--image-size);
 
     border-radius: 50%;
-    outline: var(--border-width) solid var(--color-border-avatar);
-    outline-offset: calc(-1 * var(--border-width));
-
-    padding: var(--border-width);
     box-sizing: border-box;
-
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-    }
   }
 
   .editable-image-wrapper {
@@ -272,43 +234,32 @@
 
     &:focus-visible {
       outline: var(--border-thickness-xs) solid var(--color-foreground);
-      outline-offset: 2px;
+      outline-offset: calc(-1 * var(--border-thickness-xs));
     }
   }
 
-  .edit-badge {
+  .edit-hint {
     position: absolute;
-    bottom: 0;
-    inset-inline-end: 0;
-    transform: translate(calc(var(--rtl-sign) * 15%), 15%);
-
-    width: var(--ni-24);
-    height: var(--ni-24);
-    border-radius: 50%;
-    background-color: var(--color-modal-background);
-    box-shadow: var(--shadow-dialog);
-
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: color-mix(in srgb, var(--shade-900) 55%, transparent);
     pointer-events: none;
 
     opacity: 0;
-    transition:
-      opacity var(--transition-increment) ease-in-out,
-      transform var(--transition-increment) ease-in-out;
+    transition: opacity var(--transition-increment) ease-in-out;
 
     :global(svg) {
-      width: var(--ni-12);
-      height: var(--ni-12);
-      color: var(--color-text-primary);
+      width: 30%;
+      height: 30%;
+      color: var(--shade-10);
     }
   }
 
-  .trakt-profile-image:has(.editable-image-wrapper:hover) .edit-badge,
-  .trakt-profile-image:has(.editable-image-wrapper:focus-visible) .edit-badge {
+  .editable-image-wrapper:hover .edit-hint,
+  .editable-image-wrapper:focus-visible .edit-hint {
     opacity: 1;
-    transform: translate(calc(var(--rtl-sign) * 15%), 15%) scale(1.1);
   }
 
   .upload-overlay {

@@ -2,7 +2,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
+  import UserTierRing from "$lib/features/vip-veteran/UserTierRing.svelte";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
@@ -26,17 +26,13 @@
 </script>
 
 {#snippet avatar()}
-  <div
-    class="trakt-user-avatar"
-    class:trakt-vip-user={user.isVip}
-    data-size={size}
-  >
-    <MemberAvatar member={user}>
+  <div class="trakt-user-avatar" data-size={size}>
+    <UserTierRing member={user}>
       <CrossOriginImage
         src={user.avatar.url}
         alt={m.image_alt_user_avatar({ username: user.username })}
       />
-    </MemberAvatar>
+    </UserTierRing>
 
     {#if icon}
       {@render icon()}
@@ -61,23 +57,6 @@
     &[data-size="small"] {
       width: var(--ni-32);
       height: var(--ni-32);
-    }
-
-    :global(img) {
-      border-radius: 50%;
-      box-sizing: border-box;
-
-      width: 100%;
-      height: 100%;
-
-      border: var(--ni-2) solid var(--shade-10);
-    }
-
-    &.trakt-vip-user {
-      :global(img) {
-        border: var(--ni-2) solid
-          var(--member-avatar-ring, var(--color-border-vip-avatar));
-      }
     }
   }
 </style>

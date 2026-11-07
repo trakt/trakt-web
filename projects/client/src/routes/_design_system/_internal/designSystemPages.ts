@@ -93,6 +93,12 @@ export const DESIGN_SYSTEM_GROUPS: DesignSystemGroup[] = [
         kind: 'Component',
       },
       {
+        title: 'User tiers',
+        href: '/_design_system/user-tiers',
+        description: 'Every user tier with its avatar ring and badge.',
+        kind: 'Component',
+      },
+      {
         title: 'Select',
         href: '/_design_system/select',
         description:

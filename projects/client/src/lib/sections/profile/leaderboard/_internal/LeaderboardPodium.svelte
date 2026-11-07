@@ -41,10 +41,10 @@
         <span class="podium-box">
           <ProfileImage
             --image-size="var(--podium-face)"
-            --border-width="var(--border-thickness-s)"
             name={spot.entry.user.name.first}
             src={spot.entry.user.avatar.url}
             member={spot.entry.user}
+            ringMotion="live"
           />
         </span>
       </Link>

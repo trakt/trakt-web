@@ -18,7 +18,6 @@ describe('util: mapToVipVeteran', () => {
     expect(mapToVipVeteran(baseResponse)).to.deep.equal({
       since: new Date('2016-03-01T10:00:00.000Z'),
       years: 10,
-      tier: 10,
       title: 'legend',
       graceEndsAt: null,
     });

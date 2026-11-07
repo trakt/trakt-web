@@ -27,7 +27,6 @@
   >
     <ProfileImage
       --image-size="calc(var(--width-profile-item) * 0.8)"
-      --border-width="var(--border-thickness-xs)"
       name={profile.name.first}
       src={profile.avatar.url}
       member={profile}
@@ -39,8 +38,6 @@
 </div>
 
 <style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
   .trakt-profile-item {
     display: flex;
     flex-direction: column;
@@ -67,63 +64,10 @@
     }
   }
 
-  .trakt-profile-item {
-    :global(.trakt-profile-image.is-vip)::before {
-      --offset: calc(-1 * var(--border-thickness-s));
-
-      content: "";
-      position: absolute;
-      opacity: 0;
-
-      top: var(--offset);
-      inset-inline-start: var(--offset);
-      inset-inline-end: var(--offset);
-      bottom: var(--offset);
-
-      background: conic-gradient(
-        from 0deg,
-        transparent 0deg,
-        var(--color-border-vip-avatar) 45deg,
-        transparent 90deg
-      );
-
-      border-radius: 50%;
-      z-index: var(--layer-background);
-    }
-
-    :global(.trakt-profile-image) {
-      background-color: var(--color-card-background);
-      border-radius: 50%;
-
-      box-shadow: var(--shadow-base);
-
-      :global(.profile-image) {
-        transition: outline var(--transition-increment) ease-in-out;
-      }
-
-      :global(.vip-badge) {
-        transition: var(--transition-increment) ease-in-out;
-        transition-property: transform;
-        transform-origin: center;
-      }
-
-      @include for-mouse {
-        &:hover {
-          :global(.profile-image) {
-            outline: var(--border-thickness-s) solid var(--color-border-avatar);
-          }
-
-          :global(.vip-badge) {
-            transform: scale(1.15);
-          }
-
-          &::before {
-            animation: fade-rotate calc(4 * var(--transition-increment))
-              ease-in-out;
-          }
-        }
-      }
-    }
+  .trakt-profile-item :global(.trakt-profile-image) {
+    background-color: var(--color-card-background);
+    border-radius: 50%;
+    box-shadow: var(--shadow-base);
   }
 
   .profile-footer {

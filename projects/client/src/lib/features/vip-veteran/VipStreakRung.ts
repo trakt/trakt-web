@@ -1,10 +1,6 @@
-import type { VipBadgeTone } from '$lib/components/badge/VipBadgeTone.ts';
-import type { VipVeteran } from '$lib/requests/models/VipVeteran.ts';
+import type { UserTierRung } from './UserTierRung.ts';
 
-export type VipStreakRung = {
-  tier: number;
-  title: VipVeteran['title'];
-  tone: VipBadgeTone;
+export type VipStreakRung = UserTierRung & {
   isReached: boolean;
   isCurrent: boolean;
 };

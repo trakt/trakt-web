@@ -52,7 +52,6 @@
   {#snippet icon()}
     <ProfileImage
       --image-size="var(--ni-32)"
-      --border-width="var(--border-thickness-xs)"
       name={profile.name.first}
       src={profile.avatar.url}
       member={profile}

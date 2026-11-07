@@ -16,7 +16,7 @@
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName.ts";
   import { time } from "$lib/utils/timing/time.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import MemberAvatar from "$lib/features/vip-veteran/MemberAvatar.svelte";
+  import UserTierRing from "$lib/features/vip-veteran/UserTierRing.svelte";
   import { onMount } from "svelte";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
   import TodayFaces from "./TodayFaces.svelte";
@@ -187,12 +187,14 @@
       <div class="frame-text">
         <div class="frame-person">
           {#snippet avatar(user: UserProfile)}
-            <MemberAvatar member={user}>
-              <CrossOriginImage
-                src={user.avatar.url}
-                alt={m.image_alt_user_avatar({ username: user.username })}
-              />
-            </MemberAvatar>
+            <span class="frame-avatar">
+              <UserTierRing member={user}>
+                <CrossOriginImage
+                  src={user.avatar.url}
+                  alt={m.image_alt_user_avatar({ username: user.username })}
+                />
+              </UserTierRing>
+            </span>
           {/snippet}
           {#if frame.action.user.slug}
             <Link
@@ -409,16 +411,14 @@
       align-items: center;
       gap: var(--gap-s);
 
-      :global(img) {
+      .frame-avatar {
+        display: block;
         width: var(--ni-44);
         height: var(--ni-44);
-
-        border: var(--border-thickness-xs) solid
-          var(--member-avatar-ring, var(--purple-500));
-        border-radius: 50%;
       }
 
-      :global(.trakt-link:focus-visible img) {
+      :global(.trakt-link:focus-visible .frame-avatar) {
+        border-radius: 50%;
         outline: var(--border-thickness-xs) solid var(--color-link-active);
         outline-offset: var(--ni-2);
       }

@@ -270,6 +270,37 @@ Reference: `lib/components/toggles/_internal/SwitchBase.svelte`.
 
 ---
 
+## A Component Owns Its Whole Concern
+
+Whatever a shared component draws or decides stays inside it: its states, its
+variants, the feature flag that gates it and the styles it replaces. Callers
+choose options (`size`, `variant`, `placement`), never how it works.
+
+It has leaked when callers:
+
+- read the same flag or store as the component to decide how to style around
+  it;
+- toggle a class to undo their own styles while the component is shown;
+- add a marker attribute or wrapper so the component's behaviour works;
+- each repeat the same variant to value map.
+
+```svelte
+<!-- Bad - the caller knows the badge is on and strips its own border -->
+<div class="trakt-row-avatar" class:has-badge={$isBadgeEnabled}>
+  <StatusBadge {status} />
+</div>
+
+<!-- Good - the badge draws and gates everything it needs -->
+<StatusBadge {status} />
+```
+
+The tell is the size of a change: adding a variant, or removing a flag, should
+touch the component and its tokens, not every caller. Map variants to tokens
+once (one `[data-*]` rule set in a shared style file) and let each component
+read the variables.
+
+---
+
 ## Provider Pattern
 
 Feature providers are thin shells calling a context factory from `_internal/`.
@@ -935,6 +966,8 @@ element before rejecting so a presence check cannot block a retry.
       copied component
 - [ ] Shared components styled via their props / CSS variable hooks, not
       `:global()` overrides from the consumer
+- [ ] A shared component owns its states, variants and flag - callers pass
+      options only, never undo their own styles or repeat its variant map
 - [ ] Props type file created for components with 3+ props
 - [ ] Provider delegates to `_internal/createXxxContext` via `iffy()`
 - [ ] `use*` hooks live in `features/{domain}/stores/` and return `$derived`

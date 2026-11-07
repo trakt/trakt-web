@@ -4,6 +4,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useCurrentUserTier } from "$lib/features/vip-veteran/stores/useCurrentUserTier.ts";
+  import { useActiveLink } from "$lib/stores/useActiveLink.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../../profile-banner/ProfileImage.svelte";
 
@@ -11,6 +12,7 @@
 
   const { user } = useUser();
   const { member } = useCurrentUserTier();
+  const { isActive } = useActiveLink(UrlBuilder.profile.me());
 </script>
 
 <trakt-profile-button data-hj-suppress data-sentry-mask>
@@ -21,10 +23,10 @@
   >
     <ProfileImage
       --image-size="var(--ni-32)"
-      --border-width="var(--border-thickness-xs)"
       name={$user?.name?.first ?? ""}
       src={$user?.avatar?.url ?? ""}
       member={$member}
+      isHighlighted={$isActive}
     />
     {#if isExpanded}
       <span class="trakt-profile-link-username">{$user?.username}</span>
@@ -55,12 +57,6 @@
         border-radius: var(--border-radius-xs);
         outline: var(--border-thickness-xs) solid var(--color-link-active);
         outline-offset: var(--gap-xs);
-      }
-    }
-
-    :global(.trakt-link-active) {
-      :global(.profile-image) {
-        --color-border-avatar: var(--color-link-active);
       }
     }
   }

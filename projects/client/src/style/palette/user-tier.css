@@ -1,0 +1,86 @@
+:root {
+  --user-tier-vip: #6a45e6;
+  --user-tier-vip-sheen: #b07bff;
+  --user-tier-pro: #c2287f;
+  --user-tier-pro-sheen: #ff6fb5;
+  --user-tier-veteran: #0d8a6c;
+  --user-tier-veteran-sheen: #3fd1a0;
+  --user-tier-elite: #1f5fd8;
+  --user-tier-elite-sheen: #4fb4ff;
+  --user-tier-legend: #a97800;
+  --user-tier-legend-sheen: #ffd54a;
+  --user-tier-legend-deep: #785000;
+  --user-tier-legend-ink: #2b1d00;
+
+  --user-tier-legend-ring: conic-gradient(
+    from 180deg,
+    #8a6000 0deg,
+    #b88600 70deg,
+    #ffe27a 150deg,
+    #fff6cc 175deg,
+    #e0a800 210deg,
+    #8a6000 300deg,
+    #8a6000 360deg
+  );
+
+  --user-tier-legend-tag: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--yellow-200) 85%, var(--user-tier-legend)),
+    color-mix(in srgb, var(--yellow-600) 35%, var(--user-tier-legend))
+  );
+  --user-tier-legend-tag-shadow:
+    inset 0 var(--ni-1) 0 color-mix(in srgb, var(--yellow-50) 45%, transparent),
+    0 var(--ni-2) var(--ni-12)
+    color-mix(in srgb, var(--user-tier-legend) 40%, transparent);
+
+  --user-tier-legend-tag-engrave:
+    0 var(--ni-1) 0 color-mix(in srgb, var(--yellow-50) 55%, transparent),
+    0 calc(var(--ni-1) * -1) 0
+    color-mix(in srgb, var(--user-tier-legend-deep) 45%, transparent);
+
+  --user-tier-legend-ring-light: conic-gradient(
+    from 180deg,
+    #8a6000 0deg,
+    #a97800 70deg,
+    #d9a21c 150deg,
+    #e8b83a 175deg,
+    #c08a00 210deg,
+    #8a6000 300deg,
+    #8a6000 360deg
+  );
+}
+
+[data-user-tier] {
+  --user-tier-color: var(--user-tier-vip);
+  --user-tier-sheen: var(--user-tier-vip-sheen);
+  --user-tier-ring-color: var(--color-user-tier-vip-ring);
+  --user-tier-ring-sheen: var(--color-user-tier-vip-ring-sheen);
+}
+
+[data-user-tier="pro"] {
+  --user-tier-color: var(--user-tier-pro);
+  --user-tier-sheen: var(--user-tier-pro-sheen);
+  --user-tier-ring-color: var(--color-user-tier-pro-ring);
+  --user-tier-ring-sheen: var(--color-user-tier-pro-ring-sheen);
+}
+
+[data-user-tier="veteran"] {
+  --user-tier-color: var(--user-tier-veteran);
+  --user-tier-sheen: var(--user-tier-veteran-sheen);
+  --user-tier-ring-color: var(--color-user-tier-veteran-ring);
+  --user-tier-ring-sheen: var(--color-user-tier-veteran-ring-sheen);
+}
+
+[data-user-tier="elite"] {
+  --user-tier-color: var(--user-tier-elite);
+  --user-tier-sheen: var(--user-tier-elite-sheen);
+  --user-tier-ring-color: var(--color-user-tier-elite-ring);
+  --user-tier-ring-sheen: var(--color-user-tier-elite-ring-sheen);
+}
+
+[data-user-tier="legend"] {
+  --user-tier-color: var(--user-tier-legend);
+  --user-tier-sheen: var(--user-tier-legend-sheen);
+  --user-tier-ring-color: var(--color-user-tier-legend-ring);
+  --user-tier-ring-sheen: var(--color-user-tier-legend-ring-sheen);
+}

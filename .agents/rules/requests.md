@@ -405,6 +405,19 @@ export function mapToEntry(response: EntryResponse): Entry {
 }
 ```
 
+When the API already returns a value (a status, a level, a label, a total), the
+mapper reads it as is. Do not recompute it from other fields, and do not
+override it with a client rule. Deriving what the API does not send is the
+mapper's job; second-guessing what it does send makes clients disagree.
+
+```ts
+// Bad - the API sends status, the client rebuilds it from other fields
+const isOverdue = new Date(response.due_at) < new Date() && !response.paid;
+
+// Good - the mapper reads the API's own field
+const isOverdue = response.status === 'overdue';
+```
+
 ---
 
 ## Models
@@ -518,6 +531,8 @@ Before submitting a new query or request, verify:
 - [ ] `dependencies` lists every param that should trigger a refetch
 - [ ] `invalidations` lists relevant `InvalidateAction.*` tokens
 - [ ] Mapper is pure function - no side effects
+- [ ] Values the API already returns are read as is, not recomputed or
+      overridden in the client
 - [ ] `ttl` is appropriate for data's freshness requirements
 - [ ] Write hook: `defineMutation` + `useMutation` (Pattern 5), no hand-rolled
       pending flag and no `await invalidate(...)`

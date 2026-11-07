@@ -1,7 +1,7 @@
 <script lang="ts">
   import { map } from "rxjs";
 
-  import MemberBadge from "$lib/features/vip-veteran/MemberBadge.svelte";
+  import UserTierBadge from "$lib/features/vip-veteran/UserTierBadge.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { useQuery } from "$lib/features/query/useQuery";
@@ -82,11 +82,9 @@
     <div class="yir-2024-directed-by">
       <div class="yir-2024-avatar-stack">
         <UserAvatar user={$profile} size="large" />
-        {#if $profile.isVip || $profile.isDirector}
-          <span class="yir-2024-vip">
-            <MemberBadge member={$profile} />
-          </span>
-        {/if}
+        <span class="yir-2024-vip">
+          <UserTierBadge member={$profile} />
+        </span>
       </div>
       <div class="yir-2024-directed-by-text">
         <p class="bold yir-2024-by-label bold">

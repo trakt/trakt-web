@@ -22,7 +22,6 @@
     <div class="blocked-user-identity">
       <ProfileImage
         --image-size="var(--ni-40)"
-        --border-width="var(--border-thickness-xs)"
         name={profile.name.first}
         src={profile.avatar.url}
         member={profile}
