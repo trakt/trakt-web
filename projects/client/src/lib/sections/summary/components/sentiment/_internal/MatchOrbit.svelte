@@ -174,7 +174,7 @@
 
   .trakt-match-orbit-avatar {
     position: absolute;
-    inset: calc(var(--match-orbit-size) * 0.18);
+    inset: calc(var(--match-orbit-stroke) + var(--ni-2));
     display: flex;
   }
 
