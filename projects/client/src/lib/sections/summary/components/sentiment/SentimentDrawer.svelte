@@ -8,7 +8,7 @@
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaType } from "$lib/requests/models/MediaType.ts";
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry.ts";
   import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import { TAB_PARAM } from "$lib/sections/summary/constants.ts";
@@ -31,13 +31,11 @@
     sentiment,
     realityCheck,
     source,
-    type,
-    id,
+    media,
   }: {
     sentiment: SentimentAnalysis | Nil;
     realityCheck: RealityCheck | null | undefined;
-    type: MediaType;
-    id: number;
+    media: MediaEntry;
     source: InsightsOpenSource;
     onClose: () => void;
   } = $props();
@@ -45,7 +43,7 @@
   let isOpen = $state(false);
   let activeTab = $state(toTab(page.url.searchParams.get(TAB_PARAM)));
 
-  const { match, kind, basis, taste, isLoading: isMatchLoading } = useMatch(fromRune(() => ({ type, id })));
+  const { match, kind, basis, reasons, taste, isLoading: isMatchLoading } = useMatch(fromRune(() => ({ type: media.type, id: media.id })));
 
   const { track: trackOpen } = useTrack(AnalyticsEvent.InsightsOpen);
   const { track: trackTab } = useTrack(AnalyticsEvent.InsightsTab);
@@ -126,7 +124,7 @@
 
 {#snippet matchView()}
   {#if $match !== null}
-    <MatchTab score={$match} kind={$kind} basis={$basis} taste={$taste} {type} {id} />
+    <MatchTab score={$match} kind={$kind} basis={$basis} reasons={$reasons} taste={$taste} {media} />
   {/if}
 {/snippet}
 

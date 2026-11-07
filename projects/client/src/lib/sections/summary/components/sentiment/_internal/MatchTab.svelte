@@ -4,6 +4,10 @@
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { MATCH_LOW_THRESHOLD } from "./constants/matchRing.ts";
+  import HypeStories from "./HypeStories.svelte";
+  import { matchLevel } from "./matchLevel.ts";
+  import MatchStories from "./MatchStories.svelte";
+  import { matchTiers } from "./matchTiers.ts";
   import MatchOrbit from "./MatchOrbit.svelte";
   import MatchReasons from "./MatchReasons.svelte";
   import MatchRing from "./MatchRing.svelte";
@@ -12,9 +16,14 @@
   import MatchTierLadder from "./MatchTierLadder.svelte";
   import { useInsightsCard } from "../useInsightsCard.ts";
 
-  const { score, kind, basis, taste, type, id }: MatchTabProps = $props();
+  const { score, kind, basis, reasons, taste, media }: MatchTabProps = $props();
 
   const { isInsightsCard } = useInsightsCard();
+
+  const level = $derived(matchLevel(score, kind));
+  const storyColor = $derived(
+    level === 0 ? undefined : matchTiers(kind)[level].color,
+  );
 
   const hasReasons = $derived(
     score >= MATCH_LOW_THRESHOLD && !($isInsightsCard && kind === "hype"),
@@ -45,13 +54,23 @@
     </div>
   {/if}
 
-  <MatchTaste {taste} />
+  {#if $isInsightsCard}
+    <div class="trakt-match-stories-slot" style:--insights-story-color={storyColor}>
+      {#if kind === "hype"}
+        <HypeStories {reasons} {taste} {media} />
+      {:else}
+        <MatchStories {taste} {media} hasSources={hasReasons} />
+      {/if}
+    </div>
+  {:else}
+    <MatchTaste {taste} />
 
-  <RenderFor audience="vip">
-    {#if hasReasons}
-      <MatchReasons {type} {id} />
-    {/if}
-  </RenderFor>
+    <RenderFor audience="vip">
+      {#if hasReasons}
+        <MatchReasons type={media.type} id={media.id} />
+      {/if}
+    </RenderFor>
+  {/if}
 
   <RenderFor audience="free">
     <UpsellCta source="sentiment">

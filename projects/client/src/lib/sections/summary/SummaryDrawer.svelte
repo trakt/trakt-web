@@ -171,8 +171,7 @@
   <SentimentDrawer
     {sentiment}
     {realityCheck}
-    type={media.type}
-    id={media.id}
+    {media}
     source={insightsSource}
     onClose={close}
   />

@@ -17,6 +17,7 @@ function queryMatch(type: 'movie' | 'show') {
       taste: response?.data?.taste,
       kind: response?.data?.kind,
       basis: response?.data?.basis,
+      reasons: response?.data?.reasons,
       isSuccess: response?.isSuccess,
     }),
     waitFor: ({ isSuccess }) => isSuccess === true,
@@ -69,6 +70,35 @@ describe('matchQuery', () => {
       score: 82,
       basis: 'taste',
     });
+  });
+
+  it('should map the reasons of a hype score', async () => {
+    const reasons = {
+      series: {
+        films: [
+          { ids: { trakt: 7, slug: 'film-7' }, title: 'Film 7', stars: 8 },
+        ],
+        usual: 'about',
+      },
+      lists: { top: 3 },
+    };
+    server.use(
+      http.get('http://localhost/movies/:id/match', () =>
+        HttpResponse.json({ kind: 'hype', match: 73, basis: 'taste', reasons }),
+      ),
+    );
+
+    expect(await queryMatch('movie')).toMatchObject({ reasons });
+  });
+
+  it('should default missing reasons to null', async () => {
+    server.use(
+      http.get('http://localhost/movies/:id/match', () =>
+        HttpResponse.json({ kind: 'hype', match: 82 }),
+      ),
+    );
+
+    expect(await queryMatch('movie')).toMatchObject({ reasons: null });
   });
 
   it('should default a missing basis to the series', async () => {
