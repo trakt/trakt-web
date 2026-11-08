@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ThreadRing from "$lib/components/badge/ThreadRing.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { VipDealPlan } from "./models/VipDealPlan";
   import SubscriptionTag from "./SubscriptionTag.svelte";
@@ -12,7 +13,11 @@
 </script>
 
 <section class="trakt-two-year-deal-card">
-  <SubscriptionTag variant="highlight">{m.tag_text_deal_price()}</SubscriptionTag>
+  <ThreadRing opacity={0.9} />
+
+  <SubscriptionTag variant="highlight"
+    >{m.tag_text_deal_price()}</SubscriptionTag
+  >
 
   <div class="deal-copy">
     <p class="deal-eyebrow tag bold uppercase">
@@ -49,7 +54,11 @@
 
     @include vip-glow-card;
 
-    border: var(--ni-1) solid var(--color-vip-border-accent);
+    border: none;
+    box-shadow:
+      0 var(--ni-14) var(--ni-40)
+        color-mix(in srgb, var(--purple-500) 28%, transparent),
+      var(--shadow-floating);
     border-radius: var(--border-radius-xxl);
 
     padding: var(--ni-28) var(--ni-32);
