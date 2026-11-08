@@ -17,6 +17,11 @@
 </script>
 
 <section class="trakt-member-count-hero">
+  <div class="member-count-halo" aria-hidden="true"></div>
+  <div class="member-count-ring" aria-hidden="true">
+    <div class="ring-spin"><div class="ring-sweep"></div></div>
+  </div>
+
   <p class="member-count-eyebrow tag uppercase">
     {m.label_registered_accounts()}
   </p>
@@ -38,18 +43,98 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-member-count-hero {
+    position: relative;
+    isolation: isolate;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--gap-s);
 
+    box-sizing: border-box;
     width: 100%;
+    padding: var(--gap-xl) var(--gap-m);
+
     text-align: center;
+
+    border-radius: var(--border-radius-xxl);
+    background: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+    box-shadow: var(--shadow-raised);
+
+    @include for-mobile {
+      padding-block: var(--gap-l);
+    }
+  }
+
+  .member-count-halo {
+    position: absolute;
+    inset: 22% 12%;
+    z-index: var(--layer-background);
+
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse,
+      color-mix(in srgb, var(--purple-500) 50%, transparent),
+      transparent 70%
+    );
+    filter: blur(var(--ni-14));
+
+    animation: halo-breathe 5s ease-in-out infinite;
+  }
+
+  .member-count-ring {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+
+    padding: var(--ni-1);
+    border-radius: inherit;
+
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+
+    pointer-events: none;
+  }
+
+  .ring-spin {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 260%;
+    aspect-ratio: 1;
+
+    transform: translate(-50%, -50%);
+    animation: ring-spin 6s linear infinite;
+  }
+
+  .ring-sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      color-mix(in srgb, var(--purple-400) 90%, transparent) 40deg,
+      transparent 80deg,
+      transparent 360deg
+    );
   }
 
   .member-count-eyebrow {
+    padding: var(--ni-6) var(--ni-14);
+
     letter-spacing: var(--ni-2);
     color: var(--purple-400);
+
+    border-radius: var(--border-radius-pill);
+    background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
   }
 
   .member-count-figure {
@@ -85,6 +170,34 @@
 
     @include for-mobile {
       font-size: var(--font-size-text);
+    }
+  }
+
+  @keyframes halo-breathe {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(0.95);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes ring-spin {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .member-count-halo,
+    .ring-spin {
+      animation: none;
     }
   }
 </style>

@@ -10,9 +10,7 @@
 
 <div class="trakt-about">
   <WhatIsTrakt />
-  <div class="trakt-about-divider"></div>
   <MemberCountHero {count} />
-  <div class="trakt-about-divider"></div>
   <MeetTheTeam />
 </div>
 
@@ -45,12 +43,5 @@
     @include for-mobile {
       --top-bottom-padding: var(--ni-24);
     }
-  }
-
-  .trakt-about-divider {
-    width: 100%;
-    height: var(--border-thickness-xxs);
-    background: color-mix(in srgb, var(--color-border) 60%, transparent);
-    border-radius: var(--border-radius-xs);
   }
 </style>
