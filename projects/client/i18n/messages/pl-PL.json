@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Sezony 1-{number}",
-  "text_recap_source_wikipedia": "Podsumowanie na podstawie Wikipedii",
   "text_recap_spoiler_partial": "Obejrzano {watched} z {total} odcinków. To zdradza resztę sezonu {number}.",
   "text_recap_spoiler_unwatched": "Nie masz jeszcze rozpoczętego sezonu {number}. To zdradza całość.",
   "text_recap_story_description": "Cała historia, aż do ukończonego sezonu",

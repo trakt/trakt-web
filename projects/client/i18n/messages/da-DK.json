@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Sæsoner 1-{number}",
-  "text_recap_source_wikipedia": "Resume baseret på Wikipedia",
   "text_recap_spoiler_partial": "Du har set {watched} af {total} episoder. Dette afslører resten af sæson {number}.",
   "text_recap_spoiler_unwatched": "Du er ikke startet på sæson {number}. Dette afslører det hele.",
   "text_recap_story_description": "Hele historien frem til den sæson, du blev færdig med",

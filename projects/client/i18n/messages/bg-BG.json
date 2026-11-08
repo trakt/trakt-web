@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Сезони 1-{number}",
-  "text_recap_source_wikipedia": "Обобщение въз основа на Wikipedia",
   "text_recap_spoiler_partial": "Изгледахте {watched} от {total} епизода. Това съдържа спойлери за останалата част от сезон {number}.",
   "text_recap_spoiler_unwatched": "Не сте започнали сезон {number}. Това съдържа спойлери за целия сезон.",
   "text_recap_story_description": "Цялата история до сезона, който сте изгледали",

@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Сезони 1-{number}",
-  "text_recap_source_wikipedia": "Підсумок на основі Вікіпедії",
   "text_recap_spoiler_partial": "Ви переглянули {watched} з {total} серій. Тут містяться спойлери до решти сезону {number}.",
   "text_recap_spoiler_unwatched": "Ви ще не почали сезон {number}. Тут містяться спойлери до всього сезону.",
   "text_recap_story_description": "Уся історія до сезону, який ви переглянули",

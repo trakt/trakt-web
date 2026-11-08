@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "シーズン1〜{number}",
-  "text_recap_source_wikipedia": "Wikipediaに基づくおさらい",
   "text_recap_spoiler_partial": "{total}エピソード中{watched}エピソードを視聴済みです。これ以降はシーズン{number}のネタバレを含みます。",
   "text_recap_spoiler_unwatched": "シーズン{number}をまだ視聴していません。すべてのネタバレが含まれます。",
   "text_recap_story_description": "視聴完了したシーズンまでのストーリー全容",

@@ -26,6 +26,7 @@ const STATIC_ROUTES: ReadonlyArray<SitemapEntry> = [
   { path: '/about', priority: '0.4', changefreq: 'monthly' },
   { path: '/privacy', priority: '0.3', changefreq: 'monthly' },
   { path: '/terms', priority: '0.3', changefreq: 'monthly' },
+  { path: '/data-sources', priority: '0.3', changefreq: 'monthly' },
 ];
 
 export const GET: RequestHandler = () => {

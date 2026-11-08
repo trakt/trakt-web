@@ -9034,6 +9034,30 @@
       "default": "Privacy Policy",
       "description": "Title for the privacy policy page."
     },
+    "page_title_data_sources": {
+      "default": "Data sources",
+      "description": "Title for the page that credits the services Trakt gets data from (TMDB, JustWatch, Wikipedia)."
+    },
+    "text_data_sources_intro": {
+      "default": "Some of what you see on Trakt comes from these services:",
+      "description": "Intro line on the data sources page, above the list of services."
+    },
+    "text_data_sources_tmdb": {
+      "default": "Movie and show details, people and artwork",
+      "description": "Line on the TMDB card of the data sources page, saying what Trakt uses TMDB data for."
+    },
+    "text_data_sources_justwatch": {
+      "default": "Where to watch",
+      "description": "Line on the JustWatch card of the data sources page, saying what Trakt uses JustWatch data for."
+    },
+    "text_data_sources_wikipedia": {
+      "default": "Season recaps, adapted under CC BY-SA 4.0",
+      "description": "Line on the Wikipedia card of the data sources page. CC BY-SA 4.0 is a licence name; do not translate it."
+    },
+    "text_data_sources_tmdb_notice": {
+      "default": "This product uses the TMDB API but is not endorsed or certified by TMDB.",
+      "description": "Notice required by TMDB's API terms, shown on the data sources page."
+    },
     "link_text_about": {
       "default": "About",
       "description": "Text for the about link in the footer."
@@ -9045,6 +9069,10 @@
     "link_text_branding": {
       "default": "Branding",
       "description": "Text for the branding link in the footer."
+    },
+    "link_text_data_sources": {
+      "default": "Data sources",
+      "description": "Text for the footer link to the page that credits the services Trakt gets data from."
     },
     "link_text_terms": {
       "default": "Terms",
@@ -14947,9 +14975,13 @@
       "default": "Chapter-by-chapter breakdown",
       "description": "Caption on the blurred preview of the in-depth breakdown that free members see."
     },
-    "text_recap_source_wikipedia": {
-      "default": "Recap based on Wikipedia",
-      "description": "Link under a recap crediting the Wikipedia page it was written from."
+    "text_recap_source_adapted_wikipedia": {
+      "default": "Adapted from Wikipedia",
+      "description": "Small link under a season recap crediting the Wikipedia page the recap was adapted from."
+    },
+    "text_recap_source_license": {
+      "default": "CC BY-SA 4.0",
+      "description": "Name of the Wikipedia content licence, shown as a small link after the recap credit. Do not translate."
     },
     "text_recap_spoiler_partial": {
       "default": "You've watched {watched} of {total} episodes. This spoils the rest of season {number}.",

@@ -9,6 +9,7 @@
     children,
     target,
     color = "default",
+    underline = "always",
     focusable = true,
     noscroll,
     replacestate,
@@ -21,6 +22,7 @@
     HTMLAnchorProps &
     HTMLElementProps & {
       color?: "default" | "classic" | "inherit";
+      underline?: "always" | "hover";
       focusable?: boolean;
       navigationType?: DpadNavigationType;
       activeMatch?: "exact" | "nested";
@@ -43,6 +45,7 @@
   data-sveltekit-replacestate={replacestate}
   tabindex={focusable ? 0 : -1}
   data-color={color}
+  data-underline={underline}
   aria-label={label}
   class:trakt-link={!!href}
   class:trakt-link-active={$isActive}
@@ -78,6 +81,20 @@
     &:focus-visible {
       outline: none;
       position: relative;
+    }
+
+    &[data-underline="hover"] {
+      text-decoration: none;
+
+      &:focus-visible {
+        text-decoration: underline;
+      }
+
+      @include for-mouse {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     &[data-color="default"] {

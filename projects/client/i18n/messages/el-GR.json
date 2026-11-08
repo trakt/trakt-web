@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Σεζόν 1-{number}",
-  "text_recap_source_wikipedia": "Ανακεφαλαίωση βασισμένη στη Wikipedia",
   "text_recap_spoiler_partial": "Έχετε παρακολουθήσει {watched} από {total} επεισόδια. Αυτό περιέχει spoiler για το υπόλοιπο της σεζόν {number}.",
   "text_recap_spoiler_unwatched": "Δεν έχετε ξεκινήσει τη σεζόν {number}. Αυτό περιέχει spoiler για όλη τη σεζόν.",
   "text_recap_story_description": "Ολόκληρη η ιστορία, μέχρι τη σεζόν που ολοκληρώσατε",

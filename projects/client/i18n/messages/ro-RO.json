@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Sezoanele 1-{number}",
-  "text_recap_source_wikipedia": "Recapitulare bazată pe Wikipedia",
   "text_recap_spoiler_partial": "Ai vizionat {watched} din {total} episoade. Aceasta conține spoilere pentru restul sezonului {number}.",
   "text_recap_spoiler_unwatched": "Nu ai început sezonul {number}. Aceasta conține spoilere pentru tot sezonul.",
   "text_recap_story_description": "Întreaga poveste, până la sezonul pe care l-ai terminat",

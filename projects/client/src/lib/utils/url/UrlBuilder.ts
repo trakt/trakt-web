@@ -323,6 +323,7 @@ export const UrlBuilder = {
   vipCancel: () => '/vip/cancel',
   terms: () => '/terms',
   privacy: () => '/privacy',
+  dataSources: () => '/data-sources',
   about: () => '/about',
   faq: {
     tvTime: () => '/faq/tv-time',
@@ -361,9 +362,13 @@ export const UrlBuilder = {
       media: (imdbId: string) => `https://www.imdb.com/title/${imdbId}`,
     },
     tmdb: {
+      home: () => 'https://www.themoviedb.org',
       media: (tmdbId: string, type: 'tv' | 'movie') =>
         `https://www.themoviedb.org/${type}/${tmdbId}`,
     },
+    justWatch: () => 'https://www.justwatch.com',
+    wikipediaHome: () => 'https://www.wikipedia.org',
+    ccBySa4: () => 'https://creativecommons.org/licenses/by-sa/4.0/',
     x: (id: string) => `https://x.com/${id}`,
     instagram: (id: string) => `https://www.instagram.com/${id}`,
     facebook: (id: string) => `https://www.facebook.com/${id}`,

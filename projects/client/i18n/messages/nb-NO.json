@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Sesong 1-{number}",
-  "text_recap_source_wikipedia": "Sammendrag basert på Wikipedia",
   "text_recap_spoiler_partial": "Du har sett {watched} av {total} episoder. Dette avslører resten av sesong {number}.",
   "text_recap_spoiler_unwatched": "Du har ikke begynt på sesong {number}. Dette avslører alt.",
   "text_recap_story_description": "Hele historien, frem til sesongen du fullførte",
