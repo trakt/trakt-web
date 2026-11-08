@@ -14835,6 +14835,14 @@
       "default": "Recommends titles that are not out yet, picked for you. Switch between Out now and Coming soon above the Recommended list.",
       "description": "Description of the coming soon recommendations preview feature. Out now and Coming soon are the toggle option names."
     },
+    "preview_feature_title_insights_card": {
+      "default": "Hype and match meters",
+      "description": "Product feature name for the preview feature that shows a hype meter and a taste match meter in the Insights section of movie and show pages."
+    },
+    "preview_feature_description_insights_card": {
+      "default": "Shows how hyped a title is and how well it matches your taste in the Insights section of movie and show pages.",
+      "description": "Description of the hype and match meters preview feature."
+    },
     "preview_feature_title_season_recap": {
       "default": "Season recap",
       "description": "Product feature name for the preview feature that adds a recap of a season to the show page."

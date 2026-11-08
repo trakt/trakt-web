@@ -1,13 +1,8 @@
-import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { distinctUntilChanged, map } from 'rxjs';
+import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
+import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
 
 export function useInsightsCard() {
-  const { user } = useUser();
+  const { isEnabled } = useFeatureFlag();
 
-  const isInsightsCard = user.pipe(
-    map(($user) => $user?.isDirector ?? false),
-    distinctUntilChanged(),
-  );
-
-  return { isInsightsCard };
+  return { isInsightsCard: isEnabled(FeatureFlag.InsightsCard) };
 }
