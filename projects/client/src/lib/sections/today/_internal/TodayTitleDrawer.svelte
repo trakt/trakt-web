@@ -15,6 +15,7 @@
   import TodayDrawerHeader from "./TodayDrawerHeader.svelte";
   import TodayFaces from "./TodayFaces.svelte";
   import TodayMilestoneChip from "./TodayMilestoneChip.svelte";
+  import TodayTimelineList from "./TodayTimelineList.svelte";
   import { todayStoryNavigation } from "./todayStoryNavigation.ts";
   import { toFriendActionLabel } from "./toFriendActionLabel.ts";
   import { toFriendActionTime } from "./toFriendActionTime.ts";
@@ -56,7 +57,7 @@
       {/snippet}
     </TodayDrawerHeader>
 
-    <ul class="drawer-timeline">
+    <TodayTimelineList>
       {#each story.actions as action (action.key)}
         <TodayActionRow
           title={toDisplayableName(action.user)}
@@ -72,7 +73,7 @@
           {/if}
         </TodayActionRow>
       {/each}
-    </ul>
+    </TodayTimelineList>
 
     <div class="drawer-play">
       <Link
@@ -113,16 +114,6 @@
         height: 100%;
         object-fit: cover;
       }
-    }
-
-    .drawer-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-m);
-
-      margin: 0;
-      padding: 0;
-      list-style: none;
     }
   }
 
