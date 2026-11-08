@@ -8,6 +8,7 @@
     slug,
     id,
     title,
+    extra,
   }: SummarySocialRowProps = $props();
 </script>
 
@@ -17,6 +18,7 @@
   {/key}
 
   <SocialActivitiesButton target={{ type, slug }} {title} />
+  {@render extra?.()}
 </div>
 
 <style lang="scss">
@@ -24,6 +26,7 @@
 
   .trakt-summary-social-row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: var(--gap-xs);
 
@@ -36,6 +39,7 @@
 
     @include for-tablet-sm-and-below {
       align-self: center;
+      justify-content: center;
 
       :global(.trakt-reactions-popover-trigger) {
         margin-inline-start: 0;

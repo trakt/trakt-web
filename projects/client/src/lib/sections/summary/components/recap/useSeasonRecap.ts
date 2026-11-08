@@ -5,13 +5,14 @@ import { useRecapQuery } from './useRecapQuery.ts';
 type SeasonRecapTarget = {
   slug: string;
   season: number;
+  enabled: boolean;
 };
 
 export function useSeasonRecap(target$: Observable<SeasonRecapTarget>) {
   const { isVip, result } = useRecapQuery({
     target$,
-    toQuery: ({ target: { slug, season }, isVip }) =>
-      showSeasonRecapQuery({ slug, season, isVip }),
+    toQuery: ({ target: { slug, season, enabled }, isVip }) =>
+      showSeasonRecapQuery({ slug, season, isVip, enabled }),
   });
 
   return { recap: result, isVip };

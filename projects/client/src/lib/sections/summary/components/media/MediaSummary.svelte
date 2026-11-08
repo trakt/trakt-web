@@ -28,6 +28,7 @@
   const {
     intl,
     contextualContent,
+    socialContent,
     streamOn,
     crew,
     ...target
@@ -99,6 +100,7 @@
           slug={media.slug}
           id={media.id}
           {title}
+          extra={socialContent}
         />
       </RenderFor>
     </SummaryHeader>

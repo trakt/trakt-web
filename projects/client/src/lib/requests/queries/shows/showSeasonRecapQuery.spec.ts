@@ -12,7 +12,12 @@ const URL = 'http://localhost/v3/shows/severance/seasons/1/recap';
 
 function query(isVip = true) {
   return createTestBedQuery(
-    showSeasonRecapQuery({ slug: 'severance', season: 1, isVip }),
+    showSeasonRecapQuery({
+      slug: 'severance',
+      season: 1,
+      isVip,
+      enabled: true,
+    }),
   );
 }
 
@@ -51,11 +56,13 @@ describe('showSeasonRecapQuery', () => {
       slug: 'severance',
       season: 1,
       isVip: true,
+      enabled: true,
     });
     const standard = showSeasonRecapQuery({
       slug: 'severance',
       season: 1,
       isVip: false,
+      enabled: true,
     });
 
     expect(vip.queryKey).not.to.deep.equal(standard.queryKey);
@@ -66,6 +73,7 @@ describe('showSeasonRecapQuery', () => {
       slug: 'severance',
       season: 1,
       isVip: true,
+      enabled: true,
     });
 
     expect(queryKey).to.include(InvalidateAction.Vip.Updated);

@@ -1,7 +1,9 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
 
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
@@ -18,6 +20,7 @@
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
+  import SeasonRecapPill from "./components/recap/SeasonRecapPill.svelte";
   import Sentiment from "./components/sentiment/Sentiment.svelte";
   import SoundtrackList from "./components/soundtrack/SoundtrackList.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
@@ -61,6 +64,14 @@
   );
 </script>
 
+{#snippet recapPill()}
+  <RenderForFeature flag={FeatureFlag.SeasonRecap}>
+    {#snippet enabled()}
+      <SeasonRecapPill show={media} {seasons} />
+    {/snippet}
+  </RenderForFeature>
+{/snippet}
+
 <SummaryDrawer
   {sentiment}
   {realityCheck}
@@ -75,11 +86,24 @@
 />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  <MediaSummaryV2 {media} {intl} {crew} type="show" />
+  <MediaSummaryV2
+    {media}
+    {intl}
+    {crew}
+    type="show"
+    socialContent={recapPill}
+  />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-  <MediaSummary {media} {intl} {crew} {streamOn} type="show">
+  <MediaSummary
+    {media}
+    {intl}
+    {crew}
+    {streamOn}
+    type="show"
+    socialContent={recapPill}
+  >
     {#snippet contextualContent()}
       <RenderFor audience="all" device={["desktop"]}>
         <WhereToWatchList type="show" {media} {streamOn} variant="inline" />
@@ -106,7 +130,7 @@
     type="show" />
 </RenderFor>
 
-<SeasonList show={media} {seasons} {currentSeason} hasRecap />
+<SeasonList show={media} {seasons} {currentSeason} />
 
 <CastList
   title={m.list_title_actors()}

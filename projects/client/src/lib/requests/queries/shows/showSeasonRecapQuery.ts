@@ -10,6 +10,7 @@ type ShowSeasonRecapParams = {
   slug: string;
   season: number;
   isVip: boolean;
+  enabled: boolean;
 } & ApiParams;
 
 export const showSeasonRecapQuery = defineQuery({
@@ -21,4 +22,5 @@ export const showSeasonRecapQuery = defineQuery({
   mapper: (response) => mapToSeasonRecap(response.body),
   schema: SeasonRecapSchema.nullable(),
   ttl: time.hours(3),
+  enabled: (params) => params.enabled,
 });

@@ -289,15 +289,10 @@
   </RenderForFeature>
 {/if}
 
-{#if drawer === SummaryDrawers.SeasonRecap && details.type === "show" && seasons && currentSeason != null && showEntry}
-  <RenderForFeature flag={FeatureFlag.SeasonRecap} audience="director">
+{#if drawer === SummaryDrawers.SeasonRecap && details.type === "show" && seasons && showEntry}
+  <RenderForFeature flag={FeatureFlag.SeasonRecap}>
     {#snippet enabled()}
-      <SeasonRecapDrawerHost
-        show={showEntry}
-        {seasons}
-        season={currentSeason}
-        onClose={close}
-      />
+      <SeasonRecapDrawerHost show={showEntry} {seasons} onClose={close} />
     {/snippet}
   </RenderForFeature>
 {/if}

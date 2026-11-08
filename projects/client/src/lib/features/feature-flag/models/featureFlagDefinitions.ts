@@ -76,7 +76,7 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_season_recap(),
     addedAt: new Date('2026-10-27'),
     description: () => m.preview_feature_description_season_recap(),
-    audience: 'director',
+    audience: 'vip',
   },
   [FeatureFlag.PersonalizedRelated]: {
     icon: SparkleStarIcon,

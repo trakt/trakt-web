@@ -17,8 +17,11 @@
   import RecapSpoilerGuard from "./_internal/RecapSpoilerGuard.svelte";
   import RecapStory from "./_internal/RecapStory.svelte";
   import RecapStoryLocked from "./_internal/RecapStoryLocked.svelte";
+  import RecapStoryProgress from "./_internal/RecapStoryProgress.svelte";
   import RecapTab from "./_internal/RecapTab.svelte";
+  import { toStoryProgress } from "./_internal/toStoryProgress.ts";
   import { toRecapDuration } from "./toRecapDuration.ts";
+  import { useCaughtUpSeason } from "./useCaughtUpSeason.ts";
   import { useRecapSpoilerGuard } from "./useRecapSpoilerGuard.ts";
   import { useSeasonRecap } from "./useSeasonRecap.ts";
   import { useShowRecapStory } from "./useShowRecapStory.ts";
@@ -26,10 +29,9 @@
   const RECAP_TAB = "recap" as const;
   const STORY_TAB = "story" as const;
 
-  const { show, seasons, season, onClose }: {
+  const { show, seasons, onClose }: {
     show: ShowEntry;
     seasons: ReadonlyArray<Season>;
-    season: number;
     onClose: () => void;
   } = $props();
 
@@ -59,15 +61,20 @@
     goto(url, { replaceState: true, noScroll: true, keepFocus: true });
   }
 
+  const caughtUpSeason = useCaughtUpSeason(
+    fromRune(() => ({ showId: show.id, seasons })),
+  );
+  const season = $derived($caughtUpSeason ?? 0);
+
   const { recap, isVip: isVipStore } = useSeasonRecap(
-    fromRune(() => ({ slug: show.slug, season })),
+    fromRune(() => ({ slug: show.slug, season, enabled: season > 0 })),
   );
   const isVip = $derived($isVipStore);
   const { story } = useShowRecapStory(
     fromRune(() => ({
       slug: show.slug,
       through: season,
-      enabled: $recap?.hasStory === true,
+      enabled: season > 0 && $recap?.hasStory === true,
     })),
   );
 
@@ -90,6 +97,14 @@
   const isLoading = $derived($recap === undefined);
   const expectsTabs = $derived(
     !isVip || $recap === undefined || $recap?.hasStory === true,
+  );
+  const progress = $derived(
+    toStoryProgress({
+      seasons,
+      covered: seasons
+        .map(({ number }) => number)
+        .filter((number) => number > 0 && number <= season),
+    }),
   );
   const shownTab = $derived(
     activeTab === STORY_TAB && hasTabs ? STORY_TAB : RECAP_TAB,
@@ -130,7 +145,7 @@
   <LockIcon />
 {/snippet}
 
-{#if $recap !== null}
+{#if $recap !== null && season > 0}
   <Drawer
     {onClose}
     variant={isVip ? "vip" : "default"}
@@ -150,6 +165,10 @@
       />
 
       <div class="recap-body">
+        {#if duration}
+          <RecapStoryProgress {progress} {duration} />
+        {/if}
+
         <RecapSpoilerGuard
           {isGuarded}
           {season}
@@ -215,6 +234,9 @@
     }
 
     .recap-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-l);
       padding-block: var(--gap-m) var(--gap-xl);
     }
 
