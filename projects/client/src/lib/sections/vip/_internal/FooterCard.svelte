@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ThreadRing from "$lib/components/badge/ThreadRing.svelte";
   import type { Snippet } from "svelte";
   import GlassCard from "./GlassCard.svelte";
 
@@ -6,10 +7,19 @@
     children,
     icon,
     title,
-  }: { icon: Snippet; title?: string } & ChildrenProps = $props();
+    isHero = false,
+  }: {
+    icon: Snippet;
+    title?: string;
+    isHero?: boolean;
+  } & ChildrenProps = $props();
 </script>
 
 <GlassCard variant="bordered">
+  {#if isHero}
+    <ThreadRing opacity={0.9} />
+  {/if}
+
   <div class="trakt-vip-footer-card-content">
     {@render icon()}
 
@@ -23,6 +33,8 @@
 
 <style>
   .trakt-vip-footer-card-content {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;

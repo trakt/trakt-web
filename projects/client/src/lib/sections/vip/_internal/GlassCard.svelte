@@ -11,6 +11,7 @@
 
 <style>
   .trakt-vip-glass-card {
+    position: relative;
     overflow: hidden;
 
     padding: var(--ni-24);
