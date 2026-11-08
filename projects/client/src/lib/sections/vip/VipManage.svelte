@@ -4,7 +4,7 @@
   import UsageTabs from "./_internal/UsageTabs.svelte";
   import { useVip } from "./_internal/useVip";
   import VipContent from "./_internal/VipContent.svelte";
-  import VipFeatures from "./_internal/VipFeatures.svelte";
+  import VipPerks from "./_internal/VipPerks.svelte";
 
   const { subscription, isLoading } = useVip();
 </script>
@@ -18,7 +18,7 @@
 
     <UsageTabs subscription={$subscription} />
 
-    <VipFeatures />
+    <VipPerks />
   {/if}
 </VipContent>
 

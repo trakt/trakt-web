@@ -6666,6 +6666,10 @@
       "default": "Mixed",
       "description": "Text used to indicate that a movie or show has an overall mixed sentiment analysis result."
     },
+    "header_vip_your_perks": {
+      "default": "Your VIP perks",
+      "description": "Heading above the list of VIP perks on the VIP page for members who already have VIP."
+    },
     "text_vip_features_tagline": {
       "default": "No hype, just features.",
       "description": "Text used to promote the features of a VIP package for the user."
