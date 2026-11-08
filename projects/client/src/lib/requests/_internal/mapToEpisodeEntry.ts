@@ -12,6 +12,7 @@ import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
 import { type EpisodeType, EpisodeUnknownType } from '../models/EpisodeType.ts';
 import { mapToPostCredits } from './mapToPostCredits.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
+import { toEpisodeReleaseDate } from './toEpisodeReleaseDate.ts';
 
 type EpisodeResponse =
   | UpNextResponse['progress']['next_episode']
@@ -29,9 +30,10 @@ export function mapToEpisodeEntry(
 
   const airDate = new Date(episode.first_aired ?? MAX_DATE);
   const releaseDate = new Date(episode.released ?? MAX_DATE);
-  const effectiveReleaseDate = new Date(
-    episode.effective_release_date ?? MAX_DATE,
-  );
+  const effectiveReleaseDate = toEpisodeReleaseDate({
+    firstAired: episode.first_aired,
+    released: episode.released,
+  });
 
   return {
     id: episode.ids.trakt,

@@ -15,6 +15,7 @@ import { time } from '$lib/utils/timing/time.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { ShowProgressResponse } from '@trakt/api';
 import { mapToPostCredits } from '../../_internal/mapToPostCredits.ts';
+import { toEpisodeReleaseDate } from '../../_internal/toEpisodeReleaseDate.ts';
 
 const showProgressRequest = ({ fetch, slug }: { slug: string } & ApiParams) =>
   api({ fetch }).shows.progress.watched({
@@ -38,9 +39,10 @@ function mapShowProgressResponse(
 
   const airDate = new Date(episode?.first_aired ?? MAX_DATE);
   const releaseDate = new Date(episode?.released ?? MAX_DATE);
-  const effectiveReleaseDate = new Date(
-    Math.min(airDate.getTime(), releaseDate.getTime()),
-  );
+  const effectiveReleaseDate = toEpisodeReleaseDate({
+    firstAired: episode?.first_aired,
+    released: episode?.released,
+  });
 
   const key = `episode-${episode?.ids.trakt ?? crypto.randomUUID()}`;
 
