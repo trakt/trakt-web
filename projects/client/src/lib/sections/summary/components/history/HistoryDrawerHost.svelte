@@ -1,12 +1,11 @@
 <script lang="ts">
-  import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import FadeInDrawer from "$lib/components/drawer/FadeInDrawer.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useRecentlyWatchedList } from "$lib/sections/lists/stores/useRecentlyWatchedList.ts";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { fade } from "svelte/transition";
   import HistoryList from "../details/_internal/HistoryList.svelte";
   import type { MediaDetailsProps } from "../details/MediaDetailsProps.ts";
 
@@ -50,8 +49,6 @@
 
   const hasHistory = $derived($list.length > 0);
 
-  let isOpen = $state(false);
-
   const drilldown = $derived({
     href,
     label: m.button_label_view_all_history(),
@@ -60,36 +57,31 @@
   });
 </script>
 
-<Drawer
+<FadeInDrawer
   {onClose}
-  onOpened={() => (isOpen = true)}
   title={m.list_title_history()}
   size="auto"
   {elevated}
   {drilldown}
 >
-  {#if isOpen}
-    <div transition:fade={{ duration: 150 }}>
-      <RenderFor audience="authenticated">
-        <div class="trakt-media-watch-history">
-          {#if $isLoading && !hasHistory}
-            <LoadingIndicator size="large" />
-          {/if}
+  <RenderFor audience="authenticated">
+    <div class="trakt-media-watch-history">
+      {#if $isLoading && !hasHistory}
+        <LoadingIndicator size="large" />
+      {/if}
 
-          {#if !$isLoading && !hasHistory}
-            <p class="italic watch-history-placeholder">
-              {m.list_placeholder_media_history({ title })}
-            </p>
-          {/if}
+      {#if !$isLoading && !hasHistory}
+        <p class="italic watch-history-placeholder">
+          {m.list_placeholder_media_history({ title })}
+        </p>
+      {/if}
 
-          {#if hasHistory}
-            <HistoryList list={$list} />
-          {/if}
-        </div>
-      </RenderFor>
+      {#if hasHistory}
+        <HistoryList list={$list} />
+      {/if}
     </div>
-  {/if}
-</Drawer>
+  </RenderFor>
+</FadeInDrawer>
 
 <style>
   .trakt-media-watch-history {

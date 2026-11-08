@@ -1,6 +1,6 @@
 <script lang="ts">
   import SingleSelect from "$lib/components/select/SingleSelect.svelte";
-  import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import FadeInDrawer from "$lib/components/drawer/FadeInDrawer.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -9,7 +9,6 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { TriviaCategory } from "$lib/requests/models/MediaTrivia";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
-  import { fade } from "svelte/transition";
   import TriviaCard from "./_internal/TriviaCard.svelte";
   import { useTrivia } from "./useTrivia";
 
@@ -18,7 +17,6 @@
   const { media, onClose }: { media: MediaEntry; onClose: () => void } =
     $props();
 
-  let isOpen = $state(false);
   let activeCategory = $state<TriviaCategory | "all">("all");
 
   const { current: triviaType, set, options } = useToggler("trivia");
@@ -102,33 +100,28 @@
   {/if}
 {/snippet}
 
-<Drawer
+<FadeInDrawer
   {onClose}
-  onOpened={() => (isOpen = true)}
   title={m.list_title_trivia()}
   variant="vip"
   size="auto"
   metaInfo={$hasSpoilers ? metaInfo : undefined}
   {badge}
 >
-  {#if isOpen}
-    <div transition:fade={{ duration: 150 }}>
-      <RenderFor audience="vip">
-        <div class="trivia-drawer-list">
-          {#each filteredList as trivia (trivia.key)}
-            <TriviaCard {trivia} {media} />
-          {/each}
-        </div>
-      </RenderFor>
-
-      <RenderFor audience="free">
-        <UpsellCta source="trivia">
-          {m.vip_feature_description_trivia()}
-        </UpsellCta>
-      </RenderFor>
+  <RenderFor audience="vip">
+    <div class="trivia-drawer-list">
+      {#each filteredList as trivia (trivia.key)}
+        <TriviaCard {trivia} {media} />
+      {/each}
     </div>
-  {/if}
-</Drawer>
+  </RenderFor>
+
+  <RenderFor audience="free">
+    <UpsellCta source="trivia">
+      {m.vip_feature_description_trivia()}
+    </UpsellCta>
+  </RenderFor>
+</FadeInDrawer>
 
 <style>
   .trivia-controls {
