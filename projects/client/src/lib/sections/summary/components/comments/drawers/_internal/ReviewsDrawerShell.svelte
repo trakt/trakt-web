@@ -6,6 +6,7 @@
   import type { CommentsProps } from "../../CommentsProps";
   import CommentThreadCard from "../CommentThreadCard.svelte";
   import { THREAD_LIST_CLASS } from "../constants";
+  import { isReplyingTo } from "../isReplyingTo";
   import type { useActiveComment } from "../useActiveComment";
 
   type ReviewsDrawerShellProps = {
@@ -24,9 +25,6 @@
 
   const { reset, setReplying, registerDraft, activeComment } =
     $derived(activeCommentState);
-
-  const isReplying = (id: number) =>
-    $activeComment?.id === id && $activeComment?.isReplying;
 </script>
 
 <div class={THREAD_LIST_CLASS}>
@@ -40,7 +38,7 @@
           {setReplying}
           {registerDraft}
           {...props}
-          isReplying={isReplying(comment.id)}
+          isReplying={isReplyingTo($activeComment, comment.id)}
           shouldScrollIntoView={comment.id === source?.id}
           showReplies={comment.id === source?.id && source.showReplies}
         />

@@ -6,6 +6,7 @@
   import type { CommentsProps } from "./CommentsProps.ts";
   import { commentsPlaceholder } from "./_internal/commentsPlaceholder.ts";
   import { useComments } from "./_internal/useComments.ts";
+  import { isReplyingTo } from "./drawers/isReplyingTo.ts";
   import { useActiveComment } from "./drawers/useActiveComment.ts";
   import CommentThreadCard from "./drawers/CommentThreadCard.svelte";
 
@@ -17,9 +18,6 @@
   const { reset, setReplying, registerDraft, activeComment } = useActiveComment(
     { confirm },
   );
-
-  const isReplying = (id: number) =>
-    $activeComment?.id === id && $activeComment?.isReplying;
 </script>
 
 <div class="trakt-comment-threads-list">
@@ -49,7 +47,7 @@
             {setReplying}
             {registerDraft}
             {...props}
-            isReplying={isReplying(comment.id)}
+            isReplying={isReplyingTo($activeComment, comment.id)}
             shouldScrollIntoView={false}
           />
         {/each}
