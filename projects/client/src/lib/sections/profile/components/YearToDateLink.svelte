@@ -6,17 +6,14 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ExternalLinkIcon from "$lib/components/icons/ExternalLinkIcon.svelte";
+  import { toYearToDateYear } from "./_internal/toYearToDateYear.ts";
 
   const { slug, source }: { slug: string; source: string } = $props();
 
   const { isMe } = $derived(useIsMe(slug));
   const { user } = useUser();
 
-  const now = new Date();
-  const year = now.getFullYear();
-  const isFirstMonth = now.getMonth() === 0;
-
-  const currentYear = isFirstMonth ? year - 1 : year;
+  const currentYear = toYearToDateYear(new Date());
 
   const ytdSlug = $derived($isMe ? $user.slug : slug);
   const href = $derived(UrlBuilder.users(ytdSlug).yearToDate(currentYear));
