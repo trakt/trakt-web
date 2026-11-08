@@ -16,6 +16,7 @@ const MIXTAPE_PREFIX = 'mixtape';
 const RECOMMENDATIONS_PREFIX = 'recommendations';
 const INSIGHTS_PREFIX = 'insights';
 const RECAP_PREFIX = 'recap';
+const BRANDING_PREFIX = 'branding';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -136,6 +137,8 @@ export const AnalyticsEvent = {
   RecapTab: buildEventKey(RECAP_PREFIX, 'tab'),
   RecapReveal: buildEventKey(RECAP_PREFIX, 'reveal'),
   RecapChapter: buildEventKey(RECAP_PREFIX, 'chapter'),
+
+  BrandingDownload: buildEventKey(BRANDING_PREFIX, 'download'),
 
   Favorite: buildEventKey(MEDIA_ACTION_PREFIX, 'favorite'),
   Rewatching: buildEventKey(MEDIA_ACTION_PREFIX, 'rewatching'),
