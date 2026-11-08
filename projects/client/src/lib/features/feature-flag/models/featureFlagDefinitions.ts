@@ -2,6 +2,7 @@ import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import HourglassIcon from '$lib/components/icons/HourglassIcon.svelte';
+import MatchIcon from '$lib/components/icons/MatchIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
@@ -90,6 +91,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-11-08'),
     description: () =>
       m.preview_feature_description_anticipated_recommendations(),
+    audience: 'director',
+  },
+  [FeatureFlag.InsightsCard]: {
+    icon: MatchIcon,
+    title: () => m.preview_feature_title_insights_card(),
+    addedAt: new Date('2026-11-08'),
+    description: () => m.preview_feature_description_insights_card(),
     audience: 'director',
   },
 };
