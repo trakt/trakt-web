@@ -1,7 +1,6 @@
 <script lang="ts">
   import AnticipatedIcon from "$lib/components/icons/AnticipatedIcon.svelte";
-  import StemTag from "$lib/components/tags/StemTag.svelte";
-  import TextTag from "$lib/components/tags/TextTag.svelte";
+  import TagByType from "$lib/components/tags/TagByType.svelte";
   import type { TagType } from "./models/TagType";
   import type { TagIntl } from "./TagIntl";
 
@@ -26,12 +25,6 @@
   </p>
 {/snippet}
 
-{#if type === "text"}
-  <TextTag {icon}>
-    {@render content()}
-  </TextTag>
-{:else}
-  <StemTag {icon}>
-    {@render content()}
-  </StemTag>
-{/if}
+<TagByType {type} {icon}>
+  {@render content()}
+</TagByType>
