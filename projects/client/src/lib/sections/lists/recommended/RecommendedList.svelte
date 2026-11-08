@@ -6,8 +6,8 @@
   import { useRecommendedMode } from "$lib/features/recommendations/useRecommendedMode";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
-  import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import AnticipatedRecommendedListItem from "./AnticipatedRecommendedListItem.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
   import { useAnticipatedRecommendedList } from "./useAnticipatedRecommendedList";
@@ -58,12 +58,10 @@
     urlBuilder={() => UrlBuilder.recommended()}
   >
     {#snippet item(media)}
-      <DefaultMediaItem
+      <AnticipatedRecommendedListItem
         type={media.type}
         {media}
         mode={type === "media" ? "mixed" : "standalone"}
-        source="recommended"
-        canDeemphasize
       />
     {/snippet}
   </DrillableMediaList>

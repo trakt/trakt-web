@@ -41,6 +41,8 @@ export const mediaAnticipatedRecommendedQuery = defineInfiniteQuery({
     InvalidateAction.MarkAsWatched('episode'),
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
+    InvalidateAction.HideRecommended('show'),
+    InvalidateAction.HideRecommended('movie'),
   ],
   dependencies: (params: MediaAnticipatedRecommendedParams) => [
     params.limit,
