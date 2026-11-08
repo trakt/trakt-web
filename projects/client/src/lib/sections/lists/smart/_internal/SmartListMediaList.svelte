@@ -1,12 +1,11 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SmartList } from "$lib/requests/queries/users/smartListQuery";
-  import { smartListItemsQuery } from "$lib/requests/queries/smart-lists/smartListItemsQuery";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import DefaultMediaItem from "../../components/DefaultMediaItem.svelte";
   import DrillableMediaList from "../../drilldown/DrillableMediaList.svelte";
-  import { usePaginatedListQuery } from "../../stores/usePaginatedListQuery";
+  import { createSmartListItemsStore } from "../createSmartListItemsStore";
   import { toDiscoverMode } from "../toDiscoverMode";
 
   type SmartListMediaListProps = {
@@ -19,10 +18,7 @@
 
   const type = $derived(toDiscoverMode(list.mediaType));
 
-  const useList = (params: { limit: number }) =>
-    usePaginatedListQuery(
-      smartListItemsQuery({ slug: list.slug, limit: params.limit }),
-    );
+  const useList = createSmartListItemsStore(() => list);
 </script>
 
 <DrillableMediaList
