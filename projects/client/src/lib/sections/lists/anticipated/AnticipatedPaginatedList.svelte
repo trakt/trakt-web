@@ -1,40 +1,18 @@
 <script lang="ts">
-  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
-  import { useFilter } from "$lib/features/filters/useFilter";
-  import type { Snippet } from "svelte";
-  import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import DiscoverPaginatedList from "../_internal/DiscoverPaginatedList.svelte";
+  import type { DiscoverPaginatedListProps } from "../_internal/DiscoverPaginatedListProps";
   import AnticipatedListItem from "./AnticipatedListItem.svelte";
   import { useAnticipatedList } from "./useAnticipatedList";
 
-  type AnticipatedListProps = {
-    title?: string;
-    type: DiscoverMode;
-    actions?: Snippet;
-    search?: Record<string, string>;
-  };
-
-  const { title, type, actions, search }: AnticipatedListProps = $props();
-  const { filterMap } = useFilter();
+  const props: DiscoverPaginatedListProps = $props();
 </script>
 
-<DrilledMediaList
-  id="view-all-anticipated-{type}"
-  {title}
-  {type}
-  filter={$filterMap}
-  useList={(params) =>
-    useAnticipatedList({
-      ...params,
-      search,
-    })}
-  {actions}
+<DiscoverPaginatedList
+  {...props}
+  name="anticipated"
+  useList={useAnticipatedList}
 >
-  {#snippet item(media)}
-    <AnticipatedListItem
-      type={media.type}
-      {media}
-      style="summary"
-      mode={type === "media" ? "mixed" : "standalone"}
-    />
+  {#snippet listItem(media, mode)}
+    <AnticipatedListItem type={media.type} {media} style="summary" {mode} />
   {/snippet}
-</DrilledMediaList>
+</DiscoverPaginatedList>
