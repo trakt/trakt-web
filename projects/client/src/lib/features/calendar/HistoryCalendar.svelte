@@ -6,7 +6,7 @@
   import { untrack } from "svelte";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import CalendarChunkSources from "./_internal/CalendarChunkSources.svelte";
-  import { dateKey } from "./_internal/dateKey";
+  import { toVisiblePeriodCalendar } from "./_internal/toVisiblePeriodCalendar.ts";
   import { useCalendarBoard } from "./_internal/useCalendarBoard.ts";
   import { getCalendarContext } from "./context/getCalendarContext";
   import type { HistoryCalendarProps } from "./models/HistoryCalendarProps";
@@ -43,17 +43,9 @@
 
   const selectedDate = $derived($visibleDate ?? $activeDate);
 
-  const visiblePeriodCalendar = $derived.by(() => {
-    const firstPeriod = periods.at(0)?.calendar ?? [];
-    if (!$visibleDate) return firstPeriod;
-
-    const scrollKey = dateKey($visibleDate);
-    const match = periods.find((period) =>
-      period.calendar.some((day) => dateKey(day.date) === scrollKey),
-    );
-
-    return match?.calendar ?? firstPeriod;
-  });
+  const visiblePeriodCalendar = $derived(
+    toVisiblePeriodCalendar({ periods, visibleDate: $visibleDate }),
+  );
 </script>
 
 <div class="trakt-history-calendar">
