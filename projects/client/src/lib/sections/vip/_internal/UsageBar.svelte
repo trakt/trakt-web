@@ -1,6 +1,7 @@
 <script lang="ts">
   import DistributionBar from "$lib/components/charts/DistributionBar.svelte";
   import { languageTag } from "$lib/features/i18n";
+  import { revealOnView } from "$lib/utils/actions/revealOnView";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import { calculateLimitProgress } from "./utils/calculateLimitProgress";
 
@@ -12,12 +13,16 @@
     vipLimit,
     variant: externalVariant = "vip",
     isLoading = false,
+    fillOnView = false,
+    index = 0,
   }: {
     current: number;
     freeLimit: number;
     vipLimit: number;
     variant?: "vip" | "free";
     isLoading?: boolean;
+    fillOnView?: boolean;
+    index?: number;
   } = $props();
 
   const isEqualLimit = $derived(freeLimit === vipLimit);
@@ -32,7 +37,12 @@
   );
 </script>
 
-<div class="trakt-usage-bar" data-variant={variant}>
+<div
+  class="trakt-usage-bar"
+  data-variant={variant}
+  data-fill-on-view={fillOnView}
+  use:revealOnView={{ delay: Math.min(index * 150, 400) }}
+>
   {#if limitedPercentage}
     <div
       class="trakt-limit-zone free-limit"
@@ -73,6 +83,15 @@
 
     border-radius: var(--border-radius-xxl);
     overflow: hidden;
+
+    &:global([data-reveal]) {
+      transition: none;
+    }
+
+    &:global([data-reveal="pending"]) {
+      opacity: 1;
+      translate: none;
+    }
 
     &[data-variant="vip"] {
       background-color: var(--color-usage-bar-background);
@@ -122,5 +141,39 @@
     z-index: var(--layer-raised);
     position: absolute;
     inset: 0;
+
+    clip-path: inset(0 0 0 0 round var(--border-radius-xxl));
+  }
+
+  .trakt-usage-bar[data-fill-on-view="true"] {
+    .trakt-usage-fill {
+      transition: clip-path 900ms cubic-bezier(0.22, 1, 0.36, 1)
+        var(--reveal-delay, 0ms);
+    }
+
+    .vip-limit {
+      transition: opacity 500ms ease-out calc(var(--reveal-delay, 0ms) + 250ms);
+    }
+
+    &:global([data-reveal="pending"]) .trakt-usage-fill {
+      clip-path: inset(0 100% 0 0 round var(--border-radius-xxl));
+    }
+
+    &:global([data-reveal="pending"]):dir(rtl) .trakt-usage-fill {
+      clip-path: inset(0 0 0 100% round var(--border-radius-xxl));
+    }
+
+    &:global([data-reveal="pending"]) .vip-limit {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trakt-usage-bar[data-fill-on-view="true"] {
+      .trakt-usage-fill,
+      .vip-limit {
+        transition: none;
+      }
+    }
   }
 </style>
