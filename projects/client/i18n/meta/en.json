@@ -1780,26 +1780,6 @@
       "default": "Show only finales",
       "description": "Accessible label for the toggle that shows only finale episodes: series, season and mid-season finales."
     },
-    "text_recommended_meta_info": {
-      "default": "{media} · {mode}",
-      "description": "Subtitle under the Recommended page title when the Smart / Classic toggle is on. {media} is the media type (Media, Shows or Movies) and {mode} is Smart or Classic."
-    },
-    "button_text_recommendation_mode_smart": {
-      "default": "Smart",
-      "description": "Recommendations toggle option for picks from the new model that learns from everything the user watches, rates and hides. Shown as the purple subtitle under Recommended. Keep it as short as possible."
-    },
-    "button_label_recommendation_mode_smart": {
-      "default": "Show smart recommendations",
-      "description": "Accessible label for the recommendations toggle option that shows picks from the new learning model."
-    },
-    "button_text_recommendation_mode_classic": {
-      "default": "Classic",
-      "description": "Recommendations toggle option for the original recommendations, based on titles related to what the user watched recently. Shown as the purple subtitle under Recommended. Keep it as short as possible."
-    },
-    "button_label_recommendation_mode_classic": {
-      "default": "Show classic recommendations",
-      "description": "Accessible label for the recommendations toggle option that shows the original recommendations."
-    },
     "button_text_related_mode_personal": {
       "default": "For you",
       "description": "Related titles toggle option that re-orders the related titles toward what the user likes. Keep it as short as possible."

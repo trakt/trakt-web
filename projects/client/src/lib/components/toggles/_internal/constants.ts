@@ -2,7 +2,6 @@ import type { EpisodeTypeFilter } from '$lib/features/calendar/models/EpisodeTyp
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
-import type { RecommendationMode } from '$lib/requests/models/RecommendationMode.ts';
 import type { RelatedMode } from '$lib/requests/models/RelatedMode.ts';
 import type { ToggleOption } from '../ToggleOption.ts';
 
@@ -16,7 +15,6 @@ export type TogglerId =
   | 'library'
   | 'episodeType'
   | 'myLists'
-  | 'recommendationMode'
   | 'relatedMode';
 
 type DiscoverToggleType = DiscoverMode;
@@ -28,7 +26,6 @@ type ActivityToggleType = 'reviews' | 'ratings';
 type LibraryToggleType = 'plex' | 'other';
 type EpisodeTypeToggleType = EpisodeTypeFilter;
 type MyListsToggleType = 'smart' | 'personal' | 'liked' | 'shared';
-type RecommendationModeToggleType = RecommendationMode;
 type RelatedModeToggleType = RelatedMode;
 
 type Toggler<T, K> = {
@@ -47,7 +44,6 @@ export type TogglerValueMap = {
   library: LibraryToggleType;
   episodeType: EpisodeTypeToggleType;
   myLists: MyListsToggleType;
-  recommendationMode: RecommendationModeToggleType;
   relatedMode: RelatedModeToggleType;
 };
 
@@ -241,23 +237,6 @@ const myLists: ToggleDefinition<'myLists'> = {
   ],
 };
 
-const recommendationMode: ToggleDefinition<'recommendationMode'> = {
-  id: 'recommendationMode',
-  default: 'smart',
-  options: [
-    {
-      value: 'smart',
-      text: m.button_text_recommendation_mode_smart,
-      label: m.button_label_recommendation_mode_smart,
-    },
-    {
-      value: 'classic',
-      text: m.button_text_recommendation_mode_classic,
-      label: m.button_label_recommendation_mode_classic,
-    },
-  ],
-};
-
 const relatedMode: ToggleDefinition<'relatedMode'> = {
   id: 'relatedMode',
   default: 'personal',
@@ -287,6 +266,5 @@ export const TOGGLERS: {
   library,
   episodeType,
   myLists,
-  recommendationMode,
   relatedMode,
 } as const;
