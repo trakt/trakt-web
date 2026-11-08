@@ -5,14 +5,13 @@
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { SmartList } from "$lib/requests/queries/users/smartListQuery";
 
   const {
-    list,
+    name,
     isDeleting,
     onDelete,
   }: {
-    list: SmartList;
+    name: string;
     isDeleting: boolean;
     onDelete: () => void;
   } = $props();
@@ -27,13 +26,13 @@
   const confirmDelete = $derived(
     confirm({
       type: ConfirmationType.DeleteList,
-      name: list.title,
+      name,
       onConfirm: onDelete,
     }),
   );
 
   const buttonProps: Omit<ButtonProps, "children"> = $derived({
-    label: m.button_label_delete_list({ name: list.title }),
+    label: m.button_label_delete_list({ name }),
     color: $color,
     onclick: confirmDelete,
     disabled: isDeleting,

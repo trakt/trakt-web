@@ -5,7 +5,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SmartList } from "$lib/requests/queries/users/smartListQuery";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import DeleteSmartListButton from "./DeleteSmartListButton.svelte";
+  import DeleteListButton from "../../_internal/DeleteListButton.svelte";
   import EditSmartListButton from "./EditSmartListButton.svelte";
   import { useDeleteSmartList } from "./useDeleteSmartList";
 
@@ -34,10 +34,6 @@
   {#snippet items()}
     <EditSmartListButton {list} />
 
-    <DeleteSmartListButton
-      {list}
-      isDeleting={$isDeleting}
-      {onDelete}
-    />
+    <DeleteListButton name={list.title} isDeleting={$isDeleting} {onDelete} />
   {/snippet}
 </PopupMenu>
