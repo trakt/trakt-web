@@ -1,3 +1,4 @@
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { RecommendedShowsMappedMock } from '$mocks/data/recommendations/mapped/RecommendedShowsMappedMock.ts';
 import { createTestBedInfiniteQuery } from '$test/beds/query/createTestBedInfiniteQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
@@ -21,6 +22,12 @@ describe('anticipatedRecommendedShowsQuery', () => {
           ),
         ),
       ),
+    );
+  });
+
+  it('should refetch after hiding a recommended show', () => {
+    expect(anticipatedRecommendedShowsQuery().queryKey).toContain(
+      InvalidateAction.HideRecommended('show'),
     );
   });
 });

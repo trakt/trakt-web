@@ -1,3 +1,4 @@
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { RecommendedMoviesMappedMock } from '$mocks/data/recommendations/mapped/RecommendedMoviesMappedMock.ts';
 import { createTestBedInfiniteQuery } from '$test/beds/query/createTestBedInfiniteQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
@@ -21,6 +22,12 @@ describe('anticipatedRecommendedMoviesQuery', () => {
           ),
         ),
       ),
+    );
+  });
+
+  it('should refetch after hiding a recommended movie', () => {
+    expect(anticipatedRecommendedMoviesQuery().queryKey).toContain(
+      InvalidateAction.HideRecommended('movie'),
     );
   });
 });

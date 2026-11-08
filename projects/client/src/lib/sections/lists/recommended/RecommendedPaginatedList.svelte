@@ -4,8 +4,8 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import { useRecommendedMode } from "$lib/features/recommendations/useRecommendedMode";
   import type { Snippet } from "svelte";
-  import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import AnticipatedRecommendedListItem from "./AnticipatedRecommendedListItem.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
   import { useAnticipatedRecommendedList } from "./useAnticipatedRecommendedList";
@@ -35,13 +35,11 @@
     {actions}
   >
     {#snippet item(media)}
-      <DefaultMediaItem
+      <AnticipatedRecommendedListItem
         type={media.type}
         {media}
         style="summary"
         mode={type === "media" ? "mixed" : "standalone"}
-        source="recommended"
-        canDeemphasize
       />
     {/snippet}
   </DrilledMediaList>
