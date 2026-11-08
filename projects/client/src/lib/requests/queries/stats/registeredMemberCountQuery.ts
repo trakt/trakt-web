@@ -44,7 +44,7 @@ const registeredMemberCountRequest = async ({ fetch }: ApiParams) => {
     : { body: undefined, status: 200 };
 };
 
-export const registeredMemberCountQuery = defineQuery({
+const defineRegisteredMemberCountQuery = defineQuery({
   key: 'registeredMemberCount',
   invalidations: [],
   dependencies: [],
@@ -58,4 +58,11 @@ export const registeredMemberCountQuery = defineQuery({
   refetchInterval: POLL_INTERVAL,
   refetchOnWindowFocus: true,
   retry: 1,
+});
+
+export const registeredMemberCountQuery = (
+  params?: Parameters<typeof defineRegisteredMemberCountQuery>[0],
+) => ({
+  ...defineRegisteredMemberCountQuery(params),
+  persister: undefined,
 });
