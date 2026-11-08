@@ -1,6 +1,5 @@
 <script lang="ts">
-  import Drawer from "$lib/components/drawer/Drawer.svelte";
-  import { fade } from "svelte/transition";
+  import FadeInDrawer from "$lib/components/drawer/FadeInDrawer.svelte";
 
   const {
     classList,
@@ -10,19 +9,8 @@
     classList: string;
     onClose: () => void;
   } & ChildrenProps = $props();
-
-  let isOpen = $state(false);
 </script>
 
-<Drawer
-  {onClose}
-  size="large"
-  {classList}
-  onOpened={() => (isOpen = true)}
->
-  {#if isOpen}
-    <div transition:fade={{ duration: 150 }}>
-      {@render children()}
-    </div>
-  {/if}
-</Drawer>
+<FadeInDrawer {onClose} size="large" {classList}>
+  {@render children()}
+</FadeInDrawer>

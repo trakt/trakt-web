@@ -1,12 +1,11 @@
 <script lang="ts">
-  import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import FadeInDrawer from "$lib/components/drawer/FadeInDrawer.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import UpsellCta from "$lib/features/upsell/UpsellCta.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
-  import { fade } from "svelte/transition";
   import { filterBySeason } from "./_internal/filterBySeason.ts";
   import SoundtrackBoard from "./_internal/SoundtrackBoard.svelte";
   import { toSoundtrackSummary } from "./_internal/toSoundtrackSummary.ts";
@@ -20,7 +19,6 @@
     fromRune(() => ({ slug: media.slug, type: media.type })),
   );
 
-  let isOpen = $state(false);
   let isSeasonOnly = $state(false);
 
   const hasSeasonTracks = $derived(
@@ -69,37 +67,32 @@
   </UpsellCta>
 {/snippet}
 
-<Drawer
+<FadeInDrawer
   {onClose}
-  onOpened={() => (isOpen = true)}
   title={m.list_title_soundtrack()}
   variant="vip"
   size="auto"
   {metaInfo}
   {actions}
 >
-  {#if isOpen}
-    <div transition:fade={{ duration: 150 }}>
-      <RenderFor audience="vip">
-        <SoundtrackBoard
-          {media}
-          tracks={shownTracks}
-          {summary}
-          source="soundtrack-drawer"
-          layout="stacked"
-        />
-      </RenderFor>
+  <RenderFor audience="vip">
+    <SoundtrackBoard
+      {media}
+      tracks={shownTracks}
+      {summary}
+      source="soundtrack-drawer"
+      layout="stacked"
+    />
+  </RenderFor>
 
-      <RenderFor audience="free">
-        {@render upsell()}
-      </RenderFor>
+  <RenderFor audience="free">
+    {@render upsell()}
+  </RenderFor>
 
-      <RenderFor audience="public">
-        {@render upsell()}
-      </RenderFor>
-    </div>
-  {/if}
-</Drawer>
+  <RenderFor audience="public">
+    {@render upsell()}
+  </RenderFor>
+</FadeInDrawer>
 
 <style lang="scss">
   .soundtrack-season-filter {

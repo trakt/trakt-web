@@ -2,7 +2,7 @@
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import Drawer from "$lib/components/drawer/Drawer.svelte";
+  import FadeInDrawer from "$lib/components/drawer/FadeInDrawer.svelte";
   import TabView from "$lib/components/tabs/TabView.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
@@ -12,7 +12,6 @@
   import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import { TAB_PARAM } from "$lib/sections/summary/constants.ts";
-  import { fade } from "svelte/transition";
   import RealityCheckTab from "../reality-check/RealityCheckTab.svelte";
   import type { InsightsOpenSource } from "./models/InsightsOpenSource.ts";
   import type { InsightsTab } from "./models/InsightsTab.ts";
@@ -40,7 +39,6 @@
     onClose: () => void;
   } = $props();
 
-  let isOpen = $state(false);
   let activeTab = $state(toTab(page.url.searchParams.get(TAB_PARAM)));
 
   const { match, kind, reasons, taste, isLoading: isMatchLoading } = useMatch(fromRune(() => ({ type: media.type, id: media.id })));
@@ -128,28 +126,14 @@
   {/if}
 {/snippet}
 
-<Drawer
-  {onClose}
-  onOpened={() => (isOpen = true)}
-  title={m.header_insights()}
-  variant="vip"
-  size="auto"
->
-  {#if isOpen}
-    <div transition:fade={{ duration: 150 }}>
-      {#if hasTabs}
-        <TabView
-          value={shownTab}
-          onChange={onTabChange}
-          {tabs}
-        />
-      {:else if shownTab === SENTIMENT_TAB}
-        {@render sentimentView()}
-      {:else if shownTab === MATCH_TAB}
-        {@render matchView()}
-      {:else}
-        {@render realityCheckView()}
-      {/if}
-    </div>
+<FadeInDrawer {onClose} title={m.header_insights()} variant="vip" size="auto">
+  {#if hasTabs}
+    <TabView value={shownTab} onChange={onTabChange} {tabs} />
+  {:else if shownTab === SENTIMENT_TAB}
+    {@render sentimentView()}
+  {:else if shownTab === MATCH_TAB}
+    {@render matchView()}
+  {:else}
+    {@render realityCheckView()}
   {/if}
-</Drawer>
+</FadeInDrawer>
