@@ -161,3 +161,15 @@
     background-position: 0 0;
   }
 }
+
+[data-reveal] {
+  transition:
+    opacity var(--transition-spring-duration) ease-out var(--reveal-delay, 0ms),
+    translate var(--transition-spring-duration) var(--transition-spring-ease)
+    var(--reveal-delay, 0ms);
+}
+
+[data-reveal="pending"] {
+  opacity: 0;
+  translate: 0 var(--ni-16);
+}
