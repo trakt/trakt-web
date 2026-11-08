@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ThreadRing from "$lib/components/badge/ThreadRing.svelte";
   import type { Snippet } from "svelte";
 
   const {
@@ -14,7 +15,15 @@
 </script>
 
 <div class="trakt-vip-header-content" data-variant={variant}>
-  {@render icon?.()}
+  {#if icon && variant === "hero"}
+    <div class="trakt-vip-hero-stage">
+      <span class="hero-aura"></span>
+      <span class="hero-orbit"><ThreadRing /></span>
+      <span class="hero-icon">{@render icon()}</span>
+    </div>
+  {:else}
+    {@render icon?.()}
+  {/if}
 
   <h1 class="trakt-vip-header-title">
     {@render children()}
@@ -91,6 +100,122 @@
       :global(.secondary) {
         color: var(--color-text-primary);
         font-size: var(--ni-16);
+      }
+    }
+
+    .trakt-vip-header-title,
+    .trakt-vip-description {
+      position: relative;
+    }
+
+    .trakt-vip-header-title,
+    .trakt-vip-description > :global(*) {
+      animation: vip-hero-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    }
+
+    .trakt-vip-header-title {
+      animation-delay: 240ms;
+    }
+
+    .trakt-vip-description > :global(:nth-child(1)) {
+      animation-delay: 360ms;
+    }
+
+    .trakt-vip-description > :global(:nth-child(2)) {
+      animation-delay: 480ms;
+    }
+  }
+
+  .trakt-vip-hero-stage {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--ni-72);
+    height: var(--ni-72);
+
+    .hero-aura {
+      position: absolute;
+      width: var(--ni-220);
+      height: var(--ni-220);
+
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--purple-500) 50%, transparent) 0%,
+        color-mix(in srgb, var(--purple-500) 16%, transparent) 40%,
+        transparent 70%
+      );
+
+      pointer-events: none;
+
+      animation: vip-hero-breath 4s ease-in-out infinite;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+
+      animation: vip-hero-pop 600ms var(--transition-spring-ease) backwards;
+    }
+
+    .hero-icon {
+      position: relative;
+
+      display: flex;
+
+      animation: vip-hero-pop 600ms var(--transition-spring-ease) backwards;
+
+      :global(svg) {
+        width: var(--ni-48);
+        height: var(--ni-48);
+      }
+    }
+  }
+
+  @keyframes vip-hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(var(--ni-14));
+    }
+  }
+
+  @keyframes vip-hero-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+  }
+
+  @keyframes vip-hero-breath {
+    0%,
+    100% {
+      opacity: 0.7;
+      transform: scale(0.9);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trakt-vip-header-content[data-variant="hero"] {
+      .trakt-vip-header-title,
+      .trakt-vip-description > :global(*) {
+        animation: none;
+      }
+    }
+
+    .trakt-vip-hero-stage {
+      .hero-aura,
+      .hero-orbit,
+      .hero-icon {
+        animation: none;
       }
     }
   }
