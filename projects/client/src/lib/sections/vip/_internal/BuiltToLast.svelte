@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import FooterCard from "./FooterCard.svelte";
   import BuiltToLastIcon from "./icons/BuiltToLastIcon.svelte";
+  import VipIconCircle from "./VipIconCircle.svelte";
 
   const costDescriptions = [
     m.text_vip_costs_metadata(),
@@ -13,9 +14,9 @@
 
 <FooterCard title={m.text_vip_built_to_last()}>
   {#snippet icon()}
-    <div class="trakt-vip-icon-circle">
+    <VipIconCircle className="trakt-vip-icon-circle">
       <BuiltToLastIcon />
-    </div>
+    </VipIconCircle>
   {/snippet}
 
   <div class="trakt-vip-cost-descriptions">
@@ -29,18 +30,6 @@
 </FooterCard>
 
 <style>
-  .trakt-vip-icon-circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: var(--ni-48);
-    height: var(--ni-48);
-
-    background: var(--shade-10);
-    border-radius: 50%;
-  }
-
   .trakt-vip-cost-descriptions {
     align-self: stretch;
 
