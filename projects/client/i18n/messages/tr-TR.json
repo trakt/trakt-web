@@ -2244,7 +2244,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Sezon 1-{number}",
-  "text_recap_source_wikipedia": "Wikipedia kaynaklı özet",
   "text_recap_spoiler_partial": "{total} bölümden {watched} tanesini izlediniz. Bu, {number}. sezonun geri kalanı hakkında spoiler içerir.",
   "text_recap_spoiler_unwatched": "{number}. sezona henüz başlamadınız. Bu, tüm sezon hakkında spoiler içerir.",
   "text_recap_story_description": "Bitirdiğiniz sezona kadar tüm hikâye",

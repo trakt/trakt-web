@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "المواسم 1-{number}",
-  "text_recap_source_wikipedia": "ملخص مستند إلى ويكيبيديا",
   "text_recap_spoiler_partial": "لقد شاهدت {watched} من أصل {total} حلقة. يحتوي هذا على حرق لبقية الموسم {number}.",
   "text_recap_spoiler_unwatched": "لم تبدأ الموسم {number} بعد. يحتوي هذا على حرق لأحداثه بالكامل.",
   "text_recap_story_description": "القصة كاملة حتى الموسم الذي أنهيته",

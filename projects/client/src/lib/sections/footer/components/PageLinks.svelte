@@ -75,6 +75,9 @@
     <Link href={UrlBuilder.branding()}>
       <span class="bold">{m.link_text_branding()}</span>
     </Link>
+    <Link href={UrlBuilder.dataSources()}>
+      <span class="bold">{m.link_text_data_sources()}</span>
+    </Link>
   </div>
 </div>
 

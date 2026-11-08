@@ -12,6 +12,12 @@ const whitelistedUrls = [
   UrlBuilder.socialMedia.reddit(),
   UrlBuilder.socialMedia.youtube(),
   UrlBuilder.status(),
+  UrlBuilder.dataSources(),
+  UrlBuilder.external.tmdb.home(),
+  UrlBuilder.external.justWatch(),
+  UrlBuilder.external.wikipediaHome(),
+  UrlBuilder.external.wikipedia(''),
+  UrlBuilder.external.ccBySa4(),
 ] as const;
 
 const isWhitelistedUrl = (url: string) =>

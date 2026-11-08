@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Staffeln 1-{number}",
-  "text_recap_source_wikipedia": "Rückblick basierend auf Wikipedia",
   "text_recap_spoiler_partial": "Du hast {watched} von {total} Episoden gesehen. Dies spoilert den Rest von Staffel {number}.",
   "text_recap_spoiler_unwatched": "Du hast Staffel {number} noch nicht begonnen. Dies spoilert alles.",
   "text_recap_story_description": "Die gesamte Story bis zur Staffel, die du abgeschlossen hast",

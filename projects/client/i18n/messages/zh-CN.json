@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "第 1-{number} 季",
-  "text_recap_source_wikipedia": "回顾内容参考自维基百科",
   "text_recap_spoiler_partial": "你已观看 {total} 集中的 {watched} 集。此内容包含第 {number} 季剩余部分的剧透。",
   "text_recap_spoiler_unwatched": "你尚未开始观看第 {number} 季。此内容包含整季剧透。",
   "text_recap_story_description": "完整剧情，截至你已看完的季度",

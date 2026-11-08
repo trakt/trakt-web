@@ -2240,7 +2240,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "1–{number}. évad",
-  "text_recap_source_wikipedia": "Összefoglaló a Wikipédia alapján",
   "text_recap_spoiler_partial": "{watched} részt néztél meg a(z) {total} epizódból. Ez elspoilerezi a(z) {number}. évad hátralévő részét.",
   "text_recap_spoiler_unwatched": "Még nem kezdted el a(z) {number}. évadot. Ez az egészet elspoilerezi.",
   "text_recap_story_description": "A teljes történet az általad befejezett évadig",

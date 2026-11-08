@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Temporades 1-{number}",
-  "text_recap_source_wikipedia": "Resum basat en la Viquipèdia",
   "text_recap_spoiler_partial": "Has vist {watched} de {total} episodis. Això conté espòilers de la resta de la temporada {number}.",
   "text_recap_spoiler_unwatched": "No has començat la temporada {number}. Això conté espòilers de tota la temporada.",
   "text_recap_story_description": "Tota la història, fins a la temporada que has acabat",

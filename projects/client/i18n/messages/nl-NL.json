@@ -2245,7 +2245,6 @@
   "text_recap_key_moment_counter": "{current} / {total}",
   "text_recap_meta_pair": "{first} · {second}",
   "text_recap_scope_seasons": "Seizoenen 1-{number}",
-  "text_recap_source_wikipedia": "Samenvatting gebaseerd op Wikipedia",
   "text_recap_spoiler_partial": "Je hebt {watched} van de {total} afleveringen bekeken. Dit verklapt de rest van seizoen {number}.",
   "text_recap_spoiler_unwatched": "Je bent nog niet begonnen aan seizoen {number}. Dit verklapt alles.",
   "text_recap_story_description": "Het hele verhaal, tot het seizoen dat je hebt afgerond",

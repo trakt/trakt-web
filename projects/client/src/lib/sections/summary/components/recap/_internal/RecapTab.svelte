@@ -1,8 +1,8 @@
 <script lang="ts">
-  import WikipediaIcon from "$lib/components/icons/WikipediaIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SeasonRecap } from "$lib/requests/models/SeasonRecap.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import RecapInDepth from "./RecapInDepth.svelte";
   import RecapKeyMoments from "./RecapKeyMoments.svelte";
   import RecapLines from "./RecapLines.svelte";
@@ -25,17 +25,27 @@
   <RecapInDepth chapters={recap.chapters} />
 
   {#if recap.attribution}
-    <Link
-      href={recap.attribution}
-      target="_blank"
-      rel="noopener noreferrer"
-      label={m.text_recap_source_wikipedia()}
-    >
-      <span class="recap-source small secondary">
-        <WikipediaIcon />
-        {m.text_recap_source_wikipedia()}
-      </span>
-    </Link>
+    <p class="recap-source tag secondary">
+      <Link
+        href={recap.attribution}
+        target="_blank"
+        rel="noopener noreferrer"
+        color="inherit"
+        underline="hover"
+      >
+        {m.text_recap_source_adapted_wikipedia()}
+      </Link>
+      <span aria-hidden="true">·</span>
+      <Link
+        href={UrlBuilder.external.ccBySa4()}
+        target="_blank"
+        rel="noopener noreferrer"
+        color="inherit"
+        underline="hover"
+      >
+        {m.text_recap_source_license()}
+      </Link>
+    </p>
   {/if}
 </div>
 
@@ -46,15 +56,16 @@
     gap: var(--ni-28);
 
     .recap-source {
-      display: inline-flex;
-      color: var(--color-text-secondary);
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: var(--gap-xxs);
 
-      :global(svg) {
-        width: var(--ni-14);
-        height: var(--ni-14);
-      }
+      margin: 0;
+      margin-top: var(--gap-s);
+
+      color: var(--color-text-secondary);
+      opacity: 0.8;
     }
   }
 </style>
