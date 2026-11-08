@@ -1780,6 +1780,22 @@
       "default": "Show only finales",
       "description": "Accessible label for the toggle that shows only finale episodes: series, season and mid-season finales."
     },
+    "button_text_recommended_mode_out_now": {
+      "default": "Out now",
+      "description": "Recommended titles toggle option that shows recommendations for titles that are already out. Keep it as short as possible."
+    },
+    "button_label_recommended_mode_out_now": {
+      "default": "Show recommendations that are out now",
+      "description": "Accessible label for the recommended titles toggle option that shows recommendations for titles that are already out."
+    },
+    "button_text_recommended_mode_coming_soon": {
+      "default": "Coming soon",
+      "description": "Recommended titles toggle option that shows recommendations for titles that are not out yet. Keep it as short as possible."
+    },
+    "button_label_recommended_mode_coming_soon": {
+      "default": "Show recommendations for titles coming soon",
+      "description": "Accessible label for the recommended titles toggle option that shows recommendations for titles that are not out yet."
+    },
     "button_text_related_mode_personal": {
       "default": "For you",
       "description": "Related titles toggle option that re-orders the related titles toward what the user likes. Keep it as short as possible."
@@ -14810,6 +14826,14 @@
     "preview_feature_description_personalized_related": {
       "default": "Sorts the related titles on movie and show pages toward what you like. Switch between For you and Standard above the list.",
       "description": "Description of the personalized related titles preview feature. For you and Standard are the toggle option names."
+    },
+    "preview_feature_title_anticipated_recommendations": {
+      "default": "Coming soon recommendations",
+      "description": "Product feature name for the preview feature that recommends titles that are not out yet."
+    },
+    "preview_feature_description_anticipated_recommendations": {
+      "default": "Recommends titles that are not out yet, picked for you. Switch between Out now and Coming soon above the Recommended list.",
+      "description": "Description of the coming soon recommendations preview feature. Out now and Coming soon are the toggle option names."
     },
     "preview_feature_title_season_recap": {
       "default": "Season recap",

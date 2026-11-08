@@ -12,6 +12,7 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { NoteType } from '$lib/requests/models/NoteType.ts';
+import type { RecommendedMode } from '$lib/requests/models/RecommendedMode.ts';
 import type { RelatedMode } from '$lib/requests/models/RelatedMode.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
@@ -97,6 +98,7 @@ type DeleteAccountType = {
 type ShareType = DrilldownType;
 type CoverImageType = { type: ExtendedMediaType };
 type DiscoverType = SourceType & { mode: DiscoverMode };
+type RecommendedModeType = SourceType & { mode: RecommendedMode };
 type RelatedModeType = SourceType & { mode: RelatedMode };
 type RecommendationWhyType = { reason: 'people' | 'titles' | 'empty' };
 type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
@@ -341,6 +343,7 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.PwaInstall]: { outcome: 'accepted' | 'dismissed' };
 
+  [AnalyticsEvent.RecommendedMode]: RecommendedModeType;
   [AnalyticsEvent.RelatedMode]: RelatedModeType;
   [AnalyticsEvent.RecommendationWhy]: RecommendationWhyType;
 

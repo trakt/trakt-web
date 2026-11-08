@@ -1,6 +1,7 @@
 <script>
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages";
+  import RecommendedModeToggles from "$lib/features/recommendations/RecommendedModeToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
 
@@ -13,6 +14,10 @@
   const metaInfo = $derived($current.text());
 </script>
 
+{#snippet titleActions()}
+  <RecommendedModeToggles />
+{/snippet}
+
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_MOVIE_COVER}
@@ -24,6 +29,7 @@
     header={{
       title: m.list_title_recommended(),
       metaInfo,
+      actions: titleActions,
     }}
   />
   <TraktPageCoverSetter />
