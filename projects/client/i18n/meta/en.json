@@ -14848,16 +14848,27 @@
       "description": "Product feature name for the preview feature that adds a recap of a season to the show page."
     },
     "preview_feature_description_season_recap": {
-      "default": "Adds a Recap button next to the season picker on a show page. It opens a catch-up for that season: the key moments and where the characters stand.",
+      "default": "Adds a Catch up pill to a show page once you finish a season. It recaps everything up to the last season you finished: the key moments and where the characters stand.",
       "description": "Description of the season recap preview feature."
     },
-    "button_text_season_recap": {
-      "default": "Recap",
-      "description": "Small button on a show page, next to the season picker, that opens a catch-up of the selected season. Keep it to one short word."
+    "button_text_catch_up": {
+      "default": "Catch up",
+      "description": "Bold first part of a small pill near the top of a show page that opens a recap of the seasons the user has finished. Followed by the seasons it covers, for example Season 1. Keep it to one or two short words."
+    },
+    "text_recap_scope_seasons": {
+      "default": "Seasons 1-{number}",
+      "description": "Seasons a recap covers, shown in the Catch up pill on a show page. {number} is the last season the user finished, always 2 or more.",
+      "variables": {
+        "number": {
+          "type": "number",
+          "description": "Last finished season.",
+          "required": true
+        }
+      }
     },
     "button_label_open_season_recap": {
       "default": "Open the recap for {season}",
-      "description": "Accessible label of the Recap button on a show page. {season} is the season name, for example Season 2.",
+      "description": "Accessible label of the Catch up pill on a show page. {season} is the seasons the recap covers, for example Season 1 or Seasons 1-3.",
       "variables": {
         "season": {
           "type": "string",

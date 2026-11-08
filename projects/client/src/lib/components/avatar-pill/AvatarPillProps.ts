@@ -8,6 +8,7 @@ type AvatarPillBaseProps = {
   caption?: string;
   ariaLabel: string;
   badge?: Snippet;
+  icon?: Snippet;
 };
 
 type AvatarPillLinkProps = AvatarPillBaseProps & {

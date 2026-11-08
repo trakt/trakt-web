@@ -1,6 +1,7 @@
 <script lang="ts">
   import ReactionIcon from "$lib/components/icons/ReactionIcon.svelte";
   import ReactionEmoji from "$lib/components/reactions/ReactionEmoji.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { REACTIONS_CODE_MAP } from "$lib/components/reactions/constants.ts";
   import { preloadReactionEmojis } from "$lib/components/reactions/preloadReactionEmojis.ts";
   import { getLocale } from "$lib/features/i18n/index.ts";
@@ -100,8 +101,13 @@
 
   const isCompact = $derived(variant === "compact");
 
+  const isInitialLoading = $derived(
+    !isCompact && $isLoading && merged.totalCount === 0,
+  );
+
   const hasRoom = $derived(
-    !isCompact && (glyphs.length > 0 || merged.totalCount > 0),
+    !isCompact &&
+      (isInitialLoading || glyphs.length > 0 || merged.totalCount > 0),
   );
 </script>
 
@@ -159,6 +165,13 @@
 
       {#if hasRoom}
         <span class="badge-room">
+          {#if isInitialLoading}
+            <Skeleton
+              width="calc(3 * var(--ni-18) + 3ch)"
+              height="var(--ni-18)"
+              radius="var(--border-radius-xs)"
+            />
+          {/if}
           <span class="badge-glyphs" aria-hidden="true">
             {#each glyphs as reaction (reaction)}
               <ReactionEmoji

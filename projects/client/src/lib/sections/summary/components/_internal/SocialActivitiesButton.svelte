@@ -1,5 +1,6 @@
 <script lang="ts">
   import AvatarPill from "$lib/components/avatar-pill/AvatarPill.svelte";
+  import AvatarPillSkeleton from "$lib/components/avatar-pill/AvatarPillSkeleton.svelte";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaSocialQueryTarget } from "$lib/requests/queries/media/mediaSocialQuery.ts";
@@ -78,10 +79,7 @@
 
 <div class="trakt-social-activities-button-link-wrapper">
   {#if isInitialLoading}
-    <div class="social-activities-skeleton" role="status" aria-busy="true">
-      <span class="skeleton-count"></span>
-      <span class="skeleton-label"></span>
-    </div>
+    <AvatarPillSkeleton />
   {:else if onclick}
     <AvatarPill
       {avatars}
@@ -114,65 +112,6 @@
 
     @include for-tablet-sm-and-below {
       align-self: center;
-    }
-  }
-
-  .social-activities-skeleton {
-    --height-watched-by-label: calc(var(--font-size-text) + var(--ni-2));
-
-    display: inline-flex;
-    align-items: center;
-    gap: var(--ni-4);
-    height: var(--segmented-select-segment-height);
-    padding: 0 var(--ni-8);
-    box-sizing: border-box;
-    border-radius: var(--border-radius-pill);
-
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--color-border) 40%, transparent);
-
-    cursor: default;
-    background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
-
-    .skeleton-count {
-      width: 3.5ch;
-    }
-
-    .skeleton-label {
-      width: 8.5ch;
-    }
-
-    span {
-      display: inline-block;
-      height: var(--height-watched-by-label);
-      border-radius: var(--border-radius-xs, var(--ni-4));
-      background: color-mix(in srgb, var(--color-foreground) 12%, transparent);
-
-      position: relative;
-      overflow: hidden;
-
-      &::after {
-        content: "";
-
-        position: absolute;
-        top: 0;
-
-        width: 300%;
-        height: 100%;
-
-        transform: translateX(100%);
-
-        animation: slide calc(8 * var(--transition-increment)) infinite;
-
-        background: linear-gradient(
-          110deg,
-          transparent 0%,
-          transparent 30%,
-          color-mix(in srgb, var(--color-foreground) 25%, transparent) 50%,
-          transparent 70%,
-          transparent 100%
-        );
-      }
     }
   }
 </style>

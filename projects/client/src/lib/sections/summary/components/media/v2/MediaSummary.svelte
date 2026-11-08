@@ -12,15 +12,18 @@
   import type { MediaSummaryEntry } from "../models/MediaSummaryEntry";
   import MediaSummaryBody from "../MediaSummaryBody.svelte";
   import MediaActions from "./_internal/MediaActions.svelte";
+  import type { Snippet } from "svelte";
   import SideActions from "./_internal/SideActions.svelte";
 
   const {
     intl,
     crew,
+    socialContent,
     ...target
   }: {
     intl: MediaIntl;
     crew: MediaCrew;
+    socialContent?: Snippet;
   } & MediaSummaryEntry = $props();
 
   const media = $derived(target.media);
@@ -44,6 +47,7 @@
       slug={media.slug}
       id={media.id}
       {title}
+      extra={socialContent}
     />
   </RenderFor>
 {/snippet}

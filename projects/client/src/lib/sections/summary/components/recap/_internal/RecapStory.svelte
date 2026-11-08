@@ -2,9 +2,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Season } from "$lib/requests/models/Season.ts";
   import type { ShowRecapStory } from "$lib/requests/models/ShowRecapStory.ts";
-  import { toRecapDuration } from "../toRecapDuration.ts";
   import RecapLines from "./RecapLines.svelte";
-  import RecapStoryProgress from "./RecapStoryProgress.svelte";
   import RecapStoryTimeline from "./RecapStoryTimeline.svelte";
   import { toStoryProgress } from "./toStoryProgress.ts";
 
@@ -20,13 +18,6 @@
     }),
   );
 
-  const duration = $derived(
-    toRecapDuration([
-      ...story.segments.map(({ text }) => text),
-      ...story.lines.map(({ text }) => text),
-    ]),
-  );
-
   const linesCaption = $derived(
     progress.nextSeason == null
       ? m.text_recap_at_the_finale()
@@ -36,8 +27,6 @@
 
 <div class="trakt-recap-story">
   <p class="small secondary">{m.text_recap_story_description()}</p>
-
-  <RecapStoryProgress {progress} {duration} />
 
   <RecapStoryTimeline
     segments={story.segments}

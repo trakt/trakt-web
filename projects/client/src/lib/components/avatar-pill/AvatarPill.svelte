@@ -13,6 +13,7 @@
     caption,
     ariaLabel,
     badge,
+    icon,
     href,
     onclick,
     noscroll,
@@ -44,6 +45,12 @@
             {@render badge()}
           </span>
         {/if}
+      </span>
+    {/if}
+
+    {#if icon}
+      <span class="pill-icon" aria-hidden="true">
+        {@render icon()}
       </span>
     {/if}
 
@@ -142,6 +149,18 @@
 
     &.has-avatars {
       padding-inline-start: var(--ni-3);
+    }
+  }
+
+  .pill-icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    padding-inline-start: var(--ni-4);
+    color: var(--purple-500);
+
+    :global(svg) {
+      width: var(--ni-16);
+      height: var(--ni-16);
     }
   }
 

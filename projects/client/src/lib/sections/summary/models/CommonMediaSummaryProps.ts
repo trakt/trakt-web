@@ -7,5 +7,6 @@ export type CommonMediaSummaryProps = {
   intl: MediaIntl;
   streamOn?: StreamOn;
   contextualContent?: Snippet;
+  socialContent?: Snippet;
   crew: MediaCrew;
 };
