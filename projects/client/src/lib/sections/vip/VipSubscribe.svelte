@@ -5,6 +5,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { filter, take } from "rxjs";
   import { onMount } from "svelte";
+  import StickyJoin from "./_internal/StickyJoin.svelte";
   import Subscriptions from "./_internal/Subscriptions.svelte";
   import UpsellFooter from "./_internal/UpsellFooter.svelte";
   import VipContent from "./_internal/VipContent.svelte";
@@ -33,4 +34,8 @@
   <Subscriptions />
   <VipFeatures />
   <UpsellFooter />
+  <StickyJoin
+    revealAfter="#vip-hero"
+    hideWhileVisible={["#vip-plans", "#vip-join-now"]}
+  />
 </VipContent>
