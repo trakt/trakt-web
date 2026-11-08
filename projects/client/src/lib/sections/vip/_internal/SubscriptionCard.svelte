@@ -1,12 +1,18 @@
 <script lang="ts">
+  import ThreadRing from "$lib/components/badge/ThreadRing.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { revealOnView } from "$lib/utils/actions/revealOnView";
   import type { VipPlan } from "./models/VipPlan";
   import SubscriptionTag from "./SubscriptionTag.svelte";
   import UpgradeButton from "./UpgradeButton.svelte";
   import { isTwoYearDealPlan } from "./utils/isTwoYearDealPlan";
   import { toVipPriceLabel } from "./utils/toVipPriceLabel";
 
-  const { plan }: { plan: VipPlan } = $props();
+  const {
+    plan,
+    isHighlighted = false,
+    delay = 0,
+  }: { plan: VipPlan; isHighlighted?: boolean; delay?: number } = $props();
 
   const splitPrice = (price: number) => {
     const isWholeNumber = price % 1 === 0;
@@ -25,7 +31,9 @@
   };
 
   const displayPrice = $derived(
-    splitPrice(plan.discount ? plan.discount.discountedAmountMonthly : plan.monthlyPrice),
+    splitPrice(
+      plan.discount ? plan.discount.discountedAmountMonthly : plan.monthlyPrice,
+    ),
   );
 
   const dealPlan = $derived(isTwoYearDealPlan(plan) ? plan : null);
@@ -38,7 +46,9 @@
       });
     }
 
-    const price = toVipPriceLabel(plan.discount?.discountedAmount ?? plan.totalPrice);
+    const price = toVipPriceLabel(
+      plan.discount?.discountedAmount ?? plan.totalPrice,
+    );
     switch (plan.type) {
       case "monthly":
         return m.text_vip_plan_billed_monthly({ price });
@@ -50,11 +60,24 @@
   });
 </script>
 
-<article class="trakt-subscription-card">
+<article
+  class="trakt-subscription-card"
+  class:is-highlighted={isHighlighted}
+  style:--plan-delay="{delay}ms"
+  use:revealOnView={{ delay }}
+>
+  {#if isHighlighted}
+    <ThreadRing opacity={0.9} />
+  {/if}
+
   {#if dealPlan}
-    <SubscriptionTag variant="highlight">{m.tag_text_deal_price()}</SubscriptionTag>
+    <SubscriptionTag variant="highlight"
+      >{m.tag_text_deal_price()}</SubscriptionTag
+    >
   {:else if plan.type === "two_years"}
-    <SubscriptionTag variant="highlight">{m.tag_text_vip_best_value()}</SubscriptionTag>
+    <SubscriptionTag variant="highlight"
+      >{m.tag_text_vip_best_value()}</SubscriptionTag
+    >
   {:else if plan.isPopular}
     <SubscriptionTag variant="popular">
       {m.tag_text_most_popular()}
@@ -63,12 +86,16 @@
 
   <div class="trakt-subscription-container">
     <div class="trakt-subscription-pricing">
-      <span class="price">{displayPrice.whole}{#if displayPrice.cents}<sup class="cents">{displayPrice.cents}</sup>{/if}<span class="per-month">/mo</span></span>
+      <span class="price"
+        >{displayPrice.whole}{#if displayPrice.cents}<sup class="cents"
+            >{displayPrice.cents}</sup
+          >{/if}<span class="per-month">/mo</span></span
+      >
 
       <span class="billed-text">{billedText}</span>
     </div>
 
-    <UpgradeButton {plan} />
+    <UpgradeButton {plan} highlighted={isHighlighted} />
   </div>
 </article>
 
@@ -90,6 +117,27 @@
     border-radius: var(--border-radius-xxl);
     border: var(--ni-1) solid
       color-mix(in srgb, var(--shade-10) 10%, transparent);
+
+    &.is-highlighted {
+      box-shadow:
+        0 var(--ni-14) var(--ni-40)
+          color-mix(in srgb, var(--purple-500) 28%, transparent),
+        var(--shadow-floating);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      &:not([data-reveal]) {
+        animation: vip-plan-rise 600ms cubic-bezier(0.22, 1, 0.36, 1)
+          var(--plan-delay) backwards;
+      }
+    }
+  }
+
+  @keyframes vip-plan-rise {
+    from {
+      opacity: 0;
+      transform: translateY(var(--ni-24)) scale(0.97);
+    }
   }
 
   .trakt-subscription-container {

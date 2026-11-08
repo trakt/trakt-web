@@ -12,7 +12,13 @@
     plan,
     label,
     children,
-  }: { plan: VipPlan; label?: string; children?: Snippet } = $props();
+    highlighted = true,
+  }: {
+    plan: VipPlan;
+    label?: string;
+    children?: Snippet;
+    highlighted?: boolean;
+  } = $props();
 
   const planLabel = $derived.by(() => {
     switch (plan.type) {
@@ -42,7 +48,7 @@
   };
 </script>
 
-<trakt-vip-upgrade-button>
+<trakt-vip-upgrade-button data-highlighted={highlighted}>
   <Button
     size="small"
     label={label ?? planLabel}
@@ -79,6 +85,17 @@
 
       border: none;
       transition: background-color var(--transition-duration-short) ease-in-out;
+    }
+
+    &[data-highlighted="false"] :global(.trakt-button) {
+      --color-background-custom: color-mix(
+        in srgb,
+        var(--color-foreground) 8%,
+        transparent
+      );
+      --color-foreground-custom: var(--color-text-primary);
+
+      backdrop-filter: blur(var(--ni-10));
     }
   }
 </style>

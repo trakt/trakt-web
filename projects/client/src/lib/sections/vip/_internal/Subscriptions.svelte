@@ -5,6 +5,7 @@
   import SubscriptionCard from "./SubscriptionCard.svelte";
   import TwoYearDealCard from "./TwoYearDealCard.svelte";
   import { useVip } from "./useVip";
+  import { findHighlightedPlan } from "./utils/findHighlightedPlan";
   import { findTwoYearDealPlan } from "./utils/findTwoYearDealPlan";
   import { isPaypalGateway } from "./utils/isPaypalGateway";
   import VipContentContainer from "./VipContentContainer.svelte";
@@ -21,26 +22,32 @@
   const dealPlan = $derived(
     isPaypalSwitch ? findTwoYearDealPlan(activePlans) : undefined,
   );
+
+  const highlightedPlan = $derived(
+    findHighlightedPlan({ plans: activePlans, hasDealCard: dealPlan != null }),
+  );
 </script>
 
 <VipContentContainer>
   {#snippet header()}
-    <VipHeader variant="hero">
-      {#snippet icon()}
-        <TraktIcon />
-      {/snippet}
+    <div id="vip-hero">
+      <VipHeader variant="hero">
+        {#snippet icon()}
+          <TraktIcon />
+        {/snippet}
 
-      Unlock <strong>more</strong> with Trakt VIP
+        Unlock <strong>more</strong> with Trakt VIP
 
-      {#snippet description()}
-        <span class="secondary">
-          {m.text_vip_get_insights()}
-        </span>
-        <span class="secondary">
-          VIP {m.text_vip_powers_trakt()}
-        </span>
-      {/snippet}
-    </VipHeader>
+        {#snippet description()}
+          <span class="secondary">
+            {m.text_vip_get_insights()}
+          </span>
+          <span class="secondary">
+            VIP {m.text_vip_powers_trakt()}
+          </span>
+        {/snippet}
+      </VipHeader>
+    </div>
   {/snippet}
 
   {#if dealPlan}
@@ -50,9 +57,17 @@
     </p>
   {/if}
 
-  <div id="vip-plans" class="trakt-vip-subscription-plans" class:has-deal={dealPlan != null}>
-    {#each activePlans as plan (plan.type)}
-      <SubscriptionCard {plan} />
+  <div
+    id="vip-plans"
+    class="trakt-vip-subscription-plans"
+    class:has-deal={dealPlan != null}
+  >
+    {#each activePlans as plan, index (plan.type)}
+      <SubscriptionCard
+        {plan}
+        isHighlighted={plan === highlightedPlan}
+        delay={index * 140}
+      />
     {/each}
   </div>
 </VipContentContainer>
