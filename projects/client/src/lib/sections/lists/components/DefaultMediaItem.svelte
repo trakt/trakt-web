@@ -10,7 +10,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
-  import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { useIsRewatching } from "$lib/sections/media-actions/rewatching/useIsRewatching";
@@ -124,15 +123,7 @@
   {#if externalPopupActions}
     {@render externalPopupActions()}
   {:else}
-    <DefaultMediaPopupActions
-      {media}
-      onListAction={() =>
-        manageListsDrawerStore.open({
-          target: { type: media.type, media },
-          title: media.title,
-          metaInfo: media.title,
-        })}
-    />
+    <DefaultMediaPopupActions {media} />
   {/if}
 {/snippet}
 
