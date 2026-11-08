@@ -28,6 +28,7 @@
   import { trackStuckWeekHead } from "./trackStuckWeekHead.ts";
   import { toWeekTimelineName } from "./toWeekTimelineName.ts";
   import { dateKey } from "./dateKey";
+  import { toVisiblePeriodCalendar } from "./toVisiblePeriodCalendar.ts";
   import { useEpisodeType } from "../useEpisodeType";
   import type { CalendarItem as CalendarItemEntry } from "./useCalendar";
   import type { Snippet } from "svelte";
@@ -99,17 +100,9 @@
 
   const selectedDate = $derived($visibleDate ?? $activeDate);
 
-  const visiblePeriodCalendar = $derived.by(() => {
-    const firstPeriod = periods.at(0)?.calendar ?? [];
-    if (!$visibleDate) return firstPeriod;
-
-    const scrollKey = dateKey($visibleDate);
-    const match = periods.find((p) =>
-      p.calendar.some((d) => dateKey(d.date) === scrollKey),
-    );
-
-    return match?.calendar ?? firstPeriod;
-  });
+  const visiblePeriodCalendar = $derived(
+    toVisiblePeriodCalendar({ periods, visibleDate: $visibleDate }),
+  );
 
   async function handleNavigation(action: () => void) {
     action();
