@@ -24,8 +24,7 @@
 
 <script lang="ts">
   import type { TagType } from "$lib/components/media/tags/models/TagType";
-  import StemTag from "$lib/components/tags/StemTag.svelte";
-  import TextTag from "$lib/components/tags/TextTag.svelte";
+  import TagByType from "$lib/components/tags/TagByType.svelte";
   import { type EpisodeType } from "$lib/requests/models/EpisodeType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { whenSeenFor } from "$lib/utils/actions/whenSeenFor.ts";
@@ -113,15 +112,9 @@
 {/snippet}
 
 {#if status}
-  {#if type === "text"}
-    <TextTag>
-      {@render tagContent(status)}
-    </TextTag>
-  {:else}
-    <StemTag>
-      {@render tagContent(status)}
-    </StemTag>
-  {/if}
+  <TagByType {type}>
+    {@render tagContent(status)}
+  </TagByType>
 {/if}
 
 <style>

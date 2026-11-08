@@ -1,6 +1,5 @@
 <script lang="ts">
-  import StemTag from "$lib/components/tags/StemTag.svelte";
-  import TextTag from "$lib/components/tags/TextTag.svelte";
+  import TagByType from "$lib/components/tags/TagByType.svelte";
   import type { MediaStatus } from "$lib/requests/models/MediaStatus";
   import { getMediaStatus } from "./getMediaStatus";
   import type { TagType } from "./models/TagType";
@@ -33,11 +32,7 @@
 {/snippet}
 
 {#snippet tag(text: string)}
-  {#if type === "text"}
-    <TextTag>{@render tagContent(text)}</TextTag>
-  {:else}
-    <StemTag>{@render tagContent(text)}</StemTag>
-  {/if}
+  <TagByType {type}>{@render tagContent(text)}</TagByType>
 {/snippet}
 
 {#if resolved === "new"}

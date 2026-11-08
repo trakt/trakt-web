@@ -1,6 +1,5 @@
 <script lang="ts">
-  import StemTag from "$lib/components/tags/StemTag.svelte";
-  import TextTag from "$lib/components/tags/TextTag.svelte";
+  import TagByType from "$lib/components/tags/TagByType.svelte";
   import type { TagType } from "./models/TagType";
 
   const {
@@ -18,12 +17,6 @@
   </p>
 {/snippet}
 
-{#if type === "text"}
-  <TextTag>
-    {@render content()}
-  </TextTag>
-{:else}
-  <StemTag>
-    {@render content()}
-  </StemTag>
-{/if}
+<TagByType {type}>
+  {@render content()}
+</TagByType>
