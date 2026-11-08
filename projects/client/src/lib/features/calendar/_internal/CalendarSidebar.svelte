@@ -1,11 +1,8 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DropdownCaretIcon from "$lib/components/dropdown/DropdownCaretIcon.svelte";
-  import ResetFiltersIcon from "$lib/components/icons/ResetFiltersIcon.svelte";
-  import SaveFiltersIcon from "$lib/components/icons/SaveFiltersIcon.svelte";
-  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { useFilter } from "$lib/features/filters/useFilter.ts";
+  import StoredFilterActions from "$lib/features/filters/StoredFilterActions.svelte";
   import { useStoredFilters } from "$lib/features/filters/useStoredFilters.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
@@ -62,36 +59,7 @@
         </button>
 
         <div class="filters-actions">
-          <Tooltip
-            content={m.tooltip_reset_filters()}
-            variant="compact"
-            side="bottom"
-          >
-            <ActionButton
-              label={m.button_label_reset_all_filters()}
-              style="ghost"
-              color="red"
-              tooltip={false}
-              disabled={!$hasActiveFilter}
-              onclick={resetFilters}
-            >
-              <ResetFiltersIcon />
-            </ActionButton>
-          </Tooltip>
-          <Tooltip
-            content={m.tooltip_save_as_default()}
-            variant="compact"
-            side="bottom"
-          >
-            <ActionButton
-              label={m.button_label_save_filters()}
-              style="ghost"
-              tooltip={false}
-              onclick={saveFilters}
-            >
-              <SaveFiltersIcon />
-            </ActionButton>
-          </Tooltip>
+          <StoredFilterActions onSave={saveFilters} onReset={resetFilters} />
         </div>
       </div>
 
