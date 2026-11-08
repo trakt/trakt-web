@@ -19,6 +19,7 @@
   import EmailUnsubscribeSnackbar from "$lib/features/email-unsubscribe/EmailUnsubscribeSnackbar.svelte";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
   import FeatureFlagProvider from "$lib/features/feature-flag/FeatureFlagProvider.svelte";
+  import LayoutFrameAttribute from "$lib/features/feature-flag/LayoutFrameAttribute.svelte";
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import LocaleSettingSync from "$lib/features/i18n/components/LocaleSettingSync.svelte";
@@ -97,6 +98,7 @@
             hasServerSession={data.oidcAuth.hasSession}
           >
             <FeatureFlagProvider>
+              <LayoutFrameAttribute />
               <PlayerProvider>
                 <AnalyticsProvider>
                   <RedirectProvider>
