@@ -1,24 +1,4 @@
-import { time } from '$lib/utils/timing/time.ts';
-
-type RecheckTier = {
-  maxDaysSinceRelease: number;
-  recheckIntervalMs: number;
-};
-
-const RECHECK_TIERS: ReadonlyArray<RecheckTier> = [
-  { maxDaysSinceRelease: 14, recheckIntervalMs: time.hours(12) },
-  { maxDaysSinceRelease: 40, recheckIntervalMs: time.days(3) },
-  { maxDaysSinceRelease: 120, recheckIntervalMs: time.days(7) },
-];
-const FALLBACK_RECHECK_INTERVAL_MS = time.days(30);
-
-function getRecheckIntervalMs(daysSinceRelease: number): number {
-  const tier = RECHECK_TIERS.find(
-    (t) => daysSinceRelease <= t.maxDaysSinceRelease,
-  );
-
-  return tier?.recheckIntervalMs ?? FALLBACK_RECHECK_INTERVAL_MS;
-}
+import { shareImageTimeToLive } from '../src/routes/api/shareable-image/_internal/shareImageTimeToLive.ts';
 
 function toTimestamp(value: string | undefined): number {
   if (!value) {
@@ -28,18 +8,6 @@ function toTimestamp(value: string | undefined): number {
   const parsed = Date.parse(value);
 
   return Number.isNaN(parsed) ? Number(value) : parsed;
-}
-
-type IsStaleProps = {
-  cachedAt: number;
-  releasedAt: number;
-  now: number;
-};
-
-function isStale({ cachedAt, releasedAt, now }: IsStaleProps): boolean {
-  const daysSinceRelease = (now - releasedAt) / time.days(1);
-
-  return now - cachedAt >= getRecheckIntervalMs(daysSinceRelease);
 }
 
 type R2Bucket = {
@@ -85,7 +53,8 @@ export async function pruneShareImages(
 
         // Entries predating `releasedAt` get rewritten with full metadata.
         const shouldDelete =
-          Number.isNaN(releasedAt) || isStale({ cachedAt, releasedAt, now });
+          Number.isNaN(releasedAt) ||
+          shareImageTimeToLive({ cachedAt, releasedAt, now }) <= 0;
 
         if (!shouldDelete) {
           result.skipped++;
