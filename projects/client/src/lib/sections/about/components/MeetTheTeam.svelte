@@ -1,12 +1,16 @@
 <script lang="ts">
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useTraktTeam } from "$lib/features/team/useTraktTeam.ts";
   import ProfileCard from "$lib/sections/profile/components/ProfileCard.svelte";
+  import { revealOnView } from "$lib/utils/actions/revealOnView.ts";
   import { of } from "rxjs";
 
   const { isLoading, team } = useTraktTeam(of([]));
 
   const teamSize = 10;
+  const REVEAL_STEP = 80;
+  const MAX_REVEAL_STEPS = 5;
 </script>
 
 <section class="trakt-meet-the-team">
@@ -14,14 +18,25 @@
 
   {#if !$isLoading}
     <div class="team-grid">
-      {#each $team as member (member.username)}
-        <ProfileCard profile={member} />
+      {#each $team as member, i (member.username)}
+        <div
+          class="team-card"
+          use:revealOnView={{
+            delay: Math.min(i, MAX_REVEAL_STEPS) * REVEAL_STEP,
+          }}
+        >
+          <ProfileCard profile={member} />
+        </div>
       {/each}
     </div>
   {:else}
     <div class="team-grid">
       {#each { length: teamSize } as _, i (i)}
-        <div class="team-member-skeleton"></div>
+        <div class="team-card team-card-skeleton" aria-hidden="true">
+          <Skeleton width="var(--ni-80)" height="var(--ni-80)" radius="50%" />
+          <Skeleton width="60%" height="var(--ni-18)" />
+          <Skeleton width="40%" height="var(--ni-12)" />
+        </div>
       {/each}
     </div>
   {/if}
@@ -58,30 +73,23 @@
     }
   }
 
-  .team-member-skeleton {
-    height: var(--ni-160);
+  .team-card {
+    box-sizing: border-box;
+    min-height: var(--ni-184);
+    padding: var(--gap-m) var(--gap-s);
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+
+    background: var(--color-card-background);
     border-radius: var(--border-radius-xl);
-    background: color-mix(
-      in srgb,
-      var(--color-card-background) 60%,
-      transparent
-    );
-    animation: pulse 1.5s ease-in-out infinite;
+    box-shadow: var(--shadow-raised);
   }
 
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.4;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .team-member-skeleton {
-      animation: none;
-    }
+  .team-card-skeleton {
+    align-items: center;
+    gap: var(--gap-s);
   }
 </style>
