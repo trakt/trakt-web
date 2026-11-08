@@ -31,8 +31,8 @@
   {/if}
 
   <div class="trakt-usage-limits">
-    {#each displayableItems as item}
-      <UsageLimitItem {item} {variant} {isLoading} />
+    {#each displayableItems as item, index (item.title)}
+      <UsageLimitItem {item} {variant} {isLoading} fillOnView {index} />
     {/each}
   </div>
 
@@ -71,8 +71,6 @@
       box-sizing: border-box;
 
       border-radius: var(--border-radius-xxl);
-      border: var(--ni-1) solid
-        color-mix(in srgb, var(--color-border) 50%, transparent);
     }
 
     &[data-variant="free"] {

@@ -9,10 +9,14 @@
     item,
     variant = "vip",
     isLoading = false,
+    fillOnView = false,
+    index = 0,
   }: {
     item: UsageCategoryItem;
     variant?: "vip" | "free";
     isLoading?: boolean;
+    fillOnView?: boolean;
+    index?: number;
   } = $props();
 
   const limit = $derived(
@@ -44,6 +48,8 @@
     vipLimit={item.limits.vip}
     {variant}
     {isLoading}
+    {fillOnView}
+    {index}
   />
 </div>
 
