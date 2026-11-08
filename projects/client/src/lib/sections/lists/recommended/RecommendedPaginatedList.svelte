@@ -2,12 +2,10 @@
   import { page } from "$app/state";
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import { useRecommendationMode } from "$lib/features/recommendations/useRecommendationMode";
   import type { Snippet } from "svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
-  import { toModeFilter } from "./toModeFilter";
   import { useRecommendedList } from "./useRecommendedList";
 
   type RecommendedListProps = {
@@ -18,7 +16,6 @@
 
   const { title, type, actions }: RecommendedListProps = $props();
   const { filterMap } = useFilter();
-  const { requestMode } = useRecommendationMode();
 </script>
 
 <DrilledMediaList
@@ -28,7 +25,6 @@
   filter={{
     ...$filterMap,
     ...extractWatchWindowParam(page.url.searchParams),
-    ...toModeFilter($requestMode),
   }}
   useList={(params) => useRecommendedList(params)}
   {actions}
