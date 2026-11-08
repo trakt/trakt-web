@@ -101,19 +101,7 @@
   }
 
   :global(.trakt-modal)::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    padding: var(--border-thickness-xxs);
-    border-radius: inherit;
-    background: var(--background-dialog-edge);
-    mask:
-      linear-gradient(black 0 0) content-box,
-      linear-gradient(black 0 0);
-    mask-composite: exclude;
-    pointer-events: none;
+    @include dialog-edge-ring;
   }
 
   :global(.trakt-modal[data-state="open"]) {
