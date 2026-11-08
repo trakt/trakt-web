@@ -1,66 +1,14 @@
 <script lang="ts">
-  import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
-  import { useFilter } from "$lib/features/filters/useFilter";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { Snippet } from "svelte";
-  import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
-  import type { DrillListProps } from "../drilldown/DrillListProps";
+  import DiscoverList from "../_internal/DiscoverList.svelte";
+  import type { DiscoverListProps } from "../_internal/DiscoverListProps";
   import PopularListItem from "./PopularListItem.svelte";
   import { usePopularList } from "./usePopularList";
 
-  type PopularListProps = {
-    title: string;
-    drilldownLabel: string;
-    type: DiscoverMode;
-    search?: Record<string, string>;
-    theme?: string;
-    actions?: Snippet;
-    scope?: string;
-  } & Partial<DrillListProps<DiscoverMode>>;
-
-  const {
-    title,
-    drilldownLabel,
-    type,
-    search,
-    theme,
-    actions,
-    urlBuilder,
-    scope,
-  }: PopularListProps = $props();
-  const { filterMap } = useFilter();
+  const props: DiscoverListProps = $props();
 </script>
 
-<DrillableMediaList
-  --height-override-card="var(--height-portrait-card-sm)"
-  --height-override-list="var(--height-poster-list-sm)"
-  id={{
-    scope: scope ?? "popular-list",
-    key: type,
-  }}
-  source={{ id: "popular", type }}
-  {title}
-  {drilldownLabel}
-  {type}
-  filter={theme ? undefined : $filterMap}
-  {theme}
-  {actions}
-  useList={(params) =>
-    usePopularList({
-      ...params,
-      search,
-    })}
-  urlBuilder={urlBuilder ??
-    (() =>
-      UrlBuilder.popular({
-        search,
-      }))}
->
-  {#snippet item(media)}
-    <PopularListItem
-      type={media.type}
-      {media}
-      mode={type === "media" ? "mixed" : "standalone"}
-    />
+<DiscoverList {...props} name="popular" useList={usePopularList}>
+  {#snippet listItem(media, mode)}
+    <PopularListItem type={media.type} {media} {mode} />
   {/snippet}
-</DrillableMediaList>
+</DiscoverList>
