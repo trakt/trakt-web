@@ -84,4 +84,12 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     description: () => m.preview_feature_description_personalized_related(),
     audience: 'director',
   },
+  [FeatureFlag.AnticipatedRecommendations]: {
+    icon: HourglassIcon,
+    title: () => m.preview_feature_title_anticipated_recommendations(),
+    addedAt: new Date('2026-11-08'),
+    description: () =>
+      m.preview_feature_description_anticipated_recommendations(),
+    audience: 'director',
+  },
 };

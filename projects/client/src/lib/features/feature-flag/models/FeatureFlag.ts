@@ -6,4 +6,5 @@ export enum FeatureFlag {
   VipVeteran = 'vip-veteran',
   SeasonRecap = 'season-recap',
   PersonalizedRelated = 'personalized-related',
+  AnticipatedRecommendations = 'anticipated-recommendations',
 }

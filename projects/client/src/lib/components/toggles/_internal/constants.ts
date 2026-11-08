@@ -2,6 +2,7 @@ import type { EpisodeTypeFilter } from '$lib/features/calendar/models/EpisodeTyp
 import type { DiscoverMode } from '$lib/features/filters/models/DiscoverMode.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
+import type { RecommendedMode } from '$lib/requests/models/RecommendedMode.ts';
 import type { RelatedMode } from '$lib/requests/models/RelatedMode.ts';
 import type { ToggleOption } from '../ToggleOption.ts';
 
@@ -15,6 +16,7 @@ export type TogglerId =
   | 'library'
   | 'episodeType'
   | 'myLists'
+  | 'recommendedMode'
   | 'relatedMode';
 
 type DiscoverToggleType = DiscoverMode;
@@ -26,6 +28,7 @@ type ActivityToggleType = 'reviews' | 'ratings';
 type LibraryToggleType = 'plex' | 'other';
 type EpisodeTypeToggleType = EpisodeTypeFilter;
 type MyListsToggleType = 'smart' | 'personal' | 'liked' | 'shared';
+type RecommendedModeToggleType = RecommendedMode;
 type RelatedModeToggleType = RelatedMode;
 
 type Toggler<T, K> = {
@@ -44,6 +47,7 @@ export type TogglerValueMap = {
   library: LibraryToggleType;
   episodeType: EpisodeTypeToggleType;
   myLists: MyListsToggleType;
+  recommendedMode: RecommendedModeToggleType;
   relatedMode: RelatedModeToggleType;
 };
 
@@ -237,6 +241,23 @@ const myLists: ToggleDefinition<'myLists'> = {
   ],
 };
 
+const recommendedMode: ToggleDefinition<'recommendedMode'> = {
+  id: 'recommendedMode',
+  default: 'out-now',
+  options: [
+    {
+      value: 'out-now',
+      text: m.button_text_recommended_mode_out_now,
+      label: m.button_label_recommended_mode_out_now,
+    },
+    {
+      value: 'coming-soon',
+      text: m.button_text_recommended_mode_coming_soon,
+      label: m.button_label_recommended_mode_coming_soon,
+    },
+  ],
+};
+
 const relatedMode: ToggleDefinition<'relatedMode'> = {
   id: 'relatedMode',
   default: 'personal',
@@ -266,5 +287,6 @@ export const TOGGLERS: {
   library,
   episodeType,
   myLists,
+  recommendedMode,
   relatedMode,
 } as const;

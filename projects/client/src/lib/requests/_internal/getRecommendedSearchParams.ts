@@ -1,18 +1,20 @@
 import type { FilterParam } from '../models/FilterParams.ts';
-import type { LimitParams } from '../models/LimitParams.ts';
+import type { PaginationParams } from '../models/PaginationParams.ts';
 
-type RecommendedProps = LimitParams & {
+type RecommendedProps = PaginationParams & {
   filterParams: DeepPartial<FilterParam> | undefined;
 };
 
 export function getRecommendedSearchParams({
   limit,
+  page,
   filterParams,
 }: RecommendedProps) {
   const params = {
     extended: 'full,images,colors',
     ignore_collected: true,
     limit,
+    page,
     ...filterParams,
     // FIXME: remove when we have tri-state filter toggles
     ignore_watched: true,
