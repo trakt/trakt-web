@@ -9,6 +9,8 @@
 
 <style>
   div {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,5 +20,18 @@
 
     background: var(--shade-10);
     border-radius: 50%;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      border: var(--ni-2) solid
+        color-mix(in srgb, var(--purple-500) 50%, transparent);
+      border-radius: 50%;
+      opacity: 0;
+
+      pointer-events: none;
+    }
   }
 </style>

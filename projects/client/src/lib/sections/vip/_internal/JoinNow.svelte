@@ -7,7 +7,7 @@
   import yodaUrl from "./icons/yoda.png";
 </script>
 
-<FooterCard>
+<FooterCard isHero>
   {#snippet icon()}
     <VipBadge size="large" />
   {/snippet}
@@ -20,14 +20,18 @@
     {m.text_vip_join_now()}
   </p>
 
-  <div class="trakt-vip-join-now-bar">
+  <div id="vip-join-now" class="trakt-vip-join-now-bar">
     <GlassCard variant="plain">
       <div class="trakt-vip-join-now-footer">
         <div class="trakt-vip-join-now-label">
           <img src={yodaUrl} alt="" width="33" height="33" />
           <span>{m.text_vip_make_it_official()}</span>
         </div>
-        <Button href="#vip-plans" size="small" label={m.button_text_vip_compare_plans()}>
+        <Button
+          href="#vip-plans"
+          size="small"
+          label={m.button_text_vip_compare_plans()}
+        >
           {m.button_text_vip_compare_plans()}
         </Button>
       </div>
