@@ -268,6 +268,20 @@ icon), as long as the wrapper only forwards to the base.
 
 Reference: `lib/components/toggles/_internal/SwitchBase.svelte`.
 
+### Shared pieces to reach for first
+
+| Need                                                   | Use                                                         |
+| ------------------------------------------------------ | ----------------------------------------------------------- |
+| A drawer whose content fades in once it has opened     | `lib/components/drawer/FadeInDrawer.svelte`                 |
+| A tag that renders as `TextTag` or `StemTag` by `type` | `lib/components/tags/TagByType.svelte`                      |
+| The masked edge ring on a dialog surface               | `@include dialog-edge-ring` from `$style/scss/mixins/index` |
+| The `action` / `normal` / `dropdown-item` button style | `lib/components/buttons/ActionStyle.ts`                     |
+| Reset and save buttons for a stored filter             | `lib/features/filters/StoredFilterActions.svelte`           |
+| The VIP usage limit warning                            | `lib/sections/components/UsageLimitWarning.svelte`          |
+
+`FadeInDrawer` adds no class of its own, so a drawer host that styles its own
+scoped class on the content wrapper keeps the plain `Drawer`.
+
 ---
 
 ## Provider Pattern
