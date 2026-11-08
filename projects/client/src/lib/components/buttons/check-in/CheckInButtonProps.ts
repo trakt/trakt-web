@@ -1,9 +1,10 @@
+import type { ActionStyle } from '$lib/components/buttons/ActionStyle.ts';
 import type { CheckInButtonIntl } from './CheckInButtonIntl.ts';
 
 export type CheckInButtonProps = {
   i18n?: CheckInButtonIntl;
   title: string;
-  style: 'action' | 'normal' | 'dropdown-item';
+  style: ActionStyle;
   size: 'normal' | 'small';
   isCheckingIn: boolean;
   isCheckedIn: boolean;

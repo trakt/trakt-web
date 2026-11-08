@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { ActionStyle } from "$lib/components/buttons/ActionStyle.ts";
   import Button from "$lib/components/buttons/Button.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import LogoutIcon from "$lib/components/icons/LogoutIcon.svelte";
@@ -10,9 +11,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
 
-  const {
-    style = "normal",
-  }: { style?: "normal" | "action" | "dropdown-item" } = $props();
+  const { style = "normal" }: { style?: ActionStyle } = $props();
 
   const { logout } = useAuth();
   const { track } = useTrack(AnalyticsEvent.Logout);
