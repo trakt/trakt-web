@@ -14,6 +14,7 @@
   import WhereToWatchList from "$lib/sections/lists/where-to-watch/WhereToWatchList.svelte";
   import WhereToWatchDrawerHost from "$lib/sections/lists/where-to-watch/WhereToWatchDrawerHost.svelte";
   import WhereToWatchListSkeleton from "$lib/sections/lists/where-to-watch/WhereToWatchListSkeleton.svelte";
+  import ReviewsTab from "$lib/sections/summary/components/_internal/ReviewsTab.svelte";
   import DrawerCastSection from "$lib/sections/summary/components/_internal/DrawerCastSection.svelte";
   import MediaStats from "$lib/sections/summary/components/details/_internal/MediaStats.svelte";
   import MediaStatsSkeleton from "$lib/sections/summary/components/details/_internal/MediaStatsSkeleton.svelte";
@@ -29,7 +30,6 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import EpisodeInfoHeader from "./_internal/EpisodeInfoHeader.svelte";
-  import EpisodeReviewsTab from "./_internal/EpisodeReviewsTab.svelte";
   import EpisodeReviewsTabSkeleton from "./_internal/EpisodeReviewsTabSkeleton.svelte";
   import { useEpisodeAired } from "./_internal/useEpisodeAired.ts";
   import { useEpisodePeople } from "./_internal/useEpisodePeople.ts";
@@ -254,7 +254,16 @@
 
 {#snippet reviewsContent()}
   {#if $episodeEntry && resolvedShow}
-    <EpisodeReviewsTab show={resolvedShow} episode={$episodeEntry} />
+    <ReviewsTab
+      show={resolvedShow}
+      remountKey={$episodeEntry.id}
+      target={{
+        type: "episode",
+        season: $episodeEntry.season,
+        episode: $episodeEntry.number,
+        id: $episodeEntry.id,
+      }}
+    />
   {:else if $isLoading}
     <EpisodeReviewsTabSkeleton />
   {/if}

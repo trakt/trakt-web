@@ -14,10 +14,10 @@
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { hasSeasonTitles } from "$lib/utils/media/hasSeasonTitles.ts";
   import { fade } from "svelte/transition";
+  import ReviewsTab from "../_internal/ReviewsTab.svelte";
   import SeasonDrawerItem from "./_internal/SeasonDrawerItem.svelte";
   import SeasonEpisodesTab from "./SeasonEpisodesTab.svelte";
   import SeasonOverviewTab from "./_internal/SeasonOverviewTab.svelte";
-  import SeasonReviewsTab from "./_internal/SeasonReviewsTab.svelte";
 
   const {
     onClose,
@@ -93,11 +93,15 @@
 
 {#snippet reviewsContent()}
   {#if currentSeasonData}
-    <SeasonReviewsTab
+    <ReviewsTab
       {show}
-      season={currentSeason}
-      seasonId={currentSeasonData.id}
-      episodeCount={currentSeasonData.episodes.count}
+      remountKey={currentSeason}
+      target={{
+        type: "season",
+        season: currentSeason,
+        id: currentSeasonData.id,
+        episodeCount: currentSeasonData.episodes.count,
+      }}
     />
   {/if}
 {/snippet}
