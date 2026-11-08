@@ -1,3 +1,4 @@
+import type { ActionStyle } from '$lib/components/buttons/ActionStyle.ts';
 import type { DpadNavigationType } from '$lib/features/navigation/models/DpadNavigationType.ts';
 import type { FavoriteButtonIntl } from './FavoriteButtonIntl.ts';
 
@@ -7,7 +8,7 @@ export type FavoriteButtonProps = {
   isFavoriteUpdating: boolean;
   isFavorited: boolean;
   isQueued?: boolean;
-  style: 'action' | 'normal' | 'dropdown-item';
+  style: ActionStyle;
   size?: 'small' | 'normal';
   onAdd: () => void;
   onRemove: (event: MouseEvent) => void;

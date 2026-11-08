@@ -1,3 +1,4 @@
+import type { ActionStyle } from '$lib/components/buttons/ActionStyle.ts';
 import type { MarkAsWatchedButtonIntl } from '$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonIntl.ts';
 
 export type MarkAsWatchedButtonProps = {
@@ -7,7 +8,7 @@ export type MarkAsWatchedButtonProps = {
   isWatched: boolean;
   isQueued?: boolean;
   isLoading?: boolean;
-  style: 'action' | 'normal' | 'dropdown-item';
+  style: ActionStyle;
   size: 'normal' | 'small';
   onWatch: (event: MouseEvent) => void;
   onRemove: (event: MouseEvent) => void;

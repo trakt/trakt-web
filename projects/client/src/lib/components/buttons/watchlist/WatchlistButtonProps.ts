@@ -1,3 +1,4 @@
+import type { ActionStyle } from '$lib/components/buttons/ActionStyle.ts';
 import type { WatchlistButtonIntl } from '$lib/components/buttons/watchlist/WatchlistButtonIntl.ts';
 
 export type WatchlistButtonProps = {
@@ -6,7 +7,7 @@ export type WatchlistButtonProps = {
   isWatchlistUpdating: boolean;
   isWatchlisted: boolean;
   isQueued?: boolean;
-  type: 'action' | 'normal' | 'dropdown-item';
+  type: ActionStyle;
   size: 'small' | 'normal';
   onAdd: () => void;
   onRemove: (event: MouseEvent) => void;
