@@ -1,9 +1,7 @@
 <script lang="ts">
   import type { YirCompany } from "$lib/requests/models/YirDetail";
   import { m } from "$lib/paraglide/messages";
-  import YirNetworksChart from "./YirNetworksChart.svelte";
-  import YirSectionHeader from "./YirSectionHeader.svelte";
-  import YirPageInner from "./YirPageInner.svelte";
+  import YirCompaniesSection from "./YirCompaniesSection.svelte";
 
   const {
     studios,
@@ -12,35 +10,11 @@
   } = $props();
 </script>
 
-<section class="trakt-yir-studios-section" id="section-movies-networks">
-  <YirPageInner>
-    <YirSectionHeader>
-      {m.yir_section_title_studios()}
-    </YirSectionHeader>
-
-    <div class="yir-studio-bubbles">
-      <YirNetworksChart companies={studios} type="movies" />
-    </div>
-  </YirPageInner>
-</section>
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  .trakt-yir-studios-section {
-    background-color: var(--color-yir-background);
-  }
-
-  .yir-studio-bubbles {
-    width: 100%;
-    height: var(--ni-640);
-    margin-top: var(--ni-neg-40);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    @include for-mobile {
-      height: var(--ni-480);
-    }
-  }
-</style>
+<YirCompaniesSection
+  id="section-movies-networks"
+  sectionClass="trakt-yir-studios-section"
+  bubblesClass="yir-studio-bubbles"
+  title={m.yir_section_title_studios()}
+  type="movies"
+  companies={studios}
+/>
