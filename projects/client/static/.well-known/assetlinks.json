@@ -8,5 +8,16 @@
         "2A:FF:40:C6:A3:68:82:31:0C:6B:D1:B3:9F:F1:0D:A0:4A:DD:FB:D2:D1:00:1B:8C:29:3C:9B:CF:5C:40:F5:8B"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "tv.trakt.trakt.v3",
+      "sha256_cert_fingerprints": [
+        "59:CA:CE:FD:BA:E3:49:4D:63:8B:F6:AA:CB:5F:87:20:01:7C:D4:1E:40:73:E1:84:59:E9:D8:87:70:B5:E1:06",
+        "93:02:0D:92:FC:3A:DD:43:F8:54:91:FF:69:6D:47:F1:C9:7F:28:79:93:60:65:1F:4C:8E:07:BB:9D:96:62:EC"
+      ]
+    }
   }
 ]
