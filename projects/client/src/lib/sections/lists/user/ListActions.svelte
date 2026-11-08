@@ -15,7 +15,7 @@
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import AddFromListsButton from "./_internal/bulk-add/AddFromListsButton.svelte";
   import BulkAddDrawer from "./_internal/bulk-add/BulkAddDrawer.svelte";
-  import DeleteListButton from "./_internal/DeleteListButton.svelte";
+  import DeleteListButton from "../_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
   import LikeListAction from "./_internal/LikeListAction.svelte";
   import ListDetailsButton from "./_internal/ListDetailsButton.svelte";
@@ -113,7 +113,7 @@
           onClick={() => (showManageCollaborators = true)}
         />
         <DeleteListButton
-          {list}
+          name={list.name}
           isDeleting={$isDeleting}
           onDelete={deleteList}
         />
