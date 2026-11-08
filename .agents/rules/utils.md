@@ -229,6 +229,8 @@ safeLocalStorage.setItem('key', value);
 | `pickRandom(items)`         | Pick one random item, `undefined` when empty                |
 | `downloadFile(blob, name)`  | Save a `Blob` to the user's device under a file name        |
 | `toSvgBlob(element)`        | Serialize the first `<svg>` in an element, CSS vars inlined |
+| `toRasterBlob(params)`      | Draw an SVG `Blob` on a canvas, encode as PNG, JPG or WebP  |
+| `zipBlobs(entries)`         | Pack `{ name, blob }` entries into one zip `Blob` (fflate)  |
 
 ---
 

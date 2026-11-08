@@ -1,141 +1,168 @@
 <script lang="ts">
-  import Logo from "$lib/components/logo/Logo.svelte";
-  import LogoMark from "$lib/components/logo/LogoMark.svelte";
-  import LogoMarkCircle from "$lib/components/logo/LogoMarkCircle.svelte";
-  import LogoText from "$lib/components/logo/LogoText.svelte";
+  import { goto } from "$app/navigation";
+  import { page } from "$app/state";
+  import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { error } from "$lib/utils/console/print.ts";
   import { downloadFile } from "$lib/utils/file/downloadFile.ts";
-  import { toSvgBlob } from "$lib/utils/file/toSvgBlob.ts";
+  import { zipBlobs } from "$lib/utils/file/zipBlobs.ts";
+  import type { BrandingBackdrop } from "../models/BrandingBackdrop.ts";
+  import type { LogoFormat } from "../models/LogoFormat.ts";
+  import type { LogoSize } from "../models/LogoSize.ts";
+  import type { BrandingLogo } from "./_internal/BrandingLogo.ts";
+  import BrandingTile from "./_internal/BrandingTile.svelte";
+  import DownloadPreferences from "./_internal/DownloadPreferences.svelte";
+  import { galleryLogos } from "./_internal/galleryLogos.ts";
+  import { monoLogos } from "./_internal/monoLogos.ts";
+  import { renderAllLogos } from "./_internal/renderAllLogos.ts";
+  import { renderLogo } from "./_internal/renderLogo.ts";
+  import { toBrandingBackdrop } from "./_internal/toBrandingBackdrop.ts";
+  import { toLogoFilename } from "./_internal/toLogoFilename.ts";
 
-  function handleDownload(event: MouseEvent, filename: string) {
-    const target = event.currentTarget as HTMLElement;
-    const previewElement = target.closest<HTMLElement>('.logo-preview');
-    if (!previewElement) return;
+  const { track } = useTrack(AnalyticsEvent.BrandingDownload);
 
-    const blob = toSvgBlob(previewElement);
-    if (blob) downloadFile(blob, `${filename}.svg`);
+  const BACKDROP_PARAM = "backdrop";
+  const MAX_STAGGER_MS = 320;
+  const STAGGER_STEP_MS = 80;
+
+  let section = $state<HTMLElement>();
+  let format = $state<LogoFormat>("svg");
+  let size = $state<LogoSize>(1024);
+  let isZipping = $state(false);
+
+  const backdrop = $derived(
+    toBrandingBackdrop(page.url.searchParams.get(BACKDROP_PARAM)),
+  );
+
+  const backdropOptions = $derived([
+    { value: "light" as const, text: m.text_branding_backdrop_light() },
+    { value: "dark" as const, text: m.text_branding_backdrop_dark() },
+    { value: "brand" as const, text: m.text_branding_backdrop_brand() },
+    {
+      value: "transparent" as const,
+      text: m.text_branding_backdrop_transparent(),
+    },
+  ]);
+
+  const trackedSize = $derived(format === "svg" ? "vector" : size);
+  const revealDelay = (index: number) =>
+    Math.min(index * STAGGER_STEP_MS, MAX_STAGGER_MS);
+
+  const changeBackdrop = (value: BrandingBackdrop) => {
+    const url = new URL(page.url);
+    url.searchParams.set(BACKDROP_PARAM, value);
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
+    goto(url, { replaceState: true, keepFocus: true, noScroll: true });
+  };
+
+  type DownloadParams = {
+    logo: BrandingLogo;
+    element: HTMLElement;
+    format: LogoFormat;
+  };
+
+  const downloadLogo = async ({
+    logo,
+    element,
+    format: chosen,
+  }: DownloadParams) => {
+    const logoBackdrop = logo.fixedBackdrop ?? backdrop;
+
+    try {
+      const blob = await renderLogo({
+        element,
+        format: chosen,
+        size,
+        backdrop: logoBackdrop,
+      });
+      if (!blob) return;
+
+      downloadFile(
+        blob,
+        toLogoFilename({
+          name: logo.name,
+          format: chosen,
+          size,
+          backdrop: logo.fixedBackdrop ? undefined : backdrop,
+        }),
+      );
+      track({
+        format: chosen,
+        size: chosen === "svg" ? "vector" : size,
+        scope: "logo",
+        backdrop: logoBackdrop,
+      });
+    } catch (cause) {
+      error("Could not download the logo", cause);
+    }
+  };
+
+  export async function downloadAll() {
+    if (!section || isZipping) return;
+
+    isZipping = true;
+    try {
+      const rendered = await renderAllLogos({
+        section,
+        logos: [...galleryLogos, ...monoLogos],
+        backdrop,
+        format,
+        size,
+      });
+
+      downloadFile(
+        await zipBlobs(rendered),
+        format === "svg"
+          ? "trakt-logos-svg.zip"
+          : `trakt-logos-${format}-${size}.zip`,
+      );
+      track({ format, size: trackedSize, scope: "kit", backdrop });
+    } catch (cause) {
+      error("Could not download the logo kit", cause);
+    } finally {
+      isZipping = false;
+    }
   }
 </script>
 
-{#snippet downloadBtn(filename: string)}
-  <button
-    class="logo-download"
-    aria-label="Download"
-    onclick={(e) => handleDownload(e, filename)}
-  >
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M8 1V11M8 11L4 7M8 11L12 7M1 14H15"
-        stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="square"
-      />
-    </svg>
-  </button>
-{/snippet}
-
-<div class="trakt-branding-logos">
+<div class="trakt-branding-logos" bind:this={section}>
   <section class="branding-logo-section">
     <div class="branding-section-header">
-      <h2 class="branding-section-heading">
-        {m.heading_branding_default_logos()}
-      </h2>
+      <h2 class="branding-section-heading">{m.heading_branding_logos()}</h2>
       <p class="branding-section-desc secondary">
         {m.text_branding_default_logos_desc()}
       </p>
     </div>
-    <div class="logo-grid">
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--light">
-          <div class="logo-full">
-            <Logo />
-          </div>
-          {@render downloadBtn("trakt-logo")}
-        </div>
-        <span class="secondary logo-label">Full Logo</span>
-      </div>
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--light logo-preview--branded">
-          <div class="logo-mark">
-            <LogoMark />
-          </div>
-          {@render downloadBtn("trakt-logomark")}
-        </div>
-        <span class="secondary logo-label">Logo Mark</span>
-      </div>
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--light logo-preview--branded">
-          <div class="logo-mark">
-            <LogoMarkCircle />
-          </div>
-          {@render downloadBtn("trakt-circlemark")}
-        </div>
-        <span class="secondary logo-label">Circle Mark</span>
-      </div>
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--light">
-          <div class="logo-full">
-            <LogoText />
-          </div>
-          {@render downloadBtn("trakt-text-logo")}
-        </div>
-        <span class="secondary logo-label">Text Logo</span>
-      </div>
-    </div>
-  </section>
 
-  <section class="branding-logo-section">
-    <div class="branding-section-header">
-      <h2 class="branding-section-heading">
-        {m.heading_branding_dark_background()}
-      </h2>
-      <p class="branding-section-desc secondary">
-        {m.text_branding_dark_background_desc()}
-      </p>
+    <div class="branding-logo-controls">
+      <SegmentedSelect
+        options={backdropOptions}
+        value={backdrop}
+        ariaLabel={m.label_branding_backdrop()}
+        onChange={changeBackdrop}
+      />
+      <DownloadPreferences
+        {format}
+        {size}
+        isBusy={isZipping}
+        onFormatChange={(value) => (format = value)}
+        onSizeChange={(value) => (size = value)}
+        onDownloadAll={downloadAll}
+      />
     </div>
+
     <div class="logo-grid">
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--dark">
-          <div class="logo-full">
-            <Logo />
-          </div>
-          {@render downloadBtn("trakt-logo-dark")}
-        </div>
-        <span class="secondary logo-label">Full Logo</span>
-      </div>
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--dark logo-preview--branded">
-          <div class="logo-mark">
-            <LogoMark />
-          </div>
-          {@render downloadBtn("trakt-logomark-dark")}
-        </div>
-        <span class="secondary logo-label">Logo Mark</span>
-      </div>
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--dark logo-preview--branded">
-          <div class="logo-mark">
-            <LogoMarkCircle />
-          </div>
-          {@render downloadBtn("trakt-circlemark-dark")}
-        </div>
-        <span class="secondary logo-label">Circle Mark</span>
-      </div>
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--dark">
-          <div class="logo-full">
-            <LogoText />
-          </div>
-          {@render downloadBtn("trakt-text-logo-dark")}
-        </div>
-        <span class="secondary logo-label">Text Logo</span>
-      </div>
+      {#each galleryLogos as logo, index (logo.key)}
+        <BrandingTile
+          {logo}
+          {backdrop}
+          {format}
+          revealDelay={revealDelay(index)}
+          onDownload={(params) => downloadLogo({ logo, ...params })}
+        />
+      {/each}
     </div>
   </section>
 
@@ -148,43 +175,17 @@
         {m.text_branding_alt_logos_desc()}
       </p>
     </div>
+
     <div class="logo-grid">
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--light logo-preview--mono">
-          <div class="logo-mark">
-            <LogoMarkCircle />
-          </div>
-          {@render downloadBtn("trakt-circlemark-mono-light")}
-        </div>
-        <span class="secondary logo-label">Circle Mark — Light</span>
-      </div>
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--dark logo-preview--mono">
-          <div class="logo-mark">
-            <LogoMarkCircle />
-          </div>
-          {@render downloadBtn("trakt-circlemark-mono-dark")}
-        </div>
-        <span class="secondary logo-label">Circle Mark — Dark</span>
-      </div>
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--light logo-preview--mono">
-          <div class="logo-mark">
-            <LogoMark />
-          </div>
-          {@render downloadBtn("trakt-logomark-mono-light")}
-        </div>
-        <span class="secondary logo-label">Logo Mark — Light</span>
-      </div>
-      <div class="logo-item">
-        <div class="logo-preview logo-preview--dark logo-preview--mono">
-          <div class="logo-mark">
-            <LogoMark />
-          </div>
-          {@render downloadBtn("trakt-logomark-mono-dark")}
-        </div>
-        <span class="secondary logo-label">Logo Mark — Dark</span>
-      </div>
+      {#each monoLogos as logo, index (logo.key)}
+        <BrandingTile
+          {logo}
+          backdrop={logo.fixedBackdrop ?? "light"}
+          {format}
+          revealDelay={revealDelay(index)}
+          onDownload={(params) => downloadLogo({ logo, ...params })}
+        />
+      {/each}
     </div>
   </section>
 </div>
@@ -216,137 +217,22 @@
     max-width: var(--ni-640);
   }
 
+  .branding-logo-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-m);
+    min-height: var(--ni-48);
+  }
+
   .logo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--ni-160), 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--gap-m);
-  }
 
-  .logo-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--gap-s);
-  }
-
-  .logo-preview {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: var(--ni-160);
-    padding: var(--gap-xl);
-    box-sizing: border-box;
-    border-radius: var(--border-radius-xl);
-
-    transition: border-color var(--transition-increment) ease-in-out;
-
-    &--light {
-      background: #ffffff;
-      color: #111111;
-      --color-foreground: #111111;
-      border: var(--border-thickness-xxs) solid
-        color-mix(in srgb, var(--color-border) 40%, transparent);
-
-      @include for-mouse {
-        &:hover {
-          border-color: color-mix(in srgb, var(--purple-500) 40%, transparent);
-        }
-      }
-    }
-
-    &--dark {
-      background: #111111;
-      color: #ffffff;
-      --color-foreground: #ffffff;
-      border: var(--border-thickness-xxs) solid transparent;
-
-      // On dark+mono the square is white, so the inner mark must be dark
-      &.logo-preview--mono {
-        --logo-mark-fill: #111111;
-        --circle-mark-fill: #111111;
-      }
-
-      @include for-mouse {
-        &:hover {
-          border-color: color-mix(in srgb, var(--purple-500) 40%, transparent);
-        }
-      }
-    }
-
-    &--branded {
-      --purple-600: var(--color-brand-violet);
-      --circle-mark-bg: var(--color-brand-violet);
-      --circle-mark-fill: #ffffff;
-    }
-
-    // Monochrome: the square and the circle take the foreground color instead of brand violet
-    &--mono {
-      --purple-600: var(--color-foreground);
-      --circle-mark-bg: var(--color-foreground);
-      --circle-mark-fill: #ffffff;
-    }
-  }
-
-  .logo-full {
-    width: var(--ni-200);
-
-    :global(svg) {
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  .logo-mark {
-    width: var(--ni-80);
-
-    :global(svg) {
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  .logo-label {
-    font-size: var(--ni-12);
-    text-align: center;
-  }
-
-  .logo-download {
-    position: absolute;
-    top: var(--gap-s);
-    inset-inline-end: var(--gap-s);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: var(--ni-28);
-    height: var(--ni-28);
-    padding: 0;
-
-    background: transparent;
-    border: none;
-    border-radius: var(--border-radius-pill);
-    color: currentColor;
-    opacity: 0;
-    cursor: pointer;
-
-    transition: opacity var(--transition-increment) ease;
-
-    @include for-mouse {
-      .logo-preview:hover & {
-        opacity: 0.6;
-      }
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    // Always visible on touch
-    @include for-touch {
-      opacity: 0.6;
+    @include for-tablet-sm-and-below {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>

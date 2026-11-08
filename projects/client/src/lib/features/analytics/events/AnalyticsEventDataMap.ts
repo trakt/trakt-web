@@ -7,6 +7,9 @@ import type { SearchResultPosition } from '$lib/features/search/models/SearchRes
 import type { GifPickerSource } from '$lib/features/gif-picker/GifPickerSource.ts';
 import type { OfflineActionEndpoint } from '$lib/features/offline/models/OfflineActionEndpoint.ts';
 import type { ShareArrivalOutcome } from '$lib/features/share-arrival/models/ShareArrivalOutcome.ts';
+import type { BrandingBackdrop } from '$lib/sections/branding/models/BrandingBackdrop.ts';
+import type { LogoFormat } from '$lib/sections/branding/models/LogoFormat.ts';
+import type { LogoSize } from '$lib/sections/branding/models/LogoSize.ts';
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
@@ -181,6 +184,12 @@ type MixtapeResultType = {
 type InsightsOpenType = { source: InsightsOpenSource; tab: InsightsTab };
 type InsightsTabType = { tab: InsightsTab };
 type RecapTabType = { tab: 'recap' | 'story' };
+type BrandingDownloadType = {
+  format: LogoFormat;
+  size: LogoSize | 'vector';
+  scope: 'logo' | 'kit';
+  backdrop: BrandingBackdrop;
+};
 
 type OnboardingStepType = {
   step: 'intro' | 'import' | 'outro';
@@ -315,6 +324,8 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.RecapTab]: RecapTabType;
   [AnalyticsEvent.RecapReveal]: never;
   [AnalyticsEvent.RecapChapter]: never;
+
+  [AnalyticsEvent.BrandingDownload]: BrandingDownloadType;
 
   [AnalyticsEvent.Favorite]: ActionType;
   [AnalyticsEvent.Rewatching]: { action: 'start' | 'stop' };

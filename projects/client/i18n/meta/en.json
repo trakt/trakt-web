@@ -9322,6 +9322,143 @@
       "default": "Use these logos in your app's dark theme.",
       "description": "Description text under the Dark Background heading on the Branding page."
     },
+    "label_branding_press_kit": {
+      "default": "Press kit",
+      "description": "Small caps label above the hero heading on the Branding page."
+    },
+    "heading_branding_hero": {
+      "default": "Use the Trakt brand",
+      "description": "Hero heading on the Branding page."
+    },
+    "text_branding_hero_pitch": {
+      "default": "Logos, colors and rules for apps, articles and integrations.",
+      "description": "One-line pitch under the hero heading on the Branding page."
+    },
+    "button_text_branding_download_kit": {
+      "default": "Download full kit",
+      "description": "Button label that downloads every Trakt logo as a zip from the Branding page."
+    },
+    "button_label_branding_download_kit": {
+      "default": "Download every Trakt logo as a zip file",
+      "description": "Accessible label for the button that downloads every Trakt logo as a zip from the Branding page."
+    },
+    "heading_branding_do": {
+      "default": "Do",
+      "description": "Label above the list of things to do with the Trakt brand on the Branding page."
+    },
+    "heading_branding_dont": {
+      "default": "Don't",
+      "description": "Label above the list of things not to do with the Trakt brand on the Branding page."
+    },
+    "heading_branding_logos": {
+      "default": "Logos",
+      "description": "Section heading for the logos gallery on the Branding page."
+    },
+    "label_branding_backdrop": {
+      "default": "Logo backdrop",
+      "description": "Accessible label for the control that switches the backdrop behind the logos on the Branding page."
+    },
+    "text_branding_backdrop_light": {
+      "default": "Light",
+      "description": "Backdrop option for a light background on the Branding page."
+    },
+    "text_branding_backdrop_dark": {
+      "default": "Dark",
+      "description": "Backdrop option for a dark background on the Branding page."
+    },
+    "text_branding_backdrop_brand": {
+      "default": "Brand",
+      "description": "Backdrop option for the Trakt brand color background on the Branding page."
+    },
+    "text_branding_backdrop_transparent": {
+      "default": "Transparent",
+      "description": "Backdrop option for a transparent background, shown as a checkerboard, on the Branding page."
+    },
+    "label_branding_download_format": {
+      "default": "Download format",
+      "description": "Accessible label for the control that picks the logo download format on the Branding page."
+    },
+    "label_branding_download_size": {
+      "default": "Download size",
+      "description": "Accessible label for the control that picks the longest edge in pixels of a downloaded logo on the Branding page."
+    },
+    "button_text_branding_download_all": {
+      "default": "Download all",
+      "description": "Button label that downloads every logo in the chosen format as a zip on the Branding page."
+    },
+    "button_label_branding_download_logo": {
+      "default": "Download {logo} as {format}",
+      "description": "Accessible label for the main part of a logo download button on the Branding page. Placeholders are the logo name and the file format.",
+      "variables": {
+        "logo": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_branding_download_options": {
+      "default": "Choose a download format for {logo}",
+      "description": "Accessible label for the caret that opens the list of download formats of a logo on the Branding page.",
+      "variables": {
+        "logo": {
+          "type": "string"
+        }
+      }
+    },
+    "heading_branding_clear_space": {
+      "default": "Clear space",
+      "description": "Heading for the clear space diagram on the Branding page."
+    },
+    "text_branding_clear_space_measure": {
+      "default": "T",
+      "description": "Single letter shown in the clear space diagram on the Branding page, matching the T in the Trakt logo."
+    },
+    "text_branding_clear_space_approved": {
+      "default": "Approved file",
+      "description": "Caption for the correct logo usage example in the clear space diagram on the Branding page."
+    },
+    "text_branding_clear_space_approved_detail": {
+      "default": "Untouched, with margin",
+      "description": "Detail text for the correct logo usage example in the clear space diagram on the Branding page."
+    },
+    "text_branding_clear_space_misuse": {
+      "default": "Rotated or recolored",
+      "description": "Caption for the incorrect logo usage example in the clear space diagram on the Branding page."
+    },
+    "heading_branding_colors": {
+      "default": "Colors",
+      "description": "Heading for the brand colors section on the Branding page."
+    },
+    "text_branding_colors_desc": {
+      "default": "Tap a swatch to copy its hex value.",
+      "description": "Description under the Colors heading on the Branding page."
+    },
+    "text_branding_color_violet": {
+      "default": "Brand violet",
+      "description": "Name of the Trakt brand violet color on the Branding page."
+    },
+    "text_branding_color_white": {
+      "default": "White",
+      "description": "Name of the white brand color on the Branding page."
+    },
+    "text_branding_color_ink": {
+      "default": "Ink",
+      "description": "Name of the near-black brand color on the Branding page."
+    },
+    "button_label_branding_copy_color": {
+      "default": "Copy {color} hex value {hex}",
+      "description": "Accessible label for the button that copies a brand color hex value on the Branding page.",
+      "variables": {
+        "color": {
+          "type": "string"
+        },
+        "hex": {
+          "type": "string"
+        }
+      }
+    },
     "heading_branding_alternative_logos": {
       "default": "Alternative Logos",
       "description": "Section heading for the Alternative Logos section on the Branding page."
