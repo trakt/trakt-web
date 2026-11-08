@@ -12,6 +12,7 @@
 
   .trakt-vip-content {
     --top-bottom-padding: var(--ni-64);
+    --vip-sticky-join-height: var(--ni-56);
 
     display: flex;
     flex-direction: column;

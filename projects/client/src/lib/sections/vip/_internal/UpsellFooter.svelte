@@ -66,5 +66,9 @@
     @include for-tablet-sm-and-below {
       grid-template-columns: minmax(0, var(--ni-480));
     }
+
+    @include for-mobile {
+      padding-block-end: var(--vip-sticky-join-height);
+    }
   }
 </style>
