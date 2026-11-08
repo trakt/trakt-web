@@ -2,7 +2,6 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import SparkleIcon from "$lib/components/icons/SparkleIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import HideRecommendationAction from "$lib/sections/media-actions/hide-recommendation/HideRecommendationAction.svelte";
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import DefaultMediaPopupActions from "../components/DefaultMediaPopupActions.svelte";
@@ -37,15 +36,7 @@
         <SparkleIcon />
       {/snippet}
     </DropdownItem>
-    <DefaultMediaPopupActions
-      {media}
-      onListAction={() =>
-        manageListsDrawerStore.open({
-          target: { type: media.type, media },
-          title: media.title,
-          metaInfo: media.title,
-        })}
-    />
+    <DefaultMediaPopupActions {media} />
     <HideRecommendationAction {media} />
   {/snippet}
 </DefaultMediaItem>

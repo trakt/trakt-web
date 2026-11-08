@@ -6,15 +6,15 @@
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
+  import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
 
   type DefaultMediaPopupActionsProps = {
     media: MediaInputDefault;
-    onListAction: () => void;
   };
 
-  const { media, onListAction }: DefaultMediaPopupActionsProps = $props();
+  const { media }: DefaultMediaPopupActionsProps = $props();
 </script>
 
 <WatchlistAction
@@ -33,7 +33,12 @@
   style="dropdown-item"
   target={{ type: media.type, media }}
   title={media.title}
-  onClick={onListAction}
+  onClick={() =>
+    manageListsDrawerStore.open({
+      target: { type: media.type, media },
+      title: media.title,
+      metaInfo: media.title,
+    })}
 />
 <RenderFor audience="authenticated">
   <DropdownItem
