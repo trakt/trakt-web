@@ -10,6 +10,7 @@
   import TodayActionRow from "./TodayActionRow.svelte";
   import TodayCommentBubble from "./TodayCommentBubble.svelte";
   import TodayDrawerHeader from "./TodayDrawerHeader.svelte";
+  import TodayTimelineList from "./TodayTimelineList.svelte";
   import { toFriendActionLabel } from "./toFriendActionLabel.ts";
   import { toFriendActionTime } from "./toFriendActionTime.ts";
 
@@ -42,7 +43,7 @@
       </TodayDrawerHeader>
     {/if}
 
-    <ul class="drawer-timeline">
+    <TodayTimelineList>
       {#each group.actions as action (action.key)}
         <TodayActionRow
           title={action.media.title}
@@ -65,7 +66,7 @@
           {/if}
         </TodayActionRow>
       {/each}
-    </ul>
+    </TodayTimelineList>
   </div>
 </Drawer>
 
@@ -85,16 +86,6 @@
         object-fit: cover;
         border-radius: var(--border-radius-xs);
       }
-    }
-
-    .drawer-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-m);
-
-      margin: 0;
-      padding: 0;
-      list-style: none;
     }
   }
 </style>
