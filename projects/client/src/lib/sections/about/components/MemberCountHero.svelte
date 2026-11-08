@@ -1,5 +1,6 @@
 <script lang="ts">
   import CounterNumber from "$lib/components/counter/CounterNumber.svelte";
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MemberCountProps } from "./_internal/MemberCountProps.ts";
   import { toAnnounceValue } from "./_internal/toAnnounceValue.ts";
@@ -7,8 +8,12 @@
 
   const { count }: MemberCountProps = $props();
 
-  const announced = $derived(toAnnounceValue(count.value));
-  const accessibleLabel = $derived(toMemberCountLabel(announced));
+  const announced = $derived(
+    count.value === null ? null : toAnnounceValue(count.value),
+  );
+  const accessibleLabel = $derived(
+    announced === null ? "" : toMemberCountLabel(announced),
+  );
 </script>
 
 <section class="trakt-member-count-hero">
@@ -17,7 +22,13 @@
   </p>
 
   <div class="member-count-figure">
-    <CounterNumber value={count.value} {accessibleLabel} />
+    {#if count.value === null}
+      <div class="member-count-placeholder">
+        <Skeleton width="5.6em" height="1em" radius="var(--border-radius-m)" />
+      </div>
+    {:else}
+      <CounterNumber value={count.value} {accessibleLabel} />
+    {/if}
   </div>
 
   <p class="member-count-tagline secondary">{m.text_member_count_tagline()}</p>
@@ -61,6 +72,11 @@
     @include for-mobile {
       font-size: var(--ni-40);
     }
+  }
+
+  .member-count-placeholder {
+    display: flex;
+    justify-content: center;
   }
 
   .member-count-tagline {
