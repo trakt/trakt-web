@@ -33,6 +33,5 @@ export const GET: RequestHandler = (event) => {
     type,
     slug,
     shareType: variant as ShareType,
-    cacheControl: 'public, max-age=604800, s-maxage=2592000',
   });
 };
