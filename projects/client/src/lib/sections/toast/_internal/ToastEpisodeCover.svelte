@@ -1,6 +1,4 @@
 <script lang="ts">
-  import CardCover from "$lib/components/card/CardCover.svelte";
-  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
@@ -8,6 +6,7 @@
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import ToastCover from "./ToastCover.svelte";
 
   const { episode, show }: { episode: EpisodeEntry; show: ShowEntry } =
     $props();
@@ -18,13 +17,9 @@
   const title = $derived(episodeActivityTitle(episode, show));
 </script>
 
-<Link
-  focusable={false}
+<ToastCover
   href={UrlBuilder.episodeDrawer(show.slug, episode.season, episode.number)}
->
-  <CardCover
-    {title}
-    src={$src ?? EPISODE_COVER_PLACEHOLDER}
-    alt={m.image_alt_media_poster({ title })}
-  />
-</Link>
+  src={$src ?? EPISODE_COVER_PLACEHOLDER}
+  {title}
+  alt={m.image_alt_media_poster({ title })}
+/>
