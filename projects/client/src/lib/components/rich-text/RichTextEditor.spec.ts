@@ -1,3 +1,5 @@
+import DerivedTestBed from '$test/beds/svelte/DerivedTestBed.svelte';
+import type { Editor } from '@tiptap/core';
 import { render, screen, waitFor } from '@testing-library/svelte';
 import { describe, expect, it, vi } from 'vitest';
 import RichTextEditor from './RichTextEditor.svelte';
@@ -87,5 +89,23 @@ describe('component: RichTextEditor', () => {
     await rerender({ ...baseProps, value: '', disabled: true });
 
     expect(surface?.inert).toBe(true);
+  });
+
+  it('should not throw when the editor changes while svelte is updating', async () => {
+    const { container } = render(RichTextEditor, { ...baseProps, value: '' });
+
+    const editor = await waitFor(() => {
+      const dom = container.querySelector<HTMLElement & { editor?: Editor }>(
+        '.ProseMirror',
+      );
+      expect(dom?.editor).toBeDefined();
+      return dom?.editor;
+    });
+
+    expect(() =>
+      render(DerivedTestBed, {
+        compute: () => editor?.commands.insertContent('hello'),
+      }),
+    ).not.toThrow();
   });
 });

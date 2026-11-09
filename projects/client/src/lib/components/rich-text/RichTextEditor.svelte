@@ -112,7 +112,7 @@
           onChange(lastMarkdown);
         },
         onTransaction: (updated) => {
-          toolbarState = toToolbarState(updated);
+          untrack(() => (toolbarState = toToolbarState(updated)));
         },
         onMentionChange,
         onMentionKeyDown,
