@@ -18,7 +18,7 @@ const personMovieCreditsRequest = ({
       id: slug,
     },
     query: {
-      extended: 'full,images',
+      extended: 'full',
       ...filter,
     },
   });

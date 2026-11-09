@@ -24,7 +24,7 @@ const episodeSummaryRequest = ({
       episode,
     },
     query: {
-      extended: 'full,images',
+      extended: 'full',
     },
   });
 

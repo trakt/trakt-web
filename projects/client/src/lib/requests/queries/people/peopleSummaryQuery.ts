@@ -16,7 +16,7 @@ const peopleSummaryRequest = ({ fetch, slug, locale }: PersonSummaryParams) =>
       id: slug,
     },
     query: {
-      extended: 'full,images,markdown',
+      extended: 'full,markdown',
       language: locale.toLowerCase(),
     },
   });

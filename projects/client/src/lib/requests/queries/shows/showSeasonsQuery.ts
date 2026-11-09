@@ -15,7 +15,7 @@ const showSeasonsRequest = ({ fetch, slug }: ShowSeasonsParams) =>
       id: slug,
     },
     query: {
-      extended: 'full,images',
+      extended: 'full',
     },
   });
 

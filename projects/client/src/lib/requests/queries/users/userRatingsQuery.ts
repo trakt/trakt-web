@@ -155,7 +155,7 @@ const userRatingsRequest = ({
       id: slug,
     },
     query: {
-      extended: 'full,images',
+      extended: 'full',
       page,
       limit,
     },

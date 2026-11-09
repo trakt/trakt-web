@@ -22,7 +22,7 @@ const showProgressRequest = ({ fetch, slug }: { slug: string } & ApiParams) =>
       count_specials: false,
       specials: false,
       hidden: false,
-      extended: 'full,images',
+      extended: 'full',
       include_stats: true,
     },
     params: {

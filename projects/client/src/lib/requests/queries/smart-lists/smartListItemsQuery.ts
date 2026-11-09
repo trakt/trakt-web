@@ -26,7 +26,7 @@ const smartListItemsRequest = ({
       list_id: slug,
     },
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       ...filter,

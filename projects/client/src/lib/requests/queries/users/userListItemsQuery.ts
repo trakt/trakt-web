@@ -41,7 +41,7 @@ const userListItemsRequest = ({
       list_id: listId,
     },
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       sort_by: sortBy,

@@ -22,7 +22,7 @@ type SmartListPreviewParams = {
 const smartListPreviewRequest = (params: SmartListPreviewParams) =>
   smartListPreviewItemsRequest({
     ...params,
-    extended: 'full,images,colors',
+    extended: 'full,colors',
   });
 
 export const smartListPreviewQuery = defineInfiniteQuery({

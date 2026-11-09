@@ -44,7 +44,7 @@ export const showTrendingRequest = ({
 }: ShowTrendingParams) => {
   return api({ fetch }).shows.trending({
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       theme,

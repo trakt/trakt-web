@@ -52,7 +52,7 @@ const someRequest = (
     .category
     .method({
       params: { id: slug },
-      query: { extended: 'full,images' },
+      query: { extended: 'full' },
     });
 
 export const someQuery = defineQuery({
@@ -100,7 +100,7 @@ const someListRequest = (
     .category
     .list({
       params: { id: slug },
-      query: { extended: 'full,images', page, limit },
+      query: { extended: 'full', page, limit },
     });
 
 export const someListQuery = defineInfiniteQuery({
@@ -404,6 +404,16 @@ export function mapToEntry(response: EntryResponse): Entry {
   };
 }
 ```
+
+### Images
+
+- Media images (posters, fanart, logos, headshots, thumbs, screenshots) are
+  built from the trakt id with `toMediaImageUrl`. Don't add `images` to
+  `extended` for them.
+- Keep `images` only where the URL can't be built: user avatars (Gravatar
+  fallback, `?v=` on upload), list posters, and the YIR/MIR resources.
+- When a response does carry `images`, mappers treat an empty slot as missing
+  and map it to the placeholder.
 
 ---
 

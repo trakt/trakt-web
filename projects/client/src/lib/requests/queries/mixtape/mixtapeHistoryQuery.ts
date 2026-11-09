@@ -18,7 +18,7 @@ const mixtapeHistoryRequest = async ({
   type,
   search,
 }: MixtapeHistoryParams) => {
-  const query = new URLSearchParams({ type, extended: 'full,images' });
+  const query = new URLSearchParams({ type, extended: 'full' });
   if (search) query.set('query', search);
 
   const response = await rawApiFetch({

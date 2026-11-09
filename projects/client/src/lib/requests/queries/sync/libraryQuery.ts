@@ -31,7 +31,7 @@ const mediaLibraryRequest = ({
 
   return api({ fetch }).sync.collection[endpoint]({
     query: {
-      extended: 'full,images,available_on',
+      extended: 'full,available_on',
       page,
       limit,
       available_on: availableOn,

@@ -13,9 +13,7 @@ const moviePeopleRequest = ({ fetch, slug }: MoviePeopleParams) =>
     params: {
       id: slug,
     },
-    query: {
-      extended: 'images',
-    },
+    query: {},
   });
 
 export const moviePeopleQuery = defineQuery({

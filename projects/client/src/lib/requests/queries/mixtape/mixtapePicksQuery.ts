@@ -19,7 +19,7 @@ type MixtapePicksBody = {
   shows: ShowResponse[];
 };
 
-const SUMMARY_QUERY = { extended: 'full,images' } as const;
+const SUMMARY_QUERY = { extended: 'full' } as const;
 
 const mixtapePicksRequest = async ({
   fetch,

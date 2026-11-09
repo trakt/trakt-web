@@ -27,7 +27,7 @@ const moviePopularRequest = ({
 }: MoviePopularParams) => {
   return api({ fetch }).movies.popular({
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       theme,

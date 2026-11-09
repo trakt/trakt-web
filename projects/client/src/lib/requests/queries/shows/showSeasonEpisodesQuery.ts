@@ -21,7 +21,7 @@ const showSeasonEpisodesRequest = ({
       season: castNumberAsString(season),
     },
     query: {
-      extended: 'full,images',
+      extended: 'full',
     },
   });
 

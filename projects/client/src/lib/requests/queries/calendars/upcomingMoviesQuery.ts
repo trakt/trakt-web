@@ -23,7 +23,7 @@ export const upcomingMoviesRequest = ({
 }: CalendarMoviesParams) => {
   return api({ fetch }).calendars.movies({
     query: {
-      extended: 'full,images',
+      extended: 'full',
       ...filter,
     },
     params: {

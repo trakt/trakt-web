@@ -50,7 +50,7 @@ export const movieProgressRequest = ({
     query: {
       page,
       limit,
-      extended: 'full,images',
+      extended: 'full',
       ...filter,
     },
   });

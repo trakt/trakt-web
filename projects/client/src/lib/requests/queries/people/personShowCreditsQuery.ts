@@ -18,7 +18,7 @@ const personShowCreditsRequest = ({
       id: slug,
     },
     query: {
-      extended: 'full,images',
+      extended: 'full',
       ...filter,
     },
   });

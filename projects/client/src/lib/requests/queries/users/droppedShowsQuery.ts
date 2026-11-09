@@ -33,7 +33,7 @@ const droppedShowsRequest = ({ fetch, page = 1, limit }: DroppedShowsParams) =>
     query: {
       page,
       limit,
-      extended: 'full,images',
+      extended: 'full',
     },
   });
 

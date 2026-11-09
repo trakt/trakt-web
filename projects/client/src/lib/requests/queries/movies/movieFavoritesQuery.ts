@@ -38,7 +38,7 @@ const favoritedMoviesRequest = ({
       id: slug,
     },
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       sort_by: sortBy ?? 'added',
       sort_how: sortHow ?? 'desc',
       page,

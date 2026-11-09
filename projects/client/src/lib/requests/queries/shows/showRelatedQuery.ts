@@ -26,7 +26,7 @@ const showRelatedRequest = ({
 }: ShowRelatedParams) =>
   api({ fetch }).shows.related({
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       limit,
       page,
       ...(personalized ? { personalized } : {}),

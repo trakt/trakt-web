@@ -27,7 +27,7 @@ const showPopularRequest = ({
 }: ShowPopularParams) => {
   return api({ fetch }).shows.popular({
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       theme,

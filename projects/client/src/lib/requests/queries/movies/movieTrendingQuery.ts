@@ -44,7 +44,7 @@ export const movieTrendingRequest = ({
 }: MovieTrendingParams) => {
   return api({ fetch }).movies.trending({
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       theme,

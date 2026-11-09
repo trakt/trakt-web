@@ -55,7 +55,7 @@ const watchlistRequest = ({
       id: 'me',
     },
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       sort_by: sortBy,
