@@ -35,7 +35,9 @@ export function useNowPlaying() {
         progress.next(progressPercentage);
 
         if (progressPercentage >= 100) {
-          nowPlaying.next(null);
+          queueMicrotask(() => {
+            if (nowPlaying.value === value) nowPlaying.next(null);
+          });
         }
       };
 
