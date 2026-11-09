@@ -5,6 +5,7 @@ import { handle as handleBootLoader } from '$lib/features/boot-loader/handle.ts'
 import { handle as handleBotVerification } from '$lib/features/bot-verification/handle.ts';
 import { resolveCacheControl } from '$lib/features/cache-control/resolveCacheControl.ts';
 import { handle as handleDeployment } from '$lib/features/deployment/handle.ts';
+import { handleFetch as handleDevApiFetch } from '$lib/features/dev-api/handleFetch.ts';
 import { handle as handleDevice } from '$lib/features/devices/handle.ts';
 import { handle as handleLocale } from '$lib/features/i18n/handle.ts';
 import { handle as handleImage } from '$lib/features/image/handle.ts';
@@ -149,5 +150,7 @@ export const handle: Handle = sequence(
   handleDeployment,
   handleSearchConfig,
 );
+
+export const handleFetch = handleDevApiFetch;
 
 export const handleError = handleErrorWithSentry();
