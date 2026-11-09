@@ -13,6 +13,10 @@ describe('store: useGuardedHref', () => {
     UrlBuilder.developer.home(),
     UrlBuilder.developer.apps(),
     UrlBuilder.socialMedia.youtube(),
+    UrlBuilder.terms(),
+    UrlBuilder.privacy(),
+    UrlBuilder.branding(),
+    UrlBuilder.dataSources(),
   ])('should allow signed-out visitors to open %s', async (href) => {
     const result = await runQuery({
       factory: () => useGuardedHref(href).guardedHref,
