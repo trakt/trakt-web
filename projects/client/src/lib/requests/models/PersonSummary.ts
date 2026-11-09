@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { crewPositionSchema } from './CrewPosition.ts';
 import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
-import { socialMediaSchema } from './SocialMedia.ts';
+import { personSocialMediaSchema } from './PersonSocialMedia.ts';
 
 export const PersonSummarySchema = z.object({
   id: z.number(),
@@ -17,7 +17,7 @@ export const PersonSummarySchema = z.object({
   birthday: z.date().nullish(),
   deathDate: z.date().nullish(),
   imdb: z.string().nullish(),
-  socialMedia: socialMediaSchema.optional(),
+  socialMedia: personSocialMediaSchema.optional(),
 });
 
 export type PersonSummary = z.infer<typeof PersonSummarySchema>;

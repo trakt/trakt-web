@@ -5,7 +5,7 @@ import { SEO_ORIGIN } from '$lib/features/seo/seoOrigin.ts';
 import { parseLocalDate } from '$lib/utils/date/parseLocalDate.ts';
 import { toRelativeMarkdownLinks } from '$lib/utils/markdown/toRelativeMarkdownLinks.ts';
 import { mapToHeadshot } from './mapToHeadshot.ts';
-import { mapToSocialMedia } from './mapToSocialMedia.ts';
+import { mapToPersonSocialMedia } from './mapToPersonSocialMedia.ts';
 
 export const mapToPersonSummary = (response: PersonResponse): PersonSummary => {
   return {
@@ -23,7 +23,7 @@ export const mapToPersonSummary = (response: PersonResponse): PersonSummary => {
      */
     height: (response as unknown as { height: number }).height,
     birthday: response.birthday ? parseLocalDate(response.birthday) : null,
-    socialMedia: mapToSocialMedia(response),
+    socialMedia: mapToPersonSocialMedia(response),
     deathDate: response.death ? parseLocalDate(response.death) : null,
   };
 };

@@ -25,5 +25,9 @@ export const PersonFergusonMappedMock: PersonSummary = {
     x: null,
     instagram: 'rebecca_ferguson',
     wikipedia: null,
+    tiktok: null,
+    youtube: null,
+    wikidata: null,
+    wikipediaLanguage: null,
   },
 };

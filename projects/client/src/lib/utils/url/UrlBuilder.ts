@@ -372,7 +372,12 @@ export const UrlBuilder = {
     x: (id: string) => `https://x.com/${id}`,
     instagram: (id: string) => `https://www.instagram.com/${id}`,
     facebook: (id: string) => `https://www.facebook.com/${id}`,
-    wikipedia: (id: string) => `https://en.wikipedia.org/wiki/${id}`,
+    wikipedia: (id: string, language = 'en') =>
+      `https://${language}.wikipedia.org/wiki/${id}`,
+    wikidata: (id: string) => `https://www.wikidata.org/wiki/${id}`,
+    tiktok: (handle: string) => `https://www.tiktok.com/@${handle}`,
+    youtube: (channelId: string) =>
+      `https://www.youtube.com/channel/${channelId}`,
   },
   feedback: () => 'https://roadmap.trakt.tv',
   admin: () => 'https://admin.trakt.tv',
