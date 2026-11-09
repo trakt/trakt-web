@@ -2,7 +2,8 @@
   const {
     children,
     variant = "default",
-  }: { variant?: "default" | "plain" | "bordered" } & ChildrenProps = $props();
+  }: { variant?: "default" | "plain" | "bordered" | "soft" } & ChildrenProps =
+    $props();
 </script>
 
 <div class="trakt-vip-glass-card" data-variant={variant}>
@@ -30,6 +31,14 @@
       backdrop-filter: blur(var(--ni-10));
       background: var(--background-vip-plain-glass-card);
       padding: var(--ni-16);
+    }
+
+    &[data-variant="soft"] {
+      border: none;
+      backdrop-filter: none;
+      background: var(--color-vip-plan-surface);
+      box-shadow: var(--shadow-vip-plan);
+      padding: var(--ni-32);
     }
 
     &[data-variant="bordered"] {

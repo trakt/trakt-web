@@ -45,10 +45,6 @@
 >
   {#if limitedPercentage}
     <div
-      class="trakt-limit-zone free-limit"
-      style:width="{limitedPercentage}%"
-    ></div>
-    <div
       class="trakt-limit-zone vip-limit"
       style:inset-inline-start="{limitedPercentage}%"
     >
@@ -71,11 +67,6 @@
 
 <style>
   .trakt-usage-bar {
-    --bar-border-color: color-mix(
-      in srgb,
-      var(--color-usage-bar) 30%,
-      transparent
-    );
     position: relative;
 
     height: var(--ni-16);
@@ -93,33 +84,18 @@
       translate: none;
     }
 
-    &[data-variant="vip"] {
-      background-color: var(--color-usage-bar-background);
-      box-shadow: inset 0 0 0 var(--ni-1) var(--bar-border-color);
-    }
+    background-color: var(--color-vip-usage-track);
+    box-shadow: var(--shadow-vip-usage-track);
 
-    &[data-variant="free"] .trakt-limit-zone {
-      background-color: var(--color-usage-bar-background);
+    &[data-variant="free"] .vip-limit {
+      inset-inline-end: 0;
+      border-inline-start: var(--ni-2) solid var(--color-vip-border-accent);
 
-      box-sizing: border-box;
-      border: var(--ni-1) solid var(--bar-border-color);
-      border-radius: var(--border-radius-xxl);
-    }
-
-    &[data-variant="free"] {
-      .free-limit {
-        z-index: var(--layer-raised);
-      }
-
-      .vip-limit {
-        inset-inline-end: 0;
-        margin-inline-start: var(--ni-neg-24);
-
-        border-inline-start: none;
-        border-style: dashed;
-
-        background-color: transparent;
-      }
+      background: repeating-linear-gradient(
+        115deg,
+        var(--color-vip-usage-stripe) 0 var(--ni-6),
+        transparent var(--ni-6) var(--ni-12)
+      );
     }
   }
 

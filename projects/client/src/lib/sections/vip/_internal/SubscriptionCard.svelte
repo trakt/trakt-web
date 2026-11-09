@@ -110,19 +110,14 @@
     display: flex;
     justify-content: center;
 
-    background: var(--background-subscription-card);
-
-    box-shadow: var(--shadow-floating);
-
+    background: var(--color-vip-plan-surface);
+    box-shadow: var(--shadow-vip-plan);
     border-radius: var(--border-radius-xxl);
-    border: var(--ni-1) solid
-      color-mix(in srgb, var(--shade-10) 10%, transparent);
 
     &.is-highlighted {
       box-shadow:
-        0 var(--ni-14) var(--ni-40)
-          color-mix(in srgb, var(--purple-500) 28%, transparent),
-        var(--shadow-floating);
+        0 var(--ni-14) var(--ni-40) var(--color-vip-plan-glow),
+        var(--shadow-vip-plan);
     }
 
     @media (prefers-reduced-motion: no-preference) {

@@ -15,7 +15,7 @@
   } & ChildrenProps = $props();
 </script>
 
-<GlassCard variant="bordered">
+<GlassCard variant="soft">
   {#if isHero}
     <ThreadRing opacity={0.9} />
   {/if}
