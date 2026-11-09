@@ -13,7 +13,7 @@
   import { markAppReady } from "$lib/features/boot-loader/markAppReady.ts";
   import BotProvider from "$lib/features/bot-verification/BotProvider.svelte";
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
-  import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
+  import { bustStaleCache } from "$lib/features/deployment/bustStaleCache.ts";
   import DevtoolsProvider from "$lib/features/devtools/DevtoolsProvider.svelte";
   import EditModeProvider from "$lib/features/edit-mode/EditModeProvider.svelte";
   import EmailUnsubscribeSnackbar from "$lib/features/email-unsubscribe/EmailUnsubscribeSnackbar.svelte";
@@ -51,9 +51,6 @@
   import NavbarToastContent from "$lib/sections/toast/NavbarToastContent.svelte";
   import { isCrawler } from "$lib/utils/devices/isCrawler.ts";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
-  import { retry } from "$lib/utils/retry/retry.js";
-  import { WorkerMessage } from "$worker/WorkerMessage";
-  import { workerRequest } from "$worker/workerRequest";
   import { onMount } from "svelte";
 
   const { data, children } = $props();
@@ -69,16 +66,7 @@
       document.body.classList.add("trakt-pwa");
     }
 
-    const activeSha = TRAKT_GIT_SHA;
-    const deployedSha = await retry(() => fetch(DeploymentEndpoint.Get)).then(
-      (res) => res.text(),
-    );
-
-    if (activeSha === deployedSha) {
-      return;
-    }
-
-    await workerRequest(WorkerMessage.CacheBust);
+    await bustStaleCache(TRAKT_GIT_SHA);
   });
 </script>
 
