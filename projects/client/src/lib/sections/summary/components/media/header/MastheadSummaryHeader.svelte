@@ -1441,7 +1441,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: var(--gap-m);
+      /* Half the row gap: the separators sat in more air than the marks. */
+      gap: calc(var(--gap-m) / 2);
 
       max-width: 100%;
 
@@ -1517,7 +1518,7 @@
           Three items across a phone is a squeeze; the tray keeps the row and
           shrinks to the poster's measure, as it does elsewhere.
         */
-        gap: var(--gap-s);
+        gap: calc(var(--gap-s) / 2);
         padding-inline: var(--ni-8);
 
         --action-button-size: var(--ni-40);
