@@ -1,8 +1,9 @@
+import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/assets.ts';
 import type { ListResponse } from '@trakt/api';
 import { type ListPrivacy, ListPrivacySchema } from '../models/ListPrivacy.ts';
 import { type ListType, ListTypeSchema } from '../models/ListType.ts';
 import type { MediaListSummary } from '../models/MediaListSummary.ts';
-import { mapToPoster } from './mapToPoster.ts';
+import { toImageUrls } from './toImageUrls.ts';
 import { mapToUserProfile } from './mapToUserProfile.ts';
 
 function mapToType(type: string): ListType {
@@ -27,7 +28,11 @@ export function mapToMediaListSummary(
   listResponse: ListResponse,
 ): MediaListSummary {
   const posters = (listResponse.images?.posters ?? []).map((poster) =>
-    mapToPoster({ poster: [poster] }),
+    toImageUrls({
+      candidates: [poster],
+      mediumPlaceholder: MEDIA_POSTER_PLACEHOLDER,
+      thumbPlaceholder: MEDIA_POSTER_PLACEHOLDER,
+    }),
   );
 
   return {

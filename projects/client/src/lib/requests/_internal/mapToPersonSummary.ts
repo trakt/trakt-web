@@ -17,7 +17,10 @@ export const mapToPersonSummary = (response: PersonResponse): PersonSummary => {
     biography: toRelativeMarkdownLinks(response.biography ?? '', SEO_ORIGIN),
     knownFor:
       crewPositionSchema.safeParse(response.known_for_department).data ?? null,
-    headshot: mapToHeadshot(response.images),
+    headshot: mapToHeadshot({
+      id: response.ids.trakt,
+      images: response.images,
+    }),
     /**
      * FIXME: @seferturan remove cast once @trakt/api is updated
      */

@@ -3,10 +3,8 @@ import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 export const MovieHereticMappedMock: MovieEntry = {
   cover: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/movies/000/916/302/fanarts/medium/626327d7b4.jpg.webp',
-      thumb:
-        'https://media.trakt.tv/images/movies/000/916/302/fanarts/thumb/626327d7b4.jpg.webp',
+      medium: 'https://media.trakt.tv/movies/916302/medium/fanart.webp',
+      thumb: 'https://media.trakt.tv/movies/916302/thumb/fanart.webp',
     },
   },
   genres: ['horror', 'thriller'],
@@ -19,18 +17,14 @@ export const MovieHereticMappedMock: MovieEntry = {
     'Two young missionaries are forced to prove their faith when they knock on the wrong door and are greeted by a diabolical Mr. Reed, becoming ensnared in his deadly game of cat-and-mouse.',
   poster: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/movies/000/916/302/posters/medium/db9d66deb8.jpg.webp',
-      thumb:
-        'https://media.trakt.tv/images/movies/000/916/302/posters/thumb/db9d66deb8.jpg.webp',
+      medium: 'https://media.trakt.tv/movies/916302/medium/poster.webp',
+      thumb: 'https://media.trakt.tv/movies/916302/thumb/poster.webp',
     },
   },
   logo: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/movies/000/916/302/logos/medium/36726904e9.png.webp',
-      thumb:
-        'https://media.trakt.tv/images/movies/000/916/302/logos/thumb/36726904e9.png.webp',
+      medium: 'https://media.trakt.tv/movies/916302/medium/logo.webp',
+      thumb: 'https://media.trakt.tv/movies/916302/medium/logo.webp',
     },
   },
   year: 2024,
@@ -40,7 +34,7 @@ export const MovieHereticMappedMock: MovieEntry = {
   slug: 'heretic-2024',
   tagline: 'Question everything.',
   thumb: {
-    url: 'https://media.trakt.tv/images/movies/000/916/302/fanarts/thumb/626327d7b4.jpg.webp',
+    url: 'https://media.trakt.tv/movies/916302/thumb/fanart.webp',
   },
   title: 'Heretic',
   originalTitle: 'Heretic',

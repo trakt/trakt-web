@@ -18,30 +18,24 @@ export const MovieMatrixMappedMock: MovieEntry = {
   colors: ['#9AAAB4', '#141A2A'],
   poster: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/movies/000/000/481/posters/medium/373310d2ee.jpg.webp',
-      thumb:
-        'https://media.trakt.tv/images/movies/000/000/481/posters/thumb/373310d2ee.jpg.webp',
+      medium: 'https://media.trakt.tv/movies/481/medium/poster.webp',
+      thumb: 'https://media.trakt.tv/movies/481/thumb/poster.webp',
     },
   },
   cover: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/movies/000/000/481/fanarts/medium/c556867276.jpg.webp',
-      thumb:
-        'https://media.trakt.tv/images/movies/000/000/481/fanarts/thumb/c556867276.jpg.webp',
+      medium: 'https://media.trakt.tv/movies/481/medium/fanart.webp',
+      thumb: 'https://media.trakt.tv/movies/481/thumb/fanart.webp',
     },
   },
   logo: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/movies/000/000/481/logos/medium/f5e05ed291.png.webp',
-      thumb:
-        'https://media.trakt.tv/images/movies/000/000/481/logos/thumb/f5e05ed291.png.webp',
+      medium: 'https://media.trakt.tv/movies/481/medium/logo.webp',
+      thumb: 'https://media.trakt.tv/movies/481/medium/logo.webp',
     },
   },
   thumb: {
-    url: 'https://media.trakt.tv/images/movies/000/000/481/fanarts/thumb/c556867276.jpg.webp',
+    url: 'https://media.trakt.tv/movies/481/thumb/fanart.webp',
   },
   genres: ['action', 'science-fiction'],
   overview:

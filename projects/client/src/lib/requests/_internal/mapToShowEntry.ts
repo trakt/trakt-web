@@ -1,12 +1,13 @@
 import { MAX_DATE } from '$lib/utils/constants.ts';
-import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import { toMediaImageUrl } from '$lib/utils/url/toMediaImageUrl.ts';
 import { type ShowResponse } from '@trakt/api';
 import { ShowEndingSchema, type ShowEntry } from '../models/ShowEntry.ts';
 import { mapToColors } from './mapToColors.ts';
 import { mapToCover } from './mapToCover.ts';
 import { mapToLogo } from './mapToLogo.ts';
 import { mapToPoster } from './mapToPoster.ts';
+import { mayHaveImage } from './mayHaveImage.ts';
 import { mapToSocialMedia } from './mapToSocialMedia.ts';
 import { mapToTrailerUrl } from './mapToTrailerUrl.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
@@ -16,11 +17,16 @@ type ShowResponseWithLastAired = ShowResponse & {
 };
 
 export function mapToShowEntry(show: ShowResponseWithLastAired): ShowEntry {
-  const poster = mapToPoster(show.images);
-  const cover = mapToCover(show.images);
-  const logo = mapToLogo(show.images);
+  const target = {
+    type: 'shows',
+    id: show.ids.trakt,
+    images: show.images,
+  } as const;
+  const poster = mapToPoster(target);
+  const cover = mapToCover(target);
+  const logo = mapToLogo(target);
 
-  const thumbCandidate = findDefined(...(show.images?.thumb ?? []));
+  const hasThumb = mayHaveImage(show.images, show.images?.thumb);
 
   const runtime = show.runtime ?? NaN;
   const episodeCount = show.aired_episodes ?? NaN;
@@ -47,7 +53,14 @@ export function mapToShowEntry(show: ShowResponseWithLastAired): ShowEntry {
     logo,
     colors: mapToColors(show.colors?.poster),
     thumb: {
-      url: prependHttps(findDefined(thumbCandidate), cover.url.thumb),
+      url: hasThumb
+        ? toMediaImageUrl({
+            type: 'shows',
+            id: show.ids.trakt,
+            slot: 'thumb',
+            size: 'medium',
+          })
+        : cover.url.thumb,
     },
     genres: show.genres ?? [],
     status: show.status ?? 'unknown',

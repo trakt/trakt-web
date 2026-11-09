@@ -17,7 +17,7 @@ export const EpisodeSiloMappedMock: EpisodeEntry = {
   votes: 4186,
   updatedAt: new Date('2025-01-20T03:49:10.000Z'),
   cover: {
-    url: 'https://media.trakt.tv/images/episodes/005/165/667/screenshots/thumb/e035db5f06.jpg.webp',
+    url: 'https://media.trakt.tv/episodes/5165667/thumb/screenshot.webp',
   },
   airDate: new Date('2023-05-05T01:00:00.000Z'),
   releaseDate: new Date('2023-05-05T01:00:00.000Z'),

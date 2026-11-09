@@ -9,7 +9,7 @@ export const LibraryMappedMock: LibraryItem[] = [
       releaseDate: new Date('2025-09-04T02:00:00.000Z'),
       effectiveReleaseDate: new Date('2025-09-04T02:00:00.000Z'),
       cover: {
-        url: 'https://media.trakt.tv/images/episodes/013/352/063/screenshots/thumb/60214573bb.jpg.webp',
+        url: 'https://media.trakt.tv/episodes/13352063/thumb/screenshot.webp',
       },
       genres: [],
       id: 13352063,
@@ -43,10 +43,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       country: 'us',
       cover: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/shows/000/002/177/fanarts/medium/cb8901fce2.jpg.webp',
-          thumb:
-            'https://media.trakt.tv/images/shows/000/002/177/fanarts/thumb/cb8901fce2.jpg.webp',
+          medium: 'https://media.trakt.tv/shows/2177/medium/fanart.webp',
+          thumb: 'https://media.trakt.tv/shows/2177/thumb/fanart.webp',
         },
       },
       episode: {
@@ -62,10 +60,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       languages: ['en'],
       logo: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/shows/000/002/177/logos/medium/477fd31928.png.webp',
-          thumb:
-            'https://media.trakt.tv/images/shows/000/002/177/logos/thumb/477fd31928.png.webp',
+          medium: 'https://media.trakt.tv/shows/2177/medium/logo.webp',
+          thumb: 'https://media.trakt.tv/shows/2177/medium/logo.webp',
         },
       },
       network: 'Comedy Central',
@@ -76,10 +72,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       postCredits: [],
       poster: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/shows/000/002/177/posters/medium/9cb5875b93.jpg.webp',
-          thumb:
-            'https://media.trakt.tv/images/shows/000/002/177/posters/thumb/9cb5875b93.jpg.webp',
+          medium: 'https://media.trakt.tv/shows/2177/medium/poster.webp',
+          thumb: 'https://media.trakt.tv/shows/2177/thumb/poster.webp',
         },
       },
       rating: 0.8431,
@@ -88,7 +82,7 @@ export const LibraryMappedMock: LibraryItem[] = [
       status: 'returning series',
       tagline: 'Four boys. One f**ked-up town.',
       thumb: {
-        url: 'https://media.trakt.tv/images/shows/000/002/177/thumbs/medium/0dee79e666.jpg.webp',
+        url: 'https://media.trakt.tv/shows/2177/medium/thumb.webp',
       },
       title: 'South Park',
       totalRuntime: 6560,
@@ -113,10 +107,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       country: 'us',
       cover: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/movies/001/153/578/fanarts/medium/1ba6d95f18.jpg.webp',
-          thumb:
-            'https://media.trakt.tv/images/movies/001/153/578/fanarts/thumb/1ba6d95f18.jpg.webp',
+          medium: 'https://media.trakt.tv/movies/1153578/medium/fanart.webp',
+          thumb: 'https://media.trakt.tv/movies/1153578/thumb/fanart.webp',
         },
       },
       genres: ['horror', 'fantasy', 'action'],
@@ -140,10 +132,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       postCredits: [],
       poster: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/movies/001/153/578/posters/medium/5084249a61.jpg.webp',
-          thumb:
-            'https://media.trakt.tv/images/movies/001/153/578/posters/thumb/5084249a61.jpg.webp',
+          medium: 'https://media.trakt.tv/movies/1153578/medium/poster.webp',
+          thumb: 'https://media.trakt.tv/movies/1153578/thumb/poster.webp',
         },
       },
       rating: 0.4348,
@@ -152,7 +142,7 @@ export const LibraryMappedMock: LibraryItem[] = [
       status: 'released',
       tagline: "This was never a children's story",
       thumb: {
-        url: 'https://media.trakt.tv/images/movies/001/153/578/fanarts/thumb/1ba6d95f18.jpg.webp',
+        url: 'https://media.trakt.tv/movies/1153578/thumb/fanart.webp',
       },
       title: 'The Death of Snow White',
       trailer: 'https://youtube.com/watch?v=TFr4mDt8ewY',
@@ -176,10 +166,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       country: 'us',
       cover: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/movies/000/000/007/fanarts/medium/4002770294.jpg.webp',
-          thumb:
-            'https://media.trakt.tv/images/movies/000/000/007/fanarts/thumb/4002770294.jpg.webp',
+          medium: 'https://media.trakt.tv/movies/7/medium/fanart.webp',
+          thumb: 'https://media.trakt.tv/movies/7/thumb/fanart.webp',
         },
       },
       genres: ['action', 'adventure', 'science-fiction'],
@@ -193,10 +181,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       languages: ['en'],
       logo: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/movies/000/000/007/logos/medium/933f4b8f31.png.webp',
-          thumb:
-            'https://media.trakt.tv/images/movies/000/000/007/logos/thumb/933f4b8f31.png.webp',
+          medium: 'https://media.trakt.tv/movies/7/medium/logo.webp',
+          thumb: 'https://media.trakt.tv/movies/7/medium/logo.webp',
         },
       },
       originalTitle: 'Star Wars',
@@ -206,10 +192,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       postCredits: [],
       poster: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/movies/000/000/007/posters/medium/a4f84e22e4.jpg.webp',
-          thumb:
-            'https://media.trakt.tv/images/movies/000/000/007/posters/thumb/a4f84e22e4.jpg.webp',
+          medium: 'https://media.trakt.tv/movies/7/medium/poster.webp',
+          thumb: 'https://media.trakt.tv/movies/7/thumb/poster.webp',
         },
       },
       rating: 0.8457,
@@ -218,7 +202,7 @@ export const LibraryMappedMock: LibraryItem[] = [
       status: 'released',
       tagline: 'A long time ago in a galaxy far, far away...',
       thumb: {
-        url: 'https://media.trakt.tv/images/movies/000/000/007/fanarts/thumb/4002770294.jpg.webp',
+        url: 'https://media.trakt.tv/movies/7/thumb/fanart.webp',
       },
       title: 'Star Wars',
       trailer: 'https://youtube.com/watch?v=XsS1yE2f-hE',
@@ -237,7 +221,7 @@ export const LibraryMappedMock: LibraryItem[] = [
       releaseDate: new Date('1987-04-05T05:00:00.000Z'),
       effectiveReleaseDate: new Date('1987-04-05T05:00:00.000Z'),
       cover: {
-        url: 'https://media.trakt.tv/images/episodes/000/298/461/screenshots/thumb/d5459747f8.jpg.webp',
+        url: 'https://media.trakt.tv/episodes/298461/thumb/screenshot.webp',
       },
       genres: [],
       id: 298461,
@@ -271,10 +255,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       country: 'us',
       cover: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/shows/000/004/215/fanarts/medium/f5631e4468.jpg.webp',
-          thumb:
-            'https://media.trakt.tv/images/shows/000/004/215/fanarts/thumb/f5631e4468.jpg.webp',
+          medium: 'https://media.trakt.tv/shows/4215/medium/fanart.webp',
+          thumb: 'https://media.trakt.tv/shows/4215/thumb/fanart.webp',
         },
       },
       episode: {
@@ -290,10 +272,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       languages: ['en'],
       logo: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/shows/000/004/215/logos/medium/9e761a7a93.png.webp',
-          thumb:
-            'https://media.trakt.tv/images/shows/000/004/215/logos/thumb/9e761a7a93.png.webp',
+          medium: 'https://media.trakt.tv/shows/4215/medium/logo.webp',
+          thumb: 'https://media.trakt.tv/shows/4215/medium/logo.webp',
         },
       },
       network: 'FOX',
@@ -304,10 +284,8 @@ export const LibraryMappedMock: LibraryItem[] = [
       postCredits: [],
       poster: {
         url: {
-          medium:
-            'https://media.trakt.tv/images/shows/000/004/215/posters/medium/703725c3a5.jpg.webp',
-          thumb:
-            'https://media.trakt.tv/images/shows/000/004/215/posters/thumb/703725c3a5.jpg.webp',
+          medium: 'https://media.trakt.tv/shows/4215/medium/poster.webp',
+          thumb: 'https://media.trakt.tv/shows/4215/thumb/poster.webp',
         },
       },
       rating: 0.7815,
@@ -316,7 +294,7 @@ export const LibraryMappedMock: LibraryItem[] = [
       status: 'ended',
       tagline: 'Domestic bliss was never like this!',
       thumb: {
-        url: 'https://media.trakt.tv/images/shows/000/004/215/thumbs/medium/9ee028a03e.jpg.webp',
+        url: 'https://media.trakt.tv/shows/4215/medium/thumb.webp',
       },
       title: 'Married... with Children',
       totalRuntime: 6450,

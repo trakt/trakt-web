@@ -50,7 +50,10 @@ function mapPerson(raw: RawYirPerson): YirPerson {
     id: raw.person.ids.trakt,
     name: raw.person.name,
     slug: raw.person.ids.slug,
-    headshot: mapToHeadshot(raw.person.images),
+    headshot: mapToHeadshot({
+      id: raw.person.ids.trakt,
+      images: raw.person.images,
+    }),
     count: raw.count,
     titles: dedupeTitles(raw.titles),
   };

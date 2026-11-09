@@ -23,9 +23,14 @@ function mapMovieCertificationResponse(
 }
 
 export function mapToMovieEntry(movie: MovieResponse): MovieEntry {
-  const poster = mapToPoster(movie.images);
-  const cover = mapToCover(movie.images);
-  const logo = mapToLogo(movie.images);
+  const target = {
+    type: 'movies',
+    id: movie.ids.trakt,
+    images: movie.images,
+  } as const;
+  const poster = mapToPoster(target);
+  const cover = mapToCover(target);
+  const logo = mapToLogo(target);
   const effectiveReleaseDate = new Date(movie.released ?? MAX_DATE);
 
   return {

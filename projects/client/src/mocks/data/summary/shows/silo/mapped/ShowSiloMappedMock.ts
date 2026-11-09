@@ -3,10 +3,8 @@ import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 export const ShowSiloMappedMock: ShowEntry = {
   cover: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/shows/000/180/770/fanarts/medium/80d39f8578.jpg.webp',
-      thumb:
-        'https://media.trakt.tv/images/shows/000/180/770/fanarts/thumb/80d39f8578.jpg.webp',
+      medium: 'https://media.trakt.tv/shows/180770/medium/fanart.webp',
+      thumb: 'https://media.trakt.tv/shows/180770/thumb/fanart.webp',
     },
   },
   colors: ['#D29D40', '#1E2E2F'],
@@ -17,18 +15,14 @@ export const ShowSiloMappedMock: ShowEntry = {
     'In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.',
   poster: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/shows/000/180/770/posters/medium/5312f1d1cf.jpg.webp',
-      thumb:
-        'https://media.trakt.tv/images/shows/000/180/770/posters/thumb/5312f1d1cf.jpg.webp',
+      medium: 'https://media.trakt.tv/shows/180770/medium/poster.webp',
+      thumb: 'https://media.trakt.tv/shows/180770/thumb/poster.webp',
     },
   },
   logo: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/shows/000/180/770/logos/medium/b0c9a10541.png.webp',
-      thumb:
-        'https://media.trakt.tv/images/shows/000/180/770/logos/thumb/b0c9a10541.png.webp',
+      medium: 'https://media.trakt.tv/shows/180770/medium/logo.webp',
+      thumb: 'https://media.trakt.tv/shows/180770/medium/logo.webp',
     },
   },
   type: 'show',
@@ -40,7 +34,7 @@ export const ShowSiloMappedMock: ShowEntry = {
   rating: 0.8161,
   tagline: 'The truth will surface.',
   thumb: {
-    url: 'https://media.trakt.tv/images/shows/000/180/770/thumbs/medium/dddaaead2f.jpg.webp',
+    url: 'https://media.trakt.tv/shows/180770/medium/thumb.webp',
   },
   title: 'Silo',
   originalTitle: 'Silo',
