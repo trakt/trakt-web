@@ -50,7 +50,7 @@ describe('FeaturedPeopleSearchList', () => {
       screen.getByRole('img', { name: /Rebecca Ferguson/ }),
     ).toHaveAttribute(
       'src',
-      'https://walter.trakt.tv/images/people/2/headshots/thumb/rebecca.webp',
+      'https://media.trakt.tv/people/2/thumb/headshot.webp',
     );
 
     await user.type(search, '  REBECCA  ');

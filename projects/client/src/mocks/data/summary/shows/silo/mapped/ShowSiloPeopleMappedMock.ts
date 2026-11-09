@@ -7,10 +7,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 19,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/447/271/headshots/medium/d7e3e2fc64.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/447271/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/447271/medium/headshot.webp',
         },
       },
       key: 'rebecca-ferguson',
@@ -21,10 +19,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 19,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/412/328/headshots/medium/35b36ce399.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/412328/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/412328/medium/headshot.webp',
         },
       },
       key: 'common',
@@ -35,10 +31,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 19,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/016/797/headshots/medium/987b640c84.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/16797/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/16797/medium/headshot.webp',
         },
       },
       key: 'harriet-walter',
@@ -49,10 +43,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 19,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/748/739/headshots/medium/628b796714.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/748739/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/748739/medium/headshot.webp',
         },
       },
       key: 'chinaza-uche',
@@ -63,10 +55,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 19,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/627/038/headshots/thumb/ba0377d6b0.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/627/038/headshots/medium/ba0377d6b0.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/627038/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/627038/medium/headshot.webp',
         },
       },
       key: 'avi-nash',
@@ -77,10 +67,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 19,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/014/904/headshots/medium/d67b0392d8.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/14904/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/14904/medium/headshot.webp',
         },
       },
       key: 'rick-gomez',
@@ -91,10 +79,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 19,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/015/518/headshots/medium/7aa5eb6e65.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/15518/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/15518/medium/headshot.webp',
         },
       },
       key: 'tim-robbins',
@@ -105,10 +91,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 9,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/431/779/headshots/thumb/d9ba2e0cd9.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/431/779/headshots/medium/d9ba2e0cd9.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/431779/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/431779/medium/headshot.webp',
         },
       },
       key: 'shane-mcrae',
@@ -119,10 +103,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 9,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/668/720/headshots/thumb/f9a6bc12fd.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/668/720/headshots/medium/f9a6bc12fd.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/668720/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/668720/medium/headshot.webp',
         },
       },
       key: 'billy-postlethwaite',
@@ -133,10 +115,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 9,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/001/477/761/headshots/thumb/32559bdf7c.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/001/477/761/headshots/medium/32559bdf7c.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/1477761/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/1477761/medium/headshot.webp',
         },
       },
       key: 'remmie-milner',
@@ -147,10 +127,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 9,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/001/350/141/headshots/thumb/862651c2ae.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/001/350/141/headshots/medium/862651c2ae.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/1350141/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/1350141/medium/headshot.webp',
         },
       },
       key: 'alexandria-riley',
@@ -161,10 +139,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 9,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/107/387/headshots/thumb/9f71e2f97c.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/107/387/headshots/medium/9f71e2f97c.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/107387/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/107387/medium/headshot.webp',
         },
       },
       key: 'clare-perkins',
@@ -175,10 +151,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       episodeCount: 9,
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/014/103/headshots/medium/2e92bf71ee.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/14103/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/14103/medium/headshot.webp',
         },
       },
       key: 'steve-zahn',
@@ -189,10 +163,8 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       characterName: 'Gloria Hildebrandt',
       headshot: {
         url: {
-          thumb:
-            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
-          medium:
-            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/medium/2e92bf71ee.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/14103/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/14103/medium/headshot.webp',
         },
       },
       key: 'sophie-thompson',

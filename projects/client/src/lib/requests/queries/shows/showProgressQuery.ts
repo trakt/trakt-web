@@ -10,10 +10,10 @@ import {
 } from '$lib/requests/models/EpisodeType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MAX_DATE } from '$lib/utils/constants.ts';
-import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import { toMediaImageUrl } from '$lib/utils/url/toMediaImageUrl.ts';
 import type { ShowProgressResponse } from '@trakt/api';
+import { mayHaveImage } from '../../_internal/mayHaveImage.ts';
 import { mapToPostCredits } from '../../_internal/mapToPostCredits.ts';
 
 const showProgressRequest = ({ fetch, slug }: { slug: string } & ApiParams) =>
@@ -34,7 +34,10 @@ function mapShowProgressResponse(
   item: ShowProgressResponse,
 ): EpisodeProgressEntry {
   const episode = item.next_episode;
-  const posterCandidate = findDefined(...(episode?.images?.screenshot ?? []));
+  const hasScreenshot = mayHaveImage(
+    episode?.images,
+    episode?.images?.screenshot,
+  );
 
   const airDate = new Date(episode?.first_aired ?? MAX_DATE);
   const releaseDate = new Date(episode?.released ?? MAX_DATE);
@@ -52,7 +55,15 @@ function mapShowProgressResponse(
     number: episode?.number ?? -1,
     runtime: episode?.runtime ?? NaN,
     cover: {
-      url: prependHttps(posterCandidate),
+      url:
+        episode && hasScreenshot
+          ? toMediaImageUrl({
+              type: 'episodes',
+              id: episode.ids.trakt,
+              slot: 'screenshot',
+              size: 'medium',
+            })
+          : undefined,
     },
     airDate,
     releaseDate,

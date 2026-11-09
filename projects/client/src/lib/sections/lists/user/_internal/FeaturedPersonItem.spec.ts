@@ -29,7 +29,7 @@ describe('FeaturedPersonItem', () => {
       await screen.findByRole('img', { name: /Rebecca Ferguson/ }),
     ).toHaveAttribute(
       'src',
-      'https://walter.trakt.tv/images/people/2/headshots/thumb/rebecca.webp',
+      'https://media.trakt.tv/people/2/thumb/headshot.webp',
     );
     expect(screen.getByText('Rebecca Ferguson')).toBeInTheDocument();
     expect(requestPerson).not.toHaveBeenCalled();

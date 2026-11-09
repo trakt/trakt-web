@@ -9,14 +9,17 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   country: undefined,
   cover: {
     url: {
-      medium: '/placeholders/purple_placeholder.png' as HttpsUrl,
-      thumb: '/placeholders/landscape_placeholder.png' as HttpsUrl,
+      medium:
+        'https://media.trakt.tv/shows/180770/medium/fanart.webp' as HttpsUrl,
+      thumb:
+        'https://media.trakt.tv/shows/180770/thumb/fanart.webp' as HttpsUrl,
     },
   },
   logo: {
     url: {
-      medium: '/placeholders/purple_placeholder.png' as HttpsUrl,
-      thumb: '/placeholders/landscape_placeholder.png' as HttpsUrl,
+      medium:
+        'https://media.trakt.tv/shows/180770/medium/logo.webp' as HttpsUrl,
+      thumb: 'https://media.trakt.tv/shows/180770/medium/logo.webp' as HttpsUrl,
     },
   },
   genres: [],
@@ -26,8 +29,10 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   overview: 'TBD',
   poster: {
     url: {
-      medium: '/placeholders/portrait_placeholder.png' as HttpsUrl,
-      thumb: '/placeholders/portrait_placeholder.png' as HttpsUrl,
+      medium:
+        'https://media.trakt.tv/shows/180770/medium/poster.webp' as HttpsUrl,
+      thumb:
+        'https://media.trakt.tv/shows/180770/thumb/poster.webp' as HttpsUrl,
     },
   },
   runtime: NaN,
@@ -36,7 +41,7 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   rating: undefined,
   tagline: '',
   thumb: {
-    url: '/placeholders/landscape_placeholder.png' as HttpsUrl,
+    url: 'https://media.trakt.tv/shows/180770/medium/thumb.webp' as HttpsUrl,
   },
   title: 'Silo',
   originalTitle: undefined,

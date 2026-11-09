@@ -17,8 +17,7 @@ export const SeasonRecapPublicMappedMock: SeasonRecap = {
           key: 'person-417597-0',
           name: 'Adam Scott',
           character: 'Mark Scout',
-          headshot:
-            'https://media.trakt.tv/images/people/000/417/597/headshots/thumb/212d1d562f.jpg.webp',
+          headshot: 'https://media.trakt.tv/people/417597/thumb/headshot.webp',
         },
       ],
     },

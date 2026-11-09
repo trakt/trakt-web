@@ -19,30 +19,24 @@ export const ShowDevsMappedMock: ShowEntry = {
   languages: ['en'],
   poster: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/shows/000/147/971/posters/medium/b5fe0d9957.jpg.webp',
-      thumb:
-        'https://media.trakt.tv/images/shows/000/147/971/posters/thumb/b5fe0d9957.jpg.webp',
+      medium: 'https://media.trakt.tv/shows/147971/medium/poster.webp',
+      thumb: 'https://media.trakt.tv/shows/147971/thumb/poster.webp',
     },
   },
   cover: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/shows/000/147/971/fanarts/medium/e9507d40da.jpg.webp',
-      thumb:
-        'https://media.trakt.tv/images/shows/000/147/971/fanarts/thumb/e9507d40da.jpg.webp',
+      medium: 'https://media.trakt.tv/shows/147971/medium/fanart.webp',
+      thumb: 'https://media.trakt.tv/shows/147971/thumb/fanart.webp',
     },
   },
   logo: {
     url: {
-      medium:
-        'https://media.trakt.tv/images/shows/000/147/971/logos/medium/409bb7e516.png.webp',
-      thumb:
-        'https://media.trakt.tv/images/shows/000/147/971/logos/thumb/409bb7e516.png.webp',
+      medium: 'https://media.trakt.tv/shows/147971/medium/logo.webp',
+      thumb: 'https://media.trakt.tv/shows/147971/medium/logo.webp',
     },
   },
   thumb: {
-    url: 'https://media.trakt.tv/images/shows/000/147/971/thumbs/medium/7d0e3d4bbc.jpg.webp',
+    url: 'https://media.trakt.tv/shows/147971/medium/thumb.webp',
   },
   genres: ['drama', 'fantasy', 'science-fiction', 'mystery'],
   overview:

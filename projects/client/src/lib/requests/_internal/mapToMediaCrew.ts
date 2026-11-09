@@ -42,7 +42,10 @@ function toCastMember(castResponse: CastResponse): CastMember {
     ...toMember(castResponse),
     characterName: castResponse.character ?? characters.at(0) ?? '',
     ...(characters.length > 1 ? { characters } : {}),
-    headshot: mapToHeadshot(castResponse.person.images),
+    headshot: mapToHeadshot({
+      id: castResponse.person.ids.trakt,
+      images: castResponse.person.images,
+    }),
   };
 }
 

@@ -12,7 +12,7 @@ export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   overview:
     "In Silo 18, shock and unrest take hold in the wake of Juliette doing what no one's done before.",
   cover: {
-    url: 'https://media.trakt.tv/images/episodes/012/105/048/screenshots/medium/2f894ac614.jpg.webp',
+    url: 'https://media.trakt.tv/episodes/12105048/medium/screenshot.webp',
   },
   airDate: new Date('2024-11-22T02:00:00.000Z'),
   releaseDate: new Date('2024-11-22T02:00:00.000Z'),

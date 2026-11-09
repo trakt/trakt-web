@@ -1,8 +1,6 @@
-import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { MAX_DATE } from '$lib/utils/constants.ts';
-import { findDefined } from '$lib/utils/string/findDefined.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import { toMediaImageUrl } from '$lib/utils/url/toMediaImageUrl.ts';
 import type {
   CalendarShowResponse,
   EpisodeResponse as TraktEpisodeResponse,
@@ -11,6 +9,7 @@ import type {
 import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
 import { type EpisodeType, EpisodeUnknownType } from '../models/EpisodeType.ts';
 import { mapToPostCredits } from './mapToPostCredits.ts';
+import { mayHaveImage } from './mayHaveImage.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
 type EpisodeResponse =
@@ -25,7 +24,10 @@ export function mapToEpisodeEntry(
     episodeResponse,
     'Episode response is undefined',
   );
-  const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
+  const hasScreenshot = mayHaveImage(
+    episode.images,
+    episode.images?.screenshot,
+  );
 
   const airDate = new Date(episode.first_aired ?? MAX_DATE);
   const releaseDate = new Date(episode.released ?? MAX_DATE);
@@ -45,7 +47,14 @@ export function mapToEpisodeEntry(
     number: episode.number,
     runtime: episode.runtime ?? NaN,
     cover: {
-      url: prependHttps(thumbUrl(posterCandidate)),
+      url: hasScreenshot
+        ? toMediaImageUrl({
+            type: 'episodes',
+            id: episode.ids.trakt,
+            slot: 'screenshot',
+            size: 'thumb',
+          })
+        : undefined,
     },
     airDate,
     releaseDate,

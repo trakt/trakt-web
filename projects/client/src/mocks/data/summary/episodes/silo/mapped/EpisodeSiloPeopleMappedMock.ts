@@ -6,10 +6,8 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
       characterName: 'Juliette Nichols',
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/447/271/headshots/medium/d7e3e2fc64.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/447271/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/447271/medium/headshot.webp',
         },
       },
       key: 'rebecca-ferguson',
@@ -19,10 +17,8 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
       characterName: 'Robert Sims',
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/412/328/headshots/medium/35b36ce399.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/412328/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/412328/medium/headshot.webp',
         },
       },
       key: 'common',
@@ -32,10 +28,8 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
       characterName: 'Martha Walker',
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/016/797/headshots/medium/987b640c84.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/16797/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/16797/medium/headshot.webp',
         },
       },
       key: 'harriet-walter',
@@ -45,10 +39,8 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
       characterName: 'Paul Billings',
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/748/739/headshots/medium/628b796714.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/748739/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/748739/medium/headshot.webp',
         },
       },
       key: 'chinaza-uche',
@@ -58,10 +50,8 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
       characterName: 'Lukas Kyle',
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/627/038/headshots/thumb/110e52f004.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/627/038/headshots/medium/110e52f004.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/627038/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/627038/medium/headshot.webp',
         },
       },
       key: 'avi-nash',
@@ -71,10 +61,8 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
       characterName: 'Patrick Kennedy',
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/014/904/headshots/medium/d67b0392d8.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/14904/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/14904/medium/headshot.webp',
         },
       },
       key: 'rick-gomez',
@@ -84,10 +72,8 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
       characterName: 'Bernard Holland',
       headshot: {
         url: {
-          thumb:
-            'https://media.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
-          medium:
-            'https://media.trakt.tv/images/people/000/015/518/headshots/medium/7aa5eb6e65.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/15518/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/15518/medium/headshot.webp',
         },
       },
       key: 'tim-robbins',
@@ -99,10 +85,8 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
       characterName: 'Gloria Hildebrandt',
       headshot: {
         url: {
-          thumb:
-            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
-          medium:
-            'https://walter-r2.trakt.tv/images/people/000/014/103/headshots/medium/2e92bf71ee.jpg.webp',
+          thumb: 'https://media.trakt.tv/people/14103/thumb/headshot.webp',
+          medium: 'https://media.trakt.tv/people/14103/medium/headshot.webp',
         },
       },
       key: 'sophie-thompson',

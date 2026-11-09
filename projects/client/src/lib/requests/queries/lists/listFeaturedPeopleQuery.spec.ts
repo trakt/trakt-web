@@ -45,32 +45,29 @@ describe('listFeaturedPeopleQuery', () => {
       'hugh-grant',
     ]);
     expect(result?.map((person) => person.headshot.url.thumb)).toEqual([
-      'https://walter.trakt.tv/images/people/2/headshots/thumb/rebecca.webp',
-      MEDIA_POSTER_PLACEHOLDER,
+      'https://media.trakt.tv/people/2/thumb/headshot.webp',
+      'https://media.trakt.tv/people/1/thumb/headshot.webp',
     ]);
   });
 
-  it.each([{ headshot: [], fanart: [] }, null, undefined])(
-    'should use a placeholder when headshots are unavailable (%s)',
-    async (images) => {
-      server.use(
-        http.get(`http://localhost/lists/${listId}`, () =>
-          HttpResponse.json({
-            featured: [
-              {
-                name: 'Hugh Grant',
-                ids: { trakt: 1, slug: 'hugh-grant' },
-                images,
-              },
-            ],
-          }),
-        ),
-      );
+  it('should use a placeholder when the person has no headshot', async () => {
+    server.use(
+      http.get(`http://localhost/lists/${listId}`, () =>
+        HttpResponse.json({
+          featured: [
+            {
+              name: 'Hugh Grant',
+              ids: { trakt: 1, slug: 'hugh-grant' },
+              images: { headshot: [], fanart: [] },
+            },
+          ],
+        }),
+      ),
+    );
 
-      const result = await readFeaturedPeople();
-      expect(result?.[0]?.headshot.url.thumb).toBe(MEDIA_POSTER_PLACEHOLDER);
-    },
-  );
+    const result = await readFeaturedPeople();
+    expect(result?.[0]?.headshot.url.thumb).toBe(MEDIA_POSTER_PLACEHOLDER);
+  });
 
   it.each([[], null, undefined])(
     'should return no people for an empty or unavailable extension (%s)',
