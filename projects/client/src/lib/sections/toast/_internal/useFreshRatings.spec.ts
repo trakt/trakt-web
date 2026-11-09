@@ -8,7 +8,7 @@ import { renderStore } from '$test/beds/store/renderStore.ts';
 import { describe, expect, it, vi } from 'vitest';
 import { useFreshRatings } from './useFreshRatings.ts';
 
-const watchedAt = new Date('2026-08-24T12:00:00.000Z');
+const watchedAt = new Date(Date.now() + time.hours(1));
 const staleSnapshot = new Date(watchedAt.getTime() - time.hours(1));
 
 const emptyRatings: UserRatings = {
@@ -92,5 +92,14 @@ describe('store: useFreshRatings', () => {
     hasCheckedRatingsSince(new Date(watchedAt.getTime() + time.minutes(1)));
 
     expect(invalidateQueries).toHaveBeenCalledTimes(2);
+  });
+
+  it('should refresh a snapshot restored from before the page loaded', async () => {
+    const pastWatch = new Date(Date.now() - time.hours(2));
+    const { hasCheckedRatingsSince, invalidateQueries, queryKey } =
+      await renderFreshRatings(new Date(Date.now() - time.hours(1)));
+
+    expect(hasCheckedRatingsSince(pastWatch)).toBe(false);
+    expect(invalidateQueries).toHaveBeenCalledWith({ queryKey });
   });
 });

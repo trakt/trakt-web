@@ -6,6 +6,7 @@ export function useFreshRatings() {
   const client = browser ? useQueryClient() : undefined;
   const { queryKey } = currentUserRatingsQuery();
 
+  const loadedAt = Date.now();
   let refreshedFor = 0;
 
   const hasCheckedRatingsSince = (date: Date) => {
@@ -15,9 +16,9 @@ export function useFreshRatings() {
       return false;
     }
 
-    const watchedAt = date.getTime();
+    const checkpoint = Math.max(date.getTime(), loadedAt);
 
-    if (state.dataUpdatedAt >= watchedAt) {
+    if (state.dataUpdatedAt >= checkpoint) {
       return true;
     }
 
@@ -25,11 +26,11 @@ export function useFreshRatings() {
       return false;
     }
 
-    if (refreshedFor >= watchedAt) {
+    if (refreshedFor >= checkpoint) {
       return true;
     }
 
-    refreshedFor = watchedAt;
+    refreshedFor = checkpoint;
     client?.invalidateQueries({ queryKey });
 
     return false;
