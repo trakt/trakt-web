@@ -287,6 +287,8 @@
   "button_label_share": "مشاركة \"{title}\"",
   "button_label_show_convertible_lists": "عرض القوائم التي يمكنها تحديث نفسها",
   "button_label_show_details": "عرض التفاصيل",
+  "button_label_show_fewer_social_links": "عرض روابط أقل",
+  "button_label_show_more_social_links": "عرض {count} روابط أخرى",
   "button_label_show_section": "عرض {section}",
   "button_label_shows": "مسلسلات",
   "button_label_smart_list_convert": "تحويل هذه القائمة إلى قائمة ذكية",

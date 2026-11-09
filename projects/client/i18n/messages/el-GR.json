@@ -287,6 +287,8 @@
   "button_label_share": "Κοινή χρήση \"{title}\"",
   "button_label_show_convertible_lists": "Εμφάνιση των λιστών που μπορούν να ενημερώνονται αυτόματα",
   "button_label_show_details": "Εμφάνιση λεπτομερειών",
+  "button_label_show_fewer_social_links": "Δείξε λιγότερους συνδέσμους",
+  "button_label_show_more_social_links": "Δείξε {count} ακόμη συνδέσμους",
   "button_label_show_section": "Εμφάνιση {section}",
   "button_label_shows": "Σειρές",
   "button_label_smart_list_convert": "Μετατρέψτε αυτή τη λίστα σε έξυπνη λίστα",

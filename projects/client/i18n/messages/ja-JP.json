@@ -287,6 +287,8 @@
   "button_label_share": "「{title}」を共有",
   "button_label_show_convertible_lists": "自動更新できるリストを表示",
   "button_label_show_details": "詳細を表示",
+  "button_label_show_fewer_social_links": "リンクの表示を減らす",
+  "button_label_show_more_social_links": "さらに{count}件のリンクを表示",
   "button_label_show_section": "{section}を表示",
   "button_label_shows": "番組",
   "button_label_smart_list_convert": "このリストをスマートリストに変換",

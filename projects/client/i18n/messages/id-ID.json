@@ -287,6 +287,8 @@
   "button_label_share": "Bagikan \"{title}\"",
   "button_label_show_convertible_lists": "Tampilkan daftar yang dapat memperbarui sendiri",
   "button_label_show_details": "Tampilkan detail",
+  "button_label_show_fewer_social_links": "Tampilkan lebih sedikit tautan",
+  "button_label_show_more_social_links": "Tampilkan {count} tautan lagi",
   "button_label_show_section": "Tampilkan {section}",
   "button_label_shows": "Acara",
   "button_label_smart_list_convert": "Ubah daftar ini menjadi daftar cerdas",

@@ -287,6 +287,8 @@
   "button_label_share": "\"{title}\" paylaş",
   "button_label_show_convertible_lists": "Kendini güncelleyebilen listeleri göster",
   "button_label_show_details": "Detayları göster",
+  "button_label_show_fewer_social_links": "Daha az bağlantı göster",
+  "button_label_show_more_social_links": "{count} bağlantı daha göster",
   "button_label_show_section": "{section} göster",
   "button_label_shows": "Diziler",
   "button_label_smart_list_convert": "Bu listeyi akıllı listeye dönüştür",

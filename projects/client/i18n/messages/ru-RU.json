@@ -287,6 +287,8 @@
   "button_label_share": "Поделиться \"{title}\"",
   "button_label_show_convertible_lists": "Показать списки, которые могут обновляться автоматически",
   "button_label_show_details": "Показать подробности",
+  "button_label_show_fewer_social_links": "Показать меньше ссылок",
+  "button_label_show_more_social_links": "Показать еще {count} ссылок",
   "button_label_show_section": "Показать {section}",
   "button_label_shows": "Сериалы",
   "button_label_smart_list_convert": "Превратить этот список в умный список",

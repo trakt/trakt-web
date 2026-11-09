@@ -287,6 +287,8 @@
   "button_label_share": "اشتراک‌گذاری \"{title}\"",
   "button_label_show_convertible_lists": "نمایش لیست‌هایی که می‌توانند خودشان را به‌روزرسانی کنند",
   "button_label_show_details": "نمایش جزئیات",
+  "button_label_show_fewer_social_links": "نمایش لینک‌های کمتر",
+  "button_label_show_more_social_links": "نمایش {count} لینک بیشتر",
   "button_label_show_section": "نمایش {section}",
   "button_label_shows": "برنامه‌ها",
   "button_label_smart_list_convert": "این لیست را به یک لیست هوشمند تبدیل کنید",

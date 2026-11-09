@@ -287,6 +287,8 @@
   "button_label_share": "Condividi \"{title}\"",
   "button_label_show_convertible_lists": "Mostra le liste che possono aggiornarsi automaticamente",
   "button_label_show_details": "Mostra dettagli",
+  "button_label_show_fewer_social_links": "Mostra meno link",
+  "button_label_show_more_social_links": "Mostra {count} altri link",
   "button_label_show_section": "Mostra {section}",
   "button_label_shows": "Serie TV",
   "button_label_smart_list_convert": "Converti questa lista in lista intelligente",

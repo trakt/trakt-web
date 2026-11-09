@@ -287,6 +287,8 @@
   "button_label_share": "Сподели \"{title}\"",
   "button_label_show_convertible_lists": "Покажи списъците, които могат да се актуализират сами",
   "button_label_show_details": "Покажи детайли",
+  "button_label_show_fewer_social_links": "Покажи по-малко връзки",
+  "button_label_show_more_social_links": "Покажи още {count} връзки",
   "button_label_show_section": "Показване на {section}",
   "button_label_shows": "Сериали",
   "button_label_smart_list_convert": "Превърнете този списък в интелигентен списък",

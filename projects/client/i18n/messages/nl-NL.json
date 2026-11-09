@@ -287,6 +287,8 @@
   "button_label_share": "Deel \"{title}\"",
   "button_label_show_convertible_lists": "Toon de lijsten die zichzelf kunnen bijwerken",
   "button_label_show_details": "Toon details",
+  "button_label_show_fewer_social_links": "Toon minder links",
+  "button_label_show_more_social_links": "Toon {count} meer links",
   "button_label_show_section": "{section} tonen",
   "button_label_shows": "Series",
   "button_label_smart_list_convert": "Zet deze lijst om naar een slimme lijst",

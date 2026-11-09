@@ -287,6 +287,8 @@
   "button_label_share": "Del \"{title}\"",
   "button_label_show_convertible_lists": "Vis listerne, der kan opdatere sig selv",
   "button_label_show_details": "Vis detaljer",
+  "button_label_show_fewer_social_links": "Vis færre links",
+  "button_label_show_more_social_links": "Vis {count} flere links",
   "button_label_show_section": "Vis {section}",
   "button_label_shows": "Serier",
   "button_label_smart_list_convert": "Konverter denne liste til en smartliste",

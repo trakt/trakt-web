@@ -287,6 +287,8 @@
   "button_label_share": "Partajează \"{title}\"",
   "button_label_show_convertible_lists": "Afișează listele care se pot actualiza automat",
   "button_label_show_details": "Arată detalii",
+  "button_label_show_fewer_social_links": "Afișează mai puține linkuri",
+  "button_label_show_more_social_links": "Afișează {count} mai multe linkuri",
   "button_label_show_section": "Afișează {section}",
   "button_label_shows": "Seriale",
   "button_label_smart_list_convert": "Transformă această listă într-o listă inteligentă",

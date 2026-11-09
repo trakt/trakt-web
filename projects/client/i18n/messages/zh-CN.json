@@ -287,6 +287,8 @@
   "button_label_share": "分享“{title}”",
   "button_label_show_convertible_lists": "显示可自动更新的列表",
   "button_label_show_details": "显示详情",
+  "button_label_show_fewer_social_links": "显示更少链接",
+  "button_label_show_more_social_links": "显示另外 {count} 个链接",
   "button_label_show_section": "显示{section}",
   "button_label_shows": "剧集",
   "button_label_smart_list_convert": "将此列表转为智能列表",

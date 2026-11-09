@@ -286,6 +286,8 @@
   "button_label_share": "„{title}” megosztása",
   "button_label_show_convertible_lists": "Mutasd azokat a listákat, amelyek frissíthetik magukat",
   "button_label_show_details": "Részletek megjelenítése",
+  "button_label_show_fewer_social_links": "Mutass kevesebb linket",
+  "button_label_show_more_social_links": "Mutasd a(z) {count} további linket",
   "button_label_show_section": "Megjelenítés: {section}",
   "button_label_shows": "Sorozatok",
   "button_label_smart_list_convert": "Alakítsa át ezt a listát okoslistává",

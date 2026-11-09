@@ -287,6 +287,8 @@
   "button_label_share": "Dela \"{title}\"",
   "button_label_show_convertible_lists": "Visa listorna som kan uppdatera sig själva",
   "button_label_show_details": "Visa detaljer",
+  "button_label_show_fewer_social_links": "Visa färre länkar",
+  "button_label_show_more_social_links": "Visa {count} fler länkar",
   "button_label_show_section": "Visa {section}",
   "button_label_shows": "Serier",
   "button_label_smart_list_convert": "Gör den här listan till en smart lista",

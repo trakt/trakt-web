@@ -287,6 +287,8 @@
   "button_label_share": "Share \"{title}\"",
   "button_label_show_convertible_lists": "Show the lists that can update themselves",
   "button_label_show_details": "Show details",
+  "button_label_show_fewer_social_links": "Show fewer links",
+  "button_label_show_more_social_links": "Show {count} more links",
   "button_label_show_section": "Show {section}",
   "button_label_shows": "Shows",
   "button_label_smart_list_convert": "Turn this list into a smart list",
