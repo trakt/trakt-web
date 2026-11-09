@@ -36,7 +36,7 @@ const mediaTrendingRequest = ({
 }: MediaTrendingParams) => {
   return api({ fetch }).media.trending({
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       theme,

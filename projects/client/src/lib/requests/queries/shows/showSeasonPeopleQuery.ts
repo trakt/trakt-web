@@ -24,7 +24,7 @@ const showSeasonPeopleRequest = ({
       season: castNumberAsString(season),
     },
     query: {
-      extended: getPeopleExtended(guestStars),
+      extended: getPeopleExtended(guestStars) as 'markdown' | undefined,
     },
   });
 

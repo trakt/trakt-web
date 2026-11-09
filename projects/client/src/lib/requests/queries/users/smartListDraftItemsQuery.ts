@@ -22,7 +22,7 @@ const smartListDraftItemsRequest = async ({
   const response = await rawApiFetch({
     fetch,
     path: `/users/me/lists/${listId}/smart-list-draft/items${buildParamString({
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
     })}`,

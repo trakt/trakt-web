@@ -39,7 +39,7 @@ const mediaAnticipatedRequest = ({
 }: MediaAnticipatedParams) => {
   return api({ fetch }).media.anticipated({
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       theme,

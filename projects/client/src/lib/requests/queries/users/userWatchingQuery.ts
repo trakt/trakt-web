@@ -67,7 +67,7 @@ const userWatchingRequest = ({ fetch, slug }: UserProfileParams) =>
       id: slug,
     },
     query: {
-      extended: 'full,images',
+      extended: 'full',
     },
   });
 

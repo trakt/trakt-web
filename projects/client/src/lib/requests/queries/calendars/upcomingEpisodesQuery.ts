@@ -32,7 +32,7 @@ export const upcomingEpisodesRequest = ({
 }: CalendarShowsParams) => {
   return api({ fetch }).calendars.shows({
     query: {
-      extended: 'full,images',
+      extended: 'full',
       group: 'day',
       ...filter,
     },

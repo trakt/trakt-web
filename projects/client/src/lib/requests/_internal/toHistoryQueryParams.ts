@@ -17,7 +17,7 @@ export function toHistoryQueryParams({
   filter,
 }: ToHistoryQueryParamsProps) {
   return {
-    extended: 'full,images' as const,
+    extended: 'full' as const,
     start_at: startDate?.toISOString(),
     end_at: endDate?.toISOString(),
     limit,

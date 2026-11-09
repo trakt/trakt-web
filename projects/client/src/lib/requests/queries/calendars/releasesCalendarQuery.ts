@@ -32,7 +32,7 @@ const releasesCalendarRequest = ({
 }: ReleasesCalendarParams) => {
   return unauthorizedApi({ fetch }).calendars.releasesHot({
     query: {
-      extended: 'full,images',
+      extended: 'full',
       group: 'day',
       ...filter,
       ...(type === 'media' ? {} : { type }),

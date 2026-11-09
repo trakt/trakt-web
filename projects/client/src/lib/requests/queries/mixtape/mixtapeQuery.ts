@@ -35,7 +35,7 @@ const mixtapeRequest = async ({
 }: MixtapeParams) => {
   const response = await rawApiFetch({
     fetch,
-    path: '/v3/mixtape?extended=full,images',
+    path: '/v3/mixtape?extended=full',
     init: {
       method: 'POST',
       headers: { 'content-type': 'application/json' },

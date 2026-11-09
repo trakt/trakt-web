@@ -11,7 +11,7 @@ export function getRecommendedSearchParams({
   filterParams,
 }: RecommendedProps) {
   const params = {
-    extended: 'full,images,colors',
+    extended: 'full,colors',
     ignore_collected: true,
     limit,
     page,

@@ -44,7 +44,7 @@ export const movieAnticipatedRequest = ({
 }: MovieAnticipatedParams) => {
   return api({ fetch }).movies.anticipated({
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       theme,

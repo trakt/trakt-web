@@ -51,7 +51,7 @@ export const showAnticipatedRequest = ({
 }: ShowAnticipatedParams) => {
   return api({ fetch }).shows.anticipated({
     query: {
-      extended: 'full,images,colors',
+      extended: 'full,colors',
       page,
       limit,
       theme,

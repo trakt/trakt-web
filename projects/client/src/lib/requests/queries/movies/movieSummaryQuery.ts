@@ -12,7 +12,7 @@ const movieSummaryRequest = ({ fetch, slug }: MovieSummaryParams) =>
       id: slug,
     },
     query: {
-      extended: 'full,images,colors,streaming_ids',
+      extended: 'full,colors,streaming_ids',
     },
   });
 

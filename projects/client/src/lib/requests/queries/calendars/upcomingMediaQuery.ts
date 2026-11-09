@@ -40,7 +40,7 @@ export const upcomingMediaQuery = defineQuery({
   request: ({ fetch, startDate, days, target = 'my', filter }) =>
     api({ fetch }).calendars.media({
       query: {
-        extended: 'full,images',
+        extended: 'full',
         group: 'day',
         ...filter,
       },
