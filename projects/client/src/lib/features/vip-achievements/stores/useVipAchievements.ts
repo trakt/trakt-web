@@ -8,29 +8,45 @@ import type { VipAchievementMilestone } from '../models/VipAchievementMilestone.
 
 /**
  * Reactive achievement state for the signed-in member. Combines their lifetime
- * stats with the already-loaded `useUser` slices (history, ratings) and the
- * milestones other features award, and resolves the catalog client-side - no
- * backend writes, no achievement table.
+ * stats with the already-loaded `useUser` slices (history, ratings, favorites,
+ * collection, account) and the milestones other features award, and resolves
+ * the catalog client-side - no backend writes, no achievement table.
  */
 export function useVipAchievements(
   milestones$: Observable<ReadonlySet<VipAchievementMilestone>>,
 ) {
   const stats = useQuery(userStatsQuery({ slug: 'me' }));
-  const { history, ratings } = useUser();
+  const { user, history, ratings, favorites, collection } = useUser();
 
   const achievements = combineLatest([
     stats,
+    user,
     history,
     ratings,
+    favorites,
+    collection,
     milestones$,
   ]).pipe(
-    map(([statsResult, history, ratings, milestones]) =>
-      computeVipAchievements({
-        stats: statsResult.data,
+    map(
+      ([
+        statsResult,
+        user,
         history,
         ratings,
+        favorites,
+        collection,
         milestones,
-      }),
+      ]) =>
+        computeVipAchievements({
+          stats: statsResult.data,
+          history,
+          ratings,
+          milestones,
+          favorites,
+          collection,
+          joinedAt: user?.joinedAt,
+          now: Date.now(),
+        }),
     ),
   );
 

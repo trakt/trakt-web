@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { VipAchievement } from "../models/VipAchievement.ts";
   import AchievementPinShapes from "./AchievementPinShapes.svelte";
-  import { achievementPins } from "./achievementPins.ts";
+  import { toAchievementPin } from "./toAchievementPin.ts";
   import { pinPaths } from "./pinPaths.ts";
   import { toPinGlyphFrame } from "./toPinGlyphFrame.ts";
 
@@ -35,7 +35,7 @@
   ];
 
   const uid = $props.id();
-  const pin = $derived(achievementPins[achievement.id]);
+  const pin = $derived(toAchievementPin(achievement));
   const solid = $derived(pin.glyph.solid ?? pin.glyph.shapes);
   const frame = $derived(toPinGlyphFrame(pin.glyph));
   const frameTransform = $derived(

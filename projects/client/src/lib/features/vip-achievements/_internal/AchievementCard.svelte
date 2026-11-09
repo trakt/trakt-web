@@ -5,7 +5,7 @@
   import { toGroupedNumber } from "$lib/utils/formatting/number/toGroupedNumber.ts";
   import type { VipAchievement } from "../models/VipAchievement.ts";
   import AchievementPin from "./AchievementPin.svelte";
-  import { achievementPins } from "./achievementPins.ts";
+  import { toAchievementPin } from "./toAchievementPin.ts";
 
   const {
     achievement,
@@ -23,7 +23,7 @@
   const hasProgress = $derived((achievement.nextThreshold ?? 0) > 1);
   const progressPercent = $derived(Math.round(achievement.progress * 100));
 
-  const pinColor = $derived(`var(${achievementPins[achievement.id].color})`);
+  const pinColor = $derived(`var(${toAchievementPin(achievement).color})`);
 
   // 0..1 across the tier ladder: the card's wash deepens as tiers stack up.
   const tierStrength = $derived(
@@ -33,6 +33,7 @@
   );
 
   const tierText = $derived.by(() => {
+    if (achievement.isHidden) return m.vip_achievements_secret_status();
     if (!achievement.isUnlocked) return m.vip_achievements_locked();
     if (achievement.isMaxed) return m.vip_achievements_status_completed();
     return m.vip_achievements_tier_label({

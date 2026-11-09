@@ -13,6 +13,10 @@ function makeInput(
     history: null,
     ratings: null,
     milestones: null,
+    favorites: null,
+    collection: null,
+    joinedAt: null,
+    now: Date.parse('2026-11-09T00:00:00Z'),
     ...overrides,
   };
 }
@@ -185,6 +189,103 @@ describe('util: computeVipAchievements', () => {
     expect(computeVipAchievements(makeInput()).at(0)?.id).toBe(
       'opening-credits',
     );
+  });
+
+  it('should hide a secret until it is earned', () => {
+    const locked = byId('leap-day')(computeVipAchievements(makeInput()));
+
+    expect(locked?.isHidden).toBe(true);
+    expect(locked?.title).toBe('???');
+    expect(locked?.nextStep).toBeNull();
+    expect(locked?.description).not.toContain('February');
+  });
+
+  it('should reveal a secret once earned', () => {
+    const playedAt = new Date('2028-02-29T12:00:00Z');
+    const history = {
+      movies: new Map([
+        [1, { id: 1, watchedAt: playedAt, plays: 1, watchedDates: [playedAt] }],
+      ]),
+      shows: new Map(),
+    };
+    const earned = byId('leap-day')(
+      computeVipAchievements(makeInput({ history })),
+    );
+
+    expect(earned?.isHidden).toBe(false);
+    expect(earned?.isUnlocked).toBe(true);
+    expect(earned?.title).toBe('Leap Day');
+  });
+
+  it('should count other public achievements for Credits Roll', () => {
+    const stats = makeStats({
+      totalPlays: 1_000,
+      lists: 3,
+      movies: { plays: 60, watched: 50, minutes: 0, ratings: 0, comments: 5 },
+      shows: { watched: 10, ratings: 0, comments: 0 },
+      episodes: {
+        plays: 0,
+        watched: 0,
+        minutes: 30_000,
+        ratings: 0,
+        comments: 0,
+      },
+      progress: { started: 0, finished: 10, dropped: 0 },
+      network: { followers: 10, following: 5 },
+    });
+    const list = computeVipAchievements(makeInput({ stats }));
+    const earnedOthers = list.filter(
+      (achievement) =>
+        achievement.isUnlocked &&
+        achievement.id !== 'credits-roll' &&
+        !achievement.isHidden,
+    ).length;
+
+    expect(earnedOthers).toBeGreaterThanOrEqual(10);
+    expect(byId('credits-roll')(list)?.value).toBe(earnedOthers);
+    expect(byId('credits-roll')(list)?.isUnlocked).toBe(true);
+  });
+
+  it('should make Credits Roll top tier every other public achievement', () => {
+    const publicOthers = achievementCatalog.filter(
+      (definition) => !definition.isSecret && !definition.countsOthers,
+    ).length;
+
+    expect(
+      byId('credits-roll')(computeVipAchievements(makeInput()))?.thresholds.at(
+        -1,
+      ),
+    ).toBe(publicOthers);
+  });
+
+  it('should read favorites, collection and the join date', () => {
+    const list = computeVipAchievements(
+      makeInput({
+        favorites: {
+          movies: new Map(
+            Array.from({ length: 6 }, (_, id) => [
+              id,
+              { id, favoritedAt: new Date(0) },
+            ]),
+          ),
+          shows: new Map(
+            Array.from({ length: 4 }, (_, id) => [
+              id,
+              { id, favoritedAt: new Date(0) },
+            ]),
+          ),
+        },
+        collection: {
+          movies: new Set(Array.from({ length: 30 }, (_, id) => id)),
+          episodes: new Set(Array.from({ length: 20 }, (_, id) => id)),
+        },
+        joinedAt: new Date('2019-01-01T00:00:00Z'),
+      }),
+    );
+
+    expect(byId('hall-of-fame')(list)?.value).toBe(10);
+    expect(byId('shelf-life')(list)?.value).toBe(50);
+    expect(byId('trakt-pioneer')(list)?.value).toBe(7);
   });
 
   it('degrades to all-locked with no data', () => {

@@ -19,6 +19,7 @@ function makeAchievement(
     progress: 0,
     isUnlocked: false,
     isMaxed: false,
+    isHidden: false,
     ...overrides,
   };
 }

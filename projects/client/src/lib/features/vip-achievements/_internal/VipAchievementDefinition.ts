@@ -20,4 +20,11 @@ export type VipAchievementDefinition = {
   thresholds: ReadonlyArray<number>;
   /** Pure extractor mapping the loaded client data to this metric's value. */
   metric: (input: VipAchievementMetricInput) => number;
+  /** Shown as "???" until earned, and left out of the total until then. */
+  isSecret?: boolean;
+  /**
+   * Counts the member's other earned achievements, so the engine resolves it
+   * after everything else.
+   */
+  countsOthers?: boolean;
 };

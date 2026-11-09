@@ -8,6 +8,7 @@
   import AchievementCategorySection from "./_internal/AchievementCategorySection.svelte";
   import AchievementPin from "./_internal/AchievementPin.svelte";
   import { toAchievementSections } from "./_internal/toAchievementSections.ts";
+  import { toAchievementCounts } from "./_internal/toAchievementCounts.ts";
   import { toShelfAchievements } from "./_internal/toShelfAchievements.ts";
 
   const SHELF_SIZE = 3;
@@ -25,9 +26,7 @@
   // Locked achievements show greyed out, after the earned ones in each
   // section, so there is always something to aim for. The switch hides them.
   let showLocked = $state(true);
-  const earnedCount = $derived(
-    achievements.filter((achievement) => achievement.isUnlocked).length,
-  );
+  const counts = $derived(toAchievementCounts(achievements));
 
   let collapsed = $state<ReadonlySet<VipAchievementCategory>>(new Set());
 
@@ -69,13 +68,13 @@
       <div class="summary-body">
         <span class="summary-count bold">
           {m.vip_achievements_earned_summary({
-            earned: earnedCount,
-            total: achievements.length,
+            earned: counts.earned,
+            total: counts.total,
           })}
         </span>
         <span
           class="summary-bar"
-          style:--earned-share={`${(earnedCount / Math.max(achievements.length, 1)) * 100}%`}
+          style:--earned-share={`${(counts.earned / Math.max(counts.total, 1)) * 100}%`}
           aria-hidden="true"
         ></span>
       </div>

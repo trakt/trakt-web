@@ -4,6 +4,7 @@
   import type { VipAchievementId } from "./models/VipAchievementId.ts";
   import { useSeenAchievementTiers } from "./stores/useSeenAchievementTiers.ts";
   import { useVipAchievements } from "./stores/useVipAchievements.ts";
+  import { toAchievementCounts } from "./_internal/toAchievementCounts.ts";
   import { toNewAchievementIds } from "./_internal/toNewAchievementIds.ts";
   import type { VipAchievementMilestone } from "./models/VipAchievementMilestone.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
@@ -19,9 +20,7 @@
   let newIds = $state<ReadonlySet<VipAchievementId>>(new Set());
 
   const list = $derived($achievements ?? []);
-  const unlockedCount = $derived(
-    list.filter((achievement) => achievement.isUnlocked).length,
-  );
+  const counts = $derived(toAchievementCounts(list));
 
   const openDrawer = () => {
     newIds = toNewAchievementIds({ achievements: list, seen: readSeen() });
@@ -33,8 +32,8 @@
 </script>
 
 <AchievementsAnchor
-  {unlockedCount}
-  totalCount={list.length}
+  unlockedCount={counts.earned}
+  totalCount={counts.total}
   onclick={openDrawer}
 />
 

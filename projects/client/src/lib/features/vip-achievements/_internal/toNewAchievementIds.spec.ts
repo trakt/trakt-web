@@ -17,6 +17,7 @@ function makeAchievement(
     progress: 0,
     isUnlocked: overrides.tierIndex >= 0,
     isMaxed: false,
+    isHidden: false,
     ...overrides,
   };
 }

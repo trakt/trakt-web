@@ -21,4 +21,7 @@ export const achievementCategories: ReadonlyArray<AchievementCategoryDefinition>
     { id: 'habits', title: m.vip_achievements_category_habits },
     { id: 'ratings', title: m.vip_achievements_category_ratings },
     { id: 'lists', title: m.vip_achievements_category_lists },
+    { id: 'social', title: m.vip_achievements_category_social },
+    { id: 'legacy', title: m.vip_achievements_category_legacy },
+    { id: 'secret', title: m.vip_achievements_category_secret },
   ];

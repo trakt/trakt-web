@@ -47,4 +47,84 @@ export const achievementPins: Record<VipAchievementId, AchievementPin> = {
   'perfect-ten': { color: '--achievement-pin-rose', glyph: pinGlyphs.star },
   scribe: { color: '--achievement-pin-brick', glyph: pinGlyphs.nib },
   'list-maker': { color: '--achievement-pin-slate', glyph: pinGlyphs.cards },
+  'feature-presentation': {
+    color: '--achievement-pin-cherry',
+    glyph: pinGlyphs.popcorn,
+  },
+  'pilot-season': {
+    color: '--achievement-pin-indigo',
+    glyph: pinGlyphs.remote,
+  },
+  'nostalgia-trip': {
+    color: '--achievement-pin-plum',
+    glyph: pinGlyphs.rewind,
+  },
+  'long-haul': {
+    color: '--achievement-pin-olive',
+    glyph: pinGlyphs.mountain,
+  },
+  'early-bird': {
+    color: '--achievement-pin-aqua',
+    glyph: pinGlyphs.sunrise,
+  },
+  'season-ticket': {
+    color: '--achievement-pin-jade',
+    glyph: pinGlyphs.calendar,
+  },
+  'weekly-ritual': {
+    color: '--achievement-pin-amber',
+    glyph: pinGlyphs.candle,
+  },
+  'full-spectrum': {
+    color: '--achievement-pin-grape',
+    glyph: pinGlyphs.bars,
+  },
+  'hard-to-please': {
+    color: '--achievement-pin-ocean',
+    glyph: pinGlyphs.storm,
+  },
+  'instant-verdict': {
+    color: '--achievement-pin-magenta',
+    glyph: pinGlyphs.stopwatch,
+  },
+  'episode-by-episode': {
+    color: '--achievement-pin-mint',
+    glyph: pinGlyphs.film,
+  },
+  'hall-of-fame': {
+    color: '--achievement-pin-coral',
+    glyph: pinGlyphs.heart,
+  },
+  'shelf-life': {
+    color: '--achievement-pin-ice',
+    glyph: pinGlyphs.disc,
+  },
+  'ensemble-cast': {
+    color: '--achievement-pin-denim',
+    glyph: pinGlyphs.people,
+  },
+  'fan-club': {
+    color: '--achievement-pin-flamingo',
+    glyph: pinGlyphs.pennant,
+  },
+  'trakt-pioneer': {
+    color: '--achievement-pin-sand',
+    glyph: pinGlyphs.hourglass,
+  },
+  'credits-roll': {
+    color: '--achievement-pin-lavender',
+    glyph: pinGlyphs.trophy,
+  },
+  countdown: {
+    color: '--achievement-pin-charcoal',
+    glyph: pinGlyphs.clock,
+  },
+  'leap-day': {
+    color: '--achievement-pin-forest',
+    glyph: pinGlyphs.frog,
+  },
+  'groundhog-day': {
+    color: '--achievement-pin-cocoa',
+    glyph: pinGlyphs.loop,
+  },
 };

@@ -36,4 +36,9 @@ export type VipAchievement = {
   isUnlocked: boolean;
   /** `true` once the highest tier is reached. */
   isMaxed: boolean;
+  /**
+   * A secret achievement still to be found: it shows as "???" with no hint,
+   * and only counts towards the total once earned.
+   */
+  isHidden: boolean;
 };

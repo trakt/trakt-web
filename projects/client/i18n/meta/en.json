@@ -14041,8 +14041,8 @@
       "description": "Section heading in the achievements drawer grouping achievements about ratings and comments."
     },
     "vip_achievements_category_lists": {
-      "default": "Lists",
-      "description": "Section heading in the achievements drawer grouping achievements about the lists the member creates."
+      "default": "Lists and collection",
+      "description": "Section heading in the achievements drawer for achievements about lists, favorites and the collection."
     },
     "vip_achievements_to_unlock": {
       "default": "To unlock",
@@ -14207,6 +14207,346 @@
     "vip_achievement_opening_credits_step": {
       "default": "Finish the first steps in Getting started",
       "description": "Instruction for unlocking the 'Opening Credits' achievement. 'Getting started' is the menu item that lists the steps."
+    },
+    "vip_achievements_category_social": {
+      "default": "Social",
+      "description": "Section heading in the achievements drawer for achievements about following people and being followed."
+    },
+    "vip_achievements_category_legacy": {
+      "default": "Legacy",
+      "description": "Section heading in the achievements drawer for achievements about the member's time on Trakt and the achievements they've collected."
+    },
+    "vip_achievements_category_secret": {
+      "default": "Secret",
+      "description": "Section heading in the achievements drawer for secret achievements, which stay hidden until earned."
+    },
+    "vip_achievements_secret_title": {
+      "default": "???",
+      "description": "Title shown on a secret achievement the member hasn't found yet. Keep it as question marks unless your language uses a different convention for an unknown name."
+    },
+    "vip_achievements_secret_description": {
+      "default": "Keep watching. You'll know it when you find it.",
+      "description": "Description shown on a secret achievement the member hasn't found yet. It must not hint at how to earn it."
+    },
+    "vip_achievements_secret_status": {
+      "default": "Secret",
+      "description": "Status on a secret achievement the member hasn't found yet. Displayed in uppercase."
+    },
+    "vip_achievement_feature_presentation_title": {
+      "default": "Feature Presentation",
+      "description": "Title of the 'Feature Presentation' achievement."
+    },
+    "vip_achievement_feature_presentation_description": {
+      "default": "Different movies you've watched.",
+      "description": "Description of the 'Feature Presentation' achievement."
+    },
+    "vip_achievement_feature_presentation_step": {
+      "default": "Watch {count} different movies",
+      "description": "Instruction for reaching a tier of the 'Feature Presentation' achievement. {count} is a formatted number, at least 50.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_pilot_season_title": {
+      "default": "Pilot Season",
+      "description": "Title of the 'Pilot Season' achievement."
+    },
+    "vip_achievement_pilot_season_description": {
+      "default": "Shows you've watched at least one episode of.",
+      "description": "Description of the 'Pilot Season' achievement."
+    },
+    "vip_achievement_pilot_season_step": {
+      "default": "Start {count} shows",
+      "description": "Instruction for reaching a tier of the 'Pilot Season' achievement. {count} is a formatted number, at least 10.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_nostalgia_trip_title": {
+      "default": "Nostalgia Trip",
+      "description": "Title of the 'Nostalgia Trip' achievement."
+    },
+    "vip_achievement_nostalgia_trip_description": {
+      "default": "Movies and episodes you've watched again.",
+      "description": "Description of the 'Nostalgia Trip' achievement."
+    },
+    "vip_achievement_nostalgia_trip_step": {
+      "default": "Log {count} rewatches",
+      "description": "Instruction for reaching a tier of the 'Nostalgia Trip' achievement. {count} is a formatted number, at least 10.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_long_haul_title": {
+      "default": "Long Haul",
+      "description": "Title of the 'Long Haul' achievement."
+    },
+    "vip_achievement_long_haul_description": {
+      "default": "Shows you've watched 100 or more episodes of.",
+      "description": "Description of the 'Long Haul' achievement."
+    },
+    "vip_achievement_long_haul_step_one": {
+      "default": "Watch 100 episodes of one show",
+      "description": "Instruction for reaching a tier of the 'Long Haul' achievement."
+    },
+    "vip_achievement_long_haul_step_other": {
+      "default": "Watch 100 episodes of {count} different shows",
+      "description": "Instruction for reaching a tier of the 'Long Haul' achievement. {count} is a formatted number, at least 5.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_early_bird_title": {
+      "default": "Early Bird",
+      "description": "Title of the 'Early Bird' achievement."
+    },
+    "vip_achievement_early_bird_description": {
+      "default": "Plays logged between 5 and 8 AM, your time.",
+      "description": "Description of the 'Early Bird' achievement."
+    },
+    "vip_achievement_early_bird_step": {
+      "default": "Watch {count} times between 5 and 8 AM",
+      "description": "Instruction for reaching a tier of the 'Early Bird' achievement. {count} is a formatted number, at least 5.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_season_ticket_title": {
+      "default": "Season Ticket",
+      "description": "Title of the 'Season Ticket' achievement."
+    },
+    "vip_achievement_season_ticket_description": {
+      "default": "Different days you've watched something.",
+      "description": "Description of the 'Season Ticket' achievement."
+    },
+    "vip_achievement_season_ticket_step": {
+      "default": "Watch something on {count} different days",
+      "description": "Instruction for reaching a tier of the 'Season Ticket' achievement. {count} is a formatted number, at least 50.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_weekly_ritual_title": {
+      "default": "Weekly Ritual",
+      "description": "Title of the 'Weekly Ritual' achievement."
+    },
+    "vip_achievement_weekly_ritual_description": {
+      "default": "Your longest run of weeks with at least one play.",
+      "description": "Description of the 'Weekly Ritual' achievement."
+    },
+    "vip_achievement_weekly_ritual_step": {
+      "default": "Watch something {count} weeks in a row",
+      "description": "Instruction for reaching a tier of the 'Weekly Ritual' achievement. {count} is a formatted number of weeks, at least 4.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_full_spectrum_title": {
+      "default": "Full Spectrum",
+      "description": "Title of the 'Full Spectrum' achievement."
+    },
+    "vip_achievement_full_spectrum_description": {
+      "default": "Ratings at every star level, from 1 to 5.",
+      "description": "Description of the 'Full Spectrum' achievement."
+    },
+    "vip_achievement_full_spectrum_step": {
+      "default": "Give at least one rating at every star level",
+      "description": "Instruction for reaching a tier of the 'Full Spectrum' achievement."
+    },
+    "vip_achievement_hard_to_please_title": {
+      "default": "Hard to Please",
+      "description": "Title of the 'Hard to Please' achievement."
+    },
+    "vip_achievement_hard_to_please_description": {
+      "default": "Ratings of 1 or 2 stars.",
+      "description": "Description of the 'Hard to Please' achievement."
+    },
+    "vip_achievement_hard_to_please_step": {
+      "default": "Give {count} ratings of 1 or 2 stars",
+      "description": "Instruction for reaching a tier of the 'Hard to Please' achievement. {count} is a formatted number, at least 10.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_instant_verdict_title": {
+      "default": "Instant Verdict",
+      "description": "Title of the 'Instant Verdict' achievement."
+    },
+    "vip_achievement_instant_verdict_description": {
+      "default": "Movies you rated within an hour of watching.",
+      "description": "Description of the 'Instant Verdict' achievement."
+    },
+    "vip_achievement_instant_verdict_step": {
+      "default": "Rate {count} movies within an hour of watching",
+      "description": "Instruction for reaching a tier of the 'Instant Verdict' achievement. {count} is a formatted number, at least 10.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_episode_by_episode_title": {
+      "default": "Episode by Episode",
+      "description": "Title of the 'Episode by Episode' achievement."
+    },
+    "vip_achievement_episode_by_episode_description": {
+      "default": "Episodes you've rated.",
+      "description": "Description of the 'Episode by Episode' achievement."
+    },
+    "vip_achievement_episode_by_episode_step": {
+      "default": "Rate {count} episodes",
+      "description": "Instruction for reaching a tier of the 'Episode by Episode' achievement. {count} is a formatted number, at least 50.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_hall_of_fame_title": {
+      "default": "Hall of Fame",
+      "description": "Title of the 'Hall of Fame' achievement."
+    },
+    "vip_achievement_hall_of_fame_description": {
+      "default": "Movies and shows in your favorites.",
+      "description": "Description of the 'Hall of Fame' achievement."
+    },
+    "vip_achievement_hall_of_fame_step": {
+      "default": "Add {count} favorites",
+      "description": "Instruction for reaching a tier of the 'Hall of Fame' achievement. {count} is a formatted number, at least 10.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_shelf_life_title": {
+      "default": "Shelf Life",
+      "description": "Title of the 'Shelf Life' achievement."
+    },
+    "vip_achievement_shelf_life_description": {
+      "default": "Movies and episodes in your collection.",
+      "description": "Description of the 'Shelf Life' achievement."
+    },
+    "vip_achievement_shelf_life_step": {
+      "default": "Collect {count} movies or episodes",
+      "description": "Instruction for reaching a tier of the 'Shelf Life' achievement. {count} is a formatted number, at least 50.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_ensemble_cast_title": {
+      "default": "Ensemble Cast",
+      "description": "Title of the 'Ensemble Cast' achievement."
+    },
+    "vip_achievement_ensemble_cast_description": {
+      "default": "People you follow.",
+      "description": "Description of the 'Ensemble Cast' achievement."
+    },
+    "vip_achievement_ensemble_cast_step": {
+      "default": "Follow {count} people",
+      "description": "Instruction for reaching a tier of the 'Ensemble Cast' achievement. {count} is a formatted number, at least 5.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_fan_club_title": {
+      "default": "Fan Club",
+      "description": "Title of the 'Fan Club' achievement."
+    },
+    "vip_achievement_fan_club_description": {
+      "default": "People who follow you.",
+      "description": "Description of the 'Fan Club' achievement."
+    },
+    "vip_achievement_fan_club_step": {
+      "default": "Reach {count} followers",
+      "description": "Instruction for reaching a tier of the 'Fan Club' achievement. {count} is a formatted number, at least 10.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_trakt_pioneer_title": {
+      "default": "Trakt Pioneer",
+      "description": "Title of the 'Trakt Pioneer' achievement."
+    },
+    "vip_achievement_trakt_pioneer_description": {
+      "default": "Years since you joined Trakt.",
+      "description": "Description of the 'Trakt Pioneer' achievement."
+    },
+    "vip_achievement_trakt_pioneer_step_one": {
+      "default": "Be on Trakt for a year",
+      "description": "Instruction for reaching a tier of the 'Trakt Pioneer' achievement."
+    },
+    "vip_achievement_trakt_pioneer_step_other": {
+      "default": "Be on Trakt for {count} years",
+      "description": "Instruction for reaching a tier of the 'Trakt Pioneer' achievement. {count} is a formatted number of years, at least 3.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_credits_roll_title": {
+      "default": "Credits Roll",
+      "description": "Title of the 'Credits Roll' achievement."
+    },
+    "vip_achievement_credits_roll_description": {
+      "default": "Other achievements you've earned. The last tier is all of them.",
+      "description": "Description of the 'Credits Roll' achievement."
+    },
+    "vip_achievement_credits_roll_step": {
+      "default": "Earn {count} other achievements",
+      "description": "Instruction for reaching a tier of the 'Credits Roll' achievement. {count} is a formatted number, at least 10.",
+      "variables": {
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "vip_achievement_countdown_title": {
+      "default": "Countdown",
+      "description": "Title of the 'Countdown' achievement."
+    },
+    "vip_achievement_countdown_description": {
+      "default": "Watched something as one year turned into the next.",
+      "description": "Description of the 'Countdown' achievement. Secret: only shown once earned."
+    },
+    "vip_achievement_leap_day_title": {
+      "default": "Leap Day",
+      "description": "Title of the 'Leap Day' achievement."
+    },
+    "vip_achievement_leap_day_description": {
+      "default": "Watched something on 29 February.",
+      "description": "Description of the 'Leap Day' achievement. Secret: only shown once earned."
+    },
+    "vip_achievement_groundhog_day_title": {
+      "default": "Groundhog Day",
+      "description": "Title of the 'Groundhog Day' achievement."
+    },
+    "vip_achievement_groundhog_day_description": {
+      "default": "Watched the same movie twice in one day.",
+      "description": "Description of the 'Groundhog Day' achievement. Secret: only shown once earned."
     }
   }
 }

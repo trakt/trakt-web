@@ -8,4 +8,7 @@ export type VipAchievementCategory =
   | 'watching'
   | 'habits'
   | 'ratings'
-  | 'lists';
+  | 'lists'
+  | 'social'
+  | 'legacy'
+  | 'secret';
