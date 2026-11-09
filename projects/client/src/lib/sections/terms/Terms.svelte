@@ -6,7 +6,7 @@
 </script>
 
 <LegalPage title="Trakt Terms of Use" lastUpdated="October 27, 2026">
-  <svelte:fragment slot="intro">
+  {#snippet intro()}
     <p>
       Welcome to Trakt! These Terms of Use (or <b>"Terms"</b>) are a legally
       binding agreement between you and Trakt, Inc. (<b>"Trakt,"</b>
@@ -21,9 +21,9 @@
       rules may apply to certain Services, and they will become part of these
       Terms if you use those Services.
     </p>
-  </svelte:fragment>
+  {/snippet}
 
-  <svelte:fragment slot="summary">
+  {#snippet summary()}
     <h2>What's Covered By These Terms?</h2>
     <p>
       We encourage you to read through these Terms before using Trakt Services,
@@ -67,7 +67,7 @@
         <Link href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</Link>.
       </li>
     </ul>
-  </svelte:fragment>
+  {/snippet}
   <p>
     THESE TERMS INCLUDE A CLASS ACTION WAIVER AND AN ARBITRATION AGREEMENT THAT
     GOVERNS ANY DISPUTES BETWEEN YOU AND TRAKT. If you do not agree with any of

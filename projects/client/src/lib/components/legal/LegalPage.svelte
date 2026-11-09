@@ -1,6 +1,8 @@
 <script lang="ts">
-  export let title: string;
-  export let lastUpdated: string;
+  import type { LegalPageProps } from "./_internal/LegalPageProps.ts";
+
+  const { title, lastUpdated, intro, summary, children }: LegalPageProps =
+    $props();
 </script>
 
 <div class="trakt-legal-page">
@@ -12,15 +14,15 @@
   </header>
 
   <div class="legal-content">
-    <slot name="intro" />
+    {@render intro?.()}
   </div>
 
   <div class="legal-summary">
-    <slot name="summary" />
+    {@render summary?.()}
   </div>
 
   <div class="legal-content">
-    <slot />
+    {@render children?.()}
   </div>
 </div>
 
