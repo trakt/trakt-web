@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { getLocale } from '$lib/features/i18n/index.ts';
 import { peopleSummaryQuery } from '$lib/requests/queries/people/peopleSummaryQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { shouldPrefetch } from '$lib/utils/requests/shouldPrefetch.ts';
@@ -9,11 +10,15 @@ export const load: PageLoad = async ({ parent, params, fetch, url }) => {
 
   if (shouldPrefetch({ isBot, url })) {
     const slug = assertDefined(params.slug, 'Slug is required');
-    await queryClient.prefetchQuery(peopleSummaryQuery({ slug, fetch }));
+    await queryClient.prefetchQuery(
+      peopleSummaryQuery({ slug, locale: getLocale(), fetch }),
+    );
     return;
   }
 
   if (browser && params.slug) {
-    void queryClient.prefetchQuery(peopleSummaryQuery({ slug: params.slug }));
+    void queryClient.prefetchQuery(
+      peopleSummaryQuery({ slug: params.slug, locale: getLocale() }),
+    );
   }
 };

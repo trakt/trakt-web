@@ -10,12 +10,14 @@
   import SummaryHeader from "./../summary/SummaryHeader.svelte";
   import SummaryMarkdownOverview from "./../summary/SummaryMarkdownOverview.svelte";
   import DetailSeparator from "./v2/_internal/DetailSeparator.svelte";
-  import { hasSocialMediaLinks } from "./v2/_internal/hasSocialMediaLinks";
+  import ExpandableSocialMediaLinks from "./_internal/ExpandableSocialMediaLinks.svelte";
   import ImdbLink from "./v2/_internal/ImdbLink.svelte";
   import PersonDetails from "./v2/_internal/PersonDetails.svelte";
-  import SocialMediaLinks from "./v2/_internal/SocialMediaLinks.svelte";
+  import { splitSocialMediaLinks } from "./_internal/splitSocialMediaLinks";
 
   const { person }: { person: PersonSummary } = $props();
+
+  const socialLinks = $derived(splitSocialMediaLinks(person.socialMedia));
 </script>
 
 {#snippet tags()}
@@ -69,10 +71,10 @@
       variant="compact"
     />
 
-    {#if hasSocialMediaLinks(person)}
+    {#if socialLinks.inline.length > 0}
       <DetailSeparator />
       <div class="person-social-media-links">
-        <SocialMediaLinks {person} />
+        <ExpandableSocialMediaLinks {...socialLinks} />
       </div>
     {/if}
   </div>

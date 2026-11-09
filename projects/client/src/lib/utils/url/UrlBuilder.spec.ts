@@ -2,6 +2,29 @@ import { describe, expect, it } from 'vitest';
 import { UrlBuilder } from './UrlBuilder.ts';
 
 describe('util: UrlBuilder', () => {
+  describe('external', () => {
+    it('should build the wikipedia url in the given language', () => {
+      expect(UrlBuilder.external.wikipedia('Keanu_Reeves')).to.equal(
+        'https://en.wikipedia.org/wiki/Keanu_Reeves',
+      );
+      expect(UrlBuilder.external.wikipedia('Keanu_Reeves', 'pt')).to.equal(
+        'https://pt.wikipedia.org/wiki/Keanu_Reeves',
+      );
+    });
+
+    it('should build the tiktok, youtube and wikidata urls', () => {
+      expect(UrlBuilder.external.tiktok('khaby.lame')).to.equal(
+        'https://www.tiktok.com/@khaby.lame',
+      );
+      expect(UrlBuilder.external.youtube('UC0000000000000000000000')).to.equal(
+        'https://www.youtube.com/channel/UC0000000000000000000000',
+      );
+      expect(UrlBuilder.external.wikidata('Q43416')).to.equal(
+        'https://www.wikidata.org/wiki/Q43416',
+      );
+    });
+  });
+
   describe('episodeDrawer', () => {
     it('should point at the show summary page with the episode drawer params', () => {
       const url = UrlBuilder.episodeDrawer('the-penguin', 1, 3);

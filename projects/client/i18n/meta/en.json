@@ -15240,6 +15240,19 @@
     "text_match_unreleased": {
       "default": "Unreleased",
       "description": "Small label above the hype tier in the match panel, saying the title is not out yet."
+    },
+    "button_label_show_more_social_links": {
+      "default": "Show {count} more links",
+      "description": "Aria-label for the small button on a person page that reveals the remaining social and reference links (X, TikTok, Facebook, Wikidata). {count} is how many links are hidden.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_show_fewer_social_links": {
+      "default": "Show fewer links",
+      "description": "Aria-label for the small button on a person page that hides the extra social and reference links again."
     }
   }
 }

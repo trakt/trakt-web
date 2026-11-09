@@ -10,7 +10,10 @@ describe('peopleSummaryQuery', () => {
     const result = await runQuery({
       factory: () =>
         createTestBedQuery(
-          peopleSummaryQuery({ slug: PersonFergusonResponseMock.ids.slug }),
+          peopleSummaryQuery({
+            slug: PersonFergusonResponseMock.ids.slug,
+            locale: 'en',
+          }),
         ),
       mapper: (response) => response?.data,
     });
