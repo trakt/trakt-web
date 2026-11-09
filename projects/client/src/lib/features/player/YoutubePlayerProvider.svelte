@@ -91,7 +91,11 @@
         }
 
         await enterFullscreenSafely();
-        await instance.play();
+        try {
+          await instance.play();
+        } catch {
+          handlePauseVideo();
+        }
       };
 
       /** BEGIN: iOS does not emit */
