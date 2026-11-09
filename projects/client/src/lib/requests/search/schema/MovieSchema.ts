@@ -11,7 +11,6 @@ export interface MovieSchema {
   play_30_count: number;
   runtime?: number;
   slug?: string;
-  poster_url?: string;
   genre_slugs?: string[];
   status?: string;
   released?: number;
