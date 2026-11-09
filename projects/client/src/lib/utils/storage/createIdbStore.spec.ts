@@ -4,6 +4,7 @@ import { createIdbStore } from './createIdbStore.ts';
 type FakeRequest = {
   result: unknown;
   error: Error | null;
+  transaction?: { abort: () => void };
   onupgradeneeded?: () => void;
   onsuccess?: () => void;
   onerror?: () => void;
@@ -84,6 +85,27 @@ describe('util: createIdbStore', () => {
     await expect(store('readonly', () => 'ok')).rejects.toThrow(
       'IndexedDB unavailable',
     );
+  });
+
+  it('should reject instead of throwing when the store cannot be created', async () => {
+    const fake = createFakeDatabase();
+    fake.db.createObjectStore.mockImplementation(() => {
+      throw new Error('InvalidStateError');
+    });
+    stubOpen((request) => {
+      request.result = fake.db;
+      request.transaction = {
+        abort: () => {
+          request.error = new Error('AbortError');
+          request.onerror?.();
+        },
+      };
+      request.onupgradeneeded?.();
+    });
+
+    const store = createIdbStore('db', 'items');
+
+    await expect(store('readonly', () => 'ok')).rejects.toThrow('AbortError');
   });
 
   it('should retry opening after a failed open', async () => {
