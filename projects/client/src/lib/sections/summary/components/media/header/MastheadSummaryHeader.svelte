@@ -551,11 +551,11 @@
               slug={media.slug}
               id={media.id}
             />
-            <span class="action-row-divider" aria-hidden="true"></span>
+            <span class="action-row-divider is-before-bar" aria-hidden="true"></span>
 
             <MediaActions {media} {title} />
 
-            <span class="action-row-divider" aria-hidden="true"></span>
+            <span class="action-row-divider is-after-bar" aria-hidden="true"></span>
 
             <!--
               Score then heart. The score stays clean, a grey pill only on
@@ -1513,11 +1513,36 @@
         height: var(--ni-20);
       }
 
+      /*
+        One row of reactions, bar and score runs ~550px - off both edges of a
+        phone. Narrow screens split it: the bar takes the first row, and how
+        you felt and what you scored it share the second.
+      */
+      @include for-tablet-sm-and-below {
+        flex-wrap: wrap;
+        row-gap: var(--ni-2);
+
+        width: min(100%, var(--ni-320));
+        padding-block: var(--ni-4);
+        border-radius: var(--ni-28);
+
+        > :global(.trakt-summary-actions-bar) {
+          order: -1;
+          flex-basis: 100%;
+          justify-content: center;
+        }
+
+        .action-row-divider.is-before-bar {
+          display: none;
+        }
+
+        /* No reactions, no second-row partner: the score sits alone. */
+        .action-row-divider.is-before-bar:first-child ~ .is-after-bar {
+          display: none;
+        }
+      }
+
       @include for-mobile {
-        /*
-          Three items across a phone is a squeeze; the tray keeps the row and
-          shrinks to the poster's measure, as it does elsewhere.
-        */
         gap: calc(var(--gap-s) / 2);
         padding-inline: var(--ni-8);
 
