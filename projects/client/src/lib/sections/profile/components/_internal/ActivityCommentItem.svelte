@@ -96,6 +96,7 @@
         >
           <CrossOriginImage
             src={posterSrc}
+            fallback={entry.media.poster.url.thumb}
             alt={m.image_alt_media_poster({ title: entry.media.title })}
           />
         </div>

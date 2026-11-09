@@ -86,6 +86,7 @@
   <CardCover
     title={show.title}
     src={$src ?? EPISODE_COVER_PLACEHOLDER}
+    fallback={show.cover.url.thumb}
     alt={`${show.title} - ${$spoilerFreeTitle}`}
     {badge}
     {tag}
