@@ -5,7 +5,7 @@
   import { lineClamp } from "../text/lineClamp";
   import type { CardCoverProps } from "./CardCoverProps";
 
-  const { src, overlaySrc, alt, badge, tag, title }: CardCoverProps = $props();
+  const { src, overlaySrc, alt, badge, tag, title, fallback }: CardCoverProps = $props();
 
   let isImagePending = $state(true);
   const id = $derived(checksum(`${src}-${title}`));
@@ -45,6 +45,7 @@
       classList="trakt-card-cover-image"
       animate={false}
       {src}
+      {fallback}
       {alt}
       onload={() => (isImagePending = false)}
       aria-labelledby={id}

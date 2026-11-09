@@ -15,6 +15,7 @@
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
+  import { MEDIA_POSTER_PLACEHOLDER } from "$lib/utils/assets";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "$lib/components/card/CardActionBar.svelte";
   import type { MediaCardProps } from "./models/MediaCardProps";
@@ -51,11 +52,16 @@
   });
 </script>
 
-{#snippet content(mediaCoverImageUrl: string, mediaCoverOverlay?: string)}
+{#snippet content(
+  mediaCoverImageUrl: string,
+  mediaCoverOverlay?: string,
+  fallback?: string,
+)}
   {#snippet cover()}
     <CardCover
       title={media.title}
       src={mediaCoverImageUrl}
+      {fallback}
       overlaySrc={mediaCoverOverlay}
       alt={m.image_alt_media_poster({ title: media.title })}
       --color-card-cover-shadow={media.colors?.[1]}
@@ -108,7 +114,7 @@
 
 {#if variant === "portrait"}
   <PortraitCard>
-    {@render content(media.poster.url.thumb)}
+    {@render content(media.poster.url.thumb, undefined, MEDIA_POSTER_PLACEHOLDER)}
     <CardFooter {action} {tag} />
   </PortraitCard>
 {/if}
@@ -122,7 +128,7 @@
 
 {#if variant === "progress"}
   <PortraitCard>
-    {@render content(media.poster.url.thumb)}
+    {@render content(media.poster.url.thumb, undefined, MEDIA_POSTER_PLACEHOLDER)}
     <CardFooter {action} {tag}>
       <Link {...linkProps}>
         <p class="trakt-card-title ellipsis">
@@ -158,7 +164,7 @@
 
 {#if rest.variant === "start"}
   <PortraitCard>
-    {@render content(media.poster.url.thumb)}
+    {@render content(media.poster.url.thumb, undefined, MEDIA_POSTER_PLACEHOLDER)}
     <CardFooter {action}>
       <div class="trakt-card-start-footer">
         <p class="trakt-card-title ellipsis">
@@ -181,7 +187,7 @@
 
 {#if rest.variant === "credit"}
   <PortraitCard>
-    {@render content(media.poster.url.thumb)}
+    {@render content(media.poster.url.thumb, undefined, MEDIA_POSTER_PLACEHOLDER)}
     <CardFooter {action}>
       <div class="trakt-card-credit-footer">
         <p class="trakt-card-title ellipsis">

@@ -5,6 +5,7 @@ export type CardCoverProps = {
   overlaySrc?: string;
   alt: string;
   title: string;
+  fallback?: string;
   badge?: Snippet;
   tag?: Snippet;
 };

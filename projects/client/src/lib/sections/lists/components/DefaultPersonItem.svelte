@@ -10,6 +10,7 @@
   import type { SearchResultPosition } from "$lib/features/search/models/SearchResultPosition";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import DateWithAnniversary from "$lib/sections/components/DateWithAnniversary.svelte";
+  import { MEDIA_POSTER_PLACEHOLDER } from "$lib/utils/assets";
   import { isSameDayOfYear } from "$lib/utils/date/isSameDayOfYear";
   import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -45,6 +46,7 @@
     <CardCover
       title={person.name}
       src={person.headshot.url.thumb}
+      fallback={MEDIA_POSTER_PLACEHOLDER}
       alt={`${m.image_alt_person_headshot({ person: person.name })}`}
     />
   </Link>
