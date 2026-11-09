@@ -26,7 +26,13 @@ export function createIdbStore(dbName: string, storeName: string): UseStore {
     if (pending) return pending;
 
     const request = indexedDB.open(dbName);
-    request.onupgradeneeded = () => ensureObjectStore(request, storeName);
+    request.onupgradeneeded = () => {
+      try {
+        ensureObjectStore(request, storeName);
+      } catch {
+        request.transaction?.abort();
+      }
+    };
 
     const opened = toDatabase(request);
     pending = opened;
