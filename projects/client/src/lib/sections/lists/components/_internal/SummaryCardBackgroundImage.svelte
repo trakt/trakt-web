@@ -1,11 +1,15 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
 
-  const { src, alt }: { src: string; alt: string } = $props();
+  const {
+    src,
+    fallback,
+    alt,
+  }: { src: string; fallback?: string; alt: string } = $props();
 </script>
 
 <div class="trakt-summary-card-background">
-  <CrossOriginImage loading="eager" {src} {alt} />
+  <CrossOriginImage loading="eager" {src} {fallback} {alt} />
 </div>
 
 <style>

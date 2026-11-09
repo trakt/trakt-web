@@ -110,7 +110,9 @@
 
       return {
         background: !isMinimal ? episodeCover : undefined,
+        backgroundFallback: media.cover.url.thumb,
         poster: posterOverride ?? media.poster.url.thumb,
+        posterFallback: posterOverride ? media.cover.url.thumb : undefined,
         title: $spoilerFreeTitle,
       };
     }
@@ -120,7 +122,9 @@
 
     return {
       background: !isMinimal ? media.cover.url.thumb : undefined,
+      backgroundFallback: undefined,
       poster: seasonPoster ?? media.poster.url.thumb,
+      posterFallback: seasonPoster ? media.poster.url.thumb : undefined,
       title: media.title,
     };
   });
@@ -195,6 +199,7 @@
       title={coverData.title}
       alt={`Poster for ${coverData.title}`}
       src={coverData.poster}
+      fallback={coverData.posterFallback}
     />
     {#if indicators}
       <IndicatorTags>
@@ -335,6 +340,7 @@
   {#if coverData.background}
     <SummaryCardBackgroundImage
       src={coverData.background}
+      fallback={coverData.backgroundFallback}
       alt={`Background for ${coverData.title}`}
     />
   {/if}

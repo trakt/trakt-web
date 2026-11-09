@@ -98,6 +98,7 @@
         <CardCover
           title={seasonLabel(season.number)}
           src={season.poster?.url.medium ?? media.poster.url.medium}
+          fallback={media.poster.url.medium}
           alt={seasonLabel(season.number)}
         />
       {/snippet}
