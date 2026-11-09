@@ -6,5 +6,5 @@ export function resolvePosterSource(posterUrl: string): string {
     return placeholderPosterDataUri;
   }
 
-  return posterUrl.replace(/\.webp$/i, '');
+  return posterUrl;
 }
