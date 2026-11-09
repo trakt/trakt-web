@@ -13,6 +13,7 @@ const VipTransactionTypeSchema = z.enum([
 ]);
 
 const responseGateWaySchema = z.enum([...VipGatewaySchema.options, '']);
+const responseTypeSchema = z.enum([...VipTypeSchema.options, '']);
 
 // The API serializes monetary values inconsistently - renewal `usd` comes
 // back as a number while transaction `amount` is a string. Accept either so a
@@ -59,7 +60,7 @@ export const VipSubscriptionResponseSchema = z.object({
   vip_signed_up_at: z.string().datetime().nullable(),
   expires_at: z.string().datetime().nullable(),
   gateway: responseGateWaySchema.nullable(),
-  type: VipTypeSchema.nullable(),
+  type: responseTypeSchema.nullable(),
   plan: z.string().nullable(),
   renewal: VipRenewalSchema.optional(),
   manage_url: z.string().nullish(),

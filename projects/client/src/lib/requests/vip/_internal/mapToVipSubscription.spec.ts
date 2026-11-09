@@ -61,6 +61,27 @@ describe('mapToVipSubscription', () => {
     );
   });
 
+  it('should parse an admin payload with empty VIP fields as no subscription', () => {
+    const parsed = VipSubscriptionResponseSchema.parse({
+      vip: true,
+      vip_ep: true,
+      vip_og: false,
+      vip_years: 0,
+      vip_signed_up_at: null,
+      expires_at: null,
+      gateway: '',
+      type: '',
+      plan: '',
+      cancelled: true,
+      days_left: 0,
+      manage_url: null,
+      retention_offer: null,
+      transactions: [],
+    });
+
+    expect(mapToVipSubscription(parsed)).toBeNull();
+  });
+
   it('should normalise an empty-string gateway to null', () => {
     const subscription = mapToVipSubscription(buildResponse({ gateway: '' }));
     expect(subscription?.gateway).toBeNull();
