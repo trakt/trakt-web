@@ -1,5 +1,6 @@
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import z from 'zod';
+import { PlexServerUnreachableError } from './models/PlexServerUnreachableError.ts';
 import {
   mapToMediaSyncAccount,
   MediaSyncAccountResponseSchema,
@@ -19,6 +20,9 @@ export async function plexServerAccountsRequest({
       serverId,
     )}/accounts`,
   });
+  if (response.status === 504) {
+    throw new PlexServerUnreachableError(serverId);
+  }
   if (!response.ok) {
     throw new Error(`Failed to load Plex profiles: ${response.status}`);
   }
