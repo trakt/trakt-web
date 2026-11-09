@@ -6,12 +6,14 @@
   import RateNowContent from "$lib/sections/toast/_internal/RateNowContent.svelte";
   import { useCurrentUserLastWatched } from "$lib/sections/toast/_internal/useCurrentUserLastWatched";
   import { useCurrentUserNowWatching } from "$lib/sections/toast/_internal/useCurrentUserNowWatching";
+  import { useCheckInEnd } from "$lib/sections/toast/_internal/useCheckInEnd";
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import { BehaviorSubject, combineLatest, map } from "rxjs";
   import { onMount } from "svelte";
 
   const { nowWatching } = useCurrentUserNowWatching();
   const { lastWatchedItem } = useCurrentUserLastWatched();
+  const { refreshHistoryOnEnd } = useCheckInEnd();
 
   const { nowPlaying } = useNowPlaying();
   const { lastWatched } = useLastWatched();
@@ -27,9 +29,12 @@
       .pipe(map(([candidate, held]) => held ?? candidate))
       .subscribe((val) => lastWatched.next(val));
 
+    const unsubscribeCheckInEnd = refreshHistoryOnEnd(nowPlaying);
+
     return () => {
       unsubscribeNowWatching.unsubscribe();
       unsubscribeLastWatched.unsubscribe();
+      unsubscribeCheckInEnd.unsubscribe();
     };
   });
 </script>
