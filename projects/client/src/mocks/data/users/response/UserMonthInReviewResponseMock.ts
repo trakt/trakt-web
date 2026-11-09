@@ -1,6 +1,14 @@
 import type { MonthInReviewResponse } from '@trakt/api';
 import { MovieHereticResponseMock } from '../../summary/movies/heretic/response/MovieHereticResponseMock.ts';
 
+const EMPTY_MONTH_DISTRIBUTIONS = {
+  weekly: Array<number>(52).fill(0),
+  monthly: Array<number>(12).fill(0),
+  days: Array<number>(7).fill(0),
+  hourly: Array<number>(24).fill(0),
+  daily: Array<number>(31).fill(0),
+};
+
 export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
   stats: {
     all: {
@@ -83,6 +91,8 @@ export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
         weekly: 0.0,
         daily: 0.0,
       },
+      items_count: 1,
+      distributions: EMPTY_MONTH_DISTRIBUTIONS,
     },
     movies: {
       minutes: {
@@ -120,6 +130,8 @@ export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
         weekly: 0.0,
         daily: 0.0,
       },
+      items_count: 6,
+      distributions: EMPTY_MONTH_DISTRIBUTIONS,
     },
   },
   images: {
@@ -159,6 +171,16 @@ export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
       },
     },
   },
+  most_watched: {
+    shows: [],
+    movies: [],
+  },
+  genres: {
+    shows: { genres: [], item_count: 0 },
+    movies: { genres: [], item_count: 0 },
+  },
+  networks: [],
+  production_companies: [],
   countries: {
     shows: {
       country_count: 1,
@@ -168,6 +190,10 @@ export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
       country_count: 1,
       countries: [{ country: 'us', count: 6 }],
     },
+  },
+  top_rated: {
+    shows: [],
+    movies: [],
   },
   trends: {
     shows: [],
