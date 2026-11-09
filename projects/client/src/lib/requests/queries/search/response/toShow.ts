@@ -3,7 +3,7 @@ import type { ShowSchema } from '$lib/requests/search/schema/ShowSchema.ts';
 import { toCommonMedia } from './toCommonMedia.ts';
 
 export function toShow(input: ShowSchema & { slug: string }) {
-  const common = toCommonMedia(input);
+  const common = toCommonMedia('shows', input);
 
   return {
     ...common,

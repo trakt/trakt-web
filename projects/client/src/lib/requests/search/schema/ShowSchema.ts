@@ -13,7 +13,6 @@ export interface ShowSchema {
   aired_episode_count?: number;
   runtime?: number;
   slug?: string;
-  poster_url?: string;
   genre_slugs?: string[];
   status?: string;
   first_aired?: number;

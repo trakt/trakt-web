@@ -4,6 +4,7 @@ import { toIds } from './toIds.ts';
 import { toImageArray } from './toImageArray.ts';
 
 export function toCommonMedia(
+  type: 'movies' | 'shows',
   input: (ShowSchema | MovieSchema) & { slug: string },
 ) {
   return {
@@ -15,7 +16,7 @@ export function toCommonMedia(
     genres: input.genre_slugs,
     original_title: input.original_title,
     images: {
-      poster: toImageArray(input.poster_url),
+      poster: toImageArray({ type, id: input.id, slot: 'poster' }),
     },
   };
 }

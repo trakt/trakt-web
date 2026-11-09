@@ -7,7 +7,11 @@ export function toPerson(input: PersonSchema & { slug: string }) {
     name: input.name,
     ids: toIds(input),
     images: {
-      headshot: toImageArray(input.headshot_url),
+      headshot: toImageArray({
+        type: 'people',
+        id: input.id,
+        slot: 'headshot',
+      }),
       fanart: [],
     },
     known_for_department: input.known_for_department,
