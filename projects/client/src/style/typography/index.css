@@ -72,6 +72,10 @@ code {
     font-style: italic;
   }
 
+  &.italic.ellipsis {
+    padding-inline-end: var(--ni-4);
+  }
+
   &.tag {
     font-size: var(--font-size-tag);
   }
