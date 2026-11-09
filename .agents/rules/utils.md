@@ -206,6 +206,7 @@ safeLocalStorage.setItem('key', value);
 | `toUrl(value)`                    | Parse into a `URL`, or `null` when the value is malformed             |
 | `prependHttps(url, placeholder?)` | Ensure URL starts with `https://`                                     |
 | `setCacheBuster(url)`             | Append `_cb` timestamp to bust CDN caches                             |
+| `toMediaImageUrl(params)`         | Build a `media.trakt.tv` image URL from type, trakt id, slot and size |
 
 **Rules:**
 
