@@ -6,6 +6,7 @@ import { error } from '$lib/utils/console/print.ts';
 import { IS_DEV } from '$lib/utils/env/index.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { RequestEvent } from '@sveltejs/kit';
+import type { ImageSource } from '@takumi-rs/wasm';
 import { render } from 'svelte/server';
 import { buildImageMetadata } from './buildImageMetadata.ts';
 import { buildImagePath } from './buildImagePath.ts';
@@ -132,10 +133,35 @@ export async function respondWithMediaShareImage({
   }
 
   const { media, ratings, crew } = mediaData;
-  const toBuffer = async (posterUrl: string) => {
+  const placeholderPoster = {
+    posterUrl: resolvePosterSource(MEDIA_POSTER_PLACEHOLDER),
+    images: [],
+    isPlaceholder: true,
+  };
+
+  const loadPoster = async (posterUrl: string) => {
     const images = await timing.measure('images', () =>
       loadPosterImages({ posterUrl, fetch: globalThis.fetch }),
     );
+
+    if (!images) {
+      return placeholderPoster;
+    }
+
+    return {
+      posterUrl,
+      images,
+      isPlaceholder: posterUrl === placeholderPoster.posterUrl,
+    };
+  };
+
+  const toBuffer = ({
+    posterUrl,
+    images,
+  }: {
+    posterUrl: string;
+    images: ImageSource[];
+  }) => {
     const { body, head } = render(ShareCard, {
       props: { media, crew, ratings, posterUrl, variant: shareType },
     });
@@ -150,18 +176,16 @@ export async function respondWithMediaShareImage({
   };
 
   try {
-    const { buffer, isPlaceholder } = await toBuffer(
+    const { buffer, isPlaceholder } = await loadPoster(
       resolvePosterSource(media.poster.url.medium),
     )
-      .then((buffer) => ({
-        buffer,
-        isPlaceholder: media.poster.url.medium === MEDIA_POSTER_PLACEHOLDER,
+      .then(async (poster) => ({
+        buffer: await toBuffer(poster),
+        isPlaceholder: poster.isPlaceholder,
       }))
       .catch(async (e: unknown) => {
         error('Failed to render with the media poster:', e);
-        const buffer = await toBuffer(
-          resolvePosterSource(MEDIA_POSTER_PLACEHOLDER),
-        );
+        const buffer = await toBuffer(placeholderPoster);
         return { buffer, isPlaceholder: true };
       });
 
