@@ -46,6 +46,20 @@ describe('util: toCoverMediaRef', () => {
     ).toEqual({ type: 'movie', id: 916302 });
   });
 
+  it('should recover a show reference from an id-based fanart url', () => {
+    expect(
+      toCoverMediaRef('https://media.trakt.tv/shows/1390/medium/fanart.webp'),
+    ).toEqual({ type: 'show', id: 1390 });
+  });
+
+  it('should recover an episode reference from an id-based screenshot url', () => {
+    expect(
+      toCoverMediaRef(
+        'https://media.trakt.tv/episodes/14554539/full/screenshot.webp',
+      ),
+    ).toEqual({ type: 'episode', id: 14554539 });
+  });
+
   it('should ignore the size in an id-based url', () => {
     expect(
       toCoverMediaRef('https://media.trakt.tv/movies/916302/full/fanart.webp'),

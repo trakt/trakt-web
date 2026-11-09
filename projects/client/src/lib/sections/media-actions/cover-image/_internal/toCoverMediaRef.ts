@@ -10,14 +10,25 @@ type CoverMediaRef = {
 const legacyCoverPathPattern =
   /\/images\/(movies|shows|episodes)\/(\d{3})\/(\d{3})\/(\d{3})\//;
 
-const movieCoverPathPattern =
-  /\/movies\/(\d+)\/(?:thumb|medium|large|full|original)\//;
+const coverPathPattern =
+  /\/(movies|shows|episodes)\/(\d+)\/(?:thumb|medium|large|full|original)\//;
 
 const mediaTypeMap: Record<string, ExtendedMediaType> = {
   movies: 'movie',
   shows: 'show',
   episodes: 'episode',
 };
+
+function toCoverPathMediaRef(url: string): CoverMediaRef | null {
+  const [, urlType, id] = url.match(coverPathPattern) ?? [];
+  const type = urlType ? mediaTypeMap[urlType] : undefined;
+
+  if (!type) {
+    return null;
+  }
+
+  return { type, id: Number(id) };
+}
 
 function toLegacyCoverMediaRef(url: string): CoverMediaRef | null {
   const match = url.match(legacyCoverPathPattern);
@@ -41,11 +52,5 @@ export function toCoverMediaRef(url: string | Nil): CoverMediaRef | null {
     return null;
   }
 
-  const movieMatch = url.match(movieCoverPathPattern);
-
-  if (movieMatch) {
-    return { type: 'movie', id: Number(movieMatch[1]) };
-  }
-
-  return toLegacyCoverMediaRef(url);
+  return toCoverPathMediaRef(url) ?? toLegacyCoverMediaRef(url);
 }
