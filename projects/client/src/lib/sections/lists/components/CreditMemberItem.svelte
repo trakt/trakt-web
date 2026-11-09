@@ -30,9 +30,11 @@
   const episodeCount = $derived(
     type === "show" ? member.episodeCount : undefined,
   );
+  let missingHeadshotUrl = $state<string>();
   const headshotUrl = $derived.by(() => {
     const url = member.headshot?.url.thumb;
-    return url && !PLACEHOLDERS.includes(url) ? url : undefined;
+    if (!url || PLACEHOLDERS.includes(url)) return undefined;
+    return url === missingHeadshotUrl ? undefined : url;
   });
   const cardHeight = $derived(
     headshotUrl ? "var(--height-summary-card-compact)" : "fit-content",
@@ -57,6 +59,7 @@
     <div class="credit-member-avatar">
       <CrossOriginImage
         src={headshotUrl}
+        onmissing={() => (missingHeadshotUrl = headshotUrl)}
         alt={`${m.image_alt_person_headshot({ person: member.name })}`}
       />
     </div>

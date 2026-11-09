@@ -10,7 +10,17 @@
   let isImagePending = $state(true);
   const id = $derived(checksum(`${src}-${title}`));
 
-  const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
+  let missingSrc = $state<string>();
+  let missingOverlaySrc = $state<string>();
+
+  const isPlaceholder = $derived(
+    PLACEHOLDERS.includes(src) || missingSrc === src,
+  );
+  const hasOverlayImage = $derived(
+    Boolean(overlaySrc) &&
+      !PLACEHOLDERS.includes(overlaySrc ?? "") &&
+      missingOverlaySrc !== overlaySrc,
+  );
 
   const clearPendingWhenComplete = (container: HTMLElement) => {
     const image = container.querySelector("img");
@@ -48,20 +58,22 @@
       {fallback}
       {alt}
       onload={() => (isImagePending = false)}
+      onmissing={() => (missingSrc = src)}
       aria-labelledby={id}
     />
-    {#if overlaySrc && !PLACEHOLDERS.includes(overlaySrc)}
+    {#if overlaySrc && hasOverlayImage}
       <CrossOriginImage
         classList="trakt-logo-overlay"
         animate={false}
         src={overlaySrc}
         {alt}
         onload={() => (isImagePending = false)}
+        onmissing={() => (missingOverlaySrc = overlaySrc)}
         aria-labelledby={id}
       />
     {/if}
 
-    {#if (overlaySrc && PLACEHOLDERS.includes(overlaySrc)) || isPlaceholder}
+    {#if (overlaySrc && !hasOverlayImage) || isPlaceholder}
       <div class="trakt-title-overlay" class:has-tag={tag}>
         <p class="uppercase" use:lineClamp={{ lines: 3 }}>
           {title}

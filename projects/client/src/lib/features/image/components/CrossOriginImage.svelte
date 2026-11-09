@@ -3,50 +3,64 @@
   import { trackImageLoaded } from "$lib/utils/actions/trackImageLoaded.ts";
   import { PLACEHOLDERS } from "$lib/utils/assets";
   import { iffy } from "$lib/utils/function/iffy";
+  import { toImageFallbacks } from "../_internal/toImageFallbacks";
   import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
-  import { toRetryUri } from "./toRetryUri";
 
   const {
     alt,
     src,
+    fallback,
     loading = "lazy",
     animate = true,
     onload: _onload,
     onerror: _onerror,
+    onmissing,
     classList = "",
-    fallback,
     ...rest
   }: ImageProps = $props();
 
   let uri = $state(iffy(() => src));
-  let lastSrc = iffy(() => src);
+  let sourceIndex = $state(0);
   let isImageLoaded = $state(false);
-  let hasRetried = false;
+
+  const sources = $derived([
+    ...new Set(
+      [src, fallback, ...toImageFallbacks(src ?? "")].filter(
+        (source): source is string => Boolean(source),
+      ),
+    ),
+  ]);
 
   $effect(() => {
     uri = src;
-    lastSrc = src;
-    hasRetried = false;
+    sourceIndex = 0;
   });
 
-  const isPlaceholder = $derived(
-    PLACEHOLDERS.includes(src) || (fallback != null && uri === fallback),
-  );
+  const isPlaceholder = $derived(PLACEHOLDERS.includes(uri));
 
-  const handleError = () => {
-    if (fallback != null && uri === fallback) {
-      return;
-    }
+  const showNextSource = () => {
+    sourceIndex += 1;
+    const next = sources.at(sourceIndex);
 
-    if (fallback != null && hasRetried) {
-      uri = fallback;
-      return;
-    }
+    if (next) uri = next;
+    if (!next || PLACEHOLDERS.includes(next)) onmissing?.();
+  };
 
-    hasRetried = true;
-    resolveEnvironmentUri(lastSrc).then((next) => {
-      uri = toRetryUri({ current: uri, next: next.uri, fallback });
+  const handleError: ImageProps["onerror"] = (ev) => {
+    _onerror?.(ev);
+
+    const failedSrc = src;
+    const current = sources.at(sourceIndex) ?? "";
+
+    resolveEnvironmentUri(current).then((next) => {
+      if (failedSrc !== src) return;
+      if (next.uri && next.uri !== uri) {
+        uri = next.uri;
+        return;
+      }
+
+      showNextSource();
     });
   };
 </script>
@@ -61,10 +75,7 @@
   use:trackImageLoaded={{ src: uri, onLoaded: (loaded) => (isImageLoaded = loaded) }}
   src={uri}
   {alt}
-  onerror={(ev) => {
-    handleError();
-    _onerror?.(ev);
-  }}
+  onerror={handleError}
   onload={_onload}
   {...rest}
 />
