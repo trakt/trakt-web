@@ -1,5 +1,6 @@
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
 import z from 'zod';
+import { PlexServerUnreachableError } from './models/PlexServerUnreachableError.ts';
 
 const PlexLibraryOptionSchema = z.object({
   external_id: z.string(),
@@ -28,6 +29,9 @@ export async function plexServerLibrariesRequest({
       serverId,
     )}/libraries`,
   });
+  if (response.status === 504) {
+    throw new PlexServerUnreachableError(serverId);
+  }
   if (!response.ok) {
     throw new Error(`Failed to load Plex libraries: ${response.status}`);
   }

@@ -12,6 +12,7 @@ import { plexPinStatusRequest } from '$lib/requests/media-sync/plexPinStatusRequ
 import { plexServerAccountsRequest } from '$lib/requests/media-sync/plexServerAccountsRequest.ts';
 import { plexServerLibrariesRequest } from '$lib/requests/media-sync/plexServerLibrariesRequest.ts';
 import type { MediaSyncAccount } from '$lib/requests/media-sync/models/MediaSyncAccount.ts';
+import { PlexServerUnreachableError } from '$lib/requests/media-sync/models/PlexServerUnreachableError.ts';
 import type { PlexLibraryOption } from '$lib/requests/media-sync/plexServerLibrariesRequest.ts';
 import { registerPlexPinRequest } from '$lib/requests/media-sync/registerPlexPinRequest.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -31,7 +32,19 @@ const POPUP_FEATURES = 'width=600,height=720';
 type ServerDetails = {
   libraries: PlexLibraryOption[] | null;
   accounts: MediaSyncAccount[] | null;
+  isUnreachable: boolean;
 };
+
+function settledValue<T>(result: PromiseSettledResult<T>): T | null {
+  return result.status === 'fulfilled' ? result.value : null;
+}
+
+function isUnreachableResult(result: PromiseSettledResult<unknown>) {
+  return (
+    result.status === 'rejected' &&
+    result.reason instanceof PlexServerUnreachableError
+  );
+}
 
 export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
   const { track } = useTrack(AnalyticsEvent.PlexConnect);
@@ -46,10 +59,14 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     if (cached) return cached;
 
     const target = { attemptId, serverId };
-    const loading = Promise.all([
-      plexServerLibrariesRequest(target).catch(() => null),
-      plexServerAccountsRequest(target).catch(() => null),
-    ]).then(([libraries, accounts]) => ({ libraries, accounts }));
+    const loading = Promise.allSettled([
+      plexServerLibrariesRequest(target),
+      plexServerAccountsRequest(target),
+    ]).then(([libraries, accounts]) => ({
+      libraries: settledValue(libraries),
+      accounts: settledValue(accounts),
+      isUnreachable: [libraries, accounts].some(isUnreachableResult),
+    }));
     serverDetails.set(serverId, loading);
     return loading;
   }
@@ -163,20 +180,27 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
     popup = globalThis.window.open(current.authUrl, POPUP_NAME, POPUP_FEATURES);
   }
 
+  function chooseWebhookOnly(
+    current: Extract<PlexConnectState, { step: 'choosing' }>,
+    serverId: string,
+  ) {
+    state.next({
+      ...current,
+      serverId,
+      libraries: [],
+      libraryIds: [],
+      accounts: [],
+      accountId: null,
+      feeds: MediaSyncFeedSchema.options,
+    });
+  }
+
   async function chooseServer(serverId: string) {
     const current = state.value;
     if (current.step !== 'choosing') return;
 
     if (isWebhookOnlyServer(current.servers, serverId)) {
-      state.next({
-        ...current,
-        serverId,
-        libraries: [],
-        libraryIds: [],
-        accounts: [],
-        accountId: null,
-        feeds: MediaSyncFeedSchema.options,
-      });
+      chooseWebhookOnly(current, serverId);
       return;
     }
 
@@ -193,13 +217,26 @@ export function usePlexConnect({ onConnected }: { onConnected: () => void }) {
           : MediaSyncFeedSchema.options,
     });
 
-    const { libraries, accounts } = await loadServer(
+    const { libraries, accounts, isUnreachable } = await loadServer(
       current.attemptId,
       serverId,
     );
 
     const latest = state.value;
     if (latest.step !== 'choosing' || latest.serverId !== serverId) return;
+
+    if (isUnreachable) {
+      chooseWebhookOnly(
+        {
+          ...latest,
+          servers: latest.servers.map((server) =>
+            server.id === serverId ? { ...server, reachable: false } : server,
+          ),
+        },
+        serverId,
+      );
+      return;
+    }
 
     if (!libraries || !accounts) {
       fail('server_details_failed');
