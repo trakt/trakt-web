@@ -14,11 +14,15 @@
 
 <ul class="trakt-watch-history-list">
   {#each list as entry (entry.key)}
+    {@const title =
+      entry.type === "episode"
+        ? episodeActivityTitle(entry.episode)
+        : entry.movie.title}
     <li class="trakt-watch-history-row">
       <div class="trakt-watch-history-info">
         {#if entry.type === "episode"}
           <p class="ellipsis">
-            {episodeActivityTitle(entry.episode, entry.show)}
+            {title}
           </p>
         {/if}
         <p
@@ -31,14 +35,7 @@
               : toHumanDate(now, entry.watchedAt, getLocale())}
         </p>
       </div>
-      <RemoveFromHistoryAction
-        style="action"
-        size="small"
-        title={entry.type === "episode"
-          ? episodeActivityTitle(entry.episode, entry.show)
-          : entry.movie.title}
-        {entry}
-      />
+      <RemoveFromHistoryAction style="action" size="small" {title} {entry} />
     </li>
   {/each}
 </ul>
