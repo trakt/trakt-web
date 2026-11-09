@@ -3,8 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
 import { loadPosterImages } from './loadPosterImages.ts';
 
-const POSTER_URL =
-  'https://media.trakt.tv/images/shows/000/155/536/posters/medium/c15067608d.jpg';
+const POSTER_URL = 'https://media.trakt.tv/shows/155536/medium/poster.webp';
 
 describe('util: loadPosterImages', () => {
   it('should load a remote poster keyed by its url', async () => {
@@ -18,10 +17,11 @@ describe('util: loadPosterImages', () => {
       ),
     );
 
-    const [image, ...rest] = await loadPosterImages({
-      posterUrl: POSTER_URL,
-      fetch: globalThis.fetch,
-    });
+    const [image, ...rest] =
+      (await loadPosterImages({
+        posterUrl: POSTER_URL,
+        fetch: globalThis.fetch,
+      })) ?? [];
 
     expect(rest).toEqual([]);
     expect(image?.src).toBe(POSTER_URL);
@@ -46,13 +46,23 @@ describe('util: loadPosterImages', () => {
     expect(requested).toEqual([]);
   });
 
-  it('should reject when the poster is unavailable', async () => {
+  it('should report a missing poster as null', async () => {
     server.use(
       http.get(POSTER_URL, () => new HttpResponse(null, { status: 404 })),
     );
 
     await expect(
       loadPosterImages({ posterUrl: POSTER_URL, fetch: globalThis.fetch }),
-    ).rejects.toThrow('404');
+    ).resolves.toBeNull();
+  });
+
+  it('should reject when the poster fails to load', async () => {
+    server.use(
+      http.get(POSTER_URL, () => new HttpResponse(null, { status: 500 })),
+    );
+
+    await expect(
+      loadPosterImages({ posterUrl: POSTER_URL, fetch: globalThis.fetch }),
+    ).rejects.toThrow('500');
   });
 });

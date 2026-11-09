@@ -9,12 +9,16 @@ type LoadPosterImagesProps = {
 export async function loadPosterImages({
   posterUrl,
   fetch,
-}: LoadPosterImagesProps): Promise<ImageSource[]> {
+}: LoadPosterImagesProps): Promise<ImageSource[] | null> {
   if (!isHttpUrl(posterUrl)) {
     return [];
   }
 
   const response = await fetch(posterUrl);
+
+  if (response.status === 404) {
+    return null;
+  }
 
   if (!response.ok) {
     throw new Error(`Failed to fetch poster: ${response.status}`);
