@@ -9,10 +9,10 @@
 
   /*
     Where to watch as one control in the action tray: the lead service's own
-    mark and a caret out to the full view. The mark is the answer, so it
-    carries no words; the tooltip names the control and the link label names
-    it for screen readers. One mark, not a fan: overlapped marks showed as
-    clipped slivers, and the full view already lists the rest.
+    logo, bare, and a caret out to the full view. The logo is the answer, so
+    it carries no words; the tooltip names the control and the link label
+    names it for screen readers. One logo, not a fan: overlapped marks showed
+    as clipped slivers, and the full view already lists the rest.
   */
   type DrawerLink = {
     href: string;
@@ -65,11 +65,11 @@
   .trakt-summary-header-watch-chip {
     display: inline-flex;
     align-items: center;
-    gap: var(--ni-8);
+    gap: var(--ni-6);
 
     box-sizing: border-box;
     min-height: var(--action-button-size, var(--ni-48));
-    padding-inline: var(--ni-8) var(--ni-12);
+    padding-inline: var(--ni-12);
     border-radius: 999px;
 
     transition: var(--transition-increment) ease-in-out;
@@ -94,35 +94,38 @@
     }
   }
 
-  /* The strip's provider tile, scaled to the tray. */
+  /*
+    The logo sits bare in the tray, like the emoji, stars and heart beside
+    it - a boxed tile was the one framed thing in the row. Every logo fits
+    one box, so a wide wordmark and a square mark land at a similar weight.
+  */
   .watch-chip-mark {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     flex: none;
 
-    width: var(--ni-32);
-    height: var(--ni-32);
-    border-radius: var(--border-radius-s);
-    overflow: hidden;
-
-    background-color: var(--color-card-background);
-    box-shadow: inset 0 0 0 var(--ni-1)
-      color-mix(in srgb, var(--color-foreground) 10%, transparent);
+    height: var(--ni-24);
 
     :global(.trakt-streaming-service-logo) {
       justify-content: center;
     }
 
-    :global(.trakt-streaming-service-logo img),
-    :global(.trakt-streaming-service-logo svg) {
+    :global(.trakt-streaming-service-logo img) {
       width: auto;
-      max-width: calc(var(--ni-32) - var(--ni-8));
-      max-height: var(--ni-16);
+      height: auto;
+      max-width: var(--ni-64);
+      max-height: var(--ni-22);
       object-fit: contain;
 
-      /* The marks are drawn white; the light theme darkens them. */
+      /* API logos are drawn white; the light theme darkens them. */
       filter: var(--streaming-service-logo-filter);
+    }
+
+    :global(.trakt-streaming-service-logo svg) {
+      width: auto;
+      height: var(--ni-22);
+      max-width: var(--ni-64);
     }
 
     :global(.trakt-channel-separator),
@@ -131,7 +134,7 @@
     }
 
     :global(.trakt-streaming-service-logo span) {
-      max-width: calc(var(--ni-32) - var(--ni-4));
+      max-width: var(--ni-80);
       font-size: var(--font-size-tag);
       white-space: nowrap;
       overflow: hidden;
