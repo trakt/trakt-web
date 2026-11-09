@@ -89,6 +89,11 @@
     .trakt-vip-header-title {
       font-size: var(--ni-66);
 
+      :global(strong) {
+        color: var(--color-vip-hero-accent);
+        font-weight: normal;
+      }
+
       @include for-mobile {
         font-size: var(--ni-32);
       }
@@ -144,8 +149,7 @@
       border-radius: 50%;
       background: radial-gradient(
         circle,
-        color-mix(in srgb, var(--purple-500) 50%, transparent) 0%,
-        color-mix(in srgb, var(--purple-500) 16%, transparent) 40%,
+        var(--color-vip-hero-aura) 0%,
         transparent 70%
       );
 
@@ -158,6 +162,9 @@
       position: absolute;
       inset: 0;
       border-radius: 50%;
+
+      background: var(--color-vip-plan-surface);
+      box-shadow: var(--shadow-vip-plan);
 
       animation: vip-hero-pop 600ms var(--transition-spring-ease) backwards;
     }

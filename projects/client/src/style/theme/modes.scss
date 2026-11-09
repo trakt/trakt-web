@@ -451,6 +451,16 @@
   --color-vip-thread-glint-faint: var(--purple-700);
   --color-vip-thread-label-hover: var(--shade-950);
   --color-vip-border-accent: var(--purple-600);
+  --color-vip-plan-surface: var(--shade-10);
+  --shadow-vip-plan: 0 var(--ni-10) var(--ni-30)
+    color-mix(in srgb, var(--purple-950) 12%, transparent);
+  --color-vip-plan-glow: color-mix(in srgb, var(--purple-500) 24%, transparent);
+  --color-vip-hero-accent: var(--purple-600);
+  --color-vip-usage-track: var(--shade-60);
+  --shadow-vip-usage-track: inset 0 var(--ni-2) var(--ni-4)
+    color-mix(in srgb, var(--shade-1000) 10%, transparent);
+  --color-vip-usage-stripe: color-mix(in srgb, var(--purple-500) 22%, transparent);
+  --color-vip-hero-aura: color-mix(in srgb, var(--purple-500) 22%, transparent);
   --color-vip-surface-muted: var(--purple-50);
   --background-vip-elevated-card: radial-gradient(
     167.08% 143.09% at 7.82% 100%,
@@ -1128,6 +1138,16 @@
   );
   --color-vip-thread-label-hover: var(--shade-10);
   --color-vip-border-accent: var(--purple-500);
+  --color-vip-plan-surface: var(--shade-920);
+  --shadow-vip-plan: 0 var(--ni-10) var(--ni-30)
+    color-mix(in srgb, var(--shade-1000) 50%, transparent);
+  --color-vip-plan-glow: color-mix(in srgb, var(--purple-500) 28%, transparent);
+  --color-vip-hero-accent: var(--purple-400);
+  --color-vip-usage-track: var(--shade-920);
+  --shadow-vip-usage-track: inset 0 var(--ni-2) var(--ni-4)
+    color-mix(in srgb, var(--shade-1000) 50%, transparent);
+  --color-vip-usage-stripe: color-mix(in srgb, var(--purple-500) 22%, transparent);
+  --color-vip-hero-aura: color-mix(in srgb, var(--purple-500) 50%, transparent);
   --color-vip-surface-muted: var(--purple-950);
   --background-vip-elevated-card: radial-gradient(
     167.08% 143.09% at 7.82% 100%,
