@@ -56,6 +56,7 @@
   import SummaryHeaderSentiment from "./_internal/SummaryHeaderSentiment.svelte";
   import SummaryHeaderSocialActivity from "./_internal/SummaryHeaderSocialActivity.svelte";
   import SummaryHeaderTrivia from "./_internal/SummaryHeaderTrivia.svelte";
+  import SummaryHeaderWatchChip from "./_internal/SummaryHeaderWatchChip.svelte";
   import SummaryHeaderWatchOptions from "./_internal/SummaryHeaderWatchOptions.svelte";
   import MessageWithBold from "$lib/components/text/MessageWithBold.svelte";
   import {
@@ -126,8 +127,8 @@
     toHeaderActionsVariant(page.url.searchParams.get(HEADER_ACTIONS_PARAM)),
   );
 
-  /* The pill leads with one provider; the columns show two. */
-  const glanceProvider = $derived(
+  /* The pill and the tray lead with one provider; the columns show two. */
+  const leadProvider = $derived(
     toHeaderProviders(streamOn, 1).at(0)?.service ?? null,
   );
   const providers = $derived(toHeaderProviders(streamOn, 2));
@@ -240,6 +241,20 @@
   */
   const isTabletSmallViewport = useMedia(WellKnownMediaQuery.tabletSmall);
   const tabletPageSize = $derived($isTabletSmallViewport ? 2 : 3);
+
+  /*
+    Where to watch rides in the action tray wherever the tray has room for
+    it: signed in (no tray otherwise), the stock row, desktop. On tablets the
+    longer tray outgrows the header. Narrower screens and titles with nowhere
+    to stream keep the column, which has the room to say so.
+  */
+  const isDesktopViewport = useMedia(WellKnownMediaQuery.desktop);
+  const isWatchInTray = $derived(
+    $isAuthorized &&
+      actionsVariant !== "fused" &&
+      leadProvider !== null &&
+      $isDesktopViewport,
+  );
 
   const { buildDrawerLink } = summaryDrawerNavigation();
   const ratingsLink = $derived(buildDrawerLink(SummaryDrawers.Ratings));
@@ -554,6 +569,16 @@
               favorite
               look="chip"
             />
+
+            {#if isWatchInTray && leadProvider}
+              <span class="action-row-divider" aria-hidden="true"></span>
+
+              <SummaryHeaderWatchChip
+                service={leadProvider}
+                country={$country}
+                link={whereToWatchLink}
+              />
+            {/if}
           </div>
         {/if}
       </div>
@@ -678,14 +703,15 @@
       Progress opens the row: the viewer's own standing is the one thing
       here that asks them to do something, so it reads first. Trivia closes
       it: the one column that stretches (its prose runs long) reads wrong
-      anywhere but the edge, so where to watch takes the middle.
+      anywhere but the edge, so where to watch takes the middle - when it is
+      a column at all; on desktop it rides in the action tray instead.
     -->
     {@const stripColumns = [
       ...(hasRecap ? [{ key: "recap", column: recapColumn }] : []),
       ...($isAuthorized && headerSocialEntries.length > 0
         ? [{ key: "social", column: socialColumn }]
         : []),
-      { key: "watch", column: watchColumn },
+      ...(isWatchInTray ? [] : [{ key: "watch", column: watchColumn }]),
       ...(headerSentiment
         ? [{ key: "sentiment", column: sentimentColumn }]
         : []),
@@ -719,6 +745,7 @@
     {#snippet tabletPageB()}{@render tabletPageContent(tabletPages[1] ?? [])}{/snippet}
     {#snippet tabletPageC()}{@render tabletPageContent(tabletPages[2] ?? [])}{/snippet}
 
+    {#if stripColumns.length > 0}
     <div class="masthead-strip">
       <RenderFor audience="all" device={["desktop"]}>
         <div class="strip-page">
@@ -756,6 +783,7 @@
         </div>
       </RenderFor>
     </div>
+    {/if}
     {:else}
     <!--
       The strip, folded to one line. Everything the five columns said is still
@@ -777,7 +805,7 @@
         {title}
         labeled={stripVariant === "labeled"}
         release={glanceRelease}
-        provider={glanceProvider}
+        provider={leadProvider}
         country={$country}
         social={glanceSocial}
         sentiment={headerSentiment}
@@ -1231,8 +1259,6 @@
   .masthead-strip {
     width: 100%;
     padding-top: var(--ni-20);
-
-    border-top: var(--ni-1) solid var(--color-hairline);
 
     /* The composition centres; the data does not. */
     text-align: start;

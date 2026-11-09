@@ -1,0 +1,157 @@
+<script lang="ts">
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
+  import StreamingServiceLogo from "$lib/components/media/streaming-service/StreamingServiceLogo.svelte";
+  import { StreamingServiceLogoIntlProvider } from "$lib/components/media/streaming-service/StreamingServiceLogoIntlProvider";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
+  import * as m from "$lib/features/i18n/messages";
+  import type { StreamingServiceOption } from "$lib/requests/models/StreamingServiceOptions";
+
+  /*
+    Where to watch as one control in the action tray: the lead service's own
+    mark and a caret out to the full view. The mark is the answer, so it
+    carries no words; the tooltip names the control and the link label names
+    it for screen readers. One mark, not a fan: overlapped marks showed as
+    clipped slivers, and the full view already lists the rest.
+  */
+  type DrawerLink = {
+    href: string;
+    noscroll?: boolean;
+    replacestate?: boolean;
+  };
+
+  const {
+    service,
+    country,
+    link,
+  }: {
+    service: StreamingServiceOption;
+    country: string;
+    link: DrawerLink;
+  } = $props();
+</script>
+
+<Tooltip content={m.list_title_where_to_watch()} variant="compact">
+  <Link
+    href={link.href}
+    noscroll={link.noscroll}
+    replacestate={link.replacestate}
+    label={m.button_label_view_all_where_to_watch()}
+    color="inherit"
+  >
+    <span class="trakt-summary-header-watch-chip">
+      <span class="watch-chip-mark">
+        <StreamingServiceLogo
+          source={service.source}
+          {country}
+          i18n={StreamingServiceLogoIntlProvider}
+        />
+      </span>
+
+      <span class="watch-chip-caret" aria-hidden="true">
+        <CaretRightIcon />
+      </span>
+    </span>
+  </Link>
+</Tooltip>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  /*
+    The tray's own hover language: bare at rest, a pill of wash on hover, on
+    the same box as the buttons beside it.
+  */
+  .trakt-summary-header-watch-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ni-8);
+
+    box-sizing: border-box;
+    min-height: var(--action-button-size, var(--ni-48));
+    padding-inline: var(--ni-8) var(--ni-12);
+    border-radius: 999px;
+
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: background-color, transform;
+
+    @include for-mouse {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 10%,
+          transparent
+        );
+
+        .watch-chip-caret {
+          opacity: 0.9;
+        }
+      }
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+
+  /* The strip's provider tile, scaled to the tray. */
+  .watch-chip-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+
+    width: var(--ni-32);
+    height: var(--ni-32);
+    border-radius: var(--border-radius-s);
+    overflow: hidden;
+
+    background-color: var(--color-card-background);
+    box-shadow: inset 0 0 0 var(--ni-1)
+      color-mix(in srgb, var(--color-foreground) 10%, transparent);
+
+    :global(.trakt-streaming-service-logo) {
+      justify-content: center;
+    }
+
+    :global(.trakt-streaming-service-logo img),
+    :global(.trakt-streaming-service-logo svg) {
+      width: auto;
+      max-width: calc(var(--ni-32) - var(--ni-8));
+      max-height: var(--ni-16);
+      object-fit: contain;
+
+      /* The marks are drawn white; the light theme darkens them. */
+      filter: var(--streaming-service-logo-filter);
+    }
+
+    :global(.trakt-channel-separator),
+    :global(.trakt-channel-logo) {
+      display: none;
+    }
+
+    :global(.trakt-streaming-service-logo span) {
+      max-width: calc(var(--ni-32) - var(--ni-4));
+      font-size: var(--font-size-tag);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .watch-chip-caret {
+    display: inline-flex;
+    align-items: center;
+
+    color: var(--color-text-primary);
+    opacity: 0.55;
+    transition: opacity var(--transition-increment) ease-out;
+
+    font-size: var(--font-size-text);
+
+    :global(svg) {
+      height: 1em;
+      width: auto;
+    }
+  }
+</style>
