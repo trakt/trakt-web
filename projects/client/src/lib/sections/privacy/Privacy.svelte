@@ -6,7 +6,7 @@
 </script>
 
 <LegalPage title="Trakt Privacy Policy" lastUpdated="October 27, 2026">
-  <svelte:fragment slot="intro">
+  {#snippet intro()}
     <p>
       Welcome to Trakt! This Privacy Policy explains how we at trakt, inc. (<b
         >"Trakt,"</b
@@ -21,9 +21,9 @@
       <u><b>does not</b></u> apply to any third-party platforms, such as the third-party
       content streaming services you may use in conjunction with our Services.
     </p>
-  </svelte:fragment>
+  {/snippet}
 
-  <svelte:fragment slot="summary">
+  {#snippet summary()}
     <h2>Let's Get Right To The Point</h2>
     <p>
       Trakt wants you to have a clear understanding of how we collect, protect,
@@ -51,7 +51,7 @@
         Trakt welcomes your questions and comments about our privacy practices.
       </li>
     </ul>
-  </svelte:fragment>
+  {/snippet}
   <p>
     Please read this Privacy Policy carefully to fully understand our privacy
     practices. Our Privacy Policy may be updated from time to time, and we will
