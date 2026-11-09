@@ -5,6 +5,7 @@
   import { iffy } from "$lib/utils/function/iffy";
   import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
+  import { toRetryUri } from "./toRetryUri";
 
   const {
     alt,
@@ -14,19 +15,40 @@
     onload: _onload,
     onerror: _onerror,
     classList = "",
+    fallback,
     ...rest
   }: ImageProps = $props();
 
   let uri = $state(iffy(() => src));
   let lastSrc = iffy(() => src);
   let isImageLoaded = $state(false);
+  let hasRetried = false;
 
   $effect(() => {
     uri = src;
     lastSrc = src;
+    hasRetried = false;
   });
 
-  const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
+  const isPlaceholder = $derived(
+    PLACEHOLDERS.includes(src) || (fallback != null && uri === fallback),
+  );
+
+  const handleError = () => {
+    if (fallback != null && uri === fallback) {
+      return;
+    }
+
+    if (fallback != null && hasRetried) {
+      uri = fallback;
+      return;
+    }
+
+    hasRetried = true;
+    resolveEnvironmentUri(lastSrc).then((next) => {
+      uri = toRetryUri({ current: uri, next: next.uri, fallback });
+    });
+  };
 </script>
 
 <img
@@ -40,7 +62,7 @@
   src={uri}
   {alt}
   onerror={(ev) => {
-    resolveEnvironmentUri(lastSrc).then((next) => (uri = next.uri));
+    handleError();
     _onerror?.(ev);
   }}
   onload={_onload}
