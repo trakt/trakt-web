@@ -20,6 +20,10 @@
   const RELEASE_WINDOWS: ReadonlyArray<number> = [30, 90, 180, 365];
   const ANY = "any";
   const BODY_ID = "smart-list-more-filters";
+  const AWARD_YEAR_RANGE: SliderRange = {
+    min: 1930,
+    max: new Date().getFullYear(),
+  };
 
   const RATING_SLIDERS: ReadonlyArray<{
     key: RangeKey;
@@ -98,6 +102,7 @@
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import type { SmartListFilters } from "$lib/requests/models/SmartListFilters.ts";
   import { smartListLanguagesQuery } from "$lib/requests/queries/smart-lists/smartListLanguagesQuery.ts";
+  import { awardCatalogQuery } from "$lib/requests/queries/awards/awardCatalogQuery.ts";
   import FilterSection from "$lib/sections/navbar/components/filter/FilterSection.svelte";
   import Filter from "$lib/sections/navbar/components/filter/filters/Filter.svelte";
   import FilterGroup from "$lib/sections/navbar/components/filter/filters/FilterGroup.svelte";
@@ -113,6 +118,9 @@
   import type { FilterSettingsSlot } from "$lib/sections/navbar/components/filter/filters/FilterSettingsSlot.ts";
   import { SHOW_ONLY_SMART_LIST_FILTERS } from "../showOnlySmartListFilters.ts";
   import { toSmartListExtrasForType } from "../toSmartListExtrasForType.ts";
+  import { toSmartListAwardsForType } from "../toSmartListAwardsForType.ts";
+  import { withShortAwardNames } from "../withShortAwardNames.ts";
+  import { withSmartListAwards } from "../withSmartListAwards.ts";
   import SearchableFilterSelect from "./SearchableFilterSelect.svelte";
   import SmartListMatchFilter from "./SmartListMatchFilter.svelte";
 
@@ -139,6 +147,7 @@
       map((type) => smartListLanguagesQuery({ type })),
     ),
   );
+  const awardCatalog = useQuery(awardCatalogQuery());
   const motionDuration = useMotionDuration();
 
   const countryOptions = [
@@ -175,9 +184,25 @@
     })),
   ];
 
+  const awardOptions = $derived(
+    toSmartListAwardsForType({
+      catalog: $awardCatalog.data ?? [],
+      type,
+    }).map(withShortAwardNames).flatMap((ceremony) =>
+      ceremony.awards.map((award) => ({
+        value: award.slug,
+        label: award.name,
+        excludable: false,
+        group: { key: ceremony.slug, label: ceremony.name },
+        keywords: [ceremony.name, ceremony.slug],
+      }))
+    ),
+  );
+
   let isOpen = $state(false);
 
   const hasShows = $derived(type !== "movie");
+  const hasAwards = $derived((filters.awards?.length ?? 0) > 0);
   const visibleToggles = $derived(
     TOGGLES.filter((toggle) =>
       hasShows || !SHOW_ONLY_SMART_LIST_FILTERS.includes(toggle.key)
@@ -219,6 +244,23 @@
 
   const onLanguagesChange = (selection: MultiSelectSelection) =>
     set("languages", selection.included);
+
+  const onAwardsChange = (selection: MultiSelectSelection) =>
+    onChange(withSmartListAwards({ filters, awards: selection.included }));
+
+  const awardYears = $derived.by(() => {
+    const [min = AWARD_YEAR_RANGE.min, max = AWARD_YEAR_RANGE.max] =
+      filters.award_years ?? [];
+    return { min, max };
+  });
+
+  const onAwardYearsCommit = (range: SliderRange) =>
+    set(
+      "award_years",
+      isFullRange({ value: range, range: AWARD_YEAR_RANGE })
+        ? null
+        : [range.min, range.max],
+    );
 </script>
 
 {#snippet match(key: MatchKey)}
@@ -324,14 +366,15 @@
 
   <div class="more-filters-body" id={BODY_ID}>
     {#snippet toggleRow(
-      key: ToggleKey | "parental_include_unrated",
+      key: ToggleKey | "parental_include_unrated" | "award_won",
       label: string,
+      isDisabled = disabled,
     )}
       <Filter title={label} variant="inline">
         <Switch
           {label}
           checked={filters[key] === true}
-          {disabled}
+          disabled={isDisabled}
           onclick={() => set(key, filters[key] !== true)}
         />
       </Filter>
@@ -417,6 +460,56 @@
             </div>
           {/if}
         </FilterGroup>
+      </div>
+    {/if}
+
+    {#if isShown("awards", "award_won", "award_years")}
+      <div transition:reveal>
+        <FilterSection title={m.header_smart_list_awards()}>
+          <FilterGroup>
+            {#if isShown("awards")}
+              <div transition:reveal>
+                <Filter
+                  title={m.header_smart_list_award_categories()}
+                  variant="inline"
+                >
+                  <MultiSelect
+                    options={awardOptions}
+                    included={filters.awards ?? []}
+                    placeholder={m.option_text_all()}
+                    searchPlaceholder={m.input_placeholder_search_awards()}
+                    variant="chip"
+                    isLoading={$awardCatalog.isLoading}
+                    {disabled}
+                    onChange={onAwardsChange}
+                  />
+                </Filter>
+              </div>
+            {/if}
+
+            {#if isShown("award_won")}
+              <div transition:reveal>
+                {@render toggleRow(
+                  "award_won",
+                  m.toggle_text_award_winners_only(),
+                  disabled || !hasAwards,
+                )}
+              </div>
+            {/if}
+
+            {#if isShown("award_years")}
+              <div transition:reveal>
+                <SliderField
+                  label={m.label_smart_list_ceremony_year()}
+                  range={AWARD_YEAR_RANGE}
+                  value={awardYears}
+                  disabled={disabled || !hasAwards}
+                  onCommit={onAwardYearsCommit}
+                />
+              </div>
+            {/if}
+          </FilterGroup>
+        </FilterSection>
       </div>
     {/if}
 
