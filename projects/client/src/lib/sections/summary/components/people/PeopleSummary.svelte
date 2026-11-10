@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import PersonAwardsStat from "$lib/sections/summary/components/awards/PersonAwardsStat.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -69,7 +72,19 @@
       birthday={person.birthday}
       deathDate={person.deathDate}
       variant="compact"
-    />
+    >
+      {#snippet trailing()}
+        <RenderForFeature flag={FeatureFlag.Awards} audience="director">
+          {#snippet enabled()}
+            <PersonAwardsStat slug={person.slug}>
+              {#snippet leading()}
+                <DetailSeparator />
+              {/snippet}
+            </PersonAwardsStat>
+          {/snippet}
+        </RenderForFeature>
+      {/snippet}
+    </PersonDetails>
 
     {#if socialLinks.inline.length > 0}
       <DetailSeparator />

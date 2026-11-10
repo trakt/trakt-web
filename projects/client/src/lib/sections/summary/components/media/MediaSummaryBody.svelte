@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import AwardsBadge from "$lib/sections/summary/components/awards/AwardsBadge.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
@@ -56,6 +59,14 @@
   const { isWatchlisted } = $derived(useIsWatchlisted(target));
 </script>
 
+{#snippet awardsBadge()}
+  <RenderForFeature flag={FeatureFlag.Awards} audience="director">
+    {#snippet enabled()}
+      <AwardsBadge type={target.type} slug={media.slug} />
+    {/snippet}
+  </RenderForFeature>
+{/snippet}
+
 {#snippet tags()}
   <SummaryPosterTags
     postCreditsCount={media.postCredits?.length ?? 0}
@@ -96,6 +107,7 @@
         entry={media}
         drilldown={ratingsDrilldown}
         isLoading={$isLoading}
+        trailing={variant === "page" ? awardsBadge : undefined}
       />
     </div>
 

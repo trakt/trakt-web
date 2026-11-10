@@ -1,6 +1,7 @@
 import CoverImageIcon from '$lib/components/icons/CoverImageIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
+import LaurelIcon from '$lib/components/icons/LaurelIcon.svelte';
 import HourglassIcon from '$lib/components/icons/HourglassIcon.svelte';
 import MatchIcon from '$lib/components/icons/MatchIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
@@ -97,6 +98,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_insights_card(),
     addedAt: new Date('2026-11-08'),
     description: () => m.preview_feature_description_insights_card(),
+    audience: 'director',
+  },
+  [FeatureFlag.Awards]: {
+    icon: LaurelIcon,
+    title: () => m.preview_feature_title_awards(),
+    addedAt: new Date('2026-11-10'),
+    description: () => m.preview_feature_description_awards(),
     audience: 'director',
   },
 };

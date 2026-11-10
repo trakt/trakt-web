@@ -8,17 +8,20 @@
   import { toMeasurement } from "$lib/utils/formatting/number/toMeasurement";
   import Celebration from "./Celebration.svelte";
   import DetailSeparator from "./DetailSeparator.svelte";
+  import type { Snippet } from "svelte";
 
   const {
     birthday,
     deathDate,
     height,
     variant = "default",
+    trailing,
   }: {
     birthday: Date | Nil;
     deathDate: Date | Nil;
     height: number | Nil;
     variant?: "default" | "compact";
+    trailing?: Snippet;
   } = $props();
 
   const today = new Date();
@@ -60,6 +63,7 @@
       {/if}
     </div>
   {/if}
+  {@render trailing?.()}
 </div>
 
 <style lang="scss">
