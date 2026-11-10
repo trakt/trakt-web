@@ -605,6 +605,18 @@
     overscroll-behavior: contain;
   }
 
+  .trakt-drawer:has(> .trakt-drawer-content :global(.trakt-drawer-dock)) {
+    --drawer-dock-inset: calc(
+      var(--gap-xs) + env(safe-area-inset-bottom, 0)
+    );
+
+    padding-bottom: 0;
+
+    .trakt-drawer-content {
+      padding-bottom: calc(var(--ni-8) + var(--drawer-dock-inset));
+    }
+  }
+
   .trakt-drawer-header,
   .trakt-drawer-content {
     padding-inline-start: var(--drawer-padding);

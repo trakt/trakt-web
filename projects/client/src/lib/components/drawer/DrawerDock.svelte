@@ -16,7 +16,7 @@
     );
 
     position: sticky;
-    bottom: var(--gap-xxs);
+    bottom: var(--drawer-dock-inset, var(--gap-xxs));
     z-index: var(--layer-raised);
 
     display: flex;
@@ -30,7 +30,7 @@
 
     background: var(--drawer-dock-surface);
     backdrop-filter: blur(var(--ni-12));
-    box-shadow: var(--shadow-dialog);
+    box-shadow: var(--shadow-sticky);
 
     :global(.trakt-button) {
       flex: 1;
