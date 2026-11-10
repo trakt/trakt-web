@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSmartListAwardLabels } from "$lib/sections/lists/smart/useSmartListAwardLabels.ts";
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -12,7 +13,9 @@
   const { list }: { list: SmartList } = $props();
 
   const { buildDrawerLink } = smartListDrawerNavigation();
-  const preview = $derived(toSmartListRecipePreview(list));
+  const awardLabels = useSmartListAwardLabels();
+
+  const preview = $derived(toSmartListRecipePreview(list, $awardLabels));
 </script>
 
 <div class="trakt-smart-list-recipe-link">

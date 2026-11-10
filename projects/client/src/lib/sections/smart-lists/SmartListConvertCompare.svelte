@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSmartListAwardLabels } from "$lib/sections/lists/smart/useSmartListAwardLabels.ts";
   import { goto } from "$app/navigation";
   import Redirect from "$lib/components/router/Redirect.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
@@ -42,8 +43,12 @@
     !$isListLoading && !$isDraftLoading && (!$list || !$draft),
   );
 
+  const awardLabels = useSmartListAwardLabels();
+
   const draftSummary = $derived(
-    $draft ? toSmartListDraftChips($draft).join(" · ") : undefined,
+    $draft
+      ? toSmartListDraftChips($draft, $awardLabels).join(" · ")
+      : undefined,
   );
 
   const viewOptions = $derived([

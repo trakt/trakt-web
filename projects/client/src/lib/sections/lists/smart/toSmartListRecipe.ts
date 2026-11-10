@@ -10,6 +10,7 @@ import { toTitleCaseSlug } from '$lib/utils/formatting/string/toTitleCaseSlug.ts
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
 import { toTranslatedStatus } from '$lib/utils/formatting/string/toTranslatedStatus.ts';
 import { toTranslatedSubgenre } from '$lib/utils/formatting/string/toTranslatedSubgenre.ts';
+import type { SmartListAwardLabel } from './models/SmartListAwardLabel.ts';
 import type { SmartListRecipe } from './models/SmartListRecipe.ts';
 import { toSmartListFilterLabel } from './toSmartListFilterLabel.ts';
 import { toSmartListMediaTypeLabel } from './toSmartListMediaTypeLabel.ts';
@@ -21,6 +22,7 @@ type ListKey =
   | 'keywords'
   | 'people'
   | 'studios'
+  | 'awards'
   | 'networks'
   | 'languages'
   | 'countries'
@@ -62,6 +64,11 @@ const INCLUDE_ROWS: ReadonlyArray<IncludeRow> = [
   {
     key: 'studios',
     label: m.header_smart_list_studios,
+    format: toTitleCaseSlug,
+  },
+  {
+    key: 'awards',
+    label: m.header_smart_list_awards,
     format: toTitleCaseSlug,
   },
   {
@@ -172,6 +179,26 @@ function toOperatorDetails(
   return [toDetail(m.label_smart_list_match(), value)];
 }
 
+function toAwardDetails(filters: SmartListFilters): string[] {
+  const [min, max] = filters.award_years ?? [];
+  const years =
+    min != null && max != null
+      ? [
+          toDetail(
+            m.label_smart_list_ceremony_year(),
+            m.list_summary_range_between({
+              min: String(min),
+              max: String(max),
+            }),
+          ),
+        ]
+      : [];
+
+  return filters.award_won
+    ? [m.toggle_text_award_winners_only(), ...years]
+    : years;
+}
+
 function toRowDetails({
   row,
   filters,
@@ -209,27 +236,98 @@ function toRowDetails({
   return operator;
 }
 
-function toIncludes(filters: SmartListFilters) {
-  return INCLUDE_ROWS.filter((row) => (filters[row.key]?.length ?? 0) > 0).map(
-    (row) => {
-      const values = dedupe((raw) => raw, filters[row.key] ?? []);
+type AwardGroup = {
+  key: string;
+  label: string;
+  values: ReadonlyArray<string>;
+};
 
-      return {
+function toAwardGroups({
+  row,
+  values,
+  awardLabels,
+}: {
+  row: IncludeRow;
+  values: ReadonlyArray<string>;
+  awardLabels: ReadonlyMap<string, SmartListAwardLabel>;
+}): ReadonlyArray<AwardGroup> {
+  return values.reduce<ReadonlyArray<AwardGroup>>((groups, raw) => {
+    const label = awardLabels.get(raw);
+    const key = label ? `${row.key}:${label.ceremonySlug}` : row.key;
+    const existing = groups.find((group) => group.key === key);
+
+    if (existing) {
+      return groups.map((group) =>
+        group === existing
+          ? { ...group, values: [...group.values, raw] }
+          : group,
+      );
+    }
+
+    return [
+      ...groups,
+      { key, label: label?.ceremony ?? row.label(), values: [raw] },
+    ];
+  }, []);
+}
+
+function toAwardRows({
+  row,
+  filters,
+  awardLabels,
+}: {
+  row: IncludeRow;
+  filters: SmartListFilters;
+  awardLabels: ReadonlyMap<string, SmartListAwardLabel>;
+}) {
+  const values = dedupe((raw) => raw, filters.awards ?? []);
+  const groups = toAwardGroups({ row, values, awardLabels });
+  const format = (raw: string) =>
+    awardLabels.get(raw)?.shortName ?? row.format(raw);
+
+  return groups.map((group, index) => ({
+    key: group.key,
+    label: group.label,
+    values: group.values.map((raw) => toValue(format, raw)),
+    details: index === groups.length - 1 ? toAwardDetails(filters) : [],
+  }));
+}
+
+function toIncludes({
+  filters,
+  awardLabels,
+}: {
+  filters: SmartListFilters;
+  awardLabels: ReadonlyMap<string, SmartListAwardLabel>;
+}) {
+  return INCLUDE_ROWS.filter(
+    (row) => (filters[row.key]?.length ?? 0) > 0,
+  ).flatMap((row) => {
+    if (row.key === 'awards') {
+      return toAwardRows({ row, filters, awardLabels });
+    }
+
+    const values = dedupe((raw) => raw, filters[row.key] ?? []);
+
+    return [
+      {
         key: row.key,
         label: row.label(),
         values: values.map((raw) => toValue(row.format, raw)),
         details: toRowDetails({ row, filters, values }),
-      };
-    },
-  );
+      },
+    ];
+  });
 }
 
 function toLimits(filters: SmartListFilters) {
   const ranges = LIMIT_KEYS.flatMap((key) =>
-    toSmartListFilterLabel(key, filters[key]).map((label, index) => ({
-      key: `${key}-${index}`,
-      label,
-    })),
+    toSmartListFilterLabel({ key, value: filters[key] }).map(
+      (label, index) => ({
+        key: `${key}-${index}`,
+        label,
+      }),
+    ),
   );
 
   return filters.parental_include_unrated
@@ -245,11 +343,12 @@ function toLimits(filters: SmartListFilters) {
 
 export function toSmartListRecipe(
   list: Pick<SmartList, 'source' | 'mediaType' | 'filters'>,
+  awardLabels: ReadonlyMap<string, SmartListAwardLabel> = new Map(),
 ): SmartListRecipe {
   return {
     source: toSmartListSourceLabel(list.source),
     mediaType: toSmartListMediaTypeLabel(list.mediaType),
-    includes: toIncludes(list.filters),
+    includes: toIncludes({ filters: list.filters, awardLabels }),
     limits: toLimits(list.filters),
     hidden: HIDE_TOGGLES.filter(({ key }) => list.filters[key] === true).map(
       ({ key, label }) => ({ key, label: label() }),
