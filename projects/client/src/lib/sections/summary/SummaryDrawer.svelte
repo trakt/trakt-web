@@ -37,6 +37,7 @@
   import SocialDrawerHost from "./components/social/SocialDrawerHost.svelte";
   import SoundtrackDrawerHost from "./components/soundtrack/SoundtrackDrawerHost.svelte";
   import TriviaDrawerHost from "./components/trivia/TriviaDrawerHost.svelte";
+  import AwardsDrawerHost from "./components/awards/AwardsDrawerHost.svelte";
   import VideoDrawerHost from "./components/videos/VideoDrawerHost.svelte";
 
   const {
@@ -207,6 +208,17 @@
 
 {#if drawer === SummaryDrawers.Trivia && media}
   <TriviaDrawerHost {media} onClose={close} />
+{/if}
+
+{#if drawer === SummaryDrawers.Awards && media}
+  <RenderForFeature flag={FeatureFlag.Awards} audience="director">
+    {#snippet enabled()}
+      <AwardsDrawerHost
+        target={{ type: media.type, slug: media.slug }}
+        onClose={close}
+      />
+    {/snippet}
+  </RenderForFeature>
 {/if}
 
 {#if drawer === SummaryDrawers.Soundtrack && media}

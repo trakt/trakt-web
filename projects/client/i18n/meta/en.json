@@ -15846,8 +15846,8 @@
       }
     },
     "text_award_tally_wins": {
-      "default": "{wins} won of {count}",
-      "description": "Wins out of nominations in a ceremony group, e.g. \"7 won of 13\".",
+      "default": "<b>{wins} won</b> of {count}",
+      "description": "Wins out of nominations in a ceremony group, e.g. \"7 won of 13\". The <b> tags mark the bold part.",
       "variables": {
         "wins": {
           "type": "number",

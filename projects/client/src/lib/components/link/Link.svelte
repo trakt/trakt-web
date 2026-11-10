@@ -21,7 +21,7 @@
   }: ChildrenProps &
     HTMLAnchorProps &
     HTMLElementProps & {
-      color?: "default" | "classic" | "inherit";
+      color?: "default" | "classic" | "inherit" | "accent";
       underline?: "always" | "hover" | "none";
       focusable?: boolean;
       navigationType?: DpadNavigationType;
@@ -109,6 +109,15 @@
         &:visited {
           color: var(--color-link-active);
         }
+      }
+    }
+
+    &[data-color="accent"] {
+      text-decoration-color: var(--color-link-active);
+
+      &,
+      &:visited {
+        color: var(--color-link-active);
       }
     }
 

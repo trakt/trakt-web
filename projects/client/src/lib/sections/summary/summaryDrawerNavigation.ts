@@ -6,6 +6,7 @@ import {
   EPISODE_PARAM,
   SEASON_PARAM,
   SHOW_REPLIES_PARAM,
+  SOURCE_PARAM,
   TAB_PARAM,
 } from '$lib/sections/summary/constants.ts';
 
@@ -28,6 +29,7 @@ const summaryDrawerParams = {
   [SummaryDrawers.Seasons]: { [EPISODE_PARAM]: '' },
   [SummaryDrawers.Sentiment]: { [TAB_PARAM]: '' },
   [SummaryDrawers.SeasonRecap]: { [TAB_PARAM]: '' },
+  [SummaryDrawers.Awards]: { [SOURCE_PARAM]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 type CommentDrawerSource = {

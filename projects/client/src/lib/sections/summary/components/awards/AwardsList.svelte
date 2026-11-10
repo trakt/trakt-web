@@ -9,6 +9,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { SOURCE_PARAM } from "$lib/sections/summary/constants.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import AwardCard from "./_internal/AwardCard.svelte";
@@ -46,7 +47,9 @@
   const isCollapsed = $derived($isListCollapsed);
 
   const { buildDrawerLink } = summaryDrawerNavigation();
-  const drawerLink = $derived(buildDrawerLink(SummaryDrawers.Awards));
+  const drawerLink = $derived(
+    buildDrawerLink(SummaryDrawers.Awards, { [SOURCE_PARAM]: "section" }),
+  );
   const drilldown: ListDrilldownProps = $derived({
     ...drawerLink,
     source: { id: "awards" },
