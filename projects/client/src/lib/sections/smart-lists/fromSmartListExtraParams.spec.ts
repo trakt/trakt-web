@@ -24,6 +24,20 @@ describe('util: fromSmartListExtraParams', () => {
     });
   });
 
+  it('should read the award filters', () => {
+    const params = new URLSearchParams({
+      awards: 'oscars-best-picture,palme-dor',
+      award_years: '2000-2026',
+      award_won: 'true',
+    });
+
+    expect(fromSmartListExtraParams(params)).toEqual({
+      awards: ['oscars-best-picture', 'palme-dor'],
+      award_years: [2000, 2026],
+      award_won: true,
+    });
+  });
+
   it('should ignore the regular filter panel params', () => {
     const params = new URLSearchParams({ genres: 'drama', years: '2000-2010' });
 
