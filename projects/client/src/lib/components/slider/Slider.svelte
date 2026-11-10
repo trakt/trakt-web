@@ -131,10 +131,6 @@
     background-color: var(--color-surface-button-disabled);
   }
 
-  :global(.trakt-slider[data-disabled] .trakt-slider-range) {
-    background-color: var(--color-foreground-button-disabled);
-  }
-
   :global(.trakt-slider[data-disabled] .trakt-slider-thumb) {
     background-color: var(--color-foreground-button-disabled);
   }
@@ -157,6 +153,10 @@
       transition: var(--transition-increment) ease-in-out;
       transition-property: background-color, opacity;
     }
+  }
+
+  :global(.trakt-slider[data-disabled] .trakt-slider-range) {
+    background-color: var(--color-foreground-button-disabled);
   }
 
   :global(.trakt-slider-thumb) {
