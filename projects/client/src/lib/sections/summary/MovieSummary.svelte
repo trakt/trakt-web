@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import AwardsList from "$lib/sections/summary/components/awards/AwardsList.svelte";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
 
@@ -101,6 +104,12 @@
   slug={media.slug}
   type={media.type}
 />
+
+<RenderForFeature flag={FeatureFlag.Awards} audience="director">
+  {#snippet enabled()}
+    <AwardsList type="movie" slug={media.slug} />
+  {/snippet}
+</RenderForFeature>
 
 <Comments {media} type="movie" />
 

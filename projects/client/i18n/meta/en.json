@@ -15631,6 +15631,90 @@
         }
       }
     },
+    "list_title_awards": {
+      "default": "Awards",
+      "description": "Section title for the awards a movie, show or person won or was nominated for."
+    },
+    "drawer_title_awards": {
+      "default": "Awards",
+      "description": "Title of the drawer that lists every award of a movie, show or person."
+    },
+    "tag_text_award_won": {
+      "default": "Won",
+      "description": "Tag on an award that was won. Shown in a tiny tag, keep it very short."
+    },
+    "tag_text_award_nominee": {
+      "default": "Nominee",
+      "description": "Tag on an award nomination that did not win. Shown in a tiny tag, keep it very short."
+    },
+    "tag_text_award_pending": {
+      "default": "Nominated",
+      "description": "Tag on an award nomination whose results are not announced yet. Shown in a tiny tag, keep it very short."
+    },
+    "text_award_count": {
+      "default": "{count} {award}",
+      "description": "Number of awards won, e.g. \"7 Oscars\".",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Number of wins.",
+          "required": true
+        },
+        "award": {
+          "type": "string",
+          "description": "Short award name, singular or plural to match the count.",
+          "required": true
+        }
+      }
+    },
+    "text_award_summary_wins": {
+      "default": "{awards} from {nominations}",
+      "description": "Summary of wins out of nominations, e.g. \"7 Oscars from 13 nominations\".",
+      "variables": {
+        "awards": {
+          "type": "string",
+          "description": "Wins, e.g. 7 Oscars.",
+          "required": true
+        },
+        "nominations": {
+          "type": "string",
+          "description": "Nominations, e.g. 13 nominations.",
+          "required": true
+        }
+      }
+    },
+    "text_award_nomination_summary_one": {
+      "default": "{count} {award} nomination",
+      "description": "Single nomination at one ceremony, e.g. \"1 Oscar nomination\".",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Number of nominations (1).",
+          "required": true
+        },
+        "award": {
+          "type": "string",
+          "description": "Short singular award name, e.g. Oscar.",
+          "required": true
+        }
+      }
+    },
+    "text_award_nomination_summary_other": {
+      "default": "{count} {award} nominations",
+      "description": "Nominations at one ceremony, e.g. \"2 Oscar nominations\".",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Number of nominations.",
+          "required": true
+        },
+        "award": {
+          "type": "string",
+          "description": "Short singular award name, e.g. Oscar.",
+          "required": true
+        }
+      }
+    },
     "text_ordinal_one": {
       "default": "{count}st",
       "description": "Ordinal number for the plural category 'one' (1st, 21st). Languages without ordinal suffixes can use \"{count}.\".",
@@ -15671,6 +15755,196 @@
         "count": {
           "type": "number",
           "description": "The number.",
+          "required": true
+        }
+      }
+    },
+    "text_award_edition": {
+      "default": "{edition} {ceremony}",
+      "description": "A numbered ceremony, e.g. \"96th Academy Awards\".",
+      "variables": {
+        "edition": {
+          "type": "string",
+          "description": "Ordinal edition, e.g. 96th.",
+          "required": true
+        },
+        "ceremony": {
+          "type": "string",
+          "description": "Ceremony name, e.g. Academy Awards.",
+          "required": true
+        }
+      }
+    },
+    "text_award_live_upcoming": {
+      "default": "{awards} on {date} · {eta}",
+      "description": "Shown in award season before the ceremony, e.g. \"Oscars on Sunday, 10 March · in 9 days\".",
+      "variables": {
+        "awards": {
+          "type": "string",
+          "description": "Short plural award name, e.g. Oscars.",
+          "required": true
+        },
+        "date": {
+          "type": "string",
+          "description": "Ceremony date.",
+          "required": true
+        },
+        "eta": {
+          "type": "string",
+          "description": "Relative time until the ceremony, e.g. in 9 days.",
+          "required": true
+        }
+      }
+    },
+    "text_award_live_winners": {
+      "default": "Winners of the {ceremony}",
+      "description": "Shown for two weeks after a ceremony, e.g. \"Winners of the 96th Academy Awards\".",
+      "variables": {
+        "ceremony": {
+          "type": "string",
+          "description": "Ceremony, e.g. 96th Academy Awards.",
+          "required": true
+        }
+      }
+    },
+    "text_award_results_on": {
+      "default": "Results {date} · {eta}",
+      "description": "Shown on a pending nomination, e.g. \"Results Sunday, 10 March · in 9 days\".",
+      "variables": {
+        "date": {
+          "type": "string",
+          "description": "Ceremony date.",
+          "required": true
+        },
+        "eta": {
+          "type": "string",
+          "description": "Relative time until the ceremony.",
+          "required": true
+        }
+      }
+    },
+    "text_award_announced_on": {
+      "default": "Announced {date}",
+      "description": "Shown on an award right after the ceremony.",
+      "variables": {
+        "date": {
+          "type": "string",
+          "description": "Ceremony date.",
+          "required": true
+        }
+      }
+    },
+    "text_award_see_all": {
+      "default": "See all {count}",
+      "description": "Link at the end of the awards list that opens every award.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Total number of awards.",
+          "required": true
+        }
+      }
+    },
+    "text_award_tally_wins": {
+      "default": "{wins} won of {count}",
+      "description": "Wins out of nominations in a ceremony group, e.g. \"7 won of 13\".",
+      "variables": {
+        "wins": {
+          "type": "number",
+          "description": "Number of wins.",
+          "required": true
+        },
+        "count": {
+          "type": "number",
+          "description": "Number of nominations.",
+          "required": true
+        }
+      }
+    },
+    "text_award_tally_pending": {
+      "default": "{count} nominated",
+      "description": "Nominations in a ceremony group whose results are pending.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Number of nominations.",
+          "required": true
+        }
+      }
+    },
+    "text_award_tally_festival": {
+      "default": "Winner",
+      "description": "Tally for a festival prize that was won."
+    },
+    "text_award_year_range": {
+      "default": "{from} to {to}",
+      "description": "Range of years, e.g. \"1979 to 2018\".",
+      "variables": {
+        "from": {
+          "type": "number",
+          "description": "First year.",
+          "required": true
+        },
+        "to": {
+          "type": "number",
+          "description": "Last year.",
+          "required": true
+        }
+      }
+    },
+    "text_award_decade": {
+      "default": "{decade}s",
+      "description": "A decade, e.g. \"2010s\".",
+      "variables": {
+        "decade": {
+          "type": "number",
+          "description": "First year of the decade.",
+          "required": true
+        }
+      }
+    },
+    "text_award_career_since": {
+      "default": "{ceremony} · career since {year}",
+      "description": "Subtitle of a person's award timeline.",
+      "variables": {
+        "ceremony": {
+          "type": "string",
+          "description": "Ceremony name, e.g. Academy Awards.",
+          "required": true
+        },
+        "year": {
+          "type": "number",
+          "description": "Year of the first credit.",
+          "required": true
+        }
+      }
+    },
+    "text_award_timeline_now": {
+      "default": "Now",
+      "description": "Label for today at the end of a timeline axis."
+    },
+    "aria_label_award_timeline_entry": {
+      "default": "{year}, {status}, {category}, {title}",
+      "description": "Accessible label for one award on a person's timeline.",
+      "variables": {
+        "year": {
+          "type": "number",
+          "description": "Award year.",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Won, Nominee or Nominated.",
+          "required": true
+        },
+        "category": {
+          "type": "string",
+          "description": "Award category, e.g. Best Actress.",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "description": "Movie or show title.",
           "required": true
         }
       }

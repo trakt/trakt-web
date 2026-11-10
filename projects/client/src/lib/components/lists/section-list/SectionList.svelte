@@ -36,6 +36,7 @@
     id: SectionListId;
     empty?: Snippet;
     metaInfo?: Snippet;
+    titleBadge?: Snippet;
     headerNavigationType?: DpadNavigationType;
     subtitle?: string;
     variant?: ListVariant;
@@ -62,6 +63,7 @@
     trailingItem,
     empty,
     metaInfo,
+    titleBadge,
     actions: _externalActions,
     drilldown,
     headerNavigationType,
@@ -180,6 +182,7 @@
           {subtitle}
           {titleAction}
           {metaInfo}
+          titleBadge={isCollapsed ? undefined : titleBadge}
           actions={isCollapsed ? undefined : actions}
           listActions={hasListActions ? listActions : undefined}
           navigationType={headerNavigationType}

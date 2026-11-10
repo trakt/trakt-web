@@ -508,6 +508,11 @@
   --background-award-chip-live: var(--background-today-entry);
   --shadow-award-chip-live: var(--shadow-today-entry);
   --color-award-chip-hover: color-mix(in srgb, var(--shade-920) 8%, transparent);
+  --color-award-tag-background: color-mix(in srgb, var(--shade-920) 6%, transparent);
+  --color-award-tag-ring: color-mix(in srgb, var(--shade-920) 10%, transparent);
+  --color-award-tag-won-ring: color-mix(in srgb, var(--yellow-600) 45%, transparent);
+  --color-award-live-dot: var(--red-500);
+  --color-award-axis: var(--shade-200);
   --color-vip-border-accent: var(--purple-600);
   --color-vip-plan-surface: var(--shade-10);
   --shadow-vip-plan: 0 var(--ni-10) var(--ni-30)
@@ -1234,6 +1239,11 @@
   --background-award-chip-live: var(--background-today-entry);
   --shadow-award-chip-live: var(--shadow-today-entry);
   --color-award-chip-hover: color-mix(in srgb, var(--shade-10) 10%, transparent);
+  --color-award-tag-background: color-mix(in srgb, var(--shade-10) 8%, transparent);
+  --color-award-tag-ring: color-mix(in srgb, var(--shade-10) 12%, transparent);
+  --color-award-tag-won-ring: color-mix(in srgb, var(--yellow-400) 35%, transparent);
+  --color-award-live-dot: var(--red-500);
+  --color-award-axis: var(--shade-800);
   --color-vip-border-accent: var(--purple-500);
   --color-vip-plan-surface: var(--shade-920);
   --shadow-vip-plan: 0 var(--ni-10) var(--ni-30)

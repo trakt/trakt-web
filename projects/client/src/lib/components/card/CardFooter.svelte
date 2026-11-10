@@ -3,12 +3,12 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { CardFooterProps } from "./CardFooterProps";
 
-  const { children, action, tag }: CardFooterProps = $props();
+  const { children, action, tag, align = "center" }: CardFooterProps = $props();
 
   const { isEditMode } = useEditMode();
 </script>
 
-<div class="trakt-card-footer">
+<div class="trakt-card-footer" data-align={align}>
   {#if tag}
     <div class="trakt-card-footer-tag">{@render tag()}</div>
   {/if}
@@ -49,6 +49,10 @@
     gap: var(--gap-xs);
     justify-content: space-between;
     align-items: center;
+
+    &[data-align="start"] {
+      align-items: flex-start;
+    }
 
     :global(.trakt-link) {
       text-decoration: none;
