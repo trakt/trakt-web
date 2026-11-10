@@ -15923,6 +15923,10 @@
       "default": "Now",
       "description": "Label for today at the end of a timeline axis."
     },
+    "aria_label_award_timeline": {
+      "default": "Awards timeline",
+      "description": "Accessible label for the slider that moves through the years on a person's awards timeline."
+    },
     "aria_label_award_timeline_entry": {
       "default": "{year}, {status}, {category}, {title}",
       "description": "Accessible label for one award on a person's timeline.",

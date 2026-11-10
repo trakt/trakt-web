@@ -1,4 +1,11 @@
 <script lang="ts">
+  import { page } from "$app/state";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
+  import AwardsDrawerHost from "./components/awards/AwardsDrawerHost.svelte";
+  import PersonAwardsTimeline from "./components/awards/PersonAwardsTimeline.svelte";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -19,6 +26,9 @@
   } = $props();
 
   const { mode } = useDiscover();
+  const { drawer, close } = $derived(
+    summaryDrawerNavigation(page.url.searchParams),
+  );
 </script>
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
@@ -49,7 +59,24 @@
   />
 {/if}
 
+<RenderForFeature flag={FeatureFlag.Awards} audience="director">
+  {#snippet enabled()}
+    <PersonAwardsTimeline slug={person.slug} />
+  {/snippet}
+</RenderForFeature>
+
 <CreditsHistoryList
   {person}
   drilldownLink={UrlBuilder.credits.history(person.slug)}
 />
+
+{#if drawer === SummaryDrawers.Awards}
+  <RenderForFeature flag={FeatureFlag.Awards} audience="director">
+    {#snippet enabled()}
+      <AwardsDrawerHost
+        target={{ type: "person", slug: person.slug }}
+        onClose={close}
+      />
+    {/snippet}
+  </RenderForFeature>
+{/if}
