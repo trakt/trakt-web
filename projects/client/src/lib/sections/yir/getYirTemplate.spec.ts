@@ -1,7 +1,10 @@
-import { describe, expect, it } from 'vitest';
-import { getYirTemplate } from './getYirTemplate.ts';
+import { describe, expect, it, vi } from 'vitest';
 import Yir2024 from './2024/Yir2024.svelte';
 import YirDefault from './default/YirDefault.svelte';
+import { getYirTemplate } from './getYirTemplate.ts';
+
+vi.mock('./2024/Yir2024.svelte', () => ({ default: () => {} }));
+vi.mock('./default/YirDefault.svelte', () => ({ default: () => {} }));
 
 describe('getYirTemplate', () => {
   it('returns Yir2024 for year 2024', () => {
