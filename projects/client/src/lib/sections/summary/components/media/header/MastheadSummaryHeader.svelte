@@ -243,14 +243,15 @@
   const tabletPageSize = $derived($isTabletSmallViewport ? 2 : 3);
 
   /*
-    Where to watch rides in the action tray wherever the tray has room for
-    it: signed in (no tray otherwise), the stock row, desktop. On tablets the
-    longer tray outgrows the header. It keeps its place whether or not
+    Where to watch lives with the actions whenever there are actions:
+    signed in (no tray otherwise) on the stock row. Desktop seats it at the
+    tray's end; narrower screens, where the tray has no room, hang it under
+    the tray as a labelled pill. CSS picks between the two, so the server
+    render already has the right one. It keeps its place whether or not
     anything streams - the chip says so itself.
   */
-  const isDesktopViewport = useMedia(WellKnownMediaQuery.desktop);
-  const isWatchInTray = $derived(
-    $isAuthorized && actionsVariant !== "fused" && $isDesktopViewport,
+  const isWatchInActions = $derived(
+    $isAuthorized && actionsVariant !== "fused",
   );
 
   const { buildDrawerLink } = summaryDrawerNavigation();
@@ -567,16 +568,30 @@
               look="chip"
             />
 
-            {#if isWatchInTray}
-              <span class="action-row-divider" aria-hidden="true"></span>
+            {#if isWatchInActions}
+              <span class="action-row-divider is-before-watch" aria-hidden="true"
+              ></span>
 
+              <span class="tray-watch">
+                <SummaryHeaderWatchChip
+                  service={leadProvider}
+                  country={$country}
+                  link={whereToWatchLink}
+                />
+              </span>
+            {/if}
+          </div>
+
+          {#if isWatchInActions}
+            <div class="watch-line">
               <SummaryHeaderWatchChip
+                labeled
                 service={leadProvider}
                 country={$country}
                 link={whereToWatchLink}
               />
-            {/if}
-          </div>
+            </div>
+          {/if}
         {/if}
       </div>
     </RenderFor>
@@ -708,7 +723,7 @@
       ...($isAuthorized && headerSocialEntries.length > 0
         ? [{ key: "social", column: socialColumn }]
         : []),
-      ...(isWatchInTray ? [] : [{ key: "watch", column: watchColumn }]),
+      ...(isWatchInActions ? [] : [{ key: "watch", column: watchColumn }]),
       ...(headerSentiment
         ? [{ key: "sentiment", column: sentimentColumn }]
         : []),
@@ -745,7 +760,7 @@
     {#if stripColumns.length > 0}
     <div class="masthead-strip">
       <RenderFor audience="all" device={["desktop"]}>
-        <div class="strip-page" data-columns={isWatchInTray ? 4 : 5}>
+        <div class="strip-page" data-columns={isWatchInActions ? 4 : 5}>
           {#each stripColumns as entry (entry.key)}
             {@render entry.column()}
           {/each}
@@ -1585,6 +1600,33 @@
       }
     }
 
+    /*
+      Where to watch: at the tray's end on desktop; under the tray as a
+      labelled pill where the tray has no room for it.
+    */
+    .tray-watch {
+      display: flex;
+
+      @include for-tablet-lg-and-below {
+        display: none;
+      }
+    }
+
+    .action-row-divider.is-before-watch {
+      @include for-tablet-lg-and-below {
+        display: none;
+      }
+    }
+
+    .watch-line {
+      display: none;
+      margin-top: var(--ni-12);
+
+      @include for-tablet-lg-and-below {
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 
 

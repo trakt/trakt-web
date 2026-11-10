@@ -16,6 +16,11 @@
 
     With nothing to stream it keeps its place and says what it is, quietly:
     the full view still lets you look up other countries.
+
+    `labeled` is the pill under the tray on phones and tablets, where no
+    tooltip ever shows: it names itself, "Where to Watch [logo] ›". The label
+    leads rather than wrapping the logo in a sentence ("Watch on …"), so no
+    language has to fit its word order around a picture.
   */
   type DrawerLink = {
     href: string;
@@ -27,10 +32,12 @@
     service,
     country,
     link,
+    labeled = false,
   }: {
     service: StreamingServiceOption | null;
     country: string;
     link: DrawerLink;
+    labeled?: boolean;
   } = $props();
 
   const tooltip = $derived(
@@ -46,7 +53,11 @@
     label={m.button_label_view_all_where_to_watch()}
     color="inherit"
   >
-    <span class="trakt-summary-header-watch-chip">
+    <span class="trakt-summary-header-watch-chip" data-labeled={labeled}>
+      {#if labeled || !service}
+        <span class="watch-chip-label">{m.list_title_where_to_watch()}</span>
+      {/if}
+
       {#if service}
         <span class="watch-chip-mark">
           <StreamingServiceLogo
@@ -55,8 +66,6 @@
             i18n={StreamingServiceLogoIntlProvider}
           />
         </span>
-      {:else}
-        <span class="watch-chip-label">{m.list_title_where_to_watch()}</span>
       {/if}
 
       <span class="watch-chip-caret" aria-hidden="true">
@@ -106,6 +115,35 @@
 
     &:active {
       transform: scale(0.97);
+    }
+
+    /* The pill under the tray wears the tray's own glass, a size smaller. */
+    &[data-labeled="true"] {
+      gap: var(--ni-8);
+      min-height: var(--ni-40);
+      padding-inline: var(--ni-16) var(--ni-12);
+
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground) 3.5%,
+        transparent
+      );
+      box-shadow: inset 0 0 0 var(--ni-1)
+        color-mix(in srgb, var(--color-foreground) 10%, transparent);
+
+      .watch-chip-mark {
+        height: var(--ni-20);
+      }
+
+      .watch-chip-mark :global(.trakt-streaming-service-logo img) {
+        max-height: var(--ni-18);
+        max-width: var(--ni-56);
+      }
+
+      .watch-chip-mark :global(.trakt-streaming-service-logo svg) {
+        height: var(--ni-18);
+        max-width: var(--ni-56);
+      }
     }
   }
 
