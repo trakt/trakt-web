@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AwardsList from "$lib/sections/summary/components/awards/AwardsList.svelte";
   import * as m from "$lib/features/i18n/messages";
 
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
@@ -139,6 +140,12 @@
   type={media.type}
   spoiler={{ type: "show", media }}
 />
+
+<RenderForFeature flag={FeatureFlag.Awards} audience="director">
+  {#snippet enabled()}
+    <AwardsList type="show" slug={media.slug} />
+  {/snippet}
+</RenderForFeature>
 
 <Comments {media} type="show" />
 

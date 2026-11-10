@@ -24,6 +24,8 @@
    */
   --color-background-stem-tag: var(--shade-800);
   --color-foreground-stem-tag: var(--shade-10);
+  --color-foreground-award-tag-won: var(--yellow-300);
+  --color-foreground-award-tag-nominee: var(--shade-100);
 
   --color-text-progress-tag: var(--shade-10);
   --color-background-progress-tag: var(--shade-930);

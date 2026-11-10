@@ -11,6 +11,7 @@
   type ListTitleProps = {
     title: string;
     metaInfo?: Snippet;
+    titleBadge?: Snippet;
     drilldown?: ListDrilldownProps;
     subtitle?: string;
     disabled?: boolean;
@@ -19,6 +20,7 @@
   const {
     title,
     metaInfo,
+    titleBadge,
     subtitle,
     drilldown,
     disabled,
@@ -63,33 +65,44 @@
   data-drilldown={isDrilldownActive ? "" : undefined}
   {...props}
 >
-  {#if isDrilldownActive && drilldown?.onClick}
-    <button
-      type="button"
-      class="trakt-list-title-action"
-      aria-label={drilldown.label}
-      disabled={isDrilldownDisabled}
-      onclick={() => {
-        trackDrilldown(drilldown.source);
-        drilldown.onClick();
-      }}
-    >
-      {@render drilldownContent()}
-    </button>
-  {:else if isDrilldownActive && drilldown}
-    <Link
-      href={drilldown.href}
-      label={drilldown.label}
-      noscroll={drilldown.noscroll}
-      replacestate={drilldown.replacestate}
-      disabled={isDrilldownDisabled}
-      color="inherit"
-      onclick={() => trackDrilldown(drilldown.source)}
-    >
-      {@render drilldownContent()}
-    </Link>
+  {#snippet heading()}
+    {#if isDrilldownActive && drilldown?.onClick}
+      <button
+        type="button"
+        class="trakt-list-title-action"
+        aria-label={drilldown.label}
+        disabled={isDrilldownDisabled}
+        onclick={() => {
+          trackDrilldown(drilldown.source);
+          drilldown.onClick();
+        }}
+      >
+        {@render drilldownContent()}
+      </button>
+    {:else if isDrilldownActive && drilldown}
+      <Link
+        href={drilldown.href}
+        label={drilldown.label}
+        noscroll={drilldown.noscroll}
+        replacestate={drilldown.replacestate}
+        disabled={isDrilldownDisabled}
+        color="inherit"
+        onclick={() => trackDrilldown(drilldown.source)}
+      >
+        {@render drilldownContent()}
+      </Link>
+    {:else}
+      {@render content()}
+    {/if}
+  {/snippet}
+
+  {#if titleBadge}
+    <div class="trakt-list-title-row">
+      {@render heading()}
+      {@render titleBadge()}
+    </div>
   {:else}
-    {@render content()}
+    {@render heading()}
   {/if}
 
   {#if metaInfo}
@@ -104,6 +117,13 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
+
+    .trakt-list-title-row {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-s);
+      min-width: 0;
+    }
 
     .trakt-list-title-wrapper,
     .trakt-list-title-action,

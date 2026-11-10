@@ -10,6 +10,7 @@
     title: string;
     subtitle?: string;
     metaInfo?: Snippet;
+    titleBadge?: Snippet;
     titleAction?: Snippet;
     actions?: Snippet;
     listActions?: Snippet;
@@ -21,6 +22,7 @@
     title,
     subtitle,
     metaInfo,
+    titleBadge,
     titleAction: externalTitleAction,
     actions,
     navigationType,
@@ -45,7 +47,14 @@
       <div class="trakt-list-title">
         {@render titleAction({ device: ["desktop", "tablet-lg"] })}
 
-        <ListTitle {title} {drilldown} {metaInfo} {disabled} {subtitle} />
+        <ListTitle
+          {title}
+          {drilldown}
+          {metaInfo}
+          {titleBadge}
+          {disabled}
+          {subtitle}
+        />
 
         {#if actions}
           <div class="trakt-list-actions" data-dpad-navigation={navigationType}>
