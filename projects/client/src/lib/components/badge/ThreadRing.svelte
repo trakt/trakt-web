@@ -3,7 +3,9 @@
     weight,
     intensity,
     opacity,
+    color = "vip",
   }: {
+    color?: "vip" | "gold";
     weight?: string;
     intensity?: number;
     opacity?: number;
@@ -13,6 +15,7 @@
 <span
   class="trakt-thread-ring"
   aria-hidden="true"
+  data-color={color}
   style:--thread-ring-weight={weight}
   style:--thread-ring-intensity={intensity}
   style:--thread-ring-opacity={opacity}
@@ -20,8 +23,13 @@
   <span class="ring-spin"><span class="ring-sweep"></span></span>
 </span>
 
-<style>
+<style lang="scss">
   .trakt-thread-ring {
+    --thread-ring-base: var(--color-vip-thread-base);
+    --thread-ring-mid: var(--color-vip-thread-mid);
+    --thread-ring-glint: var(--color-vip-thread-glint);
+    --thread-ring-glint-faint: var(--color-vip-thread-glint-faint);
+
     position: absolute;
     inset: 0;
     overflow: hidden;
@@ -40,6 +48,13 @@
     mask-composite: exclude;
 
     pointer-events: none;
+
+    &[data-color="gold"] {
+      --thread-ring-base: var(--color-gold-thread-base);
+      --thread-ring-mid: var(--color-gold-thread-mid);
+      --thread-ring-glint: var(--color-gold-thread-glint);
+      --thread-ring-glint-faint: var(--color-gold-thread-glint-faint);
+    }
   }
 
   .ring-spin {
@@ -63,15 +78,15 @@
 
     background: conic-gradient(
       from 0deg,
-      var(--color-vip-thread-base) 0deg,
-      var(--color-vip-thread-mid) 55deg,
-      var(--color-vip-thread-glint) 90deg,
-      var(--color-vip-thread-mid) 125deg,
-      var(--color-vip-thread-base) 180deg,
-      var(--color-vip-thread-mid) 235deg,
-      var(--color-vip-thread-glint-faint) 270deg,
-      var(--color-vip-thread-mid) 305deg,
-      var(--color-vip-thread-base) 360deg
+      var(--thread-ring-base) 0deg,
+      var(--thread-ring-mid) 55deg,
+      var(--thread-ring-glint) 90deg,
+      var(--thread-ring-mid) 125deg,
+      var(--thread-ring-base) 180deg,
+      var(--thread-ring-mid) 235deg,
+      var(--thread-ring-glint-faint) 270deg,
+      var(--thread-ring-mid) 305deg,
+      var(--thread-ring-base) 360deg
     );
 
     animation: vip-thread-sweep 6s linear infinite;
