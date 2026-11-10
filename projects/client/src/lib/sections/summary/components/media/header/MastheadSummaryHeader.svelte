@@ -1532,7 +1532,13 @@
         flex-wrap: wrap;
         row-gap: var(--ni-2);
 
-        width: min(100%, var(--ni-320));
+        /*
+          Out to the screen's gutters, past the text column: held to the
+          column, the second row had 7px to spare in English and wrapped
+          again in Persian.
+        */
+        width: min(calc(100vw - var(--ni-32)), var(--ni-340));
+        max-width: none;
         padding-block: var(--ni-4);
         border-radius: var(--ni-28);
 
