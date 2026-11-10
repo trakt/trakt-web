@@ -94,4 +94,88 @@ describe('util: UrlBuilder', () => {
       );
     });
   });
+
+  describe('category drilldowns', () => {
+    it('should keep well known params in a stable shape and drop unset ones', () => {
+      const url = UrlBuilder.watched({
+        type: 'movie',
+        sort_by: 'title',
+        sort_how: 'asc',
+        status: 'returning',
+        watch_window: 7,
+        display: 'show',
+      });
+
+      const params = new URL(url, 'http://localhost').searchParams;
+      expect(params.get('sort_by')).toBe('title');
+      expect(params.get('sort_how')).toBe('asc');
+      expect(params.get('status')).toBe('returning');
+      expect(params.get('watch_window')).toBe('7');
+      expect(params.get('display')).toBe('show');
+      expect(params.has('page')).toBe(false);
+    });
+
+    it('should serialise the search filters as encoded json', () => {
+      const url = UrlBuilder.watched({
+        type: 'movie',
+        search: { genres: 'action', year: 2024, adult: false },
+      });
+
+      const raw = new URL(url, 'http://localhost').searchParams.get('search');
+      expect(JSON.parse(decodeURIComponent(raw ?? ''))).toEqual({
+        genres: 'action',
+        year: 2024,
+        adult: false,
+      });
+    });
+  });
+
+  describe('mixtape', () => {
+    it('should be the plain route without params', () => {
+      expect(UrlBuilder.mixtape()).to.equal('/discover/mixtape');
+    });
+
+    it('should serialise picks, skips and kept rounds', () => {
+      const url = UrlBuilder.mixtape({
+        type: 'movie',
+        picks: [1, 2],
+        skips: [3],
+        kept: [[4, 5], [6]],
+        savedTo: 9,
+        view: 'results',
+        source: 'navbar',
+      });
+
+      const params = new URL(url, 'http://localhost').searchParams;
+      expect(params.get('type')).toBe('movie');
+      expect(params.get('picks')).toBe('1,2');
+      expect(params.get('skips')).toBe('3');
+      expect(params.get('kept')).toBe('4,5~6');
+      expect(params.get('to')).toBe('9');
+      expect(params.get('view')).toBe('results');
+      expect(params.get('source')).toBe('navbar');
+    });
+
+    it('should drop empty lists and a null saved list', () => {
+      const url = UrlBuilder.mixtape({
+        picks: [],
+        skips: [],
+        kept: [],
+        savedTo: null,
+      });
+
+      expect(url).to.equal('/discover/mixtape');
+    });
+  });
+
+  describe('settings', () => {
+    it('should drop a null service from the streaming service params', () => {
+      expect(
+        UrlBuilder.settings.streamingServices({
+          connection: 'ok',
+          service: null,
+        }),
+      ).to.equal('/settings/streaming-services?connection=ok');
+    });
+  });
 });
