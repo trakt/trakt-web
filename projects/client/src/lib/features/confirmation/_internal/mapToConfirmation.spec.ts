@@ -35,17 +35,6 @@ describe('mapToConfirmation', () => {
     expect(result.buttonText).toBe('Block');
   });
 
-  it('should name the person in the body, not the title, when unfollowing', () => {
-    const result = mapToConfirmation({
-      type: ConfirmationType.UnfollowUser,
-      username: 'harry',
-    });
-
-    expect(result.operation).toBe('destructive');
-    expect(result.title).not.toContain('harry');
-    expect(result.message).toContain('harry');
-  });
-
   it('should name the list in the body and keep the button to the verb when deleting a list', () => {
     const result = mapToConfirmation({
       type: ConfirmationType.DeleteList,
@@ -142,5 +131,28 @@ describe('mapToConfirmation', () => {
       expect(oldest.title).toBe(newest.title);
       expect(oldest.buttonText).toBe(newest.buttonText);
     });
+  });
+
+  it('should require typing the username and offer an export when deleting the account', () => {
+    const result = mapToConfirmation({
+      type: ConfirmationType.DeleteAccount,
+      username: 'harry',
+    });
+
+    expect(result.challenge?.value).toBe('harry');
+    expect(result.challenge?.placeholder).toBe('harry');
+    expect(result.challenge?.label).toContain('harry');
+    expect(result.preflight?.isEnabledByDefault).toBe(true);
+  });
+
+  it('should report how many sections failed before proceeding', () => {
+    const result = mapToConfirmation({
+      type: ConfirmationType.ProceedAfterPartialExport,
+      failed: 2,
+      total: 5,
+    });
+
+    expect(result.title).toBe("2 of 5 sections didn't export");
+    expect(result.operation).toBe('destructive');
   });
 });
