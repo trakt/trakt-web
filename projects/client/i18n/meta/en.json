@@ -15630,6 +15630,50 @@
           "required": true
         }
       }
+    },
+    "text_ordinal_one": {
+      "default": "{count}st",
+      "description": "Ordinal number for the plural category 'one' (1st, 21st). Languages without ordinal suffixes can use \"{count}.\".",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "The number.",
+          "required": true
+        }
+      }
+    },
+    "text_ordinal_two": {
+      "default": "{count}nd",
+      "description": "Ordinal number for the plural category 'two' (2nd, 22nd).",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "The number.",
+          "required": true
+        }
+      }
+    },
+    "text_ordinal_few": {
+      "default": "{count}rd",
+      "description": "Ordinal number for the plural category 'few' (3rd, 23rd).",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "The number.",
+          "required": true
+        }
+      }
+    },
+    "text_ordinal_other": {
+      "default": "{count}th",
+      "description": "Ordinal number for every other count (4th, 11th, 96th).",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "The number.",
+          "required": true
+        }
+      }
     }
   }
 }
