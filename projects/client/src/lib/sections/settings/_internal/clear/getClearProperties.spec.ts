@@ -46,3 +46,47 @@ describe('getClearProperties invalidation', () => {
     expect(updated.data?.pages.at(0)?.entries).toEqual([]);
   });
 });
+
+const rated = (id: number) => ({ id, rating: 8, ratedAt: new Date() });
+
+describe('util: getClearProperties', () => {
+  it('should be empty when the source has no input yet', () => {
+    expect(getClearProperties({ type: 'watchlist' }).totalCount).toBe(0);
+    expect(getClearProperties({ type: 'library' }).totalCount).toBe(0);
+  });
+
+  it('should count movies and shows for the watchlist', () => {
+    const { totalCount } = getClearProperties({
+      type: 'watchlist',
+      input: { movies: new Set([1, 2]), shows: new Set([3]) },
+    });
+
+    expect(totalCount).toBe(3);
+  });
+
+  it('should count movies, shows and episodes for ratings', () => {
+    const { totalCount } = getClearProperties({
+      type: 'ratings',
+      input: {
+        movies: new Map<number, ReturnType<typeof rated>>(),
+        shows: new Map([[1, rated(1)]]),
+        seasons: new Map<number, ReturnType<typeof rated>>(),
+        episodes: new Map([
+          [2, rated(2)],
+          [3, rated(3)],
+        ]),
+      },
+    });
+
+    expect(totalCount).toBe(3);
+  });
+
+  it('should count movies and episodes for the library', () => {
+    const { totalCount } = getClearProperties({
+      type: 'library',
+      input: { movies: new Set([1]), episodes: new Set([2, 3]) },
+    });
+
+    expect(totalCount).toBe(3);
+  });
+});
