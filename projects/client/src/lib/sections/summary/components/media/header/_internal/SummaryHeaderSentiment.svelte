@@ -26,7 +26,7 @@
     {#each sentiment.bullets as bullet (bullet)}
       <li>
         <SummaryHeaderBulletDot />
-        <span class="bullet-text">{bullet}</span>
+        <span class="bullet-text" dir="auto">{bullet}</span>
       </li>
     {/each}
   </ul>
@@ -71,6 +71,10 @@
   }
 
   .bullet-text {
+    /* API text keeps its own direction; its lines still align with the page. */
+    text-align: -webkit-match-parent;
+    text-align: match-parent;
+
     font-size: var(--font-size-text);
     line-height: var(--ni-20);
     color: var(--color-text-primary);

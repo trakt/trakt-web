@@ -78,7 +78,7 @@
         <SummaryHeaderLabel text={outlook.previous.kicker} />
 
         <span class="previous-heading">
-          <span class="previous-title">{outlook.previous.title ?? ""}</span>
+          <span class="previous-title" dir="auto">{outlook.previous.title ?? ""}</span>
           <span class="previous-caret" aria-hidden="true">
             <CaretRightIcon />
           </span>
@@ -86,7 +86,7 @@
 
         {#if outlook.previous.overview}
           <span class="previous-overview-slot" {@attach fitLines}>
-            <span class="previous-overview">{outlook.previous.overview}</span>
+            <span class="previous-overview" dir="auto">{outlook.previous.overview}</span>
           </span>
         {/if}
       </Link>
@@ -191,6 +191,10 @@
     flex: 1;
     min-width: 0;
 
+    /* API text keeps its own direction; its lines still align with the page. */
+    text-align: -webkit-match-parent;
+    text-align: match-parent;
+
     font-size: var(--font-size-text);
     font-weight: 700;
     line-height: var(--ni-20);
@@ -216,6 +220,10 @@
     line-height: var(--ni-16);
   }
 
+  /*
+    No page-side alignment here: on a clamped line Chrome drops the ellipsis
+    when the text is aligned against its own direction.
+  */
   .previous-overview {
     display: -webkit-box;
     -webkit-box-orient: vertical;

@@ -20,7 +20,7 @@
   {#each facts as fact, index (index)}
     <li>
       <SummaryHeaderBulletDot />
-      <div class="trivia-text">
+      <div class="trivia-text" dir="auto">
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html marked.parse(fact)}
       </div>
@@ -46,6 +46,10 @@
   }
 
   .trivia-text {
+    /* API text keeps its own direction; its lines still align with the page. */
+    text-align: -webkit-match-parent;
+    text-align: match-parent;
+
     font-size: var(--font-size-text);
     line-height: var(--ni-20);
     color: var(--color-text-primary);

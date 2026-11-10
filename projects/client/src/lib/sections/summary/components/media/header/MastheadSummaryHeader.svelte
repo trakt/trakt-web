@@ -502,7 +502,7 @@
           color="inherit"
           label={m.button_label_details({ title })}
         >
-          <p class="deck-text">{overview}</p>
+          <p class="deck-text" dir="auto">{overview}</p>
         </Link>
       </Spoiler>
     </div>
