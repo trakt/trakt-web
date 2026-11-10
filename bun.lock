@@ -28,7 +28,7 @@
         "@tiptap/pm": "3.33.0",
         "@tiptap/starter-kit": "3.33.0",
         "@tiptap/suggestion": "3.33.0",
-        "@trakt/api": "npm:@jsr/trakt__api@0.7.19",
+        "@trakt/api": "npm:@jsr/trakt__api@0.8.1",
         "@ts-rest/core": "3.52.1",
         "@use-gesture/vanilla": "10.3.1",
         "bits-ui": "2.20.6",
@@ -983,7 +983,7 @@
 
     "@tiptap/suggestion": ["@tiptap/suggestion@3.33.0", "", { "peerDependencies": { "@floating-ui/dom": "^1.0.0", "@tiptap/core": "3.33.0", "@tiptap/pm": "3.33.0" } }, "sha512-g5IU3rC4whIJHWk+6kxGk9v2QB2iFm+3vdI7h44tRHw1Ik/rVYexOABMPU/w3zuh+7VSNGYoUT7PsTJa7eGYKA=="],
 
-    "@trakt/api": ["@jsr/trakt__api@0.7.19", "https://npm.jsr.io/~/11/@jsr/trakt__api/0.7.19.tgz", { "dependencies": { "@anatine/zod-openapi": "^2.2.6", "@ts-rest/core": "^3.52.1", "zod": "^3.24.1" } }, "sha512-ywBQOVUwnYyOjafpSP7rSM+zZor2K15cIn+V2tABb1TxUokMMAD7hx2UcDJqX/AJQctRnLcbokaa6V/3EXz1Ug=="],
+    "@trakt/api": ["@jsr/trakt__api@0.8.1", "https://npm.jsr.io/~/11/@jsr/trakt__api/0.8.1.tgz", { "dependencies": { "@anatine/zod-openapi": "^2.2.6", "@ts-rest/core": "^3.52.1", "zod": "^3.24.1" } }, "sha512-m0q57GMmAwHCsZfsvQ5/hcToXjRW1wqdBARNc2NS3CfNtw8E7Nou/9Qezouh1Y6zuiUHImMPKJFzpPRO24NMcA=="],
 
     "@trickfilm400/rollup-plugin-off-main-thread": ["@trickfilm400/rollup-plugin-off-main-thread@3.0.0-pre1", "", { "dependencies": { "ejs": "^3.1.10", "json5": "^2.2.3", "magic-string": "^0.30.21", "string.prototype.matchall": "^4.0.12" } }, "sha512-/67zpWDBLV+oYAEL682s1ktXL0HgqX76f6gaVGkGnVZlBbm1zd0v4Bz8MFF2GGhoX9rvfq3KSQHubFHwa6w6/Q=="],
 
