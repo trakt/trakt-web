@@ -1,8 +1,12 @@
 <script lang="ts">
   import SelectBase from "./_internal/SelectBase.svelte";
+  import SelectGroup from "./_internal/SelectGroup.svelte";
   import SelectItem from "./_internal/SelectItem.svelte";
+  import { matchesOptionSearch } from "./_internal/matchesOptionSearch.ts";
+  import { toOptionSections } from "./_internal/toOptionSections.ts";
   import type { MultiSelectProps } from "./models/MultiSelectProps.ts";
   import type { MultiSelectState } from "./models/MultiSelectState.ts";
+  import type { SelectOption } from "./models/SelectOption.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import LoaderIcon from "$lib/components/icons/LoaderIcon.svelte";
 
@@ -47,10 +51,11 @@
   const visibleOptions = $derived(
     normalizedSearch && !onSearch
       ? options.filter((option) =>
-        option.label.toLowerCase().includes(normalizedSearch)
+        matchesOptionSearch({ option, search: normalizedSearch })
       )
       : options,
   );
+  const sections = $derived(toOptionSections(visibleOptions));
 
   const selectedLabel = $derived(
     value.length
@@ -136,6 +141,16 @@
   </div>
 {/snippet}
 
+{#snippet items(sectionOptions: ReadonlyArray<SelectOption>)}
+  {#each sectionOptions as option (option.value)}
+    <SelectItem
+      {option}
+      state={stateOf(option.value)}
+      onCommit={(next) => setState(option.value, next)}
+    />
+  {/each}
+{/snippet}
+
 <SelectBase
   type="multiple"
   {value}
@@ -148,12 +163,14 @@
   {variant}
   autoWidth
 >
-  {#each visibleOptions as option (option.value)}
-    <SelectItem
-      {option}
-      state={stateOf(option.value)}
-      onCommit={(next) => setState(option.value, next)}
-    />
+  {#each sections as section (section.key)}
+    {#if section.label}
+      <SelectGroup label={section.label}>
+        {@render items(section.options)}
+      </SelectGroup>
+    {:else}
+      {@render items(section.options)}
+    {/if}
   {/each}
   {#if visibleOptions.length === 0 && emptyLabel && !isLoading}
     <div class="trakt-select-empty">
