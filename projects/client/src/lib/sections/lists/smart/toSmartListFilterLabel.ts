@@ -10,6 +10,7 @@ import { toPercentage } from '$lib/utils/formatting/number/toPercentage.ts';
 import { toTitleCaseSlug } from '$lib/utils/formatting/string/toTitleCaseSlug.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
 import { toTranslatedStatus } from '$lib/utils/formatting/string/toTranslatedStatus.ts';
+import type { SmartListAwardLabel } from './models/SmartListAwardLabel.ts';
 
 function toRatingPercentage(value: number): string {
   return toPercentage(value / 100, languageTag());
@@ -145,14 +146,27 @@ function formatListValue(key: string, value: string): string {
   }
 }
 
-function formatList(key: string, values: string[]): string[] {
+function formatList({
+  key,
+  values,
+  awardLabels,
+}: {
+  key: string;
+  values: string[];
+  awardLabels: ReadonlyMap<string, SmartListAwardLabel>;
+}): string[] {
+  const format = (value: string) =>
+    key === 'awards'
+      ? (awardLabels.get(value)?.name ?? toTitleCaseSlug(value))
+      : formatListValue(key, value);
+
   return values.map((raw) => {
     if (!raw.startsWith(EXCLUSION_PREFIX)) {
-      return formatListValue(key, raw);
+      return format(raw);
     }
 
     return m.smart_list_filter_label_excluded({
-      value: formatListValue(key, raw.slice(EXCLUSION_PREFIX.length)),
+      value: format(raw.slice(EXCLUSION_PREFIX.length)),
     });
   });
 }
@@ -195,15 +209,32 @@ function formatRange(key: string, range: number[]): string[] {
       return [formatVotesRange(range, 'Trakt')];
     case 'imdb_votes':
       return [formatVotesRange(range, 'IMDb')];
+    case 'award_years':
+      return [
+        m.text_smart_list_recipe_detail({
+          label: m.label_smart_list_ceremony_year(),
+          value: formatPlainRange(range),
+        }),
+      ];
     default:
       return [];
   }
 }
 
-export function toSmartListFilterLabel(key: string, value: unknown): string[] {
+type SmartListFilterLabelProps = {
+  key: string;
+  value: unknown;
+  awardLabels?: ReadonlyMap<string, SmartListAwardLabel>;
+};
+
+export function toSmartListFilterLabel({
+  key,
+  value,
+  awardLabels = new Map(),
+}: SmartListFilterLabelProps): string[] {
   if (Array.isArray(value)) {
     return value.every((item) => typeof item === 'string')
-      ? formatList(key, value as string[])
+      ? formatList({ key, values: value as string[], awardLabels })
       : formatRange(key, value as number[]);
   }
 
@@ -217,6 +248,10 @@ export function toSmartListFilterLabel(key: string, value: unknown): string[] {
 
   if (value === true && key === 'ignore_watchlisted') {
     return [m.header_hide_watchlisted()];
+  }
+
+  if (value === true && key === 'award_won') {
+    return [m.toggle_text_award_winners_only()];
   }
 
   return [];

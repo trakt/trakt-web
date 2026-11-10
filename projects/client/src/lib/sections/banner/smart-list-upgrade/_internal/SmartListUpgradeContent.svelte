@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSmartListAwardLabels } from "$lib/sections/lists/smart/useSmartListAwardLabels.ts";
   import Button from "$lib/components/buttons/Button.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import GlobalParameterEscaper from "$lib/features/parameters/GlobalParameterEscaper.svelte";
@@ -30,8 +31,10 @@
   const summary = $derived(
     overlap ? m.smart_list_upgrade_overlap(overlap) : undefined,
   );
+  const awardLabels = useSmartListAwardLabels();
+
   const detail = $derived(
-    $draft ? toSmartListDraftChips($draft).join(" · ") : "",
+    $draft ? toSmartListDraftChips($draft, $awardLabels).join(" · ") : "",
   );
 </script>
 

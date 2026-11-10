@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSmartListAwardLabels } from "$lib/sections/lists/smart/useSmartListAwardLabels.ts";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SmartList } from "$lib/requests/queries/users/smartListQuery.ts";
@@ -15,7 +16,9 @@
 
   let isOpen = $state(false);
 
-  const recipe = $derived(toSmartListRecipe(list));
+  const awardLabels = useSmartListAwardLabels();
+
+  const recipe = $derived(toSmartListRecipe(list, $awardLabels));
   const hasFilters = $derived(
     recipe.includes.length > 0 ||
       recipe.limits.length > 0 ||

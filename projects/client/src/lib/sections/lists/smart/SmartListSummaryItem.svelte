@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useSmartListAwardLabels } from "$lib/sections/lists/smart/useSmartListAwardLabels.ts";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
@@ -15,7 +16,11 @@
 
   const href = $derived(UrlBuilder.lists.smart.view(list.slug));
   const { posters } = $derived(useSmartListPreview(list));
-  const filterSummary = $derived(getSmartListFilterSummary(list));
+  const awardLabels = useSmartListAwardLabels();
+
+  const filterSummary = $derived(
+    getSmartListFilterSummary(list, $awardLabels),
+  );
 </script>
 
 <ListSummaryCard>

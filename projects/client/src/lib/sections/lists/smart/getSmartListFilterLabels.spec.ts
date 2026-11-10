@@ -131,4 +131,44 @@ describe('getSmartListFilterLabels', () => {
 
     expect(label).toBe('PG-13');
   });
+
+  it('should label the award filters', () => {
+    const [, ...labels] = getSmartListFilterLabels({
+      source: 'discover',
+      filters: {
+        awards: ['oscars-best-picture', 'baftas-best-film'],
+        award_won: true,
+        award_years: [2000, 2026],
+      },
+    });
+
+    expect(labels).toEqual([
+      'Oscars Best Picture',
+      'Baftas Best Film',
+      'Winners only',
+      'Ceremony year: 2000 to 2026',
+    ]);
+  });
+
+  it('should use the award names from the catalog', () => {
+    const [, ...labels] = getSmartListFilterLabels(
+      {
+        source: 'discover',
+        filters: { awards: ['oscars-best-picture', 'golden-bear'] },
+      },
+      new Map([
+        [
+          'oscars-best-picture',
+          {
+            ceremonySlug: 'oscars',
+            ceremony: 'Academy Awards',
+            name: 'Academy Award for Best Picture',
+            shortName: 'Best Picture',
+          },
+        ],
+      ]),
+    );
+
+    expect(labels).toEqual(['Academy Award for Best Picture', 'Golden Bear']);
+  });
 });

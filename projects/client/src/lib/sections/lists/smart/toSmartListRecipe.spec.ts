@@ -1,6 +1,27 @@
 import { describe, expect, it } from 'vitest';
 import { toSmartListRecipe } from './toSmartListRecipe.ts';
 
+const AWARD_LABELS = new Map([
+  [
+    'oscars-best-picture',
+    {
+      ceremonySlug: 'oscars',
+      ceremony: 'Academy Awards',
+      name: 'Academy Award for Best Picture',
+      shortName: 'Best Picture',
+    },
+  ],
+  [
+    'emmys-outstanding-drama-series',
+    {
+      ceremonySlug: 'emmys',
+      ceremony: 'Primetime Emmy Awards',
+      name: 'Primetime Emmy Award for Outstanding Drama Series',
+      shortName: 'Outstanding Drama Series',
+    },
+  ],
+]);
+
 describe('toSmartListRecipe', () => {
   it('should describe the source and media type', () => {
     const recipe = toSmartListRecipe({
@@ -132,6 +153,77 @@ describe('toSmartListRecipe', () => {
     expect(includes.at(0)?.values.map(({ key }) => key)).toEqual([
       'action',
       '-action',
+    ]);
+  });
+
+  it('should describe the awards with their settings', () => {
+    const { includes } = toSmartListRecipe({
+      source: 'discover',
+      mediaType: 'movies',
+      filters: {
+        awards: ['oscars-best-picture'],
+        award_won: true,
+        award_years: [2000, 2026],
+      },
+    });
+
+    expect(includes.at(0)).toEqual({
+      key: 'awards',
+      label: 'Awards',
+      values: [
+        {
+          key: 'oscars-best-picture',
+          label: 'Oscars Best Picture',
+          isExcluded: false,
+        },
+      ],
+      details: ['Winners only', 'Ceremony year: 2000 to 2026'],
+    });
+  });
+
+  it('should group the awards per ceremony', () => {
+    const { includes } = toSmartListRecipe(
+      {
+        source: 'discover',
+        mediaType: 'movies',
+        filters: {
+          awards: [
+            'oscars-best-picture',
+            'emmys-outstanding-drama-series',
+            'golden-bear',
+          ],
+          award_won: true,
+        },
+      },
+      AWARD_LABELS,
+    );
+
+    expect(
+      includes.map(({ key, label, values, details }) => ({
+        key,
+        label,
+        values: values.map((value) => value.label),
+        details,
+      })),
+    ).toEqual([
+      {
+        key: 'awards:oscars',
+        label: 'Academy Awards',
+        values: ['Best Picture'],
+        details: [],
+      },
+      {
+        key: 'awards:emmys',
+        label: 'Primetime Emmy Awards',
+        values: ['Outstanding Drama Series'],
+        details: [],
+      },
+      {
+        key: 'awards',
+        label: 'Awards',
+        values: ['Golden Bear'],
+        details: ['Winners only'],
+      },
     ]);
   });
 });
