@@ -8471,6 +8471,26 @@
       "default": "Studios",
       "description": "Label for the smart list filter that matches titles by production studio."
     },
+    "header_smart_list_awards": {
+      "default": "Awards",
+      "description": "Label for the smart list filter that matches titles nominated for or winning an award."
+    },
+    "header_smart_list_award_categories": {
+      "default": "Categories",
+      "description": "Label for the award category picker inside the smart list awards filter."
+    },
+    "input_placeholder_search_awards": {
+      "default": "Search awards",
+      "description": "Placeholder for the search field in the smart list awards filter."
+    },
+    "toggle_text_award_winners_only": {
+      "default": "Winners only",
+      "description": "Toggle in the smart list awards filter that keeps only award winners instead of nominees and winners."
+    },
+    "label_smart_list_ceremony_year": {
+      "default": "Ceremony year",
+      "description": "Label for the year range of the award ceremony in the smart list awards filter."
+    },
     "header_smart_list_networks": {
       "default": "Networks",
       "description": "Label for the smart list filter that matches shows by TV network."
