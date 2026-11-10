@@ -27,20 +27,26 @@
       </span>
 
       <span class="activity-info">
-        <span class="activity-name ellipsis">{toDisplayableName(entry.user)}</span>
-        <span class="activity-label">{toSocialActivityLabel(entry)}</span>
-      </span>
+        <span class="activity-name ellipsis">
+          <bdi>{toDisplayableName(entry.user)}</bdi>
+        </span>
 
-      <!--
-        The score keeps a column of its own at the row's end, blank when the
-        friend has not rated, so every row holds the same grid. It goes
-        through UserRating, as the ratings drawer and comments do: ratings
-        are stored 1-10 but shown as 5 stars.
-      -->
-      <span class="activity-score">
-        {#if entry.watched?.rating}
-          <UserRating rating={entry.watched.rating.rating} />
-        {/if}
+        <!--
+          The score leads the line under the name, so it reads as that
+          friend's verdict. Pinned to the row's far end it sat nearer the next
+          column than its own name and read as part of it. It goes through
+          UserRating, as the ratings drawer and comments do: ratings are
+          stored 1-10 but shown as 5 stars.
+        -->
+        <span class="activity-meta">
+          {#if entry.watched?.rating}
+            <span class="activity-score">
+              <UserRating rating={entry.watched.rating.rating} />
+            </span>
+            <span class="activity-separator" aria-hidden="true">·</span>
+          {/if}
+          <span class="activity-label">{toSocialActivityLabel(entry)}</span>
+        </span>
       </span>
     </div>
   {/each}
@@ -99,23 +105,39 @@
     color: var(--color-text-primary);
   }
 
+  .activity-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--ni-6);
+
+    min-width: 0;
+    height: var(--ni-16);
+  }
+
   /* Sized on the span: the global sheet sets every bare span to 14px. */
-  .activity-label {
+  .activity-label,
+  .activity-separator {
     font-size: var(--font-size-text-small);
     line-height: var(--ni-16);
     color: var(--color-text-quiet);
+  }
+
+  .activity-label {
+    min-width: 0;
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
+  .activity-separator {
+    flex: none;
+  }
+
+  /* The score is the line's one bright mark; the activity stays quiet. */
   .activity-score {
     display: flex;
-    justify-content: flex-end;
     flex: none;
-
-    width: var(--ni-44);
-    margin-inline-start: auto;
 
     font-variant-numeric: tabular-nums;
 
@@ -127,6 +149,7 @@
     :global(.trakt-user-rating span) {
       font-size: var(--font-size-text-small);
       font-weight: 700;
+      line-height: var(--ni-16);
     }
 
     :global(.trakt-user-rating svg) {
