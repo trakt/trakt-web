@@ -717,23 +717,23 @@
       Five sections at most - progress, social, watch, sentiment, trivia -
       which is exactly one row now that credits moved under the title and
       awards onto the poster. No more paging: the strip IS the page.
-      Progress opens the row: the viewer's own standing is the one thing
-      here that asks them to do something, so it reads first. Trivia closes
-      it: the one column that stretches (its prose runs long) reads wrong
-      anywhere but the edge, so where to watch takes the middle - when it is
-      a column at all; on desktop it rides in the action tray instead.
+      Insights, trivia, progress, social: the two prose columns lead and
+      set the row's height, progress follows, and social closes it - three
+      short rows whose text ends highest, which left a hole anywhere but the
+      edge. Where to watch follows progress when it is a column at all; on
+      desktop it rides in the action tray instead.
     -->
     {@const stripColumns = [
-      ...(hasRecap ? [{ key: "recap", column: recapColumn }] : []),
-      ...($isAuthorized && headerSocialEntries.length > 0
-        ? [{ key: "social", column: socialColumn }]
-        : []),
-      ...(isWatchInActions ? [] : [{ key: "watch", column: watchColumn }]),
       ...(headerSentiment
         ? [{ key: "sentiment", column: sentimentColumn }]
         : []),
       ...(triviaFacts.length > 0
         ? [{ key: "trivia", column: triviaColumn }]
+        : []),
+      ...(hasRecap ? [{ key: "recap", column: recapColumn }] : []),
+      ...(isWatchInActions ? [] : [{ key: "watch", column: watchColumn }]),
+      ...($isAuthorized && headerSocialEntries.length > 0
+        ? [{ key: "social", column: socialColumn }]
         : []),
     ]}
 
