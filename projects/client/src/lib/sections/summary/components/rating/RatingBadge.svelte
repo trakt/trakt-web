@@ -56,9 +56,7 @@
 </script>
 
 {#snippet rateContent()}
-  <div class="rating-badge-popover">
-    <RateNow {...target} variant="allow" showFavorite={!favorite} />
-  </div>
+  <RateNow {...target} variant="allow" showFavorite={!favorite} />
 {/snippet}
 
 <!--
@@ -247,12 +245,5 @@
     background-color: var(--purple-300);
     box-shadow: 0 0 0 var(--ni-2)
       var(--rating-badge-dot-ring, var(--color-actions-bar-background));
-  }
-
-  .rating-badge-popover {
-    padding: var(--ni-12) var(--ni-16);
-    border-radius: var(--border-radius-l);
-    background-color: var(--color-modal-background);
-    box-shadow: var(--shadow-menu);
   }
 </style>
