@@ -326,4 +326,225 @@ describe('action: reorderDrag', () => {
       expect(onDragStart).toHaveBeenCalledWith('a', expect.any(Object), 0);
     });
   });
+
+  describe('drag handle', () => {
+    it('should ignore presses outside the drag handle', () => {
+      createAction();
+
+      rowA.dispatchEvent(
+        new PointerEvent('pointerdown', { bubbles: true, button: 0 }),
+      );
+
+      expect(onDragStart).not.toHaveBeenCalled();
+    });
+
+    it('should use a custom handle selector', () => {
+      const grip = document.createElement('span');
+      grip.className = 'grip';
+      rowB.appendChild(grip);
+      createAction({ dragHandleSelector: '.grip' });
+
+      rowB
+        .querySelector('.drag-handle')
+        ?.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+      expect(onDragStart).not.toHaveBeenCalled();
+
+      grip.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+      expect(onDragStart).toHaveBeenCalledWith('b', expect.any(Object), 1);
+    });
+  });
+
+  describe('pointer capture', () => {
+    const capture = () => node as unknown as Record<string, Mock>;
+
+    it('should capture the pointer for the drag', () => {
+      createAction();
+
+      pointerDown(rowA, { pointerId: 7 });
+
+      expect(capture().setPointerCapture).toHaveBeenCalledWith(7);
+    });
+
+    it('should not start a drag when the pointer cannot be captured', () => {
+      capture().setPointerCapture?.mockImplementation(() => {
+        throw new Error('gone');
+      });
+      createAction();
+
+      pointerDown(rowA);
+
+      expect(onDragStart).not.toHaveBeenCalled();
+    });
+
+    it('should release a held pointer when the drag ends', () => {
+      capture().hasPointerCapture?.mockReturnValue(true);
+      createAction();
+      pointerDown(rowA, { pointerId: 7 });
+
+      pointerUp({ pointerId: 7 });
+
+      expect(capture().releasePointerCapture).toHaveBeenCalledWith(7);
+    });
+
+    it('should still end the drag when releasing the pointer throws', () => {
+      capture().hasPointerCapture?.mockReturnValue(true);
+      capture().releasePointerCapture?.mockImplementation(() => {
+        throw new Error('already released');
+      });
+      createAction();
+      pointerDown(rowA);
+
+      pointerCancel();
+
+      expect(onDragEnd).toHaveBeenCalledWith('a', 0, true);
+    });
+
+    it('should release a held pointer when destroyed mid drag', () => {
+      capture().hasPointerCapture?.mockReturnValue(true);
+      const action = createAction();
+      pointerDown(rowA, { pointerId: 7 });
+
+      action.destroy();
+
+      expect(capture().releasePointerCapture).toHaveBeenCalledWith(7);
+    });
+
+    it('should forget the drag once it ended', () => {
+      createAction();
+      pointerDown(rowA);
+      pointerUp();
+
+      pointerMove({ clientY: 90 });
+
+      expect(onGhostMove).not.toHaveBeenCalled();
+      expect(onDragEnd).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('auto scroll', () => {
+    let container: HTMLDivElement;
+
+    const frames = () => vi.mocked(requestAnimationFrame).mock.calls;
+
+    const tick = () => {
+      const callback = frames().at(-1)?.[0];
+      callback?.(0);
+    };
+
+    const defineContainer = ({
+      top = 0,
+      bottom = 300,
+      scrollTop = 100,
+      scrollHeight = 1000,
+    } = {}) => {
+      container = document.createElement('div');
+      container.className = 'trakt-drawer-content';
+      container.getBoundingClientRect = () =>
+        ({ top, bottom, height: bottom - top }) as DOMRect;
+      Object.defineProperty(container, 'scrollHeight', {
+        value: scrollHeight,
+      });
+      Object.defineProperty(container, 'clientHeight', {
+        value: bottom - top,
+      });
+      container.scrollTop = scrollTop;
+      Object.defineProperty(container, 'scrollTop', {
+        value: scrollTop,
+        writable: true,
+      });
+      document.body.appendChild(container);
+      container.appendChild(node);
+    };
+
+    afterEach(() => {
+      document.body.appendChild(node);
+      container?.remove();
+    });
+
+    it('should scroll up faster the closer the pointer is to the top edge', () => {
+      defineContainer();
+      createAction();
+      pointerDown(rowA, { clientY: 60 });
+      tick();
+      const far = 100 - container.scrollTop;
+
+      container.scrollTop = 100;
+      pointerMove({ clientY: 10 });
+      tick();
+      const near = 100 - container.scrollTop;
+
+      expect(far).toBeGreaterThan(0);
+      expect(near).toBeGreaterThan(far);
+    });
+
+    it('should scroll down near the bottom edge', () => {
+      defineContainer();
+      createAction();
+      pointerDown(rowA, { clientY: 290 });
+
+      tick();
+
+      expect(container.scrollTop).toBeGreaterThan(100);
+    });
+
+    it('should move the placeholder when scrolling changes what is under the pointer', () => {
+      defineContainer();
+      createAction();
+      pointerDown(rowA, { clientY: 60 });
+
+      tick();
+
+      expect(onPlaceholderMove).toHaveBeenCalledWith(1);
+    });
+
+    it('should not scroll when the pointer is away from the edges', () => {
+      defineContainer({ top: 0, bottom: 1000 });
+      createAction();
+      pointerDown(rowA, { clientY: 500 });
+
+      tick();
+
+      expect(container.scrollTop).toBe(100);
+    });
+
+    it('should not scroll above the top of the content', () => {
+      defineContainer({ scrollTop: 0 });
+      createAction();
+      pointerDown(rowA, { clientY: 10 });
+
+      tick();
+
+      expect(container.scrollTop).toBe(0);
+    });
+
+    it('should not scroll past the end of the content', () => {
+      defineContainer({ scrollTop: 700 });
+      createAction();
+      pointerDown(rowA, { clientY: 290 });
+
+      tick();
+
+      expect(container.scrollTop).toBe(700);
+    });
+
+    it('should use a custom scroll container class', () => {
+      defineContainer();
+      container.className = 'custom-scroll';
+      createAction({ scrollContainerClassName: 'custom-scroll' });
+      pointerDown(rowA, { clientY: 60 });
+
+      tick();
+
+      expect(container.scrollTop).toBeLessThan(100);
+    });
+
+    it('should not scroll when there is no scroll container', () => {
+      createAction();
+      pointerDown(rowA, { clientY: 60 });
+
+      tick();
+
+      expect(onPlaceholderMove).not.toHaveBeenCalled();
+    });
+  });
 });
