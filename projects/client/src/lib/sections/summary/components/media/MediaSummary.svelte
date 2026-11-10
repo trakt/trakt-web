@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import AwardsBadge from "$lib/sections/summary/components/awards/AwardsBadge.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
@@ -52,6 +55,14 @@
   const posterUrl = $derived(streamOn?.preferred?.link ?? media.trailer);
 </script>
 
+{#snippet awardsBadge()}
+  <RenderForFeature flag={FeatureFlag.Awards} audience="director">
+    {#snippet enabled()}
+      <AwardsBadge type={target.type} slug={media.slug} />
+    {/snippet}
+  </RenderForFeature>
+{/snippet}
+
 {#snippet tags()}
   <SummaryPosterTags
     {postCreditsCount}
@@ -92,6 +103,7 @@
         entry={media}
         drilldown={ratingsDrawerLink}
         isLoading={$isLoading}
+        trailing={awardsBadge}
       />
 
       <RenderFor audience="authenticated">

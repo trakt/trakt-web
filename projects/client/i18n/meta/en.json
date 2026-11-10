@@ -15458,6 +15458,178 @@
     "button_label_show_fewer_social_links": {
       "default": "Show fewer links",
       "description": "Aria-label for the small button on a person page that hides the extra social and reference links again."
+    },
+    "preview_feature_title_awards": {
+      "default": "Awards",
+      "description": "Product feature name for the preview feature that shows award wins and nominations on movie, show and person pages."
+    },
+    "preview_feature_description_awards": {
+      "default": "See Oscar, Golden Globe, Emmy and festival wins and nominations on movie, show and person pages.",
+      "description": "Description of the awards preview feature."
+    },
+    "text_award_name_oscars_one": {
+      "default": "Oscar",
+      "description": "Short singular name of an award from the Academy Awards, used in labels like \"Oscar winner\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_oscars_other": {
+      "default": "Oscars",
+      "description": "Short plural name of awards from the Academy Awards, used in labels like \"7 Oscars\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_golden_globes_one": {
+      "default": "Golden Globe",
+      "description": "Short singular name of an award from the Golden Globe Awards, used in labels like \"Oscar winner\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_golden_globes_other": {
+      "default": "Golden Globes",
+      "description": "Short plural name of awards from the Golden Globe Awards, used in labels like \"7 Oscars\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_emmys_one": {
+      "default": "Emmy",
+      "description": "Short singular name of an award from the Primetime Emmy Awards, used in labels like \"Oscar winner\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_emmys_other": {
+      "default": "Emmys",
+      "description": "Short plural name of awards from the Primetime Emmy Awards, used in labels like \"7 Oscars\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_emmys_creative_arts_one": {
+      "default": "Creative Arts Emmy",
+      "description": "Short singular name of an award from the Creative Arts Emmy Awards, used in labels like \"Oscar winner\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_emmys_creative_arts_other": {
+      "default": "Creative Arts Emmys",
+      "description": "Short plural name of awards from the Creative Arts Emmy Awards, used in labels like \"7 Oscars\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_cannes_one": {
+      "default": "Cannes",
+      "description": "Short singular name of an award from the Cannes film festival, used in labels like \"Oscar winner\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_cannes_other": {
+      "default": "Cannes",
+      "description": "Short plural name of awards from the Cannes film festival, used in labels like \"7 Oscars\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_venice_one": {
+      "default": "Venice",
+      "description": "Short singular name of an award from the Venice film festival, used in labels like \"Oscar winner\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_venice_other": {
+      "default": "Venice",
+      "description": "Short plural name of awards from the Venice film festival, used in labels like \"7 Oscars\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_berlin_one": {
+      "default": "Berlinale",
+      "description": "Short singular name of an award from the Berlin film festival, used in labels like \"Oscar winner\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_berlin_other": {
+      "default": "Berlinale",
+      "description": "Short plural name of awards from the Berlin film festival, used in labels like \"7 Oscars\". Keep it short. Proper name: keep it exactly as written in English and never translate it (e.g. keep \"Golden Globe\", not a literal translation like \"Gouden Bol\"). Only inflect it if the grammar of the count requires it."
+    },
+    "text_award_name_other_one": {
+      "default": "Award",
+      "description": "Short singular name of an award from any other award ceremony, used in labels like \"Oscar winner\". Keep it short."
+    },
+    "text_award_name_other_other": {
+      "default": "Awards",
+      "description": "Short plural name of awards from any other award ceremony, used in labels like \"7 Oscars\". Keep it short."
+    },
+    "text_award_prize_cannes": {
+      "default": "Palme d'Or",
+      "description": "Name of the top prize at the Cannes film festival, shown when a title or person won it. Proper name: keep it exactly as written and never translate it."
+    },
+    "text_award_prize_venice": {
+      "default": "Golden Lion",
+      "description": "Name of the top prize at the Venice film festival, shown when a title or person won it. Proper name: keep it exactly as written and never translate it."
+    },
+    "text_award_prize_berlin": {
+      "default": "Golden Bear",
+      "description": "Name of the top prize at the Berlin film festival, shown when a title or person won it. Proper name: keep it exactly as written and never translate it."
+    },
+    "text_award_winner": {
+      "default": "{award} winner",
+      "description": "Badge label for a single award win, e.g. \"Oscar winner\".",
+      "variables": {
+        "award": {
+          "type": "string",
+          "description": "Short singular award name, e.g. Oscar.",
+          "required": true
+        }
+      }
+    },
+    "text_award_nominee": {
+      "default": "{award} nominee",
+      "description": "Badge label for a single award nomination, e.g. \"Oscar nominee\".",
+      "variables": {
+        "award": {
+          "type": "string",
+          "description": "Short singular award name, e.g. Oscar.",
+          "required": true
+        }
+      }
+    },
+    "text_award_nominations": {
+      "default": "{award} nominations",
+      "description": "Badge label shown after a bold nomination count, e.g. \"13\" + \"Oscar nominations\".",
+      "variables": {
+        "award": {
+          "type": "string",
+          "description": "Short singular award name, e.g. Oscar.",
+          "required": true
+        }
+      }
+    },
+    "text_award_wins_one": {
+      "default": "{count} win",
+      "description": "Count of award wins, singular.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Number of wins (1).",
+          "required": true
+        }
+      }
+    },
+    "text_award_wins_other": {
+      "default": "{count} wins",
+      "description": "Count of award wins, plural.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Number of wins.",
+          "required": true
+        }
+      }
+    },
+    "text_award_nomination_count_one": {
+      "default": "{count} nomination",
+      "description": "Count of award nominations, singular.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Number of nominations (1).",
+          "required": true
+        }
+      }
+    },
+    "text_award_nomination_count_other": {
+      "default": "{count} nominations",
+      "description": "Count of award nominations, plural.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Number of nominations.",
+          "required": true
+        }
+      }
+    },
+    "aria_label_awards_badge": {
+      "default": "{label}, see all awards",
+      "description": "Accessible label for the awards badge, which opens the list of all awards.",
+      "variables": {
+        "label": {
+          "type": "string",
+          "description": "Visible badge text, e.g. \"7 Oscars\".",
+          "required": true
+        }
+      }
     }
   }
 }

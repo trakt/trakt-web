@@ -22,6 +22,7 @@
   import RottenIcon from "../icons/RottenIcon.svelte";
   import TMDBIcon from "../icons/TMDBIcon.svelte";
   import WatchersIcon from "../icons/WatchersIcon.svelte";
+  import type { Snippet } from "svelte";
   import type { RatingIntl } from "./RatingIntl";
   import { RatingIntlProvider } from "./RatingIntlProvider";
   import RatingItem from "./RatingItem.svelte";
@@ -41,6 +42,7 @@
     onDrilldown?: () => void;
     variant?: "summary" | "breakdown";
     isLoading?: boolean;
+    trailing?: Snippet;
   };
 
   const {
@@ -51,6 +53,7 @@
     onDrilldown,
     variant = "summary",
     isLoading = false,
+    trailing,
   }: RatingListProps = $props();
 
   const { trakt, imdb, tmdb, rotten, mal, letterboxd } = $derived(
@@ -194,6 +197,8 @@
   {:else}
     {@render sources()}
   {/if}
+
+  {@render trailing?.()}
 </div>
 
 <style lang="scss">

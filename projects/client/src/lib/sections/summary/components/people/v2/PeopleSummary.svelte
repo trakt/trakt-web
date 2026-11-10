@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import PersonAwardsStat from "$lib/sections/summary/components/awards/PersonAwardsStat.svelte";
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
@@ -111,6 +114,11 @@
       deathDate={person.deathDate}
       height={person.height}
     />
+    <RenderForFeature flag={FeatureFlag.Awards} audience="director">
+      {#snippet enabled()}
+        <PersonAwardsStat slug={person.slug} />
+      {/snippet}
+    </RenderForFeature>
   {/snippet}
 
   <SummaryMarkdownOverview

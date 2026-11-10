@@ -83,6 +83,8 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.Rewatching;
     case SummaryDrawers.SeasonRecap:
       return SummaryDrawers.SeasonRecap;
+    case SummaryDrawers.Awards:
+      return SummaryDrawers.Awards;
     default:
       return null;
   }

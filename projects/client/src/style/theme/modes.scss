@@ -493,6 +493,21 @@
   --color-vip-thread-glint: var(--purple-900);
   --color-vip-thread-glint-faint: var(--purple-700);
   --color-vip-thread-label-hover: var(--shade-950);
+  --color-award-gold: var(--yellow-600);
+  --color-award-gold-text: var(--yellow-800);
+  --color-award-gold-soft: color-mix(in srgb, var(--yellow-400) 22%, transparent);
+  --color-award-nominee: var(--shade-500);
+  --color-gold-thread-base: var(--yellow-700);
+  --color-gold-thread-mid: var(--yellow-400);
+  --color-gold-thread-glint: var(--shade-10);
+  --color-gold-thread-glint-faint: color-mix(
+    in srgb,
+    var(--shade-10) 60%,
+    transparent
+  );
+  --background-award-chip-live: var(--background-today-entry);
+  --shadow-award-chip-live: var(--shadow-today-entry);
+  --color-award-chip-hover: color-mix(in srgb, var(--shade-920) 8%, transparent);
   --color-vip-border-accent: var(--purple-600);
   --color-vip-plan-surface: var(--shade-10);
   --shadow-vip-plan: 0 var(--ni-10) var(--ni-30)
@@ -1200,6 +1215,25 @@
     transparent
   );
   --color-vip-thread-label-hover: var(--shade-10);
+  --color-award-gold: var(--yellow-400);
+  --color-award-gold-text: var(--yellow-300);
+  --color-award-gold-soft: color-mix(in srgb, var(--yellow-400) 14%, transparent);
+  --color-award-nominee: var(--shade-300);
+  --color-gold-thread-base: var(--yellow-600);
+  --color-gold-thread-mid: var(--yellow-300);
+  --color-gold-thread-glint: color-mix(
+    in srgb,
+    var(--shade-10) 85%,
+    transparent
+  );
+  --color-gold-thread-glint-faint: color-mix(
+    in srgb,
+    var(--shade-10) 45%,
+    transparent
+  );
+  --background-award-chip-live: var(--background-today-entry);
+  --shadow-award-chip-live: var(--shadow-today-entry);
+  --color-award-chip-hover: color-mix(in srgb, var(--shade-10) 10%, transparent);
   --color-vip-border-accent: var(--purple-500);
   --color-vip-plan-surface: var(--shade-920);
   --shadow-vip-plan: 0 var(--ni-10) var(--ni-30)

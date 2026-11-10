@@ -22,7 +22,7 @@
     HTMLAnchorProps &
     HTMLElementProps & {
       color?: "default" | "classic" | "inherit";
-      underline?: "always" | "hover";
+      underline?: "always" | "hover" | "none";
       focusable?: boolean;
       navigationType?: DpadNavigationType;
       activeMatch?: "exact" | "nested";
@@ -81,6 +81,10 @@
     &:focus-visible {
       outline: none;
       position: relative;
+    }
+
+    &[data-underline="none"] {
+      text-decoration: none;
     }
 
     &[data-underline="hover"] {
