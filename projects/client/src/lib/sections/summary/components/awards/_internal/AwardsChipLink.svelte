@@ -4,6 +4,7 @@
   import * as m from "$lib/features/i18n/messages";
   import Link from "$lib/components/link/Link.svelte";
   import { SummaryDrawers } from "$lib/sections/summary/SummaryDrawers.ts";
+  import { SOURCE_PARAM } from "$lib/sections/summary/constants.ts";
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import type { AwardsChipLinkProps } from "./AwardsChipLinkProps.ts";
 
@@ -17,7 +18,9 @@
   }: AwardsChipLinkProps = $props();
 
   const { buildDrawerLink } = summaryDrawerNavigation();
-  const drawerLink = $derived(buildDrawerLink(SummaryDrawers.Awards));
+  const drawerLink = $derived(
+    buildDrawerLink(SummaryDrawers.Awards, { [SOURCE_PARAM]: "chip" }),
+  );
   const label = $derived(
     m.aria_label_awards_badge({
       label: count == null ? text : `${count} ${text}`,

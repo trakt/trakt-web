@@ -13,6 +13,7 @@ import type { LogoSize } from '$lib/sections/branding/models/LogoSize.ts';
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { AwardsOpenSource } from '$lib/sections/summary/components/awards/models/AwardsOpenSource.ts';
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { NoteType } from '$lib/requests/models/NoteType.ts';
 import type { RecommendedMode } from '$lib/requests/models/RecommendedMode.ts';
@@ -243,6 +244,10 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.CheckIn]: CheckInType;
   [AnalyticsEvent.Extras]: ExtrasType;
   [AnalyticsEvent.Trailer]: { slug: string };
+  [AnalyticsEvent.Awards]: {
+    source: AwardsOpenSource;
+    type: 'movie' | 'show' | 'person';
+  };
   [AnalyticsEvent.Soundtrack]: SoundtrackType;
   [AnalyticsEvent.StreamOn]: StreamOnType;
   [AnalyticsEvent.HideRecommendation]: { type: MediaType };
