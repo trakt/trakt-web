@@ -19,6 +19,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SmartList } from "$lib/requests/queries/users/smartListQuery";
   import type { SmartListFilters } from "$lib/requests/models/SmartListFilters.ts";
+  import { awardCatalogQuery } from "$lib/requests/queries/awards/awardCatalogQuery.ts";
+  import { useQuery } from "$lib/features/query/useQuery.ts";
   import type { UserLimits } from "$lib/requests/models/UserLimits";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { iffy } from "$lib/utils/function/iffy";
@@ -140,8 +142,14 @@
       }
       : undefined;
 
+  const awardCatalog = useQuery(awardCatalogQuery());
+
   const typedExtras = $derived(
-    toSmartListExtrasForType({ filters: extraFilters, type }),
+    toSmartListExtrasForType({
+      filters: extraFilters,
+      type,
+      catalog: $awardCatalog.data ?? [],
+    }),
   );
   const hasExtraFilters = $derived(
     Object.values(typedExtras).some((value) =>
