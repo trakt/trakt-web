@@ -13,6 +13,9 @@
     it carries no words; the tooltip names the control and the link label
     names it for screen readers. One logo, not a fan: overlapped marks showed
     as clipped slivers, and the full view already lists the rest.
+
+    With nothing to stream it keeps its place and says what it is, quietly:
+    the full view still lets you look up other countries.
   */
   type DrawerLink = {
     href: string;
@@ -25,13 +28,17 @@
     country,
     link,
   }: {
-    service: StreamingServiceOption;
+    service: StreamingServiceOption | null;
     country: string;
     link: DrawerLink;
   } = $props();
+
+  const tooltip = $derived(
+    service ? m.list_title_where_to_watch() : m.text_not_available_to_stream(),
+  );
 </script>
 
-<Tooltip content={m.list_title_where_to_watch()} variant="compact">
+<Tooltip content={tooltip} variant="compact">
   <Link
     href={link.href}
     noscroll={link.noscroll}
@@ -40,13 +47,17 @@
     color="inherit"
   >
     <span class="trakt-summary-header-watch-chip">
-      <span class="watch-chip-mark">
-        <StreamingServiceLogo
-          source={service.source}
-          {country}
-          i18n={StreamingServiceLogoIntlProvider}
-        />
-      </span>
+      {#if service}
+        <span class="watch-chip-mark">
+          <StreamingServiceLogo
+            source={service.source}
+            {country}
+            i18n={StreamingServiceLogoIntlProvider}
+          />
+        </span>
+      {:else}
+        <span class="watch-chip-label">{m.list_title_where_to_watch()}</span>
+      {/if}
 
       <span class="watch-chip-caret" aria-hidden="true">
         <CaretRightIcon />
@@ -85,6 +96,10 @@
 
         .watch-chip-caret {
           opacity: 0.9;
+        }
+
+        .watch-chip-label {
+          color: var(--color-text-primary);
         }
       }
     }
@@ -140,6 +155,17 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+  }
+
+  /* Two classes deep: Link pins the colour of spans inside it at (0,2,1). */
+  .trakt-summary-header-watch-chip .watch-chip-label {
+    font-size: var(--font-size-text-small);
+    font-weight: 600;
+    line-height: var(--ni-24);
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+
+    transition: color var(--transition-increment) ease-out;
   }
 
   .watch-chip-caret {

@@ -245,15 +245,12 @@
   /*
     Where to watch rides in the action tray wherever the tray has room for
     it: signed in (no tray otherwise), the stock row, desktop. On tablets the
-    longer tray outgrows the header. Narrower screens and titles with nowhere
-    to stream keep the column, which has the room to say so.
+    longer tray outgrows the header. It keeps its place whether or not
+    anything streams - the chip says so itself.
   */
   const isDesktopViewport = useMedia(WellKnownMediaQuery.desktop);
   const isWatchInTray = $derived(
-    $isAuthorized &&
-      actionsVariant !== "fused" &&
-      leadProvider !== null &&
-      $isDesktopViewport,
+    $isAuthorized && actionsVariant !== "fused" && $isDesktopViewport,
   );
 
   const { buildDrawerLink } = summaryDrawerNavigation();
@@ -570,7 +567,7 @@
               look="chip"
             />
 
-            {#if isWatchInTray && leadProvider}
+            {#if isWatchInTray}
               <span class="action-row-divider" aria-hidden="true"></span>
 
               <SummaryHeaderWatchChip
@@ -748,7 +745,7 @@
     {#if stripColumns.length > 0}
     <div class="masthead-strip">
       <RenderFor audience="all" device={["desktop"]}>
-        <div class="strip-page">
+        <div class="strip-page" data-columns={isWatchInTray ? 4 : 5}>
           {#each stripColumns as entry (entry.key)}
             {@render entry.column()}
           {/each}
@@ -1308,6 +1305,19 @@
       */
       &:only-child {
         max-width: min(72ch, 100%);
+      }
+    }
+
+    /*
+      With where to watch in the action tray the row holds four at most, so
+      the four share it evenly: every column gains about 30%, trivia stops
+      needing extra weight to stay readable, and long translated titles fit.
+    */
+    &[data-columns="4"] {
+      --strip-page-columns: 4;
+
+      > .strip-column-stretch {
+        flex-grow: 1;
       }
     }
   }
