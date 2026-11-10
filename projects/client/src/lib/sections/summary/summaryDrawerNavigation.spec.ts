@@ -1,5 +1,6 @@
 import { goto } from '$app/navigation';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { SummaryDrawers } from './SummaryDrawers.ts';
 import { summaryDrawerNavigation } from './summaryDrawerNavigation.ts';
 
 describe('summaryDrawerNavigation', () => {
@@ -152,5 +153,109 @@ describe('summaryDrawerNavigation', () => {
     const target = new URL(vi.mocked(goto).mock.calls.at(0)?.[0] ?? '');
     expect(target.searchParams.get('comment_id')).toBeNull();
     expect(target.searchParams.get('show_replies')).toBeNull();
+  });
+
+  describe('drawer detection', () => {
+    it.each(Object.values(SummaryDrawers))(
+      'should recognise the %s drawer from the view param',
+      (view) => {
+        const { drawer } = summaryDrawerNavigation(
+          new URLSearchParams({ view }),
+        );
+
+        expect(drawer).toBe(view);
+      },
+    );
+
+    it('should ignore unknown views and missing params', () => {
+      expect(
+        summaryDrawerNavigation(new URLSearchParams({ view: 'nope' })).drawer,
+      ).toBeNull();
+      expect(summaryDrawerNavigation().drawer).toBeNull();
+    });
+  });
+
+  describe('source params', () => {
+    it('should parse a numeric comment id', () => {
+      const { sourceCommentId } = summaryDrawerNavigation(
+        new URLSearchParams({ comment_id: '42' }),
+      );
+
+      expect(sourceCommentId).toBe(42);
+    });
+
+    it('should ignore a non-numeric comment id', () => {
+      const { sourceCommentId } = summaryDrawerNavigation(
+        new URLSearchParams({ comment_id: 'abc' }),
+      );
+
+      expect(sourceCommentId).toBeUndefined();
+    });
+
+    it('should leave the source undefined without params', () => {
+      const result = summaryDrawerNavigation();
+
+      expect(result.sourceCommentId).toBeUndefined();
+      expect(result.sourceEpisode).toBeUndefined();
+      expect(result.showSourceReplies).toBe(false);
+    });
+
+    it('should parse the source episode and ignore a malformed one', () => {
+      expect(
+        summaryDrawerNavigation(new URLSearchParams({ episode: '3' }))
+          .sourceEpisode,
+      ).toBe(3);
+      expect(
+        summaryDrawerNavigation(new URLSearchParams({ episode: 'x' }))
+          .sourceEpisode,
+      ).toBeUndefined();
+    });
+  });
+
+  describe('links', () => {
+    const paramsOf = (href: string) => new URL(href).searchParams;
+
+    beforeEach(() => {
+      window.history.replaceState({}, '', '/shows/silo');
+    });
+
+    it('should link to the episode drawer with its season and episode', () => {
+      const { buildEpisodeDrawerLink } = summaryDrawerNavigation();
+
+      const params = paramsOf(
+        buildEpisodeDrawerLink({ season: 2, episode: 5 }).href,
+      );
+
+      expect(params.get('view')).toBe('episode');
+      expect(params.get('season')).toBe('2');
+      expect(params.get('episode')).toBe('5');
+    });
+
+    it('should link to the seasons drawer on a given episode', () => {
+      const { buildSeasonsDrawerLink } = summaryDrawerNavigation();
+
+      const params = paramsOf(buildSeasonsDrawerLink(4).href);
+
+      expect(params.get('view')).toBe('seasons');
+      expect(params.get('episode')).toBe('4');
+    });
+
+    it('should link to the seasons drawer without an episode', () => {
+      const { buildSeasonsDrawerLink } = summaryDrawerNavigation();
+
+      const params = paramsOf(buildSeasonsDrawerLink().href);
+
+      expect(params.get('view')).toBe('seasons');
+      expect(params.has('episode')).toBe(false);
+    });
+
+    it('should link to a review drawer for a comment', () => {
+      const { buildReviewDrawerLink } = summaryDrawerNavigation();
+
+      const params = paramsOf(buildReviewDrawerLink(9).href);
+
+      expect(params.get('view')).toBe('review');
+      expect(params.get('comment_id')).toBe('9');
+    });
   });
 });
