@@ -14958,6 +14958,14 @@
       "default": "Progress",
       "description": "Section label for the viewer's own progress through a show - last seen episode, standing and time left."
     },
+    "header_strip_social": {
+      "default": "Social",
+      "description": "Short column title in the summary page header for what the people the user follows did with a movie or show. Shown in capitals in a narrow column: keep it to one word, 14 characters at most."
+    },
+    "header_strip_trivia": {
+      "default": "Trivia",
+      "description": "Short column title in the summary page header for fun facts about a movie or show. Shown in capitals in a narrow column: keep it to one word, 14 characters at most."
+    },
     "header_year": {
       "default": "Year",
       "description": "Field label for the release year in the summary header facts strip."

@@ -650,11 +650,16 @@
       {/if}
     {/snippet}
 
+    <!--
+      Social and trivia carry strip-only titles: the page's full section
+      headings ("Social Activity") ran past a column in several languages.
+      The short keys tell translators the room they have.
+    -->
     {#snippet socialColumn()}
       <div class="strip-column strip-column-borrowed">
         <div class="column-head">
           <SummaryHeaderSectionHeader
-            title={m.list_title_social_activity()}
+            title={m.header_strip_social()}
             drilldown={{
               ...socialLink,
               label: m.button_label_view_all_social_activity(),
@@ -693,7 +698,7 @@
       <div class="strip-column strip-column-borrowed strip-column-stretch">
         <div class="column-head">
           <SummaryHeaderSectionHeader
-            title={m.list_title_trivia()}
+            title={m.header_strip_trivia()}
             drilldown={{
               ...triviaLink,
               label: m.button_label_view_trivia(),
