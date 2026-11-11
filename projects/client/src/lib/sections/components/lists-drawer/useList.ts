@@ -1,3 +1,5 @@
+import { toListLimitMessage } from '$lib/features/action-toast/toListLimitMessage.ts';
+import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
@@ -14,6 +16,7 @@ type UseListProps = { list: UserList } & ListTarget;
 
 export function useList({ list, type, media }: UseListProps) {
   const { track } = useTrack(AnalyticsEvent.List);
+  const { notify } = useActionToast();
   const body = toBulkPayload(type, [media.id]);
 
   const target = {
@@ -42,7 +45,13 @@ export function useList({ list, type, media }: UseListProps) {
   const addToList = async () => {
     track({ action: 'add' });
 
-    return await addition.mutate();
+    const result = await addition.mutate();
+    const limitMessage = toListLimitMessage(result);
+    if (limitMessage != null) {
+      notify({ message: limitMessage, variant: 'error' });
+    }
+
+    return result.status === 'added';
   };
 
   const removeFromList = async () => {
