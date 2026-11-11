@@ -294,6 +294,102 @@ describe('TvTimeLiberatorParser', () => {
       });
     });
 
+    it('reads watchlist.csv when the zip has no activity_history.csv', async () => {
+      const encoder = new TextEncoder();
+      const csv = [
+        'imdb_id,tvdb_id,type,title,season,episode,is_special,is_watched,watched_at,status,is_watchlisted,rating',
+        '-1,500,episode,Sample Show,1,2,false,true,2023-01-01T00:00:00Z,,false,',
+        '-1,600,movie,Sample Movie,,,false,false,,,true,',
+      ].join('\n');
+      const zipped = zipSync({
+        'watchlist.csv': encoder.encode(csv),
+        'favorites.csv': encoder.encode(csv),
+      });
+      const file = new File([zipped as BlobPart], 'tv-time-export.zip');
+
+      const result = await TvTimeLiberatorParser.parse([file]);
+
+      expect(result.map((item) => item.action)).toEqual([
+        'history',
+        'watchlist',
+      ]);
+    });
+
+    it('sets the show id from shows.json on episode items', async () => {
+      const encoder = new TextEncoder();
+      const csv = [
+        'imdb_id,tvdb_id,type,title,season,episode,is_special,is_watched,watched_at,status,is_watchlisted,rating',
+        '-1,500,episode,Sample Show,1,2,false,true,2023-01-01T00:00:00Z,,false,',
+      ].join('\n');
+      const shows = [
+        {
+          id: { tvdb: 900, imdb: '-1' },
+          seasons: [
+            { number: 1, episodes: [{ id: { tvdb: 500 }, number: 2 }] },
+          ],
+        },
+      ];
+      const zipped = zipSync({
+        'activity_history.csv': encoder.encode(csv),
+        'shows.json': encoder.encode(JSON.stringify(shows)),
+      });
+      const file = new File([zipped as BlobPart], 'tv-time-export.zip');
+
+      const result = await TvTimeLiberatorParser.parse([file]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        type: 'episode',
+        ids: { tvdb: 500 },
+        showTvdb: 900,
+        season: 1,
+        episode: 2,
+      });
+    });
+
+    it('sets the show id from episode_watches.json series_id', async () => {
+      const encoder = new TextEncoder();
+      const csv = [
+        'imdb_id,tvdb_id,type,title,watched_at,is_watched,status',
+        ',500,episode,,2023-01-01T00:00:00Z,true,',
+        ',700,movie,Sample Movie,2023-01-02T00:00:00Z,true,',
+      ].join('\n');
+      const watches = [{ episode_id: 500, series_id: 900 }];
+      const zipped = zipSync({
+        'activity_history.csv': encoder.encode(csv),
+        'episode_watches.json': encoder.encode(JSON.stringify(watches)),
+        'shows.json': encoder.encode(JSON.stringify([{ meta: { id: 900 } }])),
+      });
+      const file = new File([zipped as BlobPart], 'tv-time-export.zip');
+
+      const result = await TvTimeLiberatorParser.parse([file]);
+
+      expect(result[0]).toMatchObject({
+        type: 'episode',
+        ids: { tvdb: 500 },
+        showTvdb: 900,
+      });
+      expect(result[1]?.showTvdb).toBeUndefined();
+    });
+
+    it('keeps parsing when the json sidecars are malformed', async () => {
+      const encoder = new TextEncoder();
+      const csv = [
+        'imdb_id,tvdb_id,type,title,watched_at,is_watched,status',
+        ',500,episode,,2023-01-01T00:00:00Z,true,',
+      ].join('\n');
+      const zipped = zipSync({
+        'activity_history.csv': encoder.encode(csv),
+        'shows.json': encoder.encode('not json'),
+      });
+      const file = new File([zipped as BlobPart], 'tv-time-export.zip');
+
+      const result = await TvTimeLiberatorParser.parse([file]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]?.showTvdb).toBeUndefined();
+    });
+
     it('raises a helpful error for unreadable zips', async () => {
       const file = new File(
         [new Uint8Array([1, 2, 3, 4]) as BlobPart],
