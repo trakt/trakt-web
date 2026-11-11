@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { toReportRecord } from './toReportRecord.ts';
 
-const reporter = { userId: '1', username: 'tester' };
+const reporter = { userId: '1', username: 'tester', isVip: true };
 const createdAt = '2026-11-11T00:00:00.000Z';
 
 describe('util: toReportRecord', () => {
@@ -60,6 +60,7 @@ describe('util: toReportRecord', () => {
         kind: 'search',
         query: 'dune',
         intent: 'dune',
+        link: 'https://www.imdb.com/title/tt0087182/',
         expected: 'Dune (1984)',
         mode: 'movie',
         results: [],

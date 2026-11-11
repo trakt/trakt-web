@@ -20,6 +20,7 @@ describe('util: toIssueReportTracking', () => {
         kind: 'search',
         query: 'private query',
         intent: 'private intent',
+        link: 'https://www.imdb.com/title/tt0087182/',
         expected: 'free text',
         mode: 'people',
         results: [],

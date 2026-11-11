@@ -11,6 +11,7 @@
   import SearchResultsGrid from "$lib/features/search/SearchResultsGrid.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import SearchReport from "$lib/sections/search/SearchReport.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
@@ -19,8 +20,15 @@
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
-  const { search, clear, results, mode, postRecentSearch, coverSrc } =
-    useSearch();
+  const {
+    search,
+    clear,
+    results,
+    mode,
+    isSearching,
+    postRecentSearch,
+    coverSrc,
+  } = useSearch();
 
   $effect(() => {
     if (!query) {
@@ -96,6 +104,11 @@
         onclick={onResultClick}
         leadingItem={hasGameCard ? gameCard : undefined}
       />
+      {#if query && !$isSearching}
+        <RenderFor audience="vip">
+          <SearchReport {query} mode={$mode} results={$results} />
+        </RenderFor>
+      {/if}
     {:else if !query}
       <SearchPlaceHolder />
     {/if}

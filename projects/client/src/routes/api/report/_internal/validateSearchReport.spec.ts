@@ -4,6 +4,7 @@ import { validateSearchReport } from './validateSearchReport.ts';
 const baseInput = {
   query: 'dune',
   intent: 'dune 1984',
+  link: 'https://www.imdb.com/title/tt0087182/',
   expected: 'The 1984 David Lynch film',
   results: ['movie: Dune (2021)'],
 };
@@ -31,6 +32,19 @@ describe('util: validateSearchReport', () => {
       ok: false,
       reason: 'intent-required',
     });
+  });
+
+  it('should reject a missing link', () => {
+    expect(validateSearchReport({ ...baseInput, link: '' })).toEqual({
+      ok: false,
+      reason: 'link-required',
+    });
+  });
+
+  it('should reject a link outside the reputable sites', () => {
+    expect(
+      validateSearchReport({ ...baseInput, link: 'https://example.com/dune' }),
+    ).toEqual({ ok: false, reason: 'link-not-reputable' });
   });
 
   it('should reject a blank expectation', () => {

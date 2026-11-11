@@ -10,6 +10,7 @@ export type SearchIssueReport = {
   kind: 'search';
   query: string;
   intent: string;
+  link: string;
   expected: string;
   mode: string;
   results: ReadonlyArray<string>;

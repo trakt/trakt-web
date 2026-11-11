@@ -4,9 +4,11 @@ import { buildSearchIssue } from './buildSearchIssue.ts';
 const baseInput = {
   reportId: 'abc-123',
   userId: '42',
+  isVip: true,
   username: 'tester',
   query: 'dune',
   intent: 'dune 1984',
+  link: 'https://www.imdb.com/title/tt0087182/',
   expected: 'The 1984 David Lynch film',
   mode: 'movie',
   results: ['movie: Dune (2021) [dune-2021]', 'movie: Dune: Part Two (2024)'],
@@ -23,6 +25,7 @@ describe('util: buildSearchIssue', () => {
 
     expect(body).toContain('**Search text:** `dune`');
     expect(body).toContain('**Looking for:** dune 1984');
+    expect(body).toContain('**Link:** <https://www.imdb.com/title/tt0087182/>');
     expect(body).toContain('**Mode:** movie');
     expect(body).toContain('The 1984 David Lynch film');
   });
