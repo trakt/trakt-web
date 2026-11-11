@@ -9,7 +9,12 @@ export type ImportSource =
 
 export const DEFAULT_IMPORT_SOURCE: ImportSource = 'tvtime';
 
-export type ImportAction = 'history' | 'watchlist' | 'ratings' | 'list';
+export type ImportAction =
+  | 'history'
+  | 'watchlist'
+  | 'ratings'
+  | 'list'
+  | 'favorites';
 
 export type ImportActionSelection = Record<ImportAction, boolean>;
 
@@ -69,6 +74,7 @@ export interface ImportCounts {
   watchlist: number;
   ratings: number;
   list: number;
+  favorites: number;
 }
 
 export interface MovieMatchCandidate {

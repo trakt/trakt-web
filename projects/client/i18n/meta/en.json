@@ -6172,6 +6172,15 @@
         }
       }
     },
+    "import_summary_favorites": {
+      "default": "{count} favorites",
+      "description": "Summary line showing the number of favorite movies and shows found in the import file.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "import_match_toggle_label": {
       "default": "Match episodes by season and episode number",
       "description": "Label for the import toggle that switches episode matching from the episode's TVDB id (default) to show + season/episode number."

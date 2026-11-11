@@ -50,6 +50,7 @@
       watchlist: true,
       ratings: true,
       list: true,
+      favorites: true,
     };
   }
 
@@ -93,6 +94,7 @@
     watchlist: state.parsedItems.filter((i) => i.action === "watchlist").length,
     ratings: state.parsedItems.filter((i) => i.action === "ratings").length,
     list: state.parsedItems.filter((i) => i.action === "list").length,
+    favorites: state.parsedItems.filter((i) => i.action === "favorites").length,
   });
   const selectedItems = $derived(
     filterImportItemsByActionSelection({
@@ -105,6 +107,7 @@
     watchlist: state.selectedActions.watchlist ? counts.watchlist : 0,
     ratings: state.selectedActions.ratings ? counts.ratings : 0,
     list: state.selectedActions.list ? counts.list : 0,
+    favorites: state.selectedActions.favorites ? counts.favorites : 0,
   });
   const selectedTotalCount = $derived(selectedItems.length);
   const hasEpisodes = $derived(
@@ -158,6 +161,8 @@
       await invalidate(InvalidateAction.MarkAsWatched("movie"));
       await invalidate(InvalidateAction.Rated("show"));
       await invalidate(InvalidateAction.Rated("movie"));
+      await invalidate(InvalidateAction.Favorited("show"));
+      await invalidate(InvalidateAction.Favorited("movie"));
     }
   }
 
@@ -215,6 +220,7 @@
         historyCount: countsToImport.history,
         watchlistCount: countsToImport.watchlist,
         ratingsCount: countsToImport.ratings,
+        favoritesCount: countsToImport.favorites,
         successCount,
         failedCount: errorCount,
         unresolvedCount: unresolved.length,

@@ -30,6 +30,7 @@ describe('filterImportItemsByActionSelection', () => {
         watchlist: true,
         ratings: true,
         list: true,
+        favorites: true,
       },
     });
 
@@ -44,6 +45,7 @@ describe('filterImportItemsByActionSelection', () => {
         watchlist: false,
         ratings: false,
         list: false,
+        favorites: false,
       },
     });
 

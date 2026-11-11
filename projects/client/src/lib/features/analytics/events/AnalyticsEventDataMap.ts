@@ -130,6 +130,7 @@ type ImportCompletedType = {
   historyCount: number;
   watchlistCount: number;
   ratingsCount: number;
+  favoritesCount: number;
   successCount: number;
   failedCount: number;
   unresolvedCount: number;
