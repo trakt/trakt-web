@@ -10,8 +10,10 @@ import { buildRatingsPayload } from './engine/buildRatingsPayload.ts';
 import { buildWatchlistPayload } from './engine/buildWatchlistPayload.ts';
 import { findNotFoundItems } from './engine/findNotFoundItems.ts';
 import { matchMovies } from './engine/matchMovies.ts';
+import { matchShows } from './engine/matchShows.ts';
 import { MOVIE_IDS, pickIds } from './engine/pickIds.ts';
 import { resolveMovieIds } from './engine/resolveMovieIds.ts';
+import { resolveShowIds } from './engine/resolveShowIds.ts';
 import { toPositionalRetryItems } from './engine/toPositionalRetryItems.ts';
 import {
   DEFAULT_EPISODE_MATCH_MODE,
@@ -168,20 +170,29 @@ export async function syncToTrakt(
   onStart?.();
 
   try {
-    const { items: resolvedItems, ambiguous } = await resolveMovieIds({
+    const { items: movieResolvedItems, ambiguous } = await resolveMovieIds({
       items,
       match: matchMovies,
       onProgress: onMatchProgress,
       signal,
     });
 
+    const { items: resolvedItems, unresolved: unresolvedShows } =
+      await resolveShowIds({
+        items: movieResolvedItems,
+        match: matchShows,
+        onProgress: onMatchProgress,
+        signal,
+      });
+
     const ambiguousItems = new Set(ambiguous.map((entry) => entry.item));
-    const unresolved = resolvedItems.filter(
+    const unresolvedMovies = resolvedItems.filter(
       (item) =>
         item.type === 'movie' &&
         !pickIds(item.ids, MOVIE_IDS) &&
         !ambiguousItems.has(item),
     );
+    const unresolved = [...unresolvedMovies, ...unresolvedShows];
 
     const historyItems = resolvedItems.filter((i) => i.action === 'history');
     const watchlistItems = resolvedItems.filter(

@@ -4,6 +4,7 @@ import { isValidItem } from './utils/isValidItem.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toImportIds } from './utils/toImportIds.ts';
 import { toImportISOString } from './utils/toImportISOString.ts';
+import { toInt } from './utils/toInt.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
 const TV_TIME_EXTRACTOR_CSV = 'tv-time-export.csv';
@@ -15,6 +16,8 @@ type TvTimeExtractorRow = {
   imdb_id?: string;
   title?: string;
   year?: string;
+  season?: string;
+  episode?: string;
   watched_at?: string;
 };
 
@@ -23,19 +26,44 @@ function toYear(value?: string): number | undefined {
   return isNaN(year) ? undefined : year;
 }
 
-function parseExtractorRow(row: TvTimeExtractorRow): UniversalImportItem[] {
-  if (row.type !== 'watch' || row.media_type !== 'movie') return [];
+function parseMovieRow(row: TvTimeExtractorRow): UniversalImportItem {
+  return {
+    action: 'history',
+    type: 'movie',
+    ids: toImportIds({ imdb: row.imdb_id, tmdb: row.tmdb_id }),
+    title: row.title || undefined,
+    year: toYear(row.year),
+    watched_at: toImportISOString(row.watched_at),
+  };
+}
 
-  return [
-    {
-      action: 'history',
-      type: 'movie',
-      ids: toImportIds({ imdb: row.imdb_id, tmdb: row.tmdb_id }),
-      title: row.title || undefined,
-      year: toYear(row.year),
-      watched_at: toImportISOString(row.watched_at),
-    },
-  ];
+function parseEpisodeRow(row: TvTimeExtractorRow): UniversalImportItem {
+  return {
+    action: 'history',
+    type: 'episode',
+    ids: {},
+    title: row.title || undefined,
+    year: toYear(row.year),
+    season: toInt(row.season),
+    episode: toInt(row.episode),
+    watched_at: toImportISOString(row.watched_at),
+  };
+}
+
+function parseExtractorRow(row: TvTimeExtractorRow): UniversalImportItem[] {
+  if (row.type !== 'watch') return [];
+  if (row.media_type === 'movie') return [parseMovieRow(row)];
+  if (row.media_type === 'episode') return [parseEpisodeRow(row)];
+  return [];
+}
+
+function isShowTitleEpisode(item: UniversalImportItem): boolean {
+  return (
+    item.type === 'episode' &&
+    Boolean(item.title) &&
+    item.season != null &&
+    item.episode != null
+  );
 }
 
 async function readCsvTexts(file: File): Promise<string[]> {
@@ -68,6 +96,6 @@ export const TvTimeExtractorParser: FileParser = {
 
     return (rows as TvTimeExtractorRow[])
       .flatMap(parseExtractorRow)
-      .filter(isValidItem);
+      .filter((item) => isShowTitleEpisode(item) || isValidItem(item));
   },
 };

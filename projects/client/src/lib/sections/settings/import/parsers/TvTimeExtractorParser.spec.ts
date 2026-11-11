@@ -57,12 +57,44 @@ describe('TvTimeExtractorParser', () => {
       });
     });
 
-    it('should skip movies without ids or year, and id-less episodes', async () => {
+    it('should skip movies without ids or year', async () => {
       const result = await TvTimeExtractorParser.parse([
         csvFile(EXTRACTOR_CSV),
       ]);
 
-      expect(result).toHaveLength(2);
+      expect(result.filter((item) => item.type === 'movie')).toHaveLength(2);
+    });
+
+    it('should keep episodes that only carry a show title, season and episode', async () => {
+      const result = await TvTimeExtractorParser.parse([
+        csvFile(EXTRACTOR_CSV),
+      ]);
+
+      expect(result.at(2)).toEqual({
+        action: 'history',
+        type: 'episode',
+        ids: {},
+        title: "Abdeen's Palace",
+        year: undefined,
+        season: 1,
+        episode: 10,
+        watched_at: '2016-11-06T18:52:32.000Z',
+      });
+    });
+
+    it('should skip episodes without a title, season or episode', async () => {
+      const result = await TvTimeExtractorParser.parse([
+        csvFile(
+          [
+            'type,media_type,tmdb_id,imdb_id,tvdb_id,title,year,season,episode,watched_at,rating,review',
+            'watch,episode,,,,,,1,10,2016-11-06T18:52:32Z,,',
+            'watch,episode,,,,Made Up Show,,,10,2016-11-06T18:52:32Z,,',
+            'watch,episode,,,,Made Up Show,,1,,2016-11-06T18:52:32Z,,',
+          ].join('\n'),
+        ),
+      ]);
+
+      expect(result).toHaveLength(0);
     });
 
     it('should read the csv from a zip', async () => {
@@ -74,7 +106,7 @@ describe('TvTimeExtractorParser', () => {
         new File([zipped as BlobPart], 'tv-time-export.zip'),
       ]);
 
-      expect(result).toHaveLength(2);
+      expect(result).toHaveLength(3);
     });
   });
 });
