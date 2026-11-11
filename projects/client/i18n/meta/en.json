@@ -6442,7 +6442,7 @@
       "description": "Confirmation dialog body when leaving the page would stop clearing data partway."
     },
     "import_vip_limit_exceeded": {
-      "default": "Your import exceeds the free tier limit. Upgrade to VIP to import all {count} items.",
+      "default": "Your import has {count} items, more than a free account can import. This is an account limit, not a file size limit. VIP removes it.",
       "description": "Warning shown when a non-VIP user tries to import more items than the free tier allows.",
       "variables": {
         "count": {
