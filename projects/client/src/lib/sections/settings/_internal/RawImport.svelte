@@ -136,7 +136,12 @@
     state.status = "parsing";
 
     try {
-      state.parsedItems = await parser.parse(fileArray);
+      const parsedItems = await parser.parse(fileArray);
+      if (parsedItems.length === 0) {
+        throw new Error(m.import_error_nothing_to_import());
+      }
+
+      state.parsedItems = parsedItems;
       state.totalCount = state.parsedItems.length;
       state.status = "review";
     } catch (err) {
