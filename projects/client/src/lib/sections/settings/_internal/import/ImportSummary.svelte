@@ -41,10 +41,11 @@
     watchlist: selectedActions.watchlist ? counts.watchlist : 0,
     ratings: selectedActions.ratings ? counts.ratings : 0,
     list: selectedActions.list ? counts.list : 0,
+    favorites: selectedActions.favorites ? counts.favorites : 0,
   });
   const selectedTotalItems = $derived(
     selectedCounts.history + selectedCounts.watchlist +
-      selectedCounts.ratings + selectedCounts.list,
+      selectedCounts.ratings + selectedCounts.list + selectedCounts.favorites,
   );
 
   const actionRows = $derived<
@@ -62,6 +63,11 @@
     },
     { action: "ratings", count: counts.ratings, label: m.import_summary_ratings },
     { action: "list", count: counts.list, label: m.import_summary_list },
+    {
+      action: "favorites",
+      count: counts.favorites,
+      label: m.import_summary_favorites,
+    },
   ]);
 
   const isVipLimitExceeded = $derived.by(() => {

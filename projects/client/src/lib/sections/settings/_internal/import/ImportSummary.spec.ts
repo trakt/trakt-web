@@ -17,6 +17,7 @@ describe('ImportSummary', () => {
     watchlist: 3,
     ratings: 1,
     list: 1,
+    favorites: 1,
   };
 
   const allSelected = {
@@ -24,6 +25,7 @@ describe('ImportSummary', () => {
     watchlist: true,
     ratings: true,
     list: true,
+    favorites: true,
   };
 
   function baseProps(overrides: Record<string, unknown> = {}) {
@@ -75,6 +77,7 @@ describe('ImportSummary', () => {
           watchlist: false,
           ratings: false,
           list: false,
+          favorites: false,
         },
       }),
     );

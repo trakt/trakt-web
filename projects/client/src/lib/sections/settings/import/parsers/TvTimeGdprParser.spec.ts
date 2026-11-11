@@ -1012,7 +1012,7 @@ describe('TvTimeGdprParser', () => {
         expect(result).toHaveLength(0);
       });
 
-      it('should not import favorites as a list', async () => {
+      it('should import favorites as favorites, never as a list', async () => {
         const csv = toCsv(COLLECTION_HEADER, [
           { s_key: 'favorite-series', name: '', is_public: 'false', objects },
           {
@@ -1028,7 +1028,10 @@ describe('TvTimeGdprParser', () => {
           csvFile(csv, 'lists-prod-lists.csv'),
         ]);
 
-        expect(result).toHaveLength(0);
+        expect(result.map((item) => item.action)).toEqual([
+          'favorites',
+          'favorites',
+        ]);
       });
     });
   });
@@ -1074,6 +1077,100 @@ describe('TvTimeGdprParser', () => {
 
       await expect(TvTimeGdprParser.parse([file])).rejects.toThrow(
         /password protected/,
+      );
+    });
+  });
+
+  describe('favorites and movies stored by uuid', () => {
+    const LISTS_HEADER = ['s_key', 'name', 'is_public', 'objects'];
+    const MOVIE_UUID = '11111111-2222-3333-4444-555555555555';
+    const OTHER_UUID = '66666666-7777-8888-9999-000000000000';
+
+    const trackedMovie = () =>
+      toCsv(V1_HEADER, [
+        v1MovieWatch({
+          uuid: MOVIE_UUID,
+          alpha_range_key: 'watch-alpha-example-movie',
+          movie_name: 'Example Movie',
+          release_date: '2001-02-03',
+        }),
+      ]);
+
+    const listsCsv = (rows: Record<string, string>[]) =>
+      csvFile(toCsv(LISTS_HEADER, rows), 'lists-prod-lists.csv');
+
+    it('should import favorite series by TVDB id as favorites', async () => {
+      const objects =
+        '[map[created_at:1.7e+09 id:253463 type:series] map[created_at:1.7e+09 id:1435 type:series]]';
+
+      const result = await TvTimeGdprParser.parse([
+        listsCsv([{ s_key: 'favorite-series', name: '', objects }]),
+      ]);
+
+      expect(result).toEqual([
+        { action: 'favorites', type: 'show', ids: { tvdb: 253463 } },
+        { action: 'favorites', type: 'show', ids: { tvdb: 1435 } },
+      ]);
+    });
+
+    it('should resolve favorite movies by uuid through the tracking rows', async () => {
+      const objects = `[map[created_at:1.7e+09 filter:<nil> id:0 meta:<nil> sorting:<nil> type:movie uuid:${MOVIE_UUID}]]`;
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(trackedMovie(), 'tracking-prod-records.csv'),
+        listsCsv([
+          { s_key: 'favorite-movies', name: 'Favorite Movies', objects },
+        ]),
+      ]);
+
+      expect(result.filter((item) => item.action === 'favorites')).toEqual([
+        {
+          action: 'favorites',
+          type: 'movie',
+          ids: {},
+          title: 'example movie',
+          year: 2001,
+        },
+      ]);
+    });
+
+    it('should resolve custom list movies stored by uuid only', async () => {
+      const objects = `[map[created_at:1.7e+09 type:movie uuid:${MOVIE_UUID}]]`;
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(trackedMovie(), 'tracking-prod-records.csv'),
+        listsCsv([
+          { s_key: 'list-key', name: 'Weekend', is_public: 'true', objects },
+        ]),
+      ]);
+
+      expect(result.filter((item) => item.action === 'list')).toEqual([
+        {
+          action: 'list',
+          type: 'movie',
+          ids: {},
+          title: 'example movie',
+          year: 2001,
+          listName: 'Weekend',
+          listIsPublic: true,
+        },
+      ]);
+    });
+
+    it('should skip list and favorite movies whose uuid has no tracking row', async () => {
+      const objects = `[map[created_at:1.7e+09 id:0 type:movie uuid:${OTHER_UUID}]]`;
+
+      const result = await TvTimeGdprParser.parse([
+        csvFile(trackedMovie(), 'tracking-prod-records.csv'),
+        listsCsv([
+          { s_key: 'list-key', name: 'Weekend', is_public: 'true', objects },
+          { s_key: 'favorite-movies', name: '', objects },
+        ]),
+      ]);
+
+      expect(result.filter((item) => item.action === 'list')).toHaveLength(0);
+      expect(result.filter((item) => item.action === 'favorites')).toHaveLength(
+        0,
       );
     });
   });

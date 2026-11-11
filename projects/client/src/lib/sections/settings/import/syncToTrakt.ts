@@ -4,6 +4,7 @@ import { createSyncRunner } from '$lib/sections/settings/sync/createSyncRunner.t
 import { chunk } from '$lib/utils/array/chunk.ts';
 import type { SyncEngineCallbacks } from '../sync/models/SyncEngineCallbacks.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
+import { buildFavoritesPayload } from './engine/buildFavoritesPayload.ts';
 import { buildHistoryPayload } from './engine/buildHistoryPayload.ts';
 import { buildRatingsPayload } from './engine/buildRatingsPayload.ts';
 import { buildWatchlistPayload } from './engine/buildWatchlistPayload.ts';
@@ -188,6 +189,7 @@ export async function syncToTrakt(
     );
     const ratingItems = resolvedItems.filter((i) => i.action === 'ratings');
     const listItems = resolvedItems.filter((i) => i.action === 'list');
+    const favoriteItems = resolvedItems.filter((i) => i.action === 'favorites');
 
     const client = api();
     const { run, getErrorCount } = createSyncRunner({
@@ -231,12 +233,20 @@ export async function syncToTrakt(
 
     const listsNotFound = await syncLists(listItems, client, run, onError);
 
+    const favoritesNotFound = await runCollectingNotFound({
+      items: favoriteItems,
+      run,
+      buildPayload: buildFavoritesPayload,
+      sendRequest: (payload) => client.sync.favorites.add({ body: payload }),
+    });
+
     const notFound = [
       ...historyNotFound.filter((item) => !retryItems.has(item)),
       ...retriedNotFound,
       ...watchlistNotFound,
       ...ratingsNotFound,
       ...listsNotFound,
+      ...favoritesNotFound,
     ];
 
     onComplete?.(!signal?.aborted);
