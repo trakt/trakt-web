@@ -4,6 +4,7 @@ auto-load via AGENTS.md; domain rules load on demand):
 
 - UI surface (lib/components, lib/features, lib/sections, lib/guards): read
   components.md
+- Styles (`<style>` blocks, `.scss`, `src/style`): read styling.md
 - API requests, queries, mutations, mappers (lib/requests): read requests.md
 - Shared utilities (lib/utils): read utils.md
 - Perf work (animations, scroll handlers, IntersectionObservers, rxjs
