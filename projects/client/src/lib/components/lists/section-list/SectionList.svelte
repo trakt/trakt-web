@@ -446,6 +446,9 @@
     --list-end-fade: var(--ni-0);
     --list-frame-end: var(--ni-0);
     --list-end-clip: max(var(--list-end-fade), var(--list-frame-end));
+    --list-clip-left: var(--list-bleed-origin);
+    --list-clip-right: var(--list-end-clip);
+    --list-clip-bottom: calc(100% - var(--layout-scrollbar-width));
 
     mask-image:
       linear-gradient(
@@ -471,12 +474,30 @@
       0 100%;
     mask-repeat: no-repeat;
 
+    /*
+      The mask only hides paint; the clip traces its opaque region (plus the
+      scrollbar strip) so nothing past the frame edge takes pointer events.
+    */
+    clip-path: polygon(
+      var(--list-clip-left) 0,
+      calc(100% - var(--list-clip-right)) 0,
+      calc(100% - var(--list-clip-right)) var(--list-clip-bottom),
+      100% var(--list-clip-bottom),
+      100% 100%,
+      0 100%,
+      0 var(--list-clip-bottom),
+      var(--list-clip-left) var(--list-clip-bottom)
+    );
+
     &:dir(rtl) {
       --list-fade-dir: to left;
+      --list-clip-left: var(--list-end-clip);
+      --list-clip-right: var(--list-bleed-origin);
     }
 
     @include for-tablet-sm-and-below {
       mask-image: none;
+      clip-path: none;
     }
   }
 
