@@ -1,3 +1,5 @@
+import type { GitHubIssue } from './GitHubIssue.ts';
+
 type ReportedFile = {
   name: string;
   size: number;
@@ -14,12 +16,6 @@ type BuildReportIssueInput = {
   storagePrefix: string;
 };
 
-type GitHubIssue = {
-  title: string;
-  body: string;
-  labels: ReadonlyArray<string>;
-};
-
 const BASE_LABEL = 'import-report';
 
 const toFileLine = (file: ReportedFile): string =>
@@ -34,7 +30,7 @@ const toFileLine = (file: ReportedFile): string =>
  * lookup key, and keeping PII out of tickets is preferable even in a private
  * repo.
  */
-export function buildReportIssue({
+export function buildImportIssue({
   reportId,
   source,
   sourceName,

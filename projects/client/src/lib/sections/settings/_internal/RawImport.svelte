@@ -374,6 +374,7 @@
           />
         {:else if state.status === "complete"}
           <ImportComplete
+            config={sourceConfig}
             processedCount={state.processedCount}
             errorCount={state.errorCount}
             unresolved={state.unresolved}
@@ -382,7 +383,11 @@
             onreset={reset}
           />
         {:else if state.status === "error"}
-          <ImportError error={state.parseError ?? ""} onreset={reset} />
+          <ImportError
+            config={sourceConfig}
+            error={state.parseError ?? ""}
+            onreset={reset}
+          />
         {/if}
       </div>
     </div>

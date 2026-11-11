@@ -7,14 +7,17 @@
   import { downloadFile } from "$lib/utils/file/downloadFile.ts";
   import type {
     AmbiguousImportItem,
+    ImportSourceConfig,
     UniversalImportItem,
   } from "$lib/sections/settings/import/ImportTypes.ts";
   import { toUnresolvedCsv } from "$lib/sections/settings/import/toUnresolvedCsv.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { slide } from "svelte/transition";
+  import ImportReport from "./ImportReport.svelte";
   import ImportTally from "./ImportTally.svelte";
 
   type ImportCompleteProps = {
+    config: ImportSourceConfig;
     processedCount: number;
     errorCount: number;
     unresolved: ReadonlyArray<UniversalImportItem>;
@@ -27,6 +30,7 @@
   };
 
   const {
+    config,
     processedCount,
     errorCount,
     unresolved,
@@ -80,11 +84,16 @@
     }
   }
 
-  function downloadUnresolved() {
-    const blob = new Blob([toUnresolvedCsv(unresolved)], {
+  const UNRESOLVED_FILE_NAME = "trakt-import-skipped.csv";
+
+  const unresolvedFile = $derived(
+    new File([toUnresolvedCsv(unresolved)], UNRESOLVED_FILE_NAME, {
       type: "text/csv",
-    });
-    downloadFile(blob, "trakt-import-skipped.csv");
+    }),
+  );
+
+  function downloadUnresolved() {
+    downloadFile(unresolvedFile, UNRESOLVED_FILE_NAME);
   }
 </script>
 
@@ -235,6 +244,11 @@
       </Button>
     </div>
   {/if}
+
+    <ImportReport
+      {config}
+      attachedFiles={unresolved.length > 0 ? [unresolvedFile] : []}
+    />
 </div>
 
 <style>
