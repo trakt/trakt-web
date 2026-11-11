@@ -325,9 +325,6 @@ export const UrlBuilder = {
   privacy: () => '/privacy',
   dataSources: () => '/data-sources',
   about: () => '/about',
-  faq: {
-    tvTime: () => '/faq/tv-time',
-  },
   branding: () => '/branding',
   status: () => 'https://status.trakt.tv',
   renewVip: (flow?: Extract<VipFlow, 'switch'>) =>
