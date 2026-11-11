@@ -241,7 +241,7 @@
   ) {
     if (picked.length > 0) {
       abortController = new AbortController();
-      const { errorCount } = await syncToTrakt(picked, {
+      const { errorCount, unresolved } = await syncToTrakt(picked, {
         signal: abortController.signal,
         episodeMatch: state.episodeMatch,
         onProgress: () => {},
@@ -256,6 +256,7 @@
       });
 
       state.errorCount += errorCount;
+      state.unresolved = [...state.unresolved, ...unresolved];
     }
 
     state.unresolved = [...state.unresolved, ...skipped];

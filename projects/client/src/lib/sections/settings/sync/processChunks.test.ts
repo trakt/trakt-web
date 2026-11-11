@@ -168,4 +168,31 @@ describe('processChunks', () => {
       expect(sendRequest).toHaveBeenCalledWith([2, 4]);
     });
   });
+
+  describe('responses', () => {
+    it('hands each successful response and its batch to onResponse', async () => {
+      const onResponse = vi.fn();
+
+      await processChunks([[1, 2], [3]], identity, succeed('ok'), {
+        onProgress: vi.fn(),
+        onError: vi.fn(),
+        onResponse,
+      });
+
+      expect(onResponse).toHaveBeenNthCalledWith(1, 'ok', [1, 2]);
+      expect(onResponse).toHaveBeenNthCalledWith(2, 'ok', [3]);
+    });
+
+    it('skips onResponse for a failed chunk', async () => {
+      const onResponse = vi.fn();
+
+      await processChunks([[1]], identity, fail('boom'), {
+        onProgress: vi.fn(),
+        onError: vi.fn(),
+        onResponse,
+      });
+
+      expect(onResponse).not.toHaveBeenCalled();
+    });
+  });
 });
