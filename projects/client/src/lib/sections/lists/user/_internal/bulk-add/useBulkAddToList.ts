@@ -1,3 +1,4 @@
+import { toListLimitMessage } from '$lib/features/action-toast/toListLimitMessage.ts';
 import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
@@ -5,7 +6,10 @@ import * as m from '$lib/features/i18n/messages.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { addToListRequest } from '$lib/requests/queries/users/addToListRequest.ts';
+import {
+  type AddToListResult,
+  addToListRequest,
+} from '$lib/requests/queries/users/addToListRequest.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import type { BulkAddPick } from './BulkAddPick.ts';
 import { toBulkAddPayload } from './toBulkAddPayload.ts';
@@ -41,13 +45,18 @@ export function useBulkAddToList(list: MediaListSummary) {
 
     track({ action: 'add' });
 
-    const isAdded = await addition.mutate(picks).catch(() => false);
+    const result = await addition
+      .mutate(picks)
+      .catch((): AddToListResult => ({ status: 'failed' }));
+    const isAdded = result.status === 'added';
 
     notify(
       isAdded
         ? { message: toAddedMessage({ count: picks.length, name: list.name }) }
         : {
-            message: m.text_failed_to_add_titles({ name: list.name }),
+            message:
+              toListLimitMessage(result) ??
+              m.text_failed_to_add_titles({ name: list.name }),
             variant: 'error',
           },
     );

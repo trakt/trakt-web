@@ -6605,6 +6605,39 @@
       "default": "Added {count} titles to {name}",
       "description": "Confirmation shown after several titles were added to a list. The first variable is the number of titles, the second is the list name."
     },
+    "text_list_item_limit_reached": {
+      "default": "This list is full at {limit} items. Start a new list to keep adding.",
+      "description": "Error toast when adding a title to a list is refused because that list reached its item limit.",
+      "variables": {
+        "limit": {
+          "type": "string",
+          "description": "The item limit, already formatted for the viewer's locale.",
+          "required": true
+        }
+      }
+    },
+    "text_lists_item_limit_reached_free": {
+      "default": "Your lists are full: your plan holds {limit} items across all lists. VIP raises that limit.",
+      "description": "Error toast for a non-VIP user when adding a title is refused because all their lists together reached the item limit.",
+      "variables": {
+        "limit": {
+          "type": "string",
+          "description": "The item limit, already formatted for the viewer's locale.",
+          "required": true
+        }
+      }
+    },
+    "text_lists_item_limit_reached_vip": {
+      "default": "Your lists are full: they hold {limit} items across all lists.",
+      "description": "Error toast for a VIP user when adding a title is refused because all their lists together reached the item limit.",
+      "variables": {
+        "limit": {
+          "type": "string",
+          "description": "The item limit, already formatted for the viewer's locale.",
+          "required": true
+        }
+      }
+    },
     "text_failed_to_add_titles": {
       "default": "Could not add titles to {name}",
       "description": "Error shown when adding titles to a list failed. The variable is the list name."

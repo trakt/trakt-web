@@ -1,3 +1,4 @@
+import { toListLimitMessage } from '$lib/features/action-toast/toListLimitMessage.ts';
 import { useActionToast } from '$lib/features/action-toast/useActionToast.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { executeOrEnqueue } from '$lib/features/offline/executeOrEnqueue.ts';
@@ -10,7 +11,10 @@ import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { addToWatchlistRequest } from '$lib/requests/sync/addToWatchlistRequest.ts';
 import { removeFromWatchlistRequest } from '$lib/requests/sync/removeFromWatchlistRequest.ts';
-import { addToListRequest } from '$lib/requests/queries/users/addToListRequest.ts';
+import {
+  type AddToListResult,
+  addToListRequest,
+} from '$lib/requests/queries/users/addToListRequest.ts';
 import { createListRequest } from '$lib/requests/queries/users/createListRequest.ts';
 import { mediaListIdsRequest } from '$lib/requests/queries/users/mediaListIdsRequest.ts';
 import { removeFromListRequest } from '$lib/requests/queries/users/removeFromListRequest.ts';
@@ -36,10 +40,17 @@ const invalidations = [
   InvalidateAction.Listed('show'),
 ];
 
-function addTo(target: MixtapeTarget, media: ReadonlyArray<Media>) {
+function toResult(isSuccess: boolean): AddToListResult {
+  return { status: isSuccess ? 'added' : 'failed' };
+}
+
+function addTo(
+  target: MixtapeTarget,
+  media: ReadonlyArray<Media>,
+): Promise<AddToListResult> {
   const body = toMixtapePayload(media);
   return target == null
-    ? addToWatchlistRequest({ body })
+    ? addToWatchlistRequest({ body }).then(toResult)
     : addToListRequest({ body, listId: target });
 }
 
@@ -51,8 +62,16 @@ function removeFrom(target: MixtapeTarget, media: ReadonlyArray<Media>) {
     : removeFromListRequest({ body, listId: target });
 }
 
-async function transferRequest({ to, add, from, remove }: Transfer) {
-  return (await addTo(to, add)) && (await removeFrom(from, remove));
+async function transferRequest({
+  to,
+  add,
+  from,
+  remove,
+}: Transfer): Promise<AddToListResult> {
+  const added = await addTo(to, add);
+  if (added.status !== 'added') return added;
+
+  return toResult(await removeFrom(from, remove));
 }
 
 async function notYetIn(target: MixtapeTarget, media: ReadonlyArray<Media>) {
@@ -111,10 +130,13 @@ export function useMixtapeSave() {
       await watchlisting.mutate(media);
       return true;
     }
-    const isKept = await listing.mutate({ target, media });
+    const result = await listing.mutate({ target, media });
+    const isKept = result.status === 'added';
     if (!isKept) {
       notify({
-        message: m.text_mixtape_keep_failed({ title: media.title }),
+        message:
+          toListLimitMessage(result) ??
+          m.text_mixtape_keep_failed({ title: media.title }),
         variant: 'error',
       });
     }
@@ -137,14 +159,17 @@ export function useMixtapeSave() {
     if (from === to) return true;
 
     const added = await notYetIn(to, media);
-    const isMoved = await transferring.mutate({
+    const moved = await transferring.mutate({
       to,
       add: media,
       from,
       remove: media,
     });
-    if (!isMoved) {
-      notify({ message: m.text_mixtape_move_failed(), variant: 'error' });
+    if (moved.status !== 'added') {
+      notify({
+        message: toListLimitMessage(moved) ?? m.text_mixtape_move_failed(),
+        variant: 'error',
+      });
       return false;
     }
 
@@ -155,13 +180,13 @@ export function useMixtapeSave() {
         text: m.button_text_undo(),
         label: m.button_text_undo(),
         onAction: async () => {
-          const isUndone = await transferring.mutate({
+          const undone = await transferring.mutate({
             to: from,
             add: media,
             from: to,
             remove: added,
           });
-          if (isUndone) onMoved(from);
+          if (undone.status === 'added') onMoved(from);
         },
       },
     });
