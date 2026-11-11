@@ -567,6 +567,28 @@ describe('TvTimeGdprParser', () => {
       });
     });
 
+    it('should import a rewatch row as an extra play with its own date', async () => {
+      const csv = toCsv(V1_HEADER, [
+        v1MovieWatch(),
+        v1MovieWatch({
+          type: 'rewatch',
+          'type-uuid-n': 'rewatch-002e2d8f-aee0-40ce-aa39-1be952e2952a-0',
+          alpha_range_key: 'rewatch-alpha-what-happened-to-monday',
+          watch_date_range_key: 'watch-date-1700000000',
+        }),
+      ]);
+
+      const result = await TvTimeGdprParser.parse([csvFile(csv)]);
+
+      expect(result.map((item) => item.watched_at)).toEqual([
+        new Date(1649590015 * 1000).toISOString(),
+        new Date(1700000000 * 1000).toISOString(),
+      ]);
+      expect(
+        result.every((item) => item.title === 'what happened to monday'),
+      ).toBe(true);
+    });
+
     it('should collapse plays of the same movie within the same minute', async () => {
       const csv = toCsv(V1_HEADER, [
         v1MovieWatch(),
