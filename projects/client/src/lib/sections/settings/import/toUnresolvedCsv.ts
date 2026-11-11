@@ -5,6 +5,9 @@ function toCsvField(value: string | number | undefined): string {
   return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
 }
 
+const HEADER =
+  'title,year,action,watched_at,type,season,episode,imdb,tmdb,tvdb,trakt';
+
 export function toUnresolvedCsv(
   items: ReadonlyArray<UniversalImportItem>,
 ): string {
@@ -14,8 +17,15 @@ export function toUnresolvedCsv(
       toCsvField(item.year),
       toCsvField(item.action),
       toCsvField(item.watched_at),
+      toCsvField(item.type),
+      toCsvField(item.season),
+      toCsvField(item.episode),
+      toCsvField(item.ids.imdb),
+      toCsvField(item.ids.tmdb),
+      toCsvField(item.ids.tvdb),
+      toCsvField(item.ids.trakt),
     ].join(','),
   );
 
-  return ['title,year,action,watched_at', ...rows].join('\n');
+  return [HEADER, ...rows].join('\n');
 }

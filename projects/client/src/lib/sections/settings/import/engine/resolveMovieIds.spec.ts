@@ -136,6 +136,31 @@ describe('engine: resolveMovieIds', () => {
     expect(match).not.toHaveBeenCalled();
   });
 
+  it('should match movies that only carry an id movies cannot resolve by', async () => {
+    const match = vi.fn().mockResolvedValue([
+      matched(0, {
+        title: 'Split',
+        year: 2016,
+        score: 2582,
+        ids: { trakt: 247643, imdb: 'tt3315656', tmdb: 358364 },
+      }),
+    ]);
+
+    const { items } = await resolveMovieIds({
+      items: [movie({ ids: { tvdb: 4521 }, year: undefined })],
+      match,
+    });
+
+    expect(match).toHaveBeenCalledWith([
+      { index: 0, title: 'split', year: undefined },
+    ]);
+    expect(items[0]?.ids).toEqual({
+      trakt: 247643,
+      imdb: 'tt3315656',
+      tmdb: 358364,
+    });
+  });
+
   it('should not match episodes or shows', async () => {
     const match = vi.fn().mockResolvedValue([]);
 
