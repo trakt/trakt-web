@@ -172,6 +172,22 @@ describe('TvTimeCsvParser', () => {
       });
     });
 
+    it('should route liberator zips that hold watchlist.csv instead of activity_history.csv', async () => {
+      const file = zipFile(
+        { 'watchlist.csv': LIBERATOR_CSV, 'favorites.csv': LIBERATOR_CSV },
+        'tv-time-export.zip',
+      );
+
+      const result = await TvTimeCsvParser.parse([file]);
+
+      expect(result).toHaveLength(1);
+      expect(result[0]).toMatchObject({
+        action: 'history',
+        type: 'episode',
+        ids: { imdb: 'tt0903747', tvdb: 3859781 },
+      });
+    });
+
     it('should route gdpr zips by their tracking-prod-records entries', async () => {
       const file = zipFile(
         {

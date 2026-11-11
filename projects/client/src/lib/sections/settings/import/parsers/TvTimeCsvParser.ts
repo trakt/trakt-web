@@ -17,7 +17,7 @@ type TvTimeFormat =
   | 'unknown';
 
 const GDPR_ZIP_MARKER = 'tracking-prod-records';
-const LIBERATOR_ZIP_MARKER = 'activity_history.csv';
+const LIBERATOR_ZIP_MARKERS = ['activity_history.csv', 'watchlist.csv'];
 const EXTRACTOR_ZIP_MARKER = 'tv-time-export.csv';
 const EXTRACTOR_MARKER = 'media_type';
 const GDPR_ACCOUNT_MARKERS = ['auth-prod-login.csv', 'gdpr_requests.csv'];
@@ -68,7 +68,9 @@ async function detectZipFormat(file: File): Promise<TvTimeFormat> {
   if (basenames.some((name) => name.startsWith(GDPR_ZIP_MARKER))) {
     return 'gdpr';
   }
-  if (basenames.includes(LIBERATOR_ZIP_MARKER)) return 'liberator';
+  if (basenames.some((name) => LIBERATOR_ZIP_MARKERS.includes(name))) {
+    return 'liberator';
+  }
   if (basenames.includes(EXTRACTOR_ZIP_MARKER)) return 'extractor';
   if (
     basenames.some(
