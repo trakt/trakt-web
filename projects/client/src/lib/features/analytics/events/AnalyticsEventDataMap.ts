@@ -1,3 +1,4 @@
+import type { IssueReportTrackingType } from '$lib/features/issue-report/models/IssueReportTrackingType.ts';
 import type { LoginSource } from '$lib/features/auth/models/LoginSource.ts';
 import type { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
 import type { ReportableType } from '$lib/features/report/models/ReportableType.ts';
@@ -371,4 +372,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.GifPicker]: GifPickerType;
   [AnalyticsEvent.RevokeApp]: never;
   [AnalyticsEvent.DeleteAccount]: DeleteAccountType;
+
+  [AnalyticsEvent.IssueReportOpen]: IssueReportTrackingType;
+  [AnalyticsEvent.IssueReportSent]: IssueReportTrackingType;
 };

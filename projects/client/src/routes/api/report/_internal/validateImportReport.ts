@@ -3,7 +3,7 @@ const LIMITS = {
   maxFiles: 10,
   maxFileSize: 10 * 1024 * 1024,
   maxTotalSize: 25 * 1024 * 1024,
-  allowedExtensions: ['.csv', '.zip'],
+  allowedExtensions: ['.csv', '.zip', '.json'],
 } as const;
 
 type ValidationFailure =
@@ -18,7 +18,7 @@ type ValidationFailure =
 
 type ValidationResult = { ok: true } | { ok: false; reason: ValidationFailure };
 
-type TvTimeReportInput = {
+type ImportReportInput = {
   message: string;
   files: ReadonlyArray<File>;
 };
@@ -28,10 +28,10 @@ const hasAllowedExtension = (name: string): boolean =>
     name.toLowerCase().endsWith(extension),
   );
 
-export function validateTvTimeReport({
+export function validateImportReport({
   message,
   files,
-}: TvTimeReportInput): ValidationResult {
+}: ImportReportInput): ValidationResult {
   if (message.trim().length === 0) {
     return { ok: false, reason: 'message-required' };
   }

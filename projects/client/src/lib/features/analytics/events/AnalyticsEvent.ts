@@ -17,6 +17,7 @@ const RECOMMENDATIONS_PREFIX = 'recommendations';
 const INSIGHTS_PREFIX = 'insights';
 const RECAP_PREFIX = 'recap';
 const BRANDING_PREFIX = 'branding';
+const ISSUE_REPORT_PREFIX = 'issue-report';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -177,4 +178,7 @@ export const AnalyticsEvent = {
   GifPicker: buildEventKey(ACTION_PREFIX, 'gif-picker'),
   RevokeApp: buildEventKey(USER_ACTION_PREFIX, 'revoke-app'),
   DeleteAccount: buildEventKey(USER_ACTION_PREFIX, 'delete-account'),
+
+  IssueReportOpen: buildEventKey(ISSUE_REPORT_PREFIX, 'open'),
+  IssueReportSent: buildEventKey(ISSUE_REPORT_PREFIX, 'sent'),
 } as const;

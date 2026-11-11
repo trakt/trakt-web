@@ -6269,6 +6269,93 @@
       "default": "Download a CSV file listing the items that were skipped during the import.",
       "description": "Aria-label for the download skipped items button."
     },
+    "issue_report_submit_text": {
+      "default": "Send report",
+      "description": "Text for the submit button on an import or search issue report form."
+    },
+    "issue_report_submit_label": {
+      "default": "Send the report to the Trakt team",
+      "description": "Aria-label for the submit button on an import or search issue report form."
+    },
+    "issue_report_remove_file_label": {
+      "default": "Remove file",
+      "description": "Aria-label for the button that removes an attached file from an issue report."
+    },
+    "issue_report_success": {
+      "default": "Thanks! Your report has been sent. We'll take a look.",
+      "description": "Success message shown after an import or search issue report is sent."
+    },
+    "issue_report_error_too_large": {
+      "default": "Those files are too large. Keep uploads under 25 MB in total.",
+      "description": "Error shown when the files attached to an issue report exceed the size limit."
+    },
+    "issue_report_error_unknown": {
+      "default": "Something went wrong sending your report. Please try again.",
+      "description": "Generic error shown when sending an issue report fails."
+    },
+    "button_text_report_import_problem": {
+      "default": "Report a problem",
+      "description": "Text for the button on the import results screen that opens the import issue report form."
+    },
+    "button_label_report_import_problem": {
+      "default": "Report a problem with this import to the Trakt team",
+      "description": "Aria-label for the button that opens the import issue report form."
+    },
+    "import_report_heading": {
+      "default": "Something missing or wrong?",
+      "description": "Heading above the import issue report form on the import results screen."
+    },
+    "import_report_description": {
+      "default": "Attach your export and tell us what went wrong. Your files and Trakt account are sent privately to the team, never shared publicly.",
+      "description": "Text under the import report form heading, including the privacy note."
+    },
+    "import_report_skipped_note": {
+      "default": "We've attached the list of skipped items for you.",
+      "description": "Note under the import report form when the skipped items CSV was attached automatically."
+    },
+    "import_report_message_placeholder": {
+      "default": "Tell us what happened…",
+      "description": "Placeholder for the import report message textarea."
+    },
+    "button_text_report_search": {
+      "default": "Report these results",
+      "description": "Text for the button on the search page that opens the search issue report form."
+    },
+    "button_label_report_search": {
+      "default": "Report that search results are missing or wrong",
+      "description": "Aria-label for the button that opens the search issue report form."
+    },
+    "search_report_prompt": {
+      "default": "Not finding what you're looking for?",
+      "description": "Short line next to the report button below search results."
+    },
+    "search_report_heading": {
+      "default": "Report search results",
+      "description": "Title of the drawer where users report missing or wrong search results."
+    },
+    "search_report_description": {
+      "default": "Tell us what you were looking for. We'll send the results you saw along with your report, privately to the team.",
+      "description": "Text at the top of the search report drawer, including the privacy note."
+    },
+    "search_report_query_placeholder": {
+      "default": "What were you searching for?",
+      "description": "Placeholder for the search report field holding the search text."
+    },
+    "search_report_expected_placeholder": {
+      "default": "What did you expect to find? A title, year or link helps.",
+      "description": "Placeholder for the search report field where users describe what they expected to find."
+    },
+    "import_report_upload_prompt": {
+      "default": "Drop your {source} export here, or click to choose files",
+      "description": "Prompt inside the import report file dropzone.",
+      "variables": {
+        "source": {
+          "type": "string",
+          "description": "Import source name, e.g. Letterboxd",
+          "required": true
+        }
+      }
+    },
     "header_clear_data": {
       "default": "Clear Data",
       "description": "Header for the settings section that allows users to clear their Trakt data."
