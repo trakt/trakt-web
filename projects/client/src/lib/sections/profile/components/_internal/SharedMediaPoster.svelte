@@ -2,6 +2,7 @@
   import FavoriteIcon from "$lib/components/icons/FavoriteIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -16,11 +17,10 @@
 {#if $media}
     <div class="trakt-shared-media-poster">
       <Link href={UrlBuilder.media(type, $media.slug)} color="inherit">
-        <img
+        <CrossOriginImage
           src={$media.poster.url.medium}
           alt={$media.title}
-          loading="lazy"
-          decoding="async"
+          animate={false}
         />
       </Link>
       {#if isFavorite}
@@ -50,7 +50,7 @@
       text-decoration: none;
     }
 
-    img {
+    :global(img) {
       display: block;
       width: 100%;
       height: 100%;

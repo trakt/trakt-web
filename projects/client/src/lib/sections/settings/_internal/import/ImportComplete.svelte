@@ -3,6 +3,7 @@
   import TabView from "$lib/components/tabs/TabView.svelte";
   import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import ShadowScroller from "$lib/sections/components/ShadowScroller.svelte";
   import { downloadFile } from "$lib/utils/file/downloadFile.ts";
   import type {
@@ -120,7 +121,11 @@
               >
                 <span class="candidate-poster">
                   {#if candidate.poster}
-                    <img src={candidate.poster} alt="" loading="lazy" />
+                    <CrossOriginImage
+                      src={candidate.poster}
+                      alt=""
+                      animate={false}
+                    />
                   {/if}
                   <span class="tag candidate-year">{candidate.year ?? "?"}</span>
                 </span>
@@ -366,7 +371,7 @@
     border-color: var(--purple-500);
   }
 
-  .candidate-poster img {
+  .candidate-poster :global(img) {
     position: absolute;
     inset: 0;
     width: 100%;

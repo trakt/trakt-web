@@ -1,5 +1,6 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { m } from "$lib/paraglide/messages";
   import type {
     YirRatingCount,
@@ -68,10 +69,12 @@
               }}
             >
               <div class="yir-poster">
-                <img
-                  class="yir-poster-img"
+                <CrossOriginImage
+                  classList="yir-poster-img"
                   src={item.entry.poster?.url?.thumb}
                   alt={item.entry.title}
+                  loading="eager"
+                  animate={false}
                 />
               </div>
               <div class="yir-rating">
@@ -164,7 +167,7 @@
     }
 
     &:hover .yir-grid-item:not(:hover) {
-      .yir-poster-img,
+      :global(.yir-poster-img),
       .yir-rating {
         opacity: 0.3;
       }
@@ -201,16 +204,13 @@
     box-shadow: 0 0 var(--ni-20) var(--color-yir-poster-surface);
     position: relative;
 
-    .yir-poster-img {
+    :global(.yir-poster-img) {
       transition: all 0.5s;
+      width: 100%;
+      display: block;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
     }
-  }
-
-  .yir-poster-img {
-    width: 100%;
-    display: block;
-    aspect-ratio: 2 / 3;
-    object-fit: cover;
   }
 
   // 5-point star rating (shared v3 UserRating), centered beneath the poster.

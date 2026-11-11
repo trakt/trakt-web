@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { matchFaceSweep } from "./matchFaceSweep.ts";
@@ -22,9 +23,15 @@
   <div class="cover" aria-hidden="true">
     {#if poster}
       <div class="halftone">
-        <img src={poster} alt="" />
+        <CrossOriginImage src={poster} alt="" loading="eager" animate={false} />
       </div>
-      <img class="tint" src={poster} alt="" />
+      <CrossOriginImage
+        classList="tint"
+        src={poster}
+        alt=""
+        loading="eager"
+        animate={false}
+      />
       <div class="print"></div>
       <div class="sheen"></div>
     {/if}
@@ -130,7 +137,7 @@
     mask-image: radial-gradient(circle at center, #000 1.7px, transparent 2.3px);
     mask-size: 6px 6px;
 
-    img {
+    :global(img) {
       position: absolute;
       inset-inline-start: var(--ni-neg-20);
       inset-block-start: var(--ni-neg-200);
@@ -143,13 +150,14 @@
     @media (prefers-reduced-motion: no-preference) {
       animation: match-hero-ink 900ms ease-out both;
 
-      img {
+      :global(img) {
         animation: match-hero-drift 16s ease-in-out 1400ms infinite alternate;
       }
     }
   }
 
-  .tint {
+  .cover > :global(.tint) {
+    position: absolute;
     inset: var(--ni-neg-40);
     width: calc(100% + var(--ni-80));
     height: calc(100% + var(--ni-80));

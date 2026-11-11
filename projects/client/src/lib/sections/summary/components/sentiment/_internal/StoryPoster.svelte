@@ -1,4 +1,6 @@
 <script lang="ts">
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+
   const {
     src,
     title,
@@ -8,7 +10,7 @@
 
 <span class="trakt-story-poster" {title}>
   {#if src}
-    <img {src} alt={title} width="32" height="48" loading="lazy" decoding="async" />
+    <CrossOriginImage {src} alt={title} animate={false} />
   {/if}
   {#if stars !== null}
     <span class="trakt-story-poster-stars bold">{stars}</span>
@@ -34,7 +36,7 @@
       margin-inline-start: 0;
     }
 
-    img {
+    :global(img) {
       width: 100%;
       height: 100%;
       object-fit: cover;

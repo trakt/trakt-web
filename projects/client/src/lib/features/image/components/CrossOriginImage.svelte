@@ -1,9 +1,13 @@
 <script lang="ts">
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { trackImageLoaded } from "$lib/utils/actions/trackImageLoaded.ts";
+  import { whenInViewport } from "$lib/utils/actions/whenInViewport.ts";
   import { PLACEHOLDERS } from "$lib/utils/assets";
   import { iffy } from "$lib/utils/function/iffy";
+  import { hasPosterLanguage } from "../_internal/hasPosterLanguage";
+  import { posterLanguage } from "../_internal/posterLanguage";
   import { toImageFallbacks } from "../_internal/toImageFallbacks";
+  import { toLocalizedPoster } from "../_internal/toLocalizedPoster";
   import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
 
@@ -20,24 +24,72 @@
     ...rest
   }: ImageProps = $props();
 
-  let uri = $state(iffy(() => src));
+  const localizedPoster = $derived(
+    toLocalizedPoster({ url: src, language: posterLanguage() }),
+  );
+
+  const nativeLazyDistance = "1250px";
+
+  let manifestPick = $state<{ src: string; poster: string }>();
+  let isNearViewport = $state(false);
+  const canAskManifest = $derived(loading === "eager" || isNearViewport);
+  const needsViewportGate = $derived(
+    Boolean(localizedPoster) && !canAskManifest,
+  );
+  const nearViewport = (element: HTMLImageElement) =>
+    whenInViewport(element, {
+      callback: () => (isNearViewport = true),
+      rootMargin: nativeLazyDistance,
+    }).destroy;
+
+  $effect(() => {
+    const poster = localizedPoster;
+    const current = src;
+    if (!poster || !current || !canAskManifest) return;
+
+    let isCurrent = true;
+    hasPosterLanguage(poster).then((exists) => {
+      if (!isCurrent) return;
+      manifestPick = { src: current, poster: exists ? poster.src : current };
+    });
+
+    return () => {
+      isCurrent = false;
+    };
+  });
+
+  const leadingSource = $derived.by(() => {
+    if (!localizedPoster) return src;
+    if (manifestPick?.src !== src) return null;
+
+    return manifestPick.poster;
+  });
+
+  const sources = $derived(
+    leadingSource === null
+      ? []
+      : [
+          ...new Set(
+            [
+              leadingSource,
+              src,
+              fallback,
+              ...toImageFallbacks(src ?? ""),
+            ].filter((source): source is string => Boolean(source)),
+          ),
+        ],
+  );
+
+  let uri = $state(iffy(() => sources.at(0)));
   let sourceIndex = $state(0);
   let isImageLoaded = $state(false);
 
-  const sources = $derived([
-    ...new Set(
-      [src, fallback, ...toImageFallbacks(src ?? "")].filter(
-        (source): source is string => Boolean(source),
-      ),
-    ),
-  ]);
-
   $effect(() => {
-    uri = src;
+    uri = sources.at(0);
     sourceIndex = 0;
   });
 
-  const isPlaceholder = $derived(PLACEHOLDERS.includes(uri));
+  const isPlaceholder = $derived(PLACEHOLDERS.includes(uri ?? ""));
 
   const showNextSource = () => {
     sourceIndex += 1;
@@ -72,7 +124,11 @@
   class:image-animation-enabled={animate}
   class:image-placeholder={isPlaceholder}
   use:appendClassList={classList}
-  use:trackImageLoaded={{ src: uri, onLoaded: (loaded) => (isImageLoaded = loaded) }}
+  {@attach needsViewportGate ? nearViewport : undefined}
+  use:trackImageLoaded={{
+    src: uri ?? "",
+    onLoaded: (loaded) => (isImageLoaded = loaded),
+  }}
   src={uri}
   {alt}
   onerror={handleError}
