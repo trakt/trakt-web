@@ -18,6 +18,7 @@ export function createSyncRunner({
     chunks: ReadonlyArray<ReadonlyArray<TItem>>,
     buildPayload: (chunk: ReadonlyArray<TItem>) => TPayload,
     sendRequest: (payload: TPayload) => Promise<TResponse>,
+    onResponse?: (response: TResponse, batch: ReadonlyArray<TItem>) => void,
   ) => {
     const result = await processChunks(
       chunks,
@@ -29,6 +30,7 @@ export function createSyncRunner({
           onProgress(n);
         },
         onError,
+        onResponse,
         signal,
       },
       processedCount,

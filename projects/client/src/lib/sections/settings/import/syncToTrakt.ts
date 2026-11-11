@@ -3,12 +3,15 @@ import { SYNC_CHUNK_SIZE } from '$lib/sections/settings/sync/constants/index.ts'
 import { createSyncRunner } from '$lib/sections/settings/sync/createSyncRunner.ts';
 import { chunk } from '$lib/utils/array/chunk.ts';
 import type { SyncEngineCallbacks } from '../sync/models/SyncEngineCallbacks.ts';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import { buildHistoryPayload } from './engine/buildHistoryPayload.ts';
 import { buildRatingsPayload } from './engine/buildRatingsPayload.ts';
 import { buildWatchlistPayload } from './engine/buildWatchlistPayload.ts';
+import { findNotFoundItems } from './engine/findNotFoundItems.ts';
 import { matchMovies } from './engine/matchMovies.ts';
 import { MOVIE_IDS, pickIds } from './engine/pickIds.ts';
 import { resolveMovieIds } from './engine/resolveMovieIds.ts';
+import { toPositionalRetryItems } from './engine/toPositionalRetryItems.ts';
 import {
   DEFAULT_EPISODE_MATCH_MODE,
   type EpisodeMatchMode,
@@ -26,6 +29,40 @@ type SyncRunner = ReturnType<typeof createSyncRunner>['run'];
 
 // Personal lists are few; one large page covers reuse-by-name lookup.
 const ALL_LISTS_PAGE_SIZE = 1000;
+
+type RunCollectingNotFoundParams<TPayload, TResponse> = {
+  items: ReadonlyArray<UniversalImportItem>;
+  run: SyncRunner;
+  buildPayload: (batch: ReadonlyArray<UniversalImportItem>) => TPayload;
+  sendRequest: (payload: TPayload) => Promise<TResponse>;
+};
+
+async function runCollectingNotFound<
+  TPayload,
+  TResponse extends { body?: unknown },
+>({
+  items,
+  run,
+  buildPayload,
+  sendRequest,
+}: RunCollectingNotFoundParams<TPayload, TResponse>): Promise<
+  UniversalImportItem[]
+> {
+  const notFound: UniversalImportItem[] = [];
+
+  await run(
+    chunk(items, SYNC_CHUNK_SIZE),
+    buildPayload,
+    sendRequest,
+    (response, batch) => {
+      notFound.push(
+        ...findNotFoundItems({ items: batch, body: response.body }),
+      );
+    },
+  );
+
+  return notFound;
+}
 
 interface ListGroup {
   isPublic: boolean;
@@ -56,9 +93,10 @@ async function syncLists(
   client: TraktClient,
   run: SyncRunner,
   onError?: (message: string) => void,
-): Promise<void> {
+): Promise<UniversalImportItem[]> {
   const groups = groupByList(listItems);
-  if (groups.size === 0) return;
+  if (groups.size === 0) return [];
+  const notFound: UniversalImportItem[] = [];
 
   const slugByName = new Map<string, string>();
   try {
@@ -98,16 +136,20 @@ async function syncLists(
     }
 
     const listSlug = slug;
-    await run(
-      chunk(items, SYNC_CHUNK_SIZE),
-      (batch) => buildWatchlistPayload(batch),
-      (payload) =>
+    const listNotFound = await runCollectingNotFound({
+      items,
+      run,
+      buildPayload: buildWatchlistPayload,
+      sendRequest: (payload) =>
         client.users.lists.list.add({
           params: { id: 'me', list_id: listSlug },
           body: payload,
         }),
-    );
+    });
+    notFound.push(...listNotFound);
   }
+
+  return notFound;
 }
 
 export async function syncToTrakt(
@@ -153,37 +195,56 @@ export async function syncToTrakt(
       onError,
       signal,
     });
+    const { run: retryRun, getErrorCount: getRetryErrorCount } =
+      createSyncRunner({ onProgress: NOOP_FN, onError, signal });
 
-    if (historyItems.length > 0) {
-      await run(
-        chunk(historyItems, SYNC_CHUNK_SIZE),
-        (batch) => buildHistoryPayload(batch, episodeMatch),
-        (payload) => client.sync.history.add({ body: payload }),
-      );
-    }
+    const historyNotFound = await runCollectingNotFound({
+      items: historyItems,
+      run,
+      buildPayload: (batch) => buildHistoryPayload(batch, episodeMatch),
+      sendRequest: (payload) => client.sync.history.add({ body: payload }),
+    });
 
-    if (watchlistItems.length > 0) {
-      await run(
-        chunk(watchlistItems, SYNC_CHUNK_SIZE),
-        (batch) => buildWatchlistPayload(batch),
-        (payload) => client.sync.watchlist.add({ body: payload }),
-      );
-    }
+    const retryItems = new Set(
+      toPositionalRetryItems({ items: historyNotFound, episodeMatch }),
+    );
+    const retriedNotFound = await runCollectingNotFound({
+      items: [...retryItems],
+      run: retryRun,
+      buildPayload: (batch) => buildHistoryPayload(batch, 'positional'),
+      sendRequest: (payload) => client.sync.history.add({ body: payload }),
+    });
 
-    if (ratingItems.length > 0) {
-      await run(
-        chunk(ratingItems, SYNC_CHUNK_SIZE),
-        (batch) => buildRatingsPayload(batch),
-        (payload) => client.sync.ratings.add({ body: payload }),
-      );
-    }
+    const watchlistNotFound = await runCollectingNotFound({
+      items: watchlistItems,
+      run,
+      buildPayload: buildWatchlistPayload,
+      sendRequest: (payload) => client.sync.watchlist.add({ body: payload }),
+    });
 
-    if (listItems.length > 0) {
-      await syncLists(listItems, client, run, onError);
-    }
+    const ratingsNotFound = await runCollectingNotFound({
+      items: ratingItems,
+      run,
+      buildPayload: buildRatingsPayload,
+      sendRequest: (payload) => client.sync.ratings.add({ body: payload }),
+    });
+
+    const listsNotFound = await syncLists(listItems, client, run, onError);
+
+    const notFound = [
+      ...historyNotFound.filter((item) => !retryItems.has(item)),
+      ...retriedNotFound,
+      ...watchlistNotFound,
+      ...ratingsNotFound,
+      ...listsNotFound,
+    ];
 
     onComplete?.(!signal?.aborted);
-    return { errorCount: getErrorCount(), unresolved, ambiguous };
+    return {
+      errorCount: getErrorCount() + getRetryErrorCount(),
+      unresolved: [...unresolved, ...notFound],
+      ambiguous,
+    };
   } catch (err) {
     onComplete?.(false);
     throw err;
