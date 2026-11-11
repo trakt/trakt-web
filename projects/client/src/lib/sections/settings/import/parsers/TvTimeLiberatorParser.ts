@@ -4,9 +4,27 @@ import { parseCsvFile } from './utils/parseCsvFile.ts';
 import { parseCsvText } from './utils/parseCsvText.ts';
 import { toImportISOString } from './utils/toImportISOString.ts';
 import { toInt } from './utils/toInt.ts';
+import {
+  type LiberatorEpisodeShow,
+  toLiberatorEpisodeShows,
+} from './utils/toLiberatorEpisodeShows.ts';
 import { unzipCsvTexts } from './utils/unzipCsvTexts.ts';
 
 const ACTIVITY_HISTORY_CSV = 'activity_history.csv';
+const WATCHLIST_CSV = 'watchlist.csv';
+const SHOWS_JSON = 'shows.json';
+const EPISODE_WATCHES_JSON = 'episode_watches.json';
+const ZIP_ENTRIES = [
+  ACTIVITY_HISTORY_CSV,
+  WATCHLIST_CSV,
+  SHOWS_JSON,
+  EPISODE_WATCHES_JSON,
+];
+
+type ParsedLiberatorFile = {
+  rows: unknown[];
+  episodeShows: ReadonlyMap<number, LiberatorEpisodeShow>;
+};
 
 type TvTimeLiberatorRow = {
   imdb_id?: string;
@@ -30,18 +48,26 @@ function toImportType(value?: string): ImportType {
   return 'movie';
 }
 
-function parseLiberatorRow(row: TvTimeLiberatorRow): UniversalImportItem[] {
+function parseLiberatorRow(
+  row: TvTimeLiberatorRow,
+  episodeShows: ReadonlyMap<number, LiberatorEpisodeShow>,
+): UniversalImportItem[] {
   const imdbId = row.imdb_id && row.imdb_id !== '-1' ? row.imdb_id : undefined;
   const tvdbId = toInt(row.tvdb_id);
 
   if (!imdbId && tvdbId == null) return [];
 
+  const type = toImportType(row.type);
+  const show =
+    type === 'episode' && tvdbId != null ? episodeShows.get(tvdbId) : undefined;
+
   const base = {
-    type: toImportType(row.type),
+    type,
     ids: { imdb: imdbId, tvdb: tvdbId },
     title: row.title || undefined,
-    season: toInt(row.season),
-    episode: toInt(row.episode),
+    season: toInt(row.season) ?? show?.season,
+    episode: toInt(row.episode) ?? show?.episode,
+    showTvdb: show?.showTvdb,
   };
 
   const items: UniversalImportItem[] = [];
@@ -68,25 +94,51 @@ function parseLiberatorRow(row: TvTimeLiberatorRow): UniversalImportItem[] {
   return items;
 }
 
-// The Liberator zip also holds movies.json/shows.json, but
-// activity_history.csv carries the same data plus watchlist flags.
-async function unzipActivityHistoryRows(file: File): Promise<unknown[]> {
-  const buffer = await file.arrayBuffer();
-  const texts = (() => {
-    try {
-      return unzipCsvTexts({
-        buffer,
-        isMatch: (basename) => basename === ACTIVITY_HISTORY_CSV,
-      }).map((entry) => entry.text);
-    } catch {
-      throw new Error(
-        `Could not read the .zip file. Extract it and upload ${ACTIVITY_HISTORY_CSV} instead.`,
-      );
-    }
-  })();
+function parseJsonArray(text?: string): unknown[] {
+  if (!text) return [];
+  try {
+    const parsed: unknown = JSON.parse(text);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
 
-  const parsed = await Promise.all(texts.map(parseCsvText));
-  return parsed.flat();
+function unzipLiberatorEntries(buffer: ArrayBuffer) {
+  try {
+    return unzipCsvTexts({
+      buffer,
+      isMatch: (basename) => ZIP_ENTRIES.includes(basename),
+    });
+  } catch {
+    throw new Error(
+      `Could not read the .zip file. Extract it and upload ${ACTIVITY_HISTORY_CSV} instead.`,
+    );
+  }
+}
+
+// activity_history.csv carries the same data as the movies/shows JSON plus
+// watchlist flags. Some exports hold watchlist.csv in its place.
+async function unzipLiberator(file: File): Promise<ParsedLiberatorFile> {
+  const entries = unzipLiberatorEntries(await file.arrayBuffer());
+  const textsOf = (basename: string) =>
+    entries.filter((entry) => entry.basename === basename);
+
+  const csvEntries = textsOf(ACTIVITY_HISTORY_CSV).length
+    ? textsOf(ACTIVITY_HISTORY_CSV)
+    : textsOf(WATCHLIST_CSV);
+  const rows = (
+    await Promise.all(csvEntries.map((entry) => parseCsvText(entry.text)))
+  ).flat();
+
+  const episodeShows = toLiberatorEpisodeShows({
+    shows: textsOf(SHOWS_JSON).flatMap((entry) => parseJsonArray(entry.text)),
+    episodeWatches: textsOf(EPISODE_WATCHES_JSON).flatMap((entry) =>
+      parseJsonArray(entry.text),
+    ),
+  });
+
+  return { rows, episodeShows };
 }
 
 export const TvTimeLiberatorParser: FileParser = {
@@ -105,10 +157,15 @@ export const TvTimeLiberatorParser: FileParser = {
     const [file] = files;
     if (!file) return [];
 
-    const rows = file.name.endsWith('.zip')
-      ? await unzipActivityHistoryRows(file)
-      : await parseCsvFile(file);
+    const { rows, episodeShows } = file.name.endsWith('.zip')
+      ? await unzipLiberator(file)
+      : {
+          rows: await parseCsvFile(file),
+          episodeShows: new Map<number, LiberatorEpisodeShow>(),
+        };
 
-    return (rows as TvTimeLiberatorRow[]).flatMap(parseLiberatorRow);
+    return (rows as TvTimeLiberatorRow[]).flatMap((row) =>
+      parseLiberatorRow(row, episodeShows),
+    );
   },
 };
