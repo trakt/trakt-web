@@ -15,6 +15,7 @@ Read them when the work touches the matching area. CLAUDE.md routes the
 mapping; the rule files live at `.agents/rules/`:
 
 - `components.md` - UI surface (lib/components, lib/features, lib/sections, lib/guards)
+- `styling.md` - SCSS, tokens, theming, responsive mixins, RTL-safe layout
 - `requests.md` - API requests, queries, mutations, mappers (lib/requests)
 - `utils.md` - shared utilities (lib/utils)
 - `performance.md` - perf work: animations, scroll handlers, IntersectionObservers, rxjs plumbing, bundle/boot, viewport gating
