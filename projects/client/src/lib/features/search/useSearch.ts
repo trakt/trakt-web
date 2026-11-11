@@ -1,6 +1,7 @@
 import { browser } from '$app/environment';
 import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
 import type { CreateQueryOptions } from '$lib/features/query/types.ts';
+import { anySignal } from '$lib/utils/requests/anySignal.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { QueryClient, QueryKey } from '@tanstack/query-core';
@@ -57,7 +58,7 @@ function withSignal(signal: AbortSignal) {
   return ((input, init) =>
     globalThis.fetch(input, {
       ...init,
-      signal: init?.signal ? AbortSignal.any([init.signal, signal]) : signal,
+      signal: init?.signal ? anySignal([init.signal, signal]) : signal,
     })) as typeof fetch;
 }
 

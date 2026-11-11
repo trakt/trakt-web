@@ -1,5 +1,6 @@
 import { rawApiFetch } from '$lib/requests/api.ts';
 import { error } from '$lib/utils/console/print.ts';
+import { anySignal } from '$lib/utils/requests/anySignal.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { isAbortError, retryAsync } from 'ts-retry';
 import { PAGE_LIMIT } from './constants.ts';
@@ -37,7 +38,7 @@ function toRequestSignal(timeout: number, signal?: AbortSignal) {
     return timeoutSignal;
   }
 
-  return AbortSignal.any([signal, timeoutSignal]);
+  return anySignal([signal, timeoutSignal]);
 }
 
 export function fetchWithRetry({
