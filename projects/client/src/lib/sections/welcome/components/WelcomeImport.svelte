@@ -6,7 +6,6 @@
   import { whenInViewport } from "$lib/utils/actions/whenInViewport.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import ImporterCard from "./_internal/ImporterCard.svelte";
-  import TvTimeNotice from "./_internal/TvTimeNotice.svelte";
 
   const { track } = useTrack(AnalyticsEvent.OnboardingStep);
 
@@ -26,8 +25,6 @@
       {m.welcome_import_description()}
     </p>
   </div>
-
-  <TvTimeNotice onclick={trackImportPicked} />
 
   <div class="welcome-import-cards">
     <ImporterCard
