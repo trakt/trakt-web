@@ -117,6 +117,28 @@ describe('createSafeMarked', () => {
     });
   });
 
+  describe('links off the trakt domain', () => {
+    const payloads = [
+      '[verify](https://evil.example/login)',
+      'verify: https://evil.example/login',
+      '<https://evil.example/login>',
+      '[ok](mailto:support@trakt.tv)',
+      '[ok](//evil.example)',
+    ];
+
+    for (const payload of payloads) {
+      it(`should build no anchor for ${JSON.stringify(payload)}`, () => {
+        expect(toDom(renderComment(payload)).querySelector('a')).toBeNull();
+      });
+    }
+
+    it('should keep the link text readable', () => {
+      expect(
+        toDom(renderComment('[verify](https://evil.example)')).textContent,
+      ).toContain('verify');
+    });
+  });
+
   describe('attribute encoding', () => {
     it('should escape an ampersand in a href', () => {
       expect(renderComment('[ok](/movies?a=1&b=2)')).toContain(
@@ -183,14 +205,6 @@ describe('createSafeMarked', () => {
       expect(
         toDom(renderComment('[ok](#section)')).querySelector('a'),
       ).toHaveAttribute('href', '#section');
-    });
-
-    it('should render a mailto link', () => {
-      expect(
-        toDom(renderComment('[ok](mailto:support@trakt.tv)')).querySelector(
-          'a',
-        ),
-      ).toHaveAttribute('href', 'mailto:support@trakt.tv');
     });
 
     it('should render an autolink', () => {

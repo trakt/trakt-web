@@ -1,5 +1,6 @@
 import { escapeHtml } from '$lib/utils/string/escapeHtml.ts';
 import { hasSafeUrlProtocol } from '$lib/utils/url/hasSafeUrlProtocol.ts';
+import { isTraktUrl } from '$lib/utils/url/isTraktUrl.ts';
 import type { MarkedExtension, RendererThis, Tokens } from 'marked';
 
 const DOUBLE_ENCODED_PERCENT = /%25/gu;
@@ -25,7 +26,7 @@ export function safeMarkdownExtension(): MarkedExtension {
       },
       link(this: RendererThis, token: Tokens.Link) {
         const content = this.parser.parseInline(token.tokens);
-        const href = toAttributeUrl(token.href);
+        const href = isTraktUrl(token.href) ? toAttributeUrl(token.href) : null;
 
         if (!href) return content;
 
