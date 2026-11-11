@@ -6,6 +6,7 @@ const baseInput = {
   source: 'tvtime',
   sourceName: 'TV Time',
   userId: '42',
+  isVip: true,
   username: 'seferturan',
   message: 'Nothing imported from my GDPR export.',
   files: [{ name: 'tracking-prod-records.csv', size: 2048 }],

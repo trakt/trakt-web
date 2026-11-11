@@ -1,4 +1,4 @@
-import type { ReportSubmission } from './ReportSubmission.ts';
+import type { Reporter, ReportSubmission } from './ReportSubmission.ts';
 
 const textOf = (form: FormData, key: string): string =>
   (form.get(key) ?? '').toString();
@@ -9,12 +9,10 @@ const toSlug = (value: string): string =>
     .toLowerCase()
     .slice(0, 32) || 'unknown';
 
-export function parseReportForm(form: FormData): ReportSubmission | null {
-  const reporter = {
-    userId: textOf(form, 'userId'),
-    username: textOf(form, 'username'),
-  };
-
+export function parseReportForm(
+  form: FormData,
+  reporter: Reporter,
+): ReportSubmission | null {
   switch (textOf(form, 'kind')) {
     case 'import': {
       const source = toSlug(textOf(form, 'source'));
@@ -35,6 +33,7 @@ export function parseReportForm(form: FormData): ReportSubmission | null {
         kind: 'search',
         query: textOf(form, 'query'),
         intent: textOf(form, 'intent'),
+        link: textOf(form, 'link').trim(),
         expected: textOf(form, 'expected'),
         mode: toSlug(textOf(form, 'mode')),
         results: form.getAll('results').map(String),

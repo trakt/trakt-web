@@ -6342,8 +6342,16 @@
       "description": "Placeholder for the search report field holding the search text."
     },
     "search_report_expected_placeholder": {
-      "default": "What did you expect to find? A title, year or link helps.",
+      "default": "What did you expect to find? A title and year help.",
       "description": "Placeholder for the search report field where users describe what they expected to find."
+    },
+    "search_report_link_placeholder": {
+      "default": "Link to it on IMDb, TMDB, Rotten Tomatoes, Letterboxd, TVDB, Metacritic or Wikipedia",
+      "description": "Placeholder for the required link field in the search report drawer. Site names stay as written."
+    },
+    "search_report_link_error": {
+      "default": "Use a link from IMDb, TMDB, Rotten Tomatoes, Letterboxd, TVDB, Metacritic or Wikipedia.",
+      "description": "Error under the search report link field when the link is not from one of the accepted sites. Site names stay as written."
     },
     "import_report_upload_prompt": {
       "default": "Drop your {source} export here, or click to choose files",

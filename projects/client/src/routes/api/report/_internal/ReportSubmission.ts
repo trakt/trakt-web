@@ -1,6 +1,7 @@
-type Reporter = {
+export type Reporter = {
   userId: string;
   username: string;
+  isVip: boolean;
 };
 
 export type ImportReportSubmission = Reporter & {
@@ -15,6 +16,7 @@ export type SearchReportSubmission = Reporter & {
   kind: 'search';
   query: string;
   intent: string;
+  link: string;
   expected: string;
   mode: string;
   results: ReadonlyArray<string>;

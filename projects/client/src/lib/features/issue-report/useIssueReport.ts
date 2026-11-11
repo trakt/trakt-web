@@ -1,7 +1,6 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
-import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { toIssueReportError } from './_internal/toIssueReportError.ts';
 import { toIssueReportFormData } from './_internal/toIssueReportFormData.ts';
 import { toIssueReportTracking } from './_internal/toIssueReportTracking.ts';
@@ -11,7 +10,6 @@ import { IssueReportError } from './models/IssueReportError.ts';
 const ENDPOINT = '/api/report';
 
 export function useIssueReport() {
-  const { user } = useUser();
   const { track } = useTrack(AnalyticsEvent.IssueReportSent);
   const isSubmitting = new BehaviorSubject(false);
   const error = new BehaviorSubject<IssueReportError | null>(null);
@@ -21,11 +19,7 @@ export function useIssueReport() {
     error.next(null);
 
     try {
-      const { id, username } = await firstValueFrom(user);
-      const body = toIssueReportFormData(report, {
-        userId: String(id),
-        username,
-      });
+      const body = toIssueReportFormData(report);
 
       const response = await fetch(ENDPOINT, { method: 'POST', body });
 

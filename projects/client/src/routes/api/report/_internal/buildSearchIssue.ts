@@ -6,6 +6,7 @@ type BuildSearchIssueInput = {
   username: string;
   query: string;
   intent: string;
+  link: string;
   expected: string;
   mode: string;
   results: ReadonlyArray<string>;
@@ -25,6 +26,7 @@ export function buildSearchIssue({
   username,
   query,
   intent,
+  link,
   expected,
   mode,
   results,
@@ -33,6 +35,7 @@ export function buildSearchIssue({
   const body = [
     `**Search text:** \`${query.replaceAll('`', "'")}\``,
     `**Looking for:** ${intent}`,
+    `**Link:** <${link}>`,
     `**Mode:** ${mode}`,
     `**User:** @${username} (id: ${userId})`,
     `**Report ID:** ${reportId}`,

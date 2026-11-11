@@ -1,18 +1,33 @@
 import { error as printError } from '$lib/utils/console/print.ts';
 import { IS_DEV } from '$lib/utils/env/index.ts';
 import { json, type RequestHandler } from '@sveltejs/kit';
+import { fetchReporter } from './_internal/fetchReporter.ts';
 import { parseReportForm } from './_internal/parseReportForm.ts';
 import { postGitHubIssue } from './_internal/postGitHubIssue.ts';
 import { toReportRecord } from './_internal/toReportRecord.ts';
 import { validateReport } from './_internal/validateReport.ts';
 
-export const POST: RequestHandler = async ({ request, locals, platform }) => {
+export const POST: RequestHandler = async ({
+  request,
+  locals,
+  platform,
+  fetch,
+}) => {
   if (!locals.oidcAuth?.token) {
     return new Response(null, { status: 401 });
   }
 
   const form = await request.formData().catch(() => null);
-  const report = form ? parseReportForm(form) : null;
+  if (!form) {
+    return new Response(null, { status: 400 });
+  }
+
+  const reporter = await fetchReporter({ token: locals.oidcAuth.token, fetch });
+  if (!reporter) {
+    return new Response(null, { status: 401 });
+  }
+
+  const report = parseReportForm(form, reporter);
   if (!report) {
     return new Response(null, { status: 400 });
   }
@@ -20,6 +35,10 @@ export const POST: RequestHandler = async ({ request, locals, platform }) => {
   const validation = validateReport(report);
   if (!validation.ok) {
     return json({ ok: false, reason: validation.reason }, { status: 400 });
+  }
+
+  if (report.kind === 'search' && !reporter.isVip) {
+    return json({ ok: false, reason: 'vip-required' }, { status: 403 });
   }
 
   // No platform bindings in local dev — short-circuit so the UI stays testable.
