@@ -148,7 +148,7 @@ function parseV1Movie(row: TrackingV1Row): UniversalImportItem | null {
     year: toYear(row.release_date),
   };
 
-  if (row.type === 'watch') {
+  if (row.type === 'watch' || row.type === 'rewatch') {
     return { ...base, action: 'history', watched_at: toWatchedAt(row) };
   }
 
