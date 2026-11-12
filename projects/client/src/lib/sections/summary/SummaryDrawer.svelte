@@ -7,7 +7,7 @@
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
-  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
+  import type { RealityCheckVariant } from "$lib/requests/models/RealityCheckVariant.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import type { YouTubeSpecial } from "$lib/requests/models/YouTubeSpecial.ts";
@@ -50,7 +50,7 @@
     ...details
   }: {
     sentiment?: SentimentAnalysis | null | undefined;
-    realityCheck?: RealityCheck | null | undefined;
+    realityCheck?: RealityCheckVariant | null | undefined;
     videos?: MediaVideo[];
     seasons?: Season[];
     currentSeason?: number;

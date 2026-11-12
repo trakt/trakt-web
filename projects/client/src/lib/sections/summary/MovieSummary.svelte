@@ -8,7 +8,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
-  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
+  import type { RealityCheckVariant } from "$lib/requests/models/RealityCheckVariant.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import type { YouTubeSpecial } from "$lib/requests/models/YouTubeSpecial.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -41,7 +41,7 @@
     studios: MediaStudio[];
     videos: MediaVideo[];
     sentiment: SentimentAnalysis | Nil;
-    realityCheck: RealityCheck | null | undefined;
+    realityCheck: RealityCheckVariant | null | undefined;
     youtubeSpecial: YouTubeSpecial | Nil;
   } & CommonMediaSummaryProps = $props();
 

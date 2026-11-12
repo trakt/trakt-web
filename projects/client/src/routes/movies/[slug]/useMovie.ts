@@ -16,10 +16,12 @@ import { movieVideosQuery } from '$lib/requests/queries/movies/movieVideosQuery.
 import { movieYouTubeSpecialQuery } from '$lib/requests/queries/movies/movieYouTubeSpecialQuery.ts';
 import { streamMovieQuery } from '$lib/requests/queries/movies/streamMovieQuery.ts';
 import { toStreamOn } from '$lib/stores/toStreamOn.ts';
+import { useDocumentaryCheck } from '$lib/stores/useDocumentaryCheck.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadableData } from '$lib/utils/requests/toLoadableData.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { selectRealityCheck } from '$lib/utils/reality/selectRealityCheck.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { combineLatest, type Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -59,7 +61,7 @@ export function useMovie(slug$: Observable<string>) {
     multicast(),
   );
 
-  const realityCheck = combineLatest([
+  const storyRealityCheck = combineLatest([
     isAuthorized,
     useQuery(
       combineLatest([slug$, isAuthorized]).pipe(
@@ -76,6 +78,21 @@ export function useMovie(slug$: Observable<string>) {
     map(([authorized, query]) =>
       toLoadableData({ isAuthorized: authorized, query }),
     ),
+  );
+
+  const documentaryCheck = useDocumentaryCheck({
+    type: 'movie',
+    slug$,
+    genres$: movie.pipe(map(($movie) => $movie.data?.genres)),
+    isAuthorized,
+    locale: activeLocale,
+  });
+
+  const realityCheck = combineLatest([
+    storyRealityCheck,
+    documentaryCheck,
+  ]).pipe(
+    map(([story, documentary]) => selectRealityCheck({ story, documentary })),
     multicast(),
   );
 

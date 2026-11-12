@@ -35,6 +35,11 @@
       background: var(--color-reality-altered-background);
     }
 
+    &[data-tone="neutral"] {
+      color: var(--color-reality-neutral-text);
+      background: var(--color-reality-neutral-background);
+    }
+
     &.is-muted {
       opacity: 0.75;
     }
