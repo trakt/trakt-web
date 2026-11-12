@@ -10,12 +10,11 @@
 
   type RateActionProps = {
     target: RateNowProps;
-    title: string;
+    title?: string;
     style?: "cover" | "summary";
   };
 
   const { target, title, style = "cover" }: RateActionProps = $props();
-
 
   let requestedOpen = $state(false);
   let ratingAtOpen = $state<number | undefined>(undefined);
@@ -33,11 +32,17 @@
     ratingAtOpen = open ? rating : undefined;
   };
 
-  const label = $derived(
-    rating
+  const label = $derived.by(() => {
+    if (!title) {
+      return rating
+        ? m.button_label_change_rating_untitled()
+        : m.button_label_rate_untitled();
+    }
+
+    return rating
       ? m.button_label_change_rating({ title })
-      : m.button_label_rate({ title }),
-  );
+      : m.button_label_rate({ title });
+  });
 </script>
 
 {#snippet rateContent()}
@@ -46,12 +51,7 @@
 
 <div class="trakt-rate-action-root" data-style={style}>
   <Tooltip content={label} variant="compact">
-    <Popover
-      content={rateContent}
-      {label}
-      open={isOpen}
-      {onOpenChange}
-    >
+    <Popover content={rateContent} {label} open={isOpen} {onOpenChange}>
       <span class="trakt-rate-action" class:is-rated={Boolean(rating)}>
         {#if rating}
           <UserRating {rating} />

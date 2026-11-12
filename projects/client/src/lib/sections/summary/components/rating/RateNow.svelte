@@ -56,9 +56,15 @@
     delight.set({
       kind,
       origin: {
-        x: offsetRect.left + star.offsetLeft + star.offsetWidth / 2 -
+        x:
+          offsetRect.left +
+          star.offsetLeft +
+          star.offsetWidth / 2 -
           parentRect.left,
-        y: offsetRect.top + star.offsetTop + star.offsetHeight / 2 -
+        y:
+          offsetRect.top +
+          star.offsetTop +
+          star.offsetHeight / 2 -
           parentRect.top,
       },
     });
@@ -94,7 +100,7 @@
 
       {#if $isQueued}<QueuedTag />{/if}
 
-      {#if props.type !== "episode" && props.type !== "season"}
+      {#if props.type !== "episode" && props.type !== "season" && props.media.title}
         <div
           class="trakt-favorite-action"
           transition:slideFade={{ duration: 300, axis: "x" }}
