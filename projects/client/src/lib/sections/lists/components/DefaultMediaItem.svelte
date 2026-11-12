@@ -7,7 +7,7 @@
   import PosterTags from "$lib/components/media/tags/PosterTags.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { useLargeScreen } from "$lib/features/large-screen-cards/useLargeScreen.ts";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import { useIsDropped } from "$lib/sections/media-actions/drop/useIsDropped";
@@ -18,6 +18,7 @@
   import type { MediaCardProps } from "../components/models/MediaCardProps";
   import DefaultMediaPopupActions from "./DefaultMediaPopupActions.svelte";
   import { resolveItemCardStyle } from "$lib/sections/lists/utils/resolveItemCardStyle.ts";
+  import { resolveSummaryCardLayout } from "$lib/sections/lists/utils/resolveSummaryCardLayout.ts";
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
 
@@ -53,6 +54,21 @@
 
   const hasHoverTag = $derived(Boolean(externalTag || media.certification));
 
+  const isLargeScreen = useLargeScreen();
+  const isLargeLayout = $derived(
+    isSummary &&
+      resolveSummaryCardLayout({
+          style: style ?? "cover",
+          isLargeScreen: $isLargeScreen,
+        }) === "large",
+  );
+
+  const hasReleaseTags = $derived(
+    "episode" in media ||
+      (type === "movie" && rest.variant !== "activity" &&
+        rest.variant !== "next"),
+  );
+
 </script>
 
 {#snippet contextualTag()}
@@ -61,20 +77,41 @@
   {/if}
 {/snippet}
 
-{#snippet defaultTag(hasCertification: boolean)}
-  {#if "episode" in media}
+{#snippet releaseTag()}
+  {#if hasReleaseTags}
     <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} year={media.year} />
-    <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
-  {:else if type === "movie" && rest.variant !== "activity" && rest.variant !== "next"}
-    <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} year={media.year} />
-    {#if media.airDate < new Date()}
-      <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
-    {/if}
   {/if}
+{/snippet}
 
-  {#if hasCertification && media.certification}
+{#snippet lengthTag()}
+  {#if "episode" in media}
+    {#if !isLargeLayout || media.episode.count > 0}
+      <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
+    {/if}
+  {:else if hasReleaseTags && media.airDate < new Date()}
+    <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
+  {/if}
+{/snippet}
+
+{#snippet certificationTag()}
+  {#if media.certification}
     <CertificationTag certification={media.certification} />
   {/if}
+{/snippet}
+
+{#snippet defaultTag(hasCertification: boolean)}
+  {@render releaseTag()}
+  {@render lengthTag()}
+
+  {#if hasCertification}
+    {@render certificationTag()}
+  {/if}
+{/snippet}
+
+{#snippet detailsTag()}
+  <TagBar isWrappable>
+    {@render defaultTag(true)}
+  </TagBar>
 {/snippet}
 
 {#snippet indicatorTags()}
@@ -88,19 +125,19 @@
 {/snippet}
 
 {#snippet tag()}
-  <TagBar>
+  <TagBar isWrappable={isLargeLayout}>
     {#if !isSummary}
       {@render contextualTag()}
     {/if}
 
     {#if isSummary}
       {#if mode === "mixed"}
-        <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-          {@render contextualTag()}
-        </RenderFor>
+        {@render contextualTag()}
       {/if}
       {@render externalTag?.()}
-      {@render defaultTag(true)}
+      {#if !isLargeLayout}
+        {@render defaultTag(true)}
+      {/if}
     {:else if externalTag}
       {@render externalTag()}
     {:else}
@@ -138,8 +175,8 @@
       {style}
       tag={rest.variant !== "next" ? tag : undefined}
       hoverTag={hasHoverTag ? hoverTag : undefined}
+      detailsTag={isLargeLayout ? detailsTag : undefined}
       coverTag={externalCoverTag}
-      contextualTag={mode === "mixed" ? contextualTag : undefined}
       indicators={indicatorTags}
       {...rest}
       popupActions={externalPopupActions === null ? undefined : popupActions}

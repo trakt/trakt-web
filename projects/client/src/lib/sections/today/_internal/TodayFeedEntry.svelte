@@ -55,7 +55,6 @@
       media={{ ...show, episode: { count: 0 } }}
       {badge}
       tag={action.milestone ? milestoneTag : undefined}
-      contextualTag={action.milestone ? milestoneTag : undefined}
       indicators={isWatchedToo ? watchedTag : undefined}
     />
   {:else if action.season && show}
@@ -66,7 +65,6 @@
       media={show}
       {badge}
       tag={action.milestone ? milestoneTag : undefined}
-      contextualTag={action.milestone ? milestoneTag : undefined}
       indicators={isWatchedToo ? watchedTag : undefined}
     />
   {:else if movie}
@@ -90,7 +88,6 @@
       media={show}
       {badge}
       tag={action.milestone ? milestoneTag : undefined}
-      contextualTag={action.milestone ? milestoneTag : undefined}
       indicators={isWatchedToo ? watchedTag : undefined}
     />
   {/if}

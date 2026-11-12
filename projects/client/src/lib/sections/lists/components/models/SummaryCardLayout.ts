@@ -1,1 +1,1 @@
-export type SummaryCardLayout = 'default' | 'compact' | 'minimal';
+export type SummaryCardLayout = 'default' | 'large' | 'compact' | 'minimal';

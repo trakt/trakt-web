@@ -14,12 +14,10 @@
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler.ts";
   import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { trackTextOverflow } from "$lib/utils/actions/trackTextOverflow.ts";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/assets";
   import { isUnknownDate } from "$lib/utils/date/isUnknownDate.ts";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
-  import { toHumanTime } from "$lib/utils/formatting/date/toHumanTime.ts";
   import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
@@ -49,9 +47,9 @@
     MediaCardProps | EpisodeSummaryProps | SeasonSummaryProps;
 
   type SummaryCardProps = {
-    contextualTag?: Snippet;
     badge?: Snippet;
     sortTag?: Snippet;
+    detailsTag?: Snippet;
     layout?: SummaryCardLayout;
   } & DistributiveOmit<ItemCardProps, "badge" | "action">;
 
@@ -61,8 +59,8 @@
     popupActions,
     media,
     source,
-    contextualTag,
     sortTag,
+    detailsTag,
     layout = "default",
     indicators,
     ...rest
@@ -70,15 +68,8 @@
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
-  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
-
   const isCompact = $derived(layout === "compact");
   const isMinimal = $derived(layout === "minimal");
-
-  const hasMultiLineTitles = $derived(
-    !isCompact && !isMinimal && ($isTabletLarge || $isDesktop),
-  );
 
   const isShowContext = $derived(
     rest.type === "episode" && "context" in rest && rest.context === "show",
@@ -156,7 +147,7 @@
   );
 
   const dimensions = $derived.by(() => {
-    if (layout === "default") {
+    if (layout === "default" || layout === "large") {
       return {
         width: "var(--width-summary-card)",
         height: "var(--height-summary-card)",
@@ -208,11 +199,7 @@
     {/if}
   </div>
 
-  <SummaryCardDetails
-    classList={hasMultiLineTitles ? "multi-line-titles" : ""}
-    {tag}
-    {layout}
-  >
+  <SummaryCardDetails>
     {#if rest.type === "season"}
       <p class="trakt-card-title ellipsis">
         {media.title}
@@ -244,17 +231,12 @@
           class="trakt-card-subtitle small secondary ellipsis capitalize"
           title={toHumanDate(new Date(), rest.date, getLocale())}
         >
-          {#if rest.activityType === "social" || hasMultiLineTitles}
+          {#if rest.activityType === "social"}
             {toRelativeHumanDay(new Date(), rest.date, getLocale())}
           {:else}
             {toHumanDate(new Date(), rest.date, getLocale())}
           {/if}
         </p>
-        {#if rest.activityType === "personal" && hasMultiLineTitles}
-          <p class="trakt-card-subtitle small secondary ellipsis capitalize">
-            {toHumanTime({ date: rest.date, locale: getLocale() })}
-          </p>
-        {/if}
       {/if}
     {:else if isShowContext && rest.type === "episode"}
       <Tooltip
@@ -311,6 +293,10 @@
         genres={media.genres}
       />
     {/if}
+
+    {#if layout === "large" && detailsTag}
+      {@render detailsTag()}
+    {/if}
   </SummaryCardDetails>
 {/snippet}
 
@@ -355,7 +341,7 @@
     {@render cardContent()}
   </Link>
 
-  <SummaryCardBottomBar {contextualTag} {tag} {layout}>
+  <SummaryCardBottomBar {tag} {layout}>
     {#if sortTag}
       {@render sortTag()}
     {:else if badge}
@@ -435,28 +421,9 @@
     padding-inline-end: var(--ni-18);
   }
 
-  :global(.multi-line-titles) {
-    .trakt-card-title,
-    .trakt-card-subtitle,
-    :global(.trakt-card-subtitle) {
-      display: -webkit-box;
-
-      line-clamp: 2;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-
-      white-space: initial;
-      overflow: hidden;
-    }
-  }
-
   .trakt-card-title {
     min-width: 0;
-    font-size: var(--font-size-text);
-
-    @include for-tablet-sm-and-below {
-      font-size: var(--font-size-title);
-    }
+    font-size: var(--font-size-title);
   }
 
   :global(.trakt-summary-card-minimal),

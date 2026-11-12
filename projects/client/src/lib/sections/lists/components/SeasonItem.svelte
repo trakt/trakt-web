@@ -14,7 +14,6 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { scrollActiveItemIntoView } from "$lib/utils/actions/scrollActiveItemIntoView";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
@@ -53,9 +52,8 @@
     resolveItemCardStyle(style, $isLargeScreenCards),
   );
 
-  const isMouse = useMedia(WellKnownMediaQuery.mouse);
   const hasHoverCard = $derived(
-    resolvedStyle === "cover" && $isMouse && style === "summary",
+    resolvedStyle === "cover" && style === "summary",
   );
 
 
