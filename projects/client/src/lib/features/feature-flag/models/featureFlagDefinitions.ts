@@ -112,4 +112,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     description: () => m.preview_feature_description_character_portraits(),
     audience: 'director',
   },
+  [FeatureFlag.WatchingNowHeader]: {
+    icon: PeopleIcon,
+    title: () => m.preview_feature_title_watching_now_header(),
+    addedAt: new Date('2026-11-12'),
+    description: () => m.preview_feature_description_watching_now_header(),
+    audience: 'director',
+  },
 };
