@@ -4,6 +4,7 @@ import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import LaurelIcon from '$lib/components/icons/LaurelIcon.svelte';
 import HourglassIcon from '$lib/components/icons/HourglassIcon.svelte';
 import MatchIcon from '$lib/components/icons/MatchIcon.svelte';
+import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
@@ -95,6 +96,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_month_in_review_redesign(),
     addedAt: new Date('2026-11-12'),
     description: () => m.preview_feature_description_month_in_review_redesign(),
+    audience: 'director',
+  },
+  [FeatureFlag.WatchingNowHeader]: {
+    icon: PeopleIcon,
+    title: () => m.preview_feature_title_watching_now_header(),
+    addedAt: new Date('2026-11-12'),
+    description: () => m.preview_feature_description_watching_now_header(),
     audience: 'director',
   },
 };

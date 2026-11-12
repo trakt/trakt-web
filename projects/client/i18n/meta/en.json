@@ -15416,6 +15416,14 @@
       "default": "Shows your Month in Review in its new design, for free and VIP members.",
       "description": "Description of the Month in Review redesign preview feature."
     },
+    "preview_feature_title_watching_now_header": {
+      "default": "Watching Now on Home",
+      "description": "Title of the preview feature that shows who you follow is watching on the home page."
+    },
+    "preview_feature_description_watching_now_header": {
+      "default": "Shows who you follow is watching right now next to the Today button on the home page.",
+      "description": "Description of the Watching Now home page preview feature."
+    },
     "button_label_open_season_recap": {
       "default": "Open the recap for {season}",
       "description": "Accessible label of the Catch up pill on a show page. {season} is the seasons the recap covers, for example Season 1 or Seasons 1-3.",

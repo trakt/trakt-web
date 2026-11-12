@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import Banner from "$lib/sections/banner/Banner.svelte";
   import DashboardDrawer from "$lib/sections/dashboard/DashboardDrawer.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
@@ -33,7 +35,11 @@
 {/snippet}
 
 {#snippet todayEntry()}
-  <WatchingNowNavbarPill />
+  <RenderForFeature flag={FeatureFlag.WatchingNowHeader} audience="director">
+    {#snippet enabled()}
+      <WatchingNowNavbarPill />
+    {/snippet}
+  </RenderForFeature>
   <TodayNavbarEntry />
 {/snippet}
 

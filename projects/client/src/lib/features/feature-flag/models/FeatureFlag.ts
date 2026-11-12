@@ -9,4 +9,5 @@ export enum FeatureFlag {
   InsightsCard = 'insights-card',
   Awards = 'awards',
   MonthInReviewRedesign = 'month-in-review-redesign',
+  WatchingNowHeader = 'watching-now-header',
 }
