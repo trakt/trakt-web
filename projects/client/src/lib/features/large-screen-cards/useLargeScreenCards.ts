@@ -7,18 +7,19 @@ import {
   map,
   type Observable,
 } from 'rxjs';
+import { useLargeScreen } from './useLargeScreen.ts';
 
 export function useLargeScreenCards(): Observable<boolean> {
   const { isEnabled } = useFeatureFlag();
 
   return combineLatest([
     isEnabled(FeatureFlag.LargeScreenCards),
-    useMedia(WellKnownMediaQuery.tabletLarge),
-    useMedia(WellKnownMediaQuery.desktop),
+    useLargeScreen(),
+    useMedia(WellKnownMediaQuery.mouse),
   ]).pipe(
     map(
-      ([isFlagEnabled, isTabletLarge, isDesktop]) =>
-        isFlagEnabled && (isTabletLarge || isDesktop),
+      ([isFlagEnabled, isLargeScreen, isMouse]) =>
+        isFlagEnabled && isLargeScreen && isMouse,
     ),
     distinctUntilChanged(),
   );

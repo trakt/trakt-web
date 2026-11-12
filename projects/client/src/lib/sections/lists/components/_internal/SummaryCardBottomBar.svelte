@@ -1,5 +1,4 @@
 <script lang="ts">
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import { fade } from "svelte/transition";
   import type { SummaryCardLayout } from "../models/SummaryCardLayout";
@@ -7,40 +6,18 @@
   const {
     children,
     tag,
-    contextualTag,
     layout = "default",
   }: ChildrenProps & {
     tag?: Snippet;
-    contextualTag?: Snippet;
     layout?: SummaryCardLayout;
   } = $props();
-
-  const isSmall = $derived(layout === "compact" || layout === "minimal");
 </script>
 
-<div
-  class="trakt-summary-card-bottom-bar"
-  class:has-contextualTag={Boolean(contextualTag)}
-  data-layout={layout}
->
-  {#if contextualTag && !isSmall}
-    <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-      {@render contextualTag()}
-    </RenderFor>
-  {/if}
-
+<div class="trakt-summary-card-bottom-bar" data-layout={layout}>
   {#if tag}
-    {#if isSmall}
-      <div class="trakt-summary-bottom-bar-tags" in:fade={{ duration: 150 }}>
-        {@render tag()}
-      </div>
-    {:else}
-      <RenderFor audience="all" device={["tablet-sm", "mobile"]}>
-        <div class="trakt-summary-bottom-bar-tags" in:fade={{ duration: 150 }}>
-          {@render tag()}
-        </div>
-      </RenderFor>
-    {/if}
+    <div class="trakt-summary-bottom-bar-tags" in:fade={{ duration: 150 }}>
+      {@render tag()}
+    </div>
   {/if}
 
   {@render children()}
@@ -67,10 +44,6 @@
 
     z-index: var(--layer-floating);
 
-    &.has-contextualTag {
-      justify-content: space-between;
-    }
-
     &[data-layout="minimal"],
     &[data-layout="compact"] {
       --poster-width: calc(
@@ -86,5 +59,10 @@
     align-items: center;
     gap: var(--gap-xs);
     flex-grow: 1;
+  }
+
+  .trakt-summary-card-bottom-bar[data-layout="large"]
+    .trakt-summary-bottom-bar-tags {
+    min-width: 0;
   }
 </style>

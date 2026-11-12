@@ -8,7 +8,8 @@
     progress: number;
     total?: number;
     tags?: Snippet;
-  } & ChildrenProps;
+    children?: Snippet;
+  };
 
   const { children, progress, tags, total = 100 }: ProgressTagProps = $props();
 </script>
@@ -23,10 +24,12 @@
   aria-label={m.tag_label_progress()}
 >
   <TagContent>
-    <div class="tag-content">
-      <p class="tag bold capitalize no-wrap">
-        {@render children()}
-      </p>
+    <div class="tag-content" data-has-label={Boolean(children)}>
+      {#if children}
+        <p class="tag bold capitalize no-wrap">
+          {@render children()}
+        </p>
+      {/if}
 
       {#if tags}
         <TagBar>
@@ -47,6 +50,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    &[data-has-label="false"] {
+      justify-content: flex-end;
+    }
 
     gap: var(--gap-xs);
   }

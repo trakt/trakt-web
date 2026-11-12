@@ -3,8 +3,9 @@
   import MediaStatusTag from "$lib/components/media/tags/MediaStatusTag.svelte";
   import ProgressTag from "$lib/components/media/tags/ProgressTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import { useLargeScreen } from "$lib/features/large-screen-cards/useLargeScreen.ts";
+  import { resolveSummaryCardLayout } from "$lib/sections/lists/utils/resolveSummaryCardLayout.ts";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import type { Snippet } from "svelte";
   import ActivityDateTag from "./_internal/ActivityDateTag.svelte";
   import MediaHoverCard from "./_internal/MediaHoverCard.svelte";
@@ -14,15 +15,17 @@
   import type { MediaCardProps } from "./models/MediaCardProps";
 
   const {
-    contextualTag,
     sortTag,
     hoverTag,
+    detailsTag,
     ...props
   }: MediaCardProps & {
-    contextualTag?: Snippet;
     sortTag?: Snippet;
     hoverTag?: Snippet;
+    detailsTag?: Snippet;
   } = $props();
+
+  const isLargeScreen = useLargeScreen();
 
   const isLargeScreenCards = useLargeScreenCards();
 
@@ -32,14 +35,13 @@
   );
 
   const summaryCardLayout = $derived(
-    style === "compact" || style === "minimal" ? style : "default",
+    resolveSummaryCardLayout({ style, isLargeScreen: $isLargeScreen }),
   );
 
   const isCover = $derived(resolvedStyle === "cover");
 
-  const isMouse = useMedia(WellKnownMediaQuery.mouse);
   const hasHoverCard = $derived(
-    isCover && $isMouse && style === "summary" &&
+    isCover && style === "summary" &&
       (props.variant == null || props.variant === "start" ||
         props.variant === "credit" || props.variant === "progress" ||
         props.variant === "next" || props.variant === "activity"),
@@ -119,8 +121,8 @@
     {...props}
     style={resolvedStyle}
     layout={summaryCardLayout}
-    {contextualTag}
     {sortTag}
+    {detailsTag}
     badge={props.action}
     popupActions={props.badge ? undefined : props.popupActions}
     tag={props.variant === "next" || props.variant === "progress"

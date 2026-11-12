@@ -12,8 +12,9 @@
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import { useSpoilerFreeEpisodeTitle } from "$lib/features/spoilers/useSpoilerFreeEpisodeTitle.ts";
+  import { useLargeScreen } from "$lib/features/large-screen-cards/useLargeScreen.ts";
+  import { resolveSummaryCardLayout } from "$lib/sections/lists/utils/resolveSummaryCardLayout.ts";
   import { useLargeScreenCards } from "$lib/features/large-screen-cards/useLargeScreenCards.ts";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
@@ -38,18 +39,23 @@
   const isListItem = $derived(props.variant === "list-item");
 
   const isLargeScreenCards = useLargeScreenCards();
+  const isLargeScreen = useLargeScreen();
 
   const style = $derived(props.style ?? "cover");
   const resolvedStyle = $derived(
     resolveItemCardStyle(style, $isLargeScreenCards),
   );
   const summaryCardLayout = $derived(
-    style === "compact" || style === "minimal" ? style : "default",
+    resolveSummaryCardLayout({ style, isLargeScreen: $isLargeScreen }),
   );
 
-  const isMouse = useMedia(WellKnownMediaQuery.mouse);
+  const isLargeNext = $derived(
+    summaryCardLayout === "large" && resolvedStyle === "summary" &&
+      props.variant === "next",
+  );
+
   const hasHoverCard = $derived(
-    resolvedStyle === "cover" && $isMouse && style === "summary" &&
+    resolvedStyle === "cover" && style === "summary" &&
       (isListItem || isActivity || props.variant === "next"),
   );
 
@@ -139,6 +145,10 @@
   {/if}
 {/snippet}
 
+{#snippet runtimeDetailsTag()}
+  <DurationTag i18n={TagIntlProvider} {runtime} />
+{/snippet}
+
 {#snippet tag()}
   <div class="trakt-episode-tag">
     {#if props.tag}
@@ -179,7 +189,7 @@
           total={props.episode.total}
           tags={status ? statusTag : progressTags}
           {runtime}
-          style={resolvedStyle}
+          hasRuntime={!isLargeNext}
         />
       {/if}
 
@@ -256,6 +266,7 @@
       popupActions={props.popupActions}
       urlOverride={props.urlOverride}
       layout={summaryCardLayout}
+      detailsTag={isLargeNext ? runtimeDetailsTag : undefined}
       badge={action}
       {sortTag}
       type="episode"
