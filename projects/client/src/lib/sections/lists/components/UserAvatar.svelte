@@ -70,12 +70,15 @@
       width: 100%;
       height: 100%;
 
-      border: var(--ni-2) solid var(--shade-10);
+      border: var(--user-avatar-border, var(--ni-2) solid var(--shade-10));
     }
 
     &.trakt-vip-user {
       :global(.trakt-user-tier-ring.is-classic img) {
-        border: var(--ni-2) solid var(--color-border-vip-avatar);
+        border: var(
+          --user-avatar-border,
+          var(--ni-2) solid var(--color-border-vip-avatar)
+        );
       }
     }
   }

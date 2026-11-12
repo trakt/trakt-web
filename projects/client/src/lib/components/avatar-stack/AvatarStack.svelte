@@ -55,8 +55,9 @@
       );
       --avatar-stack-overlap: calc(-1 * var(--ni-8));
 
-      .avatar :global(.trakt-user-avatar img) {
-        border: var(--border-thickness-xs) solid var(--color-background);
+      .avatar {
+        --user-avatar-border: var(--border-thickness-xs) solid
+          var(--color-background);
       }
     }
   }
@@ -90,10 +91,6 @@
     :global(.trakt-user-avatar) {
       width: var(--avatar-stack-size);
       height: var(--avatar-stack-size);
-
-      :global(img) {
-        border-width: var(--ni-1);
-      }
     }
   }
 </style>
