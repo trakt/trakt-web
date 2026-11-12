@@ -3,12 +3,14 @@ import type { VipUpsellSource } from '$lib/features/upsell/models/VipUpsellSourc
 import type { VipPlanDuration } from '$lib/requests/models/VipPlanDuration.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
+import { toCheckoutReturnUrl } from './toCheckoutReturnUrl.ts';
 
 type CheckoutReturnParams = {
   origin: string;
   plan: VipPlanDuration;
   source: VipUpsellSource;
   flow: VipFlow;
+  returnUrl?: string | Nil;
 };
 
 export function buildCheckoutReturnUrls({
@@ -16,6 +18,7 @@ export function buildCheckoutReturnUrls({
   plan,
   source,
   flow,
+  returnUrl,
 }: CheckoutReturnParams) {
   const success = new URL(UrlBuilder.vip(source), origin);
   success.searchParams.set('plan', plan);
@@ -25,7 +28,7 @@ export function buildCheckoutReturnUrls({
   cancel.searchParams.set('checkout', 'canceled');
 
   return {
-    successUrl: setCacheBuster(success).href,
+    successUrl: toCheckoutReturnUrl(returnUrl) ?? setCacheBuster(success).href,
     cancelUrl: setCacheBuster(cancel).href,
   };
 }

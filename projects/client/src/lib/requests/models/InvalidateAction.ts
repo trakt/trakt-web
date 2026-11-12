@@ -13,7 +13,7 @@ type UserType =
   | 'cover'
   | 'block';
 type ListType = 'edited' | 'deleted' | 'created' | 'like' | 'collaborator';
-type VipType = 'canceled' | 'updated';
+type VipType = 'canceled' | 'updated' | 'promotion';
 type MediaSyncType = 'connections' | 'runs';
 type RewatchingType = 'show';
 type ShareType = 'click' | 'mute';
@@ -168,6 +168,7 @@ export const InvalidateAction = {
   Vip: {
     Canceled: buildInvalidationKey('vip', 'canceled'),
     Updated: buildInvalidationKey('vip', 'updated'),
+    Promotion: buildInvalidationKey('vip', 'promotion'),
   },
 
   Rewatching: (type: RewatchingType) =>

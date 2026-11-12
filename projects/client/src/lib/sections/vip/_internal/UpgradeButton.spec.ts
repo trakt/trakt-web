@@ -54,4 +54,18 @@ describe('UpgradeButton', () => {
       await screen.findByText("Couldn't start checkout"),
     ).toBeInTheDocument();
   });
+
+  it('should explain when the offer ended before checkout started', async () => {
+    const user = userEvent.setup();
+    server.use(
+      http.post('http://localhost/vip/stripe/create', () =>
+        HttpResponse.json({ error: 'promotion_unavailable' }, { status: 409 }),
+      ),
+    );
+
+    renderComponent(UpgradeButton, { props: { plan, label: 'Upgrade' } });
+    await user.click(await screen.findByRole('button', { name: 'Upgrade' }));
+
+    expect(await screen.findByText('This offer has ended')).toBeInTheDocument();
+  });
 });

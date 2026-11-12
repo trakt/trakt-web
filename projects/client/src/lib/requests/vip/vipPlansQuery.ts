@@ -1,4 +1,5 @@
 import { type ApiParams, rawApiFetch } from '$lib/requests/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import {
   type VipPlanResponse,
   VipPlansResponseSchema,
@@ -58,7 +59,7 @@ const vipPlansRequest = async ({ fetch }: VipPlansParams) => {
 
 export const vipPlansQuery = defineQuery({
   key: 'vipPlans',
-  invalidations: [],
+  invalidations: [InvalidateAction.Vip.Promotion],
   dependencies: [],
   request: vipPlansRequest,
   mapper: (response) => toPlans(response.body),

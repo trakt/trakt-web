@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useActiveOffer } from "$lib/features/promotions/useActiveOffer";
   import { VIP_PLANS } from "./constants";
   import TraktIcon from "./icons/TraktIcon.svelte";
   import SubscriptionCard from "./SubscriptionCard.svelte";
@@ -7,6 +9,7 @@
   import { useVip } from "./useVip";
   import { findHighlightedPlan } from "./utils/findHighlightedPlan";
   import { findTwoYearDealPlan } from "./utils/findTwoYearDealPlan";
+  import { parseVipParams } from "./utils/parseVipParams";
   import { isPaypalGateway } from "./utils/isPaypalGateway";
   import VipContentContainer from "./VipContentContainer.svelte";
   import VipHeader from "./VipHeader.svelte";
@@ -19,12 +22,20 @@
     isPaypalGateway($subscription?.gateway) && !$subscription?.isCancelled,
   );
 
-  const dealPlan = $derived(
-    isPaypalSwitch ? findTwoYearDealPlan(activePlans) : undefined,
+  const requestedPlan = $derived(parseVipParams(page.url).plan);
+
+  const dealPlan = $derived(findTwoYearDealPlan(activePlans));
+  const { offer } = useActiveOffer();
+  const dealOffer = $derived(
+    $offer?.plan.duration === dealPlan?.type ? $offer : null,
   );
 
   const highlightedPlan = $derived(
-    findHighlightedPlan({ plans: activePlans, hasDealCard: dealPlan != null }),
+    findHighlightedPlan({
+      plans: activePlans,
+      hasDealCard: dealPlan != null,
+      requestedPlan,
+    }),
   );
 </script>
 
@@ -51,7 +62,12 @@
   {/snippet}
 
   {#if dealPlan}
-    <TwoYearDealCard plan={dealPlan} />
+    <TwoYearDealCard
+      plan={dealPlan}
+      {isPaypalSwitch}
+      isEmphasized={requestedPlan === "two_years"}
+      offer={dealOffer}
+    />
     <p class="trakt-vip-plans-divider small secondary uppercase">
       {m.text_vip_deal_or_standard_plan()}
     </p>

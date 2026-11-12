@@ -79,6 +79,12 @@ describe('util: UrlBuilder', () => {
         '/vip?source=navbar-mobile',
       );
     });
+
+    it('should carry the plan ahead of the source', () => {
+      expect(UrlBuilder.vip('promotion-spring-offer', 'two_years')).to.equal(
+        '/vip?plan=two_years&source=promotion-spring-offer',
+      );
+    });
   });
 
   describe('og.support', () => {

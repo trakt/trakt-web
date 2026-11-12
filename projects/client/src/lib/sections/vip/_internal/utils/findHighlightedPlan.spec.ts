@@ -49,4 +49,24 @@ describe('util: findHighlightedPlan', () => {
       findHighlightedPlan({ plans: [monthly], hasDealCard: false }),
     ).toBeUndefined();
   });
+
+  it('should highlight the requested plan over the popular one', () => {
+    expect(
+      findHighlightedPlan({
+        plans: [twoYears, yearly, monthly],
+        hasDealCard: false,
+        requestedPlan: 'monthly',
+      }),
+    ).toBe(monthly);
+  });
+
+  it('should fall back when the requested plan is not offered', () => {
+    expect(
+      findHighlightedPlan({
+        plans: [yearly, monthly],
+        hasDealCard: false,
+        requestedPlan: 'two_years',
+      }),
+    ).toBe(yearly);
+  });
 });

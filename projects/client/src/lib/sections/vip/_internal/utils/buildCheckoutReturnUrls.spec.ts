@@ -55,4 +55,29 @@ describe('util: buildCheckoutReturnUrls', () => {
     expect(new URL(urls.successUrl).searchParams.has('source')).toBe(false);
     expect(parseVipParams(new URL(urls.successUrl)).source).toBe('direct');
   });
+
+  it('should use a trusted return url as the success url', () => {
+    const urls = buildCheckoutReturnUrls({
+      origin: ORIGIN,
+      plan: 'two_years',
+      source: 'direct',
+      flow: 'new',
+      returnUrl: 'https://trakt.tv/thanks',
+    });
+
+    expect(urls.successUrl).toBe('https://trakt.tv/thanks');
+    expect(new URL(urls.cancelUrl).pathname).toBe('/vip');
+  });
+
+  it('should ignore an untrusted return url', () => {
+    const urls = buildCheckoutReturnUrls({
+      origin: ORIGIN,
+      plan: 'two_years',
+      source: 'direct',
+      flow: 'new',
+      returnUrl: 'https://evil.com/',
+    });
+
+    expect(new URL(urls.successUrl).pathname).toBe('/vip');
+  });
 });

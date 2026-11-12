@@ -1,7 +1,9 @@
 <script lang="ts">
   import { initializePromotions } from "$lib/features/promotions/initializePromotions";
+  import { useActiveOffer } from "$lib/features/promotions/useActiveOffer";
   import { usePromotion } from "$lib/features/promotions/usePromotion";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import OfferBanner from "./_internal/OfferBanner.svelte";
   import PromotionBanners from "./_internal/PromotionBanners.svelte";
   import ReviewBanners from "./_internal/ReviewBanners.svelte";
   import NudgeBanner from "./nudge/NudgeBanner.svelte";
@@ -10,6 +12,7 @@
 
   $effect.pre(() => initializePromotions());
   const { promotion } = usePromotion();
+  const { offer } = useActiveOffer();
   const welcome = useWelcomeBanner();
   const { isVisible: isWelcomeVisible } = welcome;
 </script>
@@ -19,7 +22,7 @@
 </RenderFor>
 
 <RenderFor audience="free">
-  {#if !$isWelcomeVisible && !$promotion}
+  {#if !$isWelcomeVisible && !$promotion && !$offer}
     <NudgeBanner />
   {/if}
 </RenderFor>
@@ -28,6 +31,8 @@
   <ReviewBanners />
 </RenderFor>
 
-{#if $promotion}
+{#if $offer}
+  <OfferBanner offer={$offer} />
+{:else if $promotion}
   <PromotionBanners promotion={$promotion} />
 {/if}

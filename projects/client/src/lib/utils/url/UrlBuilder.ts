@@ -1,6 +1,7 @@
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { VipFlow } from '$lib/features/upsell/models/VipFlow.ts';
 import type { VipUpsellSource } from '$lib/features/upsell/models/VipUpsellSource.ts';
+import type { VipPlanDuration } from '$lib/requests/models/VipPlanDuration.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import type { PersonalListType } from '$lib/sections/lists/user/models/PersonalListType.ts';
@@ -318,10 +319,13 @@ export const UrlBuilder = {
     x: () => 'https://x.com/trakt',
     youtube: () => 'https://www.youtube.com/@trakt-tv',
   },
-  vip: (source?: VipUpsellSource) =>
-    source && source !== 'direct'
-      ? `/vip?${new URLSearchParams({ source })}`
-      : '/vip',
+  vip: (source?: VipUpsellSource, plan?: VipPlanDuration) => {
+    const params = new URLSearchParams();
+    if (plan) params.set('plan', plan);
+    if (source && source !== 'direct') params.set('source', source);
+
+    return params.size > 0 ? `/vip?${params}` : '/vip';
+  },
   vipCancel: () => '/vip/cancel',
   terms: () => '/terms',
   privacy: () => '/privacy',

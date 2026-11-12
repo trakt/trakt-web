@@ -5,6 +5,7 @@
   import type { VipPlan } from "./models/VipPlan";
   import SubscriptionTag from "./SubscriptionTag.svelte";
   import UpgradeButton from "./UpgradeButton.svelte";
+  import VipMonthlyPrice from "./VipMonthlyPrice.svelte";
   import { isTwoYearDealPlan } from "./utils/isTwoYearDealPlan";
   import { toVipPriceLabel } from "./utils/toVipPriceLabel";
 
@@ -14,26 +15,8 @@
     delay = 0,
   }: { plan: VipPlan; isHighlighted?: boolean; delay?: number } = $props();
 
-  const splitPrice = (price: number) => {
-    const isWholeNumber = price % 1 === 0;
-    const formatted = toVipPriceLabel(price);
-
-    if (isWholeNumber) {
-      return { whole: formatted, cents: null };
-    }
-
-    const match = formatted.match(/^([^.]+)\.(\d+)$/);
-    if (!match) {
-      return { whole: formatted, cents: null };
-    }
-
-    return { whole: match[1], cents: match[2] };
-  };
-
-  const displayPrice = $derived(
-    splitPrice(
-      plan.discount ? plan.discount.discountedAmountMonthly : plan.monthlyPrice,
-    ),
+  const monthlyAmount = $derived(
+    plan.discount ? plan.discount.discountedAmountMonthly : plan.monthlyPrice,
   );
 
   const dealPlan = $derived(isTwoYearDealPlan(plan) ? plan : null);
@@ -86,11 +69,7 @@
 
   <div class="trakt-subscription-container">
     <div class="trakt-subscription-pricing">
-      <span class="price"
-        >{displayPrice.whole}{#if displayPrice.cents}<sup class="cents"
-            >{displayPrice.cents}</sup
-          >{/if}<span class="per-month">/mo</span></span
-      >
+      <span class="price"><VipMonthlyPrice amount={monthlyAmount} /></span>
 
       <span class="billed-text">{billedText}</span>
     </div>
@@ -174,18 +153,6 @@
 
     .price {
       margin-top: var(--ni-12);
-      font-size: var(--price-font-size);
-      transition: font-size var(--transition-duration-short) ease-in-out;
-
-      .cents {
-        font-size: 0.5em;
-        vertical-align: super;
-      }
-
-      .per-month {
-        margin-inline-start: var(--ni-2);
-        font-size: 0.5em;
-      }
     }
 
     .billed-text {

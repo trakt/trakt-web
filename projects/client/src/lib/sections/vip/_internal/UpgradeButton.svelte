@@ -4,20 +4,24 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { VipUpsellSource } from "$lib/features/upsell/models/VipUpsellSource";
   import type { Snippet } from "svelte";
   import type { VipPlan } from "./models/VipPlan";
   import { useVip } from "./useVip";
+  import { toVipFailureCode } from "./utils/toVipFailureCode";
 
   const {
     plan,
     label,
     children,
     highlighted = true,
+    source,
   }: {
     plan: VipPlan;
     label?: string;
     children?: Snippet;
     highlighted?: boolean;
+    source?: VipUpsellSource;
   } = $props();
 
   const planLabel = $derived.by(() => {
@@ -34,13 +38,18 @@
   const { startCheckout, isFetching } = useVip();
   const { user } = useUser();
 
-  let hasFailed = $state(false);
+  let failure = $state<"offer_ended" | "failed" | null>(null);
 
   const onStartCheckout = async () => {
     if ($isFetching) return;
-    const url = await startCheckout(plan).catch(() => null);
+    failure = null;
+    const url = await startCheckout(plan, source).catch((error: unknown) => {
+      failure =
+        toVipFailureCode(error) === "http_409" ? "offer_ended" : "failed";
+      return null;
+    });
     if (!url) {
-      hasFailed = true;
+      failure ??= "failed";
       return;
     }
 
@@ -68,12 +77,19 @@
 </trakt-vip-upgrade-button>
 
 <Snackbar
-  open={hasFailed}
-  onDismiss={() => (hasFailed = false)}
+  open={failure === "failed"}
+  onDismiss={() => (failure = null)}
   title={m.text_vip_checkout_failed_title()}
   message={m.text_vip_subscription_failed_message()}
   href={UrlBuilder.og.support($user?.slug)}
   variant="error"
+/>
+
+<Snackbar
+  open={failure === "offer_ended"}
+  onDismiss={() => (failure = null)}
+  title={m.text_vip_offer_ended_title()}
+  message={m.text_vip_offer_ended_message()}
 />
 
 <style>

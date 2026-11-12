@@ -8160,6 +8160,31 @@
         }
       }
     },
+    "tag_text_vip_deal_limited_offer": {
+      "default": "Limited-time offer",
+      "description": "Eyebrow label on the VIP deal card for a limited-time 2 year discount, above the headline. This should be as short as possible."
+    },
+    "header_vip_deal_limited_offer": {
+      "default": "2 years of VIP for only {price}",
+      "description": "Headline on the VIP deal card showing the discounted total price for the first 2 years of VIP.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_deal_limited_offer": {
+      "default": "{price} today for your first 2 years, then {renewalPrice} every 2 years. Discount applied at checkout.",
+      "description": "Fine print on the VIP deal card for a limited-time 2 year discount. {renewalPrice} is the full 2 year plan price the plan renews at.",
+      "variables": {
+        "price": {
+          "type": "string"
+        },
+        "renewalPrice": {
+          "type": "string"
+        }
+      }
+    },
     "text_vip_deal_term": {
       "default": "2 years of VIP",
       "description": "Text under the deal price on the VIP deal card, saying what the price buys. This should be as short as possible."
@@ -9489,6 +9514,14 @@
     "text_vip_checkout_failed_title": {
       "default": "Couldn't start checkout",
       "description": "Title of the snackbar shown when starting the VIP checkout failed, for example because the connection dropped."
+    },
+    "text_vip_offer_ended_title": {
+      "default": "This offer has ended",
+      "description": "Title of the snackbar shown when someone tries to claim a limited-time VIP offer that ended just before they clicked."
+    },
+    "text_vip_offer_ended_message": {
+      "default": "Prices have been updated. Take another look before you continue.",
+      "description": "Message of the snackbar shown when someone tries to claim a limited-time VIP offer that ended just before they clicked. The plan prices on the page refresh to the regular prices."
     },
     "text_vip_subscription_failed_message": {
       "default": "Please try again later, or <a>contact support</a> if this keeps happening.",
@@ -16625,6 +16658,96 @@
     "vip_feature_description_leaderboard": {
       "default": "See where you rank amongst your friends on the leaderboard!",
       "description": "Description for the Leaderboard VIP feature."
+    },
+    "text_promotion_offer_headline": {
+      "default": "{term} of VIP for only {price}",
+      "description": "Headline of a limited-time VIP offer. {term} is the plan length, e.g. '2 years'. {price} is the discounted price.",
+      "variables": {
+        "term": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "text_promotion_ends_on": {
+      "default": "Ends {date}",
+      "description": "Small line next to the name of a limited-time VIP offer. {date} is the last day of the offer in the viewer's time zone, e.g. 'Wed, Mar 6'.",
+      "variables": {
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "text_promotion_ends_today": {
+      "default": "Ends today, {time}",
+      "description": "Small line next to the name of a limited-time VIP offer on its last day. {time} is the time the offer ends, in the viewer's time zone, e.g. '11:59 PM'.",
+      "variables": {
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "text_promotion_offer_pitch": {
+      "default": "That's just {monthly} a month!",
+      "description": "Line under the headline of a limited-time VIP offer. {monthly} is the offer price spread over the months it covers, e.g. '$2.92'.",
+      "variables": {
+        "monthly": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_promotion_claim": {
+      "default": "Claim deal",
+      "description": "Text for the button on the limited-time VIP offer banner that opens the VIP page. This should be as short as possible."
+    },
+    "text_promotion_chip_term": {
+      "default": "{term} of <b>VIP</b>",
+      "description": "First line of the navbar chip shown during a limited-time VIP offer. {term} is the plan length, e.g. '2 years'. Keep the <b></b> tags around the bold part. This should be as short as possible.",
+      "variables": {
+        "term": {
+          "type": "string"
+        }
+      }
+    },
+    "text_promotion_chip_price": {
+      "default": "for only <b>{price}</b>",
+      "description": "Second line of the navbar chip shown during a limited-time VIP offer. {price} is the discounted price. Keep the <b></b> tags around the bold part. This should be as short as possible.",
+      "variables": {
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "link_label_promotion_vip": {
+      "default": "{name}: get VIP for {price}",
+      "description": "Aria-label for the navbar chip shown during a limited-time VIP offer. {name} is the name of the offer, {price} is the discounted price.",
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "text_ticket_brand": {
+      "default": "Trakt VIP",
+      "description": "Small brand line printed on the decorative ticket art of a VIP offer. This should be as short as possible."
+    },
+    "text_ticket_year": {
+      "default": "Year {number}",
+      "description": "Large line printed on the decorative ticket art of a VIP offer, one ticket per year. {number} is the year number. This should be as short as possible.",
+      "variables": {
+        "number": {
+          "type": "string"
+        }
+      }
+    },
+    "text_ticket_admit_one": {
+      "default": "Admit one",
+      "description": "Small line printed on the decorative ticket art of a VIP offer, like a cinema ticket. This should be as short as possible."
     }
   }
 }
