@@ -108,7 +108,6 @@
     syncState.processedCount = 0;
     syncState.totalCount = count;
     const startTime = Date.now();
-    let errorCount = 0;
 
     await clearData(source, {
       signal: controller.signal,
@@ -117,9 +116,8 @@
       },
       onError: (message) => {
         console.error(message);
-        errorCount++;
       },
-      onComplete: async (success) => {
+      onComplete: async (success, failedCount = 0) => {
         await invalidateAll(invalidations, {
           refetchType: isLibrary ? "all" : "active",
         });
@@ -135,16 +133,25 @@
           return;
         }
 
-        const duration = Date.now() - startTime;
-        const successCount = syncState.totalCount - errorCount;
+        const isFullFailure =
+          syncState.totalCount > 0 && failedCount >= syncState.totalCount;
 
-        record(AnalyticsEvent.ClearCompleted, {
-          source: source.type,
-          totalItems: syncState.totalCount,
-          successCount,
-          failedCount: errorCount,
-          duration,
-        });
+        if (isFullFailure) {
+          record(AnalyticsEvent.ClearFailed, {
+            source: source.type,
+            error: "aborted or fully failed",
+          });
+        }
+
+        if (!isFullFailure) {
+          record(AnalyticsEvent.ClearCompleted, {
+            source: source.type,
+            totalItems: syncState.totalCount,
+            successCount: syncState.totalCount - failedCount,
+            failedCount,
+            duration: Date.now() - startTime,
+          });
+        }
 
         clearInProgress.next(false);
         isRunning = false;

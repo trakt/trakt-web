@@ -26,7 +26,11 @@ export async function clearRatings(
     }));
 
     const client = api();
-    const { run } = createSyncRunner({ onProgress, onError, signal });
+    const { run, getErrorCount } = createSyncRunner({
+      onProgress,
+      onError,
+      signal,
+    });
 
     if (movies.length > 0) {
       await run(
@@ -62,7 +66,7 @@ export async function clearRatings(
       );
     }
 
-    onComplete?.(!signal?.aborted);
+    onComplete?.(!signal?.aborted, getErrorCount());
   } catch (err) {
     onComplete?.(false);
     throw err;
