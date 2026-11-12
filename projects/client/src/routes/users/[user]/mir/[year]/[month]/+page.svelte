@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import MonthInReviewPage from "$lib/sections/month-in-review/MonthInReviewPage.svelte";
   import ReviewRouteLayout from "$lib/sections/yir/ReviewRouteLayout.svelte";
   import MirPage from "$lib/sections/yir/MirPage.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
@@ -16,5 +19,14 @@
   title={m.page_title_month_in_review()}
   image={DEFAULT_SHARE_COVER}
 >
-  <MirPage slug={params.user} {year} {month} />
+  <RenderForFeature
+    flag={FeatureFlag.MonthInReviewRedesign}
+    audience="director"
+  >
+    {#snippet enabled()}
+      <MonthInReviewPage slug={params.user} {year} {month} />
+    {/snippet}
+
+    <MirPage slug={params.user} {year} {month} />
+  </RenderForFeature>
 </ReviewRouteLayout>

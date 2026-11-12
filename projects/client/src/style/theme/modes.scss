@@ -706,6 +706,15 @@
   // (the SVG reads as designed); knocked back to a faint watermark in light so
   // the heavy dark wordmark doesn't dominate the light background.
   --yir-hero-watermark-opacity: 0.12;
+  --color-month-review-accent: var(--purple-500);
+  --color-month-review-tile: color-mix(in srgb, var(--shade-920) 4%, transparent);
+  --color-month-review-hairline: color-mix(in srgb, var(--shade-920) 8%, transparent);
+  --color-month-review-track: color-mix(in srgb, var(--shade-920) 14%, transparent);
+  --color-month-review-glow: color-mix(in srgb, var(--purple-300) 24%, transparent);
+  --color-month-review-panel: var(--purple-50);
+  --color-month-review-panel-glow: color-mix(in srgb, var(--purple-200) 55%, transparent);
+  --color-month-review-card: var(--shade-10);
+  --month-review-ambient-opacity: 0.22;
 }
 
 // Define theme variables for dark mode
@@ -1419,6 +1428,15 @@
     color-mix(in srgb, var(--shade-950) 70%, var(--shade-900) 30%) 100%
   );
   --yir-hero-watermark-opacity: 1;
+  --color-month-review-accent: var(--purple-400);
+  --color-month-review-tile: color-mix(in srgb, var(--shade-10) 5%, transparent);
+  --color-month-review-hairline: color-mix(in srgb, var(--shade-10) 8%, transparent);
+  --color-month-review-track: color-mix(in srgb, var(--shade-10) 14%, transparent);
+  --color-month-review-glow: color-mix(in srgb, var(--purple-500) 22%, transparent);
+  --color-month-review-panel: var(--purple-1000);
+  --color-month-review-panel-glow: color-mix(in srgb, var(--purple-700) 55%, transparent);
+  --color-month-review-card: var(--shade-930);
+  --month-review-ambient-opacity: 0.1;
 }
 
 // Apply themes to selectors
