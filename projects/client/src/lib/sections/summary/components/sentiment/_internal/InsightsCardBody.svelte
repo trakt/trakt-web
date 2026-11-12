@@ -1,7 +1,7 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import type { MatchKind } from "$lib/requests/models/MatchKind.ts";
-  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
+  import type { RealityCheckVariant } from "$lib/requests/models/RealityCheckVariant.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import InsightsSummary from "./InsightsSummary.svelte";
   import MatchRingSlot from "./MatchRingSlot.svelte";
@@ -16,7 +16,7 @@
     isMatchLoading,
   }: {
     sentiment: SentimentAnalysis | Nil;
-    realityCheck: RealityCheck | null | undefined;
+    realityCheck: RealityCheckVariant | null | undefined;
     hasRing: boolean;
     hasDrawer: boolean;
     score: number | null;

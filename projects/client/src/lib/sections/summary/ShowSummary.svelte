@@ -8,7 +8,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
-  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
+  import type { RealityCheckVariant } from "$lib/requests/models/RealityCheckVariant.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -35,7 +35,7 @@
     videos: MediaVideo[];
     currentSeason: number;
     sentiment: SentimentAnalysis | Nil;
-    realityCheck: RealityCheck | null | undefined;
+    realityCheck: RealityCheckVariant | null | undefined;
   } & CommonMediaSummaryProps;
 
   const {

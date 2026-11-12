@@ -2932,6 +2932,66 @@
       "default": "Left out",
       "description": "Header for the section that lists what a movie or show leaves out of the real story."
     },
+    "text_documentary_tier_none": {
+      "default": "No disputes found",
+      "description": "Documentary Check verdict: no source disputed the claims of the documentary."
+    },
+    "text_documentary_tier_minor": {
+      "default": "Minor points disputed",
+      "description": "Documentary Check verdict: sources disputed only minor points of the documentary."
+    },
+    "text_documentary_tier_central": {
+      "default": "Central claims disputed",
+      "description": "Documentary Check verdict: sources disputed central claims of the documentary."
+    },
+    "text_documentary_tier_wide": {
+      "default": "Widely disputed",
+      "description": "Documentary Check verdict: many sources disputed central claims of the documentary."
+    },
+    "text_documentary_tier_not_enough": {
+      "default": "Not enough sources",
+      "description": "Documentary Check verdict: there are not enough independent sources to say how disputed the documentary is."
+    },
+    "text_documentary_made_by": {
+      "default": "Made by {names}.",
+      "description": "Small line under the Documentary Check summary naming who made the documentary. {names} is a list of production companies or filmmakers."
+    },
+    "text_documentary_funded_by": {
+      "default": "Funded by {names}.",
+      "description": "Small line under the Documentary Check summary naming who funded the documentary. {names} is a list of funders. Only shown when a source names one."
+    },
+    "header_documentary_disputed_claims": {
+      "default": "Disputed claims",
+      "description": "Small header above the list of claims of a documentary that others disputed."
+    },
+    "label_documentary_claim_film_says": {
+      "default": "The film says",
+      "description": "Small label in a disputed claim, next to the text that says what the documentary claims."
+    },
+    "label_documentary_claim_disputed_by": {
+      "default": "Disputed by",
+      "description": "Small label in a disputed claim, next to the name of who disputed it."
+    },
+    "label_documentary_claim_reply": {
+      "default": "Film's reply",
+      "description": "Small label in a disputed claim, next to the reply of the filmmakers. Only shown when a reply exists."
+    },
+    "text_documentary_source_expert": {
+      "default": "Expert",
+      "description": "Tag on a disputed claim: the claim was disputed by an expert or a researcher."
+    },
+    "text_documentary_source_press": {
+      "default": "Press",
+      "description": "Tag on a disputed claim: the claim was disputed by a news outlet or a journalist."
+    },
+    "text_documentary_source_interested": {
+      "default": "Interested party",
+      "description": "Tag on a disputed claim: the claim was disputed by a group with a stake in the subject, such as an industry group."
+    },
+    "text_documentary_source_filmmaker": {
+      "default": "Filmmaker",
+      "description": "Tag on a disputed claim: the claim was disputed by a filmmaker."
+    },
     "button_text_manage_lists": {
       "default": "Manage lists",
       "description": "Text for the button that opens the lists drawer. This allows users to add or remove a movie, show, season or episode from their lists."

@@ -9,7 +9,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry.ts";
-  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
+  import type { RealityCheckVariant } from "$lib/requests/models/RealityCheckVariant.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis";
   import { TAB_PARAM } from "$lib/sections/summary/constants.ts";
   import RealityCheckTab from "../reality-check/RealityCheckTab.svelte";
@@ -33,7 +33,7 @@
     media,
   }: {
     sentiment: SentimentAnalysis | Nil;
-    realityCheck: RealityCheck | null | undefined;
+    realityCheck: RealityCheckVariant | null | undefined;
     media: MediaEntry;
     source: InsightsOpenSource;
     onClose: () => void;
