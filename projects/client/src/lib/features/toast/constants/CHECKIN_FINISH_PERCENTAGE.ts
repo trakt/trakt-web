@@ -1,0 +1,1 @@
+export const CHECKIN_FINISH_PERCENTAGE = 95;

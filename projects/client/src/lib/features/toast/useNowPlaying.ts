@@ -1,6 +1,7 @@
 import { time } from '$lib/utils/timing/time.ts';
 import { onMount } from 'svelte';
 import { getToastContext } from './_internal/getToastContext.ts';
+import { hasNowPlayingEnded } from './hasNowPlayingEnded.ts';
 
 const UPDATE_FREQUENCY = time.seconds(1);
 
@@ -34,7 +35,7 @@ export function useNowPlaying() {
         remainingMinutes.next(Math.max(remaining / time.minutes(1), 1));
         progress.next(progressPercentage);
 
-        if (progressPercentage >= 100) {
+        if (hasNowPlayingEnded(value, now)) {
           queueMicrotask(() => {
             if (nowPlaying.value === value) nowPlaying.next(null);
           });
