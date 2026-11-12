@@ -10,9 +10,7 @@
   title={m.header_preview_features()}
   description={m.description_preview_features()}
 >
-  <RenderFor audience="vip">
-    <FeatureFlagItems classList="trakt-settings-feature-preview" />
-  </RenderFor>
+  <FeatureFlagItems classList="trakt-settings-feature-preview" />
 
   <RenderFor audience="free">
     <UpsellCta source="preview-features">
