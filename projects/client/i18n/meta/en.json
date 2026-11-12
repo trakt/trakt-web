@@ -10971,6 +10971,14 @@
         }
       }
     },
+    "button_label_rate_untitled": {
+      "default": "Rate",
+      "description": "Aria label for the button that allows users to rate a movie or show when its title is not loaded."
+    },
+    "button_label_change_rating_untitled": {
+      "default": "Change rating",
+      "description": "Aria label for the button that shows the user's own rating and reopens the rating picker, when the title is not loaded."
+    },
     "button_text_watch_until_here_anchor_start": {
       "default": "Start time",
       "description": "Toggle label that treats the picked date and time as when the user started binge-watching the selected episodes."

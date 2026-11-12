@@ -18,7 +18,7 @@ type RateableSeason = {
 
 type RateableMedia = {
   type: MediaType;
-  media: MediaEntry;
+  media: Pick<MediaEntry, 'id'> & Partial<Pick<MediaEntry, 'title'>>;
 };
 
 export type RateNowProps = (
