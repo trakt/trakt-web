@@ -6,6 +6,7 @@ import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import { defineMutation } from '$lib/features/query/defineMutation.ts';
 import { useMutation } from '$lib/features/query/useMutation.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import type { DataSync } from '$lib/requests/models/DataSync.ts';
 import { connectStreamingRequest } from '$lib/requests/queries/streaming-sync/connectStreamingRequest.ts';
 import { disconnectStreamingRequest } from '$lib/requests/queries/streaming-sync/disconnectStreamingRequest.ts';
 import { refreshStreamingRequest } from '$lib/requests/queries/streaming-sync/refreshStreamingRequest.ts';
@@ -89,13 +90,16 @@ export function useStreamingServicesActions() {
       },
     });
 
-  const undo = (syncId: number) =>
+  const undo = (sync: Pick<DataSync, 'id' | 'source'>) =>
     confirm({
       type: ConfirmationType.UndoSync,
       onConfirm: () => {
-        track({ action: 'undo' });
+        track({
+          action: 'undo',
+          ...(sync.source ? { service: sync.source } : {}),
+        });
 
-        return undoSync.mutate(syncId);
+        return undoSync.mutate(sync.id);
       },
     });
 

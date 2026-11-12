@@ -11,7 +11,7 @@
     hasNextPage: boolean;
     isFetchingNextPage?: boolean;
     onLoadMore: () => void;
-    getOnUndo: (id: number) => () => void;
+    getOnUndo: (sync: DataSync) => () => void;
     getService?: (sync: DataSync) => ServiceInfo | undefined;
     getHref?: (sync: DataSync) => string;
   };
@@ -33,7 +33,7 @@
       {sync}
       service={getService?.(sync)}
       href={getHref?.(sync)}
-      onUndo={getOnUndo(sync.id)}
+      onUndo={getOnUndo(sync)}
     />
   {/each}
 </SettingsGroupCard>

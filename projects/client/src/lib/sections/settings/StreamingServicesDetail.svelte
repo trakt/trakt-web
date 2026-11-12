@@ -49,7 +49,7 @@
             application: $sync.application,
             connections: $lookup,
           })}
-          onUndo={actions.undo($sync.id)}
+          onUndo={actions.undo($sync)}
         />
       </SettingsGroupCard>
     {/if}
