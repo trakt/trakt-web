@@ -2,6 +2,8 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import LoadingIndicator from "$lib/components/icons/LoadingIndicator.svelte";
   import NavigationGuard from "$lib/components/NavigationGuard.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useAnalytics } from "$lib/features/analytics/useAnalytics.ts";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType.ts";
   import { useConfirm } from "$lib/features/confirmation/useConfirm.ts";
@@ -35,6 +37,7 @@
   const { invalidateAll } = useInvalidator();
   const { clearInProgress } = useClearInProgress();
   const { confirm } = useConfirm();
+  const { record } = useAnalytics();
   const exportGate = useExportGate();
 
   const moviePlays = useQuery(currentUserWatchedMoviePlaysQuery({}));
@@ -116,13 +119,18 @@
       return;
     }
 
-    abortController = new AbortController();
+    const source = `history-duplicates-${category.target}`;
+    record(AnalyticsEvent.ClearInitiated, { source });
+
+    const controller = new AbortController();
+    abortController = controller;
+    const startTime = Date.now();
     syncState.status = "cleaning";
     syncState.processedCount = 0;
     syncState.totalCount = duplicateIds.length;
 
     await cleanUpHistoryPlays(duplicateIds, {
-      signal: abortController.signal,
+      signal: controller.signal,
       onProgress: (n) => {
         syncState.processedCount = n;
       },
@@ -130,12 +138,37 @@
         console.error(message);
       },
       onComplete: async (success, failedCount = 0) => {
+        if (!success && !controller.signal.aborted) {
+          record(AnalyticsEvent.ClearFailed, {
+            source,
+            error: "aborted or fully failed",
+          });
+        }
+
         if (!success) {
           stopCleanUp();
           return;
         }
 
         removedCount = syncState.totalCount - failedCount;
+        const isFullFailure = failedCount >= syncState.totalCount;
+
+        if (isFullFailure) {
+          record(AnalyticsEvent.ClearFailed, {
+            source,
+            error: "aborted or fully failed",
+          });
+        }
+
+        if (!isFullFailure) {
+          record(AnalyticsEvent.ClearCompleted, {
+            source,
+            totalItems: syncState.totalCount,
+            successCount: removedCount,
+            failedCount,
+            duration: Date.now() - startTime,
+          });
+        }
         await invalidateAll(category.invalidations);
         clearInProgress.next(false);
         isRunning = false;
