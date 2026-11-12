@@ -15,8 +15,8 @@ describe('util: toVipUpsellSource', () => {
   });
 
   it('should keep a promotion source', () => {
-    expect(toVipUpsellSource('promotion-black-friday')).toBe(
-      'promotion-black-friday',
+    expect(toVipUpsellSource('promotion-spring-offer')).toBe(
+      'promotion-spring-offer',
     );
   });
 

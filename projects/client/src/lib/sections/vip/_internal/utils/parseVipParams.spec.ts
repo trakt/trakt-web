@@ -30,8 +30,8 @@ describe('util: parseVipParams', () => {
   });
 
   it('should keep a promotion source', () => {
-    expect(parse('/vip?source=promotion-black-friday').source).toBe(
-      'promotion-black-friday',
+    expect(parse('/vip?source=promotion-spring-offer').source).toBe(
+      'promotion-spring-offer',
     );
   });
 

@@ -3,7 +3,7 @@ import { toVipUpsellSource } from './toVipUpsellSource.ts';
 import { toPromotionUpsellSource } from './toPromotionUpsellSource.ts';
 
 describe('util: toPromotionUpsellSource', () => {
-  it.each(['black-friday', 'yir-2025'])(
+  it.each(['spring-offer', 'yir-2025'])(
     'should build a source that survives validation for %s',
     (id) => {
       const source = toPromotionUpsellSource({ id });

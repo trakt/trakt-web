@@ -20,6 +20,10 @@ vi.mock('$lib/features/query/useQuery.ts', () => ({
   useQuery: () => of({ data: connections.current, isError: false }),
 }));
 
+vi.mock('$lib/features/promotions/useActiveOffer.ts', () => ({
+  useActiveOffer: () => ({ offer: of(null) }),
+}));
+
 vi.mock('./SyncedServers.svelte', () => ({ default: () => {} }));
 
 vi.mock('./useJellyfinConnect.ts', () => ({

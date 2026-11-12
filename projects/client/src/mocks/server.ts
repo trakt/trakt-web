@@ -10,6 +10,7 @@ import { lists } from './handlers/lists.ts';
 import { movies } from './handlers/movies.ts';
 import { people } from './handlers/people.ts';
 import { mediaSync } from './handlers/mediaSync.ts';
+import { promotions } from './handlers/promotions.ts';
 import { recommendations } from './handlers/recommendations.ts';
 import { search } from './handlers/search.ts';
 import { shows } from './handlers/shows.ts';
@@ -42,6 +43,7 @@ const handlers = [
   ...intl,
   ...klipy,
   ...vip,
+  ...promotions,
   ...shares,
 ];
 
