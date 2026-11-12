@@ -20,7 +20,11 @@ export async function clearHistory(
     }));
 
     const client = api();
-    const { run } = createSyncRunner({ onProgress, onError, signal });
+    const { run, getErrorCount } = createSyncRunner({
+      onProgress,
+      onError,
+      signal,
+    });
 
     if (movies.length > 0) {
       await run(
@@ -38,7 +42,7 @@ export async function clearHistory(
       );
     }
 
-    onComplete?.(!signal?.aborted);
+    onComplete?.(!signal?.aborted, getErrorCount());
   } catch (err) {
     onComplete?.(false);
     throw err;
