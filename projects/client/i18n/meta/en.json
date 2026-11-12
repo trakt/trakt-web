@@ -7125,6 +7125,246 @@
       "default": "Month in Review",
       "description": "Period label in the Month in Review header, shown beneath the month and year (the MIR equivalent of 'Year in Review')."
     },
+    "month_review_kicker": {
+      "default": "Episode {episode} of 12",
+      "description": "Small label above the month title in Month in Review, for example \"Episode 10 of 12\", shown after the year. Each month is framed as one episode of a 12-episode year, so {episode} is the month number."
+    },
+    "month_review_subtitle_me": {
+      "default": "Your month, on screen.",
+      "description": "Line under the month title on your own Month in Review."
+    },
+    "month_review_subtitle_user": {
+      "default": "{name}'s month, on screen.",
+      "description": "Line under the month title on someone else's Month in Review. {name} is their display name."
+    },
+    "month_review_label_plays": {
+      "default": "Plays",
+      "description": "Stat label in Month in Review: number of plays."
+    },
+    "month_review_label_movies": {
+      "default": "Movies",
+      "description": "Stat label in Month in Review: number of distinct movies watched."
+    },
+    "month_review_label_shows": {
+      "default": "Shows",
+      "description": "Stat label in Month in Review: number of distinct shows watched."
+    },
+    "month_review_label_active_days": {
+      "default": "Active days",
+      "description": "Stat label in Month in Review: number of days with at least one play."
+    },
+    "month_review_label_hours": {
+      "default": "Hours",
+      "description": "Stat label in Month in Review: hours watched."
+    },
+    "month_review_tag_number_one": {
+      "default": "No. 1",
+      "description": "Tag on the most played title's poster in Month in Review."
+    },
+    "month_review_outro_kicker": {
+      "default": "That's a wrap",
+      "description": "Small label above the closing line of Month in Review."
+    },
+    "month_review_outro_title": {
+      "default": "See you in {month}.",
+      "description": "Closing line of Month in Review. {month} is the next month's name."
+    },
+    "month_review_empty": {
+      "default": "Nothing watched in {month}.",
+      "description": "Shown in Month in Review when the month has no plays. {month} is the month's name."
+    },
+    "month_review_section_watched": {
+      "default": "What you watched",
+      "description": "Section label in Month in Review for the titles watched that month."
+    },
+    "month_review_unrated_title": {
+      "default": "Not rated yet",
+      "description": "Title of the Month in Review card listing titles watched that month but not rated."
+    },
+    "month_review_unrated_body": {
+      "default": "You watched these this month. Add a rating to round off the month.",
+      "description": "Body of the unrated card in Month in Review, above the list of unrated titles."
+    },
+    "month_review_section_more": {
+      "default": "The rest of {month}",
+      "description": "Section label above the VIP upsell in the free Month in Review. {month} is the month's name."
+    },
+    "month_review_more_title": {
+      "default": "There's more to your {month}.",
+      "description": "Headline of the VIP upsell in the free Month in Review. {month} is the month's name."
+    },
+    "month_review_more_body": {
+      "default": "The full review shows where your hours went, your best nights, where you watched and what you watched, plus a recap you can share.",
+      "description": "Body of the VIP upsell in the free Month in Review."
+    },
+    "month_review_feature_hours": {
+      "default": "Hours watched",
+      "description": "VIP feature listed in the Month in Review upsell."
+    },
+    "month_review_feature_nights": {
+      "default": "Your best nights",
+      "description": "VIP feature listed in the Month in Review upsell."
+    },
+    "month_review_feature_top_rated": {
+      "default": "Your top rated",
+      "description": "VIP feature listed in the Month in Review upsell."
+    },
+    "month_review_feature_recap": {
+      "default": "Shareable recap",
+      "description": "VIP feature listed in the Month in Review upsell: a recap of the month that can be shared."
+    },
+    "month_review_unlock": {
+      "default": "Unlock the full review",
+      "description": "Call to action in the Month in Review upsell that opens the VIP page."
+    },
+    "month_review_includes_yir": {
+      "default": "Includes Year in Review",
+      "description": "Note next to the Month in Review upsell button."
+    },
+    "month_review_see_it": {
+      "default": "See it in action",
+      "description": "Small label above example reviews from the Trakt team in the Month in Review upsell."
+    },
+    "month_review_see_it_body": {
+      "default": "Real {month} reviews from the Trakt team",
+      "description": "Line above example reviews in the Month in Review upsell. {month} is the month's name."
+    },
+    "month_review_role_director": {
+      "default": "Director",
+      "description": "Role shown under a Trakt team member's name on an example review card."
+    },
+    "month_review_open_review": {
+      "default": "Open {name}'s {month} review",
+      "description": "Accessible label for an example review card in the Month in Review upsell."
+    },
+    "month_review_section_numbers": {
+      "default": "The numbers",
+      "description": "Section label in the VIP Month in Review for the month's totals and charts."
+    },
+    "month_review_vs_previous": {
+      "default": "vs {month}",
+      "description": "Comparison note under a stat in Month in Review. {month} is the previous month's name."
+    },
+    "month_review_day_by_day": {
+      "default": "Day by day",
+      "description": "Title of the daily plays chart in Month in Review."
+    },
+    "month_review_busiest_day": {
+      "default": "Busiest day: {date}",
+      "description": "Line under the daily plays chart in Month in Review. {date} is the day with the most plays."
+    },
+    "month_review_prime_time": {
+      "default": "Prime time",
+      "description": "Title of the plays by hour chart in Month in Review."
+    },
+    "month_review_peak_hour": {
+      "default": "Most plays started around {hour}",
+      "description": "Line under the plays by hour chart in Month in Review. {hour} is a time of day."
+    },
+    "month_review_number_one": {
+      "default": "Your number one",
+      "description": "Small label above the most played title in Month in Review."
+    },
+    "month_review_services": {
+      "default": "Where you watched",
+      "description": "Title of the streaming services list in Month in Review."
+    },
+    "month_review_section_ratings": {
+      "default": "Your ratings",
+      "description": "Section label in the VIP Month in Review for ratings given that month."
+    },
+    "month_review_label_rated": {
+      "default": "Rated",
+      "description": "Stat label in Month in Review: number of ratings given that month."
+    },
+    "month_review_top_rated": {
+      "default": "Top rated",
+      "description": "Title of the top rated titles list in Month in Review."
+    },
+    "month_review_section_bookends": {
+      "default": "First and last",
+      "description": "Section label in the VIP Month in Review for the first and last play of the month."
+    },
+    "month_review_first_play": {
+      "default": "First play",
+      "description": "Label on the card for the first play of the month in Month in Review."
+    },
+    "month_review_last_play": {
+      "default": "Last play",
+      "description": "Label on the card for the last play of the month in Month in Review."
+    },
+    "month_review_label_titles": {
+      "default": "Titles",
+      "description": "Stat label in Month in Review: number of distinct titles watched."
+    },
+    "month_review_label_hours_per_day": {
+      "default": "Hours a day",
+      "description": "Stat label in Month in Review: average hours watched per day."
+    },
+    "month_review_label_comments": {
+      "default": "Comments",
+      "description": "Stat label in Month in Review: comments written that month."
+    },
+    "month_review_label_lists": {
+      "default": "Lists",
+      "description": "Stat label in Month in Review: lists created that month."
+    },
+    "month_review_label_busiest_day": {
+      "default": "Busiest day",
+      "description": "Stat label in Month in Review: the day with the most plays."
+    },
+    "month_review_label_peak_hour": {
+      "default": "Peak hour",
+      "description": "Stat label in Month in Review: the hour most plays started."
+    },
+    "month_review_label_genres": {
+      "default": "Genres",
+      "description": "Stat label in Month in Review: number of genres watched."
+    },
+    "month_review_most_watched": {
+      "default": "Most watched",
+      "description": "Title of the most watched titles list in Month in Review."
+    },
+    "month_review_scroll_cue": {
+      "default": "Scroll",
+      "description": "Small cue at the bottom of the Month in Review intro telling people to scroll."
+    },
+    "month_review_private_title": {
+      "default": "{name}'s {month} is private",
+      "description": "Title shown on someone else's Month in Review when it isn't available to view. {name} is their display name, {month} the month's name."
+    },
+    "month_review_private_body": {
+      "default": "Free members see their own Month in Review. VIP members get a review anyone can look at.",
+      "description": "Body shown on someone else's Month in Review when it isn't available to view."
+    },
+    "month_review_private_own": {
+      "default": "See your {month}",
+      "description": "Link from a private Month in Review to your own review of the same month. {month} is the month's name."
+    },
+    "month_review_your_week": {
+      "default": "Your week",
+      "description": "Title of the plays by weekday chart in Month in Review."
+    },
+    "month_review_weekday_lead": {
+      "default": "Most plays on {day}: {plays}",
+      "description": "Line under the plays by weekday chart in Month in Review. {day} is a weekday name, {plays} a play count like '11 plays'."
+    },
+    "month_review_weekends": {
+      "default": "Weekends",
+      "description": "Legend label for the highlighted weekend bars in the Month in Review day by day chart."
+    },
+    "month_review_after_hours": {
+      "default": "{percent} of your plays started after {hour}.",
+      "description": "Line in the Month in Review prime time chart. {percent} is a share like '52%', {hour} a time of day like '8 PM'."
+    },
+    "month_review_top_share": {
+      "default": "{title} took {percent} of your plays.",
+      "description": "Line under the most watched list in Month in Review. {title} is the number one title, {percent} a share like '25%'."
+    },
+    "month_review_year_so_far": {
+      "default": "{year} so far",
+      "description": "Link in the closing section of Month in Review to the year to date review. {year} is the year."
+    },
     "mir_share_text": {
       "default": "Check out my {month} Month in Review on Trakt",
       "description": "Share text used when sharing a Month in Review page. {month} is the formatted month and year, e.g. 'May 2025'.",
@@ -15103,6 +15343,14 @@
           "required": true
         }
       }
+    },
+    "preview_feature_title_month_in_review_redesign": {
+      "default": "New Month in Review",
+      "description": "Product feature name for the preview feature that switches Month in Review to its redesigned layout."
+    },
+    "preview_feature_description_month_in_review_redesign": {
+      "default": "Shows your Month in Review in its new design, for free and VIP members.",
+      "description": "Description of the Month in Review redesign preview feature."
     },
     "button_label_open_season_recap": {
       "default": "Open the recap for {season}",

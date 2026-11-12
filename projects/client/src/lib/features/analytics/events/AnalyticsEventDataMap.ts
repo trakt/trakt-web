@@ -193,6 +193,10 @@ type BrandingDownloadType = {
   scope: 'logo' | 'kit';
   backdrop: BrandingBackdrop;
 };
+type MonthReviewViewType = {
+  tier: 'free' | 'vip';
+  owner: 'me' | 'other';
+};
 
 type OnboardingStepType = {
   step: 'intro' | 'import' | 'outro';
@@ -327,6 +331,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.InsightsOpen]: InsightsOpenType;
   [AnalyticsEvent.InsightsTab]: InsightsTabType;
 
+  [AnalyticsEvent.MonthReviewView]: MonthReviewViewType;
   [AnalyticsEvent.RecapOpen]: never;
   [AnalyticsEvent.RecapTab]: RecapTabType;
   [AnalyticsEvent.RecapReveal]: never;

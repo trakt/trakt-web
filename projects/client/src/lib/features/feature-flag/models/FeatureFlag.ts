@@ -8,4 +8,5 @@ export enum FeatureFlag {
   AnticipatedRecommendations = 'anticipated-recommendations',
   InsightsCard = 'insights-card',
   Awards = 'awards',
+  MonthInReviewRedesign = 'month-in-review-redesign',
 }
