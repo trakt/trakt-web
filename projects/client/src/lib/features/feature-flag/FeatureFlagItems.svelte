@@ -25,7 +25,10 @@
   const { track } = useTrack(AnalyticsEvent.PreviewFeature);
   const { acknowledgeUnread } = useUnreadPreviewFeatures();
   const featureFlags = Object.values(FeatureFlag);
-  const hasFlags = featureFlags.length > 0;
+  const isForDirectors = (key: FeatureFlag) =>
+    featureFlagDefinitions[key].audience === "director";
+  const vipFlags = featureFlags.filter((key) => !isForDirectors(key));
+  const directorFlags = featureFlags.filter(isForDirectors);
 
   let newFeatures = $state<ReadonlyArray<FeatureFlag>>([]);
 
@@ -39,74 +42,108 @@
   };
 </script>
 
-{#if hasFlags}
-  <div class="feature-flag-list" use:appendClassList={classList}>
-    {#each featureFlags as key (key)}
-      {@const value = $flags[key]}
-      {@const definition = featureFlagDefinitions[key]}
-      {@const Icon = definition.icon}
-      {@const title = definition.title()}
-      {@const description = definition.description?.() ?? ""}
-      {@const featureLink = definition.featureLink?.()}
-      {@const isNew = newFeatures.includes(key) ||
-        isRecentlyAddedFeature(definition.addedAt)}
-      <RenderFor audience={definition.audience ?? "vip"}>
-        <div class="feature-flag-item">
-          <div class="feature-flag-icon">
-            <Icon />
-          </div>
+{#snippet flagItem(key: FeatureFlag)}
+  {@const value = $flags[key]}
+  {@const definition = featureFlagDefinitions[key]}
+  {@const Icon = definition.icon}
+  {@const title = definition.title()}
+  {@const description = definition.description?.() ?? ""}
+  {@const featureLink = definition.featureLink?.()}
+  {@const isNew =
+    newFeatures.includes(key) || isRecentlyAddedFeature(definition.addedAt)}
+  <div class="feature-flag-item">
+    <div class="feature-flag-icon">
+      <Icon />
+    </div>
 
-          <div class="feature-flag-copy">
-            <span class="feature-flag-title-row">
-              <span class="feature-flag-title bold">{title}</span>
-              {#if isNew}
-                <StemTag
-                  text={m.tag_text_new_preview_feature()}
-                  classList="feature-flag-new-tag"
-                  --color-background-stem-tag="var(--color-background-purple)"
-                  --color-foreground-stem-tag="var(--color-foreground-purple)"
-                />
-              {/if}
-            </span>
-            {#if description}
-              <p class="feature-flag-description secondary small">
-                {description}
-              </p>
-            {/if}
-          </div>
+    <div class="feature-flag-copy">
+      <span class="feature-flag-title-row">
+        <span class="feature-flag-title bold">{title}</span>
+        {#if isNew}
+          <StemTag
+            text={m.tag_text_new_preview_feature()}
+            classList="feature-flag-new-tag"
+            --color-background-stem-tag="var(--color-background-purple)"
+            --color-foreground-stem-tag="var(--color-foreground-purple)"
+          />
+        {/if}
+      </span>
+      {#if description}
+        <p class="feature-flag-description secondary small">
+          {description}
+        </p>
+      {/if}
+    </div>
 
-          <div class="feature-flag-actions">
-            <Switch
-              label={title}
-              checked={value}
-              onclick={() => toggleFlag(key, value)}
-            />
+    <div class="feature-flag-actions">
+      <Switch
+        label={title}
+        checked={value}
+        onclick={() => toggleFlag(key, value)}
+      />
 
-            <span
-              class="feature-flag-link"
-              aria-hidden={!value || !featureLink}
-            >
-              {#if value && featureLink}
-                <Link
-                  href={featureLink.href}
-                  label={featureLink.label()}
-                  color="inherit"
-                >
-                  <CaretRightIcon />
-                </Link>
-              {/if}
-            </span>
-          </div>
-        </div>
-      </RenderFor>
-    {/each}
+      <span class="feature-flag-link" aria-hidden={!value || !featureLink}>
+        {#if value && featureLink}
+          <Link
+            href={featureLink.href}
+            label={featureLink.label()}
+            color="inherit"
+          >
+            <CaretRightIcon />
+          </Link>
+        {/if}
+      </span>
+    </div>
   </div>
-{:else}
-  <p class="bold">{m.text_placeholder_preview_features()}</p>
-{/if}
+{/snippet}
+
+<div class="trakt-feature-flag-groups" use:appendClassList={classList}>
+  <RenderFor audience="vip">
+    {#if vipFlags.length > 0}
+      <div class="feature-flag-list">
+        {#each vipFlags as key (key)}
+          {@render flagItem(key)}
+        {/each}
+      </div>
+    {:else}
+      <p class="bold">{m.text_placeholder_preview_features()}</p>
+    {/if}
+  </RenderFor>
+
+  {#if directorFlags.length > 0}
+    <RenderFor audience="director">
+      <section class="feature-flag-group">
+        <h3 class="feature-flag-group-title tag secondary">Director flags</h3>
+        <div class="feature-flag-list">
+          {#each directorFlags as key (key)}
+            {@render flagItem(key)}
+          {/each}
+        </div>
+      </section>
+    </RenderFor>
+  {/if}
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  .trakt-feature-flag-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-l);
+  }
+
+  .feature-flag-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+
+  .feature-flag-group-title {
+    margin: 0;
+    padding-inline-start: var(--gap-m);
+    text-transform: uppercase;
+  }
 
   .feature-flag-list {
     overflow: hidden;
