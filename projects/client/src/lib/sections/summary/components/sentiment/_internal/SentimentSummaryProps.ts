@@ -1,8 +1,8 @@
-import type { RealityCheck } from '$lib/requests/models/RealityCheck.ts';
+import type { RealityCheckVariant } from '$lib/requests/models/RealityCheckVariant.ts';
 import type { SentimentAnalysis } from '$lib/requests/models/SentimentAnalysis.ts';
 
 export type SentimentSummaryProps = {
   sentiment: SentimentAnalysis | Nil;
-  realityCheck: RealityCheck | null | undefined;
+  realityCheck: RealityCheckVariant | null | undefined;
   hasRing?: boolean;
 };

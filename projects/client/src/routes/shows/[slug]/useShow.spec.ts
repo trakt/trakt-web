@@ -5,11 +5,14 @@ import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/
 import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';
 import { ShowSiloStudiosMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStudiosMappedMock.ts';
 import { ShowSiloTranslationsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloTranslationsMappedMock.ts';
+import { DocumentaryCheckPublicMappedMock } from '$mocks/data/summary/documentary-check/mapped/DocumentaryCheckPublicMappedMock.ts';
+import { DocumentaryCheckPublicResponseMock } from '$mocks/data/summary/documentary-check/response/DocumentaryCheckPublicResponseMock.ts';
+import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
 import { server } from '$mocks/server.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
-import { delay, http } from 'msw';
-import { describe, expect, it } from 'vitest';
+import { delay, http, HttpResponse } from 'msw';
+import { describe, expect, it, vi } from 'vitest';
 import { useShow } from './useShow.ts';
 
 describe('store: useShow', () => {
@@ -82,6 +85,53 @@ describe('store: useShow', () => {
       });
 
       expect(result).to.equal(false);
+    });
+
+    it('should show the documentary check for a documentary', async () => {
+      setAuthorization(true);
+      server.use(
+        http.get(`http://localhost/shows/${ShowSiloMappedMock.slug}`, () =>
+          HttpResponse.json({
+            ...ShowSiloResponseMock,
+            genres: ['documentary'],
+          }),
+        ),
+        http.get(
+          `http://localhost/v3/media/show/${ShowSiloMappedMock.slug}/info/66/version/1`,
+          () => HttpResponse.json(DocumentaryCheckPublicResponseMock),
+        ),
+      );
+
+      const result = await runQuery({
+        factory: () =>
+          useShow(valueObservable(ShowSiloMappedMock.slug)).realityCheck,
+        waitFor: (realityCheck) => realityCheck !== undefined,
+      });
+
+      expect(result).to.deep.equal(DocumentaryCheckPublicMappedMock);
+    });
+
+    it('should not request a documentary check for another genre', async () => {
+      setAuthorization(true);
+      const requested = vi.fn();
+      server.use(
+        http.get(
+          `http://localhost/v3/media/show/${ShowSiloMappedMock.slug}/info/66/version/1`,
+          () => {
+            requested();
+            return HttpResponse.json(DocumentaryCheckPublicResponseMock);
+          },
+        ),
+      );
+
+      const result = await runQuery({
+        factory: () =>
+          useShow(valueObservable(ShowSiloMappedMock.slug)).realityCheck,
+        waitFor: (realityCheck) => realityCheck !== undefined,
+      });
+
+      expect(result).to.not.deep.equal(DocumentaryCheckPublicMappedMock);
+      expect(requested).not.toHaveBeenCalled();
     });
 
     it('should return studios', async () => {

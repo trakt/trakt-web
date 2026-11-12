@@ -1,3 +1,4 @@
+import { DocumentaryCheckPublicMappedMock } from '$mocks/data/summary/documentary-check/mapped/DocumentaryCheckPublicMappedMock.ts';
 import { MatchResponseMock } from '$mocks/data/summary/match/response/MatchResponseMock.ts';
 import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock.ts';
 import { MovieHereticSentimentMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticSentimentMappedMock.ts';
@@ -143,6 +144,38 @@ describe('SentimentCard', () => {
     ).toBeInTheDocument();
     expect(container.querySelector(PILL)).toHaveTextContent('Loosely based');
     expect(container.querySelector('ul')).toBeNull();
+  });
+
+  it('should show the documentary summary, who made it and the dot pill without sentiment', async () => {
+    const { container } = await renderCard({
+      sentiment: null,
+      realityCheck: DocumentaryCheckPublicMappedMock,
+    });
+
+    expect(screen.getByText('Reality Check')).toBeInTheDocument();
+    expect(
+      screen.getByText(DocumentaryCheckPublicMappedMock.summary),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Made by Example Films. Funded by Example Foundation.'),
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.trakt-documentary-tier-pill'),
+    ).toHaveTextContent('Widely disputed');
+    expect(container.querySelector(PILL)).toBeNull();
+  });
+
+  it('should show no funded line on the documentary card without a funder', async () => {
+    await renderCard({
+      sentiment: null,
+      realityCheck: {
+        ...DocumentaryCheckPublicMappedMock,
+        makers: { madeBy: ['Example Films'], fundedBy: [] },
+      },
+    });
+
+    expect(screen.getByText('Made by Example Films.')).toBeInTheDocument();
+    expect(screen.queryByText(/Funded/u)).not.toBeInTheDocument();
   });
 
   it('should label the link for the Reality Check without sentiment', async () => {
