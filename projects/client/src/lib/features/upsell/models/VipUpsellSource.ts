@@ -11,6 +11,7 @@ export const VipUpsellSourceSchema = z.union([
     'direct',
     'footer',
     'footer-link',
+    'home-nudge',
     'import',
     'jellyfin-settings-add-server',
     'jellyfin-settings-collection-limit',

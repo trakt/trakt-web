@@ -11,7 +11,7 @@
   import DismissButton from "../_internal/DismissButton.svelte";
   import { useWelcomeBanner } from "./_internal/useWelcomeBanner.ts";
 
-  const { isVisible, dismiss } = useWelcomeBanner();
+  const { isVisible, dismiss }: ReturnType<typeof useWelcomeBanner> = $props();
   const { trackClick, trackImpression } = useVipUpsell(() => "welcome-banner");
 </script>
 

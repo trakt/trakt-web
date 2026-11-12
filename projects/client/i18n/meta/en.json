@@ -16237,6 +16237,215 @@
           "required": true
         }
       }
+    },
+    "vip_nudge_over_watchlist_items": {
+      "default": "You have {used} watchlist items, more than the {total} the free plan includes.",
+      "description": "Headline of the VIP card on the home page for a free member whose watchlist count is above the free limit.",
+      "variables": {
+        "used": {
+          "type": "string",
+          "description": "Formatted number of items the member has.",
+          "required": true
+        },
+        "total": {
+          "type": "string",
+          "description": "Formatted number of items the free plan includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_over_list_items": {
+      "default": "You have {used} list items, more than the {total} the free plan includes.",
+      "description": "Headline of the VIP card on the home page for a free member whose list items count is above the free limit.",
+      "variables": {
+        "used": {
+          "type": "string",
+          "description": "Formatted number of items the member has.",
+          "required": true
+        },
+        "total": {
+          "type": "string",
+          "description": "Formatted number of items the free plan includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_over_lists": {
+      "default": "You have {used} lists, more than the {total} the free plan includes.",
+      "description": "Headline of the VIP card on the home page for a free member whose lists count is above the free limit.",
+      "variables": {
+        "used": {
+          "type": "string",
+          "description": "Formatted number of items the member has.",
+          "required": true
+        },
+        "total": {
+          "type": "string",
+          "description": "Formatted number of items the free plan includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_over_notes": {
+      "default": "You have {used} notes, more than the {total} the free plan includes.",
+      "description": "Headline of the VIP card on the home page for a free member whose notes count is above the free limit.",
+      "variables": {
+        "used": {
+          "type": "string",
+          "description": "Formatted number of items the member has.",
+          "required": true
+        },
+        "total": {
+          "type": "string",
+          "description": "Formatted number of items the free plan includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_within_watchlist_items": {
+      "default": "You're using {used} of your {total} free watchlist items.",
+      "description": "Headline of the VIP card on the home page for a free member whose watchlist count is at or below the free limit.",
+      "variables": {
+        "used": {
+          "type": "string",
+          "description": "Formatted number of items the member has.",
+          "required": true
+        },
+        "total": {
+          "type": "string",
+          "description": "Formatted number of items the free plan includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_within_list_items": {
+      "default": "You're using {used} of your {total} free list items.",
+      "description": "Headline of the VIP card on the home page for a free member whose list items count is at or below the free limit.",
+      "variables": {
+        "used": {
+          "type": "string",
+          "description": "Formatted number of items the member has.",
+          "required": true
+        },
+        "total": {
+          "type": "string",
+          "description": "Formatted number of items the free plan includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_within_lists": {
+      "default": "You're using {used} of your {total} free lists.",
+      "description": "Headline of the VIP card on the home page for a free member whose lists count is at or below the free limit.",
+      "variables": {
+        "used": {
+          "type": "string",
+          "description": "Formatted number of items the member has.",
+          "required": true
+        },
+        "total": {
+          "type": "string",
+          "description": "Formatted number of items the free plan includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_within_notes": {
+      "default": "You're using {used} of your {total} free notes.",
+      "description": "Headline of the VIP card on the home page for a free member whose notes count is at or below the free limit.",
+      "variables": {
+        "used": {
+          "type": "string",
+          "description": "Formatted number of items the member has.",
+          "required": true
+        },
+        "total": {
+          "type": "string",
+          "description": "Formatted number of items the free plan includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_vip_limit_watchlist_items": {
+      "default": "With VIP the limit is {vip} watchlist items.",
+      "description": "Second line of the VIP card on the home page, stating how many watchlist items VIP allows.",
+      "variables": {
+        "vip": {
+          "type": "string",
+          "description": "Formatted number of items VIP includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_vip_limit_list_items": {
+      "default": "With VIP the limit is {vip} list items.",
+      "description": "Second line of the VIP card on the home page, stating how many list items VIP allows.",
+      "variables": {
+        "vip": {
+          "type": "string",
+          "description": "Formatted number of items VIP includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_vip_limit_notes": {
+      "default": "With VIP the limit is {vip} notes.",
+      "description": "Second line of the VIP card on the home page, stating how many notes VIP allows.",
+      "variables": {
+        "vip": {
+          "type": "string",
+          "description": "Formatted number of items VIP includes.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_vip_limit_lists": {
+      "default": "With VIP there is no limit on lists.",
+      "description": "Second line of the VIP card on the home page when it is about the number of lists."
+    },
+    "vip_nudge_feature_title": {
+      "default": "What Trakt VIP includes",
+      "description": "Headline of the VIP feature card on the home page shown to free members."
+    },
+    "vip_nudge_feature_body": {
+      "default": "Every streaming service, real-time Plex scrobbling, your year in review, and room for {watchlist} watchlist items, {listItems} list items, {notes} notes and unlimited lists.",
+      "description": "Body of the VIP feature card on the home page on wide screens, listing what VIP includes.",
+      "variables": {
+        "watchlist": {
+          "type": "string",
+          "description": "Formatted number of watchlist items VIP allows.",
+          "required": true
+        },
+        "listItems": {
+          "type": "string",
+          "description": "Formatted number of list items VIP allows.",
+          "required": true
+        },
+        "notes": {
+          "type": "string",
+          "description": "Formatted number of notes VIP allows.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_feature_body_short": {
+      "default": "Every streaming service, real-time Plex scrobbling, your year in review and {watchlist} watchlist items.",
+      "description": "Body of the VIP feature card on the home page on phones, a shorter list of what VIP includes.",
+      "variables": {
+        "watchlist": {
+          "type": "string",
+          "description": "Formatted number of watchlist items VIP allows.",
+          "required": true
+        }
+      }
+    },
+    "vip_nudge_action": {
+      "default": "See what VIP includes",
+      "description": "Button on the VIP card on the home page that opens the VIP page."
+    },
+    "vip_nudge_close": {
+      "default": "Close and hide for 14 days",
+      "description": "Accessible label of the close button on the VIP card on the home page, which hides the card for 14 days."
     }
   }
 }
