@@ -14724,13 +14724,6 @@
       "default": "Unresolved",
       "description": "Text for a show that ended or stopped without resolving its story. The value is sent back from the Trakt API as open."
     },
-    "text_mixtape_fits_count": {
-      "default": "{count} from your history",
-      "description": "Small text next to the Fits with your picks heading. {count} is how many watched titles still fit."
-    "preview_feature_title_show_ending": {
-      "default": "Show ending",
-      "description": "Product feature name for the preview feature that shows whether a show has a complete ending in its details."
-    },
     "preview_feature_description_show_ending": {
       "default": "Shows an Ending row in a show's details: Complete when the story wrapped up, Unresolved when it did not.",
       "description": "Description of the show ending preview feature."
