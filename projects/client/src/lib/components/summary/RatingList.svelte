@@ -213,6 +213,10 @@
   }
 
   .trakt-summary-ratings {
+    :global(.trakt-summary-meta-info) & {
+      justify-content: center;
+    }
+
     :global(rating) {
       flex: 0 0 auto;
     }
