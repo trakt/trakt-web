@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaType } from "$lib/requests/models/MediaType.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
-  import { useParentalGuideCategories } from "../../_internal/useParentalGuideCategories.ts";
+  import { useParentalGuideCategories } from "$lib/sections/summary/components/useParentalGuideCategories.ts";
 
   const { type, slug }: { type: MediaType; slug: string } = $props();
 

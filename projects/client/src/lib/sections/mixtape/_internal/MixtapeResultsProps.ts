@@ -23,4 +23,5 @@ export type MixtapeResultsProps = {
   onKeep: (media: MovieEntry | ShowEntry) => Promise<void>;
   onMoved: (target: MixtapeTarget) => void;
   matchOf: (id: number) => number | null;
+  becauseOf: (id: number) => string | null;
 };

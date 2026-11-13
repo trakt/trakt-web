@@ -1,5 +1,5 @@
 <script lang="ts">
-  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
+  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import { userListsQuery } from "$lib/requests/queries/users/userListsQuery.ts";
@@ -60,11 +60,13 @@
     aria-haspopup="dialog"
     onclick={() => (isSheetOpen = true)}
   >
-    <BookmarkIcon state="added" />
+    <CheckIcon />
     <span class="saved-to-text">
       {m.text_mixtape_saved_to({ name: savedToName })}
     </span>
-    <span class="small secondary">{m.button_text_mixtape_change_target()}</span>
+    <span class="saved-to-change">
+      {m.button_text_mixtape_change_target()}
+    </span>
   </button>
 {/if}
 
@@ -81,34 +83,60 @@
 {/if}
 
 <style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-mixtape-saved-to {
     all: unset;
-    box-sizing: border-box;
-    width: var(--width-mixtape-saved, auto);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: var(--gap-xs);
-    padding: var(--ni-12) var(--ni-14);
+    max-width: 100%;
+    padding-block: var(--ni-4);
 
-    border-radius: var(--border-radius-m);
-    background: var(--color-card-background);
-    box-shadow: inset 0 0 0 var(--border-thickness-xxs) var(--color-border);
     color: var(--color-text-primary);
+    font-size: var(--font-size-text-small);
     cursor: pointer;
 
     :global(svg) {
       flex: none;
-      color: var(--purple-400);
+      width: var(--ni-12);
+      height: var(--ni-12);
     }
 
     &:focus-visible {
+      border-radius: var(--border-radius-s);
       outline: var(--border-thickness-xs) solid var(--purple-300);
-      outline-offset: var(--ni-2);
+      outline-offset: var(--ni-4);
     }
   }
 
   .saved-to-text {
-    flex: 1;
     min-width: 0;
+    font-weight: 600;
+  }
+
+  .saved-to-change {
+    flex: none;
+    padding: var(--ni-4) var(--ni-10);
+
+    border-radius: var(--border-radius-pill);
+    background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
+    color: var(--color-text-secondary);
+    font-weight: 600;
+
+    transition:
+      background var(--transition-increment) ease-in-out,
+      color var(--transition-increment) ease-in-out;
+
+    @include for-mouse {
+      .trakt-mixtape-saved-to:hover & {
+        background: color-mix(
+          in srgb,
+          var(--color-foreground) 10%,
+          transparent
+        );
+        color: var(--color-text-primary);
+      }
+    }
   }
 </style>

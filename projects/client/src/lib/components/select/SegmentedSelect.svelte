@@ -27,6 +27,8 @@
     collapsedCount = 0,
     expanded = false,
     extension,
+    leading,
+    isLeadingOpen = false,
     onChange,
   }: SegmentedSelectProps<TValue> = $props();
 
@@ -42,7 +44,8 @@
   const collapseFrom = $derived(
     expandable ? options.length - collapsedCount : options.length,
   );
-  const isCollapsed = (index: number) => !expanded && index >= collapseFrom;
+  const isCollapsed = (index: number, option: SegmentedSelectOption<TValue>) =>
+    Boolean(option.isFolded) || (!expanded && index >= collapseFrom);
 
   const unfoldDelay = (index: number) => {
     if (index < collapseFrom) return "0ms";
@@ -108,7 +111,7 @@
 </script>
 
 {#snippet segment(option: SegmentedSelectOption<TValue>, index: number)}
-  {@const collapsed = isCollapsed(index)}
+  {@const collapsed = isCollapsed(index, option)}
   {#if option.href}
     <a
       bind:this={segmentEls[index]}
@@ -180,6 +183,18 @@
       bind:this={selectorEl}
       aria-hidden="true"
     ></div>
+
+    {#if leading}
+      <div
+        class="segment-leading"
+        data-open={isLeadingOpen}
+        inert={!isLeadingOpen || undefined}
+      >
+        <div class="segment-leading-content">
+          {@render leading()}
+        </div>
+      </div>
+    {/if}
 
     {#each options as option, index (option.value)}
       {#if isLabelHidden}
@@ -434,6 +449,37 @@
       margin-inline-start: var(--segment-gap);
     }
 
+    /*
+      The leading slot opens inside the track, in front of the segments,
+      without changing the track's height.
+    */
+    .segment-leading {
+      flex: none;
+      display: grid;
+      grid-template-columns: 0fr;
+      overflow: hidden;
+      opacity: 0;
+
+      transition:
+        grid-template-columns var(--expand-duration) var(--expand-ease),
+        margin-inline-end var(--expand-duration) var(--expand-ease),
+        opacity var(--transition-increment) ease-in-out;
+
+      &[data-open="true"] {
+        grid-template-columns: 1fr;
+        margin-inline-end: var(--segment-gap);
+        opacity: 1;
+        transition-delay: 0ms, 0ms, var(--transition-increment);
+      }
+    }
+
+    .segment-leading-content {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      height: var(--segment-height);
+    }
+
     .segment.is-collapsed {
       max-inline-size: 0;
       padding-inline: 0;
@@ -478,6 +524,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       .segment,
+      .segment-leading,
       .segment-row:global([data-settled]) .segment-selector,
       .segment-row:global([data-tracking]) .segment-selector {
         transition: none;

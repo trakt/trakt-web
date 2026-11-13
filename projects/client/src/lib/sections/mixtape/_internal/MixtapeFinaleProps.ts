@@ -2,7 +2,7 @@ import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import type { MixtapeTarget } from './MixtapeTarget.ts';
 
-export type MixtapeDoneProps = {
+export type MixtapeFinaleProps = {
   rounds: ReadonlyArray<ReadonlyArray<MovieEntry | ShowEntry>>;
   picked: ReadonlyArray<MovieEntry | ShowEntry>;
   savedTo: MixtapeTarget;
@@ -11,4 +11,6 @@ export type MixtapeDoneProps = {
   startOverHref: string;
   onMore: (() => void) | null;
   onMoved: (target: MixtapeTarget) => void;
+  matchOf: (id: number) => number | null;
+  becauseOf: (id: number) => string | null;
 };

@@ -1,36 +1,47 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import CassetteIcon from "$lib/components/icons/CassetteIcon.svelte";
-  import SegmentedSelect from "$lib/components/select/SegmentedSelect.svelte";
-  import ToggleIcon from "$lib/components/toggles/ToggleIcon.svelte";
+  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import ResetFiltersIcon from "$lib/components/icons/ResetFiltersIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
-  import { useDiscover } from "$lib/features/filters/useDiscover.ts";
-  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
-  import DrawerSearchInput from "$lib/components/drawer/DrawerSearchInput.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput.ts";
-  import type { MediaType } from "$lib/requests/models/MediaType.ts";
+  import type { MovieEntry } from "$lib/requests/models/MovieEntry.ts";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { distinctUntilChanged, map, scan } from "rxjs";
-  import { onMount } from "svelte";
+  import { fadeAway } from "$lib/utils/transitions/fadeAway.ts";
+  import {
+    combineLatest,
+    concat,
+    distinctUntilChanged,
+    map,
+    of,
+    scan,
+    switchMap,
+    timer,
+  } from "rxjs";
+  import { onDestroy, onMount } from "svelte";
   import { holdSettledPicker } from "./_internal/holdSettledPicker.ts";
   import { MAX_MIXTAPE_PICKS } from "./_internal/MAX_MIXTAPE_PICKS.ts";
-  import MixtapeActionBar from "./_internal/MixtapeActionBar.svelte";
+  import { MIX_HOLD_DURATION } from "./_internal/MIX_HOLD_DURATION.ts";
+  import MixtapeHeaderButton from "./_internal/MixtapeHeaderButton.svelte";
   import MixtapePicker from "./_internal/MixtapePicker.svelte";
   import MixtapeResults from "./_internal/MixtapeResults.svelte";
-  import MixtapeTray from "./_internal/MixtapeTray.svelte";
+  import { cubicOut } from "svelte/easing";
+  import { fly } from "svelte/transition";
+  import type { MixtapeTarget } from "./_internal/MixtapeTarget.ts";
   import { parseMixtapeParams } from "./_internal/parseMixtapeParams.ts";
   import { toMixtapeSlots } from "./_internal/toMixtapeSlots.ts";
   import { toPickerItems } from "./_internal/toPickerItems.ts";
-  import type { MixtapeTarget } from "./_internal/MixtapeTarget.ts";
   import { useMixtapeSave } from "./_internal/useMixtapeSave.ts";
+  import { useMixtapeSession } from "./_internal/useMixtapeSession.ts";
+  import MixtapeNavbarDeck from "./MixtapeNavbarDeck.svelte";
   import { useMixtape } from "./useMixtape.ts";
-  import type { MovieEntry } from "$lib/requests/models/MovieEntry.ts";
-  import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
 
   const params = $derived(parseMixtapeParams(page.url.searchParams));
   const request$ = fromRune(() => ({
@@ -41,7 +52,13 @@
       (a, b) => a.type === b.type && a.picks.join() === b.picks.join(),
     ),
   );
-  let query = $state("");
+
+  const { session, update, reset, launch } = useMixtapeSession();
+  const search$ = session.pipe(
+    map(({ search }) => search),
+    distinctUntilChanged(),
+  );
+  const query = $derived($session.search);
 
   const {
     history,
@@ -54,31 +71,14 @@
     isHistoryLoading,
     mixtape,
     isMixtapeLoading,
-  } = useMixtape(request$, fromRune(() => query));
+  } = useMixtape(request$, search$);
 
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-
-  let searchBox = $state<HTMLDivElement>();
+  const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
 
   const { track: trackOpen } = useTrack(AnalyticsEvent.MixtapeOpen);
   const { track: trackPick } = useTrack(AnalyticsEvent.MixtapePick);
   const { track: trackNoFits } = useTrack(AnalyticsEvent.MixtapeNoFits);
-  const { track: trackMix } = useTrack(AnalyticsEvent.MixtapeMix);
   const { track: trackResult } = useTrack(AnalyticsEvent.MixtapeResult);
-
-  const { options } = useDiscover();
-  const typeOptions = $derived(
-    options
-      .filter((option): option is typeof option & { value: MediaType } =>
-        option.value === "movie" || option.value === "show",
-      )
-      .map((option) => ({
-        value: option.value,
-        text: option.text(),
-        label: option.label(),
-        href: UrlBuilder.mixtape({ type: option.value }),
-      })),
-  );
 
   const href = (overrides: Parameters<typeof UrlBuilder.mixtape>[0]) =>
     UrlBuilder.mixtape({
@@ -93,6 +93,7 @@
       history: $history,
       searchResults: $searchResults,
       fitMedia: $known,
+      picked: $picked,
       picks: params.picks,
       fits: $fits,
       query,
@@ -116,6 +117,70 @@
         $isSearchLoading),
   );
   const isFull = $derived(params.picks.length >= MAX_MIXTAPE_PICKS);
+  const isResults = $derived(params.view === "results");
+  const slotsLeft = $derived(MAX_MIXTAPE_PICKS - params.picks.length);
+
+  /*
+    The hold re-arms only when the view itself changes: a keep or a swap
+    rewrites the results url too, and must not send the stage back into
+    the mixing theatre.
+  */
+  const isHolding$ = combineLatest([
+    fromRune(() => params.view).pipe(distinctUntilChanged()),
+    isReducedMotion,
+  ]).pipe(
+    switchMap(([view, isReduced]) =>
+      view === "results"
+        ? concat(
+            of(true),
+            timer(isReduced ? 0 : MIX_HOLD_DURATION).pipe(map(() => false)),
+          )
+        : of(false),
+    ),
+  );
+  const isMixing = $derived(isResults && ($isHolding$ || $isMixtapeLoading));
+  const isShowingResults = $derived(isResults && !isMixing);
+  const motion = (duration: number) => ($isReducedMotion ? 0 : duration);
+  const STAGE_RISE_DURATION = 360;
+  const STAGE_FADE_DURATION = 240;
+  const phase = $derived(isMixing ? "mixing" : isFull ? "full" : "pick");
+
+  $effect(() => {
+    update({ picked: $picked, fitCount: $fits.length, isMixing });
+  });
+
+  onDestroy(reset);
+
+  const subtitle = $derived.by(() => {
+    if (isMixing) return m.text_mixtape_mixing();
+    if (isResults) {
+      return params.picks.length === 1
+        ? m.text_mixtape_mixed_from_picks_one()
+        : m.text_mixtape_mixed_from_picks({ count: params.picks.length });
+    }
+    if (isFull) return m.text_mixtape_deck_loaded();
+    return params.type === "show"
+      ? m.text_mixtape_deck_prompt_shows({ max: MAX_MIXTAPE_PICKS })
+      : m.text_mixtape_deck_prompt_movies({ max: MAX_MIXTAPE_PICKS });
+  });
+
+  const gridHead = $derived.by(() => {
+    if (isMixing) return m.header_mixtape_mixing();
+    if (isFull) return m.header_mixtape_deck_full();
+    if (shownPicker.kind === "search") return m.header_mixtape_search_results();
+    if (shownPicker.kind === "fits") return m.header_mixtape_fits();
+    return params.type === "show"
+      ? m.header_mixtape_recent_shows()
+      : m.header_mixtape_recent_movies();
+  });
+
+  const gridMeta = $derived.by(() => {
+    if (isMixing || isFull) return null;
+    return slotsLeft === 1
+      ? m.text_mixtape_slots_left_one()
+      : m.text_mixtape_slots_left({ count: slotsLeft });
+  });
+
   const slots = $derived(toMixtapeSlots($mixtape.suggestions, params.skips));
   const canSwap = $derived(
     $mixtape.suggestions.some(
@@ -128,15 +193,16 @@
   const titleOf = (id: number) =>
     $picked.find((media) => media.id === id)?.title ?? null;
 
+  const suggestionOf = (id: number) =>
+    $mixtape.suggestions.find(({ media }) => media.id === id) ?? null;
+
   const { keep } = useMixtapeSave();
 
-  const replaceResults = (
-    overrides: {
-      skips?: ReadonlyArray<number>;
-      kept?: ReadonlyArray<ReadonlyArray<number>>;
-      savedTo?: MixtapeTarget;
-    },
-  ) => {
+  const replaceResults = (overrides: {
+    skips?: ReadonlyArray<number>;
+    kept?: ReadonlyArray<ReadonlyArray<number>>;
+    savedTo?: MixtapeTarget;
+  }) => {
     const url = href({
       view: "results",
       skips: params.skips,
@@ -148,18 +214,10 @@
     return goto(url, { replaceState: true, noScroll: true, keepFocus: true });
   };
 
-  const matchById = $derived(
-    new Map(
-      $mixtape.suggestions.map(({ media, match }) => [media.id, match]),
-    ),
-  );
-
   const rounds = $derived(
     params.kept.map((ids) =>
       ids.flatMap((id) => {
-        const suggestion = $mixtape.suggestions.find(
-          ({ media }) => media.id === id,
-        );
+        const suggestion = suggestionOf(id);
         return suggestion ? [suggestion.media] : [];
       }),
     ),
@@ -185,6 +243,20 @@
     return recorded;
   };
 
+  const pick = (
+    source: "grid" | "search",
+    media: MediaInputDefault,
+    from: DOMRect | null,
+  ) => {
+    update({ search: "" });
+    trackPick({
+      source,
+      type: params.type,
+      picks: params.picks.length + 1,
+    });
+    launch({ id: media.id, src: media.poster.url.thumb, from });
+  };
+
   onMount(() => {
     trackOpen({ source: params.source ?? "direct", type: params.type });
   });
@@ -196,149 +268,150 @@
       picker.kind === "fits" &&
       !isSettling &&
       !isFull &&
-      picker.items.length === 0;
+      picker.items.length === params.picks.length;
     if (!ranOut || reportedNoFits === key) return;
     reportedNoFits = key;
     trackNoFits({ type: params.type, picks: params.picks.length });
   });
 </script>
 
-{#if params.view !== "results"}
-  <NavbarStateSetter>
-    {#snippet contextualActions()}
-      <div class="mixtape-dock" data-surface="own">
-        <MixtapeActionBar
-          pickCount={params.picks.length}
-          clearHref={UrlBuilder.mixtape({ type: params.type })}
-          mixHref={href({ view: "results" })}
-          onMix={() =>
-            trackMix({
+{#snippet subtitleContent()}
+  {#key subtitle}
+    <span class="mixtape-subtitle">{subtitle}</span>
+  {/key}
+{/snippet}
+
+<NavbarStateSetter
+  contentToggle={isResults ? "mixtape-results" : "mixtape"}
+  showFilters={false}
+  header={{ title: m.page_title_mixtape(), metaInfo: subtitleContent }}
+>
+  {#snippet headerActions()}
+    <MixtapeHeaderButton
+      href={UrlBuilder.mixtape({ type: params.type })}
+      label={m.button_text_mixtape_start_over()}
+      isDisabled={params.picks.length === 0}
+      replace
+    >
+      <ResetFiltersIcon />
+    </MixtapeHeaderButton>
+    {#if isShowingResults}
+      <MixtapeHeaderButton
+        href={UrlBuilder.discover()}
+        label={m.button_label_close()}
+      >
+        <CloseIcon />
+      </MixtapeHeaderButton>
+    {/if}
+  {/snippet}
+</NavbarStateSetter>
+
+<div class="trakt-mixtape" data-phase={isShowingResults ? "results" : phase}>
+  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+    <div class="mixtape-search-bar">
+      <MixtapeNavbarDeck layout="docked" />
+    </div>
+  </RenderFor>
+
+  <!-- The picker and the stage cross-fade in one slot: the leaving block lifts out of the flow while the arriving one rises in. -->
+  <div class="mixtape-switch">
+    {#if isShowingResults}
+      <div
+        class="mixtape-switch-item"
+        in:fly={{
+          y: 16,
+          duration: motion(STAGE_RISE_DURATION),
+          easing: cubicOut,
+        }}
+        out:fadeAway={{ duration: motion(STAGE_FADE_DURATION) }}
+      >
+        <MixtapeResults
+          {slots}
+          {canSwap}
+          isLoading={$isMixtapeLoading}
+          picked={$picked}
+          {titleOf}
+          closeHref={UrlBuilder.discover()}
+          changeHref={href({})}
+          startOverHref={UrlBuilder.mixtape({ type: params.type })}
+          {rounds}
+          savedTo={params.savedTo}
+          onKeep={keepMedia}
+          matchOf={(id) => suggestionOf(id)?.match ?? null}
+          becauseOf={(id) => {
+            const suggestion = suggestionOf(id);
+            return suggestion ? titleOf(suggestion.because) : null;
+          }}
+          onMoved={(savedTo) => replaceResults({ savedTo })}
+          onSkip={(id) => replaceResults({ skips: [...params.skips, id] })}
+          onUndo={() => replaceResults({ skips: params.skips.slice(0, -1) })}
+          onMore={(ids) =>
+            replaceResults({
+              skips: [...params.skips, ...ids],
+              kept: [...params.kept, []],
+            })}
+          onResult={(action, position) =>
+            trackResult({
+              action,
+              position: String(position),
               type: params.type,
-              picks: params.picks.length,
-              fits: $fits.length,
             })}
-        >
-          <MixtapeTray
-            picks={params.picks}
-            picked={$picked}
-            removeHref={(id) =>
-              href({ picks: params.picks.filter((pick) => pick !== id) })}
-            onAdd={() => searchBox?.querySelector("input")?.focus()}
-          />
-        </MixtapeActionBar>
-      </div>
-    {/snippet}
-  </NavbarStateSetter>
-{/if}
-
-{#if params.view === "results"}
-  <MixtapeResults
-    {slots}
-    {canSwap}
-    isLoading={$isMixtapeLoading}
-    picked={$picked}
-    {titleOf}
-    closeHref={UrlBuilder.discover()}
-    changeHref={href({})}
-    startOverHref={UrlBuilder.mixtape({ type: params.type })}
-    {rounds}
-    savedTo={params.savedTo}
-    onKeep={keepMedia}
-    matchOf={(id) => matchById.get(id) ?? null}
-    onMoved={(savedTo) => replaceResults({ savedTo })}
-    onSkip={(id) => replaceResults({ skips: [...params.skips, id] })}
-    onUndo={() => replaceResults({ skips: params.skips.slice(0, -1) })}
-    onMore={(ids) =>
-      replaceResults({
-        skips: [...params.skips, ...ids],
-        kept: [...params.kept, []],
-      })}
-    onResult={(action, position) =>
-      trackResult({ action, position: String(position), type: params.type })}
-  />
-{:else}
-  <div class="trakt-mixtape">
-    <header class="mixtape-header">
-      <div class="mixtape-title-row">
-        <h2 class="mixtape-headline">
-          <span class="mixtape-icon"><CassetteIcon /></span>
-          {m.page_title_mixtape()}
-        </h2>
-        <SegmentedSelect
-          options={typeOptions}
-          value={params.type}
-          variant={$isMobile ? "selected-label" : "regular"}
-          ariaLabel={m.page_title_mixtape()}
-          onChange={() => (query = "")}
-        >
-          {#snippet icon(option)}
-            <ToggleIcon {option} />
-          {/snippet}
-        </SegmentedSelect>
-      </div>
-      <p class="secondary mixtape-description">
-        {params.type === "show"
-          ? m.text_mixtape_description_shows()
-          : m.text_mixtape_description_movies()}
-      </p>
-    </header>
-
-    <section class="mixtape-browse">
-      <div class="mixtape-grid-head">
-        <h3>
-          {shownPicker.kind === "search"
-            ? m.header_mixtape_search_results()
-            : shownPicker.kind === "fits"
-              ? m.header_mixtape_fits()
-              : params.type === "show"
-                ? m.header_mixtape_recent_shows()
-                : m.header_mixtape_recent_movies()}
-        </h3>
-        {#if shownPicker.kind === "fits" && !isPickerLoading}
-          <span class="small secondary">
-            {m.text_mixtape_fits_count({
-              count: String(shownPicker.items.length),
-            })}
-          </span>
-        {/if}
-      </div>
-
-      <div class="mixtape-search" bind:this={searchBox}>
-        <DrawerSearchInput
-          bind:value={query}
-          label={m.input_label_mixtape_search()}
-          placeholder={params.type === "show"
-            ? m.input_placeholder_mixtape_search_shows()
-            : m.input_placeholder_mixtape_search_movies()}
         />
       </div>
-
-      <MixtapePicker
-        picker={shownPicker}
-        isLoading={isPickerLoading}
-        {isSettling}
-        {isFull}
-        pickHref={(media: MediaInputDefault) =>
-          href({ picks: [...params.picks, media.id] })}
-        onPick={(source) => {
-          query = "";
-          trackPick({
-            source,
-            type: params.type,
-            picks: params.picks.length + 1,
-          });
+    {:else}
+      <section
+        class="mixtape-browse"
+        in:fly={{
+          y: 16,
+          duration: motion(STAGE_RISE_DURATION),
+          easing: cubicOut,
         }}
-      />
-    </section>
+        out:fadeAway={{ duration: motion(STAGE_FADE_DURATION) }}
+      >
+        <div class="mixtape-grid-head">
+          <span class="mixtape-grid-label">{gridHead}</span>
+          {#if gridMeta}
+            <span class="mixtape-grid-meta">{gridMeta}</span>
+          {/if}
+        </div>
+
+        <MixtapePicker
+          picker={shownPicker}
+          isLoading={isPickerLoading}
+          {isSettling}
+          {phase}
+          pickHref={(media) => href({ picks: [...params.picks, media.id] })}
+          removeHref={(media) =>
+            href({ picks: params.picks.filter((pick) => pick !== media.id) })}
+          onPick={pick}
+        />
+      </section>
+    {/if}
   </div>
-{/if}
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-mixtape {
-    --mixtape-content-width: var(--ni-520);
+  .mixtape-subtitle {
+    display: block;
+    color: var(--color-text-emphasis);
+    font-size: var(--font-size-text-small);
+    font-weight: 600;
+    white-space: nowrap;
 
+    animation: mixtape-subtitle-in calc(2 * var(--transition-increment))
+      cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  @keyframes mixtape-subtitle-in {
+    from {
+      opacity: 0;
+      transform: translateY(var(--ni-6));
+    }
+  }
+
+  .trakt-mixtape {
     box-sizing: border-box;
     min-height: 100dvh;
 
@@ -346,83 +419,106 @@
     flex-direction: column;
     gap: var(--gap-m);
 
-    .mixtape-header {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-xs);
-      padding-block-start: var(--ni-10);
+    /*
+      Clearance for the floating dock on small screens: the tray grows a
+      Mix it row once the deck is full, so the grid clears that too. The
+      results stage floats its own buttons and clears them itself.
+    */
+    @include for-tablet-sm-and-below {
+      --mixtape-dock-height: var(--ni-60);
 
-      @include for-tablet-sm-and-below {
-        padding-block-start: var(--ni-16);
+      padding-block-end: calc(var(--mixtape-dock-height) + 2 * var(--gap-s));
+
+      &[data-phase="full"],
+      &[data-phase="mixing"] {
+        --mixtape-dock-height: var(--ni-120);
+      }
+
+      &[data-phase="results"] {
+        padding-block-end: 0;
       }
     }
 
-    .mixtape-title-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--gap-s);
-    }
+    @include for-mobile {
+      --mixtape-dock-height: var(--ni-88);
 
-    .mixtape-headline {
-      display: flex;
-      align-items: center;
-      gap: var(--gap-s);
-      margin: 0;
-
-      font-size: var(--ni-40);
-      line-height: 1;
-      letter-spacing: -0.02em;
-
-      @include for-mobile {
-        font-size: var(--ni-28);
+      &[data-phase="full"],
+      &[data-phase="mixing"] {
+        --mixtape-dock-height: var(--ni-144);
       }
     }
 
-    .mixtape-icon {
-      display: flex;
-      color: var(--color-text-emphasis);
+    /*
+      The glass lives on a pseudo-element: a backdrop-filter on the bar
+      itself would become the containing block of the deck's fixed slots.
+    */
+    .mixtape-search-bar {
+      position: sticky;
+      inset-block-start: calc(
+        var(--navbar-height) + env(safe-area-inset-top, 0px)
+      );
+      z-index: var(--layer-floating);
 
-      :global(svg) {
-        width: 1em;
-        height: 1em;
+      box-sizing: border-box;
+      padding: var(--gap-xs) var(--layout-distance-side);
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: color-mix(
+          in srgb,
+          var(--color-background-navbar) 75%,
+          transparent
+        );
+        backdrop-filter: blur(var(--ni-10));
       }
     }
 
-    .mixtape-description {
-      margin: 0;
-      max-width: var(--mixtape-content-width);
+    .mixtape-switch {
+      position: relative;
+      display: grid;
     }
 
-    .mixtape-header,
-    .mixtape-search,
-    .mixtape-grid-head {
-      padding-inline: var(--layout-distance-side);
-    }
-
-    .mixtape-search {
-      max-width: var(--mixtape-content-width);
+    .mixtape-switch-item {
+      min-width: 0;
     }
 
     .mixtape-browse {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-m);
+      gap: var(--gap-s);
     }
 
     .mixtape-grid-head {
       display: flex;
       align-items: baseline;
       gap: var(--gap-xs);
-
-      h3 {
-        margin: 0;
-      }
+      min-height: var(--ni-16);
+      padding-inline: var(--layout-distance-side);
     }
-  }
 
-  .mixtape-dock {
-    width: 100%;
+    .mixtape-grid-label {
+      color: var(--color-text-primary);
+      font-size: var(--font-size-text-small);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      line-height: var(--ni-16);
+      text-transform: uppercase;
+
+      transition: color calc(2 * var(--transition-increment)) ease-in-out;
+    }
+
+    .mixtape-grid-meta {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-text-small);
+      font-weight: 700;
+      line-height: var(--ni-16);
+    }
+
+    &[data-phase="pick"] .mixtape-grid-label {
+      color: var(--color-text-secondary);
+    }
   }
 </style>

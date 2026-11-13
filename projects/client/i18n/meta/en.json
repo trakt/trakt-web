@@ -10205,6 +10205,21 @@
       "default": "Severe",
       "description": "Label for content with severe parental guide concerns."
     },
+    "text_parental_guide_nothing_flagged": {
+      "default": "Nothing flagged",
+      "description": "Chip in the compact parental guidance block (Mixtape results) when the guide exists but reports no concerns in any category."
+    },
+    "label_certification_rated": {
+      "default": "Rated {certification}",
+      "description": "Screen reader label for the maturity rating chip in the Mixtape results details. {certification} is the raw rating, e.g. R, PG-13, TV-MA.",
+      "variables": {
+        "certification": {
+          "type": "string",
+          "description": "The raw maturity rating as the API sends it.",
+          "required": true
+        }
+      }
+    },
     "advanced_filter_label_parental_guide": {
       "default": "{category}: {min} to {max}",
       "description": "Selected parental guidance severity range for a category.",
@@ -11839,6 +11854,18 @@
     "button_label_open_today_stories": {
       "default": "Open today's stories",
       "description": "Aria-label for the button in the top bar that opens the Today stories."
+    },
+    "today_entry_tooltip_body": {
+      "default": "What the people you follow watched today, plus your new episodes and releases.",
+      "description": "Body copy of the tooltip that opens when hovering the Today pill in the top bar."
+    },
+    "today_entry_open": {
+      "default": "Open stories",
+      "description": "Link text inside the Today pill tooltip that opens today's stories."
+    },
+    "today_entry_see_all": {
+      "default": "See everything",
+      "description": "Button text inside the Today pill tooltip that opens the Today page with all of today's activity."
     },
     "button_label_view_all_today": {
       "default": "View everything from today",
@@ -14493,14 +14520,6 @@
       "default": "Mixtape",
       "description": "Page title of the Mixtape page, where users pick watched titles and get three suggestions with the same feel. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
-    "text_mixtape_description_movies": {
-      "default": "Pick a movie you loved. Add more to fine-tune the mix.",
-      "description": "Intro under the Mixtape heading when picking movies. One pick is enough; more picks narrow the mix."
-    },
-    "text_mixtape_description_shows": {
-      "default": "Pick a show you loved. Add more to fine-tune the mix.",
-      "description": "Intro under the Mixtape heading when picking shows. One pick is enough; more picks narrow the mix."
-    },
     "header_mixtape_recent_movies": {
       "default": "Your recent movies",
       "description": "Heading above the grid of the user's recently watched movies before anything is picked on the Mixtape page."
@@ -14517,29 +14536,21 @@
       "default": "Search results",
       "description": "Heading above the Mixtape grid while the user searches their own history."
     },
-    "input_placeholder_mixtape_search_movies": {
-      "default": "Search movies you've watched",
-      "description": "Placeholder of the search field on the Mixtape page when picking movies. Search only covers the user's own history."
-    },
-    "input_placeholder_mixtape_search_shows": {
-      "default": "Search shows you've watched",
-      "description": "Placeholder of the search field on the Mixtape page when picking shows. Search only covers the user's own history."
-    },
     "input_label_mixtape_search": {
       "default": "Search your history",
       "description": "Accessible label of the search field on the Mixtape page."
     },
+    "input_placeholder_mixtape_deck_movies": {
+      "default": "Search movies",
+      "description": "Placeholder of the compact search pill in the Mixtape header while picking movies. Keep it short: the pill also holds the Movies / Shows toggle, and it only searches the user's own history."
+    },
+    "input_placeholder_mixtape_deck_shows": {
+      "default": "Search shows",
+      "description": "Placeholder of the compact search pill in the Mixtape header while picking shows. Keep it short: the pill also holds the Movies / Shows toggle, and it only searches the user's own history."
+    },
     "tag_mixtape_different_mood": {
       "default": "Different mood",
       "description": "Tag on a searched title that does not share the feel of the titles already picked, so it cannot be added."
-    },
-    "text_mixtape_slot_first": {
-      "default": "Pick one",
-      "description": "Label on the single add box in the Mixtape tray before anything is picked. Tapping it jumps to search."
-    },
-    "text_mixtape_slot_next": {
-      "default": "Add",
-      "description": "Label on the single add box in the Mixtape tray after the first pick. Tapping it jumps to search."
     },
     "button_label_mixtape_remove_pick": {
       "default": "Remove {title}",
@@ -14547,11 +14558,7 @@
     },
     "text_mixtape_pick_count": {
       "default": "{count} picked",
-      "description": "How many titles are picked on the Mixtape page. {count} is a number from 1 to 5."
-    },
-    "button_text_mixtape_clear": {
-      "default": "Clear",
-      "description": "Button that removes every picked title on the Mixtape page."
+      "description": "How many titles are picked on the Mixtape page. {count} is a number from 1 to 3."
     },
     "button_text_mix_it": {
       "default": "Mix it",
@@ -14561,10 +14568,6 @@
       "default": "Nothing else in your history fits all of these. Mix it, or remove a pick to widen the list.",
       "description": "Shown when no other watched title shares the feel of every picked title."
     },
-    "text_mixtape_max_picks": {
-      "default": "That's 5 picks. Mix it when you're ready.",
-      "description": "Shown in place of the grid once the maximum of 5 titles is picked."
-    },
     "text_mixtape_no_search_results": {
       "default": "Nothing in your history matches that title.",
       "description": "Shown when the Mixtape search finds no watched title."
@@ -14573,17 +14576,9 @@
       "default": "Your history is empty. Mark a few titles as watched to make a mixtape.",
       "description": "Shown on the Mixtape page when the user has no watched titles of the chosen type. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
-    "text_mixtape_based_on": {
-      "default": "Mixed from {titles}",
-      "description": "Line on the Mixtape results naming the picked titles. {titles} is a list of titles."
-    },
     "text_mixtape_because": {
       "default": "Because you liked {title}",
       "description": "Line under a Mixtape suggestion naming the picked title it is closest to. {title} is the movie or show title."
-    },
-    "button_text_mixtape_not_this": {
-      "default": "Not this",
-      "description": "Label under the left button of a Mixtape card, and the stamp shown while swiping a card left. Swaps the suggestion for the next one."
     },
     "button_text_mixtape_change_picks": {
       "default": "Change picks",
@@ -14599,7 +14594,7 @@
     },
     "button_text_make_mixtape": {
       "default": "Make a mixtape",
-      "description": "Title of the Discover strip that opens the Mixtape page. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
+      "description": "Accessible name of the Mixtape pill in the Discover header that opens the Mixtape page. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling (e.g. ミックステープ), and use the same form in every Mixtape string."
     },
     "button_text_start_mixtape_with_this": {
       "default": "Start a mixtape with this",
@@ -14607,7 +14602,115 @@
     },
     "text_mixtape_strip_description": {
       "default": "Pick titles you loved. Get 3 that feel the same.",
-      "description": "Short line on the Discover strip that opens the Mixtape page."
+      "description": "Tooltip under the Mixtape pill in the Discover header. One short line explaining what Mixtape does."
+    },
+    "text_mixtape_deck_prompt_movies": {
+      "default": "Add up to {max} movies you loved",
+      "description": "Line under the Mixtape title in the page header while picking movies. {max} is how many slots the deck has (3).",
+      "variables": {
+        "max": {
+          "type": "number",
+          "description": "Number of slots in the deck.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_deck_prompt_shows": {
+      "default": "Add up to {max} shows you loved",
+      "description": "Line under the Mixtape title in the page header while picking shows. {max} is how many slots the deck has (3).",
+      "variables": {
+        "max": {
+          "type": "number",
+          "description": "Number of slots in the deck.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_deck_loaded": {
+      "default": "Deck loaded",
+      "description": "Line under the Mixtape title once every slot of the deck holds a pick. The deck is the row of five small poster slots in the header."
+    },
+    "text_mixtape_mixing": {
+      "default": "Mixing…",
+      "description": "Line under the Mixtape title while the suggestions are being prepared after pressing Mix it."
+    },
+    "text_mixtape_mixed_from_picks_one": {
+      "default": "Mixed from your pick",
+      "description": "Line under the Mixtape title on the results, when exactly one title was picked."
+    },
+    "text_mixtape_mixed_from_picks": {
+      "default": "Mixed from your {count} picks",
+      "description": "Line under the Mixtape title on the results. {count} is 2 or more.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "How many titles were picked.",
+          "required": true
+        }
+      }
+    },
+    "text_mixtape_slots_left_one": {
+      "default": "1 slot left",
+      "description": "Next to the grid heading on the Mixtape page when one slot of the deck is still free."
+    },
+    "text_mixtape_slots_left": {
+      "default": "{count} slots left",
+      "description": "Next to the grid heading on the Mixtape page. {count} is how many slots of the deck are still free, 2 or more.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Free slots in the deck.",
+          "required": true
+        }
+      }
+    },
+    "header_mixtape_deck_full": {
+      "default": "Deck full",
+      "description": "Heading above the grid on the Mixtape page once all 5 slots are picked. The rest of the grid dims until Mix it is pressed."
+    },
+    "header_mixtape_mixing": {
+      "default": "Mixing your picks",
+      "description": "Heading above the grid on the Mixtape page while the suggestions are being prepared."
+    },
+    "button_text_mixtape_mixing": {
+      "default": "Mixing",
+      "description": "Label of the Mix it button in the header while the suggestions are being prepared. The button fills up while this shows."
+    },
+    "button_text_mixtape_remix": {
+      "default": "Remix",
+      "description": "Label of the Mix it button in the header once the results are shown. Goes back to the picker with the same picks."
+    },
+    "text_mixtape_deck_count": {
+      "default": "{count}/{max}",
+      "description": "Small counter inside the Mix it button. {count} is how many titles are picked, {max} is the size of the deck (3).",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Picked titles.",
+          "required": true
+        },
+        "max": {
+          "type": "number",
+          "description": "Number of slots in the deck.",
+          "required": true
+        }
+      }
+    },
+    "button_label_mixtape_add_movie": {
+      "default": "Add a movie",
+      "description": "Accessible name of the empty add slot in the Mixtape deck while picking movies. Picks land in it from the grid or the search."
+    },
+    "button_label_mixtape_add_show": {
+      "default": "Add a show",
+      "description": "Accessible name of the empty add slot in the Mixtape deck while picking shows. Picks land in it from the grid or the search."
+    },
+    "button_text_mixtape_change": {
+      "default": "Change",
+      "description": "Tail of the picks pill in the header once the Mixtape results are shown. Opens the picker again with the same picks so they can be changed. Keep it to one short word."
+    },
+    "header_mixtape_list": {
+      "default": "Your mixtape",
+      "description": "Small heading above the list of kept titles on the Mixtape end screen. Mixtape is a feature name: keep it as Mixtape, or use the common local spelling, and use the same form in every Mixtape string."
     },
     "header_ending": {
       "default": "Ending",
@@ -14621,9 +14724,9 @@
       "default": "Unresolved",
       "description": "Text for a show that ended or stopped without resolving its story. The value is sent back from the Trakt API as open."
     },
-    "text_mixtape_fits_count": {
-      "default": "{count} from your history",
-      "description": "Small text next to the Fits with your picks heading. {count} is how many watched titles still fit."
+    "preview_feature_description_show_ending": {
+      "default": "Shows an Ending row in a show's details: Complete when the story wrapped up, Unresolved when it did not.",
+      "description": "Description of the show ending preview feature."
     },
     "header_mixtape_find": {
       "default": "Find {total} to watch",
@@ -14656,45 +14759,13 @@
         }
       }
     },
-    "text_mixtape_kept_toast": {
-      "default": "{title} added, {left} to go",
-      "description": "Short confirmation after adding a Mixtape suggestion to the watchlist. {title} is the movie or show title, {left} is how many more to keep.",
-      "variables": {
-        "title": {
-          "type": "string",
-          "description": "Title that was added.",
-          "required": true
-        },
-        "left": {
-          "type": "number",
-          "description": "How many more to keep.",
-          "required": true
-        }
-      }
-    },
     "button_text_mixtape_keep": {
       "default": "Keep it",
       "description": "Label under the right button of a Mixtape card. Adds the suggestion to the watchlist."
     },
-    "button_text_mixtape_another": {
-      "default": "Another",
-      "description": "Label under the left button of a Mixtape card. Swaps the suggestion for the next one."
-    },
-    "text_mixtape_or_swipe": {
-      "default": "or swipe",
-      "description": "Text between the two Mixtape card buttons, saying the card can also be swiped."
-    },
-    "tag_mixtape_tap_details": {
-      "default": "Tap for details",
-      "description": "One-time chip on the first Mixtape card saying a tap flips it to show details."
-    },
     "tag_mixtape_match": {
       "default": "{match}% match",
       "description": "Tag on a Mixtape suggestion saying how closely it matches the picked titles. {match} is a number from 0 to 100."
-    },
-    "button_label_mixtape_another": {
-      "default": "Not this, show another",
-      "description": "Accessible label of the left button on a Mixtape card that swaps the suggestion for the next one."
     },
     "button_text_mixtape_show_another": {
       "default": "Show me another",
@@ -14744,21 +14815,6 @@
         "sofar": {
           "type": "number",
           "description": "Titles kept in the whole session.",
-          "required": true
-        }
-      }
-    },
-    "text_mixtape_count_one": {
-      "default": "1 title",
-      "description": "Size of the Mixtape on its end screen when it holds one title."
-    },
-    "text_mixtape_count": {
-      "default": "{count} titles",
-      "description": "Size of the Mixtape on its end screen. {count} is 2 or more.",
-      "variables": {
-        "count": {
-          "type": "number",
-          "description": "Titles in the mixtape.",
           "required": true
         }
       }
@@ -14887,17 +14943,6 @@
     "text_mixtape_saved_as_you_go": {
       "default": "Each keep is saved right away, so closing never loses it.",
       "description": "Rest of the bar under the desktop Mixtape fan, after the count."
-    },
-    "button_text_mixtape_finish_with": {
-      "default": "Finish with {count}",
-      "description": "Button in the bar under the desktop Mixtape fan that ends the round early and opens the end screen. {count} is how many were kept.",
-      "variables": {
-        "count": {
-          "type": "number",
-          "description": "Titles kept this round.",
-          "required": true
-        }
-      }
     },
     "text_mixtape_stat_titles_label": {
       "default": "Titles",
@@ -15113,10 +15158,6 @@
           "type": "string"
         }
       }
-    },
-    "text_mixtape_pick_prompt": {
-      "default": "Tap a poster you loved",
-      "description": "Shown in the Mixtape bottom bar before anything is picked."
     },
     "description_jellyfin_sync": {
       "default": "Connect your Jellyfin server to sync watch history and collections with Trakt.",

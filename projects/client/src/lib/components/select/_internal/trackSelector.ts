@@ -22,22 +22,39 @@ const easeOutSpring = (progress: number) => {
   );
 };
 
+const resizeSettleDelay = time.seconds(0.08);
+
 export function trackSelector(row: HTMLElement, initial: TrackSelectorParams) {
   let params = initial;
   let isMorphing = false;
   let morphFrame = 0;
   let settleFrame = 0;
+  let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+
+  /*
+    Rects come back scaled while an ancestor animates a transform (the
+    navbar surface scales in around the toggle). Dividing by the row's
+    layout width undoes that, so a measure taken on such a frame still
+    lands on the segment instead of settling short of it.
+  */
+  const rowMetrics = () => {
+    const rect = row.getBoundingClientRect();
+    const ratio = row.offsetWidth > 0 ? rect.width / row.offsetWidth : 1;
+    const scale = Math.abs(ratio - 1) < 0.01 ? 1 : ratio;
+
+    return { left: rect.left, width: rect.width / scale, scale };
+  };
 
   const offsetOf = (element: HTMLElement) => {
-    const rowRect = row.getBoundingClientRect();
+    const { left, scale } = rowMetrics();
     const rect = element.getBoundingClientRect();
 
-    return { x: rect.left - rowRect.left, width: rect.width };
+    return { x: (rect.left - left) / scale, width: rect.width / scale };
   };
 
   const containInRow = ({ x, width }: { x: number; width: number }) => {
     const start = Math.max(x, 0);
-    const end = Math.min(x + width, row.getBoundingClientRect().width);
+    const end = Math.min(x + width, rowMetrics().width);
 
     return { x: start, width: Math.max(end - start, 0) };
   };
@@ -55,7 +72,29 @@ export function trackSelector(row: HTMLElement, initial: TrackSelectorParams) {
     if (isMorphing || !target || !row.isConnected) return;
 
     write(offsetOf(target));
+    if (row.dataset.measured != null) return;
+
     row.dataset.measured = '';
+    settleFrame = requestAnimationFrame(() => {
+      row.dataset.settled = '';
+    });
+  };
+
+  /*
+    While the row itself is resizing (a segment folding, the leading slot
+    opening) the segment moves a little every frame; the selector follows
+    each measure directly instead of springing after it, and the spring
+    comes back once the row has held still.
+  */
+  const followResize = () => {
+    if (isMorphing) return;
+
+    row.dataset.tracking = '';
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (!isMorphing) delete row.dataset.tracking;
+    }, resizeSettleDelay);
+    measure();
   };
 
   const stopMorph = () => {
@@ -108,15 +147,11 @@ export function trackSelector(row: HTMLElement, initial: TrackSelectorParams) {
     morphFrame = requestAnimationFrame(step);
   };
 
-  const observer = new ResizeObserver(measure);
+  const observer = new ResizeObserver(followResize);
 
   const start = () => {
     measure();
     document.fonts?.ready.then(measure);
-
-    settleFrame = requestAnimationFrame(() => {
-      row.dataset.settled = '';
-    });
     observer.observe(row);
   };
 
@@ -147,6 +182,7 @@ export function trackSelector(row: HTMLElement, initial: TrackSelectorParams) {
     },
     destroy() {
       cancelAnimationFrame(settleFrame);
+      clearTimeout(resizeTimer);
       stopMorph();
       observer.disconnect();
     },

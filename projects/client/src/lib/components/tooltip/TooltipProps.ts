@@ -6,6 +6,8 @@ export type TooltipProps = {
   side?: 'top' | 'right' | 'bottom' | 'left';
   delayDuration?: number;
   sideOffset?: number;
+  /* Minimum distance in px the tooltip keeps from the viewport edges. */
+  collisionPadding?: number;
   disabled?: boolean;
   /*
     Let the pointer pass straight through the tooltip content instead of the
@@ -16,4 +18,6 @@ export type TooltipProps = {
   */
   disableHoverableContent?: boolean;
   openOnTap?: boolean;
+  /* Keeps the tooltip open while true; hover, focus and tap own it otherwise. */
+  open?: boolean;
 };

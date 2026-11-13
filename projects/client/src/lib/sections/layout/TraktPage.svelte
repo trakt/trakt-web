@@ -11,6 +11,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../../components/router/Redirect.svelte";
   import Footer from "../footer/Footer.svelte";
+  import type { NavbarEntry } from "../navbar/models/NavbarEntry.ts";
   import NavbarStateSetter from "../navbar/NavbarStateSetter.svelte";
   import { createMediaLd } from "./_internal/createMediaLd.ts";
   import { isNoIndexPath } from "./_internal/isNoIndexPath.ts";
@@ -28,6 +29,7 @@
     mode?: "default" | "content-only";
     filterScope?: FilterScope;
     isIndexable?: boolean;
+    navbarEntry?: NavbarEntry;
   };
 
   const {
@@ -41,6 +43,7 @@
     mode = "default",
     filterScope = "local",
     isIndexable = true,
+    navbarEntry,
   }: ChildrenProps & TraktPageProps & AudienceProps = $props();
 
   const websiteName = "Trakt Web";
@@ -265,7 +268,7 @@
 <FilterScopeSetter {filterScope}>
   <RenderFor {audience}>
     {#if mode === "default"}
-      <NavbarStateSetter mode="full" />
+      <NavbarStateSetter mode="full" entry={navbarEntry ?? null} />
     {/if}
 
     <main class="trakt-content" data-mode={mode} {...dynamicContentProps}>

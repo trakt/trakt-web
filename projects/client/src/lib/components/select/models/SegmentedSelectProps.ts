@@ -16,5 +16,8 @@ export type SegmentedSelectProps<TValue extends string = string> = {
   collapsedCount?: number;
   expanded?: boolean;
   extension?: Snippet;
+  /** Content that opens inside the track before the segments (expandable only). */
+  leading?: Snippet;
+  isLeadingOpen?: boolean;
   onChange: (value: TValue) => void;
 };

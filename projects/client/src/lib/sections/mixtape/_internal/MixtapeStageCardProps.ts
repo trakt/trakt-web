@@ -1,8 +1,8 @@
 import type { MixtapeSlot } from './MixtapeSlot.ts';
 
-export type MixtapeFanPosterProps = {
+export type MixtapeStageCardProps = {
   slot: MixtapeSlot;
-  place: 'center' | 'start' | 'end';
+  offset: number;
   isSelected: boolean;
   isSwapping: boolean;
   isKept: boolean;

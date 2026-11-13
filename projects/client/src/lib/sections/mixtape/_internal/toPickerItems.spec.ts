@@ -13,6 +13,7 @@ describe('toPickerItems', () => {
       history,
       fitMedia: [],
       searchResults: [],
+      picked: [],
       picks: [],
       fits: [],
       query: '',
@@ -22,12 +23,13 @@ describe('toPickerItems', () => {
     expect(items.map(({ media }) => media.id)).toEqual([1, 2, 3, 4]);
   });
 
-  it('should show only fitting titles, best fit first, once something is picked', () => {
+  it('should lead with the picks in deck order, then the fits, best first', () => {
     const { kind, items } = toPickerItems({
       history,
       fitMedia: [],
       searchResults: [],
-      picks: [1],
+      picked: [earth, spaceballs],
+      picks: [4, 1],
       fits: [
         { id: 3, score: 0.7 },
         { id: 2, score: 0.6 },
@@ -36,19 +38,40 @@ describe('toPickerItems', () => {
     });
 
     expect(kind).toBe('fits');
-    expect(items.map(({ media }) => media.id)).toEqual([3, 2]);
+    expect(items.map(({ media, slot }) => [media.id, slot])).toEqual([
+      [4, 1],
+      [1, 2],
+      [3, null],
+      [2, null],
+    ]);
   });
 
-  it('should never offer a title that is already picked', () => {
+  it('should never offer a picked title among the fits', () => {
     const { items } = toPickerItems({
       history,
       fitMedia: [],
       searchResults: [],
+      picked: [earth],
       picks: [1],
       fits: [
         { id: 1, score: 1 },
         { id: 2, score: 0.6 },
       ],
+      query: '',
+    });
+
+    expect(items.map(({ media }) => media.id)).toEqual([1, 2]);
+    expect(items.map(({ slot }) => slot)).toEqual([1, null]);
+  });
+
+  it('should skip a pick whose details have not arrived yet', () => {
+    const { items } = toPickerItems({
+      history,
+      fitMedia: [],
+      searchResults: [],
+      picked: [],
+      picks: [1],
+      fits: [{ id: 2, score: 0.6 }],
       query: '',
     });
 
@@ -60,6 +83,7 @@ describe('toPickerItems', () => {
       history,
       fitMedia: [],
       searchResults: [],
+      picked: [earth],
       picks: [1],
       fits: [{ id: 2, score: 0.6 }],
       query: ' E',
@@ -67,10 +91,25 @@ describe('toPickerItems', () => {
 
     expect(kind).toBe('search');
     expect(items).toEqual([
-      { media: ritual, isOff: false },
-      { media: coherence, isOff: true },
-      { media: spaceballs, isOff: true },
+      { media: earth, isOff: false, slot: 1 },
+      { media: ritual, isOff: false, slot: null },
+      { media: coherence, isOff: true, slot: null },
+      { media: spaceballs, isOff: true, slot: null },
     ]);
+  });
+
+  it('should only keep the picks that match the typed text', () => {
+    const { items } = toPickerItems({
+      history,
+      fitMedia: [],
+      searchResults: [],
+      picked: [earth, spaceballs],
+      picks: [1, 4],
+      fits: [],
+      query: 'space',
+    });
+
+    expect(items).toEqual([{ media: spaceballs, isOff: false, slot: 2 }]);
   });
 
   it('should mark nothing off while searching with no picks', () => {
@@ -78,12 +117,13 @@ describe('toPickerItems', () => {
       history,
       fitMedia: [],
       searchResults: [],
+      picked: [],
       picks: [],
       fits: [],
       query: 'space',
     });
 
-    expect(items).toEqual([{ media: spaceballs, isOff: false }]);
+    expect(items).toEqual([{ media: spaceballs, isOff: false, slot: null }]);
   });
 
   it('should add older search hits from the whole history after recent matches', () => {
@@ -93,6 +133,7 @@ describe('toPickerItems', () => {
       history: [...history, gladiatorTwo],
       fitMedia: [],
       searchResults: [gladiatorTwo, gladiator],
+      picked: [earth],
       picks: [1],
       fits: [{ id: 5, score: 0.77 }],
       query: 'glad',
@@ -111,6 +152,7 @@ describe('toPickerItems', () => {
       history,
       fitMedia: [gladiator],
       searchResults: [],
+      picked: [earth],
       picks: [1],
       fits: [
         { id: 2, score: 0.8 },
@@ -120,7 +162,7 @@ describe('toPickerItems', () => {
     });
 
     expect(kind).toBe('fits');
-    expect(items.map(({ media }) => media.id)).toEqual([2, 5]);
+    expect(items.map(({ media }) => media.id)).toEqual([1, 2, 5]);
   });
 
   it('should drop full-history hits that no longer match the typed text', () => {
@@ -129,6 +171,7 @@ describe('toPickerItems', () => {
       history,
       fitMedia: [],
       searchResults: [gladiator],
+      picked: [],
       picks: [],
       fits: [],
       query: 'star',

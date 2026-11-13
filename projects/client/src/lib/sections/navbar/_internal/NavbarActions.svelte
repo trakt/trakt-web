@@ -3,20 +3,34 @@
   import EditModeBar from "$lib/features/edit-mode/EditModeBar.svelte";
   import { useEditMode } from "$lib/features/edit-mode/useEditMode";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import MixtapeNavbarDeck from "$lib/sections/mixtape/MixtapeNavbarDeck.svelte";
+  import MixtapeNavbarSearch from "$lib/sections/mixtape/MixtapeNavbarSearch.svelte";
   import { trackElementBottom } from "$lib/utils/actions/trackElementBottom";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
+  import { nudgeInline } from "$lib/utils/transitions/nudgeInline.ts";
   import Toast from "../../toast/Toast.svelte";
   import FilterButton from "../components/filter/FilterButton.svelte";
   import GetVIPLink from "../components/GetVIPLink.svelte";
   import JoinTraktButton from "../components/JoinTraktButton.svelte";
   import { useNavbarState } from "../useNavbarState";
   import NavbarContentToggle from "./NavbarContentToggle.svelte";
+  import NavbarEntryStack from "./NavbarEntryStack.svelte";
   import NavbarHeader from "./NavbarHeader.svelte";
+  import { navbarSurfaceTransition } from "./navbarSurfaceTransition.ts";
 
   const { state } = useNavbarState();
 
   const { isEditMode } = useEditMode();
+
+  const isMixtape = $derived(
+    $state.contentToggle === "mixtape" ||
+      $state.contentToggle === "mixtape-results",
+  );
 </script>
+
+{#snippet mixtapeSearch()}
+  <MixtapeNavbarSearch --width-mixtape-navbar-search="var(--ni-228)" />
+{/snippet}
 
 <div
   class="trakt-navbar-actions"
@@ -33,9 +47,36 @@
     {#if $isEditMode}
       <EditModeBar />
     {:else}
-      {#if $state.contentToggle}
-        <NavbarContentToggle surface={$state.contentToggle} />
-      {/if}
+      <!--
+        One surface for the toggle and the mixtape deck: Mixtape is a mode
+        of the toggle, so the switch morphs in place instead of swapping.
+        On results the toggle gives its space up (and takes it back coming
+        home) through its end margin, never its width, so the picks pill
+        glides to the centre and the toggle keeps its own geometry.
+      -->
+      <div class="navbar-content-surfaces">
+        {#if $state.contentToggle}
+          <div
+            class="navbar-content-surface"
+            in:navbarSurfaceTransition|global
+            out:navbarSurfaceTransition|global
+          >
+            {#if $state.contentToggle !== "mixtape-results"}
+              <div class="navbar-content-toggle-slot" transition:nudgeInline>
+                <NavbarContentToggle
+                  surface={$state.contentToggle}
+                  leading={mixtapeSearch}
+                />
+              </div>
+            {/if}
+            {#if isMixtape}
+              <div class="navbar-content-deck-slot" out:nudgeInline>
+                <MixtapeNavbarDeck />
+              </div>
+            {/if}
+          </div>
+        {/if}
+      </div>
       {@render $state.actions?.()}
     {/if}
   </div>
@@ -43,6 +84,8 @@
   <div class="trakt-navbar-actions-right">
     <RenderFor audience="authenticated">
       {#if !$isEditMode}
+        {@render $state.entryLeadingActions?.()}
+        <NavbarEntryStack />
         {@render $state.headerActions?.()}
         {#if $state.showFilters}
           <FilterButton
@@ -191,6 +234,29 @@
     display: flex;
     align-items: center;
     gap: var(--gap-s);
+  }
+
+  /*
+    The centre surfaces stack in one grid cell so a leaving surface can fade
+    out over the arriving one without shifting the bar.
+  */
+  .navbar-content-surfaces {
+    display: grid;
+    justify-items: center;
+  }
+
+  .navbar-content-surface {
+    grid-area: 1 / 1;
+    display: flex;
+    align-items: center;
+    gap: var(--ni-12);
+    min-width: 0;
+  }
+
+  .navbar-content-toggle-slot,
+  .navbar-content-deck-slot {
+    display: flex;
+    min-width: 0;
   }
 
   .trakt-navbar-actions.has-actions {
