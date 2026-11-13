@@ -12,8 +12,10 @@
   import { useTodayDetails } from "./useTodayDetails.ts";
   import { toMediaMeta } from "./_internal/toMediaMeta.ts";
 
-  const { media, kicker = null }: { media: TodayMedia; kicker?: string | null } =
-    $props();
+  const {
+    media,
+    kicker = null,
+  }: { media: TodayMedia; kicker?: string | null } = $props();
 
   const { ratings, isRatingsLoading, sentiment, realityCheck } =
     useTodayDetails(fromRune(() => media));

@@ -37,9 +37,8 @@
   });
 
   const coverRect = (key: string) =>
-    cells[key]
-      ?.querySelector(".trakt-card-cover")
-      ?.getBoundingClientRect() ?? null;
+    cells[key]?.querySelector(".trakt-card-cover")?.getBoundingClientRect() ??
+    null;
 </script>
 
 {#snippet differentMood()}
@@ -146,8 +145,8 @@
       --width-override-card: 100%;
       --height-override-card-cover: calc(100cqi * 1.5);
       --height-override-card: calc(
-        100cqi * 1.5 + var(--height-portrait-card) -
-          var(--height-portrait-card-cover)
+        100cqi * 1.5 +
+          var(--height-portrait-card) - var(--height-portrait-card-cover)
       );
 
       transition:
@@ -164,8 +163,8 @@
       animation: picker-cell-in calc(3 * var(--transition-increment))
         cubic-bezier(0.2, 0.8, 0.2, 1) both;
       animation-delay: calc(
-        var(--picker-stagger-base) +
-          var(--cell-index, 0) * var(--picker-stagger-step)
+        var(--picker-stagger-base) + var(--cell-index, 0) *
+          var(--picker-stagger-step)
       );
     }
 

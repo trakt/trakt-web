@@ -74,9 +74,7 @@
       rows are clipped to the pill.
     */
     &:has(:global([data-entry-glow])) {
-      box-shadow:
-        var(--shadow-navbar-entry),
-        var(--shadow-navbar-entry-glow);
+      box-shadow: var(--shadow-navbar-entry), var(--shadow-navbar-entry-glow);
     }
 
     &[data-entry="today"]:not(:has(:global(.trakt-today-navbar-entry))) {

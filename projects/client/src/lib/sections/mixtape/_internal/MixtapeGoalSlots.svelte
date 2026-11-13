@@ -6,8 +6,7 @@
   const {
     round,
     total,
-  }: { round: ReadonlyArray<MovieEntry | ShowEntry>; total: number } =
-    $props();
+  }: { round: ReadonlyArray<MovieEntry | ShowEntry>; total: number } = $props();
 </script>
 
 <ol class="trakt-mixtape-goal-slots" aria-hidden="true">
