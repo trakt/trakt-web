@@ -8,6 +8,7 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
 import { moviePeopleQuery } from '$lib/requests/queries/movies/moviePeopleQuery.ts';
+import { movieDocumentaryCheckQuery } from '$lib/requests/queries/movies/movieDocumentaryCheckQuery.ts';
 import { movieRealityCheckQuery } from '$lib/requests/queries/movies/movieRealityCheckQuery.ts';
 import { movieSentimentQuery } from '$lib/requests/queries/movies/movieSentimentQuery.ts';
 import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuery.ts';
@@ -20,6 +21,8 @@ import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts'
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadableData } from '$lib/utils/requests/toLoadableData.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { selectRealityCheck } from '$lib/utils/reality/selectRealityCheck.ts';
+import { toLoadableDocumentaryCheck } from '$lib/utils/reality/toLoadableDocumentaryCheck.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { combineLatest, type Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -59,7 +62,7 @@ export function useMovie(slug$: Observable<string>) {
     multicast(),
   );
 
-  const realityCheck = combineLatest([
+  const storyRealityCheck = combineLatest([
     isAuthorized,
     useQuery(
       combineLatest([slug$, isAuthorized]).pipe(
@@ -76,6 +79,42 @@ export function useMovie(slug$: Observable<string>) {
     map(([authorized, query]) =>
       toLoadableData({ isAuthorized: authorized, query }),
     ),
+  );
+
+  const isDocumentary = movie.pipe(
+    map(($movie) => $movie.data?.genres.includes('documentary')),
+    distinctUntilChanged(),
+  );
+
+  const documentaryCheck = combineLatest([
+    isAuthorized,
+    isDocumentary,
+    useQuery(
+      combineLatest([slug$, isAuthorized, isDocumentary]).pipe(
+        map(([slug, authorized, documentary]) =>
+          movieDocumentaryCheckQuery({
+            slug,
+            locale: activeLocale,
+            enabled: authorized && documentary === true,
+          }),
+        ),
+      ),
+    ),
+  ]).pipe(
+    map(([authorized, documentary, query]) =>
+      toLoadableDocumentaryCheck({
+        isAuthorized: authorized,
+        isDocumentary: documentary,
+        query,
+      }),
+    ),
+  );
+
+  const realityCheck = combineLatest([
+    storyRealityCheck,
+    documentaryCheck,
+  ]).pipe(
+    map(([story, documentary]) => selectRealityCheck({ story, documentary })),
     multicast(),
   );
 

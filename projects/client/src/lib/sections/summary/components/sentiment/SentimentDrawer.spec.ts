@@ -1,5 +1,6 @@
 import { RealityCheckPublicMappedMock } from '$mocks/data/summary/reality-check/mapped/RealityCheckPublicMappedMock.ts';
 import { goto } from '$app/navigation';
+import { DocumentaryCheckVipMappedMock } from '$mocks/data/summary/documentary-check/mapped/DocumentaryCheckVipMappedMock.ts';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import type { MatchResponse } from '$lib/requests/models/MatchResponse.ts';
 import { MatchResponseMock } from '$mocks/data/summary/match/response/MatchResponseMock.ts';
@@ -137,6 +138,26 @@ describe('SentimentDrawer', () => {
 
     expect(
       baseElement.querySelector('.trakt-reality-check-skeleton'),
+    ).toBeInTheDocument();
+  });
+
+  it('should show the documentary check under the Reality Check tab', async () => {
+    const { baseElement } = renderComponent(SentimentDrawer, {
+      props: {
+        sentiment: MovieHereticSentimentMappedMock,
+        realityCheck: DocumentaryCheckVipMappedMock,
+        ...TARGET,
+        source: 'card',
+        onClose,
+      },
+    });
+
+    expect(
+      await screen.findByRole('tab', { name: 'Reality Check' }),
+    ).toHaveAttribute('data-state', 'active');
+    expect(await screen.findByText('Widely disputed')).toBeVisible();
+    expect(
+      baseElement.querySelector('.trakt-documentary-check-tab'),
     ).toBeInTheDocument();
   });
 

@@ -9,6 +9,7 @@ import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
+import { showDocumentaryCheckQuery } from '$lib/requests/queries/shows/showDocumentaryCheckQuery.ts';
 import { showRealityCheckQuery } from '$lib/requests/queries/shows/showRealityCheckQuery.ts';
 import { showSentimentQuery } from '$lib/requests/queries/shows/showSentimentQuery.ts';
 import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
@@ -19,9 +20,11 @@ import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts'
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadableData } from '$lib/utils/requests/toLoadableData.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { selectRealityCheck } from '$lib/utils/reality/selectRealityCheck.ts';
+import { toLoadableDocumentaryCheck } from '$lib/utils/reality/toLoadableDocumentaryCheck.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
 import { combineLatest, type Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 export function useShow(slug$: Observable<string>) {
   const { isAuthorized } = useAuth();
@@ -64,7 +67,7 @@ export function useShow(slug$: Observable<string>) {
     multicast(),
   );
 
-  const realityCheck = combineLatest([
+  const storyRealityCheck = combineLatest([
     isAuthorized,
     useQuery(
       combineLatest([slug$, isAuthorized]).pipe(
@@ -81,6 +84,42 @@ export function useShow(slug$: Observable<string>) {
     map(([authorized, query]) =>
       toLoadableData({ isAuthorized: authorized, query }),
     ),
+  );
+
+  const isDocumentary = show.pipe(
+    map(($show) => $show.data?.genres.includes('documentary')),
+    distinctUntilChanged(),
+  );
+
+  const documentaryCheck = combineLatest([
+    isAuthorized,
+    isDocumentary,
+    useQuery(
+      combineLatest([slug$, isAuthorized, isDocumentary]).pipe(
+        map(([slug, authorized, documentary]) =>
+          showDocumentaryCheckQuery({
+            slug,
+            locale: activeLocale,
+            enabled: authorized && documentary === true,
+          }),
+        ),
+      ),
+    ),
+  ]).pipe(
+    map(([authorized, documentary, query]) =>
+      toLoadableDocumentaryCheck({
+        isAuthorized: authorized,
+        isDocumentary: documentary,
+        query,
+      }),
+    ),
+  );
+
+  const realityCheck = combineLatest([
+    storyRealityCheck,
+    documentaryCheck,
+  ]).pipe(
+    map(([story, documentary]) => selectRealityCheck({ story, documentary })),
     multicast(),
   );
 

@@ -395,6 +395,14 @@
   --color-reality-adjusted-text: var(--yellow-900);
   --color-reality-altered-background: var(--red-90);
   --color-reality-altered-text: var(--red-800);
+  --color-reality-central-background: var(--orange-90);
+  --color-reality-central-text: var(--orange-800);
+  --color-reality-neutral-background: color-mix(
+    in srgb,
+    var(--color-text-primary) 12%,
+    transparent
+  );
+  --color-reality-neutral-text: var(--color-text-secondary);
 
   /*
    * VIP page
@@ -1150,6 +1158,18 @@
     transparent
   );
   --color-reality-altered-text: var(--red-100);
+  --color-reality-central-background: color-mix(
+    in srgb,
+    var(--orange-300) 22%,
+    transparent
+  );
+  --color-reality-central-text: var(--orange-200);
+  --color-reality-neutral-background: color-mix(
+    in srgb,
+    var(--color-text-primary) 12%,
+    transparent
+  );
+  --color-reality-neutral-text: var(--color-text-secondary);
 
   /*
    * VIP page

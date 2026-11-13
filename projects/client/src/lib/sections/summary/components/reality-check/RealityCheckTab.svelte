@@ -1,15 +1,22 @@
 <script lang="ts">
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
+  import type { RealityCheckVariant } from "$lib/requests/models/RealityCheckVariant.ts";
+  import { isDocumentaryCheck } from "$lib/utils/reality/isDocumentaryCheck.ts";
+  import DocumentaryCheckTab from "./_internal/DocumentaryCheckTab.svelte";
   import RealityCheckDetail from "./_internal/RealityCheckDetail.svelte";
   import RealityCheckSkeleton from "./_internal/RealityCheckSkeleton.svelte";
   import RealityCheckSummary from "./_internal/RealityCheckSummary.svelte";
   import RealityCheckUpsell from "./_internal/RealityCheckUpsell.svelte";
 
-  const { realityCheck }: { realityCheck: RealityCheck | undefined } = $props();
+  const { realityCheck }: { realityCheck: RealityCheckVariant | undefined } =
+    $props();
 </script>
 
-{#if realityCheck}
+{#if !realityCheck}
+  <RealityCheckSkeleton />
+{:else if isDocumentaryCheck(realityCheck)}
+  <DocumentaryCheckTab documentaryCheck={realityCheck} />
+{:else}
   <div class="trakt-reality-check-tab">
     <RealityCheckSummary {realityCheck} />
 
@@ -23,8 +30,6 @@
       <RealityCheckUpsell />
     </RenderFor>
   </div>
-{:else}
-  <RealityCheckSkeleton />
 {/if}
 
 <style>

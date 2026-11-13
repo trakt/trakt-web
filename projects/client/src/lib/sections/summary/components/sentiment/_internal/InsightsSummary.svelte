@@ -5,9 +5,11 @@
   import { lineClamp } from "$lib/components/text/lineClamp.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
-  import RealityTierPill from "$lib/sections/components/reality-check/RealityTierPill.svelte";
+  import DocumentaryMakers from "$lib/sections/components/reality-check/DocumentaryMakers.svelte";
+  import RealityCheckPill from "$lib/sections/components/reality-check/RealityCheckPill.svelte";
   import RealityTierPillSkeleton from "$lib/sections/components/reality-check/RealityTierPillSkeleton.svelte";
   import { stripMarkdownLinks } from "$lib/utils/markdown/stripMarkdownLinks.ts";
+  import { isDocumentaryCheck } from "$lib/utils/reality/isDocumentaryCheck.ts";
   import { clampItemsToFit } from "./clampItemsToFit.ts";
   import MatchTierHeading from "./MatchTierHeading.svelte";
   import { mapToSentimentSummary } from "./mapToSentimentSummary";
@@ -27,6 +29,10 @@
     sentiment === undefined || realityCheck === undefined,
   );
 
+  const isDocumentary = $derived(
+    realityCheck ? isDocumentaryCheck(realityCheck) : false,
+  );
+
   const summary = $derived(
     sentiment
       ? mapToSentimentSummary({
@@ -41,6 +47,7 @@
   class="trakt-sentiment-summary"
   class:has-ring={hasRing}
   class:has-floating-footer={!isLoading && !realityCheck}
+  class:is-documentary={isDocumentary}
 >
   {#if isLoading}
     <Skeleton width="55%" height="var(--ni-18)" />
@@ -64,9 +71,12 @@
     <span class="bold">{m.header_reality_check()}</span>
 
     <div class="trakt-sentiment-aspects">
-      <p use:lineClamp={{ lines: 5 }}>
+      <p use:lineClamp={{ lines: isDocumentary ? 3 : 5 }}>
         <InlineMarkdown text={stripMarkdownLinks(realityCheck.summary)} />
       </p>
+      {#if isDocumentaryCheck(realityCheck)}
+        <DocumentaryMakers --makers-max-lines="2" makers={realityCheck.makers} />
+      {/if}
     </div>
   {:else if match === undefined}
     <Skeleton width="80%" height="var(--ni-18)" />
@@ -79,7 +89,7 @@
       <RealityTierPillSkeleton />
     {:else}
       {#if realityCheck}
-        <RealityTierPill tier={realityCheck.verdict} />
+        <RealityCheckPill {realityCheck} />
       {/if}
       {#if hasDrawer}
         <span class="trakt-sentiment-arrow"><ArrowRightIcon /></span>
@@ -102,6 +112,10 @@
     position: relative;
 
     --width-ring-reserve: calc(var(--width-sentiment-match-slot) + var(--gap-xs));
+
+    &.is-documentary {
+      gap: var(--gap-xs);
+    }
 
     &.has-floating-footer {
       ul {

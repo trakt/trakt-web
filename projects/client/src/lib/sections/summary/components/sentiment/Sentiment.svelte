@@ -4,7 +4,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import type { RealityCheck } from "$lib/requests/models/RealityCheck.ts";
+  import type { RealityCheckVariant } from "$lib/requests/models/RealityCheckVariant.ts";
   import type { SentimentAnalysis } from "$lib/requests/models/SentimentAnalysis.ts";
   import InsightsCard from "./_internal/InsightsCard.svelte";
   import SentimentCard from "./_internal/SentimentCard.svelte";
@@ -13,7 +13,7 @@
 
   type SentimentProps = {
     sentiment: SentimentAnalysis | Nil;
-    realityCheck: RealityCheck | null | undefined;
+    realityCheck: RealityCheckVariant | null | undefined;
     slug: string;
     id: number;
     variant?: ListVariant;
