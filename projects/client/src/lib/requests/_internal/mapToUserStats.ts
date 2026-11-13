@@ -42,6 +42,7 @@ export function mapToUserStats(response: UserStatsResponse): UserStats {
         }
       : null,
     lists: response.lists ?? null,
+    listComments: response.list_comments ?? 0,
     totalMinutes:
       response.total_minutes ??
       response.movies.minutes + response.episodes.minutes,

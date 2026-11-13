@@ -43,12 +43,8 @@ function toDistribution(ratings: UserRatings): RatingDistribution {
 }
 
 /**
- * Client-side fallback for the `/users/:id/stats` shape, used when a free user
- * views their OWN profile (the endpoint returns `404` for free accounts).
- *
- * Only the metrics derivable from the loaded history + ratings are populated;
- * server-only aggregates (minutes, comments, network, progress, lists) stay `0`
- * and the panel hides zero-valued stats rather than surfacing misleading data.
+ * Aggregates only the server knows (minutes, comments, network, progress,
+ * lists) stay `0`.
  */
 export function computeUserStats({
   history,
@@ -114,6 +110,7 @@ export function computeUserStats({
       dropped: 0,
     },
     lists: 0,
+    listComments: 0,
     totalMinutes: 0,
     totalPlays: moviePlays + episodePlays,
   };

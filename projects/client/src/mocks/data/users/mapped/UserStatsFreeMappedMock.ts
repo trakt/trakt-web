@@ -45,6 +45,7 @@ export const UserStatsFreeMappedMock: UserStats = {
   },
   progress: null,
   lists: null,
+  listComments: 0,
   totalMinutes: 175,
   totalPlays: 2,
 };

@@ -1,6 +1,6 @@
 export type AllTimeStatsDetails = {
   playCount: number;
-  minuteCount: number;
+  minuteCount: number | null;
   movieCount: number;
   showCount: number;
   episodeCount: number;

@@ -5,19 +5,27 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useQuery } from "$lib/features/query/useQuery.ts";
   import { userStatsQuery } from "$lib/requests/queries/users/userStatsQuery.ts";
+  import { map } from "rxjs";
   import type { ConfirmationContentProps } from "./ConfirmationContentProps.ts";
   import { toDeleteAccountStats } from "./toDeleteAccountStats.ts";
 
   const _props: ConfirmationContentProps = $props();
 
   const { user } = useUser();
-  const stats = useQuery(userStatsQuery({ slug: "me" }));
+  const stats = useQuery(
+    user.pipe(
+      map((current) => ({
+        ...userStatsQuery({ slug: "me" }),
+        enabled: Boolean(current?.isVip),
+      })),
+    ),
+  );
 
   const format = $derived(new Intl.NumberFormat(getIntlLocale(languageTag())));
   const counts = $derived(
     toDeleteAccountStats({
       joinedAt: $user?.joinedAt,
-      stats: $stats.data,
+      stats: $stats.isEnabled ? $stats.data : null,
       now: new Date(),
     }),
   );

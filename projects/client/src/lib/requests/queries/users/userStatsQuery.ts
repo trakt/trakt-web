@@ -43,6 +43,7 @@ export const UserStatsResponseSchema = z.object({
     })
     .optional(),
   lists: z.number().int().optional(),
+  list_comments: z.number().int().optional(),
   total_minutes: z.number().int().optional(),
   total_plays: z.number().int().optional(),
 });

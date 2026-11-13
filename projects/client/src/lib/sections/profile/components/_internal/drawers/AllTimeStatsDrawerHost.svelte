@@ -61,7 +61,10 @@
         {
           key: "hours",
           label: m.label_stats_hours(),
-          value: Math.round($details.minuteCount / 60),
+          value:
+            $details.minuteCount === null
+              ? null
+              : Math.round($details.minuteCount / 60),
         },
         {
           key: "movies",

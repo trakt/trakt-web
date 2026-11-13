@@ -1,24 +1,30 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
-import { userStatsQuery } from '$lib/requests/queries/users/userStatsQuery.ts';
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { multicast } from '$lib/utils/store/multicast.ts';
-import { map } from 'rxjs';
-import type { AllTimeStatsDetails } from '../models/AllTimeStatsDetails.ts';
+import { combineLatest, distinctUntilChanged, map } from 'rxjs';
 import { toAllTimeCounts } from './_internal/toAllTimeCounts.ts';
+import { useFreeAllTimeStats } from './_internal/useFreeAllTimeStats.ts';
+import { useVipAllTimeStats } from './_internal/useVipAllTimeStats.ts';
 
 export function useAllTimeStatsDetails() {
-  const stats = useQuery(userStatsQuery({ slug: 'me' }));
+  const { user } = useUser();
+  const isVip = user.pipe(
+    map(($user) => Boolean($user?.isVip)),
+    distinctUntilChanged(),
+  );
 
-  const state = stats.pipe(
-    map(($stats) => {
-      const details: AllTimeStatsDetails = {
-        ...toAllTimeCounts($stats.data),
-      };
+  const vip = useVipAllTimeStats(isVip);
+  const free = useFreeAllTimeStats(isVip.pipe(map((vipUser) => !vipUser)));
 
-      return {
-        details,
-        isLoading: $stats.isLoading,
-      };
-    }),
+  const state = combineLatest([
+    vip.details,
+    free.details,
+    vip.isLoading,
+    free.isLoading,
+  ]).pipe(
+    map(([vipDetails, freeDetails, isVipLoading, isFreeLoading]) => ({
+      details: vipDetails ?? freeDetails ?? toAllTimeCounts(null),
+      isLoading: isVipLoading || isFreeLoading,
+    })),
     multicast(),
   );
 

@@ -20,7 +20,8 @@ export function toAllTimeCounts(stats: UserStats | Nil): AllTimeStatsDetails {
     return EMPTY_COUNTS;
   }
 
-  const { movies, shows, seasons, episodes, ratings, progress } = stats;
+  const { movies, shows, seasons, episodes, ratings, progress, listComments } =
+    stats;
 
   return {
     playCount: stats.totalPlays,
@@ -29,7 +30,11 @@ export function toAllTimeCounts(stats: UserStats | Nil): AllTimeStatsDetails {
     showCount: shows.watched,
     episodeCount: episodes.watched,
     commentCount:
-      movies.comments + shows.comments + seasons.comments + episodes.comments,
+      movies.comments +
+      shows.comments +
+      seasons.comments +
+      episodes.comments +
+      listComments,
     ratingCount: ratings.total,
     listCount: stats.lists,
     startedCount: progress?.started ?? null,
