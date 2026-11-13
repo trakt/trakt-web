@@ -643,7 +643,9 @@
         background: none;
         backdrop-filter: none;
         box-shadow: none;
-        animation: none;
+        /* A different name each way, so the tray fades in wherever it lands. */
+        animation: deck-pill-in var(--deck-slide-duration)
+          var(--deck-slide-ease) both;
       }
 
       .deck-slots {
@@ -689,6 +691,13 @@
     from {
       opacity: 0;
       transform: var(--deck-slots-from);
+    }
+  }
+
+  @keyframes deck-pill-in {
+    from {
+      opacity: 0;
+      transform: translateY(calc(-1 * var(--ni-12)));
     }
   }
 </style>

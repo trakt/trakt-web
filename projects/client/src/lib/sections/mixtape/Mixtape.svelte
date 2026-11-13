@@ -14,6 +14,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
+  import { fadeAway } from "$lib/utils/transitions/fadeAway.ts";
   import {
     combineLatest,
     concat,
@@ -31,6 +32,8 @@
   import MixtapeHeaderButton from "./_internal/MixtapeHeaderButton.svelte";
   import MixtapePicker from "./_internal/MixtapePicker.svelte";
   import MixtapeResults from "./_internal/MixtapeResults.svelte";
+  import { cubicOut } from "svelte/easing";
+  import { fly } from "svelte/transition";
   import type { MixtapeTarget } from "./_internal/MixtapeTarget.ts";
   import { parseMixtapeParams } from "./_internal/parseMixtapeParams.ts";
   import { toMixtapeSlots } from "./_internal/toMixtapeSlots.ts";
@@ -137,6 +140,9 @@
   );
   const isMixing = $derived(isResults && ($isHolding$ || $isMixtapeLoading));
   const isShowingResults = $derived(isResults && !isMixing);
+  const motion = (duration: number) => ($isReducedMotion ? 0 : duration);
+  const STAGE_RISE_DURATION = 360;
+  const STAGE_FADE_DURATION = 240;
   const phase = $derived(isMixing ? "mixing" : isFull ? "full" : "pick");
 
   $effect(() => {
@@ -307,56 +313,81 @@
     </div>
   </RenderFor>
 
-  {#if isShowingResults}
-    <MixtapeResults
-      {slots}
-      {canSwap}
-      isLoading={$isMixtapeLoading}
-      picked={$picked}
-      {titleOf}
-      closeHref={UrlBuilder.discover()}
-      changeHref={href({})}
-      startOverHref={UrlBuilder.mixtape({ type: params.type })}
-      {rounds}
-      savedTo={params.savedTo}
-      onKeep={keepMedia}
-      matchOf={(id) => suggestionOf(id)?.match ?? null}
-      becauseOf={(id) => {
-        const suggestion = suggestionOf(id);
-        return suggestion ? titleOf(suggestion.because) : null;
-      }}
-      onMoved={(savedTo) => replaceResults({ savedTo })}
-      onSkip={(id) => replaceResults({ skips: [...params.skips, id] })}
-      onUndo={() => replaceResults({ skips: params.skips.slice(0, -1) })}
-      onMore={(ids) =>
-        replaceResults({
-          skips: [...params.skips, ...ids],
-          kept: [...params.kept, []],
-        })}
-      onResult={(action, position) =>
-        trackResult({ action, position: String(position), type: params.type })}
-    />
-  {:else}
-    <section class="mixtape-browse">
-      <div class="mixtape-grid-head">
-        <span class="mixtape-grid-label">{gridHead}</span>
-        {#if gridMeta}
-          <span class="mixtape-grid-meta">{gridMeta}</span>
-        {/if}
+  <!-- The picker and the stage cross-fade in one slot: the leaving block lifts out of the flow while the arriving one rises in. -->
+  <div class="mixtape-switch">
+    {#if isShowingResults}
+      <div
+        class="mixtape-switch-item"
+        in:fly={{
+          y: 16,
+          duration: motion(STAGE_RISE_DURATION),
+          easing: cubicOut,
+        }}
+        out:fadeAway={{ duration: motion(STAGE_FADE_DURATION) }}
+      >
+        <MixtapeResults
+          {slots}
+          {canSwap}
+          isLoading={$isMixtapeLoading}
+          picked={$picked}
+          {titleOf}
+          closeHref={UrlBuilder.discover()}
+          changeHref={href({})}
+          startOverHref={UrlBuilder.mixtape({ type: params.type })}
+          {rounds}
+          savedTo={params.savedTo}
+          onKeep={keepMedia}
+          matchOf={(id) => suggestionOf(id)?.match ?? null}
+          becauseOf={(id) => {
+            const suggestion = suggestionOf(id);
+            return suggestion ? titleOf(suggestion.because) : null;
+          }}
+          onMoved={(savedTo) => replaceResults({ savedTo })}
+          onSkip={(id) => replaceResults({ skips: [...params.skips, id] })}
+          onUndo={() => replaceResults({ skips: params.skips.slice(0, -1) })}
+          onMore={(ids) =>
+            replaceResults({
+              skips: [...params.skips, ...ids],
+              kept: [...params.kept, []],
+            })}
+          onResult={(action, position) =>
+            trackResult({
+              action,
+              position: String(position),
+              type: params.type,
+            })}
+        />
       </div>
+    {:else}
+      <section
+        class="mixtape-browse"
+        in:fly={{
+          y: 16,
+          duration: motion(STAGE_RISE_DURATION),
+          easing: cubicOut,
+        }}
+        out:fadeAway={{ duration: motion(STAGE_FADE_DURATION) }}
+      >
+        <div class="mixtape-grid-head">
+          <span class="mixtape-grid-label">{gridHead}</span>
+          {#if gridMeta}
+            <span class="mixtape-grid-meta">{gridMeta}</span>
+          {/if}
+        </div>
 
-      <MixtapePicker
-        picker={shownPicker}
-        isLoading={isPickerLoading}
-        {isSettling}
-        {phase}
-        pickHref={(media) => href({ picks: [...params.picks, media.id] })}
-        removeHref={(media) =>
-          href({ picks: params.picks.filter((pick) => pick !== media.id) })}
-        onPick={pick}
-      />
-    </section>
-  {/if}
+        <MixtapePicker
+          picker={shownPicker}
+          isLoading={isPickerLoading}
+          {isSettling}
+          {phase}
+          pickHref={(media) => href({ picks: [...params.picks, media.id] })}
+          removeHref={(media) =>
+            href({ picks: params.picks.filter((pick) => pick !== media.id) })}
+          onPick={pick}
+        />
+      </section>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
@@ -443,6 +474,15 @@
         );
         backdrop-filter: blur(var(--ni-10));
       }
+    }
+
+    .mixtape-switch {
+      position: relative;
+      display: grid;
+    }
+
+    .mixtape-switch-item {
+      min-width: 0;
     }
 
     .mixtape-browse {
