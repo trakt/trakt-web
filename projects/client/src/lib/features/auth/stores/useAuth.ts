@@ -13,6 +13,7 @@ import { mapToLoginError } from '../mapToLoginError.ts';
 import { LoginErrorType } from '../models/LoginErrorType.ts';
 import type { LoginSource } from '../models/LoginSource.ts';
 import { toLoginFailureCode } from '../toLoginFailureCode.ts';
+import { toLoginReturnPath } from '../toLoginReturnPath.ts';
 import { setToken } from '../token/index.ts';
 import { getAuthContext } from './getAuthContext.ts';
 import { getUserManager } from './userManager.ts';
@@ -80,7 +81,14 @@ export function useAuth() {
     const lang = region ? `${language}-${region.toUpperCase()}` : language;
 
     try {
+      const returnTo = toLoginReturnPath(
+        new URLSearchParams(globalThis.window?.location?.search).get(
+          'return_to',
+        ),
+      );
+
       await manager.signinRedirect({
+        state: returnTo ?? undefined,
         extraQueryParams: {
           hide_email_form: 'true',
           lang,

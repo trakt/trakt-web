@@ -59,6 +59,40 @@ describe('store: useAuth', () => {
       });
     });
 
+    it('should carry a returnable path through the sign in state', async () => {
+      globalThis.window.history.replaceState(
+        {},
+        '',
+        `/?${new URLSearchParams({ return_to: '/vip?source=yir-email' })}`,
+      );
+      const { login } = await renderStore(() => useAuth());
+      const manager = createManager({});
+
+      await login('landing-login');
+      globalThis.window.history.replaceState({}, '', '/');
+
+      expect(manager.signinRedirect.mock.calls.at(0)?.at(0)).to.deep.include({
+        state: '/vip?source=yir-email',
+      });
+    });
+
+    it('should drop a return path that is not returnable', async () => {
+      globalThis.window.history.replaceState(
+        {},
+        '',
+        `/?${new URLSearchParams({ return_to: 'https://evil.example/vip' })}`,
+      );
+      const { login } = await renderStore(() => useAuth());
+      const manager = createManager({});
+
+      await login('landing-login');
+      globalThis.window.history.replaceState({}, '', '/');
+
+      expect(manager.signinRedirect.mock.calls.at(0)?.at(0)?.state).to.equal(
+        undefined,
+      );
+    });
+
     it('should clear a previous login error when starting again', async () => {
       loginErrorStore.set(LoginErrorType.RateLimited);
       const { login } = await renderStore(() => useAuth());

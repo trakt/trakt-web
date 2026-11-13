@@ -30,7 +30,7 @@ type CheckoutRequest = {
   plan: VipPlan;
   source: VipUpsellSource;
   flow: VipFlow;
-  returnTo: string | null;
+  returnTo?: string | Nil;
 };
 
 function getReturnUrl() {
