@@ -16446,6 +16446,18 @@
     "vip_nudge_close": {
       "default": "Close and hide for 14 days",
       "description": "Accessible label of the close button on the VIP card on the home page, which hides the card for 14 days."
+    },
+    "header_beta_vip_only": {
+      "default": "The beta is for VIP members",
+      "description": "Heading on the screen that replaces the app in a TestFlight beta build when the signed in user isn't VIP."
+    },
+    "text_beta_vip_only": {
+      "default": "Purchases aren't available in the beta. Get the App Store version of Trakt to upgrade to VIP, then come back to the beta.",
+      "description": "Explains on the beta VIP-only screen that VIP can't be bought in a TestFlight build, and points to the App Store version."
+    },
+    "button_text_get_app_store_version": {
+      "default": "Get the App Store version",
+      "description": "Button on the beta VIP-only screen that opens the app's App Store page."
     }
   }
 }
