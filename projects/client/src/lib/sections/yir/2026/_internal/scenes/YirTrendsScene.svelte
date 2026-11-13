@@ -38,7 +38,7 @@
 >
   {#snippet children()}
     <ol class="yir-trends">
-      {#each ordered as item, position (item.entry.key)}
+      {#each ordered as item, position (item.month)}
         <li class:is-watched={item.watched} data-reveal style:--d="calc(var(--yir-beat) * {position} * 0.5)">
           <Link href={UrlBuilder.media(item.entry.type, item.entry.slug)} color="inherit">
             <span class="yir-trend-month">
