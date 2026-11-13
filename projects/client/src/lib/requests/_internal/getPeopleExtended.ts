@@ -1,3 +1,3 @@
 export function getPeopleExtended(guestStars: boolean) {
-  return guestStars ? ('guest_stars' as const) : undefined;
+  return guestStars ? ('images,guest_stars' as const) : ('images' as const);
 }

@@ -91,10 +91,10 @@ export const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/people`,
     ({ request }) => {
       const extended = new URL(request.url).searchParams.get('extended');
-      if (extended === 'guest_stars') {
+      if (extended === 'images,guest_stars') {
         return HttpResponse.json(ShowSiloSplitPeopleResponseMock);
       }
-      if (extended === null) {
+      if (extended === 'images') {
         return HttpResponse.json(ShowSiloPeopleResponseMock);
       }
       return new HttpResponse(null, { status: 400 });
@@ -164,10 +164,13 @@ export const shows = [
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/people`,
     ({ request }) => {
-      if (new URL(request.url).searchParams.get('extended') === null) {
+      if (new URL(request.url).searchParams.get('extended') === 'images') {
         return HttpResponse.json(ShowSiloPeopleResponseMock);
       }
-      if (new URL(request.url).searchParams.get('extended') !== 'guest_stars') {
+      if (
+        new URL(request.url).searchParams.get('extended') !==
+        'images,guest_stars'
+      ) {
         return new HttpResponse(null, { status: 400 });
       }
       return HttpResponse.json(ShowSiloSplitPeopleResponseMock);
@@ -182,14 +185,17 @@ export const shows = [
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/people`,
     ({ request }) => {
-      if (new URL(request.url).searchParams.get('extended') === null) {
+      if (new URL(request.url).searchParams.get('extended') === 'images') {
         const { guest_stars, ...people } = EpisodeSiloPeopleResponseMock;
         return HttpResponse.json({
           ...people,
           cast: [...(people.cast ?? []), ...guest_stars],
         });
       }
-      if (new URL(request.url).searchParams.get('extended') !== 'guest_stars') {
+      if (
+        new URL(request.url).searchParams.get('extended') !==
+        'images,guest_stars'
+      ) {
         return new HttpResponse(null, { status: 400 });
       }
 
