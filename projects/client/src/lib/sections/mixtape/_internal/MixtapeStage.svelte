@@ -344,6 +344,7 @@
 
     container: mixtape-stage / inline-size;
     position: relative;
+    isolation: isolate;
     box-sizing: border-box;
     overflow: hidden;
     margin-inline: var(--layout-distance-side);
@@ -387,7 +388,9 @@
 
     opacity: 0.55;
     filter: blur(var(--ni-28)) saturate(1.1);
-    transform: scale(1.15);
+    /* Its own layer: iOS Safari otherwise leaves a filtered block behind while the page scrolls. */
+    transform: scale(1.15) translateZ(0);
+    will-change: transform;
     pointer-events: none;
 
     :global(img) {
@@ -639,7 +642,18 @@
     }
   }
 
-  @container mixtape-stage (width < 60rem) {
+  /* A narrow main column (iPad landscape beside the details) keeps the goal on one line. */
+  @container mixtape-stage-main (width < 34rem) {
+    .stage-goal-title {
+      font-size: var(--ni-24);
+    }
+
+    .stage-goal-meta :global(.trakt-mixtape-goal-slots) {
+      display: none;
+    }
+  }
+
+  @container mixtape-stage (width < 56rem) {
     .stage-layout {
       grid-template-columns: minmax(0, 1fr);
       row-gap: var(--gap-l);
@@ -652,78 +666,13 @@
   }
 
   /*
-    Phones: the stage runs edge to edge, the carousel is swiped, the details
-    read on below it with a centred heading, and the verdict buttons float
-    above the bottom navbar, where the thumbs are.
+    Small screens (phones and small tablets, where the bottom navbar lives):
+    the verdict buttons float above it, where the thumbs are, and the stage
+    clears them at its end.
   */
-  @include for-mobile {
-    .trakt-mixtape-stage {
-      --stage-card-tilt: 5deg;
-      --border-radius-mixtape-stage-card: var(--border-radius-l);
-
-      margin-inline: 0;
-      margin-block-end: 0;
-      border-radius: 0;
-      background: none;
-
-      &::after {
-        display: none;
-      }
-    }
-
-    .stage-veil {
-      background: linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--color-background) 40%, transparent) 0%,
-        color-mix(in srgb, var(--color-background) 90%, transparent) 50%,
-        var(--color-background) 70%
-      );
-    }
-
+  @include for-tablet-sm-and-below {
     .stage-layout {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-xs);
-      padding: var(--gap-xs) var(--layout-distance-side)
-        calc(var(--ni-104) + var(--gap-m));
-    }
-
-    /*
-      The goal is one line on phones, title at the start and the watchlist
-      count at the end; the dots and the footer already count the keeps.
-    */
-    .stage-goal {
-      align-items: baseline;
-      justify-content: space-between;
-      gap: var(--gap-xs);
-    }
-
-    .stage-goal-title {
-      font-size: var(--ni-20);
-    }
-
-    .stage-goal-meta :global(.trakt-mixtape-goal-slots) {
-      display: none;
-    }
-
-    .stage-main {
-      gap: var(--gap-xs);
-    }
-
-    .stage-carousel {
-      --width-mixtape-stage-card: var(--ni-152);
-      --stage-card-step: calc(var(--width-mixtape-stage-card) * 0.76);
-
-      height: calc(var(--width-mixtape-stage-card) * 1.5 + var(--ni-12));
-      margin-inline: calc(-1 * var(--layout-distance-side));
-    }
-
-    .stage-nav-button {
-      display: none;
-    }
-
-    .stage-side {
-      align-items: stretch;
+      padding-block-end: calc(var(--ni-104) + var(--gap-m));
     }
 
     .stage-footer {
@@ -768,6 +717,71 @@
       max-width: calc(100% - 2 * var(--layout-distance-side));
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  /*
+    Phones: the stage runs edge to edge, the carousel is swiped and the
+    details read on below it with a centred heading.
+  */
+  @include for-mobile {
+    .trakt-mixtape-stage {
+      --stage-card-tilt: 5deg;
+      --border-radius-mixtape-stage-card: var(--border-radius-l);
+
+      margin-inline: 0;
+      margin-block-end: 0;
+      border-radius: 0;
+      background: none;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    .stage-veil {
+      background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-background) 40%, transparent) 0%,
+        color-mix(in srgb, var(--color-background) 90%, transparent) 50%,
+        var(--color-background) 70%
+      );
+    }
+
+    .stage-layout {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-xs);
+      padding: var(--ni-4) var(--layout-distance-side)
+        calc(var(--ni-104) + var(--gap-m));
+    }
+
+    /*
+      Phones skip the goal row: the page header already names the mixtape,
+      the dots place the card and the footer counts the keeps.
+    */
+    .stage-goal {
+      display: none;
+    }
+
+    .stage-main {
+      gap: var(--gap-xs);
+    }
+
+    .stage-carousel {
+      --width-mixtape-stage-card: var(--ni-144);
+      --stage-card-step: calc(var(--width-mixtape-stage-card) * 0.76);
+
+      height: calc(var(--width-mixtape-stage-card) * 1.5 + var(--ni-8));
+      margin-inline: calc(-1 * var(--layout-distance-side));
+    }
+
+    .stage-nav-button {
+      display: none;
+    }
+
+    .stage-side {
+      align-items: stretch;
     }
   }
 

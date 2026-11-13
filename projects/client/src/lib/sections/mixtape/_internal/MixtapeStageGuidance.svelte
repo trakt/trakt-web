@@ -4,6 +4,7 @@
   import type { MovieEntry } from "$lib/requests/models/MovieEntry.ts";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import { useParentalGuideCategories } from "$lib/sections/summary/components/useParentalGuideCategories.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import { toGuidanceChips } from "./toGuidanceChips.ts";
 
@@ -13,9 +14,25 @@
     target$: fromRune(() => ({ type: media.type, slug: media.slug })),
   });
 
+  const isPhone = useMedia(WellKnownMediaQuery.mobile);
+
   const chips = $derived(toGuidanceChips($categories));
   const certification = $derived(media.certification ?? null);
   const isVisible = $derived(Boolean(certification) || chips.isReported);
+  const lines = $derived(
+    chips.flagged.length > 0
+      ? chips.flagged
+      : chips.isReported
+        ? [
+            {
+              key: "none",
+              label: m.text_parental_guide_nothing_flagged(),
+              severityLabel: "",
+              severityTone: "none",
+            },
+          ]
+        : [],
+  );
 </script>
 
 {#if isVisible}
@@ -40,20 +57,28 @@
         width="60%"
         radius="var(--border-radius-pill)"
       />
-    {:else if chips.flagged.length > 0}
+    {:else if $isPhone}
+      <!-- Phones: the same flags as one wrapping line, no chip can run off the screen. -->
+      <p class="tag guidance-line">
+        {#each lines as line (line.key)}
+          <span class="guidance-item" data-severity={line.severityTone}>
+            <span class="bold">{line.label}</span>
+            {#if line.severityLabel}
+              <span class="guidance-severity">{line.severityLabel}</span>
+            {/if}
+          </span>
+        {/each}
+      </p>
+    {:else if lines.length > 0}
       <ul class="guidance-chips">
-        {#each chips.flagged as chip (chip.key)}
-          <li class="guidance-chip" data-severity={chip.severityTone}>
-            <span class="bold">{chip.label}</span>
-            <span class="guidance-severity">{chip.severityLabel}</span>
+        {#each lines as line (line.key)}
+          <li class="guidance-chip" data-severity={line.severityTone}>
+            <span class="bold">{line.label}</span>
+            {#if line.severityLabel}
+              <span class="guidance-severity">{line.severityLabel}</span>
+            {/if}
           </li>
         {/each}
-      </ul>
-    {:else if chips.isReported}
-      <ul class="guidance-chips">
-        <li class="guidance-chip" data-severity="none">
-          <span class="bold">{m.text_parental_guide_nothing_flagged()}</span>
-        </li>
       </ul>
     {/if}
   </div>
@@ -132,7 +157,8 @@
       list-style: none;
     }
 
-    .guidance-chip {
+    .guidance-chip,
+    .guidance-item {
       &::before {
         content: "";
         flex: none;
@@ -163,23 +189,24 @@
       }
     }
 
-    .guidance-accessible-label {
-      @include visually-hidden;
+    .guidance-line {
+      color: var(--color-text-primary);
+      line-height: 1.6;
     }
 
-    /* Phones: one row of chips that scrolls sideways, bleeding to the screen edge. */
-    @include for-mobile {
-      .guidance-chips {
-        flex-wrap: nowrap;
-        margin-inline: calc(-1 * var(--layout-distance-side));
-        padding-inline: var(--layout-distance-side);
-        overflow-x: auto;
-        scrollbar-width: none;
+    .guidance-item {
+      margin-inline-end: var(--ni-12);
+      white-space: nowrap;
 
-        &::-webkit-scrollbar {
-          display: none;
-        }
+      &::before {
+        display: inline-block;
+        margin-inline-end: var(--ni-4);
+        vertical-align: middle;
       }
+    }
+
+    .guidance-accessible-label {
+      @include visually-hidden;
     }
   }
 </style>
