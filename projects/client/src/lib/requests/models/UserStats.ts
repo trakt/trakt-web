@@ -53,6 +53,7 @@ export const UserStatsSchema = z.object({
     })
     .nullable(),
   lists: z.number().nullable(),
+  listComments: z.number(),
   totalMinutes: z.number(),
   totalPlays: z.number(),
 });

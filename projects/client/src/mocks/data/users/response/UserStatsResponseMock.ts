@@ -35,6 +35,7 @@ export const UserStatsResponseMock: UserStatsResponse = {
   },
   progress: { started: 12, finished: 34, dropped: 5 },
   lists: 7,
+  list_comments: 2,
   total_minutes: 260_000,
   total_plays: 6100,
 };

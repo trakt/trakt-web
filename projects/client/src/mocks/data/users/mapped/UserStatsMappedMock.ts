@@ -49,6 +49,7 @@ export const UserStatsMappedMock: UserStats = {
     dropped: 5,
   },
   lists: 7,
+  listComments: 2,
   totalMinutes: 260_000,
   totalPlays: 6100,
 };
