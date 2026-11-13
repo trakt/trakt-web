@@ -30,6 +30,17 @@ describe('toImageFallbacks', () => {
     ]);
   });
 
+  it('should fall back from a character to the person headshot', () => {
+    expect(
+      toImageFallbacks(
+        'https://media.trakt.tv/characters/1390-447271/thumb/headshot.webp',
+      ),
+    ).toEqual([
+      'https://media.trakt.tv/people/447271/thumb/headshot.webp',
+      MEDIA_POSTER_PLACEHOLDER,
+    ]);
+  });
+
   it('should ignore a version query', () => {
     expect(
       toImageFallbacks('https://media.trakt.tv/movies/1/thumb/poster.webp?v=1'),

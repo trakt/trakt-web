@@ -6,22 +6,37 @@ import {
 } from '$lib/utils/assets.ts';
 
 const mediaImagePattern =
-  /^(https:\/\/media\.trakt\.tv\/[a-z]+\/\d+)\/([a-z]+)\/([a-z]+)\.webp(?:\?.*)?$/;
+  /^(https:\/\/media\.trakt\.tv\/([a-z]+)\/([\d-]+))\/([a-z]+)\/([a-z]+)\.webp(?:\?.*)?$/;
 
 type MediaImagePath = {
   base: string;
+  type: string;
+  id: string;
   size: string;
   slot: string;
 };
 
 function toMediaImagePath(url: string): MediaImagePath | null {
-  const [, base, size, slot] = url.match(mediaImagePattern) ?? [];
+  const [, base, type, id, size, slot] = url.match(mediaImagePattern) ?? [];
 
-  if (!base || !size || !slot) {
+  if (!base || !type || !id || !size || !slot) {
     return null;
   }
 
-  return { base, size, slot };
+  return { base, type, id, size, slot };
+}
+
+function toCharacterFallbacks({ id, size }: MediaImagePath): string[] {
+  const personId = id.split('-').at(1);
+
+  if (!personId) {
+    return [MEDIA_POSTER_PLACEHOLDER];
+  }
+
+  return [
+    `https://media.trakt.tv/people/${personId}/${size}/headshot.webp`,
+    MEDIA_POSTER_PLACEHOLDER,
+  ];
 }
 
 function toCoverPlaceholder(size: string) {
@@ -51,6 +66,10 @@ export function toImageFallbacks(url: string): string[] {
 
   if (!path) {
     return [];
+  }
+
+  if (path.type === 'characters') {
+    return toCharacterFallbacks(path);
   }
 
   return toSlotFallbacks(path);
