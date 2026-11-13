@@ -105,10 +105,10 @@
         margin-block: calc(-1 * var(--ni-2));
       }
       color: var(--color-text-primary);
+    }
 
-      &:not(.is-live)[data-align="start"] {
-        margin-inline-start: calc(-1 * var(--ni-10));
-      }
+    &:not(.is-live)[data-align="start"] {
+      margin-inline-start: calc(-1 * var(--ni-10));
     }
 
     &.is-live {
