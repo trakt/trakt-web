@@ -28,6 +28,7 @@
     mode?: "default" | "content-only";
     filterScope?: FilterScope;
     isIndexable?: boolean;
+    returnAfterLogin?: boolean;
   };
 
   const {
@@ -41,6 +42,7 @@
     mode = "default",
     filterScope = "local",
     isIndexable = true,
+    returnAfterLogin = false,
   }: ChildrenProps & TraktPageProps & AudienceProps = $props();
 
   const websiteName = "Trakt Web";
@@ -167,11 +169,15 @@
 
   const audienceRedirect = $derived(AUDIENCE_REDIRECTS[audience]);
 
-  const audienceRedirectTo = $derived(
-    audienceRedirect?.preservesSearch
+  const audienceRedirectTo = $derived.by(() => {
+    if (audience === "authenticated" && returnAfterLogin) {
+      return UrlBuilder.landing(`${page.url.pathname}${page.url.search}`);
+    }
+
+    return audienceRedirect?.preservesSearch
       ? `${audienceRedirect.to}${page.url.search}`
-      : audienceRedirect?.to,
-  );
+      : audienceRedirect?.to;
+  });
 
   const isMediaPage = $derived(type === "movie" || type === "show");
   const hasOpenGraphDimensions = $derived(

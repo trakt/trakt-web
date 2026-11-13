@@ -5,6 +5,7 @@
   import { postToken } from "$lib/features/auth/postToken";
   import { toLoginFailureCode } from "$lib/features/auth/toLoginFailureCode.ts";
   import { getUserManager } from "$lib/features/auth/stores/userManager";
+  import { toLoginReturnPath } from "$lib/features/auth/toLoginReturnPath.ts";
   import { FETCH_ERROR_EVENT } from "$lib/features/errors/constants";
   import { error as printError } from "$lib/utils/console/print.ts";
   import { setCacheBuster } from "$lib/utils/url/setCacheBuster";
@@ -31,13 +32,12 @@
     trackLoginFailed({ error: "session_not_stored" });
   };
 
-  const navigateToHome = () => {
-    const homeUrl = new URL(
-      UrlBuilder.home(),
-      globalThis.window.location.origin,
-    );
-    globalThis.window.location.replace(setCacheBuster(homeUrl));
+  const navigateTo = (path: string) => {
+    const url = new URL(path, globalThis.window.location.origin);
+    globalThis.window.location.replace(setCacheBuster(url));
   };
+
+  const navigateToHome = () => navigateTo(UrlBuilder.home());
 
   onMount(() => {
     const manager = getUserManager();
@@ -48,8 +48,10 @@
 
     manager
       .signinCallback()
-      .then(storeSession)
-      .then(navigateToHome)
+      .then(async (user) => {
+        await storeSession(user);
+        navigateTo(toLoginReturnPath(user?.state) ?? UrlBuilder.home());
+      })
       .catch((error) => {
         printError("Error during sign-in callback:", error);
         trackLoginFailed({ error: toLoginFailureCode(error) });

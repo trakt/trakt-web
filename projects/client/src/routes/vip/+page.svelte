@@ -8,7 +8,12 @@
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 </script>
 
-<TraktPage audience="authenticated" image={DEFAULT_SHARE_COVER} title="VIP">
+<TraktPage
+  audience="authenticated"
+  image={DEFAULT_SHARE_COVER}
+  title="VIP"
+  returnAfterLogin
+>
   <NavbarStateSetter mode="minimal" />
 
   <StripeReturnHandler />

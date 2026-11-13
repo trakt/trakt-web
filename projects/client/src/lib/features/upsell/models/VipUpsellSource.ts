@@ -41,6 +41,7 @@ export const VipUpsellSourceSchema = z.union([
     'welcome-banner',
     'yir',
     'yir-all-time',
+    'yir-email',
   ]),
   z.custom<`promotion-${string}`>(
     (value) =>

@@ -155,7 +155,8 @@ export const UrlBuilder = {
   startWatching: (user: string, params: Record<string, string | number> = {}) =>
     `/users/${user}/start-watching${buildParamString(sanitizeParams(params))}`,
 
-  landing: () => '/',
+  landing: (returnTo?: string) =>
+    returnTo ? `/?${new URLSearchParams({ return_to: returnTo })}` : '/',
   home: () => '/home',
   today: () => '/today',
   mixtape: (params: MixtapeUrlParams = {}) =>
