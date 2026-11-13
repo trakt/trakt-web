@@ -1,15 +1,11 @@
 <script lang="ts">
   import MediaReactionsBadge from "$lib/features/media-reactions/MediaReactionsBadge.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import WatchingNowSummaryPill from "$lib/sections/watching-now/WatchingNowSummaryPill.svelte";
   import SocialActivitiesButton from "./SocialActivitiesButton.svelte";
   import type { SummarySocialRowProps } from "./SummarySocialRowProps.ts";
 
-  const {
-    type,
-    slug,
-    id,
-    title,
-    extra,
-  }: SummarySocialRowProps = $props();
+  const { type, slug, id, title, extra }: SummarySocialRowProps = $props();
 </script>
 
 <div class="trakt-summary-social-row">
@@ -18,6 +14,10 @@
   {/key}
 
   <SocialActivitiesButton target={{ type, slug }} {title} />
+
+  <RenderFor audience="authenticated">
+    <WatchingNowSummaryPill target={{ type, slug }} {title} />
+  </RenderFor>
   {@render extra?.()}
 </div>
 
