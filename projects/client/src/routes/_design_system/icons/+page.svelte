@@ -105,6 +105,7 @@
   import WatchNowIcon from "$lib/components/icons/WatchNowIcon.svelte";
   import WikipediaIcon from "$lib/components/icons/WikipediaIcon.svelte";
   import XIcon from "$lib/components/icons/XIcon.svelte";
+  import XLogoIcon from "$lib/components/icons/XLogoIcon.svelte";
   import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
@@ -293,6 +294,7 @@
         <IconTile name="TMDBIcon"><TMDBIcon /></IconTile>
         <IconTile name="WikipediaIcon"><WikipediaIcon /></IconTile>
         <IconTile name="XIcon"><XIcon /></IconTile>
+        <IconTile name="XLogoIcon"><XLogoIcon /></IconTile>
         <IconTile name="YouTubeIcon"><YouTubeIcon /></IconTile>
       </div>
     </section>

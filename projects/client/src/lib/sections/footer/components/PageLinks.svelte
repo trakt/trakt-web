@@ -1,7 +1,5 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -9,7 +7,6 @@
   import FooterVipLink from "./FooterVipLink.svelte";
 
   const { user } = useUser();
-  const { track } = useTrack(AnalyticsEvent.Link);
 </script>
 
 {#snippet vipLink()}
@@ -21,12 +18,33 @@
 <div class="trakt-page-links">
   <div class="trakt-link-group">
     <span class="secondary">{m.text_footer_category_platform()}</span>
-    <Link href={UrlBuilder.about()}>
-      <span class="bold">{m.link_text_about()}</span>
-    </Link>
     <RenderFor audience="free"><FooterVipLink /></RenderFor>
     <RenderFor audience="public">{@render vipLink()}</RenderFor>
     <RenderFor audience="vip">{@render vipLink()}</RenderFor>
+    <Link href={UrlBuilder.about()}>
+      <span class="bold">{m.link_text_about()}</span>
+    </Link>
+    <Link href={UrlBuilder.branding()}>
+      <span class="bold">{m.link_text_branding()}</span>
+    </Link>
+  </div>
+
+  <div class="trakt-link-group">
+    <span class="secondary">{m.text_footer_category_community()}</span>
+    <Link
+      href={UrlBuilder.og.support($user?.slug)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="bold">{m.link_text_support()}</span>
+    </Link>
+    <Link
+      href={UrlBuilder.feedback()}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="bold">{m.link_text_feedback()}</span>
+    </Link>
     <Link
       href={UrlBuilder.developer.home()}
       target="_blank"
@@ -37,34 +55,6 @@
   </div>
 
   <div class="trakt-link-group">
-    <span class="secondary">{m.text_footer_category_community()}</span>
-    <Link
-      href={UrlBuilder.socialMedia.reddit()}
-      target="_blank"
-      rel="noopener noreferrer"
-      onclick={() => track({ target: "reddit", source: "footer" })}
-    >
-      <span class="bold">{m.link_label_reddit()}</span>
-    </Link>
-    <RenderFor audience="vip">
-      <Link
-        href={UrlBuilder.og.support($user?.slug)}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span class="bold">{m.link_text_support()}</span>
-      </Link>
-      <Link
-        href={UrlBuilder.feedback()}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span class="bold">{m.link_text_feedback()}</span>
-      </Link>
-    </RenderFor>
-  </div>
-
-  <div class="trakt-link-group">
     <span class="secondary">{m.text_footer_category_legal()}</span>
     <Link href={UrlBuilder.terms()}>
       <span class="bold">{m.link_text_terms()}</span>
@@ -72,11 +62,8 @@
     <Link href={UrlBuilder.privacy()}>
       <span class="bold">{m.link_text_privacy()}</span>
     </Link>
-    <Link href={UrlBuilder.branding()}>
-      <span class="bold">{m.link_text_branding()}</span>
-    </Link>
     <Link href={UrlBuilder.dataSources()}>
-      <span class="bold">{m.link_text_data_sources()}</span>
+      <span class="bold">{m.link_text_data()}</span>
     </Link>
   </div>
 </div>

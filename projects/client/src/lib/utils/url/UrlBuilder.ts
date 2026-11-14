@@ -315,6 +315,7 @@ export const UrlBuilder = {
   },
   socialMedia: {
     reddit: () => 'https://www.reddit.com/r/trakt',
+    x: () => 'https://x.com/trakt',
     youtube: () => 'https://www.youtube.com/@trakt-tv',
   },
   vip: (source?: VipUpsellSource) =>

@@ -9326,9 +9326,9 @@
       "default": "Please try again later, or <a>contact support</a> if this keeps happening.",
       "description": "Message of the snackbar shown when starting the VIP checkout, or managing or cancelling a VIP subscription, failed for an unexpected reason. The text wrapped in <a></a> becomes a link to support and must be kept."
     },
-    "button_text_history": {
-      "default": "History",
-      "description": "Short text for a button that reveals the VIP payment history. This should be as short as possible."
+    "button_text_transactions": {
+      "default": "Transactions",
+      "description": "Short text for a button that reveals the list of VIP payment transactions. This should be as short as possible."
     },
     "button_text_usage": {
       "default": "Usage",
@@ -9387,8 +9387,8 @@
       "default": "Branding",
       "description": "Text for the branding link in the footer."
     },
-    "link_text_data_sources": {
-      "default": "Data sources",
+    "link_text_data": {
+      "default": "Data",
       "description": "Text for the footer link to the page that credits the services Trakt gets data from."
     },
     "link_text_terms": {
@@ -10866,6 +10866,10 @@
     "link_label_reddit": {
       "default": "Reddit",
       "description": "Text for the link to the Trakt Reddit page."
+    },
+    "link_label_x": {
+      "default": "X",
+      "description": "Text for the link to the Trakt X (formerly Twitter) profile."
     },
     "link_label_youtube": {
       "default": "YouTube",
