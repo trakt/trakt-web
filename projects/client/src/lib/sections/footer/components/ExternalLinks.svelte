@@ -3,7 +3,9 @@
   import AppleIcon from "$lib/components/icons/AppleIcon.svelte";
   import GithubIcon from "$lib/components/icons/GithubIcon.svelte";
   import InstallIcon from "$lib/components/icons/InstallIcon.svelte";
+  import RedditIcon from "$lib/components/icons/RedditIcon.svelte";
   import StatusIcon from "$lib/components/icons/StatusIcon.svelte";
+  import XLogoIcon from "$lib/components/icons/XLogoIcon.svelte";
   import YouTubeLogoIcon from "$lib/components/icons/YouTubeLogoIcon.svelte";
 
   import Link from "$lib/components/link/Link.svelte";
@@ -57,6 +59,24 @@
     onclick={() => trackLink("android-app")}
   >
     <AndroidIcon />
+  </Link>
+
+  <Link
+    href={UrlBuilder.socialMedia.reddit()}
+    target="_blank"
+    label={m.link_label_reddit()}
+    onclick={() => trackLink("reddit")}
+  >
+    <RedditIcon />
+  </Link>
+
+  <Link
+    href={UrlBuilder.socialMedia.x()}
+    target="_blank"
+    label={m.link_label_x()}
+    onclick={() => trackLink("x")}
+  >
+    <XLogoIcon />
   </Link>
 
   <Link

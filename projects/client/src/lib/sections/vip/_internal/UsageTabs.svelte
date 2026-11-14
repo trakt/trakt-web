@@ -40,7 +40,7 @@
           },
           {
             value: "history",
-            label: m.button_text_history(),
+            label: m.button_text_transactions(),
             content: history,
           },
         ]}

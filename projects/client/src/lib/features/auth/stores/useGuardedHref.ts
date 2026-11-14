@@ -1,5 +1,6 @@
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SUPPORT_EMAIL } from '$lib/utils/constants.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { useBotContext } from '../../bot-verification/stores/useBotContext.ts';
 import { useAuth } from './useAuth.ts';
@@ -11,6 +12,9 @@ const whitelistedUrls = [
   UrlBuilder.developer.home(),
   UrlBuilder.socialMedia.reddit(),
   UrlBuilder.socialMedia.youtube(),
+  UrlBuilder.socialMedia.x(),
+  UrlBuilder.feedback(),
+  `mailto:${SUPPORT_EMAIL}`,
   UrlBuilder.status(),
   UrlBuilder.terms(),
   UrlBuilder.privacy(),
