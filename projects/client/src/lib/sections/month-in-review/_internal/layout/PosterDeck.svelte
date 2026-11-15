@@ -182,6 +182,10 @@
     &.is-placeholder {
       animation: none;
     }
+
+    :global(.is-moving) & {
+      will-change: transform;
+    }
   }
 
   .card {

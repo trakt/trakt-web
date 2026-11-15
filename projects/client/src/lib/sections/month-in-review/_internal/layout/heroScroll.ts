@@ -25,11 +25,16 @@ export function heroScroll(node: HTMLElement, isStatic: boolean) {
     node.style.removeProperty('--p');
     node.style.removeProperty('--deal');
 
-    if (state.isStatic || reducedMotion.matches) return;
+    if (state.isStatic || reducedMotion.matches) {
+      node.classList.remove('is-moving');
+      return;
+    }
 
     const top = node.getBoundingClientRect().top;
     const scrolled = state.isStacked ? window.scrollY : -top;
     const progress = Math.min(Math.max(scrolled / state.travel, 0), 1);
+
+    node.classList.toggle('is-moving', progress > 0 && progress < 1);
 
     node.style.setProperty(
       state.isStacked ? '--deal' : '--p',
