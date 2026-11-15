@@ -228,6 +228,25 @@
     translate: 0 calc((1 - var(--p)) * var(--ni-24));
   }
 
+  .trakt-month-review-hero-scroll:global(.is-moving) {
+    .title {
+      will-change: scale;
+    }
+
+    .subtitle,
+    .stats {
+      will-change: opacity, translate;
+    }
+
+    @include for-tablet-sm-and-below {
+      .title,
+      .subtitle,
+      .stats {
+        will-change: auto;
+      }
+    }
+  }
+
   .cue {
     display: inline-flex;
     align-self: flex-start;
