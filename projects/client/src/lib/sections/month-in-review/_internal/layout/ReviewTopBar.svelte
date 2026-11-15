@@ -78,6 +78,11 @@
     align-items: center;
     gap: var(--gap-m);
     min-height: var(--ni-72);
+    padding-top: env(safe-area-inset-top, 0px);
+
+    @include for-tablet-sm-and-below {
+      padding-top: 0;
+    }
 
     @include for-mobile {
       grid-template-columns: 1fr auto;
