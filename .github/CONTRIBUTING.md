@@ -50,12 +50,11 @@ PR and we'll help you land on the right one - it's an easy fix.
 
 ### The red checks on your PR are probably fine 🙂
 
-If you're contributing from a fork, you'll likely see a few checks go red:
-**Enable Auto Merge**, **E2E**, and **DeepSource: Test coverage**. These need
-repository secrets that GitHub - correctly - never shares with fork PRs, so they
-can't pass from a fork no matter how good your change is. They're not caused by
-your diff. A maintainer takes care of them when merging, so don't let them worry
-you.
+If you're contributing from a fork, you'll likely see two checks go red:
+**Enable Auto Merge** and **E2E**. These need repository secrets that GitHub -
+correctly - never shares with fork PRs, so they can't pass from a fork no matter
+how good your change is. They're not caused by your diff. A maintainer takes care
+of them when merging, so don't let them worry you.
 
 ## i18n Contributions
 

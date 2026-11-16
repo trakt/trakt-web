@@ -214,7 +214,7 @@ export default defineConfig(({ mode }) => ({
     ],
     coverage: {
       provider: 'istanbul',
-      reporter: ['clover', 'lcov'],
+      reporter: ['text-summary', 'json-summary'],
       exclude: [
         '.svelte-kit/**',
         '.vite/**',

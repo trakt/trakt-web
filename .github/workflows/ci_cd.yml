@@ -57,6 +57,7 @@ jobs:
             workflows:
               - '.github/workflows/**'
               - '.github/actions/**'
+              - '.github/scripts/**'
 
   format-check:
     if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
@@ -156,7 +157,7 @@ jobs:
 
       - name: "Probe the Client's Mind aka Run Tests [${{ matrix.shard }}/4]"
         working-directory: projects/client
-        run: 'bun x vitest --coverage --shard=${{ matrix.shard }}/4 --reporter=blob --reporter=dot --reporter=github-actions'
+        run: "bun x vitest ${{ github.event_name == 'push' && '--coverage' || '' }} --shard=${{ matrix.shard }}/4 --reporter=blob --reporter=dot --reporter=github-actions"
 
       - name: Sealing the Evidence aka Upload Blob Report
         uses: actions/upload-artifact@v4
@@ -220,9 +221,14 @@ jobs:
 
   coverage:
     needs: [test]
-    if: ${{ always() && needs.test.result != 'cancelled' && needs.test.result != 'skipped' }}
+    if: ${{ github.event_name == 'push' && needs.test.result == 'success' }}
     name: The Inquisition's Verdict (Coverage)
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: coverage-badge
+      cancel-in-progress: true
 
     steps:
       - name: Secure the Evidence aka Checkout Code
@@ -251,13 +257,20 @@ jobs:
         working-directory: projects/client
         run: 'bun x vitest --merge-reports .vitest-reports --coverage'
 
-      - name: Trial by Deep Source
-        uses: deepsourcelabs/test-coverage-action@master
-        continue-on-error: true
-        with:
-          key: javascript
-          coverage-file: ${{github.workspace}}/projects/client/coverage/lcov.info
-          dsn: ${{ secrets.DEEPSOURCE_DSN }}
+      - name: Engraving the Sigil aka Coverage Badge
+        run: bun .github/scripts/coverage-badge.ts projects/client/coverage/coverage-summary.json "$RUNNER_TEMP/badges/coverage.svg"
+
+      - name: Nailing the Sigil to the Door aka Publish Badge
+        working-directory: ${{ runner.temp }}/badges
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git init -q -b badges
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add coverage.svg
+          git commit -q -m "chore: update coverage badge for ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" badges
 
   e2e:
     needs: files-changed
