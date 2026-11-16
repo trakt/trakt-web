@@ -1,4 +1,5 @@
 import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
+import CelebrationIcon from '$lib/components/icons/CelebrationIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
 import LaurelIcon from '$lib/components/icons/LaurelIcon.svelte';
@@ -96,6 +97,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_month_in_review_redesign(),
     addedAt: new Date('2026-11-12'),
     description: () => m.preview_feature_description_month_in_review_redesign(),
+    audience: 'director',
+  },
+  [FeatureFlag.Onboarding]: {
+    icon: CelebrationIcon,
+    title: () => m.preview_feature_title_onboarding(),
+    addedAt: new Date('2026-10-14'),
+    description: () => m.preview_feature_description_onboarding(),
     audience: 'director',
   },
   [FeatureFlag.LivingPoster]: {

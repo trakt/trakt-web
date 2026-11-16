@@ -16768,6 +16768,146 @@
     "text_ticket_admit_one": {
       "default": "Admit one",
       "description": "Small line printed on the decorative ticket art of a VIP offer, like a cinema ticket. This should be as short as possible."
+    },
+    "preview_feature_title_onboarding": {
+      "default": "Getting started",
+      "description": "Product feature name for the preview feature with the onboarding checklist in the navigation."
+    },
+    "preview_feature_description_onboarding": {
+      "default": "A progress ring at the top of the navigation that opens five first things to do on Trakt. Each one ticks itself off as you use the app.",
+      "description": "Description for the onboarding checklist preview feature."
+    },
+    "button_label_onboarding": {
+      "default": "Getting started",
+      "description": "Label of the navigation item and drawer title for the onboarding checklist."
+    },
+    "onboarding_set_first_steps_title": {
+      "default": "First steps",
+      "description": "Title of the first onboarding set."
+    },
+    "onboarding_set_first_steps_subtitle": {
+      "default": "Five things that make Trakt yours. Each one ticks itself off as you use the app.",
+      "description": "Subtitle of the first onboarding set."
+    },
+    "onboarding_step_account_title": {
+      "default": "Account created",
+      "description": "Onboarding step title: the account exists."
+    },
+    "onboarding_step_account_hint": {
+      "default": "Welcome to Trakt.",
+      "description": "Onboarding step hint for the account step."
+    },
+    "onboarding_step_watchlist_title": {
+      "default": "Watchlist a title",
+      "description": "Onboarding step title: add a movie or show to the watchlist."
+    },
+    "onboarding_step_watchlist_hint": {
+      "default": "Save something for later.",
+      "description": "Onboarding step hint for the watchlist step."
+    },
+    "onboarding_step_watched_title": {
+      "default": "Mark one as watched",
+      "description": "Onboarding step title: mark a movie or show as watched."
+    },
+    "onboarding_step_watched_hint": {
+      "default": "Start your history.",
+      "description": "Onboarding step hint for the watched step."
+    },
+    "onboarding_step_rate_title": {
+      "default": "Rate a movie or show",
+      "description": "Onboarding step title: rate a movie or show."
+    },
+    "onboarding_step_rate_hint": {
+      "default": "Your recommendations get smarter.",
+      "description": "Onboarding step hint for the rating step."
+    },
+    "onboarding_step_follow_title": {
+      "default": "Follow someone",
+      "description": "Onboarding step title: follow another member."
+    },
+    "onboarding_step_follow_hint": {
+      "default": "See what friends are watching.",
+      "description": "Onboarding step hint for the follow step."
+    },
+    "onboarding_progress_count": {
+      "default": "{done} of {total}",
+      "description": "Progress count of an onboarding set, e.g. 2 of 5."
+    },
+    "onboarding_status_skipped": {
+      "default": "Skipped",
+      "description": "Status text under a skipped onboarding step."
+    },
+    "button_text_onboarding_skip": {
+      "default": "Skip",
+      "description": "Button text that skips an onboarding step."
+    },
+    "button_label_onboarding_skip": {
+      "default": "Skip {title}",
+      "description": "Aria-label for the button that skips an onboarding step."
+    },
+    "button_text_onboarding_undo": {
+      "default": "Undo",
+      "description": "Button text that undoes skipping an onboarding step."
+    },
+    "button_label_onboarding_undo": {
+      "default": "Undo skipping {title}",
+      "description": "Aria-label for the button that undoes skipping an onboarding step."
+    },
+    "onboarding_step_watchlist_cta": {
+      "default": "Browse titles",
+      "description": "Call to action on the onboarding watchlist step; opens the trending titles."
+    },
+    "onboarding_step_watched_cta": {
+      "default": "Mark watched",
+      "description": "Call to action on the onboarding mark-as-watched step; opens the trending titles."
+    },
+    "onboarding_step_rate_cta": {
+      "default": "Rate something",
+      "description": "Call to action on the onboarding rating step; opens the history page where watched titles can be rated."
+    },
+    "onboarding_step_follow_cta": {
+      "default": "Find people",
+      "description": "Call to action on the onboarding follow step; opens the About page where the Trakt team is listed."
+    },
+    "onboarding_progress_of_total": {
+      "default": "/ {total}",
+      "description": "The total shown next to the big done count in the onboarding drawer, e.g. \"/ 5\"."
+    },
+    "onboarding_toast_title": {
+      "default": "Step {done} of {total} complete",
+      "description": "Title of the short pill that stretches out of the progress ring when an onboarding step lands, e.g. Step 2 of 5 complete."
+    },
+    "onboarding_step_watchlist_objective": {
+      "default": "Save any title to your watchlist",
+      "description": "Objective shown in the floating onboarding tracker for the watchlist step."
+    },
+    "onboarding_step_watched_objective": {
+      "default": "Mark any title as watched",
+      "description": "Objective shown in the floating onboarding tracker for the watched step."
+    },
+    "onboarding_step_rate_objective": {
+      "default": "Rate any title with a star",
+      "description": "Objective shown in the floating onboarding tracker for the rating step."
+    },
+    "onboarding_step_follow_objective": {
+      "default": "Follow one person",
+      "description": "Objective shown in the floating onboarding tracker for the follow step."
+    },
+    "onboarding_tracker_step": {
+      "default": "Step {index} of {total}",
+      "description": "Kicker of the floating onboarding tracker, e.g. Step 2 of 5."
+    },
+    "onboarding_tracker_count": {
+      "default": "{done}/{total}",
+      "description": "Small count pill in the floating onboarding tracker, 0/1 until the step lands."
+    },
+    "button_label_onboarding_stop_tracking": {
+      "default": "Stop tracking this step",
+      "description": "Aria-label for the close button on the floating onboarding tracker."
+    },
+    "onboarding_toast_done": {
+      "default": "All done",
+      "description": "Second line of the progress-ring pill when the last onboarding step lands."
     }
   }
 }
