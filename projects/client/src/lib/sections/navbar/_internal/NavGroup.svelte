@@ -106,6 +106,7 @@
       border: none;
       cursor: pointer;
       color: inherit;
+      font: inherit;
 
       &:focus-visible {
         border-radius: var(--border-radius-m);
