@@ -4,6 +4,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { ReviewTitle } from "$lib/sections/review/models/ReviewTitle.ts";
   import { toPlaysLabel } from "$lib/sections/review/toPlaysLabel.ts";
+  import { SvelteSet } from "svelte/reactivity";
 
   const DECK_SIZE = 6;
 
@@ -15,46 +16,52 @@
     isLoading: boolean;
   } = $props();
 
-  const placeholders = Array.from({ length: DECK_SIZE }, (_, index) => index);
-
   const deck = $derived(
     [...titles]
       .sort((a, b) => b.plays - a.plays)
       .slice(0, DECK_SIZE)
       .reverse(),
   );
+
+  const loaded = new SvelteSet<string>();
+  const markLoaded = (poster: string) => loaded.add(poster);
+
+  const offset = $derived(DECK_SIZE - deck.length);
+  const slots = $derived(
+    Array.from({ length: DECK_SIZE }, (_, index) =>
+      isLoading || index < offset ? null : deck.at(index - offset),
+    ),
+  );
 </script>
 
 <div class="trakt-month-review-poster-deck">
-  {#if isLoading}
-    {#each placeholders as index (index)}
-      <div
-        aria-hidden="true"
-        class="poster is-placeholder"
-        class:is-top={index === DECK_SIZE - 1}
-        style="--index: {index}"
-      >
-        <div class="card"></div>
-      </div>
-    {/each}
-  {/if}
-  {#each isLoading ? [] : deck as title, index (title.key)}
+  {#each slots as title, index (index)}
     <div
+      aria-hidden={title ? undefined : "true"}
       class="poster"
-      class:is-top={index === deck.length - 1}
+      class:is-placeholder={isLoading || (title && !loaded.has(title.poster))}
+      class:is-empty={!isLoading && !title}
+      class:is-top={index === DECK_SIZE - 1}
       style="--index: {index}"
     >
       <div class="card">
-        <Link
-          href={UrlBuilder.media(title.type, title.slug)}
-          label={title.title || toPlaysLabel(title.plays)}
-          underline="none"
-        >
-          <img src={title.poster} alt="" loading="lazy" />
-          {#if index === deck.length - 1}
-            <span class="tag bold">{m.month_review_tag_number_one()}</span>
-          {/if}
-        </Link>
+        {#if title}
+          <Link
+            href={UrlBuilder.media(title.type, title.slug)}
+            label={title.title || toPlaysLabel(title.plays)}
+            underline="none"
+          >
+            <img
+              src={title.poster}
+              alt=""
+              onload={() => markLoaded(title.poster)}
+              onerror={() => markLoaded(title.poster)}
+            />
+            {#if index === DECK_SIZE - 1}
+              <span class="tag bold">{m.month_review_tag_number_one()}</span>
+            {/if}
+          </Link>
+        {/if}
       </div>
     </div>
   {/each}
@@ -98,6 +105,8 @@
     top: 50%;
     width: clamp(var(--ni-96), 28%, var(--ni-180));
     aspect-ratio: 2 / 3;
+    animation: float 7s ease-in-out infinite alternate;
+    animation-delay: calc(var(--index) * -1.3s);
     transform: translate(-50%, -50%)
       translate(
         calc(
@@ -119,8 +128,6 @@
         )
       )
       scale(calc(1.15 - 0.15 * var(--progress)));
-    animation: deal-in 900ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
-    animation-delay: calc(var(--index) * 70ms + 200ms);
 
     &:nth-child(1) {
       --sx: -150cqi;
@@ -179,8 +186,10 @@
       z-index: 1;
     }
 
-    &.is-placeholder {
-      animation: none;
+    &.is-empty {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-increment) ease;
     }
 
     :global(.is-moving) & {
@@ -221,14 +230,15 @@
     height: 100%;
     border-radius: var(--border-radius-m);
     overflow: hidden;
-    background: var(--color-month-review-tile);
+    background: color-mix(in srgb, var(--color-border) 80%, transparent);
     box-shadow: var(--shadow-floating);
-    animation: float 7s ease-in-out infinite alternate;
-    animation-delay: calc(var(--index) * -1.3s);
 
     :global(.trakt-link) {
       display: block;
       height: 100%;
+      background: var(--color-month-review-tile);
+      animation: deal-in 900ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+      animation-delay: calc(var(--index) * 70ms);
     }
 
     &:has(:focus-visible) {
@@ -237,10 +247,14 @@
     }
 
     .is-placeholder & {
-      background: color-mix(in srgb, var(--color-border) 80%, transparent);
       box-shadow: none;
       animation: pulse calc(5 * var(--transition-increment)) ease-in-out
         infinite alternate;
+
+      :global(.trakt-link) {
+        opacity: 0;
+        animation: none;
+      }
     }
 
     img {
@@ -252,7 +266,9 @@
 
   @include for-mouse {
     .poster {
-      transition: filter 300ms ease;
+      transition:
+        filter 300ms ease,
+        opacity var(--transition-increment) ease;
 
       &:not(.is-placeholder):hover {
         z-index: 3;
@@ -272,7 +288,7 @@
       }
     }
 
-    .trakt-month-review-poster-deck:hover
+    .trakt-month-review-poster-deck:has(.poster:not(.is-placeholder):hover)
       .poster:not(:hover):not(.is-placeholder) {
       filter: saturate(0.5) brightness(0.8);
     }
@@ -294,7 +310,6 @@
   @keyframes deal-in {
     from {
       opacity: 0;
-      filter: blur(6px);
     }
   }
 
@@ -310,7 +325,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .poster,
-    .card {
+    .card,
+    .card :global(.trakt-link) {
       animation: none;
       transition: none;
     }

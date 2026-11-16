@@ -55,7 +55,7 @@
         {year} · {m.month_review_kicker({ episode: month })}
       </span>
       <h1 class="title" aria-label={monthName}>
-        {#each letters as letter, index (index)}
+        {#each letters as letter, index (`${monthName}:${index}`)}
           <span class="letter" style="--index: {index}" aria-hidden="true"
             >{letter}</span
           >
@@ -381,6 +381,11 @@
     flex-wrap: wrap;
     gap: var(--gap-l) var(--gap-xl);
     margin-top: var(--gap-s);
+
+    @include for-mobile {
+      justify-content: space-between;
+      column-gap: var(--gap-s);
+    }
   }
 
   @keyframes letter-in {
