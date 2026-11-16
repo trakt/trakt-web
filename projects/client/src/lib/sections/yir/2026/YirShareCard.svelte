@@ -317,8 +317,6 @@
     align-items: center;
   }
 
-  /* Open graph */
-
   [data-variant="open-graph"] .yir-share-glow {
     left: 370px;
     top: -135px;
@@ -389,8 +387,6 @@
     box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.7);
   }
 
-  /* Feed */
-
   [data-variant="feed"] .yir-share-glow {
     left: -10px;
     top: -30px;
@@ -447,8 +443,6 @@
   [data-variant="feed"] .yir-share-rarity {
     font-size: 30px;
   }
-
-  /* Story */
 
   [data-variant="story"] .yir-share-glow {
     left: -210px;
