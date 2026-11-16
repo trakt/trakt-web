@@ -114,7 +114,7 @@
   }
   .track {
     display: inline-block;
-    padding-inline-start: 100%;
+    padding-inline-start: 5cqw;
   }
   .is-live .live-bug i {
     animation: blink 1.2s steps(2) infinite;
@@ -126,6 +126,7 @@
     animation: slide-in calc(var(--yir-beat) * 6) cubic-bezier(0.2, 0.8, 0.2, 1) calc(var(--yir-beat) * 3.5) both;
   }
   .is-live .track {
+    padding-inline-start: 100%;
     animation: marquee 14s linear infinite;
   }
   .is-live .big {
@@ -147,6 +148,9 @@
     .root,
     .root * {
       animation: none !important;
+    }
+    .is-live .track {
+      padding-inline-start: 5cqw;
     }
   }
 </style>
