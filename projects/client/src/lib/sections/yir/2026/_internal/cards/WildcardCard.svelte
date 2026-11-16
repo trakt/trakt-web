@@ -1,3 +1,5 @@
+<svelte:options css="injected" />
+
 <script lang="ts">
   import type { PersonaCardProps } from "./PersonaCardProps";
   import type { YirPersonaId } from "$lib/requests/models/YirPersonaId";

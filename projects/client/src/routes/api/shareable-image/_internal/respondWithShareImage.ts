@@ -3,7 +3,7 @@ import { error } from '$lib/utils/console/print.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
 import { IS_DEV } from '$lib/utils/env/index.ts';
 import type { RequestEvent } from '@sveltejs/kit';
-import type { ImageSource } from '@takumi-rs/wasm';
+import type { FontDetails, ImageSource } from '@takumi-rs/wasm';
 import { createServerTiming } from './createServerTiming.ts';
 import { fetchWithoutAuthorization } from './fetchWithoutAuthorization.ts';
 import { fetchWithUserAgent } from './fetchWithUserAgent.ts';
@@ -16,6 +16,7 @@ type ServerTiming = ReturnType<typeof createServerTiming>;
 type ShareCardInput = {
   html: string;
   images: ImageSource[];
+  fonts?: ReadonlyArray<FontDetails>;
   isComplete?: boolean;
 };
 
@@ -152,7 +153,7 @@ export async function respondWithShareImage<T>({
       buffer: await renderShareCard({
         html,
         variant: shareType,
-        fonts,
+        fonts: [...fonts, ...(input.fonts ?? [])],
         images,
         debug: IS_DEV && url.searchParams.get('debug') === 'true',
       }),

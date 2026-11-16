@@ -8,6 +8,16 @@ describe('util: toShareImageRoute', () => {
     );
   });
 
+  it('should route the legacy year in review image to the share endpoint', () => {
+    expect(toShareImageRoute('/users/sean/yir.jpg')).toBe(
+      '/api/shareable-image/yir/sean',
+    );
+  });
+
+  it('should leave other images under a user alone', () => {
+    expect(toShareImageRoute('/users/sean/avatar.jpg')).toBeUndefined();
+  });
+
   it('should leave the month in review page alone', () => {
     expect(toShareImageRoute('/users/sean/mir/2026/10')).toBeUndefined();
   });

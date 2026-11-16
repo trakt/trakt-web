@@ -1,3 +1,5 @@
+<svelte:options css="injected" />
+
 <script lang="ts">
   import type { PersonaCardProps } from "./PersonaCardProps";
   const DIGITS = [8, 7, 6, 5, 4, 3, 2];

@@ -3,6 +3,7 @@ const ROOT_PATH = 'images/share';
 const VERSIONS = {
   mir: 1,
   profile: 1,
+  yir: 1,
 } as const;
 
 type VersionedShareImagePrefix = {

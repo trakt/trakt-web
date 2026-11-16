@@ -1,3 +1,5 @@
+<svelte:options css="injected" />
+
 <script lang="ts">
   import type { PersonaCardProps } from "./PersonaCardProps";
   const TOP = ["#e8e8e8", "#f5d90a", "#1fd1e0", "#27c93f", "#d63af9", "#ff3b3b", "#3b5bff"];

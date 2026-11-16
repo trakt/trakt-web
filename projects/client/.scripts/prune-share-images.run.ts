@@ -90,6 +90,11 @@ const versionedResult = await pruneVersionedShareImages({
       isLatestOnly: true,
       maxAge: time.days(180),
     },
+    {
+      ...versionedShareImagePrefix('yir'),
+      isLatestOnly: true,
+      maxAge: time.days(180),
+    },
   ],
   isDryRun: process.env.DRY_RUN === '1',
 });
