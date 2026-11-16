@@ -19,6 +19,7 @@ const RECAP_PREFIX = 'recap';
 const BRANDING_PREFIX = 'branding';
 const ISSUE_REPORT_PREFIX = 'issue-report';
 const MONTH_REVIEW_PREFIX = 'month-review';
+const YEAR_REVIEW_PREFIX = 'year-review';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -141,6 +142,7 @@ export const AnalyticsEvent = {
   RecapReveal: buildEventKey(RECAP_PREFIX, 'reveal'),
   RecapChapter: buildEventKey(RECAP_PREFIX, 'chapter'),
   MonthReviewView: buildEventKey(MONTH_REVIEW_PREFIX, 'view'),
+  YearReviewView: buildEventKey(YEAR_REVIEW_PREFIX, 'view'),
 
   BrandingDownload: buildEventKey(BRANDING_PREFIX, 'download'),
 

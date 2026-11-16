@@ -1,6 +1,6 @@
 import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
-import type { Review } from '$lib/sections/review/models/Review.ts';
-import type { ReviewTitle } from '$lib/sections/review/models/ReviewTitle.ts';
+import type { Review } from './models/Review.ts';
+import type { ReviewTitle } from './models/ReviewTitle.ts';
 
 type WithUserRatingsParams = {
   review: Review;

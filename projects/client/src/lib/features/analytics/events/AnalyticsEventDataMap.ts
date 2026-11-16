@@ -193,7 +193,7 @@ type BrandingDownloadType = {
   scope: 'logo' | 'kit';
   backdrop: BrandingBackdrop;
 };
-type MonthReviewViewType = {
+type ReviewViewType = {
   tier: 'free' | 'vip';
   owner: 'me' | 'other';
 };
@@ -331,7 +331,8 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.InsightsOpen]: InsightsOpenType;
   [AnalyticsEvent.InsightsTab]: InsightsTabType;
 
-  [AnalyticsEvent.MonthReviewView]: MonthReviewViewType;
+  [AnalyticsEvent.MonthReviewView]: ReviewViewType;
+  [AnalyticsEvent.YearReviewView]: ReviewViewType;
   [AnalyticsEvent.RecapOpen]: never;
   [AnalyticsEvent.RecapTab]: RecapTabType;
   [AnalyticsEvent.RecapReveal]: never;
