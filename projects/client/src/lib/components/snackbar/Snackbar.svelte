@@ -151,7 +151,8 @@
     box-shadow: var(--shadow-raised);
     backdrop-filter: blur(var(--ni-16));
 
-    margin-bottom: var(--ni-24);
+    margin-bottom: calc(var(--ni-24) + var(--layout-bottom-dock-height, 0px));
+    transition: margin-bottom var(--transition-increment) ease-out;
 
     .snackbar-content {
       display: flex;
@@ -164,7 +165,7 @@
     }
 
     @include for-tablet-sm-and-below {
-      margin-bottom: var(--ni-8);
+      margin-bottom: calc(var(--ni-8) + var(--layout-bottom-dock-height, 0px));
     }
   }
 
