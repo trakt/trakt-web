@@ -1,39 +1,11 @@
 <script lang="ts">
-  import type { YirPersonaId } from "$lib/requests/models/YirPersonaId";
-  import type { Component } from "svelte";
-  import AnimeVoyagerCard from "./AnimeVoyagerCard.svelte";
-  import CinephileCard from "./CinephileCard.svelte";
-  import ComfortRewatcherCard from "./ComfortRewatcherCard.svelte";
-  import CriticCard from "./CriticCard.svelte";
-  import CuratorCard from "./CuratorCard.svelte";
-  import DayOneDevoteeCard from "./DayOneDevoteeCard.svelte";
-  import LoyalistCard from "./LoyalistCard.svelte";
-  import OmnivoreCard from "./OmnivoreCard.svelte";
-  import OpeningActCard from "./OpeningActCard.svelte";
-  import OpeningNightCard from "./OpeningNightCard.svelte";
   import type { PersonaCardProps } from "./PersonaCardProps";
-  import WeekendMarathonerCard from "./WeekendMarathonerCard.svelte";
-  import WildcardCard from "./WildcardCard.svelte";
-
-  const CARDS: Record<YirPersonaId, Component<PersonaCardProps>> = {
-    "anime-voyager": AnimeVoyagerCard,
-    "day-one-devotee": DayOneDevoteeCard,
-    "weekend-marathoner": WeekendMarathonerCard,
-    "comfort-rewatcher": ComfortRewatcherCard,
-    omnivore: OmnivoreCard,
-    "opening-night": OpeningNightCard,
-    cinephile: CinephileCard,
-    critic: CriticCard,
-    loyalist: LoyalistCard,
-    curator: CuratorCard,
-    wildcard: WildcardCard,
-    "opening-act": OpeningActCard,
-  };
+  import { personaCardComponent } from "./personaCardComponent";
 
   const { card, live = true }: Partial<PersonaCardProps> &
     Pick<PersonaCardProps, "card"> = $props();
 
-  const Card = $derived(CARDS[card.persona]);
+  const Card = $derived(personaCardComponent(card.persona));
 
   let tilt = $state({ x: 0, y: 0, glareX: 50, glareY: 30 });
 
