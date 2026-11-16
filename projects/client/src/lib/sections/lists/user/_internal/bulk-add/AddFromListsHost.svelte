@@ -9,11 +9,16 @@
   type AddFromListsHostProps = {
     list: MediaListSummary;
     isSharedOnly?: boolean;
+    onOpen?: () => void;
     children: Snippet<[() => void]>;
   };
 
-  const { list, isSharedOnly = false, children }: AddFromListsHostProps =
-    $props();
+  const {
+    list,
+    isSharedOnly = false,
+    onOpen,
+    children,
+  }: AddFromListsHostProps = $props();
 
   const { user } = useUser();
   const { canAddFromLists, isSharedList } = useCanAddFromLists({
@@ -26,10 +31,12 @@
   );
 
   let showBulkAdd = $state(false);
+
+  const open = () => (onOpen ? onOpen() : (showBulkAdd = true));
 </script>
 
 {#if isVisible}
-  {@render children(() => (showBulkAdd = true))}
+  {@render children(open)}
 {/if}
 
 {#if showBulkAdd}

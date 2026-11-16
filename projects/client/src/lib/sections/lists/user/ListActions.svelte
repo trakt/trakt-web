@@ -10,10 +10,10 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { fromRune } from "$lib/utils/store/fromRune.svelte";
-  import { type Snippet, untrack } from "svelte";
+  import type { Snippet } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import AddFromListsButton from "./_internal/bulk-add/AddFromListsButton.svelte";
+  import AddFromListsHost from "./_internal/bulk-add/AddFromListsHost.svelte";
   import BulkAddDrawer from "./_internal/bulk-add/BulkAddDrawer.svelte";
   import DeleteListButton from "../_internal/DeleteListButton.svelte";
   import EditListButton from "./_internal/EditListButton.svelte";
@@ -22,7 +22,6 @@
   import ListDetailsDrawerHost from "./_internal/ListDetailsDrawerHost.svelte";
   import ManageCollaboratorsButton from "./_internal/ManageCollaboratorsButton.svelte";
   import ManageCollaboratorsDrawerHost from "./_internal/ManageCollaboratorsDrawerHost.svelte";
-  import { useCanAddFromLists } from "./_internal/bulk-add/useCanAddFromLists";
   import ListReorderDrawer from "./ListReorderDrawer.svelte";
   import SaveListDrawer from "./_internal/SaveListDrawer.svelte";
   import { useDeleteList } from "./_internal/useDeleteList";
@@ -45,11 +44,6 @@
   const { likeList, unlikeList, isUpdating, isLiked } = $derived(
     useLikeList(list),
   );
-
-  const { canAddFromLists } = useCanAddFromLists({
-    list$: fromRune(() => list),
-    userSlug: untrack(() => $user.slug),
-  });
 
   const isListOwner = $derived($user.slug === list.user?.slug);
   const isOnListPage = $derived(
@@ -118,9 +112,11 @@
           onDelete={deleteList}
         />
       {:else}
-        {#if $canAddFromLists}
-          <AddFromListsButton {list} onClick={() => (showBulkAdd = true)} />
-        {/if}
+        <AddFromListsHost {list} onOpen={() => (showBulkAdd = true)}>
+          {#snippet children(open)}
+            <AddFromListsButton {list} onClick={open} />
+          {/snippet}
+        </AddFromListsHost>
         <ReportButton
           params={{ type: ReportableType.List, id: list.id, title: list.name }}
           label={m.button_label_report_list({ name: list.name })}
