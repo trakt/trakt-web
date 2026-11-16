@@ -7,6 +7,7 @@
   } from "$lib/requests/models/YirPersonaId";
   import * as m from "$lib/features/i18n/messages";
   import { parsePersonaPreview } from "./parsePersonaPreview";
+  import { parseTierPreview } from "./parseTierPreview";
   import { personaCopy } from "./persona/personaCopy";
 
   const {
@@ -21,6 +22,7 @@
 
   const personas = YirPersonaIdSchema.options;
   const realData = "real";
+  const freeTier = "free";
 
   let isOpen = $state(false);
 
@@ -36,8 +38,30 @@
 
   const runnerValue = $derived(page.url.searchParams.get("runner") ?? "auto");
   const personaValue = $derived(
-    parsePersonaPreview(page.url.searchParams)?.persona ?? realData,
+    parseTierPreview(page.url.searchParams)
+      ? freeTier
+      : (parsePersonaPreview(page.url.searchParams)?.persona ?? realData),
   );
+  const isPersonaPreview = $derived(
+    personaValue !== realData && personaValue !== freeTier,
+  );
+
+  const selectPreview = (value: string) => {
+    if (value === realData) {
+      return setParams({ persona: null, runner: null, tier: null });
+    }
+
+    if (value === freeTier) {
+      return setParams({
+        persona: null,
+        runner: null,
+        reel: null,
+        tier: freeTier,
+      });
+    }
+
+    return setParams({ persona: value, tier: null });
+  };
 </script>
 
 <div
@@ -60,12 +84,10 @@
         <span>{m.yir_2026_preview_persona()}</span>
         <select
           value={personaValue}
-          onchange={(event) =>
-            event.currentTarget.value === realData
-              ? setParams({ persona: null, runner: null })
-              : setParams({ persona: event.currentTarget.value })}
+          onchange={(event) => selectPreview(event.currentTarget.value)}
         >
           <option value={realData}>{m.yir_2026_preview_real_data()}</option>
+          <option value={freeTier}>{m.yir_2026_preview_free()}</option>
           {#each personas as id (id)}
             <option value={id}>{personaCopy(id).name}</option>
           {/each}
@@ -76,7 +98,7 @@
         <span>{m.yir_2026_preview_runner_up()}</span>
         <select
           value={runnerValue}
-          disabled={personaValue === realData}
+          disabled={!isPersonaPreview}
           onchange={(event) =>
             setParams({
               runner:
@@ -100,7 +122,11 @@
       </label>
 
       <div class="yir-toggles-actions">
-        <button type="button" onclick={() => setParams({ reel: "1" })}>
+        <button
+          type="button"
+          disabled={personaValue === freeTier}
+          onclick={() => setParams({ reel: "1" })}
+        >
           ▶ {m.yir_2026_preview_play_reel()}
         </button>
       </div>
