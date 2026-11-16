@@ -10,7 +10,7 @@ import { render } from 'svelte/server';
 import { loadImageSources } from '../../_internal/loadImageSources.ts';
 import { respondWithShareImage } from '../../_internal/respondWithShareImage.ts';
 import { toShareUser } from '../../_internal/toShareUser.ts';
-import { isMirImageFresh } from '../_internal/isMirImageFresh.ts';
+import { isSettledShareImageFresh } from '../../_internal/isSettledShareImageFresh.ts';
 import { parseMirShareParams } from '../_internal/parseMirShareParams.ts';
 import { toMirImagePath } from '../_internal/toMirImagePath.ts';
 import { toMirShareData } from '../_internal/toMirShareData.ts';
@@ -67,7 +67,8 @@ export const GET: RequestHandler = (event) => {
         month,
         user: toShareUser(profile),
       }),
-    isFresh: (cachedAt) => isMirImageFresh({ cachedAt, now, settlesAt }),
+    isFresh: (cachedAt) =>
+      isSettledShareImageFresh({ cachedAt, now, settlesAt }),
     cacheControl:
       isSettled && hasExplicitMonth ? SETTLED_MONTH_CACHE : OPEN_MONTH_CACHE,
     toRedirect: ({ profile }) =>
