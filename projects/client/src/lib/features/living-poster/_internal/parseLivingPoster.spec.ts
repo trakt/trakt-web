@@ -32,6 +32,27 @@ describe('util: parseLivingPoster', () => {
     expect(poster?.effects.map(({ kind }) => kind)).toEqual(['fog', 'shimmer']);
   });
 
+  it('should tag layer and mask urls with the cut stamp', () => {
+    const poster = parseLivingPoster({
+      raw: { ...manifest, cut: 'a1b2c3d4e5f6' },
+      baseUrl: BASE_URL,
+    });
+
+    expect(poster?.layers.at(0)?.src).toBe(
+      `${BASE_URL}/00.webp?v=a1b2c3d4e5f6`,
+    );
+    expect(poster?.mask).toBe(`${BASE_URL}/m.webp?v=a1b2c3d4e5f6`);
+  });
+
+  it('should reject a malformed cut stamp', () => {
+    expect(
+      parseLivingPoster({
+        raw: { ...manifest, cut: '../x' },
+        baseUrl: BASE_URL,
+      }),
+    ).toBeNull();
+  });
+
   it('should parse a manifest without effects or mask', () => {
     const poster = parseLivingPoster({
       raw: { v: 1, layers: [['00.webp', -1]] },

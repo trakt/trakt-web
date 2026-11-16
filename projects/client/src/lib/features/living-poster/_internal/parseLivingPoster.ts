@@ -6,6 +6,7 @@ import { parseLivingPosterEffect } from './parseLivingPosterEffect.ts';
 const SUPPORTED_VERSION = 1;
 const MAX_SHIFT = 1.5;
 const FILE_NAME_PATTERN = /^[\w-]+\.webp$/;
+const CUT_STAMP_PATTERN = /^[0-9a-f]{6,40}$/;
 
 const FileNameSchema = z.string().regex(FILE_NAME_PATTERN);
 
@@ -14,6 +15,7 @@ const LivingPosterManifestSchema = z.object({
   layers: z.array(z.tuple([FileNameSchema, z.number().finite()])).min(1),
   mask: FileNameSchema.nullish(),
   effects: z.array(z.unknown()).nullish(),
+  cut: z.string().regex(CUT_STAMP_PATTERN).nullish(),
 });
 
 type ParseLivingPosterParams = {
@@ -31,8 +33,10 @@ export function parseLivingPoster({
   const parsed = LivingPosterManifestSchema.safeParse(raw);
   if (!parsed.success) return null;
 
-  const { layers, mask, effects } = parsed.data;
+  const { layers, mask, effects, cut } = parsed.data;
   const hasMask = mask != null;
+  const toSrc = (file: string) =>
+    cut ? `${baseUrl}/${file}?v=${cut}` : `${baseUrl}/${file}`;
 
   const parsedEffects = (effects ?? [])
     .map(parseLivingPosterEffect)
@@ -44,10 +48,10 @@ export function parseLivingPoster({
 
   return {
     layers: layers.map(([file, shift]) => ({
-      src: `${baseUrl}/${file}`,
+      src: toSrc(file),
       shift: clampShift(shift),
     })),
-    mask: hasMask ? `${baseUrl}/${mask}` : null,
+    mask: hasMask ? toSrc(mask) : null,
     effects: parsedEffects,
   };
 }

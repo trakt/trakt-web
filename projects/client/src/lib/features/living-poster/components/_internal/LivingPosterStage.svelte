@@ -84,6 +84,7 @@
           {:else if item.type === "particles"}
             <canvas
               class="living-poster-particles"
+              class:is-screen={item.isScreen}
               style:--s={item.shift}
               {@attach particleCanvas({
                 effects: item.effects,
@@ -183,11 +184,14 @@
     object-fit: cover;
 
     &.is-cutout {
-      filter: drop-shadow(0 var(--ni-8) var(--ni-12) rgba(0, 0, 0, 0.35));
+      filter: drop-shadow(
+        calc(var(--rx) * -10px) calc(8px + var(--ry) * -6px) 10px
+          rgba(0, 0, 0, calc(0.25 + var(--lift) * 0.3))
+      );
     }
   }
 
-  .living-poster-particles {
+  .living-poster-particles.is-screen {
     mix-blend-mode: screen;
   }
 
