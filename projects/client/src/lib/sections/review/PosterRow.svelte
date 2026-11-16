@@ -2,10 +2,10 @@
   import Link from "$lib/components/link/Link.svelte";
   import UserRating from "$lib/sections/components/UserRating.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { MonthReviewTitle } from "../models/MonthReviewTitle.ts";
+  import type { ReviewTitle } from "./models/ReviewTitle.ts";
   import { toPlaysLabel } from "./toPlaysLabel.ts";
 
-  const { titles }: { titles: ReadonlyArray<MonthReviewTitle> } = $props();
+  const { titles }: { titles: ReadonlyArray<ReviewTitle> } = $props();
 </script>
 
 <div class="trakt-month-review-poster-row">

@@ -5,11 +5,11 @@
   import LedgerSection from "../layout/LedgerSection.svelte";
   import Tile from "../layout/Tile.svelte";
   import TileGrid from "../layout/TileGrid.svelte";
-  import type { MonthReview } from "../models/MonthReview.ts";
-  import PosterRow from "../parts/PosterRow.svelte";
-  import RateNudge from "../parts/RateNudge.svelte";
+  import type { Review } from "$lib/sections/review/models/Review.ts";
+  import PosterRow from "$lib/sections/review/PosterRow.svelte";
+  import RateNudge from "$lib/sections/review/RateNudge.svelte";
 
-  const { review }: { review: MonthReview } = $props();
+  const { review }: { review: Review } = $props();
 
   const unrated = $derived(review.unrated ?? []);
 </script>

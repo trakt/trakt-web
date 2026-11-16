@@ -2,8 +2,8 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { MonthReviewTitle } from "../models/MonthReviewTitle.ts";
-  import { toPlaysLabel } from "../parts/toPlaysLabel.ts";
+  import type { ReviewTitle } from "$lib/sections/review/models/ReviewTitle.ts";
+  import { toPlaysLabel } from "$lib/sections/review/toPlaysLabel.ts";
 
   const DECK_SIZE = 6;
 
@@ -11,7 +11,7 @@
     titles,
     isLoading,
   }: {
-    titles: ReadonlyArray<MonthReviewTitle>;
+    titles: ReadonlyArray<ReviewTitle>;
     isLoading: boolean;
   } = $props();
 

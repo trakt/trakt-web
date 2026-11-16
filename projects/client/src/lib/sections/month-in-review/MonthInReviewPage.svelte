@@ -21,12 +21,12 @@
   import LedgerSection from "./_internal/layout/LedgerSection.svelte";
   import ReviewHero from "./_internal/layout/ReviewHero.svelte";
   import ReviewOutro from "./_internal/layout/ReviewOutro.svelte";
-  import PrivateReview from "./_internal/layout/PrivateReview.svelte";
+  import PrivateReview from "$lib/sections/review/PrivateReview.svelte";
   import ReviewTopBar from "./_internal/layout/ReviewTopBar.svelte";
   import SectionSkeleton from "./_internal/layout/SectionSkeleton.svelte";
   import Stat from "./_internal/layout/Stat.svelte";
   import StatSkeleton from "./_internal/layout/StatSkeleton.svelte";
-  import VipPanel from "./_internal/panel/VipPanel.svelte";
+  import VipPanel from "$lib/sections/review/VipPanel.svelte";
   import BookendsSection from "./_internal/sections/BookendsSection.svelte";
   import NumbersSection from "./_internal/sections/NumbersSection.svelte";
   import RatingsSection from "./_internal/sections/RatingsSection.svelte";
@@ -194,7 +194,7 @@
           name={toDisplayableName($profile)}
           {year}
           {month}
-          {monthName}
+          periodName={monthName}
           canSeeOwn={Boolean($user?.slug)}
         />
       {/if}
@@ -232,7 +232,7 @@
         <LedgerSection
           label={m.month_review_section_more({ month: monthName })}
         >
-          <VipPanel {year} {month} {monthName} />
+          <VipPanel {year} {month} periodName={monthName} />
         </LedgerSection>
       {/if}
 

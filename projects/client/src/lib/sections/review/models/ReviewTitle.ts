@@ -1,6 +1,6 @@
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 
-export type MonthReviewTitle = {
+export type ReviewTitle = {
   key: string;
   id: number;
   type: MediaType;

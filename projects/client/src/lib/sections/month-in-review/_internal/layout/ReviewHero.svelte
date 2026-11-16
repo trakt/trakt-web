@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
   import type { Snippet } from "svelte";
-  import type { MonthReviewTitle } from "../models/MonthReviewTitle.ts";
+  import type { ReviewTitle } from "$lib/sections/review/models/ReviewTitle.ts";
   import PosterDeck from "./PosterDeck.svelte";
   import { heroScroll } from "./heroScroll.ts";
 
@@ -19,7 +19,7 @@
     year: number;
     month: number;
     subtitle: string;
-    titles: ReadonlyArray<MonthReviewTitle>;
+    titles: ReadonlyArray<ReviewTitle>;
     isLoading: boolean;
     scrollIntro: boolean;
     stats: Snippet;

@@ -1,7 +1,7 @@
 import type { Observable } from 'rxjs';
-import type { MonthReview } from '../models/MonthReview.ts';
+import type { Review } from '$lib/sections/review/models/Review.ts';
 
 export type MonthReviewSource = {
-  review: Observable<MonthReview | null>;
+  review: Observable<Review | null>;
   isLoading: Observable<boolean>;
 };

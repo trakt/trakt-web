@@ -3,10 +3,10 @@
   import LedgerSection from "../layout/LedgerSection.svelte";
   import Tile from "../layout/Tile.svelte";
   import TileGrid from "../layout/TileGrid.svelte";
-  import type { MonthReview } from "../models/MonthReview.ts";
+  import type { Review } from "$lib/sections/review/models/Review.ts";
   import PlayCard from "../parts/PlayCard.svelte";
 
-  const { review }: { review: MonthReview } = $props();
+  const { review }: { review: Review } = $props();
 
   const span = $derived(review.firstPlay && review.lastPlay ? 3 : 6);
 </script>

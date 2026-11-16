@@ -3,11 +3,11 @@ import type {
   YirGenresGroup,
   YirStatsCategory,
 } from '$lib/requests/models/YirDetail.ts';
-import type { MonthReview } from '../models/MonthReview.ts';
-import type { MonthReviewPlay } from '../models/MonthReviewPlay.ts';
-import type { MonthReviewShare } from '../models/MonthReviewShare.ts';
-import type { MonthReviewTitle } from '../models/MonthReviewTitle.ts';
-import type { MonthReviewTypeStats } from '../models/MonthReviewTypeStats.ts';
+import type { Review } from '$lib/sections/review/models/Review.ts';
+import type { ReviewPlay } from '$lib/sections/review/models/ReviewPlay.ts';
+import type { ReviewShare } from '$lib/sections/review/models/ReviewShare.ts';
+import type { ReviewTitle } from '$lib/sections/review/models/ReviewTitle.ts';
+import type { ReviewTypeStats } from '$lib/sections/review/models/ReviewTypeStats.ts';
 import { toMonthReviewTitle } from './toMonthReviewTitle.ts';
 
 const MAX_SHARES = 6;
@@ -22,7 +22,7 @@ type Series = ReadonlyArray<number> | Nil;
 type WatchedItem = NonNullable<YirDetail['firstWatched']>;
 type MostWatchedItem = YirDetail['mostWatched']['shows'][number];
 
-const byCount = (a: MonthReviewShare, b: MonthReviewShare) => b.count - a.count;
+const byCount = (a: ReviewShare, b: ReviewShare) => b.count - a.count;
 
 function optional<K extends string, V>(
   key: K,
@@ -55,7 +55,7 @@ function toGenres(groups: ReadonlyArray<YirGenresGroup>) {
           label: genre.name,
           count: (genres.get(genre.slug)?.count ?? 0) + genre.count,
         }),
-      new Map<string, MonthReviewShare>(),
+      new Map<string, ReviewShare>(),
     );
 
   return [...merged.values()].sort(byCount);
@@ -71,7 +71,7 @@ function toTypeStats({
   stats,
   mostWatched,
   genres,
-}: ToTypeStatsParams): MonthReviewTypeStats {
+}: ToTypeStatsParams): ReviewTypeStats {
   const allGenres = toGenres([genres]);
 
   return {
@@ -88,7 +88,7 @@ function toTypeStats({
   };
 }
 
-function toTopRated(detail: YirDetail): ReadonlyArray<MonthReviewTitle> {
+function toTopRated(detail: YirDetail): ReadonlyArray<ReviewTitle> {
   return [...detail.topRated.shows, ...detail.topRated.movies]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, MAX_TOP_RATED)
@@ -110,7 +110,7 @@ const countActive = (daily: Series) =>
 function toServices(
   detail: YirDetail,
   previous: YirDetail | Nil,
-): ReadonlyArray<MonthReviewShare> {
+): ReadonlyArray<ReviewShare> {
   const before = new Map(
     (previous?.streamingServices?.services ?? []).map((service) => [
       service.source,
@@ -134,7 +134,7 @@ function toServices(
     .slice(0, MAX_SHARES);
 }
 
-function toPlay(item: WatchedItem | Nil): MonthReviewPlay | undefined {
+function toPlay(item: WatchedItem | Nil): ReviewPlay | undefined {
   if (!item) return undefined;
 
   const title = toMonthReviewTitle({ entry: item.entry, plays: 1 });
@@ -147,7 +147,7 @@ function toPlay(item: WatchedItem | Nil): MonthReviewPlay | undefined {
 export function toMonthReviewFromDetail({
   detail,
   previous,
-}: ToMonthReviewFromDetailParams): MonthReview {
+}: ToMonthReviewFromDetailParams): Review {
   const { all, shows, movies } = detail.stats;
   const daily = toDaily(detail);
   const weekdays =

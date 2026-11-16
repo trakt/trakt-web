@@ -2,7 +2,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
-  import type { MonthReviewTitle } from "../models/MonthReviewTitle.ts";
+  import type { ReviewTitle } from "$lib/sections/review/models/ReviewTitle.ts";
 
   const {
     titles,
@@ -10,8 +10,8 @@
     start = 1,
     layout = "list",
   }: {
-    titles: ReadonlyArray<MonthReviewTitle>;
-    trailing: Snippet<[MonthReviewTitle]>;
+    titles: ReadonlyArray<ReviewTitle>;
+    trailing: Snippet<[ReviewTitle]>;
     start?: number;
     layout?: "list" | "grid";
   } = $props();
