@@ -476,6 +476,26 @@ Use guards instead of inline `{#if auth.isLoggedIn}` or `{#if isDesktop}`:
 
 `RenderFor` props: `audience`, `device`, `input` (combinable).
 
+Guards only gate markup. Hooks called in a component's `<script>` run for every
+audience, even when the template wraps their output in a guard. Move the hook
+into a child component rendered inside the guard:
+
+```svelte
+<!-- Bad - the query runs for signed-out visitors too -->
+<script lang="ts">
+  const { canEdit } = useCanEdit({ userSlug: $user.slug });
+</script>
+
+<RenderFor audience="authenticated">
+  {#if $canEdit}<EditButton />{/if}
+</RenderFor>
+
+<!-- Good - the hook lives in EditButtonHost, which only mounts when signed in -->
+<RenderFor audience="authenticated">
+  <EditButtonHost />
+</RenderFor>
+```
+
 ---
 
 ## Theme-Aware Styling
