@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
-  import ReviewRouteLayout from "$lib/sections/yir/ReviewRouteLayout.svelte";
+  import ReviewRouteLayout from "$lib/sections/layout/ReviewRouteLayout.svelte";
   import YirPage from "$lib/sections/yir/YirPage.svelte";
   import type { YirYear } from "$lib/requests/models/YirYear";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
