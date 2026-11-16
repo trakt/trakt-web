@@ -228,6 +228,75 @@
     translate: 0 calc((1 - var(--p)) * var(--ni-24));
   }
 
+  .trakt-month-review-hero-scroll:global(.is-scroll-driven) {
+    view-timeline: --month-review-hero block;
+
+    .title,
+    .subtitle,
+    .stats,
+    .cue {
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --month-review-hero;
+      animation-range: exit-crossing 0 exit-crossing var(--ni-380);
+    }
+
+    .title {
+      animation-name: hero-title;
+    }
+
+    .subtitle,
+    .stats {
+      animation-name: hero-reveal;
+    }
+
+    .cue {
+      animation-name: hero-cue;
+    }
+  }
+
+  @keyframes hero-title {
+    from {
+      scale: 1.3;
+    }
+
+    to {
+      scale: 1;
+    }
+  }
+
+  @keyframes hero-reveal {
+    0% {
+      opacity: 0;
+      translate: 0 var(--ni-24);
+    }
+
+    18.75% {
+      opacity: 0;
+    }
+
+    81.25% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes hero-cue {
+    0% {
+      opacity: 1;
+    }
+
+    25%,
+    100% {
+      opacity: 0;
+    }
+  }
+
   .trakt-month-review-hero-scroll:global(.is-moving) {
     .title {
       will-change: scale;
@@ -318,7 +387,6 @@
     from {
       opacity: 0;
       transform: translateY(0.32em) rotate(2.5deg);
-      filter: blur(8px);
     }
   }
 
