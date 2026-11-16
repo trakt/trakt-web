@@ -4,7 +4,14 @@ const isStacked = (node: HTMLElement) =>
 
 export function heroScroll(node: HTMLElement, isStatic: boolean) {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const hasScrollTimeline = CSS.supports('animation-timeline: view()');
   const state = { frame: 0, isStatic, isStacked: false, travel: 1 };
+
+  const isScrollDriven = () =>
+    hasScrollTimeline &&
+    !state.isStatic &&
+    !state.isStacked &&
+    !reducedMotion.matches;
 
   const measure = () => {
     const stage =
@@ -24,8 +31,9 @@ export function heroScroll(node: HTMLElement, isStatic: boolean) {
 
     node.style.removeProperty('--p');
     node.style.removeProperty('--deal');
+    node.classList.toggle('is-scroll-driven', isScrollDriven());
 
-    if (state.isStatic || reducedMotion.matches) {
+    if (state.isStatic || reducedMotion.matches || isScrollDriven()) {
       node.classList.remove('is-moving');
       return;
     }
@@ -43,13 +51,14 @@ export function heroScroll(node: HTMLElement, isStatic: boolean) {
   };
 
   const schedule = () => {
-    if (state.frame) return;
+    if (state.frame || isScrollDriven()) return;
     state.frame = requestAnimationFrame(update);
   };
 
   const observer = new ResizeObserver(() => {
+    cancelAnimationFrame(state.frame);
     measure();
-    schedule();
+    update();
   });
 
   observer.observe(node);
@@ -61,6 +70,7 @@ export function heroScroll(node: HTMLElement, isStatic: boolean) {
   return {
     update(next: boolean) {
       state.isStatic = next;
+      measure();
       update();
     },
     destroy() {

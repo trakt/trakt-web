@@ -132,7 +132,7 @@
   );
 </script>
 
-<div class="trakt-month-review">
+<div class="trakt-month-review" data-sveltekit-preload-code="hover">
   <div class="content">
     <ReviewTopBar {slug} {year} {month}>
       {#snippet who()}

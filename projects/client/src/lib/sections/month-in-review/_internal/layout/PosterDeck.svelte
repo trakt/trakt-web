@@ -186,6 +186,35 @@
     :global(.is-moving) & {
       will-change: transform;
     }
+
+    :global(.is-scroll-driven) & {
+      animation:
+        poster-deal linear both,
+        float 7s ease-in-out infinite alternate;
+      animation-duration: auto, 7s;
+      animation-delay: 0s, calc(var(--index) * -1.3s);
+      animation-timeline: --month-review-hero, auto;
+      animation-range:
+        exit-crossing 0 exit-crossing var(--ni-380),
+        normal;
+    }
+  }
+
+  @keyframes poster-deal {
+    from {
+      transform: translate(-50%, -50%)
+        translate(
+          calc(var(--rtl-sign) * (var(--sx) * var(--spread) + var(--shift))),
+          calc(var(--sy) * var(--spread))
+        )
+        rotate(calc(var(--rtl-sign) * var(--sr))) scale(1.15);
+    }
+
+    to {
+      transform: translate(-50%, -50%)
+        translate(calc(var(--rtl-sign) * var(--dx)), var(--dy))
+        rotate(calc(var(--rtl-sign) * var(--tilt))) scale(1);
+    }
   }
 
   .card {
