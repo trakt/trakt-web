@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/filters/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import AddFromListsEmptyState from "./_internal/bulk-add/AddFromListsEmptyState.svelte";
@@ -48,11 +49,15 @@
   groupBy={sort.groupBy}
 >
   {#snippet ctaItem()}
-    <AddFromListsTile {list} />
+    <RenderFor audience="authenticated">
+      <AddFromListsTile {list} />
+    </RenderFor>
   {/snippet}
 
   {#snippet empty()}
-    <AddFromListsEmptyState {list} />
+    <RenderFor audience="authenticated">
+      <AddFromListsEmptyState {list} />
+    </RenderFor>
   {/snippet}
 
   {#snippet item(media)}
