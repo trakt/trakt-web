@@ -94,9 +94,7 @@ export async function loadPersonaShareFonts({
 }: LoadPersonaShareFontsProps): Promise<PersonaShareFonts> {
   const faces = await Promise.allSettled(
     personaShareFontFaces(persona).map(async (face) => ({
-      name: face.name,
-      weight: face.weight,
-      style: face.style,
+      ...face,
       data: await loadCachedFace({ face, bucket, fetch }),
     })),
   );
