@@ -6,6 +6,7 @@ import { useNavbarState } from '../useNavbarState.ts';
 import NavbarEntryStack from './NavbarEntryStack.svelte';
 
 const STACK = '.trakt-navbar-entry-stack';
+const LAZY_ENTRY_TIMEOUT = 3000;
 
 describe('NavbarEntryStack', () => {
   const { globalSet } = useNavbarState();
@@ -63,7 +64,11 @@ describe('NavbarEntryStack', () => {
 
     renderComponent(NavbarEntryStack, { props: {}, withFilters: true });
 
-    await screen.findByRole('link', { name: "Open today's stories" });
+    await screen.findByRole(
+      'link',
+      { name: "Open today's stories" },
+      { timeout: LAZY_ENTRY_TIMEOUT },
+    );
     await screen.findByRole('link', { name: 'Make a mixtape' });
     expect(document.querySelector(STACK)).toHaveAttribute(
       'data-entry',
