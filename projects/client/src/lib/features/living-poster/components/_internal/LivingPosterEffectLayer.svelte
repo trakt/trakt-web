@@ -75,9 +75,7 @@
         class="living-poster-foil"
         style:mask-image={maskImage}
         style:-webkit-mask-image={maskImage}
-      >
-        <div class="living-poster-sheen"></div>
-      </div>
+      ></div>
     {:else if effect.kind === "shimmer" && maskImage}
       <div
         class="living-poster-shine"
@@ -346,16 +344,8 @@
   .living-poster-foil {
     mix-blend-mode: color-dodge;
     opacity: calc(var(--i) * (0.35 + var(--lift) * 0.65));
-  }
-
-  .living-poster-sheen {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -60%;
-    width: 220%;
     background: linear-gradient(
-      110deg,
+      calc(110deg + var(--rx) * 40deg),
       transparent 20%,
       rgba(255, 120, 180, 0.55) 34%,
       rgba(120, 220, 255, 0.6) 44%,
@@ -363,8 +353,8 @@
       rgba(160, 120, 255, 0.5) 64%,
       transparent 78%
     );
-    transform: translate3d(calc(var(--rx) * 22%), 0, 0)
-      rotate(calc(var(--rx) * 6deg));
+    background-size: 220% 100%;
+    background-position: calc(50% + var(--rx) * 60%) 50%;
   }
 
   .living-poster-shine {

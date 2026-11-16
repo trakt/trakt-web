@@ -19,6 +19,11 @@ const layers = [
   { src: 'fg.webp', shift: 0.55 },
 ];
 
+const masked = (kind: 'foil' | 'shimmer', mask: 'letters' | 'title') =>
+  ({ ...effect(kind), mask }) as LivingPosterEffect;
+
+const titledLayers = [...layers, { src: 'title.webp', shift: 1 }];
+
 const describeItem = (
   item: ReturnType<typeof composeLivingPosterStack>[number],
 ) => (item.type === 'effect' ? `${item.type}:${item.effect.kind}` : item.type);
@@ -41,12 +46,92 @@ describe('util: composeLivingPosterStack', () => {
       'layer',
       'layer',
       'particles',
+      'particles',
       'layer',
     ]);
-    const particles = stack.find(({ type }) => type === 'particles');
-    expect(particles?.type === 'particles' && particles.effects).toHaveLength(
-      2,
+  });
+
+  it('should split screen blended particles from normal ones', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers,
+      effects: [effect('embers'), effect('snow'), effect('fireflies')],
+    });
+    const groups = stack.flatMap((item) =>
+      item.type === 'particles'
+        ? [[item.isScreen, item.effects.map(({ kind }) => kind)]]
+        : [],
     );
+
+    expect(groups).toEqual([
+      [true, ['embers', 'fireflies']],
+      [false, ['snow']],
+    ]);
+  });
+
+  it('should draw behind effects before the figures layer', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers: titledLayers,
+      effects: [effect('fog'), effect('dust')],
+    });
+
+    expect(stack.map(describeItem)).toEqual([
+      'layer',
+      'layer',
+      'effect:fog',
+      'particles',
+      'layer',
+      'layer',
+    ]);
+  });
+
+  it('should draw fire flicker and lamp glow behind the figures', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers: titledLayers,
+      effects: [effect('flicker'), effect('glow')],
+    });
+
+    expect(stack.map(describeItem)).toEqual([
+      'layer',
+      'layer',
+      'effect:flicker',
+      'effect:glow',
+      'layer',
+      'layer',
+    ]);
+  });
+
+  it('should draw a title masked foil in front at the title shift', () => {
+    const stack = composeLivingPosterStack({
+      mask: 'm.webp',
+      layers: titledLayers,
+      effects: [masked('foil', 'title'), masked('shimmer', 'letters')],
+    });
+
+    expect(stack.map(describeItem)).toEqual([
+      'layer',
+      'effect:shimmer',
+      'layer',
+      'layer',
+      'layer',
+      'effect:foil',
+    ]);
+    expect(stack.at(-1)?.shift).toBe(1);
+  });
+
+  it('should move a title masked foil with an edge title that moves less', () => {
+    const stack = composeLivingPosterStack({
+      mask: 'm.webp',
+      layers: [...layers, { src: 'title.webp', shift: 0.3 }],
+      effects: [masked('foil', 'title'), effect('flare')],
+    });
+    const shifts = stack
+      .filter((item) => item.type === 'effect')
+      .map(({ shift }) => shift);
+
+    expect(shifts).toEqual([0.3, -0.6]);
   });
 
   it('should group effects by where they sit in the depth', () => {
@@ -57,7 +142,7 @@ describe('util: composeLivingPosterStack', () => {
         effect('lightning'),
         effect('fog'),
         effect('bulbs'),
-        effect('foil'),
+        masked('foil', 'letters'),
         effect('embers'),
       ],
     });
@@ -89,7 +174,7 @@ describe('util: composeLivingPosterStack', () => {
     const stack = composeLivingPosterStack({
       mask: null,
       layers,
-      effects: [effect('flare'), effect('glow')],
+      effects: [effect('flare'), effect('foil')],
     });
     const shifts = stack
       .filter((item) => item.type === 'effect')
@@ -108,9 +193,29 @@ describe('util: composeLivingPosterStack', () => {
     expect(stack.map(describeItem)).toEqual(['layer', 'effect:fog']);
   });
 
-  it('should only mark the top layer of a cutout stack as a cutout', () => {
-    const stack = composeLivingPosterStack({ mask: null, layers, effects: [] });
+  it('should cast shadows from the figures and title layers only', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers: titledLayers,
+      effects: [],
+    });
 
+    expect(stack.map((item) => item.type === 'layer' && item.isCutout)).toEqual(
+      [false, false, true, true],
+    );
+  });
+
+  it('should fall back to the top layer for unknown shifts', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers: [
+        { src: 'a.webp', shift: -0.8 },
+        { src: 'b.webp', shift: 0.2 },
+      ],
+      effects: [effect('embers')],
+    });
+
+    expect(stack.map(describeItem)).toEqual(['layer', 'particles', 'layer']);
     expect(stack.map((item) => item.type === 'layer' && item.isCutout)).toEqual(
       [false, false, true],
     );
@@ -120,10 +225,7 @@ describe('util: composeLivingPosterStack', () => {
     const stack = composeLivingPosterStack({
       layers,
       mask: 'm.webp',
-      effects: [
-        { ...effect('shimmer'), mask: 'letters' } as LivingPosterEffect,
-        { ...effect('foil'), mask: 'title' } as LivingPosterEffect,
-      ],
+      effects: [masked('shimmer', 'letters'), masked('foil', 'title')],
     });
     const masks = stack.flatMap((item) =>
       item.type === 'effect' ? [item.mask] : [],

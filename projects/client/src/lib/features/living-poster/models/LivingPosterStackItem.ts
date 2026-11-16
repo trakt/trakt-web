@@ -21,4 +21,5 @@ export type LivingPosterStackItem =
       key: string;
       effects: ReadonlyArray<ParticleEffect>;
       shift: number;
+      isScreen: boolean;
     };
