@@ -97,4 +97,11 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     description: () => m.preview_feature_description_month_in_review_redesign(),
     audience: 'director',
   },
+  [FeatureFlag.LivingPoster]: {
+    icon: SparkleIcon,
+    title: () => m.preview_feature_title_living_poster(),
+    addedAt: new Date('2026-11-16'),
+    description: () => m.preview_feature_description_living_poster(),
+    audience: 'director',
+  },
 };

@@ -13,6 +13,7 @@
   import type { Snippet } from "svelte";
   import SpoilerSection from "../_internal/SpoilerSection.svelte";
   import Summary from "../_internal/Summary.svelte";
+  import SummaryLivingPoster from "../_internal/SummaryLivingPoster.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
   import { useIsStarted } from "../_internal/useIsStarted";
@@ -77,7 +78,14 @@
       alt={title}
       {tags}
       isPriority
-    />
+    >
+      {#snippet stage({ onsettledchange })}
+        <SummaryLivingPoster
+          target={{ type: target.type, id: media.id }}
+          {onsettledchange}
+        />
+      {/snippet}
+    </SummaryPoster>
   {/snippet}
 
 

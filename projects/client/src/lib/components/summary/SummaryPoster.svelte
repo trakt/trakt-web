@@ -14,6 +14,7 @@
     tags?: Snippet;
     variant?: "portrait" | "landscape";
     isPriority?: boolean;
+    stage?: Snippet<[{ onsettledchange: (isSettled: boolean) => void }]>;
   };
 
   const {
@@ -26,9 +27,14 @@
     tags,
     variant = "portrait",
     isPriority = false,
+    stage,
   }: SummaryPosterProps = $props();
 
-  const activeOverlay = $derived(href && hoverOverlay);
+  const activeStage = $derived(variant === "portrait" ? stage : null);
+
+  let isStageSettled = $state(false);
+
+  const activeOverlay = $derived(href && !isStageSettled && hoverOverlay);
 
   const priorityProps = $derived(
     isPriority ? { loading: "eager" as const, fetchpriority: "high" } : {},
@@ -36,7 +42,11 @@
 </script>
 
 <div class="trakt-summary-poster-container" data-variant={variant}>
-  <div class="trakt-summary-poster" class:has-active-overlay={activeOverlay}>
+  <div
+    class="trakt-summary-poster"
+    class:has-active-overlay={activeOverlay}
+    class:has-settled-stage={isStageSettled}
+  >
     <Link {href} {target}>
       <CrossOriginImage {src} {alt} {...priorityProps} />
     </Link>
@@ -47,6 +57,10 @@
       {@render activeOverlay()}
     </div>
   {/if}
+
+  {@render activeStage?.({
+    onsettledchange: (isSettled) => (isStageSettled = isSettled),
+  })}
 
   {@render actions?.()}
 
@@ -101,6 +115,10 @@
       transition: var(--transition-increment) ease-in-out;
       transition-property: filter, border, opacity;
     }
+  }
+
+  .trakt-summary-poster.has-settled-stage {
+    opacity: 0;
   }
 
   .trakt-summary-poster-overlay {
