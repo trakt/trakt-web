@@ -1,9 +1,6 @@
 # trakt-web
 
-<a href="https://app.deepsource.com/gh/trakt/trakt-web/"><img src="https://app.deepsource.com/gh/trakt/trakt-web.svg/?label=code+coverage&show_trend=true&token=tiC5fNXEfyZqbFXqMggxzbWT" /></a>
-<a href="https://app.deepsource.com/gh/trakt/trakt-web/"><img src="https://app.deepsource.com/gh/trakt/trakt-web.svg/?label=active+issues&show_trend=true&token=tiC5fNXEfyZqbFXqMggxzbWT" /></a>
-<a href="https://app.deepsource.com/gh/trakt/trakt-web/"><img src="https://app.deepsource.com/gh/trakt/trakt-web.svg/?label=resolved+issues&show_trend=true&token=tiC5fNXEfyZqbFXqMggxzbWT" /></a>
-
+<a href="https://github.com/trakt/trakt-web/actions/workflows/ci_cd.yml"><img src="https://raw.githubusercontent.com/trakt/trakt-web/badges/coverage.svg" alt="Coverage" /></a>
 <a href="https://github.com/trakt/trakt-web/actions/workflows/ci_cd.yml"><img src="https://github.com/trakt/trakt-web/actions/workflows/ci_cd.yml/badge.svg" /></a>
 
 ---
