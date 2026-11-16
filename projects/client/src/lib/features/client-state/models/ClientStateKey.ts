@@ -1,1 +1,3 @@
-export enum ClientStateKey {}
+export enum ClientStateKey {
+  Onboarding = 'onboarding',
+}
