@@ -15808,6 +15808,14 @@
       "default": "Show fewer links",
       "description": "Aria-label for the small button on a person page that hides the extra social and reference links again."
     },
+    "preview_feature_title_living_poster": {
+      "default": "Living posters",
+      "description": "Product feature name for the preview feature that turns the poster on a movie or show page into a layered, tilting poster with ambient effects."
+    },
+    "preview_feature_description_living_poster": {
+      "default": "Top titles get a poster that tilts with your pointer, with layers that move at different depths and ambient effects such as fog, embers and snow.",
+      "description": "Description of the living poster preview feature."
+    },
     "preview_feature_title_awards": {
       "default": "Awards",
       "description": "Product feature name for the preview feature that shows award wins and nominations on movie, show and person pages."

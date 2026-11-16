@@ -14,6 +14,7 @@
   import { summaryDrawerNavigation } from "$lib/sections/summary/summaryDrawerNavigation.ts";
   import SummarySocialRow from "../_internal/SummarySocialRow.svelte";
   import SummaryCover from "../_internal/SummaryCover.svelte";
+  import SummaryLivingPoster from "../_internal/SummaryLivingPoster.svelte";
   import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
   import { useIsStarted } from "../_internal/useIsStarted";
@@ -85,6 +86,13 @@
       {tags}
       isPriority
     >
+      {#snippet stage({ onsettledchange })}
+        <SummaryLivingPoster
+          target={{ type, id: media.id }}
+          {onsettledchange}
+        />
+      {/snippet}
+
       {#snippet hoverOverlay()}
         {#if streamOn?.preferred != null}
           <StreamOnOverlay service={streamOn.preferred} />
