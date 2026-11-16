@@ -506,7 +506,8 @@ dependencies: (params) => [
 
 ## Conditional Queries
 
-Use `enabled` to skip fetching when required params absent:
+Use `enabled` to skip fetching while a required param is not available yet
+(e.g. a slug or id that resolves asynchronously):
 
 ```ts
 export const someQuery = defineQuery({
@@ -514,6 +515,12 @@ export const someQuery = defineQuery({
   enabled: (params) => Boolean(params.slug),
 });
 ```
+
+Do not use `enabled` to hide a call the viewer can never make (signed out, not
+the owner, missing permission). A param that is empty for that reason means the
+caller is mounted for the wrong audience. Gate the caller with a guard instead
+(see "Guard Components" in `components.md`), so the query never exists for that
+audience.
 
 ---
 
