@@ -1,16 +1,13 @@
 import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
-import type { MonthReview } from '../models/MonthReview.ts';
-import type { MonthReviewTitle } from '../models/MonthReviewTitle.ts';
+import type { Review } from '$lib/sections/review/models/Review.ts';
+import type { ReviewTitle } from '$lib/sections/review/models/ReviewTitle.ts';
 
 type WithUserRatingsParams = {
-  review: MonthReview;
+  review: Review;
   ratings: UserRatings;
 };
 
-function withRating(
-  title: MonthReviewTitle,
-  ratings: UserRatings,
-): MonthReviewTitle {
+function withRating(title: ReviewTitle, ratings: UserRatings): ReviewTitle {
   const lookup = title.type === 'movie' ? ratings.movies : ratings.shows;
   const rating = lookup.get(title.id)?.rating;
 
@@ -20,7 +17,7 @@ function withRating(
 export function withUserRatings({
   review,
   ratings,
-}: WithUserRatingsParams): MonthReview {
+}: WithUserRatingsParams): Review {
   const titles = review.titles.map((title) => withRating(title, ratings));
 
   return {

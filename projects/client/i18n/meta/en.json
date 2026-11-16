@@ -7271,7 +7271,7 @@
     },
     "month_review_feature_recap": {
       "default": "Shareable recap",
-      "description": "VIP feature listed in the Month in Review upsell: a recap of the month that can be shared."
+      "description": "VIP feature listed in the Month and Year in Review upsells: a recap of the period that can be shared."
     },
     "month_review_unlock": {
       "default": "Unlock the full review",
@@ -7296,6 +7296,34 @@
     "month_review_open_review": {
       "default": "Open {name}'s {month} review",
       "description": "Accessible label for an example review card in the Month in Review upsell."
+    },
+    "year_review_private_body": {
+      "default": "Free members see their own Year in Review. VIP members get a review anyone can look at.",
+      "description": "Body of the placeholder shown when visiting a free member's Year in Review."
+    },
+    "year_review_more_body": {
+      "default": "The full review gives you a persona, where your hours went, your top genres and people, and a reel you can share.",
+      "description": "Body of the VIP panel at the end of the free Year in Review."
+    },
+    "year_review_feature_persona": {
+      "default": "Your persona",
+      "description": "VIP feature in the free Year in Review upsell: the viewing persona assigned to the member."
+    },
+    "year_review_feature_people": {
+      "default": "Your people",
+      "description": "VIP feature in the free Year in Review upsell: the actors and crew the member watched most."
+    },
+    "year_review_includes_mir": {
+      "default": "Includes Month in Review",
+      "description": "Note beside the unlock button in the free Year in Review upsell."
+    },
+    "year_review_see_it_body": {
+      "default": "Real {year} reviews from the Trakt team",
+      "description": "Subtitle above example Year in Review cards from Trakt team members in the upsell."
+    },
+    "year_review_unrated_body": {
+      "default": "You watched these this year. Add a rating to round off the year.",
+      "description": "Body of the unrated card in the free Year in Review, above the list of unrated titles."
     },
     "month_review_section_numbers": {
       "default": "The numbers",

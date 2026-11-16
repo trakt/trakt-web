@@ -1,4 +1,4 @@
-export type MonthReviewShare = {
+export type ReviewShare = {
   key: string;
   label: string;
   count: number;

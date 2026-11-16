@@ -10,39 +10,45 @@
     director,
     year,
     month,
-    monthName,
+    periodName,
   }: {
     director: UserProfile;
     year: number;
-    month: number;
-    monthName: string;
+    month?: number;
+    periodName: string;
   } = $props();
 
   const name = $derived(toDisplayableName(director));
+  const reviews = $derived(
+    UrlBuilder.users(director.slug ?? director.username),
+  );
   const href = $derived(
-    UrlBuilder.users(director.slug ?? director.username).monthInReview(
-      year,
-      month,
-    ),
+    month === undefined
+      ? reviews.yearToDate(year)
+      : reviews.monthInReview(year, month),
   );
 </script>
 
 <Link
   {href}
-  label={m.month_review_open_review({ name, month: monthName })}
+  label={m.month_review_open_review({ name, month: periodName })}
   color="inherit"
   underline="none"
 >
   <span class="trakt-month-review-director-card">
     <span class="bar"></span>
-    <span class="meta bold">{m.mir_title_month_in_review()}</span>
+    <span class="meta bold"
+      >{month === undefined
+        ? m.yir_title_year_in_review()
+        : m.mir_title_month_in_review()}</span
+    >
     <span class="me">
       <img src={director.avatar.url} alt="" loading="lazy" />
       <span class="name">{name}</span>
       <span class="role bold">{m.month_review_role_director()}</span>
     </span>
     <span class="foot">
-      <span class="month">{monthName}</span>
+      <span class="month">{periodName}</span>
       <span class="open" aria-hidden="true"><CaretRightIcon /></span>
     </span>
   </span>

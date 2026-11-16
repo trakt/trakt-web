@@ -1,12 +1,18 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import RateAction from "$lib/sections/media-actions/rating/RateAction.svelte";
-  import type { MonthReviewTitle } from "../models/MonthReviewTitle.ts";
+  import type { ReviewTitle } from "./models/ReviewTitle.ts";
   import { toPlaysLabel } from "./toPlaysLabel.ts";
 
   const MAX_TITLES = 3;
 
-  const { titles }: { titles: ReadonlyArray<MonthReviewTitle> } = $props();
+  const {
+    titles,
+    period = "month",
+  }: {
+    titles: ReadonlyArray<ReviewTitle>;
+    period?: "month" | "year";
+  } = $props();
 
   const shown = $derived(titles.slice(0, MAX_TITLES));
 </script>
@@ -14,7 +20,11 @@
 <div class="trakt-month-review-rate-nudge">
   <div class="copy">
     <h3>{m.month_review_unrated_title()}</h3>
-    <p>{m.month_review_unrated_body()}</p>
+    <p>
+      {period === "year"
+        ? m.year_review_unrated_body()
+        : m.month_review_unrated_body()}
+    </p>
   </div>
   <ul class="titles">
     {#each shown as title (title.key)}

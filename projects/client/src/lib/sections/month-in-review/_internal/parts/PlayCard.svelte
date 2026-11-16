@@ -3,9 +3,9 @@
   import { languageTag } from "$lib/features/i18n";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { MonthReviewPlay } from "../models/MonthReviewPlay.ts";
+  import type { ReviewPlay } from "$lib/sections/review/models/ReviewPlay.ts";
 
-  const { play, label }: { play: MonthReviewPlay; label: string } = $props();
+  const { play, label }: { play: ReviewPlay; label: string } = $props();
 
   const when = $derived(
     new Intl.DateTimeFormat(languageTag(), {

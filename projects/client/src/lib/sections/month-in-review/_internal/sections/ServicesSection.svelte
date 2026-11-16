@@ -6,14 +6,14 @@
   import LedgerSection from "../layout/LedgerSection.svelte";
   import Tile from "../layout/Tile.svelte";
   import TileGrid from "../layout/TileGrid.svelte";
-  import type { MonthReview } from "../models/MonthReview.ts";
+  import type { Review } from "$lib/sections/review/models/Review.ts";
   import BarList from "../parts/BarList.svelte";
 
   const {
     review,
     previousMonthName,
   }: {
-    review: MonthReview;
+    review: Review;
     previousMonthName: string;
   } = $props();
 

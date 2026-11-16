@@ -4,14 +4,14 @@
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { REVEAL_MARGIN } from "./REVEAL_MARGIN.ts";
   import type { Snippet } from "svelte";
-  import type { MonthReviewShare } from "../models/MonthReviewShare.ts";
+  import type { ReviewShare } from "$lib/sections/review/models/ReviewShare.ts";
 
   const {
     items,
     meta,
   }: {
-    items: ReadonlyArray<MonthReviewShare>;
-    meta?: Snippet<[MonthReviewShare]>;
+    items: ReadonlyArray<ReviewShare>;
+    meta?: Snippet<[ReviewShare]>;
   } = $props();
 
   let isInView = $state(false);

@@ -5,37 +5,53 @@
   import { useVipUpsell } from "$lib/features/upsell/useVipUpsell.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import DirectorCard from "./DirectorCard.svelte";
-  import { useReviewDirectors } from "./useReviewDirectors.ts";
+  import DirectorCard from "./_internal/DirectorCard.svelte";
+  import { useReviewDirectors } from "./_internal/useReviewDirectors.ts";
 
   const {
     year,
     month,
-    monthName,
+    periodName,
   }: {
     year: number;
-    month: number;
-    monthName: string;
+    month?: number;
+    periodName: string;
   } = $props();
 
-  const directors = useReviewDirectors();
-  const { trackClick, trackImpression } = useVipUpsell(() => "mir");
+  const isYear = $derived(month === undefined);
+  const source = $derived(isYear ? "yir" : "mir");
 
-  const features = [
-    m.month_review_feature_hours,
-    m.month_review_feature_nights,
-    m.month_review_services,
-    m.yir_label_top_genres,
-    m.month_review_feature_top_rated,
-    m.month_review_feature_recap,
-  ];
+  const directors = useReviewDirectors();
+  const { trackClick, trackImpression } = useVipUpsell(() => source);
+
+  const features = $derived(
+    isYear
+      ? [
+          m.year_review_feature_persona,
+          m.month_review_feature_hours,
+          m.yir_label_top_genres,
+          m.year_review_feature_people,
+          m.month_review_feature_top_rated,
+          m.month_review_feature_recap,
+        ]
+      : [
+          m.month_review_feature_hours,
+          m.month_review_feature_nights,
+          m.month_review_services,
+          m.yir_label_top_genres,
+          m.month_review_feature_top_rated,
+          m.month_review_feature_recap,
+        ],
+  );
 </script>
 
 <div class="trakt-month-review-vip-panel" use:trackImpression>
   <div class="pitch">
     <VipUpsellBadge />
-    <h2>{m.month_review_more_title({ month: monthName })}</h2>
-    <p>{m.month_review_more_body()}</p>
+    <h2>{m.month_review_more_title({ month: periodName })}</h2>
+    <p>
+      {isYear ? m.year_review_more_body() : m.month_review_more_body()}
+    </p>
     <ul class="features">
       {#each features as feature (feature)}
         <li>
@@ -47,14 +63,18 @@
     </ul>
     <div class="cta">
       <Button
-        href={UrlBuilder.vip("mir")}
+        href={UrlBuilder.vip(source)}
         label={m.month_review_unlock()}
         color="purple"
         onclick={trackClick}
       >
         {m.month_review_unlock()}
       </Button>
-      <span class="note bold">{m.month_review_includes_yir()}</span>
+      <span class="note bold"
+        >{isYear
+          ? m.year_review_includes_mir()
+          : m.month_review_includes_yir()}</span
+      >
     </div>
   </div>
 
@@ -63,13 +83,15 @@
       <div class="proof-head">
         <span class="kicker bold">{m.month_review_see_it()}</span>
         <span class="sub"
-          >{m.month_review_see_it_body({ month: monthName })}</span
+          >{isYear
+            ? m.year_review_see_it_body({ year })
+            : m.month_review_see_it_body({ month: periodName })}</span
         >
       </div>
       <div class="fan">
         {#each $directors as director (director.username)}
           <div class="slot">
-            <DirectorCard {director} {year} {month} {monthName} />
+            <DirectorCard {director} {year} {month} {periodName} />
           </div>
         {/each}
       </div>

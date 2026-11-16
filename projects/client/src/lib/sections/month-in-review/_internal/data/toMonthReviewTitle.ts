@@ -1,5 +1,5 @@
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
-import type { MonthReviewTitle } from '../models/MonthReviewTitle.ts';
+import type { ReviewTitle } from '$lib/sections/review/models/ReviewTitle.ts';
 
 type ToMonthReviewTitleParams = {
   entry: MediaEntry;
@@ -13,7 +13,7 @@ export function toMonthReviewTitle({
   plays,
   minutes,
   rating,
-}: ToMonthReviewTitleParams): MonthReviewTitle {
+}: ToMonthReviewTitleParams): ReviewTitle {
   return {
     key: entry.key,
     id: entry.id,

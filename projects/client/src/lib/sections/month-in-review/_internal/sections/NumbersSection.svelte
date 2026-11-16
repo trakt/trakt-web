@@ -6,12 +6,12 @@
   import Stat from "../layout/Stat.svelte";
   import Tile from "../layout/Tile.svelte";
   import TileGrid from "../layout/TileGrid.svelte";
-  import type { MonthReview } from "../models/MonthReview.ts";
+  import type { Review } from "$lib/sections/review/models/Review.ts";
   import BarChart from "../parts/BarChart.svelte";
   import HourDial from "../parts/HourDial.svelte";
   import FactGrid from "../parts/FactGrid.svelte";
   import { toDurationLabel } from "../parts/toDurationLabel.ts";
-  import { toPlaysLabel } from "../parts/toPlaysLabel.ts";
+  import { toPlaysLabel } from "$lib/sections/review/toPlaysLabel.ts";
   import { toChange } from "./toChange.ts";
   import { toPeakLabels } from "./toPeakLabels.ts";
   import { toHumanHour } from "$lib/utils/formatting/date/toHumanHour.ts";
@@ -23,7 +23,7 @@
     month,
     previousMonthName,
   }: {
-    review: MonthReview;
+    review: Review;
     year: number;
     month: number;
     previousMonthName: string;

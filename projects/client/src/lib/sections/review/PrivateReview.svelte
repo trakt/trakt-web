@@ -8,28 +8,38 @@
     name,
     year,
     month,
-    monthName,
+    periodName,
     canSeeOwn,
   }: {
     name: string;
     year: number;
-    month: number;
-    monthName: string;
+    month?: number;
+    periodName: string;
     canSeeOwn: boolean;
   } = $props();
+
+  const ownHref = $derived(
+    month === undefined
+      ? UrlBuilder.users("me").yearToDate(year)
+      : UrlBuilder.users("me").monthInReview(year, month),
+  );
 </script>
 
 <div class="trakt-month-review-private">
   <span class="icon" aria-hidden="true"><LockIcon /></span>
-  <h2>{m.month_review_private_title({ name, month: monthName })}</h2>
-  <p>{m.month_review_private_body()}</p>
+  <h2>{m.month_review_private_title({ name, month: periodName })}</h2>
+  <p>
+    {month === undefined
+      ? m.year_review_private_body()
+      : m.month_review_private_body()}
+  </p>
   {#if canSeeOwn}
     <Button
-      href={UrlBuilder.users("me").monthInReview(year, month)}
-      label={m.month_review_private_own({ month: monthName })}
+      href={ownHref}
+      label={m.month_review_private_own({ month: periodName })}
       color="purple"
     >
-      {m.month_review_private_own({ month: monthName })}
+      {m.month_review_private_own({ month: periodName })}
     </Button>
   {/if}
 </div>

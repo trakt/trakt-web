@@ -7,12 +7,12 @@
   import Stat from "../layout/Stat.svelte";
   import Tile from "../layout/Tile.svelte";
   import TileGrid from "../layout/TileGrid.svelte";
-  import type { MonthReviewTypeStats } from "../models/MonthReviewTypeStats.ts";
+  import type { ReviewTypeStats } from "$lib/sections/review/models/ReviewTypeStats.ts";
   import BarList from "../parts/BarList.svelte";
   import FactGrid from "../parts/FactGrid.svelte";
   import RankedList from "../parts/RankedList.svelte";
   import { toDurationLabel } from "../parts/toDurationLabel.ts";
-  import { toPlaysLabel } from "../parts/toPlaysLabel.ts";
+  import { toPlaysLabel } from "$lib/sections/review/toPlaysLabel.ts";
   import { toPeakLabels } from "./toPeakLabels.ts";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage.ts";
 
@@ -26,7 +26,7 @@
     month,
   }: {
     label: string;
-    stats: MonthReviewTypeStats;
+    stats: ReviewTypeStats;
     totalPlays: number;
     year: number;
     month: number;
