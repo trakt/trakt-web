@@ -2,8 +2,8 @@
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import ReviewRouteLayout from "$lib/sections/layout/ReviewRouteLayout.svelte";
   import MonthInReviewPage from "$lib/sections/month-in-review/MonthInReviewPage.svelte";
-  import ReviewRouteLayout from "$lib/sections/yir/ReviewRouteLayout.svelte";
   import MirPage from "$lib/sections/yir/MirPage.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
