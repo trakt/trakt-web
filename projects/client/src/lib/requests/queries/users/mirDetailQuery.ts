@@ -31,6 +31,10 @@ const mirDetailRequest = async ({
     slurm,
   });
 
+  if (response.status === 426) {
+    return { body: null, status: 204 };
+  }
+
   return response.ok
     ? { body: (await response.json()) as RawYirResponse, status: 200 }
     : { body: null, status: response.status };
