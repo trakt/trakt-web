@@ -402,6 +402,8 @@ export const UrlBuilder = {
       year: number;
       month: number;
     }) => `/users/${slug}/mir.jpg?year=${year}&month=${month}&shape=og`,
+    yirShareableImage: ({ slug, year }: { slug: string; year: number }) =>
+      `/users/${slug}/yir.jpg?year=${year}&shape=og`,
     trendingShareableImage: (type: 'movie' | 'show') => {
       const basePath = `${TRENDING_SHAREABLE_IMAGE_PATH}?type=${type}`;
       return {

@@ -25,11 +25,18 @@
         ? m.page_title_year_to_date()
         : m.page_title_year_in_review({ year: params.year }),
   );
-  const pageImage = $derived(
-    params.user === "me"
-      ? undefined
-      : UrlBuilder.og.widgets.yir(params.user, params.year),
-  );
+  const hasPersona = $derived(!isAllTime && Number(year) >= 2026);
+  const pageImage = $derived.by(() => {
+    if (params.user === "me") return undefined;
+    if (hasPersona) {
+      return UrlBuilder.api.yirShareableImage({
+        slug: params.user,
+        year: Number(year),
+      });
+    }
+
+    return UrlBuilder.og.widgets.yir(params.user, params.year);
+  });
 </script>
 
 <ReviewRouteLayout user={params.user} title={pageTitle} image={pageImage}>
