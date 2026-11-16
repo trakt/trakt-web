@@ -101,6 +101,9 @@
       ? `${page.url.origin}${UrlBuilder.users($profile.slug).monthInReview(year, month)}`
       : undefined,
   );
+  const canShare = $derived(
+    canBeVip && Boolean(shareUrl) && review?.tier !== "free" && !isPrivate,
+  );
 
   const { track: trackView } = useTrack(AnalyticsEvent.MonthReviewView);
   let lastTrackedView: string | undefined;
@@ -144,7 +147,7 @@
         {/if}
       {/snippet}
       {#snippet actions()}
-        {#if review?.tier === "vip"}
+        {#if canShare}
           <ShareButton
             title={m.mir_share_text({ month: `${monthName} ${year}` })}
             urlOverride={shareUrl}
@@ -273,6 +276,10 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
+
+    @include for-tablet-sm-and-below {
+      display: none;
+    }
   }
 
   .who-label {
@@ -280,6 +287,10 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
+
+    @include for-tablet-lg {
+      display: none;
+    }
   }
 
   .ledger {
