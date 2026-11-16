@@ -1,6 +1,8 @@
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
+import { server } from '$mocks/server.ts';
 import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
+import { http, HttpResponse } from 'msw';
 import { map } from 'rxjs';
 import { describe, expect, it } from 'vitest';
 import { mirDetailQuery } from './mirDetailQuery.ts';
@@ -34,5 +36,25 @@ describe('mirDetailQuery', () => {
 
     expect(result?.firstWatched?.type).to.equal('movie');
     expect(result?.firstWatched?.entry).to.deep.equal(MovieHereticMappedMock);
+  });
+
+  it('should return null when the month needs an upgrade', async () => {
+    server.use(
+      http.get(
+        'http://localhost/users/me/mir*',
+        () => new HttpResponse(null, { status: 426 }),
+      ),
+    );
+
+    const result = await runQuery({
+      factory: () =>
+        createTestBedQuery(
+          mirDetailQuery({ slug: 'me', month: 5, year: 2025 }),
+        ),
+      mapper: (query) => query?.data,
+      waitFor: (data) => data !== undefined,
+    });
+
+    expect(result).toBeNull();
   });
 });

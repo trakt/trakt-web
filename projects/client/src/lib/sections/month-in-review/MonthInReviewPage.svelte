@@ -3,6 +3,7 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
+  import { useAuth } from "$lib/features/auth/stores/useAuth.ts";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { languageTag } from "$lib/features/i18n";
@@ -47,6 +48,7 @@
   const STAT_PLACEHOLDERS = [0, 1, 2, 3];
 
   const { user } = useUser();
+  const { isAuthorized } = useAuth();
   const { isMe } = $derived(useIsMe(slug));
   const profileQuery = useQuery(
     fromRune(() => slug).pipe(
@@ -84,8 +86,10 @@
     })),
   );
 
+  const isResolvingOwner = $derived($isAuthorized && !$user);
   const isLoading = $derived(
-    (!$isMe && $isProfileLoading) ||
+    isResolvingOwner ||
+      (!$isMe && $isProfileLoading) ||
       (canBeVip && $isVipLoading) ||
       (needsFree && $isFreeLoading),
   );
