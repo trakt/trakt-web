@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import { getLocale } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import CountUp from "../parts/CountUp.svelte";
@@ -9,7 +10,7 @@
     note,
     trend,
   }: {
-    value: string | number;
+    value: string | number | null;
     label: string;
     note?: string;
     trend?: "up" | "down";
@@ -18,7 +19,12 @@
 
 <div class="trakt-month-review-stat">
   <span class="value">
-    {#if typeof value === "number"}
+    {#if value === null}
+      <Skeleton
+        width="calc(var(--stat-value-size) * 1.2)"
+        height="var(--stat-value-size)"
+      />
+    {:else if typeof value === "number"}
       <CountUp {value} format={(shown) => toHumanNumber(shown, getLocale())} />
     {:else}
       {value}
@@ -34,21 +40,23 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-month-review-stat {
+    --stat-value-size: var(--ni-36);
+
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
+
+    @include for-mobile {
+      --stat-value-size: var(--ni-28);
+    }
   }
 
   .value {
-    font-size: var(--ni-36);
+    font-size: var(--stat-value-size);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1;
     font-variant-numeric: tabular-nums;
-
-    @include for-mobile {
-      font-size: var(--ni-28);
-    }
   }
 
   .label {

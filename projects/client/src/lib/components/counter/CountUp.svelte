@@ -9,10 +9,11 @@
   let shown = $state(0);
 
   $effect(() => {
+    const target = value;
     if (!active) return;
 
     if ($isReducedMotion) {
-      shown = value;
+      shown = target;
       return;
     }
 
@@ -20,7 +21,7 @@
     let frame = 0;
     const tick = (now: number) => {
       const progress = Math.min(1, (now - start) / duration);
-      shown = value * (1 - Math.pow(1 - progress, 3));
+      shown = target * (1 - Math.pow(1 - progress, 3));
       if (progress < 1) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);

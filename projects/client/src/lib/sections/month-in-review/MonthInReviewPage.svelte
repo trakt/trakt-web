@@ -26,7 +26,6 @@
   import ReviewTopBar from "./_internal/layout/ReviewTopBar.svelte";
   import SectionSkeleton from "./_internal/layout/SectionSkeleton.svelte";
   import Stat from "./_internal/layout/Stat.svelte";
-  import StatSkeleton from "./_internal/layout/StatSkeleton.svelte";
   import VipPanel from "$lib/sections/review/VipPanel.svelte";
   import BookendsSection from "./_internal/sections/BookendsSection.svelte";
   import NumbersSection from "./_internal/sections/NumbersSection.svelte";
@@ -45,8 +44,6 @@
     month: number;
   } = $props();
 
-  const STAT_PLACEHOLDERS = [0, 1, 2, 3];
-
   const { user } = useUser();
   const { isAuthorized } = useAuth();
   const { isMe } = $derived(useIsMe(slug));
@@ -63,6 +60,14 @@
       ? Boolean($user?.isVip)
       : Boolean($profile?.isVip || $profile?.isDirector),
   );
+  const isVipShaped = $derived(!$isMe || canBeVip);
+  const loadingStatLabels = $derived([
+    m.month_review_label_plays(),
+    m.month_review_label_movies(),
+    m.month_review_label_shows(),
+    m.month_review_label_active_days(),
+    ...(isVipShaped ? [m.month_review_label_hours()] : []),
+  ]);
   const { review: vipReview, isLoading: isVipLoading } = useVipMonthReview(
     fromRune(() => ({
       slug,
@@ -162,7 +167,7 @@
       {month}
       {subtitle}
       {isLoading}
-      scrollIntro={review ? review.tier === "vip" : canBeVip}
+      scrollIntro={review ? review.tier === "vip" : isVipShaped}
       titles={review?.titles ?? []}
     >
       {#snippet stats()}
@@ -183,8 +188,8 @@
             />
           {/if}
         {:else if isLoading}
-          {#each STAT_PLACEHOLDERS as index (index)}
-            <StatSkeleton />
+          {#each loadingStatLabels as label, index (index)}
+            <Stat value={null} {label} />
           {/each}
         {/if}
       {/snippet}
