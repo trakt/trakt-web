@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PersonaCardProps } from "./PersonaCardProps";
-  import { personaCardComponent } from "./personaCardComponent";
+  import { personaCardComponent } from "./personaCardComponent.ts";
 
   const { card, live = true }: Partial<PersonaCardProps> &
     Pick<PersonaCardProps, "card"> = $props();
