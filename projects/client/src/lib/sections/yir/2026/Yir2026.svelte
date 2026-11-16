@@ -2,7 +2,10 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
+  import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { useQuery } from "$lib/features/query/useQuery";
   import type { YirDetail } from "$lib/requests/models/YirDetail";
   import { userProfileQuery } from "$lib/requests/queries/users/userProfileQuery";
@@ -16,6 +19,10 @@
   import YirHeader from "../_internal/YirHeader.svelte";
   import YirUpgradeSection from "../_internal/YirUpgradeSection.svelte";
   import { parsePersonaPreview } from "./_internal/parsePersonaPreview";
+  import { parseTierPreview } from "./_internal/parseTierPreview";
+  import { useFreeYearReview } from "./_internal/free/useFreeYearReview";
+  import YirFree from "./_internal/free/YirFree.svelte";
+  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { useReelSeen } from "./_internal/useReelSeen";
   import { useYirPersona } from "./_internal/useYirPersona";
   import Yir2026Hero from "./_internal/Yir2026Hero.svelte";
@@ -57,8 +64,47 @@
     $profile?.name.first || $profile?.username || slug,
   );
 
+  const { user } = useUser();
+  const isFreePreview = $derived(parseTierPreview(page.url.searchParams));
+  const isTierKnown = $derived($isMe ? Boolean($user) : Boolean($profile));
+  const canBeVip = $derived(
+    $isMe
+      ? Boolean($user?.isVip)
+      : Boolean($profile?.isVip || $profile?.isDirector),
+  );
+  const isFree = $derived(isFreePreview || (isTierKnown && !canBeVip));
+
+  const { review: freeReview } = useFreeYearReview(
+    fromRune(() => ({ year, isEnabled: isFree && $isMe })),
+  );
+
+  const { track: trackView } = useTrack(AnalyticsEvent.YearReviewView);
+  let lastTrackedView: string | undefined;
+
+  const isPreview = $derived(
+    isFreePreview || parsePersonaPreview(page.url.searchParams) !== undefined,
+  );
+  const hasReview = $derived(
+    isFree ? Boolean($freeReview) : Boolean($persona),
+  );
+
+  $effect(() => {
+    if (isPreview || !hasReview) return;
+
+    const view = `${slug}/${year}`;
+    if (lastTrackedView === view) return;
+
+    lastTrackedView = view;
+    trackView({
+      tier: isFree ? "free" : "vip",
+      owner: $isMe ? "me" : "other",
+    });
+  });
+
   const isReelRequested = $derived(page.url.searchParams.get("reel") === "1");
-  const isReelOpen = $derived(isReelRequested || ($isMe && !$isSeen));
+  const isReelOpen = $derived(
+    !isFree && (isReelRequested || ($isMe && !$isSeen)),
+  );
 
   const webview = useWebviewSession();
   const navbarMode = $derived(
@@ -101,7 +147,15 @@
 
 <NavbarStateSetter mode={navbarMode} />
 
-{#if $persona}
+{#if isFree}
+  <YirFree
+    {slug}
+    {year}
+    review={$freeReview}
+    privateName={!$isMe && $profile ? toDisplayableName($profile) : undefined}
+  />
+  {@render toggles(false)}
+{:else if $persona}
   <YirPersonaTheme persona={$persona.persona} runnerUp={$persona.runnerUp}>
     <div class="yir-2026-page" class:is-covered={isReelOpen}>
       <ReviewPageShell id="year-in-review" headerForeground="theme">

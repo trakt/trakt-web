@@ -109,6 +109,14 @@ const PALETTES: Record<YirPersonaId, PersonaPalette> = {
   },
 };
 
-export function personaPalette(id: YirPersonaId): PersonaPalette {
-  return PALETTES[id];
+const HOUSE: PersonaPalette = {
+  background: 'var(--color-background)',
+  ink: 'var(--color-text-primary)',
+  accent: 'var(--color-month-review-accent)',
+  display: BODY,
+  body: BODY,
+};
+
+export function personaPalette(id: YirPersonaId | null): PersonaPalette {
+  return id ? PALETTES[id] : HOUSE;
 }

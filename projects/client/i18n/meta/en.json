@@ -7321,6 +7321,90 @@
       "default": "Real {year} reviews from the Trakt team",
       "description": "Subtitle above example Year in Review cards from Trakt team members in the upsell."
     },
+    "yir_free_kicker": {
+      "default": "Your year on Trakt",
+      "description": "Kicker above the member's name in the hero of the free Year in Review, built from the member's own history."
+    },
+    "yir_free_tagline": {
+      "default": "Here is your {year}, play by play.",
+      "description": "Tagline under the member's name in the hero of the free Year in Review, built from the member's own history."
+    },
+    "yir_free_member_since": {
+      "default": "Member since {year}",
+      "description": "Line on the hero card of the free Year in Review, built from the member's own history. {year} is the year the member joined."
+    },
+    "yir_free_months_kicker": {
+      "default": "Month by month",
+      "description": "Section kicker for plays per month in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_months_title": {
+      "default": "{month} was your biggest month.",
+      "description": "Section title in the free Year in Review, built from the member's own history. {month} is the full month name with the most plays."
+    },
+    "yir_free_plays_by_month": {
+      "default": "Plays by month",
+      "description": "Chart label for plays per month in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_rhythm_kicker": {
+      "default": "Your rhythm",
+      "description": "Section kicker for weekday habits in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_rhythm_title": {
+      "default": "{weekday} was your day.",
+      "description": "Section title in the free Year in Review, built from the member's own history. {weekday} is the full weekday name with the most plays."
+    },
+    "yir_free_plays_by_weekday": {
+      "default": "Plays by day of the week",
+      "description": "Chart label for plays per weekday in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_streak": {
+      "default": "Longest streak",
+      "description": "Label for the longest run of consecutive days with a play in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_first_play": {
+      "default": "First play of {year}",
+      "description": "Label for the date of the first play of the year in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_split_kicker": {
+      "default": "Movies and shows",
+      "description": "Section kicker for the movies versus shows split in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_split_title_shows": {
+      "default": "Mostly a shows year.",
+      "description": "Section title in the free Year in Review, built from the member's own history. Shown when episodes outnumber movie plays."
+    },
+    "yir_free_split_title_movies": {
+      "default": "Mostly a movies year.",
+      "description": "Section title in the free Year in Review, built from the member's own history. Shown when movie plays outnumber episodes."
+    },
+    "yir_free_label_episodes": {
+      "default": "Episodes",
+      "description": "Label for the number of episode plays in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_label_movie_plays": {
+      "default": "Movie plays",
+      "description": "Label for the number of movie plays, rewatches included, in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_top_kicker": {
+      "default": "Most played",
+      "description": "Section kicker for the most played titles in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_top_title": {
+      "default": "The ones you kept coming back to.",
+      "description": "Section title above the most played posters in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_ratings_kicker": {
+      "default": "Ratings",
+      "description": "Section kicker for ratings given during the year in the free Year in Review, built from the member's own history."
+    },
+    "yir_free_ratings_title": {
+      "default": "Your ratings averaged {average}.",
+      "description": "Section title in the free Year in Review, built from the member's own history. {average} is the average rating out of 10."
+    },
+    "yir_free_label_favorites": {
+      "default": "New favorites",
+      "description": "Label for the number of favorites added during the year in the free Year in Review, built from the member's own history."
+    },
     "year_review_unrated_body": {
       "default": "You watched these this year. Add a rating to round off the year.",
       "description": "Body of the unrated card in the free Year in Review, above the list of unrated titles."

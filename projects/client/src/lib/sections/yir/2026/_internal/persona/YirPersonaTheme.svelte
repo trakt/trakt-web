@@ -11,7 +11,7 @@
     runnerUp,
     children,
   }: {
-    persona: YirPersonaId;
+    persona: YirPersonaId | null;
     runnerUp?: YirPersonaId | Nil;
     children: Snippet;
   } = $props();
@@ -19,7 +19,9 @@
   const palette = $derived(personaPalette(persona));
 
   const fontsUrl = $derived(
-    personaFonts(runnerUp ? [persona, runnerUp] : [persona]),
+    personaFonts(
+      [persona, runnerUp].filter((id): id is YirPersonaId => id != null),
+    ),
   );
 </script>
 

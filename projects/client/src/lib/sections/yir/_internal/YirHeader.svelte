@@ -8,9 +8,11 @@
   const {
     slug,
     year,
+    isShareable = true,
   }: {
     slug: string;
     year: YirYear;
+    isShareable?: boolean;
   } = $props();
 
   const currentYear = new Date().getFullYear();
@@ -54,4 +56,5 @@
   subtitle={isAllTime ? undefined : periodLabel}
   {shareText}
   sourceId="yir"
+  {isShareable}
 />

@@ -28,6 +28,7 @@
     subtitle,
     shareText,
     sourceId,
+    isShareable = true,
   }: {
     slug: string;
     prevUrl: string;
@@ -37,6 +38,7 @@
     subtitle?: string;
     shareText: string;
     sourceId: string;
+    isShareable?: boolean;
   } = $props();
 
   const profileQuery = $derived(useQuery(userProfileQuery({ slug })));
@@ -53,7 +55,10 @@
   });
 
   const canShare = $derived(
-    browser && !!navigator.canShare && navigator.canShare(shareData),
+    isShareable &&
+      browser &&
+      !!navigator.canShare &&
+      navigator.canShare(shareData),
   );
 </script>
 

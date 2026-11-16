@@ -2,7 +2,7 @@ import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQ
 import { combineLatest, map, type Observable } from 'rxjs';
 import type { Review } from '$lib/sections/review/models/Review.ts';
 import type { MonthReviewParams } from './MonthReviewParams.ts';
-import { withUserRatings } from './withUserRatings.ts';
+import { withUserRatings } from '$lib/sections/review/withUserRatings.ts';
 
 type WithRatingsOverlayParams = {
   review: Observable<Review | null>;
