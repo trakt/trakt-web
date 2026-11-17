@@ -107,7 +107,7 @@
       --color-background-custom: color-mix(
         in srgb,
         var(--color-foreground) 8%,
-        transparent
+        var(--color-vip-plan-surface)
       );
       --color-foreground-custom: var(--color-text-primary);
 
