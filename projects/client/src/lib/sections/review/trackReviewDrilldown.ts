@@ -1,5 +1,5 @@
 import type { ActionReturn } from 'svelte/action';
-import { toReviewDrilldownType } from './toReviewDrilldownType.ts';
+import { toReviewDrilldownType } from './_internal/toReviewDrilldownType.ts';
 
 type TrackReviewDrilldownParams = {
   source: 'yir' | 'mir';
