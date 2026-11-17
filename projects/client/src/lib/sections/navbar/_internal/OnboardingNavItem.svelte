@@ -25,9 +25,7 @@
 {#snippet iconOnboarding()}
   {#if progress}
     <OnboardingRing
-      done={progress.done}
-      total={progress.total}
-      isEarned={progress.isEarned}
+      {progress}
       orbOrigin={$trackerGlyph}
       onFinished={$active?.dismiss}
     />
@@ -38,7 +36,6 @@
   <div
     class="trakt-onboarding-nav-item"
     class:is-expanded={!isCollapsed}
-    class:is-open={$isDrawerOpen}
     out:slide|global={{ duration: $isReducedMotion ? 0 : EXIT_MS, axis: "y" }}
   >
     <NavGroup
@@ -47,6 +44,7 @@
       title={m.button_label_onboarding()}
       icon={iconOnboarding}
       {isCollapsed}
+      isActive={$isDrawerOpen}
     />
   </div>
 
@@ -59,13 +57,5 @@
     flex-direction: column;
     gap: var(--gap-xxs);
     width: 100%;
-
-    :global(.nav-label) {
-      transition: color var(--transition-increment) ease-in-out;
-    }
-
-    &.is-open :global(.nav-label) {
-      color: var(--color-text-emphasis);
-    }
   }
 </style>

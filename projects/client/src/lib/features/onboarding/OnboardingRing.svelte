@@ -6,16 +6,14 @@
   import { getRecentPointer } from "./_internal/getRecentPointer.ts";
   import { trackLastPointer } from "./_internal/trackLastPointer.ts";
   import OnboardingBurst from "./_internal/OnboardingBurst.svelte";
-  import type { OnboardingStepStatus } from "./models/OnboardingStepStatus.ts";
+  import type { OnboardingSetProgress } from "./models/OnboardingSetProgress.ts";
 
   const {
-    statuses,
-    isEarned = false,
+    progress,
     orbOrigin = null,
     onFinished,
   }: {
-    statuses: ReadonlyArray<OnboardingStepStatus>;
-    isEarned?: boolean;
+    progress: OnboardingSetProgress;
     orbOrigin?: Element | null;
     onFinished?: () => void;
   } = $props();
@@ -27,6 +25,8 @@
   const RADIUS = 10;
   const GAP = 2.4;
 
+  const statuses = $derived(progress.steps.map(({ status }) => status));
+  const isEarned = $derived(progress.isEarned);
   const total = $derived(statuses.length);
   const done = $derived(statuses.filter((status) => status === "done").length);
   const circumference = 2 * Math.PI * RADIUS;

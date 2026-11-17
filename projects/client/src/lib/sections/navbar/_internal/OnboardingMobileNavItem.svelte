@@ -27,9 +27,7 @@
     out:slide|global={{ duration: $isReducedMotion ? 0 : EXIT_MS, axis: "x" }}
   >
     <OnboardingRing
-      done={progress.done}
-      total={progress.total}
-      isEarned={progress.isEarned}
+      {progress}
       orbOrigin={$trackerGlyph}
       onFinished={$active?.dismiss}
     />
