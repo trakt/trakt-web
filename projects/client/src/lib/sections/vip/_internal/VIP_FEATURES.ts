@@ -3,10 +3,12 @@ import ApiIcon from './icons/ApiIcon.svelte';
 import BookmarkIcon from './icons/BookmarkIcon.svelte';
 import ChatIcon from './icons/ChatIcon.svelte';
 import GlobeIcon from './icons/GlobeIcon.svelte';
+import LeaderboardIcon from './icons/LeaderboardIcon.svelte';
 import LibraryIcon from './icons/LibraryIcon.svelte';
 import ListIcon from './icons/ListIcon.svelte';
 import RecapsIcon from './icons/RecapsIcon.svelte';
 import SentimentIcon from './icons/SentimentIcon.svelte';
+import SoundtrackIcon from './icons/SoundtrackIcon.svelte';
 import StreamingIcon from './icons/StreamingIcon.svelte';
 import SyncIcon from './icons/SyncIcon.svelte';
 
@@ -50,6 +52,16 @@ export const VIP_FEATURES = [
     title: m.vip_feature_title_sentiment_trivia,
     description: m.vip_feature_description_sentiment_trivia,
     icon: SentimentIcon,
+  },
+  {
+    title: m.list_title_soundtrack,
+    description: m.vip_feature_description_soundtrack,
+    icon: SoundtrackIcon,
+  },
+  {
+    title: m.text_leaderboard,
+    description: m.vip_feature_description_leaderboard,
+    icon: LeaderboardIcon,
   },
   {
     title: m.vip_feature_title_api_apps,
