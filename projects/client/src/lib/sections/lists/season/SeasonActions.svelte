@@ -1,8 +1,4 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
-  import ReportButton from "$lib/features/report/ReportButton.svelte";
-  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { ListTarget } from "$lib/models/ListTarget";
   import ListAction from "$lib/sections/components/lists-drawer/ListAction.svelte";
   import { manageListsDrawerStore } from "$lib/sections/components/lists-drawer/manageListsDrawerStore";
@@ -36,10 +32,3 @@
   onClick={() =>
     manageListsDrawerStore.open({ target, title, metaInfo: show.title })}
 />
-
-<RenderFor audience="authenticated">
-  <ReportButton
-    params={{ type: ReportableType.Season, id: season.id, title }}
-    label={m.button_label_report_media({ title })}
-  />
-</RenderFor>

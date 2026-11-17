@@ -4,13 +4,9 @@
   import PersonAwardsStat from "$lib/sections/summary/components/awards/PersonAwardsStat.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
-  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
-  import ReportButton from "$lib/features/report/ReportButton.svelte";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import PersonTitle from "../_internal/PersonTitle.svelte";
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
-  import SummaryHeader from "./../summary/SummaryHeader.svelte";
   import SummaryMarkdownOverview from "./../summary/SummaryMarkdownOverview.svelte";
   import DetailSeparator from "./v2/_internal/DetailSeparator.svelte";
   import ExpandableSocialMediaLinks from "./_internal/ExpandableSocialMediaLinks.svelte";
@@ -40,25 +36,11 @@
   {/snippet}
 
   <div class="trakt-summary-main-content">
-    <SummaryHeader title={person.name}>
-      {#snippet popupActions()}
-        <ShareButton
-          title={person.name}
-          source={{ id: "person" }}
-          style="dropdown-item"
-        />
-        <ReportButton
-          params={{
-            type: ReportableType.Person,
-            id: person.id,
-            title: person.name,
-          }}
-          label={m.button_label_report_person({ name: person.name })}
-        />
+    <PersonTitle name={person.name} knownFor={person.knownFor}>
+      {#snippet actions()}
+        <ShareButton title={person.name} source={{ id: "person" }} />
       {/snippet}
-
-      <PersonTitle name={person.name} knownFor={person.knownFor} />
-    </SummaryHeader>
+    </PersonTitle>
 
     <SummaryMarkdownOverview
       title={person.name}

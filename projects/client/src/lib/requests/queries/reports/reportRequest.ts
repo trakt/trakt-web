@@ -11,17 +11,10 @@ type ReportRequestParams = {
 
 export type ReportRequestResult = { ok: true } | { ok: false; status: number };
 
-// The SDK router is the pluralized type for every reportable except person,
-// which lives under the `people` router. Mapped explicitly so the key stays a
-// string literal the typed API proxy can index.
+// Mapped explicitly so the key stays a string literal the typed API proxy
+// can index.
 const reportRouter = {
   [ReportableType.Comment]: 'comments',
-  [ReportableType.Movie]: 'movies',
-  [ReportableType.Show]: 'shows',
-  [ReportableType.Season]: 'seasons',
-  [ReportableType.Episode]: 'episodes',
-  [ReportableType.Person]: 'people',
-  [ReportableType.List]: 'lists',
   [ReportableType.User]: 'users',
 } as const satisfies Record<ReportableType, string>;
 

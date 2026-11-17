@@ -5,8 +5,6 @@
   import Redirect from "$lib/components/router/Redirect.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
-  import ReportButton from "$lib/features/report/ReportButton.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -117,10 +115,6 @@
             <AddFromListsButton {list} onClick={open} />
           {/snippet}
         </AddFromListsHost>
-        <ReportButton
-          params={{ type: ReportableType.List, id: list.id, title: list.name }}
-          label={m.button_label_report_list({ name: list.name })}
-        />
       {/if}
     {/snippet}
   </PopupMenu>

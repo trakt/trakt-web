@@ -12,41 +12,6 @@ const commentReasons: ReadonlyArray<ReportReason> = [
   ReportReason.Other,
 ];
 
-const mediaReasons: ReadonlyArray<ReportReason> = [
-  ReportReason.Duplicate,
-  ReportReason.Remove,
-  ReportReason.DataRefresh,
-  ReportReason.Metadata,
-  ReportReason.Adult,
-  ReportReason.Runtime,
-  ReportReason.Language,
-  ReportReason.Spam,
-  ReportReason.Tmdb,
-  ReportReason.Other,
-];
-
-const personReasons: ReadonlyArray<ReportReason> = [
-  ReportReason.Duplicate,
-  ReportReason.Remove,
-  ReportReason.DataRefresh,
-  ReportReason.Metadata,
-  ReportReason.Adult,
-  ReportReason.Language,
-  ReportReason.Spam,
-  ReportReason.Tmdb,
-  ReportReason.Other,
-];
-
-const listReasons: ReadonlyArray<ReportReason> = [
-  ReportReason.Duplicate,
-  ReportReason.Remove,
-  ReportReason.Metadata,
-  ReportReason.Adult,
-  ReportReason.Language,
-  ReportReason.Spam,
-  ReportReason.Other,
-];
-
 const userReasons: ReadonlyArray<ReportReason> = [
   ReportReason.Spam,
   ReportReason.Adult,
@@ -56,12 +21,6 @@ const userReasons: ReadonlyArray<ReportReason> = [
 
 const reasonsMap: Record<ReportableType, ReadonlyArray<ReportReason>> = {
   [ReportableType.Comment]: commentReasons,
-  [ReportableType.Movie]: mediaReasons,
-  [ReportableType.Show]: mediaReasons,
-  [ReportableType.Season]: mediaReasons,
-  [ReportableType.Episode]: mediaReasons,
-  [ReportableType.Person]: personReasons,
-  [ReportableType.List]: listReasons,
   [ReportableType.User]: userReasons,
 };
 
