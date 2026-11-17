@@ -6,16 +6,15 @@
   import { getRecentPointer } from "./_internal/getRecentPointer.ts";
   import { trackLastPointer } from "./_internal/trackLastPointer.ts";
   import OnboardingBurst from "./_internal/OnboardingBurst.svelte";
+  import type { OnboardingStepStatus } from "./models/OnboardingStepStatus.ts";
 
   const {
-    done,
-    total,
+    statuses,
     isEarned = false,
     orbOrigin = null,
     onFinished,
   }: {
-    done: number;
-    total: number;
+    statuses: ReadonlyArray<OnboardingStepStatus>;
     isEarned?: boolean;
     orbOrigin?: Element | null;
     onFinished?: () => void;
@@ -28,12 +27,14 @@
   const RADIUS = 10;
   const GAP = 2.4;
 
+  const total = $derived(statuses.length);
+  const done = $derived(statuses.filter((status) => status === "done").length);
   const circumference = 2 * Math.PI * RADIUS;
   const segmentLength = $derived(total > 0 ? circumference / total : 0);
 
-  let shownDone = $state(done);
+  let shownDone = $state(untrack(() => done));
   let track: SVGSVGElement | undefined = $state();
-  let previousDone = $state(done);
+  let previousDone = $state(untrack(() => done));
   let burstId = $state(0);
   let toast = $state<{ title: string; sub: string } | null>(null);
   let burstTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -43,10 +44,30 @@
   let hasFinished = false;
   let isDestroyed = false;
 
+  const isShownDone = $derived(
+    statuses.map(
+      (status, index) =>
+        status === "done" &&
+        statuses.slice(0, index).filter((earlier) => earlier === "done")
+          .length < shownDone,
+    ),
+  );
+  const nextIndex = $derived(
+    statuses.findIndex(
+      (status, index) => status !== "skipped" && !isShownDone.at(index),
+    ),
+  );
+
   const segments = $derived(
-    Array.from({ length: total }, (_, index) => ({
+    statuses.map((status, index) => ({
       index,
-      tone: index < shownDone ? "done" : index === shownDone ? "next" : "rest",
+      tone: isShownDone.at(index)
+        ? "done"
+        : status === "skipped"
+          ? "skipped"
+          : index === nextIndex
+            ? "next"
+            : "rest",
       dasharray: `${Math.max(0, segmentLength - GAP)} ${
         circumference - segmentLength + GAP
       }`,
@@ -166,8 +187,17 @@
     {/key}
   {/if}
 </span>
+<span class="ring-status" role="status">
+  {#if toast}{toast.title} {toast.sub}{/if}
+</span>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .ring-status {
+    @include visually-hidden;
+  }
+
   .trakt-onboarding-ring {
     --onboarding-ring-size: var(--nav-icon-size, var(--ni-24));
     --onboarding-ring-done: var(--color-accent-purple);
@@ -177,6 +207,7 @@
       transparent
     );
     --onboarding-ring-rest: color-mix(in srgb, currentColor 16%, transparent);
+    --onboarding-ring-skipped: color-mix(in srgb, currentColor 45%, transparent);
 
     position: relative;
     display: inline-grid;
@@ -216,6 +247,10 @@
 
     &[data-tone="next"] {
       stroke: var(--onboarding-ring-next);
+    }
+
+    &[data-tone="skipped"] {
+      stroke: var(--onboarding-ring-skipped);
     }
   }
 
