@@ -44,7 +44,8 @@
     tracked != null && completingStepId === tracked.step.id,
   );
   const isVisible = $derived(
-    tracked != null && !isDrawerOpen && !progress.isEarned &&
+    tracked != null &&
+      !isDrawerOpen &&
       (tracked.status === "todo" || isCompleting),
   );
   const Icon = $derived(tracked?.step.icon ?? null);
@@ -76,7 +77,7 @@
     class:is-visible={isVisible}
     class:is-completing={isCompleting}
     role="status"
-    aria-hidden={!isVisible}
+    inert={!isVisible}
   >
     <div class="tracker-bar">
       <span class="tracker-glyph" bind:this={glyph}>
