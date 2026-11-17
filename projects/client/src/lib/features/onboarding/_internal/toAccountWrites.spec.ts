@@ -32,13 +32,19 @@ function writesFor({
 }
 
 describe('util: toAccountWrites', () => {
-  it('should start a set the first time it shows and store what is already done', () => {
+  it('should start a set the first time it shows with what is already done', () => {
     expect(writesFor({ record: null })).toEqual([
-      { setId: 'first', change: { type: 'start' } },
+      { setId: 'first', change: { type: 'start', stepIds: ['account'] } },
+    ]);
+  });
+
+  it('should complete a set that starts with every step done', () => {
+    expect(writesFor({ record: null, counts: { watchlist: 1 } })).toEqual([
       {
         setId: 'first',
-        change: { type: 'done', stepId: 'account', source: 'account' },
+        change: { type: 'start', stepIds: ['account', 'watchlist'] },
       },
+      { setId: 'first', change: { type: 'complete' } },
     ]);
   });
 

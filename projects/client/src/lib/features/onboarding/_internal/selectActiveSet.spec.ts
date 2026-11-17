@@ -40,7 +40,7 @@ function select(
     counts: {},
     user: ExtendedUserMappedMock,
     now: NOW,
-    loadedAt: NOW,
+    openedSetIds: new Set(),
     dismissedSetId: null,
     bypassesEligibility: false,
     ...overrides,
@@ -71,6 +71,7 @@ describe('util: selectActiveSet', () => {
     expect(
       select({
         records: { first: { startedAt: 0, completedAt: NOW + 1, steps: {} } },
+        openedSetIds: new Set(['first']),
       }).active?.set.id,
     ).toBe('first');
   });
@@ -79,6 +80,7 @@ describe('util: selectActiveSet', () => {
     expect(
       select({
         records: { first: { startedAt: 0, completedAt: NOW + 1, steps: {} } },
+        openedSetIds: new Set(['first']),
         dismissedSetId: 'first',
       }).active?.set.id,
     ).toBe('second');
@@ -128,6 +130,25 @@ describe('util: selectActiveSet', () => {
     expect(selection.active?.set.id).toBe('second');
   });
 
+  it('should never retire a set for directors', () => {
+    expect(
+      select({
+        records: { first: { startedAt: 0, steps: {} } },
+        counts: { plays: 400 },
+        bypassesEligibility: true,
+      }).retiring,
+    ).toEqual([]);
+  });
+
+  it('should not retire a set that was already completed', () => {
+    expect(
+      select({
+        records: { first: { startedAt: 0, completedAt: 5, steps: {} } },
+        counts: { plays: 400 },
+      }).retiring,
+    ).toEqual([]);
+  });
+
   it('should not report a set that never started', () => {
     expect(select({ counts: { plays: 400 } }).retiring).toEqual([]);
   });
@@ -141,10 +162,22 @@ describe('util: selectActiveSet', () => {
         },
       },
       counts: { plays: 400 },
+      openedSetIds: new Set(['first']),
     });
 
     expect(selection.retiring).toEqual([]);
     expect(selection.active?.set.id).toBe('first');
+  });
+
+  it('should skip a set that is already done when it first shows', () => {
+    expect(select({ counts: { plays: 1 } }).active?.set.id).toBe('second');
+  });
+
+  it('should keep a set on screen when its last step lands after it opened', () => {
+    expect(
+      select({ counts: { plays: 1 }, openedSetIds: new Set(['first']) }).active
+        ?.set.id,
+    ).toBe('first');
   });
 
   it('should show retired and ineligible sets to directors', () => {
@@ -154,7 +187,15 @@ describe('util: selectActiveSet', () => {
           buildOnboardingSet({
             id: 'only',
             eligibleWhen: () => false,
-            steps: [{ id: 'account' }],
+            steps: [
+              {
+                id: 'follow',
+                completesWith: {
+                  signal: 'following',
+                  mutations: ['user:follow'],
+                },
+              },
+            ],
           }),
         ],
         bypassesEligibility: true,

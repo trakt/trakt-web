@@ -5,7 +5,6 @@ import type { OnboardingSet } from '$lib/features/onboarding/models/OnboardingSe
 import type { OnboardingSetProgress } from '$lib/features/onboarding/models/OnboardingSetProgress.ts';
 import type { OnboardingSetRecord } from '$lib/features/onboarding/models/OnboardingSetRecord.ts';
 import type { OnboardingSignalCounts } from '$lib/features/onboarding/models/OnboardingSignalCounts.ts';
-import { isSetFolded } from './isSetFolded.ts';
 import { resolveSet } from './resolveSet.ts';
 
 type OnboardingRecords = Readonly<
@@ -18,7 +17,7 @@ type SelectActiveSetParams = {
   counts: OnboardingSignalCounts;
   user: UserSettings;
   now: number;
-  loadedAt: number;
+  openedSetIds: ReadonlySet<string>;
   dismissedSetId: string | null;
   bypassesEligibility: boolean;
 };
@@ -78,7 +77,7 @@ export function selectActiveSet({
   counts,
   user,
   now,
-  loadedAt,
+  openedSetIds,
   dismissedSetId,
   bypassesEligibility,
 }: SelectActiveSetParams): OnboardingSelection {
@@ -93,14 +92,21 @@ export function selectActiveSet({
       startedAt: record?.startedAt,
       now,
     });
-    const isHidden =
-      isSetFolded({ record, loadedAt }) || dismissedSetId === set.id;
+    const progress = resolveSet({ set, record, counts });
+    const isDoneBeforeOpening =
+      (progress.isClosed || isClosed(record)) && !openedSetIds.has(set.id);
+    const isHidden = isDoneBeforeOpening || dismissedSetId === set.id;
     const isShown =
       !isHidden && (bypassesEligibility || (isEligible && !isRetired));
 
     return {
-      progress: resolveSet({ set, record, counts }),
-      isRetiring: hitsRetireRule && record != null && record.retiredAt == null,
+      progress,
+      isRetiring:
+        !bypassesEligibility &&
+        hitsRetireRule &&
+        record != null &&
+        record.completedAt == null &&
+        record.retiredAt == null,
       isShown,
       isSettled: !isShown || isClosed(record),
     };

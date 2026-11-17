@@ -16,6 +16,18 @@ function withStep(
   return { ...record, steps: { ...record.steps, [stepId]: step } };
 }
 
+function toAccountSteps(
+  stepIds: ReadonlyArray<string>,
+  now: number,
+): Record<string, OnboardingStepRecord> {
+  return Object.fromEntries(
+    stepIds.map((stepId) => [
+      stepId,
+      { status: 'done', at: now, source: 'account' } as const,
+    ]),
+  );
+}
+
 function applyToRecord({
   record,
   change,
@@ -64,9 +76,8 @@ export function applyRecordChange({
   change,
   now,
 }: ApplyRecordChangeParams): OnboardingSetRecord | null {
-  if (!record) {
-    return change.type === 'start' ? { startedAt: now, steps: {} } : null;
-  }
+  if (record) return applyToRecord({ record, change, now });
+  if (change.type !== 'start') return null;
 
-  return applyToRecord({ record, change, now });
+  return { startedAt: now, steps: toAccountSteps(change.stepIds, now) };
 }

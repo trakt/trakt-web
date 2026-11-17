@@ -14,21 +14,23 @@ export function toAccountWrites({
   const { set, record, steps, isClosed } = active;
   const setId = set.id;
 
-  const start = record ? [] : [{ setId, change: { type: 'start' as const } }];
-
-  const landed = steps
+  const landedIds = steps
     .filter(
       ({ step, status }) =>
         status === 'done' && record?.steps[step.id]?.status !== 'done',
     )
-    .map(({ step }) => ({
-      setId,
-      change: {
-        type: 'done' as const,
-        stepId: step.id,
-        source: 'account' as const,
-      },
-    }));
+    .map(({ step }) => step.id);
+
+  const start = record
+    ? []
+    : [{ setId, change: { type: 'start' as const, stepIds: landedIds } }];
+
+  const landed = record
+    ? landedIds.map((stepId) => ({
+        setId,
+        change: { type: 'done' as const, stepId, source: 'account' as const },
+      }))
+    : [];
 
   const complete =
     isClosed && record?.completedAt == null

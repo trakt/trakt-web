@@ -8,15 +8,32 @@ const STARTED: OnboardingSetRecord = { startedAt: 100, steps: {} };
 describe('util: applyRecordChange', () => {
   it('should start a set that has no record yet', () => {
     expect(
-      applyRecordChange({ record: null, change: { type: 'start' }, now: NOW }),
+      applyRecordChange({
+        record: null,
+        change: { type: 'start', stepIds: [] },
+        now: NOW,
+      }),
     ).toEqual({ startedAt: NOW, steps: {} });
+  });
+
+  it('should store the steps the account already did when it starts', () => {
+    expect(
+      applyRecordChange({
+        record: null,
+        change: { type: 'start', stepIds: ['account'] },
+        now: NOW,
+      }),
+    ).toEqual({
+      startedAt: NOW,
+      steps: { account: { status: 'done', at: NOW, source: 'account' } },
+    });
   });
 
   it('should never restart a set', () => {
     expect(
       applyRecordChange({
         record: STARTED,
-        change: { type: 'start' },
+        change: { type: 'start', stepIds: [] },
         now: NOW,
       }),
     ).toBeNull();
