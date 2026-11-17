@@ -8248,6 +8248,38 @@
       "default": "First 2 Years",
       "description": "Short tag indicating that the offer price applies to the first 2 years."
     },
+    "tag_text_deal_price_first_month": {
+      "default": "First Month",
+      "description": "Short tag on the monthly VIP plan card indicating that the offer price applies to the first month only."
+    },
+    "tag_text_deal_price_first_year": {
+      "default": "First Year",
+      "description": "Short tag on the yearly VIP plan card indicating that the offer price applies to the first year only."
+    },
+    "text_vip_billed_deal_first_month": {
+      "default": "{price} for your first month, then {renewalPrice} monthly",
+      "description": "Billing line on the monthly VIP plan card when a first-term deal is applied. {price} is the discounted price for the first month, {renewalPrice} the full monthly price after that.",
+      "variables": {
+        "price": {
+          "type": "string"
+        },
+        "renewalPrice": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_billed_deal_first_year": {
+      "default": "{price} for your first year, then {renewalPrice} yearly",
+      "description": "Billing line on the yearly VIP plan card when a first-term deal is applied. {price} is the discounted total for the first year, {renewalPrice} the full yearly price after that.",
+      "variables": {
+        "price": {
+          "type": "string"
+        },
+        "renewalPrice": {
+          "type": "string"
+        }
+      }
+    },
     "text_vip_billed_deal_first_term": {
       "default": "{price} for your first 2 years, then {renewalPrice} every 2 years",
       "description": "Billing line on the 2 year plan card when a first-term deal is applied. {price} is the discounted total for the first 2 year term.",
