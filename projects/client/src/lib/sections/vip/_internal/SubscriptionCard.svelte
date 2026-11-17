@@ -6,7 +6,7 @@
   import SubscriptionTag from "./SubscriptionTag.svelte";
   import UpgradeButton from "./UpgradeButton.svelte";
   import VipMonthlyPrice from "./VipMonthlyPrice.svelte";
-  import { isTwoYearDealPlan } from "./utils/isTwoYearDealPlan";
+  import { isFirstTermDealPlan } from "./utils/isFirstTermDealPlan";
   import { toVipPriceLabel } from "./utils/toVipPriceLabel";
 
   const {
@@ -19,14 +19,33 @@
     plan.discount ? plan.discount.discountedAmountMonthly : plan.monthlyPrice,
   );
 
-  const dealPlan = $derived(isTwoYearDealPlan(plan) ? plan : null);
+  const dealPlan = $derived(isFirstTermDealPlan(plan) ? plan : null);
+
+  const dealTag = $derived.by(() => {
+    switch (plan.type) {
+      case "monthly":
+        return m.tag_text_deal_price_first_month();
+      case "yearly":
+        return m.tag_text_deal_price_first_year();
+      case "two_years":
+        return m.tag_text_deal_price();
+    }
+  });
 
   const billedText = $derived.by(() => {
     if (dealPlan) {
-      return m.text_vip_billed_deal_first_term({
+      const prices = {
         price: toVipPriceLabel(dealPlan.discount.discountedAmount),
         renewalPrice: toVipPriceLabel(dealPlan.totalPrice),
-      });
+      };
+      switch (dealPlan.type) {
+        case "monthly":
+          return m.text_vip_billed_deal_first_month(prices);
+        case "yearly":
+          return m.text_vip_billed_deal_first_year(prices);
+        case "two_years":
+          return m.text_vip_billed_deal_first_term(prices);
+      }
     }
 
     const price = toVipPriceLabel(
@@ -54,9 +73,7 @@
   {/if}
 
   {#if dealPlan}
-    <SubscriptionTag variant="highlight"
-      >{m.tag_text_deal_price()}</SubscriptionTag
-    >
+    <SubscriptionTag variant="highlight">{dealTag}</SubscriptionTag>
   {:else if plan.type === "two_years"}
     <SubscriptionTag variant="highlight"
       >{m.tag_text_vip_best_value()}</SubscriptionTag
