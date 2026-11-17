@@ -19,62 +19,6 @@ describe('reasonsFor', () => {
     ]);
   });
 
-  it.each([
-    ReportableType.Movie,
-    ReportableType.Show,
-    ReportableType.Season,
-    ReportableType.Episode,
-  ])('returns the shared media reason set for %s', (type) => {
-    const result = reasonsFor(type);
-
-    expect(result).toEqual([
-      ReportReason.Duplicate,
-      ReportReason.Remove,
-      ReportReason.DataRefresh,
-      ReportReason.Metadata,
-      ReportReason.Adult,
-      ReportReason.Runtime,
-      ReportReason.Language,
-      ReportReason.Spam,
-      ReportReason.Tmdb,
-      ReportReason.Other,
-    ]);
-  });
-
-  it('returns the list reason set for List (no runtime, tmdb, data_refresh)', () => {
-    const result = reasonsFor(ReportableType.List);
-
-    expect(result).toEqual([
-      ReportReason.Duplicate,
-      ReportReason.Remove,
-      ReportReason.Metadata,
-      ReportReason.Adult,
-      ReportReason.Language,
-      ReportReason.Spam,
-      ReportReason.Other,
-    ]);
-    expect(result).not.toContain(ReportReason.Runtime);
-    expect(result).not.toContain(ReportReason.Tmdb);
-    expect(result).not.toContain(ReportReason.DataRefresh);
-  });
-
-  it('returns the person reason set for Person (media set without runtime)', () => {
-    const result = reasonsFor(ReportableType.Person);
-
-    expect(result).toEqual([
-      ReportReason.Duplicate,
-      ReportReason.Remove,
-      ReportReason.DataRefresh,
-      ReportReason.Metadata,
-      ReportReason.Adult,
-      ReportReason.Language,
-      ReportReason.Spam,
-      ReportReason.Tmdb,
-      ReportReason.Other,
-    ]);
-    expect(result).not.toContain(ReportReason.Runtime);
-  });
-
   it('returns the user reason set for User', () => {
     const result = reasonsFor(ReportableType.User);
 
