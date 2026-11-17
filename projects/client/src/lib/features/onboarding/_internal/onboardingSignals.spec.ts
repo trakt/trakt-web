@@ -1,4 +1,4 @@
-import { firstValueFrom, lastValueFrom, of } from 'rxjs';
+import { firstValueFrom, lastValueFrom, of, toArray } from 'rxjs';
 import { describe, expect, it, vi } from 'vitest';
 import { onboardingSignals } from './onboardingSignals.ts';
 
@@ -55,15 +55,23 @@ describe('onboardingSignals', () => {
     expect(await firstValueFrom(onboardingSignals.ratings())).toBe(3);
   });
 
-  it('should count nothing for a missing account', async () => {
+  it('should not count anything until the data has loaded', async () => {
     withUser({});
 
     const counts = await Promise.all(
       Object.values(onboardingSignals).map((source) =>
-        firstValueFrom(source()),
+        lastValueFrom(source().pipe(toArray())),
       ),
     );
 
-    expect(counts).toEqual([0, 0, 0, 0]);
+    expect(counts).toEqual([[], [], [], []]);
+  });
+
+  it('should count once the data has loaded', async () => {
+    withUser({
+      network: of(undefined, { following: [{}, {}] }),
+    });
+
+    expect(await firstValueFrom(onboardingSignals.following())).toBe(2);
   });
 });

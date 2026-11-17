@@ -3,7 +3,7 @@ import type { UserRatings } from '$lib/features/auth/queries/currentUserRatingsQ
 import type { UserWatchlist } from '$lib/features/auth/queries/currentUserWatchlistQuery.ts';
 import type { UserHistory } from '$lib/features/auth/stores/useCurrentUserHistory.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { map, type Observable, scan } from 'rxjs';
+import { filter, map, type Observable, scan } from 'rxjs';
 import type { OnboardingSignalSource } from '$lib/features/onboarding/models/OnboardingSignalSource.ts';
 
 type UserStreams = ReturnType<typeof useUser>;
@@ -12,7 +12,11 @@ function fromUser<T>(
   pick: (user: UserStreams) => Observable<T>,
   count: (value: T) => number,
 ): OnboardingSignalSource {
-  return () => pick(useUser()).pipe(map(count));
+  return () =>
+    pick(useUser()).pipe(
+      filter((value) => value != null),
+      map(count),
+    );
 }
 
 function sum(values: ReadonlyArray<number>): number {
