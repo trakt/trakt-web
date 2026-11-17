@@ -2,6 +2,7 @@ import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { useQueryClient } from '$lib/features/query/_internal/queryClientContext.ts';
+import { IS_DEV } from '$lib/utils/env/index.ts';
 import {
   asapScheduler,
   BehaviorSubject,
@@ -13,7 +14,7 @@ import {
   merge,
   type Observable,
   observeOn,
-  share,
+  shareReplay,
   tap,
   withLatestFrom,
 } from 'rxjs';
@@ -42,6 +43,7 @@ function countSkipped(record: OnboardingSetRecord): number {
 export function useOnboarding() {
   const { user } = useUser();
   const progress = useOnboardingProgress();
+  const trackStart = useTrack(AnalyticsEvent.GettingStartedStart).track;
   const trackOpen = useTrack(AnalyticsEvent.GettingStartedOpen).track;
   const trackTrack = useTrack(AnalyticsEvent.GettingStartedTrack).track;
   const trackUntrack = useTrack(AnalyticsEvent.GettingStartedUntrack).track;
@@ -49,7 +51,6 @@ export function useOnboarding() {
   const trackStep = useTrack(AnalyticsEvent.GettingStartedStep).track;
   const trackComplete = useTrack(AnalyticsEvent.GettingStartedComplete).track;
   const trackRetire = useTrack(AnalyticsEvent.GettingStartedRetire).track;
-  const loadedAt = Date.now();
   const shown = new BehaviorSubject<OnboardingSetProgress | null>(null);
 
   const report = (
@@ -57,6 +58,9 @@ export function useOnboarding() {
     change: OnboardingRecordChange,
     record: OnboardingSetRecord,
   ) => {
+    if (change.type === 'start') {
+      trackStart({ set: setId, done: change.stepIds.length });
+    }
     if (change.type === 'done') {
       trackStep({ set: setId, step: change.stepId, source: change.source });
     }
@@ -121,20 +125,21 @@ export function useOnboarding() {
     counts,
     user,
     onboardingUiStore.dismissedSetId,
+    onboardingUiStore.openedSetIds,
   ]).pipe(
-    map(([records, $counts, $user, $dismissedSetId]) =>
+    map(([records, $counts, $user, $dismissedSetId, $openedSetIds]) =>
       selectActiveSet({
         catalog: onboardingCatalog,
         records,
         counts: $counts,
         user: $user,
         now: Date.now(),
-        loadedAt,
+        openedSetIds: $openedSetIds,
         dismissedSetId: $dismissedSetId,
-        bypassesEligibility: $user.isDirector,
+        bypassesEligibility: $user.isDirector || IS_DEV,
       }),
     ),
-    share(),
+    shareReplay({ bufferSize: 1, refCount: true }),
   );
 
   const accountWrites = selection.pipe(
@@ -161,11 +166,25 @@ export function useOnboarding() {
       map(({ active: current }) =>
         current ? toActiveOnboarding({ progress: current, actions }) : null,
       ),
-      tap((current) => shown.next(current?.progress ?? null)),
+      tap((current) => {
+        shown.next(current?.progress ?? null);
+        if (current && !current.progress.isClosed) {
+          onboardingUiStore.markOpened(current.progress.set.id);
+        }
+      }),
     ),
     accountWrites,
     replays,
   );
+
+  const closeDrawer = () => {
+    const current = shown.value;
+    if (current?.isClosed && !current.isEarned) {
+      onboardingUiStore.dismiss(current.set.id);
+      return;
+    }
+    onboardingUiStore.close();
+  };
 
   const openDrawer = () => {
     const current = shown.value;
@@ -183,7 +202,7 @@ export function useOnboarding() {
     active,
     isDrawerOpen: onboardingUiStore.isOpen,
     openDrawer,
-    closeDrawer: onboardingUiStore.close,
+    closeDrawer,
     trackerGlyph: onboardingUiStore.trackerGlyph,
     setTrackerGlyph: onboardingUiStore.setTrackerGlyph,
   };

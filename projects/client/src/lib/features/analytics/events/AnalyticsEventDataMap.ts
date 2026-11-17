@@ -109,6 +109,7 @@ type RecommendationWhyType = { reason: 'people' | 'titles' | 'empty' };
 type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
 type LinkType = SourceType & { target: string };
 type BannerDismissType = { id: string; value: string };
+type GettingStartedStartType = { set: string; done: number };
 type GettingStartedOpenType = { set: string; done: number; total: number };
 type GettingStartedTrackType = { set: string; step: string };
 type GettingStartedSkipType = {
@@ -290,6 +291,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.SeasonalFilter]: SeasonalFilterType;
 
   [AnalyticsEvent.BannerDismiss]: BannerDismissType;
+  [AnalyticsEvent.GettingStartedStart]: GettingStartedStartType;
   [AnalyticsEvent.GettingStartedOpen]: GettingStartedOpenType;
   [AnalyticsEvent.GettingStartedTrack]: GettingStartedTrackType;
   [AnalyticsEvent.GettingStartedUntrack]: GettingStartedTrackType;

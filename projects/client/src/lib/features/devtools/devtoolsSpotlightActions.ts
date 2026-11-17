@@ -1,5 +1,5 @@
-import { replayOnboarding } from '$lib/features/onboarding/replayOnboarding.ts';
 import type { SpotlightAction } from '$lib/features/spotlight/models/SpotlightAction.ts';
+import { devtoolsEntries } from './_internal/devtoolsEntries.ts';
 import { devtoolsStore } from './devtoolsStore.ts';
 import { DEVTOOLS_TITLE } from './devtoolsTitle.ts';
 
@@ -10,16 +10,10 @@ export const devtoolsSpotlightActions: ReadonlyArray<SpotlightAction> = [
     keywords: ['devtools', 'dev tools', 'debug', 'tooling'],
     run: devtoolsStore.openDrawer,
   },
-  {
-    id: 'devtools-query',
-    label: () => 'TanStack Query devtools',
-    keywords: ['query', 'queries', 'cache', 'tanstack', 'mutations'],
-    run: () => devtoolsStore.openTool('query'),
-  },
-  {
-    id: 'devtools-onboarding-replay',
-    label: () => 'Replay getting started',
-    keywords: ['onboarding', 'getting started', 'replay', 'first steps'],
-    run: replayOnboarding,
-  },
+  ...devtoolsEntries.map(({ id, title, keywords, run }) => ({
+    id,
+    label: () => title,
+    keywords,
+    run,
+  })),
 ];

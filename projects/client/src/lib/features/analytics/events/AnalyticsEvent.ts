@@ -85,6 +85,7 @@ export const AnalyticsEvent = {
   SeasonalFilter: buildEventKey(SEASONAL_ACTION_PREFIX, 'filter'),
 
   BannerDismiss: buildEventKey(BANNER_ACTION_PREFIX, 'dismiss'),
+  GettingStartedStart: buildEventKey(GETTING_STARTED_PREFIX, 'start'),
   GettingStartedOpen: buildEventKey(GETTING_STARTED_PREFIX, 'open'),
   GettingStartedTrack: buildEventKey(GETTING_STARTED_PREFIX, 'track'),
   GettingStartedUntrack: buildEventKey(GETTING_STARTED_PREFIX, 'untrack'),

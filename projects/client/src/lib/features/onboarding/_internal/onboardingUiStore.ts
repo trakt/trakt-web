@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 const isOpen$ = new BehaviorSubject(false);
 const trackerGlyph$ = new BehaviorSubject<Element | null>(null);
 const dismissedSetId$ = new BehaviorSubject<string | null>(null);
+const openedSetIds$ = new BehaviorSubject<ReadonlySet<string>>(new Set());
 
 export const onboardingUiStore = {
   isOpen: isOpen$.asObservable(),
@@ -14,5 +15,10 @@ export const onboardingUiStore = {
   dismiss: (setId: string) => {
     isOpen$.next(false);
     dismissedSetId$.next(setId);
+  },
+  openedSetIds: openedSetIds$.asObservable(),
+  markOpened: (setId: string) => {
+    if (openedSetIds$.value.has(setId)) return;
+    openedSetIds$.next(new Set([...openedSetIds$.value, setId]));
   },
 };
