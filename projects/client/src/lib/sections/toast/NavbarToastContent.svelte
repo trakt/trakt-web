@@ -27,7 +27,11 @@
       nowPlaying.next(val),
     );
 
-    const unsubscribeLastWatched = combineLatest([lastWatchedItem, pinned, isTrackerVisible])
+    const unsubscribeLastWatched = combineLatest([
+      lastWatchedItem,
+      pinned,
+      isTrackerVisible,
+    ])
       .pipe(
         map(([candidate, held, trackerVisible]) =>
           trackerVisible ? null : (held ?? candidate),
