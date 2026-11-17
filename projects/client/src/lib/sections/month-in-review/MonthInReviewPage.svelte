@@ -208,6 +208,7 @@
           {month}
           periodName={monthName}
           canSeeOwn={Boolean($user?.slug)}
+          isPrivateProfile={$profile.private}
         />
       {/if}
 

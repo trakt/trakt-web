@@ -10,12 +10,14 @@
     month,
     periodName,
     canSeeOwn,
+    isPrivateProfile = false,
   }: {
     name: string;
     year: number;
     month?: number;
     periodName: string;
     canSeeOwn: boolean;
+    isPrivateProfile?: boolean;
   } = $props();
 
   const ownHref = $derived(
@@ -28,11 +30,13 @@
 <div class="trakt-month-review-private">
   <span class="icon" aria-hidden="true"><LockIcon /></span>
   <h2>{m.month_review_private_title({ name, month: periodName })}</h2>
-  <p>
-    {month === undefined
-      ? m.year_review_private_body()
-      : m.month_review_private_body()}
-  </p>
+  {#if !isPrivateProfile}
+    <p>
+      {month === undefined
+        ? m.year_review_private_body()
+        : m.month_review_private_body()}
+    </p>
+  {/if}
   {#if canSeeOwn}
     <Button
       href={ownHref}
