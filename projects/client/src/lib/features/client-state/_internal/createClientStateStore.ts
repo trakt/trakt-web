@@ -21,7 +21,7 @@ import { toLocalStorageKey } from './toLocalStorageKey.ts';
 
 const UPLOAD_DEBOUNCE = time.seconds(1);
 
-export type SaveClientState = (params: {
+type SaveClientState = (params: {
   key: string;
   value: unknown;
   method: 'PUT' | 'PATCH';
@@ -62,6 +62,7 @@ export function createClientStateStore<T>({
   const value = new BehaviorSubject<T>(empty);
   const session = new BehaviorSubject<Session>({ userId: 0, isSynced: false });
   const uploads = new Subject<PendingUpload<T>>();
+  const isSettled = new BehaviorSubject(false);
   let isLoaded = false;
   let hasUnsavedChanges = false;
   let serverValue: T = empty;
@@ -145,6 +146,7 @@ export function createClientStateStore<T>({
       .subscribe(({ userId: $userId, remote: $remote }) => {
         if ($remote.status === 'unreadable') {
           session.next({ userId: $userId, isSynced: true });
+          isSettled.next(true);
           return;
         }
 
@@ -159,11 +161,16 @@ export function createClientStateStore<T>({
 
         commit($userId, reconciled.value);
         session.next({ userId: $userId, isSynced: true });
+        isSettled.next(true);
 
         if (reconciled.shouldUpload || !isSameState(pruned, serverValue)) {
           uploads.next({ userId: $userId, value: reconciled.value });
         }
       });
+
+    remote
+      .pipe(filter(($remote) => $remote === null))
+      .subscribe(() => isSettled.next(true));
   }
 
   const update = (change: (current: T) => T) => {
@@ -178,7 +185,13 @@ export function createClientStateStore<T>({
   };
 
   return {
-    value: value.pipe(filter(() => isLoaded)),
+    value: combineLatest([
+      value,
+      isSettled.pipe(distinctUntilChanged()),
+    ]).pipe(
+      filter(([, $isSettled]) => $isSettled && isLoaded),
+      map(([$value]) => $value),
+    ),
     current: () => value.value,
     update,
   };

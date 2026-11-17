@@ -201,6 +201,26 @@ describe('createClientStateStore', () => {
     expect(save).toHaveBeenCalledTimes(1);
   });
 
+  it('should hold the value until the remote state has settled', () => {
+    localStorage.clear();
+    const remote$ = new BehaviorSubject<ClientState | Nil>(undefined);
+    const store = createClientStateStore({
+      definition,
+      userId: new BehaviorSubject(42),
+      remote: remote$,
+      save: vi.fn(() => Promise.resolve(true)),
+      storage: localStorage,
+    });
+    const values: unknown[] = [];
+    store.value.subscribe((value) => values.push(value));
+
+    expect(values).to.deep.equal([]);
+
+    remote$.next({ test_state: { yir: '2026' } });
+
+    expect(values).to.deep.equal([{ yir: '2026' }]);
+  });
+
   it('should never save for guests', () => {
     const { store, save } = setup({ userId: 0, remote: {} });
 

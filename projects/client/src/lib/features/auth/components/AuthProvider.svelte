@@ -65,10 +65,10 @@
       isResolved: hasLiveSession,
     }),
   );
-  const { user, clientState } = useUser();
+  const { user } = useUser();
   provideClientState();
 </script>
 
-{#if !$isInitializing && $user != null && $clientState !== undefined}
+{#if !$isInitializing && $user != null}
   {@render children()}
 {/if}
