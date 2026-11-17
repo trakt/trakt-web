@@ -3,6 +3,8 @@ import type {
   CrewMember,
   MediaCrew,
 } from '$lib/requests/models/MediaCrew.ts';
+import type { PortraitOf } from '$lib/requests/models/PortraitOf.ts';
+import { toMediaImageUrl } from '$lib/utils/url/toMediaImageUrl.ts';
 import type { CastResponse, CrewResponse, PeopleResponse } from '@trakt/api';
 import { mapToHeadshot } from './mapToHeadshot.ts';
 
@@ -35,28 +37,58 @@ function toCrewMember(crewResponse: CrewResponse): CrewMember {
   };
 }
 
-function toCastMember(castResponse: CastResponse): CastMember {
-  const characters = castResponse.characters ?? [];
+function toPortrait(
+  { media, id }: PortraitOf,
+  personId: number,
+): CastMember['headshot'] {
+  const toUrl = (size: 'thumb' | 'medium') =>
+    toMediaImageUrl({
+      type: 'portraits',
+      id: `${media}-${id}-${personId}`,
+      slot: 'portrait',
+      size,
+    });
 
-  return {
-    ...toMember(castResponse),
-    characterName: castResponse.character ?? characters.at(0) ?? '',
-    ...(characters.length > 1 ? { characters } : {}),
-    headshot: mapToHeadshot({
-      id: castResponse.person.ids.trakt,
-      images: castResponse.person.images,
-    }),
+  return { url: { medium: toUrl('medium'), thumb: toUrl('thumb') } };
+}
+
+function toCastHeadshot(
+  castResponse: CastResponse,
+  portraitOf: PortraitOf | Nil,
+): CastMember['headshot'] {
+  const personId = castResponse.person.ids.trakt;
+
+  if (portraitOf) {
+    return toPortrait(portraitOf, personId);
+  }
+
+  return mapToHeadshot({ id: personId, images: castResponse.person.images });
+}
+
+function toCastMember(portraitOf: PortraitOf | Nil) {
+  return (castResponse: CastResponse): CastMember => {
+    const characters = castResponse.characters ?? [];
+
+    return {
+      ...toMember(castResponse),
+      characterName: castResponse.character ?? characters.at(0) ?? '',
+      ...(characters.length > 1 ? { characters } : {}),
+      headshot: toCastHeadshot(castResponse, portraitOf),
+    };
   };
 }
 
 export function mapToMediaCrew(
   response: PeopleResponseWithGuestStars,
+  portraitOf?: PortraitOf | Nil,
 ): MediaCrew {
+  const toCast = toCastMember(portraitOf);
+
   return {
     directors: (response.crew?.directing ?? []).map(toCrewMember),
     writers: (response.crew?.writing ?? []).map(toCrewMember),
     creators: (response.crew?.['created by'] ?? []).map(toCrewMember),
-    cast: (response.cast ?? []).map(toCastMember),
-    guestStars: (response.guest_stars ?? []).map(toCastMember),
+    cast: (response.cast ?? []).map(toCast),
+    guestStars: (response.guest_stars ?? []).map(toCast),
   };
 }

@@ -1,3 +1,5 @@
+import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
+import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { EMPTY_CREW } from '$lib/requests/_internal/mapToMediaCrew.ts';
@@ -29,9 +31,14 @@ export function useEpisode(params$: Observable<UseEpisodeParams>) {
     params$.pipe(map((p) => showSummaryQuery({ slug: p.slug }))),
   );
   const seasons = useQuery(params$.pipe(map((p) => showSeasonsQuery(p))));
+  const isPortraitsEnabled = useFeatureFlag().isEnabled(
+    FeatureFlag.CharacterPortraits,
+  );
   const crew = useQuery(
-    params$.pipe(
-      map((params) => episodePeopleQuery({ ...params, guestStars: true })),
+    combineLatest([params$, isPortraitsEnabled]).pipe(
+      map(([params, portraits]) =>
+        episodePeopleQuery({ ...params, guestStars: true, portraits }),
+      ),
     ),
   );
 

@@ -17,4 +17,21 @@ describe('moviePeopleQuery', () => {
 
     expect(result).to.deep.equal(MovieHereticPeopleMappedMock);
   });
+
+  it('should build movie portraits for the cast when the flag is on', async () => {
+    const result = await runQuery({
+      factory: () =>
+        createTestBedQuery(
+          moviePeopleQuery({
+            slug: MovieHereticMappedMock.slug,
+            portraits: true,
+          }),
+        ),
+      waitFor: (response) => response.isSuccess,
+    });
+
+    expect(result.data?.cast.at(0)?.headshot.url.thumb).toContain(
+      `/portraits/movie-${MovieHereticMappedMock.id}-`,
+    );
+  });
 });

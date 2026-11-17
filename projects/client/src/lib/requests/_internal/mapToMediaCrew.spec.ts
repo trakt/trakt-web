@@ -56,4 +56,79 @@ describe('mapToMediaCrew', () => {
       },
     ]);
   });
+
+  describe('character portraits', () => {
+    const response = {
+      cast: [
+        {
+          character: 'Juliette Nichols',
+          person: {
+            name: 'Rebecca Ferguson',
+            ids: { trakt: 447271, slug: 'rebecca-ferguson' },
+          },
+        },
+      ],
+      guest_stars: [
+        {
+          character: 'Guest Role',
+          person: {
+            name: 'Guest Actor',
+            ids: { trakt: 9, slug: 'guest-actor' },
+          },
+        },
+      ],
+      crew: {
+        directing: [
+          {
+            jobs: ['Director'],
+            person: {
+              name: 'Director One',
+              ids: { trakt: 7, slug: 'director-one' },
+            },
+          },
+        ],
+      },
+    } as unknown as PeopleResponse;
+
+    const portrait = (id: string) => ({
+      url: {
+        medium: `https://media.trakt.tv/portraits/${id}/medium/portrait.webp`,
+        thumb: `https://media.trakt.tv/portraits/${id}/thumb/portrait.webp`,
+      },
+    });
+
+    const headshot = (id: number) => ({
+      url: {
+        medium: `https://media.trakt.tv/people/${id}/medium/headshot.webp`,
+        thumb: `https://media.trakt.tv/people/${id}/thumb/headshot.webp`,
+      },
+    });
+
+    it('should use the show character portrait for the cast', () => {
+      const crew = mapToMediaCrew(response, { media: 'show', id: 1390 });
+
+      expect(crew.cast.at(0)?.headshot).toEqual(portrait('show-1390-447271'));
+      expect(crew.guestStars.at(0)?.headshot).toEqual(portrait('show-1390-9'));
+    });
+
+    it('should use the movie character portrait for the cast', () => {
+      const crew = mapToMediaCrew(response, { media: 'movie', id: 120 });
+
+      expect(crew.cast.at(0)?.headshot).toEqual(portrait('movie-120-447271'));
+    });
+
+    it('should use the person headshot without a portrait target', () => {
+      const crew = mapToMediaCrew(response);
+
+      expect(crew.cast.at(0)?.headshot).toEqual(headshot(447271));
+      expect(JSON.stringify(crew)).not.toContain('/portraits/');
+    });
+
+    it('should keep the crew without a character portrait', () => {
+      const crew = mapToMediaCrew(response, { media: 'show', id: 1390 });
+
+      expect(crew.directors.at(0)).not.toHaveProperty('headshot');
+      expect(JSON.stringify(crew.directors)).not.toContain('/portraits/');
+    });
+  });
 });

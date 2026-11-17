@@ -7,15 +7,18 @@ type MediaImageSlots = {
   networks: 'logo';
   companies: 'logo';
   lists: 'fanart';
+  portraits: 'portrait';
 };
 
 type MediaImageType = keyof MediaImageSlots;
 
 type MediaImageSize = 'thumb' | 'medium' | 'full';
 
+type PortraitId = `${'show' | 'movie'}-${number}-${number}`;
+
 type MediaImageUrlProps<T extends MediaImageType> = {
   type: T;
-  id: number;
+  id: T extends 'portraits' ? PortraitId : number;
   slot: MediaImageSlots[T];
   size: MediaImageSize;
 };

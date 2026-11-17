@@ -1,4 +1,6 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
+import { FeatureFlag } from '$lib/features/feature-flag/models/FeatureFlag.ts';
+import { useFeatureFlag } from '$lib/features/feature-flag/useFeatureFlag.ts';
 import {
   getLanguageAndRegion,
   getLocale,
@@ -36,7 +38,14 @@ export function useShow(slug$: Observable<string>) {
   const studios = useQuery(
     slug$.pipe(map((slug) => showStudiosQuery({ slug }))),
   );
-  const crew = useQuery(slug$.pipe(map((slug) => showPeopleQuery({ slug }))));
+  const isPortraitsEnabled = useFeatureFlag().isEnabled(
+    FeatureFlag.CharacterPortraits,
+  );
+  const crew = useQuery(
+    combineLatest([slug$, isPortraitsEnabled]).pipe(
+      map(([slug, portraits]) => showPeopleQuery({ slug, portraits })),
+    ),
+  );
 
   const streamOnQuery = useQuery(
     combineLatest([slug$, country]).pipe(
