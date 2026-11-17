@@ -16,39 +16,17 @@
       type: "conjunction",
     }).format(items);
 
-  const toRow = (loss: VipCancelLoss): LossRow => {
-    switch (loss.kind) {
-      case "streaming":
-        return {
-          key: loss.kind,
-          title: toList(loss.services),
-          detail: m.text_vip_cancel_loss_streaming(),
-          value:
-            loss.services.length === 1
-              ? m.text_vip_cancel_value_service()
-              : m.text_vip_cancel_value_services({
-                  count: loss.services.length,
-                }),
-        };
-      case "plex-scrobbling":
-        return {
-          key: loss.kind,
-          title: m.header_vip_cancel_loss_plex_scrobbling(),
-          detail: m.text_vip_cancel_loss_plex_scrobbling(),
-          value: m.text_vip_cancel_value_off(),
-        };
-      case "plex-servers":
-        return {
-          key: loss.kind,
-          title: m.header_vip_cancel_loss_plex_servers(),
-          detail: m.text_vip_cancel_loss_plex_servers(),
-          value:
-            loss.count === 1
-              ? m.text_vip_cancel_value_server()
-              : m.text_vip_cancel_value_servers({ count: loss.count }),
-        };
-    }
-  };
+  const toRow = (loss: VipCancelLoss): LossRow => ({
+    key: loss.kind,
+    title: toList(loss.services),
+    detail: m.text_vip_cancel_loss_streaming(),
+    value:
+      loss.services.length === 1
+        ? m.text_vip_cancel_value_service()
+        : m.text_vip_cancel_value_services({
+            count: loss.services.length,
+          }),
+  });
 
   const FEATURES = [
     { key: "reviews", title: () => m.text_vip_cancel_feature_reviews() },

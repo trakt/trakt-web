@@ -73,7 +73,6 @@ const build = (
     limits,
     stats: { plays: 1240, minutes: 131400, ratings: 312 },
     streaming: [],
-    plex: null,
     now: NOW,
     ...overrides,
   });
@@ -121,15 +120,6 @@ describe('util: toVipCancelSummary', () => {
 
     expect(build({ streaming })?.losses).toEqual([
       { kind: 'streaming', services: ['Max', 'Disney+'] },
-    ]);
-  });
-
-  it('should list Plex scrobbling and the extra Plex servers', () => {
-    expect(
-      build({ plex: { scrobbleEvents: 12, syncedServers: 3 } })?.losses,
-    ).toEqual([
-      { kind: 'plex-scrobbling' },
-      { kind: 'plex-servers', count: 2 },
     ]);
   });
 
