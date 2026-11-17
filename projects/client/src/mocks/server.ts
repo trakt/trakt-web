@@ -10,7 +10,6 @@ import { lists } from './handlers/lists.ts';
 import { movies } from './handlers/movies.ts';
 import { people } from './handlers/people.ts';
 import { mediaSync } from './handlers/mediaSync.ts';
-import { plex } from './handlers/plex.ts';
 import { recommendations } from './handlers/recommendations.ts';
 import { search } from './handlers/search.ts';
 import { shows } from './handlers/shows.ts';
@@ -33,7 +32,6 @@ const handlers = [
   ...sync,
   ...people,
   ...mediaSync,
-  ...plex,
   ...watchNow,
   ...recommendations,
   ...calendars,

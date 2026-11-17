@@ -20,7 +20,6 @@ type ToVipCancelSummaryParams = {
   limits: UserLimits | Nil;
   stats: { plays: number; minutes: number; ratings: number } | Nil;
   streaming: ReadonlyArray<StreamingConnection>;
-  plex: { scrobbleEvents: number; syncedServers: number } | Nil;
   now: Date;
 };
 
@@ -69,21 +68,6 @@ const toStreamingLoss = (
   const unlinked = connected.slice(1).map(({ name }) => name);
 
   return unlinked.length > 0 ? { kind: 'streaming', services: unlinked } : null;
-};
-
-const toPlexLosses = (
-  plex: ToVipCancelSummaryParams['plex'],
-): ReadonlyArray<VipCancelLoss> => {
-  if (!plex) return [];
-
-  const scrobbling: ReadonlyArray<VipCancelLoss> =
-    plex.scrobbleEvents > 0 ? [{ kind: 'plex-scrobbling' }] : [];
-  const servers: ReadonlyArray<VipCancelLoss> =
-    plex.syncedServers > 1
-      ? [{ kind: 'plex-servers', count: plex.syncedServers - 1 }]
-      : [];
-
-  return [...scrobbling, ...servers];
 };
 
 const toLibrary = (limits: UserLimits | Nil): ReadonlyArray<VipCancelLimit> => {
@@ -145,10 +129,7 @@ export function toVipCancelSummary(
       hours: Math.round((params.stats?.minutes ?? 0) / MINUTES_PER_HOUR),
       ratings: params.stats?.ratings ?? 0,
     },
-    losses: [
-      ...(streamingLoss ? [streamingLoss] : []),
-      ...toPlexLosses(params.plex),
-    ],
+    losses: streamingLoss ? [streamingLoss] : [],
     library: toLibrary(params.limits),
   };
 }

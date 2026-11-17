@@ -14,7 +14,6 @@ type UserType =
   | 'block';
 type ListType = 'edited' | 'deleted' | 'created' | 'like' | 'collaborator';
 type VipType = 'canceled' | 'updated';
-type PlexType = 'settings' | 'syncs';
 type MediaSyncType = 'connections' | 'runs';
 type RewatchingType = 'show';
 type ShareType = 'click' | 'mute';
@@ -45,7 +44,6 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:hide_recommended:${MediaType}`
   | `${typeof INVALIDATION_ID}:streaming_connection`
   | `${typeof INVALIDATION_ID}:data_sync`
-  | `${typeof INVALIDATION_ID}:plex:${PlexType}`
   | `${typeof INVALIDATION_ID}:media_sync:${MediaSyncType}`
   | `${typeof INVALIDATION_ID}:share:${ShareType}`
   | `${typeof INVALIDATION_ID}:app_revoke`;
@@ -75,7 +73,6 @@ type TypeDataMap = {
   hide_recommended: MediaType;
   streaming_connection: null;
   data_sync: null;
-  plex: PlexType;
   media_sync: MediaSyncType;
   share: ShareType;
   app_revoke: null;
@@ -182,10 +179,6 @@ export const InvalidateAction = {
   StreamingSync: {
     Connection: buildInvalidationKey('streaming_connection'),
     Sync: buildInvalidationKey('data_sync'),
-  },
-
-  Plex: {
-    Settings: buildInvalidationKey('plex', 'settings'),
   },
 
   MediaSync: {

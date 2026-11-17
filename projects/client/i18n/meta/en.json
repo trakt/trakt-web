@@ -14311,22 +14311,6 @@
         }
       }
     },
-    "header_vip_cancel_loss_plex_scrobbling": {
-      "default": "Plex scrobbling",
-      "description": "Title of the Plex scrobbling row on the VIP cancel page."
-    },
-    "text_vip_cancel_loss_plex_scrobbling": {
-      "default": "Plays stop being tracked on their own",
-      "description": "Explains the Plex scrobbling row on the VIP cancel page."
-    },
-    "text_vip_cancel_value_server": {
-      "default": "1 server",
-      "description": "Count of one Plex server on the VIP cancel page."
-    },
-    "text_vip_cancel_value_off": {
-      "default": "Off",
-      "description": "Value meaning a feature turns off on the VIP cancel page."
-    },
     "text_vip_cancel_feature_reviews": {
       "default": "Year in Review and Month in Review",
       "description": "VIP feature listed on the VIP cancel page when the person has nothing personal to lose."
@@ -14499,23 +14483,6 @@
     "text_vip_cancel_tenure_new": {
       "default": "under a month",
       "description": "How long someone has been VIP on the VIP cancel page, used when it is less than one month."
-    },
-    "header_vip_cancel_loss_plex_servers": {
-      "default": "Extra Plex servers",
-      "description": "Title of the row on the VIP cancel page about Plex servers that stop syncing."
-    },
-    "text_vip_cancel_loss_plex_servers": {
-      "default": "Free accounts sync one server",
-      "description": "Explains the extra Plex servers row on the VIP cancel page."
-    },
-    "text_vip_cancel_value_servers": {
-      "default": "{count} servers",
-      "description": "Count of several Plex servers on the VIP cancel page.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
     },
     "text_vip_cancel_claim_failed_title": {
       "default": "Couldn't claim the offer",
