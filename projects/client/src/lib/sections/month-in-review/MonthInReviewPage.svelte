@@ -23,6 +23,7 @@
   import ReviewHero from "./_internal/layout/ReviewHero.svelte";
   import ReviewOutro from "./_internal/layout/ReviewOutro.svelte";
   import PrivateReview from "$lib/sections/review/PrivateReview.svelte";
+  import { trackReviewDrilldown } from "$lib/sections/review/trackReviewDrilldown.ts";
   import ReviewTopBar from "./_internal/layout/ReviewTopBar.svelte";
   import SectionSkeleton from "./_internal/layout/SectionSkeleton.svelte";
   import Stat from "./_internal/layout/Stat.svelte";
@@ -111,6 +112,7 @@
   );
 
   const { track: trackView } = useTrack(AnalyticsEvent.MonthReviewView);
+  const { track: trackDrilldown } = useTrack(AnalyticsEvent.SummaryDrilldown);
   let lastTrackedView: string | undefined;
 
   $effect(() => {
@@ -137,7 +139,11 @@
   );
 </script>
 
-<div class="trakt-month-review" data-sveltekit-preload-code="hover">
+<div
+  class="trakt-month-review"
+  data-sveltekit-preload-code="hover"
+  use:trackReviewDrilldown={{ source: "mir", track: trackDrilldown }}
+>
   <div class="content">
     <ReviewTopBar {slug} {year} {month}>
       {#snippet who()}

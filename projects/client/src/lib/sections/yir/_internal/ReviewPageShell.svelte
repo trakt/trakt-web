@@ -2,7 +2,7 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import type { Snippet } from "svelte";
-  import { trackReviewDrilldown } from "./trackReviewDrilldown.ts";
+  import { trackReviewDrilldown } from "$lib/sections/review/trackReviewDrilldown.ts";
 
   const {
     id,
