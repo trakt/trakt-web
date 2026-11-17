@@ -17,7 +17,13 @@
       const joinsNext = isDone && statuses.at(index + 1) === "done";
       return {
         key: index,
-        tone: isDone ? "done" : index === focusIndex ? "focus" : "rest",
+        tone: isDone
+          ? "done"
+          : status === "skipped"
+            ? "skipped"
+            : index === focusIndex
+              ? "focus"
+              : "rest",
         joinsPrevious,
         joinsNext,
       };
@@ -59,6 +65,10 @@
 
     &[data-tone="focus"] {
       background: color-mix(in srgb, var(--color-accent-purple) 32%, transparent);
+    }
+
+    &[data-tone="skipped"] {
+      background: color-mix(in srgb, var(--color-foreground) 35%, transparent);
     }
 
     &.joins-previous {

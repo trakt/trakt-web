@@ -29,6 +29,21 @@
   );
 </script>
 
+{#snippet skipButton()}
+  <span class="step-skip">
+    <Button
+      label={m.button_label_onboarding_skip({ title: step.title() })}
+      style="ghost"
+      color="default"
+      variant="secondary"
+      size="small"
+      onclick={onSkip}
+    >
+      {m.button_text_onboarding_skip()}
+    </Button>
+  </span>
+{/snippet}
+
 <div class="trakt-onboarding-step" data-mode={mode}>
   <div class="step-row">
     <span class="step-icon">
@@ -48,18 +63,7 @@
     </span>
     <span class="step-side">
       {#if mode === "quiet" && step.skippable}
-        <span class="step-skip">
-          <Button
-            label={m.button_label_onboarding_skip({ title: step.title() })}
-            style="ghost"
-            color="default"
-            variant="secondary"
-            size="small"
-            onclick={onSkip}
-          >
-            {m.button_text_onboarding_skip()}
-          </Button>
-        </span>
+        {@render skipButton()}
       {/if}
       {#if mode === "quiet" && action}
         <Link
@@ -98,18 +102,7 @@
         <ChevronIcon />
       </Link>
       {#if step.skippable}
-        <span class="step-skip">
-          <Button
-            label={m.button_label_onboarding_skip({ title: step.title() })}
-            style="ghost"
-            color="default"
-            variant="secondary"
-            size="small"
-            onclick={onSkip}
-          >
-            {m.button_text_onboarding_skip()}
-          </Button>
-        </span>
+        {@render skipButton()}
       {/if}
     </div>
   {/if}

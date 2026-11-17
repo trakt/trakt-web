@@ -69,9 +69,6 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-onboarding-drawer {
-    --drawer-glass-3: color-mix(in srgb, var(--color-foreground) 3%, transparent);
-    --drawer-glass-8: color-mix(in srgb, var(--color-foreground) 8%, transparent);
-
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -120,6 +117,7 @@
     font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--color-text-primary);
+    animation: onboarding-count-pop 420ms var(--transition-spring-ease);
   }
 
   .count-total {
@@ -136,10 +134,6 @@
     display: flex;
     flex-direction: column;
     margin-top: var(--gap-l);
-  }
-
-  .count-done {
-    animation: onboarding-count-pop 420ms var(--transition-spring-ease);
   }
 
   @keyframes onboarding-count-pop {
