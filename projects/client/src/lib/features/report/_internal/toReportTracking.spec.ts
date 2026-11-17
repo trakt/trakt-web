@@ -5,14 +5,14 @@ import { ReportableType } from '../models/ReportableType.ts';
 import { toReportTracking } from './toReportTracking.ts';
 
 describe('util: toReportTracking', () => {
-  it('should carry the type, reason and outcome without ids or titles', () => {
+  it('should carry the type, reason and outcome without the id', () => {
     expect(
       toReportTracking({
-        params: { type: ReportableType.Movie, id: 1, title: 'Heretic' },
+        params: { type: ReportableType.Comment, id: 1 },
         reason: ReportReason.Duplicate,
         outcome: 'sent',
       }),
-    ).toEqual({ type: 'movie', reason: 'duplicate', outcome: 'sent' });
+    ).toEqual({ type: 'comment', reason: 'duplicate', outcome: 'sent' });
   });
 
   it('should keep the error as the outcome', () => {
