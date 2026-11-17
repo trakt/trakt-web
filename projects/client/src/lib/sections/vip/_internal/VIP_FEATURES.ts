@@ -2,7 +2,6 @@ import * as m from '$lib/features/i18n/messages.ts';
 import ApiIcon from './icons/ApiIcon.svelte';
 import BookmarkIcon from './icons/BookmarkIcon.svelte';
 import ChatIcon from './icons/ChatIcon.svelte';
-import GlobeIcon from './icons/GlobeIcon.svelte';
 import LeaderboardIcon from './icons/LeaderboardIcon.svelte';
 import LibraryIcon from './icons/LibraryIcon.svelte';
 import ListIcon from './icons/ListIcon.svelte';
@@ -17,11 +16,6 @@ export const VIP_FEATURES = [
     title: m.vip_feature_title_recaps,
     description: m.vip_feature_description_recaps,
     icon: RecapsIcon,
-  },
-  {
-    title: m.vip_feature_title_global_wtw,
-    description: m.vip_feature_description_global_wtw,
-    icon: GlobeIcon,
   },
   {
     title: m.vip_feature_title_bigger_watchlist,
