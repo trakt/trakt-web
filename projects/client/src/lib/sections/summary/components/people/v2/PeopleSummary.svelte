@@ -6,9 +6,6 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import ReportButton from "$lib/features/report/ReportButton.svelte";
-  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import ExternalLinkAction from "$lib/sections/summary/components/_internal/ExternalLinkAction.svelte";
   import FilterButton from "$lib/sections/navbar/components/filter/FilterButton.svelte";
@@ -31,16 +28,6 @@
   {#if person.imdb}
     <ImdbLink imdbId={person.imdb} />
   {/if}
-{/snippet}
-
-{#snippet overflowLinks()}
-  {#each overflow as link (link.type)}
-    <ExternalLinkAction
-      {...link}
-      source="person-summary"
-      style="dropdown-item"
-    />
-  {/each}
 {/snippet}
 
 <Summary>
@@ -67,7 +54,7 @@
       <div class="person-side-actions-group">
         <SocialMediaLinks links={inline} />
 
-        <RenderFor audience="authenticated">
+        {#if overflow.length > 0}
           <PopupMenu
             label={m.button_label_popup_menu({ title: person.name })}
             mode="standalone"
@@ -75,32 +62,15 @@
             title={person.name}
           >
             {#snippet items()}
-              {@render overflowLinks()}
-              <ReportButton
-                params={{
-                  type: ReportableType.Person,
-                  id: person.id,
-                  title: person.name,
-                }}
-                label={m.button_label_report_person({ name: person.name })}
-              />
+              {#each overflow as link (link.type)}
+                <ExternalLinkAction
+                  {...link}
+                  source="person-summary"
+                  style="dropdown-item"
+                />
+              {/each}
             {/snippet}
           </PopupMenu>
-        </RenderFor>
-
-        {#if overflow.length > 0}
-          <RenderFor audience="public">
-            <PopupMenu
-              label={m.button_label_popup_menu({ title: person.name })}
-              mode="standalone"
-              size="normal"
-              title={person.name}
-            >
-              {#snippet items()}
-                {@render overflowLinks()}
-              {/snippet}
-            </PopupMenu>
-          </RenderFor>
         {/if}
       </div>
     </div>

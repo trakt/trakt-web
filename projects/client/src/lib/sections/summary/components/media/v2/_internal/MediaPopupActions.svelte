@@ -1,10 +1,5 @@
 <script lang="ts">
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import * as m from "$lib/features/i18n/messages.ts";
-  import ReportButton from "$lib/features/report/ReportButton.svelte";
-  import type { ReportParams } from "$lib/features/report/models/ReportParams.ts";
-  import { ReportableType } from "$lib/features/report/models/ReportableType.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
@@ -39,12 +34,6 @@
   const { buildDrawerLink } = summaryDrawerNavigation();
   const rewatchingDrawerLink = $derived(
     buildDrawerLink(SummaryDrawers.Rewatching),
-  );
-
-  const reportParams = $derived<ReportParams>(
-    media.type === "show"
-      ? { type: ReportableType.Show, id: media.id, title }
-      : { type: ReportableType.Movie, id: media.id, title },
   );
 </script>
 
@@ -105,12 +94,5 @@
     {title}
   />
 {/if}
-
-<RenderFor audience="authenticated">
-  <ReportButton
-    params={reportParams}
-    label={m.button_label_report_media({ title })}
-  />
-</RenderFor>
 
 <ModerateAction />
