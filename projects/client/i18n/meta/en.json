@@ -16613,6 +16613,10 @@
     "button_text_get_app_store_version": {
       "default": "Get the App Store version",
       "description": "Button on the beta VIP-only screen that opens the app's App Store page."
+    },
+    "vip_feature_description_leaderboard": {
+      "default": "See where you rank amongst your friends on the leaderboard!",
+      "description": "Description for the Leaderboard VIP feature."
     }
   }
 }
