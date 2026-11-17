@@ -54,4 +54,30 @@ describe('util: toMediaImageUrl', () => {
       }),
     ).toBe('https://media.trakt.tv/shows/1390/thumb/fanart.webp');
   });
+
+  it('should build a show character portrait url', () => {
+    expect(
+      toMediaImageUrl({
+        type: 'portraits',
+        id: 'show-1390-447271',
+        slot: 'portrait',
+        size: 'thumb',
+      }),
+    ).toBe(
+      'https://media.trakt.tv/portraits/show-1390-447271/thumb/portrait.webp',
+    );
+  });
+
+  it('should build a movie character portrait url', () => {
+    expect(
+      toMediaImageUrl({
+        type: 'portraits',
+        id: 'movie-120-6384',
+        slot: 'portrait',
+        size: 'medium',
+      }),
+    ).toBe(
+      'https://media.trakt.tv/portraits/movie-120-6384/medium/portrait.webp',
+    );
+  });
 });

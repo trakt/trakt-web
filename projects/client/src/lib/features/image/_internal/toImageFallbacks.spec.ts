@@ -30,6 +30,23 @@ describe('toImageFallbacks', () => {
     ]);
   });
 
+  it.each([
+    ['show-1390-447271/thumb', 'people/447271/thumb/headshot.webp'],
+    ['movie-120-6384/medium', 'people/6384/medium/headshot.webp'],
+  ])(
+    'should fall back from the character portrait %s to the person headshot',
+    (portrait, headshot) => {
+      expect(
+        toImageFallbacks(
+          `https://media.trakt.tv/portraits/${portrait}/portrait.webp`,
+        ),
+      ).toEqual([
+        `https://media.trakt.tv/${headshot}`,
+        MEDIA_POSTER_PLACEHOLDER,
+      ]);
+    },
+  );
+
   it('should ignore a version query', () => {
     expect(
       toImageFallbacks('https://media.trakt.tv/movies/1/thumb/poster.webp?v=1'),

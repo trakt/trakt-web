@@ -15899,6 +15899,14 @@
       "default": "Top titles get a poster that tilts with your pointer, with layers that move at different depths and ambient effects such as fog, embers and snow.",
       "description": "Description of the living poster preview feature."
     },
+    "preview_feature_title_character_portraits": {
+      "default": "Character portraits",
+      "description": "Product feature name for the preview feature that shows cast members as their character, in costume, on movie, show, season and episode pages."
+    },
+    "preview_feature_description_character_portraits": {
+      "default": "Cast lists show each actor as their character when we have a portrait of them in the role.",
+      "description": "Description of the character portraits preview feature."
+    },
     "preview_feature_title_awards": {
       "default": "Awards",
       "description": "Product feature name for the preview feature that shows award wins and nominations on movie, show and person pages."
