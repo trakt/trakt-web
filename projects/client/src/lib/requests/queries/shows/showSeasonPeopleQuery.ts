@@ -42,7 +42,10 @@ const showSeasonPeopleRequest = async (params: ShowSeasonPeopleParams) => {
       : null,
   ]);
 
-  return { ...people, portraitOf };
+  return {
+    ...people,
+    portraitOf: portraitOf && { ...portraitOf, season: params.season },
+  };
 };
 
 export const showSeasonPeopleQuery = defineQuery({

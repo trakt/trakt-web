@@ -14,7 +14,9 @@ type MediaImageType = keyof MediaImageSlots;
 
 type MediaImageSize = 'thumb' | 'medium' | 'full';
 
-type PortraitId = `${'show' | 'movie'}-${number}-${number}`;
+type PortraitId =
+  | `${'show' | 'movie'}-${number}-${number}`
+  | `show-${number}-s${number}-${number}`;
 
 type MediaImageUrlProps<T extends MediaImageType> = {
   type: T;

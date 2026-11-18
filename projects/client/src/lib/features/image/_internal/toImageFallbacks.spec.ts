@@ -47,6 +47,32 @@ describe('toImageFallbacks', () => {
     },
   );
 
+  it.each([
+    [
+      'show-1390-s2-447271/thumb',
+      'show-1390-447271/thumb',
+      'people/447271/thumb/headshot.webp',
+    ],
+    [
+      'show-1390-s0-447271/medium',
+      'show-1390-447271/medium',
+      'people/447271/medium/headshot.webp',
+    ],
+  ])(
+    'should fall back from the season portrait %s to the show portrait %s, then the headshot',
+    (portrait, showPortrait, headshot) => {
+      expect(
+        toImageFallbacks(
+          `https://media.trakt.tv/portraits/${portrait}/portrait.webp`,
+        ),
+      ).toEqual([
+        `https://media.trakt.tv/portraits/${showPortrait}/portrait.webp`,
+        `https://media.trakt.tv/${headshot}`,
+        MEDIA_POSTER_PLACEHOLDER,
+      ]);
+    },
+  );
+
   it('should ignore a version query', () => {
     expect(
       toImageFallbacks('https://media.trakt.tv/movies/1/thumb/poster.webp?v=1'),

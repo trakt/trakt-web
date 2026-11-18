@@ -117,6 +117,33 @@ describe('mapToMediaCrew', () => {
       expect(crew.cast.at(0)?.headshot).toEqual(portrait('movie-120-447271'));
     });
 
+    it('should use the season character portrait for the season cast', () => {
+      const crew = mapToMediaCrew(response, {
+        media: 'show',
+        id: 1390,
+        season: 2,
+      });
+
+      expect(crew.cast.at(0)?.headshot).toEqual(
+        portrait('show-1390-s2-447271'),
+      );
+      expect(crew.guestStars.at(0)?.headshot).toEqual(
+        portrait('show-1390-s2-9'),
+      );
+    });
+
+    it('should keep specials (season 0) on the season character portrait', () => {
+      const crew = mapToMediaCrew(response, {
+        media: 'show',
+        id: 1390,
+        season: 0,
+      });
+
+      expect(crew.cast.at(0)?.headshot).toEqual(
+        portrait('show-1390-s0-447271'),
+      );
+    });
+
     it('should use the person headshot without a portrait target', () => {
       const crew = mapToMediaCrew(response);
 

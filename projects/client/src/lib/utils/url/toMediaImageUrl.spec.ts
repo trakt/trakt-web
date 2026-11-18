@@ -80,4 +80,17 @@ describe('util: toMediaImageUrl', () => {
       'https://media.trakt.tv/portraits/movie-120-6384/medium/portrait.webp',
     );
   });
+
+  it('should build a season character portrait url', () => {
+    expect(
+      toMediaImageUrl({
+        type: 'portraits',
+        id: 'show-1390-s2-447271',
+        slot: 'portrait',
+        size: 'medium',
+      }),
+    ).toBe(
+      'https://media.trakt.tv/portraits/show-1390-s2-447271/medium/portrait.webp',
+    );
+  });
 });
