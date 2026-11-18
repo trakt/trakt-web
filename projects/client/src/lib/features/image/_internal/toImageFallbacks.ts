@@ -7,7 +7,9 @@ import {
 import { toMediaImageUrl } from '$lib/utils/url/toMediaImageUrl.ts';
 
 const mediaImagePattern =
-  /^(https:\/\/media\.trakt\.tv\/[a-z]+\/(?:\d+|(?:show|movie)-\d+-(\d+)))\/([a-z]+)\/([a-z]+)\.webp(?:\?.*)?$/;
+  /^(https:\/\/media\.trakt\.tv\/[a-z]+\/(?:\d+|(?:show|movie)-\d+(?:-s\d+)?-(\d+)))\/([a-z]+)\/([a-z]+)\.webp(?:\?.*)?$/;
+
+const seasonSegmentPattern = /-s\d+(?=-\d+$)/;
 
 type MediaImagePath = {
   base: string;
@@ -32,7 +34,11 @@ function toCoverPlaceholder(size: string) {
     : MEDIA_COVER_LARGE_PLACEHOLDER;
 }
 
-function toPortraitFallbacks(size: string, personId: string | undefined) {
+function toPortraitFallbacks(
+  base: string,
+  size: string,
+  personId: string | undefined,
+) {
   if (!personId) {
     return [MEDIA_POSTER_PLACEHOLDER];
   }
@@ -43,8 +49,17 @@ function toPortraitFallbacks(size: string, personId: string | undefined) {
     slot: 'headshot',
     size: size === 'thumb' ? 'thumb' : 'medium',
   });
+  const showPortraitBase = base.replace(seasonSegmentPattern, '');
 
-  return [headshot, MEDIA_POSTER_PLACEHOLDER];
+  if (showPortraitBase === base) {
+    return [headshot, MEDIA_POSTER_PLACEHOLDER];
+  }
+
+  return [
+    `${showPortraitBase}/${size}/portrait.webp`,
+    headshot,
+    MEDIA_POSTER_PLACEHOLDER,
+  ];
 }
 
 function toSlotFallbacks({
@@ -64,7 +79,7 @@ function toSlotFallbacks({
     case 'thumb':
       return [`${base}/thumb/fanart.webp`, MEDIA_COVER_THUMB_PLACEHOLDER];
     case 'portrait':
-      return toPortraitFallbacks(size, personId);
+      return toPortraitFallbacks(base, size, personId);
     default:
       return [];
   }

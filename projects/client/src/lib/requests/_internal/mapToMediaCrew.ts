@@ -38,13 +38,16 @@ function toCrewMember(crewResponse: CrewResponse): CrewMember {
 }
 
 function toPortrait(
-  { media, id }: PortraitOf,
+  { media, id, season }: PortraitOf,
   personId: number,
 ): CastMember['headshot'] {
   const toUrl = (size: 'thumb' | 'medium') =>
     toMediaImageUrl({
       type: 'portraits',
-      id: `${media}-${id}-${personId}`,
+      id:
+        season != null
+          ? `show-${id}-s${season}-${personId}`
+          : `${media}-${id}-${personId}`,
       slot: 'portrait',
       size,
     });

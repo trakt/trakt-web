@@ -57,4 +57,34 @@ describe('showSeasonPeopleQuery', () => {
       showSeasonPeopleQuery({ ...params, guestStars: true }).queryKey,
     );
   });
+
+  describe('character portraits', () => {
+    const params = {
+      slug: ShowSiloResponseMock.ids.slug,
+      season: EpisodeSiloResponseMock.season,
+    };
+
+    it('should not build portraits when the flag is off', async () => {
+      const result = await runQuery({
+        factory: () => createTestBedQuery(showSeasonPeopleQuery(params)),
+        waitFor: (response) => response.isSuccess,
+      });
+
+      expect(JSON.stringify(result.data)).not.toContain('/portraits/');
+    });
+
+    it('should build season portraits for the cast when the flag is on', async () => {
+      const result = await runQuery({
+        factory: () =>
+          createTestBedQuery(
+            showSeasonPeopleQuery({ ...params, portraits: true }),
+          ),
+        waitFor: (response) => response.isSuccess,
+      });
+
+      expect(result.data?.cast.at(0)?.headshot.url.thumb).toContain(
+        `/portraits/show-${ShowSiloResponseMock.ids.trakt}-s${params.season}-`,
+      );
+    });
+  });
 });
