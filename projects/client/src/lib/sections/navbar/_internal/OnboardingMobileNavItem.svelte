@@ -1,14 +1,10 @@
-<script lang="ts" module>
-  const EXIT_MS = 280;
-</script>
-
 <script lang="ts">
   import { toOnboardingLabel } from "$lib/features/onboarding/toOnboardingLabel.ts";
   import OnboardingRing from "$lib/features/onboarding/OnboardingRing.svelte";
   import OnboardingSurfaces from "$lib/features/onboarding/OnboardingSurfaces.svelte";
   import { useOnboarding } from "$lib/features/onboarding/useOnboarding.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { slide } from "svelte/transition";
+  import { collapse } from "$lib/utils/transitions/collapse.ts";
 
   const { active, openDrawer, trackerGlyph } = useOnboarding();
 
@@ -24,7 +20,10 @@
     type="button"
     aria-label={label}
     onclick={openDrawer}
-    out:slide|global={{ duration: $isReducedMotion ? 0 : EXIT_MS, axis: "x" }}
+    out:collapse|global={{
+      duration: $isReducedMotion ? 0 : undefined,
+      axis: "x",
+    }}
   >
     <OnboardingRing
       {progress}

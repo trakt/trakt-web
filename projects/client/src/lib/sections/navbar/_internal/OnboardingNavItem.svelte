@@ -1,7 +1,3 @@
-<script lang="ts" module>
-  const EXIT_MS = 280;
-</script>
-
 <script lang="ts">
   import { m } from "$lib/features/i18n/messages.ts";
   import { toOnboardingLabel } from "$lib/features/onboarding/toOnboardingLabel.ts";
@@ -9,7 +5,7 @@
   import OnboardingSurfaces from "$lib/features/onboarding/OnboardingSurfaces.svelte";
   import { useOnboarding } from "$lib/features/onboarding/useOnboarding.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { slide } from "svelte/transition";
+  import { collapse } from "$lib/utils/transitions/collapse.ts";
   import NavGroup from "./NavGroup.svelte";
 
   const { isCollapsed }: { isCollapsed: boolean } = $props();
@@ -36,7 +32,10 @@
   <div
     class="trakt-onboarding-nav-item"
     class:is-expanded={!isCollapsed}
-    out:slide|global={{ duration: $isReducedMotion ? 0 : EXIT_MS, axis: "y" }}
+    out:collapse|global={{
+      duration: $isReducedMotion ? 0 : undefined,
+      axis: "y",
+    }}
   >
     <NavGroup
       onclick={openDrawer}
