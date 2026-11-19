@@ -1,3 +1,5 @@
+import { time } from '$lib/utils/timing/time.ts';
+
 type Point = { readonly x: number; readonly y: number };
 
 type FlyOrbParams = {
@@ -6,8 +8,8 @@ type FlyOrbParams = {
 };
 
 const STEPS = 32;
-const DURATION_MS = 760;
-const EASING = 'cubic-bezier(0.55, 0, 0.25, 1)';
+const DURATION_MS = time.seconds(0.52);
+const EASING = 'cubic-bezier(0.3, 0, 0.2, 1)';
 
 function quadratic(a: Point, control: Point, b: Point, t: number): Point {
   const u = 1 - t;
@@ -74,8 +76,8 @@ export function flyOrb({ from, to }: FlyOrbParams): Promise<void> {
     return { ...quadratic(from, control, target, t), t };
   });
 
-  spawnOrb({ size: 10, opacity: 0.5, delay: 70, path });
-  spawnOrb({ size: 7, opacity: 0.3, delay: 130, path });
+  spawnOrb({ size: 10, opacity: 0.5, delay: time.seconds(0.045), path });
+  spawnOrb({ size: 7, opacity: 0.3, delay: time.seconds(0.085), path });
   const main = spawnOrb({ size: 18, opacity: 1, delay: 0, path });
 
   return new Promise((resolve) => {
