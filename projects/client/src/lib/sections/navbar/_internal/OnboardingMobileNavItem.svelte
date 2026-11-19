@@ -35,6 +35,7 @@
 <style>
   .trakt-onboarding-mobile-nav-item {
     --nav-icon-size: var(--ni-24);
+    --onboarding-toast-pull: var(--ni-8);
     display: flex;
     align-items: center;
     justify-content: center;
