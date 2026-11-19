@@ -139,6 +139,7 @@
     width: min(var(--ni-480), calc(100dvw - var(--ni-32)));
     padding: var(--ni-12) var(--ni-16);
     box-sizing: border-box;
+    text-align: start;
 
     display: flex;
     flex-direction: column;
