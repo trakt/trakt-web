@@ -4,7 +4,7 @@
   import OnboardingSurfaces from "$lib/features/onboarding/OnboardingSurfaces.svelte";
   import { useOnboarding } from "$lib/features/onboarding/useOnboarding.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { collapse } from "$lib/utils/transitions/collapse.ts";
+  import { collapseOut } from "$lib/utils/transitions/collapseOut.ts";
 
   const { active, openDrawer, trackerGlyph } = useOnboarding();
 
@@ -20,10 +20,7 @@
     type="button"
     aria-label={label}
     onclick={openDrawer}
-    out:collapse|global={{
-      duration: $isReducedMotion ? 0 : undefined,
-      axis: "x",
-    }}
+    out:collapseOut|global={{ duration: $isReducedMotion ? 0 : undefined }}
   >
     <OnboardingRing
       {progress}

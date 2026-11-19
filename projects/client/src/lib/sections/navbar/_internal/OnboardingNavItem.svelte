@@ -5,7 +5,7 @@
   import OnboardingSurfaces from "$lib/features/onboarding/OnboardingSurfaces.svelte";
   import { useOnboarding } from "$lib/features/onboarding/useOnboarding.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { collapse } from "$lib/utils/transitions/collapse.ts";
+  import { collapseOut } from "$lib/utils/transitions/collapseOut.ts";
   import NavGroup from "./NavGroup.svelte";
 
   const { isCollapsed }: { isCollapsed: boolean } = $props();
@@ -32,10 +32,7 @@
   <div
     class="trakt-onboarding-nav-item"
     class:is-expanded={!isCollapsed}
-    out:collapse|global={{
-      duration: $isReducedMotion ? 0 : undefined,
-      axis: "y",
-    }}
+    out:collapseOut|global={{ duration: $isReducedMotion ? 0 : undefined }}
   >
     <NavGroup
       onclick={openDrawer}
