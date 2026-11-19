@@ -261,7 +261,9 @@
     );
     position: absolute;
     top: var(--onboarding-toast-inset);
-    inset-inline-start: var(--onboarding-toast-inset);
+    inset-inline-start: calc(
+      var(--onboarding-toast-inset) + var(--onboarding-toast-pull, 0px)
+    );
     height: var(--onboarding-toast-height);
     width: var(--onboarding-toast-height);
     border-radius: var(--border-radius-xl);
