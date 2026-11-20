@@ -7,6 +7,7 @@
   import { useCurrentUserLastWatched } from "$lib/sections/toast/_internal/useCurrentUserLastWatched";
   import { useCurrentUserNowWatching } from "$lib/sections/toast/_internal/useCurrentUserNowWatching";
   import { useCheckInEnd } from "$lib/sections/toast/_internal/useCheckInEnd";
+  import { useOnboardingTrackerVisible } from "$lib/features/onboarding/useOnboardingTrackerVisible";
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import { BehaviorSubject, combineLatest, map } from "rxjs";
   import { onMount } from "svelte";
@@ -17,6 +18,7 @@
 
   const { nowPlaying } = useNowPlaying();
   const { lastWatched } = useLastWatched();
+  const isTrackerVisible = useOnboardingTrackerVisible();
 
   const pinned = new BehaviorSubject<LastWatchedItem | null>(null);
 
@@ -25,8 +27,16 @@
       nowPlaying.next(val),
     );
 
-    const unsubscribeLastWatched = combineLatest([lastWatchedItem, pinned])
-      .pipe(map(([candidate, held]) => held ?? candidate))
+    const unsubscribeLastWatched = combineLatest([
+      lastWatchedItem,
+      pinned,
+      isTrackerVisible,
+    ])
+      .pipe(
+        map(([candidate, held, trackerVisible]) =>
+          trackerVisible ? null : (held ?? candidate),
+        ),
+      )
       .subscribe((val) => lastWatched.next(val));
 
     const unsubscribeCheckInEnd = refreshHistoryOnEnd(nowPlaying);

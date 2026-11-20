@@ -11,6 +11,7 @@
     title,
     icon,
     isCollapsed,
+    isActive = false,
     ariaLabel,
     hint,
     children,
@@ -21,6 +22,7 @@
     title: string;
     icon: Snippet;
     isCollapsed: boolean;
+    isActive?: boolean;
     ariaLabel?: string;
     hint?: Snippet;
     children?: Snippet;
@@ -30,7 +32,9 @@
 {#snippet navItemContent()}
   {@render icon()}
   {#if !isCollapsed}
-    <span class="bold ellipsis nav-label">{title}</span>
+    <span class="bold ellipsis nav-label" class:is-active={isActive}>
+      {title}
+    </span>
   {/if}
 {/snippet}
 
@@ -106,6 +110,7 @@
       border: none;
       cursor: pointer;
       color: inherit;
+      font: inherit;
 
       &:focus-visible {
         border-radius: var(--border-radius-m);
@@ -130,6 +135,14 @@
 
   .nav-label {
     white-space: nowrap;
+
+    &.is-active {
+      color: var(--color-text-emphasis);
+    }
+  }
+
+  .nav-action .nav-label {
+    transition: color var(--transition-increment) ease-in-out;
   }
 
   .nav-sub-items-inner {

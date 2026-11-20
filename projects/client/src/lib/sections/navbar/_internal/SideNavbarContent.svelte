@@ -4,11 +4,14 @@
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DevtoolsNavItem from "./DevtoolsNavItem.svelte";
   import NavGroup from "./NavGroup.svelte";
+  import OnboardingNavItem from "./OnboardingNavItem.svelte";
   import SearchShortcutHint from "./SearchShortcutHint.svelte";
 
   const { isCollapsed }: { isCollapsed: boolean } = $props();
@@ -30,6 +33,11 @@
 
 <div class="trakt-side-navbar-content" class:is-expanded={!isCollapsed}>
   <RenderFor audience="authenticated">
+    <RenderForFeature flag={FeatureFlag.Onboarding} audience="director">
+      {#snippet enabled()}
+        <OnboardingNavItem {isCollapsed} />
+      {/snippet}
+    </RenderForFeature>
     <NavGroup
       href={UrlBuilder.search()}
       label={m.button_label_search()}

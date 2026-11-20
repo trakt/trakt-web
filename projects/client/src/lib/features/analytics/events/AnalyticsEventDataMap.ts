@@ -109,6 +109,21 @@ type RecommendationWhyType = { reason: 'people' | 'titles' | 'empty' };
 type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
 type LinkType = SourceType & { target: string };
 type BannerDismissType = { id: string; value: string };
+type GettingStartedStartType = { set: string; done: number };
+type GettingStartedOpenType = { set: string; done: number; total: number };
+type GettingStartedTrackType = { set: string; step: string };
+type GettingStartedSkipType = {
+  set: string;
+  step: string;
+  action: 'skip' | 'undo';
+};
+type GettingStartedStepType = {
+  set: string;
+  step: string;
+  source: 'action' | 'account';
+};
+type GettingStartedCompleteType = { set: string; skipped: number };
+type GettingStartedRetireType = { set: string };
 type SortType = { sortBy: string; sortHow: string };
 type LikeType = { action: 'like' | 'unlike' };
 type VipUpsellType = { source: VipUpsellSource };
@@ -276,6 +291,14 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.SeasonalFilter]: SeasonalFilterType;
 
   [AnalyticsEvent.BannerDismiss]: BannerDismissType;
+  [AnalyticsEvent.GettingStartedStart]: GettingStartedStartType;
+  [AnalyticsEvent.GettingStartedOpen]: GettingStartedOpenType;
+  [AnalyticsEvent.GettingStartedTrack]: GettingStartedTrackType;
+  [AnalyticsEvent.GettingStartedUntrack]: GettingStartedTrackType;
+  [AnalyticsEvent.GettingStartedSkip]: GettingStartedSkipType;
+  [AnalyticsEvent.GettingStartedStep]: GettingStartedStepType;
+  [AnalyticsEvent.GettingStartedComplete]: GettingStartedCompleteType;
+  [AnalyticsEvent.GettingStartedRetire]: GettingStartedRetireType;
 
   [AnalyticsEvent.VipUpsell]: VipUpsellType;
   [AnalyticsEvent.VipUpsellImpression]: VipUpsellType;

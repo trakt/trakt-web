@@ -13,7 +13,7 @@
   const MAX_REVEAL_STEPS = 5;
 </script>
 
-<section class="trakt-meet-the-team">
+<section class="trakt-meet-the-team" id="meet-the-team">
   <h2 class="meet-the-team-heading">{m.heading_meet_the_team()}</h2>
 
   {#if !$isLoading}

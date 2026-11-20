@@ -2,37 +2,21 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import CodeIcon from "$lib/components/icons/CodeIcon.svelte";
   import { DEVTOOLS_TITLE } from "../devtoolsTitle.ts";
-  import type { DevtoolsTool } from "./DevtoolsTool.ts";
+  import { devtoolsEntries } from "./devtoolsEntries.ts";
 
-  type DevtoolsDrawerProps = {
-    onClose: () => void;
-    onSelect: (tool: DevtoolsTool) => void;
-  };
-
-  type DevtoolsEntry = {
-    tool: DevtoolsTool;
-    title: string;
-    description: string;
-  };
-
-  const { onClose, onSelect }: DevtoolsDrawerProps = $props();
-
-  const entries: DevtoolsEntry[] = [
-    {
-      tool: "query",
-      title: "TanStack Query",
-      description: "Inspect query cache, fetch states and mutations.",
-    },
-  ];
+  const { onClose }: { onClose: () => void } = $props();
 </script>
 
 <Drawer {onClose} title={DEVTOOLS_TITLE} metaInfo="Development only">
   <div class="trakt-devtools-drawer">
-    {#each entries as entry (entry.tool)}
+    {#each devtoolsEntries as entry (entry.id)}
       <button
         class="devtools-entry"
         type="button"
-        onclick={() => onSelect(entry.tool)}
+        onclick={() => {
+          onClose();
+          entry.run();
+        }}
       >
         <CodeIcon />
         <span class="entry-text">
