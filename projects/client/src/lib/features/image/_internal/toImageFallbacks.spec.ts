@@ -73,6 +73,18 @@ describe('toImageFallbacks', () => {
     },
   );
 
+  it('should keep the portrait link token on the show portrait fallback', () => {
+    expect(
+      toImageFallbacks(
+        'https://media.trakt.tv/portraits/show-1390-s2-447271/thumb/portrait.webp?verify=1794787200-mac',
+      ),
+    ).toEqual([
+      'https://media.trakt.tv/portraits/show-1390-447271/thumb/portrait.webp?verify=1794787200-mac',
+      'https://media.trakt.tv/people/447271/thumb/headshot.webp',
+      MEDIA_POSTER_PLACEHOLDER,
+    ]);
+  });
+
   it('should ignore a version query', () => {
     expect(
       toImageFallbacks('https://media.trakt.tv/movies/1/thumb/poster.webp?v=1'),

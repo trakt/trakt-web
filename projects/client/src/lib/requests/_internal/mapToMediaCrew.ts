@@ -38,11 +38,11 @@ function toCrewMember(crewResponse: CrewResponse): CrewMember {
 }
 
 function toPortrait(
-  { media, id, season }: PortraitOf,
+  { media, id, season, token }: PortraitOf,
   personId: number,
 ): CastMember['headshot'] {
   const toUrl = (size: 'thumb' | 'medium') =>
-    toMediaImageUrl({
+    `${toMediaImageUrl({
       type: 'portraits',
       id:
         season != null
@@ -50,7 +50,7 @@ function toPortrait(
           : `${media}-${id}-${personId}`,
       slot: 'portrait',
       size,
-    });
+    })}?verify=${token}` as HttpsUrl;
 
   return { url: { medium: toUrl('medium'), thumb: toUrl('thumb') } };
 }

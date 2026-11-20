@@ -1,5 +1,6 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { PortraitOf } from '$lib/requests/models/PortraitOf.ts';
+import { fetchPortraitToken } from './fetchPortraitToken.ts';
 
 type FetchPortraitOfParams = {
   media: PortraitOf['media'];
@@ -18,11 +19,14 @@ function summaryRequest({ fetch, media, slug }: FetchPortraitOfParams) {
 export async function fetchPortraitOf(
   params: FetchPortraitOfParams,
 ): Promise<PortraitOf | null> {
-  const response = await summaryRequest(params).catch(() => null);
+  const [response, token] = await Promise.all([
+    summaryRequest(params).catch(() => null),
+    fetchPortraitToken({ fetch: params.fetch }),
+  ]);
 
-  if (response?.status !== 200) {
+  if (response?.status !== 200 || !token) {
     return null;
   }
 
-  return { media: params.media, id: response.body.ids.trakt };
+  return { media: params.media, id: response.body.ids.trakt, token };
 }

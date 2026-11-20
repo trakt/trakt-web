@@ -92,8 +92,8 @@ describe('mapToMediaCrew', () => {
 
     const portrait = (id: string) => ({
       url: {
-        medium: `https://media.trakt.tv/portraits/${id}/medium/portrait.webp`,
-        thumb: `https://media.trakt.tv/portraits/${id}/thumb/portrait.webp`,
+        medium: `https://media.trakt.tv/portraits/${id}/medium/portrait.webp?verify=1794787200-mac`,
+        thumb: `https://media.trakt.tv/portraits/${id}/thumb/portrait.webp?verify=1794787200-mac`,
       },
     });
 
@@ -105,14 +105,22 @@ describe('mapToMediaCrew', () => {
     });
 
     it('should use the show character portrait for the cast', () => {
-      const crew = mapToMediaCrew(response, { media: 'show', id: 1390 });
+      const crew = mapToMediaCrew(response, {
+        media: 'show',
+        id: 1390,
+        token: '1794787200-mac',
+      });
 
       expect(crew.cast.at(0)?.headshot).toEqual(portrait('show-1390-447271'));
       expect(crew.guestStars.at(0)?.headshot).toEqual(portrait('show-1390-9'));
     });
 
     it('should use the movie character portrait for the cast', () => {
-      const crew = mapToMediaCrew(response, { media: 'movie', id: 120 });
+      const crew = mapToMediaCrew(response, {
+        media: 'movie',
+        id: 120,
+        token: '1794787200-mac',
+      });
 
       expect(crew.cast.at(0)?.headshot).toEqual(portrait('movie-120-447271'));
     });
@@ -122,6 +130,7 @@ describe('mapToMediaCrew', () => {
         media: 'show',
         id: 1390,
         season: 2,
+        token: '1794787200-mac',
       });
 
       expect(crew.cast.at(0)?.headshot).toEqual(
@@ -137,6 +146,7 @@ describe('mapToMediaCrew', () => {
         media: 'show',
         id: 1390,
         season: 0,
+        token: '1794787200-mac',
       });
 
       expect(crew.cast.at(0)?.headshot).toEqual(
@@ -152,7 +162,11 @@ describe('mapToMediaCrew', () => {
     });
 
     it('should keep the crew without a character portrait', () => {
-      const crew = mapToMediaCrew(response, { media: 'show', id: 1390 });
+      const crew = mapToMediaCrew(response, {
+        media: 'show',
+        id: 1390,
+        token: '1794787200-mac',
+      });
 
       expect(crew.directors.at(0)).not.toHaveProperty('headshot');
       expect(JSON.stringify(crew.directors)).not.toContain('/portraits/');

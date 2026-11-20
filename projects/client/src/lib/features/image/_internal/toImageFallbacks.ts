@@ -7,7 +7,7 @@ import {
 import { toMediaImageUrl } from '$lib/utils/url/toMediaImageUrl.ts';
 
 const mediaImagePattern =
-  /^(https:\/\/media\.trakt\.tv\/[a-z]+\/(?:\d+|(?:show|movie)-\d+(?:-s\d+)?-(\d+)))\/([a-z]+)\/([a-z]+)\.webp(?:\?.*)?$/;
+  /^(https:\/\/media\.trakt\.tv\/[a-z]+\/(?:\d+|(?:show|movie)-\d+(?:-s\d+)?-(\d+)))\/([a-z]+)\/([a-z]+)\.webp(\?.*)?$/;
 
 const seasonSegmentPattern = /-s\d+(?=-\d+$)/;
 
@@ -16,16 +16,18 @@ type MediaImagePath = {
   size: string;
   slot: string;
   personId?: string;
+  query: string;
 };
 
 function toMediaImagePath(url: string): MediaImagePath | null {
-  const [, base, personId, size, slot] = url.match(mediaImagePattern) ?? [];
+  const [, base, personId, size, slot, query = ''] =
+    url.match(mediaImagePattern) ?? [];
 
   if (!base || !size || !slot) {
     return null;
   }
 
-  return { base, size, slot, personId };
+  return { base, size, slot, personId, query };
 }
 
 function toCoverPlaceholder(size: string) {
@@ -34,11 +36,7 @@ function toCoverPlaceholder(size: string) {
     : MEDIA_COVER_LARGE_PLACEHOLDER;
 }
 
-function toPortraitFallbacks(
-  base: string,
-  size: string,
-  personId: string | undefined,
-) {
+function toPortraitFallbacks({ base, size, personId, query }: MediaImagePath) {
   if (!personId) {
     return [MEDIA_POSTER_PLACEHOLDER];
   }
@@ -56,18 +54,15 @@ function toPortraitFallbacks(
   }
 
   return [
-    `${showPortraitBase}/${size}/portrait.webp`,
+    `${showPortraitBase}/${size}/portrait.webp${query}`,
     headshot,
     MEDIA_POSTER_PLACEHOLDER,
   ];
 }
 
-function toSlotFallbacks({
-  base,
-  size,
-  slot,
-  personId,
-}: MediaImagePath): string[] {
+function toSlotFallbacks(path: MediaImagePath): string[] {
+  const { base, size, slot } = path;
+
   switch (slot) {
     case 'poster':
     case 'headshot':
@@ -79,7 +74,7 @@ function toSlotFallbacks({
     case 'thumb':
       return [`${base}/thumb/fanart.webp`, MEDIA_COVER_THUMB_PLACEHOLDER];
     case 'portrait':
-      return toPortraitFallbacks(base, size, personId);
+      return toPortraitFallbacks(path);
     default:
       return [];
   }
