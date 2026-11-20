@@ -9,6 +9,7 @@ import { klipy } from './handlers/klipy.ts';
 import { lists } from './handlers/lists.ts';
 import { movies } from './handlers/movies.ts';
 import { people } from './handlers/people.ts';
+import { portraits } from './handlers/portraits.ts';
 import { mediaSync } from './handlers/mediaSync.ts';
 import { promotions } from './handlers/promotions.ts';
 import { recommendations } from './handlers/recommendations.ts';
@@ -32,6 +33,7 @@ const handlers = [
   ...streamingSync,
   ...sync,
   ...people,
+  ...portraits,
   ...mediaSync,
   ...watchNow,
   ...recommendations,
