@@ -1,9 +1,11 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { useDiscover } from "$lib/features/filters/useDiscover.ts";
   import { m } from "$lib/features/i18n/messages.ts";
   import { useVipVeteran } from "$lib/features/vip-veteran/stores/useVipVeteran.ts";
   import { useVipVeteranMoments } from "$lib/features/vip-veteran/stores/useVipVeteranMoments.ts";
+  import { useUserWatching } from "$lib/sections/watching-now/useUserWatching.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
   import FavoritesList from "../lists/favorites/FavoritesList.svelte";
   import PersonalHistoryList from "../lists/history/PersonalHistoryList.svelte";
@@ -36,14 +38,18 @@
     $celebration?.kind === "promotion" ? $celebration : null,
   );
   let isAnniversaryDismissed = $state(false);
+
+  const { blocked } = useUser();
+  const { nowPlaying } = useUserWatching(fromRune(() => slug));
+  const shownNowPlaying = $derived($blocked.has(slug) ? null : $nowPlaying);
 </script>
 
 {#if $veteran && $graceDaysLeft != null}
   <VipStreakGraceBanner years={$veteran.years} daysLeft={$graceDaysLeft} />
 {/if}
 
-<ProfileContainer {profile} {slug}>
-  <ProfileDetails {slug} {profile} {promotion} />
+<ProfileContainer {profile} {slug} isWatching={shownNowPlaying != null}>
+  <ProfileDetails {slug} {profile} {promotion} nowPlaying={shownNowPlaying} />
 </ProfileContainer>
 
 <FavoritesList {slug} title={m.list_title_favorites()} mode={$mode} />

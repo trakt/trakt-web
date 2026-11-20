@@ -2,8 +2,13 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import type { DisplayableProfileProps } from "../DisplayableProfileProps";
 
-  const { children, profile, slug }: ChildrenProps & DisplayableProfileProps =
-    $props();
+  const {
+    children,
+    profile,
+    slug,
+    isWatching = false,
+  }: ChildrenProps &
+    DisplayableProfileProps & { isWatching?: boolean } = $props();
 
   const { isMe } = $derived(useIsMe(slug));
   const isFreeOtherProfile = $derived($isMe === false && !profile.isVip);
@@ -13,6 +18,7 @@
   class="trakt-profile-container"
   class:is-vip={profile.isVip}
   class:is-narrow={isFreeOtherProfile}
+  class:is-watching={isWatching}
 >
   {@render children()}
 </div>
@@ -52,6 +58,10 @@
 
     &.is-narrow {
       max-width: var(--ni-640);
+    }
+
+    &.is-narrow.is-watching {
+      max-width: var(--ni-920);
     }
 
     @include for-tablet-sm-and-below {

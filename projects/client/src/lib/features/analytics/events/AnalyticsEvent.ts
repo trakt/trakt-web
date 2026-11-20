@@ -20,6 +20,7 @@ const BRANDING_PREFIX = 'branding';
 const ISSUE_REPORT_PREFIX = 'issue-report';
 const MONTH_REVIEW_PREFIX = 'month-review';
 const YEAR_REVIEW_PREFIX = 'year-review';
+const WATCHING_NOW_PREFIX = 'watching-now';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -145,6 +146,8 @@ export const AnalyticsEvent = {
   YearReviewView: buildEventKey(YEAR_REVIEW_PREFIX, 'view'),
 
   BrandingDownload: buildEventKey(BRANDING_PREFIX, 'download'),
+
+  WatchingNowOpen: buildEventKey(WATCHING_NOW_PREFIX, 'open'),
 
   Favorite: buildEventKey(MEDIA_ACTION_PREFIX, 'favorite'),
   Rewatching: buildEventKey(MEDIA_ACTION_PREFIX, 'rewatching'),

@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { useDiscover } from "$lib/features/filters/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import Banner from "$lib/sections/banner/Banner.svelte";
   import DashboardDrawer from "$lib/sections/dashboard/DashboardDrawer.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
@@ -14,6 +16,7 @@
   import MonthInReviewNavbarEntry from "$lib/sections/banner/month-in-review/MonthInReviewNavbarEntry.svelte";
   import StreakCallout from "$lib/sections/stats/StreakCallout.svelte";
   import TodayStoryViewerHost from "$lib/sections/today/TodayStoryViewerHost.svelte";
+  import WatchingNowNavbarPill from "$lib/sections/watching-now/WatchingNowNavbarPill.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/assets";
 
   // FIXME: move to PersonalHistoryList when Profile also supports discover mode
@@ -30,6 +33,14 @@
   <MonthInReviewNavbarEntry />
 {/snippet}
 
+{#snippet watchingNowEntry()}
+  <RenderForFeature flag={FeatureFlag.WatchingNowHeader} audience="director">
+    {#snippet enabled()}
+      <WatchingNowNavbarPill />
+    {/snippet}
+  </RenderForFeature>
+{/snippet}
+
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
@@ -43,6 +54,7 @@
     contentToggle="discover"
     hasFilters
     leadingActions={monthInReviewEntry}
+    entryLeadingActions={watchingNowEntry}
   />
 
   <Banner />
