@@ -27,8 +27,8 @@
   {#each PILLARS as pillar (pillar.key)}
     <article class="pillar">
       <span class="pillar-eyebrow tag bold uppercase">{pillar.eyebrow()}</span>
-      <h2 class="pillar-label">{pillar.label()}</h2>
-      <p class="pillar-description capitalize">{pillar.description()}</p>
+      <h2 class="pillar-label capitalize">{pillar.label()}</h2>
+      <p class="pillar-description">{pillar.description()}</p>
     </article>
   {/each}
 </section>
