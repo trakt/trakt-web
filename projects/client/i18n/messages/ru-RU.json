@@ -175,6 +175,7 @@
   "button_label_leave_collaboration": "Удалить себя из соавторов списка {name}",
   "button_label_library": "Библиотека",
   "button_label_like_list": "Нравится {name}",
+  "button_label_living_poster_tilt": "Наклоняйте телефон, чтобы двигать постер",
   "button_label_login": "Войти",
   "button_label_logout": "Выйти из аккаунта",
   "button_label_manage_collaborators": "Управление соавторами для {name}",

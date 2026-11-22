@@ -175,6 +175,7 @@
   "button_label_leave_collaboration": "Távolítsd el magad mint közreműködő innen: {name}",
   "button_label_library": "Könyvtár",
   "button_label_like_list": "{name} kedvelése",
+  "button_label_living_poster_tilt": "Döntsd meg a telefont a poszter mozgatásához",
   "button_label_login": "Bejelentkezés",
   "button_label_logout": "Kijelentkezés",
   "button_label_manage_collaborators": "Közreműködők kezelése ehhez: {name}",

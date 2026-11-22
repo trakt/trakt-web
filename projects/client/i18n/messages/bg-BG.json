@@ -175,6 +175,7 @@
   "button_label_leave_collaboration": "Премахване на себе си като сътрудник в {name}",
   "button_label_library": "Библиотека",
   "button_label_like_list": "Харесване на {name}",
+  "button_label_living_poster_tilt": "Наклонете телефона си, за да движите постера",
   "button_label_login": "Вход",
   "button_label_logout": "Изход",
   "button_label_manage_collaborators": "Управление на сътрудници за {name}",

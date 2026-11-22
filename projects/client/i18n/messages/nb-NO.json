@@ -175,6 +175,7 @@
   "button_label_leave_collaboration": "Fjern deg selv som samarbeidspartner på {name}",
   "button_label_library": "Bibliotek",
   "button_label_like_list": "Lik {name}",
+  "button_label_living_poster_tilt": "Vipp telefonen for å bevege plakaten",
   "button_label_login": "Logg inn",
   "button_label_logout": "Logg ut",
   "button_label_manage_collaborators": "Administrer samarbeidspartnere for {name}",
