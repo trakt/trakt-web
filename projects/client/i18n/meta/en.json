@@ -11182,6 +11182,10 @@
         }
       }
     },
+    "button_label_living_poster_tilt": {
+      "default": "Tilt your phone to move the poster",
+      "description": "Aria-label and tooltip for the small button on a living poster that asks for access to the phone's motion sensors, so the poster can follow how the phone is tilted. Shown on touch devices that need the person's permission first."
+    },
     "button_label_edit_mode": {
       "default": "Edit mode",
       "description": "Aria-label for the button that allows users to enter edit mode to customize their dashboard."

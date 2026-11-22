@@ -20,6 +20,7 @@ const BRANDING_PREFIX = 'branding';
 const ISSUE_REPORT_PREFIX = 'issue-report';
 const MONTH_REVIEW_PREFIX = 'month-review';
 const YEAR_REVIEW_PREFIX = 'year-review';
+const LIVING_POSTER_PREFIX = 'living-poster';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -185,4 +186,7 @@ export const AnalyticsEvent = {
 
   IssueReportOpen: buildEventKey(ISSUE_REPORT_PREFIX, 'open'),
   IssueReportSent: buildEventKey(ISSUE_REPORT_PREFIX, 'sent'),
+
+  LivingPosterTilt: buildEventKey(LIVING_POSTER_PREFIX, 'tilt'),
+  LivingPosterDrag: buildEventKey(LIVING_POSTER_PREFIX, 'drag'),
 } as const;

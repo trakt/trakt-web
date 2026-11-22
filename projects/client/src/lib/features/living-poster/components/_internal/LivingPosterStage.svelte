@@ -1,9 +1,15 @@
 <script lang="ts">
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import TiltIcon from "$lib/components/icons/TiltIcon.svelte";
+  import * as m from "$lib/features/i18n/messages";
   import type { Attachment } from "svelte/attachments";
   import { composeLivingPosterStack } from "../../_internal/composeLivingPosterStack";
   import { createLivingPosterMotion } from "../../_internal/createLivingPosterMotion";
   import { particleCanvas } from "../../_internal/particleCanvas";
   import type { LivingPoster } from "../../models/LivingPoster";
+  import type { OrientationAccess } from "../../models/OrientationAccess";
   import LivingPosterEffectLayer from "./LivingPosterEffectLayer.svelte";
 
   const {
@@ -15,9 +21,16 @@
   } = $props();
 
   const stack = $derived(composeLivingPosterStack(poster));
-  const motion = createLivingPosterMotion();
+  const { track: trackTilt } = useTrack(AnalyticsEvent.LivingPosterTilt);
+  const { track: trackDrag } = useTrack(AnalyticsEvent.LivingPosterDrag);
+
+  const motion = createLivingPosterMotion({
+    onaccesschange: (access) => (tiltAccess = access),
+    ondrag: () => trackDrag(),
+  });
 
   let isRevealed = $state(false);
+  let tiltAccess = $state<OrientationAccess>("unsupported");
 
   const reveal: Attachment<HTMLElement> = (root) => {
     const frames = { first: 0, second: 0 };
@@ -45,6 +58,11 @@
       cancelAnimationFrame(frames.first);
       cancelAnimationFrame(frames.second);
     };
+  };
+
+  const requestTilt = async () => {
+    const outcome = await motion.requestTilt();
+    if (outcome) trackTilt({ outcome });
   };
 
   const resetOnDestroy: Attachment<HTMLElement> = () => () =>
@@ -106,6 +124,19 @@
   </div>
 </div>
 
+{#if isRevealed && tiltAccess === "needs-permission"}
+  <div class="living-poster-tilt-prompt">
+    <ActionButton
+      label={m.button_label_living_poster_tilt()}
+      onclick={requestTilt}
+      size="small"
+      variant="secondary"
+    >
+      <TiltIcon />
+    </ActionButton>
+  </div>
+{/if}
+
 <style>
   .trakt-living-poster {
     --rx: 0;
@@ -132,6 +163,13 @@
     &:global([data-paused="true"]) :global(*::before) {
       animation-play-state: paused;
     }
+  }
+
+  .living-poster-tilt-prompt {
+    position: absolute;
+    z-index: var(--layer-raised);
+    top: var(--gap-s);
+    inset-inline-end: var(--gap-s);
   }
 
   .living-poster-tilt {
