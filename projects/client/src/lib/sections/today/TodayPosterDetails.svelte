@@ -10,15 +10,21 @@
   import { stripMarkdownLinks } from "$lib/utils/markdown/stripMarkdownLinks.ts";
   import { toSentimentAspects } from "$lib/utils/sentiment/toSentimentAspects.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte";
-  import type { TodayMedia } from "./models/TodayMedia.ts";
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
+  import type { TodayPosterDetailsProps } from "./TodayPosterDetailsProps.ts";
   import { useTodayDetails } from "./useTodayDetails.ts";
   import { toMediaMeta } from "./_internal/toMediaMeta.ts";
   import TodaySentimentVerdict from "./_internal/TodaySentimentVerdict.svelte";
 
   const ASPECTS_LIMIT = 4;
 
-  const { media, kicker = null }: { media: TodayMedia; kicker?: string | null } =
-    $props();
+  const {
+    media,
+    kicker = null,
+    onOpenMedia,
+  }: TodayPosterDetailsProps = $props();
 
   const { ratings, isRatingsLoading, sentiment, realityCheck } =
     useTodayDetails(fromRune(() => media));
@@ -26,7 +32,8 @@
   const meta = $derived(toMediaMeta(media));
 
   const selected = $derived(
-    $sentiment && $sentiment.aspect.pros.length + $sentiment.aspect.cons.length > 0
+    $sentiment &&
+      $sentiment.aspect.pros.length + $sentiment.aspect.cons.length > 0
       ? toSentimentAspects({
           pros: $sentiment.aspect.pros,
           cons: $sentiment.aspect.cons,
@@ -52,7 +59,21 @@
       {#if kicker}
         <p class="tag uppercase bold ellipsis details-kicker">{kicker}</p>
       {/if}
-      <h3 class="ellipsis">{media.title}</h3>
+      {#if onOpenMedia}
+        <Link
+          href={UrlBuilder.media(media.type, media.slug)}
+          color="inherit"
+          underline="none"
+          onclick={onOpenMedia}
+        >
+          <span class="details-title-link">
+            <h3 class="ellipsis">{media.title}</h3>
+            <CaretRightIcon />
+          </span>
+        </Link>
+      {:else}
+        <h3 class="ellipsis">{media.title}</h3>
+      {/if}
       <p class="small secondary ellipsis">{meta}</p>
     </div>
   </div>
@@ -161,6 +182,24 @@
 
       h3 {
         margin: 0;
+      }
+
+      :global(.trakt-link) {
+        pointer-events: auto;
+        min-width: 0;
+      }
+    }
+
+    .details-title-link {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xxs);
+      min-width: 0;
+
+      :global(svg) {
+        flex-shrink: 0;
+        width: var(--ni-14);
+        height: var(--ni-14);
       }
     }
 

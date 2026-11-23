@@ -5,6 +5,7 @@ import { RealityCheckPublicResponseMock } from '$mocks/data/summary/reality-chec
 import { MovieHereticSentimentResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticSentimentResponseMock.ts';
 import { server } from '$mocks/server.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { screen, waitFor } from '@testing-library/svelte';
 import { http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
@@ -113,5 +114,23 @@ describe('TodayPosterDetails', () => {
         expect(screen.queryByText('Reality Check')).not.toBeInTheDocument(),
       );
     });
+  });
+
+  it("should link the title to the media page only when it can be opened", async () => {
+    setAuthorization(true);
+
+    const { unmount } = renderComponent(TodayPosterDetails, {
+      props: { media: MovieHereticMappedMock },
+    });
+    expect(await screen.findByRole("heading", { name: MovieHereticMappedMock.title })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: MovieHereticMappedMock.title })).not.toBeInTheDocument();
+    unmount();
+
+    renderComponent(TodayPosterDetails, {
+      props: { media: MovieHereticMappedMock, onOpenMedia: () => {} },
+    });
+    expect(
+      await screen.findByRole("link", { name: MovieHereticMappedMock.title }),
+    ).toHaveAttribute("href", `/movies/${MovieHereticMappedMock.slug}`);
   });
 });
