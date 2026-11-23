@@ -62,7 +62,6 @@
       {#if onOpenMedia}
         <Link
           href={UrlBuilder.media(media.type, media.slug)}
-          color="inherit"
           underline="none"
           onclick={onOpenMedia}
         >
