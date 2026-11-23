@@ -72,6 +72,7 @@
     if (event.target !== event.currentTarget) return;
     if (event.propertyName !== "opacity") return;
 
+    motion.release();
     onsettledchange?.(true);
   };
 </script>
@@ -142,6 +143,8 @@
     --rx: 0;
     --ry: 0;
     --lift: 0;
+    --reach: 0;
+    --presence: 0;
 
     position: absolute;
     top: 0;
@@ -201,7 +204,7 @@
   .living-poster-plane {
     position: absolute;
     inset: 0;
-    transform: scale(1.06);
+    transform: scale(calc(1 + var(--reach) * 0.06));
   }
 
   .living-poster-layer,
@@ -246,6 +249,7 @@
       transparent 55%,
       rgba(0, 0, 0, 0.45)
     );
+    opacity: var(--presence);
   }
 
   .living-poster-glare {
@@ -254,7 +258,7 @@
     pointer-events: none;
     mix-blend-mode: soft-light;
     background: radial-gradient(circle, white, transparent 42%);
-    opacity: calc(0.18 + var(--lift) * 0.42);
+    opacity: calc((0.18 + var(--lift) * 0.42) * var(--presence));
     transform: translate3d(calc(var(--rx) * 45%), calc(var(--ry) * 45%), 0);
   }
 </style>
