@@ -15,6 +15,7 @@ const TILT_DAMPING = 15;
 const LIFT_STIFFNESS = 80;
 const LIFT_DAMPING = 16;
 const TILT_SMOOTHING_SECONDS = 0.1;
+const PRESENCE_SECONDS = 0.5;
 const TILT_LIFT = 0.5;
 const MAX_FRAME_SECONDS = 1 / 30;
 const VISIBILITY_MARGIN = '120px';
@@ -25,6 +26,7 @@ type MotionState = {
   x: SpringState;
   y: SpringState;
   lift: SpringState;
+  presence: number;
   pointer: Tilt | null;
   orientation: Tilt | null;
   dragStart: { clientX: number; clientY: number } | null;
@@ -33,6 +35,7 @@ type MotionState = {
 };
 
 const AT_REST: SpringState = { value: 0, velocity: 0 };
+const AT_REST_TILT: Tilt = { x: 0, y: 0 };
 
 type SmoothTiltParams = {
   previous: Tilt | null;
@@ -66,6 +69,7 @@ export function createLivingPosterMotion({
 }: CreateLivingPosterMotionParams = {}) {
   const painters = new Set<LivingPosterPainter>();
   const phase = Math.random() * Math.PI * 2;
+  let isReleased = false;
   const orientationSource = createOrientationSource({
     onaccesschange: (access) => onaccesschange?.(access),
   });
@@ -84,6 +88,7 @@ export function createLivingPosterMotion({
       x: AT_REST,
       y: AT_REST,
       lift: AT_REST,
+      presence: 0,
       pointer: null,
       orientation: null,
       dragStart: null,
@@ -108,8 +113,11 @@ export function createLivingPosterMotion({
         ? smoothTilt({ previous: state.orientation, reading, seconds })
         : null;
 
-      const target =
-        state.pointer ?? state.orientation ?? idleTilt({ milliseconds, phase });
+      const target = isReleased
+        ? (state.pointer ??
+          state.orientation ??
+          idleTilt({ milliseconds, phase }))
+        : AT_REST_TILT;
       state.x = stepSpring({
         state: state.x,
         target: target.x,
@@ -126,7 +134,13 @@ export function createLivingPosterMotion({
       });
       state.lift = stepSpring({
         state: state.lift,
-        target: state.pointer ? 1 : state.orientation ? TILT_LIFT : 0,
+        target: !isReleased
+          ? 0
+          : state.pointer
+            ? 1
+            : state.orientation
+              ? TILT_LIFT
+              : 0,
         seconds,
         stiffness: LIFT_STIFFNESS,
         damping: LIFT_DAMPING,
@@ -134,7 +148,19 @@ export function createLivingPosterMotion({
 
       element.style.setProperty('--rx', state.x.value.toFixed(4));
       element.style.setProperty('--ry', state.y.value.toFixed(4));
+      state.presence = stepLowPass({
+        value: state.presence,
+        target: isReleased ? 1 : 0,
+        seconds,
+        timeConstant: PRESENCE_SECONDS,
+      });
+
       element.style.setProperty('--lift', state.lift.value.toFixed(3));
+      element.style.setProperty(
+        '--reach',
+        Math.min(1, Math.hypot(state.x.value, state.y.value)).toFixed(4),
+      );
+      element.style.setProperty('--presence', state.presence.toFixed(3));
 
       for (const paint of painters) {
         paint({ seconds: (milliseconds - start) / 1000 });
@@ -265,5 +291,14 @@ export function createLivingPosterMotion({
     };
   };
 
-  return { root, addPainter, requestTilt: orientationSource.requestAccess };
+  const release = () => {
+    isReleased = true;
+  };
+
+  return {
+    root,
+    addPainter,
+    release,
+    requestTilt: orientationSource.requestAccess,
+  };
 }
