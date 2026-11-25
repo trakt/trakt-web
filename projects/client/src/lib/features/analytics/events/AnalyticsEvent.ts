@@ -6,6 +6,7 @@ const LIST_ACTION_PREFIX = 'list-action';
 const CALENDAR_ACTION_PREFIX = 'calendar-action';
 const SEASONAL_ACTION_PREFIX = 'seasonal-action';
 const BANNER_ACTION_PREFIX = 'banner-action';
+const GETTING_STARTED_PREFIX = 'getting-started';
 const VIP_ACTION_PREFIX = 'vip-action';
 const SMART_LIST_ACTION_PREFIX = 'smart-list-action';
 const DATA_IMPORT_ACTION_PREFIX = 'data-import';
@@ -85,6 +86,14 @@ export const AnalyticsEvent = {
   SeasonalFilter: buildEventKey(SEASONAL_ACTION_PREFIX, 'filter'),
 
   BannerDismiss: buildEventKey(BANNER_ACTION_PREFIX, 'dismiss'),
+  GettingStartedStart: buildEventKey(GETTING_STARTED_PREFIX, 'start'),
+  GettingStartedOpen: buildEventKey(GETTING_STARTED_PREFIX, 'open'),
+  GettingStartedTrack: buildEventKey(GETTING_STARTED_PREFIX, 'track'),
+  GettingStartedUntrack: buildEventKey(GETTING_STARTED_PREFIX, 'untrack'),
+  GettingStartedSkip: buildEventKey(GETTING_STARTED_PREFIX, 'skip'),
+  GettingStartedStep: buildEventKey(GETTING_STARTED_PREFIX, 'step'),
+  GettingStartedComplete: buildEventKey(GETTING_STARTED_PREFIX, 'complete'),
+  GettingStartedRetire: buildEventKey(GETTING_STARTED_PREFIX, 'retire'),
   VipUpsell: buildEventKey(ACTION_PREFIX, 'vip-upsell'),
   VipUpsellImpression: buildEventKey(ACTION_PREFIX, 'vip-upsell-impression'),
 

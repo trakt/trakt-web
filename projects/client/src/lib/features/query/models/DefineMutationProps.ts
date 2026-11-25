@@ -1,4 +1,5 @@
 import type { InvalidateActionOptions } from '$lib/requests/models/InvalidateAction.ts';
+import type { MutationKey } from './MutationKey.ts';
 
 type InvalidationProps<TData, TVariables> = {
   data: TData;
@@ -6,7 +7,7 @@ type InvalidationProps<TData, TVariables> = {
 };
 
 export type DefineMutationProps<TData, TVariables = void> = {
-  key: string;
+  key: MutationKey;
   request: (variables: TVariables) => Promise<TData>;
   invalidations:
     | InvalidateActionOptions[]

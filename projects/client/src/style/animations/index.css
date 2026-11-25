@@ -173,3 +173,20 @@
   opacity: 0;
   translate: 0 var(--ni-16);
 }
+
+.trakt-onboarding-orb {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  z-index: var(--layer-top);
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    var(--shade-10) 0 22%,
+    var(--purple-200) 42%,
+    transparent 72%
+  );
+  box-shadow: 0 0 var(--ni-18) var(--ni-6)
+    color-mix(in srgb, var(--color-accent-purple) 45%, transparent);
+}

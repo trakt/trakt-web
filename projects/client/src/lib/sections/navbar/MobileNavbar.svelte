@@ -7,11 +7,14 @@
   import Link from "$lib/components/link/Link.svelte";
   import { devtoolsStore } from "$lib/features/devtools/devtoolsStore.ts";
   import { DEVTOOLS_TITLE } from "$lib/features/devtools/devtoolsTitle.ts";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { fade } from "svelte/transition";
+  import OnboardingMobileNavItem from "./_internal/OnboardingMobileNavItem.svelte";
   import ProfileLink from "./components/ProfileLink.svelte";
   import { useNavbarState } from "./useNavbarState";
 
@@ -48,6 +51,14 @@
     {/if}
 
     <div class="trakt-mobile-navbar-links">
+      <RenderFor audience="authenticated">
+        <RenderForFeature flag={FeatureFlag.Onboarding} audience="director">
+          {#snippet enabled()}
+            <OnboardingMobileNavItem />
+          {/snippet}
+        </RenderForFeature>
+      </RenderFor>
+
       <Link href={UrlBuilder.home()} label={m.button_label_home()}>
         <HomeIcon />
       </Link>

@@ -5,10 +5,7 @@
 </script>
 
 {#if $devtoolsStore.isDrawerOpen}
-  <DevtoolsDrawer
-    onClose={devtoolsStore.closeDrawer}
-    onSelect={devtoolsStore.openTool}
-  />
+  <DevtoolsDrawer onClose={devtoolsStore.closeDrawer} />
 {/if}
 
 {#if $devtoolsStore.activeTool === "query"}
