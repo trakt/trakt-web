@@ -7,7 +7,7 @@
   import type { Attachment } from "svelte/attachments";
   import { composeLivingPosterStack } from "../../_internal/composeLivingPosterStack";
   import { createLivingPosterMotion } from "../../_internal/createLivingPosterMotion";
-  import { particleCanvas } from "../../_internal/particleCanvas";
+  import { effectCanvas } from "../../_internal/effectCanvas";
   import type { LivingPoster } from "../../models/LivingPoster";
   import type { OrientationAccess } from "../../models/OrientationAccess";
   import LivingPosterEffectLayer from "./LivingPosterEffectLayer.svelte";
@@ -100,13 +100,15 @@
               draggable="false"
               style:--s={item.shift}
             />
-          {:else if item.type === "particles"}
+          {:else if item.type === "canvas"}
             <canvas
-              class="living-poster-particles"
+              class="living-poster-canvas"
               class:is-screen={item.isScreen}
               style:--s={item.shift}
-              {@attach particleCanvas({
+              {@attach effectCanvas({
                 effects: item.effects,
+                plane: item.plane,
+                sources: item.sources,
                 addPainter: motion.addPainter,
               })}
             ></canvas>
@@ -208,7 +210,7 @@
   }
 
   .living-poster-layer,
-  .living-poster-particles {
+  .living-poster-canvas {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -232,7 +234,7 @@
     }
   }
 
-  .living-poster-particles.is-screen {
+  .living-poster-canvas.is-screen {
     mix-blend-mode: screen;
   }
 

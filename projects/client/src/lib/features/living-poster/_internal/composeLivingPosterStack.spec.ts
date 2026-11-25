@@ -26,7 +26,11 @@ const titledLayers = [...layers, { src: 'title.webp', shift: 1 }];
 
 const describeItem = (
   item: ReturnType<typeof composeLivingPosterStack>[number],
-) => (item.type === 'effect' ? `${item.type}:${item.effect.kind}` : item.type);
+) => {
+  if (item.type === 'effect') return `effect:${item.effect.kind}`;
+  if (item.type === 'canvas') return `canvas:${item.plane}`;
+  return item.type;
+};
 
 describe('util: composeLivingPosterStack', () => {
   it('should keep layers in order when there are no effects', () => {
@@ -35,7 +39,7 @@ describe('util: composeLivingPosterStack', () => {
     expect(stack.map(({ type }) => type)).toEqual(['layer', 'layer', 'layer']);
   });
 
-  it('should put particles behind the top layer', () => {
+  it('should paint canvas effects behind the top layer', () => {
     const stack = composeLivingPosterStack({
       mask: null,
       layers,
@@ -45,21 +49,22 @@ describe('util: composeLivingPosterStack', () => {
     expect(stack.map(describeItem)).toEqual([
       'layer',
       'layer',
-      'particles',
-      'particles',
+      'canvas:back',
+      'canvas:back',
       'layer',
+      'canvas:front',
     ]);
   });
 
-  it('should split screen blended particles from normal ones', () => {
+  it('should split screen blended canvas effects from normal ones', () => {
     const stack = composeLivingPosterStack({
       mask: null,
       layers,
       effects: [effect('embers'), effect('snow'), effect('fireflies')],
     });
     const groups = stack.flatMap((item) =>
-      item.type === 'particles'
-        ? [[item.isScreen, item.effects.map(({ kind }) => kind)]]
+      item.type === 'canvas' && item.plane === 'back'
+        ? [[item.isScreen, item.effects.map(({ effect }) => effect.kind)]]
         : [],
     );
 
@@ -73,16 +78,17 @@ describe('util: composeLivingPosterStack', () => {
     const stack = composeLivingPosterStack({
       mask: null,
       layers: titledLayers,
-      effects: [effect('fog'), effect('dust')],
+      effects: [effect('haze'), effect('dust')],
     });
 
     expect(stack.map(describeItem)).toEqual([
       'layer',
       'layer',
-      'effect:fog',
-      'particles',
+      'effect:haze',
+      'canvas:back',
       'layer',
       'layer',
+      'canvas:front',
     ]);
   });
 
@@ -128,7 +134,7 @@ describe('util: composeLivingPosterStack', () => {
       effects: [masked('foil', 'title'), effect('flare')],
     });
     const shifts = stack
-      .filter((item) => item.type === 'effect')
+      .filter((item) => item.type !== 'layer')
       .map(({ shift }) => shift);
 
     expect(shifts).toEqual([0.3, -0.6]);
@@ -152,11 +158,82 @@ describe('util: composeLivingPosterStack', () => {
       'effect:bulbs',
       'effect:foil',
       'layer',
-      'effect:fog',
-      'particles',
+      'canvas:back',
       'layer',
-      'effect:lightning',
+      'canvas:rim',
+      'canvas:front',
     ]);
+  });
+
+  it('should rim the figures with lightning at the figures shift', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers: titledLayers,
+      effects: [effect('lightning')],
+    });
+    const rim = stack.find(
+      (item) => item.type === 'canvas' && item.plane === 'rim',
+    );
+
+    expect(stack.map(describeItem)).toEqual([
+      'layer',
+      'layer',
+      'canvas:back',
+      'layer',
+      'canvas:rim',
+      'layer',
+      'canvas:front',
+    ]);
+    expect(rim?.shift).toBe(0.55);
+  });
+
+  it('should skip the rim when no layer holds the figures', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers: [
+        { src: 'a.webp', shift: -0.8 },
+        { src: 'b.webp', shift: 0.2 },
+      ],
+      effects: [effect('lightning')],
+    });
+
+    expect(stack.map(describeItem)).toEqual([
+      'layer',
+      'canvas:back',
+      'layer',
+      'canvas:front',
+    ]);
+  });
+
+  it('should seed every plane of one effect the same', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers,
+      effects: [effect('embers'), effect('rain'), effect('lightning')],
+    });
+    const seeds = stack.flatMap((item) =>
+      item.type === 'canvas'
+        ? item.effects
+            .filter(({ effect }) => effect.kind === 'lightning')
+            .map(({ seed }) => seed)
+        : [],
+    );
+
+    expect(seeds).toEqual([244, 244, 244]);
+  });
+
+  it('should hand canvas effects the backdrop and figures sources', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers: titledLayers,
+      effects: [effect('twinkle')],
+    });
+    const canvas = stack.find((item) => item.type === 'canvas');
+
+    expect(canvas?.type === 'canvas' && canvas.sources).toEqual({
+      backdrop: 'bg.webp',
+      figures: 'fg.webp',
+    });
   });
 
   it('should share the background parallax with background effects', () => {
@@ -177,20 +254,20 @@ describe('util: composeLivingPosterStack', () => {
       effects: [effect('flare'), effect('foil')],
     });
     const shifts = stack
-      .filter((item) => item.type === 'effect')
+      .filter((item) => item.type !== 'layer')
       .map(({ shift }) => shift);
 
-    expect(shifts).toEqual([-0.6, 1]);
+    expect(shifts).toEqual([1, -0.6]);
   });
 
   it('should draw behind effects over a single layer', () => {
     const stack = composeLivingPosterStack({
       mask: null,
       layers: [layers[0]],
-      effects: [effect('fog')],
+      effects: [effect('glow')],
     });
 
-    expect(stack.map(describeItem)).toEqual(['layer', 'effect:fog']);
+    expect(stack.map(describeItem)).toEqual(['layer', 'effect:glow']);
   });
 
   it('should cast shadows from the figures and title layers only', () => {
@@ -215,7 +292,7 @@ describe('util: composeLivingPosterStack', () => {
       effects: [effect('embers')],
     });
 
-    expect(stack.map(describeItem)).toEqual(['layer', 'particles', 'layer']);
+    expect(stack.map(describeItem)).toEqual(['layer', 'canvas:back', 'layer']);
     expect(stack.map((item) => item.type === 'layer' && item.isCutout)).toEqual(
       [false, false, true],
     );

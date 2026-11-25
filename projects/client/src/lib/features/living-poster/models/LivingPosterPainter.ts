@@ -1,1 +1,4 @@
-export type LivingPosterPainter = (frame: { seconds: number }) => void;
+export type LivingPosterPainter = (frame: {
+  seconds: number;
+  tilt: { x: number; y: number };
+}) => void;
