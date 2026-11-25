@@ -5,7 +5,7 @@ import type { EffectPlane } from '../models/EffectPlane.ts';
 type Planes = Readonly<Partial<Record<EffectPlane, EffectBlend>>>;
 
 const PLANES: Record<CanvasEffect['kind'], Planes> = {
-  embers: { back: 'screen' },
+  embers: { backdrop: 'normal', back: 'screen', front: 'screen' },
   snow: { back: 'normal', front: 'normal' },
   dust: { back: 'screen', front: 'screen' },
   rain: { back: 'normal', front: 'screen' },

@@ -1,1 +1,1 @@
-export type EffectPlane = 'back' | 'rim' | 'front';
+export type EffectPlane = 'backdrop' | 'back' | 'rim' | 'front';

@@ -24,7 +24,7 @@ export function createEffectPainter({
 }: CreateEffectPainterParams): EffectPainter {
   switch (effect.kind) {
     case 'embers':
-      return createEmbersPainter({ effect, seed });
+      return createEmbersPainter({ effect, seed, backdrop: sources.backdrop });
     case 'snow':
       return createSnowPainter({ effect, seed });
     case 'dust':

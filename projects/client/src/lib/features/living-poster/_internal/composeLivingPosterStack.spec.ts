@@ -43,7 +43,7 @@ describe('util: composeLivingPosterStack', () => {
     const stack = composeLivingPosterStack({
       mask: null,
       layers,
-      effects: [effect('embers'), effect('snow')],
+      effects: [effect('fireflies'), effect('snow')],
     });
 
     expect(stack.map(describeItem)).toEqual([
@@ -155,6 +155,7 @@ describe('util: composeLivingPosterStack', () => {
 
     expect(stack.map(describeItem)).toEqual([
       'layer',
+      'canvas:backdrop',
       'effect:bulbs',
       'effect:foil',
       'layer',
@@ -163,6 +164,28 @@ describe('util: composeLivingPosterStack', () => {
       'canvas:rim',
       'canvas:front',
     ]);
+  });
+
+  it('should paint the embers haze right on the background', () => {
+    const stack = composeLivingPosterStack({
+      mask: null,
+      layers,
+      effects: [effect('embers')],
+    });
+    const backdrop = stack.find(
+      (item) => item.type === 'canvas' && item.plane === 'backdrop',
+    );
+
+    expect(stack.map(describeItem)).toEqual([
+      'layer',
+      'canvas:backdrop',
+      'layer',
+      'canvas:back',
+      'layer',
+      'canvas:front',
+    ]);
+    expect(backdrop?.type === 'canvas' && backdrop.isScreen).toBe(false);
+    expect(backdrop?.shift).toBe(-1);
   });
 
   it('should rim the figures with lightning at the figures shift', () => {
@@ -289,7 +312,7 @@ describe('util: composeLivingPosterStack', () => {
         { src: 'a.webp', shift: -0.8 },
         { src: 'b.webp', shift: 0.2 },
       ],
-      effects: [effect('embers')],
+      effects: [effect('fireflies')],
     });
 
     expect(stack.map(describeItem)).toEqual(['layer', 'canvas:back', 'layer']);
