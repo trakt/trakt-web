@@ -188,6 +188,16 @@ export function composeLivingPosterStack(
     }),
   ];
 
+  const backgroundShift = layers.at(0)?.shift ?? 0;
+  const backdrop = toCanvasGroup({
+    sources,
+    effects: painted,
+    key: 'canvas-backdrop-normal',
+    plane: 'backdrop',
+    blend: 'normal',
+    shift: backgroundShift,
+  });
+
   const rim = figures
     ? toCanvasGroup({
         sources,
@@ -199,7 +209,6 @@ export function composeLivingPosterStack(
       })
     : [];
 
-  const backgroundShift = layers.at(0)?.shift ?? 0;
   const titleShift =
     layers.findLast(({ shift }, index) => index > 0 && !isBelowTitle(shift))
       ?.shift ?? FRONT_SHIFT;
@@ -223,6 +232,7 @@ export function composeLivingPosterStack(
         isCutout: isCutoutLayer({ shift, index, total: layers.length }),
       },
       ...(index === figuresIndex ? rim : []),
+      ...(index === 0 ? backdrop : []),
       ...(index === 0
         ? onBackground.map((effect, position) =>
             toEffectItem({
