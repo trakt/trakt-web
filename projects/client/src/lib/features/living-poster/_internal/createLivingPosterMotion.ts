@@ -163,7 +163,10 @@ export function createLivingPosterMotion({
       element.style.setProperty('--presence', state.presence.toFixed(3));
 
       for (const paint of painters) {
-        paint({ seconds: (milliseconds - start) / 1000 });
+        paint({
+          seconds: (milliseconds - start) / 1000,
+          tilt: { x: state.x.value, y: state.y.value },
+        });
       }
     };
 

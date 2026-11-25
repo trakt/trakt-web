@@ -1,5 +1,7 @@
+import type { EffectPlane } from './EffectPlane.ts';
+import type { EffectSources } from './EffectSources.ts';
 import type { LivingPosterEffect } from './LivingPosterEffect.ts';
-import type { ParticleEffect } from './ParticleEffect.ts';
+import type { SeededCanvasEffect } from './SeededCanvasEffect.ts';
 
 export type LivingPosterStackItem =
   | {
@@ -17,9 +19,11 @@ export type LivingPosterStackItem =
       mask: string | null;
     }
   | {
-      type: 'particles';
+      type: 'canvas';
       key: string;
-      effects: ReadonlyArray<ParticleEffect>;
+      effects: ReadonlyArray<SeededCanvasEffect>;
+      plane: EffectPlane;
+      sources: EffectSources;
       shift: number;
       isScreen: boolean;
     };
