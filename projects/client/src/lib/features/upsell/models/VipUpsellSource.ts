@@ -20,6 +20,7 @@ export const VipUpsellSourceSchema = z.union([
     'library-collection-limit',
     'lists',
     'mir',
+    'movie-lore',
     'navbar',
     'navbar-mobile',
     'plex-settings-add-server',

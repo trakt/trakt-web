@@ -17,4 +17,5 @@ export enum SummaryDrawers {
   Rewatching = 'rewatching',
   SeasonRecap = 'season-recap',
   Awards = 'awards',
+  MovieLore = 'movie-lore',
 }

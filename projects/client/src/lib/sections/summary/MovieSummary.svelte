@@ -20,6 +20,7 @@
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
+  import MovieLorePill from "./components/movie-lore/MovieLorePill.svelte";
   import Sentiment from "./components/sentiment/Sentiment.svelte";
   import SoundtrackList from "./components/soundtrack/SoundtrackList.svelte";
   import TriviaList from "./components/trivia/TriviaList.svelte";
@@ -49,6 +50,14 @@
   const listsLink = $derived(UrlBuilder.popularLists.movie(media.slug));
 </script>
 
+{#snippet lorePill()}
+  <RenderForFeature flag={FeatureFlag.MovieLore} audience="director">
+    {#snippet enabled()}
+      <MovieLorePill movie={media} />
+    {/snippet}
+  </RenderForFeature>
+{/snippet}
+
 <SummaryDrawer
   {sentiment}
   {realityCheck}
@@ -61,11 +70,24 @@
 />
 
 <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-  <MediaSummaryV2 {media} {crew} {intl} type="movie" />
+  <MediaSummaryV2
+    {media}
+    {crew}
+    {intl}
+    type="movie"
+    socialContent={lorePill}
+  />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-  <MediaSummary {media} {intl} {streamOn} {crew} type="movie">
+  <MediaSummary
+    {media}
+    {intl}
+    {streamOn}
+    {crew}
+    type="movie"
+    socialContent={lorePill}
+  >
     {#snippet contextualContent()}
       <RenderFor audience="all" device={["desktop"]}>
         <WhereToWatchList

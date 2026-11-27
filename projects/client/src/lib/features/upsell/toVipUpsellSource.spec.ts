@@ -14,6 +14,10 @@ describe('util: toVipUpsellSource', () => {
     expect(toVipUpsellSource('season-recap')).toBe('season-recap');
   });
 
+  it('should keep the movie lore source', () => {
+    expect(toVipUpsellSource('movie-lore')).toBe('movie-lore');
+  });
+
   it('should keep a promotion source', () => {
     expect(toVipUpsellSource('promotion-spring-offer')).toBe(
       'promotion-spring-offer',

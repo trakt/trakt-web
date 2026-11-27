@@ -7,7 +7,10 @@
   import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
 
-  const { points }: { points: ReadonlyArray<string> } = $props();
+  const { heading, points }: {
+    heading: string;
+    points: ReadonlyArray<string>;
+  } = $props();
 
   const isReducedMotion = useMedia(WellKnownMediaQuery.reducedMotion);
 
@@ -52,7 +55,7 @@
 
 <div class="trakt-recap-key-moments">
   <div class="moments-header">
-    <h3>{m.header_recap_key_moments()}</h3>
+    <h3>{heading}</h3>
 
     <div class="moments-controls">
       <span class="small secondary moments-counter" aria-live="polite">
