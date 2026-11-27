@@ -30,6 +30,7 @@ const summaryDrawerParams = {
   [SummaryDrawers.Sentiment]: { [TAB_PARAM]: '' },
   [SummaryDrawers.SeasonRecap]: { [TAB_PARAM]: '' },
   [SummaryDrawers.Awards]: { [SOURCE_PARAM]: '' },
+  [SummaryDrawers.MovieLore]: { [TAB_PARAM]: '' },
 } satisfies Partial<Record<SummaryDrawers, Record<string, string>>>;
 
 type CommentDrawerSource = {
@@ -87,6 +88,8 @@ function mapToDrawer(value: string | Nil) {
       return SummaryDrawers.SeasonRecap;
     case SummaryDrawers.Awards:
       return SummaryDrawers.Awards;
+    case SummaryDrawers.MovieLore:
+      return SummaryDrawers.MovieLore;
     default:
       return null;
   }

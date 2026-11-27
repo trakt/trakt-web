@@ -28,6 +28,7 @@
   import HistoryDrawerHost from "./components/history/HistoryDrawerHost.svelte";
   import NotesDrawerHost from "./components/notes/NotesDrawerHost.svelte";
   import RatingsDrawer from "./components/rating/RatingsDrawer.svelte";
+  import MovieLoreDrawerHost from "./components/movie-lore/MovieLoreDrawerHost.svelte";
   import SeasonRecapDrawerHost from "./components/recap/SeasonRecapDrawerHost.svelte";
   import SeasonsDrawerHost from "./components/seasons/SeasonsDrawerHost.svelte";
   import { useMatch } from "./components/sentiment/useMatch.ts";
@@ -126,6 +127,10 @@
     if (details.type === "episode") return details.show;
     if (details.media.type === "show") return details.media as ShowEntry;
   });
+
+  const movieEntry = $derived(
+    details.type === "movie" ? details.media : undefined,
+  );
 
   const whereToWatchTarget = $derived(
     details.type === "episode"
@@ -296,6 +301,14 @@
   <RenderForFeature flag={FeatureFlag.Rewatching}>
     {#snippet enabled()}
       <RewatchingDrawerHost show={showEntry} onClose={close} />
+    {/snippet}
+  </RenderForFeature>
+{/if}
+
+{#if drawer === SummaryDrawers.MovieLore && movieEntry}
+  <RenderForFeature flag={FeatureFlag.MovieLore} audience="director">
+    {#snippet enabled()}
+      <MovieLoreDrawerHost movie={movieEntry} onClose={close} />
     {/snippet}
   </RenderForFeature>
 {/if}

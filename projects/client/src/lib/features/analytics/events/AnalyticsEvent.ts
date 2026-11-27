@@ -16,6 +16,7 @@ const MIXTAPE_PREFIX = 'mixtape';
 const RECOMMENDATIONS_PREFIX = 'recommendations';
 const INSIGHTS_PREFIX = 'insights';
 const RECAP_PREFIX = 'recap';
+const MOVIE_LORE_PREFIX = 'movie-lore';
 const BRANDING_PREFIX = 'branding';
 const ISSUE_REPORT_PREFIX = 'issue-report';
 const MONTH_REVIEW_PREFIX = 'month-review';
@@ -142,6 +143,10 @@ export const AnalyticsEvent = {
   RecapTab: buildEventKey(RECAP_PREFIX, 'tab'),
   RecapReveal: buildEventKey(RECAP_PREFIX, 'reveal'),
   RecapChapter: buildEventKey(RECAP_PREFIX, 'chapter'),
+
+  MovieLoreOpen: buildEventKey(MOVIE_LORE_PREFIX, 'open'),
+  MovieLoreTab: buildEventKey(MOVIE_LORE_PREFIX, 'tab'),
+  MovieLoreReveal: buildEventKey(MOVIE_LORE_PREFIX, 'reveal'),
   MonthReviewView: buildEventKey(MONTH_REVIEW_PREFIX, 'view'),
   YearReviewView: buildEventKey(YEAR_REVIEW_PREFIX, 'view'),
 

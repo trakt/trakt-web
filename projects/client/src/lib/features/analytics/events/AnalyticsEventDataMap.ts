@@ -188,6 +188,7 @@ type MixtapeResultType = {
 type InsightsOpenType = { source: InsightsOpenSource; tab: InsightsTab };
 type InsightsTabType = { tab: InsightsTab };
 type RecapTabType = { tab: 'recap' | 'story' };
+type MovieLoreTabType = { tab: 'setup' | 'lore' };
 type BrandingDownloadType = {
   format: LogoFormat;
   size: LogoSize | 'vector';
@@ -338,6 +339,9 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.RecapTab]: RecapTabType;
   [AnalyticsEvent.RecapReveal]: never;
   [AnalyticsEvent.RecapChapter]: never;
+  [AnalyticsEvent.MovieLoreOpen]: never;
+  [AnalyticsEvent.MovieLoreTab]: MovieLoreTabType;
+  [AnalyticsEvent.MovieLoreReveal]: never;
 
   [AnalyticsEvent.BrandingDownload]: BrandingDownloadType;
 

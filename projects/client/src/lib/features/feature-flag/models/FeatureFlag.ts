@@ -11,4 +11,5 @@ export enum FeatureFlag {
   MonthInReviewRedesign = 'month-in-review-redesign',
   LivingPoster = 'living-poster',
   CharacterPortraits = 'character-portraits',
+  MovieLore = 'movie-lore',
 }

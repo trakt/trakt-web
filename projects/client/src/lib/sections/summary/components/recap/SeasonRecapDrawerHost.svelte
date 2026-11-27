@@ -89,6 +89,15 @@
   let activeTab = $state(toTab(page.url.searchParams.get(TAB_PARAM)));
 
   const isGuarded = $derived($isSpoilerHidden !== false && !isRevealed);
+  const spoilerMessage = $derived(
+    ($watched ?? 0) > 0
+      ? m.text_recap_spoiler_partial({
+          watched: $watched ?? 0,
+          total: seasonEntry?.episodes.aired ?? 0,
+          number: season,
+        })
+      : m.text_recap_spoiler_unwatched({ number: season }),
+  );
 
   const hasStoryTab = $derived(
     isVip && $recap?.hasStory === true && $story !== null,
@@ -158,9 +167,13 @@
     >
       <RecapHero
         image={show.cover.url.medium}
-        title={show.title}
-        season={season}
-        episodeCount={seasonEntry?.episodes.count ?? 0}
+        heading={m.header_season_recap({ title: show.title })}
+        label={m.text_recap_meta_pair({
+          first: m.text_season_number({ number: season }),
+          second: m.tag_text_number_of_episodes({
+            count: seasonEntry?.episodes.count ?? 0,
+          }),
+        })}
         {duration}
       />
 
@@ -171,9 +184,7 @@
 
         <RecapSpoilerGuard
           {isGuarded}
-          {season}
-          watched={$watched ?? 0}
-          total={seasonEntry?.episodes.aired ?? 0}
+          message={spoilerMessage}
           {onReveal}
         >
           {#if isLoading}

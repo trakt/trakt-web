@@ -1,3 +1,4 @@
+import BookIcon from '$lib/components/icons/BookIcon.svelte';
 import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
 import EditModeIcon from '$lib/components/icons/EditModeIcon.svelte';
 import FastRewindIcon from '$lib/components/icons/FastRewindIcon.svelte';
@@ -110,6 +111,13 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     title: () => m.preview_feature_title_character_portraits(),
     addedAt: new Date('2026-11-17'),
     description: () => m.preview_feature_description_character_portraits(),
+    audience: 'director',
+  },
+  [FeatureFlag.MovieLore]: {
+    icon: BookIcon,
+    title: () => m.preview_feature_title_movie_lore(),
+    addedAt: new Date('2026-11-27'),
+    description: () => m.preview_feature_description_movie_lore(),
     audience: 'director',
   },
 };

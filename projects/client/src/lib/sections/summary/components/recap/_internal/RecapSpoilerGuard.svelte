@@ -4,11 +4,9 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
 
-  const { isGuarded, season, watched, total, onReveal, children }: {
+  const { isGuarded, message, onReveal, children }: {
     isGuarded: boolean;
-    season: number;
-    watched: number;
-    total: number;
+    message: string;
     onReveal: () => void;
     children: Snippet;
   } = $props();
@@ -24,17 +22,7 @@
       <div class="guard-card">
         <div class="guard-message">
           <HideIcon />
-          <p class="small secondary">
-            {#if watched > 0}
-              {m.text_recap_spoiler_partial({
-                watched,
-                total,
-                number: season,
-              })}
-            {:else}
-              {m.text_recap_spoiler_unwatched({ number: season })}
-            {/if}
-          </p>
+          <p class="small secondary">{message}</p>
         </div>
 
         <Button
@@ -57,6 +45,7 @@
     position: relative;
 
     &.is-guarded {
+      min-height: var(--recap-guard-min-height, 0);
       max-height: var(--ni-440);
       overflow: hidden;
 

@@ -1,14 +1,13 @@
 <script lang="ts">
   import ClockIcon from "$lib/components/icons/ClockIcon.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
 
-  const { image, title, season, episodeCount, duration }: {
+  const { image, heading, label, note, duration }: {
     image: HttpsUrl;
-    title: string;
-    season: number;
-    episodeCount: number;
+    heading: string;
+    label: string | undefined;
+    note?: string;
     duration: string | undefined;
   } = $props();
 </script>
@@ -20,12 +19,13 @@
 
   <div class="hero-copy">
     <div class="hero-chips">
-      <span class="hero-chip bold">
-        {m.text_recap_meta_pair({
-          first: m.text_season_number({ number: season }),
-          second: m.tag_text_number_of_episodes({ count: episodeCount }),
-        })}
-      </span>
+      {#if label}
+        <span class="hero-chip bold">{label}</span>
+      {:else}
+        <span class="hero-chip">
+          <Skeleton width="var(--ni-72)" height="var(--ni-10)" />
+        </span>
+      {/if}
 
       {#if duration}
         <span class="hero-chip secondary">
@@ -37,9 +37,13 @@
           <Skeleton width="var(--ni-40)" height="var(--ni-10)" />
         </span>
       {/if}
+
+      {#if note}
+        <span class="hero-chip secondary">{note}</span>
+      {/if}
     </div>
 
-    <h2 class="hero-title">{m.header_season_recap({ title })}</h2>
+    <h2 class="hero-title">{heading}</h2>
   </div>
 </header>
 
