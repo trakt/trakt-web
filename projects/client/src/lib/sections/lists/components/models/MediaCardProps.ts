@@ -14,6 +14,7 @@ export type MediaItemVariant<T> =
       subtitle?: string;
     } & MediaInput<T>)
   | ({ variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>)
+  | ({ variant: 'portrait' } & MediaInput<T>)
   | ({ variant: 'start' } & MediaInput<T>)
   | ({ variant: 'progress' } & MediaInput<T>)
   | ({ variant: 'credit'; role: string } & MediaInput<T>);

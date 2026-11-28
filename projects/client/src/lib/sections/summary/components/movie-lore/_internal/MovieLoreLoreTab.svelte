@@ -6,9 +6,10 @@
   import RecapSource from "../../recap/_internal/RecapSource.svelte";
   import MovieLorePreviously from "./MovieLorePreviously.svelte";
 
-  const { lore, movie, watchedIds, onReveal }: {
+  const { lore, movie, mustWatchIds, watchedIds, onReveal }: {
     lore: MovieLore;
     movie: Pick<MovieEntry, "id" | "title">;
+    mustWatchIds: ReadonlySet<number>;
     watchedIds: ReadonlySet<number>;
     onReveal: () => void;
   } = $props();
@@ -34,6 +35,7 @@
     <MovieLorePreviously
       previously={lore.previously}
       {movie}
+      {mustWatchIds}
       {watchedIds}
       {onReveal}
     />

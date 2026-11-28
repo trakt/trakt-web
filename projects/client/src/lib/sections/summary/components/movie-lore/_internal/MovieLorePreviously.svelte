@@ -1,35 +1,35 @@
 <script lang="ts">
+  import Button from "$lib/components/buttons/Button.svelte";
+  import HideIcon from "$lib/components/icons/HideIcon.svelte";
+  import CollapseIcon from "$lib/components/lists/section-list/CollapseIcon.svelte";
+  import IndicatorTag from "$lib/components/media/tags/IndicatorTag.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { useSpoiler } from "$lib/features/spoilers/_internal/useSpoiler.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry.ts";
   import type { MovieLore } from "$lib/requests/models/MovieLore.ts";
-  import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
   import MarkdownText from "$lib/sections/components/markdown/MarkdownText.svelte";
-  import { useSpoiler } from "$lib/features/spoilers/_internal/useSpoiler.ts";
   import { toMediaImageUrl } from "$lib/utils/url/toMediaImageUrl.ts";
   import { Accordion } from "bits-ui";
-  import RecapAccordionItem from "../../recap/_internal/RecapAccordionItem.svelte";
-  import RecapSpoilerGuard from "../../recap/_internal/RecapSpoilerGuard.svelte";
   import { isLoreFilmGuarded } from "./isLoreFilmGuarded.ts";
+  import MovieLoreFilmMenu from "./MovieLoreFilmMenu.svelte";
+  import MovieLoreTag from "./MovieLoreTag.svelte";
 
-  const { previously, movie, watchedIds, onReveal }: {
+  const { previously, movie, mustWatchIds, watchedIds, onReveal }: {
     previously: MovieLore["previously"];
     movie: Pick<MovieEntry, "id" | "title">;
+    mustWatchIds: ReadonlySet<number>;
     watchedIds: ReadonlySet<number>;
     onReveal: () => void;
   } = $props();
 
   const entries = $derived(
-    previously.map(({ movie: earlier, summary }) => {
-      const [lead = "", ...more] = summary.trim().split(/\n{2,}/);
-
-      return {
-        key: `previously-${earlier.id}`,
-        movie: earlier,
-        lead,
-        more: more.join("\n\n"),
-      };
-    }),
+    previously.map(({ movie: earlier, summary }) => ({
+      key: `previously-${earlier.id}`,
+      movie: earlier,
+      summary,
+    })),
   );
 
   const moviePoster = $derived(
@@ -47,8 +47,7 @@
   let revealed = $state(new Set<number>());
 
   const latestKey = $derived(entries.at(-1)?.key);
-  const isOpen = (key: string) => toggled.get(key) ?? key === latestKey;
-  const openKeys = $derived(entries.map(({ key }) => key).filter(isOpen));
+
   const isGuarded = (id: number) =>
     isLoreFilmGuarded({
       isSpoilerHidden: $isSpoilerHidden,
@@ -56,11 +55,31 @@
       isRevealed: revealed.has(id),
     });
 
-  function reveal(id: number) {
-    revealed = new Set([...revealed, id]);
+  const isOpen = ({ key, movie: earlier }: (typeof entries)[number]) =>
+    !isGuarded(earlier.id) && (toggled.get(key) ?? key === latestKey);
+
+  const openKeys = $derived(
+    entries.filter(isOpen).map(({ key }) => key),
+  );
+
+  function reveal({ key, movie: earlier }: (typeof entries)[number]) {
+    revealed = new Set([...revealed, earlier.id]);
+    toggled = new Map([...toggled, [key, true]]);
     onReveal();
   }
 </script>
+
+{#snippet heading(entry: (typeof entries)[number])}
+  <span class="timeline-heading">
+    <span class="bold ellipsis">{entry.movie.title}</span>
+    {#if entry.movie.year}
+      <span class="timeline-year small secondary">{entry.movie.year}</span>
+    {/if}
+    {#if mustWatchIds.has(entry.movie.id) && !watchedIds.has(entry.movie.id)}
+      <MovieLoreTag tone="must-watch" />
+    {/if}
+  </span>
+{/snippet}
 
 <section class="trakt-movie-lore-previously">
   <div class="previously-header">
@@ -81,45 +100,82 @@
       class="previously-list"
     >
       {#each entries as entry (entry.key)}
-        {@const isEntryOpen = isOpen(entry.key)}
+        {@const isEntryOpen = isOpen(entry)}
+        {@const isEntryGuarded = isGuarded(entry.movie.id)}
         <div class="timeline-item">
           <span class="timeline-node" aria-hidden="true">
             {#if entry.movie.poster}
               <CrossOriginImage src={entry.movie.poster} alt="" />
             {/if}
+            {#if watchedIds.has(entry.movie.id)}
+              <span class="timeline-tick">
+                <IndicatorTag indicator="watched" />
+              </span>
+            {/if}
           </span>
 
           <div class="timeline-card" class:is-open={isEntryOpen}>
-            <RecapSpoilerGuard
-              isGuarded={isGuarded(entry.movie.id)}
-              message={m.text_movie_lore_spoiler_unseen({
-                title: entry.movie.title,
-              })}
-              onReveal={() => reveal(entry.movie.id)}
+            <Accordion.Item
+              value={entry.key}
+              disabled={isEntryGuarded}
+              class="timeline-accordion-item"
             >
-              <RecapAccordionItem value={entry.key} isOpen={isEntryOpen}>
-                {#snippet trigger()}
-                  <span class="timeline-heading">
-                    <span class="bold">{entry.movie.title}</span>
-                    {#if entry.movie.year}
-                      <span class="small secondary">{entry.movie.year}</span>
-                    {/if}
-                  </span>
-                {/snippet}
-
-                {#snippet preview()}
-                  <p class="timeline-lead" class:is-open={isEntryOpen}>
-                    <InlineMarkdown text={entry.lead} />
-                  </p>
-                {/snippet}
-
-                {#if entry.more}
-                  <div class="secondary">
-                    <MarkdownText text={entry.more} spacing="relaxed" />
+              <div class="timeline-row">
+                {#if isEntryGuarded}
+                  <div class="timeline-trigger">
+                    {@render heading(entry)}
                   </div>
+                  <span
+                    class="timeline-reveal"
+                    title={m.tooltip_text_movie_lore_spoils_film()}
+                  >
+                    <Button
+                      label={m.button_label_movie_lore_show_spoiler({
+                        title: entry.movie.title,
+                      })}
+                      style="outline"
+                      color="default"
+                      size="tag"
+                      onclick={() => reveal(entry)}
+                    >
+                      {m.button_text_movie_lore_show_spoiler()}
+                      {#snippet icon()}
+                        <HideIcon />
+                      {/snippet}
+                    </Button>
+                  </span>
+                {:else}
+                  <Accordion.Header level={4} class="timeline-heading-wrap">
+                    <Accordion.Trigger class="timeline-trigger">
+                      {@render heading(entry)}
+                      <span
+                        class="timeline-caret"
+                        class:is-open={isEntryOpen}
+                        aria-hidden="true"
+                      >
+                        <CollapseIcon
+                          state={isEntryOpen ? "expanded" : "collapsed"}
+                          variant="bare"
+                          size={20}
+                        />
+                      </span>
+                    </Accordion.Trigger>
+                  </Accordion.Header>
                 {/if}
-              </RecapAccordionItem>
-            </RecapSpoilerGuard>
+
+                <RenderFor audience="authenticated">
+                  <MovieLoreFilmMenu film={entry.movie} />
+                </RenderFor>
+              </div>
+
+              {#if !isEntryGuarded}
+                <Accordion.Content class="timeline-content">
+                  <div class="secondary">
+                    <MarkdownText text={entry.summary} spacing="relaxed" />
+                  </div>
+                </Accordion.Content>
+              {/if}
+            </Accordion.Item>
           </div>
         </div>
       {/each}
@@ -130,7 +186,7 @@
         <CrossOriginImage src={moviePoster} alt="" />
       </span>
       <span class="secondary">
-        {m.text_movie_lore_up_next({ title: movie.title })}
+        {m.text_movie_lore_up_next_title({ title: movie.title })}
       </span>
     </div>
   </div>
@@ -153,7 +209,6 @@
 
     .previously-timeline {
       position: relative;
-
       display: flex;
       flex-direction: column;
       gap: var(--ni-14);
@@ -164,9 +219,7 @@
       top: var(--ni-18);
       bottom: var(--ni-18);
       inset-inline-start: calc(var(--timeline-node-width) / 2 - 1px);
-
       width: var(--ni-2);
-
       background: linear-gradient(
         180deg,
         var(--color-vip-border-accent),
@@ -182,22 +235,17 @@
 
     .timeline-item {
       position: relative;
-
       display: flex;
       gap: var(--gap-s);
     }
 
     .timeline-node {
       position: relative;
-
       flex-shrink: 0;
       align-self: flex-start;
-
       width: var(--timeline-node-width);
       aspect-ratio: 2 / 3;
       margin-top: var(--ni-4);
-
-      overflow: hidden;
       border-radius: var(--ni-6);
       background-color: var(--purple-800);
       box-shadow: 0 0 0 var(--border-thickness-s) var(--color-card-background);
@@ -206,6 +254,7 @@
         display: block;
         width: 100%;
         height: 100%;
+        border-radius: inherit;
         object-fit: cover;
       }
 
@@ -217,16 +266,19 @@
       }
     }
 
-    .timeline-card {
-      --recap-accordion-gap: var(--gap-xs);
-      --recap-accordion-trigger-height: var(--ni-28);
-      --recap-accordion-focus-offset: var(--ni-2);
-      --recap-guard-min-height: var(--ni-168);
+    .timeline-tick {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      transform: translateY(50%);
+    }
 
+    .timeline-card {
       flex: 1;
       min-width: 0;
       padding: var(--gap-s) var(--ni-14) var(--ni-14);
-
       border-radius: var(--border-radius-m);
       background: color-mix(in srgb, var(--color-text-primary) 4%, transparent);
 
@@ -237,26 +289,71 @@
       }
     }
 
-    .timeline-heading {
+    .timeline-row {
       display: flex;
-      flex-direction: column;
-      gap: var(--ni-2);
+      align-items: center;
+      gap: var(--gap-xs);
+      min-height: var(--ni-28);
     }
 
-    .timeline-lead {
-      line-height: 1.5;
+    :global(.timeline-heading-wrap) {
+      display: flex;
+      flex: 1;
+      min-width: 0;
+      margin: 0;
+    }
+
+    :global(.timeline-trigger),
+    .timeline-trigger {
+      all: unset;
+      box-sizing: border-box;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      gap: var(--gap-s);
+      min-width: 0;
+      min-height: var(--ni-28);
+    }
+
+    :global(button.timeline-trigger) {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+
+      &:focus-visible {
+        outline: var(--border-thickness-xs) solid currentColor;
+        outline-offset: var(--ni-2);
+      }
+    }
+
+    .timeline-heading {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xs);
+      min-width: 0;
+    }
+
+    .timeline-year {
+      flex-shrink: 0;
+    }
+
+    .timeline-reveal {
+      display: flex;
+      flex-shrink: 0;
+    }
+
+    .timeline-caret {
+      display: flex;
+      flex-shrink: 0;
+      margin-inline-start: auto;
       color: var(--color-text-secondary);
 
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      overflow: hidden;
-
       &.is-open {
-        display: block;
-        color: var(--color-text-primary);
+        color: var(--color-text-emphasis);
       }
+    }
+
+    :global(.timeline-content) {
+      padding-top: var(--gap-xs);
     }
 
     .timeline-up-next {
