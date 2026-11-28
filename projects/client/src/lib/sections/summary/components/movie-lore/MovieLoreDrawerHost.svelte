@@ -60,6 +60,7 @@
 
   const watchedIdsStore = useWatchedMovieIds();
   const watchedIds = $derived($watchedIdsStore ?? new Set<number>());
+  const isHistoryLoading = $derived($watchedIdsStore == null);
 
   let activeTab = $state(toTab(page.url.searchParams.get(TAB_PARAM)));
 
@@ -139,6 +140,7 @@
           <RenderFor audience="authenticated">
             <MovieLoreProgress
               {progress}
+              isLoading={isHistoryLoading}
               verdict={$lore.watchFirst?.verdict}
               title={movie.title}
             />

@@ -5,6 +5,8 @@ export function useWatchedMovieIds() {
   const { history } = useUser();
 
   return history.pipe(
-    map(($history): ReadonlySet<number> => new Set($history?.movies.keys())),
+    map(($history): ReadonlySet<number> | null =>
+      $history ? new Set($history.movies.keys()) : null,
+    ),
   );
 }

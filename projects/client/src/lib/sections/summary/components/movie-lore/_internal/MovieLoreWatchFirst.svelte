@@ -4,10 +4,15 @@
   import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
   import MovieLoreFilm from "./MovieLoreFilm.svelte";
 
-  const { watchFirst, watchedIds }: {
+  const { watchFirst, watchedIds, earlierCount }: {
     watchFirst: NonNullable<MovieLore["watchFirst"]>;
     watchedIds: ReadonlySet<number>;
+    earlierCount: number;
   } = $props();
+
+  const isShortList = $derived(
+    watchFirst.movies.length > 0 && watchFirst.movies.length < earlierCount,
+  );
 </script>
 
 <section class="trakt-movie-lore-watch-first">
@@ -16,12 +21,30 @@
   <div class="watch-first-card">
     <p><InlineMarkdown text={watchFirst.note} /></p>
 
+    {#if isShortList}
+      <div class="watch-first-label small">
+        <span class="bold">{m.text_movie_lore_watch_first_label()}</span>
+        <span class="secondary">
+          {m.text_movie_lore_watch_first_count({
+            count: watchFirst.movies.length,
+            total: earlierCount,
+          })}
+        </span>
+      </div>
+    {/if}
+
     {#if watchFirst.movies.length > 0}
       <div class="watch-first-films">
         {#each watchFirst.movies as movie (movie.id)}
           <MovieLoreFilm {movie} isWatched={watchedIds.has(movie.id)} />
         {/each}
       </div>
+    {/if}
+
+    {#if isShortList}
+      <span class="small secondary">
+        {m.text_movie_lore_watch_first_recapped({ total: earlierCount })}
+      </span>
     {/if}
   </div>
 </section>
@@ -46,6 +69,22 @@
 
       :global(.trakt-inline-markdown) {
         font-size: inherit;
+      }
+    }
+
+    .watch-first-label {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--gap-xxs) var(--gap-xs);
+
+      padding-top: var(--gap-s);
+      border-top: var(--border-thickness-xxs) solid var(--recap-card-ring);
+
+      .bold {
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
       }
     }
 
