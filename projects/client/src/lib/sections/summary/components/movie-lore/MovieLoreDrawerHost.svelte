@@ -7,7 +7,6 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent.ts";
   import { useTrack } from "$lib/features/analytics/useTrack.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry.ts";
   import { TAB_PARAM } from "$lib/sections/summary/constants.ts";
   import { fromRune } from "$lib/utils/store/fromRune.svelte.ts";
@@ -64,8 +63,13 @@
 
   let activeTab = $state(toTab(page.url.searchParams.get(TAB_PARAM)));
 
+  const mustWatchIds = $derived(
+    new Set($lore?.watchFirst?.movies.map(({ id }) => id)),
+  );
+
   const progress = $derived(
-    $lore && toLoreProgress({ earlier: $lore.earlier, watchedIds }),
+    $lore &&
+      toLoreProgress({ earlier: $lore.earlier, mustWatchIds, watchedIds }),
   );
 
   const duration = $derived(
@@ -83,7 +87,7 @@
 {#snippet setupView()}
   <div class="lore-panel">
     {#if $lore}
-      <MovieLoreSetupTab lore={$lore} {watchedIds} />
+      <MovieLoreSetupTab lore={$lore} {movie} {mustWatchIds} {watchedIds} />
     {/if}
   </div>
 {/snippet}
@@ -94,6 +98,7 @@
       <MovieLoreLoreTab
         lore={$lore}
         {movie}
+        {mustWatchIds}
         {watchedIds}
         onReveal={() => trackReveal()}
       />
@@ -136,15 +141,12 @@
       />
 
       <div class="lore-body">
-        {#if $lore && progress && progress.totalCount > 0}
-          <RenderFor audience="authenticated">
-            <MovieLoreProgress
-              {progress}
-              isLoading={isHistoryLoading}
-              verdict={$lore.watchFirst?.verdict}
-              title={movie.title}
-            />
-          </RenderFor>
+        {#if $lore && progress && $lore.earlier.length > 0}
+          <MovieLoreProgress
+            {progress}
+            isLoading={isHistoryLoading}
+            title={movie.title}
+          />
         {/if}
 
         {#if $lore}

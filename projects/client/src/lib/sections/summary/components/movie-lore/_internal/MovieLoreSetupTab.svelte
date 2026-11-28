@@ -1,11 +1,14 @@
 <script lang="ts">
+  import type { MovieEntry } from "$lib/requests/models/MovieEntry.ts";
   import type { MovieLore } from "$lib/requests/models/MovieLore.ts";
   import RecapSource from "../../recap/_internal/RecapSource.svelte";
   import MovieLoreSetup from "./MovieLoreSetup.svelte";
   import MovieLoreWatchFirst from "./MovieLoreWatchFirst.svelte";
 
-  const { lore, watchedIds }: {
+  const { lore, movie, mustWatchIds, watchedIds }: {
     lore: MovieLore;
+    movie: MovieEntry;
+    mustWatchIds: ReadonlySet<number>;
     watchedIds: ReadonlySet<number>;
   } = $props();
 </script>
@@ -16,8 +19,10 @@
   {#if lore.watchFirst}
     <MovieLoreWatchFirst
       watchFirst={lore.watchFirst}
+      earlier={lore.earlier}
+      {movie}
+      {mustWatchIds}
       {watchedIds}
-      earlierCount={lore.earlier.length}
     />
   {/if}
 

@@ -1,50 +1,47 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { LoreMovie } from "$lib/requests/models/LoreMovie.ts";
+  import type { MovieEntry } from "$lib/requests/models/MovieEntry.ts";
   import type { MovieLore } from "$lib/requests/models/MovieLore.ts";
   import InlineMarkdown from "$lib/sections/components/markdown/InlineMarkdown.svelte";
-  import MovieLoreFilm from "./MovieLoreFilm.svelte";
+  import MovieLoreBadge from "./MovieLoreBadge.svelte";
+  import MovieLoreFilmPoster from "./MovieLoreFilmPoster.svelte";
+  import MovieLorePosterCard from "./MovieLorePosterCard.svelte";
+  import { toLoreVerdictLabel } from "./toLoreVerdictLabel.ts";
 
-  const { watchFirst, watchedIds, earlierCount }: {
+  const { watchFirst, earlier, movie, mustWatchIds, watchedIds }: {
     watchFirst: NonNullable<MovieLore["watchFirst"]>;
+    earlier: ReadonlyArray<LoreMovie>;
+    movie: MovieEntry;
+    mustWatchIds: ReadonlySet<number>;
     watchedIds: ReadonlySet<number>;
-    earlierCount: number;
   } = $props();
-
-  const isShortList = $derived(
-    watchFirst.movies.length > 0 && watchFirst.movies.length < earlierCount,
-  );
 </script>
 
 <section class="trakt-movie-lore-watch-first">
-  <h3>{m.header_movie_lore_need_others()}</h3>
-
+  <h3>{m.header_movie_lore_need_films()}</h3>
   <div class="watch-first-card">
+    <div class="watch-first-verdict">
+      <MovieLoreBadge tone={watchFirst.verdict}>
+        {toLoreVerdictLabel(watchFirst.verdict)}
+      </MovieLoreBadge>
+    </div>
     <p><InlineMarkdown text={watchFirst.note} /></p>
-
-    {#if isShortList}
-      <div class="watch-first-label small">
-        <span class="bold">{m.text_movie_lore_watch_first_label()}</span>
-        <span class="secondary">
-          {m.text_movie_lore_watch_first_count({
-            count: watchFirst.movies.length,
-            total: earlierCount,
-          })}
-        </span>
-      </div>
-    {/if}
-
-    {#if watchFirst.movies.length > 0}
+    {#if earlier.length > 0}
       <div class="watch-first-films">
-        {#each watchFirst.movies as movie (movie.id)}
-          <MovieLoreFilm {movie} isWatched={watchedIds.has(movie.id)} />
+        {#each earlier as film (film.id)}
+          <MovieLoreFilmPoster
+            {film}
+            tone={mustWatchIds.has(film.id) ? "must-watch" : "optional"}
+            isWatched={watchedIds.has(film.id)}
+          />
         {/each}
+        <MovieLorePosterCard
+          media={movie}
+          tone="current"
+          isWatched={watchedIds.has(movie.id)}
+        />
       </div>
-    {/if}
-
-    {#if isShortList}
-      <span class="small secondary">
-        {m.text_movie_lore_watch_first_recapped({ total: earlierCount })}
-      </span>
     {/if}
   </div>
 </section>
@@ -59,9 +56,7 @@
       display: flex;
       flex-direction: column;
       gap: var(--gap-s);
-
       padding: var(--gap-m);
-
       border-radius: var(--border-radius-l);
       background: var(--recap-card-background);
       box-shadow: inset 0 0 0 var(--border-thickness-xxs)
@@ -72,26 +67,16 @@
       }
     }
 
-    .watch-first-label {
+    .watch-first-verdict {
       display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: var(--gap-xxs) var(--gap-xs);
-
-      padding-top: var(--gap-s);
-      border-top: var(--border-thickness-xxs) solid var(--recap-card-ring);
-
-      .bold {
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-      }
     }
 
     .watch-first-films {
       display: flex;
-      flex-direction: column;
-      gap: var(--gap-xs);
+      gap: var(--gap-s);
+      padding-block: var(--gap-xs);
+      overflow-x: auto;
+      scrollbar-width: none;
     }
   }
 </style>

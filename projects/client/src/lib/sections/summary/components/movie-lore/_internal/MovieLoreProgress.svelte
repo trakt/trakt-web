@@ -1,79 +1,124 @@
 <script lang="ts">
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { MovieLoreVerdict } from "$lib/requests/models/MovieLoreVerdict.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import MovieLoreBadge from "./MovieLoreBadge.svelte";
+  import MovieLoreWatchlistAll from "./MovieLoreWatchlistAll.svelte";
+  import { toLoreSignedOutLabel } from "./toLoreSignedOutLabel.ts";
   import type { toLoreProgress } from "./toLoreProgress.ts";
-  import { toLoreMovieTitle } from "./toLoreMovieTitle.ts";
-  import { toLoreVerdictLabel } from "./toLoreVerdictLabel.ts";
 
-  const { progress, verdict, title, isLoading = false }: {
+  const { progress, title, isLoading = false }: {
     progress: ReturnType<typeof toLoreProgress>;
-    verdict: MovieLoreVerdict | undefined;
     title: string;
     isLoading?: boolean;
   } = $props();
 
-  const isCaughtUp = $derived(
-    progress.totalCount > 0 && progress.watchedCount === progress.totalCount,
+  const { mustWatch, optional, unseenMustWatch } = $derived(progress);
+
+  const hasMustWatch = $derived(mustWatch.totalCount > 0);
+  const isCaughtUp = $derived(hasMustWatch && unseenMustWatch.length === 0);
+
+  const heading = $derived(
+    hasMustWatch
+      ? m.text_movie_lore_progress_must_watch({
+        count: mustWatch.seenCount,
+        total: mustWatch.totalCount,
+      })
+      : m.text_movie_lore_progress_no_must_watch(),
   );
 
-  const summary = $derived(
-    progress.totalCount === 1
-      ? m.text_movie_lore_progress_one({
-        count: progress.watchedCount,
-        total: progress.totalCount,
-      })
-      : m.text_movie_lore_progress_other({
-        count: progress.watchedCount,
-        total: progress.totalCount,
-      }),
+  const counts = $derived(
+    [
+      hasMustWatch
+        ? m.text_movie_lore_progress_must_watch_count({
+          count: mustWatch.seenCount,
+          total: mustWatch.totalCount,
+        })
+        : null,
+      optional.totalCount > 0
+        ? m.text_movie_lore_progress_optional_count({
+          count: optional.seenCount,
+          total: optional.totalCount,
+        })
+        : null,
+    ]
+      .filter((count) => count !== null)
+      .join(" · "),
   );
 </script>
 
 <div class="trakt-movie-lore-progress" aria-busy={isLoading}>
-  <div class="progress-summary">
-    {#if isLoading}
-      <Skeleton width="60%" height="var(--ni-16)" />
-    {:else}
-      <span class="bold">{summary}</span>
-    {/if}
-    {#if isLoading}
-      <Skeleton width="var(--ni-96)" height="var(--ni-20)" radius="var(--border-radius-pill)" />
-    {:else if isCaughtUp}
-      <span class="progress-verdict small bold" data-verdict="caught_up">
-        {m.text_movie_lore_caught_up()}
-      </span>
-    {:else if verdict}
-      <span class="progress-verdict small bold" data-verdict={verdict}>
-        {toLoreVerdictLabel(verdict)}
-      </span>
-    {/if}
-  </div>
-
-  <div
-    class="progress-steps"
-    style="--step-count: {progress.steps.length}"
-    aria-hidden="true"
-  >
-    {#each progress.steps as step (step.id)}
-      <span
-        class="progress-step"
-        data-state={isLoading ? "pending" : step.state}
-      ></span>
-    {/each}
-  </div>
-
-  <span class="progress-note small secondary">
-    {#if isLoading}
-      <Skeleton width="40%" height="var(--ni-12)" />
-    {:else if progress.next}
-      {m.text_movie_lore_progress_next({
-        title: toLoreMovieTitle(progress.next),
+  <RenderFor audience="public">
+    <span class="bold">
+      {toLoreSignedOutLabel({
+        mustWatchCount: mustWatch.totalCount,
+        optionalCount: optional.totalCount,
       })}
-    {:else}
-      {m.text_movie_lore_progress_ready({ title })}
+    </span>
+  </RenderFor>
+
+  <RenderFor audience="authenticated">
+    <div class="progress-summary">
+      {#if isLoading}
+        <Skeleton width="60%" height="var(--ni-16)" />
+        <Skeleton
+          width="var(--ni-96)"
+          height="var(--ni-20)"
+          radius="var(--border-radius-pill)"
+        />
+      {:else}
+        <span class="bold">{heading}</span>
+        {#if isCaughtUp}
+          <MovieLoreBadge tone="caught_up">
+            {m.text_movie_lore_caught_up()}
+          </MovieLoreBadge>
+        {:else if hasMustWatch}
+          <MovieLoreBadge tone="to_go">
+            {m.text_movie_lore_progress_to_go({
+              count: unseenMustWatch.length,
+            })}
+          </MovieLoreBadge>
+        {/if}
+      {/if}
+    </div>
+
+    <div class="progress-bar" aria-hidden="true">
+      {#each mustWatch.steps as step (step.id)}
+        <span
+          class="progress-step"
+          data-group="must-watch"
+          data-state={!isLoading && step.isSeen ? "seen" : "unseen"}
+        ></span>
+      {/each}
+      {#if hasMustWatch && optional.totalCount > 0}
+        <span class="progress-gap"></span>
+      {/if}
+      {#each optional.steps as step (step.id)}
+        <span
+          class="progress-step"
+          data-group="optional"
+          data-state={!isLoading && step.isSeen ? "seen" : "unseen"}
+        ></span>
+      {/each}
+    </div>
+
+    <div class="progress-legend small">
+      {#if isLoading}
+        <Skeleton width="40%" height="var(--ni-12)" />
+      {:else}
+        <span class="secondary">{counts}</span>
+        {#if unseenMustWatch.length > 0}
+          <MovieLoreWatchlistAll films={unseenMustWatch} />
+        {/if}
+      {/if}
+    </div>
+
+    {#if isCaughtUp && !isLoading}
+      <span class="small secondary">
+        {m.text_movie_lore_progress_ready({ title })}
+      </span>
     {/if}
-  </span>
+  </RenderFor>
 </div>
 
 <style lang="scss">
@@ -81,16 +126,13 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
-
     padding: var(--gap-m);
-
     border-radius: var(--border-radius-l);
     background: var(--recap-card-background);
     box-shadow: inset 0 0 0 var(--border-thickness-xxs) var(--recap-card-ring);
 
     .progress-summary {
       min-height: var(--ni-24);
-
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -98,60 +140,60 @@
       gap: var(--gap-xxs) var(--gap-xs);
     }
 
-    .progress-verdict {
-      padding: var(--ni-2) var(--ni-10);
-
-      border-radius: var(--border-radius-pill);
-
-      &[data-verdict="required"] {
-        background: var(--color-reality-altered-background);
-        color: var(--color-reality-altered-text);
-      }
-
-      &[data-verdict="helpful"] {
-        background: var(--color-reality-adjusted-background);
-        color: var(--color-reality-adjusted-text);
-      }
-
-      &[data-verdict="not_needed"],
-      &[data-verdict="caught_up"] {
-        background: var(--color-reality-accurate-background);
-        color: var(--color-reality-accurate-text);
-      }
-    }
-
-    .progress-note {
+    .progress-bar {
       display: flex;
       align-items: center;
-      min-height: var(--ni-18);
-    }
-
-    .progress-steps {
-      display: grid;
-      grid-template-columns: repeat(var(--step-count), minmax(0, 1fr));
       gap: var(--gap-xxs);
     }
 
     .progress-step {
-      height: var(--ni-8);
-      border-radius: var(--ni-3);
+      flex: 1 1 0;
+      min-width: 0;
       background-color: color-mix(
         in srgb,
         var(--color-text-primary) 12%,
         transparent
       );
 
-      &[data-state="covered"] {
-        background-color: var(--color-vip-border-accent);
+      &[data-group="must-watch"] {
+        height: var(--ni-8);
+        border-radius: var(--ni-3);
+
+        &[data-state="seen"] {
+          background-color: var(--color-vip-border-accent);
+        }
       }
 
-      &[data-state="next"] {
-        background: repeating-linear-gradient(
-          90deg,
-          var(--color-text-secondary) 0 var(--ni-4),
-          transparent var(--ni-4) var(--ni-8)
+      &[data-group="optional"] {
+        height: var(--ni-4);
+        border-radius: var(--ni-2);
+        background-color: color-mix(
+          in srgb,
+          var(--color-text-primary) 6%,
+          transparent
         );
+
+        &[data-state="seen"] {
+          background-color: color-mix(
+            in srgb,
+            var(--color-vip-border-accent) 55%,
+            transparent
+          );
+        }
       }
+    }
+
+    .progress-gap {
+      flex: 0 0 var(--gap-xs);
+    }
+
+    .progress-legend {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--gap-xs);
+      min-height: var(--ni-40);
     }
   }
 </style>

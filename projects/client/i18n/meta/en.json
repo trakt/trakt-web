@@ -15851,52 +15851,9 @@
       "default": "No spoilers for this film",
       "description": "Chip in the Before you watch drawer promising that the primer does not spoil the movie itself."
     },
-    "text_movie_lore_progress_one": {
-      "default": "You've seen {count} of {total} earlier film",
-      "description": "Progress at the top of the Before you watch drawer, singular: how many of the earlier films the viewer has watched. {total} is always 1.",
-      "variables": {
-        "count": {
-          "type": "number",
-          "description": "Earlier films watched.",
-          "required": true
-        },
-        "total": {
-          "type": "number",
-          "description": "Earlier films in the series, always 1.",
-          "required": true
-        }
-      }
-    },
-    "text_movie_lore_progress_other": {
-      "default": "You've seen {count} of {total} earlier films",
-      "description": "Progress at the top of the Before you watch drawer, plural: how many of the earlier films the viewer has watched.",
-      "variables": {
-        "count": {
-          "type": "number",
-          "description": "Earlier films watched.",
-          "required": true
-        },
-        "total": {
-          "type": "number",
-          "description": "Earlier films in the series.",
-          "required": true
-        }
-      }
-    },
-    "text_movie_lore_progress_next": {
-      "default": "Next up: {title}",
-      "description": "Under the progress in the Before you watch drawer, naming the first earlier film the viewer has not watched. {title} is the film title with its year.",
-      "variables": {
-        "title": {
-          "type": "string",
-          "description": "Title of the film, with its year.",
-          "required": true
-        }
-      }
-    },
     "text_movie_lore_progress_ready": {
       "default": "You're ready for {title}.",
-      "description": "Under the progress in the Before you watch drawer when the viewer has watched every earlier film. {title} is the movie title.",
+      "description": "Under the progress bar in the Before you watch drawer when the viewer has watched every must-watch film. {title} is the movie title.",
       "variables": {
         "title": {
           "type": "string",
@@ -15919,42 +15876,162 @@
     },
     "text_movie_lore_caught_up": {
       "default": "All caught up",
-      "description": "Badge on the progress card in the Before you watch drawer when the viewer has watched every earlier film. Replaces the watch-first advice."
+      "description": "Badge on the progress card in the Before you watch drawer when the viewer has watched every must-watch film."
     },
-    "text_movie_lore_watch_first_label": {
-      "default": "Most important to watch",
-      "description": "Label above the films listed under Do I need the others first? in the Before you watch drawer, shown when only some of the earlier films are listed."
-    },
-    "text_movie_lore_watch_first_count": {
-      "default": "{count} of {total} earlier films",
-      "description": "Next to the Most important to watch label: how many of the earlier films are listed. {total} is always 2 or more.",
+    "text_movie_lore_progress_must_watch": {
+      "default": "You've seen {count} of {total} must-watch",
+      "description": "Heading of the progress card at the top of the Before you watch drawer: how many of the must-watch earlier films the viewer has watched. Must-watch means the films the viewer needs to have seen to follow the movie.",
       "variables": {
         "count": {
           "type": "number",
-          "description": "Films listed as most important.",
+          "description": "Must-watch films watched.",
           "required": true
         },
         "total": {
           "type": "number",
-          "description": "Earlier films in the series, always 2 or more.",
+          "description": "Must-watch films in the series.",
           "required": true
         }
       }
     },
-    "text_movie_lore_watch_first_recapped": {
-      "default": "All {total} are recapped under Previously on the Lore tab.",
-      "description": "Under the Most important to watch films in the Before you watch drawer, pointing to the Previously section that recaps every earlier film. {total} is always 2 or more.",
+    "text_movie_lore_progress_no_must_watch": {
+      "default": "No must-watch films",
+      "description": "Heading of the progress card at the top of the Before you watch drawer when none of the earlier films is required to follow the movie."
+    },
+    "text_movie_lore_progress_to_go": {
+      "default": "{count} to go",
+      "description": "Badge on the progress card in the Before you watch drawer: how many must-watch films the viewer still has to watch. Keep it short.",
       "variables": {
+        "count": {
+          "type": "number",
+          "description": "Must-watch films not watched yet.",
+          "required": true
+        }
+      }
+    },
+    "text_movie_lore_progress_must_watch_count": {
+      "default": "Must watch {count}/{total}",
+      "description": "Line under the progress bar in the Before you watch drawer: must-watch films watched out of all must-watch films. It is joined with the optional count by a middle dot.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Must-watch films watched.",
+          "required": true
+        },
         "total": {
           "type": "number",
-          "description": "Earlier films in the series, always 2 or more.",
+          "description": "Must-watch films in the series.",
           "required": true
         }
       }
     },
-    "header_movie_lore_need_others": {
-      "default": "Do I need the others first?",
-      "description": "Heading of the card in the Before you watch drawer that says whether the earlier films are needed and lists them."
+    "text_movie_lore_progress_optional_count": {
+      "default": "Optional {count}/{total}",
+      "description": "Line under the progress bar in the Before you watch drawer: optional earlier films watched out of all optional earlier films. It is joined with the must-watch count by a middle dot.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Optional films watched.",
+          "required": true
+        },
+        "total": {
+          "type": "number",
+          "description": "Optional films in the series.",
+          "required": true
+        }
+      }
+    },
+    "text_movie_lore_progress_signed_out_one": {
+      "default": "1 must-watch film, {optional} optional",
+      "description": "One line on the progress card in the Before you watch drawer for a signed-out viewer, with exactly one must-watch earlier film. {optional} is the number of optional earlier films.",
+      "variables": {
+        "optional": {
+          "type": "number",
+          "description": "Optional earlier films.",
+          "required": true
+        }
+      }
+    },
+    "text_movie_lore_progress_signed_out_other": {
+      "default": "{count} must-watch films, {optional} optional",
+      "description": "One line on the progress card in the Before you watch drawer for a signed-out viewer, with several must-watch earlier films.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Must-watch earlier films, 2 or more.",
+          "required": true
+        },
+        "optional": {
+          "type": "number",
+          "description": "Optional earlier films.",
+          "required": true
+        }
+      }
+    },
+    "text_movie_lore_progress_signed_out_none": {
+      "default": "No must-watch films, {optional} optional",
+      "description": "One line on the progress card in the Before you watch drawer for a signed-out viewer when no earlier film is must-watch. {optional} is the number of optional earlier films.",
+      "variables": {
+        "optional": {
+          "type": "number",
+          "description": "Optional earlier films.",
+          "required": true
+        }
+      }
+    },
+    "text_movie_lore_watchlist_add_one": {
+      "default": "Add it to watchlist",
+      "description": "Button on the progress card in the Before you watch drawer when one must-watch film is left to watch. It adds that film to the watchlist."
+    },
+    "text_movie_lore_watchlist_add_two": {
+      "default": "Add both to watchlist",
+      "description": "Button on the progress card in the Before you watch drawer when two must-watch films are left to watch. It adds both films to the watchlist."
+    },
+    "text_movie_lore_watchlist_add_other": {
+      "default": "Add all {count} to watchlist",
+      "description": "Button on the progress card in the Before you watch drawer when three or more must-watch films are left to watch. It adds all of them to the watchlist.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Must-watch films left, 3 or more.",
+          "required": true
+        }
+      }
+    },
+    "tag_text_movie_lore_must_watch": {
+      "default": "Must watch",
+      "description": "Small tag on the poster or timeline row of an earlier film that the viewer needs to have seen to follow the movie, in the Before you watch drawer. Keep it very short."
+    },
+    "tag_text_movie_lore_optional": {
+      "default": "Optional",
+      "description": "Small tag on the poster of an earlier film that is not needed to follow the movie, in the Before you watch drawer. Keep it very short."
+    },
+    "tag_text_movie_lore_this_film": {
+      "default": "This film",
+      "description": "Small tag on the poster of the movie the Before you watch drawer is about, shown last after the earlier films. Keep it very short."
+    },
+    "button_text_movie_lore_show_spoiler": {
+      "default": "Show",
+      "description": "Small button on the timeline row of an earlier film the viewer has not watched. It opens that film's recap, which spoils the film. Keep it very short."
+    },
+    "button_label_movie_lore_show_spoiler": {
+      "default": "Show the recap of {title}, spoils this film",
+      "description": "Accessible label of the small Show button on the timeline row of an earlier film the viewer has not watched. {title} is the title of that film.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Title of the earlier film.",
+          "required": true
+        }
+      }
+    },
+    "tooltip_text_movie_lore_spoils_film": {
+      "default": "Spoils this film",
+      "description": "Hover text of the small Show button on the timeline row of an earlier film the viewer has not watched."
+    },
+    "header_movie_lore_need_films": {
+      "default": "Do I need the films first?",
+      "description": "Heading of the card in the Before you watch drawer that says whether the earlier films are needed and shows their posters."
     },
     "header_movie_lore_world": {
       "default": "The world",
@@ -15968,24 +16045,13 @@
       "default": "Spoilers for the earlier films only",
       "description": "Small label next to the Previously heading, saying the recaps spoil the earlier films but not the movie itself."
     },
-    "text_movie_lore_up_next": {
-      "default": "Up next: {title}, spoiler-free",
+    "text_movie_lore_up_next_title": {
+      "default": "Up next: {title}",
       "description": "Last step of the Previously timeline in the Before you watch drawer. {title} is the movie title.",
       "variables": {
         "title": {
           "type": "string",
           "description": "Title of the movie.",
-          "required": true
-        }
-      }
-    },
-    "text_movie_lore_spoiler_unseen": {
-      "default": "You haven't seen {title}. This spoils it.",
-      "description": "Warning on the recap of an earlier film the viewer has not watched. {title} is the title of that film.",
-      "variables": {
-        "title": {
-          "type": "string",
-          "description": "Title of the earlier film.",
           "required": true
         }
       }

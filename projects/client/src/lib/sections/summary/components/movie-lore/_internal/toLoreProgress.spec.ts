@@ -12,58 +12,91 @@ function movie(id: number): LoreMovie {
   };
 }
 
-const EARLIER = [movie(1), movie(2), movie(3)];
+const EARLIER = [movie(1), movie(2), movie(3), movie(4)];
 
 describe('util: toLoreProgress', () => {
-  it('should count the watched earlier films and point at the first unwatched one', () => {
+  it('should split the earlier films into must-watch and optional', () => {
     const progress = toLoreProgress({
       earlier: EARLIER,
-      watchedIds: new Set([1, 3]),
-    });
-
-    expect(progress.watchedCount).toBe(2);
-    expect(progress.totalCount).toBe(3);
-    expect(progress.next).toBe(EARLIER[1]);
-    expect(progress.steps).to.deep.equal([
-      { id: 1, state: 'covered' },
-      { id: 2, state: 'next' },
-      { id: 3, state: 'covered' },
-    ]);
-  });
-
-  it('should have no next film once every earlier film is watched', () => {
-    const progress = toLoreProgress({
-      earlier: EARLIER,
-      watchedIds: new Set([1, 2, 3, 99]),
-    });
-
-    expect(progress.watchedCount).toBe(3);
-    expect(progress.next).toBeNull();
-  });
-
-  it('should start at the first film when nothing is watched', () => {
-    const progress = toLoreProgress({
-      earlier: EARLIER,
+      mustWatchIds: new Set([2, 4]),
       watchedIds: new Set(),
     });
 
-    expect(progress.watchedCount).toBe(0);
-    expect(progress.next).toBe(EARLIER[0]);
-    expect(progress.steps.map(({ state }) => state)).to.deep.equal([
-      'next',
-      'pending',
-      'pending',
-    ]);
+    expect(progress.mustWatch.steps.map(({ id }) => id)).to.deep.equal([2, 4]);
+    expect(progress.optional.steps.map(({ id }) => id)).to.deep.equal([1, 3]);
+  });
+
+  it('should count what the viewer has seen in each group', () => {
+    const progress = toLoreProgress({
+      earlier: EARLIER,
+      mustWatchIds: new Set([2, 4]),
+      watchedIds: new Set([1, 2, 99]),
+    });
+
+    expect(progress.mustWatch).to.deep.equal({
+      steps: [
+        { id: 2, isSeen: true },
+        { id: 4, isSeen: false },
+      ],
+      seenCount: 1,
+      totalCount: 2,
+    });
+    expect(progress.optional.seenCount).toBe(1);
+    expect(progress.optional.totalCount).toBe(2);
+  });
+
+  it('should list the must-watch films that are not seen yet in release order', () => {
+    const progress = toLoreProgress({
+      earlier: EARLIER,
+      mustWatchIds: new Set([1, 3, 4]),
+      watchedIds: new Set([3]),
+    });
+
+    expect(progress.unseenMustWatch).to.deep.equal([EARLIER[0], EARLIER[3]]);
+  });
+
+  it('should have nothing left once every must-watch film is seen', () => {
+    const progress = toLoreProgress({
+      earlier: EARLIER,
+      mustWatchIds: new Set([1]),
+      watchedIds: new Set([1]),
+    });
+
+    expect(progress.unseenMustWatch).to.deep.equal([]);
+  });
+
+  it('should treat every film as optional without must-watch films', () => {
+    const progress = toLoreProgress({
+      earlier: EARLIER,
+      mustWatchIds: new Set(),
+      watchedIds: new Set([1]),
+    });
+
+    expect(progress.mustWatch.totalCount).toBe(0);
+    expect(progress.optional.totalCount).toBe(4);
+  });
+
+  it('should ignore must-watch ids that are not earlier films', () => {
+    const progress = toLoreProgress({
+      earlier: EARLIER,
+      mustWatchIds: new Set([99]),
+      watchedIds: new Set(),
+    });
+
+    expect(progress.mustWatch.totalCount).toBe(0);
   });
 
   it('should handle a movie without earlier films', () => {
     expect(
-      toLoreProgress({ earlier: [], watchedIds: new Set([1]) }),
+      toLoreProgress({
+        earlier: [],
+        mustWatchIds: new Set(),
+        watchedIds: new Set([1]),
+      }),
     ).to.deep.equal({
-      steps: [],
-      watchedCount: 0,
-      totalCount: 0,
-      next: null,
+      mustWatch: { steps: [], seenCount: 0, totalCount: 0 },
+      optional: { steps: [], seenCount: 0, totalCount: 0 },
+      unseenMustWatch: [],
     });
   });
 });
