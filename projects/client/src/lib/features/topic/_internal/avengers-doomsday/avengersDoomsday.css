@@ -1,0 +1,113 @@
+:root[data-topic="avengers-doomsday"] {
+  --purple-50: oklch(97% 0.0186 150);
+  --purple-60: oklch(95.2% 0.0299 150);
+  --purple-70: oklch(93.7% 0.0395 150);
+  --purple-80: oklch(92.2% 0.0493 150);
+  --purple-90: oklch(90.6% 0.0599 150);
+  --purple-100: oklch(89% 0.0705 150);
+  --purple-200: oklch(81% 0.1072 150);
+  --purple-300: oklch(71% 0.1519 150);
+  --purple-400: oklch(63.5% 0.1811 150);
+  --purple-500: oklch(56.1% 0.1947 150);
+  --purple-600: oklch(49% 0.2061 150);
+  --purple-700: oklch(43% 0.1597 150);
+  --purple-800: oklch(35.5% 0.1324 150);
+  --purple-900: oklch(29% 0.1072 150);
+  --purple-950: oklch(19% 0.0779 150);
+  --purple-1000: oklch(12% 0.0506 150);
+  --shade-10: oklch(99% 0.008 230);
+  --shade-20: oklch(98.3% 0.01 230);
+  --shade-30: oklch(97.7% 0.012 230);
+  --shade-40: oklch(97% 0.012 230);
+  --shade-50: oklch(95.5% 0.014 230);
+  --shade-60: oklch(93.5% 0.016 230);
+  --shade-70: oklch(91.5% 0.018 230);
+  --shade-80: oklch(89.5% 0.02 230);
+  --shade-90: oklch(87.5% 0.02 230);
+  --shade-100: oklch(85.5% 0.022 230);
+  --shade-200: oklch(78% 0.024 230);
+  --shade-300: oklch(67% 0.026 230);
+  --shade-400: oklch(61% 0.026 230);
+  --shade-500: oklch(51% 0.026 230);
+  --shade-600: oklch(47% 0.026 230);
+  --shade-700: oklch(38% 0.024 230);
+  --shade-800: oklch(30% 0.022 230);
+  --shade-900: oklch(24% 0.02 230);
+  --shade-910: oklch(22% 0.02 230);
+  --shade-920: oklch(19.5% 0.018 230);
+  --shade-930: oklch(16.5% 0.016 230);
+  --shade-940: oklch(14% 0.014 230);
+  --shade-950: oklch(13% 0.014 230);
+  --shade-1000: oklch(11% 0.012 230);
+  --color-brand-violet: var(--purple-600);
+  --color-text-emphasis: oklch(86% 0.02 230);
+  --color-link-active: oklch(78% 0.17 150);
+  --color-background-tint: oklch(30% 0.1 150);
+  --color-background-tint-strength: 8%;
+  --doom-emerald: oklch(80% 0.2 155);
+  --doom-emerald-hot: oklch(93% 0.13 155);
+  --doom-emerald-deep: oklch(42% 0.13 158);
+  --doom-steel-hi: oklch(90% 0.012 235);
+  --doom-steel: oklch(62% 0.016 235);
+  --doom-steel-lo: oklch(30% 0.016 235);
+  --doom-steel-ink: oklch(17% 0.014 235);
+  --doom-gold: oklch(82% 0.12 86);
+  --topic-bar-from: oklch(30% 0.09 158);
+  --topic-bar-to: oklch(52% 0.16 156);
+  --color-background-progress-tag: var(--doom-emerald-deep);
+  --color-background-progress-track-tag: oklch(12% 0.02 210 / 0.82);
+}
+
+:root[data-topic="avengers-doomsday"] body {
+  background-color: oklch(13% 0.016 205);
+  background-image:
+    radial-gradient(
+      120% 70% at 50% -20%,
+      oklch(30% 0.09 158 / 0.55),
+      transparent 60%
+    ),
+    radial-gradient(
+      90% 60% at 50% 120%,
+      oklch(18% 0.05 160 / 0.9),
+      transparent 70%
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='31.18' height='54'%3E%3Cpath d='M15.6 0.0 L31.2 9.0 L31.2 27.0 L15.6 36.0 L0.0 27.0 L0.0 9.0 Z M15.6 36.0 L15.6 54.0' fill='none' stroke='white' stroke-opacity='0.045' stroke-width='1'/%3E%3Cg fill='white' fill-opacity='0.07'%3E%3Ccircle cx='15.6' cy='0.0' r='1.1'/%3E%3Ccircle cx='31.2' cy='27.0' r='1.1'/%3E%3Ccircle cx='0.0' cy='27.0' r='1.1'/%3E%3C/g%3E%3C/svg%3E"),
+    repeating-linear-gradient(
+      0deg,
+      oklch(100% 0 0 / 0.018) 0 1px,
+      transparent 1px 3px
+    );
+  background-size:
+    auto,
+    auto,
+    31.18px 54px,
+    auto;
+  background-attachment: fixed;
+}
+
+:root[data-topic="avengers-doomsday"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2147483000;
+  background-image:
+    url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'240'%20height%3D'240'%3E%3Cfilter%20id%3D'n'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.85'%20numOctaves%3D'3'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200.07%200'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'100%25'%20height%3D'100%25'%20filter%3D'url(%23n)'%2F%3E%3C%2Fsvg%3E"),
+    radial-gradient(
+      130% 100% at 50% 40%,
+      transparent 55%,
+      oklch(5% 0.02 200 / 0.55)
+    );
+  mix-blend-mode: overlay;
+}
+
+:root[data-topic="avengers-doomsday"] :is(h1, h2, h3) {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-list-title-wrapper .title {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}

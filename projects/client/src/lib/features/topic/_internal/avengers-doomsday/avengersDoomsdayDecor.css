@@ -1,0 +1,1432 @@
+:root[data-topic="avengers-doomsday"] {
+  --doom-font-mono: "Roboto Mono", monospace;
+  --doom-brushed: linear-gradient(
+    135deg,
+    var(--doom-steel-hi) 0%,
+    var(--doom-steel-lo) 28%,
+    var(--doom-steel) 50%,
+    var(--doom-steel-lo) 72%,
+    var(--doom-steel-hi) 100%
+  );
+  --doom-reticle:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%23000' stroke-opacity='.55' stroke-width='3'%3E%3Ccircle cx='16' cy='16' r='7'/%3E%3Cpath d='M16 2v6M16 24v6M2 16h6M24 16h6'/%3E%3C/g%3E%3Cg fill='none' stroke='%2378ffb0' stroke-width='1.3'%3E%3Ccircle cx='16' cy='16' r='7' stroke-dasharray='8 3'/%3E%3Cpath d='M16 2v6M16 24v6M2 16h6M24 16h6'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.4' fill='%23d6ffe6'/%3E%3C/svg%3E")
+    16 16,
+    auto;
+  --doom-reticle-lock:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%23000' stroke-opacity='.55' stroke-width='3'%3E%3Cpath d='M5 11V5h6M21 5h6v6M27 21v6h-6M11 27H5v-6'/%3E%3C/g%3E%3Cg fill='none' stroke='%23b6ffd2' stroke-width='1.6'%3E%3Cpath d='M5 11V5h6M21 5h6v6M27 21v6h-6M11 27H5v-6'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='2.2' fill='%2378ffb0'/%3E%3C/svg%3E")
+    16 16,
+    pointer;
+}
+
+:root[data-topic="avengers-doomsday"] {
+  cursor: var(--doom-reticle);
+  accent-color: var(--doom-emerald);
+}
+
+:root[data-topic="avengers-doomsday"]
+  :is(
+    a,
+    button,
+    [role="button"],
+    [role="radio"],
+    [role="tab"],
+    summary,
+    label[for]
+  ) {
+  cursor: var(--doom-reticle-lock);
+}
+
+:root[data-topic="avengers-doomsday"] ::selection {
+  background: oklch(70% 0.18 155 / 0.45);
+  color: white;
+}
+
+.doom-fog {
+  position: absolute;
+  inset: -25%;
+  will-change: transform;
+  animation: doom-fog-drift 70s ease-in-out infinite alternate;
+}
+
+.doom-fog[data-layer="a"] {
+  background:
+    radial-gradient(
+      38% 30% at 18% 78%,
+      oklch(46% 0.13 155 / 0.32),
+      transparent 70%
+    ),
+    radial-gradient(
+      30% 22% at 78% 64%,
+      oklch(40% 0.1 165 / 0.22),
+      transparent 70%
+    );
+}
+
+.doom-fog[data-layer="b"] {
+  background:
+    radial-gradient(
+      34% 26% at 70% 26%,
+      oklch(42% 0.12 150 / 0.26),
+      transparent 70%
+    ),
+    radial-gradient(
+      26% 32% at 32% 40%,
+      oklch(34% 0.08 170 / 0.2),
+      transparent 70%
+    );
+  animation-duration: 90s;
+  animation-direction: alternate-reverse;
+}
+
+.doom-fog[data-layer="c"] {
+  background:
+    radial-gradient(
+      45% 20% at 50% 100%,
+      oklch(52% 0.16 155 / 0.22),
+      transparent 72%
+    ),
+    radial-gradient(
+      22% 18% at 90% 90%,
+      oklch(70% 0.11 86 / 0.06),
+      transparent 70%
+    );
+  animation-name: doom-fog-breathe;
+  animation-duration: 14s;
+}
+
+.doom-ambient-sigil {
+  position: absolute;
+  width: min(72vmax, 1040px);
+  aspect-ratio: 1;
+  inset-inline-end: max(-22vmax, -320px);
+  top: max(-26vmax, -380px);
+  opacity: 0.16;
+  color: var(--doom-emerald);
+  --doom-sigil-stroke: 0.45;
+  mask-image: radial-gradient(closest-side, black 55%, transparent 100%);
+}
+
+.doom-flash {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(
+    70% 55% at 50% 0%,
+    oklch(85% 0.2 155 / 0.12),
+    transparent 70%
+  );
+  transition: opacity 420ms ease-out;
+}
+
+.doom-backdrop.is-flashing .doom-flash {
+  opacity: 1;
+  transition-duration: 40ms;
+}
+
+@keyframes doom-fog-drift {
+  from {
+    transform: translate3d(-4%, 2%, 0) rotate(-3deg) scale(1);
+  }
+  to {
+    transform: translate3d(5%, -3%, 0) rotate(4deg) scale(1.12);
+  }
+}
+
+@keyframes doom-fog-breathe {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.doom-sigil {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.doom-sigil-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--doom-sigil-stroke, 0.7);
+  stroke-linecap: round;
+  will-change: transform;
+  animation: topic-spin 140s linear infinite;
+}
+
+.doom-sigil-layer[data-layer="glyphs"] {
+  animation-duration: 100s;
+  animation-direction: reverse;
+}
+
+.doom-sigil-layer[data-layer="star"] {
+  animation-duration: 70s;
+}
+
+.doom-sigil-layer[data-layer="core"] {
+  animation-duration: 48s;
+  animation-direction: reverse;
+}
+
+:is(
+    .doom-poster-sigil,
+    .doom-landing-sigil,
+    .doom-avatar-sigil,
+    .doom-countdown-sigil
+  )
+  .doom-sigil-layer {
+  animation: none;
+  will-change: auto;
+}
+
+.doom-sigil-fill {
+  fill: currentColor;
+}
+
+.doom-sigil-faint {
+  opacity: 0.4;
+}
+
+.doom-countdown {
+  position: fixed;
+  top: 68px;
+  inset-inline-start: 12px;
+  z-index: calc(var(--layer-overlay) + 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  width: 48px;
+  padding: 9px 0 11px;
+  box-sizing: border-box;
+  color: var(--doom-steel-hi);
+  text-decoration: none;
+  border-radius: var(--border-radius-m);
+  background:
+    linear-gradient(180deg, oklch(100% 0 0 / 0.07), transparent 45%),
+    linear-gradient(180deg, oklch(26% 0.014 235), oklch(15% 0.014 225));
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.14),
+    inset 0 0 0 1px oklch(60% 0.02 235 / 0.35),
+    inset 0 -16px 20px -14px oklch(70% 0.2 155 / 0.4);
+}
+
+.doom-countdown::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px oklch(75% 0.18 155 / 0.7),
+    inset 0 -20px 24px -12px oklch(75% 0.2 155 / 0.55);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.doom-countdown:focus-visible {
+  outline: none;
+}
+
+.doom-countdown:focus-visible::after {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .doom-countdown:hover::after {
+    opacity: 1;
+  }
+}
+
+.doom-countdown-sigil {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  color: var(--doom-emerald);
+  --doom-sigil-stroke: 4;
+}
+
+.doom-countdown-caption {
+  position: fixed;
+  top: 68px;
+  inset-inline-start: 68px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px 11px;
+  white-space: nowrap;
+  font-family: var(--doom-font-mono);
+  text-transform: uppercase;
+  line-height: 1;
+  pointer-events: none;
+  border-radius: var(--border-radius-m);
+  background: oklch(19% 0.014 228 / 0.96);
+  box-shadow:
+    inset 0 0 0 1px oklch(75% 0.18 155 / 0.4),
+    0 10px 30px -10px black;
+  opacity: 0;
+  translate: -6px 0;
+  transition:
+    opacity 180ms ease,
+    translate 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.doom-countdown:is(:hover, :focus-visible) .doom-countdown-caption {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.doom-countdown-kicker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: var(--doom-emerald);
+}
+
+.doom-countdown-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--doom-emerald-hot);
+  transform: rotate(45deg);
+}
+
+.doom-countdown-date {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: oklch(75% 0.02 235);
+}
+
+.doom-countdown-clock {
+  direction: ltr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.doom-countdown-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.doom-countdown-group + .doom-countdown-group::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  inset-inline: 3px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(60% 0.02 235 / 0.4),
+    transparent
+  );
+}
+
+.doom-digit {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 21px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: linear-gradient(
+    180deg,
+    oklch(10% 0.01 220),
+    oklch(16% 0.02 200) 50%,
+    oklch(11% 0.01 220) 50.5%,
+    oklch(14% 0.015 210)
+  );
+  box-shadow:
+    inset 0 1px 2px oklch(0% 0 0 / 0.8),
+    inset 0 0 0 1px oklch(0% 0 0 / 0.5);
+}
+
+.doom-digit::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 1px;
+  background: oklch(0% 0 0 / 0.7);
+}
+
+.doom-digit-face {
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  padding-top: 2px;
+  color: var(--doom-emerald-hot);
+  animation: doom-digit-in 200ms ease-out both;
+}
+
+.doom-countdown-group[data-unit="D"] .doom-digit-face {
+  color: var(--doom-gold);
+}
+
+.doom-countdown-unit {
+  width: 8px;
+  font-family: var(--doom-font-mono);
+  font-size: 9px;
+  color: oklch(70% 0.02 235);
+  margin-inline-start: 1px;
+  align-self: flex-end;
+  padding-bottom: 1px;
+}
+
+@keyframes doom-digit-in {
+  from {
+    transform: translateY(-30%);
+    opacity: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  body:not(:has(.trakt-side-navbar)) .doom-countdown {
+    top: 14px;
+    inset-inline: auto;
+    left: 50%;
+    translate: -50% 0;
+    flex-direction: row;
+    width: auto;
+    height: 36px;
+    gap: 10px;
+    padding: 0 16px 0 8px;
+    border-radius: var(--border-radius-pill);
+  }
+
+  body:not(:has(.trakt-side-navbar)) .doom-countdown-caption {
+    position: static;
+    opacity: 1;
+    translate: none;
+    padding: 0 10px 0 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-inline-end: 1px solid oklch(60% 0.02 235 / 0.3);
+  }
+
+  body:not(:has(.trakt-side-navbar)) .doom-countdown-clock {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  body:not(:has(.trakt-side-navbar))
+    .doom-countdown-group
+    + .doom-countdown-group::before {
+    display: none;
+  }
+}
+
+.doom-countdown[data-placement="dock"] {
+  display: none;
+}
+
+@media (max-height: 760px) and (min-width: 769px) {
+  .doom-countdown-sigil {
+    display: none;
+  }
+}
+
+@media (max-height: 660px) and (min-width: 769px) {
+  body:has(.trakt-side-navbar) .doom-countdown[data-placement="rail"] {
+    gap: 3px;
+    padding: 7px 0 8px;
+  }
+
+  body:has(.trakt-side-navbar)
+    .doom-countdown[data-placement="rail"]
+    .doom-countdown-group:not([data-unit="D"]) {
+    display: none;
+  }
+
+  body:has(.trakt-side-navbar) .doom-countdown[data-placement="rail"]::before {
+    content: attr(data-prefix);
+    font-family: var(--doom-font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--doom-emerald);
+  }
+}
+
+@media (max-width: 768px) {
+  :root[data-topic="avengers-doomsday"] {
+    --mobile-navbar-height: calc(
+      var(--ni-56) +
+      22px +
+      env(safe-area-inset-bottom, 0)
+    );
+  }
+
+  .doom-countdown[data-placement="rail"] {
+    display: none;
+  }
+
+  .doom-countdown[data-placement="dock"] {
+    position: absolute;
+    top: 6px;
+    inset-inline: auto;
+    left: 50%;
+    translate: -50% 0;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 20px;
+    gap: 8px;
+    padding: 0 14px;
+    border-radius: var(--border-radius-pill);
+    background: oklch(12% 0.014 220 / 0.9);
+    box-shadow:
+      inset 0 0 0 1px oklch(60% 0.02 235 / 0.3),
+      inset 0 -8px 12px -8px oklch(70% 0.2 155 / 0.45);
+  }
+
+  .doom-countdown[data-placement="dock"]::after {
+    display: none;
+  }
+
+  .doom-countdown[data-placement="dock"]
+    :is(
+      .doom-countdown-sigil,
+      .doom-countdown-date,
+      .doom-countdown-group + .doom-countdown-group::before
+    ) {
+    display: none;
+  }
+
+  .doom-countdown[data-placement="dock"] .doom-countdown-caption {
+    position: static;
+    opacity: 1;
+    translate: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .doom-countdown[data-placement="dock"] .doom-countdown-kicker {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+  }
+
+  .doom-countdown[data-placement="dock"] .doom-countdown-clock {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .doom-countdown[data-placement="dock"] .doom-digit {
+    width: 9px;
+    height: 16px;
+    background: none;
+    box-shadow: none;
+  }
+
+  .doom-countdown[data-placement="dock"] .doom-digit::after {
+    display: none;
+  }
+
+  .doom-countdown[data-placement="dock"] .doom-digit-face {
+    font-size: 15px;
+  }
+
+  .doom-countdown[data-placement="dock"] .doom-countdown-unit {
+    width: auto;
+    font-size: 8px;
+  }
+}
+
+.doom-plate {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.1);
+}
+
+.doom-plate::before,
+.doom-plate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.doom-plate::before {
+  background: repeating-linear-gradient(
+    0deg,
+    oklch(80% 0.2 155 / 0.1) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+.doom-plate::after {
+  box-shadow:
+    inset 0 0 0 1px oklch(80% 0.2 155 / 0.7),
+    inset 0 0 22px oklch(70% 0.2 155 / 0.35);
+}
+
+.doom-plate-scan {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 42%;
+  opacity: 0;
+  transform: translateY(-110%);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    oklch(80% 0.2 155 / 0.1) 55%,
+    oklch(85% 0.2 155 / 0.3) 92%,
+    oklch(97% 0.08 155 / 0.8) 98.5%,
+    transparent
+  );
+  mix-blend-mode: screen;
+}
+
+@media (hover: hover) {
+  :is(.trakt-card, .trakt-calendar-poster-tile):hover .doom-plate::before,
+  :is(.trakt-card, .trakt-calendar-poster-tile):hover .doom-plate::after {
+    opacity: 1;
+  }
+
+  :is(.trakt-card, .trakt-calendar-poster-tile):hover .doom-plate-scan {
+    animation: doom-scan 320ms cubic-bezier(0.35, 0.1, 0.25, 1) both;
+  }
+}
+
+@keyframes doom-scan {
+  0% {
+    opacity: 1;
+    transform: translateY(-110%);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(250%);
+  }
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-list-header {
+  position: relative;
+}
+
+.doom-hud-line {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -4px;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    oklch(80% 0.2 155 / 0.6),
+    oklch(60% 0.02 235 / 0.28) 18%,
+    oklch(60% 0.02 235 / 0.1) 60%,
+    transparent
+  );
+}
+
+[dir="rtl"] .doom-hud-line {
+  scale: -1 1;
+}
+
+:root[data-topic="avengers-doomsday"]
+  .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+    [data-size="tag"]
+  ) {
+  color: var(--doom-steel-hi);
+  background:
+    linear-gradient(180deg, oklch(100% 0 0 / 0.08), transparent 55%),
+    linear-gradient(180deg, oklch(34% 0.016 235), oklch(21% 0.016 230));
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.2),
+    inset 0 0 0 1px oklch(62% 0.02 235 / 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+:root[data-topic="avengers-doomsday"]
+  .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+    [data-size="tag"]
+  )
+  :is(p, svg) {
+  position: relative;
+  z-index: 1;
+}
+
+:root[data-topic="avengers-doomsday"]
+  .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+    [data-size="tag"]
+  )
+  p {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+:root[data-topic="avengers-doomsday"]
+  .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+    [data-size="tag"]
+  )::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    80% 140% at 50% 120%,
+    oklch(75% 0.22 155 / 0.55),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+:root[data-topic="avengers-doomsday"]
+  .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+    [data-size="tag"]
+  ):focus-visible::after {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  :root[data-topic="avengers-doomsday"]
+    .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+      [data-size="tag"]
+    ):hover::after {
+    opacity: 1;
+  }
+}
+
+:root[data-topic="avengers-doomsday"]
+  .trakt-summary-poster-container[data-variant] {
+  position: relative;
+  isolation: isolate;
+}
+
+.doom-poster-sigil {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: 185%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  pointer-events: none;
+  color: var(--doom-emerald);
+  opacity: 0.34;
+  --doom-sigil-stroke: 0.5;
+  mask-image: radial-gradient(closest-side, black 88%, transparent);
+}
+
+.doom-poster-forge {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.doom-forge-edge {
+  position: absolute;
+  inset: 0;
+  padding: 3px;
+  border-radius: var(--border-radius-xxl);
+  background: var(--doom-brushed);
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  filter: drop-shadow(0 0 1px black);
+}
+
+.doom-forge-plate {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  padding: 3px 14px 4px;
+  white-space: nowrap;
+  font-family: var(--doom-font-mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: oklch(20% 0.02 235);
+  background: linear-gradient(180deg, var(--doom-steel-hi), var(--doom-steel));
+  border-radius: 0 0 10px 10px;
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-profile-image {
+  position: relative;
+}
+
+.doom-avatar-sigil {
+  position: absolute;
+  inset: -7px;
+  z-index: 1;
+  pointer-events: none;
+  color: var(--doom-emerald);
+  --doom-sigil-stroke: 3.2;
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-landing-spotlight {
+  isolation: isolate;
+}
+
+.doom-landing-sigil {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  z-index: -1;
+  width: 118%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  pointer-events: none;
+  color: var(--doom-emerald);
+  opacity: 0.26;
+  --doom-sigil-stroke: 0.55;
+  mask-image: radial-gradient(closest-side, black 60%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doom-stinger *,
+  .doom-stinger,
+  .doom-fog,
+  .doom-sigil-layer,
+  .doom-digit-face,
+  :is(.trakt-card, .trakt-calendar-poster-tile):hover .doom-plate-scan {
+    animation: none !important;
+  }
+
+  .doom-lock,
+  .doom-plate::before,
+  .doom-plate::after,
+  .doom-countdown::after,
+  :root[data-topic="avengers-doomsday"] .trakt-button::after {
+    transition: none !important;
+  }
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-summary-title {
+  position: relative;
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-summary-title h1,
+.doom-slam-letter {
+  background: linear-gradient(
+    180deg,
+    oklch(98% 0.005 235) 0%,
+    oklch(86% 0.012 235) 44%,
+    oklch(58% 0.018 235) 52%,
+    oklch(80% 0.012 235) 70%,
+    oklch(94% 0.008 235) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-summary-title h1 {
+  filter: drop-shadow(0 2px 0 oklch(0% 0 0 / 0.7))
+    drop-shadow(0 0 22px oklch(70% 0.2 155 / 0.35));
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-summary-title h1.doom-slamming {
+  opacity: 0;
+}
+
+.doom-slam {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 0 oklch(0% 0 0 / 0.7))
+    drop-shadow(0 0 22px oklch(70% 0.2 155 / 0.45));
+}
+
+.doom-slam-word,
+.doom-slam-letter {
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.doom-slam-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.doom-slam-letter {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  animation: doom-letter-drop 300ms linear both;
+}
+
+.doom-slam-shock {
+  position: absolute;
+  inset-inline: -10%;
+  bottom: 4%;
+  height: 3px;
+  opacity: 0;
+  background: radial-gradient(
+    closest-side,
+    oklch(97% 0.08 155),
+    oklch(80% 0.2 155 / 0.8) 40%,
+    transparent
+  );
+  filter: blur(1px);
+}
+
+.doom-slam.is-impact .doom-slam-shock {
+  animation: doom-shock 620ms cubic-bezier(0.1, 0.8, 0.2, 1) both;
+}
+
+.doom-slam.is-impact {
+  animation: doom-impact-flash 520ms ease-out both;
+}
+
+@keyframes doom-letter-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-1.1em) scale(1.7);
+    filter: blur(6px);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  72% {
+    transform: translateY(0.03em) scale(1.08, 0.86);
+  }
+  86% {
+    transform: translateY(-0.03em) scale(0.98, 1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes doom-shock {
+  0% {
+    opacity: 1;
+    transform: scaleX(0.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1.25) scaleY(0.5);
+  }
+}
+
+@keyframes doom-impact-flash {
+  0% {
+    filter: drop-shadow(0 2px 0 oklch(0% 0 0 / 0.7))
+      drop-shadow(0 0 4px oklch(95% 0.12 155))
+      drop-shadow(0 0 30px oklch(75% 0.22 155));
+  }
+}
+
+.doom-lock {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: var(--layer-top);
+  width: var(--lock-w);
+  height: var(--lock-h);
+  translate: var(--lock-x) var(--lock-y);
+  border-radius: var(--lock-r);
+  pointer-events: none;
+  opacity: 0;
+  outline: 1.5px solid oklch(88% 0.16 155 / 0.9);
+  outline-offset: 3px;
+  filter: drop-shadow(0 0 4px oklch(75% 0.2 155 / 0.6));
+  transition:
+    opacity 160ms ease,
+    translate 180ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    width 180ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    height 180ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.doom-lock.is-locked {
+  opacity: 1;
+}
+
+.doom-threat-tag {
+  position: absolute;
+  top: 6px;
+  inset-inline-start: 6px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px 3px 7px;
+  pointer-events: none;
+  font-family: var(--doom-font-mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--doom-emerald-hot);
+  background: oklch(12% 0.02 200 / 0.85);
+  border-radius: var(--border-radius-pill);
+  box-shadow: inset 0 0 0 1px oklch(75% 0.2 155 / 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.doom-threat-cells {
+  display: flex;
+  gap: 2px;
+}
+
+.doom-threat-cells i {
+  width: 4px;
+  height: 8px;
+  background: oklch(40% 0.02 235 / 0.6);
+  transform: skewX(-18deg);
+}
+
+.doom-threat-cells i.is-armed {
+  background: var(--doom-emerald);
+}
+
+.doom-threat-tag.is-critical {
+  color: var(--doom-gold);
+  box-shadow: inset 0 0 0 1px oklch(80% 0.14 86 / 0.55);
+}
+
+.doom-threat-tag.is-critical .is-armed {
+  background: var(--doom-gold);
+}
+
+:root[data-topic="avengers-doomsday"] .week-head-day.is-today {
+  position: relative;
+}
+
+.doom-threat-today {
+  position: absolute;
+  left: 50%;
+  top: -14px;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: var(--doom-font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--doom-gold);
+}
+
+.doom-threat-today i {
+  width: 6px;
+  height: 6px;
+  background: var(--doom-gold);
+  transform: rotate(45deg);
+}
+
+.trakt-calendar-day-header[data-variant="row"] .doom-threat-today {
+  position: static;
+  translate: none;
+  margin-inline-start: auto;
+}
+
+.doom-stinger {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483001;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 60% at 50% 50%,
+    oklch(20% 0.06 158 / 0.92),
+    oklch(8% 0.02 200 / 0.97)
+  );
+  animation: topic-fade-in 220ms ease-out both;
+}
+
+.doom-stinger.is-leaving {
+  animation: doom-stinger-out 260ms ease-in both;
+}
+
+.doom-stinger-surge {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    closest-side,
+    oklch(95% 0.12 155 / 0.9),
+    oklch(75% 0.22 155 / 0.5) 30%,
+    transparent 70%
+  );
+  animation: doom-surge 900ms cubic-bezier(0.1, 0.7, 0.2, 1) both;
+}
+
+.doom-stinger-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40vmin;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2px oklch(92% 0.14 155),
+    0 0 30px 6px oklch(75% 0.22 155 / 0.8),
+    inset 0 0 30px 6px oklch(75% 0.22 155 / 0.6);
+  animation: doom-ring 1000ms cubic-bezier(0.05, 0.7, 0.1, 1) 80ms both;
+}
+
+.doom-stinger-sigil {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(86vmin, 760px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  color: var(--doom-emerald);
+  --doom-sigil-stroke: 0.55;
+  filter: drop-shadow(0 0 8px oklch(75% 0.22 155));
+  animation: doom-sigil-flare 1450ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.doom-stinger-sigil .doom-sigil-layer {
+  animation-duration: 9s;
+}
+
+.doom-stinger-copy {
+  position: relative;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.doom-stinger-kicker {
+  font-size: clamp(24px, 5vmin, 56px);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  padding-inline-start: 0.3em;
+  line-height: 1;
+  color: var(--doom-steel-hi);
+  animation: doom-stinger-kicker 500ms cubic-bezier(0.2, 0.9, 0.2, 1) 120ms both;
+}
+
+.doom-stinger-days {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2em;
+  font-weight: 700;
+  line-height: 0.85;
+  animation: doom-stinger-slam 420ms cubic-bezier(0.6, 0, 0.8, 0.4) 260ms both;
+}
+
+.doom-stinger-number {
+  font-size: clamp(120px, 34vmin, 320px);
+  background: linear-gradient(
+    180deg,
+    white 0%,
+    oklch(92% 0.12 155) 45%,
+    oklch(62% 0.2 155) 55%,
+    oklch(88% 0.14 155) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 24px oklch(75% 0.22 155 / 0.9));
+}
+
+.doom-stinger-unit {
+  font-size: clamp(28px, 7vmin, 72px);
+  letter-spacing: 0.08em;
+  color: var(--doom-gold);
+  text-shadow: 0 0 16px oklch(80% 0.14 86 / 0.7);
+}
+
+.doom-stinger-foot {
+  margin-top: 1.2em;
+  font-family: var(--doom-font-mono);
+  font-size: clamp(10px, 1.6vmin, 14px);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: oklch(78% 0.04 155);
+  animation: doom-stinger-kicker 400ms ease-out 520ms both;
+}
+
+.doom-stinger-scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    oklch(0% 0 0 / 0.28) 0 1px,
+    transparent 1px 3px
+  );
+  mix-blend-mode: multiply;
+}
+
+.doom-stinger.is-calm,
+.doom-stinger.is-calm * {
+  animation-name: topic-fade-in;
+  animation-duration: 200ms;
+  animation-delay: 0ms;
+}
+
+.doom-stinger.is-calm .doom-stinger-surge,
+.doom-stinger.is-calm .doom-stinger-ring {
+  display: none;
+}
+
+.doom-stinger.is-calm.is-leaving {
+  animation-name: doom-stinger-out;
+}
+
+@keyframes doom-stinger-out {
+  to {
+    opacity: 0;
+    filter: brightness(2) blur(4px);
+    transform: scale(1.04);
+  }
+}
+
+@keyframes doom-surge {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.12;
+    transform: scale(2.4);
+  }
+}
+
+@keyframes doom-ring {
+  0% {
+    opacity: 1;
+    scale: 0.1;
+  }
+  100% {
+    opacity: 0;
+    scale: 4;
+  }
+}
+
+@keyframes doom-sigil-flare {
+  0% {
+    opacity: 0;
+    scale: 0.6;
+    rotate: -40deg;
+  }
+  35% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.45;
+    scale: 1.08;
+    rotate: 0deg;
+  }
+}
+
+@keyframes doom-stinger-kicker {
+  0% {
+    opacity: 0;
+    letter-spacing: 0.9em;
+    filter: blur(8px);
+  }
+}
+
+@keyframes doom-stinger-slam {
+  0% {
+    opacity: 0;
+    scale: 2.6;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    filter: blur(0);
+  }
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-profile-container {
+  position: relative;
+}
+
+.doom-dossier {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.doom-dossier-tag {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 36px;
+  translate: 0 -50%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px 5px;
+  white-space: nowrap;
+  font-family: var(--doom-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--doom-emerald);
+  background: oklch(15% 0.02 205);
+  border-radius: var(--border-radius-pill);
+  box-shadow: inset 0 0 0 1px oklch(75% 0.18 155 / 0.4);
+}
+
+.doom-dossier-tag i {
+  width: 6px;
+  height: 6px;
+  background: var(--doom-emerald);
+  transform: rotate(45deg);
+}
+
+.doom-dossier-id {
+  position: absolute;
+  inset-inline-start: 18px;
+  bottom: 8px;
+  font-family: var(--doom-font-mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: oklch(70% 0.03 200 / 0.85);
+}
+
+@media (max-width: 768px) {
+  .doom-dossier-tag,
+  .doom-dossier-id {
+    display: none;
+  }
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-stats-card > .secondary,
+:root[data-topic="avengers-doomsday"] .trakt-stat .tag.secondary,
+:root[data-topic="avengers-doomsday"] .trakt-kpi-tile .kpi-label,
+:root[data-topic="avengers-doomsday"] .trakt-pulse-graph > p:first-child {
+  font-family: var(--doom-font-mono);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-stats-card > .secondary {
+  color: var(--doom-emerald);
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-stat .stat-value p.bold {
+  font-weight: 700;
+  font-size: 1.15em;
+  font-variant-numeric: tabular-nums;
+  color: var(--doom-emerald-hot);
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-stat svg {
+  color: var(--doom-steel);
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-kpi-tile .kpi-value {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--doom-emerald-hot);
+}
+
+.doom-readout-code {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-inline-end: 7px;
+  vertical-align: 1px;
+  background: var(--doom-emerald);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+:root[data-topic="avengers-doomsday"] svg:has(> .trakt-star-fill) {
+  overflow: visible;
+}
+
+:root[data-topic="avengers-doomsday"] svg:has(> .trakt-star-fill) path {
+  d: path("M12 1.6L21.2 6.8V17.2L12 22.4L2.8 17.2V6.8Z");
+  stroke-linejoin: round;
+}
+
+:root[data-topic="avengers-doomsday"] svg:has(> .trakt-star-fill) > path {
+  color: var(--doom-steel);
+  stroke-width: 1.6;
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-star-fill {
+  fill: var(--doom-emerald);
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-side-navbar-content {
+  background:
+    linear-gradient(
+      90deg,
+      oklch(100% 0 0 / 0.07),
+      transparent 35%,
+      oklch(0% 0 0 / 0.25)
+    ),
+    linear-gradient(180deg, oklch(25% 0.014 235), oklch(15% 0.014 225));
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.14),
+    inset 0 0 0 1px oklch(60% 0.02 235 / 0.35),
+    0 12px 30px -12px black;
+}
+
+:root[data-topic="avengers-doomsday"]
+  :is(.trakt-side-navbar-content, .trakt-mobile-navbar)
+  .trakt-link-active {
+  color: var(--doom-emerald-hot);
+  filter: drop-shadow(0 0 5px oklch(75% 0.2 155 / 0.8));
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-mobile-navbar {
+  background:
+    linear-gradient(180deg, oklch(100% 0 0 / 0.05), transparent 40%),
+    linear-gradient(
+      180deg,
+      oklch(22% 0.014 235 / 0.96),
+      oklch(13% 0.014 225 / 0.98)
+    );
+  box-shadow:
+    inset 0 1px 0 oklch(80% 0.2 155 / 0.45),
+    0 -10px 30px -10px oklch(70% 0.2 155 / 0.25);
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-summary-actions-bar {
+  background:
+    linear-gradient(180deg, oklch(100% 0 0 / 0.07), transparent 45%),
+    linear-gradient(180deg, oklch(26% 0.014 235), oklch(15% 0.014 225));
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.16),
+    inset 0 0 0 1px oklch(60% 0.02 235 / 0.4);
+}
+
+:root[data-topic="avengers-doomsday"] .trakt-streak-count {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--doom-emerald-hot);
+}

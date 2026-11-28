@@ -1,0 +1,11 @@
+:root[data-topic] :is(h1, h2, h3) {
+  font-weight: 700;
+}
+
+:root[data-topic] .trakt-progress-tag .trakt-tag::before {
+  background: linear-gradient(
+    calc(var(--rtl-sign, 1) * 90deg),
+    var(--topic-bar-from),
+    var(--topic-bar-to)
+  );
+}

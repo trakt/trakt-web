@@ -26,6 +26,27 @@
         frame-src 'self' https://trakt.tv http://localhost:3000 https://*.youtube.com https://open.spotify.com;
       "
     >
+    <script>
+      (() => {
+        const topics = ['dune-3', 'avengers-doomsday', 'dunesday'];
+        try {
+          const topic = localStorage.getItem('trakt_topic');
+          if (!topics.includes(topic)) return;
+          document.documentElement.setAttribute('data-topic', topic);
+          const paint = localStorage.getItem('trakt_topic_paint');
+          if (paint) {
+            const style = document.createElement('style');
+            style.id = 'trakt-topic-paint';
+            style.textContent = paint;
+            document.head.appendChild(style);
+          }
+          const side = localStorage.getItem('dunesday-side');
+          if (topic === 'dunesday' && (side === 'dune' || side === 'doom')) {
+            document.documentElement.setAttribute('data-dd-side', side);
+          }
+        } catch {}
+      })();
+    </script>
     <!-- PWA -->
     <link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest">
     <script>

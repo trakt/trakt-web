@@ -1,0 +1,1694 @@
+:root[data-topic="dunesday"] {
+  --dd-sand: oklch(88% 0.07 80);
+  --dd-dune-ink: oklch(22% 0.04 55);
+  --dd-spice-hot: oklch(84% 0.11 240);
+  --dd-emerald-hot: oklch(93% 0.12 155);
+  --dd-steel-hi: oklch(90% 0.012 235);
+  --dd-steel: oklch(64% 0.016 235);
+  --dd-steel-lo: oklch(32% 0.016 235);
+  --dd-steel-ink: oklch(17% 0.014 235);
+  --dd-charge: linear-gradient(
+    105deg,
+    var(--dd-gold) 0%,
+    var(--dd-spice) 42%,
+    var(--dd-emerald) 100%
+  );
+  --dd-brushed: linear-gradient(
+    135deg,
+    var(--dd-steel-hi) 0%,
+    var(--dd-steel-lo) 28%,
+    var(--dd-steel) 50%,
+    var(--dd-steel-lo) 72%,
+    var(--dd-steel-hi) 100%
+  );
+}
+
+:root[data-topic="dunesday"] {
+  cursor: var(--dd-cursor, auto);
+}
+
+:root[data-topic="dunesday"]
+  :is(
+    a,
+    button,
+    [role="button"],
+    [role="radio"],
+    [role="tab"],
+    summary,
+    label[for]
+  ) {
+  cursor: var(--dd-cursor-lock, pointer);
+}
+
+:root[data-topic="dunesday"] ::selection {
+  background: oklch(72% 0.15 245 / 0.45);
+  color: white;
+}
+
+:root[data-topic="dunesday"] .trakt-summary-title h1,
+:root[data-topic="dunesday"] h1.trakt-summary-title,
+:root[data-topic="dunesday"] .trakt-summary-title .trakt-responsive-title {
+  background: linear-gradient(
+    100deg,
+    var(--dd-sand) 0%,
+    var(--dd-gold) 38%,
+    var(--dd-steel-hi) 52%,
+    var(--dd-emerald-hot) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 0 oklch(10% 0.02 60 / 0.9));
+}
+
+.dd-backdrop-art {
+  opacity: 0.92;
+}
+
+.dd-backdrop-veil {
+  background:
+    linear-gradient(
+      180deg,
+      oklch(8% 0.01 240 / 0.55) 0%,
+      transparent 22%,
+      transparent 70%,
+      oklch(8% 0.01 240 / 0.35) 100%
+    ),
+    radial-gradient(
+      70% 60% at 45% 40%,
+      oklch(8% 0.01 240 / 0.38),
+      transparent 75%
+    );
+}
+
+.dd-lockup-source {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+.dd-lockup {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.42em;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.dd-lockup-word {
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.dd-lockup-word[data-world="dune"] {
+  font-weight: 700;
+  font-size: 0.72em;
+  letter-spacing: 0.22em;
+  color: var(--dd-gold);
+  text-shadow: 0 0 14px oklch(80% 0.13 75 / 0.35);
+}
+
+.dd-lockup-word[data-world="doom"] {
+  font-weight: 700;
+  font-size: 1.18em;
+  letter-spacing: 0.035em;
+  background: linear-gradient(
+    180deg,
+    var(--dd-steel-hi) 0%,
+    oklch(78% 0.014 235) 48%,
+    var(--dd-emerald) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 8px oklch(82% 0.19 155 / 0.22));
+}
+
+.dd-lockup-gem {
+  flex: none;
+  align-self: center;
+  width: 6px;
+  height: 6px;
+  rotate: 45deg;
+  background: linear-gradient(
+    135deg,
+    var(--dd-gold) 0 50%,
+    var(--dd-emerald) 50%
+  );
+  box-shadow: 0 0 8px oklch(82% 0.19 155 / 0.6);
+}
+
+.dd-lockup-word[data-world="dune"]:only-child {
+  font-size: 0.9em;
+}
+
+:root[data-topic="dunesday"] .trakt-list-title-wrapper {
+  align-items: center;
+}
+
+:root[data-topic="dunesday"] .trakt-calendar-week .week-heading .dd-lockup {
+  font-size: 1.35rem;
+}
+
+.dd-card {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.07);
+}
+
+.dd-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--dd-charge);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.dd-card-glass {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 42%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    oklch(96% 0.05 150 / 0.2) 50%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-110%);
+}
+
+@media (hover: hover) {
+  :is(
+      .trakt-card,
+      .trakt-calendar-poster-tile,
+      .trakt-summary-poster-container
+    ):hover
+    .dd-card::before {
+    opacity: 0.85;
+  }
+
+  :is(
+      .trakt-card,
+      .trakt-calendar-poster-tile,
+      .trakt-summary-poster-container
+    ):hover
+    .dd-card-glass {
+    animation: dd-glass-sweep 720ms cubic-bezier(0.3, 0.1, 0.2, 1) both;
+  }
+}
+
+@keyframes dd-glass-sweep {
+  0% {
+    opacity: 1;
+    transform: translateX(-110%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(260%);
+  }
+}
+
+.trakt-summary-poster > .dd-card .dd-card-glass {
+  animation: dd-glass-sweep 1400ms cubic-bezier(0.3, 0.1, 0.2, 1) 900ms both;
+}
+
+:root[data-topic="dunesday"]
+  .trakt-button[data-color="purple"][data-style="flat"],
+:root[data-topic="dunesday"] .trakt-get-started-button .trakt-button,
+:root[data-topic="dunesday"]
+  .trakt-button[data-color="purple"][data-variant="primary"]:not(
+    [data-style="outline"]
+  ):not([data-style="ghost"]) {
+  background-image: var(--dd-charge);
+  color: oklch(14% 0.02 240);
+  transition: translate 180ms ease;
+}
+
+:root[data-topic="dunesday"]
+  .trakt-button[data-color="purple"][data-style="outline"],
+:root[data-topic="dunesday"]
+  .trakt-action-button[data-color="purple"][data-variant="secondary"] {
+  border-color: transparent;
+  background:
+    linear-gradient(oklch(14% 0.015 240), oklch(14% 0.015 240)) padding-box,
+    var(--dd-charge) border-box;
+  transition: translate 180ms ease;
+}
+
+@media (hover: hover) {
+  :root[data-topic="dunesday"]
+    :is(
+      .trakt-button[data-color="purple"],
+      .trakt-get-started-button .trakt-button,
+      .trakt-action-button[data-color="purple"][data-variant="secondary"]
+    ):hover {
+    translate: 0 -1px;
+  }
+}
+
+:root[data-topic="dunesday"] .trakt-star-fill {
+  fill: url(#dd-star-gradient);
+}
+
+:root[data-topic="dunesday"] :is(.trakt-user-avatar, .trakt-profile-image) {
+  position: relative;
+}
+
+.dd-avatar-ring {
+  position: absolute;
+  inset: -3px;
+  z-index: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 195deg,
+    var(--dd-gold) 0deg,
+    var(--dd-sand) 60deg,
+    var(--dd-gold-deep) 175deg,
+    var(--dd-emerald) 185deg,
+    var(--dd-emerald-hot) 250deg,
+    var(--dd-emerald-deep) 355deg,
+    var(--dd-gold) 360deg
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2.5px),
+    black calc(100% - 2px)
+  );
+}
+
+.trakt-profile-image > .dd-avatar-ring {
+  inset: -5px;
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 4px),
+    black calc(100% - 3.5px)
+  );
+}
+
+:root[data-topic="dunesday"] .trakt-streak-flame {
+  position: relative;
+}
+
+:root[data-topic="dunesday"] .trakt-streak-flame .streak-flame-body {
+  opacity: 0;
+}
+
+.dd-streak {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.dd-streak svg {
+  width: 100%;
+  height: 100%;
+  max-width: 48px;
+  overflow: visible;
+}
+
+.dd-streak-sun {
+  fill: var(--dd-gold);
+  filter: drop-shadow(0 0 6px oklch(80% 0.13 75 / 0.7));
+}
+
+.dd-streak-dune {
+  fill: oklch(55% 0.1 60);
+}
+
+.dd-streak-sigil {
+  fill: var(--dd-emerald);
+  stroke: var(--dd-emerald);
+  filter: drop-shadow(0 0 5px oklch(82% 0.19 155 / 0.7));
+}
+
+.dd-streak-seam {
+  stroke: oklch(97% 0.04 120);
+  stroke-width: 1.2;
+}
+
+:root[data-topic="dunesday"] .trakt-calendar-day-header {
+  position: relative;
+}
+
+:root[data-topic="dunesday"]
+  .trakt-calendar-day-header.dd-is-dunesday
+  :is(.day-number, .weekday) {
+  color: oklch(97% 0.04 120);
+  text-shadow: 0 0 12px oklch(82% 0.19 155 / 0.8);
+}
+
+:root[data-topic="dunesday"] .trakt-calendar-day-header.dd-is-dunesday::after {
+  content: "";
+  position: absolute;
+  inset-inline: 14%;
+  inset-block-end: -1px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--dd-charge);
+}
+
+.dd-day-badge {
+  position: absolute;
+  inset-block-start: -26px;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: "Roboto Mono", monospace;
+  font-size: 9px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dd-emerald-hot);
+  background: oklch(14% 0.015 235 / 0.92);
+  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.14);
+}
+
+[dir="rtl"] .dd-day-badge {
+  translate: 50% 0;
+}
+
+.dd-day-kicker {
+  color: var(--dd-gold);
+}
+
+.dd-day-text {
+  font-weight: 600;
+}
+
+.dd-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.dd-dock {
+  position: fixed;
+  z-index: calc(var(--layer-overlay, 100) + 1);
+  display: none;
+}
+
+:root:has(.trakt-side-navbar) .dd-dock {
+  display: block;
+  inset-block-start: 72px;
+  inset-inline-start: 12px;
+}
+
+:root:has(.trakt-mobile-navbar) .dd-dock {
+  display: block;
+  inset-block-end: calc(72px + env(safe-area-inset-bottom, 0px));
+  inset-inline-end: 6px;
+}
+
+.dd-ticket {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  width: 48px;
+  filter: drop-shadow(0 6px 14px oklch(0% 0 0 / 0.55));
+  cursor: var(--dd-cursor-lock, pointer);
+  transition: transform 300ms cubic-bezier(0.34, 1.5, 0.5, 1);
+}
+
+.dd-ticket:focus-visible {
+  outline: 2px solid var(--dd-emerald);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.dd-stub {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 1px;
+  overflow: hidden;
+  transition: transform 300ms cubic-bezier(0.34, 1.5, 0.5, 1);
+}
+
+.dd-stub[data-world="dune"] {
+  height: 100px;
+  padding-block: 8px 10px;
+  border-radius: 7px 7px 2px 2px;
+  color: oklch(24% 0.05 55);
+  background:
+    repeating-linear-gradient(
+      172deg,
+      oklch(70% 0.1 70 / 0.18) 0 1px,
+      transparent 1px 6px
+    ),
+    linear-gradient(
+      180deg,
+      oklch(91% 0.07 82) 0%,
+      oklch(83% 0.11 76) 70%,
+      oklch(74% 0.12 66) 100%
+    );
+  mask:
+    radial-gradient(circle 5px at 0 100%, transparent 96%, black) top left / 51%
+    100% no-repeat,
+    radial-gradient(circle 5px at 100% 100%, transparent 96%, black) top right /
+    51% 100% no-repeat;
+  transform: rotate(-3deg) translate(-1px, 2px);
+  border-bottom: 1.5px dashed oklch(35% 0.06 55 / 0.55);
+}
+
+.dd-stub[data-world="doom"] {
+  height: 104px;
+  padding-block: 10px 9px;
+  border-radius: 2px 2px 7px 7px;
+  color: var(--dd-steel-hi);
+  background:
+    radial-gradient(
+      circle 1.6px at 6px 6px,
+      var(--dd-steel-hi) 60%,
+      transparent 70%
+    ),
+    radial-gradient(
+      circle 1.6px at calc(100% - 6px) calc(100% - 6px),
+      var(--dd-steel-hi) 60%,
+      transparent 70%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      oklch(100% 0 0 / 0.035) 0 1px,
+      transparent 1px 3px
+    ),
+    linear-gradient(
+      160deg,
+      oklch(30% 0.018 235) 0%,
+      oklch(18% 0.016 235) 55%,
+      oklch(14% 0.02 200) 100%
+    );
+  box-shadow: inset 0 0 0 1px oklch(82% 0.19 155 / 0.35);
+  mask:
+    radial-gradient(circle 5px at 0 0, transparent 96%, black) bottom left / 51%
+    100% no-repeat,
+    radial-gradient(circle 5px at 100% 0, transparent 96%, black) bottom right /
+    51% 100% no-repeat;
+  transform: rotate(2deg) translate(1px, -2px);
+}
+
+.dd-stub-kicker {
+  font-weight: 700;
+  font-size: 7.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-inline-start: 0.16em;
+}
+
+.dd-stub[data-world="doom"] .dd-stub-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--dd-steel);
+}
+
+.dd-stub-number {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+}
+
+.dd-stub[data-world="doom"] .dd-stub-number {
+  font-size: 22px;
+  color: var(--dd-emerald);
+  text-shadow: 0 0 10px oklch(82% 0.19 155 / 0.7);
+}
+
+.dd-stub-unit {
+  font-family: "Roboto Mono", monospace;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.dd-stub-unit em {
+  display: block;
+  font-style: normal;
+  color: var(--dd-emerald-hot);
+  opacity: 0.8;
+  text-align: center;
+}
+
+.dd-stub-sun {
+  position: relative;
+  width: 22px;
+  height: 11px;
+  overflow: hidden;
+  margin-block-end: 3px;
+  border-block-end: 1.5px solid oklch(35% 0.08 55);
+}
+
+.dd-stub-sun::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 4px;
+  inset-block-start: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 40%,
+    oklch(80% 0.17 55),
+    oklch(62% 0.18 40)
+  );
+}
+
+@media (hover: hover) {
+  .dd-ticket:hover .dd-stub[data-world="dune"],
+  .dd-dock[data-open="true"] .dd-stub[data-world="dune"] {
+    transform: rotate(-6deg) translate(-3px, -1px);
+  }
+
+  .dd-ticket:hover .dd-stub[data-world="doom"],
+  .dd-dock[data-open="true"] .dd-stub[data-world="doom"] {
+    transform: rotate(5deg) translate(3px, 1px);
+  }
+}
+
+:root:has(.trakt-landing) .dd-dock {
+  display: block;
+  position: absolute;
+  inset-block-start: 26px;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+}
+
+[dir="rtl"]:has(.trakt-landing) .dd-dock {
+  translate: 50% 0;
+}
+
+:root:has(.trakt-landing) .dd-ticket {
+  grid-auto-flow: column;
+  width: auto;
+}
+
+:root:has(.trakt-landing) .dd-stub {
+  height: 44px;
+  width: 64px;
+  padding: 0;
+  gap: 0;
+}
+
+:root:has(.trakt-landing) .dd-stub[data-world="dune"] {
+  border-radius: 7px 2px 2px 7px;
+  border-bottom: none;
+  border-inline-end: 1.5px dashed oklch(35% 0.06 55 / 0.55);
+  mask:
+    radial-gradient(circle 5px at 100% 0, transparent 96%, black) top / 100% 51%
+    no-repeat,
+    radial-gradient(circle 5px at 100% 100%, transparent 96%, black) bottom /
+    100% 51% no-repeat;
+  transform: rotate(-3deg) translate(1px, 1px);
+}
+
+:root:has(.trakt-landing) .dd-stub[data-world="doom"] {
+  border-radius: 2px 7px 7px 2px;
+  mask:
+    radial-gradient(circle 5px at 0 0, transparent 96%, black) top / 100% 51%
+    no-repeat,
+    radial-gradient(circle 5px at 0 100%, transparent 96%, black) bottom / 100%
+    51% no-repeat;
+  transform: rotate(2deg) translate(-1px, -1px);
+}
+
+:root:has(.trakt-landing) :is(.dd-stub-sun, .dd-stub-unit em) {
+  display: none;
+}
+
+:root:has(.trakt-landing) .dd-stub-number {
+  font-size: 21px;
+}
+
+:root:has(.trakt-landing) .dd-stub[data-world="doom"] .dd-stub-number {
+  font-size: 18px;
+}
+
+:root:has(.trakt-landing) .dd-panel {
+  inset-block-start: 58px;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  transform-origin: top center;
+}
+
+[dir="rtl"]:has(.trakt-landing) .dd-panel {
+  translate: 50% 0;
+}
+
+:root[data-topic="dunesday"] .trakt-landing-backdrop {
+  opacity: 0.35;
+  mix-blend-mode: screen;
+}
+
+:root[data-topic="dunesday"] .trakt-landing {
+  background-color: transparent;
+}
+
+:root[data-topic="dunesday"]
+  .trakt-landing
+  section:has(.trakt-landing-backdrop) {
+  background: linear-gradient(
+    180deg,
+    transparent 70%,
+    oklch(10% 0.015 220 / 0.7)
+  );
+}
+
+@media (max-width: 600px) {
+  :root:has(.trakt-landing) .dd-dock {
+    inset-inline-start: auto;
+    inset-inline-end: 96px;
+    inset-block-start: 22px;
+    translate: none;
+  }
+
+  [dir="rtl"]:has(.trakt-landing) .dd-dock {
+    translate: none;
+  }
+
+  :root:has(.trakt-landing) .dd-ticket {
+    scale: 0.8;
+    transform-origin: top right;
+  }
+
+  :root:has(.trakt-landing) .dd-panel {
+    inset-inline-start: auto;
+    inset-inline-end: -84px;
+    translate: none;
+    transform-origin: top right;
+  }
+}
+
+:root[data-topic="dunesday"] .trakt-landing h1 {
+  background: linear-gradient(
+    100deg,
+    var(--dd-sand) 0%,
+    var(--dd-gold) 36%,
+    var(--dd-steel-hi) 56%,
+    var(--dd-emerald-hot) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 0 oklch(10% 0.02 60 / 0.9));
+}
+
+:root[data-topic="dunesday"] .trakt-landing-spotlight img {
+  box-shadow:
+    0 0 0 1px oklch(82% 0.19 155 / 0.35),
+    0 30px 80px oklch(0% 0 0 / 0.6);
+}
+
+:root:has(.trakt-mobile-navbar) .dd-dock {
+  transition: transform 520ms cubic-bezier(0.34, 1.3, 0.5, 1);
+}
+
+:root:has(.trakt-mobile-navbar)
+  .dd-dock:not([data-open="true"]):not([data-peek="true"]) {
+  transform: translateX(calc(100% - 10px));
+}
+
+[dir="rtl"]:has(.trakt-mobile-navbar)
+  .dd-dock:not([data-open="true"]):not([data-peek="true"]) {
+  transform: translateX(calc(-100% + 10px));
+}
+
+:root:has(.trakt-mobile-navbar) .dd-ticket {
+  scale: 0.86;
+  transform-origin: bottom right;
+}
+
+.dd-panel {
+  position: absolute;
+  inset-block-start: -8px;
+  inset-inline-start: 64px;
+  width: 330px;
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border-radius: var(--border-radius-l);
+  color: oklch(94% 0.01 240);
+  background: oklch(15% 0.02 230 / 0.96);
+  border: 1px solid oklch(60% 0.03 200 / 0.3);
+  box-shadow:
+    0 24px 60px oklch(0% 0 0 / 0.65),
+    0 0 0 1px oklch(0% 0 0 / 0.5);
+  backdrop-filter: blur(14px);
+  transform-origin: top left;
+  animation: dd-panel-in 340ms cubic-bezier(0.34, 1.4, 0.5, 1) both;
+}
+
+[dir="rtl"] .dd-panel {
+  transform-origin: top right;
+}
+
+:root:has(.trakt-mobile-navbar) .dd-panel {
+  position: fixed;
+  inset-block-start: auto;
+  inset-block-end: calc(72px + env(safe-area-inset-bottom, 0px));
+  inset-inline-start: 10px;
+  inset-inline-end: 56px;
+  width: auto;
+  padding: 14px;
+  transform-origin: bottom right;
+}
+
+@keyframes dd-panel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(-6px);
+  }
+}
+
+.dd-panel-head {
+  display: grid;
+  gap: 4px;
+}
+
+.dd-panel-title,
+.dd-stinger-title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.dd-panel-title span:first-child,
+.dd-stinger-title span:first-child {
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--dd-gold);
+}
+
+.dd-panel-title span:last-child,
+.dd-stinger-title span:last-child {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--dd-emerald);
+  text-shadow: 0 0 16px oklch(82% 0.19 155 / 0.55);
+}
+
+.dd-panel-title span:first-child {
+  font-size: 19px;
+}
+
+.dd-panel-title span:last-child {
+  font-size: 30px;
+}
+
+.dd-panel-date {
+  margin: 0;
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  color: oklch(85% 0.02 220 / 0.8);
+}
+
+.dd-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.dd-picker-option {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 10px 6px 9px;
+  border-radius: var(--border-radius-m);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  color: oklch(88% 0.015 230 / 0.85);
+  background: oklch(100% 0 0 / 0.04);
+  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
+  cursor: var(--dd-cursor-lock, pointer);
+  transition:
+    background 220ms ease,
+    box-shadow 220ms ease,
+    color 220ms ease,
+    translate 160ms ease;
+}
+
+.dd-picker-option:focus-visible {
+  outline: 2px solid var(--dd-spice);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .dd-picker-option:hover {
+    translate: 0 -1px;
+  }
+}
+
+.dd-picker-option[data-side="dune"][aria-pressed="true"] {
+  color: oklch(22% 0.05 55);
+  background: linear-gradient(170deg, var(--dd-sand), var(--dd-gold));
+  box-shadow: 0 0 18px oklch(80% 0.13 75 / 0.45);
+}
+
+.dd-picker-option[data-side="doom"][aria-pressed="true"] {
+  color: oklch(15% 0.04 158);
+  background: linear-gradient(170deg, var(--dd-emerald-hot), var(--dd-emerald));
+  box-shadow: 0 0 18px oklch(82% 0.19 155 / 0.45);
+}
+
+.dd-picker-option[data-side="double"][aria-pressed="true"] {
+  color: oklch(14% 0.02 240);
+  background: var(--dd-charge);
+  box-shadow: 0 0 18px oklch(72% 0.15 245 / 0.45);
+}
+
+.dd-meter {
+  display: grid;
+  gap: 10px;
+}
+
+.dd-meter-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.dd-meter-label b {
+  font-size: 20px;
+  letter-spacing: 0;
+}
+
+.dd-meter-label[data-world="dune"] {
+  color: var(--dd-gold);
+}
+
+.dd-meter-label[data-world="doom"] {
+  color: var(--dd-emerald);
+}
+
+.dd-meter-rope {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  overflow: visible;
+  background: oklch(100% 0 0 / 0.06);
+}
+
+.dd-meter-fill {
+  position: absolute;
+  inset-block: 0;
+  transition: width 900ms cubic-bezier(0.34, 1.3, 0.5, 1);
+}
+
+.dd-meter-fill[data-world="dune"] {
+  inset-inline-start: 0;
+  width: var(--dd-share);
+  border-start-start-radius: 5px;
+  border-end-start-radius: 5px;
+  background: var(--dd-gold);
+}
+
+.dd-meter-fill[data-world="doom"] {
+  inset-inline-end: 0;
+  width: calc(100% - var(--dd-share));
+  border-start-end-radius: 5px;
+  border-end-end-radius: 5px;
+  background: var(--dd-emerald);
+}
+
+.dd-meter-knot {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: var(--dd-share);
+  width: 16px;
+  height: 16px;
+  margin-inline-start: -8px;
+  margin-block-start: -8px;
+  border-radius: 4px;
+  rotate: 45deg;
+  background: linear-gradient(
+    135deg,
+    var(--dd-sand) 0 50%,
+    var(--dd-emerald-hot) 50% 100%
+  );
+  box-shadow:
+    0 0 0 2px oklch(12% 0.02 220),
+    0 0 14px oklch(90% 0.12 150 / 0.7);
+  transition: inset-inline-start 900ms cubic-bezier(0.34, 1.3, 0.5, 1);
+}
+
+.dd-meter-note {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.35;
+  color: oklch(85% 0.02 220 / 0.7);
+}
+
+.dd-panel-links {
+  display: flex;
+  gap: 8px;
+}
+
+.dd-panel-links a {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: var(--border-radius-s);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  background: oklch(100% 0 0 / 0.05);
+  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.1);
+  transition: translate 160ms ease;
+}
+
+.dd-panel-links a[data-world="dune"] {
+  color: var(--dd-gold);
+}
+
+.dd-panel-links a[data-world="doom"] {
+  color: var(--dd-emerald);
+}
+
+@media (hover: hover) {
+  .dd-panel-links a:hover {
+    translate: 0 -1px;
+  }
+}
+
+.dd-side-card-host {
+  margin-block: 4px;
+}
+
+.dd-side-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-areas:
+    "body stats"
+    "controls controls";
+  gap: 18px 28px;
+  padding-block: 28px;
+}
+
+.dd-side-card::before,
+.dd-side-card::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--dd-gold) 30%,
+    var(--dd-emerald) 70%,
+    transparent 100%
+  );
+  opacity: 0.55;
+}
+
+.dd-side-card::before {
+  inset-block-start: 0;
+}
+
+.dd-side-card::after {
+  inset-block-end: 0;
+  opacity: 0.25;
+}
+
+[dir="rtl"] .dd-side-card::before,
+[dir="rtl"] .dd-side-card::after {
+  background: linear-gradient(
+    270deg,
+    transparent 0%,
+    var(--dd-gold) 30%,
+    var(--dd-emerald) 70%,
+    transparent 100%
+  );
+}
+
+.dd-side-card-body {
+  grid-area: body;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.dd-side-card-kicker {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5em;
+  font-size: 18px;
+}
+
+.dd-side-card-verdict {
+  margin: 4px 0 0;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 0.95;
+  text-transform: uppercase;
+  background: var(--dd-charge);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.dd-side-card[data-verdict="dune"] .dd-side-card-verdict {
+  background-image: linear-gradient(
+    180deg,
+    var(--dd-sand),
+    var(--dd-gold) 70%,
+    var(--dd-gold-deep)
+  );
+}
+
+.dd-side-card[data-verdict="doom"] .dd-side-card-verdict {
+  background-image: linear-gradient(
+    180deg,
+    var(--dd-emerald-hot),
+    var(--dd-emerald) 70%,
+    var(--dd-emerald-deep)
+  );
+}
+
+.dd-side-card-line {
+  margin: 0;
+  max-width: 44ch;
+  font-size: 13px;
+  line-height: 1.4;
+  color: oklch(90% 0.02 80 / 0.82);
+}
+
+.dd-side-card-stats {
+  grid-area: stats;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: end;
+  align-content: center;
+  gap: 22px;
+}
+
+.dd-side-card-stats div {
+  display: grid;
+  gap: 2px;
+}
+
+.dd-side-card-stats dt {
+  font-family: "Roboto Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: oklch(85% 0.02 220 / 0.65);
+}
+
+.dd-side-card-stats dd {
+  margin: 0;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1;
+  color: var(--dd-steel-hi);
+}
+
+.dd-side-card-stats [data-world="dune"] dd {
+  color: var(--dd-gold);
+}
+
+.dd-side-card-stats [data-world="doom"] dd {
+  color: var(--dd-emerald);
+  text-shadow: 0 0 14px oklch(82% 0.19 155 / 0.5);
+}
+
+.dd-side-card-controls {
+  grid-area: controls;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .dd-side-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "body"
+      "stats"
+      "controls";
+    padding-block: 20px;
+  }
+
+  .dd-side-card-stats {
+    justify-content: start;
+  }
+
+  .dd-side-card-stats dd {
+    font-size: 30px;
+  }
+
+  .dd-side-card-verdict {
+    font-size: 36px;
+  }
+
+  .dd-side-card-controls {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+
+.dd-stinger {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483100;
+  overflow: hidden;
+  pointer-events: auto;
+  animation: topic-fade-in 120ms ease-out both;
+}
+
+.dd-stinger-half {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  animation: dd-stinger-shake 420ms linear calc(var(--dd-run) * 0.46) both;
+}
+
+.dd-stinger-half[data-half="dune"] {
+  clip-path: polygon(0 0, 58% 0, 42% 100%, 0 100%);
+}
+
+.dd-stinger-half[data-half="doom"] {
+  clip-path: polygon(58% 0, 100% 0, 100% 100%, 42% 100%);
+}
+
+.dd-stinger-sky {
+  position: absolute;
+  inset: 0;
+}
+
+[data-half="dune"] .dd-stinger-sky {
+  background:
+    radial-gradient(
+      60% 50% at 25% 75%,
+      oklch(60% 0.14 55 / 0.5),
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg,
+      oklch(12% 0.025 55),
+      oklch(20% 0.05 58) 70%,
+      oklch(10% 0.02 55)
+    );
+}
+
+[data-half="doom"] .dd-stinger-sky {
+  background:
+    radial-gradient(
+      60% 50% at 78% 30%,
+      oklch(45% 0.14 158 / 0.5),
+      transparent 70%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      oklch(100% 0 0 / 0.03) 0 1px,
+      transparent 1px 4px
+    ),
+    linear-gradient(180deg, oklch(13% 0.02 225), oklch(9% 0.02 200));
+}
+
+.dd-stinger-actor {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  width: min(62vmin, 560px);
+  aspect-ratio: 1;
+  margin-block-start: calc(min(62vmin, 560px) / -2);
+  margin-inline-start: calc(min(62vmin, 560px) / -2);
+  animation-duration: var(--dd-run);
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+.dd-stinger-actor svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dd-stinger-actor[data-actor="worm"] {
+  animation-name: dd-worm-in;
+  filter: drop-shadow(0 0 30px oklch(70% 0.14 60 / 0.55));
+}
+
+.dd-stinger-actor[data-actor="sigil"] {
+  color: var(--dd-emerald);
+  animation-name: dd-sigil-in;
+  filter: drop-shadow(0 0 22px oklch(82% 0.19 155 / 0.8));
+}
+
+.dd-worm-ring[data-spin="a"] {
+  animation: topic-spin 2.4s linear infinite;
+}
+
+.dd-worm-ring[data-spin="b"] {
+  animation: topic-spin 3.2s linear infinite reverse;
+}
+
+.dd-stinger .dd-sigil-glyphs {
+  animation: topic-spin 2.8s linear infinite reverse;
+}
+
+.dd-stinger .dd-sigil-ticks {
+  animation: topic-spin 4s linear infinite;
+}
+
+@keyframes dd-worm-in {
+  0% {
+    transform: translateX(-75vw) rotate(-160deg) scale(0.7);
+    animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.4);
+  }
+  46% {
+    transform: translateX(-27vmin) rotate(0deg) scale(1);
+    animation-timing-function: cubic-bezier(0.1, 0.8, 0.3, 1);
+  }
+  62% {
+    transform: translateX(-46vmin) rotate(25deg) scale(0.92);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-44vmin) rotate(40deg) scale(0.92);
+    opacity: 0.32;
+  }
+}
+
+@keyframes dd-sigil-in {
+  0% {
+    transform: translateX(75vw) rotate(160deg) scale(0.7);
+    animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.4);
+  }
+  46% {
+    transform: translateX(27vmin) rotate(0deg) scale(1);
+    animation-timing-function: cubic-bezier(0.1, 0.8, 0.3, 1);
+  }
+  62% {
+    transform: translateX(46vmin) rotate(-25deg) scale(0.92);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(44vmin) rotate(-40deg) scale(0.92);
+    opacity: 0.32;
+  }
+}
+
+.dd-stinger-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    oklch(99% 0.02 100) 0,
+    oklch(90% 0.1 85 / 0.9) 8%,
+    oklch(82% 0.19 155 / 0.55) 22%,
+    transparent 55%
+  );
+  opacity: 0;
+  animation: dd-flash var(--dd-run) linear both;
+  mix-blend-mode: screen;
+}
+
+@keyframes dd-flash {
+  0%,
+  44% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  48% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  70% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0.12;
+    transform: scale(1.6);
+  }
+}
+
+.dd-stinger-wave {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  width: 40vmin;
+  height: 40vmin;
+  margin: -20vmin;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 3px oklch(95% 0.08 120 / 0.9),
+    0 0 40px 8px oklch(82% 0.19 155 / 0.6),
+    inset 0 0 40px 6px oklch(80% 0.13 75 / 0.5);
+  opacity: 0;
+  animation: dd-wave var(--dd-run) cubic-bezier(0.1, 0.7, 0.3, 1) both;
+}
+
+@keyframes dd-wave {
+  0%,
+  46% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  48% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4.2);
+  }
+}
+
+.dd-stinger-copy {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding-inline: 16px;
+  text-align: center;
+}
+
+.dd-stinger-title {
+  gap: 0.08em;
+  animation: dd-title-land var(--dd-run) linear both;
+}
+
+.dd-stinger-title span:first-child {
+  font-size: clamp(30px, 6.6vw, 96px);
+  letter-spacing: 0.16em;
+  background: linear-gradient(
+    180deg,
+    oklch(97% 0.04 85),
+    var(--dd-gold) 60%,
+    var(--dd-gold-deep)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 0 oklch(12% 0.03 55))
+    drop-shadow(0 0 22px oklch(80% 0.13 75 / 0.5));
+}
+
+.dd-stinger-title span:last-child {
+  font-size: clamp(52px, 11.5vw, 168px);
+  background: linear-gradient(
+    180deg,
+    var(--dd-steel-hi),
+    oklch(80% 0.02 235) 45%,
+    var(--dd-emerald) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 4px 0 oklch(8% 0.02 220))
+    drop-shadow(0 0 26px oklch(82% 0.19 155 / 0.7));
+}
+
+@keyframes dd-title-land {
+  0%,
+  47% {
+    opacity: 0;
+    transform: scale(1.9);
+    filter: blur(14px);
+  }
+  56% {
+    opacity: 1;
+    transform: scale(0.97);
+    filter: blur(0);
+  }
+  62%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.dd-stinger-line {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 600;
+  font-size: clamp(13px, 1.9vw, 24px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: oklch(96% 0.03 85);
+  text-shadow:
+    0 2px 0 oklch(8% 0.02 60),
+    0 0 18px oklch(0% 0 0 / 0.9);
+  animation: dd-line-in var(--dd-run) linear both;
+}
+
+.dd-stinger-line i {
+  width: 8px;
+  height: 8px;
+  rotate: 45deg;
+  background: linear-gradient(
+    135deg,
+    var(--dd-gold) 0 50%,
+    var(--dd-emerald) 50%
+  );
+}
+
+.dd-stinger-line span:last-child {
+  color: var(--dd-emerald-hot);
+}
+
+@keyframes dd-line-in {
+  0%,
+  58% {
+    opacity: 0;
+    letter-spacing: 0.9em;
+  }
+  74%,
+  100% {
+    opacity: 1;
+    letter-spacing: 0.3em;
+  }
+}
+
+.dd-stinger-debris {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+}
+
+.dd-stinger-debris i {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 1px;
+  opacity: 0;
+  animation: dd-debris var(--dd-run) cubic-bezier(0.1, 0.7, 0.3, 1) both;
+}
+
+.dd-stinger-debris i[data-world="dune"] {
+  background: var(--dd-sand);
+  box-shadow: 0 0 6px var(--dd-gold);
+}
+
+.dd-stinger-debris i[data-world="doom"] {
+  rotate: 45deg;
+  background: var(--dd-emerald-hot);
+  box-shadow: 0 0 8px var(--dd-emerald);
+}
+
+@keyframes dd-debris {
+  0%,
+  46% {
+    opacity: 0;
+    transform: translate(0, 0) scale(1.4);
+  }
+  48% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.4);
+  }
+}
+
+.dd-stinger-seam {
+  position: absolute;
+  inset-block: -5%;
+  inset-inline-start: 50%;
+  width: 3px;
+  margin-inline-start: -1.5px;
+  rotate: atan2(16vw, 100vh);
+  background: linear-gradient(
+    180deg,
+    var(--dd-sand),
+    oklch(97% 0.05 140),
+    var(--dd-emerald)
+  );
+  box-shadow:
+    0 0 18px 3px oklch(82% 0.19 155 / 0.7),
+    0 0 50px 8px oklch(80% 0.13 75 / 0.35);
+  transform-origin: center;
+  animation: dd-seam-open var(--dd-run) cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes dd-seam-open {
+  0%,
+  44% {
+    transform: scaleY(0);
+  }
+  52%,
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes dd-stinger-shake {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  15% {
+    translate: -9px 5px;
+  }
+  30% {
+    translate: 7px -6px;
+  }
+  45% {
+    translate: -5px 3px;
+  }
+  60% {
+    translate: 3px -2px;
+  }
+  80% {
+    translate: -1px 1px;
+  }
+}
+
+.dd-stinger.is-leaving {
+  pointer-events: none;
+}
+
+.dd-stinger.is-leaving .dd-stinger-half {
+  transition:
+    transform var(--dd-exit) cubic-bezier(0.6, 0, 0.9, 0.5),
+    opacity var(--dd-exit) ease-in;
+  opacity: 0;
+}
+
+.dd-stinger.is-leaving .dd-stinger-half[data-half="dune"] {
+  transform: translate(-46vw, 8vh);
+}
+
+.dd-stinger.is-leaving .dd-stinger-half[data-half="doom"] {
+  transform: translate(46vw, -8vh);
+}
+
+.dd-stinger.is-leaving .dd-stinger-seam {
+  transition:
+    opacity var(--dd-exit) ease-in,
+    width var(--dd-exit) ease-in;
+  opacity: 0;
+  width: 14px;
+}
+
+.dd-stinger.is-calm,
+.dd-stinger.is-calm * {
+  animation: none !important;
+}
+
+.dd-stinger.is-calm .dd-stinger-actor[data-actor="worm"] {
+  transform: translateX(-44vmin) rotate(40deg) scale(0.92);
+  opacity: 0.32;
+}
+
+.dd-stinger.is-calm .dd-stinger-actor[data-actor="sigil"] {
+  transform: translateX(44vmin) rotate(-40deg) scale(0.92);
+  opacity: 0.32;
+}
+
+.dd-stinger.is-calm .dd-stinger-flash,
+.dd-stinger.is-calm .dd-stinger-debris,
+.dd-stinger.is-calm .dd-stinger-wave {
+  display: none;
+}
+
+.dd-stinger.is-calm.is-leaving .dd-stinger-half {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dd-panel,
+  .trakt-summary-poster > .dd-card .dd-card-glass {
+    animation: none;
+  }
+
+  .dd-card::before,
+  .dd-stub,
+  .dd-ticket,
+  .dd-meter-fill,
+  .dd-meter-knot,
+  .dd-picker-option,
+  .dd-panel-links a {
+    transition: none;
+  }
+
+  :is(
+      .trakt-card,
+      .trakt-calendar-poster-tile,
+      .trakt-summary-poster-container
+    ):hover
+    .dd-card-glass {
+    animation: none;
+  }
+
+  :root[data-topic="dunesday"]
+    :is(
+      .trakt-button[data-color="purple"],
+      .trakt-get-started-button .trakt-button,
+      .trakt-action-button[data-color="purple"][data-variant="secondary"]
+    ) {
+    transition: none;
+  }
+}

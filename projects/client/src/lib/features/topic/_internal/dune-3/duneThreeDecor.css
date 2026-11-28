@@ -1,0 +1,1240 @@
+:root[data-topic="dune-3"] {
+  --dn3-grain-fine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .07 0 0 0 0 .045 0 0 0 0 .03 0 0 0 1.3 -.62'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  --dn3-ornament: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='12' viewBox='0 0 44 12'%3E%3Cpath d='M0 6h14' stroke='%23e8c896' stroke-opacity='.55'/%3E%3Cpath d='M20 1.8l4.2 4.2-4.2 4.2-4.2-4.2z' fill='none' stroke='%23e8c896'/%3E%3Ccircle cx='20' cy='6' r='1.1' fill='%23e8c896'/%3E%3Ccircle cx='31' cy='6' r='2' fill='%235fb4ff'/%3E%3Ccircle cx='38' cy='6' r='1.15' fill='%235fb4ff' fill-opacity='.7'/%3E%3C/svg%3E");
+
+  cursor: var(--dn3-cursor), auto;
+}
+
+:root[data-topic="dune-3"]
+  :is(
+    a,
+    button,
+    [role="button"],
+    [role="radio"],
+    [role="tab"],
+    summary,
+    label[for]
+  ) {
+  cursor: var(--dn3-cursor-hot), pointer;
+}
+
+:root[data-topic="dune-3"] :is(input, textarea, [contenteditable="true"]) {
+  cursor: text;
+}
+
+:root[data-topic="dune-3"] ::selection {
+  background: oklch(70% 0.15 240 / 0.45);
+  color: white;
+}
+
+.dn3-veil {
+  background:
+    linear-gradient(
+      180deg,
+      oklch(6% 0.01 50 / 0.6) 0%,
+      oklch(6% 0.01 50 / 0.18) 34%,
+      transparent 58%
+    ),
+    radial-gradient(
+      130% 90% at 50% 40%,
+      transparent 55%,
+      oklch(4% 0.01 50 / 0.55) 100%
+    );
+}
+
+:root[data-topic="dune-3"] .trakt-list-title-wrapper {
+  align-items: center;
+}
+
+:root[data-topic="dune-3"] .trakt-list-title-wrapper::after {
+  content: "";
+  flex: none;
+  display: inline-block;
+  inline-size: 44px;
+  block-size: 12px;
+  margin-inline-start: 4px;
+  background: var(--dn3-ornament) center / contain no-repeat;
+  vertical-align: middle;
+}
+
+:root[data-topic="dune-3"] :dir(rtl) .trakt-list-title-wrapper::after {
+  transform: scaleX(-1);
+}
+
+:root[data-topic="dune-3"] .trakt-list-header {
+  position: relative;
+}
+
+:root[data-topic="dune-3"] .trakt-list-header::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -5px;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--dn3-sand-soft),
+    var(--dn3-sand-faint) 35%,
+    transparent 80%
+  );
+}
+
+:root[data-topic="dune-3"] :dir(rtl) .trakt-list-header::after {
+  background: linear-gradient(
+    270deg,
+    var(--dn3-sand-soft),
+    var(--dn3-sand-faint) 35%,
+    transparent 80%
+  );
+}
+
+:root[data-topic="dune-3"]
+  .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+    [data-size="tag"]
+  ) {
+  color: oklch(93% 0.03 78);
+  background:
+    linear-gradient(180deg, oklch(100% 0 0 / 0.07), transparent 46%),
+    linear-gradient(180deg, oklch(28% 0.028 58), oklch(17% 0.02 53));
+  box-shadow:
+    inset 0 0 0 1px oklch(86% 0.06 78 / 0.24),
+    0 3px 10px oklch(0% 0 0 / 0.4);
+  transition: transform 200ms ease;
+}
+
+:root[data-topic="dune-3"]
+  .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+    [data-size="tag"]
+  )
+  p {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+:root[data-topic="dune-3"]
+  .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+    [data-size="tag"]
+  )::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px oklch(78% 0.15 238 / 0.85),
+    0 0 18px oklch(70% 0.17 242 / 0.35);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+:root[data-topic="dune-3"]
+  .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+    [data-size="tag"]
+  ):focus-visible::after {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  :root[data-topic="dune-3"]
+    .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+      [data-size="tag"]
+    ):hover {
+    transform: translateY(-1px);
+  }
+
+  :root[data-topic="dune-3"]
+    .trakt-button:not([data-style="ghost"]):not([data-style="underlined"]):not(
+      [data-size="tag"]
+    ):hover::after {
+    opacity: 1;
+  }
+}
+
+.dn3-dust {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      0deg,
+      oklch(18% 0.03 50 / 0.72) 0%,
+      oklch(42% 0.08 60 / 0.24) 16%,
+      transparent 38%
+    ),
+    var(--dn3-grain-fine);
+  background-size:
+    auto,
+    140px 140px;
+  -webkit-mask-image: linear-gradient(0deg, #000 0%, #000 30%, transparent 55%);
+  mask-image: linear-gradient(0deg, #000 0%, #000 30%, transparent 55%);
+  box-shadow: inset 0 0 0 1px oklch(86% 0.06 78 / 0.1);
+  transition:
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 700ms ease;
+}
+
+:root[data-topic="dune-3"] .trakt-calendar-poster-tile .tile-poster {
+  position: relative;
+}
+
+@media (hover: hover) {
+  :root[data-topic="dune-3"] .trakt-card:hover .dn3-dust {
+    opacity: 0.55;
+    transform: translateY(6px);
+  }
+}
+
+.dn3-drift {
+  position: absolute;
+  inset-inline: 16px;
+  top: -9px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 -1px 0 oklch(96% 0.05 82 / 0.55))
+    drop-shadow(0 -3px 4px oklch(0% 0 0 / 0.35));
+}
+
+.dn3-drift::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      172deg,
+      oklch(97% 0.04 82 / 0.16) 0 1px,
+      transparent 1px 3.5px
+    ),
+    linear-gradient(
+      180deg,
+      oklch(88% 0.07 78) 0%,
+      oklch(72% 0.1 64) 30%,
+      oklch(50% 0.085 54) 64%,
+      oklch(30% 0.05 50 / 0) 100%
+    );
+  -webkit-mask: var(--dn3-drift-shape) center / 100% 100% no-repeat;
+  mask: var(--dn3-drift-shape) center / 100% 100% no-repeat;
+  transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform-origin: 50% 100%;
+}
+
+.dn3-drift[data-shape="0"] {
+  --dn3-drift-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M0 16V11C18 10 30 6.5 50 7s30 4.5 50 4 38-6.5 60-6 30 4 40 4v7z'/%3E%3C/svg%3E");
+}
+
+.dn3-drift[data-shape="1"] {
+  --dn3-drift-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M0 16V8c14-1 26 2 44 2.5s38-5.5 60-6 36 5.5 58 6.5 30-1 38-1v6z'/%3E%3C/svg%3E");
+}
+
+.dn3-drift[data-shape="2"] {
+  --dn3-drift-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M0 16v-4c24 0 40-3 62-3.5s30-5 54-5.5 34 6.5 56 8 28 1 28 1v4z'/%3E%3C/svg%3E");
+}
+
+.dn3-drift[data-shape="3"] {
+  --dn3-drift-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M0 16V9.5C20 9 32 4 54 4s32 6 54 6.5 38-3.5 58-3.5 28 3 34 4v5.5z'/%3E%3C/svg%3E");
+}
+
+.dn3-drift i {
+  position: absolute;
+  top: 5px;
+  width: 2.4px;
+  height: 2.4px;
+  box-shadow: 0 0 3px oklch(86% 0.06 78 / 0.8);
+  border-radius: 50%;
+  background: var(--dn3-sand);
+  opacity: 0;
+}
+
+.dn3-drift i:nth-child(1) {
+  inset-inline-start: 12%;
+  animation-delay: 0ms;
+}
+
+.dn3-drift i:nth-child(2) {
+  inset-inline-start: 19%;
+  animation-delay: 380ms;
+}
+
+.dn3-drift i:nth-child(3) {
+  inset-inline-start: 46%;
+  animation-delay: 160ms;
+}
+
+.dn3-drift i:nth-child(4) {
+  inset-inline-start: 53%;
+  animation-delay: 620ms;
+}
+
+.dn3-drift i:nth-child(5) {
+  inset-inline-start: 80%;
+  animation-delay: 260ms;
+}
+
+.dn3-drift i:nth-child(6) {
+  inset-inline-start: 88%;
+  animation-delay: 740ms;
+}
+
+@media (hover: hover) {
+  :root[data-topic="dune-3"] .trakt-card:hover .dn3-drift::before {
+    transform: scaleY(0.8);
+  }
+}
+
+.dn3-drift::after {
+  content: "";
+  position: absolute;
+  inset: -12px 0 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    oklch(86% 0.08 76 / 0.85),
+    oklch(72% 0.09 66 / 0.35) 55%,
+    transparent
+  );
+  filter: blur(2px);
+  opacity: 0;
+  transform: translateY(6px) scaleX(0.7);
+}
+
+@media (hover: hover) {
+  :root[data-topic="dune-3"] .trakt-card:hover .dn3-drift::after {
+    animation: dn3-plume 1600ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+}
+
+@keyframes dn3-plume {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scaleX(0.7);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--rtl-sign, 1) * 18px), -14px) scaleX(1.15);
+  }
+}
+
+@media (hover: hover) {
+  :root[data-topic="dune-3"] .trakt-card:hover .dn3-drift i {
+    animation-name: dn3-trickle;
+    animation-duration: 900ms;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6);
+    animation-iteration-count: infinite;
+  }
+}
+
+:root[data-topic="dune-3"][data-dn3-stage="worm"] .dn3-drift i {
+  animation-name: dn3-trickle;
+  animation-duration: 900ms;
+  animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6);
+  animation-iteration-count: infinite;
+}
+
+@keyframes dn3-trickle {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  12% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(3px, 38px);
+  }
+}
+
+:root[data-topic="dune-3"][data-dn3-stage="tremor"] .dn3-drift,
+:root[data-topic="dune-3"][data-dn3-stage="worm"] .dn3-drift {
+  animation: dn3-shiver 150ms steps(2) infinite;
+}
+
+:root[data-topic="dune-3"][data-dn3-stage="worm"] .dn3-drift {
+  animation-duration: 90ms;
+}
+
+@keyframes dn3-shiver {
+  0% {
+    transform: translate(-0.6px, 0.4px);
+  }
+  100% {
+    transform: translate(0.7px, -0.3px);
+  }
+}
+
+:root[data-topic="dune-3"] .trakt-summary-poster-container[data-variant] {
+  position: relative;
+  isolation: isolate;
+}
+
+.dn3-monolith {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: var(--border-radius-l);
+  background: var(--dn3-ink);
+  transform: translate(calc(var(--rtl-sign, 1) * 16px), 18px);
+  box-shadow:
+    inset 1px 0 0 oklch(86% 0.06 78 / 0.18),
+    calc(var(--rtl-sign, 1) * 40px) 40px 60px oklch(0% 0 0 / 0.55);
+}
+
+:root[data-topic="dune-3"] .trakt-summary-title h1 {
+  font-size: clamp(22px, calc(var(--text-size, 7cqi) * 0.74), 40px);
+  line-height: 1.12;
+  letter-spacing: 0.08em;
+  color: oklch(94% 0.03 80);
+  text-shadow: 0 0 34px oklch(70% 0.1 62 / 0.35);
+  animation: dn3-title-in 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes dn3-title-in {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(calc(var(--rtl-sign, 1) * -12px));
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+:root[data-topic="dune-3"] .trakt-summary-actions-bar {
+  background:
+    var(--dn3-grain-fine),
+    linear-gradient(
+      180deg,
+      oklch(22% 0.025 55 / 0.92),
+      oklch(13% 0.016 50 / 0.95)
+    );
+  background-size:
+    120px 120px,
+    auto;
+  box-shadow:
+    inset 0 0 0 1px oklch(86% 0.06 78 / 0.2),
+    0 10px 30px oklch(0% 0 0 / 0.45);
+}
+
+:root[data-topic="dune-3"] svg:has(> .trakt-star-fill) {
+  overflow: visible;
+}
+
+:root[data-topic="dune-3"] svg:has(> .trakt-star-fill) path {
+  d: path("M12 1.2L18.8 12L12 22.8L5.2 12Z");
+  stroke-linejoin: miter;
+}
+
+:root[data-topic="dune-3"] svg:has(> .trakt-star-fill) > path {
+  color: var(--dn3-sand-soft);
+  stroke-width: 1.4;
+}
+
+:root[data-topic="dune-3"] .trakt-star-fill {
+  fill: var(--dn3-spice);
+  filter: drop-shadow(0 0 4px var(--dn3-spice-glow));
+}
+
+:root[data-topic="dune-3"] .trakt-profile-image {
+  position: relative;
+}
+
+.dn3-ibad {
+  position: absolute;
+  inset: -3px;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1.5px oklch(78% 0.14 238 / 0.9),
+    0 0 12px 1px oklch(70% 0.17 242 / 0.55),
+    inset 0 0 8px oklch(70% 0.17 242 / 0.5);
+}
+
+.dn3-ibad::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    oklch(85% 0.12 236 / 0.65) 0 2deg,
+    transparent 2deg 10deg
+  );
+  -webkit-mask: radial-gradient(
+    closest-side,
+    transparent 86%,
+    #000 88%,
+    #000 98%,
+    transparent 100%
+  );
+  mask: radial-gradient(
+    closest-side,
+    transparent 86%,
+    #000 88%,
+    #000 98%,
+    transparent 100%
+  );
+}
+
+:root[data-topic="dune-3"] .trakt-streak-callout {
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    oklch(86% 0.06 78 / 0.07),
+    transparent 70%
+  );
+  box-shadow: inset 0 0 0 1px oklch(86% 0.06 78 / 0.14);
+}
+
+:root[data-topic="dune-3"] .trakt-streak-flame {
+  position: relative;
+}
+
+:root[data-topic="dune-3"] .trakt-streak-flame .streak-flame-body {
+  opacity: 0;
+}
+
+.dn3-arrakis-sun {
+  position: absolute;
+  inset: -2px;
+  color: var(--dn3-sand);
+  pointer-events: none;
+}
+
+.dn3-arrakis-sun svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 8px oklch(70% 0.11 62 / 0.6));
+}
+
+:root[data-topic="dune-3"] .trakt-streak-info {
+  position: relative;
+}
+
+:root[data-topic="dune-3"]
+  .trakt-streak-info:has(> .dn3-arrakis-days)
+  .trakt-streak-title {
+  opacity: 0;
+}
+
+.dn3-arrakis-days {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 50%;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  white-space: nowrap;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.dn3-arrakis-days b {
+  font-family: "Roboto Mono", monospace;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dn3-spice-hot);
+  text-shadow: 0 0 16px var(--dn3-spice-glow);
+}
+
+.dn3-arrakis-days span {
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dn3-sand);
+}
+
+:root[data-topic="dune-3"] .week-head-day.is-today,
+:root[data-topic="dune-3"]
+  .trakt-calendar-day-header.is-today[data-variant="row"] {
+  position: relative;
+}
+
+.dn3-today {
+  position: absolute;
+  inset-inline-end: 8px;
+  top: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--dn3-sand);
+  pointer-events: none;
+}
+
+.dn3-today svg {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 0 6px oklch(70% 0.11 62 / 0.55));
+}
+
+.dn3-today span {
+  font-family: "Roboto Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dn3-spice);
+}
+
+:root[data-topic="dune-3"]
+  .trakt-calendar-day-header.is-today[data-variant="row"]
+  .dn3-today {
+  flex-direction: row;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+:root[data-topic="dune-3"] .trakt-profile-container {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    oklch(86% 0.06 78 / 0.06),
+    transparent 60%
+  );
+  box-shadow: inset 0 0 0 1px oklch(86% 0.06 78 / 0.16);
+}
+
+.dn3-house {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  inset-inline-start: 4px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-block-end: 6px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.dn3-house-crest {
+  display: block;
+  width: 26px;
+  height: 26px;
+  color: var(--dn3-sand);
+}
+
+.dn3-house-crest svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dn3-house-title,
+.dn3-house-records > span {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.2;
+}
+
+.dn3-house-records {
+  display: flex;
+  gap: 16px;
+  padding-inline-start: 14px;
+  border-inline-start: 1px solid oklch(86% 0.06 78 / 0.28);
+}
+
+.dn3-house i {
+  font-family: "Roboto Mono", monospace;
+  font-size: 9px;
+  font-style: normal;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: oklch(86% 0.06 78 / 0.74);
+}
+
+.dn3-house-title b {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dn3-sand);
+}
+
+.dn3-house-records b {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dn3-sand);
+}
+
+.dn3-house-records > span:first-child b {
+  color: var(--dn3-spice-hot);
+  text-shadow: 0 0 10px var(--dn3-spice-glow);
+}
+
+:root[data-topic="dune-3"] .trakt-stats-card > .secondary {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: oklch(86% 0.06 78 / 0.7);
+}
+
+:root[data-topic="dune-3"] .trakt-stat svg {
+  color: var(--dn3-ochre);
+}
+
+:root[data-topic="dune-3"] .trakt-stat .stat-value p.bold {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 600;
+  color: var(--dn3-sand);
+}
+
+:root[data-topic="dune-3"] .trakt-stat p.tag.secondary:has(> .dn3-stat-label) {
+  font-size: 0;
+}
+
+.dn3-stat-label {
+  font-family: "Roboto Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+:root[data-topic="dune-3"] .trakt-kpi-tile .kpi-label,
+:root[data-topic="dune-3"] .trakt-pulse-graph > p:first-child {
+  font-family: "Roboto Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: oklch(86% 0.06 78 / 0.7);
+}
+
+:root[data-topic="dune-3"] .trakt-kpi-tile .kpi-value {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 600;
+  color: var(--dn3-sand);
+}
+
+:root[data-topic="dune-3"]
+  .trakt-card-content:has(.trakt-kpi-tile, .trakt-pulse-graph) {
+  box-shadow: inset 0 0 0 1px oklch(86% 0.06 78 / 0.14);
+}
+
+:root[data-topic="dune-3"] .trakt-side-navbar-content {
+  background:
+    var(--dn3-grain-fine),
+    linear-gradient(
+      180deg,
+      oklch(19% 0.025 55 / 0.94),
+      oklch(11% 0.014 50 / 0.94)
+    );
+  background-size:
+    120px 120px,
+    auto;
+  box-shadow:
+    inset 0 0 0 1px oklch(86% 0.06 78 / 0.2),
+    0 10px 30px oklch(0% 0 0 / 0.5);
+}
+
+:root[data-topic="dune-3"]
+  :is(.trakt-side-navbar-content, .trakt-mobile-navbar)
+  .trakt-link-active {
+  color: var(--dn3-spice-hot);
+  filter: drop-shadow(0 0 6px var(--dn3-spice-glow));
+}
+
+:root[data-topic="dune-3"] .trakt-mobile-navbar {
+  background:
+    var(--dn3-grain-fine),
+    linear-gradient(
+      180deg,
+      oklch(19% 0.025 55 / 0.96),
+      oklch(10% 0.012 50 / 0.98)
+    );
+  background-size:
+    120px 120px,
+    auto;
+  box-shadow:
+    inset 0 1px 0 oklch(86% 0.06 78 / 0.3),
+    0 -12px 30px oklch(0% 0 0 / 0.45);
+}
+
+.dn3-chrome {
+  pointer-events: none;
+}
+
+.dn3-countdown,
+.dn3-meter {
+  position: fixed;
+  inset-inline-start: 12px;
+  z-index: 700;
+  width: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--dn3-sand);
+}
+
+.dn3-countdown {
+  top: 80px;
+  gap: 5px;
+}
+
+.dn3-countdown-glyph {
+  width: 30px;
+  height: 30px;
+}
+
+.dn3-countdown-glyph svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 6px oklch(70% 0.11 62 / 0.5));
+}
+
+.dn3-countdown-number {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+  color: oklch(95% 0.03 80);
+}
+
+.dn3-countdown-unit {
+  font-family: "Roboto Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  padding-inline-start: 0.3em;
+  text-transform: uppercase;
+  color: var(--dn3-spice);
+}
+
+.dn3-countdown-rule {
+  width: 1px;
+  height: 26px;
+  margin-block: 4px;
+  background: linear-gradient(180deg, var(--dn3-sand-soft), transparent);
+}
+
+.dn3-countdown-date {
+  writing-mode: vertical-rl;
+  font-family: "Roboto Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: oklch(86% 0.06 78 / 0.74);
+}
+
+.dn3-meter {
+  bottom: 72px;
+  gap: 9px;
+}
+
+.dn3-meter-ticks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dn3-meter-ticks i {
+  display: block;
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+  background: oklch(86% 0.06 78 / 0.16);
+  transition:
+    background-color 300ms ease,
+    box-shadow 300ms ease,
+    width 300ms ease;
+}
+
+.dn3-meter-ticks i.is-lit {
+  width: 18px;
+  background: var(--dn3-sand);
+}
+
+.dn3-meter-ticks i.is-lit.is-hot {
+  background: var(--dn3-spice);
+  box-shadow: 0 0 6px var(--dn3-spice-glow);
+}
+
+.dn3-meter-trace {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px oklch(86% 0.06 78 / 0.3);
+  background:
+    radial-gradient(circle, var(--dn3-sand) 0 1.5px, transparent 2px),
+    radial-gradient(
+      circle,
+      transparent 0 6px,
+      oklch(86% 0.06 78 / 0.25) 6.5px 7px,
+      transparent 7.5px
+    );
+}
+
+.dn3-meter[data-stage="stir"] .dn3-meter-trace {
+  animation: dn3-pulse 1.6s ease-out infinite;
+}
+
+.dn3-meter[data-stage="tremor"] .dn3-meter-trace,
+.dn3-meter[data-stage="worm"] .dn3-meter-trace {
+  animation: dn3-pulse 700ms ease-out infinite;
+  background:
+    radial-gradient(circle, var(--dn3-spice-hot) 0 2px, transparent 2.5px),
+    radial-gradient(
+      circle,
+      transparent 0 6px,
+      oklch(76% 0.15 240 / 0.6) 6.5px 7px,
+      transparent 7.5px
+    );
+}
+
+.dn3-meter[data-stage="tremor"] .dn3-meter-ticks,
+.dn3-meter[data-stage="worm"] .dn3-meter-ticks {
+  animation: dn3-shiver 120ms steps(2) infinite;
+}
+
+@keyframes dn3-pulse {
+  0% {
+    box-shadow:
+      inset 0 0 0 1px oklch(86% 0.06 78 / 0.3),
+      0 0 0 0 oklch(76% 0.15 240 / 0.5);
+  }
+  100% {
+    box-shadow:
+      inset 0 0 0 1px oklch(86% 0.06 78 / 0.3),
+      0 0 0 10px oklch(76% 0.15 240 / 0);
+  }
+}
+
+.dn3-meter-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: "Roboto Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: oklch(86% 0.06 78 / 0.74);
+}
+
+.dn3-meter[data-stage="worm"] .dn3-meter-label {
+  color: var(--dn3-spice);
+  text-shadow: 0 0 8px var(--dn3-spice-glow);
+}
+
+@media (max-height: 820px) {
+  .dn3-countdown-rule,
+  .dn3-countdown-date {
+    display: none;
+  }
+}
+
+@media (max-height: 700px) {
+  .dn3-meter {
+    display: none;
+  }
+}
+
+:root[data-topic="dune-3"]:not(:has(.trakt-side-navbar, .trakt-mobile-navbar))
+  .dn3-chrome {
+  display: none;
+}
+
+.dn3-stinger {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.dn3-stinger-body {
+  position: absolute;
+  inset: 0;
+  background: oklch(6% 0.008 50);
+}
+
+.dn3-stinger-stage {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000 45%, transparent 55%);
+  mask-image: linear-gradient(90deg, #000 45%, transparent 55%);
+  -webkit-mask-size: 260% 100%;
+  mask-size: 260% 100%;
+  animation: dn3-reveal 560ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+.dn3-stinger.is-leaving .dn3-stinger-body {
+  -webkit-mask-image: linear-gradient(90deg, transparent 45%, #000 55%);
+  mask-image: linear-gradient(90deg, transparent 45%, #000 55%);
+  -webkit-mask-size: 260% 100%;
+  mask-size: 260% 100%;
+  animation: dn3-reveal 360ms cubic-bezier(0.5, 0, 0.6, 1) both;
+}
+
+@keyframes dn3-reveal {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
+.dn3-stinger-horizon {
+  position: absolute;
+  inset-inline: 0;
+  top: 56%;
+  width: 100%;
+  height: 44%;
+}
+
+.dn3-stinger-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 0 16px 14vh;
+  text-align: center;
+}
+
+.dn3-stinger-kicker {
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  padding-inline-start: 0.5em;
+  text-transform: uppercase;
+  color: oklch(86% 0.06 78 / 0.7);
+  animation: dn3-fade-up 600ms 160ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+.dn3-stinger-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35em;
+  font-weight: 300;
+  font-size: clamp(20px, 3vw, 44px);
+  line-height: 1.1;
+  letter-spacing: 0.42em;
+  padding-inline-start: 0.42em;
+  text-transform: uppercase;
+  color: oklch(95% 0.03 80);
+  text-shadow: 0 0 30px oklch(70% 0.1 62 / 0.4);
+  animation: dn3-line-in 950ms 140ms cubic-bezier(0.16, 0.8, 0.25, 1) both;
+}
+
+.dn3-stinger-line span {
+  font-size: inherit;
+  letter-spacing: inherit;
+}
+
+.dn3-stinger-days {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  animation: dn3-fade-up 600ms 420ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+.dn3-stinger-days b {
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1;
+  color: var(--dn3-spice-hot);
+  text-shadow:
+    0 0 24px oklch(70% 0.17 242 / 0.75),
+    0 0 60px oklch(60% 0.18 246 / 0.45);
+}
+
+.dn3-stinger-days span {
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--dn3-sand);
+}
+
+@keyframes dn3-line-in {
+  from {
+    opacity: 0;
+    letter-spacing: 1.1em;
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.42em;
+    filter: blur(0);
+  }
+}
+
+@keyframes dn3-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.dn3-stinger.is-calm .dn3-stinger-stage,
+.dn3-stinger.is-calm
+  :is(.dn3-stinger-kicker, .dn3-stinger-line, .dn3-stinger-days) {
+  animation: none;
+  -webkit-mask: none;
+  mask: none;
+}
+
+.dn3-stinger.is-calm.is-leaving .dn3-stinger-body {
+  -webkit-mask: none;
+  mask: none;
+  animation: dn3-fade-out 360ms ease both;
+}
+
+@keyframes dn3-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+:root[data-topic="dune-3"] .trakt-landing {
+  background-color: transparent;
+}
+
+:root[data-topic="dune-3"] .trakt-landing .landing-hero {
+  background: linear-gradient(
+    180deg,
+    oklch(8% 0.01 50 / 0.6) 0%,
+    oklch(8% 0.01 50 / 0.1) 45%,
+    transparent 70%
+  );
+}
+
+:root[data-topic="dune-3"] .trakt-landing .trakt-landing-apps {
+  background-image: radial-gradient(
+    60% 120% at 100% 100%,
+    oklch(55% 0.1 62 / 0.3),
+    transparent 70%
+  );
+}
+
+:root[data-topic="dune-3"] .trakt-landing-backdrop {
+  opacity: 0.22;
+  filter: sepia(0.7) saturate(0.7);
+}
+
+:root[data-topic="dune-3"] .trakt-landing h1 {
+  font-size: clamp(30px, 4vw, 60px);
+  line-height: 1.12;
+  letter-spacing: 0.05em;
+}
+
+:root[data-topic="dune-3"] .trakt-landing-pillars h2 {
+  font-size: clamp(22px, 2.5vw, 38px);
+  letter-spacing: 0.1em;
+}
+
+:root[data-topic="dune-3"] .trakt-drawer-title :is(h1, h2, h3) {
+  font-size: 0.82em;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 768px) {
+  :root[data-topic="dune-3"] .trakt-profile-container {
+    margin-top: 52px;
+  }
+
+  .dn3-house {
+    inset-inline: 4px;
+    justify-content: space-between;
+  }
+
+  .dn3-house-records > span:not(:first-child) {
+    display: none;
+  }
+}
+
+:root[data-topic="dune-3"]:has(.trakt-mobile-navbar) .dn3-chrome {
+  position: fixed;
+  inset-inline: 30px;
+  bottom: 43px;
+  z-index: 1000;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:root[data-topic="dune-3"]:has(.trakt-mobile-navbar)
+  :is(.dn3-countdown, .dn3-meter) {
+  position: static;
+  width: auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+:root[data-topic="dune-3"]:has(.trakt-mobile-navbar)
+  :is(.dn3-countdown-glyph, .dn3-countdown-rule, .dn3-meter-trace) {
+  display: none;
+}
+
+:root[data-topic="dune-3"]:has(.trakt-mobile-navbar) .dn3-countdown-number {
+  font-size: 9px;
+  color: var(--dn3-sand);
+}
+
+:root[data-topic="dune-3"]:has(.trakt-mobile-navbar)
+  :is(.dn3-countdown-date, .dn3-meter-label) {
+  display: block;
+  writing-mode: horizontal-tb;
+  transform: none;
+  font-size: 7px;
+  letter-spacing: 0.26em;
+}
+
+:root[data-topic="dune-3"]:has(.trakt-mobile-navbar) .dn3-meter {
+  flex-direction: row-reverse;
+}
+
+:root[data-topic="dune-3"]:has(.trakt-mobile-navbar) .dn3-meter-ticks {
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 2px;
+}
+
+:root[data-topic="dune-3"]:has(.trakt-mobile-navbar) .dn3-meter-ticks i,
+:root[data-topic="dune-3"]:has(.trakt-mobile-navbar) .dn3-meter-ticks i.is-lit {
+  width: 2px;
+  height: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-topic="dune-3"]
+    :is(.dn3-drift, .dn3-drift i, .dn3-meter-trace, .dn3-meter-ticks),
+  :root[data-topic="dune-3"] .dn3-drift::after,
+  :root[data-topic="dune-3"] .trakt-summary-title h1 {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  :root[data-topic="dune-3"] .trakt-list-title-wrapper .title {
+    letter-spacing: 0.2em;
+  }
+
+  :root[data-topic="dune-3"] .trakt-list-title-wrapper::after {
+    inline-size: 30px;
+  }
+}
