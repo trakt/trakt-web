@@ -93,7 +93,11 @@
         exitMargin: HOVER_EXIT_MARGIN,
       }}
     >
-      <div class="poster-card" data-milestone={milestone?.type}>
+      <div
+        class="poster-card"
+        class:is-flipped={isFlipped}
+        data-milestone={milestone?.type}
+      >
         {#if rating != null && !isFlipped}
           <div class="poster-rating">
             <StemTag>
@@ -127,7 +131,11 @@
           {#snippet back()}
             <div class="poster-face is-back">
               {#if showBack}
-                <TodayPosterDetails {media} />
+                <TodayPosterDetails
+                  {media}
+                  onOpenMedia={() =>
+                    trackAction({ action: "details", frame: frame.type })}
+                />
               {/if}
             </div>
           {/snippet}
@@ -266,6 +274,11 @@
     .poster-card {
       position: absolute;
       inset: 0;
+
+      &.is-flipped {
+        z-index: calc(var(--layer-floating) + 1);
+        pointer-events: none;
+      }
     }
 
     .poster-rating {

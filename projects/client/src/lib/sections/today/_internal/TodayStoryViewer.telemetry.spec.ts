@@ -6,7 +6,7 @@ import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfile
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { buildFriendAction } from '$test/beds/today/buildFriendAction.ts';
-import { screen } from '@testing-library/svelte';
+import { fireEvent, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import TodayStoryViewer from './TodayStoryViewer.svelte';
@@ -141,6 +141,20 @@ describe('TodayStoryViewer telemetry', () => {
 
     expect(eventsOf('today.action')).toEqual([
       { action: 'view-all', frame: 'friend' },
+    ]);
+  });
+
+  it('should report the title link on the details side', async () => {
+    const user = userEvent.setup();
+    await renderViewer();
+
+    await user.click(screen.getByRole('button', { name: 'Show details' }));
+    await fireEvent.click(
+      await screen.findByRole('link', { name: MovieHereticMappedMock.title }),
+    );
+
+    expect(eventsOf('today.action')).toEqual([
+      { action: 'details', frame: 'friend' },
     ]);
   });
 });
