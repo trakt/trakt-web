@@ -1,0 +1,182 @@
+:root[data-topic="dunesday"] {
+  --purple-50: oklch(97% 0.016 238);
+  --purple-60: oklch(95.2% 0.024 238);
+  --purple-70: oklch(93.7% 0.032 238);
+  --purple-80: oklch(92.2% 0.04 238);
+  --purple-90: oklch(90.6% 0.048 238);
+  --purple-100: oklch(89% 0.0576 238);
+  --purple-200: oklch(81% 0.088 238);
+  --purple-300: oklch(71% 0.1248 238);
+  --purple-400: oklch(63.5% 0.1488 238);
+  --purple-500: oklch(56.1% 0.16 238);
+  --purple-600: oklch(49% 0.1552 238);
+  --purple-700: oklch(43% 0.1312 238);
+  --purple-800: oklch(35.5% 0.1088 238);
+  --purple-900: oklch(29% 0.088 238);
+  --purple-950: oklch(19% 0.064 238);
+  --purple-1000: oklch(12% 0.0416 238);
+  --shade-10: oklch(99% 0.0048 255);
+  --shade-20: oklch(98.3% 0.006 255);
+  --shade-30: oklch(97.7% 0.0072 255);
+  --shade-40: oklch(97% 0.0072 255);
+  --shade-50: oklch(95.5% 0.0084 255);
+  --shade-60: oklch(93.5% 0.0096 255);
+  --shade-70: oklch(91.5% 0.0108 255);
+  --shade-80: oklch(89.5% 0.012 255);
+  --shade-90: oklch(87.5% 0.012 255);
+  --shade-100: oklch(85.5% 0.0132 255);
+  --shade-200: oklch(78% 0.0144 255);
+  --shade-300: oklch(67% 0.0156 255);
+  --shade-400: oklch(61% 0.0156 255);
+  --shade-500: oklch(51% 0.0156 255);
+  --shade-600: oklch(47% 0.0156 255);
+  --shade-700: oklch(38% 0.0144 255);
+  --shade-800: oklch(30% 0.0132 255);
+  --shade-900: oklch(24% 0.012 255);
+  --shade-910: oklch(22% 0.012 255);
+  --shade-920: oklch(19.5% 0.0108 255);
+  --shade-930: oklch(16.5% 0.0096 255);
+  --shade-940: oklch(14% 0.0084 255);
+  --shade-950: oklch(13% 0.0084 255);
+  --shade-1000: oklch(11% 0.0072 255);
+}
+
+:root[data-topic="dunesday"][data-dd-side="dune"] {
+  --purple-50: oklch(97% 0.014 72);
+  --purple-60: oklch(95.2% 0.021 72);
+  --purple-70: oklch(93.7% 0.028 72);
+  --purple-80: oklch(92.2% 0.035 72);
+  --purple-90: oklch(90.6% 0.042 72);
+  --purple-100: oklch(89% 0.0504 72);
+  --purple-200: oklch(81% 0.077 72);
+  --purple-300: oklch(71% 0.1092 72);
+  --purple-400: oklch(63.5% 0.1302 72);
+  --purple-500: oklch(56.1% 0.14 72);
+  --purple-600: oklch(49% 0.1358 72);
+  --purple-700: oklch(43% 0.1148 72);
+  --purple-800: oklch(35.5% 0.0952 72);
+  --purple-900: oklch(29% 0.077 72);
+  --purple-950: oklch(19% 0.056 72);
+  --purple-1000: oklch(12% 0.0364 72);
+  --shade-10: oklch(99% 0.0056 62);
+  --shade-20: oklch(98.3% 0.007 62);
+  --shade-30: oklch(97.7% 0.0084 62);
+  --shade-40: oklch(97% 0.0084 62);
+  --shade-50: oklch(95.5% 0.0098 62);
+  --shade-60: oklch(93.5% 0.0112 62);
+  --shade-70: oklch(91.5% 0.0126 62);
+  --shade-80: oklch(89.5% 0.014 62);
+  --shade-90: oklch(87.5% 0.014 62);
+  --shade-100: oklch(85.5% 0.0154 62);
+  --shade-200: oklch(78% 0.0168 62);
+  --shade-300: oklch(67% 0.0182 62);
+  --shade-400: oklch(61% 0.0182 62);
+  --shade-500: oklch(51% 0.0182 62);
+  --shade-600: oklch(47% 0.0182 62);
+  --shade-700: oklch(38% 0.0168 62);
+  --shade-800: oklch(30% 0.0154 62);
+  --shade-900: oklch(24% 0.014 62);
+  --shade-910: oklch(22% 0.014 62);
+  --shade-920: oklch(19.5% 0.0126 62);
+  --shade-930: oklch(16.5% 0.0112 62);
+  --shade-940: oklch(14% 0.0098 62);
+  --shade-950: oklch(13% 0.0098 62);
+  --shade-1000: oklch(11% 0.0084 62);
+}
+
+:root[data-topic="dunesday"][data-dd-side="doom"] {
+  --purple-50: oklch(97% 0.019 155);
+  --purple-60: oklch(95.2% 0.0285 155);
+  --purple-70: oklch(93.7% 0.038 155);
+  --purple-80: oklch(92.2% 0.0475 155);
+  --purple-90: oklch(90.6% 0.057 155);
+  --purple-100: oklch(89% 0.0684 155);
+  --purple-200: oklch(81% 0.1045 155);
+  --purple-300: oklch(71% 0.1482 155);
+  --purple-400: oklch(63.5% 0.1767 155);
+  --purple-500: oklch(56.1% 0.19 155);
+  --purple-600: oklch(49% 0.1843 155);
+  --purple-700: oklch(43% 0.1558 155);
+  --purple-800: oklch(35.5% 0.1292 155);
+  --purple-900: oklch(29% 0.1045 155);
+  --purple-950: oklch(19% 0.076 155);
+  --purple-1000: oklch(12% 0.0494 155);
+  --shade-10: oklch(99% 0.0064 230);
+  --shade-20: oklch(98.3% 0.008 230);
+  --shade-30: oklch(97.7% 0.0096 230);
+  --shade-40: oklch(97% 0.0096 230);
+  --shade-50: oklch(95.5% 0.0112 230);
+  --shade-60: oklch(93.5% 0.0128 230);
+  --shade-70: oklch(91.5% 0.0144 230);
+  --shade-80: oklch(89.5% 0.016 230);
+  --shade-90: oklch(87.5% 0.016 230);
+  --shade-100: oklch(85.5% 0.0176 230);
+  --shade-200: oklch(78% 0.0192 230);
+  --shade-300: oklch(67% 0.0208 230);
+  --shade-400: oklch(61% 0.0208 230);
+  --shade-500: oklch(51% 0.0208 230);
+  --shade-600: oklch(47% 0.0208 230);
+  --shade-700: oklch(38% 0.0192 230);
+  --shade-800: oklch(30% 0.0176 230);
+  --shade-900: oklch(24% 0.016 230);
+  --shade-910: oklch(22% 0.016 230);
+  --shade-920: oklch(19.5% 0.0144 230);
+  --shade-930: oklch(16.5% 0.0128 230);
+  --shade-940: oklch(14% 0.0112 230);
+  --shade-950: oklch(13% 0.0112 230);
+  --shade-1000: oklch(11% 0.0096 230);
+}
+
+:root[data-topic="dunesday"] {
+  --dd-gold: oklch(80% 0.13 75);
+  --dd-gold-deep: oklch(58% 0.12 60);
+  --dd-spice: oklch(72% 0.15 245);
+  --dd-emerald: oklch(82% 0.19 155);
+  --dd-emerald-deep: oklch(45% 0.13 158);
+  --dd-accent: var(--dd-spice);
+  --topic-bar-from: var(--dd-gold-deep);
+  --topic-bar-to: var(--dd-emerald-deep);
+  --dd-seam: 60%;
+  --color-brand-violet: var(--purple-500);
+  --color-link-active: var(--dd-accent);
+  --color-background-tint: oklch(30% 0.06 200);
+  --color-background-tint-strength: 6%;
+  --color-background-progress-tag: var(--topic-bar-to);
+  --color-background-progress-track-tag: oklch(100% 0 0 / 0.1);
+  accent-color: var(--dd-accent);
+}
+
+:root[data-topic="dunesday"][data-dd-side="dune"] {
+  --dd-accent: var(--dd-gold);
+  --topic-bar-to: oklch(66% 0.12 70);
+  --dd-seam: 80%;
+  --color-background-tint: oklch(34% 0.08 70);
+}
+
+:root[data-topic="dunesday"][data-dd-side="doom"] {
+  --dd-accent: var(--dd-emerald);
+  --topic-bar-from: var(--dd-emerald-deep);
+  --topic-bar-to: oklch(58% 0.15 155);
+  --dd-seam: 30%;
+  --color-background-tint: oklch(30% 0.1 155);
+}
+
+:root[data-topic="dunesday"]::before {
+  background-image: linear-gradient(
+    105deg,
+    oklch(20% 0.04 60) 0%,
+    oklch(14% 0.03 60) calc(var(--dd-seam) - 8%),
+    oklch(30% 0.1 155 / 0.5) var(--dd-seam),
+    oklch(12% 0.02 220) calc(var(--dd-seam) + 1%),
+    oklch(11% 0.015 220) 100%
+  );
+}
+
+:root[data-topic="dunesday"] :is(h1, h2, h3) {
+  letter-spacing: 0.01em;
+}
+
+:root[data-topic="dunesday"] h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}

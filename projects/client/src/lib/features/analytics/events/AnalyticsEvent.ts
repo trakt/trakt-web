@@ -22,6 +22,7 @@ const ISSUE_REPORT_PREFIX = 'issue-report';
 const MONTH_REVIEW_PREFIX = 'month-review';
 const YEAR_REVIEW_PREFIX = 'year-review';
 const LIVING_POSTER_PREFIX = 'living-poster';
+const TOPIC_PREFIX = 'topic';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -194,4 +195,7 @@ export const AnalyticsEvent = {
 
   LivingPosterTilt: buildEventKey(LIVING_POSTER_PREFIX, 'tilt'),
   LivingPosterDrag: buildEventKey(LIVING_POSTER_PREFIX, 'drag'),
+
+  TopicApply: buildEventKey(TOPIC_PREFIX, 'apply'),
+  TopicSide: buildEventKey(TOPIC_PREFIX, 'side'),
 } as const;

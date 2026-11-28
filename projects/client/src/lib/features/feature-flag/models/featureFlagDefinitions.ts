@@ -8,6 +8,7 @@ import MatchIcon from '$lib/components/icons/MatchIcon.svelte';
 import PeopleIcon from '$lib/components/icons/PeopleIcon.svelte';
 import SparkleIcon from '$lib/components/icons/SparkleIcon.svelte';
 import SparkleStarIcon from '$lib/components/icons/SparkleStarIcon.svelte';
+import ThemeIcon from '$lib/components/icons/ThemeIcon.svelte';
 import { m } from '$lib/features/i18n/messages.ts';
 import type { Component } from 'svelte';
 import { FeatureFlag } from './FeatureFlag.ts';
@@ -119,5 +120,12 @@ export const featureFlagDefinitions: FeatureFlagDefinitions = {
     addedAt: new Date('2026-11-27'),
     description: () => m.preview_feature_description_movie_lore(),
     audience: 'director',
+  },
+  [FeatureFlag.TopicThemes]: {
+    icon: ThemeIcon,
+    title: () => m.preview_feature_title_topic_themes(),
+    addedAt: new Date('2026-11-28'),
+    description: () => m.preview_feature_description_topic_themes(),
+    audience: 'vip',
   },
 };

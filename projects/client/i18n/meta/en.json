@@ -17055,6 +17055,446 @@
     "text_ticket_admit_one": {
       "default": "Admit one",
       "description": "Small line printed on the decorative ticket art of a VIP offer, like a cinema ticket. This should be as short as possible."
+    },
+    "preview_feature_title_topic_themes": {
+      "default": "Film themes",
+      "description": "Product feature name for the VIP preview feature that re-skins the whole app when Dune: Part Three, Avengers: Doomsday or both are on the watchlist."
+    },
+    "preview_feature_description_topic_themes": {
+      "default": "Re-skins the app with a Dune, Avengers: Doomsday or Dunesday look, with backdrops, a release countdown and a short intro, when those films are on your watchlist. Dunesday applies when both are.",
+      "description": "Description of the film themes preview feature."
+    },
+    "text_topic_unit_day_one": {
+      "default": "day",
+      "description": "Singular unit word for a number of days until a film release, shown next to a big countdown number. Keep it short."
+    },
+    "text_topic_unit_day_other": {
+      "default": "days",
+      "description": "Plural unit word for a number of days until a film release, shown next to a big countdown number. Keep it short."
+    },
+    "text_topic_film_dune_part_three": {
+      "default": "Dune: Part Three",
+      "description": "Title of the film Dune: Part Three, used as a link label."
+    },
+    "text_topic_film_avengers_doomsday": {
+      "default": "Avengers: Doomsday",
+      "description": "Title of the film Avengers: Doomsday, used as a link label."
+    },
+    "text_topic_dune_release_date": {
+      "default": "18 · XII · 2026",
+      "description": "Release date of Dune: Part Three written with a Roman numeral month, shown as decorative art in the Dune theme. Keep the separators."
+    },
+    "text_topic_dune_now": {
+      "default": "NOW",
+      "description": "Short label in the Dune theme countdown shown once the film is out."
+    },
+    "text_topic_dune_wormsign": {
+      "default": "Wormsign",
+      "description": "Label of the decorative meter in the Dune theme that fills while the user scrolls erratically."
+    },
+    "text_topic_dune_shai_hulud": {
+      "default": "Shai-Hulud",
+      "description": "Label of the decorative meter in the Dune theme while the sandworm passes. Shai-Hulud is the name of the sandworm."
+    },
+    "text_topic_dune_stinger_kicker": {
+      "default": "Arrakis · Year XII of the Empire",
+      "description": "Small line above the title of the short intro of the Dune theme."
+    },
+    "text_topic_dune_stinger_line_start": {
+      "default": "All empires",
+      "description": "First half of the two line title of the short intro of the Dune theme."
+    },
+    "text_topic_dune_stinger_line_end": {
+      "default": "return to sand",
+      "description": "Second half of the two line title of the short intro of the Dune theme."
+    },
+    "text_topic_dune_house_record": {
+      "default": "Record of the Imperium",
+      "description": "Small heading of the decorative house plate on a profile in the Dune theme."
+    },
+    "text_topic_dune_house_name": {
+      "default": "House {name}",
+      "description": "Name of the decorative house on a profile in the Dune theme.",
+      "variables": {
+        "name": {
+          "description": "Display name of the profile owner.",
+          "required": true,
+          "type": "string"
+        }
+      }
+    },
+    "text_topic_dune_house_default_name": {
+      "default": "Atreides",
+      "description": "Fallback house name on a profile in the Dune theme when the profile has no display name."
+    },
+    "text_topic_dune_house_default_seat": {
+      "default": "Arrakis",
+      "description": "Fallback seat on a profile in the Dune theme when the profile has no location."
+    },
+    "text_topic_dune_house_seat": {
+      "default": "Seat",
+      "description": "Label of the location on the decorative house plate on a profile in the Dune theme."
+    },
+    "text_topic_dune_house_spice_harvested": {
+      "default": "Spice harvested",
+      "description": "Label of the total hours watched on the decorative house plate on a profile in the Dune theme."
+    },
+    "text_topic_dune_house_harvests": {
+      "default": "Harvests",
+      "description": "Label of the total plays on the decorative house plate on a profile in the Dune theme."
+    },
+    "text_topic_dune_house_hours": {
+      "default": "{hours} h",
+      "description": "Hours watched with a short unit, shown on the decorative house plate on a profile in the Dune theme.",
+      "variables": {
+        "hours": {
+          "description": "Hours watched, already formatted for the locale.",
+          "required": true,
+          "type": "string"
+        }
+      }
+    },
+    "text_topic_dune_days_on_arrakis_one": {
+      "default": "day on Arrakis",
+      "description": "Singular label next to the watching streak count in the Dune theme."
+    },
+    "text_topic_dune_days_on_arrakis_other": {
+      "default": "days on Arrakis",
+      "description": "Plural label next to the watching streak count in the Dune theme."
+    },
+    "text_topic_dune_stat_plays": {
+      "default": "Harvests",
+      "description": "Themed replacement for the plays stat label on a profile in the Dune theme. Keep it very short."
+    },
+    "text_topic_dune_stat_watched": {
+      "default": "Spice",
+      "description": "Themed replacement for the time watched stat label on a profile in the Dune theme. Keep it very short."
+    },
+    "text_topic_dune_stat_ratings": {
+      "default": "Judgements",
+      "description": "Themed replacement for the ratings stat label on a profile in the Dune theme. Keep it very short."
+    },
+    "text_topic_dune_stat_comments": {
+      "default": "Testimony",
+      "description": "Themed replacement for the comments stat label on a profile in the Dune theme. Keep it very short."
+    },
+    "text_topic_dune_stat_shows": {
+      "default": "Worlds",
+      "description": "Themed replacement for the shows stat label on a profile in the Dune theme. Keep it very short."
+    },
+    "text_topic_dune_stat_movies": {
+      "default": "Films",
+      "description": "Themed replacement for the movies stat label on a profile in the Dune theme. Keep it very short."
+    },
+    "text_topic_doom_countdown_label_one": {
+      "default": "Avengers: Doomsday arrives in {count} day",
+      "description": "Accessible label of the Avengers: Doomsday countdown, singular.",
+      "variables": {
+        "count": {
+          "description": "Days until release, always 1.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_doom_countdown_label_other": {
+      "default": "Avengers: Doomsday arrives in {count} days",
+      "description": "Accessible label of the Avengers: Doomsday countdown, plural.",
+      "variables": {
+        "count": {
+          "description": "Days until release.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_doom_countdown_prefix": {
+      "default": "T-",
+      "description": "Short prefix in front of the compact countdown, like T-minus in a launch countdown."
+    },
+    "text_topic_doom_countdown_kicker": {
+      "default": "Doomsday",
+      "description": "Small heading of the Avengers: Doomsday countdown."
+    },
+    "text_topic_doom_countdown_date": {
+      "default": "Avengers: Doomsday · 18 Dec 2026",
+      "description": "Film title and release date shown under the Avengers: Doomsday countdown heading."
+    },
+    "text_topic_doom_unit_days": {
+      "default": "D",
+      "description": "One letter abbreviation for days under a countdown digit pair."
+    },
+    "text_topic_doom_unit_hours": {
+      "default": "H",
+      "description": "One letter abbreviation for hours under a countdown digit pair."
+    },
+    "text_topic_doom_unit_minutes": {
+      "default": "M",
+      "description": "One letter abbreviation for minutes under a countdown digit pair."
+    },
+    "text_topic_doom_unit_seconds": {
+      "default": "S",
+      "description": "One letter abbreviation for seconds under a countdown digit pair."
+    },
+    "text_topic_doom_stinger_here": {
+      "default": "Doomsday is here",
+      "description": "Heading of the short intro of the Avengers: Doomsday theme once the film is out."
+    },
+    "text_topic_doom_stinger_in": {
+      "default": "Doomsday in",
+      "description": "Heading of the short intro of the Avengers: Doomsday theme before the film is out, followed by a number of days."
+    },
+    "text_topic_doom_stinger_foot": {
+      "default": "Avengers: Doomsday · 18.12.2026",
+      "description": "Film title and release date at the bottom of the short intro of the Avengers: Doomsday theme."
+    },
+    "text_topic_doom_dossier_tag": {
+      "default": "Threat assessment",
+      "description": "Tag on the decorative dossier banner on a profile in the Avengers: Doomsday theme."
+    },
+    "text_topic_doom_dossier_id": {
+      "default": "File DD-1218 · Classified",
+      "description": "Decorative file number on the dossier banner on a profile in the Avengers: Doomsday theme."
+    },
+    "text_topic_doom_forge_plate": {
+      "default": "Subject file · Priority alpha",
+      "description": "Decorative plate on the poster of a movie or show page in the Avengers: Doomsday theme."
+    },
+    "text_topic_doom_threat_level": {
+      "default": "LV{level}",
+      "description": "Short threat level next to the threat meter on a calendar poster in the Avengers: Doomsday theme.",
+      "variables": {
+        "level": {
+          "description": "Threat level from 1 to 5.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_doom_threat_imminent": {
+      "default": "Threat imminent",
+      "description": "Decorative tag on the header of today in the calendar in the Avengers: Doomsday theme."
+    },
+    "text_topic_dunesday_name": {
+      "default": "Dunesday",
+      "description": "Name of the crossover day on which Dune: Part Three and Avengers: Doomsday are released together."
+    },
+    "text_topic_dunesday_title_start": {
+      "default": "Dunes",
+      "description": "First half of the name Dunesday, styled in the desert colour. Together with the second half it spells the name."
+    },
+    "text_topic_dunesday_title_end": {
+      "default": "day",
+      "description": "Second half of the name Dunesday, styled in the steel colour. Together with the first half it spells the name."
+    },
+    "text_topic_dunesday_side_dune": {
+      "default": "Dune",
+      "description": "Short name of the Dune side in the Dunesday theme."
+    },
+    "text_topic_dunesday_side_doom": {
+      "default": "Doom",
+      "description": "Short name of the Doomsday side in the Dunesday theme."
+    },
+    "text_topic_dunesday_ticket_label_one": {
+      "default": "Dunesday: Dune: Part Three and Avengers: Doomsday open on 18 December 2026, in {count} day. Pick your side.",
+      "description": "Accessible label of the Dunesday ticket button, singular.",
+      "variables": {
+        "count": {
+          "description": "Days until release, always 1.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_dunesday_ticket_label_other": {
+      "default": "Dunesday: Dune: Part Three and Avengers: Doomsday open on 18 December 2026, in {count} days. Pick your side.",
+      "description": "Accessible label of the Dunesday ticket button, plural.",
+      "variables": {
+        "count": {
+          "description": "Days until release.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_dunesday_panel_date_one": {
+      "default": "Fri 18.12.2026 · {count} day · two worlds, one Friday",
+      "description": "Date line of the Dunesday panel, singular.",
+      "variables": {
+        "count": {
+          "description": "Days until release, always 1.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_dunesday_panel_date_other": {
+      "default": "Fri 18.12.2026 · {count} days · two worlds, one Friday",
+      "description": "Date line of the Dunesday panel, plural.",
+      "variables": {
+        "count": {
+          "description": "Days until release.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_dunesday_stub_suns": {
+      "default": "suns",
+      "description": "Playful unit for days on the Dune half of the Dunesday ticket. Keep it very short."
+    },
+    "text_topic_dunesday_stub_hours": {
+      "default": "hrs",
+      "description": "Short unit for hours on the Doom half of the Dunesday ticket."
+    },
+    "text_topic_dunesday_stub_minutes": {
+      "default": "{minutes}m",
+      "description": "Minutes with a short unit on the Doom half of the Dunesday ticket.",
+      "variables": {
+        "minutes": {
+          "description": "Minutes, zero padded to two digits.",
+          "required": true,
+          "type": "string"
+        }
+      }
+    },
+    "text_topic_dunesday_picker_label": {
+      "default": "Pick your side",
+      "description": "Accessible label of the group of buttons for choosing a side in the Dunesday theme."
+    },
+    "text_topic_dunesday_team_dune": {
+      "default": "Team Dune",
+      "description": "Button label for picking the Dune side in the Dunesday theme."
+    },
+    "text_topic_dunesday_double_feature": {
+      "default": "Double feature",
+      "description": "Button label for picking both films in the Dunesday theme."
+    },
+    "text_topic_dunesday_team_doom": {
+      "default": "Team Doom",
+      "description": "Button label for picking the Doomsday side in the Dunesday theme."
+    },
+    "text_topic_dunesday_meter_label": {
+      "default": "Fan split",
+      "description": "Accessible label of the meter that shows how the user splits between Dune and Doomsday."
+    },
+    "text_topic_dunesday_meter_value": {
+      "default": "{dune}% Dune, {doom}% Doom",
+      "description": "Accessible value of the fan split meter.",
+      "variables": {
+        "dune": {
+          "description": "Percentage on the Dune side.",
+          "required": true,
+          "type": "number"
+        },
+        "doom": {
+          "description": "Percentage on the Doomsday side.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_dunesday_meter_history": {
+      "default": "From your last {plays} plays: {dune} sci-fi, {doom} superhero.",
+      "description": "Note under the fan split meter when it is based on the genres of the latest plays.",
+      "variables": {
+        "plays": {
+          "description": "Number of plays looked at.",
+          "required": true,
+          "type": "number"
+        },
+        "dune": {
+          "description": "Number of science fiction plays.",
+          "required": true,
+          "type": "number"
+        },
+        "doom": {
+          "description": "Number of superhero plays.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_dunesday_meter_cosmetic": {
+      "default": "A cosmetic tug-of-war. Pick a side to pull.",
+      "description": "Note under the fan split meter when there is no play history, so the meter is only decoration."
+    },
+    "text_topic_dunesday_side_card_label": {
+      "default": "Which side are you on?",
+      "description": "Accessible label of the Dunesday card on the own profile."
+    },
+    "text_topic_dunesday_side_card_kicker_start": {
+      "default": "Which side",
+      "description": "First half of the question on the Dunesday card on the own profile, styled in the desert colour."
+    },
+    "text_topic_dunesday_side_card_kicker_end": {
+      "default": "are you on?",
+      "description": "Second half of the question on the Dunesday card on the own profile, styled in the steel colour."
+    },
+    "text_topic_dunesday_side_card_sci_fi_plays": {
+      "default": "Sci-fi plays",
+      "description": "Label of the number of science fiction plays on the Dunesday card on the own profile."
+    },
+    "text_topic_dunesday_side_card_superhero_plays": {
+      "default": "Superhero plays",
+      "description": "Label of the number of superhero plays on the Dunesday card on the own profile."
+    },
+    "text_topic_dunesday_side_card_sampled": {
+      "default": "Sampled",
+      "description": "Label of the number of plays looked at on the Dunesday card on the own profile."
+    },
+    "text_topic_dunesday_verdict_dune": {
+      "default": "Sand in your boots. You came for the long walk and the slow burn.",
+      "description": "Playful verdict line for users who lean towards Dune."
+    },
+    "text_topic_dunesday_verdict_double": {
+      "default": "Two tickets, one seat, zero regrets. Dunesday was made for you.",
+      "description": "Playful verdict line for users who are in between Dune and Doomsday."
+    },
+    "text_topic_dunesday_verdict_doom": {
+      "default": "Steel in your veins. You came for the crossover and the green glow.",
+      "description": "Playful verdict line for users who lean towards Doomsday."
+    },
+    "text_topic_dunesday_days_to_go": {
+      "default": "{days} to go",
+      "description": "Badge on the calendar header of today in the Dunesday theme, counting down to release day.",
+      "variables": {
+        "days": {
+          "description": "Days until release.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_dunesday_stinger_now_showing": {
+      "default": "Now showing",
+      "description": "Line of the short intro of the Dunesday theme once the films are out."
+    },
+    "text_topic_dunesday_stinger_days_one": {
+      "default": "{count} day",
+      "description": "Line of the short intro of the Dunesday theme before the films are out, singular.",
+      "variables": {
+        "count": {
+          "description": "Days until release, always 1.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_dunesday_stinger_days_other": {
+      "default": "{count} days",
+      "description": "Line of the short intro of the Dunesday theme before the films are out, plural.",
+      "variables": {
+        "count": {
+          "description": "Days until release.",
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "text_topic_dunesday_stinger_date": {
+      "default": "18.12.2026",
+      "description": "Release date of Dune: Part Three and Avengers: Doomsday written as day, month and year, shown on the short intro of the Dunesday theme."
     }
   }
 }

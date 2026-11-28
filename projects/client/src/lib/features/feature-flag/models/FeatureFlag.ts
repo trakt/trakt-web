@@ -12,4 +12,5 @@ export enum FeatureFlag {
   LivingPoster = 'living-poster',
   CharacterPortraits = 'character-portraits',
   MovieLore = 'movie-lore',
+  TopicThemes = 'topic-themes',
 }

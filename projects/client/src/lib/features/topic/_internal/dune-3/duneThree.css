@@ -1,0 +1,100 @@
+:root[data-topic="dune-3"] {
+  --purple-50: oklch(97% 0.02 238);
+  --purple-60: oklch(95.5% 0.03 238);
+  --purple-70: oklch(94% 0.04 238);
+  --purple-80: oklch(92.5% 0.05 238);
+  --purple-90: oklch(91% 0.06 238);
+  --purple-100: oklch(89% 0.07 238);
+  --purple-200: oklch(82% 0.11 238);
+  --purple-300: oklch(75% 0.145 240);
+  --purple-400: oklch(68.5% 0.17 242);
+  --purple-500: oklch(62% 0.185 244);
+  --purple-600: oklch(55% 0.19 246);
+  --purple-700: oklch(47% 0.17 248);
+  --purple-800: oklch(39% 0.14 250);
+  --purple-900: oklch(31% 0.11 252);
+  --purple-950: oklch(22% 0.08 254);
+  --purple-1000: oklch(15% 0.05 256);
+  --shade-10: oklch(98% 0.012 80);
+  --shade-20: oklch(97% 0.014 80);
+  --shade-30: oklch(96% 0.016 79);
+  --shade-40: oklch(95% 0.018 79);
+  --shade-50: oklch(93.5% 0.02 78);
+  --shade-60: oklch(91.5% 0.024 77);
+  --shade-70: oklch(89.5% 0.026 76);
+  --shade-80: oklch(87.5% 0.028 75);
+  --shade-90: oklch(85.5% 0.03 74);
+  --shade-100: oklch(83% 0.032 73);
+  --shade-200: oklch(76% 0.036 70);
+  --shade-300: oklch(66% 0.04 67);
+  --shade-400: oklch(59% 0.04 64);
+  --shade-500: oklch(51% 0.036 61);
+  --shade-600: oklch(46% 0.032 59);
+  --shade-700: oklch(37.5% 0.028 57);
+  --shade-800: oklch(30% 0.024 55);
+  --shade-900: oklch(24% 0.02 54);
+  --shade-910: oklch(21.5% 0.019 54);
+  --shade-920: oklch(19% 0.018 53);
+  --shade-930: oklch(16.5% 0.016 52);
+  --shade-940: oklch(14.5% 0.015 52);
+  --shade-950: oklch(13% 0.014 51);
+  --shade-1000: oklch(10.5% 0.012 50);
+  --color-brand-violet: var(--purple-500);
+  --color-text-emphasis: oklch(90% 0.04 78);
+  --color-link-active: oklch(80% 0.13 236);
+  --color-background-tint: oklch(45% 0.08 65);
+  --color-background-tint-strength: 6%;
+
+  --dn3-sand: oklch(86% 0.06 78);
+  --dn3-sand-soft: oklch(86% 0.06 78 / 0.55);
+  --dn3-sand-faint: oklch(86% 0.06 78 / 0.18);
+  --dn3-ochre: oklch(68% 0.11 62);
+  --dn3-night: oklch(11% 0.012 50);
+  --dn3-ink: oklch(7% 0.008 50);
+  --dn3-spice: oklch(76% 0.15 240);
+  --dn3-spice-hot: oklch(90% 0.08 230);
+  --dn3-spice-glow: oklch(70% 0.17 242 / 0.55);
+  --dn3-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .9 0 0 0 0 .74 0 0 0 2.4 -1.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --topic-bar-from: oklch(44% 0.08 52);
+  --topic-bar-to: oklch(68% 0.11 62);
+  --color-background-progress-tag: oklch(62% 0.1 62);
+  --color-background-progress-track-tag: oklch(9% 0.012 50 / 0.82);
+  accent-color: var(--dn3-spice);
+}
+
+:root[data-topic="dune-3"] body {
+  background-color: var(--dn3-night);
+  background-image: linear-gradient(
+    180deg,
+    oklch(12% 0.012 50) 0%,
+    oklch(16% 0.025 55) 50%,
+    oklch(34% 0.07 60) 75%,
+    oklch(15% 0.02 50) 80%,
+    oklch(10% 0.012 50) 100%
+  );
+  background-attachment: fixed;
+}
+
+:root[data-topic="dune-3"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  background-image: var(--dn3-grain);
+  opacity: 0.11;
+  mix-blend-mode: screen;
+}
+
+:root[data-topic="dune-3"] :is(h1, h2, h3) {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+:root[data-topic="dune-3"] .trakt-list-title-wrapper .title {
+  font-weight: 700;
+  font-size: 0.82em;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dn3-sand);
+}

@@ -19,6 +19,7 @@
   import EmailUnsubscribeSnackbar from "$lib/features/email-unsubscribe/EmailUnsubscribeSnackbar.svelte";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
   import FeatureFlagProvider from "$lib/features/feature-flag/FeatureFlagProvider.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import LocaleSettingSync from "$lib/features/i18n/components/LocaleSettingSync.svelte";
@@ -40,7 +41,10 @@
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import { initializeSeasonalThemes } from "$lib/features/theme/initializeSeasonalThemes.js";
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
+  import TopicHost from "$lib/features/topic/TopicHost.svelte";
+  import TopicReset from "$lib/features/topic/TopicReset.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import ManageListsDrawerProvider from "$lib/sections/components/lists-drawer/ManageListsDrawerProvider.svelte";
   import MarkAsWatchedDrawerProvider from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedDrawerProvider.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
@@ -103,6 +107,14 @@
                                     <ReportDialogProvider />
                                     <CoverImage />
                                     <SeasonalFlair />
+                                    <RenderForFeature
+                                      flag={FeatureFlag.TopicThemes}
+                                    >
+                                      {#snippet enabled()}
+                                        <TopicHost />
+                                      {/snippet}
+                                      <TopicReset />
+                                    </RenderForFeature>
                                     <EditModeProvider>
                                       <ThemeProvider theme={data.theme}>
                                         <ListScrollHistoryProvider>
