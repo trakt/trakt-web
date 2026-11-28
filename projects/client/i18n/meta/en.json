@@ -15917,6 +15917,41 @@
       "default": "Works on its own",
       "description": "Verdict in the Before you watch drawer: the movie can be watched without the earlier films."
     },
+    "text_movie_lore_caught_up": {
+      "default": "All caught up",
+      "description": "Badge on the progress card in the Before you watch drawer when the viewer has watched every earlier film. Replaces the watch-first advice."
+    },
+    "text_movie_lore_watch_first_label": {
+      "default": "Most important to watch",
+      "description": "Label above the films listed under Do I need the others first? in the Before you watch drawer, shown when only some of the earlier films are listed."
+    },
+    "text_movie_lore_watch_first_count": {
+      "default": "{count} of {total} earlier films",
+      "description": "Next to the Most important to watch label: how many of the earlier films are listed. {total} is always 2 or more.",
+      "variables": {
+        "count": {
+          "type": "number",
+          "description": "Films listed as most important.",
+          "required": true
+        },
+        "total": {
+          "type": "number",
+          "description": "Earlier films in the series, always 2 or more.",
+          "required": true
+        }
+      }
+    },
+    "text_movie_lore_watch_first_recapped": {
+      "default": "All {total} are recapped under Previously on the Lore tab.",
+      "description": "Under the Most important to watch films in the Before you watch drawer, pointing to the Previously section that recaps every earlier film. {total} is always 2 or more.",
+      "variables": {
+        "total": {
+          "type": "number",
+          "description": "Earlier films in the series, always 2 or more.",
+          "required": true
+        }
+      }
+    },
     "header_movie_lore_need_others": {
       "default": "Do I need the others first?",
       "description": "Heading of the card in the Before you watch drawer that says whether the earlier films are needed and lists them."

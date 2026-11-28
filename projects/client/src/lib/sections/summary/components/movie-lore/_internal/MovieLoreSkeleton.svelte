@@ -1,11 +1,16 @@
 <script lang="ts">
   import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
 
   const LEAD_LINE_WIDTHS = ["100%", "92%", "58%"];
   const REST_LINE_WIDTHS = ["100%", "94%", "100%", "72%"];
 </script>
 
 <div class="trakt-movie-lore-skeleton" aria-hidden="true">
+  <RenderFor audience="authenticated">
+    <Skeleton height="var(--ni-104)" radius="var(--border-radius-l)" />
+  </RenderFor>
+
   <Skeleton height="var(--ni-40)" radius="var(--border-radius-pill)" />
 
   <div class="skeleton-setup">

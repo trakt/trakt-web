@@ -1,15 +1,21 @@
 <script lang="ts">
+  import Skeleton from "$lib/components/skeleton/Skeleton.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MovieLoreVerdict } from "$lib/requests/models/MovieLoreVerdict.ts";
   import type { toLoreProgress } from "./toLoreProgress.ts";
   import { toLoreMovieTitle } from "./toLoreMovieTitle.ts";
   import { toLoreVerdictLabel } from "./toLoreVerdictLabel.ts";
 
-  const { progress, verdict, title }: {
+  const { progress, verdict, title, isLoading = false }: {
     progress: ReturnType<typeof toLoreProgress>;
     verdict: MovieLoreVerdict | undefined;
     title: string;
+    isLoading?: boolean;
   } = $props();
+
+  const isCaughtUp = $derived(
+    progress.totalCount > 0 && progress.watchedCount === progress.totalCount,
+  );
 
   const summary = $derived(
     progress.totalCount === 1
@@ -24,10 +30,20 @@
   );
 </script>
 
-<div class="trakt-movie-lore-progress">
+<div class="trakt-movie-lore-progress" aria-busy={isLoading}>
   <div class="progress-summary">
-    <span class="bold">{summary}</span>
-    {#if verdict}
+    {#if isLoading}
+      <Skeleton width="60%" height="var(--ni-16)" />
+    {:else}
+      <span class="bold">{summary}</span>
+    {/if}
+    {#if isLoading}
+      <Skeleton width="var(--ni-96)" height="var(--ni-20)" radius="var(--border-radius-pill)" />
+    {:else if isCaughtUp}
+      <span class="progress-verdict small bold" data-verdict="caught_up">
+        {m.text_movie_lore_caught_up()}
+      </span>
+    {:else if verdict}
       <span class="progress-verdict small bold" data-verdict={verdict}>
         {toLoreVerdictLabel(verdict)}
       </span>
@@ -40,12 +56,17 @@
     aria-hidden="true"
   >
     {#each progress.steps as step (step.id)}
-      <span class="progress-step" data-state={step.state}></span>
+      <span
+        class="progress-step"
+        data-state={isLoading ? "pending" : step.state}
+      ></span>
     {/each}
   </div>
 
-  <span class="small secondary">
-    {#if progress.next}
+  <span class="progress-note small secondary">
+    {#if isLoading}
+      <Skeleton width="40%" height="var(--ni-12)" />
+    {:else if progress.next}
       {m.text_movie_lore_progress_next({
         title: toLoreMovieTitle(progress.next),
       })}
@@ -68,6 +89,8 @@
     box-shadow: inset 0 0 0 var(--border-thickness-xxs) var(--recap-card-ring);
 
     .progress-summary {
+      min-height: var(--ni-24);
+
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -90,10 +113,17 @@
         color: var(--color-reality-adjusted-text);
       }
 
-      &[data-verdict="not_needed"] {
+      &[data-verdict="not_needed"],
+      &[data-verdict="caught_up"] {
         background: var(--color-reality-accurate-background);
         color: var(--color-reality-accurate-text);
       }
+    }
+
+    .progress-note {
+      display: flex;
+      align-items: center;
+      min-height: var(--ni-18);
     }
 
     .progress-steps {

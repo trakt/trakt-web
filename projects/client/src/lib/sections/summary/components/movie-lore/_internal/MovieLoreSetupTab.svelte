@@ -14,7 +14,11 @@
   <MovieLoreSetup lines={lore.setup} />
 
   {#if lore.watchFirst}
-    <MovieLoreWatchFirst watchFirst={lore.watchFirst} {watchedIds} />
+    <MovieLoreWatchFirst
+      watchFirst={lore.watchFirst}
+      {watchedIds}
+      earlierCount={lore.earlier.length}
+    />
   {/if}
 
   {#if lore.attribution}
